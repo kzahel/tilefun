@@ -199,8 +199,9 @@ service records seeded before Realm startup, not a preview-only movement loop.
 
 
 The [curved train fixtures](../tactical/063-curved-train-routes.md) supply tangent
-line/arc paths and named stops to the same RailwaySystem. Train geometry is drawn
+line/arc paths and named stops to the same RailwaySystem. Native blue train crops are drawn
 by the shared raster renderer on Canvas/GPU using replicated heading frames;
-replicas derive matching conservative colliders from those frames. Lab underlays
+replicas derive matching cardinal colliders from those frames. Pose changes
+intentionally snap, preserving the available sprites. Lab underlays
 only draw the static alignment/platform/town diagram. Generated routes keep the
 accepted native horizontal representation until the new motion/art is reviewed.

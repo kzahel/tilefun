@@ -4,7 +4,7 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { RoadType } from "../road/RoadType.js";
 import type { World } from "../world/World.js";
-import { CURVE_OFFSETS, createCurveTrain } from "./CurveTrain.js";
+import { createCurveTrain, curveOffsets } from "./CurveTrain.js";
 import { railAlignment, wrapDistance } from "./RailPath.js";
 import type { RailService } from "./RailwaySystem.js";
 
@@ -51,6 +51,7 @@ export function stepCurvedTrain(
         ? wrapDistance(required(record.distance) + direction * travel, alignment.length)
         : required(record.distance) + direction * travel;
   const poses = createCurveTrain(alignment, nextDistance);
+  const offsets = curveOffsets(alignment, nextDistance);
   for (const [i, nextCar] of poses.entries()) {
     const car = required(s.carriages[i]);
     const current = getEntityAABB(car.position, required(car.collider));
@@ -73,7 +74,7 @@ export function stepCurvedTrain(
         }
     // Wheels follow the rail centerline; the carriage may overhang a curve.
     for (const bogie of [-36, 0, 36]) {
-      const p = alignment.sample(nextDistance + required(CURVE_OFFSETS[i]) + bogie);
+      const p = alignment.sample(nextDistance + required(offsets[i]) + bogie);
       if (world.getRoadAt(Math.floor(p.x / 16), Math.floor(p.y / 16)) !== RoadType.RailCurveProof) {
         s.speed = 0;
         return;
@@ -86,7 +87,7 @@ export function stepCurvedTrain(
       maxCy: Math.floor(swept.bottom / 256),
     };
     for (const p of props.getPropsInChunkRange(r.minCx, r.minCy, r.maxCx, r.maxCy))
-      if (aabbOverlapsPropWalls(swept, p.position, p, 0, 40)) {
+      if (aabbOverlapsPropWalls(swept, p.position, p, 0, 44)) {
         s.speed = 0;
         return;
       }
@@ -96,7 +97,7 @@ export function stepCurvedTrain(
         !other.collider ||
         other.collider.solid === false ||
         other.flashHidden ||
-        (other.wz ?? 0) >= 40 ||
+        (other.wz ?? 0) >= 44 ||
         (other.wz ?? 0) + (other.collider.physicalHeight ?? Infinity) <= 0
       )
         continue;

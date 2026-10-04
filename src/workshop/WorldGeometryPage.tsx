@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
-import { CURVE_TRAIN } from "../railway/CurveTrain.js";
+import { CURVE_TRAIN, curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
 import { railAlignment } from "../railway/RailPath.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import {
@@ -203,7 +203,7 @@ export default function WorldGeometryPage() {
           );
           frame.label(
             trainCurve
-              ? "Shared train simulation · schematic bodies and track · 8s station stops"
+              ? "Shared train simulation · native train sprites · schematic track · 8s station stops"
               : trainGrade
                 ? "Bridge 64 · tunnel −96 · 8s stops · horizontal native carriages"
                 : crossing
@@ -241,11 +241,17 @@ export default function WorldGeometryPage() {
           );
           c.dataset.visibility = settings.current.visibility;
           const carriages = h.session.view.entities
-            .filter((e) => e.type.startsWith("train-carriage-v1:") || e.type === CURVE_TRAIN)
+            .filter((e) => e.type.startsWith("train-carriage-v1:") || isCurveTrain(e))
             .sort((a, b) => a.position.wx - b.position.wx);
           c.dataset.carriagePoses = JSON.stringify(
             carriages.map((e) => [e.position.wx, e.position.wy, e.sprite?.frameRow]),
           );
+          c.dataset.carriageSources = carriages
+            .map(
+              (e) =>
+                curveTrainView(e.type, e.sprite?.frameRow ?? 0)?.name ?? "native-horizontal-bank",
+            )
+            .join(",");
           c.dataset.carriageCount = String(carriages.length);
           c.dataset.carriageHeights = carriages.map((e) => (e.wz ?? 0).toFixed(2)).join(",");
           c.dataset.trainCamera = settings.current.followTrain ? "follow" : "overview";
@@ -334,7 +340,7 @@ export default function WorldGeometryPage() {
       <h1>World geometry lab</h1>
       <p>
         {trainCurve
-          ? "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Run either direction and save/reload mid-bend. Bodies, track and platforms are schematic review geometry; this is not yet in generated worlds."
+          ? "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Run either direction and save/reload mid-bend. Native blue train sprites switch between horizontal and vertical views at corners, like cars. Track and platforms are schematic; this is not yet in generated worlds."
           : generated
             ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
             : trainGrade

@@ -75,8 +75,8 @@ export class RailAlignment {
         (s, i) =>
           !s.name ||
           !Number.isFinite(s.distance) ||
-          s.distance < (path.closed ? 0 : 176) ||
-          s.distance > this.length - (path.closed ? 0.001 : 176) ||
+          s.distance < (path.closed ? 0 : 240) ||
+          s.distance > this.length - (path.closed ? 0.001 : 240) ||
           (i > 0 && s.distance - required(path.stops[i - 1]).distance < 384),
       ) ||
       (path.closed &&

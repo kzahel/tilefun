@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
-import { CURVE_TRAIN } from "../railway/CurveTrain.js";
+import { isCurveTrain } from "../railway/CurveTrain.js";
 import { railAlignment } from "../railway/RailPath.js";
 import { curvedTrainRecipe } from "./CurvedTrainRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
@@ -39,7 +39,7 @@ for (const loop of [true, false])
             const last = required(previous[j]);
             expect(
               Math.hypot(car.position.wx - last.wx, car.position.wy - last.wy),
-            ).toBeLessThanOrEqual(19.201);
+            ).toBeLessThanOrEqual(25.601);
             headings.add(required(car.sprite).frameRow);
           }
           previous = s.carriages.map((c) => ({ ...c.position }));
@@ -62,7 +62,7 @@ for (const loop of [true, false])
               })),
             ).toEqual(poses);
             expect(
-              session.realm.entityManager.entities.filter((e) => e.type === CURVE_TRAIN),
+              session.realm.entityManager.entities.filter((e) => isCurveTrain(e)),
             ).toHaveLength(3);
             reloaded = true;
           }
@@ -71,7 +71,7 @@ for (const loop of [true, false])
         }
         expect(visited.size).toBe(loop ? 4 : 3);
         expect(reloaded && independent).toBe(true);
-        expect(headings.size).toBeGreaterThan(60);
+        expect([...headings].some((h) => h % 64 > 16 && h % 64 < 48)).toBe(true);
         if (loop)
           for (const middle of [32, 96, 160, 224])
             expect([...headings].some((h) => Math.abs(h - middle) < 5)).toBe(true);
@@ -91,13 +91,13 @@ it("stops for a child, missing rails or unready terrain; retires and deletes the
     const actor = s.realm.entityManager.spawn(child);
     for (let i = 0; i < 80; i++) await s.step(idle, 0.1);
     expect(service.speed).toBe(0);
-    expect(service.entity.position.wx).toBeLessThan(105);
+    expect(service.entity.position.wx).toBeLessThan(40);
     s.realm.entityManager.remove(actor.id, false);
     const before = service.record.distance;
     railway.tick(1, () => false);
     expect(service.record.distance).toBe(before);
     const alignment = railAlignment(required(service.line.path));
-    const p = alignment.sample(required(before) + 160);
+    const p = alignment.sample(required(before) + 184);
     const tx = Math.floor(p.x / 16),
       ty = Math.floor(p.y / 16);
     const chunk = required(
@@ -118,7 +118,7 @@ it("stops for a child, missing rails or unready terrain; retires and deletes the
     expect(service.record).toEqual(record);
     s.realm.entityManager.remove(service.carriages[2]?.id ?? -1, true);
     railway.tick(0.1, () => true);
-    expect(s.realm.entityManager.entities.filter((e) => e.type === CURVE_TRAIN)).toHaveLength(0);
+    expect(s.realm.entityManager.entities.filter((e) => isCurveTrain(e))).toHaveLength(0);
     await s.reload();
     expect(required(s.realm.railway?.services.get("curved-service")).record.deleted).toBe(true);
   } finally {

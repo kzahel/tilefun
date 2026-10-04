@@ -15,11 +15,12 @@ has been manufactured.
   straight segments and circular arcs. Radius is at least 192px. One service has
   exclusive use of each alignment; this does not introduce switches or signalling.
 - Three rigid carriages each follow the chord between their own two bogies. Their
-  reference distances stay 112px apart. The service progresses by arc length,
+  spacing varies continuously between native horizontal and vertical lengths.
+  The service progresses by arc length,
   wraps closed routes without teleporting and reverses only at open-route termini.
 - Named distance-based stops brake, dwell eight seconds and depart. Through stops
   preserve direction; a loop circulates through every stop in either direction.
-- Each body uses a heading-dependent conservative AABB and 40px height. All bodies
+- Each body uses a native cardinal AABB and 44px height. All bodies
   must pass swept collision, flat-ground/readiness and wheel-track checks before
   any move. Children, props and deleted rail cells stop the entire service.
 - One service record stores distance, next stop, direction, speed, dwell, deletion
@@ -28,10 +29,11 @@ has been manufactured.
 - Orientation uses the existing replicated sprite orientation row (256 heading
   frames). Authority, snapshots and delta replicas reconstruct the same collider;
   stopped trains retain their heading. No wire-protocol version change is needed.
-- Both Canvas and GPU use the same procedural geometric train representation.
-  Bodies are 96×28px, with 16px inter-car gaps and small couplers. These are
-  deliberately schematic bodies, not distorted/rotated horizontal source sprites.
-  The immutable native train bank and old preview renderer are untouched.
+- Both Canvas and GPU draw the native blue train end/middle pieces directly
+  from the pinned railway atlas, at original scale without rotation or mirroring.
+  Each carriage switches horizontal/vertical source pose at a 45-degree boundary.
+  Ends retain their physical identity on reversal. The native train bank and
+  old preview renderer are untouched.
 - The World geometry lab hosts both fixtures through production Realm/Worker,
   streaming, replication, persistence and shared presentation. Its static diagram
   draws rails, sleepers, platform markers and a town layout placeholder. It does
@@ -44,7 +46,8 @@ has been manufactured.
 
 Use Whole route / Follow train, pause, opposite direction and save/reload mid-bend.
 Mobile controls retain long-press suppression. Review the bend radius, train scale,
-carriage spacing and schematic representation before choosing the production art.
+carriage spacing and native pose switches. The user accepts abrupt cardinal
+turns as an available-sprite constraint.
 Platforms are layout markers, not finished station buildings or boarding logic.
 
 ## Boundaries
@@ -57,7 +60,16 @@ are unchanged; no generator version bump or world deletion is involved.
 The current route adapter retains legacy start/end/y fields for straight routes;
 curved motion/querying uses the explicit alignment and its bounds.
 
-## Evidence
+## Correction after first review
+
+The user rejected the first commit's procedural box trains: they require the
+actual train sprites and accept abrupt directional changes, as with cars. The
+correction removes all procedural train-body drawing, uses the six native blue
+source pieces, restores full native dimensions and updates spacing/colliders.
+New tests check every cardinal composition and exact joins on straight track.
+Changed previews return to review; the rejection was not recorded as approval.
+
+## Initial implementation evidence
 
 - Typechecks pass. All **1,549 unit tests in 184 files** pass with two workers.
   The initial unrestricted run timed out in an existing furniture test while
@@ -76,8 +88,9 @@ curved motion/querying uses the explicit alignment and its bounds.
   from its unchanged HEAD blob (plus the existing 117 warnings/32 infos).
   That unrelated generated registry is untouched.
 - Screenshots of diagonal carriages, both full-route layouts and the phone view
-  were inspected. Train bodies remain geometric proposals; no native asset bank
-  was rewritten and no human art approval was inferred.
+  were inspected. These captures were of the initial geometric proposal,
+  subsequently rejected by the user. No native asset bank was rewritten and no
+  human art approval was inferred.
 - Final browser/build validation used a frozen tracked-source and asset copy
   with isolated test auth/data and ports, because another task was editing the
   shared worktree. The copy uses the exact train changes; harness port changes
@@ -89,5 +102,30 @@ mid-bend reload, collision, missing track, readiness, retirement/deletion, and
 replicated stopped orientation/collider reconstruction. Browser pause/reload
 checks wait for queued Worker ticks to settle before comparing poses.
 
-Next: human review of both motion fixtures, then bounded curved-route generation
-with road/rail clearance planning and an explicit rolling-stock art choice.
+Next: human review of both native-sprite motion fixtures, then bounded curved-route
+generation with road/rail clearance planning.
+
+
+## Native-sprite correction validation
+
+- Typechecks and all **1,551 unit tests in 185 files** pass. New coverage checks
+  all four native compositions, straight-section joins, cardinal pose boundaries
+  and restored body identities/colliders.
+- Full bundled-Chromium suite: **366 passed, 1 skipped** in 10.2 minutes.
+  The focused train checks also pass for Canvas, GPU and phone controls, including
+  native source selection on bends and save/reload of the complete consist.
+- Repository lint passes with the existing 118 warnings and 32 infos; all 15
+  changed TypeScript/test files pass scoped lint without diagnostics.
+- Art catalog regenerated, then all **577 Workshop candidate identities**
+  verified in normal Chromium at retina scale. Production build passes.
+- `streaming:bench -- --assert-ready` passes with no errors or readiness failures.
+  This checks existing game streaming, not future generated curved networks.
+- Native corner and whole-route captures were inspected. Atlas image bytes are
+  unchanged; no procedural replacement train bodies remain. Pose switches can
+  expose gaps/overlap on bends, as documented for review.
+- Validation used a frozen tracked-source/asset copy with isolated test data and
+  ports while another task continued in the shared worktree. Harness-only port
+  changes are excluded from the commit.
+
+The correction preserves route following, station operations, persistence and
+the lab-only integration boundary.

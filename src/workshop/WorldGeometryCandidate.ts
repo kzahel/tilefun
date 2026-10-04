@@ -9,6 +9,7 @@ import curveMotion from "../railway/CurvedRailMotion.ts?raw";
 import curveTrain from "../railway/CurveTrain.ts?raw";
 import curvePath from "../railway/RailPath.ts?raw";
 import planner from "../railway/RailwayPlanner.ts?raw";
+import railSource from "../railway/RailwaySource.json";
 import strategy from "../railway/RailwayStrategy.ts?raw";
 import railway from "../railway/RailwaySystem.ts?raw";
 import bridge from "../railway/RoadRailBridge.ts?raw";
@@ -150,7 +151,7 @@ export async function buildCurvedTrainCandidate(loop: boolean): Promise<Workshop
     kind: "geometry",
     name: loop ? "Train around town, four stops" : "Winding train between towns",
     prompt:
-      "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Shared authority with schematic train bodies and track; review before world generation.",
+      "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views at corners; shared authority and schematic track; review before world generation.",
     url: `/tilefun/workshop.html?geometry=${fixture}#/tool/world-geometry`,
     fingerprint: await sha256(
       new TextEncoder().encode(
@@ -161,6 +162,7 @@ export async function buildCurvedTrainCandidate(loop: boolean): Promise<Workshop
           curveMotion,
           curvePath,
           curveTrain,
+          railSource,
           curveDrawing,
           curveLayout,
           scenarioHost,
@@ -168,7 +170,6 @@ export async function buildCurvedTrainCandidate(loop: boolean): Promise<Workshop
         }),
       ),
     ),
-    excluded:
-      "Interactive engine experiment; schematic rolling stock, not a promoted art snapshot.",
+    excluded: "Interactive engine experiment; native sprite motion, not a promoted art snapshot.",
   };
 }

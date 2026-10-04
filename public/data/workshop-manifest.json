@@ -4810,7 +4810,7 @@
       "name": "Train grades, bridge and tunnel",
       "prompt": "Follow three independent carriage heights across ramps, bridge and tunnel, reverse at both termini and reload on a slope. Schematic proof with horizontal native art and visible slope-join limitations.",
       "url": "/tilefun/workshop.html?geometry=train-grades#/tool/world-geometry",
-      "fingerprint": "f6429d140797c8010deb445f156dc5b2992733a5045030e35294885ee24ac59b",
+      "fingerprint": "a2798fb2b4b9eb8d87bab16a0be21e5a2f5cc7cf2fbc2a2999941b6cbc59369c",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -4818,20 +4818,20 @@
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Train around town, four stops",
-      "prompt": "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Shared authority with schematic train bodies and track; review before world generation.",
+      "prompt": "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views at corners; shared authority and schematic track; review before world generation.",
       "url": "/tilefun/workshop.html?geometry=train-loop#/tool/world-geometry",
-      "fingerprint": "fdfb0b13b1f5df0b20242222288cc75efe9e9ed8af81d9710094843906e18c44",
-      "excluded": "Interactive engine experiment; schematic rolling stock, not a promoted art snapshot."
+      "fingerprint": "6e0d5d90f0f2d0200bbc4a2130b10ffafa56367f5044ce0b658b097958d039ee",
+      "excluded": "Interactive engine experiment; native sprite motion, not a promoted art snapshot."
     },
     {
       "id": "geometry:train-winding-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Winding train between towns",
-      "prompt": "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Shared authority with schematic train bodies and track; review before world generation.",
+      "prompt": "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views at corners; shared authority and schematic track; review before world generation.",
       "url": "/tilefun/workshop.html?geometry=train-winding#/tool/world-geometry",
-      "fingerprint": "c17469f9f8620860c9bfead56f3e5947081f628efa684a6bc52d7a0d88596c53",
-      "excluded": "Interactive engine experiment; schematic rolling stock, not a promoted art snapshot."
+      "fingerprint": "c345bf582925ab2675074b59155402fe231dda2cd99ba91c8c96454c8c8a05b7",
+      "excluded": "Interactive engine experiment; native sprite motion, not a promoted art snapshot."
     },
     {
       "id": "geometry:generated-crossing-100-v1",

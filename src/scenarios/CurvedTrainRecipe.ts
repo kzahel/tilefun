@@ -57,9 +57,9 @@ export function curvedTrainRecipe(loop = true, reverse = false): ScenarioRecipe 
           { distance: total / 2 + required(lengths[0]) + required(lengths[1]) + 256, name: "West" },
         ]
       : [
-          { distance: 192, name: "Town A" },
+          { distance: 256, name: "Town A" },
           { distance: total - 896, name: "Valley" },
-          { distance: total - 192, name: "Town B" },
+          { distance: total - 256, name: "Town B" },
         ],
   };
   new RailAlignment(path);

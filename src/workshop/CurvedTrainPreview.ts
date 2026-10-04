@@ -52,10 +52,10 @@ export function drawCurvedRailLayout(
       ny = Math.cos(p.angle);
     for (const offset of [40, 56, 72])
       line(
-        p.x - Math.cos(p.angle) * 176 + nx * offset,
-        p.y - Math.sin(p.angle) * 176 + ny * offset,
-        p.x + Math.cos(p.angle) * 176 + nx * offset,
-        p.y + Math.sin(p.angle) * 176 + ny * offset,
+        p.x - Math.cos(p.angle) * 240 + nx * offset,
+        p.y - Math.sin(p.angle) * 240 + ny * offset,
+        p.x + Math.cos(p.angle) * 240 + nx * offset,
+        p.y + Math.sin(p.angle) * 240 + ny * offset,
         "#8dada8",
       );
     const label = camera.worldToScreen(p.x + nx * 105, p.y + ny * 105);

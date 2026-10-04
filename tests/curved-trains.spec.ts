@@ -14,6 +14,10 @@ for (const backend of ["canvas", "gpu"]) {
     const c = page.getByLabel("World geometry scene");
     await expect(c).toHaveAttribute("data-ready", "true");
     await expect(c).toHaveAttribute("data-carriage-count", "3");
+    await expect(c).toHaveAttribute(
+      "data-carriage-sources",
+      "Exterior_Train_Blue_Left,Exterior_Train_Blue_Middle,Exterior_Train_Blue_Right",
+    );
     await page.getByLabel("Train camera").selectOption("follow");
     await expect
       .poll(
@@ -26,6 +30,7 @@ for (const backend of ["canvas", "gpu"]) {
         { timeout: 25000 },
       )
       .toBe(true);
+    await expect(c).toHaveAttribute("data-carriage-sources", /Train_Blue_.*_Down/);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await expect(c).toHaveAttribute("data-train-camera", "follow");
     let last = "",

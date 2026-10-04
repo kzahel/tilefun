@@ -194,13 +194,18 @@ This advances the machinery beyond the earlier cardinal-pose art studies.
 
 Review [Town loop](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train-loop#/tool/world-geometry)
 and [Winding inter-town route](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train-winding#/tool/world-geometry).
-Both run real Realm/Worker services. New geometric train bodies turn through 256
-heading poses on Canvas and GPU; rails/platforms/town blocks remain labelled
-schematic geometry. The source pack has no intermediate turning sprites, so this
-is an explicit representation proposal, not promotion of the native train bank.
+Both run real Realm/Worker services with the actual native blue train end and
+middle sprites. Each carriage switches horizontal/vertical pose at cardinal
+boundaries, like the existing cars. The user explicitly accepts abrupt sprite
+turns as the available-art constraint and rejected replacing the sprites with
+procedural boxes. Keep source pixels at their native scale; do not substitute
+geometric rolling stock to hide missing diagonal poses. Rails/platforms/town
+blocks remain labelled schematic geometry. Straight-section spacing matches
+the different native horizontal/vertical lengths; bends can expose gaps/overlap
+as individual carriages switch pose.
 
 Current generated worlds still use the accepted straight horizontal services.
 The pre-integration review gate remains: first accept the new motion/layout and
-choose rolling-stock presentation, then add bounded generated loops/curved links
+then add bounded generated loops/curved links
 with road-crossing and terrain admission. Curves plus grades, switches, shared
 track traffic and boarding are not part of this slice.
