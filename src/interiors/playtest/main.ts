@@ -3,17 +3,23 @@ import {
   loadModernInteriorsAtlasIndex,
 } from "../../assets/ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "../../assets/Spritesheet.js";
-import { PIXEL_SCALE, PLAYER_SPEED, PLAYER_SPRITE_SIZE } from "../../config/constants.js";
-import { Camera } from "../../rendering/Camera.js";
-import type { SpriteItem } from "../../rendering/SceneItem.js";
+import { TileVariants } from "../../assets/TileVariants.js";
+import {
+  PIXEL_SCALE,
+  PLAYER_SPEED,
+  PLAYER_SPRITE_SIZE,
+  TICK_RATE,
+} from "../../config/constants.js";
+import { getEntityAABB } from "../../entities/collision.js";
+import { interpolatePosition, interpolateWz } from "../../rendering/EntityInterpolation.js";
 import { furnitureRecipe } from "../../scenarios/FurnitureRecipe.js";
-import { ScenarioClient } from "../../scenarios/ScenarioClient.js";
+import { ScenarioPresentationHost } from "../../scenarios/ScenarioPresentationHost.js";
 import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
-import { drawFurnishedInterior } from "../FurnishedInterior.js";
 import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../FurnitureCatalog.js";
 import { furnitureDrawOrder, furnitureSignature } from "../FurnitureLayout.js";
 import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH } from "../FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "../FurniturePhysics.js";
+import { InteriorPresentation } from "../InteriorPresentation.js";
 import { motionSceneSignature, motionVerdict, nextUncheckedScene } from "../MotionReview.js";
 import spriteIndexUrl from "../review/assets/review-sprites.json?url";
 import spriteUrl from "../review/assets/review-sprites.png?url";
@@ -39,9 +45,7 @@ root.innerHTML = `<header><a href="./tools.html">Indexes & atlases</a><a href=".
 <p id="position"></p><p id="status" role="status">Preparing scene…</p>
 <section class="report"><p id="grade" role="status">Unchecked</p><label>Optional note <input id="note" maxlength="1800" placeholder="e.g. I stop too far from the wardrobe"></label><div class="verdict-buttons"><button id="good">Looks good</button><button id="report">Report issue</button></div><p>Your scene, player height, gravity, object settings and screenshot are included.</p></section>`;
 const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
-const canvas = el<HTMLCanvasElement>("room"),
-  ctx = canvas.getContext("2d");
-if (!ctx) throw new Error("Missing canvas");
+const canvas = el<HTMLCanvasElement>("room");
 const scene = el<HTMLSelectElement>("scene"),
   object = el<HTMLSelectElement>("object"),
   mode = el<HTMLSelectElement>("mode");
@@ -84,8 +88,8 @@ const defaultScene = () => {
   return value;
 };
 let model = new FurnitureMotion(defaultScene().furniture);
-let dirty = true,
-  ready = false,
+let ready = false,
+  reporting = false,
   syncing = false,
   placementError = "";
 let path: [number, number][] = [];
@@ -98,8 +102,6 @@ let jumpHeld = false;
 let viewOffsetY = 0;
 const atlas = new Image(),
   playerImage = new Image();
-const camera = new Camera();
-camera.zoom = 1 / PIXEL_SCALE;
 const sheets = new Map<string, Spritesheet>();
 let alpha: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D;
 
@@ -220,7 +222,6 @@ function fields() {
     el<HTMLInputElement>("landable").checked = body.walkableTop;
   }
   grade();
-  dirty = true;
 }
 function persist() {
   saved[scene.value] = model.furniture;
@@ -232,20 +233,68 @@ function persist() {
     status("Placement works, but browser storage is full; reload will lose it.");
   }
 }
-let scenario: ScenarioClient | undefined;
+let presentation: ScenarioPresentationHost | undefined;
+function syncPlayer() {
+  if (!ready || !presentation) return;
+  const next = presentation.session.view.playerEntity;
+  Object.assign(model.player, structuredClone(next));
+  if (next.jumpVZ === undefined) delete model.player.jumpVZ;
+}
+function updateReportButtons() {
+  el<HTMLButtonElement>("report").disabled = !ready || reporting;
+  el<HTMLButtonElement>("good").disabled = !ready || reporting;
+}
 function restartSimulation() {
-  scenario?.dispose();
-  const next = new ScenarioClient(furnitureRecipe(model));
-  scenario = next;
+  ready = false;
+  updateReportButtons();
+  delete el("app").dataset.ready;
+  presentation?.dispose();
+  const width = model.map.width * 16,
+    height = model.map.pixelHeight;
+  const next = new ScenarioPresentationHost(canvas, furnitureRecipe(model), {
+    width,
+    height,
+    terrain: false,
+    background: "#171e2a",
+    fixedCamera: (player, fraction) => {
+      const p = interpolatePosition(player.position, player.prevPosition, fraction);
+      viewOffsetY = Math.max(0, Math.ceil(24 + (interpolateWz(player, fraction) ?? 0) - p.wy));
+      return { wx: width / 2, wy: height / 2 - viewOffsetY };
+    },
+    interior: {
+      presentation: new InteriorPresentation(model.map, model.plan, model.placementArea),
+      placements: model.furniture,
+      drawProps: new Set(),
+    },
+    loadAssets: async () => ({
+      sheets: new Map(sheets),
+      blendSheets: [],
+      variants: new TileVariants(new Spritesheet(atlas, 16, 16)),
+    }),
+    input: movement,
+    settings: () => ({ paused: !ready, zoom: 1 / PIXEL_SCALE, terrainPacing: "throughput" }),
+    uiOverlay: draw,
+    onError: (error) => {
+      ready = false;
+      updateReportButtons();
+      status(String(error));
+    },
+  });
+  presentation = next;
   void next.ready
     .then(() => {
-      dirty = true;
+      if (presentation !== next) return;
+      ready = true;
+      updateReportButtons();
+      syncPlayer();
+      next.captureFrame();
+      el("app").dataset.ready = "true";
     })
     .catch((error) => {
-      if (scenario === next) status(String(error));
+      if (presentation === next) status(String(error));
     });
 }
-window.addEventListener("pagehide", () => scenario?.dispose());
+window.addEventListener("pagehide", () => presentation?.dispose());
 function load(reset = false) {
   stop();
   placementError = "";
@@ -269,12 +318,12 @@ function load(reset = false) {
   );
   canvas.width = model.map.width * 16;
   canvas.height = model.map.pixelHeight;
-  camera.setViewport(canvas.width, canvas.height);
-  camera.snapTo(canvas.width / 2, canvas.height / 2);
   fields();
   resize();
   status("Ready. Walk around the object or turn on placement mode.");
-  history.replaceState(null, "", `?scene=${preset.id}`);
+  const url = new URL(location.href);
+  url.searchParams.set("scene", preset.id);
+  history.replaceState(null, "", url);
 }
 function resize() {
   const available = el("viewport").clientWidth - 16;
@@ -295,7 +344,6 @@ function moveObject(x: number, y: number) {
     placementError = error instanceof Error ? error.message : String(error);
     status(placementError);
   }
-  dirty = true;
 }
 scene.addEventListener("change", () => load());
 el("reset").onclick = () => load(true);
@@ -311,7 +359,6 @@ mode.onchange = () => {
   el("placement").hidden = mode.value !== "place";
   el("walk-controls").hidden = mode.value !== "walk";
   canvas.style.cursor = mode.value === "place" ? "grab" : "default";
-  dirty = true;
 };
 el("apply").onclick = () =>
   moveObject(el<HTMLInputElement>("x").valueAsNumber, el<HTMLInputElement>("y").valueAsNumber);
@@ -323,14 +370,12 @@ for (const button of document.querySelectorAll<HTMLButtonElement>("[data-nx]"))
 for (const id of ["collisions", "bounds", "depth"])
   el(id).onchange = () => {
     el("depth-help").hidden = !el<HTMLInputElement>("depth").checked;
-    dirty = true;
   };
 el("home").onclick = () => {
   clearInput();
   try {
     model.resetPlayer();
     restartSimulation();
-    dirty = true;
     status("Player reset.");
   } catch (error) {
     status(String(error));
@@ -482,51 +527,17 @@ canvas.onpointercancel = endDrag;
 canvas.onlostpointercapture = endDrag;
 addEventListener("resize", resize);
 
-function draw() {
-  if (!ctx || !ready) return;
-  ctx.fillStyle = "#171e2a";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  const p = model.player,
-    s = p.sprite;
-  if (!s) return;
-  viewOffsetY = Math.max(0, Math.ceil(24 + (p.wz ?? 0) - p.position.wy));
+function draw(ctx: CanvasRenderingContext2D, host: ScenarioPresentationHost) {
+  if (!ready) return;
+  syncPlayer();
+  const source = host.presentedPlayer;
+  const p = {
+    ...source,
+    position: interpolatePosition(source.position, source.prevPosition, host.presentationAlpha),
+    wz: interpolateWz(source, host.presentationAlpha),
+  };
   ctx.save();
   ctx.translate(0, viewOffsetY);
-  const item: SpriteItem = {
-    kind: "sprite",
-    sortKey: model.playerDepth(),
-    wx: p.position.wx,
-    wy: p.position.wy,
-    zOffset: p.wz ?? 0,
-    sheetKey: "player",
-    frameCol: s.frameCol,
-    frameRow: s.frameRow,
-    spriteWidth: s.spriteWidth,
-    spriteHeight: s.spriteHeight,
-    flipX: false,
-    drawOffsetY: 0,
-    hasShadow: false,
-    shadowFeetWy: p.position.wy,
-    shadowWidth: 10,
-    shadowTerrainZ: 0,
-    flashHidden: false,
-  };
-  drawFurnishedInterior(
-    ctx,
-    atlas,
-    model.map,
-    model.plan,
-    model.furniture,
-    [
-      {
-        id: "player",
-        depth: model.playerDepth(),
-        item,
-      },
-    ],
-    model.placementArea,
-    { sheets, camera },
-  );
   if (el<HTMLInputElement>("collisions").checked) {
     const box = (
       b: { left: number; top: number; right: number; bottom: number },
@@ -557,7 +568,14 @@ function draw() {
     };
     for (const b of model.collisionBoxes())
       box(b.bounds, 0, b.height, "#ff719a", b.walkableTop ? "#80edb1" : "#ff719a");
-    box(model.playerBounds(), p.wz ?? 0, p.collider?.physicalHeight ?? 12, "#62efff", "#62efff");
+    if (p.collider)
+      box(
+        getEntityAABB(p.position, p.collider),
+        p.wz ?? 0,
+        p.collider?.physicalHeight ?? 12,
+        "#62efff",
+        "#62efff",
+      );
     ctx.strokeStyle = "#536c85";
     ctx.strokeRect(
       model.floor.left + 0.5,
@@ -619,7 +637,6 @@ function draw() {
   canvas.dataset.circling = String(circling);
   el("position").textContent =
     `Player feet: ${p.position.wx.toFixed(1)}, ${p.position.wy.toFixed(1)} · Height: ${(p.wz ?? 0).toFixed(1)}px · ${p.jumpVZ !== undefined ? "Airborne" : (p.wz ?? 0) > 0 ? "On object" : "On floor"}`;
-  dirty = false;
 }
 function autoVector(): [number, number] {
   if (!path.length) {
@@ -627,14 +644,12 @@ function autoVector(): [number, number] {
     if (!target) {
       stop();
       status("Walk complete. Try a different object or adjust its position.");
-      dirty = true;
       return [0, 0];
     }
     const route = model.pathTo(...target);
     if (!route) {
       stop();
       status("No clear route around this placement. Move the object or walk manually.");
-      dirty = true;
       return [0, 0];
     }
     path = route;
@@ -644,67 +659,49 @@ function autoVector(): [number, number] {
   const dx = next[0] - model.player.position.wx,
     dy = next[1] - model.player.position.wy,
     dist = Math.hypot(dx, dy);
-  if (dist < PLAYER_SPEED / 120 + 0.05) {
+  if (dist < PLAYER_SPEED / TICK_RATE + 0.05) {
     path.shift();
     return [0, 0];
   }
-  const scale = Math.max(dist, PLAYER_SPEED / 120);
+  const scale = Math.max(dist, PLAYER_SPEED / TICK_RATE);
   return [dx / scale, dy / scale];
 }
-let previous = performance.now(),
-  accumulator = 0;
-function frame(now: number) {
-  accumulator += Math.min((now - previous) / 1000, 0.05);
-  previous = now;
-  while (ready && accumulator >= 1 / 120) {
-    let dx =
-      held[0] +
-      Number(keys.has("ArrowRight") || keys.has("KeyD")) -
-      Number(keys.has("ArrowLeft") || keys.has("KeyA"));
-    let dy =
-      held[1] +
-      Number(keys.has("ArrowDown") || keys.has("KeyS")) -
-      Number(keys.has("ArrowUp") || keys.has("KeyW"));
-    if (circling) [dx, dy] = autoVector();
-    else if (mode.value === "place") {
-      dx = 0;
-      dy = 0;
-    }
-    const { wx, wy } = model.player.position,
-      oldFrame = model.player.sprite?.frameCol,
-      oldFacing = model.player.sprite?.frameRow,
-      oldZ = model.player.wz,
-      oldAirborne = model.player.jumpVZ !== undefined;
-    scenario?.step(
-      { dx, dy, sprinting: false, jump: mode.value === "walk" && (jumpHeld || keys.has("Space")) },
-      1 / 120,
-    );
-    if (scenario?.predictor.player) {
-      const next = scenario.view.playerEntity;
-      Object.assign(model.player, structuredClone(next));
-      if (next.jumpVZ === undefined) delete model.player.jumpVZ;
-    }
-    const moved = Math.hypot(model.player.position.wx - wx, model.player.position.wy - wy);
-    if (circling && (dx || dy)) {
-      stuck = moved < 0.001 ? stuck + 1 : 0;
-      if (stuck > 120) {
+let lastWalkPosition: { wx: number; wy: number } | undefined;
+function movement() {
+  syncPlayer();
+  let dx =
+    held[0] +
+    Number(keys.has("ArrowRight") || keys.has("KeyD")) -
+    Number(keys.has("ArrowLeft") || keys.has("KeyA"));
+  let dy =
+    held[1] +
+    Number(keys.has("ArrowDown") || keys.has("KeyS")) -
+    Number(keys.has("ArrowUp") || keys.has("KeyW"));
+  if (circling) {
+    const p = model.player.position;
+    if (lastWalkPosition) {
+      stuck =
+        Math.hypot(p.wx - lastWalkPosition.wx, p.wy - lastWalkPosition.wy) < 0.001 ? stuck + 1 : 0;
+      if (stuck > TICK_RATE) {
         stop();
         status("Movement stopped at a collision. You can report this position.");
       }
     }
-    if (
-      moved ||
-      oldFrame !== model.player.sprite?.frameCol ||
-      oldZ !== model.player.wz ||
-      oldAirborne !== (model.player.jumpVZ !== undefined) ||
-      oldFacing !== model.player.sprite?.frameRow
-    )
-      dirty = true;
-    accumulator -= 1 / 120;
+    lastWalkPosition = { ...p };
+    if (circling) [dx, dy] = autoVector();
+  } else {
+    lastWalkPosition = undefined;
+    if (mode.value === "place") {
+      dx = 0;
+      dy = 0;
+    }
   }
-  if (!ready) accumulator = 0;
-  if (dirty) draw();
-  requestAnimationFrame(frame);
+  return {
+    dx,
+    dy,
+    sprinting: false,
+    jump: mode.value === "walk" && (jumpHeld || keys.has("Space")),
+  };
 }
 function storeOutbox() {
   try {
@@ -741,12 +738,11 @@ async function sync() {
 }
 async function submit(verdict: "good" | "wrong") {
   if (!ready) return;
-  const button = el<HTMLButtonElement>("report");
-  button.disabled = true;
-  el<HTMLButtonElement>("good").disabled = true;
+  reporting = true;
+  updateReportButtons();
   clearInput();
-  draw();
   try {
+    const capture = presentation?.captureFrame() ?? canvas;
     const playtest = {
       playerX: model.player.position.wx,
       playerY: model.player.position.wy,
@@ -762,7 +758,7 @@ async function submit(verdict: "good" | "wrong") {
       mode: mode.value as "walk" | "place",
     };
     const furniture = structuredClone(model.furniture),
-      screenshot = canvas.toDataURL("image/png");
+      screenshot = capture.toDataURL("image/png");
     const note = [
       el<HTMLInputElement>("note").value,
       placementError ? `Placement rejected: ${placementError}` : "",
@@ -820,9 +816,11 @@ async function submit(verdict: "good" | "wrong") {
       )
         advance();
     }
+  } catch (error) {
+    status(`Could not capture report: ${String(error)}`);
   } finally {
-    button.disabled = false;
-    el<HTMLButtonElement>("good").disabled = false;
+    reporting = false;
+    updateReportButtons();
   }
 }
 el("report").onclick = () => void submit("wrong");
@@ -854,12 +852,11 @@ async function start() {
   if (!maskContext) throw new Error("Missing source alpha reader");
   alpha = maskContext;
   alpha.drawImage(atlas, 0, 0);
+  sheets.set("modern-interiors", new Spritesheet(atlas, 16, 16));
   sheets.set("player", new Spritesheet(playerImage, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
   load();
-  ready = true;
+  await presentation?.ready;
   el("sync").textContent = "Ready";
-  draw();
-  el("app").dataset.ready = "true";
   for (const row of outbox) remember(row);
   void sync();
   const initialScene = scene.value;
@@ -876,4 +873,3 @@ void start().catch((error) => status(`Could not start: ${String(error)}`));
 setInterval(() => {
   if (outbox.length) void sync();
 }, 10000);
-requestAnimationFrame(frame);

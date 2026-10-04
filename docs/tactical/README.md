@@ -95,6 +95,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [054 Character presentation host](054-character-presentation-host.md) | Shared interactive character host; immutable approval renderer preserved; [embedded labs](../topics/embedded-engine-labs.md) |
 | [055 Overview frame reuse](055-overview-frame-reuse.md) | Complete: bounded overview grass pooling, indexed GPU quads and Mac/Pixel comparisons; [performance topic](../topics/performance.md) |
 
+| [056 Furniture presentation host](056-furniture-presentation-host.md) | Shared indoor game/lab presentation; static approvals preserved, live motion reviews versioned; [embedded labs](../topics/embedded-engine-labs.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

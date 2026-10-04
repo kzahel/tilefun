@@ -57,9 +57,9 @@ without changing physics, generation, editing or
 presentation policy. GameClient asset loading, procedural sprite creation and
 platform input/UI wiring remain application composition responsibilities.
 
-`ScenarioPresentationHost` embeds the same render-host implementations for Traffic.
-`PlayerPresentation` and `OutdoorPresentation` share camera interpolation and terrain
-policy with gameplay. GPU hosts support an absolute world surface inside a positioned
+`ScenarioPresentationHost` embeds the same render-host implementations for the
+interactive labs. `PlayerPresentation`, `OutdoorPresentation` and `presentInterior`
+share camera interpolation, terrain policy and room submission with gameplay. GPU hosts support an absolute world surface inside a positioned
 lab wrapper, while the input/UI canvas stays in document flow. See
 [embedded engine labs](embedded-engine-labs.md) for lifecycle and migration boundaries.
 
@@ -129,9 +129,10 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | --- | --- |
 | Play/edit outdoor and indoor rendering | Neutral `renderWorld`, `renderInterior`, scene and overlay builders; `RenderBackend` only |
 | Explorer | Canvas selected in `TilePreview` composition; explicit preparation/submission, ready-chunk clips and lifecycle |
-| Traffic, outdoor geometry, building/street/district reviews | Canvas selected at each platform entry; shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
+| Interactive Traffic, Outdoor Geometry, World Geometry, Character lab and furniture playtest | Shared `ScenarioPresentationHost`, production Canvas/GPU hosts and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
+| Building/street/district reviews | Canvas reference presentation at platform entry; shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
 | Native character review | Source-hashed `CharacterTestScene.ts` is immutable approval input. Its `drawScene2D` reference adapter consumes the same scene-pass implementation; do not rewrite approved controller bytes merely to rename a call |
-| Indoor review/reference and furniture playtest | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
+| Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
 | Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the backend |
 | HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
 | Optional GPU gameplay and diagnostics | `?renderer=gpu` selects the shared raster backend; `&meshes` enables the diagnostic car; renderer lab shares its body adapter |

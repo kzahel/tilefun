@@ -6,6 +6,7 @@ import {
 } from "../interiors/GameplayInterior.js";
 import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { InteriorPresentation } from "../interiors/InteriorPresentation.js";
+import { presentInterior } from "../interiors/presentInterior.js";
 import { collectScene } from "../rendering/collectScene.js";
 import type { ParticleItem } from "../rendering/SceneItem.js";
 
@@ -67,12 +68,7 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
     gc.sceneFrame,
   );
   try {
-    gc.renderer.prepareInterior(presentation.content);
-    gc.renderer.submit(gc.camera, {
-      kind: "interior",
-      contentId: presentation.content.id,
-      draws: presentation.collect(placements, items),
-    });
+    presentInterior(gc.renderer, gc.camera, presentation, placements, items);
   } finally {
     frame.release();
   }

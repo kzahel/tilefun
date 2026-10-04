@@ -1,10 +1,9 @@
 # Embedded engine labs
 
 Topic: embedded-engine-labs
-Status: shared scenario simulation and embedded outdoor presentation host delivered;
-Traffic, Outdoor Geometry, World Geometry and Character lab share engine
-interpolation, asset setup and render lifecycle.
-Other interactive lab presentation adapters remain to migrate.
+Status: shared scenario simulation and presentation host delivered for Traffic,
+Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
+The identified interactive lab migrations are complete.
 Updated: 2026-10-04.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
@@ -57,7 +56,7 @@ explicit step scheduling, rather than the game's complete `LocalServerRuntime`
 and `GameClient` composition. The simulation migration is delivered.
 
 `ScenarioPresentationHost` owns the migrated labs' client/Worker, production
-`GameLoop`, render host, asset lifetime, camera and frame storage. The React page supplies
+`GameLoop`, render host, asset lifetime, camera and frame storage. The lab page supplies
 controls, input, viewport/settings and diagnostic UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
 records this extraction and its validation. Shared owners are:
 
@@ -104,25 +103,38 @@ verification; it is no longer the interactive scene. The candidate fingerprint
 formula, reference pixels and approved gameplay bank are unchanged. See
 [Tactical 054](../tactical/054-character-presentation-host.md).
 
-This host currently presents outdoor scenarios. It does not replace the full
-GameClient's menus, audio, particles, indoor scenes or world/profile persistence.
+Furniture playtest now uses the same host for its production clock, prediction
+interpolation, room presentation, Canvas/GPU configuration and resource lifetime.
+`presentInterior` is shared with the game's indoor renderer; `collectScene` supplies
+actors and support-aware ordering while `InteriorPresentation` caches room geometry.
+The lab owns layout editing, path targets, Canvas diagnostic UI and an explicit
+fixed-room camera with interpolated jump headroom. Reports capture the world and UI
+together without advancing simulation. Reset/edit replaces and disposes the session;
+CSS resize preserves it, and renderer query settings survive scene changes.
+
+Static `drawFurnishedInterior` approval renders, source assets and image fixtures
+remain unchanged. Live movement reviews now include `presentationVersion: 1`:
+the engine's 60 Hz clock, interpolated actors and production shadows replace the
+native 120 Hz loop/hand-built actor. The eleven motion identities reopen for review;
+prior reports remain historical, and static candidate identities are preserved.
+See [Tactical 056](../tactical/056-furniture-presentation-host.md).
+
+This host presents outdoor and indoor scenarios. It does not replace the full
+GameClient's menus, audio, particles or world/profile persistence.
 The bounded scenario scheduling/transport remains distinct from LocalServerRuntime.
 
 The [World geometry lab](world-geometry.md) uses the same host with a fixed camera
 and schematic grid. Opt-in surface patches draw through shared
 `SurfacePresentation`, also called by the game's outdoor renderer; automatic and
 manual visibility affect presentation only. [Tactical 051](../tactical/051-world-geometry-proof.md)
-records ramp/deck/passage coverage. It does not establish indoor host support or
+records ramp/deck/passage coverage. It does not establish
 full 3D debug-renderer/stacked-actor parity.
 
-| Remaining consumer | Current boundary / next work |
-| --- | --- |
-| `interiors/playtest/main.ts` | Shared scenario authority; furniture-specific layout and native room presentation. Needs an indoor host adapter and review-contract validation. |
-| Static diagrams, source experiments and frozen approval renders | Intentional diagnostic/reference adapters; no claim of full gameplay parity. |
-
-Shared authority alone does not establish presentation or performance parity for
-these remaining tools. Migrate them with focused evidence, preserving approved
-reference pixels and explicit diagnostic camera/overlay policies.
+No identified interactive consumer remains to migrate in this plan. Static diagrams,
+source experiments and frozen approval renders intentionally retain diagnostic/reference
+adapters; they do not claim full gameplay parity. Shared hosting establishes ownership
+and behavior, not a frame-rate result: performance comparisons still need matched
+scenes and device measurements.
 
 ## Change and validation discipline
 
@@ -147,6 +159,7 @@ the scenario tests under `src/scenarios/`, and the shared renderer boundary and
 terrain preparation tests. Prefer behavioral/cache counters over brittle FPS
 thresholds in regression tests, with separate browser timing evidence.
 
-Next: extract a shared indoor presentation adapter for the furniture playtest,
-while preserving its exact approval renderer and room-specific controls. This topic
-owns the continuing constraint and outstanding gaps; tacticals own bounded migration evidence.
+Next: profile matched Traffic lab and in-game scenes on the same device/backend,
+separating simulation/transport, scene collection and GPU work. The original frame-rate
+concern needs measured evidence now that the migration list is complete. This topic
+owns the continuing architecture constraint; tacticals own bounded migration evidence.

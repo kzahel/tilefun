@@ -58,13 +58,15 @@ for (const mode of ["canvas", "gpu"]) {
       .locator(".geometry-viewport")
       .screenshot({ path: `/tmp/tilefun-outdoor-${mode}.png` });
     await page.setViewportSize({ width: 390, height: 844 });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
-      true,
-    );
+    // GPU world alignment is published by ResizeObserver after viewport layout.
+    await expect
+      .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+      .toBe(true);
     if (mode === "gpu") {
       const ui = await canvas.boundingBox();
-      const world = await page.locator(".geometry-viewport canvas[aria-hidden=true]").boundingBox();
-      expect(world).toEqual(ui);
+      await expect
+        .poll(() => page.locator(".geometry-viewport canvas[aria-hidden=true]").boundingBox())
+        .toEqual(ui);
       await expect(page.locator(".geometry-viewport canvas[aria-hidden=true]")).toHaveCSS(
         "image-rendering",
         "pixelated",

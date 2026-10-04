@@ -128,9 +128,14 @@ Rendering evidence and runners are routed through [performance](performance.md).
 
 Furniture motion now compiles its layouts to ordinary props and runs a memory-backed
 Realm in a Worker through [Gameplay scenarios](gameplay-scenarios.md). The layout
-model keeps placement validation, path targets and review rendering; it has no
-private player simulation. Physics version 2 reopens previous motion judgments
-while retaining exact historical approvals and static art. Gameplay collider
+model keeps placement validation and path targets; it has no private player simulation.
+Interactive presentation uses `ScenarioPresentationHost` and the same `presentInterior`
+adapter as gameplay, including actor interpolation, room ordering and Canvas/GPU
+lifecycle. Static approval rendering remains separate and unchanged. Live motion
+review signatures include presentation version 1, reopening the eleven movement
+cases while preserving historical reports. See [embedded engine labs](embedded-engine-labs.md)
+and [Tactical 056](../tactical/056-furniture-presentation-host.md). The earlier physics
+version 2 similarly reopened pre-Worker motion judgments. Gameplay collider
 compilation lives in FurniturePhysics, independent of the lab model.
 
 ## Next work

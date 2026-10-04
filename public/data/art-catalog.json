@@ -21579,15 +21579,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:501"
-        },
-        {
-          "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:522"
-        },
-        {
-          "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:857"
+          "source": "src/interiors/playtest/main.ts:856"
         },
         {
           "system": "Gameplay",
@@ -23579,7 +23571,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:233"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:259"
         },
         {
           "system": "Editor",

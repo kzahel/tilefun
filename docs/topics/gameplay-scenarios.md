@@ -8,7 +8,7 @@ changes storage and scheduling; it does not implement another gameplay loop.
 [Tactical 027](../tactical/027-composable-gameplay-scenarios.md) owns delivery evidence.
 
 [Embedded engine labs](embedded-engine-labs.md) owns the requirement to keep labs
-aligned with engine changes, including the remaining presentation-host gaps.
+aligned with engine changes, including presentation and lifecycle contracts.
 Shared simulation does not mean every lab runs the game's complete frame loop.
 
 ## Composition
@@ -41,10 +41,10 @@ predictor and replica animation clock. `predictInput` is shared with `PlayScene`
 The client bounds outstanding steps to six; pause/hidden views do not accumulate
 unbounded command debt. Explicit commands change scenario state at the authority.
 
-Traffic presentation now uses `ScenarioPresentationHost` with the production
-clock, render host and shared camera/terrain helpers. Other labs retain their
-view-specific presentation adapters; [embedded engine labs](embedded-engine-labs.md)
-tracks migration and the remaining camera/overlay/indoor boundaries. Diagnostics,
+Traffic, Outdoor Geometry, World Geometry, Character lab and furniture playtest
+use `ScenarioPresentationHost` with the production clock, render host and shared
+camera/terrain/indoor helpers. [Embedded engine labs](embedded-engine-labs.md)
+tracks the completed migrations and explicit camera/overlay/reference boundaries. Diagnostics,
 placement controls and static review painting remain view responsibilities. FurnitureMotion and CharacterTestScene
 are layout/render models without movement loops. The former synchronous traffic
 loop is `TrafficTestHarness`, imported only by low-level lane stress tests.
@@ -88,7 +88,9 @@ baselines, and restore prediction before accepting further movement.
 The immutable approved art banks and saved human decisions are unchanged.
 Character fingerprints now include recipe and Realm host source. Furniture motion
 version 2 reopens earlier behavior approvals; it does not relabel them as approvals
-of the Worker runtime. Static art identities still use exact rendered evidence.
+of the Worker runtime. Presentation version 1 additionally reopens the eleven
+movement cases for the shared clock/interpolation/indoor-rendering migration; prior
+reports remain historical. Static art identities still use exact rendered evidence.
 
 Tests cover independent memory sessions, collision, scoped settings, binary
 replicas, Worker-host/headless parity, reset/reload, invalid requests, all car

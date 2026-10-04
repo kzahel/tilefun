@@ -12,6 +12,9 @@ export function motionSceneSignature(
 ): string {
   return JSON.stringify({
     version: FURNITURE_PHYSICS_VERSION,
+    // Live movement reviews now use the engine clock, interpolated actors and
+    // production room/shadow presentation. Keep previous screenshots historical.
+    presentationVersion: 1,
     sketch: MOTION_SKETCH,
     furniture: furnitureSignature(furniture),
     bodies,

@@ -3,6 +3,9 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
+import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
+import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
+import { presentInterior } from "../interiors/presentInterior.js";
 import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
@@ -30,7 +33,17 @@ export interface ScenarioPresentationOptions {
   height: number;
   cameraOffsetY?: number;
   /** Fixed diagnostic framing; otherwise use production player follow. */
-  fixedCamera?: { wx: number; wy: number };
+  fixedCamera?:
+    | { wx: number; wy: number }
+    | ((player: Entity, alpha: number) => { wx: number; wy: number });
+  /** Owned room cache. Props still participate in collision/support-aware actor ordering. */
+  interior?: {
+    presentation: InteriorPresentation;
+    placements: readonly FurniturePlacement[];
+    drawProps: ReadonlySet<number>;
+  };
+  /** Diagnostic UI only; world content always goes through the renderer backend. */
+  uiOverlay?(ctx: CanvasRenderingContext2D, host: ScenarioPresentationHost): void;
   /** Owned asset set; disposal closes bitmaps, leaving borrowed HTML images intact. */
   loadAssets?(graph: BlendGraph): Promise<GameAssets>;
   /** Diagnostic fixtures can replace terrain/grass with a grid. */
@@ -49,7 +62,7 @@ export interface ScenarioPresentationOptions {
   onError(error: unknown): void;
 }
 
-/** Embedded outdoor gameplay, using the production clock, render host, asset
+/** Embedded gameplay, using the production clock, render host, asset
  * configuration, camera interpolation and scene/terrain presentation. The caller
  * owns DOM controls and a positioned wrapper around its input/UI canvas.
  */
@@ -73,7 +86,7 @@ export class ScenarioPresentationHost {
   private displayedPlayer: Entity | undefined;
 
   constructor(
-    canvas: HTMLCanvasElement,
+    private readonly canvas: HTMLCanvasElement,
     recipe: ScenarioRecipe,
     private readonly options: ScenarioPresentationOptions,
   ) {
@@ -128,9 +141,14 @@ export class ScenarioPresentationHost {
 
   private snapCamera() {
     const p = this.session.view.playerEntity.position;
-    const fixed = this.options.fixedCamera;
+    const fixed = this.fixedCamera(1);
     this.camera.snapTo(fixed?.wx ?? p.wx, fixed?.wy ?? p.wy + (this.options.cameraOffsetY ?? 0));
     this.interpolate = false;
+  }
+
+  private fixedCamera(alpha: number) {
+    const fixed = this.options.fixedCamera;
+    return typeof fixed === "function" ? fixed(this.session.view.playerEntity, alpha) : fixed;
   }
 
   private update(dt: number) {
@@ -166,19 +184,24 @@ export class ScenarioPresentationHost {
     const view = this.session.view;
     this.camera.zoom = this.options.settings().zoom;
     this.alpha = this.paused || !this.interpolate ? 1 : alpha;
-    if (this.options.fixedCamera) {
-      bindPredictedPlayerPose(view.playerEntity, this.session.predictor);
-      this.camera.applyInterpolation(this.alpha);
-    } else
-      beginPlayerPresentation(
-        this.camera,
-        view.playerEntity,
-        this.alpha,
-        this.session.predictor,
-        false,
-        this.options.cameraOffsetY,
-      );
     try {
+      if (this.options.fixedCamera) {
+        bindPredictedPlayerPose(view.playerEntity, this.session.predictor);
+        this.camera.applyInterpolation(this.alpha);
+        const fixed = this.fixedCamera(this.alpha);
+        if (fixed) {
+          this.camera.x = fixed.wx;
+          this.camera.y = fixed.wy;
+        }
+      } else
+        beginPlayerPresentation(
+          this.camera,
+          view.playerEntity,
+          this.alpha,
+          this.session.predictor,
+          false,
+          this.options.cameraOffsetY,
+        );
       const player = view.playerEntity;
       const cycle = this.options.poseCycle?.();
       const row = Math.floor(this.poseSeconds / 2) % 4;
@@ -201,7 +224,7 @@ export class ScenarioPresentationHost {
       this.host.beginFrame();
       renderer.submit(this.camera, { kind: "clear", color: this.options.background ?? "#cbd5c3" });
       const range = this.camera.getVisibleChunkRange();
-      if (this.options.terrain !== false)
+      if (!this.options.interior && this.options.terrain !== false)
         presentTerrain(
           renderer,
           this.camera,
@@ -210,17 +233,18 @@ export class ScenarioPresentationHost {
           this.options.settings().terrainPacing,
         );
       this.drawOverlay(this.options.underlay);
-      this.drawOverlay((frame) =>
-        collectSurfacePresentation(
-          frame,
-          this.camera,
-          view.props,
-          view.playerEntity,
-          this.options.surfaceVisibility?.() ?? "auto",
-          "below",
-          this.alpha,
-        ),
-      );
+      if (!this.options.interior)
+        this.drawOverlay((frame) =>
+          collectSurfacePresentation(
+            frame,
+            this.camera,
+            view.props,
+            view.playerEntity,
+            this.options.surfaceVisibility?.() ?? "auto",
+            "below",
+            this.alpha,
+          ),
+        );
       const items = collectScene(
         entities,
         view.props,
@@ -230,29 +254,37 @@ export class ScenarioPresentationHost {
         this.alpha,
         renderer,
         [],
-        this.options.terrain !== false && renderer.assets.has("grass-blades"),
+        !this.options.interior &&
+          this.options.terrain !== false &&
+          renderer.assets.has("grass-blades"),
         undefined,
-        undefined,
+        this.options.interior?.drawProps,
         this.frame,
       );
-      renderer.submit(this.camera, {
-        kind: "scene",
-        items,
-        order: collectSceneOrder(items, this.frame.drawOrder),
-        pixelExactShadows: this.options.pixelExactShadows ?? false,
-      });
-      this.drawOverlay((frame) =>
-        collectSurfacePresentation(
-          frame,
-          this.camera,
-          view.props,
-          view.playerEntity,
-          this.options.surfaceVisibility?.() ?? "auto",
-          "above",
-          this.alpha,
-        ),
-      );
+      const interior = this.options.interior;
+      if (interior)
+        presentInterior(renderer, this.camera, interior.presentation, interior.placements, items);
+      else
+        renderer.submit(this.camera, {
+          kind: "scene",
+          items,
+          order: collectSceneOrder(items, this.frame.drawOrder),
+          pixelExactShadows: this.options.pixelExactShadows ?? false,
+        });
+      if (!this.options.interior)
+        this.drawOverlay((frame) =>
+          collectSurfacePresentation(
+            frame,
+            this.camera,
+            view.props,
+            view.playerEntity,
+            this.options.surfaceVisibility?.() ?? "auto",
+            "above",
+            this.alpha,
+          ),
+        );
       this.drawOverlay(this.options.overlay);
+      this.options.uiOverlay?.(this.host.uiContext, this);
       this.renderX = this.camera.x;
       this.renderY = this.camera.y;
       this.options.onFrame?.(this);
@@ -263,6 +295,14 @@ export class ScenarioPresentationHost {
       this.overlays.release();
       this.camera.restoreActual();
     }
+  }
+
+  /** Fresh, non-advancing report capture, including the GPU world and diagnostic UI. */
+  captureFrame(): HTMLCanvasElement {
+    if (!this.host) throw new Error("Presentation is unavailable for capture");
+    this.render(1);
+    if (!this.host) throw new Error("Presentation failed during capture");
+    return this.host.captureFrame?.() ?? this.canvas;
   }
 
   /** Resize presentation without restarting the Worker or changing its world. */
@@ -326,6 +366,7 @@ export class ScenarioPresentationHost {
     this.host?.dispose();
     this.host = undefined;
     this.frame.clear();
+    this.options.interior?.presentation.clear();
     this.displayedPlayer = undefined;
     this.overlays.clear();
     if (this.assets) closeAssets(this.assets);
