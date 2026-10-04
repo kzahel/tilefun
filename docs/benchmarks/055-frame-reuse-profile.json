@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "commit": "a3ed665",
+  "device": "Mac",
+  "renderer": "gpu",
+  "zoom": 0.1,
+  "stage": "recovery-warm",
+  "requestedSeconds": 5,
+  "sampledFrames": 588,
+  "limits": [
+    "Instrumentation adds overhead; attribution is not an uninstrumented frame-rate comparison.",
+    "Hooks span a slightly wider window than frame sampling; inlining can shift function attribution.",
+    "Raw profile stays local; only repo-relative names and aggregate counters are retained."
+  ],
+  "profile": {
+    "totals": {
+      "submit:clear": {
+        "calls": 601,
+        "ms": 4.00000000372529,
+        "items": 0
+      },
+      "prepareTerrain": {
+        "calls": 601,
+        "ms": 37.80000002682209,
+        "items": 0
+      },
+      "collectTerrain": {
+        "calls": 601,
+        "ms": 13.899999987334013,
+        "items": 0
+      },
+      "submit:terrain": {
+        "calls": 601,
+        "ms": 230.60000003129244,
+        "items": 140634
+      },
+      "collectElevationItems": {
+        "calls": 601,
+        "ms": 19.499999973922968,
+        "items": 0
+      },
+      "submit:scene": {
+        "calls": 601,
+        "ms": 2003.8999999910593,
+        "items": 20518741
+      }
+    },
+    "uploads": {},
+    "evictions": {
+      "sheet:vehicle-v1:car-24": 1,
+      "canvas:256x256": 13
+    },
+    "cpu": [
+      {
+        "functionName": "/src/rendering/collectScene.ts:collectScene",
+        "selfMs": 1218.408
+      },
+      {
+        "functionName": "/src/rendering/Canvas2DRenderer.ts:drawSceneEntry2D",
+        "selfMs": 778.13
+      },
+      {
+        "functionName": "/src/rendering/collectScene.ts:(anonymous)",
+        "selfMs": 724.974
+      },
+      {
+        "functionName": "/src/rendering/GpuRasterSurface.ts:drawImage",
+        "selfMs": 462.218
+      },
+      {
+        "functionName": "/src/rendering/GrassBladeRenderer.ts:getBlades",
+        "selfMs": 357.148
+      },
+      {
+        "functionName": "browser/benchmark:(program)",
+        "selfMs": 350.753
+      },
+      {
+        "functionName": "/src/rendering/GpuRasterSurface.ts:quad",
+        "selfMs": 302.516
+      },
+      {
+        "functionName": "/src/rendering/GpuRasterSurface.ts:page",
+        "selfMs": 110.59
+      },
+      {
+        "functionName": "browser/benchmark:owner.<computed>",
+        "selfMs": 97.606
+      },
+      {
+        "functionName": "/src/rendering/Canvas2DRenderer.ts:drawScenePass2D",
+        "selfMs": 85.106
+      },
+      {
+        "functionName": "/src/rendering/RenderFrame.ts:collectSceneOrder",
+        "selfMs": 83.519
+      },
+      {
+        "functionName": "browser/benchmark:bufferSubData",
+        "selfMs": 70.995
+      },
+      {
+        "functionName": "browser/benchmark:(anonymous)",
+        "selfMs": 68.658
+      },
+      {
+        "functionName": "dependency:WebGLRenderer.renderBufferDirect",
+        "selfMs": 36.349
+      },
+      {
+        "functionName": "browser/benchmark:(garbage collector)",
+        "selfMs": 27.236
+      },
+      {
+        "functionName": "dependency:WebGLRenderer.render",
+        "selfMs": 26.274
+      },
+      {
+        "functionName": "browser/benchmark:callbacks.render",
+        "selfMs": 20.097
+      },
+      {
+        "functionName": "/src/world/ChunkManager.ts:get",
+        "selfMs": 15.112
+      },
+      {
+        "functionName": "/src/rendering/GpuRasterSurface.ts:(anonymous)",
+        "selfMs": 15.033
+      },
+      {
+        "functionName": "/src/rendering/TerrainFrame.ts:collect",
+        "selfMs": 13.959
+      },
+      {
+        "functionName": "browser/benchmark:depthMask",
+        "selfMs": 12.596
+      },
+      {
+        "functionName": "dependency:setProgram",
+        "selfMs": 12.513
+      },
+      {
+        "functionName": "/src/rendering/RasterSurface.ts:rasterRevision",
+        "selfMs": 11.195
+      },
+      {
+        "functionName": "/src/rendering/ElevationDescriptorCache.ts:collect",
+        "selfMs": 10.058
+      },
+      {
+        "functionName": "browser/benchmark:drawImage",
+        "selfMs": 9.258
+      },
+      {
+        "functionName": "browser/benchmark:(idle)",
+        "selfMs": 8.733
+      },
+      {
+        "functionName": "/src/rendering/GpuRasterSurface.ts:beginFrame",
+        "selfMs": 8.637
+      },
+      {
+        "functionName": "/src/rendering/GrassBladeRenderer.ts:appendGrassBladeItems",
+        "selfMs": 7.62
+      },
+      {
+        "functionName": "/src/rendering/GpuRasterSurface.ts:size",
+        "selfMs": 7.543
+      },
+      {
+        "functionName": "/src/rendering/CanvasTerrainResources.ts:retainCoordinates",
+        "selfMs": 7.541
+      }
+    ]
+  }
+}

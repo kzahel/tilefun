@@ -379,13 +379,7 @@ The extra Pixel overview repeat hit the 600-second cooldown deadline; its planne
 one-minute sprint was canceled before measurement. Resume those cases on a cooled
 phone, retaining the <=31°C/status-zero entry gate.
 
-Next engine target: shared grass collection/sorting and recurring vertex creation.
-The measured Mac overview still requests about 5.78 MiB of vertex uploads per
-render frame; persistent ordering and instanced quad submission are candidates
-for measured follow-ups. Keep current renderer/pacing defaults.
-
-
-[055](../tactical/055-overview-frame-reuse.md) is addressing overview frame reuse.
+[055](../tactical/055-overview-frame-reuse.md) delivered overview frame reuse.
 The shared grass pool now retains up to 65,536 scalar records on demand (formerly
 8,192), with the same sustained-underuse shrink and realm/host teardown. A fixed
 21,394-blade allocation probe reduces warm record creation from 1.58 million to
@@ -398,3 +392,27 @@ per quad, preserving the original triangle order. Requested dynamic vertex data
 is 128 bytes/quad versus 192, with the same batching and shader. Game and embedded
 GPU consumers share it. Full-Chromium parity and multi-batch upload accounting
 pass; this byte reduction is not a physical bandwidth measurement or FPS claim.
+
+
+The [055 comparison](../benchmarks/055-frame-reuse-comparison.md) records 15
+passing cases. Mac GPU overview render CPU p95 falls from 10.1 to 8.5 ms in two
+final runs; slow intervals fall from 274/2,125 to 25/2,374 and 27/2,372. Dynamic
+vertex requests fall from 5.78 to 3.85 MiB/frame. Canvas overview stays near
+50 ms frame p95: its native submission bottleneck remains. Pixel GPU render CPU
+p95 falls from 10.4 to 9.9 ms in two observations, with fewer slow intervals;
+frame p95 varies between 16.8 and 33.3 ms after the change. Do not describe this
+as a stutter cure. All phone starts/ends were thermal status zero, 28.5–30.5°C;
+run order/temperature still vary. Current code also completes the one-minute
+1× Pixel sprint: 8,834px, no terrain gaps, 18 slow intervals / 3,583 samples.
+This supplies current long-run evidence without rewriting 052's unmeasured cases.
+
+
+Next: measure cached grass depth order plus a stable merge with live scene items
+in the shared collector. The post-change five-second GPU profile still attributes
+1,218 ms to `collectScene` and 725 ms to its anonymous callbacks (including sort),
+versus 303 ms to quad generation and 27 ms to GC. Inlining and instrumentation
+limit attribution. Preserve equal-depth order, viewport/chunk invalidation and
+independent host lifetimes, and retain the change only if comparison beats the
+native sort. Keep Canvas drawing cost as a separate thread and renderer/pacing
+defaults unchanged. [055](../tactical/055-overview-frame-reuse.md) records full
+validation, memory tradeoffs, the new profile and measurement limits.
