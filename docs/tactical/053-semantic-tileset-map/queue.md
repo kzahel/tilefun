@@ -30,13 +30,16 @@ an agent-written queue status.
 | RB01 | Room Builder path edges and arch assembly | S02-R11/R09 | Reconciled and delivered | [25-record packet](packets/RB01-room-builder-path-arch.md), [review](packets/RB01-room-builder-path-arch-review.md); fixed arch/shadow differences, weakened inset extension and open network windows retained |
 | E03 | Playground crawl tubes | S02-exteriors/E10 | Reconciled and delivered | [25-record packet](packets/E03-playground-tubes.md), [review](packets/E03-playground-tubes-review.md); required continuation ports, finite assemblies, rounded/collared roles qualified |
 | A01 | Small door-animation family | S01 animation inventory | Reconciled and delivered | [Nine-frame packet](packets/A01-animation.md), [review](packets/A01-animation-review.md); eight pixel states, exact GIF correspondence; game playback remains unknown |
+| E04 | City plants and planters | S02; owner planter annotations | Assigned | `plants_mapping`: Eight broadleaf City Props Tree, seven Flower_Bush and four Pot exports; exclusive `E04-plants-planters` packet/helper |
+| I02 | Side-view beds and blanket overlays | S02 Interiors; I01 lessons | Assigned | `bedroom_mapping`: four bed exports and two matching cover exports across three shadow sets; exclusive `I02-bedroom` packet/helper |
+| E05 | Fence and gate topology | S02 Exteriors; E03 lessons | Assigned | `expansion_sheets`: bounded complete fence/gate kit; exclusive `E05-fences-gates` packet/helper |
 | E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, V01 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Bounded mapped-evidence audit; entire-pack semantic audit remains open | [Expansion audit](notes/2026-10-04-expansion-audit.md); inventory duplicates, mapped frames and coverage consistency; unsegmented art remains unassigned |
 | R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and independently checked for all eight normalized packets | 131 cards / 191 records, variants, assemblies, selected-piece metadata and shared notes; eight proposed discovery candidates, no approval/promotion controls |
 | R02 | Act on first owner comments: tree-base names/relations and forest repeat examples | R01 | Implemented and validated | [Feedback evidence](notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up); cabinets/scrapyard have positive whole-sheet comments; F05 ground correction and three varied-offset examples accepted in chat; exact source/recipe recorded; boundaries remain unresolved |
 
-Next action: expand to bounded unmapped themes and reconcile supplemental exports,
-using the same independent review and quiet-sheet workflow. The
+Next action: reconcile the locked-door wording feedback, then investigate E04/I02/E05,
+rotate independent reviewers across their frozen packets, and deliver quiet sheets. The
 [expansion reconciliation](notes/2026-10-04-component-animation-expansion.md) is the
 frozen research checkpoint; current delivery is recorded in the
 [component family delivery](notes/2026-10-04-component-family-delivery.md).
@@ -64,3 +67,14 @@ The independent model and presentation audits are linked from the delivery note.
 Runtime/train/traffic changes from the other active user session are outside this
 assignment. Worker models remain GPT-6.1 Sol/high; shared tests run in a source
 snapshot with separate ports and storage to prevent contention.
+
+## Next family assignment — 2026-10-04
+
+The owner authorized plants/planters, beds/bedroom furniture, and fences/gates
+after leaving positive whole-sheet comments on floors/arches and tubes. The door
+comment challenges the label “Closed door movement”; source frames and the locked
+filename support a proposed failed-opening/rattle interpretation, not a new game
+contract. The coordinator owns this presentation clarification and all shared
+registries/catalogs. Three Sol6.1/high workers own separate packet/helper paths.
+Research scope is bounded per selected subfamily; full-pack completeness remains
+unknown. Mapper packets freeze before a different worker reviews them.

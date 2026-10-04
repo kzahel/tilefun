@@ -606,6 +606,12 @@ test("door source demonstrations stay paused and expose every frame independentl
   const link = page.url();
   const demonstrations = page.locator(".family-source-animation");
   await expect(demonstrations).toHaveCount(2);
+  await expect(page.locator(".family-examples figure").nth(1)).toContainText(
+    "failed opening attempt",
+  );
+  await page.getByRole("button", { name: "4× artwork zoom", exact: true }).click();
+  await expect(demonstrations.first().locator("canvas")).toHaveCSS("width", "64px");
+  await expect(demonstrations.first().locator("canvas")).toHaveAttribute("width", "16");
   for (const [index, example] of family.examples.entries()) {
     const demo = demonstrations.nth(index);
     await expect(demo).toContainText("Source demonstration");

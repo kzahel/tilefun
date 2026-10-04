@@ -10,6 +10,8 @@ generated crops and contact sheets can use ignored local output, with reproducib
 capture commands and source hashes recorded here. Temporary file links alone are
 not durable evidence. Do not commit original downloaded packs or private review logs.
 
+Current next-family slice: [plants, bedroom furniture and fences](2026-10-04-plants-bedroom-fences.md).
+
 ## Planning checkpoint — 2026-10-04
 
 Current implementation records: [shared model](2026-10-04-semantic-model.md),

@@ -248,7 +248,7 @@ def build_doors(a, packet, images, sheets):
     demonstrations = {row['id']: row for row in packet['sourceGifDemonstrations']}
     cards, examples = [], []
     for number, (sequence, sheet_id, label) in enumerate(zip(packet['sequences'],
-            ['interiors-door-1', 'interiors-door-1-locked'], ['Door opening frames', 'Closed door movement frames']), 1):
+            ['interiors-door-1', 'interiors-door-1-locked'], ['Door opening frames', 'Locked-door attempt frames']), 1):
         records = sequence['memberRecords']
         source_id = rows[records[0]]['sourceStrip']
         source = sources[source_id]
@@ -283,17 +283,19 @@ def build_doors(a, packet, images, sheets):
                         [a.fact('Form', 'Frames of one source strip; these are not spatial assembly pieces.'),
                          a.fact('Use', 'Standalone placement is unknown; the frames grant no placement permission.'),
                          a.fact('Playback', 'Source order and companion GIF timing are demonstration evidence only.')], variants)
+        if number == 2:
+            card['facts'].insert(0, a.fact('Interpretation', 'Likely a failed opening attempt: the panel shifts but stays closed. The source is named locked.'))
         card['variantLabel'] = 'Frame'
         cards.append(card)
         examples.append({'id': sequence['id'] + '-demonstration',
                          'groupLabel': 'Source demonstrations',
-                         'label': 'Door opening demonstration' if number == 1 else 'Closed door movement demonstration',
+                         'label': 'Door opening demonstration' if number == 1 else 'Locked-door attempt demonstration',
                          'description': 'Repeats the companion GIF in source order. Game timing, triggers and lock mechanics are unknown.' +
-                                        (' The reset to closed is not a closing sequence.' if number == 1 else ''),
+                                        (' The reset to closed is not a closing sequence.' if number == 1 else ' Press Play to see the closed panel rattle; a failed opening attempt is the proposed interpretation.'),
                          'variants': variants, 'animation': {'frameDurationsMs': durations, 'loop': True}})
     return a.family('animated-doors', 'Animated doors', 'Two source strips of the same brown door.',
                     'Frame', [('frame-1', 'Frame 1')],
-                    [a.fact('Frames', 'Five opening frames and four closed-door movement frames; the closed first frame is shared.'),
+                    [a.fact('Frames', 'Five opening frames and four possible locked-door attempt frames; the closed first frame is shared.'),
                      a.fact('Playback', 'Examples replay the companion GIF demonstrations. Game playback is unknown.'),
                      a.fact('Gameplay', 'Placement, collision, opening triggers, reverse closing and lock mechanics are unknown.')],
                     [a.group('strips', 'Source frame strips', cards)], examples, sheets)

@@ -263,7 +263,7 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
                     className={example.variants[0]?.sprite.background ? "is-large" : undefined}
                   >
                     {example.animation ? (
-                      <SourceAnimation example={example} images={images.data} />
+                      <SourceAnimation example={example} images={images.data} zoom={zoom} />
                     ) : (
                       <SpriteStage
                         sprite={familyVariant(example, variantId).sprite}
@@ -291,9 +291,11 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
 function SourceAnimation({
   example,
   images,
+  zoom,
 }: {
   example: FamilyExample;
   images: Map<string, HTMLImageElement>;
+  zoom: number;
 }) {
   const [frame, setFrame] = useState(0),
     [playing, setPlaying] = useState(false);
@@ -321,7 +323,7 @@ function SourceAnimation({
       <SpriteStage
         sprite={variant.sprite}
         images={images}
-        zoom={2}
+        zoom={zoom}
         label={`${example.label} · Frame ${frame + 1}`}
       />
       <p className="family-source-label">Source demonstration</p>

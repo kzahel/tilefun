@@ -163,9 +163,13 @@ revisions and note targets are preserved. The
 and [independent presentation review](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-family-review.md)
 route implementation evidence. Whole-sheet comments remain available everywhere.
 
-Next: investigate another bounded set of unmapped themes and reconcile supplemental
-exports against the masters, using the same independent review and quiet-sheet
-workflow. Prioritize repeated families that can expose missed variants or assembly
+The owner’s latest floor/arch and tube comments are positive whole-sheet feedback.
+The door label now describes a proposed locked-door attempt, with source
+demonstrations following artwork zoom. The
+[next-family slice](../tactical/053-semantic-tileset-map/notes/2026-10-04-plants-bedroom-fences.md)
+owns that correction and the active plants/planters, bed/bedding and fence/gate
+investigations. New research will receive separate independent review before
+normalization and quiet-sheet delivery. Prioritize repeated families that can expose missed variants or assembly
 rules; unknown regions remain explicit in the coverage ledger. The
 [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
 tracks duplicate/gap/source consistency; it does not exhaustively segment the packs.

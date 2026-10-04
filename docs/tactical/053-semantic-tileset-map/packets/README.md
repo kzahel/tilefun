@@ -57,7 +57,7 @@ exact public PNG copies now support ordinary browsing. I01 is normalized as twen
 with eighteen cards and nine positive assembly examples. Four roles remain unknown.
 
 
-## Reviewed expansion awaiting normalization
+## Delivered component and animation expansion
 
 | Packet | Source record scope | Independent review |
 | --- | --- | --- |
@@ -65,6 +65,7 @@ with eighteen cards and nine positive assembly examples. Four roles remain unkno
 | [E03 Playground tubes](E03-playground-tubes.md) · [JSON](E03-playground-tubes.json) | 19 ochre shapes plus six blue/red counterparts | [Review](E03-playground-tubes-review.md): 25 records, eight frozen probes and five supplemental challenges; required cuts distinguished from entrance mouths |
 | [A01 Door animation](A01-animation.md) · [JSON](A01-animation.json) | Nine temporal source frames / eight pixel states / two sequences | [Review](A01-animation-review.md): full static/packed/corpus checks and exact companion GIF correspondence; game playback remains unknown |
 
-These 59 researched component/frame records have registered, pinned reviews but
-no normalized coverage credit yet. They need explicit format adapters and quiet
-owner-facing sheets; no new human approval or gameplay metadata is inferred.
+These 59 component/frame records now have explicit normalization and three quiet
+family sheets, bringing the total to 191 records / 164 proposal units. The
+[delivery record](../notes/2026-10-04-component-family-delivery.md) preserves exact
+validation and review scope. No human approval or gameplay metadata is inferred.

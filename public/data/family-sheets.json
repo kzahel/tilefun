@@ -11053,7 +11053,7 @@
       "facts": [
         {
           "label": "Frames",
-          "value": "Five opening frames and four closed-door movement frames; the closed first frame is shared."
+          "value": "Five opening frames and four possible locked-door attempt frames; the closed first frame is shared."
         },
         {
           "label": "Playback",
@@ -11235,9 +11235,13 @@
             {
               "id": "A01:closed-perturbation",
               "number": 2,
-              "label": "Closed door movement frames",
+              "label": "Locked-door attempt frames",
               "kind": "frame",
               "facts": [
+                {
+                  "label": "Interpretation",
+                  "value": "Likely a failed opening attempt: the panel shifts but stays closed. The source is named locked."
+                },
                 {
                   "label": "Form",
                   "value": "Frames of one source strip; these are not spatial assembly pieces."
@@ -11532,8 +11536,8 @@
         {
           "id": "A01:closed-perturbation-demonstration",
           "groupLabel": "Source demonstrations",
-          "label": "Closed door movement demonstration",
-          "description": "Repeats the companion GIF in source order. Game timing, triggers and lock mechanics are unknown.",
+          "label": "Locked-door attempt demonstration",
+          "description": "Repeats the companion GIF in source order. Game timing, triggers and lock mechanics are unknown. Press Play to see the closed panel rattle; a failed opening attempt is the proposed interpretation.",
           "variants": [
             {
               "id": "frame-1",
@@ -11673,8 +11677,8 @@
           "height": 32
         }
       ],
-      "revision": "b6049c97c198489e793bf32885dfd7096f6cbb14edf3ed15d6fd132928771d1c"
+      "revision": "369525f6b27956fa01cf659ee9f16aa34c383b8d1dc1f564f1626c8dc0f0f3be"
     }
   ],
-  "revision": "e52e627c6da1ab1691708e5fef012f0af545457688c322df9df191f8113ef132"
+  "revision": "a9658052cff5c4e0d0aac5b950f24a7c871becd8b8426bf35e65574d3bfdad2a"
 }
