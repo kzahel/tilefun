@@ -3,7 +3,12 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const input = process.argv[2];
-if (!input) throw Error("Usage: node scripts/analyze-streaming-trace.mjs TRACE.json [OUTPUT.json]");
+if (!input)
+  throw Error(
+    "Usage: node scripts/analyze-streaming-trace.mjs TRACE.json [OUTPUT.json] [REPORT.json]",
+  );
+const report = process.argv[4] ? JSON.parse(await readFile(process.argv[4], "utf8")) : null;
+const sample = report?.fixtures.flatMap((f) => f.samples).find((s) => s.renderTimeline);
 const events = JSON.parse(await readFile(input, "utf8")).traceEvents;
 const start = events.find((e) => e.name === "tilefun.sample.start");
 const end = events.find((e) => e.name === "tilefun.sample.end");
@@ -47,8 +52,56 @@ for (const event of events
 }
 const overlapping = (es, frame) => es.filter((e) => e.ts < frame.end && e.ts + e.dur > frame.start);
 const maxDuration = (es, key = "dur") => round(Math.max(0, ...es.map((e) => (e[key] ?? 0) / 1000)));
+const cadenceMs = stats(frames.map((f) => (f.end - f.start) / 1000)).p50Ms;
+const renderRows = sample?.renderTimeline ?? [];
+const renderPhases = (frame) => {
+  if (!sample) return {};
+  const left = (frame.start - start.ts) / 1000 + sample.sampleStartMs;
+  const right = (frame.end - start.ts) / 1000 + sample.sampleStartMs;
+  const rows = renderRows.filter((r) => r.startMs < right && r.endMs > left);
+  const max = (key) => round(Math.max(0, ...rows.map((r) => r[key] ?? 0)));
+  const sum = (key) => rows.reduce((total, r) => total + r[key], 0);
+  return {
+    renderMaxMs: round(Math.max(0, ...rows.map((r) => r.endMs - r.startMs))),
+    beginMaxMs: max("beginMs"),
+    prepareMaxMs: max("prepareMs"),
+    submitMaxMs: max("submitMs"),
+    pageMaxMs: max("pageMs"),
+    flushMaxMs: max("flushMs"),
+    meshMaxMs: max("meshMs"),
+    textureUploadedBytes: sum("textureUploadedBytes"),
+    vertexUploadedBytes: sum("vertexUploadedBytes"),
+    drawCalls: sum("drawCalls"),
+    terrainRows: sum("terrainRows"),
+  };
+};
+const rasterDetail = (frame) => {
+  const request = overlapping(requests, frame).sort((a, b) => b.dur - a.dur)[0];
+  const nested = request
+    ? rasters.filter(
+        (e) =>
+          e.pid === request.pid &&
+          e.tid === request.tid &&
+          e.ts >= request.ts &&
+          e.ts + e.dur <= request.ts + request.dur,
+      )
+    : [];
+  return {
+    rasterBatchesInLongestRequest: nested.length,
+    rasterEndMsInLongestRequest: round(nested.reduce((sum, e) => sum + e.dur / 1000, 0)),
+  };
+};
 const summary = {
-  schema: "tilefun-streaming-trace/v1",
+  schema: "tilefun-streaming-trace/v2",
+  cadenceMs,
+  slowThresholdMs: cadenceMs * 1.5,
+  framesOver25Ms: frames.filter((f) => f.end - f.start > 25000).length,
+  renderPhasesInclusive: Object.fromEntries(
+    ["beginMs", "prepareMs", "submitMs", "pageMs", "flushMs", "meshMs"].map((key) => [
+      key,
+      stats(renderRows.map((r) => r[key] ?? 0)),
+    ]),
+  ),
   durationMs: round((end.ts - start.ts) / 1000),
   frameIntervals: stats(frames.map((f) => (f.end - f.start) / 1000)),
   mainThreadTasks: durations(tasks),
@@ -59,10 +112,12 @@ const summary = {
   ),
   rasterBatchCount: rasters.length,
   slowFrames: frames.flatMap((frame, index) =>
-    frame.end - frame.start > 25000
+    frame.end - frame.start > cadenceMs * 1500
       ? [
           {
             index,
+            ...renderPhases(frame),
+            ...rasterDetail(frame),
             startMs: round((frame.start - start.ts) / 1000),
             intervalMs: round((frame.end - frame.start) / 1000),
             overlappingMainTaskMaxMs: maxDuration(overlapping(tasks, frame)),

@@ -159,3 +159,25 @@ texture uploads and draw submission need profiling before adoption. Live-heap
 snapshots do not attribute allocation churn or close the intermittent-hitch issue.
 The car also renders in native WebGPU, but this is an asset probe, not a complete
 WebGPU game backend or proof that it will be faster.
+
+
+## Longer GPU stutter investigation
+
+[046](../tactical/046-gpu-stutter-investigation.md) records sixteen desktop/Pixel
+runs and [sanitized trace evidence](../benchmarks/046-gpu-stutters.json). Ordinary
+long phone sprints became blocked, so sustained rendering/streaming comparisons
+use explicit noclip and record actual distance/stationary time. Desktop movement
+is clean at roughly 120 Hz. Pixel continuous one-minute controls record 5 missed
+intervals for Canvas and 18 for GPU sprites, with no visible terrain gaps.
+
+Recorded hitches include a 42.3 ms main-thread GC event in the Canvas trace and
+14–21 ms GPU-process raster requests in the GPU trace. Tracing perturbs timing and
+allocation; neither observation attributes every ordinary-play hitch. A reversible
+GPU terrain-budget test gives 20 → 6 → 23 missed intervals for default → two rows
+→ default, while keeping movement ready. The two-row limit also raises initial
+unfinished-cache frames from 9–10 to 26, so no blanket production cap is adopted.
+
+Next: bound background/offscreen raster work through the shared preparation owner,
+retain urgency for visible terrain, and validate entry/movement plus affected labs.
+The Traffic lab's conflicting preparation policies remain a separate known issue.
+Production renderer behavior and Canvas default are unchanged by this investigation.

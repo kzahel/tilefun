@@ -17,6 +17,7 @@ const option = (key, fallback) =>
 const renderer = option("renderer", "canvas");
 if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canvas or gpu");
 const meshes = process.argv.includes("--meshes");
+const noclip = process.argv.includes("--noclip");
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
@@ -25,11 +26,17 @@ const cpuRate = Number(option("cpu", "1"));
 const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
 const touch = process.argv.includes("--touch");
+const sprintFrames = Number(option("sprint-frames", "300"));
+if (!Number.isInteger(sprintFrames) || sprintFrames < 1 || sprintFrames > 7200)
+  throw Error("--sprint-frames must be between 1 and 7200");
 const traceStage = option("trace-stage", "");
 const traceFrames = Number(option("trace-frames", "600"));
 const frameTimelineEnabled = process.argv.includes("--frame-timeline");
 const zoomSettled = process.argv.includes("--zoom-settled");
 const pauseZoomPreparation = process.argv.includes("--pause-zoom-preparation");
+const terrainRowBudget = Number(option("terrain-row-budget", "0"));
+if (!Number.isInteger(terrainRowBudget) || terrainRowBudget < 0 || terrainRowBudget > 128)
+  throw Error("--terrain-row-budget must be between 1 and 128, or 0 for the default");
 const zoomRowBudget = Number(option("zoom-row-budget", "0"));
 if (!Number.isInteger(zoomRowBudget) || zoomRowBudget < 0 || zoomRowBudget > 128)
   throw Error("--zoom-row-budget must be between 1 and 128, or 0 for the default");
@@ -61,8 +68,11 @@ const report = {
   input: touch ? "touch joystick and sprint button" : "keyboard",
   ...(traceStage ? { traceStage, traceFrames } : {}),
   ...(pauseZoomPreparation ? { diagnosticControl: "pause terrain preparation after zoom" } : {}),
+  ...(terrainRowBudget ? { diagnosticTerrainRowBudget: terrainRowBudget } : {}),
   ...(zoomRowBudget ? { diagnosticZoomRowBudget: zoomRowBudget } : {}),
   instrumentation,
+  sprintFrames,
+  noclip,
   renderer,
   meshes,
   cpuRate,
@@ -123,6 +133,15 @@ try {
         Math.hypot(p.wx / 16 - arrival.x, p.wy / 16 - arrival.y) <= 46
       );
     }, arrival);
+    if (noclip)
+      await page.evaluate(() => document.querySelector("#game").__game.debugPanel.setNoclip(true));
+    if (terrainRowBudget)
+      await page.evaluate((rowBudget) => {
+        const renderer = document.querySelector("#game").__game.renderer;
+        const prepare = renderer.prepareTerrain.bind(renderer);
+        renderer.prepareTerrain = (camera, world, visible) =>
+          prepare(camera, world, visible, { timeBudgetMs: 2, rowBudget });
+      }, terrainRowBudget);
     const actualRenderer = await page.locator("#game").getAttribute("data-renderer");
     if (renderer === "gpu" && actualRenderer !== "gpu")
       throw Error(`GPU benchmark fell back to ${actualRenderer}`);
@@ -190,6 +209,45 @@ try {
             visited = new Set(),
             tasks = [];
           const frameTimeline = [];
+          const renderTimeline = [];
+          const phases = {
+            beginMs: 0,
+            prepareMs: 0,
+            submitMs: 0,
+            pageMs: 0,
+            flushMs: 0,
+            meshMs: 0,
+          };
+          const restores = [];
+          const instrument = (owner, method, key) => {
+            if (!tracing || !owner || typeof owner[method] !== "function") return;
+            const original = owner[method];
+            owner[method] = function (...args) {
+              const start = performance.now();
+              try {
+                return original.apply(this, args);
+              } finally {
+                phases[key] += performance.now() - start;
+              }
+            };
+            restores.push(() => {
+              owner[method] = original;
+            });
+          };
+          instrument(game.renderHost, "beginFrame", "beginMs");
+          instrument(game.renderer, "prepareTerrain", "prepareMs");
+          instrument(game.renderer, "submit", "submitMs");
+          instrument(game.renderer.surface, "page", "pageMs");
+          instrument(game.renderer.surface, "flush", "flushMs");
+          instrument(game.renderer.meshes, "draw", "meshMs");
+          const gpuStats = game.renderer.surface?.stats;
+          let previousUpload = gpuStats?.uploadedBytes ?? 0;
+          let previousVertex = gpuStats?.vertexUploadedBytes ?? 0;
+          let previousDraws = gpuStats?.drawCalls ?? 0;
+          let sampleStartMs = 0;
+          let travelledPx = 0,
+            stationaryMs = 0,
+            maxStationaryMs = 0;
           const observer = new PerformanceObserver((list) => {
             for (const e of list.getEntries()) tasks.push(e.duration);
           });
@@ -227,10 +285,26 @@ try {
           };
           callbacks.render = (alpha) => {
             const t = performance.now();
+            if (tracing) for (const key of Object.keys(phases)) phases[key] = 0;
             render(alpha);
-            renders.push(performance.now() - t);
-            if (tracing)
-              performance.measure("tilefun.render", { start: t, end: performance.now() });
+            const end = performance.now();
+            renders.push(end - t);
+            if (tracing) {
+              const diagnostics = game.renderer.getDiagnostics?.();
+              renderTimeline.push({
+                startMs: t,
+                endMs: end,
+                ...phases,
+                terrainRows: diagnostics?.rowsLastFrame ?? 0,
+                textureUploadedBytes: (gpuStats?.uploadedBytes ?? 0) - previousUpload,
+                vertexUploadedBytes: (gpuStats?.vertexUploadedBytes ?? 0) - previousVertex,
+                drawCalls: (gpuStats?.drawCalls ?? 0) - previousDraws,
+              });
+              previousUpload = gpuStats?.uploadedBytes ?? 0;
+              previousVertex = gpuStats?.vertexUploadedBytes ?? 0;
+              previousDraws = gpuStats?.drawCalls ?? 0;
+            }
+            if (tracing) performance.measure("tilefun.render", { start: t, end });
             const r = game.camera.getVisibleChunkRange();
             let missing = 0,
               incomplete = 0;
@@ -268,11 +342,21 @@ try {
             }
           };
           try {
+            sampleStartMs = performance.now();
             if (tracing) performance.mark("tilefun.sample.start");
             let last = await new Promise(requestAnimationFrame);
+            let previousX = game.stateView.playerEntity.position.wx;
+            let previousY = game.stateView.playerEntity.position.wy;
             for (let i = 0; i < count; i++) {
               const now = await new Promise(requestAnimationFrame);
               frames.push(now - last);
+              const position = game.stateView.playerEntity.position;
+              const distance = Math.hypot(position.wx - previousX, position.wy - previousY);
+              travelledPx += distance;
+              stationaryMs = distance > 0.01 ? 0 : stationaryMs + now - last;
+              maxStationaryMs = Math.max(maxStationaryMs, stationaryMs);
+              previousX = position.wx;
+              previousY = position.wy;
               if (timeline) {
                 frameTimeline.push({
                   index: i,
@@ -290,6 +374,7 @@ try {
             callbacks.update = update;
             game.transport.send = send;
             observer.disconnect();
+            for (const restore of restores) restore();
           }
           const summary = (values) => {
             const v = [...values].sort((a, b) => a - b);
@@ -297,8 +382,12 @@ try {
             return { count: v.length, p50: q(0.5), p95: q(0.95), p99: q(0.99), max: q(1) };
           };
           const after = game.stateView.playerEntity.position;
+          const cadenceMs = summary(frames).p50;
           return {
             ...(timeline ? { frameTimeline } : {}),
+            ...(tracing ? { renderTimeline, sampleStartMs } : {}),
+            travelledPx,
+            maxStationaryMs,
             renderedFrames: renders.length,
             inputAckMs: summary(ackTimes),
             maxAckGap,
@@ -308,6 +397,8 @@ try {
             renderMs: summary(renders),
             updateMs: summary(updates),
             longTasksMs: summary(tasks),
+            cadenceMs,
+            framesOverCadence: frames.filter((v) => v > cadenceMs * 1.5).length,
             framesOver25Ms: frames.filter((v) => v > 25).length,
             framesOver50Ms: frames.filter((v) => v > 50).length,
             missingDataFrames,
@@ -359,7 +450,7 @@ try {
     samples.push(await sample("walk", 180));
     if (touch) await move(-1, true);
     else await page.keyboard.down("Shift");
-    const sprint = await sample("sprint", 300);
+    const sprint = await sample("sprint", sprintFrames);
     samples.push(sprint);
     if (touch) {
       await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });

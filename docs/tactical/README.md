@@ -77,6 +77,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [045 GPU measurement/decision](045-gpu-measurement-decision.md) | Complete matched renderer measurements; Canvas remains default |
 
+| [046 GPU stutter investigation](046-gpu-stutter-investigation.md) | Complete: desktop/Pixel traces, GC/raster findings and bounded-work diagnostic |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in
