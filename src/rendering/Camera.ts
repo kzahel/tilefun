@@ -1,5 +1,7 @@
 import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
 
+import { projectWorld, unprojectPlane } from "./Projection.js";
+
 export class Camera {
   x = 0;
   y = 0;
@@ -36,18 +38,12 @@ export class Camera {
 
   /** Convert world-pixel coordinates to screen (canvas) coordinates. */
   worldToScreen(wx: number, wy: number): { sx: number; sy: number } {
-    return {
-      sx: (wx - this.x) * this.scale + this.viewportWidth / 2,
-      sy: (wy - this.y) * this.scale + this.viewportHeight / 2,
-    };
+    return projectWorld(this, wx, wy);
   }
 
   /** Convert screen (canvas) coordinates to world-pixel coordinates. */
   screenToWorld(sx: number, sy: number): { wx: number; wy: number } {
-    return {
-      wx: (sx - this.viewportWidth / 2) / this.scale + this.x,
-      wy: (sy - this.viewportHeight / 2) / this.scale + this.y,
-    };
+    return unprojectPlane(this, sx, sy);
   }
 
   /** Immediately set camera position (e.g. restoring from HMR state). */

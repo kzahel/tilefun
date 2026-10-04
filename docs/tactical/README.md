@@ -63,6 +63,10 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [038 Car proxy orthographic checks](038-car-proxy-orthographic-checks.md) | Delivered: side/top presets, grounded tires and closed top texture seams |
 
+| [039 Fixed-view GPU parent](039-fixed-view-gpu-parent.md) | Active autonomous six-slice delivery; optional GPU gameplay and mesh bodies |
+
+| [040 GPU compatibility baseline](040-gpu-compatibility-baseline.md) | Shared projection and reference validation |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

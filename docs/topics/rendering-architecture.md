@@ -167,7 +167,9 @@ from visual meshes. Existing height-aware physics can remain while that is teste
 
 ## Open engine checkpoints
 
-These are proposed follow-ups, not unfinished gates in the completed 022 refactor.
+[Parent 039](../tactical/039-fixed-view-gpu-parent.md) now tracks authorized
+autonomous delivery of the six implementation slices. These are follow-ups,
+not unfinished gates in the completed 022 refactor.
 Plan the next slice just in time; no GPU backend or Rust port is selected for
 production by this document.
 
