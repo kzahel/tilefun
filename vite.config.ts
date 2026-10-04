@@ -33,6 +33,7 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         main: resolve(root, "index.html"),
+        rendererLab: resolve(root, "renderer-lab.html"),
         tools: resolve(root, "tools.html"),
         workshop: resolve(root, "workshop.html"),
         worldExplorer: resolve(root, "world-explorer.html"),

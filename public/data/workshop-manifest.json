@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "renderer-lab",
+      "name": "Renderer comparison",
+      "description": "Compare the shared sprite scene on Canvas and GPU, and inspect experimental mesh bodies.",
+      "url": "renderer-lab.html",
+      "mode": "source"
+    },
+    {
       "id": "car-projection",
       "name": "Car projection lab",
       "description": "Orbit a car built from sprite artwork and fitted 3D surfaces. Compare the source view and approved collision box.",
@@ -26779,5 +26786,5 @@
       }
     }
   ],
-  "inputDigest": "93df545fa935319d685b76e3c6088ee4f4cd3fc4467f9ccacb8d54457bcb33f0"
+  "inputDigest": "197792d8aa228efeec4fedef41ebf817936e4283a26147d269f96ea8eaed9260"
 }

@@ -6,6 +6,7 @@ import type { InteriorLayer } from "../interiors/LayeredInteriorMap.js";
 import { Camera } from "./Camera.js";
 import { type CanvasTerrainSource, drawSceneEntry2D } from "./Canvas2DRenderer.js";
 import { drawLayeredInteriorMap } from "./CanvasInteriorMap.js";
+import type { RasterSurface } from "./RasterSurface.js";
 
 /** One backend's bounded room cache. Ordering is supplied by presentation data. */
 export class CanvasInteriorResources {
@@ -60,7 +61,7 @@ export class CanvasInteriorResources {
   }
 
   draw(
-    ctx: CanvasRenderingContext2D,
+    ctx: RasterSurface,
     draws: readonly InteriorDraw[],
     sheets: Map<string, Spritesheet>,
     terrain?: CanvasTerrainSource,

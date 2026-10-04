@@ -67,6 +67,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [040 GPU compatibility baseline](040-gpu-compatibility-baseline.md) | Shared projection and reference validation |
 
+| [041 GPU sprite backend](041-gpu-sprite-backend.md) | Active shared drawing and optional GPU host |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

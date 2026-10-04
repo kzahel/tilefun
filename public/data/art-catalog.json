@@ -23511,7 +23511,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CanvasRenderBackend.ts:154"
+          "source": "src/rendering/RasterRenderBackend.ts:155"
         },
         {
           "system": "Editor",

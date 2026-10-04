@@ -2,6 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Camera } from "./Camera.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
+import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
@@ -16,7 +17,7 @@ export interface CanvasTerrainSource {
  * Two passes: shadow pre-pass, then main draw pass.
  */
 export function drawScene2D(
-  ctx: CanvasRenderingContext2D,
+  ctx: RasterSurface,
   camera: Camera,
   items: readonly SceneItem[],
   sheets: Map<string, Spritesheet>,
@@ -37,7 +38,7 @@ export function drawScene2D(
 
 /** Native Canvas references and production consume the same semantic pass. */
 export function drawScenePass2D(
-  ctx: CanvasRenderingContext2D,
+  ctx: RasterSurface,
   camera: Camera,
   pass: Extract<RenderPass, { kind: "scene" }>,
   sheets: Map<string, Spritesheet>,
@@ -72,7 +73,7 @@ export function drawScenePass2D(
 
 /** Draw one explicitly ordered body or shadow. No scene ordering policy here. */
 export function drawSceneEntry2D(
-  ctx: CanvasRenderingContext2D,
+  ctx: RasterSurface,
   camera: Camera,
   item: SceneItem,
   sheets: Map<string, Spritesheet>,
@@ -106,7 +107,7 @@ export function drawSceneEntry2D(
 
 /** Draw a single entity shadow ellipse. */
 function drawOneShadow(
-  ctx: CanvasRenderingContext2D,
+  ctx: RasterSurface,
   camera: Camera,
   item: SpriteItem,
   pixelExactShadows: boolean,
@@ -116,8 +117,11 @@ function drawOneShadow(
   const terrainOffset = item.shadowTerrainZ * camera.scale;
   const feetScreen = camera.worldToScreen(item.wx, item.shadowFeetWy);
   if (pixelExactShadows) {
-    drawPixelShadow(
-      ctx,
+    (
+      ctx.pixelShadow ??
+      ((...args: [number, number, number, number]) =>
+        drawPixelShadow(ctx as CanvasRenderingContext2D, ...args))
+    )(
       Math.floor(feetScreen.sx),
       Math.floor(feetScreen.sy - terrainOffset),
       shadowW / 2,
@@ -177,7 +181,7 @@ function drawPixelShadow(
 }
 
 function drawSprite(
-  ctx: CanvasRenderingContext2D,
+  ctx: RasterSurface,
   camera: Camera,
   item: SpriteItem,
   sheets: Map<string, Spritesheet>,
@@ -235,7 +239,7 @@ function drawSprite(
 }
 
 function drawElevation(
-  ctx: CanvasRenderingContext2D,
+  ctx: RasterSurface,
   camera: Camera,
   item: ElevationItem,
   image: CanvasImageSource,
@@ -285,23 +289,29 @@ function drawElevation(
   }
 }
 
-function drawGrass(
-  ctx: CanvasRenderingContext2D,
-  camera: Camera,
-  item: GrassItem,
-  sheet: Spritesheet,
-): void {
+function drawGrass(ctx: RasterSurface, camera: Camera, item: GrassItem, sheet: Spritesheet): void {
   const screen = camera.worldToScreen(item.wx, item.wy);
   const scale = camera.scale;
   const ay = GRASS_ANCHOR_Y[item.variant] ?? 7;
   ctx.save();
   ctx.translate(screen.sx, screen.sy);
   ctx.rotate(item.angle);
-  sheet.drawTile(ctx, item.variant, 0, -GRASS_ANCHOR_X * scale, -ay * scale, scale);
+  const region = sheet.getRegion(item.variant, 0);
+  ctx.drawImage(
+    sheet.image,
+    region.x,
+    region.y,
+    region.width,
+    region.height,
+    -GRASS_ANCHOR_X * scale,
+    -ay * scale,
+    region.width * scale,
+    region.height * scale,
+  );
   ctx.restore();
 }
 
-function drawParticle(ctx: CanvasRenderingContext2D, camera: Camera, item: ParticleItem): void {
+function drawParticle(ctx: RasterSurface, camera: Camera, item: ParticleItem): void {
   const screen = camera.worldToScreen(item.wx, item.wy);
   const r = item.size * camera.scale;
   ctx.globalAlpha = item.alpha;

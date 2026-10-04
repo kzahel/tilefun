@@ -24,6 +24,7 @@ import type { Camera } from "./Camera.js";
 import { allocateTerrainResourceId, CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
+import { touchRaster } from "./RasterSurface.js";
 import type { ElevationItem } from "./SceneItem.js";
 import type {
   TerrainPresentation,
@@ -472,6 +473,7 @@ export class TileRenderer implements TerrainPresentation {
       usedRows++;
     }
 
+    if (usedRows) touchRaster(state.canvas);
     if (state.nextRowOrderIdx >= state.rowOrder.length) {
       this.resources.publish(chunk, cx, cy, state.canvas);
       this.deleteCacheBuildState(key);

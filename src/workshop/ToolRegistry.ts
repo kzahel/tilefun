@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "renderer-lab",
+    name: "Renderer comparison",
+    description:
+      "Compare the shared sprite scene on Canvas and GPU, and inspect experimental mesh bodies.",
+    url: "renderer-lab.html",
+    mode: "source",
+  },
+  {
     id: "car-projection",
     name: "Car projection lab",
     description:

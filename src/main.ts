@@ -193,6 +193,10 @@ function createConnectionOverlay(onCancel: () => void) {
 }
 
 async function start() {
+  const renderHostFactory =
+    new URLSearchParams(location.search).get("renderer") === "gpu"
+      ? (await import("./rendering/GpuRenderHost.js")).createGpuRenderHost
+      : undefined;
   await import.meta.hot?.data.localShutdown;
   // Resolve player profile first
   const profileStore = new PlayerProfileStore();
@@ -265,6 +269,7 @@ async function start() {
 
     console.log("[tilefun] Connected to P2P host");
     client = new GameClient(canvas, peerTransport, null, {
+      ...(renderHostFactory ? { renderHostFactory } : {}),
       mode: "serialized",
       profile,
       profileStore,
@@ -284,6 +289,7 @@ async function start() {
     const { GameServer } = await import("./server/GameServer.js");
     server = new GameServer(peerHost.serverSide, browserServerDependencies());
     client = new GameClient(canvas, peerHost.clientSide, null, {
+      ...(renderHostFactory ? { renderHostFactory } : {}),
       mode: "serialized",
       profile,
       profileStore,
@@ -319,6 +325,7 @@ async function start() {
       await rtcTransport.ready();
       console.log("[tilefun] Connected to server (WebRTC datachannel)");
       client = new GameClient(canvas, rtcTransport, null, {
+        ...(renderHostFactory ? { renderHostFactory } : {}),
         mode: "serialized",
         profile,
         profileStore,
@@ -336,6 +343,7 @@ async function start() {
       await wsTransport.ready();
       console.log("[tilefun] Connected to server");
       client = new GameClient(canvas, wsTransport, null, {
+        ...(renderHostFactory ? { renderHostFactory } : {}),
         mode: "serialized",
         profile,
         profileStore,
@@ -357,6 +365,7 @@ async function start() {
     await transport.ready();
     transport.connect({ profileId: profile.id, displayName: profile.name });
     client = new GameClient(canvas, transport, null, {
+      ...(renderHostFactory ? { renderHostFactory } : {}),
       mode: "serialized",
       profile,
       profileStore,
