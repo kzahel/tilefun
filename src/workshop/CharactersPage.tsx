@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { required } from "../art/ArtCatalog.js";
 import { latestArtNotes } from "../art/ArtNotes.js";
+import { TileVariants } from "../assets/TileVariants.js";
 import {
   CHARACTER_FIELDS,
   CHARACTERS,
@@ -10,11 +11,12 @@ import {
   type CharacterSettings,
   parseCharacterSettings,
 } from "../characters/CharacterCatalog.js";
-import { CharacterTestScene } from "../characters/CharacterTestScene.js";
+import { PIXEL_SCALE } from "../config/constants.js";
 import { characterRecipe } from "../scenarios/CharacterRecipe.js";
-import { ScenarioClient } from "../scenarios/ScenarioClient.js";
+import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { ErrorMessage } from "./App.js";
 import { buildCharacterCandidate } from "./CharacterCandidates.js";
+import { characterGrid, characterOverlay } from "./CharacterPresentation.js";
 import { useArtNotes } from "./OutdoorQueries.js";
 import { candidateSummary } from "./WorkshopProjection.js";
 import { useManifest } from "./WorkshopQueries.js";
@@ -172,40 +174,21 @@ function CharacterInspector({
   const [overlays, setOverlays] = useState(true),
     [zoom, setZoom] = useState(2),
     [cycle, setCycle] = useState(false);
-  const canvas = useRef<HTMLCanvasElement>(null),
-    scene = useRef<CharacterTestScene | null>(null);
+  const canvas = useRef<HTMLCanvasElement>(null);
+  const [verified, setVerified] = useState<Awaited<
+    ReturnType<typeof buildCharacterCandidate>
+  > | null>(null);
   const keys = useRef(new Set<string>()),
     pointers = useRef(new Map<number, string>());
   const latest = useRef({ settings, overlays, zoom, cycle });
   latest.current = { settings, overlays, zoom, cycle };
-  const simulation = useRef<ScenarioClient | null>(null);
+  const presentation = useRef<ScenarioPresentationHost | null>(null);
   const note = drafts[`note:${key}`] ?? "";
   useEffect(() => {
     useWorkspace.getState().setDraft(key, JSON.stringify(settings));
   }, [key, settings]);
   useEffect(() => {
-    scene.current?.update(settings);
-    if (scene.current) {
-      simulation.current?.dispose();
-      const next = new ScenarioClient(characterRecipe(def, settings));
-      simulation.current = next;
-      void next.ready.catch((e) => {
-        if (simulation.current === next) setError(String(e));
-      });
-    }
-    setMessage("");
-  }, [settings, def]);
-  useEffect(() => {
-    let active = true,
-      frame = 0;
-    const release = () => {
-      keys.current.clear();
-      pointers.current.clear();
-    };
-    const up = (e: KeyboardEvent) => keys.current.delete(e.key.toLowerCase());
-    window.addEventListener("keyup", up);
-    window.addEventListener("blur", release);
-    document.addEventListener("visibilitychange", release);
+    let active = true;
     void (async () => {
       const response = await fetch("/tilefun/data/art-catalog.json");
       if (!response.ok) throw new Error("Character art catalog unavailable");
@@ -215,79 +198,108 @@ function CharacterInspector({
         throw new Error(
           "Character preview does not match its registered review. Reload the page; if this persists, report a rendering mismatch.",
         );
-      if (!active || !canvas.current) return;
-      scene.current = new CharacterTestScene(
-        def,
-        latest.current.settings,
-        built.image,
-        built.player,
-      );
-      const session = new ScenarioClient(characterRecipe(def, latest.current.settings));
-      simulation.current = session;
-      await session.ready;
-      if (!active) {
-        session.dispose();
-        return;
-      }
-      setReady(true);
-      let last = performance.now(),
-        elapsed = 0,
-        accumulator = 0;
-      const tick = (now: number) => {
-        if (!active || !canvas.current || !scene.current) return;
-        const dt = Math.min(0.1, (now - last) / 1000);
-        last = now;
-        accumulator += dt;
-        elapsed += dt;
-        const held = new Set([...keys.current, ...pointers.current.values()]);
-        const dx =
-          Number(held.has("arrowright") || held.has("d")) -
-          Number(held.has("arrowleft") || held.has("a"));
-        const dy =
-          Number(held.has("arrowdown") || held.has("s")) -
-          Number(held.has("arrowup") || held.has("w"));
-        while (accumulator >= 1 / 60) {
-          simulation.current?.step(
-            {
-              dx: latest.current.cycle ? 0 : dx,
-              dy: latest.current.cycle ? 0 : dy,
-              jump: held.has(" "),
-              sprinting: false,
-            },
-            1 / 60,
-          );
-          const actor = simulation.current?.predictor.player;
-          if (actor) {
-            Object.assign(scene.current.actor, structuredClone(actor));
-            if (actor.jumpVZ === undefined) delete scene.current.actor.jumpVZ;
-          }
-          accumulator -= 1 / 60;
-        }
-        if (latest.current.cycle) {
-          const sprite = required(scene.current.actor.sprite);
-          sprite.frameRow = sprite.direction = Math.floor(elapsed / 2) % 4;
-          sprite.frameCol = Math.floor(elapsed * latest.current.settings.fps) % def.frameCount;
-          sprite.moving = true;
-        }
-        scene.current.draw(canvas.current, latest.current.overlays, latest.current.zoom);
-        frame = requestAnimationFrame(tick);
-      };
-      frame = requestAnimationFrame(tick);
+      if (active) setVerified(built);
     })().catch((e) => {
       if (active) setError(String(e));
     });
     return () => {
       active = false;
-      cancelAnimationFrame(frame);
-      simulation.current?.dispose();
-      simulation.current = null;
-      scene.current = null;
+    };
+  }, [def, candidate.fingerprint]);
+  useEffect(() => {
+    const c = canvas.current;
+    if (!verified || !c) return;
+    let active = true;
+    setReady(false);
+    setError("");
+    setMessage("");
+    c.dataset.ready = "false";
+    const release = () => {
+      keys.current.clear();
+      pointers.current.clear();
+    };
+    release();
+    const up = (e: KeyboardEvent) => keys.current.delete(e.key.toLowerCase());
+    window.addEventListener("keyup", up);
+    window.addEventListener("blur", release);
+    document.addEventListener("visibilitychange", release);
+    const reportError = (e: unknown) => {
+      if (active) {
+        c.dataset.ready = "false";
+        setReady(false);
+        setError(String(e));
+      }
+    };
+    const host = new ScenarioPresentationHost(c, characterRecipe(def, settings), {
+      width: 288 * latest.current.zoom,
+      height: 192 * latest.current.zoom,
+      fixedCamera: { wx: 0, wy: -12 },
+      terrain: false,
+      background: "#d4dfcc",
+      pixelExactShadows: true,
+      loadAssets: async () => ({
+        // Each host owns its map, while verified HTML images/fixture canvases are borrowed.
+        sheets: new Map(verified.sheets),
+        blendSheets: [],
+        variants: new TileVariants(required(verified.sheets.get("player"))),
+      }),
+      poseCycle: () =>
+        latest.current.cycle ? { fps: settings.fps, frameCount: def.frameCount } : undefined,
+      settings: () => ({
+        paused: false,
+        zoom: latest.current.zoom / PIXEL_SCALE,
+        terrainPacing: "throughput",
+      }),
+      input: () => {
+        const held = new Set([...keys.current, ...pointers.current.values()]);
+        return {
+          dx:
+            Number(held.has("arrowright") || held.has("d")) -
+            Number(held.has("arrowleft") || held.has("a")),
+          dy:
+            Number(held.has("arrowdown") || held.has("s")) -
+            Number(held.has("arrowup") || held.has("w")),
+          jump: held.has(" "),
+          sprinting: false,
+        };
+      },
+      underlay: characterGrid,
+      overlay: (frame, h) => characterOverlay(frame, h, settings, latest.current.overlays),
+      onFrame: (h) => {
+        const actor = h.presentedPlayer;
+        const sprite = required(actor.sprite);
+        c.dataset.x = String(actor.position.wx);
+        c.dataset.y = String(actor.position.wy);
+        c.dataset.z = String(actor.wz ?? 0);
+        c.dataset.direction = String(sprite.direction);
+        c.dataset.frame = String(sprite.frameCol);
+        c.dataset.moving = String(sprite.moving);
+        c.dataset.mode = latest.current.cycle ? "poses" : "movement";
+        c.dataset.cameraX = String(h.camera.x);
+        c.dataset.cameraY = String(h.camera.y);
+        if (c.dataset.ready !== "true") {
+          c.dataset.ready = "true";
+          setReady(true);
+        }
+      },
+      onError: reportError,
+    });
+    presentation.current = host;
+    void host.ready.catch(reportError);
+    return () => {
+      active = false;
+      c.dataset.ready = "false";
+      host.dispose();
+      presentation.current = null;
       release();
       window.removeEventListener("keyup", up);
       window.removeEventListener("blur", release);
       document.removeEventListener("visibilitychange", release);
     };
-  }, [def, candidate.fingerprint]);
+  }, [def, settings, verified]);
+  useEffect(() => {
+    presentation.current?.resize(288 * zoom, 192 * zoom);
+  }, [zoom]);
   function save(verdict: CharacterEvent["verdict"]) {
     try {
       if (!ready || !current || paused) throw new Error("This candidate is not ready for review.");
@@ -382,7 +394,7 @@ function CharacterInspector({
               onClick={() => {
                 keys.current.clear();
                 pointers.current.clear();
-                void simulation.current
+                void presentation.current
                   ?.command({ kind: "teleport", position: { wx: 0, wy: 8 } })
                   .catch((e) => setError(String(e)));
               }}
@@ -400,8 +412,17 @@ function CharacterInspector({
               Geometry overlays
             </label>
             <label>
-              <input type="checkbox" checked={cycle} onChange={(e) => setCycle(e.target.checked)} />{" "}
-              Cycle poses in place
+              <input
+                type="checkbox"
+                checked={cycle}
+                onChange={(e) => {
+                  // Leaving inspection never resumes a stale gameplay press.
+                  keys.current.clear();
+                  pointers.current.clear();
+                  setCycle(e.target.checked);
+                }}
+              />{" "}
+              Cycle poses in place (pauses movement)
             </label>
             <label>
               Zoom

@@ -2,8 +2,8 @@
 
 Topic: embedded-engine-labs
 Status: shared scenario simulation and embedded outdoor presentation host delivered;
-Traffic and Outdoor Geometry use shared engine interpolation, asset setup and render
-lifecycle; Traffic also uses the shared terrain policy.
+Traffic, Outdoor Geometry, World Geometry and Character lab share engine
+interpolation, asset setup and render lifecycle.
 Other interactive lab presentation adapters remain to migrate.
 Updated: 2026-10-04.
 
@@ -56,8 +56,8 @@ binary replicas and `PlayerPredictor`. This is a temporary engine host, with
 explicit step scheduling, rather than the game's complete `LocalServerRuntime`
 and `GameClient` composition. The simulation migration is delivered.
 
-`ScenarioPresentationHost` owns Traffic and Outdoor Geometry's client/Worker,
-production `GameLoop`, render host, asset lifetime, camera and frame storage. The React page supplies
+`ScenarioPresentationHost` owns the migrated labs' client/Worker, production
+`GameLoop`, render host, asset lifetime, camera and frame storage. The React page supplies
 controls, input, viewport/settings and diagnostic UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
 records this extraction and its validation. Shared owners are:
 
@@ -93,6 +93,17 @@ fixture selection and DOM input remain lab responsibilities. Closing the geometr
 panel stops the clock and disposes its Worker and GPU sibling canvas. See
 [Tactical 050](../tactical/050-outdoor-geometry-presentation.md) for validation.
 
+Character lab now uses the same host with fixed framing, verified source/fixture
+assets, semantic grid/geometry overlays and live viewport resize. Settings rebuild
+only that temporary scenario; zoom leaves the Worker alive. Pose cycling explicitly
+pauses simulation and supplies a display-only sprite copy to the ordinary scene
+collector. It never overwrites replicated/predicted animation state. The production
+clock drives both movement and inspection, and hidden views accrue no time debt.
+`CharacterTestScene` remains the immutable reference renderer used by candidate
+verification; it is no longer the interactive scene. The candidate fingerprint
+formula, reference pixels and approved gameplay bank are unchanged. See
+[Tactical 054](../tactical/054-character-presentation-host.md).
+
 This host currently presents outdoor scenarios. It does not replace the full
 GameClient's menus, audio, particles, indoor scenes or world/profile persistence.
 The bounded scenario scheduling/transport remains distinct from LocalServerRuntime.
@@ -106,7 +117,6 @@ full 3D debug-renderer/stacked-actor parity.
 
 | Remaining consumer | Current boundary / next work |
 | --- | --- |
-| `CharactersPage` | Shared scenario authority; local clock and native CharacterTestScene presentation/cycle inspector. Preserve source-hashed approval references when separating interactive presentation. |
 | `interiors/playtest/main.ts` | Shared scenario authority; furniture-specific layout and native room presentation. Needs an indoor host adapter and review-contract validation. |
 | Static diagrams, source experiments and frozen approval renders | Intentional diagnostic/reference adapters; no claim of full gameplay parity. |
 
@@ -137,7 +147,6 @@ the scenario tests under `src/scenarios/`, and the shared renderer boundary and
 terrain preparation tests. Prefer behavioral/cache counters over brittle FPS
 thresholds in regression tests, with separate browser timing evidence.
 
-Next: migrate the interactive character lab clock/presentation into the shared
-host, preserving the independent source-hashed approval renderer; then address
-the indoor playtest adapter. This topic owns the continuing constraint and
-outstanding gaps; tacticals own bounded migration evidence.
+Next: extract a shared indoor presentation adapter for the furniture playtest,
+while preserving its exact approval renderer and room-specific controls. This topic
+owns the continuing constraint and outstanding gaps; tacticals own bounded migration evidence.

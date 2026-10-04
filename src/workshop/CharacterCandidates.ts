@@ -66,7 +66,8 @@ export async function buildCharacterCandidate(def: CharacterDefinition, catalog:
     sourceFingerprint: sheet.fingerprint,
     characterId: def.id,
   };
-  return { candidate, image, player };
+  // The interactive host borrows verified source/fixture imagery, not this reference renderer.
+  return { candidate, image, player, sheets: scene.sheets };
 }
 export async function buildCharacterCandidates(catalog: ArtCatalog) {
   const results: WorkshopCandidate[] = [];

@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameAssets } from "../assets/GameAssets.js";
+import { createPlayer } from "../entities/Player.js";
 import type { RenderPass } from "../rendering/RenderFrame.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
@@ -154,4 +155,66 @@ it("keeps diagnostic framing through ticks/commands and submits overlays around 
   expect([host.camera.x, host.camera.y]).toEqual([0, -32]);
   host.dispose();
   expect(mocks.close).toHaveBeenCalledWith(assets);
+});
+
+it("cycles a presentation-only pose while authority is paused, then restores the replica pose", async () => {
+  let cycle = true;
+  mocks.factory.mockReturnValue({
+    setAssets: mocks.setAssets,
+    resize: mocks.resize,
+    dispose: mocks.dispose,
+    beginFrame: vi.fn(),
+    renderer: { assets: new Map(), submit: vi.fn() },
+  });
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, {
+    ...options,
+    terrain: false,
+    fixedCamera: { wx: 0, wy: -12 },
+    poseCycle: () => (cycle ? { fps: 4, frameCount: 4 } : undefined),
+  });
+  const player = createPlayer(0, 8);
+  const original = structuredClone(player);
+  Object.assign(host.session.view, { playerEntity: player, entities: [player] });
+  await host.ready;
+  const start = performance.now();
+  for (let i = 1; i <= 30; i++) {
+    vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + i * 100);
+  }
+  expect(mocks.step).not.toHaveBeenCalled();
+  expect(host.presentedPlayer.sprite).toMatchObject({ direction: 1, frameRow: 1, moving: true });
+  expect(host.presentedPlayer).not.toBe(player);
+  expect(player).toEqual(original);
+  expect(mocks.collect).toHaveBeenLastCalledWith(
+    [host.presentedPlayer],
+    [],
+    undefined,
+    host.camera,
+    expect.anything(),
+    1,
+    expect.anything(),
+    [],
+    false,
+    undefined,
+    undefined,
+    expect.anything(),
+  );
+  cycle = false;
+  vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + 3100);
+  expect(mocks.step).toHaveBeenCalled();
+  expect(host.presentedPlayer).toBe(player);
+  expect(player.sprite).toEqual(original.sprite);
+  host.dispose();
+});
+
+it("resizes before readiness and during use without replacing the Worker", async () => {
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, options);
+  host.resize(288, 192);
+  await host.ready;
+  expect(mocks.resize).toHaveBeenLastCalledWith(288, 192);
+  host.resize(1152, 768);
+  expect(mocks.resize).toHaveBeenLastCalledWith(1152, 768);
+  expect([host.camera.viewportWidth, host.camera.viewportHeight]).toEqual([1152, 768]);
+  expect(mocks.terminate).not.toHaveBeenCalled();
+  expect(mocks.factory).toHaveBeenCalledTimes(1);
+  host.dispose();
 });

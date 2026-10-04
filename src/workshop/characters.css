@@ -18,6 +18,7 @@
   min-width: 0;
 }
 .character-scroll {
+  position: relative;
   max-width: 100%;
   overflow: auto;
   border: 1px solid var(--line, #ccc);

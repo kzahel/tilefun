@@ -90,6 +90,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | [052 Overview draw and upload profile](052-overview-draw-and-upload-profile.md) | Complete: GPU dimension cache, 18 measured cases; extra Pixel repeat/long run blocked by cooldown |
 
+| [054 Character presentation host](054-character-presentation-host.md) | Shared interactive character host; immutable approval renderer preserved; [embedded labs](../topics/embedded-engine-labs.md) |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

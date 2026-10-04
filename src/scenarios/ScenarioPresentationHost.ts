@@ -1,6 +1,7 @@
 import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
+import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
 import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
@@ -35,6 +36,9 @@ export interface ScenarioPresentationOptions {
   /** Diagnostic fixtures can replace terrain/grass with a grid. */
   terrain?: boolean;
   pixelExactShadows?: boolean;
+  background?: string;
+  /** Four-direction sprite inspection: pauses authority and overrides only the displayed pose. */
+  poseCycle?(): { fps: number; frameCount: number } | undefined;
   surfaceVisibility?(): SurfaceVisibility;
   /** Borrowed frame/camera, consumed synchronously through either renderer backend. */
   underlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
@@ -65,6 +69,8 @@ export class ScenarioPresentationHost {
   private renderX = 0;
   private renderY = 0;
   private steps = 0;
+  private poseSeconds = 0;
+  private displayedPlayer: Entity | undefined;
 
   constructor(
     canvas: HTMLCanvasElement,
@@ -101,7 +107,7 @@ export class ScenarioPresentationHost {
     this.host = factory(canvas);
     // Includes blend sheets, roads and tile variants, exactly as in GameClient.
     this.host.setAssets(assets, graph);
-    this.host.resize(this.options.width, this.options.height);
+    this.host.resize(this.camera.viewportWidth, this.camera.viewportHeight);
     this.snapCamera();
     this.visibilityChanged();
   }
@@ -112,7 +118,12 @@ export class ScenarioPresentationHost {
   };
 
   private get paused() {
-    return this.options.settings().paused || document.hidden || this.controls > 0;
+    return (
+      this.options.settings().paused ||
+      !!this.options.poseCycle?.() ||
+      document.hidden ||
+      this.controls > 0
+    );
   }
 
   private snapCamera() {
@@ -123,7 +134,9 @@ export class ScenarioPresentationHost {
   }
 
   private update(dt: number) {
-    if (this.disposed || this.paused) return;
+    if (this.disposed || document.hidden) return;
+    this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
+    if (this.paused) return;
     try {
       this.camera.zoom = this.options.settings().zoom;
       this.camera.savePrev();
@@ -166,8 +179,27 @@ export class ScenarioPresentationHost {
         this.options.cameraOffsetY,
       );
     try {
+      const player = view.playerEntity;
+      const cycle = this.options.poseCycle?.();
+      const row = Math.floor(this.poseSeconds / 2) % 4;
+      this.displayedPlayer =
+        cycle && player.sprite
+          ? {
+              ...player,
+              sprite: {
+                ...player.sprite,
+                direction: row,
+                frameRow: row,
+                frameCol: Math.floor(this.poseSeconds * cycle.fps) % cycle.frameCount,
+                moving: true,
+              },
+            }
+          : player;
+      const entities = cycle
+        ? view.entities.map((entity) => (entity.id === player.id ? this.presentedPlayer : entity))
+        : view.entities;
       this.host.beginFrame();
-      renderer.submit(this.camera, { kind: "clear", color: "#cbd5c3" });
+      renderer.submit(this.camera, { kind: "clear", color: this.options.background ?? "#cbd5c3" });
       const range = this.camera.getVisibleChunkRange();
       if (this.options.terrain !== false)
         presentTerrain(
@@ -190,7 +222,7 @@ export class ScenarioPresentationHost {
         ),
       );
       const items = collectScene(
-        view.entities,
+        entities,
         view.props,
         view.world,
         this.camera,
@@ -231,6 +263,18 @@ export class ScenarioPresentationHost {
       this.overlays.release();
       this.camera.restoreActual();
     }
+  }
+
+  /** Resize presentation without restarting the Worker or changing its world. */
+  resize(width: number, height: number) {
+    if (this.disposed) return;
+    this.camera.setViewport(width, height);
+    this.host?.resize(width, height);
+  }
+
+  /** Borrowed current display pose; diagnostic cycling never writes into prediction/replication. */
+  get presentedPlayer(): Entity {
+    return this.displayedPlayer ?? this.session.view.playerEntity;
   }
 
   /** The same sub-tick fraction used by the scene collector this frame. */
@@ -282,6 +326,7 @@ export class ScenarioPresentationHost {
     this.host?.dispose();
     this.host = undefined;
     this.frame.clear();
+    this.displayedPlayer = undefined;
     this.overlays.clear();
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;

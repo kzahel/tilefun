@@ -2,7 +2,7 @@
 
 Topic: characters
 Status: six approved characters promoted to Entities; per-profile player model selection implemented.
-Updated: 2026-10-03.
+Updated: 2026-10-04.
 
 ## Current slice
 
@@ -33,8 +33,16 @@ Live settings adjust vertical sprite offset, depth sorting offset, collider
 X/Y offsets, ground width/depth, physical height, walk speed and animation FPS.
 The test scene now runs a memory-backed Realm in a Worker with the gameplay
 player controller, binary replication and client prediction. Candidate geometry,
-walk speed and animation FPS are scoped to that session. Drawing still uses
-`collectScene`/`drawScene2D`; the static pose fixture has no simulation loop.
+walk speed and animation FPS are scoped to that session. Interactive presentation
+uses `ScenarioPresentationHost`: production fixed clock, interpolation, scene
+collection/ordering, selectable Canvas/GPU renderer and owned lifecycle. Fixed
+framing and geometry overlays are explicit diagnostics. Zoom resizes the host
+without restarting authority; settings changes rebuild the temporary recipe.
+Pose cycling pauses simulation and overrides only a displayed sprite copy; leaving
+inspection restores the replica's normal pose and clears held input. Hidden views
+stop the clock. `CharacterTestScene` remains a separate static reference renderer
+for source-hashed candidate verification, with no simulation loop.
+[Tactical 054](../tactical/054-character-presentation-host.md) records the migration.
 See [Gameplay scenarios](gameplay-scenarios.md).
 
 The fixture has a wall, 16px passage, 4/8/12px passable steps (the existing
@@ -49,7 +57,7 @@ Six zero-event candidates are registered in the global inbox. Candidate identity
 pins source PNG bytes, default settings, sixteen rendered pose/fixture snapshots
 (without platform-dependent text labels)
 and the recipe, Realm host, collision, surface, gravity and animation source.
-The runtime migration changes these behavior identities and reopens review;
+The earlier simulation migration changed these behavior identities and reopened review;
 the immutable approved-v1 gameplay bank and saved human decisions remain intact.
 Images are verified before display; stale inventories disable saves.
 
