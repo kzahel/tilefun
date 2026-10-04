@@ -228,6 +228,15 @@ an occluding surface, remain deferred (2026-10-04). The current whole-patch reve
 is sufficient for this proof; choosing when a local hole is appropriate needs a
 separate design pass.
 
+Following crossing feedback, automatic reveal requires the observer's head to be
+below the local surface top (with the existing 1px presentation tolerance), as
+well as projected sprite occlusion. Feet being slightly below a neighboring deck
+while climbing its ramp no longer hide that deck. Head height uses the physical
+body height, falling back to the sprite's visual height when unspecified, and
+follows interpolated Z. Foot-based ordering/support and manual views are unchanged.
+This gate is shared by gameplay and all World geometry fixtures; an actor fully
+below a ceiling still triggers the existing projected cutaway.
+
 The intended direction includes automatic cutaways for an underground/interior
 observer and explicit level/sector visibility selection. The World geometry lab
 now demonstrates whole-patch reveal and lower/upper selection. General sector

@@ -10,7 +10,7 @@ import { projectWorld } from "./Projection.js";
 
 export type SurfaceVisibility = "auto" | "all" | "lower" | "upper";
 
-// One presentation tolerance for visibility, draw order and shadow support.
+// One presentation tolerance for height comparisons and shadow support.
 // Interpolation across a clipped ramp/deck join may put feet just below its top.
 const SUPPORT_TOLERANCE = 1;
 
@@ -74,6 +74,16 @@ export function surfacePresentationState(
   if (mode !== "auto" || !above || !observer.sprite) return { visible: true, above };
 
   const sprite = observer.sprite;
+  // Approaching a connected deck is not entering a lower space. Keep the slab
+  // while the head can peek above its local top, even if the feet are lower.
+  // Ordering still uses feet; this gate affects automatic visibility only.
+  const headZ =
+    feetZ +
+    Math.max(
+      0,
+      observer.collider?.physicalHeight ?? sprite.spriteHeight - (sprite.drawOffsetY ?? 0),
+    );
+  if (headZ >= top - SUPPORT_TOLERANCE) return { visible: true, above };
   const left = Math.max(bounds.left, position.wx - sprite.spriteWidth / 2);
   const right = Math.min(bounds.right, position.wx + sprite.spriteWidth / 2);
   if (left >= right) return { visible: true, above };

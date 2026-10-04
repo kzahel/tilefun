@@ -65,3 +65,22 @@ before a town loop or generated structure is introduced.
 - After the independent family-navigation commit landed, the combined checkout's
   typechecks, lint, regenerated inventories and build passed again; focused
   crossing/family browser checks verify their final composition.
+
+## Ramp approach cutaway follow-up
+
+The owner reported a brief automatic cutaway while approaching the top of the
+road ramp. Feet just below the neighboring bridge top were sufficient to hide
+the slab, even though the player's head was above it. Automatic reveal now also
+requires interpolated head height below the local surface top, using physical
+body height (visual sprite height as fallback) and the existing 1px tolerance.
+Projected occlusion is still required. Ordering, collision and manual views are
+unchanged; this is the shared game/lab visibility policy.
+
+Regression coverage walks both complete road approaches through the real Realm
+and checks intermediate rendered poses, plus threshold/interpolation cases at
+ground, raised and underground actor heights. All 1,503 unit tests and 332 browser
+checks passed (one intentional skip), along with typechecks, lint, refreshed
+inventories and the production build. The full run used an isolated source
+snapshot to exclude concurrent grass-rendering edits. Existing north/south
+projected occlusion and the garage passed on both Canvas and GPU. Only the three
+excluded geometry candidate identities changed; art approvals remain intact.

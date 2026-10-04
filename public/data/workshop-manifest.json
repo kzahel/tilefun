@@ -4705,7 +4705,7 @@
       "name": "Ramp, raised deck and lower passage",
       "prompt": "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
       "url": "/tilefun/workshop.html#/tool/world-geometry",
-      "fingerprint": "363a13499151c0fbe143dd0080ea9fe9e7ac0183a3331bf74ab89b628af81d10",
+      "fingerprint": "ac8c0d0a9fb42f12daca47e7fc506f58c37484455de006b79e5a8f84814bf366",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -4715,7 +4715,7 @@
       "name": "Underground garage, entrance and usable street",
       "prompt": "Walk down through an opening in terrain into a covered garage, return continuously, and compare street/garage space identity and reload.",
       "url": "/tilefun/workshop.html?geometry=garage#/tool/world-geometry",
-      "fingerprint": "b9e4d5dd178ce51e73f13cea273ad149438bb301d2f16a917b711f9bd0c2cdde",
+      "fingerprint": "a20a34df0c970129a0550f45a1a576f299db9e7f8b6763490e5ae75d8eb57dfe",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -4725,7 +4725,7 @@
       "name": "Road bridge over a moving train",
       "prompt": "Walk both road approaches while the production train service passes beneath; inspect clearance, ordering and save/reload. Schematic engine proof.",
       "url": "/tilefun/workshop.html?geometry=crossing#/tool/world-geometry",
-      "fingerprint": "4803fb6ba1fe467e4ec0ef669dbe3bbc2c390d530a073da7c5c0cac89fc80184",
+      "fingerprint": "afca0ca387f64b81304a694968d08e7ac9ec5dc806bf5e1ab806ef716e8ad05b",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -26869,5 +26869,5 @@
       }
     }
   ],
-  "inputDigest": "e9a15d220a85a11d91bcd8000395a7e0c366148d4844180baaf09d6108001c8e"
+  "inputDigest": "152bd09f8b1fce0012408de98f63dd384d63c43659ad080b9461744cf5031427"
 }

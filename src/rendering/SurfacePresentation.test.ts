@@ -2,6 +2,8 @@ import { expect, it } from "vitest";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { querySurfacePatch } from "../physics/SurfacePatch.js";
+import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
+import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import type { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
@@ -48,6 +50,72 @@ function fixture(id: string) {
   if (!prop?.collider?.surface) throw new Error(`Missing ${id}`);
   return { patch: prop.collider.surface, bounds: getEntityAABB(prop.position, prop.collider) };
 }
+
+it.each([0, 48, 64])(
+  "requires the head to be below a surface at height %s before cutting away",
+  (z) => {
+    const { patch, bounds } = fixture("deck");
+    const player = createPlayer(80, -20);
+    for (const [gap, visible] of [
+      [8, true],
+      [12, true],
+      [13, true],
+      [14, false],
+      [24, false],
+    ] as const) {
+      player.wz = z - gap;
+      expect(surfacePresentationState({ ...patch, z }, bounds, player, "auto")).toEqual({
+        visible,
+        above: true,
+      });
+      expect(surfaceVisibility({ ...patch, z }, bounds, player, "all")).toBe(true);
+      expect(surfaceVisibility({ ...patch, z }, bounds, player, "lower")).toBe(false);
+    }
+  },
+);
+
+it("uses interpolated head height and visual height when physical height is absent", () => {
+  const { patch, bounds } = fixture("deck");
+  const player = createPlayer(80, -20);
+  player.wz = 40;
+  player.prevWz = 32;
+  expect(surfaceVisibility(patch, bounds, player, "auto", 0)).toBe(false);
+  expect(surfaceVisibility(patch, bounds, player, "auto", 0.5)).toBe(true);
+  expect(surfaceVisibility(patch, bounds, player, "auto", 1)).toBe(true);
+  player.collider = null;
+  expect(surfaceVisibility(patch, bounds, player, "auto", 0)).toBe(true);
+});
+
+it("keeps the bridge visible throughout real traversal of both ramp approaches, including interpolated frames", async () => {
+  for (const direction of [-1, 1]) {
+    const recipe = railCrossingRecipe();
+    const deck = recipe.props.find((p) => p.collider?.surface?.id === "road-bridge");
+    if (!deck?.collider?.surface) throw new Error("Missing bridge");
+    const bounds = getEntityAABB(deck.position, deck.collider);
+    const session = await ScenarioSession.create(recipe);
+    try {
+      await session.command({
+        kind: "teleport",
+        ...CROSSING_STARTS[direction < 0 ? "south approach" : "north approach"],
+      });
+      for (let i = 0; i < 350; i++) {
+        const before = structuredClone(session.player.player);
+        await session.step({ dx: 0, dy: direction, jump: false, sprinting: false });
+        const player = {
+          ...session.player.player,
+          prevPosition: before.position,
+          prevWz: before.wz ?? 0,
+        };
+        for (const alpha of [0, 0.25, 0.5, 0.75, 1])
+          expect(surfaceVisibility(deck.collider.surface, bounds, player, "auto", alpha)).toBe(
+            true,
+          );
+      }
+    } finally {
+      await session.close();
+    }
+  }
+});
 
 it.each([
   [80, -80, 0, false, "north of the footprint but covered on screen"],
