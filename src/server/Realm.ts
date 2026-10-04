@@ -80,7 +80,7 @@ import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js
 import type { ClientMessage } from "../shared/protocol.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
-import { TrafficSystem } from "../traffic/TrafficSystem.js";
+import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -120,6 +120,7 @@ export interface RealmOptions {
   ambientSpawns?: boolean;
   /** Explicit route source for authored infrastructure/scenarios. */
   railways?: RailRouteSource;
+  traffic?: TrafficRouteSource;
 }
 
 export class Realm {
@@ -260,15 +261,12 @@ export class Realm {
     this.world = new World();
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
-    this.traffic =
-      this.generator?.terrain instanceof TrafficStrategy
-        ? new TrafficSystem(
-            this.world,
-            this.entityManager,
-            this.propManager,
-            this.generator.terrain,
-          )
-        : null;
+    const trafficRoutes =
+      this.options.traffic ??
+      (this.generator?.terrain instanceof TrafficStrategy ? this.generator.terrain : undefined);
+    this.traffic = trafficRoutes
+      ? new TrafficSystem(this.world, this.entityManager, this.propManager, trafficRoutes)
+      : null;
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -1363,15 +1361,12 @@ export class Realm {
     this.world = new World(this.interior ? this.generator.terrain : strategy);
     this.entityManager = new EntityManager();
     this.propManager = new PropManager();
-    this.traffic =
-      this.generator?.terrain instanceof TrafficStrategy
-        ? new TrafficSystem(
-            this.world,
-            this.entityManager,
-            this.propManager,
-            this.generator.terrain,
-          )
-        : null;
+    const trafficRoutes =
+      this.options.traffic ??
+      (this.generator?.terrain instanceof TrafficStrategy ? this.generator.terrain : undefined);
+    this.traffic = trafficRoutes
+      ? new TrafficSystem(this.world, this.entityManager, this.propManager, trafficRoutes)
+      : null;
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),

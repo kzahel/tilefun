@@ -1,7 +1,7 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: deck and garage proofs accepted; road-over-rail crossing implemented for review. Broader terrain authoring and interior integration remain open.
+Status: deck, garage and crossing proofs accepted; car bridge/garage grades implemented for review. Broader terrain authoring and interior integration remain open.
 Updated: 2026-10-04.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
@@ -179,8 +179,9 @@ The user accepted the garage on 2026-10-04 and authorized a crossing proof.
 [Tactical 058](../tactical/058-road-rail-crossing-proof.md) records the bounded scope:
 continuous north/south road approaches above the production horizontal train
 service. Clearance, two-height collision, persistence and per-actor slab ordering
-are exercised together. The train stays on level track; train grades, road vehicle
-routes and generated structures are not yet integrated. Both game and lab now
+are exercised together. The train stays on level track; train grades and generated
+structures remain deferred. The subsequent [vehicle proof](../tactical/060-vehicle-grade-proof.md)
+adds authored car routes on these road ramps. Both game and lab now
 order sprites against slabs using each actor's height, while the observer still
 controls cutaway visibility. Arbitrary intersecting surfaces remain unsupported.
 
@@ -260,9 +261,11 @@ with continuous connected spaces remains open. No realm migration is selected.
 
 ## Next step and evaluation
 
-Review the moving train beneath the road bridge, continuous road approaches,
-clearance, per-actor ordering and save/reload. The garage and deck remain regression
-fixtures. Next consider shared vehicle grade support and per-carriage rail poses. Connected indoor
+Review the [vehicle grade proof](../tactical/060-vehicle-grade-proof.md): cars cross
+the bridge and descend into the garage using production traffic, footprint support,
+body clearance and durable height restoration. The chassis remains level and
+generated traffic remains unchanged. Both directions are selectable fresh runs;
+automatic cutaway follows the player observer. Next consider per-carriage rail poses. Connected indoor
 levels still need an explicit design against existing realm boundaries before
 migrating interiors or committing a durable terrain-authoring format.
 

@@ -15,12 +15,16 @@ Shared simulation does not mean every lab runs the game's complete frame loop.
 
 `src/scenarios/ScenarioRecipe.ts` defines versioned plain data: generator identity,
 player appearance/geometry and starting pose, props, ordinary gameplay actors,
-physics overrides and named traffic fixtures. `scenarioWalls` composes normal
+physics overrides, named traffic fixtures and optional authored traffic/rail routes.
+Authored road rectangles are tile-aligned, bounded and seeded once; reload uses
+stored chunks. Vehicles may supply an initial height, restored from traffic records. `scenarioWalls` composes normal
 wall props. Recipes contain no update callbacks and need no DOM or image loading.
 
-- `TrafficRecipe`: real regional-v11 lanes, a compact car and bus, braking/roof commands.
+- `TrafficRecipe`: current regional lanes, a compact car and bus, braking/roof commands.
 - `FurnitureRecipe`: compiled furniture placements, reviewed body proposals and room edges.
 - `CharacterRecipe`: candidate settings, passage/step/clearance obstacles and scale reference.
+- `VehicleGeometryRecipe`: straight car routes over the railway bridge or into the garage,
+  with the production traffic controller and explicit opposite-direction starts.
 - `OutdoorRecipe`: the selected asset's actual prop geometry and a bounded walking area.
 
 `ScenarioSession` owns an isolated `MemoryRecordStore`/`RecordPersistenceStore`,

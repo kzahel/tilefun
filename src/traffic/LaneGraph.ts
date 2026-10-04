@@ -10,6 +10,8 @@ export interface RoadSegment {
   intercity: boolean;
 }
 export interface Lane {
+  /** Authored route follows shared terrain/slab support; ordinary generated lanes stay level. */
+  surfaceFollowing?: boolean;
   id: string;
   from: string;
   to: string;

@@ -3,6 +3,7 @@ import type { Prop } from "../entities/Prop.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { getMovementPhysicsParams, type MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import type { RailRoute } from "../railway/RailwaySystem.js";
+import type { Lane } from "../traffic/LaneGraph.js";
 
 /** Data only: the Realm owns all updates, collisions, AI and persistence. */
 export interface ScenarioRecipe {
@@ -15,7 +16,11 @@ export interface ScenarioRecipe {
   /** Authored straight tracks, served by the production RailwaySystem. */
   railways?: RailRoute[];
   physics?: Partial<MovementPhysicsParams>;
+  trafficLanes?: Lane[];
+  trafficSpeed?: number;
+  roads?: { left: number; right: number; top: number; bottom: number }[];
   traffic?: {
+    z?: number;
     model: string;
     laneId: string;
     x: number;

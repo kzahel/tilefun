@@ -184,3 +184,14 @@ subsequently found top-view appearance unacceptable despite passing coverage
 checks. [Rendering architecture](rendering-architecture.md) owns the engine boundary;
 [037](../tactical/037-car-projection-experiment.md) records initial validation and
 [038](../tactical/038-car-proxy-orthographic-checks.md) records the inspection fixes.
+
+## Authored vehicle grades
+
+[Vehicle grade proof](../tactical/060-vehicle-grade-proof.md) adds opt-in surface
+following to the production TrafficSystem. World geometry offers car bridge and
+underground garage fixtures, both directions and slope save/reload. Full collider
+footprints use shared terrain/excavation support; vertical body clearance includes
+roof passengers. Height is persisted in traffic records (older records default to
+zero). Generated traffic keeps its existing flat-road behavior. This is a level
+chassis proof on straight terminal lanes, not pitched car art or multi-level
+junction routing. Human review is pending; train grades are the next consumer.

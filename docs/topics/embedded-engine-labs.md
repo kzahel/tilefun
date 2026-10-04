@@ -174,3 +174,9 @@ Next: profile matched Traffic lab and in-game scenes on the same device/backend,
 separating simulation/transport, scene collection and GPU work. The original frame-rate
 concern needs measured evidence now that the migration list is complete. This topic
 owns the continuing architecture constraint; tacticals own bounded migration evidence.
+
+The [vehicle grade fixtures](../tactical/060-vehicle-grade-proof.md) inject authored
+traffic lanes through RealmOptions and seed bounded road areas once. Their cars
+use the same TrafficSystem, actor replication and TrafficRecords as generated
+traffic, including height and route restoration. The lab owns recipe selection
+and observer controls only; it has no car movement loop.

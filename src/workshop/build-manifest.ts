@@ -38,6 +38,8 @@ try {
     await buildWorldGeometryCandidate(),
     await buildWorldGeometryCandidate("garage"),
     await buildWorldGeometryCandidate("crossing"),
+    await buildWorldGeometryCandidate("car-bridge"),
+    await buildWorldGeometryCandidate("car-garage"),
   );
   candidates.push(...(await buildRailwayCandidates()));
   candidates.push(...(await buildFamilySheetCandidates()));

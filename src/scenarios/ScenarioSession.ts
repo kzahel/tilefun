@@ -96,6 +96,21 @@ export class ScenarioSession {
     this.realm = new Realm([baseGameMod], {
       physics: () => this.physics,
       ambientSpawns: false,
+      ...(this.recipe.trafficLanes
+        ? {
+            traffic: {
+              trafficNetwork: () => ({
+                lanes: new Map(this.recipe.trafficLanes?.map((l) => [l.id, l])),
+                outgoing: new Map(
+                  this.recipe.trafficLanes?.map((l) => [
+                    l.from,
+                    this.recipe.trafficLanes?.filter((n) => n.from === l.from) ?? [],
+                  ]),
+                ),
+              }),
+            },
+          }
+        : {}),
       ...(this.recipe.railways
         ? {
             railways: {
@@ -117,6 +132,10 @@ export class ScenarioSession {
       },
     });
     await this.realm.loadWorld(meta.id, registry, () => this.store);
+    if (this.recipe.trafficLanes && this.realm.traffic) {
+      this.realm.traffic.canSpawn = () => false;
+      this.realm.traffic.settings.speed = this.recipe.trafficSpeed ?? 36;
+    }
     this.player = new PlayerSession("scenario-player");
     this.player.editorEnabled = false;
     await this.realm.addPlayer(this.player);
@@ -156,6 +175,32 @@ export class ScenarioSession {
             this.realm.saveManager?.markChunkDirty(`${cx},${cy}`);
           }
       }
+      for (const area of this.recipe.roads ?? []) {
+        if (
+          !Object.values(area).every((v) => Number.isSafeInteger(v) && v % 16 === 0) ||
+          area.right <= area.left ||
+          area.bottom <= area.top ||
+          (area.right - area.left) * (area.bottom - area.top) > 1048576
+        )
+          throw new Error("Invalid scenario road bounds");
+        await this.ready({
+          minCx: Math.floor(area.left / 256),
+          maxCx: Math.floor((area.right - 1) / 256),
+          minCy: Math.floor(area.top / 256),
+          maxCy: Math.floor((area.bottom - 1) / 256),
+        });
+        for (let y = area.top / 16; y < area.bottom / 16; y++)
+          for (let x = area.left / 16; x < area.right / 16; x++) {
+            const cx = Math.floor(x / 16),
+              cy = Math.floor(y / 16);
+            const c = this.realm.world.getChunkIfLoaded(cx, cy);
+            if (!c) throw new Error("Scenario road is not ready");
+            const lx = ((x % 16) + 16) % 16,
+              ly = ((y % 16) + 16) % 16;
+            if (!c.getRoad(lx, ly)) c.setRoad(lx, ly, RoadType.Asphalt);
+            this.realm.saveManager?.markChunkDirty(`${cx},${cy}`);
+          }
+      }
       for (const prop of this.recipe.props) this.realm.propManager.add(structuredClone(prop));
       for (const actor of this.recipe.actors ?? [])
         this.realm.entityManager.spawn(structuredClone(actor));
@@ -165,7 +210,14 @@ export class ScenarioSession {
           .trafficNetwork(fixture.x, fixture.y)
           .lanes.get(fixture.laneId);
         if (!traffic || !lane) throw new Error(`Missing scenario lane ${fixture.laneId}`);
-        const car = traffic.add(fixture.model, lane, fixture.distance).entity;
+        const car = traffic.add(
+          fixture.model,
+          lane,
+          fixture.distance,
+          true,
+          undefined,
+          fixture.z ?? 0,
+        ).entity;
         this.handles[fixture.name] = car.id;
         if (car.proceduralId) this.identities[fixture.name] = car.proceduralId;
       }
@@ -240,7 +292,7 @@ export class ScenarioSession {
         wx: car.position.wx + (command.roof ? 0 : dx * 90),
         wy: car.position.wy + 3 + (command.roof ? 0 : dy * 90),
       };
-      z = command.roof ? (car.collider?.physicalHeight ?? 0) : 0;
+      z = (car.wz ?? 0) + (command.roof ? (car.collider?.physicalHeight ?? 0) : 0);
     } else {
       position = command.position;
       z = command.z ?? 0;

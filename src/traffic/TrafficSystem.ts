@@ -10,6 +10,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { actorScope } from "../persistence/ActorRecords.js";
+import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import {
@@ -20,7 +21,12 @@ import {
   samplePath,
   turnPath,
 } from "./LaneGraph.js";
-import type { TrafficStrategy } from "./TrafficNetwork.js";
+import { roofSupport } from "./RoofSupport.js";
+
+export interface TrafficRouteSource {
+  trafficNetwork(wx: number, wy: number): LaneGraph;
+}
+
 import {
   applyVehicleFacing,
   createVehicle,
@@ -33,6 +39,7 @@ import {
 export interface SavedTraffic {
   persistentId?: string;
   originScope?: string;
+  wz?: number;
   wx?: number;
   wy?: number;
   speed?: number;
@@ -96,7 +103,7 @@ export class TrafficSystem {
     readonly world: World,
     readonly entities: EntityManager,
     readonly props: PropManager,
-    readonly strategy: TrafficStrategy,
+    readonly strategy: TrafficRouteSource,
   ) {
     entities.removalListeners.add((entity, destroyed) => {
       const state = this.states.get(entity.id);
@@ -117,8 +124,10 @@ export class TrafficSystem {
     distance = 0,
     persist = true,
     pose = samplePath(lane.path, distance),
+    z = 0,
   ): TrafficState {
     const entity = createVehicle(model, pose.x, pose.y, pose.direction);
+    entity.wz = entity.groundZ = z;
     entity.proceduralId = this.identity(model, lane, distance);
     this.entities.spawn(entity);
     const s: TrafficState = {
@@ -177,15 +186,96 @@ export class TrafficSystem {
       bottom: pose.y + c.height / 2,
     };
   }
-  private roadClear(box: AABB) {
+  private roadClear(box: AABB, surfaceFollowing = false) {
     for (let y = Math.floor(box.top / 16); y <= Math.floor((box.bottom - 0.01) / 16); y++)
       for (let x = Math.floor(box.left / 16); x <= Math.floor((box.right - 0.01) / 16); x++) {
         const road = this.world.getRoadAt(x, y);
-        if (!road || road === 2 || road === 6 || this.world.getHeightAt(x, y) !== 0) return false;
+        if (
+          !road ||
+          road === 2 ||
+          road === 6 ||
+          (!surfaceFollowing && this.world.getHeightAt(x, y) !== 0)
+        )
+          return false;
       }
     return true;
   }
+  /** Conservative level chassis over the highest support under its full footprint.
+   * Sample grades continuously so lookahead never chooses an unrelated floor,
+   * steps up a wall, or snaps off a missing deck. Clearance uses the resulting Z.
+   */
+  private surfaceProbe(s: TrafficState, ahead: number): { z: number; reason: string } {
+    let z = s.entity.wz ?? 0;
+    const riders = this.entities.entities.filter(
+      (e) => e !== s.entity && roofSupport(e, [s.entity]),
+    );
+    const bodyHeight = s.entity.collider?.physicalHeight ?? 24;
+    const height = Math.max(
+      bodyHeight,
+      ...riders.map((e) => bodyHeight + (e.collider?.physicalHeight ?? 0)),
+    );
+    const steps = Math.max(1, Math.ceil(ahead / 2));
+    for (let i = 0; i <= steps; i++) {
+      const d = (ahead * i) / steps,
+        box = this.box(s, d),
+        pose = this.pose(s, d);
+      if (!this.roadClear(box, true)) return { z, reason: "road unavailable" };
+      const props = this.props.getPropsInChunkRange(
+        Math.floor(box.left / CHUNK_SIZE_PX),
+        Math.floor(box.top / CHUNK_SIZE_PX),
+        Math.floor(box.right / CHUNK_SIZE_PX),
+        Math.floor(box.bottom / CHUNK_SIZE_PX),
+      );
+      const nextZ = resolveGroundZForTracking(
+        {
+          id: s.entity.id,
+          position: { wx: pose.x, wy: pose.y },
+          collider: {
+            offsetX: 0,
+            offsetY: (box.bottom - box.top) / 2,
+            width: box.right - box.left,
+            height: box.bottom - box.top,
+          },
+          wz: z,
+        },
+        (x, y) => this.world.getHeightAt(x, y),
+        props,
+        [],
+      );
+      if (Math.abs(nextZ - z) > (i ? (ahead / steps) * 0.5 : 0) + 0.001)
+        return { z, reason: "unsupported grade" };
+      for (const p of props)
+        if (aabbOverlapsPropWalls(box, p.position, p, nextZ, height))
+          return { z, reason: "obstacle" };
+      for (const e of this.entities.spatialHash.queryRange(
+        Math.floor(box.left / CHUNK_SIZE_PX) - 1,
+        Math.floor(box.top / CHUNK_SIZE_PX) - 1,
+        Math.floor(box.right / CHUNK_SIZE_PX) + 1,
+        Math.floor(box.bottom / CHUNK_SIZE_PX) + 1,
+      )) {
+        if (
+          e === s.entity ||
+          !e.collider ||
+          e.collider.solid === false ||
+          e.flashHidden ||
+          riders.includes(e)
+        )
+          continue;
+        const base = e.wz ?? 0;
+        if (
+          base >= nextZ + height - 0.05 ||
+          base + (e.collider.physicalHeight ?? Infinity) <= nextZ + 0.001
+        )
+          continue;
+        if (aabbsOverlap(box, getEntityAABB(e.position, e.collider)))
+          return { z, reason: isVehicle(e) ? "traffic" : "crossing" };
+      }
+      z = nextZ;
+    }
+    return { z, reason: "" };
+  }
   private blocked(s: TrafficState, ahead: number): string {
+    if (s.lane.surfaceFollowing) return this.surfaceProbe(s, ahead).reason;
     const box = this.box(s, ahead),
       height = s.entity.collider?.physicalHeight ?? 24;
     if (!this.roadClear(box)) return "road unavailable";
@@ -284,10 +374,27 @@ export class TrafficSystem {
           ? Math.min(target, s.speed + TRAFFIC_ACCELERATION * dt)
           : Math.max(target, s.speed - TRAFFIC_BRAKE * dt);
       // Hard safety bound for sudden edits/obstacles, even inside braking distance.
-      const move = Math.min(s.speed * dt, clearance);
+      let move = Math.min(s.speed * dt, clearance);
+      const surface = s.lane.surfaceFollowing ? this.surfaceProbe(s, move) : undefined;
+      if (surface?.reason) {
+        move = 0;
+        reason = surface.reason;
+      }
       if (move < 0.001) s.speed = 0;
       const before = { ...s.entity.position };
       s.entity.prevPosition = before;
+      s.entity.prevWz = s.entity.wz ?? 0;
+      if (surface && !surface.reason) {
+        // Player movement has already applied horizontal platform carry this tick.
+        // Preserve grounded passengers when this platform changes its roof plane.
+        const dz = surface.z - (s.entity.wz ?? 0);
+        for (const rider of this.entities.entities) {
+          if (rider === s.entity || !roofSupport(rider, [s.entity])) continue;
+          rider.wz = (rider.wz ?? 0) + dz;
+          rider.groundZ = (rider.groundZ ?? rider.wz - dz) + dz;
+        }
+        s.entity.wz = s.entity.groundZ = surface.z;
+      }
       const pose = this.pose(s, move);
       s.entity.position.wx = pose.x;
       s.entity.position.wy = pose.y;
@@ -357,6 +464,7 @@ export class TrafficSystem {
       nextId: s.next?.id ?? null,
       x: s.lane.a.x,
       y: s.lane.a.y,
+      wz: s.entity.wz ?? 0,
       wx: s.entity.position.wx,
       wy: s.entity.position.wy,
       distance: s.distance,
@@ -380,6 +488,7 @@ export class TrafficSystem {
       if (
         !TRAFFIC_MODELS.includes(r.model) ||
         ![
+          r.wz ?? 0,
           r.x,
           r.y,
           r.distance,
@@ -416,7 +525,14 @@ export class TrafficSystem {
   restore(records: readonly SavedTraffic[]) {
     const prepared = this.prepareRestore(records);
     for (const { r, lane, next, activePath } of prepared) {
-      const s = this.add(r.model, lane, r.distance, false, samplePath(activePath, r.distance));
+      const s = this.add(
+        r.model,
+        lane,
+        r.distance,
+        false,
+        samplePath(activePath, r.distance),
+        r.wz ?? 0,
+      );
       s.speed = r.speed ?? 0;
       s.blockedSeconds = r.blockedSeconds ?? 0;
       s.entity.velocity = { vx: r.vx ?? 0, vy: r.vy ?? 0 };
