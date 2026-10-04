@@ -131,8 +131,11 @@ lost capture; other buttons retain normal click and keyboard activation.
   Automatic reveal compares the interpolated sprite frame with the projected
   slab silhouette, including its south face: it reveals an occluded actor north
   of the footprint and retains a slab when an actor beneath it is already visible.
-  Support uses one height tolerance for both visibility and draw order, avoiding
+  Support uses one height tolerance for visibility, draw order and shadows, avoiding
   ramp surfaces flickering in front of their rider because of subpixel differences.
+  Before the feet reach a ramp, ordering uses its nearby edge height rather than
+  its distant high end. Shadows retain support across interpolated ramp/deck joins
+  and never rise above the displayed feet.
   Hiding a slab never modifies physics. The first reveal hides a whole patch;
   overlap uses the sprite frame rather than opaque pixels. It is not a general
   portal/occlusion algorithm or a polished terrain cutout.
@@ -186,6 +189,11 @@ Resolve these questions before choosing a schema:
    alone may hide connected ramps or mishandle overlapping spaces.
 
 ## Visibility and seamless interiors
+
+Player-centered cutaway holes, possibly growing as the player moves farther into
+an occluding surface, remain deferred (2026-10-04). The current whole-patch reveal
+is sufficient for this proof; choosing when a local hole is appropriate needs a
+separate design pass.
 
 The intended direction includes automatic cutaways for an underground/interior
 observer and explicit level/sector visibility selection. The World geometry lab

@@ -21,6 +21,7 @@ it("projects shared scene shadows onto the occupied deck, but leaves lower actor
   for (const [feet, expectedShadow] of [
     [0, 0],
     [20, 0],
+    [40, 0],
     [48, 48],
     [64, 48],
   ]) {
@@ -134,4 +135,61 @@ it("uses the displayed XY and Z at every interpolation fraction without changing
     visible: false,
     above: true,
   });
+});
+
+it("keeps the low ramp entrance visible before the feet collider reaches it", () => {
+  const { patch, bounds } = fixture("ramp");
+  const player = createPlayer(-196, 8);
+  player.prevPosition = { wx: -200, wy: 8 };
+  player.prevWz = 0;
+  player.wz = 0.25;
+  for (const alpha of [0.125, 0.25, 0.5, 0.75, 0.875, 1]) {
+    expect(surfacePresentationState(patch, bounds, player, "auto", alpha)).toEqual({
+      visible: true,
+      above: false,
+    });
+  }
+});
+
+it.each([
+  [-199, 8, 0, 48, 0],
+  [7, 8, 48, -48, 0],
+  [-96, 39, 48, 0, -48],
+])("uses the nearby low edge for either slope direction: %s,%s", (x, y, z, riseX, riseY) => {
+  const { patch, bounds } = fixture("ramp");
+  const player = createPlayer(x, y);
+  player.wz = 0;
+  expect(surfacePresentationState({ ...patch, z, riseX, riseY }, bounds, player, "auto")).toEqual({
+    visible: true,
+    above: false,
+  });
+});
+
+it("retains the elevated shadow across an interpolated ramp/deck join in both directions", () => {
+  const camera = new Camera();
+  camera.setViewport(960, 640);
+  const recipe = worldGeometryRecipe();
+  for (const reverse of [false, true]) {
+    const player = createPlayer(reverse ? -5.8 : -4.6, 8);
+    player.prevPosition = { wx: reverse ? -4.6 : -5.8, wy: 8 };
+    player.prevWz = reverse ? 48 : 47.8;
+    player.wz = reverse ? 47.8 : 48;
+    for (const alpha of [0, 0.125, 0.25, 0.5, 0.75, 0.875, 1]) {
+      const items = collectScene(
+        [player],
+        recipe.props,
+        { getHeightAt: () => 0 } as unknown as World,
+        camera,
+        { minCx: -1, maxCx: 1, minCy: -1, maxCy: 1 },
+        alpha,
+        { collectElevationItems: () => [] } as unknown as TerrainPresentation,
+        [],
+        false,
+      );
+      const sprite = items.find((item) => item.kind === "sprite" && item.sheetKey === "player");
+      if (sprite?.kind !== "sprite") throw new Error("Missing rendered player");
+      expect(sprite.shadowTerrainZ).toBeGreaterThanOrEqual(47.8);
+      expect(sprite.shadowTerrainZ).toBeLessThanOrEqual(sprite.zOffset);
+    }
+  }
 });

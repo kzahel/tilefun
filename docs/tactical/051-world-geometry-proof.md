@@ -118,6 +118,25 @@ and south screenshots in Canvas and GPU. The commit's source-only snapshot also
 regenerates both inventories and builds independently of concurrent character-lab
 changes; no approved art pixels or promotions changed.
 
+## Ramp boundary follow-up (2026-10-04)
+
+Reproduced both reported one-frame artifacts in regression tests before changing
+the implementation. When the sprite overlapped the low ramp entrance but its feet
+collider did not, draw ordering incorrectly used the whole ramp's maximum height.
+It now samples the nearby edge, retaining exact local support heights when the
+feet overlap. Shadows now use the same 1px support tolerance as surface ordering
+and clamp their height to the displayed feet. This avoids dropping to ground at
+the ramp/deck join when interpolation puts feet a fraction below the physical top.
+Tests cover the entrance at multiple interpolation fractions, opposite slope
+directions, both directions across the top join, and shadows staying below the
+deck for actors in the lower passage. Player-centered/growing cutaway holes remain
+deferred as requested; collision and simulation are unchanged.
+
+Validation: typechecks, all 1,480 unit tests, lint (existing warnings), rebuilt
+catalog/manifest, production build and all 317 browser tests pass. The only
+candidate identity change is the excluded World geometry engine experiment;
+approved art and promotions are unchanged.
+
 ## Follow-on boundary
 
 Review this proof before extending it. Next decide how a passage replaces the

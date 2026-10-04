@@ -9,6 +9,10 @@ import { projectWorld } from "./Projection.js";
 
 export type SurfaceVisibility = "auto" | "all" | "lower" | "upper";
 
+// One presentation tolerance for visibility, draw order and shadow support.
+// Interpolation across a clipped ramp/deck join may put feet just below its top.
+const SUPPORT_TOLERANCE = 1;
+
 /** Project a shadow onto the highest new surface below the actor, never the ceiling. */
 export function surfaceShadowZ(
   props: readonly Prop[],
@@ -22,15 +26,28 @@ export function surfaceShadowZ(
     for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
       if (!c.surface) continue;
       const hit = querySurfacePatch(c.surface, getEntityAABB(prop.position, c), footprint);
-      if (hit && hit.topMax <= feetZ + 0.001) z = Math.max(z, hit.topMax);
+      if (hit && hit.topMax <= feetZ + SUPPORT_TOLERANCE)
+        z = Math.max(z, Math.min(hit.topMax, feetZ));
     }
   }
   return z;
 }
 
-// Use the same tolerance for visibility and draw order. Float32 replication and
-// interpolation across a clipped ramp/deck join must not put support over feet.
-const SUPPORT_TOLERANCE = 1;
+/** Maximum under the feet, or at the nearest edge before they enter the patch.
+ * A sprite can overlap the ramp before its smaller feet collider does. Comparing
+ * those feet to the distant high end would briefly misclassify the low entrance.
+ */
+function nearbySurfaceTop(patch: SurfacePatch, bounds: AABB, feet: AABB): number {
+  const x = Math.max(
+    bounds.left,
+    Math.min(bounds.right, patch.riseX >= 0 ? feet.right : feet.left),
+  );
+  const y = Math.max(
+    bounds.top,
+    Math.min(bounds.bottom, patch.riseY >= 0 ? feet.bottom : feet.top),
+  );
+  return surfaceZAt(patch, bounds, x, y);
+}
 
 /** Read-only observer policy in fixed-projection coordinates (x, y-z). Camera
  * translation and zoom cancel out. Tests use the sprite frame, not its ground
@@ -46,17 +63,10 @@ export function surfacePresentationState(
 ): { visible: boolean; above: boolean } {
   const position = interpolatePosition(observer.position, observer.prevPosition, alpha);
   const feetZ = interpolateWz(observer, alpha) ?? 0;
-  const hit = observer.collider
-    ? querySurfacePatch(patch, bounds, getEntityAABB(position, observer.collider))
-    : undefined;
-  const top =
-    hit?.topMax ??
-    Math.max(
-      patch.z,
-      patch.z + patch.riseX,
-      patch.z + patch.riseY,
-      patch.z + patch.riseX + patch.riseY,
-    );
+  const feet = observer.collider
+    ? getEntityAABB(position, observer.collider)
+    : { left: position.wx, right: position.wx, top: position.wy, bottom: position.wy };
+  const top = nearbySurfaceTop(patch, bounds, feet);
   const above = feetZ < top - SUPPORT_TOLERANCE;
   if (mode === "lower") return { visible: false, above };
   if (mode !== "auto" || !above || !observer.sprite) return { visible: true, above };
