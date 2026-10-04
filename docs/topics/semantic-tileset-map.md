@@ -90,7 +90,12 @@ scrapyard, questioned the tree-base naming/color, and proposed repeating forest
 centers. The [follow-up evidence](../tactical/053-semantic-tileset-map/notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up)
 confirms card 4 exactly matches tree 2’s base and card 5 matches tree 3’s base.
 Horizontal center repetition is visually supported; dense vertical fill requires
-a separate overlap/placement proposal. Display refinements are queued; formal
+a separate overlap/placement proposal. A subsequent owner correction exposed an
+incorrect dark background in the F05 probe; all three centers share the sampled
+base ground color `#479757`. Vertically overlapping rows need varied horizontal
+phases to avoid obvious columns. The [phase probe](../../scripts/semantic-forest-repeat-probe.mjs)
+compares aligned, alternating and varied offsets; boundary rules remain unresolved.
+Display refinements are queued; formal
 catalog status remains Proposed.
 
 Next: present the tree-base relationships and repeated forest strips, then extend V01 beyond the presentation

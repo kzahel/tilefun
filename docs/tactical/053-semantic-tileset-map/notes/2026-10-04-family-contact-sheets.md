@@ -181,3 +181,52 @@ as a separate hypothesis for visual review. This checkpoint records findings onl
 
 Feedback checkpoint validation: 1,500 unit tests, typechecks and lint passed
 (existing warnings). Only plan/topic documentation changed in this checkpoint.
+
+
+### Owner correction: F05 grass and staggered rows
+
+The owner identified the grass mismatch in the F05 128×80 full-grid probe and
+asked for horizontal phase offsets between vertically repeated rows. This
+supersedes the earlier visual assessment of the F05 ground bands: the temporary
+probe used `#37854e` (shadow green) as its background fill. F05's dominant opaque
+bottom-row ground is `#479757`, so that fill introduced an artificial seam through
+transparent pixels. Source art does not need recoloring to fix this comparison.
+
+The opaque bottom row contains `#479757` in 123/128 pixels for F02, 116/128 for F05,
+and 100/112 for F08; the remaining samples are `#37854e` shadows. Therefore the
+previous claim that these three rows necessarily need different ground fills is
+not supported. This correction also belongs in R02's proposed sheet metadata.
+Compatibility with textured or differently colored terrain remains untested.
+
+A durable source-only probe now reproduces the ground correction and compares
+five rows of each center at a 48px vertical step, drawn back to front:
+
+| Arrangement | Horizontal phase by row | Observation |
+| --- | --- | --- |
+| Aligned control | 0, 0, 0, 0, 0 | Distinctive crowns form conspicuous vertical columns |
+| Alternating halves | 0, 64, 0, 64, 0 for F02/F05; 0, 56, 0, 56, 0 for F08 | Breaks columns but creates a regular two-row zigzag; F08's 56px is off the 16px placement grid |
+| Varied phase on 16px grid | 0, 48, 16, 96, 32 | Breaks the simple column/zigzag rhythm across this five-row sample |
+
+Varied phases are the coordinator's preferred next visual proposal, not a claim
+that a five-value sequence is nonperiodic or human-approved. Each row is extended
+past the capture bounds to avoid mistaking crop edges for placement seams. These
+are interior-fill samples; shifted boundaries, matching caps, corners and clipped
+foreground trunks still need explicit handling. Preserve the source motif's
+horizontal period (128px/128px/112px). For a larger region, choose row phases
+reproducibly from a seed/global row coordinate rather than restarting the same
+short sequence per chunk. No runtime placement behavior has been added.
+
+Reproduce with `node scripts/semantic-forest-repeat-probe.mjs [output-directory]`.
+It verifies the source SHA, derives the modal opaque bottom-row color, imports the
+shared CPU review-canvas helper, and uses bundled full Playwright Chromium. The
+outputs are `phase-comparison.png`, `f05-ground-correction.png` and exact numeric
+`measurements.json` in the supplied directory (or the platform temporary directory
+under `tilefun-forest-phase`). Source sprites and review records are untouched.
+
+Metadata to carry forward: repeat direction and period, vertical step/overlap,
+row-phase policy, ground fill with sampling provenance, painter order, and boundary
+policy. A statement that an asset simply “loops” loses these required distinctions.
+
+Phase-probe checkpoint: generated both comparisons with the shared canvas helper
+and inspected them; typechecks, 1,505 unit tests and lint passed (existing warnings).
+No gameplay, Workshop UI, source assets or review-manifest inputs changed.
