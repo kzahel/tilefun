@@ -132,7 +132,31 @@
     },
     {
       "path": "docs/tactical/053-semantic-tileset-map/mapping-registry.json",
-      "sha256": "ad8607f824a2d7ac6d3b60cb1392a6613e87a8830387d61239df79988f1d196f"
+      "sha256": "875e07d1266a0fff8b4c1193a57ae16b14fdd5a39e5662d201aafdeabf014b3e"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/packets/RB01-room-builder-path-arch.json",
+      "sha256": "88f2ebcf7f7509e3da1337f9e1bd2dde087f6b342e245f478fb94ddc07b2b6c4"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/packets/RB01-room-builder-path-arch-review.md",
+      "sha256": "31461d71cb25c1fa5eb9c4287dc2df4f2ca491a6e26367a21d69153f22821601"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes.json",
+      "sha256": "4370a63a1308b9ccc844029bfe077bb304faac2e62826923c3ba5a685508143e"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes-review.md",
+      "sha256": "ab901c1a2859661332b15187060a3c38d3ad1e7d04ed69656128e83f49f8df88"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/packets/A01-animation.json",
+      "sha256": "f0e5f627c4e8fe27c5de9c83c5b2ba98d60f273fd7361be07a914563a49e9f0c"
+    },
+    {
+      "path": "docs/tactical/053-semantic-tileset-map/packets/A01-animation-review.md",
+      "sha256": "7ee15c2663c88f4e7aded23d9f8023b8fc0203264f77527617fbd265fbfe9dce"
     }
   ],
   "verification": {
@@ -1224,7 +1248,12 @@
       ],
       "expandedRecordIds": [],
       "expandedIndependentReviewEvidence": [],
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "E03-playground-tubes",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "S02-exteriors/E11",
@@ -9517,7 +9546,12 @@
       ],
       "expandedRecordIds": [],
       "expandedIndependentReviewEvidence": [],
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "A01-animation",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "S02-I11",
@@ -13217,7 +13251,12 @@
       ],
       "expandedRecordIds": [],
       "expandedIndependentReviewEvidence": [],
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "RB01-room-builder-path-arch",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "S02-R10",
@@ -13387,7 +13426,12 @@
       ],
       "expandedRecordIds": [],
       "expandedIndependentReviewEvidence": [],
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "RB01-room-builder-path-arch",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "S02-R12",
@@ -15049,6 +15093,10 @@
         {
           "packetId": "E01-outdoor-seating",
           "state": "reconciled"
+        },
+        {
+          "packetId": "E03-playground-tubes",
+          "state": "review-ready"
         }
       ]
     },
@@ -16049,6 +16097,10 @@
         {
           "packetId": "E01-outdoor-seating",
           "state": "reconciled"
+        },
+        {
+          "packetId": "E03-playground-tubes",
+          "state": "review-ready"
         }
       ]
     },
@@ -16116,7 +16168,12 @@
       "expandedReferencedPNGPaths": [],
       "expandedReferencedPNGPathCount": 0,
       "expandedSupplementalOccurrenceCount": 0,
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "A01-animation",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "interiors-home-examples",
@@ -16706,7 +16763,12 @@
       "expandedReferencedPNGPaths": [],
       "expandedReferencedPNGPathCount": 0,
       "expandedSupplementalOccurrenceCount": 0,
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "RB01-room-builder-path-arch",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "interiors-room-builder-subfiles",
@@ -16772,7 +16834,12 @@
       "expandedReferencedPNGPaths": [],
       "expandedReferencedPNGPathCount": 0,
       "expandedSupplementalOccurrenceCount": 0,
-      "packetAssignments": []
+      "packetAssignments": [
+        {
+          "packetId": "RB01-room-builder-path-arch",
+          "state": "review-ready"
+        }
+      ]
     },
     {
       "id": "interiors-singles-black-shadow",
@@ -33138,6 +33205,1021 @@
           "recordIds": []
         }
       }
+    },
+    {
+      "packetId": "RB01-room-builder-path-arch",
+      "assignmentState": "review-ready",
+      "owner": "coordinator",
+      "taskDescriptor": "25 independently reviewed crop records: 17 floor pieces and eight arch/shadow components; bounded recipes, weakened inset extensions and master/subfile shadow differences retained. Normalization and owner-facing sheet pending.",
+      "regionIds": [
+        "S02-R11",
+        "S02-R09"
+      ],
+      "sourceGroupIds": [
+        "interiors-room-builder-master",
+        "interiors-room-builder-subfiles"
+      ],
+      "proposal": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/RB01-room-builder-path-arch.json",
+        "sha256": "88f2ebcf7f7509e3da1337f9e1bd2dde087f6b342e245f478fb94ddc07b2b6c4"
+      },
+      "independentReview": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/RB01-room-builder-path-arch-review.md",
+        "sha256": "31461d71cb25c1fa5eb9c4287dc2df4f2ca491a6e26367a21d69153f22821601"
+      },
+      "memberRecords": [
+        {
+          "id": "RB01-P01",
+          "jsonPointer": "/candidates/0"
+        },
+        {
+          "id": "RB01-P02",
+          "jsonPointer": "/candidates/1"
+        },
+        {
+          "id": "RB01-P03",
+          "jsonPointer": "/candidates/2"
+        },
+        {
+          "id": "RB01-P04",
+          "jsonPointer": "/candidates/3"
+        },
+        {
+          "id": "RB01-P05",
+          "jsonPointer": "/candidates/4"
+        },
+        {
+          "id": "RB01-P06",
+          "jsonPointer": "/candidates/5"
+        },
+        {
+          "id": "RB01-P07",
+          "jsonPointer": "/candidates/6"
+        },
+        {
+          "id": "RB01-P08",
+          "jsonPointer": "/candidates/7"
+        },
+        {
+          "id": "RB01-P09",
+          "jsonPointer": "/candidates/8"
+        },
+        {
+          "id": "RB01-P10",
+          "jsonPointer": "/candidates/9"
+        },
+        {
+          "id": "RB01-P11",
+          "jsonPointer": "/candidates/10"
+        },
+        {
+          "id": "RB01-P12",
+          "jsonPointer": "/candidates/11"
+        },
+        {
+          "id": "RB01-P13",
+          "jsonPointer": "/candidates/12"
+        },
+        {
+          "id": "RB01-P14",
+          "jsonPointer": "/candidates/13"
+        },
+        {
+          "id": "RB01-P15",
+          "jsonPointer": "/candidates/14"
+        },
+        {
+          "id": "RB01-P16",
+          "jsonPointer": "/candidates/15"
+        },
+        {
+          "id": "RB01-P17",
+          "jsonPointer": "/candidates/16"
+        },
+        {
+          "id": "RB01-A01",
+          "jsonPointer": "/candidates/17"
+        },
+        {
+          "id": "RB01-A02",
+          "jsonPointer": "/candidates/18"
+        },
+        {
+          "id": "RB01-A03",
+          "jsonPointer": "/candidates/19"
+        },
+        {
+          "id": "RB01-A04",
+          "jsonPointer": "/candidates/20"
+        },
+        {
+          "id": "RB01-A05",
+          "jsonPointer": "/candidates/21"
+        },
+        {
+          "id": "RB01-A06",
+          "jsonPointer": "/candidates/22"
+        },
+        {
+          "id": "RB01-A07",
+          "jsonPointer": "/candidates/23"
+        },
+        {
+          "id": "RB01-A08",
+          "jsonPointer": "/candidates/24"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            16,
+            48,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            32,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            48,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            64,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            80,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            48,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            64,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            80,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            48,
+            32,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            16,
+            80,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            32,
+            80,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            64,
+            80,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            48,
+            48,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            64,
+            48,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            48,
+            64,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floor_Paths_16x16.png",
+          "sha256": "e9864663769910852fbe4e5e5f950d2ddb51d20b298877c56269e13c1e4bf159",
+          "rect": [
+            32,
+            64,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            16,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            0,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            16,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            0,
+            32,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            16,
+            32,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            0,
+            48,
+            16,
+            8
+          ]
+        },
+        {
+          "path": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Arched_Entryways_16x16.png",
+          "sha256": "f423305bb790d5f4e26776d629f6636df5505a00b059573fb48277905d10aaed",
+          "rect": [
+            16,
+            48,
+            16,
+            8
+          ]
+        }
+      ],
+      "coverageCredit": false,
+      "normalization": "pending explicit packet adapter/model validation; no source-unit or semantic count credited",
+      "stages": {
+        "surveyed": {
+          "state": "related-context",
+          "scope": "listed region/group context only",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "registered-proposal",
+          "scope": "assignment/proposal registration only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/RB01-room-builder-path-arch.json"
+          ],
+          "recordIds": []
+        },
+        "independentlyReviewed": {
+          "state": "registered-evidence",
+          "scope": "review reference only; applicability requires explicit normalization",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/RB01-room-builder-path-arch-review.md"
+          ],
+          "recordIds": []
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "packetId": "E03-playground-tubes",
+      "assignmentState": "review-ready",
+      "owner": "coordinator",
+      "taskDescriptor": "25 independently reviewed playground tube records; required continuation ports, eight frozen assembly dispositions and unresolved rounded/collared functions. Normalization and owner-facing sheet pending.",
+      "regionIds": [
+        "S02-exteriors/E10"
+      ],
+      "sourceGroupIds": [
+        "exteriors-complete-singles",
+        "exteriors-theme-singles"
+      ],
+      "proposal": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes.json",
+        "sha256": "4370a63a1308b9ccc844029bfe077bb304faac2e62826923c3ba5a685508143e"
+      },
+      "independentReview": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes-review.md",
+        "sha256": "ab901c1a2859661332b15187060a3c38d3ad1e7d04ed69656128e83f49f8df88"
+      },
+      "memberRecords": [
+        {
+          "id": "E03-01",
+          "jsonPointer": "/candidates/0"
+        },
+        {
+          "id": "E03-02",
+          "jsonPointer": "/candidates/1"
+        },
+        {
+          "id": "E03-03",
+          "jsonPointer": "/candidates/2"
+        },
+        {
+          "id": "E03-04",
+          "jsonPointer": "/candidates/3"
+        },
+        {
+          "id": "E03-05",
+          "jsonPointer": "/candidates/4"
+        },
+        {
+          "id": "E03-06",
+          "jsonPointer": "/candidates/5"
+        },
+        {
+          "id": "E03-07",
+          "jsonPointer": "/candidates/6"
+        },
+        {
+          "id": "E03-08",
+          "jsonPointer": "/candidates/7"
+        },
+        {
+          "id": "E03-09",
+          "jsonPointer": "/candidates/8"
+        },
+        {
+          "id": "E03-10",
+          "jsonPointer": "/candidates/9"
+        },
+        {
+          "id": "E03-11",
+          "jsonPointer": "/candidates/10"
+        },
+        {
+          "id": "E03-12",
+          "jsonPointer": "/candidates/11"
+        },
+        {
+          "id": "E03-13",
+          "jsonPointer": "/candidates/12"
+        },
+        {
+          "id": "E03-14",
+          "jsonPointer": "/candidates/13"
+        },
+        {
+          "id": "E03-15",
+          "jsonPointer": "/candidates/14"
+        },
+        {
+          "id": "E03-16",
+          "jsonPointer": "/candidates/15"
+        },
+        {
+          "id": "E03-17",
+          "jsonPointer": "/candidates/16"
+        },
+        {
+          "id": "E03-18",
+          "jsonPointer": "/candidates/17"
+        },
+        {
+          "id": "E03-19",
+          "jsonPointer": "/candidates/18"
+        },
+        {
+          "id": "E03-20",
+          "jsonPointer": "/candidates/19"
+        },
+        {
+          "id": "E03-21",
+          "jsonPointer": "/candidates/20"
+        },
+        {
+          "id": "E03-22",
+          "jsonPointer": "/candidates/21"
+        },
+        {
+          "id": "E03-23",
+          "jsonPointer": "/candidates/22"
+        },
+        {
+          "id": "E03-24",
+          "jsonPointer": "/candidates/23"
+        },
+        {
+          "id": "E03-25",
+          "jsonPointer": "/candidates/24"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_1.png",
+          "sha256": "35c617d3678eb184c64c273673cfb0ce7629ef53239f5a34061009f83cfa2640",
+          "rect": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_2.png",
+          "sha256": "883d05688980994b73171024640dafdfe84d97d3e4b5c3aba79b3bc6624eb4df",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_3.png",
+          "sha256": "c9a67345dc09239a20a6704c1938198e2e4ec3fa93830fcd1811c47fdd71d99e",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_4.png",
+          "sha256": "37e7bba06dac26bdfdf9299793d7a62fc8960b7514dddc1aba84330c243f3f8e",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_5.png",
+          "sha256": "ae031874bf215110b865614253646cce29b136e064369e1cd40e110874bba033",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_6.png",
+          "sha256": "883d05688980994b73171024640dafdfe84d97d3e4b5c3aba79b3bc6624eb4df",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_7.png",
+          "sha256": "38641b11505ab44c7daba96884791a5ff3a49ff3f720bc2e44aab2759bf0efd1",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_8.png",
+          "sha256": "3cfbd002ce97787c99d120a25edce6e2dbd6c8e22d3c4744d078248de3e83670",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_9.png",
+          "sha256": "166fc373a2fd8d19e205ba5db493c38fdf8e3ec8eafa455ddbcc7fa1c76e5124",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_10.png",
+          "sha256": "bf44d2f3bafd71475591574638c25a5ce660506dd0c87c31761447d2897cbb6a",
+          "rect": [
+            0,
+            0,
+            32,
+            16
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_11.png",
+          "sha256": "f61e66efdc6eb6ad95e7494e8a8b05a9d07fca1bb57dc21eaa17c0c83afad66e",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_12.png",
+          "sha256": "3cfa3d32e08a1209c00ee38f2e4126dc4ade6410115fcf70625907adfcc06dbb",
+          "rect": [
+            0,
+            0,
+            32,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_13.png",
+          "sha256": "0b34ce7b86246333f6060566cbc8020bb36fa7115847f5cad2c7a96249950749",
+          "rect": [
+            0,
+            0,
+            16,
+            48
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_14.png",
+          "sha256": "c47794420fc18e5196a6f45ed7ccef47599dc79941db7280667b5ebbb90e9525",
+          "rect": [
+            0,
+            0,
+            16,
+            48
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_15.png",
+          "sha256": "51c6d04ec82834436ee1a1353552a68fabe0d4d9d66a9b505edc7a017e6c62aa",
+          "rect": [
+            0,
+            0,
+            16,
+            48
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_16.png",
+          "sha256": "8e5f929f3522b33c354b2ae1432c24d089742d7905aee794a730872037f0d0cc",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_17.png",
+          "sha256": "729b11259bb711c47da09361035eb68ed85c0a056f82fea31766e336d2c758fb",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_18.png",
+          "sha256": "ff2a9f48b2abf2367ec693f00eaace206fdf7e226b10895af6a7f392060cbe63",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_1_19.png",
+          "sha256": "425a1c1f5d9fb9434835c984b7ced697fc6337edee08c112e8edb69d308e3f6e",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_2_15.png",
+          "sha256": "84c81e126d9f336cb5d41fdc00a7c651bc664bc6924ff6f0439e4a573c6cfd52",
+          "rect": [
+            0,
+            0,
+            16,
+            48
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_2_16.png",
+          "sha256": "09683d43c2ee20a100c8a28e55e4048e8fda2bfcc70fc8e66b539b12427d1564",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_2_17.png",
+          "sha256": "ef238433ad153ad896700d8888f3fc0f4495d2a9b61f30ca9f2e2b916f0af8aa",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_3_15.png",
+          "sha256": "716680f2c873c5f643d6f65b0b325407dec228906e40d2230e5aac172c5761f7",
+          "rect": [
+            0,
+            0,
+            16,
+            48
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_3_16.png",
+          "sha256": "417693f5c0fd21b576131fade7b6ceec11dc6b40c263820018045ef5835f69a2",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Singles_16x16/ME_Singles_School_16x16_School_Yard_Tube_Modular_3_17.png",
+          "sha256": "8ce1cd9ae4fa90e46064f2435a67e081127e4fe6cec941106b20f21c1ca13f89",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "coverageCredit": false,
+      "normalization": "pending explicit packet adapter/model validation; no source-unit or semantic count credited",
+      "stages": {
+        "surveyed": {
+          "state": "related-context",
+          "scope": "listed region/group context only",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "registered-proposal",
+          "scope": "assignment/proposal registration only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes.json"
+          ],
+          "recordIds": []
+        },
+        "independentlyReviewed": {
+          "state": "registered-evidence",
+          "scope": "review reference only; applicability requires explicit normalization",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/E03-playground-tubes-review.md"
+          ],
+          "recordIds": []
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
+    },
+    {
+      "packetId": "A01-animation",
+      "assignmentState": "review-ready",
+      "owner": "coordinator",
+      "taskDescriptor": "Nine independently reviewed native door frames / eight pixel states across two sequences. Exact static and GIF correspondence retained; supplemental GIF timing is separate from game playback. Normalization and owner-facing presentation pending.",
+      "regionIds": [
+        "S02-I10"
+      ],
+      "sourceGroupIds": [
+        "interiors-animations"
+      ],
+      "proposal": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/A01-animation.json",
+        "sha256": "f0e5f627c4e8fe27c5de9c83c5b2ba98d60f273fd7361be07a914563a49e9f0c"
+      },
+      "independentReview": {
+        "path": "docs/tactical/053-semantic-tileset-map/packets/A01-animation-review.md",
+        "sha256": "7ee15c2663c88f4e7aded23d9f8023b8fc0203264f77527617fbd265fbfe9dce"
+      },
+      "memberRecords": [
+        {
+          "id": "A01-01",
+          "jsonPointer": "/candidates/0"
+        },
+        {
+          "id": "A01-02",
+          "jsonPointer": "/candidates/1"
+        },
+        {
+          "id": "A01-03",
+          "jsonPointer": "/candidates/2"
+        },
+        {
+          "id": "A01-04",
+          "jsonPointer": "/candidates/3"
+        },
+        {
+          "id": "A01-05",
+          "jsonPointer": "/candidates/4"
+        },
+        {
+          "id": "A01-06",
+          "jsonPointer": "/candidates/5"
+        },
+        {
+          "id": "A01-07",
+          "jsonPointer": "/candidates/6"
+        },
+        {
+          "id": "A01-08",
+          "jsonPointer": "/candidates/7"
+        },
+        {
+          "id": "A01-09",
+          "jsonPointer": "/candidates/8"
+        }
+      ],
+      "sourceRefs": [
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+          "sha256": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+          "sha256": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+          "rect": [
+            16,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+          "sha256": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+          "rect": [
+            32,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+          "sha256": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+          "rect": [
+            48,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+          "sha256": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+          "rect": [
+            64,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png",
+          "sha256": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+          "rect": [
+            0,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png",
+          "sha256": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+          "rect": [
+            16,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png",
+          "sha256": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+          "rect": [
+            32,
+            0,
+            16,
+            32
+          ]
+        },
+        {
+          "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png",
+          "sha256": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+          "rect": [
+            48,
+            0,
+            16,
+            32
+          ]
+        }
+      ],
+      "coverageCredit": false,
+      "normalization": "pending explicit packet adapter/model validation; no source-unit or semantic count credited",
+      "stages": {
+        "surveyed": {
+          "state": "related-context",
+          "scope": "listed region/group context only",
+          "evidence": [],
+          "recordIds": []
+        },
+        "investigated": {
+          "state": "registered-proposal",
+          "scope": "assignment/proposal registration only",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/A01-animation.json"
+          ],
+          "recordIds": []
+        },
+        "independentlyReviewed": {
+          "state": "registered-evidence",
+          "scope": "review reference only; applicability requires explicit normalization",
+          "evidence": [
+            "docs/tactical/053-semantic-tileset-map/packets/A01-animation-review.md"
+          ],
+          "recordIds": []
+        },
+        "ownerFeedback": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        },
+        "accepted": {
+          "state": "no-evidence",
+          "scope": "none",
+          "evidence": [],
+          "recordIds": []
+        }
+      }
     }
   ],
   "acceptanceScopes": [
@@ -33281,8 +34363,9 @@
         "S02-R11",
         "S02-R09"
       ],
-      "scope": "One material path corner/edge/center set plus one three-tile arch; find exact master/subfile/packed relations and positive/negative seams.",
-      "state": "ready-unassigned"
+      "scope": "RB01: 17 floor pieces, six fixed arch body cells and two shadow companions; bounded recipes and master/subfile shadow differences retained.",
+      "state": "review-ready",
+      "supersededByRegistration": "RB01-room-builder-path-arch"
     },
     {
       "key": "interiors-sofa-contrast",
@@ -33299,8 +34382,9 @@
       "regions": [
         "S02-exteriors/E10"
       ],
-      "scope": "Bounded tube bend/cross/end set near [1984,1104,256,288]; distinguish components from standalone props and test join order.",
-      "state": "ready-unassigned"
+      "scope": "E03: 25 crawl-tube components, explicit continuation ports, bounded positive/negative assemblies and unresolved rounded/collared roles.",
+      "state": "review-ready",
+      "supersededByRegistration": "E03-playground-tubes"
     },
     {
       "key": "supplemental-animation-reconciliation",
@@ -33308,8 +34392,11 @@
         "exteriors-animations",
         "interiors-animations"
       ],
-      "scope": "Select one animation family per pack, retain sheet/frame file occurrences and timing evidence; master alias mapping remains explicit.",
-      "state": "ready-unassigned"
+      "scope": "A01 investigates one Interiors door family; other Interiors animations and an Exteriors animation trial remain unassigned. Source frame order, GIF demonstration playback and game behavior stay separate.",
+      "state": "partially-registered",
+      "registeredPacketIds": [
+        "A01-animation"
+      ]
     }
   ],
   "registrationContract": [

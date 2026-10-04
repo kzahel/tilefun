@@ -1,7 +1,7 @@
 # Semantic tileset map
 
 Topic: semantic-tileset-map
-Status: five family sheets delivered; 132 source records normalized; Room Builder, playground and animation expansion underway.
+Status: five family sheets delivered; 132 source records normalized; three further component/animation packets independently reviewed.
 Updated: 2026-10-04.
 
 Owns the continuing effort to identify and relate all in-scope Modern Exteriors
@@ -139,8 +139,20 @@ The [sofa model audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-sof
 and [sheet delivery](../tactical/053-semantic-tileset-map/notes/2026-10-04-sofa-delivery.md)
 record independent source replay, adversarial checks and application validation.
 
-Next: finish the bounded Room Builder path/arch and playground tube packets, then
-reconcile a small animation family. Separate mapper/reviewer paths keep work independent. The [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
+The [component/animation expansion](../tactical/053-semantic-tileset-map/notes/2026-10-04-component-animation-expansion.md)
+adds three independently reviewed research packets: RB01's 25 floor/arch records,
+E03's 25 playground tube records and A01's nine animation frames (eight pixel
+states). These 59 records are registered with exact proposal/review pins and zero
+normalized coverage credit until explicit adapters are implemented. Room Builder
+retains a 176-pixel master/subfile shadow difference and weakened inset extensions;
+tubes separate continuation cuts from entrance mouths; animation source/GIF
+playback stays distinct from unknown game behavior. Research stays in the plan
+folder; the five delivered family sheets remain the owner-facing surface.
+
+Next: normalize these three packet formats and add quiet sheets with supported
+assemblies and compact metadata. Keep open continuation windows distinct from
+closed objects, source-over tube recipes distinct from replacement recipes, and
+animation frames distinct from spatial components. The [bounded expansion audit](../tactical/053-semantic-tileset-map/notes/2026-10-04-expansion-audit.md)
 tracks duplicate/gap/source consistency; it does not exhaustively segment the packs.
 The user authorized reasonable checkpoint commits. The broader plan remains active;
 these records cover a small part of the entire packs.

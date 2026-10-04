@@ -228,6 +228,23 @@ class CoverageTests(unittest.TestCase):
         finally:
             target.write_bytes(before)
 
+    def test_reviewed_expansion_packets_await_explicit_normalization(self):
+        registrations = {r['packetId']: r for r in self.ledger['registeredPackets']}
+        for packet_id, count in [('RB01-room-builder-path-arch', 25),
+                                 ('E03-playground-tubes', 25), ('A01-animation', 9)]:
+            registration = registrations[packet_id]
+            self.assertEqual(len(registration['memberRecords']), count)
+            self.assertEqual(registration['assignmentState'], 'review-ready')
+            self.assertFalse(registration['coverageCredit'])
+            self.assertEqual(registration['stages']['independentlyReviewed']['state'], 'registered-evidence')
+            self.assertEqual(registration['stages']['accepted']['state'], 'no-evidence')
+        self.assertEqual(self.ledger['accounting']['allNormalizedSourceRecords'], 132)
+        self.assertEqual(self.ledger['accounting']['allNormalizedProposalUnits'], 112)
+        queued = {r['key']: r for r in self.ledger['readyBoundedPackets']}
+        self.assertEqual(queued['room-builder-path-arch']['state'], 'review-ready')
+        self.assertEqual(queued['exteriors-playground-tubes']['state'], 'review-ready')
+        self.assertEqual(queued['supplemental-animation-reconciliation']['state'], 'partially-registered')
+
     def test_extensible_registration_pins_members_and_review_without_credit(self):
         target = self.fixture / coverage.REGISTRY
         before = target.read_bytes()

@@ -1,0 +1,1948 @@
+{
+  "schemaVersion": 1,
+  "packetId": "A01",
+  "proposalRevision": 1,
+  "state": "agent-proposal",
+  "coordinates": {
+    "origin": "top-left",
+    "unit": "native16 pixels",
+    "rect": "[x,y,width,height]; half-open",
+    "alphaDeltaBounds": "[left,top,right,bottom]; half-open",
+    "packedCoordinates": "separate packed-atlas pixel space"
+  },
+  "pins": {
+    "sourceLedger": {
+      "path": "docs/tactical/053-semantic-tileset-map/source-files.json",
+      "sha256": "c98c9174f84c7cc8f38011a7b02f87b00f6891a416d0627b31ba7f2a223d2bda"
+    },
+    "packedIndex": {
+      "path": "public/data/modern-interiors-atlas.json",
+      "sha256": "c2beaba7bbd767b14df8cb7faa042908adbda89e0a43a7fd5c37cb5101a9a02e"
+    },
+    "matcherImplementation": {
+      "path": "scripts/semantic-map-match.py",
+      "sha256": "f2ed8a0acb8031f390f767954fc63cafb699c0b5f1540731326f414497d31adc"
+    }
+  },
+  "scope": {
+    "strips": [
+      "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+      "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png"
+    ],
+    "sourceRecordCount": 9,
+    "logicalActionProposals": 2,
+    "logicalObjectFamilyProposal": 1,
+    "supportingGifSources": 2,
+    "exclusions": [
+      "other door colors/facings",
+      "other animations",
+      "gameplay door/lock rules",
+      "source repacking",
+      "human approval"
+    ]
+  },
+  "initialObservations": "Unlabeled source pixels were enlarged and viewed before detailed labels/comparison. A brown handled inset panel becomes successively narrower/turned in the first strip. The second strip retains a closed panel with small edge/inset/handle shifts. Frame margins remain transparent and untrimmed; transparent source margins are not world-placement geometry.",
+  "sources": [
+    {
+      "id": "src-0171c6c1c84d1e3f",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/25_Shooting_Range_Black_Shadow_16x16.png",
+      "fileSHA256": "c0e3629eb4314fea762e725fc590435b9a44a5c5cfd378c2321e5b162fe18999",
+      "dimensions": [
+        256,
+        80
+      ],
+      "normalizedRgbaSHA256": "d5122db4775c28b83c8ff9b633ce88106ea22e7e40ea0fce7574724308f28116",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-01a73d7417dc1efa",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/17_Visibile_Upstairs_System_16x16.png",
+      "fileSHA256": "3fb55bb15d3c541d0b9c157e6f7c49892c3b5af97296ddd23202a1aef00c8560",
+      "dimensions": [
+        256,
+        432
+      ],
+      "normalizedRgbaSHA256": "33ed3f43730d9626da44fd126ec9a595ffb00399809896ae01ae818428e6748d",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-07ac8b7075eae570",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/17_Visibile_Upstairs_System_Black_Shadow_16x16.png",
+      "fileSHA256": "38d3614028642965fbc13cccc8141d3ea3ca6a0455e18bc39152d683f31c6e2a",
+      "dimensions": [
+        256,
+        432
+      ],
+      "normalizedRgbaSHA256": "dda38e743d9ad8a6684425405f346d60b7ef7cc68dfa1adf18384c12ee8025e0",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-0939286763b64691",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/19_Hospital_Shadowless.png",
+      "fileSHA256": "46713f4526776d525bc39fad6d3432d7ef7469019a4a983cea4572bb827852fa",
+      "dimensions": [
+        256,
+        1760
+      ],
+      "normalizedRgbaSHA256": "f4e84b8b57ed12f1ad6c514f7565b6047b55b988b82ac657109aa3c4f3ef3a9c",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-0b230712e5353bd4",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/11_Halloween_16x16.png",
+      "fileSHA256": "9bfd31a8c9e2c4ec43dbe1a1a959bf0e6525fc9e5724f6b2bade951b11a7cd41",
+      "dimensions": [
+        256,
+        976
+      ],
+      "normalizedRgbaSHA256": "90641edeed5fd58f21bae4f0625a7119e3ccd67ae3ce691d2ac4b923ee121671",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-0f0dd399fe177920",
+      "path": "assets/interiors/1_Interiors/16x16/Room_Builder_16x16.png",
+      "fileSHA256": "f53d7cd04f275dfa4b3e1f410569d491275105e2710a0f86ec46edeff3ab576f",
+      "dimensions": [
+        1216,
+        1808
+      ],
+      "normalizedRgbaSHA256": "901781873658821b6bb0f41c1bc02d20f85617bae9834e1539278ff6ec48d439",
+      "scopeGroup": "interiors-room-builder-master"
+    },
+    {
+      "id": "src-0f60327705f0b013",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/21_Clothing_Store.png",
+      "fileSHA256": "5c674c7dba29130abfc87f98d127e1c6d013b8fd40d0327c577edc5df65fb77b",
+      "dimensions": [
+        256,
+        1072
+      ],
+      "normalizedRgbaSHA256": "2724c0deff300df7d22fd67f8faec19e3995f2422caf0405d0f34e7dc821a13a",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-10aee5e91bc36ae2",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/1_Generic_16x16.png",
+      "fileSHA256": "7d25ad4ecaac01dd53f177c9e32ce1a6bddcfaeec9a648da1cbc451115c62f2b",
+      "dimensions": [
+        256,
+        1248
+      ],
+      "normalizedRgbaSHA256": "38e99ba5645279fa699f7a04235b31b256f01b32d035b53439d71fc67d33e156",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-11b5b269568f91cd",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/22_Museum.png",
+      "fileSHA256": "d3a6c33a1bbf71be6e219163a9bc530daba23c3ad1b69827723b5179d0afc94b",
+      "dimensions": [
+        256,
+        1952
+      ],
+      "normalizedRgbaSHA256": "86d7cf34e8d1e44d0778e2898b10de172c6775e02a78253fce7e7ad67dfcb2a3",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-1688c64d7a264b1b",
+      "path": "public/assets/tilesets/modern-interiors-atlas.png",
+      "fileSHA256": "b2ff29303e6c7e61d49b650171ec6dac2dfce8baa681a708897b66a1461245bd",
+      "dimensions": [
+        2048,
+        8800
+      ],
+      "normalizedRgbaSHA256": "1e266def5f6f06e28ed15ee48a0aa9746aea8076348449b8c4f2e9ab294a36b0",
+      "scopeGroup": "committed-reference"
+    },
+    {
+      "id": "src-1d4aaf0a5ba2afa1",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/6_Music_and_sport_Black_Shadow_16x16.png",
+      "fileSHA256": "5135f291472aabed57b3a1e47a4a68cd7394d4e548d571eb30a887db74ecd89c",
+      "dimensions": [
+        256,
+        768
+      ],
+      "normalizedRgbaSHA256": "4021faadb83809d5906584f7390ca785416b3bea4e6ae91c1428274c5e71f675",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-2a81204d77c2d031",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/15_Christmas_Shadowless.png",
+      "fileSHA256": "d9fe90ad8e4799f3d218152fe1bfa36f78c65c92ce0f1f15e468521280d751e1",
+      "dimensions": [
+        256,
+        272
+      ],
+      "normalizedRgbaSHA256": "1fa3920a47417f86f682da67e19ba3d57e4fbbb3212ebd72e49a93eb2c928106",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-2cfe6488911836bc",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/7_Art_Black_Shadow_16x16.png",
+      "fileSHA256": "d5b49049a01b3779ed103f6f91d07fca7b8a951de80bd36f637e0924ea6667d9",
+      "dimensions": [
+        256,
+        112
+      ],
+      "normalizedRgbaSHA256": "7a369b2746ab1c9e104ed9a7e222cbcd0d1e898544f010665bc4fad9e4765179",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-30bf53197810fb7d",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/10_Birthday_party_Black_Shadow_16x16.png",
+      "fileSHA256": "7594f676dde3a6ef73ec76e1906b7c6c61cb8cace2669f0f4bc14f003855e435",
+      "dimensions": [
+        192,
+        112
+      ],
+      "normalizedRgbaSHA256": "a82eb5e28af6e7d9722c582f27e019db635b9010292116fa7ceb6f682fea7c60",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-32517289a81b119b",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/11_Halloween_Black_Shadow_16x16.png",
+      "fileSHA256": "2c7ee2c90f9e4ca5bcd30b078973cc17d7931706c8297f44fdade66fbfe9c0df",
+      "dimensions": [
+        256,
+        976
+      ],
+      "normalizedRgbaSHA256": "3908c0cd3d0cc0df4f1814c29db3db604f3865b490391d480192f4394e80d392",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-3d84e9bfe7ee772d",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/21_Clothing_Store_Black_Shadow_16x16.png",
+      "fileSHA256": "a8a8a4163832f7a372289fe320c3c181fde99f91f58d39978e5f6d6f72899049",
+      "dimensions": [
+        256,
+        1072
+      ],
+      "normalizedRgbaSHA256": "4a45a2e6b1f3bf4ac8170f93e072d67bac5f600b89c8a1477b94c41f96f857e5",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-41776f734c43871b",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/25_Shooting_Range.png",
+      "fileSHA256": "21c5e61be6e4e8f6e64b121df5696ca83a2c870db415ec44bc29004f0770b09f",
+      "dimensions": [
+        256,
+        80
+      ],
+      "normalizedRgbaSHA256": "d985e0e5b573667302efd56991a6069937ebe7d40ad129a7f67c44ea67f1b1ac",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-46046a41ced999a9",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/4_Bedroom_Shadowless.png",
+      "fileSHA256": "1da60c7e76480fb993075fb9dfe7e3a201e13768fe8e319128d92a066cf7ae05",
+      "dimensions": [
+        256,
+        1712
+      ],
+      "normalizedRgbaSHA256": "cc87f2a9643db8a89616a8345c29b015ce7dd888bb92fad3447a82bf130ea1ba",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-480dcc2b84388964",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/9_Fishing_16x16.png",
+      "fileSHA256": "9476d7bf738fbc56e63c96ebc05b43a4b1e8d7e411b6338ac0d9e103d548356f",
+      "dimensions": [
+        256,
+        432
+      ],
+      "normalizedRgbaSHA256": "01847951ae2d591dca95e3728362c23eea681d5c2e6ef8aa0db9305bbea4923b",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-48f1e916ae891357",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/3_Bathroom_Black_Shadow_16x16.png",
+      "fileSHA256": "03a41932eaa150b0ef2922f6e1a05024be444034f41389c71fd8de3dac0d3aae",
+      "dimensions": [
+        256,
+        896
+      ],
+      "normalizedRgbaSHA256": "7c99d716e528d2f66270abfe4e82d33baef35a9f081b2a5896cebfdb54e1d889",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-4b33383e8e0705a5",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/3_Bathroom_16x16.png",
+      "fileSHA256": "905122b1017253a4fda331c8eab9944dde53ae847b2d88c86aa581b15162f37a",
+      "dimensions": [
+        256,
+        896
+      ],
+      "normalizedRgbaSHA256": "28a10491cedfe0aee1fcf273491a54fd65735a61bffeb6a242b424a2c7bbf541",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-4ef90adffbb18d02",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/1_Generic_Shadowless.png",
+      "fileSHA256": "c9935dc8f17dbc8df66d23995dd9186d3d8f261a24cf410a9726031e003702c0",
+      "dimensions": [
+        256,
+        1248
+      ],
+      "normalizedRgbaSHA256": "59b418ac4da9315c9e4909e77525712673a1b74affbc7f389e7e494f71080683",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-4fc9566751d79875",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/13_Conference_Hall_16x16.png",
+      "fileSHA256": "c831e9479019f25518866b08b63e546d7d78a8a1647cddfd34134adcf264df1a",
+      "dimensions": [
+        256,
+        192
+      ],
+      "normalizedRgbaSHA256": "ed5ccbb1718682a90c7a995e01fc41a79c72544035ea0d91d947002d4f27f797",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-517a315a95f823f1",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/11_Halloween_Shadowless.png",
+      "fileSHA256": "a92b7c8ef742ee25d06fb340dfdf32d52afa530020200b3fee7bb26ea9b65a21",
+      "dimensions": [
+        256,
+        976
+      ],
+      "normalizedRgbaSHA256": "123a270ca4dcde2361bc25d7acb4cd2c735d8c95c2c50535b8b84f2a902daad3",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-53653b9817dbf95d",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/25_Shooting_Range_Shadowless.png",
+      "fileSHA256": "b88ea5e706200928634d99a4e280db0d4446b5008986a1c68540d06513a369b9",
+      "dimensions": [
+        256,
+        80
+      ],
+      "normalizedRgbaSHA256": "d92cab40d771a627bf9c88874fd285aaeccabf9bf668bd83e9ad6cf45e7b9958",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-54f85b366a2a6d79",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/9_Fishing_Shadowless.png",
+      "fileSHA256": "2b17b998de788f3fb8aa455fe0605ec32d235ebdc872c30cfdd100bda517e12b",
+      "dimensions": [
+        256,
+        432
+      ],
+      "normalizedRgbaSHA256": "02ab77cdc09d6991d1205a5a3574faa01199f2777e90653e5ce2e0f9329831e1",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-5678180bbd1872ad",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/4_Bedroom_16x16.png",
+      "fileSHA256": "33d61ecc64367d21f1d198b64d9ecc21c23d492b2fe9d12bfa4676ba9def7b6e",
+      "dimensions": [
+        256,
+        1712
+      ],
+      "normalizedRgbaSHA256": "3aed48d5d3a064132869bfaf3a3723a88e2384925862a06c5514b6cd3b5211f6",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-5dc4e667798ef3c6",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/19_Hospital_Black_Shadow_16x16.png",
+      "fileSHA256": "af64fb8b36332741289b27cc365218b0bd8e5b9e61a1391e25e50deb272a56a7",
+      "dimensions": [
+        256,
+        1712
+      ],
+      "normalizedRgbaSHA256": "065605703f575769ed8cb75c0f3c24ec6fba91cb32cfc2b4800826d982f40b52",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-5e6637e6ae307da6",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/23_Television_and_Film_Studio_Black_Shadow_16x16.png",
+      "fileSHA256": "d5af8e0df61db7ce21b79270263210af9dcc719b2908e010f280f4ae613c6609",
+      "dimensions": [
+        256,
+        224
+      ],
+      "normalizedRgbaSHA256": "ba7aafbf453d997b743f91bb15a515206c031eef43ef0e1bab9f8aa3a9aa4726",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-5fe27319797f46d8",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/14_Basement_Shadowless.png",
+      "fileSHA256": "2a3a9be49e8b325ca5b52f70ed17d13754c1bd9e732bb71d8704b66f4337c659",
+      "dimensions": [
+        256,
+        800
+      ],
+      "normalizedRgbaSHA256": "e40c4680e0d5717dbbf0be83e1979d8717dfb913a71c62cf51a25edba73dcfff",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-62d4edb54733a0fb",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/2_LivingRoom_Shadowless.png",
+      "fileSHA256": "136181813035266ca305f520924d96c588cfde26ad5f9293017240b3866775fc",
+      "dimensions": [
+        256,
+        720
+      ],
+      "normalizedRgbaSHA256": "05e385fa670aca40fb81f4c6900c92036d41d870ffe61b9f999a03b71ca83ede",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-63419729cceabd1a",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/20_Japanese_interiors.png",
+      "fileSHA256": "8e6eb71a71feb0c52a9913696ae5545317538cbcdcdde20332f72dc258928426",
+      "dimensions": [
+        256,
+        512
+      ],
+      "normalizedRgbaSHA256": "4efb0f341ea8103a32650e5b03b2549aea4314c26a048c098226cff316b06c35",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-6478d1a86d91b105",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/6_Music_and_sport_Shadowless.png",
+      "fileSHA256": "5651db6fa25bf875797a5a79566115717a566651373ab6ad3aeca0bba6eae234",
+      "dimensions": [
+        256,
+        768
+      ],
+      "normalizedRgbaSHA256": "991807619e71200ce89825a344f23ffb3a3609a5f976e687a3cfa8f8a9d7ab59",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-64b53f8a22d9307d",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/18_Jail_Shadowless.png",
+      "fileSHA256": "8f9e31fa1bee9f84d0d20c33b651686fe6e6a195f61fd773cda0e50e5e6e737b",
+      "dimensions": [
+        256,
+        720
+      ],
+      "normalizedRgbaSHA256": "a1886ca9aaf6fd98f64fce44e4ee10c2c053f601c605dd555a3fb3250c6e5711",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-6522af586f3a70ce",
+      "path": "assets/interiors/3_Animated_objects/16x16/gif/animated_door_1_locked.gif",
+      "fileSHA256": "d8b36baec8454b3d8c724e8a5c9f8acd05468621a922db875fdf90d865109677",
+      "dimensions": [
+        16,
+        32
+      ],
+      "normalizedRgbaSHA256": "770563b58b2f4083505945b02522eb50496cbecfd2bb8019a74dc9eaff793cfa",
+      "scopeGroup": "supporting-native16-GIF-outside-PNG-inventory"
+    },
+    {
+      "id": "src-676aa7fa95891111",
+      "path": "assets/interiors/3_Animated_objects/16x16/gif/animated_door_1.gif",
+      "fileSHA256": "52268b380577828914ee7cdd383517f8830143789a1c2856a472391bb3dbe4d7",
+      "dimensions": [
+        16,
+        32
+      ],
+      "normalizedRgbaSHA256": "770563b58b2f4083505945b02522eb50496cbecfd2bb8019a74dc9eaff793cfa",
+      "scopeGroup": "supporting-native16-GIF-outside-PNG-inventory"
+    },
+    {
+      "id": "src-6e5562265aba52e5",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/13_Conference_Hall_Shadowless.png",
+      "fileSHA256": "cd76a392dcd99476f957f482982a955c3ec971b5e2853e017e808717df539068",
+      "dimensions": [
+        256,
+        192
+      ],
+      "normalizedRgbaSHA256": "5aac0948af17b6c3f1e857672438df9dd51801805aaa455ec6130407fe88e48e",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-766fd4bea603da8c",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/16_Grocery_store_Black_Shadow_16x16.png",
+      "fileSHA256": "96bfa7d9a60ed491bb73d3b2d1107d5c14f344da4dfe6ca9ad0c4ff625df7e78",
+      "dimensions": [
+        256,
+        1248
+      ],
+      "normalizedRgbaSHA256": "bd384bea4d149038f66d2b87811962e4c95d82ab6217d130610937af79936c7b",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-7d457f83943bc9b6",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/1_Generic_Black_Shadow_16x16.png",
+      "fileSHA256": "b792ce98462c73bdd0db4943d900015edc5ced5a70518297c9335b0405331555",
+      "dimensions": [
+        256,
+        1248
+      ],
+      "normalizedRgbaSHA256": "e51837de2fdf69c24a8f87509c956e6a97c3f8fa04a8cc9547359af627980bae",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-8252cd0da2a807c4",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/24_Ice_Cream_Shop_Black_Shadow_16x16.png",
+      "fileSHA256": "1c3bc7a6b0c4c7ca1b4df7cb66cfcb7226aa2fbc10947e16a6fb19cb741de82b",
+      "dimensions": [
+        256,
+        272
+      ],
+      "normalizedRgbaSHA256": "526edef8f56182858d048588dad46fb30f389669cfe91f606f843f1a7934c9f4",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-8408e2693febc113",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/14_Basement_16x16.png",
+      "fileSHA256": "d176a4befe3df95093dbe8b329baf17dcd6fd89dc00cb7c91d573b29eca45ef4",
+      "dimensions": [
+        256,
+        800
+      ],
+      "normalizedRgbaSHA256": "8be6e0a179778e361f7ad0c958776e2f719d4b6ec9ae80e872cddcb57be25c0c",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-8459ca06a8cd2f3e",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/12_Kitchen_Shadowless.png",
+      "fileSHA256": "c925ddb808b02b9ed1d89ce73828acd84c8913fe1192e333a046ae90253ab142",
+      "dimensions": [
+        256,
+        784
+      ],
+      "normalizedRgbaSHA256": "49344ed980f2dd61a96a4516f19e9279e5cbac2389398a549896737e00a81d0c",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-86983181da958ee8",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/4_Bedroom_Black_Shadow_16x16.png",
+      "fileSHA256": "6cb30a055463265bfa75331cebb8b314b12b5fb1a713cd5d3c20833ab24dce11",
+      "dimensions": [
+        256,
+        1712
+      ],
+      "normalizedRgbaSHA256": "4521d44cacda2273a8f6d3bea1dc810db50375f766d12e3f3997abab72192e45",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-899dd20f89d17808",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/22_Museum_Black_Shadow_16x16.png",
+      "fileSHA256": "3297439d38ca4938ca15b279f98f18064f13eee1321dc5c54e6938d26885a081",
+      "dimensions": [
+        256,
+        1952
+      ],
+      "normalizedRgbaSHA256": "3e0f0de2eec8b3cc50462d6bee3252fab95aa4c20f8c1b29eb1684b987faa28b",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-8a0170eb2b105092",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/16_Grocery_store_16x16.png",
+      "fileSHA256": "2e3f8cb234669eabea2f96ae4b415da48c31f261963dac72c3eb4c3271078eb7",
+      "dimensions": [
+        256,
+        1248
+      ],
+      "normalizedRgbaSHA256": "6424efea7e7b199c16ba60374668d7551b4ced8844a4cd2bb82b8f97e8e501f2",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-8cfcbf4a1be5e972",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/16_Grocery_store_Shadowless.png",
+      "fileSHA256": "696fe3318ef3fb0c0593e83f65f99d08baa82366948570147ffef3818bb26376",
+      "dimensions": [
+        256,
+        1248
+      ],
+      "normalizedRgbaSHA256": "799cb83f3b7045dcfc707b3c841547d9bb3909173ac80c33c45764fbf7ce8997",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-8f2c6fcf8e15155a",
+      "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1.png",
+      "fileSHA256": "dd13493877176653200007256b6a2c48feb7f3433ef5ce39a6050e9276769165",
+      "dimensions": [
+        80,
+        32
+      ],
+      "normalizedRgbaSHA256": "923392d3f814571080ccc7e04e57a7068aad731ccf861cd2c8ca4e3f489fd1da",
+      "scopeGroup": "interiors-animations"
+    },
+    {
+      "id": "src-95f05258e66a1761",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/8_Gym_Shadowless.png",
+      "fileSHA256": "fd4d78ba4f364239c5c68d91a20cb7f5ebd2f1ed1181b2d52e7ab070ad1b6b46",
+      "dimensions": [
+        256,
+        528
+      ],
+      "normalizedRgbaSHA256": "a6df2f82899d7714be283eff663dbb50ca84f33503ebe0d83248be8aad48b222",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-9624cbeb652c7782",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/5_Classroom_and_library_Shadowless.png",
+      "fileSHA256": "69a619e392cbaba3f41eb4366442f5f3929c30066a95e7ceb5b92e1bbadb219a",
+      "dimensions": [
+        256,
+        544
+      ],
+      "normalizedRgbaSHA256": "81bcf20b09aa6cbc9a9fc5263bfee75080de84ed31ea2d2d375dae11d002d6d6",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-98dfe6d91c5748d1",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/5_Classroom_and_library_Black_Shadow_16x16.png",
+      "fileSHA256": "7b0e10eb5156bead424b623087c86bb482b3f5e838a4de53fa80b6dcfa70bd9a",
+      "dimensions": [
+        256,
+        544
+      ],
+      "normalizedRgbaSHA256": "b56846561a1a7b146190b989bcc9cd82a250ad64c7b4e0c374b7591dc96750e1",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-9a43b00a32fb8eca",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/8_Gym_16x16.png",
+      "fileSHA256": "5abe9f8046621fcfd897ca30501e71b999d263d0326115c5ec3a29f99866a704",
+      "dimensions": [
+        256,
+        528
+      ],
+      "normalizedRgbaSHA256": "6b62fd652fcd918d87606585724abb4b896f9f4514dc54d35980c0e5913d2d30",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-a277341becaad730",
+      "path": "assets/interiors/3_Animated_objects/16x16/spritesheets/animated_door_1_locked.png",
+      "fileSHA256": "dcb3a071c0a5489056f9d83bbdf212eda8902f6067bba1ab5e2011481c9b50a9",
+      "dimensions": [
+        64,
+        32
+      ],
+      "normalizedRgbaSHA256": "a7eb4fc68ec9eecf78bab51ce5bf82a58ee9965a133385c7b641b0eb3e133d31",
+      "scopeGroup": "interiors-animations"
+    },
+    {
+      "id": "src-a2e7cc2a82720938",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/5_Classroom_and_library_16x16.png",
+      "fileSHA256": "b3bc8dbdd0f72421a73b40be1ae09323aab5396a0cb9f81cb9172b634191e18b",
+      "dimensions": [
+        256,
+        544
+      ],
+      "normalizedRgbaSHA256": "0a96824165dc653a6439931482d8afdf3d97dbc2b675d2d9b626ec68088e2906",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-a400274bbf9418ae",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/12_Kitchen_16x16.png",
+      "fileSHA256": "ce2efce161ccaa313b54b22aeb47a39e6402970defa7c0204c7acaf7b4390e1a",
+      "dimensions": [
+        256,
+        784
+      ],
+      "normalizedRgbaSHA256": "983d49064947c43e2256075fb5eb1b3b24a30d24d7fd852ce168970358290b58",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-a563204695cfca4e",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/24_Ice_Cream_Shop.png",
+      "fileSHA256": "9616bc7f1d28d2df74ed9665ba80131516250875e573a9885c36325acdfd969a",
+      "dimensions": [
+        256,
+        272
+      ],
+      "normalizedRgbaSHA256": "fb21b89efbff58dde7cad3aa2f01983c849eaf1bc259a3a1651e36a38466a4c7",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-a607d24d2fc0e9c4",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/24_Ice_Cream_Shop_Shadowless.png",
+      "fileSHA256": "6f16594c324336187ce24358291cda51076dda8c5ae90897f37a124e970c474f",
+      "dimensions": [
+        256,
+        272
+      ],
+      "normalizedRgbaSHA256": "1f0e4547f7e33b4552fffef2c0eff504c19b441338b72040f79eeee4d209a96b",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-a95ac98be2a853a1",
+      "path": "assets/interiors/1_Interiors/16x16/Interiors_16x16.png",
+      "fileSHA256": "a35b8ed8ef392657a9339e1ce0831a3efe7b4631bfff69835bb5ef3bc738550b",
+      "dimensions": [
+        256,
+        17024
+      ],
+      "normalizedRgbaSHA256": "a1edf60e5fe1976ee6e1706f427a63ed0c660533a9124b3e03c7db63399b9f71",
+      "scopeGroup": "interiors-master"
+    },
+    {
+      "id": "src-aa3fb037650b8f39",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/15_Christmas_16x16.png",
+      "fileSHA256": "e6f9e1ea31da494166c4bebcb72b57d07312daa1eb2231b80618dc6fb68e95a8",
+      "dimensions": [
+        256,
+        272
+      ],
+      "normalizedRgbaSHA256": "9aae02f3452e5cfb0b304a7388cd36339122ce6e69f36ac77b85d6d983a8206d",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-ad71c8e6cb2b85f7",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/14_Basement_Black_Shadow_16x16.png",
+      "fileSHA256": "f5f96307fe030f31b9b435ae79c7a66be1f4f472350e734adcc2e54744b9c66c",
+      "dimensions": [
+        256,
+        800
+      ],
+      "normalizedRgbaSHA256": "c5e0fd90ace64422805aeadee4b31de81fb4c40704824a8e3c4708e501ba1835",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-aea1d7b8e7286203",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/23_Television_and_Film_Studio.png",
+      "fileSHA256": "2e33c88bfe508e6326f4e6c400f1bbe8a794b14e1787aee812d8c02bcb099c0f",
+      "dimensions": [
+        256,
+        224
+      ],
+      "normalizedRgbaSHA256": "5d9fe6c82ca19d2ab00f1aa255dc5cc72932e3a99712223b560d7b2f2da0aba1",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-aeecc1e38c8d7397",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/18_Jail_Black_Shadow_16x16.png",
+      "fileSHA256": "6267f3cfe573d236d16eda64e36ee68cd40c2282ed18d1e5e3d7b86f91715610",
+      "dimensions": [
+        256,
+        720
+      ],
+      "normalizedRgbaSHA256": "e10b7316c83d2f007cdfce7b4c3f976267416d68a8a54fe322551d0f918323c8",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-b51fe2197162e9bd",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/26_Condominium_Shadowless.png",
+      "fileSHA256": "244b9ab2689ef0586637051b5217006010de737dcc2d13f0fa93fa54ce92f0be",
+      "dimensions": [
+        256,
+        304
+      ],
+      "normalizedRgbaSHA256": "7827fcba05e65ded6f1eb2c3b0667ba894f89ec23be75710c4196b075b3098c4",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-bcb80c0a43eb8daa",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/7_Art_Shadowless.png",
+      "fileSHA256": "f308841faf4c3d085b05f8fa838c7de0f98d109d142b126ba0034a43da4676d2",
+      "dimensions": [
+        256,
+        112
+      ],
+      "normalizedRgbaSHA256": "85e1188f538884dc5d394c281ac834737c99e6baa109e143b6fee86db852debe",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-bdf088cf356e4417",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/6_Music_and_sport_16x16.png",
+      "fileSHA256": "9a9f895eb4f2dd45dbb137329b59133d488d78c76f894cf121e24739478cd872",
+      "dimensions": [
+        256,
+        768
+      ],
+      "normalizedRgbaSHA256": "23aba881c0ebfbee396d9439de00815313a9712cdd6df1a951b1416ddbdfa62b",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-bf4117df522546df",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/26_Condominium_Black_Shadow_16x16.png",
+      "fileSHA256": "394c7170032b6f585a90a89707c2fc34840a719abbad6d4c3c7bb6f37c595e4b",
+      "dimensions": [
+        256,
+        304
+      ],
+      "normalizedRgbaSHA256": "3d0d1bd5f79b746e0331847402c802af97630d796107e4b7deee39f90be1c459",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-c03d48d8395874ac",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/13_Conference_Hall_Black_Shadow_16x16.png",
+      "fileSHA256": "75f5f7d9b12f95f0cffece48b47e0caaa54df71458792a88ae0cf51efa8df1e6",
+      "dimensions": [
+        256,
+        192
+      ],
+      "normalizedRgbaSHA256": "d0853dd88051854783dfa0f911216ef3c141f7810c29469e1c2164acc765d274",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-c05b6f113890bcd2",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/19_Hospital_16x16.png",
+      "fileSHA256": "a3dc92c380ca3a1167e1eba894e3cb1887dbcaa46db1aad30431331ca706ce6b",
+      "dimensions": [
+        256,
+        1760
+      ],
+      "normalizedRgbaSHA256": "29a7127cb9581dd8d00eb44993f8c69ce8b03ded860621d7bf5407412ef1832f",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-c0840ba1edc952b3",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/2_LivingRoom_16x16.png",
+      "fileSHA256": "6362268ea4bbfc4f5dba8eb746f003f4f70ec81ab396d7883dbc848aa06733e9",
+      "dimensions": [
+        256,
+        720
+      ],
+      "normalizedRgbaSHA256": "b8fcb72a3e6066ee9b45ad40e0b380495db6e07a246dd6e327c0b765cacc200b",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-ca88ae38545f4618",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/10_Birthday_party_16x16.png",
+      "fileSHA256": "4a394f3c11977039f95687bb736bf81d186e9a06735c15542f2e16b9f62b9982",
+      "dimensions": [
+        192,
+        112
+      ],
+      "normalizedRgbaSHA256": "e6f0e7b684e0109dca7f2755eb3ffd9a86935e6c578931e9e494f3a2896e7216",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-d0c591455a60ff73",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/2_LivingRoom_Black_Shadow_16x16.png",
+      "fileSHA256": "b0d48481072c9a99fc9b146dc75a985e1e55a3c6f586cadce0cf3afe653e38e8",
+      "dimensions": [
+        256,
+        720
+      ],
+      "normalizedRgbaSHA256": "8559bcf47b2bd69ff177626a41e0fc22145076c6ec4ecc576c11f98bb49ec66a",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-d16c901cca62127a",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/20_Japanese_interiors_Shadowless.png",
+      "fileSHA256": "1f14ee551a789e0a54063e237dc53d69b245dfc82b308953848f72f7d027b90a",
+      "dimensions": [
+        256,
+        512
+      ],
+      "normalizedRgbaSHA256": "87b0d641a75e85e6792792aae153944364bd513fa4f7eadff625f620a297da17",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-db550ade4e057bc6",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/9_Fishing_Black_Shadow_16x16.png",
+      "fileSHA256": "bd698f29429ee6fc03e5140a4ea83118d51c9d8955d6acd978f6431fd2dee589",
+      "dimensions": [
+        256,
+        432
+      ],
+      "normalizedRgbaSHA256": "e46ddaf3a343df94e648a013d306d06a8409576210a9a29cb830f3366878a7d6",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-dcfcc62f1d8bf2f6",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/12_Kitchen_Black_Shadow_16x16.png",
+      "fileSHA256": "98ab26ab045af7fa511301d00819747505458cab91fdec01be409d333ae40c4e",
+      "dimensions": [
+        256,
+        784
+      ],
+      "normalizedRgbaSHA256": "74f7968ee25dd051d909746974fb09afa96566caa6b740f35517225f0d38fdff",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-dd3917bbc5a90309",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/10_Birthday_party_Shadowless.png",
+      "fileSHA256": "0ccec45072f581461e8d90879f792b10d7ab5e379dd6cdf9bcd87e3681b9bb6f",
+      "dimensions": [
+        192,
+        112
+      ],
+      "normalizedRgbaSHA256": "89f800de518b8306d2cbc50269572c183f0cdfcbc021c407c01449e7c47ab650",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-e0f04064851cd944",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/22_Museum_Shadowless.png",
+      "fileSHA256": "a0a03ebc11a18622ccbcd63ea73af0624bfa54109528367737bc66e55a0decc5",
+      "dimensions": [
+        256,
+        1952
+      ],
+      "normalizedRgbaSHA256": "d5a7c162c96d82763b0466854281c6c0108474dbee0418b8163b63dd5c3bc058",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-e5cf995edf374706",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/23_Television_and_Film_Studio_Shadowless.png",
+      "fileSHA256": "9908b8a5e9f1f566bed30d645d101012bd82778c60ed1d77119aa42a0533c8f5",
+      "dimensions": [
+        256,
+        224
+      ],
+      "normalizedRgbaSHA256": "abc3d43825d6dc1e336df40691b60c6c50c6e90510115d6fd350716d08bb0b82",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-e84555c6c726ec54",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/18_Jail_16x16.png",
+      "fileSHA256": "6bf5562a088a374d5e00c271fa794a31afa1491f554d60b5e2e1dc40f37c6ba7",
+      "dimensions": [
+        256,
+        720
+      ],
+      "normalizedRgbaSHA256": "160a246625207e73db80bf81b6ad93de45bd74be36dcf91a471a036392e95136",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-e9864aca3cd4203e",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/7_Art_16x16.png",
+      "fileSHA256": "6638b5cef53b5135ea8334b5a868af1bc517753752ac44e62367dab1fddeb8bb",
+      "dimensions": [
+        256,
+        112
+      ],
+      "normalizedRgbaSHA256": "5b6597829ac21b27be669c0f9e5587cbe840ef83a2f350443e260a5eef9dafd8",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-ea5d6fae376eef2f",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/20_Japanese_interiors_Black_Shadow_16x16.png",
+      "fileSHA256": "387e9f07304d3d074ecf5ffca5cdf597dd47ea647e1f41caebd47540033f70b5",
+      "dimensions": [
+        256,
+        512
+      ],
+      "normalizedRgbaSHA256": "a31c2c65f4b431c26e1364df04367ae1ec63977279738c24b98c37978d5ab374",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-f2dcfded670466ba",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/15_Christmas_Black_Shadow_16x16.png",
+      "fileSHA256": "07cb0fbe075979d77bc685238a175e3f2e96c08601fa05e09525d3819b6b2a10",
+      "dimensions": [
+        256,
+        272
+      ],
+      "normalizedRgbaSHA256": "8baa0664b35c400fcbfe74c00f0da23f236244038d10999eb64fdc98b1449087",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-f389f5a9147d62c6",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Black_Shadow/8_Gym_Black_Shadow_16x16.png",
+      "fileSHA256": "32c2b771acac82c60b1437b5527d28a30616782b84233d1d05ced53f39bd3e50",
+      "dimensions": [
+        256,
+        528
+      ],
+      "normalizedRgbaSHA256": "f1e7affd09736a41796d3dfbc34317b0f77dd9d2ccb1f6cda88fe8149d6fd474",
+      "scopeGroup": "interiors-theme-black-shadow"
+    },
+    {
+      "id": "src-f48b6d0fd408cccf",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/21_Clothing_Store_Shadowless.png",
+      "fileSHA256": "a6171674b1cd8fb3b9da59427b4fe920c777a77875f6169f89cf1517977d3328",
+      "dimensions": [
+        256,
+        1072
+      ],
+      "normalizedRgbaSHA256": "2dc630e685afc55763dac40ad66242d260bff06a9f069f0daab8d5c9ada47540",
+      "scopeGroup": "interiors-theme-shadowless"
+    },
+    {
+      "id": "src-f8a1ea6ca10eef2d",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter/26_Condominium.png",
+      "fileSHA256": "58e194a0256f85089c43e7af161d821e6fae649eb224e9b088f184fb8717a176",
+      "dimensions": [
+        256,
+        304
+      ],
+      "normalizedRgbaSHA256": "4d3554766878cffd04d50d2897cee18203171628eb14e955a13a54cc81b49c0e",
+      "scopeGroup": "interiors-theme-normal"
+    },
+    {
+      "id": "src-fe1c0acaa734508a",
+      "path": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Shadowless/3_Bathroom_Shadowless.png",
+      "fileSHA256": "4085a8e2c116f5a44a9fc966b2dfd7114f8758f07f0011dddcc088197ae588b1",
+      "dimensions": [
+        256,
+        896
+      ],
+      "normalizedRgbaSHA256": "0e49a69829e3638dec93db3bfc0eec06bccc13342781e1cf662c3c3c06a65486",
+      "scopeGroup": "interiors-theme-shadowless"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "A01-01",
+      "sourceStrip": "src-8f2c6fcf8e15155a",
+      "sourceFrameIndex": 0,
+      "sourceRect": [
+        0,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "770563b58b2f4083505945b02522eb50496cbecfd2bb8019a74dc9eaff793cfa",
+      "actionHypothesis": "opening",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [
+        {
+          "sourceId": "src-a95ac98be2a853a1",
+          "rect": [
+            16,
+            3440,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-master"
+        },
+        {
+          "sourceId": "src-10aee5e91bc36ae2",
+          "rect": [
+            16,
+            640,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-theme-normal"
+        },
+        {
+          "sourceId": "src-7d457f83943bc9b6",
+          "rect": [
+            16,
+            640,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-theme-black-shadow"
+        },
+        {
+          "sourceId": "src-4ef90adffbb18d02",
+          "rect": [
+            16,
+            640,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-theme-shadowless"
+        }
+      ],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [
+        "A01-06"
+      ],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "exact-static-master-counterpart"
+    },
+    {
+      "id": "A01-02",
+      "sourceStrip": "src-8f2c6fcf8e15155a",
+      "sourceFrameIndex": 1,
+      "sourceRect": [
+        16,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "931cc3b0f63d985179536f4ff0273b88277110c1d5f8ced69b9707b6aacdaf86",
+      "actionHypothesis": "opening",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    },
+    {
+      "id": "A01-03",
+      "sourceStrip": "src-8f2c6fcf8e15155a",
+      "sourceFrameIndex": 2,
+      "sourceRect": [
+        32,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "479469d3c47259b19461b209d8fdc984201ddd01fac6790be32ef0d88a811bcc",
+      "actionHypothesis": "opening",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    },
+    {
+      "id": "A01-04",
+      "sourceStrip": "src-8f2c6fcf8e15155a",
+      "sourceFrameIndex": 3,
+      "sourceRect": [
+        48,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "40199c9f00131b16a16cf99eb09be75e1a89f7465ca3f20c9f4f3ff7469e4cf0",
+      "actionHypothesis": "opening",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    },
+    {
+      "id": "A01-05",
+      "sourceStrip": "src-8f2c6fcf8e15155a",
+      "sourceFrameIndex": 4,
+      "sourceRect": [
+        64,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "ad19f578acbe163fa980ed1c764de3a2d53147a381fb203eac74b47974f2d385",
+      "actionHypothesis": "opening",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    },
+    {
+      "id": "A01-06",
+      "sourceStrip": "src-a277341becaad730",
+      "sourceFrameIndex": 0,
+      "sourceRect": [
+        0,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "770563b58b2f4083505945b02522eb50496cbecfd2bb8019a74dc9eaff793cfa",
+      "actionHypothesis": "closed-perturbation",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [
+        {
+          "sourceId": "src-a95ac98be2a853a1",
+          "rect": [
+            16,
+            3440,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-master"
+        },
+        {
+          "sourceId": "src-10aee5e91bc36ae2",
+          "rect": [
+            16,
+            640,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-theme-normal"
+        },
+        {
+          "sourceId": "src-7d457f83943bc9b6",
+          "rect": [
+            16,
+            640,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-theme-black-shadow"
+        },
+        {
+          "sourceId": "src-4ef90adffbb18d02",
+          "rect": [
+            16,
+            640,
+            16,
+            32
+          ],
+          "lineage": "exact-whole-frame-normalized-RGBA",
+          "domain": "interiors-theme-shadowless"
+        }
+      ],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [
+        "A01-01"
+      ],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "exact-static-master-counterpart"
+    },
+    {
+      "id": "A01-07",
+      "sourceStrip": "src-a277341becaad730",
+      "sourceFrameIndex": 1,
+      "sourceRect": [
+        16,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "666dce91c941bd209a5f632ab22cd7bc75b10e18e6ffea06fcb0adbdc1736297",
+      "actionHypothesis": "closed-perturbation",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    },
+    {
+      "id": "A01-08",
+      "sourceStrip": "src-a277341becaad730",
+      "sourceFrameIndex": 2,
+      "sourceRect": [
+        32,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "f3ec02b9d0cee1c58fa2c8c82de7a85c930273e624518548b51ee234162ef6ae",
+      "actionHypothesis": "closed-perturbation",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    },
+    {
+      "id": "A01-09",
+      "sourceStrip": "src-a277341becaad730",
+      "sourceFrameIndex": 3,
+      "sourceRect": [
+        48,
+        0,
+        16,
+        32
+      ],
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "alphaVisibleRect": [
+        1,
+        11,
+        14,
+        21
+      ],
+      "normalizedRgbaSHA256": "601d5e2bfb49ecc36f485e1248df5ea64cf42940f6e81ec13705201f427859d8",
+      "actionHypothesis": "closed-perturbation",
+      "identity": {
+        "value": "brown hinged door animation frame",
+        "confidence": "high",
+        "evidence": "Handled rectangular panel with an upper inset; turning/narrowing panel in first strip, closed-panel shifts in second.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "staticOccurrences": [],
+      "namedExportAliases": [],
+      "packedOccurrences": [],
+      "alphaTightExportCounterparts": [],
+      "duplicateFrameIds": [],
+      "humanApproval": "unregistered",
+      "gameplayGeometry": {
+        "anchor": null,
+        "footprint": null,
+        "collision": null,
+        "walkability": null,
+        "height": null
+      },
+      "primaryStaticLineage": "animation-original-only-in-searched-static-domains"
+    }
+  ],
+  "sequences": [
+    {
+      "id": "A01:opening",
+      "memberRecords": [
+        "A01-01",
+        "A01-02",
+        "A01-03",
+        "A01-04",
+        "A01-05"
+      ],
+      "sourceOrder": "left-to-right strip frame indexes; 16x32 untrimmed source frames",
+      "logicalAnimationIdentity": {
+        "value": "door opening progression",
+        "confidence": "high",
+        "evidence": "Pixels progressively turn/narrow the panel.",
+        "alternatives": [],
+        "disposition": "proposed"
+      },
+      "proposedPlaybackOrder": [
+        "A01-01",
+        "A01-02",
+        "A01-03",
+        "A01-04",
+        "A01-05"
+      ],
+      "orderStatus": "source-order proposal; companion GIF comparison separately recorded",
+      "gameplayPlayback": {
+        "frameDurationsMs": null,
+        "loop": null,
+        "trigger": null,
+        "reverseClosing": null,
+        "lockMechanics": null
+      },
+      "humanApproval": "unregistered",
+      "companionGifEvidence": "A01:opening:GIF",
+      "adjacentSourceFrameDeltas": [
+        {
+          "members": [
+            "A01-01",
+            "A01-02"
+          ],
+          "changedPixels": 105,
+          "changedBoundsXYXY": [
+            2,
+            12,
+            14,
+            32
+          ],
+          "alphaChangedPixels": 30,
+          "maskSHA256": "eaf0a9eccff1e32d134468f4392b61aebfb8d5b7de1bad6b31d13a821f841fb1"
+        },
+        {
+          "members": [
+            "A01-02",
+            "A01-03"
+          ],
+          "changedPixels": 98,
+          "changedBoundsXYXY": [
+            2,
+            12,
+            14,
+            31
+          ],
+          "alphaChangedPixels": 35,
+          "maskSHA256": "ae58cdd6a094d6fa78df407778213969cf6b75527853275a10aa45f3d2387f90"
+        },
+        {
+          "members": [
+            "A01-03",
+            "A01-04"
+          ],
+          "changedPixels": 126,
+          "changedBoundsXYXY": [
+            3,
+            12,
+            13,
+            30
+          ],
+          "alphaChangedPixels": 51,
+          "maskSHA256": "b4eac2eeb242ef90b1ded02cbb494c26fba9466a442034c5f67666f489bb7d79"
+        },
+        {
+          "members": [
+            "A01-04",
+            "A01-05"
+          ],
+          "changedPixels": 94,
+          "changedBoundsXYXY": [
+            3,
+            12,
+            10,
+            30
+          ],
+          "alphaChangedPixels": 65,
+          "maskSHA256": "4195be6632c37ae8f2224f29dc5c2194cff0c27bfbeab756ff1a90527ed790f2"
+        }
+      ]
+    },
+    {
+      "id": "A01:closed-perturbation",
+      "memberRecords": [
+        "A01-06",
+        "A01-07",
+        "A01-08",
+        "A01-09"
+      ],
+      "sourceOrder": "left-to-right strip frame indexes; 16x32 untrimmed source frames",
+      "logicalAnimationIdentity": {
+        "value": "closed door perturbation / locked-attempt demonstration",
+        "confidence": "high",
+        "evidence": "Panel remains closed; edge/inset/handle shifts. The filename supplies locked context, not gameplay mechanics.",
+        "alternatives": [
+          "closed-door shake",
+          "failed opening attempt"
+        ],
+        "disposition": "proposed"
+      },
+      "proposedPlaybackOrder": [
+        "A01-06",
+        "A01-07",
+        "A01-08",
+        "A01-09"
+      ],
+      "orderStatus": "source-order proposal; companion GIF comparison separately recorded",
+      "gameplayPlayback": {
+        "frameDurationsMs": null,
+        "loop": null,
+        "trigger": null,
+        "reverseClosing": null,
+        "lockMechanics": null
+      },
+      "humanApproval": "unregistered",
+      "companionGifEvidence": "A01:closed-perturbation:GIF",
+      "adjacentSourceFrameDeltas": [
+        {
+          "members": [
+            "A01-06",
+            "A01-07"
+          ],
+          "changedPixels": 66,
+          "changedBoundsXYXY": [
+            2,
+            12,
+            14,
+            32
+          ],
+          "alphaChangedPixels": 0,
+          "maskSHA256": "090ea1e39cdb372d2e7088c8db11bd0acc058f5fdf340b5005733ac976c618d3"
+        },
+        {
+          "members": [
+            "A01-07",
+            "A01-08"
+          ],
+          "changedPixels": 86,
+          "changedBoundsXYXY": [
+            2,
+            12,
+            14,
+            32
+          ],
+          "alphaChangedPixels": 0,
+          "maskSHA256": "c50be9129abc480cba8348b06137f9230fd62f92ae541a0f15f97a7ec7b39dc9"
+        },
+        {
+          "members": [
+            "A01-08",
+            "A01-09"
+          ],
+          "changedPixels": 54,
+          "changedBoundsXYXY": [
+            2,
+            12,
+            14,
+            32
+          ],
+          "alphaChangedPixels": 0,
+          "maskSHA256": "3a99122c96c0869c9f55f12e529fbbe28d7e01d2fb202cf5e05c4f158c00275b"
+        }
+      ]
+    }
+  ],
+  "sourceGifDemonstrations": [
+    {
+      "id": "A01:opening:GIF",
+      "sourceId": "src-676aa7fa95891111",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "decodedFrameCount": 5,
+      "loopExtension": 0,
+      "loopMeaning": "0 means indefinite repeat in this source demonstration only",
+      "frames": [
+        {
+          "decodedFrameIndex": 0,
+          "normalizedRgbaSHA256": "770563b58b2f4083505945b02522eb50496cbecfd2bb8019a74dc9eaff793cfa",
+          "durationMs": 300,
+          "exactSourceFrameIds": [
+            "A01-01"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 1,
+          "normalizedRgbaSHA256": "931cc3b0f63d985179536f4ff0273b88277110c1d5f8ced69b9707b6aacdaf86",
+          "durationMs": 100,
+          "exactSourceFrameIds": [
+            "A01-02"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 2,
+          "normalizedRgbaSHA256": "479469d3c47259b19461b209d8fdc984201ddd01fac6790be32ef0d88a811bcc",
+          "durationMs": 100,
+          "exactSourceFrameIds": [
+            "A01-03"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 3,
+          "normalizedRgbaSHA256": "40199c9f00131b16a16cf99eb09be75e1a89f7465ca3f20c9f4f3ff7469e4cf0",
+          "durationMs": 100,
+          "exactSourceFrameIds": [
+            "A01-04"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 4,
+          "normalizedRgbaSHA256": "ad19f578acbe163fa980ed1c764de3a2d53147a381fb203eac74b47974f2d385",
+          "durationMs": 300,
+          "exactSourceFrameIds": [
+            "A01-05"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        }
+      ],
+      "demonstrationCycleDurationMs": 900,
+      "scope": "Companion GIF demonstration, not a runtime timing/loop/trigger contract. Opening demonstration resets to closed; it supplies no closing sequence."
+    },
+    {
+      "id": "A01:closed-perturbation:GIF",
+      "sourceId": "src-6522af586f3a70ce",
+      "frameDimensions": [
+        16,
+        32
+      ],
+      "decodedFrameCount": 4,
+      "loopExtension": 0,
+      "loopMeaning": "0 means indefinite repeat in this source demonstration only",
+      "frames": [
+        {
+          "decodedFrameIndex": 0,
+          "normalizedRgbaSHA256": "770563b58b2f4083505945b02522eb50496cbecfd2bb8019a74dc9eaff793cfa",
+          "durationMs": 500,
+          "exactSourceFrameIds": [
+            "A01-06"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 1,
+          "normalizedRgbaSHA256": "666dce91c941bd209a5f632ab22cd7bc75b10e18e6ffea06fcb0adbdc1736297",
+          "durationMs": 100,
+          "exactSourceFrameIds": [
+            "A01-07"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 2,
+          "normalizedRgbaSHA256": "f3ec02b9d0cee1c58fa2c8c82de7a85c930273e624518548b51ee234162ef6ae",
+          "durationMs": 100,
+          "exactSourceFrameIds": [
+            "A01-08"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        },
+        {
+          "decodedFrameIndex": 3,
+          "normalizedRgbaSHA256": "601d5e2bfb49ecc36f485e1248df5ea64cf42940f6e81ec13705201f427859d8",
+          "durationMs": 100,
+          "exactSourceFrameIds": [
+            "A01-09"
+          ],
+          "deltaToSameIndexPngFrame": {
+            "changedPixels": 0,
+            "changedBoundsXYXY": null,
+            "alphaChangedPixels": 0,
+            "maskSHA256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+          },
+          "decoderDisposalMethod": 2
+        }
+      ],
+      "demonstrationCycleDurationMs": 800,
+      "scope": "Companion GIF demonstration, not a runtime timing/loop/trigger contract. Opening demonstration resets to closed; it supplies no closing sequence."
+    }
+  ],
+  "matching": {
+    "algorithm": "semantic-map-match.py Matcher(grid=1), exact complete normalized RGBA verification",
+    "sheetDomains": [
+      "src-a95ac98be2a853a1",
+      "src-0f0dd399fe177920",
+      "src-ca88ae38545f4618",
+      "src-0b230712e5353bd4",
+      "src-a400274bbf9418ae",
+      "src-4fc9566751d79875",
+      "src-8408e2693febc113",
+      "src-aa3fb037650b8f39",
+      "src-8a0170eb2b105092",
+      "src-01a73d7417dc1efa",
+      "src-e84555c6c726ec54",
+      "src-c05b6f113890bcd2",
+      "src-10aee5e91bc36ae2",
+      "src-63419729cceabd1a",
+      "src-0f60327705f0b013",
+      "src-11b5b269568f91cd",
+      "src-aea1d7b8e7286203",
+      "src-a563204695cfca4e",
+      "src-41776f734c43871b",
+      "src-f8a1ea6ca10eef2d",
+      "src-c0840ba1edc952b3",
+      "src-4b33383e8e0705a5",
+      "src-5678180bbd1872ad",
+      "src-a2e7cc2a82720938",
+      "src-bdf088cf356e4417",
+      "src-e9864aca3cd4203e",
+      "src-9a43b00a32fb8eca",
+      "src-480dcc2b84388964",
+      "src-30bf53197810fb7d",
+      "src-32517289a81b119b",
+      "src-dcfcc62f1d8bf2f6",
+      "src-c03d48d8395874ac",
+      "src-ad71c8e6cb2b85f7",
+      "src-f2dcfded670466ba",
+      "src-766fd4bea603da8c",
+      "src-07ac8b7075eae570",
+      "src-aeecc1e38c8d7397",
+      "src-5dc4e667798ef3c6",
+      "src-7d457f83943bc9b6",
+      "src-ea5d6fae376eef2f",
+      "src-3d84e9bfe7ee772d",
+      "src-899dd20f89d17808",
+      "src-5e6637e6ae307da6",
+      "src-8252cd0da2a807c4",
+      "src-0171c6c1c84d1e3f",
+      "src-bf4117df522546df",
+      "src-d0c591455a60ff73",
+      "src-48f1e916ae891357",
+      "src-86983181da958ee8",
+      "src-98dfe6d91c5748d1",
+      "src-1d4aaf0a5ba2afa1",
+      "src-2cfe6488911836bc",
+      "src-f389f5a9147d62c6",
+      "src-db550ade4e057bc6",
+      "src-dd3917bbc5a90309",
+      "src-517a315a95f823f1",
+      "src-8459ca06a8cd2f3e",
+      "src-6e5562265aba52e5",
+      "src-5fe27319797f46d8",
+      "src-2a81204d77c2d031",
+      "src-8cfcbf4a1be5e972",
+      "src-64b53f8a22d9307d",
+      "src-0939286763b64691",
+      "src-4ef90adffbb18d02",
+      "src-d16c901cca62127a",
+      "src-f48b6d0fd408cccf",
+      "src-e0f04064851cd944",
+      "src-e5cf995edf374706",
+      "src-a607d24d2fc0e9c4",
+      "src-53653b9817dbf95d",
+      "src-b51fe2197162e9bd",
+      "src-62d4edb54733a0fb",
+      "src-fe1c0acaa734508a",
+      "src-46046a41ced999a9",
+      "src-9624cbeb652c7782",
+      "src-6478d1a86d91b105",
+      "src-bcb80c0a43eb8daa",
+      "src-95f05258e66a1761",
+      "src-54f85b366a2a6d79"
+    ],
+    "packedAtlasDomain": "src-1688c64d7a264b1b",
+    "namedAliasCorpus": {
+      "indexSingles": 15964,
+      "sameSizeExportsRead": 5368,
+      "columns": [
+        "packedKey",
+        "sourcePath",
+        "sourceFileSHA256",
+        "sourceRect",
+        "normalizedFrameSHA256"
+      ],
+      "sortedCorpusSHA256": "5bea4a4570dc2b3ac57f76e6b65e68026eeaadc9b95e0760bf1a056f9bf7c26b"
+    },
+    "alphaTightAliasCorpus": {
+      "allIndexedSinglesRead": 15964,
+      "nonemptyExportCount": 15957,
+      "columns": [
+        "packedKey",
+        "sourcePath",
+        "sourceFileSHA256",
+        "alphaTightDimensions",
+        "normalizedAlphaTightSHA256"
+      ],
+      "sortedCorpusSHA256": "825922d86943552d0722708d2d202952a3505aca80aafbf5ab28e40b5ced1c61",
+      "limit": "Exact normalized alpha-tight body comparisons with independent packed-body crop verification; padding/frame difference is retained, not renamed a whole-export alias."
+    },
+    "limit": "No exact frame match excludes only this full untrimmed rectangle within the declared static sheets/atlas and indexed same-size singles. No absence claim for occlusion, alternate padding, clipped art or different pixel states."
+  },
+  "topology": {
+    "sourceFramesAreAssemblyParts": false,
+    "standaloneEligibility": "unknown; animated door visual state does not establish independent world placement",
+    "limit": "A sprite frame is a temporal state, not a spatial piece to concatenate. World opening/collision/anchor remain unknown."
+  },
+  "coverage": {
+    "sourceRecordCount": 9,
+    "distinctFramePixels": 8,
+    "masterOccurrenceCount": 2,
+    "staticThemeOccurrenceCount": 6,
+    "uniqueStaticSourceRectangles": 4,
+    "animationOriginalOnlyRecordCount": 7,
+    "namedExportAliasCount": 0,
+    "alphaTightExportCounterpartCount": 0,
+    "packedPixelOccurrenceCount": 0,
+    "semanticExhaustiveness": "one bounded door family; no full animation, source-group or pack completion"
+  },
+  "review": {
+    "independent": "pending separate exact-hash artifact",
+    "human": "unregistered; no approval or promotion"
+  },
+  "reproduce": {
+    "check": "python3 scripts/semantic-map-animation.py --check",
+    "capture": "python3 scripts/semantic-map-animation.py --check --capture-dir /tmp/tilefun-semantic-A01"
+  }
+}

@@ -27,16 +27,19 @@ an agent-written queue status.
 | E01 | Outdoor benches, camping chairs and picnic tables | V01 contract; S02 | Reconciled and delivered | [27-export proposal](packets/E01-outdoor-seating.md); 25 direct master matches and two original-only exports; [independent review](packets/E01-outdoor-seating-review.md), [sheet delivery](notes/2026-10-04-outdoor-seating-delivery.md) |
 | C01 | Full source-domain and region coverage ledger | S01, S02 | Implemented and checked | [Coverage ledger](coverage-ledger.json), [registry](mapping-registry.json), [evidence](notes/2026-10-04-coverage-ledger.md): 163 windows, all 18 source groups, separate evidence stages |
 | I01 | Interiors sofa and upholstered-seat contrast | V01; S02 | Reconciled and delivered | [Proposal](packets/I01-interior-sofas.md), [review](packets/I01-interior-sofas-review.md); 20 records / 18 units, 15 assembly probes; [sheet delivery](notes/2026-10-04-sofa-delivery.md); four lower-seat roles remain unknown |
-| RB01 | Room Builder path edges and arch assembly | S02-R11/R09 | Proposed; independent review assigned | `room_builder_map` owns `scripts/semantic-map-room-builder.py` and `packets/RB01-room-builder-path-arch.{json,md}`; bounded original-pixel topology probes |
-| E03 | Playground crawl tubes | S02-exteriors/E10 | Proposed; independent review assigned | `playground_map` owns `scripts/semantic-map-playground.py` and `packets/E03-playground-tubes.{json,md}`; 19 ochre shapes plus six palette counterparts |
-| A01 | Small door-animation family | S01 animation inventory | Assigned | `sofa_model` owns `scripts/semantic-map-animation.py` and `packets/A01-animation.{json,md}`; nine native frames across opening and closed-door strips; GIF playback evidence separate from game behavior |
+| RB01 | Room Builder path edges and arch assembly | S02-R11/R09 | Independently reviewed; normalization/presentation next | [25-record packet](packets/RB01-room-builder-path-arch.md), [review](packets/RB01-room-builder-path-arch-review.md); fixed arch/shadow differences, weakened inset extension and open network windows retained |
+| E03 | Playground crawl tubes | S02-exteriors/E10 | Independently reviewed; normalization/presentation next | [25-record packet](packets/E03-playground-tubes.md), [review](packets/E03-playground-tubes-review.md); required continuation ports, finite assemblies, rounded/collared roles qualified |
+| A01 | Small door-animation family | S01 animation inventory | Independently reviewed; normalization/presentation next | [Nine-frame packet](packets/A01-animation.md), [review](packets/A01-animation-review.md); eight pixel states, exact GIF correspondence; game playback remains unknown |
 | E02 | Reconcile supplemental art not represented by master surveys: unmatched singles, theme variants and animations | S01, V01 | Queued | Inventory group counts are available; these sources are not yet semantically surveyed |
 | G01 | Global boundary, duplicate, gap and semantic consistency audit | E01, E02 | Bounded mapped-evidence audit; entire-pack semantic audit remains open | [Expansion audit](notes/2026-10-04-expansion-audit.md); inventory duplicates, mapped frames and coverage consistency; unsegmented art remains unassigned |
 | R01 | Quiet themed contact sheets with compact metadata and lightweight review | V01 presentation adapter; candidate packets | Implemented and validated for three pilots plus E01/I01 | 85 cards / 132 records, variants, assemblies, selected-piece metadata and shared notes; five proposed discovery candidates, no approval/promotion controls |
 | R02 | Act on first owner comments: tree-base names/relations and forest repeat examples | R01 | Implemented and validated | [Feedback evidence](notes/2026-10-04-family-contact-sheets.md#first-owner-comments-and-tree-follow-up); cabinets/scrapyard have positive whole-sheet comments; F05 ground correction and three varied-offset examples accepted in chat; exact source/recipe recorded; boundaries remain unresolved |
 
-Next action: independently review the frozen Room Builder path/arch and playground
-tube packets; investigate the bounded A01 door-animation sequence and counterparts. Continue explicit supplemental reconciliation and whole-source
+Next action: add explicit RB01/E03/A01 adapters and quiet owner-facing sheets;
+retain fixed versus open assemblies, variant exceptions and temporal frame identity.
+[Expansion reconciliation](notes/2026-10-04-component-animation-expansion.md) records
+59 reviewed component/frame records without additional normalized coverage credit.
+Continue explicit supplemental reconciliation and whole-source
 gap auditing without treating surveyed windows as completed semantics. R02 delivery
 is recorded in the [integration note](notes/2026-10-04-tree-sheet-integration.md).
 Read the [coordinator corrections](notes/2026-10-04-pilot-reconciliation.md)
@@ -44,5 +47,5 @@ alongside all frozen proposals. Worker models are GPT-6.1 Sol/high. The coordina
 alone commits checkpoints. Reconciled research does not mean human-approved or
 ready in the Workshop; exact review delivery remains R01.
 
-Keep rows bounded as the survey reveals themes; replace E01 with linked theme
-assignments rather than assigning the entire remaining atlas to one worker.
+Keep future assignments bounded by theme rather than assigning the entire
+remaining atlas to one worker.

@@ -1,6 +1,6 @@
 # Modern Exteriors and Interiors semantic mapping plan
 
-Status: five family sheets delivered; Room Builder, playground and animation packets active; whole-pack mapping continues.
+Status: five family sheets delivered; Room Builder, playground and animation packets independently reviewed; whole-pack mapping continues.
 Created: 2026-10-04.
 
 Build an exhaustive semantic map of the Modern Exteriors and Modern Interiors

@@ -55,3 +55,16 @@ normalized integration preserves the original-only master status even though two
 exact public PNG copies now support ordinary browsing. I01 is normalized as twenty records / eighteen proposal units and has a
 [fifth family sheet](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/families?family=sofas)
 with eighteen cards and nine positive assembly examples. Four roles remain unknown.
+
+
+## Reviewed expansion awaiting normalization
+
+| Packet | Source record scope | Independent review |
+| --- | --- | --- |
+| [RB01 Room Builder](RB01-room-builder-path-arch.md) · [JSON](RB01-room-builder-path-arch.json) | 17 floor pieces, six fixed arch cells and two shadow strips | [Review](RB01-room-builder-path-arch-review.md): 25 records, 16 assembly and two contextual wall probes; inset/height alternatives and shadow differences retained |
+| [E03 Playground tubes](E03-playground-tubes.md) · [JSON](E03-playground-tubes.json) | 19 ochre shapes plus six blue/red counterparts | [Review](E03-playground-tubes-review.md): 25 records, eight frozen probes and five supplemental challenges; required cuts distinguished from entrance mouths |
+| [A01 Door animation](A01-animation.md) · [JSON](A01-animation.json) | Nine temporal source frames / eight pixel states / two sequences | [Review](A01-animation-review.md): full static/packed/corpus checks and exact companion GIF correspondence; game playback remains unknown |
+
+These 59 researched component/frame records have registered, pinned reviews but
+no normalized coverage credit yet. They need explicit format adapters and quiet
+owner-facing sheets; no new human approval or gameplay metadata is inferred.
