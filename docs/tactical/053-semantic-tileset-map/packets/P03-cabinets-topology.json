@@ -1,0 +1,295 @@
+{
+  "schema": "semantic-topology-supplement-v1",
+  "packet": "P03",
+  "revision": 1,
+  "date": "2026-10-04",
+  "state": "research-metadata-not-runtime-enforced",
+  "baseProposal": {
+    "path": "P03-cabinets.json",
+    "sha256": "c22f7b16e24816a231883bad04cd29e43eac2ce81f09f444d4bc5ffad7875254"
+  },
+  "evidence": {
+    "ownerClarification": {
+      "date": "2026-10-04",
+      "scope": "All pieces 41-44 in normal, black-shadow and shadowless variants shown in the owner screenshot.",
+      "statement": "These are partials meant to be combined with others; they are not allowed to be standalone.",
+      "establishes": [
+        "standaloneAllowed=false",
+        "requiresAssembly=true"
+      ],
+      "doesNotEstablish": [
+        "approval of every assembly",
+        "runtime promotion",
+        "gameplay geometry"
+      ]
+    },
+    "agentEvidence": {
+      "proposalPath": "P03-cabinets.json",
+      "reviewPath": "P03-cabinets-review.md",
+      "basis": "Open/closed source edges, frame dimensions, positive cap/middle assemblies and reversed-end controls; reviewer also tested repeated/reordered middles.",
+      "reviewSha256": "d785fad5cd8629d31ee1781287f5b1fbc9f50ea8d2af8a2d02adf221f18f7465"
+    }
+  },
+  "family": "modular-wood-cabinet-kit",
+  "components": [
+    {
+      "conceptId": "P03-C41",
+      "memberRecords": [
+        "P03-41-normal",
+        "P03-41-black-shadow",
+        "P03-41-shadowless"
+      ],
+      "role": "left-end",
+      "standaloneAllowed": false,
+      "requiresAssembly": true,
+      "left": {
+        "state": "closed-end",
+        "compatibleConceptIds": []
+      },
+      "right": {
+        "state": "join-required",
+        "compatibleConceptIds": [
+          "P03-C42",
+          "P03-C43",
+          "P03-C44"
+        ]
+      },
+      "sourceAssemblyRole": "left-end"
+    },
+    {
+      "conceptId": "P03-C42",
+      "memberRecords": [
+        "P03-42-normal",
+        "P03-42-black-shadow",
+        "P03-42-shadowless"
+      ],
+      "role": "middle",
+      "standaloneAllowed": false,
+      "requiresAssembly": true,
+      "left": {
+        "state": "join-required",
+        "compatibleConceptIds": [
+          "P03-C41",
+          "P03-C42",
+          "P03-C43"
+        ]
+      },
+      "right": {
+        "state": "join-required",
+        "compatibleConceptIds": [
+          "P03-C42",
+          "P03-C43",
+          "P03-C44"
+        ]
+      },
+      "sourceAssemblyRole": "repeatable-reflective-middle"
+    },
+    {
+      "conceptId": "P03-C43",
+      "memberRecords": [
+        "P03-43-normal",
+        "P03-43-black-shadow",
+        "P03-43-shadowless"
+      ],
+      "role": "middle",
+      "standaloneAllowed": false,
+      "requiresAssembly": true,
+      "left": {
+        "state": "join-required",
+        "compatibleConceptIds": [
+          "P03-C41",
+          "P03-C42",
+          "P03-C43"
+        ]
+      },
+      "right": {
+        "state": "join-required",
+        "compatibleConceptIds": [
+          "P03-C42",
+          "P03-C43",
+          "P03-C44"
+        ]
+      },
+      "sourceAssemblyRole": "repeatable-solid-middle"
+    },
+    {
+      "conceptId": "P03-C44",
+      "memberRecords": [
+        "P03-44-normal",
+        "P03-44-black-shadow",
+        "P03-44-shadowless"
+      ],
+      "role": "right-end",
+      "standaloneAllowed": false,
+      "requiresAssembly": true,
+      "left": {
+        "state": "join-required",
+        "compatibleConceptIds": [
+          "P03-C41",
+          "P03-C42",
+          "P03-C43"
+        ]
+      },
+      "right": {
+        "state": "closed-end",
+        "compatibleConceptIds": []
+      },
+      "sourceAssemblyRole": "right-end"
+    }
+  ],
+  "assemblyTopology": {
+    "status": "proposed-from-inspected-and-tested-joins",
+    "axis": "source-image-x",
+    "coordinateSpace": "untrimmed-source-frame-pixels",
+    "memberFrameDimensions": [
+      16,
+      48
+    ],
+    "nextMemberOffset": [
+      16,
+      0
+    ],
+    "boundaryRule": "Exactly one left end first, zero or more middle pieces, exactly one right end last; every join-required edge must connect to a compatible neighbor.",
+    "startConceptId": "P03-C41",
+    "middleConceptIds": [
+      "P03-C42",
+      "P03-C43"
+    ],
+    "endConceptId": "P03-C44",
+    "minimumMiddleCount": 0,
+    "allRequiredJoinsMustBeSatisfied": true,
+    "internalClosedEndsAllowed": false,
+    "variantPolicy": {
+      "sameVariantRequired": true,
+      "basis": "Conservative scope: all inspected positive/negative assemblies use one consistent variant; cross-variant joins are untested, not demonstrated invalid."
+    },
+    "placementPolicy": {
+      "individualComponents": "assembly-editor-only",
+      "completedAssembly": "candidate-for-review",
+      "geometry": "unknown"
+    },
+    "limits": [
+      "Topology-valid does not mean visually verified or human-approved.",
+      "Unbounded middle repetition and all combinations are not rendered or reviewed.",
+      "These are source-image left/right roles, not world compass directions.",
+      "Do not auto-trim frames before joining or infer collisions from the frame."
+    ]
+  },
+  "verifiedRenderSequences": {
+    "variants": [
+      "normal",
+      "black-shadow",
+      "shadowless"
+    ],
+    "proposal": [
+      [
+        "P03-C41",
+        "P03-C44"
+      ],
+      [
+        "P03-C41",
+        "P03-C43",
+        "P03-C44"
+      ],
+      [
+        "P03-C41",
+        "P03-C42",
+        "P03-C44"
+      ],
+      [
+        "P03-C41",
+        "P03-C42",
+        "P03-C43",
+        "P03-C44"
+      ]
+    ],
+    "independentReview": [
+      [
+        "P03-C41",
+        "P03-C42",
+        "P03-C42",
+        "P03-C44"
+      ],
+      [
+        "P03-C41",
+        "P03-C43",
+        "P03-C43",
+        "P03-C44"
+      ],
+      [
+        "P03-C41",
+        "P03-C43",
+        "P03-C42",
+        "P03-C44"
+      ]
+    ],
+    "status": "agent-checked-renders-not-human-approved"
+  },
+  "invalidTopologyExamples": [
+    {
+      "members": [
+        "P03-C41"
+      ],
+      "reason": "Unconnected required edge; component cannot stand alone."
+    },
+    {
+      "members": [
+        "P03-C42"
+      ],
+      "reason": "Unconnected required edge; component cannot stand alone."
+    },
+    {
+      "members": [
+        "P03-C43"
+      ],
+      "reason": "Unconnected required edge; component cannot stand alone."
+    },
+    {
+      "members": [
+        "P03-C44"
+      ],
+      "reason": "Unconnected required edge; component cannot stand alone."
+    },
+    {
+      "members": [
+        "P03-C42",
+        "P03-C43"
+      ],
+      "reason": "Missing both outer caps; original source sampler is not a complete cabinet."
+    },
+    {
+      "members": [
+        "P03-C44",
+        "P03-C42",
+        "P03-C41"
+      ],
+      "reason": "Reversed caps expose required joins externally and put closed ends internally."
+    },
+    {
+      "members": [
+        "P03-C41",
+        "P03-C42"
+      ],
+      "reason": "Missing right cap."
+    },
+    {
+      "members": [
+        "P03-C42",
+        "P03-C44"
+      ],
+      "reason": "Missing left cap."
+    }
+  ],
+  "validationHandoff": {
+    "task": "V01",
+    "requirements": [
+      "Resolve base proposal by exact hash and all 12 explicit member records.",
+      "Reject lone components, unclosed chains, reversed caps, incompatible joins, wrong offsets and mixed-variant assemblies within this policy.",
+      "Accept tested complete sequences as topology-valid while retaining separate render-review and human-approval states.",
+      "Preserve unknown standalone eligibility for other candidates; never default an unidentified component to a whole object.",
+      "Carry the component-only placement restriction into later catalog/generator/editor consumers."
+    ]
+  },
+  "registeredHumanApproval": "none",
+  "runtimeEnforcement": "not-implemented"
+}

@@ -1,5 +1,10 @@
 # P03 — Wooden cabinets, component kit and shadow variants
 
+Coordinator addendum, 2026-10-04: the owner explicitly confirmed that all pictured
+41–44 variants are partials and cannot stand alone. Apply the
+[topology supplement](P03-cabinets-topology.json) alongside this frozen proposal;
+it records required connections and completeness, with enforcement still pending.
+
 ## Assignment
 
 - Scope: living-room vendor singles 37–45 in normal, black-shadow and shadowless

@@ -36,3 +36,9 @@ fields are trial formats; they are not a unified runtime catalog contract.
 Read the [coordinator reconciliation](../notes/2026-10-04-pilot-reconciliation.md)
 before reusing proposal labels or evidence. It supplies authoritative corrections
 to the frozen snapshots while preserving each reviewed JSON hash.
+
+The [P03 topology supplement](P03-cabinets-topology.json) adds the owner's explicit
+non-standalone rule for all 12 records of cabinet components 41–44, with required
+connections and assembly completeness. These constraints are saved metadata;
+validator and runtime enforcement remain pending. This clarification is not a
+registered approval of every rendered combination or of gameplay geometry.

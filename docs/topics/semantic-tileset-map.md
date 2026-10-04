@@ -28,6 +28,16 @@ approval separately. Naming an object does not establish its gameplay geometry.
 Agents record alternatives and reproducible refutation evidence; unresolved fields
 remain visible. No source art or runtime definitions have changed for this effort.
 
+Assembly topology is required metadata. The owner clarified that cabinet pieces
+41–44 are non-standalone partials in all three shadow variants. Their
+[topology supplement](../tactical/053-semantic-tileset-map/packets/P03-cabinets-topology.json)
+records explicit member IDs, forbidden standalone placement, required left/right
+connections, compatible members and complete-chain rules. This supplements the
+frozen reviewed proposal; runtime enforcement is pending. V01 must validate these
+constraints and preserve the distinction between valid topology, tested rendering
+and human approval. Future catalogs/generators must not offer such pieces as whole
+props; assembly editors can still expose them as components.
+
 ## Plan and next work
 
 The [source manifest](../tactical/053-semantic-tileset-map/source-manifest.json)
