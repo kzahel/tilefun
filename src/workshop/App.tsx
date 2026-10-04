@@ -247,6 +247,7 @@ export function App() {
               "car-projection",
               "character-lab",
               "art",
+              "families",
               "buildings",
               "roads",
               "districts",

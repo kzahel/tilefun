@@ -67,7 +67,7 @@ export function FamilySheetNote({
           }}
         >
           <label>
-            {member ? `Note about ${member.label}` : `Note about ${family.name}`}
+            {member ? `Note about ${member.label}` : `Note about the whole ${family.name} sheet`}
             <textarea
               value={draft}
               rows={3}

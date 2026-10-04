@@ -77,3 +77,30 @@ Reproduction: `python3 scripts/build-family-sheets.py --check`,
 writes six contact-sheet captures under `/tmp/tilefun-family-*-{desktop,phone}.png`.
 The coordinator inspected the desktop and phone captures; they are disposable
 evidence reproducible from committed data and source images.
+
+
+## Owner follow-up: navigation and whole-sheet comments
+
+The owner found that no sidebar item indicated the current family page and that
+selecting a piece hid the family discussion entry point. Asset families is now in
+the sidebar's native route list, using the existing active-page semantics plus a
+stronger inset marker shared by all sidebar links.
+
+**Comment on whole sheet** is always available above the selected-piece details.
+Its form has a separate family-wide draft and sends a note with no member target,
+even while a piece remains selected. **Discuss this piece** remains a separate
+control. Positive prose such as “Everything here looks perfect” is saved as a
+whole-sheet comment; this change adds no automatic promotion or approval action.
+
+Browser coverage includes 1440px, the reported 966px viewport, and 390px phone
+layouts; active navigation follows family tabs and moves to Source art when
+navigating away. Mocked writes verify the whole-sheet context and retained piece
+selection. Desktop/tablet/phone captures were inspected.
+
+Follow-up validation: typechecks, lint (existing warnings), catalog/manifest
+generation and production build passed. The unit run passed 1,496 tests with one
+furniture-physics timeout; all 12 tests in that file passed on a focused rerun.
+All eight family-sheet browser tests passed in the full regression run.
+The full browser run passed 332 of 333 tests; standalone review was blocked by
+the stale-build guard after concurrent shared-rendering changes. Rebuilding
+against the current manifest resolved it, and the standalone test passed.

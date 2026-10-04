@@ -39,6 +39,7 @@
 }
 .family-heading {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
@@ -197,6 +198,15 @@
 }
 .family-note form {
   max-width: 650px;
+}
+.family-sheet-discussion {
+  margin-bottom: 18px;
+}
+.family-sheet-discussion summary {
+  width: fit-content;
+  border: 1px solid #786e4d;
+  border-radius: 5px;
+  padding: 8px 12px;
 }
 .family-note label {
   color: var(--family-ink);

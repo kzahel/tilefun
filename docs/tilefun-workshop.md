@@ -63,7 +63,8 @@ presents cabinets, trees and scrapyard objects as large themed contact sheets.
 Switch family, shadow/color variant and pixel zoom; select a numbered piece for
 short metadata and an optional shared note. Complete objects and pieces to combine
 are grouped separately, with assembly examples below. Links retain the selected
-piece and variant. **Discuss this family/piece** uses the existing shared inbox,
+piece and variant. **Comment on whole sheet** stays available even when a piece is selected;
+**Discuss this piece** adds a separate piece-specific note. Both use the existing shared inbox,
 with drafts scoped to the exact family revision, piece and variant.
 
 These first three sheets are labeled **Proposed**. Saving a note does not approve

@@ -42,7 +42,7 @@ async function pixels(canvas: Locator) {
   });
 }
 
-test("all three contact sheets fit desktop and 390px phone with the complete piece inventory", async ({
+test("all three contact sheets fit desktop, tablet and 390px phone with the complete piece inventory", async ({
   page,
 }) => {
   await mockDiscussions(page);
@@ -52,6 +52,7 @@ test("all three contact sheets fit desktop and 390px phone with the complete pie
   const counts = { cabinets: 9, trees: 14, scrapyard: 29 };
   for (const viewport of [
     { name: "desktop", width: 1440, height: 1000 },
+    { name: "tablet", width: 966, height: 1024 },
     { name: "phone", width: 390, height: 844 },
   ]) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
@@ -65,6 +66,11 @@ test("all three contact sheets fit desktop and 390px phone with the complete pie
       await tab.click();
       await ready(page, counts[family.id]);
       await expect(tab).toHaveAttribute("aria-current", "page");
+      await expect(
+        page
+          .getByRole("complementary", { name: "Workshop navigation", includeHidden: true })
+          .getByRole("link", { name: "Asset families", includeHidden: true }),
+      ).toHaveAttribute("aria-current", "page");
       await expect(page.getByRole("heading", { name: family.name, exact: true })).toBeVisible();
       await expect(page.locator(".family-proposed")).toHaveText("Proposed");
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
@@ -155,7 +161,7 @@ test("discussion drafts stay scoped to family, piece and variant and send exact 
   await page.goto(`${URL}?family=cabinets&member=P03-C41&variant=normal`);
   await ready(page, 9);
   await page.getByText("Discuss this piece", { exact: true }).click();
-  const note = page.getByRole("textbox");
+  const note = page.locator(".family-piece-discussion").getByRole("textbox");
   await note.fill("Left end, normal shadow");
   await page.getByRole("combobox", { name: "Shadow" }).selectOption("black-shadow");
   await expect(note).toHaveValue("");
@@ -165,9 +171,10 @@ test("discussion drafts stay scoped to family, piece and variant and send exact 
   await page.getByText("Discuss this piece", { exact: true }).click();
   await expect(note).toHaveValue("Left end, dark shadow");
   await page.getByRole("button", { name: "Clear selection", exact: true }).click();
-  await page.getByText("Discuss this family", { exact: true }).click();
-  await expect(note).toHaveValue("");
-  await note.fill("Whole cabinet family");
+  await page.getByText("Comment on whole sheet", { exact: true }).click();
+  const sheetNote = page.locator(".family-sheet-discussion").getByRole("textbox");
+  await expect(sheetNote).toHaveValue("");
+  await sheetNote.fill("Whole cabinet family");
   await page.getByRole("button", { name: "42. Reflective middle", exact: true }).click();
   await page.getByText("Discuss this piece", { exact: true }).click();
   await expect(note).toHaveValue("");
@@ -182,7 +189,10 @@ test("discussion drafts stay scoped to family, piece and variant and send exact 
   await page.getByText("Discuss this piece", { exact: true }).click();
   await expect(note).toHaveValue("");
   await note.fill("Please check this pale trunk.");
-  await page.getByRole("button", { name: "Save note", exact: true }).click();
+  await page
+    .locator(".family-piece-discussion")
+    .getByRole("button", { name: "Save note", exact: true })
+    .click();
   await expect.poll(() => events.length).toBe(1);
   const family = required(catalog.families.find((item) => item.id === "trees"));
   const source = required(catalog.sources.find((item) => item.id === "me-complete"));
@@ -273,4 +283,50 @@ test("an earlier proposal link cannot attach new discussion to the current revis
     page.getByRole("button", { name: "2. Tree · pale lower section", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
   expect(events).toEqual([]);
+});
+
+test("whole-sheet comments remain available while a piece is selected", async ({ page }) => {
+  const events = await mockDiscussions(page);
+  await page.goto(`${URL}?family=cabinets&member=P03-C43&variant=normal`);
+  await ready(page, 9);
+  for (const width of [1440, 966, 390]) {
+    await page.setViewportSize({ width, height: 1024 });
+    const discussion = page.locator(".family-sheet-discussion");
+    await discussion.getByText("Comment on whole sheet", { exact: true }).click();
+    await discussion.getByRole("textbox").fill("Everything here looks perfect");
+    await discussion.getByRole("button", { name: "Save note", exact: true }).click();
+    await expect.poll(() => events.length).toBe([1440, 966, 390].indexOf(width) + 1);
+    const event = events.at(-1);
+    expect(event).toMatchObject({
+      type: "source",
+      note: "Wooden cabinets · Whole family\n\nEverything here looks perfect",
+    });
+    if (event?.type !== "source") throw new Error("Expected a source note");
+    expect(event.sliceKeys).toContain("family-sheet:cabinets");
+    expect(event.sliceKeys.some((key) => key.startsWith("family-member:"))).toBe(false);
+    expect(event).not.toHaveProperty("verdict");
+    await expect(page).toHaveURL(/member=P03-C43/);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
+      true,
+    );
+    await page.screenshot({ path: `/tmp/tilefun-family-comments-${width}.png` });
+    await discussion.getByText("Comment on whole sheet", { exact: true }).click();
+  }
+  await page.getByRole("button", { name: "Toggle tool navigation" }).click();
+  const nav = page.getByRole("complementary", { name: "Workshop navigation" });
+  await expect(nav.getByRole("link", { name: "Asset families" })).toBeVisible();
+  await expect(nav.getByRole("link", { name: "Asset families" })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await nav.getByRole("link", { name: "Source art", exact: true }).click();
+  await page.getByRole("button", { name: "Toggle tool navigation" }).click();
+  await expect(nav.getByRole("link", { name: "Source art", exact: true })).toHaveAttribute(
+    "aria-current",
+    "page",
+  );
+  await expect(nav.getByRole("link", { name: "Asset families" })).not.toHaveAttribute(
+    "aria-current",
+    "page",
+  );
 });

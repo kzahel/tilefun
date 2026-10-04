@@ -50,7 +50,9 @@ now cover cabinets, trees and scrapyard pieces: 52 cards expose all 85 source
 records through variant selectors. All three are marked Proposed. Notes reuse
 the Workshop outbox/inbox and pin family revision, selected member, variant and
 source layers. They do not approve or promote metadata. The current slice has no
-approval buttons or generator placement enforcement.
+approval buttons or generator placement enforcement. Asset families appears in the
+sidebar with an active-page highlight. **Comment on whole sheet** remains visible
+with a selected piece and saves a family-wide note; piece discussion remains separate.
 
 ## Plan and next work
 

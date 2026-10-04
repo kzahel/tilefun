@@ -119,6 +119,17 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
 
       <Facts facts={family.facts} className="family-shared-facts" />
 
+      <details className="family-note family-sheet-discussion" key={family.id}>
+        <summary>Comment on whole sheet</summary>
+        <FamilySheetNote
+          catalog={catalog}
+          family={family}
+          member={null}
+          variantId={variantId}
+          imagesReady={!!images.data && !images.error}
+        />
+      </details>
+
       <div className={`family-detail ${selected ? "has-selection" : ""}`} ref={detail}>
         <div className="family-detail-copy" aria-live="polite">
           {selected ? (
@@ -140,16 +151,21 @@ function LoadedFamilySheets({ catalog }: { catalog: FamilySheetCatalog }) {
             </p>
           )}
         </div>
-        <details className="family-note" key={`${family.id}:${selected?.id ?? "family"}`}>
-          <summary>{selected ? "Discuss this piece" : "Discuss this family"}</summary>
-          <FamilySheetNote
-            catalog={catalog}
-            family={family}
-            member={selected ?? null}
-            variantId={variantId}
-            imagesReady={!!images.data && !images.error}
-          />
-        </details>
+        {selected ? (
+          <details
+            className="family-note family-piece-discussion"
+            key={`${family.id}:${selected.id}`}
+          >
+            <summary>Discuss this piece</summary>
+            <FamilySheetNote
+              catalog={catalog}
+              family={family}
+              member={selected}
+              variantId={variantId}
+              imagesReady={!!images.data && !images.error}
+            />
+          </details>
+        ) : null}
       </div>
 
       <ErrorMessage error={images.error} />

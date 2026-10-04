@@ -209,6 +209,7 @@ time {
   background: #d7e1d1;
   color: #17372e;
   font-weight: 700;
+  box-shadow: inset 3px 0 #17372e;
 }
 .nav-heading {
   font-size: 10px;
