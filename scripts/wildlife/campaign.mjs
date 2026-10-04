@@ -166,22 +166,48 @@ export function queue(root = ROOT) {
   const productionHold = existsSync(holdPath) ? read(holdPath) : null;
   const motionContractPath = resolve(root, "art-source/wildlife-v2/body-motion-contract.json");
   const motionContract = existsSync(motionContractPath) ? read(motionContractPath) : null;
+  const inspectionPath = resolve(root, "data/wildlife-campaign-v2/body-motion-audits.json");
+  const inspections = existsSync(inspectionPath) ? read(inspectionPath) : { entries: {} };
+  const motionContractSha256 = motionContract ? hash(readFileSync(motionContractPath)) : null;
   const motionGatePath = resolve(root, "data/wildlife-campaign-v2/body-motion-gate.json");
   const motionGate = existsSync(motionGatePath) ? read(motionGatePath) : null;
+  const scopePath = resolve(root, "art-source/wildlife-v2/repair-scope.json");
+  const scope = existsSync(scopePath) ? read(scopePath) : null;
+  const repairOnly = scope?.allowNewAnimals === false;
   const prototype = new Map();
   const tasks = animals.map((animal) => {
     const key = `${animal.form}:${animal.family ?? ""}:${animal.bodyPlan}:${animal.media.join("+")}:${(animal.locomotion ?? []).join("+")}`;
     const leader = prototype.get(key);
     if (!leader) prototype.set(key, animal.id);
     const errors = receiptErrors(root, receipts[animal.id], animal.id);
+    const receipt = receipts[animal.id];
+    const inspection = inspections.entries?.[animal.id];
+    const alreadyCompliant = Boolean(
+      receipt &&
+        motionContract &&
+        inspection?.result === "already-compliant" &&
+        inspection.observer === "coordinator" &&
+        inspection.revision === receipt.revision &&
+        inspection.motionContract === motionContract.identity &&
+        inspection.receiptSha256 === hash(JSON.stringify(receipt)) &&
+        inspection.contractSha256 === motionContractSha256 &&
+        typeof inspection.weightTransfer === "string" &&
+        inspection.weightTransfer.trim().length >= 24,
+    );
     const held = productionHold?.affected?.[animal.id] ?? motionContract?.affected?.[animal.id];
     const qualityHold =
-      held && held.revision === receipts[animal.id]?.revision ? held.reason : null;
+      !alreadyCompliant && held && held.revision === receipt?.revision ? held.reason : null;
     if (qualityHold) errors.push(`Motion review required: ${qualityHold}`);
-    const receipt = receipts[animal.id];
+    const scopeExcluded = repairOnly && !scope.existingAnimalIds.includes(animal.id);
+    const repairEligible =
+      repairOnly &&
+      Boolean(receipt) &&
+      scope.existingAnimalIds.includes(animal.id) &&
+      scope.repairCandidates.includes(animal.id);
     if (
       receipt &&
       motionContract &&
+      !alreadyCompliant &&
       animal.bodyPlan === "quadruped" &&
       animal.locomotion?.includes("walk")
     ) {
@@ -197,7 +223,13 @@ export function queue(root = ROOT) {
       valid: errors.length === 0,
       errors,
       qualityHold,
-      state: statuses[animal.id]?.status ?? "queued",
+      scopeExcluded,
+      repairEligible,
+      alreadyCompliant,
+      state:
+        scopeExcluded && statuses[animal.id]?.status !== "blocked"
+          ? "out-of-scope"
+          : (statuses[animal.id]?.status ?? "queued"),
     };
   });
   const byId = new Map(tasks.map((task) => [task.id, task]));
@@ -205,6 +237,7 @@ export function queue(root = ROOT) {
   errors.push(...motionGateErrors(root, motionContract, motionGate, receipts));
   if (productionHold && productionHold.active !== false)
     errors.push(`Production paused: ${productionHold.reason ?? "owner quality hold"}`);
+  if (repairOnly) errors.push("New animal production disabled: owner scope is repairs only");
   const next = errors.length
     ? null
     : tasks.find(
@@ -217,6 +250,10 @@ export function queue(root = ROOT) {
     tasks,
     errors,
     productionHold,
+    scope,
+    repairs: tasks
+      .filter((task) => task.repairEligible && !task.valid)
+      .sort((a, b) => scope.priority.indexOf(a.id) - scope.priority.indexOf(b.id)),
     next: next ?? null,
     valid: tasks.filter((t) => t.valid).length,
     total: tasks.length,
@@ -226,6 +263,19 @@ export function queue(root = ROOT) {
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const result = queue();
   if (process.argv.includes("--next")) console.log(JSON.stringify(result.next, null, 2));
+  else if (process.argv.includes("--repairs"))
+    console.log(
+      JSON.stringify(
+        result.repairs.map((task) => ({
+          id: task.id,
+          valid: task.valid,
+          qualityHold: task.qualityHold,
+          instruction: result.scope.editCondition,
+        })),
+        null,
+        2,
+      ),
+    );
   else
     console.log(
       JSON.stringify(

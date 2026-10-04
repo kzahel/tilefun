@@ -1,7 +1,7 @@
 # Fresh wildlife production with supervised projection pilots
 
-Status: source checkpoint committed; broad production stopped on 2026-10-04
-after owner rigid-torso rejection. New sheep/pig motion prototypes precede restart.
+Status: source checkpoint committed; new-animal production canceled. Only existing
+frozen-torso repairs remain, starting with sheep/pig and coordinator motion review.
 Owner: [Wildlife](../topics/wildlife.md).
 
 ## Authorized sequence

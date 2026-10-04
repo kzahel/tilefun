@@ -367,3 +367,121 @@ test("future walkers cannot count as ready without current motion review", (t) =
   save();
   assert.equal(queue(f.root).valid, 1);
 });
+
+test("repair-only scope prevents new species selection after motion gates pass", (t) => {
+  const f = motionFixture(t);
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: [
+      {
+        id: "sheep",
+        family: "Farm",
+        form: "natural",
+        bodyPlan: "quadruped",
+        media: ["ground"],
+        locomotion: ["walk"],
+      },
+      { id: "robin", family: "Birds", form: "natural", bodyPlan: "winged", media: ["air"] },
+    ],
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", {
+    receipts: { ...f.receipts, ...f.motionReceipts },
+    tasks: {},
+  });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  f.write("data/wildlife-campaign-v2/body-motion-gate.json", f.motionGate);
+  assert.equal(queue(f.root).next.id, "robin");
+  f.write("art-source/wildlife-v2/repair-scope.json", {
+    allowNewAnimals: false,
+    existingAnimalIds: ["sheep"],
+    repairCandidates: ["sheep"],
+    priority: ["sheep"],
+  });
+  const result = queue(f.root);
+  assert.equal(result.next, null);
+  assert.match(result.errors.join(" "), /New animal production disabled/);
+  assert.equal(result.tasks.find((task) => task.id === "robin").state, "out-of-scope");
+  assert.deepEqual(result.repairs, []);
+});
+
+test("repair list includes only unresolved candidates with existing source receipts", (t) => {
+  const f = motionFixture(t);
+  const sheep = { ...f.receipt("sheep"), revision: "draft-v1" };
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: ["sheep", "goat", "robin"].map((id) => ({
+      id,
+      form: "natural",
+      bodyPlan: "quadruped",
+      media: ["ground"],
+      locomotion: ["walk"],
+    })),
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", {
+    receipts: { ...f.receipts, sheep },
+    tasks: {},
+  });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  f.write("art-source/wildlife-v2/repair-scope.json", {
+    allowNewAnimals: false,
+    existingAnimalIds: ["sheep", "goat"],
+    repairCandidates: ["sheep", "goat"],
+    priority: ["goat", "sheep"],
+  });
+  assert.deepEqual(
+    queue(f.root).repairs.map((task) => task.id),
+    ["sheep"],
+  );
+});
+
+test("coordinator inspection can preserve already-good pixels and old receipt", (t) => {
+  const f = motionFixture(t);
+  const sheep = { ...f.receipt("sheep"), revision: "draft-v1" };
+  const preserved = JSON.stringify(sheep);
+  f.write("art-source/wildlife-v2/roster.json", {
+    animals: [
+      {
+        id: "sheep",
+        form: "natural",
+        bodyPlan: "quadruped",
+        media: ["ground"],
+        locomotion: ["walk"],
+      },
+    ],
+  });
+  f.write("data/wildlife-campaign-v2/progress.json", {
+    receipts: { ...f.receipts, sheep },
+    tasks: {},
+  });
+  f.write("data/wildlife-campaign-v2/pilot-gate.json", f.gate);
+  f.write("art-source/wildlife-v2/repair-scope.json", {
+    allowNewAnimals: false,
+    existingAnimalIds: ["sheep"],
+    repairCandidates: ["sheep"],
+    priority: ["sheep"],
+  });
+  assert.equal(queue(f.root).valid, 0);
+  const inspection = {
+    result: "already-compliant",
+    observer: "coordinator",
+    revision: sheep.revision,
+    motionContract: f.contract.identity,
+    receiptSha256: digest(JSON.stringify(sheep)),
+    contractSha256: digest(JSON.stringify(f.contract)),
+    weightTransfer:
+      "Coordinator inspected native/transferred body motion and planted contacts in every direction.",
+  };
+  const save = () =>
+    f.write("data/wildlife-campaign-v2/body-motion-audits.json", {
+      entries: { sheep: inspection },
+    });
+  save();
+  assert.equal(queue(f.root).valid, 1);
+  assert.deepEqual(queue(f.root).repairs, []);
+  assert.equal(JSON.stringify(sheep), preserved);
+  inspection.observer = "production-agent";
+  save();
+  assert.equal(queue(f.root).valid, 0);
+  inspection.observer = "coordinator";
+  inspection.receiptSha256 = "wrong receipt";
+  save();
+  assert.equal(queue(f.root).valid, 0);
+});

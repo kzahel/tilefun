@@ -1,0 +1,69 @@
+{
+  "identity": "wildlife-repair-only-20261004",
+  "mode": "repair-existing",
+  "allowNewAnimals": false,
+  "reason": "Owner limits further work to touching up existing animals with frozen walking torsos. No more new animals.",
+  "existingAnimalIds": [
+    "ant",
+    "cat",
+    "cow",
+    "deer",
+    "dog",
+    "elephant",
+    "fish",
+    "fox",
+    "frog",
+    "giraffe",
+    "goat",
+    "harbor-seal",
+    "horse",
+    "kangaroo",
+    "king-cobra",
+    "mallard-duck",
+    "manta-ray",
+    "penguin",
+    "piglet",
+    "rabbit",
+    "robin",
+    "sheep"
+  ],
+  "repairCandidates": [
+    "fox",
+    "elephant",
+    "giraffe",
+    "cat",
+    "dog",
+    "deer",
+    "cow",
+    "sheep",
+    "horse",
+    "piglet",
+    "goat"
+  ],
+  "priority": [
+    "sheep",
+    "piglet",
+    "deer",
+    "horse",
+    "goat",
+    "fox",
+    "cow",
+    "cat",
+    "dog",
+    "elephant",
+    "giraffe"
+  ],
+  "editCondition": "Inspect existing motion first. Change pixels only when the torso is frozen or its weight transfer disappears at native resolution; preserve already convincing animations.",
+  "permittedChanges": [
+    "body motion and moving-hip leg/contact corrections",
+    "head/neck follow required by that motion",
+    "pose projection and pixel finishing needed to preserve the corrected motion",
+    "new revision exports and review evidence"
+  ],
+  "excludedChanges": [
+    "new species, variants or humanoid forms",
+    "redesigning appearance, changing scale or camera",
+    "new animation states or unrelated actions",
+    "resuming the 196-animal production queue"
+  ]
+}

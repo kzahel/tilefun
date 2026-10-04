@@ -15,6 +15,15 @@ const [
 ] = process.argv.slice(2);
 if (![animalId, revision, batchId].every((v) => /^[a-z0-9-]+$/.test(v ?? "")) || !name)
   throw new Error("Usage: register.mjs ANIMAL REVISION NAME BATCH [SHEET SCENE CONTACT PREVIEW]");
+const repairScopePath = resolve(ROOT, "art-source/wildlife-v2/repair-scope.json");
+if (existsSync(repairScopePath)) {
+  const scope = JSON.parse(readFileSync(repairScopePath, "utf8"));
+  if (
+    scope.allowNewAnimals === false &&
+    (!scope.existingAnimalIds.includes(animalId) || !scope.repairCandidates.includes(animalId))
+  )
+    throw new Error("Owner scope is frozen-torso repairs only; this animal is outside that scope");
+}
 const base = `public/demos/wildlife-v2/${animalId}/${revision}`;
 const fingerprint = (bytes) => createHash("sha256").update(bytes).digest("hex");
 function pathFor(file) {

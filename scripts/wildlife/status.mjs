@@ -34,7 +34,9 @@ export function writeStatus() {
               ? "In progress"
               : task.state === "blocked"
                 ? "Blocked"
-                : "Queued";
+                : task.state === "out-of-scope"
+                  ? "Out of scope"
+                  : "Queued";
   const counts = {};
   for (const task of result.tasks) counts[status(task)] = (counts[status(task)] ?? 0) + 1;
   const rank = {
@@ -45,6 +47,7 @@ export function writeStatus() {
     Blocked: 2,
     "Receipt needs checking": 3,
     Queued: 4,
+    "Out of scope": 5,
   };
   const tasks = [...result.tasks].sort((a, b) => rank[status(a)] - rank[status(b)]);
   const lines = [
@@ -59,6 +62,12 @@ export function writeStatus() {
     `**${result.valid}/${result.total} draft ready; ${counts["Motion review required"] ?? 0} require motion review; ${counts["In progress"] ?? 0} in progress; ${counts.Paused ?? 0} paused; ${counts.Blocked ?? 0} blocked; ${counts.Queued ?? 0} queued.**`,
     ...(result.productionHold && result.productionHold.active !== false
       ? ["", `**Production paused:** ${clean(result.productionHold.reason)}`]
+      : []),
+    ...(result.scope?.allowNewAnimals === false
+      ? [
+          "",
+          `**Scope: repair existing frozen-torso walks only. No new animals.** ${counts["Out of scope"] ?? 0} unfinished roster entries are outside the current plan, not queued for production.`,
+        ]
       : []),
     "",
     `[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/029-wildlife-fresh-production.md)${sessionLink}`,

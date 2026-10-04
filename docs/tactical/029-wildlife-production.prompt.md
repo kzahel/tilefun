@@ -1,13 +1,22 @@
-Produce Tilefun wildlife drafts using the fresh wildlife-v2 workflow. Read
+Repair existing Tilefun frozen-torso walks using the wildlife-v2 workflow. Read
 AGENTS.md, docs/topics/wildlife.md, docs/topics/art-review.md,
 docs/blender-pixel-characters.md and docs/tactical/029-wildlife-fresh-production.md.
 Use the local blender-game-assets and blender-animation skills as standalone
 asset workflows. Use gpt-6.1-sol with high reasoning effort; the launcher pins
 these values. Never silently fall back to another model or effort.
 
+CURRENT OWNER SCOPE OVERRIDES THE ORIGINAL WHOLE-ROSTER PLAN: repair existing
+animals with frozen walking torsos ONLY. No new animals, variants, breeds, ages,
+humanoid forms or locomotion families. Read art-source/wildlife-v2/repair-scope.json
+and select only explicitly assigned existing repair candidates. Inspect first;
+change pixels only when body motion is frozen or disappears at native resolution.
+Keep already convincing motion unchanged. Preserve design, scale, camera, palette
+and existing action states; adjust limbs/head follow only as required by the body
+motion repair. Do not resume the original species queue after repair gates pass.
+
 QUALITY IS THE DELIVERABLE. Produce fewer credible animals if needed. Unique
 frames, metadata, test passes and plausible prose do not establish good art.
-Do not expand beyond the assigned manual animal or unlocked family task.
+Do not expand beyond the assigned existing animal's frozen-torso repair.
 
 FRESH START: do not read the backup branch, wildlife-archive, old wildlife-v1
 art, recipes, completion receipts or screenshots. Existing approved character
@@ -120,15 +129,12 @@ inspect the images and sample continuous cycles. Record precise observations,
 reject failed iterations, fix them and repeat. Do not substitute assertions,
 guides authored from the same mistaken pixels, hashes or test results for seeing.
 
-GATES: supervised pilot sessions stop after their assigned animal for coordinator
-review. Background mode requires coordinator-reviewed pilot artifacts and starts
-the fresh roster from those newly produced pilots, with zero v1 completions.
-The family gate is keyed by roster family, body plan, media and gait set; a fox
-walk or rabbit hop does not unlock unrelated animal families.
-For each new locomotion family, produce/review a prototype before siblings. A
-failed style/camera/motion gate blocks that family. Do not persist a flawed
-shared template across dozens of species. Two saved Needs changes reports pause
-the batch until the owner says ready. Owner feedback is not an agent approval.
+GATES: repair sessions stop after their assigned existing animal for coordinator
+review. The original broad-production launch/queue is disabled under the current
+owner scope, even after corrected motion prototypes pass. Do not open a new
+family/species task or treat a corrected sheep/pig as permission to expand the
+roster. Two saved Needs changes reports pause the batch until the owner says
+ready. Owner feedback is not an agent approval.
 Read data/wildlife-campaign-v2/production-hold.json when present. An active owner
 motion hold forbids background production and template expansion. Preserve all
 old receipt/artifact bytes. Only explicitly assigned correction prototypes may
@@ -136,7 +142,7 @@ run during that hold, using new revisions. Do not clear the hold, replace its
 reasons with your own approval, or use an old pilot's gait to bypass it.
 After the owner's rigid-torso rejection, correction order is sheep then pig,
 with coordinator review of each new revision's complete native/4x loops before
-any wider restart. The coordinator must audit other walking quadrupeds against
+repairing other existing frozen walkers. The coordinator must audit those walkers against
 the revised body-motion contract; earlier draft-ready receipts do not certify it.
 Assigned corrections may start from that animal's own frozen scene/drawings in
 a new revision. Do not treat the rejected walk as an accepted gait or propagate
@@ -162,6 +168,12 @@ those fields into old receipts to retroactively claim a review. The separate
 data/wildlife-campaign-v2/body-motion-gate.json is coordinator-owned: it pins new
 sheep/piglet coordinator receipts and contract bytes; production agents never
 create or clear it. Background launch cannot bypass it by deleting a local hold.
+Already-compliant existing walks need no pixel change or new revision. The
+coordinator may record a separate body-motion-audits.json entry pinning the old
+receipt and motion-contract SHA-256, exact revision, observer=coordinator,
+result=already-compliant and concrete weightTransfer observations. Production
+agents must not create these entries or retrofit old receipts. Passing this audit
+removes that repair candidate, not the ban on new animals.
 After persisting task selection, meaningful checkpoints, completion, blocking or
 receipt revision, regenerate docs/wildlife-status.md with
 `node scripts/wildlife/status.mjs`; also refresh before final handoff. A checkpoint

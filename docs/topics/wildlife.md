@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: broad production paused after owner rejected rigid-torso walks; corrected motion prototypes required.
+Status: repair existing frozen-torso walks only; new-animal production canceled.
 Updated: 2026-10-04.
 
 For the whole-roster completion table and local animation links, see the generated
@@ -20,9 +20,47 @@ campaign is preserved on `backup/wildlife-low-20261004`, commit
 archived locally. They are historical evidence, not inputs to this campaign.
 
 Use gpt-6.1-sol with high reasoning effort, explicitly pinned for every session.
-The owner authorizes coordinator-reviewed manual pilots and then background
-draft production. This authorizes production, not human art approval, publication
-or gameplay promotion. See [029](../tactical/029-wildlife-fresh-production.md).
+The original owner authorization for whole-roster production is superseded by
+repair-only scope below. This authorizes corrections, not human art approval,
+publication or gameplay promotion. See [029](../tactical/029-wildlife-fresh-production.md).
+
+## Current scope: existing frozen-torso repairs only
+
+The owner canceled new-animal work. The [repair scope](../../art-source/wildlife-v2/repair-scope.json)
+freezes the22 already-produced draft IDs and lists11 existing walking quadrupeds
+for inspection. The196-species roster remains historical backlog, not an active
+production target. Unfinished entries are out of scope; partial/blocked attempts
+remain evidence, without authorizing completion or unrelated fixes.
+
+Order: sheep/pig corrections first, then inspect the other existing walkers.
+Change art only where torso motion is frozen or disappears at native resolution.
+Preserve appearance, scale, camera, palette and action states; change hips/limbs,
+head follow and finishing only where necessary for the motion repair. Already
+convincing motion stays byte-for-byte unchanged. Use new revisions for corrected
+pixels. No new species, variants, companions or animation states.
+
+The generic production queue/launcher stays disabled even after motion gates
+pass, and registration rejects animals outside the repair list. `campaign.mjs
+--repairs` lists existing unresolved candidates; it cannot select unproduced IDs.
+Passing a sheep/pig gate authorizes only bounded existing-animal repairs, never
+roster expansion. No worker is currently running; do not revive the old broad
+background brief or the06:00 deadline as an authorization to produce new animals.
+
+For an existing walk that passes inspection without changes, the coordinator
+can record a separate `body-motion-audits.json` entry with observer=coordinator,
+result=already-compliant, exact revision, receipt/contract hashes and concrete
+weightTransfer observations. This clears its repair hold without modifying its
+old receipt or art. Changed/corrected art still needs new revision receipts and
+review. Agents may not claim these coordinator audits or alter the frozen scope.
+
+Scope verification: nineteen queue/gate tests pass, including new-species
+selection after all motion gates pass, candidates without existing receipts,
+and unchanged-art coordinator audits versus worker/wrong-hash claims. Live
+`--next` returns null and registration rejects an unproduced probe before any
+artifact write. The table shows166 unfinished entries out of scope, zero queued
+and11 unresolved repair candidates. Typecheck/changed-file lint pass; full suites
+retain the documented five Windows unit failures and two immutable HTML encoding
+errors. No animal art changed and no repair worker was launched by this plan edit.
 
 ## Art and projection contract
 
@@ -88,8 +126,8 @@ decisions remain unchanged. The generated table reflects these separate holds.
 Stopped the verified background02 launcher and its16 descendants after preserving
 the owner-stop record; its watchdog then exited. The interrupted lock and original
 checkpoint remain evidence. Active-session metadata records the stop; no worker
-or automatic continuation is running. Original06:00 Berlin deadline is retained
-for any eventual continuation, not treated as permission to bypass this hold.
+or automatic continuation is running. The former06:00 Berlin deadline is
+historical; it no longer authorizes broad production or bypassing repair-only scope.
 
 `campaign.mjs` rejects background launch under an active local production hold.
 The tracked contract ALSO requires a new coordinator body-motion gate, even if
@@ -103,8 +141,8 @@ approval or proof of animation quality.
 Next: author corrected sheep then pig in new revisions, inspect body/hip/foot
 landmarks plus full native/4x in-place/travel playback, and record actual
 coordinator observations. Only after those prototypes pass can the coordinator
-write the pinned gate and release the global hold. Re-audit/correct the other
-held walkers before releasing their family gates. The production agent cannot
+write the pinned gate and release the repair hold for explicitly assigned
+existing walkers. Re-audit/correct only existing frozen torsos. The production agent cannot
 clear the hold, create the coordinator gate or retrofit old receipts. Broad
 background production remains stopped; this prompt change is not an art fix.
 
