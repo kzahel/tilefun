@@ -179,3 +179,15 @@ current source references/interactive fingerprints, without modifying frozen art
 Broad browser validation was interrupted after a build replaced served bundles
 mid-run; its failures are not accepted evidence. Repeat against a settled build,
 then record final checks and any reproducible unrelated frozen-review limitations.
+
+### Camera follow checkpoint
+
+Final review found that fixed-tick follow still targeted the raw physics pose,
+while render-time follow targeted the displayed pose. Shared followPlayer now
+binds the predictor's presentation pose for both game and scenario camera targets.
+The focused test verifies that a 1px correction changes physics without moving the
+follow target/body; existing camera and decay tests pass (8), plus all typechecks.
+Full units at the preceding checkpoint pass 1581 tests. Contact/rate CLIs pass
+`--assert-fixed` with all independent repeats; streaming readiness passes again.
+The broad settled-build browser suite is still running on the preceding built
+checkpoint; rebuild and rerun affected game/lab consumers after it completes.

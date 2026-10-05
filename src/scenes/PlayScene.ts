@@ -369,7 +369,7 @@ export class PlayScene implements GameScene {
       // pending until a real player position arrives.
       const playerEnt = gc.stateView.playerEntity;
       if (playerEnt.id !== -1) {
-        followPlayer(gc.camera, playerEnt, verticalFollow);
+        followPlayer(gc.camera, playerEnt, verticalFollow, 0, this.predictor);
       }
       if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
         const savedZoom = gc.camera.zoom;

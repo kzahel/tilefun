@@ -83,3 +83,23 @@ it("binds the same sub-tick body and overlay pose without following a diagnostic
   expect(player.prevJumpZ).toBe(4);
   expect(player.prevWz).toBe(8);
 });
+
+it("fixed camera follow uses the displayed correction pose while physics remains separate", () => {
+  const player = createPlayer(101, 80);
+  const shown = { ...player, position: { wx: 100, wy: 80 }, prevPosition: { wx: 100, wy: 80 } };
+  const predictor = {
+    player,
+    presentationPlayer: shown,
+    prevPosition: { wx: 100, wy: 80 },
+    prevWz: 0,
+    prevJumpZ: 0,
+  };
+  const camera = new Camera();
+  camera.snapTo(90, 80);
+  camera.savePrev();
+  followPlayer(camera, player, false, 0, predictor);
+  expect(camera.x).toBe(91);
+  expect(player.position.wx).toBe(101);
+  beginPlayerPresentation(camera, player, 1, predictor);
+  expect(camera.x).toBe(91);
+});

@@ -174,6 +174,7 @@ export class ScenarioPresentationHost {
             this.session.view.playerEntity,
             false,
             this.options.cameraOffsetY,
+            this.session.predictor,
           );
       }
     } catch (error) {

@@ -3,13 +3,21 @@ import { CAMERA_LERP } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "./Camera.js";
 
+type PlayerPosePredictor = Pick<
+  PlayerPredictor,
+  "player" | "prevPosition" | "prevJumpZ" | "prevWz"
+> &
+  Partial<Pick<PlayerPredictor, "presentationPlayer">>;
+
 /** Shared fixed-tick follow policy. Diagnostic framing is an explicit offset. */
 export function followPlayer(
   camera: Camera,
   player: Entity,
   verticalFollow = false,
   offsetY = 0,
+  predictor?: PlayerPosePredictor | null,
 ): void {
+  player = bindPredictedPlayerPose(player, predictor);
   if (player.id === -1) return;
   camera.follow(
     player.position.wx,
@@ -25,10 +33,7 @@ export function beginPlayerPresentation(
   camera: Camera,
   player: Entity,
   alpha: number,
-  predictor?:
-    | (Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> &
-        Partial<Pick<PlayerPredictor, "presentationPlayer">>)
-    | null,
+  predictor?: PlayerPosePredictor | null,
   verticalFollow = false,
   offsetY = 0,
 ): void {
@@ -55,10 +60,7 @@ export function beginPlayerPresentation(
 /** Bind the production prediction history for body/overlay interpolation, including fixed cameras. */
 export function bindPredictedPlayerPose(
   player: Entity,
-  predictor?:
-    | (Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> &
-        Partial<Pick<PlayerPredictor, "presentationPlayer">>)
-    | null,
+  predictor?: PlayerPosePredictor | null,
 ): Entity {
   const predicted = predictor?.player;
   if (predicted && predictor) {
