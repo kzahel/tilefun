@@ -295,6 +295,34 @@ try {
   });
   const clockGroups = new Map();
   const cruiseSkips = cruiseSteps.filter((s) => s.screenStep > 3);
+  const rateCadence = new Map();
+  // Exclude transition edges: advertised metadata and consumed snapshots cross
+  // the independently scheduled client boundary at different instants.
+  const rateSegments = [];
+  for (const sample of raw.samples) {
+    const hz = Math.round(sample.tickRate);
+    let segment = rateSegments.at(-1);
+    if (!segment || segment.hz !== hz) {
+      segment = { hz, samples: [] };
+      rateSegments.push(segment);
+    }
+    segment.samples.push(sample);
+  }
+  const steadyRateSamples = rateSegments.flatMap((segment) =>
+    segment.samples.filter(
+      (s) => s.t >= segment.samples[0].t + 500 && s.t <= segment.samples.at(-1).t - 500,
+    ),
+  );
+  for (let i = 1; i < steadyRateSamples.length; i++) {
+    const a = steadyRateSamples[i - 1],
+      b = steadyRateSamples[i];
+    const hz = Math.round(b.tickRate);
+    if (Math.round(a.tickRate) !== hz || b.t - a.t > 100) continue;
+    const cadence = rateCadence.get(hz) ?? { elapsedMs: 0, ticks: 0 };
+    cadence.elapsedMs += b.t - a.t;
+    cadence.ticks += b.serverTick - a.serverTick;
+    rateCadence.set(hz, cadence);
+  }
   const inputDurations = new Map(raw.inputs.map((s) => [s.seq, s.dtMs / 1000]));
   for (let i = 1; i < raw.reconciliations.length; i++) {
     const a = raw.reconciliations[i - 1],
@@ -356,7 +384,14 @@ try {
       observedAuthorityHz:
         ((raw.samples.at(-1).serverTick - raw.samples[0].serverTick) * 1000) /
         (raw.samples.at(-1).t - raw.samples[0].t),
+      authorityCadenceByAdvertisedHz: Object.fromEntries(
+        [...rateCadence].map(([hz, value]) => [
+          hz,
+          { ...value, observedHz: (value.ticks * 1000) / value.elapsedMs },
+        ]),
+      ),
       cruiseScreenSkips: cruiseSkips.length,
+      cruiseScreenReverseSkips: cruiseSteps.filter((s) => s.screenStep < -3).length,
       cruiseScreenSkipSpacingMs: stats(cruiseSkips.slice(1).map((s, i) => s.t - cruiseSkips[i].t)),
       invalidAlphaFrames: raw.samples.filter((s) => s.alpha < 0 || s.alpha > 1).length,
       observedTickRates: [...new Set(raw.samples.map((s) => Math.round(s.tickRate)))],
@@ -388,6 +423,16 @@ try {
   const expectedRates = serverHz === "alternate" ? [30, 60] : [Number(serverHz)];
   if (expectedRates.some((hz) => !report.summary.observedTickRates.includes(hz)))
     throw Error("Missing advertised server tick-rate samples");
+  if (process.argv.includes("--assert-timing")) {
+    for (const hz of expectedRates) {
+      const cadence = report.summary.authorityCadenceByAdvertisedHz[hz];
+      // Include endpoint snapshot quantization on steady sections. This detects
+      // the former 60/30Hz timer drift; direct clock tests cover transition time.
+      const tolerance = serverHz === "alternate" ? 0.2 : 0.1;
+      if (!cadence || Math.abs(cadence.observedHz - hz) > tolerance)
+        throw Error(`Authority cadence drift at ${hz}Hz: ${JSON.stringify(cadence)}`);
+    }
+  }
 } finally {
   await browser?.close();
   await server.close();

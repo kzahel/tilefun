@@ -26,6 +26,12 @@ the remaining recommendations are not implemented fixes.
   `src/transport/WorkerClientTransport.ts` carries replicated state. Prediction
   and rendering stay on the main thread. P2P hosting still runs its authority
   on the main thread; dedicated hosts reuse the same server implementation.
+- Timed authority uses ServerLoop's monotonic fixed-step deadlines, not repeating
+  timer callback counts. Fractional timer rounding no longer produces ~62.5Hz
+  simulation while advertising 60Hz. Catch-up is bounded to 250ms and lifecycle
+  resume/rate changes reset the schedule. Native timing and roof-camera evidence
+  are in [the prediction follow-up](../research/train-camera-and-jump-reproductions.md#shared-authority-timing-fix);
+  this does not establish elimination of delayed-snapshot presentation jumps.
 - Terrain cache preparation runs ahead of the camera. Measure both visible
   readiness and frame pacing. Explicit progressive presentation may accept gaps
   to preserve responsiveness; report gap duration, backlog and catch-up alongside

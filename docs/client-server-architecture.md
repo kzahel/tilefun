@@ -27,6 +27,12 @@ hosting uses the same GameServer/Realm model through
 [standalone.ts](../src/server/standalone.ts). A direct LocalTransport/LocalStateView
 path still exists for specialized callers/tests; it is not the default launcher.
 
+All timed GameServer hosts use ServerLoop's monotonic fixed-step deadlines.
+Integer timer rounding and callback work do not accumulate simulation drift;
+short late wakes catch up, long stalls bound overdue debt to 250ms, and stop/resume
+or rate changes start a fresh schedule. Embedded scenarios instead advance explicit
+authority steps through ScenarioSession; they do not use ServerLoop.
+
 ## Transport and requests
 
 [Transport interfaces](../src/transport/Transport.ts) separate hosts from the

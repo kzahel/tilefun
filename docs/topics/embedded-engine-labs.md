@@ -230,4 +230,8 @@ finds that roof-relative alignment does not establish camera continuity: real Wo
 authority timer drift and mixed carrier/client interpolation clocks create periodic
 screen skips. Default shared air friction also erases takeoff momentum. Follow-up
 must preserve the game/lab shared camera and movement owners; the reproduction
-checkpoint has not changed runtime behavior.
+checkpoint has not changed runtime behavior. The separately authorized ServerLoop
+timing fix now uses monotonic deadlines in game Worker/P2P/dedicated authority.
+Labs advance through explicit scenario steps and do not use that timer; their
+shared movement/presentation owners remain unchanged. Periodic drift is removed,
+with rate-switch/delayed-snapshot presentation and jump friction still outstanding.

@@ -1,7 +1,7 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared prediction implemented; playtest camera/momentum failures reproduced.
+Status: shared authority timing fixed; remaining presentation/momentum work recorded.
 Updated: 2026-10-05.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -17,7 +17,14 @@ camera skips and lost jump momentum. Both are reproduced in
 Worker authority runs near 62.5Hz while advertising 60Hz; combined carrier and
 rider screen position skips ~9.4px every 0.4 seconds. Default airborne friction
 erases inherited carrier velocity on the second jump command. Eight timing controls
-and five full-flight cases repeat identically. No runtime tweaks in that checkpoint.
+and five full-flight cases repeat identically. That record preserves the baseline.
+
+The authorized timing follow-up replaces ServerLoop's repeating timer count with
+monotonic deadlines and bounded catch-up, shared by Worker/P2P/dedicated authority.
+Native approximately-120Hz captures now measure ~60Hz/~30Hz authority; the repeating
+400ms skip is gone. GPU 60Hz and Canvas 30Hz captures have no large screen jumps;
+one Canvas delayed-frame pair and rate-switch discontinuities remain. The evidence
+records those limits. Camera smoothing and airborne movement are unchanged.
 
 Shared-loop rate transitions, car/train carry ownership, relative roof prediction
 and presentation, timestamped collision proxies and collider-policy parity are
@@ -47,6 +54,8 @@ replica pose for every command. Lower-activity NPC tick tiers are a further conc
 Current invariants:
 
 - Autonomous roofs carry by committed pose, independently of input count.
+- Shared authority ticks follow monotonic wall-time deadlines; short late wakes
+  catch up, long stalls bound debt to 250ms, and resume/rate changes reset the epoch.
 - Predicted/replayed walking is relative to synchronized roof snapshots; displayed
   passengers and carriers share interpolation endpoints.
 - Nearby solid NPC collision uses bounded timestamped proxies and the shared
@@ -57,8 +66,8 @@ Current invariants:
 
 ## Next work
 
-Correct shared authority timer drift first and rerun camera continuity measurements,
-then address timestamped remote presentation and sustained airborne carrier momentum
+With authority timer drift corrected, address timestamped remote presentation
+and sustained airborne carrier momentum
 with shared game/lab owners. The evidence document records the sequence and missing
 gap/collision cases. Do not broaden this into global AI rollback or change immutable
 art review snapshots to make unrelated validation pass. Continue engine changes

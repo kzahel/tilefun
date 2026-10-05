@@ -1,7 +1,7 @@
 # Shared prediction time, moving contacts and supports
 
 Topic: player-prediction
-Status: initial implementation validated; playtest camera/momentum follow-up open, 2026-10-05.
+Status: authority timing follow-up implemented; presentation/momentum follow-up open, 2026-10-05.
 
 The user requested a recorded plan/references, then autonomous implementation
 and incremental commits. This supersedes the investigation-only hold after the
@@ -236,3 +236,22 @@ Reopen those boundaries: shared monotonic-time authority scheduling first, measu
 camera rerun, timestamped remote presentation as needed, then separate carrier
 momentum from voluntary air controls with native carriage-gap/collision cases.
 This checkpoint changes probes/docs only; no camera or movement tweak.
+
+### Authorized authority timing follow-up
+
+ServerLoop now uses monotonic fixed-step deadlines, rounded-up one-shot timer
+delays, 250ms bounded overdue catch-up and fresh epochs on resume/rate changes.
+It consumes deadlines before callback lifecycle mutations and preserves error
+reporting. All timed Worker/P2P/dedicated hosts share the change; labs already
+advance explicit scenario authority steps and need no timer migration.
+Fourteen clock regressions and native Node cadence checks cover the contract,
+including the 250ms catch-up boundary at 30/60/120Hz.
+
+Native 120Hz game captures remove the repeating 400ms clock-drift skip. Consumed
+authority cadence is ~60/~30Hz, with exactly stable roof alignment. Canvas 60Hz
+had one delayed-frame forward/reverse pair, GPU 60Hz and Canvas 30Hz had none;
+mixed-rate changes retain presentation discontinuities. The
+[follow-up evidence](../research/train-camera-and-jump-reproductions.md#shared-authority-timing-fix)
+records those limits and the corrected steady-section measurement. No camera or
+momentum tweaks are bundled into the timer fix. Final repository/browser validation
+is recorded after the settled build.

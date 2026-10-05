@@ -311,5 +311,8 @@ The user's next idle-roof playtest exposes periodic camera skips and lost moment
 during flight. [Camera/jump reproductions](../research/train-camera-and-jump-reproductions.md)
 confirm both: timer drift produces ~9.4px screen skips at native 120Hz, while
 default airborne friction erases inherited train velocity on the second command.
-Those shared engine fixes remain pending; roof-relative alignment alone is not
-the acceptance criterion. Service lifetime/map tickets remain deferred.
+The shared authority clock is now corrected with monotonic deadlines; native
+120Hz captures remove the periodic drift skips. Isolated delayed-snapshot and
+rate-switch presentation jumps, plus airborne friction, remain pending.
+Roof-relative alignment alone is not the acceptance criterion. Service lifetime/map
+tickets remain deferred.

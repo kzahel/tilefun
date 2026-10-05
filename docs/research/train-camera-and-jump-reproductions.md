@@ -169,3 +169,63 @@ Typechecks, strict standalone probe typecheck, all 1,582 unit tests and lint pas
 at the reproduction checkpoint. Lint retains 118 existing warnings/34 infos.
 Native browser evidence is above. No renderer/input/recipe/runtime changes are
 made, so this checkpoint does not change inventories or rebuild frozen review art.
+
+## Shared authority timing fix
+
+The user authorized the timing fix separately after the reproduction checkpoint.
+`ServerLoop` now schedules monotonic deadlines with one-shot timers. Timer delays
+round up, and callbacks consume only deadlines actually reached. Small late wakes
+catch up fixed steps without shifting future deadlines or adding tick work to each
+interval. More than 250ms of overdue debt is bounded/discarded. Stop/resume and
+rate changes establish a fresh epoch; callbacks that stop, restart or change rate
+cannot continue the old epoch or install an extra timer. Existing tick error
+reporting/recovery remains intact. No camera lerp or airborne movement change.
+
+Worker, browser P2P and dedicated-server GameServer hosts share this owner.
+Embedded labs use explicit ScenarioWorkerHost/ScenarioSession steps, rather than
+ServerLoop; their stepping and shared player/camera policy stay unchanged.
+
+Fourteen focused clock tests cover 30/60/120Hz with integer timers over ten seconds,
+late/early wakes, long-stall bounds, hidden pause/resume, callback work, callback
+rate switches, stop/restart and fatal/recoverable errors. Native Node's direct
+clock runner requires each five-second window to be within one endpoint tick of
+elapsed wall time, with unchanged dt and no early simulation steps.
+Its completed-tick cadence is 30.004 / 59.997 / 120.014Hz, respectively; final
+pending ticks account for one tick of endpoint quantization in each window.
+
+Native 120Hz game captures after the fix:
+
+| Capture | Consumed authority Hz | Cruise forward / reverse screen skips >3px |
+| --- | ---: | ---: |
+| Canvas, 60Hz | 60.025 | 1 / 1 |
+| GPU, 60Hz | 60.023 | 0 / 0 |
+| Canvas, 30Hz | 29.913 | 0 / 0 |
+| Canvas, 30Hz repeat | 29.964 in steady section | 0 / 0 |
+| GPU, 60→30→60Hz | 60.038 / 29.931 in steady sections | 1 / 7 across whole capture |
+
+All roof-offset ranges remain exactly zero; all captures render at approximately
+120Hz, with no invalid alpha or browser errors. The repeatable 400ms clock-drift
+skip is eliminated. The first Canvas 60Hz capture has one forward/reverse pair
+associated with delayed snapshot consumption, rather than a repeating beat. GPU
+60Hz and both Canvas 30Hz runs show no >3px screen jumps. Rate-switching still has
+presentation discontinuities. This fixes authority timing, not all snapshot
+presentation; timestamped presentation and sustained airborne momentum remain next.
+
+An initial whole-phase rate-switch assertion measured 29.753Hz because transition
+edges mix advertised metadata and independently consumed frames. The probe now
+excludes 500ms at each phase edge, measures steady sections separately, and reports
+forward/reverse jumps. The final mixed-rate capture passes `--assert-timing` and
+roof `--assert-fixed`. This measurement refinement does not alter game behavior;
+direct clock tests exercise the actual transition lifecycle.
+
+```sh
+npx vitest run src/server/ServerLoop.test.ts
+npx tsx scripts/instrumentation/server-clock.ts --output=/tmp/server-clock-fixed.json
+node scripts/instrumentation/train-roof-browser.mjs --renderer=gpu --headed --server-hz=alternate --assert-fixed --assert-timing --output=/tmp/train-camera-timing-alternate-final.json
+node scripts/instrumentation/train-roof-browser.mjs --renderer=canvas --headed --server-hz=30 --assert-fixed --assert-timing --output=/tmp/train-camera-timing-canvas30-repeat.json
+```
+
+The deterministic `roof-camera-jump --assert-baseline` deliberately supplies an
+independent 16ms wake schedule directly to Realm; it does not call ServerLoop.
+It therefore still reproduces the old cadence's presentation failure and current
+jump friction. Its controls are retained for the next presentation/momentum work.
