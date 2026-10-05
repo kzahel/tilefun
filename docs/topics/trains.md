@@ -262,3 +262,12 @@ by default. Map planning stays in the existing Worker, with bounded owner/featur
 budgets and cancellation between owners; broad overview scales omit routes with
 other detailed features. This is generated infrastructure, not live train dots
 or a timetable, and follows the map's existing generator-overview policy for edits.
+
+Validation on 2026-10-05: typecheck, 1,571 unit tests, lint, asset inventories,
+build and streaming readiness passed. All 12 focused map/explorer browser checks
+passed, including desktop and phone rail discovery. The full browser run passed
+372 of 375 tests; the unrelated door test-clock failure passed on isolated retry.
+The remaining two failures are the previously missing frozen fox review archive
+files. Desktop and phone captures also confirmed route curves, named stops and
+station-centering controls. Next: playtest finding and boarding trains from the
+map before expanding the network.
