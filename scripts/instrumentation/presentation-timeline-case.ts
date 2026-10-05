@@ -49,14 +49,17 @@ export function runPresentationCase(config: PresentationCase) {
   const rider = createPlayer(ROOF_OFFSET, 64);
   rider.id = 1;
   rider.wz = 44;
-  view.applyFrame({
-    type: "frame",
-    serverTick: 0,
-    simulationTime: 0,
-    lastProcessedInputSeq: 0,
-    playerEntityId: 1,
-    entityBaselines: [serializeEntity(train), serializeEntity(rider)],
-  });
+  view.applyFrame(
+    {
+      type: "frame",
+      serverTick: 0,
+      simulationTime: 0,
+      lastProcessedInputSeq: 0,
+      playerEntityId: 1,
+      entityBaselines: [serializeEntity(train), serializeEntity(rider)],
+    },
+    0,
+  );
   let nowMs = 0;
   const physics = { ...getMovementPhysicsParams(), revision: 0 };
   const predictor = new PlayerPredictor(
@@ -65,6 +68,7 @@ export function runPresentationCase(config: PresentationCase) {
     () => nowMs / 1000,
   );
   predictor.reset(view.serverPlayerEntity);
+  view.setPredictor(predictor);
   predictor.reconcile(view.serverPlayerEntity, 0, world, [], view.serverEntities);
   const camera = new Camera();
   camera.setViewport(1280, 900);
@@ -114,7 +118,7 @@ export function runPresentationCase(config: PresentationCase) {
       while (packets[nextPacket] && required(packets[nextPacket]).arrivalMs <= nowMs) {
         const message = decodeServerMessage(required(packets[nextPacket++]).buffer);
         if (message.type !== "frame") throw Error("Unexpected fixture packet");
-        view.applyFrame(message);
+        view.applyFrame(message, nowMs / 1000);
         applied++;
       }
       if (applied)
@@ -134,10 +138,11 @@ export function runPresentationCase(config: PresentationCase) {
       appliedSinceRender += applied;
     },
     render(alpha) {
-      beginPlayerPresentation(camera, view.serverPlayerEntity, alpha, predictor);
-      const shown = required(predictor.presentationPlayer);
+      view.beginPresentation(nowMs / 1000, alpha);
+      const shown = view.playerEntity;
+      beginPlayerPresentation(camera, shown, alpha, undefined, false, 0, view.cameraPresentation);
       const p = interpolatePosition(shown.position, shown.prevPosition, alpha);
-      const car = required(view.serverEntities.find((e) => e.id === 2));
+      const car = required(view.entities.find((e) => e.id === 2));
       const t = interpolatePosition(car.position, car.prevPosition, alpha);
       samples.push({
         timeMs: nowMs,
@@ -153,6 +158,7 @@ export function runPresentationCase(config: PresentationCase) {
       });
       appliedSinceRender = 0;
       camera.restoreActual();
+      view.endPresentation();
     },
   });
   loop.setTickRate(config.serverHz);

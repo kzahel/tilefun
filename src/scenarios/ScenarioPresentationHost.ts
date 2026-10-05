@@ -10,11 +10,7 @@ import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
-import {
-  beginPlayerPresentation,
-  bindPredictedPlayerPose,
-  followPlayer,
-} from "../rendering/PlayerPresentation.js";
+import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import type { TerrainPacing } from "../rendering/PresentationSettings.js";
 import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
@@ -93,7 +89,7 @@ export class ScenarioPresentationHost {
     this.camera.zoom = options.settings().zoom;
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
-      render: (alpha) => this.render(alpha),
+      render: (alpha, now) => this.render(alpha, now),
     });
     document.addEventListener("visibilitychange", this.visibilityChanged);
     this.ready = this.initialize(canvas).catch((error) => {
@@ -124,6 +120,8 @@ export class ScenarioPresentationHost {
   }
 
   private visibilityChanged = () => {
+    this.session.view.resetPresentationClock();
+    this.camera.requestSnap();
     this.loop.stop();
     if (!this.disposed && this.host && !document.hidden) this.loop.start();
   };
@@ -182,15 +180,15 @@ export class ScenarioPresentationHost {
     }
   }
 
-  private render(alpha: number) {
+  private render(alpha: number, now = performance.now() / 1000) {
     if (this.disposed || !this.host) return;
     const { renderer } = this.host;
     const view = this.session.view;
     this.camera.zoom = this.options.settings().zoom;
     this.alpha = this.paused || !this.interpolate ? 1 : alpha;
+    view.beginPresentation(now, this.alpha, this.paused);
     try {
       if (this.options.fixedCamera) {
-        bindPredictedPlayerPose(view.playerEntity, this.session.predictor);
         this.camera.applyInterpolation(this.alpha);
         const fixed = this.fixedCamera(this.alpha);
         if (fixed) {
@@ -202,9 +200,10 @@ export class ScenarioPresentationHost {
           this.camera,
           view.playerEntity,
           this.alpha,
-          this.session.predictor,
+          undefined,
           false,
           this.options.cameraOffsetY,
+          view.cameraPresentation,
         );
       // Camera inspection while paused still needs streamed chunks and replicas,
       // but must not advance the simulation clock.
@@ -216,7 +215,7 @@ export class ScenarioPresentationHost {
           void this.command({ kind: "view-range", range }).catch((e) => this.fail(e));
         }
       }
-      const player = bindPredictedPlayerPose(view.playerEntity, this.session.predictor);
+      const player = view.playerEntity;
       const cycle = this.options.poseCycle?.();
       const row = Math.floor(this.poseSeconds / 2) % 4;
       this.displayedPlayer =
@@ -289,6 +288,7 @@ export class ScenarioPresentationHost {
       this.frame.release();
       this.overlays.release();
       this.camera.restoreActual();
+      view.endPresentation();
     }
   }
 

@@ -28,9 +28,9 @@ it.each(rates)(
   },
 );
 
-// Expected failure documents the unmet presentation contract. Promote to a
-// normal regression when the shared timeline is fixed; do not loosen tolerance.
-it.fails.each(rates)(
+// Regression promoted from the original expected failures, with the same oracle
+// and tolerances after adopting the shared timestamped presentation owner.
+it.each(rates)(
   "keeps constant-speed presentation continuous across a 10ms late snapshot ($serverHz/$renderHz Hz)",
   (config) => {
     const a = runPresentationCase({ ...config, lateSnapshot: true });

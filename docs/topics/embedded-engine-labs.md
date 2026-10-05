@@ -64,6 +64,14 @@ records this extraction and its validation. Shared owners are:
   interpolation, called by both `PlayScene` and the lab. Predictor previous poses
   supply body and camera interpolation together. The lab's -12px framing offset
   is explicit; position commands snap, while ordinary movement interpolates.
+
+  The shared timestamped presentation follow-up replaces interactive render-time
+  camera advancement with pure `CameraFollow` and borrows sampled poses through
+  RemoteStateView during render. Remote entities use bounded timestamp history;
+  local voluntary input stays predicted. Diagnostic fixed/train cameras consume
+  those same displayed entities. Paused views show committed current poses and
+  resume without hidden-time debt. Static reference adapters keep their explicit
+  untimed camera path; frozen review snapshots are not regenerated.
 - `OutdoorPresentation.presentTerrain`: one scheduler/publication policy for game
   and lab, retaining the shared default 2 ms/128-row budget and experimental
   two-row/completed-chunk mode. `collectScene` and `collectSceneOrder` provide the

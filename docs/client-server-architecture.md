@@ -63,7 +63,13 @@ endpoints. NPC AI remains authoritative.
 
 Autonomous car/train roofs carry passengers once per committed support pose.
 Command integration predicts relative walking/jumping; displayed passengers share
-the carrier's interpolation endpoints. A bounded presentation-only decay handles
+the carrier's sampled presentation pose. RemoteStateView retains bounded motion
+history and borrows render-only clones at an explicit display time: a 50ms buffer,
+up to 100ms extrapolation, then hold. Local roof walking remains predicted.
+Pure camera follow consumes displayed targets and explicit time; local ground
+movement uses admitted input time, while carrier motion uses remote presentation
+time. Physics and collision replay never consume those render-only clones.
+A bounded presentation-only decay handles
 small residual ground-contact corrections without changing replay physics.
 [Player prediction](topics/player-prediction.md) owns limits and acceptance evidence.
 

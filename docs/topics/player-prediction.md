@@ -1,7 +1,7 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared authority timing fixed; rider-free camera recovery faults reproduced.
+Status: shared timestamped presentation and camera recovery implemented; integration verification underway.
 Updated: 2026-10-05.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -11,15 +11,22 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
-Latest: [camera basics](../research/camera-basics-reproductions.md) removes the
-passenger entirely. A locked train camera still moves backwards with one 10ms late
-snapshot. A 100ms render gap resumes a locked train correctly but introduces a
-4.728px world-space camera error with ordinary smoothing. A real locally predicted
-768px/s player, with/without noclip, resumes correctly after that short gap.
-Long pauses separately expose bounded simulation catch-up and remote alpha phase.
-These deterministic fixtures change no runtime behavior; seven additional
-expected failures keep the unmet basic contracts explicit. Work on these basic
-camera/time boundaries before returning to passengers or airborne momentum.
+Latest: shared `PresentationTimeline` samples bounded timestamped remote motion,
+and pure `CameraFollow` integrates an explicit target/time pair. Game and embedded
+labs borrow display-only replica/player poses during render; physics and collision
+replay retain committed poses. The [rider-free cases](../research/camera-basics-reproductions.md#shared-presentation-fix)
+now pass late delivery, short render gaps and remote long-pause recovery. All eleven
+original expected failures are ordinary passing regressions, including the idle
+rider case. Build/inventories are refreshed; browser and streaming checks follow.
+
+Remote display uses a 50ms buffer and at most 100ms of last-segment extrapolation,
+then holds. Camera follow uses a render-time exponential response, normalized to
+the existing 60Hz response. Grounded local prediction supplies its admitted input
+clock, excluding discarded catch-up debt; supported players use remote presentation
+time with locally interpolated walking. Switching clock domains preserves camera
+position. Explicit pause/resume, visibility and realm reset rebase presentation;
+large relocations start a new history segment. Missing information can still cause
+correction when a train brakes/turns or authority stalls beyond the buffer.
 
 The latest native-120Hz playtest reports stable roof-relative riding but periodic
 camera skips and lost jump momentum. Both are reproduced in
@@ -45,9 +52,9 @@ A focused [headless presentation reproduction](../research/train-camera-and-jump
 now isolates a single 10ms late snapshot at correct authority cadence. Production
 client interpolation/prediction/camera math yields a backward frame and ~9.9px
 screen jump at 60Hz snapshots / 120Hz presentation, while roof alignment remains
-within Float32 noise. All eight rate/delivery traces repeat exactly. Four expected
-continuity failures remain explicit in unit tests; `--assert-continuous` is red.
-This is a test/doc checkpoint, with no runtime refactor or camera tweak.
+within Float32 noise. All eight rate/delivery traces repeat exactly. Four continuity failures were explicit in that test/doc checkpoint. The subsequent
+shared presentation implementation promotes them to ordinary passing regressions;
+both headless `--assert-continuous` CLIs now pass.
 
 Shared-loop rate transitions, car/train carry ownership, relative roof prediction
 and presentation, timestamped collision proxies and collider-policy parity are
@@ -80,7 +87,8 @@ Current invariants:
 - Shared authority ticks follow monotonic wall-time deadlines; short late wakes
   catch up, long stalls bound debt to 250ms, and resume/rate changes reset the epoch.
 - Predicted/replayed walking is relative to synchronized roof snapshots; displayed
-  passengers and carriers share interpolation endpoints.
+  passengers and carriers share one timestamp-sampled support pose. Local voluntary
+  walking retains responsive prediction rather than waiting for remote display time.
 - Nearby solid NPC collision uses bounded timestamped proxies and the shared
   authoritative blocking rule. AI turns/arrival grouping can still correct physics.
 - Presentation correction is bounded and time-based; teleports/support changes reset it.
@@ -89,10 +97,10 @@ Current invariants:
 
 ## Next work
 
-With authority timer drift corrected, address timestamped remote presentation and
-camera catch-up targeting through the rider-free cases first, using shared game/lab
-owners. Preserve the passing fast local-player controls and define long-pause
-policy before adding authority-debt, reconciliation and passenger cases. Sustained
+Complete integration validation of the shared presentation/camera fix, then add
+authority-debt, reconciliation and varying-speed/gap cases before broad passenger
+acceptance. Preserve the passing fast local-player controls; the existing 250ms
+simulation catch-up cap still discards excess local elapsed time. Sustained
 airborne carrier momentum remains separate and deferred. Do not broaden this into
 global AI rollback or change immutable art review snapshots to make unrelated
 validation pass. Continue engine changes

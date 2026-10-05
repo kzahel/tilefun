@@ -102,6 +102,18 @@ interface ReconcileReplayStats {
  * position is derived from the mount + local offset.
  */
 export class PlayerPredictor {
+  private presentationInputSeconds = 0;
+  private presentationInputDt = 0;
+  private presentationEpoch = 0;
+
+  /** Local input clock excludes simulation time discarded by the catch-up cap. */
+  presentationClock(alpha: number): { time: number; domain: string } | null {
+    if (this.support) return null;
+    return {
+      time: this.presentationInputSeconds - this.presentationInputDt * (1 - alpha),
+      domain: `input:${this.presentationEpoch}`,
+    };
+  }
   constructor(
     private readonly physics = getMovementPhysicsParams,
     private readonly physicsMult = getServerPhysicsMult,
@@ -174,6 +186,8 @@ export class PlayerPredictor {
    * Called on first server state and on world load.
    */
   reset(serverPlayer: Entity, serverMount?: Entity): void {
+    this.presentationInputSeconds = this.presentationInputDt = 0;
+    this.presentationEpoch++;
     this.clearPresentationError();
     this.predicted = this.clonePlayer(serverPlayer);
     this.support = null;
@@ -228,6 +242,9 @@ export class PlayerPredictor {
     entities: readonly Entity[],
   ): void {
     if (!this.predicted) return;
+
+    this.presentationInputSeconds += dt;
+    this.presentationInputDt = dt;
 
     // Autonomous roof motion follows the latest committed pose once, independently
     // of how many player commands are generated/replayed against that snapshot.
@@ -649,6 +666,41 @@ export class PlayerPredictor {
       prevWz: (support.prevWz ?? support.wz ?? 0) + height,
       prevJumpZ: this._prevJumpZ,
     };
+  }
+
+  /** Collapse local interpolation onto one render pose. Carrier contribution is
+   * sampled on the remote display timeline; voluntary roof walking stays local.
+   */
+  samplePresentationPlayer(alpha: number, displayedEntities: readonly Entity[]): Entity | null {
+    const player = this.presentationPlayer;
+    if (!player) return null;
+    let position: PositionComponent;
+    const support = displayedEntities.find((e) => e.id === this.support?.id);
+    const offset = this.supportOffset,
+      previousOffset = this.prevSupportOffset ?? offset;
+    if (support && offset && previousOffset) {
+      position = roofPosition(
+        {
+          x: previousOffset.x + (offset.x - previousOffset.x) * alpha,
+          y: previousOffset.y + (offset.y - previousOffset.y) * alpha,
+        },
+        support,
+      );
+    } else {
+      const prev = player.prevPosition ?? player.position;
+      position = {
+        wx: prev.wx + (player.position.wx - prev.wx) * alpha,
+        wy: prev.wy + (player.position.wy - prev.wy) * alpha,
+      };
+    }
+    const wz = support
+      ? (support.wz ?? 0) + (support.collider?.physicalHeight ?? 0)
+      : (player.prevWz ?? player.wz ?? 0) +
+        ((player.wz ?? 0) - (player.prevWz ?? player.wz ?? 0)) * alpha;
+    const jumpZ =
+      (player.prevJumpZ ?? player.jumpZ ?? 0) +
+      ((player.jumpZ ?? 0) - (player.prevJumpZ ?? player.jumpZ ?? 0)) * alpha;
+    return { ...player, position, prevPosition: position, wz, prevWz: wz, jumpZ, prevJumpZ: jumpZ };
   }
 
   private clearSupport(): void {

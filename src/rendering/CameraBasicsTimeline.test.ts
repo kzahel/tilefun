@@ -63,7 +63,7 @@ it("isolates noclip from timing: both real prediction paths agree on resident em
   expect(normal.samples).toEqual(noclip.samples);
 });
 
-it("a centered train can hide backwards camera motion; a stationary landmark reveals it", () => {
+it("keeps the train centered and the stationary landmark moving forward through late delivery", () => {
   const a = compareCameraBasics({
     subject: "train-locked",
     fault: "snapshot-late-10ms",
@@ -72,7 +72,7 @@ it("a centered train can hide backwards camera motion; a stationary landmark rev
   });
   expect(a.samples.every((s) => s.screenX === 640)).toBe(true);
   expect(
-    a.steps.some((s) => s.targetStep < 0 && s.cameraStep < 0 && s.landmarkScreenStep > 0),
+    a.steps.every((s) => s.targetStep >= 0 && s.cameraStep >= 0 && s.landmarkScreenStep <= 0),
   ).toBe(true);
 });
 
@@ -90,18 +90,20 @@ it.each(["player", "player-noclip"] as const)(
     expect(a.summary.backwardTargetFrames).toBe(0);
     // Continuing to walk must not restore the discarded simulation time later.
     expect(a.comparisons.at(-1)?.worldDeviation).toBeLessThan(-250);
+    // Camera uses the admitted input clock too, avoiding a second visual debt.
+    expect(a.summary.maxScreenDeviationPx).toBeLessThan(0.05);
   },
 );
 
-// Unmet contracts, not success claims. Promote to normal regressions after the
-// shared timeline/camera fix; do not relax the independent oracle tolerances.
+// Regressions promoted from the original seven expected failures, preserving
+// the independent oracle tolerances after the shared timeline/camera fix.
 const shortPauseFailures = CAMERA_FAULT_CASES.filter(
   (c) =>
     c.fault === "snapshot-late-10ms" ||
     c.fault === "delivery-gap-100ms" ||
     (c.fault === "render-gap-100ms" && c.subject === "train-smoothed"),
 );
-it.fails.each(shortPauseFailures)(
+it.each(shortPauseFailures)(
   "keeps basic $subject presentation independent of $fault scheduling",
   (config) => {
     const a = compareCameraBasics(config);
@@ -110,7 +112,7 @@ it.fails.each(shortPauseFailures)(
   },
 );
 
-it.fails.each(["train-locked", "train-smoothed"] as const)(
+it.each(["train-locked", "train-smoothed"] as const)(
   "does not replay train movement backwards after a long render pause ($subject)",
   (subject) => {
     const a = compareCameraBasics({

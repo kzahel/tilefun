@@ -22305,11 +22305,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:136"
+          "source": "src/client/ClientStateView.ts:137"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:602"
+          "source": "src/client/ClientStateView.ts:642"
         },
         {
           "system": "Gameplay",
@@ -22317,7 +22317,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:564"
+          "source": "src/client/PlayerPredictor.ts:581"
         },
         {
           "system": "Gameplay",
@@ -23081,7 +23081,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:627"
+          "source": "src/scenes/PlayScene.ts:635"
         }
       ]
     },
@@ -24345,7 +24345,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:261"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:260"
         },
         {
           "system": "Editor",

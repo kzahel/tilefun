@@ -36,10 +36,12 @@ export function beginPlayerPresentation(
   predictor?: PlayerPosePredictor | null,
   verticalFollow = false,
   offsetY = 0,
+  presentation?: { time: number; domain: string },
 ): void {
   camera.applyInterpolation(alpha);
   player = bindPredictedPlayerPose(player, predictor);
-  const prev = player.prevPosition;
+  if (player.id === -1) return;
+  const prev = player.prevPosition ?? (presentation === undefined ? undefined : player.position);
   if (prev) {
     const px = prev.wx + (player.position.wx - prev.wx) * alpha;
     let py = prev.wy + (player.position.wy - prev.wy) * alpha + offsetY;
@@ -49,9 +51,12 @@ export function beginPlayerPresentation(
     }
     // Match follow()'s exponential decay between ticks, avoiding the derivative
     // discontinuities of linear interpolation of the already-followed camera.
-    const f = 1 - (1 - CAMERA_LERP) ** alpha;
-    camera.x = camera.prevX + (px - camera.prevX) * f;
-    camera.y = camera.prevY + (py - camera.prevY) * f;
+    if (presentation) camera.presentFollow(presentation.time, px, py, presentation.domain);
+    else {
+      const f = 1 - (1 - CAMERA_LERP) ** alpha;
+      camera.x = camera.prevX + (px - camera.prevX) * f;
+      camera.y = camera.prevY + (py - camera.prevY) * f;
+    }
   }
   camera.x += camera.shakeOffsetX;
   camera.y += camera.shakeOffsetY;

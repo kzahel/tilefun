@@ -16,6 +16,9 @@ const mocks = vi.hoisted(() => ({
   terrain: vi.fn(),
   step: vi.fn(() => true),
   command: vi.fn(async () => {}),
+  beginPresentation: vi.fn(),
+  endPresentation: vi.fn(),
+  resetPresentationClock: vi.fn(),
 }));
 vi.mock("../assets/GameAssets.js", () => ({
   loadGameAssets: mocks.load,
@@ -29,7 +32,14 @@ vi.mock("../rendering/OutdoorPresentation.js", () => ({ presentTerrain: mocks.te
 vi.mock("./ScenarioClient.js", () => ({
   ScenarioClient: class {
     ready = Promise.resolve();
-    view = { playerEntity: { position: { wx: 80, wy: 160 } }, props: [] };
+    view = {
+      playerEntity: { position: { wx: 80, wy: 160 } },
+      props: [],
+      beginPresentation: mocks.beginPresentation,
+      endPresentation: mocks.endPresentation,
+      resetPresentationClock: mocks.resetPresentationClock,
+      cameraPresentation: { time: 0, domain: "remote" },
+    };
     step = mocks.step;
     command = mocks.command;
     dispose = mocks.terminate;
@@ -79,6 +89,7 @@ it("configures full gameplay assets, starts at the fixture and detaches visibili
   Object.defineProperty(document, "hidden", { value: false });
   document.dispatchEvent(new Event("visibilitychange"));
   expect(requestAnimationFrame).toHaveBeenCalledTimes(2);
+  expect(mocks.resetPresentationClock).toHaveBeenCalledTimes(3);
   host.dispose();
   host.dispose();
   document.dispatchEvent(new Event("visibilitychange"));
@@ -147,6 +158,8 @@ it("keeps diagnostic framing through ticks/commands and submits overlays around 
   expect(mocks.step).toHaveBeenCalled();
   expect(mocks.terrain).not.toHaveBeenCalled();
   expect(mocks.collect).toHaveBeenCalled();
+  expect(mocks.beginPresentation).toHaveBeenCalled();
+  expect(mocks.endPresentation).toHaveBeenCalled();
   expect(passes.map((p) => p.kind)).toEqual(["clear", "overlay", "scene", "overlay"]);
   expect(passes[1]).toMatchObject({ items: [{ kind: "line", stroke: "green" }] });
   expect(passes[3]).toMatchObject({ items: [{ kind: "rect", stroke: "red" }] });

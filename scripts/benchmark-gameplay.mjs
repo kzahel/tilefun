@@ -35,9 +35,9 @@ try {
       const callbacks = game.loop.callbacks,
         render = callbacks.render;
       const costs = [];
-      callbacks.render = (alpha) => {
+      callbacks.render = (alpha, now) => {
         const start = performance.now();
-        render(alpha);
+        render(alpha, now);
         costs.push(performance.now() - start);
       };
       const frames = [];

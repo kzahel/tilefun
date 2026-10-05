@@ -1,5 +1,5 @@
 import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
-
+import { advanceCameraFollow, type CameraFollowState } from "./CameraFollow.js";
 import { projectWorld, unprojectPlane } from "./Projection.js";
 
 export class Camera {
@@ -25,6 +25,8 @@ export class Camera {
   /** Actual position saved during interpolation, restored after render. */
   private actualX = 0;
   private actualY = 0;
+  private presentedFollow: CameraFollowState | null = null;
+  private presentedDomain = "";
 
   /** Effective pixel scale (base scale * zoom). */
   get scale(): number {
@@ -48,6 +50,7 @@ export class Camera {
 
   /** Immediately set camera position (e.g. restoring from HMR state). */
   snapTo(x: number, y: number): void {
+    this.presentedFollow = null;
     this.x = x;
     this.y = y;
     this.prevX = x;
@@ -57,6 +60,7 @@ export class Camera {
 
   /** Make the next follow() call snap instead of lerping (e.g. after switching worlds). */
   requestSnap(): void {
+    this.presentedFollow = null;
     this.firstFollow = true;
   }
 
@@ -96,6 +100,20 @@ export class Camera {
     this.actualY = this.y;
     this.x = this.prevX + (this.x - this.prevX) * alpha;
     this.y = this.prevY + (this.y - this.prevY) * alpha;
+  }
+
+  /** Render-time follow, driven only by explicit time and the displayed target. */
+  presentFollow(time: number, targetX: number, targetY: number, domain = "remote"): void {
+    if (this.presentedFollow && domain !== this.presentedDomain) {
+      // Ground/support transitions change clock ownership, not camera position.
+      this.presentedFollow = { ...this.presentedFollow, time, targetX, targetY };
+    }
+    this.presentedDomain = domain;
+    this.presentedFollow = advanceCameraFollow(this.presentedFollow, time, targetX, targetY);
+    this.x = this.presentedFollow.x;
+    this.y = this.presentedFollow.y;
+    this.actualX = this.x;
+    this.actualY = this.y;
   }
 
   /** Restore the true (post-update) camera position after rendering. */

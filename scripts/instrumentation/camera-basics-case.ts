@@ -74,14 +74,17 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
   const subject = remote ? createTrain(0, 64) : createPlayer(0, 64);
   subject.id = 1;
   subject.velocity = { vx: remote ? TRAIN_SPEED : PLAYER_SPEED, vy: 0 };
-  view.applyFrame({
-    type: "frame",
-    serverTick: 0,
-    simulationTime: 0,
-    lastProcessedInputSeq: 0,
-    playerEntityId: 1,
-    entityBaselines: [serializeEntity(subject)],
-  });
+  view.applyFrame(
+    {
+      type: "frame",
+      serverTick: 0,
+      simulationTime: 0,
+      lastProcessedInputSeq: 0,
+      playerEntityId: 1,
+      entityBaselines: [serializeEntity(subject)],
+    },
+    0,
+  );
   let nowMs = 0;
   const physics = { ...getMovementPhysicsParams(), revision: 0, walkSpeed: PLAYER_SPEED };
   const predictor = remote
@@ -94,6 +97,7 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
   if (predictor) {
     predictor.noclip = config.subject === "player-noclip";
     predictor.reset(subject);
+    view.setPredictor(predictor);
   }
   const camera = new Camera();
   camera.setViewport(1280, 900);
@@ -147,7 +151,7 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
         while (packets[nextPacket] && required(packets[nextPacket]).arrivalMs <= nowMs) {
           const message = decodeServerMessage(required(packets[nextPacket++]).buffer);
           if (message.type !== "frame") throw Error("Unexpected fixture packet");
-          view.applyFrame(message);
+          view.applyFrame(message, nowMs / 1000);
           framesApplied++;
         }
       if (predictor) {
@@ -160,7 +164,8 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
       updates++;
     },
     render(alpha) {
-      const shown = predictor ? required(predictor.presentationPlayer) : view.serverPlayerEntity;
+      view.beginPresentation(nowMs / 1000, alpha);
+      const shown = view.playerEntity;
       const p = interpolatePosition(shown.position, shown.prevPosition, alpha);
       if (config.subject === "train-locked") {
         // Same exact displayed-pose framing as ScenarioPresentationHost's
@@ -168,7 +173,8 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
         camera.applyInterpolation(alpha);
         camera.x = p.wx;
         camera.y = p.wy;
-      } else beginPlayerPresentation(camera, view.serverPlayerEntity, alpha, predictor);
+      } else
+        beginPlayerPresentation(camera, shown, alpha, undefined, false, 0, view.cameraPresentation);
       samples.push({
         frame,
         timeMs: nowMs,
@@ -186,6 +192,7 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
       });
       updates = framesApplied = 0;
       camera.restoreActual();
+      view.endPresentation();
     },
   });
   loop.setTickRate(config.serverHz);

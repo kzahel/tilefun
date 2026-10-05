@@ -5,7 +5,7 @@ const MAX_FRAME_TIME = 0.25;
 
 export interface GameLoopCallbacks {
   update(dt: number): void;
-  render(alpha: number): void;
+  render(alpha: number, presentationSeconds: number): void;
 }
 
 /**
@@ -70,7 +70,7 @@ export class GameLoop {
     }
 
     const alpha = this.accumulator / this.fixedDt;
-    this.callbacks.render(alpha);
+    this.callbacks.render(alpha, now);
   }
 
   private tick = (nowMs: number): void => {

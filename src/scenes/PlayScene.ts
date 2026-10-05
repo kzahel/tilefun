@@ -464,26 +464,34 @@ export class PlayScene implements GameScene {
   }
 
   render(alpha: number, gc: GameContext): void {
-    beginPlayerPresentation(
-      gc.camera,
-      gc.stateView.playerEntity,
-      alpha,
-      gc.serialized ? this.predictor : undefined,
-      gc.console.cvars.get("cl_verticalfollow")?.get() === true,
-    );
+    const view = gc.serialized ? (gc.stateView as RemoteStateView) : null;
+    view?.beginPresentation(gc.time.presentationSeconds, alpha, gc.debugPanel.paused);
+    try {
+      beginPlayerPresentation(
+        gc.camera,
+        gc.stateView.playerEntity,
+        alpha,
+        undefined,
+        gc.console.cvars.get("cl_verticalfollow")?.get() === true,
+        0,
+        view?.cameraPresentation ?? { time: gc.time.presentationSeconds, domain: "local" },
+      );
 
-    renderWorld(gc);
-    const particleItems = this.particles.collectItems();
-    renderEntities(gc, alpha, particleItems);
-    drawGemHUD(gc);
-    gc.chatHUD.render(gc.ctx);
-    renderDebugOverlay(gc);
-    render3DDebug(gc);
-    if (!gc.xrActive) {
-      gc.touchJoystick.draw(gc.ctx);
-      gc.touchButtons.draw(gc.ctx);
+      renderWorld(gc);
+      const particleItems = this.particles.collectItems();
+      renderEntities(gc, alpha, particleItems);
+      drawGemHUD(gc);
+      gc.chatHUD.render(gc.ctx);
+      renderDebugOverlay(gc);
+      render3DDebug(gc);
+      if (!gc.xrActive) {
+        gc.touchJoystick.draw(gc.ctx);
+        gc.touchButtons.draw(gc.ctx);
+      }
+    } finally {
+      gc.camera.restoreActual();
+      view?.endPresentation();
     }
-    gc.camera.restoreActual();
   }
 
   private maybeLogReconcile(gc: GameContext, remoteView: RemoteStateView): void {

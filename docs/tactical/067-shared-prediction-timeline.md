@@ -309,3 +309,20 @@ files / 1,647 ordinary passes / 11 expected failures; lint passes with existing
 118 warnings / 34 infos. Twenty-eight complete numeric traces repeat exactly;
 direct continuity CLI remains intentionally red. Tests/docs only: no runtime,
 integration, asset or browser change.
+
+### Shared presentation implementation
+
+Authorized follow-up implements pure `PresentationTimeline` sampling/monotonic
+clock and `CameraFollow` linear-target exponential integration. RemoteStateView
+owns bounded remote history and render-only pose borrowing; PlayScene and the
+embedded host share those outputs. Local walking remains predicted, with sampled
+support motion added only for display. Ground camera uses admitted input time;
+remote supported motion uses presentation time. Physics/replay owners are unchanged.
+
+All eleven expected failures are ordinary regressions, unchanged oracle tolerances;
+both continuity CLIs pass with exact repeated traces. The previous 4.728px short-gap
+camera error falls below 0.000002px; remote late delivery/long-pause controls have
+no backwards frames. Long local simulation debt remains intentionally bounded.
+[Evidence and limits](../research/camera-basics-reproductions.md#shared-presentation-fix)
+record the 50ms buffer, 100ms extrapolation/hold, reset and clock-domain behavior.
+Inventories/build are refreshed; final browser/streaming verification follows.

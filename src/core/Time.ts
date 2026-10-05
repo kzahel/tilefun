@@ -7,4 +7,6 @@ export class Time {
   elapsed = 0;
   /** Render interpolation alpha [0, 1). Fraction between two fixed updates. */
   alpha = 0;
+  /** Actual render timestamp, independent of capped simulation catch-up. */
+  presentationSeconds = 0;
 }

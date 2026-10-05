@@ -509,8 +509,9 @@ export class GameClient {
           this.doorPresentation.busy,
         );
       },
-      render: (alpha) => {
+      render: (alpha, presentationSeconds) => {
         this.time.alpha = alpha;
+        this.time.presentationSeconds = presentationSeconds;
         this.renderHost.beginFrame();
         this.scenes.render(alpha);
       },
@@ -866,6 +867,8 @@ export class GameClient {
     this.applyStartupRoute();
 
     document.addEventListener("visibilitychange", () => {
+      if (this.stateView instanceof RemoteStateView) this.stateView.resetPresentationClock();
+      this.camera.requestSnap();
       if (document.visibilityState === "hidden") {
         this.gcFlushServer();
       }

@@ -145,3 +145,55 @@ Lint passes with existing 118 warnings / 34 infos. All 28 complete default-phase
 traces repeat exactly, and the direct continuity CLI fails as intended. No runtime,
 rendered-pixel or integration changes; no browser/build/inventory run in this
 test/doc checkpoint. A simulated render gap is not a measurement of real GC.
+
+## Shared presentation fix
+
+The authorized implementation extracts pure timestamped sampling/clock functions
+into `PresentationTimeline` and exact exponential linear-target follow into
+`CameraFollow`. Replica-owned `RemotePresentation` retains at most 32 samples per
+entity, removes exits and resets segments for large relocations/backwards source
+time. The display clock has a 50ms buffer and at most 100ms of linear extrapolation,
+then holds. Snapshot arrival does not restart an already displayed segment.
+Pause/resume, visibility and replica clear have explicit reset behavior; timeScale
+updates rebase the source clock without depending on a 60Hz server interval.
+
+GameLoop passes the actual render timestamp separately from its capped simulation
+updates. Both PlayScene and ScenarioPresentationHost borrow display-only remote
+and player clones for the full render, including diagnostic fixed cameras, and
+release them in `finally`. Physics, serverEntities and collision replay stay on
+committed data. Predicted roof walking is interpolated locally and composed with
+the sampled carrier. Grounded prediction supplies its admitted input clock to the
+camera, so discarded simulation debt does not produce a second camera discontinuity.
+Clock-domain transitions preserve camera position; explicit camera snaps reset
+follow state. Static untimed reference camera consumers retain their old path.
+
+The camera integrates a moving target in closed form rather than following the
+newest remote target repeatedly during fixed catch-up. Its decay rate preserves
+the ordinary 60Hz response independently of server/render Hz. For straight motion,
+the integration composes across omitted renders, rather than needing to invent
+frames that never occurred. The unshaken displayed camera becomes the camera's
+post-render position for input/view queries.
+
+All eleven previously expected failures are promoted to ordinary regressions
+with the original independent tolerances. Both continuity CLIs now pass and all
+complete traces repeat exactly. At 60/120Hz, late-10ms locked-train recovery has
+zero world/camera deviation and no backwards frames. The 100ms delivery gap has
+only 0.000080px world deviation (Float32 extrapolation noise), no backwards frames.
+Smoothed-train 100ms render-gap camera deviation is 0.0000011px instead of 4.728px;
+600ms remote render-gap camera deviation is 0.0000027px with no backwards frames.
+Fast grounded/noclip short-pause recovery remains identical to uninterrupted
+execution. Their long-pause simulation deficit remains 275.255px by existing policy,
+but maximum additional subject screen deviation is only 0.00591px.
+
+Pure-function tests cover history bounds, relocation, equal-time replacement,
+bounded extrapolation, monotonic clock and camera composition at 30/60/120Hz.
+Replica tests check immutable physics ownership, paused resume, exit/re-entry,
+clear/relocation and responsive local roof walking. Shared host lifecycle tests
+check presentation borrow/release and visibility reset.
+
+Limits: last-segment extrapolation cannot know future braking/turns/collisions.
+Stalls beyond the bounded history/lead require hold and may correct on delivery.
+Latest replicated heading/native cardinal art and collider policy remain intact.
+Authority-debt/variable-speed/reconciliation cases remain further work; the fixed
+local simulation catch-up cap is unchanged. This is not a promise to hide arbitrary
+GC pauses or a pixel/frame-pacing result. Final browser/streaming checks follow.

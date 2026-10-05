@@ -20,10 +20,10 @@ it("presents intermediate frames at 120 Hz while updating at 60 Hz and bounds lo
   loop.stop();
   loop.externalTick(1000 / 120);
   expect(update).not.toHaveBeenCalled();
-  expect(render).toHaveBeenLastCalledWith(0.5);
+  expect(render).toHaveBeenLastCalledWith(0.5, 1 / 120);
   loop.externalTick(1000 / 60);
   expect(update).toHaveBeenCalledTimes(1);
-  expect(render).toHaveBeenLastCalledWith(0);
+  expect(render).toHaveBeenLastCalledWith(0, 1 / 60);
   loop.externalTick(25);
   expect(update).toHaveBeenCalledTimes(1);
   expect(render.mock.lastCall?.[0]).toBeCloseTo(0.5);

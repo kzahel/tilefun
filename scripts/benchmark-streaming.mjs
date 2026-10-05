@@ -416,10 +416,10 @@ try {
             update(dt);
             updates.push(performance.now() - t);
           };
-          callbacks.render = (alpha) => {
+          callbacks.render = (alpha, now) => {
             const t = performance.now();
             if (tracing) for (const key of Object.keys(phases)) phases[key] = 0;
-            render(alpha);
+            render(alpha, now);
             const end = performance.now();
             renders.push(end - t);
             const terrain = game.renderer.getDiagnostics();

@@ -171,22 +171,33 @@ try {
       const render = game.loop.callbacks.render;
       const restoreActual = game.camera.restoreActual;
       let renderedCamera;
+      let renderedPoses;
+      let renderAlpha;
       game.camera.restoreActual = function () {
         renderedCamera = { x: this.x, y: this.y, prevX: this.prevX, prevY: this.prevY };
+        const player = game.remoteView.playerEntity;
+        const car = game.remoteView.entities.find((e) => e.type === "train-curve-proof-v1");
+        const lerp = (a, b) => a + (b - a) * renderAlpha;
+        if (car)
+          renderedPoses = {
+            px: lerp(player.prevPosition?.wx ?? player.position.wx, player.position.wx),
+            py: lerp(player.prevPosition?.wy ?? player.position.wy, player.position.wy),
+            tx: lerp(car.prevPosition?.wx ?? car.position.wx, car.position.wx),
+            ty: lerp(car.prevPosition?.wy ?? car.position.wy, car.position.wy),
+            wz: player.wz,
+          };
         return restoreActual.call(this);
       };
-      game.loop.callbacks.render = (alpha) => {
+      game.loop.callbacks.render = (alpha, now) => {
+        renderAlpha = alpha;
         renderedCamera = undefined;
-        render(alpha);
+        renderedPoses = undefined;
+        render(alpha, now);
         const car = game.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
         if (!car) return;
         if (!renderedCamera) throw Error("Missing render-time camera pose");
-        const player = predictor.presentationPlayer ?? predictor.player;
-        const lerp = (a, b) => a + (b - a) * alpha;
-        const px = lerp(player.prevPosition?.wx ?? predictor.prevPosition.wx, player.position.wx);
-        const py = lerp(player.prevPosition?.wy ?? predictor.prevPosition.wy, player.position.wy);
-        const tx = lerp(car.prevPosition?.wx ?? car.position.wx, car.position.wx);
-        const ty = lerp(car.prevPosition?.wy ?? car.position.wy, car.position.wy);
+        if (!renderedPoses) throw Error("Missing borrowed render-time entity poses");
+        const { px, py, tx, ty } = renderedPoses;
         const server = game.remoteView.serverPlayerEntity;
         samples.push({
           t: performance.now(),
@@ -208,7 +219,7 @@ try {
           offsetX: px - tx,
           offsetY: py - ty,
           serverOffsetX: server.position.wx - car.position.wx,
-          z: player.wz,
+          z: renderedPoses.wz,
           serverZ: server.wz,
           heading: car.sprite?.frameRow,
           speed: Math.hypot(car.velocity?.vx ?? 0, car.velocity?.vy ?? 0),

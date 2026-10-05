@@ -35,6 +35,7 @@ import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../share
 import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor, ReconcileDiagnostics } from "./PlayerPredictor.js";
+import { RemotePresentation } from "./RemotePresentation.js";
 
 export interface ExtrapolationGhost {
   entityId: number;
@@ -188,6 +189,32 @@ export class RemoteStateView implements ClientStateView {
   private _lastFrameAppliedAtMs = 0;
   private _lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
   private _extrapolationStats: ExtrapolationStats | undefined;
+  private presentation = new RemotePresentation();
+  private presentedEntities: Entity[] | null = null;
+  cameraPresentation: { time: number; domain: string } = { time: 0, domain: "remote" };
+
+  /** Borrow display-only poses during render; end before simulation/input work. */
+  beginPresentation(now: number, alpha: number, paused = false): void {
+    this.cameraPresentation = this._predictor?.presentationClock(alpha) ?? {
+      time: now,
+      domain: "remote",
+    };
+    const entities = this.presentation.sample(this._entities, now, paused);
+    const player = this._predictor?.samplePresentationPlayer(alpha, entities);
+    const mount = this._predictor?.mount;
+    this.presentedEntities = entities.map((e) => {
+      if (e.id === this._playerEntityId && player) return player;
+      if (mount && e.id === mount.id)
+        return { ...mount, prevPosition: this._predictor?.mountPrevPosition ?? mount.position };
+      return e;
+    });
+  }
+  endPresentation(): void {
+    this.presentedEntities = null;
+  }
+  resetPresentationClock(): void {
+    this.presentation.resetClock();
+  }
 
   constructor(world: World) {
     this._world = world;
@@ -299,7 +326,7 @@ export class RemoteStateView implements ClientStateView {
   }
 
   /** Apply a per-tick frame message (entity delta protocol). */
-  applyFrame(msg: FrameMessage): void {
+  applyFrame(msg: FrameMessage, receivedAt = performance.now() / 1000): void {
     const extrapolationSamples = this._lastExtrapolationSamples;
     this._lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
 
@@ -352,6 +379,11 @@ export class RemoteStateView implements ClientStateView {
 
     // Rebuild flat entity array from map
     this._entities = Array.from(this._entityMap.values());
+    this.presentation.record(
+      this._entities,
+      msg.simulationTime ?? (msg.serverTick * this._tickMs) / 1000,
+      receivedAt,
+    );
     this.updateExtrapolationStats(extrapolationSamples);
     this._lastFrameAppliedAtMs = performance.now();
   }
@@ -420,6 +452,7 @@ export class RemoteStateView implements ClientStateView {
     setSmallJumps(msg.cvars.smallJumps);
     setPlatformerAir(msg.cvars.platformerAir);
     setTimeScale(msg.cvars.timeScale);
+    this.presentation.setRate(msg.cvars.timeScale, performance.now() / 1000);
     const tickMs = msg.cvars.tickMs > 0 ? msg.cvars.tickMs : 1000 / msg.cvars.tickRate;
     this._tickMs = tickMs;
     this._tickRate = 1000 / tickMs;
@@ -441,6 +474,8 @@ export class RemoteStateView implements ClientStateView {
 
   /** Clear all cached state (e.g., when switching worlds). */
   clear(): void {
+    this.presentation.clear();
+    this.endPresentation();
     this.roomState = null;
     console.log(
       `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingStates=${this._pendingStates.length}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
@@ -476,6 +511,7 @@ export class RemoteStateView implements ClientStateView {
     return this._world;
   }
   get entities(): readonly Entity[] {
+    if (this.presentedEntities) return this.presentedEntities;
     const predictor = this._predictor;
     if (!predictor?.player) return this._entities;
     const predicted = predictor.presentationPlayer ?? predictor.player;
@@ -495,6 +531,10 @@ export class RemoteStateView implements ClientStateView {
     return this._props;
   }
   get playerEntity(): Entity {
+    if (this.presentedEntities)
+      return (
+        this.presentedEntities.find((e) => e.id === this._playerEntityId) ?? PLACEHOLDER_ENTITY
+      );
     if (this._predictor?.player) return this._predictor.player;
     return this._entities.find((e) => e.id === this._playerEntityId) ?? PLACEHOLDER_ENTITY;
   }
