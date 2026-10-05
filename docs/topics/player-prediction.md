@@ -31,6 +31,14 @@ The timing checkpoint passes all three typechecks, 1,596 unit tests, lint, build
 Final native GPU capture measures 60.003Hz authority at approximately 120Hz render,
 with zero large screen jumps; the linked evidence preserves residual/transition cases.
 
+A focused [headless presentation reproduction](../research/train-camera-and-jump-reproductions.md#small-headless-presentation-reproduction)
+now isolates a single 10ms late snapshot at correct authority cadence. Production
+client interpolation/prediction/camera math yields a backward frame and ~9.9px
+screen jump at 60Hz snapshots / 120Hz presentation, while roof alignment remains
+within Float32 noise. All eight rate/delivery traces repeat exactly. Four expected
+continuity failures remain explicit in unit tests; `--assert-continuous` is red.
+This is a test/doc checkpoint, with no runtime refactor or camera tweak.
+
 Shared-loop rate transitions, car/train carry ownership, relative roof prediction
 and presentation, timestamped collision proxies and collider-policy parity are
 implemented. Bounded display-only decay handles residual uncertain NPC contacts;

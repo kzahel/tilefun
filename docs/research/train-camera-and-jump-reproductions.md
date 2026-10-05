@@ -242,3 +242,87 @@ traffic rendering/pause/context recovery. No source or bundle changes during tha
 run. `npm run streaming:bench -- --assert-ready` passes on the final build;
 the tested traversal retains ready visible terrain. These readiness checks are
 separate from the native 120Hz camera/cadence captures above.
+
+## Small headless presentation reproduction
+
+The user requested a simpler, deterministic verification boundary rather than
+relying on browser runs or visual judgment. `presentation-timeline-case.ts` now
+isolates one analytically moving train (`x = 192 * time`), one idle roof rider
+and a following camera. It supplies ordered binary frames to the actual
+RemoteStateView, PlayerPredictor, GameLoop, entity interpolation, PlayerPresentation
+and Camera projection. There is no Realm/generation/service behavior, renderer,
+DOM, browser, OS timer or rAF. Logical timestamps and delivery times are explicit.
+
+The only disturbance is **one snapshot at t=1500ms arriving 10ms late**. On-time
+delivery is the control; the same case runs at 30/60Hz snapshots × 60/120Hz
+presentation. Each three-second numeric trace repeats exactly. This is eight
+light parameter combinations of one scenario, not eight gameplay scenes.
+
+At 60Hz snapshots / 120Hz presentation, consecutive displayed train positions:
+
+| Presentation time | Consumed server tick | Frames consumed | Train x |
+| ---: | ---: | ---: | ---: |
+| 1493.750ms | 89 | 0 | 283.600px |
+| 1502.083ms | 89 | 0 | 282.000px |
+| 1510.417ms | 89 | 0 | 283.600px |
+| 1518.750ms | 91 | 2 | 288.400px |
+
+A constant 192px/s train should advance 1.6px every 120Hz frame. Instead it
+briefly moves back 1.6px, then later advances 4.8px. The client alpha resets while
+the replica still has the old interpolation endpoints, then the next update
+consumes two snapshots. The camera follows its own fixed-tick state; the pair
+produces a 9.878px maximum screen step. Rider/carriage offset stays within
+0.000062 world pixels; Float32 wire rounding explains that tiny residual.
+
+| Snapshots / presentation | On-time maximum world-step error | Late maximum world-step error | Late maximum screen step |
+| --- | ---: | ---: | ---: |
+| 30 / 60Hz | <0.00005px | 6.400px | 19.907px |
+| 30 / 120Hz | <0.00005px | 6.400px | 19.487px |
+| 60 / 60Hz | <0.00005px | 3.200px | 10.423px |
+| 60 / 120Hz | <0.00005px | 3.200px | 9.878px |
+
+This reproduces the remaining delivery/interpolation fault without authority clock
+drift. Analytic authority is deliberately diagnostic data, not an alternate game
+physics loop. Native Realm/Worker captures remain the integration evidence; this
+fixture does not establish AI, collisions, rendering pixels or display cadence.
+
+```sh
+# Numeric traces and repeatability; no browser launched.
+npx tsx scripts/instrumentation/presentation-timeline.ts --output=/tmp/presentation-timeline-baseline.json
+# Desired continuity contract: intentionally exits nonzero on current code.
+npx tsx scripts/instrumentation/presentation-timeline.ts --assert-continuous
+npx vitest run src/rendering/MovingPresentationTimeline.test.ts
+```
+
+The test file has eight ordinary tests for repeatability, the smooth control,
+ordered batching and roof alignment. Four `it.fails` tests explicitly record the
+unmet continuity contract. A passing aggregate suite is **not** evidence that late
+snapshot presentation is fixed: those four failures are expected and the direct
+continuity CLI is red. After the timeline fix, promote them to ordinary regressions
+without loosening the 0.05px world-step / 1px screen-step limits. World-step error
+is measured against the independent constant-speed oracle, not copied interpolation
+math; the camera warmup is excluded.
+
+### Pure boundary for the next fix
+
+The current harness is deterministic while exercising stateful production owners.
+The next runtime change should isolate presentation sampling into shared math:
+
+- Timestamped snapshot history plus chosen display time → displayed remote poses.
+- Displayed carrier pose plus locally predicted roof offset → displayed rider pose.
+- Previous camera state, displayed target and explicit elapsed time → camera state.
+
+Clock/buffer policy supplies a monotonic display time; the sampler reads no ambient
+timer. Explicit reset/teleport and insufficient-history policies remain necessary.
+Game and ScenarioPresentationHost consume the same outputs; Canvas/GPU consume
+those poses. This keeps responsiveness and roof walking prediction separate from
+delayed remote presentation without duplicating a special train algorithm.
+No production refactor or motion tweak is included in this reproduction checkpoint.
+An offscreen renderer is useful later for projection/pixel/ordering checks, but
+these numeric traces already detect the motion discontinuity before drawing.
+
+Reproduction checkpoint validation: all three typechecks and lint pass (the same
+118 warnings/34 infos); 197 unit files report **1,604 passed / 4 expected failures**.
+The direct continuity CLI fails as intended, and all eight traces repeat exactly.
+Only diagnostic fixtures/tests/docs changed. No browser, offscreen renderer or
+asset inventory regeneration was needed to establish this numerical reproduction.

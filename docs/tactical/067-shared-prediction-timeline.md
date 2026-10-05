@@ -265,3 +265,20 @@ and zero >3px forward/reverse screen jumps. Streaming `--assert-ready` passes on
 the final build. Remaining work is timestamped remote presentation through delayed
 snapshots/rate switches, followed by full-flight carrier momentum; neither is
 claimed fixed by the shared authority clock correction.
+
+### Deterministic presentation boundary
+
+The user requested simpler simulation-based verification. The new
+[headless reproduction](../research/train-camera-and-jump-reproductions.md#small-headless-presentation-reproduction)
+uses analytic constant-speed snapshot data and actual client codec/replica/predictor/
+GameLoop/interpolation/camera code, with no renderer/browser/OS clock/Realm. One
+10ms late snapshot causes a backwards frame and a ~9.9px screen step at 120Hz;
+on-time controls are smooth. Eight small parameter traces repeat identically.
+Four expected-failure unit contracts and a red `--assert-continuous` CLI make the
+remaining problem explicit. Sampling and camera math can be refactored behind
+this boundary, then the contracts promoted to ordinary regressions. No runtime
+behavior changes in this checkpoint.
+
+Headless checkpoint checks: typechecks/lint pass, 1,604 unit tests pass and four
+continuity tests are expected failures. The direct CLI is intentionally red.
+No browser/renderer run or runtime/pixel/asset change in this checkpoint.
