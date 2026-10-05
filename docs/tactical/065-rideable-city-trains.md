@@ -1,6 +1,6 @@
 # 065 — Rideable city-to-city trains
 
-Status: in progress.
+Status: complete (unrelated wildlife archive failures recorded below).
 Owner: [trains](../topics/trains.md).
 
 The user authorized autonomous implementation and commits on 2026-10-05,
@@ -46,4 +46,36 @@ Switches, shared-track traffic, express services and curved grades are later wor
   and refreshes after same-cell pose changes. Dedicated spatial/gravity regressions
   pass; the Canvas game completes the full saved trip. Full suite: 1,567 unit tests.
 
-Next: finish GPU/full browser and streaming validation and record final evidence.
+## Validation
+
+- `npm run typecheck`, `npm test -- --maxWorkers=2` (191 files, 1,567 tests),
+  `npm run check` (no errors; existing 118 warnings/34 infos), and build pass.
+- `npm run art:catalog` and `npm run workshop:manifest` pass: 605 exact candidates,
+  including the new generated city-train fixture. No approvals synthesized.
+- Full saved city-to-city journey passes in bundled full Chromium on Canvas and
+  GPU; phone fixture fits and restores a paused roof passenger. Generated crossings
+  retain walk/car traversal and clear roof passengers in both directions.
+- `npm run streaming:bench -- --assert-ready` passes: no missing data or unfinished
+  visible caches in cold/standing/walk/sprint/reverse/zoom-out samples. Frame p95
+  16.7–16.8ms on this desktop, headless Canvas/current-city fixture. This is an
+  ordinary traversal gate, not a physical-phone or train-journey timing claim.
+- Inspected native train/track composition at bends, second-station arrival and
+  phone layout. Pose switches and bend joins remain the available-art limitation.
+
+- Full `npx playwright test`: **371 passed / 2 failed** in 11.7 minutes. Both
+  failures are in `wildlife-review.spec.ts`: the registered fox pilot references
+  missing `preview.gif`/`playback.js` files. These artifacts and registrations are
+  unchanged by this task; the preview failure also prevents the playback-mutation
+  test reaching its expected message. Frozen wildlife assets were not repaired or
+  regenerated. All city-train, curve, grade, crossing, roof, interior and other
+  shared-engine browser regressions pass.
+
+## Completion
+
+Commits: `488dcc0` roof support, `0b7ad8f` generated integration, `f0623f6`
+spatial seam correction, followed by the validation/documentation checkpoint.
+New worlds and same-seed recreation use the current generator; old terrain edits
+are not migrated. No deployment or asset promotion was requested.
+
+Next: playtest boarding at both stations and the native pose switches, then add
+city/destination information before expanding routes or dispatch.

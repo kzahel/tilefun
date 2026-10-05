@@ -1,6 +1,6 @@
 # Client/server architecture
 
-Current implementation map, checked 2026-10-03. The
+Current implementation map, checked 2026-10-05. The
 [original extraction plan](archive/client-server-extraction-plan.md) is archived;
 its shared-memory local mode and “future” multiplayer phases are historical.
 
@@ -36,6 +36,12 @@ budgeted. These consumption acknowledgments are not an acknowledged entity
 snapshot protocol. See [networking](topics/multiplayer-networking.md) for message
 contracts and the dedicated WebRTC reliability boundary.
 
+`sync-chunks` preserves the fixed ordinary chunk layout. A flagged, length-prefixed
+geometry extension carries deterministic rail paths for curved track chunks;
+replicas use these paths with the replicated road mask to bake normal terrain
+caches. The authority service uses the same alignment for carriage motion. Paths
+are generator-derived metadata, not duplicated durable terrain records.
+
 [RequestBroker](../src/client/RequestBroker.ts) correlates request IDs with the
 response mapping in [requests.ts](../src/shared/requests.ts), checks response
 types, times out after 30 seconds and rejects pending calls on disconnect or
@@ -50,7 +56,10 @@ successful transfers reset replication state. Profile takeover and reconnect wai
 for in-flight travel. Keep menu and building-door transitions on this shared path.
 [PlayerLocationStore](../src/persistence/PlayerLocationStore.ts) owns current realm
 and position; per-realm player records remain visit history. Startup restores the
-current location, with validated fallback for unavailable interiors. See the
+current location, with validated fallback for unavailable interiors. Exact resume
+retains absolute height and saved moving-roof support; a relocated safe arrival
+or explicit travel resets support to ground. Restoring a train roof first readies
+the saved service and resolves its stable carriage identity. See the
 [interior topic](topics/patterns-and-interiors.md#player-location-reload-and-building-connections)
 for door identities, reload guarantees and content boundaries.
 

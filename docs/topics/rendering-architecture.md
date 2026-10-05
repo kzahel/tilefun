@@ -4,7 +4,7 @@ Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; optional WebGL2 gameplay backend and shared mesh-car presentation delivered;
 Canvas2D remains the default pending performance/asset acceptance.
-Updated: 2026-10-04.
+Updated: 2026-10-05.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
@@ -421,3 +421,13 @@ rotated blade edges, including at full opacity. Fixed-angle, integer-projection
 fixtures establish opacity/composition parity; actual-zoom images are visually
 inspected without asserting pixel identity. The sampling difference is recorded
 for future renderer fidelity work, not expanded into this LOD optimization.
+
+## Curved railway terrain
+
+Curved city links and loop/winding labs use the same procedural pixel track
+rasterizer inside `TileRenderer`. Rails, ballast and globally phased sleepers derive
+from analytic line/arc geometry attached to replicated chunks; road masks decide
+which tiles retain the tracks, including saved edits. Both backends consume the
+ordinary prepared terrain cache. There is no per-frame world track overlay.
+Native cardinal train sprites remain unchanged, with support-aware player ordering
+above their roofs. See [trains](trains.md#city-to-city-roof-riding-integration).
