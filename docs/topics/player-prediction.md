@@ -1,7 +1,7 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: reproduction baseline established; simulation and prediction changes remain on hold.
+Status: reproduction baseline established; shared timeline implementation authorized and in progress.
 Updated: 2026-10-05.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -14,8 +14,9 @@ own their autonomous motion and service behavior.
 The user reports jitter on a straight, constant-speed train and when walking into
 a moving NPC. On 2026-10-05 they explicitly requested solid reproducible scenarios
 before any tweaks or implementation. No gameplay changes have been made for this
-investigation. Preserve that reproduction-first gate rather than treating the
-initial train-specific proposal as an instruction to implement it immediately.
+investigation. After baseline completion, the user authorized implementation and
+incremental commits. [Tactical 067](../tactical/067-shared-prediction-timeline.md)
+records the implementation plan, engine references and acceptance cases.
 
 [Moving-contact reproductions](../research/moving-contact-reproductions.md) records
 50 deterministic cases, each repeated in a fresh production scenario with an
