@@ -271,3 +271,15 @@ The remaining two failures are the previously missing frozen fox review archive
 files. Desktop and phone captures also confirmed route curves, named stops and
 station-centering controls. Next: playtest finding and boarding trains from the
 map before expanding the network.
+
+## Deferred service lifetime and active markers
+
+On 2026-10-05 the user requested a written plan, with implementation deferred.
+[Tactical 066](../tactical/066-train-lifetime-and-map-markers.md) proposes retaining
+a travelling train's own dependency ticket until its next station after player
+interest disappears, then parking and unloading. A small world-scoped summary
+would show active trains to remote map viewers without replicating their bodies
+or loading remote terrain. Bounded admission, blocked trains and save/renewal
+races are part of that plan. Current trains still freeze at their exact saved
+position on retirement. The immediate task is investigating roof-rider jitter
+reported even on straight track at constant speed.
