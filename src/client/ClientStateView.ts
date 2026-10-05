@@ -17,6 +17,7 @@ import {
   setStopSpeed,
   setTimeScale,
 } from "../physics/PlayerMovement.js";
+import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import type { GameServer } from "../server/GameServer.js";
 import { applyEntityDelta } from "../shared/entityDelta.js";
 import type {
@@ -191,7 +192,7 @@ export class RemoteStateView implements ClientStateView {
   private _extrapolationStats: ExtrapolationStats | undefined;
   private presentation = new RemotePresentation();
   private presentedEntities: Entity[] | null = null;
-  cameraPresentation: { time: number; domain: string } = { time: 0, domain: "remote" };
+  cameraPresentation: CameraPresentationTime = { time: 0, domain: "remote" };
 
   /** Borrow display-only poses during render; end before simulation/input work. */
   beginPresentation(now: number, alpha: number, paused = false): void {

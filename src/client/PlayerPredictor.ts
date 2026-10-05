@@ -11,6 +11,7 @@ import {
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
+import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import type { World } from "../world/World.js";
@@ -104,14 +105,14 @@ interface ReconcileReplayStats {
 export class PlayerPredictor {
   private presentationInputSeconds = 0;
   private presentationInputDt = 0;
-  private presentationEpoch = 0;
+  private presentationEpoch: object = {};
 
   /** Local input clock excludes simulation time discarded by the catch-up cap. */
-  presentationClock(alpha: number): { time: number; domain: string } | null {
+  presentationClock(alpha: number): CameraPresentationTime | null {
     if (this.support) return null;
     return {
       time: this.presentationInputSeconds - this.presentationInputDt * (1 - alpha),
-      domain: `input:${this.presentationEpoch}`,
+      domain: this.presentationEpoch,
     };
   }
   constructor(
@@ -187,7 +188,7 @@ export class PlayerPredictor {
    */
   reset(serverPlayer: Entity, serverMount?: Entity): void {
     this.presentationInputSeconds = this.presentationInputDt = 0;
-    this.presentationEpoch++;
+    this.presentationEpoch = {};
     this.clearPresentationError();
     this.predicted = this.clonePlayer(serverPlayer);
     this.support = null;

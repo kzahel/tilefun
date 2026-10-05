@@ -119,3 +119,16 @@ describe("Camera", () => {
     expect(range.maxCy).toBe(1);
   });
 });
+
+describe("presentation clock epochs", () => {
+  it("rebases a restarted clock without freezing or jumping the camera", () => {
+    const camera = new Camera();
+    camera.presentFollow(100, 40, 20, {});
+    const replacement = {};
+    camera.presentFollow(0, 80, 20, replacement);
+    expect(camera.x).toBe(40);
+    camera.presentFollow(1 / 120, 81, 20, replacement);
+    expect(camera.x).toBeGreaterThan(40);
+    expect(camera.x).toBeLessThan(81);
+  });
+});

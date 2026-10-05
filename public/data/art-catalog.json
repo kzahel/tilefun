@@ -22305,19 +22305,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:137"
+          "source": "src/client/ClientStateView.ts:138"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:647"
+          "source": "src/client/ClientStateView.ts:648"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:53"
+          "source": "src/client/PlayerPredictor.ts:54"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:581"
+          "source": "src/client/PlayerPredictor.ts:582"
         },
         {
           "system": "Gameplay",
@@ -22369,7 +22369,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/PlayerPresentation.ts:8"
+          "source": "src/rendering/PlayerPresentation.ts:9"
         },
         {
           "system": "Gameplay",

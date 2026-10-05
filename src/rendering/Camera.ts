@@ -1,5 +1,9 @@
 import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
-import { advanceCameraFollow, type CameraFollowState } from "./CameraFollow.js";
+import {
+  advanceCameraFollow,
+  type CameraFollowState,
+  type CameraPresentationTime,
+} from "./CameraFollow.js";
 import { projectWorld, unprojectPlane } from "./Projection.js";
 
 export class Camera {
@@ -26,7 +30,7 @@ export class Camera {
   private actualX = 0;
   private actualY = 0;
   private presentedFollow: CameraFollowState | null = null;
-  private presentedDomain = "";
+  private presentedDomain: CameraPresentationTime["domain"] = "";
 
   /** Effective pixel scale (base scale * zoom). */
   get scale(): number {
@@ -103,7 +107,12 @@ export class Camera {
   }
 
   /** Render-time follow, driven only by explicit time and the displayed target. */
-  presentFollow(time: number, targetX: number, targetY: number, domain = "remote"): void {
+  presentFollow(
+    time: number,
+    targetX: number,
+    targetY: number,
+    domain: CameraPresentationTime["domain"] = "remote",
+  ): void {
     if (this.presentedFollow && domain !== this.presentedDomain) {
       // Ground/support transitions change clock ownership, not camera position.
       this.presentedFollow = { ...this.presentedFollow, time, targetX, targetY };

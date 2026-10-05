@@ -206,3 +206,13 @@ overlays, while leaving physics/diagnostic callers on `playerEntity`. The replic
 ownership test asserts that contract during a live borrow. The numeric continuity
 fix is unchanged. Inventories/build and final affected consumers are rerun after
 this boundary correction; no source changes during the first browser run.
+
+Final lifecycle review reproduced a second reset boundary: separate predictors
+both named their local clock `input:1`. Returning from editor mode could restart
+input time at zero while the camera still waited on the previous play clock.
+A regression first failed on that reused name. Each predictor/reset now allocates
+an opaque epoch identity; the camera preserves its position while rebasing time.
+The predictor identity and camera restart regressions pass, as do both headless
+continuity CLIs, all three typechecks, 200 unit files / 1,670 tests and lint
+(existing 118 warnings / 34 infos). Inventories/build are refreshed after this
+change. The lifecycle browser rerun is recorded below after execution.

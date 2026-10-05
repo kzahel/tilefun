@@ -8,6 +8,18 @@ import { RemoteStateView } from "./ClientStateView.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
 import { RemotePresentation } from "./RemotePresentation.js";
 
+it("allocates a distinct presentation clock epoch for predictor replacement and reset", () => {
+  const a = new PlayerPredictor(),
+    b = new PlayerPredictor();
+  const player = createPlayer(0, 64);
+  a.reset(player);
+  b.reset(player);
+  const old = a.presentationClock(1);
+  expect(b.presentationClock(1)?.domain).not.toBe(old?.domain);
+  a.reset(player);
+  expect(a.presentationClock(1)?.domain).not.toBe(old?.domain);
+});
+
 it("borrows sampled poses without modifying committed replica/collision data", () => {
   const view = new RemoteStateView(new World(new FlatStrategy()));
   const train = createTrain(0, 64);

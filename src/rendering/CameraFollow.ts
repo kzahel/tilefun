@@ -1,5 +1,11 @@
 import { CAMERA_LERP, TICK_RATE } from "../config/constants.js";
 
+/** Opaque identity distinguishes clock restarts, including new predictor instances. */
+export interface CameraPresentationTime {
+  time: number;
+  domain: string | object;
+}
+
 export interface CameraFollowState {
   time: number;
   x: number;

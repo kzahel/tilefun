@@ -2,6 +2,7 @@ import type { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { CAMERA_LERP } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Camera } from "./Camera.js";
+import type { CameraPresentationTime } from "./CameraFollow.js";
 
 type PlayerPosePredictor = Pick<
   PlayerPredictor,
@@ -36,7 +37,7 @@ export function beginPlayerPresentation(
   predictor?: PlayerPosePredictor | null,
   verticalFollow = false,
   offsetY = 0,
-  presentation?: { time: number; domain: string },
+  presentation?: CameraPresentationTime,
 ): void {
   camera.applyInterpolation(alpha);
   player = bindPredictedPlayerPose(player, predictor);
