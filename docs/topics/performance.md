@@ -7,7 +7,7 @@ identity/lifetime fixed, gameplay grass frame storage and terrain scheduler reco
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
-Updated: 2026-10-04.
+Updated: 2026-10-05.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend

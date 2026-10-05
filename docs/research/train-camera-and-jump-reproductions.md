@@ -199,6 +199,7 @@ Native 120Hz game captures after the fix:
 | --- | ---: | ---: |
 | Canvas, 60Hz | 60.025 | 1 / 1 |
 | GPU, 60Hz | 60.023 | 0 / 0 |
+| GPU, 60Hz final with timing assertion | 60.003 in steady section | 0 / 0 |
 | Canvas, 30Hz | 29.913 | 0 / 0 |
 | Canvas, 30Hz repeat | 29.964 in steady section | 0 / 0 |
 | GPU, 60→30→60Hz | 60.038 / 29.931 in steady sections | 1 / 7 across whole capture |
@@ -229,3 +230,15 @@ The deterministic `roof-camera-jump --assert-baseline` deliberately supplies an
 independent 16ms wake schedule directly to Realm; it does not call ServerLoop.
 It therefore still reproduces the old cadence's presentation failure and current
 jump friction. Its controls are retained for the next presentation/momentum work.
+
+Final validation of the runtime committed as `ddc7fef`: all three typechecks and
+strict standalone clock-probe typecheck pass; 196 unit files / 1,596 tests pass;
+lint passes with the existing 118 warnings / 34 infos. Art catalog and Workshop
+manifest regenerated without tracked output changes; build passes. All 16 affected
+browser tests pass against the settled build (3.0m): Canvas/GPU city ride,
+mid-bend save/reopen and alighting, phone roof restoration, curved route motion,
+Worker busy/save/visibility lifecycle, standalone server, lab disposal and shared
+traffic rendering/pause/context recovery. No source or bundle changes during that
+run. `npm run streaming:bench -- --assert-ready` passes on the final build;
+the tested traversal retains ready visible terrain. These readiness checks are
+separate from the native 120Hz camera/cadence captures above.

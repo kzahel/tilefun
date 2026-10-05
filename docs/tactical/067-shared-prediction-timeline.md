@@ -255,3 +255,13 @@ mixed-rate changes retain presentation discontinuities. The
 records those limits and the corrected steady-section measurement. No camera or
 momentum tweaks are bundled into the timer fix. Final repository/browser validation
 is recorded after the settled build.
+
+Timing fix commit: `ddc7fef`. Final typechecks (including standalone clock probe),
+all 1,596 units and lint pass; existing 118 warnings/34 infos. Inventories regenerated
+with no tracked output changes; build passes. All 16 affected game/lab/Worker/
+standalone browser tests pass on the settled build in 3.0m. Final native GPU timing
+assertion measures 60.003Hz authority and 120.003Hz rendering, zero roof-offset range
+and zero >3px forward/reverse screen jumps. Streaming `--assert-ready` passes on
+the final build. Remaining work is timestamped remote presentation through delayed
+snapshots/rate switches, followed by full-flight carrier momentum; neither is
+claimed fixed by the shared authority clock correction.

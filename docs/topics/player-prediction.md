@@ -26,6 +26,11 @@ Native approximately-120Hz captures now measure ~60Hz/~30Hz authority; the repea
 one Canvas delayed-frame pair and rate-switch discontinuities remain. The evidence
 records those limits. Camera smoothing and airborne movement are unchanged.
 
+The timing checkpoint passes all three typechecks, 1,596 unit tests, lint, build,
+16 affected game/lab/Worker/standalone browser tests and streaming readiness.
+Final native GPU capture measures 60.003Hz authority at approximately 120Hz render,
+with zero large screen jumps; the linked evidence preserves residual/transition cases.
+
 Shared-loop rate transitions, car/train carry ownership, relative roof prediction
 and presentation, timestamped collision proxies and collider-policy parity are
 implemented. Bounded display-only decay handles residual uncertain NPC contacts;
