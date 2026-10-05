@@ -77,12 +77,15 @@ Real Worker game, ordinary keyboard boarding, bundled full Chromium:
 - GPU with a timed external clock measured 119.9996Hz, live 60→30→60 authority;
   1369 cruise frames have exactly zero displayed roof-offset range, zero invalid
   alpha frames. This external run does not certify native display cadence.
+- Native headed GPU at 30Hz authority measured 120.0022Hz after the camera
+  follow change; 1337 cruise frames have zero displayed/server offset range and
+  zero invalid interpolation fractions (`--assert-fixed` passes).
 - One initial GPU boarding attempt timed out before measurement; a fresh run
   boarded successfully. The runner now emits boarding state on setup failure.
 
 Reports are machine-local: `/tmp/contact-presentation-fixed.json`,
 `/tmp/prediction-rates-fixed.json`, `/tmp/train-native-fixed.json`,
-`/tmp/train-gpu-fixed.json`. Durable results are summarized here; rerun on any
+`/tmp/train-gpu-fixed.json`, `/tmp/train-gpu-native-final.json`. Durable results are summarized here; rerun on any
 machine with:
 
 ```sh

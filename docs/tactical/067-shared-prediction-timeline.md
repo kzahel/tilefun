@@ -1,7 +1,7 @@
 # Shared prediction time, moving contacts and supports
 
 Topic: player-prediction
-Status: authorized for implementation, 2026-10-05.
+Status: implementation and validation complete; human playtest next, 2026-10-05.
 
 The user requested a recorded plan/references, then autonomous implementation
 and incremental commits. This supersedes the investigation-only hold after the
@@ -191,3 +191,30 @@ Full units at the preceding checkpoint pass 1581 tests. Contact/rate CLIs pass
 `--assert-fixed` with all independent repeats; streaming readiness passes again.
 The broad settled-build browser suite is still running on the preceding built
 checkpoint; rebuild and rerun affected game/lab consumers after it completes.
+
+### Final validation
+
+- All three typechecks pass; strict standalone probe typecheck passes.
+- Full unit suite passes: 195 files / 1582 tests after camera follow alignment.
+- Lint passes with the existing 118 warnings / 34 infos; no introduced errors.
+- Art catalog and Workshop manifest regenerated, build passes. Source references
+  and input digest are current; immutable asset banks/review evidence are untouched.
+- Contact `--assert-fixed`: all 50 cases pass, independent complete traces identical.
+- Rate `--assert-fixed`: all 42 cases pass, independent complete traces identical.
+- Real Worker native Canvas/GPU approximately 120Hz with 30Hz authority and GPU
+  external 120Hz with 60→30→60 authority pass roof presentation checks.
+- Settled broad browser run: 372/375 passed. Two wildlife checks reproduce the
+  prior fox `preview.gif` hash mismatch. Standalone timed out because source
+  changed after inventory generation; its freshness guard correctly disabled
+  voting. Its orphaned test process was reaped, inventories regenerated and the
+  isolated standalone rerun passed.
+- Final rebuilt game/lab consumer suite: all 35 pass, including standalone,
+  city-to-city boarding/ride/reload/alight, native curves, train/car bridge/garage
+  grades, traffic render/pause/context recovery, Worker settings/lifecycle and
+  character/furniture/scenario presentation. No bundle/source mutation during it.
+- Streaming `--assert-ready` passes again on the final camera build.
+
+Next checkpoint: human native-120Hz playtest of moving-NPC contact and train/car
+roof walking, jumping and alighting. Uncertain future AI/arrival grouping still
+corrects physics; bounded visual decay handles the measured residuals. Train
+lifetime/map tickets remain deferred to 066. No claim of full NPC AI prediction.
