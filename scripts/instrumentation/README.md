@@ -51,6 +51,17 @@ backlog lead and measure displayed rider position relative to the carriage.
 See [evidence and proposed fix](../../docs/research/train-roof-prediction-jitter.md).
 These are characterization probes, not assertions that jitter is fixed.
 
+## Rider-free camera timing
+
+`npx tsx scripts/instrumentation/camera-basics.ts --output=/tmp/camera-basics.json`
+records deterministic train-locked/train-smoothed and fast-player/noclip traces.
+Production client math runs on explicit times; no browser or renderer starts.
+Delivery delays and absent render callbacks are injected separately. Known-speed
+motion and equal-time uninterrupted controls distinguish missing frames from extra
+camera errors. `--assert-continuous` is intentionally red on current remote/camera
+recovery faults. Long-pause local simulation debt is characterized separately.
+See [scope, evidence and next work](../../docs/research/camera-basics-reproductions.md).
+
 ## Sleeping NPC separation
 
 Run `npx tsx scripts/instrumentation/entity-separation.ts` from the repository

@@ -282,3 +282,30 @@ behavior changes in this checkpoint.
 Headless checkpoint checks: typechecks/lint pass, 1,604 unit tests pass and four
 continuity tests are expected failures. The direct CLI is intentionally red.
 No browser/renderer run or runtime/pixel/asset change in this checkpoint.
+
+### Basic camera cases before passengers
+
+The user explicitly prioritized basic continuous motion over jump momentum and
+the combined rider/train case. [Camera basics evidence](../research/camera-basics-reproductions.md)
+records four rider-free fixtures: locked and smoothed remote train framing, plus
+768px/s real local prediction with/without noclip. On-time controls at 30/60Hz
+simulation × 60/120Hz display pass target motion and one-sided update-boundary
+checks. Fault traces separately inject late delivery and absent render callbacks.
+
+One late snapshot makes the locked train/camera move backwards. A short render
+gap preserves train target interpolation but shared smoothed follow runs 4.728px
+ahead of uninterrupted camera execution: catch-up follows the newest remote target
+repeatedly. Local player catch-up produces intermediate targets and passes the
+same short-gap control. A long gap separately drops local simulation debt and
+misphases remote presentation. No runtime change or jump work in this checkpoint.
+
+Next implementation order: establish shared explicit-time remote sampling and
+camera recovery using these basic contracts; preserve passing local prediction
+controls; define long-pause behavior and test authority debt/reconciliation before
+returning to supported passengers. Keep jump momentum as a later independent fix.
+
+Checks: three repository typechecks plus standalone CLI typecheck pass; 198 unit
+files / 1,647 ordinary passes / 11 expected failures; lint passes with existing
+118 warnings / 34 infos. Twenty-eight complete numeric traces repeat exactly;
+direct continuity CLI remains intentionally red. Tests/docs only: no runtime,
+integration, asset or browser change.

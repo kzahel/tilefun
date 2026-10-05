@@ -235,3 +235,11 @@ timing fix now uses monotonic deadlines in game Worker/P2P/dedicated authority.
 Labs advance through explicit scenario steps and do not use that timer; their
 shared movement/presentation owners remain unchanged. Periodic drift is removed,
 with rate-switch/delayed-snapshot presentation and jump friction still outstanding.
+
+The subsequent [rider-free camera basics](../research/camera-basics-reproductions.md)
+checkpoint exercises locked train framing (matching the existing lab diagnostic
+callback) and shared ordinary smoothing without a passenger. It identifies remote
+interpolation replay and catch-up camera targeting as separate faults; fast local
+prediction/short-render-pause controls pass, including noclip. No host, camera mode,
+runtime policy or frozen review pixels changed. Future sampling/camera fixes must
+preserve diagnostic fixed framing and reach both shared consumers.

@@ -52,6 +52,8 @@ history, not instructions to implement or confirmed present-day failures.
 
 ## Research and history
 
+- [Rider-free camera timing reproductions](research/camera-basics-reproductions.md)
+
 - [Sprite-to-3D investigations and renderer options](research/sprite-to-3d-and-renderer-options.md)
 - [Entity streaming: Minecraft Java and mclone](research/entity-streaming-reference.md)
 - [Wire protocol survey](research/wire-protocol-survey.md)

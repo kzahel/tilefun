@@ -1,7 +1,7 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared authority timing fixed; remaining presentation/momentum work recorded.
+Status: shared authority timing fixed; rider-free camera recovery faults reproduced.
 Updated: 2026-10-05.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -10,6 +10,16 @@ owns transport/replication delivery; [vehicles](vehicles.md) and [trains](trains
 own their autonomous motion and service behavior.
 
 ## Current status
+
+Latest: [camera basics](../research/camera-basics-reproductions.md) removes the
+passenger entirely. A locked train camera still moves backwards with one 10ms late
+snapshot. A 100ms render gap resumes a locked train correctly but introduces a
+4.728px world-space camera error with ordinary smoothing. A real locally predicted
+768px/s player, with/without noclip, resumes correctly after that short gap.
+Long pauses separately expose bounded simulation catch-up and remote alpha phase.
+These deterministic fixtures change no runtime behavior; seven additional
+expected failures keep the unmet basic contracts explicit. Work on these basic
+camera/time boundaries before returning to passengers or airborne momentum.
 
 The latest native-120Hz playtest reports stable roof-relative riding but periodic
 camera skips and lost jump momentum. Both are reproduced in
@@ -79,10 +89,12 @@ Current invariants:
 
 ## Next work
 
-With authority timer drift corrected, address timestamped remote presentation
-and sustained airborne carrier momentum
-with shared game/lab owners. The evidence document records the sequence and missing
-gap/collision cases. Do not broaden this into global AI rollback or change immutable
-art review snapshots to make unrelated validation pass. Continue engine changes
+With authority timer drift corrected, address timestamped remote presentation and
+camera catch-up targeting through the rider-free cases first, using shared game/lab
+owners. Preserve the passing fast local-player controls and define long-pause
+policy before adding authority-debt, reconciliation and passenger cases. Sustained
+airborne carrier momentum remains separate and deferred. Do not broaden this into
+global AI rollback or change immutable art review snapshots to make unrelated
+validation pass. Continue engine changes
 through game/lab shared owners. Train lifetime/active map markers remain deferred
 in [Tactical 066](../tactical/066-train-lifetime-and-map-markers.md).
