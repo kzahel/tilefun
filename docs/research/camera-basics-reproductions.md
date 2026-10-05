@@ -196,7 +196,8 @@ Stalls beyond the bounded history/lead require hold and may correct on delivery.
 Latest replicated heading/native cardinal art and collider policy remain intact.
 Authority-debt/variable-speed/reconciliation cases remain further work; the fixed
 local simulation catch-up cap is unchanged. This is not a promise to hide arbitrary
-GC pauses or a pixel/frame-pacing result. Final browser/streaming checks follow.
+GC pauses or universal frame pacing. Scoped browser/streaming and native evidence
+follows below.
 
 The first settled-build browser run passed 32/34 checks; both outdoor geometry
 backends exposed a diagnostics ownership mismatch. `playerEntity` must retain its
@@ -215,4 +216,63 @@ an opaque epoch identity; the camera preserves its position while rebasing time.
 The predictor identity and camera restart regressions pass, as do both headless
 continuity CLIs, all three typechecks, 200 unit files / 1,670 tests and lint
 (existing 118 warnings / 34 infos). Inventories/build are refreshed after this
-change. The lifecycle browser rerun is recorded below after execution.
+change. The lifecycle browser rerun is recorded below.
+
+
+### Integration and native refresh verification
+
+Runtime checkpoints: `36372cd` shared clocks/sampling, `6570be8` explicit physics
+and display accessors, `14261bb` unique prediction-clock epochs. The settled
+`6570be8` build passed 34/34 affected Playwright cases: city boarding, curved trains,
+Worker persistence/pause, standalone Workshop, scenario lifecycle, Traffic,
+Character, Furniture, Outdoor/World/Train/Vehicle Geometry. After the epoch change,
+the refreshed `14261bb` build passed all 12 affected lifecycle cases, including
+real character-gameplay editor/play switching, Worker and Canvas/GPU host consumers.
+Sources/build remained fixed during each browser run.
+
+The full unit run on settled inventories passes 200 files / 1,670 tests, without
+expected failures. All three typechecks, lint, both headless continuity CLIs and
+build pass. Lint retains 118 existing warnings / 34 infos. An intermediate unit
+run overlapped inventory generation and failed six Workshop freshness assertions;
+the settled-inventory repeat passed them unchanged. Frozen art/reference banks
+were not modified; catalog changes only refresh source references/digests.
+`streaming:bench -- --assert-ready` passed on the shared presentation/accessor
+checkpoint; this establishes streaming readiness, not arbitrary frame pacing.
+
+The isolated real Worker probe used ordinary keyboard boarding, bundled full
+Chromium, GPU rendering and this machine's native approximately-120Hz refresh.
+It captures the displayed player/train inside the render borrow and the unshaken
+camera immediately before restore. Motion deltas use the actual GameLoop/rAF
+presentation timestamp, **not** a `performance.now()` read after raster work.
+The latter remains separately recorded as capture time. After one second of
+continuous 192px/s straight cruise, expected travel is speed × elapsed presentation
+time. Startup camera settling is excluded from that steady-motion metric.
+
+| Native lane | Display Hz | Consumed authority Hz | Steady samples | Max world step error (px) | Max camera step error (px) | Backwards camera frames |
+| --- | ---: | --- | ---: | ---: | ---: | ---: |
+| GPU 60Hz | 120.0006 | 59.9774 | 1,204 | 0.001869 | 0.000288 | 0 |
+| GPU 60→30→60Hz repeat | 120.0117 | 29.8647 / 59.9914 | 1,217 | 0.007323 | 0.000242 | 0 |
+
+Both lanes pass `--assert-fixed --assert-timing --assert-presentation`, preserve
+zero measured roof-offset range and have zero large forward/reverse screen skips.
+An earlier mixed-rate attempt passed roof/presentation checks (max camera error
+0.000261px, no backwards frames) but failed the unchanged ±0.2Hz consumed-cadence
+tolerance: 29.7598Hz during the 30Hz portion. This is retained as a cadence
+measurement shortfall; the passing repeat does not prove scheduling can never
+miss deadlines. Recording committed source simulation time in the repeat adds
+evidence for future authority-debt investigations. Raw replay world shifts still
+include carrier travel, so those shifts alone are not presentation-error metrics.
+
+Rerun native lanes:
+
+```sh
+node scripts/instrumentation/train-roof-browser.mjs --renderer=gpu --headed --server-hz=60 --assert-fixed --assert-timing --assert-presentation --output=/tmp/train-presentation-60.json
+node scripts/instrumentation/train-roof-browser.mjs --renderer=gpu --headed --server-hz=alternate --assert-fixed --assert-timing --assert-presentation --output=/tmp/train-presentation-alternate.json
+```
+
+The probe closes browser/server and owns isolated auth/data. These captures
+validate continuous straight presentation at actual native refresh; they are
+not manual visual approval or controlled measurements of GC, loading stalls,
+unknown turns/braking or long authority catch-up. Next add explicit source-debt,
+varying-speed and reconciliation cases while preserving these basic controls.
+Jump momentum and train lifetime/map tickets remain deferred.

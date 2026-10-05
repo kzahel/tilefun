@@ -326,3 +326,22 @@ no backwards frames. Long local simulation debt remains intentionally bounded.
 [Evidence and limits](../research/camera-basics-reproductions.md#shared-presentation-fix)
 record the 50ms buffer, 100ms extrapolation/hold, reset and clock-domain behavior.
 Inventories/build are refreshed; final browser/streaming verification follows.
+
+
+Verification completed for the scoped basic-motion fix: all three typechecks,
+200 unit files / 1,670 tests, lint, refreshed inventories/build, both deterministic
+continuity CLIs and streaming readiness pass. The settled accessor build passes
+34/34 affected browser cases; the final epoch build passes 12/12 affected lifecycle
+cases, including real editor/play switching and Canvas/GPU embedded hosts.
+Opaque epoch identities fix a separately reproduced predictor-replacement camera
+freeze without adding a global clock or changing physics.
+
+Native GPU straight-motion captures at approximately 120Hz pass roof/cadence/
+presentation assertions at 60Hz and 60→30→60Hz. Maximum steady camera-step errors
+are 0.000288px / 0.000242px, with no backwards frames or large screen skips. An
+earlier mixed-rate attempt misses the separate 30Hz consumed-cadence tolerance
+while presentation passes; the evidence preserves it alongside the passing repeat.
+[Final integration/native evidence and reruns](../research/camera-basics-reproductions.md#integration-and-native-refresh-verification)
+record measurement timestamps, startup exclusions and limitations. Next work is
+explicit authority-debt, varying motion and reconciliation cases, then separate
+airborne momentum; no new claim about arbitrary server/GC stalls.

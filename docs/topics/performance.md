@@ -31,7 +31,11 @@ the remaining recommendations are not implemented fixes.
   simulation while advertising 60Hz. Catch-up is bounded to 250ms and lifecycle
   resume/rate changes reset the schedule. Native timing and roof-camera evidence
   are in [the prediction follow-up](../research/train-camera-and-jump-reproductions.md#shared-authority-timing-fix);
-  this does not establish elimination of delayed-snapshot presentation jumps.
+  the subsequent [shared presentation follow-up](../research/camera-basics-reproductions.md#shared-presentation-fix)
+  adds pure basic-motion contracts and native approximately-120Hz straight-motion
+  measurements. Benchmark render wrappers forward the actual render timestamp.
+  Streaming readiness is not a frame-pacing proof; injected absent callbacks do
+  not measure real GC, and variable motion/long authority debt remain outside acceptance.
 - Terrain cache preparation runs ahead of the camera. Measure both visible
   readiness and frame pacing. Explicit progressive presentation may accept gaps
   to preserve responsiveness; report gap duration, backlog and catch-up alongside

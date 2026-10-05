@@ -312,7 +312,11 @@ during flight. [Camera/jump reproductions](../research/train-camera-and-jump-rep
 confirm both: timer drift produces ~9.4px screen skips at native 120Hz, while
 default airborne friction erases inherited train velocity on the second command.
 The shared authority clock is now corrected with monotonic deadlines; native
-120Hz captures remove the periodic drift skips. Isolated delayed-snapshot and
-rate-switch presentation jumps, plus airborne friction, remain pending.
+120Hz captures remove the periodic drift skips. Delayed-snapshot jumps were then
+isolated in headless basic cases and corrected by the shared timestamped
+presentation/camera owner. Both continuity CLIs and native GPU approximately-120Hz
+straight-motion checks, including 60→30→60Hz transitions, now pass; see
+[camera basics evidence](../research/camera-basics-reproductions.md#shared-presentation-fix).
+Unknown braking/turns, extended authority debt and airborne friction remain pending.
 Roof-relative alignment alone is not the acceptance criterion. Service lifetime/map
 tickets remain deferred.

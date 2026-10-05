@@ -326,3 +326,14 @@ Reproduction checkpoint validation: all three typechecks and lint pass (the same
 The direct continuity CLI fails as intended, and all eight traces repeat exactly.
 Only diagnostic fixtures/tests/docs changed. No browser, offscreen renderer or
 asset inventory regeneration was needed to establish this numerical reproduction.
+
+
+## Shared presentation follow-up
+
+The subsequent [rider-free camera implementation/evidence](camera-basics-reproductions.md#shared-presentation-fix)
+introduces shared pure timestamp sampling and exact linear-target camera follow,
+used by both game and embedded hosts. All four continuity failures above are now
+ordinary passing regressions; the eight complete numeric traces still repeat
+exactly and `presentation-timeline.ts --assert-continuous` passes. The follow-up
+records broader basic controls, lifecycle boundaries and native approximately-120Hz
+measurements. Jump momentum remains an independent deferred change.

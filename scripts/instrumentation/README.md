@@ -49,7 +49,15 @@ Chromium, and closes both server and browser. Hooks observe without changing
 simulation or prediction. Reports distinguish post-replay corrections from raw
 backlog lead and measure displayed rider position relative to the carriage.
 See [evidence and proposed fix](../../docs/research/train-roof-prediction-jitter.md).
-These are characterization probes, not assertions that jitter is fixed.
+Use `--assert-fixed` for roof alignment, `--assert-timing` for consumed authority
+cadence and `--assert-presentation` for steady straight-motion step errors. The last
+check uses the actual GameLoop/rAF timestamp, separately recording post-render
+capture time, and compares world/camera travel against 192px/s × elapsed time after
+one second of continuous cruise. It requires at least 60 steady steps, world error
+≤0.05px, camera error ≤0.1px and no backwards camera frames.
+`--server-hz=alternate --headed --renderer=gpu` exercises 60→30→60Hz at native refresh.
+These checks establish the scoped straight-motion contract, not arbitrary motion
+or whole-machine frame pacing. See [current presentation evidence](../../docs/research/camera-basics-reproductions.md#shared-presentation-fix).
 
 ## Rider-free camera timing
 

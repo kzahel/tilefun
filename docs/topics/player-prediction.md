@@ -1,7 +1,8 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared timestamped presentation and camera recovery implemented; integration verification underway.
+Status: shared timestamped presentation and camera recovery implemented and verified;
+authority-debt and varying-motion cases remain next.
 Updated: 2026-10-05.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -17,14 +18,17 @@ labs borrow display-only replica/player poses during render; physics and collisi
 replay retain committed poses. The [rider-free cases](../research/camera-basics-reproductions.md#shared-presentation-fix)
 now pass late delivery, short render gaps and remote long-pause recovery. All eleven
 original expected failures are ordinary passing regressions, including the idle
-rider case. Build/inventories are refreshed; browser and streaming checks follow.
+rider case. Settled-build game/lab browser, streaming and native approximately-120Hz
+checks pass; detailed results and limits are in the linked evidence.
 
 Remote display uses a 50ms buffer and at most 100ms of last-segment extrapolation,
 then holds. Camera follow uses a render-time exponential response, normalized to
 the existing 60Hz response. Grounded local prediction supplies its admitted input
 clock, excluding discarded catch-up debt; supported players use remote presentation
 time with locally interpolated walking. Switching clock domains preserves camera
-position. Explicit pause/resume, visibility and realm reset rebase presentation;
+position. Opaque epoch identities distinguish predictor replacement/reset, preventing
+editor/play transitions from reusing an old local clock. Explicit pause/resume,
+visibility and realm reset rebase presentation;
 large relocations start a new history segment. Missing information can still cause
 correction when a train brakes/turns or authority stalls beyond the buffer.
 
@@ -97,8 +101,7 @@ Current invariants:
 
 ## Next work
 
-Complete integration validation of the shared presentation/camera fix, then add
-authority-debt, reconciliation and varying-speed/gap cases before broad passenger
+Add authority-debt, reconciliation and varying-speed/gap cases before broad passenger
 acceptance. Preserve the passing fast local-player controls; the existing 250ms
 simulation catch-up cap still discards excess local elapsed time. Sustained
 airborne carrier momentum remains separate and deferred. Do not broaden this into

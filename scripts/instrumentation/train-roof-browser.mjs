@@ -200,10 +200,12 @@ try {
         const { px, py, tx, ty } = renderedPoses;
         const server = game.remoteView.serverPlayerEntity;
         samples.push({
-          t: performance.now(),
+          t: now * 1000,
+          capturedAtMs: performance.now(),
           alpha,
           serverTick: game.remoteView.serverTick,
           ack: game.remoteView.lastProcessedInputSeq,
+          simulationTime: game.remoteView.simulationTime,
           tickRate: game.remoteView.tickRate,
           playerX: px,
           playerY: py,
@@ -278,6 +280,7 @@ try {
     };
   };
   const clockResiduals = [];
+  let cruiseSince;
   const cruiseSteps = raw.samples.slice(1).flatMap((b, i) => {
     const a = raw.samples[i];
     if (
@@ -287,8 +290,11 @@ try {
       b.heading !== 0 ||
       a.serverZ !== 44 ||
       b.serverZ !== 44
-    )
+    ) {
+      cruiseSince = undefined;
       return [];
+    }
+    cruiseSince ??= a.t;
     const dt = (b.t - a.t) / 1000;
     return [
       {
@@ -301,6 +307,9 @@ try {
         alphaBefore: a.alpha,
         alphaAfter: b.alpha,
         tickDelta: b.serverTick - a.serverTick,
+        steady: b.t - cruiseSince >= 1000,
+        worldStepError: b.playerX - a.playerX - 192 * dt,
+        cameraStepError: b.cameraX - a.cameraX - 192 * dt,
       },
     ];
   });
@@ -388,6 +397,12 @@ try {
       cruisePlayerStepX: stats(cruiseSteps.map((s) => s.playerStep)),
       cruiseScreenStepX: stats(cruiseSteps.map((s) => s.screenStep)),
       cruiseCameraReverseFrames: cruiseSteps.filter((s) => s.cameraStep < -0.01).length,
+      steadyWorldStepErrorPx: stats(
+        cruiseSteps.filter((s) => s.steady).map((s) => Math.abs(s.worldStepError)),
+      ),
+      steadyCameraStepErrorPx: stats(
+        cruiseSteps.filter((s) => s.steady).map((s) => Math.abs(s.cameraStepError)),
+      ),
       commandDtMs: stats(raw.inputs.map((s) => s.dtMs)),
       renderIntervalMs: stats(raw.samples.slice(1).map((s, i) => s.t - raw.samples[i].t)),
       observedRenderHz:
@@ -432,6 +447,18 @@ try {
   )
     throw Error("Moving roof presentation drift");
   const expectedRates = serverHz === "alternate" ? [30, 60] : [Number(serverHz)];
+  if (process.argv.includes("--assert-presentation")) {
+    const world = report.summary.steadyWorldStepErrorPx;
+    const camera = report.summary.steadyCameraStepErrorPx;
+    if (
+      world.count < 60 ||
+      camera.count < 60 ||
+      world.max > 0.05 ||
+      camera.max > 0.1 ||
+      report.summary.cruiseCameraReverseFrames
+    )
+      throw Error(`Steady presentation discontinuity: ${JSON.stringify({ world, camera })}`);
+  }
   if (expectedRates.some((hz) => !report.summary.observedTickRates.includes(hz)))
     throw Error("Missing advertised server tick-rate samples");
   if (process.argv.includes("--assert-timing")) {
