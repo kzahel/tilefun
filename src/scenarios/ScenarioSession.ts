@@ -364,7 +364,14 @@ export class ScenarioSession {
     }
     let position: { wx: number; wy: number },
       z = 0;
-    if (command.kind === "traffic-position") {
+    if (command.kind === "train-position") {
+      const car = [...(this.realm.railway?.services.values() ?? [])][0]?.carriages[
+        command.carriage ?? 1
+      ];
+      if (!car?.collider) throw new Error("Missing train fixture");
+      position = { wx: car.position.wx, wy: car.position.wy + (command.roof ? 0 : 48) };
+      z = (car.wz ?? 0) + (command.roof ? (car.collider.physicalHeight ?? 44) : 0);
+    } else if (command.kind === "traffic-position") {
       const car = this.realm.entityManager.entities.find((e) => e.id === this.handles.car);
       if (!car) throw new Error("Missing car fixture");
       const direction = car.sprite?.direction ?? Direction.Right;

@@ -112,6 +112,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [063 Curved train routes](063-curved-train-routes.md) | Implemented for review: smooth carriage corners, four-stop town loop and winding station link; [trains](../topics/trains.md) |
 | [064 Vehicle grade proof](064-vehicle-grade-proof.md) | Implemented for review: cars on bridge and garage ramps through production traffic; [world geometry](../topics/world-geometry.md) |
 
+| [065 Rideable city trains](065-rideable-city-trains.md) | In progress: generated curved city links, shared train roof riding and saved passengers |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

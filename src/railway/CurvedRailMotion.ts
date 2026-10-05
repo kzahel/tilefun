@@ -7,6 +7,7 @@ import type { World } from "../world/World.js";
 import { createCurveTrain, curveOffsets } from "./CurveTrain.js";
 import { railAlignment, wrapDistance } from "./RailPath.js";
 import type { RailService } from "./RailwaySystem.js";
+import { carryTrainPassengers, planTrainPassengers } from "./TrainPassengers.js";
 
 /** One exclusive service per path, advancing by arc length, never by global X. */
 export function stepCurvedTrain(
@@ -52,8 +53,15 @@ export function stepCurvedTrain(
         : required(record.distance) + direction * travel;
   const poses = createCurveTrain(alignment, nextDistance);
   const offsets = curveOffsets(alignment, nextDistance);
+  const passengers: NonNullable<ReturnType<typeof planTrainPassengers>> = [];
   for (const [i, nextCar] of poses.entries()) {
     const car = required(s.carriages[i]);
+    const plan = planTrainPassengers(car, nextCar, entities, props, world);
+    if (!plan) {
+      s.speed = 0;
+      return;
+    }
+    passengers.push(...plan);
     const current = getEntityAABB(car.position, required(car.collider));
     const next = getEntityAABB(nextCar.position, required(nextCar.collider));
     // Conservative swept envelopes bound the rotation as well as translation.
@@ -109,6 +117,7 @@ export function stepCurvedTrain(
   }
   // Commit atomically only after every body has cleared its next pose.
   record.distance = nextDistance;
+  carryTrainPassengers(passengers, entities);
   for (const [i, car] of s.carriages.entries()) {
     const next = required(poses[i]);
     car.velocity = {

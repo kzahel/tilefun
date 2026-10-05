@@ -6,6 +6,7 @@ export type ScenarioCommand =
   | { kind: "view-range"; range: ChunkRange }
   | { kind: "teleport"; position: Entity["position"]; z?: number }
   | { kind: "traffic-position"; roof: boolean }
+  | { kind: "train-position"; roof: boolean; carriage?: number }
   | { kind: "traffic-settings"; speed?: number; gap?: number };
 export type ScenarioRequest = { id: number } & (
   | { kind: "open"; recipe: ScenarioRecipe }

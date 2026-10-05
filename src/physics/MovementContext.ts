@@ -19,6 +19,8 @@ export interface MovementContext {
   isPropBlocked(aabb: AABB, entityWz: number, entityHeight: number, stepUp?: number): boolean;
   /** When true, skip all collision (debug noclip). */
   noclip: boolean;
+  /** Authority carries train passengers with the committed carriage pose, after input. */
+  deferTrainCarry?: boolean;
   /** Computed blendBase TerrainId at tile coords. For surface friction lookup. */
   getTerrainAt?(tx: number, ty: number): number;
   /** Road type at tile coords. For surface friction lookup. */

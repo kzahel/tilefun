@@ -3,7 +3,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
-import { isVehicle } from "../traffic/Vehicle.js";
+import { hasMovingRoof } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
@@ -75,7 +75,7 @@ export function collectScene(
     (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
   );
   const vehicleSurfaces = entities.flatMap((e) =>
-    isVehicle(e) && e.collider
+    hasMovingRoof(e) && e.collider
       ? [
           {
             bounds: getEntityAABB(e.position, e.collider),

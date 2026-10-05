@@ -77,6 +77,7 @@ import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
+import { isTrain } from "../railway/Train.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
@@ -337,23 +338,29 @@ export class Realm {
     applyPlayerModel(player, session.playerModel);
     this.entityManager.spawn(player);
     const ride = saved?.roofRide;
+    if (ride && this.railway) {
+      this.railway.update([...this.sessions.values()].map((s) => s.player).concat(player));
+      await this.railway.settle();
+      if (this.railway.error) throw this.railway.error;
+    }
     if (
       ride &&
-      this.traffic &&
       Number.isFinite(ride.offsetX) &&
       Number.isFinite(ride.offsetY) &&
-      Math.hypot(ride.offsetX, ride.offsetY) < 40
+      Math.hypot(ride.offsetX, ride.offsetY) < 512
     ) {
-      const vehicle = [...this.traffic.states.values()].find(
-        (s) => s.entity.proceduralId === ride.identity,
-      )?.entity;
+      const vehicle = this.entityManager.entities.find((e) => e.proceduralId === ride.identity);
       if (vehicle?.collider) {
         player.position = {
           wx: vehicle.position.wx + ride.offsetX,
           wy: vehicle.position.wy + ride.offsetY,
         };
-        player.wz = vehicle.collider.physicalHeight ?? 0;
+        player.wz = (vehicle.wz ?? 0) + (vehicle.collider.physicalHeight ?? 0);
         player.groundZ = player.wz;
+        if (roofSupport(player, [vehicle])?.id !== vehicle.id) {
+          player.position = { wx: spawnX, wy: spawnY };
+          player.wz = player.groundZ = saved?.wz ?? 0;
+        }
       }
     }
 
@@ -680,6 +687,7 @@ export class Realm {
 
           const playerExclude = new Set([session.player.id]);
           const playerCtx = createMovementContext({
+            deferTrainCarry: true,
             getCollision,
             getHeight,
             getTerrainAt,
@@ -816,7 +824,7 @@ export class Realm {
         for (const player of players) {
           if (preSteppedEntityIds.has(player.id)) continue;
           const support = roofSupport(player, this.entityManager.entities);
-          if (support?.velocity) {
+          if (support?.velocity && !isTrain(support)) {
             player.position.wx += support.velocity.vx * stepDt;
             player.position.wy += support.velocity.vy * stepDt;
           }

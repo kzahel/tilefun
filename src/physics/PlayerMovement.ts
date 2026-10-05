@@ -19,8 +19,8 @@ import {
 import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
-import { roofSupport } from "../traffic/RoofSupport.js";
-import { isVehicle } from "../traffic/Vehicle.js";
+import { isTrain } from "../railway/Train.js";
+import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { MovementContext } from "./MovementContext.js";
 import { getSurfaceProperties } from "./SurfaceFriction.js";
@@ -320,7 +320,7 @@ export function stepPlayerFromInput(
     // local hop assist; terrain/furniture jumps and approved geometry stay fixed.
     const nearby = initialSurfaces.entities.filter(
       (e) =>
-        isVehicle(e) &&
+        hasMovingRoof(e) &&
         e.collider &&
         Math.hypot(e.position.wx - entity.position.wx, e.position.wy - entity.position.wy) < 100,
     );
@@ -338,7 +338,7 @@ export function stepPlayerFromInput(
     if (entity.jumpVZ !== undefined) {
       entity.velocity.vx += support.velocity.vx;
       entity.velocity.vy += support.velocity.vy;
-    } else {
+    } else if (!(ctx.deferTrainCarry && isTrain(support))) {
       const relative = entity.velocity;
       entity.velocity = { ...support.velocity };
       moveAndCollide(entity, dt, ctx);

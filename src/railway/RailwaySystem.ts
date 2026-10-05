@@ -7,6 +7,7 @@ import type { SaveManager } from "../persistence/SaveManager.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { RoadType } from "../road/RoadType.js";
 import type { InterestTicket } from "../server/InterestManager.js";
+import { roofSupport } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { stepCurvedTrain } from "./CurvedRailMotion.js";
@@ -14,6 +15,7 @@ import { createCurveTrain } from "./CurveTrain.js";
 import { type RailPath, railAlignment } from "./RailPath.js";
 import type { RailLine } from "./RailwayPlanner.js";
 import { createTrain, createTrainCarriages, TRAIN_LENGTH } from "./Train.js";
+import { carryTrainPassengers, planTrainPassengers } from "./TrainPassengers.js";
 
 /** Legacy straight tile route, or an opt-in world-pixel alignment with station distances. */
 export type RailRoute = Pick<RailLine, "id" | "y" | "start" | "end"> & {
@@ -101,7 +103,20 @@ export class RailwaySystem {
       }))
         nearby.set(line.id, line);
     }
-    this.wanted = new Set([...nearby.keys()].sort().slice(0, MAX_SERVICES));
+    const ridden = new Set(
+      [...this.services.values()]
+        .filter((s) =>
+          players.some((p) =>
+            s.carriages.some((c) => roofSupport(p, this.entities.entities)?.id === c.id),
+          ),
+        )
+        .map((s) => s.line.id),
+    );
+    this.wanted = new Set(
+      [...nearby.keys()]
+        .sort((a, b) => Number(ridden.has(b)) - Number(ridden.has(a)) || a.localeCompare(b))
+        .slice(0, MAX_SERVICES),
+    );
     for (const id of this.wanted) {
       const line = nearby.get(id);
       if (
@@ -297,6 +312,32 @@ export class RailwaySystem {
           e.velocity.vx = 0;
           break;
         }
+        const passengers: NonNullable<ReturnType<typeof planTrainPassengers>> = [];
+        let passengerBlocked = false;
+        for (const [j, car] of s.carriages.entries()) {
+          const plan = planTrainPassengers(
+            car,
+            {
+              ...car,
+              position: { wx: car.position.wx + dx, wy: car.position.wy },
+              wz: required(poses[j]),
+            },
+            this.entities,
+            this.props,
+            this.world,
+          );
+          if (!plan) {
+            passengerBlocked = true;
+            break;
+          }
+          passengers.push(...plan);
+        }
+        if (passengerBlocked) {
+          s.speed = 0;
+          e.velocity.vx = 0;
+          break;
+        }
+        carryTrainPassengers(passengers, this.entities);
         for (const [j, car] of s.carriages.entries()) {
           car.position.wx += dx;
           car.wz = car.groundZ = required(poses[j]);

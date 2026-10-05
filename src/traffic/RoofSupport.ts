@@ -1,7 +1,13 @@
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntitySurface } from "../physics/surfaceHeight.js";
+import { isTrain } from "../railway/Train.js";
 import { isVehicle } from "./Vehicle.js";
+
+/** Autonomous solid moving roofs; passengers walk/jump rather than steer a mount. */
+export function hasMovingRoof(e: { type?: string }): boolean {
+  return isVehicle(e) || isTrain(e);
+}
 
 export function vehicleRoofBounds(e: EntitySurface) {
   // Every solid part of the body must support feet at its top plane. A smaller
@@ -17,7 +23,7 @@ export function roofSupport(
   const box = getEntityAABB(entity.position, entity.collider);
   return entities.find(
     (e) =>
-      isVehicle(e) &&
+      hasMovingRoof(e) &&
       e.id !== entity.id &&
       e.collider &&
       Math.abs((entity.wz ?? 0) - (e.wz ?? 0) - (e.collider.physicalHeight ?? 0)) < 0.1 &&

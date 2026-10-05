@@ -2,7 +2,7 @@
 
 Topic: trains
 Status: generated horizontal services and road crossings delivered; curved-route and town-loop engine previews implemented for review.
-Updated: 2026-10-04.
+Updated: 2026-10-05.
 
 Owns generated railway networks, town stations, train services, railway structures
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
@@ -209,3 +209,22 @@ The pre-integration review gate remains: first accept the new motion/layout and
 then add bounded generated loops/curved links
 with road-crossing and terrain admission. Curves plus grades, switches, shared
 track traffic and boarding are not part of this slice.
+
+## City-to-city roof riding integration
+
+On 2026-10-05 the user authorized autonomous end-to-end implementation and
+incremental commits, explicitly superseding the earlier pre-integration review
+gate for this scope. This is implementation authorization, not manufactured
+Workshop verdicts or permission to rewrite frozen asset banks. Native train
+sprites remain unchanged. [Tactical 065](../tactical/065-rideable-city-trains.md)
+owns this delivery.
+
+Train roofs now use shared moving-roof support, jump assistance, momentum and
+support-aware drawing. Authority carries by each committed carriage pose; native
+cardinal changes retain the passenger's relative roof position. Both curved and
+straight services check passenger clearance before moving. Player records retain
+the carriage identity and roof offset; restoration prepares the saved service
+before reattaching. The World geometry train labs expose **Ride train roof**.
+
+Next in this authorized slice: generated bounded curved links, production cached
+track rendering, station access and full game/Worker validation.

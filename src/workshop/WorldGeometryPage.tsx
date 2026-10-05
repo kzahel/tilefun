@@ -431,6 +431,22 @@ export default function WorldGeometryPage() {
             Start at {name}
           </button>
         ))}
+        {(trainCurve || trainGrade) && (
+          <button
+            onContextMenu={(e) => e.preventDefault()}
+            type="button"
+            onClick={() => {
+              keys.current.clear();
+              setFollowTrain(true);
+              void scene.current
+                ?.command({ kind: "train-position", roof: true })
+                .catch((e) => setError(String(e)));
+              canvas.current?.focus();
+            }}
+          >
+            Ride train roof
+          </button>
+        )}
         <button
           onContextMenu={(e) => e.preventDefault()}
           type="button"
