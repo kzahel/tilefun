@@ -100,3 +100,11 @@ Chromium. Native 120Hz cadence is measured, not assumed from the display label.
 ## Execution
 
 Plan recorded before runtime changes. Checkpoints and final evidence follow here.
+
+### Loop timing checkpoint
+
+Consume the active timestep before calling update; native rAF and external lab
+stepping now share GameLoop.externalTick. Focused loop tests pass (including
+60→30→60 with intermediate 120Hz renders). The deterministic free-walk transition
+probe reports zero negative-alpha frames, versus seven in the recorded baseline,
+and unchanged float-noise walking error. Report: `/tmp/rate-switch-fixed.json`.

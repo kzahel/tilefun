@@ -63,8 +63,10 @@ export class GameLoop {
     this.accumulator += frameTime * this.timeScale;
 
     while (this.accumulator >= this.fixedDt) {
-      this.callbacks.update(this.fixedDt);
-      this.accumulator -= this.fixedDt;
+      const dt = this.fixedDt;
+      // Consume this step before callbacks can reset the accumulator/rate.
+      this.accumulator -= dt;
+      this.callbacks.update(dt);
     }
 
     const alpha = this.accumulator / this.fixedDt;
@@ -74,23 +76,7 @@ export class GameLoop {
   private tick = (nowMs: number): void => {
     if (!this.running) return;
 
-    const now = nowMs / 1000;
-    let frameTime = now - this.lastTime;
-    this.lastTime = now;
-
-    if (frameTime > MAX_FRAME_TIME) {
-      frameTime = MAX_FRAME_TIME;
-    }
-
-    this.accumulator += frameTime * this.timeScale;
-
-    while (this.accumulator >= this.fixedDt) {
-      this.callbacks.update(this.fixedDt);
-      this.accumulator -= this.fixedDt;
-    }
-
-    const alpha = this.accumulator / this.fixedDt;
-    this.callbacks.render(alpha);
+    this.externalTick(nowMs);
 
     this.rafId = requestAnimationFrame(this.tick);
   };
