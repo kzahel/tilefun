@@ -6,6 +6,12 @@ Before: [contact reproductions](moving-contact-reproductions.md),
 [Worker roof captures](train-roof-prediction-jitter.md). Those baseline records
 remain historical evidence, not current behavior.
 
+**Playtest follow-up:** the earlier checks establish roof-relative alignment, not
+smooth world/screen motion or momentum throughout flight. The user subsequently
+reported periodic camera skips and ineffective carriage-to-carriage jumps. Both
+are reproduced in [camera/jump evidence](train-camera-and-jump-reproductions.md).
+The shared implementation is a partial checkpoint with those failures outstanding.
+
 ## Contract
 
 GameLoop consumes the active timestep before invoking callbacks that may change

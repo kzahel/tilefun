@@ -169,10 +169,18 @@ try {
         return send.call(this, message);
       };
       const render = game.loop.callbacks.render;
+      const restoreActual = game.camera.restoreActual;
+      let renderedCamera;
+      game.camera.restoreActual = function () {
+        renderedCamera = { x: this.x, y: this.y, prevX: this.prevX, prevY: this.prevY };
+        return restoreActual.call(this);
+      };
       game.loop.callbacks.render = (alpha) => {
+        renderedCamera = undefined;
         render(alpha);
         const car = game.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
         if (!car) return;
+        if (!renderedCamera) throw Error("Missing render-time camera pose");
         const player = predictor.presentationPlayer ?? predictor.player;
         const lerp = (a, b) => a + (b - a) * alpha;
         const px = lerp(player.prevPosition?.wx ?? predictor.prevPosition.wx, player.position.wx);
@@ -190,6 +198,13 @@ try {
           playerY: py,
           trainX: tx,
           trainY: ty,
+          cameraX: renderedCamera?.x,
+          cameraY: renderedCamera?.y,
+          cameraPrevX: renderedCamera?.prevX,
+          cameraActualX: game.camera.x,
+          playerScreenX: (px - (renderedCamera?.x ?? NaN)) * game.camera.scale,
+          playerVx: predictor.player.velocity?.vx,
+          serverVx: server.velocity?.vx,
           offsetX: px - tx,
           offsetY: py - ty,
           serverOffsetX: server.position.wx - car.position.wx,
@@ -218,6 +233,7 @@ try {
         predictor.reconcile = reconcile;
         game.transport.send = send;
         game.loop.callbacks.render = render;
+        game.camera.restoreActual = restoreActual;
         return { samples, reconciliations, inputs };
       };
     },
@@ -251,7 +267,34 @@ try {
     };
   };
   const clockResiduals = [];
+  const cruiseSteps = raw.samples.slice(1).flatMap((b, i) => {
+    const a = raw.samples[i];
+    if (
+      a.speed < 191.9 ||
+      b.speed < 191.9 ||
+      a.heading !== 0 ||
+      b.heading !== 0 ||
+      a.serverZ !== 44 ||
+      b.serverZ !== 44
+    )
+      return [];
+    const dt = (b.t - a.t) / 1000;
+    return [
+      {
+        t: b.t,
+        dt,
+        cameraStep: b.cameraX - a.cameraX,
+        cameraVelocity: (b.cameraX - a.cameraX) / dt,
+        playerStep: b.playerX - a.playerX,
+        screenStep: b.playerScreenX - a.playerScreenX,
+        alphaBefore: a.alpha,
+        alphaAfter: b.alpha,
+        tickDelta: b.serverTick - a.serverTick,
+      },
+    ];
+  });
   const clockGroups = new Map();
+  const cruiseSkips = cruiseSteps.filter((s) => s.screenStep > 3);
   const inputDurations = new Map(raw.inputs.map((s) => [s.seq, s.dtMs / 1000]));
   for (let i = 1; i < raw.reconciliations.length; i++) {
     const a = raw.reconciliations[i - 1],
@@ -301,10 +344,20 @@ try {
       cruiseReconcileShiftAbs: stats(cruiseReconciles.map((s) => Math.hypot(s.shiftX, s.shiftY))),
       cruiseReplayCount: stats(cruiseReconciles.map((s) => s.replayCount)),
       cruiseSpeed: stats(cruise.map((s) => s.speed)),
+      cruiseCameraStepX: stats(cruiseSteps.map((s) => s.cameraStep)),
+      cruiseCameraVelocityX: stats(cruiseSteps.map((s) => s.cameraVelocity)),
+      cruisePlayerStepX: stats(cruiseSteps.map((s) => s.playerStep)),
+      cruiseScreenStepX: stats(cruiseSteps.map((s) => s.screenStep)),
+      cruiseCameraReverseFrames: cruiseSteps.filter((s) => s.cameraStep < -0.01).length,
       commandDtMs: stats(raw.inputs.map((s) => s.dtMs)),
       renderIntervalMs: stats(raw.samples.slice(1).map((s, i) => s.t - raw.samples[i].t)),
       observedRenderHz:
         ((raw.samples.length - 1) * 1000) / (raw.samples.at(-1).t - raw.samples[0].t),
+      observedAuthorityHz:
+        ((raw.samples.at(-1).serverTick - raw.samples[0].serverTick) * 1000) /
+        (raw.samples.at(-1).t - raw.samples[0].t),
+      cruiseScreenSkips: cruiseSkips.length,
+      cruiseScreenSkipSpacingMs: stats(cruiseSkips.slice(1).map((s, i) => s.t - cruiseSkips[i].t)),
       invalidAlphaFrames: raw.samples.filter((s) => s.alpha < 0 || s.alpha > 1).length,
       observedTickRates: [...new Set(raw.samples.map((s) => Math.round(s.tickRate)))],
       clockEquationResidualPx: stats(clockResiduals),
@@ -312,7 +365,7 @@ try {
         [...clockGroups].map(([key, shifts]) => [key, stats(shifts)]),
       ),
     },
-    raw,
+    raw: { ...raw, cruiseSteps },
   };
   const output = option("output", path.join(temp, "report.json"));
   await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);

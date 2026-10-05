@@ -306,3 +306,10 @@ roof passengers once per committed pose; prediction replays relative walking and
 camera/body/lab overlays bind to the same support presentation. Native geometry,
 clearance and saved support identities remain authoritative. Collision proxies and
 bounded residual display correction share game/lab engine owners.
+
+The user's next idle-roof playtest exposes periodic camera skips and lost momentum
+during flight. [Camera/jump reproductions](../research/train-camera-and-jump-reproductions.md)
+confirm both: timer drift produces ~9.4px screen skips at native 120Hz, while
+default airborne friction erases inherited train velocity on the second command.
+Those shared engine fixes remain pending; roof-relative alignment alone is not
+the acceptance criterion. Service lifetime/map tickets remain deferred.

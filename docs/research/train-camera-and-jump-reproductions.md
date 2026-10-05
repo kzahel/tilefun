@@ -1,0 +1,171 @@
+# Idle train camera skips and airborne momentum loss
+
+2026-10-05, runtime baseline `6c762ab`. Follow-up to the user's roof-riding
+playtest after [shared prediction work](shared-prediction-fix.md).
+Reproduction and diagnosis only; no movement, camera or server-loop changes in
+this checkpoint. [Player prediction](../topics/player-prediction.md) owns next work.
+
+## What was missing from the previous acceptance checks
+
+The earlier real Worker probes and deterministic matrices checked the passenger's
+offset from the carriage, not continuity of the carriage/player in world space or
+on screen relative to the camera. A whole carriage and its passenger can skip
+together while passing every roof-offset assertion. The earlier jump tests checked
+inherited velocity immediately after takeoff, not its survival through flight.
+
+The browser probe now captures the camera **during rendering**, just before
+`restoreActual()`, alongside interpolated player/train world positions, their
+relative offset, screen-relative position, authority tick and client alpha. Reading
+camera.x after rendering would instead measure the restored fixed-tick camera.
+
+## Real Worker reproduction
+
+Fresh regional seed 2026, ordinary Down + Space boarding, then release all input.
+Native headed rAF on this machine's 120Hz display; bundled full Playwright Chromium,
+1280×900 viewport, isolated dev origins/auth/data, no network emulation. Twenty-second
+captures include station dwell, acceleration and straight 192px/s cruise. Analysis
+below selects consecutive straight cruise frames with authoritative roof height 44.
+
+| Backend / advertised authority | Measured render Hz | Measured authority Hz | Cruise screen skips >3px | Maximum screen step |
+| --- | ---: | ---: | ---: | ---: |
+| Canvas / 60Hz | 120.009 | 62.431 | 28 | 9.442px |
+| GPU / 60Hz | 120.002 | 62.527 | 29 | 9.376px |
+| Canvas / 30Hz | 120.002 | 30.213 | 3 | 18.905px |
+
+Displayed and authoritative roof-offset ranges are **exactly zero** in all three
+captures. No browser errors or invalid alpha frames. At 60Hz the large screen steps
+occur about every 0.4 seconds; the Canvas inter-event spacing is 310–484ms. At 30Hz
+the measured spacings are 3.067 and 3.500 seconds. This matches the reported idle
+roof-riding symptom without turns, acceleration or walking.
+
+One representative Canvas transition, across a 7.9ms display frame:
+
+- Consumed authority tick advances from 621 to 623.
+- Passenger and train advance together by 4.716 world pixels.
+- Rendered camera advances by 1.616 world pixels.
+- Their screen position advances by 9.300px at the default scale of 3.
+
+The camera is not teleporting backward. The train/player pair periodically steps
+ahead of the independently smoothed camera, then the camera catches up. To the
+rider this appears as unstable tracking. Merely switching the camera to follow
+the same discontinuous movement would transfer the skip to the landscape.
+
+The first 30Hz attempt failed during ordinary keyboard boarding, before measurement;
+it is excluded. A sequential rerun boarded normally and produced the accepted
+30Hz capture. Every browser and dev server is closed by the probe's finally block.
+
+## Timing cause and deterministic control
+
+`ServerLoop.start()` schedules `setInterval(fixedDt * 1000)` and advances exactly
+one fixed simulation step for every callback, without measuring elapsed time.
+The 60Hz interval is 16.6667ms, but the observed browser authority cadence is near
+16ms. This explains the measured ~62.5 ticks/second. The main-thread `GameLoop`
+accumulates real elapsed time at the advertised 60Hz. Thus authority advances an
+extra tick approximately every `1 / (62.5 - 60) = 0.4` seconds.
+
+`RemoteStateView` consumes the accumulated frames during client updates. Carrier
+rendering interpolates its most recent authoritative previous/current poses with
+**client** alpha; passengers correctly share those endpoints. When two authority
+ticks arrive within one client update, the endpoints advance by an extra 3.2px at
+192px/s. The fixed-tick camera filters that advance. At 30Hz, a nominal 33.3333ms
+timer running near 33ms produces a smaller clock drift, but each excess tick moves
+the carrier 6.4px.
+
+The focused deterministic probe varies only actual authority wake cadence, keeping
+the advertised rate and physics dt unchanged. It uses the production Realm,
+codec, replica, predictor, GameLoop and shared camera functions, with independently
+scheduled authority and render events. Six seconds per case; screen steps are
+measured after a one-second camera warmup. Each complete trace is run twice and
+must hash identically.
+
+| Advertised rate / actual timer | Render rates | Screen skips | Maximum screen step at 120Hz |
+| --- | --- | ---: | ---: |
+| 60Hz / 16.6667ms control | 60, 120Hz | 0 | 0.066px |
+| 60Hz / 16ms reproduction | 60, 120Hz | 13 | 9.376px |
+| 30Hz / 33.3333ms control | 60, 120Hz | 0 | 0.361px |
+| 30Hz / 33ms reproduction | 60, 120Hz | 1 | 18.989px |
+
+All eight cases preserve exactly zero roof-offset range and correct advertised
+rate. The 60Hz reproduction's skip spacing is exactly 400ms. The ideal-cadence
+control eliminates the periodic large skip. This isolates clock drift from an
+arbitrary camera smoothing setting. The browser results independently establish
+that the drift exists in the real Worker; the deterministic fixture does not
+pretend to measure OS timers or display cadence.
+
+## Jump reproduction and cause
+
+The same native authority fixture starts an ordinary held jump from a carriage
+cruising at 192px/s, then records every command until landing. A car at 36px/s is
+the shared moving-support control. Both use default physics. Diagnostic repeats
+disable only platformer air control to isolate its effect; this is not a proposed
+change to the game's default controls. Each trace repeats identically.
+
+| Case | First airborne vx | Second airborne vx | Relative travel at landing |
+| --- | ---: | ---: | ---: |
+| Train, idle jump, defaults | 192px/s | 0 | −105.621px |
+| Train, forward jump, defaults | 265.6px/s | 64px/s | −68.120px |
+| Train, idle jump, air-control-off diagnostic | 192px/s | 192px/s | +3.201px |
+| Train, forward jump, air-control-off diagnostic | 265.6px/s | 265.6px/s | +46.143px |
+| Car, idle jump, defaults | 36px/s | 0 | −19.804px |
+
+Flights last 583.45ms in these fixtures. The forward takeoff contains the roof's
+current walking velocity plus carrier velocity; airborne wish speed is 64px/s.
+Relative travel at landing includes that landing tick's committed roof carry;
+the +3.201px diagnostic landing displacement is not a claim of zero landing error.
+This fixture demonstrates momentum loss, not successful traversal of a particular
+carriage gap or complete predicted airborne presentation.
+
+`stepPlayerFromInput()` adds the last carrier velocity exactly once on takeoff.
+On the next command, `applyMovementPhysics()` applies ordinary friction in air
+when `platformerAir` is enabled, which is the default. Default friction is 100;
+at 60Hz, the computed drop exceeds the full speed, erasing it in one tick. With
+forward input, normal acceleration then sets ordinary airborne walking velocity.
+Thus the inheritance exists, but does not survive long enough to be useful. This
+is shared player movement behavior, not a train-specific omission or air drag model.
+
+## Proposed implementation sequence
+
+1. Make the shared ServerLoop advance fixed steps according to monotonic elapsed
+   time/deadlines, rather than callback count. Fractional timer rounding and late
+   callbacks must not speed up/slacken simulation. Bound catch-up, preserve hidden
+   pause/resume, stop/restart and tick-rate changes, and test Worker/P2P/dedicated
+   owners. Verify measured wall-time authority cadence at 30/60Hz first.
+2. Rerun these camera traces before touching smoothing. Separately address ordinary
+   delayed/batched snapshots with an authority-timestamped presentation clock:
+   remote bodies and support passengers share sampled carrier poses; local command
+   alpha remains the local prediction clock. The camera consumes that displayed
+   pose through the shared game/lab policy. Do not conceal a faster simulation by
+   changing camera lerp or repeating carrier velocity per predicted command.
+3. Preserve inherited airborne carrier velocity independently of voluntary movement
+   velocity, so platformer friction/control operates on the voluntary component.
+   Carry this state through authority, replication, prediction/replay, collision,
+   landing, teleports and support changes. Retain responsive default air steering
+   rather than globally switching to Quake air controls. Before implementation,
+   stage a native two-carriage gap case in both directions, idle/forward/backward
+   jumps, landing on same/next roof, walk-off and wall/ceiling collision.
+
+Acceptance must include world/screen continuity and whole airborne trajectories,
+in addition to roof-relative alignment. Exercise 60/120Hz render, 30/60Hz authority,
+rate transitions and ordered delayed/batched delivery. Keep game and embedded labs
+on shared engine owners. Train lifetime/minimap tickets remain deferred.
+
+## Rerun and validation
+
+```sh
+npx tsx scripts/instrumentation/roof-camera-jump.ts --assert-baseline --output=/tmp/roof-camera-jump-baseline.json
+node scripts/instrumentation/train-roof-browser.mjs --renderer=canvas --headed --output=/tmp/train-camera-baseline.json
+node scripts/instrumentation/train-roof-browser.mjs --renderer=gpu --headed --output=/tmp/train-camera-gpu-baseline.json
+node scripts/instrumentation/train-roof-browser.mjs --renderer=canvas --headed --server-hz=30 --output=/tmp/train-camera-30-baseline.json
+```
+
+Run native headed captures sequentially to avoid focus/cadence contention.
+`--assert-fixed` in the older browser probe still asserts roof alignment and alpha,
+**not camera continuity**. The new `--assert-baseline` intentionally requires the
+documented failures and ideal-cadence/air-control controls; replace its expectations
+when implementing fixes. Local reports contain raw frame/step/velocity data and
+deterministic trace hashes; the document preserves the reviewable numerical evidence.
+
+Typechecks, strict standalone probe typecheck, all 1,582 unit tests and lint pass
+at the reproduction checkpoint. Lint retains 118 existing warnings/34 infos.
+Native browser evidence is above. No renderer/input/recipe/runtime changes are
+made, so this checkpoint does not change inventories or rebuild frozen review art.

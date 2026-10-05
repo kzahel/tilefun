@@ -1,7 +1,7 @@
 # Shared prediction time, moving contacts and supports
 
 Topic: player-prediction
-Status: implementation and validation complete; human playtest next, 2026-10-05.
+Status: initial implementation validated; playtest camera/momentum follow-up open, 2026-10-05.
 
 The user requested a recorded plan/references, then autonomous implementation
 and incremental commits. This supersedes the investigation-only hold after the
@@ -218,3 +218,21 @@ Next checkpoint: human native-120Hz playtest of moving-NPC contact and train/car
 roof walking, jumping and alighting. Uncertain future AI/arrival grouping still
 corrects physics; bounded visual decay handles the measured residuals. Train
 lifetime/map tickets remain deferred to 066. No claim of full NPC AI prediction.
+
+### Playtest follow-up: camera and flight
+
+The user's idle train playtest preserved roof-relative alignment but exposed
+periodic screen skips and ineffective inherited jump momentum. The focused
+[reproduction record](../research/train-camera-and-jump-reproductions.md) adds
+render-time camera capture and whole-flight traces before runtime changes.
+Native 120Hz Canvas/GPU reproduce ~9.4px screen steps every ~0.4s; authority
+actually advances near 62.5Hz although advertising 60Hz. Deterministic 16ms versus
+16.6667ms authority wakes isolate that drift with exactly repeating controls.
+At 30Hz, native screen steps are ~18.9px but occur ~3.3s apart. Default platformer
+air friction erases inherited 192px/s on the second jump command; car control agrees.
+
+The earlier acceptance checks omitted camera continuity and sustained flight.
+Reopen those boundaries: shared monotonic-time authority scheduling first, measured
+camera rerun, timestamped remote presentation as needed, then separate carrier
+momentum from voluntary air controls with native carriage-gap/collision cases.
+This checkpoint changes probes/docs only; no camera or movement tweak.

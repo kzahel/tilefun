@@ -1,7 +1,7 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared prediction timeline implemented; validation and playtest checkpoint.
+Status: shared prediction implemented; playtest camera/momentum failures reproduced.
 Updated: 2026-10-05.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -10,6 +10,14 @@ owns transport/replication delivery; [vehicles](vehicles.md) and [trains](trains
 own their autonomous motion and service behavior.
 
 ## Current status
+
+The latest native-120Hz playtest reports stable roof-relative riding but periodic
+camera skips and lost jump momentum. Both are reproduced in
+[camera/jump evidence](../research/train-camera-and-jump-reproductions.md): real
+Worker authority runs near 62.5Hz while advertising 60Hz; combined carrier and
+rider screen position skips ~9.4px every 0.4 seconds. Default airborne friction
+erases inherited carrier velocity on the second jump command. Eight timing controls
+and five full-flight cases repeat identically. No runtime tweaks in that checkpoint.
 
 Shared-loop rate transitions, car/train carry ownership, relative roof prediction
 and presentation, timestamped collision proxies and collider-policy parity are
@@ -49,8 +57,10 @@ Current invariants:
 
 ## Next work
 
-Human playtesting of native 120Hz moving contacts and roof walking/jumps is the
-next checkpoint. Do not broaden this into global AI rollback or change immutable
+Correct shared authority timer drift first and rerun camera continuity measurements,
+then address timestamped remote presentation and sustained airborne carrier momentum
+with shared game/lab owners. The evidence document records the sequence and missing
+gap/collision cases. Do not broaden this into global AI rollback or change immutable
 art review snapshots to make unrelated validation pass. Continue engine changes
 through game/lab shared owners. Train lifetime/active map markers remain deferred
 in [Tactical 066](../tactical/066-train-lifetime-and-map-markers.md).

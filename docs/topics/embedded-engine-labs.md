@@ -224,3 +224,10 @@ roof passengers once per committed pose; prediction replays relative walking and
 camera/body/lab overlays bind to the same support presentation. Native geometry,
 clearance and saved support identities remain authoritative. Collision proxies and
 bounded residual display correction share game/lab engine owners.
+
+The subsequent [camera/jump reproduction](../research/train-camera-and-jump-reproductions.md)
+finds that roof-relative alignment does not establish camera continuity: real Worker
+authority timer drift and mixed carrier/client interpolation clocks create periodic
+screen skips. Default shared air friction also erases takeoff momentum. Follow-up
+must preserve the game/lab shared camera and movement owners; the reproduction
+checkpoint has not changed runtime behavior.
