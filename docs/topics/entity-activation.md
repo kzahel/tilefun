@@ -4,7 +4,7 @@ Topic: entity-activation
 Status: incremental persistence and shared lazy residency are implemented.
 World containers, traffic records, bounded admission and recovery validation
 are complete.
-Updated: 2026-10-03.
+Updated: 2026-10-05.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
 [Performance](performance.md) owns broader timing evidence and renderer work;
@@ -60,6 +60,13 @@ IDs change on return; durable IDs and root-scoped attachment records do not.
 [024](../tactical/024-interest-and-residency.md) records deterministic fault tests,
 1,000-chunk bounded-retention evidence, real browser/Node integration and the
 concurrent spatial-query fix discovered during that integration.
+
+The transient entity spatial hash keeps origin-cell buckets plus an overlap index
+for any collider footprint crossing a chunk edge. Refresh that index on every
+move or pose change, including changes inside the same origin cell. Exact cell
+queries must still find a sub-chunk train roof straddling the edge; otherwise
+missing-input gravity ticks can drop a rider. Radius queries remain origin based.
+This index is independent of durable actor residency and persistence scope.
 
 ## Completion validation
 

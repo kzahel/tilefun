@@ -94,7 +94,9 @@ for (const backend of ["canvas", "gpu"]) {
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect.poll(async () => (await read(page)).serverZ).toBe(44);
     const restored = await read(page);
-    expect(Math.hypot(restored.x - saved.x, restored.y - saved.y)).toBeLessThan(32);
+    expect(saved.z).toBe(44);
+    // Authority may run during startup; allow one second of service travel.
+    expect(Math.hypot(restored.x - saved.x, restored.y - saved.y)).toBeLessThan(192);
     if (restored.editing) await page.keyboard.press("Tab");
     await expect
       .poll(

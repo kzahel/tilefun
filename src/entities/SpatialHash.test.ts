@@ -132,3 +132,23 @@ describe("SpatialHash", () => {
     expect(cell).toHaveLength(2);
   });
 });
+
+it("finds sub-chunk roofs across negative cell seams and refreshes same-cell pose changes", () => {
+  const hash = new SpatialHash(),
+    e = makeEntity(10, 120, -260);
+  e.collider = { offsetX: 0, offsetY: 12, width: 160, height: 24 };
+  hash.insert(e);
+  expect(hash.queryRange(0, -1, 0, -1)).toContain(e);
+  e.collider = { offsetX: 0, offsetY: 56, width: 34, height: 112 };
+  hash.update(e);
+  expect(hash.queryRange(0, -1, 0, -1)).toContain(e);
+  e.position.wy = -400;
+  hash.update(e);
+  expect(hash.queryRange(0, -1, 0, -1)).not.toContain(e);
+  e.collider.height = 400;
+  e.collider.offsetY = 200;
+  hash.update(e);
+  expect(hash.queryRange(0, -1, 0, -1)).toContain(e);
+  hash.remove(e);
+  expect(hash.queryRange(0, -1, 0, -1)).not.toContain(e);
+});

@@ -14,8 +14,8 @@ export class SpatialHash {
   private cells = new Map<number, Entity[]>();
   /** entity id → current cell key */
   private entityCell = new Map<number, number>();
-  /** Long bodies can overlap a query whose cells do not include their origin. */
-  private largeEntities = new Map<number, Entity>();
+  /** Footprints crossing a cell edge must appear in queries beyond their origin cell. */
+  private spanningEntities = new Map<number, Entity>();
 
   /** Pack chunk coordinates into a single integer key. Handles negative coords up to +-32767. */
   private static key(cx: number, cy: number): number {
@@ -29,8 +29,7 @@ export class SpatialHash {
 
   /** Add an entity to the hash. */
   insert(entity: Entity): void {
-    if (entity.collider && Math.max(entity.collider.width, entity.collider.height) >= CHUNK_SIZE_PX)
-      this.largeEntities.set(entity.id, entity);
+    this.indexFootprint(entity);
     const cx = SpatialHash.toChunk(entity.position.wx);
     const cy = SpatialHash.toChunk(entity.position.wy);
     const k = SpatialHash.key(cx, cy);
@@ -45,7 +44,7 @@ export class SpatialHash {
 
   /** Remove an entity from the hash. */
   remove(entity: Entity): void {
-    this.largeEntities.delete(entity.id);
+    this.spanningEntities.delete(entity.id);
     const k = this.entityCell.get(entity.id);
     if (k === undefined) return;
     this.entityCell.delete(entity.id);
@@ -62,8 +61,20 @@ export class SpatialHash {
     }
   }
 
-  /** Update an entity's cell if it crossed a chunk boundary. */
+  private indexFootprint(entity: Entity): void {
+    const b = entity.collider ? getEntityAABB(entity.position, entity.collider) : undefined;
+    if (
+      b &&
+      (SpatialHash.toChunk(b.left) !== SpatialHash.toChunk(b.right) ||
+        SpatialHash.toChunk(b.top) !== SpatialHash.toChunk(b.bottom))
+    )
+      this.spanningEntities.set(entity.id, entity);
+    else this.spanningEntities.delete(entity.id);
+  }
+
+  /** Refresh the footprint even when the origin stays in its cell (including pose changes). */
   update(entity: Entity): void {
+    this.indexFootprint(entity);
     const cx = SpatialHash.toChunk(entity.position.wx);
     const cy = SpatialHash.toChunk(entity.position.wy);
     const newKey = SpatialHash.key(cx, cy);
@@ -103,7 +114,7 @@ export class SpatialHash {
         }
       }
     }
-    for (const entity of this.largeEntities.values()) {
+    for (const entity of this.spanningEntities.values()) {
       if (!entity.collider || result.includes(entity)) continue;
       const b = getEntityAABB(entity.position, entity.collider);
       if (
@@ -149,6 +160,6 @@ export class SpatialHash {
   clear(): void {
     this.cells.clear();
     this.entityCell.clear();
-    this.largeEntities.clear();
+    this.spanningEntities.clear();
   }
 }

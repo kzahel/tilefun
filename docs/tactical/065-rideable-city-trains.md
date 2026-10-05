@@ -40,5 +40,10 @@ Switches, shared-track traffic, express services and curved grades are later wor
 - Added a production city-train Workshop fixture and candidate; curved lab tracks
   share the production renderer. Native cardinal pose switches remain visible.
 
-Next: finish full browser/unit/lint/build and streaming validation, record evidence,
-and commit the completed integration.
+- Full browser travel exposed a missing-input gravity seam: sub-chunk carriages
+  were indexed only by origin, so exact foot-cell queries could miss their roof.
+  The shared spatial hash now indexes every footprint crossing a cell boundary
+  and refreshes after same-cell pose changes. Dedicated spatial/gravity regressions
+  pass; the Canvas game completes the full saved trip. Full suite: 1,567 unit tests.
+
+Next: finish GPU/full browser and streaming validation and record final evidence.

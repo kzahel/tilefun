@@ -3,6 +3,7 @@ import { required } from "../art/ArtCatalog.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
+import { LocalTransport } from "../transport/LocalTransport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { curvedTrainRecipe } from "./CurvedTrainRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
@@ -122,6 +123,28 @@ it("stops before a low ceiling with a roof passenger, then continues without tha
     await s.command({ kind: "teleport", position: { wx: -900, wy: 550 } });
     for (let i = 0; i < 40; i++) await s.step(idle, 0.1);
     expect(required(service.record.distance)).toBeGreaterThan(before + 100);
+  } finally {
+    await s.close();
+  }
+});
+
+it("keeps roof support during missing-input ticks with the carriage origin across a chunk seam", async () => {
+  const s = await ScenarioSession.create(curvedTrainRecipe());
+  try {
+    await s.command({ kind: "train-position", roof: true });
+    const service = required(s.realm.railway?.services.get("curved-service"));
+    const car = service.entity;
+    // Keep an ordinary narrow roof straddling the edge; no input means the
+    // gravity phase queries the exact foot cells instead of an expanded sampler.
+    car.position.wy = -260;
+    s.realm.entityManager.spatialHash.update(car);
+    s.player.player.position = { wx: car.position.wx, wy: -250 };
+    service.record.dwell = 8;
+    for (let i = 0; i < 10; i++) {
+      s.realm.tick(1 / 60, new LocalTransport().serverSide, false, new Set());
+      expect(s.player.player.wz).toBe(44);
+      expect(s.player.player.jumpVZ).toBeUndefined();
+    }
   } finally {
     await s.close();
   }
