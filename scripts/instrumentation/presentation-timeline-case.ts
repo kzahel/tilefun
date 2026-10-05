@@ -139,7 +139,7 @@ export function runPresentationCase(config: PresentationCase) {
     },
     render(alpha) {
       view.beginPresentation(nowMs / 1000, alpha);
-      const shown = view.playerEntity;
+      const shown = view.presentedPlayerEntity;
       beginPlayerPresentation(camera, shown, alpha, undefined, false, 0, view.cameraPresentation);
       const p = interpolatePosition(shown.position, shown.prevPosition, alpha);
       const car = required(view.entities.find((e) => e.id === 2));

@@ -34,6 +34,9 @@ vi.mock("./ScenarioClient.js", () => ({
     ready = Promise.resolve();
     view = {
       playerEntity: { position: { wx: 80, wy: 160 } },
+      get presentedPlayerEntity() {
+        return this.playerEntity;
+      },
       props: [],
       beginPresentation: mocks.beginPresentation,
       endPresentation: mocks.endPresentation,

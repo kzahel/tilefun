@@ -197,3 +197,12 @@ Latest replicated heading/native cardinal art and collider policy remain intact.
 Authority-debt/variable-speed/reconciliation cases remain further work; the fixed
 local simulation catch-up cap is unchanged. This is not a promise to hide arbitrary
 GC pauses or a pixel/frame-pacing result. Final browser/streaming checks follow.
+
+The first settled-build browser run passed 32/34 checks; both outdoor geometry
+backends exposed a diagnostics ownership mismatch. `playerEntity` must retain its
+physics pose even during a render borrow. The follow-up introduces the explicit
+`presentedPlayerEntity` accessor for cameras and `host.presentedPlayer` for render
+overlays, while leaving physics/diagnostic callers on `playerEntity`. The replica
+ownership test asserts that contract during a live borrow. The numeric continuity
+fix is unchanged. Inventories/build and final affected consumers are rerun after
+this boundary correction; no source changes during the first browser run.

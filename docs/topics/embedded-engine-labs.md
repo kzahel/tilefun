@@ -72,6 +72,11 @@ records this extraction and its validation. Shared owners are:
   those same displayed entities. Paused views show committed current poses and
   resume without hidden-time debt. Static reference adapters keep their explicit
   untimed camera path; frozen review snapshots are not regenerated.
+
+  `playerEntity` remains the physics/diagnostic pose during render borrowing.
+  Cameras use `presentedPlayerEntity`; renderer overlays use `host.presentedPlayer`.
+  The outdoor geometry browser checks caught and corrected this ownership boundary
+  during integration, rather than weakening the collider-position assertions.
 - `OutdoorPresentation.presentTerrain`: one scheduler/publication policy for game
   and lab, retaining the shared default 2 ms/128-row budget and experimental
   two-row/completed-chunk mode. `collectScene` and `collectSceneOrder` provide the

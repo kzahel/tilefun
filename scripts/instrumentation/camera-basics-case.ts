@@ -165,7 +165,7 @@ export function runCameraBasicsTrace(config: CameraBasicsCase, phaseMs = 1000 / 
     },
     render(alpha) {
       view.beginPresentation(nowMs / 1000, alpha);
-      const shown = view.playerEntity;
+      const shown = view.presentedPlayerEntity;
       const p = interpolatePosition(shown.position, shown.prevPosition, alpha);
       if (config.subject === "train-locked") {
         // Same exact displayed-pose framing as ScenarioPresentationHost's

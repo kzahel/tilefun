@@ -531,12 +531,17 @@ export class RemoteStateView implements ClientStateView {
     return this._props;
   }
   get playerEntity(): Entity {
-    if (this.presentedEntities)
-      return (
-        this.presentedEntities.find((e) => e.id === this._playerEntityId) ?? PLACEHOLDER_ENTITY
-      );
     if (this._predictor?.player) return this._predictor.player;
     return this._entities.find((e) => e.id === this._playerEntityId) ?? PLACEHOLDER_ENTITY;
+  }
+
+  /** Display pose for cameras/overlays. playerEntity always stays on physics. */
+  get presentedPlayerEntity(): Entity {
+    return (
+      this.presentedEntities?.find((e) => e.id === this._playerEntityId) ??
+      this._predictor?.presentationPlayer ??
+      this.playerEntity
+    );
   }
   get gemsCollected(): number {
     return this._gemsCollected;

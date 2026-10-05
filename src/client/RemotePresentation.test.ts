@@ -37,7 +37,8 @@ it("borrows sampled poses without modifying committed replica/collision data", (
   const committed = view.serverPlayerEntity;
   const before = structuredClone(committed);
   view.beginPresentation(0.1, 0.5);
-  expect(view.playerEntity.position.wx).toBeCloseTo(9.6);
+  expect(view.presentedPlayerEntity.position.wx).toBeCloseTo(9.6);
+  expect(view.playerEntity).toBe(committed);
   expect(view.entities[0]).not.toBe(committed);
   expect(view.serverPlayerEntity).toBe(committed);
   expect(committed).toEqual(before);

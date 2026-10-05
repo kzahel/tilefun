@@ -142,9 +142,9 @@ export class ScenarioPresentationHost {
     this.interpolate = false;
   }
 
-  private fixedCamera(alpha: number) {
+  private fixedCamera(alpha: number, player = this.session.view.playerEntity) {
     const fixed = this.options.fixedCamera;
-    return typeof fixed === "function" ? fixed(this.session.view.playerEntity, alpha) : fixed;
+    return typeof fixed === "function" ? fixed(player, alpha) : fixed;
   }
 
   private update(dt: number) {
@@ -190,7 +190,7 @@ export class ScenarioPresentationHost {
     try {
       if (this.options.fixedCamera) {
         this.camera.applyInterpolation(this.alpha);
-        const fixed = this.fixedCamera(this.alpha);
+        const fixed = this.fixedCamera(this.alpha, view.presentedPlayerEntity);
         if (fixed) {
           this.camera.x = fixed.wx;
           this.camera.y = fixed.wy;
@@ -198,7 +198,7 @@ export class ScenarioPresentationHost {
       } else
         beginPlayerPresentation(
           this.camera,
-          view.playerEntity,
+          view.presentedPlayerEntity,
           this.alpha,
           undefined,
           false,
@@ -215,7 +215,7 @@ export class ScenarioPresentationHost {
           void this.command({ kind: "view-range", range }).catch((e) => this.fail(e));
         }
       }
-      const player = view.playerEntity;
+      const player = view.presentedPlayerEntity;
       const cycle = this.options.poseCycle?.();
       const row = Math.floor(this.poseSeconds / 2) % 4;
       this.displayedPlayer =

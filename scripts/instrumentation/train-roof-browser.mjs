@@ -175,7 +175,7 @@ try {
       let renderAlpha;
       game.camera.restoreActual = function () {
         renderedCamera = { x: this.x, y: this.y, prevX: this.prevX, prevY: this.prevY };
-        const player = game.remoteView.playerEntity;
+        const player = game.remoteView.presentedPlayerEntity;
         const car = game.remoteView.entities.find((e) => e.type === "train-curve-proof-v1");
         const lerp = (a, b) => a + (b - a) * renderAlpha;
         if (car)

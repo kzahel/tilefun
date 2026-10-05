@@ -69,6 +69,9 @@ up to 100ms extrapolation, then hold. Local roof walking remains predicted.
 Pure camera follow consumes displayed targets and explicit time; local ground
 movement uses admitted input time, while carrier motion uses remote presentation
 time. Physics and collision replay never consume those render-only clones.
+`playerEntity` retains physics ownership throughout a render; cameras use the
+explicit `presentedPlayerEntity` accessor and renderers consume the borrowed
+entity array. The host releases the borrow before subsequent input/simulation.
 A bounded presentation-only decay handles
 small residual ground-contact corrections without changing replay physics.
 [Player prediction](topics/player-prediction.md) owns limits and acceptance evidence.

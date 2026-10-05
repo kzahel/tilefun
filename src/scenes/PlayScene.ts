@@ -469,7 +469,7 @@ export class PlayScene implements GameScene {
     try {
       beginPlayerPresentation(
         gc.camera,
-        gc.stateView.playerEntity,
+        view?.presentedPlayerEntity ?? gc.stateView.playerEntity,
         alpha,
         undefined,
         gc.console.cvars.get("cl_verticalfollow")?.get() === true,

@@ -141,7 +141,7 @@ export function OutdoorGeometryTest({
           const b = getEntityAABB(prop.position, wall);
           drawRect(frame, camera, [b.left, b.top, b.right - b.left, b.bottom - b.top], "#e54c49");
         }
-        const player = host.session.view.playerEntity;
+        const player = host.presentedPlayer;
         const position = interpolatePosition(
           player.position,
           player.prevPosition,
