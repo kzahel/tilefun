@@ -8,13 +8,23 @@ import { intersects } from "../generation/regional/RegionalPlanner.js";
 import { RoadType } from "../road/RoadType.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { Chunk } from "../world/Chunk.js";
+import { nearestRail } from "./RailPath.js";
 import { RailwayPlanner } from "./RailwayPlanner.js";
 import { bridgePlacements } from "./RoadRailBridge.js";
 
-/** Reserve stations outside town blocks; admit only dry, straight services with bounded road bridges. */
+/** Reserve stations outside town blocks; admit dry tangent curves or straight services with bounded road bridges. */
 export class RailwayStrategy extends TrafficStrategy {
   private bridgeNetworks = new WeakSet<object>();
   readonly railways = new RailwayPlanner(this.world);
+  railPathsForChunk(cx: number, cy: number) {
+    return this.railways
+      .query({ minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 })
+      .flatMap((l) =>
+        l.path && nearestRail(l.path, cx * 256 + 128, cy * 256 + 128).distance < 320
+          ? [l.path]
+          : [],
+      );
+  }
   override trafficNetwork(wx: number, wy: number) {
     const graph = super.trafficNetwork(wx, wy);
     if (this.bridgeNetworks.has(graph)) return graph;
@@ -53,11 +63,19 @@ export class RailwayStrategy extends TrafficStrategy {
     if (!lines.length) return;
     const surface = (x: number, y: number) => {
       for (const line of lines) {
-        if (x >= line.bounds.minX && x < line.bounds.maxX && y >= line.y - 1 && y < line.y + 1)
-          return y < line.y ? RoadType.RailHorizontalTop : RoadType.RailHorizontalBottom;
         for (const s of line.stations)
           if (insideDenseBounds(s.platform, x, y) || insideDenseBounds(s.access, x, y))
             return RoadType.CityPavement;
+        if (line.path) {
+          if (nearestRail(line.path, (x + 0.5) * 16, (y + 0.5) * 16).distance <= 112)
+            return RoadType.RailCurveProof;
+        } else if (
+          x >= line.bounds.minX &&
+          x < line.bounds.maxX &&
+          y >= line.y - 1 &&
+          y < line.y + 1
+        )
+          return y < line.y ? RoadType.RailHorizontalTop : RoadType.RailHorizontalBottom;
       }
       return 0;
     };

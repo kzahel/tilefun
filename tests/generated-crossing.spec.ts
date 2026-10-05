@@ -43,7 +43,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.getByRole("button", { name: "Resume", exact: true }).click();
     await c.focus();
     await page.keyboard.down("ArrowUp");
-    await expect(c).toHaveAttribute("data-player-z", "64", { timeout: 8000 });
+    await expect(c).toHaveAttribute("data-player-z", "96", { timeout: 10000 });
     await expect
       .poll(
         async () =>
@@ -51,7 +51,7 @@ for (const renderer of ["canvas", "gpu"]) {
           Number(await c.getAttribute("data-bridge-y")),
         { timeout: 7000 },
       )
-      .toBeLessThan(-340);
+      .toBeLessThan(-468);
     await page.keyboard.up("ArrowUp");
     await expect(c).toHaveAttribute("data-player-z", "0");
     await expect
@@ -61,10 +61,10 @@ for (const renderer of ["canvas", "gpu"]) {
           Number(await c.getAttribute("data-bridge-y")),
         { timeout: 15000 },
       )
-      .toBeLessThan(-350);
+      .toBeLessThan(-478);
     await expect(c).toHaveAttribute("data-car-z", "0");
     await page.getByRole("button", { name: "Start at bridge", exact: true }).click();
-    await expect(c).toHaveAttribute("data-player-z", "64");
+    await expect(c).toHaveAttribute("data-player-z", "96");
     await page.screenshot({
       path: `/tmp/tilefun-generated-bridge-above-${renderer}.png`,
       fullPage: true,

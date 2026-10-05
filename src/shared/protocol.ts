@@ -7,6 +7,7 @@ import type {
 } from "../generation/GenerationDescriptor.js";
 import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import type { RailPath } from "../railway/RailPath.js";
 import type { Arrival } from "../server/SafeArrival.js";
 import type { EntityDelta } from "./entityDelta.js";
 
@@ -164,6 +165,7 @@ export type ClientMessage =
 // ---- Snapshot types for serialized state sync ----
 
 export interface ChunkSnapshot {
+  railPaths?: RailPath[];
   cx: number;
   cy: number;
   revision: number;

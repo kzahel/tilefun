@@ -175,6 +175,7 @@ export function deserializeProp(s: PropSnapshot): Prop {
 
 export function serializeChunk(cx: number, cy: number, chunk: Chunk): ChunkSnapshot {
   return {
+    ...(chunk.railPaths.length ? { railPaths: chunk.railPaths } : {}),
     cx,
     cy,
     revision: chunk.revision,
@@ -190,6 +191,7 @@ export function serializeChunk(cx: number, cy: number, chunk: Chunk): ChunkSnaps
 }
 
 export function applyChunkSnapshot(chunk: Chunk, s: ChunkSnapshot): void {
+  chunk.railPaths = s.railPaths ?? [];
   chunk.subgrid.set(s.subgrid);
   chunk.roadGrid.set(s.roadGrid);
   chunk.heightGrid.set(s.heightGrid);

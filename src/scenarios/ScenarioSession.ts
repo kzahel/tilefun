@@ -309,6 +309,21 @@ export class ScenarioSession {
     };
     this.realm.updateVisibleChunks(this.player.visibleRange);
     await this.realm.ensureReady(this.player.visibleRange);
+    for (const [key, chunk] of this.realm.world.chunks.entries()) {
+      const [cx, cy] = key.split(",").map(Number);
+      const paths = (this.recipe.railways ?? [])
+        .flatMap((l) => (l.path ? [l.path] : []))
+        .filter((path) => {
+          const b = railAlignment(path).bounds;
+          return (
+            b.minX < ((cx ?? 0) + 1) * 256 &&
+            b.maxX > (cx ?? 0) * 256 &&
+            b.minY < ((cy ?? 0) + 1) * 256 &&
+            b.maxY > (cy ?? 0) * 256
+          );
+        });
+      if (paths.length) chunk.railPaths = paths;
+    }
     await this.realm.railway?.settle();
     if (this.realm.railway?.error) throw this.realm.railway.error;
   }
@@ -365,9 +380,8 @@ export class ScenarioSession {
     let position: { wx: number; wy: number },
       z = 0;
     if (command.kind === "train-position") {
-      const car = [...(this.realm.railway?.services.values() ?? [])][0]?.carriages[
-        command.carriage ?? 1
-      ];
+      const service = [...(this.realm.railway?.services.values() ?? [])][0];
+      const car = service?.carriages[command.carriage ?? (service.carriages.length > 1 ? 1 : 0)];
       if (!car?.collider) throw new Error("Missing train fixture");
       position = { wx: car.position.wx, wy: car.position.wy + (command.roof ? 0 : 48) };
       z = (car.wz ?? 0) + (command.roof ? (car.collider.physicalHeight ?? 44) : 0);

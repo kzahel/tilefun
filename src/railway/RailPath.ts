@@ -20,7 +20,7 @@ export const wrapDistance = (d: number, length: number) => ((d % length) + lengt
 export function segmentLength(s: RailSegment): number {
   return s.kind === "line" ? Math.hypot(s.endX - s.x, s.endY - s.y) : s.radius * Math.abs(s.sweep);
 }
-function segmentPose(s: RailSegment, distance: number): RailPose {
+export function segmentPose(s: RailSegment, distance: number): RailPose {
   if (s.kind === "line") {
     const angle = Math.atan2(s.endY - s.y, s.endX - s.x);
     return { x: s.x + Math.cos(angle) * distance, y: s.y + Math.sin(angle) * distance, angle };
@@ -31,6 +31,41 @@ function segmentPose(s: RailSegment, distance: number): RailPose {
     y: s.y + s.radius * Math.sin(angle),
     angle: angle + (Math.sign(s.sweep) * Math.PI) / 2,
   };
+}
+
+/** Analytic nearest position for corridor reservation and native-pixel tracks. */
+export function nearestRail(path: RailPath, x: number, y: number) {
+  let along = 0,
+    best = { distance: Infinity, lateral: 0, along: 0 };
+  for (const s of path.segments) {
+    const length = segmentLength(s);
+    let d: number;
+    if (s.kind === "line") {
+      d = Math.max(
+        0,
+        Math.min(length, ((x - s.x) * (s.endX - s.x) + (y - s.y) * (s.endY - s.y)) / length),
+      );
+    } else {
+      const angle = Math.atan2(y - s.y, x - s.x);
+      const swept = wrapDistance((angle - s.angle) * Math.sign(s.sweep), TAU);
+      if (swept <= Math.abs(s.sweep)) d = swept * s.radius;
+      else {
+        const a = segmentPose(s, 0),
+          b = segmentPose(s, length);
+        d = Math.hypot(x - a.x, y - a.y) <= Math.hypot(x - b.x, y - b.y) ? 0 : length;
+      }
+    }
+    const p = segmentPose(s, d),
+      distance = Math.hypot(x - p.x, y - p.y);
+    if (distance < best.distance)
+      best = {
+        distance,
+        lateral: -(x - p.x) * Math.sin(p.angle) + (y - p.y) * Math.cos(p.angle),
+        along: along + d,
+      };
+    along += length;
+  }
+  return best;
 }
 export class RailAlignment {
   readonly length: number;

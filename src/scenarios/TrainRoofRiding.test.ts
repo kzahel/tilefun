@@ -53,7 +53,7 @@ it("jumps from trackside onto a stopped train, walks the roof and jumps off with
     for (let i = 0; i < 65; i++) await s.step({ ...idle, dy: i < 40 ? -1 : 0, jump: i < 40 });
     expect(s.player.player.wz).toBe(44);
     expect(s.player.player.jumpVZ).toBeUndefined();
-    const car = required(s.realm.railway?.services.get("curved-service")).carriages[1]!;
+    const car = required(required(s.realm.railway?.services.get("curved-service")).carriages[1]);
     for (let i = 0; i < 100; i++) await s.step(idle, 0.1);
     expect(car.velocity?.vx).toBeGreaterThan(100);
     await s.step({ ...idle, jump: true });

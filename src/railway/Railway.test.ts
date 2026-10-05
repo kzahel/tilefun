@@ -19,8 +19,8 @@ import bank from "./rail-local-v1.json" with { type: "json" };
 import { createTrain } from "./Train.js";
 
 async function fixture() {
-  const strategy = new RailwayStrategy(regionalWorld(2026));
-  const line = required(strategy.railways.owner(2, -3));
+  const strategy = new RailwayStrategy(regionalWorld(100));
+  const line = required(strategy.railways.owner(-2, -1));
   const world = new World(strategy),
     entities = new EntityManager(),
     props = new PropManager();
@@ -52,10 +52,10 @@ describe("generated railway", () => {
       expect(a.start()).toBeDefined();
       expect(a.start()).toEqual(new RailwayPlanner(regionalWorld(seed)).start());
     }
-    const strategy = new RailwayStrategy(regionalWorld(2026)),
+    const strategy = new RailwayStrategy(regionalWorld(100)),
       world = new World(strategy);
-    const line = required(strategy.railways.owner(2, -3));
-    expect(strategy.railways.owner(3, -3)).toBe(line);
+    const line = required(strategy.railways.owner(-2, -1));
+    expect(strategy.railways.owner(-1, -1)).toBe(line);
     for (let x = line.bounds.minX; x < line.bounds.maxX; x++) {
       world.getChunk(Math.floor(x / 16), Math.floor((line.y - 1) / 16));
       world.getChunk(Math.floor(x / 16), Math.floor(line.y / 16));

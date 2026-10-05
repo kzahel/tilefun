@@ -851,9 +851,21 @@ function encodeSyncChunksMessage(msg: SyncChunksMessage): ArrayBuffer {
   const updates = msg.chunkUpdates;
   const keyCount = keys?.length ?? 0;
   const updateCount = updates?.length ?? 0;
+  // Optional geometry extension. Ordinary chunks keep their fixed layout.
+  const hasRails = updates?.some((c) => c.railPaths?.length) ?? false;
+  const rails = hasRails
+    ? (updates?.map((c) => textEncoder.encode(JSON.stringify(c.railPaths ?? []))) ?? [])
+    : [];
 
   // Header: 1 tag + 1 flags + 2 keyCount + keyCount*4 + 2 updateCount + updateCount*CHUNK_BINARY_SIZE
-  const size = 1 + 1 + 2 + keyCount * 4 + 2 + updateCount * CHUNK_BINARY_SIZE;
+  const size =
+    1 +
+    1 +
+    2 +
+    keyCount * 4 +
+    2 +
+    updateCount * CHUNK_BINARY_SIZE +
+    rails.reduce((n, r) => n + 4 + r.length, 0);
   const buf = new ArrayBuffer(size);
   const view = new DataView(buf);
   const bytes = new Uint8Array(buf);
@@ -865,6 +877,7 @@ function encodeSyncChunksMessage(msg: SyncChunksMessage): ArrayBuffer {
   let flags = 0;
   if (keys) flags |= 0x01;
   if (updates) flags |= 0x02;
+  if (hasRails) flags |= 0x04;
   view.setUint8(off, flags);
   off += 1;
 
@@ -885,8 +898,15 @@ function encodeSyncChunksMessage(msg: SyncChunksMessage): ArrayBuffer {
   view.setUint16(off, updateCount, true);
   off += 2;
   if (updates) {
-    for (const chunk of updates) {
+    for (const [i, chunk] of updates.entries()) {
       off = writeChunkSnapshot(view, bytes, off, chunk);
+      const rail = rails[i];
+      if (rail) {
+        view.setUint32(off, rail.length, true);
+        off += 4;
+        bytes.set(rail, off);
+        off += rail.length;
+      }
     }
   }
 
@@ -926,6 +946,15 @@ function decodeSyncChunksMessage(view: DataView, buf: ArrayBuffer): SyncChunksMe
       const [chunk, newOff] = readChunkSnapshot(view, bytes, off);
       chunkUpdates.push(chunk);
       off = newOff;
+      if (flags & 0x04) {
+        const size = view.getUint32(off, true);
+        off += 4;
+        if (size > 65536 || off + size > bytes.length) throw Error("Invalid rail geometry size");
+        const paths = JSON.parse(textDecoder.decode(bytes.subarray(off, off + size)));
+        if (!Array.isArray(paths) || paths.length > 4) throw Error("Invalid rail geometry batch");
+        if (paths.length) chunk.railPaths = paths;
+        off += size;
+      }
     }
     msg.chunkUpdates = chunkUpdates;
   }

@@ -1,3 +1,4 @@
+import { required } from "../art/ArtCatalog.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
@@ -91,5 +92,3 @@ export function carryTrainPassengers(
     entities.spatialHash.update(rider);
   }
 }
-
-import { required } from "../art/ArtCatalog.js";

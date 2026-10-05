@@ -1,7 +1,7 @@
 # Generated railways, stations and trains
 
 Topic: trains
-Status: generated horizontal services and road crossings delivered; curved-route and town-loop engine previews implemented for review.
+Status: generated two-city trains, broad curves, cached pixel tracks and saved roof riding delivered; loops remain authored lab fixtures.
 Updated: 2026-10-05.
 
 Owns generated railway networks, town stations, train services, railway structures
@@ -19,7 +19,7 @@ proposal has been replaced. The preview review was accepted in chat, followed by
 integrate and commit the first two-town service on 2026-10-04. This does not
 authorize unreviewed new art/geometry.
 
-## Required user review before overworld integration
+## Earlier review gate (superseded for the 2026-10-05 integration)
 
 The user explicitly requires reviewing tile patterns, plans and actual moving
 trains before railway integration into the overworld. Build isolated Workshop
@@ -128,7 +128,7 @@ accelerates to 192 px/s, brakes at the ends, dwells eight seconds and reverses
 without mirroring the horizontal artwork. The whole 456px body is represented
 in collisions; players/props, edited-away rails and missing ready terrain stop it.
 Stations have native platform edges and benches, a lamp and bin. They are basic
-outdoor platforms, without a station building or passenger boarding yet.
+outdoor platforms. Roof boarding is delivered below; station buildings remain later work.
 
 Shared Realm authority owns motion in Worker, P2P and dedicated-server hosts.
 Each service saves its location, destination and dwell in one `railServices`
@@ -138,9 +138,9 @@ line freezes and saves its service before removal; returning at either station
 restores the same train with no wall-clock catch-up. Train state is not duplicated
 in ordinary entity records. Existing saves require explicit same-seed recreation.
 
-Next: station names/destination information and safe boarding/alighting at stopped
-trains. Then review paired tracks, vertical service, turnouts and structures before
-expanding generation; high-speed/world-spanning trunks remain later work.
+The 2026-10-05 slice below adds boarding/alighting and curved city links. Station
+names/destination information, paired tracks and shared junctions remain next work;
+high-speed/world-spanning trunks remain later work.
 
 ## World geometry prerequisite for expanded routes
 
@@ -166,8 +166,8 @@ and [tactical 061](../tactical/061-train-grade-proof.md) add opt-in authored
 horizontal routes with three replicated native sections, separate footprint
 support/clearance and a single service record retaining all heights and speed.
 The shared Realm/renderer handles each body; dependency terrain is readied before
-restoration publishes the group. Generated services remain on flat single-body
-routes and older records remain readable. The user accepted this lab in chat;
+restoration publishes the group. At this checkpoint generated services remained flat and single-body; the later
+city integration uses three native sections on eligible curved routes. Older records remain readable. The user accepted this lab in chat;
 carriages stay horizontal, so slope joins expose the remaining articulation/art
 gap. Review before selecting one small generated structure crossing.
 
@@ -177,7 +177,9 @@ gap. Review before selecting one small generated structure crossing.
 The user accepted the train grade proof and authorized a first generated crossing,
 without a generator-version bump. [Tactical 062](../tactical/062-generated-road-rail-crossing.md)
 owns admission, streaming/persistence evidence and review links. One eligible
-north/south road receives a 64px deck with two ramps above the flat railway.
+north/south road originally received a 64px deck with two ramps above the flat railway.
+The roof-riding integration raises generated decks to 96px with 384px ramps,
+leaving 88px beneath the slab for a 44px train and its passenger.
 Generated cars use the shared surface-following path; players can walk above
 or underneath. The bridge retains schematic lab presentation; no new bridge
 art bank is promoted. The user accepted these crossings in chat on 2026-10-04.
@@ -199,16 +201,14 @@ middle sprites. Each carriage switches horizontal/vertical pose at cardinal
 boundaries, like the existing cars. The user explicitly accepts abrupt sprite
 turns as the available-art constraint and rejected replacing the sprites with
 procedural boxes. Keep source pixels at their native scale; do not substitute
-geometric rolling stock to hide missing diagonal poses. Rails/platforms/town
-blocks remain labelled schematic geometry. Straight-section spacing matches
+geometric rolling stock to hide missing diagonal poses. Tracks now use the shared cached pixel renderer; platform/town markers in the
+authored loop/winding fixtures remain labelled schematic geometry. Straight-section spacing matches
 the different native horizontal/vertical lengths; bends can expose gaps/overlap
 as individual carriages switch pose.
 
-Current generated worlds still use the accepted straight horizontal services.
-The pre-integration review gate remains: first accept the new motion/layout and
-then add bounded generated loops/curved links
-with road-crossing and terrain admission. Curves plus grades, switches, shared
-track traffic and boarding are not part of this slice.
+This was initially a lab-only slice. The user subsequently authorized the
+city integration below. Generated loops, curves plus grades, switches and shared
+track traffic remain outside the delivered scope.
 
 ## City-to-city roof riding integration
 
@@ -226,5 +226,28 @@ straight services check passenger clearance before moving. Player records retain
 the carriage identity and roof offset; restoration prepares the saved service
 before reattaching. The World geometry train labs expose **Ride train roof**.
 
-Next in this authorized slice: generated bounded curved links, production cached
-track rendering, station access and full game/Worker validation.
+Eligible dry, road-free two-city services now use broad tangent arcs (512px
+radius), straight station approaches and three native carriages. Terrain reserves
+the same alignment used by authority. Analytic pixel rails, sleepers and ballast
+are baked into the ordinary terrain cache on Canvas/GPU and replicated as bounded
+chunk geometry. Saved terrain edits keep their road mask; geometry is derived from
+the current generator. Rejected curves retain admitted straight services; accepted
+road crossings stay straight. No new art pixels or asset banks are promoted.
+
+Fresh regional seed **2026** starts on the platform at **Willowhaven**. Leave edit
+mode with **Tab** if needed, then hold **Down + Space** to board the stopped train.
+Ride through the bends to **Willowbridge**, then jump north onto its platform.
+Each station dwell lasts eight seconds; the service reverses at the terminus.
+Players can walk or jump off the roof, and exact automatic game resume preserves
+saved support. Explicit travel still resets support to destination ground.
+Use a fresh world or same-seed recreation to see this generation revision.
+
+[Generated city train lab](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=city-trains#/tool/world-geometry)
+uses production terrain, stations, train authority and rendering, with extra road
+traffic disabled only in the temporary lab. It provides **Ride train roof** and
+**Save / reload scene**. The game browser regression boards with ordinary keyboard
+input, reopens mid-bend, reaches the second city and alights on both backends.
+
+Next: playtest station boarding and native pose switches, then add visible city
+names/destinations before expanding the network. The current service is an
+exclusive two-city shuttle; generated loops and shared-track dispatch are later work.

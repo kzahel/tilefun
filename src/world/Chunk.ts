@@ -1,5 +1,6 @@
 import { MAX_BLEND_LAYERS } from "../autotile/BlendGraph.js";
 import { CHUNK_SIZE } from "../config/constants.js";
+import type { RailPath } from "../railway/RailPath.js";
 import type { TileId } from "./TileRegistry.js";
 
 const AREA = CHUNK_SIZE * CHUNK_SIZE;
@@ -23,6 +24,8 @@ function subgridIdx(sx: number, sy: number): number {
 }
 
 export class Chunk {
+  /** Authority-supplied rail geometry; roadGrid is the editable support mask. */
+  railPaths: RailPath[] = [];
   /** Sub-grid size (33 for 16-tile chunks). */
   static readonly SUBGRID_SIZE = SUBGRID_SIZE;
   /** @deprecated Use SUBGRID_SIZE. Old corner grid was CHUNK_SIZE+1=17. */

@@ -146,7 +146,7 @@ test("archived dense review hands off to the current station start with a moving
         }
       ).__game;
       return g.stateView.entities
-        .filter((e) => e.type === "train-local-v1")
+        .filter((e) => e.type === "train-local-v1" || e.type === "train-curve-proof-v1")
         .map((e) => ({ id: e.id, ...e.position }));
     });
   await expect.poll(async () => (await read()).length).toBeGreaterThan(0);

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
-test("new regional world opens at a furnished station with one moving native horizontal train", async ({
+test("new regional world opens at a furnished station with moving native curved train carriages", async ({
   page,
 }) => {
   test.setTimeout(60000);
@@ -27,7 +27,7 @@ test("new regional world opens at a furnished station with one moving native hor
       ).__game;
       return {
         trains: game.stateView.entities
-          .filter((e) => e.type === "train-local-v1")
+          .filter((e) => e.type.startsWith("train-curve-proof-v1"))
           .map((e) => ({
             x: e.position.wx,
             y: e.position.wy,
@@ -37,7 +37,7 @@ test("new regional world opens at a furnished station with one moving native hor
         platforms: game.stateView.props.filter((p) => p.type === "prop-rail-platform-edge").length,
       };
     });
-  await expect.poll(async () => (await read()).trains.length).toBe(1);
+  await expect.poll(async () => (await read()).trains.length).toBe(3);
   await expect.poll(async () => (await read()).platforms).toBeGreaterThan(10);
   const first = (await read()).trains[0];
   expect(first).toBeDefined();
@@ -75,6 +75,6 @@ test("new regional world opens at a furnished station with one moving native hor
   const moving = (await read()).trains[0];
   expect(moving?.row).toBe(0);
   expect(moving?.flip ?? false).toBe(false);
-  expect(moving?.y).toBe(-2658 * 16);
+  expect(moving?.y).toBe(-2710 * 16);
   expect(errors).toEqual([]);
 });

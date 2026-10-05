@@ -6,6 +6,7 @@ import geometry from "../physics/SurfacePatch.ts?raw";
 import support from "../physics/surfaceHeight.ts?raw";
 import excavation from "../physics/TerrainExcavation.ts?raw";
 import curveMotion from "../railway/CurvedRailMotion.ts?raw";
+import curvedPlanner from "../railway/CurvedRailPlanner.ts?raw";
 import curveTrain from "../railway/CurveTrain.ts?raw";
 import curvePath from "../railway/RailPath.ts?raw";
 import planner from "../railway/RailwayPlanner.ts?raw";
@@ -14,9 +15,12 @@ import strategy from "../railway/RailwayStrategy.ts?raw";
 import railway from "../railway/RailwaySystem.ts?raw";
 import bridge from "../railway/RoadRailBridge.ts?raw";
 import trainBodies from "../railway/Train.ts?raw";
+import passengers from "../railway/TrainPassengers.ts?raw";
 import curveDrawing from "../rendering/CurveTrainPresentation.ts?raw";
 import ordering from "../rendering/presentSurfaceScene.ts?raw";
+import trackRaster from "../rendering/RailTrackRaster.ts?raw";
 import presentation from "../rendering/SurfacePresentation.ts?raw";
+import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
@@ -25,6 +29,7 @@ import { trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { vehicleGeometryRecipe } from "../scenarios/VehicleGeometryRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
+import roofSupport from "../traffic/RoofSupport.ts?raw";
 import traffic from "../traffic/TrafficSystem.ts?raw";
 import curveLayout from "./CurvedTrainPreview.ts?raw";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
@@ -151,7 +156,7 @@ export async function buildCurvedTrainCandidate(loop: boolean): Promise<Workshop
     kind: "geometry",
     name: loop ? "Train around town, four stops" : "Winding train between towns",
     prompt:
-      "Inspect smooth corners, independent carriages, station stops, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views at corners; shared authority and schematic track; review before world generation.",
+      "Inspect smooth corners, station stops, roof riding, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views; tracks use the production terrain renderer. Town/platform markers remain schematic.",
     url: `/tilefun/workshop.html?geometry=${fixture}#/tool/world-geometry`,
     fingerprint: await sha256(
       new TextEncoder().encode(
@@ -165,11 +170,50 @@ export async function buildCurvedTrainCandidate(loop: boolean): Promise<Workshop
           railSource,
           curveDrawing,
           curveLayout,
+          passengers,
+          roofSupport,
+          trackRaster,
           scenarioHost,
           collision,
         }),
       ),
     ),
     excluded: "Interactive engine experiment; native sprite motion, not a promoted art snapshot.",
+  };
+}
+
+export async function buildCityTrainCandidate(): Promise<WorkshopCandidate> {
+  return {
+    id: "geometry:city-trains-v1",
+    batchId: "world-geometry",
+    kind: "geometry",
+    name: "Ride trains between generated cities",
+    prompt:
+      "Jump from Willowhaven station onto the train roof, ride the curved route to Willowbridge and jump off. Save/reload during the ride. Production towns, tracks, stations, streaming and train authority; extra road traffic is disabled in this temporary scene.",
+    url: "/tilefun/workshop.html?geometry=city-trains#/tool/world-geometry",
+    fingerprint: await sha256(
+      new TextEncoder().encode(
+        JSON.stringify({
+          recipe: cityTrainRecipe(),
+          planner,
+          curvedPlanner,
+          strategy,
+          railway,
+          curveMotion,
+          curvePath,
+          curveTrain,
+          railSource,
+          curveDrawing,
+          passengers,
+          roofSupport,
+          trackRaster,
+          movement,
+          queries,
+          scenarioHost,
+          ordering,
+        }),
+      ),
+    ),
+    excluded: "Interactive generated-world experiment; no immutable art bank promotion.",
   };
 }

@@ -3,7 +3,7 @@ import { required } from "../art/ArtCatalog.js";
 import { createProp } from "../entities/PropFactories.js";
 import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
-import { bridgePlacements } from "../railway/RoadRailBridge.js";
+import { bridgePlacements, ROAD_RAIL_BRIDGE } from "../railway/RoadRailBridge.js";
 import { generatedCrossingRecipe } from "./GeneratedCrossingRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
@@ -31,7 +31,7 @@ for (const index of [0, 1, 2])
           maxZ = Math.max(maxZ, car.entity.wz ?? 0);
           const train = required(s.realm.railway?.services.get(f.line.id));
           expect(train.entity.wz ?? 0).toBe(0);
-          trainPassed ||= (train.entity.position.wx - f.bridge.x * 16) * (reverse ? -1 : 1) > 320;
+          trainPassed ||= (train.entity.position.wx - f.bridge.x * 16) * (reverse ? -1 : 1) > 448;
           if (!reloaded && maxZ > 20 && maxZ < 48) {
             const before = required(s.realm.traffic).snapshot(car);
             await s.reload();
@@ -46,12 +46,12 @@ for (const index of [0, 1, 2])
         }
         const car = required([...required(s.realm.traffic).states.values()][0]);
         expect(reloaded).toBe(true);
-        expect(maxZ).toBe(64);
+        expect(maxZ).toBe(ROAD_RAIL_BRIDGE.height);
         expect(car.entity.wz).toBe(0);
         expect(
           (car.entity.position.wy - f.bridge.y * 16) * (reverse ? 1 : -1),
           car.waiting,
-        ).toBeGreaterThan(350);
+        ).toBeGreaterThan(478);
         expect(trainPassed).toBe(true);
       } finally {
         await s.close();
@@ -74,13 +74,13 @@ it("walks both generated approaches and restores the observer below the same dec
     s = await ScenarioSession.create(f.recipe);
   try {
     let max = 0;
-    for (let i = 0; i < 65; i++) {
+    for (let i = 0; i < 90; i++) {
       await s.step({ ...idle, dy: -1 }, 0.1);
       max = Math.max(max, s.player.player.wz ?? 0);
     }
-    expect(max).toBe(64);
+    expect(max).toBe(ROAD_RAIL_BRIDGE.height);
     expect(s.player.player.wz).toBe(0);
-    expect(s.player.player.position.wy).toBeLessThan(f.bridge.y * 16 - 320);
+    expect(s.player.player.position.wy).toBeLessThan(f.bridge.y * 16 - 448);
     await s.command({
       kind: "teleport",
       position: { wx: f.bridge.x * 16, wy: f.bridge.y * 16 + 40 },
@@ -118,11 +118,11 @@ for (const obstruction of [
         await s.command({
           kind: "teleport",
           position: { wx: car.entity.position.wx, wy: f.bridge.y * 16 + 20 },
-          z: obstruction === "bridge pedestrian" ? 64 : 0,
+          z: obstruction === "bridge pedestrian" ? ROAD_RAIL_BRIDGE.height : 0,
         });
       for (let i = 0; i < 200; i++) await s.step(idle, 0.1);
       if (obstruction === "underpass pedestrian")
-        expect(car.entity.position.wy).toBeLessThan(f.bridge.y * 16 - 350);
+        expect(car.entity.position.wy).toBeLessThan(f.bridge.y * 16 - 478);
       else {
         expect(car.speed).toBe(0);
         expect(car.entity.position.wy).toBeGreaterThan(f.bridge.y * 16 + 20);
@@ -132,3 +132,23 @@ for (const obstruction of [
     }
   });
 }
+
+it.each([false, true])(
+  "carries a train roof rider under the generated road bridge (%s)",
+  async (reverse) => {
+    const f = generatedCrossingRecipe(0, reverse),
+      s = await ScenarioSession.create(f.recipe);
+    try {
+      await s.command({ kind: "train-position", roof: true });
+      for (let i = 0; i < 120; i++) {
+        await s.step(idle, 0.1);
+        expect(s.player.player.wz).toBe(44);
+      }
+      expect((s.player.player.position.wx - f.bridge.x * 16) * (reverse ? -1 : 1)).toBeGreaterThan(
+        320,
+      );
+    } finally {
+      await s.close();
+    }
+  },
+);

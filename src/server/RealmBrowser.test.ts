@@ -574,7 +574,14 @@ it("Play here checks identity and realized walls, and live inspection preserves 
   await server.loadWorld(meta.id, { x: 300, y: 519, generation });
   const initial = server.getLocalSession().player.position;
   expect(Math.hypot(initial.wx / 16 - 300, initial.wy / 16 - 519)).toBeLessThanOrEqual(46);
-  const props = server.propManager.props.filter((p) => p.proceduralId);
+  // A restored railway can prepare distant station dependencies. Inspect the
+  // requested neighborhood rather than whichever remote prop published first.
+  const props = server.propManager.props.filter(
+    (p) =>
+      p.proceduralId &&
+      Math.abs(p.position.wx / 16 - 300) < 60 &&
+      Math.abs(p.position.wy / 16 - 519) < 60,
+  );
   expect(props.length).toBeGreaterThan(0);
   const building = props.find((p) => p.type.includes("condo"));
   if (!building) throw new Error("Missing apartment");
@@ -1771,3 +1778,46 @@ it.each(["butcher", "condo-bay"])(
     }
   },
 );
+
+it("resumes a saved procedural train roof, while explicit travel returns to ground", async () => {
+  const setup = await createTestSetup();
+  const profile = { profileId: "train-rider", displayName: "Train rider" };
+  let server = setup.server;
+  try {
+    setup.transport.connect("local", profile);
+    await server.settle();
+    const generation = createDescriptor("regional", 2026);
+    const meta = await setup.registry.createWorld(
+      "Train roof",
+      undefined,
+      undefined,
+      undefined,
+      generation,
+    );
+    await server.loadWorld(meta.id, { x: 2543, y: -2713, generation });
+    server.updateVisibleChunks({ minCx: 157, maxCx: 161, minCy: -172, maxCy: -168 });
+    await server.flushAsync();
+    const session = server.getLocalSession();
+    const train = server.entityManager.entities.find((e) => e.type === "train-curve-proof-v1");
+    if (!train) throw new Error("Missing station train");
+    session.player.position = { ...train.position };
+    session.player.wz = session.player.groundZ = 44;
+    await server.flushAsync();
+    const position = { ...session.player.position };
+    await server.destroy();
+    const transport = new TestTransport();
+    server = new GameServer(transport, {
+      registry: setup.registry,
+      createStore: setup.createStore,
+    });
+    await server.init();
+    transport.connect("local", profile);
+    await server.settle();
+    expect(server.getLocalSession().player.position).toEqual(position);
+    expect(server.getLocalSession().player.wz).toBe(44);
+    await server.loadWorld(meta.id, { x: 2543, y: -2713, generation });
+    expect(server.getLocalSession().player.wz).toBe(0);
+  } finally {
+    await server.destroy();
+  }
+}, 30000);

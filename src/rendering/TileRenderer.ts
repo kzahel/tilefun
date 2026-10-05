@@ -24,6 +24,7 @@ import type { Camera } from "./Camera.js";
 import { allocateTerrainResourceId, CanvasTerrainResources } from "./CanvasTerrainResources.js";
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
+import { drawRailTile } from "./RailTrackRaster.js";
 import { touchRaster } from "./RasterSurface.js";
 import type { ElevationItem } from "./SceneItem.js";
 import type {
@@ -568,7 +569,9 @@ export class TileRenderer implements TerrainPresentation {
 
         // 4. Road layer (asphalt base + overlay autotile)
         const road = chunk.getRoad(lx, ly);
-        if (road === RoadType.RailHorizontalTop || road === RoadType.RailHorizontalBottom) {
+        if (road === RoadType.RailCurveProof) {
+          drawRailTile(offCtx, chunk.railPaths, baseTx + lx, baseTy + ly, dx, dy);
+        } else if (road === RoadType.RailHorizontalTop || road === RoadType.RailHorizontalBottom) {
           // Native grey straight rail, split into the two 16px terrain cells.
           const sheet = sheets.get("me-complete");
           if (sheet)

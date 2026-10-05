@@ -6,8 +6,8 @@ import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 export const ROAD_RAIL_BRIDGE = {
   halfWidth: 96,
   halfDeck: 64,
-  ramp: 256,
-  height: 64,
+  ramp: 384,
+  height: 96,
   thickness: 8,
 } as const;
 export interface RailBridge {
@@ -18,9 +18,27 @@ export interface RailBridge {
   bounds: Bounds;
 }
 const PARTS = {
-  north: { bottom: -64, length: 256, z: 0, rise: 64, neighbors: ["deck"] },
-  deck: { bottom: 64, length: 128, z: 64, rise: 0, neighbors: ["north", "south"] },
-  south: { bottom: 320, length: 256, z: 64, rise: -64, neighbors: ["deck"] },
+  north: {
+    bottom: -64,
+    length: ROAD_RAIL_BRIDGE.ramp,
+    z: 0,
+    rise: ROAD_RAIL_BRIDGE.height,
+    neighbors: ["deck"],
+  },
+  deck: {
+    bottom: 64,
+    length: 128,
+    z: ROAD_RAIL_BRIDGE.height,
+    rise: 0,
+    neighbors: ["north", "south"],
+  },
+  south: {
+    bottom: ROAD_RAIL_BRIDGE.halfDeck + ROAD_RAIL_BRIDGE.ramp,
+    length: ROAD_RAIL_BRIDGE.ramp,
+    z: ROAD_RAIL_BRIDGE.height,
+    rise: -ROAD_RAIL_BRIDGE.height,
+    neighbors: ["deck"],
+  },
 } as const;
 export function bridgePart(type: string): keyof typeof PARTS | undefined {
   return (Object.keys(PARTS) as (keyof typeof PARTS)[]).find((p) => type === `prop-road-rail-${p}`);

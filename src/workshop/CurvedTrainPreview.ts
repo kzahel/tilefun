@@ -1,16 +1,13 @@
 import type { RailAlignment } from "../railway/RailPath.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
-/** Static schematic track/platform presentation. Motion comes only from Realm. */
+/** Lab-only town/platform markers. Tracks use the production terrain cache. */
 export function drawCurvedRailLayout(
   frame: OverlayFrame,
   camera: Camera,
   alignment: RailAlignment,
 ) {
-  const scale = camera.scale,
-    b = alignment.bounds;
-  const origin = camera.worldToScreen(b.minX, b.minY);
-  frame.rect(origin.sx, origin.sy, (b.maxX - b.minX) * scale, (b.maxY - b.minY) * scale, "#e7ede0");
+  const scale = camera.scale;
   const line = (x: number, y: number, x2: number, y2: number, color: string) => {
     const a = camera.worldToScreen(x, y),
       z = camera.worldToScreen(x2, y2);
@@ -26,25 +23,6 @@ export function drawCurvedRailLayout(
       }
     const p = camera.worldToScreen(0, 0);
     frame.label("TOWN · layout placeholder", p.sx, p.sy, "#516760", "14px sans-serif", true);
-  }
-  for (const p of alignment.samples(20)) {
-    const nx = -Math.sin(p.angle),
-      ny = Math.cos(p.angle);
-    line(p.x - nx * 18, p.y - ny * 18, p.x + nx * 18, p.y + ny * 18, "#a08763");
-  }
-  const points = alignment.samples(6);
-  for (let i = 1; i < points.length; i++) {
-    const p = points[i - 1],
-      q = points[i];
-    if (!p || !q) continue;
-    for (const side of [-10, 10])
-      line(
-        p.x - Math.sin(p.angle) * side,
-        p.y + Math.cos(p.angle) * side,
-        q.x - Math.sin(q.angle) * side,
-        q.y + Math.cos(q.angle) * side,
-        "#52616a",
-      );
   }
   for (const stop of alignment.path.stops) {
     const p = alignment.sample(stop.distance),

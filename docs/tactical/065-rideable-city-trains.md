@@ -28,5 +28,17 @@ Switches, shared-track traffic, express services and curved grades are later wor
   mid-turn reload, trackside jumping/momentum, prediction and low ceilings.
   Existing curved-motion and car-riding regressions pass; typechecks pass.
 
-Next: generate curved links and render their tracks through shared terrain caches,
-then complete all required checks and full browser/streaming validation.
+- Eligible pairs now receive dry tangent arcs and usable city platforms, with
+  deterministic road/terrain admission and retained straight fallback services.
+- Analytic native-scale pixel tracks share the service path, chunk replication
+  and ordinary Canvas/GPU terrain cache. No train sprite pixels changed.
+- Fresh seed 2026 boards from Willowhaven and reaches Willowbridge. The real-Realm
+  regression covers ordinary jump boarding, both bends, streaming, mid-bend reload,
+  station arrival and alighting. Game profile resume preserves saved roof support;
+  explicit travel still resets height. Generated bridges use 96px decks/384px ramps
+  for passenger headroom while the low-ceiling lab retains its blocking case.
+- Added a production city-train Workshop fixture and candidate; curved lab tracks
+  share the production renderer. Native cardinal pose switches remain visible.
+
+Next: finish full browser/unit/lint/build and streaming validation, record evidence,
+and commit the completed integration.

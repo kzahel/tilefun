@@ -3129,7 +3129,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:113"
+          "source": "src/railway/RailwayStrategy.ts:131"
         }
       ]
     },
@@ -3151,7 +3151,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:114"
+          "source": "src/railway/RailwayStrategy.ts:132"
         }
       ]
     },
@@ -3209,7 +3209,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:116"
+          "source": "src/railway/RailwayStrategy.ts:134"
         }
       ]
     },
@@ -4781,7 +4781,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:115"
+          "source": "src/railway/RailwayStrategy.ts:133"
         }
       ]
     },
@@ -22369,6 +22369,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/railway/TrainPassengers.ts:47"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/rendering/PlayerPresentation.ts:28"
         },
         {
@@ -22401,11 +22405,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1102"
+          "source": "src/server/Realm.ts:1110"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2034"
+          "source": "src/server/Realm.ts:2042"
         },
         {
           "system": "Gameplay",

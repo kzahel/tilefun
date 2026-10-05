@@ -94,6 +94,7 @@ export class ChunkManager {
       } else {
         this.generate(chunk, cx, cy);
       }
+      chunk.railPaths = this.generator?.railPathsForChunk?.(cx, cy) ?? [];
       this.chunks.set(key, chunk);
       // Invalidate neighbors' autotile so their borders recompute
       this.invalidateNeighborAutotile(cx, cy);
@@ -116,6 +117,7 @@ export class ChunkManager {
       if (data.roadGrid) chunk.roadGrid.set(data.roadGrid);
       if (data.heightGrid) chunk.heightGrid.set(data.heightGrid);
     } else this.generate(chunk, cx, cy);
+    chunk.railPaths = this.generator?.railPathsForChunk?.(cx, cy) ?? [];
     this.chunks.set(chunkKey(cx, cy), chunk);
     this.invalidateNeighborAutotile(cx, cy);
     return chunk;

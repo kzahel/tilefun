@@ -788,11 +788,14 @@ export class GameServer {
               y: saved.player.y / TILE_SIZE,
               generation: realm.generation,
             };
-            await safeArrival(realm, arrival);
+            const position = await safeArrival(realm, arrival);
+            const exact = position.wx === saved.player.x && position.wy === saved.player.y;
             return {
               realm,
               allowInterior: true,
-              arrival,
+              // Resume exact saved progress, including moving-roof support. A relocated
+              // fallback is explicit ground travel and must discard that old support.
+              ...(exact ? {} : { arrival }),
               savedPlayer: saved.player,
               returnLocation: saved.player.returnLocation ?? null,
             };

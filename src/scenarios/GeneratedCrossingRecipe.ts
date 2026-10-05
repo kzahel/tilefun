@@ -3,6 +3,7 @@ import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
+import { ROAD_RAIL_BRIDGE } from "../railway/RoadRailBridge.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
 export const GENERATED_CROSSINGS = [
@@ -30,12 +31,12 @@ export function generatedCrossingRecipe(index = 0, reverse = false) {
     ),
   );
   const first = required(lane.path.points[0]);
-  const distance = Math.abs(y + (reverse ? -420 : 420) - first.y);
+  const distance = Math.abs(y + (reverse ? -548 : 548) - first.y);
   const starts = {
-    "south approach": { position: { wx: x + 76, wy: y + 352 }, z: 0 },
-    bridge: { position: { wx: x + 76, wy: y + 8 }, z: 64 },
+    "south approach": { position: { wx: x + 76, wy: y + 480 }, z: 0 },
+    bridge: { position: { wx: x + 76, wy: y + 8 }, z: ROAD_RAIL_BRIDGE.height },
     trackside: { position: { wx: x + 128, wy: y + 40 }, z: 0 },
-    "north approach": { position: { wx: x + 76, wy: y - 352 }, z: 0 },
+    "north approach": { position: { wx: x + 76, wy: y - 480 }, z: 0 },
   };
   const start = starts["south approach"];
   const recipe: ScenarioRecipe = {

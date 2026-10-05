@@ -8,6 +8,7 @@ import {
   describeSurfaceSupport,
   type SurfaceVisibility,
 } from "../rendering/SurfacePresentation.js";
+import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import {
   GENERATED_CROSSINGS,
@@ -32,21 +33,27 @@ export default function WorldGeometryPage() {
     () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
+  const cityTrains = fixture === "city-trains";
   const generated = generatedIndex >= 0;
   const garage = fixture === "garage" || fixture === "car-garage",
     crossing = fixture === "crossing" || fixture === "car-bridge" || generated,
     vehicle = fixture === "car-garage" || fixture === "car-bridge",
     trainGrade = fixture === "train-grades";
-  const trainCurve = fixture === "train-loop" || fixture === "train-winding";
-  const [followTrain, setFollowTrain] = useState(!trainCurve);
+  const trainCurve = fixture === "train-loop" || fixture === "train-winding" || cityTrains;
+  const [followTrain, setFollowTrain] = useState(!trainCurve || cityTrains);
   const [reverse, setReverse] = useState(false);
   const generatedScene = useMemo(
     () => (generatedIndex >= 0 ? generatedCrossingRecipe(generatedIndex, reverse) : undefined),
     [generatedIndex, reverse],
   );
   const curveRecipe = useMemo(
-    () => (trainCurve ? curvedTrainRecipe(fixture === "train-loop", reverse) : undefined),
-    [trainCurve, fixture, reverse],
+    () =>
+      cityTrains
+        ? cityTrainRecipe()
+        : trainCurve
+          ? curvedTrainRecipe(fixture === "train-loop", reverse)
+          : undefined,
+    [trainCurve, fixture, reverse, cityTrains],
   );
   const curveAlignment = curveRecipe?.railways?.[0]?.path
     ? railAlignment(curveRecipe.railways[0].path)
@@ -91,19 +98,22 @@ export default function WorldGeometryPage() {
                 const middle = scene.current?.session.view.entities.find(
                   (e) => e.type === (trainCurve ? CURVE_TRAIN : "train-carriage-v1:middle"),
                 );
-                if (!settings.current.followTrain || !middle) return { wx: 0, wy: -16 };
+                if (!settings.current.followTrain || !middle)
+                  return cityTrains ? required(curveRecipe).player.position : { wx: 0, wy: -16 };
                 const p = interpolatePosition(middle.position, middle.prevPosition, alpha);
                 return { wx: p.wx, wy: p.wy - (interpolateWz(middle, alpha) ?? 0) - 16 };
               }
             : { wx: crossing ? 0 : vehicle ? -48 : -16, wy: -16 },
-        terrain: generated,
+        terrain: generated || trainCurve,
         surfaceVisibility: () => settings.current.visibility,
         settings: () => ({
           paused: settings.current.paused,
           zoom:
             trainGrade || trainCurve
               ? settings.current.followTrain
-                ? 0.4
+                ? cityTrains
+                  ? 0.75
+                  : 0.4
                 : trainCurve
                   ? fixture === "train-loop"
                     ? 0.14
@@ -184,9 +194,11 @@ export default function WorldGeometryPage() {
         overlay: (frame) => {
           frame.label(
             trainCurve
-              ? fixture === "train-loop"
-                ? "TOWN LOOP · FOUR STOPS"
-                : "WINDING INTER-TOWN ROUTE"
+              ? cityTrains
+                ? "CITY-TO-CITY ROOF RIDING"
+                : fixture === "train-loop"
+                  ? "TOWN LOOP · FOUR STOPS"
+                  : "WINDING INTER-TOWN ROUTE"
               : generated
                 ? `GENERATED CROSSING · SEED ${GENERATED_CROSSINGS[generatedIndex]?.seed}`
                 : trainGrade
@@ -203,11 +215,13 @@ export default function WorldGeometryPage() {
           );
           frame.label(
             trainCurve
-              ? "Shared train simulation · native train sprites · schematic track · 8s station stops"
+              ? "Native train sprites · pixel tracks · jump on the roof · 8s station stops"
               : trainGrade
                 ? "Bridge 64 · tunnel −96 · 8s stops · horizontal native carriages"
                 : crossing
-                  ? "Road 64 · train 0 · clearance 56 · train height 44"
+                  ? generated
+                    ? "Road 96 · train 0 · clearance 88 · roof riding"
+                    : "Road 64 · train 0 · clearance 56 · train height 44"
                   : garage
                     ? vehicle
                       ? "Car floor −48 · street 0 · opposite direction starts a new run"
@@ -340,7 +354,9 @@ export default function WorldGeometryPage() {
       <h1>World geometry lab</h1>
       <p>
         {trainCurve
-          ? "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Run either direction and save/reload mid-bend. Native blue train sprites switch between horizontal and vertical views at corners, like cars. Track and platforms are schematic; this is not yet in generated worlds."
+          ? cityTrains
+            ? "Jump from the station onto the train roof and ride from Willowhaven to Willowbridge. This is the real generated world, with broad curves, native train sprites and eight-second station stops. Walk on the roof, jump off or save/reload during the ride."
+            : "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Ride the roof, run either direction and save/reload mid-bend. Native blue train sprites switch cardinal views at corners. Pixel tracks use the production terrain renderer; town/platform markers are schematic."
           : generated
             ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
             : trainGrade
@@ -366,6 +382,7 @@ export default function WorldGeometryPage() {
           onChange={(e) => {
             keys.current.clear();
             setFixture(e.target.value);
+            if (e.target.value === "city-trains") setFollowTrain(true);
             const url = new URL(location.href);
             url.searchParams.set("geometry", e.target.value);
             history.replaceState(null, "", url);
@@ -381,13 +398,14 @@ export default function WorldGeometryPage() {
           <option value="crossing">Road bridge over railway</option>
           <option value="car-bridge">Car over railway bridge</option>
           <option value="car-garage">Car in underground garage</option>
+          <option value="city-trains">City-to-city trains · generated world</option>
           <option value="train-loop">Train around a town · four stops</option>
           <option value="train-winding">Winding train route between towns</option>
           <option value="train-grades">Train over bridge and through tunnel</option>
         </select>
       </label>
       <div className="actions geometry-controls">
-        {(vehicle || trainGrade || trainCurve || generated) && (
+        {(vehicle || trainGrade || trainCurve || generated) && !cityTrains && (
           <button
             type="button"
             onContextMenu={(e) => e.preventDefault()}
@@ -506,7 +524,7 @@ export default function WorldGeometryPage() {
             onChange={(e) => setFollowTrain(e.target.value === "follow")}
           >
             <option value="follow">Follow train</option>
-            <option value="overview">Whole route</option>
+            {!cityTrains && <option value="overview">Whole route</option>}
           </select>
         </label>
       )}

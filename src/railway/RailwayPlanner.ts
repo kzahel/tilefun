@@ -10,6 +10,8 @@ import {
   settlementForOwner,
 } from "../generation/regional/RegionalPlanner.js";
 import type { RegionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { curvedCityLine } from "./CurvedRailPlanner.js";
+import type { RailPath } from "./RailPath.js";
 import type { RailBridge } from "./RoadRailBridge.js";
 
 export interface RailStation {
@@ -21,6 +23,7 @@ export interface RailStation {
   access: Bounds;
 }
 export interface RailLine {
+  path?: RailPath;
   id: string;
   bounds: Bounds;
   y: number;
@@ -37,7 +40,8 @@ export class RailwayPlanner {
     cx = Math.floor(cx / 2) * 2;
     const key = `${cx},${cy}`;
     if (this.cache.has(key)) return this.cache.get(key) ?? null;
-    const result = this.plan(cx, cy);
+    const straight = this.plan(cx, cy);
+    const result = straight ? (curvedCityLine(this.world, straight) ?? straight) : null;
     this.cache.set(key, result);
     if (this.cache.size > 128) this.cache.delete(this.cache.keys().next().value ?? "");
     return result;
@@ -90,13 +94,13 @@ export class RailwayPlanner {
                 p.x === q.x &&
                 p.x > a.center.x + 40 &&
                 p.x < b.center.x - 40 &&
-                Math.min(p.y, q.y) <= y - 28 &&
-                Math.max(p.y, q.y) >= y + 28,
+                Math.min(p.y, q.y) <= y - 36 &&
+                Math.max(p.y, q.y) >= y + 36,
             );
           if (!crossing || bridges.length || conflicts.some((x) => Math.abs(x - crossing.a.x) > 10))
             return null;
           const x = crossing.a.x;
-          const bridgeBounds = { minX: x - 6, maxX: x + 6, minY: y - 20, maxY: y + 20 };
+          const bridgeBounds = { minX: x - 6, maxX: x + 6, minY: y - 28, maxY: y + 28 };
           if (!dry(bridgeBounds)) return null;
           bridges.push({
             id: `${id}:bridge:${road.id}`,
@@ -154,7 +158,7 @@ export class RailwayPlanner {
     );
     for (const o of owners) {
       const line = this.owner(o.cx, o.cy);
-      if (line) return { x: line.start, y: line.y - 4 };
+      if (line) return { x: line.stations[0].x, y: line.stations[0].y - 3 };
     }
     return undefined;
   }

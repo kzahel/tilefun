@@ -16,6 +16,7 @@ import { buildVehicleCandidates } from "./VehicleCandidates.js";
 import { buildWildlifeCandidates, WILDLIFE_BATCHES } from "./WildlifeCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 import {
+  buildCityTrainCandidate,
   buildCurvedTrainCandidate,
   buildGeneratedCrossingCandidate,
   buildWorldGeometryCandidate,
@@ -47,6 +48,7 @@ try {
     await buildWorldGeometryCandidate("train-grades"),
     await buildCurvedTrainCandidate(true),
     await buildCurvedTrainCandidate(false),
+    await buildCityTrainCandidate(),
     ...(await Promise.all([0, 1, 2].map(buildGeneratedCrossingCandidate))),
   );
   candidates.push(...(await buildRailwayCandidates()));

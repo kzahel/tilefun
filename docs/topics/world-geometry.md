@@ -1,8 +1,8 @@
 # Terrain heights, slopes and stacked spaces
 
 Topic: world-geometry
-Status: deck, garage, crossing and car grade proofs accepted; train grades accepted; first generated road bridge accepted; curved train previews implemented for review. Broader terrain authoring and interior integration remain open.
-Updated: 2026-10-04.
+Status: deck, garage, crossing and car grade proofs accepted; train grades accepted; first generated road bridge accepted; curved train labs and rideable generated city links delivered. Broader terrain authoring and interior integration remain open.
+Updated: 2026-10-05.
 
 Owns the physical world model for terrain, ramps, stacked floors and passages.
 [Physics](../3D-PHYSICS-DESIGN.md) documents existing movement;
@@ -284,3 +284,14 @@ The generated crossing was accepted in chat on 2026-10-04. The user then chose
 train corners and curved inter-town routes as the next priority. [Trains](trains.md#curved-routes-and-town-loops)
 owns that level-ground motion proof; underground station access and combined
 curves/grades remain subsequent geometry consumers.
+
+## Roof passengers on generated trains
+
+The 2026-10-05 [city train integration](trains.md#city-to-city-roof-riding-integration)
+uses the shared moving-roof and surface-clearance contracts. Authority checks the
+swept passenger body along with the carriage before committing motion. Low authored
+ceilings stop the service with a rider; generated road decks are 96px high with an
+88px underside and 384px ramps so roof passengers can pass and players/cars can
+still traverse both approaches. Curved routes remain level and avoid roads;
+existing admitted road crossings retain their straight services. Native train
+pixels and promoted banks remain unchanged.

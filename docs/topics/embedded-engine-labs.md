@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-04.
+Updated: 2026-10-05.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -205,3 +205,13 @@ replicas derive matching cardinal colliders from those frames. Pose changes
 intentionally snap, preserving the available sprites. Lab underlays
 only draw the static alignment/platform/town diagram. Generated routes keep the
 accepted native horizontal representation until the new motion/art is reviewed.
+
+## City train integration
+
+The World geometry loop/winding recipes now render procedural pixel tracks through
+the production terrain cache on both backends. The overlay retains only labelled
+schematic town/platform markers. `city-trains` instead uses real regional seed 2026
+terrain and station props. Roof-start commands, carriage support, streaming and
+save/reload use the shared Realm/Worker pipeline; road traffic is deliberately
+omitted in this temporary scene. Full game tests separately exercise ordinary
+station jumping and durable game reopening. See [tactical 065](../tactical/065-rideable-city-trains.md).

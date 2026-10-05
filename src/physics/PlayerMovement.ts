@@ -316,13 +316,21 @@ export function stepPlayerFromInput(
   const wasGrounded = entity.jumpVZ === undefined;
   let next = applyPlayerInputIntent(entity, input, dt, ctx, state, physics);
   if (!ctx.noclip && !support && wasGrounded && entity.jumpVZ !== undefined) {
-    // Ordinary jumps peak below approved car roofs. Nearby vehicles provide a
+    // Ordinary jumps peak below vehicle roofs. Nearby moving roofs provide a
     // local hop assist; terrain/furniture jumps and approved geometry stay fixed.
     const nearby = initialSurfaces.entities.filter(
       (e) =>
         hasMovingRoof(e) &&
         e.collider &&
-        Math.hypot(e.position.wx - entity.position.wx, e.position.wy - entity.position.wy) < 100,
+        (() => {
+          const b = getEntityAABB(e.position, e.collider);
+          return (
+            Math.hypot(
+              Math.max(b.left - entity.position.wx, entity.position.wx - b.right, 0),
+              Math.max(b.top - entity.position.wy, entity.position.wy - b.bottom, 0),
+            ) < 80
+          );
+        })(),
     );
     const roof = Math.max(
       0,
@@ -331,7 +339,9 @@ export function stepPlayerFromInput(
     if (roof > 0 && roof <= 64)
       entity.jumpVZ = Math.max(
         entity.jumpVZ,
-        Math.sqrt(2 * JUMP_GRAVITY * physics.gravityScale * (roof + 24)),
+        Math.sqrt(
+          2 * JUMP_GRAVITY * physics.gravityScale * (roof + (nearby.some(isTrain) ? 40 : 24)),
+        ),
       );
   }
   if (support?.velocity && entity.velocity) {
