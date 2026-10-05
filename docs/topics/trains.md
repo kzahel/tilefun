@@ -292,5 +292,8 @@ post-replay corrections reach roughly 3.2px because train ticks and player comma
 ticks carry the rider on different clocks. Uneven input timing reproduces the
 same error deterministically; ground walking/idle controls remain near exact.
 [Evidence, repeatable probes and proposed support-relative prediction fix](../research/train-roof-prediction-jitter.md)
-own the detailed results. No runtime fix has been implemented. Next: implement
-and validate a common moving-support timeline and local passenger prediction.
+own the detailed results. No runtime fix has been implemented. The user's
+subsequent reproduction-first request broadens this to NPC contact and car roofs;
+[player prediction](player-prediction.md) now owns that investigation and its
+repeatable baseline. Review a shared timeline design against all cases before
+implementing a moving-support fix.

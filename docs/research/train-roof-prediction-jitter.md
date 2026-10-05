@@ -2,7 +2,11 @@
 
 Investigated 2026-10-05 against gameplay source at `17ec681` (documentation-only
 successor of `5847bd3`). No gameplay fix is implemented in this investigation.
-[Trains](../topics/trains.md) owns current status; the deferred service lifetime
+[Player prediction](../topics/player-prediction.md) now owns the broader
+reproduction-first investigation, including the
+[NPC/car baseline](moving-contact-reproductions.md). The support-relative proposal
+below is an initial train diagnosis, not an implemented or complete NPC solution.
+[Trains](../topics/trains.md) owns service behavior; the deferred service lifetime
 and map-marker work is [066](../tactical/066-train-lifetime-and-map-markers.md).
 
 ## Finding

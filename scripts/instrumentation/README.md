@@ -1,5 +1,22 @@
 # Diagnostic probes
 
+## Moving contact and car/train roofs
+
+`npx tsx scripts/instrumentation/moving-contact.ts --output=/tmp/moving-contact.json`
+runs ten native production scenes under five controlled input/delivery schedules.
+Every scene runs twice in fresh sessions and rejects differing complete trace
+hashes. It also checks that walking really encounters a constraint and that roof
+fixtures retain support at cruise speed. Only fixture data and clocks are controlled;
+native AI, collider flags, carry logic, binary replication and prediction are unchanged.
+
+Use `--case=person-away --profile=delay50`, `--case=cow-still --profile=lockstep`,
+`--case=car-roof --profile=uneven` or `--case=train-roof --profile=uneven` for focused
+reproductions. Other cases/profiles and the measured baseline are in
+[moving-contact evidence](../../docs/research/moving-contact-reproductions.md).
+JSON retains actual post-replay shifts, acknowledgements, geometry and
+authoritative passenger offsets. This is characterization, not a fixed-behavior
+test or a browser presentation measurement. Gameplay changes remain on hold.
+
 ## Train roof prediction
 
 `npx tsx scripts/instrumentation/train-roof-prediction.ts --output=/tmp/train-clock.json`

@@ -31,6 +31,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Semantic tileset map](semantic-tileset-map.md) | Whole-sheet thematic mapping, autonomous asset hypotheses and independent review for Modern Exteriors and Interiors |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
+| [Player prediction](player-prediction.md) | Reproduction-first investigation of moving NPC contact and car/train support timelines |
 | [Rendering architecture](rendering-architecture.md) | Backend separation, resource ownership, frame lifetime and incremental renderer replacement |
 | [3D assets](3d-assets.md) | Sprite reconstruction, physical/visual proxies, car investigation and model-assisted asset experiments |
 | [Performance](performance.md) | Worker authority, traversal readiness, phone evidence and bounded terrain preparation |

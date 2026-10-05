@@ -26,6 +26,13 @@ documentation cleanup; they are not a confirmed current bug list.
 
 ## Reproduce before changing behavior
 
+The current [player prediction](topics/player-prediction.md) investigation has a
+[deterministic contact/roof matrix](research/moving-contact-reproductions.md)
+covering moving/still NPCs and cars/trains with independent input and authority
+clocks. Use it before tweaking behavior. The
+[train browser probe](research/train-roof-prediction-jitter.md) additionally
+measures real Worker corrections and rendered passenger-relative positions.
+
 Record the host mode (Worker, P2P or dedicated), generator/seed, mount type,
 input sequence and whether divergence occurs in physics or presentation. Check
 acknowledged input sequence and double-stepping first; don't revive an old
