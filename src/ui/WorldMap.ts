@@ -27,6 +27,7 @@ export class WorldMap {
   private readonly title = document.createElement("h2");
   private readonly status = document.createElement("p");
   private readonly roster = document.createElement("div");
+  private readonly stops = document.createElement("div");
   private readonly count = document.createElement("span");
   private readonly renderer = new MapRenderer();
   private readonly resize = new ResizeObserver(() => this.resized());
@@ -88,7 +89,12 @@ export class WorldMap {
       "Terrain overview · indoor players appear at their entrance · nearby safe ground is chosen for travel";
     this.roster.className = "world-map-roster";
     this.roster.setAttribute("aria-label", "Players in this world");
-    footer.append(hint, this.roster, this.status, note);
+    const legend = document.createElement("small");
+    legend.textContent = "Purple dashed lines: railways · ◇: train stops";
+    this.stops.className = "world-map-roster";
+    this.stops.setAttribute("role", "group");
+    this.stops.setAttribute("aria-label", "Train stops");
+    footer.append(hint, legend, this.stops, this.roster, this.status, note);
     this.dialog.append(header, toolbar, this.canvas, footer);
     this.root.append(this.dialog);
     document.body.append(this.root);
@@ -192,6 +198,20 @@ export class WorldMap {
             if (!this.open || epoch !== this.epoch) return;
             if (response.type === "result") {
               this.result = response.result;
+              this.stops.replaceChildren();
+              for (const station of (this.result.railways ?? []).flatMap((line) => line.stations)) {
+                const button = this.button(`${station.town.name} station`, () => {
+                  this.view.x = station.x;
+                  this.view.y = station.y;
+                  this.changed();
+                });
+                button.dataset.testid = "world-map-stop";
+                button.dataset.stationId = station.id;
+                button.dataset.x = String(station.x);
+                button.dataset.y = String(station.y);
+                this.stops.append(button);
+              }
+              this.root.dataset.railLines = String(this.result.railways?.length ?? 0);
               this.root.dataset.settled = "true";
               this.draw();
             } else if (response.type === "error") this.status.textContent = response.message;

@@ -19,6 +19,7 @@ export interface Overlays {
   geography: boolean;
   landUse: boolean;
   roads: boolean;
+  railways: boolean;
   settlements: boolean;
   boundaries: boolean;
   lots: boolean;
@@ -30,6 +31,7 @@ export const DEFAULT_OVERLAYS: Overlays = {
   geography: true,
   landUse: true,
   roads: true,
+  railways: true,
   settlements: true,
   boundaries: false,
   lots: true,

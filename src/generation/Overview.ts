@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { type RailLine, RailwayPlanner } from "../railway/RailwayPlanner.js";
 import {
   createDescriptor,
   type GenerationDescriptor,
@@ -23,6 +24,8 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   world: GenerationDescriptor | RegionalWorld;
   districts?: DistrictPlan[];
   countryside?: CountryPlan[];
+  /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
+  railways?: RailLine[];
 };
 export function normalizeGeneration(
   world: GenerationDescriptor | RegionalWorld,
@@ -40,6 +43,19 @@ export function* overviewSteps(
   const descriptor = requireCurrentGeneration(normalizeGeneration(input));
   if (descriptor.type === "regional") {
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
+    let railways: RailLine[] = [];
+    if (result.detail === "region") {
+      const lines = yield* new RailwayPlanner(regionalWorld(descriptor.seed)).querySteps(
+        request.bounds,
+        request.limits.maxOwners,
+      );
+      const count = lines.reduce((n, line) => n + 1 + line.stations.length, 0);
+      // Keep an entire layer within budget rather than returning a shifting subset.
+      if (result.stats.features + count <= request.limits.maxFeatures) {
+        railways = lines;
+        result.stats.features += count;
+      }
+    }
     const source = new DenseDistrictSource(regionalWorld(descriptor.seed), true);
     const districts: DistrictPlan[] = [];
     if (result.detail === "region" && result.grid.step <= 16) {
@@ -68,7 +84,7 @@ export function* overviewSteps(
       0,
     );
     const countryside: CountryPlan[] = [];
-    return { ...result, world: descriptor, districts, countryside };
+    return { ...result, world: descriptor, districts, countryside, railways };
   }
   validateRequest(request);
   const grid = makeGrid(request.bounds, request.sampleStep, request.limits.maxSamples);
@@ -110,6 +126,7 @@ export function* overviewSteps(
     cover,
     settlements: [],
     connections: [],
+    railways: [],
     stats: { samples: count, owners: 0, features: 0, detailedChunks: 0 },
   };
 }

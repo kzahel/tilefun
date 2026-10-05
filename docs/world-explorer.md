@@ -31,6 +31,13 @@ Failed travel leaves the map open with an error; successful travel returns to
 the game. Travel from an interior returns to the exterior world. **Escape**, **G**,
 or **Close map** dismisses the overlay without travelling.
 
+Generated railway routes appear as **purple dashed lines**, including the actual
+broad curves. Diamond markers label each **city station**. The **Train stops**
+buttons center on either stop, including a destination outside the current view;
+centering does not travel. The standalone explorer also has a **Railways & stops**
+layer toggle. Very broad overview scales omit planned routes/stops with the other
+bounded regional features; zoom in to see them.
+
 The map is a terrain overview from the current world's pinned generator,
 with authoritative player positions. Saved terrain edits are inspected through
 the standalone explorer's exact tile view.
@@ -91,7 +98,9 @@ Play here connects the same location to authoritative gameplay.
   features at 432. Lower budgets are supported. Sample lattices are globally
   aligned powers of two, so overlapping samples at the same spacing agree.
   Larger queries coarsen their samples and return landscape overview without
-  settlement/road enumeration; they do not truncate a changing subset of places.
+  settlement/road/rail enumeration; they do not truncate a changing subset of places.
+  Railway queries reuse the production planner, yield after each owner and count
+  routes plus stops against the shared feature cap before district details.
   Small water/vegetation features can be omitted by the sampled overview. This
   slice does not claim a conservative multiscale geographic envelope.
 

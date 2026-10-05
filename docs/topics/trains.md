@@ -251,3 +251,14 @@ input, reopens mid-bend, reaches the second city and alights on both backends.
 Next: playtest station boarding and native pose switches, then add visible city
 names/destinations before expanding the network. The current service is an
 exclusive two-city shuttle; generated loops and shared-track dispatch are later work.
+
+## Finding trains on the map
+
+The in-game map (**G** / **Map · G**) and standalone explorer now display the
+production planner's straight and curved routes as purple dashed lines, with
+named diamond station markers. In-game **Train stops** buttons center on a
+station without travelling. The explorer's **Railways & stops** layer is enabled
+by default. Map planning stays in the existing Worker, with bounded owner/feature
+budgets and cancellation between owners; broad overview scales omit routes with
+other detailed features. This is generated infrastructure, not live train dots
+or a timetable, and follows the map's existing generator-overview policy for edits.

@@ -128,13 +128,20 @@ export class RailwayPlanner {
     return { id, bounds, y, start: a.center.x, end: b.center.x, stations, bridges };
   }
   query(bounds: Bounds): RailLine[] {
+    const query = this.querySteps(bounds);
+    let step = query.next();
+    while (!step.done) step = query.next();
+    return step.value;
+  }
+  /** One owner per cooperative step; overview workers can cancel between plans. */
+  *querySteps(bounds: Bounds, maxOwners = 144): Generator<void, RailLine[]> {
     const result: RailLine[] = [];
     // Station access and corridor fit inside their two owner cells.
     const minX = Math.floor(bounds.minX / REGION_SIZE / 2) * 2,
       maxX = Math.floor(bounds.maxX / REGION_SIZE / 2) * 2;
     const minY = Math.floor(bounds.minY / REGION_SIZE),
       maxY = Math.floor(bounds.maxY / REGION_SIZE);
-    if (((maxX - minX + 2) / 2) * (maxY - minY + 1) > 144) return result;
+    if (((maxX - minX + 2) / 2) * (maxY - minY + 1) > maxOwners) return result;
     for (let y = minY; y <= maxY; y++)
       for (let x = minX; x <= maxX; x += 2) {
         const line = this.owner(x, y);
@@ -147,6 +154,7 @@ export class RailwayPlanner {
             ))
         )
           result.push(line);
+        yield;
       }
     return result;
   }

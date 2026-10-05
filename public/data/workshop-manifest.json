@@ -4840,7 +4840,7 @@
       "name": "Ride trains between generated cities",
       "prompt": "Jump from Willowhaven station onto the train roof, ride the curved route to Willowbridge and jump off. Save/reload during the ride. Production towns, tracks, stations, streaming and train authority; extra road traffic is disabled in this temporary scene.",
       "url": "/tilefun/workshop.html?geometry=city-trains#/tool/world-geometry",
-      "fingerprint": "3ce2e7ab5c5695f0f5aebd486d0c2c499f780eea9dd4c43e9a53d7184ed04e11",
+      "fingerprint": "b08d35be213b93ff0672f248819b6a606686f7ed16017d658c8cc52819b2883b",
       "excluded": "Interactive generated-world experiment; no immutable art bank promotion."
     },
     {
@@ -4850,7 +4850,7 @@
       "name": "Generated road bridge · seed 100",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-100#/tool/world-geometry",
-      "fingerprint": "4323a0e49ff36f02aa9b515e99d3d8234bbc4a4bdf1f51d67d7c9dcc968cc1e4",
+      "fingerprint": "79aa0724e5a34833d1417c18f5509ee22173bfef6ab3bb0d4537f5f2f417c057",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -4860,7 +4860,7 @@
       "name": "Generated road bridge · seed 42",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry",
-      "fingerprint": "6faf4d90f32df475d4239fa136009792c4d6a6e27fad4ab761f85c47a332f8d0",
+      "fingerprint": "0b0add0eea666d9ca0402a0c3a9e9c5341e7d4b826231dc66c12c105e361966f",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -4870,7 +4870,7 @@
       "name": "Generated road bridge · seed 3",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-3#/tool/world-geometry",
-      "fingerprint": "f55ba89f12365a837cb92314dd935f06ecc6f0553a389ff2ce692144e32b5e44",
+      "fingerprint": "24764e4991fd841da1d7234886b22af18659872381c88d85ed5190c986f90a30",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -28247,5 +28247,5 @@
       }
     }
   ],
-  "inputDigest": "eefcdf1f674d42cb3c05af21dbb72f9a0be16696ccc4f537ae35692f57beda95"
+  "inputDigest": "0d60fd793e12424e729f10c65afeed0a6b692c1ff41eead6477e700d5a89fafb"
 }

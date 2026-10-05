@@ -9,6 +9,7 @@ import {
   REGION_SIZE,
   type Settlement,
 } from "../generation/regional/RegionalPlanner.js";
+import { segmentPose } from "../railway/RailPath.js";
 import type { Overlays, ViewState } from "./ViewState.js";
 
 export type LotFeature = DistrictLot & {
@@ -132,6 +133,42 @@ export class MapRenderer {
         ctx.stroke();
       }
     }
+    if (overlays.railways) {
+      for (const line of result.railways ?? []) {
+        ctx.beginPath();
+        if (line.path) {
+          const first = line.path.segments[0];
+          if (!first) continue;
+          const start = segmentPose(first, 0);
+          ctx.moveTo(sx(start.x / 16), sy(start.y / 16));
+          for (const segment of line.path.segments) {
+            if (segment.kind === "line") ctx.lineTo(sx(segment.endX / 16), sy(segment.endY / 16));
+            else
+              ctx.arc(
+                sx(segment.x / 16),
+                sy(segment.y / 16),
+                (segment.radius / 16) * view.zoom,
+                segment.angle,
+                segment.angle + segment.sweep,
+                segment.sweep < 0,
+              );
+          }
+        } else {
+          ctx.moveTo(sx(line.bounds.minX), sy(line.y));
+          ctx.lineTo(sx(line.bounds.maxX), sy(line.y));
+        }
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = "#fff8f4";
+        ctx.lineWidth = 6;
+        ctx.stroke();
+        ctx.strokeStyle = "#684593";
+        ctx.lineWidth = 3;
+        ctx.setLineDash([7, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+    }
     for (const plan of result.countryside ?? []) {
       const b = plan.bounds;
       if (overlays.lots) {
@@ -218,6 +255,7 @@ export class MapRenderer {
             ctx.fill();
           }
     }
+    const placed: { x: number; y: number; width: number }[] = [];
     if (overlays.settlements) {
       for (const settlement of result.settlements) {
         ctx.beginPath();
@@ -246,7 +284,6 @@ export class MapRenderer {
         ctx.lineWidth = 1.5;
         ctx.stroke();
       }
-      const placed: { x: number; y: number; width: number }[] = [];
       for (const settlement of [...result.settlements].sort(
         (a, b) => Number(b.kind === "city") - Number(a.kind === "city") || a.id.localeCompare(b.id),
       )) {
@@ -270,6 +307,44 @@ export class MapRenderer {
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(settlement.name, x, y);
+      }
+    }
+    if (overlays.railways) {
+      for (const station of (result.railways ?? []).flatMap((line) => line.stations)) {
+        const x = sx(station.x),
+          y = sy(station.y);
+        if (x < -8 || x > width + 8 || y < -8 || y > height + 8) continue;
+        ctx.beginPath();
+        ctx.moveTo(x, y - 6);
+        ctx.lineTo(x + 6, y);
+        ctx.lineTo(x, y + 6);
+        ctx.lineTo(x - 6, y);
+        ctx.closePath();
+        ctx.fillStyle = "#fff8f4";
+        ctx.fill();
+        ctx.strokeStyle = "#684593";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        const label = `${station.town.name} station`;
+        ctx.font = "600 11px system-ui";
+        const labelWidth = ctx.measureText(label).width + 12,
+          labelY = y + 19;
+        if (
+          placed.some(
+            (p) =>
+              Math.abs(p.y - labelY) < 24 && Math.abs(p.x - x) < (p.width + labelWidth) / 2 + 4,
+          )
+        )
+          continue;
+        placed.push({ x, y: labelY, width: labelWidth });
+        ctx.fillStyle = "#fff8f4ee";
+        ctx.beginPath();
+        ctx.roundRect(x - labelWidth / 2, labelY - 10, labelWidth, 20, 4);
+        ctx.fill();
+        ctx.fillStyle = "#563479";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(label, x, labelY);
       }
     }
   }
