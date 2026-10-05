@@ -75,16 +75,17 @@ async function run(name: ContactCase, profile: Profile) {
     setServerTickRate(serverHz);
     const view = new RemoteStateView(new World(new FlatStrategy()));
     applyContactFrames(view, session.frames());
+    let clockStep = 0;
+    const clientClockStep = () => clockStep + (FRAME_PHASE_MS * 120) / 1000;
+    const clientTimeMs = () => (clientClockStep() / 120) * 1000;
     const predictor = new PlayerPredictor(
       () => session.physics,
       () => 1,
+      () => clientTimeMs() / 1000,
     );
     predictor.reset(view.serverPlayerEntity);
     const transport = new LocalTransport();
     let seq = session.player.lastProcessedInputSeq;
-    let clockStep = 0;
-    const clientClockStep = () => clockStep + (FRAME_PHASE_MS * 120) / 1000;
-    const clientTimeMs = () => (clientClockStep() / 120) * 1000;
     let clientHz = profile.commandHz ?? view.tickRate;
     const input = name.endsWith("roof") ? IDLE : RIGHT;
     const delaySteps = (profile.delayMs * 120) / 1000;
@@ -129,7 +130,11 @@ async function run(name: ContactCase, profile: Profile) {
             view.props,
             view.entities,
             view.mountEntityId,
-            { serverTick: view.serverTick, expectedInputDt: dt },
+            {
+              ...(view.simulationTime !== undefined ? { simulationTime: view.simulationTime } : {}),
+              serverTick: view.serverTick,
+              expectedInputDt: dt,
+            },
           );
           const shift = Math.hypot(
             required(predictor.player).position.wx - before.wx,

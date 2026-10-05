@@ -79,6 +79,12 @@ try {
   await page.waitForFunction(() => {
     const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
     return p.wz === 44 && p.jumpVZ === undefined;
+  }).catch(async (error) => {
+    console.log(JSON.stringify(await page.evaluate(() => {
+      const g=document.querySelector("#game").__game;
+      return { player:g.remoteView.serverPlayerEntity, trains:g.remoteView.serverEntities.filter(e=>e.type.startsWith("train")), errors:[] };
+    })));
+    throw error;
   });
   const setRate = async (hz) => {
     const output = await page.evaluate(async (hz) => {

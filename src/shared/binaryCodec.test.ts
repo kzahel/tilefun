@@ -70,7 +70,7 @@ describe("FrameMessage binary codec", () => {
       playerEntityId: 1,
     };
     const buf = encodeServerMessage(msg);
-    expect(buf.byteLength).toBe(19); // header only
+    expect(buf.byteLength).toBe(27); // header only
     const decoded = decodeServerMessage(buf) as FrameMessage;
     expect(decoded).toEqual(msg);
   });
@@ -85,7 +85,7 @@ describe("FrameMessage binary codec", () => {
     };
     const decoded = roundtripServer(msg) as FrameMessage;
     expect(decoded).toEqual(msg);
-    expect(encodeServerMessage(msg).byteLength).toBe(19 + 3 * 4); // header + 3 u32s
+    expect(encodeServerMessage(msg).byteLength).toBe(27 + 3 * 4); // header + 3 u32s
   });
 
   it("roundtrips frame with baselines, deltas, and exits", () => {
@@ -373,7 +373,7 @@ describe("EntityDelta binary codec", () => {
     };
     const buf = encodeServerMessage(msg);
     // 19 header + (4 id + 2 changeMask + 2 nullMask + 8 position) = 19 + 16 = 35
-    expect(buf.byteLength).toBe(35);
+    expect(buf.byteLength).toBe(43);
   });
 
   it("roundtrips velocity set to null", () => {
@@ -792,4 +792,15 @@ describe("JSON fallback", () => {
     const decoded = roundtripServer(msg);
     expect(decoded).toEqual(msg);
   });
+});
+
+it("preserves fractional elapsed simulation time separately from tick count", () => {
+  const frame: FrameMessage = {
+    type: "frame",
+    serverTick: 123,
+    simulationTime: 1 / 60 + 1 / 30,
+    lastProcessedInputSeq: 7,
+    playerEntityId: 1,
+  };
+  expect(roundtripServer(frame)).toEqual(frame);
 });

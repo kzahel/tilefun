@@ -15,6 +15,8 @@ import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupp
 import { roofSupport } from "../traffic/RoofSupport.js";
 import type { World } from "../world/World.js";
 
+import { PredictionCollisionTimeline } from "./PredictionCollisionTimeline.js";
+
 /** If predicted and server positions diverge by more than this, snap immediately. */
 const SNAP_THRESHOLD = 32;
 
@@ -103,11 +105,15 @@ export class PlayerPredictor {
   constructor(
     private readonly physics = getMovementPhysicsParams,
     private readonly physicsMult = getServerPhysicsMult,
+    private readonly clock = () => performance.now() / 1000,
   ) {}
 
   /** The predicted player entity. */
   private predicted: Entity | null = null;
 
+  private readonly collisionTimeline = new PredictionCollisionTimeline();
+  private predictionTime: number | undefined;
+  private reconciledAt = 0;
   private support: Entity | null = null;
   private supportOffset: RoofOffset | null = null;
   private prevSupportOffset: RoofOffset | null = null;
@@ -160,6 +166,8 @@ export class PlayerPredictor {
     this.predicted = this.clonePlayer(serverPlayer);
     this.support = null;
     this.supportOffset = this.prevSupportOffset = null;
+    this.collisionTimeline.clear();
+    this.predictionTime = undefined;
     this._prevPosition = {
       wx: this.predicted.position.wx,
       wy: this.predicted.position.wy,
@@ -236,7 +244,13 @@ export class PlayerPredictor {
       };
     }
 
+    // Replay establishes a collision horizon; wall time advances it between
+    // arrivals. Commands generated together share that horizon, rather than
+    // inventing an extra NPC tick for each catch-up command.
+    const collisionTime = this.predictionTime;
+    if (collisionTime !== undefined) this.predictionTime = collisionTime + Math.max(0, this.clock() - this.reconciledAt);
     this.applyInput(movement, dt, world, props, entities, this.physics());
+    this.predictionTime = collisionTime;
   }
 
   /**
@@ -257,8 +271,13 @@ export class PlayerPredictor {
     props: readonly Prop[],
     entities: readonly Entity[],
     mountEntityId?: number,
-    diagnostics?: { expectedInputDt?: number; serverTick?: number },
+    diagnostics?: { expectedInputDt?: number; serverTick?: number; simulationTime?: number },
   ): void {
+    if (diagnostics?.simulationTime !== undefined) {
+      this.collisionTimeline.record(diagnostics.simulationTime, entities);
+      this.predictionTime = diagnostics.simulationTime;
+      this.reconciledAt = this.clock();
+    }
     if (!this.predicted) {
       const serverMount =
         serverPlayer.parentId !== undefined
@@ -555,6 +574,8 @@ export class PlayerPredictor {
   clearPredicted(): void {
     this.predicted = null;
     this.clearSupport();
+    this.collisionTimeline.clear();
+    this.predictionTime = undefined;
     this.predictedMount = null;
     this.inputBuffer = [];
     this._lastReconcileDiagnostics = null;
@@ -787,7 +808,10 @@ export class PlayerPredictor {
       top: number;
       right: number;
       bottom: number;
-    }): readonly Entity[] => entities;
+    }): readonly Entity[] =>
+      this.predictionTime === undefined
+        ? entities
+        : this.collisionTimeline.poses(this.predictionTime, entities, this.predicted?.id ?? -1);
     const queryProps = (_aabb: {
       left: number;
       top: number;
@@ -826,6 +850,7 @@ export class PlayerPredictor {
           this.predicted,
           this.physicsMult(),
         );
+        if (this.predictionTime !== undefined) this.predictionTime += stepDt;
       }
 
       // Derive player position from mount + offset
@@ -869,6 +894,7 @@ export class PlayerPredictor {
           this.physicsMult(),
         );
         nextState = stepResult.jumpState;
+        if (this.predictionTime !== undefined) this.predictionTime += stepDts[i] ?? 0;
       }
       this.jumpConsumed = nextState.jumpConsumed;
       this.lastJumpHeld = nextState.lastJumpHeld;

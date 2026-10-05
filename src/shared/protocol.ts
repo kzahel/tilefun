@@ -269,6 +269,8 @@ export interface PhysicsCVars {
 export interface FrameMessage {
   type: "frame";
   serverTick: number;
+  /** Elapsed authoritative simulation seconds; independent of changing tick rate. */
+  simulationTime?: number;
   lastProcessedInputSeq: number;
   playerEntityId: number;
   entityBaselines?: EntitySnapshot[];

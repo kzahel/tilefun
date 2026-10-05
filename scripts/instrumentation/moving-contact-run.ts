@@ -56,9 +56,11 @@ export async function runContactCase(name: ContactCase, profile: ContactProfile,
   try {
     const view = new RemoteStateView(new World(new FlatStrategy()));
     applyContactFrames(view, session.frames());
+    let clock = 0;
     const predictor = new PlayerPredictor(
       () => session.physics,
       () => 1,
+      () => clock,
     );
     predictor.reset(view.serverPlayerEntity);
     const transport = new LocalTransport();
@@ -68,6 +70,7 @@ export async function runContactCase(name: ContactCase, profile: ContactProfile,
     const outgoing: { tick: number; frames: ArrayBuffer[] }[] = [];
     const samples = [];
     for (let tick = 0; tick < ticks; tick++) {
+      clock = tick * SERVER_DT;
       const count = required(profile.inputs[tick % profile.inputs.length]);
       for (let i = 0; i < count; i++) {
         predictor.storeInput(++seq, input, COMMAND_DT);
@@ -108,7 +111,11 @@ export async function runContactCase(name: ContactCase, profile: ContactProfile,
           view.props,
           view.entities,
           view.mountEntityId,
-          { serverTick: view.serverTick, expectedInputDt: SERVER_DT },
+          {
+            ...(view.simulationTime !== undefined ? { simulationTime: view.simulationTime } : {}),
+            serverTick: view.serverTick,
+            expectedInputDt: SERVER_DT,
+          },
         );
       const predicted = required(predictor.player),
         player = session.player.player;

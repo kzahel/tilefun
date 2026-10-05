@@ -170,6 +170,7 @@ export class RemoteStateView implements ClientStateView {
   private _predictor: PlayerPredictor | null = null;
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
+  private _simulationTime: number | undefined;
   private _lastProcessedInputSeq = 0;
   private _mountEntityId: number | undefined = undefined;
   private _tickMs = 1000 / TICK_RATE;
@@ -210,6 +211,10 @@ export class RemoteStateView implements ClientStateView {
   /** Server tick number from the latest game state. */
   get physicsParameters() {
     return getMovementPhysicsParams();
+  }
+
+  get simulationTime(): number | undefined {
+    return this._simulationTime;
   }
 
   get serverTick(): number {
@@ -308,6 +313,7 @@ export class RemoteStateView implements ClientStateView {
     // Always-present fields
     this._playerEntityId = msg.playerEntityId;
     this._serverTick = msg.serverTick;
+    this._simulationTime = msg.simulationTime;
     this._lastProcessedInputSeq = msg.lastProcessedInputSeq;
     this.updateInvincibilityTimer();
 
@@ -440,6 +446,7 @@ export class RemoteStateView implements ClientStateView {
       `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingStates=${this._pendingStates.length}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
     );
     this._entityMap.clear();
+    this._simulationTime = undefined;
     this._entities = [];
     this._props = [];
     this._playerEntityId = -1;

@@ -74,6 +74,9 @@ export class ScenarioClient {
             this.view.props,
             this.view.serverEntities,
             this.view.mountEntityId,
+            this.view.simulationTime !== undefined
+              ? { simulationTime: this.view.simulationTime }
+              : undefined,
           );
       }
       pending?.resolve();

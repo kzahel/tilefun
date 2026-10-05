@@ -105,7 +105,7 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 
 // ---- FrameMessage binary codec ----
 
-const FRAME_HEADER_SIZE = 19; // 1 tag + 4 serverTick + 4 lastInput + 4 playerEntity + 2+2+2 counts
+const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
 const MAX_BASELINE_SIZE = 15 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4; // ~60 bytes
 const MAX_DELTA_SIZE = 8 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4; // ~55 bytes
 
@@ -133,6 +133,8 @@ function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   off += 4;
   view.setUint32(off, msg.playerEntityId, true);
   off += 4;
+  view.setFloat64(off, msg.simulationTime ?? -1, true);
+  off += 8;
   view.setUint16(off, baselines.length, true);
   off += 2;
   view.setUint16(off, deltas.length, true);
@@ -168,6 +170,8 @@ function decodeFrameMessage(view: DataView, _buf: ArrayBuffer): FrameMessage {
   off += 4;
   const playerEntityId = view.getUint32(off, true);
   off += 4;
+  const simulationTime = view.getFloat64(off, true);
+  off += 8;
   const baselineCount = view.getUint16(off, true);
   off += 2;
   const deltaCount = view.getUint16(off, true);
@@ -181,6 +185,8 @@ function decodeFrameMessage(view: DataView, _buf: ArrayBuffer): FrameMessage {
     lastProcessedInputSeq,
     playerEntityId,
   };
+
+  if (Number.isFinite(simulationTime) && simulationTime >= 0) msg.simulationTime = simulationTime;
 
   // Baselines
   if (baselineCount > 0) {

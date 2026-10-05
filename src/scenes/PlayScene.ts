@@ -339,6 +339,9 @@ export class PlayScene implements GameScene {
                 {
                   expectedInputDt: (remoteView.tickMs / 1000) * getTimeScale(),
                   serverTick: remoteView.serverTick,
+                  ...(remoteView.simulationTime !== undefined
+                    ? { simulationTime: remoteView.simulationTime }
+                    : {}),
                 },
               );
             }

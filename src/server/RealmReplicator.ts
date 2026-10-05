@@ -35,6 +35,7 @@ interface ReplicationSource {
   readonly propManager: PropManager;
   readonly sessions: ReadonlyMap<string, PlayerSession>;
   readonly tickCounter: number;
+  readonly simulationTime?: number;
   readonly tickRate: number;
   readonly physicsMult: number;
   readonly playerNamesRevision: number;
@@ -204,6 +205,7 @@ export class RealmReplicator {
     const frame: FrameMessage = {
       type: "frame",
       serverTick: source.tickCounter,
+      ...(source.simulationTime !== undefined ? { simulationTime: source.simulationTime } : {}),
       lastProcessedInputSeq: session.lastProcessedInputSeq,
       playerEntityId: session.player.id,
     };

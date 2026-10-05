@@ -22309,15 +22309,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:595"
+          "source": "src/client/ClientStateView.ts:602"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:49"
+          "source": "src/client/PlayerPredictor.ts:53"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:482"
+          "source": "src/client/PlayerPredictor.ts:527"
         },
         {
           "system": "Gameplay",
@@ -22369,15 +22369,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/TrainPassengers.ts:47"
+          "source": "src/rendering/PlayerPresentation.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/PlayerPresentation.ts:28"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/PlayerPresentation.ts:55"
+          "source": "src/rendering/PlayerPresentation.ts:59"
         },
         {
           "system": "Gameplay",
@@ -22405,11 +22401,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1110"
+          "source": "src/server/Realm.ts:1102"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2042"
+          "source": "src/server/Realm.ts:2034"
         },
         {
           "system": "Gameplay",
@@ -22426,6 +22422,10 @@
         {
           "system": "Gameplay",
           "source": "src/shared/serialization.ts:25"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/MovingSupport.ts:60"
         },
         {
           "system": "Gameplay",
@@ -23085,7 +23085,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:624"
+          "source": "src/scenes/PlayScene.ts:627"
         }
       ]
     },

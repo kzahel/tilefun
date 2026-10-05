@@ -127,3 +127,26 @@ A new support-relative resimulation diagnostic measures actual rider correction.
 Reports: `/tmp/car-authority-fixed.json`, `/tmp/train-relative-rates.json`.
 Existing traffic harnesses now defer roof carry and load their passenger clearance
 cells; prediction tests reconcile synchronized player/carrier snapshots.
+
+### Collision timeline checkpoint
+
+Authority frames carry Float64 elapsed simulation seconds (27-byte binary header,
+up from 19); both endpoints must run the same build. Tick-count × current rate is
+never used to reconstruct time. Game and scenario clients pass that time into
+reconciliation. Collision proxies retain eight poses per visible solid entity,
+100ms maximum extrapolation, invalidate exits/time resets/teleports/geometry
+changes, and do not mutate replicas or autonomously advance moving roofs.
+Replay uses accumulated command durations; live queries advance from that horizon
+by measured time since the frame arrived, so co-generated catch-up commands share
+an NPC pose. Deterministic probes inject their clock instead of wall time.
+
+The first proxy probe removed delayed moving-away/crossing errors but introduced
+1.067px corrections in the zero-latency uneven lane: advancing NPCs per live
+command repeated the carry-clock mistake. Freeze co-generated command horizons,
+then advance by arrival-relative elapsed time; retain the failing traces and rerun
+all profiles. Native 120Hz Canvas Worker capture at 30Hz authority now reports
+exactly zero displayed/server roof-offset range, including zero/two-command ticks.
+One GPU run failed ordinary keyboard boarding before capture; no claim from it.
+Full unit suite passes (1576 tests) before the final clock refinement; focused
+codec/predictor/history tests and all three typechecks pass after it. Streaming
+readiness passes. Inventory rebuilds update source references, not approved pixels.

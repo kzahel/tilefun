@@ -999,6 +999,7 @@ export class Realm {
       propManager: this.propManager,
       sessions: this.sessions,
       tickCounter: this.tickCounter,
+      simulationTime: this.worldAPI.time,
       tickRate: this.tickRate,
       physicsMult: this.physicsMult,
       playerNamesRevision: this.playerNamesRevision,
