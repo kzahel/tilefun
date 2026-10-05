@@ -53,3 +53,25 @@ it("shares the carrier's render endpoints while replaying roof walking and detac
   predictor.update(1 / 60, idle, world, [], []);
   expect(predictor.presentationPlayer?.prevPosition).toEqual(predictor.prevPosition);
 });
+
+it("inherits carrier momentum once when walking off the edge", () => {
+  const world = new World(new FlatStrategy());
+  world.getChunk(0, 0);
+  world.getChunk(1, 0);
+  const train = createTrain(80, 80);
+  train.id = 2;
+  train.velocity = { vx: 192, vy: 0 };
+  const player = createPlayer(80 + required(train.collider).width / 2 + 2, 80);
+  player.id = 1;
+  player.wz = 44;
+  const predictor = new PlayerPredictor();
+  predictor.reset(player);
+  const right = { ...idle, dx: 1 };
+  for (let i = 0; i < 15 && predictor.player?.jumpVZ === undefined; i++)
+    predictor.update(1 / 60, right, world, [], [train]);
+  expect(predictor.player?.jumpVZ).toBeDefined();
+  const vx = required(required(predictor.player).velocity).vx;
+  expect(vx).toBeGreaterThan(192);
+  predictor.update(1 / 60, right, world, [], [train]);
+  expect(required(required(predictor.player).velocity).vx).toBeLessThan(vx + 1);
+});

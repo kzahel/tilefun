@@ -215,3 +215,12 @@ terrain and station props. Roof-start commands, carriage support, streaming and
 save/reload use the shared Realm/Worker pipeline; road traffic is deliberately
 omitted in this temporary scene. Full game tests separately exercise ordinary
 station jumping and durable game reopening. See [tactical 065](../tactical/065-rideable-city-trains.md).
+
+## Shared prediction checkpoint (2026-10-05)
+
+[Player prediction](player-prediction.md) owns the shared timing correction and
+[implementation evidence](../research/shared-prediction-fix.md). Cars/trains carry
+roof passengers once per committed pose; prediction replays relative walking and
+camera/body/lab overlays bind to the same support presentation. Native geometry,
+clearance and saved support identities remain authoritative. Collision proxies and
+bounded residual display correction share game/lab engine owners.

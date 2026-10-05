@@ -297,3 +297,12 @@ subsequent reproduction-first request broadens this to NPC contact and car roofs
 [player prediction](player-prediction.md) now owns that investigation and its
 repeatable baseline. Review a shared timeline design against all cases before
 implementing a moving-support fix.
+
+## Shared prediction checkpoint (2026-10-05)
+
+[Player prediction](player-prediction.md) owns the shared timing correction and
+[implementation evidence](../research/shared-prediction-fix.md). Cars/trains carry
+roof passengers once per committed pose; prediction replays relative walking and
+camera/body/lab overlays bind to the same support presentation. Native geometry,
+clearance and saved support identities remain authoritative. Collision proxies and
+bounded residual display correction share game/lab engine owners.

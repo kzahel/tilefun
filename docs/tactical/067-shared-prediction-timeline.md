@@ -150,3 +150,32 @@ One GPU run failed ordinary keyboard boarding before capture; no claim from it.
 Full unit suite passes (1576 tests) before the final clock refinement; focused
 codec/predictor/history tests and all three typechecks pass after it. Streaming
 readiness passes. Inventory rebuilds update source references, not approved pixels.
+
+### Residual presentation and phase checkpoint
+
+Account for authority order: input uses the last committed NPC pose before that
+NPC advances. Arrival-relative live lead subtracts the advertised authority step.
+This preserves lockstep/uneven controls and removes batched-frame corrections;
+naively adding a whole frame interval had introduced 1.067px errors in lockstep.
+Those prototype reports remain local evidence, not the accepted result.
+
+The accepted contact/rate traces and real Worker captures are summarized in
+[shared prediction evidence](../research/shared-prediction-fix.md). Remaining
+uncertain arrivals/AI contacts accept physics immediately, with an independent
+60ms, ≤8px display decay; support/mount/height changes and teleports reset it.
+All 50 contact traces retain identical repeats; instantaneous non-roof displayed
+correction is ≤0.00001454px, maximum visual offset 2.13376px. All 42 rate cases
+repeat, no invalid alpha frames, zero settled car/train displayed offset range.
+The probe CLIs now have explicit `--assert-fixed` acceptance checks.
+
+Tests cover 30/60/120Hz decay, normal roof walking/replay, once-only explicit jump
+and walk-off momentum, support loss, native curve/braking/headroom/reload and two
+roof passengers with independent [2,0,1,1,1] / [0,0,3,1,1] command schedules.
+Full units pass 1580 tests before the final two-passenger addition; that new scenario
+and existing roof scenarios pass independently (7). Typechecks pass; lint errors
+introduced in new tests/probes have been corrected. Rebuilt inventories contain
+current source references/interactive fingerprints, without modifying frozen art.
+
+Broad browser validation was interrupted after a build replaced served bundles
+mid-run; its failures are not accepted evidence. Repeat against a settled build,
+then record final checks and any reproducible unrelated frozen-review limitations.

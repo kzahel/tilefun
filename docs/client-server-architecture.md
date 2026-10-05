@@ -47,6 +47,20 @@ response mapping in [requests.ts](../src/shared/requests.ts), checks response
 types, times out after 30 seconds and rejects pending calls on disconnect or
 destruction. Reconnected transports can make fresh requests.
 
+## Prediction and moving supports
+
+Authority frames carry elapsed simulation seconds independently of tick count;
+binary frame headers are 27 bytes and endpoints must run the same build. Prediction
+retains bounded collision-only motion history for nearby solid entities and uses
+explicit replay time. Shared collision policy blocks `solid !== false` on both
+endpoints. NPC AI remains authoritative.
+
+Autonomous car/train roofs carry passengers once per committed support pose.
+Command integration predicts relative walking/jumping; displayed passengers share
+the carrier's interpolation endpoints. A bounded presentation-only decay handles
+small residual ground-contact corrections without changing replay physics.
+[Player prediction](topics/player-prediction.md) owns limits and acceptance evidence.
+
 ## Persistence and shared tools
 
 Realm transfers prepare the destination and save the source before detaching a

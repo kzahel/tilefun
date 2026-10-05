@@ -354,6 +354,22 @@ for (const name of cases)
     }
     results.push({ ...a, repeatIdentical: true, traceHash: hash(a) });
   }
+if (process.argv.includes("--assert-fixed")) {
+  for (const r of results) {
+    if (r.summary.invalidAlphaFrames) throw Error(`Invalid interpolation: ${r.case}/${r.profile}`);
+    if (
+      r.case.endsWith("roof") &&
+      ((r.summary.serverRoofOffsetRangePx ?? 0) > 0.001 ||
+        (r.summary.renderedRoofOffsetRangeAfterStartupPx ?? 0) > 0.001)
+    )
+      throw Error(`Roof drift: ${r.case}/${r.profile}`);
+    if (
+      ["free-walk", "static-wall", "cow-still"].includes(r.case) &&
+      r.summary.maxPostReplayShiftAfterStartupPx > 0.001
+    )
+      throw Error(`Control correction: ${r.case}/${r.profile}`);
+  }
+}
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   scope:

@@ -75,7 +75,10 @@ export class ScenarioClient {
             this.view.serverEntities,
             this.view.mountEntityId,
             this.view.simulationTime !== undefined
-              ? { simulationTime: this.view.simulationTime }
+              ? {
+                  simulationTime: this.view.simulationTime,
+                  expectedInputDt: this.view.tickMs / 1000,
+                }
               : undefined,
           );
       }

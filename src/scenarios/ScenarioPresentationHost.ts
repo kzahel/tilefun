@@ -215,7 +215,7 @@ export class ScenarioPresentationHost {
           void this.command({ kind: "view-range", range }).catch((e) => this.fail(e));
         }
       }
-      const player = view.playerEntity;
+      const player = bindPredictedPlayerPose(view.playerEntity, this.session.predictor);
       const cycle = this.options.poseCycle?.();
       const row = Math.floor(this.poseSeconds / 2) % 4;
       this.displayedPlayer =

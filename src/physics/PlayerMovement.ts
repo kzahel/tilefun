@@ -344,8 +344,10 @@ export function stepPlayerFromInput(
         ),
       );
   }
+  let inheritedSupportVelocity = false;
   if (support?.velocity && entity.velocity) {
     if (entity.jumpVZ !== undefined) {
+      inheritedSupportVelocity = true;
       entity.velocity.vx += support.velocity.vx;
       entity.velocity.vy += support.velocity.vy;
     } else if (!ctx.deferRoofCarry) {
@@ -388,6 +390,18 @@ export function stepPlayerFromInput(
       initiateJump(entity, physics);
       next = { ...next, jumpConsumed: true };
     }
+  }
+
+  // Walking off a moving roof begins a fall too. Retain its last committed
+  // velocity once, just as an explicit jump does, rather than losing momentum.
+  if (
+    support?.velocity &&
+    entity.velocity &&
+    !inheritedSupportVelocity &&
+    entity.jumpVZ !== undefined
+  ) {
+    entity.velocity.vx += support.velocity.vx;
+    entity.velocity.vy += support.velocity.vy;
   }
 
   return {

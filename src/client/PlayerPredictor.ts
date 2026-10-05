@@ -114,6 +114,17 @@ export class PlayerPredictor {
   private readonly collisionTimeline = new PredictionCollisionTimeline();
   private predictionTime: number | undefined;
   private reconciledAt = 0;
+  private collisionStepSeconds = 0;
+  private presentationError = { wx: 0, wy: 0, at: 0 };
+  private prevPresentationError = { wx: 0, wy: 0 };
+  private clearPresentationError(): void {
+    this.presentationError = { wx: 0, wy: 0, at: this.clock() };
+    this.prevPresentationError = { wx: 0, wy: 0 };
+  }
+  private displayedError() {
+    const decay = Math.exp(-Math.max(0, this.clock() - this.presentationError.at) / 0.06);
+    return { wx: this.presentationError.wx * decay, wy: this.presentationError.wy * decay };
+  }
   private support: Entity | null = null;
   private supportOffset: RoofOffset | null = null;
   private prevSupportOffset: RoofOffset | null = null;
@@ -163,6 +174,7 @@ export class PlayerPredictor {
    * Called on first server state and on world load.
    */
   reset(serverPlayer: Entity, serverMount?: Entity): void {
+    this.clearPresentationError();
     this.predicted = this.clonePlayer(serverPlayer);
     this.support = null;
     this.supportOffset = this.prevSupportOffset = null;
@@ -230,6 +242,7 @@ export class PlayerPredictor {
     }
     this.captureSupport(entities);
     this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
+    this.prevPresentationError = this.displayedError();
     // Save previous state for render interpolation
     this._prevPosition = {
       wx: this.predicted.position.wx,
@@ -248,7 +261,9 @@ export class PlayerPredictor {
     // arrivals. Commands generated together share that horizon, rather than
     // inventing an extra NPC tick for each catch-up command.
     const collisionTime = this.predictionTime;
-    if (collisionTime !== undefined) this.predictionTime = collisionTime + Math.max(0, this.clock() - this.reconciledAt);
+    if (collisionTime !== undefined)
+      this.predictionTime =
+        collisionTime + Math.max(0, this.clock() - this.reconciledAt - this.collisionStepSeconds);
     this.applyInput(movement, dt, world, props, entities, this.physics());
     this.predictionTime = collisionTime;
   }
@@ -277,6 +292,7 @@ export class PlayerPredictor {
       this.collisionTimeline.record(diagnostics.simulationTime, entities);
       this.predictionTime = diagnostics.simulationTime;
       this.reconciledAt = this.clock();
+      this.collisionStepSeconds = diagnostics.expectedInputDt ?? 0;
     }
     if (!this.predicted) {
       const serverMount =
@@ -523,6 +539,23 @@ export class PlayerPredictor {
       predictedAfter.wy - predictedBefore.wy,
       predictedAfter.wz - predictedBefore.wz,
     );
+    // Small residual contact corrections are display-only. Physics still uses
+    // the authoritative replay result; supports have their own exact pose binding.
+    if (
+      this.support ||
+      oldSupportId !== undefined ||
+      serverMount ||
+      resimPosErr > 8 ||
+      Math.abs(predictedAfter.wz - predictedBefore.wz) > 0.1
+    ) {
+      this.clearPresentationError();
+    } else if (resimPosErr > 0.00025) {
+      const error = this.displayedError();
+      const wx = error.wx + predictedBefore.wx - predictedAfter.wx;
+      const wy = error.wy + predictedBefore.wy - predictedAfter.wy;
+      if (Math.hypot(wx, wy) > 8) this.clearPresentationError();
+      else this.presentationError = { wx, wy, at: this.clock() };
+    }
     const resimVelErr = Math.hypot(
       predictedAfter.vx - predictedBefore.vx,
       predictedAfter.vy - predictedBefore.vy,
@@ -573,6 +606,7 @@ export class PlayerPredictor {
   /** Clear predicted state (e.g. when switching worlds). */
   clearPredicted(): void {
     this.predicted = null;
+    this.clearPresentationError();
     this.clearSupport();
     this.collisionTimeline.clear();
     this.predictionTime = undefined;
@@ -592,13 +626,19 @@ export class PlayerPredictor {
     if (!player) return null;
     const support = this.support,
       offset = this.supportOffset;
-    if (!support || !offset)
+    if (!support || !offset) {
+      const error = this.displayedError();
       return {
         ...player,
-        prevPosition: this._prevPosition,
+        position: { wx: player.position.wx + error.wx, wy: player.position.wy + error.wy },
+        prevPosition: {
+          wx: this._prevPosition.wx + this.prevPresentationError.wx,
+          wy: this._prevPosition.wy + this.prevPresentationError.wy,
+        },
         prevWz: this._prevWz,
         prevJumpZ: this._prevJumpZ,
       };
+    }
     const previous = { ...support, position: support.prevPosition ?? support.position };
     const height = support.collider?.physicalHeight ?? 0;
     return {
@@ -623,13 +663,17 @@ export class PlayerPredictor {
     const surface = roofSupport(this.predicted, entities);
     const support = surface && entities.find((e) => e.id === surface.id);
     if (!support) {
+      if (this.support) this.clearPresentationError();
       this.clearSupport();
       return;
     }
     const changed = support.id !== this.support?.id;
     this.support = support;
     this.supportOffset = roofOffset(this.predicted.position, support);
-    if (changed) this.prevSupportOffset = { ...this.supportOffset };
+    if (changed) {
+      this.clearPresentationError();
+      this.prevSupportOffset = { ...this.supportOffset };
+    }
   }
 
   /** Get the predicted mount entity (or null when not riding). */

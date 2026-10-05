@@ -76,16 +76,26 @@ try {
   await page.waitForTimeout(950);
   await page.keyboard.up("ArrowDown");
   await page.keyboard.up("Space");
-  await page.waitForFunction(() => {
-    const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
-    return p.wz === 44 && p.jumpVZ === undefined;
-  }).catch(async (error) => {
-    console.log(JSON.stringify(await page.evaluate(() => {
-      const g=document.querySelector("#game").__game;
-      return { player:g.remoteView.serverPlayerEntity, trains:g.remoteView.serverEntities.filter(e=>e.type.startsWith("train")), errors:[] };
-    })));
-    throw error;
-  });
+  await page
+    .waitForFunction(() => {
+      const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
+      return p.wz === 44 && p.jumpVZ === undefined;
+    })
+    .catch(async (error) => {
+      console.log(
+        JSON.stringify(
+          await page.evaluate(() => {
+            const g = document.querySelector("#game").__game;
+            return {
+              player: g.remoteView.serverPlayerEntity,
+              trains: g.remoteView.serverEntities.filter((e) => e.type.startsWith("train")),
+              errors: [],
+            };
+          }),
+        ),
+      );
+      throw error;
+    });
   const setRate = async (hz) => {
     const output = await page.evaluate(async (hz) => {
       const game = document.querySelector("#game").__game;
@@ -281,7 +291,7 @@ try {
     requestedRenderHz: renderHz,
     rateCommands,
     scope:
-      "Fresh regional seed 2026, ordinary keyboard roof boarding, real Worker, bundled full Chromium, isolated dev origin; existing server tick-rate CVar; optional timed external render clock, measured wall timestamps; no prediction/authority fixes. External 120Hz draws do not certify display refresh or native rAF cadence",
+      "Fresh regional seed 2026, ordinary keyboard roof boarding, real Worker, bundled full Chromium, isolated dev origin; existing server tick-rate CVar; optional timed external render clock, measured wall timestamps; observes current production prediction/authority without overriding them. External 120Hz draws do not certify display refresh or native rAF cadence",
     errors,
     summary: {
       cruiseRenderOffsetX: stats(cruise.map((s) => s.offsetX)),
@@ -316,6 +326,12 @@ try {
     throw Error(
       "External-clock run did not achieve approximately 120Hz drawing; inspect cadence report",
     );
+  if (
+    process.argv.includes("--assert-fixed") &&
+    (report.summary.invalidAlphaFrames ||
+      report.summary.cruiseRenderOffsetX.max - report.summary.cruiseRenderOffsetX.min > 0.01)
+  )
+    throw Error("Moving roof presentation drift");
   const expectedRates = serverHz === "alternate" ? [30, 60] : [Number(serverHz)];
   if (expectedRates.some((hz) => !report.summary.observedTickRates.includes(hz)))
     throw Error("Missing advertised server tick-rate samples");

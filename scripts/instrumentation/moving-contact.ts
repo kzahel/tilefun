@@ -1,4 +1,4 @@
-// Reproduction/characterization only: no gameplay implementation or tuning.
+// Deterministic before/after characterization using unmodified native fixtures.
 
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
@@ -24,6 +24,25 @@ for (const name of cases)
     if (!repeatIdentical) throw Error(`Non-repeatable fixture: ${name}/${profile.name}`);
     results.push({ ...first, repeatIdentical, traceHash: hash(first) });
   }
+if (process.argv.includes("--assert-fixed")) {
+  for (const result of results) {
+    const roof = result.case.endsWith("roof");
+    if (roof) {
+      if (
+        (result.serverRoofOffsetRangePx ?? 0) > 0.001 ||
+        (result.maxSupportResimErrorPx ?? 0) > 0.001
+      )
+        throw Error(`Support drift: ${result.case}/${result.profile}`);
+    } else if (result.maxDisplayedReconcileShiftPx > 0.001)
+      throw Error(`Display snap: ${result.case}/${result.profile}`);
+    if (
+      ["free-walk", "static-wall", "person-still", "cow-still"].includes(result.case) &&
+      result.maxPostReplayShiftPx > 0.001
+    )
+      throw Error(`Control correction: ${result.case}/${result.profile}`);
+    if (result.maxPresentationOffsetPx > 8) throw Error("Unbounded presentation correction");
+  }
+}
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   scope:

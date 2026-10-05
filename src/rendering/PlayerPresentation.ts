@@ -62,7 +62,8 @@ export function bindPredictedPlayerPose(
 ): Entity {
   const predicted = predictor?.player;
   if (predicted && predictor) {
-    if (predictor.presentationPlayer) return predictor.presentationPlayer;
+    const shown = predictor.presentationPlayer;
+    if (shown) return shown;
     player = predicted;
     player.prevPosition = predictor.prevPosition;
     player.prevJumpZ = predictor.prevJumpZ;

@@ -96,6 +96,7 @@ export async function runContactCase(name: ContactCase, profile: ContactProfile,
       session.realm.tick(SERVER_DT, transport.serverSide, false, new Set());
       outgoing.push({ tick: tick + profile.rx, frames: session.frames() });
       const before = { ...required(predictor.player).position };
+      const shownBefore = { ...required(predictor.presentationPlayer).position };
       let framesApplied = 0;
       if ((tick + 1) % profile.frameBatch === 0) {
         while (outgoing[0] && outgoing[0].tick <= tick) {
@@ -128,7 +129,17 @@ export async function runContactCase(name: ContactCase, profile: ContactProfile,
           getEntityAABB(player.position, required(player.collider)),
           getEntityAABB(required(target).position, collider),
         );
+      const shownAfter = required(predictor.presentationPlayer);
       samples.push({
+        displayedShiftPx: Math.hypot(
+          shownAfter.position.wx - shownBefore.wx,
+          shownAfter.position.wy - shownBefore.wy,
+        ),
+        presentationOffsetPx: Math.hypot(
+          shownAfter.position.wx - predicted.position.wx,
+          shownAfter.position.wy - predicted.position.wy,
+        ),
+        supportResimErrorPx: predictor.lastReconcileDiagnostics?.resimSupportPosErr ?? null,
         tick,
         sentSeq: seq,
         ackSeq: view.lastProcessedInputSeq,
@@ -200,6 +211,14 @@ export async function runContactCase(name: ContactCase, profile: ContactProfile,
     return {
       case: name,
       profile: profile.name,
+      maxDisplayedReconcileShiftPx: Math.max(
+        0,
+        ...samples.filter((s) => s.framesApplied).map((s) => s.displayedShiftPx),
+      ),
+      maxPresentationOffsetPx: Math.max(0, ...samples.map((s) => s.presentationOffsetPx)),
+      maxSupportResimErrorPx: name.endsWith("roof")
+        ? Math.max(0, ...samples.map((s) => s.supportResimErrorPx ?? 0))
+        : null,
       maxPostReplayShiftPx: Math.max(...shifts),
       shiftsOverQuarterPixel: shifts.filter((s) => s > 0.25).length,
       shiftsOverOnePixel: shifts.filter((s) => s > 1).length,

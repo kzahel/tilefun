@@ -55,6 +55,7 @@ export interface ColliderComponent {
   /** When false, collider is visual-only (debug box) and doesn't block movement. Default true. */
   solid?: boolean;
   /** When true, client predicts collision with this entity (no rubber-banding). */
+  /** Legacy asset hint; shared player physics blocks solid !== false on both endpoints. */
   clientSolid?: boolean;
   /** Z-axis extent above feet in world pixels. Used for 3D entity-entity collision filtering. */
   physicalHeight?: number;

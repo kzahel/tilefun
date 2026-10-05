@@ -195,3 +195,12 @@ roof passengers. Height is persisted in traffic records (older records default t
 zero). Generated traffic keeps its existing flat-road behavior. This is a level
 chassis proof on straight terminal lanes, not pitched car art or multi-level
 junction routing. Human review is pending; train grades are the next consumer.
+
+## Shared prediction checkpoint (2026-10-05)
+
+[Player prediction](player-prediction.md) owns the shared timing correction and
+[implementation evidence](../research/shared-prediction-fix.md). Cars/trains carry
+roof passengers once per committed pose; prediction replays relative walking and
+camera/body/lab overlays bind to the same support presentation. Native geometry,
+clearance and saved support identities remain authoritative. Collision proxies and
+bounded residual display correction share game/lab engine owners.

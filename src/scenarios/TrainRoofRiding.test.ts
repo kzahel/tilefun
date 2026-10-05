@@ -2,7 +2,9 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import { PlayerSession } from "../server/PlayerSession.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
+import { roofOffset } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { curvedTrainRecipe } from "./CurvedTrainRecipe.js";
@@ -158,3 +160,46 @@ it("keeps roof support during missing-input ticks with the carriage origin acros
     await s.close();
   }
 });
+
+it("carries two passengers once through bends with independent zero/multiple-input schedules", async () => {
+  const s = await ScenarioSession.create(curvedTrainRecipe());
+  try {
+    await s.command({ kind: "train-position", roof: true });
+    const second = new PlayerSession("second-roof-passenger");
+    second.editorEnabled = false;
+    second.visibleRange = { ...s.player.visibleRange };
+    await s.realm.addPlayer(second);
+    const car = required(required(s.realm.railway?.services.get("curved-service")).carriages[1]);
+    second.player.position = {
+      wx: s.player.player.position.wx + 35,
+      wy: s.player.player.position.wy,
+    };
+    second.player.wz = second.player.groundZ = 44;
+    s.realm.entityManager.spatialHash.update(second.player);
+    const passengers = [s.player, second];
+    const offsets = passengers.map((p) => roofOffset(p.player.position, car));
+    const seq = [0, 0];
+    const headings = new Set<number>();
+    for (let tick = 0; tick < 1800; tick++) {
+      await s.ready();
+      passengers.forEach((p, index) => {
+        const count = required((index === 0 ? [2, 0, 1, 1, 1] : [0, 0, 3, 1, 1])[tick % 5]);
+        for (let i = 0; i < count; i++) {
+          seq[index] = required(seq[index]) + 1;
+          p.inputQueue.push({ ...idle, seq: required(seq[index]), dtMs: 16.67 });
+        }
+      });
+      s.realm.tick(1 / 60, new LocalTransport().serverSide, false, new Set());
+      headings.add(Math.floor(((car.sprite?.frameRow ?? 0) + 32) / 64) % 4);
+      passengers.forEach((p, index) => {
+        expect(roofSupport(p.player, s.realm.entityManager.entities)?.id).toBe(car.id);
+        const offset = roofOffset(p.player.position, car);
+        expect(offset.x).toBeCloseTo(required(offsets[index]).x, 7);
+        expect(offset.y).toBeCloseTo(required(offsets[index]).y, 7);
+      });
+    }
+    expect(headings.size).toBeGreaterThan(1);
+  } finally {
+    await s.close();
+  }
+}, 30000);
