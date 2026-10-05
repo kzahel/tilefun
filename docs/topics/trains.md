@@ -283,3 +283,14 @@ or loading remote terrain. Bounded admission, blocked trains and save/renewal
 races are part of that plan. Current trains still freeze at their exact saved
 position on retirement. The immediate task is investigating roof-rider jitter
 reported even on straight track at constant speed.
+
+## Roof prediction investigation
+
+The 2026-10-05 investigation reproduced straight, constant-speed jitter in the
+real Worker game on Canvas and GPU. Authoritative roof offsets stay constant;
+post-replay corrections reach roughly 3.2px because train ticks and player command
+ticks carry the rider on different clocks. Uneven input timing reproduces the
+same error deterministically; ground walking/idle controls remain near exact.
+[Evidence, repeatable probes and proposed support-relative prediction fix](../research/train-roof-prediction-jitter.md)
+own the detailed results. No runtime fix has been implemented. Next: implement
+and validate a common moving-support timeline and local passenger prediction.

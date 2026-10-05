@@ -1,5 +1,22 @@
 # Diagnostic probes
 
+## Train roof prediction
+
+`npx tsx scripts/instrumentation/train-roof-prediction.ts --output=/tmp/train-clock.json`
+characterizes a constant-speed train passenger with independently scheduled
+commands/server ticks using production Realm, replication, codec and predictor.
+It includes both train body representations and idle/walking ground controls.
+
+`node scripts/instrumentation/train-roof-browser.mjs --renderer=canvas --output=/tmp/train-browser.json`
+captures ordinary keyboard boarding in a fresh seed 2026 world through the real
+Worker. Use `--renderer=gpu`, `--delay=50` (milliseconds each way), or `--headed`
+for other lanes. It owns an isolated dev origin, temporary data and bundled full
+Chromium, and closes both server and browser. Hooks observe without changing
+simulation or prediction. Reports distinguish post-replay corrections from raw
+backlog lead and measure displayed rider position relative to the carriage.
+See [evidence and proposed fix](../../docs/research/train-roof-prediction-jitter.md).
+These are characterization probes, not assertions that jitter is fixed.
+
 ## Sleeping NPC separation
 
 Run `npx tsx scripts/instrumentation/entity-separation.ts` from the repository
