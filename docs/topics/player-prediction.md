@@ -32,10 +32,19 @@ on Canvas and GPU, without artificial latency. The newer NPC/car matrix exercise
 production simulation, codec, replication and prediction directly; it does not
 yet establish their visible browser presentation error.
 
+[Rate reproductions](../research/prediction-rate-reproductions.md) extend six
+representative scenes to 60/120Hz presentation, 30/60Hz authority, live 60→30→60
+transitions and an independent 60Hz-input/30Hz-server stress lane. Worker captures
+verify native rAF at approximately 120Hz on this machine at both authority rates,
+external 120Hz drawing on Canvas/GPU and advertised command-rate changes. Rate
+transitions also reproduce negative interpolation fractions in shared GameLoop,
+including ordinary walking; this remains unfixed.
+
 ## Timing and contract distinctions
 
 Default player input and authority clocks both target 60Hz, but arrival/processing
-is independently scheduled. Ordinary nearby NPCs and traffic advance on authority
+is independently scheduled. Client simulation/input follows the advertised server
+rate; display rendering is independent. Ordinary nearby NPCs and traffic advance on authority
 ticks; the client predicts the controlled player (and a steerable mount), not all
 ordinary entities. Replay queries the latest replica geometry for multiple past
 commands. Lower-activity NPC tick tiers are a further concern outside this baseline.
@@ -62,6 +71,11 @@ Use the baseline to review a shared movement/contact timeline design. A carrier
 relationship can address roof travel and presentation, but cannot by itself fix
 NPC collision policy or replay against stale collision geometry. Do not hide these
 errors with reconciliation smoothing or a train-only flag change.
+
+Rate transitions also need correct accumulator ownership: the client currently
+changes rate inside an update, resets the accumulator, then the loop subtracts
+the new timestep and presents a negative interpolation fraction. Preserve the
+rate-switch reproductions as acceptance cases for that shared-loop correction.
 
 Before claiming a fix, retain stable ground/static-contact controls and separately
 validate moving people, native cow policy, authoritative car offset and train

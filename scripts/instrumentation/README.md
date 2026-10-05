@@ -1,5 +1,22 @@
 # Diagnostic probes
 
+## Render and authority rates
+
+`npx tsx scripts/instrumentation/prediction-rates.ts --output=/tmp/prediction-rates.json`
+extends six representative native contact/roof scenes through production
+`GameLoop.externalTick`, shared interpolation and binary replication. Profiles
+cover 60/120Hz presentation, 30/60Hz authority, live rate transitions, timed delay
+and deliberately independent command rates. Every trace repeats in a fresh
+session. `--case=free-walk --profile=switch60-30-60-render120` isolates the shared
+loop's negative-alpha reproduction. The deterministic lane does not draw pixels.
+
+The train browser probe also accepts `--server-hz=30|60|alternate` via the existing
+server CVar and `--render-hz=120` for measured external-clock drawing. Use `--headed`
+without a render override to measure native rAF; do not assume display cadence.
+[Rate evidence](../../docs/research/prediction-rate-reproductions.md) records actual
+native 120Hz Worker captures, Canvas/GPU runs, commands and measurement limits.
+No gameplay fix is implemented.
+
 ## Moving contact and car/train roofs
 
 `npx tsx scripts/instrumentation/moving-contact.ts --output=/tmp/moving-contact.json`

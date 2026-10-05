@@ -5,6 +5,10 @@ and documentation changed. [Player prediction](../topics/player-prediction.md)
 owns current status and the user's reproduction-first gate. No gameplay fix or
 collider-policy change is implemented.
 
+[Rate coverage](prediction-rate-reproductions.md) subsequently adds 30/60Hz
+authority, 60/120Hz presentation, live rate transitions and measured native 120Hz
+Worker captures. The fixed-60Hz matrix below remains the original timing baseline.
+
 ## Repeatable commands
 
 ```sh

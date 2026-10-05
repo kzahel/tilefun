@@ -105,8 +105,8 @@ export function contactRecipe(name: ContactCase): ScenarioRecipe {
   return recipe;
 }
 
-export async function openContactCase(name: ContactCase) {
-  const session = await ScenarioSession.create(contactRecipe(name));
+export async function openContactCase(name: ContactCase, recipe = contactRecipe(name)) {
+  const session = await ScenarioSession.create(recipe);
   try {
     if (name === "train-roof") {
       // Depart through the production eight-second dwell and reach cruise speed.

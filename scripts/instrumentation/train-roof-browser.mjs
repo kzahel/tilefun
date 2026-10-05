@@ -11,6 +11,10 @@ const option = (name, fallback) =>
   process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const renderer = option("renderer", "canvas");
 const delay = Number(option("delay", "0"));
+const serverHz = option("server-hz", "60");
+const renderHz = option("render-hz", "native");
+if (!["30", "60", "alternate"].includes(serverHz) || !["native", "120"].includes(renderHz))
+  throw Error("Use --server-hz=30|60|alternate and --render-hz=native|120");
 if (!["canvas", "gpu"].includes(renderer) || !Number.isFinite(delay) || delay < 0 || delay > 200)
   throw Error("Use --renderer=canvas|gpu and --delay=0..200 (ms each way)");
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-train-prediction-"));
@@ -54,6 +58,17 @@ try {
     const game = document.querySelector("#game")?.__game;
     return game?.stateView.entities.some((e) => e.type === "train-curve-proof-v1");
   });
+  await page.waitForFunction(() => {
+    const game = document.querySelector("#game")?.__game;
+    const p = game?.stateView.playerEntity.position;
+    return (
+      game?.initDone &&
+      p &&
+      game.renderer.isTerrainReady(
+        game.stateView.world.chunks.get(Math.floor(p.wx / 256), Math.floor(p.wy / 256)),
+      )
+    );
+  });
   if (await page.evaluate(() => document.querySelector("#game").__game.stateView.editorEnabled))
     await page.keyboard.press("Tab");
   await page.keyboard.down("ArrowDown");
@@ -65,8 +80,36 @@ try {
     const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
     return p.wz === 44 && p.jumpVZ === undefined;
   });
+  const setRate = async (hz) => {
+    const output = await page.evaluate(async (hz) => {
+      const game = document.querySelector("#game").__game;
+      const result = await game.gcSendRequest({
+        type: "rcon",
+        requestId: game.nextRequestId++,
+        command: `sv_tickrate ${hz}`,
+      });
+      return result.output;
+    }, hz);
+    console.log(
+      JSON.stringify({
+        requestedHz: hz,
+        output,
+        advertisedHz: await page.evaluate(
+          () => document.querySelector("#game").__game.remoteView.tickRate,
+        ),
+      }),
+    );
+    await page.waitForFunction(
+      (hz) => Math.abs(document.querySelector("#game").__game.remoteView.tickRate - hz) < 0.001,
+      hz,
+    );
+    return output;
+  };
+  const rateCommands = [
+    { hz: serverHz === "30" ? 30 : 60, output: await setRate(serverHz === "30" ? 30 : 60) },
+  ];
   await page.evaluate(
-    ({ delay }) => {
+    ({ delay, renderHz }) => {
       const game = document.querySelector("#game").__game;
       if (delay)
         game.netEmulatedTransport.setConfig({
@@ -126,6 +169,7 @@ try {
           alpha,
           serverTick: game.remoteView.serverTick,
           ack: game.remoteView.lastProcessedInputSeq,
+          tickRate: game.remoteView.tickRate,
           playerX: px,
           playerY: py,
           trainX: tx,
@@ -140,16 +184,36 @@ try {
           pending: game.remoteView.pendingMessageCount,
         });
       };
+      let timer;
+      if (renderHz === "120") {
+        // Exercise the real update/render callbacks through the production
+        // external clock. Actual wall timestamps are measured, not fabricated.
+        game.loop.stop();
+        let deadline = performance.now();
+        const tick = () => {
+          game.loop.externalTick(performance.now());
+          deadline += 1000 / 120;
+          timer = setTimeout(tick, Math.max(0, deadline - performance.now()));
+        };
+        tick();
+      }
       window.finishTrainProbe = () => {
+        clearTimeout(timer);
         predictor.reconcile = reconcile;
         game.transport.send = send;
         game.loop.callbacks.render = render;
         return { samples, reconciliations, inputs };
       };
     },
-    { delay },
+    { delay, renderHz },
   );
-  await page.waitForTimeout(20000);
+  if (serverHz === "alternate") {
+    await page.waitForTimeout(4000);
+    rateCommands.push({ hz: 30, output: await setRate(30) });
+    await page.waitForTimeout(8000);
+    rateCommands.push({ hz: 60, output: await setRate(60) });
+    await page.waitForTimeout(8000);
+  } else await page.waitForTimeout(20000);
   const raw = await page.evaluate(() => window.finishTrainProbe());
   const cruise = raw.samples.filter(
     (sample) => sample.speed > 191.9 && sample.heading === 0 && sample.serverZ === 44,
@@ -172,6 +236,7 @@ try {
   };
   const clockResiduals = [];
   const clockGroups = new Map();
+  const inputDurations = new Map(raw.inputs.map((s) => [s.seq, s.dtMs / 1000]));
   for (let i = 1; i < raw.reconciliations.length; i++) {
     const a = raw.reconciliations[i - 1],
       b = raw.reconciliations[i];
@@ -184,7 +249,18 @@ try {
       continue;
     const acknowledged = b.ackSeq - a.ackSeq;
     const trainTravel = b.trainX - a.trainX;
-    const expectedShift = trainTravel - acknowledged * 192 * 0.01667;
+    let acknowledgedSeconds = 0;
+    let complete = true;
+    for (let seq = a.ackSeq + 1; seq <= b.ackSeq; seq++) {
+      const dt = inputDurations.get(seq);
+      if (dt === undefined) {
+        complete = false;
+        break;
+      }
+      acknowledgedSeconds += dt;
+    }
+    if (!complete) continue;
+    const expectedShift = trainTravel - 192 * acknowledgedSeconds;
     clockResiduals.push(Math.abs(b.shiftX - expectedShift));
     const key = `${b.serverTick - a.serverTick} server ticks / ${acknowledged} acknowledged commands`;
     const group = clockGroups.get(key) ?? [];
@@ -195,8 +271,11 @@ try {
     revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     renderer,
     delayEachWayMs: delay,
+    requestedServerHz: serverHz,
+    requestedRenderHz: renderHz,
+    rateCommands,
     scope:
-      "Fresh regional seed 2026, ordinary keyboard roof boarding, real Worker, bundled full Chromium, isolated dev origin; observation hooks, no prediction/authority modifications",
+      "Fresh regional seed 2026, ordinary keyboard roof boarding, real Worker, bundled full Chromium, isolated dev origin; existing server tick-rate CVar; optional timed external render clock, measured wall timestamps; no prediction/authority fixes. External 120Hz draws do not certify display refresh or native rAF cadence",
     errors,
     summary: {
       cruiseRenderOffsetX: stats(cruise.map((s) => s.offsetX)),
@@ -207,6 +286,11 @@ try {
       cruiseReplayCount: stats(cruiseReconciles.map((s) => s.replayCount)),
       cruiseSpeed: stats(cruise.map((s) => s.speed)),
       commandDtMs: stats(raw.inputs.map((s) => s.dtMs)),
+      renderIntervalMs: stats(raw.samples.slice(1).map((s, i) => s.t - raw.samples[i].t)),
+      observedRenderHz:
+        ((raw.samples.length - 1) * 1000) / (raw.samples.at(-1).t - raw.samples[0].t),
+      invalidAlphaFrames: raw.samples.filter((s) => s.alpha < 0 || s.alpha > 1).length,
+      observedTickRates: [...new Set(raw.samples.map((s) => Math.round(s.tickRate)))],
       clockEquationResidualPx: stats(clockResiduals),
       clockGroups: Object.fromEntries(
         [...clockGroups].map(([key, shifts]) => [key, stats(shifts)]),
@@ -219,6 +303,16 @@ try {
   console.log(JSON.stringify({ output, ...report.summary, errors }, null, 2));
   if (cruise.length < 180 || errors.length)
     throw Error("Insufficient steady roof cruise or browser errors");
+  if (
+    renderHz === "120" &&
+    (report.summary.observedRenderHz < 110 || report.summary.renderIntervalMs.p50 > 10)
+  )
+    throw Error(
+      "External-clock run did not achieve approximately 120Hz drawing; inspect cadence report",
+    );
+  const expectedRates = serverHz === "alternate" ? [30, 60] : [Number(serverHz)];
+  if (expectedRates.some((hz) => !report.summary.observedTickRates.includes(hz)))
+    throw Error("Missing advertised server tick-rate samples");
 } finally {
   await browser?.close();
   await server.close();
