@@ -108,3 +108,22 @@ stepping now share GameLoop.externalTick. Focused loop tests pass (including
 60→30→60 with intermediate 120Hz renders). The deterministic free-walk transition
 probe reports zero negative-alpha frames, versus seven in the recorded baseline,
 and unchanged float-noise walking error. Report: `/tmp/rate-switch-fixed.json`.
+
+### Committed support checkpoint
+
+Cars and trains share normalized cardinal roof transforms and passenger clearance.
+Authority carries once per committed support pose, including zero/multiple-input
+frames; the old missing-input car fallback is removed. Prediction replays relative
+walking without autonomous carry per command. Presentation binds passenger and
+carrier interpolation endpoints together in the game and labs, with physics kept
+separate. Jump velocity inheritance remains in shared movement. The predictor now
+uses the authority's default solid-collider policy, including native cows.
+
+Focused traffic/train/predictor/presentation tests pass (27). Car uneven-input
+probe authority offset range is zero (baseline 21.02136px). All seven train rate
+profiles have zero displayed roof-offset range/steps and zero invalid alphas;
+raw world-position shifts of 3.2/6.4px remain expected carrier snapshot travel.
+A new support-relative resimulation diagnostic measures actual rider correction.
+Reports: `/tmp/car-authority-fixed.json`, `/tmp/train-relative-rates.json`.
+Existing traffic harnesses now defer roof carry and load their passenger clearance
+cells; prediction tests reconcile synchronized player/carrier snapshots.

@@ -348,7 +348,7 @@ export function stepPlayerFromInput(
     if (entity.jumpVZ !== undefined) {
       entity.velocity.vx += support.velocity.vx;
       entity.velocity.vy += support.velocity.vy;
-    } else if (!(ctx.deferTrainCarry && isTrain(support))) {
+    } else if (!ctx.deferRoofCarry) {
       const relative = entity.velocity;
       entity.velocity = { ...support.velocity };
       moveAndCollide(entity, dt, ctx);

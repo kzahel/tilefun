@@ -471,7 +471,7 @@ export class RemoteStateView implements ClientStateView {
   get entities(): readonly Entity[] {
     const predictor = this._predictor;
     if (!predictor?.player) return this._entities;
-    const predicted = predictor.player;
+    const predicted = predictor.presentationPlayer ?? predictor.player;
     const predictedMount = predictor.mount;
     const playerId = this._playerEntityId;
     const mountId = predictedMount?.id ?? -1;

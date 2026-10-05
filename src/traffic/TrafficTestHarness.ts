@@ -101,6 +101,7 @@ export class TrafficTestHarness {
       movingEntity: this.player,
       excludeIds: new Set([this.player.id]),
       noclip: false,
+      deferRoofCarry: true,
     });
     this.jumpState = stepPlayerFromInput(
       this.player,

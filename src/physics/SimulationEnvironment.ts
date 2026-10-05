@@ -26,7 +26,7 @@ export interface CreateMovementContextOptions extends SimulationQuerySource {
   movingEntity: Entity;
   excludeIds: ReadonlySet<number>;
   noclip: boolean;
-  deferTrainCarry?: boolean;
+  deferRoofCarry?: boolean;
   shouldEntityBlock?: (other: Entity) => boolean;
 }
 
@@ -75,7 +75,7 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
       return false;
     },
     noclip: options.noclip,
-    ...(options.deferTrainCarry ? { deferTrainCarry: true } : {}),
+    ...(options.deferRoofCarry ? { deferRoofCarry: true } : {}),
   };
   if (options.getTerrainAt) ctx.getTerrainAt = options.getTerrainAt;
   if (options.getRoadAt) ctx.getRoadAt = options.getRoadAt;

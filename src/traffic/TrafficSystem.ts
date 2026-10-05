@@ -24,6 +24,7 @@ import {
   samplePath,
   turnPath,
 } from "./LaneGraph.js";
+import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js";
 import { roofSupport } from "./RoofSupport.js";
 
 export interface TrafficRouteSource {
@@ -407,22 +408,35 @@ export class TrafficSystem {
       const before = { ...s.entity.position };
       s.entity.prevPosition = before;
       s.entity.prevWz = s.entity.wz ?? 0;
-      if (surface && !surface.reason) {
-        // Player movement has already applied horizontal platform carry this tick.
-        // Preserve grounded passengers when this platform changes its roof plane.
-        const dz = surface.z - (s.entity.wz ?? 0);
-        for (const rider of this.entities.entities) {
-          if (rider === s.entity || !roofSupport(rider, [s.entity])) continue;
-          rider.wz = (rider.wz ?? 0) + dz;
-          rider.groundZ = (rider.groundZ ?? rider.wz - dz) + dz;
-        }
-        s.entity.wz = s.entity.groundZ = surface.z;
+      let pose = this.pose(s, move);
+      const next: Entity = {
+        ...s.entity,
+        position: { wx: pose.x, wy: pose.y },
+        sprite: s.entity.sprite ? { ...s.entity.sprite } : null,
+      };
+      if (surface && !surface.reason) next.wz = next.groundZ = surface.z;
+      applyVehicleFacing(next, pose.direction);
+      const passengers = planMovingPassengers(
+        s.entity,
+        next,
+        this.entities,
+        this.props,
+        this.world,
+      );
+      if (!passengers) {
+        move = s.speed = 0;
+        reason = "passenger clearance";
+        pose = this.pose(s, 0);
+        s.entity.velocity = { vx: 0, vy: 0 };
+      } else {
+        carryMovingPassengers(passengers, this.entities);
+        s.entity.position = next.position;
+        s.entity.collider = next.collider;
+        s.entity.sprite = next.sprite;
+        if (next.sortOffsetY !== undefined) s.entity.sortOffsetY = next.sortOffsetY;
+        if (next.wz !== undefined) s.entity.wz = s.entity.groundZ = next.wz;
+        s.entity.velocity = { vx: (pose.x - before.wx) / dt, vy: (pose.y - before.wy) / dt };
       }
-      const pose = this.pose(s, move);
-      s.entity.position.wx = pose.x;
-      s.entity.position.wy = pose.y;
-      applyVehicleFacing(s.entity, pose.direction);
-      s.entity.velocity = { vx: (pose.x - before.wx) / dt, vy: (pose.y - before.wy) / dt };
       if (s.entity.sprite) s.entity.sprite.moving = move > 0;
       s.waiting = reason;
       s.blockedSeconds = move < 0.001 ? s.blockedSeconds + dt : 0;

@@ -157,10 +157,10 @@ try {
         render(alpha);
         const car = game.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
         if (!car) return;
-        const player = predictor.player;
+        const player = predictor.presentationPlayer ?? predictor.player;
         const lerp = (a, b) => a + (b - a) * alpha;
-        const px = lerp(predictor.prevPosition.wx, player.position.wx);
-        const py = lerp(predictor.prevPosition.wy, player.position.wy);
+        const px = lerp(player.prevPosition?.wx ?? predictor.prevPosition.wx, player.position.wx);
+        const py = lerp(player.prevPosition?.wy ?? predictor.prevPosition.wy, player.position.wy);
         const tx = lerp(car.prevPosition?.wx ?? car.position.wx, car.position.wx);
         const ty = lerp(car.prevPosition?.wy ?? car.position.wy, car.position.wy);
         const server = game.remoteView.serverPlayerEntity;

@@ -77,7 +77,6 @@ import { getSurfaceProperties } from "../physics/SurfaceFriction.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
-import { isTrain } from "../railway/Train.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
@@ -687,7 +686,7 @@ export class Realm {
 
           const playerExclude = new Set([session.player.id]);
           const playerCtx = createMovementContext({
-            deferTrainCarry: true,
+            deferRoofCarry: true,
             getCollision,
             getHeight,
             getTerrainAt,
@@ -821,14 +820,6 @@ export class Realm {
           for (const car of service.carriages) preSteppedEntityIds.add(car.id);
         for (const vehicle of this.traffic?.states.values() ?? [])
           preSteppedEntityIds.add(vehicle.entity.id);
-        for (const player of players) {
-          if (preSteppedEntityIds.has(player.id)) continue;
-          const support = roofSupport(player, this.entityManager.entities);
-          if (support?.velocity && !isTrain(support)) {
-            player.position.wx += support.velocity.vx * stepDt;
-            player.position.wy += support.velocity.vy * stepDt;
-          }
-        }
         this.entityManager.update(
           stepDt,
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),

@@ -86,8 +86,17 @@ it("predicts a centered rider through bends and braking with bounded corrections
       client.storeInput(i + 1, idle, 1 / 60);
       client.update(1 / 60, idle, s.realm.world, s.realm.propManager.props, replicas);
       await s.step(idle);
-      client.reconcile(s.player.player, i + 1, s.realm.world, s.realm.propManager.props, replicas);
-      maxError = Math.max(maxError, required(client.lastReconcileDiagnostics).correctionPosErr);
+      client.reconcile(
+        s.player.player,
+        i + 1,
+        s.realm.world,
+        s.realm.propManager.props,
+        s.realm.entityManager.entities.map((e) => deserializeEntity(serializeEntity(e))),
+      );
+      maxError = Math.max(
+        maxError,
+        required(client.lastReconcileDiagnostics).resimSupportPosErr ?? 0,
+      );
       expect(client.player?.wz).toBe(44);
     }
     expect(maxError).toBeLessThan(0.15);

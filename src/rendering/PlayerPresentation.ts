@@ -25,7 +25,10 @@ export function beginPlayerPresentation(
   camera: Camera,
   player: Entity,
   alpha: number,
-  predictor?: Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> | null,
+  predictor?:
+    | (Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> &
+        Partial<Pick<PlayerPredictor, "presentationPlayer">>)
+    | null,
   verticalFollow = false,
   offsetY = 0,
 ): void {
@@ -52,10 +55,14 @@ export function beginPlayerPresentation(
 /** Bind the production prediction history for body/overlay interpolation, including fixed cameras. */
 export function bindPredictedPlayerPose(
   player: Entity,
-  predictor?: Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> | null,
+  predictor?:
+    | (Pick<PlayerPredictor, "player" | "prevPosition" | "prevJumpZ" | "prevWz"> &
+        Partial<Pick<PlayerPredictor, "presentationPlayer">>)
+    | null,
 ): Entity {
   const predicted = predictor?.player;
   if (predicted && predictor) {
+    if (predictor.presentationPlayer) return predictor.presentationPlayer;
     player = predicted;
     player.prevPosition = predictor.prevPosition;
     player.prevJumpZ = predictor.prevJumpZ;

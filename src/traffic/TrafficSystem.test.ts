@@ -30,6 +30,7 @@ function fixture() {
   strategy.trafficNetwork = () => graph;
   const world = new World(strategy);
   world.getRoadAt = () => 5;
+  for (let y = -1; y <= 3; y++) for (let x = -1; x <= 3; x++) world.getChunk(x, y);
   const entities = new EntityManager(),
     props = new PropManager(),
     traffic = new TrafficSystem(world, entities, props, strategy);
@@ -49,19 +50,22 @@ function fixture() {
     movingEntity: player,
     excludeIds: new Set([player.id]),
     noclip: false,
+    deferRoofCarry: true,
   });
   let state = { jumpConsumed: false, lastJumpHeld: false };
-  function step(jump = false, dx = 0, dy = 0) {
-    state = stepPlayerFromInput(
-      player,
-      { dx, dy, jump, sprinting: false },
-      1 / 60,
-      ctx,
-      () => 0,
-      createSurfaceSampler({ queryEntities, queryProps }),
-      state,
-      getMovementPhysicsParams(),
-    ).jumpState;
+  function step(jump = false, dx = 0, dy = 0, inputs = 1) {
+    for (let i = 0; i < inputs; i++) {
+      state = stepPlayerFromInput(
+        player,
+        { dx, dy, jump, sprinting: false },
+        1 / 60,
+        ctx,
+        () => 0,
+        createSurfaceSampler({ queryEntities, queryProps }),
+        state,
+        getMovementPhysicsParams(),
+      ).jumpState;
+    }
     traffic.tick(1 / 60, []);
   }
   return { graph, traffic, car, player, step, world, entities };
@@ -167,6 +171,23 @@ describe("generated road traffic", () => {
     for (let i = 0; i < 120; i++) f.traffic.tick(1 / 60, []);
     expect(f.car.entity.position).toEqual(before);
   });
+  it("carries a roof passenger once per vehicle tick with zero or multiple commands", () => {
+    const f = fixture();
+    f.player.position = { ...f.car.entity.position };
+    f.player.wz = 24;
+    const start = f.car.entity.position.wx;
+    for (let i = 0; i < 300; i++) {
+      f.step(false, 0, 0, [2, 0, 1, 1, 1][i % 5]);
+      expect(
+        Math.hypot(
+          f.player.position.wx - f.car.entity.position.wx,
+          f.player.position.wy - f.car.entity.position.wy,
+        ),
+      ).toBeLessThan(0.000001);
+      expect(f.player.wz).toBe(24);
+    }
+    expect(f.car.entity.position.wx).toBeGreaterThan(start + 100);
+  });
   it("two predicting clients agree with roof movement through turns and a jump off", () => {
     const f = fixture();
     f.world.getCollisionIfLoaded = () => 0;
@@ -185,8 +206,15 @@ describe("generated road traffic", () => {
       }
       f.step(jump);
       for (const client of clients) {
-        client.reconcile(f.player, i + 1, f.world, [], replicas);
-        expect(required(client.lastReconcileDiagnostics).correctionPosErr).toBeLessThan(0.02);
+        client.reconcile(
+          f.player,
+          i + 1,
+          f.world,
+          [],
+          f.entities.entities.map((e) => deserializeEntity(serializeEntity(e))),
+        );
+        const sample = required(client.lastReconcileDiagnostics);
+        expect(sample.resimSupportPosErr ?? sample.resimPosErr).toBeLessThan(0.02);
       }
     }
     expect(f.car.choices).toBeGreaterThan(1);

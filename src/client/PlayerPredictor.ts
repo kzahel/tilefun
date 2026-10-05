@@ -11,6 +11,8 @@ import {
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
+import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
+import { roofSupport } from "../traffic/RoofSupport.js";
 import type { World } from "../world/World.js";
 
 /** If predicted and server positions diverge by more than this, snap immediately. */
@@ -63,6 +65,8 @@ export interface ReconcileDiagnostics {
   correctionVelErr: number;
   resimPosErr: number;
   resimVelErr: number;
+  supportId: number | null;
+  resimSupportPosErr: number | null;
   causeTags: readonly ReconcileCauseTag[];
   predictedBefore: ReconcileStateSnapshot;
   authoritative: ReconcileStateSnapshot;
@@ -103,6 +107,10 @@ export class PlayerPredictor {
 
   /** The predicted player entity. */
   private predicted: Entity | null = null;
+
+  private support: Entity | null = null;
+  private supportOffset: RoofOffset | null = null;
+  private prevSupportOffset: RoofOffset | null = null;
 
   /** Whether noclip is active (skip collision in prediction). */
   noclip = false;
@@ -150,6 +158,8 @@ export class PlayerPredictor {
    */
   reset(serverPlayer: Entity, serverMount?: Entity): void {
     this.predicted = this.clonePlayer(serverPlayer);
+    this.support = null;
+    this.supportOffset = this.prevSupportOffset = null;
     this._prevPosition = {
       wx: this.predicted.position.wx,
       wy: this.predicted.position.wy,
@@ -199,6 +209,19 @@ export class PlayerPredictor {
   ): void {
     if (!this.predicted) return;
 
+    // Autonomous roof motion follows the latest committed pose once, independently
+    // of how many player commands are generated/replayed against that snapshot.
+    if (this.support && this.supportOffset) {
+      const current = entities.find((e) => e.id === this.support?.id);
+      if (current) {
+        this.support = current;
+        this.predicted.position = roofPosition(this.supportOffset, current);
+        this.predicted.wz = this.predicted.groundZ =
+          (current.wz ?? 0) + (current.collider?.physicalHeight ?? 0);
+      } else this.clearSupport();
+    }
+    this.captureSupport(entities);
+    this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
     // Save previous state for render interpolation
     this._prevPosition = {
       wx: this.predicted.position.wx,
@@ -245,6 +268,8 @@ export class PlayerPredictor {
       return;
     }
 
+    const oldSupportId = this.support?.id;
+    const oldOffset = this.supportOffset && { ...this.supportOffset };
     const predictedBefore = this.snapshotEntity(this.predicted);
     const authoritative = this.snapshotEntity(serverPlayer);
     this._lastCorrection = {
@@ -274,6 +299,7 @@ export class PlayerPredictor {
       mountEntityId !== undefined ? (entities.find((e) => e.id === mountEntityId) ?? null) : null;
 
     if (serverMount) {
+      this.clearSupport();
       // ── Riding: predict the mount ──
       if (!this.predictedMount || this._mountId !== serverMount.id) {
         // Just started riding or mount changed
@@ -394,6 +420,10 @@ export class PlayerPredictor {
         delete this.predicted.jumpVZ;
       }
 
+      this.captureSupport(entities);
+      if (this.support?.id !== oldSupportId)
+        this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
+
       // Trim acknowledged inputs
       this.trimInputBuffer(lastProcessedInputSeq);
       replayStats = this.collectReplayStats();
@@ -496,6 +526,16 @@ export class PlayerPredictor {
       correctionVelErr,
       resimPosErr,
       resimVelErr,
+      supportId: this.support?.id ?? null,
+      resimSupportPosErr:
+        this.support && this.supportOffset && oldOffset && this.support.id === oldSupportId
+          ? Math.hypot(
+              roofPosition(this.supportOffset, this.support).wx -
+                roofPosition(oldOffset, this.support).wx,
+              roofPosition(this.supportOffset, this.support).wy -
+                roofPosition(oldOffset, this.support).wy,
+            )
+          : null,
       causeTags: this.inferReconcileCauseTags(
         predictedBefore,
         authoritative,
@@ -514,6 +554,7 @@ export class PlayerPredictor {
   /** Clear predicted state (e.g. when switching worlds). */
   clearPredicted(): void {
     this.predicted = null;
+    this.clearSupport();
     this.predictedMount = null;
     this.inputBuffer = [];
     this._lastReconcileDiagnostics = null;
@@ -522,6 +563,52 @@ export class PlayerPredictor {
   /** Get the predicted player entity (or null before first server state). */
   get player(): Entity | null {
     return this.predicted;
+  }
+
+  /** Render-only pose: carrier and passenger use the same interpolation endpoints. */
+  get presentationPlayer(): Entity | null {
+    const player = this.predicted;
+    if (!player) return null;
+    const support = this.support,
+      offset = this.supportOffset;
+    if (!support || !offset)
+      return {
+        ...player,
+        prevPosition: this._prevPosition,
+        prevWz: this._prevWz,
+        prevJumpZ: this._prevJumpZ,
+      };
+    const previous = { ...support, position: support.prevPosition ?? support.position };
+    const height = support.collider?.physicalHeight ?? 0;
+    return {
+      ...player,
+      position: roofPosition(offset, support),
+      prevPosition: roofPosition(this.prevSupportOffset ?? offset, previous),
+      wz: (support.wz ?? 0) + height,
+      prevWz: (support.prevWz ?? support.wz ?? 0) + height,
+      prevJumpZ: this._prevJumpZ,
+    };
+  }
+
+  private clearSupport(): void {
+    this.support = null;
+    this.supportOffset = this.prevSupportOffset = null;
+  }
+  private captureSupport(entities: readonly Entity[]): void {
+    if (!this.predicted || this.noclip || this.predictedMount) {
+      this.clearSupport();
+      return;
+    }
+    const surface = roofSupport(this.predicted, entities);
+    const support = surface && entities.find((e) => e.id === surface.id);
+    if (!support) {
+      this.clearSupport();
+      return;
+    }
+    const changed = support.id !== this.support?.id;
+    this.support = support;
+    this.supportOffset = roofOffset(this.predicted.position, support);
+    if (changed) this.prevSupportOffset = { ...this.supportOffset };
   }
 
   /** Get the predicted mount entity (or null when not riding). */
@@ -726,7 +813,7 @@ export class PlayerPredictor {
         movingEntity: this.predictedMount,
         excludeIds: mountExclude,
         noclip: this.noclip,
-        shouldEntityBlock: (other) => other.collider?.clientSolid === true,
+        deferRoofCarry: true,
       });
       for (const stepDt of stepDts) {
         stepMountFromInput(
@@ -761,7 +848,7 @@ export class PlayerPredictor {
         movingEntity: this.predicted,
         excludeIds: playerExclude,
         noclip: this.noclip,
-        shouldEntityBlock: (other) => other.collider?.clientSolid === true,
+        deferRoofCarry: true,
       });
       let nextState = {
         jumpConsumed: this.jumpConsumed,
@@ -786,6 +873,7 @@ export class PlayerPredictor {
       this.jumpConsumed = nextState.jumpConsumed;
       this.lastJumpHeld = nextState.lastJumpHeld;
     }
+    this.captureSupport(entities);
   }
 
   private clonePlayer(serverPlayer: Entity): Entity {
