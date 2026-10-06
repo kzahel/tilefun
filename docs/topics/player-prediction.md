@@ -1,8 +1,8 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared camera recovery and airborne support momentum implemented and verified;
-varying motion and authority-debt cases remain next.
+Status: shared camera recovery, snapshot-anchored reload pacing and airborne
+support momentum verified; varying motion and longer-stall corrections remain next.
 Updated: 2026-10-06.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -17,8 +17,10 @@ reproduces persistent train/rider stepping after refresh despite stable relative
 prediction. GPU approximately-120Hz capture and four historical deterministic failures
 isolate early clock initialization and retained forward clock debt. The shared
 sampler now anchors to the first snapshot and rebases unusable debt monotonically;
-nine startup regressions and two burst/exhaustion clock checks pass. Native/full
-verification of this slice follows;
+nine startup regressions and two burst/exhaustion clock checks pass. Native
+approximately-120Hz GPU-requested 60Hz and Canvas 30Hz reload captures have zero
+bad cruise steps; all 1,707 unit tests, 36 affected browser checks, typechecks,
+lint/build and streaming readiness pass;
 the earlier ordinary-play camera acceptance does not cover this startup path.
 
 Latest: [airborne support momentum](../research/airborne-support-momentum.md) preserves
@@ -47,7 +49,8 @@ clock, excluding discarded catch-up debt; supported players use remote presentat
 time with locally interpolated walking. Switching clock domains preserves camera
 position. Opaque epoch identities distinguish predictor replacement/reset, preventing
 editor/play transitions from reusing an old local clock. Explicit pause/resume,
-visibility and realm reset rebase presentation;
+visibility and realm reset rebase presentation. Loading renders wait for the first
+authority snapshot; exhausted/burst clocks discard unusable debt monotonically;
 large relocations start a new history segment. Missing information can still cause
 correction when a train brakes/turns or authority stalls beyond the buffer.
 
@@ -120,8 +123,8 @@ Current invariants:
 
 ## Next work
 
-Add authority-debt, reconciliation and varying-speed/gap cases before broad passenger
-acceptance. Preserve the passing fast local-player controls; the existing 250ms
+Repeat the user's refresh/background playtest, then add longer authority-debt,
+reconciliation and varying-speed/gap cases before broad passenger acceptance. Preserve the passing fast local-player controls; the existing 250ms
 simulation catch-up cap still discards excess local elapsed time. Sustained
 airborne carrier momentum is now implemented and covered by the linked evidence.
 Do not broaden this into

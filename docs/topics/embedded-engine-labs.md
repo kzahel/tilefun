@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-05.
+Updated: 2026-10-06.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -270,3 +270,9 @@ Saved-train reload pacing now uses snapshot-anchored RemotePresentation startup
 and pure bounded clock-debt recovery in the common RemoteStateView. Loading
 renders, scenario reset and game refresh share this owner; no lab clock or
 renderer-specific correction is added. [Reproduction/contract](../research/train-refresh-pacing.md).
+
+The reload pacing checkpoint passes all 1,707 unit tests, 36 affected native
+Canvas/GPU game/lab browser checks, both headless continuity CLIs and streaming
+readiness. Separate headed 120Hz train captures measure smooth 60/30Hz source
+streams across saved game refresh. These use an explicit clock-reset control;
+they do not claim automated hidden-tab recovery. See the linked evidence.

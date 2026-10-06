@@ -22,7 +22,7 @@ Actual saved roof ride: bundled headed full Chromium, GPU, real Worker, native
 approximately 120Hz display, ordinary keyboard boarding, isolated Vite/persistence,
 normal page.reload. No authority timer or render clock is replaced. Six seconds
 are captured after reload and after a separate reset control; first cruise second
-is excluded. Baseline artifact: `/tmp/train-refresh-gpu-baseline.json`.
+is excluded. Baseline artifact: [native capture](/tmp/train-refresh-gpu-baseline.json).
 
 | Phase | Display Hz | Steady steps | Train step error max | Camera step error max | Bad train steps (>0.1px) |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -80,7 +80,42 @@ leave it permanently behind history as that bounded history is pruned.
 All nine startup checks are now normal passing regressions. Two additional pure
 clock checks cover immutable monotonic exhaustion and long delayed-data burst
 recovery. Focused game/lab presentation tests (91 checks), all three typechecks,
-and both deterministic continuity CLIs pass. Native and full validation follow.
+and both deterministic continuity CLIs pass. Native and full validation are recorded below.
 This changes shared replica sampling, not physics, train service motion, passenger
 momentum or camera response. A long absence of authoritative data may still hold
 and then correct; it cannot cause a permanently stale clock epoch.
+
+## Verified checkpoint
+
+Runtime commit `940e456` (baseline runtime `139b52f`). Both native captures use
+bundled headed full Chromium, ordinary keyboard boarding, real Worker authority
+and native display timestamps. The 30Hz lane explicitly requests/waits for 30Hz
+after reopen because runtime CVars are not necessarily durable; the 60Hz reload
+lane makes no rate-change request. Assertions require finite train/player/camera
+metrics, at least 60 settled cruise steps, correct advertised rate, ≤0.1px step
+error and ≤0.02px roof-offset range.
+
+| Reload capture | Display Hz | Steady steps | Train/rider max step error | Camera max step error | Bad steps | Roof-offset range |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| GPU requested, 60Hz authority | 119.981 | 600 | 0.001856px | 0.002340px | 0 | 0px |
+| Canvas, 30Hz authority | 120.027 | 599 | 0.000731px | 0.001024px | 0 | 0px |
+
+Fresh and explicit-reset phases also pass in both captures, with no page errors.
+Artifacts: [60Hz capture](/tmp/train-refresh-gpu-fixed.json),
+[30Hz capture](/tmp/train-refresh-canvas30-fixed.json). One initial 60Hz attempt
+failed ordinary keyboard boarding before any pacing capture; the same lane passed
+on rerun without runtime changes or threshold changes. Native tab hiding remains
+outside these captures; the reset control and production Worker pause/resume
+integration test are separate evidence.
+
+Final validation: all three typechecks, 203 unit files / 1,707 tests, lint with
+only the existing 118 warnings / 34 infos, refreshed catalog/manifest, production
+build, both continuous-presentation CLIs, 36 affected game/lab/Worker Canvas/GPU
+browser checks and streaming readiness pass. The manifest changes only its input
+digest; immutable art and review pixels are untouched. Tests/build finish before
+native pacing runs, and no runtime/build changes occur during browser validation.
+
+Next: repeat the user's actual refresh/background playtest. Longer authoritative
+stalls, uncertain acceleration/turning and delivery corrections still need their
+own acceptance traces; this verifies snapshot-anchored startup and monotonic clock
+recovery, not reconstruction of motion absent from the data stream.

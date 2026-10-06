@@ -52,6 +52,7 @@ history, not instructions to implement or confirmed present-day failures.
 
 ## Research and history
 
+- [Train reload presentation pacing](research/train-refresh-pacing.md)
 - [Airborne support momentum](research/airborne-support-momentum.md)
 - [Rider-free camera timing reproductions](research/camera-basics-reproductions.md)
 

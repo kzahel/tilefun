@@ -459,3 +459,15 @@ large-delivery-burst recovery avoids falling permanently behind pruned history.
 All nine startup regressions and two additional pure clock contracts pass, as do
 91 focused game/lab tests, all three typechecks and both continuous-presentation
 CLIs. Camera response, movement/momentum and authority clocks remain unchanged.
+
+Final reload checkpoint: all three typechecks, 203 unit files / 1,707 passing
+checks, existing-only lint diagnostics, refreshed inventories/build, both
+headless continuity CLIs, 36 affected Canvas/GPU game/lab/Worker browser checks
+and streaming readiness pass. Native approximately-120Hz saved refresh reduces
+train/rider maximum cruise step error from 1.806px to 0.001856px at 60Hz and
+0.000731px at 30Hz; zero bad steps and zero roof-offset range in both. The 30Hz
+lane requests the rate again after reopen and verifies advertised metadata.
+One initial keyboard-boarding setup failed before capture; unchanged rerun passed.
+No runtime/build changes occur during these browser runs. Evidence and remaining
+native-visibility/longer-stall limits are in the linked reload record. Next is the
+user's exact refresh/background playtest, then varying-motion/stall acceptance.

@@ -90,6 +90,10 @@ export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
         command: "sv_tickrate 30",
       });
     });
+  await page.waitForFunction(
+    (hz) => Math.abs(document.querySelector("#game").__game.remoteView.tickRate - hz) < 0.001,
+    Number(serverHz),
+  );
   const reloaded = await collect(6);
   // Same presentation reset used by visibilitychange, isolated from browser
   // automation's forced-visible pages. This is a reset control, not a tab-switch test.

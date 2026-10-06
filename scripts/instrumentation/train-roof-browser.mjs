@@ -41,6 +41,7 @@ const server = await createServer({
   logLevel: "error",
 });
 let browser;
+// biome-ignore lint/suspicious/noConfusingLabels: each diagnostic exits through the shared cleanup.
 probe: try {
   await server.listen();
   browser = await chromium.launch({
@@ -143,6 +144,12 @@ probe: try {
       for (const summary of Object.values(capture.summaries))
         if (
           summary.steadySteps < 60 ||
+          ![
+            summary.maxStepError,
+            summary.maxPlayerStepError,
+            summary.roofOffsetRange,
+            summary.maxCameraStepError,
+          ].every(Number.isFinite) ||
           summary.maxStepError > 0.1 ||
           summary.maxPlayerStepError > 0.1 ||
           summary.roofOffsetRange > 0.02 ||
