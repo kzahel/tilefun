@@ -51,6 +51,7 @@ const BIT_PARENT_ID = 9;
 const BIT_LOCAL_OFFSET_X = 10;
 const BIT_LOCAL_OFFSET_Y = 11;
 const BIT_AIR_MOMENTUM_Y = 13;
+const BIT_JUMP_INPUT_STATE = 14;
 const BIT_AIR_MOMENTUM_X = 12;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
@@ -108,8 +109,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 // ---- FrameMessage binary codec ----
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
-const MAX_BASELINE_SIZE = 15 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8; // Includes passive airborne XY velocity.
-const MAX_DELTA_SIZE = 8 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8; // Includes passive airborne XY velocity.
+const MAX_BASELINE_SIZE = 15 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
+const MAX_DELTA_SIZE = 8 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -259,6 +260,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.localOffsetY !== undefined) mask |= 1 << BIT_LOCAL_OFFSET_Y;
   if (snap.airMomentumX !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_X;
   if (snap.airMomentumY !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_Y;
+  if (snap.jumpInputState !== undefined) mask |= 1 << BIT_JUMP_INPUT_STATE;
   view.setUint16(off, mask, true);
   off += 2;
 
@@ -322,6 +324,10 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   }
   if (mask & (1 << BIT_AIR_MOMENTUM_Y)) {
     view.setFloat32(off, snap.airMomentumY!, true);
+    off += 4;
+  }
+  if (mask & (1 << BIT_JUMP_INPUT_STATE)) {
+    view.setFloat32(off, snap.jumpInputState!, true);
     off += 4;
   }
   return off;
@@ -419,6 +425,10 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     snap.airMomentumY = view.getFloat32(off, true);
     off += 4;
   }
+  if (mask & (1 << BIT_JUMP_INPUT_STATE)) {
+    snap.jumpInputState = view.getFloat32(off, true);
+    off += 4;
+  }
   return [snap, off];
 }
 
@@ -513,6 +523,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     changeMask |= 1 << 14;
     if (delta.airMomentumY === null) nullMask |= 1 << 14;
   }
+  if (delta.jumpInputState !== undefined) {
+    changeMask |= 1 << 15;
+    if (delta.jumpInputState === null) nullMask |= 1 << 15;
+  }
   view.setUint16(off, changeMask, true);
   off += 2;
   view.setUint16(off, nullMask, true);
@@ -588,6 +602,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   }
   if (changeMask & (1 << 14) && !(nullMask & (1 << 14))) {
     view.setFloat32(off, delta.airMomentumY as number, true);
+    off += 4;
+  }
+  if (changeMask & (1 << 15) && !(nullMask & (1 << 15))) {
+    view.setFloat32(off, delta.jumpInputState as number, true);
     off += 4;
   }
   return off;
@@ -748,6 +766,13 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
     if (nullMask & (1 << 14)) delta.airMomentumY = null;
     else {
       delta.airMomentumY = view.getFloat32(off, true);
+      off += 4;
+    }
+  }
+  if (changeMask & (1 << 15)) {
+    if (nullMask & (1 << 15)) delta.jumpInputState = null;
+    else {
+      delta.jumpInputState = view.getFloat32(off, true);
       off += 4;
     }
   }

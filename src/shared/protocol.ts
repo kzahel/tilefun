@@ -194,6 +194,8 @@ export interface EntitySnapshot {
   /** Passive XY departure velocity while airborne; total velocity includes it. */
   airMomentumX?: number;
   airMomentumY?: number;
+  /** Authoritative jump-button latch: bit 0 consumed, bit 1 held. */
+  jumpInputState?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

@@ -144,6 +144,8 @@ export interface Entity {
   /** Passive XY departure velocity while airborne; total velocity includes it. */
   airMomentumX?: number;
   airMomentumY?: number;
+  /** Authoritative jump-button latch: bit 0 consumed, bit 1 held. */
+  jumpInputState?: number;
   /** Absolute Z position in world pixels (0 = world floor). */
   wz?: number;
   /** Computed surface height at entity feet in world pixels (not serialized, computed each tick). */

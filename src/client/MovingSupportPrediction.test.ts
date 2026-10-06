@@ -97,3 +97,27 @@ it("keeps the displayed departure position when jumping from a buffered roof", (
   // Borrowing never moves the physics player onto the delayed display timeline.
   expect(predictor.player?.position.wx).toBeCloseTo(93.2, 8);
 });
+
+it("replays an unacknowledged takeoff from a grounded acknowledgement without consuming it twice", () => {
+  const world = new World(new FlatStrategy());
+  world.getChunk(0, 0);
+  const train = createTrain(80, 80);
+  train.id = 2;
+  train.velocity = { vx: 192, vy: 0 };
+  const player = createPlayer(90, 80);
+  player.id = 1;
+  player.wz = 44;
+  const predictor = new PlayerPredictor();
+  predictor.reset(player);
+  predictor.reconcile(player, 0, world, [], [train]);
+  const jump = { ...idle, jump: true, jumpPressed: true };
+  predictor.storeInput(1, jump, 1 / 30);
+  predictor.update(1 / 30, jump, world, [], [train]);
+  const before = required(predictor.player).jumpVZ;
+  predictor.reconcile(player, 0, world, [], [train]);
+  expect(predictor.player?.jumpVZ).toBe(before);
+  expect(predictor.player?.airMomentumX).toBe(192);
+  predictor.reconcile(player, 0, world, [], [train]);
+  expect(predictor.player?.jumpVZ).toBe(before);
+  expect(predictor.player?.velocity?.vx).toBe(192);
+});

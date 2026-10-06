@@ -29,6 +29,7 @@ export interface StoredInput {
   movement: Movement;
   dt: number;
   physics: MovementPhysicsParams;
+  jumpStateBefore?: { jumpConsumed: boolean; lastJumpHeld: boolean };
 }
 
 export type ReconcileCauseTag =
@@ -205,8 +206,8 @@ export class PlayerPredictor {
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
     this._prevWz = this.predicted.wz ?? 0;
     this.inputBuffer = [];
-    this.jumpConsumed = false;
-    this.lastJumpHeld = false;
+    this.jumpConsumed = ((serverPlayer.jumpInputState ?? 0) & 1) !== 0;
+    this.lastJumpHeld = ((serverPlayer.jumpInputState ?? 0) & 2) !== 0;
     this._lastReconcileDiagnostics = null;
 
     if (serverMount && serverPlayer.parentId === serverMount.id) {
@@ -231,7 +232,13 @@ export class PlayerPredictor {
     if (this.inputBuffer.length >= INPUT_BUFFER_SIZE) {
       this.inputBuffer.shift();
     }
-    this.inputBuffer.push({ seq, movement, dt, physics: this.physics() });
+    this.inputBuffer.push({
+      seq,
+      movement,
+      dt,
+      physics: this.physics(),
+      jumpStateBefore: { jumpConsumed: this.jumpConsumed, lastJumpHeld: this.lastJumpHeld },
+    });
   }
 
   /**
@@ -491,6 +498,18 @@ export class PlayerPredictor {
       this.trimInputBuffer(lastProcessedInputSeq);
       replayStats = this.collectReplayStats();
 
+      // Jump latches belong to the acknowledged state too, not to the latest
+      // predicted command. Otherwise replay can suppress an unacknowledged jump.
+      const latch = serverPlayer.jumpInputState;
+      const before = this.inputBuffer[0]?.jumpStateBefore;
+      if (latch !== undefined) {
+        this.jumpConsumed = (latch & 1) !== 0;
+        this.lastJumpHeld = (latch & 2) !== 0;
+      } else if (before) {
+        // Direct/reference callers without replicated latch state.
+        this.jumpConsumed = before.jumpConsumed;
+        this.lastJumpHeld = before.lastJumpHeld;
+      }
       // Replay unacknowledged inputs on top of server position
       for (const input of this.inputBuffer) {
         this.applyInput(input.movement, input.dt, world, props, entities, input.physics);

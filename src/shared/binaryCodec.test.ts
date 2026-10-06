@@ -181,6 +181,7 @@ describe("EntitySnapshot binary codec", () => {
       jumpVZ: -5,
       airMomentumX: 192.5,
       airMomentumY: -36.25,
+      jumpInputState: 3,
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -212,6 +213,7 @@ describe("EntitySnapshot binary codec", () => {
     expect(result.jumpVZ).toBeCloseTo(-5, 2);
     expect(result.airMomentumX).toBe(192.5);
     expect(result.airMomentumY).toBe(-36.25);
+    expect(result.jumpInputState).toBe(3);
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);
@@ -455,6 +457,7 @@ describe("EntityDelta binary codec", () => {
       jumpVZ: null,
       airMomentumX: null,
       airMomentumY: null,
+      jumpInputState: null,
       wz: null,
       parentId: null,
       localOffsetX: null,
@@ -476,6 +479,7 @@ describe("EntityDelta binary codec", () => {
     expect(result.jumpVZ).toBeNull();
     expect(result.airMomentumX).toBeNull();
     expect(result.airMomentumY).toBeNull();
+    expect(result.jumpInputState).toBeNull();
     expect(result.wz).toBeNull();
     expect(result.parentId).toBeNull();
     expect(result.localOffsetX).toBeNull();
@@ -492,6 +496,7 @@ describe("EntityDelta binary codec", () => {
       jumpVZ: -5,
       airMomentumX: 192.5,
       airMomentumY: -36.25,
+      jumpInputState: 3,
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -513,6 +518,7 @@ describe("EntityDelta binary codec", () => {
     expect(result.jumpVZ).toBeCloseTo(-5, 2);
     expect(result.airMomentumX).toBe(192.5);
     expect(result.airMomentumY).toBe(-36.25);
+    expect(result.jumpInputState).toBe(3);
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);

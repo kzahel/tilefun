@@ -400,3 +400,20 @@ The separate real save/reopen/explicit-travel test passes. New regressions inclu
 walk-off, buffered landing jump, ceiling contact, noclip and display/physics ownership.
 All three typechecks pass. Full validation and ordinary-keyboard Worker jump
 captures follow on a settled source/build checkpoint.
+
+The first native GPU approximately-120Hz / 60Hz authority run passes two keyboard
+flights: forward gap landing on the next roof and an idle→forward→backward midair
+steering sequence. The 30Hz Canvas lane preserves physical momentum and reaches
+the next roof, but exposes an existing jump replay latch fault: an unacknowledged
+predicted takeoff is suppressed when an older grounded acknowledgement is replayed
+using the already-consumed latest jump-button state. It returns on authoritative
+confirmation, introducing ~12.5px of display motion beyond expected travel.
+
+A focused regression fails before the correction. Player snapshots now carry
+`jumpInputState` (consumed/held bits), and reconciliation restores that acknowledged
+latch before replay. Direct/reference callers without the replicated field restore
+the first pending command's stored pre-input latch. Repeated reconciliation can
+neither suppress the pending takeoff nor add carrier velocity twice. Binary baseline,
+delta and null-removal checks include the final spare delta-mask bit; max buffer
+sizes account for all added fields. Focused predictor/codec/native-replay tests and
+all three typechecks pass; native 30Hz is rerun without changing tolerances.
