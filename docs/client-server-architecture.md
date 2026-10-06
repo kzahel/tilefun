@@ -115,3 +115,13 @@ share generation and art realization. See [world explorer](world-explorer.md),
   [input queue prediction](../src/server/InputQueuePrediction.test.ts).
 - Worker lifecycle and streaming: [performance](topics/performance.md).
 - Hosting authorization: [server access](SERVER-SECURITY.md).
+
+
+Airborne support momentum uses optional `airMomentumX/Y` velocity components in
+entity baselines/deltas. Authority and prediction retain total world velocity for
+collision, while platformer air control acts on voluntary velocity. The optional
+`jumpInputState` packs authority's consumed/held jump-button latch, restored before
+pending-input replay. All fields have explicit delta removal and binary mask/buffer
+coverage; endpoints must use the same build. Airborne player saves retain total and
+passive XY motion; explicit travel and lifecycle resets clear passive state.
+[Movement/presentation evidence](research/airborne-support-momentum.md) owns details.

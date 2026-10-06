@@ -256,3 +256,11 @@ interpolation replay and catch-up camera targeting as separate faults; fast loca
 prediction/short-render-pause controls pass, including noclip. No host, camera mode,
 runtime policy or frozen review pixels changed. Future sampling/camera fixes must
 preserve diagnostic fixed framing and reach both shared consumers.
+
+
+The airborne support follow-up uses shared PlayerMovement and PlayerPredictor,
+including passive departure velocity, acknowledged jump-latch replay, sampled
+support-to-flight display translation and ScenarioSession teleport/reset removal.
+Native ScenarioSession car/train tests run the same Realm and binary replicas at
+30/60Hz. No lab-specific airborne physics or renderer is introduced.
+[Evidence](../research/airborne-support-momentum.md) records scoped acceptance.

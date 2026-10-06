@@ -145,6 +145,10 @@ new implementation concerns, not evidence that the approved bounds need re-revie
   and rear. The former small central support let walkers fall into the solid
   hood/trunk and become trapped; shared server/prediction support fixes this. Shared server/prediction physics carries the
   rider, permits relative walking, and inherits full vehicle velocity on a jump.
+  [Shared airborne momentum](../research/airborne-support-momentum.md) now preserves
+  that departure contribution through flight while platformer steering changes
+  voluntary motion; landing converts to new-roof-relative walking, and collisions
+  clip blocked passive components. Native car replay controls exercise the same code.
   A nearby-vehicle hop assist makes approved roofs reachable with Space; ordinary
   jumps elsewhere retain their settings. Height checks keep a low airborne player
   blocking the car until their feet clear its body. Roof passengers never mount,

@@ -1,9 +1,9 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared timestamped presentation and camera recovery implemented and verified;
-authority-debt and varying-motion cases remain next.
-Updated: 2026-10-05.
+Status: shared camera recovery and airborne support momentum implemented and verified;
+varying motion and authority-debt cases remain next.
+Updated: 2026-10-06.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)
@@ -12,7 +12,17 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
-Latest: shared `PresentationTimeline` samples bounded timestamped remote motion,
+Latest: [airborne support momentum](../research/airborne-support-momentum.md) preserves
+platform departure velocity while retaining platformer air steering. Landing converts
+to new-roof-relative velocity; collision, missing-input ticks, save/reopen and
+replay share the contract. A replicated acknowledged jump latch prevents pending
+takeoffs from disappearing during reconciliation. Native GPU 60Hz and Canvas 30Hz
+Worker flights at approximately 120Hz cross the next carriage and preserve midair
+reversal. All three typechecks, 1,696 unit tests, lint/build, 36 affected browser
+checks and streaming readiness pass. The user confirmed the preceding camera
+fix in ordinary play, including trains.
+
+Shared `PresentationTimeline` samples bounded timestamped remote motion,
 and pure `CameraFollow` integrates an explicit target/time pair. Game and embedded
 labs borrow display-only replica/player poses during render; physics and collision
 replay retain committed poses. The [rider-free cases](../research/camera-basics-reproductions.md#shared-presentation-fix)
@@ -32,7 +42,7 @@ visibility and realm reset rebase presentation;
 large relocations start a new history segment. Missing information can still cause
 correction when a train brakes/turns or authority stalls beyond the buffer.
 
-The latest native-120Hz playtest reports stable roof-relative riding but periodic
+The earlier native-120Hz playtest reported stable roof-relative riding but periodic
 camera skips and lost jump momentum. Both are reproduced in
 [camera/jump evidence](../research/train-camera-and-jump-reproductions.md): real
 Worker authority runs near 62.5Hz while advertising 60Hz; combined carrier and
@@ -104,7 +114,8 @@ Current invariants:
 Add authority-debt, reconciliation and varying-speed/gap cases before broad passenger
 acceptance. Preserve the passing fast local-player controls; the existing 250ms
 simulation catch-up cap still discards excess local elapsed time. Sustained
-airborne carrier momentum remains separate and deferred. Do not broaden this into
+airborne carrier momentum is now implemented and covered by the linked evidence.
+Do not broaden this into
 global AI rollback or change immutable art review snapshots to make unrelated
 validation pass. Continue engine changes
 through game/lab shared owners. Train lifetime/active map markers remain deferred

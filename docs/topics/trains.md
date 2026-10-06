@@ -317,6 +317,10 @@ isolated in headless basic cases and corrected by the shared timestamped
 presentation/camera owner. Both continuity CLIs and native GPU approximately-120Hz
 straight-motion checks, including 60→30→60Hz transitions, now pass; see
 [camera basics evidence](../research/camera-basics-reproductions.md#shared-presentation-fix).
-Unknown braking/turns, extended authority debt and airborne friction remain pending.
+Unknown braking/turns and extended authority debt remain further presentation work.
+[Airborne support momentum](../research/airborne-support-momentum.md) now preserves
+train departure velocity through flight with responsive platformer steering; native
+GPU 60Hz / Canvas 30Hz authority at approximately 120Hz crosses the next carriage
+and reverses direction midair. Jump height and native roof geometry are unchanged.
 Roof-relative alignment alone is not the acceptance criterion. Service lifetime/map
 tickets remain deferred.

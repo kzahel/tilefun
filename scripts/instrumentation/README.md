@@ -193,3 +193,20 @@ Each owns an isolated Vite origin and bundled Chromium and closes both on exit.
 V8 sampling is not an allocation census or a frame-pacing measurement. Compare
 work counts, hashes, cache counters and source revisions alongside sampled bytes.
 See [renderer completion](../../docs/tactical/034-renderer-completion.md).
+
+
+## Airborne support momentum
+
+`npx tsx scripts/instrumentation/roof-camera-jump.ts --assert-momentum` checks the
+full native authority flight contract, including preserved Quake-air controls.
+Its legacy `--assert-baseline` retains the historical momentum-loss expectation,
+and its camera lanes intentionally retain the old untimed consumer. Current
+camera continuity uses the separate timestamped presentation CLIs above.
+
+Add `--jump-momentum` to `train-roof-browser.mjs` with a fixed 30/60Hz server rate
+to run ordinary-keyboard next-carriage and midair-reversal flights. It requires
+20 airborne samples per flight, retained departure velocity, next-roof landing,
+forward/backward steering and takeoff step error ≤3.5px. Use native headed full
+Chromium for actual 120Hz display evidence. Roof-offset/steady-idle assertions
+are separate lanes: walking/jumping intentionally changes the passenger offset.
+[Contracts, evidence and limits](../../docs/research/airborne-support-momentum.md).

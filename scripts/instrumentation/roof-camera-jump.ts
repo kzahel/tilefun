@@ -259,11 +259,24 @@ const output = process.argv.find((a) => a.startsWith("--output="))?.slice(9);
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   scope:
-    "Controlled independent timer/render events using production Realm, codec, replica, prediction, GameLoop and camera; native 120Hz Worker captures separately establish actual browser cadence. Jump traces use full native authority, defaults versus diagnostic air-control-off; no runtime overrides or implementation changes.",
+    "Controlled independent timer/render events using production Realm, codec, replica, prediction, GameLoop and camera; native 120Hz Worker captures separately establish actual browser cadence. Jump traces use full native authority, defaults versus diagnostic Quake air-control; legacy camera lanes retain their historical untimed consumer. --assert-baseline preserves the old failure contract; --assert-momentum checks the implemented flight contract.",
   camera,
   jumps,
 };
 if (output) await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
+if (process.argv.includes("--assert-momentum")) {
+  for (const j of jumps) {
+    const expected = j.initialVx + j.dx * 64;
+    if (
+      j.platformerAir &&
+      j.samples.slice(1).some((s) => s.airborne && Math.abs(s.vx - expected) > 0.001)
+    )
+      throw Error("Inherited momentum did not survive full flight");
+    if (!j.platformerAir && Math.abs(j.summary.firstVx - j.summary.secondVx) > 0.001)
+      throw Error("Quake air-control option changed");
+  }
+}
+
 console.table(
   camera.map(({ serverHz, timerMs, renderHz, summary }) => ({
     serverHz,

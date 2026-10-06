@@ -12,6 +12,9 @@ const option = (name, fallback) =>
 const renderer = option("renderer", "canvas");
 const delay = Number(option("delay", "0"));
 const serverHz = option("server-hz", "60");
+const jumpMomentum = process.argv.includes("--jump-momentum");
+if (jumpMomentum && serverHz === "alternate")
+  throw Error("Use a fixed server rate for jump flights");
 const renderHz = option("render-hz", "native");
 if (!["30", "60", "alternate"].includes(serverHz) || !["native", "120"].includes(renderHz))
   throw Error("Use --server-hz=30|60|alternate and --render-hz=native|120");
@@ -125,7 +128,8 @@ try {
     { hz: serverHz === "30" ? 30 : 60, output: await setRate(serverHz === "30" ? 30 : 60) },
   ];
   await page.evaluate(
-    ({ delay, renderHz }) => {
+    async ({ delay, renderHz }) => {
+      const { roofSupport } = await import("/tilefun/src/traffic/RoofSupport.ts");
       const game = document.querySelector("#game").__game;
       if (delay)
         game.netEmulatedTransport.setConfig({
@@ -218,6 +222,10 @@ try {
           playerScreenX: (px - (renderedCamera?.x ?? NaN)) * game.camera.scale,
           playerVx: predictor.player.velocity?.vx,
           serverVx: server.velocity?.vx,
+          serverAirborne: server.jumpVZ !== undefined,
+          serverMomentumX: server.airMomentumX,
+          serverMomentumY: server.airMomentumY,
+          serverRoofId: roofSupport(server, game.remoteView.serverEntities)?.id,
           offsetX: px - tx,
           offsetY: py - ty,
           serverOffsetX: server.position.wx - car.position.wx,
@@ -252,7 +260,35 @@ try {
     },
     { delay, renderHz },
   );
-  if (serverHz === "alternate") {
+  if (jumpMomentum) {
+    await page.waitForFunction(
+      () => {
+        const g = document.querySelector("#game").__game;
+        const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+        return car?.velocity?.vx > 191.9 && g.remoteView.serverPlayerEntity.wz === 44;
+      },
+      undefined,
+      { timeout: 15000 },
+    );
+    await page.keyboard.down("ArrowRight");
+    await page.waitForTimeout(700);
+    await page.keyboard.down("Space");
+    await page.waitForTimeout(650);
+    await page.keyboard.up("Space");
+    await page.keyboard.up("ArrowRight");
+    await page.waitForTimeout(200);
+    await page.keyboard.down("Space");
+    await page.waitForTimeout(100);
+    await page.keyboard.down("ArrowRight");
+    await page.waitForTimeout(120);
+    await page.keyboard.up("ArrowRight");
+    await page.keyboard.down("ArrowLeft");
+    await page.waitForTimeout(120);
+    await page.keyboard.up("ArrowLeft");
+    await page.waitForTimeout(400);
+    await page.keyboard.up("Space");
+    await page.waitForTimeout(4000);
+  } else if (serverHz === "alternate") {
     await page.waitForTimeout(4000);
     rateCommands.push({ hz: 30, output: await setRate(30) });
     await page.waitForTimeout(8000);
@@ -374,7 +410,32 @@ try {
     group.push(b.shiftX);
     clockGroups.set(key, group);
   }
+  const jumpFlights = [];
+  for (let i = 1; i < raw.samples.length; i++) {
+    if (!raw.samples[i].serverAirborne || raw.samples[i - 1].serverAirborne) continue;
+    const start = i;
+    while (i < raw.samples.length && raw.samples[i].serverAirborne) i++;
+    const airborne = raw.samples.slice(start, i),
+      departure = raw.samples[start - 1],
+      landing = raw.samples[i];
+    jumpFlights.push({
+      samples: airborne.length,
+      departureRoofId: departure.serverRoofId,
+      landingRoofId: landing?.serverRoofId,
+      landedZ: landing?.serverZ,
+      momentumErrorPxPerSecond: stats(airborne.map((s) => Math.abs(s.serverMomentumX - 192))),
+      velocity: stats(airborne.map((s) => s.serverVx)),
+      hasForward: airborne.some((s) => Math.abs(s.serverVx - 256) < 0.1),
+      hasBackward: airborne.some((s) => Math.abs(s.serverVx - 128) < 0.1),
+      takeoffStepErrorPx: Math.abs(
+        raw.samples[start].playerX -
+          departure.playerX -
+          (raw.samples[start].playerVx * (raw.samples[start].t - departure.t)) / 1000,
+      ),
+    });
+  }
   const report = {
+    jumpFlights,
     revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     renderer,
     delayEachWayMs: delay,
@@ -431,6 +492,26 @@ try {
   const output = option("output", path.join(temp, "report.json"));
   await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify({ output, ...report.summary, errors }, null, 2));
+  if (
+    jumpMomentum &&
+    (jumpFlights.length !== 2 ||
+      jumpFlights.some(
+        (f) =>
+          f.samples < 20 ||
+          f.departureRoofId === undefined ||
+          f.landingRoofId === undefined ||
+          f.momentumErrorPxPerSecond.count !== f.samples ||
+          !Number.isFinite(f.takeoffStepErrorPx) ||
+          f.momentumErrorPxPerSecond.max > 0.001 ||
+          f.landedZ !== 44 ||
+          f.takeoffStepErrorPx > 3.5,
+      ) ||
+      jumpFlights[0].departureRoofId === jumpFlights[0].landingRoofId ||
+      !jumpFlights[1].hasForward ||
+      !jumpFlights[1].hasBackward)
+  )
+    throw Error(`Jump momentum contract: ${JSON.stringify(jumpFlights)}`);
+
   if (cruise.length < 180 || errors.length)
     throw Error("Insufficient steady roof cruise or browser errors");
   if (

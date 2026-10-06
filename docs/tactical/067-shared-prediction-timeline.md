@@ -426,3 +426,17 @@ three typechecks, 202 unit files / 1,696 tests, lint (the existing 118 warnings 
 192px/s, forward flight settles to 256px/s, and car flight retains 36px/s. Inventories
 refresh source/interactive fingerprints; immutable art banks are untouched.
 Affected browser consumers and streaming readiness follow on the final build.
+
+
+Final airborne checkpoint is verified: 202 unit files / 1,696 tests, all three
+typechecks, existing-only lint diagnostics, refreshed inventories/build, basic and
+idle-rider continuity CLIs, full-flight momentum CLI, 36 affected game/lab/Worker/
+phone Canvas/GPU browser checks and streaming readiness all pass. Native GPU 60Hz
+and Canvas 30Hz keyboard flights at approximately 120Hz both cross onto the next
+carriage and preserve forward/backward midair steering. The failed pre-latch 30Hz
+record remains in the evidence; takeoff excess falls from ~12.5px to ~1.1px in that
+lane without loosening acceptance. No source/build mutation during browser runs.
+[Movement contract, reruns and final evidence](../research/airborne-support-momentum.md)
+record defaults, replay/reset boundaries and remaining limits. Next is human
+jump-distance/steering feedback, then explicit varying-motion/authority-debt cases;
+water/air drag and service tickets remain separate future work.
