@@ -417,3 +417,12 @@ neither suppress the pending takeoff nor add carrier velocity twice. Binary base
 delta and null-removal checks include the final spare delta-mask bit; max buffer
 sizes account for all added fields. Focused predictor/codec/native-replay tests and
 all three typechecks pass; native 30Hz is rerun without changing tolerances.
+
+The final review adds a small scripted-midair-relocation display-state check and
+removes new non-null assertions from codec writes. On settled inventories, all
+three typechecks, 202 unit files / 1,696 tests, lint (the existing 118 warnings /
+34 infos), build and both basic/idle-rider continuity CLIs pass. The full-flight
+`--assert-momentum` CLI passes; native authority idle train velocity survives at
+192px/s, forward flight settles to 256px/s, and car flight retains 36px/s. Inventories
+refresh source/interactive fingerprints; immutable art banks are untouched.
+Affected browser consumers and streaming readiness follow on the final build.

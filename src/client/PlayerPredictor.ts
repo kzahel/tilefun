@@ -733,6 +733,12 @@ export class PlayerPredictor {
         wy: prev.wy + (player.position.wy - prev.wy) * alpha,
       };
     }
+    if (
+      player.jumpVZ !== undefined &&
+      player.airMomentumX === undefined &&
+      player.airMomentumY === undefined
+    )
+      this.flightDisplayShift = null;
     if (!support && this.flightDisplayShift) {
       const shift = this.flightDisplayShift;
       if (player.jumpVZ === undefined) shift.landedAt ??= this.clock();

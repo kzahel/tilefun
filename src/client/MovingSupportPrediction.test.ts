@@ -96,6 +96,12 @@ it("keeps the displayed departure position when jumping from a buffered roof", (
   expect(after.position.wx - before.position.wx).toBeCloseTo(192 / 60, 8);
   // Borrowing never moves the physics player onto the delayed display timeline.
   expect(predictor.player?.position.wx).toBeCloseTo(93.2, 8);
+  // A scripted midair teleport clears passive state; its old display shift
+  // must not survive even for a relocation below the large-snap threshold.
+  const physics = required(predictor.player);
+  delete physics.airMomentumX;
+  delete physics.airMomentumY;
+  expect(predictor.samplePresentationPlayer(1, [])?.position.wx).toBeCloseTo(93.2, 8);
 });
 
 it("replays an unacknowledged takeoff from a grounded acknowledgement without consuming it twice", () => {

@@ -22313,11 +22313,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:54"
+          "source": "src/client/PlayerPredictor.ts:55"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:582"
+          "source": "src/client/PlayerPredictor.ts:612"
         },
         {
           "system": "Gameplay",
@@ -22381,11 +22381,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:168"
+          "source": "src/server/EntityHandle.ts:170"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:168"
+          "source": "src/server/EntityHandle.ts:170"
         },
         {
           "system": "Gameplay",
@@ -22397,11 +22397,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1102"
+          "source": "src/server/Realm.ts:1131"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2034"
+          "source": "src/server/Realm.ts:2073"
         },
         {
           "system": "Gameplay",

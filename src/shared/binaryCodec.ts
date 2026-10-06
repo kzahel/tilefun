@@ -318,16 +318,16 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     off += 4;
   }
 
-  if (mask & (1 << BIT_AIR_MOMENTUM_X)) {
-    view.setFloat32(off, snap.airMomentumX!, true);
+  if (snap.airMomentumX !== undefined) {
+    view.setFloat32(off, snap.airMomentumX, true);
     off += 4;
   }
-  if (mask & (1 << BIT_AIR_MOMENTUM_Y)) {
-    view.setFloat32(off, snap.airMomentumY!, true);
+  if (snap.airMomentumY !== undefined) {
+    view.setFloat32(off, snap.airMomentumY, true);
     off += 4;
   }
-  if (mask & (1 << BIT_JUMP_INPUT_STATE)) {
-    view.setFloat32(off, snap.jumpInputState!, true);
+  if (snap.jumpInputState !== undefined) {
+    view.setFloat32(off, snap.jumpInputState, true);
     off += 4;
   }
   return off;
