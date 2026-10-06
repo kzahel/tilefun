@@ -75,3 +75,25 @@ it("inherits carrier momentum once when walking off the edge", () => {
   predictor.update(1 / 60, right, world, [], [train]);
   expect(required(required(predictor.player).velocity).vx).toBeLessThan(vx + 1);
 });
+
+it("keeps the displayed departure position when jumping from a buffered roof", () => {
+  const world = new World(new FlatStrategy());
+  world.getChunk(0, 0);
+  const train = createTrain(80, 80);
+  train.id = 2;
+  train.velocity = { vx: 192, vy: 0 };
+  const player = createPlayer(90, 80);
+  player.id = 1;
+  player.wz = 44;
+  const predictor = new PlayerPredictor();
+  predictor.reset(player);
+  predictor.reconcile(player, 0, world, [], [train]);
+  predictor.update(1 / 60, idle, world, [], [train]);
+  const displayedTrain = { ...train, position: { wx: 70.4, wy: 80 } };
+  const before = required(predictor.samplePresentationPlayer(1, [displayedTrain]));
+  predictor.update(1 / 60, { ...idle, jump: true }, world, [], [train]);
+  const after = required(predictor.samplePresentationPlayer(1, [displayedTrain]));
+  expect(after.position.wx - before.position.wx).toBeCloseTo(192 / 60, 8);
+  // Borrowing never moves the physics player onto the delayed display timeline.
+  expect(predictor.player?.position.wx).toBeCloseTo(93.2, 8);
+});

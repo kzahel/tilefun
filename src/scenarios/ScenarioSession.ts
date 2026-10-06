@@ -404,6 +404,8 @@ export class ScenarioSession {
     player.position = { ...position };
     player.wz = player.groundZ = z;
     player.velocity = { vx: 0, vy: 0 };
+    delete player.airMomentumX;
+    delete player.airMomentumY;
     delete player.jumpVZ;
     delete player.jumpZ;
     this.player.jumpConsumed = this.player.lastJumpHeld = false;

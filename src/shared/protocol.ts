@@ -191,6 +191,9 @@ export interface EntitySnapshot {
   deathTimer?: number;
   jumpZ?: number;
   jumpVZ?: number;
+  /** Passive XY departure velocity while airborne; total velocity includes it. */
+  airMomentumX?: number;
+  airMomentumY?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

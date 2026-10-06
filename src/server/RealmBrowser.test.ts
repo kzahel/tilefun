@@ -1821,3 +1821,46 @@ it("resumes a saved procedural train roof, while explicit travel returns to grou
     await server.destroy();
   }
 }, 30000);
+
+it("restores airborne departure motion on reopen and clears it on explicit travel", async () => {
+  const setup = await createTestSetup();
+  const profile = { profileId: "airborne-rider", displayName: "Airborne rider" };
+  let server = setup.server;
+  try {
+    setup.transport.connect("local", profile);
+    await server.settle();
+    const player = server.getLocalSession().player;
+    player.wz = 64;
+    player.groundZ = 0;
+    player.jumpVZ = 40;
+    player.velocity = { vx: 256, vy: -10 };
+    player.airMomentumX = 192;
+    player.airMomentumY = -10;
+    await server.destroy();
+    const transport = new TestTransport();
+    server = new GameServer(transport, {
+      registry: setup.registry,
+      createStore: setup.createStore,
+    });
+    await server.init();
+    transport.connect("local", profile);
+    await server.settle();
+    const restored = server.getLocalSession().player;
+    expect(restored.velocity).toEqual({ vx: 256, vy: -10 });
+    expect(restored.airMomentumX).toBe(192);
+    expect(restored.airMomentumY).toBe(-10);
+    expect(restored.jumpVZ).toBe(40);
+    const target = await setup.registry.createWorld("Airborne travel", "flat", 422);
+    await server.loadWorld(target.id, {
+      x: 100,
+      y: -200,
+      generation: createDescriptor("flat", 422),
+    });
+    const arrived = server.getLocalSession().player;
+    expect(arrived.airMomentumX).toBeUndefined();
+    expect(arrived.airMomentumY).toBeUndefined();
+    expect(arrived.jumpVZ).toBeUndefined();
+  } finally {
+    await server.destroy();
+  }
+});

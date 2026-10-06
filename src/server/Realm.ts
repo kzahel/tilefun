@@ -63,6 +63,7 @@ import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
 import {
   applyFriction,
+  applyPlatformerAirFriction,
   getMovementPhysicsParams,
   initiateJump,
   MAX_INPUT_STEP_SECONDS,
@@ -331,6 +332,14 @@ export class Realm {
         saved.groundZ !== undefined && Number.isFinite(saved.groundZ) ? saved.groundZ : saved.wz;
       if (saved.jumpVZ !== undefined && Number.isFinite(saved.jumpVZ)) {
         player.jumpVZ = saved.jumpVZ;
+        const motion = saved.airborneVelocity;
+        if (motion && Number.isFinite(motion.vx) && Number.isFinite(motion.vy)) {
+          player.velocity = { vx: motion.vx, vy: motion.vy };
+          if (motion.momentumX !== undefined && Number.isFinite(motion.momentumX))
+            player.airMomentumX = motion.momentumX;
+          if (motion.momentumY !== undefined && Number.isFinite(motion.momentumY))
+            player.airMomentumY = motion.momentumY;
+        }
         player.jumpZ = saved.wz - (player.groundZ ?? saved.wz);
       }
     }
@@ -504,7 +513,24 @@ export class Realm {
       y: session.player.position.wy,
       ...(session.player.wz === undefined ? {} : { wz: session.player.wz }),
       ...(session.player.groundZ === undefined ? {} : { groundZ: session.player.groundZ }),
-      ...(session.player.jumpVZ === undefined ? {} : { jumpVZ: session.player.jumpVZ }),
+      ...(session.player.jumpVZ === undefined
+        ? {}
+        : {
+            jumpVZ: session.player.jumpVZ,
+            ...(session.player.velocity
+              ? {
+                  airborneVelocity: {
+                    ...session.player.velocity,
+                    ...(session.player.airMomentumX === undefined
+                      ? {}
+                      : { momentumX: session.player.airMomentumX }),
+                    ...(session.player.airMomentumY === undefined
+                      ? {}
+                      : { momentumY: session.player.airMomentumY }),
+                  },
+                }
+              : {}),
+          }),
       cameraX: session.cameraX,
       cameraY: session.cameraY,
       cameraZoom: session.cameraZoom,
@@ -740,7 +766,7 @@ export class Realm {
         if (airborne) {
           // Match predictor physics: apply air friction when platformerAir is enabled.
           if (movementPhysics.platformerAir) {
-            applyFriction(session.player, dt, 1.0, movementPhysics);
+            applyPlatformerAirFriction(session.player, dt, movementPhysics);
           }
         } else {
           const surface = getSurfaceProperties(
@@ -1290,6 +1316,8 @@ export class Realm {
           session.lastProcessedInputSeq =
             session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
           session.inputQueue.length = 0;
+          delete session.player.airMomentumX;
+          delete session.player.airMomentumY;
           session.player.velocity = { vx: 0, vy: 0 };
         }
         break;
@@ -1307,6 +1335,10 @@ export class Realm {
       case "set-debug":
         session.debugPaused = msg.paused;
         session.debugNoclip = msg.noclip;
+        if (msg.noclip) {
+          delete session.player.airMomentumX;
+          delete session.player.airMomentumY;
+        }
         break;
 
       case "visible-range":
@@ -1735,6 +1767,8 @@ export class Realm {
       // which may include the cow's own walkable surface height, double-counting).
       player.wz = (entity.wz ?? 0) + 10;
       player.jumpZ = 10;
+      delete player.airMomentumX;
+      delete player.airMomentumY;
       Reflect.set(player, "jumpVZ", undefined);
       player.noShadow = true; // cow's shadow is bigger
       if (entity.wanderAI) {
@@ -1797,6 +1831,8 @@ export class Realm {
         p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
         p.groundZ = p.wz;
       }
+      delete p.airMomentumX;
+      delete p.airMomentumY;
       Reflect.set(p, "jumpVZ", undefined);
       Reflect.set(p, "jumpZ", undefined);
       // Brief invincibility flash so the respawn is visible.

@@ -1,5 +1,6 @@
 import { DEFAULT_PHYSICAL_HEIGHT, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
+import { clipAirMomentum } from "../physics/AirborneMomentum.js";
 import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Entity, PositionComponent } from "./Entity.js";
@@ -208,6 +209,7 @@ export function resolveCollision(
   if (!aabbOverlapsSolid(xBox, getCollision, blockMask) && !isExtraBlocked?.(xBox)) {
     entity.position.wx = testX.wx;
   } else {
+    clipAirMomentum(entity, "x");
     blocked = true;
   }
 
@@ -220,6 +222,7 @@ export function resolveCollision(
   if (!aabbOverlapsSolid(yBox, getCollision, blockMask) && !isExtraBlocked?.(yBox)) {
     entity.position.wy = testY.wy;
   } else {
+    clipAirMomentum(entity, "y");
     blocked = true;
   }
 

@@ -374,3 +374,29 @@ expected-failure tests. Stationary-platform and Quake-air controls stay ordinary
 passing tests. Next implement shared state/replication and promote these contracts,
 then verify authority/prediction and actual game/lab consumers, including existing
 60/120Hz presentation controls.
+
+Shared movement now records optional `airMomentumX/Y` on departure, keeps total
+velocity for integration, and excludes the passive contribution only while applying
+platformer air controls. Quake control continues to use total velocity. Both
+command movement and missing-command authority friction preserve passive motion;
+both collision paths clip blocked components. Landing conversion also covers a
+jump buffered through touchdown. State roundtrips through entity baseline/delta
+binary masks (two spare optional bits), cloning, replay and airborne saves, with
+explicit removal on landing/reset/travel/mount/noclip. Endpoints must use the same
+build, as with the existing binary frame protocol.
+
+A display-only regression additionally reproduced a 9.6px departure jump from the
+50ms buffered train pose to current physics position. Prediction now retains the
+sampled support/display translation through flight; ordinary ground landing releases
+it over the existing 60ms presentation response, and a new sampled roof takes over
+on roof landing. This never translates physics/collision data. Predictor resets,
+large relocations and noclip/mounting clear that display state. Unknown changing
+platform motion still has the previously documented presentation limits.
+
+Focused checks pass 64 tests, including native Realm/car/train replay at 30/60Hz
+from one-tick-delayed batched binary frames. Replay has an outstanding command;
+roof landings compare support-relative offsets rather than mismatched world clocks.
+The separate real save/reopen/explicit-travel test passes. New regressions include
+walk-off, buffered landing jump, ceiling contact, noclip and display/physics ownership.
+All three typechecks pass. Full validation and ordinary-keyboard Worker jump
+captures follow on a settled source/build checkpoint.

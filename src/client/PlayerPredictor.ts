@@ -141,6 +141,8 @@ export class PlayerPredictor {
   private support: Entity | null = null;
   private supportOffset: RoofOffset | null = null;
   private prevSupportOffset: RoofOffset | null = null;
+  private supportDisplayShift: PositionComponent | null = null;
+  private flightDisplayShift: { wx: number; wy: number; landedAt?: number } | null = null;
 
   /** Whether noclip is active (skip collision in prediction). */
   noclip = false;
@@ -189,6 +191,7 @@ export class PlayerPredictor {
   reset(serverPlayer: Entity, serverMount?: Entity): void {
     this.presentationInputSeconds = this.presentationInputDt = 0;
     this.presentationEpoch = {};
+    this.supportDisplayShift = this.flightDisplayShift = null;
     this.clearPresentationError();
     this.predicted = this.clonePlayer(serverPlayer);
     this.support = null;
@@ -377,6 +380,8 @@ export class PlayerPredictor {
       } else {
         delete this.predicted.jumpZ;
       }
+      delete this.predicted.airMomentumX;
+      delete this.predicted.airMomentumY;
       delete this.predicted.jumpVZ;
 
       const oldMountX = this.predictedMount.position.wx;
@@ -473,6 +478,11 @@ export class PlayerPredictor {
         delete this.predicted.jumpVZ;
       }
 
+      for (const key of ["airMomentumX", "airMomentumY"] as const) {
+        const value = serverPlayer[key];
+        if (value === undefined) delete this.predicted[key];
+        else this.predicted[key] = value;
+      }
       this.captureSupport(entities);
       if (this.support?.id !== oldSupportId)
         this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
@@ -559,6 +569,7 @@ export class PlayerPredictor {
     );
     // Small residual contact corrections are display-only. Physics still uses
     // the authoritative replay result; supports have their own exact pose binding.
+    if (resimPosErr > SNAP_THRESHOLD || serverMount || this.noclip) this.flightDisplayShift = null;
     if (
       this.support ||
       oldSupportId !== undefined ||
@@ -687,12 +698,31 @@ export class PlayerPredictor {
         },
         support,
       );
+      const raw = roofPosition(
+        {
+          x: previousOffset.x + (offset.x - previousOffset.x) * alpha,
+          y: previousOffset.y + (offset.y - previousOffset.y) * alpha,
+        },
+        this.support ?? support,
+      );
+      this.supportDisplayShift = { wx: position.wx - raw.wx, wy: position.wy - raw.wy };
+      this.flightDisplayShift = null;
     } else {
       const prev = player.prevPosition ?? player.position;
       position = {
         wx: prev.wx + (player.position.wx - prev.wx) * alpha,
         wy: prev.wy + (player.position.wy - prev.wy) * alpha,
       };
+    }
+    if (!support && this.flightDisplayShift) {
+      const shift = this.flightDisplayShift;
+      if (player.jumpVZ === undefined) shift.landedAt ??= this.clock();
+      const decay =
+        shift.landedAt === undefined
+          ? 1
+          : Math.exp(-Math.max(0, this.clock() - shift.landedAt) / 0.06);
+      position.wx += shift.wx * decay;
+      position.wy += shift.wy * decay;
     }
     const wz = support
       ? (support.wz ?? 0) + (support.collider?.physicalHeight ?? 0)
@@ -705,18 +735,28 @@ export class PlayerPredictor {
   }
 
   private clearSupport(): void {
+    this.supportDisplayShift = null;
     this.support = null;
     this.supportOffset = this.prevSupportOffset = null;
   }
   private captureSupport(entities: readonly Entity[]): void {
     if (!this.predicted || this.noclip || this.predictedMount) {
+      this.flightDisplayShift = null;
       this.clearSupport();
       return;
     }
     const surface = roofSupport(this.predicted, entities);
     const support = surface && entities.find((e) => e.id === surface.id);
     if (!support) {
-      if (this.support) this.clearPresentationError();
+      if (this.support) {
+        if (
+          this.predicted.jumpVZ !== undefined &&
+          this.predicted.airMomentumX !== undefined &&
+          this.supportDisplayShift
+        )
+          this.flightDisplayShift = { ...this.supportDisplayShift };
+        this.clearPresentationError();
+      }
       this.clearSupport();
       return;
     }
@@ -1018,6 +1058,8 @@ export class PlayerPredictor {
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
     if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;
     if (serverPlayer.jumpVZ !== undefined) clone.jumpVZ = serverPlayer.jumpVZ;
+    if (serverPlayer.airMomentumX !== undefined) clone.airMomentumX = serverPlayer.airMomentumX;
+    if (serverPlayer.airMomentumY !== undefined) clone.airMomentumY = serverPlayer.airMomentumY;
     if (serverPlayer.wz !== undefined) clone.wz = serverPlayer.wz;
     if (serverPlayer.parentId !== undefined) clone.parentId = serverPlayer.parentId;
     if (serverPlayer.localOffsetX !== undefined) clone.localOffsetX = serverPlayer.localOffsetX;

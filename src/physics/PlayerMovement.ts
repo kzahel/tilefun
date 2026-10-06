@@ -22,6 +22,7 @@ import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { clearAirMomentum, clipAirMomentum, inheritAirMomentum } from "./AirborneMomentum.js";
 import type { MovementContext } from "./MovementContext.js";
 import { getSurfaceProperties } from "./SurfaceFriction.js";
 import {
@@ -311,6 +312,7 @@ export function stepPlayerFromInput(
   physics: MovementPhysicsParams,
   substeps = 1,
 ): PlayerStepResult {
+  if (ctx.noclip) clearAirMomentum(entity);
   const initialSurfaces = sampleSurfaces(entity);
   const support = ctx.noclip ? undefined : roofSupport(entity, initialSurfaces.entities);
   const wasGrounded = entity.jumpVZ === undefined;
@@ -348,8 +350,7 @@ export function stepPlayerFromInput(
   if (support?.velocity && entity.velocity) {
     if (entity.jumpVZ !== undefined) {
       inheritedSupportVelocity = true;
-      entity.velocity.vx += support.velocity.vx;
-      entity.velocity.vy += support.velocity.vy;
+      inheritAirMomentum(entity, support.velocity);
     } else if (!ctx.deferRoofCarry) {
       const relative = entity.velocity;
       entity.velocity = { ...support.velocity };
@@ -387,7 +388,12 @@ export function stepPlayerFromInput(
       enteredWater = true;
     }
     if (gravity.landed && next.lastJumpHeld && !next.jumpConsumed) {
+      const landedSupport = roofSupport(entity, surfaces.entities);
       initiateJump(entity, physics);
+      if (landedSupport?.velocity) {
+        inheritAirMomentum(entity, landedSupport.velocity);
+        inheritedSupportVelocity = true;
+      }
       next = { ...next, jumpConsumed: true };
     }
   }
@@ -400,8 +406,7 @@ export function stepPlayerFromInput(
     !inheritedSupportVelocity &&
     entity.jumpVZ !== undefined
   ) {
-    entity.velocity.vx += support.velocity.vx;
-    entity.velocity.vy += support.velocity.vy;
+    inheritAirMomentum(entity, support.velocity);
   }
 
   return {
@@ -556,6 +561,15 @@ export function tickJumpGravity(
       entity.wz = groundZ;
       Reflect.set(entity, "jumpVZ", undefined);
       Reflect.set(entity, "jumpZ", undefined);
+      if (entity.airMomentumX !== undefined || entity.airMomentumY !== undefined) {
+        // World velocity becomes walking velocity relative to the new roof.
+        const support = roofSupport(entity, entities ?? []);
+        if (entity.velocity && support?.velocity) {
+          entity.velocity.vx -= support.velocity.vx;
+          entity.velocity.vy -= support.velocity.vy;
+        }
+        clearAirMomentum(entity);
+      }
       return { landed: true, groundZ };
     }
     entity.jumpZ = entity.wz - groundZ;
@@ -669,6 +683,14 @@ export function applyMovementPhysics(
   if (!entity.velocity) return;
 
   const airborne = entity.jumpVZ !== undefined;
+  // Preserve passive departure motion while the preferred platformer controls
+  // steer/brake only voluntary motion. Quake air control still uses total velocity.
+  const momentumX =
+    airborne && physics.platformerAir && !ctx.noclip ? (entity.airMomentumX ?? 0) : 0;
+  const momentumY =
+    airborne && physics.platformerAir && !ctx.noclip ? (entity.airMomentumY ?? 0) : 0;
+  entity.velocity.vx -= momentumX;
+  entity.velocity.vy -= momentumY;
 
   // Surface properties for friction and speed (ignored while airborne)
   const defaultTerrain = (_tx: number, _ty: number) => 4; // Grass
@@ -712,6 +734,9 @@ export function applyMovementPhysics(
       applyAcceleration(entity, wishdirX, wishdirY, wishspeed, physics.accelerate, dt);
     }
   }
+
+  entity.velocity.vx += momentumX;
+  entity.velocity.vy += momentumY;
 
   // 3. Update sprite from input (not velocity — prevents animation during passive slide)
   if (entity.sprite) {
@@ -780,11 +805,27 @@ export function moveAndCollide(entity: Entity, dt: number, ctx: MovementContext)
   const xBox = getEntityAABB(testX, entity.collider);
   if (!isBlocked(xBox)) {
     entity.position.wx = testX.wx;
-  }
+  } else clipAirMomentum(entity, "x");
 
   const testY = { wx: entity.position.wx, wy: entity.position.wy + dy };
   const yBox = getEntityAABB(testY, entity.collider);
   if (!isBlocked(yBox)) {
     entity.position.wy = testY.wy;
-  }
+  } else clipAirMomentum(entity, "y");
+}
+
+/** Missing commands brake voluntary air motion without erasing departure momentum. */
+export function applyPlatformerAirFriction(
+  entity: Entity,
+  dt: number,
+  physics: MovementPhysicsParams,
+): void {
+  if (!entity.velocity) return;
+  const x = entity.airMomentumX ?? 0,
+    y = entity.airMomentumY ?? 0;
+  entity.velocity.vx -= x;
+  entity.velocity.vy -= y;
+  applyFriction(entity, dt, 1, physics);
+  entity.velocity.vx += x;
+  entity.velocity.vy += y;
 }

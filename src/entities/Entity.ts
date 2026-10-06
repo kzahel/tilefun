@@ -141,6 +141,9 @@ export interface Entity {
   prevWz?: number;
   /** Vertical velocity in world px/s, positive = up. */
   jumpVZ?: number;
+  /** Passive XY departure velocity while airborne; total velocity includes it. */
+  airMomentumX?: number;
+  airMomentumY?: number;
   /** Absolute Z position in world pixels (0 = world floor). */
   wz?: number;
   /** Computed surface height at entity feet in world pixels (not serialized, computed each tick). */

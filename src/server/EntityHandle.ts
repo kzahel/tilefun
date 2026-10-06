@@ -39,6 +39,8 @@ export class EntityHandle {
     if (!this.alive) return;
     if (this.entityManager.canPlace?.(wx, wy) === false)
       throw new Error("Position is outside ready terrain.");
+    delete this.entity.airMomentumX;
+    delete this.entity.airMomentumY;
     this.entity.position.wx = wx;
     this.entity.position.wy = wy;
   }
@@ -336,6 +338,8 @@ export class PlayerHandle extends EntityHandle {
     this.entity.localOffsetX = 0;
     this.entity.localOffsetY = 0;
     this.entity.jumpZ = 10;
+    delete this.entity.airMomentumX;
+    delete this.entity.airMomentumY;
     Reflect.set(this.entity, "jumpVZ", undefined);
     this.entity.noShadow = true;
     this.session.mountId = target.id;

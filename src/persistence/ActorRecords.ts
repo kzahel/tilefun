@@ -27,6 +27,8 @@ export const DURABLE_ENTITY_FIELDS = [
   "deathTimer",
   "wz",
   "jumpVZ",
+  "airMomentumX",
+  "airMomentumY",
   "jumpZ",
   "localOffsetX",
   "localOffsetY",

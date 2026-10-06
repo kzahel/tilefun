@@ -78,6 +78,8 @@ export class RealmTransitions {
               Math.floor(position.wy / TILE_SIZE),
             ) * ELEVATION_PX;
           session.player.groundZ = session.player.wz;
+          delete session.player.airMomentumX;
+          delete session.player.airMomentumY;
           delete session.player.jumpVZ;
           delete session.player.jumpZ;
           session.cameraX = position.wx;

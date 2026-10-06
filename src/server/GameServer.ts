@@ -93,6 +93,8 @@ export class GameServer {
         maxCy: Math.floor(wy / 256) + 3,
       });
       if (session.realmId !== realm.currentWorldId || session.retired) return;
+      delete session.player.airMomentumX;
+      delete session.player.airMomentumY;
       session.player.position = { wx, wy };
       realm.savePlayerData(session);
     };

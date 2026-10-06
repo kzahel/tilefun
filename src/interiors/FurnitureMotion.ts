@@ -243,6 +243,8 @@ export class FurnitureMotion {
     this.player.wz = 0;
     this.player.groundZ = 0;
     delete this.player.jumpZ;
+    delete this.player.airMomentumX;
+    delete this.player.airMomentumY;
     delete this.player.jumpVZ;
   }
   /** Small deterministic 2px path grid; only the game collision adapter decides passability. */

@@ -29,6 +29,8 @@ export interface EntityDelta {
   deathTimer?: number | null;
   jumpZ?: number | null;
   jumpVZ?: number | null;
+  airMomentumX?: number | null;
+  airMomentumY?: number | null;
   wz?: number | null;
   parentId?: number | null;
   localOffsetX?: number | null;
@@ -82,6 +84,8 @@ export function diffEntitySnapshots(
   diffOptionalNum("deathTimer", prev, curr, ensure);
   diffOptionalNum("jumpZ", prev, curr, ensure);
   diffOptionalNum("jumpVZ", prev, curr, ensure);
+  diffOptionalNum("airMomentumX", prev, curr, ensure);
+  diffOptionalNum("airMomentumY", prev, curr, ensure);
   diffOptionalNum("wz", prev, curr, ensure);
   diffOptionalNum("parentId", prev, curr, ensure);
   diffOptionalNum("localOffsetX", prev, curr, ensure);
@@ -116,6 +120,8 @@ type OptionalNumField =
   | "deathTimer"
   | "jumpZ"
   | "jumpVZ"
+  | "airMomentumX"
+  | "airMomentumY"
   | "wz"
   | "parentId"
   | "localOffsetX"
@@ -288,6 +294,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "deathTimer");
   applyOptionalNum(entity, delta, "jumpZ");
   applyOptionalNum(entity, delta, "jumpVZ");
+  applyOptionalNum(entity, delta, "airMomentumX");
+  applyOptionalNum(entity, delta, "airMomentumY");
   applyOptionalNum(entity, delta, "wz");
   applyOptionalNum(entity, delta, "parentId");
   applyOptionalNum(entity, delta, "localOffsetX");
