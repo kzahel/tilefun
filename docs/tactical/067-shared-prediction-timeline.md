@@ -345,3 +345,32 @@ while presentation passes; the evidence preserves it alongside the passing repea
 record measurement timestamps, startup exclusions and limitations. Next work is
 explicit authority-debt, varying motion and reconciliation cases, then separate
 airborne momentum; no new claim about arbitrary server/GC stalls.
+
+### Airborne support momentum (2026-10-06)
+
+User playtest confirms the camera jitter is fixed, including riding trains. The
+next authorized change preserves departure momentum while retaining the preferred
+platformer air-control option. World XY velocity remains the total velocity used
+by collision/integration. Two optional replicated airborne momentum components
+identify the departure platform contribution; platformer friction/acceleration
+operate on the remaining controlled component. Quake air control continues to
+operate on total velocity. No air drag/swimming model is introduced.
+
+Departure samples platform velocity once on jump or walk-off. Subsequent platform
+braking/turning does not influence the airborne player. Landing converts total
+world velocity to velocity relative to the new moving roof, then clears the
+inherited components; ordinary ground retains total velocity for existing friction.
+Wall blocking clips both the blocked total velocity and passive component, so
+momentum cannot reappear after obstruction. Noclip, teleports/respawn, mounting
+and realm/lab resets clear the airborne state. Save/reload and prediction replay
+must retain it during a real airborne flight. Existing ordinary ground/air controls,
+roof colliders, jump height and immutable art remain unchanged.
+
+First checkpoint adds native-carriage pure full-flight contracts at 30/60Hz:
+idle momentum in either travel direction, direction reversal/release, departed
+platform direction changes, forward/backward gap landings, landing/rejump without
+stacking, and blocked/tangential motion. Positive invariants initially use explicit
+expected-failure tests. Stationary-platform and Quake-air controls stay ordinary
+passing tests. Next implement shared state/replication and promote these contracts,
+then verify authority/prediction and actual game/lab consumers, including existing
+60/120Hz presentation controls.
