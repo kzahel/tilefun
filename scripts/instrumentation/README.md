@@ -210,3 +210,12 @@ forward/backward steering and takeoff step error ≤3.5px. Use native headed ful
 Chromium for actual 120Hz display evidence. Roof-offset/steady-idle assertions
 are separate lanes: walking/jumping intentionally changes the passenger offset.
 [Contracts, evidence and limits](../../docs/research/airborne-support-momentum.md).
+
+## Saved train reload pacing
+
+Add `--reload-pacing --headed` to `train-roof-browser.mjs` for a normal page reload
+on a saved moving roof ride, followed by an isolated production clock-reset control.
+The lane leaves native rAF and authority timers intact, records raw sampled clocks
+and borrowed poses, and accepts `--assert-presentation` / `--output=...`.
+It does not claim a real hidden-tab lifecycle test: automated pages are forced
+visible in the measured setup. [Evidence and rerun](../../docs/research/train-refresh-pacing.md).

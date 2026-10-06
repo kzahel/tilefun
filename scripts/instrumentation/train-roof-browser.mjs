@@ -36,7 +36,7 @@ const server = await createServer({
   logLevel: "error",
 });
 let browser;
-try {
+probe: try {
   await server.listen();
   browser = await chromium.launch({
     channel: "chromium",
@@ -124,6 +124,24 @@ try {
     );
     return output;
   };
+  if (process.argv.includes("--reload-pacing")) {
+    if (serverHz === "30") await setRate(30);
+    const { runTrainRefreshProbe } = await import("./train-refresh-probe.mjs");
+    const capture = await runTrainRefreshProbe(page, origin, renderer);
+    const output = option("output", `/tmp/train-refresh-${renderer}-${serverHz}.json`);
+    await writeFile(
+      output,
+      `${JSON.stringify({ renderer, serverHz, errors, ...capture }, null, 2)}\n`,
+    );
+    console.log(JSON.stringify({ output, errors, ...capture.summaries }, null, 2));
+    if (process.argv.includes("--assert-presentation")) {
+      for (const summary of Object.values(capture.summaries))
+        if (summary.steadySteps < 60 || summary.maxStepError > 0.1)
+          throw Error("Refresh presentation continuity failed");
+      if (errors.length) throw Error("Browser errors");
+    }
+    break probe;
+  }
   const rateCommands = [
     { hz: serverHz === "30" ? 30 : 60, output: await setRate(serverHz === "30" ? 30 : 60) },
   ];

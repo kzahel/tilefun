@@ -12,6 +12,13 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
+New playtest follow-up: [reload pacing](../research/train-refresh-pacing.md)
+reproduces persistent train/rider stepping after refresh despite stable relative
+prediction. GPU approximately-120Hz capture and four deterministic expected
+failures isolate early clock initialization and retained forward clock debt.
+Fixing shared snapshot-anchored startup/recovery is the immediate next slice;
+the earlier ordinary-play camera acceptance does not cover this startup path.
+
 Latest: [airborne support momentum](../research/airborne-support-momentum.md) preserves
 platform departure velocity while retaining platformer air steering. Landing converts
 to new-roof-relative velocity; collision, missing-input ticks, save/reopen and

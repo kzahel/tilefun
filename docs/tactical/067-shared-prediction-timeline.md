@@ -440,3 +440,15 @@ lane without loosening acceptance. No source/build mutation during browser runs.
 record defaults, replay/reset boundaries and remaining limits. Next is human
 jump-distance/steering feedback, then explicit varying-motion/authority-debt cases;
 water/air drag and service tickets remain separate future work.
+
+## Reload pacing reproduction (2026-10-06)
+
+The new [reload pacing evidence](../research/train-refresh-pacing.md) reproduces
+native GPU approximately-120Hz train/rider stepping after normal saved-world
+refresh. All 600 settled reload steps exceed 0.1px error (max 1.806px), versus
+~0.002px before reload and after an isolated production clock reset. Nine pure
+controls include four expected failures before runtime edits. Clock creation
+before the first snapshot and permanently retained forward source debt are
+isolated; the browser reset control does not claim native visibility recovery.
+Next: snapshot-anchored startup and bounded monotonic exhaustion/burst recovery
+in the shared game/lab sampler, then repeat the existing controls and native lane.
