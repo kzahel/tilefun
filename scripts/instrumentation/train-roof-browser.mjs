@@ -16,6 +16,11 @@ const jumpMomentum = process.argv.includes("--jump-momentum");
 if (jumpMomentum && serverHz === "alternate")
   throw Error("Use a fixed server rate for jump flights");
 const renderHz = option("render-hz", "native");
+if (
+  process.argv.includes("--reload-pacing") &&
+  (renderHz !== "native" || serverHz === "alternate" || delay || jumpMomentum)
+)
+  throw Error("Reload pacing requires native render, a fixed rate, no emulation and no jumping");
 if (!["30", "60", "alternate"].includes(serverHz) || !["native", "120"].includes(renderHz))
   throw Error("Use --server-hz=30|60|alternate and --render-hz=native|120");
 if (!["canvas", "gpu"].includes(renderer) || !Number.isFinite(delay) || delay < 0 || delay > 200)
@@ -127,7 +132,7 @@ probe: try {
   if (process.argv.includes("--reload-pacing")) {
     if (serverHz === "30") await setRate(30);
     const { runTrainRefreshProbe } = await import("./train-refresh-probe.mjs");
-    const capture = await runTrainRefreshProbe(page, origin, renderer);
+    const capture = await runTrainRefreshProbe(page, origin, renderer, serverHz);
     const output = option("output", `/tmp/train-refresh-${renderer}-${serverHz}.json`);
     await writeFile(
       output,
@@ -136,7 +141,14 @@ probe: try {
     console.log(JSON.stringify({ output, errors, ...capture.summaries }, null, 2));
     if (process.argv.includes("--assert-presentation")) {
       for (const summary of Object.values(capture.summaries))
-        if (summary.steadySteps < 60 || summary.maxStepError > 0.1)
+        if (
+          summary.steadySteps < 60 ||
+          summary.maxStepError > 0.1 ||
+          summary.maxPlayerStepError > 0.1 ||
+          summary.roofOffsetRange > 0.02 ||
+          summary.maxCameraStepError > 0.1 ||
+          summary.advertisedRates.some((hz) => Math.abs(hz - Number(serverHz)) > 0.001)
+        )
           throw Error("Refresh presentation continuity failed");
       if (errors.length) throw Error("Browser errors");
     }

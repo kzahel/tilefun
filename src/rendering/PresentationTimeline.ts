@@ -64,8 +64,10 @@ export interface PresentationClock {
   sourceOrigin: number;
   time: number;
 }
-/** Late arrivals don't reset the clock. Once history is exhausted, hold time;
- * newly delivered data resumes it. Explicit pause/reset establishes a new epoch.
+/** Ordinary late arrivals don't reset the clock. Exhausted history holds time
+ * and discards unreachable forward debt, allowing a steady stream to recover.
+ * A large source burst catches up to its buffer rather than falling behind the
+ * bounded history forever. Both recoveries are monotonic and pose-independent.
  */
 export function advancePresentationClock(
   state: PresentationClock,
@@ -75,6 +77,13 @@ export function advancePresentationClock(
 ): PresentationClock {
   const wanted =
     state.sourceOrigin + Math.max(0, now - state.localOrigin) * rate - PRESENTATION_DELAY;
-  const time = Math.max(state.time, Math.min(wanted, latest + MAX_PRESENTATION_EXTRAPOLATION));
-  return { ...state, time };
+  const exhausted = wanted > latest + MAX_PRESENTATION_EXTRAPOLATION;
+  const burst = latest - wanted > PRESENTATION_DELAY + MAX_PRESENTATION_EXTRAPOLATION;
+  const time = Math.max(
+    state.time,
+    burst ? latest - PRESENTATION_DELAY : Math.min(wanted, latest + MAX_PRESENTATION_EXTRAPOLATION),
+  );
+  return exhausted || burst
+    ? { localOrigin: now, sourceOrigin: time + PRESENTATION_DELAY, time }
+    : { ...state, time };
 }

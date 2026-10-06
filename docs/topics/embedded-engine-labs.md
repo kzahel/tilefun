@@ -264,3 +264,9 @@ support-to-flight display translation and ScenarioSession teleport/reset removal
 Native ScenarioSession car/train tests run the same Realm and binary replicas at
 30/60Hz. No lab-specific airborne physics or renderer is introduced.
 [Evidence](../research/airborne-support-momentum.md) records scoped acceptance.
+
+
+Saved-train reload pacing now uses snapshot-anchored RemotePresentation startup
+and pure bounded clock-debt recovery in the common RemoteStateView. Loading
+renders, scenario reset and game refresh share this owner; no lab clock or
+renderer-specific correction is added. [Reproduction/contract](../research/train-refresh-pacing.md).

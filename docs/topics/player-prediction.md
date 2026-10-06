@@ -14,9 +14,11 @@ own their autonomous motion and service behavior.
 
 New playtest follow-up: [reload pacing](../research/train-refresh-pacing.md)
 reproduces persistent train/rider stepping after refresh despite stable relative
-prediction. GPU approximately-120Hz capture and four deterministic expected
-failures isolate early clock initialization and retained forward clock debt.
-Fixing shared snapshot-anchored startup/recovery is the immediate next slice;
+prediction. GPU approximately-120Hz capture and four historical deterministic failures
+isolate early clock initialization and retained forward clock debt. The shared
+sampler now anchors to the first snapshot and rebases unusable debt monotonically;
+nine startup regressions and two burst/exhaustion clock checks pass. Native/full
+verification of this slice follows;
 the earlier ordinary-play camera acceptance does not cover this startup path.
 
 Latest: [airborne support momentum](../research/airborne-support-momentum.md) preserves

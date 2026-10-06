@@ -43,7 +43,7 @@ it.each([
 it("aligned 60Hz authority/display masks the staircase", () => {
   expect(startupTrace(60, 60, 0.6)).toBeLessThan(1e-9);
 });
-it.fails.each([
+it.each([
   [60, 120],
   [30, 120],
   [30, 60],
@@ -54,7 +54,7 @@ it.fails.each([
   },
 );
 
-it.fails("anchors the first authority snapshot even when rendering began during loading", () => {
+it("anchors the first authority snapshot even when rendering began during loading", () => {
   const view = new RemotePresentation();
   view.sample([], 0.4);
   const train = createTrain(0, 64);

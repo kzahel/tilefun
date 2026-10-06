@@ -46,3 +46,25 @@ it.each([30, 60, 120])("composes camera motion across a missing render interval 
   expect(advanceCameraFollow(missing, 1, 200, 90)).toBe(missing);
   expect(advanceCameraFollow(missing, 0, 200, 90)).toBe(missing);
 });
+
+it("rebases exhausted forward debt without rewinding or resetting ordinary arrivals", () => {
+  const start = Object.freeze({ localOrigin: 0, sourceOrigin: 0, time: 0 });
+  const held = advancePresentationClock(start, 0.6, 0);
+  expect(held.time).toBeCloseTo(0.1);
+  expect(held.localOrigin).toBe(0.6);
+  const next = advancePresentationClock(held, 0.6 + 1 / 120, 1 / 60);
+  expect(next.time - held.time).toBeCloseTo(1 / 120);
+  expect(next.localOrigin).toBe(held.localOrigin);
+  expect(next.sourceOrigin).toBe(held.sourceOrigin);
+  const late = advancePresentationClock(next, 0.6 + 2 / 120, 1 / 60);
+  expect(late.time - next.time).toBeCloseTo(1 / 120);
+  expect(start).toEqual({ localOrigin: 0, sourceOrigin: 0, time: 0 });
+});
+it("recovers a large source burst after a delivery hold and remains smooth afterward", () => {
+  const held = advancePresentationClock({ localOrigin: 0, sourceOrigin: 0, time: 0 }, 2, 0.95);
+  const resumed = advancePresentationClock(held, 2.1, 2.1);
+  expect(resumed.time).toBeCloseTo(2.05);
+  const next = advancePresentationClock(resumed, 2.1 + 1 / 120, 2.1);
+  expect(next.time - resumed.time).toBeCloseTo(1 / 120);
+  expect(next.time).toBeGreaterThan(held.time);
+});

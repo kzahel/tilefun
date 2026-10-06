@@ -452,3 +452,10 @@ before the first snapshot and permanently retained forward source debt are
 isolated; the browser reset control does not claim native visibility recovery.
 Next: snapshot-anchored startup and bounded monotonic exhaustion/burst recovery
 in the shared game/lab sampler, then repeat the existing controls and native lane.
+
+The shared sampler now waits for its first snapshot before starting the source
+clock. Exhaustion rebases unreachable forward debt without rewinding; a separate
+large-delivery-burst recovery avoids falling permanently behind pruned history.
+All nine startup regressions and two additional pure clock contracts pass, as do
+91 focused game/lab tests, all three typechecks and both continuous-presentation
+CLIs. Camera response, movement/momentum and authority clocks remain unchanged.

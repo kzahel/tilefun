@@ -1,5 +1,5 @@
 /** Observe normal refresh; a separate explicit reset control isolates clock recovery. */
-export async function runTrainRefreshProbe(page, origin, renderer) {
+export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
   const install = () =>
     page.evaluate(() => {
       const game = document.querySelector("#game").__game;
@@ -8,7 +8,7 @@ export async function runTrainRefreshProbe(page, origin, renderer) {
       const render = game.loop.callbacks.render;
       const restore = game.camera.restoreActual;
       const frames = [];
-      let pose, camera;
+      let pose, camera, player;
       presentation.sample = function (entities, now, paused) {
         const result = sample.call(this, entities, now, paused);
         const car = result.find((e) => e.type === "train-curve-proof-v1");
@@ -27,17 +27,20 @@ export async function runTrainRefreshProbe(page, origin, renderer) {
               Math.max(0, now - this.clock.localOrigin) * this.rate -
               0.05,
             playerZ: game.remoteView.serverPlayerEntity.wz,
+            tickRate: game.remoteView.tickRate,
           };
         return result;
       };
       game.camera.restoreActual = function () {
         camera = { x: this.x, y: this.y };
+        player = { ...game.remoteView.presentedPlayerEntity.position };
         return restore.call(this);
       };
       game.loop.callbacks.render = (alpha, now) => {
-        pose = camera = undefined;
+        pose = camera = player = undefined;
         render(alpha, now);
-        if (pose && camera) frames.push({ ...pose, camera, tick: game.remoteView.serverTick });
+        if (pose && camera)
+          frames.push({ ...pose, camera, player, tick: game.remoteView.serverTick });
       };
       window.finishRefreshProbe = () => {
         presentation.sample = sample;
@@ -76,6 +79,17 @@ export async function runTrainRefreshProbe(page, origin, renderer) {
     const g = document.querySelector("#game")?.__game;
     return g?.initDone && g.remoteView.serverPlayerEntity.wz === 44;
   });
+  // Runtime CVars are not necessarily durable. Request the selected stream rate
+  // after reopen; presentation uses elapsed simulation time, not tick count.
+  if (serverHz === "30")
+    await page.evaluate(async () => {
+      const g = document.querySelector("#game").__game;
+      await g.gcSendRequest({
+        type: "rcon",
+        requestId: g.nextRequestId++,
+        command: "sv_tickrate 30",
+      });
+    });
   const reloaded = await collect(6);
   // Same presentation reset used by visibilitychange, isolated from browser
   // automation's forced-visible pages. This is a reset control, not a tab-switch test.
@@ -85,6 +99,8 @@ export async function runTrainRefreshProbe(page, origin, renderer) {
   const resetControl = await collect(6);
   const summarize = ({ frames, initial }) => {
     const errors = [],
+      playerErrors = [],
+      offsets = [],
       cameraErrors = [],
       leads = [];
     let since;
@@ -99,6 +115,8 @@ export async function runTrainRefreshProbe(page, origin, renderer) {
       if (b.t - since < 1) continue;
       const dt = b.t - a.t;
       errors.push(Math.abs(b.x - a.x - 192 * dt));
+      playerErrors.push(Math.abs(b.player.wx - a.player.wx - 192 * dt));
+      offsets.push(b.player.wx - b.x);
       cameraErrors.push(Math.abs(b.camera.x - a.camera.x - 192 * dt));
       leads.push(b.wanted - b.latest);
     }
@@ -107,6 +125,9 @@ export async function runTrainRefreshProbe(page, origin, renderer) {
       frames: frames.length,
       steadySteps: errors.length,
       maxStepError: Math.max(0, ...errors),
+      maxPlayerStepError: Math.max(0, ...playerErrors),
+      roofOffsetRange: Math.max(...offsets) - Math.min(...offsets),
+      advertisedRates: [...new Set(frames.map((f) => f.tickRate))],
       maxCameraStepError: Math.max(0, ...cameraErrors),
       wantedLeadMin: Math.min(...leads),
       wantedLeadMax: Math.max(...leads),

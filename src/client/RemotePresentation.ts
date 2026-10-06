@@ -12,13 +12,13 @@ import {
 export class RemotePresentation {
   private history = new Map<number, MotionSample[]>();
   private clock: PresentationClock | null = null;
-  private latest = 0;
+  private latest: number | null = null;
   private wasPaused = false;
   private rate = 1;
 
   setRate(rate: number, now: number) {
     if (!Number.isFinite(rate) || rate < 0 || rate === this.rate) return;
-    if (this.clock) {
+    if (this.clock && this.latest !== null) {
       const state = advancePresentationClock(this.clock, now, this.latest, this.rate);
       this.clock = {
         localOrigin: now,
@@ -30,7 +30,7 @@ export class RemotePresentation {
   }
 
   record(entities: readonly Entity[], time: number, receivedAt: number) {
-    if (time < this.latest) this.clear();
+    if (this.latest !== null && time < this.latest) this.clear();
     this.latest = time;
     this.clock ??= { localOrigin: receivedAt, sourceOrigin: time, time: time - PRESENTATION_DELAY };
     const ids = new Set(entities.map((e) => e.id));
@@ -49,6 +49,9 @@ export class RemotePresentation {
   }
 
   sample(entities: readonly Entity[], now: number, paused = false): Entity[] {
+    // Loading renders are not source-clock samples. The first authority record
+    // establishes the epoch, however long asset/world preparation has taken.
+    if (this.latest === null) return [...entities];
     if (paused || this.wasPaused || !this.clock) {
       // Resume from the frozen current pose, with no hidden-wall-time debt.
       this.clock = {
@@ -79,7 +82,7 @@ export class RemotePresentation {
   clear() {
     this.history.clear();
     this.clock = null;
-    this.latest = 0;
+    this.latest = null;
     this.wasPaused = false;
   }
 }

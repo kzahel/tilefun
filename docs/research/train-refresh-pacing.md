@@ -65,3 +65,22 @@ The browser lane retains raw clocks, authority times and borrowed train/camera
 poses. This is numeric render-path evidence, not visual inspection or a screenshot
 FPS estimate. A fixed 30Hz variant uses `--server-hz=30`; captures must report the
 actual advertised rate after reopen, rather than assuming CVars persist.
+
+## Shared correction
+
+RemotePresentation now distinguishes “no snapshot yet” from source time zero.
+Loading renders cannot establish an epoch; the first applied authority snapshot
+anchors it. The pure PresentationTimeline rebases unreachable forward debt when
+its 100ms extrapolation limit holds, without rewinding the held pose. Ordinary
+in-buffer arrivals preserve the origin. If a later delivery burst puts authority
+more than buffer + extrapolation (150ms) ahead of wanted time, it catches up to
+latest minus the 50ms buffer; otherwise exhausted-clock rebasing could instead
+leave it permanently behind history as that bounded history is pruned.
+
+All nine startup checks are now normal passing regressions. Two additional pure
+clock checks cover immutable monotonic exhaustion and long delayed-data burst
+recovery. Focused game/lab presentation tests (91 checks), all three typechecks,
+and both deterministic continuity CLIs pass. Native and full validation follow.
+This changes shared replica sampling, not physics, train service motion, passenger
+momentum or camera response. A long absence of authoritative data may still hold
+and then correct; it cannot cause a permanently stale clock epoch.
