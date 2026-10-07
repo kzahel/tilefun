@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-07T08:04:36.282Z",
+  "command": "npm run streaming:bench -- --assert-ready",
+  "scope": "Production game regression after aligning interactive scenario clocks. Lab cadence is covered by ScenarioScheduling and scenario-scheduling browser tests; these measurements do not establish matched scene frame-pacing parity.",
+  "platform": "darwin 25.6.0 arm64",
+  "cpu": "Apple M4 Pro",
+  "renderer": "canvas",
+  "cpuRate": 1,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "fixtures": [
+    {
+      "version": "current",
+      "errors": [],
+      "failures": [],
+      "samples": [
+        {
+          "name": "cold",
+          "frames": 120,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 2,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "visitedChunks": 9,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "maxPredictionErrorPx": 0
+        },
+        {
+          "name": "standing",
+          "frames": 120,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "visitedChunks": 9,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "maxPredictionErrorPx": 0
+        },
+        {
+          "name": "walk",
+          "frames": 180,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "visitedChunks": 9,
+          "displacement": {
+            "x": -222.0712890625,
+            "y": 0
+          },
+          "maxPredictionErrorPx": 0.00034950000008393545
+        },
+        {
+          "name": "sprint",
+          "frames": 300,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "visitedChunks": 15,
+          "displacement": {
+            "x": -738.601318359375,
+            "y": 0
+          },
+          "maxPredictionErrorPx": 0.0002775624998321291
+        },
+        {
+          "name": "reverse",
+          "frames": 300,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "visitedChunks": 15,
+          "displacement": {
+            "x": 738.60107421875,
+            "y": 0
+          },
+          "maxPredictionErrorPx": 0.0002775624998321291
+        },
+        {
+          "name": "zoom-out",
+          "frames": 180,
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "visitedChunks": 12,
+          "displacement": {
+            "x": 0,
+            "y": 0
+          },
+          "maxPredictionErrorPx": 0
+        }
+      ]
+    }
+  ]
+}

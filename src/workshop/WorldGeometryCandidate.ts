@@ -32,6 +32,7 @@ import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import roofSupport from "../traffic/RoofSupport.ts?raw";
 import traffic from "../traffic/TrafficSystem.ts?raw";
 import curveLayout from "./CurvedTrainPreview.ts?raw";
+import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildWorldGeometryCandidate(
@@ -44,6 +45,7 @@ export async function buildWorldGeometryCandidate(
   const fingerprint = await sha256(
     new TextEncoder().encode(
       JSON.stringify({
+        runtime: scenarioRuntimeSource,
         ...(vehicle ? { traffic, reverseRecipe: vehicleGeometryRecipe(garage, true) } : {}),
         ...(trainGrade ? { railway, trainBodies, reverseRecipe: trainGeometryRecipe(true) } : {}),
         recipe: trainGrade
@@ -126,6 +128,7 @@ export async function buildGeneratedCrossingCandidate(index: number): Promise<Wo
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
+          runtime: scenarioRuntimeSource,
           scene,
           reverse: generatedCrossingRecipe(index, true),
           planner,
@@ -161,6 +164,7 @@ export async function buildCurvedTrainCandidate(loop: boolean): Promise<Workshop
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
+          runtime: scenarioRuntimeSource,
           recipe: curvedTrainRecipe(loop),
           reverse: curvedTrainRecipe(loop, true),
           railway,
@@ -194,6 +198,7 @@ export async function buildCityTrainCandidate(): Promise<WorkshopCandidate> {
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
+          runtime: scenarioRuntimeSource,
           recipe: cityTrainRecipe(),
           planner,
           curvedPlanner,

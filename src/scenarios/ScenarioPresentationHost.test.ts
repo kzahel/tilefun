@@ -14,7 +14,10 @@ const mocks = vi.hoisted(() => ({
   factory: vi.fn(),
   collect: vi.fn(() => []),
   terrain: vi.fn(),
-  step: vi.fn(() => true),
+  submitInput: vi.fn(() => true),
+  pump: vi.fn(),
+  setRunning: vi.fn(),
+  diagnostics: vi.fn(),
   command: vi.fn(async () => {}),
   beginPresentation: vi.fn(),
   endPresentation: vi.fn(),
@@ -43,7 +46,10 @@ vi.mock("./ScenarioClient.js", () => ({
       resetPresentationClock: mocks.resetPresentationClock,
       cameraPresentation: { time: 0, domain: "remote" },
     };
-    step = mocks.step;
+    submitInput = mocks.submitInput;
+    pump = mocks.pump;
+    setRunning = mocks.setRunning;
+    getDiagnostics = mocks.diagnostics;
     command = mocks.command;
     dispose = mocks.terminate;
   },
@@ -86,12 +92,15 @@ it("configures full gameplay assets, starts at the fixture and detaches visibili
   expect(mocks.resize).toHaveBeenCalledWith(960, 600);
   expect([host.camera.x, host.camera.y]).toEqual([80, 148]);
   expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
+  expect(mocks.setRunning).toHaveBeenLastCalledWith(true);
   Object.defineProperty(document, "hidden", { value: true, configurable: true });
   document.dispatchEvent(new Event("visibilitychange"));
   expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
+  expect(mocks.setRunning).toHaveBeenLastCalledWith(false);
   Object.defineProperty(document, "hidden", { value: false });
   document.dispatchEvent(new Event("visibilitychange"));
   expect(requestAnimationFrame).toHaveBeenCalledTimes(2);
+  expect(mocks.setRunning).toHaveBeenLastCalledWith(true);
   expect(mocks.resetPresentationClock).toHaveBeenCalledTimes(3);
   host.dispose();
   host.dispose();
@@ -158,7 +167,7 @@ it("keeps diagnostic framing through ticks/commands and submits overlays around 
   expect(mocks.load).not.toHaveBeenCalled();
   const tick = vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0];
   tick?.(performance.now() + 25);
-  expect(mocks.step).toHaveBeenCalled();
+  expect(mocks.submitInput).toHaveBeenCalled();
   expect(mocks.terrain).not.toHaveBeenCalled();
   expect(mocks.collect).toHaveBeenCalled();
   expect(mocks.beginPresentation).toHaveBeenCalled();
@@ -196,7 +205,8 @@ it("cycles a presentation-only pose while authority is paused, then restores the
   for (let i = 1; i <= 30; i++) {
     vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + i * 100);
   }
-  expect(mocks.step).not.toHaveBeenCalled();
+  expect(mocks.submitInput).not.toHaveBeenCalled();
+  expect(mocks.setRunning).toHaveBeenLastCalledWith(false);
   expect(host.presentedPlayer.sprite).toMatchObject({ direction: 1, frameRow: 1, moving: true });
   expect(host.presentedPlayer).not.toBe(player);
   expect(player).toEqual(original);
@@ -216,7 +226,8 @@ it("cycles a presentation-only pose while authority is paused, then restores the
   );
   cycle = false;
   vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + 3100);
-  expect(mocks.step).toHaveBeenCalled();
+  expect(mocks.submitInput).toHaveBeenCalled();
+  expect(mocks.setRunning).toHaveBeenLastCalledWith(true);
   expect(host.presentedPlayer).toBe(player);
   expect(player.sprite).toEqual(original.sprite);
   host.dispose();
@@ -248,8 +259,8 @@ it("uses the moving diagnostic camera for streaming as well as drawing", async (
   const start = performance.now();
   for (let i = 1; i <= 3; i++)
     vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + i * 100);
-  expect(mocks.step).toHaveBeenCalled();
-  expect(mocks.step).toHaveBeenLastCalledWith(
+  expect(mocks.submitInput).toHaveBeenCalled();
+  expect(mocks.submitInput).toHaveBeenLastCalledWith(
     expect.anything(),
     expect.any(Number),
     expect.objectContaining({ minCx: 18 }),

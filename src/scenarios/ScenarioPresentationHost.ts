@@ -123,16 +123,30 @@ export class ScenarioPresentationHost {
     this.session.view.resetPresentationClock();
     this.camera.requestSnap();
     this.loop.stop();
+    try {
+      this.syncAuthority();
+    } catch (error) {
+      this.fail(error);
+      return;
+    }
     if (!this.disposed && this.host && !document.hidden) this.loop.start();
   };
 
-  private get paused() {
+  private get pauseRequested() {
     return (
       this.options.settings().paused ||
       !!this.options.poseCycle?.() ||
       document.hidden ||
       this.controls > 0
     );
+  }
+
+  private get paused() {
+    return this.pauseRequested || this.session.busy;
+  }
+
+  private syncAuthority() {
+    if (!this.disposed) this.session.setRunning(!!this.host && !this.pauseRequested);
   }
 
   private snapCamera() {
@@ -149,6 +163,13 @@ export class ScenarioPresentationHost {
 
   private update(dt: number) {
     if (this.disposed || document.hidden) return;
+    try {
+      this.session.pump();
+      this.syncAuthority();
+    } catch (error) {
+      this.fail(error);
+      return;
+    }
     this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
     if (this.paused) return;
     try {
@@ -159,7 +180,7 @@ export class ScenarioPresentationHost {
         this.camera.x = fixed.wx;
         this.camera.y = fixed.wy;
       }
-      this.interpolate = this.session.step(
+      this.interpolate = this.session.submitInput(
         this.options.input(),
         dt,
         this.camera.getVisibleChunkRange(),
@@ -182,6 +203,12 @@ export class ScenarioPresentationHost {
 
   private render(alpha: number, now = performance.now() / 1000) {
     if (this.disposed || !this.host) return;
+    try {
+      this.syncAuthority();
+    } catch (error) {
+      this.fail(error);
+      return;
+    }
     const { renderer } = this.host;
     const view = this.session.view;
     this.camera.zoom = this.options.settings().zoom;
@@ -331,6 +358,7 @@ export class ScenarioPresentationHost {
       terrain,
       alpha: this.alpha,
       steps: this.steps,
+      authority: this.session.getDiagnostics(),
       cameraX: this.renderX,
       cameraY: this.renderY,
       // Optional backend diagnostics stay outside presentation policy.
@@ -340,11 +368,13 @@ export class ScenarioPresentationHost {
 
   async command(command: ScenarioCommand) {
     this.controls++;
+    this.syncAuthority();
     try {
       await this.session.command(command);
       if (!this.disposed) this.snapCamera();
     } finally {
       this.controls--;
+      this.syncAuthority();
     }
   }
 

@@ -289,7 +289,15 @@ export class ScenarioSession {
       }
     this.realm.entityManager.spatialHash.update(this.player.player);
   }
-  async ready(range?: ChunkRange) {
+  private setViewRange(range?: ChunkRange) {
+    if (
+      range &&
+      (!Object.values(range).every(Number.isSafeInteger) ||
+        range.maxCx < range.minCx ||
+        range.maxCy < range.minCy ||
+        (range.maxCx - range.minCx + 1) * (range.maxCy - range.minCy + 1) > 4096)
+    )
+      throw new Error("Invalid scenario view range");
     const p = this.player.player.position,
       cx = Math.floor(p.wx / 256),
       cy = Math.floor(p.wy / 256);
@@ -308,8 +316,17 @@ export class ScenarioSession {
       minCy: Math.min(view.minCy, cy - 2),
       maxCy: Math.max(view.maxCy, cy + 2),
     };
+  }
+  async ready(range?: ChunkRange) {
+    this.setViewRange(range);
     this.realm.updateVisibleChunks(this.player.visibleRange);
     await this.realm.ensureReady(this.player.visibleRange);
+    this.applyAuthoredRailPaths();
+    await this.realm.railway?.settle();
+    if (this.realm.railway?.error) throw this.realm.railway.error;
+  }
+  private applyAuthoredRailPaths() {
+    if (!this.recipe.railways?.some((line) => line.path)) return;
     for (const [key, chunk] of this.realm.world.chunks.entries()) {
       const [cx, cy] = key.split(",").map(Number);
       const paths = (this.recipe.railways ?? [])
@@ -325,8 +342,29 @@ export class ScenarioSession {
         });
       if (paths.length) chunk.railPaths = paths;
     }
-    await this.realm.railway?.settle();
-    if (this.realm.railway?.error) throw this.realm.railway.error;
+  }
+  /** Normal live input admission; streaming readiness is owned by Realm.tick. */
+  input(buffer: ArrayBuffer, range?: ChunkRange) {
+    if (this.closed) throw new Error("Scenario is closed");
+    const message = decodeClientMessage(buffer);
+    if (message.type !== "player-input") throw new Error("Expected scenario player input");
+    this.setViewRange(range);
+    this.seq = Math.max(this.seq, message.seq);
+    this.realm.handleMessage(this.player.clientId, this.player, message);
+  }
+  /** Synchronous production authority tick, independent of client/render cadence. */
+  tick(dt: number, publish = false): ArrayBuffer[] {
+    if (this.closed) throw new Error("Scenario is closed");
+    const frames: ArrayBuffer[] = [];
+    this.transport.clientSide.onMessage((message) => frames.push(encodeServerMessage(message)));
+    this.applyAuthoredRailPaths();
+    this.realm.tick(dt, this.transport.serverSide, publish, new Set());
+    return frames;
+  }
+  discardInputs() {
+    this.player.lastProcessedInputSeq =
+      this.player.inputQueue.at(-1)?.seq ?? this.player.lastProcessedInputSeq;
+    this.player.inputQueue.length = 0;
   }
   async step(input: Movement, dt = 1 / 60, range?: ChunkRange) {
     if (this.closed) throw new Error("Scenario is closed");
@@ -343,13 +381,8 @@ export class ScenarioSession {
       encodeClientMessage({ type: "player-input", ...input, seq: ++this.seq, dtMs: dt * 1000 }),
     );
     if (message.type !== "player-input") throw new Error("Invalid input codec");
-    this.player.inputQueue.push(message);
-    this.realm.tick(
-      (message.dtMs ?? dt * 1000) / 1000,
-      this.transport.serverSide,
-      false,
-      new Set(),
-    );
+    this.realm.handleMessage(this.player.clientId, this.player, message);
+    this.tick((message.dtMs ?? dt * 1000) / 1000);
   }
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");

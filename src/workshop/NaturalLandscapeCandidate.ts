@@ -22,6 +22,7 @@ import {
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import recipes from "../scenarios/NaturalLandscapeRecipe.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
+import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildNaturalCandidate(
@@ -52,6 +53,7 @@ export async function buildNaturalCandidate(
           propGeometry,
           forestPatterns,
           presentation,
+          runtime: scenarioRuntimeSource,
           drawing,
           spriteDrawing,
           sceneCollection,

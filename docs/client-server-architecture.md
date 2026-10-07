@@ -1,6 +1,6 @@
 # Client/server architecture
 
-Current implementation map, checked 2026-10-06. The
+Current implementation map, checked 2026-10-07. The
 [original extraction plan](archive/client-server-extraction-plan.md) is archived;
 its shared-memory local mode and “future” multiplayer phases are historical.
 
@@ -30,8 +30,11 @@ path still exists for specialized callers/tests; it is not the default launcher.
 All timed GameServer hosts use ServerLoop's monotonic fixed-step deadlines.
 Integer timer rounding and callback work do not accumulate simulation drift;
 short late wakes catch up, long stalls bound overdue debt to 250ms, and stop/resume
-or rate changes start a fresh schedule. Embedded scenarios instead advance explicit
-authority steps through ScenarioSession; they do not use ServerLoop.
+or rate changes start a fresh schedule. Interactive embedded scenarios now use the
+same ServerLoop and OrderedWorkerChannel. Their temporary Realm host separates
+input admission from ticks and uses ordinary streaming readiness policy. Explicit
+ScenarioSession steps remain available for headless tests and paused inspection.
+See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity limits.
 
 ## Transport and requests
 

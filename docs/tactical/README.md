@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [069 Interactive authority scheduling](069-interactive-authority-scheduling.md) | Delivered shared authority clock/transport and lifecycle/streaming regressions; [embedded labs](../topics/embedded-engine-labs.md) |
 | [001 Modern interiors](001-modern-interiors-plan.md) | Original parent plan; later deliveries continue in 002/003/011 and [interiors topic](../topics/patterns-and-interiors.md) |
 | [002 Wall solver](002-interior-wall-solver-plan.md) | Wall checkpoint stable, 233 approved cases; retain as execution history |
 | [003 Furniture](003-interior-furniture-plan.md) | Catalog/motion/depth delivered; final record reopens two reviews; consult live inbox |

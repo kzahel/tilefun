@@ -7,7 +7,7 @@ identity/lifetime fixed, gameplay grass frame storage and terrain scheduler reco
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
-Updated: 2026-10-05.
+Updated: 2026-10-07.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -36,6 +36,12 @@ the remaining recommendations are not implemented fixes.
   measurements. Benchmark render wrappers forward the actual render timestamp.
   Streaming readiness is not a frame-pacing proof; injected absent callbacks do
   not measure real GC, and variable motion/long authority debt remain outside acceptance.
+- Interactive labs now use the production ServerLoop and OrderedWorkerChannel;
+  a render stall no longer stops authority. Live Realm ticks use normal streaming
+  admission rather than waiting for the entire view. Manual headless fixtures keep
+  explicit readiness/steps. [Scheduling evidence](../tactical/069-interactive-authority-scheduling.md)
+  distinguishes authority cadence, input submission and output backpressure;
+  synthetic browser stalls establish independence, not physical-device pacing.
 - Terrain cache preparation runs ahead of the camera. Measure both visible
   readiness and frame pacing. Explicit progressive presentation may accept gaps
   to preserve responsiveness; report gap duration, backlog and catch-up alongside

@@ -51,20 +51,35 @@ Changed review pixels still follow [art review](art-review.md).
 
 `ScenarioSession` hosts a production Realm over `MemoryRecordStore` and
 `RecordPersistenceStore`; `ScenarioClient` uses a dedicated scenario Worker,
-binary replicas and `PlayerPredictor`. This is a temporary engine host, with
-explicit step scheduling, rather than the game's complete `LocalServerRuntime`
-and `GameClient` composition. The simulation migration is delivered.
+binary replicas and `PlayerPredictor`. Interactive authority uses the same
+`ServerLoop` as GameServer: fixed monotonic deadlines, bounded catch-up and a fresh
+schedule after pause/resume. Main-thread GameLoop ticks submit binary input and
+predict locally; they no longer advance authority. Unsolicited snapshots flow
+through production `OrderedWorkerChannel`, with the same credits, byte/count
+bounds and 2ms client decode budget. Output pressure defers replication without
+advancing its delta baselines; authority keeps ticking.
 
-Explicit stepping originated with repeatable headless scenario tests: callers can
-advance an exact number of ticks, await world readiness, and inspect/reset/reload
-without real-time sleeps. Interactive labs reuse that host; their main-thread
-GameLoop requests serialized Worker steps, with at most six outstanding requests.
-The game instead starts GameServer's independent ServerLoop in its authority
-Worker, which must also support remote clients independently of their rendering.
-This is a host/testability choice, not a requirement of in-memory storage or Realm.
-Lab pause/readiness/backpressure therefore do not reproduce game authority timing.
-Use the actual game host for timing regressions; a future live-host consolidation
-should retain an injectable manual clock for deterministic tests and inspection.
+Live ticks call the normal Realm streaming/replication path and do not await a
+fully ready visible range. Realm's shared support admission decides when actors
+can advance. Initial fixture construction and explicit inspection commands still
+await readiness. Headless `ScenarioSession.step` remains manual and repeatable;
+manual Worker sessions have no timer, and real-time sessions reject manual steps
+until paused. In-memory storage does not dictate the scheduling choice.
+
+Pause, hidden views and pose inspection stop authority as well as local input.
+Acknowledged pause discards queued input and reconciles the displayed player;
+resume starts without hidden-time debt. Async commands/reset/reload fence the
+Worker clock throughout their operation. Lifecycle traffic is ordered with
+inputs and snapshots; startup, paused/hidden views and pending controls keep a
+bounded automatic message pump alive even when rendering is stopped. Disposal
+terminates the Worker, clock and channel. Diagnostic reports distinguish submitted
+client inputs (`steps`) from authoritative `clock.ticks`.
+
+The lab still composes one Realm rather than the whole GameServer application:
+recipe staging, temporary storage, review UI and explicit inspection controls
+remain intentional differences. This alignment establishes clock/transport
+ownership, not full application parity or a frame-pacing claim. See
+[Tactical 069](../tactical/069-interactive-authority-scheduling.md) for validation.
 
 `ScenarioPresentationHost` owns the migrated labs' client/Worker, production
 `GameLoop`, render host, asset lifetime, camera and frame storage. The lab page supplies
@@ -97,8 +112,7 @@ records this extraction and its validation. Shared owners are:
   placement keeps the world canvas beneath the lab's input/UI canvas through
   scrolling and resize. The replica uses server-computed autotiles.
 
-Pause submits no simulation steps; hidden views stop/restart the clock without
-hidden-time debt. Disposal releases the Worker, frame, host and assets; late
+Pause and hidden views stop/restart both clocks without hidden-time debt. Disposal releases the Worker, frame, host and assets; late
 asset arrivals close without publishing a renderer. Diagnostics are on-demand,
 including interpolation and terrain state, and are detached with readiness on exit.
 Traffic reset still creates a fresh canvas. Context loss/recovery uses the
@@ -145,7 +159,8 @@ See [Tactical 056](../tactical/056-furniture-presentation-host.md).
 
 This host presents outdoor and indoor scenarios. It does not replace the full
 GameClient's menus, audio, particles or world/profile persistence.
-The bounded scenario scheduling/transport remains distinct from LocalServerRuntime.
+The scenario application host remains distinct from LocalServerRuntime; authority
+scheduling and bounded binary transport share production owners.
 
 The [World geometry lab](world-geometry.md) uses the same host with a fixed camera
 and schematic grid. Opt-in surface patches draw through shared
@@ -256,8 +271,8 @@ screen skips. Default shared air friction also erases takeoff momentum. Follow-u
 must preserve the game/lab shared camera and movement owners; the reproduction
 checkpoint has not changed runtime behavior. The separately authorized ServerLoop
 timing fix now uses monotonic deadlines in game Worker/P2P/dedicated authority.
-Labs advance through explicit scenario steps and do not use that timer; their
-shared movement/presentation owners remain unchanged. Periodic drift is removed,
+At that checkpoint labs still used explicit scenario steps. Tactical 069 later
+aligns interactive labs with ServerLoop; headless fixtures retain manual stepping. Periodic drift is removed,
 with rate-switch/delayed-snapshot presentation and jump friction still outstanding.
 
 The subsequent [rider-free camera basics](../research/camera-basics-reproductions.md)

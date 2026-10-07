@@ -10,6 +10,7 @@ import surfaceSource from "../physics/surfaceHeight.ts?raw";
 import scenarioSource from "../scenarios/CharacterRecipe.ts?raw";
 import hostSource from "../scenarios/ScenarioSession.ts?raw";
 import realmSource from "../server/Realm.ts?raw";
+import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 /** All sixteen poses rendered with production anchoring, shadows and fixture depth. */
@@ -39,6 +40,7 @@ export async function buildCharacterCandidate(def: CharacterDefinition, catalog:
         definition: def,
         source: sheet.fingerprint,
         poses: hashes,
+        runtime: scenarioRuntimeSource,
         controller: await sha256(
           new TextEncoder().encode(
             controllerSource +

@@ -1,10 +1,12 @@
 # Gameplay scenarios
 
-Status: shared recipe/runtime delivered and validated, 2026-10-03.
+Status: shared recipe/runtime delivered; interactive authority scheduling aligned, 2026-10-07.
 
 Interactive Workshop examples run the production `Realm`, `baseGameMod`, streaming,
 record persistence, binary replication and `PlayerPredictor`. The temporary host
-changes storage and scheduling; it does not implement another gameplay loop.
+changes storage and fixture staging; interactive timing and transport use the same
+ServerLoop and OrderedWorkerChannel as the game. Manual headless stepping remains
+an explicit test mode.
 [Tactical 027](../tactical/027-composable-gameplay-scenarios.md) owns delivery evidence.
 
 [Embedded engine labs](embedded-engine-labs.md) owns the requirement to keep labs
@@ -60,8 +62,13 @@ non-player gameplay actors; the controlled participant belongs in `player`.
 `ScenarioWorkerHost` orders requests and invokes that same session. `ScenarioClient`
 uses a dedicated Worker, normal binary frames, `RemoteStateView`, the production
 predictor and replica animation clock. `predictInput` is shared with `PlayScene`.
-The client bounds outstanding steps to six; pause/hidden views do not accumulate
-unbounded command debt. Explicit commands change scenario state at the authority.
+Inputs enter Realm independently of its ServerLoop ticks. Snapshots arrive without
+request/response stepping, through production channel credits and bounded decode.
+Pause/hidden views stop both clocks, and async controls fence authority while
+pending. Live ticks use ordinary streaming admission; only initial construction,
+explicit controls and manual headless steps wait for complete view readiness.
+[Scheduling delivery](../tactical/069-interactive-authority-scheduling.md) records
+regressions and intentional application-host differences.
 
 Traffic, Outdoor Geometry, World Geometry, Character lab and furniture playtest
 use `ScenarioPresentationHost` with the production clock, render host and shared
@@ -112,7 +119,8 @@ Character fingerprints now include recipe and Realm host source. Furniture motio
 version 2 reopens earlier behavior approvals; it does not relabel them as approvals
 of the Worker runtime. Presentation version 1 additionally reopens the eleven
 movement cases for the shared clock/interpolation/indoor-rendering migration; prior
-reports remain historical. Static art identities still use exact rendered evidence.
+reports remain historical. Presentation version 2 records the independent authority clock migration; motion
+reviews reopen while static art identities retain their exact rendered evidence.
 
 Tests cover independent memory sessions, collision, scoped settings, binary
 replicas, Worker-host/headless parity, reset/reload, invalid requests, all car
