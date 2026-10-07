@@ -55,112 +55,112 @@ for (const hz of [30, 60]) {
   }
 }
 
-for (const hz of [30, 60]) for (const delayTicks of [0, 2]) {
-  const test = delayTicks ? it.fails : it;
-  test(`keeps idle jump presentation aligned at ${hz}Hz authority / 120Hz display (${delayTicks} delayed snapshots)`, async () => {
-    const session = await openContactCase("train-roof", {
-      ...contactRecipe("train-roof"),
-      physics: { revision: 0 },
-    });
-    try {
-      session.realm.tickRate = hz;
-      const view = new RemoteStateView(new World(new FlatStrategy()));
-      let now = 0;
-      const queued: ArrayBuffer[][] = [];
-      const apply = (deferred = false) => {
-        let frames = session.frames();
-        if (deferred) {
-          queued.push(frames);
-          frames = queued.length > delayTicks ? required(queued.shift()) : [];
-        }
-        for (const buffer of frames) {
-          const msg = decodeServerMessage(buffer);
-          if (msg.type === "frame") view.applyFrame(msg, now);
-          else applyContactFrames(view, [buffer]);
-        }
-      };
-      apply();
-      const predictor = new PlayerPredictor(
-        () => session.physics,
-        () => 1,
-        () => now,
-      );
-      predictor.reset(view.serverPlayerEntity);
-      view.setPredictor(predictor);
-      let seq = view.lastProcessedInputSeq;
-      let nextInput = IDLE;
-      let step = 0;
-      const samples: { time: number; offset: number; airborne: boolean; serverOffset: number }[] =
-        [];
-      const loop = new GameLoop({
-        update(dt) {
-          apply(true);
-          predictor.reconcile(
-            view.serverPlayerEntity,
-            view.lastProcessedInputSeq,
-            view.world,
-            view.props,
-            view.serverEntities,
-            undefined,
-            {
-              simulationTime: required(view.simulationTime),
-              serverTick: view.serverTick,
-            },
-          );
-          const input = { ...IDLE, jump: step >= hz && step < hz * 2 };
-          predictor.storeInput(++seq, input, dt);
-          predictor.update(dt, input, view.world, view.props, view.serverEntities);
-          nextInput = input;
-          step++;
-        },
-        render(alpha) {
-          view.beginPresentation(now, alpha);
-          try {
-            const roof = required(
-              view.entities.find((e) => e.id === contactTarget(session, "train-roof")?.id),
-            );
-            const p = view.presentedPlayerEntity;
-            const rawRoof = required(contactTarget(session, "train-roof"));
-            samples.push({
-              time: now,
-              offset: p.position.wx - roof.position.wx,
-              airborne: p.jumpVZ !== undefined,
-              serverOffset: session.player.player.position.wx - rawRoof.position.wx,
-            });
-          } finally {
-            view.endPresentation();
-          }
-        },
+for (const hz of [30, 60])
+  for (const delayTicks of [0, 2]) {
+    it(`keeps idle jump presentation aligned at ${hz}Hz authority / 120Hz display (${delayTicks} delayed snapshots)`, async () => {
+      const session = await openContactCase("train-roof", {
+        ...contactRecipe("train-roof"),
+        physics: { revision: 0 },
       });
-      loop.setTickRate(hz);
-      for (let frame = 0; frame <= 360; frame++) {
-        now = frame / 120;
-        if (frame > 0 && frame % (120 / hz) === 0) await session.step(nextInput, 1 / hz);
-        loop.externalTick(now * 1000);
+      try {
+        session.realm.tickRate = hz;
+        const view = new RemoteStateView(new World(new FlatStrategy()));
+        let now = 0;
+        const queued: ArrayBuffer[][] = [];
+        const apply = (deferred = false) => {
+          let frames = session.frames();
+          if (deferred) {
+            queued.push(frames);
+            frames = queued.length > delayTicks ? required(queued.shift()) : [];
+          }
+          for (const buffer of frames) {
+            const msg = decodeServerMessage(buffer);
+            if (msg.type === "frame") view.applyFrame(msg, now);
+            else applyContactFrames(view, [buffer]);
+          }
+        };
+        apply();
+        const predictor = new PlayerPredictor(
+          () => session.physics,
+          () => 1,
+          () => now,
+        );
+        predictor.reset(view.serverPlayerEntity);
+        view.setPredictor(predictor);
+        let seq = view.lastProcessedInputSeq;
+        let nextInput = IDLE;
+        let step = 0;
+        const samples: { time: number; offset: number; airborne: boolean; serverOffset: number }[] =
+          [];
+        const loop = new GameLoop({
+          update(dt) {
+            apply(true);
+            predictor.reconcile(
+              view.serverPlayerEntity,
+              view.lastProcessedInputSeq,
+              view.world,
+              view.props,
+              view.serverEntities,
+              undefined,
+              {
+                simulationTime: required(view.simulationTime),
+                serverTick: view.serverTick,
+              },
+            );
+            const input = { ...IDLE, jump: step >= hz && step < hz * 2 };
+            predictor.storeInput(++seq, input, dt);
+            predictor.update(dt, input, view.world, view.props, view.serverEntities);
+            nextInput = input;
+            step++;
+          },
+          render(alpha) {
+            view.beginPresentation(now, alpha);
+            try {
+              const roof = required(
+                view.entities.find((e) => e.id === contactTarget(session, "train-roof")?.id),
+              );
+              const p = view.presentedPlayerEntity;
+              const rawRoof = required(contactTarget(session, "train-roof"));
+              samples.push({
+                time: now,
+                offset: p.position.wx - roof.position.wx,
+                airborne: p.jumpVZ !== undefined,
+                serverOffset: session.player.player.position.wx - rawRoof.position.wx,
+              });
+            } finally {
+              view.endPresentation();
+            }
+          },
+        });
+        loop.setTickRate(hz);
+        for (let frame = 0; frame <= 360; frame++) {
+          now = frame / 120;
+          if (frame > 0 && frame % (120 / hz) === 0) await session.step(nextInput, 1 / hz);
+          loop.externalTick(now * 1000);
+        }
+        const before = required(samples.filter((s) => s.time < 0.95).at(-1));
+        const flight = samples.filter((s) => s.airborne);
+        expect(flight.length).toBeGreaterThan(30);
+        expect(
+          Math.max(...flight.map((s) => Math.abs(s.offset - before.offset))),
+          JSON.stringify({
+            before,
+            first: flight[0],
+            last: flight.at(-1),
+            max: Math.max(...flight.map((s) => s.offset)),
+            min: Math.min(...flight.map((s) => s.offset)),
+          }),
+        ).toBeLessThan(0.1);
+        expect(
+          Math.max(
+            ...samples.filter((s) => s.time >= 1).map((s) => Math.abs(s.offset - before.offset)),
+          ),
+        ).toBeLessThan(0.1);
+      } finally {
+        await session.close();
       }
-      const before = required(samples.filter((s) => s.time < 0.95).at(-1));
-      const flight = samples.filter((s) => s.airborne);
-      expect(flight.length).toBeGreaterThan(30);
-      expect(
-        Math.max(...flight.map((s) => Math.abs(s.offset - before.offset))),
-        JSON.stringify({
-          before,
-          first: flight[0],
-          last: flight.at(-1),
-          max: Math.max(...flight.map((s) => s.offset)),
-          min: Math.min(...flight.map((s) => s.offset)),
-        }),
-      ).toBeLessThan(0.1);
-      expect(
-        Math.max(
-          ...samples.filter((s) => s.time >= 1).map((s) => Math.abs(s.offset - before.offset)),
-        ),
-      ).toBeLessThan(0.1);
-    } finally {
-      await session.close();
-    }
-  });
-}
+    });
+  }
 
 for (const hz of [30, 60])
   for (const name of ["train-roof", "car-roof"] as const) {

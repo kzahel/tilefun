@@ -341,6 +341,9 @@ export class PlayerPredictor {
 
     const oldSupportId = this.support?.id;
     const oldOffset = this.supportOffset && { ...this.supportOffset };
+    const oldPoseSourceSeconds = this.poseSourceSeconds;
+    const oldMomentumX = this.predicted.airMomentumX;
+    const oldMomentumY = this.predicted.airMomentumY;
     const predictedBefore = this.snapshotEntity(this.predicted);
     const authoritative = this.snapshotEntity(serverPlayer);
     this._lastCorrection = {
@@ -598,6 +601,22 @@ export class PlayerPredictor {
       predictedAfter.wy - predictedBefore.wy,
       predictedAfter.wz - predictedBefore.wz,
     );
+    let displayCorrectionX = predictedBefore.wx - predictedAfter.wx;
+    let displayCorrectionY = predictedBefore.wy - predictedAfter.wy;
+    if (
+      !predictedBefore.grounded &&
+      !predictedAfter.grounded &&
+      oldPoseSourceSeconds !== undefined &&
+      this.poseSourceSeconds !== undefined
+    ) {
+      // Passive source-time sampling already accounts for endpoint time changes.
+      // Decay only the residual contact displacement, not that expected travel.
+      const sourceAdvance = this.poseSourceSeconds - oldPoseSourceSeconds;
+      if (oldMomentumX !== undefined && oldMomentumX === this.predicted.airMomentumX)
+        displayCorrectionX += oldMomentumX * sourceAdvance;
+      if (oldMomentumY !== undefined && oldMomentumY === this.predicted.airMomentumY)
+        displayCorrectionY += oldMomentumY * sourceAdvance;
+    }
     // Small residual contact corrections are display-only. Physics still uses
     // the authoritative replay result; supports have their own exact pose binding.
     if (resimPosErr > SNAP_THRESHOLD || serverMount || this.noclip) this.flightDisplayShift = null;
@@ -609,10 +628,10 @@ export class PlayerPredictor {
       Math.abs(predictedAfter.wz - predictedBefore.wz) > 0.1
     ) {
       this.clearPresentationError();
-    } else if (resimPosErr > 0.00025) {
+    } else if (Math.hypot(displayCorrectionX, displayCorrectionY) > 0.00025) {
       const error = this.displayedError();
-      const wx = error.wx + predictedBefore.wx - predictedAfter.wx;
-      const wy = error.wy + predictedBefore.wy - predictedAfter.wy;
+      const wx = error.wx + displayCorrectionX;
+      const wy = error.wy + displayCorrectionY;
       if (Math.hypot(wx, wy) > 8) this.clearPresentationError();
       else this.presentationError = { wx, wy, at: this.clock() };
     }

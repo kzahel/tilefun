@@ -98,21 +98,33 @@ probe: try {
   await page.keyboard.down("ArrowDown");
   // Approach the actual body before jumping. A timed approach from spawn can
   // miss the roof when startup work delays keyboard command delivery.
-  await page.waitForFunction(() => {
-    const g = document.querySelector("#game").__game;
-    const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
-    return car && g.remoteView.serverPlayerEntity.position.wy >= car.position.wy - 14;
-  }, undefined, { timeout: 2000 });
+  await page.waitForFunction(
+    () => {
+      const g = document.querySelector("#game").__game;
+      const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+      return car && g.remoteView.serverPlayerEntity.position.wy >= car.position.wy - 14;
+    },
+    undefined,
+    { timeout: 2000 },
+  );
   await page.keyboard.down("Space");
-  await page.waitForFunction(() => {
-    const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
-    return p.jumpVZ !== undefined;
-  }, undefined, { timeout: 1000 });
-  await page.waitForFunction(() => {
-    const g = document.querySelector("#game").__game;
-    const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
-    return car && g.remoteView.serverPlayerEntity.position.wy >= car.position.wy + 3;
-  }, undefined, { timeout: 1500 });
+  await page.waitForFunction(
+    () => {
+      const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
+      return p.jumpVZ !== undefined;
+    },
+    undefined,
+    { timeout: 1000 },
+  );
+  await page.waitForFunction(
+    () => {
+      const g = document.querySelector("#game").__game;
+      const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+      return car && g.remoteView.serverPlayerEntity.position.wy >= car.position.wy + 3;
+    },
+    undefined,
+    { timeout: 1500 },
+  );
   await page.keyboard.up("ArrowDown");
   await page
     .waitForFunction(() => {
@@ -496,13 +508,24 @@ probe: try {
     const airborne = raw.samples.slice(start, i),
       departure = raw.samples[start - 1],
       landing = raw.samples[i];
+    // Prediction takes off before its acknowledgement arrives. Include that
+    // boundary rather than measuring from an already airborne display pose.
+    let displayedStart = start;
+    while (displayedStart > 0 && raw.samples[displayedStart - 1].predictedAirborne)
+      displayedStart--;
+    let displayedEnd = displayedStart;
+    while (displayedEnd < raw.samples.length && raw.samples[displayedEnd].predictedAirborne)
+      displayedEnd++;
+    const displayedDeparture = raw.samples[Math.max(0, displayedStart - 1)];
+    const displayedFlight = raw.samples.slice(displayedStart, displayedEnd);
     jumpFlights.push({
       samples: airborne.length,
-      departureOffset: departure.offsetX,
+      predictedSamples: displayedFlight.length,
+      departureOffset: displayedDeparture.offsetX,
       landingOffset: landing?.offsetX,
       landingServerOffsetDrift: (landing?.serverOffsetX ?? NaN) - departure.serverOffsetX,
       maxDisplayedRelativeDrift: Math.max(
-        ...airborne.map((s) => Math.abs(s.offsetX - departure.offsetX)),
+        ...displayedFlight.map((s) => Math.abs(s.offsetX - displayedDeparture.offsetX)),
       ),
       departureRoofId: departure.serverRoofId,
       landingRoofId: landing?.serverRoofId,

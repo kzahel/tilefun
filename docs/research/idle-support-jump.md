@@ -69,3 +69,10 @@ the follow-up correction. [Native boundary capture](/tmp/idle-train-jump-before-
 The probe's initial timed boarding was unreliable; it now waits for acknowledged
 play mode, approaches the actual body and releases XY while over the roof, using
 ordinary keys and observed server coordinates only.
+
+The follow-up measures display contact corrections after removing the expected
+passive displacement between pre/post-replay source endpoints, when that axis's
+departure momentum is unchanged. Genuine residual contact error retains its
+existing decay. Both delayed regressions now pass without changing thresholds;
+all twelve idle-jump cases are ordinary passing tests. Native idle/steering and
+settled full verification still follow.
