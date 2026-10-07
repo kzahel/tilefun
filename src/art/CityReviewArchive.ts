@@ -62,8 +62,11 @@ function expand(encoded: number[], target: Uint8Array) {
 }
 
 /** Finite review data, never a historical world generator or a save migration. */
-export function createPreviewGenerator(generation: GenerationDescriptor): WorldGenerator {
-  if (isCurrentGeneration(generation)) return createGenerator(generation);
+export function createPreviewGenerator(
+  generation: GenerationDescriptor,
+  landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile,
+): WorldGenerator {
+  if (isCurrentGeneration(generation)) return createGenerator(generation, landscape);
   const scene = Object.values(archive.scenes).find(
     (s) => s.generation.version === generation.version && s.generation.seed === generation.seed,
   );
@@ -111,9 +114,10 @@ export function archivedCityPlan(generation: GenerationDescriptor) {
 export function* previewOverviewSteps(
   input: GenerationDescriptor | RegionalWorld,
   request: RegionalRequest,
+  landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile,
 ) {
   const generation = normalizeGeneration(input);
-  if (isCurrentGeneration(generation)) return yield* overviewSteps(generation, request);
+  if (isCurrentGeneration(generation)) return yield* overviewSteps(generation, request, landscape);
   const plan = archivedCityPlan(generation);
   if (!plan) throw new Error("Missing archived city plan");
   const result = yield* overviewSteps(createDescriptor("regional", generation.seed), request);

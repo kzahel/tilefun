@@ -8,6 +8,7 @@ import { buildCharacterCandidates } from "./CharacterCandidates.js";
 import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildFamilySheetCandidates } from "./FamilySheetCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
+import { buildNaturalCandidates } from "./NaturalLandscapeCandidate.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
@@ -38,6 +39,7 @@ try {
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
   for (const id of DOOR_CASES)
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
+  candidates.push(...(await buildNaturalCandidates(catalog)));
   candidates.push(await buildCarProjectionCandidate());
   candidates.push(
     await buildWorldGeometryCandidate(),
@@ -63,6 +65,13 @@ try {
       tools: WORKSHOP_TOOLS,
       batches: [
         ...CITY_BATCHES,
+        {
+          id: "natural-landscapes",
+          name: "Natural landscapes",
+          description:
+            "Nine seeded scenes, including three solid forest kits and a train journey. Compare sparse, balanced, lush and extra-dense landscapes.",
+          toolId: "world-geometry",
+        },
         {
           id: "asset-families",
           name: "Asset families",

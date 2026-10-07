@@ -31,6 +31,8 @@ export function reviewKey(
   caseId: string,
   { generation, world, preview, view }: ReviewIdentity,
 ): string {
+  if (preview.landscape)
+    return `${descriptorKey(generation)}:nature-v1:${preview.landscape}:${caseId}:${view.x}:${view.y}:${view.zoom}`;
   return generation.type === "regional" &&
     generation.version === "regional-v1" &&
     preview.mode === "auto" &&

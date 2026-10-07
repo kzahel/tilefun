@@ -117,6 +117,8 @@ Several early plans contain original unchecked lists superseded by later work.
 | [066 Train lifetime and map markers](066-train-lifetime-and-map-markers.md) | Planned, deferred: finish unattended legs at stations and replicate active services to world maps |
 | [067 Shared prediction timeline](067-shared-prediction-timeline.md) | In progress: rate transitions, common moving support and time-aware NPC contact prediction |
 
+| [068 Natural landscape preview](068-natural-landscape-preview.md) | Implemented for review: shared habitat planning, trees/ponds and seeded explorer/lab scenes; ordinary defaults unchanged |
+
 ## Earlier plans
 
 These predate the numbered convention. Their original bodies are preserved in

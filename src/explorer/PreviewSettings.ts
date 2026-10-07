@@ -3,10 +3,15 @@ import {
   type GenerationDescriptor,
   resolveDescriptor,
 } from "../generation/GenerationDescriptor.js";
+import {
+  type LandscapeProfile,
+  landscapeProfile,
+} from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { locationUrl, type Overlays, parseLocation, type ViewState } from "./ViewState.js";
 
 export interface PreviewSettings {
+  landscape?: LandscapeProfile | undefined;
   mode: "auto" | "map" | "tiles" | "coverage";
   detailZoom: number;
   radius: number;
@@ -32,7 +37,7 @@ export function validatePreview(value: PreviewSettings): PreviewSettings {
     value.sampleBudget > 24576
   )
     throw new Error("Unsupported preview settings.");
-  return { ...value };
+  return { ...value, ...(value.landscape ? { landscape: landscapeProfile(value.landscape) } : {}) };
 }
 export function explorerUrl(
   base: string,
@@ -54,6 +59,7 @@ export function explorerUrl(
     if (value) url.searchParams.set(key, value);
   }
   url.searchParams.set("generation", JSON.stringify(resolveDescriptor(generation)));
+  if (preview.landscape) url.searchParams.set("landscape", preview.landscape);
   url.searchParams.set("mode", preview.mode);
   url.searchParams.set("detailZoom", String(preview.detailZoom));
   url.searchParams.set("radius", String(preview.radius));
@@ -77,6 +83,9 @@ export function parseExplorerLocation(base: string): {
   }
   const old = parseLocation(url.href);
   const preview = validatePreview({
+    ...(url.searchParams.has("landscape")
+      ? { landscape: landscapeProfile(url.searchParams.get("landscape")) }
+      : {}),
     mode: (url.searchParams.get("mode") ?? DEFAULT_PREVIEW.mode) as PreviewSettings["mode"],
     detailZoom: Number(url.searchParams.get("detailZoom") ?? DEFAULT_PREVIEW.detailZoom),
     radius: Number(url.searchParams.get("radius") ?? DEFAULT_PREVIEW.radius),

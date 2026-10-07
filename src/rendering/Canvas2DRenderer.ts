@@ -193,18 +193,20 @@ function drawSprite(
   const sheet = sheets.get(item.sheetKey);
   if (!sheet) return;
 
-  const totalZScreen = item.zOffset * camera.scale;
   // Position is at feet (bottom-center of the sprite frame).
   // Offset draw origin so sprite frame is centered horizontally
   // and extends upward from feet.
   const halfW = item.spriteWidth / 2;
-  const screen = camera.worldToScreen(item.wx - halfW, item.wy - item.spriteHeight);
-  const destW = item.spriteWidth * camera.scale;
-  const destH = item.spriteHeight * camera.scale;
+  const bottom = item.wy - item.zOffset + item.drawOffsetY;
+  const screen = camera.worldToScreen(item.wx - halfW, bottom - item.spriteHeight);
+  const end = camera.worldToScreen(item.wx + halfW, bottom);
   const region = sheet.getRegion(item.frameCol, item.frameRow);
-  const drawOffsetY = item.drawOffsetY * camera.scale;
   const dx = Math.floor(screen.sx);
-  const dy = Math.floor(screen.sy - totalZScreen + drawOffsetY);
+  const dy = Math.floor(screen.sy);
+  // Snap shared edges, not an origin plus a fractional size. Otherwise adjoining
+  // pieces (forest repeats, facades) leave gaps or overlap at non-integral zoom.
+  const destW = Math.floor(end.sx) - dx;
+  const destH = Math.floor(end.sy) - dy;
 
   ctx.save();
   if (item.alpha !== undefined) {

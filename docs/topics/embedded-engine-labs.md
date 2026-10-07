@@ -55,6 +55,17 @@ binary replicas and `PlayerPredictor`. This is a temporary engine host, with
 explicit step scheduling, rather than the game's complete `LocalServerRuntime`
 and `GameClient` composition. The simulation migration is delivered.
 
+Explicit stepping originated with repeatable headless scenario tests: callers can
+advance an exact number of ticks, await world readiness, and inspect/reset/reload
+without real-time sleeps. Interactive labs reuse that host; their main-thread
+GameLoop requests serialized Worker steps, with at most six outstanding requests.
+The game instead starts GameServer's independent ServerLoop in its authority
+Worker, which must also support remote clients independently of their rendering.
+This is a host/testability choice, not a requirement of in-memory storage or Realm.
+Lab pause/readiness/backpressure therefore do not reproduce game authority timing.
+Use the actual game host for timing regressions; a future live-host consolidation
+should retain an injectable manual clock for deterministic tests and inspection.
+
 `ScenarioPresentationHost` owns the migrated labs' client/Worker, production
 `GameLoop`, render host, asset lifetime, camera and frame storage. The lab page supplies
 controls, input, viewport/settings and diagnostic UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
@@ -286,3 +297,18 @@ path is added. Twelve new deterministic positional cases, all 1,719 units and 36
 affected Canvas/GPU game/lab browser checks pass, with typechecks, lint/build and
 streaming readiness. Native 120Hz idle/steering captures verify the real Worker
 composition; [idle travel evidence](../research/idle-support-jump.md) records limits.
+
+
+## Natural landscape preview
+
+[Plan 068](../tactical/068-natural-landscape-preview.md) adds nine optional generated
+landscape recipes to World geometry. `ScenarioRecipe.landscape` passes through the
+normal Realm factory; NaturalStrategy retains production railway and traffic owners.
+Explorer exact tiles and regional habitat views consume the same seed/profile
+planner. The UI owns controls and camera follow only. Ordinary worlds omit this
+experimental profile, and temporary scene save/reload preserves it through the
+recipe. Forest edits and a complete lush roof-passenger journey exercise normal
+persistence and authority; there is no separate forest collision or train loop.
+The extra-dense profile's staggered forest rows are normal multipart props with
+replicated solid footprints, native atlas crops and ordinary procedural deletion.
+They add no lab-specific rendering, collision or editor persistence path.

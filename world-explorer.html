@@ -19,6 +19,11 @@
           <div class="intro"><span class="eyebrow">REGIONAL STUDY / 01</span><h1>A world takes shape.</h1><p>Follow the landscape. Find a place.<br />See how the pieces connect.</p></div>
           <form id="seed-form" class="seed-form"><label for="generator">World type</label><select id="generator" aria-label="World type"></select><label>Regional revision<select id="regional-revision" aria-label="Regional revision"></select></label><label for="seed">World seed</label><div class="input-row"><input id="seed" value="2026" autocomplete="off" maxlength="64" /><button type="submit">Explore</button></div><span id="world-version" class="muted">regional-v1 · temperate-v1</span></form>
           <label for="world-source">Preview source</label><select id="world-source" aria-label="Preview source"><option value="">Procedural world</option></select><button id="refresh-snapshot" type="button">Refresh saved view</button><p id="source-coverage" class="muted">Procedural preview · no saved edits</p>
+          <fieldset class="layers"><legend>Natural landscape preview</legend>
+            <label>Composition<select id="landscape-preview" aria-label="Landscape composition"><option value="">Current world</option><option value="sparse">Sparse</option><option value="balanced">Balanced</option><option value="lush">Lush</option><option value="thicket">Extra dense</option></select></label>
+            <p class="muted">Preview only · open meadow, green groves, dark woodland, blue ponds. Extra dense adds near-black impassable thickets. Zoom in for exact edges.</p>
+            <a href="workshop.html?geometry=nature-forest&amp;landscape=balanced#/tool/world-geometry">Landscape review scenes →</a>
+          </fieldset>
           <fieldset class="layers"><legend>Terrain preview</legend>
             <label for="display-mode">Display<select id="display-mode"><option value="auto">Auto</option><option value="map">Map</option><option value="tiles">Tiles</option><option value="coverage">Coverage</option></select></label>
             <label for="detail-zoom">Tiles above zoom<input id="detail-zoom" type="number" min="2" max="32" step="1" /></label>

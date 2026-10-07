@@ -48,6 +48,8 @@ const COLORS = [
   [86, 128, 103],
   [193, 189, 139],
   [197, 168, 125],
+  [43, 83, 63],
+  [23, 51, 37],
 ];
 
 function contextFor(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
@@ -94,6 +96,22 @@ export class MapRenderer {
       grid.width * grid.step * view.zoom,
       grid.height * grid.step * view.zoom,
     );
+
+    if (overlays.landUse)
+      for (const pond of result.ponds ?? []) {
+        ctx.beginPath();
+        ctx.ellipse(
+          sx(pond.x),
+          sy(pond.y),
+          Math.max(3, pond.rx * view.zoom),
+          Math.max(3, pond.ry * view.zoom),
+          0,
+          0,
+          Math.PI * 2,
+        );
+        ctx.fillStyle = "#407487";
+        ctx.fill();
+      }
 
     if (overlays.boundaries) {
       const step =

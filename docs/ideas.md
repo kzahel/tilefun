@@ -28,6 +28,10 @@ copying every item into multiple checklists.
 - More curated furniture/props and natural brushes: gardens, forest clusters
   and further tree families. Current drawing work lives in
   [patterns and interiors](topics/patterns-and-interiors.md).
+- [Natural overworld landscapes](topics/natural-landscapes.md): forests, scattered
+  wild trees, solid patterned thickets and small ponds throughout eligible land,
+  including inter-town train scenery; explorer/lab preview is ready for composition
+  review, with cliffs and mesas later.
 - City follow-ons: farmers markets, connected large parks, more frontage
   orientations and additional room layouts. See the living-world ideas below and
   [city generation](topics/city-generation.md) for dependencies and review gates.

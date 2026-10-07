@@ -72,6 +72,24 @@ settlement scale and spacing, countryside/woods/water transitions, connection
 placement, and continuity while panning across a cell boundary. Real terrain, roads, buildings, props, and static inhabitants appear in tile mode.
 Play here connects the same location to authoritative gameplay.
 
+## Natural landscape preview
+
+For Current regional, **Landscape preview** compares sparse, balanced, lush and extra-dense
+compositions with the ordinary generator. The regional map shows woodland cover
+and admitted local ponds; Tiles shows their actual trees and shores. Copy location
+preserves this selection. **Walk this landscape in lab** opens the same seed,
+profile and location in a temporary shared-engine scene. The lab also supplies
+nine pinned cases, including three forest pattern kits and a real train journey,
+with exact Workshop review notes. Extra dense includes solid thicket interiors;
+the darkest map cover distinguishes them from ordinary walkable woodland.
+Start from the [natural landscape review links](tactical/068-natural-landscape-preview.md#review-links).
+
+This is an optional composition review. Ordinary world creation still uses the
+current default. Saved worlds, archived city snapshots and nonregional presets
+disable this overlay. Broad maps can omit small ponds and infrastructure detail;
+use Tiles or the lab to assess a particular forest edge or bank. See
+[Natural landscapes](topics/natural-landscapes.md) for rollout and future relief.
+
 ## Shared contracts
 
 - `GenerationDescriptor` is the authoritative immutable type/version/seed/preset

@@ -115,6 +115,8 @@ function mergePlayerStepOutcomes(
  * GameServer coordinates active realms; RealmReplicator owns their client baselines.
  */
 export interface RealmOptions {
+  /** Temporary review-world composition; ordinary saved worlds omit it. */
+  landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile;
   definitions?: import("../persistence/ActorRecords.js").ActorDefinitions;
   physics?: () => import("../physics/PlayerMovement.js").MovementPhysicsParams;
   random?: () => number;
@@ -2103,7 +2105,7 @@ export class Realm {
   }
 
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {
-    this.generator = createGenerator(descriptorFromMetadata(meta));
+    this.generator = createGenerator(descriptorFromMetadata(meta), this.options.landscape);
     return this.generator.terrain;
   }
 }

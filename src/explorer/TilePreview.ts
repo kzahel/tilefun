@@ -59,7 +59,7 @@ export class TilePreview {
     height: number,
     settings: PreviewSettings,
   ): { cx: number; cy: number }[] {
-    const key = descriptorKey(generation);
+    const key = `${descriptorKey(generation)}:${settings.landscape ?? "current"}`;
     if (key !== this.key) {
       this.releaseChunks();
       this.key = key;

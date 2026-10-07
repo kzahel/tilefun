@@ -16,6 +16,7 @@ export type WorkerRequest =
       exact?: { cx: number; cy: number }[];
       footprint?: Bounds;
       snapshot?: InspectionSnapshot;
+      landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile;
     }
   | { type: "cancel"; id: number };
 

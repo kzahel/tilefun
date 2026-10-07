@@ -25,8 +25,16 @@ import {
 } from "../scenarios/VehicleGeometryRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import { drawCurvedRailLayout } from "./CurvedTrainPreview.js";
+import NaturalLandscapePage from "./NaturalLandscapePage.js";
 
 export default function WorldGeometryPage() {
+  return new URLSearchParams(location.search).get("geometry")?.startsWith("nature-") ? (
+    <NaturalLandscapePage />
+  ) : (
+    <GeometryFixtures />
+  );
+}
+function GeometryFixtures() {
   const canvas = useRef<HTMLCanvasElement>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
   const [fixture, setFixture] = useState(

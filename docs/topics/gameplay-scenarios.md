@@ -30,6 +30,20 @@ wall props. Recipes contain no update callbacks and need no DOM or image loading
 - `VehicleGeometryRecipe`: straight car routes over the railway bridge or into the garage,
   with the production traffic controller and explicit opposite-direction starts.
 - `OutdoorRecipe`: the selected asset's actual prop geometry and a bounded walking area.
+- `NaturalLandscapeRecipe`: generated regional countryside, ponds and tree/thicket
+  composition, or a real town-to-town railway; profile, starting view and omitted
+  extra road traffic are staged.
+
+The playable lab composition root is `ScenarioPresentationHost → ScenarioClient →
+scenario Worker → ScenarioSession → Realm`. The game instead uses `GameClient`
+and `LocalServerRuntime`. Both share simulation, streamed world chunks, prediction,
+binary replication, terrain preparation and scene/render backends. Only nearby
+world regions are resident; a generated world is not precomputed into one giant
+in-memory map. Lab reload flushes/reopens its memory records; reset, closing or
+replacing the session discards them. Labs omit the full menus/editor, audio,
+particles, multiplayer hosting and durable world/profile registry. Ambient spawning
+is disabled; recipes can also deliberately suppress traffic. These are explicit
+host/content differences, so shared engine fidelity is not whole-application parity.
 
 `ScenarioSession` owns an isolated `MemoryRecordStore`/`RecordPersistenceStore`,
 fixed registry, `Realm` and `PlayerSession`. Memory IO uses the production copying,

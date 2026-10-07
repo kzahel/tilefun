@@ -10,6 +10,7 @@ export interface ScenarioRecipe {
   version: 1;
   id: string;
   generation: GenerationDescriptor;
+  landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile;
   player: Entity;
   props: Prop[];
   actors?: Entity[];

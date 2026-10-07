@@ -121,6 +121,7 @@ export class ScenarioSession {
     this.realm = new Realm([baseGameMod], {
       physics: () => this.physics,
       ambientSpawns: false,
+      ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),
       ...(this.recipe.trafficLanes
         ? {
             traffic: {

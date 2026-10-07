@@ -12,6 +12,7 @@ import {
   interiorWalls,
 } from "../interiors/GameplayInterior.js";
 import { treeRunLength, treeRunProp } from "../patterns/FencedTrees.js";
+import { forestRowDefinition, forestRowProp, forestRowWalls } from "../patterns/ForestThicket.js";
 import { bridgePart, roadRailBridgeProp } from "../railway/RoadRailBridge.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
@@ -552,6 +553,8 @@ export function getMaterialForPropType(type: string): MaterialType | undefined {
 
 /** Look up static wall segments for a prop type (from the definition, not serialized). */
 export function getWallsForPropType(type: string): PropCollider[] | null {
+  const forest = forestRowWalls(type);
+  if (forest) return forest;
   const outdoor = outdoorRuntimeAsset(type);
   if (outdoor) return outdoor.metadata.colliders?.map((c) => ({ ...c })) ?? null;
   if (type === INTERIOR_WALL_TYPE) return interiorWalls();
@@ -572,6 +575,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  const forest = forestRowProp(type, wx, wy);
+  if (forest) return forest;
   const bridge = roadRailBridgeProp(type, wx, wy);
   if (bridge) return bridge;
   const length = treeRunLength(type);
@@ -643,6 +648,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (forestRowDefinition(type)) return true;
   if (bridgePart(type)) return true;
   if (treeRunLength(type) !== null) return true;
   if (outdoorRuntimeAsset(type)) return true;

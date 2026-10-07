@@ -4,7 +4,7 @@ Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; optional WebGL2 gameplay backend and shared mesh-car presentation delivered;
 Canvas2D remains the default pending performance/asset acceptance.
-Updated: 2026-10-05.
+Updated: 2026-10-07.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
@@ -77,6 +77,13 @@ lab wrapper, while the input/UI canvas stays in document flow. See
 - `collectScene`, `collectSceneOrder`, grass frames and prop-depth metadata own
   outdoor interpolation, visibility and shadow/body ordering. Ground shadows
   precede bodies; elevated shadows immediately precede their associated body.
+- Ordinary sprite rectangles snap both projected edges, then derive their width
+  and height from those endpoints. Rounding only the origin while retaining a
+  fractional scaled size exposed one-pixel gaps/overlaps between forest repeat
+  pieces at fractional zoom. This shared raster rule applies to Canvas and GPU,
+  including flipped sprites and visual height offsets. The renderer lab's
+  `probeSpriteSeams` checks translucent adjoining pieces (so overlap also fails)
+  at four zooms and four camera positions on both backends.
 - `ElevationDescriptorCache` caches static geometry by weak chunk identity,
   placement and edit/visual revisions. Binding a new resource creates new
   immutable records, leaving prior records unchanged. Empty chunks are cached.

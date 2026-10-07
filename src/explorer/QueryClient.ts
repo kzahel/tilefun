@@ -53,6 +53,7 @@ export class QueryClient {
     exact?: { cx: number; cy: number }[],
     footprint?: Bounds,
     snapshot?: import("../persistence/WorldInspection.js").InspectionSnapshot,
+    landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile,
   ): void {
     if (this.disposed) return;
     this.invalidate();
@@ -64,6 +65,7 @@ export class QueryClient {
       ...(exact ? { exact } : {}),
       ...(footprint ? { footprint } : {}),
       ...(snapshot ? { snapshot } : {}),
+      ...(landscape ? { landscape } : {}),
     };
     this.dispatch();
   }

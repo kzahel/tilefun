@@ -68,7 +68,16 @@ export default function ReviewPage() {
       </section>
     );
   if (candidate.kind === "projection") return <Navigate to="/tool/car-projection" replace />;
-  if (candidate.kind === "geometry") return <Navigate to="/tool/world-geometry" replace />;
+  if (candidate.kind === "geometry")
+    return (
+      <section>
+        <h1>{candidate.name}</h1>
+        <p>{candidate.prompt}</p>
+        <a className="button" href={candidate.url}>
+          Open this playable review →
+        </a>
+      </section>
+    );
   if (candidate.kind === "family")
     return <Navigate to={candidate.url.replace("/tilefun/workshop.html#", "")} replace />;
   if (candidate.kind === "character")

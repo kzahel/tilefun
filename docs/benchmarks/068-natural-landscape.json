@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-07",
+  "command": "npx tsx scripts/benchmark-natural-landscape.ts",
+  "environment": "Local macOS desktop; Node CLI; single run after browser tests stopped",
+  "scope": "49 chunks per scene/profile, generation and placement enumeration; 1024 by 768 tile overview at sample step 8; excludes rendering and asset loads",
+  "cases": [
+    {
+      "case": "meadow",
+      "profile": "current",
+      "chunks": 49,
+      "props": 0,
+      "p50Ms": 0.914709000000002,
+      "p95Ms": 1.277290999999991,
+      "overviewMs": 4.504750000000001,
+      "ponds": 0
+    },
+    {
+      "case": "meadow",
+      "profile": "sparse",
+      "chunks": 49,
+      "props": 23,
+      "p50Ms": 1.144790999999998,
+      "p95Ms": 1.661457999999982,
+      "overviewMs": 41.248458,
+      "ponds": 11
+    },
+    {
+      "case": "meadow",
+      "profile": "balanced",
+      "chunks": 49,
+      "props": 57,
+      "p50Ms": 1.1841249999999945,
+      "p95Ms": 1.7017920000000117,
+      "overviewMs": 41.912125,
+      "ponds": 22
+    },
+    {
+      "case": "meadow",
+      "profile": "lush",
+      "chunks": 49,
+      "props": 139,
+      "p50Ms": 1.1600840000000403,
+      "p95Ms": 1.697499999999991,
+      "overviewMs": 43.84254200000004,
+      "ponds": 33
+    },
+    {
+      "case": "grove",
+      "profile": "current",
+      "chunks": 49,
+      "props": 0,
+      "p50Ms": 0.8000839999999698,
+      "p95Ms": 0.8350839999999948,
+      "overviewMs": 4.064792000000011,
+      "ponds": 0
+    },
+    {
+      "case": "grove",
+      "profile": "sparse",
+      "chunks": 49,
+      "props": 36,
+      "p50Ms": 1.0534170000000813,
+      "p95Ms": 1.5849589999999694,
+      "overviewMs": 35.89133300000003,
+      "ponds": 7
+    },
+    {
+      "case": "grove",
+      "profile": "balanced",
+      "chunks": 49,
+      "props": 186,
+      "p50Ms": 1.0697920000000067,
+      "p95Ms": 1.5289579999999887,
+      "overviewMs": 36.12679200000002,
+      "ponds": 13
+    },
+    {
+      "case": "grove",
+      "profile": "lush",
+      "chunks": 49,
+      "props": 363,
+      "p50Ms": 1.07487500000002,
+      "p95Ms": 1.545500000000061,
+      "overviewMs": 39.18091700000002,
+      "ponds": 22
+    },
+    {
+      "case": "forest",
+      "profile": "current",
+      "chunks": 49,
+      "props": 0,
+      "p50Ms": 0.8069580000000087,
+      "p95Ms": 0.9927500000000009,
+      "overviewMs": 3.7747920000000477,
+      "ponds": 0
+    },
+    {
+      "case": "forest",
+      "profile": "sparse",
+      "chunks": 49,
+      "props": 163,
+      "p50Ms": 1.0749170000000277,
+      "p95Ms": 1.463707999999997,
+      "overviewMs": 41.92812500000002,
+      "ponds": 8
+    },
+    {
+      "case": "forest",
+      "profile": "balanced",
+      "chunks": 49,
+      "props": 351,
+      "p50Ms": 1.0801659999999629,
+      "p95Ms": 1.5290840000000117,
+      "overviewMs": 37.46474999999998,
+      "ponds": 15
+    },
+    {
+      "case": "forest",
+      "profile": "lush",
+      "chunks": 49,
+      "props": 498,
+      "p50Ms": 1.1046250000001692,
+      "p95Ms": 1.568416999999954,
+      "overviewMs": 38.86483300000009,
+      "ponds": 23
+    },
+    {
+      "case": "edge",
+      "profile": "current",
+      "chunks": 49,
+      "props": 0,
+      "p50Ms": 0.7804590000000644,
+      "p95Ms": 0.9190419999999904,
+      "overviewMs": 3.4064579999999296,
+      "ponds": 0
+    },
+    {
+      "case": "edge",
+      "profile": "sparse",
+      "chunks": 49,
+      "props": 46,
+      "p50Ms": 1.0394169999999576,
+      "p95Ms": 1.353541999999834,
+      "overviewMs": 29.815583999999944,
+      "ponds": 13
+    },
+    {
+      "case": "edge",
+      "profile": "balanced",
+      "chunks": 49,
+      "props": 154,
+      "p50Ms": 1.0370419999999285,
+      "p95Ms": 1.3924999999999272,
+      "overviewMs": 31.405916999999818,
+      "ponds": 16
+    },
+    {
+      "case": "edge",
+      "profile": "lush",
+      "chunks": 49,
+      "props": 323,
+      "p50Ms": 1.0979999999999563,
+      "p95Ms": 1.5275839999999334,
+      "overviewMs": 34.82983400000012,
+      "ponds": 24
+    },
+    {
+      "case": "pond",
+      "profile": "current",
+      "chunks": 49,
+      "props": 0,
+      "p50Ms": 0.8087499999999181,
+      "p95Ms": 0.9541669999998703,
+      "overviewMs": 4.371209000000135,
+      "ponds": 0
+    },
+    {
+      "case": "pond",
+      "profile": "sparse",
+      "chunks": 49,
+      "props": 173,
+      "p50Ms": 1.0893329999998969,
+      "p95Ms": 1.8175000000001091,
+      "overviewMs": 45.029916000000185,
+      "ponds": 9
+    },
+    {
+      "case": "pond",
+      "profile": "balanced",
+      "chunks": 49,
+      "props": 337,
+      "p50Ms": 1.0766670000000431,
+      "p95Ms": 1.713124999999991,
+      "overviewMs": 44.82574999999997,
+      "ponds": 18
+    },
+    {
+      "case": "pond",
+      "profile": "lush",
+      "chunks": 49,
+      "props": 478,
+      "p50Ms": 1.0767909999999574,
+      "p95Ms": 1.755916999999954,
+      "overviewMs": 45.08708299999989,
+      "ponds": 28
+    },
+    {
+      "case": "train",
+      "profile": "current",
+      "chunks": 49,
+      "props": 47,
+      "p50Ms": 0.9809999999999945,
+      "p95Ms": 1.7140420000000631,
+      "overviewMs": 6.586000000000013,
+      "ponds": 0
+    },
+    {
+      "case": "train",
+      "profile": "sparse",
+      "chunks": 49,
+      "props": 51,
+      "p50Ms": 1.249749999999949,
+      "p95Ms": 1.4832910000000084,
+      "overviewMs": 37.00400000000013,
+      "ponds": 13
+    },
+    {
+      "case": "train",
+      "profile": "balanced",
+      "chunks": 49,
+      "props": 57,
+      "p50Ms": 1.208667000000105,
+      "p95Ms": 1.5614579999999023,
+      "overviewMs": 35.40204199999994,
+      "ponds": 19
+    },
+    {
+      "case": "train",
+      "profile": "lush",
+      "chunks": 49,
+      "props": 61,
+      "p50Ms": 1.2140420000000631,
+      "p95Ms": 1.6296669999999267,
+      "overviewMs": 32.88516699999991,
+      "ponds": 25
+    }
+  ]
+}

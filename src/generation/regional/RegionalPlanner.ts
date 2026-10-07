@@ -25,6 +25,8 @@ export const LandCover = {
   Woodland: 3,
   Rural: 4,
   Settlement: 5,
+  DenseWoodland: 6,
+  Thicket: 7,
 } as const;
 
 interface Feature {

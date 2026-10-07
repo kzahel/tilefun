@@ -2,6 +2,20 @@ import { expect, test } from "@playwright/test";
 import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 
 test.use({ channel: "chromium" });
+test("adjacent sprites have no gaps or overlaps at fractional scales on either backend", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const reports = await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { probeSpriteSeams(): { mismatches: number }[] } }
+    ).rendererLab.probeSpriteSeams(),
+  );
+  expect(reports).toHaveLength(32);
+  expect(reports.filter((report) => report.mismatches !== 0)).toEqual([]);
+});
+
 test("GPU consumes the Canvas scene with retained textures and union clips", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));

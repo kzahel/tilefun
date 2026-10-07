@@ -31,3 +31,18 @@ it("round-trips generation and presentation independently including legacy seeds
   expect(() => parseExplorerLocation("https://test.example/?version=future")).toThrow();
   expect(() => parseExplorerLocation("https://test.example/?radius=10")).toThrow();
 });
+
+it("preserves landscape profile in share links without changing the world descriptor", () => {
+  const generation = createDescriptor("regional", 2026),
+    view = { x: -416, y: -512, zoom: 16 };
+  const preview = { ...DEFAULT_PREVIEW, landscape: "lush" as const };
+  const url = explorerUrl(
+    "https://test.example/world-explorer.html",
+    generation,
+    view,
+    DEFAULT_OVERLAYS,
+    preview,
+  );
+  expect(parseExplorerLocation(url)).toMatchObject({ generation, view, preview });
+  expect(() => parseExplorerLocation("https://test.example/?landscape=unknown")).toThrow();
+});

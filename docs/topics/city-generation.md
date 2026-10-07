@@ -76,6 +76,11 @@ asset promotion and inclusion in the current generator are separate decisions.
 
 ## Next work
 
+[Natural landscapes](natural-landscapes.md) previews continuous overworld forests,
+scattered trees and ponds, with regional and train-level review in the existing
+explorer/lab. [Tactical 068](../tactical/068-natural-landscape-preview.md) records
+the optional explorer/lab preview; ordinary regional defaults await composition review.
+
 [Generated railways](trains.md) now admit one isolated road bridge per eligible
 line. [Tactical 062](../tactical/062-generated-road-rail-crossing.md) records the
 current greenfield integration and three seeded previews. Regional-v13 remains

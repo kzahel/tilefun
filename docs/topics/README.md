@@ -30,6 +30,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [Semantic tileset map](semantic-tileset-map.md) | Whole-sheet thematic mapping, autonomous asset hypotheses and independent review for Modern Exteriors and Interiors |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
+| [Natural landscapes](natural-landscapes.md) | Overworld forest/tree/pond preview; shared explorer/lab composition review and future landforms |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
 | [Player prediction](player-prediction.md) | Reproduction-first investigation of moving NPC contact and car/train support timelines |
 | [Rendering architecture](rendering-architecture.md) | Backend separation, resource ownership, frame lifetime and incremental renderer replacement |

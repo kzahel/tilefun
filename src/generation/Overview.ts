@@ -11,6 +11,12 @@ import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
 import type { DistrictPlan } from "./regional/DistrictPlanner.js";
 import {
+  type LandscapeProfile,
+  NaturalLandscape,
+  type NaturalPond,
+  naturalHabitat,
+} from "./regional/NaturalLandscape.js";
+import {
   LandCover,
   makeGrid,
   type RegionalRequest,
@@ -26,6 +32,8 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   countryside?: CountryPlan[];
   /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
   railways?: RailLine[];
+  landscape?: LandscapeProfile;
+  ponds?: NaturalPond[];
 };
 export function normalizeGeneration(
   world: GenerationDescriptor | RegionalWorld,
@@ -39,6 +47,7 @@ export function normalizeGeneration(
 export function* overviewSteps(
   input: GenerationDescriptor | RegionalWorld,
   request: RegionalRequest,
+  landscape?: LandscapeProfile,
 ): Generator<void, OverviewResult> {
   const descriptor = requireCurrentGeneration(normalizeGeneration(input));
   if (descriptor.type === "regional") {
@@ -84,7 +93,62 @@ export function* overviewSteps(
       0,
     );
     const countryside: CountryPlan[] = [];
-    return { ...result, world: descriptor, districts, countryside, railways };
+    const ponds: NaturalPond[] = [];
+    if (landscape) {
+      const world = regionalWorld(descriptor.seed);
+      const nature = new NaturalLandscape(world, landscape);
+      for (let row = 0; row < result.grid.height; row++) {
+        for (let col = 0; col < result.grid.width; col++) {
+          const i = row * result.grid.width + col;
+          const x = result.grid.x + (col + 0.5) * result.grid.step;
+          const y = result.grid.y + (row + 0.5) * result.grid.step;
+          const precise = result.detail === "region" && result.grid.step <= 32;
+          const sample = precise ? nature.sample(x, y) : undefined;
+          if (sample && sample.terrain <= TerrainId.ShallowWater) {
+            result.cover[i] = LandCover.Water;
+            result.elevation[i] = -0.2;
+          } else if (sample && sample.terrain <= TerrainId.SandLight) {
+            result.cover[i] = LandCover.Shore;
+          } else if (result.cover[i] !== LandCover.Water && result.cover[i] !== LandCover.Shore) {
+            const habitat = sample ?? naturalHabitat(world, landscape, x, y);
+            result.cover[i] = sample?.reserved
+              ? LandCover.Meadow
+              : sample?.thicket
+                ? LandCover.Thicket
+                : habitat.habitat === "forest"
+                  ? LandCover.DenseWoodland
+                  : habitat.habitat === "grove"
+                    ? LandCover.Woodland
+                    : LandCover.Meadow;
+          }
+        }
+        yield;
+      }
+      const b = request.bounds;
+      const minX = Math.floor(b.minX / 128),
+        maxX = Math.floor(b.maxX / 128);
+      const minY = Math.floor(b.minY / 128),
+        maxY = Math.floor(b.maxY / 128);
+      if (result.detail === "region" && (maxX - minX + 1) * (maxY - minY + 1) <= 144) {
+        for (let cy = minY; cy <= maxY; cy++) {
+          for (let cx = minX; cx <= maxX; cx++) {
+            const pond = nature.pond(cx, cy);
+            if (pond) ponds.push(pond);
+          }
+          yield;
+        }
+      }
+      if (result.stats.features + ponds.length > request.limits.maxFeatures) ponds.length = 0;
+      result.stats.features += ponds.length;
+    }
+    return {
+      ...result,
+      world: descriptor,
+      districts,
+      countryside,
+      railways,
+      ...(landscape ? { landscape, ponds } : {}),
+    };
   }
   validateRequest(request);
   const grid = makeGrid(request.bounds, request.sampleStep, request.limits.maxSamples);

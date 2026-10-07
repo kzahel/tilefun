@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-07T06:38:47.178Z",
+  "command": "npm run streaming:bench -- --assert-ready",
+  "scope": "Ordinary generator regression after forest pattern support; optional thickets tested separately through native sessions and browser labs",
+  "renderer": "canvas",
+  "cpuRate": 1,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "fixtures": [
+    {
+      "version": "current",
+      "errors": [],
+      "failures": [],
+      "samples": [
+        {
+          "name": "cold",
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999727,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 4,
+          "resident": 25,
+          "pending": 0
+        },
+        {
+          "name": "standing",
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.700000000000728,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "resident": 25,
+          "pending": 0
+        },
+        {
+          "name": "walk",
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "resident": 20,
+          "pending": 0
+        },
+        {
+          "name": "sprint",
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "resident": 20,
+          "pending": 0
+        },
+        {
+          "name": "reverse",
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291
+          },
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "resident": 25,
+          "pending": 0
+        },
+        {
+          "name": "zoom-out",
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.799999999999272
+          },
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0,
+          "staleCacheFrames": 0,
+          "resident": 30,
+          "pending": 0
+        }
+      ]
+    }
+  ]
+}

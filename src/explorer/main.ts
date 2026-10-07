@@ -114,11 +114,19 @@ async function refreshSources(): Promise<void> {
   };
 }
 function syncSource(): void {
+  if (savedWorldId || generation.type !== "regional" || !isCurrentGeneration(generation))
+    delete preview.landscape;
+  const natureSelect = element<HTMLSelectElement>("#landscape-preview");
+  natureSelect.value = preview.landscape ?? "";
+  natureSelect.disabled =
+    !!savedWorldId || generation.type !== "regional" || !isCurrentGeneration(generation);
+
   element<HTMLSelectElement>("#generator").value = descriptorChoice(generation);
   seedInput.value = String(generation.seed);
   element<HTMLSelectElement>("#generator").disabled = !!savedWorldId;
   seedInput.disabled = !!savedWorldId;
-  element<HTMLSelectElement>("#regional-revision").value = generation.version;
+  element<HTMLSelectElement>("#regional-revision").value =
+    generation.type === "regional" ? generation.version : createDescriptor("regional", 42).version;
   element<HTMLSelectElement>("#regional-revision").disabled = !!savedWorldId;
   element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
   element("#source-coverage").textContent = savedWorldId
@@ -319,6 +327,7 @@ async function requestQuery(): Promise<void> {
     exact,
     footprint,
     snapshot,
+    preview.landscape,
   );
   updateDiagnostics();
 }
@@ -342,6 +351,20 @@ function changedView(immediate = false): void {
     ? ""
     : "Archived review scene. The current generator creates a different world; this layout is not playable.";
   element<HTMLAnchorElement>("#play-here").href = gameUrl.href;
+  if (preview.landscape) {
+    const lab = new URL("workshop.html", location.href);
+    lab.search = new URLSearchParams({
+      geometry: "nature-explore",
+      landscape: preview.landscape,
+      seed: String(generation.seed),
+      x: String(view.x),
+      y: String(view.y),
+    }).toString();
+    lab.hash = "/tool/world-geometry";
+    element<HTMLAnchorElement>("#play-here").href = lab.href;
+    element("#play-here").textContent = "Walk here in landscape lab";
+    element("#create-world").textContent = "Create ordinary world (without preview)";
+  } else element("#create-world").textContent = "Create this world";
   client.invalidate();
   app.dataset.settled = "false";
   requestDraw();
@@ -575,6 +598,7 @@ element<HTMLFormElement>("#seed-form").onsubmit = (event) => {
         version: revisionSelect.value,
       } as typeof generation);
     world = regionalWorld(generation.type === "regional" ? generation.seed : 2026);
+    syncSource();
     element("#world-version").textContent = `${generation.version} · ${generation.preset}`;
     locationError = null;
     delete app.dataset.error;
@@ -755,4 +779,19 @@ void refreshSources().catch((error) => {
 element("#refresh-snapshot").onclick = () => {
   tilePreview.reset();
   changedView(true);
+};
+
+syncSource();
+const landscapeSelect = element<HTMLSelectElement>("#landscape-preview");
+landscapeSelect.value = preview.landscape ?? "";
+landscapeSelect.onchange = () => {
+  preview.landscape = landscapeSelect.value
+    ? (landscapeSelect.value as import("../generation/regional/NaturalLandscape.js").LandscapeProfile)
+    : undefined;
+  tilePreview.reset();
+  result = null;
+  renderer.release();
+  delete app.dataset.error;
+  changedView(true);
+  updateReview();
 };

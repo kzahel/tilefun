@@ -29,7 +29,9 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
         descriptorKey(normalizeGeneration(message.world))
     )
       throw new Error("Saved world identity differs from the preview.");
-    const query = overviewSteps(message.world, message.request);
+    if (message.landscape && message.snapshot)
+      throw new Error("Landscape previews cannot overlay saved worlds");
+    const query = overviewSteps(message.world, message.request, message.landscape);
     while (!job.cancelled) {
       const sliceStart = performance.now();
       let step = query.next();
@@ -51,7 +53,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             )
           )
             throw new Error("Exact query exceeds supported chunk bounds.");
-          const generator = createGenerator(normalizeGeneration(message.world));
+          const generator = createGenerator(normalizeGeneration(message.world), message.landscape);
           for (const coordinate of message.exact) {
             if (job.cancelled) break;
             const terrainStart = performance.now();
@@ -88,13 +90,13 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             b.maxY - b.minY > 160
           )
             throw new Error("Exact placement footprint exceeds its cap.");
-          const generator = createGenerator(normalizeGeneration(message.world));
+          const generator = createGenerator(normalizeGeneration(message.world), message.landscape);
           for (let cy = Math.floor(b.minY / 16); cy <= Math.floor(b.maxY / 16); cy++) {
             for (let cx = Math.floor(b.minX / 16); cx <= Math.floor(b.maxX / 16); cx++) {
               for (const p of generator.placements(cx, cy, new Set()).placements) {
                 const id = p.featureId ?? `classic:${p.propType}:${p.wx}:${p.wy}`;
                 placements.set(id, { ...p, featureId: id });
-                if (placements.size > 512)
+                if (placements.size > (message.landscape ? 2048 : 512))
                   throw new Error("Exact placement count exceeds its cap.");
               }
             }
@@ -105,7 +107,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
         const actors = new Map(
           (message.footprint
             ? actorPlacements(
-                createGenerator(normalizeGeneration(message.world)),
+                createGenerator(normalizeGeneration(message.world), message.landscape),
                 message.footprint,
               )
             : []
