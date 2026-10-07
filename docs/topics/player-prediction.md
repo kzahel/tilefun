@@ -3,7 +3,7 @@
 Topic: player-prediction
 Status: shared camera recovery, snapshot-anchored reload pacing and airborne
 support momentum verified; varying motion and longer-stall corrections remain next.
-Updated: 2026-10-06.
+Updated: 2026-10-07.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)
@@ -11,6 +11,12 @@ owns transport/replication delivery; [vehicles](vehicles.md) and [trains](trains
 own their autonomous motion and service behavior.
 
 ## Current status
+
+New [idle roof-jump reproduction](../research/idle-support-jump.md) finds forward
+travel despite correct inherited velocity: uneven input delivery double-counts
+passive motion, landing gets a second carry, and takeoff presentation uses a
+mismatched time. Six deterministic expected failures and a native Worker capture
+precede correction. Idle relative travel, not velocity alone, is the acceptance.
 
 New playtest follow-up: [reload pacing](../research/train-refresh-pacing.md)
 reproduces persistent train/rider stepping after refresh despite stable relative

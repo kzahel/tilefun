@@ -12,7 +12,8 @@ const option = (name, fallback) =>
 const renderer = option("renderer", "canvas");
 const delay = Number(option("delay", "0"));
 const serverHz = option("server-hz", "60");
-const jumpMomentum = process.argv.includes("--jump-momentum");
+const idleJump = process.argv.includes("--idle-jump");
+const jumpMomentum = process.argv.includes("--jump-momentum") || idleJump;
 if (jumpMomentum && serverHz === "alternate")
   throw Error("Use a fixed server rate for jump flights");
 const renderHz = option("render-hz", "native");
@@ -260,6 +261,7 @@ probe: try {
           playerVx: predictor.player.velocity?.vx,
           serverVx: server.velocity?.vx,
           serverAirborne: server.jumpVZ !== undefined,
+          predictedAirborne: predictor.player.jumpVZ !== undefined,
           serverMomentumX: server.airMomentumX,
           serverMomentumY: server.airMomentumY,
           serverRoofId: roofSupport(server, game.remoteView.serverEntities)?.id,
@@ -307,24 +309,34 @@ probe: try {
       undefined,
       { timeout: 15000 },
     );
-    await page.keyboard.down("ArrowRight");
-    await page.waitForTimeout(700);
-    await page.keyboard.down("Space");
-    await page.waitForTimeout(650);
-    await page.keyboard.up("Space");
-    await page.keyboard.up("ArrowRight");
-    await page.waitForTimeout(200);
-    await page.keyboard.down("Space");
-    await page.waitForTimeout(100);
-    await page.keyboard.down("ArrowRight");
-    await page.waitForTimeout(120);
-    await page.keyboard.up("ArrowRight");
-    await page.keyboard.down("ArrowLeft");
-    await page.waitForTimeout(120);
-    await page.keyboard.up("ArrowLeft");
-    await page.waitForTimeout(400);
-    await page.keyboard.up("Space");
-    await page.waitForTimeout(4000);
+    if (idleJump) {
+      for (let flight = 0; flight < 2; flight++) {
+        await page.keyboard.down("Space");
+        await page.waitForTimeout(650);
+        await page.keyboard.up("Space");
+        await page.waitForTimeout(700);
+      }
+      await page.waitForTimeout(1000);
+    } else {
+      await page.keyboard.down("ArrowRight");
+      await page.waitForTimeout(700);
+      await page.keyboard.down("Space");
+      await page.waitForTimeout(650);
+      await page.keyboard.up("Space");
+      await page.keyboard.up("ArrowRight");
+      await page.waitForTimeout(200);
+      await page.keyboard.down("Space");
+      await page.waitForTimeout(100);
+      await page.keyboard.down("ArrowRight");
+      await page.waitForTimeout(120);
+      await page.keyboard.up("ArrowRight");
+      await page.keyboard.down("ArrowLeft");
+      await page.waitForTimeout(120);
+      await page.keyboard.up("ArrowLeft");
+      await page.waitForTimeout(400);
+      await page.keyboard.up("Space");
+      await page.waitForTimeout(4000);
+    }
   } else if (serverHz === "alternate") {
     await page.waitForTimeout(4000);
     rateCommands.push({ hz: 30, output: await setRate(30) });
@@ -457,6 +469,12 @@ probe: try {
       landing = raw.samples[i];
     jumpFlights.push({
       samples: airborne.length,
+      departureOffset: departure.offsetX,
+      landingOffset: landing?.offsetX,
+      landingServerOffsetDrift: (landing?.serverOffsetX ?? NaN) - departure.serverOffsetX,
+      maxDisplayedRelativeDrift: Math.max(
+        ...airborne.map((s) => Math.abs(s.offsetX - departure.offsetX)),
+      ),
       departureRoofId: departure.serverRoofId,
       landingRoofId: landing?.serverRoofId,
       landedZ: landing?.serverZ,
@@ -531,6 +549,7 @@ probe: try {
   console.log(JSON.stringify({ output, ...report.summary, errors }, null, 2));
   if (
     jumpMomentum &&
+    !idleJump &&
     (jumpFlights.length !== 2 ||
       jumpFlights.some(
         (f) =>
@@ -548,6 +567,24 @@ probe: try {
       !jumpFlights[1].hasBackward)
   )
     throw Error(`Jump momentum contract: ${JSON.stringify(jumpFlights)}`);
+
+  if (
+    idleJump &&
+    (jumpFlights.length !== 2 ||
+      jumpFlights.some(
+        (f) =>
+          f.samples < 20 ||
+          !Number.isFinite(f.landingServerOffsetDrift) ||
+          Math.abs(f.landingServerOffsetDrift) > 0.02 ||
+          !Number.isFinite(f.maxDisplayedRelativeDrift) ||
+          f.maxDisplayedRelativeDrift > 0.1 ||
+          f.landedZ !== 44 ||
+          f.departureRoofId !== f.landingRoofId ||
+          Math.abs(f.velocity.min - 192) > 0.001 ||
+          Math.abs(f.velocity.max - 192) > 0.001,
+      ))
+  )
+    throw Error(`Idle jump relative drift: ${JSON.stringify(jumpFlights)}`);
 
   if (cruise.length < 180 || errors.length)
     throw Error("Insufficient steady roof cruise or browser errors");

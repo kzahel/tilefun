@@ -471,3 +471,13 @@ One initial keyboard-boarding setup failed before capture; unchanged rerun passe
 No runtime/build changes occur during these browser runs. Evidence and remaining
 native-visibility/longer-stall limits are in the linked reload record. Next is the
 user's exact refresh/background playtest, then varying-motion/stall acceptance.
+
+## Idle roof-jump follow-up (2026-10-07)
+
+[Idle jump evidence](../research/idle-support-jump.md) preserves six expected
+failures and a native 60Hz / approximately-120Hz keyboard capture. Input batches
+and no-input fallback double-count passive flight; input landing then roof carry
+also advances twice; buffered train versus local-flight display introduces an
+additional small offset. Prior velocity/gap checks did not detect relative drift.
+Next isolate uneven delivery and correct authority passive-time admission,
+landing carry eligibility and source-time passive presentation in shared owners.
