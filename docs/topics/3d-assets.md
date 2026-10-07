@@ -3,7 +3,7 @@
 Topic: 3d-assets
 Status: car projection and orthographic inspection delivered; top-view appearance
 unresolved. Optional fixed-view GPU gameplay integration is delivered; model-assisted reconstruction remains proposed.
-Updated: 2026-10-04.
+Updated: 2026-10-07.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
 to physical proxies, and cross-view quality. [Rendering architecture](rendering-architecture.md)
@@ -91,10 +91,24 @@ Plan each implementation slice in a new tactical when it is taken up.
 | A6 | Diagnostic implementation delivered in 039–045 | Render the asset as an optional mesh body under the unchanged game projection, with continuous visual heading and a sprite fallback; engine work is tracked in the rendering topic |
 | A7 | Later | Test a second asset class before generalizing authoring, animation or batch generation; first-person coverage remains a later scope |
 
-Recommended next slice: A2 plus a fixed-camera comparison harness. It makes the
-three reconstruction approaches comparable without treating the current bad top
-view as training truth. Provider selection, execution cost and output quality are
-still open; custom training is not the starting assumption.
+The next investigation is [070 — Model-assisted spatial assets and sprite
+clipping](../tactical/070-model-assisted-spatial-assets-investigation.md), recorded
+at the owner's request for handoff to a Windows RTX 4090 workstation. It combines
+A2 input/camera registration with a bounded A3 comparison on oak and compact car,
+then picnic table and umbrella. The primary outcome is improved ordinary 2D
+clipping derived from spatial proxies; optional 3D appearance is evaluated
+separately. No model runs or renderer changes have occurred for this investigation.
+Provider selection, actual workstation compatibility and output quality remain
+open; custom training is not the starting assumption.
+
+Proposed asset direction: derive an occlusion proxy and projected depth/semantic
+masks from a fitted reconstruction while retaining original 2D color artwork.
+Visual geometry, occlusion geometry and collision/support metadata share an origin
+and scale but have distinct responsibilities. Painted ground shadows need explicit
+receiver semantics; mesh generation alone does not identify them. A compatible
+actor depth representation and cross-object renderer depth path are also required.
+The existing isolated mesh-body depth is not that general solution. Plan 070 owns
+the experiment protocol, overlap cases, Windows setup checks and evidence record.
 
 ## Implementation pointers
 

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [070 Spatial asset investigation](070-model-assisted-spatial-assets-investigation.md) | Planned Windows/RTX 4090 comparison: derive 2D clipping from model-assisted tree/car geometry, then table/umbrella; [3D assets](../topics/3d-assets.md) |
 | [069 Interactive authority scheduling](069-interactive-authority-scheduling.md) | Delivered shared authority clock/transport and lifecycle/streaming regressions; [embedded labs](../topics/embedded-engine-labs.md) |
 | [001 Modern interiors](001-modern-interiors-plan.md) | Original parent plan; later deliveries continue in 002/003/011 and [interiors topic](../topics/patterns-and-interiors.md) |
 | [002 Wall solver](002-interior-wall-solver-plan.md) | Wall checkpoint stable, 233 approved cases; retain as execution history |

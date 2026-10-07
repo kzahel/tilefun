@@ -7,6 +7,14 @@ This records repository evidence, external capabilities and proposed experiments
 separately. It is not a model benchmark or a decision to replace the engine.
 Recheck linked APIs and requirements before implementing against them.
 
+The 2026-10-07 next investigation is [070 — Model-assisted spatial assets and
+sprite clipping](../tactical/070-model-assisted-spatial-assets-investigation.md).
+It carries the tree/car experiment to the Windows RTX 4090 workstation and tests
+derived 2D occlusion depth separately from novel-view artwork quality. The plan
+records freshly checked provider/WSL requirements; the historical renderer survey
+below is not a statement of current implementation status. No model runs are
+claimed by that handoff.
+
 ## Investigations so far
 
 | Investigation | Observed result | What it does not establish |
