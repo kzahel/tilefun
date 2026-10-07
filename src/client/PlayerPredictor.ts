@@ -139,6 +139,11 @@ export class PlayerPredictor {
     const decay = Math.exp(-Math.max(0, this.clock() - this.presentationError.at) / 0.06);
     return { wx: this.presentationError.wx * decay, wy: this.presentationError.wy * decay };
   }
+  // Source timestamps accompany physics endpoints. Only passive XY samples
+  // the remote clock; locally controlled steering retains its input interpolation.
+  private poseSourceSeconds: number | undefined;
+  private prevPoseSourceSeconds: number | undefined;
+  private sourceFrameSeconds: number | undefined;
   private support: Entity | null = null;
   private supportOffset: RoofOffset | null = null;
   private prevSupportOffset: RoofOffset | null = null;
@@ -193,6 +198,7 @@ export class PlayerPredictor {
     this.presentationInputSeconds = this.presentationInputDt = 0;
     this.presentationEpoch = {};
     this.supportDisplayShift = this.flightDisplayShift = null;
+    this.poseSourceSeconds = this.prevPoseSourceSeconds = this.sourceFrameSeconds = undefined;
     this.clearPresentationError();
     this.predicted = this.clonePlayer(serverPlayer);
     this.support = null;
@@ -270,6 +276,8 @@ export class PlayerPredictor {
     }
     this.captureSupport(entities);
     this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
+    if (this.support) this.poseSourceSeconds = this.sourceFrameSeconds;
+    this.prevPoseSourceSeconds = this.poseSourceSeconds;
     this.prevPresentationError = this.displayedError();
     // Save previous state for render interpolation
     this._prevPosition = {
@@ -442,6 +450,7 @@ export class PlayerPredictor {
       const dx = this.predicted.position.wx - oldX;
       const dy = this.predicted.position.wy - oldY;
       if (dx * dx + dy * dy > SNAP_THRESHOLD * SNAP_THRESHOLD) {
+        this.prevPoseSourceSeconds = this.poseSourceSeconds;
         this._prevPosition = {
           wx: this.predicted.position.wx,
           wy: this.predicted.position.wy,
@@ -455,6 +464,8 @@ export class PlayerPredictor {
       const oldX = this.predicted.position.wx;
       const oldY = this.predicted.position.wy;
 
+      this.poseSourceSeconds = this.sourceFrameSeconds = diagnostics?.simulationTime;
+      this.prevPoseSourceSeconds ??= this.poseSourceSeconds;
       // Snap to server's authoritative position, velocity, and jump state.
       // Velocity must be snapped because the friction/acceleration model is
       // path-dependent — replaying inputs from the wrong starting velocity
@@ -520,6 +531,7 @@ export class PlayerPredictor {
       const dx = this.predicted.position.wx - oldX;
       const dy = this.predicted.position.wy - oldY;
       if (dx * dx + dy * dy > SNAP_THRESHOLD * SNAP_THRESHOLD) {
+        this.prevPoseSourceSeconds = this.poseSourceSeconds;
         this._prevPosition = {
           wx: this.predicted.position.wx,
           wy: this.predicted.position.wy,
@@ -702,7 +714,11 @@ export class PlayerPredictor {
   /** Collapse local interpolation onto one render pose. Carrier contribution is
    * sampled on the remote display timeline; voluntary roof walking stays local.
    */
-  samplePresentationPlayer(alpha: number, displayedEntities: readonly Entity[]): Entity | null {
+  samplePresentationPlayer(
+    alpha: number,
+    displayedEntities: readonly Entity[],
+    sourceSeconds?: number,
+  ): Entity | null {
     const player = this.presentationPlayer;
     if (!player) return null;
     let position: PositionComponent;
@@ -739,6 +755,24 @@ export class PlayerPredictor {
       player.airMomentumY === undefined
     )
       this.flightDisplayShift = null;
+    if (
+      !support &&
+      player.jumpVZ !== undefined &&
+      (player.airMomentumX !== undefined || player.airMomentumY !== undefined) &&
+      sourceSeconds !== undefined &&
+      this.poseSourceSeconds !== undefined &&
+      this.prevPoseSourceSeconds !== undefined
+    ) {
+      const physicsTime =
+        this.prevPoseSourceSeconds + (this.poseSourceSeconds - this.prevPoseSourceSeconds) * alpha;
+      this.flightDisplayShift ??= { wx: 0, wy: 0 };
+      // Preserve a clipped axis's existing translation rather than popping to
+      // its committed wall pose. Landing retains the established release policy.
+      if (player.airMomentumX)
+        this.flightDisplayShift.wx = player.airMomentumX * (sourceSeconds - physicsTime);
+      if (player.airMomentumY)
+        this.flightDisplayShift.wy = player.airMomentumY * (sourceSeconds - physicsTime);
+    }
     if (!support && this.flightDisplayShift) {
       const shift = this.flightDisplayShift;
       if (player.jumpVZ === undefined) shift.landedAt ??= this.clock();
@@ -764,7 +798,7 @@ export class PlayerPredictor {
     this.support = null;
     this.supportOffset = this.prevSupportOffset = null;
   }
-  private captureSupport(entities: readonly Entity[]): void {
+  private captureSupport(entities: readonly Entity[], landed = false): void {
     if (!this.predicted || this.noclip || this.predictedMount) {
       this.flightDisplayShift = null;
       this.clearSupport();
@@ -786,6 +820,14 @@ export class PlayerPredictor {
       return;
     }
     const changed = support.id !== this.support?.id;
+    if (landed && this.poseSourceSeconds !== undefined && this.sourceFrameSeconds !== undefined) {
+      // Flight predicts a future world pose. Once supported, bind walking back
+      // to the newest committed roof using the offset against its future pose.
+      const ahead = Math.max(0, this.poseSourceSeconds - this.sourceFrameSeconds);
+      this.predicted.position.wx -= (support.velocity?.vx ?? 0) * ahead;
+      this.predicted.position.wy -= (support.velocity?.vy ?? 0) * ahead;
+      this.poseSourceSeconds = this.sourceFrameSeconds;
+    }
     this.support = support;
     this.supportOffset = roofOffset(this.predicted.position, support);
     if (changed) {
@@ -986,6 +1028,7 @@ export class PlayerPredictor {
     const getTerrainAt = (tx: number, ty: number) => world.getBlendBaseAt(tx, ty);
     const getRoadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
 
+    let landed = false;
     if (this.predictedMount) {
       // ── Riding: apply input to mount, derive player position ──
       const mountExclude = new Set([this.predictedMount.id, this.predicted.id]);
@@ -1024,6 +1067,7 @@ export class PlayerPredictor {
       }
     } else {
       // ── Normal: apply friction + acceleration from input ──
+      if (this.support) this.poseSourceSeconds = this.sourceFrameSeconds;
       const playerExclude = new Set([this.predicted.id]);
       const playerCtx = createMovementContext({
         getCollision,
@@ -1056,12 +1100,14 @@ export class PlayerPredictor {
           this.physicsMult(),
         );
         nextState = stepResult.jumpState;
+        landed ||= stepResult.outcome.landed;
+        if (this.poseSourceSeconds !== undefined) this.poseSourceSeconds += stepDts[i] ?? 0;
         if (this.predictionTime !== undefined) this.predictionTime += stepDts[i] ?? 0;
       }
       this.jumpConsumed = nextState.jumpConsumed;
       this.lastJumpHeld = nextState.lastJumpHeld;
     }
-    this.captureSupport(entities);
+    this.captureSupport(entities, landed);
   }
 
   private clonePlayer(serverPlayer: Entity): Entity {

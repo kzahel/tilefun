@@ -354,7 +354,12 @@ export class TrafficSystem {
     return true;
   }
   /** Called once per physics tick after player input. No wander AI, damage or pushing. */
-  tick(dt: number, players: readonly Entity[], active?: ReadonlySet<Entity>) {
+  tick(
+    dt: number,
+    players: readonly Entity[],
+    active?: ReadonlySet<Entity>,
+    excludedRiderIds?: ReadonlySet<number>,
+  ) {
     this.time += dt;
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
@@ -422,6 +427,7 @@ export class TrafficSystem {
         this.entities,
         this.props,
         this.world,
+        excludedRiderIds,
       );
       if (!passengers) {
         move = s.speed = 0;

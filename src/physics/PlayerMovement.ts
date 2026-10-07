@@ -365,7 +365,22 @@ export function stepPlayerFromInput(
   let enteredWater = false;
 
   for (let i = 0; i < steps; i++) {
+    // Keep commanded steering/gravity time, but admit externally inherited XY
+    // motion on the authority's world interval. Restore world velocity after
+    // collision; clipped passive axes stay clipped rather than being re-added.
+    const mx = entity.airMomentumX ?? 0,
+      my = entity.airMomentumY ?? 0;
+    const admittedDt = mx !== 0 || my !== 0 ? (ctx.takeAirMomentumDt?.(stepDt) ?? stepDt) : stepDt;
+    const scaleDelta = admittedDt / stepDt - 1;
+    if (entity.velocity) {
+      entity.velocity.vx += mx * scaleDelta;
+      entity.velocity.vy += my * scaleDelta;
+    }
     moveAndCollide(entity, stepDt, ctx);
+    if (entity.velocity) {
+      entity.velocity.vx -= (entity.airMomentumX ?? 0) * scaleDelta;
+      entity.velocity.vy -= (entity.airMomentumY ?? 0) * scaleDelta;
+    }
     const surfaces = sampleSurfaces(entity);
     const trackedGroundZ = resolveGroundZForTracking(
       entity,

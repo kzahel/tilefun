@@ -590,6 +590,7 @@ export class Realm {
       );
     const movementPhysics = this.options.physics?.() ?? getMovementPhysicsParams();
     const preSteppedEntityIds = new Set<number>();
+    const landingCarryExcluded = new Set<number>();
 
     // ── Phase 1: Process player inputs (per-session) ──
     // Drain each session's input queue and run full per-input simulation steps.
@@ -624,6 +625,12 @@ export class Realm {
       if (!session.editorEnabled && session.inputQueue.length > 0) {
         const inputs = session.inputQueue;
         session.inputQueue = [];
+        let passiveSeconds = dt;
+        const takeAirMomentumDt = () => {
+          const admitted = passiveSeconds;
+          passiveSeconds = 0;
+          return admitted;
+        };
 
         const getCollision = (tx: number, ty: number) => this.world.getCollisionIfLoaded(tx, ty);
         const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
@@ -713,6 +720,7 @@ export class Realm {
           const playerExclude = new Set([session.player.id]);
           const playerCtx = createMovementContext({
             deferRoofCarry: true,
+            takeAirMomentumDt,
             getCollision,
             getHeight,
             getTerrainAt,
@@ -748,6 +756,7 @@ export class Realm {
               this.physicsMult,
             );
             nextState = stepResult.jumpState;
+            if (stepResult.outcome.landed) landingCarryExcluded.add(session.player.id);
             playerStepOutcome = mergePlayerStepOutcomes(playerStepOutcome, stepResult.outcome);
           }
           session.jumpConsumed = nextState.jumpConsumed;
@@ -856,8 +865,17 @@ export class Realm {
           preSteppedEntityIds,
         );
 
-        this.traffic?.tick(stepDt, players, this.streaming ? new Set(active) : undefined);
-        this.railway?.tick(stepDt, (range) => this.streaming?.rangeReady(range) ?? false);
+        this.traffic?.tick(
+          stepDt,
+          players,
+          this.streaming ? new Set(active) : undefined,
+          landingCarryExcluded,
+        );
+        this.railway?.tick(
+          stepDt,
+          (range) => this.streaming?.rangeReady(range) ?? false,
+          landingCarryExcluded,
+        );
 
         // ── Jump physics for all players + mount detection on landing ──
         for (const session of activeSessions) {

@@ -21,6 +21,9 @@ export interface MovementContext {
   noclip: boolean;
   /** Moving-roof carry is owned by committed support poses, not input commands. */
   deferRoofCarry?: boolean;
+  /** Authority admits passive departure motion once per world interval, not per
+   * queued command. Prediction/direct stepping defaults to the command duration. */
+  takeAirMomentumDt?(commandDt: number): number;
   /** Computed blendBase TerrainId at tile coords. For surface friction lookup. */
   getTerrainAt?(tx: number, ty: number): number;
   /** Road type at tile coords. For surface friction lookup. */

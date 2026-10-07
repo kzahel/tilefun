@@ -201,7 +201,11 @@ export class RemoteStateView implements ClientStateView {
       domain: "remote",
     };
     const entities = this.presentation.sample(this._entities, now, paused);
-    const player = this._predictor?.samplePresentationPlayer(alpha, entities);
+    const player = this._predictor?.samplePresentationPlayer(
+      alpha,
+      entities,
+      this.presentation.sampledTime,
+    );
     const mount = this._predictor?.mount;
     this.presentedEntities = entities.map((e) => {
       if (e.id === this._playerEntityId && player) return player;

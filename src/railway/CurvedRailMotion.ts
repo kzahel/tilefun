@@ -16,6 +16,7 @@ export function stepCurvedTrain(
   world: World,
   entities: EntityManager,
   props: PropManager,
+  excludedRiderIds?: ReadonlySet<number>,
 ): void {
   const alignment = railAlignment(required(s.line.path));
   const record = s.record;
@@ -56,7 +57,7 @@ export function stepCurvedTrain(
   const passengers: NonNullable<ReturnType<typeof planTrainPassengers>> = [];
   for (const [i, nextCar] of poses.entries()) {
     const car = required(s.carriages[i]);
-    const plan = planTrainPassengers(car, nextCar, entities, props, world);
+    const plan = planTrainPassengers(car, nextCar, entities, props, world, excludedRiderIds);
     if (!plan) {
       s.speed = 0;
       return;

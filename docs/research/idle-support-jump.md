@@ -35,3 +35,25 @@ No runtime correction has been made at this reproduction checkpoint.
 npx vitest run src/client/IdleSupportJump.test.ts
 node scripts/instrumentation/train-roof-browser.mjs --headed --renderer=gpu --server-hz=60 --idle-jump --output=/tmp/idle-train-jump.json
 ```
+
+## Shared correction
+
+Ten regressions now pass: lockstep and alternating 2/0 inputs for native cars and
+trains at 30/60Hz, plus full replica/predictor/GameLoop presentation at 120Hz,
+including the first grounded display after flight. Authority admits passive XY
+motion once per world tick through the shared movement context; commanded
+steering and jump gravity retain their existing input time. No-input fallback
+already advances once and keeps that behavior. The movement collision path
+restores total velocity after admitting passive displacement and preserves clipped
+axes. Input-landed passengers are excluded from the following carry interval in
+both traffic and straight/curved rail services.
+
+Prediction timestamps its world endpoints and interpolates only inherited XY
+onto the replica's sampled source time. Local steering stays responsive. Predicted
+landing converts the future roof offset back to the newest committed roof frame.
+First-history holds, reset and endpoint collapse have matching source timestamps.
+Departed platforms are not followed in flight; the stored departure velocity is
+used. Existing clipped-axis/ground-landing display translation policy is retained.
+The 104 focused movement/prediction/camera checks and all three typechecks pass.
+Native and final validation follow. This does not redesign vertical/input-time
+admission or infer unavailable varying-platform trajectories.

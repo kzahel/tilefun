@@ -13,6 +13,11 @@ export class RemotePresentation {
   private history = new Map<number, MotionSample[]>();
   private clock: PresentationClock | null = null;
   private latest: number | null = null;
+  private first: number | null = null;
+  /** Effective source time of borrowed poses; initial history holds its first sample. */
+  get sampledTime(): number | undefined {
+    return this.clock && this.first !== null ? Math.max(this.first, this.clock.time) : undefined;
+  }
   private wasPaused = false;
   private rate = 1;
 
@@ -31,6 +36,7 @@ export class RemotePresentation {
 
   record(entities: readonly Entity[], time: number, receivedAt: number) {
     if (this.latest !== null && time < this.latest) this.clear();
+    this.first ??= time;
     this.latest = time;
     this.clock ??= { localOrigin: receivedAt, sourceOrigin: time, time: time - PRESENTATION_DELAY };
     const ids = new Set(entities.map((e) => e.id));
@@ -82,7 +88,7 @@ export class RemotePresentation {
   clear() {
     this.history.clear();
     this.clock = null;
-    this.latest = null;
+    this.latest = this.first = null;
     this.wasPaused = false;
   }
 }

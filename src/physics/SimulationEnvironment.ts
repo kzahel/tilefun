@@ -27,6 +27,7 @@ export interface CreateMovementContextOptions extends SimulationQuerySource {
   excludeIds: ReadonlySet<number>;
   noclip: boolean;
   deferRoofCarry?: boolean;
+  takeAirMomentumDt?: MovementContext["takeAirMomentumDt"];
   shouldEntityBlock?: (other: Entity) => boolean;
 }
 
@@ -77,6 +78,7 @@ export function createMovementContext(options: CreateMovementContextOptions): Mo
     noclip: options.noclip,
     ...(options.deferRoofCarry ? { deferRoofCarry: true } : {}),
   };
+  if (options.takeAirMomentumDt) ctx.takeAirMomentumDt = options.takeAirMomentumDt;
   if (options.getTerrainAt) ctx.getTerrainAt = options.getTerrainAt;
   if (options.getRoadAt) ctx.getRoadAt = options.getRoadAt;
   return ctx;

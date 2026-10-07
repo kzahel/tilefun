@@ -5,17 +5,19 @@ import {
   IDLE,
   openContactCase,
 } from "../../scripts/instrumentation/moving-contact-cases.js";
+import { applyContactFrames } from "../../scripts/instrumentation/moving-contact-run.js";
 import { required } from "../art/ArtCatalog.js";
 import { GameLoop } from "../core/GameLoop.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { decodeServerMessage } from "../shared/binaryCodec.js";
+import { LocalTransport } from "../transport/LocalTransport.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
 
 for (const hz of [30, 60]) {
   for (const name of ["train-roof", "car-roof"] as const) {
-    it.fails(`keeps the same roof-relative position for an idle native ${name} jump at ${hz}Hz`, async () => {
+    it(`keeps the same roof-relative position for an idle native ${name} jump at ${hz}Hz`, async () => {
       const session = await openContactCase(name, {
         ...contactRecipe(name),
         physics: { revision: 0 },
@@ -54,7 +56,7 @@ for (const hz of [30, 60]) {
 }
 
 for (const hz of [30, 60]) {
-  it.fails(`keeps idle jump presentation aligned at ${hz}Hz authority / 120Hz display`, async () => {
+  it(`keeps idle jump presentation aligned at ${hz}Hz authority / 120Hz display`, async () => {
     const session = await openContactCase("train-roof", {
       ...contactRecipe("train-roof"),
       physics: { revision: 0 },
@@ -67,8 +69,7 @@ for (const hz of [30, 60]) {
         for (const buffer of session.frames()) {
           const msg = decodeServerMessage(buffer);
           if (msg.type === "frame") view.applyFrame(msg, now);
-          else if (msg.type.startsWith("sync-"))
-            view.applyMessage(msg as Parameters<typeof view.applyMessage>[0]);
+          else applyContactFrames(view, [buffer]);
         }
       };
       apply();
@@ -130,7 +131,7 @@ for (const hz of [30, 60]) {
         if (frame > 0 && frame % (120 / hz) === 0) await session.step(nextInput, 1 / hz);
         loop.externalTick(now * 1000);
       }
-      const before = required(samples.findLast((s) => s.time < 0.95));
+      const before = required(samples.filter((s) => s.time < 0.95).at(-1));
       const flight = samples.filter((s) => s.airborne);
       expect(flight.length).toBeGreaterThan(30);
       expect(
@@ -143,8 +144,48 @@ for (const hz of [30, 60]) {
           min: Math.min(...flight.map((s) => s.offset)),
         }),
       ).toBeLessThan(0.1);
+      expect(
+        Math.max(
+          ...samples.filter((s) => s.time >= 1).map((s) => Math.abs(s.offset - before.offset)),
+        ),
+      ).toBeLessThan(0.1);
     } finally {
       await session.close();
     }
   });
 }
+
+for (const hz of [30, 60])
+  for (const name of ["train-roof", "car-roof"] as const) {
+    it(`admits passive flight once with alternating 2/0 commands (${name}, ${hz}Hz)`, async () => {
+      const session = await openContactCase(name, {
+        ...contactRecipe(name),
+        physics: { revision: 0 },
+      });
+      try {
+        session.realm.tickRate = hz;
+        const roof = required(contactTarget(session, name)),
+          p = session.player.player;
+        const offset = p.position.wx - roof.position.wx;
+        const transport = new LocalTransport();
+        let seq = session.player.lastProcessedInputSeq,
+          airborne = false;
+        const errors: number[] = [];
+        for (let tick = 0; tick < hz * 2; tick++) {
+          await session.ready();
+          if (tick % 2 === 0)
+            for (let cmd = 0; cmd < 2; cmd++)
+              session.player.inputQueue.push({ ...IDLE, jump: true, seq: ++seq, dtMs: 1000 / hz });
+          session.realm.tick(1 / hz, transport.serverSide, false, new Set());
+          errors.push(Math.abs(p.position.wx - roof.position.wx - offset));
+          airborne ||= p.jumpVZ !== undefined;
+          if (airborne && p.jumpVZ === undefined) break;
+        }
+        expect(airborne).toBe(true);
+        expect(p.jumpVZ).toBeUndefined();
+        expect(Math.max(...errors)).toBeLessThan(0.02);
+      } finally {
+        await session.close();
+      }
+    });
+  }

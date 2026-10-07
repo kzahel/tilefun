@@ -79,6 +79,16 @@ probe: try {
       )
     );
   });
+  const actualRenderer = await page.getAttribute("#game", "data-renderer");
+  if (actualRenderer !== renderer) throw Error(`Requested ${renderer}, got ${actualRenderer}`);
+  // World creation and replica application are asynchronous; don't send boarding
+  // keys against an earlier spawn whose terrain happens to already be ready.
+  await page.waitForFunction(() => {
+    const g = document.querySelector("#game").__game;
+    const p = g.remoteView.serverPlayerEntity;
+    const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+    return car && Math.hypot(p.position.wx - car.position.wx, p.position.wy - car.position.wy) < 80;
+  });
   if (await page.evaluate(() => document.querySelector("#game").__game.stateView.editorEnabled))
     await page.keyboard.press("Tab");
   await page.keyboard.down("ArrowDown");
@@ -493,6 +503,7 @@ probe: try {
     jumpFlights,
     revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
     renderer,
+    actualRenderer,
     delayEachWayMs: delay,
     requestedServerHz: serverHz,
     requestedRenderHz: renderHz,

@@ -257,7 +257,7 @@ export class RailwaySystem {
       .filter((s) => !s.record.deleted && !s.retiring)
       .map((s) => ({ range: this.range(s), activity: 2, reason: "dependency" }));
   }
-  tick(dt: number, ready: (range: ChunkRange) => boolean) {
+  tick(dt: number, ready: (range: ChunkRange) => boolean, excludedRiderIds?: ReadonlySet<number>) {
     if (this.closed || this.saves.pressured) return;
     for (const s of this.services.values()) {
       const e = s.entity;
@@ -283,7 +283,7 @@ export class RailwaySystem {
       for (let i = 0; i < steps; i++) {
         if (s.line.path) {
           for (const car of s.carriages) if (car.velocity) car.velocity.vx = car.velocity.vy = 0;
-          stepCurvedTrain(s, step, this.world, this.entities, this.props);
+          stepCurvedTrain(s, step, this.world, this.entities, this.props, excludedRiderIds);
           continue;
         }
         if (s.record.dwell > 0) {
@@ -325,6 +325,7 @@ export class RailwaySystem {
             this.entities,
             this.props,
             this.world,
+            excludedRiderIds,
           );
           if (!plan) {
             passengerBlocked = true;

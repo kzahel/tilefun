@@ -55,9 +55,13 @@ export function planMovingPassengers(
   entities: EntityManager,
   props: PropManager,
   world: World,
+  excludedRiderIds?: ReadonlySet<number>,
 ): { rider: Entity; position: Entity["position"]; z: number }[] | undefined {
   const riders = entities.entities.filter(
-    (e) => e.type === "player" && roofSupport(e, entities.entities)?.id === before.id,
+    (e) =>
+      e.type === "player" &&
+      !excludedRiderIds?.has(e.id) &&
+      roofSupport(e, entities.entities)?.id === before.id,
   );
   const result = [];
   for (const rider of riders) {

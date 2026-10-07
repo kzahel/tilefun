@@ -481,3 +481,10 @@ also advances twice; buffered train versus local-flight display introduces an
 additional small offset. Prior velocity/gap checks did not detect relative drift.
 Next isolate uneven delivery and correct authority passive-time admission,
 landing carry eligibility and source-time passive presentation in shared owners.
+
+The shared correction admits inherited XY once per authority interval and excludes
+input-landed riders from the next service carry phase. Timestamped prediction
+endpoints let passive display motion use the carrier source clock while voluntary
+steering stays local. Future landing offsets convert to the committed roof frame.
+Ten new regressions and 104 focused controls pass; all three typechecks pass.
+Native idle/steering flights and full game/lab validation follow before acceptance.
