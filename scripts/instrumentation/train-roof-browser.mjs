@@ -91,11 +91,29 @@ probe: try {
   });
   if (await page.evaluate(() => document.querySelector("#game").__game.stateView.editorEnabled))
     await page.keyboard.press("Tab");
+  await page.waitForFunction(() => {
+    const g = document.querySelector("#game").__game;
+    return !g.remoteView.editorEnabled && g.remoteView._predictor?.player;
+  });
   await page.keyboard.down("ArrowDown");
+  // Approach the actual body before jumping. A timed approach from spawn can
+  // miss the roof when startup work delays keyboard command delivery.
+  await page.waitForFunction(() => {
+    const g = document.querySelector("#game").__game;
+    const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+    return car && g.remoteView.serverPlayerEntity.position.wy >= car.position.wy - 14;
+  }, undefined, { timeout: 2000 });
   await page.keyboard.down("Space");
-  await page.waitForTimeout(950);
+  await page.waitForFunction(() => {
+    const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
+    return p.jumpVZ !== undefined;
+  }, undefined, { timeout: 1000 });
+  await page.waitForFunction(() => {
+    const g = document.querySelector("#game").__game;
+    const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+    return car && g.remoteView.serverPlayerEntity.position.wy >= car.position.wy + 3;
+  }, undefined, { timeout: 1500 });
   await page.keyboard.up("ArrowDown");
-  await page.keyboard.up("Space");
   await page
     .waitForFunction(() => {
       const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity;
@@ -116,6 +134,7 @@ probe: try {
       );
       throw error;
     });
+  await page.keyboard.up("Space");
   const setRate = async (hz) => {
     const output = await page.evaluate(async (hz) => {
       const game = document.querySelector("#game").__game;

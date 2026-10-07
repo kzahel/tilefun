@@ -129,3 +129,12 @@ pending-input replay. All fields have explicit delta removal and binary mask/buf
 coverage; endpoints must use the same build. Airborne player saves retain total and
 passive XY motion; explicit travel and lifecycle resets clear passive state.
 [Movement/presentation evidence](research/airborne-support-momentum.md) owns details.
+
+Externally inherited XY displacement is admitted once per authority world interval,
+across an input batch; commanded steering and jump gravity retain input time.
+Input-landed passengers do not receive another service carry during that interval.
+Prediction timestamps its world endpoints and samples inherited display motion at
+the remote entities' source time, with local steering still interpolated locally.
+Predicted landing binds its future roof offset back to the committed roof frame.
+These policies live in shared Realm/movement/replica/predictor code used by game
+and labs. [Idle travel evidence](research/idle-support-jump.md) owns acceptance.

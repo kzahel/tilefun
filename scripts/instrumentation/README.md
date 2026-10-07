@@ -211,6 +211,15 @@ Chromium for actual 120Hz display evidence. Roof-offset/steady-idle assertions
 are separate lanes: walking/jumping intentionally changes the passenger offset.
 [Contracts, evidence and limits](../../docs/research/airborne-support-momentum.md).
 
+Use `--idle-jump` for two jumps with no XY input on an unchanged cruising train.
+The lane asserts server landing offset drift ≤0.02px and airborne displayed
+relative drift ≤0.1px, in addition to velocity and same-roof landing. Ordinary
+keyboard boarding waits for play-mode acknowledgement and approaches the body
+before jumping; no physics or player-position override is used. Native headed
+captures complement deterministic Realm input-batch and 120Hz presentation
+regressions in `src/client/IdleSupportJump.test.ts`.
+[Idle travel evidence](../../docs/research/idle-support-jump.md).
+
 ## Saved train reload pacing
 
 Add `--reload-pacing --headed` to `train-roof-browser.mjs` for a normal page reload

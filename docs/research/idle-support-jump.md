@@ -57,3 +57,15 @@ used. Existing clipped-axis/ground-landing display translation policy is retaine
 The 104 focused movement/prediction/camera checks and all three typechecks pass.
 Native and final validation follow. This does not redesign vertical/input-time
 admission or infer unavailable varying-platform trajectories.
+
+The first post-correction native 60Hz / 120Hz GPU capture has zero authoritative
+landing drift for both jumps but a brief ~3.2px backward display error after
+takeoff. Two delayed-snapshot regressions reproduce it without a browser:
+~3.20064px / 6.39944px at 60/30Hz. Grounded acknowledgements still replaying the
+pending takeoff advance the predicted world/source endpoint; contact-error decay
+mistakes the expected source-time shift for residual displacement even though
+passive sampling already accounts for it. These two expected failures precede
+the follow-up correction. [Native boundary capture](/tmp/idle-train-jump-before-residual60.json).
+The probe's initial timed boarding was unreliable; it now waits for acknowledged
+play mode, approaches the actual body and releases XY while over the roof, using
+ordinary keys and observed server coordinates only.

@@ -55,8 +55,9 @@ for (const hz of [30, 60]) {
   }
 }
 
-for (const hz of [30, 60]) {
-  it(`keeps idle jump presentation aligned at ${hz}Hz authority / 120Hz display`, async () => {
+for (const hz of [30, 60]) for (const delayTicks of [0, 2]) {
+  const test = delayTicks ? it.fails : it;
+  test(`keeps idle jump presentation aligned at ${hz}Hz authority / 120Hz display (${delayTicks} delayed snapshots)`, async () => {
     const session = await openContactCase("train-roof", {
       ...contactRecipe("train-roof"),
       physics: { revision: 0 },
@@ -65,8 +66,14 @@ for (const hz of [30, 60]) {
       session.realm.tickRate = hz;
       const view = new RemoteStateView(new World(new FlatStrategy()));
       let now = 0;
-      const apply = () => {
-        for (const buffer of session.frames()) {
+      const queued: ArrayBuffer[][] = [];
+      const apply = (deferred = false) => {
+        let frames = session.frames();
+        if (deferred) {
+          queued.push(frames);
+          frames = queued.length > delayTicks ? required(queued.shift()) : [];
+        }
+        for (const buffer of frames) {
           const msg = decodeServerMessage(buffer);
           if (msg.type === "frame") view.applyFrame(msg, now);
           else applyContactFrames(view, [buffer]);
@@ -87,7 +94,7 @@ for (const hz of [30, 60]) {
         [];
       const loop = new GameLoop({
         update(dt) {
-          apply();
+          apply(true);
           predictor.reconcile(
             view.serverPlayerEntity,
             view.lastProcessedInputSeq,

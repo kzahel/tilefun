@@ -1,5 +1,10 @@
 # Airborne support momentum
 
+2026-10-07 follow-up: [idle roof-jump travel](idle-support-jump.md) adds positional
+acceptance through flight and landing. The initial velocity/gap checks missed
+uneven-input passive travel, landing double carry and flight display source phase;
+the newer record owns their correction and verification.
+
 Implemented 2026-10-06 after the user's playtest confirmed camera jitter was fixed.
 [Player prediction](../topics/player-prediction.md) owns current contracts;
 [Tactical 067](../tactical/067-shared-prediction-timeline.md) records execution.
