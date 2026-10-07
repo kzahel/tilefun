@@ -12,6 +12,8 @@ export class Camera {
   viewportWidth = 0;
   viewportHeight = 0;
   zoom = 1;
+  /** Gameplay opts in; immutable reference adapters retain their original projection. */
+  pixelSnap = false;
 
   /** True until the first follow() call, so the camera snaps instead of lerping. */
   private firstFollow = true;

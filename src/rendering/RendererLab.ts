@@ -6,6 +6,7 @@ import type { InteriorContent } from "../interiors/InteriorPresentation.js";
 import { vehicleFrameDirection } from "../traffic/Vehicle.js";
 import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
+import { probeCameraStability } from "./CameraStabilityProbe.js";
 import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
 import { collectScene } from "./collectScene.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
@@ -361,6 +362,7 @@ const lab = {
   },
   gpu,
   probeSpriteSeams,
+  probeCameraStability,
 };
 (window as unknown as { rendererLab: typeof lab }).rendererLab = lab;
 const controls = required(document.querySelector<HTMLElement>("#controls"));

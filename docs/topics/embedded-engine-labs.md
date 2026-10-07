@@ -91,6 +91,15 @@ records this extraction and its validation. Shared owners are:
   supply body and camera interpolation together. The lab's -12px framing offset
   is explicit; position commands snap, while ordinary movement interpolates.
 
+  The 2026-10-07 camera raster prototype enables the same `RenderView.pixelSnap`
+  policy in GameClient and ScenarioPresentationHost. Only the final shared screen
+  translation is quantized; follow clocks, displayed world poses, fixed diagnostic
+  framing and prediction remain unchanged. Backend view copying and terrain
+  placement consume that policy; inverse picking follows the displayed projection.
+  `?pixelsnap=0` disables it in either host for visual comparison. Reference adapters
+  keep the original projection. See [rendering architecture](rendering-architecture.md)
+  for placement regression scope, remaining texture-sampling limits and owner acceptance.
+
   The shared timestamped presentation follow-up replaces interactive render-time
   camera advancement with pure `CameraFollow` and borrows sampled poses through
   RemoteStateView during render. Remote entities use bounded timestamp history;

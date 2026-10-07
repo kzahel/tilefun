@@ -21143,7 +21143,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:314"
+          "source": "src/rendering/RendererLab.ts:315"
         }
       ]
     },
@@ -21161,7 +21161,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:315"
+          "source": "src/rendering/RendererLab.ts:316"
         }
       ]
     },
@@ -21451,19 +21451,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:200"
+          "source": "src/rendering/RendererLab.ts:201"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:268"
+          "source": "src/rendering/RendererLab.ts:269"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:272"
+          "source": "src/rendering/RendererLab.ts:273"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:276"
+          "source": "src/rendering/RendererLab.ts:277"
         }
       ]
     },
@@ -24349,19 +24349,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RasterRenderBackend.ts:155"
+          "source": "src/rendering/CameraStabilityProbe.ts:46"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:205"
+          "source": "src/rendering/RasterRenderBackend.ts:156"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:209"
+          "source": "src/rendering/RendererLab.ts:206"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:287"
+          "source": "src/rendering/RendererLab.ts:210"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ScenarioPresentationHost.ts:288"
         },
         {
           "system": "Editor",

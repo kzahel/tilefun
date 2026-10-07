@@ -6,7 +6,7 @@ import type { SpriteItem } from "./SceneItem.js";
 
 /** Browser regression fixture: adjacent translucent pieces must cover a rectangle
  * exactly once, including at fractional zoom and camera positions. */
-export function probeSpriteSeams() {
+export function probeSpriteSeams(pixelSnap = false) {
   const makeCanvas = () => {
     const canvas = document.createElement("canvas");
     canvas.width = 960;
@@ -29,6 +29,7 @@ export function probeSpriteSeams() {
   native.setAssets(sheets);
   gpu.setAssets(sheets);
   const camera = new Camera();
+  camera.pixelSnap = pixelSnap;
   camera.setViewport(960, 640);
   const reports = [];
   try {
@@ -73,6 +74,7 @@ export function probeSpriteSeams() {
           zoom,
           viewportWidth: 960,
           viewportHeight: 640,
+          pixelSnap,
         };
         const tl = camera.worldToScreen(origin - 104, origin - 64 - 5);
         const br = camera.worldToScreen(origin + 104, origin + 64 - 5);

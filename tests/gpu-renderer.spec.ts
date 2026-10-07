@@ -7,13 +7,34 @@ test("adjacent sprites have no gaps or overlaps at fractional scales on either b
 }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const reports = await page.evaluate(() => {
+    const lab = (
+      window as unknown as {
+        rendererLab: { probeSpriteSeams(snap?: boolean): { mismatches: number }[] };
+      }
+    ).rendererLab;
+    return [...lab.probeSpriteSeams(), ...lab.probeSpriteSeams(true)];
+  });
+  expect(reports).toHaveLength(64);
+  expect(reports.filter((report) => report.mismatches !== 0)).toEqual([]);
+});
+
+test("stationary terrain, props and grass stay rigid while the camera settles", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
   const reports = await page.evaluate(() =>
     (
-      window as unknown as { rendererLab: { probeSpriteSeams(): { mismatches: number }[] } }
-    ).rendererLab.probeSpriteSeams(),
+      window as unknown as {
+        rendererLab: { probeCameraStability(): { mismatches: number; movedFrames: number }[] };
+      }
+    ).rendererLab.probeCameraStability(),
   );
-  expect(reports).toHaveLength(32);
-  expect(reports.filter((report) => report.mismatches !== 0)).toEqual([]);
+  expect(reports).toHaveLength(20);
+  expect(reports.filter((report) => report.mismatches !== 0 || report.movedFrames === 0)).toEqual(
+    [],
+  );
 });
 
 test("GPU consumes the Canvas scene with retained textures and union clips", async ({ page }) => {
@@ -54,6 +75,15 @@ test("GPU host runs the shared game and retains the input/UI canvas", async ({ p
   await page.goto("/tilefun/?renderer=gpu");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
+  expect(
+    await page
+      .locator("#game")
+      .evaluate(
+        (canvas) =>
+          (canvas as unknown as { __game: { camera: { pixelSnap: boolean } } }).__game.camera
+            .pixelSnap,
+      ),
+  ).toBe(true);
   await expect(page.locator("canvas[data-renderer=gpu][aria-hidden=true]")).toBeVisible();
   await page.keyboard.press("Escape");
   await page.keyboard.down("ArrowRight");
@@ -113,6 +143,9 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
   await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
   const canvas = page.getByLabel("Generated traffic playground");
   await expect(canvas).toHaveAttribute("data-ready", "true");
+  expect(
+    await canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().pixelSnap),
+  ).toBe(true);
   await expect
     .poll(() =>
       canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),

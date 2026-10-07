@@ -1,5 +1,6 @@
 import { CHUNK_SIZE, PIXEL_SCALE, TILE_SIZE } from "../config/constants.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
+import { projectWorld } from "./Projection.js";
 import type { RenderView, TerrainDraw } from "./RenderFrame.js";
 import type { GroundTerrainResources, TerrainRenderWorld } from "./TerrainPresentation.js";
 
@@ -32,8 +33,9 @@ export class TerrainFrame {
       for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
         const chunk = world.getChunkIfLoaded(cx, cy);
         if (!chunk) continue;
-        const x = Math.round((cx * nativeSize - view.x) * scale + view.viewportWidth / 2);
-        const y = Math.round((cy * nativeSize - view.y) * scale + view.viewportHeight / 2);
+        const screen = projectWorld(view, cx * nativeSize, cy * nativeSize);
+        const x = Math.round(screen.sx);
+        const y = Math.round(screen.sy);
         if (x + size < 0 || y + size < 0 || x > viewportWidth || y > viewportHeight) continue;
         const resource = resources.groundResourceId(chunk, cx, cy, options?.readyOnly ?? false);
         if (resource === null) continue;

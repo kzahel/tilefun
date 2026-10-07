@@ -35,6 +35,7 @@ it("runs production outdoor/editor/indoor presentation on another backend withou
     props = [createProp("prop-country-house", 120, 100)];
   const snapshot = () => structuredClone({ chunk, entities, props });
   const camera = new Camera();
+  camera.pixelSnap = true;
   camera.zoom = 1 / 3;
   camera.snapTo(128, 128);
   camera.setViewport(256, 256);
@@ -71,6 +72,7 @@ it("runs production outdoor/editor/indoor presentation on another backend withou
     { kind: "particle", sortKey: 80, wx: 80, wy: 80, color: "red", z: 0, size: 2, alpha: 1 },
   ]);
   expect(backend.passes.map((p) => p.kind)).toEqual(["clear", "terrain", "scene"]);
+  expect(backend.views.every((view) => view.pixelSnap === true)).toBe(true);
   const scene = backend.passes.at(-1);
   if (scene?.kind !== "scene") throw Error("missing scene");
   expect(scene.items.map((i) => i.kind)).toContain("elevation");

@@ -11,7 +11,7 @@ import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
-import type { TerrainPacing } from "../rendering/PresentationSettings.js";
+import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
@@ -85,6 +85,7 @@ export class ScenarioPresentationHost {
     private readonly options: ScenarioPresentationOptions,
   ) {
     this.session = new ScenarioClient(recipe);
+    this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));
     this.camera.setViewport(options.width, options.height);
     this.camera.zoom = options.settings().zoom;
     this.loop = new GameLoop({
@@ -361,6 +362,7 @@ export class ScenarioPresentationHost {
       authority: this.session.getDiagnostics(),
       cameraX: this.renderX,
       cameraY: this.renderY,
+      pixelSnap: this.camera.pixelSnap,
       // Optional backend diagnostics stay outside presentation policy.
       meshDraws: (terrain as typeof terrain & { gpu?: { meshDraws: number } })?.gpu?.meshDraws ?? 0,
     };

@@ -74,6 +74,12 @@ lab wrapper, while the input/UI canvas stays in document flow. See
   view data and a resource-ID lookup. Camera-only movement reuses prepared
   resources and a bounded placement pool. Canvas and the recording backend use
   the same builder.
+- Gameplay and interactive labs opt into a shared pixel-snapped screen translation
+  through `RenderView.pixelSnap`. `Projection` applies that translation to terrain,
+  sprites, grass, mesh anchors, overlays and picking while camera follow remains
+  continuous. `?pixelsnap=0` restores the previous projection for owner comparison.
+  Reference cameras default to the original unsnapped projection, preserving frozen
+  approval inputs. This is a 2026-10-07 prototype awaiting visual acceptance.
 - `collectScene`, `collectSceneOrder`, grass frames and prop-depth metadata own
   outdoor interpolation, visibility and shadow/body ordering. Ground shadows
   precede bodies; elevated shadows immediately precede their associated body.
@@ -84,6 +90,21 @@ lab wrapper, while the input/UI canvas stays in document flow. See
   including flipped sprites and visual height offsets. The renderer lab's
   `probeSpriteSeams` checks translucent adjoining pieces (so overlap also fails)
   at four zooms and four camera positions on both backends.
+  `probeCameraStability` additionally checks stationary terrain landmarks,
+  fractional prop anchors and frozen grass at five zooms, positive/negative chunk
+  coordinates and an odd viewport on both backends. Solid landmarks isolate layer
+  placement: detailed nearest-neighbor textures can still exhibit texel tie
+  differences during integer translation, especially at fractional scales. The
+  prototype addresses relative positioning; it does not establish complete texel
+  stability or a frame-pacing result. Owner review should check both alignment and
+  any remaining internal shimmer while a forest camera settles.
+  Prototype validation: typechecks, all 1,743 unit tests, lint (existing warnings),
+  catalog/manifest generation and production build pass. Full Chromium checks pass
+  all 20 placement cases and 64 seam cases, plus the real game and embedded forest
+  walking/reload/travel checks on Canvas/GPU. The full browser suite records 384
+  passes and three failures: two wildlife-review checks encounter the missing
+  archived `fox/pilot-v1/preview.gif`; the GPU city train passenger-height check
+  passes on an isolated rerun. These are not a clean full-suite acceptance result.
 - `ElevationDescriptorCache` caches static geometry by weak chunk identity,
   placement and edit/visual revisions. Binding a new resource creates new
   immutable records, leaving prior records unchanged. Empty chunks are cached.

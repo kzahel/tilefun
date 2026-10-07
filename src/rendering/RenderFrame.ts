@@ -18,6 +18,8 @@ export interface RenderView {
   readonly zoom: number;
   readonly viewportWidth: number;
   readonly viewportHeight: number;
+  /** Snap the shared world-to-screen translation; reference renders may leave this off. */
+  readonly pixelSnap?: boolean;
 }
 
 /** Prepared terrain placement in screen pixels, including seam overscan. */

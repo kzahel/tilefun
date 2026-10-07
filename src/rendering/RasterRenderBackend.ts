@@ -68,6 +68,7 @@ export class RasterRenderBackend implements RenderBackend {
     camera.x = view.x;
     camera.y = view.y;
     camera.zoom = view.zoom;
+    camera.pixelSnap = view.pixelSnap ?? false;
     camera.setViewport(view.viewportWidth, view.viewportHeight);
     return camera;
   }

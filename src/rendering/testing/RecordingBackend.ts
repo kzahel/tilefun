@@ -88,6 +88,7 @@ export class RecordingBackend implements RenderBackend {
       zoom: view.zoom,
       viewportWidth: view.viewportWidth,
       viewportHeight: view.viewportHeight,
+      ...(view.pixelSnap !== undefined ? { pixelSnap: view.pixelSnap } : {}),
     });
     this.passes.push(structuredClone(pass));
   }

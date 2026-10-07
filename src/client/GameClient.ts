@@ -49,6 +49,7 @@ import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
+import { cameraPixelSnap } from "../rendering/PresentationSettings.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
@@ -226,6 +227,7 @@ export class GameClient {
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
+    this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(window.location.search));
     this.actions = new ActionManager();
     if (new URLSearchParams(window.location.search).has("nogamepad")) {
       this.actions.disableGamepad();

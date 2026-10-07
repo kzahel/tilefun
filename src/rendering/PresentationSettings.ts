@@ -2,6 +2,11 @@ import type { ActionName } from "../input/ActionMap.js";
 import type { TerrainPreparationOptions } from "./RenderFrame.js";
 import type { TerrainDrawOptions } from "./TerrainFrame.js";
 
+/** Shared gameplay prototype; ?pixelsnap=0 restores the prior camera projection for comparison. */
+export function cameraPixelSnap(params: URLSearchParams): boolean {
+  return params.get("pixelsnap") !== "0";
+}
+
 /** Shared by keyboard, controls and benchmark workloads. Keep existing 1–4 bindings. */
 export const ZOOM_PRESETS = [
   { key: "0", action: "zoom_0", zoom: 0.1, label: "Overview · 0.1×" },
