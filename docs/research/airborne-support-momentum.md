@@ -48,10 +48,12 @@ added. Ground/player jump heights and frozen art/collider geometry are unchanged
 
 Buffered roofs are displayed behind committed authority poses. A focused regression
 found a 9.6px takeoff shift when switching directly from that sampled roof to the
-current physics player. Prediction retains the support's sampled display translation
-through flight. A new sampled roof owns roof-landing presentation; ordinary ground
-landing releases the translation over 60ms. Physics poses never receive this offset.
-Reset, noclip/mount and large relocations clear it.
+current physics player. The initial fix retained the sampled departure translation.
+The idle-travel follow-up timestamps simulated endpoints and samples inherited
+flight motion on the remote source clock; untimed reference callers keep the
+departure-translation fallback. A new sampled roof owns roof-landing presentation;
+ordinary ground landing releases translation over 60ms. Physics poses never
+receive this display offset. Reset, noclip/mount and large relocations clear it.
 
 The first 30Hz native run then exposed a separate pre-existing replay bug: an older
 grounded acknowledgement replayed a pending jump with the latest already-consumed

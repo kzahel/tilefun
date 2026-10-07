@@ -488,3 +488,21 @@ endpoints let passive display motion use the carrier source clock while voluntar
 steering stays local. Future landing offsets convert to the committed roof frame.
 Ten new regressions and 104 focused controls pass; all three typechecks pass.
 Native idle/steering flights and full game/lab validation follow before acceptance.
+
+Native follow-up finds zero physical landing drift but a ~3.2px display dip while
+older grounded acknowledgements replay takeoff. Two further delayed-snapshot
+cases reproduce ~3.2px / 6.4px before correction. Contact-error decay now removes
+expected passive source-time travel, retaining genuine residual correction.
+Twelve idle positional regressions and all 1,719 unit checks, typechecks, lint and
+settled inventory/build pass. Final native flight and browser/readiness evidence
+still follows in the linked record.
+
+Final idle-jump checkpoint: native 120Hz GPU/60Hz and Canvas/30Hz idle flights
+land with zero relative drift and display error below 0.003px. Next-carriage and
+midair-reversal controls pass at both rates. All 1,719 units, three typechecks,
+existing-only lint diagnostics, refreshed inventories/build, 36 affected
+Canvas/GPU game/lab/Worker browser checks and streaming readiness pass. Native
+and integration runs use fixed runtime/build; owned bundled browsers and servers
+are reaped. A 0.164px acceleration-boundary display case is retained as a varying
+trajectory limit. Next: repeat the user's idle-jump playtest, then address varying
+trajectories/long stalls under a separate positional acceptance scope.

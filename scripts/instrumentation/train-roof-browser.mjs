@@ -350,6 +350,9 @@ probe: try {
       undefined,
       { timeout: 15000 },
     );
+    // The positional idle contract assumes unchanged cruise. Let buffered
+    // presentation history clear the acceleration-to-cruise transition first.
+    await page.waitForTimeout(1000);
     if (idleJump) {
       for (let flight = 0; flight < 2; flight++) {
         await page.keyboard.down("Space");

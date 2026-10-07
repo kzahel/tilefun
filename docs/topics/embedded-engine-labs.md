@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-06.
+Updated: 2026-10-07.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -276,3 +276,13 @@ Canvas/GPU game/lab browser checks, both headless continuity CLIs and streaming
 readiness. Separate headed 120Hz train captures measure smooth 60/30Hz source
 streams across saved game refresh. These use an explicit clock-reset control;
 they do not claim automated hidden-tab recovery. See the linked evidence.
+
+Idle-jump travel uses shared Realm passive-time admission and landing eligibility
+in both traffic and railway services. Game and lab RemoteStateView pass sampled
+source time to the common predictor; inherited flight display and its contact
+residual use that time while voluntary steering stays local. Future roof-landing
+offsets bind to the committed roof frame. No lab-specific physics or presentation
+path is added. Twelve new deterministic positional cases, all 1,719 units and 36
+affected Canvas/GPU game/lab browser checks pass, with typechecks, lint/build and
+streaming readiness. Native 120Hz idle/steering captures verify the real Worker
+composition; [idle travel evidence](../research/idle-support-jump.md) records limits.

@@ -76,3 +76,53 @@ departure momentum is unchanged. Genuine residual contact error retains its
 existing decay. Both delayed regressions now pass without changing thresholds;
 all twelve idle-jump cases are ordinary passing tests. Native idle/steering and
 settled full verification still follow.
+
+## Native cruise verification
+
+At `48665be`, ordinary keyboard boarding and two idle jumps pass on the native
+approximately-120Hz display with a real Worker and bundled full Chromium. The
+driver waits one second at full cruise before jumping so the borrowed train
+history is also constant-speed; raw server and displayed player/train poses are
+recorded. No simulation/prediction/clock override or screenshots-as-motion-judgment
+are used. Predicted airborne frames include the takeoff before acknowledgement.
+
+| Lane | Measured display Hz | Landing drift, jump 1 / 2 | Maximum displayed relative drift, jump 1 / 2 |
+| --- | ---: | ---: | ---: |
+| GPU / 60Hz authority | 120.0003 | 0 / 0px | 0.001875 / 0.002300px |
+| Canvas / 30Hz authority | 119.9991 | 0 / 0px | 0.001431 / 0.001569px |
+
+Both flights land on the same roof at height 44, retain 192px/s and report zero
+page errors. [60Hz capture](/tmp/idle-train-jump-final60-cruise.json),
+[30Hz capture](/tmp/idle-train-jump-final30.json). An earlier post-residual-correction
+capture jumped immediately at the acceleration-to-cruise boundary and observed
+0.164px initial displayed relative error, decaying as the buffered acceleration
+history cleared. That remains a varying-trajectory presentation limit, not a
+passing constant-cruise capture. [Boundary capture](/tmp/idle-train-jump-final60.json).
+
+All three typechecks, 204 files / 1,719 unit checks, existing-only lint diagnostics,
+settled catalogs/manifest and build pass. Native forward/reversal controls and
+affected browser/readiness checks follow without changing runtime/build.
+
+Native forward-jump and idle→forward→backward controls also pass on GPU/60Hz and
+Canvas/30Hz at measured 120.0119Hz / 120.0130Hz. First jumps land on the next
+carriage; second flights retain the 128–256px/s steering range, with unchanged
+departure momentum and no page errors. Takeoff step errors are below 0.001px.
+[60Hz control](/tmp/idle-controls-final60.json), [30Hz control](/tmp/idle-controls-final30.json).
+
+## Final verification
+
+All **36 affected Playwright checks pass** on the settled build: generated city
+train boarding/ride/reopen/alight, phone roof lab, curves, train/vehicle grades,
+Traffic, Character, Furniture, Outdoor and World Geometry presentation, cutaways,
+Worker lifecycle/persistence, scenario disposal and standalone Workshop. Both
+Canvas and full-Chromium GPU consumers use isolated auth/data. Sources/build stay
+fixed during captures and integration; owned browsers and servers are closed.
+Streaming `--assert-ready` passes with no fixture failures or missing/incomplete
+terrain frames. [Readiness report](/tmp/idle-streaming-final/report.json).
+
+Together with the 1,719 units, typechecks, lint and build above, this establishes
+constant-velocity idle roof travel through repeated takeoff/landing and retains
+directional jumps. It does not add air resistance or change vertical/input-time
+admission. Variable platform motion, extended stalls and the existing clipped-axis/
+ordinary-ground display release policy remain separate limits. Next is the
+user's exact repeated idle-jump playtest on a cruising train.

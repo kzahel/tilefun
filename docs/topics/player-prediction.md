@@ -1,8 +1,8 @@
 # Player prediction and moving contacts
 
 Topic: player-prediction
-Status: shared camera recovery, snapshot-anchored reload pacing and airborne
-support momentum verified; varying motion and longer-stall corrections remain next.
+Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
+support travel verified; varying motion and longer-stall corrections remain next.
 Updated: 2026-10-07.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -12,11 +12,20 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
-New [idle roof-jump reproduction](../research/idle-support-jump.md) finds forward
-travel despite correct inherited velocity: uneven input delivery double-counts
-passive motion, landing gets a second carry, and takeoff presentation uses a
-mismatched time. Six deterministic expected failures and a native Worker capture
-precede correction. Idle relative travel, not velocity alone, is the acceptance.
+[Idle roof-jump evidence](../research/idle-support-jump.md) finds forward travel
+despite correct inherited velocity: uneven input delivery double-counts passive
+motion, landing gets a second carry, and takeoff presentation uses a mismatched
+time. Authority now admits inherited XY once per world interval, excludes
+input-landed riders from another carry and timestamps prediction endpoints for
+passive source-time sampling. Contact correction removes expected source-time
+travel before decaying residual error; two delayed-acknowledgement cases preserve
+the additional native takeoff boundary. Twelve new positional regressions pass at
+30/60Hz authority and 120Hz presentation, through flight and landing. Steering and
+vertical/input-time admission retain existing policies. Final native 120Hz idle
+flights at 30/60Hz authority have zero landing drift and displayed drift below
+0.003px; next-carriage/reversal controls pass. All 1,719 units, 36 affected browser
+checks, typechecks, lint/build and streaming readiness pass. Varying trajectories
+and longer stalls remain open; next is the user's repeated idle-jump playtest.
 
 New playtest follow-up: [reload pacing](../research/train-refresh-pacing.md)
 reproduces persistent train/rider stepping after refresh despite stable relative
@@ -29,7 +38,7 @@ bad cruise steps; all 1,707 unit tests, 36 affected browser checks, typechecks,
 lint/build and streaming readiness pass;
 the earlier ordinary-play camera acceptance does not cover this startup path.
 
-Latest: [airborne support momentum](../research/airborne-support-momentum.md) preserves
+Earlier checkpoint: [airborne support momentum](../research/airborne-support-momentum.md) preserves
 platform departure velocity while retaining platformer air steering. Landing converts
 to new-roof-relative velocity; collision, missing-input ticks, save/reopen and
 replay share the contract. A replicated acknowledged jump latch prevents pending
