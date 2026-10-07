@@ -5,7 +5,7 @@ import { deriveTerrain } from "../deriveTerrain.js";
 import { type LandscapeProfile, NaturalLandscape } from "./NaturalLandscape.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
-/** Optional composition for review. Retains production rail/traffic route sources. */
+/** Regional natural cover composed with production rail/traffic route sources. */
 export class NaturalStrategy extends RailwayStrategy {
   readonly nature: NaturalLandscape;
   constructor(world: RegionalWorld, profile: LandscapeProfile) {

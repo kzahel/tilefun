@@ -20,6 +20,8 @@ export const LANDSCAPE_PROFILES = ["sparse", "balanced", "lush", "thicket"] as c
 export const landscapeLabel = (profile: LandscapeProfile) =>
   profile === "thicket" ? "Extra dense · forest patterns" : profile;
 export type LandscapeProfile = (typeof LANDSCAPE_PROFILES)[number];
+/** Current regional composition, shared by gameplay and the explorer. */
+export const DEFAULT_LANDSCAPE_PROFILE: LandscapeProfile = "thicket";
 export function landscapeProfile(value: unknown): LandscapeProfile | undefined {
   if (value === undefined || value === null || value === "") return undefined;
   if (!LANDSCAPE_PROFILES.includes(value as LandscapeProfile))

@@ -2,6 +2,82 @@ import { expect, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
 for (const renderer of ["canvas", "gpu"]) {
+  test(`ordinary explorer handoff creates patterned forests by default (${renderer})`, async ({
+    page,
+  }) => {
+    await page.goto("/tilefun/world-explorer.html?seed=2026&x=-73&y=-425&zoom=16&mode=tiles");
+    const app = page.locator("#app");
+    await expect(app).toHaveAttribute("data-settled", "true");
+    await expect(app).not.toHaveAttribute("data-error", /.+/);
+    await expect(page.getByLabel("Landscape composition")).toHaveValue("");
+    const ids: string[] = JSON.parse((await app.getAttribute("data-prop-ids")) ?? "[]");
+    expect(ids.some((id) => id.startsWith("nature:thicket:"))).toBe(true);
+    const link = await page
+      .getByRole("link", { name: "Play here", exact: true })
+      .getAttribute("href");
+    if (!link) throw new Error("Missing game handoff");
+    const url = new URL(link, page.url());
+    url.searchParams.set("renderer", renderer);
+    await page.goto(url.href);
+    await page.getByPlaceholder("World name...").fill(`Default forest ${renderer}`);
+    await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const g = (
+            document.querySelector("#game") as unknown as {
+              __game: import("../src/client/GameClient.js").GameClient;
+            }
+          ).__game;
+          return g.stateView.props.filter((p) => p.proceduralId?.startsWith("nature:thicket:"))
+            .length;
+        }),
+      )
+      .toBeGreaterThan(0);
+    await expect
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const g = (
+              document.querySelector("#game") as unknown as {
+                __game: import("../src/client/GameClient.js").GameClient;
+              }
+            ).__game;
+            const p = g.stateView.playerEntity.position;
+            const tx = Math.floor(p.wx / 16),
+              ty = Math.floor(p.wy / 16);
+            const cx = Math.floor(tx / 16),
+              cy = Math.floor(ty / 16);
+            const chunk = g.stateView.world.getChunkIfLoaded(cx, cy);
+            return chunk?.blendBase[(ty - cy * 16) * 16 + tx - cx * 16];
+          }),
+        { timeout: 10000 },
+      )
+      .toBe(4);
+    await expect
+      .poll(
+        () =>
+          page.evaluate(() => {
+            const g = (
+              document.querySelector("#game") as unknown as {
+                __game: import("../src/client/GameClient.js").GameClient;
+              }
+            ).__game;
+            const range = g.camera.getVisibleChunkRange();
+            for (let cy = range.minCy; cy <= range.maxCy; cy++)
+              for (let cx = range.minCx; cx <= range.maxCx; cx++)
+                if (!g.renderer.isTerrainReady(g.stateView.world.getChunkIfLoaded(cx, cy)))
+                  return false;
+            return true;
+          }),
+        { timeout: 10000 },
+      )
+      .toBe(true);
+    await page.screenshot({ path: `/tmp/tilefun-default-forest-ready-${renderer}.png` });
+  });
+}
+for (const renderer of ["canvas", "gpu"]) {
   test(`landscape lab shares Worker trees, walking, reload and train travel (${renderer})`, async ({
     page,
   }) => {

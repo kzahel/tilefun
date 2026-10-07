@@ -1,7 +1,7 @@
 # Natural overworld landscapes
 
 Topic: natural-landscapes
-Status: seeded explorer/lab preview implemented for review; ordinary regional defaults unchanged.
+Status: natural cover and patterned forests are the default current regional generation.
 Updated: 2026-10-07.
 
 Owns natural land cover, forest composition, scattered vegetation and small ponds
@@ -17,8 +17,11 @@ natural landscapes throughout suitable overworld land, including dense forests,
 standalone wild trees, varied tree patterns, natural habitats and small ponds.
 Start simply, reuse existing art and labs, and show regional planning and biome
 differences for review. Leave room for future cliffs, mountains and elevated mesas.
-The owner authorized the first audit/preview slice on 2026-10-07. No particular
-art composition or density has been accepted yet.
+The owner authorized the first audit/preview slice on 2026-10-07, then explicitly
+requested making it the default. The existing `thicket` composition is now the
+regional default: spatially varied meadows, individual trees, woodland, ponds and
+solid patterned forests. Preview profiles remain available for comparison; no
+Workshop approval events were synthesized.
 
 Follow-up direction: the owner likes the full-world train preview and specifically
 wants the previously reviewed repeating/staggered forest patterns, including large
@@ -27,7 +30,7 @@ Retain open meadows and ordinary trees, with distinct solid thickets that shape
 routes. This is direction for the new preview, not a recorded approval of its edges
 or collision geometry.
 
-## Current foundation and gap
+## Original foundation and gap
 
 - `RegionalPlanner.ts` already samples elevation and moisture and labels meadow,
   woodland, rural, shore and water. These labels are broad geographic hints;
@@ -122,7 +125,7 @@ heights then need explicit planning, not a terrain-noise amplitude increase.
 Use ordinary ground plus bounded additional surfaces where necessary, consistent
 with the existing geometry direction; avoid making every landscape tile a prop.
 
-## Delivered preview (2026-10-07)
+## Initial preview delivery (2026-10-07)
 
 [Open the landscape lab](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-forest&landscape=balanced#/tool/world-geometry).
 Six fixed cases cover meadow, grove, forest, clearing/edge, pond bank and the real
@@ -138,14 +141,15 @@ show suitability; blue markers show admitted ponds at bounded regional scales.
 Zoom in for the actual terrain and oak props. Broad views omit local ponds and
 infrastructure exclusion detail. Composition changes invalidate exact tile caches;
 share links preserve the profile. **Walk here in landscape lab** opens a temporary
-scene at dry, unobstructed ground nearby. Saved-world and archived views cannot
-apply this experimental composition; creating an ordinary world omits it.
+scene at dry, unobstructed ground nearby. Explicit profile overrides stay unavailable for saved-world and archived views.
+Current regional views and ordinary world creation now share the default profile.
 
 `NaturalLandscape` owns deterministic fields, reservations, local ponds and tree
 anchors. `NaturalStrategy` composes normal railway/traffic/district generation.
 The optional profile is supplied to `createGenerator`, RealmOptions and data-only
 ScenarioRecipe; it is not a new persisted world descriptor or historical generator.
-The default factory path remains unchanged. Trees use ordinary procedural IDs,
+The regional factory defaults to `DEFAULT_LANDSCAPE_PROFILE` (`thicket`), shared
+with Overview. Classic, Island and Flat retain their own generators. Trees use ordinary procedural IDs,
 normal geometry, replication, edit records and residency. Neighbor-priority spacing
 removes close trunk pairs without relying on query order. Ponds have shallow/deep
 water and sand banks, bounded wholly inside deterministic owner cells.
@@ -166,7 +170,8 @@ probe reproduced a background gap at standard zoom: a 128px repeat scales to
 sprite renderer now snaps both projected edges, eliminating gaps/overlaps on
 Canvas and GPU; no atlas pixels, crop periods or row spacing changed. Natural
 candidate fingerprints now include the shared sprite drawing source explicitly.
-The seeded composition remains unapproved pending human review.
+Exact Workshop composition verdicts remain separate from the owner’s subsequent
+instruction to enable this generation by default.
 
 [Open Forest pattern 1](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-thicket-1&landscape=thicket#/tool/world-geometry).
 The **Extra dense · forest patterns** profile adds large forest masses using all
@@ -192,13 +197,13 @@ broad maps still omit local footprint detail.
 
 The Extra dense profile also increases broad forest cover. The pinned town-to-town
 ride streams actual thicket rows while retaining production track clearance and
-roof support. Default-world generation remains unchanged.
+roof support. This existing profile is now the ordinary regional default; its
+density, source crops, collision and noise fields were not retuned for integration.
 
 ## Review and next step
 
-Current sequence: review the mixture of open woodland and solid forest → integrate
-the chosen current regional composition → broader palettes/ground plants → mesa
-proof. Compare **sparse / balanced / lush / extra dense** at the same seed/location.
+Current sequence: play the default mixture in ordinary worlds and tune from
+feedback → broader palettes/ground plants → mesa proof. Compare **sparse / balanced / lush / extra dense** at the same seed/location.
 Review mass size, staggered edges, source-ground joins, collision at the visible
 front and sides, available routes, shore readability and scenery pacing.
 
@@ -207,3 +212,38 @@ cost, prop residency and visible readiness. High-speed travel is a primary use
 case, not a final screenshot-only check. Exact review and promotion follow
 [art review](art-review.md); runtime output follows the one-current-generator
 policy. Do not retain multiple historical landscape generators.
+
+## Default integration (2026-10-07)
+
+The shared factory now always composes NaturalStrategy for regional worlds.
+GameServer, Realm, explorer exact tiles, overview/map queries and regional lab
+recipes without an override all inherit the same default. Explicit lab profiles
+retain their prior output. Explorer's ordinary **Play here** and **Create this
+world** handoffs use this generation without a landscape URL parameter.
+
+`regional-v13` remains current under the greenfield policy. No save is erased or
+migrated. Persisted terrain wins over newly generated terrain, and ordinary prop
+edit/deletion records still apply; old development worlds can therefore mix saved
+terrain with current procedural content. Use a fresh regional world for coherent
+new output. Frozen city snapshots and promoted asset banks were not regenerated.
+
+Validation: typechecks, all 1,741 unit tests, lint (no errors; existing warnings),
+art catalog, 641-candidate manifest verification and production build pass. The
+full browser run passes 384 of 386 tests; the same two pre-existing wildlife
+review failures reference the missing archived fox `pilot-v1/preview.gif`. No
+wildlife artifact or test was changed. Both ordinary Canvas/GPU explorer-to-game
+handoffs realize solid thickets without a profile override; their final focused
+rerun passes and waits for authoritative grass blends plus visible render caches
+before capture. Both full city-train rides pass with natural props present,
+including save/reopen mid-bend and arrival/alighting. Existing lab pattern
+collision, deletion/reload and profile comparisons pass.
+
+The isolated production streaming readiness benchmark passes on Apple M4 Pro,
+macOS arm64, bundled Chromium, Canvas at 1280×900: cold, standing, walking,
+sprinting, reversing and zoom-out all have zero missing-data/incomplete-cache
+frames and zero final stale caches. Cold startup has two stale-cache frames.
+This is bounded readiness evidence, not a device-wide frame-pacing claim.
+Live candidate fingerprints now include the shared generator selection; 54 live
+candidate records update (36 nature, 12 geometry, 6 character), with human review
+history untouched. Next: ordinary-world scenery/density feedback, then palette
+and ground-plant variety or the bounded mesa proof.

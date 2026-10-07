@@ -37,7 +37,7 @@ export async function buildNaturalCandidate(
     kind: "geometry",
     name: `${c.name} · ${profile}`,
     prompt:
-      "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense uses staggered native forest patterns with impassable interiors; ordinary worlds are unchanged.",
+      "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
     url: `/tilefun/workshop.html?geometry=nature-${id}&landscape=${profile}#/tool/world-geometry`,
     exploreUrl: naturalExplorerUrl(c, profile),
     fingerprint: await sha256(

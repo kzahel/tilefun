@@ -42,14 +42,14 @@ it("runs forest movement and persists tree deletion and movement through reload"
     await s.close();
   }
 });
-it("pins real locations and keeps ordinary generator output separate", () => {
+it("pins real locations and keeps explicit profiles available beside the natural default", () => {
   for (const c of NATURAL_CASES) {
     const r = naturalLandscapeRecipe(c.id, "balanced");
     expect(r.landscape).toBe("balanced");
     expect(r.generation.seed).toBe(c.seed);
   }
   const g = createGenerator(createDescriptor("regional", 2026));
-  expect(g.placements(-26, -32, new Set()).placements).toEqual([]);
+  expect(g.placements(-26, -32, new Set()).placements.length).toBeGreaterThan(0);
 });
 
 it.each([

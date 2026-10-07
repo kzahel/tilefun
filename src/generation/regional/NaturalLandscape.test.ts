@@ -21,7 +21,7 @@ function all(n: NaturalLandscape, coordinates = chunks) {
   ].sort((a, b) => a.featureId.localeCompare(b.featureId));
 }
 describe("natural landscape shared composition", () => {
-  it("is optional, deterministic across query order and monotonic across density previews", () => {
+  it("defaults to patterned forests and retains deterministic density previews", () => {
     const byProfile = LANDSCAPE_PROFILES.map((p) =>
       all(new NaturalLandscape(regionalWorld(2026), p)),
     );
@@ -36,7 +36,17 @@ describe("natural landscape shared composition", () => {
       chunks
         .flatMap((c) => plain.placements(c.cx, c.cy, new Set()).placements)
         .some((p) => p.featureId?.startsWith("nature:")),
-    ).toBe(false);
+    ).toBe(true);
+    const explicit = createGenerator(createDescriptor("regional", 2026), "thicket");
+    for (const c of [...chunks, { cx: -5, cy: -27 }])
+      expect(plain.placements(c.cx, c.cy, new Set())).toEqual(
+        explicit.placements(c.cx, c.cy, new Set()),
+      );
+    expect(
+      plain
+        .placements(-5, -27, new Set())
+        .placements.some((p) => p.featureId?.startsWith("nature:thicket:")),
+    ).toBe(true);
   });
   it("includes canopy overhangs across negative chunk seams while keeping trunks separated", () => {
     const n = new NaturalLandscape(regionalWorld(2026), "lush"),
@@ -154,16 +164,12 @@ describe("natural landscape shared composition", () => {
   });
   it("maps actual solid interiors separately from walkable woodland", () => {
     const n = new NaturalLandscape(regionalWorld(2026), "thicket");
-    const q = overviewSteps(
-      createDescriptor("regional", 2026),
-      {
-        bounds: { minX: -128, minY: -512, maxX: 0, maxY: -384 },
-        detail: "region",
-        sampleStep: 4,
-        limits: QUERY_LIMITS,
-      },
-      "thicket",
-    );
+    const q = overviewSteps(createDescriptor("regional", 2026), {
+      bounds: { minX: -128, minY: -512, maxX: 0, maxY: -384 },
+      detail: "region",
+      sampleStep: 4,
+      limits: QUERY_LIMITS,
+    });
     let next = q.next();
     while (!next.done) next = q.next();
     const { grid, cover, stats } = next.value;

@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-05.
+Updated: 2026-10-07.
 
 ## Current generation policy
 
@@ -10,7 +10,8 @@ The user approved dropping historical playable generator compatibility during ac
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
 regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road
 traffic and [rideable two-city railways](trains.md): eligible broad curves, shared
-pixel tracks, platforms and straight road crossings.
+pixel tracks, platforms and straight road crossings. Natural cover now adds
+spatially varied trees, solid patterned forests and ponds on eligible land.
 It does not automatically promote the v7–v10 review candidates. Classic, Island and
 Flat remain distinct simple presets, not historical regional revisions.
 
@@ -76,10 +77,11 @@ asset promotion and inclusion in the current generator are separate decisions.
 
 ## Next work
 
-[Natural landscapes](natural-landscapes.md) previews continuous overworld forests,
-scattered trees and ponds, with regional and train-level review in the existing
-explorer/lab. [Tactical 068](../tactical/068-natural-landscape-preview.md) records
-the optional explorer/lab preview; ordinary regional defaults await composition review.
+[Natural landscapes](natural-landscapes.md) now supplies the default regional
+composition, including patterned forests, scattered trees and ponds. The owner
+explicitly requested default integration on 2026-10-07. The explorer/lab retains
+profile comparisons; [Tactical 068](../tactical/068-natural-landscape-preview.md)
+records the initial preview delivery. Next: ordinary-world composition feedback.
 
 [Generated railways](trains.md) now admit one isolated road bridge per eligible
 line. [Tactical 062](../tactical/062-generated-road-rail-crossing.md) records the

@@ -27,6 +27,7 @@ const read = (page: Page) =>
       trainY: car?.position.wy ?? 0,
       heading: car?.sprite?.frameRow ?? 0,
       speed: Math.hypot(car?.velocity?.vx ?? 0, car?.velocity?.vy ?? 0),
+      naturalProps: g.stateView.props.filter((p) => p.proceduralId?.startsWith("nature:")).length,
       railChunks: [...g.stateView.world.chunks.entries()].filter(([, c]) => c.railPaths.length > 0)
         .length,
     };
@@ -71,6 +72,7 @@ for (const backend of ["canvas", "gpu"]) {
       )
       .toBe(true);
     expect((await read(page)).serverZ).toBe(44);
+    expect((await read(page)).naturalProps).toBeGreaterThan(0);
     await page.screenshot({ path: `/tmp/tilefun-city-train-bend-${backend}.png` });
     const saved = await page.evaluate(async () => {
       const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;

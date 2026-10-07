@@ -11,6 +11,7 @@ import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
 import type { DistrictPlan } from "./regional/DistrictPlanner.js";
 import {
+  DEFAULT_LANDSCAPE_PROFILE,
   type LandscapeProfile,
   NaturalLandscape,
   type NaturalPond,
@@ -51,6 +52,7 @@ export function* overviewSteps(
 ): Generator<void, OverviewResult> {
   const descriptor = requireCurrentGeneration(normalizeGeneration(input));
   if (descriptor.type === "regional") {
+    landscape ??= DEFAULT_LANDSCAPE_PROFILE;
     const result = yield* regionalQuerySteps(regionalWorld(descriptor.seed), request);
     let railways: RailLine[] = [];
     if (result.detail === "region") {

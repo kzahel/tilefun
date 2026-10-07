@@ -84,9 +84,10 @@ with exact Workshop review notes. Extra dense includes solid thicket interiors;
 the darkest map cover distinguishes them from ordinary walkable woodland.
 Start from the [natural landscape review links](tactical/068-natural-landscape-preview.md#review-links).
 
-This is an optional composition review. Ordinary world creation still uses the
-current default. Saved worlds, archived city snapshots and nonregional presets
-disable this overlay. Broad maps can omit small ponds and infrastructure detail;
+**Current world** now includes the Extra dense composition for regional worlds,
+matching ordinary game creation, exact tiles and overview maps. Other selections
+are optional lab comparisons. Saved worlds, archived city snapshots and nonregional
+presets disable profile overrides. Broad maps can omit small ponds and infrastructure detail;
 use Tiles or the lab to assess a particular forest edge or bank. See
 [Natural landscapes](topics/natural-landscapes.md) for rollout and future relief.
 

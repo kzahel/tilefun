@@ -96,7 +96,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
               for (const p of generator.placements(cx, cy, new Set()).placements) {
                 const id = p.featureId ?? `classic:${p.propType}:${p.wx}:${p.wy}`;
                 placements.set(id, { ...p, featureId: id });
-                if (placements.size > (message.landscape ? 2048 : 512))
+                if (placements.size > (result.landscape ? 2048 : 512))
                   throw new Error("Exact placement count exceeds its cap.");
               }
             }

@@ -9,6 +9,7 @@ import channel from "../transport/OrderedWorkerChannel.ts?raw";
 
 /** Live behavior reviews include host timing/transport, not just recipe/physics. */
 export const scenarioRuntimeSource = {
+  generation,
   client,
   presentation,
   protocol,
@@ -18,3 +19,5 @@ export const scenarioRuntimeSource = {
   clock,
   channel,
 };
+
+import generation from "../generation/Generator.ts?raw";

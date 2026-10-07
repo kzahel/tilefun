@@ -320,9 +320,9 @@ composition; [idle travel evidence](../research/idle-support-jump.md) records li
 landscape recipes to World geometry. `ScenarioRecipe.landscape` passes through the
 normal Realm factory; NaturalStrategy retains production railway and traffic owners.
 Explorer exact tiles and regional habitat views consume the same seed/profile
-planner. The UI owns controls and camera follow only. Ordinary worlds omit this
-experimental profile, and temporary scene save/reload preserves it through the
-recipe. Forest edits and a complete lush roof-passenger journey exercise normal
+planner. The UI owns controls and camera follow only. Ordinary regional worlds
+now use the thicket profile by default; explicit lab profiles override it, and
+temporary scene save/reload preserves the override through the recipe. Forest edits and a complete lush roof-passenger journey exercise normal
 persistence and authority; there is no separate forest collision or train loop.
 The extra-dense profile's staggered forest rows are normal multipart props with
 replicated solid footprints, native atlas crops and ordinary procedural deletion.
