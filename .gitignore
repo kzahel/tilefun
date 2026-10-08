@@ -16,3 +16,11 @@ ME complete tileset.tsx
 data/
 !public/data/
 !public/data/**
+
+# Local spatial-investigation evidence; retain recipes and written findings in Git.
+/docs/tactical/070-spatial-assets/
+/docs/tactical/071-spatial-assets/
+/docs/tactical/072-conditioning-fidelity/
+/docs/tactical/073-spatial-alternatives/
+/docs/tactical/074-alpha-geometry/
+/docs/tactical/075-alpha-guard-framing/

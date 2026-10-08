@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Generated mesh inspection</title>
+<style>
+body{font:16px system-ui;margin:24px;color:#243142;background:#f5f7fa}
+main{max-width:900px;margin:auto}h1{font-size:24px}
+canvas{width:100%;max-width:640px;height:auto;touch-action:none;border-radius:12px}
+label{margin-right:20px}p{max-width:740px;line-height:1.5}select{font:inherit;padding:6px}
+code{overflow-wrap:anywhere}
+</style>
+<main><h1>__RUN_ID__</h1>
+<p>Unreviewed generated appearance. Drag to orbit; scroll to zoom. This simplified textured export is separate from the untouched mesh used for depth baking.</p>
+<p><label>Camera <select id="views"><option>oblique</option><option>front</option><option>back</option><option>side</option><option>top</option><option>opposite</option></select></label><label><input id="wire" type="checkbox"> Wireframe</label></p>
+<div id="canvas"></div><p>__TRIANGLES__ triangles · __TEXTURE_SIZE__² PBR texture · GLB axes Y up.</p>
+<p>GLB SHA-256: <code>__HASH__</code></p></main>
+<script>__BUNDLE__</script>
+</html>

@@ -7,6 +7,12 @@ This records repository evidence, external capabilities and proposed experiments
 separately. It is not a model benchmark or a decision to replace the engine.
 Recheck linked APIs and requirements before implementing against them.
 
+For the current 2026-10-08 model/workflow shortlist after the local conditioning
+experiments, read [spatial asset pipeline alternatives](spatial-asset-pipeline-alternatives-2026-10.md).
+It researches reference editing, native multiview/control, direct shape baselines,
+geometry-first construction and masking; the historical survey below retains
+its original research date.
+
 The 2026-10-07 next investigation is [070 — Model-assisted spatial assets and
 sprite clipping](../tactical/070-model-assisted-spatial-assets-investigation.md).
 It carries the tree/car experiment to the Windows RTX 4090 workstation and tests

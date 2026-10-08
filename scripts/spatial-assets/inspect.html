@@ -1,0 +1,140 @@
+<div id="spatial-control-data">
+  <h3>Spatial data behind the experiment</h3>
+  <div class="viz-controls">
+    <label class="form-label">Asset
+      <select class="form-select" data-asset>
+      </select>
+    </label>
+    <label class="form-label">Derived layer
+      <select class="form-select" data-layer>
+        <option value="ground">Proposed ground mask</option>
+        <option value="depth">Depth values</option>
+        <option value="validity">Valid depth / unknown</option>
+      </select>
+    </label>
+  </div>
+  <div class="spatial-panels">
+    <figure>
+      <figcaption>Original pixels</figcaption>
+      <canvas width="256" height="256" data-source role="img" aria-label="Original sprite; select a pixel to inspect its underlying values">Original source pixels</canvas>
+    </figure>
+    <figure>
+      <figcaption data-layer-label>Proposed ground mask</figcaption>
+      <canvas width="256" height="256" data-derived role="img" aria-label="Derived data layer at the exact source pixel locations">Derived data layer</canvas>
+    </figure>
+    <figure>
+      <figcaption data-geometry-label>Authored geometry</figcaption>
+      <canvas width="256" height="256" data-mesh role="img" aria-label="Wireframe of the actual stored geometry">Stored mesh wireframe</canvas>
+      <label class="form-label">View angle <span data-angle-value class="tabular-nums">25°</span>
+        <input class="form-range" data-angle type="range" min="0" max="360" value="25" aria-label="Geometry view angle">
+      </label>
+    </figure>
+  </div>
+  <div class="viz-controls">
+    <label class="form-label">Pixel X <input class="form-control" type="number" min="0" max="63" value="14" data-x></label>
+    <label class="form-label">Pixel Y <input class="form-control" type="number" min="0" max="63" value="55" data-y></label>
+  </div>
+  <output class="spatial-detail tabular-nums" data-detail aria-live="polite"></output>
+  <div class="spatial-methods text-small">
+    <span data-mask-method></span><span data-depth-method></span><span data-counts></span>
+  </div>
+  <script type="application/json" id="spatial-control-values">"__SPATIAL_DATA__"</script>
+</div>
+<style>
+  #spatial-control-data .spatial-panels {display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin:16px 0}
+  #spatial-control-data figure {margin:0;min-width:0}
+  #spatial-control-data figcaption {margin-bottom:8px;min-height:3em}
+  #spatial-control-data canvas {width:100%;max-width:320px;height:auto;display:block;image-rendering:pixelated}
+  #spatial-control-data .spatial-detail {display:block;overflow-wrap:anywhere;margin:12px 0}
+  #spatial-control-data .spatial-methods {display:flex;flex-direction:column;gap:6px}
+</style>
+<script>
+(() => {
+  const root=document.getElementById('spatial-control-data');
+  const data=JSON.parse(document.getElementById('spatial-control-values').textContent);
+  const el=name=>root.querySelector(`[data-${name}]`);
+  const canvasSource=el('source'),canvasDerived=el('derived'),canvasMesh=el('mesh');
+  const colorProbe=document.createElement('span');root.appendChild(colorProbe);colorProbe.hidden=true;
+  const colorCanvas=document.createElement('canvas');colorCanvas.width=colorCanvas.height=1;
+  const colorContext=colorCanvas.getContext('2d');
+  function color(token){colorProbe.style.color=`var(${token})`;return getComputedStyle(colorProbe).color;}
+  function rgb(token){colorContext.clearRect(0,0,1,1);colorContext.fillStyle=color(token);colorContext.fillRect(0,0,1,1);return [...colorContext.getImageData(0,0,1,1).data];}
+  const state={asset:data['generated-car']?'generated-car':'oak-tree',layer:data['generated-car']?'depth':'ground',x:14,y:20,angle:25};
+  for(const [key,d] of Object.entries(data)){const option=document.createElement('option');option.value=key;option.textContent=d.label;el('asset').appendChild(option);}
+  function restore(saved){
+    if(!saved)return;
+    if(data[saved.asset])state.asset=saved.asset;
+    if(['ground','depth','validity'].includes(saved.layer))state.layer=saved.layer;
+    for(const key of ['x','y','angle'])if(Number.isFinite(saved[key]))state[key]=saved[key];
+  }
+  restore(window.openai?.widgetState?.modelContent);
+  function save(){window.openai?.setWidgetState?.({modelContent:{...state},privateContent:null})?.catch(()=>{});}
+  function dimensions(d){const scale=240/Math.max(d.width,d.height);return {scale,left:(256-d.width*scale)/2,top:(256-d.height*scale)/2};}
+  function imagePanel(canvas,rgba,d){
+    const ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,256,256);
+    const a=color('--background'),b=color('--muted');
+    for(let y=0;y<256;y+=16)for(let x=0;x<256;x+=16){ctx.fillStyle=((x+y)/16)%2?a:b;ctx.fillRect(x,y,16,16);}
+    const off=document.createElement('canvas');off.width=d.width;off.height=d.height;
+    off.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(rgba.flat()),d.width,d.height),0,0);
+    const p=dimensions(d);ctx.imageSmoothingEnabled=false;ctx.drawImage(off,p.left,p.top,d.width*p.scale,d.height*p.scale);
+    ctx.strokeStyle=color('--foreground');ctx.lineWidth=1.5;
+    ctx.strokeRect(p.left+state.x*p.scale,p.top+state.y*p.scale,p.scale,p.scale);
+  }
+  function geometry(d){
+    const ctx=canvasMesh.getContext('2d');ctx.clearRect(0,0,256,256);
+    const t=state.angle*Math.PI/180,c=Math.cos(t),s=Math.sin(t);
+    function project(v){const x=v[0]*c-v[1]*s,y=v[0]*s+v[1]*c;return [x,-.866025*v[2]+.5*y,.5*v[2]+.866025*y];}
+    const projected=d.vertices.map(project);
+    const all=[...projected,project([0,0,0]),project([12,0,0]),project([0,12,0]),project([0,0,12])];
+    const xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+    const loX=Math.min(...xs),hiX=Math.max(...xs),loY=Math.min(...ys),hiY=Math.max(...ys);
+    const scale=Math.min(215/Math.max(hiX-loX,1),215/Math.max(hiY-loY,1));
+    const point=p=>[128+(p[0]-(loX+hiX)/2)*scale,128+(p[1]-(loY+hiY)/2)*scale];
+    const faces=d.faces.map(f=>({f,depth:f.reduce((sum,i)=>sum+projected[i][2],0)/f.length})).sort((a,b)=>a.depth-b.depth);
+    ctx.fillStyle=color('--viz-series-1');ctx.strokeStyle=color('--viz-series-1');ctx.lineWidth=.6;
+    for(const {f} of faces){ctx.beginPath();f.forEach((i,k)=>{const p=point(projected[i]);if(k===0)ctx.moveTo(...p);else ctx.lineTo(...p);});ctx.closePath();ctx.globalAlpha=.06;ctx.fill();ctx.globalAlpha=.5;ctx.stroke();}
+    ctx.globalAlpha=1;ctx.strokeStyle=color('--foreground');ctx.fillStyle=color('--foreground');ctx.font=getComputedStyle(root).font;
+    const origin=point(project([0,0,0]));
+    for(const [v,label] of [[[12,0,0],'X'],[[0,12,0],'Y'],[[0,0,12],'Z']]){const p=point(project(v));ctx.beginPath();ctx.moveTo(...origin);ctx.lineTo(...p);ctx.stroke();ctx.fillText(label,p[0]+3,p[1]-3);}
+    el('geometry-label').textContent=d.geometry;
+  }
+  function draw(){
+    const d=data[state.asset];state.x=Math.max(0,Math.min(d.width-1,Math.round(state.x)));state.y=Math.max(0,Math.min(d.height-1,Math.round(state.y)));
+    el('asset').value=state.asset;el('layer').value=state.layer;el('angle').value=state.angle;el('angle-value').textContent=`${state.angle}°`;
+    el('x').max=d.width-1;el('y').max=d.height-1;el('x').value=state.x;el('y').value=state.y;
+    imagePanel(canvasSource,d.rgba,d);
+    const active=rgb('--viz-series-1'),unknown=rgb('--orange'),neutral=rgb('--muted');
+    const finite=d.depth.filter(v=>v!==null),lo=Math.min(...finite),hi=Math.max(...finite);
+    const pixels=d.rgba.map((p,i)=>{
+      if(state.layer==='ground')return d.ground[i]?[...active.slice(0,3),255]:[...neutral.slice(0,3),p[3]?160:0];
+      if(!p[3])return [0,0,0,0];
+      if(d.depth[i]===null)return [...unknown.slice(0,3),255];
+      if(state.layer==='validity')return [...active.slice(0,3),255];
+      const t=(d.depth[i]-lo)/Math.max(hi-lo,.001),alpha=.18+.82*t;
+      return [...active.slice(0,3),Math.round(255*alpha)];
+    });
+    imagePanel(canvasDerived,pixels,d);geometry(d);
+    el('layer-label').textContent={ground:'Proposed ground mask: selected / other',depth:'Depth: faint far → solid near; orange unknown',validity:'Depth coverage: valid / orange unknown'}[state.layer];
+    const i=state.y*d.width+state.x,p=d.rgba[i],position=d.xyz[i];
+    const xyz=position?.every(v=>v!==null)?position.map(v=>v.toFixed(3)).join(', '):'unknown';
+    const dep=d.depth[i]===null?'unknown':`${d.depth[i].toFixed(3)} world px`;
+    el('detail').textContent=`Pixel (${state.x}, ${state.y}) · RGBA [${p.join(', ')}] · Ground proposal ${d.ground[i]?'yes':'no'} · Depth ${dep} · Local XYZ [${xyz}]`;
+    el('mask-method').textContent=d.groundMethod;
+    el('depth-method').textContent=`${d.depthMethod} · ${d.provenance}`;
+      el('counts').textContent=`Display: ${d.vertices.length} vertices · ${d.faces.length} triangles · ${finite.length} pixels with depth${d.rawTriangles?` · Depth mesh: ${d.rawTriangles} triangles`:''}`;
+  }
+  el('asset').addEventListener('change',()=>{state.asset=el('asset').value;draw();save();});
+  el('layer').addEventListener('change',()=>{state.layer=el('layer').value;draw();save();});
+  el('angle').addEventListener('input',()=>{state.angle=Number(el('angle').value);draw();save();});
+  for(const key of ['x','y'])el(key).addEventListener('change',()=>{state[key]=Number(el(key).value);draw();save();});
+  for(const canvas of [canvasSource,canvasDerived])canvas.addEventListener('click',event=>{
+    const bounds=canvas.getBoundingClientRect(),d=data[state.asset],p=dimensions(d);
+    state.x=Math.floor(((event.clientX-bounds.left)*256/bounds.width-p.left)/p.scale);
+    state.y=Math.floor(((event.clientY-bounds.top)*256/bounds.height-p.top)/p.scale);draw();save();
+  });
+  window.addEventListener('openai:set_globals',event=>{restore(event.detail?.globals?.widgetState?.modelContent);draw();});
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+  draw();
+})();
+</script>

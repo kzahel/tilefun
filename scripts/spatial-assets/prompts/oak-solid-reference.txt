@@ -1,0 +1,8 @@
+Use case: stylized-concept
+Asset type: unreviewed geometry-conditioning reference for an image-to-3D pipeline.
+Input image: the supplied original oak sprite is the shape, proportion and palette reference.
+Generate one isolated solid three-dimensional interpretation of this exact tree, in the same elevated three-quarter view. Keep its broad irregular rounded crown, multiple distinct overlapping green foliage lobes, short thick brown trunk, visible flared roots, relative canopy-to-trunk proportions and green/brown palette. Interpret the foliage as substantial rounded volumes extending behind the visible surface. Show a solid cylindrical trunk with rounded branches; no flat cutout or billboard.
+Style: clean stylized 3D game asset render, smooth readable surfaces, soft even lighting with restrained self-shading. Resolve the pixelated artwork into clear geometry cues; do not reproduce the square pixel grid.
+Composition: one complete centered tree, crown, trunk and root tips fully visible, with transparent padding on every side.
+Background: genuine transparent alpha. Remove only the painted ground-shadow/ground-patch concept; no ground plane, base, pot, grass patch, cast ground shadow or scenery. The tree must remain recognizable from the original sprite.
+Avoid: extra trees, fruit, flowers, new props, text, labels, watermark, cropped roots, photorealistic leaf noise, flat relief, paper cutout, dramatic lighting. This reference may infer hidden surfaces; it is not a replacement for the original gameplay pixels.

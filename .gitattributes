@@ -2,3 +2,8 @@
 # Preserve their bytes across Windows, Linux and macOS checkouts.
 art-source/wildlife-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 public/demos/wildlife-v2/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Spatial workflow shell launchers and frozen evidence preserve cross-platform bytes.
+scripts/spatial-assets/*.sh text eol=lf
+docs/tactical/071-spatial-assets/**/*.json -text
+docs/tactical/072-conditioning-fidelity/**/*.json -text

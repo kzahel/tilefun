@@ -12,7 +12,12 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [070 Spatial asset investigation](070-model-assisted-spatial-assets-investigation.md) | Planned Windows/RTX 4090 comparison: derive 2D clipping from model-assisted tree/car geometry, then table/umbrella; [3D assets](../topics/3d-assets.md) |
+| [075 Alpha guard/tree framing](075-alpha-guard-tree-framing.md) | Complete: 23 runs; guard transfer is mixed, fixed framing improves harder tree masks, two colored tree probes; [3D assets](../topics/3d-assets.md) |
+| [074 Controlled alpha/geometry](074-alpha-geometry-controlled-experiments.md) | Complete: 23 runs; crop-preserving low-alpha guard fixes tested car failures, SAM points restore trunk, foliage still unresolved; [3D assets](../topics/3d-assets.md) |
+| [073 Spatial pipeline alternatives](073-spatial-pipeline-alternatives.md) | Complete first four-route trial: FLUX/Qwen, TripoSG, fitted car; tree shape-first route and car mask sensitivity; [3D assets](../topics/3d-assets.md) |
+| [072 Conditioning fidelity](072-conditioning-fidelity-investigation.md) | Complete bounded trial: twelve RGB/mask cases, four matched direct meshes; lower strength preserves more design but shape/masks remain unresolved; [3D assets](../topics/3d-assets.md) |
+| [071 Current sprite spatial workflow](071-current-sprite-spatial-workflow.md) | Complete offline trial: ten current assets, sixteen-stage sheets and audited artifacts; conditioning/mask/geometry failures retained; [3D assets](../topics/3d-assets.md) |
+| [070 Spatial asset investigation](070-model-assisted-spatial-assets-investigation.md) | Local SDXL/MV-Adapter/U2Net/TRELLIS.2 pipeline produces volumetric oak hypotheses; controlled conditioning failures retained; registration/ground roles precede useful clipping and more shapes; [3D assets](../topics/3d-assets.md) |
 | [069 Interactive authority scheduling](069-interactive-authority-scheduling.md) | Delivered shared authority clock/transport and lifecycle/streaming regressions; [embedded labs](../topics/embedded-engine-labs.md) |
 | [001 Modern interiors](001-modern-interiors-plan.md) | Original parent plan; later deliveries continue in 002/003/011 and [interiors topic](../topics/patterns-and-interiors.md) |
 | [002 Wall solver](002-interior-wall-solver-plan.md) | Wall checkpoint stable, 233 approved cases; retain as execution history |

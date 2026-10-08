@@ -1,0 +1,83 @@
+{
+  "id": "071-current-assets",
+  "review": "Unreviewed offline experiments; current runtime source pixels stay unchanged",
+  "settings": {
+    "strength": 0.8,
+    "imageSeed": 42,
+    "meshSeed": 42,
+    "mode": "multiview"
+  },
+  "assets": [
+    {
+      "id": "palm-tree",
+      "type": "prop-palm-tree",
+      "label": "Palm tree",
+      "description": "palm tree with long arching green fronds and a slender brown trunk",
+      "question": "Does the workflow preserve thin fronds and trunk volume?"
+    },
+    {
+      "id": "picnic-table",
+      "type": "prop-picnic-table",
+      "label": "Picnic table",
+      "description": "wooden outdoor table with plates, a jug and small containers on top",
+      "question": "Do the tabletop contents, legs and open space beneath survive?"
+    },
+    {
+      "id": "beach-umbrella",
+      "type": "prop-beach-umbrella",
+      "label": "Beach umbrella",
+      "description": "open beach umbrella with segmented fabric canopy and one thin central pole",
+      "question": "Are the pole and canopy separated from painted ground?"
+    },
+    {
+      "id": "fountain",
+      "type": "prop-fountain",
+      "label": "Fountain",
+      "description": "decorative fountain with stone basin and raised central water feature",
+      "question": "Does the basin reconstruct as a hollow volume or a solid lump?"
+    },
+    {
+      "id": "shed",
+      "type": "prop-shed",
+      "label": "Shed",
+      "description": "small garden shed with pitched roof, walls and a visible door",
+      "question": "Are roof, walls and hidden sides coherent?"
+    },
+    {
+      "id": "tent-blue",
+      "type": "prop-tent-blue",
+      "label": "Blue tent",
+      "description": "blue camping tent with fabric canopy and a visible entrance",
+      "question": "Does fabric retain its shape and entrance opening?"
+    },
+    {
+      "id": "slide",
+      "type": "prop-slide",
+      "label": "Playground slide",
+      "description": "playground climbing frame with orange vertical posts, blue horizontal bars and yellow ladder panels",
+      "question": "Do bars, posts, ladders and open spaces survive?"
+    },
+    {
+      "id": "swing",
+      "type": "prop-swing",
+      "label": "Swing",
+      "description": "playground swing frame with a crossbar, suspended seat and thin hanging supports",
+      "question": "Can the generator preserve open frame space and suspension?"
+    },
+    {
+      "id": "sand-castle",
+      "type": "prop-sand-castle",
+      "label": "Sand castle",
+      "description": "small sand castle with walls, turrets and sculpted sand details",
+      "question": "Does low-resolution sculpted detail become plausible volume?"
+    },
+    {
+      "id": "compact-1-east",
+      "vehicleId": "compact-1",
+      "direction": "east",
+      "label": "Compact car",
+      "description": "compact car with roof, hood, windows and four volumetric wheels",
+      "question": "Are actual wheels and hidden vehicle surfaces recovered?"
+    }
+  ]
+}

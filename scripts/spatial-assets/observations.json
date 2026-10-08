@@ -1,0 +1,17 @@
+{
+  "trellis2-oak-001": "Original sprite, nearest-neighbor enlargement: near-flat card with painted ground.",
+  "trellis2-oak-original-001": "Original 64-pixel crop: almost planar.",
+  "trellis2-oak-seed42-001": "Original sprite enlarged to 512, second seed: almost planar.",
+  "trellis2-car-001": "Volumetric but boxy car with weak wheels; source registration and clipping unresolved.",
+  "trellis2-oak-reference-001": "Hosted solid-tree reference produces crown/trunk volume. Changes interpretation and detail as well as resolution; not a pure upscale test.",
+  "trellis2-oak-reference64-001": "Same hosted reference downsampled to 64 pixels: tiny tree on a large plane. Higher silhouette coverage is misleading. Coarse automatic geometry screen misses this failure.",
+  "oak-local-sprite-004": "Local MV-Adapter from original sprite produces extruded-card views; selected view generates a box. Computational success, shape failure.",
+  "oak-local-sprite-soft-001": "Reducing local MV-Adapter reference conditioning to 0.35 still produces box geometry.",
+  "oak-local-hosted-001": "Local MV-Adapter from the hosted reference produces plausible six-view tree hypotheses and a volumetric single-view TRELLIS.2 candidate. Textured oblique export inspected; identity and clipping remain unreviewed.",
+  "trellis2-oak-sdxl08-001": "Entirely local SDXL img2img at strength 0.8 yields crown/trunk volume. Export has blotchy generated colors and surface fragments. A controlled upstream remesh export preserves the color problem; useful geometry experiment, unsatisfactory appearance.",
+  "trellis2-oak-sdxl055-001": "Local img2img strength 0.55 retains pixel-art/ground appearance and returns a flat card; pipeline stops before fitting/export.",
+  "trellis2-oak-sdxl08-seed1-001": "Identical regenerated local reference bytes, alternate TRELLIS.2 seed 1: volumetric crown/trunk again, with the same blotchy texture problem. Two seeds support geometry feasibility, not robustness across arbitrary assets.",
+  "oak-local-sdxl08-001": "Entirely local SDXL 0.8 → MV-Adapter six views → U2Net → selected angle 0 → TRELLIS.2: volumetric tree with more legible generated colors than direct SDXL conditioning. Rounded lobe geometry and source alignment remain hypotheses; not accepted art or clipping.",
+  "trellis2-oak-sdxl095-001": "Entirely local direct img2img strength 0.95: volumetric leafy tree with more coherent generated texture than direct 0.8. Greater crown/trunk interpretation drift; does not recover unique hidden geometry. All model stages completed; the wrapper shell was edited while running and exited afterward, so texture capture was run separately.",
+  "oak-local-full-seed1-001": "Complete default local launcher with mesh seed 1: generated reference, six views, learned masks, volumetric TRELLIS mesh, fit/bake/comparison, textured GLB, interactive viewer and report all succeeded. Crown/trunk volume persists, with visible texture mottling and surface fragments; appearance varies by mesh seed."
+}
