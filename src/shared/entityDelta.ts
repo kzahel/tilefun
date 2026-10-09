@@ -1,4 +1,5 @@
 import { applyPlayerModel } from "../characters/PlayerModels.js";
+import { setSpriteClip, tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
@@ -105,6 +106,7 @@ function spriteStatesEqual(a: SpriteState | null, b: SpriteState | null): boolea
     a.frameRow === b.frameRow &&
     a.flipX === b.flipX &&
     a.frameDuration === b.frameDuration &&
+    a.clip === b.clip &&
     a.model === b.model
   );
 }
@@ -230,7 +232,11 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
     }
   }
 
-  if (delta.spriteState) applyPlayerModel(entity, delta.spriteState.model);
+  if (delta.spriteState) {
+    setSpriteClip(entity, delta.spriteState.clip);
+    tickSpriteAnimation(entity, 0);
+    applyPlayerModel(entity, delta.spriteState.model);
+  }
   applyVehicleFacing(entity);
 
   if (delta.wanderAIState !== undefined) {
@@ -238,12 +244,7 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
       entity.wanderAI = null;
     } else if (entity.wanderAI) {
       // Update in-place
-      entity.wanderAI.state = delta.wanderAIState.state as
-        | "idle"
-        | "walking"
-        | "chasing"
-        | "following"
-        | "ridden";
+      entity.wanderAI.state = delta.wanderAIState.state as NonNullable<Entity["wanderAI"]>["state"];
       entity.wanderAI.dirX = delta.wanderAIState.dirX;
       entity.wanderAI.dirY = delta.wanderAIState.dirY;
       if (delta.wanderAIState.following !== undefined) {

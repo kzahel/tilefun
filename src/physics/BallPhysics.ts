@@ -15,6 +15,7 @@ import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/coll
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
+import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { zRangesOverlap } from "./AABB3D.js";
 import { getSurfaceZ } from "./surfaceHeight.js";
@@ -152,9 +153,29 @@ export function tickBallPhysics(
       const minCy = Math.floor(ballBox.top / CHUNK_SIZE_PX);
       const maxCy = Math.floor(ballBox.bottom / CHUNK_SIZE_PX);
       const nearby = entityManager.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
+      if (ball.ballThrowerId !== undefined) {
+        const thrower = entityManager.byId.get(ball.ballThrowerId);
+        if (
+          !thrower?.collider ||
+          !aabbsOverlap(ballBox, getEntityAABB(thrower.position, thrower.collider)) ||
+          !zRangesOverlap(
+            ballWz,
+            ballH,
+            thrower.wz ?? 0,
+            thrower.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT,
+          )
+        )
+          delete ball.ballThrowerId;
+      }
 
       for (const other of nearby) {
-        if (other === ball || other.type === "ball" || !other.collider) continue;
+        if (
+          other === ball ||
+          other.type === "ball" ||
+          other.id === ball.ballThrowerId ||
+          !other.collider
+        )
+          continue;
         // Z-range overlap check
         const otherWz = other.wz ?? 0;
         const otherH = other.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
@@ -182,6 +203,8 @@ export function tickBallPhysics(
             other.velocity.vy = 0;
           }
           entityManager.spawn(createGem(other.position.wx, other.position.wy));
+        } else if (other.mallard) {
+          startleMallard(other, ball.position);
         } else if (ai && !ai.hostile) {
           // Scare NPCs (non-hostile entities with wander AI)
           if (other.velocity) {

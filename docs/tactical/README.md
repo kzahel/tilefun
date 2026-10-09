@@ -12,6 +12,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [077 Duck contact and startle flight](077-duck-contact-and-startle-flight.md) | Complete: solid bodies, predicted landing bounce, ball startle and durable bounded flight |
+| [076 Durable pond wildlife](076-durable-pond-wildlife.md) | Provisional mallard gameplay: varied clips, seeded pond flocks, open banks and durable individuals |
 | [075 Alpha guard/tree framing](075-alpha-guard-tree-framing.md) | Complete: 23 runs; guard transfer is mixed, fixed framing improves harder tree masks, two colored tree probes; [3D assets](../topics/3d-assets.md) |
 | [074 Controlled alpha/geometry](074-alpha-geometry-controlled-experiments.md) | Complete: 23 runs; crop-preserving low-alpha guard fixes tested car failures, SAM points restore trunk, foliage still unresolved; [3D assets](../topics/3d-assets.md) |
 | [073 Spatial pipeline alternatives](073-spatial-pipeline-alternatives.md) | Complete first four-route trial: FLUX/Qwen, TripoSG, fitted car; tree shape-first route and car mask sensitivity; [3D assets](../topics/3d-assets.md) |
@@ -125,6 +127,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [067 Shared prediction timeline](067-shared-prediction-timeline.md) | In progress: rate transitions, common moving support and time-aware NPC contact prediction |
 
 | [068 Natural landscape preview](068-natural-landscape-preview.md) | Implemented for review: shared habitat planning, trees/ponds and seeded explorer/lab scenes; ordinary defaults unchanged |
+
 
 ## Earlier plans
 

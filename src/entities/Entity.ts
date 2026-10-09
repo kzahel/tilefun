@@ -1,3 +1,5 @@
+import type { MallardBehavior } from "../wildlife/Mallard.js";
+
 /** Movement/facing direction. Row index in character spritesheet. */
 export enum Direction {
   Down = 0,
@@ -24,6 +26,8 @@ export interface VelocityComponent {
 
 export interface SpriteComponent {
   sheetKey: string;
+  /** Optional index into the static named animation clips. */
+  clip?: number;
   /** Current animation frame column. */
   frameCol: number;
   /** Current direction row in spritesheet. */
@@ -103,6 +107,9 @@ export interface Entity {
   playerModel?: string;
   /** Stable generated identity; authoritative residency metadata, separate from runtime IDs. */
   proceduralId?: string;
+  /** Launch-only ball exemption until its collider clears the thrower's body. Transient. */
+  ballThrowerId?: number;
+  mallard?: MallardBehavior;
   routeAI?: {
     points: readonly RouteWaypoint[];
     index: number;

@@ -12,6 +12,13 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
+Duck contact (2026-10-09): solid mallard bodies use the existing shared collision
+timeline. Landing on their 9px body supplies a 95px/s upward bounce from
+`tickJumpGravity`, shared by prediction, authority input steps and missing-input
+gravity. The outcome identifies the contacted duck for server-only alarm/flight;
+the client does not mutate NPC AI. A duck bounce over water is not a water landing.
+See [077](../tactical/077-duck-contact-and-startle-flight.md) for interaction evidence.
+
 [Idle roof-jump evidence](../research/idle-support-jump.md) finds forward travel
 despite correct inherited velocity: uneven input delivery double-counts passive
 motion, landing gets a second carry, and takeoff presentation uses a mismatched

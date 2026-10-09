@@ -1,8 +1,63 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: repair existing frozen-torso walks only; new-animal production canceled.
-Updated: 2026-10-04.
+Status: provisional durable mallards with body contact, landing bounce and startle flight delivered; art repairs remain separate and new-animal production stays canceled.
+Updated: 2026-10-09.
+
+## Provisional gameplay: durable pond ducks
+
+On 2026-10-09 the owner requested populating wild areas with existing imperfect
+assets, habitat support and baseline AI rather than waiting for perfect art.
+They selected a first deep animal slice and prefer seeded initial populations
+that persist, with manual creation instead of periodic replacement spawning.
+This supersedes the previous prohibition on provisional gameplay integration;
+it does not resume new-animal art production or invent human approvals.
+
+[Tactical 076](../tactical/076-durable-pond-wildlife.md) implements the mallard
+first: unchanged drawing-02 with idle, waddle, swim, flap and quack clips, open
+pond banks, small seeded flocks, bounded home-area behavior and ordinary actor
+persistence. The existing World geometry pond scene runs the same production
+Worker behavior. Gameplay availability is provisional, distinct from the art
+production receipts/table and Workshop approval states.
+
+The current slice passes typecheck, lint, build, 1,760 unit tests, all six wildlife
+Canvas/GPU/game browser checks and isolated streaming readiness. The full browser
+run passes 389/393: two missing archived art-preview failures remain; a Canvas
+train boarding check passes in isolation, and an initially single-shot duck test
+now accounts for intentional throw spread and passes with a short aimed volley.
+See 076 for initial integration history and 077 for current interaction evidence.
+
+Generated ducks are seeded deterministically from world seed and pond identity,
+with stable per-member IDs and owner chunks. On first residency they become
+ordinary saved actors. Movement, home, destination, behavior timer and per-duck
+random state persist; leaving an area freezes distant animals without elapsed-time
+catch-up. Deleted individuals remain deleted. There is no replacement timer,
+breeding or automatic population replenishment. Editor-created ducks persist too.
+Ghost/baddie spawning remains its separate system. Same-seed reproducibility is
+for the current generator, not historical landscape compatibility.
+Previously seeded saved chunks are not backfilled; manual placement supplies ducks
+there while new pond chunks receive their initial flock.
+
+The owner subsequently requested physical/playful interactions. [077](../tactical/077-duck-contact-and-startle-flight.md)
+supersedes 076's non-solid bodies: ducks now block body movement and give the player
+a small bounce when landed upon. The same landing rule runs in prediction and
+authority, including missing-input gravity. Landing or a ball hit starts a quack,
+then a short bounded escape flight using unchanged flap frames. The duck settles
+for two seconds before returning to its pond routine; repeated hits do not restart
+the escape. If no clear destination exists, it quacks and settles in place.
+
+The destination, flight timeline, elevation and identity survive save/reload and
+residency. Normal collision still owns movement; landing uses the actual resolved
+position rather than teleporting through a new obstacle. The ordinary game plays
+a provisional synthesized quack on the replicated alarm transition. The pond lab's
+**Hop onto duck** control uses the existing authority teleport/fall command and the
+same production physics. Flight frame phase remains transient. The original ball
+scare cancellation gap is resolved; launched balls also ignore their thrower's
+collider until they clear it, avoiding an immediate self-hit at chest height.
+
+Art checkpoint refresh was attempted, but this checkout lacks the ignored
+`data/wildlife-campaign-v2/progress.json`. Preserve the last validated production
+table rather than fabricate receipts; gameplay work/evidence belongs in 076/077.
 
 For the whole-roster completion table and local animation links, see the generated
 [production status table](../wildlife-status.md). Agents persist fresh progress

@@ -32,7 +32,7 @@ const TAG_JSON = 0xff;
 
 // ---- AI state string ↔ u8 ----
 
-const AI_STATES = ["idle", "walking", "chasing", "following", "ridden"] as const;
+const AI_STATES = ["idle", "walking", "chasing", "following", "ridden", "scared"] as const;
 const AI_STATE_TO_INDEX: Record<string, number> = {};
 for (let i = 0; i < AI_STATES.length; i++) AI_STATE_TO_INDEX[AI_STATES[i]!] = i;
 
@@ -784,6 +784,7 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
 // Byte 1: frameRow (u8)
 // Optional bytes 2-3: frameDuration (u16, only if hasFrameDuration)
 // Flag bit 5: model index (u8), following frameDuration when present.
+// Flag bit 6: animation clip index (u8), following model when present.
 
 function writeSpriteState(view: DataView, off: number, ss: SpriteState): number {
   let flags = (ss.direction as number) & 0x03;
@@ -792,6 +793,7 @@ function writeSpriteState(view: DataView, off: number, ss: SpriteState): number 
   const hasFrameDuration = ss.frameDuration !== undefined;
   if (hasFrameDuration) flags |= 0x10;
   if (ss.model !== undefined) flags |= 0x20;
+  if (ss.clip !== undefined) flags |= 0x40;
 
   view.setUint8(off, flags);
   off += 1;
@@ -806,6 +808,7 @@ function writeSpriteState(view: DataView, off: number, ss: SpriteState): number 
     if (model < 0) throw new Error("Unknown player model");
     view.setUint8(off++, model);
   }
+  if (ss.clip !== undefined) view.setUint8(off++, ss.clip);
   return off;
 }
 
@@ -830,6 +833,7 @@ function readSpriteState(view: DataView, off: number): [SpriteState, number] {
     if (!model) throw new Error("Unknown player model");
     ss.model = model.id;
   }
+  if (flags & 0x40) ss.clip = view.getUint8(off++);
   return [ss, off];
 }
 

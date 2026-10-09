@@ -26,6 +26,9 @@ export class NaturalStrategy extends RailwayStrategy {
       }
     if (changed) deriveTerrain(chunk);
   }
+  override actors(cx: number, cy: number) {
+    return [...super.actors(cx, cy), ...this.nature.wildlife(cx, cy)];
+  }
   override placements(cx: number, cy: number) {
     return [...super.placements(cx, cy), ...this.nature.placements(cx, cy)];
   }

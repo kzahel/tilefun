@@ -1,6 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import { updateRouteAI } from "../entities/routeAI.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
+import { updateMallardAI, type WildlifeEnvironment } from "../wildlife/mallardAI.js";
 
 /**
  * Run AI for all entities: tick-tier culling, chase/follow, wander.
@@ -17,10 +18,15 @@ export function tickAllAI(
   playerPositions: readonly { wx: number; wy: number }[],
   entityTickDts: ReadonlyMap<Entity, number>,
   rng: () => number,
+  wildlife?: WildlifeEnvironment,
 ): void {
   // Collect buddies for hostile AI targeting (need all, not just ticked)
   const buddies = entities.filter((e) => e.wanderAI?.following);
   for (const [entity, dt] of entityTickDts) {
+    if (entity.mallard && wildlife) {
+      updateMallardAI(entity, dt, wildlife, entities, playerPositions);
+      continue;
+    }
     if (!entity.wanderAI) continue;
     // Skip ridden entities — their velocity is controlled by the rider's input
     if (entity.wanderAI.state === "ridden") continue;

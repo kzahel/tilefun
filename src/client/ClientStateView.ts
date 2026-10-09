@@ -2,6 +2,7 @@ import { TICK_RATE } from "../config/constants.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import {
   getMovementPhysicsParams,
   setAccelerate,
@@ -677,22 +678,7 @@ export class RemoteStateView implements ClientStateView {
    * so that animTimer/frameCol stay correct without being serialized.
    */
   tickAnimations(dt: number): void {
-    const dtMs = dt * 1000;
-    for (const entity of this._entities) {
-      const sprite = entity.sprite;
-      if (sprite && sprite.frameCount > 1) {
-        if (sprite.moving) {
-          sprite.animTimer += dtMs;
-          if (sprite.animTimer >= sprite.frameDuration) {
-            sprite.animTimer -= sprite.frameDuration;
-            sprite.frameCol = (sprite.frameCol + 1) % sprite.frameCount;
-          }
-        } else {
-          sprite.frameCol = 0;
-          sprite.animTimer = 0;
-        }
-      }
-    }
+    for (const entity of this._entities) tickSpriteAnimation(entity, dt);
   }
 
   private updateExtrapolationStats(samples: ReadonlyMap<number, ExtrapolationSample>): void {

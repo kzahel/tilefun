@@ -4,6 +4,7 @@ import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
 import { generateUUID } from "../shared/uuid.js";
+import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
 
 export interface ActorRecord {
   version: 2;
@@ -23,6 +24,7 @@ export interface ActorRecord {
 export const DURABLE_ENTITY_FIELDS = [
   "velocity",
   "wanderAI",
+  "mallard",
   "routeAI",
   "deathTimer",
   "wz",
@@ -111,6 +113,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     actor.wanderAI.timer = 1;
   }
   if ("isProp" in actor && record.spawnTimer !== undefined) actor.spawnTimer = record.spawnTimer;
+  if (!("isProp" in actor)) restoreMallardPose(actor);
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;
   return actor;

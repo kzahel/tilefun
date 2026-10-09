@@ -2,6 +2,8 @@ import { TerrainId } from "../../autotile/TerrainId.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
+import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
+import type { ActorPlacement } from "../Generator.js";
 import { fbm, valueNoise } from "../noise.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { pathDistance } from "./PlanGeometry.js";
@@ -173,6 +175,44 @@ export class NaturalLandscape {
     if (local.distance < 1.23) return TerrainId.SandLight;
     return base;
   }
+  /** Reserve an open ring around admitted ponds for wildlife and player access. */
+  pondBank(x: number, y: number, clearance = 0): boolean {
+    const p = this.pond(Math.floor(x / 128), Math.floor(y / 128));
+    return !!p && Math.hypot((x - p.x) / (p.rx + clearance), (y - p.y) / (p.ry + clearance)) < 1.5;
+  }
+  /** Seed once; persistence owns subsequent movement and deletion, never a respawn timer. */
+  wildlife(cx: number, cy: number): ActorPlacement[] {
+    const pond = this.pond(Math.floor(cx / 8), Math.floor(cy / 8));
+    if (!pond) return [];
+    const px = Math.floor(pond.x / 128),
+      py = Math.floor(pond.y / 128);
+    const h = (salt: number) => valueNoise(px, py, this.world.seed + salt);
+    const count = 2 + Math.floor(h(7401) * 3);
+    const actors: ActorPlacement[] = [];
+    for (let i = 0; i < count; i++) {
+      // A fixed dry-bank arc leaves each member room and easy access to the pond.
+      const angle = h(7411) * Math.PI * 2 + i * 0.5;
+      const wx = (pond.x + Math.cos(angle) * pond.rx * 1.32) * 16;
+      const wy = (pond.y + Math.sin(angle) * pond.ry * 1.32) * 16;
+      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      const duck = createMallard(wx, wy),
+        ai = duck.mallard;
+      if (!ai) throw new Error("Missing mallard behavior");
+      ai.home = { wx: pond.x * 16, wy: pond.y * 16 };
+      ai.radius = Math.max(pond.rx, pond.ry) * 1.5 * 16;
+      ai.randomState = Math.floor(h(7421 + i) * 4294967296) >>> 0;
+      ai.timer = 1 + i * 1.1;
+      actors.push({
+        featureId: `wildlife:mallard:${this.world.seed}:${pond.id}:${i}`,
+        type: MALLARD_TYPE,
+        wx,
+        wy,
+        route: [],
+        mallard: ai,
+      });
+    }
+    return actors;
+  }
   /** Bounded 128-tile owners hold irregular forest masses. Rows retain native
    * periods and overlap; phases use global row coordinates, never chunk order. */
   forest(cx: number, cy: number): ForestRow[] {
@@ -207,7 +247,10 @@ export class NaturalLandscape {
         let valid = true;
         for (let ty = bounds.minY; ty <= bounds.maxY && valid; ty += 1)
           for (let tx = bounds.minX; tx <= bounds.maxX && valid; tx += 1)
-            valid = this.terrain(tx, ty) === TerrainId.Grass && !this.reserved(tx, ty, 2);
+            valid =
+              this.terrain(tx, ty) === TerrainId.Grass &&
+              !this.reserved(tx, ty, 2) &&
+              !this.pondBank(tx, ty);
         if (!valid) continue;
         rows.push({
           featureId: `nature:thicket:${cx}:${cy}:${row}`,
@@ -283,7 +326,8 @@ export class NaturalLandscape {
         if (
           valueNoise(gx, gy, this.world.seed + 7211) >=
             naturalHabitat(this.world, this.profile, x, y).density ||
-          this.reserved(x, y, 4)
+          this.reserved(x, y, 4) ||
+          this.pondBank(x, y, 4)
         )
           continue;
         // Full trunk and crown ground projection remain on dry land, clear of shore.

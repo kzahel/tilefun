@@ -1,9 +1,33 @@
 import type { Entity } from "./Entity.js";
+import { ENTITY_DEFS } from "./EntityDefs.js";
 
-/** Shared gameplay animation clock; idle returns to the first pose. */
+/** Change clips atomically; repeated decisions preserve the local animation phase. */
+export function setSpriteClip(entity: Entity, clip: number | undefined): void {
+  const sprite = entity.sprite;
+  if (!sprite || sprite.clip === clip) return;
+  if (clip === undefined) delete sprite.clip;
+  else sprite.clip = clip;
+  sprite.animTimer = 0;
+  sprite.frameCol = ENTITY_DEFS[entity.type]?.sprite?.clips?.[clip ?? 0]?.start ?? 0;
+}
+
+/** Common server/client clock. Named stationary clips play without moving the actor. */
 export function tickSpriteAnimation(entity: Entity, dt: number): void {
   const sprite = entity.sprite;
-  if (!sprite || sprite.frameCount <= 1) return;
+  if (!sprite) return;
+  const clip =
+    sprite.clip === undefined ? undefined : ENTITY_DEFS[entity.type]?.sprite?.clips?.[sprite.clip];
+  if (clip) {
+    if (sprite.frameCol < clip.start || sprite.frameCol >= clip.start + clip.count)
+      sprite.frameCol = clip.start;
+    sprite.animTimer += dt * 1000;
+    const frames = Math.floor(sprite.animTimer / clip.frameDuration);
+    sprite.animTimer %= clip.frameDuration;
+    const next = sprite.frameCol - clip.start + frames;
+    sprite.frameCol = clip.start + (clip.loop ? next % clip.count : Math.min(next, clip.count - 1));
+    return;
+  }
+  if (sprite.frameCount <= 1) return;
   if (sprite.moving) {
     sprite.animTimer += dt * 1000;
     if (sprite.animTimer >= sprite.frameDuration) {

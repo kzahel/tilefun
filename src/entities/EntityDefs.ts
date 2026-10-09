@@ -2,12 +2,22 @@ import { CHARACTER_ENTITY_DEFS } from "../characters/PromotedCharacters.js";
 import { CURVE_TRAIN_DEFS } from "../railway/CurveTrain.js";
 import { TRAIN_CARRIAGE_DEFS, TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js";
 import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
+import { MALLARD_DEF, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
 // ---- Static definition types ----
 
 /** Static sprite asset metadata, shared via ENTITY_DEFS registry. */
+export interface AnimationClip {
+  name: string;
+  start: number;
+  count: number;
+  frameDuration: number;
+  loop: boolean;
+}
+
 export interface SpriteDef {
+  clips?: readonly AnimationClip[];
   sheetKey: string;
   spriteWidth: number;
   spriteHeight: number;
@@ -48,6 +58,8 @@ export interface EntityDef {
   initialMoving?: boolean;
   /** When true, entity can only move on water tiles (fish, etc.). */
   aquatic?: boolean;
+  /** Ground movement crosses water and banks, retaining ordinary solid collisions. */
+  amphibious?: boolean;
 }
 
 // ---- Dynamic state types (serialized per-tick) ----
@@ -57,6 +69,7 @@ export interface EntityDef {
  * computes animation locally from `moving`, `frameDuration`, and `frameCount`.
  */
 export interface SpriteState {
+  clip?: number;
   /** Cosmetic player model; absent means the classic player. */
   model?: string;
   direction: Direction;
@@ -141,6 +154,7 @@ function wormDef(n: number): EntityDef {
 
 export const ENTITY_DEFS: Record<string, EntityDef> = {
   ...CHARACTER_ENTITY_DEFS,
+  [MALLARD_TYPE]: MALLARD_DEF,
   ...VEHICLE_DEFS,
   [TRAIN_TYPE]: TRAIN_DEF,
   ...TRAIN_CARRIAGE_DEFS,

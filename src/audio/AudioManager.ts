@@ -75,6 +75,38 @@ export class AudioManager {
     return this.buffers.get(key);
   }
 
+  /** Provisional nasal quack, synthesized without adding or promoting art assets. */
+  playDuckQuack(volume = 0.2, pan = 0): void {
+    if (this.ctx?.state !== "running") return;
+    const now = this.ctx.currentTime;
+    const voice = this.ctx.createOscillator();
+    voice.type = "sawtooth";
+    voice.frequency.setValueAtTime(230, now);
+    voice.frequency.exponentialRampToValueAtTime(145, now + 0.18);
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = "bandpass";
+    filter.frequency.value = 950;
+    filter.Q.value = 1.5;
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(volume, now + 0.015);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+    const panner = this.ctx.createStereoPanner();
+    panner.pan.value = pan;
+    voice.connect(filter);
+    filter.connect(gain);
+    gain.connect(panner);
+    panner.connect(this.master ?? this.ctx.destination);
+    voice.onended = () => {
+      voice.disconnect();
+      filter.disconnect();
+      gain.disconnect();
+      panner.disconnect();
+    };
+    voice.start(now);
+    voice.stop(now + 0.21);
+  }
+
   /**
    * Fire-and-forget one-shot sound playback.
    * Pipeline: AudioBufferSourceNode → GainNode → StereoPannerNode → destination

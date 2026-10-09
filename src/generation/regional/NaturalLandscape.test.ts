@@ -130,7 +130,9 @@ describe("natural landscape shared composition", () => {
       [1, -5, 3],
     ] as const) {
       const rows = n.forest(cx, cy);
-      expect(rows.length).toBeGreaterThan(8);
+      // Open wildlife banks can remove a row from an otherwise dense forest.
+      expect(rows.length).toBeGreaterThanOrEqual(8);
+      expect(rows.every((r) => !n.pondBank(r.wx / 16, r.wy / 16))).toBe(true);
       expect(rows.every((r) => r.kit === kit)).toBe(true);
       for (const r of rows) {
         expect(r.bounds.minX).toBeGreaterThanOrEqual(cx * 128);

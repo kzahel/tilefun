@@ -11,6 +11,7 @@ import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -730,6 +731,10 @@ export class PlayScene implements GameScene {
       const pan = Math.max(-0.5, Math.min(0.5, normalizedX * 0.5));
 
       // Pitch based on entity weight: lighter = higher pitch
+      if (e.type === MALLARD_TYPE) {
+        gc.audioManager.playDuckQuack(0.25 * distFactor, pan);
+        continue;
+      }
       const weight = e.weight ?? ENTITY_DEFS[e.type]?.weight ?? 10;
       const pitch =
         weight < 5

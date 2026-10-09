@@ -75,6 +75,16 @@ regenerate them with `npm run assets:app-icons` when it changes.
 Launcher checks cover both Vite dev serving (used by the live site) and production
 preview; public-asset links let Vite apply the deployment prefix exactly once.
 
+## Wildlife
+
+Regional ponds have small seeded mallard flocks using provisional existing art.
+Ducks waddle, swim, rest, quack and exercise their wings around open banks.
+Their bodies have collision. Landing on one bounces you up; landing contact or a
+ball hit makes it quack, fly a short distance and settle nearby.
+They persist as individuals when you leave and return; deleted ducks stay gone,
+with no timed respawns. **Edit → Entities → Mallard duck** adds more saved ducks.
+Try the [pond playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pond&landscape=thicket#/tool/world-geometry).
+
 ## Characters
 
 Open **Edit → Entities** to place Tiger, Tuxedo Cat, Floppy Dog, Trail Explorer,

@@ -14,6 +14,7 @@ import {
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
@@ -127,8 +128,25 @@ export default function NaturalLandscapePage() {
         sprinting: false,
       }),
       onFrame: (h) => {
+        const ducks = h.session.view.entities.filter((e) => e.type === MALLARD_TYPE);
+        c.dataset.wildlifeCount = String(ducks.length);
+        c.dataset.wildlifePoses = JSON.stringify(
+          ducks.map((e) => ({
+            id: e.id,
+            x: e.position.wx,
+            y: e.position.wy,
+            clip: e.sprite?.clip,
+            frame: e.sprite?.frameCol,
+            direction: e.sprite?.direction,
+            z: e.wz ?? 0,
+            state: e.wanderAI?.state,
+          })),
+        );
         const view = h.session.view;
+        c.dataset.playerVz = String(view.serverPlayerEntity.jumpVZ ?? 0);
+        c.dataset.playerZ = String(view.serverPlayerEntity.wz ?? 0);
         const diagnostics = h.getDiagnostics();
+        c.dataset.authorityRunning = String(diagnostics.authority.clock?.running ?? false);
         c.dataset.terrainPending = String(diagnostics.terrain?.pending ?? -1);
         c.dataset.terrainResident = String(diagnostics.terrain?.resident ?? 0);
         const pos = view.playerEntity.position;
@@ -380,6 +398,29 @@ export default function NaturalLandscapePage() {
               {follow ? "Follow player" : "Follow train"}
             </button>
           </>
+        )}
+        {caseId === "pond" && (
+          <button
+            type="button"
+            disabled={!ready || paused}
+            onClick={() => {
+              const h = host.current;
+              const duck = h?.session.view.entities.find(
+                (e) => e.type === MALLARD_TYPE && e.wanderAI?.state !== "scared",
+              );
+              if (!h || !duck) return;
+              void h
+                .command({
+                  kind: "teleport",
+                  position: { ...duck.position },
+                  z: (duck.wz ?? 0) + 26,
+                })
+                .catch((e) => setError(String(e)));
+              canvas.current?.focus();
+            }}
+          >
+            Hop onto duck
+          </button>
         )}
       </div>
       <p role="status">{ready ? "Ready to explore" : "Preparing landscape…"}</p>

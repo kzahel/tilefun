@@ -2,13 +2,24 @@
 
 Topic: natural-landscapes
 Status: natural cover and patterned forests are the default current regional generation.
-Updated: 2026-10-07.
+Updated: 2026-10-09.
 
 Owns natural land cover, forest composition, scattered vegetation and small ponds
 in the current regional overworld. [City generation](city-generation.md) owns
 generator policy and settlements; [world geometry](world-geometry.md) owns physical
 terrain elevation, slopes and stacked spaces. [Tactical 068](../tactical/068-natural-landscape-preview.md)
 records the first review delivery and validation.
+
+## Durable pond wildlife
+
+The owner authorized provisional existing-art wildlife gameplay on 2026-10-09.
+Admitted local ponds now reserve an open bank ring against scattered trees and
+solid thicket rows, supporting walking access and duck land/water transitions.
+The current NaturalStrategy supplies small seed-deterministic mallard flocks;
+normal actor persistence owns their later movement and deletion. This is a
+bounded extension to existing ponds, not a new climate/biome or generation version.
+[Wildlife](wildlife.md#provisional-gameplay-durable-pond-ducks) and
+[tactical 076](../tactical/076-durable-pond-wildlife.md) own behavior and evidence.
 
 ## User direction
 

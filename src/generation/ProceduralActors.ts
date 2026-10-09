@@ -54,13 +54,18 @@ export class ProceduralActors {
         if (!factory) throw new Error(`Unsupported generated actor: ${p.type}`);
         const entity = factory(p.wx, p.wy);
         entity.proceduralId = p.featureId;
-        entity.routeAI = {
-          points: p.route,
-          index: 1 % p.route.length,
-          pause: 1,
-          blocked: 0,
-          last: { ...entity.position },
-        };
+        if (p.mallard) {
+          entity.mallard = structuredClone(p.mallard);
+          entity.persistentId = p.featureId;
+        }
+        if (p.route.length)
+          entity.routeAI = {
+            points: p.route,
+            index: 1 % p.route.length,
+            pause: 1,
+            blocked: 0,
+            last: { ...entity.position },
+          };
         if (entity.wanderAI) entity.wanderAI.befriendable = false;
         entity.tags?.delete("befriendable");
         this.manager.spawn(entity);

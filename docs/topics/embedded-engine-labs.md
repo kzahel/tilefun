@@ -197,6 +197,14 @@ scenes and device measurements.
 
 ## Change and validation discipline
 
+Duck interactions (2026-10-09) keep body collision and player landing bounce in
+shared movement physics; Realm owns quack/startle/escape and EntityManager owns the
+collision-resolved flight arc. The pond lab's **Hop onto duck** control uses the
+existing authority teleport/fall command, not lab-specific physics. Canvas/GPU
+diagnostics expose duck elevation/clip/alarm and player bounce velocity. The
+ordinary game's PlayScene plays the provisional synthesized quack; labs retain
+their existing lack of game audio. See [077](../tactical/077-duck-contact-and-startle-flight.md).
+
 When changing simulation/transport, prediction/time, asset setup, rendering,
 terrain preparation or host lifecycle:
 
@@ -336,3 +344,12 @@ persistence and authority; there is no separate forest collision or train loop.
 The extra-dense profile's staggered forest rows are normal multipart props with
 replicated solid footprints, native atlas crops and ordinary procedural deletion.
 They add no lab-specific rendering, collision or editor persistence path.
+
+## Provisional pond wildlife
+
+Tactical 076 adds mallards to generated natural pond scenes and ordinary worlds
+through the same NaturalStrategy, ProceduralActors, Realm AI and persistence.
+Named animation clips use the same sprite clock in EntityManager and the client
+replica; clip selection is replicated in binary baselines/deltas. Lab pause and
+save/reload exercise that shared system. World geometry exposes bounded per-frame
+duck diagnostics for browser verification; it adds no animal simulation loop.

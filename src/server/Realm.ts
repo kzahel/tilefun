@@ -16,7 +16,12 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
 import { createBall } from "../entities/Ball.js";
-import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import {
+  aabbOverlapsPropWalls,
+  aabbOverlapsSolid,
+  aabbsOverlap,
+  getEntityAABB,
+} from "../entities/collision.js";
 import type { ColliderComponent, Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
@@ -83,6 +88,7 @@ import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import { startleMallard } from "../wildlife/mallardInteractions.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -105,6 +111,9 @@ function mergePlayerStepOutcomes(
     groundZ: next.groundZ,
     enteredWater: previous.enteredWater || next.enteredWater,
     endedGrounded: next.endedGrounded,
+    ...((next.duckContactId ?? previous.duckContactId) !== undefined
+      ? { duckContactId: next.duckContactId ?? previous.duckContactId }
+      : {}),
   };
 }
 
@@ -848,7 +857,36 @@ export class Realm {
             ((this.streaming.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
               this.streaming.supported(prop, stepDt)),
         );
-        tickAllAI(active, playerPositions, decisions, this.options.random ?? Math.random);
+        tickAllAI(active, playerPositions, decisions, this.options.random ?? Math.random, {
+          surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
+          isWater: (p) =>
+            (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
+              CollisionFlag.Water) !==
+            0,
+          canOccupy: (entity, p) => {
+            if (!entity.collider) return false;
+            const box = getEntityAABB(p, entity.collider);
+            if (
+              aabbOverlapsSolid(
+                box,
+                (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+                CollisionFlag.Solid,
+              )
+            )
+              return false;
+            return !this.propManager
+              .getPropsNearPosition(p, entity.collider)
+              .some((prop) =>
+                aabbOverlapsPropWalls(
+                  box,
+                  prop.position,
+                  prop,
+                  entity.wz ?? 0,
+                  entity.collider?.physicalHeight ?? 9,
+                ),
+              );
+          },
+        });
 
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
@@ -914,6 +952,9 @@ export class Realm {
               groundZ: gravity.groundZ,
               enteredWater: gravity.landed && this.isEntityOnWater(p),
               endedGrounded: p.jumpVZ === undefined,
+              ...(gravity.duckContactId !== undefined
+                ? { duckContactId: gravity.duckContactId }
+                : {}),
             },
             getHeight,
             movementPhysics,
@@ -1231,6 +1272,7 @@ export class Realm {
         const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
         const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
         const ball = createBall(player.position.wx, player.position.wy);
+        ball.ballThrowerId = player.id;
         ball.velocity = { vx: Math.cos(baseAngle) * xySpeed, vy: Math.sin(baseAngle) * xySpeed };
         ball.wz = (player.wz ?? 0) + 8; // throw from chest height
         ball.jumpVZ = zSpeed;
@@ -1846,6 +1888,14 @@ export class Realm {
   ): void {
     if (!outcome.landed) return;
     const p = session.player;
+    if (outcome.duckContactId !== undefined) {
+      const duck = this.entityManager.byId.get(outcome.duckContactId);
+      if (duck) {
+        startleMallard(duck, p.position);
+        this.records?.changed(duck);
+      }
+      return;
+    }
     if (outcome.enteredWater) {
       const safe = session.gameplaySession.lastSafePosition;
       if (safe) {

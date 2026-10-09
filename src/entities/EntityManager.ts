@@ -1,10 +1,16 @@
-import { CHUNK_SIZE_PX, DEFAULT_PHYSICAL_HEIGHT, STEP_UP_THRESHOLD } from "../config/constants.js";
+import {
+  CHUNK_SIZE_PX,
+  DEFAULT_PHYSICAL_HEIGHT,
+  STEP_UP_THRESHOLD,
+  TILE_SIZE,
+} from "../config/constants.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
   applyGroundTracking,
   isElevationBlocked3D,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
+import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
@@ -195,6 +201,7 @@ export class EntityManager {
             if (
               entity === player ||
               !entity.collider ||
+              entity.collider.solid === false ||
               !entity.wanderAI ||
               (entityTickDts && !entityTickDts.has(entity))
             )
@@ -252,16 +259,20 @@ export class EntityManager {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
+      if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
       const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
+      const isAmphibious = ENTITY_DEFS[entity.type]?.amphibious === true;
       const speedMult =
-        entity.collider && !isAquatic ? getSpeedMultiplier(entity.position, getCollision) : 1.0;
+        entity.collider && !isAquatic && !isAmphibious
+          ? getSpeedMultiplier(entity.position, getCollision)
+          : 1.0;
       const dx = entity.velocity.vx * entityDt * speedMult;
       const dy = entity.velocity.vy * entityDt * speedMult;
 
       if (entity.collider) {
         // Aquatic entities: blocked by Solid only (water is passable),
         // plus an extra check that every tile under their AABB has water.
-        const entityBlockMask = isAquatic ? CollisionFlag.Solid : blockMask;
+        const entityBlockMask = isAquatic || isAmphibious ? CollisionFlag.Solid : blockMask;
         const baseBlocker = makeExtraBlocker(entity);
         const extraBlocker = isAquatic
           ? (aabb: AABB): boolean => {
@@ -307,6 +318,20 @@ export class EntityManager {
         if (skipEntityIds?.has(entity.id)) continue;
         if (entity.parentId !== undefined) continue; // riders: Z is visual-only
         if (entity.tags?.has("projectile")) continue; // projectiles handled by BallPhysics
+        if (entity.mallard?.state === "flight" && entity.mallard.flight) {
+          if (entity.mallard.flight.elapsed >= entity.mallard.flight.duration)
+            settleMallard(
+              entity,
+              computeGroundZ(entity),
+              (getCollision(
+                Math.floor(entity.position.wx / TILE_SIZE),
+                Math.floor(entity.position.wy / TILE_SIZE),
+              ) &
+                CollisionFlag.Water) !==
+                0,
+            );
+          continue;
+        }
         applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities
