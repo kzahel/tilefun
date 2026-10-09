@@ -324,7 +324,7 @@ it("keeps expanded city walls and walking routes clear of native rail and statio
     for (let cy = -4; cy <= 4; cy++)
       for (let cx = -4; cx <= 4; cx++) {
         const p = source.owner(cx, cy);
-        if (!p || p.recipe !== "current-dense-district-v1") continue;
+        if (p?.recipe !== "current-dense-district-v1") continue;
         expect(p.bounds.maxY).toBe(p.center.y + 44);
         const lines = rails.query(p.bounds);
         for (const line of lines) {
