@@ -32,14 +32,14 @@ owner IDs stable. Existing draft motion holds/approval records remain untouched.
 
 | Slice | Animal | Habitat and baseline behavior | State | Commit / evidence |
 | --- | --- | --- | --- | --- |
-| A | Fox | Woodland edge; solitary roam, investigate pauses, tail flick, bounded escape | Complete | A: 1,821 units, 411/413 full browser; four fox checks pass |
-| B | Cat | Rural clearing; short walks, rests/action, cautious player interest | Planned | — |
-| B | Dog | Rural clearing; walks, rests/action, loose player interest | Planned | — |
-| B | Cow | Broad pasture; small groups, slow walks, tail swish | Planned | — |
-| B | Sheep | Pasture; tighter groups, walks, ear action | Planned | — |
-| B | Horse | Broad pasture; longer walks, rests, tail action | Planned | — |
-| B | Pig | Pasture edge; short walks, ear/tail action | Planned | — |
-| B | Goat | Dry meadow; loose groups, walks, ear/tail action | Planned | — |
+| A | Fox | Woodland edge; solitary roam, investigate pauses, tail flick, bounded escape | Complete | `518a18a`: 1,821 units, 411/413 full browser; four fox checks pass |
+| B | Cat | Rural clearing; short walks, rests/action, cautious player interest | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Dog | Rural clearing; walks, rests/action, loose player interest | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Cow | Broad pasture; small groups, slow walks, tail swish | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Sheep | Pasture; tighter groups, walks, ear action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Horse | Broad pasture; longer walks, rests, tail action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Pig | Pasture edge; short walks, ear/tail action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Goat | Dry meadow; loose groups, walks, ear/tail action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
 | C | Elephant | Wide open refuge; slow grouped walks, trunk action | Planned | — |
 | C | Giraffe | Wide woodland-edge refuge; slow grouped walks, ear/tail action | Planned | — |
 | C | Kangaroo | Open meadow; physical timed hops, rests/listening action | Planned | — |
@@ -123,3 +123,39 @@ functional Canvas evidence, not a GPU frame-pacing claim.
 Production-table checkpoint/completion refresh still reports ENOENT for ignored
 campaign progress state; retain its validated art table. Gameplay progress is
 persisted here first. Continue autonomously with slice B.
+
+
+### Slice B checkpoint
+
+Cat, dog, cow, sheep, horse, pig and goat profiles reuse unchanged draft-v1 pixels
+and native walk/action ranges. Cat/dog native playback is 160ms; other pasture
+walkers use 100ms. Matching doubled walk cadence supplies short escapes. Cats
+and dogs have cautious player-interest steering within their home limits. Cow,
+sheep, pig and goat groups have three members; horses have two; pets are solitary.
+Sizes, body support heights, speeds, home radii, separation and cohesion differ
+by species. Existing legacy Cow keeps its separate palette entry; new **Pasture
+cow** names the durable provisional animal unambiguously.
+
+Native inspection arrivals (seed 2026): cat 32,37; dog -25,102; cow 31,-98;
+sheep -355,284; horse 105,290; pig -29,221; goat -30,297. Browser contexts run
+independently with the repository's bounded two-worker concurrency. All 1,915
+units, typechecks and lint pass (existing 118 warnings / 34 infos). All 32 profile
+browser checks pass in 2.3m. Final capture rerun passes 16 Canvas/GPU pose/contact
+checks in 1.4m; scrolling to the page top before capture prevents fixed navigation
+from obscuring part of a herd. Both renderer contact sheets inspected at native
+capture scale. Build passes; catalog 228 sheets / 1,073 uses, manifest 689 verified
+candidates. Complete browser suite: **439/441** in 16.2m. All 32 profile checks, both
+complete city-train journeys and phone roof ride pass; only the two known
+archived fox-preview review failures remain. All 27 exact wildlife candidates
+are unchanged. [Full browser log](/tmp/tilefun-pasture-browser-full.log).
+
+Streaming readiness exits 0, all six phases have zero final missing/incomplete/
+stale caches, errors and failures (functional Canvas evidence).
+[Unit log](/tmp/tilefun-pasture-unit.log),
+[focused browser log](/tmp/tilefun-pasture-browser-focused.log),
+[final capture checks](/tmp/tilefun-pasture-browser-captures.log),
+[Canvas captures](/tmp/tilefun-pasture-canvas-contact.png),
+[GPU captures](/tmp/tilefun-pasture-gpu-contact.png),
+[streaming report](/tmp/tilefun-pasture-streaming/report.json).
+No art pixels, receipts or approval events changed. Checkpoint production-table
+refresh still lacks ignored campaign state; preserve the validated art snapshot.

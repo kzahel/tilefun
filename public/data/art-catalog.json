@@ -286,6 +286,76 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-cat-provisional-v1",
+      "name": "wildlife cat provisional v1",
+      "image": "demos/wildlife-v2/cat/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-dog-provisional-v1",
+      "name": "wildlife dog provisional v1",
+      "image": "demos/wildlife-v2/dog/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-cow-provisional-v1",
+      "name": "wildlife cow provisional v1",
+      "image": "demos/wildlife-v2/cow/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-sheep-provisional-v1",
+      "name": "wildlife sheep provisional v1",
+      "image": "demos/wildlife-v2/sheep/draft-v1/sheet.png",
+      "width": 1200,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-horse-provisional-v1",
+      "name": "wildlife horse provisional v1",
+      "image": "demos/wildlife-v2/horse/draft-v1/sheet.png",
+      "width": 2000,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-piglet-provisional-v1",
+      "name": "wildlife piglet provisional v1",
+      "image": "demos/wildlife-v2/piglet/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-goat-provisional-v1",
+      "name": "wildlife goat provisional v1",
+      "image": "demos/wildlife-v2/goat/draft-v1/sheet.png",
+      "width": 1200,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-frog-v1",
       "name": "wildlife frog v1",
       "image": "demos/wildlife-v2/frog/draft-v1/sheet.png",
@@ -21256,6 +21326,132 @@
       ]
     },
     {
+      "id": "sprite:wildlife-cat-provisional-v1",
+      "sheetId": "wildlife-cat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1008,
+        192
+      ],
+      "label": "wildlife-cat-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-dog-provisional-v1",
+      "sheetId": "wildlife-dog-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1600,
+        256
+      ],
+      "label": "wildlife-dog-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-cow-provisional-v1",
+      "sheetId": "wildlife-cow-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1600,
+        256
+      ],
+      "label": "wildlife-cow-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-sheep-provisional-v1",
+      "sheetId": "wildlife-sheep-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1200,
+        192
+      ],
+      "label": "wildlife-sheep-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-horse-provisional-v1",
+      "sheetId": "wildlife-horse-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2000,
+        320
+      ],
+      "label": "wildlife-horse-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-piglet-provisional-v1",
+      "sheetId": "wildlife-piglet-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1008,
+        192
+      ],
+      "label": "wildlife-piglet-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-goat-provisional-v1",
+      "sheetId": "wildlife-goat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1200,
+        192
+      ],
+      "label": "wildlife-goat-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-frog-v1",
       "sheetId": "wildlife-frog-v1",
       "rect": [
@@ -22750,6 +22946,10 @@
         {
           "system": "Gameplay",
           "source": "src/wildlife/Fauna.ts:9"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/Fauna.ts:170"
         }
       ]
     },

@@ -316,3 +316,14 @@ Live candidate fingerprints now include the shared generator selection; 54 live
 candidate records update (36 nature, 12 geometry, 6 character), with human review
 history untouched. Next: ordinary-world scenery/density feedback, then palette
 and ground-plant variety or the bounded mesa proof.
+
+## Durable pets and pasture groups
+
+[082](../tactical/082-complete-provisional-wildlife.md) slices A/B use fixed
+17-species owner selection, so activating another existing draft never remaps
+previous homes. Native cat/dog and cow/sheep/horse/pig/goat populations reserve
+full-body dry clearances, with larger radii for broad pasture groups. The current
+regional generator, production Worker and inspection arrivals share this planner;
+no saved-chunk backfill or timed population replacement is introduced. B passes
+1,915 units, 32 profile browser checks and streaming readiness; full browser
+439/441 has only the two known archived-art failures.

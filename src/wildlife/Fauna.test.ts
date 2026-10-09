@@ -44,6 +44,31 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
     const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
     const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 
+    if (p.interest > 0)
+      it("shows cautious player interest without entering the alarm radius", () => {
+        let improvement = 0;
+        const player = { wx: 244, wy: 64 };
+        for (let seed = 1; seed <= 24; seed++) {
+          const alone = createAnimal(64, 64),
+            curious = createAnimal(64, 64);
+          for (const a of [alone, curious]) {
+            required(a.fauna).randomState = seed;
+            required(a.fauna).timer = 0;
+          }
+          updateFaunaAI(alone, 0.1, open, [alone], []);
+          updateFaunaAI(curious, 0.1, open, [curious], [player]);
+          const d = (a: typeof alone) =>
+            Math.hypot(
+              required(a.fauna).target.wx - player.wx,
+              required(a.fauna).target.wy - player.wy,
+            );
+          expect(d(curious)).toBeLessThanOrEqual(d(alone) + 1e-8);
+          expect(d(curious)).toBeGreaterThan(p.alarmDistance);
+          improvement += d(alone) - d(curious);
+        }
+        expect(improvement).toBeGreaterThan(20);
+      });
+
     it("uses unchanged native draft cells and real walk/alert ranges", () => {
       const metadata = JSON.parse(
         readFileSync(`public/${IMAGE.replace("sheet.png", "sprite.json")}`, "utf8"),

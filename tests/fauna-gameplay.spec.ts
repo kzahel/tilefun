@@ -4,6 +4,7 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FAUNA_PROFILES, faunaType } from "../src/wildlife/Fauna.js";
 
 test.use({ channel: "chromium" });
+test.describe.configure({ mode: "parallel" });
 for (const profile of FAUNA_PROFILES) {
   const TYPE = faunaType(profile.species);
   const [arrivalX, arrivalY] = profile.inspection;
@@ -44,6 +45,7 @@ for (const profile of FAUNA_PROFILES) {
       const before = await poses();
       await page.waitForTimeout(250);
       expect(await poses()).toEqual(before);
+      await page.evaluate(() => window.scrollTo(0, 0));
       await page.screenshot({
         path: `/tmp/tilefun-fauna-${profile.species}-${renderer}.png`,
         fullPage: true,
