@@ -4,6 +4,18 @@ Topic: wildlife
 Status: durable ducks, frogs, meadow rabbits, woodland robins and deer delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
+## Autonomous completion of existing gameplay roster
+
+On 2026-10-09 the owner authorized integrating all 17 remaining existing drafts,
+autonomously, with a written tracker and incremental commits. [082](../tactical/082-complete-provisional-wildlife.md)
+owns slices A–E and per-species completion/evidence. This continues provisional
+gameplay with unchanged art: fox; cat/dog and five pasture animals; elephant,
+giraffe, kangaroo, cobra and ants; fish, penguin, seal and ray; final habitat and
+regression pass. Five existing implementations stay intact. Durable seeded
+individuals, suitable accessible homes, varied native cycles, shared game/lab
+behavior, manual creation, harmless reactions and no automatic bounce remain the
+contract. Art production/approval holds are separate and unchanged.
+
 ## Provisional woodland deer
 
 The owner accepted the robin grove and authorized deer on 2026-10-09.
