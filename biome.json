@@ -43,6 +43,10 @@
   },
   "overrides": [
     {
+      "includes": ["public/data/workshop-manifest.json"],
+      "files": { "maxSize": 2097152 }
+    },
+    {
       "includes": [
         "art-source/wildlife-v2/**/*.json",
         "public/demos/wildlife-v2/**/*.json",

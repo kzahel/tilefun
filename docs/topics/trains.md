@@ -327,11 +327,20 @@ tickets remain deferred.
 
 ## Current regression evidence
 
-The fox baseline slice in [082](../tactical/082-complete-provisional-wildlife.md)
-passes both complete city-train journeys and the phone roof ride in the full
-411/413 browser run. Only known archived wildlife-art failures remain. No train
-physics or assertion changed; earlier intermittent support evidence remains open.
-[Full fox browser log](/tmp/tilefun-fox-browser-full.log).
+The completed 2026-10-09 wildlife roster in [082](../tactical/082-complete-provisional-wildlife.md)
+passes both complete city journeys and phone roof riding in the A/B/C full runs
+(411/413, 439/441, 459/461) and first D run (476/479). The final whole-roster full
+run is 476/479: GPU journey and phone ride pass, but Canvas loses roof support on
+the onward post-reopen leg (`city-train-riding:107`, expected 44px, received 0).
+Its unchanged isolated complete journey passes in 1.5m, including mid-bend reopen
+and alighting. The other two failures are known archived wildlife-art reviews;
+all wildlife gameplay passes. No train physics or assertions changed. Retain this
+intermittent support evidence without claiming a fix; investigate saved roofRide,
+carriage residency and the first post-reopen authority steps if it recurs.
+[Final full run](/tmp/tilefun-roster-browser-final.log),
+[isolated journey](/tmp/tilefun-roster-train-rerun.log),
+[failure context](/tmp/tilefun-roster-train-failure/error-context.md),
+[failure capture](/tmp/tilefun-roster-train-failure/test-failed-1.png).
 
 
 The 2026-10-09 [deer slice](../tactical/081-durable-woodland-deer.md) full run

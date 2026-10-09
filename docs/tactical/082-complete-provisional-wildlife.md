@@ -1,7 +1,7 @@
 # Complete the existing provisional wildlife roster
 
 Owner: [wildlife](../topics/wildlife.md). Started 2026-10-09.
-Status: active. Owner authorizes autonomous integration of all 17 remaining
+Status: complete (2026-10-09). Owner authorized autonomous integration of all 17 remaining
 existing sprite-sheet species, the same gameplay/validation procedure and commits
 as delivery progresses. This is gameplay authorization, not new art production.
 
@@ -45,11 +45,11 @@ owner IDs stable. Existing draft motion holds/approval records remain untouched.
 | C | Kangaroo | Open meadow; physical timed hops, rests/listening action | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
 | C | King cobra | Dry woodland refuge; solitary slither, tongue action, harmless retreat | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
 | C | Ant | Dry woodland floor; small colonies, crawls, antenna action | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
-| D | Pond fish | Pond interior; swim, rest/action, dart away | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
-| D | Penguin | Broad water refuge and accessible shore; waddle, swim, flipper action | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
-| D | Harbor seal | Broad water refuge and sandy shore; haul, swim, action | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
-| D | Manta ray | Broad deep-water refuge; swim loops, action, water-confined retreat | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
-| E | Whole world | Habitat distribution, budgets, all-species game/lab parity and regressions | Verification | Four-seed habitats, all-22 residency pass; full browser in progress |
+| D | Pond fish | Pond interior; swim, rest/action, dart away | Complete | `c4af030`: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| D | Penguin | Broad water refuge and accessible shore; waddle, swim, flipper action | Complete | `c4af030`: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| D | Harbor seal | Broad water refuge and sandy shore; haul, swim, action | Complete | `c4af030`: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| D | Manta ray | Broad deep-water refuge; swim loops, action, water-confined retreat | Complete | `c4af030`: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| E | Whole world | Habitat distribution, budgets, all-species game/lab parity and regressions | Complete | Four-seed habitats, all-22 residency, 2,031 units; 476/479 full browser, isolated train journey passes |
 
 A introduces reusable profile-driven authority motion/state with one fully proven
 species. B/C extend it only where behavior fits, with timed hops as a separate
@@ -278,3 +278,42 @@ failure and result; E reruns the full suite against the strengthened probe.
 [failure capture](/tmp/tilefun-water-duck-failure/test-failed-1.png),
 [unchanged reproduction](/tmp/tilefun-water-duck-repro.log),
 [corrected recovery checks](/tmp/tilefun-water-duck-fixed.log).
+
+
+### Slice E completion
+
+All **17 remaining existing-sheet species** are delivered in slices A–D, giving
+**22 durable provisional species** in the production game/Worker, entity editor
+and shared inspection scenes. Zero animals remain in this authorized roster.
+Stable seeded identities, suitable habitats, saved individual activity/motion,
+native cycles, harmless approach/contact/ball reactions and ordinary player
+support apply. Manual creation persists; deletion stays deleted. No timed
+replacement, offscreen catch-up, saved-chunk backfill or new art was introduced.
+
+Final complete browser run: **476/479** in 18.4m. All 70 added-profile/scene-switch
+checks and original five-species gameplay regressions pass, including strengthened
+Canvas/GPU duck recovery. GPU complete train journey and phone roof ride pass.
+The two known archived fox-preview review failures remain. Canvas train riding
+loses roof support on the onward post-reopen leg (`city-train-riding:107`, expected
+44px, received 0); its unchanged isolated complete journey passes in 1.5m.
+Preserve this intermittent evidence without claiming a train fix. Earlier D full
+run passed both journeys; the train topic tracks the continuing constraint.
+[Final full browser log](/tmp/tilefun-roster-browser-final.log),
+[isolated train journey](/tmp/tilefun-roster-train-rerun.log),
+[train failure context](/tmp/tilefun-roster-train-failure/error-context.md),
+[train failure capture](/tmp/tilefun-roster-train-failure/test-failed-1.png).
+
+Final validation includes **2,031 units in 218 files**, client/server/Worker
+typechecks, lint, generated inventories, build and six-phase streaming readiness.
+Four production seeds admit all added dry species and water refuges; planner
+caches remain bounded. The expanded generated Workshop manifest crossed Biome's
+1 MiB default; a file-specific 2 MiB ceiling keeps it checked, without changing
+formatter ownership or game behavior. All 27 exact wildlife review objects match
+the pre-integration baseline; frozen asset pixels, receipts and approval events
+are unchanged. Production-table refresh still reports ENOENT for absent ignored
+campaign state, so retain the last validated art table. Gameplay progress is
+persisted here and in the wildlife topic before refresh and final handoff.
+
+Next logical work: owner playtesting of population density, habitat placement and
+activity variety across ordinary exploration. Existing draft art quality holds
+remain separate; further species/art expansion needs new scope.

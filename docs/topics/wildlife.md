@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species have durable provisional gameplay; final whole-roster validation is in progress. Art repairs remain separate and new-animal production stays canceled.
+Status: all 22 existing-sheet species have durable provisional gameplay; autonomous roster integration and validation are complete. Art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
 ## Autonomous completion of existing gameplay roster
@@ -16,33 +16,46 @@ individuals, suitable accessible homes, varied native cycles, shared game/lab
 behavior, manual creation, harmless reactions and no automatic bounce remain the
 contract. Art production/approval holds are separate and unchanged.
 
-Slice A fox gameplay is complete: unchanged pilot-v2 native idle/walk/tail action,
-solitary 112px homes, investigation pauses and short grounded escape. Shared
-profile/state owners supply durable motion and normal contact/balls. [Inspect foxes](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-fox&landscape=thicket#/tool/world-geometry)
-at seed 2026, -598,-538. All 1,821 units, typechecks/lint/build, four fox browser
-checks and streaming readiness pass. Full browser: 411/413, only known archived-art
-failures; both city-train journeys pass. Tracker 082 owns details and the remaining
-four species. Slice B completes seven domestic/pasture profiles: all 1,915 units,
-typechecks/lint/build, 32 profile browser checks and streaming readiness pass.
-Full browser: 439/441; only the same two archived-art failures remain. Both train
-journeys and phone roof ride pass. Native habitat arrivals and capture evidence
-are in 082. Slice C completes elephant, giraffe, kangaroo, cobra and ants: all 1,983 units,
-typechecks/lint/build, 20 new-profile browser checks and streaming readiness pass.
-Full browser 459/461 has only the two known archived-art failures; both train
-journeys pass. Kangaroo physical push/flight/landing and its saved phase are shared
-with the game, alongside collision-resolved grounded motion for the other four.
-D completes fish, penguin, seal and ray: all 2,031 units, typechecks/lint/build,
-68 profile browser checks, four framing checks and streaming readiness pass.
-All 22 species have seeded habitats, editor creation and durable residency.
-Fish/rays use footprint water/depth constraints; penguins/seals change gait at
-actual shores. Native stationary actions also retain exact saved phase.
+All 17 remaining species are integrated and committed: fox; cat, dog, cow, sheep,
+horse, pig and goat; elephant, giraffe, kangaroo, king cobra and ant; pond fish,
+penguin, harbor seal and manta ray. Together with duck, frog, rabbit, robin and
+deer this completes the **22-species existing-sheet roster**. Zero animals remain
+in this authorized scope. Shared profiles preserve species-specific bodies,
+speeds, spacing, grouping, native walk/hop/swim/action clips and saved phases.
+Kangaroo has physical timed push/flight/landing; penguins/seals change gait at
+resolved shores; fish/rays follow full-body water/depth constraints. Existing
+five gameplay implementations remain intact.
+
+Regional homes reserve appropriate dry clearings, ponds and rare broad water
+refuges with accessible sandy shores, outside infrastructure and protected dry
+homes. Four production seeds admit every added dry species plus water refuges;
+planner caches remain bounded. Species need exploration: this does not promise
+every animal beside every starting area. Saved chunks are not backfilled.
+**Edit → Entities** exposes all species for durable manual creation. Individuals
+seed once, retain activity/RNG/motion across return/reload and remain deleted when
+removed; no automatic respawn or offscreen catch-up. Approach, landing and balls
+cause bounded harmless escape/recovery. Player standing never receives a bounce.
+
 [Inspect the water refuge](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-manta-ray&landscape=thicket#/tool/world-geometry)
-at seed 2026, -656,-2997. First full browser: 476/479; the GPU duck recovery probe
-loses a replica at close zoom. Its corrected whole-pond, present-and-grounded
-probe passes six repeated checks; two known archived-art failures remain.
-082 E tracks the final full rerun. No duck physics or art is altered.
-Production-table helper still lacks ignored campaign state; preserve
-the validated table.
+at seed 2026, -656,-2997;
+[inspect kangaroos](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-kangaroo&landscape=thicket#/tool/world-geometry)
+at -21,-22. These are shared in-memory production Worker scenes with native
+framing, Pause, Save / reload and contact controls. 082 lists all species arrivals,
+captures, incremental commits and detailed validation.
+
+Final evidence: **2,031 units**, typechecks, lint, inventories/build and six-phase
+streaming readiness pass. All 70 added-profile/scene-switch browser checks pass.
+Complete browser suite: **476/479** (18.4m), with all wildlife regressions passing.
+Failures are the two known archived fox-preview reviews and intermittent Canvas
+train roof-support loss after reopening; the unchanged isolated complete train
+journey passes in 1.5m. GPU journey and phone ride pass. The train topic retains
+this unresolved intermittent evidence. The earlier close-camera duck recovery
+probe was strengthened to require the same present, grounded, recovered duck;
+both renderers pass. No duck physics changed. All 27 exact wildlife review
+objects, frozen pixels, receipts and approval events remain unchanged.
+Production-table checkpoint/completion helper still lacks ignored campaign state;
+preserve its validated art table. Next gameplay work is density/habitat/activity
+playtesting, separate from existing art motion holds.
 
 ## Provisional woodland deer
 
