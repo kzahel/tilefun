@@ -83,6 +83,12 @@ A bounded presentation-only decay handles
 small residual ground-contact corrections without changing replay physics.
 [Player prediction](topics/player-prediction.md) owns limits and acceptance evidence.
 
+Physically timed wildlife clips can replicate an optional elapsed-millisecond phase
+(u16, sprite flag bit 7). Frog hop push/air/landing frames follow the same saved
+physics timeline in authority and both replica consumers, including mid-hop
+baselines and delta removal. Ordinary animation clocks remain local. Endpoints
+must run the same build; [078](tactical/078-durable-pond-frogs.md) records coverage.
+
 ## Persistence and shared tools
 
 Realm transfers prepare the destination and save the source before detaching a

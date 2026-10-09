@@ -53,6 +53,7 @@ it("seeds small pond flocks independently of chunk query order, with open banks"
   const placements = (nature: NaturalLandscape, reversed = false) =>
     (reversed ? [...coords].reverse() : coords)
       .flatMap((c) => nature.wildlife(c.cx, c.cy))
+      .filter((p) => p.type === MALLARD_TYPE)
       .sort((a, b) => a.featureId.localeCompare(b.featureId));
   const ducks = placements(n);
   expect(ducks.length).toBeGreaterThanOrEqual(2);

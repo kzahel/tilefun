@@ -14,12 +14,14 @@ records the first review delivery and validation.
 
 The owner authorized provisional existing-art wildlife gameplay on 2026-10-09.
 Admitted local ponds now reserve an open bank ring against scattered trees and
-solid thicket rows, supporting walking access and duck land/water transitions.
-The current NaturalStrategy supplies small seed-deterministic mallard flocks;
+solid thicket rows, supporting walking access and duck/frog land/water transitions.
+The current NaturalStrategy supplies small seed-deterministic duck and frog populations;
 normal actor persistence owns their later movement and deletion. This is a
 bounded extension to existing ponds, not a new climate/biome or generation version.
 [Wildlife](wildlife.md#provisional-gameplay-durable-pond-ducks) and
-[tactical 076](../tactical/076-durable-pond-wildlife.md) own behavior and evidence.
+[076](../tactical/076-durable-pond-wildlife.md) / [078](../tactical/078-durable-pond-frogs.md) own behavior and evidence.
+Frogs use an independent grassy bank arc and rotate crowded initial slots around
+the open ring. The lab's **Pond · frogs & shallows** arrival frames their bank.
 
 ## User direction
 

@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: provisional durable mallards with body contact, landing bounce and startle flight delivered; art repairs remain separate and new-animal production stays canceled.
+Status: durable pond ducks and frogs delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
 ## Provisional gameplay: durable pond ducks
@@ -20,9 +20,9 @@ persistence. The existing World geometry pond scene runs the same production
 Worker behavior. Gameplay availability is provisional, distinct from the art
 production receipts/table and Workshop approval states.
 
-The current slice passes typecheck, lint, build, 1,760 unit tests, all six wildlife
+The duck-only delivery in 077 passed typecheck, lint, build, 1,760 unit tests, all six wildlife
 Canvas/GPU/game browser checks and isolated streaming readiness. The full browser
-run passes 389/393: two missing archived art-preview failures remain; a Canvas
+run passed 389/393: two missing archived art-preview failures remain; a Canvas
 train boarding check passes in isolation, and an initially single-shot duck test
 now accounts for intentional throw spread and passes with a short aimed volley.
 See 076 for initial integration history and 077 for current interaction evidence.
@@ -78,6 +78,22 @@ Use gpt-6.1-sol with high reasoning effort, explicitly pinned for every session.
 The original owner authorization for whole-roster production is superseded by
 repair-only scope below. This authorizes corrections, not human art approval,
 publication or gameplay promotion. See [060](../tactical/060-wildlife-fresh-production.md).
+
+## Provisional gameplay: pond frogs
+
+The owner selected frogs next and requested implementation on 2026-10-09.
+[Tactical 078](../tactical/078-durable-pond-frogs.md) records the slice and validation:
+unchanged existing draft, seed-determined small bank populations, physical hops,
+swimming, rest/blink cycles, spatial croaks and player/ball escape reactions.
+They share the duck persistence policy (including no timed respawns), open-bank
+habitat and editor creation. Their smaller body uses shared predicted landing
+bounce. The in-memory pond lab adds **Pond · frogs & shallows** and **Hop onto frog**.
+The slice passes 1,771 units, typecheck, lint, build, all ten frog/duck browser checks
+and isolated streaming readiness. The full browser suite passes 395/397, with the
+two previously recorded missing archived fox-preview failures. Gameplay evidence
+is in 078; all 27 exact wildlife review candidates remain unchanged. No art approval
+or new art production is implied. Next: owner playtest of mixed ponds, then rabbits
+for meadows and woodland edges.
 
 ## Current scope: existing frozen-torso repairs only
 

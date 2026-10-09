@@ -16,6 +16,7 @@ export const NATURAL_CASES = [
   { id: "forest", name: "Woodland · individual trees", seed: 2026, x: -416, y: -512 },
   { id: "edge", name: "Forest edge & clearing", seed: 7, x: -384, y: -512 },
   { id: "pond", name: "Pond & dry bank", seed: 2026, x: 227, y: -183 },
+  { id: "frogs", name: "Pond · frogs & shallows", seed: 2026, x: 236, y: -181 },
   { id: "train", name: "Between towns · train ride", seed: 2026, x: 2543, y: -2713 },
   { id: "thicket-1", name: "Forest pattern 1 · tall thicket", seed: 2026, x: -73, y: -425 },
   { id: "thicket-2", name: "Forest pattern 2 · stump thicket", seed: 2026, x: -193, y: -548 },

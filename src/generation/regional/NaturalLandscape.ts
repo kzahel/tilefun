@@ -2,6 +2,7 @@ import { TerrainId } from "../../autotile/TerrainId.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
+import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import type { ActorPlacement } from "../Generator.js";
 import { fbm, valueNoise } from "../noise.js";
@@ -209,6 +210,51 @@ export class NaturalLandscape {
         wy,
         route: [],
         mallard: ai,
+      });
+    }
+    // Frogs occupy a separate grassy outer-bank arc, leaving the duck bank and
+    // shallow-water entry open. Existing pondBank reservations keep trees away.
+    const frogCount = 2 + Math.floor(h(7501) * 3);
+    const occupied = Array.from({ length: count }, (_, j) => {
+      const angle = h(7411) * Math.PI * 2 + j * 0.5;
+      return {
+        wx: (pond.x + Math.cos(angle) * pond.rx * 1.32) * 16,
+        wy: (pond.y + Math.sin(angle) * pond.ry * 1.32) * 16,
+      };
+    });
+    for (let i = 0; i < frogCount; i++) {
+      let point: { wx: number; wy: number } | undefined;
+      // Rotate a crowded candidate around the open ring. Calculate every slot
+      // before its chunk filter so neighboring queries choose identical positions.
+      for (let attempt = 0; attempt < 12; attempt++) {
+        const angle = h(7511) * Math.PI * 2 + i * 0.65 + (attempt * Math.PI) / 6;
+        const candidate = {
+          wx: (pond.x + Math.cos(angle) * pond.rx * 1.4) * 16,
+          wy: (pond.y + Math.sin(angle) * pond.ry * 1.4) * 16,
+        };
+        if (occupied.some((p) => Math.hypot(candidate.wx - p.wx, candidate.wy - p.wy) < 14))
+          continue;
+        point = candidate;
+        break;
+      }
+      if (!point) continue;
+      occupied.push(point);
+      const { wx, wy } = point;
+      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      const frog = createFrog(wx, wy),
+        ai = frog.frog;
+      if (!ai) throw new Error("Missing frog behavior");
+      ai.home = { wx: pond.x * 16, wy: pond.y * 16 };
+      ai.radius = Math.max(pond.rx, pond.ry) * 1.5 * 16;
+      ai.randomState = Math.floor(h(7521 + i) * 4294967296) >>> 0;
+      ai.timer = 1.4 + i * 0.8;
+      actors.push({
+        featureId: `wildlife:frog:${this.world.seed}:${pond.id}:${i}`,
+        type: FROG_TYPE,
+        wx,
+        wy,
+        route: [],
+        frog: ai,
       });
     }
     return actors;

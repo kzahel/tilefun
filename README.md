@@ -77,13 +77,16 @@ preview; public-asset links let Vite apply the deployment prefix exactly once.
 
 ## Wildlife
 
-Regional ponds have small seeded mallard flocks using provisional existing art.
-Ducks waddle, swim, rest, quack and exercise their wings around open banks.
+Regional ponds have small seeded duck and frog populations using existing provisional
+art. Ducks waddle, swim, rest, quack and exercise their wings; frogs hop with real
+push-off/landing phases, swim, rest, blink and croak around grassy banks.
 Their bodies have collision. Landing on one bounces you up; landing contact or a
-ball hit makes it quack, fly a short distance and settle nearby.
-They persist as individuals when you leave and return; deleted ducks stay gone,
-with no timed respawns. **Edit → Entities → Mallard duck** adds more saved ducks.
-Try the [pond playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pond&landscape=thicket#/tool/world-geometry).
+ball hit makes a duck escape in a short flight, or a frog hop/swim away and settle.
+They persist as individuals when you leave and return; deleted animals stay gone,
+with no timed respawns. **Edit → Entities → Mallard duck / Common frog** adds saved
+individuals, including in older worlds whose pond chunks were already seeded.
+Try the [frog pond playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-frogs&landscape=thicket#/tool/world-geometry)
+and its **Hop onto frog** / **Hop onto duck** controls.
 
 ## Characters
 

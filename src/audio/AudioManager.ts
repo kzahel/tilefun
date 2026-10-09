@@ -75,6 +75,36 @@ export class AudioManager {
     return this.buffers.get(key);
   }
 
+  /** Short provisional two-pulse croak, using the existing spatial audio path. */
+  playFrogCroak(volume = 0.15, pan = 0): void {
+    if (this.ctx?.state !== "running") return;
+    const now = this.ctx.currentTime;
+    const voice = this.ctx.createOscillator();
+    voice.type = "triangle";
+    voice.frequency.setValueAtTime(160, now);
+    voice.frequency.linearRampToValueAtTime(95, now + 0.12);
+    voice.frequency.setValueAtTime(145, now + 0.17);
+    voice.frequency.linearRampToValueAtTime(90, now + 0.3);
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0, now);
+    for (const offset of [0, 0.17]) {
+      gain.gain.linearRampToValueAtTime(volume, now + offset + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.13);
+    }
+    const panner = this.ctx.createStereoPanner();
+    panner.pan.value = pan;
+    voice.connect(gain);
+    gain.connect(panner);
+    panner.connect(this.master ?? this.ctx.destination);
+    voice.onended = () => {
+      voice.disconnect();
+      gain.disconnect();
+      panner.disconnect();
+    };
+    voice.start(now);
+    voice.stop(now + 0.32);
+  }
+
   /** Provisional nasal quack, synthesized without adding or promoting art assets. */
   playDuckQuack(volume = 0.2, pan = 0): void {
     if (this.ctx?.state !== "running") return;

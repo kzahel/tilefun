@@ -202,7 +202,10 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
     page.evaluate((type) => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       return g.stateView.entities
-        .filter((e) => e.type === type)
+        .filter(
+          (e) =>
+            e.type === type && Math.hypot(e.position.wx - 227 * 16, e.position.wy + 183 * 16) < 500,
+        )
         .map((e) => ({ id: e.id, x: e.position.wx, y: e.position.wy }));
     }, MALLARD_TYPE);
   await expect.poll(async () => (await ducks()).length).toBeGreaterThanOrEqual(2);

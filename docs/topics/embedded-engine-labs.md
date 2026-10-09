@@ -195,6 +195,14 @@ adapters; they do not claim full gameplay parity. Shared hosting establishes own
 and behavior, not a frame-rate result: performance comparisons still need matched
 scenes and device measurements.
 
+Frogs (2026-10-09) use the same Realm habitat decisions, EntityManager physics and
+predicted wildlife landing contact. A physically timed hop has an optional binary
+sprite phase shared by game/lab replicas and restored from actor records. The
+**Pond · frogs & shallows** scene supplies a dry arrival near frogs, and **Hop onto
+frog** uses the existing teleport/fall command. Frog diagnostics expose matching
+pose/height on Canvas/GPU; croaks belong to the ordinary game's audio path.
+See [078](../tactical/078-durable-pond-frogs.md).
+
 ## Change and validation discipline
 
 Duck interactions (2026-10-09) keep body collision and player landing bounce in

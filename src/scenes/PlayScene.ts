@@ -11,6 +11,7 @@ import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
@@ -87,6 +88,7 @@ export class PlayScene implements GameScene {
   /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
   private ballDying: Set<number> | undefined;
   /** Previous wander AI state per entity ID (for detecting scared transitions). */
+  private prevFrogClips = new Map<number, number | undefined>();
   private prevWanderStates = new Map<number, string>();
   /** Reconciliation telemetry counters (for cl_log_reconcile summaries). */
   private reconcileSamples = 0;
@@ -715,7 +717,14 @@ export class PlayScene implements GameScene {
       const prevState = this.prevWanderStates.get(e.id);
       this.prevWanderStates.set(e.id, currentState);
 
-      if (currentState !== "scared" || prevState === "scared") continue;
+      const previousClip = this.prevFrogClips.get(e.id);
+      if (e.type === FROG_TYPE) this.prevFrogClips.set(e.id, e.sprite?.clip);
+      const frogCall =
+        e.type === FROG_TYPE &&
+        previousClip !== undefined &&
+        previousClip !== 3 &&
+        e.sprite?.clip === 3;
+      if (!frogCall && (currentState !== "scared" || prevState === "scared")) continue;
 
       // Newly scared — play spatial impact sound
       const dx = e.position.wx - player.position.wx;
@@ -731,6 +740,10 @@ export class PlayScene implements GameScene {
       const pan = Math.max(-0.5, Math.min(0.5, normalizedX * 0.5));
 
       // Pitch based on entity weight: lighter = higher pitch
+      if (e.type === FROG_TYPE) {
+        gc.audioManager.playFrogCroak(0.18 * distFactor, pan);
+        continue;
+      }
       if (e.type === MALLARD_TYPE) {
         gc.audioManager.playDuckQuack(0.25 * distFactor, pan);
         continue;
@@ -757,6 +770,9 @@ export class PlayScene implements GameScene {
     }
 
     // Prune stale entries for entities that no longer exist
+    for (const id of this.prevFrogClips.keys()) {
+      if (!liveIds.has(id)) this.prevFrogClips.delete(id);
+    }
     for (const id of this.prevWanderStates.keys()) {
       if (!liveIds.has(id)) this.prevWanderStates.delete(id);
     }

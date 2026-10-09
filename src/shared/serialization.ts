@@ -4,7 +4,11 @@ import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import type { Prop } from "../entities/Prop.js";
 import { getWallsForPropType } from "../entities/PropFactories.js";
-import { setSpriteClip, tickSpriteAnimation } from "../entities/spriteAnimation.js";
+import {
+  setSpriteClip,
+  setSpriteClipElapsed,
+  tickSpriteAnimation,
+} from "../entities/spriteAnimation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import type { Chunk } from "../world/Chunk.js";
@@ -24,6 +28,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
       frameRow: e.sprite.frameRow,
     };
     if (e.sprite.clip !== undefined) spriteState.clip = e.sprite.clip;
+    if (e.sprite.clipElapsedMs !== undefined) spriteState.clipElapsedMs = e.sprite.clipElapsedMs;
     if (e.type === "player" && e.playerModel) spriteState.model = e.playerModel;
     if (e.sprite.flipX !== undefined) spriteState.flipX = e.sprite.flipX;
     // Only include frameDuration when it differs from the def
@@ -145,6 +150,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
   if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;
   setSpriteClip(result, s.spriteState?.clip);
+  setSpriteClipElapsed(result, s.spriteState?.clipElapsedMs);
   tickSpriteAnimation(result, 0);
   applyPlayerModel(result, s.spriteState?.model);
   applyVehicleFacing(result);

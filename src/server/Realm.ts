@@ -88,6 +88,7 @@ import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -111,8 +112,8 @@ function mergePlayerStepOutcomes(
     groundZ: next.groundZ,
     enteredWater: previous.enteredWater || next.enteredWater,
     endedGrounded: next.endedGrounded,
-    ...((next.duckContactId ?? previous.duckContactId) !== undefined
-      ? { duckContactId: next.duckContactId ?? previous.duckContactId }
+    ...((next.wildlifeContactId ?? previous.wildlifeContactId) !== undefined
+      ? { wildlifeContactId: next.wildlifeContactId ?? previous.wildlifeContactId }
       : {}),
   };
 }
@@ -952,8 +953,8 @@ export class Realm {
               groundZ: gravity.groundZ,
               enteredWater: gravity.landed && this.isEntityOnWater(p),
               endedGrounded: p.jumpVZ === undefined,
-              ...(gravity.duckContactId !== undefined
-                ? { duckContactId: gravity.duckContactId }
+              ...(gravity.wildlifeContactId !== undefined
+                ? { wildlifeContactId: gravity.wildlifeContactId }
                 : {}),
             },
             getHeight,
@@ -1888,11 +1889,12 @@ export class Realm {
   ): void {
     if (!outcome.landed) return;
     const p = session.player;
-    if (outcome.duckContactId !== undefined) {
-      const duck = this.entityManager.byId.get(outcome.duckContactId);
-      if (duck) {
-        startleMallard(duck, p.position);
-        this.records?.changed(duck);
+    if (outcome.wildlifeContactId !== undefined) {
+      const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
+      if (animal) {
+        if (animal.frog) startleFrog(animal, p.position);
+        else startleMallard(animal, p.position);
+        this.records?.changed(animal);
       }
       return;
     }

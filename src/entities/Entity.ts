@@ -1,3 +1,4 @@
+import type { FrogBehavior } from "../wildlife/Frog.js";
 import type { MallardBehavior } from "../wildlife/Mallard.js";
 
 /** Movement/facing direction. Row index in character spritesheet. */
@@ -28,6 +29,8 @@ export interface SpriteComponent {
   sheetKey: string;
   /** Optional index into the static named animation clips. */
   clip?: number;
+  /** Optional authority phase for physically timed one-shot clips. */
+  clipElapsedMs?: number;
   /** Current animation frame column. */
   frameCol: number;
   /** Current direction row in spritesheet. */
@@ -110,6 +113,7 @@ export interface Entity {
   /** Launch-only ball exemption until its collider clears the thrower's body. Transient. */
   ballThrowerId?: number;
   mallard?: MallardBehavior;
+  frog?: FrogBehavior;
   routeAI?: {
     points: readonly RouteWaypoint[];
     index: number;

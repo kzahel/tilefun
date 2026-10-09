@@ -15,6 +15,7 @@ import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/coll
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
+import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { zRangesOverlap } from "./AABB3D.js";
@@ -203,6 +204,8 @@ export function tickBallPhysics(
             other.velocity.vy = 0;
           }
           entityManager.spawn(createGem(other.position.wx, other.position.wy));
+        } else if (other.frog) {
+          startleFrog(other, ball.position);
         } else if (other.mallard) {
           startleMallard(other, ball.position);
         } else if (ai && !ai.hostile) {

@@ -10,6 +10,7 @@ import {
   isElevationBlocked3D,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
+import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
@@ -27,7 +28,7 @@ import type { Entity } from "./Entity.js";
 import { ENTITY_DEFS } from "./EntityDefs.js";
 import type { PropManager } from "./PropManager.js";
 import { SpatialHash } from "./SpatialHash.js";
-import { tickSpriteAnimation } from "./spriteAnimation.js";
+import { setSpriteClipElapsed, tickSpriteAnimation } from "./spriteAnimation.js";
 import { onWanderBlocked } from "./wanderAI.js";
 
 /** Player speed multiplier while pushing an entity. */
@@ -260,6 +261,7 @@ export class EntityManager {
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
+      if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
       const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
       const isAmphibious = ENTITY_DEFS[entity.type]?.amphibious === true;
       const speedMult =
@@ -332,6 +334,20 @@ export class EntityManager {
             );
           continue;
         }
+        if (entity.frog?.state === "hop" && entity.frog.hop) {
+          if (entity.frog.hop.elapsed >= 1.12)
+            settleFrog(
+              entity,
+              computeGroundZ(entity),
+              (getCollision(
+                Math.floor(entity.position.wx / TILE_SIZE),
+                Math.floor(entity.position.wy / TILE_SIZE),
+              ) &
+                CollisionFlag.Water) !==
+                0,
+            );
+          continue;
+        }
         applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities
@@ -367,7 +383,9 @@ export class EntityManager {
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
-      tickSpriteAnimation(entity, entityTickDts?.get(entity) ?? dt);
+      if (entity.frog?.state === "hop" && entity.frog.hop)
+        setSpriteClipElapsed(entity, Math.round(entity.frog.hop.elapsed * 1000));
+      else tickSpriteAnimation(entity, entityTickDts?.get(entity) ?? dt);
     }
   }
 

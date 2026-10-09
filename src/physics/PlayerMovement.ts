@@ -21,6 +21,8 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { FROG_TYPE } from "../wildlife/Frog.js";
+import { FROG_BOUNCE_VZ } from "../wildlife/frogInteractions.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { MALLARD_BOUNCE_VZ } from "../wildlife/mallardInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -211,7 +213,7 @@ export interface JumpInputState {
 export interface JumpGravityOutcome {
   landed: boolean;
   groundZ: number;
-  duckContactId?: number;
+  wildlifeContactId?: number;
 }
 
 export interface PlayerStepOutcome {
@@ -219,7 +221,7 @@ export interface PlayerStepOutcome {
   groundZ: number;
   enteredWater: boolean;
   endedGrounded: boolean;
-  duckContactId?: number;
+  wildlifeContactId?: number;
 }
 
 export interface PlayerStepResult {
@@ -367,7 +369,7 @@ export function stepPlayerFromInput(
   let landed = false;
   let groundZ = entity.groundZ ?? entity.wz ?? 0;
   let enteredWater = false;
-  let duckContactId: number | undefined;
+  let wildlifeContactId: number | undefined;
 
   for (let i = 0; i < steps; i++) {
     // Keep commanded steering/gravity time, but admit externally inherited XY
@@ -404,8 +406,8 @@ export function stepPlayerFromInput(
     );
     groundZ = gravity.groundZ;
     landed = landed || gravity.landed;
-    duckContactId ??= gravity.duckContactId;
-    if (gravity.landed && gravity.duckContactId === undefined && isEntityOnWater(entity, ctx)) {
+    wildlifeContactId ??= gravity.wildlifeContactId;
+    if (gravity.landed && gravity.wildlifeContactId === undefined && isEntityOnWater(entity, ctx)) {
       enteredWater = true;
     }
     if (gravity.landed && entity.jumpVZ === undefined && next.lastJumpHeld && !next.jumpConsumed) {
@@ -437,7 +439,7 @@ export function stepPlayerFromInput(
       groundZ,
       enteredWater,
       endedGrounded: entity.jumpVZ === undefined,
-      ...(duckContactId !== undefined ? { duckContactId } : {}),
+      ...(wildlifeContactId !== undefined ? { wildlifeContactId } : {}),
     },
   };
 }
@@ -592,25 +594,25 @@ export function tickJumpGravity(
         }
         clearAirMomentum(entity);
       }
-      // A duck is a physical body, but landing gives a playful hop rather than
+      // Pond wildlife has a physical body; landing gives a playful hop rather than
       // a mount. This runs identically in authority, missing-input gravity and prediction.
       const footprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
-      const duck =
+      const animal =
         entity.type === "player" && footprint
           ? entities?.find(
               (e) =>
-                e.type === MALLARD_TYPE &&
+                (e.type === MALLARD_TYPE || e.type === FROG_TYPE) &&
                 e.collider?.solid !== false &&
                 e.collider &&
                 Math.abs((e.wz ?? 0) + (e.collider.physicalHeight ?? 0) - groundZ) < 0.001 &&
                 aabbsOverlap(footprint, getEntityAABB(e.position, e.collider)),
             )
           : undefined;
-      if (duck) {
+      if (animal) {
         entity.wz = groundZ + 0.01;
         entity.jumpZ = 0.01;
-        entity.jumpVZ = MALLARD_BOUNCE_VZ;
-        return { landed: true, groundZ, duckContactId: duck.id };
+        entity.jumpVZ = animal.type === FROG_TYPE ? FROG_BOUNCE_VZ : MALLARD_BOUNCE_VZ;
+        return { landed: true, groundZ, wildlifeContactId: animal.id };
       }
       return { landed: true, groundZ };
     }

@@ -1,5 +1,9 @@
 import { applyPlayerModel } from "../characters/PlayerModels.js";
-import { setSpriteClip, tickSpriteAnimation } from "../entities/spriteAnimation.js";
+import {
+  setSpriteClip,
+  setSpriteClipElapsed,
+  tickSpriteAnimation,
+} from "../entities/spriteAnimation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
@@ -107,6 +111,7 @@ function spriteStatesEqual(a: SpriteState | null, b: SpriteState | null): boolea
     a.flipX === b.flipX &&
     a.frameDuration === b.frameDuration &&
     a.clip === b.clip &&
+    a.clipElapsedMs === b.clipElapsedMs &&
     a.model === b.model
   );
 }
@@ -234,6 +239,7 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
 
   if (delta.spriteState) {
     setSpriteClip(entity, delta.spriteState.clip);
+    setSpriteClipElapsed(entity, delta.spriteState.clipElapsedMs);
     tickSpriteAnimation(entity, 0);
     applyPlayerModel(entity, delta.spriteState.model);
   }

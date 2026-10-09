@@ -109,8 +109,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 // ---- FrameMessage binary codec ----
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
-const MAX_BASELINE_SIZE = 15 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
-const MAX_DELTA_SIZE = 8 + 8 + 5 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
+const MAX_BASELINE_SIZE = 15 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
+const MAX_DELTA_SIZE = 8 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -785,6 +785,7 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
 // Optional bytes 2-3: frameDuration (u16, only if hasFrameDuration)
 // Flag bit 5: model index (u8), following frameDuration when present.
 // Flag bit 6: animation clip index (u8), following model when present.
+// Flag bit 7: physically timed clip elapsed milliseconds (u16).
 
 function writeSpriteState(view: DataView, off: number, ss: SpriteState): number {
   let flags = (ss.direction as number) & 0x03;
@@ -794,6 +795,7 @@ function writeSpriteState(view: DataView, off: number, ss: SpriteState): number 
   if (hasFrameDuration) flags |= 0x10;
   if (ss.model !== undefined) flags |= 0x20;
   if (ss.clip !== undefined) flags |= 0x40;
+  if (ss.clipElapsedMs !== undefined) flags |= 0x80;
 
   view.setUint8(off, flags);
   off += 1;
@@ -809,6 +811,10 @@ function writeSpriteState(view: DataView, off: number, ss: SpriteState): number 
     view.setUint8(off++, model);
   }
   if (ss.clip !== undefined) view.setUint8(off++, ss.clip);
+  if (ss.clipElapsedMs !== undefined) {
+    view.setUint16(off, ss.clipElapsedMs, true);
+    off += 2;
+  }
   return off;
 }
 
@@ -834,6 +840,10 @@ function readSpriteState(view: DataView, off: number): [SpriteState, number] {
     ss.model = model.id;
   }
   if (flags & 0x40) ss.clip = view.getUint8(off++);
+  if (flags & 0x80) {
+    ss.clipElapsedMs = view.getUint16(off, true);
+    off += 2;
+  }
   return [ss, off];
 }
 

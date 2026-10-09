@@ -58,6 +58,10 @@ export class ProceduralActors {
           entity.mallard = structuredClone(p.mallard);
           entity.persistentId = p.featureId;
         }
+        if (p.frog) {
+          entity.frog = structuredClone(p.frog);
+          entity.persistentId = p.featureId;
+        }
         if (p.route.length)
           entity.routeAI = {
             points: p.route,

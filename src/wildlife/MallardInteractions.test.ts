@@ -89,7 +89,7 @@ it("predicts body blocking and the same landing bounce from replicated duck bodi
     physics,
   );
   predictor.update(0.1, idle, world, [], [replica]);
-  expect(result.outcome.duckContactId).toBe(duck.id);
+  expect(result.outcome.wildlifeContactId).toBe(duck.id);
   expect(result.outcome.enteredWater).toBe(false);
   expect(player.jumpVZ).toBe(MALLARD_BOUNCE_VZ);
   expect(predictor.player?.wz).toBeCloseTo(required(player.wz), 5);
@@ -107,7 +107,7 @@ it("does not bounce on a near miss, an ascending pass or a body above the player
     if (kind === "miss") d.position.wx += 40;
     if (kind === "ascending") p.jumpVZ = 80;
     if (kind === "above") d.wz = 40;
-    expect(tickJumpGravity(p, 0.1, () => 0, physics, [], [d]).duckContactId).toBeUndefined();
+    expect(tickJumpGravity(p, 0.1, () => 0, physics, [], [d]).wildlifeContactId).toBeUndefined();
   }
 });
 

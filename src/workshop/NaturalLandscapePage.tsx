@@ -14,6 +14,7 @@ import {
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
@@ -140,6 +141,20 @@ export default function NaturalLandscapePage() {
             direction: e.sprite?.direction,
             z: e.wz ?? 0,
             state: e.wanderAI?.state,
+          })),
+        );
+        const frogs = h.session.view.entities.filter((e) => e.type === FROG_TYPE);
+        c.dataset.frogCount = String(frogs.length);
+        c.dataset.frogPoses = JSON.stringify(
+          frogs.map((e) => ({
+            id: e.id,
+            x: e.position.wx,
+            y: e.position.wy,
+            z: e.wz ?? 0,
+            clip: e.sprite?.clip,
+            frame: e.sprite?.frameCol,
+            state: e.wanderAI?.state,
+            direction: e.sprite?.direction,
           })),
         );
         const view = h.session.view;
@@ -399,29 +414,35 @@ export default function NaturalLandscapePage() {
             </button>
           </>
         )}
-        {caseId === "pond" && (
-          <button
-            type="button"
-            disabled={!ready || paused}
-            onClick={() => {
-              const h = host.current;
-              const duck = h?.session.view.entities.find(
-                (e) => e.type === MALLARD_TYPE && e.wanderAI?.state !== "scared",
-              );
-              if (!h || !duck) return;
-              void h
-                .command({
-                  kind: "teleport",
-                  position: { ...duck.position },
-                  z: (duck.wz ?? 0) + 26,
-                })
-                .catch((e) => setError(String(e)));
-              canvas.current?.focus();
-            }}
-          >
-            Hop onto duck
-          </button>
-        )}
+        {(caseId === "pond" || caseId === "frogs") &&
+          [
+            { type: MALLARD_TYPE, label: "duck" },
+            { type: FROG_TYPE, label: "frog" },
+          ].map((animal) => (
+            <button
+              key={animal.type}
+              type="button"
+              disabled={!ready || paused}
+              onClick={() => {
+                const h = host.current;
+                const target = h?.session.view.entities.find(
+                  (e) =>
+                    e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) === 0,
+                );
+                if (!h || !target) return;
+                void h
+                  .command({
+                    kind: "teleport",
+                    position: { ...target.position },
+                    z: (target.wz ?? 0) + 26,
+                  })
+                  .catch((e) => setError(String(e)));
+                canvas.current?.focus();
+              }}
+            >
+              Hop onto {animal.label}
+            </button>
+          ))}
       </div>
       <p role="status">{ready ? "Ready to explore" : "Preparing landscape…"}</p>
       {candidate && (

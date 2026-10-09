@@ -167,6 +167,9 @@ describe("EntitySnapshot binary codec", () => {
         frameRow: 3,
         flipX: true,
         frameDuration: 100,
+        model: "person1",
+        clip: 1,
+        clipElapsedMs: 65535,
       },
       wanderAIState: {
         state: "following",
@@ -536,6 +539,9 @@ describe("EntityDelta binary codec", () => {
         frameRow: 1,
         flipX: true,
         frameDuration: 200,
+        model: "person1",
+        clip: 1,
+        clipElapsedMs: 560,
       },
       wanderAIState: {
         state: "chasing",
@@ -562,6 +568,7 @@ describe("EntityDelta binary codec", () => {
     expect(result.spriteState?.moving).toBe(true);
     expect(result.spriteState?.flipX).toBe(true);
     expect(result.spriteState?.frameDuration).toBe(200);
+    expect(result.spriteState?.clipElapsedMs).toBe(560);
     expect(result.wanderAIState?.state).toBe("chasing");
     expect(result.wanderAIState?.dirX).toBe(1);
     expect(result.wanderAIState?.dirY).toBe(-1);

@@ -1,6 +1,7 @@
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { RoadType } from "../road/RoadType.js";
+import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 
 export type EditorTab =
@@ -68,6 +69,7 @@ export interface EntityPaletteEntry {
 export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),
   { type: MALLARD_TYPE, label: "Mallard duck", color: "#638f66" },
+  { type: FROG_TYPE, label: "Common frog", color: "#937b4c" },
   { type: "chicken", label: "Chicken", color: "#f0c040" },
   { type: "cow", label: "Cow", color: "#d4a880" },
   { type: "pigeon", label: "Pigeon", color: "#8888cc" },
