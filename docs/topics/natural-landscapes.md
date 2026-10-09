@@ -23,6 +23,20 @@ bounded extension to existing ponds, not a new climate/biome or generation versi
 Frogs use an independent grassy bank arc and rotate crowded initial slots around
 the open ring. The lab's **Pond · frogs & shallows** arrival frames their bank.
 
+## Durable woodland-edge rabbits
+
+[079](../tactical/079-durable-meadow-rabbits.md) adds seed-determined 2–3-member
+rabbit groups in small grassy glades. A bounded 64-tile owner tries up to four
+candidate centers, outside infrastructure, pond banks and forest collision bands.
+Dry-ground validation and sampled woodland density admit the glade; the densest
+nearby cover direction supplies an open shelter edge for escape preference.
+Scattered trees leave a seven-tile center clearance; solid forests remain intact.
+Rabbits stay within a 72px home radius and reject water and obstructed paths.
+This adjusts the one current regional composition without a version bump or
+historical-world backfill. Ordinary worlds, explorer exact realization and the
+**Meadow · rabbits & woodland edge** lab share the same planner. Existing saved
+populations/props retain their normal records; use fresh countryside for this slice.
+
 ## User direction
 
 Train travel between towns currently feels like plain grass. The request is for

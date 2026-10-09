@@ -203,6 +203,13 @@ frog** uses the existing teleport/fall command. Frog diagnostics expose matching
 pose/height on Canvas/GPU; croaks belong to the ordinary game's audio path.
 See [078](../tactical/078-durable-pond-frogs.md).
 
+Rabbits (2026-10-09) reuse the same saved/replicated hop-phase contract and shared
+predicted wildlife body contact. The **Meadow · rabbits & woodland edge** scene
+uses ordinary seeded glades, dry-ground authority AI and physical native hops;
+**Hop onto rabbit** issues the normal teleport/fall command. Rabbit pose datasets
+support Canvas/GPU checks, without a lab-specific simulation or animation clock.
+See [079](../tactical/079-durable-meadow-rabbits.md).
+
 ## Change and validation discipline
 
 Duck interactions (2026-10-09) keep body collision and player landing bounce in

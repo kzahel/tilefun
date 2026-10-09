@@ -4,6 +4,7 @@ import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
+import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
 import type { ActorPlacement } from "../Generator.js";
 import { fbm, valueNoise } from "../noise.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
@@ -44,6 +45,12 @@ export interface NaturalPond {
   rx: number;
   ry: number;
   bounds: Bounds;
+}
+export interface RabbitGlade {
+  id: string;
+  x: number;
+  y: number;
+  shelter: { wx: number; wy: number };
 }
 export type Habitat = "meadow" | "grove" | "forest";
 export interface ForestRow extends FeaturePlacement {
@@ -86,6 +93,7 @@ export class NaturalLandscape {
   readonly railways: RailwayPlanner;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private ponds = new Map<string, NaturalPond | null>();
+  private glades = new Map<string, RabbitGlade | null>();
   private forests = new Map<string, ForestRow[]>();
   constructor(
     readonly world: RegionalWorld,
@@ -184,12 +192,12 @@ export class NaturalLandscape {
   /** Seed once; persistence owns subsequent movement and deletion, never a respawn timer. */
   wildlife(cx: number, cy: number): ActorPlacement[] {
     const pond = this.pond(Math.floor(cx / 8), Math.floor(cy / 8));
-    if (!pond) return [];
+    const actors = this.rabbits(cx, cy);
+    if (!pond) return actors;
     const px = Math.floor(pond.x / 128),
       py = Math.floor(pond.y / 128);
     const h = (salt: number) => valueNoise(px, py, this.world.seed + salt);
     const count = 2 + Math.floor(h(7401) * 3);
-    const actors: ActorPlacement[] = [];
     for (let i = 0; i < count; i++) {
       // A fixed dry-bank arc leaves each member room and easy access to the pond.
       const angle = h(7411) * Math.PI * 2 + i * 0.5;
@@ -255,6 +263,91 @@ export class NaturalLandscape {
         wy,
         route: [],
         frog: ai,
+      });
+    }
+    return actors;
+  }
+  /** A 64-tile owner admits one small, dry glade beside natural woodland cover.
+   * Forest collision bands remain intact; scattered trees leave its interior open. */
+  rabbitGlade(cx: number, cy: number): RabbitGlade | null {
+    const key = `${cx},${cy}`;
+    if (this.glades.has(key)) return this.glades.get(key) ?? null;
+    const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
+    let glade: RabbitGlade | null = null;
+    if (h(7601) < 0.35) {
+      for (let attempt = 0; attempt < 4 && !glade; attempt++) {
+        const x = cx * 64 + 16 + h(7611 + attempt * 2) * 32;
+        const y = cy * 64 + 16 + h(7612 + attempt * 2) * 32;
+        if (this.reserved(x, y, 8) || this.pondBank(x, y, 8) || this.inThicket(x, y, 8)) continue;
+        let valid = true;
+        for (let dy = -6; dy <= 6 && valid; dy += 2)
+          for (let dx = -6; dx <= 6 && valid; dx += 2)
+            valid = this.terrain(x + dx, y + dy) === TerrainId.Grass;
+        if (!valid) continue;
+        // Pick an open edge facing denser woodland, never a solid thicket interior.
+        let cover = -Infinity,
+          angle = 0;
+        for (let i = 0; i < 8; i++) {
+          const a = (i * Math.PI) / 4;
+          const density = naturalHabitat(
+            this.world,
+            this.profile,
+            x + Math.cos(a) * 10,
+            y + Math.sin(a) * 10,
+          ).density;
+          if (density > cover) {
+            cover = density;
+            angle = a;
+          }
+        }
+        if (cover < 0.13) continue;
+        glade = {
+          id: `glade:${cx}:${cy}`,
+          x,
+          y,
+          shelter: { wx: (x + Math.cos(angle) * 4) * 16, wy: (y + Math.sin(angle) * 4) * 16 },
+        };
+      }
+    }
+    this.glades.set(key, glade);
+    if (this.glades.size > 128) this.glades.delete(this.glades.keys().next().value ?? "");
+    return glade;
+  }
+  private rabbitClearing(x: number, y: number): boolean {
+    // Entire glade stays inside its owner. Check adjacent owners for a tree's clearance.
+    for (let cy = Math.floor((y - 7) / 64); cy <= Math.floor((y + 7) / 64); cy++)
+      for (let cx = Math.floor((x - 7) / 64); cx <= Math.floor((x + 7) / 64); cx++) {
+        const glade = this.rabbitGlade(cx, cy);
+        if (glade && Math.hypot(x - glade.x, y - glade.y) < 7) return true;
+      }
+    return false;
+  }
+  private rabbits(cx: number, cy: number): ActorPlacement[] {
+    const gx = Math.floor(cx / 4),
+      gy = Math.floor(cy / 4);
+    const glade = this.rabbitGlade(gx, gy);
+    if (!glade) return [];
+    const h = (salt: number) => valueNoise(gx, gy, this.world.seed + salt);
+    const count = 2 + Math.floor(h(7651) * 2),
+      actors: ActorPlacement[] = [];
+    for (let i = 0; i < count; i++) {
+      const angle = h(7653) * Math.PI * 2 + (i * Math.PI * 2) / count;
+      const wx = (glade.x + Math.cos(angle) * 1.4) * 16;
+      const wy = (glade.y + Math.sin(angle) * 1.4) * 16;
+      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      const ai = createRabbit(wx, wy).rabbit;
+      if (!ai) throw new Error("Missing rabbit behavior");
+      ai.home = { wx: glade.x * 16, wy: glade.y * 16 };
+      ai.shelter = { ...glade.shelter };
+      ai.randomState = Math.floor(h(7661 + i) * 4294967296) >>> 0;
+      ai.timer = 1.2 + i * 0.8;
+      actors.push({
+        featureId: `wildlife:rabbit:${this.world.seed}:${glade.id}:${i}`,
+        type: RABBIT_TYPE,
+        wx,
+        wy,
+        route: [],
+        rabbit: ai,
       });
     }
     return actors;
@@ -373,7 +466,8 @@ export class NaturalLandscape {
           valueNoise(gx, gy, this.world.seed + 7211) >=
             naturalHabitat(this.world, this.profile, x, y).density ||
           this.reserved(x, y, 4) ||
-          this.pondBank(x, y, 4)
+          this.pondBank(x, y, 4) ||
+          this.rabbitClearing(x, y)
         )
           continue;
         // Full trunk and crown ground projection remain on dry land, clear of shore.
@@ -397,6 +491,7 @@ export class NaturalLandscape {
       reservations: this.reservations.size,
       ponds: this.ponds.size,
       forests: this.forests.size,
+      glades: this.glades.size,
     };
   }
 }

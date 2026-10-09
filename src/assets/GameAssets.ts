@@ -6,6 +6,7 @@ import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { FROG_IMAGE, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_IMAGE, MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { RABBIT_IMAGE, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { loadImage } from "./AssetLoader.js";
 import { MODERN_INTERIORS_SHEET_KEY } from "./ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "./Spritesheet.js";
@@ -36,6 +37,7 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
   { key: FROG_TYPE, path: FROG_IMAGE, w: 48, h: 48 },
+  { key: RABBIT_TYPE, path: RABBIT_IMAGE, w: 32, h: 32 },
   { key: MALLARD_TYPE, path: MALLARD_IMAGE, w: 48, h: 48 },
   ...TRAIN_CARRIAGES.map((c) => ({
     key: c.type,

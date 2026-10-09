@@ -16,6 +16,7 @@ import {
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
@@ -147,6 +148,20 @@ export default function NaturalLandscapePage() {
         c.dataset.frogCount = String(frogs.length);
         c.dataset.frogPoses = JSON.stringify(
           frogs.map((e) => ({
+            id: e.id,
+            x: e.position.wx,
+            y: e.position.wy,
+            z: e.wz ?? 0,
+            clip: e.sprite?.clip,
+            frame: e.sprite?.frameCol,
+            state: e.wanderAI?.state,
+            direction: e.sprite?.direction,
+          })),
+        );
+        const rabbits = h.session.view.entities.filter((e) => e.type === RABBIT_TYPE);
+        c.dataset.rabbitCount = String(rabbits.length);
+        c.dataset.rabbitPoses = JSON.stringify(
+          rabbits.map((e) => ({
             id: e.id,
             x: e.position.wx,
             y: e.position.wy,
@@ -414,35 +429,39 @@ export default function NaturalLandscapePage() {
             </button>
           </>
         )}
-        {(caseId === "pond" || caseId === "frogs") &&
-          [
-            { type: MALLARD_TYPE, label: "duck" },
-            { type: FROG_TYPE, label: "frog" },
-          ].map((animal) => (
-            <button
-              key={animal.type}
-              type="button"
-              disabled={!ready || paused}
-              onClick={() => {
-                const h = host.current;
-                const target = h?.session.view.entities.find(
-                  (e) =>
-                    e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) === 0,
-                );
-                if (!h || !target) return;
-                void h
-                  .command({
-                    kind: "teleport",
-                    position: { ...target.position },
-                    z: (target.wz ?? 0) + 26,
-                  })
-                  .catch((e) => setError(String(e)));
-                canvas.current?.focus();
-              }}
-            >
-              Hop onto {animal.label}
-            </button>
-          ))}
+        {(caseId === "rabbits"
+          ? [{ type: RABBIT_TYPE, label: "rabbit" }]
+          : caseId === "pond" || caseId === "frogs"
+            ? [
+                { type: MALLARD_TYPE, label: "duck" },
+                { type: FROG_TYPE, label: "frog" },
+              ]
+            : []
+        ).map((animal) => (
+          <button
+            key={animal.type}
+            type="button"
+            disabled={!ready || paused}
+            onClick={() => {
+              const h = host.current;
+              const target = h?.session.view.entities.find(
+                (e) =>
+                  e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) === 0,
+              );
+              if (!h || !target) return;
+              void h
+                .command({
+                  kind: "teleport",
+                  position: { ...target.position },
+                  z: (target.wz ?? 0) + 26,
+                })
+                .catch((e) => setError(String(e)));
+              canvas.current?.focus();
+            }}
+          >
+            Hop onto {animal.label}
+          </button>
+        ))}
       </div>
       <p role="status">{ready ? "Ready to explore" : "Preparing landscape…"}</p>
       {candidate && (

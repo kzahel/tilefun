@@ -58,6 +58,10 @@ export class ProceduralActors {
           entity.mallard = structuredClone(p.mallard);
           entity.persistentId = p.featureId;
         }
+        if (p.rabbit) {
+          entity.rabbit = structuredClone(p.rabbit);
+          entity.persistentId = p.featureId;
+        }
         if (p.frog) {
           entity.frog = structuredClone(p.frog);
           entity.persistentId = p.featureId;

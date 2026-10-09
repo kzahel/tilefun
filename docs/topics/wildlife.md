@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: durable pond ducks and frogs delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
+Status: durable ducks, frogs and meadow rabbits delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
 ## Provisional gameplay: durable pond ducks
@@ -92,8 +92,28 @@ The slice passes 1,771 units, typecheck, lint, build, all ten frog/duck browser 
 and isolated streaming readiness. The full browser suite passes 395/397, with the
 two previously recorded missing archived fox-preview failures. Gameplay evidence
 is in 078; all 27 exact wildlife review candidates remain unchanged. No art approval
-or new art production is implied. Next: owner playtest of mixed ponds, then rabbits
-for meadows and woodland edges.
+or new art production is implied. The rabbit follow-up is recorded below.
+
+## Provisional gameplay: meadow rabbits
+
+The owner accepted the next rabbit slice on 2026-10-09. [079](../tactical/079-durable-meadow-rabbits.md)
+implements the unchanged existing pilot with physical native hops, quiet action
+cycles, player/ball reactions, woodland-facing grassy glades and durable groups.
+The same no-respawn/manual-creation policy applies: 2–3 seed-determined individuals
+per admitted dry glade, no timer or distant catch-up, durable moved/manual/deleted
+actors and saved physical hop phases. Rabbits reject water and obstacles, escape
+away from threats toward accessible cover, and recover before returning to their
+routine. Mid-hop alarms finish the original hop before an escape.
+
+[Inspect the rabbit meadow](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-rabbits&landscape=thicket#/tool/world-geometry)
+uses the same production Worker; **Hop onto rabbit** demonstrates shared body
+contact and bounce. Older saved chunks use **Edit → Entities → Rabbit**.
+Typechecks, lint, build, all 1,784 units, all 14 wildlife browser checks and isolated
+streaming readiness pass. Full browser suite: 398/401; two existing archived-art
+failures and a GPU train roof-reopen failure that passes an isolated full-journey
+rerun. See 079 for evidence and limits. All 27 exact wildlife review records remain
+unchanged; art production and approval remain separate. Art-table refresh still
+lacks the ignored campaign state. Next: owner rabbit playtest, then robins.
 
 ## Current scope: existing frozen-torso repairs only
 

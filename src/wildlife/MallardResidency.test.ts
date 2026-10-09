@@ -15,10 +15,33 @@ import { tickAllAI } from "../server/tickAllAI.js";
 import { World } from "../world/World.js";
 import { createFrog, FROG_TYPE } from "./Frog.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
+import { createRabbit, RABBIT_TYPE } from "./Rabbit.js";
 
 it.each([
-  { name: "ducks", type: MALLARD_TYPE, create: createMallard, component: "mallard" as const },
-  { name: "frogs", type: FROG_TYPE, create: createFrog, component: "frog" as const },
+  {
+    name: "ducks",
+    type: MALLARD_TYPE,
+    create: createMallard,
+    component: "mallard" as const,
+    cx: 14,
+    cy: -12,
+  },
+  {
+    name: "frogs",
+    type: FROG_TYPE,
+    create: createFrog,
+    component: "frog" as const,
+    cx: 14,
+    cy: -12,
+  },
+  {
+    name: "rabbits",
+    type: RABBIT_TYPE,
+    create: createRabbit,
+    component: "rabbit" as const,
+    cx: -10,
+    cy: -34,
+  },
 ])(
   "evicts and returns the same $name, retaining movement, manual animals and deletion",
   async (animal) => {
@@ -63,14 +86,14 @@ it.each([
       }
     };
     try {
-      await visit(14, -12, 2);
+      await visit(animal.cx, animal.cy, 2);
       const flock = () => entities.entities.filter((e) => e.type === animal.type);
       const removed = required(flock()[0]),
         moved = required(flock()[1]);
       const removedIdentity = removed.persistentId;
       entities.remove(removed.id);
       // Move across its origin chunk: revisiting that origin must not seed a duplicate.
-      moved.position.wx += Math.floor(moved.position.wx / 256) >= 16 ? -256 : 256;
+      moved.position.wx += Math.floor(moved.position.wx / 256) >= animal.cx + 2 ? -256 : 256;
       required(moved[animal.component]).timer = 3.25;
       const identity = moved.persistentId,
         position = { ...moved.position },
@@ -86,7 +109,7 @@ it.each([
       const localIds = new Set(flock().map((e) => e.persistentId));
       await visit(100, 100);
       expect(flock().some((e) => localIds.has(e.persistentId))).toBe(false);
-      await visit(14, -12, 2);
+      await visit(animal.cx, animal.cy, 2);
       expect(flock().some((e) => e.persistentId === removedIdentity)).toBe(false);
       const restored = required(flock().find((e) => e.persistentId === identity));
       expect(restored.position).toEqual(position);
@@ -94,7 +117,7 @@ it.each([
       expect(flock().filter((e) => e.proceduralId === moved.proceduralId)).toHaveLength(1);
       expect(flock().some((e) => e.persistentId === manualId)).toBe(true);
       await visit(100, 100);
-      await visit(14, -12, 2);
+      await visit(animal.cx, animal.cy, 2);
       expect(flock().some((e) => e.persistentId === removedIdentity)).toBe(false);
     } finally {
       await streaming.close();

@@ -3,6 +3,7 @@ import { updateRouteAI } from "../entities/routeAI.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
 import { updateFrogAI } from "../wildlife/frogAI.js";
 import { updateMallardAI, type WildlifeEnvironment } from "../wildlife/mallardAI.js";
+import { updateRabbitAI } from "../wildlife/rabbitAI.js";
 
 /**
  * Run AI for all entities: tick-tier culling, chase/follow, wander.
@@ -24,6 +25,10 @@ export function tickAllAI(
   // Collect buddies for hostile AI targeting (need all, not just ticked)
   const buddies = entities.filter((e) => e.wanderAI?.following);
   for (const [entity, dt] of entityTickDts) {
+    if (entity.rabbit && wildlife) {
+      updateRabbitAI(entity, dt, wildlife, entities, playerPositions);
+      continue;
+    }
     if (entity.frog && wildlife) {
       updateFrogAI(entity, dt, wildlife, entities, playerPositions);
       continue;

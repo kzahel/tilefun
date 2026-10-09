@@ -2,7 +2,7 @@
 
 Topic: trains
 Status: generated two-city trains, broad curves, cached pixel tracks and saved roof riding delivered; loops remain authored lab fixtures.
-Updated: 2026-10-05.
+Updated: 2026-10-09.
 
 Owns generated railway networks, town stations, train services, railway structures
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
@@ -324,3 +324,14 @@ GPU 60Hz / Canvas 30Hz authority at approximately 120Hz crosses the next carriag
 and reverses direction midair. Jump height and native roof geometry are unchanged.
 Roof-relative alignment alone is not the acceptance criterion. Service lifetime/map
 tickets remain deferred.
+
+## Current regression evidence
+
+The 2026-10-09 [rabbit slice](../tactical/079-durable-meadow-rabbits.md) full browser
+run passed the Canvas city journey but failed the GPU journey at the post-reopen
+roof-height check (expected 44, received 0). The isolated GPU rerun passed the
+complete journey, mid-bend reopen and alighting in 1.5 minutes. No train test or
+roof behavior changed. This remains non-reproduced failure evidence, not a claimed
+fix. If it recurs, inspect saved roofRide and carriage residency before the first
+post-reopen authority step. See [full log](/tmp/tilefun-rabbit-browser-full.log) and
+[isolated rerun](/tmp/tilefun-rabbit-train-rerun.log).

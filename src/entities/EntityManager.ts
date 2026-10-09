@@ -12,6 +12,11 @@ import {
 } from "../physics/surfaceHeight.js";
 import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
+import {
+  prepareRabbitHop,
+  RABBIT_HOP_DURATION,
+  settleRabbit,
+} from "../wildlife/rabbitInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
@@ -261,6 +266,7 @@ export class EntityManager {
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
+      if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
       if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
       const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
       const isAmphibious = ENTITY_DEFS[entity.type]?.amphibious === true;
@@ -334,6 +340,11 @@ export class EntityManager {
             );
           continue;
         }
+        if (entity.rabbit?.state === "hop" && entity.rabbit.hop) {
+          if (entity.rabbit.hop.elapsed >= RABBIT_HOP_DURATION)
+            settleRabbit(entity, computeGroundZ(entity));
+          continue;
+        }
         if (entity.frog?.state === "hop" && entity.frog.hop) {
           if (entity.frog.hop.elapsed >= 1.12)
             settleFrog(
@@ -385,6 +396,8 @@ export class EntityManager {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
       if (entity.frog?.state === "hop" && entity.frog.hop)
         setSpriteClipElapsed(entity, Math.round(entity.frog.hop.elapsed * 1000));
+      else if (entity.rabbit?.state === "hop" && entity.rabbit.hop)
+        setSpriteClipElapsed(entity, Math.round(entity.rabbit.hop.elapsed * 1000));
       else tickSpriteAnimation(entity, entityTickDts?.get(entity) ?? dt);
     }
   }

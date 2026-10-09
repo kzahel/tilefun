@@ -1,5 +1,6 @@
 import type { FrogBehavior } from "../wildlife/Frog.js";
 import type { MallardBehavior } from "../wildlife/Mallard.js";
+import type { RabbitBehavior } from "../wildlife/Rabbit.js";
 
 /** Movement/facing direction. Row index in character spritesheet. */
 export enum Direction {
@@ -114,6 +115,7 @@ export interface Entity {
   ballThrowerId?: number;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
+  rabbit?: RabbitBehavior;
   routeAI?: {
     points: readonly RouteWaypoint[];
     index: number;

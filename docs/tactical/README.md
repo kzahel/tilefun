@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [079 Durable meadow rabbits](079-durable-meadow-rabbits.md) | Complete: seeded glades, physical native hops, cover escapes, durable contact and game/lab inspection |
 | [078 Durable pond frogs](078-durable-pond-frogs.md) | Complete: seeded frogs, physical hops/swims, contact/croaks and durable game/lab inspection |
 | [077 Duck contact and startle flight](077-duck-contact-and-startle-flight.md) | Complete: solid bodies, predicted landing bounce, ball startle and durable bounded flight |
 | [076 Durable pond wildlife](076-durable-pond-wildlife.md) | Provisional mallard gameplay: varied clips, seeded pond flocks, open banks and durable individuals |

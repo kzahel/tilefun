@@ -90,6 +90,7 @@ import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem
 import type { IServerTransport } from "../transport/Transport.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
+import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -1892,7 +1893,8 @@ export class Realm {
     if (outcome.wildlifeContactId !== undefined) {
       const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
       if (animal) {
-        if (animal.frog) startleFrog(animal, p.position);
+        if (animal.rabbit) startleRabbit(animal, p.position);
+        else if (animal.frog) startleFrog(animal, p.position);
         else startleMallard(animal, p.position);
         this.records?.changed(animal);
       }

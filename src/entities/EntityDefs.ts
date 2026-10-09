@@ -4,6 +4,7 @@ import { TRAIN_CARRIAGE_DEFS, TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js"
 import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
 import { FROG_DEF, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_DEF, MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { RABBIT_DEF, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
 // ---- Static definition types ----
@@ -158,6 +159,7 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
   ...CHARACTER_ENTITY_DEFS,
   [MALLARD_TYPE]: MALLARD_DEF,
   [FROG_TYPE]: FROG_DEF,
+  [RABBIT_TYPE]: RABBIT_DEF,
   ...VEHICLE_DEFS,
   [TRAIN_TYPE]: TRAIN_DEF,
   ...TRAIN_CARRIAGE_DEFS,

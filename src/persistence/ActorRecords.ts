@@ -6,6 +6,7 @@ import { createProp } from "../entities/PropFactories.js";
 import { generateUUID } from "../shared/uuid.js";
 import { restoreFrogPose } from "../wildlife/frogInteractions.js";
 import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
+import { restoreRabbitPose } from "../wildlife/rabbitInteractions.js";
 
 export interface ActorRecord {
   version: 2;
@@ -27,6 +28,7 @@ export const DURABLE_ENTITY_FIELDS = [
   "wanderAI",
   "mallard",
   "frog",
+  "rabbit",
   "routeAI",
   "deathTimer",
   "wz",
@@ -118,6 +120,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
   if (!("isProp" in actor)) {
     restoreMallardPose(actor);
     restoreFrogPose(actor);
+    restoreRabbitPose(actor);
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;
