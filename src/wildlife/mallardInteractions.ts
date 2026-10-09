@@ -2,8 +2,6 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { setSpriteClip } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 
-export const MALLARD_BOUNCE_VZ = 95;
-
 /** Rebuild transient presentation from durable behavior after residency/reload. */
 export function restoreMallardPose(duck: Entity): void {
   const ai = duck.mallard;

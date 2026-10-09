@@ -22,7 +22,7 @@ import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { World } from "../world/World.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
 import { updateMallardAI } from "./mallardAI.js";
-import { MALLARD_BOUNCE_VZ, startleMallard } from "./mallardInteractions.js";
+import { startleMallard } from "./mallardInteractions.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
@@ -58,7 +58,7 @@ function fallingPlayer() {
   return player;
 }
 
-it("predicts body blocking and the same landing bounce from replicated duck bodies", () => {
+it("predicts body blocking and grounded standing on replicated duck bodies until Jump is pressed", () => {
   const duck = createMallard(64, 64);
   duck.id = 1;
   duck.wz = 0;
@@ -91,15 +91,58 @@ it("predicts body blocking and the same landing bounce from replicated duck bodi
   predictor.update(0.1, idle, world, [], [replica]);
   expect(result.outcome.wildlifeContactId).toBe(duck.id);
   expect(result.outcome.enteredWater).toBe(false);
-  expect(player.jumpVZ).toBe(MALLARD_BOUNCE_VZ);
+  expect(player.jumpVZ).toBeUndefined();
+  expect(player.jumpZ).toBeUndefined();
+  expect(player.wz).toBe(9);
   expect(predictor.player?.wz).toBeCloseTo(required(player.wz), 5);
   expect(predictor.player?.jumpVZ).toBe(player.jumpVZ);
+  // A stationary body remains support across idle ticks, with no repeated contact/jump.
+  let jumpState = { jumpConsumed: false, lastJumpHeld: false };
+  for (let i = 0; i < 90; i++) {
+    const step = stepPlayerFromInput(
+      player,
+      idle,
+      1 / 60,
+      ctx,
+      () => 0,
+      () => ({ props: [], entities: [duck] }),
+      jumpState,
+      getMovementPhysicsParams(),
+    );
+    jumpState = step.jumpState;
+    predictor.update(1 / 60, idle, world, [], [deserializeEntity(serializeEntity(duck))]);
+    expect(step.outcome.wildlifeContactId).toBeUndefined();
+    expect(player.wz).toBe(9);
+    expect(player.jumpVZ).toBeUndefined();
+    expect(predictor.player?.wz).toBe(9);
+    expect(predictor.player?.jumpVZ).toBeUndefined();
+  }
+  stepPlayerFromInput(
+    player,
+    { ...idle, jump: true },
+    1 / 60,
+    ctx,
+    () => 0,
+    () => ({ props: [], entities: [duck] }),
+    jumpState,
+    getMovementPhysicsParams(),
+  );
+  predictor.update(
+    1 / 60,
+    { ...idle, jump: true },
+    world,
+    [],
+    [deserializeEntity(serializeEntity(duck))],
+  );
+  expect(player.jumpVZ).toBeGreaterThan(0);
+  expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
+
   expect(ctx.isEntityBlocked({ left: 62, right: 66, top: 62, bottom: 66 })).toBe(false); // above the duck now
   player.wz = 0;
   expect(ctx.isEntityBlocked({ left: 62, right: 66, top: 62, bottom: 66 })).toBe(true);
 });
 
-it("does not bounce on a near miss, an ascending pass or a body above the player", () => {
+it("does not report wildlife landing contact on a near miss, an ascending pass or a body above the player", () => {
   for (const kind of ["miss", "ascending", "above"] as const) {
     const p = fallingPlayer(),
       d = createMallard(64, 64);
@@ -263,7 +306,7 @@ it.each([true, false])(
         if (input) await s.step(idle, 1 / 60);
         else s.tick(1 / 60);
       }
-      expect(s.player.player.jumpVZ).toBeGreaterThan(0);
+      expect(s.player.player.jumpVZ).toBeUndefined();
       expect(duck().mallard?.state).toBe("startle");
       const id = duck().persistentId;
       for (let i = 0; i < 60; i++) await s.step(idle, 1 / 60);

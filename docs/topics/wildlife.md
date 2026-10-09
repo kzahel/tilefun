@@ -4,6 +4,41 @@ Topic: wildlife
 Status: durable ducks, frogs and meadow rabbits delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
+## Wildlife support: no automatic player bounce
+
+On 2026-10-09 the owner explicitly rejected trampoline behavior on every animal.
+Wildlife bodies are ordinary solid support: landing completes at the body top,
+clears player jump velocity and reports contact to authority AI. Standing never
+adds a jump impulse. Players jump through the normal Jump input; an escaping
+animal can move out from under them, causing an ordinary fall.
+This supersedes the bounce introduced in 077–079, without changing animal startle,
+ball ricochets, physical hops/flights, durable identity or population policy.
+The rule is shared by prediction, input-driven authority and missing-input gravity.
+
+Automatic landing impulses and their species constants are removed for
+ducks, frogs and rabbits. Focused headless checks pass, including sustained idle
+standing, explicit Jump, body blocking and contact/startle with and without input.
+Canvas/GPU labs record maximum player vertical velocity after their controlled
+landing to verify that an animal escape never relaunches the player.
+Typechecks, lint, build, all 1,784 unit tests and all 14 focused wildlife browser
+checks pass. The full browser run passes **398/401** (12.6 minutes), including all
+14 wildlife checks and affected game/lab movement checks. Two previously recorded
+archived-art review failures remain. The Canvas train journey lost roof support
+on the onward leg after reopening; its isolated full-journey rerun passes, while
+the full run's GPU train journey also passes. Both results are recorded in the
+[train topic](trains.md#current-regression-evidence); no train test or physics was
+changed. Isolated streaming readiness passes: cold, standing, walk, sprint,
+reverse and zoom-out finish with zero missing/incomplete/stale caches. This is
+functional Canvas/headless evidence, not a GPU frame-pacing claim. All 27 exact
+wildlife review candidates remain unchanged. Art-table refresh was attempted after
+persisted checkpoints and completion, but still lacks the ignored campaign state;
+the last validated art table is preserved.
+
+Local evidence: [unit log](/tmp/tilefun-wildlife-standing-unit.log),
+[focused browser checks](/tmp/tilefun-wildlife-standing-browser-focused.log),
+[full browser log](/tmp/tilefun-wildlife-standing-browser-full.log),
+[streaming report](/tmp/tilefun-wildlife-standing-streaming/report.json).
+
 ## Provisional gameplay: durable pond ducks
 
 On 2026-10-09 the owner requested populating wild areas with existing imperfect
@@ -39,9 +74,9 @@ Previously seeded saved chunks are not backfilled; manual placement supplies duc
 there while new pond chunks receive their initial flock.
 
 The owner subsequently requested physical/playful interactions. [077](../tactical/077-duck-contact-and-startle-flight.md)
-supersedes 076's non-solid bodies: ducks now block body movement and give the player
-a small bounce when landed upon. The same landing rule runs in prediction and
-authority, including missing-input gravity. Landing or a ball hit starts a quack,
+supersedes 076's non-solid bodies: ducks now block body movement and support the player
+when landed upon. The owner later removed the original automatic landing bounce.
+The same landing rule runs in prediction and authority, including missing-input gravity. Landing or a ball hit starts a quack,
 then a short bounded escape flight using unchanged flap frames. The duck settles
 for two seconds before returning to its pond routine; repeated hits do not restart
 the escape. If no clear destination exists, it quacks and settles in place.
@@ -87,7 +122,7 @@ unchanged existing draft, seed-determined small bank populations, physical hops,
 swimming, rest/blink cycles, spatial croaks and player/ball escape reactions.
 They share the duck persistence policy (including no timed respawns), open-bank
 habitat and editor creation. Their smaller body uses shared predicted landing
-bounce. The in-memory pond lab adds **Pond · frogs & shallows** and **Hop onto frog**.
+support. The in-memory pond lab adds **Pond · frogs & shallows** and **Hop onto frog**.
 The slice passes 1,771 units, typecheck, lint, build, all ten frog/duck browser checks
 and isolated streaming readiness. The full browser suite passes 395/397, with the
 two previously recorded missing archived fox-preview failures. Gameplay evidence
@@ -107,7 +142,7 @@ routine. Mid-hop alarms finish the original hop before an escape.
 
 [Inspect the rabbit meadow](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-rabbits&landscape=thicket#/tool/world-geometry)
 uses the same production Worker; **Hop onto rabbit** demonstrates shared body
-contact and bounce. Older saved chunks use **Edit → Entities → Rabbit**.
+contact and grounded support. Older saved chunks use **Edit → Entities → Rabbit**.
 Typechecks, lint, build, all 1,784 units, all 14 wildlife browser checks and isolated
 streaming readiness pass. Full browser suite: 398/401; two existing archived-art
 failures and a GPU train roof-reopen failure that passes an isolated full-journey

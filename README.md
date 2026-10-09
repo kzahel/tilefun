@@ -80,11 +80,14 @@ preview; public-asset links let Vite apply the deployment prefix exactly once.
 Regional ponds have small seeded duck and frog populations using existing provisional
 art. Ducks waddle, swim, rest, quack and exercise their wings; frogs hop with real
 push-off/landing phases, swim, rest, blink and croak around grassy banks.
-Their bodies have collision. Landing on one bounces you up; landing contact or a
-ball hit makes a duck escape in a short flight, or a frog hop/swim away and settle.
+Woodland glades also have small seeded rabbit groups that hop, rest and play quiet
+action cycles. Their bodies have collision and support standing; landing never
+automatically launches the player. Landing contact or a ball hit makes animals
+escape briefly and settle. Press Jump to jump off; moving animals can leave you
+to fall normally.
 They persist as individuals when you leave and return; deleted animals stay gone,
-with no timed respawns. **Edit → Entities → Mallard duck / Common frog** adds saved
-individuals, including in older worlds whose pond chunks were already seeded.
+with no timed respawns. **Edit → Entities → Mallard duck / Common frog / Rabbit** adds saved
+individuals, including in older worlds whose countryside chunks were already seeded.
 Try the [frog pond playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-frogs&landscape=thicket#/tool/world-geometry)
 and its **Hop onto frog** / **Hop onto duck** controls.
 

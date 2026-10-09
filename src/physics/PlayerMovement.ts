@@ -22,11 +22,8 @@ import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
-import { FROG_BOUNCE_VZ } from "../wildlife/frogInteractions.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
-import { MALLARD_BOUNCE_VZ } from "../wildlife/mallardInteractions.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
-import { RABBIT_BOUNCE_VZ } from "../wildlife/rabbitInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { clearAirMomentum, clipAirMomentum, inheritAirMomentum } from "./AirborneMomentum.js";
 import type { MovementContext } from "./MovementContext.js";
@@ -596,8 +593,8 @@ export function tickJumpGravity(
         }
         clearAirMomentum(entity);
       }
-      // Wildlife has a physical body; landing gives a playful hop rather than
-      // a mount. This runs identically in authority, missing-input gravity and prediction.
+      // Wildlife is ordinary solid support: keep the completed landing grounded.
+      // Report contact for authority startle AI without an automatic jump impulse.
       const footprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
       const animal =
         entity.type === "player" && footprint
@@ -610,17 +607,7 @@ export function tickJumpGravity(
                 aabbsOverlap(footprint, getEntityAABB(e.position, e.collider)),
             )
           : undefined;
-      if (animal) {
-        entity.wz = groundZ + 0.01;
-        entity.jumpZ = 0.01;
-        entity.jumpVZ =
-          animal.type === FROG_TYPE
-            ? FROG_BOUNCE_VZ
-            : animal.type === RABBIT_TYPE
-              ? RABBIT_BOUNCE_VZ
-              : MALLARD_BOUNCE_VZ;
-        return { landed: true, groundZ, wildlifeContactId: animal.id };
-      }
+      if (animal) return { landed: true, groundZ, wildlifeContactId: animal.id };
       return { landed: true, groundZ };
     }
     entity.jumpZ = entity.wz - groundZ;

@@ -2,7 +2,6 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 
-export const FROG_BOUNCE_VZ = 75;
 export const FROG_HOP_DURATION = 1.12;
 // Two crouch/push frames, then airborne frames, then fore-first landing/recovery.
 const PUSH_OFF = 0.28;

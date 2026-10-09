@@ -335,3 +335,13 @@ roof behavior changed. This remains non-reproduced failure evidence, not a claim
 fix. If it recurs, inspect saved roofRide and carriage residency before the first
 post-reopen authority step. See [full log](/tmp/tilefun-rabbit-browser-full.log) and
 [isolated rerun](/tmp/tilefun-rabbit-train-rerun.log).
+
+The subsequent wildlife-standing fix full run passed the GPU city journey but
+lost Canvas roof support during the onward journey after a successful mid-bend
+reopen (`city-train-riding.spec.ts:107`, expected 44, received 0). The isolated
+Canvas rerun passed the full journey in 1.5 minutes. Wildlife-only landing impulses
+were removed; train physics/tests remain unchanged. Retain this as intermittent
+support-after-reopen evidence rather than attributing it to a backend or claiming
+it fixed. [Full run](/tmp/tilefun-wildlife-standing-browser-full.log),
+[isolated rerun](/tmp/tilefun-wildlife-standing-train-rerun.log),
+[failure capture](/tmp/tilefun-wildlife-standing-train-failure/test-failed-1.png).

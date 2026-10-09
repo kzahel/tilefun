@@ -30,7 +30,7 @@ import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { createRabbit, RABBIT_CLIPS, RABBIT_IMAGE, RABBIT_TYPE } from "./Rabbit.js";
 import { updateRabbitAI } from "./rabbitAI.js";
-import { RABBIT_BOUNCE_VZ, startleRabbit } from "./rabbitInteractions.js";
+import { startleRabbit } from "./rabbitInteractions.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
@@ -218,7 +218,7 @@ it("balls ricochet and startle rabbits; elevated balls miss and repeated alarms 
   }
 });
 
-it("predicts the same landing bounce from a replicated rabbit body", () => {
+it("lands and stands on a replicated rabbit body until Jump is pressed", () => {
   const rabbit = createRabbit(64, 64);
   rabbit.id = 1;
   const player = createPlayer(64, 64);
@@ -251,9 +251,51 @@ it("predicts the same landing bounce from a replicated rabbit body", () => {
   );
   predictor.update(0.05, idle, world, [], [deserializeEntity(serializeEntity(rabbit))]);
   expect(result.outcome.wildlifeContactId).toBe(rabbit.id);
-  expect(player.jumpVZ).toBe(RABBIT_BOUNCE_VZ);
+  expect(player.jumpVZ).toBeUndefined();
+  expect(player.jumpZ).toBeUndefined();
+  expect(player.wz).toBe(8);
   expect(predictor.player?.wz).toBeCloseTo(required(player.wz), 5);
   expect(predictor.player?.jumpVZ).toBe(player.jumpVZ);
+  // A stationary body remains support across idle ticks, with no repeated contact/jump.
+  let jumpState = { jumpConsumed: false, lastJumpHeld: false };
+  for (let i = 0; i < 90; i++) {
+    const step = stepPlayerFromInput(
+      player,
+      idle,
+      1 / 60,
+      ctx,
+      () => 0,
+      () => ({ props: [], entities: [rabbit] }),
+      jumpState,
+      getMovementPhysicsParams(),
+    );
+    jumpState = step.jumpState;
+    predictor.update(1 / 60, idle, world, [], [deserializeEntity(serializeEntity(rabbit))]);
+    expect(step.outcome.wildlifeContactId).toBeUndefined();
+    expect(player.wz).toBe(8);
+    expect(player.jumpVZ).toBeUndefined();
+    expect(predictor.player?.wz).toBe(8);
+    expect(predictor.player?.jumpVZ).toBeUndefined();
+  }
+  stepPlayerFromInput(
+    player,
+    { ...idle, jump: true },
+    1 / 60,
+    ctx,
+    () => 0,
+    () => ({ props: [], entities: [rabbit] }),
+    jumpState,
+    getMovementPhysicsParams(),
+  );
+  predictor.update(
+    1 / 60,
+    { ...idle, jump: true },
+    world,
+    [],
+    [deserializeEntity(serializeEntity(rabbit))],
+  );
+  expect(player.jumpVZ).toBeGreaterThan(0);
+  expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
 });
 
 it("recovers in a closed habitat and lands at the actual position if new terrain blocks a hop", () => {
@@ -348,7 +390,7 @@ it.each([true, false])(
         else s.tick(1 / 60);
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === RABBIT_TYPE));
-      expect(s.player.player.jumpVZ).toBeGreaterThan(0);
+      expect(s.player.player.jumpVZ).toBeUndefined();
       expect(animal.wanderAI?.state).toBe("scared");
       for (let i = 0; i < 22; i++) await s.step(idle, 1 / 60);
       expect(animal.rabbit?.state).toBe("hop");

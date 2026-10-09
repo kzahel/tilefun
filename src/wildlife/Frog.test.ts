@@ -30,7 +30,7 @@ import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { createFrog, FROG_CLIPS, FROG_IMAGE, FROG_TYPE } from "./Frog.js";
 import { updateFrogAI } from "./frogAI.js";
-import { FROG_BOUNCE_VZ, startleFrog } from "./frogInteractions.js";
+import { startleFrog } from "./frogInteractions.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
@@ -205,7 +205,7 @@ it("balls ricochet and startle frogs; elevated balls miss and repeated alarms ke
   }
 });
 
-it("predicts the same landing bounce from a replicated frog body", () => {
+it("lands and stands on a replicated frog body until Jump is pressed", () => {
   const frog = createFrog(64, 64);
   frog.id = 1;
   const player = createPlayer(64, 64);
@@ -238,9 +238,51 @@ it("predicts the same landing bounce from a replicated frog body", () => {
   );
   predictor.update(0.05, idle, world, [], [deserializeEntity(serializeEntity(frog))]);
   expect(result.outcome.wildlifeContactId).toBe(frog.id);
-  expect(player.jumpVZ).toBe(FROG_BOUNCE_VZ);
+  expect(player.jumpVZ).toBeUndefined();
+  expect(player.jumpZ).toBeUndefined();
+  expect(player.wz).toBe(4);
   expect(predictor.player?.wz).toBeCloseTo(required(player.wz), 5);
   expect(predictor.player?.jumpVZ).toBe(player.jumpVZ);
+  // A stationary body remains support across idle ticks, with no repeated contact/jump.
+  let jumpState = { jumpConsumed: false, lastJumpHeld: false };
+  for (let i = 0; i < 90; i++) {
+    const step = stepPlayerFromInput(
+      player,
+      idle,
+      1 / 60,
+      ctx,
+      () => 0,
+      () => ({ props: [], entities: [frog] }),
+      jumpState,
+      getMovementPhysicsParams(),
+    );
+    jumpState = step.jumpState;
+    predictor.update(1 / 60, idle, world, [], [deserializeEntity(serializeEntity(frog))]);
+    expect(step.outcome.wildlifeContactId).toBeUndefined();
+    expect(player.wz).toBe(4);
+    expect(player.jumpVZ).toBeUndefined();
+    expect(predictor.player?.wz).toBe(4);
+    expect(predictor.player?.jumpVZ).toBeUndefined();
+  }
+  stepPlayerFromInput(
+    player,
+    { ...idle, jump: true },
+    1 / 60,
+    ctx,
+    () => 0,
+    () => ({ props: [], entities: [frog] }),
+    jumpState,
+    getMovementPhysicsParams(),
+  );
+  predictor.update(
+    1 / 60,
+    { ...idle, jump: true },
+    world,
+    [],
+    [deserializeEntity(serializeEntity(frog))],
+  );
+  expect(player.jumpVZ).toBeGreaterThan(0);
+  expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
 });
 
 it("recovers in a closed habitat and lands at the actual position if new terrain blocks a hop", () => {
@@ -339,7 +381,7 @@ it.each([true, false])(
         else s.tick(1 / 60);
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === FROG_TYPE));
-      expect(s.player.player.jumpVZ).toBeGreaterThan(0);
+      expect(s.player.player.jumpVZ).toBeUndefined();
       expect(animal.wanderAI?.state).toBe("scared");
       for (let i = 0; i < 42; i++) await s.step(idle, 1 / 60);
       expect(animal.frog?.state).toBe("hop");

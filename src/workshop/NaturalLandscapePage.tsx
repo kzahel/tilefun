@@ -174,6 +174,9 @@ export default function NaturalLandscapePage() {
         );
         const view = h.session.view;
         c.dataset.playerVz = String(view.serverPlayerEntity.jumpVZ ?? 0);
+        c.dataset.playerMaxVz = String(
+          Math.max(Number(c.dataset.playerMaxVz ?? 0), view.serverPlayerEntity.jumpVZ ?? 0),
+        );
         c.dataset.playerZ = String(view.serverPlayerEntity.wz ?? 0);
         const diagnostics = h.getDiagnostics();
         c.dataset.authorityRunning = String(diagnostics.authority.clock?.running ?? false);
@@ -449,6 +452,7 @@ export default function NaturalLandscapePage() {
                   e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) === 0,
               );
               if (!h || !target) return;
+              if (canvas.current) canvas.current.dataset.playerMaxVz = "0";
               void h
                 .command({
                   kind: "teleport",

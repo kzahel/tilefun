@@ -61,9 +61,6 @@ for (const renderer of ["canvas", "gpu"]) {
       .toBe(true);
     await page.getByRole("button", { name: "Hop onto rabbit", exact: true }).click();
     await expect
-      .poll(async () => Number(await c.getAttribute("data-player-vz")), { intervals: [20] })
-      .toBeGreaterThan(0);
-    await expect
       .poll(
         async () => (await poses()).some((f) => f.state === "scared" && f.clip === 1 && f.z > 3),
         { intervals: [30] },
@@ -72,6 +69,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
       .toBe(true);
+    await expect(c).toHaveAttribute("data-player-max-vz", "0");
     expect(errors).toEqual([]);
   });
 }

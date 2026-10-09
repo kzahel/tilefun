@@ -210,14 +210,20 @@ uses ordinary seeded glades, dry-ground authority AI and physical native hops;
 support Canvas/GPU checks, without a lab-specific simulation or animation clock.
 See [079](../tactical/079-durable-meadow-rabbits.md).
 
+The owner removed automatic landing bounces from all wildlife on 2026-10-09.
+Game and lab consumers use the same grounded support rule and contact outcome;
+Realm still startles the animal. Native Canvas/GPU landing checks record the
+maximum authority player vertical velocity throughout escape/recovery to catch
+an unintended relaunch. Explicit Jump retains ordinary input physics.
+
 ## Change and validation discipline
 
-Duck interactions (2026-10-09) keep body collision and player landing bounce in
+Duck interactions (2026-10-09) keep body collision and grounded player landing in
 shared movement physics; Realm owns quack/startle/escape and EntityManager owns the
 collision-resolved flight arc. The pond lab's **Hop onto duck** control uses the
 existing authority teleport/fall command, not lab-specific physics. Canvas/GPU
-diagnostics expose duck elevation/clip/alarm and player bounce velocity. The
-ordinary game's PlayScene plays the provisional synthesized quack; labs retain
+diagnostics expose duck elevation/clip/alarm and maximum player vertical velocity
+after landing. The ordinary game's PlayScene plays the provisional synthesized quack; labs retain
 their existing lack of game audio. See [077](../tactical/077-duck-contact-and-startle-flight.md).
 
 When changing simulation/transport, prediction/time, asset setup, rendering,

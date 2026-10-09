@@ -91,7 +91,7 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
   expect((await duck()).z).toBe(0);
 });
 for (const renderer of ["canvas", "gpu"]) {
-  test(`duck landing bounces and starts a durable escape in the shared pond Worker (${renderer})`, async ({
+  test(`duck landing stays grounded and starts a durable escape in the shared pond Worker (${renderer})`, async ({
     page,
   }) => {
     const errors: string[] = [];
@@ -113,14 +113,12 @@ for (const renderer of ["canvas", "gpu"]) {
     expect(original.length).toBeGreaterThanOrEqual(2);
     await page.getByRole("button", { name: "Hop onto duck", exact: true }).click();
     await expect
-      .poll(async () => Number(await c.getAttribute("data-player-vz")), { intervals: [30] })
-      .toBeGreaterThan(0);
-    await expect
       .poll(
         async () => (await poses()).some((d) => d.state === "scared" && d.clip === 5 && d.z > 14),
         { intervals: [50] },
       )
       .toBe(true);
+    await expect(c).toHaveAttribute("data-player-max-vz", "0");
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await expect(c).toHaveAttribute("data-authority-running", "false");
     const flying = (await poses()).find((d) => d.clip === 5);

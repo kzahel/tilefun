@@ -2,7 +2,6 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 
-export const RABBIT_BOUNCE_VZ = 85;
 export const RABBIT_HOP_DURATION = 1;
 // Native sheet: gather, push, lift/apex, fore-first contact, hind contact, settle.
 const PUSH_OFF = 0.25;
