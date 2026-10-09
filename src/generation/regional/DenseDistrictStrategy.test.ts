@@ -14,7 +14,6 @@ import { denseCitySurfacePieces } from "../../road/DenseCitySurface.js";
 import { RoadType } from "../../road/RoadType.js";
 import { Chunk } from "../../world/Chunk.js";
 import { World } from "../../world/World.js";
-import { actorPlacements } from "../ActorPlacements.js";
 import { CURRENT_REGIONAL_VERSION } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralProps } from "../ProceduralProps.js";
@@ -111,6 +110,7 @@ describe("current dense districts and approved art", () => {
     for (const seed of [2026, 42]) {
       const source = new DenseDistrictSource(regionalWorld(seed), true);
       const g = createGenerator({ ...generation, seed, version: CURRENT_REGIONAL_VERSION });
+      const chunks = new Map<string, Chunk>();
       for (const [cx, cy] of [
         [0, 0],
         [-1, -1],
@@ -118,7 +118,7 @@ describe("current dense districts and approved art", () => {
       ] as const) {
         const plan = source.owner(cx, cy);
         if (!plan) continue;
-        expect(plan.recipe).toBe("dense-district-v2");
+        expect(["dense-district-v2", "current-dense-district-v1"]).toContain(plan.recipe);
         const lots = plan.blocks.flatMap((b) => b.lots);
         expect(plan.entrancePaths).toHaveLength(
           lots.reduce((n, l) => n + denseDoorThresholds(denseBuilding(l.buildingType)).length, 0),
@@ -130,10 +130,15 @@ describe("current dense districts and approved art", () => {
           // Inspect realized roadGrid cells, including chunk boundaries, rather
           // than only checking that the planner emits a connector rectangle.
           for (let y = firstY; y <= path.sidewalk.y + 1; y++) {
-            const chunk = new Chunk();
             const chunkX = Math.floor(x / 16),
-              chunkY = Math.floor(y / 16);
-            g.terrain.generate(chunk, chunkX, chunkY);
+              chunkY = Math.floor(y / 16),
+              key = `${chunkX},${chunkY}`;
+            let chunk = chunks.get(key);
+            if (!chunk) {
+              chunk = new Chunk();
+              g.terrain.generate(chunk, chunkX, chunkY);
+              chunks.set(key, chunk);
+            }
             expect(
               chunk.getRoad(x - chunkX * 16, y - chunkY * 16),
               `${lot.id} gap at ${x},${y}`,
@@ -194,8 +199,22 @@ describe("current dense districts and approved art", () => {
         )
           for (const p of g.placements(x, y, new Set()).placements)
             props.set(required(p.featureId), createProp(p.propType, p.wx, p.wy));
-      const actors = actorPlacements(g, plan.bounds).filter((a) => a.route.length > 0);
-      expect(actors).toHaveLength(5);
+      const actorMap = new Map<string, import("../Generator.js").ActorPlacement>();
+      for (
+        let cy = Math.floor(plan.bounds.minY / 16);
+        cy <= Math.floor(plan.bounds.maxY / 16);
+        cy++
+      )
+        for (
+          let cx = Math.floor(plan.bounds.minX / 16);
+          cx <= Math.floor(plan.bounds.maxX / 16);
+          cx++
+        )
+          for (const actor of g.actors?.(cx, cy) ?? [])
+            if (actor.route.length && actor.featureId.startsWith(`${plan.settlementId}:`))
+              actorMap.set(actor.featureId, actor);
+      const actors = [...actorMap.values()];
+      expect(actors).toHaveLength(plan.actors.length);
       for (const a of actors) {
         const entity = required(ENTITY_FACTORIES[a.type])(a.wx, a.wy);
         for (let i = 0; i < a.route.length; i++) {

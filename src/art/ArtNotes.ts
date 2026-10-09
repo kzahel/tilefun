@@ -29,6 +29,7 @@ export interface BuildingReview {
   districtRecipe?:
     | "dense-district-v1"
     | "dense-district-v2"
+    | "current-dense-district-v1"
     | "commercial-district-v1"
     | "city-places-v7"
     | "city-places-v8"
@@ -144,6 +145,7 @@ function parseBuildingReview(value: unknown): BuildingReview {
       ![
         "dense-district-v1",
         "dense-district-v2",
+        "current-dense-district-v1",
         "commercial-district-v1",
         ...Object.values(CITY_REVIEW_RUNS).map((r) => r.recipe),
       ].includes(v.districtRecipe as string) ||

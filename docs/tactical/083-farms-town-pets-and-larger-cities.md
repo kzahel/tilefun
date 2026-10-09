@@ -28,10 +28,10 @@ candidate architecture or parked/park/pedestrian art is promoted.
 
 | Slice | Scope | State | Evidence / commit |
 | --- | --- | --- | --- |
-| A | Dry connected farmstead, access lane, farmhouse/shed/crops/pasture; inspection arrival | Delivered; final regressions pending | 14 new units / 29 focused checks; six native browser checks pass |
-| B | Durable village/city cats and dogs, safe habitat bounds and pet inspection | Delivered; final regressions pending | Shared safe yards, clear spawns, saved state/tombstones; six native browser checks pass |
-| C | Larger denser current cities, compact villages, connected sidewalks/doors, city inspection | Planned | Pending |
-| D | Whole-world regressions, native Canvas/GPU inspection, streaming, docs and clean commits | Planned | Pending |
+| A | Dry connected farmstead, access lane, farmhouse/shed/crops/pasture; inspection arrival | Delivered; final regressions pending | 14 new units / 29 focused checks; six native browser checks pass; a0bb4bf |
+| B | Durable village/city cats and dogs, safe habitat bounds and pet inspection | Delivered; final regressions pending | Shared safe yards, clear spawns, saved state/tombstones; six native browser checks pass; a0bb4bf |
+| C | Larger denser current cities, compact villages, connected sidewalks/doors, city inspection | Delivered; final regressions running | 29 focused checks pass; native Canvas/GPU captures inspected |
+| D | Whole-world regressions, native Canvas/GPU inspection, streaming, docs and clean commits | Running | Full units and native capture pipeline started |
 
 Validate seeded/query-order/seam geometry and bounded planning; realized paths,
 collision-free initial animals, territory constraints, saved/deleted residents;
@@ -83,3 +83,36 @@ preserved. Complete regressions follow C.
 [native browser checks](/tmp/tilefun-farms-browser-final.log),
 [farm Canvas](/tmp/tilefun-farmstead-canvas.png),
 [village GPU](/tmp/tilefun-village-pets-gpu.png).
+
+
+C implementation checkpoint: current cities have seeded 16/24 blocks with two
+parks, shopping bands, taller central homes and lower residential edges. Villages
+keep the compact layout. Separate current recipe identity preserves compact
+authoring output and immutable archived review snapshots. Existing threshold
+geometry and whole pedestrian routes pass over the expanded production grid;
+chunk ownership, bounded queries and source cache limits remain unchanged.
+New checks cover both city sizes, settlement reservation fit, native facade mix,
+all green pavements and exactly one cat/dog per green. City-center arrival uses
+the actual generated intersection; Canvas/GPU native checks and full units follow.
+
+
+Native C checkpoint: eight Canvas/GPU checks pass in 17.6s; the city-center GPU
+capture was visually inspected. Typechecks, lint, catalog, manifest and build
+pass; 741 candidate identities are verified, with all 27 existing wildlife
+objects exact. The first full unit run passes 2046/2047 (218/219 files).
+TrafficJourney's fire-truck reaches only one junction choice in the old fixed
+100-second compact-grid window; roof support stays correct. Its unchanged
+three-choice requirement now determines completion, with a 300-second simulation
+cap and unchanged 43-family admission count. The corrected journey and complete
+browser regressions are running. Streaming readiness passes.
+
+
+Traffic follow-up: extending the test duration disproved the initial timing
+hypothesis. The newly admitted folded ladder truck reached an avenue with no
+wide enough onward circulation. Current larger cities now have an 8-tile outer
+boulevard connected to their central avenues. Interior streets remain 6 tiles,
+compact villages unchanged. Full-body pedestrian routes and door approaches
+still pass. All 44 admitted vehicle families now complete three junction choices
+with stable roof support; raised-ladder traffic remains excluded. All 29 focused
+settlement/district/traffic checks pass in 24.94s. The old interrupted browser run
+used the pre-boulevard build; final complete regressions use the rebuilt source.

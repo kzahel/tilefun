@@ -52,6 +52,35 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.screenshot({ path: `/tmp/tilefun-farmstead-${renderer}.png`, fullPage: true });
     expect(errors).toEqual([]);
   });
+  test(`larger city center renders inhabited connected blocks (${renderer})`, async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto(
+      `/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
+    );
+    const c = page.getByLabel("Natural landscape playground");
+    await expect(c).toHaveAttribute("data-ready", "true");
+    await expect
+      .poll(async () => Number(await c.getAttribute("data-city-building-count")))
+      .toBeGreaterThanOrEqual(20);
+    await expect
+      .poll(async () => Number(await c.getAttribute("data-city-walker-count")))
+      .toBeGreaterThanOrEqual(9);
+    await page.getByRole("button", { name: "Pause", exact: true }).click();
+    await expect(c).toHaveAttribute("data-authority-running", "false");
+    const buildings = (await c.getAttribute("data-city-building-count")) ?? "";
+    const x = (await c.getAttribute("data-x")) ?? "",
+      y = (await c.getAttribute("data-y")) ?? "";
+    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+    await expect(c).toHaveAttribute("data-reload-count", "1");
+    await expect(c).toHaveAttribute("data-terrain-pending", "0");
+    await expect(c).toHaveAttribute("data-city-building-count", buildings);
+    await expect(c).toHaveAttribute("data-x", x);
+    await expect(c).toHaveAttribute("data-y", y);
+    await page.evaluate(() => scrollTo(0, 0));
+    await page.screenshot({ path: `/tmp/tilefun-city-center-${renderer}.png`, fullPage: true });
+    expect(errors).toEqual([]);
+  });
   for (const id of ["village-pets", "city-pets"]) {
     test(`${id} has moving saved cats and dogs (${renderer})`, async ({ page }) => {
       const errors: string[] = [];
@@ -61,7 +90,9 @@ for (const renderer of ["canvas", "gpu"]) {
       );
       const c = page.getByLabel("Natural landscape playground");
       await expect(c).toHaveAttribute("data-ready", "true");
-      await expect(c).toHaveAttribute("data-pet-count", "2");
+      await expect
+        .poll(async () => Number(await c.getAttribute("data-pet-count")))
+        .toBeGreaterThanOrEqual(2);
       const poses = async () =>
         (
           JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]") as {
@@ -73,7 +104,7 @@ for (const renderer of ["canvas", "gpu"]) {
             frame: number;
           }[]
         ).filter((p) => ["cat", "dog"].includes(p.species));
-      expect((await poses()).map((p) => p.species).sort()).toEqual(["cat", "dog"]);
+      expect([...new Set((await poses()).map((p) => p.species))].sort()).toEqual(["cat", "dog"]);
       await expect
         .poll(async () => (await poses()).some((p) => p.clip === 1 && p.frame >= 3), {
           timeout: 12000,

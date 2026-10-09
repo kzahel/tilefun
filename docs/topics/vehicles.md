@@ -130,7 +130,9 @@ new implementation concerns, not evidence that the approved bounds need re-revie
   runtime direction selects the opposite approved side frame, without mirroring.
   The raised ladder pose remains available art but is excluded from traffic.
   The folded ladder truck is admitted only where the onward street widths fit;
-  it cannot circulate in the tested city network.
+  the larger current cities now provide a connected 8-tile outer boulevard
+  and central avenues, so it can circulate there. Compact villages still limit
+  admission by their actual onward street widths.
 - The current regional generator composes traffic with connected dense-neighborhood
   terrain. Retired regional saves use explicit same-seed recreation; see
   [city generation](city-generation.md).
@@ -208,3 +210,11 @@ roof passengers once per committed pose; prediction replays relative walking and
 camera/body/lab overlays bind to the same support presentation. Native geometry,
 clearance and saved support identities remain authoritative. Collision proxies and
 bounded residual display correction share game/lab engine owners.
+
+
+The larger-city checkpoint in [083](../tactical/083-farms-town-pets-and-larger-cities.md)
+requires at least three completed junction choices for every admitted family,
+with a bounded 300-second simulation window. Forty-four families now complete
+this production-road roof-riding test; raised-ladder traffic remains excluded.
+The outer boulevard fixes a wide-vehicle dead end exposed by the larger grid,
+without changing traffic AI, vehicle bounds or promoted art.

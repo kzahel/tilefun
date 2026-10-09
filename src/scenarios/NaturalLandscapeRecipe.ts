@@ -23,6 +23,7 @@ export const NATURAL_CASES = [
   })),
   { id: "farmstead", name: "Countryside · connected farmstead", seed: 2026, x: 380, y: 897 },
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
+  { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
   { id: "city-pets", name: "City · cats & dogs", seed: 2026, x: 306, y: 540 },
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
   { id: "grove", name: "Open woodland", seed: 2026, x: -160, y: -512 },
@@ -52,7 +53,7 @@ export function naturalLandscapeRecipe(
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);
-  if (!at && ["farmstead", "village-pets", "city-pets"].includes(id)) {
+  if (!at && ["farmstead", "village-pets", "city-pets", "city-center"].includes(id)) {
     const world = regionalWorld(point.seed);
     let player: ReturnType<typeof createPlayer>;
     if (id === "farmstead") {
@@ -62,10 +63,10 @@ export function naturalLandscapeRecipe(
     } else {
       const plan = new DenseDistrictSource(world, true).owner(0, id === "village-pets" ? -1 : 0);
       if (!plan) throw Error("Missing settlement inspection");
-      player = createPlayer(
-        (plan.park.minX - 1) * 16,
-        ((plan.park.minY + plan.park.maxY) / 2) * 16,
-      );
+      player =
+        id === "city-center"
+          ? createPlayer(plan.center.x * 16, plan.center.y * 16)
+          : createPlayer((plan.park.minX - 1) * 16, ((plan.park.minY + plan.park.maxY) / 2) * 16);
     }
     return {
       version: 1,

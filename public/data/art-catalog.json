@@ -24011,7 +24011,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:154"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:189"
         }
       ]
     },

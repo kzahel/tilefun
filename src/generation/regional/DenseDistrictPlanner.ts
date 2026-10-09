@@ -12,6 +12,7 @@ export interface DenseDistrictPlan extends DistrictPlan {
   readonly recipe:
     | "dense-district-v1"
     | "dense-district-v2"
+    | "current-dense-district-v1"
     | "commercial-district-v1"
     | "city-places-v7"
     | "city-places-v8"
@@ -45,10 +46,24 @@ export function denseDistrict(
   seed: number,
   commercial = false,
 ): DenseDistrictPlan {
+  return planDenseDistrict(settlement, seed, commercial);
+}
+function planDenseDistrict(
+  settlement: Settlement,
+  seed: number,
+  commercial = false,
+  columns = 2,
+  rows = 2,
+): DenseDistrictPlan {
   const { x, y } = settlement.center;
-  const xs = [x - 44, x, x + 44],
-    ys = [y - 40, y, y + 40];
-  const bounds = { minX: x - 48, minY: y - 44, maxX: x + 48, maxY: y + 44 };
+  const xs = Array.from({ length: columns + 1 }, (_, i) => x + (i - columns / 2) * 44),
+    ys = Array.from({ length: rows + 1 }, (_, i) => y + (i - rows / 2) * 40);
+  const bounds = {
+    minX: item(xs, 0) - 4,
+    minY: item(ys, 0) - 4,
+    maxX: item(xs, columns) + 4,
+    maxY: item(ys, rows) + 4,
+  };
   const streets: DistrictStreet[] = [];
   for (const sx of xs)
     streets.push({
@@ -57,7 +72,7 @@ export function denseDistrict(
         { x: sx, y: bounds.minY },
         { x: sx, y: bounds.maxY },
       ],
-      width: sx === x ? 8 : 6,
+      width: sx === x || (columns > 2 && (sx === xs[0] || sx === xs.at(-1))) ? 8 : 6,
       sidewalk: commercial ? 4 : 3,
       kind: sx === x ? "avenue" : "street",
     });
@@ -68,23 +83,30 @@ export function denseDistrict(
         { x: bounds.minX, y: sy },
         { x: bounds.maxX, y: sy },
       ],
-      width: sy === y ? (commercial ? 12 : 8) : 6,
+      width:
+        sy === y
+          ? commercial
+            ? 12
+            : 8
+          : columns > 2 && (sy === ys[0] || sy === ys.at(-1))
+            ? 8
+            : 6,
       sidewalk: commercial ? 4 : 3,
       kind: sy === y ? "avenue" : "street",
     });
   const blocks: DistrictBlock[] = [],
     actors: ActorPlacement[] = [];
   let park: Bounds | undefined;
-  for (let row = 0; row < 2; row++)
-    for (let col = 0; col < 2; col++) {
+  for (let row = 0; row < rows; row++)
+    for (let col = 0; col < columns; col++) {
       const left = item(xs, col),
         right = item(xs, col + 1),
         top = item(ys, row),
         bottom = item(ys, row + 1);
-      const hl = left === x ? 4 : 3,
-        hr = right === x ? 4 : 3,
-        ht = top === y ? (commercial ? 6 : 4) : 3,
-        hb = bottom === y ? (commercial ? 6 : 4) : 3;
+      const hl = left === x || (columns > 2 && col === 0) ? 4 : 3,
+        hr = right === x || (columns > 2 && col === columns - 1) ? 4 : 3,
+        ht = top === y ? (commercial ? 6 : 4) : columns > 2 && row === 0 ? 4 : 3,
+        hb = bottom === y ? (commercial ? 6 : 4) : columns > 2 && row === rows - 1 ? 4 : 3;
       const sidewalk = commercial ? 4 : 3;
       const b = {
         minX: left + hl + sidewalk,
@@ -93,19 +115,32 @@ export function denseDistrict(
         maxY: bottom - hb - sidewalk,
       };
       const id = `${settlement.id}:block:${col}:${row}`;
-      const kind = row === 1 && col === 1 ? "park" : row === 0 && col === 1 ? "shops" : "homes";
+      const kind =
+        (row === rows / 2 && col === columns / 2) ||
+        (columns > 2 && row === rows - 1 && col === columns - 1)
+          ? "park"
+          : row === rows / 2 - 1 && (columns > 2 || col === 1)
+            ? "shops"
+            : "homes";
       const block: DistrictBlock = { id, bounds: b, kind, lots: [] };
-      if (kind === "park") park = b;
-      else {
+      if (kind === "park") {
+        if (!park) park = b;
+      } else {
         const variation = edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 17303);
         const suffixes =
           kind === "shops"
             ? ["bakery-3", "butcher-2", "ice-cream-3", "gym-3"]
-            : row === 1
-              ? ["hotel-4-roof-sign", "condo-bay-3"]
-              : variation < 0.5
-                ? ["condo-bay-3", "condo-narrow-5"]
-                : ["condo-bay-5", "condo-narrow-5"];
+            : columns > 2
+              ? row === rows - 1 && col === 0
+                ? ["hotel-4-roof-sign", "condo-bay-3"]
+                : Math.abs(col + 0.5 - columns / 2) <= 1.5 && Math.abs(row + 0.5 - rows / 2) <= 1.5
+                  ? ["condo-bay-5", "condo-narrow-5"]
+                  : ["condo-bay-3", "condo-bay-3"]
+              : row === 1
+                ? ["hotel-4-roof-sign", "condo-bay-3"]
+                : variation < 0.5
+                  ? ["condo-bay-3", "condo-narrow-5"]
+                  : ["condo-bay-5", "condo-narrow-5"];
         const recipes = suffixes.map((s) => denseBuilding(type(s)));
         const total = recipes.reduce((n, p) => n + p.width / TILE_SIZE, 0),
           gap = (b.maxX - b.minX - total) / (recipes.length + 1);
@@ -187,7 +222,7 @@ export class DenseDistrictSource extends DistrictSource {
     const settlement = settlementForOwner(this.world, cx, cy),
       plan = settlement
         ? this.connectEntrances
-          ? connectedDenseDistrict(settlement, this.world.seed)
+          ? currentDenseDistrict(settlement, this.world.seed)
           : denseDistrict(settlement, this.world.seed)
         : null;
     this.cache.set(key, plan);
@@ -211,7 +246,9 @@ export function connectedDenseDistrict(
   seed: number,
   commercial = false,
 ): DenseDistrictPlan {
-  const plan = denseDistrict(settlement, seed, commercial);
+  return connectDenseEntrances(denseDistrict(settlement, seed, commercial), settlement);
+}
+function connectDenseEntrances(plan: DenseDistrictPlan, settlement: Settlement): DenseDistrictPlan {
   const blocks = plan.blocks.map((block) => ({
     ...block,
     lots: block.lots.map((lot) => {
@@ -260,6 +297,20 @@ export function connectedDenseDistrict(
     id: `${settlement.id}:dense-district-v2`,
     blocks,
     entrancePaths,
+  };
+}
+/** Current composition only: frozen authoring recipes stay on the compact layout. */
+export function currentDenseDistrict(settlement: Settlement, seed: number): DenseDistrictPlan {
+  if (settlement.kind === "village") return connectedDenseDistrict(settlement, seed);
+  const columns = edgeHash(settlement.owner.cx, settlement.owner.cy, seed + 32303) < 0.55 ? 4 : 6;
+  const plan = connectDenseEntrances(
+    planDenseDistrict(settlement, seed, false, columns, 4),
+    settlement,
+  );
+  return {
+    ...plan,
+    recipe: "current-dense-district-v1",
+    id: `${settlement.id}:current-dense-district-v1`,
   };
 }
 /** Surface facts are encoded in the existing persistent roadGrid; the shared
@@ -347,10 +398,12 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
         )
           return RoadType.CityPavement;
   }
-  const p = plan.park,
-    px = (p.minX + p.maxX) / 2,
-    py = (p.minY + p.maxY) / 2;
-  if (insideDenseBounds(p, x, y) && (Math.abs(x + 0.5 - px) < 1 || Math.abs(y + 0.5 - py) < 1))
-    return RoadType.CityPavement;
+  for (const block of plan.blocks.filter((b) => b.kind === "park")) {
+    const p = block.bounds,
+      px = (p.minX + p.maxX) / 2,
+      py = (p.minY + p.maxY) / 2;
+    if (insideDenseBounds(p, x, y) && (Math.abs(x + 0.5 - px) < 1 || Math.abs(y + 0.5 - py) < 1))
+      return RoadType.CityPavement;
+  }
   return RoadType.None;
 }

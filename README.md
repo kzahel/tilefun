@@ -113,6 +113,16 @@ frames the ray and shore groups, while the
 [kangaroo meadow](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-kangaroo&landscape=thicket#/tool/world-geometry)
 shows physical hops. Other native species arrivals are in the Scene selector.
 
+Fresh worlds also have connected farmsteads: dirt lanes branch from inter-town
+roads to a farmhouse, shed, crops and durable pasture animals. Cities have larger
+16- or 24-block neighborhoods, taller centers, shopping streets and two greens;
+villages stay compact. Cats and dogs live in safe settlement greens and persist
+as individuals. Inspect the [farmstead](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-farmstead&landscape=thicket#/tool/world-geometry),
+[village pets](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-village-pets&landscape=thicket#/tool/world-geometry),
+[city pets](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-city-pets&landscape=thicket#/tool/world-geometry)
+or [city center](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket#/tool/world-geometry)
+in temporary worlds with walking and Save / reload controls.
+
 ## Characters
 
 Open **Edit → Entities** to place Tiger, Tuxedo Cat, Floppy Dog, Trail Explorer,

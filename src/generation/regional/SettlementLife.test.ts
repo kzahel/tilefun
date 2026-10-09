@@ -15,10 +15,11 @@ import { startleFauna } from "../../wildlife/faunaInteractions.js";
 import { Chunk } from "../../world/Chunk.js";
 import { createDescriptor } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
-import { DenseDistrictSource, denseSurfaceAt } from "./DenseDistrictPlanner.js";
+import { DenseDistrictSource, denseDistrict, denseSurfaceAt } from "./DenseDistrictPlanner.js";
 import { FarmsteadSource } from "./FarmsteadPlanner.js";
 import { NaturalLandscape } from "./NaturalLandscape.js";
 import { pathDistance } from "./PlanGeometry.js";
+import { settlementForOwner } from "./RegionalPlanner.js";
 import { settlementGreenProps, settlementPets } from "./SettlementPets.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
@@ -259,3 +260,55 @@ it.each(["farmstead", "village-pets", "city-pets"])(
   },
   15000,
 );
+
+it("keeps villages compact while seeded cities gain dense cores, edges and two safe greens", () => {
+  const sizes = new Set<number>();
+  for (const seed of [7, 42, 2026, 98123]) {
+    const world = regionalWorld(seed),
+      source = new DenseDistrictSource(world, true);
+    for (let cy = -2; cy <= 2; cy++)
+      for (let cx = -2; cx <= 2; cx++) {
+        const settlement = settlementForOwner(world, cx, cy),
+          plan = source.owner(cx, cy);
+        if (!settlement || !plan) continue;
+        const frozen = denseDistrict(settlement, seed);
+        expect(frozen.blocks).toHaveLength(4);
+        expect(new DenseDistrictSource(world, false).owner(cx, cy)).toEqual(frozen);
+        expect(new DenseDistrictSource(world, true).owner(cx, cy)).toEqual(plan);
+        expect(plan.bounds.minX).toBeGreaterThanOrEqual(settlement.bounds.minX);
+        expect(plan.bounds.maxX).toBeLessThanOrEqual(settlement.bounds.maxX);
+        expect(plan.bounds.minY).toBeGreaterThanOrEqual(settlement.bounds.minY);
+        expect(plan.bounds.maxY).toBeLessThanOrEqual(settlement.bounds.maxY);
+        if (settlement.kind === "village") {
+          expect(plan.blocks).toHaveLength(4);
+          continue;
+        }
+        sizes.add(plan.blocks.length);
+        expect([16, 24]).toContain(plan.blocks.length);
+        expect(plan.blocks.filter((b) => b.kind === "park")).toHaveLength(2);
+        expect(settlementPets(plan, seed)).toHaveLength(4);
+        const lots = plan.blocks.flatMap((b) => b.lots);
+        expect(lots.length).toBeGreaterThanOrEqual(36);
+        expect(lots.some((l) => l.buildingType.endsWith("condo-bay-5"))).toBe(true);
+        expect(lots.some((l) => l.buildingType.endsWith("condo-bay-3"))).toBe(true);
+        expect(plan.actors).toHaveLength(plan.blocks.length + 1);
+        for (const block of plan.blocks.filter((b) => b.kind === "park"))
+          expect(
+            denseSurfaceAt(
+              plan,
+              Math.floor((block.bounds.minX + block.bounds.maxX) / 2),
+              Math.floor((block.bounds.minY + block.bounds.maxY) / 2),
+            ),
+          ).toBe(RoadType.CityPavement);
+      }
+  }
+  expect([...sizes].sort()).toEqual([16, 24]);
+});
+
+it("arrives at the current city center with the ordinary production recipe", () => {
+  const recipe = naturalLandscapeRecipe("city-center", "thicket");
+  const plan = required(new DenseDistrictSource(regionalWorld(2026), true).owner(0, 0));
+  expect(recipe.player.position.wx).toBe(plan.center.x * 16);
+  expect(recipe.player.position.wy).toBe(plan.center.y * 16);
+  expect(plan.recipe).toBe("current-dense-district-v1");
+});

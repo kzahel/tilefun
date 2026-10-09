@@ -39,7 +39,7 @@ export default function NaturalLandscapePage() {
       FAUNA_PROFILES.find((p) => p.species === caseId)?.inspectionZoom ??
         (caseId === "farmstead"
           ? 0.25
-          : ["village-pets", "city-pets"].includes(caseId)
+          : ["village-pets", "city-pets", "city-center"].includes(caseId)
             ? 0.3
             : caseId === "pond"
               ? 0.4
@@ -258,6 +258,12 @@ export default function NaturalLandscapePage() {
           })),
         );
         const view = h.session.view;
+        c.dataset.cityBuildingCount = String(
+          view.props.filter((p) => p.type.startsWith("prop-city-dense-v1-")).length,
+        );
+        c.dataset.cityWalkerCount = String(
+          view.entities.filter((e) => e.type.startsWith("person")).length,
+        );
         c.dataset.farmHouseCount = String(
           view.props.filter(
             (p) => p.proceduralId?.startsWith("farmstead:") && p.type === "prop-country-house",
@@ -333,7 +339,7 @@ export default function NaturalLandscapePage() {
       FAUNA_PROFILES.find((p) => p.species === nextCase)?.inspectionZoom ??
         (nextCase === "farmstead"
           ? 0.25
-          : ["village-pets", "city-pets"].includes(nextCase)
+          : ["village-pets", "city-pets", "city-center"].includes(nextCase)
             ? 0.3
             : nextCase === "pond"
               ? 0.4
@@ -388,9 +394,10 @@ export default function NaturalLandscapePage() {
       <p className="eyebrow">WORLD GEOMETRY LAB · LANDSCAPE PREVIEW</p>
       <h1>Natural landscapes</h1>
       <p>
-        Compare open meadows, woodland and small ponds. Extra dense adds staggered forest patterns
-        with solid interiors: walk around these thickets, between them and through clearings. These
-        temporary worlds leave your saved worlds unchanged.
+        Explore connected farmsteads, village greens and city neighborhoods alongside meadows,
+        woodland and ponds. Extra dense adds staggered forest patterns with solid interiors: walk
+        around these thickets, between them and through clearings. These temporary worlds leave your
+        saved worlds unchanged.
       </p>
       <div
         className="actions"

@@ -80,9 +80,22 @@ asset promotion and inclusion in the current generator are separate decisions.
 On 2026-10-09 the owner requested farmhouses and smaller dirt roads branching
 from inter-town roads, larger denser cities, and cats/dogs in towns and cities,
 then authorized proceeding. [083](../tactical/083-farms-town-pets-and-larger-cities.md)
-tracks connected farmsteads/town pets first and expanded current city layouts next.
-Reuse existing assets and durable fauna; keep compact villages, traffic-safe pet
-homes, seeded reservations and frozen review compositions separate.
+tracks delivery and whole-world validation. Current composition now includes
+connected farmsteads and durable settlement pets. Cities use a seeded 4×4 or 6×4
+grid (184×168 or 272×168 tiles), connected outer boulevards, shopping bands, taller central homes, lower
+residential edges and two greens; villages retain compact 2×2 grids. Native
+promoted facades retain their threshold-to-sidewalk connections. Each block has
+a pedestrian route and each green has one cat and one dog with a saved safe home
+boundary. Frozen authoring layouts, promoted asset banks and archived review
+records remain unchanged. Existing development worlds are disposable; inspect
+new generation in a fresh world or an in-memory lab.
+
+The [city center](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket#/tool/world-geometry),
+[village pets](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-village-pets&landscape=thicket#/tool/world-geometry)
+and [farmstead](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-farmstead&landscape=thicket#/tool/world-geometry)
+use the same production generator, shared Worker authority and persistence.
+Their local traffic is suppressed to focus inspection; ordinary game traffic
+remains enabled. Use the regional planning link for settlement-scale geometry.
 
 ## Next work
 

@@ -55,7 +55,9 @@ it("all admitted vehicle families turn on actual generated roads with stable roo
     scene.player.groundZ = height;
     const tick = scene.traffic.tick.bind(scene.traffic);
     scene.traffic.tick = (dt) => tick(dt, []);
-    for (let i = 0; i < 6000; i++) {
+    // Current cities span longer avenues. Exercise three completed choices rather
+    // than assuming the compact authoring grid's fixed 100-second route length.
+    for (let i = 0; i < 18000 && car.choices < 3; i++) {
       if (i % 60 === 0) {
         const cx = Math.floor(scene.player.position.wx / 256),
           cy = Math.floor(scene.player.position.wy / 256);
@@ -67,5 +69,6 @@ it("all admitted vehicle families turn on actual generated roads with stable roo
     expect(car.choices, model).toBeGreaterThan(2);
     expect(scene.player.wz, model).toBe(height);
   }
-  expect(admitted).toBe(43);
-}, 60000);
+  // The current city boulevard admits the folded ladder truck as well.
+  expect(admitted).toBe(44);
+}, 120000);
