@@ -30,7 +30,7 @@ candidate architecture or parked/park/pedestrian art is promoted.
 | --- | --- | --- | --- |
 | A | Dry connected farmstead, access lane, farmhouse/shed/crops/pasture; inspection arrival | Delivered; final regressions pending | 14 new units / 29 focused checks; six native browser checks pass; a0bb4bf |
 | B | Durable village/city cats and dogs, safe habitat bounds and pet inspection | Delivered; final regressions pending | Shared safe yards, clear spawns, saved state/tombstones; six native browser checks pass; a0bb4bf |
-| C | Larger denser current cities, compact villages, connected sidewalks/doors, city inspection | Delivered; final regressions running | 29 focused checks pass; native Canvas/GPU captures inspected |
+| C | Larger denser current cities, compact villages, connected sidewalks/doors, city inspection | Delivered; final regressions running | 29 focused checks pass; native Canvas/GPU captures inspected; fea3d52 |
 | D | Whole-world regressions, native Canvas/GPU inspection, streaming, docs and clean commits | Running | Full units and native capture pipeline started |
 
 Validate seeded/query-order/seam geometry and bounded planning; realized paths,
@@ -116,3 +116,44 @@ still pass. All 44 admitted vehicle families now complete three junction choices
 with stable roof support; raised-ladder traffic remains excluded. All 29 focused
 settlement/district/traffic checks pass in 24.94s. The old interrupted browser run
 used the pre-boulevard build; final complete regressions use the rebuilt source.
+
+
+D checkpoint: the rebuilt boulevard source passes all 2,047 unit tests in 219
+files (116.75s), typechecks, lint (existing 118 warnings / 34 infos), updated
+catalog/manifest and build. Final current-world streaming passes all six phases
+with zero missing-data, incomplete-cache or stale-cache frames, page errors or
+readiness failures. This is desktop Canvas readiness, not universal GPU/phone
+frame-pacing evidence. Exact 27 wildlife candidate objects and promoted banks,
+source pixels and archived snapshots are unchanged. Complete browser run pending.
+[Full units](/tmp/tilefun-settlement-full-units-final.log),
+[streaming report](/tmp/tilefun-settlement-streaming-final.json).
+
+
+Browser checkpoint: the larger population invalidates a former test-only
+assumption that sprite `person7` uniquely identifies the crossing walker. The
+old test deletes a different block walker, then incorrectly checks the crossing
+walker ID. Its selection now uses the generated crossing route and retains the
+exact persisted-ID assertion plus resumed-world checks. This is a test correction;
+production actor persistence is unchanged. The two recorded archived fox-preview
+review failures reproduce; immutable archive pixels/playback remain untouched.
+Final full suite and corrected saved-world check are pending.
+
+
+Integration audit follow-up: native rail stations begin beyond the established
++44-tile southern town edge. Symmetric four-row cities had extended into that
+reservation. Extra current city rows now grow northward while the original
+central intersection, road connection and southern edge stay fixed. Existing
+railway alignments/stops and frozen compact layouts are unchanged. New geometry
+coverage inspects physical building walls across four seeds and native nearby
+rail/platform reservations; all 30 focused settlement/district/traffic checks
+pass in 25.17s. Final-source full units and inventory verification are running.
+
+
+Final validation refinements: an isolated native ant probe observes the normal
+arrival alert/escape/recovery followed by ordinary crawl after the old five-second
+poll window. The motion assertion remains exact but allows twelve seconds for
+that complete activity cycle. No ant AI or source art changed. The concurrent
+final-source unit run passes 2046/2048; fish (20s) and forest-kit (5s) checks hit
+explicit timeouts. They will be rerun in the complete unit suite without a
+concurrent native browser run. Typechecks, lint, catalog/741 manifest identities
+pass for the rail-clear city source.

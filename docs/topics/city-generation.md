@@ -83,7 +83,9 @@ then authorized proceeding. [083](../tactical/083-farms-town-pets-and-larger-cit
 tracks delivery and whole-world validation. Current composition now includes
 connected farmsteads and durable settlement pets. Cities use a seeded 4×4 or 6×4
 grid (184×168 or 272×168 tiles), connected outer boulevards, shopping bands, taller central homes, lower
-residential edges and two greens; villages retain compact 2×2 grids. Native
+residential edges and two greens; villages retain compact 2×2 grids. Additional
+city rows grow northward, retaining the established +44-tile southern street
+edge and keeping native southern stations and rail approaches clear. Native
 promoted facades retain their threshold-to-sidewalk connections. Each block has
 a pedestrian route and each green has one cat and one dog with a saved safe home
 boundary. Frozen authoring layouts, promoted asset banks and archived review

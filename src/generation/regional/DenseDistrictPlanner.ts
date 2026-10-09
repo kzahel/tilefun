@@ -56,8 +56,10 @@ function planDenseDistrict(
   rows = 2,
 ): DenseDistrictPlan {
   const { x, y } = settlement.center;
+  // Keep the established southern station edge at +44; larger cities grow north.
+  const centerRow = columns > 2 ? rows - 1 : rows / 2;
   const xs = Array.from({ length: columns + 1 }, (_, i) => x + (i - columns / 2) * 44),
-    ys = Array.from({ length: rows + 1 }, (_, i) => y + (i - rows / 2) * 40);
+    ys = Array.from({ length: rows + 1 }, (_, i) => y + (i - centerRow) * 40);
   const bounds = {
     minX: item(xs, 0) - 4,
     minY: item(ys, 0) - 4,
@@ -116,10 +118,10 @@ function planDenseDistrict(
       };
       const id = `${settlement.id}:block:${col}:${row}`;
       const kind =
-        (row === rows / 2 && col === columns / 2) ||
+        (row === centerRow && col === columns / 2) ||
         (columns > 2 && row === rows - 1 && col === columns - 1)
           ? "park"
-          : row === rows / 2 - 1 && (columns > 2 || col === 1)
+          : row === centerRow - 1 && (columns > 2 || col === 1)
             ? "shops"
             : "homes";
       const block: DistrictBlock = { id, bounds: b, kind, lots: [] };
@@ -133,7 +135,7 @@ function planDenseDistrict(
             : columns > 2
               ? row === rows - 1 && col === 0
                 ? ["hotel-4-roof-sign", "condo-bay-3"]
-                : Math.abs(col + 0.5 - columns / 2) <= 1.5 && Math.abs(row + 0.5 - rows / 2) <= 1.5
+                : Math.abs(col + 0.5 - columns / 2) <= 1.5 && Math.abs(row + 0.5 - centerRow) <= 1.5
                   ? ["condo-bay-5", "condo-narrow-5"]
                   : ["condo-bay-3", "condo-bay-3"]
               : row === 1

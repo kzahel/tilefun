@@ -6,6 +6,8 @@ import { EntityManager } from "../../entities/EntityManager.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { PropManager } from "../../entities/PropManager.js";
 import { decodeActor, encodeActor } from "../../persistence/ActorRecords.js";
+import { nearestRail } from "../../railway/RailPath.js";
+import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import { RoadType } from "../../road/RoadType.js";
 import { naturalLandscapeRecipe } from "../../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../../scenarios/ScenarioSession.js";
@@ -312,3 +314,50 @@ it("arrives at the current city center with the ordinary production recipe", () 
   expect(recipe.player.position.wy).toBe(plan.center.y * 16);
   expect(plan.recipe).toBe("current-dense-district-v1");
 });
+
+it("keeps expanded city walls and walking routes clear of native rail and station reservations", () => {
+  let inspected = 0;
+  for (const seed of [7, 42, 2026, 98123]) {
+    const world = regionalWorld(seed),
+      source = new DenseDistrictSource(world, true),
+      rails = new RailwayPlanner(world);
+    for (let cy = -4; cy <= 4; cy++)
+      for (let cx = -4; cx <= 4; cx++) {
+        const p = source.owner(cx, cy);
+        if (!p || p.recipe !== "current-dense-district-v1") continue;
+        expect(p.bounds.maxY).toBe(p.center.y + 44);
+        const lines = rails.query(p.bounds);
+        for (const line of lines) {
+          inspected++;
+          for (const lot of p.blocks.flatMap((b) => b.lots)) {
+            const prop = createProp(lot.buildingType, lot.anchor.x * 16, lot.anchor.y * 16);
+            for (let y = lot.bounds.minY; y <= lot.bounds.maxY; y += 1)
+              for (let x = lot.bounds.minX; x <= lot.bounds.maxX; x += 1) {
+                const box = {
+                  left: x * 16 - 1,
+                  right: x * 16 + 1,
+                  top: y * 16 - 1,
+                  bottom: y * 16 + 1,
+                };
+                if (!aabbOverlapsPropWalls(box, prop.position, prop, 0)) continue;
+                expect(
+                  line.path
+                    ? nearestRail(line.path, x * 16, y * 16).distance
+                    : Math.abs(y - line.y) * 16,
+                  lot.id,
+                ).toBeGreaterThan(112);
+                for (const station of line.stations)
+                  expect(
+                    x >= station.platform.minX &&
+                      x < station.platform.maxX &&
+                      y >= station.platform.minY &&
+                      y < station.platform.maxY,
+                    lot.id,
+                  ).toBe(false);
+              }
+          }
+        }
+      }
+  }
+  expect(inspected).toBeGreaterThan(0);
+}, 15000);

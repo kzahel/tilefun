@@ -48,6 +48,9 @@ for (const profile of FAUNA_PROFILES) {
                     : 4),
             ),
           {
+            // Arrival can trigger a small group's normal alert/escape/recovery.
+            // Wait through that cycle before requiring an ordinary walking frame.
+            timeout: 12000,
             intervals: [30],
           },
         )

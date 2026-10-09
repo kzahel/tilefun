@@ -166,6 +166,7 @@ test("archived dense review hands off to the current station start with a moving
 test("dense building edits and actor tombstones survive saved-world inspection and resume", async ({
   page,
 }) => {
+  const crossing = required(plan.actors.find((a) => a.featureId.endsWith(":crossing:walker")));
   const generation = createDescriptor("regional", 2026);
   await page.goto(
     `/tilefun/world-explorer.html?generation=${encodeURIComponent(JSON.stringify(generation))}&x=300&y=519&zoom=16&mode=tiles`,
@@ -179,7 +180,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
   );
   await expect
     .poll(() =>
-      page.evaluate(() => {
+      page.evaluate((crossing) => {
         const g = (
           document.querySelector("#game") as unknown as {
             __game: import("../src/client/GameClient.js").GameClient;
@@ -188,12 +189,14 @@ test("dense building edits and actor tombstones survive saved-world inspection a
         return (
           g.stateView.props.some((p) => p.type.startsWith("prop-city-dense-v1-")) &&
           g.stateView.props.some((p) => p.type === "prop-street-lamp") &&
-          g.stateView.entities.some((e) => e.type === "person7")
+          g.stateView.entities.some(
+            (e) => e.type === crossing.type && Math.abs(e.position.wy - crossing.wy) < 2,
+          )
         );
-      }),
+      }, crossing),
     )
     .toBe(true);
-  const changed = await page.evaluate(async () => {
+  const changed = await page.evaluate(async (crossing) => {
     const g = (
       document.querySelector("#game") as unknown as {
         __game: import("../src/client/GameClient.js").GameClient;
@@ -201,7 +204,9 @@ test("dense building edits and actor tombstones survive saved-world inspection a
     ).__game;
     const building = g.stateView.props.find((p) => p.type.startsWith("prop-city-dense-v1-"));
     const lamp = g.stateView.props.find((p) => p.type === "prop-street-lamp");
-    const actor = g.stateView.entities.find((e) => e.type === "person7");
+    const actor = g.stateView.entities.find(
+      (e) => e.type === crossing.type && Math.abs(e.position.wy - crossing.wy) < 2,
+    );
     if (!building || !lamp || !actor) throw new Error("Missing dense residency");
     const wx = lamp.position.wx + 16,
       wy = lamp.position.wy;
@@ -226,11 +231,13 @@ test("dense building edits and actor tombstones survive saved-world inspection a
       worldId: g.mainMenu.currentWorldId,
       buildingId: building.proceduralId,
       lampId: lamp.proceduralId,
-      actorId: "settlement:0:0:crossing:walker",
+      actorId: crossing.featureId,
+      actorType: crossing.type,
+      actorY: crossing.wy,
       wx,
       wy,
     };
-  });
+  }, crossing);
   await page.goto(
     `/tilefun/world-explorer.html?worldId=${changed.worldId}&generation=${encodeURIComponent(JSON.stringify(generation))}&x=300&y=519&zoom=16&mode=tiles`,
   );
@@ -256,7 +263,9 @@ test("dense building edits and actor tombstones survive saved-world inspection a
         const lamp = g.stateView.props.find((p) => p.proceduralId === changed.lampId);
         return {
           deleted: !g.stateView.props.some((p) => p.proceduralId === changed.buildingId),
-          actorDeleted: !g.stateView.entities.some((e) => e.type === "person7"),
+          actorDeleted: !g.stateView.entities.some(
+            (e) => e.type === changed.actorType && Math.abs(e.position.wy - changed.actorY) < 2,
+          ),
           wx: lamp?.position.wx,
           wy: lamp?.position.wy,
         };
