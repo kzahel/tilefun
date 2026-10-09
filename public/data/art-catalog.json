@@ -3678,6 +3678,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:99"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:175"
         }
       ]
     },
@@ -3700,6 +3704,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:99"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:175"
         }
       ]
     },
@@ -4229,19 +4237,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:106"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:690"
+          "source": "src/generation/regional/NaturalLandscape.ts:694"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:884"
+          "source": "src/generation/regional/NaturalLandscape.ts:888"
         },
         {
           "system": "World generation",
@@ -4268,12 +4272,16 @@
           "source": "src/generation/regional/PublicSpaceRecipes.ts:38"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:22"
+        },
+        {
           "system": "Gameplay",
           "source": "src/wildlife/robinPerches.ts:9"
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:62"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:72"
         }
       ]
     },
@@ -4384,6 +4392,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:90"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:168"
         }
       ]
     },
@@ -4888,6 +4900,10 @@
           "source": "src/generation/regional/DistrictStrategy.ts:203"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:164"
+        },
+        {
           "system": "Interiors",
           "source": "src/interiors/GameplayInterior.ts:39"
         },
@@ -4993,7 +5009,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:102"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:103"
         },
         {
           "system": "World generation",
@@ -5083,10 +5099,6 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:107"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:211"
         },
         {
@@ -5104,6 +5116,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/PublicSpaceRecipes.ts:46"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:28"
         },
         {
           "system": "Street starter review (candidate)",
@@ -5183,7 +5199,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:108"
+          "source": "src/generation/regional/SettlementPets.ts:34"
         }
       ]
     },
@@ -23061,7 +23077,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2168"
+          "source": "src/server/Realm.ts:2171"
         },
         {
           "system": "Gameplay",
@@ -23194,6 +23210,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:123"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:182"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:182"
         },
         {
           "system": "Gameplay",
@@ -24477,19 +24501,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:106"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:690"
+          "source": "src/generation/regional/NaturalLandscape.ts:694"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:884"
+          "source": "src/generation/regional/NaturalLandscape.ts:888"
         },
         {
           "system": "World generation",
@@ -24516,12 +24536,16 @@
           "source": "src/generation/regional/PublicSpaceRecipes.ts:38"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/SettlementPets.ts:22"
+        },
+        {
           "system": "Gameplay",
           "source": "src/wildlife/robinPerches.ts:9"
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:62"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:72"
         }
       ]
     },
@@ -24644,6 +24668,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:90"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/FarmsteadPlanner.ts:168"
         }
       ]
     },
@@ -25045,7 +25073,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:65"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:75"
         }
       ]
     },

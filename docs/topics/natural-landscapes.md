@@ -10,6 +10,20 @@ generator policy and settlements; [world geometry](world-geometry.md) owns physi
 terrain elevation, slopes and stacked spaces. [Tactical 068](../tactical/068-natural-landscape-preview.md)
 records the first review delivery and validation.
 
+## Connected farmsteads and access lanes
+
+[083](../tactical/083-farms-town-pets-and-larger-cities.md) composes an independent
+farm planner upstream of natural cover. Long dry inter-town road connections can
+admit a country house, shed, crop patch and small durable mixed pasture, with a
+2.5-tile dirt access lane and front-yard approaches. Lots/lanes reject water,
+settlements, other roads and rail; their reservations exclude ponds, forest bands,
+scattered trunks and competing wildlife homes. Caches are bounded at 64 farm
+owners, and IDs derive from the connection owner/axis. Realized terrain, props
+and animal spawn-chunk ownership are shared by game, explorer and Worker labs.
+The old unused CountrySource woodland loop remains disconnected. No new art,
+generator version or saved-chunk backfill is introduced. Inspect seed 2026 at
+380,897 through **Countryside · connected farmstead**. Final validation is in 083.
+
 ## Durable pond wildlife
 
 The owner authorized provisional existing-art wildlife gameplay on 2026-10-09.

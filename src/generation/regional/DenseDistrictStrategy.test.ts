@@ -194,7 +194,7 @@ describe("current dense districts and approved art", () => {
         )
           for (const p of g.placements(x, y, new Set()).placements)
             props.set(required(p.featureId), createProp(p.propType, p.wx, p.wy));
-      const actors = actorPlacements(g, plan.bounds);
+      const actors = actorPlacements(g, plan.bounds).filter((a) => a.route.length > 0);
       expect(actors).toHaveLength(5);
       for (const a of actors) {
         const entity = required(ENTITY_FACTORIES[a.type])(a.wx, a.wy);

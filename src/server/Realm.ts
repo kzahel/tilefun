@@ -1719,6 +1719,9 @@ export class Realm {
     else
       for (let cy = range.minCy; cy <= range.maxCy; cy++)
         for (let cx = range.minCx; cx <= range.maxCx; cx++) this.world.getChunk(cx, cy);
+    // Explicit readiness fences may load chunks after the ordinary budgeted pass.
+    // Publish complete terrain even when authority will stay paused after reload.
+    this.world.computeAutotile(this.blendGraph);
   }
 
   async flushAsync(): Promise<void> {

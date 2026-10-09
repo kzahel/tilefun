@@ -17,6 +17,7 @@ import { createRobin, ROBIN_TYPE } from "../../wildlife/Robin.js";
 import type { ActorPlacement } from "../Generator.js";
 import { fbm, valueNoise } from "../noise.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
+import { FarmsteadSource } from "./FarmsteadPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
 import {
   type Bounds,
@@ -107,6 +108,7 @@ export function naturalHabitat(
 /** Bounded cells own ponds and reservation caches; tree IDs use an independent 4-tile lattice. */
 export class NaturalLandscape {
   readonly railways: RailwayPlanner;
+  readonly farms: FarmsteadSource;
   private dryRefugePlanner?: NaturalLandscape;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private lagoons = new Map<string, NaturalPond | null>();
@@ -122,6 +124,7 @@ export class NaturalLandscape {
   ) {
     landscapeProfile(profile);
     this.railways = new RailwayPlanner(world);
+    this.farms = new FarmsteadSource(world);
   }
   private buildReservations(cx: number, cy: number) {
     const bounds = {
@@ -136,7 +139,7 @@ export class NaturalLandscape {
       sampleStep: 128,
       limits: QUERY_LIMITS,
     });
-    return { region, lines: this.railways.query(bounds) };
+    return { region, lines: this.railways.query(bounds), farms: this.farms.query(bounds) };
   }
   /** r includes the proposed feature's footprint/visual clearance. */
   reserved(x: number, y: number, r = 3): boolean {
@@ -150,6 +153,7 @@ export class NaturalLandscape {
       if (this.reservations.size > 64)
         this.reservations.delete(this.reservations.keys().next().value ?? "");
     }
+    if (this.farms.reserved(plans.farms, x, y, r)) return true;
     if (plans.region.settlements.some((s) => near(s.bounds, x, y, r + 4))) return true;
     if (plans.region.connections.some((c) => pathDistance(c.points, x, y) <= c.width / 2 + r))
       return true;

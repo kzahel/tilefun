@@ -81,6 +81,17 @@ Static art/rail diagrams and frozen approval renders remain render fixtures.
 The original exported pixel-character galleries remain art-only pose/movement
 viewers; Character lab is the gameplay physics validation surface.
 
+## Explicit ready and paused terrain
+
+The farm/town-pet inspection in [083](../tactical/083-farms-town-pets-and-larger-cities.md)
+exposed partially initialized blend data after paused reload. Shared
+`Realm.ensureReady` now completes ordinary autotile preparation after awaited
+chunk loads, before publishing explicit-ready results. Live tick/load budgets
+remain unchanged. Headless tests require computed terrain both initially and
+after reload, without advancing individual clocks; Canvas/GPU captures check the
+same paused presentation. Natural candidate identities include the farm, pet,
+resident and district composition sources so changed layouts return to review.
+
 ## Headless integration usage
 
 ```ts

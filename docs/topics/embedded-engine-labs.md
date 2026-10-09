@@ -12,6 +12,16 @@ owns recipes, memory persistence and simulation hosting;
 [rendering architecture](rendering-architecture.md) owns presentation/backend
 contracts; [performance](performance.md) owns timing evidence and its limits.
 
+## Farmstead and settlement alignment
+
+[083](../tactical/083-farms-town-pets-and-larger-cities.md) adds generated farm and
+village/city pet arrivals to the existing natural Worker playground. All terrain,
+placements, durable animals, safe yards and AI are production generator behavior.
+Diagnostic scenery zooms frame the native compositions. Explicit ready/reload
+now finishes shared Realm autotile preparation after async loads; it does not
+advance authority or change live streaming budgets. Native Canvas/GPU tests cover
+motion, paused saved phase and fully prepared ground after reload.
+
 ## Remaining wildlife alignment
 
 [082](../tactical/082-complete-provisional-wildlife.md) tracks the remaining

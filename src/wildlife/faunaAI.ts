@@ -145,6 +145,15 @@ export function faunaHabitatAllows(
 ): boolean {
   const p = faunaProfile(animal.type);
   if (!p) return false;
+  const bounds = animal.fauna?.habitatBounds;
+  if (
+    bounds &&
+    (point.wx - p.body[0] / 2 < bounds.minX ||
+      point.wx + p.body[0] / 2 > bounds.maxX ||
+      point.wy - p.body[1] < bounds.minY ||
+      point.wy > bounds.maxY)
+  )
+    return false;
   if (p.habitat === "shore") return true;
   if (p.habitat !== "pond" && p.habitat !== "deep") return !environment.isWater(point);
   const water =

@@ -1,6 +1,8 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
+import { DenseDistrictSource } from "../generation/regional/DenseDistrictPlanner.js";
+import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
 import {
   type LandscapeProfile,
   NaturalLandscape,
@@ -19,6 +21,9 @@ export const NATURAL_CASES = [
     x: p.inspection[0],
     y: p.inspection[1],
   })),
+  { id: "farmstead", name: "Countryside · connected farmstead", seed: 2026, x: 380, y: 897 },
+  { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
+  { id: "city-pets", name: "City · cats & dogs", seed: 2026, x: 306, y: 540 },
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
   { id: "grove", name: "Open woodland", seed: 2026, x: -160, y: -512 },
   { id: "forest", name: "Woodland · individual trees", seed: 2026, x: -416, y: -512 },
@@ -47,6 +52,31 @@ export function naturalLandscapeRecipe(
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);
+  if (!at && ["farmstead", "village-pets", "city-pets"].includes(id)) {
+    const world = regionalWorld(point.seed);
+    let player: ReturnType<typeof createPlayer>;
+    if (id === "farmstead") {
+      const farm = new FarmsteadSource(world).owner(0, 0, "south");
+      if (!farm) throw Error("Missing connected farmstead inspection");
+      player = createPlayer(farm.center.x * 16, (farm.center.y + 3) * 16);
+    } else {
+      const plan = new DenseDistrictSource(world, true).owner(0, id === "village-pets" ? -1 : 0);
+      if (!plan) throw Error("Missing settlement inspection");
+      player = createPlayer(
+        (plan.park.minX - 1) * 16,
+        ((plan.park.minY + plan.park.maxY) / 2) * 16,
+      );
+    }
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: createDescriptor("regional", point.seed),
+      landscape: profile,
+      player,
+      props: [],
+      traffic: [],
+    };
+  }
   if (![point.x, point.y].every((n) => Number.isFinite(n) && Math.abs(n) <= 2 ** 23))
     throw new Error("Invalid landscape location");
   const n = new NaturalLandscape(regionalWorld(point.seed), profile);

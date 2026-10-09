@@ -14,6 +14,7 @@ import {
 import { DistrictStrategy, type FeaturePlacement } from "./DistrictStrategy.js";
 import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
+import { settlementGreenProps } from "./SettlementPets.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
 /** Shared dense realization using promoted facades, streets and walking routes.
@@ -100,12 +101,7 @@ export class DenseDistrictStrategy extends DistrictStrategy {
     for (const dx of [-14, 14])
       for (const dy of [-4.5, 4.5])
         add(`${plan.id}:lamp:${dx}:${dy}`, "prop-street-lamp", x + dx, y + dy);
-    const p = plan.park,
-      px = (p.minX + p.maxX) / 2,
-      py = (p.minY + p.maxY) / 2;
-    add(`${plan.id}:green:tree`, "prop-oak-tree", p.minX + 5, p.minY + 8);
-    add(`${plan.id}:green:bench`, "prop-bench", px + 5, p.maxY - 5);
-    add(`${plan.id}:green:fountain`, "prop-garden-fountain", px - 5, py + 5);
+    props.push(...settlementGreenProps(plan));
     return props;
   }
   actors(cx: number, cy: number): ActorPlacement[] {

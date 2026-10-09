@@ -57,6 +57,21 @@ Production-table checkpoint/completion helper still lacks ignored campaign state
 preserve its validated art table. Next gameplay work is density/habitat/activity
 playtesting, separate from existing art motion holds.
 
+## Settlement pets and farm residents
+
+[083](../tactical/083-farms-town-pets-and-larger-cities.md) adds one seeded cat and
+one dog per settlement green, alongside small mixed cow/sheep/goat/pig pastures
+at admitted farmsteads. They reuse the delivered native profiles, shared AI,
+records and harmless reactions. A saved optional `habitatBounds` rectangle in
+world pixels constrains the complete physical footprint along routine and escape
+paths, keeping pets in pedestrian-safe yards/greens away from road traffic.
+Initial positions avoid existing green furniture and each other. Manual animals
+keep their own ordinary homes; generation does not add respawns or catch-up.
+Deletion and exact individual phase/RNG survive reload. New profiles explicitly
+start at ground height zero, including individuals frozen outside active support.
+The village/city pet scenes and farm scene use production regional populations.
+083 owns incremental and final evidence; art motion holds remain unchanged.
+
 ## Provisional woodland deer
 
 The owner accepted the robin grove and authorized deer on 2026-10-09.

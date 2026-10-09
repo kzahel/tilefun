@@ -904,6 +904,8 @@ export interface FaunaBehavior {
   shelter: PositionComponent;
   radius: number;
   groupId?: string;
+  /** Optional planner-owned safe yard in world pixels; persisted with the individual. */
+  habitatBounds?: { minX: number; minY: number; maxX: number; maxY: number };
   state: "rest" | "action" | "startle" | "travel" | "flee" | "recover";
   timer: number;
   randomState: number;
@@ -951,6 +953,7 @@ export function createFauna(species: FaunaSpecies, wx: number, wy: number): Enti
   return {
     id: 0,
     type,
+    wz: 0,
     position: { wx, wy },
     velocity: { vx: 0, vy: 0 },
     sprite: {

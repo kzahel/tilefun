@@ -37,7 +37,13 @@ export default function NaturalLandscapePage() {
     [follow, setFollow] = useState(caseId === "train");
   const [zoom, setZoom] = useState(
       FAUNA_PROFILES.find((p) => p.species === caseId)?.inspectionZoom ??
-        (caseId === "pond" ? 0.4 : 0.8),
+        (caseId === "farmstead"
+          ? 0.25
+          : ["village-pets", "city-pets"].includes(caseId)
+            ? 0.3
+            : caseId === "pond"
+              ? 0.4
+              : 0.8),
     ),
     [reset, setReset] = useState(0),
     [error, setError] = useState("");
@@ -252,6 +258,14 @@ export default function NaturalLandscapePage() {
           })),
         );
         const view = h.session.view;
+        c.dataset.farmHouseCount = String(
+          view.props.filter(
+            (p) => p.proceduralId?.startsWith("farmstead:") && p.type === "prop-country-house",
+          ).length,
+        );
+        c.dataset.petCount = String(
+          fauna.filter((e) => ["cat", "dog"].includes(faunaProfile(e.type)?.species ?? "")).length,
+        );
         c.dataset.playerVz = String(view.serverPlayerEntity.jumpVZ ?? 0);
         c.dataset.playerMaxVz = String(
           Math.max(Number(c.dataset.playerMaxVz ?? 0), view.serverPlayerEntity.jumpVZ ?? 0),
@@ -317,7 +331,13 @@ export default function NaturalLandscapePage() {
     setFollow(nextCase === "train");
     setZoom(
       FAUNA_PROFILES.find((p) => p.species === nextCase)?.inspectionZoom ??
-        (nextCase === "pond" ? 0.4 : 0.8),
+        (nextCase === "farmstead"
+          ? 0.25
+          : ["village-pets", "city-pets"].includes(nextCase)
+            ? 0.3
+            : nextCase === "pond"
+              ? 0.4
+              : 0.8),
     );
     setMessage("");
     const url = new URL(location.href);
@@ -414,6 +434,8 @@ export default function NaturalLandscapePage() {
             value={zoom}
             onChange={(e) => setZoom(Number(e.target.value))}
           >
+            <option value={0.25}>Countryside</option>
+            <option value={0.3}>Scenery</option>
             <option value={0.4}>Wide</option>
             <option value={0.6}>Roomy</option>
             <option value={0.8}>Normal</option>
