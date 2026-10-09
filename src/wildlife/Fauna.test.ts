@@ -141,7 +141,7 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       expect(n.cacheSizes.faunaHomes).toBeLessThanOrEqual(128);
     });
 
-    it("walks on the ground and resumes exact saved movement/animation without vertical motion", () => {
+    it("resumes exact saved movement and native phase", () => {
       const manager = new EntityManager(),
         props = new PropManager(),
         animal = manager.spawn(createAnimal(64, 64));
@@ -158,11 +158,12 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
           () => 0,
         );
       expect(Math.hypot(animal.position.wx - 64, animal.position.wy - 64)).toBeCloseTo(
-        WALK_SPEED * 0.45,
+        p.hop ? 0 : WALK_SPEED * 0.45,
         3,
       );
-      expect(animal.wz).toBe(0);
-      expect(animal.jumpZ).toBeUndefined();
+      if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);
+      else expect(animal.wz).toBe(0);
+      if (!p.hop || !animal.fauna?.motion) expect(animal.jumpZ).toBeUndefined();
       expect(animal.sprite?.frameCol).toBe(
         required(CLIPS[1]).start + Math.floor(450 / required(CLIPS[1]).frameDuration),
       );
@@ -190,7 +191,8 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
         );
         expect(restored.position).toEqual(animal.position);
         expect(restored.fauna).toEqual(animal.fauna);
-        expect(animal.wz).toBe(0);
+        if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);
+        else expect(animal.wz).toBe(0);
       }
       expect(animal.fauna?.state).toBe("rest");
     });
@@ -258,14 +260,15 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
         );
       for (const animal of [first, second]) {
         expect(animal.fauna?.state).toBe("recover");
-        expect(animal.wz).toBe(0);
+        if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);
+        else expect(animal.wz).toBe(0);
         expect(animal.jumpVZ).toBeUndefined();
       }
     });
 
     it("loosely keeps herd company and rejects water/closed routes without an alarm retry loop", () => {
       const animal = createAnimal(64, 64),
-        peer = createAnimal(128, 64);
+        peer = createAnimal(64 + Math.max(64, p.body[0] * 2), 64);
       required(animal.fauna).groupId = required(peer.fauna).groupId = "companions";
       required(animal.fauna).timer = 0;
       updateFaunaAI(animal, 0.1, open, [animal, peer], []);
@@ -276,7 +279,7 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
             required(animal.fauna).target.wx - peer.position.wx,
             required(animal.fauna).target.wy - peer.position.wy,
           ),
-        ).toBeLessThan(64);
+        ).toBeLessThan(Math.max(64, p.body[0] * 2));
       const enclosed = createAnimal(64, 64);
       startleFauna(enclosed, { wx: 40, wy: 64 });
       updateFaunaAI(enclosed, 0.5, { ...open, isWater: () => true }, [enclosed], []);
@@ -328,8 +331,9 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
           await s.step(idle, 0.1);
           for (const d of animal()) {
             clips.add(d.sprite?.clip ?? 0);
-            expect(d.wz).toBe(0);
-            expect(d.jumpZ).toBeUndefined();
+            if (p.hop) expect(d.wz ?? 0).toBeGreaterThanOrEqual(0);
+            else expect(d.wz).toBe(0);
+            if (!p.hop || !d.fauna?.motion) expect(d.jumpZ).toBeUndefined();
             expect(
               Math.hypot(
                 d.position.wx - required(d.fauna).home.wx,

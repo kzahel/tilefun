@@ -19,7 +19,10 @@ contracts; [performance](performance.md) owns timing evidence and its limits.
 authority motion/interaction owners serve the normal game and Worker lab.
 Native regional arrivals, generic pose datasets and body-height-aware contact
 controls supply inspection only; no separate lab AI or collision is introduced.
-Pause/reload and both renderers are checked for each profile batch.
+Pause/reload and both renderers are checked for each profile batch. C adds
+native elephant/giraffe/kangaroo/cobra/ant arrivals and a Roomy camera zoom for
+large bodies. Kangaroo height and movement use the shared saved hop clock;
+inspection introduces no separate physics.
 
 ## Deer gameplay alignment
 

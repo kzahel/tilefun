@@ -11,6 +11,7 @@ import {
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
+import { faunaProfile } from "../wildlife/Fauna.js";
 import { prepareFaunaTravel, settleFauna } from "../wildlife/faunaInteractions.js";
 import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
@@ -379,6 +380,11 @@ export class EntityManager {
             ) < 0.5)
         )
           settleDeer(entity);
+        if (entity.fauna?.motion && faunaProfile(entity.type)?.hop) {
+          if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
+            settleFauna(entity, computeGroundZ(entity));
+          continue;
+        }
         if (
           entity.fauna?.motion &&
           (entity.fauna.motion.elapsed >= entity.fauna.motion.duration ||

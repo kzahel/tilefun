@@ -83,7 +83,10 @@ push-off/landing phases, swim, rest, blink and croak around grassy banks.
 Solitary foxes roam woodland clearings, pause to investigate and flick their tails.
 Cats and dogs explore rural clearings with cautious player interest. Small cow,
 sheep, horse, pig and goat groups walk in wider pastures, rest and play native
-ear/tail actions. Species have different speeds, spacing and home ranges.
+ear/tail actions. Elephant and giraffe groups use broad clearings; kangaroos
+hop with real push, flight and landing. Cobras slither harmlessly and small ant
+colonies crawl around woodland homes. Species have different speeds, spacing and
+home ranges.
 Woodland glades also have small seeded rabbit groups that hop, rest and play quiet
 action cycles. Robins hop and rest on dry woodland ground, fly to oak/palm crowns,
 and perch or sing before returning to ground. Small deer groups inhabit wider
@@ -93,7 +96,7 @@ automatically launches the player. Landing contact or a ball hit makes animals
 escape briefly and settle. Press Jump to jump off; moving animals can leave you
 to fall normally.
 They persist as individuals when you leave and return; deleted animals stay gone,
-with no timed respawns. **Edit → Entities → Mallard duck / Common frog / Rabbit / Robin / Deer / Red fox / Cat / Dog / Pasture cow / Sheep / Horse / Pig / Goat** adds saved
+with no timed respawns. **Edit → Entities → Mallard duck / Common frog / Rabbit / Robin / Deer / Red fox / Cat / Dog / Pasture cow / Sheep / Horse / Pig / Goat / Elephant / Giraffe / Kangaroo / King cobra / Ant** adds saved
 individuals, including in older worlds whose countryside chunks were already seeded.
 Try the [frog pond playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-frogs&landscape=thicket#/tool/world-geometry)
 and its **Hop onto frog** / **Hop onto duck** controls, or the

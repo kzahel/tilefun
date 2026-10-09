@@ -33,18 +33,18 @@ owner IDs stable. Existing draft motion holds/approval records remain untouched.
 | Slice | Animal | Habitat and baseline behavior | State | Commit / evidence |
 | --- | --- | --- | --- | --- |
 | A | Fox | Woodland edge; solitary roam, investigate pauses, tail flick, bounded escape | Complete | `518a18a`: 1,821 units, 411/413 full browser; four fox checks pass |
-| B | Cat | Rural clearing; short walks, rests/action, cautious player interest | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| B | Dog | Rural clearing; walks, rests/action, loose player interest | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| B | Cow | Broad pasture; small groups, slow walks, tail swish | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| B | Sheep | Pasture; tighter groups, walks, ear action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| B | Horse | Broad pasture; longer walks, rests, tail action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| B | Pig | Pasture edge; short walks, ear/tail action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| B | Goat | Dry meadow; loose groups, walks, ear/tail action | Complete | B: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| C | Elephant | Wide open refuge; slow grouped walks, trunk action | Planned | — |
-| C | Giraffe | Wide woodland-edge refuge; slow grouped walks, ear/tail action | Planned | — |
-| C | Kangaroo | Open meadow; physical timed hops, rests/listening action | Planned | — |
-| C | King cobra | Warm dry refuge; solitary slither, tongue action, harmless retreat | Planned | — |
-| C | Ant | Dry woodland floor; small colonies, crawls, antenna action | Planned | — |
+| B | Cat | Rural clearing; short walks, rests/action, cautious player interest | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Dog | Rural clearing; walks, rests/action, loose player interest | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Cow | Broad pasture; small groups, slow walks, tail swish | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Sheep | Pasture; tighter groups, walks, ear action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Horse | Broad pasture; longer walks, rests, tail action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Pig | Pasture edge; short walks, ear/tail action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| B | Goat | Dry meadow; loose groups, walks, ear/tail action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
+| C | Elephant | Wide open refuge; slow grouped walks, trunk action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | Giraffe | Wide woodland-edge refuge; slow grouped walks, ear/tail action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | Kangaroo | Open meadow; physical timed hops, rests/listening action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | King cobra | Warm dry refuge; solitary slither, tongue action, harmless retreat | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | Ant | Dry woodland floor; small colonies, crawls, antenna action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
 | D | Pond fish | Pond interior; swim, hover/feeding action, dart away | Planned | — |
 | D | Penguin | Broad water refuge and accessible shore; waddle, swim, flipper action | Planned | — |
 | D | Harbor seal | Broad water refuge and sandy shore; haul, swim, action | Planned | — |
@@ -159,3 +159,47 @@ stale caches, errors and failures (functional Canvas evidence).
 [streaming report](/tmp/tilefun-pasture-streaming/report.json).
 No art pixels, receipts or approval events changed. Checkpoint production-table
 refresh still lacks ignored campaign state; preserve the validated art snapshot.
+
+
+### Slice C checkpoint
+
+Elephant, giraffe, kangaroo, king cobra and ant use unchanged native source cells,
+anchors and idle/motion/action clips. Two-member elephant/giraffe/kangaroo groups,
+solitary cobra and four-member ant colonies have distinct body sizes, clearances,
+speeds and cohesion. Kangaroo uses its 1.6s native push (0–0.48s), flight
+(0.48–1.44s) and landing; a 16px physical arc and collision-resolved XY share the
+saved clock. A queued alarm preserves the committed hop, then uses a matched
+0.8s escape. Edited trunks can block arrival; no player trampoline impulse.
+
+Inspection arrivals, seed 2026: elephant 110,-89; giraffe 101,-150; kangaroo
+-21,-22; cobra 31,-156; ant 167,-32. Elephant/giraffe use a 0.6 Roomy zoom so both
+complete bodies fit; final four Canvas/GPU capture/contact checks pass in 28.3s.
+All 20 new-profile browser checks pass in 1.7m, including ordinary balls and
+manual creation/deletion across reopening. Native captures inspected. All 1,983
+units pass in 110s after rerunning a concurrent-validation 5s forest timeout;
+test behavior/assertions unchanged. Typechecks and lint pass (existing 118 warnings /
+34 infos). Catalog: 233 sheets / 1,078 uses; manifest: 709 verified candidates.
+All 27 exact wildlife objects are unchanged. Build and six-phase streaming
+readiness pass, zero final missing/incomplete/stale caches and errors/failures.
+Complete browser suite: **459/461** in 17.8m; all 52 profile checks, both complete
+train journeys and the phone ride pass. Only the two known archived fox-preview
+review failures remain. [Full log](/tmp/tilefun-refuge-browser-full.log).
+No art bytes/receipts/approval events changed.
+[Unit log](/tmp/tilefun-refuge-unit-final.log),
+[new-profile checks](/tmp/tilefun-refuge-browser-focused.log),
+[final wide captures](/tmp/tilefun-refuge-browser-captures.log),
+[elephant Canvas](/tmp/tilefun-fauna-elephant-canvas.png),
+[giraffe GPU](/tmp/tilefun-fauna-giraffe-gpu.png),
+[kangaroo GPU](/tmp/tilefun-fauna-kangaroo-gpu.png),
+[streaming report](/tmp/tilefun-refuge-streaming/report.json).
+
+
+Water prototype checkpoint (isolated source copy; C production source remains
+frozen during its full run): 26 focused water checks pass, including both actual
+production shore gaits, footprint confinement, blocked recovery, native metadata,
+durable phase/RNG and regional query-order/cache checks. NaturalStrategy must
+realize admitted lagoons as well as ponds; the production-path test caught and
+corrected the initial missing overlay in the prototype. The upstream dry-only
+planner protects admitted land homes before deciding a broad water refuge;
+there is no recursive call back into the water-enabled instance. Native activity
+phase also gains a saved clock alongside travel phase. Continue D after C commit.

@@ -17,7 +17,7 @@ for (const profile of FAUNA_PROFILES) {
       );
       const c = page.getByLabel("Natural landscape playground");
       await expect(c).toHaveAttribute("data-ready", "true");
-      await page.getByLabel("Landscape zoom").selectOption("0.8");
+      await page.getByLabel("Landscape zoom").selectOption(String(profile.inspectionZoom ?? 0.8));
       const poses = async () =>
         (
           JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]") as {
@@ -34,9 +34,15 @@ for (const profile of FAUNA_PROFILES) {
       const original = await poses();
       expect(original.length).toBeGreaterThanOrEqual(profile.group);
       await expect
-        .poll(async () => (await poses()).some((f) => f.clip === 1 && f.z === 0 && f.frame >= 4), {
-          intervals: [30],
-        })
+        .poll(
+          async () =>
+            (await poses()).some(
+              (f) => f.clip === 1 && (profile.hop ? f.z > 2 : f.z === 0) && f.frame >= 4,
+            ),
+          {
+            intervals: [30],
+          },
+        )
         .toBe(true);
       // Pause a routine walk as well as the escape below. This checks saved phase,
       // rather than assuming the client restarts its walk at frame zero.
@@ -70,7 +76,9 @@ for (const profile of FAUNA_PROFILES) {
       await expect
         .poll(
           async () =>
-            (await poses()).some((f) => f.state === "scared" && f.clip === 3 && f.z === 0),
+            (await poses()).some(
+              (f) => f.state === "scared" && f.clip === 3 && (profile.hop ? f.z > 2 : f.z === 0),
+            ),
           { intervals: [30] },
         )
         .toBe(true);
@@ -133,7 +141,7 @@ for (const profile of FAUNA_PROFILES) {
       .poll(
         async () => {
           const f = await deer();
-          return f.state === "scared" && f.clip === 3 && f.z === 0;
+          return f.state === "scared" && f.clip === 3 && (profile.hop ? f.z > 2 : f.z === 0);
         },
         { intervals: [30] },
       )

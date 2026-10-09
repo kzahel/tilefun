@@ -356,6 +356,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-elephant-provisional-v1",
+      "name": "wildlife elephant provisional v1",
+      "image": "demos/wildlife-v2/elephant/pilot-v2/sheet.png",
+      "width": 2352,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-giraffe-provisional-v1",
+      "name": "wildlife giraffe provisional v1",
+      "image": "demos/wildlife-v2/giraffe/draft-v1/sheet.png",
+      "width": 3600,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-kangaroo-provisional-v1",
+      "name": "wildlife kangaroo provisional v1",
+      "image": "demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "width": 1824,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-king-cobra-provisional-v1",
+      "name": "wildlife king cobra provisional v1",
+      "image": "demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "width": 1440,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ant-provisional-v1",
+      "name": "wildlife ant provisional v1",
+      "image": "demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "width": 480,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-frog-v1",
       "name": "wildlife frog v1",
       "image": "demos/wildlife-v2/frog/draft-v1/sheet.png",
@@ -21452,6 +21502,96 @@
       ]
     },
     {
+      "id": "sprite:wildlife-elephant-provisional-v1",
+      "sheetId": "wildlife-elephant-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2352,
+        448
+      ],
+      "label": "wildlife-elephant-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-giraffe-provisional-v1",
+      "sheetId": "wildlife-giraffe-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3600,
+        576
+      ],
+      "label": "wildlife-giraffe-provisional-v1 · registered 144×144 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-kangaroo-provisional-v1",
+      "sheetId": "wildlife-kangaroo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1824,
+        384
+      ],
+      "label": "wildlife-kangaroo-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-king-cobra-provisional-v1",
+      "sheetId": "wildlife-king-cobra-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1440,
+        384
+      ],
+      "label": "wildlife-king-cobra-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ant-provisional-v1",
+      "sheetId": "wildlife-ant-provisional-v1",
+      "rect": [
+        0,
+        0,
+        480,
+        128
+      ],
+      "label": "wildlife-ant-provisional-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-frog-v1",
       "sheetId": "wildlife-frog-v1",
       "rect": [
@@ -22949,7 +23089,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:170"
+          "source": "src/wildlife/Fauna.ts:172"
         }
       ]
     },

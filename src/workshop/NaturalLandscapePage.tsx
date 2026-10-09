@@ -35,7 +35,10 @@ export default function NaturalLandscapePage() {
   );
   const [paused, setPaused] = useState(false),
     [follow, setFollow] = useState(caseId === "train");
-  const [zoom, setZoom] = useState(caseId === "pond" ? 0.4 : 0.8),
+  const [zoom, setZoom] = useState(
+      FAUNA_PROFILES.find((p) => p.species === caseId)?.inspectionZoom ??
+        (caseId === "pond" ? 0.4 : 0.8),
+    ),
     [reset, setReset] = useState(0),
     [error, setError] = useState("");
   const [ready, setReady] = useState(false),
@@ -377,6 +380,7 @@ export default function NaturalLandscapePage() {
             onChange={(e) => setZoom(Number(e.target.value))}
           >
             <option value={0.4}>Wide</option>
+            <option value={0.6}>Roomy</option>
             <option value={0.8}>Normal</option>
             <option value={1.3}>Close</option>
           </select>

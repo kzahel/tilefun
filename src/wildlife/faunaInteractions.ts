@@ -47,7 +47,23 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
     p = faunaProfile(animal.type),
     motion = ai?.motion;
   if (!ai || !motion || !p || !animal.velocity || dt <= 0) return;
-  motion.elapsed = Math.min(motion.duration, motion.elapsed + dt);
+  const old = motion.elapsed;
+  motion.elapsed = Math.min(motion.duration, old + dt);
+  if (p.hop) {
+    const scale = motion.duration / p.hop.duration,
+      push = p.hop.push * scale,
+      land = p.hop.land * scale;
+    const start = Math.max(push, old),
+      end = Math.min(land, motion.elapsed);
+    const fraction = Math.max(0, end - start) / Math.max(0.0001, land - start);
+    animal.velocity.vx = ((ai.target.wx - animal.position.wx) * fraction) / dt;
+    animal.velocity.vy = ((ai.target.wy - animal.position.wy) * fraction) / dt;
+    const t = Math.max(0, Math.min(1, (motion.elapsed - push) / (land - push)));
+    const height = Math.sin(Math.PI * t) * p.hop.height;
+    animal.wz = (motion.startZ ?? 0) + ((motion.endZ ?? 0) - (motion.startZ ?? 0)) * t + height;
+    animal.jumpZ = height;
+    return;
+  }
   const dx = ai.target.wx - animal.position.wx,
     dy = ai.target.wy - animal.position.wy;
   const distance = Math.hypot(dx, dy);
@@ -55,13 +71,17 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
   animal.velocity.vx = distance > 0.001 ? (dx / distance) * speed : 0;
   animal.velocity.vy = distance > 0.001 ? (dy / distance) * speed : 0;
 }
-export function settleFauna(animal: Entity): void {
+export function settleFauna(animal: Entity, groundZ?: number): void {
   const ai = animal.fauna;
   if (!ai) return;
   const alarm = !!ai.alarmFrom,
     queued = alarm && ai.motion?.escaping === false;
   ai.state = queued ? "startle" : alarm ? "recover" : "rest";
   ai.timer = queued ? 0.4 : alarm ? 3 : 0.8;
+  if (animal.jumpZ !== undefined) {
+    animal.wz = groundZ ?? ai.motion?.endZ ?? 0;
+    delete animal.jumpZ;
+  }
   delete ai.motion;
   if (!queued) delete ai.alarmFrom;
   if (animal.velocity) animal.velocity.vx = animal.velocity.vy = 0;

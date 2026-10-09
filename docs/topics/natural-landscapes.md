@@ -327,3 +327,9 @@ regional generator, production Worker and inspection arrivals share this planner
 no saved-chunk backfill or timed population replacement is introduced. B passes
 1,915 units, 32 profile browser checks and streaming readiness; full browser
 439/441 has only the two known archived-art failures.
+
+Slice C activates elephant, giraffe, kangaroo, cobra and ants in the same fixed
+owner slots, with full-body dry reservations up to 16 tiles and grouped spacing
+for large animals. All 1,983 units and new-profile browser checks pass; full browser
+459/461 retains only the same two archived-art failures. Existing pond/forest
+composition, durable chunk ownership and provisional asset holds remain intact.

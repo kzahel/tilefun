@@ -116,7 +116,10 @@ export function updateFaunaAI(
   ai.state = escaping ? "flee" : "travel";
   ai.motion = {
     elapsed: 0,
-    duration: distance(target, animal.position) / (p.speed * (escaping ? 2 : 1)) + 0.15,
+    duration: p.hop
+      ? p.hop.duration * (escaping ? 0.5 : 1)
+      : distance(target, animal.position) / (p.speed * (escaping ? 2 : 1)) + 0.15,
+    ...(p.hop ? { startZ: animal.wz ?? 0, endZ: environment.surfaceZ?.(target) ?? 0 } : {}),
     escaping,
   };
   if (animal.wanderAI) animal.wanderAI.state = escaping ? "scared" : "walking";

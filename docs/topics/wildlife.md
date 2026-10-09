@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: durable ducks, frogs, meadow rabbits, woodland robins, deer, foxes, cats, dogs and five pasture species delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
+Status: durable ducks, frogs, meadow rabbits, woodland robins, deer, foxes, cats, dogs, five pasture species, elephant, giraffe, kangaroo, cobra and ants delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
 ## Autonomous completion of existing gameplay roster
@@ -22,11 +22,16 @@ profile/state owners supply durable motion and normal contact/balls. [Inspect fo
 at seed 2026, -598,-538. All 1,821 units, typechecks/lint/build, four fox browser
 checks and streaming readiness pass. Full browser: 411/413, only known archived-art
 failures; both city-train journeys pass. Tracker 082 owns details and the remaining
-nine species. Slice B completes seven domestic/pasture profiles: all 1,915 units,
+four species. Slice B completes seven domestic/pasture profiles: all 1,915 units,
 typechecks/lint/build, 32 profile browser checks and streaming readiness pass.
 Full browser: 439/441; only the same two archived-art failures remain. Both train
 journeys and phone roof ride pass. Native habitat arrivals and capture evidence
-are in 082. Continue with elephant, giraffe, kangaroo, cobra and ants.
+are in 082. Slice C completes elephant, giraffe, kangaroo, cobra and ants: all 1,983 units,
+typechecks/lint/build, 20 new-profile browser checks and streaming readiness pass.
+Full browser 459/461 has only the two known archived-art failures; both train
+journeys pass. Kangaroo physical push/flight/landing and its saved phase are shared
+with the game, alongside collision-resolved grounded motion for the other four.
+There are 18 integrated species; fish, penguin, seal and ray remain for D.
 Production-table helper still lacks ignored campaign state; preserve
 the validated table.
 
