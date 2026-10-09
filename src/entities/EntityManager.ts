@@ -1,3 +1,4 @@
+import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE_PX,
   DEFAULT_PHYSICAL_HEIGHT,
@@ -12,7 +13,7 @@ import {
 } from "../physics/surfaceHeight.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
-import { prepareFaunaTravel, settleFauna } from "../wildlife/faunaInteractions.js";
+import { prepareFaunaTravel, settleFauna, syncFaunaWater } from "../wildlife/faunaInteractions.js";
 import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import {
@@ -104,6 +105,7 @@ export class EntityManager {
    *   using their per-entity dt (accumulated from tick tiering).
    *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
    * @param skipEntityIds Optional entity IDs to freeze for this update pass.
+   * @param getTerrain Base terrain for deep-water-only body collision; supplied by production Realm.
    */
   update(
     dt: number,
@@ -113,6 +115,7 @@ export class EntityManager {
     entityTickDts?: ReadonlyMap<Entity, number>,
     getHeight?: (tx: number, ty: number) => number,
     skipEntityIds?: ReadonlySet<number>,
+    getTerrain?: (tx: number, ty: number) => number,
   ): void {
     const playerSet = new Set(players);
     const active = entityTickDts ? [...entityTickDts.keys()] : this.entities;
@@ -271,6 +274,14 @@ export class EntityManager {
       const entityDt = entityTickDts?.get(entity) ?? dt;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
       if (entity.deer?.motion) prepareDeerTravel(entity, entityDt);
+      if (entity.fauna)
+        syncFaunaWater(
+          entity,
+          (getCollision(Math.floor(entity.position.wx / 16), Math.floor(entity.position.wy / 16)) &
+            CollisionFlag.Water) !==
+            0,
+        );
+      if (entity.fauna?.actionElapsed !== undefined) entity.fauna.actionElapsed += entityDt;
       if (entity.fauna?.motion) prepareFaunaTravel(entity, entityDt);
       if (entity.robin?.motion) prepareRobinMotion(entity, entityDt);
       if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
@@ -292,7 +303,12 @@ export class EntityManager {
         const extraBlocker = isAquatic
           ? (aabb: AABB): boolean => {
               if (baseBlocker(aabb)) return true;
-              return aabbLacksWater(aabb, getCollision);
+              if (aabbLacksWater(aabb, getCollision)) return true;
+              return faunaProfile(entity.type)?.habitat === "deep" && getTerrain
+                ? aabbLacksWater(aabb, (tx, ty) =>
+                    getTerrain(tx, ty) === TerrainId.DeepWater ? CollisionFlag.Water : 0,
+                  )
+                : false;
             }
           : baseBlocker;
         const blocked = resolveCollision(
@@ -380,6 +396,16 @@ export class EntityManager {
             ) < 0.5)
         )
           settleDeer(entity);
+        if (entity.fauna)
+          syncFaunaWater(
+            entity,
+            (getCollision(
+              Math.floor(entity.position.wx / 16),
+              Math.floor(entity.position.wy / 16),
+            ) &
+              CollisionFlag.Water) !==
+              0,
+          );
         if (entity.fauna?.motion && faunaProfile(entity.type)?.hop) {
           if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
             settleFauna(entity, computeGroundZ(entity));
@@ -429,8 +455,11 @@ export class EntityManager {
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
-      if (entity.fauna?.motion)
-        setSpriteClipElapsed(entity, Math.round(entity.fauna.motion.elapsed * 1000));
+      if (entity.fauna?.motion || entity.fauna?.actionElapsed !== undefined)
+        setSpriteClipElapsed(
+          entity,
+          Math.round((entity.fauna.motion?.elapsed ?? entity.fauna.actionElapsed ?? 0) * 1000),
+        );
       else if (entity.deer?.motion)
         setSpriteClipElapsed(entity, Math.round(entity.deer.motion.elapsed * 1000));
       else if (entity.robin?.motion)

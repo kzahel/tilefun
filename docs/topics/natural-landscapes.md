@@ -333,3 +333,23 @@ owner slots, with full-body dry reservations up to 16 tiles and grouped spacing
 for large animals. All 1,983 units and new-profile browser checks pass; full browser
 459/461 retains only the same two archived-art failures. Existing pond/forest
 composition, durable chunk ownership and provisional asset holds remain intact.
+
+
+## Broad water refuges and complete provisional roster
+
+[082](../tactical/082-complete-provisional-wildlife.md) D adds three pond fish and
+rare broad water refuges (approximately 72×56 tiles of water plus open sandy
+banks). The one current regional generator admits these outside infrastructure,
+existing ponds and upstream admitted dry homes. A lazy dry-only planner protects
+homes without recursive water/forest dependencies; all its caches have the same
+hard bounds as the main planner. Ponds remain unchanged. Production subgrid
+realization, explorer and Worker use the same water/shore composition. Three
+penguins, two seals and a ray seed once with stable refuge/member IDs and normal
+records. Shore gait follows actual terrain; full-footprint water/depth collision
+confines aquatic bodies, including edited routes. These are provisional habitats
+using existing terrain, without a climate-system or art-promotion claim.
+
+Four-seed production probes find all 13 new dry-profile homes and pond/broad-water
+habitats for the four water/shore species; availability can be far from a start.
+All-22 residency and native query-order/body checks pass. 082 owns the final full
+browser result and exact evidence. Existing saved chunks are never backfilled.

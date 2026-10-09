@@ -107,7 +107,9 @@ export function naturalHabitat(
 /** Bounded cells own ponds and reservation caches; tree IDs use an independent 4-tile lattice. */
 export class NaturalLandscape {
   readonly railways: RailwayPlanner;
+  private dryRefugePlanner?: NaturalLandscape;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
+  private lagoons = new Map<string, NaturalPond | null>();
   private ponds = new Map<string, NaturalPond | null>();
   private faunaHomes = new Map<string, FaunaHome | null>();
   private deerGlades = new Map<string, RabbitGlade | null>();
@@ -116,6 +118,7 @@ export class NaturalLandscape {
   constructor(
     readonly world: RegionalWorld,
     readonly profile: LandscapeProfile,
+    private readonly waterRefuges = true,
   ) {
     landscapeProfile(profile);
     this.railways = new RailwayPlanner(world);
@@ -192,9 +195,153 @@ export class NaturalLandscape {
     const edge = 1 + fbm(x / 9, y / 9, this.world.seed + 7151, 2) * 0.18;
     return { pond, distance: radius / edge };
   }
+  /** Broad, rare water refuges; upstream of forests and wildlife to avoid planner cycles. */
+  lagoon(cx: number, cy: number): NaturalPond | null {
+    if (!this.waterRefuges) return null;
+    const key = `${cx},${cy}`;
+    if (this.lagoons.has(key)) return this.lagoons.get(key) ?? null;
+    const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
+    let lagoon: NaturalPond | null = null;
+    if (h(8201) < 0.22) {
+      const x = cx * 256 + 80 + h(8209) * 96,
+        y = cy * 256 + 80 + h(8211) * 96,
+        rx = 36,
+        ry = 28,
+        radius = 48;
+      let valid = !this.reserved(x, y, radius);
+      for (let dy = -radius; dy <= radius && valid; dy += 4)
+        for (let dx = -radius; dx <= radius && valid; dx += 4) valid = this.dry(x + dx, y + dy);
+      for (
+        let py = Math.floor((y - radius) / 128);
+        py <= Math.floor((y + radius) / 128) && valid;
+        py++
+      )
+        for (
+          let px = Math.floor((x - radius) / 128);
+          px <= Math.floor((x + radius) / 128) && valid;
+          px++
+        ) {
+          const pond = this.pond(px, py);
+          if (pond && near(pond.bounds, x, y, radius)) valid = false;
+        }
+      if (valid && !this.potentialDryHomeNear(x, y, radius))
+        lagoon = { id: `lagoon:${cx}:${cy}`, x, y, rx, ry, bounds: rect(x, y, radius) };
+    }
+    this.lagoons.set(key, lagoon);
+    if (this.lagoons.size > 128) this.lagoons.delete(this.lagoons.keys().next().value ?? "");
+    return lagoon;
+  }
+  /** The dry-only planner is upstream: it never admits lagoons or calls this instance. */
+  private potentialDryHomeNear(x: number, y: number, radius: number): boolean {
+    if (!this.dryRefugePlanner)
+      this.dryRefugePlanner = new NaturalLandscape(this.world, this.profile, false);
+    const dry = this.dryRefugePlanner;
+    const margin = radius + 24;
+    for (let cy = Math.floor((y - margin) / 64); cy <= Math.floor((y + margin) / 64); cy++)
+      for (let cx = Math.floor((x - margin) / 64); cx <= Math.floor((x + margin) / 64); cx++) {
+        const fauna = dry.faunaHome(cx, cy),
+          rabbit = dry.rabbitGlade(cx, cy),
+          deer = dry.deerGlade(cx, cy);
+        if (
+          [
+            fauna && { ...fauna, r: fauna.clearance },
+            rabbit && { ...rabbit, r: 8 },
+            deer && { ...deer, r: 11 },
+          ].some((h) => h && Math.hypot(h.x - x, h.y - y) < radius + h.r + 2)
+        )
+          return true;
+      }
+    return false;
+  }
+  lagoonAt(x: number, y: number) {
+    const pond = this.lagoon(Math.floor(x / 256), Math.floor(y / 256));
+    if (!pond || !near(pond.bounds, x, y, 0.01)) return undefined;
+    const radius = Math.hypot((x - pond.x) / pond.rx, (y - pond.y) / pond.ry);
+    const edge = 1 + fbm(x / 18, y / 18, this.world.seed + 8221, 2) * 0.08;
+    return { pond, distance: radius / edge };
+  }
+  private waterFauna(cx: number, cy: number): ActorPlacement[] {
+    const actors: ActorPlacement[] = [];
+    const pond = this.pond(Math.floor(cx / 8), Math.floor(cy / 8));
+    const lagoon = this.lagoon(Math.floor(cx / 16), Math.floor(cy / 16));
+    const add = (
+      species: FaunaSpecies,
+      refuge: NaturalPond,
+      home: { wx: number; wy: number },
+      positions: { wx: number; wy: number }[],
+    ) => {
+      const profile = FAUNA_PROFILES.find((p) => p.species === species);
+      if (!profile) return;
+      const groupId = `wildlife:${species}:${this.world.seed}:${refuge.id}`;
+      positions.forEach((point, i) => {
+        if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+        const fauna = createFauna(species, point.wx, point.wy).fauna;
+        if (!fauna) throw Error("Missing water fauna behavior");
+        fauna.home = { ...home };
+        fauna.shelter = { ...home };
+        if (profile.group > 1) fauna.groupId = groupId;
+        fauna.water = [TerrainId.DeepWater, TerrainId.ShallowWater].includes(
+          this.terrain(point.wx / 16, point.wy / 16),
+        );
+        fauna.randomState =
+          Math.floor(
+            valueNoise(
+              refuge.x,
+              refuge.y,
+              this.world.seed + 8241 + i + FAUNA_ROSTER.indexOf(species) * 19,
+            ) * 4294967296,
+          ) >>> 0;
+        fauna.timer = 1.5 + i * 0.5;
+        actors.push({
+          featureId: `${groupId}:${i}`,
+          type: faunaType(species),
+          wx: point.wx,
+          wy: point.wy,
+          route: [],
+          fauna,
+        });
+      });
+    };
+    if (pond) {
+      const home = { wx: pond.x * 16, wy: pond.y * 16 };
+      add(
+        "fish",
+        pond,
+        home,
+        [0, 1, 2].map((i) => ({
+          wx: home.wx + Math.cos((i * Math.PI * 2) / 3) * 24,
+          wy: home.wy + Math.sin((i * Math.PI * 2) / 3) * 24,
+        })),
+      );
+    }
+    if (lagoon) {
+      const home = { wx: lagoon.x * 16, wy: (lagoon.y - lagoon.ry * 0.45) * 16 };
+      add("manta-ray", lagoon, home, [home]);
+      // Opposite open sandy arcs give both shore groups space to change gait.
+      for (const species of ["penguin", "harbor-seal"] as const) {
+        const p = FAUNA_PROFILES.find((p) => p.species === species);
+        if (!p) continue;
+        const side = species === "penguin" ? -1 : 1;
+        const x = lagoon.x + side * lagoon.rx * 0.4;
+        const y = lagoon.y - lagoon.ry * Math.sqrt(1 - 0.4 ** 2) * 1.02;
+        const shore = { wx: x * 16, wy: y * 16 };
+        add(
+          species,
+          lagoon,
+          shore,
+          Array.from({ length: p.group }, (_, i) => ({
+            wx: shore.wx + (i - (p.group - 1) / 2) * (p.body[0] + 12),
+            wy: shore.wy,
+          })),
+        );
+      }
+    }
+    return actors;
+  }
+
   terrain(x: number, y: number): TerrainId {
     const base = regionalTerrainForElevation(plannedElevation(this.world, x, y));
-    const local = this.pondAt(x, y);
+    const local = this.pondAt(x, y) ?? this.lagoonAt(x, y);
     if (!local) return base;
     if (local.distance < 0.65) return TerrainId.DeepWater;
     if (local.distance < 1) return TerrainId.ShallowWater;
@@ -205,7 +352,15 @@ export class NaturalLandscape {
   /** Reserve an open ring around admitted ponds for wildlife and player access. */
   pondBank(x: number, y: number, clearance = 0): boolean {
     const p = this.pond(Math.floor(x / 128), Math.floor(y / 128));
-    return !!p && Math.hypot((x - p.x) / (p.rx + clearance), (y - p.y) / (p.ry + clearance)) < 1.5;
+    const bay = this.lagoon(Math.floor(x / 256), Math.floor(y / 256));
+    return (
+      (!!p && Math.hypot((x - p.x) / (p.rx + clearance), (y - p.y) / (p.ry + clearance)) < 1.5) ||
+      (!!bay &&
+        Math.hypot(
+          (x - bay.x) / (bay.rx * 1.3 + clearance),
+          (y - bay.y) / (bay.ry * 1.3 + clearance),
+        ) < 1)
+    );
   }
   /** Seed once; persistence owns subsequent movement and deletion, never a respawn timer. */
   wildlife(cx: number, cy: number): ActorPlacement[] {
@@ -215,6 +370,7 @@ export class NaturalLandscape {
       ...this.robins(cx, cy),
       ...this.deer(cx, cy),
       ...this.fauna(cx, cy),
+      ...this.waterFauna(cx, cy),
     ];
     if (!pond) return actors;
     const px = Math.floor(pond.x / 128),
@@ -740,6 +896,7 @@ export class NaturalLandscape {
       glades: this.glades.size,
       deerGlades: this.deerGlades.size,
       faunaHomes: this.faunaHomes.size,
+      lagoons: this.lagoons.size,
     };
   }
 }

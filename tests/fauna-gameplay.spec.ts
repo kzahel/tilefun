@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { TerrainId } from "../src/autotile/TerrainId.js";
 import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FAUNA_PROFILES, faunaType } from "../src/wildlife/Fauna.js";
@@ -21,6 +22,7 @@ for (const profile of FAUNA_PROFILES) {
       const poses = async () =>
         (
           JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]") as {
+            visible: boolean;
             id: number;
             species: string;
             x: number;
@@ -37,7 +39,13 @@ for (const profile of FAUNA_PROFILES) {
         .poll(
           async () =>
             (await poses()).some(
-              (f) => f.clip === 1 && (profile.hop ? f.z > 2 : f.z === 0) && f.frame >= 4,
+              (f) =>
+                (f.clip === 1 || (profile.habitat === "shore" && f.clip === 2)) &&
+                (profile.hop ? f.z > 2 : f.z === 0) &&
+                f.frame >=
+                  (profile.habitat === "shore" && f.clip === 2
+                    ? (profile.clips[2]?.start ?? 0) + 3
+                    : 4),
             ),
           {
             intervals: [30],
@@ -49,6 +57,7 @@ for (const profile of FAUNA_PROFILES) {
       await page.getByRole("button", { name: "Pause", exact: true }).click();
       await expect(c).toHaveAttribute("data-authority-running", "false");
       const before = await poses();
+      if (profile.habitat === "deep") expect(before.every((p) => p.visible)).toBe(true);
       await page.waitForTimeout(250);
       expect(await poses()).toEqual(before);
       await page.evaluate(() => window.scrollTo(0, 0));
@@ -66,7 +75,7 @@ for (const profile of FAUNA_PROFILES) {
         expect(r?.x).toBeCloseTo(f.x, 3);
         expect(r?.y).toBeCloseTo(f.y, 3);
         expect(r?.z).toBeCloseTo(f.z, 3);
-        if (f.clip === 1) expect(r?.frame).toBe(f.frame);
+        expect(r?.frame).toBe(f.frame);
       }
       await page.getByRole("button", { name: "Resume", exact: true }).click();
       await expect
@@ -77,7 +86,10 @@ for (const profile of FAUNA_PROFILES) {
         .poll(
           async () =>
             (await poses()).some(
-              (f) => f.state === "scared" && f.clip === 3 && (profile.hop ? f.z > 2 : f.z === 0),
+              (f) =>
+                f.state === "scared" &&
+                profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
+                (profile.hop ? f.z > 2 : f.z === 0),
             ),
           { intervals: [30] },
         )
@@ -100,6 +112,24 @@ for (const profile of FAUNA_PROFILES) {
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await page.getByTestId("main-menu-toggle").click();
     await page.getByRole("button", { name: "Edit", exact: true }).click();
+    if (["pond", "deep"].includes(profile.habitat)) {
+      await page.evaluate((terrainId) => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const p = g.stateView.playerEntity.position,
+          tx = Math.floor(p.wx / 16),
+          ty = Math.floor(p.wy / 16);
+        for (let y = ty - 12; y <= ty + 12; y++)
+          for (let x = tx + 3; x <= tx + 21; x++)
+            g.transport.send({
+              type: "edit-terrain-tile",
+              tx: x,
+              ty: y,
+              terrainId,
+              paintMode: "positive",
+              bridgeDepth: 0,
+            });
+      }, TerrainId.DeepWater);
+    }
     await page.evaluate((type) => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       const p = g.stateView.playerEntity.position;
@@ -141,7 +171,11 @@ for (const profile of FAUNA_PROFILES) {
       .poll(
         async () => {
           const f = await deer();
-          return f.state === "scared" && f.clip === 3 && (profile.hop ? f.z > 2 : f.z === 0);
+          return (
+            f.state === "scared" &&
+            profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
+            (profile.hop ? f.z > 2 : f.z === 0)
+          );
         },
         { intervals: [30] },
       )
@@ -212,3 +246,28 @@ for (const profile of FAUNA_PROFILES) {
     await page.screenshot({ path: `/tmp/tilefun-fauna-${profile.species}-game.png` });
   });
 }
+
+for (const renderer of ["canvas", "gpu"])
+  test(`wildlife scene switching keeps native framing (${renderer})`, async ({ page }) => {
+    await page.goto(
+      `/tilefun/workshop.html?geometry=nature-fox&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
+    );
+    const c = page.getByLabel("Natural landscape playground");
+    await expect(c).toHaveAttribute("data-ready", "true");
+    for (const [species, zoom] of [
+      ["giraffe", "0.6"],
+      ["manta-ray", "0.4"],
+      ["fish", "0.4"],
+    ] as const) {
+      await page.getByLabel("Landscape scene").selectOption(species);
+      await expect(page.getByLabel("Landscape zoom")).toHaveValue(zoom);
+      await expect
+        .poll(
+          async () =>
+            JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]").filter(
+              (p: { species: string }) => p.species === species,
+            ).length,
+        )
+        .toBeGreaterThan(0);
+    }
+  });

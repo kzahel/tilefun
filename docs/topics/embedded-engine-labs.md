@@ -22,7 +22,11 @@ controls supply inspection only; no separate lab AI or collision is introduced.
 Pause/reload and both renderers are checked for each profile batch. C adds
 native elephant/giraffe/kangaroo/cobra/ant arrivals and a Roomy camera zoom for
 large bodies. Kangaroo height and movement use the shared saved hop clock;
-inspection introduces no separate physics.
+inspection introduces no separate physics. D adds native fish/penguin/seal/ray
+arrivals using production water/shore/depth behavior. Stationary actions share
+durable clocks with travel. The ray camera frames both player and animal; native
+zoom presets apply on scene changes, and full-cell visibility is exposed only as
+a diagnostic. Body/ball/landing dispatch remains shared with the game.
 
 ## Deer gameplay alignment
 

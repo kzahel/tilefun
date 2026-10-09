@@ -1,6 +1,11 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { faunaProfile } from "./Fauna.js";
-import { restoreFaunaPose, settleFauna, startleFauna } from "./faunaInteractions.js";
+import {
+  restoreFaunaPose,
+  settleFauna,
+  startleFauna,
+  syncFaunaWater,
+} from "./faunaInteractions.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 
 const distance = (a: PositionComponent, b: PositionComponent) =>
@@ -16,6 +21,7 @@ export function updateFaunaAI(
     p = faunaProfile(animal.type),
     velocity = animal.velocity;
   if (!ai || !velocity || !animal.sprite || !p) return;
+  syncFaunaWater(animal, environment.isWater(animal.position));
   const random = () => {
     ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
     return ai.randomState / 4294967296;
@@ -38,6 +44,7 @@ export function updateFaunaAI(
   if (ai.timer > 0) return;
   const rest = () => {
     ai.state = "rest";
+    delete ai.actionElapsed;
     ai.timer = 2 + random() * 4;
     if (animal.wanderAI) animal.wanderAI.state = "idle";
     restoreFaunaPose(animal);
@@ -49,7 +56,9 @@ export function updateFaunaAI(
   const escaping = ai.state === "startle";
   if (!escaping && ++ai.activity % 3 === 0) {
     ai.state = "action";
-    ai.timer = ((p.clips[2]?.count ?? 1) * (p.clips[2]?.frameDuration ?? 100)) / 1000;
+    ai.actionElapsed = 0;
+    const action = p.clips.find((c) => c.name === "action");
+    ai.timer = ((action?.count ?? 1) * (action?.frameDuration ?? 100)) / 1000;
     restoreFaunaPose(animal);
     return;
   }
@@ -80,14 +89,14 @@ export function updateFaunaAI(
     let clear = true;
     const steps = Math.ceil(length / 4);
     for (let j = 1; j <= steps; j++) {
-      const p = {
+      const sample = {
         wx: animal.position.wx + ((point.wx - animal.position.wx) * j) / steps,
         wy: animal.position.wy + ((point.wy - animal.position.wy) * j) / steps,
       };
       if (
-        environment.isWater(p) ||
-        !environment.canOccupy(animal, p) ||
-        Math.abs((environment.surfaceZ?.(p) ?? 0) - (animal.wz ?? 0)) > 4
+        !faunaHabitatAllows(animal, sample, environment) ||
+        !environment.canOccupy(animal, sample) ||
+        Math.abs((environment.surfaceZ?.(sample) ?? 0) - (animal.wz ?? 0)) > 4
       ) {
         clear = false;
         break;
@@ -101,7 +110,8 @@ export function updateFaunaAI(
       ? gain - distance(point, ai.shelter) * 0.15
       : random() * 12 -
         cohesion * p.cohesion -
-        (players[0] ? distance(point, players[0]) * p.interest : 0);
+        (players[0] ? distance(point, players[0]) * p.interest : 0) +
+        (p.habitat === "shore" && environment.isWater(point) !== ai.water ? 24 : 0);
     if (score > best) {
       best = score;
       target = point;
@@ -112,6 +122,7 @@ export function updateFaunaAI(
     else rest();
     return;
   }
+  delete ai.actionElapsed;
   ai.target = target;
   ai.state = escaping ? "flee" : "travel";
   ai.motion = {
@@ -124,4 +135,26 @@ export function updateFaunaAI(
   };
   if (animal.wanderAI) animal.wanderAI.state = escaping ? "scared" : "walking";
   restoreFaunaPose(animal);
+}
+
+/** Check every footprint tile along aquatic paths, including edited shallow/deep edges. */
+export function faunaHabitatAllows(
+  animal: Entity,
+  point: PositionComponent,
+  environment: WildlifeEnvironment,
+): boolean {
+  const p = faunaProfile(animal.type);
+  if (!p) return false;
+  if (p.habitat === "shore") return true;
+  if (p.habitat !== "pond" && p.habitat !== "deep") return !environment.isWater(point);
+  const water =
+    p.habitat === "deep" ? (environment.isDeepWater ?? environment.isWater) : environment.isWater;
+  const left = point.wx - p.body[0] / 2,
+    top = point.wy - p.body[1] / 2,
+    right = point.wx + p.body[0] / 2 - 0.001,
+    bottom = point.wy + p.body[1] / 2 - 0.001;
+  for (let ty = Math.floor(top / 16); ty <= Math.floor(bottom / 16); ty++)
+    for (let tx = Math.floor(left / 16); tx <= Math.floor(right / 16); tx++)
+      if (!water({ wx: tx * 16 + 8, wy: ty * 16 + 8 })) return false;
+  return true;
 }

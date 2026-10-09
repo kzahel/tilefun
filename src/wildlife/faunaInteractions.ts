@@ -15,17 +15,29 @@ export function restoreFaunaPose(animal: Entity): void {
     );
     animal.sprite.frameRow = animal.sprite.direction;
   }
+  const swim = p.habitat === "shore" && ai.water;
+  const named = (name: string) => p.clips.findIndex((c) => c.name === name);
   setSpriteClip(
     animal,
     ai.state === "travel"
-      ? 1
+      ? swim
+        ? named("swim")
+        : 1
       : ai.state === "flee"
-        ? p.clips.length - 1
+        ? named(swim ? "flee-swim" : "flee")
         : ai.state === "action" || ai.state === "startle"
-          ? 2
+          ? named("action")
           : 0,
   );
-  setSpriteClipElapsed(animal, ai.motion ? Math.round(ai.motion.elapsed * 1000) : undefined);
+  animal.noShadow = !!ai.water;
+  setSpriteClipElapsed(
+    animal,
+    ai.motion
+      ? Math.round(ai.motion.elapsed * 1000)
+      : ai.actionElapsed !== undefined
+        ? Math.round(ai.actionElapsed * 1000)
+        : undefined,
+  );
 }
 /** One alarm through alert, escape and recovery; preserve any already committed walk. */
 export function startleFauna(animal: Entity, from: PositionComponent): boolean {
@@ -35,6 +47,7 @@ export function startleFauna(animal: Entity, from: PositionComponent): boolean {
   if (animal.wanderAI) animal.wanderAI.state = "scared";
   if (!ai.motion) {
     ai.state = "startle";
+    ai.actionElapsed = 0;
     ai.timer = 0.4;
     if (animal.velocity) animal.velocity.vx = animal.velocity.vy = 0;
     restoreFaunaPose(animal);
@@ -67,7 +80,10 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
   const dx = ai.target.wx - animal.position.wx,
     dy = ai.target.wy - animal.position.wy;
   const distance = Math.hypot(dx, dy);
-  const speed = Math.min(p.speed * (motion.escaping ? 2 : 1), distance / dt);
+  const speed = Math.min(
+    (ai.water ? (p.swimSpeed ?? p.speed) : p.speed) * (motion.escaping ? 2 : 1),
+    distance / dt,
+  );
   animal.velocity.vx = distance > 0.001 ? (dx / distance) * speed : 0;
   animal.velocity.vy = distance > 0.001 ? (dy / distance) * speed : 0;
 }
@@ -77,6 +93,8 @@ export function settleFauna(animal: Entity, groundZ?: number): void {
   const alarm = !!ai.alarmFrom,
     queued = alarm && ai.motion?.escaping === false;
   ai.state = queued ? "startle" : alarm ? "recover" : "rest";
+  if (queued) ai.actionElapsed = 0;
+  else delete ai.actionElapsed;
   ai.timer = queued ? 0.4 : alarm ? 3 : 0.8;
   if (animal.jumpZ !== undefined) {
     animal.wz = groundZ ?? ai.motion?.endZ ?? 0;
@@ -87,4 +105,17 @@ export function settleFauna(animal: Entity, groundZ?: number): void {
   if (animal.velocity) animal.velocity.vx = animal.velocity.vy = 0;
   if (animal.wanderAI) animal.wanderAI.state = alarm ? "scared" : "idle";
   restoreFaunaPose(animal);
+}
+
+/** Gait changes at the resolved position; phase remains tied to the durable motion clock. */
+export function syncFaunaWater(animal: Entity, water: boolean): void {
+  const p = faunaProfile(animal.type),
+    ai = animal.fauna;
+  if (!p || !ai || !["pond", "shore", "deep"].includes(p.habitat)) return;
+  const actual = p.habitat === "shore" ? water : true;
+  animal.noShadow = actual;
+  if (ai.water !== actual) {
+    ai.water = actual;
+    restoreFaunaPose(animal);
+  }
 }

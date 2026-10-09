@@ -19,7 +19,11 @@ export class NaturalStrategy extends RailwayStrategy {
       for (let sx = 0; sx < 33; sx++) {
         const terrain = this.nature.terrain(cx * 16 + sx / 2, cy * 16 + sy / 2);
         // Ponds were admitted against all infrastructure before realization.
-        if (terrain !== TerrainId.Grass && this.nature.pondAt(cx * 16 + sx / 2, cy * 16 + sy / 2)) {
+        if (
+          terrain !== TerrainId.Grass &&
+          (this.nature.pondAt(cx * 16 + sx / 2, cy * 16 + sy / 2) ||
+            this.nature.lagoonAt(cx * 16 + sx / 2, cy * 16 + sy / 2))
+        ) {
           chunk.setSubgrid(sx, sy, terrain);
           changed = true;
         }

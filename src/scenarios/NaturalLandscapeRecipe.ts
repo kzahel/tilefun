@@ -61,7 +61,12 @@ export function naturalLandscapeRecipe(
           n.reserved(x, y, 1) ||
           n.inThicket(x, y, 2) ||
           [-1, 0, 1].some((ox) =>
-            [-1, 0, 1].some((oy) => n.terrain(x + ox, y + oy) !== TerrainId.Grass),
+            [-1, 0, 1].some(
+              (oy) =>
+                ![TerrainId.Grass, TerrainId.Sand, TerrainId.SandLight].includes(
+                  n.terrain(x + ox, y + oy),
+                ),
+            ),
           )
         )
           continue;

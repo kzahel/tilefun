@@ -406,6 +406,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-fish-provisional-v1",
+      "name": "wildlife fish provisional v1",
+      "image": "demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "width": 720,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-penguin-provisional-v1",
+      "name": "wildlife penguin provisional v1",
+      "image": "demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-harbor-seal-provisional-v1",
+      "name": "wildlife harbor seal provisional v1",
+      "image": "demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "width": 2208,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-manta-ray-provisional-v1",
+      "name": "wildlife manta ray provisional v1",
+      "image": "demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "width": 3024,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-frog-v1",
       "name": "wildlife frog v1",
       "image": "demos/wildlife-v2/frog/draft-v1/sheet.png",
@@ -4197,11 +4237,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:534"
+          "source": "src/generation/regional/NaturalLandscape.ts:690"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:728"
+          "source": "src/generation/regional/NaturalLandscape.ts:884"
         },
         {
           "system": "World generation",
@@ -21592,6 +21632,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-fish-provisional-v1",
+      "sheetId": "wildlife-fish-provisional-v1",
+      "rect": [
+        0,
+        0,
+        720,
+        192
+      ],
+      "label": "wildlife-fish-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-penguin-provisional-v1",
+      "sheetId": "wildlife-penguin-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1600,
+        256
+      ],
+      "label": "wildlife-penguin-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-harbor-seal-provisional-v1",
+      "sheetId": "wildlife-harbor-seal-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2208,
+        384
+      ],
+      "label": "wildlife-harbor-seal-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-manta-ray-provisional-v1",
+      "sheetId": "wildlife-manta-ray-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3024,
+        576
+      ],
+      "label": "wildlife-manta-ray-provisional-v1 · registered 144×144 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-frog-v1",
       "sheetId": "wildlife-frog-v1",
       "rect": [
@@ -22945,11 +23057,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1207"
+          "source": "src/server/Realm.ts:1212"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2163"
+          "source": "src/server/Realm.ts:2168"
         },
         {
           "system": "Gameplay",
@@ -23089,7 +23201,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:172"
+          "source": "src/wildlife/Fauna.ts:173"
         }
       ]
     },
@@ -24373,11 +24485,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:534"
+          "source": "src/generation/regional/NaturalLandscape.ts:690"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:728"
+          "source": "src/generation/regional/NaturalLandscape.ts:884"
         },
         {
           "system": "World generation",

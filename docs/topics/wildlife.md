@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: durable ducks, frogs, meadow rabbits, woodland robins, deer, foxes, cats, dogs, five pasture species, elephant, giraffe, kangaroo, cobra and ants delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
+Status: all 22 existing-sheet species have durable provisional gameplay; final whole-roster validation is in progress. Art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
 ## Autonomous completion of existing gameplay roster
@@ -31,7 +31,16 @@ typechecks/lint/build, 20 new-profile browser checks and streaming readiness pas
 Full browser 459/461 has only the two known archived-art failures; both train
 journeys pass. Kangaroo physical push/flight/landing and its saved phase are shared
 with the game, alongside collision-resolved grounded motion for the other four.
-There are 18 integrated species; fish, penguin, seal and ray remain for D.
+D completes fish, penguin, seal and ray: all 2,031 units, typechecks/lint/build,
+68 profile browser checks, four framing checks and streaming readiness pass.
+All 22 species have seeded habitats, editor creation and durable residency.
+Fish/rays use footprint water/depth constraints; penguins/seals change gait at
+actual shores. Native stationary actions also retain exact saved phase.
+[Inspect the water refuge](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-manta-ray&landscape=thicket#/tool/world-geometry)
+at seed 2026, -656,-2997. First full browser: 476/479; the GPU duck recovery probe
+loses a replica at close zoom. Its corrected whole-pond, present-and-grounded
+probe passes six repeated checks; two known archived-art failures remain.
+082 E tracks the final full rerun. No duck physics or art is altered.
 Production-table helper still lacks ignored campaign state; preserve
 the validated table.
 

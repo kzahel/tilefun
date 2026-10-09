@@ -118,6 +118,26 @@ export default function NaturalLandscapePage() {
         const train = host.current?.session.view.entities.find((e) => e.type === CURVE_TRAIN);
         const target = settings.current.follow && train ? train : player;
         const p = interpolatePosition(target.position, target.prevPosition, alpha);
+        const selected = FAUNA_PROFILES.find((p) => p.species === caseId);
+        const ray =
+          selected?.habitat === "deep"
+            ? host.current?.session.view.entities.find(
+                (e) => e.type === faunaType(selected.species),
+              )
+            : undefined;
+        if (ray) {
+          const q = interpolatePosition(ray.position, ray.prevPosition, alpha);
+          return {
+            wx: (p.wx + q.wx) / 2,
+            wy:
+              (p.wy +
+                q.wy -
+                (interpolateWz(target, alpha) ?? 0) -
+                (interpolateWz(ray, alpha) ?? 0)) /
+                2 -
+              24,
+          };
+        }
         return { wx: p.wx, wy: p.wy - (interpolateWz(target, alpha) ?? 0) - 24 };
       },
       settings: () => ({
@@ -194,16 +214,28 @@ export default function NaturalLandscapePage() {
         );
         const fauna = h.session.view.entities.filter((e) => faunaProfile(e.type));
         c.dataset.faunaPoses = JSON.stringify(
-          fauna.map((e) => ({
-            id: e.id,
-            species: faunaProfile(e.type)?.species,
-            x: e.position.wx,
-            y: e.position.wy,
-            z: e.wz ?? 0,
-            clip: e.sprite?.clip,
-            frame: e.sprite?.frameCol,
-            state: e.wanderAI?.state,
-          })),
+          fauna.map((e) => {
+            const p = faunaProfile(e.type);
+            const point = h.camera.worldToScreen(e.position.wx, e.position.wy - (e.wz ?? 0));
+            const scale = h.camera.scale;
+            const visible =
+              !!p &&
+              point.sx - (p.size / 2) * scale >= 0 &&
+              point.sx + (p.size / 2) * scale <= h.camera.viewportWidth &&
+              point.sy - p.anchor[1] * scale >= 0 &&
+              point.sy + (p.size - p.anchor[1]) * scale <= h.camera.viewportHeight;
+            return {
+              visible,
+              id: e.id,
+              species: faunaProfile(e.type)?.species,
+              x: e.position.wx,
+              y: e.position.wy,
+              z: e.wz ?? 0,
+              clip: e.sprite?.clip,
+              frame: e.sprite?.frameCol,
+              state: e.wanderAI?.state,
+            };
+          }),
         );
         const deer = h.session.view.entities.filter((e) => e.type === DEER_TYPE);
         c.dataset.deerCount = String(deer.length);
@@ -283,7 +315,10 @@ export default function NaturalLandscapePage() {
     setCaseId(nextCase);
     setProfile(nextProfile);
     setFollow(nextCase === "train");
-    setZoom(nextCase === "pond" ? 0.4 : 0.8);
+    setZoom(
+      FAUNA_PROFILES.find((p) => p.species === nextCase)?.inspectionZoom ??
+        (nextCase === "pond" ? 0.4 : 0.8),
+    );
     setMessage("");
     const url = new URL(location.href);
     url.searchParams.set("geometry", `nature-${nextCase}`);

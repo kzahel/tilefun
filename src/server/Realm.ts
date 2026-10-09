@@ -1,5 +1,6 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { applyPlayerModel } from "../characters/PlayerModels.js";
 import {
   CHUNK_SIZE_PX,
@@ -878,6 +879,9 @@ export class Realm {
             (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
               CollisionFlag.Water) !==
             0,
+          isDeepWater: (p) =>
+            this.world.getBlendBaseAt(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) ===
+            TerrainId.DeepWater,
           canOccupy: (entity, p) => {
             if (!entity.collider) return false;
             const box = getEntityAABB(p, entity.collider);
@@ -918,6 +922,7 @@ export class Realm {
           entityTickDts,
           (tx, ty) => this.world.getHeightAt(tx, ty),
           preSteppedEntityIds,
+          (tx, ty) => this.world.getBlendBaseAt(tx, ty),
         );
 
         this.traffic?.tick(

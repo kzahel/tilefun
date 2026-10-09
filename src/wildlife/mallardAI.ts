@@ -6,6 +6,7 @@ import { settleMallard } from "./mallardInteractions.js";
 export interface WildlifeEnvironment {
   canOccupy(entity: Entity, point: PositionComponent): boolean;
   isWater(point: PositionComponent): boolean;
+  isDeepWater?(point: PositionComponent): boolean;
   surfaceZ?(point: PositionComponent): number;
   perches?(home: PositionComponent, radius: number): readonly import("./Robin.js").RobinPerch[];
 }

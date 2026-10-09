@@ -101,7 +101,8 @@ for (const renderer of ["canvas", "gpu"]) {
     );
     const c = page.getByLabel("Natural landscape playground");
     await expect(c).toHaveAttribute("data-ready", "true");
-    await page.getByLabel("Landscape zoom").selectOption("1.3");
+    // Keep the complete escape inside the observed pond rather than losing its replica.
+    await page.getByLabel("Landscape zoom").selectOption("0.4");
     const poses = async () =>
       JSON.parse((await c.getAttribute("data-wildlife-poses")) ?? "[]") as {
         id: number;
@@ -131,10 +132,16 @@ for (const renderer of ["canvas", "gpu"]) {
     expect(restored?.z).toBeCloseTo(flying?.z ?? 0, 3);
     await page.getByRole("button", { name: "Resume", exact: true }).click();
     await expect
-      .poll(async () => (await poses()).find((d) => d.id === restored?.id)?.state, {
-        timeout: 10000,
-      })
-      .not.toBe("scared");
+      .poll(
+        async () => {
+          const duck = (await poses()).find((d) => d.id === restored?.id);
+          return !!duck && duck.state !== "scared" && duck.z === 0;
+        },
+        {
+          timeout: 10000,
+        },
+      )
+      .toBe(true);
     expect((await poses()).find((d) => d.id === restored?.id)?.z).toBe(0);
     expect(errors).toEqual([]);
   });

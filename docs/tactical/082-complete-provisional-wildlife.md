@@ -40,16 +40,16 @@ owner IDs stable. Existing draft motion holds/approval records remain untouched.
 | B | Horse | Broad pasture; longer walks, rests, tail action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
 | B | Pig | Pasture edge; short walks, ear/tail action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
 | B | Goat | Dry meadow; loose groups, walks, ear/tail action | Complete | `2ae4b50`: 1,915 units, 439/441 full browser; 32 profile checks pass |
-| C | Elephant | Wide open refuge; slow grouped walks, trunk action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
-| C | Giraffe | Wide woodland-edge refuge; slow grouped walks, ear/tail action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
-| C | Kangaroo | Open meadow; physical timed hops, rests/listening action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
-| C | King cobra | Warm dry refuge; solitary slither, tongue action, harmless retreat | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
-| C | Ant | Dry woodland floor; small colonies, crawls, antenna action | Complete | C: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
-| D | Pond fish | Pond interior; swim, hover/feeding action, dart away | Planned | — |
-| D | Penguin | Broad water refuge and accessible shore; waddle, swim, flipper action | Planned | — |
-| D | Harbor seal | Broad water refuge and sandy shore; haul, swim, action | Planned | — |
-| D | Manta ray | Broad deep-water refuge; swim loops, action, water-confined retreat | Planned | — |
-| E | Whole world | Habitat distribution, budgets, all-species game/lab parity and regressions | Planned | — |
+| C | Elephant | Wide open refuge; slow grouped walks, trunk action | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | Giraffe | Wide woodland-edge refuge; slow grouped walks, ear/tail action | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | Kangaroo | Open meadow; physical timed hops, rests/listening action | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | King cobra | Dry woodland refuge; solitary slither, tongue action, harmless retreat | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| C | Ant | Dry woodland floor; small colonies, crawls, antenna action | Complete | `64fe198`: 1,983 units, 459/461 full browser; 20 new-profile checks pass |
+| D | Pond fish | Pond interior; swim, rest/action, dart away | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| D | Penguin | Broad water refuge and accessible shore; waddle, swim, flipper action | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| D | Harbor seal | Broad water refuge and sandy shore; haul, swim, action | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| D | Manta ray | Broad deep-water refuge; swim loops, action, water-confined retreat | Complete | D: 2,031 units; 68 profile + four framing + six recovery checks pass |
+| E | Whole world | Habitat distribution, budgets, all-species game/lab parity and regressions | Verification | Four-seed habitats, all-22 residency pass; full browser in progress |
 
 A introduces reusable profile-driven authority motion/state with one fully proven
 species. B/C extend it only where behavior fits, with timed hops as a separate
@@ -203,3 +203,78 @@ corrected the initial missing overlay in the prototype. The upstream dry-only
 planner protects admitted land homes before deciding a broad water refuge;
 there is no recursive call back into the water-enabled instance. Native activity
 phase also gains a saved clock alongside travel phase. Continue D after C commit.
+
+
+### Slice D checkpoint
+
+All remaining existing profiles are active: pond fish, penguin, harbor seal and
+manta ray. Native cells/anchors/clip ranges remain frozen. Fish/rays use full-body
+water paths and ordinary aquatic collision; production Realm supplies deep terrain
+to collision so rays also stop when a committed route is edited to shallows.
+Penguins/seals use actual resolved shores to change native walk/haul and swim
+clips, with species-specific swim speeds and paired escape cadence. Routine
+shore steering favors the opposite medium; groups remain loosely cohesive.
+Stationary action/alert phase now has a saved clock alongside motion phase.
+
+Ponds seed three fish. Rare 256-tile owners admit 72×56-tile water areas plus banks, outside
+infrastructure/existing ponds and protected admitted dry homes; sandy open rings
+reserve trees/forest bands. A lazy upstream dry-only planner has independent
+bounded caches and never calls back into water-enabled planning. Production
+NaturalStrategy realizes the same pond/lagoon subgrid overlay as explorer/lab.
+Marine refuges seed three penguins, two seals and a ray with stable member IDs.
+No timer respawns, catch-up or backfill. Inspection seed 2026: fish 227,-183;
+penguin -676,-2997; seal -637,-2997; ray -656,-2997, beside lagoon:-3:-12.
+
+Typechecks and **118 focused headless checks** pass: 28 water/phase/depth checks,
+68 common body/contact/ball checks for all 17 new profiles and eviction/return
+checks for all 22 species. Existing land body tests moved unchanged into the
+shared all-profile suite, with actual water setup for aquatic Realm fixtures.
+Complete units, lint, inventories/build and profile browsers follow.
+[Focused log](/tmp/tilefun-water-unit-focused.log). Prototype four-seed probes
+(7,42,2026,98123) found all 13 dry-profile homes, ponds and broad water refuges;
+final production probe and full regressions will supply E evidence. No art bytes,
+receipts or approval events changed. Persist this checkpoint before table refresh.
+
+
+D final verification checkpoint: **2,031 units**, typechecks/lint pass (existing
+118 warnings / 34 infos). Catalog: 237 sheets / 1,082 source uses; manifest:
+725 verified candidates. All 27 exact wildlife review objects are unchanged.
+All **68 profile browser checks** pass in 5.1m. Final Canvas/GPU ray framing and
+scene-switch checks pass 4/4 in 16.7s; native water captures inspected. The deep
+inspection camera frames the player and ray together, with a full-cell visibility
+assertion; changing scenes uses their native zoom presets. Actual water bounds
+and no-shadow swim poses remain shared production behavior. Build passes.
+Six-phase streaming readiness exits 0 with zero missing/incomplete/stale caches,
+errors/failures (functional Canvas evidence). Complete browser run follows.
+[Units](/tmp/tilefun-water-unit.log),
+[profile browsers](/tmp/tilefun-water-browser-focused.log),
+[final framing](/tmp/tilefun-water-browser-framing.log),
+[fish Canvas](/tmp/tilefun-fauna-fish-canvas.png),
+[penguin Canvas](/tmp/tilefun-fauna-penguin-canvas.png),
+[seal GPU](/tmp/tilefun-fauna-harbor-seal-gpu.png),
+[ray GPU](/tmp/tilefun-fauna-manta-ray-gpu.png),
+[streaming report](/tmp/tilefun-water-streaming/report.json).
+
+E production habitat probe passes for seeds 7,42,2026,98123: all 13 new dry
+species have admitted homes, plus existing ponds and broad marine refuges for the
+four water/shore species. Search stops at owner-ring radii 12,30,12,35 respectively;
+this is availability evidence, not a claim that every animal is near every start.
+Cache counts remain at existing hard bounds. Broad per-species clearance, actual
+spawn-chunk ownership, query-order/native body checks and all-22 residency are
+covered by the unit suite. [Production habitat report](/tmp/tilefun-roster-distribution.json).
+Final full browser result and clean incremental commits will close D/E.
+
+
+D implementation complete: first full run **476/479** in 19.0m. All 70 profile/
+scene-switch checks, both train journeys and phone ride pass. Besides the two
+known archived-art failures, the GPU duck recovery probe loses its replica at
+close 1.3 zoom; its `not scared` poll wrongly accepts absence before the final
+height assertion. The unchanged probe passes three isolated reruns. The corrected
+probe observes the whole pond at 0.4 and requires the same duck to be present,
+grounded and recovered; all six repeated Canvas/GPU checks pass. Duck physics,
+landing/height assertions and native art remain unchanged. Preserve the original
+failure and result; E reruns the full suite against the strengthened probe.
+[First full log](/tmp/tilefun-water-browser-full.log),
+[failure capture](/tmp/tilefun-water-duck-failure/test-failed-1.png),
+[unchanged reproduction](/tmp/tilefun-water-duck-repro.log),
+[corrected recovery checks](/tmp/tilefun-water-duck-fixed.log).
