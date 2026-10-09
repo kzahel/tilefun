@@ -70,7 +70,11 @@ keep their own ordinary homes; generation does not add respawns or catch-up.
 Deletion and exact individual phase/RNG survive reload. New profiles explicitly
 start at ground height zero, including individuals frozen outside active support.
 The village/city pet scenes and farm scene use production regional populations.
-083 owns incremental and final evidence; art motion holds remain unchanged.
+083 is complete: final full units and native animal/settlement gameplay checks
+pass, including bounded homes, motion/contact, saved phase and deletion. Its
+completion record retains the two known immutable art-preview failures and the
+missing ignored campaign-progress file that prevents production-table refresh.
+Art motion holds remain unchanged.
 
 ## Provisional woodland deer
 

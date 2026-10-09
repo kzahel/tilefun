@@ -2,7 +2,7 @@
 
 Owner: [city generation](../topics/city-generation.md), with
 [natural landscapes](../topics/natural-landscapes.md) and [wildlife](../topics/wildlife.md).
-Started 2026-10-09. Status: active. Owner authorized proceeding after the proposed
+Started 2026-10-09. Status: complete. Owner authorized proceeding after the proposed
 farmstead/town-pet first slice and larger-city follow-up. Commit validated slices.
 
 ## Contract
@@ -28,10 +28,10 @@ candidate architecture or parked/park/pedestrian art is promoted.
 
 | Slice | Scope | State | Evidence / commit |
 | --- | --- | --- | --- |
-| A | Dry connected farmstead, access lane, farmhouse/shed/crops/pasture; inspection arrival | Delivered; final regressions pending | 14 new units / 29 focused checks; six native browser checks pass; a0bb4bf |
-| B | Durable village/city cats and dogs, safe habitat bounds and pet inspection | Delivered; final regressions pending | Shared safe yards, clear spawns, saved state/tombstones; six native browser checks pass; a0bb4bf |
-| C | Larger denser current cities, compact villages, connected sidewalks/doors, city inspection | Delivered; final regressions running | 29 focused checks pass; native Canvas/GPU captures inspected; fea3d52 |
-| D | Whole-world regressions, native Canvas/GPU inspection, streaming, docs and clean commits | Running | Full units and native capture pipeline started |
+| A | Dry connected farmstead, access lane, farmhouse/shed/crops/pasture; inspection arrival | Complete | 14 new units / 29 focused checks; six native browser checks pass; a0bb4bf |
+| B | Durable village/city cats and dogs, safe habitat bounds and pet inspection | Complete | Shared safe yards, clear spawns, saved state/tombstones; six native browser checks pass; a0bb4bf |
+| C | Larger denser current cities, compact villages, connected sidewalks/doors, city inspection | Complete | 29 focused checks pass; native Canvas/GPU captures inspected; fea3d52 |
+| D | Whole-world regressions, native Canvas/GPU inspection, streaming, docs and clean commits | Complete | 2,048 units pass; 485/487 browsers, only recorded archive failures; six streaming phases pass |
 
 Validate seeded/query-order/seam geometry and bounded planning; realized paths,
 collision-free initial animals, territory constraints, saved/deleted residents;
@@ -157,3 +157,57 @@ final-source unit run passes 2046/2048; fish (20s) and forest-kit (5s) checks hi
 explicit timeouts. They will be rerun in the complete unit suite without a
 concurrent native browser run. Typechecks, lint, catalog/741 manifest identities
 pass for the rail-clear city source.
+
+
+Serial final-source units pass all 2,048 tests / 219 files (106.78s), and build
+passes. The corrected persisted-ID test and both native ant cycles pass. Focused
+browser capture detects seven streamed center walkers after northward city
+growth, rather than the old symmetric view's nine. The city-center native check
+now requires the crossing plus the four surrounding block routes (at least five);
+headless full-city checks still require exact 17/25 routes and 16/24 blocks.
+Final native/streaming checks continue on this fixed source.
+
+
+Focused completion: all thirteen native checks pass in 50.2s, including the
+corrected dense saved-world tombstone, both ant motion/contact/saved-phase cycles
+and all eight farm/settlement scenes. Final northward city-center GPU capture
+was visually inspected. The implementation is fixed; remaining work is the
+serial complete browser suite and final evidence/closure.
+
+
+## Completion
+
+All requested slices are delivered in the current regional-v13 composition:
+connected dry farmsteads and dirt access lanes, six durable pasture residents per
+farm, one durable cat/dog per green, compact villages and larger 16/24-block
+cities with connected boulevards, dense cores, lower edges and rail-clear southern
+stations. Inspect fresh development worlds or the four native in-memory arrivals.
+No source art, promoted banks or immutable archived review snapshots changed.
+
+Final source: typechecks, lint (existing 118 warnings / 34 infos), catalog, 741
+verified candidate identities and build pass. All 2,048 unit tests in 219 files
+pass (106.78s). Thirteen focused native checks pass (50.2s), followed by the
+complete browser run: 485/487 pass in 19.5m. Its only failures are the two
+previously recorded immutable fox-preview review checks (`wildlife-review.spec.ts`
+14/72); no archive regeneration or weakened review checks. All wildlife gameplay,
+the eight new farm/settlement checks, saved-world actor tombstones, both complete
+city-train journeys and phone roof riding pass. Final streaming has six clean
+phases, with no page errors, readiness failures, missing/incomplete/stale terrain
+frames. This is desktop Canvas readiness, not universal GPU/phone pacing proof.
+
+All 27 existing wildlife candidate objects remain exact. Gameplay progress is
+persisted here and in owning topics before the final wildlife-status refresh.
+The refresh cannot run without ignored `data/wildlife-campaign-v2/progress.json`;
+retain the last validated production table rather than fabricate campaign receipts.
+
+[Final full units](/tmp/tilefun-settlement-units-serial.log),
+[focused native checks](/tmp/tilefun-settlement-focused-completion-final.log),
+[complete browser run](/tmp/tilefun-settlement-browser-completion.log),
+[streaming report](/tmp/tilefun-settlement-streaming-completion.json),
+[city GPU capture](/tmp/tilefun-city-center-gpu.png),
+[farm GPU capture](/tmp/tilefun-farmstead-gpu.png).
+
+Commits: `b3f6db3` plan, `a0bb4bf` farm/pets and explicit terrain readiness,
+`fea3d52` city expansion/boulevards, `25c2534` station-clear northward growth
+and native test identity/timing corrections, followed by final evidence closure.
+Next: owner playtest of farm spacing, dirt-lane approaches and city density.

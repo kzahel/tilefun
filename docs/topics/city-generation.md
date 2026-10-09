@@ -116,3 +116,10 @@ Continue reviewing the thirteen city-place views before promotion. Later city wo
 includes farmers markets, connected parks, frontage variety and richer schedules.
 Performance evidence lives under [performance](performance.md); feedback rules live
 under [art review](art-review.md).
+
+
+The [083 completion](../tactical/083-farms-town-pets-and-larger-cities.md#completion)
+records 2,048 passing units and 485/487 browser checks; the remaining two are
+recorded immutable wildlife-preview failures. Native farms/pets/cities, exact
+actor tombstones, both complete train journeys and streaming readiness pass.
+Next: playtest farm spacing, lane approaches and city density in a fresh world.

@@ -15,7 +15,7 @@ contracts; [performance](performance.md) owns timing evidence and its limits.
 ## Farmstead and settlement alignment
 
 [083](../tactical/083-farms-town-pets-and-larger-cities.md) adds generated farm and
-village/city pet arrivals to the existing natural Worker playground. All terrain,
+village/city pet and larger city-center arrivals to the existing natural Worker playground. All terrain,
 placements, durable animals, safe yards and AI are production generator behavior.
 Diagnostic scenery zooms frame the native compositions. Explicit ready/reload
 now finishes shared Realm autotile preparation after async loads; it does not

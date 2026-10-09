@@ -63,9 +63,11 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(async () => Number(await c.getAttribute("data-city-building-count")))
       .toBeGreaterThanOrEqual(20);
+    // At the southern center, require the crossing and surrounding blocks.
+    // The full 17/25-route population is covered across the city in unit checks.
     await expect
       .poll(async () => Number(await c.getAttribute("data-city-walker-count")))
-      .toBeGreaterThanOrEqual(9);
+      .toBeGreaterThanOrEqual(5);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await expect(c).toHaveAttribute("data-authority-running", "false");
     const buildings = (await c.getAttribute("data-city-building-count")) ?? "";
