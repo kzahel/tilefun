@@ -327,6 +327,13 @@ tickets remain deferred.
 
 ## Current regression evidence
 
+The 2026-10-09 robin integration full run passes both Canvas/GPU complete
+city-train journeys, including mid-bend world reopening and alighting, plus the
+phone roof ride. Full suite: 403/405, with only the known archived wildlife-art
+failures. No train behavior/test changed in that slice. This adds successful
+current evidence without claiming the earlier intermittent support loss fixed.
+[Full robin browser log](/tmp/tilefun-robin-browser-full.log).
+
 The 2026-10-09 [rabbit slice](../tactical/079-durable-meadow-rabbits.md) full browser
 run passed the Canvas city journey but failed the GPU journey at the post-reopen
 roof-height check (expected 44, received 0). The isolated GPU rerun passed the

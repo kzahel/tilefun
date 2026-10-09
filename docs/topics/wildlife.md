@@ -1,8 +1,54 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: durable ducks, frogs and meadow rabbits delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
+Status: durable ducks, frogs, meadow rabbits and woodland robins delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
+
+## Provisional woodland robins
+
+The owner authorized the next robin slice on 2026-10-09, including tree perching.
+[080](../tactical/080-durable-woodland-robins.md) owns implementation and validation.
+Unchanged draft-v2 drawing-03/motion-02 supplies native 32px idle/hop/flap/song
+cycles (anchor 16,25; 120ms frames). This remains unapproved provisional gameplay.
+Sparse individuals seed once beside eligible existing oaks with dry clear ground,
+world/tree/member IDs, independent RNG and 112px home ranges. No timed replacement,
+catch-up or backfill of previously seeded chunks; manual **Edit → Entities → Robin**
+creates an ordinary saved individual. Deletions remain tombstoned.
+
+The routine alternates grounded hops, quiet rests, short flights to tree crowns,
+perched rests/songs and flights back down. Actual oak/palm crown walls supply
+perches (32px/48px tops), including manually placed trees; moved/deleted trees
+immediately change eligible perches and normal support tracking. No decorative
+branch points or scenery-only collision is introduced. The normal shared depth
+ordering keeps elevated birds visible above their tree. Native hops have a 0.24s
+stationary push, 5px physical arc and landing/settle; flights take 1.6s with a
+44px arc and looping native flap frames. Both use ordinary collision-resolved XY,
+not teleports, and restore elevation/timeline/frame phase on hydration.
+
+Approach, landing contact and balls queue one bounded escape followed by 2.5s
+recovery. An alarm during motion preserves its trajectory before escape; repeated
+hits do not restart it. Clear routes reject water, solid paths, occupied landings
+and targets toward the threat; enclosed birds recover in place. Player landing
+is ordinary support without an upward impulse; Jump remains explicit. The main
+game plays a quiet provisional spatial three-note chirp on songs/startles.
+Interactive labs intentionally remain silent.
+
+[Inspect the robin grove](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-robins&landscape=thicket#/tool/world-geometry):
+production seed 2026 at -163,-519 tiles, in-memory Worker world, with Pause,
+Save / reload scene and **Hop onto robin**. Shared headless crown support, tree
+edits, physical trajectories, binary phases, player contact with/without input,
+no-bounce prediction and durable residency checks pass. All 1,795 unit tests,
+typechecks, lint and build pass. All 18 focused wildlife browser checks pass,
+including Canvas/GPU robin flight/perching, pause/reload, contact, ordinary balls
+and manual creation/deletion. The full browser run passes **403/405** (13.5m):
+all 18 wildlife checks and both complete city-train journeys pass; only the two
+previous archived-preview review failures remain. The earlier intermittent train
+failure did not recur in either renderer. Isolated streaming readiness passes all
+six phases with zero final missing/incomplete/stale caches, errors and failures;
+functional Canvas readiness evidence only. 080 retains the detailed evidence. Catalog contains 219 sheets / 1,064 source uses; manifest verifies 653
+candidates, with all 27 exact wildlife review candidates unchanged. Art production
+is still repair-only; the production-table helper lacks ignored campaign state,
+so preserve the validated table rather than fabricate receipts.
 
 ## Wildlife support: no automatic player bounce
 

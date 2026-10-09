@@ -91,6 +91,8 @@ import type { IServerTransport } from "../transport/Transport.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
+import { startleRobin } from "../wildlife/robinInteractions.js";
+import { robinTreePerches } from "../wildlife/robinPerches.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -860,6 +862,15 @@ export class Realm {
               this.streaming.supported(prop, stepDt)),
         );
         tickAllAI(active, playerPositions, decisions, this.options.random ?? Math.random, {
+          perches: (home, radius) =>
+            robinTreePerches(
+              this.propManager.getPropsInChunkRange(
+                Math.floor((home.wx - radius) / 256),
+                Math.floor((home.wy - radius) / 256),
+                Math.floor((home.wx + radius) / 256),
+                Math.floor((home.wy + radius) / 256),
+              ),
+            ),
           surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
           isWater: (p) =>
             (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
@@ -1893,7 +1904,8 @@ export class Realm {
     if (outcome.wildlifeContactId !== undefined) {
       const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
       if (animal) {
-        if (animal.rabbit) startleRabbit(animal, p.position);
+        if (animal.robin) startleRobin(animal, p.position);
+        else if (animal.rabbit) startleRabbit(animal, p.position);
         else if (animal.frog) startleFrog(animal, p.position);
         else startleMallard(animal, p.position);
         this.records?.changed(animal);

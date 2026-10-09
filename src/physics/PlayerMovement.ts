@@ -24,6 +24,7 @@ import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
+import { ROBIN_TYPE } from "../wildlife/Robin.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { clearAirMomentum, clipAirMomentum, inheritAirMomentum } from "./AirborneMomentum.js";
 import type { MovementContext } from "./MovementContext.js";
@@ -600,7 +601,10 @@ export function tickJumpGravity(
         entity.type === "player" && footprint
           ? entities?.find(
               (e) =>
-                (e.type === MALLARD_TYPE || e.type === FROG_TYPE || e.type === RABBIT_TYPE) &&
+                (e.type === MALLARD_TYPE ||
+                  e.type === FROG_TYPE ||
+                  e.type === RABBIT_TYPE ||
+                  e.type === ROBIN_TYPE) &&
                 e.collider?.solid !== false &&
                 e.collider &&
                 Math.abs((e.wz ?? 0) + (e.collider.physicalHeight ?? 0) - groundZ) < 0.001 &&

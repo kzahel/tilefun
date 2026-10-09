@@ -37,6 +37,21 @@ historical-world backfill. Ordinary worlds, explorer exact realization and the
 **Meadow · rabbits & woodland edge** lab share the same planner. Existing saved
 populations/props retain their normal records; use fresh countryside for this slice.
 
+## Durable tree-edge robins
+
+[080](../tactical/080-durable-woodland-robins.md) adds sparse individual robins beside
+eligible ordinary oaks. A deterministic tree/member gate admits 22% of candidates;
+dry grass, infrastructure/thicket clearance and other trunks validate each ground
+spawn 28px to a tree's side. A one-chunk halo discovers trees before assigning
+ownership to the actual spawn chunk, keeping seams and query order stable.
+Each bird has a 112px home range (targets retain a small separation margin) and
+uses existing crown surfaces plus nearby clear ground. Existing landscape trees
+already supply both ground gaps and elevated perches; no canopy pixels, solid
+forest patterns, promoted banks or historical snapshots change. The production
+world and **Grove · robins & tree perches** lab share seed 2026 at -163,-519.
+Actual resident oak/palm props, including editor trees, own perches. No old saved
+chunk backfill or timed replenishment is introduced.
+
 ## User direction
 
 Train travel between towns currently feels like plain grass. The request is for

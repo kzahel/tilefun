@@ -5,6 +5,7 @@ import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
+import { createRobin, ROBIN_TYPE } from "../../wildlife/Robin.js";
 import type { ActorPlacement } from "../Generator.js";
 import { fbm, valueNoise } from "../noise.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
@@ -192,7 +193,7 @@ export class NaturalLandscape {
   /** Seed once; persistence owns subsequent movement and deletion, never a respawn timer. */
   wildlife(cx: number, cy: number): ActorPlacement[] {
     const pond = this.pond(Math.floor(cx / 8), Math.floor(cy / 8));
-    const actors = this.rabbits(cx, cy);
+    const actors = [...this.rabbits(cx, cy), ...this.robins(cx, cy)];
     if (!pond) return actors;
     const px = Math.floor(pond.x / 128),
       py = Math.floor(pond.y / 128);
@@ -321,6 +322,48 @@ export class NaturalLandscape {
         if (glade && Math.hypot(x - glade.x, y - glade.y) < 7) return true;
       }
     return false;
+  }
+  /** Sparse individuals at ordinary tree edges with both dry ground and real crowns.
+   * Discover a halo before assigning the spawn's owner; IDs never depend on query order. */
+  private robins(cx: number, cy: number): ActorPlacement[] {
+    const trees = new Map<string, FeaturePlacement>();
+    for (let dy = -1; dy <= 1; dy++)
+      for (let dx = -1; dx <= 1; dx++)
+        for (const p of this.placements(cx + dx, cy + dy))
+          if (p.propType === "prop-oak-tree") trees.set(p.featureId, p);
+    const actors: ActorPlacement[] = [];
+    for (const tree of trees.values()) {
+      const gx = Math.floor(tree.wx / 64),
+        gy = Math.floor(tree.wy / 64);
+      if (valueNoise(gx, gy, this.world.seed + 7801) > 0.22) continue;
+      const side = valueNoise(gx, gy, this.world.seed + 7803) < 0.5 ? -1 : 1;
+      const wx = tree.wx + side * 28,
+        wy = tree.wy + 8;
+      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      if (
+        this.reserved(wx / 16, wy / 16, 1) ||
+        this.inThicket(wx / 16, wy / 16, 1) ||
+        [-0.5, 0, 0.5].some((dx) =>
+          [-0.5, 0, 0.5].some((dy) => this.terrain(wx / 16 + dx, wy / 16 + dy) !== TerrainId.Grass),
+        ) ||
+        [...trees.values()].some((p) => Math.abs(p.wx - wx) < 12 && Math.abs(p.wy - wy) < 10)
+      )
+        continue;
+      const ai = createRobin(wx, wy).robin;
+      if (!ai) throw new Error("Missing robin behavior");
+      ai.home = { wx: tree.wx, wy: tree.wy };
+      ai.randomState = Math.floor(valueNoise(gx, gy, this.world.seed + 7807) * 4294967296) >>> 0;
+      ai.timer = 1 + valueNoise(gx, gy, this.world.seed + 7811) * 2;
+      actors.push({
+        featureId: `wildlife:robin:${this.world.seed}:${tree.featureId}:0`,
+        type: ROBIN_TYPE,
+        wx,
+        wy,
+        route: [],
+        robin: ai,
+      });
+    }
+    return actors.sort((a, b) => a.featureId.localeCompare(b.featureId));
   }
   private rabbits(cx: number, cy: number): ActorPlacement[] {
     const gx = Math.floor(cx / 4),

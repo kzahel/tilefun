@@ -16,8 +16,17 @@ import { World } from "../world/World.js";
 import { createFrog, FROG_TYPE } from "./Frog.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "./Rabbit.js";
+import { createRobin, ROBIN_TYPE } from "./Robin.js";
 
 it.each([
+  {
+    name: "robins",
+    type: ROBIN_TYPE,
+    create: createRobin,
+    component: "robin" as const,
+    cx: -11,
+    cy: -33,
+  },
   {
     name: "ducks",
     type: MALLARD_TYPE,
@@ -79,8 +88,9 @@ it.each([
         { range: around(cx, cy, radius), activity: 2, reason: "player" },
       ]);
       // Cross-chunk origin receipts can become dirty during concurrent releases.
-      // Production reconciles every tick; drain that follow-up reconciliation here.
-      for (let i = 0; i < 2; i++) {
+      // Production reconciles every tick. Drain bounded save batches for all 25
+      // old owner chunks, plus any follow-up dirty-origin reconciliation.
+      for (let i = 0; i < 8; i++) {
         streaming.residency.reconcile(streaming.interest.demand(0));
         await streaming.residency.settle();
       }

@@ -75,6 +75,40 @@ export class AudioManager {
     return this.buffers.get(key);
   }
 
+  /** Short provisional three-note robin call, using the existing spatial audio path. */
+  playRobinChirp(volume = 0.1, pan = 0): void {
+    if (this.ctx?.state !== "running") return;
+    const now = this.ctx.currentTime;
+    const voice = this.ctx.createOscillator();
+    voice.type = "sine";
+    for (const [offset, pitch] of [
+      [0, 2200],
+      [0.12, 2900],
+      [0.24, 2500],
+    ]) {
+      voice.frequency.setValueAtTime(pitch ?? 2200, now + (offset ?? 0));
+      voice.frequency.exponentialRampToValueAtTime(1800, now + (offset ?? 0) + 0.09);
+    }
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0, now);
+    for (const offset of [0, 0.12, 0.24]) {
+      gain.gain.linearRampToValueAtTime(volume, now + offset + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.1);
+    }
+    const panner = this.ctx.createStereoPanner();
+    panner.pan.value = pan;
+    voice.connect(gain);
+    gain.connect(panner);
+    panner.connect(this.master ?? this.ctx.destination);
+    voice.onended = () => {
+      voice.disconnect();
+      gain.disconnect();
+      panner.disconnect();
+    };
+    voice.start(now);
+    voice.stop(now + 0.36);
+  }
+
   /** Short provisional two-pulse croak, using the existing spatial audio path. */
   playFrogCroak(volume = 0.15, pan = 0): void {
     if (this.ctx?.state !== "running") return;

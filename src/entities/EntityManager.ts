@@ -17,6 +17,7 @@ import {
   RABBIT_HOP_DURATION,
   settleRabbit,
 } from "../wildlife/rabbitInteractions.js";
+import { prepareRobinMotion, settleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { AABB } from "./collision.js";
 import {
@@ -266,6 +267,7 @@ export class EntityManager {
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
+      if (entity.robin?.motion) prepareRobinMotion(entity, entityDt);
       if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
       if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
       const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
@@ -340,6 +342,11 @@ export class EntityManager {
             );
           continue;
         }
+        if (entity.robin?.motion) {
+          if (entity.robin.motion.elapsed >= entity.robin.motion.duration)
+            settleRobin(entity, computeGroundZ(entity));
+          continue;
+        }
         if (entity.rabbit?.state === "hop" && entity.rabbit.hop) {
           if (entity.rabbit.hop.elapsed >= RABBIT_HOP_DURATION)
             settleRabbit(entity, computeGroundZ(entity));
@@ -394,7 +401,9 @@ export class EntityManager {
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
-      if (entity.frog?.state === "hop" && entity.frog.hop)
+      if (entity.robin?.motion)
+        setSpriteClipElapsed(entity, Math.round(entity.robin.motion.elapsed * 1000));
+      else if (entity.frog?.state === "hop" && entity.frog.hop)
         setSpriteClipElapsed(entity, Math.round(entity.frog.hop.elapsed * 1000));
       else if (entity.rabbit?.state === "hop" && entity.rabbit.hop)
         setSpriteClipElapsed(entity, Math.round(entity.rabbit.hop.elapsed * 1000));

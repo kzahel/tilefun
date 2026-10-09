@@ -4,13 +4,24 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-07.
+Updated: 2026-10-09.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
 owns recipes, memory persistence and simulation hosting;
 [rendering architecture](rendering-architecture.md) owns presentation/backend
 contracts; [performance](performance.md) owns timing evidence and its limits.
+
+## Robin gameplay alignment
+
+[080](../tactical/080-durable-woodland-robins.md) adds a native grove arrival using
+the normal regional population and Worker. Game and lab share robin registration,
+AI, crown queries, collision, support, no-bounce landing, ball reactions, durable
+motion timelines and timed binary sprite phases. The lab only adds pose datasets,
+arrival/controls and **Hop onto robin**, using the existing authority teleport/fall
+command. Canvas/GPU checks exercise flight, actual crown rest, pause/reload and
+player contact with zero maximum upward velocity after controlled landing. The
+game's spatial chirp is intentionally absent in the silent scenario lab.
 
 ## Required architecture
 

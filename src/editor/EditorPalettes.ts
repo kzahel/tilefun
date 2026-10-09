@@ -4,6 +4,7 @@ import { RoadType } from "../road/RoadType.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
+import { ROBIN_TYPE } from "../wildlife/Robin.js";
 
 export type EditorTab =
   | "natural"
@@ -71,6 +72,7 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),
   { type: MALLARD_TYPE, label: "Mallard duck", color: "#638f66" },
   { type: FROG_TYPE, label: "Common frog", color: "#937b4c" },
+  { type: ROBIN_TYPE, label: "Robin", color: "#bc5836" },
   { type: RABBIT_TYPE, label: "Rabbit", color: "#ad967a" },
   { type: "chicken", label: "Chicken", color: "#f0c040" },
   { type: "cow", label: "Cow", color: "#d4a880" },

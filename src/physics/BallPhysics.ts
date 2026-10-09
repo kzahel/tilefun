@@ -18,6 +18,7 @@ import { createGem } from "../entities/Gem.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
+import { startleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { zRangesOverlap } from "./AABB3D.js";
 import { getSurfaceZ } from "./surfaceHeight.js";
@@ -205,6 +206,8 @@ export function tickBallPhysics(
             other.velocity.vy = 0;
           }
           entityManager.spawn(createGem(other.position.wx, other.position.wy));
+        } else if (other.robin) {
+          startleRobin(other, ball.position);
         } else if (other.rabbit) {
           startleRabbit(other, ball.position);
         } else if (other.frog) {

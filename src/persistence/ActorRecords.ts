@@ -7,6 +7,7 @@ import { generateUUID } from "../shared/uuid.js";
 import { restoreFrogPose } from "../wildlife/frogInteractions.js";
 import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
 import { restoreRabbitPose } from "../wildlife/rabbitInteractions.js";
+import { restoreRobinPose } from "../wildlife/robinInteractions.js";
 
 export interface ActorRecord {
   version: 2;
@@ -29,6 +30,7 @@ export const DURABLE_ENTITY_FIELDS = [
   "mallard",
   "frog",
   "rabbit",
+  "robin",
   "routeAI",
   "deathTimer",
   "wz",
@@ -121,6 +123,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     restoreMallardPose(actor);
     restoreFrogPose(actor);
     restoreRabbitPose(actor);
+    restoreRobinPose(actor);
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;
