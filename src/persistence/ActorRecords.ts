@@ -5,6 +5,7 @@ import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
 import { generateUUID } from "../shared/uuid.js";
 import { restoreDeerPose } from "../wildlife/deerInteractions.js";
+import { restoreFaunaPose } from "../wildlife/faunaInteractions.js";
 import { restoreFrogPose } from "../wildlife/frogInteractions.js";
 import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
 import { restoreRabbitPose } from "../wildlife/rabbitInteractions.js";
@@ -33,6 +34,7 @@ export const DURABLE_ENTITY_FIELDS = [
   "rabbit",
   "robin",
   "deer",
+  "fauna",
   "routeAI",
   "deathTimer",
   "wz",
@@ -127,6 +129,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     restoreRabbitPose(actor);
     restoreRobinPose(actor);
     restoreDeerPose(actor);
+    restoreFaunaPose(actor);
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;

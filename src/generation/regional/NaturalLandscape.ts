@@ -3,6 +3,13 @@ import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/Fore
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import { createDeer, DEER_TYPE } from "../../wildlife/Deer.js";
+import {
+  createFauna,
+  FAUNA_PROFILES,
+  FAUNA_ROSTER,
+  type FaunaSpecies,
+  faunaType,
+} from "../../wildlife/Fauna.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
@@ -47,6 +54,13 @@ export interface NaturalPond {
   rx: number;
   ry: number;
   bounds: Bounds;
+}
+export interface FaunaHome {
+  id: string;
+  species: FaunaSpecies;
+  x: number;
+  y: number;
+  clearance: number;
 }
 export interface RabbitGlade {
   id: string;
@@ -95,6 +109,7 @@ export class NaturalLandscape {
   readonly railways: RailwayPlanner;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private ponds = new Map<string, NaturalPond | null>();
+  private faunaHomes = new Map<string, FaunaHome | null>();
   private deerGlades = new Map<string, RabbitGlade | null>();
   private glades = new Map<string, RabbitGlade | null>();
   private forests = new Map<string, ForestRow[]>();
@@ -195,7 +210,12 @@ export class NaturalLandscape {
   /** Seed once; persistence owns subsequent movement and deletion, never a respawn timer. */
   wildlife(cx: number, cy: number): ActorPlacement[] {
     const pond = this.pond(Math.floor(cx / 8), Math.floor(cy / 8));
-    const actors = [...this.rabbits(cx, cy), ...this.robins(cx, cy), ...this.deer(cx, cy)];
+    const actors = [
+      ...this.rabbits(cx, cy),
+      ...this.robins(cx, cy),
+      ...this.deer(cx, cy),
+      ...this.fauna(cx, cy),
+    ];
     if (!pond) return actors;
     const px = Math.floor(pond.x / 128),
       py = Math.floor(pond.y / 128);
@@ -402,6 +422,99 @@ export class NaturalLandscape {
     }
     return actors;
   }
+  /** Stable fixed-roster owner selection; never fill an inactive species with another one. */
+  faunaHome(cx: number, cy: number): FaunaHome | null {
+    const key = `${cx},${cy}`;
+    if (this.faunaHomes.has(key)) return this.faunaHomes.get(key) ?? null;
+    const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
+    const species = FAUNA_ROSTER[Math.floor(h(8011) * FAUNA_ROSTER.length)];
+    const profile = FAUNA_PROFILES.find((p) => p.species === species);
+    let home: FaunaHome | null = null;
+    if (profile && h(8001) < 0.65 && !["pond", "shore", "deep"].includes(profile.habitat)) {
+      const clearance = Math.ceil(profile.radius / 16 + profile.body[0] / 32 + 4);
+      for (let attempt = 0; attempt < 4 && !home; attempt++) {
+        const x = cx * 64 + 24 + h(8021 + attempt * 2) * 16,
+          y = cy * 64 + 24 + h(8022 + attempt * 2) * 16;
+        const rabbit = this.rabbitGlade(cx, cy),
+          deer = this.deerGlade(cx, cy);
+        if (
+          this.reserved(x, y, clearance) ||
+          this.pondBank(x, y, clearance) ||
+          this.inThicket(x, y, clearance) ||
+          (rabbit && Math.hypot(x - rabbit.x, y - rabbit.y) < clearance + 8) ||
+          (deer && Math.hypot(x - deer.x, y - deer.y) < clearance + 12)
+        )
+          continue;
+        let valid = true;
+        for (let dy = -clearance; dy <= clearance && valid; dy += 2)
+          for (let dx = -clearance; dx <= clearance && valid; dx += 2)
+            valid = this.terrain(x + dx, y + dy) === TerrainId.Grass;
+        if (!valid) continue;
+        if (
+          profile.habitat === "woodland" &&
+          Math.max(
+            ...[0, 1, 2, 3].map(
+              (i) =>
+                naturalHabitat(
+                  this.world,
+                  this.profile,
+                  x + Math.cos((i * Math.PI) / 2) * (clearance + 2),
+                  y + Math.sin((i * Math.PI) / 2) * (clearance + 2),
+                ).density,
+            ),
+          ) < 0.13
+        )
+          continue;
+        home = { id: `fauna-home:${cx}:${cy}`, species: profile.species, x, y, clearance };
+      }
+    }
+    this.faunaHomes.set(key, home);
+    if (this.faunaHomes.size > 128)
+      this.faunaHomes.delete(this.faunaHomes.keys().next().value ?? "");
+    return home;
+  }
+  private faunaClearing(x: number, y: number): boolean {
+    // Largest current/proposed ground body has a 160px home and 56px body.
+    for (let cy = Math.floor((y - 20) / 64); cy <= Math.floor((y + 20) / 64); cy++)
+      for (let cx = Math.floor((x - 20) / 64); cx <= Math.floor((x + 20) / 64); cx++) {
+        const home = this.faunaHome(cx, cy);
+        if (home && Math.hypot(x - home.x, y - home.y) < home.clearance) return true;
+      }
+    return false;
+  }
+  private fauna(cx: number, cy: number): ActorPlacement[] {
+    const home = this.faunaHome(Math.floor(cx / 4), Math.floor(cy / 4));
+    if (!home) return [];
+    const p = FAUNA_PROFILES.find((p) => p.species === home.species);
+    if (!p) return [];
+    const h = (salt: number) =>
+      valueNoise(Math.floor(cx / 4), Math.floor(cy / 4), this.world.seed + salt);
+    const groupId = `wildlife:${home.species}:${this.world.seed}:${home.id}`;
+    const actors: ActorPlacement[] = [];
+    for (let i = 0; i < p.group; i++) {
+      const angle = h(8031) * Math.PI * 2 + (i * Math.PI * 2) / p.group;
+      const separation = p.group === 1 ? 0 : Math.max(24, p.body[0] + 8);
+      const wx = home.x * 16 + Math.cos(angle) * separation,
+        wy = home.y * 16 + Math.sin(angle) * separation;
+      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      const fauna = createFauna(p.species, wx, wy).fauna;
+      if (!fauna) throw new Error("Missing fauna behavior");
+      fauna.home = { wx: home.x * 16, wy: home.y * 16 };
+      fauna.shelter = { wx: (home.x + 4) * 16, wy: home.y * 16 };
+      if (p.group > 1) fauna.groupId = groupId;
+      fauna.timer = 1.5 + i * 0.5;
+      fauna.randomState = Math.floor(h(8041 + i) * 4294967296) >>> 0;
+      actors.push({
+        featureId: `${groupId}:${i}`,
+        type: faunaType(p.species),
+        wx,
+        wy,
+        route: [],
+        fauna,
+      });
+    }
+    return actors;
+  }
   private rabbitClearing(x: number, y: number): boolean {
     // Entire glade stays inside its owner. Check adjacent owners for a tree's clearance.
     for (let cy = Math.floor((y - 7) / 64); cy <= Math.floor((y + 7) / 64); cy++)
@@ -599,7 +712,8 @@ export class NaturalLandscape {
           this.reserved(x, y, 4) ||
           this.pondBank(x, y, 4) ||
           this.rabbitClearing(x, y) ||
-          this.deerClearing(x, y)
+          this.deerClearing(x, y) ||
+          this.faunaClearing(x, y)
         )
           continue;
         // Full trunk and crown ground projection remain on dry land, clear of shore.
@@ -625,6 +739,7 @@ export class NaturalLandscape {
       forests: this.forests.size,
       glades: this.glades.size,
       deerGlades: this.deerGlades.size,
+      faunaHomes: this.faunaHomes.size,
     };
   }
 }

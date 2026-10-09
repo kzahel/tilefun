@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: durable ducks, frogs, meadow rabbits, woodland robins and deer delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
+Status: durable ducks, frogs, meadow rabbits, woodland robins, deer and foxes delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
 
 ## Autonomous completion of existing gameplay roster
@@ -15,6 +15,15 @@ regression pass. Five existing implementations stay intact. Durable seeded
 individuals, suitable accessible homes, varied native cycles, shared game/lab
 behavior, manual creation, harmless reactions and no automatic bounce remain the
 contract. Art production/approval holds are separate and unchanged.
+
+Slice A fox gameplay is complete: unchanged pilot-v2 native idle/walk/tail action,
+solitary 112px homes, investigation pauses and short grounded escape. Shared
+profile/state owners supply durable motion and normal contact/balls. [Inspect foxes](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-fox&landscape=thicket#/tool/world-geometry)
+at seed 2026, -598,-538. All 1,821 units, typechecks/lint/build, four fox browser
+checks and streaming readiness pass. Full browser: 411/413, only known archived-art
+failures; both city-train journeys pass. Tracker 082 owns details and the remaining
+16 species. Production-table helper still lacks ignored campaign state; preserve
+the validated table.
 
 ## Provisional woodland deer
 

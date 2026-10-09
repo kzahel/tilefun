@@ -68,6 +68,17 @@ RNG, and actual-position chunk ownership. Query order does not change population
 The normal world, explorer and **Woodland glade · deer group** Worker scene share
 these plans. Inspection arrives at seed 2026, -164,-460, beside deer-glade:-3:-8.
 
+## Remaining provisional habitats
+
+[082](../tactical/082-complete-provisional-wildlife.md) adds species-specific
+homes through a fixed 17-species owner order, so later profiles never remap an
+already integrated species. Eligible 64-tile land owners admit dry clearings
+outside infrastructure, pond banks, solid thickets and earlier rabbit/deer homes.
+Full body/home clearance reserves scattered trunks; cache limit is 128 owners.
+Planning remains upstream of tree/actor realization. Seed 2026's initial fox
+inspection arrives at -598,-538. Water/shore refuges and wider large-body homes
+follow in the tracker; this is provisional geography, not a new climate system.
+
 ## User direction
 
 Train travel between towns currently feels like plain grass. The request is for

@@ -15,6 +15,7 @@ import {
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
+import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -186,6 +187,19 @@ export default function NaturalLandscapePage() {
             frame: e.sprite?.frameCol,
             state: e.wanderAI?.state,
             direction: e.sprite?.direction,
+          })),
+        );
+        const fauna = h.session.view.entities.filter((e) => faunaProfile(e.type));
+        c.dataset.faunaPoses = JSON.stringify(
+          fauna.map((e) => ({
+            id: e.id,
+            species: faunaProfile(e.type)?.species,
+            x: e.position.wx,
+            y: e.position.wy,
+            z: e.wz ?? 0,
+            clip: e.sprite?.clip,
+            frame: e.sprite?.frameCol,
+            state: e.wanderAI?.state,
           })),
         );
         const deer = h.session.view.entities.filter((e) => e.type === DEER_TYPE);
@@ -462,18 +476,23 @@ export default function NaturalLandscapePage() {
             </button>
           </>
         )}
-        {(caseId === "deer"
-          ? [{ type: DEER_TYPE, label: "deer" }]
-          : caseId === "robins"
-            ? [{ type: ROBIN_TYPE, label: "robin" }]
-            : caseId === "rabbits"
-              ? [{ type: RABBIT_TYPE, label: "rabbit" }]
-              : caseId === "pond" || caseId === "frogs"
-                ? [
-                    { type: MALLARD_TYPE, label: "duck" },
-                    { type: FROG_TYPE, label: "frog" },
-                  ]
-                : []
+        {(FAUNA_PROFILES.some((p) => p.species === caseId)
+          ? FAUNA_PROFILES.filter((p) => p.species === caseId).map((p) => ({
+              type: faunaType(p.species),
+              label: p.label,
+            }))
+          : caseId === "deer"
+            ? [{ type: DEER_TYPE, label: "deer" }]
+            : caseId === "robins"
+              ? [{ type: ROBIN_TYPE, label: "robin" }]
+              : caseId === "rabbits"
+                ? [{ type: RABBIT_TYPE, label: "rabbit" }]
+                : caseId === "pond" || caseId === "frogs"
+                  ? [
+                      { type: MALLARD_TYPE, label: "duck" },
+                      { type: FROG_TYPE, label: "frog" },
+                    ]
+                  : []
         ).map((animal) => (
           <button
             key={animal.type}
@@ -491,7 +510,7 @@ export default function NaturalLandscapePage() {
                 .command({
                   kind: "teleport",
                   position: { ...target.position },
-                  z: (target.wz ?? 0) + 26,
+                  z: (target.wz ?? 0) + (faunaProfile(target.type)?.body[2] ?? 24) + 2,
                 })
                 .catch((e) => setError(String(e)));
               canvas.current?.focus();

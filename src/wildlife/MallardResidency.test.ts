@@ -14,12 +14,21 @@ import { RealmStreaming } from "../server/RealmStreaming.js";
 import { tickAllAI } from "../server/tickAllAI.js";
 import { World } from "../world/World.js";
 import { createDeer, DEER_TYPE } from "./Deer.js";
+import { createFauna, FAUNA_PROFILES, faunaType } from "./Fauna.js";
 import { createFrog, FROG_TYPE } from "./Frog.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "./Rabbit.js";
 import { createRobin, ROBIN_TYPE } from "./Robin.js";
 
 it.each([
+  ...FAUNA_PROFILES.map((p) => ({
+    name: p.species,
+    type: faunaType(p.species),
+    create: (wx: number, wy: number) => createFauna(p.species, wx, wy),
+    component: "fauna" as const,
+    cx: Math.floor(p.inspection[0] / 16),
+    cy: Math.floor(p.inspection[1] / 16),
+  })),
   {
     name: "deer",
     type: DEER_TYPE,
@@ -107,8 +116,11 @@ it.each([
     try {
       await visit(animal.cx, animal.cy, 2);
       const flock = () => entities.entities.filter((e) => e.type === animal.type);
-      const removed = required(flock()[0]),
-        moved = required(flock()[1]);
+      const moved = required(flock()[1] ?? flock()[0]),
+        removed = flock()[1]
+          ? required(flock()[0])
+          : entities.spawn(animal.create(moved.position.wx + 30, moved.position.wy));
+      expect(moved.proceduralId).toBeDefined();
       const removedIdentity = removed.persistentId;
       entities.remove(removed.id);
       // Move across its origin chunk: revisiting that origin must not seed a duplicate.

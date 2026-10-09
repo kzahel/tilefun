@@ -32,7 +32,7 @@ owner IDs stable. Existing draft motion holds/approval records remain untouched.
 
 | Slice | Animal | Habitat and baseline behavior | State | Commit / evidence |
 | --- | --- | --- | --- | --- |
-| A | Fox | Woodland edge; solitary roam, investigate pauses, tail flick, bounded escape | Planned | — |
+| A | Fox | Woodland edge; solitary roam, investigate pauses, tail flick, bounded escape | Complete | A: 1,821 units, 411/413 full browser; four fox checks pass |
 | B | Cat | Rural clearing; short walks, rests/action, cautious player interest | Planned | — |
 | B | Dog | Rural clearing; walks, rests/action, loose player interest | Planned | — |
 | B | Cow | Broad pasture; small groups, slow walks, tail swish | Planned | — |
@@ -84,3 +84,42 @@ Planning checkpoint: clean working tree at deer commit `3a5212b`; five species
 integrated, 17 remaining. Native metadata inspected for all 17. No asset pixels,
 art receipts or approval events changed. Next action: slice A, fox and shared
 baseline, then continue B–E.
+
+
+### Slice A checkpoint
+
+Fox uses unchanged pilot-v2 drawing-03/motion-02, 48px cells, anchor 24,31,
+125ms idle/walk/tail action; escape uses the native walk at 62.5ms and twice
+speed. Solitary 112px homes, 22px/s routine motion, cautious investigation bias,
+30px approach alarm, physical body 18×8×14 and bounded recovery. Shared `fauna`
+state/profile owners supply registration, durable records, binary timed phases,
+AI, collision-resolved travel and contact/ball dispatch. The five earlier animal
+implementations remain intact. Fixed 17-species owner selection prevents adding
+profiles from remapping earlier homes. Land homes/clearings and caches are bounded.
+
+Inspection: seed 2026 at -598,-538 tiles, `fauna-home:-10:-9`. Native Canvas/GPU
+captures inspected. 18 focused headless checks, all 1,821 unit tests, typechecks,
+all four fox browser checks and build pass. Import organization diagnostics were
+corrected; final lint/inventories/full-browser/streaming checks follow. Tests
+cover ordinary standing/prediction, explicit Jump, harmless balls and high misses,
+mid-motion alarm/edited obstacles, exact phase hydration/binary removal,
+production Realm cycles, durable manual/seeded deletion and eviction/return.
+[Focused browser log](/tmp/tilefun-fox-browser-focused.log),
+[unit log](/tmp/tilefun-fox-unit.log),
+[Canvas capture](/tmp/tilefun-fauna-fox-canvas.png),
+[GPU capture](/tmp/tilefun-fauna-fox-gpu.png).
+
+
+Slice A complete: all 1,821 units, typechecks and lint pass (existing 118 warnings /
+34 infos). Catalog: 221 sheets / 1,066 uses; manifest: 661 verified candidates.
+Build passes. Full browser suite: **411/413** in 13.7m; all 26 wildlife gameplay
+checks, both complete train journeys and the phone roof ride pass. Only the two
+previous archived fox-preview review failures remain (`wildlife-review:14/:72`).
+All 27 exact wildlife candidates remain unchanged. Streaming readiness exits 0,
+all six phases finish with zero missing/incomplete/stale caches, errors/failures;
+functional Canvas evidence, not a GPU frame-pacing claim.
+[Full browser log](/tmp/tilefun-fox-browser-full.log),
+[streaming report](/tmp/tilefun-fox-streaming/report.json).
+Production-table checkpoint/completion refresh still reports ENOENT for ignored
+campaign progress state; retain its validated art table. Gameplay progress is
+persisted here first. Continue autonomously with slice B.

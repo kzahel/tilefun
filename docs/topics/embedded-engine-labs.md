@@ -12,6 +12,15 @@ owns recipes, memory persistence and simulation hosting;
 [rendering architecture](rendering-architecture.md) owns presentation/backend
 contracts; [performance](performance.md) owns timing evidence and its limits.
 
+## Remaining wildlife alignment
+
+[082](../tactical/082-complete-provisional-wildlife.md) tracks the remaining
+17 species. Profile-based definitions/assets, durable `fauna` state and shared
+authority motion/interaction owners serve the normal game and Worker lab.
+Native regional arrivals, generic pose datasets and body-height-aware contact
+controls supply inspection only; no separate lab AI or collision is introduced.
+Pause/reload and both renderers are checked for each profile batch.
+
 ## Deer gameplay alignment
 
 [081](../tactical/081-durable-woodland-deer.md) adds a native deer glade arrival

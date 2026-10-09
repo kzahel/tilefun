@@ -16,6 +16,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
+import { startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
@@ -207,6 +208,8 @@ export function tickBallPhysics(
             other.velocity.vy = 0;
           }
           entityManager.spawn(createGem(other.position.wx, other.position.wy));
+        } else if (other.fauna) {
+          startleFauna(other, ball.position);
         } else if (other.deer) {
           startleDeer(other, ball.position);
         } else if (other.robin) {

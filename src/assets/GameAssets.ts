@@ -5,6 +5,7 @@ import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
+import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FROG_IMAGE, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_IMAGE, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_IMAGE, RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -38,6 +39,12 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  ...FAUNA_PROFILES.map((p) => ({
+    key: faunaType(p.species),
+    path: p.image,
+    w: p.size,
+    h: p.size,
+  })),
   { key: FROG_TYPE, path: FROG_IMAGE, w: 48, h: 48 },
   { key: DEER_TYPE, path: DEER_IMAGE, w: 48, h: 48 },
   { key: ROBIN_TYPE, path: ROBIN_IMAGE, w: 32, h: 32 },

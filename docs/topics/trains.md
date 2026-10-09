@@ -327,6 +327,13 @@ tickets remain deferred.
 
 ## Current regression evidence
 
+The fox baseline slice in [082](../tactical/082-complete-provisional-wildlife.md)
+passes both complete city-train journeys and the phone roof ride in the full
+411/413 browser run. Only known archived wildlife-art failures remain. No train
+physics or assertion changed; earlier intermittent support evidence remains open.
+[Full fox browser log](/tmp/tilefun-fox-browser-full.log).
+
+
 The 2026-10-09 [deer slice](../tactical/081-durable-woodland-deer.md) full run
 passes the GPU complete journey and phone roof ride, but Canvas fails on the
 onward leg after reopening (`city-train-riding.spec.ts:107`, expected 44px,

@@ -2,6 +2,7 @@ import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { RoadType } from "../road/RoadType.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
+import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -73,6 +74,7 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),
   { type: MALLARD_TYPE, label: "Mallard duck", color: "#638f66" },
   { type: FROG_TYPE, label: "Common frog", color: "#937b4c" },
+  ...FAUNA_PROFILES.map((p) => ({ type: faunaType(p.species), label: p.label, color: "#b59365" })),
   { type: DEER_TYPE, label: "Deer", color: "#b59365" },
   { type: ROBIN_TYPE, label: "Robin", color: "#bc5836" },
   { type: RABBIT_TYPE, label: "Rabbit", color: "#ad967a" },

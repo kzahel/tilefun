@@ -11,6 +11,7 @@ import {
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
+import { prepareFaunaTravel, settleFauna } from "../wildlife/faunaInteractions.js";
 import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import {
@@ -269,6 +270,7 @@ export class EntityManager {
       const entityDt = entityTickDts?.get(entity) ?? dt;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
       if (entity.deer?.motion) prepareDeerTravel(entity, entityDt);
+      if (entity.fauna?.motion) prepareFaunaTravel(entity, entityDt);
       if (entity.robin?.motion) prepareRobinMotion(entity, entityDt);
       if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
       if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
@@ -377,6 +379,15 @@ export class EntityManager {
             ) < 0.5)
         )
           settleDeer(entity);
+        if (
+          entity.fauna?.motion &&
+          (entity.fauna.motion.elapsed >= entity.fauna.motion.duration ||
+            Math.hypot(
+              entity.fauna.target.wx - entity.position.wx,
+              entity.fauna.target.wy - entity.position.wy,
+            ) < 0.5)
+        )
+          settleFauna(entity);
         applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities
@@ -412,7 +423,9 @@ export class EntityManager {
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
-      if (entity.deer?.motion)
+      if (entity.fauna?.motion)
+        setSpriteClipElapsed(entity, Math.round(entity.fauna.motion.elapsed * 1000));
+      else if (entity.deer?.motion)
         setSpriteClipElapsed(entity, Math.round(entity.deer.motion.elapsed * 1000));
       else if (entity.robin?.motion)
         setSpriteClipElapsed(entity, Math.round(entity.robin.motion.elapsed * 1000));

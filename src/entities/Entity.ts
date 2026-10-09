@@ -1,4 +1,5 @@
 import type { DeerBehavior } from "../wildlife/Deer.js";
+import type { FaunaBehavior } from "../wildlife/Fauna.js";
 import type { FrogBehavior } from "../wildlife/Frog.js";
 import type { MallardBehavior } from "../wildlife/Mallard.js";
 import type { RabbitBehavior } from "../wildlife/Rabbit.js";
@@ -120,6 +121,7 @@ export interface Entity {
   rabbit?: RabbitBehavior;
   robin?: RobinBehavior;
   deer?: DeerBehavior;
+  fauna?: FaunaBehavior;
   routeAI?: {
     points: readonly RouteWaypoint[];
     index: number;

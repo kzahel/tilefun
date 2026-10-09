@@ -6,11 +6,19 @@ import {
   NaturalLandscape,
 } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { FAUNA_PROFILES } from "../wildlife/Fauna.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  ...FAUNA_PROFILES.map((p) => ({
+    id: p.species,
+    name: `${p.label} · ${p.habitat} refuge`,
+    seed: 2026,
+    x: p.inspection[0],
+    y: p.inspection[1],
+  })),
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
   { id: "grove", name: "Open woodland", seed: 2026, x: -160, y: -512 },
   { id: "forest", name: "Woodland · individual trees", seed: 2026, x: -416, y: -512 },
