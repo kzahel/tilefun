@@ -1,8 +1,57 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: durable ducks, frogs, meadow rabbits and woodland robins delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
+Status: durable ducks, frogs, meadow rabbits, woodland robins and deer delivered with existing drafts, shared contact and physical escape motion; art repairs remain separate and new-animal production stays canceled.
 Updated: 2026-10-09.
+
+## Provisional woodland deer
+
+The owner accepted the robin grove and authorized deer on 2026-10-09.
+[081](../tactical/081-durable-woodland-deer.md) implements the unchanged adult doe
+`draft-v1` drawing-03 / walk-tailflag-01: native 48px cells, anchor 24,36, idle,
+12-frame walk and eight-frame ear/tail alert action at 100ms. A provisional brisk
+escape reuses the same grounded walk at 50ms with twice the movement speed
+(36px/s versus 18px/s). There is no invented gallop, airborne gait or new art.
+Art remains pending human review, separate from gameplay availability.
+
+Two or three seeded individuals share a glade/herd identity, with separate saved
+per-member RNG, targets, timers and activity. They pause, walk and play quiet
+alert cycles, loosely favor company and share nearby herd alarms. Generated homes
+have a 112px radius, with target margins for normal separation. Approach within
+38px, landing contact or balls produce one alert, a 48–80px bounded grounded
+escape toward accessible cover, then three seconds of recovery. Repeated hits
+never restart it. A mid-walk alarm preserves the committed walk before fleeing;
+closed habitat settles in place. Paths reject water, collision, abrupt height
+changes, occupied landings and escapes toward the threat. Normal collision owns
+actual XY, and edited obstacles stop the animal at its real resolved position.
+There is no forced arrival teleport or upward player impulse.
+
+Wider glades reserve scattered-tree clearance while preserving solid forests,
+pond banks, roads/rail and rabbit homes. Same-seed stable world/glade/member IDs
+seed only new eligible chunks; ordinary records retain moved/manual individuals
+and deletion across visits/reloads. No timers replace populations, no offscreen
+time catch-up and no backfill of already seeded saved chunks. **Edit → Entities →
+Deer** creates a saved individual; manual deer have their own home and no implicit
+herd assignment. Native timed walk/flee frame phase is saved and replicated.
+
+[Inspect the deer glade](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-deer&landscape=thicket#/tool/world-geometry):
+in-memory production Worker at seed 2026, -164,-460 tiles, beside deer-glade:-3:-8.
+Pause, Save / reload scene and **Hop onto deer** use common game/lab behavior.
+Headless checks cover habitat/seams, group alarm/cohesion, dry grounded movement,
+mid-walk hydration/binary phase, closed/edited paths, balls and ordinary standing
+in authority/prediction (with/without player input). All 1,808 units, typechecks,
+lint and build pass. All 22 focused wildlife browser checks pass, also passing
+inside the full **406/409** run (13.5m). Two known archived-preview art failures
+remain. Canvas train riding loses roof support on the onward post-reopen leg
+(expected 44px, received 43.583168px); its isolated complete-journey rerun passes
+in 1.5m. GPU and phone train checks pass in the full run. No train behavior or
+assertion changed; the train topic retains this intermittent evidence. Isolated
+streaming readiness passes all six phases with zero final missing/incomplete/stale
+caches, errors and failures (functional Canvas evidence). 081 records details. Catalog: 220 sheets / 1,065 source uses; manifest:
+657 verified candidates, all 27 exact wildlife review records unchanged. No new
+art production or approval is implied. The art table's ignored campaign state
+remains absent; checkpoint and completion refresh attempts preserve the last
+validated table.
 
 ## Provisional woodland robins
 

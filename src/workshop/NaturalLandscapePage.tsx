@@ -14,6 +14,7 @@ import {
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -177,6 +178,20 @@ export default function NaturalLandscapePage() {
         c.dataset.robinCount = String(robins.length);
         c.dataset.robinPoses = JSON.stringify(
           robins.map((e) => ({
+            id: e.id,
+            x: e.position.wx,
+            y: e.position.wy,
+            z: e.wz ?? 0,
+            clip: e.sprite?.clip,
+            frame: e.sprite?.frameCol,
+            state: e.wanderAI?.state,
+            direction: e.sprite?.direction,
+          })),
+        );
+        const deer = h.session.view.entities.filter((e) => e.type === DEER_TYPE);
+        c.dataset.deerCount = String(deer.length);
+        c.dataset.deerPoses = JSON.stringify(
+          deer.map((e) => ({
             id: e.id,
             x: e.position.wx,
             y: e.position.wy,
@@ -447,16 +462,18 @@ export default function NaturalLandscapePage() {
             </button>
           </>
         )}
-        {(caseId === "robins"
-          ? [{ type: ROBIN_TYPE, label: "robin" }]
-          : caseId === "rabbits"
-            ? [{ type: RABBIT_TYPE, label: "rabbit" }]
-            : caseId === "pond" || caseId === "frogs"
-              ? [
-                  { type: MALLARD_TYPE, label: "duck" },
-                  { type: FROG_TYPE, label: "frog" },
-                ]
-              : []
+        {(caseId === "deer"
+          ? [{ type: DEER_TYPE, label: "deer" }]
+          : caseId === "robins"
+            ? [{ type: ROBIN_TYPE, label: "robin" }]
+            : caseId === "rabbits"
+              ? [{ type: RABBIT_TYPE, label: "rabbit" }]
+              : caseId === "pond" || caseId === "frogs"
+                ? [
+                    { type: MALLARD_TYPE, label: "duck" },
+                    { type: FROG_TYPE, label: "frog" },
+                  ]
+                : []
         ).map((animal) => (
           <button
             key={animal.type}

@@ -13,12 +13,21 @@ import { around } from "../server/InterestManager.js";
 import { RealmStreaming } from "../server/RealmStreaming.js";
 import { tickAllAI } from "../server/tickAllAI.js";
 import { World } from "../world/World.js";
+import { createDeer, DEER_TYPE } from "./Deer.js";
 import { createFrog, FROG_TYPE } from "./Frog.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "./Rabbit.js";
 import { createRobin, ROBIN_TYPE } from "./Robin.js";
 
 it.each([
+  {
+    name: "deer",
+    type: DEER_TYPE,
+    create: createDeer,
+    component: "deer" as const,
+    cx: -11,
+    cy: -29,
+  },
   {
     name: "robins",
     type: ROBIN_TYPE,

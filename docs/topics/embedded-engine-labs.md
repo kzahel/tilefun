@@ -12,6 +12,17 @@ owns recipes, memory persistence and simulation hosting;
 [rendering architecture](rendering-architecture.md) owns presentation/backend
 contracts; [performance](performance.md) owns timing evidence and its limits.
 
+## Deer gameplay alignment
+
+[081](../tactical/081-durable-woodland-deer.md) adds a native deer glade arrival
+using production regional populations. Shared owners cover definitions, seeded
+herd/individual state, authority AI, actual grounded collision, no-bounce body
+support, ball startle, durable travel and binary timed walk/flee poses. The lab
+adds arrival, pose datasets and **Hop onto deer** through the existing authority
+teleport/fall command. Canvas/GPU checks cover walking, pause/reload and landing
+with no automatic upward player velocity. No lab-specific animal physics or AI
+is introduced; no historical approval snapshot is regenerated.
+
 ## Robin gameplay alignment
 
 [080](../tactical/080-durable-woodland-robins.md) adds a native grove arrival using

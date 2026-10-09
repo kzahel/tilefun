@@ -1,4 +1,5 @@
 import { CHARACTER_FACTORIES } from "../characters/PromotedCharacters.js";
+import { createDeer, DEER_TYPE } from "../wildlife/Deer.js";
 import { createFrog, FROG_TYPE } from "../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -46,6 +47,7 @@ export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity
   [FROG_TYPE]: createFrog,
   [RABBIT_TYPE]: createRabbit,
   [ROBIN_TYPE]: createRobin,
+  [DEER_TYPE]: createDeer,
   ball: createBall,
   chicken: createChicken,
   cow: createCow,

@@ -2,6 +2,7 @@ import { TerrainId } from "../../autotile/TerrainId.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
+import { createDeer, DEER_TYPE } from "../../wildlife/Deer.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
@@ -94,6 +95,7 @@ export class NaturalLandscape {
   readonly railways: RailwayPlanner;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private ponds = new Map<string, NaturalPond | null>();
+  private deerGlades = new Map<string, RabbitGlade | null>();
   private glades = new Map<string, RabbitGlade | null>();
   private forests = new Map<string, ForestRow[]>();
   constructor(
@@ -193,7 +195,7 @@ export class NaturalLandscape {
   /** Seed once; persistence owns subsequent movement and deletion, never a respawn timer. */
   wildlife(cx: number, cy: number): ActorPlacement[] {
     const pond = this.pond(Math.floor(cx / 8), Math.floor(cy / 8));
-    const actors = [...this.rabbits(cx, cy), ...this.robins(cx, cy)];
+    const actors = [...this.rabbits(cx, cy), ...this.robins(cx, cy), ...this.deer(cx, cy)];
     if (!pond) return actors;
     const px = Math.floor(pond.x / 128),
       py = Math.floor(pond.y / 128);
@@ -313,6 +315,92 @@ export class NaturalLandscape {
     this.glades.set(key, glade);
     if (this.glades.size > 128) this.glades.delete(this.glades.keys().next().value ?? "");
     return glade;
+  }
+  /** Wider open glades for larger bodies, separate from the existing rabbit homes.
+   * Pure habitat queries precede scattered vegetation; forest bands remain intact. */
+  deerGlade(cx: number, cy: number): RabbitGlade | null {
+    const key = `${cx},${cy}`;
+    if (this.deerGlades.has(key)) return this.deerGlades.get(key) ?? null;
+    const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
+    let glade: RabbitGlade | null = null;
+    if (h(7901) < 0.22) {
+      const rabbit = this.rabbitGlade(cx, cy);
+      for (let attempt = 0; attempt < 4 && !glade; attempt++) {
+        const x = cx * 64 + 16 + h(7911 + attempt * 2) * 32,
+          y = cy * 64 + 16 + h(7912 + attempt * 2) * 32;
+        if (
+          this.reserved(x, y, 11) ||
+          this.pondBank(x, y, 11) ||
+          this.inThicket(x, y, 11) ||
+          (rabbit && Math.hypot(x - rabbit.x, y - rabbit.y) < 18)
+        )
+          continue;
+        let valid = true;
+        for (let dy = -10; dy <= 10 && valid; dy += 2)
+          for (let dx = -10; dx <= 10 && valid; dx += 2)
+            valid = this.terrain(x + dx, y + dy) === TerrainId.Grass;
+        if (!valid) continue;
+        let cover = -Infinity,
+          angle = 0;
+        for (let i = 0; i < 8; i++) {
+          const a = (i * Math.PI) / 4;
+          const density = naturalHabitat(
+            this.world,
+            this.profile,
+            x + Math.cos(a) * 13,
+            y + Math.sin(a) * 13,
+          ).density;
+          if (density > cover) {
+            cover = density;
+            angle = a;
+          }
+        }
+        if (cover < 0.13) continue;
+        glade = {
+          id: `deer-glade:${cx}:${cy}`,
+          x,
+          y,
+          shelter: { wx: (x + Math.cos(angle) * 5) * 16, wy: (y + Math.sin(angle) * 5) * 16 },
+        };
+      }
+    }
+    this.deerGlades.set(key, glade);
+    if (this.deerGlades.size > 128)
+      this.deerGlades.delete(this.deerGlades.keys().next().value ?? "");
+    return glade;
+  }
+  private deerClearing(x: number, y: number): boolean {
+    for (let cy = Math.floor((y - 11) / 64); cy <= Math.floor((y + 11) / 64); cy++)
+      for (let cx = Math.floor((x - 11) / 64); cx <= Math.floor((x + 11) / 64); cx++) {
+        const glade = this.deerGlade(cx, cy);
+        if (glade && Math.hypot(x - glade.x, y - glade.y) < 11) return true;
+      }
+    return false;
+  }
+  private deer(cx: number, cy: number): ActorPlacement[] {
+    const gx = Math.floor(cx / 4),
+      gy = Math.floor(cy / 4),
+      glade = this.deerGlade(gx, gy);
+    if (!glade) return [];
+    const h = (salt: number) => valueNoise(gx, gy, this.world.seed + salt),
+      count = 2 + Math.floor(h(7951) * 2);
+    const actors: ActorPlacement[] = [];
+    const herdId = `wildlife:deer:${this.world.seed}:${glade.id}`;
+    for (let i = 0; i < count; i++) {
+      const angle = h(7953) * Math.PI * 2 + (i * Math.PI * 2) / count;
+      const wx = (glade.x + Math.cos(angle) * 3) * 16,
+        wy = (glade.y + Math.sin(angle) * 3) * 16;
+      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      const ai = createDeer(wx, wy).deer;
+      if (!ai) throw new Error("Missing deer behavior");
+      ai.home = { wx: glade.x * 16, wy: glade.y * 16 };
+      ai.shelter = { ...glade.shelter };
+      ai.herdId = herdId;
+      ai.randomState = Math.floor(h(7961 + i) * 4294967296) >>> 0;
+      ai.timer = 1.5 + i * 0.8;
+      actors.push({ featureId: `${herdId}:${i}`, type: DEER_TYPE, wx, wy, route: [], deer: ai });
+    }
+    return actors;
   }
   private rabbitClearing(x: number, y: number): boolean {
     // Entire glade stays inside its owner. Check adjacent owners for a tree's clearance.
@@ -510,7 +598,8 @@ export class NaturalLandscape {
             naturalHabitat(this.world, this.profile, x, y).density ||
           this.reserved(x, y, 4) ||
           this.pondBank(x, y, 4) ||
-          this.rabbitClearing(x, y)
+          this.rabbitClearing(x, y) ||
+          this.deerClearing(x, y)
         )
           continue;
         // Full trunk and crown ground projection remain on dry land, clear of shore.
@@ -535,6 +624,7 @@ export class NaturalLandscape {
       ponds: this.ponds.size,
       forests: this.forests.size,
       glades: this.glades.size,
+      deerGlades: this.deerGlades.size,
     };
   }
 }

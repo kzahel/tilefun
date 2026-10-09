@@ -21,6 +21,7 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -604,7 +605,8 @@ export function tickJumpGravity(
                 (e.type === MALLARD_TYPE ||
                   e.type === FROG_TYPE ||
                   e.type === RABBIT_TYPE ||
-                  e.type === ROBIN_TYPE) &&
+                  e.type === ROBIN_TYPE ||
+                  e.type === DEER_TYPE) &&
                 e.collider?.solid !== false &&
                 e.collider &&
                 Math.abs((e.wz ?? 0) + (e.collider.physicalHeight ?? 0) - groundZ) < 0.001 &&

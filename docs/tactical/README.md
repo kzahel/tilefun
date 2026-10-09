@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [081 Durable woodland deer](081-durable-woodland-deer.md) | Complete: existing doe draft, wider glades, durable small groups and grounded escape |
 | [080 Durable woodland robins](080-durable-woodland-robins.md) | Complete: existing draft, durable tree-edge birds, physical flight and real tree perches |
 | [079 Durable meadow rabbits](079-durable-meadow-rabbits.md) | Complete: seeded glades, physical native hops, cover escapes, durable contact and game/lab inspection |
 | [078 Durable pond frogs](078-durable-pond-frogs.md) | Complete: seeded frogs, physical hops/swims, contact/croaks and durable game/lab inspection |

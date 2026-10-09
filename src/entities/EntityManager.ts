@@ -10,6 +10,7 @@ import {
   isElevationBlocked3D,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
+import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
 import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import {
@@ -267,6 +268,7 @@ export class EntityManager {
 
       const entityDt = entityTickDts?.get(entity) ?? dt;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, entityDt);
+      if (entity.deer?.motion) prepareDeerTravel(entity, entityDt);
       if (entity.robin?.motion) prepareRobinMotion(entity, entityDt);
       if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
       if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
@@ -366,6 +368,15 @@ export class EntityManager {
             );
           continue;
         }
+        if (
+          entity.deer?.motion &&
+          (entity.deer.motion.elapsed >= entity.deer.motion.duration ||
+            Math.hypot(
+              entity.deer.target.wx - entity.position.wx,
+              entity.deer.target.wy - entity.position.wy,
+            ) < 0.5)
+        )
+          settleDeer(entity);
         applyGroundTracking(entity, computeGroundZ(entity), playerSet.has(entity));
       }
       // Also initialize players that may not be in this.entities
@@ -401,7 +412,9 @@ export class EntityManager {
     // --- Phase 5: Tick animations (only for ticking entities) ---
     for (const entity of active) {
       if (entityTickDts && !entityTickDts.has(entity)) continue;
-      if (entity.robin?.motion)
+      if (entity.deer?.motion)
+        setSpriteClipElapsed(entity, Math.round(entity.deer.motion.elapsed * 1000));
+      else if (entity.robin?.motion)
         setSpriteClipElapsed(entity, Math.round(entity.robin.motion.elapsed * 1000));
       else if (entity.frog?.state === "hop" && entity.frog.hop)
         setSpriteClipElapsed(entity, Math.round(entity.frog.hop.elapsed * 1000));

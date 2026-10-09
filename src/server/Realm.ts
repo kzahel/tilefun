@@ -88,6 +88,7 @@ import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import { startleDeer } from "../wildlife/deerInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
@@ -1904,7 +1905,8 @@ export class Realm {
     if (outcome.wildlifeContactId !== undefined) {
       const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
       if (animal) {
-        if (animal.robin) startleRobin(animal, p.position);
+        if (animal.deer) startleDeer(animal, p.position);
+        else if (animal.robin) startleRobin(animal, p.position);
         else if (animal.rabbit) startleRabbit(animal, p.position);
         else if (animal.frog) startleFrog(animal, p.position);
         else startleMallard(animal, p.position);

@@ -2,6 +2,7 @@ import { CHARACTER_ENTITY_DEFS } from "../characters/PromotedCharacters.js";
 import { CURVE_TRAIN_DEFS } from "../railway/CurveTrain.js";
 import { TRAIN_CARRIAGE_DEFS, TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js";
 import { VEHICLE_DEFS } from "../traffic/Vehicle.js";
+import { DEER_DEF, DEER_TYPE } from "../wildlife/Deer.js";
 import { FROG_DEF, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_DEF, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { RABBIT_DEF, RABBIT_TYPE } from "../wildlife/Rabbit.js";
@@ -162,6 +163,7 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
   [FROG_TYPE]: FROG_DEF,
   [RABBIT_TYPE]: RABBIT_DEF,
   [ROBIN_TYPE]: ROBIN_DEF,
+  [DEER_TYPE]: DEER_DEF,
   ...VEHICLE_DEFS,
   [TRAIN_TYPE]: TRAIN_DEF,
   ...TRAIN_CARRIAGE_DEFS,

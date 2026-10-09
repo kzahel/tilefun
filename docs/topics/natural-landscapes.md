@@ -52,6 +52,22 @@ world and **Grove · robins & tree perches** lab share seed 2026 at -163,-519.
 Actual resident oak/palm props, including editor trees, own perches. No old saved
 chunk backfill or timed replenishment is introduced.
 
+## Durable woodland deer glades
+
+[081](../tactical/081-durable-woodland-deer.md) admits wider glades for 2–3-member
+durable deer groups. Independent bounded 64-tile owners gate candidates, try up
+to four centers, require dry ground and nearby woodland cover, and reject roads,
+rail, settlements, pond banks, solid thickets and overlapping rabbit homes.
+Scattered trees keep an eleven-tile center clearance, leaving room for the larger
+20×10px body footprints and 112px home ranges. Forest collision bands stay intact;
+no new tree art, climate layer, generator version or saved-chunk migration occurs.
+The planner stays acyclic: terrain/reservations/forest bands precede glades, which
+precede scattered trees and animal realization. Its deer-glade cache is bounded
+at 128 owners. Members use a shared world/glade herd identity, per-member IDs and
+RNG, and actual-position chunk ownership. Query order does not change populations.
+The normal world, explorer and **Woodland glade · deer group** Worker scene share
+these plans. Inspection arrives at seed 2026, -164,-460, beside deer-glade:-3:-8.
+
 ## User direction
 
 Train travel between towns currently feels like plain grass. The request is for

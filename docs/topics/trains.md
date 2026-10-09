@@ -327,6 +327,19 @@ tickets remain deferred.
 
 ## Current regression evidence
 
+The 2026-10-09 [deer slice](../tactical/081-durable-woodland-deer.md) full run
+passes the GPU complete journey and phone roof ride, but Canvas fails on the
+onward leg after reopening (`city-train-riding.spec.ts:107`, expected 44px,
+received 43.583168px). The isolated Canvas complete-journey rerun passes in 1.5m,
+including mid-bend reopening and alighting. Full suite: 406/409, with the other
+two failures in archived wildlife-art review. No train physics or assertion
+changed. Retain this intermittent support evidence without claiming it fixed;
+inspect saved roofRide, carriage residency and the first post-reopen authority
+steps if it recurs. [Full log](/tmp/tilefun-deer-browser-full.log),
+[isolated rerun](/tmp/tilefun-deer-train-rerun.log),
+[failure context](/tmp/tilefun-deer-train-failure/error-context.md),
+[failure capture](/tmp/tilefun-deer-train-failure/test-failed-1.png).
+
 The 2026-10-09 robin integration full run passes both Canvas/GPU complete
 city-train journeys, including mid-bend world reopening and alighting, plus the
 phone roof ride. Full suite: 403/405, with only the known archived wildlife-art
