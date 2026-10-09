@@ -12,7 +12,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [082 Complete provisional wildlife](082-complete-provisional-wildlife.md) | Active: autonomous integration of all 17 remaining existing drafts, tracked slices A–E |
+| [083 Farms, town pets and larger cities](083-farms-town-pets-and-larger-cities.md) | Active: connected rural lanes/farmsteads, durable settlement pets and larger current cities |
+| [082 Complete provisional wildlife](082-complete-provisional-wildlife.md) | Complete: all 17 remaining drafts integrated; 22 durable provisional species |
 | [081 Durable woodland deer](081-durable-woodland-deer.md) | Complete: existing doe draft, wider glades, durable small groups and grounded escape |
 | [080 Durable woodland robins](080-durable-woodland-robins.md) | Complete: existing draft, durable tree-edge birds, physical flight and real tree perches |
 | [079 Durable meadow rabbits](079-durable-meadow-rabbits.md) | Complete: seeded glades, physical native hops, cover escapes, durable contact and game/lab inspection |

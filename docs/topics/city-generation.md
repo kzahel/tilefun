@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-07.
+Updated: 2026-10-09.
 
 ## Current generation policy
 
@@ -74,6 +74,15 @@ asset promotion and inclusion in the current generator are separate decisions.
   poses; historical prompts about live movement are provenance, not a promise of
   playable old revisions. [Tactical 009](../tactical/009-city-places-and-indoor-performance.md)
   preserves their delivery history. Consult the live Workshop inbox for later decisions.
+
+## Connected countryside and larger settlements
+
+On 2026-10-09 the owner requested farmhouses and smaller dirt roads branching
+from inter-town roads, larger denser cities, and cats/dogs in towns and cities,
+then authorized proceeding. [083](../tactical/083-farms-town-pets-and-larger-cities.md)
+tracks connected farmsteads/town pets first and expanded current city layouts next.
+Reuse existing assets and durable fauna; keep compact villages, traffic-safe pet
+homes, seeded reservations and frozen review compositions separate.
 
 ## Next work
 
