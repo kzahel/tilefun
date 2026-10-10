@@ -4,7 +4,7 @@ Topic: entity-activation
 Status: incremental persistence and shared lazy residency are implemented.
 World containers, traffic records, bounded admission and recovery validation
 are complete.
-Updated: 2026-10-05.
+Updated: 2026-10-10.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
 [Performance](performance.md) owns broader timing evidence and renderer work;
@@ -44,6 +44,15 @@ Player tickets request full AI decisions within 2 chunks, reduced decisions
 within 4 and collision support within 5. Camera tickets add residency without
 activating distant AI. Distant players contribute a union of neighborhoods.
 
+[088](../tactical/088-wildlife-work-budgets.md) further narrows wildlife simulation
+within that membership. An animal wakes within 192px of any player or in that
+player's visible chunk range plus one chunk, clamped to the player's two-chunk
+neighborhood. Exit hysteresis lasts at most 0.5 simulation seconds with a wider
+margin. Followers, attached groups and moving ordinary-body contacts retain
+activity. A fresh actor receives one grounding step before sleep; sleeping actors
+retain residency, collision bodies, RNG and motion phase without accumulating dt.
+Ordinary avatars, vehicles and projectiles retain their existing membership.
+
 Movement remains fixed-step in both active tiers; nominal reduced decision rate
 is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic
 state without wall-clock catch-up. Balls, entity physics, separation, attachments
@@ -82,6 +91,23 @@ exact test counts, benchmark observations and limits.
 Dense active crowds still produce collision-pair and rendering costs. Bounded
 unloading is not proof of acceptable performance for arbitrarily dense nearby
 populations.
+
+The [2026-10-10 desync investigation](../research/mobile-desync-investigation.md)
+confirms that 384 camera-resident distant dogs leave only the player active;
+nearby dogs instead incur expensive collision/support work. Normal generated
+countryside fixtures have 94–173 active actors. On the attached Pixel 7a, a fresh
+dog-clearing world has 242 resident actors (221 robins), approximately 160 active
+and three in visible chunks. Baseline tick p95 is 23–26 ms. Decision-only culling
+reduces spikes but leaves fixed-step offscreen physics; full wildlife sleep beyond
+a one-chunk view margin/proximity reduces active membership to 22 and tick p95 to
+12.5–13.5 ms. These physical measurements describe the earlier diagnostic control,
+not the shipped policy's mobile performance. [088](../tactical/088-wildlife-work-budgets.md)
+implements shared sleep interest and deterministic robin work quotas, including
+bounds inside an individual path search. It deliberately chooses among a smaller
+set of fully checked candidates; 085's original-choice parity applies to the
+unbudgeted allocation optimization only. Moving phone validation and cheaper
+resting-body support/broadphase queries remain follow-up. Prediction's history
+weakness has its own owner; the user's original save has not been profiled.
 
 Campfires have no AI: their definition in
 [EntityDefs](../../src/entities/EntityDefs.ts) gives them animation and a solid

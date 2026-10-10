@@ -23133,15 +23133,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:653"
+          "source": "src/client/ClientStateView.ts:671"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:55"
+          "source": "src/client/PlayerPredictor.ts:77"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:643"
+          "source": "src/client/PlayerPredictor.ts:674"
         },
         {
           "system": "Gameplay",
@@ -23225,11 +23225,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1212"
+          "source": "src/server/Realm.ts:1220"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2171"
+          "source": "src/server/Realm.ts:2213"
         },
         {
           "system": "Gameplay",
@@ -23926,6 +23926,10 @@
         {
           "system": "Editor",
           "source": "src/scenes/PlayScene.ts:714"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:2180"
         }
       ]
     },

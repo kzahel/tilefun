@@ -209,7 +209,7 @@ export class ScenarioClient {
     void this.ready
       .then(() => this.request({ kind: "clock", running }))
       .then(() => {
-        this.view.resetPresentationClock();
+        this.view.resetPresentationClock(true);
         this.predictor.reset(this.view.serverPlayerEntity);
       })
       .catch((error) => this.fail(error))

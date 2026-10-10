@@ -4,6 +4,27 @@ Topic: wildlife
 Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay; the four exact pet drafts await human review. Other art expansion stays stopped.
 Updated: 2026-10-10.
 
+## Robin CPU follow-up
+
+[085](../tactical/085-robin-search-cost.md) removes whole-actor copies from robin
+path samples and unnecessary crown discovery during safe timer waits in the
+shared game/lab AI. Existing motion/RNG/candidates and current-tree alarm rules
+are preserved. All 480 decision traces and 55,740 occupancy samples match the
+original; warmed desktop decision CPU is approximately 42% lower. Phone A/B is
+pending foreground availability. All 2,108 units and seven focused game/lab browser
+checks and six-phase streaming readiness pass. Production-table refresh cannot
+run because ignored campaign progress is absent in this checkout; retain the last
+validated table and review state.
+[088](../tactical/088-wildlife-work-budgets.md) now supplies shared contact-aware
+wildlife sleep and bounded robin candidate/path work. These runtime quotas change
+which fully checked candidate is selected; the earlier parity result covers only
+085's unbudgeted allocation optimization. The phone capture establishes the old
+offscreen cost; new physical moving-gameplay timing remains follow-up. Final runtime validation
+passes 2,133 units, 18 focused browser reruns and streaming readiness. Two full-suite
+review fixtures still require absent historical fox archives; feedback fails closed.
+Art production, review decisions, individual generation and saved phases are
+unchanged. [Performance](performance.md) owns whole-tick measurements.
+
 ## Common pets: bounded resumption
 
 On 2026-10-10 the owner requested recording familiar-animal/variation ideas,

@@ -1,6 +1,7 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
+import type { WildlifeBody, WildlifeEnvironment } from "./mallardAI.js";
 import type { RobinPerch } from "./Robin.js";
+import type { RobinWorkBudget } from "./RobinWorkBudget.js";
 import { restoreRobinPose, robinMotionZ, settleRobin, startleRobin } from "./robinInteractions.js";
 
 const distance = (a: PositionComponent, b: PositionComponent) =>
@@ -11,6 +12,7 @@ export function updateRobinAI(
   environment: WildlifeEnvironment,
   animals: readonly Entity[],
   players: readonly PositionComponent[],
+  budget?: RobinWorkBudget,
 ): void {
   const ai = bird.robin,
     velocity = bird.velocity;
@@ -20,6 +22,16 @@ export function updateRobinAI(
     return ai.randomState / 4294967296;
   };
   if (ai.motion) return;
+  // Current crowns matter for decisions and the smaller perched alarm radius.
+  // A distant player cannot alarm either pose, so idle waits need no prop query.
+  if (
+    ai.timer > dt &&
+    (ai.state === "recover" || !players.some((p) => distance(p, bird.position) < 26))
+  ) {
+    velocity.vx = velocity.vy = 0;
+    ai.timer -= dt;
+    return;
+  }
   const perches = environment.perches?.(ai.home, ai.radius) ?? [];
   const perched = perches.some(
     (p) => distance(p, bird.position) < 2 && Math.abs(p.z - (bird.wz ?? 0)) < 1,
@@ -40,6 +52,8 @@ export function updateRobinAI(
     rest();
     return;
   }
+  // Wait fairly for planning admission, without consuming activity or RNG.
+  if (budget && (budget.starts <= 0 || budget.candidates <= 0 || budget.samples <= 0)) return;
   if (!escaping) {
     ai.activity++;
     if (ai.activity % 3 === 0) {
@@ -50,10 +64,25 @@ export function updateRobinAI(
     }
   }
   const flying = escaping || perched || ai.activity % 2 === 0;
+  if (budget) budget.starts--;
+  const near = players.some((p) => distance(p, bird.position) < 192);
+  let candidatesLeft = budget ? (near ? 8 : 4) : Infinity;
+  let samplesLeft = budget ? (near ? 64 : 32) : Infinity;
   const from = ai.alarmFrom ?? bird.position;
   let target: RobinPerch | undefined,
     best = -Infinity;
-  const candidates: RobinPerch[] = flying && !perched ? [...perches] : [];
+  // Chunk queries include crowns outside the home radius. Do not let that
+  // stable, unreachable prefix consume every bounded search's candidate quota.
+  const candidates: RobinPerch[] =
+    flying && !perched
+      ? budget
+        ? perches.filter(
+            (p) => distance(p, ai.home) <= ai.radius - 8 && distance(p, bird.position) >= 10,
+          )
+        : [...perches]
+      : [];
+  // Borrowed only for synchronous queries; never write trial heights to the actor.
+  const body: WildlifeBody = { collider: bird.collider, wz: bird.wz ?? 0 };
   for (let i = 0; i < 24; i++) {
     const away =
       distance(from, bird.position) < 1
@@ -68,6 +97,8 @@ export function updateRobinAI(
     candidates.push({ ...p, z: environment.surfaceZ?.(p) ?? 0 });
   }
   for (const p of candidates) {
+    if (budget && (candidatesLeft-- <= 0 || budget.candidates <= 0 || budget.samples <= 0)) break;
+    if (budget) budget.candidates--;
     const length = distance(p, bird.position),
       gain = distance(p, from) - distance(bird.position, from);
     if (
@@ -87,6 +118,9 @@ export function updateRobinAI(
       continue;
     let clear = true;
     const steps = Math.ceil(length / 3);
+    // Reserve the entire route and its final endpoint. Never accept an unchecked
+    // suffix when work runs out; previously completed candidates remain usable.
+    if (budget && (steps + 1 > samplesLeft || steps + 1 > budget.samples)) continue;
     for (let i = 1; i <= steps; i++) {
       const t = i / steps,
         point = {
@@ -94,16 +128,27 @@ export function updateRobinAI(
           wy: bird.position.wy + (p.wy - bird.position.wy) * t,
         };
       const z = robinMotionZ(flying ? "flight" : "hop", bird.wz ?? 0, p.z, t);
+      body.wz = z;
+      if (budget) {
+        budget.samples--;
+        samplesLeft--;
+      }
       if (
         environment.isWater(point) ||
-        !environment.canOccupy({ ...bird, wz: z }, point) ||
+        !environment.canOccupy(body, point) ||
         (!flying && Math.abs((environment.surfaceZ?.(point) ?? 0) - (bird.wz ?? 0)) > 4)
       ) {
         clear = false;
         break;
       }
     }
-    if (!clear || !environment.canOccupy({ ...bird, wz: p.z }, p)) continue;
+    if (!clear) continue;
+    body.wz = p.z;
+    if (budget) {
+      budget.samples--;
+      samplesLeft--;
+    }
+    if (!environment.canOccupy(body, p)) continue;
     const score = escaping ? gain + (p.z > 4 ? 12 : 0) : p.z > 4 ? 2 + random() : random();
     if (score > best) {
       best = score;

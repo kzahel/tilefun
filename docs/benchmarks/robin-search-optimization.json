@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-10",
+  "cases": 480,
+  "parity": true,
+  "limits": "Headless decisions with observed actors and native terrain/prop queries. Parity capture includes trace allocation; six timing rounds omit traces after one warmup round and reverse lane order. No full server, motion or rendering benchmark.",
+  "before": {
+    "ms": 280.5827920000007,
+    "perches": 480,
+    "occupancy": 55740
+  },
+  "after": {
+    "ms": 161.88158400000214,
+    "perches": 384,
+    "occupancy": 55740
+  },
+  "rounds": [
+    {
+      "before": {
+        "totalMs": 251.34186599999816,
+        "p50": 0.007458000000042375,
+        "p95": 2.7642499999999472,
+        "max": 3.3792499999999563
+      },
+      "after": {
+        "totalMs": 146.255623999999,
+        "p50": 0.007834000000002561,
+        "p95": 1.546624999999949,
+        "max": 2.024832999999944
+      }
+    },
+    {
+      "before": {
+        "totalMs": 250.26974300000643,
+        "p50": 0.0075419999998302956,
+        "p95": 2.7380410000000666,
+        "max": 3.3705419999996593
+      },
+      "after": {
+        "totalMs": 144.10462500000176,
+        "p50": 0.007500000000163709,
+        "p95": 1.5224170000001322,
+        "max": 1.978207999999995
+      }
+    },
+    {
+      "before": {
+        "totalMs": 252.53400099999044,
+        "p50": 0.007582999999613094,
+        "p95": 2.771458000000166,
+        "max": 3.7319579999998496
+      },
+      "after": {
+        "totalMs": 147.39069500000096,
+        "p50": 0.007791999999881227,
+        "p95": 1.5591669999998885,
+        "max": 2.4140000000002146
+      }
+    },
+    {
+      "before": {
+        "totalMs": 254.6925390000015,
+        "p50": 0.007749999999759893,
+        "p95": 2.794832999999926,
+        "max": 4.481124999999793
+      },
+      "after": {
+        "totalMs": 146.4740440000014,
+        "p50": 0.007542000000285043,
+        "p95": 1.541124999999738,
+        "max": 2.091374999999971
+      }
+    },
+    {
+      "before": {
+        "totalMs": 245.61350699999366,
+        "p50": 0.008500000000367436,
+        "p95": 2.6961670000000595,
+        "max": 3.19912499999964
+      },
+      "after": {
+        "totalMs": 146.22525500000802,
+        "p50": 0.008584000000155356,
+        "p95": 1.5324580000001333,
+        "max": 2.2739590000001044
+      }
+    },
+    {
+      "before": {
+        "totalMs": 239.65874099999746,
+        "p50": 0.0070420000001831795,
+        "p95": 2.6562910000002375,
+        "max": 3.11783400000013
+      },
+      "after": {
+        "totalMs": 139.582960000002,
+        "p50": 0.00716599999987011,
+        "p95": 1.4741669999998521,
+        "max": 2.0455839999999625
+      }
+    }
+  ],
+  "referenceRevision": "2d8248e",
+  "referenceFile": "src/wildlife/robinAI.ts",
+  "runtimeChanges": [
+    "geometry-only occupancy body reused through one synchronous decision",
+    "idle timer waits omit current crown queries unless close-player alarm classification is needed"
+  ],
+  "phoneComparison": "No completed new captures: native Chrome was backgrounded, causing menu/CDP timeouts. Prior phone timings are in mobile-authority-investigation.json.",
+  "summary": {
+    "before": {
+      "medianRoundTotalMs": 250.8058045000023,
+      "medianRoundP95Ms": 2.751145500000007
+    },
+    "after": {
+      "medianRoundTotalMs": 146.2404395000035,
+      "medianRoundP95Ms": 1.5367914999999357
+    },
+    "totalCpuReductionPct": 41.69176435467937
+  },
+  "traceSha256": "1d5cbca32c467f64ce11d3e4386797be74bd51f79c7ba121f7413b512dea2508",
+  "host": {
+    "cpu": "Apple M4 Pro",
+    "node": "v26.7.0",
+    "platform": "darwin",
+    "physicalPhone": false
+  }
+}

@@ -3,8 +3,11 @@ import { setSpriteClip } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { settleMallard } from "./mallardInteractions.js";
 
+/** Synchronous occupancy queries need geometry, not an actor's AI/persistent state. */
+export type WildlifeBody = Pick<Entity, "collider" | "wz">;
+
 export interface WildlifeEnvironment {
-  canOccupy(entity: Entity, point: PositionComponent): boolean;
+  canOccupy(body: WildlifeBody, point: PositionComponent): boolean;
   isWater(point: PositionComponent): boolean;
   isDeepWater?(point: PositionComponent): boolean;
   surfaceZ?(point: PositionComponent): number;

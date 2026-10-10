@@ -1,5 +1,6 @@
-import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { Entity, PositionComponent, SpriteComponent } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
 import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import {
@@ -23,6 +24,27 @@ const SNAP_THRESHOLD = 32;
 
 /** Ring buffer capacity for stored inputs (replay-based reconciliation). */
 const INPUT_BUFFER_SIZE = 128;
+
+/** Ordinary controlled animation owns local phase; physically timed clips do not. */
+function predictionSprite(
+  local: SpriteComponent | null,
+  authoritative: SpriteComponent | null,
+): SpriteComponent | null {
+  if (!authoritative) return null;
+  const sprite = { ...authoritative };
+  if (
+    local &&
+    local.sheetKey === sprite.sheetKey &&
+    local.frameCount === sprite.frameCount &&
+    local.clip === sprite.clip &&
+    local.clipElapsedMs === undefined &&
+    sprite.clipElapsedMs === undefined
+  ) {
+    sprite.frameCol = local.frameCol;
+    sprite.animTimer = local.animTimer;
+  }
+  return sprite;
+}
 
 export interface StoredInput {
   seq: number;
@@ -301,6 +323,10 @@ export class PlayerPredictor {
       this.predictionTime =
         collisionTime + Math.max(0, this.clock() - this.reconciledAt - this.collisionStepSeconds);
     this.applyInput(movement, dt, world, props, entities, this.physics());
+    // Replay applies physics only; live prediction advances this clock once.
+    if (this.predicted.sprite?.clipElapsedMs === undefined) tickSpriteAnimation(this.predicted, dt);
+    if (this.predictedMount && this.predictedMount.sprite?.clipElapsedMs === undefined)
+      tickSpriteAnimation(this.predictedMount, dt);
     this.predictionTime = collisionTime;
   }
 
@@ -409,7 +435,7 @@ export class PlayerPredictor {
       this.predictedMount.position.wx = serverMount.position.wx;
       this.predictedMount.position.wy = serverMount.position.wy;
       this.predictedMount.collider = serverMount.collider;
-      this.predictedMount.sprite = serverMount.sprite ? { ...serverMount.sprite } : null;
+      this.predictedMount.sprite = predictionSprite(this.predictedMount.sprite, serverMount.sprite);
       if (serverMount.wanderAI) {
         this.predictedMount.wanderAI = { ...serverMount.wanderAI };
       }
@@ -552,11 +578,16 @@ export class PlayerPredictor {
     // preserve predicted animation state (moving, direction, frameRow,
     // frameDuration). The server's sprite may have stale animation if a
     // no-input tick or timing jitter set moving=false between acked inputs.
-    const predMoving = this.predicted.sprite?.moving;
+    const localSprite = this.predicted.sprite;
+    const compatibleSprite =
+      localSprite?.sheetKey === serverPlayer.sprite?.sheetKey &&
+      localSprite?.frameCount === serverPlayer.sprite?.frameCount &&
+      localSprite?.clip === serverPlayer.sprite?.clip;
+    const predMoving = compatibleSprite ? localSprite?.moving : undefined;
     const predDirection = this.predicted.sprite?.direction;
     const predFrameRow = this.predicted.sprite?.frameRow;
     const predFrameDuration = this.predicted.sprite?.frameDuration;
-    this.predicted.sprite = serverPlayer.sprite ? { ...serverPlayer.sprite } : null;
+    this.predicted.sprite = predictionSprite(localSprite, serverPlayer.sprite);
     if (this.predicted.sprite && predMoving !== undefined) {
       this.predicted.sprite.moving = predMoving;
       this.predicted.sprite.direction = predDirection ?? this.predicted.sprite.direction;

@@ -106,6 +106,7 @@ import type { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 import { tickAllAI } from "./tickAllAI.js";
+import { isWildlife, WildlifeActivity } from "./WildlifeActivity.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
 
@@ -864,48 +865,55 @@ export class Realm {
             ((this.streaming.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
               this.streaming.supported(prop, stepDt)),
         );
-        tickAllAI(active, playerPositions, decisions, this.options.random ?? Math.random, {
-          perches: (home, radius) =>
-            robinTreePerches(
-              this.propManager.getPropsInChunkRange(
-                Math.floor((home.wx - radius) / 256),
-                Math.floor((home.wy - radius) / 256),
-                Math.floor((home.wx + radius) / 256),
-                Math.floor((home.wy + radius) / 256),
-              ),
-            ),
-          surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
-          isWater: (p) =>
-            (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
-              CollisionFlag.Water) !==
-            0,
-          isDeepWater: (p) =>
-            this.world.getBlendBaseAt(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) ===
-            TerrainId.DeepWater,
-          canOccupy: (entity, p) => {
-            if (!entity.collider) return false;
-            const box = getEntityAABB(p, entity.collider);
-            if (
-              aabbOverlapsSolid(
-                box,
-                (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-                CollisionFlag.Solid,
-              )
-            )
-              return false;
-            return !this.propManager
-              .getPropsNearPosition(p, entity.collider)
-              .some((prop) =>
-                aabbOverlapsPropWalls(
-                  box,
-                  prop.position,
-                  prop,
-                  entity.wz ?? 0,
-                  entity.collider?.physicalHeight ?? 9,
+        tickAllAI(
+          active,
+          playerPositions,
+          decisions,
+          this.options.random ?? Math.random,
+          {
+            perches: (home, radius) =>
+              robinTreePerches(
+                this.propManager.getPropsInChunkRange(
+                  Math.floor((home.wx - radius) / 256),
+                  Math.floor((home.wy - radius) / 256),
+                  Math.floor((home.wx + radius) / 256),
+                  Math.floor((home.wy + radius) / 256),
                 ),
-              );
+              ),
+            surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
+            isWater: (p) =>
+              (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
+                CollisionFlag.Water) !==
+              0,
+            isDeepWater: (p) =>
+              this.world.getBlendBaseAt(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) ===
+              TerrainId.DeepWater,
+            canOccupy: (entity, p) => {
+              if (!entity.collider) return false;
+              const box = getEntityAABB(p, entity.collider);
+              if (
+                aabbOverlapsSolid(
+                  box,
+                  (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+                  CollisionFlag.Solid,
+                )
+              )
+                return false;
+              return !this.propManager
+                .getPropsNearPosition(p, entity.collider)
+                .some((prop) =>
+                  aabbOverlapsPropWalls(
+                    box,
+                    prop.position,
+                    prop,
+                    entity.wz ?? 0,
+                    entity.collider?.physicalHeight ?? 9,
+                  ),
+                );
+            },
           },
-        });
+          this.robinTurn++,
+        );
 
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
@@ -2093,7 +2101,7 @@ export class Realm {
         )
           result.set(state.entity, dt);
       }
-      return result;
+      return this.selectWildlifeActivity(result, sessions, dt);
     }
     const nearBuf = Realm.BROADCAST_BUFFER_CHUNKS;
     const midBuf = nearBuf + Realm.MID_TICK_BUFFER;
@@ -2156,10 +2164,44 @@ export class Realm {
       entity.tickAccumulator = 0;
     }
 
-    return result;
+    return this.selectWildlifeActivity(result, sessions, dt);
+  }
+
+  private selectWildlifeActivity(
+    active: Map<Entity, number>,
+    sessions: readonly PlayerSession[],
+    dt: number,
+  ): Map<Entity, number> {
+    this.wildlifeActivity.advance(dt);
+    const contacts = [...active.keys()].filter(
+      (e) =>
+        !isWildlife(e) &&
+        e.collider?.solid !== false &&
+        (e.type === "ball" || (!!e.velocity && (e.velocity.vx !== 0 || e.velocity.vy !== 0))),
+    );
+    const visited = new Set<Entity>();
+    for (const entity of active.keys()) {
+      if (visited.has(entity)) continue;
+      const group = this.records ? this.records.group(entity) : [entity];
+      for (const member of group) visited.add(member);
+      // Fresh actors need one physics step to establish their grounded pose.
+      // Restored actors already carry that pose; sleeping never reinitializes it.
+      if (
+        group.some((member) => member.wz === undefined) ||
+        this.wildlifeActivity.awake(group, sessions, contacts)
+      )
+        continue;
+      for (const member of group) {
+        active.delete(member);
+        member.tickAccumulator = 0;
+      }
+    }
+    return active;
   }
 
   private previousActive = new Set<Entity>();
+  private readonly wildlifeActivity = new WildlifeActivity();
+  private robinTurn = 0;
   private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {
     const decisions = new Map<Entity, number>();
     for (const entity of this.previousActive) if (!active.has(entity)) entity.tickAccumulator = 0;

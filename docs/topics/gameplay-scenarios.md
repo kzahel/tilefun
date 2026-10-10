@@ -142,6 +142,12 @@ return to zero on exit, and verifies that no IndexedDB worlds are created.
 Next: review movement feel in the migrated labs. Future small gameplay examples
 should add fixture data and semantic integration assertions through this host.
 
+Explicit authority clock fences also reset timed sprite clips to their latest
+replicated phase. Local animation ticks can advance without a new sprite delta;
+pausing must freeze the saved authority frame so reload does not change it.
+`RemoteStateView` retains those phases until a clip ends, an entity exits or the
+world is cleared; ordinary presentation-clock resets retain their existing behavior.
+
 
 Paused camera changes use the `view-range` command to ready/replicate a bounded
 chunk range without a simulation tick. Reload preserves that range, including

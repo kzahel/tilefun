@@ -5,6 +5,7 @@ import { updateDeerAI } from "../wildlife/deerAI.js";
 import { updateFaunaAI } from "../wildlife/faunaAI.js";
 import { updateFrogAI } from "../wildlife/frogAI.js";
 import { updateMallardAI, type WildlifeEnvironment } from "../wildlife/mallardAI.js";
+import { robinWorkBudget } from "../wildlife/RobinWorkBudget.js";
 import { updateRabbitAI } from "../wildlife/rabbitAI.js";
 import { updateRobinAI } from "../wildlife/robinAI.js";
 
@@ -24,9 +25,11 @@ export function tickAllAI(
   entityTickDts: ReadonlyMap<Entity, number>,
   rng: () => number,
   wildlife?: WildlifeEnvironment,
+  robinTurn = 0,
 ): void {
   // Collect buddies for hostile AI targeting (need all, not just ticked)
   const buddies = entities.filter((e) => e.wanderAI?.following);
+  const robins: [Entity, number][] = [];
   for (const [entity, dt] of entityTickDts) {
     if (entity.fauna && wildlife) {
       updateFaunaAI(entity, dt, wildlife, entities, playerPositions);
@@ -37,7 +40,7 @@ export function tickAllAI(
       continue;
     }
     if (entity.robin && wildlife) {
-      updateRobinAI(entity, dt, wildlife, entities, playerPositions);
+      robins.push([entity, dt]);
       continue;
     }
     if (entity.rabbit && wildlife) {
@@ -65,6 +68,26 @@ export function tickAllAI(
     } else {
       updateWanderAI(entity, dt, rng);
     }
+  }
+  if (wildlife && robins.length) {
+    const budget = robinWorkBudget();
+    const rotated = robins
+      .slice(robinTurn % robins.length)
+      .concat(robins.slice(0, robinTurn % robins.length));
+    // Alarms have priority, then proximity. Rotation preserves fair admission
+    // within each class even when many timers expire together.
+    const rank = (entity: Entity) =>
+      entity.robin?.alarmFrom
+        ? 0
+        : playerPositions.some(
+              (p) => Math.hypot(p.wx - entity.position.wx, p.wy - entity.position.wy) < 192,
+            )
+          ? 1
+          : 2;
+    const priorities = new Map(rotated.map(([entity]) => [entity, rank(entity)]));
+    rotated.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
+    for (const [entity, dt] of rotated)
+      updateRobinAI(entity, dt, wildlife, entities, playerPositions, budget);
   }
 }
 

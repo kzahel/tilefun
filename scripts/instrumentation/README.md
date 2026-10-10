@@ -1,5 +1,60 @@
 # Diagnostic probes
 
+## Mobile desync and active populations
+
+`node scripts/instrumentation/desync-stalls.mjs --output=/tmp/tilefun-desync-stalls`
+runs real-Worker short/long authority stalls, a main-thread stall and delayed
+outgoing-command controls in isolated bundled Chromium. It measures unchanged
+local walk frames, sampled prediction steps, post-replay error and history occupancy.
+It owns ephemeral worlds/data and closes its browser/server. Add
+`--predicted-animation` to test the local phase prototype against older source.
+It is a no-op when the production local-clock implementation is already present. For the attached phone, use `--cdp="$PHONE_CDP_URL" --port="$PHONE_HTTP_PORT"`
+after setting up task-owned USB forwarding/reverse routes through machine-control's
+Android guide. It opens/closes owned tabs on the native context and clears only
+the isolated localhost origin; disconnecting leaves user Chrome running. Movement
+is driven through CDP keyboard commands, not a touch-input benchmark.
+
+`node scripts/instrumentation/mobile-authority.mjs --output=/tmp/tilefun-mobile-authority`
+captures 15 seconds of native Worker/renderer/IndexedDB stationary countryside per
+control. It defaults to baseline, decision-only visibility, full hidden-wildlife
+sleep, no-AI and baseline. `--controls=baseline,query-cache,sleep-hidden-cache,baseline`
+tests query caching separately. `--scenes=dog` selects the fresh thicket arrival;
+`--seconds=15` controls sampling. The same `--cdp`/`--port` arguments attach the phone;
+`--android-device-cli="$ANDROID_DEVICE_CLI"` adds thermal readings. Remove only the
+task's owned USB routes after the run. With no CDP endpoint it uses bundled Chromium.
+Coarse visible chunks, a one-chunk sleep margin and proximity/parent exceptions
+are diagnostic controls, not production activation policy. They do not establish
+safe movement, persistence, wake or multiplayer behavior. Raw host IDs remain in
+the temporary report; commit only sanitized summaries.
+`--robin-reference=PATH` substitutes only the supplied pre-change `robinAI.ts`
+inside this diagnostic Vite server for an original/optimized comparison. The
+reference must be from the same checkout's companion modules. For a full earlier
+policy comparison, also supply `--realm-reference=PATH` and `--ai-reference=PATH`
+with matching earlier `Realm.ts` and `tickAllAI.ts`. The default baseline means the
+current production policy, not the historical runtime. Keep Chrome in the
+foreground on the phone; background debugging can stall or stop. Startup failures
+inside the capture retain page errors and body text in `failure.json`.
+
+`node --import tsx scripts/instrumentation/robin-search.mjs --reference=PATH --output=/tmp/tilefun-robin-search-parity`
+compares 480 observed-actor decisions against explicitly supplied original source,
+using native generated-world terrain/prop queries. It requires Node with
+`node:module.stripTypeScriptTypes`. Complete saved actor state and every occupancy
+point/height must match, including RNG. After parity, one warmup and six timing
+rounds omit traces and reverse lane order. Hydration is outside the AI timer.
+This is decision characterization, not full server/physics/render or phone timing.
+[Optimization slice](../../docs/tactical/085-robin-search-cost.md).
+
+`node --import tsx scripts/instrumentation/active-crowds.mjs --output=/tmp/tilefun-active-crowds`
+compares 0/24/96/384 nearby dogs and 384 resident distant dogs through production
+Realm streaming/physics. Add `--natural` for six current generated thicket scenes.
+Each runs 240 idle input/tick pairs with 60 warmup ticks; replication is timed
+separately for the remaining 180. This excludes rendering and actual IndexedDB.
+Phase instrumentation adds overhead and dirty-marking timings overlap physics/AI.
+
+Run these timing probes sequentially without concurrent validation. They characterize
+known faults/workloads rather than asserting FPS acceptance or modifying gameplay.
+[Evidence and next work](../../docs/research/mobile-desync-investigation.md).
+
 ## Render and authority rates
 
 `npx tsx scripts/instrumentation/prediction-rates.ts --output=/tmp/prediction-rates.json`

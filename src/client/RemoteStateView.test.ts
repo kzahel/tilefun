@@ -32,6 +32,7 @@ import {
 } from "../physics/PlayerMovement.js";
 import type { FrameMessage } from "../shared/protocol.js";
 import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
+import { createRobin } from "../wildlife/Robin.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
@@ -719,6 +720,39 @@ describe("RemoteStateView", () => {
 });
 
 describe("RemoteStateView tickAnimations", () => {
+  it("freezes timed clips at the authority phase after an explicit clock fence", () => {
+    const view = new RemoteStateView(new World(new FlatStrategy()));
+    const robin = createRobin(0, 0);
+    robin.id = 1;
+    if (!robin.sprite) throw new Error("Missing robin sprite");
+    robin.sprite.clip = 1;
+    robin.sprite.clipElapsedMs = 350;
+    view.applyFrame(makeFrame({ entityBaselines: [serializeEntity(robin)] }));
+    expect(view.entities[0]?.sprite?.frameCol).toBe(3);
+    view.tickAnimations(0.1);
+    expect(view.entities[0]?.sprite?.frameCol).toBe(4);
+    // A pause response can contain no sprite delta: its source phase did not
+    // change even though the client's animation clock advanced across a frame.
+    view.applyFrame(makeFrame({ entityDeltas: [] }));
+    view.resetPresentationClock();
+    expect(view.entities[0]?.sprite?.frameCol).toBe(4);
+    view.resetPresentationClock(true);
+    expect(view.entities[0]?.sprite?.frameCol).toBe(3);
+    expect(view.entities[0]?.sprite?.clipElapsedMs).toBe(350);
+    view.applyFrame(
+      makeFrame({
+        entityDeltas: [
+          {
+            id: 1,
+            spriteState: { direction: Direction.Down, moving: false, frameRow: 0, clip: 0 },
+          },
+        ],
+      }),
+    );
+    view.resetPresentationClock(true);
+    expect(view.entities[0]?.sprite?.clipElapsedMs).toBeUndefined();
+    expect(view.entities[0]?.sprite?.frameCol).toBe(0);
+  });
   it("advances frameCol for moving entities", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);

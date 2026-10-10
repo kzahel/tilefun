@@ -2,7 +2,7 @@ import { TICK_RATE } from "../config/constants.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
-import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
+import { setSpriteClipElapsed, tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import {
   getMovementPhysicsParams,
   setAccelerate,
@@ -158,6 +158,7 @@ export class RemoteStateView implements ClientStateView {
   interior: import("../interiors/GameplayInterior.js").InteriorIdentity | null = null;
   private _world: World;
   private _entityMap: Map<number, Entity> = new Map();
+  private authoritativeClipPhases = new Map<number, number>();
   private _entities: Entity[] = [];
   private _props: Prop[] = [];
   private _playerEntityId = -1;
@@ -218,8 +219,15 @@ export class RemoteStateView implements ClientStateView {
   endPresentation(): void {
     this.presentedEntities = null;
   }
-  resetPresentationClock(): void {
+  resetPresentationClock(resetAnimations = false): void {
     this.presentation.resetClock();
+    // Local animation ticks may lead the last authority snapshot. An explicit
+    // authority clock fence must freeze at that snapshot, just like position.
+    if (resetAnimations)
+      for (const [id, phase] of this.authoritativeClipPhases) {
+        const entity = this._entityMap.get(id);
+        if (entity) setSpriteClipElapsed(entity, phase);
+      }
   }
 
   constructor(world: World) {
@@ -361,6 +369,7 @@ export class RemoteStateView implements ClientStateView {
     if (msg.entityExits) {
       for (const id of msg.entityExits) {
         this._entityMap.delete(id);
+        this.authoritativeClipPhases.delete(id);
       }
     }
 
@@ -370,6 +379,9 @@ export class RemoteStateView implements ClientStateView {
         const entity = deserializeEntity(snapshot);
         // New entity — no prev position for interpolation
         this._entityMap.set(entity.id, entity);
+        const phase = snapshot.spriteState?.clipElapsedMs;
+        if (phase === undefined) this.authoritativeClipPhases.delete(entity.id);
+        else this.authoritativeClipPhases.set(entity.id, phase);
       }
     }
 
@@ -379,6 +391,11 @@ export class RemoteStateView implements ClientStateView {
         const entity = this._entityMap.get(delta.id);
         if (entity) {
           applyEntityDelta(entity, delta);
+          if (delta.spriteState !== undefined) {
+            const phase = delta.spriteState?.clipElapsedMs;
+            if (phase === undefined) this.authoritativeClipPhases.delete(entity.id);
+            else this.authoritativeClipPhases.set(entity.id, phase);
+          }
         }
       }
     }
@@ -487,6 +504,7 @@ export class RemoteStateView implements ClientStateView {
       `[tilefun:rsv] clear() — playerEntityId=${this._playerEntityId}, pendingStates=${this._pendingStates.length}, predictor=${!!this._predictor?.player}, editorEnabled=${this._editorEnabled}, chunks=${this._world.chunks.loadedCount}`,
     );
     this._entityMap.clear();
+    this.authoritativeClipPhases.clear();
     this._simulationTime = undefined;
     this._entities = [];
     this._props = [];

@@ -36,6 +36,110 @@ import { robinTreePerches } from "./robinPerches.js";
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 
+it("waits without crown queries while retaining immediate close-player alarm rules", () => {
+  for (const state of ["rest", "recover"] as const) {
+    const bird = createRobin(64, 64),
+      ai = required(bird.robin);
+    ai.state = state;
+    const rng = ai.randomState;
+    updateRobinAI(
+      bird,
+      0.1,
+      {
+        ...open,
+        perches: () => {
+          throw Error("Distant timer waits must not query crowns");
+        },
+      },
+      [bird],
+      state === "recover" ? [bird.position] : [{ wx: 90, wy: 64 }],
+    );
+    expect(ai.timer).toBe(1.4);
+    expect(ai.state).toBe(state);
+    expect(ai.randomState).toBe(rng);
+    expect(ai.alarmFrom).toBeUndefined();
+  }
+
+  const ground = createRobin(64, 64),
+    perched = createRobin(64, 64);
+  perched.wz = 32;
+  required(perched.robin).state = "perch";
+  let queries = 0;
+  const env = {
+    ...open,
+    perches: () => {
+      queries++;
+      return [{ wx: 64, wy: 64, z: 32 }];
+    },
+  };
+  const player = { wx: 84, wy: 64 };
+  updateRobinAI(ground, 0.01, env, [ground], [player]);
+  updateRobinAI(perched, 0.01, env, [perched], [player]);
+  expect(queries).toBe(2);
+  expect(ground.robin?.state).toBe("startle");
+  expect(perched.robin?.state).toBe("perch");
+  // Removing the crown changes the smaller alarm radius on the next decision.
+  updateRobinAI(perched, 0.01, { ...env, perches: () => [] }, [perched], [player]);
+  expect(perched.robin?.state).toBe("startle");
+});
+
+it("queries current crowns when the timer expires, including the exact boundary", () => {
+  for (const timer of [0.1, 0.09]) {
+    const bird = createRobin(64, 64);
+    required(bird.robin).timer = timer;
+    required(bird.robin).activity = 1;
+    let queried = false;
+    updateRobinAI(
+      bird,
+      0.1,
+      {
+        ...open,
+        perches: () => {
+          queried = true;
+          return [{ wx: 100, wy: 64, z: 32 }];
+        },
+      },
+      [bird],
+      [],
+    );
+    expect(queried).toBe(true);
+    expect(bird.robin?.target).toEqual({ wx: 100, wy: 64, z: 32 });
+    expect(bird.robin?.state).toBe("flight");
+  }
+});
+
+it("tests proposed path heights without copying actor state or mutating the bird", () => {
+  const bird = createRobin(64, 64);
+  required(bird.robin).timer = 0;
+  required(bird.robin).activity = 1;
+  Object.defineProperty(bird, "tags", {
+    enumerable: true,
+    get: () => {
+      throw Error("Occupancy must not read unrelated actor fields");
+    },
+  });
+  const heights: number[] = [];
+  updateRobinAI(
+    bird,
+    0.1,
+    {
+      ...open,
+      perches: () => [{ wx: 100, wy: 64, z: 32 }],
+      canOccupy: (body) => {
+        expect(body.collider).toBe(bird.collider);
+        expect(bird.wz).toBeUndefined();
+        heights.push(body.wz ?? 0);
+        return true;
+      },
+    },
+    [bird],
+    [],
+  );
+  expect(Math.max(...heights)).toBeGreaterThan(44);
+  expect(heights).toContain(32);
+  expect(bird.robin?.state).toBe("flight");
+});
+
 it("uses unchanged native robin cells and hop/flap/song ranges", () => {
   const metadata = JSON.parse(
     readFileSync(`public/${ROBIN_IMAGE.replace("sheet.png", "sprite.json")}`, "utf8"),
@@ -103,7 +207,7 @@ it("flies onto actual oak/palm crowns, reloads the same trajectory and leaves re
       ...open,
       perches: () => robinTreePerches(props.props),
       canOccupy: (
-        entity: import("../entities/Entity.js").Entity,
+        entity: import("./mallardAI.js").WildlifeBody,
         point: { wx: number; wy: number },
       ) =>
         !props.props.some((p) =>

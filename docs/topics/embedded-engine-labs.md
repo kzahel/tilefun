@@ -12,6 +12,11 @@ owns recipes, memory persistence and simulation hosting;
 [rendering architecture](rendering-architecture.md) owns presentation/backend
 contracts; [performance](performance.md) owns timing evidence and its limits.
 
+Explicit scenario clock fences reset timed sprite animation to the last
+replicated authority phase through shared `RemoteStateView` code. This prevents
+client animation lead from changing the frozen frame after pause/reload.
+The [scenario topic](gameplay-scenarios.md) owns that clock contract.
+
 ## Farmstead and settlement alignment
 
 [084](../tactical/084-common-pets-and-variations.md) adds four native pet-coat
@@ -56,6 +61,18 @@ with no automatic upward player velocity. No lab-specific animal physics or AI
 is introduced; no historical approval snapshot is regenerated.
 
 ## Robin gameplay alignment
+
+[088](../tactical/088-wildlife-work-budgets.md) routes both game and labs through
+shared Realm wildlife sleep and robin work quotas. Nearby controls retain native
+motion/contact; paused resident motion/RNG survives reload and wakes with one
+normal step. Predicted ordinary player/mount animation uses the shared predictor,
+while physically timed wildlife clips retain their authority clock.
+
+[085](../tactical/085-robin-search-cost.md) optimizes the shared robin decision
+function without a separate lab path. Canvas/GPU grove checks still pass flight,
+actual perching, approach/contact and frozen trajectory reload; ordinary game
+ball reactions and durable manual deletion pass. All decision/RNG/collision
+samples in the headless original/optimized lane match. Art/clip timing is unchanged.
 
 [080](../tactical/080-durable-woodland-robins.md) adds a native grove arrival using
 the normal regional population and Worker. Game and lab share robin registration,

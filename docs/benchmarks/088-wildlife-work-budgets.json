@@ -1,0 +1,425 @@
+{
+  "date": "2026-10-10",
+  "platform": "Apple M4 Pro, bundled Chromium, native Worker/Canvas/IndexedDB",
+  "physical": false,
+  "instrumented": true,
+  "scenario": "Fresh thicket seed 2026, dog clearing, stationary 411x789 viewport, 15 seconds per case",
+  "limits": [
+    "Sequential original-original then current-current runs; no CPU throttle. Instrumentation overhead and run-order effects remain.",
+    "Original Realm/tickAllAI are from 6d78123; original robinAI from 2d8248e (unchanged in 6d78123).",
+    "Not a moving-gameplay, original-save or physical-phone performance comparison.",
+    "Full interval tick summaries are used; built-in host timing summaries retain only the last 512 samples.",
+    "intermediateAfter retains the earlier bounded-prefix policy; final after also prefilters unreachable crowns before charging a candidate slot and includes the shared explicit clip-clock fence. Timing probes were sequential with validation stopped."
+  ],
+  "before": [
+    {
+      "elapsedMs": 15014.5,
+      "tickHz": 59.98792278550437,
+      "residentActors": 242,
+      "activeActors": 159,
+      "species": {
+        "wildlife-robin-v1": 221,
+        "wildlife-dog-provisional-v1": 1,
+        "wildlife-rabbit-v1": 8,
+        "player": 1,
+        "wildlife-fish-provisional-v1": 3,
+        "wildlife-frog-v1": 2,
+        "wildlife-deer-v1": 3,
+        "wildlife-mallard-v1": 2,
+        "wildlife-cat-provisional-v1": 1
+      },
+      "tick": {
+        "count": 905,
+        "totalMs": 3549.8000010252,
+        "max": 13.800000011920929,
+        "p50": 3.300000011920929,
+        "p95": 6.800000011920929,
+        "p99": 10.800000011920929
+      },
+      "robinAI": {
+        "count": 68987,
+        "totalMs": 975.299999833107,
+        "max": 3.099999964237213,
+        "p50": 0,
+        "p95": 0.09999996423721313,
+        "p99": 0.10000002384185791
+      },
+      "physics": {
+        "count": 905,
+        "totalMs": 1539.600000321865,
+        "max": 3,
+        "p50": 1.600000023841858,
+        "p95": 2.400000035762787,
+        "p99": 2.699999988079071
+      },
+      "selection": {
+        "count": 905,
+        "totalMs": 121.10000050067902,
+        "max": 0.30000001192092896,
+        "p50": 0.10000002384185791,
+        "p95": 0.20000004768371582,
+        "p99": 0.20000004768371582
+      },
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000291
+      },
+      "framesOver25ms": 0,
+      "ackMs": {
+        "count": 899,
+        "p50": 33.69999998807907,
+        "p95": 35.19999998807907,
+        "p99": 35.60000002384186,
+        "max": 35.700000047683716
+      },
+      "maxReplay": 1,
+      "errors": []
+    },
+    {
+      "elapsedMs": 15016.300000011921,
+      "tickHz": 59.990709403410975,
+      "residentActors": 242,
+      "activeActors": 159,
+      "species": {
+        "wildlife-robin-v1": 221,
+        "wildlife-dog-provisional-v1": 1,
+        "wildlife-rabbit-v1": 8,
+        "player": 1,
+        "wildlife-fish-provisional-v1": 3,
+        "wildlife-frog-v1": 2,
+        "wildlife-deer-v1": 3,
+        "wildlife-mallard-v1": 2,
+        "wildlife-cat-provisional-v1": 1
+      },
+      "tick": {
+        "count": 905,
+        "totalMs": 3622.6999992132187,
+        "max": 14.5,
+        "p50": 3.400000035762787,
+        "p95": 7.400000035762787,
+        "p99": 10.299999952316284
+      },
+      "robinAI": {
+        "count": 68983,
+        "totalMs": 1047.2999995946884,
+        "max": 3.200000047683716,
+        "p50": 0,
+        "p95": 0.09999996423721313,
+        "p99": 0.10000002384185791
+      },
+      "physics": {
+        "count": 905,
+        "totalMs": 1601.1999992132187,
+        "max": 2.900000035762787,
+        "p50": 1.699999988079071,
+        "p95": 2.599999964237213,
+        "p99": 2.700000047683716
+      },
+      "selection": {
+        "count": 905,
+        "totalMs": 110.200000166893,
+        "max": 0.30000001192092896,
+        "p50": 0.10000002384185791,
+        "p95": 0.20000004768371582,
+        "p99": 0.20000004768371582
+      },
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.800000000000182,
+        "max": 16.80000000000109
+      },
+      "framesOver25ms": 0,
+      "ackMs": {
+        "count": 898,
+        "p50": 33.69999998807907,
+        "p95": 35.09999996423721,
+        "p99": 35.5,
+        "max": 35.90000003576279
+      },
+      "maxReplay": 2,
+      "errors": []
+    }
+  ],
+  "after": [
+    {
+      "elapsedMs": 15001.5,
+      "tickHz": 59.99135379601609,
+      "residentActors": 242,
+      "activeActors": 22,
+      "species": {
+        "wildlife-robin-v1": 221,
+        "wildlife-dog-provisional-v1": 1,
+        "wildlife-rabbit-v1": 8,
+        "player": 1,
+        "wildlife-fish-provisional-v1": 3,
+        "wildlife-frog-v1": 2,
+        "wildlife-deer-v1": 3,
+        "wildlife-mallard-v1": 2,
+        "wildlife-cat-provisional-v1": 1
+      },
+      "tick": {
+        "count": 903,
+        "totalMs": 2090.7999995350838,
+        "max": 8.5,
+        "p50": 2.199999988079071,
+        "p95": 4.199999988079071,
+        "p99": 4.800000011920929
+      },
+      "robinAI": {
+        "count": 19404,
+        "totalMs": 52.3000003695488,
+        "max": 0.699999988079071,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0.10000002384185791
+      },
+      "physics": {
+        "count": 903,
+        "totalMs": 429.7000004053116,
+        "max": 1.199999988079071,
+        "p50": 0.5,
+        "p95": 0.7999999523162842,
+        "p99": 0.9000000357627869
+      },
+      "selection": {
+        "count": 903,
+        "totalMs": 399.4000006914139,
+        "max": 2.200000047683716,
+        "p50": 0.3999999761581421,
+        "p95": 1.0999999642372131,
+        "p99": 1.5
+      },
+      "frames": {
+        "count": 900,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000291
+      },
+      "framesOver25ms": 0,
+      "ackMs": {
+        "count": 820,
+        "p50": 33.89999997615814,
+        "p95": 35.69999998807907,
+        "p99": 36.89999997615814,
+        "max": 51.5
+      },
+      "maxReplay": 2,
+      "errors": []
+    },
+    {
+      "elapsedMs": 15015.099999964237,
+      "tickHz": 60.00265498473384,
+      "residentActors": 242,
+      "activeActors": 22,
+      "species": {
+        "wildlife-robin-v1": 221,
+        "wildlife-dog-provisional-v1": 1,
+        "wildlife-rabbit-v1": 8,
+        "player": 1,
+        "wildlife-fish-provisional-v1": 3,
+        "wildlife-frog-v1": 2,
+        "wildlife-deer-v1": 3,
+        "wildlife-mallard-v1": 2,
+        "wildlife-cat-provisional-v1": 1
+      },
+      "tick": {
+        "count": 905,
+        "totalMs": 2779.5999997854233,
+        "max": 7.599999964237213,
+        "p50": 2.400000035762787,
+        "p95": 5.800000011920929,
+        "p99": 6.5
+      },
+      "robinAI": {
+        "count": 19442,
+        "totalMs": 60.69999957084656,
+        "max": 0.7999999523162842,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0.10000002384185791
+      },
+      "physics": {
+        "count": 905,
+        "totalMs": 444.09999960660934,
+        "max": 1.600000023841858,
+        "p50": 0.5,
+        "p95": 0.800000011920929,
+        "p99": 1.100000023841858
+      },
+      "selection": {
+        "count": 905,
+        "totalMs": 618.1000003218651,
+        "max": 3.699999988079071,
+        "p50": 0.40000003576278687,
+        "p95": 1.600000023841858,
+        "p99": 2
+      },
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.800000000000182,
+        "max": 16.80000000000291
+      },
+      "framesOver25ms": 0,
+      "ackMs": {
+        "count": 899,
+        "p50": 33.80000001192093,
+        "p95": 35.39999997615814,
+        "p99": 36.60000002384186,
+        "max": 37.299999952316284
+      },
+      "maxReplay": 2,
+      "errors": []
+    }
+  ],
+  "intermediateAfter": [
+    {
+      "elapsedMs": 15014.200000047684,
+      "tickHz": 60.00026548780544,
+      "residentActors": 242,
+      "activeActors": 23,
+      "species": {
+        "wildlife-robin-v1": 221,
+        "wildlife-dog-provisional-v1": 1,
+        "wildlife-rabbit-v1": 8,
+        "player": 1,
+        "wildlife-fish-provisional-v1": 3,
+        "wildlife-frog-v1": 2,
+        "wildlife-deer-v1": 3,
+        "wildlife-mallard-v1": 2,
+        "wildlife-cat-provisional-v1": 1
+      },
+      "tick": {
+        "count": 905,
+        "totalMs": 2078.6999990344048,
+        "max": 6.800000011920929,
+        "p50": 1.7000000476837158,
+        "p95": 5,
+        "p99": 5.800000011920929
+      },
+      "robinAI": {
+        "count": 19612,
+        "totalMs": 50.50000035762787,
+        "max": 0.5,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0.10000002384185791
+      },
+      "physics": {
+        "count": 905,
+        "totalMs": 386.40000039339066,
+        "max": 1.800000011920929,
+        "p50": 0.3999999761581421,
+        "p95": 0.800000011920929,
+        "p99": 1.0999999642372131
+      },
+      "selection": {
+        "count": 905,
+        "totalMs": 437.29999911785126,
+        "max": 2.300000011920929,
+        "p50": 0.30000001192092896,
+        "p95": 1.399999976158142,
+        "p99": 1.800000011920929
+      },
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000291
+      },
+      "framesOver25ms": 0,
+      "ackMs": {
+        "count": 899,
+        "p50": 33.69999998807907,
+        "p95": 35.30000001192093,
+        "p99": 36.19999998807907,
+        "max": 36.89999997615814
+      },
+      "maxReplay": 1,
+      "errors": []
+    },
+    {
+      "elapsedMs": 15013.599999964237,
+      "tickHz": 60.00106196555608,
+      "residentActors": 242,
+      "activeActors": 23,
+      "species": {
+        "wildlife-robin-v1": 221,
+        "wildlife-dog-provisional-v1": 1,
+        "wildlife-rabbit-v1": 8,
+        "player": 1,
+        "wildlife-fish-provisional-v1": 3,
+        "wildlife-frog-v1": 2,
+        "wildlife-deer-v1": 3,
+        "wildlife-mallard-v1": 2,
+        "wildlife-cat-provisional-v1": 1
+      },
+      "tick": {
+        "count": 905,
+        "totalMs": 2456.4000000953674,
+        "max": 7.5,
+        "p50": 2.399999976158142,
+        "p95": 4.800000011920929,
+        "p99": 5.5
+      },
+      "robinAI": {
+        "count": 19612,
+        "totalMs": 56.30000060796738,
+        "max": 0.5,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0.10000002384185791
+      },
+      "physics": {
+        "count": 905,
+        "totalMs": 484.1999982595444,
+        "max": 1.7000000476837158,
+        "p50": 0.5,
+        "p95": 0.800000011920929,
+        "p99": 1
+      },
+      "selection": {
+        "count": 905,
+        "totalMs": 499,
+        "max": 3.199999988079071,
+        "p50": 0.40000003576278687,
+        "p95": 1.2999999523162842,
+        "p99": 1.600000023841858
+      },
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "framesOver25ms": 0,
+      "ackMs": {
+        "count": 770,
+        "p50": 33.40000003576279,
+        "p95": 35.39999997615814,
+        "p99": 50.80000001192093,
+        "max": 52
+      },
+      "maxReplay": 2,
+      "errors": []
+    }
+  ],
+  "finalSourceSha256": {
+    "src/server/Realm.ts": "e96769b9936d145d21b26ff49b9f56536184bfa431d85d3c24c2f46c32d51e6a",
+    "src/server/WildlifeActivity.ts": "6a25f0cc90583e20603590f28f4998c54771e47e367c4eaedb67062c4f4da202",
+    "src/server/tickAllAI.ts": "079fdf885a046db3796c31753a530dcbe4c83fa0aacb9a090d89e734c59e74fb",
+    "src/wildlife/robinAI.ts": "ce7d366c872626a176447ac74de6a91c11809598b852a0b5460035db7c3a404c",
+    "src/client/PlayerPredictor.ts": "5643324fb6eb0d22546d29656319234b763a046069acea6aa32067b5bb44ce8e",
+    "src/client/ClientStateView.ts": "7d04c1f6daab6c0c05fa0b389c6cd8b3a66a47838189b9a18ef1e6f351e8c3da",
+    "src/scenarios/ScenarioClient.ts": "37bb75ac88516d9834b6ed5ef822b9cb65e2e38787379c24b66cd109381ad552"
+  }
+}

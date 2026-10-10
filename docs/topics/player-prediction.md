@@ -2,8 +2,9 @@
 
 Topic: player-prediction
 Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
-support travel verified; varying motion and longer-stall corrections remain next.
-Updated: 2026-10-07.
+support travel verified; local predicted animation delivered. Varying motion and
+history-overflow recovery remain next.
+Updated: 2026-10-10.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)
@@ -144,6 +145,18 @@ Current invariants:
   support-relative correction and displayed relative offset separately.
 
 ## Next work
+
+[088](../tactical/088-wildlife-work-budgets.md) gives ordinary predicted player and
+steerable-mount animation a local clock, advanced once per live input step and
+preserved across compatible reconciliation. Replay advances physics only;
+model/clip changes and resets use the new authoritative sprite. Physically timed
+clips retain their authority phase. This fixes the local walk-frame stall found
+by the [mobile investigation](../research/mobile-desync-investigation.md).
+
+The 128-command history still has no explicit overflow recovery: a 2.5-second
+Worker stall can exhaust it and produce a backward correction. Follow up with
+history/old-ack diagnostics and recovery, then a moving physical-phone playtest.
+The user's original saved session has not been captured.
 
 Repeat the user's refresh/background playtest, then add longer authority-debt,
 reconciliation and varying-speed/gap cases before broad passenger acceptance. Preserve the passing fast local-player controls; the existing 250ms

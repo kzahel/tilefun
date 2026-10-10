@@ -7,6 +7,7 @@ identity/lifetime fixed, gameplay grass frame storage and terrain scheduler reco
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
+Wildlife sleep, bounded robin planning and local predicted animation are delivered.
 Updated: 2026-10-10.
 
 Owns current performance direction and the limits of the evidence.
@@ -117,11 +118,25 @@ upload costs or device-specific problems.
 
 ## Next work
 
-[Entity activation, AI and unloading](entity-activation.md) owns the separate
-simulation-debt backlog: tick tiers do not eliminate all distant-entity work,
-and placed entities remain resident after terrain unloads. Its source audit
-does not establish the cause of observed frame hitches; measure dense local
-scenes and distant populations separately before selecting fixes.
+[085](../tactical/085-robin-search-cost.md) removes whole-actor copies from robin
+path samples and safe idle crown queries. Its 480-case unbudgeted parity lane
+retains identical decisions/RNG; warmed desktop decision CPU falls about 42%.
+[088](../tactical/088-wildlife-work-budgets.md) adds contact-aware wildlife sleep,
+deterministic shared/per-decision planning quotas, and local predicted animation.
+Its bounded candidate selection deliberately changes search choices. The owning
+[activation](entity-activation.md) and [prediction](player-prediction.md) topics
+specify behavior and remaining history-overflow recovery.
+
+The [original mobile investigation](../research/mobile-desync-investigation.md)
+measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.
+Its experimental sleeping control reduced membership to 22 and p95 to 12.5–13.5ms;
+query caching alone offered little gain. These are pre-delivery measurements.
+088 records fresh desktop before/after timing separately; the phone was being
+used outside Chrome, so the shipped policy still needs a moving native-phone
+capture. Use a provisional 4–6ms p95 CPU target, then profile remaining
+support/collision and streaming work. The city traversal gate has much lower
+actor load and does not establish countryside headroom. The user's original
+session has not been captured.
 
 The grass-fix follow-up captured a 60-second Pixel 7a traversal with no visible
 terrain gaps and two missed frames: one overlapping a 33 ms main-thread GC,
@@ -438,7 +453,7 @@ run order/temperature still vary. Current code also completes the one-minute
 This supplies current long-run evidence without rewriting 052's unmeasured cases.
 
 
-## Current optimization stopping point
+## Earlier renderer stopping point
 
 [059: Grass overview LOD](../tactical/059-grass-overview-lod.md) is the agreed
 final small performance slice. Individual blades retain full detail at zoom
@@ -450,7 +465,8 @@ adapter preserves inherited alpha around each blade. Game and outdoor embedded
 labs share the policy, independently of device pixel ratio. Assets, generation,
 ordinary-zoom appearance and renderer/pacing defaults are unchanged.
 
-With this slice validated, pause engine optimization. Cached grass ordering,
+Engine optimization paused at that checkpoint. The 2026-10-10 desync report
+resumes bounded wildlife/prediction work through 088 above. Cached grass ordering,
 nearby-entity filtering, deeper GPU instancing and normal-play hitch attribution
 are deferred candidates, not an autonomous implementation queue. Resume when
 ordinary play shows a material problem, sustained mobile heat/battery use needs

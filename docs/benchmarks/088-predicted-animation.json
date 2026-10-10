@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-10",
+  "platform": "Apple M4 Pro, bundled Chromium, native Worker",
+  "physical": false,
+  "limits": "Controlled fresh flat worlds, noclip, CDP keyboard; excludes actual touch, original save and moving contacts. Main-thread stalls also stall drawing. History remains 128 commands.",
+  "cases": [
+    {
+      "kind": "baseline",
+      "ms": 0,
+      "maxUnchangedWalkFrameMs": 134.89999997615814,
+      "minDx": -0.00034949999826494604,
+      "maxDx": 2.457380749998265,
+      "maxFrameMs": 19.30000001192093,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 2,
+      "maxResim": 0.003556750001735054,
+      "errors": []
+    },
+    {
+      "kind": "worker",
+      "ms": 350,
+      "maxUnchangedWalkFrameMs": 136.9000000357628,
+      "minDx": -0.00034950000008393545,
+      "maxDx": 2.453824000000168,
+      "maxFrameMs": 20.900000035762787,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 23,
+      "maxResim": 0.0006990000001678709,
+      "errors": []
+    },
+    {
+      "kind": "worker",
+      "ms": 750,
+      "maxUnchangedWalkFrameMs": 137.4000000357628,
+      "minDx": -0.00034949999826494604,
+      "maxDx": 2.45382399999653,
+      "maxFrameMs": 20.5,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 46,
+      "maxResim": 0.007463000001735054,
+      "errors": []
+    },
+    {
+      "kind": "worker",
+      "ms": 2500,
+      "maxUnchangedWalkFrameMs": 134.69999998807907,
+      "minDx": -24.53893899996183,
+      "maxDx": 28.221238500220352,
+      "maxFrameMs": 19.19999998807907,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 128,
+      "maxResim": 26.994326500222087,
+      "errors": []
+    },
+    {
+      "kind": "main",
+      "ms": 350,
+      "maxUnchangedWalkFrameMs": 356.5999999642372,
+      "minDx": 0,
+      "maxDx": 18.403330500001175,
+      "maxFrameMs": 356.5999999642372,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 2,
+      "maxResim": 0.0008944374985730974,
+      "errors": []
+    },
+    {
+      "kind": "tx-delay",
+      "ms": 750,
+      "maxUnchangedWalkFrameMs": 134.20000004768372,
+      "minDx": -0.00034950000008393545,
+      "maxDx": 2.453824000000168,
+      "maxFrameMs": 17.599999964237213,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 47,
+      "maxResim": 0.0006990000001678709,
+      "errors": []
+    },
+    {
+      "kind": "tx-delay",
+      "ms": 2500,
+      "maxUnchangedWalkFrameMs": 134.30000001192093,
+      "minDx": -0.00034950000008393545,
+      "maxDx": 2.4541015625,
+      "maxFrameMs": 19.80000001192093,
+      "animationCols": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "maxReplay": 128,
+      "maxResim": 1.227189562499916,
+      "errors": []
+    }
+  ]
+}
