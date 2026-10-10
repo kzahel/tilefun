@@ -141,10 +141,20 @@ order, temperatures, workload and final checks.
 stable demand, readiness, membership and geometry. Native Pixel selection p95
 falls from 2.1–2.9ms to 0.3–0.4ms stationary and 1.5–1.6ms to 0.3–0.4ms walking.
 Whole walking-tick p95 stays near 11ms; this remains a phase saving. Live collision
-queries are unchanged. Next, profile resting-body ground/support and broadphase
-queries inside EntityManager.update before choosing a cache or finer spatial index.
-Moving physics costs 3.2–3.7ms p95 in these samples. The tactical records validation,
-concurrent checkout state, ACK/temperature variation and measurement limits.
+queries are unchanged. Moving physics costs 3.2–3.7ms p95 in these samples. The
+tactical records validation, concurrent checkout state, ACK/temperature variation
+and measurement limits.
+
+[092](../tactical/092-authority-physics-profile.md) profiles frozen 091 production
+source on the phone. Walking NPC movement costs 2.5ms p95 versus 0.8ms ground
+tracking; 76% of NPC collision resolutions have zero displacement. The next bounded
+candidate is reuse of duplicate same-footprint axis probes while preserving blocked
+flags, momentum clipping and AI reactions, with original-policy parity and native
+controls. It is not implemented yet. Full tick time includes Realm player-input
+processing as well as EntityManager; phase p95s cannot be added. The profile owns
+query counts, sampled CPU attribution and debugger/temperature/window limitations.
+Persistent support caches, finer spatial indices and incremental demand assembly
+remain later candidates.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

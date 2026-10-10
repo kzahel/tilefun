@@ -6,6 +6,7 @@ import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 import { readAndroidThermals } from "../android-thermal-gate.mjs";
+import { startWorkerCpu, summarizeWorkerCpu } from "./worker-cpu.mjs";
 
 const option = (key, fallback) =>
   process.argv.find((arg) => arg.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
@@ -13,6 +14,8 @@ const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
 const seconds = Number(option("seconds", "15"));
 const motion = option("motion", "idle");
+const physicsProfile = option("physics-profile", "false") === "true";
+const workerCpu = option("worker-cpu", "false") === "true";
 if (!["idle", "walk"].includes(motion)) throw Error("--motion must be idle or walk");
 const output = option("output", path.join(os.tmpdir(), "tilefun-mobile-authority"));
 const androidCli = option("android-device-cli", "");
@@ -60,8 +63,64 @@ const server = await createServer({
       name: "diagnostic-authority-access",
       enforce: "pre",
       transform(code, id) {
-        if (realmReference && id.split("?")[0].endsWith("/src/server/Realm.ts"))
-          return realmReference;
+        if (realmReference && id.split("?")[0].endsWith("/src/server/Realm.ts")) {
+          if (!physicsProfile) return realmReference;
+          code = realmReference;
+        }
+        const replaceOnce = (from, to) => {
+          if (code.split(from).length !== 2) throw Error(`Physics probe marker changed in ${id}`);
+          code = code.replace(from, to);
+        };
+        if (physicsProfile && id.split("?")[0].endsWith("/src/entities/EntityManager.ts")) {
+          replaceOnce(
+            "const playerSet = new Set(players);",
+            `let __phase = "setup", __start = performance.now();
+            const __mark = (next) => {
+              globalThis.__diagnosticProfile?.record("physics." + __phase, performance.now() - __start);
+              __phase = next; globalThis.__diagnosticPhysicsPhase = next; __start = performance.now();
+            };
+            globalThis.__diagnosticPhysicsPhase = "setup";
+            const playerSet = new Set(players);`,
+          );
+          for (const [marker, phase] of [
+            ["// --- Phase 1:", "passive-player-movement"],
+            ["// --- Phase 2:", "npc-movement"],
+            ["// --- Phase 2.5:", "ground-tracking"],
+            ["// Update spatial hash after all movement", "first-index"],
+            ["// --- Phase 3:", "separation"],
+            ["// --- Phase 4:", "attachments-index"],
+            ["// --- Phase 5:", "animation"],
+          ])
+            replaceOnce(marker, `__mark("${phase}"); ${marker}`);
+          replaceOnce(
+            "    }\n  }\n\n  /**\n   * Resolve world positions",
+            '    }\n    __mark("outside");\n  }\n\n  /**\n   * Resolve world positions',
+          );
+          replaceOnce(
+            "const blocked = resolveCollision(",
+            "globalThis.__diagnosticProfile?.recordMovement(dx, dy);\n        const blocked = resolveCollision(",
+          );
+          return code;
+        }
+        if (physicsProfile && id.split("?")[0].endsWith("/src/server/Realm.ts")) {
+          replaceOnce(
+            "// ── Phase 1: Process player inputs",
+            'const __inputStart = performance.now();\n    globalThis.__diagnosticPhysicsPhase = "player-input";\n    // ── Phase 1: Process player inputs',
+          );
+          replaceOnce(
+            "// ── Phase 2: AI + Physics",
+            'globalThis.__diagnosticProfile?.record("player.input-phase", performance.now() - __inputStart);\n    globalThis.__diagnosticPhysicsPhase = "outside";\n    // ── Phase 2: AI + Physics',
+          );
+          replaceOnce(
+            "const p = session.player;\n          const nearbyProps",
+            'const p = session.player;\n          const __jumpStart = performance.now();\n          globalThis.__diagnosticPhysicsPhase = "player-jump";\n          const nearbyProps',
+          );
+          replaceOnce(
+            "          this.handlePlayerStepOutcome(\n",
+            '          globalThis.__diagnosticProfile?.record("player.jump-support", performance.now() - __jumpStart);\n          globalThis.__diagnosticPhysicsPhase = "outside";\n          this.handlePlayerStepOutcome(\n',
+          );
+          return code;
+        }
         if (robinReference && id.split("?")[0].endsWith("/src/wildlife/robinAI.ts"))
           return robinReference;
         if (id.split("?")[0].endsWith("/src/server/local-server.worker.ts"))
@@ -112,6 +171,8 @@ const report = {
   physical: !!endpoint,
   instrumented: true,
   motion,
+  physicsProfile,
+  workerCpu,
   robinReference: !!robinReference,
   realmReference: !!realmReference,
   aiReference: !!aiReference,
@@ -119,6 +180,7 @@ const report = {
 };
 let page;
 let currentErrors = [];
+let profiler;
 try {
   for (const scene of scenes)
     for (const control of controls) {
@@ -162,7 +224,9 @@ try {
       });
       const worker = page.workers().find((w) => w.url().includes("local-server.worker"));
       if (!worker) throw Error("No authority Worker");
-      await worker.evaluate((control) => {
+      const diagnosticOptions = { control, physicsProfile };
+      await worker.evaluate((settings) => {
+        const { control, physicsProfile } = settings;
         const server = globalThis.__diagnosticAuthority,
           realm = server.activeRealm;
         const timings = {};
@@ -175,7 +239,13 @@ try {
           t.max = Math.max(t.max, ms);
           t.values[(t.count - 1) % 6000] = ms;
         };
-        globalThis.__diagnosticProfile = { record };
+        const movementCounts = { stationary: 0, moving: 0 };
+        globalThis.__diagnosticProfile = {
+          record,
+          recordMovement: (dx, dy) => {
+            movementCounts[dx === 0 && dy === 0 ? "stationary" : "moving"]++;
+          },
+        };
         const summary = () =>
           Object.fromEntries(
             Object.entries(timings).map(([name, t]) => {
@@ -193,6 +263,26 @@ try {
               ];
             }),
           );
+        const queryCounts = {};
+        if (physicsProfile) {
+          for (const [owner, key, label] of [
+            [realm.propManager, "getPropsInChunkRange", "props"],
+            [realm.entityManager.spatialHash, "queryRange", "entities"],
+            [realm.entityManager.spatialHash, "update", "index"],
+          ]) {
+            const original = owner[key];
+            owner[key] = function (...args) {
+              const result = original.apply(this, args);
+              const name = `${globalThis.__diagnosticPhysicsPhase ?? "outside"}.${label}`;
+              queryCounts[name] ??= { calls: 0, candidates: 0, maxCandidates: 0 };
+              const counts = queryCounts[name];
+              counts.calls++;
+              counts.candidates += result?.length ?? 0;
+              counts.maxCandidates = Math.max(counts.maxCandidates, result?.length ?? 0);
+              return result;
+            };
+          }
+        }
         const sessions = [...realm.sessions.values()];
         const visible = (e, halo) => {
           const wx = e.position.wx,
@@ -301,6 +391,8 @@ try {
               : 0,
           tickTimes,
           timings: summary(),
+          queryCounts,
+          movementCounts,
           tickCounts,
           resident: realm.entityManager.entities.length,
           props: realm.propManager.props.length,
@@ -319,11 +411,18 @@ try {
           for (const key of Object.keys(timings)) delete timings[key];
           tickCounts.length = 0;
           tickTimes.length = 0;
+          for (const key of Object.keys(queryCounts)) delete queryCounts[key];
+          movementCounts.stationary = 0;
+          movementCounts.moving = 0;
         };
-      }, control);
+      }, diagnosticOptions);
       await page.waitForTimeout(2000);
       await worker.evaluate(() => globalThis.__diagnosticReset());
       if (motion === "walk") await page.keyboard.down("ArrowRight");
+      if (workerCpu) {
+        profiler = await startWorkerCpu(browser, worker.url());
+        await worker.evaluate(() => globalThis.__diagnosticReset());
+      }
       const data = await page.evaluate(async (seconds) => {
         const g = document.querySelector("#game").__game;
         g.performanceMetrics.reset();
@@ -412,8 +511,17 @@ try {
           viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio },
         };
       }, seconds);
-      if (motion === "walk") await page.keyboard.up("ArrowRight");
+      // Read timings before Profiler.stop can pause the Worker for profile export.
       const authority = await worker.evaluate(() => globalThis.__diagnosticRead());
+      let cpu;
+      if (profiler) {
+        const profile = await profiler.stop();
+        profiler = undefined;
+        const file = `${scene}-${motion}-${report.cases.length + 1}.cpuprofile`;
+        await writeFile(path.join(output, file), JSON.stringify(profile));
+        cpu = { file, ...summarizeWorkerCpu(profile) };
+      }
+      if (motion === "walk") await page.keyboard.up("ArrowRight");
       const thermalsAfter = androidCli ? readAndroidThermals(androidCli) : undefined;
       const row = {
         scene,
@@ -421,6 +529,7 @@ try {
         motion,
         thermalsBefore,
         thermalsAfter,
+        cpu,
         ...data,
         authority,
         authorityHz: authority.measuredTickHz,
@@ -475,6 +584,7 @@ try {
   );
   throw error;
 } finally {
+  if (profiler) await profiler.close().catch(() => {});
   if (page && motion === "walk") await page.keyboard.up("ArrowRight").catch(() => {});
   if (page && endpoint) {
     const cleanup = await page

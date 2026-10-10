@@ -49,6 +49,15 @@ The probe times prop admission through the cached selector when available and th
 original filter otherwise. `--realm-reference=PATH` can isolate the earlier Realm
 admission policy against the same companion modules;
 [091](../../docs/tactical/091-static-prop-admission.md) records that comparison.
+Add `--physics-profile=true --worker-cpu=true` for optional authority physics
+subphases, query/candidate counts, zero-displacement NPC counts and a 1,000µs
+sampled CPU profile of only the owned Worker. Raw `.cpuprofile` files stay local;
+report CPU source names are sanitized. Timings are captured before profiler export,
+which can pause the Worker. Deep timings/query wrappers and sampling add overhead;
+use separate shallow controls for ordinary timing. Source markers fail closed if
+the phase structure changes. [092](../../docs/tactical/092-authority-physics-profile.md)
+owns the measurement boundary and results.
+
 Keep Chrome in the
 foreground on the phone; background debugging can stall or stop. Startup failures
 inside the capture retain page errors and body text in `failure.json`.

@@ -14,6 +14,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | --- | --- |
 | [090 Incremental simulation membership](090-incremental-simulation-membership.md) | Complete: cached demanded groups and sleep-first readiness; native phone comparison |
 | [091 Static prop admission](091-static-prop-admission.md) | Complete: cache stable scenery activity/readiness, measured native game/phone controls; [performance](../topics/performance.md) |
+| [092 Authority physics profile](092-authority-physics-profile.md) | Complete: native Worker phase/query/CPU attribution and next collision target; [performance](../topics/performance.md) |
 | [089 Prediction backlog recovery](089-prediction-backlog-recovery.md) | Complete: bounded input/replay work, explicit history gaps and native stall controls |
 | [088 Wildlife work budgets](088-wildlife-work-budgets.md) | Complete: wildlife sleep, bounded robin planning, predicted animation and clip-clock fences; native phone follow-up |
 | [087 Player-driven cars and trains](087-player-driven-cars-and-trains.md) | Delivered: inside driving, persistent parked cars, track-bound trains and tap-to-move controls |

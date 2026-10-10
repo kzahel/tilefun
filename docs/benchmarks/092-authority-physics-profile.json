@@ -1,0 +1,1996 @@
+{
+  "date": "2026-10-10",
+  "revision": "54ffc806c1c6c174c4e5e30dcb64621e225a6606",
+  "runtimeSha256": {
+    "src/server/Realm.ts": "21b6da1c5b81d0db9b3a7f386bf49e70fda014315c89993446ff2b02468d2f80",
+    "src/entities/EntityManager.ts": "2e73f3934209cdeaa5c5806cebfdfd0e10fb8b16db727b6ed218d1812d3db325",
+    "src/entities/collision.ts": "6cea19aa1acd4f556090d9472ef14955d18c58c968aa3f689c203dc7d2e5c487",
+    "src/entities/SpatialHash.ts": "7fa1203ce2207bfd006d0719224d83eab86f977ce0d058783ca6a9eb62fc184a",
+    "src/entities/PropManager.ts": "6623266926094b07ee00f0da17826693badea1ddc87b22580bc25d621b4689b0",
+    "src/physics/surfaceHeight.ts": "2192455a54c760cedecff41e2266ea185dece888bf433706f1a9658ca33dddfa",
+    "src/physics/PlayerMovement.ts": "7cd529ded4aeed0e06ef86f120490e49f9b5cc94c0e4d5ea16136f1e5eea2225"
+  },
+  "diagnosticSha256": {
+    "scripts/instrumentation/mobile-authority.mjs": "944a88455bb4f20d536408cceafe6f89ab91c581c0e9585331cd3fb8bea557b0",
+    "scripts/instrumentation/worker-cpu.mjs": "d32af12bb632d3f56b4b814895580a5258600de9e198964ac328fc6fa20e595e"
+  },
+  "method": {
+    "fixture": "fresh regional thicket seed 2026 dog clearing",
+    "runtime": "frozen 54ffc80 native Worker / Canvas / IndexedDB",
+    "device": "Pixel 7a / Android 17",
+    "warmupSeconds": 2,
+    "mainWindowSeconds": 15,
+    "cpuIntervalUs": 1000,
+    "deepRepeats": 1,
+    "shallowRepeats": 2,
+    "order": "idle shallow, exploratory CPU idle/walk, walking shallow, final CPU idle/walk",
+    "limits": [
+      "Diagnostic source evolved during preliminary captures; only final deep captures are accepted. Shallow controls have identical production runtime but earlier readout/setup code.",
+      "Instrumentation and CPU sampling perturb CPU/GC/scheduling; no before/after optimization is implemented.",
+      "Timings reset after debugger attachment and read before Profiler.stop/export; main/Worker/CPU windows still have asynchronous boundaries.",
+      "CPU self rows partition sampled time; inclusive rows overlap and transformed-source line numbers are not original TypeScript lines.",
+      "Charging/run-order temperatures differ; CPU profile attachment begins with Right already held, so measured distances differ.",
+      "Keyboard motion is not touch acceptance; original user save is unmeasured."
+    ]
+  },
+  "samples": [
+    {
+      "kind": "shallow",
+      "motion": "idle",
+      "repeat": 1,
+      "browser": "154.0.8037.126",
+      "frames": {
+        "count": 895,
+        "p50": 16.69999999999709,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 99.80000000000291
+      },
+      "framesOver25": 2,
+      "renderMs": {
+        "count": 895,
+        "p50": 2.299999952316284,
+        "p95": 3,
+        "p99": 3.5,
+        "max": 4.799999952316284
+      },
+      "updateMs": {
+        "count": 901,
+        "p50": 2.700000047683716,
+        "p95": 3.799999952316284,
+        "p99": 4.200000047683716,
+        "max": 8.699999928474426
+      },
+      "ackMs": {
+        "count": 846,
+        "p50": 35.5,
+        "p95": 38.59999990463257,
+        "p99": 53,
+        "max": 114.29999995231628
+      },
+      "maxReplay": 5,
+      "maxResim": 0,
+      "initialPosition": {
+        "wx": -400,
+        "wy": 1632
+      },
+      "finalPosition": {
+        "wx": -400,
+        "wy": 1632
+      },
+      "maxTravel": 0,
+      "replicatedEntities": 62,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "authorityHz": 60.0011920764743,
+      "errors": [],
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "streaming": {
+            "count": 1814,
+            "totalMs": 1399.9000017642975,
+            "max": 12.600000023841858,
+            "p50": 0.7000000476837158,
+            "p95": 1.100000023841858,
+            "p99": 1.399999976158142
+          },
+          "selection": {
+            "count": 907,
+            "totalMs": 679.2999995946884,
+            "max": 3.600000023841858,
+            "p50": 0.7000000476837158,
+            "p95": 1,
+            "p99": 1.2000000476837158
+          },
+          "decision-selection": {
+            "count": 907,
+            "totalMs": 76.50000154972076,
+            "max": 0.3999999761581421,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "prop-selection": {
+            "count": 907,
+            "totalMs": 216.89999723434448,
+            "max": 0.7000000476837158,
+            "p50": 0.20000004768371582,
+            "p95": 0.3999999761581421,
+            "p99": 0.5
+          },
+          "updateFaunaAI": {
+            "count": 907,
+            "totalMs": 82.49999928474426,
+            "max": 1.899999976158142,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.30000007152557373
+          },
+          "updateRobinAI": {
+            "count": 19460,
+            "totalMs": 235.4000027179718,
+            "max": 1.3000000715255737,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "pre-hooks": {
+            "count": 907,
+            "totalMs": 4.600000619888306,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0.09999990463256836,
+            "p99": 0.10000002384185791
+          },
+          "physics": {
+            "count": 907,
+            "totalMs": 1586.6999977827072,
+            "max": 4.600000023841858,
+            "p50": 1.7000000476837158,
+            "p95": 2.5,
+            "p99": 2.799999952316284
+          },
+          "tags": {
+            "count": 907,
+            "totalMs": 3.100000262260437,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "overlap": {
+            "count": 907,
+            "totalMs": 21.200000047683716,
+            "max": 0.19999992847442627,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "replication": {
+            "count": 907,
+            "totalMs": 887.49999833107,
+            "max": 7.100000023841858,
+            "p50": 1,
+            "p95": 1.3000000715255737,
+            "p99": 1.600000023841858
+          },
+          "tick": {
+            "count": 907,
+            "totalMs": 6470.6000019311905,
+            "max": 21,
+            "p50": 7,
+            "p95": 9.5,
+            "p99": 11.300000071525574
+          }
+        },
+        "queryCounts": {},
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 22,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        },
+        "view": [
+          {
+            "minCx": -2,
+            "minCy": 5,
+            "maxCx": -2,
+            "maxCy": 6
+          }
+        ]
+      },
+      "finalActive": 22
+    },
+    {
+      "kind": "shallow",
+      "motion": "idle",
+      "repeat": 2,
+      "browser": "154.0.8037.126",
+      "frames": {
+        "count": 900,
+        "p50": 16.69999999999709,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 17.400000000001455
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 900,
+        "p50": 2.3000000715255737,
+        "p95": 3.200000047683716,
+        "p99": 3.600000023841858,
+        "max": 4.899999976158142
+      },
+      "updateMs": {
+        "count": 900,
+        "p50": 2.899999976158142,
+        "p95": 4.199999928474426,
+        "p99": 4.600000023841858,
+        "max": 8.900000095367432
+      },
+      "ackMs": {
+        "count": 852,
+        "p50": 36.10000002384186,
+        "p95": 54.39999997615814,
+        "p99": 55.699999928474426,
+        "max": 59.300000071525574
+      },
+      "maxReplay": 2,
+      "maxResim": 0,
+      "initialPosition": {
+        "wx": -400,
+        "wy": 1632
+      },
+      "finalPosition": {
+        "wx": -400,
+        "wy": 1632
+      },
+      "maxTravel": 0,
+      "replicatedEntities": 62,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "authorityHz": 59.9997348074226,
+      "errors": [],
+      "thermalsBefore": {
+        "batteryC": 27.7,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.7,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "streaming": {
+            "count": 1812,
+            "totalMs": 1365.3999997377396,
+            "max": 6.5,
+            "p50": 0.7000000476837158,
+            "p95": 1.1999999284744263,
+            "p99": 1.5
+          },
+          "selection": {
+            "count": 906,
+            "totalMs": 641.900000333786,
+            "max": 1.600000023841858,
+            "p50": 0.7000000476837158,
+            "p95": 1,
+            "p99": 1.100000023841858
+          },
+          "decision-selection": {
+            "count": 906,
+            "totalMs": 80.19999980926514,
+            "max": 0.30000007152557373,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "prop-selection": {
+            "count": 906,
+            "totalMs": 196.99999976158142,
+            "max": 0.5,
+            "p50": 0.20000004768371582,
+            "p95": 0.30000007152557373,
+            "p99": 0.40000009536743164
+          },
+          "updateFaunaAI": {
+            "count": 906,
+            "totalMs": 85.79999923706055,
+            "max": 2.600000023841858,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "updateRobinAI": {
+            "count": 19430,
+            "totalMs": 266.9000002145767,
+            "max": 5.800000071525574,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "pre-hooks": {
+            "count": 906,
+            "totalMs": 5.300000071525574,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0.09999990463256836,
+            "p99": 0.10000002384185791
+          },
+          "physics": {
+            "count": 906,
+            "totalMs": 1620.6000022888184,
+            "max": 7.299999952316284,
+            "p50": 1.7000000476837158,
+            "p95": 2.600000023841858,
+            "p99": 3.200000047683716
+          },
+          "tags": {
+            "count": 906,
+            "totalMs": 5.4000004529953,
+            "max": 2.8000000715255737,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "overlap": {
+            "count": 906,
+            "totalMs": 18.999998927116394,
+            "max": 0.3999999761581421,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "replication": {
+            "count": 906,
+            "totalMs": 849.099999666214,
+            "max": 6.5,
+            "p50": 0.8999999761581421,
+            "p95": 1.3000000715255737,
+            "p99": 1.5
+          },
+          "tick": {
+            "count": 906,
+            "totalMs": 6408.9000017642975,
+            "max": 16.899999976158142,
+            "p50": 6.900000095367432,
+            "p95": 9.600000023841858,
+            "p99": 11.299999952316284
+          }
+        },
+        "queryCounts": {},
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 22,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        },
+        "view": [
+          {
+            "minCx": -2,
+            "minCy": 5,
+            "maxCx": -2,
+            "maxCy": 6
+          }
+        ]
+      },
+      "finalActive": 22
+    },
+    {
+      "kind": "shallow",
+      "motion": "walk",
+      "repeat": 1,
+      "browser": "154.0.8037.126",
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999709,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 17.30000000000109
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 901,
+        "p50": 3,
+        "p95": 4.699999928474426,
+        "p99": 5.399999976158142,
+        "max": 9.699999928474426
+      },
+      "updateMs": {
+        "count": 901,
+        "p50": 2.899999976158142,
+        "p95": 4.100000023841858,
+        "p99": 5.100000023841858,
+        "max": 9.5
+      },
+      "ackMs": {
+        "count": 809,
+        "p50": 36.60000002384186,
+        "p95": 53.39999997615814,
+        "p99": 54.59999990463257,
+        "max": 175.30000007152557
+      },
+      "maxReplay": 9,
+      "maxResim": 1.598632815102974e-5,
+      "initialPosition": {
+        "wx": -396.7993599999999,
+        "wy": 1632
+      },
+      "finalPosition": {
+        "wx": 227.325439453125,
+        "wy": 1632
+      },
+      "maxTravel": 624.1248016357421,
+      "replicatedEntities": 69,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "authorityHz": 60.02567801910586,
+      "errors": [],
+      "thermalsBefore": {
+        "batteryC": 28.2,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28.4,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "streaming": {
+            "count": 1816,
+            "totalMs": 1273.8999975919724,
+            "max": 6.399999976158142,
+            "p50": 0.6999999284744263,
+            "p95": 1,
+            "p99": 1.600000023841858
+          },
+          "selection": {
+            "count": 908,
+            "totalMs": 670.6999986171722,
+            "max": 4.399999976158142,
+            "p50": 0.7000000476837158,
+            "p95": 1,
+            "p99": 1.3000000715255737
+          },
+          "decision-selection": {
+            "count": 908,
+            "totalMs": 97.40000021457672,
+            "max": 6,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.2999999523162842
+          },
+          "prop-selection": {
+            "count": 908,
+            "totalMs": 204.400000333786,
+            "max": 4.400000095367432,
+            "p50": 0.20000004768371582,
+            "p95": 0.3999999761581421,
+            "p99": 0.6999999284744263
+          },
+          "updateFaunaAI": {
+            "count": 478,
+            "totalMs": 36.89999878406525,
+            "max": 2.700000047683716,
+            "p50": 0.09999990463256836,
+            "p95": 0.19999992847442627,
+            "p99": 0.2999999523162842
+          },
+          "updateRobinAI": {
+            "count": 34487,
+            "totalMs": 369.70000183582306,
+            "max": 1.8000000715255737,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "pre-hooks": {
+            "count": 908,
+            "totalMs": 3.0999996662139893,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "physics": {
+            "count": 908,
+            "totalMs": 2300.0999994277954,
+            "max": 9.799999952316284,
+            "p50": 2.5,
+            "p95": 3.5,
+            "p99": 4.100000023841858
+          },
+          "tags": {
+            "count": 908,
+            "totalMs": 1.9000000953674316,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "overlap": {
+            "count": 908,
+            "totalMs": 22.300000071525574,
+            "max": 0.7000000476837158,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "replication": {
+            "count": 908,
+            "totalMs": 881.2000021934509,
+            "max": 9.899999976158142,
+            "p50": 0.9000000953674316,
+            "p95": 1.2999999523162842,
+            "p99": 1.8000000715255737
+          },
+          "tick": {
+            "count": 908,
+            "totalMs": 7277.500001072884,
+            "max": 39.5,
+            "p50": 7.900000095367432,
+            "p95": 10.899999976158142,
+            "p99": 13.600000023841858
+          },
+          "updateRabbitAI": {
+            "count": 1412,
+            "totalMs": 56.30000078678131,
+            "max": 2.8000000715255737,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          }
+        },
+        "queryCounts": {},
+        "resident": 241,
+        "props": 932,
+        "visible": 14,
+        "halo": 43,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        },
+        "view": [
+          {
+            "minCx": 0,
+            "minCy": 5,
+            "maxCx": 1,
+            "maxCy": 6
+          }
+        ]
+      },
+      "finalActive": 43
+    },
+    {
+      "kind": "shallow",
+      "motion": "walk",
+      "repeat": 2,
+      "browser": "154.0.8037.126",
+      "frames": {
+        "count": 900,
+        "p50": 16.69999999999709,
+        "p95": 16.700000000000728,
+        "p99": 16.799999999999272,
+        "max": 33.20000000000073
+      },
+      "framesOver25": 1,
+      "renderMs": {
+        "count": 900,
+        "p50": 3.5999999046325684,
+        "p95": 5.100000023841858,
+        "p99": 6.200000047683716,
+        "max": 11.299999952316284
+      },
+      "updateMs": {
+        "count": 901,
+        "p50": 2.799999952316284,
+        "p95": 3.899999976158142,
+        "p99": 4.5,
+        "max": 10.100000023841858
+      },
+      "ackMs": {
+        "count": 872,
+        "p50": 35.60000002384186,
+        "p95": 39.10000002384186,
+        "p99": 53.40000009536743,
+        "max": 155
+      },
+      "maxReplay": 8,
+      "maxResim": 1.598632815102974e-5,
+      "initialPosition": {
+        "wx": -396.79934546874995,
+        "wy": 1632
+      },
+      "finalPosition": {
+        "wx": 227.325439453125,
+        "wy": 1632
+      },
+      "maxTravel": 624.1247863769531,
+      "replicatedEntities": 69,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "authorityHz": 60.00079471270222,
+      "errors": [],
+      "thermalsBefore": {
+        "batteryC": 28.4,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28.6,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "streaming": {
+            "count": 1814,
+            "totalMs": 1308.800000667572,
+            "max": 6.5,
+            "p50": 0.7000000476837158,
+            "p95": 1.100000023841858,
+            "p99": 1.5999999046325684
+          },
+          "selection": {
+            "count": 907,
+            "totalMs": 736.5000027418137,
+            "max": 6.799999952316284,
+            "p50": 0.7000000476837158,
+            "p95": 1.100000023841858,
+            "p99": 6.5
+          },
+          "decision-selection": {
+            "count": 907,
+            "totalMs": 91.59999942779541,
+            "max": 5.900000095367432,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "prop-selection": {
+            "count": 907,
+            "totalMs": 222.2000002861023,
+            "max": 6.100000023841858,
+            "p50": 0.20000004768371582,
+            "p95": 0.3999999761581421,
+            "p99": 0.8000000715255737
+          },
+          "updateFaunaAI": {
+            "count": 478,
+            "totalMs": 36.499998927116394,
+            "max": 3.100000023841858,
+            "p50": 0.09999990463256836,
+            "p95": 0.19999992847442627,
+            "p99": 0.30000007152557373
+          },
+          "updateRobinAI": {
+            "count": 34428,
+            "totalMs": 355.39999973773956,
+            "max": 1.3000000715255737,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "pre-hooks": {
+            "count": 907,
+            "totalMs": 3.7999998331069946,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "physics": {
+            "count": 907,
+            "totalMs": 2269.2000002861023,
+            "max": 12.299999952316284,
+            "p50": 2.5,
+            "p95": 3.5,
+            "p99": 4.800000071525574
+          },
+          "tags": {
+            "count": 907,
+            "totalMs": 2.299999713897705,
+            "max": 0.19999992847442627,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "overlap": {
+            "count": 907,
+            "totalMs": 19.700000166893005,
+            "max": 0.7000000476837158,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "replication": {
+            "count": 907,
+            "totalMs": 842.7999995946884,
+            "max": 3.399999976158142,
+            "p50": 0.8999999761581421,
+            "p95": 1.2999999523162842,
+            "p99": 1.5
+          },
+          "tick": {
+            "count": 907,
+            "totalMs": 7362.300001382828,
+            "max": 36.300000071525574,
+            "p50": 8,
+            "p95": 11.199999928474426,
+            "p99": 14.800000071525574
+          },
+          "updateRabbitAI": {
+            "count": 1411,
+            "totalMs": 57.899999260902405,
+            "max": 3.600000023841858,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          }
+        },
+        "queryCounts": {},
+        "resident": 241,
+        "props": 932,
+        "visible": 14,
+        "halo": 43,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        },
+        "view": [
+          {
+            "minCx": 0,
+            "minCy": 5,
+            "maxCx": 1,
+            "maxCy": 6
+          }
+        ]
+      },
+      "finalActive": 43
+    },
+    {
+      "kind": "deep",
+      "motion": "idle",
+      "repeat": 1,
+      "browser": "154.0.8037.126",
+      "frames": {
+        "count": 901,
+        "p50": 16.69999999999709,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000291,
+        "max": 16.899999999997817
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 901,
+        "p50": 2.5,
+        "p95": 3.3000000715255737,
+        "p99": 3.700000047683716,
+        "max": 6.099999904632568
+      },
+      "updateMs": {
+        "count": 901,
+        "p50": 2.700000047683716,
+        "p95": 4,
+        "p99": 4.5,
+        "max": 11
+      },
+      "ackMs": {
+        "count": 812,
+        "p50": 35.699999928474426,
+        "p95": 53.10000002384186,
+        "p99": 53.89999997615814,
+        "max": 59.89999997615814
+      },
+      "maxReplay": 2,
+      "maxResim": 0,
+      "initialPosition": {
+        "wx": -400,
+        "wy": 1632
+      },
+      "finalPosition": {
+        "wx": -400,
+        "wy": 1632
+      },
+      "maxTravel": 0,
+      "replicatedEntities": 62,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "authorityHz": 60.053896219886525,
+      "errors": [],
+      "thermalsBefore": {
+        "batteryC": 28.8,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 29.1,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "player.input-phase": {
+            "count": 1816,
+            "totalMs": 493.1999976634979,
+            "max": 2.399999976158142,
+            "p50": 0.09999990463256836,
+            "p95": 0.7999999523162842,
+            "p99": 1.100000023841858
+          },
+          "streaming": {
+            "count": 1816,
+            "totalMs": 1435.0999994277954,
+            "max": 5.5,
+            "p50": 0.7000000476837158,
+            "p95": 1.2000000476837158,
+            "p99": 2
+          },
+          "selection": {
+            "count": 908,
+            "totalMs": 680.1999992132187,
+            "max": 5.100000023841858,
+            "p50": 0.7000000476837158,
+            "p95": 1,
+            "p99": 1.2000000476837158
+          },
+          "decision-selection": {
+            "count": 908,
+            "totalMs": 84.60000133514404,
+            "max": 0.6999999284744263,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.2999999523162842
+          },
+          "prop-selection": {
+            "count": 908,
+            "totalMs": 270.1000009775162,
+            "max": 4.300000071525574,
+            "p50": 0.2999999523162842,
+            "p95": 0.40000009536743164,
+            "p99": 0.5
+          },
+          "updateFaunaAI": {
+            "count": 908,
+            "totalMs": 104.89999878406525,
+            "max": 5.100000023841858,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.3999999761581421
+          },
+          "updateRobinAI": {
+            "count": 19454,
+            "totalMs": 285.09999775886536,
+            "max": 5.700000047683716,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "pre-hooks": {
+            "count": 908,
+            "totalMs": 4.500000238418579,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "physics.setup": {
+            "count": 908,
+            "totalMs": 40.700000405311584,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          },
+          "physics.passive-player-movement": {
+            "count": 908,
+            "totalMs": 11.300000429153442,
+            "max": 0.2999999523162842,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          },
+          "physics.npc-movement": {
+            "count": 908,
+            "totalMs": 1066.4000010490417,
+            "max": 3,
+            "p50": 1.100000023841858,
+            "p95": 1.7999999523162842,
+            "p99": 2.299999952316284
+          },
+          "physics.ground-tracking": {
+            "count": 908,
+            "totalMs": 371.5999995470047,
+            "max": 1.600000023841858,
+            "p50": 0.3999999761581421,
+            "p95": 0.7000000476837158,
+            "p99": 0.8999999761581421
+          },
+          "physics.first-index": {
+            "count": 908,
+            "totalMs": 61.799999713897705,
+            "max": 0.30000007152557373,
+            "p50": 0.09999990463256836,
+            "p95": 0.19999992847442627,
+            "p99": 0.20000004768371582
+          },
+          "physics.separation": {
+            "count": 908,
+            "totalMs": 61.20000076293945,
+            "max": 0.30000007152557373,
+            "p50": 0.09999990463256836,
+            "p95": 0.19999992847442627,
+            "p99": 0.20000004768371582
+          },
+          "physics.attachments-index": {
+            "count": 908,
+            "totalMs": 62.89999973773956,
+            "max": 0.3999999761581421,
+            "p50": 0.10000002384185791,
+            "p95": 0.19999992847442627,
+            "p99": 0.20000004768371582
+          },
+          "physics.animation": {
+            "count": 908,
+            "totalMs": 69.40000009536743,
+            "max": 2.5999999046325684,
+            "p50": 0.10000002384185791,
+            "p95": 0.19999992847442627,
+            "p99": 0.20000004768371582
+          },
+          "physics": {
+            "count": 908,
+            "totalMs": 1779.6000018119812,
+            "max": 4.200000047683716,
+            "p50": 1.899999976158142,
+            "p95": 2.8000000715255737,
+            "p99": 3.399999976158142
+          },
+          "tags": {
+            "count": 908,
+            "totalMs": 1.4000002145767212,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "overlap": {
+            "count": 908,
+            "totalMs": 21.99999976158142,
+            "max": 0.19999992847442627,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "replication": {
+            "count": 908,
+            "totalMs": 866.4999992847443,
+            "max": 2,
+            "p50": 1,
+            "p95": 1.2999999523162842,
+            "p99": 1.4000000953674316
+          },
+          "tick": {
+            "count": 908,
+            "totalMs": 6893.200000405312,
+            "max": 22.800000071525574,
+            "p50": 7.5,
+            "p95": 10.199999928474426,
+            "p99": 11.600000023841858
+          },
+          "player.jump-support": {
+            "count": 86,
+            "totalMs": 3.6000001430511475,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          }
+        },
+        "queryCounts": {
+          "player-input.props": {
+            "calls": 5490,
+            "candidates": 406260,
+            "maxCandidates": 74
+          },
+          "player-input.entities": {
+            "calls": 3660,
+            "candidates": 65112,
+            "maxCandidates": 18
+          },
+          "outside.props": {
+            "calls": 2516,
+            "candidates": 27073,
+            "maxCandidates": 52
+          },
+          "npc-movement.props": {
+            "calls": 40724,
+            "candidates": 435198,
+            "maxCandidates": 29
+          },
+          "npc-movement.entities": {
+            "calls": 40724,
+            "candidates": 133887,
+            "maxCandidates": 12
+          },
+          "ground-tracking.props": {
+            "calls": 15121,
+            "candidates": 158360,
+            "maxCandidates": 16
+          },
+          "ground-tracking.entities": {
+            "calls": 15121,
+            "candidates": 49982,
+            "maxCandidates": 8
+          },
+          "first-index.index": {
+            "calls": 21270,
+            "candidates": 0,
+            "maxCandidates": 0
+          },
+          "attachments-index.index": {
+            "calls": 21270,
+            "candidates": 0,
+            "maxCandidates": 0
+          },
+          "outside.entities": {
+            "calls": 908,
+            "candidates": 56296,
+            "maxCandidates": 62
+          },
+          "passive-player-movement.props": {
+            "calls": 172,
+            "candidates": 688,
+            "maxCandidates": 4
+          },
+          "passive-player-movement.entities": {
+            "calls": 172,
+            "candidates": 516,
+            "maxCandidates": 3
+          },
+          "player-jump.props": {
+            "calls": 86,
+            "candidates": 344,
+            "maxCandidates": 4
+          },
+          "player-jump.entities": {
+            "calls": 86,
+            "candidates": 258,
+            "maxCandidates": 3
+          }
+        },
+        "movementCounts": {
+          "stationary": 15663,
+          "moving": 4699
+        },
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 22,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        },
+        "view": [
+          {
+            "minCx": -2,
+            "minCy": 5,
+            "maxCx": -2,
+            "maxCy": 6
+          }
+        ]
+      },
+      "finalActive": 22,
+      "cpu": {
+        "intervalUs": 1000,
+        "samples": 12589,
+        "sampledMs": 15312.052,
+        "idleMs": 7754.449,
+        "activeMs": 7557.603,
+        "topSelf": [
+          {
+            "name": "demand",
+            "source": "src/server/InterestManager.ts",
+            "line": 21,
+            "sampledMs": 890.612
+          },
+          {
+            "name": "serializeEntity",
+            "source": "src/shared/serialization.ts",
+            "line": 8,
+            "sampledMs": 394.706
+          },
+          {
+            "name": "build",
+            "source": "src/server/RealmReplicator.ts",
+            "line": 32,
+            "sampledMs": 320.602
+          },
+          {
+            "name": "queryRange",
+            "source": "src/entities/SpatialHash.ts",
+            "line": 93,
+            "sampledMs": 300.5439999999999
+          },
+          {
+            "name": "get",
+            "source": "src/persistence/ActorRecords.ts",
+            "line": 107,
+            "sampledMs": 298.119
+          },
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 47,
+            "sampledMs": 245.272
+          },
+          {
+            "name": "select",
+            "source": "src/server/RealmPropActivity.ts",
+            "line": 20,
+            "sampledMs": 230.605
+          },
+          {
+            "name": "set",
+            "source": "src/persistence/ActorRecords.ts",
+            "line": 108,
+            "sampledMs": 213.33499999999998
+          },
+          {
+            "name": "recordsDependencyTickets",
+            "source": "src/server/RealmStreaming.ts",
+            "line": 217,
+            "sampledMs": 211.859
+          },
+          {
+            "name": "awake",
+            "source": "src/server/WildlifeActivity.ts",
+            "line": 13,
+            "sampledMs": 189.158
+          },
+          {
+            "name": "getPropsInChunkRange",
+            "source": "src/entities/PropManager.ts",
+            "line": 159,
+            "sampledMs": 170.777
+          },
+          {
+            "name": "select",
+            "source": "src/server/RealmActivity.ts",
+            "line": 20,
+            "sampledMs": 163.493
+          },
+          {
+            "name": "update",
+            "source": "src/entities/EntityManager.ts",
+            "line": 73,
+            "sampledMs": 153.82
+          },
+          {
+            "name": "(garbage collector)",
+            "source": "runtime",
+            "line": 0,
+            "sampledMs": 151.19
+          },
+          {
+            "name": "update",
+            "source": "src/server/RealmStreaming.ts",
+            "line": 122,
+            "sampledMs": 143.53099999999998
+          },
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 140,
+            "sampledMs": 139.43400000000003
+          },
+          {
+            "name": "tick",
+            "source": "src/server/Realm.ts",
+            "line": 446,
+            "sampledMs": 130.882
+          },
+          {
+            "name": "isWildlife",
+            "source": "src/server/WildlifeActivity.ts",
+            "line": 3,
+            "sampledMs": 127.65299999999999
+          },
+          {
+            "name": "roofSupport",
+            "source": "src/traffic/RoofSupport.ts",
+            "line": 14,
+            "sampledMs": 126.958
+          },
+          {
+            "name": "get",
+            "source": "src/persistence/ActorRecords.ts",
+            "line": 135,
+            "sampledMs": 113.81400000000002
+          }
+        ],
+        "topInclusive": [
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 140,
+            "sampledMs": 11949.661000000002
+          },
+          {
+            "name": "(anonymous)",
+            "source": "src/server/ServerLoop.ts",
+            "line": 34,
+            "sampledMs": 6888.331
+          },
+          {
+            "name": "pump",
+            "source": "src/server/ServerLoop.ts",
+            "line": 36,
+            "sampledMs": 6878.8
+          },
+          {
+            "name": "(anonymous)",
+            "source": "src/server/GameServer.ts",
+            "line": 415,
+            "sampledMs": 6803.476
+          },
+          {
+            "name": "tick",
+            "source": "src/server/GameServer.ts",
+            "line": 466,
+            "sampledMs": 6783.489
+          },
+          {
+            "name": "tick",
+            "source": "src/server/Realm.ts",
+            "line": 446,
+            "sampledMs": 6731.119
+          },
+          {
+            "name": "update",
+            "source": "src/entities/EntityManager.ts",
+            "line": 73,
+            "sampledMs": 1714.461
+          },
+          {
+            "name": "update",
+            "source": "src/server/RealmStreaming.ts",
+            "line": 122,
+            "sampledMs": 1452.623
+          },
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 47,
+            "sampledMs": 897.5910000000001
+          },
+          {
+            "name": "demand",
+            "source": "src/server/InterestManager.ts",
+            "line": 21,
+            "sampledMs": 890.612
+          },
+          {
+            "name": "replicate",
+            "source": "src/server/Realm.ts",
+            "line": 763,
+            "sampledMs": 842.4659999999999
+          },
+          {
+            "name": "build",
+            "source": "src/server/RealmReplicator.ts",
+            "line": 32,
+            "sampledMs": 818.856
+          },
+          {
+            "name": "resolveCollision",
+            "source": "src/entities/collision.ts",
+            "line": 124,
+            "sampledMs": 797.375
+          },
+          {
+            "name": "computeEntityTickDtsMulti",
+            "source": "src/server/Realm.ts",
+            "line": 1514,
+            "sampledMs": 688.827
+          },
+          {
+            "name": "updateVisibleChunks",
+            "source": "src/server/Realm.ts",
+            "line": 780,
+            "sampledMs": 680.845
+          },
+          {
+            "name": "select",
+            "source": "src/server/RealmActivity.ts",
+            "line": 20,
+            "sampledMs": 663.595
+          },
+          {
+            "name": "(anonymous)",
+            "source": "src/entities/EntityManager.ts",
+            "line": 116,
+            "sampledMs": 650.594
+          },
+          {
+            "name": "tickAllAI",
+            "source": "src/server/tickAllAI.ts",
+            "line": 20,
+            "sampledMs": 487.643
+          },
+          {
+            "name": "serializeEntity",
+            "source": "src/shared/serialization.ts",
+            "line": 8,
+            "sampledMs": 421.451
+          },
+          {
+            "name": "queryRange",
+            "source": "src/entities/SpatialHash.ts",
+            "line": 93,
+            "sampledMs": 402.46
+          }
+        ]
+      }
+    },
+    {
+      "kind": "deep",
+      "motion": "walk",
+      "repeat": 1,
+      "browser": "154.0.8037.126",
+      "frames": {
+        "count": 900,
+        "p50": 16.69999999999709,
+        "p95": 16.799999999999272,
+        "p99": 16.899999999997817,
+        "max": 33.29999999999927
+      },
+      "framesOver25": 1,
+      "renderMs": {
+        "count": 900,
+        "p50": 3,
+        "p95": 4.600000023841858,
+        "p99": 5.200000047683716,
+        "max": 9.5
+      },
+      "updateMs": {
+        "count": 901,
+        "p50": 2.600000023841858,
+        "p95": 3.600000023841858,
+        "p99": 4,
+        "max": 8.5
+      },
+      "ackMs": {
+        "count": 864,
+        "p50": 35.60000002384186,
+        "p95": 53.09999990463257,
+        "p99": 61.700000047683716,
+        "max": 137.59999990463257
+      },
+      "maxReplay": 7,
+      "maxResim": 1.598632815102974e-5,
+      "initialPosition": {
+        "wx": -385.0636887304687,
+        "wy": 1632
+      },
+      "finalPosition": {
+        "wx": 227.325439453125,
+        "wy": 1632
+      },
+      "maxTravel": 612.3891296386719,
+      "replicatedEntities": 69,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "authorityHz": 60.0556807636219,
+      "errors": [],
+      "thermalsBefore": {
+        "batteryC": 29.1,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 29.5,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "player.input-phase": {
+            "count": 1814,
+            "totalMs": 442.0999982357025,
+            "max": 7.800000071525574,
+            "p50": 0.10000002384185791,
+            "p95": 0.6000000238418579,
+            "p99": 0.7000000476837158
+          },
+          "streaming": {
+            "count": 1814,
+            "totalMs": 1234.600002169609,
+            "max": 6.799999952316284,
+            "p50": 0.6999999284744263,
+            "p95": 1,
+            "p99": 1.600000023841858
+          },
+          "selection": {
+            "count": 907,
+            "totalMs": 616.0000015497208,
+            "max": 7.199999928474426,
+            "p50": 0.6999999284744263,
+            "p95": 0.9000000953674316,
+            "p99": 2.100000023841858
+          },
+          "decision-selection": {
+            "count": 907,
+            "totalMs": 93.29999685287476,
+            "max": 4.600000023841858,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.2999999523162842
+          },
+          "prop-selection": {
+            "count": 907,
+            "totalMs": 215.30000221729279,
+            "max": 6,
+            "p50": 0.20000004768371582,
+            "p95": 0.3999999761581421,
+            "p99": 0.7000000476837158
+          },
+          "updateFaunaAI": {
+            "count": 468,
+            "totalMs": 43.700000286102295,
+            "max": 5.899999976158142,
+            "p50": 0.09999990463256836,
+            "p95": 0.20000004768371582,
+            "p99": 0.5
+          },
+          "updateRobinAI": {
+            "count": 34613,
+            "totalMs": 351.8999984264374,
+            "max": 4.899999976158142,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "pre-hooks": {
+            "count": 907,
+            "totalMs": 3.5999995470046997,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "physics.setup": {
+            "count": 907,
+            "totalMs": 50.19999980926514,
+            "max": 1.399999976158142,
+            "p50": 0.09999990463256836,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          },
+          "physics.passive-player-movement": {
+            "count": 907,
+            "totalMs": 4.999999761581421,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0.09999990463256836,
+            "p99": 0.10000002384185791
+          },
+          "physics.npc-movement": {
+            "count": 907,
+            "totalMs": 1508.8000020980835,
+            "max": 7.199999928474426,
+            "p50": 1.600000023841858,
+            "p95": 2.5,
+            "p99": 3.299999952316284
+          },
+          "physics.ground-tracking": {
+            "count": 907,
+            "totalMs": 443.70000064373016,
+            "max": 5.100000023841858,
+            "p50": 0.5,
+            "p95": 0.7999999523162842,
+            "p99": 0.9000000953674316
+          },
+          "physics.first-index": {
+            "count": 907,
+            "totalMs": 76.4999988079071,
+            "max": 0.7999999523162842,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "physics.separation": {
+            "count": 907,
+            "totalMs": 75.49999976158142,
+            "max": 0.3999999761581421,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "physics.attachments-index": {
+            "count": 907,
+            "totalMs": 81.60000109672546,
+            "max": 0.9000000953674316,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "physics.animation": {
+            "count": 907,
+            "totalMs": 78.00000071525574,
+            "max": 0.2999999523162842,
+            "p50": 0.10000002384185791,
+            "p95": 0.20000004768371582,
+            "p99": 0.20000004768371582
+          },
+          "physics": {
+            "count": 907,
+            "totalMs": 2349.8000004291534,
+            "max": 7.799999952316284,
+            "p50": 2.600000023841858,
+            "p95": 3.799999952316284,
+            "p99": 4.600000023841858
+          },
+          "tags": {
+            "count": 907,
+            "totalMs": 2.4999996423721313,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.10000002384185791
+          },
+          "overlap": {
+            "count": 907,
+            "totalMs": 22.300001621246338,
+            "max": 0.20000004768371582,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "replication": {
+            "count": 907,
+            "totalMs": 801.6000000238419,
+            "max": 5,
+            "p50": 0.8999999761581421,
+            "p95": 1.2000000476837158,
+            "p99": 1.5
+          },
+          "tick": {
+            "count": 907,
+            "totalMs": 7184.199998497963,
+            "max": 43,
+            "p50": 7.700000047683716,
+            "p95": 11.199999928474426,
+            "p99": 13.5
+          },
+          "player.jump-support": {
+            "count": 32,
+            "totalMs": 0.6000001430511475,
+            "max": 0.10000002384185791,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.10000002384185791
+          },
+          "updateRabbitAI": {
+            "count": 1432,
+            "totalMs": 56.89999878406525,
+            "max": 4,
+            "p50": 0,
+            "p95": 0.10000002384185791,
+            "p99": 0.20000004768371582
+          }
+        },
+        "queryCounts": {
+          "player-input.props": {
+            "calls": 5168,
+            "candidates": 488626,
+            "maxCandidates": 116
+          },
+          "player-input.entities": {
+            "calls": 3336,
+            "candidates": 95806,
+            "maxCandidates": 38
+          },
+          "npc-movement.props": {
+            "calls": 73064,
+            "candidates": 925159,
+            "maxCandidates": 51
+          },
+          "npc-movement.entities": {
+            "calls": 72524,
+            "candidates": 322963,
+            "maxCandidates": 21
+          },
+          "ground-tracking.props": {
+            "calls": 25975,
+            "candidates": 325373,
+            "maxCandidates": 28
+          },
+          "ground-tracking.entities": {
+            "calls": 25975,
+            "candidates": 116259,
+            "maxCandidates": 11
+          },
+          "first-index.index": {
+            "calls": 37439,
+            "candidates": 0,
+            "maxCandidates": 0
+          },
+          "attachments-index.index": {
+            "calls": 37439,
+            "candidates": 0,
+            "maxCandidates": 0
+          },
+          "outside.entities": {
+            "calls": 907,
+            "candidates": 61974,
+            "maxCandidates": 73
+          },
+          "outside.props": {
+            "calls": 5303,
+            "candidates": 76189,
+            "maxCandidates": 334
+          },
+          "passive-player-movement.props": {
+            "calls": 64,
+            "candidates": 954,
+            "maxCandidates": 25
+          },
+          "passive-player-movement.entities": {
+            "calls": 64,
+            "candidates": 440,
+            "maxCandidates": 11
+          },
+          "player-jump.props": {
+            "calls": 32,
+            "candidates": 477,
+            "maxCandidates": 25
+          },
+          "player-jump.entities": {
+            "calls": 32,
+            "candidates": 221,
+            "maxCandidates": 11
+          }
+        },
+        "movementCounts": {
+          "stationary": 27840,
+          "moving": 8692
+        },
+        "resident": 241,
+        "props": 932,
+        "visible": 12,
+        "halo": 43,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        },
+        "view": [
+          {
+            "minCx": 0,
+            "minCy": 5,
+            "maxCx": 1,
+            "maxCy": 6
+          }
+        ]
+      },
+      "finalActive": 43,
+      "cpu": {
+        "intervalUs": 1000,
+        "samples": 12739,
+        "sampledMs": 15339.19,
+        "idleMs": 7203.954,
+        "activeMs": 8135.236,
+        "topSelf": [
+          {
+            "name": "demand",
+            "source": "src/server/InterestManager.ts",
+            "line": 21,
+            "sampledMs": 704.3280000000001
+          },
+          {
+            "name": "serializeEntity",
+            "source": "src/shared/serialization.ts",
+            "line": 8,
+            "sampledMs": 407.901
+          },
+          {
+            "name": "get",
+            "source": "src/persistence/ActorRecords.ts",
+            "line": 107,
+            "sampledMs": 320.72300000000007
+          },
+          {
+            "name": "queryRange",
+            "source": "src/entities/SpatialHash.ts",
+            "line": 93,
+            "sampledMs": 303.93600000000004
+          },
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 47,
+            "sampledMs": 264.246
+          },
+          {
+            "name": "build",
+            "source": "src/server/RealmReplicator.ts",
+            "line": 32,
+            "sampledMs": 247.111
+          },
+          {
+            "name": "getPropsInChunkRange",
+            "source": "src/entities/PropManager.ts",
+            "line": 159,
+            "sampledMs": 238.62099999999995
+          },
+          {
+            "name": "markRecordDirty",
+            "source": "src/persistence/SaveManager.ts",
+            "line": 65,
+            "sampledMs": 213.747
+          },
+          {
+            "name": "update",
+            "source": "src/entities/EntityManager.ts",
+            "line": 73,
+            "sampledMs": 211.837
+          },
+          {
+            "name": "(garbage collector)",
+            "source": "runtime",
+            "line": 0,
+            "sampledMs": 204.862
+          },
+          {
+            "name": "select",
+            "source": "src/server/RealmPropActivity.ts",
+            "line": 20,
+            "sampledMs": 201.458
+          },
+          {
+            "name": "recordsDependencyTickets",
+            "source": "src/server/RealmStreaming.ts",
+            "line": 217,
+            "sampledMs": 193.26000000000002
+          },
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 140,
+            "sampledMs": 166.723
+          },
+          {
+            "name": "select",
+            "source": "src/server/RealmActivity.ts",
+            "line": 20,
+            "sampledMs": 159.854
+          },
+          {
+            "name": "awake",
+            "source": "src/server/WildlifeActivity.ts",
+            "line": 13,
+            "sampledMs": 149.443
+          },
+          {
+            "name": "getEntityAABB",
+            "source": "src/entities/collision.ts",
+            "line": 7,
+            "sampledMs": 138.855
+          },
+          {
+            "name": "tick",
+            "source": "src/server/Realm.ts",
+            "line": 446,
+            "sampledMs": 133.788
+          },
+          {
+            "name": "postMessage",
+            "source": "runtime",
+            "line": 0,
+            "sampledMs": 113.69800000000001
+          },
+          {
+            "name": "update",
+            "source": "src/server/RealmStreaming.ts",
+            "line": 122,
+            "sampledMs": 104.864
+          },
+          {
+            "name": "isWildlife",
+            "source": "src/server/WildlifeActivity.ts",
+            "line": 3,
+            "sampledMs": 99.138
+          }
+        ],
+        "topInclusive": [
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 140,
+            "sampledMs": 12419.325
+          },
+          {
+            "name": "(anonymous)",
+            "source": "src/server/ServerLoop.ts",
+            "line": 34,
+            "sampledMs": 7175.435
+          },
+          {
+            "name": "pump",
+            "source": "src/server/ServerLoop.ts",
+            "line": 36,
+            "sampledMs": 7157.86
+          },
+          {
+            "name": "(anonymous)",
+            "source": "src/server/GameServer.ts",
+            "line": 415,
+            "sampledMs": 7118.523
+          },
+          {
+            "name": "tick",
+            "source": "src/server/GameServer.ts",
+            "line": 466,
+            "sampledMs": 7109.352
+          },
+          {
+            "name": "tick",
+            "source": "src/server/Realm.ts",
+            "line": 446,
+            "sampledMs": 7057.602
+          },
+          {
+            "name": "update",
+            "source": "src/entities/EntityManager.ts",
+            "line": 73,
+            "sampledMs": 2216.308
+          },
+          {
+            "name": "update",
+            "source": "src/server/RealmStreaming.ts",
+            "line": 122,
+            "sampledMs": 1224.1039999999998
+          },
+          {
+            "name": "resolveCollision",
+            "source": "src/entities/collision.ts",
+            "line": 124,
+            "sampledMs": 1060.6470000000002
+          },
+          {
+            "name": "owner.<computed>",
+            "source": "runtime",
+            "line": 47,
+            "sampledMs": 963.3319999999998
+          },
+          {
+            "name": "(anonymous)",
+            "source": "src/entities/EntityManager.ts",
+            "line": 116,
+            "sampledMs": 875.77
+          },
+          {
+            "name": "replicate",
+            "source": "src/server/Realm.ts",
+            "line": 763,
+            "sampledMs": 800.705
+          },
+          {
+            "name": "build",
+            "source": "src/server/RealmReplicator.ts",
+            "line": 32,
+            "sampledMs": 774.168
+          },
+          {
+            "name": "demand",
+            "source": "src/server/InterestManager.ts",
+            "line": 21,
+            "sampledMs": 757.9870000000002
+          },
+          {
+            "name": "tickAllAI",
+            "source": "src/server/tickAllAI.ts",
+            "line": 20,
+            "sampledMs": 624.62
+          },
+          {
+            "name": "updateVisibleChunks",
+            "source": "src/server/Realm.ts",
+            "line": 780,
+            "sampledMs": 600.907
+          },
+          {
+            "name": "computeEntityTickDtsMulti",
+            "source": "src/server/Realm.ts",
+            "line": 1514,
+            "sampledMs": 595.51
+          },
+          {
+            "name": "select",
+            "source": "src/server/RealmActivity.ts",
+            "line": 20,
+            "sampledMs": 584.056
+          },
+          {
+            "name": "__diagnosticAI",
+            "source": "src/server/tickAllAI.ts",
+            "line": 90,
+            "sampledMs": 505.534
+          },
+          {
+            "name": "serializeEntity",
+            "source": "src/shared/serialization.ts",
+            "line": 8,
+            "sampledMs": 444.409
+          }
+        ]
+      }
+    }
+  ]
+}
