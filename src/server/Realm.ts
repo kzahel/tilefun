@@ -105,6 +105,7 @@ import { MutationQueue } from "./MutationQueue.js";
 import { mutationRange } from "./MutationRange.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { RealmActivity } from "./RealmActivity.js";
+import { RealmPropActivity } from "./RealmPropActivity.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 import { tickAllAI } from "./tickAllAI.js";
@@ -927,12 +928,9 @@ export class Realm {
         const active = [...entityTickDts.keys()];
         const decisions = this.streaming ? this.decisionDts(entityTickDts, stepDt) : entityTickDts;
         this.entityManager.simulationEntities = active;
-        this.propManager.simulationProps = this.propManager.props.filter(
-          (prop) =>
-            !this.streaming ||
-            ((this.streaming.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
-              this.streaming.supported(prop, stepDt)),
-        );
+        this.propManager.simulationProps = this.streaming
+          ? this.propActivity.select(this.propManager, this.streaming)
+          : this.propManager.props;
         tickAllAI(
           active,
           playerPositions,
@@ -1145,11 +1143,7 @@ export class Realm {
       activeSessions.some((session) => !session.editorEnabled)
     ) {
       const activeProps = this.streaming
-        ? this.propManager.props.filter(
-            (prop) =>
-              (this.streaming?.demand.get(actorScope(prop.position))?.activity ?? 0) > 0 &&
-              this.streaming?.supported(prop, dt),
-          )
+        ? this.propActivity.select(this.propManager, this.streaming)
         : this.propManager.props;
       this.tentSpawner.update(dt, this.propManager, this.entityManager, activeProps);
     }
@@ -1543,6 +1537,7 @@ export class Realm {
     await this.streaming?.close();
     this.streaming = null;
     this.activity.clear();
+    this.propActivity.clear();
     // Close previous save manager
     if (this.saveManager) {
       await this.saveManager.close();
@@ -1855,6 +1850,7 @@ export class Realm {
     this.records?.features.clear();
     this.sessions.clear();
     this.activity.clear();
+    this.propActivity.clear();
     this.replication.clear();
   }
 
@@ -2268,6 +2264,7 @@ export class Realm {
 
   private previousActive = new Set<Entity>();
   private readonly activity = new RealmActivity();
+  private readonly propActivity = new RealmPropActivity();
   private readonly wildlifeActivity = new WildlifeActivity();
   private robinTurn = 0;
   private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {

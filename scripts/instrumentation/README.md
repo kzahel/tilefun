@@ -45,6 +45,10 @@ It is a keyboard-driven movement control, not touch acceptance. For a matched
 membership comparison, run the same probe against a frozen pre-change archive
 and current source, sequentially without validation during sampling. See
 [090](../../docs/tactical/090-incremental-simulation-membership.md).
+The probe times prop admission through the cached selector when available and the
+original filter otherwise. `--realm-reference=PATH` can isolate the earlier Realm
+admission policy against the same companion modules;
+[091](../../docs/tactical/091-static-prop-admission.md) records that comparison.
 Keep Chrome in the
 foreground on the phone; background debugging can stall or stop. Startup failures
 inside the capture retain page errors and body text in `failure.json`.

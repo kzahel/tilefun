@@ -263,7 +263,9 @@ try {
           [server, "tick", "tick"],
           [realm.entityManager, "update", "physics"],
           [realm, "computeEntityTickDtsMulti", "selection"],
-          [realm.propManager.props, "filter", "prop-selection"],
+          realm.propActivity
+            ? [realm.propActivity, "select", "prop-selection"]
+            : [realm.propManager.props, "filter", "prop-selection"],
           [realm.worldAPI.tick, "firePre", "pre-hooks"],
           [realm.streaming, "update", "streaming"],
           [realm, "decisionDts", "decision-selection"],

@@ -62,6 +62,14 @@ selection. Eviction drops cached references immediately; world replacement and
 successful teardown clear membership and hysteresis. Active-body readiness,
 fixed-step dt, bucket ordering and fresh grounding remain unchanged.
 
+[091](../tactical/091-static-prop-admission.md) caches ordered static prop activity/
+readiness admission. Live demand/ready-key and identity/position/collider-size
+comparisons refresh changed results through existing support checks, including
+halo readiness and in-place procedural edits. Unchanged props make no support
+queries and reuse the selected array. Removal, world replacement and teardown
+release references/listeners; collision geometry and moving entity readiness
+remain live. Game and embedded scenarios share the Realm selector.
+
 Movement remains fixed-step in both active tiers; nominal reduced decision rate
 is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic
 state without wall-clock catch-up. Balls, entity physics, separation, attachments

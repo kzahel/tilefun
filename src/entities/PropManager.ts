@@ -10,6 +10,7 @@ function chunkKey(cx: number, cy: number): string {
 /** Simple store for static props. No update loop — props don't tick. */
 export class PropManager {
   simulationProps: readonly Prop[] | undefined;
+  readonly removalListeners = new Set<(prop: Prop) => void>();
   get queryProps(): readonly Prop[] {
     return this.simulationProps ?? this.props;
   }
@@ -130,6 +131,7 @@ export class PropManager {
       this.onChange?.(prop, true);
     }
     this.onDespawn?.(prop);
+    for (const listener of this.removalListeners) listener(prop);
     return true;
   }
 

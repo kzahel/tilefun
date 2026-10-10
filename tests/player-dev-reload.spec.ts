@@ -194,6 +194,20 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
     await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "idle");
+    // Loop startup precedes the first entity frame; do not inspect its placeholder.
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const game = (
+            document.querySelector("#game") as unknown as {
+              __game: import("../src/client/GameClient.js").GameClient;
+            }
+          ).__game;
+          return (game.stateView as import("../src/client/ClientStateView.js").RemoteStateView)
+            .serverPlayerEntity.id;
+        }),
+      )
+      .toBeGreaterThanOrEqual(0);
     const result = await page.evaluate(() => {
       const game = (
         document.querySelector("#game") as unknown as {

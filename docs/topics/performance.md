@@ -134,10 +134,17 @@ headroom or eliminate correction from newly available terrain/contacts.
 groups and checks wildlife sleep before trajectory readiness. Fresh phone
 stationary selection p95 falls from 1.7ms to 1.0–1.1ms; walking selection falls
 from 1.3–1.4ms to 1.1ms. Whole walking-tick p95 does not improve in these samples;
-this is a phase-cost reduction, not a stutter cure. The next bounded candidate is
-static prop activity/readiness selection: it still costs about 1.9–2.3ms p95 on
-the phone. Moving physics remains another substantial cost. The tactical owns
-exact run order, temperatures, workload and final checks.
+this is a phase-cost reduction, not a stutter cure. The tactical owns exact run
+order, temperatures, workload and final checks.
+
+[091](../tactical/091-static-prop-admission.md) caches static prop admission across
+stable demand, readiness, membership and geometry. Native Pixel selection p95
+falls from 2.1–2.9ms to 0.3–0.4ms stationary and 1.5–1.6ms to 0.3–0.4ms walking.
+Whole walking-tick p95 stays near 11ms; this remains a phase saving. Live collision
+queries are unchanged. Next, profile resting-body ground/support and broadphase
+queries inside EntityManager.update before choosing a cache or finer spatial index.
+Moving physics costs 3.2–3.7ms p95 in these samples. The tactical records validation,
+concurrent checkout state, ACK/temperature variation and measurement limits.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

@@ -74,6 +74,10 @@ incremental demanded-group cache and sleep-before-readiness policy in Realm,
 including ScenarioSession/ScenarioClient. Live contacts/wake checks and explicit
 world/eviction teardown stay shared; no lab-specific activation or physics path.
 
+[091](../tactical/091-static-prop-admission.md) also caches static scenery admission
+in that shared Realm. ScenarioSession receives the same demand/readiness/edit
+invalidation and teardown as the game; prop collision geometry remains live.
+
 [085](../tactical/085-robin-search-cost.md) optimizes the shared robin decision
 function without a separate lab path. Canvas/GPU grove checks still pass flight,
 actual perching, approach/contact and frozen trajectory reload; ordinary game
