@@ -42,7 +42,8 @@ export function restoreFaunaPose(animal: Entity): void {
 /** One alarm through alert, escape and recovery; preserve any already committed walk. */
 export function startleFauna(animal: Entity, from: PositionComponent): boolean {
   const ai = animal.fauna;
-  if (!ai || ai.alarmFrom || ai.state === "recover") return false;
+  if (!ai || animal.wanderAI?.state === "ridden" || ai.alarmFrom || ai.state === "recover")
+    return false;
   ai.alarmFrom = { ...from };
   if (animal.wanderAI) animal.wanderAI.state = "scared";
   if (!ai.motion) {
@@ -53,6 +54,26 @@ export function startleFauna(animal: Entity, from: PositionComponent): boolean {
     restoreFaunaPose(animal);
   }
   return true;
+}
+
+/** Suspend native travel while controlled; resume around the actual dismount. */
+export function setFaunaRidden(animal: Entity, ridden: boolean): void {
+  const ai = animal.fauna;
+  if (!ai) return;
+  delete ai.motion;
+  delete ai.actionElapsed;
+  delete ai.alarmFrom;
+  ai.state = "rest";
+  ai.timer = 1;
+  ai.target = { ...animal.position };
+  if (!ridden) {
+    ai.home = { ...animal.position };
+    ai.shelter = { ...animal.position };
+    delete ai.habitatBounds;
+    delete ai.groupId;
+  }
+  if (animal.wanderAI) animal.wanderAI.state = ridden ? "ridden" : "idle";
+  restoreFaunaPose(animal);
 }
 /** Fixed-speed grounded movement. Collision always owns actual XY; no catch-up teleport. */
 export function prepareFaunaTravel(animal: Entity, dt: number): void {

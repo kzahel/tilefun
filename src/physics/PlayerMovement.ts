@@ -18,6 +18,7 @@ import {
 } from "../config/constants.js";
 import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
+import { setSpriteClip } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
@@ -488,12 +489,16 @@ export function applyMountInput(
   rider?: Entity,
 ): void {
   if (!mount.velocity) return;
-  const baseSpeed = mount.wanderAI?.rideSpeed ?? PLAYER_SPEED;
+  const fauna = faunaProfile(mount.type);
+  // Older durable horses have a saved wanderAI without the new rideSpeed field.
+  const baseSpeed = fauna?.rideSpeed ?? mount.wanderAI?.rideSpeed ?? PLAYER_SPEED;
   const speed = input.sprinting ? baseSpeed * PLAYER_SPRINT_MULTIPLIER : baseSpeed;
   mount.velocity.vx = input.dx * speed;
   mount.velocity.vy = input.dy * speed;
 
   const moving = input.dx !== 0 || input.dy !== 0;
+  if (fauna?.rideSpeed)
+    setSpriteClip(mount, moving ? fauna.clips.length + (input.sprinting ? 1 : 0) : 0);
   if (mount.sprite) {
     mount.sprite.moving = moving;
     if (moving) {

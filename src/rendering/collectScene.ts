@@ -17,6 +17,7 @@ import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import { surfaceShadowZ } from "./SurfacePresentation.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
+import { grassDepthUnderVehicles, isVehicleSprite } from "./VehicleGrassDepth.js";
 
 /**
  * Interpolation factor for Z_SORT_FACTOR:
@@ -59,6 +60,7 @@ export function collectScene(
   const grassAlpha = hasGrass ? grassOpacity(camera.zoom) : 0;
   const visibleGrass = grassAlpha > 0;
   const items = frame ? frame.begin(visibleGrass) : [];
+  const grassVehicles: SpriteItem[] = [];
   const ghostByEntityId =
     extrapolationGhosts && extrapolationGhosts.length > 0
       ? new Map(extrapolationGhosts.map((g) => [g.entityId, g]))
@@ -153,7 +155,7 @@ export function collectScene(
       (meshAsset
         ? { assetId: meshAsset, orientation: yawOrientation(entityHeading(e)), radius: 64 }
         : undefined);
-    items.push({
+    const spriteItem = {
       ...(mesh ? { mesh } : {}),
       kind: "sprite",
       sortKey,
@@ -172,7 +174,9 @@ export function collectScene(
       shadowWidth,
       shadowTerrainZ,
       flashHidden: e.flashHidden ?? false,
-    } satisfies SpriteItem);
+    } satisfies SpriteItem;
+    items.push(spriteItem);
+    if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
 
     const ghost = ghostByEntityId?.get(e.id);
     if (ghost && Math.hypot(ghost.wx - pos.wx, ghost.wy - pos.wy) >= 0.25) {
@@ -255,14 +259,20 @@ export function collectScene(
       flashHidden: false,
     } satisfies SpriteItem;
     if (p.sprite.parts) {
-      for (const part of p.sprite.parts)
-        items.push({
+      for (const part of p.sprite.parts) {
+        const partItem = {
           ...baseItem,
           ...part,
           wx: p.position.wx + part.dx,
           wy: p.position.wy + part.dy,
-        });
-    } else items.push(baseItem);
+        };
+        items.push(partItem);
+        if (visibleGrass && isVehicleSprite(p.type)) grassVehicles.push(partItem);
+      }
+    } else {
+      items.push(baseItem);
+      if (visibleGrass && isVehicleSprite(p.type)) grassVehicles.push(baseItem);
+    }
   }
 
   // --- Grass blades ---
@@ -274,6 +284,7 @@ export function collectScene(
       maxWy: vpBR.wy,
     };
     const nowSec = performance.now() / 1000;
+    const grassStart = items.length;
     appendGrassBladeItems(
       world,
       entities,
@@ -284,6 +295,11 @@ export function collectScene(
       items,
       grassAlpha === 1 ? undefined : grassAlpha,
     );
+    if (grassVehicles.length)
+      for (let i = grassStart; i < items.length; i++) {
+        const item = items[i];
+        if (item?.kind === "grass") grassDepthUnderVehicles(item, grassVehicles);
+      }
   }
 
   // --- Elevation tiles ---

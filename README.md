@@ -123,7 +123,10 @@ woodland glades, walking, pausing and playing ear/tail alert cycles; nearby memb
 react together to a scare. Their bodies have collision and support standing; landing never
 automatically launches the player. Landing contact or a ball hit makes animals
 escape briefly and settle. Press Jump to jump off; moving animals can leave you
-to fall normally.
+to fall normally. **Horses are rideable:** jump onto their back to mount, use
+movement controls to ride quickly, hold Sprint to go faster, and press Jump to
+get off. Their back is reachable with the default jump and gravity; riding also
+works on existing saved horses.
 They persist as individuals when you leave and return; deleted animals stay gone,
 with no timed respawns. **Edit → Entities** offers all 22 wildlife species and
 creates saved individuals, including in older worlds whose countryside chunks

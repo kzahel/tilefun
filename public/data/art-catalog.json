@@ -23197,7 +23197,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PlayerMovement.ts:606"
+          "source": "src/physics/PlayerMovement.ts:611"
         },
         {
           "system": "Gameplay",
@@ -23229,11 +23229,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1284"
+          "source": "src/server/Realm.ts:1286"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2278"
+          "source": "src/server/Realm.ts:2292"
         },
         {
           "system": "Gameplay",
@@ -23385,7 +23385,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:175"
+          "source": "src/wildlife/Fauna.ts:176"
         }
       ]
     },
@@ -23937,7 +23937,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2243"
+          "source": "src/server/Realm.ts:2257"
         },
         {
           "system": "Gameplay",

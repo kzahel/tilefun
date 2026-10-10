@@ -91,7 +91,7 @@ import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
-import { startleFauna } from "../wildlife/faunaInteractions.js";
+import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
@@ -433,6 +433,8 @@ export class Realm {
       player.jumpZ = saved.mount.jumpZ;
       session.gameplaySession.mountId = mounted.id;
       if (mounted.wanderAI) mounted.wanderAI.state = "ridden";
+      setFaunaRidden(mounted, true);
+      player.noShadow = true;
     }
     session.cameraX = camX;
     session.cameraY = camY;
@@ -1876,6 +1878,7 @@ export class Realm {
 
     // Dismount at current position (player was parented to mount)
     if (mount) {
+      setFaunaRidden(mount, false);
       // Restore mount AI
       if (mount.wanderAI) {
         mount.wanderAI.state = "idle";
@@ -1895,7 +1898,7 @@ export class Realm {
   }
 
   /** Check for rideable entities under the player on landing; mount if found. */
-  private tryMountOnLanding(session: PlayerSession): void {
+  private tryMountOnLanding(session: PlayerSession, contactId?: number): void {
     const player = session.player;
     if (!player.collider) return;
 
@@ -1919,6 +1922,8 @@ export class Realm {
       if (entity.id === player.id) continue;
       if (entity.id === skipId) continue; // just dismounted — don't re-mount
       if (!entity.tags?.has("rideable")) continue;
+      // Wildlife mounts require an actual landing on their back, not nearby ground.
+      if (entity.fauna && entity.id !== contactId) continue;
       if (entity.wanderAI?.state === "ridden") continue; // already ridden
       if (!entity.collider) continue;
 
@@ -1937,8 +1942,9 @@ export class Realm {
       // Visual lift: set wz above mount so the renderer elevates the
       // player onto the mount's back. Use the mount's wz (not player.groundZ
       // which may include the cow's own walkable surface height, double-counting).
-      player.wz = (entity.wz ?? 0) + 10;
-      player.jumpZ = 10;
+      const rideHeight = entity.collider.physicalHeight ?? 10;
+      player.wz = (entity.wz ?? 0) + rideHeight;
+      player.jumpZ = rideHeight;
       delete player.airMomentumX;
       delete player.airMomentumY;
       Reflect.set(player, "jumpVZ", undefined);
@@ -1947,6 +1953,7 @@ export class Realm {
         entity.wanderAI.state = "ridden";
         entity.wanderAI.following = false;
       }
+      setFaunaRidden(entity, true);
       if (entity.velocity) {
         entity.velocity.vx = 0;
         entity.velocity.vy = 0;
@@ -1998,6 +2005,13 @@ export class Realm {
     if (outcome.wildlifeContactId !== undefined) {
       const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
       if (animal) {
+        if (session.gameplaySession.mountId === null && animal.tags?.has("rideable")) {
+          this.tryMountOnLanding(session, animal.id);
+          if (session.gameplaySession.mountId !== null) {
+            this.records?.changed(animal);
+            return;
+          }
+        }
         if (animal.fauna) startleFauna(animal, p.position);
         else if (animal.deer) startleDeer(animal, p.position);
         else if (animal.robin) startleRobin(animal, p.position);

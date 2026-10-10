@@ -39,6 +39,7 @@ export interface FaunaProfile {
   clips: readonly AnimationClip[];
   body: readonly [number, number, number];
   speed: number;
+  rideSpeed?: number;
   radius: number;
   step: number;
   alarmDistance: number;
@@ -308,8 +309,11 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
         loop: true,
       },
     ],
-    body: [34, 14, 36],
+    // The back is reachable with the default 150px/s jump and 500px/s² gravity.
+    // The head remains visual; support/collision represents the saddle height.
+    body: [34, 14, 18],
     speed: 20,
+    rideSpeed: 160,
     radius: 144,
     step: 44,
     alarmDistance: 38,
@@ -952,6 +956,8 @@ export interface FaunaBehavior {
   motion?: { elapsed: number; duration: number; escaping: boolean; startZ?: number; endZ?: number };
 }
 export function faunaDefinition(p: FaunaProfile) {
+  const walk = p.clips[1];
+  const rideSpeed = p.rideSpeed;
   return {
     sprite: {
       sheetKey: faunaType(p.species),
@@ -960,7 +966,17 @@ export function faunaDefinition(p: FaunaProfile) {
       frameCount: 1,
       frameDuration: p.clips[0]?.frameDuration ?? 100,
       drawOffsetY: p.size - p.anchor[1],
-      clips: p.clips,
+      clips:
+        rideSpeed && walk
+          ? [
+              ...p.clips,
+              ...[1, 2].map((multiplier) => ({
+                ...walk,
+                name: multiplier === 1 ? "ride" : "ride-sprint",
+                frameDuration: (walk.frameDuration * p.speed) / (rideSpeed * multiplier),
+              })),
+            ]
+          : p.clips,
     },
     collider: {
       offsetX: 0,
@@ -974,7 +990,15 @@ export function faunaDefinition(p: FaunaProfile) {
     amphibious: p.habitat === "shore",
     hasVelocity: true,
     weight: Math.max(1, p.body[0] * 2),
-    wanderAI: { idleMin: 2, idleMax: 6, walkMin: 1, walkMax: 3, speed: p.speed, directional: true },
+    wanderAI: {
+      idleMin: 2,
+      idleMax: 6,
+      walkMin: 1,
+      walkMax: 3,
+      speed: p.speed,
+      directional: true,
+      ...(p.rideSpeed ? { rideSpeed: p.rideSpeed } : {}),
+    },
   } satisfies EntityDef;
 }
 export const FAUNA_DEFS: Record<string, EntityDef> = Object.fromEntries(
@@ -1015,7 +1039,7 @@ export function createFauna(species: FaunaSpecies, wx: number, wy: number): Enti
     },
     noShadow: d.aquatic,
     weight: d.weight ?? 1,
-    tags: new Set(["npc", "wildlife"]),
+    tags: new Set(["npc", "wildlife", ...(p.rideSpeed ? ["rideable"] : [])]),
   };
 }
 export const FAUNA_FACTORIES: Record<string, (wx: number, wy: number) => Entity> =

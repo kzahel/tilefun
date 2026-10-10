@@ -4,6 +4,20 @@ Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
 Updated: 2026-10-10.
 
+## Grass occlusion
+
+Grass blades that overlap a displayed vehicle now sort below its sprite. The
+shared scene collector uses interpolated sprite bounds and visual height, covering
+all native views, stationary or driven cars, parked prop cars and trains. Blade
+rotation and projection rounding are included; grass outside the vehicle keeps
+normal depth ordering. This applies to game and embedded labs on Canvas/GPU,
+without changing approved vehicle pixels, body geometry or roof support.
+`VehicleGrassDepth.test.ts` covers every model/direction, interpolation and parked cars.
+All 180 vehicle review identities remain unchanged. The full browser run passes
+531/533; its two car tap-to-drive failures both pass on the isolated staged build
+without the pre-existing touch-control edits. Vehicle views, grades and roof
+support checks pass; no unrelated touch changes are included in this grass fix.
+
 ## Player driving
 
 [Tactical 087](../tactical/087-player-driven-cars-and-trains.md) delivers the

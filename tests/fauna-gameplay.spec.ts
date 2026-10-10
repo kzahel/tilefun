@@ -89,6 +89,18 @@ for (const profile of FAUNA_PROFILES) {
         })
         .toBe(true);
       await page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true }).click();
+      if (profile.rideSpeed) {
+        await expect.poll(async () => (await poses()).some((f) => f.state === "ridden")).toBe(true);
+        await expect(c).toHaveAttribute("data-player-max-vz", "0");
+        await page.screenshot({ path: `/tmp/tilefun-horse-mounted-${renderer}.png` });
+        await page.getByRole("button", { name: "Pause", exact: true }).click();
+        await expect(c).toHaveAttribute("data-authority-running", "false");
+        await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+        await expect(c).toHaveAttribute("data-reload-count", "2");
+        await expect.poll(async () => (await poses()).some((f) => f.state === "ridden")).toBe(true);
+        expect(errors).toEqual([]);
+        return;
+      }
       await expect
         .poll(
           async () =>

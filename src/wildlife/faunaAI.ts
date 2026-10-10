@@ -21,6 +21,7 @@ export function updateFaunaAI(
     p = faunaProfile(animal.type),
     velocity = animal.velocity;
   if (!ai || !velocity || !animal.sprite || !p) return;
+  if (animal.wanderAI?.state === "ridden") return;
   syncFaunaWater(animal, environment.isWater(animal.position));
   const random = () => {
     ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;

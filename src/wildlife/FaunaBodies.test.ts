@@ -138,7 +138,7 @@ describe.each(FAUNA_PROFILES)("$species ordinary wildlife body", (p) => {
   });
 
   it.each([true, false])(
-    "Realm landing startles a animal with or without player input (input=%s)",
+    "Realm landing mounts horses or startles other wildlife (input=%s)",
     async (input) => {
       const animal = createAnimal(64, 64);
       animal.persistentId = "durable-animal";
@@ -165,6 +165,17 @@ describe.each(FAUNA_PROFILES)("$species ordinary wildlife body", (p) => {
         }
         const animal = required(s.realm.entityManager.entities.find((e) => e.type === TYPE));
         expect(s.player.player.jumpVZ).toBeUndefined();
+        if (p.rideSpeed) {
+          expect(s.player.gameplaySession.mountId).toBe(animal.id);
+          expect(animal.wanderAI?.state).toBe("ridden");
+          expect(animal.fauna?.motion).toBeUndefined();
+          await s.reload();
+          const restored = required(s.realm.entityManager.entities.find((e) => e.type === TYPE));
+          expect(restored.persistentId).toBe("durable-animal");
+          expect(s.player.gameplaySession.mountId).toBe(restored.id);
+          expect(s.player.player.parentId).toBe(restored.id);
+          return;
+        }
         expect(animal.wanderAI?.state).toBe("scared");
         for (let i = 0; i < 40; i++) await s.step(idle, 1 / 60);
         expect(animal.fauna?.state).toBe("flee");

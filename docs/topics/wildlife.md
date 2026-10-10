@@ -4,6 +4,35 @@ Topic: wildlife
 Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay; the four exact pet drafts await human review. Other art expansion stays stopped.
 Updated: 2026-10-10.
 
+## Horse riding
+
+Landing on a horse's back now mounts it through the existing Realm mount path.
+Its 34 × 14px ground footprint is unchanged; physical support is 18px above its
+feet, so a normal jump with default gravity reaches the back. The taller head
+remains visual. Nearby ground landings do not mount horses, and one player owns
+the mount at a time. Other wildlife keeps its ordinary standing/startle behavior.
+
+Movement controls steer at 160px/s (2.5× ordinary walking), or 320px/s with Sprint.
+Shared authority/prediction uses ordinary solid/water/terrain collision, native
+direction rows and faster existing walk frames. Wildlife travel and alarms pause
+while ridden; Jump gets off, suppresses immediate remount and resumes wildlife
+around the actual dismount position. Rider identity/height survives save/reload.
+The game and the natural Worker playground share these rules; **Hop onto Horse**
+now boards rather than starting an escape. No artwork or recorded human decisions changed.
+
+Regression coverage: `HorseRiding.test.ts`, the horse cases in `FaunaBodies.test.ts`,
+`tests/horse-riding.spec.ts` and the Canvas/GPU horse cases in `tests/fauna-gameplay.spec.ts`.
+Typechecks, lint, production build, 2,244 units, seven focused browser checks and
+all six streaming readiness phases pass. Mounted screenshots were inspected in
+the game and natural playground. Production-table refresh was attempted after
+persisting this checkpoint, but ignored `data/wildlife-campaign-v2/progress.json`
+is absent; the existing production table and art-review state remain intact.
+The full browser run passed 531/533. Its two car tap-to-drive failures pass on the
+isolated staged build without the pre-existing touch-control edits; horse cases
+and all other browser checks pass. The scoped build and both generated inventories
+also verify independently of those unrelated edits.
+Next: playtest mounting approach and riding/sprint speeds on touch controls.
+
 ## Robin CPU follow-up
 
 [085](../tactical/085-robin-search-cost.md) removes whole-actor copies from robin
