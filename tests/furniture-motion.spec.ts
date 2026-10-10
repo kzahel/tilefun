@@ -326,3 +326,30 @@ test("the full player sprite remains visible at the back of the bed after landin
   expect(pixels.depth).toBeGreaterThan(90);
   await canvas.screenshot({ path: testInfo.outputPath("standing-on-bed.png") });
 });
+
+test("replacing the initial furniture Worker does not abort review startup", async ({ page }) => {
+  await page.addInitScript(() => {
+    const NativeWorker = window.Worker;
+    let first = true;
+    window.Worker = class extends NativeWorker {
+      constructor(url: string | URL, options?: WorkerOptions) {
+        super(url, options);
+        if (first) {
+          first = false;
+          // Hold the initial ready response until a setting replaces this host.
+          this.addEventListener("message", (event) => event.stopImmediatePropagation(), true);
+        }
+      }
+    };
+  });
+  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await expect(page.locator("#height")).toHaveValue("32");
+  await expect(page.locator('#app[data-ready="true"]')).toHaveCount(0);
+  await page.locator("#physics-controls summary").click();
+  await page.locator("#height").fill("40");
+  await page.locator("#apply-height").click();
+  await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
+  await expect(page.locator("#sync")).toHaveText("Reports saved");
+  await expect(page.locator("#status")).toHaveText("Collision height updated.");
+  await expect(page.locator("#good")).toBeEnabled();
+});

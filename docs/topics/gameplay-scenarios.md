@@ -145,6 +145,10 @@ should add fixture data and semantic integration assertions through this host.
 Furniture playtest callbacks ignore errors from replaced presentation hosts,
 matching the existing ready-promise identity guard. Rapid height/scene changes
 must not let a disposed scenario disable the replacement or overwrite its status.
+Review startup does not await the initial host: a setting can replace it before
+its first Worker response. The replacement owns readiness while review sync
+continues independently. A browser regression holds that initial response and
+changes collision height before the replacement becomes ready.
 Explicit authority clock fences also reset timed sprite clips to their latest
 replicated phase. Local animation ticks can advance without a new sprite delta;
 pausing must freeze the saved authority frame so reload does not change it.

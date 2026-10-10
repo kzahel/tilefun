@@ -856,7 +856,8 @@ async function start() {
   sheets.set("modern-interiors", new Spritesheet(atlas, 16, 16));
   sheets.set("player", new Spritesheet(playerImage, PLAYER_SPRITE_SIZE, PLAYER_SPRITE_SIZE));
   load();
-  await presentation?.ready;
+  // restartSimulation owns readiness and ignores replaced hosts. Review sync
+  // must not await an initial host that an early setting change can dispose.
   el("sync").textContent = "Ready";
   for (const row of outbox) remember(row);
   void sync();

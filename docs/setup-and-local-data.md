@@ -46,8 +46,9 @@ Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
 With `CI` set, browser tests use one worker and a 60-second overall deadline:
 hosted software GPU rendering can otherwise starve the simulation Worker.
-Individual assertion deadlines remain explicit. Long headless scenario tests
-have bounded tick counts and separate wall-time allowances for hosted CPUs.
+CI splits the suite across four independent runners, each with isolated auth/data
+and one browser worker. Individual assertion deadlines remain explicit. Long
+headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
 The raster verification renders every Workshop candidate in headless-shell and
 full Chromium, checks the committed fingerprints and leaves the manifest intact.
 CI runs it on Ubuntu x64 so CPU-specific blending differences cannot hide behind
@@ -67,7 +68,14 @@ and push.
 A fresh pre-push check at the newer local head passes typechecks, lint, all 2,165
 unit tests, Worker tests/dry-run build, the production build, both dependency
 audits, and the six-scenario streaming readiness gate. The complete browser
-suite and hosted CI are being rerun for this combined head.
+suite and hosted CI are rerun for the pushed commit.
+
+[Run 38055275669](https://github.com/kzahel/tilefun/actions/runs/38055275669)
+passed the complete check job and 520 browser cases, with one skipped and one
+furniture startup failure. Startup had separately awaited a host replaced by
+an early height edit. Its disposal rejection overwrote the replacement status;
+review startup now leaves scenario readiness to its guarded lifecycle. A browser
+regression holds the first Worker response and replaces that host before ready.
 
 The shared human review deployment is
 <https://tilefun.graehlarts.com/tilefun/workshop.html>. Visiting that deployment
