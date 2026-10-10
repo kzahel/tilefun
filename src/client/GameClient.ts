@@ -20,6 +20,7 @@ import { GameLoop } from "../core/GameLoop.js";
 import type { GameContext } from "../core/GameScene.js";
 import { SceneManager } from "../core/SceneManager.js";
 import { Time } from "../core/Time.js";
+import type { FaultReport } from "../diagnostics/FaultReport.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
@@ -1236,7 +1237,21 @@ export class GameClient {
 
   // ---- Helpers (also exposed via GameContext) ----
 
-  /** Send a request and return a promise resolved when the server responds with matching requestId. */
+  /** Bounded gameplay context for automatic fault reporting. */
+  getFaultContext(): FaultReport["context"] {
+    const p = this.stateView.playerEntity.position;
+    return {
+      mode: this.serialized ? "serialized" : "local",
+      worldId: (this.mainMenu.currentWorldId ?? "").slice(0, 100),
+      generation: (this.canvas.dataset.generation ?? "").slice(0, 2000),
+      x: p.wx,
+      y: p.wy,
+      serverTick: this.remoteView?.serverTick ?? 0,
+      hidden: document.hidden,
+    };
+  }
+
+  /** Send a request and resolve the response with its matching requestId. */
   private gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
     if (
       this.adminToken &&

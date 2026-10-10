@@ -33,6 +33,8 @@ port.onmessage = ({ data }) => {
       () => port.postMessage({ kind: "ready" }),
       (error) => runtime.fail(error),
     );
+  } else if (data.kind === "probe") {
+    port.postMessage({ kind: "heartbeat", id: data.id, diagnostics: runtime.diagnostics() });
   } else if (data.kind === "batch" || data.kind === "credit") runtime.receive(data);
 };
 port.addEventListener("unhandledrejection", (event) => {

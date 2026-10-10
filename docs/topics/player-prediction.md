@@ -13,6 +13,17 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
+Inside-car driving investigation (2026-10-10):
+[car jitter evidence](../research/car-driving-prediction-jitter.md) reproduces an
+extra unacknowledged braking/movement interval on missing-input authority ticks,
+followed by full delayed-command integration. Native Realm/binary/predictor
+30/60Hz controls produce 3.049/1.664px corrections; real Worker Canvas/GPU 60Hz
+captures show 1.680px corrections without injected delay. Mount reconciliation
+clears ordinary residual smoothing, exposing the correction. A real Canvas 30Hz
+control reaches 2.987px. Gameplay is unchanged; next is to give driven cars one
+motion-time owner while retaining genuine release braking and stale-input stops.
+Regular input, late-snapshot and constant-delay cruise controls remain smooth.
+
 Duck contact (2026-10-09): solid mallard bodies use the existing shared collision
 timeline. Landing on their 9px body supplies a 95px/s upward bounce from
 `tickJumpGravity`, shared by prediction, authority input steps and missing-input

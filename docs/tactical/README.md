@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [095 Game fault reports](095-game-fault-reports.md) | Complete: automatic uploads, bounded outbox, visible Worker watchdog, owner inbox and tested lock handoff; [game diagnostics](../topics/game-diagnostics.md) |
 | [090 Incremental simulation membership](090-incremental-simulation-membership.md) | Complete: cached demanded groups and sleep-first readiness; native phone comparison |
 | [091 Static prop admission](091-static-prop-admission.md) | Complete: cache stable scenery activity/readiness, measured native game/phone controls; [performance](../topics/performance.md) |
 | [092 Authority physics profile](092-authority-physics-profile.md) | Complete: native Worker phase/query/CPU attribution and next collision target; [performance](../topics/performance.md) |

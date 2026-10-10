@@ -20,6 +20,7 @@ import type {
 } from "../workshop/WorkshopTypes.js";
 import { ArtNoteStore, artNotesHandler } from "./artNotesHttp.js";
 import { characterAnnotation } from "./characterAnnotations.js";
+import { FaultReportsService } from "./faultReports.js";
 import { InteriorReviewStore, interiorReviewHandler } from "./interiorReviewPlugin.js";
 import { outdoorAnnotation } from "./outdoorAnnotations.js";
 import { PlayIdeasService } from "./playIdeas.js";
@@ -41,6 +42,7 @@ export class WorkshopService {
   private manifestCache: ReturnType<typeof this.readManifest> | undefined;
   readonly auth: WorkshopAuth;
   readonly ideas: PlayIdeasService;
+  readonly faults: FaultReportsService;
   readonly art: ArtNoteStore;
   readonly interiors: InteriorReviewStore;
   constructor(
@@ -59,6 +61,7 @@ export class WorkshopService {
     this.art = options.art ?? new ArtNoteStore();
     this.interiors = options.interiors ?? new InteriorReviewStore();
     this.ideas = new PlayIdeasService(join(this.directory, "play-ideas"), this.auth);
+    this.faults = new FaultReportsService(join(this.directory, "fault-reports"), this.auth);
   }
   private get directory() {
     return this.options.directory ?? process.env.WORKSHOP_DATA_DIR ?? "data/workshop";
@@ -300,6 +303,7 @@ export class WorkshopService {
   async handle(req: IncomingMessage, res: ServerResponse): Promise<boolean> {
     if (await this.auth.handle(req, res)) return true;
     if (await this.ideas.handle(req, res)) return true;
+    if (await this.faults.handle(req, res)) return true;
     const url = new URL(req.url ?? "/", "http://localhost"),
       legacy = ["/tilefun/api/art-notes", "/tilefun/api/interior-review"].includes(url.pathname);
     if (!legacy && !url.pathname.startsWith("/tilefun/api/workshop/")) return false;

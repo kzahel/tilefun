@@ -143,6 +143,7 @@ are individual records whose status can change and which the owner can delete:
 | --- | --- | --- |
 | Art notes and Building Lab building/street/surface/district approvals/reports | `data/art-notes/notes.ndjson` | `ART_NOTES_DIR` |
 | Room Builder and Furniture Movement Lab reviews, including stored screenshots | `data/interior-review/feedback.ndjson` | `INTERIOR_REVIEW_DIR` |
+| Game fault reports | `data/workshop/fault-reports/<UUID>.json` | `WORKSHOP_DATA_DIR` parent |
 | Play ideas (text, PNG and status) | `data/workshop/play-ideas/<UUID>.json` | `WORKSHOP_DATA_DIR` parent |
 | Workshop commands and discussion | `data/workshop/events.ndjson` | `WORKSHOP_DATA_DIR` |
 
@@ -268,3 +269,5 @@ metadata; they are not Workshop notes or `tilefun.pattern-drafts.v1` browser dra
 Copy/export the world container (including its interior namespaces and procedural furniture
 edits) to transfer playable edits. A seed/revision link reproduces the generated
 starting room, not its edited plan. See [gameplay room controls](tilefun-workshop.md#editing-gameplay-rooms).
+
+Automatic error reports and their local outbox are documented in [Game diagnostics](topics/game-diagnostics.md). The Workshop owner reviews and deletes server records there.

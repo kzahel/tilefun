@@ -109,6 +109,22 @@ No gameplay fix is implemented.
 
 ## Moving contact and car/train roofs
 
+`npx tsx scripts/instrumentation/car-driving-prediction.ts --output=/tmp/tilefun-car-driving-prediction.json`
+characterizes inside-car driving on native clear flat ground at 30/60Hz authority
+and controlled 120Hz presentation. Regular inputs, one-tick late inputs, late
+snapshots and constant 50ms delay each way repeat entire traces in fresh sessions.
+`--assert-continuous` is the future correction/step-uniformity gate; it currently
+fails the late-input cases. It does not draw pixels or measure native display cadence.
+
+`node scripts/instrumentation/car-driving-browser.mjs --output=/tmp/tilefun-car-driving-browser-canvas60.json`
+observes ordinary keyboard driving through real Worker authority in an isolated
+fresh regional world, without timing/input injection. Add `--renderer=gpu`,
+`--server-hz=30` or `--headed`. It uses bundled full Chromium, isolated Workshop
+data/browser storage and closes its browser/server. Run captures sequentially
+without concurrent tests/profilers. Cruise filtering excludes hard stops, but
+cannot exclude every contact; this is characterization, not broad driving
+acceptance. [Investigation and next fix](../../docs/research/car-driving-prediction-jitter.md).
+
 `npx tsx scripts/instrumentation/moving-contact.ts --output=/tmp/moving-contact.json`
 runs ten native production scenes under five controlled input/delivery schedules.
 Every scene runs twice in fresh sessions and rejects differing complete trace

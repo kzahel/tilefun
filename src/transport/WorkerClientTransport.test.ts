@@ -12,10 +12,12 @@ function rig(
     init?: () => Promise<void>;
     settle?: () => Promise<void>;
     flush?: () => Promise<void>;
+    watchdogMs?: number;
   } = {},
 ) {
   const events: string[] = [];
   const errors: Error[] = [];
+  const faults: { kind: string; error: Error }[] = [];
   let serverTransport!: IServerTransport;
   const authority: LocalAuthority = {
     init: async () => {
@@ -73,9 +75,11 @@ function rig(
   };
   const client = new WorkerClientTransport(endpoint, {
     onError: (error) => errors.push(error),
+    onFault: (kind, error) => faults.push({ kind, error }),
     timeoutMs: 1000,
+    ...(options.watchdogMs === undefined ? {} : { watchdogMs: options.watchdogMs }),
   });
-  return { client, endpoint, runtime, serverTransport, events, errors, authority };
+  return { client, endpoint, runtime, serverTransport, events, errors, faults, authority };
 }
 
 describe("local server Worker lifecycle", () => {
@@ -230,4 +234,74 @@ it("does not revive a terminated Worker when shutdown rejects after a fatal tran
   await failed;
   expect(r.client.getDebugInfo().transport).toContain("failed");
   expect(r.events).toContain("terminate");
+});
+
+it("terminates a silent Worker once, while hidden lifecycle time is exempt", async () => {
+  vi.useFakeTimers({
+    toFake: ["setTimeout", "setInterval", "clearTimeout", "clearInterval", "performance"],
+  });
+  try {
+    const r = rig({ watchdogMs: 1000 });
+    await r.client.ready();
+    r.client.start();
+    r.client.setHidden(true);
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(r.errors).toHaveLength(0);
+    r.client.setHidden(false);
+    await vi.advanceTimersByTimeAsync(999);
+    expect(r.errors).toHaveLength(0);
+    await vi.advanceTimersByTimeAsync(251);
+    expect(r.errors).toHaveLength(1);
+    expect(r.errors[0]?.name).toBe("LocalServerHang");
+    expect(r.events.filter((e) => e === "terminate")).toHaveLength(1);
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(r.errors).toHaveLength(1);
+  } finally {
+    vi.useRealTimers();
+  }
+});
+
+it("reports repeated residency failures once and retains the latest authority evidence", async () => {
+  vi.useFakeTimers({
+    toFake: ["setTimeout", "setInterval", "clearTimeout", "clearInterval", "performance"],
+  });
+  try {
+    const r = rig({ watchdogMs: 1000 });
+    await r.client.ready();
+    r.client.start();
+    await vi.advanceTimersByTimeAsync(250);
+    const diagnostics = r.runtime.diagnostics();
+    diagnostics.persistence = [
+      {
+        realmId: "test-world",
+        loadedChunks: 3,
+        transitioningPlayers: 1,
+        residency: {
+          failures: 2,
+          states: { loading: 2, ready: 3, saving: 0, failed: 1 },
+          lastError: "synthetic storage failure",
+        },
+      } as unknown as NonNullable<typeof diagnostics.persistence>[number],
+    ];
+    r.endpoint.onmessage?.({ data: { kind: "heartbeat", id: 1, diagnostics } } as MessageEvent);
+    expect(r.faults).toHaveLength(1);
+    expect(r.faults[0]?.kind).toBe("chunk-failure");
+    expect(r.client.getFaultDiagnostics()).toMatchObject({
+      realms: [
+        {
+          realmId: "test-world",
+          loading: 2,
+          failed: 1,
+          failures: 2,
+          lastError: "synthetic storage failure",
+        },
+      ],
+    });
+    await vi.advanceTimersByTimeAsync(250);
+    r.endpoint.onmessage?.({ data: { kind: "heartbeat", id: 2, diagnostics } } as MessageEvent);
+    expect(r.faults).toHaveLength(1);
+    r.endpoint.onerror?.({ message: "test cleanup", preventDefault() {} } as ErrorEvent);
+  } finally {
+    vi.useRealTimers();
+  }
 });

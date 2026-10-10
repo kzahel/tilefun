@@ -16,22 +16,41 @@ export class IdbRecordStore implements RecordStore {
     const held = new Promise<void>((resolve) => {
       this.release = resolve;
     });
-    if (!this.readOnly)
-      await new Promise<void>((resolve, reject) => {
-        this.lease = navigator.locks.request(
-          `tilefun-writer:${this.name}`,
-          { ifAvailable: true },
-          async (lock) => {
-            if (!lock) {
-              reject(new Error("World is already open in another authority."));
-              return;
-            }
-            resolve();
-            await held;
-          },
-        );
-        void this.lease.catch(reject);
-      });
+    if (!this.readOnly) {
+      // Worker termination can leave its Web Lock visible briefly. Queue a bounded
+      // handoff instead of rejecting a reload immediately; never steal a writer.
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 5000);
+      try {
+        await new Promise<void>((resolve, reject) => {
+          this.lease = navigator.locks.request(
+            `tilefun-writer:${this.name}`,
+            { signal: controller.signal },
+            async (lock) => {
+              if (!lock) {
+                reject(new Error("World is already open in another authority."));
+                return;
+              }
+              resolve();
+              await held;
+            },
+          );
+          void this.lease.catch((error) =>
+            reject(
+              controller.signal.aborted
+                ? new Error("World is already open in another authority.")
+                : error,
+            ),
+          );
+        });
+      } catch (error) {
+        this.release = undefined;
+        this.lease = undefined;
+        throw error;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
     try {
       this.db = await new Promise<IDBDatabase>((resolve, reject) => {
         const request = indexedDB.open(this.name, 1);

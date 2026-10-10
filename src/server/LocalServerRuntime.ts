@@ -151,13 +151,7 @@ export class LocalServerRuntime {
           });
         break;
       case "diagnostics": {
-        const diagnostics: LocalHostDiagnostics = {
-          timings: performanceMetrics.snapshot(),
-          channel: this.channel.diagnostics(),
-          ticks: this.server.completedTicks,
-          hidden: this.hidden,
-          persistence: this.server.persistenceDiagnostics ?? [],
-        };
+        const diagnostics = this.diagnostics();
         this.channel.send({ type: "result", id: packet.id, diagnostics });
         break;
       }
@@ -168,6 +162,16 @@ export class LocalServerRuntime {
       case "result":
         throw Error("Unexpected client lifecycle receipt");
     }
+  }
+
+  diagnostics(): LocalHostDiagnostics {
+    return {
+      timings: performanceMetrics.snapshot(),
+      channel: this.channel.diagnostics(),
+      ticks: this.server.completedTicks,
+      hidden: this.hidden,
+      persistence: this.server.persistenceDiagnostics ?? [],
+    };
   }
 
   private storageFailure(error: unknown, id?: number): void {

@@ -1,3 +1,4 @@
+import { faultEvent, reportFault } from "../diagnostics/FaultReporter.js";
 import type { ServerMessage } from "../shared/protocol.js";
 import {
   isRequestResponse,
@@ -25,10 +26,13 @@ export class RequestBroker {
     if (this.disposed) return Promise.reject(new Error("Game client destroyed."));
     if (this.pending.has(request.requestId))
       return Promise.reject(new Error(`Duplicate request ID: ${request.requestId}`));
+    faultEvent(`request:${request.type}`);
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         this.pending.delete(request.requestId);
-        reject(new Error(`Request timed out: ${request.type}`));
+        const error = new Error(`Request timed out: ${request.type}`);
+        reportFault("request-timeout", error);
+        reject(error);
       }, this.timeoutMs);
       this.pending.set(request.requestId, {
         timer,

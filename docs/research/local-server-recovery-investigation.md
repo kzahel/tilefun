@@ -88,3 +88,5 @@ ticks advance and whether the host is hidden. If requests stop responding entire
 capture browser console/Worker errors and the first overlay's Details before
 reloading. A targeted slow/stalled-storage reproduction should precede changing
 readiness deadlines or recovery policy.
+
+Follow-up: [automatic game diagnostics](../topics/game-diagnostics.md) now provides fault uploads, a visible Worker watchdog and an owner inbox. [095](../tactical/095-game-fault-reports.md) records synthetic crash/hang/reload validation and the bounded browser writer-lock handoff discovered by that test. The original device failure remains unreproduced.

@@ -1,3 +1,4 @@
+import type { FaultAuthority, FaultReport } from "../diagnostics/FaultReport.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type {
@@ -6,6 +7,7 @@ import type {
   LocalHostPacket,
 } from "../shared/localHostProtocol.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import { LocalServerWatchdog } from "./LocalServerWatchdog.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "./OrderedWorkerChannel.js";
 import type { ConnectionIdentity, IClientTransport } from "./Transport.js";
 
@@ -26,6 +28,16 @@ export class WorkerClientTransport implements IClientTransport {
   private messageHandler: ((message: ServerMessage) => void) | undefined;
   private disconnectHandler: (() => void) | undefined;
   private failure: Error | undefined;
+  private failureChannel:
+    | ReturnType<OrderedWorkerChannel<LocalHostPacket>["diagnostics"]>
+    | undefined;
+  private readonly watchdog: LocalServerWatchdog;
+  private watchdogTimer: ReturnType<typeof setInterval> | undefined;
+  private hidden = false;
+  private lastAuthority: LocalHostDiagnostics | undefined;
+  private probeId = 0;
+  private acceptedProbe = 0;
+  private reportedStorageFailure = false;
   private readonly startup: Promise<void>;
   private resolveStartup!: () => void;
   private rejectStartup!: (error: Error) => void;
@@ -50,8 +62,11 @@ export class WorkerClientTransport implements IClientTransport {
       metrics?: boolean;
       onError?: (error: Error) => void;
       timeoutMs?: number;
+      watchdogMs?: number;
+      onFault?: (kind: FaultReport["kind"], error: Error) => void;
     } = {},
   ) {
+    this.watchdog = new LocalServerWatchdog(options.watchdogMs);
     this.channel = new OrderedWorkerChannel((message, transfer) =>
       worker.postMessage(message, transfer),
     );
@@ -73,6 +88,22 @@ export class WorkerClientTransport implements IClientTransport {
           this.state = "ready";
           clearTimeout(this.startupTimer);
           this.resolveStartup();
+        } else if (data.kind === "heartbeat") {
+          if (data.id <= this.acceptedProbe || data.id > this.probeId) return;
+          this.acceptedProbe = data.id;
+          this.lastAuthority = data.diagnostics;
+          if (!this.hidden) this.watchdog.reply(performance.now(), data.diagnostics.ticks);
+          const failures = (data.diagnostics.persistence ?? []).reduce(
+            (n, r) => n + (r.residency?.failures ?? 0),
+            0,
+          );
+          if (failures >= 2 && !this.reportedStorageFailure) {
+            this.reportedStorageFailure = true;
+            this.options.onFault?.(
+              "chunk-failure",
+              new Error("Repeated local chunk persistence failures"),
+            );
+          }
         } else if (data.kind === "failed") {
           const error = new Error(data.error);
           if (data.stack) error.stack = data.stack;
@@ -103,9 +134,17 @@ export class WorkerClientTransport implements IClientTransport {
   start(): void {
     this.autoPump = false;
     this.channel.send({ type: "start" });
+    this.watchdog.reset(performance.now());
+    if (this.watchdogTimer === undefined)
+      this.watchdogTimer = setInterval(
+        () => this.probe(),
+        Math.min(5000, this.watchdog.timeoutMs / 4),
+      );
   }
   setHidden(hidden: boolean): void {
     if (this.state !== "ready") return;
+    this.hidden = hidden;
+    this.watchdog.reset(performance.now());
     this.autoPump = hidden;
     this.channel.send({ type: "visibility", hidden });
     this.schedulePump();
@@ -197,6 +236,42 @@ export class WorkerClientTransport implements IClientTransport {
     return { transport: `Local server Worker (${this.state})` };
   }
 
+  getFaultDiagnostics(): FaultAuthority {
+    const a = this.lastAuthority,
+      channel = this.failureChannel ?? this.channel.diagnostics();
+    return {
+      state: this.state,
+      ticks: a?.ticks ?? 0,
+      hidden: this.hidden,
+      queuedBytes: channel.queuedBytes,
+      inFlightBytes: channel.inFlightBytes,
+      realms: (a?.persistence ?? []).slice(0, 8).map((r) => ({
+        realmId: (r.realmId ?? "").slice(0, 100),
+        loadedChunks: r.loadedChunks,
+        transitioningPlayers: r.transitioningPlayers,
+        loading: r.residency?.states.loading ?? 0,
+        failed: r.residency?.states.failed ?? 0,
+        failures: r.residency?.failures ?? 0,
+        lastError: (r.residency?.lastError ?? "").slice(0, 1000),
+      })),
+    };
+  }
+  private probe(): void {
+    if (this.state !== "ready" || this.hidden) return;
+    const problem = this.watchdog.check(performance.now());
+    if (problem) {
+      const error = new Error(`${problem}. Reload to recover.`);
+      error.name = "LocalServerHang";
+      this.fail(error);
+      return;
+    }
+    try {
+      this.worker.postMessage({ kind: "probe", id: ++this.probeId }, []);
+    } catch (error) {
+      this.fail(error);
+    }
+  }
+
   private request(
     type: "flush" | "shutdown" | "diagnostics" | "reset-diagnostics",
   ): Promise<LocalHostDiagnostics | undefined> {
@@ -230,6 +305,7 @@ export class WorkerClientTransport implements IClientTransport {
   private fail(reason: unknown): void {
     if (this.state === "failed" || this.state === "stopped") return;
     const error = reason instanceof Error ? reason : new Error(String(reason));
+    this.failureChannel = this.channel.diagnostics();
     this.failure = error;
     this.state = "failed";
     this.rejectStartup(error);
@@ -244,6 +320,7 @@ export class WorkerClientTransport implements IClientTransport {
   }
   private cleanup(): void {
     clearTimeout(this.startupTimer);
+    clearInterval(this.watchdogTimer);
     clearTimeout(this.pumpTimer);
     this.channel.close();
     this.worker.onmessage = null;

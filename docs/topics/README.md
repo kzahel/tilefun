@@ -37,6 +37,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Player prediction](player-prediction.md) | Reproduction-first investigation of moving NPC contact and car/train support timelines |
 | [Rendering architecture](rendering-architecture.md) | Backend separation, resource ownership, frame lifetime and incremental renderer replacement |
 | [3D assets](3d-assets.md) | Sprite reconstruction, physical/visual proxies, car investigation and model-assisted asset experiments |
+| [Game diagnostics](game-diagnostics.md) | Automatic fault reports, local authority watchdog, bounded delivery and owner inbox |
 | [Performance](performance.md) | Worker authority, traversal readiness, phone evidence and bounded terrain preparation |
 | [Entity activation](entity-activation.md) | AI tick tiers, NPC/placed-entity unloading, inactive simulation costs and technical-debt backlog |
 | [Patterns and interiors](patterns-and-interiors.md) | Shared semantic drawing, saved room edits, furniture and pending kit/import work |

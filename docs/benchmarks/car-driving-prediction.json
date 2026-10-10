@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-10",
+  "runtimeRevision": "ef90258f3c058096d29a2121f0ba4e19cc8c9d06",
+  "scope": "Four seconds of native clear-ground driving; 30/60Hz authority, 120Hz controlled presentation. No browser, GPU, timers or physical display measurement.",
+  "gameplayChanged": false,
+  "controlled": [
+    {
+      "serverHz": 60,
+      "profile": "regular",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335149121093309,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.03546995703322864,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -93.31077223200472
+      },
+      "repeatIdentical": true,
+      "traceHash": "4ede50050663f371261437d2bb674c34cff908d4d3ae9fc1467a2c7b3494dfcf"
+    },
+    {
+      "serverHz": 60,
+      "profile": "late-input",
+      "summary": {
+        "maxReconcileShiftPx": 1.6644645285441015,
+        "maxReconcileVelocityShift": 3.732587175292963,
+        "missingInputTicks": 5,
+        "motionWithoutInputPx": 8.711111111111052,
+        "minWorldStepPx": 0.9257453321469598,
+        "maxWorldStepPx": 2.596040861580775,
+        "maxScreenStepPx": 4.85985319806116,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -85.06632776889327
+      },
+      "repeatIdentical": true,
+      "traceHash": "b00b0cecadfcc96f98ba099626b57f9bb7de89ceb8f0013b32e04227a09d6337"
+    },
+    {
+      "serverHz": 60,
+      "profile": "late-snapshot",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335149121093309,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.03546995703322864,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -93.31077223200472
+      },
+      "repeatIdentical": true,
+      "traceHash": "cb2499c5177e54640615541d77735c4c1ee68798e41bc26feddefa7777ba2754"
+    },
+    {
+      "serverHz": 60,
+      "profile": "delay50",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335149121093309,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.035469965655124724,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -98.91189223200473
+      },
+      "repeatIdentical": true,
+      "traceHash": "a4df85111e35d4cdb1cc8fd77e5a0aacc257f26b18baa37707c1e3a70cb82117"
+    },
+    {
+      "serverHz": 30,
+      "profile": "regular",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853615123671261,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -94.84461304399744
+      },
+      "repeatIdentical": true,
+      "traceHash": "d0b3ed4a0f9fc5ee79e3046adf3699cef8b36ba3cbe1c3cf08e8081d44ee133a"
+    },
+    {
+      "serverHz": 30,
+      "profile": "late-input",
+      "summary": {
+        "maxReconcileShiftPx": 3.0489171704355726,
+        "maxReconcileVelocityShift": 7.467414350585926,
+        "missingInputTicks": 5,
+        "motionWithoutInputPx": 16.799999999999983,
+        "minWorldStepPx": 0.9176751037236954,
+        "maxWorldStepPx": 3.9782659463664913,
+        "maxScreenStepPx": 8.900124062879968,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -79.9114041239977
+      },
+      "repeatIdentical": true,
+      "traceHash": "e63132b9af2605f2cbe63cd85911daab9010967ab009203de7422b4170071670"
+    },
+    {
+      "serverHz": 30,
+      "profile": "late-snapshot",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853615123671261,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -94.84461304399744
+      },
+      "repeatIdentical": true,
+      "traceHash": "43d166c0d568c599a309030a6eba404a37ec3706f137c7e7b02e77f19b5ba635"
+    },
+    {
+      "serverHz": 30,
+      "profile": "delay50",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853870639488832,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -102.31053304399742
+      },
+      "repeatIdentical": true,
+      "traceHash": "34770551b012be36fe4832d462be0f9417fbd9a04bb70a250334e2a3d502c041"
+    }
+  ],
+  "browser": [
+    {
+      "scope": "Eight seconds of real Worker keyboard driving in an isolated fresh regional world; no timing/input injection. Cruise filtering excludes hard stops but cannot rule out every nearby contact.",
+      "summary": {
+        "renderer": "canvas",
+        "serverHz": 60,
+        "reconciliationSamples": 480,
+        "cruiseSamples": 364,
+        "missingInputCruiseFrames": 1,
+        "maxMotionWithoutAckPx": 1.7734375,
+        "maxCruiseReconcileShiftPx": 1.6801041576827629,
+        "renderFrames": 480,
+        "errors": []
+      }
+    },
+    {
+      "scope": "Eight seconds of real Worker keyboard driving in an isolated fresh regional world; no timing/input injection. Cruise filtering excludes hard stops but cannot rule out every nearby contact.",
+      "summary": {
+        "renderer": "gpu",
+        "serverHz": 60,
+        "reconciliationSamples": 480,
+        "cruiseSamples": 451,
+        "missingInputCruiseFrames": 3,
+        "maxMotionWithoutAckPx": 1.7734375,
+        "maxCruiseReconcileShiftPx": 1.6801041576827629,
+        "renderFrames": 480,
+        "errors": []
+      }
+    },
+    {
+      "scope": "Eight seconds of real Worker keyboard driving in an isolated fresh regional world; no timing/input injection. Cruise filtering excludes hard stops but cannot rule out every nearby contact.",
+      "summary": {
+        "renderer": "canvas",
+        "serverHz": 30,
+        "reconciliationSamples": 238,
+        "cruiseSamples": 115,
+        "missingInputCruiseFrames": 28,
+        "maxMotionWithoutAckPx": 3.3603515625,
+        "maxCruiseReconcileShiftPx": 2.9869932786914433,
+        "renderFrames": 480,
+        "errors": []
+      }
+    }
+  ]
+}

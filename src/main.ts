@@ -1,4 +1,5 @@
 import { GameClient } from "./client/GameClient.js";
+import { FaultReporter, reportFault, setFaultReporter } from "./diagnostics/FaultReporter.js";
 import { performanceMetrics } from "./diagnostics/PerformanceMetrics.js";
 import { enableFirstTouchFullscreen } from "./input/firstTouchFullscreen.js";
 import type { PlayerProfile } from "./persistence/PlayerProfileStore.js";
@@ -43,6 +44,40 @@ let server: GameServer | null = null;
 let localHost: WorkerClientTransport | null = null;
 let hostingBanner: HostingBanner | null = null;
 let roomDirectory: RoomDirectory | null = null;
+
+const faultReporter = new FaultReporter({
+  // Acquire storage inside guarded methods; denied storage must still permit uploads.
+  storage: {
+    getItem: (key) => localStorage.getItem(key),
+    setItem: (key, value) => localStorage.setItem(key, value),
+  },
+  fetch: (...args) => fetch(...args),
+  build: import.meta.env.VITE_BUILD_ID ?? "unknown",
+  browser: navigator.userAgent,
+  context: () => ({
+    ...(client?.getFaultContext() ?? {
+      worldId: "",
+      generation: "",
+      x: 0,
+      y: 0,
+      serverTick: 0,
+      hidden: document.hidden,
+    }),
+    mode: localHost ? "local-worker" : hostP2P ? "peer-host" : "remote",
+  }),
+  authority: () => localHost?.getFaultDiagnostics() ?? null,
+});
+setFaultReporter(faultReporter);
+void faultReporter.flush();
+const faultRetryTimer = setInterval(() => void faultReporter.flush(), 60_000);
+const retryFaults = () => void faultReporter.flush();
+window.addEventListener("online", retryFaults);
+window.addEventListener("pagehide", retryFaults);
+import.meta.hot?.dispose(() => {
+  clearInterval(faultRetryTimer);
+  window.removeEventListener("online", retryFaults);
+  window.removeEventListener("pagehide", retryFaults);
+});
 
 function resolveWebRtcSignalUrl(serverParam: string | null, wsProto: "ws" | "wss"): string {
   const signalOverride = params.get("signal");
@@ -357,7 +392,7 @@ async function start() {
     // Same authority and replicated client as remote play, on an independent thread.
     const transport = new WorkerClientTransport(
       new Worker(new URL("./server/local-server.worker.ts", import.meta.url), { type: "module" }),
-      { metrics: performanceMetrics.enabled, onError: showErrorOverlay },
+      { metrics: performanceMetrics.enabled, onError: showErrorOverlay, onFault: reportFault },
     );
     localHost = transport;
     await transport.ready();
@@ -389,6 +424,10 @@ function hideLocalHost(): void {
 
 /** Show a full-screen error overlay with recovery options. */
 function showErrorOverlay(error: unknown): void {
+  reportFault(
+    error instanceof Error && error.name === "LocalServerHang" ? "server-hang" : "fatal",
+    error,
+  );
   // Only show the first error
   if (document.getElementById("tilefun-error-overlay")) return;
 

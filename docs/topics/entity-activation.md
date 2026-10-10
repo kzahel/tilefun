@@ -38,6 +38,11 @@ browser adapter defaults from the shared server during the refactor.
 
 ## Current behavior
 
+Browser writer acquisition now queues for at most five seconds before rejecting
+a competing authority. This permits Reload after a terminated busy Worker whose
+Web Lock is released asynchronously; the adapter never steals a live writer lock.
+[Game diagnostics](game-diagnostics.md) owns the crash/hang recovery evidence.
+
 The shared [RealmStreaming](../../src/server/RealmStreaming.ts) controller loads
 terrain, actor/prop records and origin overrides before publishing a chunk.
 Player tickets request full AI decisions within 2 chunks, reduced decisions

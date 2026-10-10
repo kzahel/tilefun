@@ -101,6 +101,8 @@ says “Map unavailable”. Fatal Worker errors retain their authority stack and
 diagnostics and require Reload; residency snapshots now expose pending/failed
 holders and transitions. The original session remains uncaptured, and stalled
 readiness/persistence awaits remain an investigation path.
+[Game diagnostics](game-diagnostics.md) now owns automatic fault uploads and the
+visible local-server watchdog added to capture the next occurrence.
 
 Use the repository runners with isolated bundled Chromium before manual UI work:
 

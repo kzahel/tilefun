@@ -19,4 +19,6 @@ export interface LocalHostDiagnostics {
 export type LocalHostBoot =
   | { kind: "init"; metrics: boolean }
   | { kind: "ready" }
+  | { kind: "probe"; id: number }
+  | { kind: "heartbeat"; id: number; diagnostics: LocalHostDiagnostics }
   | { kind: "failed"; error: string; stack?: string };
