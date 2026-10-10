@@ -24,3 +24,8 @@ data/
 /docs/tactical/073-spatial-alternatives/
 /docs/tactical/074-alpha-geometry/
 /docs/tactical/075-alpha-guard-framing/
+
+# Local Blender vehicle experiments: generated scenes, textures, exports and galleries.
+# Keep reusable authoring code/configuration in scripts/authored-assets/ instead.
+/art-source/vehicles/
+/public/demos/authored-car/

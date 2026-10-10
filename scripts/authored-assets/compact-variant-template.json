@@ -1,0 +1,28 @@
+{
+  "templateVehicle": "compact-1",
+  "vehicles": ["compact-1", "compact-2", "compact-3", "compact-4", "compact-5", "compact-6"],
+  "blend": "art-source/vehicles/compact-car/blender-v7/car.blend",
+  "blendSha256": "54f7e844131842102d13df4d4a9025eb205722fa64ece257743d703ab7559000",
+  "atlas": "public/demos/authored-car/v7/car-atlas.png",
+  "atlasSha256": "dfc309969d2689deacf99a7e4b0df013c1ccb4e0d40e3c26d11691a18a787ceb",
+  "setup": "scripts/authored-assets/compact-windshield-setup.json",
+  "windshield": "public/demos/authored-car/v7/windshield.json",
+  "rig": "public/demos/authored-car/v7/rig.json",
+  "authoredColors": [
+    { "rgb": [39, 46, 65], "keep": true, "role": "Unused atlas background" },
+    { "rgb": [57, 150, 223], "sourceRgb": [80, 167, 232], "role": "Body highlight" },
+    { "rgb": [49, 59, 88], "keep": true, "role": "Neutral trim ink" },
+    { "rgb": [36, 68, 118], "sourceRgb": [39, 53, 115], "role": "Body shade" },
+    { "rgb": [127, 169, 206], "keep": true, "role": "Authored glass" },
+    { "rgb": [36, 108, 197], "sourceRgb": [66, 128, 221], "role": "Body paint" },
+    { "rgb": [52, 57, 72], "keep": true, "role": "Rubber" },
+    { "rgb": [41, 48, 68], "keep": true, "role": "Underside" },
+    { "rgb": [88, 194, 231], "sourceRgb": [93, 192, 240], "role": "Roof highlight" },
+    { "rgb": [132, 202, 226], "sourceRgb": [149, 227, 227], "role": "Body stripe" },
+    { "rgb": [83, 97, 120], "keep": true, "role": "Hub gutter" },
+    { "rgb": [176, 204, 224], "keep": true, "role": "Glass reflection" },
+    { "rgb": [220, 85, 95], "keep": true, "role": "Rear light" },
+    { "rgb": [243, 242, 230], "keep": true, "role": "Front light" }
+  ],
+  "note": "093 compact-only template. Exact four-view alpha/metadata and unambiguous source-colour correspondence are required. Additional authored colours have explicit material roles, never nearest-RGB guesses. This reuses authored hidden surfaces; it does not increase observation coverage."
+}

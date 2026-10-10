@@ -1,0 +1,28 @@
+{
+  "referenceCameraPreset": "scripts/authored-assets/compact-1-setup.json",
+  "atlasSize": 1024,
+  "windowPlane": {
+    "widthIntercept": 12.11086956521739,
+    "widthPerHeight": 0.2282608695652174,
+    "outset": 0.22
+  },
+  "windowOutlinesEast": {
+    "front": [[19, 50], [30, 42], [34, 42], [34, 53], [19, 53]],
+    "rear": [[36, 42], [43, 42], [53, 50], [53, 53], [36, 53]]
+  },
+  "fender": {
+    "axles": [-17, 17],
+    "centerHeight": 4.1,
+    "segments": 16,
+    "endWidth": 9.9,
+    "flareExponent": 0.6,
+    "profile": [[5.4, 9.85], [4.9, 11.7], [4.3, 11.9], [4.3, 9.9]]
+  },
+  "paletteSamplesEast": {
+    "body": [26, 54],
+    "mid": [18, 53],
+    "highlight": [11, 53],
+    "outline": [11, 55]
+  },
+  "note": "088 bounded prototype: reduce outer arch radius and flare; dark wheel-well paint sampled from source outline. Camera and original meshes unchanged. Part boundaries need inspection as well as whole-car silhouette."
+}

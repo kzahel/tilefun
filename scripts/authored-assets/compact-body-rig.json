@@ -1,0 +1,19 @@
+{
+  "frontTip": { "x": -29.3, "width": 6.5, "bottom": 2.5, "top": 4.0 },
+  "hoodShoulderHeight": 5.4,
+  "bodyDeckHeight": 13.0,
+  "sillHeight": 1.0,
+  "roofRearX": 15.4,
+  "rearTipX": 28.9,
+  "axles": [-17.3, 15.4],
+  "wheelRadius": 4.1,
+  "wheelHalfWidthCenter": 10.55,
+  "windowPlane": {
+    "widthIntercept": 13.391666666666666,
+    "widthPerHeight": 0.2916666666666667,
+    "outset": 0.22
+  },
+  "referenceCameraPreset": "scripts/authored-assets/compact-1-setup.json",
+  "windowRefinement": "scripts/authored-assets/compact-outline-refinement.json",
+  "note": "089 compact-family geometry hypothesis: lower sloping nose, longer roof, lower sill and adjusted axle spacing. Whole alpha includes source shadows. Wheel radius/contact unchanged; four tire/hub assemblies get independent steer/roll nodes."
+}

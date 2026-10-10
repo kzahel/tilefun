@@ -1,0 +1,19 @@
+{
+  "insetAcross": 0.08,
+  "insetBottom": 0.09,
+  "insetTop": 0.07,
+  "glassSource": "south",
+  "glassCrop": [7, 34, 25, 42],
+  "atlasRect": [240, 240, 336, 328],
+  "cabinFrontWindow": {
+    "lower": [-11.057692527770996, 10.977177619934082],
+    "upper": [-0.48076921701431274, 17.7524356842041]
+  },
+  "paletteSamplesEast": {
+    "body": [26, 54],
+    "mid": [18, 53],
+    "highlight": [11, 53],
+    "outline": [11, 55]
+  },
+  "note": "090 authored compact-family windshield aperture/frame and front cabin paint guard. Glass crop is a family landmark, not inferred semantic segmentation. Preserve v4 silhouette, wheel rig, cameras and coverage uncertainty."
+}

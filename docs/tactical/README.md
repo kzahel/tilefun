@@ -12,6 +12,15 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [105 Red car and authoring skill](105-red-car-and-authoring-skill.md) | Source-checked compact-4 transfer, one-command Blender replay and reusable skill; ambulance remains the next new family |
+| [104 Visible top windshield ink](104-visible-top-windshield-ink.md) | Widened top stroke survives native sampling in all four cameras on both colours; geometry/other paint fixed, diagnostic review open |
+| [103 Dark windshield frame](103-dark-windshield-frame.md) | Continuous original-palette navy border around front glass on both compacts; glass/geometry/rig fixed, diagnostic review open |
+| [102 Windshield boundary](102-windshield-boundary.md) | Connected glass aperture/frame and cabin paint guard on two variants; silhouette/wheel rig retained, diagnostic fidelity review open |
+| [101 Fitted body and rigid wheels](101-fitted-body-and-rigid-wheels.md) | Closer compact side silhouette, four centered steer/roll tire+hub assemblies and actual motion proof; diagnostic, steering/fidelity remain open |
+| [100 Pixel outline and silhouette](100-pixel-outline-and-silhouette.md) | Smaller compact arches, native-pixel GPU ink and explicit silhouette before/after; diagnostic revision, family fitting remains open |
+| [099 Compact windows and fenders](099-compact-windows-and-fenders.md) | Continuous source-owned window panels and raised tapered arch geometry, repeated on two palette variants; diagnostic revision, fidelity remains open |
+| [098 Reusable sprite authoring](098-reusable-sprite-authoring.md) | Shared source extraction, landmark cameras, visibility-tested UV projection and Blender fidelity loop; family-template fidelity remains open |
+| [097 Authored car and Blender UV](097-authored-car-blender-uv.md) | Single authored compact-car draft, clean UV atlas, editable Blender source and all-angle evidence; [3D assets](../topics/3d-assets.md) |
 | [096 Rotated vehicle collision benchmark](096-rotated-vehicle-collision-benchmark.md) | Diagnostic AABB/OBB comparison, deterministic oracle/index tests and matched desktop/phone timing; gameplay integration remains next |
 | [095 Game fault reports](095-game-fault-reports.md) | Complete: automatic uploads, bounded outbox, visible Worker watchdog, owner inbox and tested lock handoff; [game diagnostics](../topics/game-diagnostics.md) |
 | [090 Incremental simulation membership](090-incremental-simulation-membership.md) | Complete: cached demanded groups and sleep-first readiness; native phone comparison |

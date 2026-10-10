@@ -1,0 +1,23 @@
+{
+  "assetId": "picnic-table",
+  "family": "furniture",
+  "source": {
+    "image": "public/assets/props/picnic-table.png",
+    "sha256": "11c50a50887c457fe260f28572008631d9f5a17535801d3c14e61be948e3c1ff"
+  },
+  "views": [
+    {
+      "id": "source",
+      "rect": [0, 0, 48, 48],
+      "anchor": [24, 48],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 45,
+        "horizontalScale": 1,
+        "verticalStretch": 1.4142135623730951,
+        "origin": [24, 40],
+        "status": "Game-affine camera hypothesis; height/origin need landmark fitting. Hidden sides are unobserved."
+      }
+    }
+  ]
+}

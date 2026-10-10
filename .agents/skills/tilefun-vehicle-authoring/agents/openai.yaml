@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tilefun Vehicle Authoring"
+  short_description: "Build sprite-matched Blender vehicles and reusable recipes"
+  default_prompt: "Use $tilefun-vehicle-authoring to reconstruct the next vehicle and show matched sprite/render views."

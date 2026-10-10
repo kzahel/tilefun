@@ -2,11 +2,14 @@
 
 Topic: 3d-assets
 Status: car projection and orthographic inspection delivered; top-view appearance
-unresolved. Optional fixed-view GPU gameplay integration is delivered;
+unresolved. Authored Blender/UV compact-car pilot delivered for inspection.
+Reusable offline fitting/projection/inspection tools delivered; family-template
+fidelity remains open.
+Optional fixed-view GPU gameplay integration is delivered;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
 remain unresolved. Game clipping is unchanged.
-Updated: 2026-10-08.
+Updated: 2026-10-10.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
 to physical proxies, and cross-view quality. [Rendering architecture](rendering-architecture.md)
@@ -22,6 +25,18 @@ comparison sheets, JSON records, arrays and HTML reports; links into those
 directories require the local evidence and are unavailable in a fresh clone.
 Written findings and the recipes in `scripts/spatial-assets/` remain in Git.
 Ignoring the evidence does not delete it or promote any generated artwork.
+
+The owner also requested source-only commits for Blender vehicle experiments
+097–093. `art-source/vehicles/` and `public/demos/authored-car/` are now local,
+Git-ignored bundles: generated scenes, atlases, GLBs, crops, comparisons, records
+and scratch galleries are preserved on disk but absent from fresh clones.
+The reusable skill, Python geometry/paint constructors, fitting configurations,
+GLSL outline and wheel helpers remain in Git under `.agents/skills/` and
+`scripts/authored-assets/`. Historical gallery/evidence links below require those
+local bundles. Their scratch-only Workshop registrations have been removed;
+normal builds and the committed manifest do not depend on ignored experiment files.
+Exact compact palette replay requires restoration of the pinned local v7 bundle;
+the initial compact geometry constructor can run from committed sprite sources.
 
 Rebuild report previews from the retained external experiment bundles when
 needed. Preserve those bundles for exact historical evidence: rerunning model
@@ -47,7 +62,100 @@ asset tools must consume its common implementation rather than fork it.
 This is a direction, not a claim that all sprites have recoverable hidden surfaces
 or that changing the renderer alone makes the world ready for first person.
 
+The latest authored compact already exports a self-contained, Three.js-tested
+GLB with textured meshes and independent wheel pivots. No Blender runtime is
+required. Gameplay still uses the hard-coded diagnostic `CarMeshAsset`; a general
+GLB asset adapter, game-camera/ground registration, resource/fallback handling,
+wheel pose wiring and native-pixel outer-ink integration remain next work. The
+authored GLB includes internal window ink, not the image-space outer outline.
+
 ## Current experiment and findings
+
+The owner authorized an authored Blender/UV comparison on 2026-10-10.
+[097](../tactical/097-authored-car-blender-uv.md) delivers one editable compact car
+with volumetric wheels/arches, named UV islands, retained sprite-projection draft
+and deliberately cleaned palette-matched paint. It has 438 triangles, a 512-square
+atlas, a self-contained GLB, actual six-view/stage/game-scale sheets and a 24-frame
+turntable. Workshop initially registered it as a separate excluded diagnostic;
+the source-only cleanup above now keeps it local.
+The original art and collision/support metadata are unchanged. Top/side/oblique
+views are coherent by agent inspection; the native-scale candidate remains
+plainer/softer than the sprites. Final paint is authored interpretation, not exact
+pixel recovery, and source-camera matching and human art judgment remain open.
+The owner subsequently requested reusable authoring for all vehicles and potentially
+other asset classes. [098](../tactical/098-reusable-sprite-authoring.md) supplies the
+shared offline process: exact source extraction, landmark-based camera fitting,
+visibility-tested original-pixel UV drafts with unknown/conflict masks, unlit
+native-pixel comparison and portable export. The same commands process two
+compact palette variants; all 45 vehicles have verified source extraction.
+This is shared tooling, not 45 reconstructed vehicles or an automatic mesh fitter.
+Use [the workflow](../../scripts/authored-assets/README.md) to fit the first family
+template closely before broad model production. Other geometry families remain open.
+
+The owner's subsequent side-window/fender feedback is addressed by
+[099](../tactical/099-compact-windows-and-fenders.md): four continuous window/frame
+panels with independent source-owned UV islands and four curved raised fender
+lips. The same 55-mesh / 834-triangle template and variant-palette cleanup work
+on both compact colors. A separate excluded diagnostic revision retains the
+original 097 bytes. Windshield/hood/roof distortion and family acceptance remain
+open; use the refined setup for the next fitting pass rather than broad production.
+
+The owner then identified missing dark ink and oversized fenders.
+[100](../tactical/100-pixel-outline-and-silhouette.md) reduces arch radius/flare
+and adds a one-logical-pixel inward silhouette pass with a working GPU prototype.
+The pass preserves alpha; internal lines remain UV paint. Explicit contour
+overlays show fewer longitudinal overshoots but persistent side-profile errors.
+GLB needs a separate runtime outline pass, which is not integrated into gameplay.
+Use the latest outline setup for body/hood/roof and wheel fitting; family acceptance
+and production remain open.
+
+The owner then requested a closer side silhouette and animation-ready wheels.
+[101](../tactical/101-fitted-body-and-rigid-wheels.md) fits the compact body with
+unchanged cameras/outline, improving side occupancy from about 83% to 92% while
+retaining cross-view tradeoffs. Four centered rigid steer/roll parents make each
+tire/hub assembly independently rotatable. Both GLBs preserve that hierarchy
+and axis/radius metadata; signed path distance drives the separate spin helper.
+Actual fixed-body motion and exported-axis tests pass on both colors. Steering
+clearance and gameplay integration remain open; no skeleton or collider change
+is introduced. Use the latest rigged setup for further fitting.
+
+Latest owner feedback is addressed in [102](../tactical/102-windshield-boundary.md):
+front windshield glass is confined to an explicit aperture/frame, and body paint
+replaces duplicated front-glass projection on the cabin corners. Both compact
+palettes retain v4's silhouette and independent wheel transforms. The
+[comparison](../../public/demos/authored-car/windshield.html) includes matched
+front-corner crops and both 4×2 sheets. Pillar width/texture fitting still need
+human judgment; no engine or promotion changes. Use the windshield setup for
+the latest family template.
+
+[103](../tactical/103-dark-windshield-frame.md) adds the requested continuous dark
+windshield border using the original window ink. It paints only the frame;
+glass pixels, geometry, silhouettes and wheel transforms remain identical to
+102 on both colours. The [close-ups and 4×2 sheets](../../public/demos/authored-car/windshield-ink.html)
+retain the new diagnostic. Interior ink is included in the exported atlas;
+outer silhouette ink remains a render pass. Review border weight before further
+pillar/shape and steering-clearance fitting.
+
+[104](../tactical/104-visible-top-windshield-ink.md) corrects a remaining top-edge
+gap: 103's frame paint was present in the atlas but too thin for the side camera's
+native sampling. The top stroke now extends slightly into glass. Full native
+edge segments pass in all four matched cameras on both colours, with unchanged
+geometry/silhouettes/wheels. Inspect the [close-ups](../../public/demos/authored-car/windshield-top.html);
+border weight remains a human art judgment. Validate native edge visibility
+alongside atlas coverage on future ink revisions.
+
+The owner accepted the compact checkpoint in chat and requested the little red
+car plus a repeatable skill. [105](../tactical/105-red-car-and-authoring-skill.md)
+reconstructs `compact-4` using v7 only after verifying identical four-view source
+alpha/physical metadata and consistent palette correspondence. A one-command
+offline replay reproduces the cleaned atlas and native/novel rendered images.
+The [skill](../../.agents/skills/tilefun-vehicle-authoring/SKILL.md) routes template
+selection and records the silhouette, window ownership, native border visibility
+and independent-wheel checks. The [red comparison](../../public/demos/authored-car/red.html)
+retains editable source and its own uncertain projection; existing side/hood/pillar
+tradeoffs remain. Chat acceptance is not Workshop promotion. The ambulance is
+next: author a new cab/box family and fit its axles, windows and directional
+landmarks; it cannot use the compact geometry.
 
 [Car projection lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/car-projection)
 maps one approved compact-car image onto authored low-poly geometry using Three.js
@@ -103,14 +211,14 @@ Plan each implementation slice in a new tactical when it is taken up.
 | ID | State | Checkpoint and evidence needed |
 | --- | --- | --- |
 | A1 | Done | Single-view projection and orthographic inspection; evidence in 037/038 |
-| A2 | Open | Assemble original directional crops, actual facing labels, source-camera assumptions, wheel/roof/hood landmarks and physical bounds; identify inconsistent sprite views |
-| A3 | Proposed | Compare authored geometry/rectified UVs, image-generated geometry, and authored geometry with generated textures on the same car |
-| A4 | Proposed | Evaluate fixed source/front/back/side/top and oblique views; inspect wheel volume, roof/hood layout, seams, ground contact and unknown surfaces; record human judgment alongside metrics |
+| A2 | Inputs/tooling delivered; registration open | 098 freezes all vehicle directional crops/metadata and supplies landmark camera fitting; annotate real correspondences and resolve inconsistent sprite views |
+| A3 | Bounded trials delivered; choice open | 073 compares fitted/generated geometry and AI paint; 097 adds authored Blender geometry and cleaned named UVs. No production route selected |
+| A4 | Inspection evidence delivered; human judgment open | 097 retains source/front/back/side/top, oblique and turntable views, wheel contact and texture stages; no accepted all-angle car yet |
 | A5 | Proposed | Export/import the chosen candidate as a portable asset with provenance and explicit axis/scale conversion; establish bounded triangle/texture budgets from device evidence |
 | A6 | Diagnostic implementation delivered in 039–045 | Render the asset as an optional mesh body under the unchanged game projection, with continuous visual heading and a sprite fallback; engine work is tracked in the rendering topic |
 | A7 | Later | Test a second asset class before generalizing authoring, animation or batch generation; first-person coverage remains a later scope |
 
-The active investigation is [070 — Model-assisted spatial assets and sprite
+The model-assisted investigation began with [070 — Model-assisted spatial assets and sprite
 clipping](../tactical/070-model-assisted-spatial-assets-investigation.md) on the
 owner's Windows RTX 4090 workstation. It combines
 A2 input/camera registration with a bounded A3 comparison on oak and compact car,
