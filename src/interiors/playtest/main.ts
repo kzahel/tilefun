@@ -275,6 +275,7 @@ function restartSimulation() {
     settings: () => ({ paused: !ready, zoom: 1 / PIXEL_SCALE, terrainPacing: "throughput" }),
     uiOverlay: draw,
     onError: (error) => {
+      if (presentation !== next) return;
       ready = false;
       updateReportButtons();
       status(String(error));

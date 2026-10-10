@@ -450,6 +450,13 @@ fixtures establish opacity/composition parity; actual-zoom images are visually
 inspected without asserting pixel identity. The sampling difference is recorded
 for future renderer fidelity work, not expanded into this LOD optimization.
 
+The Ubuntu x64 CI probes use a fixed blade angle away from raster sample ties,
+integer furniture texel scaling and representable 8-bit batch alpha. Exact
+camera-translation/room comparisons and the existing one-channel batch tolerance
+remain unchanged; these fixtures isolate placement, pass ordering and batching
+from architecture-specific sampling ties. Context-loss checks wait for the first
+real replicated player ID before testing identity preservation.
+
 ## Curved railway terrain
 
 Curved city links and loop/winding labs use the same procedural pixel track

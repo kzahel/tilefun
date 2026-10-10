@@ -29,7 +29,10 @@ for (const renderer of ["canvas", "gpu"]) {
     const original = await poses();
     expect(original.length).toBeGreaterThanOrEqual(2);
     await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 2 && f.z > 20), { intervals: [30] })
+      .poll(async () => (await poses()).some((f) => f.clip === 2 && f.z > 20), {
+        intervals: [30],
+        timeout: 15000,
+      })
       .toBe(true);
     // Pause a routine flight before the escape below. This checks saved phase,
     // rather than assuming the client restarts its one-shot at frame zero.
@@ -168,19 +171,22 @@ test("ordinary grove robins support manual creation and durable deletion on worl
         .map((e) => ({ id: e.id, x: e.position.wx, y: e.position.wy }));
     }, ROBIN_TYPE);
   await expect.poll(async () => (await robins()).length).toBeGreaterThanOrEqual(2);
-  const original = await robins(),
-    removed = original[0];
-  if (!removed) throw new Error("Missing generated robin");
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   await page.locator('[data-editor-tab="entities"]').click();
   await page.getByRole("button", { name: "Place Robin (click map)", exact: true }).click();
+  // Opening the editor can publish additional nearby generated individuals.
+  // Take the baseline immediately before the edit, after navigation settles.
+  const original = await robins(),
+    removed = original[0];
+  if (!removed) throw new Error("Missing generated robin");
   await page.locator("#game").click({ position: { x: 300, y: 170 } });
   await expect.poll(async () => (await robins()).length).toBe(original.length + 1);
   await page.evaluate((id) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
     g.transport.send({ type: "edit-delete-entity", entityId: id });
   }, removed.id);
+  await expect.poll(async () => (await robins()).some((r) => r.id === removed.id)).toBe(false);
   await expect.poll(async () => (await robins()).length).toBe(original.length);
   await page.getByRole("button", { name: "Exit editor", exact: true }).click();
   await page.evaluate(async () => {

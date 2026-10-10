@@ -30,6 +30,10 @@ stale input and disconnect brake; explicit travel clears occupancy. Production
 and World geometry labs share this controller and presentation. NPC driver
 exchange remains deferred; the native train art is unchanged.
 
+City-train browser coverage releases boarding movement at the carriage center
+instead of after a fixed wall-time hold. It still requires actual 44px roof
+support, mid-bend reload, arrival and alighting; hosted software GPU contention
+must not make the scripted input walk beyond the roof before asserting support.
 
 ## Requested direction
 

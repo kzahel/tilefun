@@ -80,6 +80,7 @@ it.each([
       await s.close();
     }
   },
+  20000,
 );
 
 it("keeps the pond arrival dry and computes authoritative shore blends", async () => {

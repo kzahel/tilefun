@@ -175,7 +175,7 @@ describe.each(FAUNA_PROFILES.filter((p) => ["pond", "shore", "deep"].includes(p.
       } finally {
         await s.close();
       }
-    }, 20000);
+    }, 60000);
   },
 );
 it("an amphibious gait changes at the resolved shore, while the saved motion clock continues", () => {

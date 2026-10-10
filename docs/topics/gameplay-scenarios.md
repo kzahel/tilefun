@@ -142,6 +142,9 @@ return to zero on exit, and verifies that no IndexedDB worlds are created.
 Next: review movement feel in the migrated labs. Future small gameplay examples
 should add fixture data and semantic integration assertions through this host.
 
+Furniture playtest callbacks ignore errors from replaced presentation hosts,
+matching the existing ready-promise identity guard. Rapid height/scene changes
+must not let a disposed scenario disable the replacement or overwrite its status.
 Explicit authority clock fences also reset timed sprite clips to their latest
 replicated phase. Local animation ticks can advance without a new sprite delta;
 pausing must freeze the saved authority frame so reload does not change it.

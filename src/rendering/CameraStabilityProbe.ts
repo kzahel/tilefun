@@ -96,7 +96,10 @@ export function probeCameraStability(pixelSnap = true) {
         const items: SceneItem[] = [
           sprite,
           { ...sprite, wx: base + 116.61, wy: base + 100.17, flipX: true },
-          { kind: "grass", sortKey: 97, wx: base + 140, wy: base + 97, variant: 0, angle: 0.08 },
+          // Keep rotated edges away from raster sample ties. Skia and GPU
+          // rasterizers resolve those ties differently across architectures;
+          // this probe measures rigid placement with exact pixel comparisons.
+          { kind: "grass", sortKey: 97, wx: base + 140, wy: base + 97, variant: 0, angle: 0.125 },
         ];
         for (const zoom of [0.4, 0.5, 0.8, 1, 1.3]) {
           camera.zoom = zoom;

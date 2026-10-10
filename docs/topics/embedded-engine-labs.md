@@ -15,7 +15,8 @@ contracts; [performance](performance.md) owns timing evidence and its limits.
 Explicit scenario clock fences reset timed sprite animation to the last
 replicated authority phase through shared `RemoteStateView` code. This prevents
 client animation lead from changing the frozen frame after pause/reload.
-The [scenario topic](gameplay-scenarios.md) owns that clock contract.
+The [scenario topic](gameplay-scenarios.md) owns that clock contract and the
+replacement-host error guard used by furniture playtest.
 
 ## Farmstead and settlement alignment
 

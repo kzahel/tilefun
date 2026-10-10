@@ -122,7 +122,9 @@ function draw() {
         { kind: "layer", layer: "floor" },
         { kind: "layer", layer: "walls" },
         { kind: "wall-band", row: 0, y: -16 },
-        { kind: "furniture", src: [240, 8078, 16, 16], x: 8, y: 8, width: 24, height: 32 },
+        // Integer texel scaling avoids nearest-neighbor half-texel ties whose
+        // chosen source pixel differs between Canvas and WebGL on x64.
+        { kind: "furniture", src: [240, 8078, 16, 16], x: 8, y: 8, width: 32, height: 32 },
         {
           kind: "scene",
           item: { ...sprite(8, 32, 1), hasShadow: false },

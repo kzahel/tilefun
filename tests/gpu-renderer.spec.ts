@@ -182,6 +182,20 @@ test("real graphics loss recovers resources without restarting gameplay", async 
   await page.goto("/tilefun/?renderer=gpu&meshes");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const gpu = page.locator("canvas[data-renderer=gpu][aria-hidden=true]");
+  // Renderer readiness can precede the first authority snapshot. Capture a
+  // real player identity rather than the temporary -1 replica placeholder.
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (
+            document.querySelector("#game") as unknown as {
+              __game: { stateView: { playerEntity: { id: number } } };
+            }
+          ).__game.stateView.playerEntity.id,
+      ),
+    )
+    .toBeGreaterThan(0);
   const extension = await gpu.evaluateHandle((c: HTMLCanvasElement) =>
     c.getContext("webgl2")?.getExtension("WEBGL_lose_context"),
   );
@@ -464,7 +478,9 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
       target.scale(2, 2);
       for (let i = 0; i < 4101; i++) {
         target.fillStyle = i % 2 ? "#28a45d" : "#9631e2";
-        target.globalAlpha = i % 3 ? 1 : 0.5;
+        // Use a representable 8-bit alpha, keeping the one-channel tolerance
+        // independent of Canvas/WebGL rounding exactly halfway between bytes.
+        target.globalAlpha = i % 3 ? 1 : 128 / 255;
         target.fillRect((i * 7) % 160, (i * 11) % 120, 4, 5);
       }
       target.restore();

@@ -365,7 +365,7 @@ it("runs all native cycles on dry ground in the production Realm and retains sav
   } finally {
     await s.close();
   }
-}, 30000);
+}, 60000);
 
 it.each([true, false])(
   "Realm landing startles a rabbit with or without player input (input=%s)",

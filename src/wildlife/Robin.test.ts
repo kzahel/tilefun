@@ -373,7 +373,7 @@ it("runs hops, flights, crown rests and songs in production Realm and saves dura
   } finally {
     await s.close();
   }
-}, 30000);
+}, 60000);
 it("lands and stands on a replicated robin body until Jump is pressed", () => {
   const robin = createRobin(64, 64);
   robin.id = 1;

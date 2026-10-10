@@ -64,6 +64,13 @@ New review kinds need equivalent normal-browser verification in addition to
 ordinary headless tests. A rebuilt manifest alone cannot fix nondeterministic
 rendering.
 
+Wildlife browser tests follow the archived-evidence contract in the
+[source bank README](../../art-source/wildlife-v2/README.md): a fresh checkout
+must show the exact missing-artifact error and disable feedback for historical
+revisions. Restored revisions and the fully committed common pets still undergo
+native-pixel verification in full Chromium. Playback mutation checks use a
+portable pet so an earlier missing historical GIF cannot mask the changed file.
+
 The 2026-10-03 CI repair preserved all 551 candidate records byte-for-byte (only
 the broad input digest changed). Typechecks, lint, production build, 1,424 unit
 tests and all 293 browser tests passed locally; Worker checks and both dependency

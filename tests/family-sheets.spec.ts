@@ -391,6 +391,9 @@ test("whole-sheet comments remain available while a piece is selected", async ({
     "page",
   );
   await nav.getByRole("link", { name: "Source art", exact: true }).click();
+  // Route changes close the mobile drawer in an effect. Wait for that close
+  // before reopening, so the effect cannot undo the next toggle.
+  await expect(nav).toBeHidden();
   await page.getByRole("button", { name: "Toggle tool navigation" }).click();
   await expect(nav.getByRole("link", { name: "Source art", exact: true })).toHaveAttribute(
     "aria-current",

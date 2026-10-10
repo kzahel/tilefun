@@ -36,7 +36,7 @@ for (const backend of ["canvas", "gpu"]) {
   test(`ride a generated train between cities, reopen mid-bend and alight (${backend})`, async ({
     page,
   }) => {
-    test.setTimeout(150000);
+    test.setTimeout(180000);
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
@@ -53,11 +53,19 @@ for (const backend of ["canvas", "gpu"]) {
       .poll(async () => (await read(page)).railChunks, { timeout: 15000 })
       .toBeGreaterThan(0);
     if ((await read(page)).editing) await page.keyboard.press("Tab");
+    const boardingY = (await read(page)).trainY;
     await page.keyboard.down("ArrowDown");
     await page.keyboard.down("Space");
-    await page.waitForTimeout(950);
-    await page.keyboard.up("ArrowDown");
-    await page.keyboard.up("Space");
+    try {
+      // Release at the roof center rather than after wall time: software GPU
+      // contention can make a fixed hold overshoot the carriage or stop short.
+      await expect
+        .poll(async () => (await read(page)).y, { intervals: [30], timeout: 15000 })
+        .toBeGreaterThanOrEqual(boardingY);
+    } finally {
+      await page.keyboard.up("ArrowDown");
+      await page.keyboard.up("Space");
+    }
     await expect.poll(async () => (await read(page)).serverZ).toBe(44);
     await expect
       .poll(async () => (await read(page)).speed, { timeout: 15000 })
@@ -68,7 +76,7 @@ for (const backend of ["canvas", "gpu"]) {
           const s = await read(page);
           return s.heading % 64 > 16 && s.heading % 64 < 48;
         },
-        { timeout: 35000 },
+        { timeout: 60000 },
       )
       .toBe(true);
     expect((await read(page)).serverZ).toBe(44);

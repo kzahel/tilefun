@@ -44,10 +44,30 @@ Playwright uses its own Chromium and an isolated preview on port 4174. Its
 feedback goes under `test-results/`, not the human review inbox. On Linux,
 Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
+With `CI` set, browser tests use one worker and a 60-second overall deadline:
+hosted software GPU rendering can otherwise starve the simulation Worker.
+Individual assertion deadlines remain explicit. Long headless scenario tests
+have bounded tick counts and separate wall-time allowances for hosted CPUs.
 The raster verification renders every Workshop candidate in headless-shell and
 full Chromium, checks the committed fingerprints and leaves the manifest intact.
 CI runs it on Ubuntu x64 so CPU-specific blending differences cannot hide behind
 a current source digest or passing ARM browser tests.
+
+The 2026-10-10 repair of [CI run 38027958909](https://github.com/kzahel/tilefun/actions/runs/38027958909)
+passed typechecks, 2,109 unit tests, lint, the production build, Worker tests and
+dry-run build, and both dependency audits (zero vulnerabilities). The complete
+browser suite passed all 504 tests with CI concurrency; 12 focused cases also
+passed in Linux x64 Playwright Chromium. All 761 Workshop raster identities
+verified, and the streaming readiness benchmark reported no missing, incomplete
+or stale chunks in its six scenarios. The shared animation-phase change required
+170 movement identity updates; artwork candidates and promoted asset banks were
+not changed. These are local validation results; the hosted rerun follows commit
+and push.
+
+A fresh pre-push check at the newer local head passes typechecks, lint, all 2,165
+unit tests, Worker tests/dry-run build, the production build, both dependency
+audits, and the six-scenario streaming readiness gate. The complete browser
+suite and hosted CI are being rerun for this combined head.
 
 The shared human review deployment is
 <https://tilefun.graehlarts.com/tilefun/workshop.html>. Visiting that deployment

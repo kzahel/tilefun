@@ -146,7 +146,7 @@ describe("furniture in shared game physics", async () => {
     };
     expect(await peak(1)).toBeLessThan(32);
     expect(await peak(0.25)).toBeGreaterThan(64);
-  });
+  }, 20000);
   it("height edits alter Z collision and reset clears airborne state", async () => {
     const m = scene("wardrobe");
     expect(m.canStand(80, 84, 31)).toBe(false);

@@ -356,7 +356,7 @@ it("runs all four frog cycles, land and water in the production pond Realm, and 
   } finally {
     await s.close();
   }
-}, 30000);
+}, 60000);
 
 it.each([true, false])(
   "Realm landing startles a frog with or without player input (input=%s)",

@@ -3,10 +3,12 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   globalSetup: "./tests/workshop-setup.ts",
-  timeout: 30_000,
+  timeout: process.env.CI ? 60_000 : 30_000,
   // Canvas-heavy labs and full Chromium compete for CPU/GPU with the live game.
   // Bound concurrency so readiness assertions exercise behavior, not contention.
-  workers: 2,
+  // Hosted CI uses software GPU rendering; two full Chromium workers can
+  // starve the authority Worker and miss short-lived gameplay phases.
+  workers: process.env.CI ? 1 : 2,
   reporter: [["list"], ["html", { open: "never" }]],
   snapshotPathTemplate: "{testDir}/fixtures/interior-approved/{arg}{ext}",
   // New/changed visual references require human review, never an automatic write.

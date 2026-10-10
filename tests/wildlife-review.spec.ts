@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { chromium, expect, test } from "@playwright/test";
 import type { WildlifeReview } from "../src/workshop/WildlifeCandidates.js";
 import type { WorkshopManifest } from "../src/workshop/WorkshopTypes.js";
@@ -40,7 +40,8 @@ test("common pet drafts have exact pending review and usable native/travel playb
   }
 });
 
-test("supervised wildlife revisions appear without feedback and preserve native pixels in full Chromium", async () => {
+test("wildlife revisions preserve native pixels or block feedback on missing archived evidence in full Chromium", async () => {
+  test.setTimeout(60000);
   const browser = await chromium.launch({ channel: "chromium", headless: true });
   try {
     const context = await browser.newContext({
@@ -50,7 +51,11 @@ test("supervised wildlife revisions appear without feedback and preserve native 
     });
     const page = await context.newPage();
     const inbox = await (await context.request.get("/tilefun/api/workshop/inbox")).json();
-    const pilots = definitions.filter((d) => d.batchId.startsWith("wildlife-v2-supervised-"));
+    const pilots = definitions.filter(
+      (d) =>
+        d.batchId.startsWith("wildlife-v2-supervised-") ||
+        d.batchId === "wildlife-v2-common-pets-084",
+    );
     expect(pilots.length).toBeGreaterThan(0);
     for (const d of pilots) {
       const id = `pattern:wildlife-v2-${d.id}`;
@@ -58,6 +63,20 @@ test("supervised wildlife revisions appear without feedback and preserve native 
       expect(inbox.candidates.some((c: { id: string }) => c.id === id)).toBe(true);
       expect(inbox.candidates.find((c: { id: string }) => c.id === id)?.state).toBe("unchecked");
       await page.goto(`/tilefun/workshop.html#/review/${encodeURIComponent(id)}`);
+      // Historical animation evidence is restored separately from its checksum
+      // archive. A plain checkout must fail closed, while portable pets and
+      // restored historical revisions still exercise exact native previews.
+      const missing = d.files.find((file) => !existsSync(`public/${file.path}`));
+      if (missing) {
+        await expect(
+          page.getByText(`Wildlife artifact changed: ${missing.path}`, { exact: true }),
+        ).toBeVisible();
+        await expect(
+          page.getByRole("button", { name: "Looks right ✓", exact: true }),
+        ).toBeDisabled();
+        await expect(page.locator('[data-review-ready="true"]')).toHaveCount(0);
+        continue;
+      }
       await expect(page.locator('[data-review-ready="true"]')).toBeVisible();
       await expect(page.getByRole("button", { name: "Looks right ✓", exact: true })).toBeEnabled();
       expect(
@@ -99,7 +118,7 @@ test("supervised wildlife revisions appear without feedback and preserve native 
 });
 
 test("changed playback bytes disable exact wildlife feedback", async ({ page }) => {
-  const d = definitions[0];
+  const d = definitions.find((row) => row.batchId === "wildlife-v2-common-pets-084");
   if (!d) throw new Error("Missing registered pilot");
   const file = d.files.find((f) => f.path.endsWith("playback.js"));
   if (!file) throw new Error("Pilot lacks registered playback source");
