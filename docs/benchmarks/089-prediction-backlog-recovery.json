@@ -1,0 +1,460 @@
+{
+  "date": "2026-10-10",
+  "fixture": {
+    "type": "flat",
+    "version": "flat-v1",
+    "preset": "grass",
+    "seed": 2026,
+    "generatorAsserted": true
+  },
+  "limits": "Real Worker and native client scheduling in isolated fresh flat worlds; noclip, CDP keyboard, not touch or countryside/contact acceptance. Soft replay time target is checked between atomic commands; input-step limits are per prediction tick, not render frame. Long stalls can still require correction when terrain/NPC information changes or retained history is unavailable. Raw host identities are omitted. Historical 088 stall captures used an invalid descriptor and fell back to regional worlds; do not treat these as a matched flat-world A/B. Phone original foreground app and task-owned routes/tabs were restored/removed.",
+  "policy": {
+    "historyInputSeconds": 8,
+    "maxRetainedCommands": 1024,
+    "inputSubdivisionsPerPlayerTick": 32,
+    "replaySoftTimeTargetMs": 2,
+    "historyGapAckGraceMs": 250
+  },
+  "sourceSha256": {
+    "src/client/PlayerPredictor.ts": "fcf797a839b59bedec2b2fd89ea5ca5f9bd05ab8e95d75c5337a4bb5b9713167",
+    "src/client/PredictionCollisionTimeline.ts": "3fba0c7cf13635766b6369b105dc502fe1965a6e81421c03f84782f1e4449446",
+    "src/server/Realm.ts": "b9913a63cf31391dc250a79381e284b0f615ae66aa448bf72d2fce269eeda1c9",
+    "src/physics/PlayerMovement.ts": "7cd529ded4aeed0e06ef86f120490e49f9b5cc94c0e4d5ea16136f1e5eea2225"
+  },
+  "phoneBatteryTemperatureC": {
+    "before": 29.6,
+    "after": 29.4
+  },
+  "runs": [
+    {
+      "device": "Apple M4 Pro / bundled Chromium",
+      "browser": "153.0.8010.12",
+      "date": "2026-10-10T12:28:36.248Z",
+      "physical": false,
+      "cases": [
+        {
+          "kind": "baseline",
+          "ms": 0,
+          "maxUnchangedWalkFrameMs": 133.70000004768372,
+          "frames": 64,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 1.0668830871582031,
+          "maxFrameMs": 18.799999952316284,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 3.087158205516971e-6,
+          "maxReplay": 2,
+          "maxReplayStepsPerTick": 2,
+          "maxRetainedInputs": 3,
+          "maxRetainedSeconds": 0.05001,
+          "recoveryStatuses": ["ready"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 350,
+          "maxUnchangedWalkFrameMs": 135.20000004768372,
+          "frames": 83,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 2.1337630871582007,
+          "maxFrameMs": 18.700000047683716,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 6.901855471141971e-6,
+          "maxReplay": 22,
+          "maxReplayStepsPerTick": 22,
+          "maxRetainedInputs": 23,
+          "maxRetainedSeconds": 0.3834100000000001,
+          "recoveryStatuses": ["ready"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 750,
+          "maxUnchangedWalkFrameMs": 150.10000002384186,
+          "frames": 109,
+          "minDx": -1.4550781202160579e-6,
+          "maxDx": 2.1337602261352586,
+          "maxFrameMs": 18.800000071525574,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 6.901855471141971e-6,
+          "maxReplay": 47,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 48,
+          "maxRetainedSeconds": 0.8001599999999995,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 2500,
+          "maxUnchangedWalkFrameMs": 148.80000007152557,
+          "frames": 213,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 2.133759987716675,
+          "maxFrameMs": 18.5,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 1.4531250002391971e-5,
+          "maxReplay": 26,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 155,
+          "maxRetainedSeconds": 2.5838499999999955,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 7000,
+          "maxUnchangedWalkFrameMs": 150.5,
+          "frames": 483,
+          "minDx": 0,
+          "maxDx": 2.1337600000000023,
+          "maxFrameMs": 18.799999952316284,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 1.742187453146471e-5,
+          "maxReplay": 434,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 434,
+          "maxRetainedSeconds": 7.234780000000072,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 9000,
+          "maxUnchangedWalkFrameMs": 150,
+          "frames": 604,
+          "minDx": 0,
+          "maxDx": 2.1337604522705096,
+          "maxFrameMs": 19.899999976158142,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 4.650390621918632e-5,
+          "maxReplay": 14,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 479,
+          "maxRetainedSeconds": 7.98493000000009,
+          "recoveryStatuses": ["ready", "history-gap", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "main",
+          "ms": 350,
+          "maxUnchangedWalkFrameMs": 359.8000000715256,
+          "frames": 64,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 16.003201179809572,
+          "maxFrameMs": 359.8000000715256,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 6.901855471141971e-6,
+          "maxReplay": 16,
+          "maxReplayStepsPerTick": 16,
+          "maxRetainedInputs": 17,
+          "maxRetainedSeconds": 0.28339,
+          "recoveryStatuses": ["ready"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "tx-delay",
+          "ms": 750,
+          "maxUnchangedWalkFrameMs": 150,
+          "frames": 107,
+          "minDx": 0,
+          "maxDx": 2.1337600000000023,
+          "maxFrameMs": 19.40000009536743,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 2.359619145408942e-6,
+          "maxReplay": 49,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 50,
+          "maxRetainedSeconds": 0.8334999999999995,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "tx-delay",
+          "ms": 2500,
+          "maxUnchangedWalkFrameMs": 149.89999997615814,
+          "frames": 213,
+          "minDx": 0,
+          "maxDx": 2.1337600000000023,
+          "maxFrameMs": 18.199999928474426,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 1.356811509367617e-6,
+          "maxReplay": 156,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 160,
+          "maxRetainedSeconds": 2.6671999999999954,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        }
+      ]
+    },
+    {
+      "device": "Pixel 7a / Android 17 / native Chrome",
+      "browser": "154.0.8037.126",
+      "date": "2026-10-10T12:26:36.642Z",
+      "physical": true,
+      "cases": [
+        {
+          "kind": "baseline",
+          "ms": 0,
+          "maxUnchangedWalkFrameMs": 137,
+          "frames": 63,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 2.1337602261352533,
+          "maxFrameMs": 20.399999976158142,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 3.087158205516971e-6,
+          "maxReplay": 3,
+          "maxReplayStepsPerTick": 3,
+          "maxRetainedInputs": 5,
+          "maxRetainedSeconds": 0.08335000000000001,
+          "recoveryStatuses": ["ready"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 350,
+          "maxUnchangedWalkFrameMs": 148.5,
+          "frames": 86,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 2.1337604522705114,
+          "maxFrameMs": 19.399999976158142,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 6.901855471141971e-6,
+          "maxReplay": 22,
+          "maxReplayStepsPerTick": 22,
+          "maxRetainedInputs": 23,
+          "maxRetainedSeconds": 0.3834100000000001,
+          "recoveryStatuses": ["ready"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 750,
+          "maxUnchangedWalkFrameMs": 148.5,
+          "frames": 109,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 2.1337604522705114,
+          "maxFrameMs": 20.799999952316284,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 6.901855471141971e-6,
+          "maxReplay": 15,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 47,
+          "maxRetainedSeconds": 0.7834899999999996,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 2500,
+          "maxUnchangedWalkFrameMs": 135.89999997615814,
+          "frames": 214,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 1.06689453125,
+          "maxFrameMs": 22.600000023841858,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 1.4531250002391971e-5,
+          "maxReplay": 28,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 156,
+          "maxRetainedSeconds": 2.6005199999999955,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 7000,
+          "maxUnchangedWalkFrameMs": 136.10000002384186,
+          "frames": 485,
+          "minDx": -3.197265618837264e-5,
+          "maxDx": 1.06689453125,
+          "maxFrameMs": 22.200000047683716,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 3.197265618837264e-5,
+          "maxReplay": 17,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 434,
+          "maxRetainedSeconds": 7.234780000000072,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "worker",
+          "ms": 9000,
+          "maxUnchangedWalkFrameMs": 136.10000002384186,
+          "frames": 605,
+          "minDx": 0,
+          "maxDx": 1.06689453125,
+          "maxFrameMs": 30.399999976158142,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 4.650390621918632e-5,
+          "maxReplay": 13,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 479,
+          "maxRetainedSeconds": 7.98493000000009,
+          "recoveryStatuses": ["ready", "history-gap", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "main",
+          "ms": 350,
+          "maxUnchangedWalkFrameMs": 370.7999999523163,
+          "frames": 67,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 16.00320117980957,
+          "maxFrameMs": 354.5,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 6.901855471141971e-6,
+          "maxReplay": 16,
+          "maxReplayStepsPerTick": 16,
+          "maxRetainedInputs": 17,
+          "maxRetainedSeconds": 0.28339,
+          "recoveryStatuses": ["ready"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "tx-delay",
+          "ms": 750,
+          "maxUnchangedWalkFrameMs": 136.80000007152557,
+          "frames": 107,
+          "minDx": -7.275390601080289e-7,
+          "maxDx": 3.2006397247314453,
+          "maxFrameMs": 60.89999997615814,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 2.359619145408942e-6,
+          "maxReplay": 49,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 51,
+          "maxRetainedSeconds": 0.8501699999999994,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        },
+        {
+          "kind": "tx-delay",
+          "ms": 2500,
+          "maxUnchangedWalkFrameMs": 138,
+          "frames": 214,
+          "minDx": 0,
+          "maxDx": 1.0668801770019627,
+          "maxFrameMs": 21.100000023841858,
+          "animationCols": [0, 1, 2, 3],
+          "maxResim": 9.045410251928843e-7,
+          "maxReplay": 157,
+          "maxReplayStepsPerTick": 32,
+          "maxRetainedInputs": 160,
+          "maxRetainedSeconds": 2.6671999999999954,
+          "recoveryStatuses": ["ready", "replaying"],
+          "errors": [],
+          "generation": {
+            "type": "flat",
+            "version": "flat-v1",
+            "seed": 2026,
+            "preset": "grass"
+          }
+        }
+      ]
+    }
+  ]
+}

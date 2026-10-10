@@ -125,7 +125,10 @@ retains identical decisions/RNG; warmed desktop decision CPU falls about 42%.
 deterministic shared/per-decision planning quotas, and local predicted animation.
 Its bounded candidate selection deliberately changes search choices. The owning
 [activation](entity-activation.md) and [prediction](player-prediction.md) topics
-specify behavior and remaining history-overflow recovery.
+specify behavior. [089](../tactical/089-prediction-backlog-recovery.md) adds
+bounded client scratch replay and authority input-backlog admission, with explicit
+history-gap recovery. Its isolated stall controls do not measure countryside AI
+headroom or eliminate correction from newly available terrain/contacts.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

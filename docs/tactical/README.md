@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [089 Prediction backlog recovery](089-prediction-backlog-recovery.md) | Complete: bounded input/replay work, explicit history gaps and native stall controls |
 | [088 Wildlife work budgets](088-wildlife-work-budgets.md) | Complete: wildlife sleep, bounded robin planning, predicted animation and clip-clock fences; native phone follow-up |
 | [087 Player-driven cars and trains](087-player-driven-cars-and-trains.md) | Delivered: inside driving, persistent parked cars, track-bound trains and tap-to-move controls |
 | [086 Tap to move and Options](086-tap-to-move-and-options.md) | Complete: straight-line touch walking, visible Options and local profile preference; validation recorded, child device trial next |

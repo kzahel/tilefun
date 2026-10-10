@@ -7,6 +7,7 @@ import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import {
   getMovementPhysicsParams,
   getServerPhysicsMult,
+  INPUT_BACKLOG_STEP_BUDGET,
   MAX_INPUT_STEP_SECONDS,
   splitInputStepDurations,
   stepMountFromInput,
@@ -27,7 +28,13 @@ import { PredictionCollisionTimeline } from "./PredictionCollisionTimeline.js";
 const SNAP_THRESHOLD = 32;
 
 /** Ring buffer capacity for stored inputs (replay-based reconciliation). */
-const INPUT_BUFFER_SIZE = 128;
+const INPUT_BUFFER_SIZE = 1024;
+const INPUT_HISTORY_SECONDS = 8;
+/** Per prediction tick, including continuation of a replay started by a snapshot. */
+const REPLAY_STEP_BUDGET = INPUT_BACKLOG_STEP_BUDGET;
+const REPLAY_TIME_BUDGET_SECONDS = 0.002;
+/** Allow a resumed authority to acknowledge the lost prefix before explicit resync. */
+const HISTORY_GAP_GRACE_SECONDS = 0.25;
 
 /** Ordinary controlled animation owns local phase; physically timed clips do not. */
 function predictionSprite(
@@ -48,6 +55,25 @@ function predictionSprite(
     sprite.animTimer = local.animTimer;
   }
   return sprite;
+}
+
+type ReconcileTiming = { expectedInputDt?: number; serverTick?: number; simulationTime?: number };
+type ReconcileRequest = {
+  player: Entity;
+  ack: number;
+  world: World;
+  props: readonly Prop[];
+  entities: readonly Entity[];
+  mountId: number | undefined;
+  timing: ReconcileTiming | undefined;
+};
+export interface PredictionRecoveryDiagnostics {
+  status: "ready" | "replaying" | "history-gap" | "resync" | "stale";
+  retainedInputs: number;
+  retainedSeconds: number;
+  discardedThroughSeq: number | undefined;
+  replayStepsThisTick: number;
+  replayAck: number | undefined;
 }
 
 export interface StoredInput {
@@ -151,7 +177,7 @@ export class PlayerPredictor {
   /** The predicted player entity. */
   private predicted: Entity | null = null;
 
-  private readonly collisionTimeline = new PredictionCollisionTimeline();
+  private collisionTimeline = new PredictionCollisionTimeline();
   private predictionTime: number | undefined;
   private reconciledAt = 0;
   private collisionStepSeconds = 0;
@@ -196,6 +222,25 @@ export class PlayerPredictor {
 
   /** Ring buffer of recent inputs for replay-based reconciliation. */
   private inputBuffer: StoredInput[] = [];
+  private inputSeconds = 0;
+  private discardedThroughSeq: number | undefined;
+  private gapSince: number | undefined;
+  private resyncThroughSeq: number | undefined;
+  private receivedAck: number | undefined;
+  private receivedTick: number | undefined;
+  private lastAuthority: { ack: number; player: Entity } | undefined;
+  private recoveryStatus: PredictionRecoveryDiagnostics["status"] = "ready";
+  private replayStepsThisTick = 0;
+  private replayedThroughSeq = -1;
+  private replayJob:
+    | {
+        candidate: PlayerPredictor;
+        steps: Generator<number>;
+        request: ReconcileRequest;
+        next: IteratorResult<number>;
+      }
+    | undefined;
+  private queuedReconcile: ReconcileRequest | undefined;
 
   /** Last reconciliation correction (predicted - server, before replay). */
   private _lastCorrection = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
@@ -237,7 +282,7 @@ export class PlayerPredictor {
     };
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
     this._prevWz = this.predicted.wz ?? 0;
-    this.inputBuffer = [];
+    this.clearInputHistory();
     this.jumpConsumed = ((serverPlayer.jumpInputState ?? 0) & 1) !== 0;
     this.lastJumpHeld = ((serverPlayer.jumpInputState ?? 0) & 2) !== 0;
     this._lastReconcileDiagnostics = null;
@@ -261,16 +306,35 @@ export class PlayerPredictor {
    * Store an input in the ring buffer for replay-based reconciliation.
    */
   storeInput(seq: number, movement: Movement, dt: number): void {
-    if (this.inputBuffer.length >= INPUT_BUFFER_SIZE) {
-      this.inputBuffer.shift();
-    }
-    this.inputBuffer.push({
+    const input: StoredInput = {
       seq,
-      movement,
+      movement: { ...movement },
       dt,
       physics: this.physics(),
       jumpStateBefore: { jumpConsumed: this.jumpConsumed, lastJumpHeld: this.lastJumpHeld },
-    });
+    };
+    this.inputBuffer.push(input);
+    this.inputSeconds += Number.isFinite(dt) && dt > 0 ? dt : 0;
+    // An in-flight replay also consumes commands generated while it is working.
+    this.replayJob?.candidate.inputBuffer.push(input);
+    while (
+      this.inputBuffer.length > INPUT_BUFFER_SIZE ||
+      this.inputSeconds > INPUT_HISTORY_SECONDS + 1e-9
+    ) {
+      const discarded = this.inputBuffer.shift();
+      if (!discarded) break;
+      this.inputSeconds -= Number.isFinite(discarded.dt) && discarded.dt > 0 ? discarded.dt : 0;
+      this.discardedThroughSeq = discarded.seq;
+      // A scratch replay may already have integrated the removed prefix. Keep
+      // that valid work, but never retain an unbounded second command array.
+      if (
+        this.replayJob &&
+        (this.replayJob.candidate.replayedThroughSeq < discarded.seq ||
+          this.replayJob.candidate.inputBuffer.length > INPUT_BUFFER_SIZE)
+      )
+        this.replayJob = undefined;
+      this.queuedReconcile = undefined;
+    }
   }
 
   /**
@@ -285,7 +349,6 @@ export class PlayerPredictor {
     entities: readonly Entity[],
   ): void {
     if (!this.predicted) return;
-
     this.presentationInputSeconds += dt;
     this.presentationInputDt = dt;
 
@@ -332,6 +395,15 @@ export class PlayerPredictor {
     if (this.predictedMount && this.predictedMount.sprite?.clipElapsedMs === undefined)
       tickSpriteAnimation(this.predictedMount, dt);
     this.predictionTime = collisionTime;
+    // Current input is already predicted before scratch recovery may commit it.
+    if (this.replayJob) this.drainReplay();
+    else if (this.queuedReconcile) {
+      const request = this.queuedReconcile;
+      this.queuedReconcile = undefined;
+      this.startReplay(request);
+    }
+    this.lastReplaySteps = this.replayStepsThisTick;
+    this.replayStepsThisTick = 0;
   }
 
   /**
@@ -346,16 +418,256 @@ export class PlayerPredictor {
    * responsive local prediction.
    */
   reconcile(
+    player: Entity,
+    ack: number,
+    world: World,
+    props: readonly Prop[],
+    entities: readonly Entity[],
+    mountId?: number,
+    timing?: ReconcileTiming,
+  ): void {
+    if (
+      (this.receivedAck !== undefined && ack < this.receivedAck) ||
+      (timing?.serverTick !== undefined &&
+        this.receivedTick !== undefined &&
+        timing.serverTick < this.receivedTick)
+    ) {
+      if (!this.replayJob) this.recoveryStatus = "stale";
+      return;
+    }
+    const previous = this.lastAuthority;
+    const discontinuity =
+      this.predicted &&
+      (this.predicted.id !== player.id ||
+        (previous?.ack === ack &&
+          Math.hypot(
+            player.position.wx - previous.player.position.wx,
+            player.position.wy - previous.player.position.wy,
+          ) > SNAP_THRESHOLD));
+    const changedMount = (mountId ?? null) !== this._mountId;
+    this.rememberAuthority(player, ack, timing);
+    if (
+      !this.predicted ||
+      discontinuity ||
+      (changedMount && (this.replayJob || this.discardedThroughSeq !== undefined))
+    ) {
+      this.reset(
+        player,
+        entities.find((e) => e.id === mountId),
+      );
+      this.rememberAuthority(player, ack, timing);
+      return;
+    }
+    if (timing?.simulationTime !== undefined)
+      this.collisionTimeline.record(timing.simulationTime, entities);
+    if (this.resyncThroughSeq !== undefined) {
+      if (ack < this.resyncThroughSeq) {
+        this.recoveryStatus = "resync";
+        return;
+      }
+      this.resyncThroughSeq = undefined;
+    }
+    if (this.discardedThroughSeq !== undefined) {
+      if (ack < this.discardedThroughSeq) {
+        if (
+          this.replayJob &&
+          this.replayJob.candidate.replayedThroughSeq >= this.discardedThroughSeq
+        )
+          return;
+        this.replayJob = undefined;
+        this.queuedReconcile = undefined;
+        this.gapSince ??= this.clock();
+        this.recoveryStatus = "history-gap";
+        if (this.clock() - this.gapSince >= HISTORY_GAP_GRACE_SECONDS) {
+          const fence = this.inputBuffer.at(-1)?.seq ?? this.discardedThroughSeq;
+          this.reset(
+            player,
+            entities.find((e) => e.id === mountId),
+          );
+          this.rememberAuthority(player, ack, timing);
+          // Old snapshots cannot replay the suffix against an incomplete baseline.
+          this.resyncThroughSeq = fence;
+          this.recoveryStatus = "resync";
+        }
+        return;
+      }
+      this.discardedThroughSeq = this.gapSince = undefined;
+    }
+    const request = { player, ack, world, props, entities, mountId, timing };
+    const cost = this.replayCost(ack);
+    if (this.replayJob) {
+      if (cost <= REPLAY_STEP_BUDGET - this.replayStepsThisTick) {
+        this.replayJob = undefined;
+        this.queuedReconcile = undefined;
+      } else {
+        // Retain progress; newer snapshots do not restart a long replay every tick.
+        this.queuedReconcile = this.freezeRequest(request);
+        return;
+      }
+    }
+    this.queuedReconcile = undefined;
+    this.startReplay(request);
+  }
+
+  get recoveryDiagnostics(): PredictionRecoveryDiagnostics {
+    return {
+      status: this.recoveryStatus,
+      retainedInputs: this.inputBuffer.length,
+      retainedSeconds: this.inputSeconds,
+      discardedThroughSeq: this.discardedThroughSeq,
+      replayStepsThisTick: this.lastReplaySteps,
+      replayAck: this.replayJob?.request.ack,
+    };
+  }
+  private lastReplaySteps = 0;
+
+  /** Internal relocation/resync resets must retain this snapshot's admission fence. */
+  private rememberAuthority(player: Entity, ack: number, timing?: ReconcileTiming): void {
+    this.receivedAck = ack;
+    this.receivedTick = timing?.serverTick ?? this.receivedTick;
+    this.lastAuthority = { ack, player: this.clonePlayer(player) };
+  }
+
+  private clearInputHistory(): void {
+    this.inputBuffer = [];
+    this.inputSeconds = 0;
+    this.discardedThroughSeq = this.gapSince = this.resyncThroughSeq = undefined;
+    this.receivedAck = this.receivedTick = undefined;
+    this.lastAuthority = undefined;
+    this.replayJob = undefined;
+    this.queuedReconcile = undefined;
+    this.recoveryStatus = "ready";
+    this.replayStepsThisTick = this.lastReplaySteps = 0;
+  }
+
+  private replayCost(ack: number): number {
+    let count = 0;
+    for (const input of this.inputBuffer) {
+      if (input.seq > ack) count += Math.max(1, splitInputStepDurations(input.dt).length);
+      if (count > REPLAY_STEP_BUDGET) break;
+    }
+    return count;
+  }
+
+  private freezeRequest(request: ReconcileRequest): ReconcileRequest {
+    return {
+      ...request,
+      player: this.clonePlayer(request.player),
+      // Replicas are mutated by subsequent frames. Preserve this replay's baseline.
+      entities: request.entities.map((e) => ({
+        ...e,
+        position: { ...e.position },
+        velocity: e.velocity && { ...e.velocity },
+        sprite: e.sprite && { ...e.sprite },
+        collider: e.collider && { ...e.collider },
+        wanderAI: e.wanderAI && { ...e.wanderAI },
+      })),
+      props: request.props.slice(),
+    };
+  }
+
+  /** Physics state only; the live input and animation clocks remain owned by this predictor. */
+  private copyPredictionState(source: PlayerPredictor): void {
+    this.predicted = source.predicted;
+    this.predictedMount = source.predictedMount;
+    this._mountId = source._mountId;
+    this.mountOffsetX = source.mountOffsetX;
+    this.mountOffsetY = source.mountOffsetY;
+    this.jumpConsumed = source.jumpConsumed;
+    this.lastJumpHeld = source.lastJumpHeld;
+    this._prevPosition = source._prevPosition;
+    this._prevJumpZ = source._prevJumpZ;
+    this._prevWz = source._prevWz;
+    this._mountPrevPosition = source._mountPrevPosition;
+    this.support = source.support;
+    this.supportOffset = source.supportOffset;
+    this.prevSupportOffset = source.prevSupportOffset;
+    this.supportDisplayShift = source.supportDisplayShift;
+    this.flightDisplayShift = source.flightDisplayShift;
+    this.poseSourceSeconds = source.poseSourceSeconds;
+    this.prevPoseSourceSeconds = source.prevPoseSourceSeconds;
+    this.sourceFrameSeconds = source.sourceFrameSeconds;
+    this.presentationError = source.presentationError;
+    this.prevPresentationError = source.prevPresentationError;
+    this.predictionTime = source.predictionTime;
+    this.reconciledAt = source.reconciledAt;
+    this.collisionStepSeconds = source.collisionStepSeconds;
+    this._lastCorrection = source._lastCorrection;
+    this._lastReconcileDiagnostics = source._lastReconcileDiagnostics;
+  }
+
+  private startReplay(request: ReconcileRequest): void {
+    const cost = this.replayCost(request.ack);
+    if (cost <= REPLAY_STEP_BUDGET - this.replayStepsThisTick) {
+      for (const steps of this.reconcileSteps(
+        request.player,
+        request.ack,
+        request.world,
+        request.props,
+        request.entities,
+        request.mountId,
+        request.timing,
+      ))
+        this.replayStepsThisTick += steps;
+      this.lastReplaySteps = this.replayStepsThisTick;
+      this.recoveryStatus = "ready";
+      return;
+    }
+    const frozen = this.freezeRequest(request);
+    const candidate = new PlayerPredictor(this.physics, this.physicsMult, this.clock);
+    candidate.copyPredictionState(this);
+    candidate.predicted = this.predicted && this.clonePlayer(this.predicted);
+    candidate.predictedMount = this.predictedMount && this.clonePlayer(this.predictedMount);
+    candidate.inputBuffer = this.inputBuffer.slice();
+    candidate.collisionTimeline = this.collisionTimeline.fork();
+    candidate.noclip = this.noclip;
+    const steps = candidate.reconcileSteps(
+      frozen.player,
+      frozen.ack,
+      frozen.world,
+      frozen.props,
+      frozen.entities,
+      frozen.mountId,
+      frozen.timing,
+      this,
+    );
+    this.replayJob = { candidate, steps, request: frozen, next: steps.next() };
+    this.recoveryStatus = "replaying";
+    this.drainReplay();
+  }
+
+  private drainReplay(): void {
+    const job = this.replayJob;
+    if (!job) return;
+    const started = this.clock();
+    while (
+      !job.next.done &&
+      this.replayStepsThisTick + job.next.value <= REPLAY_STEP_BUDGET &&
+      this.clock() - started < REPLAY_TIME_BUDGET_SECONDS
+    ) {
+      this.replayStepsThisTick += job.next.value;
+      job.next = job.steps.next();
+    }
+    this.lastReplaySteps = this.replayStepsThisTick;
+    if (!job.next.done) return;
+    this.copyPredictionState(job.candidate);
+    // Keep live collision arrivals, but use the replay's current physics horizon.
+    this.trimInputBuffer(job.request.ack);
+    this.replayJob = undefined;
+    this.recoveryStatus = "ready";
+  }
+
+  private *reconcileSteps(
     serverPlayer: Entity,
     lastProcessedInputSeq: number,
     world: World,
     props: readonly Prop[],
     entities: readonly Entity[],
     mountEntityId?: number,
-    diagnostics?: { expectedInputDt?: number; serverTick?: number; simulationTime?: number },
-  ): void {
+    diagnostics?: ReconcileTiming,
+    live?: PlayerPredictor,
+  ): Generator<number> {
     if (diagnostics?.simulationTime !== undefined) {
-      this.collisionTimeline.record(diagnostics.simulationTime, entities);
       this.predictionTime = diagnostics.simulationTime;
       this.reconciledAt = this.clock();
       this.collisionStepSeconds = diagnostics.expectedInputDt ?? 0;
@@ -369,12 +681,12 @@ export class PlayerPredictor {
       return;
     }
 
-    const oldSupportId = this.support?.id;
-    const oldOffset = this.supportOffset && { ...this.supportOffset };
-    const oldPoseSourceSeconds = this.poseSourceSeconds;
-    const oldMomentumX = this.predicted.airMomentumX;
-    const oldMomentumY = this.predicted.airMomentumY;
-    const predictedBefore = this.snapshotEntity(this.predicted);
+    let oldSupportId = this.support?.id;
+    let oldOffset = this.supportOffset && { ...this.supportOffset };
+    let oldPoseSourceSeconds = this.poseSourceSeconds;
+    let oldMomentumX = this.predicted.airMomentumX;
+    let oldMomentumY = this.predicted.airMomentumY;
+    let predictedBefore = this.snapshotEntity(this.predicted);
     const authoritative = this.snapshotEntity(serverPlayer);
     this._lastCorrection = {
       wx: predictedBefore.wx - authoritative.wx,
@@ -468,7 +780,9 @@ export class PlayerPredictor {
 
       // Replay unacknowledged inputs on mount
       for (const input of this.inputBuffer) {
+        yield Math.max(1, splitInputStepDurations(input.dt).length);
         this.applyInput(input.movement, input.dt, world, props, entities, input.physics);
+        this.replayedThroughSeq = input.seq;
       }
 
       // Snap check for mount teleport
@@ -558,7 +872,9 @@ export class PlayerPredictor {
       }
       // Replay unacknowledged inputs on top of server position
       for (const input of this.inputBuffer) {
+        yield Math.max(1, splitInputStepDurations(input.dt).length);
         this.applyInput(input.movement, input.dt, world, props, entities, input.physics);
+        this.replayedThroughSeq = input.seq;
       }
 
       // If position changed drastically (teleport/knockback), also snap
@@ -572,6 +888,57 @@ export class PlayerPredictor {
           wy: this.predicted.position.wy,
         };
       }
+    }
+
+    if (live?.predicted) {
+      // Scratch physics becomes visible only when it has reached the newest input.
+      // Compare with the current live pose, not the pose several frames ago.
+      oldSupportId = live.support?.id;
+      oldOffset = live.supportOffset && { ...live.supportOffset };
+      oldPoseSourceSeconds = live.poseSourceSeconds;
+      oldMomentumX = live.predicted.airMomentumX;
+      oldMomentumY = live.predicted.airMomentumY;
+      predictedBefore = live.snapshotEntity(live.predicted);
+      this.reconciledAt = live.clock();
+      this._prevPosition = { ...live._prevPosition };
+      this._prevJumpZ = live._prevJumpZ;
+      this._prevWz = live._prevWz;
+      this._mountPrevPosition = { ...live._mountPrevPosition };
+      this.prevSupportOffset = live.prevSupportOffset;
+      this.prevPoseSourceSeconds = live.prevPoseSourceSeconds;
+      this.presentationError = live.presentationError;
+      this.prevPresentationError = live.prevPresentationError;
+      this.predicted.sprite = predictionSprite(live.predicted.sprite, this.predicted.sprite);
+      if (this.predictedMount && live.predictedMount?.id === this.predictedMount.id)
+        this.predictedMount.sprite = predictionSprite(
+          live.predictedMount.sprite,
+          this.predictedMount.sprite,
+        );
+      if (
+        Math.hypot(
+          this.predicted.position.wx - predictedBefore.wx,
+          this.predicted.position.wy - predictedBefore.wy,
+        ) > SNAP_THRESHOLD
+      )
+        this._prevPosition = { ...this.predicted.position };
+      if (
+        this.predictedMount &&
+        live.predictedMount &&
+        Math.hypot(
+          this.predictedMount.position.wx - live.predictedMount.position.wx,
+          this.predictedMount.position.wy - live.predictedMount.position.wy,
+        ) > SNAP_THRESHOLD
+      )
+        this._mountPrevPosition = { ...this.predictedMount.position };
+      this._lastCorrection = {
+        wx: predictedBefore.wx - authoritative.wx,
+        wy: predictedBefore.wy - authoritative.wy,
+        wz: predictedBefore.wz - authoritative.wz,
+        vx: predictedBefore.vx - authoritative.vx,
+        vy: predictedBefore.vy - authoritative.vy,
+        jumpVZ: predictedBefore.jumpVZ - authoritative.jumpVZ,
+      };
+      replayStats = this.collectReplayStats();
     }
 
     // Copy server-authoritative state that we don't predict
@@ -727,7 +1094,7 @@ export class PlayerPredictor {
     this.collisionTimeline.clear();
     this.predictionTime = undefined;
     this.predictedMount = null;
-    this.inputBuffer = [];
+    this.clearInputHistory();
     this._lastReconcileDiagnostics = null;
   }
 
@@ -952,6 +1319,10 @@ export class PlayerPredictor {
     } else if (firstUnackedIdx > 0) {
       this.inputBuffer = this.inputBuffer.slice(firstUnackedIdx);
     }
+    this.inputSeconds = this.inputBuffer.reduce(
+      (sum, input) => sum + (Number.isFinite(input.dt) && input.dt > 0 ? input.dt : 0),
+      0,
+    );
   }
 
   private snapshotEntity(entity: Entity): ReconcileStateSnapshot {

@@ -6,7 +6,14 @@
 runs real-Worker short/long authority stalls, a main-thread stall and delayed
 outgoing-command controls in isolated bundled Chromium. It measures unchanged
 local walk frames, sampled prediction steps, post-replay error and history occupancy.
-It owns ephemeral worlds/data and closes its browser/server. Add
+It asserts a complete flat-world descriptor. Add `--extended --assert-recovery`
+for seven-/nine-second stalls and input/replay budget/backward-step gates. The
+nine-second case characterizes overflow beyond the supported history; the
+main-thread case is a drawing-stall control. Reports include recovery status,
+retained command duration/count and replay subdivisions per prediction tick.
+Earlier runs used an invalid incomplete descriptor and actually created the
+menu's default regional world; they are not flat-world parity evidence.
+It owns ephemeral worlds/data and closes its browser/server (owned tabs on CDP). Add
 `--predicted-animation` to test the local phase prototype against older source.
 It is a no-op when the production local-clock implementation is already present. For the attached phone, use `--cdp="$PHONE_CDP_URL" --port="$PHONE_HTTP_PORT"`
 after setting up task-owned USB forwarding/reverse routes through machine-control's

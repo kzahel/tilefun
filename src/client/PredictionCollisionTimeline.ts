@@ -15,6 +15,12 @@ export class PredictionCollisionTimeline {
     this.history.clear();
     this.cache = undefined;
   }
+  /** A replay spanning frames must retain the trajectories it started with. */
+  fork(): PredictionCollisionTimeline {
+    const timeline = new PredictionCollisionTimeline();
+    timeline.history = new Map(Array.from(this.history, ([id, samples]) => [id, samples.slice()]));
+    return timeline;
+  }
   record(time: number, entities: readonly Entity[]): void {
     this.cache = undefined;
     const ids = new Set(entities.map((e) => e.id));

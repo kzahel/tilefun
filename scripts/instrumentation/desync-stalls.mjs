@@ -10,6 +10,8 @@ import { predictedAnimationControl } from "./predicted-animation-control.mjs";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const predictedAnimation = process.argv.includes("--predicted-animation");
+const extended = process.argv.includes("--extended");
+const assertRecovery = process.argv.includes("--assert-recovery");
 const endpoint = process.argv.find((arg) => arg.startsWith("--cdp="))?.slice(6);
 const port = Number(process.argv.find((arg) => arg.startsWith("--port="))?.slice(7) ?? 0);
 if (endpoint && !port) throw Error("Physical CDP requires a dedicated --port");
@@ -62,12 +64,19 @@ const report = {
   predictedAnimation,
   physical: !!endpoint,
 };
+const ownedPages = new Set();
 try {
   for (const [kind, ms] of [
     ["baseline", 0],
     ["worker", 350],
     ["worker", 750],
     ["worker", 2500],
+    ...(extended
+      ? [
+          ["worker", 7000],
+          ["worker", 9000],
+        ]
+      : []),
     ["main", 350],
     ["tx-delay", 750],
     ["tx-delay", 2500],
@@ -76,6 +85,7 @@ try {
       ? browser.contexts()[0]
       : await browser.newContext({ viewport: { width: 1280, height: 900 } });
     const page = await context.newPage();
+    ownedPages.add(page);
     if (endpoint) {
       await page.bringToFront();
       const cdp = await context.newCDPSession(page);
@@ -86,7 +96,7 @@ try {
     }
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    const generation = { type: "flat", seed: 2026 };
+    const generation = { type: "flat", version: "flat-v1", preset: "grass", seed: 2026 };
     await page.goto(
       `${origin}/?perf&nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}`,
     );
@@ -100,6 +110,9 @@ try {
       );
     });
     await page.waitForTimeout(300);
+    const actualGeneration = await page.locator("#game").getAttribute("data-generation");
+    if (JSON.parse(actualGeneration ?? "null")?.type !== "flat")
+      throw Error(`Stall control requires the requested flat world: ${actualGeneration}`);
     await page.evaluate(
       ({ kind, ms }) => {
         const g = document.querySelector("#game").__game;
@@ -130,6 +143,7 @@ try {
             ack: g.stateView.lastProcessedInputSeq,
             tick: g.stateView.serverTick,
             diag: pred?.lastReconcileDiagnostics,
+            recovery: pred?.recoveryDiagnostics,
           });
         };
         window.__samples = samples;
@@ -184,15 +198,38 @@ try {
       animationCols: [...new Set(rows.filter((r) => r.moving).map((r) => r.col))],
       maxResim: Math.max(0, ...rows.map((r) => r.diag?.resimPosErr ?? 0)),
       maxReplay: Math.max(0, ...rows.map((r) => r.diag?.replayCount ?? 0)),
+      maxReplayStepsPerTick: Math.max(0, ...rows.map((r) => r.recovery?.replayStepsThisTick ?? 0)),
+      maxRetainedInputs: Math.max(0, ...rows.map((r) => r.recovery?.retainedInputs ?? 0)),
+      maxRetainedSeconds: Math.max(0, ...rows.map((r) => r.recovery?.retainedSeconds ?? 0)),
+      recoveryStatuses: [...new Set(rows.map((r) => r.recovery?.status).filter(Boolean))],
       errors,
     };
-    report.cases.push({ ...summary, stall, ...data });
+    report.cases.push({ ...summary, generation: JSON.parse(actualGeneration), stall, ...data });
     console.log(JSON.stringify(summary));
     await page.close();
+    ownedPages.delete(page);
     if (!endpoint) await context.close();
   }
   await writeFile(path.join(output, "report.json"), JSON.stringify(report, null, 2));
+  if (assertRecovery) {
+    for (const test of report.cases) {
+      if (test.errors.length) throw Error(`${test.kind}/${test.ms}: page errors`);
+      if (
+        test.maxReplayStepsPerTick > 32 ||
+        test.maxRetainedInputs > 1024 ||
+        test.maxRetainedSeconds > 8.000001
+      )
+        throw Error(`${test.kind}/${test.ms}: recovery budget exceeded`);
+      // Movement is continuously rightward in this flat noclip control. Main
+      // stalls are a rendering control; >8s cases characterize overflow recovery.
+      if (test.kind !== "main" && test.ms <= 8000 && test.minDx < -0.05)
+        throw Error(`${test.kind}/${test.ms}: backward prediction step ${test.minDx}`);
+      if (test.kind !== "main" && test.ms <= 8000 && test.maxResim > 0.05)
+        throw Error(`${test.kind}/${test.ms}: flat-world replay error ${test.maxResim}`);
+    }
+  }
 } finally {
+  for (const page of ownedPages) await page.close().catch(() => {});
   await browser.close();
   await server.close();
   await rm(temp, { recursive: true, force: true });

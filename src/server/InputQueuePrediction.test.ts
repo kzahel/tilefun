@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { required } from "../art/ArtCatalog.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { TICK_RATE } from "../config/constants.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { Movement } from "../input/ActionManager.js";
 import { quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
+import { tileToChunk, tileToLocal } from "../world/types.js";
 import { World } from "../world/World.js";
 import { GameServer } from "./GameServer.js";
 import { browserServerDependencies } from "./hosts/browser.js";
@@ -285,5 +287,81 @@ describe("Client prediction matches server after reconciliation", () => {
 
     expect(predictor.player?.position.wx).toBeCloseTo(session.player.position.wx);
     expect(session.lastProcessedInputSeq).toBe(seq);
+  });
+});
+
+describe("bounded authority stall recovery", () => {
+  it("drains an ordered movement/jump backlog over ticks without acknowledging the suffix early", () => {
+    const { server, transport, session } = createTestServer();
+    const world = server.world;
+    // Isolate input admission from the native world's water-respawn gameplay.
+    for (let tx = -20; tx <= 30; tx++)
+      for (let ty = -4; ty <= 4; ty++) {
+        const { cx, cy } = tileToChunk(tx, ty);
+        const { lx, ly } = tileToLocal(tx, ty);
+        const chunk = world.getChunk(cx, cy);
+        chunk.setCollision(lx, ly, 0);
+        chunk.setHeight(lx, ly, 0);
+      }
+    const predicted = new PlayerPredictor();
+    const prefix = new PlayerPredictor();
+    predicted.noclip = prefix.noclip = true;
+    predicted.reset(session.player);
+    prefix.reset(session.player);
+    const commandDt = quantizeInputDtMs(DT * 1000) / 1000;
+    const commands = Array.from({ length: 150 }, (_, i) => ({
+      ...RIGHT,
+      dx: i < 80 ? 1 : -1,
+      jump: i === 100,
+    }));
+    for (const [i, movement] of commands.entries()) {
+      sendInput(transport, i + 1, movement);
+      predicted.storeInput(i + 1, movement, commandDt);
+      predicted.update(commandDt, movement, world, [], []);
+    }
+    let consumed = 0;
+    while (session.inputQueue.length) {
+      server.tick(DT);
+      expect(session.lastProcessedInputSeq - consumed).toBeLessThanOrEqual(32);
+      expect(session.lastProcessedInputSeq).toBeGreaterThan(consumed);
+      for (; consumed < session.lastProcessedInputSeq; consumed++)
+        prefix.update(commandDt, required(commands[consumed]), world, [], []);
+      expect(
+        session.player.position.wx,
+        `ack=${consumed} server=${JSON.stringify(session.player.velocity)} prefix=${JSON.stringify(prefix.player?.velocity)}`,
+      ).toBeCloseTo(required(prefix.player).position.wx, 8);
+      expect(session.player.jumpVZ).toBe(prefix.player?.jumpVZ);
+      predicted.reconcile(session.player, session.lastProcessedInputSeq, world, [], []);
+    }
+    expect(session.lastProcessedInputSeq).toBe(150);
+    expect(predicted.player?.position.wx).toBeCloseTo(session.player.position.wx, 8);
+    expect(predicted.recoveryDiagnostics.retainedInputs).toBe(0);
+  });
+
+  it("limits subdivisions of large inputs instead of counting packets", () => {
+    const { server, transport, session } = createTestServer();
+    for (let seq = 1; seq <= 5; seq++)
+      transport.clientSide.send({ type: "player-input", seq, ...RIGHT, dtMs: 1500 });
+    server.tick(DT);
+    expect(session.lastProcessedInputSeq).toBe(2);
+    expect(session.inputQueue.map((input) => input.seq)).toEqual([3, 4, 5]);
+    server.tick(DT);
+    expect(session.lastProcessedInputSeq).toBe(4);
+    server.tick(DT);
+    expect(session.lastProcessedInputSeq).toBe(5);
+    expect(session.inputQueue).toHaveLength(0);
+  });
+
+  it("entering editor clears a deferred backlog and acknowledges the last queued input", () => {
+    const { server, transport, session } = createTestServer();
+    for (let seq = 1; seq <= 100; seq++) sendInput(transport, seq, RIGHT);
+    server.tick(DT);
+    expect(session.lastProcessedInputSeq).toBe(32);
+    const position = { ...session.player.position };
+    transport.clientSide.send({ type: "set-editor-mode", enabled: true });
+    expect(session.lastProcessedInputSeq).toBe(100);
+    expect(session.inputQueue).toHaveLength(0);
+    server.tick(DT);
+    expect(session.player.position).toEqual(position);
   });
 });

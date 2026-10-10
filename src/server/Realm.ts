@@ -71,6 +71,7 @@ import {
   applyFriction,
   applyPlatformerAirFriction,
   getMovementPhysicsParams,
+  INPUT_BACKLOG_STEP_BUDGET,
   initiateJump,
   MAX_INPUT_STEP_SECONDS,
   type PlayerStepOutcome,
@@ -668,8 +669,21 @@ export class Realm {
       }
 
       if (!session.editorEnabled && session.inputQueue.length > 0) {
-        const inputs = session.inputQueue;
-        session.inputQueue = [];
+        // Preserve command order, edges and dt while spreading stall recovery
+        // over ticks. Limit physics subdivisions, rather than just packet count.
+        let admitted = 0;
+        let inputSteps = 0;
+        for (const input of session.inputQueue) {
+          const cost = Math.max(
+            1,
+            splitInputStepDurations(this.resolveInputStepDt(input.dtMs, dt)).length,
+          );
+          if (inputSteps + cost > INPUT_BACKLOG_STEP_BUDGET) break;
+          inputSteps += cost;
+          admitted++;
+        }
+        const inputs = session.inputQueue.slice(0, admitted);
+        session.inputQueue = session.inputQueue.slice(admitted);
         let passiveSeconds = dt;
         const takeAirMomentumDt = () => {
           const admitted = passiveSeconds;

@@ -249,6 +249,9 @@ export const MAX_INPUT_STEP_SECONDS = 0.1;
 /** Safety cap for internal subdivisions per input command. */
 export const MAX_INPUT_SUBSTEPS = 16;
 
+/** Per-player backlog work per tick, shared by authority admission and client replay. */
+export const INPUT_BACKLOG_STEP_BUDGET = 32;
+
 /**
  * Split one input command dt into bounded simulation slices.
  * Keeps both server and predictor deterministic at large command intervals.

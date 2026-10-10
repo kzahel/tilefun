@@ -2,8 +2,8 @@
 
 Topic: player-prediction
 Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
-support travel verified; local predicted animation delivered. Varying motion and
-history-overflow recovery remain next.
+support travel verified; local predicted animation and bounded backlog recovery
+delivered. Varying moving-contact acceptance remains next.
 Updated: 2026-10-10.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
@@ -153,10 +153,21 @@ model/clip changes and resets use the new authoritative sprite. Physically timed
 clips retain their authority phase. This fixes the local walk-frame stall found
 by the [mobile investigation](../research/mobile-desync-investigation.md).
 
-The 128-command history still has no explicit overflow recovery: a 2.5-second
-Worker stall can exhaust it and produce a backward correction. Follow up with
-history/old-ack diagnostics and recovery, then a moving physical-phone playtest.
-The user's original saved session has not been captured.
+[089](../tactical/089-prediction-backlog-recovery.md) replaces silent history loss
+with an eight-second/1,024-command history, explicit gap/old-ack handling and
+bounded scratch replay. Game input numbering now survives Edit/Play replacements
+through transport-owned sequence state; internal relocation resets retain the
+latest acknowledgement fence. Authority drains at most 32 input subdivisions per player
+per tick; client replay shares that allowance across reconciliation/update and
+checks a 2ms elapsed target between commands. New local input/animation continues;
+only a complete replay pose is committed. Fresh acknowledgements can supersede
+scratch work; other arrivals coalesce without restarting it. Explicit resets and
+recovery mount changes cancel pending work. An uncovered history gap gets a 250ms
+acknowledgement grace before explicit authority resync with a sequence fence.
+The tactical records native controls, the corrected flat-world diagnostic fixture,
+and limits: changing terrain/NPC contacts and longer-than-history outages can
+still cause legitimate correction. Next is ordinary moving countryside/contact
+play on the physical phone. The user's original saved session has not been captured.
 
 Repeat the user's refresh/background playtest, then add longer authority-debt,
 reconciliation and varying-speed/gap cases before broad passenger acceptance. Preserve the passing fast local-player controls; the existing 250ms

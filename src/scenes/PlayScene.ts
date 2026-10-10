@@ -1,6 +1,7 @@
 import { AmbientSystem } from "../audio/AmbientSystem.js";
 import { FootstepSystem } from "../audio/FootstepSystem.js";
 import type { RemoteStateView } from "../client/ClientStateView.js";
+import { nextInputSequence, observeInputSequence } from "../client/InputSequence.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
@@ -73,7 +74,6 @@ export class PlayScene implements GameScene {
   readonly transparent = false;
   lastMovement = { dx: 0, dy: 0 };
   private predictor: PlayerPredictor | null = null;
-  private inputSeq = 0;
   private prevInvincibilityTimer = 0;
   private zoomUnsubs: (() => void)[] = [];
   private particles = new ParticleSystem();
@@ -155,6 +155,7 @@ export class PlayScene implements GameScene {
     if (gc.serialized) {
       this.predictor = new PlayerPredictor();
       const remoteView = gc.stateView as RemoteStateView;
+      observeInputSequence(gc.transport, remoteView.lastProcessedInputSeq);
       remoteView.setPredictor(this.predictor);
       // Initialize from current server state if available
       const serverPlayer = remoteView.serverPlayerEntity;
@@ -281,7 +282,7 @@ export class PlayScene implements GameScene {
       jump: rawMovement.jump,
       jumpPressed,
     };
-    const seq = ++this.inputSeq;
+    const seq = nextInputSequence(gc.transport);
     gc.transport.send({
       type: "player-input",
       seq,
@@ -559,7 +560,7 @@ export class PlayScene implements GameScene {
     this.throwChargeTime = 0;
     transport.send({
       type: "player-input",
-      seq: ++this.inputSeq,
+      seq: nextInputSequence(transport),
       dx: 0,
       dy: 0,
       sprinting: false,
