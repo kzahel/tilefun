@@ -27,7 +27,11 @@ for (const mode of ["canvas", "gpu"]) {
       .poll(async () => Number(await canvas.getAttribute("data-player-y")))
       .toBeLessThan(14);
     await page.keyboard.up("ArrowUp");
-    expect(Number(await canvas.getAttribute("data-player-y"))).toBeGreaterThanOrEqual(2.99);
+    // The published position is predicted; release can precede the next
+    // authority reconciliation. Require the same collision bound after settling.
+    await expect
+      .poll(async () => Number(await canvas.getAttribute("data-player-y")))
+      .toBeGreaterThanOrEqual(2.99);
     await expect(canvas).toHaveAttribute("data-camera-x", "0");
     await expect(canvas).toHaveAttribute("data-camera-y", cameraY);
     await page.getByRole("button", { name: "Reset walker", exact: true }).click();

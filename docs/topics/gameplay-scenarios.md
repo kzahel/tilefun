@@ -149,6 +149,9 @@ Review startup does not await the initial host: a setting can replace it before
 its first Worker response. The replacement owns readiness while review sync
 continues independently. A browser regression holds that initial response and
 changes collision height before the replacement becomes ready.
+Outdoor browser collision checks retain their exact boundary after waiting for
+the predicted player position to reconcile following input release; GPU
+presentation can publish a transient leading position before the next snapshot.
 Explicit authority clock fences also reset timed sprite clips to their latest
 replicated phase. Local animation ticks can advance without a new sprite delta;
 pausing must freeze the saved authority frame so reload does not change it.
