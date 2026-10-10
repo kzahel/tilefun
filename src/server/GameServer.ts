@@ -1378,6 +1378,25 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
+      case "call-train": {
+        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+        void this.trackOperation(
+          realm
+            ? realm.callTrain(session, msg.benchId)
+            : Promise.reject(Error("Train unavailable.")),
+        )
+          .then(() =>
+            this.transport.send(clientId, { type: "train-called", requestId: msg.requestId }),
+          )
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: error instanceof Error ? error.message : String(error),
+            }),
+          );
+        return;
+      }
       case "enter-vehicle":
       case "exit-vehicle": {
         try {

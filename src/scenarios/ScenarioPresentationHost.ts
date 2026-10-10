@@ -126,7 +126,9 @@ export class ScenarioPresentationHost {
         this.command(
           request.type === "enter-vehicle"
             ? { kind: "enter-vehicle", entityId: request.entityId }
-            : { kind: "exit-vehicle" },
+            : request.type === "call-train"
+              ? { kind: "call-train", benchId: request.benchId }
+              : { kind: "exit-vehicle" },
         ),
       );
       this.vehicleControl.root.style.position = "absolute";

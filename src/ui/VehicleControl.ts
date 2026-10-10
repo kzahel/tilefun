@@ -1,8 +1,12 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
+import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
 
-type VehicleRequest = { type: "enter-vehicle"; entityId: number } | { type: "exit-vehicle" };
+type VehicleRequest =
+  | { type: "enter-vehicle"; entityId: number }
+  | { type: "exit-vehicle" }
+  | { type: "call-train"; benchId: number };
 export class VehicleControl {
   readonly root = document.createElement("div");
   readonly button = document.createElement("button");
@@ -40,17 +44,28 @@ export class VehicleControl {
             boardingDistance(p, e) <= 32,
         )
         .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0];
-    const key = current ? `inside:${current.id}` : candidate ? `near:${candidate.id}` : "";
+    const bench = !candidate ? nearestStationBench(p, view.props) : undefined;
+    const key = current
+      ? `inside:${current.id}`
+      : candidate
+        ? `near:${candidate.id}`
+        : bench
+          ? `bench:${bench.id}`
+          : "";
     if (key !== this.targetKey) {
       this.status.textContent = "";
       this.error = false;
       this.targetKey = key;
     }
     this.request =
-      allowed && !view.editorEnabled && candidate
+      allowed && !view.editorEnabled
         ? current
           ? { type: "exit-vehicle" }
-          : { type: "enter-vehicle", entityId: candidate.id }
+          : candidate
+            ? { type: "enter-vehicle", entityId: candidate.id }
+            : bench
+              ? { type: "call-train", benchId: bench.id }
+              : null
         : null;
     this.root.hidden = !this.request;
     this.button.disabled = this.busy || locked;
@@ -58,7 +73,9 @@ export class VehicleControl {
       ? "Get out · E"
       : candidate && isTrain(candidate)
         ? "Drive train · E"
-        : "Drive car · E";
+        : bench
+          ? "Call train · E"
+          : "Drive car · E";
     if (this.button.textContent !== label) this.button.textContent = label;
     if (current && !this.busy && !this.error) {
       const hint = isTrain(current)
@@ -78,8 +95,15 @@ export class VehicleControl {
     this.busy = true;
     this.status.textContent = "";
     this.error = false;
-    void this.send(this.request)
+    const request = this.request;
+    const targetKey = this.targetKey;
+    void this.send(request)
+      .then(() => {
+        if (request.type === "call-train" && this.targetKey === targetKey)
+          this.status.textContent = "Poof! Your train is here.";
+      })
       .catch((error) => {
+        if (this.targetKey !== targetKey) return;
         this.error = true;
         this.status.textContent = String(error);
       })

@@ -3,6 +3,7 @@ import type { Movement } from "../input/ActionManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export type ScenarioCommand =
+  | { kind: "call-train"; benchId: number }
   | { kind: "enter-vehicle"; entityId: number }
   | { kind: "exit-vehicle" }
   | { kind: "view-range"; range: ChunkRange }

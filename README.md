@@ -76,6 +76,11 @@ tap the same side again to stop. **Get out · E** stops and finds clear ground.
 Off-road cars stay parked and saved; cars on suitable roads resume traffic.
 See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md).
 
+Waiting for a train? Go beside or onto a station bench in Play mode and tap
+**Call train · E** (or press E). The same train appears immediately at that station
+and waits eight seconds to let you board. If someone is driving or riding it,
+call again after they get off. The station track must be clear and intact.
+
 The editor tray uses at most half the visible screen, including its header and
 tabs. Swipe the category tabs horizontally and scroll the palette vertically;
 the tabs stay visible while browsing. Tap the selected-item header to minimize

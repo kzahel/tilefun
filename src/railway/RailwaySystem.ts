@@ -14,11 +14,13 @@ import { stepCurvedTrain } from "./CurvedRailMotion.js";
 import { createCurveTrain } from "./CurveTrain.js";
 import { type RailPath, railAlignment } from "./RailPath.js";
 import type { RailLine } from "./RailwayPlanner.js";
+import { besideStationBench } from "./StationBench.js";
 import { createTrain, createTrainCarriages, TRAIN_LENGTH } from "./Train.js";
 import { carryTrainPassengers, planTrainPassengers } from "./TrainPassengers.js";
 
 /** Legacy straight tile route, or an opt-in world-pixel alignment with station distances. */
 export type RailRoute = Pick<RailLine, "id" | "y" | "start" | "end"> & {
+  stations?: Pick<RailLine, "stations">["stations"];
   path?: RailPath;
   /** Authored straight grade proof. Generated services retain their flat whole-train body. */
   surfaceFollowing?: { startZ: number; endZ: number; startAtEnd?: boolean };
@@ -102,6 +104,140 @@ export class RailwaySystem {
       scope: s.line.id,
       value: { ...s.record },
     }));
+  }
+  /** Recall the existing, unoccupied service; never create a duplicate or undo deletion. */
+  async callTrain(player: Entity, benchId: number, allowed: () => boolean = () => true) {
+    const bench = this.props.props.find((p) => p.id === benchId);
+    const validate = () => {
+      if (this.closed || !allowed() || this.saves.pressured)
+        throw Error("Calling the train is unavailable right now.");
+      if (!bench || !this.props.props.includes(bench) || !besideStationBench(player, bench))
+        throw Error("Go to a station bench to call the train.");
+    };
+    validate();
+    const x = player.position.wx / 16,
+      y = player.position.wy / 16;
+    const line = this.planner
+      .query({ minX: x - 32, maxX: x + 32, minY: y - 32, maxY: y + 32 })
+      .find((route) =>
+        route.stations?.some((station) =>
+          [-12, 12].some(
+            (dx) =>
+              bench?.proceduralId === `${station.id}:bench:${dx}` &&
+              bench.position.wx === (station.x + dx) * 16 &&
+              bench.position.wy === (station.y - 4) * 16,
+          ),
+        ),
+      );
+    if (!line) throw Error("This bench is not at a train station.");
+    await this.pending.get(line.id);
+    validate();
+    const s = this.services.get(line.id);
+    const unoccupied = () => {
+      if (!s || this.services.get(line.id) !== s || s.retiring || s.record.deleted)
+        throw Error("The train is unavailable. Try again shortly.");
+      if (
+        s.driverId !== undefined ||
+        this.entities.entities.some((p) =>
+          s.carriages.some(
+            (car) =>
+              p.parentId === car.id ||
+              roofSupport(p, [car]) !== undefined ||
+              // Jumping passengers should keep their train beneath them, too.
+              (p.jumpVZ !== undefined &&
+                p.collider &&
+                (p.wz ?? 0) >= (car.wz ?? 0) + (car.collider?.physicalHeight ?? 44) &&
+                aabbsOverlap(
+                  getEntityAABB(p.position, p.collider),
+                  getEntityAABB(car.position, required(car.collider)),
+                )),
+          ),
+        )
+      )
+        throw Error("Someone is riding this train. Wait until they get off.");
+    };
+    unoccupied();
+    const service = required(s);
+    const index = required(line.stations).findIndex((station) =>
+      bench?.proceduralId?.startsWith(`${station.id}:bench:`),
+    );
+    const station = required(required(line.stations)[index]);
+    const alignment = line.path ? railAlignment(line.path) : undefined;
+    const distance = alignment?.path.stops[index]?.distance;
+    const poses = alignment
+      ? createCurveTrain(alignment, required(distance))
+      : line.surfaceFollowing
+        ? createTrainCarriages(
+            station.x * 16,
+            station.y * 16,
+            Array(3).fill(index === 0 ? line.surfaceFollowing.startZ : line.surfaceFollowing.endZ),
+          )
+        : [createTrain(station.x * 16, station.y * 16)];
+    await this.prepare?.(
+      this.range({
+        ...service,
+        entity: required(poses[alignment || line.surfaceFollowing ? 1 : 0]),
+      }),
+    );
+    validate();
+    unoccupied();
+    // Check only the destination, not the intervening route: the requested move is instant.
+    for (const pose of poses) {
+      const box = getEntityAABB(pose.position, required(pose.collider));
+      const z = pose.wz ?? 0,
+        height = pose.collider?.physicalHeight ?? 44;
+      const props = this.props.getPropsInChunkRange(
+        Math.floor(box.left / 256),
+        Math.floor(box.top / 256),
+        Math.floor(box.right / 256),
+        Math.floor(box.bottom / 256),
+      );
+      if (
+        props.some((p) => aabbOverlapsPropWalls(box, p.position, p, z, height)) ||
+        this.entities.entities.some(
+          (other) =>
+            !service.carriages.includes(other) &&
+            other.collider &&
+            other.collider.solid !== false &&
+            (other.wz ?? 0) < z + height &&
+            (other.wz ?? 0) + (other.collider.physicalHeight ?? Infinity) > z &&
+            aabbsOverlap(box, getEntityAABB(other.position, other.collider)),
+        )
+      )
+        throw Error("The station track is blocked. Clear it and try again.");
+      for (let tx = Math.floor(box.left / 16); tx <= Math.floor((box.right - 0.001) / 16); tx++)
+        for (let ty = Math.floor(box.top / 16); ty <= Math.floor((box.bottom - 0.001) / 16); ty++) {
+          const road = this.world.getRoadAt(tx, ty);
+          if (
+            (!line.surfaceFollowing && this.world.getHeightAt(tx, ty) !== 0) ||
+            !(alignment
+              ? road === RoadType.RailCurveProof
+              : [RoadType.RailHorizontalTop, RoadType.RailHorizontalBottom].includes(road))
+          )
+            throw Error("The station track needs repairing before calling the train.");
+        }
+    }
+    for (const [i, car] of service.carriages.entries()) {
+      const pose = required(poses[i]);
+      car.position = { ...pose.position };
+      car.prevPosition = { ...pose.position };
+      car.wz = car.groundZ = car.prevWz = pose.wz ?? 0;
+      car.collider = pose.collider;
+      car.velocity = { vx: 0, vy: 0 };
+      if (car.sprite && pose.sprite) {
+        car.sprite.frameRow = pose.sprite.frameRow;
+        car.sprite.moving = false;
+      }
+      this.entities.spatialHash.update(car);
+    }
+    service.speed = 0;
+    service.record.target = index === 0 ? 1 : 0;
+    service.record.dwell = DWELL;
+    if (alignment) {
+      service.record.distance = required(distance);
+      service.record.nextStop = index === 0 ? 1 : index - 1;
+    }
+    this.dirty(service);
   }
   update(players: readonly Entity[]): void {
     if (this.closed) return;

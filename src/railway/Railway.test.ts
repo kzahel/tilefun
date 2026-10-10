@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
+import { createProp } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
@@ -176,6 +177,33 @@ describe("generated railway", () => {
     expect(f.service.entity.position.wx).toBe(f.line.start * 16);
     await f.system.close();
     await f.saves.close();
+  });
+  it("recalls a retired straight service from its saved mid-route position without duplicating it", async () => {
+    const f = await fixture();
+    try {
+      for (let i = 0; i < 12; i++) f.tick();
+      f.system.update([]);
+      await f.system.settle();
+      const station = f.line.stations[1];
+      const bench = createProp("prop-rail-bench", (station.x - 12) * 16, (station.y - 4) * 16);
+      bench.proceduralId = `${station.id}:bench:-12`;
+      f.props.add(bench);
+      f.player.position = { wx: bench.position.wx, wy: bench.position.wy + 16 };
+      f.system.update([f.player]);
+      // Recall also waits for the pending restoration initiated by normal interest.
+      for (let cy = Math.floor(station.y / 16) - 2; cy <= Math.floor(station.y / 16) + 2; cy++)
+        for (let cx = Math.floor(station.x / 16) - 3; cx <= Math.floor(station.x / 16) + 3; cx++)
+          f.world.getChunk(cx, cy);
+      await f.system.callTrain(f.player, bench.id);
+      const service = required(f.system.services.get(f.line.id));
+      expect(service.entity.position.wx).toBe(station.x * 16);
+      expect(service.record.target).toBe(0);
+      expect(service.record.dwell).toBe(8);
+      expect(f.entities.entities.filter((e) => e.type === "train-local-v1")).toHaveLength(1);
+    } finally {
+      await f.system.close();
+      await f.saves.close();
+    }
   });
 });
 

@@ -27,6 +27,7 @@ export interface RealmInfo {
 // ---- Client → Server messages ----
 
 export type ClientMessage =
+  | { type: "call-train"; requestId: number; benchId: number }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }
   | {
@@ -347,6 +348,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 
 export type ServerMessage =
   | { type: "vehicle-controlled"; requestId: number }
+  | { type: "train-called"; requestId: number }
   | import("../interiors/DoorTraversal.js").DoorMotion
   | { type: "storage-status"; paused: boolean; message: string }
   | ({ type: "room-edit-status" } & import("../interiors/GameplayRoom.js").RoomEditStatus)

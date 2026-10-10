@@ -3452,6 +3452,10 @@
         {
           "system": "Gameplay",
           "source": "src/railway/RailwayStrategy.ts:132"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/railway/StationBench.ts:8"
         }
       ]
     },
@@ -23225,11 +23229,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1277"
+          "source": "src/server/Realm.ts:1290"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2268"
+          "source": "src/server/Realm.ts:2281"
         },
         {
           "system": "Gameplay",
@@ -23933,7 +23937,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2234"
+          "source": "src/server/Realm.ts:2247"
         },
         {
           "system": "Gameplay",
@@ -25229,7 +25233,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:313"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:315"
         },
         {
           "system": "Editor",

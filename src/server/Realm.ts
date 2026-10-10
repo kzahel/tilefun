@@ -217,6 +217,19 @@ export class Realm {
   private proceduralActors!: ProceduralActors;
   traffic: TrafficSystem | null = null;
   railway: RailwaySystem | null = null;
+  async callTrain(session: PlayerSession, benchId: number): Promise<void> {
+    if (!this.railway || !Number.isSafeInteger(benchId)) throw Error("Train unavailable.");
+    await this.railway.callTrain(
+      session.player,
+      benchId,
+      () =>
+        !session.editorEnabled &&
+        !session.transitioning &&
+        !session.retired &&
+        session.realmId === this.currentWorldId &&
+        session.gameplaySession.mountId === null,
+    );
+  }
   private proceduralProps: ProceduralProps;
 
   /** Sessions currently in this realm. */

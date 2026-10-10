@@ -388,6 +388,10 @@ export class ScenarioSession {
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
     const player = this.player.player;
+    if (command.kind === "call-train") {
+      await this.realm.callTrain(this.player, command.benchId);
+      return;
+    }
     if (command.kind === "enter-vehicle") {
       this.realm.vehicles.enter(this.player, command.entityId);
       return;

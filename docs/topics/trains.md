@@ -8,6 +8,33 @@ Owns generated railway networks, town stations, train services, railway structur
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
 [city generation](city-generation.md) owns regional revisions and promotion.
 
+## Calling a train from a station bench
+
+In Play mode, standing beside or on either generated station bench reveals the
+bottom-screen **Call train · E** button. Tap it or press E to bring the existing
+service instantly to that station, stopped with a fresh eight-second boarding
+pause and its next destination pointing away from the station. A short
+**Poof! Your train is here.** message confirms arrival. Bench proximity includes
+the 12px seat; this does not introduce a separate seated animation/action.
+
+The shared RailwaySystem owns recall for straight and curved generated services.
+It waits for pending service restoration and destination terrain readiness,
+then rechecks bench proximity, realm/session eligibility, service identity,
+occupancy and destination clearance before committing all carriage poses.
+Drivers, roof riders (including jumping passengers), blocked/edited-away track,
+deleted services and moved/non-station benches prevent recall. A call neither
+duplicates a train nor revives an explicitly deleted one. The recalled location,
+direction and dwell persist in the existing service record. Normal retirement
+still freezes a service at its saved location; lifetime changes in 066 stay deferred.
+
+The game and embedded production city-train lab use the same prompt and authority
+command. `src/railway/TrainCall.test.ts`, the straight-service railway regression
+and `tests/train-call.spec.ts` cover recall, occupancy, cancellation, clearance,
+touch/keyboard controls and reload. Validation on 2026-10-10: typechecks, all
+2,176 unit tests, lint, regenerated inventories, build, all 525 browser tests
+and streaming `--assert-ready` passed. Next: try calling and boarding with a child at both station benches,
+including co-op with someone already aboard.
+
 ## Player driving
 
 [Tactical 087](../tactical/087-player-driven-cars-and-trains.md) delivers explicit

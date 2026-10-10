@@ -3,6 +3,7 @@ import type { ClientMessage, ServerMessage } from "./protocol.js";
 export type RequestMessage = Extract<ClientMessage, { requestId: number }>;
 
 const RESPONSES = {
+  "call-train": "train-called",
   "enter-vehicle": "vehicle-controlled",
   "exit-vehicle": "vehicle-controlled",
   "set-player-model": "player-model-set",

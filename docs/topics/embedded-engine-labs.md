@@ -463,6 +463,12 @@ duck diagnostics for browser verification; it adds no animal simulation loop.
 
 ## Inside vehicle driving (2026-10-10)
 
+The shared VehicleControl prompt also offers **Call train · E** beside generated
+station benches. ScenarioSession forwards the lab command to Realm/RailwaySystem,
+matching game recall, occupancy/clearance checks, eight-second dwell and persisted
+service location. Production city-train labs inherit this behavior without a
+separate lab train loop; authored fixtures without station benches show no call prompt.
+
 [Tactical 087](../tactical/087-player-driven-cars-and-trains.md) adds the same
 Realm driver seats, native motion and proximity prompt to the game and shared
 Traffic/World geometry presentation host. Hidden drivers and visible roof riders
