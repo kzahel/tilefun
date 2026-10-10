@@ -106,6 +106,7 @@ import type { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 import { tickAllAI } from "./tickAllAI.js";
+import { VehicleControl } from "./VehicleControl.js";
 import { isWildlife, WildlifeActivity } from "./WildlifeActivity.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
@@ -159,6 +160,7 @@ export class Realm {
     };
   }
   readonly mutations = new MutationQueue();
+  readonly vehicles = new VehicleControl(this);
   private storageNotified = new WeakMap<PlayerSession, boolean>();
 
   admitMutation(
@@ -365,7 +367,7 @@ export class Realm {
     applyPlayerModel(player, session.playerModel);
     this.entityManager.spawn(player);
     const ride = saved?.roofRide;
-    if (ride && this.railway) {
+    if ((ride || saved?.driving) && this.railway) {
       this.railway.update([...this.sessions.values()].map((s) => s.player).concat(player));
       await this.railway.settle();
       if (this.railway.error) throw this.railway.error;
@@ -432,6 +434,20 @@ export class Realm {
     };
 
     this.sessions.set(session.clientId, session);
+    if (saved?.driving) {
+      const vehicle = this.entityManager.entities.find(
+        (e) => e.proceduralId === saved.driving?.identity,
+      );
+      const exit = saved.driving.exit;
+      const fallback =
+        exit && Number.isFinite(exit.wx) && Number.isFinite(exit.wy)
+          ? exit
+          : { wx: spawnX, wy: spawnY };
+      if (vehicle && this.vehicles.available(vehicle.id)) {
+        session.gameplaySession.lastSafePosition = { ...fallback };
+        this.vehicles.enter(session, vehicle.id, true);
+      } else await this.vehicles.restoreOnFoot(session, fallback);
+    }
     this.clearClientRevisions(session.clientId);
     this.playerNamesRevision++;
 
@@ -505,8 +521,17 @@ export class Realm {
     const identity = support
       ? this.entityManager.entities.find((e) => e.id === support.id)?.proceduralId
       : undefined;
+    const driven = this.vehicles.get(session);
     return {
-      ...(mount?.persistentId
+      ...(driven?.proceduralId
+        ? {
+            driving: {
+              identity: driven.proceduralId,
+              exit: session.gameplaySession.lastSafePosition,
+            },
+          }
+        : {}),
+      ...(!driven && mount?.persistentId
         ? {
             mount: {
               id: mount.persistentId,
@@ -624,6 +649,7 @@ export class Realm {
         session.inputQueue = [];
         continue;
       }
+      if (this.vehicles.get(session)) preSteppedEntityIds.add(session.player.id);
       if (!this.sessionSupported(session, dt)) continue;
 
       if (storagePaused) {
@@ -690,6 +716,16 @@ export class Realm {
                 ) ?? null)
               : null;
 
+          if (this.vehicles.get(session)) {
+            this.vehicles.input(
+              session,
+              input,
+              stepDts.reduce((sum, step) => sum + step, 0),
+            );
+            preSteppedEntityIds.add(session.player.id);
+            session.lastProcessedInputSeq = input.seq;
+            continue;
+          }
           if (mount) {
             // Riding: first jump press dismounts (held jump won't retrigger until release).
             const jumpPressed = input.jumpPressed === true;
@@ -786,6 +822,10 @@ export class Realm {
           session.lastProcessedInputSeq = input.seq;
         }
       } else if (!session.editorEnabled && session.player.velocity) {
+        if (this.vehicles.get(session)) {
+          this.vehicles.input(session, { dx: 0, dy: 0 }, dt);
+          continue;
+        }
         // No input this tick (timing jitter) — apply friction only.
         // Don't call applyMovementPhysics here: it would set sprite.moving=false,
         // causing animation flicker on the client. Sprite state should only
@@ -944,6 +984,8 @@ export class Realm {
           (range) => this.streaming?.rangeReady(range) ?? false,
           landingCarryExcluded,
         );
+
+        this.vehicles.sync();
 
         // ── Jump physics for all players + mount detection on landing ──
         for (const session of activeSessions) {
@@ -1290,6 +1332,7 @@ export class Realm {
         break;
 
       case "throw-ball": {
+        if (this.vehicles.get(session)) break;
         const player = session.player;
         const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
         // Add random jitter so consecutive throws spread out
@@ -1786,6 +1829,10 @@ export class Realm {
 
   /** Dismount the player from their current mount. */
   private dismountPlayer(session: PlayerSession): void {
+    if (this.vehicles.get(session)) {
+      this.vehicles.exit(session, true);
+      return;
+    }
     const mountId = session.gameplaySession.mountId;
     if (mountId === null) return;
 

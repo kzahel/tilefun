@@ -141,7 +141,10 @@ export class ScenarioClient {
       if (player.id !== -1) {
         applyScenarioAppearance(player, this.recipe.player);
         if (this.resetReplica || !this.predictor.player || this.predictor.player.id !== player.id)
-          this.predictor.reset(player);
+          this.predictor.reset(
+            player,
+            this.view.serverEntities.find((e) => e.id === player.parentId),
+          );
         else
           this.predictor.reconcile(
             player,
@@ -210,7 +213,10 @@ export class ScenarioClient {
       .then(() => this.request({ kind: "clock", running }))
       .then(() => {
         this.view.resetPresentationClock(true);
-        this.predictor.reset(this.view.serverPlayerEntity);
+        this.predictor.reset(
+          this.view.serverPlayerEntity,
+          this.view.serverEntities.find((e) => e.id === this.view.serverPlayerEntity.parentId),
+        );
       })
       .catch((error) => this.fail(error))
       .finally(() => {
@@ -256,7 +262,10 @@ export class ScenarioClient {
     try {
       await this.ready;
       await this.request({ kind: "command", command });
-      this.predictor.reset(this.view.serverPlayerEntity);
+      this.predictor.reset(
+        this.view.serverPlayerEntity,
+        this.view.serverEntities.find((e) => e.id === this.view.serverPlayerEntity.parentId),
+      );
     } finally {
       this.controls--;
     }
@@ -268,7 +277,10 @@ export class ScenarioClient {
       await this.ready;
       await this.request({ kind: reset ? "reset" : "reload" });
       this.seq = 0;
-      this.predictor.reset(this.view.serverPlayerEntity);
+      this.predictor.reset(
+        this.view.serverPlayerEntity,
+        this.view.serverEntities.find((e) => e.id === this.view.serverPlayerEntity.parentId),
+      );
     } finally {
       this.controls--;
     }

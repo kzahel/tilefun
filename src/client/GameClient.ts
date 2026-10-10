@@ -53,8 +53,10 @@ import {
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { TouchTap } from "../input/TouchTap.js";
+import { TrainTapMovement } from "../input/TrainTapMovement.js";
 import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
+import { isTrain } from "../railway/Train.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { cameraPixelSnap } from "../rendering/PresentationSettings.js";
@@ -75,6 +77,7 @@ import {
   LAST_WORLD_KEY,
   TAB_SESSION_KEY,
 } from "../shared/storageKeys.js";
+import { occupiedVehicle } from "../traffic/Driving.js";
 import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
@@ -82,6 +85,7 @@ import { DoorControl } from "../ui/DoorControl.js";
 import { MainMenu } from "../ui/MainMenu.js";
 import { OptionsDialog } from "../ui/OptionsDialog.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
+import { VehicleControl } from "../ui/VehicleControl.js";
 import { WorldMap } from "../ui/WorldMap.js";
 import { World } from "../world/World.js";
 import { XRSessionManager } from "../xr/XRSessionManager.js";
@@ -203,6 +207,8 @@ export class GameClient {
   /** Realm list received while in lobby (multiplayer connect flow). */
   private lobbyRealmList: RealmInfo[] | null = null;
   private doorControl: DoorControl;
+  private vehicleControl: VehicleControl;
+  private trainTapMovement = new TrainTapMovement();
   private doorPresentation = new DoorPresentation();
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
@@ -265,7 +271,7 @@ export class GameClient {
         this.storagePaused ||
         this.doorPresentation.busy
           ? null
-          : this.tapMovement.resolve(this.canvas, x, y),
+          : this.resolveDriveTap(x, y),
       (target) => this.onDestinationTap(target),
     );
     this.touchJoystick.enabled = this.movementMode === "joystick";
@@ -523,7 +529,13 @@ export class GameClient {
           : "";
       }
     });
-    this.actions.on("enter_place", () => this.doorControl.activate());
+    this.vehicleControl = new VehicleControl(async (request) => {
+      this.clearPlayInput();
+      return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
+    });
+    this.actions.on("enter_place", () => {
+      if (!this.vehicleControl.activate()) this.doorControl.activate();
+    });
     this.loop = new GameLoop({
       update: (dt) => {
         this.time.elapsed += dt;
@@ -554,9 +566,16 @@ export class GameClient {
                 ),
               ));
         this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
+        const vehiclePrompt = this.vehicleControl.update(
+          this.stateView,
+          this.initDone && ready && this.scenes.current instanceof PlayScene,
+          this.doorPresentation.busy || this.playInputBlocked || this.storagePaused,
+          this.movementMode === "tap",
+        );
         this.doorControl.update(
           this.stateView,
-          this.initDone &&
+          !vehiclePrompt &&
+            this.initDone &&
             ready &&
             !this.scenes.has(WorldMapScene) &&
             !this.scenes.has(IdeaScene) &&
@@ -997,6 +1016,7 @@ export class GameClient {
     this.debugPanel.destroy();
     this.sceneFrame.clear();
     this.doorControl.destroy();
+    this.vehicleControl.destroy();
     this.doorPresentation.destroy();
     this.loop.stop();
     this.gcFlushServer();
@@ -1254,6 +1274,7 @@ export class GameClient {
         return client.movementMode;
       },
       tapMovement: this.tapMovement,
+      trainTapMovement: this.trainTapMovement,
       touchTap: this.touchTap,
       canvas: this.canvas,
       ctx: this.ctx,
@@ -1577,6 +1598,11 @@ export class GameClient {
     )
       return;
     if (!(this.scenes.current instanceof PlayScene)) return;
+    if (this.movementMode === "tap") {
+      const target = this.resolveDriveTap(e.clientX, e.clientY);
+      if (target) this.onDestinationTap(target);
+      return;
+    }
     const rect = this.canvas.getBoundingClientRect();
     const sx = (e.clientX - rect.left) * (this.canvas.width / rect.width);
     const sy = (e.clientY - rect.top) * (this.canvas.height / rect.height);
@@ -1589,6 +1615,13 @@ export class GameClient {
   }
 
   /** Handle tap in play mode (mobile). */
+  private resolveDriveTap(x: number, y: number): TapTarget | null {
+    const target = this.tapMovement.resolve(this.canvas, x, y);
+    const vehicle = occupiedVehicle(this.stateView.playerEntity, this.stateView.entities);
+    if (!target || !vehicle || !isTrain(vehicle)) return target;
+    const rect = this.canvas.getBoundingClientRect();
+    return { ...target, screenSide: x < rect.left + rect.width / 2 ? -1 : 1 };
+  }
   private onPlayTap(clientX: number, clientY: number): void {
     if (this.playInputBlocked || this.storagePaused || this.doorPresentation.busy) return;
     if (!(this.scenes.current instanceof PlayScene)) return;
@@ -1610,6 +1643,7 @@ export class GameClient {
     if (sendNeutral && this.scenes?.current instanceof PlayScene)
       this.scenes.current.cancelInput(this.transport);
     this.tapMovement.cancel();
+    this.trainTapMovement.cancel();
     this.touchTap.reset();
     this.touchJoystick.reset();
     this.touchButtons.reset();
@@ -1642,15 +1676,23 @@ export class GameClient {
       this.doorPresentation.busy
     )
       return;
-    const eligible = this.stateView.entities.some((e) =>
-      isBefriendHit(
-        target.wx,
-        target.wy,
-        e.position.wx,
-        e.position.wy,
-        e.wanderAI?.befriendable === true,
-      ),
-    );
+    const vehicle = occupiedVehicle(this.stateView.playerEntity, this.stateView.entities);
+    if (vehicle && isTrain(vehicle)) {
+      this.tapMovement.cancel();
+      this.trainTapMovement.tap(target.screenSide ?? 1);
+      return;
+    }
+    const eligible =
+      !vehicle &&
+      this.stateView.entities.some((e) =>
+        isBefriendHit(
+          target.wx,
+          target.wy,
+          e.position.wx,
+          e.position.wy,
+          e.wanderAI?.befriendable === true,
+        ),
+      );
     if (eligible) {
       this.tapMovement.cancel();
       this.transport.send({ type: "player-interact", wx: target.wx, wy: target.wy });

@@ -62,10 +62,19 @@ remains the default. In Tap to move, tap a place and lift your finger to walk
 straight toward the yellow destination ring. Tap somewhere else to redirect,
 or near your character's feet to stop. Obstacles stop the walk; this first
 version does not find a route around them. Tapping a befriendable animal still
-interacts with it. Jump, Throw, Sprint, keyboard and gamepad controls remain
-available. Menus, editing, travel and focus loss cancel the destination.
+interacts with it. Jump, Throw and Sprint remain available on foot, alongside
+keyboard and gamepad controls. Menus, editing, travel and focus loss cancel the destination.
 See [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
 for the behavior and remaining device trial.
+
+In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train · E**
+(or press E). Your character disappears inside; other players can ride visibly on
+its roof. Cars use ordinary movement controls, including diagonals, or a straight
+Tap-to-move destination. Trains stay on their track: up/right moves one way,
+down/left the other. In tap mode, tap the right/left half of the screen to start;
+tap the same side again to stop. **Get out · E** stops and finds clear ground.
+Off-road cars stay parked and saved; cars on suitable roads resume traffic.
+See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md).
 
 The editor tray uses at most half the visible screen, including its header and
 tabs. Swipe the category tabs horizontally and scroll the palette vertically;

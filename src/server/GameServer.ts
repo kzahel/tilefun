@@ -93,6 +93,7 @@ export class GameServer {
         maxCy: Math.floor(wy / 256) + 3,
       });
       if (session.realmId !== realm.currentWorldId || session.retired) return;
+      realm.vehicles.exit(session, true);
       delete session.player.airMomentumX;
       delete session.player.airMomentumY;
       session.player.position = { wx, wy };
@@ -1377,6 +1378,26 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
+      case "enter-vehicle":
+      case "exit-vehicle": {
+        try {
+          const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+          if (!realm || session.transitioning || realm.saveManager?.pressured)
+            throw Error("Vehicle control is unavailable right now.");
+          if (msg.type === "enter-vehicle") {
+            if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
+            realm.vehicles.enter(session, msg.entityId);
+          } else realm.vehicles.exit(session);
+          this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId });
+        } catch (error) {
+          this.transport.send(clientId, {
+            type: "request-error",
+            requestId: msg.requestId,
+            message: error instanceof Error ? error.message : String(error),
+          });
+        }
+        return;
+      }
       case "get-world-map":
         void this.trackOperation(this.worldMap(session, msg.requestId))
           .then((map) => this.transport.send(clientId, map))

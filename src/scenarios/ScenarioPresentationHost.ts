@@ -17,6 +17,8 @@ import type { RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
+import { occupiedVehicle } from "../traffic/Driving.js";
+import { VehicleControl } from "../ui/VehicleControl.js";
 import { ScenarioClient } from "./ScenarioClient.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
@@ -78,12 +80,15 @@ export class ScenarioPresentationHost {
   private pausedViewKey = "";
   private poseSeconds = 0;
   private displayedPlayer: Entity | undefined;
+  private vehicleControl: VehicleControl | undefined;
+  private vehicleControls: boolean;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
     recipe: ScenarioRecipe,
     private readonly options: ScenarioPresentationOptions,
   ) {
+    this.vehicleControls = !!(recipe.traffic || recipe.railways);
     this.session = new ScenarioClient(recipe);
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));
     this.camera.setViewport(options.width, options.height);
@@ -116,6 +121,18 @@ export class ScenarioPresentationHost {
     // Includes blend sheets, roads and tile variants, exactly as in GameClient.
     this.host.setAssets(assets, graph);
     this.host.resize(this.camera.viewportWidth, this.camera.viewportHeight);
+    if (this.vehicleControls) {
+      this.vehicleControl = new VehicleControl((request) =>
+        this.command(
+          request.type === "enter-vehicle"
+            ? { kind: "enter-vehicle", entityId: request.entityId }
+            : { kind: "exit-vehicle" },
+        ),
+      );
+      this.vehicleControl.root.style.position = "absolute";
+      canvas.parentElement?.append(this.vehicleControl.root);
+      canvas.addEventListener("keydown", this.vehicleKey);
+    }
     this.snapCamera();
     this.visibilityChanged();
   }
@@ -162,6 +179,13 @@ export class ScenarioPresentationHost {
     return typeof fixed === "function" ? fixed(player, alpha) : fixed;
   }
 
+  private vehicleKey = (event: KeyboardEvent) => {
+    if (event.key.toLowerCase() === "e" && this.vehicleControl?.activate()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
   private update(dt: number) {
     if (this.disposed || document.hidden) return;
     try {
@@ -172,6 +196,7 @@ export class ScenarioPresentationHost {
       return;
     }
     this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
+    this.vehicleControl?.update(this.session.view, true, this.paused);
     if (this.paused) return;
     try {
       this.camera.zoom = this.options.settings().zoom;
@@ -181,11 +206,11 @@ export class ScenarioPresentationHost {
         this.camera.x = fixed.wx;
         this.camera.y = fixed.wy;
       }
-      this.interpolate = this.session.submitInput(
-        this.options.input(),
-        dt,
-        this.camera.getVisibleChunkRange(),
-      );
+      const raw = this.options.input();
+      const input = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities)
+        ? { ...raw, jump: false, sprinting: false }
+        : raw;
+      this.interpolate = this.session.submitInput(input, dt, this.camera.getVisibleChunkRange());
       if (this.interpolate) {
         this.steps++;
         if (!this.options.fixedCamera)
@@ -390,6 +415,10 @@ export class ScenarioPresentationHost {
     this.disposed = true;
     this.loop.stop();
     document.removeEventListener("visibilitychange", this.visibilityChanged);
+    if (this.vehicleControl) {
+      this.vehicleControl.destroy();
+      this.canvas.removeEventListener("keydown", this.vehicleKey);
+    }
     this.host?.dispose();
     this.host = undefined;
     this.frame.clear();

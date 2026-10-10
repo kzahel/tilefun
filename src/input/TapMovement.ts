@@ -8,6 +8,7 @@ export function touchMovementMode(value: unknown): TouchMovementMode {
   return value === "tap" ? "tap" : "joystick";
 }
 export interface TapTarget {
+  screenSide?: -1 | 1;
   wx: number;
   wy: number;
   wz: number;
@@ -59,7 +60,12 @@ export class TapMovement {
     this.stalled = 0;
     this.lastPosition = null;
   }
-  sample(position: { wx: number; wy: number }, manual: Movement, dt: number): Movement {
+  sample(
+    position: { wx: number; wy: number },
+    manual: Movement,
+    dt: number,
+    slowWithin = 0,
+  ): Movement {
     this.blockedFade = Math.max(0, this.blockedFade - dt);
     if (manual.dx || manual.dy) {
       this.cancel();
@@ -93,6 +99,7 @@ export class TapMovement {
       this.blockedFade = 0.4;
       return manual;
     }
-    return { ...manual, dx: dx / distance, dy: dy / distance };
+    const scale = slowWithin > 0 ? Math.min(1, distance / slowWithin) : 1;
+    return { ...manual, dx: (dx / distance) * scale, dy: (dy / distance) * scale };
   }
 }

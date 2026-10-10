@@ -3,6 +3,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
+import { isDrivable } from "../traffic/Driving.js";
 import { hasMovingRoof } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
@@ -90,9 +91,10 @@ export function collectScene(
     : propSurfaces;
 
   const poseTime = performance.now() / 1000;
+  const insideParents = new Set(entities.filter(isDrivable).map((e) => e.id));
   // --- Entities ---
   for (const e of entities) {
-    if (!e.sprite) continue;
+    if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
     const effectiveWy = e.position.wy - (e.wz ?? 0);
     const meshAsset = meshAssetFor(e);
     const meshRadius = e.type.startsWith("train-curve-proof-v1") ? 96 : meshAsset ? 64 : 0;

@@ -1,3 +1,4 @@
+import { getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent, SpriteComponent } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
@@ -12,9 +13,12 @@ import {
   stepPlayerFromInput,
 } from "../physics/PlayerMovement.js";
 import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
+import { isTrain } from "../railway/Train.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
+import { drivenCarPose } from "../traffic/Driving.js";
 import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
+import { isVehicle } from "../traffic/Vehicle.js";
 import type { World } from "../world/World.js";
 
 import { PredictionCollisionTimeline } from "./PredictionCollisionTimeline.js";
@@ -132,7 +136,7 @@ export class PlayerPredictor {
 
   /** Local input clock excludes simulation time discarded by the catch-up cap. */
   presentationClock(alpha: number): CameraPresentationTime | null {
-    if (this.support) return null;
+    if (this.support || (this.predictedMount && isTrain(this.predictedMount))) return null;
     return {
       time: this.presentationInputSeconds - this.presentationInputDt * (1 - alpha),
       domain: this.presentationEpoch,
@@ -435,6 +439,8 @@ export class PlayerPredictor {
       this.predictedMount.position.wx = serverMount.position.wx;
       this.predictedMount.position.wy = serverMount.position.wy;
       this.predictedMount.collider = serverMount.collider;
+      if (isVehicle(serverMount) || isTrain(serverMount))
+        this.predictedMount.velocity = serverMount.velocity && { ...serverMount.velocity };
       this.predictedMount.sprite = predictionSprite(this.predictedMount.sprite, serverMount.sprite);
       if (serverMount.wanderAI) {
         this.predictedMount.wanderAI = { ...serverMount.wanderAI };
@@ -771,6 +777,17 @@ export class PlayerPredictor {
   ): Entity | null {
     const player = this.presentationPlayer;
     if (!player) return null;
+    if (this.predictedMount && isTrain(this.predictedMount)) {
+      const vehicle = displayedEntities.find((e) => e.id === this.predictedMount?.id);
+      if (vehicle)
+        return {
+          ...player,
+          position: { ...vehicle.position },
+          prevPosition: { ...vehicle.position },
+          wz: vehicle.wz ?? 0,
+          prevWz: vehicle.wz ?? 0,
+        };
+    }
     let position: PositionComponent;
     const support = displayedEntities.find((e) => e.id === this.support?.id);
     const offset = this.supportOffset,
@@ -888,7 +905,7 @@ export class PlayerPredictor {
 
   /** Get the predicted mount entity (or null when not riding). */
   get mount(): Entity | null {
-    return this.predictedMount;
+    return this.predictedMount && isTrain(this.predictedMount) ? null : this.predictedMount;
   }
 
   /** Get the mount entity ID (or null when not riding). */
@@ -1095,6 +1112,29 @@ export class PlayerPredictor {
         deferRoofCarry: true,
       });
       for (const stepDt of stepDts) {
+        if (isTrain(this.predictedMount)) continue;
+        if (isVehicle(this.predictedMount)) {
+          const steps = Math.max(1, Math.ceil(stepDt * 60));
+          for (let i = 0; i < steps; i++) {
+            const collider = this.predictedMount.collider;
+            if (!collider) break;
+            const next = drivenCarPose(
+              this.predictedMount,
+              movement,
+              stepDt / steps,
+              world,
+              props,
+              queryEntities(getEntityAABB(this.predictedMount.position, collider)),
+            );
+            if (!next) {
+              this.predictedMount.velocity = { vx: 0, vy: 0 };
+              if (this.predictedMount.sprite) this.predictedMount.sprite.moving = false;
+              break;
+            }
+            this.predictedMount = next;
+          }
+          continue;
+        }
         stepMountFromInput(
           this.predictedMount,
           movement,

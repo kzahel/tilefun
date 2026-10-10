@@ -23137,11 +23137,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:77"
+          "source": "src/client/PlayerPredictor.ts:81"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:674"
+          "source": "src/client/PlayerPredictor.ts:680"
         },
         {
           "system": "Gameplay",
@@ -23225,11 +23225,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1220"
+          "source": "src/server/Realm.ts:1262"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2213"
+          "source": "src/server/Realm.ts:2260"
         },
         {
           "system": "Gameplay",
@@ -23246,6 +23246,10 @@
         {
           "system": "Gameplay",
           "source": "src/shared/serialization.ts:32"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/Driving.ts:126"
         },
         {
           "system": "Gameplay",
@@ -23925,11 +23929,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:714"
+          "source": "src/scenes/PlayScene.ts:736"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2180"
+          "source": "src/server/Realm.ts:2227"
         }
       ]
     },
@@ -25221,7 +25225,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:288"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:313"
         },
         {
           "system": "Editor",

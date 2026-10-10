@@ -453,3 +453,14 @@ Named animation clips use the same sprite clock in EntityManager and the client
 replica; clip selection is replicated in binary baselines/deltas. Lab pause and
 save/reload exercise that shared system. World geometry exposes bounded per-frame
 duck diagnostics for browser verification; it adds no animal simulation loop.
+
+
+## Inside vehicle driving (2026-10-10)
+
+[Tactical 087](../tactical/087-player-driven-cars-and-trains.md) adds the same
+Realm driver seats, native motion and proximity prompt to the game and shared
+Traffic/World geometry presentation host. Hidden drivers and visible roof riders
+use the shared collector; scenario commands/reload retain the authoritative
+occupied parent. Parent resolution retains live service-owned bodies outside the
+ordinary actor tick set without simulating them twice. Phone game checks exercise
+car tap destinations and train side-tap start/stop/reversal on Canvas and GPU.

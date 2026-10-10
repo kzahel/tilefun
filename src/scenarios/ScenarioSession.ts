@@ -183,6 +183,7 @@ export class ScenarioSession {
     this.player.player.wanderAI = null;
     delete this.player.player.routeAI;
     applyScenarioAppearance(this.player.player, this.recipe.player);
+    if (this.realm.vehicles.get(this.player)) this.player.player.collider = null;
     await this.ready();
     if (fresh) {
       // Seed the entire bounded track once; saved chunk edits own it thereafter.
@@ -387,6 +388,14 @@ export class ScenarioSession {
   async command(command: ScenarioCommand) {
     if (this.closed) throw new Error("Scenario is closed");
     const player = this.player.player;
+    if (command.kind === "enter-vehicle") {
+      this.realm.vehicles.enter(this.player, command.entityId);
+      return;
+    }
+    if (command.kind === "exit-vehicle") {
+      this.realm.vehicles.exit(this.player);
+      return;
+    }
     if (command.kind === "view-range") {
       const r = command.range;
       if (
@@ -411,6 +420,7 @@ export class ScenarioSession {
       if (command.gap !== undefined) settings.gap = command.gap;
       return;
     }
+    if (this.realm.vehicles.get(this.player)) this.realm.vehicles.exit(this.player, true);
     let position: { wx: number; wy: number },
       z = 0;
     if (command.kind === "train-position") {

@@ -312,3 +312,19 @@ describe("EntityManager", () => {
     });
   });
 });
+
+it("retains live service-owned parents outside the normal actor tick set", () => {
+  const em = new EntityManager();
+  const body = em.spawn(createPlayer(100, 200));
+  const child = em.spawn(createPlayer(0, 0));
+  child.parentId = body.id;
+  child.localOffsetX = 3;
+  child.localOffsetY = -4;
+  em.resolveParentedPositions([child], [child]);
+  expect(child.parentId).toBe(body.id);
+  expect(child.position).toEqual({ wx: 103, wy: 196 });
+  expect(body.position).toEqual({ wx: 100, wy: 200 });
+  em.remove(body.id);
+  em.resolveParentedPositions([child], [child]);
+  expect(child.parentId).toBeUndefined();
+});

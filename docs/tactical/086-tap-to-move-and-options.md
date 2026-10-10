@@ -228,3 +228,16 @@ child usability.
 Next: try the feature with the child on the actual device and tune tolerance and
 feedback from that observation. Route finding and simpler action buttons remain
 separate follow-ons.
+
+
+## Vehicle integration checkpoint (2026-10-10)
+
+[087](087-player-driven-cars-and-trains.md) adds car destinations and latched
+train side taps through the same input owner. Walking targets retain exactly
+`wx`, `wy` and `wz`; screen-side metadata is added only for occupied trains.
+Both unchanged fullscreen/focus checks pass on Canvas/GPU after correcting the
+initial extra-field regression. The complete worktree run passes the profile
+switch/storage-failure check; the staged affected run misses its short-lived
+walking target (15/16), then its unchanged isolated retry passes (1/1). Retain
+this timing evidence and investigate join/presentation readiness if it recurs;
+no profile behavior or assertion changed. 087 links the exact logs.

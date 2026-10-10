@@ -1,8 +1,33 @@
-# Vehicles: generated traffic and roof riding
+# Vehicles: traffic, driving and roof riding
 
 Topic: vehicles
-Status: Approved vehicle bank promoted; generated-road traffic and roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-04.
+Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
+Updated: 2026-10-10.
+
+## Player driving
+
+[Tactical 087](../tactical/087-player-driven-cars-and-trains.md) delivers the
+owner's 2026-10-10 choice: explicit **Drive car · E** beside a stopped car,
+with the player hidden inside after authority grants the seat. One driver owns
+the car; other players can still walk/jump onto the roof and ride visibly.
+WASD/arrows or the movement stick drive directly, including normalized diagonals.
+Native cardinal views follow the heading with a small facing switch margin.
+In **Tap to move**, tap a destination to drive straight there without pathfinding;
+arrival, obstacles and menu/focus changes stop the car. Cars keep whole-body,
+terrain readiness, dry ground, grade and roof-passenger clearance checks.
+
+**Get out · E** stops first and searches clear supported ground beside the body.
+If no exit fits, the driver stays inside with an explanation. Cars released on a
+usable generated lane resume traffic through a short validated road connector,
+without teleporting. Off-road cars remain parked at their actual position and
+are saved across unloading/reopening. There is no abandoned-car deletion policy.
+Saved driver seats restore by vehicle identity. Editing, explicit travel,
+deletion and disconnect release ownership; stale input brakes.
+
+Game and traffic/world geometry labs use the same Realm authority, predictor,
+vehicle prompt and scenario controls. No art bank or geometry approval changed.
+Visible NPC drivers getting out and wandering, and NPCs reclaiming parked cars,
+remain later work. [Trains](trains.md) owns whole-service track control.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
 is the review entry point, linked from the sidebar, All tools and the global
@@ -17,8 +42,8 @@ owns implementation sequencing and acceptance.
 Gentle autonomous traffic uses procedurally generated roads only: mostly city
 circulation, with occasional intercity trips. Cars keep spacing, yield at
 intersections and stop for players/animals without collision damage. Painted
-roads, player driving, parking, shop visits and passengers entering/exiting cars
-are deferred.
+roads, NPC parking/shop visits and ordinary passenger seats are deferred.
+Player driving in 087 can leave generated roads for clear dry ground.
 
 A player can stand in front of a car to stop it, jump onto its roof, and ride
 away when the road is clear. The roof is a moving support surface, not a driver

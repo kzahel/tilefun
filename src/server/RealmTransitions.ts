@@ -66,7 +66,9 @@ export class RealmTransitions {
         visibleRange: session.visibleRange,
       };
       try {
-        await target.addPlayer(session, prepared);
+        const restored = prepared ? { ...prepared } : prepared;
+        if (position && restored) delete restored.driving;
+        await target.addPlayer(session, restored);
         if (returnLocation !== undefined) session.returnLocation = returnLocation;
         session.inputQueue = [];
         if (position) {

@@ -7,11 +7,13 @@ import type { GameContext, GameScene } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { getTimeScale } from "../physics/PlayerMovement.js";
+import { isTrain } from "../railway/Train.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import { occupiedVehicle } from "../traffic/Driving.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
@@ -112,6 +114,7 @@ export class PlayScene implements GameScene {
   private reconcileNotableWithReplay = 0;
   private nextReconcileLogAtMs = 0;
   private jumpPressLatched = false;
+  private occupiedId: number | undefined;
   private lastSampledJumpHeld = false;
   private jumpPressUnsub: (() => void) | null = null;
 
@@ -239,16 +242,34 @@ export class PlayScene implements GameScene {
 
     // Player movement input — quantize dx/dy so prediction uses the same
     // values the server will see after binary decoding (no misprediction drift).
+    const vehicle = occupiedVehicle(gc.stateView.playerEntity, gc.stateView.entities);
+    if (vehicle?.id !== this.occupiedId) {
+      gc.tapMovement?.cancel();
+      gc.trainTapMovement?.cancel();
+      gc.touchButtons.reset();
+      this.occupiedId = vehicle?.id;
+    }
+    gc.touchButtons.enabled = !vehicle;
     const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
     gc.touchJoystick.enabled = gc.touchMovement !== "tap" && !inputLocked;
-    if (inputLocked) gc.tapMovement?.cancel();
+    if (inputLocked) {
+      gc.tapMovement?.cancel();
+      gc.trainTapMovement?.cancel();
+    }
     const manual = inputLocked
       ? { dx: 0, dy: 0, sprinting: false, jump: false }
       : gc.actions.getMovement();
-    const rawMovement =
+    let rawMovement =
       !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
-        ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt)
+        ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt, vehicle ? 24 : 0)
         : manual;
+    if (vehicle && isTrain(vehicle)) {
+      gc.tapMovement?.cancel();
+      if (manual.dx || manual.dy) gc.trainTapMovement?.cancel();
+      if (!manual.dx && !manual.dy && !inputLocked && gc.touchMovement === "tap")
+        rawMovement = { ...rawMovement, dx: gc.trainTapMovement?.direction ?? 0, dy: 0 };
+    }
+    if (vehicle) rawMovement = { ...rawMovement, jump: false, sprinting: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
     const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
@@ -273,10 +294,10 @@ export class PlayScene implements GameScene {
     });
 
     // Throw charge tracking
-    const throwHeld = !inputLocked && gc.actions.isHeld("throw");
+    const throwHeld = !vehicle && !inputLocked && gc.actions.isHeld("throw");
     if (throwHeld) {
       this.throwChargeTime += dt;
-    } else if (this.wasThrowHeld && !inputLocked) {
+    } else if (this.wasThrowHeld && !inputLocked && !vehicle) {
       // Released — throw the ball
       const force = Math.min(this.throwChargeTime / THROW_CHARGE_DURATION, 1);
       let dirX = 0;
@@ -525,6 +546,7 @@ export class PlayScene implements GameScene {
 
   private stopMovement(gc: GameContext): void {
     gc.tapMovement?.cancel();
+    gc.trainTapMovement?.cancel();
     gc.actions.clearHeld();
     this.cancelInput(gc.transport);
   }

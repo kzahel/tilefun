@@ -6,7 +6,7 @@ import { RoadType } from "../road/RoadType.js";
 import type { World } from "../world/World.js";
 import { createCurveTrain, curveOffsets } from "./CurveTrain.js";
 import { railAlignment, wrapDistance } from "./RailPath.js";
-import type { RailService } from "./RailwaySystem.js";
+import { drivenTrainSpeed, type RailService } from "./RailwaySystem.js";
 import { carryTrainPassengers, planTrainPassengers } from "./TrainPassengers.js";
 
 /** One exclusive service per path, advancing by arc length, never by global X. */
@@ -20,20 +20,34 @@ export function stepCurvedTrain(
 ): void {
   const alignment = railAlignment(required(s.line.path));
   const record = s.record;
-  if (record.dwell > 0) {
+  if (s.driverId === undefined && record.dwell > 0) {
     record.dwell = Math.max(0, record.dwell - dt);
     s.speed = 0;
     return;
   }
-  const stop = required(alignment.path.stops[required(record.nextStop)]);
+  if (s.driverId !== undefined && s.speed === 0 && s.driveInput)
+    record.target = s.driveInput > 0 ? 1 : 0;
+  const stop = required(
+    alignment.path.stops[
+      s.driverId !== undefined
+        ? record.target
+          ? alignment.path.stops.length - 1
+          : 0
+        : required(record.nextStop)
+    ],
+  );
   const direction = record.target ? 1 : -1;
-  const distance = alignment.path.closed
-    ? wrapDistance((stop.distance - required(record.distance)) * direction, alignment.length)
-    : Math.abs(stop.distance - required(record.distance));
+  const distance =
+    s.driverId !== undefined && alignment.path.closed
+      ? Infinity
+      : alignment.path.closed
+        ? wrapDistance((stop.distance - required(record.distance)) * direction, alignment.length)
+        : Math.abs(stop.distance - required(record.distance));
   if (distance < 0.001) {
     record.distance = stop.distance;
-    record.dwell = 8;
     s.speed = 0;
+    if (s.driverId !== undefined) return;
+    record.dwell = 8;
     if (
       !alignment.path.closed &&
       (record.nextStop === 0 || record.nextStop === alignment.path.stops.length - 1)
@@ -44,7 +58,8 @@ export function stepCurvedTrain(
       alignment.path.stops.length;
     return;
   }
-  s.speed = Math.min(192, s.speed + 96 * dt, Math.sqrt(2 * 96 * distance));
+  if (s.driverId !== undefined) drivenTrainSpeed(s, dt, distance);
+  else s.speed = Math.min(192, s.speed + 96 * dt, Math.sqrt(2 * 96 * distance));
   const travel = Math.min(distance, s.speed * dt);
   const nextDistance =
     travel >= distance

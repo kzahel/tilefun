@@ -16,11 +16,13 @@ import { bridgePart } from "../railway/RoadRailBridge.js";
 import { RoadType } from "../road/RoadType.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
+import { drivenCarPose } from "./Driving.js";
 import {
   type Lane,
   type LaneGraph,
   nextLanes,
   type Path,
+  path,
   samplePath,
   turnPath,
 } from "./LaneGraph.js";
@@ -41,6 +43,9 @@ import {
 } from "./Vehicle.js";
 
 export interface SavedTraffic {
+  parked?: boolean;
+  facing?: number;
+  resumePath?: Path;
   persistentId?: string;
   originScope?: string;
   wz?: number;
@@ -61,6 +66,9 @@ export interface SavedTraffic {
   choices: number;
 }
 export interface TrafficState {
+  driverId?: number;
+  parked?: boolean;
+  resumePath?: Path;
   entity: Entity;
   lane: Lane;
   distance: number;
@@ -372,6 +380,7 @@ export class TrafficSystem {
         continue;
       }
       if (active && !active.has(s.entity)) continue;
+      if (s.driverId !== undefined || s.parked) continue;
       this.choose(s);
       const end = (s.turn ?? s.lane.path).length;
       const half = Math.max(s.entity.collider?.width ?? 0, s.entity.collider?.height ?? 0) / 2;
@@ -474,6 +483,7 @@ export class TrafficSystem {
         s.distance -= end;
         if (s.turn) {
           s.lane = s.next;
+          delete s.resumePath;
           s.next = undefined;
           s.turn = undefined;
           s.choices++;
@@ -491,6 +501,117 @@ export class TrafficSystem {
       this.onChange?.(s, false);
     }
   }
+  takeControl(s: TrafficState, playerId: number): void {
+    s.driverId = playerId;
+    s.parked = true;
+    s.speed = 0;
+    s.entity.velocity = { vx: 0, vy: 0 };
+    for (const [node, owner] of this.reservations)
+      if (owner === s.entity.id) this.reservations.delete(node);
+    s.turn = undefined;
+    s.next = undefined;
+    s.reservation = undefined;
+    s.distance = Math.min(s.distance, s.lane.path.length);
+    this.onChange?.(s, false);
+  }
+  drive(s: TrafficState, input: { dx: number; dy: number }, dt: number): void {
+    s.entity.prevPosition = { ...s.entity.position };
+    s.entity.prevWz = s.entity.wz ?? 0;
+    const steps = Math.max(1, Math.ceil(dt * 60));
+    for (let i = 0; i < steps; i++) {
+      const next = drivenCarPose(
+        s.entity,
+        input,
+        dt / steps,
+        this.world,
+        this.props.props,
+        this.entities.entities,
+      );
+      const plan =
+        next && planMovingPassengers(s.entity, next, this.entities, this.props, this.world);
+      if (!next || !plan) {
+        s.entity.velocity = { vx: 0, vy: 0 };
+        if (s.entity.sprite) s.entity.sprite.moving = false;
+        break;
+      }
+      carryMovingPassengers(plan, this.entities);
+      Object.assign(s.entity, {
+        position: next.position,
+        velocity: next.velocity,
+        collider: next.collider,
+        sprite: next.sprite,
+        wz: next.wz,
+        groundZ: next.groundZ,
+        sortOffsetY: next.sortOffsetY,
+      });
+    }
+    this.entities.spatialHash.update(s.entity);
+    this.onChange?.(s, false);
+  }
+  /** Return from the actual parked pose using a short checked road connector, never teleport. */
+  releaseControl(s: TrafficState, resume = true): void {
+    delete s.driverId;
+    s.entity.velocity = { vx: 0, vy: 0 };
+    if (s.entity.sprite) s.entity.sprite.moving = false;
+    s.speed = 0;
+    s.parked = true;
+    if (
+      resume &&
+      this.roadClear(getEntityAABB(s.entity.position, required(s.entity.collider)), true)
+    ) {
+      const graph = this.network(s);
+      const choices = [...graph.lanes.values()]
+        .flatMap((lane) => {
+          if (
+            lane.width < vehicleRoadWidth(s.entity.type) ||
+            !nextLanes(graph, lane, vehicleRoadWidth(s.entity.type)).length
+          )
+            return [];
+          const a = required(lane.path.points[0]),
+            b = required(lane.path.points.at(-1));
+          const dx = b.x - a.x,
+            dy = b.y - a.y,
+            length = Math.hypot(dx, dy);
+          const distance = Math.max(
+            0,
+            Math.min(
+              length - 1,
+              ((s.entity.position.wx - a.x) * dx + (s.entity.position.wy - a.y) * dy) / length,
+            ),
+          );
+          const p = samplePath(lane.path, distance);
+          const gap = Math.hypot(p.x - s.entity.position.wx, p.y - s.entity.position.wy);
+          return gap <= lane.width / 2 ? [{ lane, p, b, gap }] : [];
+        })
+        .sort((a, b) => a.gap - b.gap || a.lane.id.localeCompare(b.lane.id));
+      for (const choice of choices) {
+        const connector = path([
+          { x: s.entity.position.wx, y: s.entity.position.wy },
+          choice.p,
+          choice.b,
+        ]);
+        if (connector.length < 1) continue;
+        const oldLane = s.lane,
+          oldDistance = s.distance;
+        s.lane = { ...choice.lane, path: connector };
+        s.distance = 0;
+        let clear = true;
+        for (let d = 0; d <= choice.gap; d += 2)
+          if (!this.roadClear(this.box(s, d), true)) {
+            clear = false;
+            break;
+          }
+        if (clear) {
+          s.resumePath = connector;
+          s.parked = false;
+          break;
+        }
+        s.lane = oldLane;
+        s.distance = oldDistance;
+      }
+    }
+    this.onChange?.(s, false);
+  }
   private remove(s: TrafficState) {
     for (const [node, owner] of this.reservations)
       if (owner === s.entity.id) this.reservations.delete(node);
@@ -501,6 +622,9 @@ export class TrafficSystem {
   }
   snapshot(s: TrafficState): SavedTraffic {
     return {
+      parked: s.parked ?? false,
+      facing: s.entity.sprite?.direction ?? 0,
+      ...(s.resumePath ? { resumePath: s.resumePath } : {}),
       identity: required(s.entity.proceduralId),
       model: s.entity.type.slice(11),
       laneId: s.lane.id,
@@ -549,8 +673,22 @@ export class TrafficSystem {
       )
         throw new Error("Invalid saved traffic record.");
       // Resolve the same local graph used when choosing the saved successor.
-      const graph = this.strategy.trafficNetwork(r.wx ?? r.x, r.wy ?? r.y),
-        lane = graph.lanes.get(r.laneId);
+      const graph = this.strategy.trafficNetwork(r.wx ?? r.x, r.wy ?? r.y);
+      const original =
+        graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId);
+      if (r.parked !== undefined && typeof r.parked !== "boolean")
+        throw new Error("Invalid parked state.");
+      if (r.facing !== undefined && ![0, 1, 2, 3].includes(r.facing))
+        throw new Error("Invalid saved facing.");
+      if (
+        r.resumePath &&
+        (r.resumePath.points.length < 2 ||
+          r.resumePath.points.length > 4 ||
+          !r.resumePath.points.every((p) => Number.isFinite(p.x) && Number.isFinite(p.y)))
+      )
+        throw new Error("Invalid return path.");
+      const lane =
+        original && r.resumePath ? { ...original, path: path(r.resumePath.points) } : original;
       if (!lane) throw new Error("Saved traffic lane is unavailable.");
       const next = r.nextId
         ? nextLanes(graph, lane, vehicleRoadWidth(`vehicle-v1:${r.model}`)).find(
@@ -576,12 +714,20 @@ export class TrafficSystem {
         lane,
         r.distance,
         false,
-        samplePath(activePath, r.distance),
+        r.parked
+          ? {
+              x: r.wx ?? r.x,
+              y: r.wy ?? r.y,
+              direction: r.facing ?? samplePath(activePath, r.distance).direction,
+            }
+          : samplePath(activePath, r.distance),
         r.wz ?? 0,
       );
-      s.speed = r.speed ?? 0;
+      s.parked = r.parked ?? false;
+      if (r.resumePath) s.resumePath = r.resumePath;
+      s.speed = r.parked ? 0 : (r.speed ?? 0);
       s.blockedSeconds = r.blockedSeconds ?? 0;
-      s.entity.velocity = { vx: r.vx ?? 0, vy: r.vy ?? 0 };
+      s.entity.velocity = r.parked ? { vx: 0, vy: 0 } : { vx: r.vx ?? 0, vy: r.vy ?? 0 };
       s.next = next;
       s.choices = Math.max(0, Math.floor(r.choices));
       s.entity.proceduralId = r.identity;
@@ -592,8 +738,10 @@ export class TrafficSystem {
         this.reservations.set(lane.to, s.entity.id);
       }
       const pose = samplePath(activePath, r.distance);
-      s.entity.position = { wx: pose.x, wy: pose.y };
-      applyVehicleFacing(s.entity, pose.direction);
+      s.entity.position = r.parked
+        ? { wx: r.wx ?? pose.x, wy: r.wy ?? pose.y }
+        : { wx: pose.x, wy: pose.y };
+      applyVehicleFacing(s.entity, r.parked ? (r.facing ?? pose.direction) : pose.direction);
       this.entities.spatialHash.update(s.entity);
       this.onRestore?.(s, r);
     }
@@ -603,6 +751,8 @@ export class TrafficSystem {
     for (const s of this.states.values())
       if (
         !this.managed &&
+        !s.parked &&
+        s.driverId === undefined &&
         !this.visible(s.entity.position.wx, s.entity.position.wy) &&
         players.every(
           (p) =>

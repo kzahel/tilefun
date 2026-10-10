@@ -1,12 +1,35 @@
 # Generated railways, stations and trains
 
 Topic: trains
-Status: generated two-city trains, broad curves, cached pixel tracks and saved roof riding delivered; loops remain authored lab fixtures.
-Updated: 2026-10-09.
+Status: generated two-city trains, broad curves, cached pixel tracks, inside driving and saved roof riding delivered; loops remain authored lab fixtures.
+Updated: 2026-10-10.
 
 Owns generated railway networks, town stations, train services, railway structures
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
 [city generation](city-generation.md) owns regional revisions and promotion.
+
+## Player driving
+
+[Tactical 087](../tactical/087-player-driven-cars-and-trains.md) delivers explicit
+**Drive train · E** beside a stopped carriage. The player disappears inside;
+one driver owns the whole service while other players can ride visibly on top.
+W/Up and D/Right select the increasing path direction; S/Down and A/Left select
+the decreasing direction, including on curves. Release brakes; an opposite
+command brakes before reversing. In **Tap to move**, tap the right/left half of
+the canvas to latch the corresponding path direction. Tap that same side again
+to stop; the opposite side requests reversal. The mapping stays fixed on bends.
+There is no destination pathfinding or derailment.
+
+Driving suspends automatic dwell/reversal, keeps native carriage/roof clearance
+and ready-track checks, and stops at open route ends. Authored closed loops keep
+circulating until stopped. **Get out · E** stops first and requires clear ground
+beside the selected carriage. Releasing the driver resumes service after an
+eight-second pause toward the next station in its current direction. Saved
+inside seats restore separately from passive roof support. Menu/focus changes,
+stale input and disconnect brake; explicit travel clears occupancy. Production
+and World geometry labs share this controller and presentation. NPC driver
+exchange remains deferred; the native train art is unchanged.
+
 
 ## Requested direction
 

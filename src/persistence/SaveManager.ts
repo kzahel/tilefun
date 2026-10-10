@@ -37,6 +37,7 @@ export interface InspectionState extends SavedMeta {
 }
 
 export interface SavedPlayerData {
+  driving?: { identity: string; exit: { wx: number; wy: number } | null };
   /** Absolute vertical pose, preserving which stacked space the player occupies. */
   wz?: number;
   groundZ?: number;

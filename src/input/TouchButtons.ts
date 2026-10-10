@@ -26,6 +26,7 @@ interface ButtonDef {
 }
 
 export class TouchButtons {
+  enabled = true;
   private canvas: HTMLCanvasElement;
   private buttons: ButtonDef[] = [
     { label: "A", pressed: false, touchId: null }, // jump
@@ -41,15 +42,15 @@ export class TouchButtons {
   }
 
   get jumpPressed(): boolean {
-    return this.buttons[0]?.pressed ?? false;
+    return this.enabled && (this.buttons[0]?.pressed ?? false);
   }
 
   get throwPressed(): boolean {
-    return this.buttons[1]?.pressed ?? false;
+    return this.enabled && (this.buttons[1]?.pressed ?? false);
   }
 
   get sprintPressed(): boolean {
-    return this.buttons[2]?.pressed ?? false;
+    return this.enabled && (this.buttons[2]?.pressed ?? false);
   }
 
   attach(): void {
@@ -81,6 +82,7 @@ export class TouchButtons {
 
   /** Render buttons on the canvas. Only draws on touch-capable devices. */
   draw(ctx: CanvasRenderingContext2D): void {
+    if (!this.enabled) return;
     if (!isTouchDevice()) return;
 
     const positions = this.getPositions();
@@ -145,6 +147,7 @@ export class TouchButtons {
   }
 
   private onTouchStart = (e: TouchEvent): void => {
+    if (!this.enabled) return;
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;

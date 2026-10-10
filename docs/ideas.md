@@ -8,6 +8,10 @@ copying every item into multiple checklists.
 
 ## Gameplay and creation
 
+- [Player-driven cars and trains](tactical/087-player-driven-cars-and-trains.md):
+  inside driving, persistent parked cars and tap controls delivered. Follow
+  [vehicles](topics/vehicles.md) and [trains](topics/trains.md); visible NPC driver
+  exchange and parked-car adoption remain future work.
 - [Voice agents and child-directed development](topics/voice-agents.md): proposed
   companion NPC and voice-driven builder sessions; the first direction to explore
   is turning a child's request into development, clarification and playable changes.
@@ -64,7 +68,7 @@ an active production target.
 Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
 
 - Moving cars that travel along roads. [Source audit and proposed approach](research/road-vehicles.md)
-  records four-direction car/bus art and a suggested first slice; driving is not implemented.
+  records four-direction car/bus art; inside driving is delivered in 087.
 - Generated railways connecting town stations, with two-way local service,
   longer regional trunks, high-speed lines, forks, bridges and tunnels.
   [Trains](topics/trains.md) routes the source findings and parent plan. The owner

@@ -481,7 +481,17 @@ export class EntityManager {
     players: readonly Entity[],
     active: readonly Entity[] = this.entities,
   ): void {
-    const allEntities = [...new Set([...active, ...players])];
+    // A live parent may be outside the ordinary actor tick set (for example a
+    // railway-owned carriage). Resolve attachments without advancing that body.
+    const attached = new Set([...active, ...players]);
+    for (const entity of attached) {
+      let parent = this.byId.get(entity.parentId ?? -1);
+      for (let depth = 0; parent && depth < 32 && !attached.has(parent); depth++) {
+        attached.add(parent);
+        parent = this.byId.get(parent.parentId ?? -1);
+      }
+    }
+    const allEntities = [...attached];
     const byId = new Map(allEntities.map((entity) => [entity.id, entity]));
     let remaining = allEntities.filter((entity) => entity.parentId !== undefined).length;
     if (!remaining) return;

@@ -41,12 +41,26 @@ export interface RailServiceRecord {
   speed?: number;
 }
 export interface RailService {
+  driverId?: number;
+  driveInput?: number;
   line: RailRoute;
   entity: Entity;
   carriages: Entity[];
   record: RailServiceRecord;
   speed: number;
   retiring: boolean;
+}
+export function drivenTrainSpeed(s: RailService, dt: number, distance: number): number {
+  const desired = Math.sign(s.driveInput ?? 0);
+  const current = s.record.target ? 1 : -1;
+  if (s.speed === 0 && desired) s.record.target = desired > 0 ? 1 : 0;
+  const braking = !desired || (desired !== current && s.speed > 0);
+  s.speed = Math.min(
+    Math.max(0, s.speed + (braking ? -192 : 96) * dt),
+    192,
+    Math.sqrt(2 * 192 * distance),
+  );
+  return s.speed;
 }
 const MAX_SERVICES = 4,
   SPEED = 192,
@@ -106,12 +120,16 @@ export class RailwaySystem {
     const ridden = new Set(
       [...this.services.values()]
         .filter((s) =>
-          players.some((p) =>
-            s.carriages.some((c) => roofSupport(p, this.entities.entities)?.id === c.id),
+          players.some(
+            (p) =>
+              p.id === s.driverId ||
+              s.carriages.some((c) => roofSupport(p, this.entities.entities)?.id === c.id),
           ),
         )
         .map((s) => s.line.id),
     );
+    for (const s of this.services.values())
+      if (ridden.has(s.line.id)) nearby.set(s.line.id, s.line);
     this.wanted = new Set(
       [...nearby.keys()]
         .sort((a, b) => Number(ridden.has(b)) - Number(ridden.has(a)) || a.localeCompare(b))
@@ -286,25 +304,30 @@ export class RailwaySystem {
           stepCurvedTrain(s, step, this.world, this.entities, this.props, excludedRiderIds);
           continue;
         }
-        if (s.record.dwell > 0) {
+        if (s.driverId === undefined && s.record.dwell > 0) {
           s.record.dwell = Math.max(0, s.record.dwell - step);
           s.speed = 0;
           e.velocity.vx = 0;
           continue;
         }
+        if (s.driverId !== undefined && s.speed === 0 && s.driveInput)
+          s.record.target = s.driveInput > 0 ? 1 : 0;
         const destination = (s.record.target === 0 ? s.line.start : s.line.end) * 16;
         const delta = destination - e.position.wx,
           sign = Math.sign(delta),
           distance = Math.abs(delta);
         if (distance < 0.01) {
           e.position.wx = destination;
-          s.record.target = s.record.target === 0 ? 1 : 0;
-          s.record.dwell = DWELL;
+          if (s.driverId === undefined) {
+            s.record.target = s.record.target === 0 ? 1 : 0;
+            s.record.dwell = DWELL;
+          }
           s.speed = 0;
           e.velocity.vx = 0;
           continue;
         }
-        s.speed = Math.min(SPEED, s.speed + ACCEL * step, Math.sqrt(2 * ACCEL * distance));
+        if (s.driverId !== undefined) drivenTrainSpeed(s, step, distance);
+        else s.speed = Math.min(SPEED, s.speed + ACCEL * step, Math.sqrt(2 * ACCEL * distance));
         const dx = sign * Math.min(distance, s.speed * step);
         const poses = this.probe(s, dx);
         if (!poses) {
