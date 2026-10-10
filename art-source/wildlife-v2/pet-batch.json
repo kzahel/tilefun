@@ -1,0 +1,12 @@
+{
+  "identity": "common-pets-20261010",
+  "authorization": "Owner requested cats/dogs and incremental commits on 2026-10-10; tactical 084.",
+  "revision": "draft-v1",
+  "reviewStatus": "pending",
+  "pets": [
+    { "id": "cat-ginger", "name": "Ginger tabby", "species": "cat", "state": "in-progress" },
+    { "id": "cat-black", "name": "Black cat", "species": "cat", "state": "in-progress" },
+    { "id": "dog-golden", "name": "Golden retriever", "species": "dog", "state": "in-progress" },
+    { "id": "dog-shepherd", "name": "Pointed-ear shepherd", "species": "dog", "state": "in-progress" }
+  ]
+}

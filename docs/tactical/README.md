@@ -137,6 +137,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 ## Earlier plans
 
+| [084 Common pets and variations](084-common-pets-and-variations.md) | Authorized ginger/black cats and golden/shepherd dogs; corrected motion, exact review and shared gameplay |
+
 These predate the numbered convention. Their original bodies are preserved in
 [the archive](../archive/README.md); their established URLs now route current
 architecture or implementation status.

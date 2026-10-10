@@ -38,6 +38,29 @@ copying every item into multiple checklists.
 
 ## Living world and inhabitants
 
+Owner direction, 2026-10-10: prioritize familiar animals now that the existing
+wildlife roster lives in the world. Cats and dogs are accepted work in
+[084](tactical/084-common-pets-and-variations.md); other expansion stays backlog.
+
+- Pets: ginger/gray tabby, black and calico cats; golden and black Labradors or
+  retrievers, pointed-ear shepherds and short-legged corgis/dachshunds. Coat
+  variations first, distinct body shapes next; puppies/kittens and long-haired
+  cats need their own proportions rather than scaled adult sprites.
+- Neighborhood birds: sparrow, pigeon and crow first; pigeon colors, blackbird,
+  blue tit and great tit later.
+- Garden insects: bumblebee, honeybee, ladybug, butterfly wing patterns and
+  dragonfly. Bee already exists in the historical roster, without a ready draft.
+- Familiar small animals: hedgehog, field mouse, squirrel and snail; rabbit coats
+  and gray squirrel alongside red squirrel.
+- Farm/pond variety: chicken, donkey and pond turtle; hen/rooster/chick, female
+  mallard/duckling and goose.
+- Missing named roster entries: goose, swan, blackbird, blue/great tit, budgie,
+  cockatiel, ferret and distinct bumblebee; explicit coat/breed/age variants.
+
+Suggested order after pets: neighborhood birds, garden insects, familiar small
+animals, then farm/pond variety. The old 196-entry exotic-animal backlog is not
+an active production target.
+
 Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
 
 - Moving cars that travel along roads. [Source audit and proposed approach](research/road-vehicles.md)

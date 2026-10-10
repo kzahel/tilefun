@@ -25,8 +25,9 @@ For cross-project context, see `~/code/dotfiles/projects/README.md` when availab
   progress first, then run `node scripts/wildlife/status.mjs`. See the wildlife topic.
 - Wildlife owner motion holds block broad art production; the tracked body-motion
   contract requires coordinator-reviewed correction prototypes before more repairs.
-- Wildlife art production is repair-only under `art-source/wildlife-v2/repair-scope.json`:
-  correct existing frozen torsos only; no new animal art or roster expansion.
+- Wildlife art production follows `art-source/wildlife-v2/repair-scope.json`:
+  existing frozen-torso repairs plus the explicit four-pet authorization in
+  [084](docs/tactical/084-common-pets-and-variations.md); other expansion stays stopped.
   Provisional gameplay with existing drafts follows the wildlife topic.
 - Keep this file short: agent guardrails and routing only. Put progress logs,
   benchmark captures and detailed review state in the owning docs. `CLAUDE.md`

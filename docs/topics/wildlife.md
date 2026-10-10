@@ -1,8 +1,23 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species have durable provisional gameplay; autonomous roster integration and validation are complete. Art repairs remain separate and new-animal production stays canceled.
-Updated: 2026-10-09.
+Status: all 22 existing-sheet species have durable provisional gameplay; a bounded four-pet art/gameplay batch is authorized. Other art expansion stays stopped.
+Updated: 2026-10-10.
+
+## Common pets: bounded resumption
+
+On 2026-10-10 the owner requested recording familiar-animal/variation ideas,
+proceeding with cats and dogs, and committing incrementally. [084](../tactical/084-common-pets-and-variations.md)
+owns ginger tabby, black cat, golden retriever and pointed-ear shepherd drafts,
+corrected source-driven body/hip motion, exact pending Workshop review and
+reuse of existing pet gameplay. This supersedes the older no-variant rule only
+for this named batch. The generic 196-entry campaign remains disabled, and its
+sheep/pig repair gate is not cleared by pet work. Existing frozen revisions,
+receipts and human review decisions remain unchanged.
+
+The [ideas backlog](../ideas.md#living-world-and-inhabitants) records common birds,
+garden insects (especially bees), small animals, farm/pond additions and further
+coat/breed/age variations. These are suggestions, not authorized production.
 
 ## Autonomous completion of existing gameplay roster
 
@@ -317,7 +332,7 @@ rerun. See 079 for evidence and limits. All 27 exact wildlife review records rem
 unchanged; art production and approval remain separate. Art-table refresh still
 lacks the ignored campaign state. Next: owner rabbit playtest, then robins.
 
-## Current scope: existing frozen-torso repairs only
+## Historical repair-only scope (bounded pets supersede it above)
 
 The owner canceled new-animal work. The [repair scope](../../art-source/wildlife-v2/repair-scope.json)
 freezes the22 already-produced draft IDs and lists11 existing walking quadrupeds

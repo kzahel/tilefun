@@ -2,6 +2,7 @@
   "identity": "wildlife-repair-only-20261004",
   "mode": "repair-existing",
   "allowNewAnimals": false,
+  "authorizedPetBatch": "art-source/wildlife-v2/pet-batch.json",
   "reason": "Owner limits further work to touching up existing animals with frozen walking torsos. No more new animals.",
   "existingAnimalIds": [
     "ant",
