@@ -104,6 +104,7 @@ import { around } from "./InterestManager.js";
 import { MutationQueue } from "./MutationQueue.js";
 import { mutationRange } from "./MutationRange.js";
 import type { PlayerSession } from "./PlayerSession.js";
+import { RealmActivity } from "./RealmActivity.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 import { tickAllAI } from "./tickAllAI.js";
@@ -1528,6 +1529,7 @@ export class Realm {
     this.railway = null;
     await this.streaming?.close();
     this.streaming = null;
+    this.activity.clear();
     // Close previous save manager
     if (this.saveManager) {
       await this.saveManager.close();
@@ -1569,7 +1571,10 @@ export class Realm {
       this.saveManager,
       this.options.definitions,
     );
-    this.entityManager.removalListeners.add((entity) => this.previousActive.delete(entity));
+    this.entityManager.removalListeners.add((entity) => {
+      this.previousActive.delete(entity);
+      this.activity.invalidate();
+    });
     this.entityManager.canPlace = (wx, wy) =>
       Number.isFinite(wx) &&
       Number.isFinite(wy) &&
@@ -1836,6 +1841,7 @@ export class Realm {
     for (const [key] of this.world.chunks.entries()) this.world.chunks.remove(key);
     this.records?.features.clear();
     this.sessions.clear();
+    this.activity.clear();
     this.replication.clear();
   }
 
@@ -2140,19 +2146,6 @@ export class Realm {
   ): Map<Entity, number> {
     const result = new Map<Entity, number>();
     if (this.streaming && this.records) {
-      const groups = new Set<number>();
-      for (const [key, demand] of this.streaming.demand) {
-        if (!demand.activity || !this.streaming.residency.ready(key)) continue;
-        for (const actor of this.records.buckets.get(key) ?? []) {
-          if ("isProp" in actor) continue;
-          const root = this.records.root(actor);
-          if (groups.has(root.id)) continue;
-          groups.add(root.id);
-          const group = this.records.group(actor);
-          if (group.every((member) => this.streaming?.supported(member, dt)))
-            for (const member of group) result.set(member, dt);
-        }
-      }
       for (const session of sessions)
         if (this.streaming.supported(session.player, dt)) result.set(session.player, dt);
       for (const state of this.traffic?.states.values() ?? []) {
@@ -2162,7 +2155,7 @@ export class Realm {
         )
           result.set(state.entity, dt);
       }
-      return this.selectWildlifeActivity(result, sessions, dt);
+      return this.activity.select(this.records, this.streaming, sessions, result, dt);
     }
     const nearBuf = Realm.BROADCAST_BUFFER_CHUNKS;
     const midBuf = nearBuf + Realm.MID_TICK_BUFFER;
@@ -2261,6 +2254,7 @@ export class Realm {
   }
 
   private previousActive = new Set<Entity>();
+  private readonly activity = new RealmActivity();
   private readonly wildlifeActivity = new WildlifeActivity();
   private robinTurn = 0;
   private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {

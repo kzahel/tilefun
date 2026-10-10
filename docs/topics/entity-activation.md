@@ -53,6 +53,15 @@ activity. A fresh actor receives one grounding step before sleep; sleeping actor
 retain residency, collision bodies, RNG and motion phase without accumulating dt.
 Ordinary avatars, vehicles and projectiles retain their existing membership.
 
+[090](../tactical/090-incremental-simulation-membership.md) caches demanded ready
+attachment groups by spatial/topology revision and ordered ready activity chunks.
+Ordinary state writes do not rebuild membership. Live view/proximity/follower/
+contact eligibility still runs each step; sleeping wildlife skips trajectory
+readiness queries. Supported ordinary bodies supply wake contacts before wildlife
+selection. Eviction drops cached references immediately; world replacement and
+successful teardown clear membership and hysteresis. Active-body readiness,
+fixed-step dt, bucket ordering and fresh grounding remain unchanged.
+
 Movement remains fixed-step in both active tiers; nominal reduced decision rate
 is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic
 state without wall-clock catch-up. Balls, entity physics, separation, attachments
@@ -105,8 +114,8 @@ not the shipped policy's mobile performance. [088](../tactical/088-wildlife-work
 implements shared sleep interest and deterministic robin work quotas, including
 bounds inside an individual path search. It deliberately chooses among a smaller
 set of fully checked candidates; 085's original-choice parity applies to the
-unbudgeted allocation optimization only. Moving phone validation and cheaper
-resting-body support/broadphase queries remain follow-up. Prediction's history
+unbudgeted allocation optimization only. 090 supplies fresh phone walking controls; original-save/contact acceptance and
+cheaper resting-body support/broadphase queries remain follow-up. Prediction's history
 weakness has its own owner; the user's original save has not been profiled.
 
 Campfires have no AI: their definition in

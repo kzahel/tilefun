@@ -38,7 +38,14 @@ inside this diagnostic Vite server for an original/optimized comparison. The
 reference must be from the same checkout's companion modules. For a full earlier
 policy comparison, also supply `--realm-reference=PATH` and `--ai-reference=PATH`
 with matching earlier `Realm.ts` and `tickAllAI.ts`. The default baseline means the
-current production policy, not the historical runtime. Keep Chrome in the
+current production policy, not the historical runtime. Add `--motion=walk` to
+hold Right through the normal input path; reports include initial/final position
+and maximum displacement so a blocked walk is distinguishable from traversal.
+It is a keyboard-driven movement control, not touch acceptance. For a matched
+membership comparison, run the same probe against a frozen pre-change archive
+and current source, sequentially without validation during sampling. See
+[090](../../docs/tactical/090-incremental-simulation-membership.md).
+Keep Chrome in the
 foreground on the phone; background debugging can stall or stop. Startup failures
 inside the capture retain page errors and body text in `failure.json`.
 

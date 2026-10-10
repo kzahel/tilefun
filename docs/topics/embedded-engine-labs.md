@@ -69,6 +69,11 @@ motion/contact; paused resident motion/RNG survives reload and wakes with one
 normal step. Predicted ordinary player/mount animation uses the shared predictor,
 while physically timed wildlife clips retain their authority clock.
 
+[090](../tactical/090-incremental-simulation-membership.md) applies the same
+incremental demanded-group cache and sleep-before-readiness policy in Realm,
+including ScenarioSession/ScenarioClient. Live contacts/wake checks and explicit
+world/eviction teardown stay shared; no lab-specific activation or physics path.
+
 [085](../tactical/085-robin-search-cost.md) optimizes the shared robin decision
 function without a separate lab path. Canvas/GPU grove checks still pass flight,
 actual perching, approach/contact and frozen trajectory reload; ordinary game

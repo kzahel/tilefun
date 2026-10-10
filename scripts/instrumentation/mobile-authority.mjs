@@ -12,6 +12,8 @@ const option = (key, fallback) =>
 const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
 const seconds = Number(option("seconds", "15"));
+const motion = option("motion", "idle");
+if (!["idle", "walk"].includes(motion)) throw Error("--motion must be idle or walk");
 const output = option("output", path.join(os.tmpdir(), "tilefun-mobile-authority"));
 const androidCli = option("android-device-cli", "");
 const robinReferencePath = option("robin-reference", "");
@@ -109,6 +111,7 @@ const report = {
   browser: browser.version(),
   physical: !!endpoint,
   instrumented: true,
+  motion,
   robinReference: !!robinReference,
   realmReference: !!realmReference,
   aiReference: !!aiReference,
@@ -318,6 +321,7 @@ try {
       }, control);
       await page.waitForTimeout(2000);
       await worker.evaluate(() => globalThis.__diagnosticReset());
+      if (motion === "walk") await page.keyboard.down("ArrowRight");
       const data = await page.evaluate(async (seconds) => {
         const g = document.querySelector("#game").__game;
         g.performanceMetrics.reset();
@@ -329,8 +333,10 @@ try {
           ackTimes = [];
         let maxReplay = 0,
           maxResim = 0,
+          maxTravel = 0,
           lastAck = g.stateView.lastProcessedInputSeq,
           lastFrame = performance.now();
+        const initialPosition = { ...g.stateView.playerEntity.position };
         const callbacks = g.loop.callbacks,
           render = callbacks.render,
           update = callbacks.update,
@@ -342,6 +348,11 @@ try {
         callbacks.update = (...args) => {
           const start = performance.now();
           const result = update(...args);
+          const p = g.stateView.playerEntity.position;
+          maxTravel = Math.max(
+            maxTravel,
+            Math.hypot(p.wx - initialPosition.wx, p.wy - initialPosition.wy),
+          );
           updates.push(performance.now() - start);
           const d = g.remoteView._predictor?.lastReconcileDiagnostics;
           if (d) {
@@ -391,16 +402,21 @@ try {
           ackMs: summary(ackTimes),
           maxReplay,
           maxResim,
+          initialPosition,
+          finalPosition: { ...g.stateView.playerEntity.position },
+          maxTravel,
           replicatedEntities: g.stateView.entities.length,
           host: await g.transport.getDiagnostics(),
           viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio },
         };
       }, seconds);
+      if (motion === "walk") await page.keyboard.up("ArrowRight");
       const authority = await worker.evaluate(() => globalThis.__diagnosticRead());
       const thermalsAfter = androidCli ? readAndroidThermals(androidCli) : undefined;
       const row = {
         scene,
         control,
+        motion,
         thermalsBefore,
         thermalsAfter,
         ...data,
@@ -428,6 +444,13 @@ try {
         }),
       );
       await writeFile(path.join(output, "report.json"), JSON.stringify(report, null, 2));
+      if (endpoint) {
+        await page.goto("about:blank");
+        await cdp.send("Storage.clearDataForOrigin", {
+          origin: new URL(origin).origin,
+          storageTypes: "all",
+        });
+      }
       await page.close();
       page = undefined;
       if (!endpoint) await context.close();
@@ -450,6 +473,21 @@ try {
   );
   throw error;
 } finally {
+  if (page && motion === "walk") await page.keyboard.up("ArrowRight").catch(() => {});
+  if (page && endpoint) {
+    const cleanup = await page
+      .context()
+      .newCDPSession(page)
+      .catch(() => undefined);
+    await page.goto("about:blank").catch(() => {});
+    await cleanup
+      ?.send("Storage.clearDataForOrigin", {
+        origin: new URL(origin).origin,
+        storageTypes: "all",
+      })
+      .catch(() => {});
+    await cleanup?.detach().catch(() => {});
+  }
   await page?.close().catch(() => {});
   await browser.close();
   await server.close();

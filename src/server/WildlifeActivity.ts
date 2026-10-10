@@ -32,6 +32,7 @@ export class WildlifeActivity {
     group: readonly Entity[],
     observers: readonly Observer[],
     contacts: readonly Entity[],
+    refresh = true,
   ): boolean {
     // Attached groups, followers and ordinary gameplay bodies retain their
     // existing interest. Never freeze one member independently of its root.
@@ -73,7 +74,7 @@ export class WildlifeActivity {
       return dx * dx + dy * dy <= 96 * 96;
     });
     if (interested(1, 192) || contact) {
-      this.awakeUntil.set(entity, this.time + 0.5);
+      if (refresh) this.awakeUntil.set(entity, this.time + 0.5);
       return true;
     }
     return (this.awakeUntil.get(entity) ?? 0) > this.time && interested(2, 256);

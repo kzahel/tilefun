@@ -130,13 +130,21 @@ bounded client scratch replay and authority input-backlog admission, with explic
 history-gap recovery. Its isolated stall controls do not measure countryside AI
 headroom or eliminate correction from newly available terrain/contacts.
 
+[090](../tactical/090-incremental-simulation-membership.md) caches demanded actor
+groups and checks wildlife sleep before trajectory readiness. Fresh phone
+stationary selection p95 falls from 1.7ms to 1.0–1.1ms; walking selection falls
+from 1.3–1.4ms to 1.1ms. Whole walking-tick p95 does not improve in these samples;
+this is a phase-cost reduction, not a stutter cure. The next bounded candidate is
+static prop activity/readiness selection: it still costs about 1.9–2.3ms p95 on
+the phone. Moving physics remains another substantial cost. The tactical owns
+exact run order, temperatures, workload and final checks.
+
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.
 Its experimental sleeping control reduced membership to 22 and p95 to 12.5–13.5ms;
 query caching alone offered little gain. These are pre-delivery measurements.
-088 records fresh desktop before/after timing separately; the phone was being
-used outside Chrome, so the shipped policy still needs a moving native-phone
-capture. Use a provisional 4–6ms p95 CPU target, then profile remaining
+088 records its earlier desktop before/after timing separately. 090 supplies
+fresh native-phone stationary and moving controls on the shipped policy. Use a provisional 4–6ms p95 CPU target, then profile remaining
 support/collision and streaming work. The city traversal gate has much lower
 actor load and does not establish countryside headroom. The user's original
 session has not been captured.

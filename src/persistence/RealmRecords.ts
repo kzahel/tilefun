@@ -29,6 +29,8 @@ export class RealmRecords {
   readonly byId = new Map<string, Entity | Prop>();
   readonly features = new Map<string, FeatureRecord>();
   readonly buckets = new Map<string, Set<Entity | Prop>>();
+  /** Spatial membership/attachment changes, independent of ordinary saved state edits. */
+  membershipRevision = 0;
   private membership = new WeakMap<Entity | Prop, string>();
   private children = new Map<number, Set<Entity>>();
   private parentOf = new WeakMap<Entity, number>();
@@ -87,6 +89,7 @@ export class RealmRecords {
   private unindex(actor: Entity | Prop): void {
     const old = this.membership.get(actor);
     if (old) {
+      this.membershipRevision++;
       const bucket = this.buckets.get(old);
       bucket?.delete(actor);
       if (!bucket?.size) this.buckets.delete(old);
@@ -115,6 +118,7 @@ export class RealmRecords {
     this.buckets.set(scope, bucket);
     bucket.add(actor);
     this.membership.set(actor, scope);
+    this.membershipRevision++;
     if (!("isProp" in actor) && actor.parentId !== undefined) {
       const children = this.children.get(actor.parentId) ?? new Set();
       this.children.set(actor.parentId, children);
