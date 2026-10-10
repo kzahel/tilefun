@@ -16,6 +16,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [091 Static prop admission](091-static-prop-admission.md) | Complete: cache stable scenery activity/readiness, measured native game/phone controls; [performance](../topics/performance.md) |
 | [092 Authority physics profile](092-authority-physics-profile.md) | Complete: native Worker phase/query/CPU attribution and next collision target; [performance](../topics/performance.md) |
 | [093 Identical NPC collision probes](093-identical-collision-probes.md) | Complete: per-call stable geometry reuse and native phone comparison; [performance](../topics/performance.md) |
+| [094 Reuse stable interest demand](094-interest-demand-cache.md) | Complete: ticket-value/expiry cache and native phone comparison; [performance](../topics/performance.md) |
 | [089 Prediction backlog recovery](089-prediction-backlog-recovery.md) | Complete: bounded input/replay work, explicit history gaps and native stall controls |
 | [088 Wildlife work budgets](088-wildlife-work-budgets.md) | Complete: wildlife sleep, bounded robin planning, predicted animation and clip-clock fences; native phone follow-up |
 | [087 Player-driven cars and trains](087-player-driven-cars-and-trains.md) | Delivered: inside driving, persistent parked cars, track-bound trains and tap-to-move controls |

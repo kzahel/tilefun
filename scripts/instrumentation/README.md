@@ -61,6 +61,10 @@ owns the measurement boundary and results.
 probe server for original-policy comparisons. The report records the control;
 hold companion modules and input conditions fixed. [093](../../docs/tactical/093-identical-collision-probes.md)
 owns the identical-probe comparison.
+`--interest-reference=PATH` substitutes the original interest manager while
+keeping companion modules fixed. The probe measures `interest-demand` separately
+from the enclosing streaming update; [094](../../docs/tactical/094-interest-demand-cache.md)
+owns its cache comparison.
 
 Keep Chrome in the
 foreground on the phone; background debugging can stall or stop. Startup failures

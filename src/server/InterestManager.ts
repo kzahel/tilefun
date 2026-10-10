@@ -17,6 +17,9 @@ export interface ChunkDemand {
 /** The realm's sole source of requested residency and simulation activity. */
 export class InterestManager {
   private tickets = new Map<string, readonly InterestTicket[]>();
+  private cached: Map<string, ChunkDemand> | undefined;
+  private validFrom = -Infinity;
+  private validUntil = Infinity;
   constructor(readonly maxChunks = 4096) {}
 
   set(owner: string, tickets: readonly InterestTicket[]): void {
@@ -30,23 +33,58 @@ export class InterestManager {
       )
         throw new Error("Interest exceeds the bounded chunk budget.");
     }
-    this.tickets.set(owner, tickets);
+    const previous = this.tickets.get(owner);
+    if (
+      previous?.length === tickets.length &&
+      tickets.every((ticket, i) => {
+        const old = previous[i];
+        return (
+          old !== undefined &&
+          old.activity === ticket.activity &&
+          old.reason === ticket.reason &&
+          old.expires === ticket.expires &&
+          old.range.minCx === ticket.range.minCx &&
+          old.range.maxCx === ticket.range.maxCx &&
+          old.range.minCy === ticket.range.minCy &&
+          old.range.maxCy === ticket.range.maxCy
+        );
+      })
+    )
+      return;
+    // Own the values: callers may reuse or mutate their ticket/range objects.
+    this.tickets.set(
+      owner,
+      tickets.map((ticket) => ({ ...ticket, range: { ...ticket.range } })),
+    );
+    if (tickets.length || previous?.length) this.cached = undefined;
   }
   release(owner: string): void {
-    this.tickets.delete(owner);
+    if (this.tickets.delete(owner)) this.cached = undefined;
   }
   retainOwners(owners: ReadonlySet<string>, prefix: string): void {
     for (const owner of this.tickets.keys())
       if (owner.startsWith(prefix) && !owners.has(owner)) this.release(owner);
   }
   demand(now: number): Map<string, ChunkDemand> {
+    // Empty owners affect insertion order until the next demand, but never its
+    // contents. Prune them even on hits, as the uncached assembly does.
+    for (const [owner, tickets] of this.tickets) if (!tickets.length) this.tickets.delete(owner);
+    if (this.cached && now >= this.validFrom && now < this.validUntil)
+      return this.copyDemand(this.cached);
     const result = new Map<string, ChunkDemand>();
     const ranked: InterestTicket[] = [];
+    this.validFrom = -Infinity;
+    this.validUntil = Infinity;
     for (const [owner, tickets] of this.tickets) {
       const live = tickets.filter((ticket) => ticket.expires === undefined || ticket.expires > now);
       if (!live.length) {
         this.tickets.delete(owner);
         continue;
+      }
+      for (const ticket of tickets) {
+        if (ticket.expires === undefined) continue;
+        if (ticket.expires > now) this.validUntil = Math.min(this.validUntil, ticket.expires);
+        else this.validFrom = Math.max(this.validFrom, ticket.expires);
       }
       ranked.push(...live);
     }
@@ -82,7 +120,12 @@ export class InterestManager {
           });
         }
     }
-    return new Map([...result].sort((a, b) => a[1].priority - b[1].priority));
+    this.cached = new Map([...result].sort((a, b) => a[1].priority - b[1].priority));
+    return this.copyDemand(this.cached);
+  }
+  private copyDemand(demand: Map<string, ChunkDemand>): Map<string, ChunkDemand> {
+    // Preserve the public fresh-map/value contract; consumers cannot poison reuse.
+    return new Map(Array.from(demand, ([key, chunk]) => [key, { ...chunk }]));
   }
 }
 

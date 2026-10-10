@@ -158,9 +158,19 @@ outcomes, momentum clipping and blocked AI reactions remain unchanged; later
 calls read fresh geometry, and generic callbacks retain both queries by default.
 The phone's NPC prop query count falls about 38%; shallow EntityManager mean falls
 about 15% idle/10% walking. Whole-tick p95 overlaps (walking 10.5–11.0ms original,
-10.2–11.2ms reuse), so this is a phase saving, not a stutter/desync cure. Next,
-profile incremental interest-demand assembly under live ticket/readiness changes.
-Persistent support caches and finer spatial indices remain later candidates.
+10.2–11.2ms reuse), so this is a phase saving, not a stutter/desync cure.
+
+[094](../tactical/094-interest-demand-cache.md) reuses sorted interest demand when
+ordered ticket values are stable, including repeated empty railway/attachment
+submissions. Exact lease expiry and backwards clock changes across retained expiry
+boundaries reassemble it; residency still reconciles every update with fresh maps/values. Native phone demand
+assembly averages about 78% less walking/80% less idle; streaming mean falls from
+0.70–0.84ms to 0.35–0.38ms per tick. Walking whole-tick p95 overlaps at
+10.5–10.7ms; idle p95 falls from 10.0–10.4ms to 9.3–9.6ms in two samples each.
+This is another phase saving, with rare spikes still present. Next, profile NPC
+ground/support queries for safe reuse across unchanged position and geometry;
+carrier motion and live edits must invalidate any support cache. Finer spatial
+indices remain a later candidate.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

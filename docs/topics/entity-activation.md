@@ -44,6 +44,14 @@ Player tickets request full AI decisions within 2 chunks, reduced decisions
 within 4 and collision support within 5. Camera tickets add residency without
 activating distant AI. Distant players contribute a union of neighborhoods.
 
+[094](../tactical/094-interest-demand-cache.md) caches the sorted demand assembled
+from ordered ticket values. `set` owns a snapshot; resubmit changed ticket/range
+values explicitly. Equivalent and empty submissions avoid reassembly. Owner,
+range, activity, reason, expiry and order changes invalidate it, as do exact lease
+expiry and backwards clock changes across an expiry boundary. Demand maps/values
+remain independent per call. Readiness and residency reconciliation stay live
+on every streaming update, including pressure recovery and failed-read retries.
+
 [088](../tactical/088-wildlife-work-budgets.md) further narrows wildlife simulation
 within that membership. An animal wakes within 192px of any player or in that
 player's visible chunk range plus one chunk, clamped to the player's two-chunk

@@ -83,6 +83,11 @@ movement into identical per-call collision-probe reuse. Game and labs retain bot
 axis outcomes, blocked AI reactions, live support and later-call geometry changes.
 Default generic resolver callbacks keep both queries.
 
+[094](../tactical/094-interest-demand-cache.md) reuses stable ticket demand in the
+shared InterestManager used by game, Worker/Node and ScenarioSession streaming.
+Lab camera/player/arrival/attachment changes and lease expiry retain ordinary
+invalidation; asynchronous residency reconciliation still runs every update.
+
 [085](../tactical/085-robin-search-cost.md) optimizes the shared robin decision
 function without a separate lab path. Canvas/GPU grove checks still pass flight,
 actual perching, approach/contact and frozen trajectory reload; ordinary game

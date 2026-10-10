@@ -29,6 +29,10 @@ const collisionReference = collisionReferencePath
   : undefined;
 const aiReferencePath = option("ai-reference", "");
 const aiReference = aiReferencePath ? await readFile(aiReferencePath, "utf8") : undefined;
+const interestReferencePath = option("interest-reference", "");
+const interestReference = interestReferencePath
+  ? await readFile(interestReferencePath, "utf8")
+  : undefined;
 const controls = option("controls", "baseline,visible-ai,sleep-hidden,no-ai,baseline").split(",");
 const scenes = option("scenes", "dog").split(",");
 if (endpoint && !port) throw Error("Physical CDP requires a dedicated --port");
@@ -67,6 +71,8 @@ const server = await createServer({
       name: "diagnostic-authority-access",
       enforce: "pre",
       transform(code, id) {
+        if (interestReference && id.split("?")[0].endsWith("/src/server/InterestManager.ts"))
+          return interestReference;
         if (collisionReference && id.split("?")[0].endsWith("/src/entities/collision.ts"))
           return collisionReference;
         if (realmReference && id.split("?")[0].endsWith("/src/server/Realm.ts")) {
@@ -183,6 +189,7 @@ const report = {
   realmReference: !!realmReference,
   collisionReference: !!collisionReference,
   aiReference: !!aiReference,
+  interestReference: !!interestReference,
   cases: [],
 };
 let page;
@@ -365,6 +372,7 @@ try {
             : [realm.propManager.props, "filter", "prop-selection"],
           [realm.worldAPI.tick, "firePre", "pre-hooks"],
           [realm.streaming, "update", "streaming"],
+          [realm.streaming.interest, "demand", "interest-demand"],
           [realm, "decisionDts", "decision-selection"],
           [realm, "replicate", "replication"],
           [realm.worldAPI.overlap, "tick", "overlap"],
