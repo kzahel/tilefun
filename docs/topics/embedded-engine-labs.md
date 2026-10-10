@@ -477,6 +477,13 @@ duck diagnostics for browser verification; it adds no animal simulation loop.
 
 ## Inside vehicle driving (2026-10-10)
 
+The [car input-gap fix](../research/car-driving-prediction-jitter.md) lives in
+shared Realm/VehicleControl: inside cars integrate consumed commands only, with
+explicit release braking and a genuine stale-input stop. Native ScenarioSession
+and binary-replica tests cover 30/60Hz authority and 120Hz presentation, delayed
+turns/releases and roof carry. Game and embedded labs inherit one motion owner;
+no lab-specific prediction, timer or physics path is added.
+
 The shared VehicleControl prompt also offers **Call train · E** beside generated
 station benches. ScenarioSession forwards the lab command to Realm/RailwaySystem,
 matching game recall, occupancy/clearance checks, eight-second dwell and persisted

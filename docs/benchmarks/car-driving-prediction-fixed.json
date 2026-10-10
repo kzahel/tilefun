@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-10",
+  "baseRevision": "5fc3097a7d2d3ad8fcfeab75fe310c4a586d43b6",
+  "scope": "Four seconds of native clear-ground driving; 30/60Hz authority, 120Hz controlled presentation. No browser, GPU, timers or physical display measurement.",
+  "gameplayChanged": true,
+  "controlled": [
+    {
+      "serverHz": 60,
+      "profile": "regular",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335149121093309,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.03546995703322864,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -93.31077223200472,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "8469512e4e3ab1569eda87f834476538d5e0837560fad3107d087ffcafd55e99"
+    },
+    {
+      "serverHz": 60,
+      "profile": "late-input",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 5,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335098242187314,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.03546995703322864,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -93.31077223200472,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "15da9c94252e5ca2630f256f58f0c0d778aea67750977d565c6b794db63df06c"
+    },
+    {
+      "serverHz": 60,
+      "profile": "late-snapshot",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335149121093309,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.03546995703322864,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -93.31077223200472,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "8659464e4d78b96e9dd6f3ad71f53c6876f2505c3b87848c3028b578f8344dad"
+    },
+    {
+      "serverHz": 60,
+      "profile": "delay50",
+      "summary": {
+        "maxReconcileShiftPx": 2.542968752550223e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.9335149121093309,
+        "maxWorldStepPx": 0.9335454296875696,
+        "maxScreenStepPx": 0.035469965655124724,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -98.91189223200473,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "498aa4d43cbf916009d5eef0f0c6c3f85a23fa0ded7855a71a25e287da9072d4"
+    },
+    {
+      "serverHz": 30,
+      "profile": "regular",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853615123671261,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -94.84461304399744,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "ab6584fc154f9b5546b5cae6dccbc88b9c632fa8ac6e04ce3e03361b0395a9de"
+    },
+    {
+      "serverHz": 30,
+      "profile": "late-input",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 5,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853615123671261,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -94.84461304399744,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "36c3d7ed5d4424c53d4e4131f5e4705170ec7e87bf21932c14cb2147f4a92116"
+    },
+    {
+      "serverHz": 30,
+      "profile": "late-snapshot",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853615123671261,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -94.84461304399744,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "51866449bf7f97854b108c387d4f5b979886b3fd2a5526bd8dbf3d5a67755ed2"
+    },
+    {
+      "serverHz": 30,
+      "profile": "delay50",
+      "summary": {
+        "maxReconcileShiftPx": 1.93261719232396e-5,
+        "maxReconcileVelocityShift": 0,
+        "missingInputTicks": 0,
+        "motionWithoutInputPx": 0,
+        "minWorldStepPx": 0.933220673828032,
+        "maxWorldStepPx": 0.9332511914062991,
+        "maxScreenStepPx": 0.03853870639488832,
+        "maxDriverCarSeparationPx": 0,
+        "endAuthorityX": -102.31053304399742,
+        "endAuthorityY": 0,
+        "endAuthoritySpeed": 112
+      },
+      "repeatIdentical": true,
+      "traceHash": "2359daab96a30735ef1a8c1ca375e8319b912d0f535304a53a8dc380f2983533"
+    }
+  ],
+  "browser": [
+    {
+      "scope": "Eight seconds of real Worker keyboard driving in an isolated fresh regional world; no timing/input injection. Cruise filtering excludes hard stops but cannot rule out every nearby contact.",
+      "steadyRenderScope": "Constant 112px/s XY travel, omitting first second and last half-second; this does not establish whole-machine frame pacing.",
+      "summary": {
+        "renderer": "canvas",
+        "serverHz": 60,
+        "reconciliationSamples": 480,
+        "cruiseSamples": 451,
+        "missingInputCruiseFrames": 68,
+        "maxMotionWithoutAckPx": 0,
+        "maxCruiseReconcileShiftPx": 0.0008290625009976793,
+        "renderFrames": 480,
+        "errors": [],
+        "measuredRenderHz": 60.00175370470118,
+        "headed": false,
+        "steadyRenderSamples": 388,
+        "maxSteadyWorldStepErrorPx": 0.0006713199988439555
+      }
+    },
+    {
+      "scope": "Eight seconds of real Worker keyboard driving in an isolated fresh regional world; no timing/input injection. Cruise filtering excludes hard stops but cannot rule out every nearby contact.",
+      "steadyRenderScope": "Constant 112px/s XY travel, omitting first second and last half-second; this does not establish whole-machine frame pacing.",
+      "summary": {
+        "renderer": "gpu",
+        "serverHz": 60,
+        "reconciliationSamples": 479,
+        "cruiseSamples": 450,
+        "missingInputCruiseFrames": 35,
+        "maxMotionWithoutAckPx": 0,
+        "maxCruiseReconcileShiftPx": 0.0003407812491786899,
+        "renderFrames": 960,
+        "measuredRenderHz": 120.00850946678186,
+        "headed": true,
+        "errors": [],
+        "steadyRenderSamples": 779,
+        "maxSteadyWorldStepErrorPx": 0.0005257200014057162
+      }
+    },
+    {
+      "scope": "Eight seconds of real Worker keyboard driving in an isolated fresh regional world; no timing/input injection. Cruise filtering excludes hard stops but cannot rule out every nearby contact.",
+      "steadyRenderScope": "Constant 112px/s XY travel, omitting first second and last half-second; this does not establish whole-machine frame pacing.",
+      "summary": {
+        "renderer": "canvas",
+        "serverHz": 30,
+        "reconciliationSamples": 239,
+        "cruiseSamples": 224,
+        "missingInputCruiseFrames": 3,
+        "maxMotionWithoutAckPx": 0,
+        "maxCruiseReconcileShiftPx": 0.00043843750063388143,
+        "renderFrames": 480,
+        "measuredRenderHz": 60.0025053238131,
+        "headed": false,
+        "errors": [],
+        "steadyRenderSamples": 388,
+        "maxSteadyWorldStepErrorPx": 0.0002867274990876467
+      }
+    }
+  ]
+}

@@ -113,8 +113,10 @@ No gameplay fix is implemented.
 characterizes inside-car driving on native clear flat ground at 30/60Hz authority
 and controlled 120Hz presentation. Regular inputs, one-tick late inputs, late
 snapshots and constant 50ms delay each way repeat entire traces in fresh sessions.
-`--assert-continuous` is the future correction/step-uniformity gate; it currently
-fails the late-input cases. It does not draw pixels or measure native display cadence.
+`--assert-continuous` checks correction and step uniformity; it passes after the
+shared command-time fix. Its importable `car-driving-prediction-case.ts` fixture
+also runs in the unit suite, including delayed diagonal turns and release braking.
+It does not draw pixels or measure native display cadence.
 
 `node scripts/instrumentation/car-driving-browser.mjs --output=/tmp/tilefun-car-driving-browser-canvas60.json`
 observes ordinary keyboard driving through real Worker authority in an isolated
@@ -123,7 +125,10 @@ fresh regional world, without timing/input injection. Add `--renderer=gpu`,
 data/browser storage and closes its browser/server. Run captures sequentially
 without concurrent tests/profilers. Cruise filtering excludes hard stops, but
 cannot exclude every contact; this is characterization, not broad driving
-acceptance. [Investigation and next fix](../../docs/research/car-driving-prediction-jitter.md).
+acceptance. [Investigation and shared fix](../../docs/research/car-driving-prediction-jitter.md).
+Use `--assert-fixed` to gate cruise replay correction and single-tick motion
+without acknowledgement at 0.01px; the generated-world cruise filter remains a
+scoped control, not acceptance of every terrain/contact trajectory.
 
 `npx tsx scripts/instrumentation/moving-contact.ts --output=/tmp/moving-contact.json`
 runs ten native production scenes under five controlled input/delivery schedules.

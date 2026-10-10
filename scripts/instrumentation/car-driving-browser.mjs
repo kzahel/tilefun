@@ -28,13 +28,14 @@ const server = await createServer({
   logLevel: "error",
 });
 let browser;
+let page;
 try {
   await server.listen();
   browser = await chromium.launch({
     channel: "chromium",
     headless: !process.argv.includes("--headed"),
   });
-  const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+  page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
   page.setDefaultTimeout(30_000);
   const errors = [];
   page.on("pageerror", (error) => errors.push(error.message));
@@ -50,6 +51,24 @@ try {
   );
   await page.getByPlaceholder("World name...").fill("Car prediction diagnostic");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await page.getByRole("button", { name: "New World", exact: true }).waitFor({ state: "hidden" });
+  // Realm creation and authority application are asynchronous. Wait for the
+  // requested arrival, not traffic from the launcher's preceding replica.
+  await page.waitForFunction(({ x, y }) => {
+    const g = document.querySelector("#game")?.__game;
+    const p = g?.remoteView.serverPlayerEntity;
+    return (
+      g?.initDone &&
+      p?.id !== -1 &&
+      Math.hypot(p.position.wx - x * 16, p.position.wy - y * 16) < 96 &&
+      g.renderer.isTerrainReady(
+        g.stateView.world.chunks.get(
+          Math.floor(p.position.wx / 256),
+          Math.floor(p.position.wy / 256),
+        ),
+      )
+    );
+  }, arrival);
   await page.waitForFunction(() =>
     document
       .querySelector("#game")
@@ -60,16 +79,29 @@ try {
   await page.waitForFunction(
     () => !document.querySelector("#game").__game.remoteView.editorEnabled,
   );
-  const direction = await page.evaluate(async () => {
+  await page.waitForFunction(
+    () => document.querySelector("#game").__game.remoteView._predictor?.player,
+  );
+  await page.evaluate(async () => {
     const g = document.querySelector("#game").__game;
-    const car = g.remoteView.serverEntities.find((e) => e.type.startsWith("vehicle-v1:"));
+    const p = g.remoteView.serverPlayerEntity;
+    const car = g.remoteView.serverEntities
+      .filter((e) => e.type.startsWith("vehicle-v1:") && e.collider)
+      .sort(
+        (a, b) =>
+          Math.hypot(a.position.wx - p.position.wx, a.position.wy - p.position.wy) -
+          Math.hypot(b.position.wx - p.position.wx, b.position.wy - p.position.wy),
+      )[0];
     const direction = car.sprite.direction;
     const dx = direction === 3 ? 1 : direction === 2 ? -1 : 0;
     const dy = direction === 0 ? 1 : direction === 1 ? -1 : 0;
-    const x = car.position.wx + dx * (car.collider.width / 2 + 12);
-    const y = car.position.wy + car.collider.offsetY + dy * (car.collider.height / 2 + 12);
+    const x = car.position.wx + car.collider.offsetX + dx * (car.collider.width / 2 + 12);
+    const y =
+      car.position.wy +
+      car.collider.offsetY -
+      car.collider.height / 2 +
+      dy * (car.collider.height / 2 + 12);
     await g.gcSendRequest({ type: "rcon", requestId: g.nextRequestId++, command: `tp ${x} ${y}` });
-    return direction;
   });
   const enter = page.getByRole("button", { name: "Drive car · E", exact: true });
   await enter.waitFor({ state: "visible" });
@@ -78,6 +110,12 @@ try {
     () =>
       document.querySelector("#game").__game.remoteView.serverPlayerEntity.parentId !== undefined,
   );
+  const direction = await page.evaluate(() => {
+    const g = document.querySelector("#game").__game;
+    return g.remoteView.serverEntities.find(
+      (e) => e.id === g.remoteView.serverPlayerEntity.parentId,
+    ).sprite.direction;
+  });
   await page.evaluate(async (hz) => {
     const g = document.querySelector("#game").__game;
     await g.gcSendRequest({
@@ -157,6 +195,9 @@ try {
     maxMotionWithoutAckPx: Math.max(0, ...missing.map((r) => r.authorityAdvance)),
     maxCruiseReconcileShiftPx: Math.max(0, ...cruise.map((r) => r.shift)),
     renderFrames: capture.renders.length,
+    measuredRenderHz:
+      (capture.renders.length - 1) / (capture.renders.at(-1).time - capture.renders[0].time),
+    headed: process.argv.includes("--headed"),
     errors,
   };
   const output = option("output", path.join(temp, "capture.json"));
@@ -166,6 +207,31 @@ try {
   );
   console.log(JSON.stringify({ output, ...summary }, null, 2));
   if (errors.length || cruise.length < 30) throw Error("Native diagnostic missed clear driving");
+  if (
+    process.argv.includes("--assert-fixed") &&
+    (summary.maxMotionWithoutAckPx > 0.01 || summary.maxCruiseReconcileShiftPx > 0.01)
+  )
+    throw Error("Unexpected cruise travel or prediction correction");
+} catch (error) {
+  if (page) {
+    const failure = await page
+      .evaluate(() => {
+        const g = document.querySelector("#game")?.__game;
+        return {
+          body: document.body.innerText,
+          player: g?.remoteView.serverPlayerEntity,
+          cars: g?.remoteView.serverEntities.filter((e) => e.type.startsWith("vehicle-v1:")),
+        };
+      })
+      .catch(() => null);
+    await writeFile(
+      path.join(temp, "failure.json"),
+      JSON.stringify({ message: String(error), failure }, null, 2),
+    );
+    await page.screenshot({ path: path.join(temp, "failure.png") }).catch(() => {});
+    console.error(`Failure capture: ${temp}`);
+  }
+  throw error;
 } finally {
   await browser?.close();
   await server.close();

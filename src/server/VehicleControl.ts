@@ -111,6 +111,15 @@ export class VehicleControl {
     if (train) train.driveInput = Math.sign(input.dx || -input.dy);
     this.sync();
   }
+  /** Cars integrate command time only: an empty tick is not a release command.
+   * Trains still brake on their service clock. Neither refreshes the input deadline.
+   */
+  missingInput(session: PlayerSession): void {
+    const train = [...(this.realm.railway?.services.values() ?? [])].find(
+      (s) => s.driverId === session.player.id,
+    );
+    if (train) train.driveInput = 0;
+  }
   stop(session: PlayerSession): void {
     const vehicle = this.get(session);
     if (!vehicle) return;

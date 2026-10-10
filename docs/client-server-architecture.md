@@ -58,6 +58,14 @@ destruction. Reconnected transports can make fresh requests.
 
 ## Prediction and moving supports
 
+Inside-driven cars integrate consumed input command time only. Short empty-input
+authority ticks hold the committed pose; they do not synthesize braking movement
+or refresh the last-command timestamp. Real zero-axis commands brake normally;
+the existing 250ms stale-command stop changes velocity without adding travel.
+Driven trains retain service-clock braking on empty input. This shared Realm
+policy keeps ordinary game and embedded lab prediction aligned; see
+[car input-gap evidence](research/car-driving-prediction-jitter.md).
+
 Authority frames carry elapsed simulation seconds independently of tick count;
 binary frame headers are 27 bytes and endpoints must run the same build. Prediction
 retains bounded collision-only motion history for nearby solid entities and uses

@@ -20,15 +20,15 @@ support checks pass; no unrelated touch changes are included in this grass fix.
 
 ## Player driving
 
-The owner's slight-snapping report is reproduced in
-[inside-car prediction evidence](../research/car-driving-prediction-jitter.md).
-Missing-input authority ticks add braking movement outside the acknowledged
-command timeline; delayed commands then integrate their full duration, causing
-visible replay correction. Real Worker Canvas/GPU 60Hz captures show 1.680px
-corrections; a Canvas 30Hz control reaches 2.987px. This investigation changes no
-gameplay. The next slice should remove duplicate motion-time admission and retain
-explicit release braking and a genuine stale-command deadline through shared
-Realm/predictor owners.
+[Inside-car prediction evidence](../research/car-driving-prediction-jitter.md)
+reproduces the owner's slight-snapping report and records the shared-authority
+fix. Cars now integrate consumed input commands only; short delivery gaps hold
+the authority pose, preventing delayed commands from adding a second interval
+of travel. Explicit release commands still brake, and the genuine 250ms
+stale-command deadline stops without extra displacement. Disconnect parks
+immediately. Eighteen native simulation regressions cover game/lab shared owners;
+the pure 30/60Hz authority / 120Hz presentation gate passes. Train missing-input
+braking remains service-timed. Collision, roofs and approved art are unchanged.
 
 [Tactical 087](../tactical/087-player-driven-cars-and-trains.md) delivers the
 owner's 2026-10-10 choice: explicit **Drive car · E** beside a stopped car,

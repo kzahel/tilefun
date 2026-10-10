@@ -856,7 +856,7 @@ export class Realm {
         }
       } else if (!session.editorEnabled && session.player.velocity) {
         if (this.vehicles.get(session)) {
-          this.vehicles.input(session, { dx: 0, dy: 0 }, dt);
+          this.vehicles.missingInput(session);
           continue;
         }
         // No input this tick (timing jitter) — apply friction only.
