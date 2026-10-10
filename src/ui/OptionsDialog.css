@@ -47,7 +47,7 @@
 }
 .options-choices {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 .options-choices button {
@@ -80,6 +80,15 @@
   }
   .options-dialog p {
     margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .options-choices {
+    grid-template-columns: 1fr;
+  }
+  .options-choices button {
+    min-height: 56px;
   }
 }
 

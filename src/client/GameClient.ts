@@ -51,6 +51,7 @@ import {
   touchMovementMode,
 } from "../input/TapMovement.js";
 import { TouchButtons } from "../input/TouchButtons.js";
+import { TouchHold } from "../input/TouchHold.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { TouchPinch } from "../input/TouchPinch.js";
 import { TouchTap } from "../input/TouchTap.js";
@@ -163,6 +164,7 @@ export class GameClient {
   private touchPinch: TouchPinch;
   private pinchZoom = false;
   private touchTap: TouchTap;
+  private touchHold: TouchHold;
   private optionsDialog: OptionsDialog;
   private optionsButton: HTMLButtonElement | null = null;
   private hamburgerOpen = false;
@@ -276,13 +278,22 @@ export class GameClient {
       canvas,
       this.touchButtons.claimedTouches,
       (x, y) =>
-        this.movementMode !== "tap" ||
+        (this.movementMode !== "tap" && this.movementMode !== "hold") ||
         this.playInputBlocked ||
         this.storagePaused ||
         this.doorPresentation.busy
           ? null
           : this.resolveDriveTap(x, y),
       (target) => this.onDestinationTap(target),
+    );
+    this.touchHold = new TouchHold(canvas, this.touchButtons.claimedTouches, (x, y) =>
+      this.movementMode !== "hold" ||
+      !(this.scenes.current instanceof PlayScene) ||
+      this.playInputBlocked ||
+      this.storagePaused ||
+      this.doorPresentation.busy
+        ? null
+        : this.resolveDriveTap(x, y),
     );
     this.touchJoystick.enabled = this.movementMode === "joystick";
     // Let joystick skip touches claimed by on-screen buttons
@@ -605,7 +616,7 @@ export class GameClient {
           this.stateView,
           this.initDone && ready && this.scenes.current instanceof PlayScene,
           this.doorPresentation.busy || this.playInputBlocked || this.storagePaused,
-          this.movementMode === "tap",
+          this.movementMode,
         );
         this.doorControl.update(
           this.stateView,
@@ -1312,6 +1323,7 @@ export class GameClient {
       trainTapMovement: this.trainTapMovement,
       touchPinch: this.touchPinch,
       touchTap: this.touchTap,
+      touchHold: this.touchHold,
       canvas: this.canvas,
       ctx: this.ctx,
       camera: this.camera,
@@ -1634,7 +1646,7 @@ export class GameClient {
     )
       return;
     if (!(this.scenes.current instanceof PlayScene)) return;
-    if (this.movementMode === "tap") {
+    if (this.movementMode === "tap" || this.movementMode === "hold") {
       const target = this.resolveDriveTap(e.clientX, e.clientY);
       if (target) this.onDestinationTap(target);
       return;
@@ -1682,6 +1694,7 @@ export class GameClient {
     this.trainTapMovement.cancel();
     this.touchPinch.reset();
     this.touchTap.reset();
+    this.touchHold.reset();
     this.touchJoystick.reset();
     this.touchButtons.reset();
     this.actions.clearHeld();
@@ -1707,7 +1720,7 @@ export class GameClient {
   private onDestinationTap(target: TapTarget): void {
     if (
       !(this.scenes.current instanceof PlayScene) ||
-      this.movementMode !== "tap" ||
+      (this.movementMode !== "tap" && this.movementMode !== "hold") ||
       this.playInputBlocked ||
       this.storagePaused ||
       this.doorPresentation.busy
@@ -1715,6 +1728,7 @@ export class GameClient {
       return;
     const vehicle = occupiedVehicle(this.stateView.playerEntity, this.stateView.entities);
     if (vehicle && isTrain(vehicle)) {
+      if (this.movementMode === "hold") return;
       this.tapMovement.cancel();
       this.trainTapMovement.tap(target.screenSide ?? 1);
       return;
@@ -1733,6 +1747,6 @@ export class GameClient {
     if (eligible) {
       this.tapMovement.cancel();
       this.transport.send({ type: "player-interact", wx: target.wx, wy: target.wy });
-    } else this.tapMovement.setTarget(target);
+    } else if (this.movementMode === "tap") this.tapMovement.setTarget(target);
   }
 }

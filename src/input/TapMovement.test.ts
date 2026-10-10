@@ -105,5 +105,6 @@ describe("tap movement intent", () => {
     for (const value of [null, undefined, "other", 1, "joystick"])
       expect(touchMovementMode(value)).toBe("joystick");
     expect(touchMovementMode("tap")).toBe("tap");
+    expect(touchMovementMode("hold")).toBe("hold");
   });
 });

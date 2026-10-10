@@ -230,7 +230,7 @@ export class WorldMap {
         this.map = null;
         this.roster.replaceChildren();
         this.rosterButtons.clear();
-        this.count.textContent = "Reconnecting…";
+        this.count.textContent = "Map unavailable";
         this.draw();
       }
     } finally {

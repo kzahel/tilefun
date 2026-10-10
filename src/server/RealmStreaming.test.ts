@@ -183,9 +183,16 @@ it("rolls back partial publication and retries generation without duplicate dirt
     expect(f.records.features.size).toBe(0);
     expect(f.world.chunks.loadedCount).toBe(0);
     expect(f.saves.hasDirty).toBe(false);
+    expect(f.streaming.residency.diagnostics()).toMatchObject({
+      states: { loading: 0, ready: 0, saving: 0, failed: 1 },
+      demanded: 1,
+      inFlight: 0,
+      lastError: "injected publication failure",
+    });
     f.faults.generate = false;
     for (let i = 0; i < 61; i++) await f.visit(0);
     expect(f.entities.entities).toHaveLength(1);
+    expect(f.streaming.residency.diagnostics().states.failed).toBe(0);
     await f.saves.flushAsync();
     expect((await f.saves.store.readScope("entities", "0,0")).size).toBe(1);
   } finally {

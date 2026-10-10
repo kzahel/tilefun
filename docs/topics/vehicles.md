@@ -27,7 +27,9 @@ the car; other players can still walk/jump onto the roof and ride visibly.
 WASD/arrows or the movement stick drive directly, including normalized diagonals.
 Native cardinal views follow the heading with a small facing switch margin.
 In **Tap to move**, tap a destination to drive straight there without pathfinding;
-arrival, obstacles and menu/focus changes stop the car. Cars keep whole-body,
+arrival, obstacles and menu/focus changes stop the car.
+In **Hold to move**, steer toward the held finger and lift to brake;
+[touch movement](touch-movement.md) owns contact priority and cancellation. Cars keep whole-body,
 terrain readiness, dry ground, grade and roof-passenger clearance checks.
 
 **Get out · E** stops first and searches clear supported ground beside the body.

@@ -44,6 +44,7 @@ async function start(
   page: Page,
   renderer = "canvas",
   destination?: { generation: GenerationDescriptor; x: number; y: number },
+  mode = "Tap to move",
 ) {
   await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
@@ -70,7 +71,7 @@ async function start(
   }, destination);
   await expect.poll(async () => (await state(page)).id).not.toBe(-1);
   await page.locator('button[aria-label="Options"]').tap();
-  await page.getByRole("button", { name: "Tap to move", exact: true }).tap();
+  await page.getByRole("button", { name: mode, exact: true }).tap();
   await expect(page.getByRole("status").filter({ hasText: "Movement saved" })).toBeVisible();
   await page.getByRole("button", { name: "Back to game", exact: true }).tap();
 }
@@ -540,3 +541,92 @@ test("gesture rejection, claimed Jump, resize targeting and menu cancellation us
   expect((await state(page)).target).toBeNull();
   await session.detach();
 });
+
+for (const renderer of ["canvas", "gpu"]) {
+  test(`hold movement starts immediately, keeps walking, tolerates fingers and cancels on UI (${renderer})`, async ({
+    page,
+  }) => {
+    await start(page, renderer, undefined, "Hold to move");
+    const session = await page.context().newCDPSession(page);
+    const right = await point(page, 70);
+    const left = await point(page, -70);
+    const original = await state(page);
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [{ ...right, id: 1 }],
+    });
+    await expect.poll(async () => (await state(page)).wx).toBeGreaterThan(original.wx + 8);
+    // Keep the same screen contact past both the old tap timeout and the original world spot.
+    await expect
+      .poll(async () => (await state(page)).wx, { timeout: 10000 })
+      .toBeGreaterThan(original.wx + 90);
+    expect((await state(page)).target).toBeNull();
+    const turned = await state(page);
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [
+        { ...right, id: 1 },
+        { ...left, id: 2 },
+      ],
+    });
+    await expect.poll(async () => (await state(page)).wx).toBeLessThan(turned.wx - 8);
+    const resumed = await state(page);
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchEnd",
+      touchPoints: [{ ...left, id: 2 }],
+    });
+    await expect.poll(async () => (await state(page)).wx).toBeGreaterThan(resumed.wx + 8);
+    await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    await page.waitForTimeout(300);
+    const stopped = await state(page);
+    await page.waitForTimeout(300);
+    expect(Math.abs((await state(page)).wx - stopped.wx)).toBeLessThan(1);
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [{ ...right, id: 3 }],
+    });
+    await expect.poll(async () => (await state(page)).wx).toBeGreaterThan(stopped.wx + 8);
+    // Open via the DOM while a world contact remains down, then keep moving that old contact.
+    await page
+      .locator('button[aria-label="Options"]')
+      .evaluate((b: HTMLButtonElement) => b.click());
+    await expect(page.getByRole("button", { name: "Hold to move", exact: true })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await page
+      .getByRole("button", { name: "Back to game", exact: true })
+      .evaluate((b: HTMLButtonElement) => b.click());
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [{ ...right, x: right.x - 10, id: 3 }],
+    });
+    await page.waitForTimeout(300);
+    const canceled = await state(page);
+    await page.waitForTimeout(300);
+    expect(Math.abs((await state(page)).wx - canceled.wx)).toBeLessThan(1);
+    await session.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
+    await page.reload();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await page.locator('button[aria-label="Options"]').tap();
+    await expect(page.getByRole("button", { name: "Hold to move", exact: true })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    for (const viewport of [
+      { width: 390, height: 844 },
+      { width: 844, height: 390 },
+    ]) {
+      await page.setViewportSize(viewport);
+      const bounds = await page
+        .getByRole("button", { name: "Back to game", exact: true })
+        .boundingBox();
+      expect(bounds).not.toBeNull();
+      expect((bounds?.y ?? 0) + (bounds?.height ?? 0)).toBeLessThanOrEqual(viewport.height);
+      await page.screenshot({
+        path: `/tmp/tilefun-hold-options-${renderer}-${viewport.width}.png`,
+      });
+    }
+    await session.detach();
+  });
+}

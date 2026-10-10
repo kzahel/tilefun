@@ -55,7 +55,7 @@ it, while still performing the tapped action. There is no extra button. Exiting
 fullscreen keeps it off until the next page load; unavailable or denied fullscreen
 leaves the game playable in the browser. This does not disable OS navigation gestures.
 
-Use the **⚙ Options** button beside the hamburger to choose **Tap to move** or
+Use the **⚙ Options** button beside the hamburger to choose **Tap to move**, **Hold to move** or
 **Joystick**. The same Options panel is available from the hamburger and main
 menu. The choice is remembered for each local player on this browser; Joystick
 remains the default. In Tap to move, tap a place and lift your finger to walk
@@ -64,7 +64,12 @@ or near your character's feet to stop. Obstacles stop the walk; this first
 version does not find a route around them. Tapping a befriendable animal still
 interacts with it. Jump, Throw and Sprint remain available on foot, alongside
 keyboard and gamepad controls. Menus, editing, travel and focus loss cancel the destination.
-See [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
+In Hold to move, put a finger down in the direction you want to go and keep it
+held. Move the finger to steer; lift to stop. The newest world finger steers,
+and lifting it returns control to the newest finger still held. No completed
+tap is required. Jump/Throw/Sprint touches do not take over steering. The same
+menu, travel and focus changes cancel the hold, requiring a fresh finger-down.
+See [touch movement](docs/topics/touch-movement.md) and [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
 for the behavior and remaining device trial.
 
 In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train · E**
@@ -72,7 +77,9 @@ In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train �
 its roof. Cars use ordinary movement controls, including diagonals, or a straight
 Tap-to-move destination. Trains stay on their track: up/right moves one way,
 down/left the other. In tap mode, tap the right/left half of the screen to start;
-tap the same side again to stop. **Get out · E** stops and finds clear ground.
+tap the same side again to stop. In Hold to move, hold the right/left half
+to travel and lift to stop; cars steer toward the held finger. **Get out · E**
+stops and finds clear ground.
 Off-road cars stay parked and saved; cars on suitable roads resume traffic.
 See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md).
 

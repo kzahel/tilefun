@@ -119,7 +119,7 @@ for verdict persistence/export fallback. Explorer preview, gameplay and Workshop
 share generation and art realization. See [world explorer](world-explorer.md),
 [city generation](topics/city-generation.md) and [patterns/interiors](topics/patterns-and-interiors.md).
 
-## Tap movement
+## Touch movement
 
 Tap movement remains client intent: `TapMovement` supplies ordinary directional
 axes to PlayScene's existing quantized input/prediction path. Destination and
@@ -128,7 +128,10 @@ state uses bits 5/6 for presence/value of live `befriendable` tag eligibility;
 baselines and deltas carry both false and true, overriding static definitions.
 Authority still performs `player-interact`; clients use the shared 24-pixel hit
 rule only to choose whether a world tap means interaction or walking. Game and
-embedded replicas share this state contract. See [086](tactical/086-tap-to-move-and-options.md).
+embedded replicas share this state contract. Hold movement samples the latest presented view while a world contact remains
+held, supplying the same ordinary axes. [Touch movement](topics/touch-movement.md)
+owns modes and lifecycle; [086](tactical/086-tap-to-move-and-options.md) records
+the original tap implementation.
 
 ## Validation entry points
 

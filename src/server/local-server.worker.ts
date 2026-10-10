@@ -18,6 +18,7 @@ const runtime = new LocalServerRuntime(
     port.postMessage({
       kind: "failed",
       error: error instanceof Error ? error.message : String(error),
+      ...(error instanceof Error && error.stack ? { stack: error.stack } : {}),
     }),
 );
 let initialized = false;

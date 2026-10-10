@@ -50,6 +50,23 @@ export class ChunkResidency<T> {
     return this.pending.size;
   }
 
+  diagnostics() {
+    const states = { loading: 0, ready: 0, saving: 0, failed: 0 };
+    for (const holder of this.holders.values()) states[holder.state]++;
+    return {
+      ...this.metrics,
+      states,
+      demanded: this.desired.size,
+      inFlight: this.inFlight,
+      lastError:
+        this.error === undefined
+          ? null
+          : this.error instanceof Error
+            ? this.error.message
+            : String(this.error),
+    };
+  }
+
   reconcile(desired: Map<string, ChunkDemand>): void {
     if (this.closed) return;
     this.turn++;

@@ -3,9 +3,9 @@ import { unprojectPlane } from "../rendering/Projection.js";
 import type { RenderView } from "../rendering/RenderFrame.js";
 import type { Movement } from "./ActionManager.js";
 
-export type TouchMovementMode = "tap" | "joystick";
+export type TouchMovementMode = "tap" | "hold" | "joystick";
 export function touchMovementMode(value: unknown): TouchMovementMode {
-  return value === "tap" ? "tap" : "joystick";
+  return value === "tap" || value === "hold" ? value : "joystick";
 }
 export interface TapTarget {
   screenSide?: -1 | 1;

@@ -5,6 +5,7 @@ export class OptionsDialog {
   private dialog = document.createElement("dialog");
   private opener: HTMLElement | null = null;
   private cards: HTMLButtonElement[] = [];
+  private help = document.createElement("p");
   private status = document.createElement("p");
   private pinch = document.createElement("input");
   private saving = false;
@@ -29,18 +30,17 @@ export class OptionsDialog {
     choices.className = "options-choices";
     for (const [mode, text] of [
       ["tap", "☝ Tap to move"],
+      ["hold", "👇 Hold to move"],
       ["joystick", "🕹 Joystick"],
     ] as const) {
       const card = this.button(text, () => {
         void this.choose(mode);
       });
       card.dataset.mode = mode;
-      card.setAttribute("aria-label", mode === "tap" ? "Tap to move" : "Joystick");
+      card.setAttribute("aria-label", text.slice(text.indexOf(" ") + 1));
       this.cards.push(card);
       choices.append(card);
     }
-    const help = document.createElement("p");
-    help.textContent = "Tap a place to walk there. Tap near your feet to stop.";
     const zoom = document.createElement("label");
     zoom.className = "options-pinch";
     this.pinch.type = "checkbox";
@@ -59,7 +59,7 @@ export class OptionsDialog {
       header,
       heading,
       choices,
-      help,
+      this.help,
       zoom,
       pinchHelp,
       this.status,
@@ -103,6 +103,11 @@ export class OptionsDialog {
     return b;
   }
   private setMode(mode: TouchMovementMode): void {
+    this.help.textContent = {
+      tap: "Tap a place to walk there. Tap near your feet to stop.",
+      hold: "Hold a finger where you want to go. Lift to stop. The newest finger steers.",
+      joystick: "Hold and drag the joystick to move. Lift to stop.",
+    }[mode];
     for (const c of this.cards) c.setAttribute("aria-pressed", String(c.dataset.mode === mode));
   }
   private async choose(mode: TouchMovementMode): Promise<void> {

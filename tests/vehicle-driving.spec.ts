@@ -56,9 +56,9 @@ async function start(page: Page, backend: string, cars = false) {
   await expect.poll(async () => (await read(page)).id).not.toBe(-1);
   if ((await read(page)).editing) await page.keyboard.press("Tab");
 }
-async function tapMode(page: Page) {
+async function tapMode(page: Page, mode = "Tap to move") {
   await page.locator("button[aria-label=Options]").tap();
-  await page.getByRole("button", { name: "Tap to move", exact: true }).tap();
+  await page.getByRole("button", { name: mode, exact: true }).tap();
   await page.getByRole("button", { name: "Back to game", exact: true }).tap();
 }
 for (const backend of ["canvas", "gpu"]) {
@@ -158,62 +158,84 @@ for (const backend of ["canvas", "gpu"]) {
     await expect.poll(async () => (await read(page)).parent).toBeNull();
     expect(errors).toEqual([]);
   });
-  test(`train side taps start, repeat to stop, reverse, and UI taps stay isolated (${backend})`, async ({
-    page,
-  }) => {
-    test.setTimeout(90000);
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await start(page, backend);
-    const enter = page.getByRole("button", { name: "Drive train · E", exact: true });
-    await expect
-      .poll(
-        () =>
-          page.evaluate(() => {
-            const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-            return g.stateView.entities.some((e) => e.type.startsWith("train"));
-          }),
-        { timeout: 15000 },
-      )
-      .toBe(true);
-    await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-      const trains = g.stateView.entities.filter((e) => e.type.startsWith("train"));
-      const direction = (trains[0]?.velocity?.vx ?? 0) < 0 ? -1 : 1;
-      const lead = trains.sort((a, b) => direction * (b.position.wx - a.position.wx))[0];
-      if (!lead?.collider) throw Error("No train");
-      const x =
-        lead.position.wx + lead.collider.offsetX + direction * (lead.collider.width / 2 + 12);
-      await g.gcSendRequest({
-        type: "rcon",
-        requestId: g.nextRequestId++,
-        command: `tp ${x} ${lead.position.wy + lead.collider.offsetY}`,
+  for (const mode of ["Tap to move", "Hold to move"]) {
+    test(`train ${mode} starts, stops, reverses, and UI stays isolated (${backend})`, async ({
+      page,
+    }) => {
+      test.setTimeout(90000);
+      const errors: string[] = [];
+      page.on("pageerror", (e) => errors.push(e.message));
+      await start(page, backend);
+      const enter = page.getByRole("button", { name: "Drive train · E", exact: true });
+      await expect
+        .poll(
+          () =>
+            page.evaluate(() => {
+              const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+              return g.stateView.entities.some((e) => e.type.startsWith("train"));
+            }),
+          { timeout: 15000 },
+        )
+        .toBe(true);
+      await page.evaluate(async () => {
+        const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+        const trains = g.stateView.entities.filter((e) => e.type.startsWith("train"));
+        const direction = (trains[0]?.velocity?.vx ?? 0) < 0 ? -1 : 1;
+        const lead = trains.sort((a, b) => direction * (b.position.wx - a.position.wx))[0];
+        if (!lead?.collider) throw Error("No train");
+        const x =
+          lead.position.wx + lead.collider.offsetX + direction * (lead.collider.width / 2 + 12);
+        await g.gcSendRequest({
+          type: "rcon",
+          requestId: g.nextRequestId++,
+          command: `tp ${x} ${lead.position.wy + lead.collider.offsetY}`,
+        });
       });
+      await expect(enter).toBeVisible({ timeout: 15000 });
+      await tapMode(page, mode);
+      await expect(enter).toBeEnabled();
+      await enter.tap();
+      await expect.poll(async () => (await read(page)).parent).not.toBeNull();
+      expect((await read(page)).type).toMatch(/^train/);
+      const session = await page.context().newCDPSession(page);
+      if (mode === "Hold to move")
+        await session.send("Input.dispatchTouchEvent", {
+          type: "touchStart",
+          touchPoints: [{ x: 530, y: 300, id: 1 }],
+        });
+      else await page.touchscreen.tap(530, 300);
+      await expect.poll(async () => (await read(page)).speed).toBeGreaterThan(24);
+      if (mode === "Hold to move") {
+        await page.waitForTimeout(1000);
+        expect((await read(page)).speed).toBeGreaterThan(24);
+        await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      } else await page.touchscreen.tap(530, 300);
+      await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
+      const stopped = await read(page);
+      await page.waitForTimeout(400);
+      expect(
+        Math.hypot((await read(page)).x - stopped.x, (await read(page)).y - stopped.y),
+      ).toBeLessThan(1);
+      if (mode === "Hold to move")
+        await session.send("Input.dispatchTouchEvent", {
+          type: "touchStart",
+          touchPoints: [{ x: 70, y: 300, id: 2 }],
+        });
+      else await page.touchscreen.tap(70, 300);
+      await expect.poll(async () => (await read(page)).x).toBeLessThan(stopped.x - 8);
+      await page
+        .locator("button[aria-label=Options]")
+        .evaluate((b: HTMLButtonElement) => b.click());
+      if (mode === "Hold to move")
+        await session.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
+      await session.detach();
+      await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
+      await page.getByRole("button", { name: "Back to game", exact: true }).tap();
+      expect((await read(page)).speed).toBeLessThan(0.1);
+      await page.screenshot({ path: `/tmp/tilefun-driving-train-${backend}.png` });
+      await page.getByRole("button", { name: "Get out · E", exact: true }).tap();
+      await expect.poll(async () => (await read(page)).parent).toBeNull();
+      expect(errors).toEqual([]);
     });
-    await expect(enter).toBeVisible({ timeout: 15000 });
-    await tapMode(page);
-    await expect(enter).toBeEnabled();
-    await enter.tap();
-    await expect.poll(async () => (await read(page)).parent).not.toBeNull();
-    expect((await read(page)).type).toMatch(/^train/);
-    await page.touchscreen.tap(530, 300);
-    await expect.poll(async () => (await read(page)).speed).toBeGreaterThan(24);
-    await page.touchscreen.tap(530, 300);
-    await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
-    const stopped = await read(page);
-    await page.waitForTimeout(400);
-    expect(
-      Math.hypot((await read(page)).x - stopped.x, (await read(page)).y - stopped.y),
-    ).toBeLessThan(1);
-    await page.touchscreen.tap(70, 300);
-    await expect.poll(async () => (await read(page)).x).toBeLessThan(stopped.x - 8);
-    await page.locator("button[aria-label=Options]").tap();
-    await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
-    await page.getByRole("button", { name: "Back to game", exact: true }).tap();
-    expect((await read(page)).speed).toBeLessThan(0.1);
-    await page.screenshot({ path: `/tmp/tilefun-driving-train-${backend}.png` });
-    await page.getByRole("button", { name: "Get out · E", exact: true }).tap();
-    await expect.poll(async () => (await read(page)).parent).toBeNull();
-    expect(errors).toEqual([]);
-  });
+  }
 }

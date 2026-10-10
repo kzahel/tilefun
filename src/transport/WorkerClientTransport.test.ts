@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { RequestBroker } from "../client/RequestBroker.js";
 import { type LocalAuthority, LocalServerRuntime } from "../server/LocalServerRuntime.js";
 import type { LocalHostBoot, LocalHostPacket } from "../shared/localHostProtocol.js";
 import type { ClientMessage } from "../shared/protocol.js";
@@ -78,6 +79,33 @@ function rig(
 }
 
 describe("local server Worker lifecycle", () => {
+  it("preserves Worker failure evidence and rejects subsequent game requests immediately", async () => {
+    const r = rig();
+    await r.client.ready();
+    const requests = new RequestBroker((message) => r.client.send(message));
+    r.client.onDisconnect(() => requests.disconnect());
+    const pending = requests.send({ type: "get-world-map", requestId: 1 });
+    const rejected = expect(pending).rejects.toThrow("Connection to server closed");
+    const stack = "Error: authority tick failed\n    at Realm.tick (local-server.worker.js:123:4)";
+    r.endpoint.onmessage?.({
+      data: { kind: "failed", error: "authority tick failed", stack },
+    } as MessageEvent);
+    await rejected;
+    await expect(requests.send({ type: "get-world-map", requestId: 2 })).rejects.toThrow(
+      "authority tick failed",
+    );
+    // Fire-and-forget input cleanup during disconnect must not interrupt the
+    // failure notification or overwrite the first fatal error.
+    expect(() => r.client.send({ type: "set-editor-mode", enabled: false })).not.toThrow();
+    expect(r.errors[0]?.stack).toBe(stack);
+    expect(await r.client.getDiagnostics()).toMatchObject({
+      state: "failed",
+      error: "authority tick failed",
+      stack,
+    });
+    expect(r.events.filter((event) => event === "terminate")).toHaveLength(1);
+    requests.dispose();
+  });
   it("orders connect and identification, then fences shutdown behind save and outstanding delivery", async () => {
     let finishSave!: () => void;
     const save = new Promise<void>((resolve) => {

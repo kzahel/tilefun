@@ -1,4 +1,5 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
+import type { TouchMovementMode } from "../input/TapMovement.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
@@ -28,7 +29,12 @@ export class VehicleControl {
     this.root.hidden = true;
     document.body.append(this.root);
   }
-  update(view: ClientStateView, allowed: boolean, locked: boolean, tapMode = false): boolean {
+  update(
+    view: ClientStateView,
+    allowed: boolean,
+    locked: boolean,
+    movementMode: TouchMovementMode = "joystick",
+  ): boolean {
     const p = view.playerEntity,
       entities = view.entities;
     const current = occupiedVehicle(p, entities);
@@ -79,12 +85,16 @@ export class VehicleControl {
     if (this.button.textContent !== label) this.button.textContent = label;
     if (current && !this.busy && !this.error) {
       const hint = isTrain(current)
-        ? tapMode
-          ? "Tap left / right to travel · tap again to stop"
-          : "W/S or arrows to drive train"
-        : tapMode
-          ? "Tap a destination to drive"
-          : "WASD or arrows to drive car";
+        ? movementMode === "hold"
+          ? "Hold left / right to travel · lift to stop"
+          : movementMode === "tap"
+            ? "Tap left / right to travel · tap again to stop"
+            : "W/S or arrows to drive train"
+        : movementMode === "hold"
+          ? "Hold toward a direction to drive · lift to stop"
+          : movementMode === "tap"
+            ? "Tap a destination to drive"
+            : "WASD or arrows to drive car";
       if (this.status.textContent !== hint) this.status.textContent = hint;
     }
     return !!this.request;

@@ -18,6 +18,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 
 | Topic | Scope and next direction |
 | --- | --- |
+| [Touch movement](touch-movement.md) | Joystick, tap and hold modes, local Options preference and contact cancellation |
 | [Pinch zoom](pinch-zoom.md) | Optional two-finger gameplay zoom, saved checkbox and joystick/button arbitration |
 | [Play ideas](play-ideas.md) | Hold-to-speak gameplay suggestions, text readback, public submission and private Workshop inbox |
 | [Voice agents](voice-agents.md) | Proposed companion NPC and child-directed builder sessions; live development and reload experience |

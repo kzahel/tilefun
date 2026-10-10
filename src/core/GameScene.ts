@@ -12,6 +12,7 @@ import type { PropCatalog } from "../editor/PropCatalog.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import type { TapMovement, TouchMovementMode } from "../input/TapMovement.js";
 import type { TouchButtons } from "../input/TouchButtons.js";
+import type { TouchHold } from "../input/TouchHold.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
 import type { TouchPinch } from "../input/TouchPinch.js";
 import type { TouchTap } from "../input/TouchTap.js";
@@ -42,6 +43,7 @@ export interface GameContext {
   readonly trainTapMovement?: TrainTapMovement;
   readonly touchPinch?: TouchPinch;
   readonly touchTap?: TouchTap;
+  readonly touchHold?: TouchHold;
   readonly canvas: HTMLCanvasElement;
   /** Independent HUD/touch/debug UI surface, supplied by platform composition. */
   readonly ctx: CanvasRenderingContext2D;

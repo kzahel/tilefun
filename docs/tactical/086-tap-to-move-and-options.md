@@ -1,5 +1,8 @@
 # Tap to move and accessible Options
 
+Current movement modes and the child-trial hold follow-up are owned by
+[touch movement](../topics/touch-movement.md). This file records the original tap slice.
+
 Status: complete implementation; child device trial next. Updated 2026-10-10.
 Requested by the owner on 2026-10-10 for children around two or three who
 have not learned the joystick. [Ideas](../ideas.md#presentation-and-usability)

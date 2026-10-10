@@ -93,6 +93,15 @@ Both failures reproduce serially without competing browser tests.
 
 ## Evidence and validation
 
+The [local server recovery investigation](../research/local-server-recovery-investigation.md)
+tracks the 2026-10-10 intermittent map/streaming report. Seeded pond arrival,
+rejected open-water arrival and repeated distant travel have not reproduced the
+failure. “Reconnecting…” previously described any failed map request; it now
+says “Map unavailable”. Fatal Worker errors retain their authority stack and
+diagnostics and require Reload; residency snapshots now expose pending/failed
+holders and transitions. The original session remains uncaptured, and stalled
+readiness/persistence awaits remain an investigation path.
+
 Use the repository runners with isolated bundled Chromium before manual UI work:
 
 ```sh

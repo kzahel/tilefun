@@ -25,6 +25,7 @@ export class WorkerClientTransport implements IClientTransport {
   private state: "starting" | "ready" | "stopping" | "stopped" | "failed" = "starting";
   private messageHandler: ((message: ServerMessage) => void) | undefined;
   private disconnectHandler: (() => void) | undefined;
+  private failure: Error | undefined;
   private readonly startup: Promise<void>;
   private resolveStartup!: () => void;
   private rejectStartup!: (error: Error) => void;
@@ -72,8 +73,11 @@ export class WorkerClientTransport implements IClientTransport {
           this.state = "ready";
           clearTimeout(this.startupTimer);
           this.resolveStartup();
-        } else if (data.kind === "failed") this.fail(new Error(data.error));
-        else if (data.kind === "batch" || data.kind === "credit") {
+        } else if (data.kind === "failed") {
+          const error = new Error(data.error);
+          if (data.stack) error.stack = data.stack;
+          this.fail(error);
+        } else if (data.kind === "batch" || data.kind === "credit") {
           this.channel.receive(data);
           this.schedulePump();
         }
@@ -108,6 +112,7 @@ export class WorkerClientTransport implements IClientTransport {
   }
 
   send(message: ClientMessage): void {
+    if (this.failure && "requestId" in message) throw this.failure;
     if (this.state !== "ready") return;
     try {
       const start = performanceMetrics.start();
@@ -154,9 +159,10 @@ export class WorkerClientTransport implements IClientTransport {
   }
   async getDiagnostics() {
     return {
-      authority: await this.request("diagnostics"),
+      authority: this.failure ? undefined : await this.request("diagnostics"),
       clientChannel: this.channel.diagnostics(),
       state: this.state,
+      ...(this.failure ? { error: this.failure.message, stack: this.failure.stack } : {}),
     };
   }
   resetDiagnostics(): Promise<void> {
@@ -224,6 +230,7 @@ export class WorkerClientTransport implements IClientTransport {
   private fail(reason: unknown): void {
     if (this.state === "failed" || this.state === "stopped") return;
     const error = reason instanceof Error ? reason : new Error(String(reason));
+    this.failure = error;
     this.state = "failed";
     this.rejectStartup(error);
     for (const request of this.requests.values()) {

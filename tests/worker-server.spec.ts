@@ -1,5 +1,7 @@
 import { expect, type Page, test } from "@playwright/test";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import { NaturalLandscape } from "../src/generation/regional/NaturalLandscape.js";
+import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
 async function flatWorld(page: Page) {
   await page.goto(
@@ -26,6 +28,92 @@ const hostState = (page: Page) =>
       tick: g.stateView.serverTick,
     };
   });
+
+test("lake travel and rejected open-water travel keep the local Worker, map and streaming alive", async ({
+  page,
+}) => {
+  test.setTimeout(90_000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  const generation = createDescriptor("regional", 2026);
+  const landscape = new NaturalLandscape(regionalWorld(2026), "thicket");
+  const pond = landscape.pond(1, -2);
+  if (!pond) throw Error("Missing seeded pond");
+  await flatWorld(page);
+  await page.evaluate(async (generation) => {
+    // biome-ignore lint/suspicious/noExplicitAny: test hook
+    const g = (document.querySelector("#game") as any).__game;
+    const { meta } = await g.gcSendRequest({
+      type: "create-world",
+      requestId: g.nextRequestId++,
+      name: "Lake travel regression",
+      generation,
+    });
+    await g.gcSendRequest({
+      type: "join-realm",
+      requestId: g.nextRequestId++,
+      worldId: meta.id,
+    });
+  }, generation);
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator("#game")).toHaveAttribute("data-generator", "regional");
+  const travel = (x: number, y: number) =>
+    page.evaluate(
+      async ({ x, y, generation }) => {
+        // biome-ignore lint/suspicious/noExplicitAny: test hook
+        const g = (document.querySelector("#game") as any).__game;
+        try {
+          await g.gcSendRequest({
+            type: "join-realm",
+            requestId: g.nextRequestId++,
+            worldId: g.mainMenu.currentWorldId,
+            arrival: { x, y, generation },
+          });
+          return null;
+        } catch (error) {
+          return String(error);
+        }
+      },
+      { x, y, generation },
+    );
+  for (let visit = 0; visit < 3; visit++) {
+    expect(await travel(pond.x, pond.y)).toBeNull();
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          // biome-ignore lint/suspicious/noExplicitAny: test hook
+          const g = (document.querySelector("#game") as any).__game;
+          const p = g.remoteView.serverPlayerEntity.position;
+          return g.stateView.world.getCollision(Math.floor(p.wx / 16), Math.floor(p.wy / 16));
+        }),
+      )
+      .toBe(0);
+    const before = await hostState(page);
+    expect(await travel(-4000, -4000)).toContain("No safe walkable arrival within 32 tiles");
+    await expect.poll(async () => (await hostState(page)).tick).toBeGreaterThan(before.tick);
+    await page.getByRole("button", { name: "Open world map" }).click();
+    await expect(page.getByTestId("world-map")).toHaveAttribute("data-settled", "true");
+    await expect(page.getByTestId("world-map-player")).toHaveCount(1);
+    await page.keyboard.press("Escape");
+    expect(await travel(300 + visit * 1000, 519)).toBeNull();
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          // biome-ignore lint/suspicious/noExplicitAny: test hook
+          const g = (document.querySelector("#game") as any).__game;
+          const range = g.camera.getVisibleChunkRange();
+          for (let cy = range.minCy; cy <= range.maxCy; cy++)
+            for (let cx = range.minCx; cx <= range.maxCx; cx++)
+              if (!g.stateView.world.chunks.get(cx, cy)) return false;
+          return true;
+        }),
+      )
+      .toBe(true);
+  }
+  expect((await hostState(page)).transport.transport).toContain("(ready)");
+  await expect(page.locator("#tilefun-error-overlay")).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
 
 test("single player renders while its authoritative Worker is busy", async ({ page }) => {
   await flatWorld(page);
@@ -57,6 +145,30 @@ test("single player renders while its authoritative Worker is busy", async ({ pa
   const state = await hostState(page);
   expect(state.metrics.authority.channel.highWaterBytes).toBeLessThan(16 * 1024 * 1024);
   await page.screenshot({ path: "/tmp/tilefun-worker-independent-render.png" });
+});
+
+test("an unhandled local Worker failure offers reload with the authority stack", async ({
+  page,
+}) => {
+  await flatWorld(page);
+  const worker = page.workers().find((w) => w.url().includes("local-server.worker"));
+  if (!worker) throw Error("No local authority Worker");
+  await worker.evaluate(() => {
+    function injectedAuthorityFailure() {
+      return Promise.reject(new Error("Injected local authority failure"));
+    }
+    void injectedAuthorityFailure();
+  });
+  const overlay = page.locator("#tilefun-error-overlay");
+  await expect(overlay).toContainText("Injected local authority failure");
+  await expect(overlay.locator("pre")).toContainText("injectedAuthorityFailure");
+  await overlay.getByRole("button", { name: "Reload", exact: true }).click();
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator("#tilefun-error-overlay")).toHaveCount(0);
+  // The generation handoff URL opens the world picker again after reload.
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await page.getByRole("button", { name: "Open world map" }).click();
+  await expect(page.getByTestId("world-map")).toHaveAttribute("data-settled", "true");
 });
 
 test("Worker saves player and edits before shutdown and restores them on reopen", async ({

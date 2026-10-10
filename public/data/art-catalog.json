@@ -23229,11 +23229,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1286"
+          "source": "src/server/Realm.ts:1288"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2292"
+          "source": "src/server/Realm.ts:2294"
         },
         {
           "system": "Gameplay",
@@ -23933,11 +23933,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:741"
+          "source": "src/scenes/PlayScene.ts:757"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2257"
+          "source": "src/server/Realm.ts:2259"
         },
         {
           "system": "Gameplay",

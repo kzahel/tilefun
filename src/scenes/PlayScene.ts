@@ -123,6 +123,7 @@ export class PlayScene implements GameScene {
     gc.touchButtons.attach();
     gc.touchPinch?.attach();
     gc.touchTap?.attach();
+    gc.touchHold?.attach();
     gc.touchJoystick.attach();
     if (gc.editorButton) gc.editorButton.textContent = "Edit";
 
@@ -170,6 +171,7 @@ export class PlayScene implements GameScene {
     this.stopMovement(gc);
     gc.touchPinch?.detach();
     gc.touchTap?.detach();
+    gc.touchHold?.detach();
     gc.touchJoystick.detach();
     gc.touchButtons.detach();
     this.unbindZoomActions();
@@ -193,6 +195,7 @@ export class PlayScene implements GameScene {
     gc.touchButtons.attach();
     gc.touchPinch?.attach();
     gc.touchTap?.attach();
+    gc.touchHold?.attach();
     gc.touchJoystick.attach();
     this.bindZoomActions(gc);
     // Re-send editor mode false — after realm switch the server may have a new
@@ -207,6 +210,7 @@ export class PlayScene implements GameScene {
     this.stopMovement(gc);
     gc.touchPinch?.detach();
     gc.touchTap?.detach();
+    gc.touchHold?.detach();
     gc.touchJoystick.detach();
     gc.touchButtons.detach();
     this.unbindZoomActions();
@@ -251,13 +255,15 @@ export class PlayScene implements GameScene {
     if (vehicle?.id !== this.occupiedId) {
       gc.tapMovement?.cancel();
       gc.trainTapMovement?.cancel();
+      gc.touchHold?.reset();
       gc.touchButtons.reset();
       this.occupiedId = vehicle?.id;
     }
     gc.touchButtons.enabled = !vehicle;
     const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
-    gc.touchJoystick.enabled = gc.touchMovement !== "tap" && !inputLocked;
+    gc.touchJoystick.enabled = (gc.touchMovement ?? "joystick") === "joystick" && !inputLocked;
     if (inputLocked) {
+      gc.touchHold?.reset();
       gc.tapMovement?.cancel();
       gc.trainTapMovement?.cancel();
     }
@@ -274,6 +280,14 @@ export class PlayScene implements GameScene {
       if (!manual.dx && !manual.dy && !inputLocked && gc.touchMovement === "tap")
         rawMovement = { ...rawMovement, dx: gc.trainTapMovement?.direction ?? 0, dy: 0 };
     }
+    if (!inputLocked && gc.touchMovement === "hold")
+      rawMovement =
+        gc.touchHold?.sample(
+          gc.stateView.playerEntity.position,
+          manual,
+          !!vehicle && isTrain(vehicle),
+          vehicle ? 24 : 0,
+        ) ?? manual;
     if (vehicle) rawMovement = { ...rawMovement, jump: false, sprinting: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
@@ -450,8 +464,9 @@ export class PlayScene implements GameScene {
     const invTimer = gc.stateView.invincibilityTimer;
     if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
       gc.touchTap?.reset();
-      if (gc.tapMovement?.target) {
-        gc.tapMovement.cancel();
+      gc.touchHold?.reset();
+      if (gc.touchMovement === "hold" || gc.tapMovement?.target) {
+        gc.tapMovement?.cancel();
         this.cancelInput(gc.transport);
       }
       gc.camera.shake(HIT_SHAKE_INTENSITY);
@@ -552,6 +567,7 @@ export class PlayScene implements GameScene {
   private stopMovement(gc: GameContext): void {
     gc.tapMovement?.cancel();
     gc.trainTapMovement?.cancel();
+    gc.touchHold?.reset();
     gc.actions.clearHeld();
     this.cancelInput(gc.transport);
   }

@@ -158,7 +158,9 @@ export class Realm {
       features: this.records?.features.size ?? 0,
       holders: this.streaming?.residency.holders.size ?? 0,
       queuedEdits: this.mutations.count,
-      residency: { ...this.streaming?.residency.metrics },
+      residency: this.streaming?.residency.diagnostics() ?? null,
+      transitioningPlayers: [...this.sessions.values()].filter((session) => session.transitioning)
+        .length,
       storage: this.saveManager?.diagnostics ?? null,
     };
   }

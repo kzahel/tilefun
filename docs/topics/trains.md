@@ -37,6 +37,10 @@ including co-op with someone already aboard.
 
 ## Player driving
 
+In **Hold to move**, hold the left/right screen half to travel and lift to stop.
+The newest held world finger chooses the side; [touch movement](touch-movement.md)
+owns contact handoff and cancellation. Tap mode retains its latched side taps.
+
 [Tactical 087](../tactical/087-player-driven-cars-and-trains.md) delivers explicit
 **Drive train · E** beside a stopped carriage. The player disappears inside;
 one driver owns the whole service while other players can ride visibly on top.
