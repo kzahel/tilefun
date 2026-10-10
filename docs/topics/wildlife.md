@@ -15,6 +15,16 @@ for this named batch. The generic 196-entry campaign remains disabled, and its
 sheep/pig repair gate is not cleared by pet work. Existing frozen revisions,
 receipts and human review decisions remain unchanged.
 
+All four new exact drafts are registered in `wildlife-v2-common-pets-084`, with
+editable sources, motion audits and native playback. Fresh settlement greens
+choose seeded coats independently of their stable cat/dog family IDs. Rural
+habitat ownership and all original art remain intact; older saved chunks are
+not backfilled. **Edit → Entities** creates durable individuals of each new pet.
+The four new Worker inspection cases use real settlement populations and share
+game AI, collision, support, saved phases and harmless reactions. Native gait
+speed follows each new sheet's authored stride; art is still pending human review.
+084 retains source/capture and validation evidence.
+
 The [ideas backlog](../ideas.md#living-world-and-inhabitants) records common birds,
 garden insects (especially bees), small animals, farm/pond additions and further
 coat/breed/age variations. These are suggestions, not authorized production.

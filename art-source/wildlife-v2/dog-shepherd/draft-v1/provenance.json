@@ -1,0 +1,10 @@
+{
+  "identity": "dog-shepherd-draft-v1",
+  "baseBuilder": "art-source/wildlife-v2/dog/draft-v1/build.py",
+  "baseBuilderSha256": "947b2356d38effa8e35dc143e19da71821d9e1b46a6d52737fec7d0111f9fe77",
+  "builder": "art-source/wildlife-v2/pets/build.py",
+  "motionContract": "body-motion-20261004",
+  "bodyRisePeakToPeakUnits": 0.13,
+  "bodyPitchDegrees": 1.2,
+  "gait": "lateral walk; moving hips, constant-length links, world-grounded soles"
+}

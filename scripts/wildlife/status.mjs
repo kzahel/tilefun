@@ -2,6 +2,7 @@ import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { queue, ROOT } from "./campaign.mjs";
+import { petReceiptErrors } from "./check-pets.mjs";
 
 const read = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8").replace(/^\uFEFF/, ""));
 export function writeStatus() {
@@ -61,12 +62,15 @@ export function writeStatus() {
     "",
     `**${result.valid}/${result.total} draft ready; ${counts["Motion review required"] ?? 0} require motion review; ${counts["In progress"] ?? 0} in progress; ${counts.Paused ?? 0} paused; ${counts.Blocked ?? 0} blocked; ${counts.Queued ?? 0} queued.**`,
     ...(result.productionHold && result.productionHold.active !== false
-      ? ["", `**Production paused:** ${clean(result.productionHold.reason)}`]
+      ? [
+          "",
+          `**Historical campaign paused:** ${clean(result.productionHold.reason)} The separately authorized four-pet batch is tracked below.`,
+        ]
       : []),
     ...(result.scope?.allowNewAnimals === false
       ? [
           "",
-          `**Scope: repair existing frozen-torso walks only. No new animals.** ${counts["Out of scope"] ?? 0} unfinished roster entries are outside the current plan, not queued for production.`,
+          `**Historical roster scope: existing frozen-torso repairs.** ${counts["Out of scope"] ?? 0} unfinished roster entries stay outside production. The named common-pet batch is the only expansion exception.`,
         ]
       : []),
     "",
@@ -126,6 +130,31 @@ export function writeStatus() {
     "```",
     "",
   );
+  const petPath = resolve(ROOT, "art-source/wildlife-v2/pet-batch.json");
+  if (existsSync(petPath)) {
+    const batch = read("art-source/wildlife-v2/pet-batch.json");
+    const section = [
+      "## Authorized common-pet batch",
+      "",
+      "Separate from the historical roster and its stopped queue. [Scope and evidence](tactical/084-common-pets-and-variations.md). All human approvals remain pending.",
+      "",
+      "| Pet | State | Gameplay | Inspection |",
+      "| --- | --- | --- | --- |",
+      ...batch.pets.map((pet) => {
+        const base = `public/demos/wildlife-v2/${pet.id}/${batch.revision}`;
+        const links = existsSync(resolve(ROOT, `${base}/index.html`))
+          ? `[Playback](../${base}/index.html) · [Observations](../${base}/review-observations.md)`
+          : "-";
+        const state =
+          pet.state === "draft-ready" && petReceiptErrors(pet, batch.revision).length
+            ? "Receipt needs checking"
+            : pet.state;
+        return `| ${clean(pet.name)} | ${clean(state)} | ${pet.gameplay ? "Provisional" : "Pending"} | ${links} |`;
+      }),
+      "",
+    ];
+    lines.splice(lines.indexOf("## Whole roster"), 0, ...section);
+  }
   const output = resolve(ROOT, "docs/wildlife-status.md");
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));

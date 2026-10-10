@@ -1,0 +1,10 @@
+{
+  "identity": "cat-ginger-draft-v1",
+  "baseBuilder": "art-source/wildlife-v2/cat/draft-v1/build.py",
+  "baseBuilderSha256": "2fa5c2736fd8641141506a49ab9ad9a2da17439d9571af09475482f51614009d",
+  "builder": "art-source/wildlife-v2/pets/build.py",
+  "motionContract": "body-motion-20261004",
+  "bodyRisePeakToPeakUnits": 0.125,
+  "bodyPitchDegrees": 2.0,
+  "gait": "lateral walk; moving hips, constant-length links, world-grounded soles"
+}

@@ -1,6 +1,6 @@
 import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
 import { createProp } from "../../entities/PropFactories.js";
-import { createFauna } from "../../wildlife/Fauna.js";
+import { createFauna, petCoat } from "../../wildlife/Fauna.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
 import type { DenseDistrictPlan } from "./DenseDistrictPlanner.js";
@@ -51,8 +51,12 @@ export function settlementPets(plan: DenseDistrictPlan, seed: number): ActorPlac
       for (let x = safe.minX + 2; x <= safe.maxX - 2; x += 5) candidates.push({ x, y });
     candidates.sort((a, b) => edgeHash(a.x, a.y, seed + 31301) - edgeHash(b.x, b.y, seed + 31301));
     for (const species of ["cat", "dog"] as const) {
+      const coat = petCoat(
+        species,
+        edgeHash(b.minX, b.minY, seed + (species === "cat" ? 31401 : 31403)),
+      );
       const point = candidates.find((p) => {
-        const e = createFauna(species, p.x * 16, p.y * 16);
+        const e = createFauna(coat, p.x * 16, p.y * 16);
         if (!e.collider) throw Error("Missing pet collider");
         const aabb = getEntityAABB(e.position, e.collider);
         return (
@@ -62,14 +66,7 @@ export function settlementPets(plan: DenseDistrictPlan, seed: number): ActorPlac
       });
       if (!point) throw Error(`No clear ${species} home in ${block.id}`);
       result.push(
-        residentFauna(
-          species,
-          `settlement-pet:${block.id}:${species}`,
-          point.x,
-          point.y,
-          safe,
-          seed,
-        ),
+        residentFauna(coat, `settlement-pet:${block.id}:${species}`, point.x, point.y, safe, seed),
       );
     }
   }

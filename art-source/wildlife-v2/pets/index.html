@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PET_NAME · Tilefun</title>
+    <link rel="icon" href="data:,">
+    <style>
+      body{margin:24px;background:#26342c;color:#e9eee5;font:16px system-ui}a{color:#c2e0bc}canvas,img{image-rendering:pixelated}canvas{display:block;margin:16px 0;background:#879b82}button,select{font:inherit;padding:5px}.gallery img{max-width:100%;height:auto}label{margin-right:12px}.stage{overflow:auto}
+    </style>
+  </head>
+  <body>
+    <a href="../../">Wildlife gallery</a>
+    <h1>PET_NAME</h1>
+    <p>New pet draft awaiting review. Watch at native size and enlarged, then turn on walking travel.</p>
+    <label>Scale <select id="scale"><option value="1">Native 1×</option><option value="4" selected>4×</option></select></label>
+    <label>Clip <select id="clip"><option value="sequence">Two walks, action, idle</option><option value="walk">Walk</option><option value="action">Ears and tail</option><option value="idle">Idle</option></select></label>
+    <label><input id="travel" type="checkbox">Walking travel</label>
+    <button type="button" id="reset">Restart</button>
+    <button type="button" id="pause">Pause</button>
+    <span id="status"></span>
+    <div class="stage"><canvas id="playback"></canvas><canvas id="sprites"></canvas></div>
+    <p><a href="REVIEW_URL">Review exact draft</a> · <a href="review-observations.md">Observations</a> · <a href="preview-native.gif">Native animation</a></p>
+    <div class="gallery"><img src="scene-native.png" alt="PET_NAME beside Explorer in four directions"><img src="contact-sheet-native.png" alt="All PET_NAME poses"></div>
+    <script type="module" src="playback.js"></script>
+  </body>
+</html>

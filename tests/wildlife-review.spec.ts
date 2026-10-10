@@ -11,6 +11,35 @@ const definitions = JSON.parse(
   readFileSync("src/wildlife/reviews.json", "utf8"),
 ) as WildlifeReview[];
 
+test("common pet drafts have exact pending review and usable native/travel playback", async ({
+  page,
+}) => {
+  const pets = definitions.filter((d) => d.batchId === "wildlife-v2-common-pets-084");
+  expect(pets).toHaveLength(4);
+  for (const pet of pets) {
+    const id = `pattern:wildlife-v2-${pet.id}`;
+    expect(manifest.candidates.find((c) => c.id === id)?.kind).toBe("wildlife");
+    await page.goto(`/tilefun/workshop.html#/review/${encodeURIComponent(id)}`);
+    await expect(page.locator('[data-review-ready="true"]')).toBeVisible();
+    await expect(page.getByRole("button", { name: "Looks right ✓", exact: true })).toBeEnabled();
+    await page.goto(pet.galleryUrl);
+    await expect(page.locator("#playback")).toHaveAttribute("data-clip", /idle|walk/);
+    await page.locator("#scale").selectOption("1");
+    const spriteCanvas = page.locator("#sprites");
+    expect(await spriteCanvas.evaluate((c) => c.getBoundingClientRect().width)).toBe(
+      await spriteCanvas.evaluate((c) => (c as HTMLCanvasElement).width),
+    );
+    await page.locator("#clip").selectOption("walk");
+    await page.getByLabel("Walking travel").check();
+    await expect(page.locator("#playback")).toHaveAttribute("data-clip", "walk");
+    await page.getByRole("button", { name: "Pause", exact: true }).click();
+    await page.waitForTimeout(50);
+    const pose = await page.locator("#playback").getAttribute("data-pose");
+    await page.waitForTimeout(250);
+    expect(await page.locator("#playback").getAttribute("data-pose")).toBe(pose);
+  }
+});
+
 test("supervised wildlife revisions appear without feedback and preserve native pixels in full Chromium", async () => {
   const browser = await chromium.launch({ channel: "chromium", headless: true });
   try {

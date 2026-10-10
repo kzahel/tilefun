@@ -446,6 +446,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-cat-ginger-provisional-v1",
+      "name": "wildlife cat ginger provisional v1",
+      "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ca117325a2aa18929c4dfbfb0bfd1e125a7dda18ee052af87b34715ecc2f42b9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-cat-black-provisional-v1",
+      "name": "wildlife cat black provisional v1",
+      "image": "demos/wildlife-v2/cat-black/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-dog-golden-provisional-v1",
+      "name": "wildlife dog golden provisional v1",
+      "image": "demos/wildlife-v2/dog-golden/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0e70432f51e60f2e84a32c8a33784f329c5f72d665e374027bd4207b42b23ca9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-dog-shepherd-provisional-v1",
+      "name": "wildlife dog shepherd provisional v1",
+      "image": "demos/wildlife-v2/dog-shepherd/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-frog-v1",
       "name": "wildlife frog v1",
       "image": "demos/wildlife-v2/frog/draft-v1/sheet.png",
@@ -1913,6 +1953,46 @@
       "height": 192,
       "tileSize": 16,
       "fingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cat-ginger-draft-v1",
+      "name": "wildlife v2 cat ginger draft v1",
+      "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ca117325a2aa18929c4dfbfb0bfd1e125a7dda18ee052af87b34715ecc2f42b9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cat-black-draft-v1",
+      "name": "wildlife v2 cat black draft v1",
+      "image": "demos/wildlife-v2/cat-black/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dog-golden-draft-v1",
+      "name": "wildlife v2 dog golden draft v1",
+      "image": "demos/wildlife-v2/dog-golden/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0e70432f51e60f2e84a32c8a33784f329c5f72d665e374027bd4207b42b23ca9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dog-shepherd-draft-v1",
+      "name": "wildlife v2 dog shepherd draft v1",
+      "image": "demos/wildlife-v2/dog-shepherd/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4241,11 +4321,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:694"
+          "source": "src/generation/regional/NaturalLandscape.ts:697"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:888"
+          "source": "src/generation/regional/NaturalLandscape.ts:891"
         },
         {
           "system": "World generation",
@@ -21720,6 +21800,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-cat-ginger-provisional-v1",
+      "sheetId": "wildlife-cat-ginger-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1008,
+        192
+      ],
+      "label": "wildlife-cat-ginger-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-cat-black-provisional-v1",
+      "sheetId": "wildlife-cat-black-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1008,
+        192
+      ],
+      "label": "wildlife-cat-black-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-dog-golden-provisional-v1",
+      "sheetId": "wildlife-dog-golden-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1600,
+        256
+      ],
+      "label": "wildlife-dog-golden-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-dog-shepherd-provisional-v1",
+      "sheetId": "wildlife-dog-shepherd-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1600,
+        256
+      ],
+      "label": "wildlife-dog-shepherd-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-frog-v1",
       "sheetId": "wildlife-frog-v1",
       "rect": [
@@ -23221,11 +23373,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:9"
+          "source": "src/wildlife/Fauna.ts:10"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:173"
+          "source": "src/wildlife/Fauna.ts:175"
         }
       ]
     },
@@ -24505,11 +24657,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:694"
+          "source": "src/generation/regional/NaturalLandscape.ts:697"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:888"
+          "source": "src/generation/regional/NaturalLandscape.ts:891"
         },
         {
           "system": "World generation",

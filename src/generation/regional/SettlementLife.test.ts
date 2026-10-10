@@ -155,7 +155,8 @@ it.each([2026, 42])(
         expect(settlementPets(p, seed)).toEqual(pets);
         count += pets.length;
         for (const a of pets) {
-          const e = createFauna(a.type.includes("cat") ? "cat" : "dog", a.wx, a.wy);
+          const profile = required(faunaProfile(a.type));
+          const e = createFauna(profile.species, a.wx, a.wy);
           e.fauna = structuredClone(required(a.fauna));
           expect(
             props.some((p) =>
@@ -174,12 +175,38 @@ it.each([2026, 42])(
                 denseSurfaceAt(p, x / 16, y / 16),
               );
           const restored = decodeActor(encodeActor(e));
+          expect(restored.type).toBe(a.type);
           expect("fauna" in restored && restored.fauna).toEqual(e.fauna);
         }
       }
     expect(count).toBeGreaterThan(4);
   },
 );
+
+it("generates every authorized pet coat with stable family IDs and independent query order", () => {
+  const scan = (reverse: boolean) => {
+    const source = new DenseDistrictSource(regionalWorld(2026), true);
+    const coords = Array.from({ length: 49 }, (_, i) => ({
+      x: (i % 7) - 3,
+      y: Math.floor(i / 7) - 3,
+    }));
+    return (reverse ? coords.reverse() : coords)
+      .flatMap(({ x, y }) => {
+        const plan = source.owner(x, y);
+        return plan ? settlementPets(plan, 2026) : [];
+      })
+      .sort((a, b) => a.featureId.localeCompare(b.featureId));
+  };
+  const pets = scan(false);
+  expect(scan(true)).toEqual(pets);
+  const coats = new Set<string | undefined>(pets.map((p) => faunaProfile(p.type)?.species));
+  for (const coat of ["cat", "cat-ginger", "cat-black", "dog", "dog-golden", "dog-shepherd"])
+    expect(coats.has(coat)).toBe(true);
+  for (const pet of pets) {
+    const p = required(faunaProfile(pet.type));
+    expect(pet.featureId.endsWith(`:${p.variantOf ?? p.species}`)).toBe(true);
+  }
+});
 
 it.each(["cat", "dog", "cow"] as const)(
   "safe %s home constrains routine and scared physical motion without bouncing",

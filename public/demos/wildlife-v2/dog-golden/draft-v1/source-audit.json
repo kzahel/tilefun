@@ -1,0 +1,35 @@
+{
+  "identity": "dog-golden-draft-v1",
+  "poses": 100,
+  "fixedLengthLinkChecks": 1200,
+  "plantedGroundContacts": 352,
+  "stanceTravelCompensationChecks": 208,
+  "maxProjectionError": 5.000000001587068e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 0.99586,
+      "shoulder": 1.1574,
+      "pelvis": 1.01788,
+      "head": 1.29208
+    },
+    "up": {
+      "body": 0.99586,
+      "shoulder": 1.0603,
+      "pelvis": 1.17324,
+      "head": 1.02666
+    },
+    "left": {
+      "body": 1.05916,
+      "shoulder": 1.12581,
+      "pelvis": 0.9983,
+      "head": 1.21759
+    },
+    "right": {
+      "body": 1.05916,
+      "shoulder": 0.9992,
+      "pelvis": 1.11725,
+      "head": 1.09099
+    }
+  },
+  "status": "Integrity passes; agent visual observations and human review are separate."
+}

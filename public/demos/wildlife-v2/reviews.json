@@ -2185,5 +2185,329 @@
         "sha256": "452119bbf9e4aa83cd4b7b3ec751821e53a8d54245743eeb9cb03f2ba613e34a"
       }
     ]
+  },
+  {
+    "id": "cat-ginger-draft-v1",
+    "animalId": "cat-ginger",
+    "revision": "draft-v1",
+    "name": "Ginger tabby",
+    "batchId": "wildlife-v2-common-pets-084",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/cat-ginger/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-cat-ginger-draft-v1",
+      "name": "Ginger tabby sheet",
+      "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ca117325a2aa18929c4dfbfb0bfd1e125a7dda18ee052af87b34715ecc2f42b9",
+      "source": "art-source/wildlife-v2/cat-ginger/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-cat-ginger-draft-v1-scene",
+      "name": "Ginger tabby -scene",
+      "image": "demos/wildlife-v2/cat-ginger/draft-v1/scene-native.png",
+      "width": 600,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "ce41cda2dc5ca70a0d85d665e63aa09e706048fcbac7ad9a5906c94b4129fc9e",
+      "source": "art-source/wildlife-v2/cat-ginger/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-cat-ginger-draft-v1-contact",
+      "name": "Ginger tabby -contact",
+      "image": "demos/wildlife-v2/cat-ginger/draft-v1/contact-sheet-native.png",
+      "width": 1008,
+      "height": 210,
+      "tileSize": 16,
+      "fingerprint": "7ff1905bd71f6d0b6c6b404cf54feada5fbeb612eca3fe3bdc1bdabb50775ae4",
+      "source": "art-source/wildlife-v2/cat-ginger/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/cat-ginger/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
+        "sha256": "ca117325a2aa18929c4dfbfb0bfd1e125a7dda18ee052af87b34715ecc2f42b9"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/scene-native.png",
+        "sha256": "ce41cda2dc5ca70a0d85d665e63aa09e706048fcbac7ad9a5906c94b4129fc9e"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/contact-sheet-native.png",
+        "sha256": "7ff1905bd71f6d0b6c6b404cf54feada5fbeb612eca3fe3bdc1bdabb50775ae4"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/preview.gif",
+        "sha256": "5b591b5f92097debf85efbf0ad931e1e75ff9b55ba31cf9964e795996854028c"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/sprite.json",
+        "sha256": "b2c51a3932e1a84c2ba0b0f98d60bd72fe6f54f5b6b8cebdfcfd00cbe3e0339f"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/index.html",
+        "sha256": "8ba64ead3ecf26ebfb387b3990521a71922bc41e4133086847035b15a1c3a760"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/playback.js",
+        "sha256": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/scene-background.png",
+        "sha256": "565e9f28ecfb8cea6fdfcc42032f4f89d9e032b153a572a037c7a5f72f9321a0"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/preview-native.gif",
+        "sha256": "f615f082fea7b49b518558e41d966659c4c3a15042ed91064c75b009aa29cdc1"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-ginger/draft-v1/scene-native.gif",
+        "sha256": "d84b03b57b31973466941db7623fd1ea27cdfb6921268a47ffde98eb74bdf376"
+      }
+    ]
+  },
+  {
+    "id": "cat-black-draft-v1",
+    "animalId": "cat-black",
+    "revision": "draft-v1",
+    "name": "Black cat",
+    "batchId": "wildlife-v2-common-pets-084",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/cat-black/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-cat-black-draft-v1",
+      "name": "Black cat sheet",
+      "image": "demos/wildlife-v2/cat-black/draft-v1/sheet.png",
+      "width": 1008,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
+      "source": "art-source/wildlife-v2/cat-black/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-cat-black-draft-v1-scene",
+      "name": "Black cat -scene",
+      "image": "demos/wildlife-v2/cat-black/draft-v1/scene-native.png",
+      "width": 600,
+      "height": 240,
+      "tileSize": 16,
+      "fingerprint": "ce12a8f9c23d7930cf8985d3a6cc7d51b1fa139006c4cb172c48c8611574aff2",
+      "source": "art-source/wildlife-v2/cat-black/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-cat-black-draft-v1-contact",
+      "name": "Black cat -contact",
+      "image": "demos/wildlife-v2/cat-black/draft-v1/contact-sheet-native.png",
+      "width": 1008,
+      "height": 210,
+      "tileSize": 16,
+      "fingerprint": "4d9760822ab2f08eb95ad16155b2f00c8cb91939d4013d80dc6e5930b097bf01",
+      "source": "art-source/wildlife-v2/cat-black/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/cat-black/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/sheet.png",
+        "sha256": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/scene-native.png",
+        "sha256": "ce12a8f9c23d7930cf8985d3a6cc7d51b1fa139006c4cb172c48c8611574aff2"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/contact-sheet-native.png",
+        "sha256": "4d9760822ab2f08eb95ad16155b2f00c8cb91939d4013d80dc6e5930b097bf01"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/preview.gif",
+        "sha256": "767f922b265dc7379f801ba74199a2fa68f4c52a62a1ffd242aa47d7e5b899b8"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/sprite.json",
+        "sha256": "4ba7b0e11143c2141269927d47cb90fc08a9f1f26e9e3bce65d4177174583083"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/index.html",
+        "sha256": "7be8aa25544b9c071a510c9cd8e244a4062ea4693017fcf29a52a03843fe50c4"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/playback.js",
+        "sha256": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/scene-background.png",
+        "sha256": "565e9f28ecfb8cea6fdfcc42032f4f89d9e032b153a572a037c7a5f72f9321a0"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/preview-native.gif",
+        "sha256": "e15bb87850e2abdbcf53d51d96fca44a32f5d968ec71790bd4c7310666f28390"
+      },
+      {
+        "path": "demos/wildlife-v2/cat-black/draft-v1/scene-native.gif",
+        "sha256": "a5da65a17be637374251fb14b01ab557f6fcfab3b38ce26ecd3f803ed4659f3c"
+      }
+    ]
+  },
+  {
+    "id": "dog-golden-draft-v1",
+    "animalId": "dog-golden",
+    "revision": "draft-v1",
+    "name": "Golden retriever",
+    "batchId": "wildlife-v2-common-pets-084",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dog-golden/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-dog-golden-draft-v1",
+      "name": "Golden retriever sheet",
+      "image": "demos/wildlife-v2/dog-golden/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "0e70432f51e60f2e84a32c8a33784f329c5f72d665e374027bd4207b42b23ca9",
+      "source": "art-source/wildlife-v2/dog-golden/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-dog-golden-draft-v1-scene",
+      "name": "Golden retriever -scene",
+      "image": "demos/wildlife-v2/dog-golden/draft-v1/scene-native.png",
+      "width": 680,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "835d64ccbf3bb75102210618c468565fd8c0908e27fea21b2b20810017379ffb",
+      "source": "art-source/wildlife-v2/dog-golden/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-dog-golden-draft-v1-contact",
+      "name": "Golden retriever -contact",
+      "image": "demos/wildlife-v2/dog-golden/draft-v1/contact-sheet-native.png",
+      "width": 1600,
+      "height": 276,
+      "tileSize": 16,
+      "fingerprint": "069ef63a6cecf5058faedaac3ca76ba342a7594cb2d1836b2415a9aeef77e796",
+      "source": "art-source/wildlife-v2/dog-golden/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/dog-golden/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/sheet.png",
+        "sha256": "0e70432f51e60f2e84a32c8a33784f329c5f72d665e374027bd4207b42b23ca9"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/scene-native.png",
+        "sha256": "835d64ccbf3bb75102210618c468565fd8c0908e27fea21b2b20810017379ffb"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/contact-sheet-native.png",
+        "sha256": "069ef63a6cecf5058faedaac3ca76ba342a7594cb2d1836b2415a9aeef77e796"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/preview.gif",
+        "sha256": "ae8b7e0c3ef85be9d4024c58fb7437f7c52d0e24aae156e74229dc694ab12bb3"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/sprite.json",
+        "sha256": "90ce81b88dcb172587179cdc6797db48dd6a47843a1d4885f435b39b649d6949"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/index.html",
+        "sha256": "a5a588de84bc7ecb2c2e6b9f6cdcbf9415c625aff0c8c7a94682f625698912aa"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/playback.js",
+        "sha256": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/scene-background.png",
+        "sha256": "d2ec8b43483375c7f656a59929c4e2edb11eb2f752e1dfaa23c20c3ab8b6b083"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/preview-native.gif",
+        "sha256": "49a3571f285744d10c1f910f04a008dd86974b503d878135019f5253f68654c5"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-golden/draft-v1/scene-native.gif",
+        "sha256": "b2ad9264f3d1ef0fa7fa57a5b0ea55c40795695eb9704d33c999b97ea67a1730"
+      }
+    ]
+  },
+  {
+    "id": "dog-shepherd-draft-v1",
+    "animalId": "dog-shepherd",
+    "revision": "draft-v1",
+    "name": "Pointed-ear shepherd",
+    "batchId": "wildlife-v2-common-pets-084",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dog-shepherd/draft-v1/",
+    "sheet": {
+      "id": "wildlife-v2-dog-shepherd-draft-v1",
+      "name": "Pointed-ear shepherd sheet",
+      "image": "demos/wildlife-v2/dog-shepherd/draft-v1/sheet.png",
+      "width": 1600,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e",
+      "source": "art-source/wildlife-v2/dog-shepherd/draft-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-dog-shepherd-draft-v1-scene",
+      "name": "Pointed-ear shepherd -scene",
+      "image": "demos/wildlife-v2/dog-shepherd/draft-v1/scene-native.png",
+      "width": 680,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "a1b2b057317f22704351cf1fe50e08873d45241cbc984828a3971e339b5d9dde",
+      "source": "art-source/wildlife-v2/dog-shepherd/draft-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-dog-shepherd-draft-v1-contact",
+      "name": "Pointed-ear shepherd -contact",
+      "image": "demos/wildlife-v2/dog-shepherd/draft-v1/contact-sheet-native.png",
+      "width": 1600,
+      "height": 276,
+      "tileSize": 16,
+      "fingerprint": "978027d507527b366a621e6d57acb928647c34b2a8945ca276d8d0729abec4c5",
+      "source": "art-source/wildlife-v2/dog-shepherd/draft-v1"
+    },
+    "preview": "demos/wildlife-v2/dog-shepherd/draft-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/sheet.png",
+        "sha256": "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/scene-native.png",
+        "sha256": "a1b2b057317f22704351cf1fe50e08873d45241cbc984828a3971e339b5d9dde"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/contact-sheet-native.png",
+        "sha256": "978027d507527b366a621e6d57acb928647c34b2a8945ca276d8d0729abec4c5"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/preview.gif",
+        "sha256": "1602930f2e5c4bc3dfcf068f68b18d36065003f7126954d1b7c3e9c3b61f7074"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/sprite.json",
+        "sha256": "99c9097c1615086e23ac5eaba8235245031d7bfa5f0410ef7b9282e2693323ff"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/index.html",
+        "sha256": "eac554f79c84a176cfb17ce17b465ddcddb7c2ef4e405234dedc9636d634be08"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/playback.js",
+        "sha256": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/scene-background.png",
+        "sha256": "d2ec8b43483375c7f656a59929c4e2edb11eb2f752e1dfaa23c20c3ab8b6b083"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/preview-native.gif",
+        "sha256": "c5e03ba286708f7c91624ce1ea533e68488ab7098faa0d8d3921c1ef8a010f44"
+      },
+      {
+        "path": "demos/wildlife-v2/dog-shepherd/draft-v1/scene-native.gif",
+        "sha256": "5196eed14ccd3e2f1f73aedb6784f92b873bf04d805fc150d2080ca7aacc872b"
+      }
+    ]
   }
 ]

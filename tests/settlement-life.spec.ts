@@ -1,4 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { FAUNA_PROFILES } from "../src/wildlife/Fauna.js";
+
+const petFamilies = new Map<string, string>(
+  FAUNA_PROFILES.map((p) => [p.species, p.variantOf ?? p.species]),
+);
 
 test.use({ channel: "chromium" });
 test.describe.configure({ mode: "parallel" });
@@ -105,8 +110,11 @@ for (const renderer of ["canvas", "gpu"]) {
             clip: number;
             frame: number;
           }[]
-        ).filter((p) => ["cat", "dog"].includes(p.species));
-      expect([...new Set((await poses()).map((p) => p.species))].sort()).toEqual(["cat", "dog"]);
+        ).filter((p) => ["cat", "dog"].includes(petFamilies.get(p.species) ?? ""));
+      expect([...new Set((await poses()).map((p) => petFamilies.get(p.species)))].sort()).toEqual([
+        "cat",
+        "dog",
+      ]);
       await expect
         .poll(async () => (await poses()).some((p) => p.clip === 1 && p.frame >= 3), {
           timeout: 12000,

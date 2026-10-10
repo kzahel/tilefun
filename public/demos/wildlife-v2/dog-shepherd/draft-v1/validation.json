@@ -1,0 +1,35 @@
+{
+  "status": "Integrity only, independent visual gate separate",
+  "poses": 100,
+  "binaryAlpha": true,
+  "idleVisibleHeights": {
+    "down": 24,
+    "up": 24,
+    "left": 20,
+    "right": 20
+  },
+  "canvas": [
+    64,
+    64
+  ],
+  "anchor": [
+    32,
+    44
+  ],
+  "palette": {
+    "k": "#242832",
+    "s": "#806046",
+    "b": "#b59160",
+    "l": "#d1b581",
+    "w": "#c7ad82",
+    "g": "#967c58",
+    "e": "#24232b"
+  },
+  "stylization": [
+    "Natural quadruped using retained anatomy and the fixed 40-degree wildlife camera.",
+    "Source-driven body rise and shoulder/pelvis weight transfer; constant-length leg solves with grounded soles.",
+    "Rigid skull stabilized against torso pitch; fixed head drawing follows evaluated head translation.",
+    "Authored Pointed-ear shepherd palette/markings; all facings and idle/walk/action frames. Human review pending."
+  ],
+  "sequenceDurationMs": 7360
+}

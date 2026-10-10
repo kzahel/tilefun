@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-10T03:29:36.131Z (10/10/2026, 05:29:36 Berlin).
+Snapshot: 2026-10-10T03:55:43.953Z (10/10/2026, 05:55:43 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -8,9 +8,9 @@ Draft ready means retained sprite sheets/animation sources and a validated produ
 
 **11/196 draft ready; 11 require motion review; 0 in progress; 0 paused; 8 blocked; 0 queued.**
 
-**Production paused:** Only existing frozen-torso repairs are authorized. New animal production is canceled; sheep/pig correction review precedes any other existing repairs.
+**Historical campaign paused:** Only existing frozen-torso repairs are authorized. New animal production is canceled; sheep/pig correction review precedes any other existing repairs. The separately authorized four-pet batch is tracked below.
 
-**Scope: repair existing frozen-torso walks only. No new animals.** 166 unfinished roster entries are outside the current plan, not queued for production.
+**Historical roster scope: existing frozen-torso repairs.** 166 unfinished roster entries stay outside production. The named common-pet batch is the only expansion exception.
 
 [Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/060-wildlife-fresh-production.md) · [Latest session activity](../data/wildlife-campaign-v2/background-02-worker/checkpoint.md)
 
@@ -203,6 +203,17 @@ Draft ready means retained sprite sheets/animation sources and a validated produ
 | Earthworm | Out of scope | In progress.  |
 | Upright elephant | Out of scope | In progress.  |
 | Upright giraffe | Out of scope | In progress.  |
+
+## Authorized common-pet batch
+
+Separate from the historical roster and its stopped queue. [Scope and evidence](tactical/084-common-pets-and-variations.md). All human approvals remain pending.
+
+| Pet | State | Gameplay | Inspection |
+| --- | --- | --- | --- |
+| Ginger tabby | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/cat-ginger/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/cat-ginger/draft-v1/review-observations.md) |
+| Black cat | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/cat-black/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/cat-black/draft-v1/review-observations.md) |
+| Golden retriever | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/dog-golden/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/dog-golden/draft-v1/review-observations.md) |
+| Pointed-ear shepherd | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/dog-shepherd/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/dog-shepherd/draft-v1/review-observations.md) |
 
 ## Whole roster
 

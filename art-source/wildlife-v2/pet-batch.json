@@ -4,9 +4,33 @@
   "revision": "draft-v1",
   "reviewStatus": "pending",
   "pets": [
-    { "id": "cat-ginger", "name": "Ginger tabby", "species": "cat", "state": "in-progress" },
-    { "id": "cat-black", "name": "Black cat", "species": "cat", "state": "in-progress" },
-    { "id": "dog-golden", "name": "Golden retriever", "species": "dog", "state": "in-progress" },
-    { "id": "dog-shepherd", "name": "Pointed-ear shepherd", "species": "dog", "state": "in-progress" }
+    {
+      "id": "cat-ginger",
+      "name": "Ginger tabby",
+      "species": "cat",
+      "state": "draft-ready",
+      "gameplay": true
+    },
+    {
+      "id": "cat-black",
+      "name": "Black cat",
+      "species": "cat",
+      "state": "draft-ready",
+      "gameplay": true
+    },
+    {
+      "id": "dog-golden",
+      "name": "Golden retriever",
+      "species": "dog",
+      "state": "draft-ready",
+      "gameplay": true
+    },
+    {
+      "id": "dog-shepherd",
+      "name": "Pointed-ear shepherd",
+      "species": "dog",
+      "state": "draft-ready",
+      "gameplay": true
+    }
   ]
 }

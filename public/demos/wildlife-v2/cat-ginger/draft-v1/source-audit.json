@@ -1,0 +1,35 @@
+{
+  "identity": "cat-ginger-draft-v1",
+  "poses": 84,
+  "fixedLengthLinkChecks": 1008,
+  "plantedGroundContacts": 304,
+  "stanceTravelCompensationChecks": 160,
+  "maxProjectionError": 4.9984741217201645e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 0.95756,
+      "shoulder": 1.16867,
+      "pelvis": 0.99596,
+      "head": 1.31671
+    },
+    "up": {
+      "body": 0.95756,
+      "shoulder": 1.02762,
+      "pelvis": 1.16956,
+      "head": 0.95865
+    },
+    "left": {
+      "body": 1.02086,
+      "shoulder": 1.11249,
+      "pelvis": 0.95472,
+      "head": 1.22587
+    },
+    "right": {
+      "body": 1.02086,
+      "shoulder": 0.98588,
+      "pelvis": 1.08132,
+      "head": 1.09927
+    }
+  },
+  "status": "Integrity passes; agent visual observations and human review are separate."
+}

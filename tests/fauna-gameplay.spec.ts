@@ -82,7 +82,11 @@ for (const profile of FAUNA_PROFILES) {
       }
       await page.getByRole("button", { name: "Resume", exact: true }).click();
       await expect
-        .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0))
+        // Sample the short native rest phase instead of skipping it between
+        // increasingly sparse polls after a slower pet walk.
+        .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0), {
+          intervals: [30],
+        })
         .toBe(true);
       await page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true }).click();
       await expect

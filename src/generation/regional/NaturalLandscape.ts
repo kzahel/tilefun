@@ -292,7 +292,10 @@ export class NaturalLandscape {
             valueNoise(
               refuge.x,
               refuge.y,
-              this.world.seed + 8241 + i + FAUNA_ROSTER.indexOf(species) * 19,
+              this.world.seed +
+                8241 +
+                i +
+                (FAUNA_ROSTER as readonly FaunaSpecies[]).indexOf(species) * 19,
             ) * 4294967296,
           ) >>> 0;
         fauna.timer = 1.5 + i * 0.5;

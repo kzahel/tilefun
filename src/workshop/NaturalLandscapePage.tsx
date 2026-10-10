@@ -270,7 +270,10 @@ export default function NaturalLandscapePage() {
           ).length,
         );
         c.dataset.petCount = String(
-          fauna.filter((e) => ["cat", "dog"].includes(faunaProfile(e.type)?.species ?? "")).length,
+          fauna.filter((e) => {
+            const p = faunaProfile(e.type);
+            return ["cat", "dog"].includes(p?.variantOf ?? p?.species ?? "");
+          }).length,
         );
         c.dataset.playerVz = String(view.serverPlayerEntity.jumpVZ ?? 0);
         c.dataset.playerMaxVz = String(

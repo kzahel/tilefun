@@ -117,7 +117,12 @@ Fresh worlds also have connected farmsteads: dirt lanes branch from inter-town
 roads to a farmhouse, shed, crops and durable pasture animals. Cities have larger
 16- or 24-block neighborhoods, taller centers, shopping streets and two greens;
 villages stay compact. Cats and dogs live in safe settlement greens and persist
-as individuals. Inspect the [farmstead](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-farmstead&landscape=thicket#/tool/world-geometry),
+as individuals. Fresh settlement greens choose among tuxedo, ginger tabby and
+black cats, plus tricolor, golden retriever and pointed-ear shepherd dogs.
+**Edit → Entities** also offers all four new pet variations for older worlds.
+Their new art remains pending review in the
+[Wildlife gallery](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/).
+Inspect the [farmstead](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-farmstead&landscape=thicket#/tool/world-geometry),
 [village pets](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-village-pets&landscape=thicket#/tool/world-geometry),
 [city pets](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-city-pets&landscape=thicket#/tool/world-geometry)
 or [city center](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket#/tool/world-geometry)

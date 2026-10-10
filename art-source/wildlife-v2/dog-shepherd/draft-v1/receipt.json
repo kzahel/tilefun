@@ -1,0 +1,102 @@
+{
+  "identity": "dog-shepherd-draft-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "visualReview": {
+    "observer": "coordinator",
+    "date": "2026-10-10",
+    "checks": {
+      "projection": "All four native and enlarged facings retain the fixed 40-degree top-down projection, visible upper backs and distinct near/far limb depths. No cell-fitting scale change was applied.",
+      "anatomy": "Opened every chronological walking and ear/tail frame in compact fixed-anchor panels. Low quadruped bodies remain connected to four solved limbs; rear views contain rear skulls without front facial decals.",
+      "headVolume": "The stabilized rigid skull follows evaluated body translation. Fixed authored head templates keep their pixel dimensions throughout walking; the ears articulate separately without resizing the head.",
+      "contacts": "Saved-scene audits check actual sole positions, ground clearance and constant-length links at every pose/facing. Native/enlarged panels retain alternating feet beneath the moving torso, with brief far-paw occlusion at crossings.",
+      "continuousPlayback": "Bundled full Chromium captured complete two-walk/action/idle sequences at 1x and 4x. All 21 cat or 25 dog poses were observed per scale; every four-facing crop matches its source pixels. Travel playback uses the authored stride.",
+      "sceneScale": "Opened native/enlarged scenes beside the unchanged Explorer, actual Modern Exteriors tree, roof and cars. Cats remain smaller than dogs; all four use the original world-pixel density and ground anchors.",
+      "weightTransfer": "Final native walk panels visibly move the upper body/head by roughly one pixel while planted feet stay grounded. Evaluated shoulder and pelvis trajectories differ under rigid torso pitch; the leg solve compensates rather than bouncing a finished sprite. Every facing passes the projected-motion and stance-travel audit."
+    },
+    "coat": "Tan coat and black saddle pair with separate triangular upright ear geometry and a lower tail. Profile/rear ears remain readable; frontal ears and far feet are partly occluded by the small skull/body.",
+    "limits": "One-pixel motion quantization, quiet actions and short far-paw occlusions remain. Dog breed shapes are compact stylizations, not detailed breed-standard illustrations. Agent inspection is not human approval; all new exact candidates are pending."
+  },
+  "browser": {
+    "version": "153.0.8010.12",
+    "results": [
+      {
+        "pet": "dog-shepherd",
+        "scale": 1,
+        "chronologicalPoses": 25,
+        "exactCropChecks": 100,
+        "errors": []
+      },
+      {
+        "pet": "dog-shepherd",
+        "scale": 4,
+        "chronologicalPoses": 25,
+        "exactCropChecks": 100,
+        "errors": []
+      }
+    ]
+  },
+  "sourceAudit": {
+    "identity": "dog-shepherd-draft-v1",
+    "poses": 100,
+    "fixedLengthLinkChecks": 1200,
+    "plantedGroundContacts": 352,
+    "stanceTravelCompensationChecks": 208,
+    "maxProjectionError": 5.000000001587068e-06,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 0.99586,
+        "shoulder": 1.1574,
+        "pelvis": 1.01788,
+        "head": 1.29208
+      },
+      "up": {
+        "body": 0.99586,
+        "shoulder": 1.0603,
+        "pelvis": 1.17324,
+        "head": 1.02666
+      },
+      "left": {
+        "body": 1.05916,
+        "shoulder": 1.12581,
+        "pelvis": 0.9983,
+        "head": 1.21759
+      },
+      "right": {
+        "body": 1.05916,
+        "shoulder": 0.9992,
+        "pelvis": 1.11725,
+        "head": 1.09099
+      }
+    },
+    "status": "Integrity passes; agent visual observations and human review are separate."
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/pets/audit.py": "96c7b9a1ab42292e3fe586f6c4265a7ca59699939f111f8945cb6139d98f9425",
+    "art-source/wildlife-v2/pets/build.py": "e8e244f31f0d4050f6e2dbc607a34986099f79806f187383b89f958e0613f8a3",
+    "art-source/wildlife-v2/pets/finalize.py": "e3919c18cd8880e333a1d927d5ca41a106700addcbcf8721f9b60526435893cf",
+    "art-source/wildlife-v2/pets/finish.py": "1937131074c79c626ecc320cde37088619a7d9b01a9f951f5f0903e9d432cda3",
+    "art-source/wildlife-v2/pets/inspect.py": "7994f69bbcfcd55c60cf3ded89896b7e1d95c2f8fcab64a4d46682d645c565ea",
+    "art-source/wildlife-v2/pets/review.json": "c0fc0889fdf22f47d415860bdf4160716528f7fdfacaf980d841415cc52b8c53",
+    "art-source/wildlife-v2/pets/playback.js": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f",
+    "art-source/wildlife-v2/pets/index.html": "88f7028ce9f808816c0b866b9946f20a3141062457bff120f6a5d415b3aa09d1",
+    "art-source/wildlife-v2/dog-shepherd/draft-v1/animal.blend": "de4c8d9f43bbfca6779cecfd214a4116b434c82fb53ea7f2c2a59abadd9a9e66",
+    "art-source/wildlife-v2/dog-shepherd/draft-v1/masters.json": "9eb2622727d8243654d6cd1848d1fc0a3550d73a061f811e7111ab309231ee8c",
+    "art-source/wildlife-v2/dog-shepherd/draft-v1/provenance.json": "8414cfcac93a0c625064e7ee3df7c3dbec4269619a43ef6fcfe1feaf0f95c997",
+    "art-source/wildlife-v2/dog-shepherd/draft-v1/README.md": "fe67aff22df8a987ffecb30e4489984667ceb91f987f9318d75c31000675235a",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/sheet.png": "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/sprite.json": "99c9097c1615086e23ac5eaba8235245031d7bfa5f0410ef7b9282e2693323ff",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/scene-native.png": "a1b2b057317f22704351cf1fe50e08873d45241cbc984828a3971e339b5d9dde",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/scene-background.png": "d2ec8b43483375c7f656a59929c4e2edb11eb2f752e1dfaa23c20c3ab8b6b083",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/contact-sheet-native.png": "978027d507527b366a621e6d57acb928647c34b2a8945ca276d8d0729abec4c5",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/preview.gif": "1602930f2e5c4bc3dfcf068f68b18d36065003f7126954d1b7c3e9c3b61f7074",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/preview-native.gif": "c5e03ba286708f7c91624ce1ea533e68488ab7098faa0d8d3921c1ef8a010f44",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/scene-native.gif": "5196eed14ccd3e2f1f73aedb6784f92b873bf04d805fc150d2080ca7aacc872b",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/source-audit.json": "59e9e5b9cf6ae6ecd296be1f3688d7cfb67881596d013b19325548fa17d5a700",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/validation.json": "a8e07a63f64dc79600cd762f1fd0dd2679b69733ad209c6225291ffc6b9aed1f",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/playback.js": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/index.html": "eac554f79c84a176cfb17ce17b465ddcddb7c2ef4e405234dedc9636d634be08",
+    "public/demos/wildlife-v2/dog-shepherd/draft-v1/review-observations.md": "40915bb5174416499b1778e4318630ed23cafcec13f97255f49e956d1adfca33"
+  }
+}

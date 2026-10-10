@@ -1,0 +1,102 @@
+{
+  "identity": "cat-black-draft-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "visualReview": {
+    "observer": "coordinator",
+    "date": "2026-10-10",
+    "checks": {
+      "projection": "All four native and enlarged facings retain the fixed 40-degree top-down projection, visible upper backs and distinct near/far limb depths. No cell-fitting scale change was applied.",
+      "anatomy": "Opened every chronological walking and ear/tail frame in compact fixed-anchor panels. Low quadruped bodies remain connected to four solved limbs; rear views contain rear skulls without front facial decals.",
+      "headVolume": "The stabilized rigid skull follows evaluated body translation. Fixed authored head templates keep their pixel dimensions throughout walking; the ears articulate separately without resizing the head.",
+      "contacts": "Saved-scene audits check actual sole positions, ground clearance and constant-length links at every pose/facing. Native/enlarged panels retain alternating feet beneath the moving torso, with brief far-paw occlusion at crossings.",
+      "continuousPlayback": "Bundled full Chromium captured complete two-walk/action/idle sequences at 1x and 4x. All 21 cat or 25 dog poses were observed per scale; every four-facing crop matches its source pixels. Travel playback uses the authored stride.",
+      "sceneScale": "Opened native/enlarged scenes beside the unchanged Explorer, actual Modern Exteriors tree, roof and cars. Cats remain smaller than dogs; all four use the original world-pixel density and ground anchors.",
+      "weightTransfer": "Final native walk panels visibly move the upper body/head by roughly one pixel while planted feet stay grounded. Evaluated shoulder and pelvis trajectories differ under rigid torso pitch; the leg solve compensates rather than bouncing a finished sprite. Every facing passes the projected-motion and stance-travel audit."
+    },
+    "coat": "Solid charcoal coat has restrained blue-gray upper surfaces and golden eyes. It has no white tuxedo bib/mittens; rear and profile foot separation is subtle but present against grass.",
+    "limits": "One-pixel motion quantization, quiet actions and short far-paw occlusions remain. Dog breed shapes are compact stylizations, not detailed breed-standard illustrations. Agent inspection is not human approval; all new exact candidates are pending."
+  },
+  "browser": {
+    "version": "153.0.8010.12",
+    "results": [
+      {
+        "pet": "cat-black",
+        "scale": 1,
+        "chronologicalPoses": 21,
+        "exactCropChecks": 84,
+        "errors": []
+      },
+      {
+        "pet": "cat-black",
+        "scale": 4,
+        "chronologicalPoses": 21,
+        "exactCropChecks": 84,
+        "errors": []
+      }
+    ]
+  },
+  "sourceAudit": {
+    "identity": "cat-black-draft-v1",
+    "poses": 84,
+    "fixedLengthLinkChecks": 1008,
+    "plantedGroundContacts": 304,
+    "stanceTravelCompensationChecks": 160,
+    "maxProjectionError": 4.9984741217201645e-06,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 0.95756,
+        "shoulder": 1.16867,
+        "pelvis": 0.99596,
+        "head": 1.31671
+      },
+      "up": {
+        "body": 0.95756,
+        "shoulder": 1.02762,
+        "pelvis": 1.16956,
+        "head": 0.95865
+      },
+      "left": {
+        "body": 1.02086,
+        "shoulder": 1.11249,
+        "pelvis": 0.95472,
+        "head": 1.22587
+      },
+      "right": {
+        "body": 1.02086,
+        "shoulder": 0.98588,
+        "pelvis": 1.08132,
+        "head": 1.09927
+      }
+    },
+    "status": "Integrity passes; agent visual observations and human review are separate."
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/pets/audit.py": "96c7b9a1ab42292e3fe586f6c4265a7ca59699939f111f8945cb6139d98f9425",
+    "art-source/wildlife-v2/pets/build.py": "e8e244f31f0d4050f6e2dbc607a34986099f79806f187383b89f958e0613f8a3",
+    "art-source/wildlife-v2/pets/finalize.py": "e3919c18cd8880e333a1d927d5ca41a106700addcbcf8721f9b60526435893cf",
+    "art-source/wildlife-v2/pets/finish.py": "1937131074c79c626ecc320cde37088619a7d9b01a9f951f5f0903e9d432cda3",
+    "art-source/wildlife-v2/pets/inspect.py": "7994f69bbcfcd55c60cf3ded89896b7e1d95c2f8fcab64a4d46682d645c565ea",
+    "art-source/wildlife-v2/pets/review.json": "c0fc0889fdf22f47d415860bdf4160716528f7fdfacaf980d841415cc52b8c53",
+    "art-source/wildlife-v2/pets/playback.js": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f",
+    "art-source/wildlife-v2/pets/index.html": "88f7028ce9f808816c0b866b9946f20a3141062457bff120f6a5d415b3aa09d1",
+    "art-source/wildlife-v2/cat-black/draft-v1/animal.blend": "752ec6c1fc8f5c2496932453115344855455b0900db2ddb439e7aff79cb9dee1",
+    "art-source/wildlife-v2/cat-black/draft-v1/masters.json": "19775fb09b482a91b55db7fb39f46d39a8d7a555b6a6127e3226e317720f4535",
+    "art-source/wildlife-v2/cat-black/draft-v1/provenance.json": "5b34bb1bae4a15ca673157283a7516340c07c1053a7916c14b11c3093e06343f",
+    "art-source/wildlife-v2/cat-black/draft-v1/README.md": "2f2b601416eaa5e536c6a3b6aa1b84ba757e302379f0682246b57e9f5dc5953e",
+    "public/demos/wildlife-v2/cat-black/draft-v1/sheet.png": "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
+    "public/demos/wildlife-v2/cat-black/draft-v1/sprite.json": "4ba7b0e11143c2141269927d47cb90fc08a9f1f26e9e3bce65d4177174583083",
+    "public/demos/wildlife-v2/cat-black/draft-v1/scene-native.png": "ce12a8f9c23d7930cf8985d3a6cc7d51b1fa139006c4cb172c48c8611574aff2",
+    "public/demos/wildlife-v2/cat-black/draft-v1/scene-background.png": "565e9f28ecfb8cea6fdfcc42032f4f89d9e032b153a572a037c7a5f72f9321a0",
+    "public/demos/wildlife-v2/cat-black/draft-v1/contact-sheet-native.png": "4d9760822ab2f08eb95ad16155b2f00c8cb91939d4013d80dc6e5930b097bf01",
+    "public/demos/wildlife-v2/cat-black/draft-v1/preview.gif": "767f922b265dc7379f801ba74199a2fa68f4c52a62a1ffd242aa47d7e5b899b8",
+    "public/demos/wildlife-v2/cat-black/draft-v1/preview-native.gif": "e15bb87850e2abdbcf53d51d96fca44a32f5d968ec71790bd4c7310666f28390",
+    "public/demos/wildlife-v2/cat-black/draft-v1/scene-native.gif": "a5da65a17be637374251fb14b01ab557f6fcfab3b38ce26ecd3f803ed4659f3c",
+    "public/demos/wildlife-v2/cat-black/draft-v1/source-audit.json": "75f6f4077df559837e95ba1359198c9c932352d1748c420bcff8df546bc9d2f6",
+    "public/demos/wildlife-v2/cat-black/draft-v1/validation.json": "c0d52408c5a2a3240f0d7aa4a6bfa9bc9dce470b26c7715e3f8af1c5111a2129",
+    "public/demos/wildlife-v2/cat-black/draft-v1/playback.js": "fa50fc6c93841966426e4b3ff63106129686dba263d11a54093ffbc222fd934f",
+    "public/demos/wildlife-v2/cat-black/draft-v1/index.html": "7be8aa25544b9c071a510c9cd8e244a4062ea4693017fcf29a52a03843fe50c4",
+    "public/demos/wildlife-v2/cat-black/draft-v1/review-observations.md": "9c919b5a5463b1eb818d73c747c4fa50de64c95b4daa56baac063673a56a0107"
+  }
+}

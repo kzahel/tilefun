@@ -47,6 +47,13 @@ use `--verify-only` to validate without writing. The command verifies the full
 archive and refuses to overwrite differing files. Obtain the archive separately;
 it is a local backup, not available from a Git clone.
 
-Production remains stopped. Only repairs of existing frozen-torso walks are in
-scope; committing these sources does not approve their motion or authorize new
-animals. Changed review renderer source produces fresh pending fingerprints.
+The historical campaign remains stopped. Tactical 084 separately authorizes
+four common pets under pet-batch.json: ginger/black cats and golden/shepherd
+dogs. Their shared editable authoring/audit pipeline is in pets/; per-pet scenes,
+pixel masters and exact pending receipts are retained in their own new IDs.
+This batch includes its small native review PNG/GIF/player artifacts in Git so
+a fresh checkout can review all four without the historical evidence archive.
+Large guide/contact studies and browser captures remain ignored local evidence.
+Other production is limited to existing frozen-torso repairs. Changed review
+renderer source produces fresh pending fingerprints; all human art approvals
+remain separate.

@@ -53,6 +53,19 @@ export function naturalLandscapeRecipe(
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);
+  // Pet-coat arrivals inspect real seeded settlement individuals, whose greens
+  // are intentionally excluded by the countryside-only dry-arrival search.
+  if (!at && FAUNA_PROFILES.find((p) => p.species === id)?.variantOf) {
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: createDescriptor("regional", point.seed),
+      landscape: profile,
+      player: createPlayer((point.x - 4) * 16, point.y * 16),
+      props: [],
+      traffic: [],
+    };
+  }
   if (!at && ["farmstead", "village-pets", "city-pets", "city-center"].includes(id)) {
     const world = regionalWorld(point.seed);
     let player: ReturnType<typeof createPlayer>;

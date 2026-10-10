@@ -1,5 +1,6 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import { PET_ART } from "./PetVariants.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
 export const FAUNA_ROSTER = [
@@ -21,9 +22,10 @@ export const FAUNA_ROSTER = [
   "harbor-seal",
   "manta-ray",
 ] as const;
-export type FaunaSpecies = (typeof FAUNA_ROSTER)[number];
+export type FaunaSpecies = (typeof FAUNA_ROSTER)[number] | (typeof PET_ART)[number]["id"];
 export interface FaunaProfile {
   species: FaunaSpecies;
+  variantOf?: "cat" | "dog";
   label: string;
   image: string;
   identity: string;
@@ -45,7 +47,7 @@ export interface FaunaProfile {
   interest: number;
   habitat: "woodland" | "pasture" | "open" | "pond" | "shore" | "deep";
 }
-export const FAUNA_PROFILES: readonly FaunaProfile[] = [
+const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
   {
     species: "fox",
     label: "Red fox",
@@ -896,6 +898,39 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
     inspectionZoom: 0.4,
   },
 ];
+export const FAUNA_PROFILES: readonly FaunaProfile[] = [
+  ...BASE_FAUNA_PROFILES,
+  ...PET_ART.map((art): FaunaProfile => {
+    const base = BASE_FAUNA_PROFILES.find((p) => p.species === art.species);
+    if (!base) throw new Error(`Missing pet behavior: ${art.species}`);
+    const count = base.clips[1]?.count ?? 1;
+    return {
+      ...base,
+      species: art.id,
+      variantOf: art.species,
+      label: art.name,
+      image: `demos/wildlife-v2/${art.id}/draft-v1/sheet.png`,
+      identity: art.identity,
+      sha256: art.sha256,
+      inspection: art.inspection,
+      // Match linear travel to the authored four/six-pixel walk stride.
+      speed: (art.species === "cat" ? 4 : 6) / (count * 0.08),
+      step: art.species === "cat" ? 12 : 16,
+      clips: base.clips.map((c) => ({
+        ...c,
+        frameDuration: c.name === "walk" ? 80 : c.name === "flee" ? 40 : 160,
+      })),
+    };
+  }),
+];
+/** Same cat/dog habitat owner, independent deterministic coat choice. */
+export function petCoat(species: "cat" | "dog", roll: number): FaunaSpecies {
+  const coats: FaunaSpecies[] = [
+    species,
+    ...PET_ART.filter((a) => a.species === species).map((a) => a.id),
+  ];
+  return coats[Math.min(coats.length - 1, Math.max(0, Math.floor(roll * coats.length)))] ?? species;
+}
 export const faunaType = (species: FaunaSpecies) => `wildlife-${species}-provisional-v1`;
 export const faunaProfile = (type: string | undefined) =>
   FAUNA_PROFILES.find((p) => faunaType(p.species) === type);

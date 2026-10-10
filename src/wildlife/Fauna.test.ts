@@ -72,6 +72,11 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       expect(metadata.identity).toBe(p.identity);
       expect(metadata.anchor).toEqual(p.anchor);
       expect(metadata.frameWidth).toBe(p.size);
+      if (p.variantOf) {
+        expect(
+          (p.speed * required(CLIPS[1]).count * required(CLIPS[1]).frameDuration) / 1000,
+        ).toBeCloseTo(metadata.rootTravelPixelsPerCycle);
+      }
       for (const clip of CLIPS.slice(0, 3)) {
         expect(metadata.clips[clip.name].start).toBe(clip.start);
         expect(metadata.clips[clip.name].count).toBe(clip.count);
@@ -84,7 +89,32 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       );
     });
 
-    it("seeds small stable groups in wider dry glades with whole-body tree clearance", () => {
+    it("seeds stable groups in the intended habitat with whole-body clearance", () => {
+      if (p.variantOf) {
+        const coords = Array.from({ length: 16 }, (_, i) => ({
+          cx: Math.floor(p.inspection[0] / 16) - 2 + (i % 4),
+          cy: Math.floor(p.inspection[1] / 16) - 2 + Math.floor(i / 4),
+        }));
+        const placements = (reverse: boolean) => {
+          const g = createGenerator(createDescriptor("regional", 2026));
+          return (reverse ? [...coords].reverse() : coords)
+            .flatMap((c) => g.actors?.(c.cx, c.cy) ?? [])
+            .filter((a) => a.type === TYPE)
+            .sort((a, b) => a.featureId.localeCompare(b.featureId));
+        };
+        const animals = placements(false);
+        expect(placements(true)).toEqual(animals);
+        expect(
+          animals.some((a) => a.wx === p.inspection[0] * 16 && a.wy === p.inspection[1] * 16),
+        ).toBe(true);
+        for (const a of animals) {
+          expect(a.featureId).toMatch(new RegExp(`^settlement-pet:.*:${p.variantOf}$`));
+          const b = required(a.fauna?.habitatBounds);
+          expect(a.wx - p.body[0] / 2).toBeGreaterThanOrEqual(b.minX);
+          expect(a.wx + p.body[0] / 2).toBeLessThanOrEqual(b.maxX);
+        }
+        return;
+      }
       const coords = Array.from({ length: 16 }, (_, i) => ({
         cx: Math.floor(p.inspection[0] / 16) - 2 + (i % 4),
         cy: Math.floor(p.inspection[1] / 16) - 2 + Math.floor(i / 4),
@@ -297,7 +327,10 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       const before = { ...animal.position };
       startleFauna(animal, { wx: 40, wy: 64 });
       expect(animal.fauna?.state).toBe("travel");
-      for (let i = 0; i < 200; i++)
+      // A slower coat keeps the same committed-motion contract. Wait its actual
+      // scheduled walk instead of assuming every animal finishes in 200 ticks.
+      const remainingTicks = Math.ceil((required(animal.fauna?.motion).duration + 0.1) * 60);
+      for (let i = 0; i < remainingTicks; i++)
         manager.update(
           1 / 60,
           () => CollisionFlag.Solid,

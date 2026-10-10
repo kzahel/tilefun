@@ -18,11 +18,17 @@ if (![animalId, revision, batchId].every((v) => /^[a-z0-9-]+$/.test(v ?? "")) ||
 const repairScopePath = resolve(ROOT, "art-source/wildlife-v2/repair-scope.json");
 if (existsSync(repairScopePath)) {
   const scope = JSON.parse(readFileSync(repairScopePath, "utf8"));
+  const petBatch = scope.authorizedPetBatch
+    ? JSON.parse(readFileSync(safeArtifact(ROOT, scope.authorizedPetBatch), "utf8"))
+    : null;
+  const authorizedPet =
+    petBatch?.revision === revision && petBatch.pets.some((pet) => pet.id === animalId);
   if (
     scope.allowNewAnimals === false &&
+    !authorizedPet &&
     (!scope.existingAnimalIds.includes(animalId) || !scope.repairCandidates.includes(animalId))
   )
-    throw new Error("Owner scope is frozen-torso repairs only; this animal is outside that scope");
+    throw new Error("Animal is outside the existing repairs and explicitly authorized pet batch");
 }
 const base = `public/demos/wildlife-v2/${animalId}/${revision}`;
 const fingerprint = (bytes) => createHash("sha256").update(bytes).digest("hex");
