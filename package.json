@@ -35,7 +35,8 @@
     "gameplay:bench": "node scripts/benchmark-gameplay.mjs",
     "streaming:bench": "node scripts/benchmark-streaming.mjs",
     "streaming:matrix": "node scripts/benchmark-streaming-matrix.mjs",
-    "test:streaming": "node --test scripts/streaming-matrix.test.mjs"
+    "test:streaming": "node --test scripts/streaming-matrix.test.mjs",
+    "vehicle-collision:bench": "node scripts/benchmark-vehicle-collision.mjs"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

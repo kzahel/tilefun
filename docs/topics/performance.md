@@ -542,3 +542,33 @@ asset inventories/build and ordinary streaming readiness pass. The embedded
 hosts remain covered by the common engine suite. Grass cutoff/fade and re-entry
 checks pass; fractional-scale sampling differences remain an explicitly recorded
 renderer fidelity limitation rather than another performance task.
+
+
+## Rotated vehicle collision prototype
+
+[096](../tactical/096-rotated-vehicle-collision-benchmark.md) owns the isolated
+cardinal-AABB versus continuous-yaw OBB benchmark and device results.
+`npm run vehicle-collision:bench` runs identical prescribed motion and sweep
+sampling in a dedicated Worker and a six-replay main-thread demand lane. It
+uses native SpatialHash candidate queries with diagnostic shape/roof clearance
+math. Sparse obstacles, dense tight turns and two roof-local occupants cover
+1/8/32 vehicles and an explicit 128-vehicle stress case above the current cap.
+
+Two captures each on M4 Pro and physical Pixel 7a cover 96 cases with matching
+work counts/checksums and no page errors. At 32 cars, phone median diagnostic
+Worker cost is 0.287–0.288ms AABB versus 0.299–0.311ms OBB for dense turns,
+and 0.744–0.764 versus 0.772–0.805ms with roof occupants. The marginal shape
+cost supports a bounded yaw pilot; it does not establish full-feature headroom.
+Both policies already pay the same angular sampling cost, so the extra probes
+relative to shipped cardinal movement remain unmeasured.
+
+Adaptive identical batch sizes amortize browser timer precision; idle display
+cadence, executable source hashes and hardware/run context are recorded.
+Percentiles are of batch-amortized trace-step costs, not individual server tick
+p95. This is no hardware-normalized CPU capacity score or universal timing gate.
+The fixture excludes Realm, collision response, actual PlayerPredictor replay,
+transport, streaming, rendering and mesh triangles. Sampled angular/translation
+sweeps are not continuous collision detection and can miss sufficiently thin
+obstacles. Gameplay retains cardinal collision and cosmetic mesh orientation.
+Next: integrate one yaw-body prototype through shared authority/prediction,
+including turn clearance and roof support, then measure whole-game device cost.

@@ -335,3 +335,47 @@ The lane leaves native rAF and authority timers intact, records raw sampled cloc
 and borrowed poses, and accepts `--assert-presentation` / `--output=...`.
 It does not claim a real hidden-tab lifecycle test: automated pages are forced
 visible in the measured setup. [Evidence and rerun](../../docs/research/train-refresh-pacing.md).
+
+
+## Rotated vehicle collision demand
+
+`npm run vehicle-collision:bench -- --output=/tmp/tilefun-vehicle-collision`
+compares diagnostic cardinal AABB and yaw OBB bodies through the native entity
+SpatialHash. It runs 64 prescribed motion steps against sparse/dense obstacles,
+nearby cars and two rotating roof occupant clearance probes. Counts default to
+1/8/32/128; 128 exceeds the current gameplay traffic cap and is a stress case.
+Use `--counts=1,32 --samples=12` for a smaller selection. Authority-shaped work
+checks all cars in a dedicated Worker; the main-thread lane checks one controlled
+car six times per step while refreshing nearby proxies once. This models replay
+demand, not the production PlayerPredictor or an actual Realm tick.
+
+Both policies use identical motion, occupant positions and sweep subdivisions;
+collision verdicts do not change routes. The AABB control uses nearest-cardinal
+56x20 dimensions, not the complete approved per-view vehicle bank or facing
+hysteresis. The OBB uses a diagnostic four-axis SAT test plus vertical intervals.
+The native index uses enclosing XY boxes. Every probe counts all nearby candidates
+and tests all overlapping candidates (no early exit). Static obstacles are entity
+proxies, not the production prop index. Indexing/geometry/probe counts and checksums
+are retained. Independent polygon and brute-force tests protect the prototype.
+
+Run timing probes sequentially without competing tests/profilers. Three warmup
+traces precede adaptive calibration; both policies use the same cycles until the
+faster reaches 25ms (up to 1,024 traces). Twelve measured pairs alternate A/B then
+B/A. Reported percentiles are batch-amortized milliseconds per trace step, not
+server tick p95. Raw batch durations, timer precision, idle display cadence,
+source hashes and hardware context make limits visible. No timing threshold is
+asserted. Display calibration does not normalize CPU/GPU hardware capacity.
+
+Use `--cdp="$PHONE_CDP_URL" --port="$PHONE_HTTP_PORT" --device="model / OS"`
+for the physical phone after Machine Control discovery and task-owned ADB routes.
+`--android-device-cli="$ANDROID_DEVICE_CLI"` records temperature/thermal status.
+The runner closes its Worker/tab, disconnects from CDP and closes its Vite server;
+it writes no browser storage and leaves the user's phone Chrome running. Restore
+the prior foreground app and remove only task-owned USB routes afterward.
+With no CDP endpoint it uses bundled full Chromium, reaped on completion.
+
+The fixture has no gameplay consumer and measures no solver, AI, actual prediction,
+networking, streaming, rendering, mesh geometry or full-game headroom. Discrete
+4px sweep sampling includes rotation-only motion but is not CCD; oversized motion
+fails rather than silently reducing samples. [096](../../docs/tactical/096-rotated-vehicle-collision-benchmark.md)
+owns device results and the next shared-engine integration slice.
