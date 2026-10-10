@@ -117,8 +117,16 @@ const interrupt = () => {
 process.once("SIGINT", interrupt);
 process.once("SIGTERM", interrupt);
 const report = {
-  revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
-  dirty: !!execFileSync("git", ["status", "--porcelain"], { encoding: "utf8" }).trim(),
+  revision: execFileSync(
+    process.platform === "win32" ? "wsl.exe" : "git",
+    process.platform === "win32" ? ["git", "rev-parse", "HEAD"] : ["rev-parse", "HEAD"],
+    { encoding: "utf8" },
+  ).trim(),
+  dirty: !!execFileSync(
+    process.platform === "win32" ? "wsl.exe" : "git",
+    process.platform === "win32" ? ["git", "status", "--porcelain"] : ["status", "--porcelain"],
+    { encoding: "utf8" },
+  ).trim(),
   date: new Date().toISOString(),
   platform: endpoint ? "physical-device" : `${os.platform()} ${os.release()} ${os.arch()}`,
   cpu: endpoint ? undefined : os.cpus()[0]?.model,
@@ -151,6 +159,7 @@ try {
     server = await createServer({
       configFile: false,
       base: "/tilefun/",
+      optimizeDeps: { entries: ["index.html"] },
       plugins: [
         react(),
         ...(uncachedImageSizes
@@ -221,7 +230,16 @@ try {
     await page.goto(
       `${origin}/?nogamepad&renderer=${renderer}&${meshes ? "meshes&" : ""}${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
-    await page.getByRole("button", { name: "New World", exact: true }).click();
+    try {
+      await page.getByRole("button", { name: "New World", exact: true }).click();
+    } catch (error) {
+      await page.screenshot({ path: path.join(output, "startup-failure.png") });
+      await writeFile(
+        path.join(output, "startup-failure.json"),
+        `${JSON.stringify({ errors, body: await page.locator("body").innerText() }, null, 2)}\n`,
+      );
+      throw new Error(`Benchmark game startup failed: ${errors.join("; ")}`, { cause: error });
+    }
     await page.waitForFunction((arrival) => {
       const canvas = document.querySelector("#game"),
         game = canvas.__game;

@@ -7,7 +7,7 @@ identity/lifetime fixed, gameplay grass frame storage and terrain scheduler reco
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
-Updated: 2026-10-07.
+Updated: 2026-10-10.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -20,6 +20,13 @@ proposed renderer boundary. Its implementation record tracks completed slices;
 the remaining recommendations are not implemented fixes.
 
 ## Current state and contracts
+
+The isolated streaming runner now limits Vite dependency scanning to index.html;
+ignored archived review HTML is not a benchmark entry. Windows revision/dirty
+reads use Git through WSL. Failed game startup retains a screenshot, page errors
+and visible text under the selected output directory before closing its owned
+browser/server. Six runner-matrix checks pass; [084](../tactical/084-common-pets-and-variations.md)
+records the pet-batch integration readiness run and its limits.
 
 - Single player runs the shared server in a dedicated browser Worker.
   `src/server/LocalServerRuntime.ts` owns lifecycle; ordered, bounded
