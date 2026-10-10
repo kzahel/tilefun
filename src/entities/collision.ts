@@ -183,6 +183,10 @@ export function isElevationBlocked(
  * Resolve entity movement with per-axis sliding collision.
  * Mutates entity.position in place. Returns true if any axis was blocked.
  * Optional `isExtraBlocked` checks additional AABB obstacles (props, other entities).
+ * `reuseIdenticalProbe` opts into reusing the X verdict for an identical Y pose.
+ * Both queries must be stable for that footprint throughout this call, including
+ * after X position/momentum changes; callbacks must not mutate geometry or depend
+ * on those changes. Default callers retain both queries and their side effects.
  */
 export function resolveCollision(
   entity: Entity,
@@ -191,6 +195,7 @@ export function resolveCollision(
   getCollision: (tx: number, ty: number) => number,
   blockMask: number,
   isExtraBlocked?: (aabb: AABB) => boolean,
+  reuseIdenticalProbe = false,
 ): boolean {
   if (!entity.collider) {
     entity.position.wx += dx;
@@ -206,7 +211,8 @@ export function resolveCollision(
     wy: entity.position.wy,
   };
   const xBox = getEntityAABB(testX, entity.collider);
-  if (!aabbOverlapsSolid(xBox, getCollision, blockMask) && !isExtraBlocked?.(xBox)) {
+  const xBlocked = aabbOverlapsSolid(xBox, getCollision, blockMask) || !!isExtraBlocked?.(xBox);
+  if (!xBlocked) {
     entity.position.wx = testX.wx;
   } else {
     clipAirMomentum(entity, "x");
@@ -218,8 +224,14 @@ export function resolveCollision(
     wx: entity.position.wx,
     wy: entity.position.wy + dy,
   };
-  const yBox = getEntityAABB(testY, entity.collider);
-  if (!aabbOverlapsSolid(yBox, getCollision, blockMask) && !isExtraBlocked?.(yBox)) {
+  let yBlocked: boolean;
+  if (reuseIdenticalProbe && testY.wx === testX.wx && testY.wy === testX.wy) {
+    yBlocked = xBlocked;
+  } else {
+    const yBox = getEntityAABB(testY, entity.collider);
+    yBlocked = aabbOverlapsSolid(yBox, getCollision, blockMask) || !!isExtraBlocked?.(yBox);
+  }
+  if (!yBlocked) {
     entity.position.wy = testY.wy;
   } else {
     clipAirMomentum(entity, "y");

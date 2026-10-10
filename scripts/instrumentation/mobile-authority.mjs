@@ -23,6 +23,10 @@ const robinReferencePath = option("robin-reference", "");
 const robinReference = robinReferencePath ? await readFile(robinReferencePath, "utf8") : undefined;
 const realmReferencePath = option("realm-reference", "");
 const realmReference = realmReferencePath ? await readFile(realmReferencePath, "utf8") : undefined;
+const collisionReferencePath = option("collision-reference", "");
+const collisionReference = collisionReferencePath
+  ? await readFile(collisionReferencePath, "utf8")
+  : undefined;
 const aiReferencePath = option("ai-reference", "");
 const aiReference = aiReferencePath ? await readFile(aiReferencePath, "utf8") : undefined;
 const controls = option("controls", "baseline,visible-ai,sleep-hidden,no-ai,baseline").split(",");
@@ -63,6 +67,8 @@ const server = await createServer({
       name: "diagnostic-authority-access",
       enforce: "pre",
       transform(code, id) {
+        if (collisionReference && id.split("?")[0].endsWith("/src/entities/collision.ts"))
+          return collisionReference;
         if (realmReference && id.split("?")[0].endsWith("/src/server/Realm.ts")) {
           if (!physicsProfile) return realmReference;
           code = realmReference;
@@ -175,6 +181,7 @@ const report = {
   workerCpu,
   robinReference: !!robinReference,
   realmReference: !!realmReference,
+  collisionReference: !!collisionReference,
   aiReference: !!aiReference,
   cases: [],
 };

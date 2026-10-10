@@ -57,6 +57,10 @@ which can pause the Worker. Deep timings/query wrappers and sampling add overhea
 use separate shallow controls for ordinary timing. Source markers fail closed if
 the phase structure changes. [092](../../docs/tactical/092-authority-physics-profile.md)
 owns the measurement boundary and results.
+`--collision-reference=PATH` substitutes a frozen collision module in the isolated
+probe server for original-policy comparisons. The report records the control;
+hold companion modules and input conditions fixed. [093](../../docs/tactical/093-identical-collision-probes.md)
+owns the identical-probe comparison.
 
 Keep Chrome in the
 foreground on the phone; background debugging can stall or stop. Startup failures

@@ -106,6 +106,8 @@ export class EntityManager {
    *   Entities not in the map are frozen. If omitted, all entities tick with `dt`.
    * @param skipEntityIds Optional entity IDs to freeze for this update pass.
    * @param getTerrain Base terrain for deep-water-only body collision; supplied by production Realm.
+   * Collision/height/terrain callbacks must keep geometry stable during each synchronous
+   * NPC resolution, including across position and momentum changes between its axes.
    */
   update(
     dt: number,
@@ -318,6 +320,8 @@ export class EntityManager {
           getCollision,
           entityBlockMask,
           extraBlocker,
+          // These geometry reads remain stable across this entity's axis updates.
+          true,
         );
         if (blocked && entity.wanderAI) {
           onWanderBlocked(entity);

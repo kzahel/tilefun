@@ -78,6 +78,11 @@ world/eviction teardown stay shared; no lab-specific activation or physics path.
 in that shared Realm. ScenarioSession receives the same demand/readiness/edit
 invalidation and teardown as the game; prop collision geometry remains live.
 
+[093](../tactical/093-identical-collision-probes.md) opts shared EntityManager NPC
+movement into identical per-call collision-probe reuse. Game and labs retain both
+axis outcomes, blocked AI reactions, live support and later-call geometry changes.
+Default generic resolver callbacks keep both queries.
+
 [085](../tactical/085-robin-search-cost.md) optimizes the shared robin decision
 function without a separate lab path. Canvas/GPU grove checks still pass flight,
 actual perching, approach/contact and frozen trajectory reload; ordinary game

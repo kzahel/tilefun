@@ -147,14 +147,20 @@ and measurement limits.
 
 [092](../tactical/092-authority-physics-profile.md) profiles frozen 091 production
 source on the phone. Walking NPC movement costs 2.5ms p95 versus 0.8ms ground
-tracking; 76% of NPC collision resolutions have zero displacement. The next bounded
-candidate is reuse of duplicate same-footprint axis probes while preserving blocked
-flags, momentum clipping and AI reactions, with original-policy parity and native
-controls. It is not implemented yet. Full tick time includes Realm player-input
-processing as well as EntityManager; phase p95s cannot be added. The profile owns
-query counts, sampled CPU attribution and debugger/temperature/window limitations.
-Persistent support caches, finer spatial indices and incremental demand assembly
-remain later candidates.
+tracking; 76% of NPC collision resolutions have zero displacement. Full tick time
+includes Realm player-input processing as well as EntityManager; phase p95s cannot
+be added. The profile owns query counts, sampled CPU attribution and debugger/
+temperature/window limitations.
+
+[093](../tactical/093-identical-collision-probes.md) implements opt-in identical
+per-call collision-probe reuse for shared EntityManager NPC movement. Both axis
+outcomes, momentum clipping and blocked AI reactions remain unchanged; later
+calls read fresh geometry, and generic callbacks retain both queries by default.
+The phone's NPC prop query count falls about 38%; shallow EntityManager mean falls
+about 15% idle/10% walking. Whole-tick p95 overlaps (walking 10.5–11.0ms original,
+10.2–11.2ms reuse), so this is a phase saving, not a stutter/desync cure. Next,
+profile incremental interest-demand assembly under live ticket/readiness changes.
+Persistent support caches and finer spatial indices remain later candidates.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.
