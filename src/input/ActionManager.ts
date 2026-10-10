@@ -87,6 +87,10 @@ export class ActionManager {
     this.keysDown.clear();
   }
 
+  clearHeld(): void {
+    this.keysDown.clear();
+  }
+
   // --- Continuous action polling ---
 
   isHeld(action: ActionName): boolean {

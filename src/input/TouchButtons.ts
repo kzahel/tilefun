@@ -68,6 +68,10 @@ export class TouchButtons {
     this.canvas.removeEventListener("touchstart", this.onTouchStart);
     this.canvas.removeEventListener("touchend", this.onTouchEnd);
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
+    this.reset();
+  }
+
+  reset(): void {
     for (const btn of this.buttons) {
       btn.pressed = false;
       btn.touchId = null;

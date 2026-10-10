@@ -1,4 +1,5 @@
 import type { Mod } from "../server/WorldAPI.js";
+import { BEFRIEND_RANGE, isBefriendHit } from "./playInteraction.js";
 
 // ── Combat constants ──
 const SCATTER_MAX = 3;
@@ -10,7 +11,6 @@ const STOMP_BOUNCE_VZ = 150;
 const STOMP_DEATH_TIMER = 0.4;
 
 // ── Creature constants ──
-const BEFRIEND_RANGE = 24;
 const FLEE_SPEED = 60;
 const FLEE_DURATION = 1.5;
 
@@ -125,7 +125,7 @@ export const baseGameMod: Mod = {
         const { wx, wy } = data as { wx: number; wy: number };
         const nearby = api.entities.findInRadius(wx, wy, BEFRIEND_RANGE);
         for (const entity of nearby) {
-          if (!entity.hasTag("befriendable")) continue;
+          if (!isBefriendHit(wx, wy, entity.wx, entity.wy, entity.hasTag("befriendable"))) continue;
           entity.setFollowing(!entity.isFollowing);
           break;
         }

@@ -94,6 +94,8 @@ export interface WanderAIState {
   dirX: number;
   dirY: number;
   following?: boolean;
+  /** Live authority tag, independent of the static entity definition. */
+  befriendable?: boolean;
 }
 
 // ---- Shared helper for person entities ----

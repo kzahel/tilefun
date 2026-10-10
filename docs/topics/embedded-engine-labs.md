@@ -272,6 +272,14 @@ an unintended relaunch. Explicit Jump retains ordinary input physics.
 
 ## Change and validation discipline
 
+Tap movement (2026-10-10) is a game input/UI concern and does not add Options to
+the labs. It supplies ordinary sampled axes to the existing predictor and
+authority. The existing three-byte AI state now carries the live `befriendable`
+tag using presence/value bits 5/6; shared serialization, binary baselines/deltas
+and replica reconstruction preserve both values for game and lab consumers.
+Physics, presentation hosting and projection remain shared and unchanged.
+See [086](../tactical/086-tap-to-move-and-options.md).
+
 Duck interactions (2026-10-09) keep body collision and grounded player landing in
 shared movement physics; Realm owns quack/startle/escape and EntityManager owns the
 collision-resolved flight arc. The pond lab's **Hop onto duck** control uses the

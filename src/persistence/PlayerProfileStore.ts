@@ -1,3 +1,4 @@
+import type { TouchMovementMode } from "../input/TapMovement.js";
 import { generateUUID } from "../shared/uuid.js";
 
 export interface PlayerProfile {
@@ -6,6 +7,7 @@ export interface PlayerProfile {
   pin: string | null;
   createdAt: number;
   playerModel?: string;
+  touchMovement?: TouchMovementMode;
 }
 
 const PROFILE_DB = "tilefun-profiles";
@@ -88,10 +90,10 @@ export class PlayerProfileStore {
 
   async updateProfile(
     id: string,
-    updates: Partial<Pick<PlayerProfile, "name" | "pin" | "playerModel">>,
+    updates: Partial<Pick<PlayerProfile, "name" | "pin" | "playerModel" | "touchMovement">>,
   ): Promise<void> {
     const db = this.db;
-    if (!db) return;
+    if (!db) throw new Error("Profile store is not open");
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_PROFILES, "readwrite");
       const store = tx.objectStore(STORE_PROFILES);
@@ -102,11 +104,13 @@ export class PlayerProfileStore {
           if (updates.name !== undefined) profile.name = updates.name;
           if (updates.pin !== undefined) profile.pin = updates.pin;
           if (updates.playerModel !== undefined) profile.playerModel = updates.playerModel;
+          if (updates.touchMovement !== undefined) profile.touchMovement = updates.touchMovement;
           store.put(profile);
         }
       };
       tx.oncomplete = () => resolve();
       tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error ?? new Error("Profile update was aborted"));
     });
   }
 

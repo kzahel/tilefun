@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [086 Tap to move and Options](086-tap-to-move-and-options.md) | Complete: straight-line touch walking, visible Options and local profile preference; validation recorded, child device trial next |
 | [084 Common pets and variations](084-common-pets-and-variations.md) | Complete: ginger/black cats and golden/shepherd dogs, corrected motion, exact pending review and shared gameplay |
 | [083 Farms, town pets and larger cities](083-farms-town-pets-and-larger-cities.md) | Complete: connected rural farmsteads, durable settlement pets, larger cities and final validation |
 | [082 Complete provisional wildlife](082-complete-provisional-wildlife.md) | Complete: all 17 remaining drafts integrated; 22 durable provisional species |

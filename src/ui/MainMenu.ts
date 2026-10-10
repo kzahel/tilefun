@@ -67,11 +67,13 @@ export class MainMenu {
   onDelete: ((worldId: string) => void) | null = null;
   onRename: ((worldId: string, name: string) => void) | null = null;
   onClose: (() => void) | null = null;
+  onOptions: ((opener: HTMLButtonElement) => void) | null = null;
   onSwitchProfile: (() => void) | null = null;
   onHostP2P: (() => void) | null = null;
 
   constructor() {
     this.overlay = document.createElement("div");
+    this.overlay.dataset.testid = "world-menu";
     this.overlay.style.cssText = OVERLAY_STYLE;
     this.overlay.style.display = "none";
 
@@ -258,6 +260,12 @@ export class MainMenu {
     resumeBtn.style.cssText = `${BTN_STYLE} width: 100%; font-size: 16px; padding: 10px 16px; background: rgba(100,160,255,0.2); border-color: #68f;`;
     resumeBtn.addEventListener("click", () => this.onClose?.());
     btnGroup.appendChild(resumeBtn);
+
+    const optionsBtn = document.createElement("button");
+    optionsBtn.textContent = "Options";
+    optionsBtn.style.cssText = `${BTN_STYLE} min-height:48px; width:100%;`;
+    optionsBtn.onclick = () => this.onOptions?.(optionsBtn);
+    btnGroup.append(optionsBtn);
 
     // Secondary buttons row
     const secondaryRow = document.createElement("div");

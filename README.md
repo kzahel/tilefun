@@ -55,6 +55,18 @@ it, while still performing the tapped action. There is no extra button. Exiting
 fullscreen keeps it off until the next page load; unavailable or denied fullscreen
 leaves the game playable in the browser. This does not disable OS navigation gestures.
 
+Use the **⚙ Options** button beside the hamburger to choose **Tap to move** or
+**Joystick**. The same Options panel is available from the hamburger and main
+menu. The choice is remembered for each local player on this browser; Joystick
+remains the default. In Tap to move, tap a place and lift your finger to walk
+straight toward the yellow destination ring. Tap somewhere else to redirect,
+or near your character's feet to stop. Obstacles stop the walk; this first
+version does not find a route around them. Tapping a befriendable animal still
+interacts with it. Jump, Throw, Sprint, keyboard and gamepad controls remain
+available. Menus, editing, travel and focus loss cancel the destination.
+See [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
+for the behavior and remaining device trial.
+
 The editor tray uses at most half the visible screen, including its header and
 tabs. Swipe the category tabs horizontally and scroll the palette vertically;
 the tabs stay visible while browsing. Tap the selected-item header to minimize

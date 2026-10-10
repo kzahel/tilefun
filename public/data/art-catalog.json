@@ -23157,7 +23157,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:175"
+          "source": "src/entities/EntityDefs.ts:177"
         },
         {
           "system": "Gameplay",
@@ -23303,7 +23303,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:215"
+          "source": "src/entities/EntityDefs.ts:217"
         },
         {
           "system": "World generation",
@@ -23357,7 +23357,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:244"
+          "source": "src/entities/EntityDefs.ts:246"
         },
         {
           "system": "World generation",
@@ -23407,7 +23407,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:274"
+          "source": "src/entities/EntityDefs.ts:276"
         },
         {
           "system": "Gameplay",
@@ -23445,7 +23445,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:299"
+          "source": "src/entities/EntityDefs.ts:301"
         },
         {
           "system": "Gameplay",
@@ -23483,7 +23483,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:324"
+          "source": "src/entities/EntityDefs.ts:326"
         },
         {
           "system": "Gameplay",
@@ -23525,7 +23525,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:346"
+          "source": "src/entities/EntityDefs.ts:348"
         },
         {
           "system": "Gameplay",
@@ -23567,7 +23567,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:368"
+          "source": "src/entities/EntityDefs.ts:370"
         },
         {
           "system": "Gameplay",
@@ -23625,7 +23625,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:390"
+          "source": "src/entities/EntityDefs.ts:392"
         },
         {
           "system": "Gameplay",
@@ -23671,11 +23671,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:487"
+          "source": "src/entities/EntityDefs.ts:489"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:489"
+          "source": "src/entities/EntityDefs.ts:491"
         },
         {
           "system": "Gameplay",
@@ -23717,7 +23717,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:502"
+          "source": "src/entities/EntityDefs.ts:504"
         },
         {
           "system": "World generation",
@@ -23751,7 +23751,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:527"
+          "source": "src/entities/EntityDefs.ts:529"
         },
         {
           "system": "Gameplay",
@@ -23913,7 +23913,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:195"
+          "source": "src/entities/EntityDefs.ts:197"
         },
         {
           "system": "Gameplay",
@@ -23925,7 +23925,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:639"
+          "source": "src/scenes/PlayScene.ts:714"
         }
       ]
     },
@@ -23955,11 +23955,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:428"
+          "source": "src/entities/EntityDefs.ts:430"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:430"
+          "source": "src/entities/EntityDefs.ts:432"
         },
         {
           "system": "Gameplay",
@@ -24013,11 +24013,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:457"
+          "source": "src/entities/EntityDefs.ts:459"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:459"
+          "source": "src/entities/EntityDefs.ts:461"
         },
         {
           "system": "Gameplay",

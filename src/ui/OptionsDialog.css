@@ -1,0 +1,84 @@
+.options-dialog {
+  margin: auto;
+  box-sizing: border-box;
+  width: min(440px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  overflow-y: auto;
+  padding: 20px;
+  border: 2px solid #9ab59c;
+  border-radius: 16px;
+  background: #243a32;
+  color: white;
+  font:
+    17px system-ui,
+    sans-serif;
+  line-height: 1.35;
+}
+.options-dialog::backdrop {
+  background: rgb(0 0 0 / 60%);
+}
+.options-dialog header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.options-dialog h1 {
+  font-size: 25px;
+  margin: 0;
+}
+.options-dialog h2 {
+  font-size: 20px;
+  margin: 20px 0 12px;
+}
+.options-dialog button {
+  min-height: 48px;
+  padding: 10px 16px;
+  border: 2px solid #9ab59c;
+  border-radius: 10px;
+  background: #304b40;
+  color: white;
+  font: inherit;
+  cursor: pointer;
+}
+.options-dialog button:focus-visible {
+  outline: 3px solid #ffe38a;
+  outline-offset: 3px;
+}
+.options-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.options-choices button {
+  min-height: 80px;
+}
+.options-choices [aria-pressed="true"] {
+  background: #fce5a1;
+  color: #172b22;
+  border-color: #fff1c7;
+}
+.options-status {
+  font-size: 14px;
+  min-height: 20px;
+}
+.options-dialog p {
+  margin: 14px 0;
+}
+.options-dialog > button {
+  width: 100%;
+}
+@media (max-height: 450px) {
+  .options-dialog {
+    padding: 12px;
+  }
+  .options-dialog h2 {
+    margin: 10px 0;
+  }
+  .options-choices button {
+    min-height: 48px;
+  }
+  .options-dialog p {
+    margin: 10px 0;
+  }
+}

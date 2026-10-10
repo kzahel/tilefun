@@ -120,7 +120,11 @@ function wanderAIStatesEqual(a: WanderAIState | null, b: WanderAIState | null): 
   if (a === null && b === null) return true;
   if (a === null || b === null) return false;
   return (
-    a.state === b.state && a.dirX === b.dirX && a.dirY === b.dirY && a.following === b.following
+    a.state === b.state &&
+    a.dirX === b.dirX &&
+    a.dirY === b.dirY &&
+    a.following === b.following &&
+    a.befriendable === b.befriendable
   );
 }
 
@@ -296,6 +300,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
           entity.wanderAI.rideSpeed = def.wanderAI.rideSpeed;
       }
     }
+    if (entity.wanderAI && delta.wanderAIState?.befriendable !== undefined)
+      entity.wanderAI.befriendable = delta.wanderAIState.befriendable;
   }
 
   // Entity-level optional fields: null = remove, value = set

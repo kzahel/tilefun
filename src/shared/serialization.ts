@@ -44,6 +44,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
       state: e.wanderAI.state,
       dirX: e.wanderAI.dirX,
       dirY: e.wanderAI.dirY,
+      befriendable: e.tags?.has("befriendable") ?? false,
     };
     if (e.wanderAI.following !== undefined) wanderAIState.following = e.wanderAI.following;
   }
@@ -115,6 +116,8 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
     if (def.wanderAI.chaseSpeed !== undefined) wanderAI.chaseSpeed = def.wanderAI.chaseSpeed;
     if (def.wanderAI.hostile !== undefined) wanderAI.hostile = def.wanderAI.hostile;
     if (def.wanderAI.befriendable !== undefined) wanderAI.befriendable = def.wanderAI.befriendable;
+    if (s.wanderAIState.befriendable !== undefined)
+      wanderAI.befriendable = s.wanderAIState.befriendable;
     if (def.wanderAI.followDistance !== undefined)
       wanderAI.followDistance = def.wanderAI.followDistance;
     if (def.wanderAI.followLeash !== undefined) wanderAI.followLeash = def.wanderAI.followLeash;

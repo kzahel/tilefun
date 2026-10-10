@@ -16,6 +16,7 @@ function makeFullEntity(): Entity {
   return {
     id: 42,
     type: "chicken",
+    tags: new Set(["befriendable"]),
     position: { wx: 100.5, wy: 200.25 },
     sortOffsetY: -4,
     velocity: { vx: 1.5, vy: -2.5 },

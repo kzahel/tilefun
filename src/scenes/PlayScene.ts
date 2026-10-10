@@ -10,7 +10,9 @@ import { getTimeScale } from "../physics/PlayerMovement.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
+import { projectWorld } from "../rendering/Projection.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
+import type { IClientTransport } from "../transport/Transport.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { ROBIN_TYPE } from "../wildlife/Robin.js";
@@ -67,6 +69,7 @@ const THROW_CHARGE_DURATION = 1.0;
 
 export class PlayScene implements GameScene {
   readonly transparent = false;
+  lastMovement = { dx: 0, dy: 0 };
   private predictor: PlayerPredictor | null = null;
   private inputSeq = 0;
   private prevInvincibilityTimer = 0;
@@ -115,6 +118,7 @@ export class PlayScene implements GameScene {
   onEnter(gc: GameContext): void {
     // Attach touch buttons before joystick so button claims are processed first
     gc.touchButtons.attach();
+    gc.touchTap?.attach();
     gc.touchJoystick.attach();
     if (gc.editorButton) gc.editorButton.textContent = "Edit";
 
@@ -158,6 +162,8 @@ export class PlayScene implements GameScene {
   }
 
   onExit(gc: GameContext): void {
+    this.stopMovement(gc);
+    gc.touchTap?.detach();
     gc.touchJoystick.detach();
     gc.touchButtons.detach();
     this.unbindZoomActions();
@@ -179,6 +185,7 @@ export class PlayScene implements GameScene {
       `[tilefun:play] onResume — predictor=${!!this.predictor?.player}, editorEnabled=${gc.stateView.editorEnabled}, playerEntityId=${gc.stateView.playerEntity.id}`,
     );
     gc.touchButtons.attach();
+    gc.touchTap?.attach();
     gc.touchJoystick.attach();
     this.bindZoomActions(gc);
     // Re-send editor mode false — after realm switch the server may have a new
@@ -190,6 +197,8 @@ export class PlayScene implements GameScene {
   }
 
   onPause(gc: GameContext): void {
+    this.stopMovement(gc);
+    gc.touchTap?.detach();
     gc.touchJoystick.detach();
     gc.touchButtons.detach();
     this.unbindZoomActions();
@@ -230,10 +239,17 @@ export class PlayScene implements GameScene {
 
     // Player movement input — quantize dx/dy so prediction uses the same
     // values the server will see after binary decoding (no misprediction drift).
-    const inputLocked = gc.storagePaused || gc.doorPresentation?.busy;
-    const rawMovement = inputLocked
+    const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
+    gc.touchJoystick.enabled = gc.touchMovement !== "tap" && !inputLocked;
+    if (inputLocked) gc.tapMovement?.cancel();
+    const manual = inputLocked
       ? { dx: 0, dy: 0, sprinting: false, jump: false }
       : gc.actions.getMovement();
+    const rawMovement =
+      !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
+        ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt)
+        : manual;
+    this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
     const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
     const commandDt = commandDtMs / 1000;
@@ -407,6 +423,11 @@ export class PlayScene implements GameScene {
     // Detect player hit (invincibility transition 0 → >0) and trigger screen shake + sound.
     const invTimer = gc.stateView.invincibilityTimer;
     if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
+      gc.touchTap?.reset();
+      if (gc.tapMovement?.target) {
+        gc.tapMovement.cancel();
+        this.cancelInput(gc.transport);
+      }
       gc.camera.shake(HIT_SHAKE_INTENSITY);
       playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
     }
@@ -481,6 +502,9 @@ export class PlayScene implements GameScene {
         view?.cameraPresentation ?? { time: gc.time.presentationSeconds, domain: "local" },
       );
 
+      const shown = view?.presentedPlayerEntity ?? gc.stateView.playerEntity;
+      gc.tapMovement?.captureView(gc.camera, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
+
       renderWorld(gc);
       const particleItems = this.particles.collectItems();
       renderEntities(gc, alpha, particleItems);
@@ -489,6 +513,7 @@ export class PlayScene implements GameScene {
       renderDebugOverlay(gc);
       render3DDebug(gc);
       if (!gc.xrActive) {
+        this.drawDestination(gc);
         gc.touchJoystick.draw(gc.ctx);
         gc.touchButtons.draw(gc.ctx);
       }
@@ -496,6 +521,56 @@ export class PlayScene implements GameScene {
       gc.camera.restoreActual();
       view?.endPresentation();
     }
+  }
+
+  private stopMovement(gc: GameContext): void {
+    gc.tapMovement?.cancel();
+    gc.actions.clearHeld();
+    this.cancelInput(gc.transport);
+  }
+
+  cancelInput(transport: IClientTransport): void {
+    this.lastMovement = { dx: 0, dy: 0 };
+    this.jumpPressLatched = false;
+    this.lastSampledJumpHeld = false;
+    this.wasThrowHeld = false;
+    this.throwChargeTime = 0;
+    transport.send({
+      type: "player-input",
+      seq: ++this.inputSeq,
+      dx: 0,
+      dy: 0,
+      sprinting: false,
+      jump: false,
+      dtMs: 0.01,
+    });
+  }
+
+  private drawDestination(gc: GameContext): void {
+    const controller = gc.tapMovement;
+    const target =
+      controller?.target ?? (controller?.blockedFade ? controller.blockedTarget : null);
+    if (!target) {
+      delete gc.canvas.dataset.tapDestination;
+      return;
+    }
+    const p = projectWorld(gc.camera, target.wx, target.wy, target.wz);
+    gc.canvas.dataset.tapDestination = JSON.stringify({
+      ...target,
+      ...p,
+      active: !!controller?.target,
+    });
+    const ctx = gc.ctx;
+    ctx.save();
+    ctx.globalAlpha = controller?.target ? 1 : (controller?.blockedFade ?? 0) / 0.4;
+    ctx.strokeStyle = controller?.target ? "#ffe38a" : "#ffb694";
+    ctx.lineWidth = 3;
+    ctx.fillStyle = "rgba(255,227,138,0.25)";
+    ctx.beginPath();
+    ctx.ellipse(p.sx, p.sy, 13, 8, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.restore();
   }
 
   private maybeLogReconcile(gc: GameContext, remoteView: RemoteStateView): void {

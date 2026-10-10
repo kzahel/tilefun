@@ -848,13 +848,14 @@ function readSpriteState(view: DataView, off: number): [SpriteState, number] {
 }
 
 // ---- WanderAIState encoding ----
-// Byte 0: aiStateIndex (bits 0-2) | following (bit 7)
+// Byte 0: aiStateIndex (bits 0-2) | befriendable present/value (bits 5/6) | following (bit 7)
 // Byte 1: dirX (i8)
 // Byte 2: dirY (i8)
 
 function writeWanderAIState(view: DataView, off: number, ws: WanderAIState): number {
   let flags = AI_STATE_TO_INDEX[ws.state] ?? 0;
   if (ws.following) flags |= 0x80;
+  if (ws.befriendable !== undefined) flags |= 0x20 | (ws.befriendable ? 0x40 : 0);
 
   view.setUint8(off, flags);
   off += 1;
@@ -879,6 +880,7 @@ function readWanderAIState(view: DataView, off: number): [WanderAIState, number]
     dirY,
   };
   if (flags & 0x80) ws.following = true;
+  if (flags & 0x20) ws.befriendable = (flags & 0x40) !== 0;
   return [ws, off];
 }
 

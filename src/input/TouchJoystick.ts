@@ -19,6 +19,7 @@ interface JoystickState {
 export class TouchJoystick {
   private state: JoystickState | null = null;
   private canvas: HTMLCanvasElement;
+  enabled = true;
   /** Called when a short tap (no drag) is detected. Coordinates are client-space. */
   onTap: ((clientX: number, clientY: number) => void) | null = null;
   /** Touch IDs claimed by other systems (e.g. TouchButtons). Joystick ignores these. */
@@ -44,7 +45,11 @@ export class TouchJoystick {
   }
 
   isActive(): boolean {
-    return this.state !== null;
+    return this.enabled && this.state !== null;
+  }
+
+  reset(): void {
+    this.state = null;
   }
 
   /** Get analog movement vector. dx/dy in [-1, 1], magnitude capped at 1. */
@@ -62,7 +67,7 @@ export class TouchJoystick {
 
   /** Draw the joystick overlay on the canvas. */
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!this.state) return;
+    if (!this.enabled || !this.state) return;
     ctx.save();
 
     // Base circle
@@ -120,6 +125,7 @@ export class TouchJoystick {
   }
 
   private onTouchStart = (e: TouchEvent): void => {
+    if (!this.enabled) return;
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;
@@ -162,7 +168,12 @@ export class TouchJoystick {
         const dx = touch.clientX - this.state.baseX;
         const dy = touch.clientY - this.state.baseY;
         const moved = Math.hypot(dx, dy);
-        if (elapsed < TAP_MAX_DURATION_MS && moved < TAP_MAX_DISTANCE && this.onTap) {
+        if (
+          e.type !== "touchcancel" &&
+          elapsed < TAP_MAX_DURATION_MS &&
+          moved < TAP_MAX_DISTANCE &&
+          this.onTap
+        ) {
           this.onTap(this.state.baseX, this.state.baseY);
         }
         this.state = null;

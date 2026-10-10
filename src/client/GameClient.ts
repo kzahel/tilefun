@@ -36,6 +36,7 @@ import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
+import { isBefriendHit } from "../game/playInteraction.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import {
   descriptorChoice,
@@ -43,8 +44,15 @@ import {
   type GenerationDescriptor,
 } from "../generation/GenerationDescriptor.js";
 import { ActionManager } from "../input/ActionManager.js";
+import {
+  TapMovement,
+  type TapTarget,
+  type TouchMovementMode,
+  touchMovementMode,
+} from "../input/TapMovement.js";
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
+import { TouchTap } from "../input/TouchTap.js";
 import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { Camera } from "../rendering/Camera.js";
@@ -72,6 +80,7 @@ import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
 import { DoorControl } from "../ui/DoorControl.js";
 import { MainMenu } from "../ui/MainMenu.js";
+import { OptionsDialog } from "../ui/OptionsDialog.js";
 import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { WorldMap } from "../ui/WorldMap.js";
 import { World } from "../world/World.js";
@@ -84,11 +93,14 @@ export interface GameClientOptions {
   /** Platform renderer selection; simulation and presentation stay shared. */
   renderHostFactory?: RenderHostFactory;
   mode?: "local" | "serialized";
-  profile?: { id: string; name: string; playerModel?: string };
+  profile?: { id: string; name: string; playerModel?: string; touchMovement?: TouchMovementMode };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
     createProfile(name: string): Promise<{ id: string; name: string }>;
-    updateProfile?(id: string, updates: { playerModel: string }): Promise<void>;
+    updateProfile?(
+      id: string,
+      updates: { playerModel?: string; touchMovement?: TouchMovementMode },
+    ): Promise<void>;
   };
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
   /** When true, auto-join the first active realm instead of showing the realm list. */
@@ -136,6 +148,14 @@ export class GameClient {
   private actions: ActionManager;
   private touchJoystick: TouchJoystick;
   private touchButtons: TouchButtons;
+  private readonly tapMovement = new TapMovement();
+  private touchTap: TouchTap;
+  private optionsDialog: OptionsDialog;
+  private optionsButton: HTMLButtonElement | null = null;
+  private hamburgerOpen = false;
+  private focusPaused = false;
+  private lastTouchAt = -Infinity;
+  private movementMode: TouchMovementMode = "joystick";
   private debugPanel: DebugPanel;
   private editorMode: EditorMode;
   private editorModel: EditorModel;
@@ -187,7 +207,7 @@ export class GameClient {
   /** True once init() has completed and we're ready to show UI. */
   private initDone = false;
   /** Player profile (display name, id). */
-  private profile: { id: string; name: string; playerModel?: string } | null = null;
+  private profile: NonNullable<GameClientOptions["profile"]> | null = null;
   /** Profile store for listing/creating profiles (Switch Player). */
   private profileStore: GameClientOptions["profileStore"];
   /** The client ID used for the server connection (for debug display). */
@@ -218,11 +238,13 @@ export class GameClient {
     this.transport.onDisconnect?.(() => {
       this.requests.disconnect();
       this.doorPresentation.cancel();
+      this.clearPlayInput();
     });
     this.server = server;
     this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
+    this.movementMode = touchMovementMode(this.profile?.touchMovement);
     this.reloadCamera = readReloadCamera(sessionStorage.getItem(HMR_KEY), this.profile?.id ?? null);
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
@@ -234,6 +256,19 @@ export class GameClient {
     }
     this.touchJoystick = new TouchJoystick(canvas);
     this.touchButtons = new TouchButtons(canvas);
+    this.touchTap = new TouchTap(
+      canvas,
+      this.touchButtons.claimedTouches,
+      (x, y) =>
+        this.movementMode !== "tap" ||
+        this.playInputBlocked ||
+        this.storagePaused ||
+        this.doorPresentation.busy
+          ? null
+          : this.tapMovement.resolve(this.canvas, x, y),
+      (target) => this.onDestinationTap(target),
+    );
+    this.touchJoystick.enabled = this.movementMode === "joystick";
     // Let joystick skip touches claimed by on-screen buttons
     this.touchJoystick.claimedTouches = this.touchButtons.claimedTouches;
     this.actions.setTouchJoystick(this.touchJoystick);
@@ -247,6 +282,19 @@ export class GameClient {
     this.editorPanel = new EditorPanel(this.editorModel);
     this.editorModel.onExitEditor = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
+    this.optionsDialog = new OptionsDialog(
+      async (mode) => {
+        this.clearPlayInput();
+        this.movementMode = mode;
+        this.touchJoystick.enabled = mode === "joystick";
+        if (this.profile) this.profile.touchMovement = mode;
+        if (!this.profile || !this.profileStore?.updateProfile)
+          throw new Error("No profile storage");
+        await this.profileStore.updateProfile(this.profile.id, { touchMovement: mode });
+      },
+      () => this.clearPlayInput(),
+    );
+    this.mainMenu.onOptions = (opener) => this.openOptions(opener);
     this.worldMap = new WorldMap({
       snapshot: () =>
         this.gcSendRequest({ type: "get-world-map", requestId: this.nextRequestId++ }),
@@ -307,6 +355,12 @@ export class GameClient {
       );
     };
     const routePatternStatus = (msg: ServerMessage) => {
+      if (
+        msg.type === "world-loaded" ||
+        msg.type === "realm-joined" ||
+        (msg.type === "door-motion" && msg.self)
+      )
+        this.clearPlayInput();
       if (msg.type === "storage-status") this.showStorageStatus(msg.message, msg.paused);
       if (msg.type === "pattern-edit-status" || msg.type === "room-edit-status")
         this.editorModel.setPatternStatus(msg);
@@ -448,6 +502,9 @@ export class GameClient {
 
     this.doorControl = new DoorControl(async (request) => {
       if (this.doorPresentation.busy) return;
+      // Authority validates a walking approach against the last directional input.
+      // Queue that request before neutral input; the busy presentation locks the next tick.
+      this.clearPlayInput(!request.walkThrough);
       if (request.walkThrough) this.doorPresentation.begin();
       try {
         await this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
@@ -506,9 +563,11 @@ export class GameClient {
             !this.scenes.has(MenuScene) &&
             !this.scenes.has(CatalogScene) &&
             !this.scenes.has(InteriorCatalogScene),
-          this.actions.getMovement(),
+          this.scenes.current instanceof PlayScene
+            ? this.scenes.current.lastMovement
+            : this.actions.getMovement(),
           dt,
-          this.doorPresentation.busy,
+          this.doorPresentation.busy || this.playInputBlocked,
         );
       },
       render: (alpha, presentationSeconds) => {
@@ -528,11 +587,17 @@ export class GameClient {
     // SELECT elements are NOT prevented — preventDefault on mousedown blocks native dropdowns.
     document.addEventListener("mousedown", (e) => {
       const tag = (e.target as HTMLElement).tagName;
-      if (tag === "BUTTON") {
+      if (tag === "BUTTON" && !(e.target as HTMLElement).closest(".options-dialog")) {
         e.preventDefault();
       }
     });
     this.createEditorButton();
+    window.addEventListener("blur", this.onInputBlur);
+    window.addEventListener("focus", this.onInputFocus);
+    document.addEventListener("visibilitychange", this.onInputVisibility);
+    this.canvas.addEventListener("touchstart", this.noteTouch, { capture: true, passive: true });
+    this.canvas.addEventListener("touchend", this.noteTouch, { capture: true, passive: true });
+    this.canvas.addEventListener("touchcancel", this.noteTouch, { capture: true, passive: true });
     this.stopIdeaDelivery = startIdeaDelivery();
     this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
     this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
@@ -917,6 +982,15 @@ export class GameClient {
   }
 
   destroy(): void {
+    this.clearPlayInput();
+    this.optionsDialog.destroy();
+    this.optionsButton?.remove();
+    window.removeEventListener("blur", this.onInputBlur);
+    window.removeEventListener("focus", this.onInputFocus);
+    document.removeEventListener("visibilitychange", this.onInputVisibility);
+    this.canvas.removeEventListener("touchstart", this.noteTouch, true);
+    this.canvas.removeEventListener("touchend", this.noteTouch, true);
+    this.canvas.removeEventListener("touchcancel", this.noteTouch, true);
     this.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
     this.renderHost.dispose();
@@ -926,9 +1000,9 @@ export class GameClient {
     this.doorPresentation.destroy();
     this.loop.stop();
     this.gcFlushServer();
+    this.scenes.clear();
     this.requests.dispose();
     this.transport.close();
-    this.scenes.clear();
     this.worldMap.destroy();
     this.mapButton?.remove();
     this.actions.detach();
@@ -1001,7 +1075,7 @@ export class GameClient {
   }
 
   private toggleEditor(): void {
-    if (this.doorPresentation.busy) return;
+    if (this.doorPresentation.busy || this.optionsDialog.visible) return;
     if (this.scenes.current instanceof EditScene) {
       this.scenes.replace(new PlayScene());
     } else {
@@ -1010,7 +1084,7 @@ export class GameClient {
   }
 
   private toggleWorldMap(): void {
-    if (this.doorPresentation.busy) return;
+    if (this.doorPresentation.busy || this.optionsDialog.visible) return;
     if (this.scenes.current instanceof WorldMapScene) {
       this.scenes.pop();
       return;
@@ -1021,7 +1095,8 @@ export class GameClient {
   }
 
   private async toggleMenu(): Promise<void> {
-    if (this.doorPresentation.busy) return;
+    if (this.doorPresentation.busy || this.optionsDialog.visible) return;
+    this.clearPlayInput();
     if (this.menuOpening) return;
     this.menuOpening = true;
     try {
@@ -1172,6 +1247,14 @@ export class GameClient {
       get storagePaused() {
         return client.storagePaused;
       },
+      get inputBlocked() {
+        return client.playInputBlocked;
+      },
+      get touchMovement() {
+        return client.movementMode;
+      },
+      tapMovement: this.tapMovement,
+      touchTap: this.touchTap,
       canvas: this.canvas,
       ctx: this.ctx,
       camera: this.camera,
@@ -1257,6 +1340,7 @@ export class GameClient {
       display: flex; flex-direction: column; padding: 60px 8px 8px;
       transform: translateX(-100%); transition: transform 0.2s ease-out;
     `;
+    panel.inert = true;
 
     // Hamburger button
     const hamburger = document.createElement("button");
@@ -1273,6 +1357,9 @@ export class GameClient {
     let panelOpen = false;
     let ideaSnapshot: IdeaSnapshot | undefined;
     const openPanel = () => {
+      panel.inert = false;
+      this.clearPlayInput();
+      this.hamburgerOpen = true;
       try {
         const position = this.stateView.playerEntity.position;
         ideaSnapshot = captureIdea(
@@ -1289,6 +1376,9 @@ export class GameClient {
       panel.style.transform = "translateX(0)";
     };
     const closePanel = () => {
+      panel.inert = true;
+      this.hamburgerOpen = false;
+      this.clearPlayInput();
       panelOpen = false;
       backdrop.style.display = "none";
       panel.style.transform = "translateX(-100%)";
@@ -1297,6 +1387,18 @@ export class GameClient {
       if (panelOpen) closePanel();
       else openPanel();
     });
+
+    const gear = document.createElement("button");
+    gear.textContent = "⚙";
+    gear.setAttribute("aria-label", "Options");
+    gear.style.cssText =
+      "position:fixed;top:max(8px,env(safe-area-inset-top));left:calc(max(8px,env(safe-area-inset-left)) + 52px);z-index:200;width:48px;height:48px;font:26px system-ui;color:white;background:#243a32;border:1px solid #9ab59c;border-radius:8px;cursor:pointer;";
+    gear.onclick = () => {
+      closePanel();
+      this.openOptions(gear);
+    };
+    document.body.append(gear);
+    this.optionsButton = gear;
 
     const mapBtn = document.createElement("button");
     mapBtn.textContent = "Map · G";
@@ -1312,6 +1414,13 @@ export class GameClient {
     this.mapButton = mapBtn;
 
     // Menu items
+    const optionsBtn = document.createElement("button");
+    optionsBtn.textContent = "Options";
+    optionsBtn.style.cssText = `${MENU_BTN_STYLE} min-height:48px;`;
+    optionsBtn.onclick = () => {
+      closePanel();
+      this.openOptions(hamburger);
+    };
     const ideaBtn = document.createElement("button");
     ideaBtn.textContent = "💡 Idea";
     ideaBtn.style.cssText = MENU_BTN_STYLE;
@@ -1388,6 +1497,7 @@ export class GameClient {
     toolsLink.setAttribute("data-testid", "open-tools-index");
     toolsLink.style.cssText = `${MENU_BTN_STYLE} display: block; text-decoration: none;`;
     panel.append(
+      optionsBtn,
       ideaBtn,
       editBtn,
       menuBtn,
@@ -1459,6 +1569,13 @@ export class GameClient {
 
   /** Handle click in play mode (desktop). */
   private onPlayClick(e: MouseEvent): void {
+    if (
+      performance.now() - this.lastTouchAt < 1000 ||
+      this.playInputBlocked ||
+      this.storagePaused ||
+      this.doorPresentation.busy
+    )
+      return;
     if (!(this.scenes.current instanceof PlayScene)) return;
     const rect = this.canvas.getBoundingClientRect();
     const sx = (e.clientX - rect.left) * (this.canvas.width / rect.width);
@@ -1473,6 +1590,7 @@ export class GameClient {
 
   /** Handle tap in play mode (mobile). */
   private onPlayTap(clientX: number, clientY: number): void {
+    if (this.playInputBlocked || this.storagePaused || this.doorPresentation.busy) return;
     if (!(this.scenes.current instanceof PlayScene)) return;
     const rect = this.canvas.getBoundingClientRect();
     const sx = (clientX - rect.left) * (this.canvas.width / rect.width);
@@ -1483,5 +1601,59 @@ export class GameClient {
       wx: world.wx,
       wy: world.wy,
     });
+  }
+
+  private get playInputBlocked(): boolean {
+    return this.hamburgerOpen || this.optionsDialog.visible || this.focusPaused || document.hidden;
+  }
+  private clearPlayInput(sendNeutral = true): void {
+    if (sendNeutral && this.scenes?.current instanceof PlayScene)
+      this.scenes.current.cancelInput(this.transport);
+    this.tapMovement.cancel();
+    this.touchTap.reset();
+    this.touchJoystick.reset();
+    this.touchButtons.reset();
+    this.actions.clearHeld();
+  }
+  private openOptions(opener: HTMLElement): void {
+    if (this.doorPresentation.busy) return;
+    this.clearPlayInput();
+    this.optionsDialog.show(this.movementMode, opener);
+  }
+  private onInputBlur = (): void => {
+    this.focusPaused = true;
+    this.clearPlayInput();
+  };
+  private onInputFocus = (): void => {
+    this.focusPaused = false;
+  };
+  private onInputVisibility = (): void => {
+    if (document.hidden) this.clearPlayInput();
+  };
+  private noteTouch = (): void => {
+    this.lastTouchAt = performance.now();
+  };
+  private onDestinationTap(target: TapTarget): void {
+    if (
+      !(this.scenes.current instanceof PlayScene) ||
+      this.movementMode !== "tap" ||
+      this.playInputBlocked ||
+      this.storagePaused ||
+      this.doorPresentation.busy
+    )
+      return;
+    const eligible = this.stateView.entities.some((e) =>
+      isBefriendHit(
+        target.wx,
+        target.wy,
+        e.position.wx,
+        e.position.wy,
+        e.wanderAI?.befriendable === true,
+      ),
+    );
+    if (eligible) {
+      this.tapMovement.cancel();
+      this.transport.send({ type: "player-interact", wx: target.wx, wy: target.wy });
+    } else this.tapMovement.setTarget(target);
   }
 }

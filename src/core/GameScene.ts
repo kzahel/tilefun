@@ -10,8 +10,10 @@ import type { EditorPanel } from "../editor/EditorPanel.js";
 import type { InteriorCatalog } from "../editor/InteriorCatalog.js";
 import type { PropCatalog } from "../editor/PropCatalog.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import type { TapMovement, TouchMovementMode } from "../input/TapMovement.js";
 import type { TouchButtons } from "../input/TouchButtons.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
+import type { TouchTap } from "../input/TouchTap.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
@@ -32,6 +34,10 @@ export interface GameContext {
   readonly doorPresentation?: DoorPresentation;
   readonly realmId?: string | null;
   readonly storagePaused?: boolean;
+  readonly inputBlocked?: boolean;
+  readonly touchMovement?: TouchMovementMode;
+  readonly tapMovement?: TapMovement;
+  readonly touchTap?: TouchTap;
   readonly canvas: HTMLCanvasElement;
   /** Independent HUD/touch/debug UI surface, supplied by platform composition. */
   readonly ctx: CanvasRenderingContext2D;

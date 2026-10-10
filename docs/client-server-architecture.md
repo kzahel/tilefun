@@ -119,6 +119,17 @@ for verdict persistence/export fallback. Explorer preview, gameplay and Workshop
 share generation and art realization. See [world explorer](world-explorer.md),
 [city generation](topics/city-generation.md) and [patterns/interiors](topics/patterns-and-interiors.md).
 
+## Tap movement
+
+Tap movement remains client intent: `TapMovement` supplies ordinary directional
+axes to PlayScene's existing quantized input/prediction path. Destination and
+local profile control preference are not sent to authority. The three-byte AI
+state uses bits 5/6 for presence/value of live `befriendable` tag eligibility;
+baselines and deltas carry both false and true, overriding static definitions.
+Authority still performs `player-interact`; clients use the shared 24-pixel hit
+rule only to choose whether a world tap means interaction or walking. Game and
+embedded replicas share this state contract. See [086](tactical/086-tap-to-move-and-options.md).
+
 ## Validation entry points
 
 - Authority, transfers and requests: GameServer, RealmBrowser and RequestBroker

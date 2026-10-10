@@ -100,7 +100,11 @@ choices remain open.
   older implementation labels need verification before selecting work.
 - Beach chain (deep water → shallow → sand → light sand → grass) and animated
   water autotiles.
-- Simpler child-friendly interaction, including single-finger input where useful.
+- [Tap to move and accessible Options](tactical/086-tap-to-move-and-options.md):
+  owner request, 2026-10-10, for children around two or three. First slice
+  implemented: tap a destination, walk straight toward it, stop at obstacles, and
+  choose Tap to move or Joystick in a simple mobile-friendly Options panel.
+  Pathfinding and a broader settings redesign are deferred.
 - Safety nets for destructive terrain/world-clearing actions beyond the existing
   saved-world deletion confirmation.
 
