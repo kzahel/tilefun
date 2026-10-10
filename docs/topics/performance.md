@@ -28,6 +28,14 @@ and visible text under the selected output directory before closing its owned
 browser/server. Six runner-matrix checks pass; [084](../tactical/084-common-pets-and-variations.md)
 records the pet-batch integration readiness run and its limits.
 
+084's Windows browser regression run also finds two unchanged standalone GPU
+diagnostic failures: interior comparison has six pixels outside the existing
+tolerance, and translucent indexed rectangles reach channel error 2 against a
+limit of 1. The fixture renderer does not load animal art. Pet Canvas/GPU
+motion/contact/persistence checks pass; these diagnostic tolerances remain
+unchanged and the platform discrepancy remains unresolved.
+Both failures reproduce serially without competing browser tests.
+
 - Single player runs the shared server in a dedicated browser Worker.
   `src/server/LocalServerRuntime.ts` owns lifecycle; ordered, bounded
   `src/transport/WorkerClientTransport.ts` carries replicated state. Prediction

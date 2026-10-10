@@ -26,7 +26,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
 | [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |
-| [Wildlife](wildlife.md) | 22 durable provisional species; bounded four-pet variations, with other art expansion stopped |
+| [Wildlife](wildlife.md) | 22 durable provisional species plus four delivered pet variants awaiting art review; other expansion stopped |
 | [Art review](art-review.md) | Exact-source feedback, human approvals, Workshop authentication and outdoor metadata |
 | [Semantic tileset map](semantic-tileset-map.md) | Whole-sheet thematic mapping, autonomous asset hypotheses and independent review for Modern Exteriors and Interiors |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |

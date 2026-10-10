@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-09.
+Updated: 2026-10-10.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -13,6 +13,12 @@ owns recipes, memory persistence and simulation hosting;
 contracts; [performance](performance.md) owns timing evidence and its limits.
 
 ## Farmstead and settlement alignment
+
+[084](../tactical/084-common-pets-and-variations.md) adds four native pet-coat
+inspection arrivals from actual seeded settlement populations. Ginger/black cats
+and golden/shepherd dogs use the same production profiles, authority, safe yards,
+harmless reactions and saved motion clocks in game and lab. Canvas/GPU checks
+cover native motion, contact and pause/reload; no separate lab AI is introduced.
 
 [083](../tactical/083-farms-town-pets-and-larger-cities.md) adds generated farm and
 village/city pet and larger city-center arrivals to the existing natural Worker playground. All terrain,

@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [084 Common pets and variations](084-common-pets-and-variations.md) | Authorized ginger/black cats and golden/shepherd dogs; corrected motion, exact review and shared gameplay |
+| [084 Common pets and variations](084-common-pets-and-variations.md) | Complete: ginger/black cats and golden/shepherd dogs, corrected motion, exact pending review and shared gameplay |
 | [083 Farms, town pets and larger cities](083-farms-town-pets-and-larger-cities.md) | Complete: connected rural farmsteads, durable settlement pets, larger cities and final validation |
 | [082 Complete provisional wildlife](082-complete-provisional-wildlife.md) | Complete: all 17 remaining drafts integrated; 22 durable provisional species |
 | [081 Durable woodland deer](081-durable-woodland-deer.md) | Complete: existing doe draft, wider glades, durable small groups and grounded escape |

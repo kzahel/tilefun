@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species have durable provisional gameplay; a bounded four-pet art/gameplay batch is authorized. Other art expansion stays stopped.
+Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay; the four exact pet drafts await human review. Other art expansion stays stopped.
 Updated: 2026-10-10.
 
 ## Common pets: bounded resumption
@@ -23,7 +23,12 @@ not backfilled. **Edit → Entities** creates durable individuals of each new pe
 The four new Worker inspection cases use real settlement populations and share
 game AI, collision, support, saved phases and harmless reactions. Native gait
 speed follows each new sheet's authored stride; art is still pending human review.
-084 retains source/capture and validation evidence.
+084 is complete and retains source/capture and validation evidence. Its full
+browser run passes 499 cases, including all wildlife/settlement checks, with
+four unchanged phone-review/GPU diagnostic failures and one optional capture
+skip. All animal units, typechecks, lint, build, inventory/parity checks and
+six-phase streaming readiness pass. The full Windows unit run has five unrelated
+symlink/process-kill harness failures; 084 records their exact limits.
 
 The [ideas backlog](../ideas.md#living-world-and-inhabitants) records common birds,
 garden insects (especially bees), small animals, farm/pond additions and further
@@ -78,9 +83,11 @@ this unresolved intermittent evidence. The earlier close-camera duck recovery
 probe was strengthened to require the same present, grounded, recovered duck;
 both renderers pass. No duck physics changed. All 27 exact wildlife review
 objects, frozen pixels, receipts and approval events remain unchanged.
-Production-table checkpoint/completion helper still lacks ignored campaign state;
-preserve its validated art table. Next gameplay work is density/habitat/activity
-playtesting, separate from existing art motion holds.
+At 082 completion the production-table helper lacked ignored campaign state.
+084 now has the retained local progress state and refreshes the table while
+preserving historical art counts/holds and tracking the four pets separately.
+Next gameplay work is density/habitat/activity playtesting, separate from
+existing art motion holds.
 
 ## Settlement pets and farm residents
 

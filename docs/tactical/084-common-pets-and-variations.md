@@ -1,7 +1,8 @@
 # Common pets and variations
 
 Topic: wildlife
-Status: in progress. Owner authorized cats/dogs and incremental commits on 2026-10-10.
+Status: complete. Four exact drafts and provisional gameplay delivered; human art review pending.
+Owner authorized cats/dogs and incremental commits on 2026-10-10.
 
 ## Outcome and scope
 
@@ -28,7 +29,7 @@ passed agent integrity/visual checks; human approval remains pending.
 - [x] Build and inspect corrected cat/dog motion sources.
 - [x] Author and inspect ginger tabby, black cat, golden retriever and shepherd.
 - [x] Register exact review candidates and make new pets available in the world.
-- [ ] Refresh inventories, run required checks and retain evidence.
+- [x] Refresh inventories, run required checks and retain evidence.
 
 ## Evidence
 
@@ -72,3 +73,67 @@ Initial browser run exposed two test assumptions: increasingly sparse idle
 polling could miss the 0.8s rest phase, and settlement checks filtered out named
 coats. The checks now sample native rests every 30ms and classify the exact
 profile's cat/dog family while still comparing each saved coat, position and phase.
+
+## Integration completion
+
+All 24 focused gameplay/settlement browser checks pass, including native
+Canvas/GPU motion, manual creation/deletion, safe generated yards, harmless
+contact and exact saved phases. The separate new-draft review check passes:
+all four exact identities remain pending, native/enlarged playback and travel
+work, and Pause retains the displayed pose.
+
+Complete browser suite: **499 passed, four failed, one skipped** in 22.0 minutes
+(`data/pets-084-browser-full.log`). All new and existing wildlife, settlement,
+train-journey and gameplay checks pass. The skip is the optional interior atlas
+grid capture. The four unrelated failures reproduce serially without competing
+tests (`data/pets-084-browser-diagnostics.log`):
+
+- Building-review phone navigation and hotel-review controls end at 853.796875px
+  against an 844px viewport. Their page and tests are unchanged by this batch.
+- The standalone GPU interior fixture has six mismatched pixels where zero are
+  allowed; translucent indexed rectangles have channel error 2 against limit 1.
+  Their unchanged renderer/fixtures do not load animal art. Tolerances remain
+  unchanged, and the platform discrepancy remains unresolved.
+
+Full-run error contexts are retained under
+`data/wildlife-pets-084/regression-errors/`. Final trusted inbox confirms a
+current manifest, four unchecked pet drafts and zero pending requests/fixes.
+
+Typechecks and lint pass (lint retains existing warnings). The bounded full
+unit run has 2,090 passes, five failures and ten skips across 219 files. Failures
+are Windows filesystem symlink setup/containment checks and SQLite process-death
+WAL recovery, in unchanged persistence/server tests; all animal units pass.
+The static-files suite's symlink setup also fails before its ten skipped tests.
+The WAL harness rejects Windows' process-exit signal after requesting SIGKILL;
+it fails at the harness exit check before asserting recovered records.
+The initial unbounded run competed with review rendering and hit timeouts;
+the final run uses two workers. Logs: `data/pets-084-unit-bounded.log` and
+`data/pets-084-final-lint.log` (ignored local evidence).
+
+Catalog generation records 245 sheets and 1,086 source uses. Workshop generation
+records 761 candidates and verifies headless-shell/full-Chromium retina parity.
+All 27 pre-existing wildlife candidate objects remain byte-identical; the new
+batch adds four draft reviews and sixteen native scenario views. Production
+build passes after both inventories are refreshed.
+
+`streaming:bench -- --assert-ready` passes all six phases (cold, standing, walk,
+sprint, reverse and zoom-out), with no fixture errors/failures and zero missing,
+incomplete or stale terrain at every final sample. Report:
+`data/wildlife-pets-084/streaming/report.json`. Initial isolated Vite startup
+scanned ignored archived HTML and timed out before game entry; the runner now
+scans only index.html, retains startup diagnostics and uses WSL Git on Windows.
+Its six matrix checks pass. This is integration readiness evidence, not a new
+physical-device performance claim.
+
+Incremental commits: `23bc88a` records authorization/ideas; `62ab869` delivers
+editable art, exact reviews and pet gameplay; `376a8ab` fixes benchmark isolation.
+The completion commit records final validation and refreshes the production table.
+Next: human review of these four drafts, then decide a bounded birds/bees batch
+from the recorded backlog. Other art production and historical motion holds stay
+stopped.
+
+Human review playback: [ginger tabby](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/cat-ginger/draft-v1/),
+[black cat](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/cat-black/draft-v1/),
+[golden retriever](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/dog-golden/draft-v1/)
+and [pointed-ear shepherd](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/dog-shepherd/draft-v1/).
+Approve/report through each exact pending Workshop candidate, not this execution record.
