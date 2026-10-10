@@ -8,6 +8,7 @@ export interface PlayerProfile {
   createdAt: number;
   playerModel?: string;
   touchMovement?: TouchMovementMode;
+  pinchZoom?: boolean;
 }
 
 const PROFILE_DB = "tilefun-profiles";
@@ -90,7 +91,9 @@ export class PlayerProfileStore {
 
   async updateProfile(
     id: string,
-    updates: Partial<Pick<PlayerProfile, "name" | "pin" | "playerModel" | "touchMovement">>,
+    updates: Partial<
+      Pick<PlayerProfile, "name" | "pin" | "playerModel" | "touchMovement" | "pinchZoom">
+    >,
   ): Promise<void> {
     const db = this.db;
     if (!db) throw new Error("Profile store is not open");
@@ -105,6 +108,7 @@ export class PlayerProfileStore {
           if (updates.pin !== undefined) profile.pin = updates.pin;
           if (updates.playerModel !== undefined) profile.playerModel = updates.playerModel;
           if (updates.touchMovement !== undefined) profile.touchMovement = updates.touchMovement;
+          if (updates.pinchZoom !== undefined) profile.pinchZoom = updates.pinchZoom;
           store.put(profile);
         }
       };

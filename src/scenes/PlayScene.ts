@@ -121,6 +121,7 @@ export class PlayScene implements GameScene {
   onEnter(gc: GameContext): void {
     // Attach touch buttons before joystick so button claims are processed first
     gc.touchButtons.attach();
+    gc.touchPinch?.attach();
     gc.touchTap?.attach();
     gc.touchJoystick.attach();
     if (gc.editorButton) gc.editorButton.textContent = "Edit";
@@ -167,6 +168,7 @@ export class PlayScene implements GameScene {
 
   onExit(gc: GameContext): void {
     this.stopMovement(gc);
+    gc.touchPinch?.detach();
     gc.touchTap?.detach();
     gc.touchJoystick.detach();
     gc.touchButtons.detach();
@@ -189,6 +191,7 @@ export class PlayScene implements GameScene {
       `[tilefun:play] onResume — predictor=${!!this.predictor?.player}, editorEnabled=${gc.stateView.editorEnabled}, playerEntityId=${gc.stateView.playerEntity.id}`,
     );
     gc.touchButtons.attach();
+    gc.touchPinch?.attach();
     gc.touchTap?.attach();
     gc.touchJoystick.attach();
     this.bindZoomActions(gc);
@@ -202,6 +205,7 @@ export class PlayScene implements GameScene {
 
   onPause(gc: GameContext): void {
     this.stopMovement(gc);
+    gc.touchPinch?.detach();
     gc.touchTap?.detach();
     gc.touchJoystick.detach();
     gc.touchButtons.detach();

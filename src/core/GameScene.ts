@@ -13,6 +13,7 @@ import type { ActionManager } from "../input/ActionManager.js";
 import type { TapMovement, TouchMovementMode } from "../input/TapMovement.js";
 import type { TouchButtons } from "../input/TouchButtons.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
+import type { TouchPinch } from "../input/TouchPinch.js";
 import type { TouchTap } from "../input/TouchTap.js";
 import type { TrainTapMovement } from "../input/TrainTapMovement.js";
 import type { Camera } from "../rendering/Camera.js";
@@ -39,6 +40,7 @@ export interface GameContext {
   readonly touchMovement?: TouchMovementMode;
   readonly tapMovement?: TapMovement;
   readonly trainTapMovement?: TrainTapMovement;
+  readonly touchPinch?: TouchPinch;
   readonly touchTap?: TouchTap;
   readonly canvas: HTMLCanvasElement;
   /** Independent HUD/touch/debug UI surface, supplied by platform composition. */

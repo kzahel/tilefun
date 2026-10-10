@@ -52,6 +52,7 @@ import {
 } from "../input/TapMovement.js";
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
+import { TouchPinch } from "../input/TouchPinch.js";
 import { TouchTap } from "../input/TouchTap.js";
 import { TrainTapMovement } from "../input/TrainTapMovement.js";
 import { interiorRealmId } from "../interiors/GameplayInterior.js";
@@ -97,13 +98,19 @@ export interface GameClientOptions {
   /** Platform renderer selection; simulation and presentation stay shared. */
   renderHostFactory?: RenderHostFactory;
   mode?: "local" | "serialized";
-  profile?: { id: string; name: string; playerModel?: string; touchMovement?: TouchMovementMode };
+  profile?: {
+    id: string;
+    name: string;
+    playerModel?: string;
+    touchMovement?: TouchMovementMode;
+    pinchZoom?: boolean;
+  };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
     createProfile(name: string): Promise<{ id: string; name: string }>;
     updateProfile?(
       id: string,
-      updates: { playerModel?: string; touchMovement?: TouchMovementMode },
+      updates: { playerModel?: string; touchMovement?: TouchMovementMode; pinchZoom?: boolean },
     ): Promise<void>;
   };
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
@@ -153,6 +160,8 @@ export class GameClient {
   private touchJoystick: TouchJoystick;
   private touchButtons: TouchButtons;
   private readonly tapMovement = new TapMovement();
+  private touchPinch: TouchPinch;
+  private pinchZoom = false;
   private touchTap: TouchTap;
   private optionsDialog: OptionsDialog;
   private optionsButton: HTMLButtonElement | null = null;
@@ -251,6 +260,7 @@ export class GameClient {
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
     this.movementMode = touchMovementMode(this.profile?.touchMovement);
+    this.pinchZoom = this.profile?.pinchZoom === true;
     this.reloadCamera = readReloadCamera(sessionStorage.getItem(HMR_KEY), this.profile?.id ?? null);
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
@@ -281,6 +291,23 @@ export class GameClient {
     this.actions.setTouchButtons(this.touchButtons);
     this.actions.setXRManager(this.xrManager);
     this.debugPanel = new DebugPanel();
+    this.touchPinch = new TouchPinch(
+      canvas,
+      this.touchButtons.claimedTouches,
+      () =>
+        this.pinchZoom &&
+        this.scenes?.current instanceof PlayScene &&
+        !this.playInputBlocked &&
+        !this.storagePaused &&
+        !this.doorPresentation.busy,
+      () => {
+        const { dx, dy } = this.touchJoystick.getMovement();
+        return dx !== 0 || dy !== 0;
+      },
+      () => this.debugPanel.zoom,
+      (zoom) => this.debugPanel.setZoom(zoom),
+      () => this.clearPlayInput(),
+    );
     if (this.renderHost.rendererControl)
       this.debugPanel.setRendererControl(this.renderHost.rendererControl);
     this.editorModel = new EditorModel();
@@ -299,6 +326,14 @@ export class GameClient {
         await this.profileStore.updateProfile(this.profile.id, { touchMovement: mode });
       },
       () => this.clearPlayInput(),
+      async (enabled) => {
+        this.clearPlayInput();
+        this.pinchZoom = enabled;
+        if (this.profile) this.profile.pinchZoom = enabled;
+        if (!this.profile || !this.profileStore?.updateProfile)
+          throw new Error("No profile storage");
+        await this.profileStore.updateProfile(this.profile.id, { pinchZoom: enabled });
+      },
     );
     this.mainMenu.onOptions = (opener) => this.openOptions(opener);
     this.worldMap = new WorldMap({
@@ -1275,6 +1310,7 @@ export class GameClient {
       },
       tapMovement: this.tapMovement,
       trainTapMovement: this.trainTapMovement,
+      touchPinch: this.touchPinch,
       touchTap: this.touchTap,
       canvas: this.canvas,
       ctx: this.ctx,
@@ -1644,6 +1680,7 @@ export class GameClient {
       this.scenes.current.cancelInput(this.transport);
     this.tapMovement.cancel();
     this.trainTapMovement.cancel();
+    this.touchPinch.reset();
     this.touchTap.reset();
     this.touchJoystick.reset();
     this.touchButtons.reset();
@@ -1652,7 +1689,7 @@ export class GameClient {
   private openOptions(opener: HTMLElement): void {
     if (this.doorPresentation.busy) return;
     this.clearPlayInput();
-    this.optionsDialog.show(this.movementMode, opener);
+    this.optionsDialog.show(this.movementMode, opener, this.pinchZoom);
   }
   private onInputBlur = (): void => {
     this.focusPaused = true;

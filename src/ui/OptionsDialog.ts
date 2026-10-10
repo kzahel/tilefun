@@ -6,10 +6,12 @@ export class OptionsDialog {
   private opener: HTMLElement | null = null;
   private cards: HTMLButtonElement[] = [];
   private status = document.createElement("p");
+  private pinch = document.createElement("input");
   private saving = false;
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
     private closed: () => void,
+    private selectPinch: (enabled: boolean) => Promise<void>,
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -39,6 +41,18 @@ export class OptionsDialog {
     }
     const help = document.createElement("p");
     help.textContent = "Tap a place to walk there. Tap near your feet to stop.";
+    const zoom = document.createElement("label");
+    zoom.className = "options-pinch";
+    this.pinch.type = "checkbox";
+    this.pinch.setAttribute("aria-describedby", "options-pinch-help");
+    this.pinch.onchange = () => {
+      void this.choosePinch();
+    };
+    zoom.append(this.pinch, "Two-finger pinch to zoom");
+    const pinchHelp = document.createElement("p");
+    pinchHelp.id = "options-pinch-help";
+    pinchHelp.textContent =
+      "Put two fingers on the world together, then spread or pinch them. Joystick movement and action buttons block zoom.";
     this.status.setAttribute("role", "status");
     this.status.className = "options-status";
     d.append(
@@ -46,6 +60,8 @@ export class OptionsDialog {
       heading,
       choices,
       help,
+      zoom,
+      pinchHelp,
       this.status,
       this.button("Back to game", () => this.hide()),
     );
@@ -61,10 +77,11 @@ export class OptionsDialog {
   get visible(): boolean {
     return this.dialog.open;
   }
-  show(mode: TouchMovementMode, opener: HTMLElement | null): void {
+  show(mode: TouchMovementMode, opener: HTMLElement | null, pinchZoom: boolean): void {
     this.opener = opener;
     this.status.textContent = "";
     this.setMode(mode);
+    this.pinch.checked = pinchZoom;
     if (!this.visible) this.dialog.showModal();
     this.cards.find((c) => c.dataset.mode === mode)?.focus();
   }
@@ -93,6 +110,7 @@ export class OptionsDialog {
     this.saving = true;
     this.setMode(mode);
     for (const c of this.cards) c.disabled = true;
+    this.pinch.disabled = true;
     try {
       await this.select(mode);
       this.status.textContent = "Movement saved for this player.";
@@ -101,7 +119,25 @@ export class OptionsDialog {
     } finally {
       this.saving = false;
       for (const c of this.cards) c.disabled = false;
+      this.pinch.disabled = false;
       if (this.visible) this.cards.find((c) => c.dataset.mode === mode)?.focus();
+    }
+  }
+  private async choosePinch(): Promise<void> {
+    if (this.saving) return;
+    this.saving = true;
+    this.pinch.disabled = true;
+    for (const c of this.cards) c.disabled = true;
+    try {
+      await this.selectPinch(this.pinch.checked);
+      this.status.textContent = "Zoom preference saved for this player.";
+    } catch {
+      this.status.textContent = "You can use this choice now, but it could not be remembered.";
+    } finally {
+      this.saving = false;
+      this.pinch.disabled = false;
+      for (const c of this.cards) c.disabled = false;
+      if (this.visible) this.pinch.focus();
     }
   }
   private fullscreen = (): void => {
