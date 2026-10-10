@@ -2,7 +2,7 @@
 
 Topic: art-review
 Status: Workshop and outdoor catalog delivered; human review remains ongoing.
-Updated: 2026-10-03.
+Updated: 2026-10-10.
 
 Owns agent operating rules for exact-source feedback, approvals and metadata.
 The [Workshop guide](../tilefun-workshop.md) owns UI, authentication and API
@@ -11,9 +11,11 @@ and inventory usage. Read these before changing review flows or acting on notes.
 
 ## Review workflow
 
-The live deployment at `https://tilefun.graehlarts.com/tilefun/` serves this
-checkout through Vite. Use that origin for human review links; isolated local
-preview servers are for automated validation.
+The live deployment at `https://tilefun.graehlarts.com/tilefun/` serves its own
+development checkout through Vite. Commits in another clone are not automatically
+available there. Verify that the exact revision's assets are served before sharing
+new human review links. Use that origin for human review; isolated local preview
+servers are for automated validation.
 
 The central workspace is `/tilefun/workshop.html`, linked as Tilefun Workshop
 from the game sidebar and world menu. It includes all review batches, requests,

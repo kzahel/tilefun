@@ -30,6 +30,13 @@ skip. All animal units, typechecks, lint, build, inventory/parity checks and
 six-phase streaming readiness pass. The full Windows unit run has five unrelated
 symlink/process-kill harness failures; 084 records their exact limits.
 
+Live follow-up on 2026-10-10: the shared origin still serves the earlier fauna
+module, without `PetVariants.ts` or the four new draft assets. Local delivery is
+complete; live checkout synchronization is still needed before reviewing these
+four drafts at the shared origin. Missing draft JSON paths currently return the
+Vite HTML fallback. A fresh live game loads successfully; the owner's phone JSON
+parse error has not yet been reproduced or attributed to a specific request.
+
 The [ideas backlog](../ideas.md#living-world-and-inhabitants) records common birds,
 garden insects (especially bees), small animals, farm/pond additions and further
 coat/breed/age variations. These are suggestions, not authorized production.

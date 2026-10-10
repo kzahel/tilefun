@@ -137,3 +137,19 @@ Human review playback: [ginger tabby](https://tilefun.graehlarts.com/tilefun/dem
 [golden retriever](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/dog-golden/draft-v1/)
 and [pointed-ear shepherd](https://tilefun.graehlarts.com/tilefun/demos/wildlife-v2/dog-shepherd/draft-v1/).
 Approve/report through each exact pending Workshop candidate, not this execution record.
+
+## Live follow-up
+
+The owner's 2026-10-10 phone screenshot shows HTML parsed as JSON during game
+startup. A bundled full-Chromium fresh live session reaches `#game[data-ready=true]`
+without errors. The failing phone request is not yet identified; Reload and the
+expanded error Details/full address were requested. Do not infer that the error
+is fixed from the fresh-session result.
+
+Read-only live requests also establish that the shared origin serves an earlier
+checkout: its fauna module has no `PET_ART`, `PetVariants.ts` returns HTML, and
+all four new draft `sprite.json` paths return status 200 with `text/html` rather
+than JSON. The new draft review URLs above are intended destinations, pending
+synchronization of the live checkout. The earlier handoff's shared review link
+was premature. All four exact local art receipts remain valid; no pixels or
+approval records changed.
