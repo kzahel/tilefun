@@ -1,0 +1,158 @@
+{
+  "counts": {
+    "0": 871217,
+    "1": 12357,
+    "2": 56290,
+    "3": 108712,
+    "4": 0
+  },
+  "legend": {
+    "0": "unused UV/gutter",
+    "1": "visible source sample",
+    "2": "unobserved",
+    "3": "overlapping UV surfaces",
+    "4": "source-view color disagreement"
+  },
+  "authoredFill": {
+    "image": "car-atlas.png.001",
+    "filledUVTexels": 1036219,
+    "meaning": "Existing authored atlas fills gutter/unseen/overlapping UV regions only. Coverage status remains unchanged; this is inferred paint, not source recovery."
+  },
+  "sourceViews": {
+    "Box-east": [
+      "east"
+    ],
+    "Cab-east": [
+      "east"
+    ],
+    "Fender-F-east": [
+      "east"
+    ],
+    "Fender-R-east": [
+      "east"
+    ],
+    "Box-west": [
+      "west"
+    ],
+    "Cab-west": [
+      "west"
+    ],
+    "Fender-F-west": [
+      "west"
+    ],
+    "Fender-R-west": [
+      "west"
+    ],
+    "Box-roof": [
+      "north"
+    ],
+    "Rear-doors": [
+      "north"
+    ],
+    "Box-front-wall": [
+      "south"
+    ],
+    "Cab-roof": [
+      "south"
+    ],
+    "Windshield-and-frame": [
+      "south"
+    ],
+    "Hood": [
+      "south"
+    ],
+    "Front-fascia": [
+      "south"
+    ],
+    "Underfloor": [],
+    "Rear-step": [
+      "north"
+    ],
+    "Rear-step-face": [
+      "north"
+    ],
+    "Rear-rail-east": [
+      "east"
+    ],
+    "Rear-rail-back-east": [
+      "north"
+    ],
+    "Rear-rail-west": [
+      "west"
+    ],
+    "Rear-rail-back-west": [
+      "north"
+    ],
+    "Roof-panel-0-top": [
+      "north"
+    ],
+    "Roof-panel-0-east": [
+      "east"
+    ],
+    "Roof-panel-0-west": [
+      "west"
+    ],
+    "Roof-panel-0-front": [
+      "south"
+    ],
+    "Roof-panel-0-rear": [
+      "north"
+    ],
+    "Roof-panel-1-top": [
+      "north"
+    ],
+    "Roof-panel-1-east": [
+      "east"
+    ],
+    "Roof-panel-1-west": [
+      "west"
+    ],
+    "Roof-panel-1-front": [
+      "south"
+    ],
+    "Roof-panel-1-rear": [
+      "north"
+    ],
+    "Mirror--1": [],
+    "Mirror-arm--1": [],
+    "Mirror-1": [],
+    "Mirror-arm-1": [],
+    "Tire-FL": [
+      "west"
+    ],
+    "Hub-FL": [
+      "west"
+    ],
+    "Tire-FR": [
+      "east"
+    ],
+    "Hub-FR": [
+      "east"
+    ],
+    "Tire-RL": [
+      "west"
+    ],
+    "Hub-RL": [
+      "west"
+    ],
+    "Tire-RR": [
+      "east"
+    ],
+    "Hub-RR": [
+      "east"
+    ],
+    "Lightbar-front-lens": [],
+    "Lightbar-front-base": [],
+    "Lightbar-rear-lens": [],
+    "Lightbar-rear-base": [],
+    "Beacon-front-left-lens": [],
+    "Beacon-front-left-base": [],
+    "Beacon-front-right-lens": [],
+    "Beacon-front-right-base": [],
+    "Beacon-rear-left-lens": [],
+    "Beacon-rear-left-base": [],
+    "Beacon-rear-right-lens": [],
+    "Beacon-rear-right-base": []
+  },
+  "interpretation": "Counts measure UV texels, not surface area, accuracy or acceptance. Disagreements retain the most face-on visible original pixel and remain marked. Unknown and overlapping regions require authored cleanup. Gutters are not padded by this draft baker."
+}

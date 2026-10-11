@@ -1,0 +1,53 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-garbage-truck-orange-v1",
+  "candidateFingerprint": "48455c364317e2bc2d836f43a336b630bb11c68f17e9b87eef6f51a2fc2bb18a",
+  "identity": {
+    "assetId": "garbage-truck-orange",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "a84c5a9ce11cf770c0683ec08f8fcaa20a2e6ed8d6a203151e81ad1f17cc8639",
+    "sourceAtlasSha256": "bb1879470015b6c740af875c145d96a3af538396acc67696cb2a47bdd37a7fe6",
+    "lightPatternSha256": "28f1d8ac81c965ec8b61977c23a459b157d0044d4bf7940d2e0202e5b3a52fdb",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/garbage-truck-orange-v1.glb",
+        "sha256": "e6f93e2c8322e1c7ea8f8fa54967da98a3becc1b89eb2de9edca0ed6068ca8de"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/comparison.png",
+        "sha256": "15d98c6c90d151d03ec6a7fa979688ecc11a59b9f92d2a28869021dd1abd3581"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/orbit.png",
+        "sha256": "74712048c78593abc3ed837b5d6d9257f3031883d8466aaaeb91f1f1cec19684"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/silhouette.png",
+        "sha256": "d5de6f185de493f301814956e4ff28d0d5c2e6c74cd6761bf3e3a81047c1b9bf"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/lights.gif",
+        "sha256": "0955688388e75f3d3e367f0e134d6878d4e28df70d4c9851b1763279bf13cc5f"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/lights-off.png",
+        "sha256": "39575e27190c8e58252be5c25d6f1ca335acfc6a357b07e5c79658b7b63b6508"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/lights-a.png",
+        "sha256": "eaccf2923f819f9d34546fed50197edc67e2dcbf216fbbb455174a4637c60583"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-orange-v1/lights-b.png",
+        "sha256": "39575e27190c8e58252be5c25d6f1ca335acfc6a357b07e5c79658b7b63b6508"
+      }
+    ]
+  },
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Six independent wheels, own orange paint and amber warning lens; loader held in its qualified rest pose.",
+    "Whole-body neutral wheel roll qualified on exact GLB; steering remains neutral. Production art approval pending."
+  ]
+}

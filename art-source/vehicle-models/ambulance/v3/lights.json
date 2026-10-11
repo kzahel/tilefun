@@ -1,0 +1,52 @@
+{
+  "schema": "tilefun-vehicle-lights-v1",
+  "channel": "emergencyLights",
+  "defaultEnabled": false,
+  "periodSeconds": 1,
+  "pulseWindows": [
+    [
+      0,
+      0.12
+    ],
+    [
+      0.2,
+      0.32
+    ]
+  ],
+  "peakGain": 4,
+  "tagPrefix": "tilefun_",
+  "lenses": [
+    {
+      "node": "Lightbar-front-lens",
+      "group": "front",
+      "phase": 0
+    },
+    {
+      "node": "Lightbar-rear-lens",
+      "group": "rear",
+      "phase": 0.5
+    },
+    {
+      "node": "Beacon-front-left-lens",
+      "group": "front-left",
+      "phase": 0
+    },
+    {
+      "node": "Beacon-front-right-lens",
+      "group": "front-right",
+      "phase": 0.5
+    },
+    {
+      "node": "Beacon-rear-left-lens",
+      "group": "rear-left",
+      "phase": 0.5
+    },
+    {
+      "node": "Beacon-rear-right-lens",
+      "group": "rear-right",
+      "phase": 0
+    }
+  ],
+  "housingPolicy": "Fixed and untagged",
+  "stateOwner": "Future authoritative on/off state; shared presentation supplies time. No game control wired yet."
+}

@@ -4,7 +4,11 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
 import { isDrivable } from "../traffic/Driving.js";
-import { isEmergencyVehicle } from "../traffic/EmergencyVehicle.js";
+import {
+  hasVehicleLights,
+  isWarningVehicle,
+  vehicleLightState,
+} from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
@@ -173,10 +177,26 @@ export function collectScene(
         : undefined);
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
-      ...(isEmergencyVehicle(e) && (e.emergencyState ?? 2) & 1
+      ...(hasVehicleLights(e) && vehicleLightState(e) & 1
         ? {
-            emergencyHeight: e.type === "vehicle-v1:fire-truck-ladder-1" ? 28 : 40,
-            emergencyForward: e.type === "vehicle-v1:fire-truck-ladder-1" ? 64 : 0,
+            emergencyHeight: e.type.startsWith("vehicle-v1:fire-truck-ladder-")
+              ? 28
+              : isWarningVehicle(e)
+                ? 42
+                : e.type === "vehicle-v1:police-car"
+                  ? 22
+                  : 40,
+            emergencyForward: e.type.startsWith("vehicle-v1:fire-truck-ladder-")
+              ? 64
+              : isWarningVehicle(e)
+                ? 44
+                : 0,
+            emergencyColors: isWarningVehicle(e)
+              ? (["#ffd37a", "#ffd37a"] as const)
+              : e.type === "vehicle-v1:police-car"
+                ? (["#ff7979", "#79dfff"] as const)
+                : (["#79dfff", "#79dfff"] as const),
+            ...(isWarningVehicle(e) ? { emergencySide: 0 } : {}),
             emergencyHeading: entityFacingHeading(e),
             emergencyFlash:
               poseTime % 1 < 0.12 || (poseTime % 1 >= 0.2 && poseTime % 1 < 0.32)

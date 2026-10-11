@@ -3,8 +3,10 @@ import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 
 test.use({ channel: "chromium" });
 for (const [model, parts, resource] of [
-  ["ambulance", 56, "ambulance"],
-  ["fire-truck-ladder-1", 49, "fireTruck"],
+  ["ambulance", 56, "ambulance-authored-v3"],
+  ["fire-truck-ladder-1", 49, "fire-truck-ladder-1-authored-v2"],
+  ["police-car", 37, "police-car-authored-v2"],
+  ["fire-truck-ladder-2", 49, "fire-truck-ladder-2-authored-v1"],
 ] as const) {
   for (const backend of ["canvas", "gpu&meshes"]) {
     test(`${model} uses its own model, switches lights/styles and boosts in shared driving (${backend})`, async ({
@@ -28,9 +30,15 @@ for (const [model, parts, resource] of [
           .poll(() =>
             canvas.evaluate((c, resource) => {
               const diagnostics = (c as TrafficCanvas).__presentationDiagnostics?.();
-              const gpu = (diagnostics?.terrain as unknown as { gpu?: Record<string, unknown> })
-                ?.gpu;
-              return { state: gpu?.[`${resource}State`], parts: gpu?.[`${resource}Parts`] };
+              const gpu = (
+                diagnostics?.terrain as unknown as {
+                  gpu?: { vehicleAssets?: Record<string, { state: string; meshes: number }> };
+                }
+              )?.gpu;
+              return {
+                state: gpu?.vehicleAssets?.[resource]?.state,
+                parts: gpu?.vehicleAssets?.[resource]?.meshes,
+              };
             }, resource),
           )
           .toMatchObject({ state: "ready", parts });

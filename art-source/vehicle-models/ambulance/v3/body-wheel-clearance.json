@@ -1,0 +1,91 @@
+{
+  "assetId": "ambulance",
+  "revision": "v3",
+  "glbSha256": "172cab88fa9d011fa4fa34c4edecc70968ce3cc5fc731cce52c36b8ab92a5f5c",
+  "clearance": [
+    {
+      "part": "Hub_FL",
+      "gap": 5.648857038856651,
+      "nearestBody": "Mirror-arm--1",
+      "radius": 4.200000762939453,
+      "axialBounds": [
+        -20.150001525878906,
+        -19.650001525878906
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.608347095289103,
+      "nearestBody": "Fender-F-west",
+      "radius": 8.000000305263706,
+      "axialBounds": [
+        -19.600000381469727,
+        -16.80000114440918
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": 5.648857038856651,
+      "nearestBody": "Mirror-arm-1",
+      "radius": 4.200000762939453,
+      "axialBounds": [
+        19.650001525878906,
+        20.150001525878906
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.608347095289103,
+      "nearestBody": "Fender-F-east",
+      "radius": 8.000000305263706,
+      "axialBounds": [
+        16.80000114440918,
+        19.600000381469727
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 23.09468736497291,
+      "nearestBody": "Rear-step",
+      "radius": 4.200000762939453,
+      "axialBounds": [
+        -20.150001525878906,
+        -19.650001525878906
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.6083469832134778,
+      "nearestBody": "Fender-R-west",
+      "radius": 8.000000537435408,
+      "axialBounds": [
+        -19.600000381469727,
+        -16.80000114440918
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 23.09468736497291,
+      "nearestBody": "Rear-step",
+      "radius": 4.200000762939453,
+      "axialBounds": [
+        19.650001525878906,
+        20.150001525878906
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.6083469832134778,
+      "nearestBody": "Fender-R-east",
+      "radius": 8.000000537435408,
+      "axialBounds": [
+        16.80000114440918,
+        19.600000381469727
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

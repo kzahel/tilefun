@@ -45,6 +45,18 @@ sets, padded to a common ground reference without scaling or mirroring.
 geometry and approval fingerprints. See `docs/research/road-vehicles.md` for the
 source audit. Builds verify this immutable bank; they do not regenerate it.
 
+## Authored vehicle models (`models/vehicles/`)
+
+All 45 source vehicle sets have authored Blender geometry and source-matched UV
+paint derived from LimeZu Modern Exteriors: https://limezu.itch.io/modernexteriors
+The runtime GLBs, editable scenes, clean atlases, own unused projection drafts,
+frozen source crops and exact 4×2/contour/novel/light review captures are retained
+in `art-source/vehicle-models/` and `models/vehicles/`. Earlier revisions remain
+immutable. See `art-source/vehicle-models/catalog.json` for exact source/export
+hashes and `docs/topics/vehicle-model-porting.md` for current integration/review.
+Model integration does not imply new production-art approval or a change to the
+approved sprite bank. Builds consume committed exports without running Blender.
+
 ## Railway Workshop preview atlas
 
 `tilesets/railway-review-v1.png` packs 53 unchanged Modern Exteriors 16×16

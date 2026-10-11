@@ -1,0 +1,443 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "fire-truck-ladder-2",
+  "family": "fire-truck",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    144,
+    160
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/fire-truck-ladder-2/v1/car.blend",
+    "sha256": "7093b9e1c57670dcb3bedfb73d8c53b90869ec4990f63bfe4c50f14e9767577f"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        2416,
+        4256,
+        144,
+        80
+      ],
+      "anchor": [
+        72,
+        77
+      ],
+      "metadata": {
+        "name": "Fire truck \u00b7 raised ladder \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "fire",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          72,
+          77
+        ],
+        "footprint": [
+          -66,
+          -40,
+          132,
+          40
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 132,
+            "height": 40,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -20
+      },
+      "sourceApproval": {
+        "id": "800d1505-cda2-4365-9ef0-4370f8b82627",
+        "createdAt": "2026-10-03T10:49:07.769Z",
+        "candidateFingerprint": "8202bbd09eeef5a58de7330457ce9f87385d8dad0a68a96ac6602c51c206c7fa",
+        "metadataFingerprint": "a10c468cdc8a1750001410f379e312b9084ccae468f6478370bb5a063c86de12"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        40
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 55,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          72,
+          97
+        ],
+        "status": "Fire truck source axles, ladder and cab roof hypothesis"
+      },
+      "sourceSha256": "12c16d55ce5625ce13713e405561a755d7d196afaaf85bef4ec55d6667f71d9e"
+    },
+    {
+      "id": "west",
+      "rect": [
+        2416,
+        4176,
+        144,
+        80
+      ],
+      "anchor": [
+        72,
+        77
+      ],
+      "metadata": {
+        "name": "Fire truck \u00b7 raised ladder \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "fire",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          72,
+          77
+        ],
+        "footprint": [
+          -66,
+          -40,
+          132,
+          40
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 132,
+            "height": 40,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -20
+      },
+      "sourceApproval": {
+        "id": "d560885e-f498-4fdc-a140-a2e9b7b5e633",
+        "createdAt": "2026-10-03T10:49:12.153Z",
+        "candidateFingerprint": "025a25e1e28489eb8f9595ff2d6c7e3a062437b41b8a512535bc67b41c1b47d3",
+        "metadataFingerprint": "6ee247e6b8bbcd3c8345c4c9dfd1092aae0133b9d31131ff309fd522c655df15"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        40
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 55,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          72,
+          97
+        ],
+        "status": "Independent west compartment lettering and fittings"
+      },
+      "sourceSha256": "ceef1a565e0b9c4a2633d8891a3f645895c425da06195b0bba492ae187e3692d"
+    },
+    {
+      "id": "north",
+      "rect": [
+        2624,
+        4176,
+        64,
+        160
+      ],
+      "anchor": [
+        32,
+        156
+      ],
+      "metadata": {
+        "name": "Fire truck \u00b7 raised ladder \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "fire",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          32,
+          156
+        ],
+        "footprint": [
+          -26,
+          -128,
+          52,
+          128
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 52,
+            "height": 128,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -64
+      },
+      "sourceApproval": {
+        "id": "1262dcc4-3076-4274-b131-1f81d228b6ed",
+        "createdAt": "2026-10-03T10:49:07.119Z",
+        "candidateFingerprint": "7dfcd9e9ef6f16d7c6a7f2e71eea99edb32bf1eb7ee94c06c4267a79f7613205",
+        "metadataFingerprint": "f3413d852b75d0ada1bc376f5237dea0490c547d2b8e7f07ba32196ce0814680"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        40,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          72,
+          100
+        ],
+        "status": "Fire rear equipment, cab roof and wheel footprint hypothesis"
+      },
+      "sourceSha256": "247fff92c44e32c436086e51496000339c15e9b08bf8121c00d57b9c53357ce7"
+    },
+    {
+      "id": "south",
+      "rect": [
+        2560,
+        4176,
+        64,
+        160
+      ],
+      "anchor": [
+        32,
+        156
+      ],
+      "metadata": {
+        "name": "Fire truck \u00b7 raised ladder \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "fire",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          32,
+          156
+        ],
+        "footprint": [
+          -26,
+          -128,
+          52,
+          128
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 52,
+            "height": 128,
+            "zHeight": 64
+          }
+        ],
+        "depthOffset": -64
+      },
+      "sourceApproval": {
+        "id": "e7b44001-3f56-470e-93a4-b167a069b73f",
+        "createdAt": "2026-10-03T10:49:11.282Z",
+        "candidateFingerprint": "f3f3d591f6cf251f48a87e589279002f6134529c8c114e4799a833457463b4f8",
+        "metadataFingerprint": "68c47f35fc1025e52aa2bd0a16b5473b74ab69395322bd705bc5a92b44b871e2"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        40,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          72,
+          100
+        ],
+        "status": "Fire front windshield, roof and bumper hypothesis"
+      },
+      "sourceSha256": "c57f4bc3157449ab8a809c8b5fd0345d90b2fdd305e9800862dac4a778c3254b"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1536,
+    "material": "fire-truck-ladder-2 palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Cab-east": [
+        "east"
+      ],
+      "Fender--35.5-east": [
+        "east"
+      ],
+      "Cab-west": [
+        "west"
+      ],
+      "Fender--35.5-west": [
+        "west"
+      ],
+      "Compartments-east": [
+        "east"
+      ],
+      "Fender-40.5-east": [
+        "east"
+      ],
+      "Compartments-west": [
+        "west"
+      ],
+      "Fender-40.5-west": [
+        "west"
+      ],
+      "Roof-shoulder-east": [
+        "east"
+      ],
+      "Roof-shoulder-west": [
+        "west"
+      ],
+      "Compartment-roof": [
+        "north"
+      ],
+      "Pump-platform-0": [
+        "north"
+      ],
+      "Pump-platform-1": [],
+      "Pump-platform-2": [
+        "west"
+      ],
+      "Pump-platform-3": [
+        "east"
+      ],
+      "Pump-platform-4": [
+        "south"
+      ],
+      "Pump-platform-5": [
+        "north"
+      ],
+      "Cab-roof": [
+        "north"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Front-fascia": [
+        "south"
+      ],
+      "Rear-equipment": [
+        "north"
+      ],
+      "Underfloor": [],
+      "Ladder-rail--1-0": [
+        "north"
+      ],
+      "Ladder-rail--1-1": [],
+      "Ladder-rail--1-2": [
+        "west"
+      ],
+      "Ladder-rail--1-3": [
+        "east"
+      ],
+      "Ladder-rail--1-4": [
+        "south"
+      ],
+      "Ladder-rail--1-5": [
+        "north"
+      ],
+      "Ladder-rail-1-0": [
+        "north"
+      ],
+      "Ladder-rail-1-1": [],
+      "Ladder-rail-1-2": [
+        "west"
+      ],
+      "Ladder-rail-1-3": [
+        "east"
+      ],
+      "Ladder-rail-1-4": [
+        "south"
+      ],
+      "Ladder-rail-1-5": [
+        "north"
+      ],
+      "Ladder-rungs": [],
+      "Ladder-mount": [],
+      "Fire-blue--1-base": [],
+      "Fire-blue--1-lens": [],
+      "Fire-blue-1-base": [],
+      "Fire-blue-1-lens": [],
+      "Tire_FL": [
+        "west"
+      ],
+      "Hub_FL": [
+        "west"
+      ],
+      "Tire_FR": [
+        "east"
+      ],
+      "Hub_FR": [
+        "east"
+      ],
+      "Tire_RL": [
+        "west"
+      ],
+      "Hub_RL": [
+        "west"
+      ],
+      "Tire_RR": [
+        "east"
+      ],
+      "Hub_RR": [
+        "east"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

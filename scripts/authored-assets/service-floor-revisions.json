@@ -1,0 +1,22 @@
+{
+  "schema": "tilefun-vehicle-floor-revisions-v1",
+  "margin": 0.75,
+  "vehicles": {
+    "ambulance": {
+      "source": "art-source/vehicle-models/ambulance/v2",
+      "sceneSha256": "c8286f4b3bbe8df3537962a0300e915ca45e0cf678cad369e270cc0065bae989",
+      "notes": [
+        "Open only the original level underfloor at actual tire bounds plus .75 model-unit margin; fixed visible geometry, wheel centers, atlas and refs remain unchanged.",
+        "Whole-body neutral wheel-roll clearance must pass on the exact GLB; arbitrary steering remains unqualified."
+      ]
+    },
+    "police-car": {
+      "source": "art-source/vehicle-models/police-car/v1",
+      "sceneSha256": "a43fa9bafce9f368e244a7d04f9a93e704cffe221ce380099e1b70978e572658",
+      "notes": [
+        "Open only the original level underfloor at actual tire bounds plus .75 model-unit margin; fixed visible geometry, wheel centers, atlas and refs remain unchanged.",
+        "Whole-body neutral wheel-roll clearance must pass on the exact GLB; arbitrary steering remains unqualified."
+      ]
+    }
+  }
+}

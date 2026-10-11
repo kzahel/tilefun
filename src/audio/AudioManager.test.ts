@@ -3,7 +3,7 @@ import { createVehicle } from "../traffic/Vehicle.js";
 import { AudioManager } from "./AudioManager.js";
 
 afterEach(() => vi.unstubAllGlobals());
-it.each(["ambulance", "fire-truck-ladder-1"])(
+it.each(["ambulance", "fire-truck-ladder-1", "police-car", "fire-truck-ladder-2"])(
   "%s keeps one spatial looping voice, changes style, and stops for quiet/off/range/pause",
   (model) => {
     const sources: {
@@ -41,6 +41,13 @@ it.each(["ambulance", "fire-truck-ladder-1"])(
     );
     const audio = new AudioManager();
     audio.ensureContext();
+    // Even a malformed siren bit pattern on work vehicles cannot allocate audio.
+    const silent = ["garbage-truck-green", "garbage-truck-orange"].map((model) =>
+      createVehicle(model, 0, 0),
+    );
+    for (const car of silent) car.emergencyState = 5;
+    audio.updateSirens(silent, { wx: 0, wy: 0 }, true);
+    expect(sources).toHaveLength(0);
     const car = createVehicle(model, 0, 0);
     car.id = 1;
     car.emergencyState = 3;

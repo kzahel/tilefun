@@ -1,0 +1,449 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "garbage-truck-orange",
+  "family": "garbage-truck",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    128,
+    128
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/garbage-truck-orange/v1/car.blend",
+    "sha256": "a84c5a9ce11cf770c0683ec08f8fcaa20a2e6ed8d6a203151e81ad1f17cc8639"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        1504,
+        4128,
+        128,
+        80
+      ],
+      "anchor": [
+        64,
+        77
+      ],
+      "metadata": {
+        "name": "Garbage truck orange \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "garbage",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          64,
+          77
+        ],
+        "footprint": [
+          -58,
+          -40,
+          116,
+          40
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 116,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "sourceApproval": {
+        "id": "eb6c509b-9344-4c11-b0a3-1726f26f511f",
+        "createdAt": "2026-10-03T10:49:03.126Z",
+        "candidateFingerprint": "41d1bd7cf0f543b19e2611fee9967abbdc29f88c5171d9ab18a705c58c62cf72",
+        "metadataFingerprint": "155df4d368380ca044b6ae8209113db81745b5bd052cedc9d13adbe4e32fa36e"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        24
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          68,
+          83.33
+        ],
+        "status": "Three measured wheel centers; front cab roof and container silhouette fit"
+      },
+      "sourceSha256": "e48de79cae9a71989c4dfd459b5b49c8b4e092df63d8bd3433ba7a37f9865878"
+    },
+    {
+      "id": "west",
+      "rect": [
+        1504,
+        4208,
+        128,
+        80
+      ],
+      "anchor": [
+        64,
+        77
+      ],
+      "metadata": {
+        "name": "Garbage truck orange \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "garbage",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          64,
+          77
+        ],
+        "footprint": [
+          -58,
+          -40,
+          116,
+          40
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 116,
+            "height": 40,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -20
+      },
+      "sourceApproval": {
+        "id": "8f7f9640-e6cd-4f14-9b52-75318d38c542",
+        "createdAt": "2026-10-03T10:49:03.986Z",
+        "candidateFingerprint": "cbcd267f860d81a95e553f23705812ebf0eba78b56932a0952b24db435cf91c6",
+        "metadataFingerprint": "a5932c634d073bdec6e887fe8cde21e62eeb42b2d2de954f1039899dd2df273c"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        24
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          60,
+          83.33
+        ],
+        "status": "Opposite side owns its own controls and loader paint"
+      },
+      "sourceSha256": "eed17e97f1c46936a95233487d1f85a54d0305bc7b31406f1bc506cda24bc9c8"
+    },
+    {
+      "id": "north",
+      "rect": [
+        1680,
+        4144,
+        48,
+        128
+      ],
+      "anchor": [
+        24,
+        121
+      ],
+      "metadata": {
+        "name": "Garbage truck orange \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "garbage",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          24,
+          121
+        ],
+        "footprint": [
+          -20,
+          -96,
+          40,
+          96
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 96,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -48
+      },
+      "sourceApproval": {
+        "id": "7d1caf07-02d2-489e-81bc-78f5fcc02c32",
+        "createdAt": "2026-10-03T10:49:02.776Z",
+        "candidateFingerprint": "f0b231208fefffcf0ea7ba64b4fe5b2b577c2fe6d18b237ee6e2ff86012b0091",
+        "metadataFingerprint": "84084d2f118da0b56c449986dc4d5b9019baf7448d4389ba7b4572a0ac5470a8"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        40,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 45,
+        "horizontalScale": 1,
+        "verticalStretch": 0.9,
+        "origin": [
+          64,
+          90
+        ],
+        "status": "Independent rear-facing roof/loader hypothesis"
+      },
+      "sourceSha256": "0c40c301d6c2e01c075faa908b3afaaac7e9ad7817ef311f554afeb4fd7a70d8"
+    },
+    {
+      "id": "south",
+      "rect": [
+        1632,
+        4144,
+        48,
+        128
+      ],
+      "anchor": [
+        24,
+        121
+      ],
+      "metadata": {
+        "name": "Garbage truck orange \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "garbage",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          24,
+          121
+        ],
+        "footprint": [
+          -20,
+          -96,
+          40,
+          96
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 96,
+            "zHeight": 48
+          }
+        ],
+        "depthOffset": -48
+      },
+      "sourceApproval": {
+        "id": "5f28df49-b034-4e64-93d0-b29a351079b2",
+        "createdAt": "2026-10-03T10:49:03.501Z",
+        "candidateFingerprint": "e63e4cbc4c192733766216695648f656bb4028d5c1ca8ba81b44188ca4a84742",
+        "metadataFingerprint": "a2a4a5da59509d972d78e5e92430f422730d4133136c0cbc4cbc8b4f2774336d"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        40,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 65,
+        "horizontalScale": 1,
+        "verticalStretch": 0.9,
+        "origin": [
+          64,
+          79
+        ],
+        "status": "Front roof, windshield and rear body length hypothesis"
+      },
+      "sourceSha256": "b324ce5e97304539371076a981d841b97f781fdab97df3d08de1c9085c3c9275"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1280,
+    "material": "garbage-truck-orange palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Cab-east": [
+        "east"
+      ],
+      "Fender--31.5-east": [
+        "east"
+      ],
+      "Cab-west": [
+        "west"
+      ],
+      "Fender--31.5-west": [
+        "west"
+      ],
+      "Cab-roof": [
+        "north"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Front-fascia": [
+        "south"
+      ],
+      "Container-east": [
+        "east"
+      ],
+      "Container-shoulder-east": [
+        "east"
+      ],
+      "Container-west": [
+        "west"
+      ],
+      "Container-shoulder-west": [
+        "west"
+      ],
+      "Container-roof": [
+        "north"
+      ],
+      "Container-front": [],
+      "Chassis-coupling-0": [
+        "north"
+      ],
+      "Chassis-coupling-1": [],
+      "Chassis-coupling-2": [
+        "west"
+      ],
+      "Chassis-coupling-3": [
+        "east"
+      ],
+      "Chassis-coupling-4": [
+        "south"
+      ],
+      "Chassis-coupling-5": [
+        "north"
+      ],
+      "Loader-side-east": [
+        "east"
+      ],
+      "Loader-brace-east": [
+        "east"
+      ],
+      "Loader-side-west": [
+        "west"
+      ],
+      "Loader-brace-west": [
+        "west"
+      ],
+      "Loader-roof": [
+        "north"
+      ],
+      "Loader-rear-upper": [
+        "north"
+      ],
+      "Loader-rear-frame--1": [
+        "north"
+      ],
+      "Loader-mouth-wall--1": [],
+      "Loader-rear-frame-1": [
+        "north"
+      ],
+      "Loader-mouth-wall-1": [],
+      "Loader-mouth-sill": [
+        "north"
+      ],
+      "Loader-mouth-ceiling": [],
+      "Loader-mouth-back": [
+        "north"
+      ],
+      "Mirror--1": [],
+      "Mirror-1": [],
+      "Roof-vent-base": [],
+      "Roof-vent": [],
+      "Underfloor": [],
+      "Warning-amber-base": [],
+      "Warning-amber-lens": [],
+      "Orange-cab-west-edge": [],
+      "Tire_FL": [
+        "west"
+      ],
+      "Hub_FL": [
+        "west"
+      ],
+      "Tire_FR": [
+        "east"
+      ],
+      "Hub_FR": [
+        "east"
+      ],
+      "Tire_ML": [
+        "west"
+      ],
+      "Hub_ML": [
+        "west"
+      ],
+      "Tire_MR": [
+        "east"
+      ],
+      "Hub_MR": [
+        "east"
+      ],
+      "Tire_RL": [
+        "west"
+      ],
+      "Hub_RL": [
+        "west"
+      ],
+      "Tire_RR": [
+        "east"
+      ],
+      "Hub_RR": [
+        "east"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

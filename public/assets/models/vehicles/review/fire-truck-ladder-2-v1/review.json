@@ -1,0 +1,53 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-fire-truck-ladder-2-v1",
+  "candidateFingerprint": "1d331535897272b316a758dc48d86e1c6283cc243be5fdb130a5b4d7ac5b1aa3",
+  "identity": {
+    "assetId": "fire-truck-ladder-2",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "7093b9e1c57670dcb3bedfb73d8c53b90869ec4990f63bfe4c50f14e9767577f",
+    "sourceAtlasSha256": "919c0dba7b6a75713e8e2643fbb18efbca8f391d5a0f4dfd681e0a82a073defa",
+    "lightPatternSha256": "aabe99929da13c6fff2cd331748cb1e746f0c6bc2a2fdce531e988ef738bc640",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/fire-truck-ladder-2-v1.glb",
+        "sha256": "f20ad0d505045656d563e1a57de65f8bf797b54b12bc09b8aa801c6a16b9a9a5"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/comparison.png",
+        "sha256": "028a78663d19f001b3215df47cac62d299bc3a70bd11f9d874f4697ba16703fc"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/orbit.png",
+        "sha256": "b9a477d827a472ea7c3947e3dc3d3804d7694ae4f1ef8796cd9b2e061ac6baf2"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/silhouette.png",
+        "sha256": "7130d950590c5236621d3d498d1a4abd20a33e19cf1e4a8a2087c12a24e89ee3"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/lights.gif",
+        "sha256": "407c63a868ef4013fc009b560898661d6e76840df6f6b67aca4cf3b1849eba15"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/lights-off.png",
+        "sha256": "0f043f889f67e496dcfec6a69dfdc3b9d0deed7181efb41e0bf425afdbe6fca1"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/lights-a.png",
+        "sha256": "d758a0a7a617c27be680f8e0ad03be7264e15892d4026e2bfd66d05eb785159d"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-2-v1/lights-b.png",
+        "sha256": "f6a4d3d2be9201c825c2024eae1b7ad4a24895fb62e3baf9e3d90709e969c96a"
+      }
+    ]
+  },
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Raised source owns its paint and rest ladder geometry; arbitrary ladder motion and steering remain unqualified.",
+    "Whole-body neutral wheel roll qualified on exact GLB; steering remains neutral. Production art approval pending."
+  ]
+}

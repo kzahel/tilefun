@@ -1,0 +1,53 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-police-car-v2",
+  "candidateFingerprint": "96e12cb821fc5af97d2fb5b935fcdf0657778f24fc0ff9cafd5b20efcfca26d6",
+  "identity": {
+    "assetId": "police-car",
+    "revision": "v2",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "9071aaa1e30d6ba4ed69bbde29a6ce18404f505ab4e12194f0591b79ae4050c3",
+    "sourceAtlasSha256": "6aee03aba45514859f86584682d6ac5e307b24d810894193e6027d7ed1858570",
+    "lightPatternSha256": "0f4b64cd3345c6e2296f2ecde838f6a0557f81646b39964228503c4e44bfe35f",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/police-car-v2.glb",
+        "sha256": "6a46dd5867f8fd17bc9ec20af7c059c59153973774d6d7ea775905b32ccad892"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/comparison.png",
+        "sha256": "832138dbd2a2f1a91eb69ed66b77384e68bcf9a6085fad75c854ecdc3dcdb56f"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/orbit.png",
+        "sha256": "eedd7512019b516e519126eadf148277d127abe90bea89b25223e8b2802c23d6"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/silhouette.png",
+        "sha256": "2edcd5cdae8e5d35339671d8dbb03c9a317de7eee1af3c89229c1fd27eb66b0e"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/lights.gif",
+        "sha256": "1d48ee23cf2807f0b212254cd4484a705abe7f716a502e0cfb4ffb616c0c32eb"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/lights-off.png",
+        "sha256": "dbf91347d5429e36518a42a317208d6841643360136f89dab8a7983f35035bed"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/lights-a.png",
+        "sha256": "9040f36d3ed38bfdb18d6dbb471f2e0899465f444a8560f07d392ebd391964c6"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v2/lights-b.png",
+        "sha256": "d93de559285a544aa0b586c492d2f8df036f6fe24bde8e24aa84f1e2735ade6c"
+      }
+    ]
+  },
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Floor-only clearance correction; original visible paint, wheel centers and cameras retained.",
+    "Whole-body neutral wheel roll qualified on exact GLB; steering remains neutral. Production art approval pending."
+  ]
+}

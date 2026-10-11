@@ -146,7 +146,11 @@ it.each([
   ["bus-4", "bus-4-authored-v1", 112],
   ["bus-5", "bus-5-authored-v1", 112],
   ["bus-6", "bus-6-authored-v1", 112],
-  ["ambulance", "ambulance-authored-v2", 112],
+  ["police-car", "police-car-authored-v2", 80],
+  ["garbage-truck-green", "garbage-truck-green-authored-v1", 144],
+  ["garbage-truck-orange", "garbage-truck-orange-authored-v1", 144],
+  ["fire-truck-ladder-2", "fire-truck-ladder-2-authored-v1", 192],
+  ["ambulance", "ambulance-authored-v3", 112],
   ["fire-truck-ladder-1", "fire-truck-ladder-1-authored-v2", 144],
 ] as const)(
   "uses %s own mesh, conservative bounds and absolute enabled/time state",

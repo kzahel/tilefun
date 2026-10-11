@@ -665,3 +665,49 @@ exactly. Record these limitations in the configuration and exact-revision
 reviews. Commit final GLBs, packed scenes, own clean atlas/draft/coverage,
 frozen refs, recipes, rig/paint/proof records and review captures. Authoring
 scripts alone are insufficient deliverables; scratch preparations remain ignored.
+
+## Final service families and whole-bank qualification
+
+`author_service_vehicle.py CONFIG NEW_OUTPUT --blender BLENDER_EXECUTABLE`
+uses `orange-garbage-family.json` or `raised-fire-family.json`. Orange qualifies
+its own four views against green: east +4 / west −4 crop registration, with an
+explicit 34-pixel west silhouette exception. Its hidden container face uses the
+orange source palette; all six radius-specific wheels and amber lens stay
+independent. Raised fire owns an extended ladder baked 18 degrees into children
+of its separate hinge, with raised-source UV owners and corrected stowed-family
+wheel/floor construction. Arbitrary equipment animation remains unqualified.
+
+`prepare_floor_revision.py --vehicle ambulance --config
+scripts/authored-assets/service-floor-revisions.json --out NEW_OUTPUT --blender
+BLENDER_EXECUTABLE` (also police-car) opens only the pinned prior underfloor.
+It clips original triangles around tire bounds plus .75 margin and interpolates
+original UVs barycentrically; other geometry, clean atlas, refs and cameras stay
+unchanged. Preserve the previous retained scene. A new version is required.
+
+Run `verify_vehicle_body_clearance.py` in Blender on a checkout-shaped catalog
+containing the new service exports; retain its exact GLB hash and deliberate
+collision/recovery report. For all families, use
+`verify_all_vehicle_clearance.py -- CHECKOUT_ROOT NEW_REPORT` through Blender:
+it resolves declared roll children rather than assuming tire names and proves
+all neutral roll angles of every latest revision. Nonzero steering and arbitrary
+equipment motion have separate acceptance scopes. Archived unsafe floors are
+preserved history; never qualify them as latest integration assets.
+
+`verify_service_lights.mjs NEW_OUTPUT GLB_URL CHECKOUT_ROOT LIGHTS_JSON` validates
+phases by declared lens identity, independent of scene traversal order. Fixed
+bases/body paint must stay unchanged and off reset must be exact. After actual
+GLB qualification, use `retain_service_vehicle.py` with explicit model/render/
+projection/inspection/flash/packed/config arguments, revision and all constructor
+paths. It retains final packed scene, clean/draft paint, source refs, mechanical
+proof and exact 4×2/orbit/contour/light review capture, preserving earlier bytes.
+Commit the required helpers/configs and all final assets, then verify from the
+Git index alone. Normal game builds consume GLBs without Blender.
+
+`verify_engine_wheel_motion.mjs NEW_OUTPUT OPTIONAL_CHECKOUT_ROOT` runs every
+latest real GLB through `CarMeshAsset`, checking all declared corner/middle wheels
+and per-node radius against forward/reverse/zero/absolute phases. Pair it with
+`verify_engine_vehicles.mjs` for actual GPU visible pixels, per-draw reset,
+simulation isolation, lazy load/failure/disabled sprite fallback and disposal.
+Fixed probes use static Vite serving with no HMR watcher to avoid scanning local
+scratch trees. Workshop's manifest scan is limited to its declared entry HTML;
+compiler and normal-Chromium identities still verify every earlier candidate.

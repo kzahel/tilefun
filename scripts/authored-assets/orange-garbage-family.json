@@ -1,0 +1,236 @@
+{
+  "schema": "tilefun-garbage-truck-family-v1",
+  "vehicle": "garbage-truck-orange",
+  "family": "garbage-truck",
+  "atlasCell": 160,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -59,
+    "rear": 59,
+    "halfWidth": 19,
+    "base": 8
+  },
+  "cab": {
+    "rear": -28,
+    "front": -57,
+    "roof": 66,
+    "halfWidth": 19,
+    "screenTop": 66,
+    "screenBottom": 30
+  },
+  "container": {
+    "front": -22,
+    "rear": 35,
+    "roof": 76,
+    "sideTop": 69,
+    "halfWidth": 19,
+    "roofHalfWidth": 17,
+    "base": 14
+  },
+  "loader": {
+    "front": 35,
+    "rear": 59,
+    "roof": 76,
+    "rearTop": 61,
+    "halfWidth": 19,
+    "pivot": [35, 0, 69],
+    "mouthTop": 38,
+    "mouthBottom": 13,
+    "mouthHalfWidth": 14
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -31.5,
+      "radius": 9.5,
+      "trackHalfWidth": 21.5,
+      "tireWidth": 3,
+      "hubRadius": 4.1,
+      "steering": true,
+      "paintRadii": [9.5, 7],
+      "centers": {
+        "east": [99.5, 74.5],
+        "west": [28.5, 74.5]
+      }
+    },
+    {
+      "id": "M",
+      "x": 11.5,
+      "radius": 6.5,
+      "trackHalfWidth": 16.3,
+      "tireWidth": 3,
+      "hubRadius": 3,
+      "steering": false,
+      "paintRadii": [6.5, 4],
+      "centers": {
+        "east": [56.5, 71.5],
+        "west": [71.5, 71.5]
+      }
+    },
+    {
+      "id": "R",
+      "x": 27.5,
+      "radius": 6.5,
+      "trackHalfWidth": 16.3,
+      "tireWidth": 3,
+      "hubRadius": 3,
+      "steering": false,
+      "paintRadii": [6.5, 4],
+      "centers": {
+        "east": [40.5, 71.5],
+        "west": [87.5, 71.5]
+      }
+    }
+  ],
+  "beacon": {
+    "center": [-43, -9, 66.6],
+    "radius": 2.4,
+    "height": 6
+  },
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 60,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [68, 83.33],
+      "status": "Three measured wheel centers; front cab roof and container silhouette fit"
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 60,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [60, 83.33],
+      "status": "Opposite side owns its own controls and loader paint"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 45,
+      "horizontalScale": 1,
+      "verticalStretch": 0.9,
+      "origin": [64, 90],
+      "status": "Independent rear-facing roof/loader hypothesis"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 65,
+      "horizontalScale": 1,
+      "verticalStretch": 0.9,
+      "origin": [64, 79],
+      "status": "Front roof, windshield and rear body length hypothesis"
+    }
+  },
+  "maxCenterErrorPixels": 2,
+  "floorMargin": 0.75,
+  "notes": [
+    "New six-wheel family with tandem rear axles and independently owned opposite-side paint.",
+    "Observed smaller rear caps use smaller circular wheels and inset rear tracks; physical dimensions remain diagnostic, not gameplay colliders.",
+    "Rear loader is a separate hinge assembly with an actual recessed mouth and diagonal braces; animated clearance is unqualified.",
+    "One amber warning beacon uses the existing isolated lens effect contract. Repeated opposite-view lamp placement is a source contradiction; south/west reverse a fixed physical lamp.",
+    "Source cab roof and container projection are stylized; hidden faces and roof cleanup are explicit palette inferences.",
+    "Independent orange source owner; 34 west cab-edge alpha pixels differ from green and require an explicit cab-edge fit, not a recolor bypass.",
+    "West crop has a measured four-pixel left registration; lower west cab edge extends one model unit at z8..30. Other three own silhouettes equal green after trimming; this is independent fitting, not strict recolor eligibility.",
+    "Unseen container-front palette uses orange source tones, never green-template colors.",
+    "East crop is independently registered four pixels right of green; wheel measurements and UV paint use that origin."
+  ],
+  "landmarks": {
+    "east": [
+      {
+        "world": [-57, -19, 66],
+        "pixel": [125, 12],
+        "feature": "cab roof far front corner"
+      },
+      {
+        "world": [-57, 19, 66],
+        "pixel": [125, 43],
+        "feature": "cab roof near front corner"
+      },
+      {
+        "world": [-22, -17, 76],
+        "pixel": [90, 8],
+        "feature": "container far roof front corner"
+      },
+      {
+        "world": [59, -17, 61],
+        "pixel": [9, 13],
+        "feature": "loader far roof rear corner"
+      }
+    ],
+    "north": [
+      {
+        "world": [-57, -19, 66],
+        "pixel": [5, 11],
+        "feature": "visible cab roof far corner"
+      },
+      {
+        "world": [59, 14, 38],
+        "pixel": [38, 104],
+        "feature": "loading mouth top right"
+      },
+      {
+        "world": [59, -14, 13],
+        "pixel": [10, 120],
+        "feature": "loading mouth sill left"
+      }
+    ],
+    "south": [
+      {
+        "world": [-28, 19, 66],
+        "pixel": [5, 76],
+        "feature": "cab roof rear left"
+      },
+      {
+        "world": [-57, -19, 66],
+        "pixel": [43, 101],
+        "feature": "windshield top right"
+      },
+      {
+        "world": [-59, 19, 30],
+        "pixel": [5, 114],
+        "feature": "windshield bottom left"
+      },
+      {
+        "world": [-59, -19, 6],
+        "pixel": [43, 125],
+        "feature": "front bumper right"
+      }
+    ],
+    "west": [
+      {
+        "world": [-57, 19, 66],
+        "pixel": [3, 12],
+        "feature": "cab roof far front corner"
+      },
+      {
+        "world": [-57, -19, 66],
+        "pixel": [3, 43],
+        "feature": "cab roof near front corner"
+      },
+      {
+        "world": [-22, 17, 76],
+        "pixel": [38, 8],
+        "feature": "container far roof front corner"
+      },
+      {
+        "world": [59, 17, 61],
+        "pixel": [119, 13],
+        "feature": "loader far roof rear corner"
+      }
+    ]
+  },
+  "sourceFamily": {
+    "base": "art-source/vehicle-models/garbage-truck-green/v1",
+    "rawOriginDeltas": {
+      "east": [4, 0],
+      "west": [-4, 0],
+      "north": [0, 0],
+      "south": [0, 0]
+    },
+    "westAlphaExceptions": 34,
+    "westExceptionBounds": [4, 45, 9, 77]
+  }
+}

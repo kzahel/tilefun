@@ -15,7 +15,9 @@ class RetainedBundleTests(unittest.TestCase):
                           ('police-car','v1'),('fire-truck-ladder-1','v1'),('fire-truck-ladder-1','v2'),
                           ('garbage-truck-green','v1'),('compact-3','v1'),('compact-5','v1'),('compact-6','v1')] +
                          [(f'unindexed-sedan-{color}', 'v1') for color in ['red','beige','cyan','orange','silver','olive','dark']] +
-                         [(f'bus-{number}', 'v1') for number in range(1,7)])
+                         [(f'bus-{number}', 'v1') for number in range(1,7)] +
+                         [('sedan-12' if number == 12 else f'car-{number}', 'v1') for number in range(7,27)] +
+                         [('garbage-truck-orange','v1'),('fire-truck-ladder-2','v1'),('ambulance','v3'),('police-car','v2')])
 
     def test_tandem_axle_cannot_disappear_from_the_declared_wheel_set(self):
         source=ROOT/'art-source/vehicle-models/garbage-truck-green/v1'

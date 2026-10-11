@@ -13,6 +13,8 @@ export interface SpriteItem {
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
   emergencyFlash?: number;
+  emergencyColors?: readonly [string, string];
+  emergencySide?: number;
   emergencyHeight?: number;
   emergencyForward?: number;
   emergencyHeading?: number;

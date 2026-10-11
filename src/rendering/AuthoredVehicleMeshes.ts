@@ -42,10 +42,22 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
       lateralScale: 1,
     };
   }),
+  ...(
+    ["police-car", "garbage-truck-green", "garbage-truck-orange", "fire-truck-ladder-2"] as const
+  ).map((vehicle) => {
+    const revision = vehicle === "police-car" ? "v2" : "v1";
+    return {
+      vehicle,
+      assetId: `${vehicle}-authored-${revision}`,
+      path: `assets/models/vehicles/${vehicle}-${revision}.glb`,
+      radius: vehicle === "fire-truck-ladder-2" ? 192 : vehicle === "police-car" ? 80 : 144,
+      lateralScale: 1,
+    };
+  }),
   {
     vehicle: "ambulance",
-    assetId: "ambulance-authored-v2",
-    path: "assets/models/vehicles/ambulance-v2.glb",
+    assetId: "ambulance-authored-v3",
+    path: "assets/models/vehicles/ambulance-v3.glb",
     radius: 112,
     lateralScale: 1,
   },

@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { expect, it, vi } from "vitest";
+import { required } from "../art/ArtCatalog.js";
 import { CarMeshAsset } from "./CarMeshAsset.js";
 
 function fixture() {
@@ -68,3 +69,64 @@ it("applies absolute rigid wheel travel without moving pivots, then frees shared
   expect(freeMap).toHaveBeenCalledTimes(1);
   expect(asset.object.children).toHaveLength(0);
 });
+
+it("rolls every six-wheel axle by its own radius and resets absolute phases without moving body or pivots", () => {
+  const { scene, material } = fixture();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(40, 10, 20), material);
+  body.name = "Body";
+  scene.add(body);
+  for (const [i, id] of ["ML", "MR"].entries()) {
+    const steer = new THREE.Group();
+    steer.name = `Wheel_${id}_Steer`;
+    steer.position.set(0, 6.5, i ? 8 : -8);
+    const roll = new THREE.Group();
+    roll.name = `Wheel_${id}_Roll`;
+    roll.userData = { wheel_radius: 6.5, roll_axis_gltf: [0, 0, -1] };
+    roll.quaternion.setFromAxisAngle(new THREE.Vector3(1, 0, 0), 0.2);
+    roll.add(new THREE.Mesh(new THREE.BoxGeometry(13, 13, 2), material));
+    steer.add(roll);
+    scene.add(steer);
+  }
+  const rolls = ["FL", "FR", "ML", "MR", "RL", "RR"].map((id) =>
+    required(scene.getObjectByName(`Wheel_${id}_Roll`)),
+  );
+  const rest = rolls.map((node) => node.quaternion.clone());
+  const asset = new CarMeshAsset(scene, 1);
+  asset.object.updateMatrixWorld(true);
+  const centers = rolls.map((node) => node.getWorldPosition(new THREE.Vector3()));
+  const bodyRest = body.matrixWorld.clone();
+  for (const distance of [12, -12, 0, 7, 0]) {
+    asset.setTravel(distance);
+    asset.object.updateMatrixWorld(true);
+    rolls.forEach((node, i) => {
+      const phase = new THREE.Quaternion().setFromAxisAngle(
+        new THREE.Vector3(0, 0, -1),
+        -distance / node.userData.wheel_radius,
+      );
+      expect(node.quaternion.angleTo(required(rest[i]).clone().multiply(phase))).toBeLessThan(1e-7);
+      expect(
+        node.getWorldPosition(new THREE.Vector3()).distanceTo(required(centers[i])),
+      ).toBeLessThan(1e-8);
+    });
+    expect(body.matrixWorld.equals(bodyRest)).toBe(true);
+  }
+  asset.dispose();
+});
+it.each(["radius", "parent", "duplicate"])(
+  "rejects malformed additional wheel %s and disposes shared resources",
+  (fault) => {
+    const { scene, material, map } = fixture();
+    const roll = required(scene.getObjectByName("Wheel_FL_Roll")).clone();
+    roll.name = fault === "duplicate" ? "Wheel_FL_Roll" : "Wheel_ML_Roll";
+    roll.userData.wheel_radius = fault === "radius" ? 0 : 6.5;
+    const steer = new THREE.Group();
+    steer.name = fault === "parent" ? "Wrong" : "Wheel_ML_Steer";
+    steer.add(roll);
+    scene.add(steer);
+    const freeMaterial = vi.spyOn(material, "dispose"),
+      freeMap = vi.spyOn(map, "dispose");
+    expect(() => new CarMeshAsset(scene)).toThrow(/authored car wheel/);
+    expect(freeMaterial).toHaveBeenCalledTimes(1);
+    expect(freeMap).toHaveBeenCalledTimes(1);
+  },
+);

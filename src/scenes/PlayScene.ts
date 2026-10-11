@@ -15,7 +15,12 @@ import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { occupiedVehicle } from "../traffic/Driving.js";
-import { isEmergencyVehicle } from "../traffic/EmergencyVehicle.js";
+import {
+  hasVehicleLights,
+  isEmergencyVehicle,
+  isWarningVehicle,
+  vehicleLightState,
+} from "../traffic/EmergencyVehicle.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
@@ -266,7 +271,8 @@ export class PlayScene implements GameScene {
     }
     gc.touchButtons.driving = !!vehicle;
     gc.touchButtons.emergency = !!vehicle && isEmergencyVehicle(vehicle);
-    gc.touchButtons.emergencyState = vehicle?.emergencyState ?? 2;
+    gc.touchButtons.warning = !!vehicle && isWarningVehicle(vehicle);
+    gc.touchButtons.emergencyState = vehicle ? vehicleLightState(vehicle) : 2;
     const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
     gc.touchButtons.enabled = !inputLocked;
     if (inputLocked) gc.touchButtons.reset();
@@ -299,10 +305,10 @@ export class PlayScene implements GameScene {
         ) ?? manual;
     const sirenHeld = !inputLocked && gc.actions.isHeld("throw");
     const styleHeld = !inputLocked && gc.actions.isHeld("jump");
-    if (vehicle && isEmergencyVehicle(vehicle)) {
+    if (vehicle && hasVehicleLights(vehicle)) {
       if (sirenHeld && !this.emergencyHeld)
         gc.transport.send({ type: "vehicle-emergency", action: "toggle" });
-      if (styleHeld && !this.styleHeld)
+      if (isEmergencyVehicle(vehicle) && styleHeld && !this.styleHeld)
         gc.transport.send({ type: "vehicle-emergency", action: "style" });
     }
     this.emergencyHeld = sirenHeld;

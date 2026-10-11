@@ -22985,6 +22985,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/rendering/collectScene.ts:186"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/collectScene.ts:196"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/traffic/Vehicle.ts:48"
         }
       ]
@@ -23004,10 +23012,6 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/EmergencyVehicle.ts:5"
         }
       ]
     },
@@ -23026,6 +23030,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/EmergencyVehicle.ts:25"
         }
       ]
     },
@@ -23044,6 +23052,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/EmergencyVehicle.ts:26"
         }
       ]
     },
@@ -23062,18 +23074,6 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:178"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:179"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/EmergencyVehicle.ts:5"
         }
       ]
     },
@@ -23949,7 +23949,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:784"
+          "source": "src/scenes/PlayScene.ts:790"
         },
         {
           "system": "Gameplay",

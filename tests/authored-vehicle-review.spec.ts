@@ -1,6 +1,10 @@
 import { expect, test } from "@playwright/test";
 
 for (const { asset, revision, name } of [
+  { asset: "ambulance", revision: "v3", name: "Ambulance" },
+  { asset: "police-car", revision: "v2", name: "Police car" },
+  { asset: "garbage-truck-orange", revision: "v1", name: "Orange garbage truck" },
+  { asset: "fire-truck-ladder-2", revision: "v1", name: "Fire truck · raised ladder" },
   { asset: "car-7", revision: "v1", name: "Car 7" },
   { asset: "car-8", revision: "v1", name: "Car 8" },
   { asset: "car-9", revision: "v1", name: "Car 9" },

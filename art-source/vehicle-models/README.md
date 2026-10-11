@@ -4,7 +4,9 @@ These are the exact final assets from the Blender authoring work. They are track
 deliverables; older intermediate models and scratch galleries remain ignored.
 
 The [vehicle porting checklist](../../docs/topics/vehicle-model-porting.md) tracks
-all 45 source sets, their model/engine status and the next authoring work.
+all 45 source sets, their model/engine status and exact production art review.
+All 45 own models are integrated; 49 exact retained revisions preserve earlier
+checkpoints. Normal builds consume these committed GLBs.
 
 | Vehicle | Blender/texture/source bundle | Self-contained runtime GLB |
 | --- | --- | --- |
@@ -26,6 +28,10 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Police car | [v1](police-car/v1/) | [police-car-v1.glb](../../public/assets/models/vehicles/police-car-v1.glb) |
 | Fire truck, stowed ladder | [v1](fire-truck-ladder-1/v1/) | [fire-truck-ladder-1-v1.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v1.glb) |
 | Fire truck wheel alignment | [v2](fire-truck-ladder-1/v2/) | [fire-truck-ladder-1-v2.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v2.glb) |
+| Orange garbage truck | [v1](garbage-truck-orange/v1/) | [garbage-truck-orange-v1.glb](../../public/assets/models/vehicles/garbage-truck-orange-v1.glb) |
+| Fire truck, raised ladder | [v1](fire-truck-ladder-2/v1/) | [fire-truck-ladder-2-v1.glb](../../public/assets/models/vehicles/fire-truck-ladder-2-v1.glb) |
+| Ambulance floor clearance | [v3](ambulance/v3/) | [ambulance-v3.glb](../../public/assets/models/vehicles/ambulance-v3.glb) |
+| Police floor clearance | [v2](police-car/v2/) | [police-car-v2.glb](../../public/assets/models/vehicles/police-car-v2.glb) |
 | Green garbage truck | [v1](garbage-truck-green/v1/) | [garbage-truck-green-v1.glb](../../public/assets/models/vehicles/garbage-truck-green-v1.glb) |
 | Bus 1 | [v1](bus-1/v1/) | [bus-1-v1.glb](../../public/assets/models/vehicles/bus-1-v1.glb) |
 | Bus 2 | [v1](bus-2/v1/) | [bus-2-v1.glb](../../public/assets/models/vehicles/bus-2-v1.glb) |
@@ -173,3 +179,13 @@ Original vehicle art is Modern Exteriors by LimeZu. See
 [asset credits](../../public/assets/SOURCES.md), the
 [authoring workflow](../../scripts/authored-assets/README.md) and
 [retention record](../../docs/tactical/106-retained-vehicle-model-bundles.md).
+
+Final service bundles additionally retain exact whole-body neutral-roll evidence
+with GLB hashes and deliberate body-triangle collision rejection. Floor-only
+revisions include `floor-revision.json`, preserving the prior source scene as a
+tracked, pinned dependency. Never replace the previous scene or paint. Every
+latest model passes the declared-wheel cylinder proof; the general rig probe's
+legacy floor status alone is insufficient for this qualification. Commit the new
+constructor/configuration/probe dependencies alongside the final assets, and use
+`verify_all_vehicle_clearance.py` plus `verify_engine_wheel_motion.mjs` from a
+tracked-only checkout. Arbitrary steering and equipment motion remain unqualified.

@@ -294,3 +294,25 @@ with a bounded 300-second simulation window. Forty-four families now complete
 this production-road roof-riding test; raised-ladder traffic remains excluded.
 The outer boulevard fixes a wide-vehicle dead end exposed by the larger grid,
 without changing traffic AI, vehicle bounds or promoted art.
+
+## Complete authored vehicle bank
+
+[122](../tactical/122-complete-vehicle-port.md) completes all 45 own-model
+registrations without changing the approved physical source bank. Shared game/lab
+presentation rolls every declared wheel by `-distance/radius`, including the two
+garbage middle axles; steering is neutral and ladder/loader equipment stays at its
+authored rest pose. Every latest visual body clears actual tire/hub rotation
+cylinders at neutral steering. These visual proofs do not change collision proxies.
+
+Ambulance, police and both fire trucks accept driver-only persistent siren state
+0–5: enable bit plus lights-only/EU/US style. Green and orange garbage accept only
+0/1 silent amber beacon state; style commands have no effect. B/touch toggles the
+lights; Space selects a siren style only on siren vehicles. Both Canvas and GPU
+sprite fallback keep colored flashing, and loaded GLBs pulse named lens materials.
+Audio never creates a siren for warning trucks. Wrong drivers/editor mode cannot
+change state; saved invalid state is rejected before publishing any vehicle.
+Explicit raised-ladder vehicles can save/restore and drive in the lab; automatic
+traffic still selects the existing 44 admitted source families.
+
+Next: exact production model art review and gameplay playtesting; any animated
+steering or equipment motion requires its own clearance qualification.

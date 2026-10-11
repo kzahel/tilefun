@@ -3,8 +3,9 @@
 Topic: 3d-assets
 Status: car projection and orthographic inspection delivered; top-view appearance
 unresolved. Authored Blender/UV compact-car pilot delivered for inspection.
-Reusable offline fitting/projection/inspection tools delivered; family-template
-fidelity remains open.
+Reusable offline fitting/projection/inspection tools delivered. All 45 vehicles
+have retained own Blender/UV source bundles and engine integrations (49 revisions);
+exact production art review and source-projection fidelity remain open.
 Fixed-view GPU gameplay integration is delivered and is the main-game default;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
@@ -24,8 +25,7 @@ checkpoint; ambulance v1's authoring is recorded in
 its light refinement and actual GLB flash proof are recorded in
 [116](../tactical/116-ambulance-beacons-and-light-tags.md).
 Police and stowed fire truck v1 now await inspection in
-[117](../tactical/117-police-and-fire-truck-models.md); the raised ladder remains
-queued. Fire v2 fixes wheel placement, floor intersections and tire UVs in
+[117](../tactical/117-police-and-fire-truck-models.md); the raised ladder is completed in the final [122](../tactical/122-complete-vehicle-port.md) checkpoint. Fire v2 fixes wheel placement, floor intersections and tire UVs in
 [118](../tactical/118-fire-truck-wheel-alignment.md). Six source sets now have
 retained models across eight exact revisions at that checkpoint. Green garbage
 truck v1 now adds a seventh source set/ninth exact revision in
@@ -67,6 +67,20 @@ are rejected before retention. Nonzero steering and exact production art review
 remain open. Opposing roof highlights and camera-depth differences are explicit
 fitting limits. Orange garbage and raised fire remain the final two new models.
 
+
+The final service checkpoint in [122](../tactical/122-complete-vehicle-port.md)
+brings the queue to **45 retained sets / 49 immutable revisions / 45 own-model
+integrations**. Orange garbage has source-owned paint, explicit opposite crop
+registration and six independent wheels. The raised fire model preserves its own
+18-degree ladder rest pose; arbitrary hinge motion stays unqualified. Ambulance
+v3/police v2 open only their level floor at wheel bounds while retaining original
+floor perimeter/UVs, atlas, visible geometry and source cameras. Whole-body actual
+GLB cylinder proofs pass every latest vehicle through all neutral roll angles;
+actual shared engine probes roll all 184 wheels by their exported radii.
+Siren controls cover ambulance, police and both fire trucks; both garbage warning
+beacons toggle silently. Packed editable scenes, own unused UV drafts, clean
+atlases, exact GLBs and 4×2/novel/contour/light reviews are tracked; normal builds
+consume committed assets. Earlier snapshots remain unchanged.
 
 ## Investigation evidence storage
 

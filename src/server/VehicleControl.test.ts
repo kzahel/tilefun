@@ -252,7 +252,7 @@ it("saves a driven train through a bend and holds the open route end until rever
   }
 }, 15000);
 
-it.each(["ambulance", "fire-truck-ladder-1"])(
+it.each(["ambulance", "fire-truck-ladder-1", "police-car", "fire-truck-ladder-2"])(
   "only the %s driver switches persistent emergency state across binary replicas and reload",
   async (model) => {
     const input = recipe();
@@ -332,3 +332,31 @@ it("boost shares authority/prediction motion, remains normalized and brakes on r
     await s.close();
   }
 });
+
+it.each(["garbage-truck-green", "garbage-truck-orange"])(
+  "only the %s driver toggles a silent beacon; style is ignored and reload preserves it",
+  async (model) => {
+    const input = recipe();
+    required(input.traffic?.[0]).model = model;
+    const s = await ScenarioSession.create(input);
+    try {
+      const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+      const other = new PlayerSession("spectator", s.realm.entityManager.spawn(createPlayer(0, 0)));
+      s.realm.vehicles.emergency(other, "toggle");
+      expect(car.entity.emergencyState).toBeUndefined();
+      s.realm.vehicles.enter(s.player, car.entity.id);
+      s.realm.vehicles.emergency(s.player, "toggle");
+      expect(car.entity.emergencyState).toBe(1);
+      s.realm.vehicles.emergency(s.player, "style");
+      expect(car.entity.emergencyState).toBe(1);
+      await s.reload();
+      const restored = required(s.realm.traffic?.states.get(required(s.handles.car)));
+      expect(restored.entity.emergencyState).toBe(1);
+      s.realm.vehicles.exit(s.player);
+      s.realm.vehicles.emergency(s.player, "toggle");
+      expect(restored.entity.emergencyState).toBe(1);
+    } finally {
+      await s.close();
+    }
+  },
+);

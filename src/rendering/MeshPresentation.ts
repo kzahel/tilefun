@@ -12,7 +12,7 @@ export interface MeshInstance {
   readonly presentationTime?: number;
 }
 export const FIRE_TRUCK_MESH = "fire-truck-ladder-1-authored-v2";
-export const AMBULANCE_MESH = "ambulance-authored-v2";
+export const AMBULANCE_MESH = "ambulance-authored-v3";
 export const COMPACT_CAR_MESH = "compact-1-authored-v7";
 /** Shared conservative sphere for culling and the isolated body target. */
 export function vehicleMeshRadius(assetId: string): number {

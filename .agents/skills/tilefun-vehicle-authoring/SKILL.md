@@ -165,3 +165,24 @@ and pins the exact GLB hash in `body-wheel-clearance.json`. A passing main-floor
 or independent-wheel probe alone does not establish whole-body clearance.
 Keep the bounded own roof/glass/deck UV regions and geometric window frames;
 do not transfer cameras or hidden paint merely because source alpha matches.
+
+
+For final service variants, use `author_service_vehicle.py` with the independent
+orange-garbage or raised-fire config. Preserve explicit opposite crop registration,
+source paint exceptions, six wheels and the raised ladder's authored rest pose.
+For floor-only refinements, use `prepare_floor_revision.py` and
+`service-floor-revisions.json`; preserve prior scene hashes, original perimeter
+and barycentrically interpolated floor UVs. Keep all visible geometry/paint fixed.
+Run `verify_vehicle_body_clearance.py` on the exact new exports and named-lens
+`verify_service_lights.mjs` before `retain_service_vehicle.py`. Never identify
+light phase by traversal order. Commit exact final bundles and constructor/config
+inputs; source scripts alone cannot replace them.
+
+Whole-bank qualification uses `verify_all_vehicle_clearance.py` in Blender and
+`verify_engine_wheel_motion.mjs` through the real shared engine. Resolve declared
+wheel children instead of assuming a tire naming convention or four axles. Every
+exported corner/middle wheel must roll by its own radius with absolute reset,
+without moving fixed body/equipment. Neutral roll proof is separate from steering
+or animated hinge clearance; runtime keeps those poses at rest. Four siren types
+and two silent warning types have distinct persistent-state limits; asset tags
+must be paired with driver authority, touch/keyboard, save/replica and audio tests.

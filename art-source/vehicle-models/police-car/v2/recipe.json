@@ -1,0 +1,405 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "police-car",
+  "family": "police-sedan",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    80,
+    80
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/police-car/v2/car.blend",
+    "sha256": "9071aaa1e30d6ba4ed69bbde29a6ce18404f505ab4e12194f0591b79ae4050c3"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        1792,
+        1744,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        45
+      ],
+      "metadata": {
+        "name": "Police car \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "police",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          40,
+          45
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "86bccfa4-3bef-4504-9c3c-4ecf4547628a",
+        "createdAt": "2026-10-03T10:48:54.021Z",
+        "candidateFingerprint": "8142493cacb5541737ec2400084216143b20253cdfe46a504f75ab036fa46dbe",
+        "metadataFingerprint": "b3c7f5964dc6027a1c51404b4971820239b76ec83df90a90cdddef84469f3dc7"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 55,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          40,
+          52
+        ],
+        "status": "Police source wheel contacts, roof and hood landmark hypothesis"
+      },
+      "sourceSha256": "f46750123b5429cd4c111d7c29eb355880c46607a172ad08ae1be4839fc442e5"
+    },
+    {
+      "id": "west",
+      "rect": [
+        1712,
+        1745,
+        80,
+        47
+      ],
+      "anchor": [
+        40,
+        44
+      ],
+      "metadata": {
+        "name": "Police car \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "police",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          40,
+          44
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "76f22630-ae74-4db0-a88f-27f58e1e6935",
+        "createdAt": "2026-10-03T10:48:54.466Z",
+        "candidateFingerprint": "ad7f87afe484c73de10486e8d1d04fd09df45994bb4ce7d51fa4a9d2ea3bb548",
+        "metadataFingerprint": "a748963cda65ef2b6b91ea04f82eb66e6c947a91e345d37481270ada363758ad"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 55,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          40,
+          52.5
+        ],
+        "status": "Independent police west source ownership; tighter approved crop"
+      },
+      "sourceSha256": "6c40c59a2420e6e7ced86cdc8c394c3cfb1ae9caa13645ac1e8681e6c4b7e1dc"
+    },
+    {
+      "id": "north",
+      "rect": [
+        1904,
+        1744,
+        32,
+        80
+      ],
+      "anchor": [
+        16,
+        73
+      ],
+      "metadata": {
+        "name": "Police car \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "police",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          16,
+          73
+        ],
+        "footprint": [
+          -13,
+          -54,
+          26,
+          54
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "sourceApproval": {
+        "id": "dfa5f408-5b0e-48f4-a613-d295e6564173",
+        "createdAt": "2026-10-03T10:48:53.876Z",
+        "candidateFingerprint": "520146fa62146a15f1f79be03857a52ad3ee1323ad5a55a59a631d57f6239de1",
+        "metadataFingerprint": "834d5b1d109db6f3b8a171312c0af4a461b7b36d81295242847bea74f92f3cb2"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        24,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          40,
+          44
+        ],
+        "status": "Police rear width, roof bar and bumper hypothesis"
+      },
+      "sourceSha256": "49355af487e2971edeeef99e3937055b64a89469cd0a7b6bbda1d8a2de05d62f"
+    },
+    {
+      "id": "south",
+      "rect": [
+        1872,
+        1744,
+        32,
+        80
+      ],
+      "anchor": [
+        16,
+        73
+      ],
+      "metadata": {
+        "name": "Police car \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "police",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          16,
+          73
+        ],
+        "footprint": [
+          -13,
+          -54,
+          26,
+          54
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "sourceApproval": {
+        "id": "a4ed510c-b5f6-419c-86b9-b3232c3cb9c9",
+        "createdAt": "2026-10-03T10:48:54.291Z",
+        "candidateFingerprint": "e7b607136781851da5673259b5ef494bc8ed9d5237cdf0ecfbe2fc0088f7f927",
+        "metadataFingerprint": "a30d7c225067d595ae2e3db862fe9fee4dc60748a178c478f1ae68e3552981de"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        24,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          40,
+          44
+        ],
+        "status": "Police front width, windshield and bumper hypothesis"
+      },
+      "sourceSha256": "3d8f4b523edef17e780e88c967047da627d7a122d851c0e7fc855f47759e0194"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1024,
+    "material": "police-car palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Sedan-east": [
+        "east"
+      ],
+      "Fender--24-east": [
+        "east"
+      ],
+      "Fender-24-east": [
+        "east"
+      ],
+      "Sedan-west": [
+        "west"
+      ],
+      "Fender--24-west": [
+        "west"
+      ],
+      "Fender-24-west": [
+        "west"
+      ],
+      "Roof": [
+        "north"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Rear-window-glass": [
+        "north"
+      ],
+      "Rear-window-frame": [],
+      "Hood": [
+        "south"
+      ],
+      "Trunk": [
+        "north"
+      ],
+      "Roof-shoulder-east": [],
+      "Roof-shoulder-west": [],
+      "Front-fascia": [
+        "south"
+      ],
+      "Front-corner--1": [
+        "south"
+      ],
+      "Front-corner-1": [
+        "south"
+      ],
+      "Rear-fascia": [
+        "north"
+      ],
+      "Rear-corner--1": [
+        "north"
+      ],
+      "Rear-corner-1": [
+        "north"
+      ],
+      "Underfloor": [],
+      "Lightbar-housing": [],
+      "Police-blue-base": [],
+      "Police-blue-lens": [],
+      "Police-red-base": [],
+      "Police-red-lens": [],
+      "Mirror--1": [],
+      "Mirror-1": [],
+      "Tire_FL": [
+        "east"
+      ],
+      "Hub_FL": [
+        "east"
+      ],
+      "Tire_FR": [
+        "west"
+      ],
+      "Hub_FR": [
+        "west"
+      ],
+      "Tire_RL": [
+        "east"
+      ],
+      "Hub_RL": [
+        "east"
+      ],
+      "Tire_RR": [
+        "west"
+      ],
+      "Hub_RR": [
+        "west"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

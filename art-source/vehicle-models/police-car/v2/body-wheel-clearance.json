@@ -1,0 +1,91 @@
+{
+  "assetId": "police-car",
+  "revision": "v2",
+  "glbSha256": "6a46dd5867f8fd17bc9ec20af7c059c59153973774d6d7ea775905b32ccad892",
+  "clearance": [
+    {
+      "part": "Hub_FL",
+      "gap": 8.916351009903483,
+      "nearestBody": "Mirror--1",
+      "radius": 2.1000003814697266,
+      "axialBounds": [
+        -14.75,
+        -14.34999942779541
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.48489351045008977,
+      "nearestBody": "Fender--24-east",
+      "radius": 4.400000835069187,
+      "axialBounds": [
+        -14.300000190734863,
+        -12.09999942779541
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": 8.916351009903483,
+      "nearestBody": "Mirror-1",
+      "radius": 2.1000003814697266,
+      "axialBounds": [
+        14.34999942779541,
+        14.75
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.48489351045008977,
+      "nearestBody": "Fender--24-west",
+      "radius": 4.400000835069187,
+      "axialBounds": [
+        12.09999942779541,
+        14.300000190734863
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 41.2169708651238,
+      "nearestBody": "Mirror--1",
+      "radius": 2.1000003814697266,
+      "axialBounds": [
+        -14.75,
+        -14.34999942779541
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.48489351045008977,
+      "nearestBody": "Fender-24-east",
+      "radius": 4.400000835069187,
+      "axialBounds": [
+        -14.300000190734863,
+        -12.09999942779541
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 41.2169708651238,
+      "nearestBody": "Mirror-1",
+      "radius": 2.1000003814697266,
+      "axialBounds": [
+        14.34999942779541,
+        14.75
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.48489351045008977,
+      "nearestBody": "Fender-24-west",
+      "radius": 4.400000835069187,
+      "axialBounds": [
+        12.09999942779541,
+        14.300000190734863
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

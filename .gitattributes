@@ -50,3 +50,16 @@ scripts/authored-assets/large-car-a-family.json -text
 scripts/authored-assets/large-car-b-family.json -text
 scripts/authored-assets/large-car-c-family.json -text
 scripts/authored-assets/verify_body_wheel_envelopes.py text eol=lf
+
+# Final service constructors and qualification receipts preserve portable bytes.
+scripts/authored-assets/author_service_vehicle.py text eol=lf
+scripts/authored-assets/open_retained_floor.py text eol=lf
+scripts/authored-assets/prepare_floor_revision.py text eol=lf
+scripts/authored-assets/retain_service_vehicle.py text eol=lf
+scripts/authored-assets/verify_vehicle_body_clearance.py text eol=lf
+scripts/authored-assets/verify_service_lights.mjs text eol=lf
+scripts/authored-assets/verify_engine_wheel_motion.mjs text eol=lf
+scripts/authored-assets/orange-garbage-family.json -text
+scripts/authored-assets/raised-fire-family.json -text
+scripts/authored-assets/service-floor-revisions.json -text
+scripts/authored-assets/verify_all_vehicle_clearance.py text eol=lf

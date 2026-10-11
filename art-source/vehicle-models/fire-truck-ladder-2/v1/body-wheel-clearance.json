@@ -1,0 +1,91 @@
+{
+  "assetId": "fire-truck-ladder-2",
+  "revision": "v1",
+  "glbSha256": "f20ad0d505045656d563e1a57de65f8bf797b54b12bc09b8aa801c6a16b9a9a5",
+  "clearance": [
+    {
+      "part": "Hub_FL",
+      "gap": null,
+      "nearestBody": null,
+      "radius": 4.400001525878906,
+      "axialBounds": [
+        -25.05000114440918,
+        -24.649999618530273
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.4660889827594623,
+      "nearestBody": "Fender--35.5-west",
+      "radius": 10.500000536796579,
+      "axialBounds": [
+        -24.600000381469727,
+        -21.600000381469727
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": null,
+      "nearestBody": null,
+      "radius": 4.400001525878906,
+      "axialBounds": [
+        24.649999618530273,
+        25.05000114440918
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.4660889827594623,
+      "nearestBody": "Fender--35.5-east",
+      "radius": 10.500000536796579,
+      "axialBounds": [
+        21.600000381469727,
+        24.600000381469727
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": null,
+      "nearestBody": null,
+      "radius": 4.400001525878906,
+      "axialBounds": [
+        -25.05000114440918,
+        -24.649999618530273
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.4660889827594623,
+      "nearestBody": "Fender-40.5-west",
+      "radius": 10.500000536796579,
+      "axialBounds": [
+        -24.600000381469727,
+        -21.600000381469727
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": null,
+      "nearestBody": null,
+      "radius": 4.400001525878906,
+      "axialBounds": [
+        24.649999618530273,
+        25.05000114440918
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.4660889827594623,
+      "nearestBody": "Fender-40.5-east",
+      "radius": 10.500000536796579,
+      "axialBounds": [
+        21.600000381469727,
+        24.600000381469727
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

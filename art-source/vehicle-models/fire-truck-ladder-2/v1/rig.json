@@ -1,0 +1,208 @@
+{
+  "root": "CarRoot",
+  "body": "Body",
+  "units": "world pixels",
+  "forward": [
+    -1,
+    0,
+    0
+  ],
+  "up": [
+    0,
+    0,
+    1
+  ],
+  "rollAxisBlender": [
+    0,
+    1,
+    0
+  ],
+  "rollAxisGltf": [
+    0,
+    0,
+    -1
+  ],
+  "drivingRule": "angle=-signedForwardDistance/radius; forward is -X",
+  "wheels": [
+    {
+      "id": "FL",
+      "center": [
+        -35.5,
+        -23.1,
+        10.5
+      ],
+      "radius": 10.5,
+      "steering": true,
+      "steer": "Wheel_FL_Steer",
+      "roll": "Wheel_FL_Roll"
+    },
+    {
+      "id": "FR",
+      "center": [
+        -35.5,
+        23.1,
+        10.5
+      ],
+      "radius": 10.5,
+      "steering": true,
+      "steer": "Wheel_FR_Steer",
+      "roll": "Wheel_FR_Roll"
+    },
+    {
+      "id": "RL",
+      "center": [
+        40.5,
+        -23.1,
+        10.5
+      ],
+      "radius": 10.5,
+      "steering": false,
+      "steer": "Wheel_RL_Steer",
+      "roll": "Wheel_RL_Roll"
+    },
+    {
+      "id": "RR",
+      "center": [
+        40.5,
+        23.1,
+        10.5
+      ],
+      "radius": 10.5,
+      "steering": false,
+      "steer": "Wheel_RR_Steer",
+      "roll": "Wheel_RR_Roll"
+    }
+  ],
+  "steeringClearance": "unqualified",
+  "equipmentNodes": [
+    {
+      "name": "Ladder_Hinge",
+      "parent": "Body",
+      "location": [
+        68,
+        0,
+        59
+      ],
+      "extras": {
+        "tilefun_component": "ladder",
+        "hinge_axis_blender": [
+          0,
+          1,
+          0
+        ],
+        "hinge_axis_gltf": [
+          0,
+          0,
+          -1
+        ],
+        "clearance_status": "unqualified",
+        "rest_pose_degrees": 18
+      }
+    }
+  ],
+  "wheelWellFit": {
+    "schema": "tilefun-wheel-well-fit-v1",
+    "observations": [
+      {
+        "wheel": "FL",
+        "view": "west",
+        "camera": {
+          "azimuth": -90,
+          "elevation": 55,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            72,
+            97
+          ],
+          "status": "Independent west compartment lettering and fittings"
+        },
+        "projectedOuterCapCenter": [
+          36.5,
+          111.12858770782321
+        ],
+        "sourceCenter": [
+          36.5,
+          112.5
+        ],
+        "errorPixels": 1.3714122921767853
+      },
+      {
+        "wheel": "FR",
+        "view": "east",
+        "camera": {
+          "azimuth": 90,
+          "elevation": 55,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            72,
+            97
+          ],
+          "status": "Fire truck source axles, ladder and cab roof hypothesis"
+        },
+        "projectedOuterCapCenter": [
+          107.5,
+          111.12858770782321
+        ],
+        "sourceCenter": [
+          107.5,
+          112.5
+        ],
+        "errorPixels": 1.3714122921767853
+      },
+      {
+        "wheel": "RL",
+        "view": "west",
+        "camera": {
+          "azimuth": -90,
+          "elevation": 55,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            72,
+            97
+          ],
+          "status": "Independent west compartment lettering and fittings"
+        },
+        "projectedOuterCapCenter": [
+          112.5,
+          111.12858770782321
+        ],
+        "sourceCenter": [
+          112.5,
+          112.5
+        ],
+        "errorPixels": 1.3714122921767853
+      },
+      {
+        "wheel": "RR",
+        "view": "east",
+        "camera": {
+          "azimuth": 90,
+          "elevation": 55,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            72,
+            97
+          ],
+          "status": "Fire truck source axles, ladder and cab roof hypothesis"
+        },
+        "projectedOuterCapCenter": [
+          31.5,
+          111.12858770782321
+        ],
+        "sourceCenter": [
+          31.5,
+          112.5
+        ],
+        "errorPixels": 1.3714122921767853
+      }
+    ],
+    "maxCenterErrorPixels": 2,
+    "floorMesh": "Underfloor",
+    "floorMargin": 0.75,
+    "status": "Rest/roll alignment; steering clearance unqualified"
+  }
+}

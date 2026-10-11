@@ -1,0 +1,128 @@
+{
+  "schema": "tilefun-wheel-well-fit-v1",
+  "observations": [
+    {
+      "wheel": "FL",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          60,
+          83.33
+        ],
+        "status": "Opposite side owns its own controls and loader paint"
+      },
+      "sourceCenter": [
+        28.5,
+        98.5
+      ],
+      "errorPixels": 0.0014157129579217553
+    },
+    {
+      "wheel": "FR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          68,
+          83.33
+        ],
+        "status": "Three measured wheel centers; front cab roof and container silhouette fit"
+      },
+      "sourceCenter": [
+        99.5,
+        98.5
+      ],
+      "errorPixels": 0.0014157129579217553
+    },
+    {
+      "wheel": "ML",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          60,
+          83.33
+        ],
+        "status": "Opposite side owns its own controls and loader paint"
+      },
+      "sourceCenter": [
+        71.5,
+        95.5
+      ],
+      "errorPixels": 0.004747812636992421
+    },
+    {
+      "wheel": "MR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          68,
+          83.33
+        ],
+        "status": "Three measured wheel centers; front cab roof and container silhouette fit"
+      },
+      "sourceCenter": [
+        56.5,
+        95.5
+      ],
+      "errorPixels": 0.004747812636992421
+    },
+    {
+      "wheel": "RL",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          60,
+          83.33
+        ],
+        "status": "Opposite side owns its own controls and loader paint"
+      },
+      "sourceCenter": [
+        87.5,
+        95.5
+      ],
+      "errorPixels": 0.004747812636992421
+    },
+    {
+      "wheel": "RR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 60,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          68,
+          83.33
+        ],
+        "status": "Three measured wheel centers; front cab roof and container silhouette fit"
+      },
+      "sourceCenter": [
+        40.5,
+        95.5
+      ],
+      "errorPixels": 0.004747812636992421
+    }
+  ],
+  "floorMesh": "Underfloor",
+  "maxCenterErrorPixels": 2,
+  "status": "Measured rest/roll centers; steering and loader clearance unqualified"
+}

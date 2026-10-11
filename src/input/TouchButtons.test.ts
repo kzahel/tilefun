@@ -36,6 +36,17 @@ it("shows mouse-usable driving controls on desktop and releases boost on blur", 
   buttons.draw(ctx as unknown as CanvasRenderingContext2D);
   expect(ctx.fillText.mock.calls.map((call) => call[0])).toContain("US");
   expect(ctx.fillText.mock.calls.map((call) => call[0])).toContain("Siren On");
+  buttons.emergency = false;
+  buttons.warning = true;
+  buttons.emergencyState = 1;
+  ctx.fillText.mockClear();
+  buttons.draw(ctx as unknown as CanvasRenderingContext2D);
+  expect(ctx.fillText.mock.calls.map((call) => call[0])).toEqual([
+    "Beacon On",
+    "toggle · B",
+    "Fast",
+    "hold · Shift",
+  ]);
   buttons.attach();
   const down = new Event("mousedown", { cancelable: true });
   Object.assign(down, { button: 0, clientX: 680, clientY: 548 });

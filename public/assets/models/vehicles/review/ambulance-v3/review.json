@@ -1,0 +1,53 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-ambulance-v3",
+  "candidateFingerprint": "8ad857b2ff449332abe5b22b1fbaa2b345ff23d4b92eb60493c5ead5e47c7e95",
+  "identity": {
+    "assetId": "ambulance",
+    "revision": "v3",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "f6e1e18e084d2b368dfdb69b329fd0886331a3c69002456737f7193989b280c0",
+    "sourceAtlasSha256": "6c1d3534643bb1f6dac4efd95aaf90bfa3b485d26e0d07589959b5bfe7aafd4b",
+    "lightPatternSha256": "88b02c3f30ee5d0c771e056b26cf8417b28345a6e686e97045b9a8579a4f33dd",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/ambulance-v3.glb",
+        "sha256": "172cab88fa9d011fa4fa34c4edecc70968ce3cc5fc731cce52c36b8ab92a5f5c"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/comparison.png",
+        "sha256": "4f77178471140f6f79e424489a363ccdc82c7fe78b6b138cae6306ec47ad8220"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/orbit.png",
+        "sha256": "3c7a424360afe65dd00163ec4758e1a52d2ea8bef06b45e4d075c2d42509d955"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/silhouette.png",
+        "sha256": "7a09626f8265e5039fbacec3962106da08a7fabe1e536d4700f3c0711226936f"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/lights.gif",
+        "sha256": "0ff730502d2e757cc4a9ea13ef5a797002a5e20424092eeebbefe2fdbb9f69b6"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/lights-off.png",
+        "sha256": "1f40b6d43e3d75027ed3abc25e89362aef89ede0a42cec18548c3e5381d53a09"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/lights-a.png",
+        "sha256": "a87581295fc760dc0bdfd88a73c6e13818e11b80a47c5965bd4f4f7a2c430570"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v3/lights-b.png",
+        "sha256": "f6fa04a0856b8560c69a50b645e5cc8b0c9666d6ac7457638431f7203b93cff5"
+      }
+    ]
+  },
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Floor-only clearance correction; original visible paint, wheel centers and cameras retained.",
+    "Whole-body neutral wheel roll qualified on exact GLB; steering remains neutral. Production art approval pending."
+  ]
+}

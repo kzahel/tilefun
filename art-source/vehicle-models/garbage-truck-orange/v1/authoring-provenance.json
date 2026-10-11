@@ -1,0 +1,17 @@
+{
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "constructionScripts": {
+    "scripts/authored-assets/verify_vehicle_body_clearance.py": "6edeeb76fed98b739a8e5c2e013e77197d4f01f16597589a19d8b359248be965",
+    "scripts/authored-assets/verify_service_lights.mjs": "39fde59a1c232cdd506f602c7070f0e46dbf3f292646d3af39ae23c14686585e",
+    "scripts/authored-assets/pack_draft.py": "c814bc6cb42d3ad1189236138bf195fec247295aed00316d50cf7a63b195a726",
+    "scripts/authored-assets/author_service_vehicle.py": "4db2fbeec44ff433361e03914a413caeff6356acf07c11fffd9768b13bbeb6f9",
+    "scripts/authored-assets/author_emergency_vehicle.py": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab",
+    "scripts/authored-assets/author_garbage_truck.py": "1bbfd28c3e462885b16ff831d62b7e3182afbd5ace174bfad1202abece4bcd93",
+    "scripts/authored-assets/refine_fire_wheels.py": "da3540adf5770a1292ed02da87fd31e8bbf8a4ad9f75486bbc297cad29c3afb7",
+    "scripts/authored-assets/build_emergency_vehicle.py": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62"
+  },
+  "configuration": "scripts/authored-assets/orange-garbage-family.json",
+  "configurationSha256": "984a01164ade5e281a97e88630ee4f0426d13480538be1b3172caa2c6d660c4e",
+  "retentionScript": "scripts/authored-assets/retain_service_vehicle.py",
+  "retentionScriptSha256": "011c38bb9ba9a03baddf359ed5dfdc1092287f983c2dea73863278f3cf8cdb8f"
+}

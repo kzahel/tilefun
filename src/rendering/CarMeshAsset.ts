@@ -45,8 +45,17 @@ export class CarMeshAsset {
     });
     this.meshCount = meshes;
     try {
-      for (const id of ["FL", "FR", "RL", "RR"]) {
-        const roll = scene.getObjectByName(`Wheel_${id}_Roll`);
+      const rolls = new Map<string, THREE.Object3D>();
+      scene.traverse((node) => {
+        const match = /^Wheel_(.+)_Roll$/.exec(node.name);
+        if (!match) return;
+        const id = match[1];
+        if (!id || rolls.has(id)) throw Error(`Duplicate authored car wheel ${id}`);
+        rolls.set(id, node);
+      });
+      for (const id of ["FL", "FR", "RL", "RR"])
+        if (!rolls.has(id)) throw Error(`Missing authored car wheel ${id}`);
+      for (const [id, roll] of rolls) {
         const steer = scene.getObjectByName(`Wheel_${id}_Steer`);
         const radius: unknown = roll?.userData.wheel_radius;
         const axis: unknown = roll?.userData.roll_axis_gltf;

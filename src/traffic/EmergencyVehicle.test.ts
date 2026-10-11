@@ -9,9 +9,15 @@ import {
 } from "../shared/serialization.js";
 import {
   emergencyEnabled,
+  hasVehicleLights,
+  isEmergencyVehicle,
+  isWarningVehicle,
   nextEmergencyState,
+  nextVehicleLightState,
   sirenStyle,
   validEmergencyState,
+  validVehicleLightState,
+  vehicleLightState,
 } from "./EmergencyVehicle.js";
 import { createVehicle } from "./Vehicle.js";
 
@@ -69,4 +75,29 @@ it("transmits on/off/style baselines and deltas, invalidates snapshot reuse and 
     applyEntityDelta(replica, frame.entityDeltas[0]);
     expect(replica.emergencyState).toBe(state);
   }
+});
+
+it("separates four siren vehicles from two silent warning beacons and rejects invalid persisted state", () => {
+  for (const model of ["ambulance", "police-car", "fire-truck-ladder-1", "fire-truck-ladder-2"]) {
+    const car = createVehicle(model, 0, 0);
+    expect(isEmergencyVehicle(car)).toBe(true);
+    expect(hasVehicleLights(car)).toBe(true);
+    expect(vehicleLightState(car)).toBe(2);
+    expect(nextVehicleLightState(car, "toggle")).toBe(3);
+    expect(validVehicleLightState(car, 5)).toBe(true);
+  }
+  for (const model of ["garbage-truck-green", "garbage-truck-orange"]) {
+    const car = createVehicle(model, 0, 0);
+    expect(isWarningVehicle(car)).toBe(true);
+    expect(isEmergencyVehicle(car)).toBe(false);
+    expect(vehicleLightState(car)).toBe(0);
+    car.emergencyState = nextVehicleLightState(car, "toggle");
+    expect(car.emergencyState).toBe(1);
+    expect(nextVehicleLightState(car, "style")).toBe(1);
+    expect(nextVehicleLightState(car, "toggle")).toBe(0);
+    for (const bad of [2, 3, 5, -1, 0.5, NaN, "1"])
+      expect(validVehicleLightState(car, bad)).toBe(false);
+  }
+  expect(hasVehicleLights(createVehicle("car-8", 0, 0))).toBe(false);
+  expect(validVehicleLightState(createVehicle("car-8", 0, 0), 1)).toBe(false);
 });

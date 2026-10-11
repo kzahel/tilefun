@@ -41,13 +41,9 @@ export class GpuMeshBodies {
   }
   setEnabled(value: boolean) {
     this.enabled = value;
-    if (value && this.car.state === "empty") void this.car.load(() => loadCarMesh());
-    if (value && this.ambulance.state === "empty")
-      void this.ambulance.load(() => loadCarMesh("assets/models/vehicles/ambulance-v2.glb", 1));
-    if (value && this.fireTruck.state === "empty")
-      void this.fireTruck.load(() =>
-        loadCarMesh("assets/models/vehicles/fire-truck-ladder-1-v2.glb", 1),
-      );
+    if (value)
+      for (const assetId of [COMPACT_CAR_MESH, AMBULANCE_MESH, FIRE_TRUCK_MESH])
+        this.request(assetId);
   }
   /** Lazy family loads never replace their source sprite before the next frame. */
   private request(assetId: string) {

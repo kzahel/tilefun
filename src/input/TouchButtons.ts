@@ -29,10 +29,11 @@ export class TouchButtons {
   enabled = true;
   driving = false;
   emergency = false;
+  warning = false;
   emergencyState = 2;
   private mouseButton: number | null = null;
   private visibleButton(index: number): boolean {
-    return !this.driving || index === 2 || this.emergency;
+    return !this.driving || index === 2 || this.emergency || (index === 1 && this.warning);
   }
   private canvas: HTMLCanvasElement;
   private buttons: ButtonDef[] = [
@@ -134,8 +135,12 @@ export class TouchButtons {
           ? "Fast"
           : i === 1
             ? this.emergencyState & 1
-              ? "Siren On"
-              : "Siren Off"
+              ? this.warning
+                ? "Beacon On"
+                : "Siren On"
+              : this.warning
+                ? "Beacon Off"
+                : "Siren Off"
             : (["Quiet", "EU", "US"][this.emergencyState >> 1] ?? "EU")
         : btn.label;
       ctx.fillText(label, pos.x, pos.y);

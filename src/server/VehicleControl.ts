@@ -8,7 +8,11 @@ import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { boardingDistance, isDrivable } from "../traffic/Driving.js";
-import { isEmergencyVehicle, nextEmergencyState } from "../traffic/EmergencyVehicle.js";
+import {
+  hasVehicleLights,
+  isWarningVehicle,
+  nextVehicleLightState,
+} from "../traffic/EmergencyVehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -123,12 +127,13 @@ export class VehicleControl {
     const vehicle = this.get(session);
     if (
       !vehicle ||
-      !isEmergencyVehicle(vehicle) ||
+      !hasVehicleLights(vehicle) ||
+      (isWarningVehicle(vehicle) && action === "style") ||
       session.editorEnabled ||
       (action !== "toggle" && action !== "style")
     )
       return;
-    vehicle.emergencyState = nextEmergencyState(vehicle.emergencyState, action);
+    vehicle.emergencyState = nextVehicleLightState(vehicle, action);
     const car = this.realm.traffic?.states.get(vehicle.id);
     if (car) this.realm.traffic?.onChange?.(car, false);
   }

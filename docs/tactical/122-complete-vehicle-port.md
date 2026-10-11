@@ -212,3 +212,66 @@ was scanning large local authoring trees through an unnecessary HMR watcher;
 disabling that watcher clears both launcher tests (2 pass). All twenty gameplay
 selections, own GPU loading and failed-load sprite fallback pass. No introduced
 browser failure remains. Logs are `data/authored-assets/large-*.log`.
+
+
+### Final service checkpoint
+
+Orange garbage v1 and raised fire v1 complete all 45 source sets. Orange owns its
+paint and side origins (east +4 / west −4); strict alpha registration accepts only
+the declared 34-pixel west front-cab exception. Six radii-specific wheels, loader
+hinge and amber lens are independent. Raised fire has an extended ladder baked
+18 degrees into hinge children, owned raised-source UVs and corrected wheel wells.
+Both native 4×2 and novel angles inspected; incompatible roof/camera projections
+remain explicit. Equipment stays at its qualified rest pose.
+
+The full-body audit exposed floor intersections in current ambulance v2/police v1.
+New v3/v2 clip only the original level floor around actual tires plus .75 margin,
+preserving original perimeter and barycentric UVs. All other visible geometry,
+atlas, refs and wheel centers are unchanged. Older revisions stay byte-exact.
+The four new bundles pin actual-GLB whole-body clearance and intentional body
+triangle collision rejection with exact restore. Minimum tire gaps: orange
+.9035455, raised .466089, ambulance .608347, police .484894 model units. The general
+latest-bank cylinder proof uses declared roll children (compact tire names differ)
+and passes **all 45 latest GLBs / 184 wheels**, with 45 deliberate-collision
+negative checks. It proves every neutral roll angle, not nonzero steering.
+
+`CarMeshAsset` now validates/discovers every exported roll node and applies its own
+radius/axis/rest quaternion. The real-engine before probe caught stationary ML;
+after the fix all 45 models / 184 wheels pass forward/reverse/absolute-zero reset,
+with fixed body/equipment/pivots. Malformed extra wheel/duplicate regressions pass.
+The registry integrates the four remaining source types and selects ambulance v3;
+eager loading also reads registry paths. Actual shared GPU probes pass all 45 own
+assets with visible pixels, absolute travel/light reset, simulation isolation,
+lazy/disabled/unknown fallback and disposal. All 49 bundles, packed Blender images,
+actual rigs and source hashes verify. Ordinary rig probes report legacy floors
+unqualified separately; the stronger latest-bank cylinder proof supplies that
+qualification.
+
+Driver-only persistent controls support ambulance/police/both fire types with
+0–5 siren state, and both garbage trucks with silent 0/1 beacons. Style commands
+on warning trucks do nothing; wrong drivers/editor mode cannot change state.
+Touch/keyboard, binary replicas, save/reload, audio exclusion and colored sprite
+fallback share the game/lab paths. Raised-source explicit lab save/restore is
+allowed while automatic traffic continues admitting the existing 44 types.
+
+Initial focused suite passes 122 tests and typecheck. Full unit suite: 2,541 pass /
+10 skipped / 6 fail (five known Windows symlink/SIGKILL failures plus loaded-suite
+Workshop timeout). The isolated Workshop/traffic/resource files pass all 33 tests.
+Git index checkout `data/authored-assets/full-vehicle-port/service-tracked-001/`
+verifies all 49 exact bundles, packed Blender images, 367 constructor/retainer
+hashes and 42 named configuration hashes. Actual rigs, 45-asset shared GPU,
+184-wheel engine motion, and 45 latest whole-body cylinder proofs pass from that
+checkout. Four final recipes reproduce all 32 native/novel frame hashes exactly.
+Named-lens off/A/B/reset probes pass all six light-bearing latest GLBs there.
+
+Workshop verifies 807 candidates / 59 exclusions in normal Chromium at retina
+scale. All 45 earlier retained catalog entries and dependency pins are unchanged.
+646 earlier candidate records remain exact; 152 nature and five world-geometry
+recipe identities deliberately refresh because they include raw collector/traffic
+source bytes. Retained art identities and promoted sprite banks remain unchanged;
+no human approval is inferred. The static capture server now limits dependency
+scanning to its entry HTML and disables HMR watching; ignored authoring trees
+cannot stall captures or introduce unrelated HTML import scan errors.
+
+Python's expected inventory still listed only the pre-large 25 revisions;
+it is reconciled to all 49. All 33 Python tests pass after that reconciliation. Stable-browser outcomes follow.

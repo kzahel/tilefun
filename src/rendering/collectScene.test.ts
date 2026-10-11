@@ -68,44 +68,54 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
       // 80px enclosing mesh bound, so their vertical exit is farther away.
       for (const [wx, wy] of [
         [
-          model === "fire-truck-ladder-1"
-            ? -161
-            : model === "ambulance" || model.startsWith("bus-")
-              ? -129
-              : -113,
+          model === "fire-truck-ladder-2"
+            ? -209
+            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
+              ? -161
+              : model === "ambulance" || model.startsWith("bus-")
+                ? -129
+                : -113,
           150,
         ],
         [
-          model === "fire-truck-ladder-1"
-            ? 561
-            : model === "ambulance" || model.startsWith("bus-")
-              ? 529
-              : 513,
+          model === "fire-truck-ladder-2"
+            ? 609
+            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
+              ? 561
+              : model === "ambulance" || model.startsWith("bus-")
+                ? 529
+                : 513,
           150,
         ],
         [
           200,
-          model === "fire-truck-ladder-1"
-            ? -221
-            : model === "ambulance" || model.startsWith("bus-")
-              ? -177
-              : model.startsWith("unindexed-sedan-") ||
-                  model.startsWith("car-") ||
-                  model === "sedan-12"
-                ? -145
-                : -120,
+          model === "fire-truck-ladder-2"
+            ? -290
+            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
+              ? -221
+              : model === "ambulance" || model.startsWith("bus-")
+                ? -177
+                : model === "police-car" ||
+                    model.startsWith("unindexed-sedan-") ||
+                    model.startsWith("car-") ||
+                    model === "sedan-12"
+                  ? -145
+                  : -120,
         ],
         [
           200,
-          model === "fire-truck-ladder-1"
-            ? 521
-            : model === "ambulance" || model.startsWith("bus-")
-              ? 477
-              : model.startsWith("unindexed-sedan-") ||
-                  model.startsWith("car-") ||
-                  model === "sedan-12"
-                ? 495
-                : 461,
+          model === "fire-truck-ladder-2"
+            ? 590
+            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
+              ? 521
+              : model === "ambulance" || model.startsWith("bus-")
+                ? 477
+                : model === "police-car" ||
+                    model.startsWith("unindexed-sedan-") ||
+                    model.startsWith("car-") ||
+                    model === "sedan-12"
+                  ? 495
+                  : 461,
         ],
       ] as const) {
         car.position = { wx, wy };
@@ -171,3 +181,23 @@ it("retains conservative mesh bounds even when the fallback sprite is outside th
   car.position.wy = -120;
   expect(collect(car, 1, 1 / 3, new SceneFrame())).toHaveLength(0);
 });
+
+it.each(["police-car", "garbage-truck-green", "garbage-truck-orange", "fire-truck-ladder-2"])(
+  "preserves %s colored flashing sprite fallback and off reset",
+  (model) => {
+    const car = createVehicle(model, 200, 150);
+    const frame = new SceneFrame();
+    car.emergencyState = 1;
+    frame.presentationTime = 0.05;
+    const items = collect(car, 1, 1 / 3, frame);
+    const item = items[0];
+    expect(item?.kind).toBe("sprite");
+    if (item?.kind !== "sprite") throw Error("Missing vehicle");
+    expect(item.emergencyFlash).toBe(1);
+    expect(item.emergencyColors?.[0]).toBe(
+      model.startsWith("garbage-") ? "#ffd37a" : model === "police-car" ? "#ff7979" : "#79dfff",
+    );
+    car.emergencyState = 0;
+    expect(collect(car, 1, 1 / 3, frame)[0]).not.toHaveProperty("emergencyFlash");
+  },
+);

@@ -1,0 +1,14 @@
+{
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "constructionScripts": {
+    "scripts/authored-assets/verify_vehicle_body_clearance.py": "6edeeb76fed98b739a8e5c2e013e77197d4f01f16597589a19d8b359248be965",
+    "scripts/authored-assets/verify_service_lights.mjs": "39fde59a1c232cdd506f602c7070f0e46dbf3f292646d3af39ae23c14686585e",
+    "scripts/authored-assets/pack_draft.py": "c814bc6cb42d3ad1189236138bf195fec247295aed00316d50cf7a63b195a726",
+    "scripts/authored-assets/prepare_floor_revision.py": "006f490a9da8fb94e52740a4f48edc8b224055ed98c25a22afe48f3f724b935a",
+    "scripts/authored-assets/open_retained_floor.py": "5bbd440a76a940c22830b614d45e8732fc054259271a6d7041dda51a4aec38ae"
+  },
+  "configuration": "scripts/authored-assets/service-floor-revisions.json",
+  "configurationSha256": "df79ff42a48018a4cc406bb781c55a1bb299863fe5b757e733b3bc673f170883",
+  "retentionScript": "scripts/authored-assets/retain_service_vehicle.py",
+  "retentionScriptSha256": "011c38bb9ba9a03baddf359ed5dfdc1092287f983c2dea73863278f3cf8cdb8f"
+}

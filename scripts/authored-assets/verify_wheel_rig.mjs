@@ -26,7 +26,7 @@ const server = await createServer({
   cacheDir: resolve(output, "vite-cache"),
   configFile: false,
   base: "/tilefun/",
-  server: { port: 0, host: "127.0.0.1" },
+  server: { port: 0, host: "127.0.0.1", watch: null },
   logLevel: "error",
   optimizeDeps: { entries: [], include: ["three", "three/addons/loaders/GLTFLoader.js"] },
   plugins: [

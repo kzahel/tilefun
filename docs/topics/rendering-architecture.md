@@ -588,3 +588,18 @@ which tiles retain the tracks, including saved edits. Both backends consume the
 ordinary prepared terrain cache. There is no per-frame world track overlay.
 Native cardinal train sprites remain unchanged, with support-aware player ordering
 above their roofs. See [trains](trains.md#city-to-city-roof-riding-integration).
+
+### Complete vehicle presentation checkpoint
+
+[122](../tactical/122-complete-vehicle-port.md) registers all 45 own source types.
+`AuthoredVehicleMeshes` owns GLB path, revision, width and enclosing radius;
+legacy eager slots request that registry so ambulance v3 cannot preload v2.
+Loading, failed and disabled resources preserve the complete colored-flashing
+sprite body in the shared raster path. Per-draw absolute travel and lens state
+reset prevent cached resources from carrying another entity's phase.
+`CarMeshAsset` discovers and validates all named roll nodes (required four corners,
+plus middle garbage axles), applies each node's own radius/axis/rest quaternion,
+and rejects duplicates or malformed extras while freeing resources. Disposal,
+visibility bounds and simulation isolation use shared game/lab code. Source
+physical proxies remain authoritative. Equipment stays at its qualified rest pose
+and steering is neutral; exact production art review is separate from integration.

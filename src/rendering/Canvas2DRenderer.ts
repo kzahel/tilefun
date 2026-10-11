@@ -243,7 +243,7 @@ function drawSprite(
   if (item.emergencyFlash) {
     const heading = item.emergencyHeading ?? 0;
     const forward = item.emergencyForward ?? 0;
-    const side = item.emergencyFlash === 1 ? -9 : 9;
+    const side = item.emergencySide ?? (item.emergencyFlash === 1 ? -9 : 9);
     const lamp = camera.worldToScreen(
       item.wx + (forward ? forward * Math.cos(heading) - side * Math.sin(heading) : side),
       item.wy -
@@ -251,7 +251,7 @@ function drawSprite(
         (item.emergencyHeight ?? 40) +
         (forward ? forward * Math.sin(heading) + side * Math.cos(heading) : 0),
     );
-    ctx.fillStyle = "#79dfff";
+    ctx.fillStyle = item.emergencyColors?.[item.emergencyFlash === 1 ? 0 : 1] ?? "#79dfff";
     ctx.fillRect(
       lamp.sx - 2 * camera.scale,
       lamp.sy - camera.scale,

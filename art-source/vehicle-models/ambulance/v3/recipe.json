@@ -1,0 +1,457 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "ambulance",
+  "family": "ambulance",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    128,
+    112
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/ambulance/v3/car.blend",
+    "sha256": "f6e1e18e084d2b368dfdb69b329fd0886331a3c69002456737f7193989b280c0"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        224,
+        1825,
+        128,
+        79
+      ],
+      "anchor": [
+        64,
+        76
+      ],
+      "metadata": {
+        "name": "Ambulance \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "ambulance",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          64,
+          76
+        ],
+        "footprint": [
+          -56,
+          -36,
+          112,
+          36
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 112,
+            "height": 36,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -18
+      },
+      "sourceApproval": {
+        "id": "f2ebee52-46de-4300-9331-fa28821d8049",
+        "createdAt": "2026-10-03T10:48:57.022Z",
+        "candidateFingerprint": "8fbba9b314bbf3ab4521b9f5bc5a15902ba5533357d31fd6dd8455056303401a",
+        "metadataFingerprint": "077dc5e09c41cb7da71c58807009d3c835761082b76a1d2152439cf832c6af45"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 46.85,
+        "horizontalScale": 1,
+        "verticalStretch": 1.0966,
+        "origin": [
+          64,
+          80
+        ],
+        "status": "ambulance landmark hypothesis; side roof, sill and wheel centers"
+      },
+      "sourceSha256": "be6eacad30aa1df0d481e7ecaede5045b429e4e9afa9a3549468947cae6a2f97"
+    },
+    {
+      "id": "west",
+      "rect": [
+        96,
+        1825,
+        128,
+        79
+      ],
+      "anchor": [
+        64,
+        76
+      ],
+      "metadata": {
+        "name": "Ambulance \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "ambulance",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          64,
+          76
+        ],
+        "footprint": [
+          -56,
+          -36,
+          112,
+          36
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 112,
+            "height": 36,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -18
+      },
+      "sourceApproval": {
+        "id": "d79a4596-74b7-4da6-bd5a-e79bf24e116b",
+        "createdAt": "2026-10-03T10:48:59.249Z",
+        "candidateFingerprint": "f8ca90cb276af45ccfdff6abb70fbeec7ef85272b837c3d2fc4775e51aac1879",
+        "metadataFingerprint": "11716e9e6ead0bd6c4dfedb6a256350176cae6b20502c703f584e27418d77482"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 46.85,
+        "horizontalScale": 1,
+        "verticalStretch": 1.0966,
+        "origin": [
+          64,
+          80
+        ],
+        "status": "ambulance landmark hypothesis; independently observed west graphics"
+      },
+      "sourceSha256": "fa7c4a453506945029314b121fc2c797e7eb37bb3e78531cbcbdd7934f5000db"
+    },
+    {
+      "id": "north",
+      "rect": [
+        352,
+        1792,
+        48,
+        112
+      ],
+      "anchor": [
+        24,
+        100
+      ],
+      "metadata": {
+        "name": "Ambulance \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "ambulance",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          24,
+          100
+        ],
+        "footprint": [
+          -20,
+          -82,
+          40,
+          82
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 82,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -41
+      },
+      "sourceApproval": {
+        "id": "2ed969d1-ade1-474b-a092-46edbdbb9780",
+        "createdAt": "2026-10-03T10:48:54.610Z",
+        "candidateFingerprint": "f52113af9ef8f1574f3808153afcc422f40f4503d8886da7a405622a2429cdc9",
+        "metadataFingerprint": "e599cbb9803ea9a881e7dab404c133a65d5962a4cf93997fc4d4b5d6f65ba20a"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        40,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 55,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.88781818,
+        "origin": [
+          64,
+          58
+        ],
+        "status": "ambulance rear width, roof, door and nose landmark hypothesis"
+      },
+      "sourceSha256": "ae362279ebea7acea4495740a60615ff117e65cf3c64cc5e43c2ba835967c566"
+    },
+    {
+      "id": "south",
+      "rect": [
+        48,
+        1792,
+        48,
+        112
+      ],
+      "anchor": [
+        24,
+        109
+      ],
+      "metadata": {
+        "name": "Ambulance \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "ambulance",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          24,
+          109
+        ],
+        "footprint": [
+          -20,
+          -82,
+          40,
+          82
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 82,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -41
+      },
+      "sourceApproval": {
+        "id": "6449c392-d7b8-48ac-8a5e-6f5f4da5ec10",
+        "createdAt": "2026-10-03T10:48:57.851Z",
+        "candidateFingerprint": "ca662e0330629020b7f43edcf02d9913ff53fcf3529f1d4d6979aaf03d8a8b30",
+        "metadataFingerprint": "a8f79d1535e558b575d3c6c3515c54e0b903c0c1194c9541b327f9fe2e111204"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        40,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 55,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.88781818,
+        "origin": [
+          64,
+          71
+        ],
+        "status": "ambulance front width, roof, windshield and nose landmark hypothesis"
+      },
+      "sourceSha256": "203646aa448e2d8fd5c05b152c3d1a2895ef86287f20551be34606caefdf98ae"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1024,
+    "material": "Ambulance palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Box-east": [
+        "east"
+      ],
+      "Cab-east": [
+        "east"
+      ],
+      "Fender-F-east": [
+        "east"
+      ],
+      "Fender-R-east": [
+        "east"
+      ],
+      "Box-west": [
+        "west"
+      ],
+      "Cab-west": [
+        "west"
+      ],
+      "Fender-F-west": [
+        "west"
+      ],
+      "Fender-R-west": [
+        "west"
+      ],
+      "Box-roof": [
+        "north"
+      ],
+      "Rear-doors": [
+        "north"
+      ],
+      "Box-front-wall": [
+        "south"
+      ],
+      "Cab-roof": [
+        "south"
+      ],
+      "Windshield-and-frame": [
+        "south"
+      ],
+      "Hood": [
+        "south"
+      ],
+      "Front-fascia": [
+        "south"
+      ],
+      "Underfloor": [],
+      "Rear-step": [
+        "north"
+      ],
+      "Rear-step-face": [
+        "north"
+      ],
+      "Rear-rail-east": [
+        "east"
+      ],
+      "Rear-rail-back-east": [
+        "north"
+      ],
+      "Rear-rail-west": [
+        "west"
+      ],
+      "Rear-rail-back-west": [
+        "north"
+      ],
+      "Roof-panel-0-top": [
+        "north"
+      ],
+      "Roof-panel-0-east": [
+        "east"
+      ],
+      "Roof-panel-0-west": [
+        "west"
+      ],
+      "Roof-panel-0-front": [
+        "south"
+      ],
+      "Roof-panel-0-rear": [
+        "north"
+      ],
+      "Roof-panel-1-top": [
+        "north"
+      ],
+      "Roof-panel-1-east": [
+        "east"
+      ],
+      "Roof-panel-1-west": [
+        "west"
+      ],
+      "Roof-panel-1-front": [
+        "south"
+      ],
+      "Roof-panel-1-rear": [
+        "north"
+      ],
+      "Mirror--1": [],
+      "Mirror-arm--1": [],
+      "Mirror-1": [],
+      "Mirror-arm-1": [],
+      "Tire-FL": [
+        "west"
+      ],
+      "Hub-FL": [
+        "west"
+      ],
+      "Tire-FR": [
+        "east"
+      ],
+      "Hub-FR": [
+        "east"
+      ],
+      "Tire-RL": [
+        "west"
+      ],
+      "Hub-RL": [
+        "west"
+      ],
+      "Tire-RR": [
+        "east"
+      ],
+      "Hub-RR": [
+        "east"
+      ],
+      "Lightbar-front-lens": [],
+      "Lightbar-front-base": [],
+      "Lightbar-rear-lens": [],
+      "Lightbar-rear-base": [],
+      "Beacon-front-left-lens": [],
+      "Beacon-front-left-base": [],
+      "Beacon-front-right-lens": [],
+      "Beacon-front-right-base": [],
+      "Beacon-rear-left-lens": [],
+      "Beacon-rear-left-base": [],
+      "Beacon-rear-right-lens": [],
+      "Beacon-rear-right-base": []
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  },
+  "construction": {
+    "config": "family-config.json",
+    "paintOwnership": "paint-ownership.json",
+    "rig": "rig.json"
+  }
+}

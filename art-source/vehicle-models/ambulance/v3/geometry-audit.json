@@ -1,0 +1,23 @@
+{
+  "blenderVersion": "5.2.2 LTS",
+  "meshObjects": 56,
+  "triangles": 1420,
+  "rawFrame": [
+    128,
+    149
+  ],
+  "bounds": [
+    [
+      -59.0,
+      -21.5,
+      0.0
+    ],
+    [
+      55.0,
+      21.5,
+      50.29999923706055
+    ]
+  ],
+  "appearance": "unlit",
+  "meshSha256": "06c00cc4b0ac50e5128218cb451f65ffecabc65e23ea03d88b1fe99cbaece70e"
+}

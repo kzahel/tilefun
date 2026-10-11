@@ -1,9 +1,9 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 43 models retained, 41 integrated
-in game/lab mesh mode. All six compacts, seven additional sedans, six buses, all 20 large cars, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
-Exact model art review remains open.
+Status: all 45 source sets have retained own Blender/UV models and shared
+engine integrations (49 exact retained revisions). Production model art review
+remains open; runtime keeps steering neutral and equipment at its authored rest pose.
 Updated: 2026-10-11.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
@@ -21,8 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **43/45 retained models, 2/45 queued; 41/45 own-model
-engine integrations.** All source sets have four views;
+Current progress: **45/45 retained models; 45/45 own-model engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
 - **Model:** Queued → Authoring → Checking → Retained. Retained means the exact
@@ -31,8 +30,8 @@ source extraction support alone does not count as an authored model.
   Use Rework or Paused with a concrete reason when necessary.
 - **Engine:** Pending → Integrating → Integrated (optional/default) → Production. Each row
   must load that vehicle's own asset and preserve the complete sprite fallback.
-  The `allcars3d` test override reuses the blue model for other types and does not
-  advance their status.
+  The `allcars3d` test override only supplies a blue fallback to unregistered types;
+  all 45 registered source types take precedence and use their own model.
 - **Art review:** No retained 3D revision is promoted to production art at this
   checkpoint. The approved source-sprite bank and chat feedback do not approve
   new model pixels. Record exact-revision review evidence before marking Production;
@@ -42,9 +41,10 @@ Evidence for existing models: [bundle catalog](../../art-source/vehicle-models/c
 and [106](../tactical/106-retained-vehicle-model-bundles.md). Blue's
 integration is recorded in [108](../tactical/108-authored-blue-car-gameplay.md)
 and [112](../tactical/112-coherent-car-presentation-and-test-override.md).
-The main game defaults to GPU with all six compact colors ([122](../tactical/122-complete-vehicle-port.md)), ambulance v2 ([117](../tactical/117-ambulance-driving-controls.md))
-and firetruck v2 ([120](../tactical/120-firetruck-gameplay.md)); other vehicle types retain
-sprite fallbacks, per [rendering architecture](rendering-architecture.md).
+The main game defaults to GPU with all 45 own vehicle assets through the shared
+registry ([122](../tactical/122-complete-vehicle-port.md)); every type preserves
+sprite fallback while loading, disabled or failed. Ambulance v3 and police v2
+correct underfloor clearance without changing visible paint or wheel registration.
 Ambulance v1's authoring, exact 4×2 and verification are recorded in
 [115](../tactical/115-authored-ambulance.md).
 Its beacon refinement and emergency-light contract are in
@@ -53,8 +53,7 @@ Police and stowed fire truck are retained in
 [117](../tactical/117-police-and-fire-truck-models.md), with tagged light lenses,
 own wheel rigs and a separate fire ladder hinge. The bank's siren-capable types
 are ambulance, police and fire truck (two ladder sprite states). Green/orange
-garbage trucks carry amber warning beacons; green is now retained and orange
-remains queued.
+garbage trucks carry amber warning beacons; both are retained and integrated with silent beacon controls.
 
 Stowed fire v2 corrects owner-reported axle placement, floor/tire intersections
 and wheel UV ownership in [118](../tactical/118-fire-truck-wheel-alignment.md).
@@ -62,9 +61,11 @@ V1 remains retained; the new exact comparison awaits owner inspection.
 
 Green garbage truck v1 adds six wheels, a separate recessed rear-loader hinge
 and one tagged warning beacon in [119](../tactical/119-six-wheel-garbage-truck.md).
-Its own geometry/UV sources and 4×2 are retained; clearance and integration remain pending.
+Its own geometry/UV sources and 4×2 are retained; all six wheels roll by their
+individual radii in the engine and whole-body neutral-roll clearance is verified.
 
-The complete-bank pass in [122](../tactical/122-complete-vehicle-port.md) retains compact 3/5/6 and integrates all six colors through a shared own-asset registry. Every compact passes actual GPU draw/reset/disposal checks; the failed-load browser probe preserves gameplay with sprites. The inherited compact body still needs steering/floor qualification and exact art review.
+The complete-bank pass in [122](../tactical/122-complete-vehicle-port.md) retains compact 3/5/6 and integrates all six colors through a shared own-asset registry. Every compact passes actual GPU draw/reset/disposal checks; the failed-load browser probe preserves gameplay with sprites. The compact body passes whole-body neutral-roll qualification; nonzero steering
+and exact production art review remain open.
 
 Seven additional sedans now have an independent family body, own UV paint,
 four radius-six wheel assemblies and open wheel floors. Dark-source registration
@@ -105,9 +106,10 @@ silhouette pixels after translation, with exact shapes in the other three views.
 Neither near-match bypasses the strict reuse checks.
 
 The compact, additional sedan, six-bus and twenty-large-car batches are retained
-and integrated. The remaining authoring work is orange garbage and raised fire,
-plus police/green-garbage integration and final cross-vehicle qualification. Each vehicle
-still requires its own source paint, exact retained bundle and 4×2 inspection.
+and integrated. Orange garbage, raised fire and all prior service types are also
+retained and integrated; whole-bank engine/clearance/tracked-only checks pass.
+Every vehicle has its own source paint, exact retained bundle and 4×2 inspection.
+Exact production art review follows.
 The audit does not advance any model/engine/review status.
 
 ## Work order
@@ -120,16 +122,17 @@ The audit does not advance any model/engine/review status.
   replay only when four-view shape/metadata and palette correspondence pass.
 - [x] Audit the full bank for exact four-view silhouettes and palette correspondence;
   retain [family findings](../tactical/121-vehicle-source-families.md).
-- [ ] Fit the **three large-car shape families and additional sedan family**;
+- [x] Fit the **three large-car shape families and additional sedan family**;
   qualify internal geometry before transferring source-owned paint.
 - [x] Fit a **bus** template, then its variants; preserve asymmetric door art.
 - [x] Author **police car** and **stowed fire truck** with their own geometry,
   source paint, wheel rigs and tagged lights; retain exact bundles and reviews.
-- [ ] Fit the **raised fire ladder** pose and qualify hinge/steering clearance.
-- [ ] Fit **garbage trucks**, including separate amber beacon lenses.
-  Green is retained; check orange family/paint eligibility before transferring it.
-- [ ] Complete cross-vehicle engine qualification and exact-revision art review
-  before considering the full bank ported for production.
+- [x] Fit the **raised fire ladder** rest pose and neutral-wheel clearance;
+  arbitrary hinge/steering animation remains outside the supported runtime pose.
+- [x] Fit both **garbage trucks**, with own paint and separate amber lenses.
+  Six-wheel roll and rest-loader clearance pass.
+- [x] Complete cross-vehicle engine qualification and tracked-only delivery.
+- [ ] Obtain exact-revision human art review before production-art promotion.
 
 This is a queue, not a claim that numbered cars share geometry or that all listed
 models have been started. The later family order can change with owner priorities.
@@ -151,12 +154,12 @@ models have been started. The later family order can change with owner prioritie
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `ambulance` | [Retained v2](../../art-source/vehicle-models/ambulance/v2/) — owner inspection pending; v1 retained | Integrated in default GPU mesh mode | Review [beacons](../../public/assets/models/vehicles/review/ambulance-v2/comparison.png) and flashing; playtest [117](../tactical/117-ambulance-driving-controls.md) and qualify steering. |
-| `police-car` | [Retained v1](../../art-source/vehicle-models/police-car/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/police-car-v1/comparison.png), physical lamp-order contradiction and wheel fit; integrate its own GLB and light state. |
-| `garbage-truck-green` | [Retained v1](../../art-source/vehicle-models/garbage-truck-green/v1/) — owner inspection pending in [119](../tactical/119-six-wheel-garbage-truck.md) | Pending | Review [4×2](../../public/assets/models/vehicles/review/garbage-truck-green-v1/comparison.png), wheel scale and roof projection; qualify loader/steering clearance and integrate its own GLB. |
-| `garbage-truck-orange` | Queued | Pending | Check green-template eligibility; preserve its own paint and amber beacon lens. |
+| `ambulance` | [Retained v3](../../art-source/vehicle-models/ambulance/v3/) | Default GPU integrated | Review exact [4×2](../../public/assets/models/vehicles/review/ambulance-v3/comparison.png) and light preview; whole-body neutral roll verified, steering/equipment motion unqualified. |
+| `police-car` | [Retained v2](../../art-source/vehicle-models/police-car/v2/) | Default GPU integrated | Review exact [4×2](../../public/assets/models/vehicles/review/police-car-v2/comparison.png) and light preview; whole-body neutral roll verified, steering/equipment motion unqualified. |
+| `garbage-truck-green` | [Retained v1](../../art-source/vehicle-models/garbage-truck-green/v1/) | Default GPU integrated | Review exact [4×2](../../public/assets/models/vehicles/review/garbage-truck-green-v1/comparison.png) and light preview; whole-body neutral roll verified, steering/equipment motion unqualified. |
+| `garbage-truck-orange` | [Retained v1](../../art-source/vehicle-models/garbage-truck-orange/v1/) | Default GPU integrated | Review exact [4×2](../../public/assets/models/vehicles/review/garbage-truck-orange-v1/comparison.png) and light preview; whole-body neutral roll verified, steering/equipment motion unqualified. |
 | `fire-truck-ladder-1` (stowed) | [Retained v2](../../art-source/vehicle-models/fire-truck-ladder-1/v2/) — wheel correction in [118](../tactical/118-fire-truck-wheel-alignment.md); v1 retained | Integrated in default GPU mesh mode | Review corrected [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/comparison.png); playtest [120](../tactical/120-firetruck-gameplay.md); qualify ladder/steering clearance and remaining roof paint. |
-| `fire-truck-ladder-2` (raised) | Queued | Pending | Fit raised equipment pose; qualify clearance before driving use. |
+| `fire-truck-ladder-2` (raised) | [Retained v1](../../art-source/vehicle-models/fire-truck-ladder-2/v1/) | Default GPU integrated | Review exact [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-2-v1/comparison.png) and light preview; whole-body neutral roll verified, steering/equipment motion unqualified. |
 
 ### Large car bank — 20 sets
 
@@ -247,3 +250,14 @@ and cabin bases were corrected before retention after an initial floor-only
 check missed hood/window intersections. Nonzero steering is unqualified.
 Own end/roof UV paint preserves localized exceptions, while incompatible source
 camera depths and opposing roof highlights remain exact-revision review limits.
+
+The final service checkpoint completes orange garbage and the raised fire ladder,
+with own source paint and static qualified rest equipment. Orange side registration
+uses east +4 / west −4 pixels; the west source has an explicit 34-pixel silhouette
+exception. Ambulance v3/police v2 only open original floor triangles at wheel
+bounds, preserving original perimeter and barycentric UV paint. Every latest GLB
+passes whole-body neutral-roll cylinder clearance and actual engine roll checks
+(184 wheels); older archived revisions remain unchanged. All six light-bearing
+models have isolated named lens phases. Four siren vehicles retain lights-only,
+EU and US styles; two garbage beacons toggle silently. Next: exact production art
+review through retained 4×2 comparisons, then any requested fidelity revisions.

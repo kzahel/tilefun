@@ -17,7 +17,7 @@ import { RoadType } from "../road/RoadType.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
-import { isEmergencyVehicle, validEmergencyState } from "./EmergencyVehicle.js";
+import { validVehicleLightState } from "./EmergencyVehicle.js";
 import {
   type Lane,
   type LaneGraph,
@@ -39,6 +39,7 @@ import {
   createVehicle,
   isVehicle,
   TRAFFIC_MODELS,
+  VEHICLE_MODELS,
   vehicleRoadWidth,
   vehicleView,
 } from "./Vehicle.js";
@@ -656,7 +657,7 @@ export class TrafficSystem {
     return records.flatMap((r) => {
       if (identities.has(r.identity)) return [];
       if (
-        !TRAFFIC_MODELS.includes(r.model) ||
+        !VEHICLE_MODELS.includes(r.model) ||
         ![
           r.wz ?? 0,
           r.wx ?? r.x,
@@ -677,8 +678,7 @@ export class TrafficSystem {
         throw new Error("Invalid saved traffic record.");
       if (
         r.emergencyState !== undefined &&
-        (!validEmergencyState(r.emergencyState) ||
-          !isEmergencyVehicle({ type: `vehicle-v1:${r.model}` }))
+        !validVehicleLightState({ type: `vehicle-v1:${r.model}` }, r.emergencyState)
       )
         throw new Error("Invalid saved emergency state.");
       // Resolve the same local graph used when choosing the saved successor.

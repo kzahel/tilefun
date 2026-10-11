@@ -4,6 +4,9 @@ import ambulanceReview from "../../public/assets/models/vehicles/review/ambulanc
 import ambulanceLightsReview from "../../public/assets/models/vehicles/review/ambulance-v2/review.json" with {
   type: "json",
 };
+import service0Review from "../../public/assets/models/vehicles/review/ambulance-v3/review.json" with {
+  type: "json",
+};
 import bus1Review from "../../public/assets/models/vehicles/review/bus-1-v1/review.json" with {
   type: "json",
 };
@@ -94,10 +97,19 @@ import fireReview from "../../public/assets/models/vehicles/review/fire-truck-la
 import fireWheelsReview from "../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/review.json" with {
   type: "json",
 };
+import service3Review from "../../public/assets/models/vehicles/review/fire-truck-ladder-2-v1/review.json" with {
+  type: "json",
+};
 import garbageReview from "../../public/assets/models/vehicles/review/garbage-truck-green-v1/review.json" with {
   type: "json",
 };
+import service2Review from "../../public/assets/models/vehicles/review/garbage-truck-orange-v1/review.json" with {
+  type: "json",
+};
 import policeReview from "../../public/assets/models/vehicles/review/police-car-v1/review.json" with {
+  type: "json",
+};
+import service1Review from "../../public/assets/models/vehicles/review/police-car-v2/review.json" with {
   type: "json",
 };
 import large5Review from "../../public/assets/models/vehicles/review/sedan-12-v1/review.json" with {
@@ -162,6 +174,11 @@ export async function buildCarProjectionCandidate(): Promise<WorkshopCandidate> 
 export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidate[]> {
   const candidates: WorkshopCandidate[] = [];
   const reviews = [
+    { review: service0Review, name: "Ambulance" },
+    { review: service1Review, name: "Police car" },
+    { review: service2Review, name: "Orange garbage truck" },
+    { review: service3Review, name: "Fire truck · raised ladder" },
+
     { review: large0Review, name: "Car 7" },
     { review: large1Review, name: "Car 8" },
     { review: large2Review, name: "Car 9" },

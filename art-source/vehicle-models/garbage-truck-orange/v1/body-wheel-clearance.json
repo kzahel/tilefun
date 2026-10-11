@@ -1,0 +1,131 @@
+{
+  "assetId": "garbage-truck-orange",
+  "revision": "v1",
+  "glbSha256": "e6f93e2c8322e1c7ea8f8fa54967da98a3becc1b89eb2de9edca0ed6068ca8de",
+  "clearance": [
+    {
+      "part": "Hub_FL",
+      "gap": null,
+      "nearestBody": null,
+      "radius": 4.100000916067966,
+      "axialBounds": [
+        -23.450000762939453,
+        -23.049999237060547
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 21.036861786883346,
+      "nearestBody": "Mirror--1",
+      "radius": 9.500001182321594,
+      "axialBounds": [
+        -23.0,
+        -20.0
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": null,
+      "nearestBody": null,
+      "radius": 4.100000916067966,
+      "axialBounds": [
+        23.049999237060547,
+        23.450000762939453
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 21.036861786883346,
+      "nearestBody": "Mirror-1",
+      "radius": 9.500001182321594,
+      "axialBounds": [
+        20.0,
+        23.0
+      ]
+    },
+    {
+      "part": "Hub_ML",
+      "gap": 4.403545908767358,
+      "nearestBody": "Underfloor",
+      "radius": 3.000000538713066,
+      "axialBounds": [
+        -18.25,
+        -17.849998474121094
+      ]
+    },
+    {
+      "part": "Tire_ML",
+      "gap": 0.9035455050519374,
+      "nearestBody": "Underfloor",
+      "radius": 6.500000942428486,
+      "axialBounds": [
+        -17.799999237060547,
+        -14.799999237060547
+      ]
+    },
+    {
+      "part": "Hub_MR",
+      "gap": 4.403545908767358,
+      "nearestBody": "Underfloor",
+      "radius": 3.000000538713066,
+      "axialBounds": [
+        17.849998474121094,
+        18.25
+      ]
+    },
+    {
+      "part": "Tire_MR",
+      "gap": 0.9035455050519374,
+      "nearestBody": "Underfloor",
+      "radius": 6.500000942428486,
+      "axialBounds": [
+        14.799999237060547,
+        17.799999237060547
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 4.403545908767358,
+      "nearestBody": "Underfloor",
+      "radius": 3.000000538713066,
+      "axialBounds": [
+        -18.25,
+        -17.849998474121094
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.9035455050519374,
+      "nearestBody": "Underfloor",
+      "radius": 6.500000942428486,
+      "axialBounds": [
+        -17.799999237060547,
+        -14.799999237060547
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 4.403545908767358,
+      "nearestBody": "Underfloor",
+      "radius": 3.000000538713066,
+      "axialBounds": [
+        17.849998474121094,
+        18.25
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.9035455050519374,
+      "nearestBody": "Underfloor",
+      "radius": 6.500000942428486,
+      "axialBounds": [
+        14.799999237060547,
+        17.799999237060547
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

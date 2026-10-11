@@ -1,0 +1,111 @@
+{
+  "counts": {
+    "0": 1045177,
+    "1": 3036,
+    "2": 147,
+    "3": 216,
+    "4": 0
+  },
+  "legend": {
+    "0": "unused UV/gutter",
+    "1": "visible source sample",
+    "2": "unobserved",
+    "3": "overlapping UV surfaces",
+    "4": "source-view color disagreement"
+  },
+  "authoredFill": {
+    "image": "car-atlas.png",
+    "filledUVTexels": 1045540,
+    "meaning": "Existing authored atlas fills gutter/unseen/overlapping UV regions only. Coverage status remains unchanged; this is inferred paint, not source recovery."
+  },
+  "sourceViews": {
+    "Sedan-east": [
+      "east"
+    ],
+    "Fender--24-east": [
+      "east"
+    ],
+    "Fender-24-east": [
+      "east"
+    ],
+    "Sedan-west": [
+      "west"
+    ],
+    "Fender--24-west": [
+      "west"
+    ],
+    "Fender-24-west": [
+      "west"
+    ],
+    "Roof": [
+      "north"
+    ],
+    "Windshield-glass": [
+      "south"
+    ],
+    "Windshield-frame": [],
+    "Rear-window-glass": [
+      "north"
+    ],
+    "Rear-window-frame": [],
+    "Hood": [
+      "south"
+    ],
+    "Trunk": [
+      "north"
+    ],
+    "Roof-shoulder-east": [],
+    "Roof-shoulder-west": [],
+    "Front-fascia": [
+      "south"
+    ],
+    "Front-corner--1": [
+      "south"
+    ],
+    "Front-corner-1": [
+      "south"
+    ],
+    "Rear-fascia": [
+      "north"
+    ],
+    "Rear-corner--1": [
+      "north"
+    ],
+    "Rear-corner-1": [
+      "north"
+    ],
+    "Underfloor": [],
+    "Lightbar-housing": [],
+    "Police-blue-base": [],
+    "Police-blue-lens": [],
+    "Police-red-base": [],
+    "Police-red-lens": [],
+    "Mirror--1": [],
+    "Mirror-1": [],
+    "Tire_FL": [
+      "east"
+    ],
+    "Hub_FL": [
+      "east"
+    ],
+    "Tire_FR": [
+      "west"
+    ],
+    "Hub_FR": [
+      "west"
+    ],
+    "Tire_RL": [
+      "east"
+    ],
+    "Hub_RL": [
+      "east"
+    ],
+    "Tire_RR": [
+      "west"
+    ],
+    "Hub_RR": [
+      "west"
+    ]
+  },
+  "interpretation": "Counts measure UV texels, not surface area, accuracy or acceptance. Disagreements retain the most face-on visible original pixel and remain marked. Unknown and overlapping regions require authored cleanup. Gutters are not padded by this draft baker."
+}

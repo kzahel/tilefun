@@ -259,3 +259,16 @@ it("validates an entire saved traffic batch before publishing any vehicle", () =
   ).toThrow(/lane/);
   expect(f.traffic.states.size).toBe(count);
 });
+
+it.each(["garbage-truck-green", "garbage-truck-orange", "car-8"])(
+  "rejects invalid %s persisted light state before changing the batch",
+  (model) => {
+    const f = fixture();
+    const record = required(f.traffic.save()[0]);
+    const count = f.traffic.states.size;
+    expect(() =>
+      f.traffic.restore([{ ...record, identity: "bad-lights", model, emergencyState: 3 }]),
+    ).toThrow(/emergency state/);
+    expect(f.traffic.states.size).toBe(count);
+  },
+);

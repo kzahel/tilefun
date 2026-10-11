@@ -8,6 +8,12 @@ import {
 import type { TerrainDiagnostics } from "../rendering/RenderFrame.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
+import {
+  hasVehicleLights,
+  isEmergencyVehicle,
+  isWarningVehicle,
+  vehicleLightState,
+} from "../traffic/EmergencyVehicle.js";
 
 export type TrafficCanvas = HTMLCanvasElement & {
   /** Read-only, on-demand diagnostics for lab profiling and integration checks. */
@@ -60,8 +66,8 @@ export default function TrafficPage() {
         const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
         const occupied = s.view.playerEntity.parentId === car.id;
         setDriving(occupied);
-        setEmergencyState(car.emergencyState ?? 2);
-        c.dataset.emergencyState = String(car.emergencyState ?? 2);
+        setEmergencyState(vehicleLightState(car));
+        c.dataset.emergencyState = String(vehicleLightState(car));
         c.dataset.driving = String(occupied);
         c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
         c.dataset.carX = String(car.position.wx);
@@ -167,6 +173,10 @@ export default function TrafficPage() {
             <option value="bus-4">Bus 4</option>
             <option value="bus-5">Bus 5</option>
             <option value="bus-6">Bus 6</option>
+            <option value="police-car">Police car</option>
+            <option value="garbage-truck-green">Green garbage truck</option>
+            <option value="garbage-truck-orange">Orange garbage truck</option>
+            <option value="fire-truck-ladder-2">Firetruck · raised ladder</option>
             <option value="ambulance">Ambulance</option>
             <option value="fire-truck-ladder-1">Firetruck</option>
           </select>
@@ -176,7 +186,7 @@ export default function TrafficPage() {
             Fast
           </button>
         )}
-        {driving && (model === "ambulance" || model === "fire-truck-ladder-1") && (
+        {driving && hasVehicleLights({ type: `vehicle-v1:${model}` }) && (
           <>
             <button
               type="button"
@@ -186,18 +196,21 @@ export default function TrafficPage() {
                   .catch((e) => setError(String(e)));
               }}
             >
-              Siren {emergencyState & 1 ? "On" : "Off"}
+              {isWarningVehicle({ type: `vehicle-v1:${model}` }) ? "Beacon" : "Siren"}{" "}
+              {emergencyState & 1 ? "On" : "Off"}
             </button>
-            <button
-              type="button"
-              onClick={() => {
-                void scene.current
-                  ?.command({ kind: "vehicle-emergency", action: "style" })
-                  .catch((e) => setError(String(e)));
-              }}
-            >
-              Style: {["Lights only", "EU two-tone", "US wail"][emergencyState >> 1]}
-            </button>
+            {isEmergencyVehicle({ type: `vehicle-v1:${model}` }) && (
+              <button
+                type="button"
+                onClick={() => {
+                  void scene.current
+                    ?.command({ kind: "vehicle-emergency", action: "style" })
+                    .catch((e) => setError(String(e)));
+                }}
+              >
+                Style: {["Lights only", "EU two-tone", "US wail"][emergencyState >> 1]}
+              </button>
+            )}
           </>
         )}
         <button

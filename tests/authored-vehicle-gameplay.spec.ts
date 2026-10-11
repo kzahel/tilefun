@@ -130,11 +130,26 @@ test("every large car loads its own GLB in shared traffic", async ({ page }) => 
   }
 });
 
-for (const vehicle of ["compact-6", "unindexed-sedan-dark", "bus-6", "car-7", "car-15", "car-24"]) {
+for (const vehicle of [
+  "compact-6",
+  "unindexed-sedan-dark",
+  "bus-6",
+  "car-7",
+  "car-15",
+  "car-24",
+  "garbage-truck-green",
+  "garbage-truck-orange",
+  "fire-truck-ladder-2",
+  "police-car",
+  "ambulance",
+]) {
   test(`failed ${vehicle} fetch keeps the traffic scene and sprite fallback available`, async ({
     page,
   }) => {
-    await page.route(`**/assets/models/vehicles/${vehicle}-v1.glb`, (route) => route.abort());
+    const revision = vehicle === "ambulance" ? "v3" : vehicle === "police-car" ? "v2" : "v1";
+    await page.route(`**/assets/models/vehicles/${vehicle}-${revision}.glb`, (route) =>
+      route.abort(),
+    );
     await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
     await page.getByLabel("Playground vehicle", { exact: true }).selectOption(vehicle);
     const canvas = page.getByLabel("Generated traffic playground");
@@ -146,7 +161,7 @@ for (const vehicle of ["compact-6", "unindexed-sedan-dark", "bus-6", "car-7", "c
             gpu?: { vehicleAssets?: Record<string, { state: string; meshes: number }> };
           };
           return gpu?.gpu?.vehicleAssets?.[id];
-        }, `${vehicle}-authored-v1`),
+        }, `${vehicle}-authored-${revision}`),
       )
       .toMatchObject({ state: "failed", meshes: 0 });
     await page.getByRole("button", { name: "Pause", exact: true }).click();
