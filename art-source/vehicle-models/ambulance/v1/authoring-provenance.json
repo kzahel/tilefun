@@ -1,0 +1,10 @@
+{
+  "sourceBank": "src/traffic/vehicles-v1.json",
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "constructionScripts": {
+    "author_ambulance.py": "4448cff35cbcbd4848ec2a418e5b5c9f0b88f72fe9669d13f42627b29ed8fbfe",
+    "build_ambulance.py": "dccf11c6b4280ebb369bd28c07abf2bdb18f5b7ebb14048f644abb948a44891c"
+  },
+  "capture": "Actual evaluated mesh/atlas. Packed source retains its own unused visibility-tested draft.",
+  "status": "Unreviewed authored diagnostic; engine integration pending"
+}

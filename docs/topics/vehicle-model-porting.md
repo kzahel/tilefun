@@ -1,8 +1,8 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 3 exact model bundles retained, 1 integrated
-in the optional game/lab mesh mode. Ambulance is the next new model.
+Status: 45 sprite sets inventoried; 4 exact model bundles retained, 1 integrated
+in game/lab mesh mode. Blue is the main-game GPU default; ambulance v1 awaits owner inspection.
 Updated: 2026-10-11.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
@@ -20,15 +20,15 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **3/45 retained models, 42/45 not yet authored; 1/45 own-model
-engine integrations in optional mesh mode.** All source sets have four views;
+Current progress: **4/45 retained models, 41/45 queued; 1/45 own-model
+engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
 - **Model:** Queued → Authoring → Checking → Retained. Retained means the exact
   GLB, editable Blender/texture bundle and required dependencies are committed
   and verified, per the [delivery checklist](../../art-source/vehicle-models/README.md#next-vehicle-what-to-commit-and-why).
   Use Rework or Paused with a concrete reason when necessary.
-- **Engine:** Pending → Integrating → Optional integrated → Production. Each row
+- **Engine:** Pending → Integrating → Integrated (optional/default) → Production. Each row
   must load that vehicle's own asset and preserve the complete sprite fallback.
   The `allcars3d` test override reuses the blue model for other types and does not
   advance their status.
@@ -38,13 +38,17 @@ source extraction support alone does not count as an authored model.
   [art review](art-review.md) owns that process.
 
 Evidence for existing models: [bundle catalog](../../art-source/vehicle-models/catalog.json)
-and [106](../tactical/106-retained-vehicle-model-bundles.md). Blue's optional
+and [106](../tactical/106-retained-vehicle-model-bundles.md). Blue's
 integration is recorded in [108](../tactical/108-authored-blue-car-gameplay.md)
 and [112](../tactical/112-coherent-car-presentation-and-test-override.md).
+The main game now defaults to GPU plus the blue car; other vehicle types retain
+sprite fallbacks, per [rendering architecture](rendering-architecture.md).
+Ambulance v1's authoring, exact 4×2 and verification are recorded in
+[115](../tactical/115-authored-ambulance.md).
 
 ## Work order
 
-- [ ] Author the **ambulance** next, with its own body, wheel positions, cab/box
+- [x] Author the **ambulance**, with its own body, wheel positions, cab/box
   windows and source-owned graphics. Retain and inspect its exact final bundle.
 - [ ] Connect the retained **green and red compacts** to their own engine assets;
   qualify per-asset registration instead of assuming the blue adapter fits all.
@@ -67,7 +71,7 @@ models have been started. The later family order can change with owner prioritie
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `compact-1` (blue) | [Retained v7](../../art-source/vehicle-models/compact-1/v7/) | Optional integrated | Qualify steering clearance and exact-revision art review. |
+| `compact-1` (blue) | [Retained v7](../../art-source/vehicle-models/compact-1/v7/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
 | `compact-2` (green) | [Retained v7](../../art-source/vehicle-models/compact-2/v7/) | Pending | Load its own GLB; verify game/lab registration, ink and wheel motion. |
 | `compact-3` | Queued | Pending | Run compact eligibility checks; author and inspect its own paint. |
 | `compact-4` (red) | [Retained v1](../../art-source/vehicle-models/compact-4/v1/) | Pending | Load its own GLB; verify game/lab registration, ink and wheel motion. |
@@ -78,7 +82,7 @@ models have been started. The later family order can change with owner prioritie
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `ambulance` | Queued — next new model | Pending | Author a new family template from all four complete views. |
+| `ambulance` | [Retained v1](../../art-source/vehicle-models/ambulance/v1/) — owner inspection pending | Pending | Review the [4×2](../../public/assets/models/vehicles/review/ambulance-v1/comparison.png), roof paint, rear-facing cab and rear trim; qualify steering before integration. |
 | `police-car` | Queued | Pending | Inspect body family; preserve livery, windows and separate light-bar geometry. |
 | `garbage-truck-green` | Queued | Pending | Fit cab/container geometry and wheel rig from the original views. |
 | `garbage-truck-orange` | Queued | Pending | Check geometry correspondence before reusing the green truck template. |

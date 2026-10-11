@@ -19,7 +19,8 @@ records the experiments, external options and their limits.
 
 [Vehicle model porting](vehicle-model-porting.md) owns the running list of all
 45 vehicle sets, model/engine status and next actions. Update it at each vehicle
-checkpoint; the ambulance is the next new authoring target.
+checkpoint; ambulance v1 now awaits owner inspection in
+[115](../tactical/115-authored-ambulance.md).
 
 ## Investigation evidence storage
 
@@ -45,6 +46,18 @@ their exact final export, editable source bundle and required dependencies.
 The [next-vehicle checklist](../../art-source/vehicle-models/README.md#next-vehicle-what-to-commit-and-why)
 owns the file list, reasons and tracked-file-only verification; scripts alone do
 not deliver a finished model.
+
+Ambulance v1 adds a new family-specific cab/box mesh with its own side graphics,
+roof equipment and rigid wheels: 54 meshes/1,024 triangles, world-pixel units,
+four radius-8 tire/hub assemblies. Its packed scene, exact GLB/atlas and all recipe
+dependencies are retained alongside the compacts. The tracked 4×2, contour sheet
+and novel-angle strip form an exact excluded Workshop inspection. Native contour
+IoU is 0.918 east/west, 0.930 rear and 0.914 front (shadows included, not a human
+fidelity score). Roof paint contradictions, rear-facing cab/nose, rear trim and
+steering clearance remain open; engine integration and production promotion are
+pending. The generic raw renderer now overscans long/tall meshes before camera
+registration instead of clipping them; the blue compact's eight recorded render
+hashes remain unchanged. See [115](../tactical/115-authored-ambulance.md).
 
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those

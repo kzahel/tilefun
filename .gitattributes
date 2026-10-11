@@ -14,3 +14,7 @@ public/assets/models/vehicles/** -text
 # These replay inputs are pinned by the retained bundle catalog.
 scripts/authored-assets/compact-final-setup.json -text
 scripts/authored-assets/compact-variant-template.json -text
+scripts/authored-assets/ambulance-family.json -text
+# Constructor hashes in the ambulance capture receipt use LF source bytes.
+scripts/authored-assets/author_ambulance.py text eol=lf
+scripts/authored-assets/build_ambulance.py text eol=lf

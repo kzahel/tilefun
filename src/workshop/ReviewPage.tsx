@@ -67,7 +67,21 @@ export default function ReviewPage() {
         <Link to="/">Return to inbox →</Link>
       </section>
     );
-  if (candidate.kind === "projection") return <Navigate to="/tool/car-projection" replace />;
+  if (candidate.kind === "projection") {
+    const workshopRoute = "/tilefun/workshop.html#";
+    if (candidate.url.startsWith(workshopRoute))
+      return <Navigate to={candidate.url.slice(workshopRoute.length)} replace />;
+    return (
+      <section>
+        <h1>{candidate.name}</h1>
+        <p>{candidate.prompt}</p>
+        <a className="button" href={candidate.url}>
+          Open comparison →
+        </a>
+        <p>{candidate.excluded}</p>
+      </section>
+    );
+  }
   if (candidate.kind === "geometry")
     return (
       <section>

@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "authored-vehicles",
+    name: "Authored vehicle models",
+    description:
+      "Inspect retained sprite/model comparisons and additional angles for the ambulance.",
+    url: "assets/models/vehicles/review/ambulance-v1/",
+    mode: "link",
+  },
+  {
     id: "world-geometry",
     name: "World geometry lab",
     description:
@@ -197,6 +205,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "authored-vehicles",
+    name: "Authored vehicle models",
+    description:
+      "Exact retained model comparisons for owner inspection; production art approval remains pending.",
+    toolId: "authored-vehicles",
+  },
   {
     id: "world-geometry",
     name: "World geometry proof",

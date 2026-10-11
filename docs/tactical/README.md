@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [115 Authored ambulance](115-authored-ambulance.md) | Retained v1 for owner inspection: ambulance-specific Blender/UV geometry, rigid wheels and exact sprite/render 4×2; engine integration pending |
 | [114 Remaining authority work](114-authority-work-profile.md) | Complete desktop profile: dense collision candidate scaling, effective ground reuse and recurring record/snapshot work; narrow footprint queries recommended |
 | [113 Shared AI planning](113-shared-ai-planning.md) | Shared cadence and bounded search work across all wildlife and ambient wander, with starvation prevention; desktop burst reduction validated, pre-existing GPU upload-test flake recorded |
 | [112 Coherent car presentation and test override](112-coherent-car-presentation-and-test-override.md) | Fixed world projection, immediate motion heading/rest hold and opt-in all-road-vehicle blue appearance; physics unchanged |

@@ -1,0 +1,36 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-ambulance-v1",
+  "candidateFingerprint": "8fa95f15aecfbbf940e422aa145236a5faf9500ab0e0e622808e6c3cc0620835",
+  "identity": {
+    "assetId": "ambulance",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "dad40be50ea0e6e2bacf63c31493480fc1075f396d9e7db3b9febc636078cace",
+    "sourceAtlasSha256": "5cc02527d6aeb98e889d9cb0467093e793efd7c7bf24cec0dca7fb738e2792e2",
+    "files": [
+      {
+        "url": "assets/models/vehicles/ambulance-v1.glb",
+        "sha256": "3e9e72d32171da7f2fbbdca37a5bbca36d3bf8b5462b7c9ca348bfd70cfb906c"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v1/comparison.png",
+        "sha256": "0aa3fa265f3e97dd008985c240fefc5d37346572708c0d0043a2c73d32dc2bd5"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v1/orbit.png",
+        "sha256": "ce588b1d891f2619532b6169fd9cc02879b63960a5552aca289612fb787dfa3d"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v1/silhouette.png",
+        "sha256": "db94ff1b59df4529c4edaeba852d0dbcfef050d373ff9bf33173b0925efd40ea"
+      }
+    ]
+  },
+  "status": "Retained diagnostic awaiting owner inspection; not promoted",
+  "notes": [
+    "Roof panel paint differs across source directions; this model has one coherent north-owned roof.",
+    "Cab/nose appearance in the rear view and rear trim still need human judgment.",
+    "Wheel roll is independent; steering clearance and game integration remain open."
+  ]
+}

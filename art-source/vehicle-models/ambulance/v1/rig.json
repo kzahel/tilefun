@@ -1,0 +1,77 @@
+{
+  "root": "CarRoot",
+  "body": "Body",
+  "units": "world pixels",
+  "forward": [
+    -1,
+    0,
+    0
+  ],
+  "up": [
+    0,
+    0,
+    1
+  ],
+  "rollAxisBlender": [
+    0,
+    1,
+    0
+  ],
+  "rollAxisGltf": [
+    0,
+    0,
+    -1
+  ],
+  "drivingRule": "angle=-signedForwardDistance/radius; signedForwardDistance positive along -X",
+  "wheels": [
+    {
+      "id": "FL",
+      "center": [
+        -40,
+        -18.2,
+        8
+      ],
+      "radius": 8,
+      "steering": true,
+      "steer": "Wheel_FL_Steer",
+      "roll": "Wheel_FL_Roll"
+    },
+    {
+      "id": "FR",
+      "center": [
+        -40,
+        18.2,
+        8
+      ],
+      "radius": 8,
+      "steering": true,
+      "steer": "Wheel_FR_Steer",
+      "roll": "Wheel_FR_Roll"
+    },
+    {
+      "id": "RL",
+      "center": [
+        23,
+        -18.2,
+        8
+      ],
+      "radius": 8,
+      "steering": false,
+      "steer": "Wheel_RL_Steer",
+      "roll": "Wheel_RL_Roll"
+    },
+    {
+      "id": "RR",
+      "center": [
+        23,
+        18.2,
+        8
+      ],
+      "radius": 8,
+      "steering": false,
+      "steer": "Wheel_RR_Steer",
+      "roll": "Wheel_RR_Roll"
+    }
+  ],
+  "steeringClearance": "not yet qualified"
+}

@@ -76,12 +76,14 @@ try {
       ).bundles.map((bundle) => ({
         prefix: `${bundle.assetId}-`,
         assetUrl: `/tilefun/${bundle.glb.replace(/^public\//, "")}`,
+        geometry: bundle.geometry ?? { meshObjects: 55, triangles: 842 },
       }))
     : (revision === "red-v1" ? [""] : ["", "green-"]).map((prefix) => ({
         prefix,
         assetUrl: `/tilefun/demos/authored-car/${revision}/${prefix}car.glb`,
+        geometry: { meshObjects: 55, triangles: revision === "v4" ? 834 : 842 },
       }));
-  for (const { prefix, assetUrl } of cases) {
+  for (const { prefix, assetUrl, geometry } of cases) {
     const page = await browser.newPage();
     await page.goto(`${origin}/tilefun/__vehicle_rig_probe`, {
       waitUntil: "networkidle",
@@ -138,17 +140,23 @@ try {
           return { tire, local };
         });
         // Forward is -X: bottom contact rotates toward +X relative to the car.
-        rig.setTravel((4.1 * Math.PI) / 2);
+        for (const wheel of rig.wheels) rig.setWheelTravel(wheel.id, (wheel.radius * Math.PI) / 2);
         checkFixed();
         bottomPoints.forEach(({ tire, local }, k) => {
           const p = tire.localToWorld(local.clone());
-          if (Math.abs(p.x - centers[k].x - 4.1) > 1e-4 || Math.abs(p.y - centers[k].y) > 1e-4)
+          if (
+            Math.abs(p.x - centers[k].x - rig.wheels[k].radius) > 1e-4 ||
+            Math.abs(p.y - centers[k].y) > 1e-4
+          )
             throw new Error("Wrong exported spin axis/sign/radius");
         });
-        rig.setTravel((-4.1 * Math.PI) / 2);
+        for (const wheel of rig.wheels) rig.setWheelTravel(wheel.id, (-wheel.radius * Math.PI) / 2);
         checkFixed();
         bottomPoints.forEach(({ tire, local }, k) => {
-          if (Math.abs(tire.localToWorld(local.clone()).x - centers[k].x + 4.1) > 1e-4)
+          if (
+            Math.abs(tire.localToWorld(local.clone()).x - centers[k].x + rig.wheels[k].radius) >
+            1e-4
+          )
             throw new Error("Reverse spin failed");
         });
         rig.setTravel(0);
@@ -192,7 +200,9 @@ try {
         const display = new THREE.Scene();
         display.background = new THREE.Color("#53636b");
         display.add(scene);
-        const camera = new THREE.OrthographicCamera(-40, 40, 40, -40, 0.1, 1000);
+        const size = new THREE.Box3().setFromObject(scene).getSize(new THREE.Vector3());
+        const extent = Math.max(size.x, size.y, size.z) * 0.65;
+        const camera = new THREE.OrthographicCamera(-extent, extent, extent, -extent, 0.1, 1000);
         camera.position.set(-65, 65, 85);
         camera.lookAt(0, 10, 0);
         renderer.render(display, camera);
@@ -203,6 +213,7 @@ try {
           meshes,
           triangles,
           wheels: rig.wheels.length,
+          wheelRadii: rig.wheels.map((wheel) => wheel.radius),
           childrenPerWheel: 2,
           bodyFixed: true,
           centersFixed: true,
@@ -213,8 +224,8 @@ try {
       },
       { assetUrl },
     );
-    assert.equal(result.meshes, 55);
-    assert.equal(result.triangles, revision === "v4" ? 834 : 842);
+    assert.equal(result.meshes, geometry.meshObjects);
+    assert.equal(result.triangles, geometry.triangles);
     assert.equal(result.wheels, 4);
     await page.locator("#rig-proof").screenshot({ path: resolve(output, `${prefix}rig.png`) });
     results.push({ prefix, ...result });

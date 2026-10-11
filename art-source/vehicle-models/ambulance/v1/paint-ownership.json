@@ -1,0 +1,605 @@
+{
+  "regions": [
+    {
+      "region": "Box-east",
+      "rect": [
+        0,
+        0,
+        128,
+        128
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Cab-east",
+      "rect": [
+        128,
+        0,
+        256,
+        128
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Fender-F-east",
+      "rect": [
+        256,
+        0,
+        384,
+        128
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Fender-R-east",
+      "rect": [
+        384,
+        0,
+        512,
+        128
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Box-west",
+      "rect": [
+        512,
+        0,
+        640,
+        128
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Cab-west",
+      "rect": [
+        640,
+        0,
+        768,
+        128
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Fender-F-west",
+      "rect": [
+        768,
+        0,
+        896,
+        128
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Fender-R-west",
+      "rect": [
+        896,
+        0,
+        1024,
+        128
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Box-roof",
+      "rect": [
+        0,
+        128,
+        128,
+        256
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-doors",
+      "rect": [
+        128,
+        128,
+        256,
+        256
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Box-front-wall",
+      "rect": [
+        256,
+        128,
+        384,
+        256
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Cab-roof",
+      "rect": [
+        384,
+        128,
+        512,
+        256
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Windshield-and-frame",
+      "rect": [
+        512,
+        128,
+        640,
+        256
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Hood",
+      "rect": [
+        640,
+        128,
+        768,
+        256
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Front-fascia",
+      "rect": [
+        768,
+        128,
+        896,
+        256
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Underfloor",
+      "rect": [
+        896,
+        128,
+        1024,
+        256
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-step",
+      "rect": [
+        0,
+        256,
+        128,
+        384
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-step-face",
+      "rect": [
+        128,
+        256,
+        256,
+        384
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-rail-east",
+      "rect": [
+        256,
+        256,
+        384,
+        384
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-rail-back-east",
+      "rect": [
+        384,
+        256,
+        512,
+        384
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-rail-west",
+      "rect": [
+        512,
+        256,
+        640,
+        384
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Rear-rail-back-west",
+      "rect": [
+        640,
+        256,
+        768,
+        384
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-0-top",
+      "rect": [
+        768,
+        256,
+        896,
+        384
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-0-east",
+      "rect": [
+        896,
+        256,
+        1024,
+        384
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-0-west",
+      "rect": [
+        0,
+        384,
+        128,
+        512
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-0-front",
+      "rect": [
+        128,
+        384,
+        256,
+        512
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-0-rear",
+      "rect": [
+        256,
+        384,
+        384,
+        512
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-1-top",
+      "rect": [
+        384,
+        384,
+        512,
+        512
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-1-east",
+      "rect": [
+        512,
+        384,
+        640,
+        512
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-1-west",
+      "rect": [
+        640,
+        384,
+        768,
+        512
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-1-front",
+      "rect": [
+        768,
+        384,
+        896,
+        512
+      ],
+      "owner": "south",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Roof-panel-1-rear",
+      "rect": [
+        896,
+        384,
+        1024,
+        512
+      ],
+      "owner": "north",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Blue-bar-0-top",
+      "rect": [
+        0,
+        512,
+        128,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill",
+      "paintSource": "Frozen north light-bar strip [7,9,34,3], rectified to this face; inferred transfer"
+    },
+    {
+      "region": "Blue-bar-0-east",
+      "rect": [
+        128,
+        512,
+        256,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Blue-bar-0-west",
+      "rect": [
+        256,
+        512,
+        384,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Blue-bar-0-front",
+      "rect": [
+        384,
+        512,
+        512,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill",
+      "paintSource": "Frozen north light-bar strip [7,9,34,3], rectified to this face; inferred transfer"
+    },
+    {
+      "region": "Blue-bar-0-rear",
+      "rect": [
+        512,
+        512,
+        640,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill",
+      "paintSource": "Frozen north light-bar strip [7,9,34,3], rectified to this face; inferred transfer"
+    },
+    {
+      "region": "Blue-bar-1-top",
+      "rect": [
+        640,
+        512,
+        768,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill",
+      "paintSource": "Frozen north light-bar strip [7,9,34,3], rectified to this face; inferred transfer"
+    },
+    {
+      "region": "Blue-bar-1-east",
+      "rect": [
+        768,
+        512,
+        896,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Blue-bar-1-west",
+      "rect": [
+        896,
+        512,
+        1024,
+        640
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Blue-bar-1-front",
+      "rect": [
+        0,
+        640,
+        128,
+        768
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill",
+      "paintSource": "Frozen north light-bar strip [7,9,34,3], rectified to this face; inferred transfer"
+    },
+    {
+      "region": "Blue-bar-1-rear",
+      "rect": [
+        128,
+        640,
+        256,
+        768
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill",
+      "paintSource": "Frozen north light-bar strip [7,9,34,3], rectified to this face; inferred transfer"
+    },
+    {
+      "region": "Mirror--1",
+      "rect": [
+        256,
+        640,
+        384,
+        768
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Mirror-arm--1",
+      "rect": [
+        384,
+        640,
+        512,
+        768
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Mirror-1",
+      "rect": [
+        512,
+        640,
+        640,
+        768
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Mirror-arm-1",
+      "rect": [
+        640,
+        640,
+        768,
+        768
+      ],
+      "owner": null,
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Tire-FL",
+      "rect": [
+        768,
+        640,
+        896,
+        768
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Hub-FL",
+      "rect": [
+        896,
+        640,
+        1024,
+        768
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Tire-FR",
+      "rect": [
+        0,
+        768,
+        128,
+        896
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Hub-FR",
+      "rect": [
+        128,
+        768,
+        256,
+        896
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Tire-RL",
+      "rect": [
+        256,
+        768,
+        384,
+        896
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Hub-RL",
+      "rect": [
+        384,
+        768,
+        512,
+        896
+      ],
+      "owner": "west",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Tire-RR",
+      "rect": [
+        512,
+        768,
+        640,
+        896
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    },
+    {
+      "region": "Hub-RR",
+      "rect": [
+        640,
+        768,
+        768,
+        896
+      ],
+      "owner": "east",
+      "outsideSource": "nearest opaque source edge is explicitly inferred fill"
+    }
+  ],
+  "note": "Owned source-image affine UVs on fitted surfaces; nearest-edge fill and colored hidden faces are inferred. Raw ray-visible projection and coverage are retained separately."
+}

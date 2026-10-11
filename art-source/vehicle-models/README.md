@@ -1,4 +1,4 @@
-# Retained compact-car models
+# Retained vehicle models
 
 These are the exact final assets from the Blender authoring work. They are tracked
 deliverables; older intermediate models and scratch galleries remain ignored.
@@ -11,6 +11,7 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Blue `compact-1` | [v7](compact-1/v7/) | [compact-1-v7.glb](../../public/assets/models/vehicles/compact-1-v7.glb) |
 | Green `compact-2` | [v7](compact-2/v7/) | [compact-2-v7.glb](../../public/assets/models/vehicles/compact-2-v7.glb) |
 | Red `compact-4` | [v1](compact-4/v1/) | [compact-4-v1.glb](../../public/assets/models/vehicles/compact-4-v1.glb) |
+| Ambulance | [v1](ambulance/v1/) | [ambulance-v1.glb](../../public/assets/models/vehicles/ambulance-v1.glb) |
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
@@ -21,8 +22,10 @@ copied unchanged after checking the original inspection receipts. Recipe wrapper
 only update paths to tracked, portable dependencies. `catalog.json` records SHA-256
 pins, capture identities and the expected native/novel rendered-image hashes.
 
-All models have 55 meshes, 842 triangles and four separate steer/roll tire+hub
-assemblies. Units are world pixels, Blender up is +Z and forward is -X, with
+The compacts have 55 meshes/842 triangles; the ambulance has 54 meshes/1,024
+triangles and its own body/roof geometry, source-owned side graphics and paint
+ownership records. All have four separate steer/roll tire+hub assemblies.
+Units are world pixels, Blender up is +Z and forward is -X, with
 tire contacts on Z=0. GLBs use Blender's +Y-up export conversion. The GLB embeds
 the cleaned atlas; Blender scenes pack their textures, including retained unused
 projection images. Inherited draft paint does not establish observation coverage.
@@ -32,7 +35,12 @@ art or grant a new human approval. Internal window ink is atlas paint; the outer
 pixel outline requires a renderer pass. The optional game/lab mesh mode now loads
 the blue GLB with native silhouette ink and cosmetic wheel roll; see
 [108](../../docs/tactical/108-authored-blue-car-gameplay.md). Green/red integration
-and wheel steering clearance remain open.
+and wheel steering clearance remain open. The ambulance's exact
+[4×2 review sheet](../../public/assets/models/vehicles/review/ambulance-v1/comparison.png)
+and [additional angles](../../public/assets/models/vehicles/review/ambulance-v1/orbit.png)
+are retained review snapshots, registered as an excluded Workshop inspection.
+Its north-owned roof paint, rear-facing cab/nose and rear fittings need owner
+judgment; [115](../../docs/tactical/115-authored-ambulance.md) records the slice.
 
 From the repository root:
 

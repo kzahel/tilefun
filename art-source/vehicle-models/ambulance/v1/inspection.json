@@ -1,0 +1,36 @@
+{
+  "recipeSha256": "481f81f17f45f2d03506f5275d24d7fa01a3cf03b48863c1ce4218ffee26a393",
+  "silhouettes": {
+    "east": {
+      "iou": 0.9181114551083591,
+      "sourceOnly": 334,
+      "renderOnly": 195,
+      "meanBoundaryDistancePixels": 1.4863371150199922,
+      "maxBoundaryDistancePixels": 5.0
+    },
+    "west": {
+      "iou": 0.9181114551083591,
+      "sourceOnly": 334,
+      "renderOnly": 195,
+      "meanBoundaryDistancePixels": 1.4863371150199922,
+      "maxBoundaryDistancePixels": 5.0
+    },
+    "north": {
+      "iou": 0.9300450557268201,
+      "sourceOnly": 184,
+      "renderOnly": 111,
+      "meanBoundaryDistancePixels": 1.0187490444286569,
+      "maxBoundaryDistancePixels": 2.8284271247461903
+    },
+    "south": {
+      "iou": 0.9141156462585034,
+      "sourceOnly": 196,
+      "renderOnly": 208,
+      "meanBoundaryDistancePixels": 1.284389155732183,
+      "maxBoundaryDistancePixels": 4.47213595499958
+    }
+  },
+  "windshieldGeometrySha256": null,
+  "topEdge": {},
+  "limits": "IoU includes painted shadows; contours do not measure internal fender/window fit. Optional t=.90 top-band probe belongs to the configured compact aperture, not every asset."
+}

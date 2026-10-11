@@ -8,6 +8,9 @@ import sys
 import bpy
 from mathutils import Vector
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from projection_math import raw_frame_size
+
 OUT = Path(sys.argv[sys.argv.index("--") + 1])
 recipe = json.loads((OUT / "recipe.json").read_text())
 scene = bpy.context.scene
@@ -83,7 +86,9 @@ scene.view_settings.look = "None"
 scene.view_settings.exposure = 0
 scene.view_settings.gamma = 1
 w, h = recipe["canvas"]
-scene.render.resolution_x, scene.render.resolution_y = w*8, h*8
+vertices = [o.matrix_world @ v.co for o in meshes for v in o.data.vertices]
+raw_w, raw_h = raw_frame_size(vertices, [v['camera'] for v in recipe['views']], (w, h))
+scene.render.resolution_x, scene.render.resolution_y = raw_w*8, raw_h*8
 
 
 def camera(azimuth, elevation, target, scale):
@@ -101,10 +106,9 @@ def render(name):
 
 for view in recipe["views"]:
     c = view["camera"]
-    camera(c["azimuth"], c["elevation"], Vector((0, 0, 0)), w)
+    camera(c["azimuth"], c["elevation"], Vector((0, 0, 0)), raw_w)
     render(view["id"] + "-raw")
 
-vertices = [o.matrix_world @ v.co for o in meshes for v in o.data.vertices]
 lower = Vector([min(v[k] for v in vertices) for k in range(3)])
 upper = Vector([max(v[k] for v in vertices) for k in range(3)])
 scene.render.resolution_x = scene.render.resolution_y = 256
@@ -133,6 +137,7 @@ for obj in meshes:
     obj.data.calc_loop_triangles()
     triangles += len(obj.data.loop_triangles)
 audit = {"blenderVersion": bpy.app.version_string, "meshObjects": len(meshes), "triangles": triangles,
+         "rawFrame": [raw_w, raw_h],
          "bounds": [list(lower), list(upper)], "appearance": recipe.get("appearance", "unlit"),
          "meshSha256": hashlib.sha256(json.dumps([[o.name, [list(o.matrix_world @ v.co) for v in o.data.vertices]] for o in meshes]).encode()).hexdigest()}
 (OUT / "audit.json").write_text(json.dumps(audit, indent=2)+"\n")

@@ -18,7 +18,10 @@ else:
     image.reload()
 image.use_fake_user = True
 image.pack()
+for packed in bpy.data.images:
+    if packed.source == 'FILE' and packed.packed_file:
+        packed.filepath_raw = '//' + Path(packed.filepath).name
 bpy.context.preferences.filepaths.save_version = 0
-bpy.context.scene['review_status'] = 'Unreviewed family variant; cleaned atlas plus own source-projection draft'
+bpy.context.scene['review_status'] = 'Unreviewed authored asset; cleaned atlas plus own source-projection draft'
 bpy.ops.wm.save_as_mainfile(filepath=str(output))
 print('Own source draft packed; mesh, active atlas and rig retained.')

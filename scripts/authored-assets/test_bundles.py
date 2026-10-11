@@ -5,12 +5,17 @@ import unittest
 
 from pipeline import HERE, ROOT, digest, read, write
 from transfer_variant import transfer
-from verify_bundles import verify
+from verify_bundles import glb_content, verify
 
 
 class RetainedBundleTests(unittest.TestCase):
     def test_all_final_assets_and_source_dependencies_are_self_contained(self):
-        self.assertEqual([r['assetId'] for r in verify()], ['compact-1', 'compact-2', 'compact-4'])
+        self.assertEqual([r['assetId'] for r in verify()], ['compact-1', 'compact-2', 'compact-4', 'ambulance'])
+
+    def test_ambulance_cannot_pass_with_compact_geometry_expectations(self):
+        source = ROOT / 'art-source/vehicle-models/ambulance/v1'
+        with self.assertRaisesRegex(ValueError, 'recorded audit'):
+            glb_content(ROOT / 'public/assets/models/vehicles/ambulance-v1.glb', source / 'car-atlas.png')
 
     def test_default_replay_inputs_produce_the_retained_red_atlas(self):
         with tempfile.TemporaryDirectory() as tmp:

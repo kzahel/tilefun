@@ -208,6 +208,115 @@
         "south-render.png": "673a9657a305da2161df9b1f9fa686f85801cc42a83d04211f2aa3ad7feedabb",
         "west-render.png": "3aae8c49602c61b60394eb0612cfda805b0240fba930e85b60021be517d37f05"
       }
+    },
+    {
+      "assetId": "ambulance",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/ambulance-v1.glb",
+      "source": "art-source/vehicle-models/ambulance/v1",
+      "capturedCandidateId": "projection:authored-ambulance-v1",
+      "capturedCandidateSha256": "8fa95f15aecfbbf940e422aa145236a5faf9500ab0e0e622808e6c3cc0620835",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 54,
+        "triangles": 1024
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/authoring-provenance.json",
+          "sha256": "6a242b953b851f38836884696ff1f3bdf0ad623ea7bc68ad53391e2685739e88"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/car-atlas.png",
+          "sha256": "5cc02527d6aeb98e889d9cb0467093e793efd7c7bf24cec0dca7fb738e2792e2"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/car.blend",
+          "sha256": "dad40be50ea0e6e2bacf63c31493480fc1075f396d9e7db3b9febc636078cace"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/coverage.json",
+          "sha256": "ec1a4e9421b71dbd6fba06c1e88d5320ebea6efb4109b80b72caa3ef036b461f"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/family-config.json",
+          "sha256": "05b7a2dc625799fa905171319925bf37c9cb7feed6cc230aa1db50be0bb0a417"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/geometry-audit.json",
+          "sha256": "c31ff21af4a1469b3476283dae4b35a25047f1293ebd112bf392868670627085"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/inspection.json",
+          "sha256": "e06c7cb5cdbcbc448282062bd7ed11ff26ac030c0392141e7c221c8528f6ac66"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/paint-ownership.json",
+          "sha256": "21bc817f53fb2df331bd6966b0ec0291d106369dbd800e84b03035dc32818846"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/projection-coverage.png",
+          "sha256": "cc0dcb213ec7ab77296da270600bf4fd2b8cce23d59ecb0a3028aea5ea26f895"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/projection-draft.png",
+          "sha256": "94f83b39a5a4d490fccc73b140df5f5a9250c9c990de46adf1ed8462e34c5773"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/recipe.json",
+          "sha256": "e50a56bc28e3240f6437ec23f6d0aea9ae24f56072eafb075db42dc1b50c6a92"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/refs/east.png",
+          "sha256": "be6eacad30aa1df0d481e7ecaede5045b429e4e9afa9a3549468947cae6a2f97"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/refs/north.png",
+          "sha256": "ae362279ebea7acea4495740a60615ff117e65cf3c64cc5e43c2ba835967c566"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/refs/south.png",
+          "sha256": "203646aa448e2d8fd5c05b152c3d1a2895ef86287f20551be34606caefdf98ae"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/refs/west.png",
+          "sha256": "fa7c4a453506945029314b121fc2c797e7eb37bb3e78531cbcbdd7934f5000db"
+        },
+        {
+          "path": "art-source/vehicle-models/ambulance/v1/rig.json",
+          "sha256": "a25b9667287de8772fbd7d23920fa5faf66295a162745b17ef53e9b514d78bd7"
+        },
+        {
+          "path": "public/assets/models/vehicles/ambulance-v1.glb",
+          "sha256": "3e9e72d32171da7f2fbbdca37a5bbca36d3bf8b5462b7c9ca348bfd70cfb906c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/ambulance-v1/comparison.png",
+          "sha256": "0aa3fa265f3e97dd008985c240fefc5d37346572708c0d0043a2c73d32dc2bd5"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/ambulance-v1/orbit.png",
+          "sha256": "ce588b1d891f2619532b6169fd9cc02879b63960a5552aca289612fb787dfa3d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/ambulance-v1/silhouette.png",
+          "sha256": "db94ff1b59df4529c4edaeba852d0dbcfef050d373ff9bf33173b0925efd40ea"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/ambulance-v1/review.json",
+          "sha256": "55ae3158bd70930292486b8caab368207e1822d085863d2b23d6e2091d20fd74"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "fd3eb212ed9f7b3c5f54718b788ecc0ddfa6b83a04a15f1643f6f7b2d0bf90c2",
+        "west-render.png": "d6fe88512df4f15a864823bbc16187b2f139b0780893c7a5f45d2d244b0c301b",
+        "north-render.png": "a639ed8e3448cd0c8acff02479d0ce21f72ceeedd1729e8922af6fb74343d983",
+        "south-render.png": "0a5bdc23c7a63bd36160535af93431c52db2e826ba32ae093cb502590c93e531",
+        "orbit-0.png": "6ee30b3996df90b71ddc6a0e0b40c2cc5f64f5381833c4dd7e951370b359862c",
+        "orbit-1.png": "1a93e3419d11daaa91469c20e2ff61ee7e8f82b716284e2c406128637a36d1da",
+        "orbit-2.png": "8c8b7e464c44c31a46983ac47dd254d2ed8bb529eb70ea3acb97f3268638fc42",
+        "orbit-3.png": "0f016f5ec6e432c5742a6ba84a7c1f335e9bd32cf3ec3f3dee7226f36fbdfdf6"
+      }
     }
   ],
   "dependencies": [

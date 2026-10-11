@@ -33,6 +33,12 @@ palette replay uses these pinned, tracked dependencies and works in a fresh clon
 Run `verify_bundles.py` before using them. Older experiments/galleries stay ignored.
 Do not silently replace missing inputs or overwrite a retained final revision.
 
+For the ambulance, `author_ambulance.py` constructs a new family in a fresh
+workspace; its retained v1 recipe can replay the exact finished scene. Read the
+ambulance section in `scripts/authored-assets/README.md` and the current tracker
+before choosing construction or refinement. Its own cameras, radius-8 wheels,
+asymmetric side graphics and roof ownership must not inherit compact defaults.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;

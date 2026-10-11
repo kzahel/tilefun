@@ -1,0 +1,61 @@
+{
+  "schema": "tilefun-ambulance-family-v1",
+  "box": { "rear": 50, "front": -24, "halfWidth": 18, "base": 8, "roof": 46 },
+  "cab": {
+    "roofRear": -24,
+    "roofFront": -32,
+    "roofRearHeight": 42,
+    "roofFrontHeight": 38,
+    "screenBottom": -44,
+    "screenBottomHeight": 24,
+    "nose": -59,
+    "noseHeight": 16,
+    "halfWidth": 17,
+    "noseHalfWidth": 14.5
+  },
+  "wheels": {
+    "frontAxle": -40,
+    "rearAxle": 23,
+    "radius": 8,
+    "halfWidthCenter": 18.2,
+    "tireWidth": 2.8,
+    "hubRadius": 4.2,
+    "archRadius": 8.8,
+    "fenderOuterRadius": 9.3
+  },
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 46.85,
+      "horizontalScale": 1,
+      "verticalStretch": 1.0966,
+      "origin": [64, 80],
+      "status": "ambulance landmark hypothesis; side roof, sill and wheel centers"
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 46.85,
+      "horizontalScale": 1,
+      "verticalStretch": 1.0966,
+      "origin": [64, 80],
+      "status": "ambulance landmark hypothesis; independently observed west graphics"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 55,
+      "horizontalScale": 1.1,
+      "verticalStretch": 0.88781818,
+      "origin": [64, 58],
+      "status": "ambulance rear width, roof, door and nose landmark hypothesis"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 55,
+      "horizontalScale": 1.1,
+      "verticalStretch": 0.88781818,
+      "origin": [64, 71],
+      "status": "ambulance front width, roof, windshield and nose landmark hypothesis"
+    }
+  },
+  "note": "New ambulance geometry, not a compact recolor. Source-camera hypotheses are diagnostic and do not define game-camera registration. Forward -X, up +Z, world-pixel units. Roof paint differences across source views require an authored ownership choice."
+}

@@ -17,7 +17,7 @@ def local(root, value):
     return path
 
 
-def glb_content(path, atlas):
+def glb_content(path, atlas, expected=None, rig=None):
     blob = path.read_bytes()
     magic, version, size = struct.unpack_from('<III', blob)
     if (magic, version, size) != (0x46546C67, 2, len(blob)):
@@ -37,27 +37,31 @@ def glb_content(path, atlas):
         raise ValueError('GLB texture is not embedded')
     view = model['bufferViews'][model['images'][0]['bufferView']]
     start = view.get('byteOffset', 0)
-    with Image.open(BytesIO(binary[start:start + view['byteLength']])) as embedded, Image.open(atlas) as expected:
-        embedded, expected = embedded.convert('RGBA'), expected.convert('RGBA')
-        if embedded.size != expected.size or embedded.tobytes() != expected.tobytes():
+    with Image.open(BytesIO(binary[start:start + view['byteLength']])) as embedded, Image.open(atlas) as expected_image:
+        embedded, expected_image = embedded.convert('RGBA'), expected_image.convert('RGBA')
+        if embedded.size != expected_image.size or embedded.tobytes() != expected_image.tobytes():
             raise ValueError('Embedded GLB texture differs from retained atlas')
     triangles = sum(model['accessors'][p['indices']]['count'] // 3
                     for mesh in model['meshes'] for p in mesh['primitives'])
-    if len(model['meshes']) != 55 or triangles != 842:
-        raise ValueError('Retained compact geometry changed')
+    expected = expected or {'meshObjects': 55, 'triangles': 842}
+    if len(model['meshes']) != expected['meshObjects'] or triangles != expected['triangles']:
+        raise ValueError('Retained geometry differs from its recorded audit')
     nodes = {node['name']: i for i, node in enumerate(model['nodes']) if 'name' in node}
     car, body = nodes['CarRoot'], nodes['Body']
     if body not in model['nodes'][car]['children']:
         raise ValueError('Body is detached from CarRoot')
+    wheels = {w['id']: w for w in rig['wheels']} if rig else {}
     for wheel in ['FL', 'FR', 'RL', 'RR']:
         steer, roll = nodes[f'Wheel_{wheel}_Steer'], nodes[f'Wheel_{wheel}_Roll']
         pivot = model['nodes'][roll]
         if (steer not in model['nodes'][car]['children'] or
                 roll not in model['nodes'][steer]['children'] or len(pivot['children']) != 2):
             raise ValueError(f'Wheel hierarchy changed: {wheel}')
-        if pivot['extras']['wheel_radius'] != 4.1 or pivot['extras']['roll_axis_gltf'] != [0, 0, -1]:
+        expected_wheel = wheels.get(wheel, {'radius': 4.1, 'rollAxisGltf': [0, 0, -1]})
+        axis = expected_wheel.get('rollAxisGltf', rig.get('rollAxisGltf') if rig else [0, 0, -1])
+        if pivot['extras']['wheel_radius'] != expected_wheel['radius'] or pivot['extras']['roll_axis_gltf'] != axis:
             raise ValueError(f'Wheel radius/axis changed: {wheel}')
-    return {'meshes': 55, 'triangles': triangles, 'wheels': 4, 'embeddedAtlas': 'exact RGBA'}
+    return {'meshes': len(model['meshes']), 'triangles': triangles, 'wheels': 4, 'embeddedAtlas': 'exact RGBA'}
 
 
 def verify(root=ROOT):
@@ -82,7 +86,8 @@ def verify(root=ROOT):
             if digest(local(root, str((source / view['source']).relative_to(root)))) != view['sourceSha256']:
                 raise ValueError('Frozen source crop changed')
         results.append({'assetId': bundle['assetId'], 'revision': bundle['revision'],
-                        **glb_content(local(root, bundle['glb']), source / 'car-atlas.png')})
+                        **glb_content(local(root, bundle['glb']), source / 'car-atlas.png',
+                                      bundle.get('geometry'), read(source / 'rig.json'))})
     return results
 
 

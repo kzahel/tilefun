@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "authored-vehicles",
+      "name": "Authored vehicle models",
+      "description": "Inspect retained sprite/model comparisons and additional angles for the ambulance.",
+      "url": "assets/models/vehicles/review/ambulance-v1/",
+      "mode": "link"
+    },
+    {
       "id": "world-geometry",
       "name": "World geometry lab",
       "description": "Walk a raised deck or descend into an underground garage; inspect shared physics, spaces and cutaway visibility.",
@@ -178,6 +185,12 @@
     }
   ],
   "batches": [
+    {
+      "id": "authored-vehicles",
+      "name": "Authored vehicle models",
+      "description": "Exact retained model comparisons for owner inspection; production art approval remains pending.",
+      "toolId": "authored-vehicles"
+    },
     {
       "id": "world-geometry",
       "name": "World geometry proof",
@@ -6284,6 +6297,17 @@
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "fingerprint": "fb67640fe63f5cf557e03a1ebcc4cbcac23c1ac4913e7b9977b9bf366d4517d8",
       "excluded": "Exploratory orbit view; not an immutable approval snapshot."
+    },
+    {
+      "id": "projection:authored-ambulance-v1",
+      "batchId": "authored-vehicles",
+      "name": "Ambulance · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/ambulance-v1/",
+      "kind": "projection",
+      "fingerprint": "8fa95f15aecfbbf940e422aa145236a5faf9500ab0e0e622808e6c3cc0620835",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
     {
       "id": "geometry:deck-ramp-v1",
@@ -29947,5 +29971,5 @@
       }
     }
   ],
-  "inputDigest": "668719f480e4fec706595f074f81f3636c04b54a793b90ff89b44c78161c3b0f"
+  "inputDigest": "2005d514da7771cfdc4f4d41adf2aa52228070a4ce1ca9e39aa117afad41ad24"
 }

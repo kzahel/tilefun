@@ -3,7 +3,10 @@ import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
-import { buildCarProjectionCandidate } from "./CarProjectionCandidate.js";
+import {
+  buildAuthoredVehicleCandidates,
+  buildCarProjectionCandidate,
+} from "./CarProjectionCandidate.js";
 import { buildCharacterCandidates } from "./CharacterCandidates.js";
 import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildFamilySheetCandidates } from "./FamilySheetCandidates.js";
@@ -41,6 +44,7 @@ try {
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
   candidates.push(...(await buildNaturalCandidates(catalog)));
   candidates.push(await buildCarProjectionCandidate());
+  candidates.push(...(await buildAuthoredVehicleCandidates()));
   candidates.push(
     await buildWorldGeometryCandidate(),
     await buildWorldGeometryCandidate("garage"),

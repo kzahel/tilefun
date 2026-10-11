@@ -8,7 +8,7 @@ remain explicit work. Normal builds never run this pipeline.
 
 ## Source and local output boundary
 
-Git retains the exact final blue/green/red model bundles in
+Git retains the exact final blue/green/red compact and ambulance model bundles in
 [`art-source/vehicle-models/`](../../art-source/vehicle-models/README.md), with
 self-contained GLBs in `public/assets/models/vehicles/`. Blender scenes, cleaned
 atlases, frozen crops, portable recipes and rig/windshield records are included.
@@ -35,6 +35,31 @@ they are not prerequisites for the final models or the default palette replay.
 Normal builds never regenerate the retained models. Reusable browser helpers live
 in `runtime/`; the `--bundles` rig check needs no gallery. Legacy gallery checks
 still need the particular local revision they exercise.
+
+## Ambulance family
+
+The ambulance uses a new cab/box template, not the compact palette route. Start
+from a fresh workspace; `ambulance-family.json` records its dimensions, wheel
+positions and four diagnostic source cameras. The constructor freezes the original
+views, assigns owned affine UV paint and records explicit inferred fills. Its
+own visibility-tested projection remains separate from the cleaned atlas.
+
+```text
+python scripts/authored-assets/author_ambulance.py --out data/authored-assets/NEW_AMBULANCE --blender BLENDER_EXECUTABLE
+python scripts/authored-assets/pipeline.py project --recipe data/authored-assets/NEW_AMBULANCE/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_AMBULANCE/projection-001
+python scripts/authored-assets/pipeline.py evaluate --recipe data/authored-assets/NEW_AMBULANCE/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_AMBULANCE/render-001
+python scripts/authored-assets/pipeline.py evaluate --recipe art-source/vehicle-models/ambulance/v1/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_AMBULANCE_REPLAY
+```
+
+Retained v1 includes the exact GLB/packed scene, atlas, crops, recipe, rig, family
+configuration, paint ownership, draft/coverage and audits. Its 4×2, novel-angle
+strip and contour sheet are exact tracked review snapshots, not a scratch gallery.
+The renderer overscans meshes that exceed the origin-centered raw frame before
+applying camera registration, preserving the eight-samples-per-world-pixel scale.
+Existing frames remain unchanged when geometry already fits. Verification uses
+each bundle's audited mesh/triangle counts and recorded wheel radii; the ambulance
+must not inherit compact-only assertions. Body/roof paint contradictions and
+steering clearance remain review/qualification work. Game integration is pending.
 
 ## Engine readiness
 
