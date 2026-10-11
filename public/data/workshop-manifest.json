@@ -6365,6 +6365,39 @@
       "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
     {
+      "id": "projection:authored-compact-3-v1",
+      "batchId": "authored-vehicles",
+      "name": "Cyan compact · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/compact-3-v1/",
+      "kind": "projection",
+      "fingerprint": "2ddeb4315220292ea8503453857d4b2afb2f6b26d35a6768f5ac188d950afd9c",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-compact-5-v1",
+      "batchId": "authored-vehicles",
+      "name": "Orange compact · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/compact-5-v1/",
+      "kind": "projection",
+      "fingerprint": "a3ba12e3828bab65edc6e86f711bf6de6b9ea146307dce8927a6113281658784",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-compact-6-v1",
+      "batchId": "authored-vehicles",
+      "name": "Silver compact · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/compact-6-v1/",
+      "kind": "projection",
+      "fingerprint": "3835bf3a930cd4d7d32b89adc52a234298bbf95ed8f00d5f7cd99df8dd5bbdf1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
       "id": "geometry:deck-ramp-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -30026,5 +30059,5 @@
       }
     }
   ],
-  "inputDigest": "34eecf6a6e52f2e60f4dbf38899f13dc10222d9b97fe6b9281733a9a272c54b4"
+  "inputDigest": "9f82cc7fe7fd4971c9aedc0ed413849fdc57df8b70385710a0a7ee4be2a406f7"
 }

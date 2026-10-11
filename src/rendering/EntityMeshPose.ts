@@ -1,12 +1,7 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
-import {
-  AMBULANCE_MESH,
-  COMPACT_CAR_MESH,
-  FIRE_TRUCK_MESH,
-  type MeshInstance,
-  vehicleMeshRadius,
-} from "./MeshPresentation.js";
+import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
+import { COMPACT_CAR_MESH, type MeshInstance, vehicleMeshRadius } from "./MeshPresentation.js";
 
 interface Pose {
   angle: number;
@@ -22,12 +17,10 @@ interface Pose {
   };
 }
 export function meshAssetFor(entity: Pick<Entity, "type">, allCars3d = false): string | undefined {
-  if (entity.type === "vehicle-v1:ambulance") return AMBULANCE_MESH;
-  if (entity.type === "vehicle-v1:fire-truck-ladder-1") return FIRE_TRUCK_MESH;
-  return entity.type === "vehicle-v1:compact-1" ||
-    (allCars3d && entity.type.startsWith("vehicle-v1:"))
-    ? COMPACT_CAR_MESH
-    : undefined;
+  return (
+    authoredVehicleForType(entity.type)?.assetId ??
+    (allCars3d && entity.type.startsWith("vehicle-v1:") ? COMPACT_CAR_MESH : undefined)
+  );
 }
 export function entityHeading(entity: Entity): number {
   const velocity = entity.velocity;

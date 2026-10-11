@@ -22267,10 +22267,6 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/EntityMeshPose.ts:27"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/rendering/RendererLab.ts:205"
         },
         {
@@ -23011,10 +23007,6 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/EntityMeshPose.ts:25"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/traffic/EmergencyVehicle.ts:5"
         }
       ]
@@ -23070,10 +23062,6 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/EntityMeshPose.ts:26"
         },
         {
           "system": "Gameplay",

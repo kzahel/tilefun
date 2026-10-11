@@ -1,0 +1,40 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-compact-3-v1",
+  "candidateFingerprint": "2ddeb4315220292ea8503453857d4b2afb2f6b26d35a6768f5ac188d950afd9c",
+  "identity": {
+    "assetId": "compact-3",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "3edf4dee3f283b089f69cab128893d6b738ba60c99daba09d036d5e540219213",
+    "sourceAtlasSha256": "76708881aaca913f8b3c1c0a83e0f686ec025023e7bbab50fbec8bb1c766061e",
+    "files": [
+      {
+        "url": "assets/models/vehicles/compact-3-v1.glb",
+        "sha256": "7b15b2d21b3d33628268ec517125888da5337c5e3872cbde20f722a158549697"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-3-v1/comparison.png",
+        "sha256": "1e0a268e82b87236f68ae4d3139458662859f05379c7086cdb80f9607d9ee81d"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-3-v1/orbit.png",
+        "sha256": "af90e62d1383790a07fb29590f87aea1f0021da7d745130a3464d438eb1727f7"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-3-v1/silhouette.png",
+        "sha256": "1812ce7e20fb54597ed730a6cfb5916c01ae9c25277dea9e70f05bbf6f19e8db"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-3-v1/wheels.gif",
+        "sha256": "b3843013b2495c518da8360ee8c8859790cfef17ed520f78bb4b10e53978f41b"
+      }
+    ]
+  },
+  "name": "Cyan compact",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Checked four-view palette variant; geometry/UVs match the retained compact template.",
+    "Internal ink, rigid wheel motion and hidden paint inherited; source-camera contradictions remain explicit."
+  ]
+}

@@ -31,6 +31,14 @@ retained models across eight exact revisions at that checkpoint. Green garbage
 truck v1 now adds a seventh source set/ninth exact revision in
 [119](../tactical/119-six-wheel-garbage-truck.md).
 
+The complete-bank pass in [122](../tactical/122-complete-vehicle-port.md) adds cyan,
+orange and silver compacts from the strict four-view palette replay. Ten source
+sets now have retained models across twelve exact revisions. All six compact
+colors, ambulance v2 and stowed fire v2 use their own game/lab GPU assets; every
+other source retains its sprite fallback. New compact recipes use their retained
+packed scene and own atlas/draft; normal builds do not run Blender. The source
+family fit and existing clearance/review limits remain explicit.
+
 ## Investigation evidence storage
 
 The evidence directories for investigations 070–075 under `docs/tactical/` are
@@ -150,7 +158,7 @@ models retain the complete sprite. GPU + 3D car is the
 owner-selected main-game default as of 2026-10-11. The game selector is
 **Debug → Renderer → GPU + 3D car**, or `?renderer=gpu&meshes`.
 
-Normally only blue compact-1 uses this adapter. For testing, append `&allcars3d`
+All six compact colors now use their own assets with this adapter. For testing, append `&allcars3d`
 to `?renderer=gpu&meshes` in the game or Traffic lab: all `vehicle-v1:` road
 vehicles, including buses/vans, use the blue appearance. Their original types,
 sprites, colliders and persistence remain unchanged; trains are excluded. Canvas

@@ -131,7 +131,7 @@ without closing the user's Chrome. Task-local private/raw reports remain outside
 Git. `--root=PATH --revision=LABEL` profiles a frozen Git archive; source/probe hashes
 are recorded alongside the supplied revision label.
 
-[122](../../docs/tactical/122-city-workload-profile.md) records the initial captures,
+[124](../../docs/tactical/124-city-workload-profile.md) records the initial captures,
 thermal-stopped phone coverage, scene selection differences and next proposals.
 Callback cadence does not measure displayed GPU presentation; these profiles do
 not reproduce the original desync or establish crowded-city capacity.

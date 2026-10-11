@@ -1,0 +1,822 @@
+{
+  "recipeSha256": "de2bc201621970c30a63e10281f958c970c61cbdb1431ce68ca17b8d02e59b00",
+  "silhouettes": {
+    "east": {
+      "iou": 0.9223619464188081,
+      "sourceOnly": 122,
+      "renderOnly": 20,
+      "meanBoundaryDistancePixels": 0.9093809006987515,
+      "maxBoundaryDistancePixels": 4.47213595499958
+    },
+    "west": {
+      "iou": 0.9228665207877462,
+      "sourceOnly": 122,
+      "renderOnly": 19,
+      "meanBoundaryDistancePixels": 0.9030316943495451,
+      "maxBoundaryDistancePixels": 4.47213595499958
+    },
+    "north": {
+      "iou": 0.956414978514426,
+      "sourceOnly": 36,
+      "renderOnly": 35,
+      "meanBoundaryDistancePixels": 0.43853193585192357,
+      "maxBoundaryDistancePixels": 2.0
+    },
+    "south": {
+      "iou": 0.9282296650717703,
+      "sourceOnly": 28,
+      "renderOnly": 92,
+      "meanBoundaryDistancePixels": 0.7171177012588132,
+      "maxBoundaryDistancePixels": 2.8284271247461903
+    }
+  },
+  "windshieldGeometrySha256": "d3e9c69825f4564793b643aab9bddfda0f68dabd81cdb20a4f599d7a4a9194b4",
+  "topEdge": {
+    "east": {
+      "topBandT": 0.9,
+      "samples": [
+        {
+          "pixel": [
+            26,
+            27
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            28
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            29
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            30
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            31
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            33
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            34
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            35
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            36
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            37
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            38
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        }
+      ],
+      "continuousNativeSegment": 12,
+      "visible": true
+    },
+    "west": {
+      "topBandT": 0.9,
+      "samples": [
+        {
+          "pixel": [
+            37,
+            39
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            38
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            37
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            36
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            35
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            34
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            33
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            31
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            30
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            29
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            28
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        }
+      ],
+      "continuousNativeSegment": 12,
+      "visible": true
+    },
+    "north": {
+      "topBandT": 0.9,
+      "samples": [
+        {
+          "pixel": [
+            40,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            39,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            38,
+            24
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            36,
+            24
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            35,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            34,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            33,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            32,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            31,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            30,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            29,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            28,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            27,
+            24
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            24
+          ],
+          "rgba": [
+            59,
+            59,
+            81,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            25,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            24,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            23,
+            24
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        }
+      ],
+      "continuousNativeSegment": 18,
+      "visible": true
+    },
+    "south": {
+      "topBandT": 0.9,
+      "samples": [
+        {
+          "pixel": [
+            23,
+            32
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            24,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            25,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            26,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            27,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            28,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            29,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            30,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            31,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            32,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            33,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            34,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            35,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            36,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            37,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            38,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            39,
+            32
+          ],
+          "rgba": [
+            58,
+            58,
+            80,
+            255
+          ]
+        },
+        {
+          "pixel": [
+            40,
+            32
+          ],
+          "rgba": [
+            57,
+            57,
+            79,
+            255
+          ]
+        }
+      ],
+      "continuousNativeSegment": 18,
+      "visible": true
+    }
+  },
+  "limits": "IoU includes painted shadows; contours do not measure internal fender/window fit. Optional t=.90 top-band probe belongs to the configured compact aperture, not every asset.",
+  "metrics": {
+    "views": {
+      "east": {
+        "silhouetteIoU": 0.9223619464188081,
+        "sourceOnlyPixels": 122,
+        "renderOnlyPixels": 20,
+        "intersectionPixels": 1687,
+        "rgbMAEOnIntersection": 25.47559770796285,
+        "exactRGBPixelsOnIntersection": 621
+      },
+      "west": {
+        "silhouetteIoU": 0.9228665207877462,
+        "sourceOnlyPixels": 122,
+        "renderOnlyPixels": 19,
+        "intersectionPixels": 1687,
+        "rgbMAEOnIntersection": 25.49357834420075,
+        "exactRGBPixelsOnIntersection": 600
+      },
+      "north": {
+        "silhouetteIoU": 0.956414978514426,
+        "sourceOnlyPixels": 36,
+        "renderOnlyPixels": 35,
+        "intersectionPixels": 1558,
+        "rgbMAEOnIntersection": 18.848737697903296,
+        "exactRGBPixelsOnIntersection": 758
+      },
+      "south": {
+        "silhouetteIoU": 0.9282296650717703,
+        "sourceOnlyPixels": 28,
+        "renderOnlyPixels": 92,
+        "intersectionPixels": 1552,
+        "rgbMAEOnIntersection": 19.374355670103093,
+        "exactRGBPixelsOnIntersection": 740
+      }
+    },
+    "interpretation": "Diagnostic measurements, not acceptance scores. Alpha includes painted shadows unless explicitly masked. RGB error is measured only on opaque overlap; examine missing/extra pixels and all-angle renders too."
+  }
+}

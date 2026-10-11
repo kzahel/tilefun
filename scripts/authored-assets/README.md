@@ -8,6 +8,20 @@ remain explicit work. Normal builds never run this pipeline.
 
 ## Source and local output boundary
 
+Before choosing a batch, run the four-view source classifier:
+
+```text
+python scripts/authored-assets/audit_vehicle_families.py --out data/authored-assets/NEW_FAMILY_AUDIT
+python -m unittest discover -s scripts/authored-assets -p test_vehicle_families.py
+```
+
+It separates exact alpha/occupancy families, reversible and one-way global
+palette maps, physical registration and near matches. Source contact sheets,
+minimum paint-exception counts and input-pinned pair results stay in the fresh
+ignored output. See [121](../../docs/tactical/121-vehicle-source-families.md) for
+the 45-set findings. Identical silhouettes alone do not qualify window/fender
+geometry, hidden surfaces or authored atlas color roles.
+
 Git retains the exact final blue/green/red compact and ambulance model bundles in
 [`art-source/vehicle-models/`](../../art-source/vehicle-models/README.md), with
 self-contained GLBs in `public/assets/models/vehicles/`. Blender scenes, cleaned
@@ -551,3 +565,23 @@ v7's `top-edge-probe.json` records continuous navy segments over the full apertu
 width in all four cameras and both palettes. Run `verify_wheel_rig.mjs NEW_OUTPUT
 v7` for real exports/gallery. Future camera scales can require other stroke
 weights; there is no universal one-pixel guarantee under arbitrary projection.
+
+## Complete compact family checkpoint
+
+After strict `author_variant.py` eligibility/paint replay, `retain_variant.py`
+copies the final checkpoint into a fresh tracked revision, including the packed
+scene, atlas, own draft/coverage, frozen crops, portable recipe, provenance and
+exact review snapshots. It preserves every earlier catalog/file byte. Final
+assets are required deliverables; exploratory work stays under ignored `data/`.
+
+```text
+python scripts/authored-assets/retain_variant.py --model data/authored-assets/NEW_VARIANT --revision v1 --name "Cyan compact"
+node scripts/authored-assets/verify_engine_vehicles.mjs data/authored-assets/NEW_ENGINE_PROBE
+```
+
+The engine probe uses bundled Chromium and the actual shared GPU backend. It
+checks each registered vehicle's own GLB, visible pixels, cold-load fallback,
+absolute pose/light reset, simulation isolation, unknown IDs and disposal. An
+optional second argument selects a tracked-only checkout root. Browser gameplay
+checks additionally cover every compact selection and a failed GLB load. See
+[122](../../docs/tactical/122-complete-vehicle-port.md) for checkpoint evidence.

@@ -1,4 +1,4 @@
-# 121: NPC movement profile and fauna type lookup
+# 123: NPC movement profile and fauna type lookup
 
 Status: complete; measured type lookup delivered, slower overlap prototype rejected.
 Date: 2026-10-11.
@@ -104,7 +104,7 @@ at 2.5–4.7ms versus 2.4–4.6ms. All walks travel continuously 512–513px nea
 frame p95 is 16.7–16.8ms and maximum resimulation error is below 0.000016px.
 There are no page errors or demonstrated ordinary-play speedup. These controls
 are desktop Canvas/keyboard, not actual phone GPU/touch symptom acceptance.
-[Sanitized evidence](../benchmarks/121-npc-movement-profile.json) owns source/probe
+[Sanitized evidence](../benchmarks/123-npc-movement-profile.json) owns source/probe
 hashes, all measurements, rejected prototypes, parity, thermal/order limits and
 validation scope. Raw private controller/browser state remains temporary.
 

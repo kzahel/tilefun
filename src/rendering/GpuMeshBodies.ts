@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
@@ -19,6 +20,11 @@ export class GpuMeshBodies {
   readonly car = new ResourceSlot<CarMeshAsset>();
   readonly ambulance = new ResourceSlot<CarMeshAsset>();
   readonly fireTruck = new ResourceSlot<CarMeshAsset>();
+  private readonly slots = new Map<string, ResourceSlot<CarMeshAsset>>([
+    [COMPACT_CAR_MESH, this.car],
+    [AMBULANCE_MESH, this.ambulance],
+    [FIRE_TRUCK_MESH, this.fireTruck],
+  ]);
   readonly ready = new Set<string>();
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
@@ -43,20 +49,39 @@ export class GpuMeshBodies {
         loadCarMesh("assets/models/vehicles/fire-truck-ladder-1-v2.glb", 1),
       );
   }
+  /** Lazy family loads never replace their source sprite before the next frame. */
+  private request(assetId: string) {
+    const definition = authoredVehicleForAsset(assetId);
+    if (!this.enabled || !definition) return undefined;
+    let slot = this.slots.get(assetId);
+    if (!slot) {
+      slot = new ResourceSlot<CarMeshAsset>();
+      this.slots.set(assetId, slot);
+    }
+    if (slot.state === "empty")
+      void slot.load(() => loadCarMesh(definition.path, definition.lateralScale));
+    return slot;
+  }
+  get assetStates() {
+    return Object.fromEntries(
+      [...this.slots].map(([assetId, slot]) => [
+        assetId,
+        {
+          state: slot.state,
+          meshes: slot.value?.meshCount ?? 0,
+          error: slot.error,
+        },
+      ]),
+    );
+  }
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
     this.ready.clear();
-    if (this.enabled && this.car.state === "ready") this.ready.add(COMPACT_CAR_MESH);
-    if (this.enabled && this.ambulance.state === "ready") this.ready.add(AMBULANCE_MESH);
-    if (this.enabled && this.fireTruck.state === "ready") this.ready.add(FIRE_TRUCK_MESH);
+    if (this.enabled)
+      for (const [assetId, slot] of this.slots) if (slot.state === "ready") this.ready.add(assetId);
   }
   draw(camera: Camera, item: SpriteItem): boolean {
-    const asset =
-      item.mesh?.assetId === FIRE_TRUCK_MESH
-        ? this.fireTruck.value
-        : item.mesh?.assetId === AMBULANCE_MESH
-          ? this.ambulance.value
-          : this.car.value;
+    const asset = item.mesh ? this.request(item.mesh.assetId)?.value : undefined;
     if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return false;
     const { surface } = this,
       renderer = surface.renderer;
@@ -111,9 +136,7 @@ export class GpuMeshBodies {
   }
   dispose() {
     this.ready.clear();
-    this.car.dispose();
-    this.ambulance.dispose();
-    this.fireTruck.dispose();
+    for (const slot of this.slots.values()) slot.dispose();
     this.outline.dispose();
     this.target.dispose();
   }

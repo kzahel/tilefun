@@ -1,0 +1,12 @@
+{
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "configuration": "scripts/authored-assets/compact-variant-template.json",
+  "configurationSha256": "3fdd47389c647045203f4102fb44989dc932daa250327f747c5c10d7b00f3996",
+  "scripts": {
+    "scripts/authored-assets/author_variant.py": "5a70a12fe3c308f0bb037eeca298caf2c605b3890ff4cb1df4f2c51440f91213",
+    "scripts/authored-assets/transfer_variant.py": "1f12af9bfd09626915c1fecc17182655f0b3d13ef45f974e2ff96acd90cc0d57",
+    "scripts/authored-assets/retain_variant.py": "b74d2781bc8012f74caad009ab9d9b05e0c0b1e47fb4b9866d785624418a0b25",
+    "scripts/authored-assets/retain_vehicle.py": "cacca97eb4e411b53c5f32d2b3578c80c7a89096071b09481202e10aa065bc82"
+  },
+  "status": "Exact checked family transfer; hidden surfaces inherited, unreviewed"
+}

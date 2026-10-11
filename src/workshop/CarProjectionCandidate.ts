@@ -4,6 +4,15 @@ import ambulanceReview from "../../public/assets/models/vehicles/review/ambulanc
 import ambulanceLightsReview from "../../public/assets/models/vehicles/review/ambulance-v2/review.json" with {
   type: "json",
 };
+import compactCyanReview from "../../public/assets/models/vehicles/review/compact-3-v1/review.json" with {
+  type: "json",
+};
+import compactOrangeReview from "../../public/assets/models/vehicles/review/compact-5-v1/review.json" with {
+  type: "json",
+};
+import compactSilverReview from "../../public/assets/models/vehicles/review/compact-6-v1/review.json" with {
+  type: "json",
+};
 import fireReview from "../../public/assets/models/vehicles/review/fire-truck-ladder-1-v1/review.json" with {
   type: "json",
 };
@@ -60,6 +69,9 @@ export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidat
     { review: fireReview, name: "Fire truck · stowed ladder" },
     { review: fireWheelsReview, name: "Fire truck · stowed ladder" },
     { review: garbageReview, name: "Green garbage truck" },
+    { review: compactCyanReview, name: "Cyan compact" },
+    { review: compactOrangeReview, name: "Orange compact" },
+    { review: compactSilverReview, name: "Silver compact" },
   ];
   for (const { review, name } of reviews) {
     for (const file of review.identity.files) {

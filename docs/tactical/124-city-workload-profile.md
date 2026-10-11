@@ -1,4 +1,4 @@
-# 122: Native city workload profile
+# 124: Native city workload profile
 
 Status: profile complete; city-specific server and renderer proposals, no runtime optimization shipped.
 Date: 2026-10-11.
@@ -6,7 +6,7 @@ Owner: [performance](../topics/performance.md).
 
 ## Scope and method
 
-Zoom out from 121's held dog crowds to ordinary generated-city traffic,
+Zoom out from 123's held dog crowds to ordinary generated-city traffic,
 pedestrians, streaming, persistence, player driving and GPU rendering. Production
 source is a frozen `c051a98` archive, excluding concurrent browser-test changes.
 Diagnostic Vite transforms expose only the owned authority and timing/count hooks;
@@ -36,7 +36,7 @@ Desktop uses isolated full bundled Chromium at 411×789 CSS pixels/dpr 1. Physic
 Android uses its native 411×789/dpr 2.625 viewport and GPU renderer. Runners close
 owned tabs, Workers, servers and isolated origin data. Phone routes are removed,
 original routes preserved and the prior foreground app restored. Raw controller,
-browser and host-identifying state remains temporary. [Sanitized evidence](../benchmarks/122-city-workload-profile.json)
+browser and host-identifying state remains temporary. [Sanitized evidence](../benchmarks/124-city-workload-profile.json)
 retains all 30 cases across 11 runs, source/probe hashes, CPU summaries, timings,
 counts, duration distributions, slow-frame/tick overlaps and failures.
 
@@ -150,7 +150,7 @@ Proceed in this order:
    every live body/prop/junction check, edits and road/bridge readiness. Cover flat
    roads, turns, stopped crossings, grades, missing/deleted bridges and roof riders.
    Compare unchanged outcomes and cool-phone shallow controls before delivery;
-   121's losing box prototype is a reminder that fewer calls need not be faster.
+   123's losing box prototype is a reminder that fewer calls need not be faster.
 2. **Wide-view driving locality:** supply conservative swept-area prop/body
    candidates on authority and predictor, preserving oversized bodies, all wall
    pieces and rider/headroom dependencies. Measure ordinary and overview scenes;

@@ -1,0 +1,40 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-compact-5-v1",
+  "candidateFingerprint": "a3ba12e3828bab65edc6e86f711bf6de6b9ea146307dce8927a6113281658784",
+  "identity": {
+    "assetId": "compact-5",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "70655c69f62e1284de5ced46e904f827d12e769cd6ee00fc5743957946d06379",
+    "sourceAtlasSha256": "463827bddf26d79d2337965423d9a4b1225f4be0b36ed00266a141895184c485",
+    "files": [
+      {
+        "url": "assets/models/vehicles/compact-5-v1.glb",
+        "sha256": "03442925e100427e23af65b18d2c18d03266d5c7e23bacfdb5bec04a18158a16"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-5-v1/comparison.png",
+        "sha256": "45f6272f9b213a315e758455e850275f4ea49a11df08379cf70809fd0d232daf"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-5-v1/orbit.png",
+        "sha256": "ec2c28f49c55e921085fd95a17e808f1c9cda2e0fa5870194ad5b729a8da2b17"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-5-v1/silhouette.png",
+        "sha256": "1812ce7e20fb54597ed730a6cfb5916c01ae9c25277dea9e70f05bbf6f19e8db"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-5-v1/wheels.gif",
+        "sha256": "1380bb9b4baf54e1783df5a212488e4b6fab8988017d865cbd52d022fd17bfec"
+      }
+    ]
+  },
+  "name": "Orange compact",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Checked four-view palette variant; geometry/UVs match the retained compact template.",
+    "Internal ink, rigid wheel motion and hidden paint inherited; source-camera contradictions remain explicit."
+  ]
+}
