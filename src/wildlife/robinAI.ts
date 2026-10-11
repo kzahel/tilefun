@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import type { WildlifeBody, WildlifeEnvironment } from "./mallardAI.js";
 import type { RobinPerch } from "./Robin.js";
 import type { RobinWorkBudget } from "./RobinWorkBudget.js";
@@ -13,6 +14,7 @@ export function updateRobinAI(
   animals: readonly Entity[],
   players: readonly PositionComponent[],
   budget?: RobinWorkBudget,
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = bird.robin,
     velocity = bird.velocity;
@@ -32,12 +34,21 @@ export function updateRobinAI(
     ai.timer -= dt;
     return;
   }
-  const perches = environment.perches?.(ai.home, ai.radius) ?? [];
-  const perched = perches.some(
-    (p) => distance(p, bird.position) < 2 && Math.abs(p.z - (bird.wz ?? 0)) < 1,
-  );
-  const nearby = players.find((p) => distance(p, bird.position) < (perched ? 12 : 26));
-  if (nearby && ai.state !== "recover") startleRobin(bird, nearby);
+  let perches: readonly RobinPerch[] = [];
+  let perched = false;
+  const sensePerches = () => {
+    perches = environment.perches?.(ai.home, ai.radius) ?? [];
+    perched = perches.some(
+      (p) => distance(p, bird.position) < 2 && Math.abs(p.z - (bird.wz ?? 0)) < 1,
+    );
+  };
+  const nearPlayer = players.some((p) => distance(p, bird.position) < 26);
+  if (nearPlayer) {
+    // Current crowns determine the immediate perched alarm radius.
+    sensePerches();
+    const nearby = players.find((p) => distance(p, bird.position) < (perched ? 12 : 26));
+    if (nearby && ai.state !== "recover") startleRobin(bird, nearby);
+  }
   velocity.vx = velocity.vy = 0;
   ai.timer -= dt;
   if (ai.timer > 0) return;
@@ -49,11 +60,15 @@ export function updateRobinAI(
     restoreRobinPose(bird);
   };
   if (ai.state === "recover" || ai.state === "action") {
+    if (!nearPlayer) sensePerches();
     rest();
     return;
   }
   // Wait fairly for planning admission, without consuming activity or RNG.
-  if (budget && (budget.starts <= 0 || budget.candidates <= 0 || budget.samples <= 0)) return;
+  if (!planning && budget && (budget.starts <= 0 || budget.candidates <= 0 || budget.samples <= 0))
+    return;
+  if (planning && !planning.claim(bird, escaping)) return;
+  if (!nearPlayer) sensePerches();
   if (!escaping) {
     ai.activity++;
     if (ai.activity % 3 === 0) {
@@ -64,7 +79,7 @@ export function updateRobinAI(
     }
   }
   const flying = escaping || perched || ai.activity % 2 === 0;
-  if (budget) budget.starts--;
+  if (budget && !planning) budget.starts--;
   const near = players.some((p) => distance(p, bird.position) < 192);
   let candidatesLeft = budget ? (near ? 8 : 4) : Infinity;
   let samplesLeft = budget ? (near ? 64 : 32) : Infinity;

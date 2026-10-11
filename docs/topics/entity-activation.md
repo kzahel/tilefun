@@ -90,20 +90,22 @@ support heights. The lists end before index updates and do not survive movement,
 edits, readiness or a later tick. Activity selection and support behavior stay
 unchanged; [performance](performance.md) owns device results.
 
-[110](../tactical/110-server-headroom-proposal.md) distinguishes routine admission
-from actual AI searches and proposes separate fast/slow work. The first pilot,
-[111](../tactical/111-server-snapshot-and-deer-scheduling.md), gives deer staggered
-100ms simulation-time ambient goal slots and one shared decision/search start
-per Realm AI step. Threats bypass the cadence but share the start cap; alarm and
-player proximity checks, rest/recovery timers, native motion, collision and support
-remain at existing admitted rates. Herd cohesion is queried only for due goals,
-using live actors rather than stale cached memberships. Rotation within stable
-threat/proximity classes prevents synchronized same-class wakes from monopolizing
-admission. Sleeping actors accrue no elapsed wall time or catch-up work. The
-cadence is transient; committed motion/RNG remain durable, while future goal
-choice timing may shift by a slot or quota wait after reload. Other species and
-the existing 60/15Hz admission retain their previous policy. A shared multispecies
-quota and wider sensing split remain proposed.
+[110](../tactical/110-server-headroom-proposal.md) separates routine admission from
+actual AI searches. [111](../tactical/111-server-snapshot-and-deer-scheduling.md)
+piloted deer; [113](../tactical/113-shared-ai-planning.md) now extends planning
+admission across all native wildlife and generic ambient wander. Realm shares
+four goal/action admissions, 64 evaluated candidates and 768 path-point credits
+per AI step, with tighter individual search limits. Ambient eligibility is
+staggered at 100ms near players and 300ms farther away; goals remain timer/motion
+gated rather than searching periodically. Distance classification runs at 10Hz.
+Live alarms, exact admitted timers, native motion, collision/support and
+chase/follow/route steering retain their existing rates. Cohesion lists are built
+only for admitted goals. Alarm/proximity priority, rotating ties and a 500ms
+pending-wait priority boost prevent persistent urgent work from starving far
+goals. No sleeping wall time or catch-up loop accrues. Cadence and wait age are
+transient; committed motion/RNG remain durable. Candidate selection and future
+goal timing can change after bounded admission/reload. Existing full/reduced
+60/15Hz activity selection and residency remain the outer admission policy.
 
 Movement remains fixed-step in both active tiers; nominal reduced decision rate
 is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic

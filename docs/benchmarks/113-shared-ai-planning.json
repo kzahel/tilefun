@@ -1,0 +1,4337 @@
+{
+  "schema": "tilefun-shared-ai-planning/v1",
+  "baseCommit": "86712fee5c07c0b425f37e9980b3864d6deee3c4",
+  "host": "Apple M4 Pro; macOS; bundled full headless Chromium; 411x789 CSS viewport",
+  "runtime": "native Worker/Canvas/IndexedDB; fresh thicket seed 2026; no CPU throttle",
+  "phoneAvailable": false,
+  "sourceSHA256": {
+    "before": {
+      "src/server/Realm.ts": "300b9ababd75b9be3c6fd5ccc1cf03b51bbe6e8ec5e4ff7b7c34396c4e9775c7",
+      "src/server/tickAllAI.ts": "59b0d6fb41574c65d6bbbc4a00f774bd6c2cf3568b37c9514ad4e19884b1f3b6",
+      "src/entities/wanderAI.ts": "dae9c3042d4c41381bfb59b0b53954ed67f33b9a127a760afa98acbb0df83048",
+      "src/wildlife/deerAI.ts": "38cea3a798168d48852734158299ac4695e5c7308dec8f1840037341e74103d1",
+      "src/wildlife/faunaAI.ts": "e9923457a4af2e4f237c9049c75ef9815536f07bcb57c684cf1c2628b4e10b37",
+      "src/wildlife/rabbitAI.ts": "0868add657566541c04c14375bf7a264692bbc3d6c0e5ccc97f9974782669852",
+      "src/wildlife/frogAI.ts": "ceebe4ea8ad6614affec9aa2c883f79d52e978ee71b3f61fbe76efccb2b7d5bb",
+      "src/wildlife/mallardAI.ts": "d22013a27e30b44dc1575e2cbdc2ae4736d6dc6a55f6dd70969a7dadc9d1194b",
+      "src/wildlife/robinAI.ts": "ce7d366c872626a176447ac74de6a91c11809598b852a0b5460035db7c3a404c",
+      "src/wildlife/DeerPlanningScheduler.ts": "0fe6037047320a76d411e4b0126d4155acd58e9c7aaf7e1e2ca4c9ecdd26e71a"
+    },
+    "delivered": {
+      "src/server/AiPlanningScheduler.ts": "e4d3d93837ce3deb10a45e80b4ba419288d4e4eafbd61b2dd84017f38af355b4",
+      "src/server/Realm.ts": "9da23a495fcffcc145fa0dbfa6370e1de06f4cc7d220ac0e856185b6f46b565e",
+      "src/server/tickAllAI.ts": "73a1d49713c9f49daecc6f0589e91aff836cdfeac313aaa1ee57077173b708da",
+      "src/entities/wanderAI.ts": "edf72a86bb674eeb4a7621d19bb22f9ea3d2057de27dc6c95f137f9830a5c7d8",
+      "src/wildlife/deerAI.ts": "c5352196d19838b9fe5ca2ff154964adbd8745ee42637f1a21aceb008a4d9fc2",
+      "src/wildlife/faunaAI.ts": "00fc009c5704a87d77535ee06d001446a58e8563c1aebffb2089c60daeb719a4",
+      "src/wildlife/rabbitAI.ts": "8adc2e33ecd819282992b52e179782e58b134dd81a41f57cd14ba481fb02d5e5",
+      "src/wildlife/frogAI.ts": "474c2f6b3262bdb5841b6f9705d4b5026e7ad6510ad5b6a04251edc6aa54d046",
+      "src/wildlife/mallardAI.ts": "2571d358a096ec59f50d4b25e52a0fe8ce9805b1ce955f8bd6fa23f3ebcb59d6",
+      "src/wildlife/robinAI.ts": "354b602e804f1505a7d8e0e0c40c9d75ec2a815ba3ddb59ff8293f73ee3dd832"
+    },
+    "preWaterline": {
+      "src/server/AiPlanningScheduler.ts": "e4d3d93837ce3deb10a45e80b4ba419288d4e4eafbd61b2dd84017f38af355b4",
+      "src/server/Realm.ts": "9da23a495fcffcc145fa0dbfa6370e1de06f4cc7d220ac0e856185b6f46b565e",
+      "src/server/tickAllAI.ts": "73a1d49713c9f49daecc6f0589e91aff836cdfeac313aaa1ee57077173b708da",
+      "src/entities/wanderAI.ts": "edf72a86bb674eeb4a7621d19bb22f9ea3d2057de27dc6c95f137f9830a5c7d8",
+      "src/wildlife/deerAI.ts": "c5352196d19838b9fe5ca2ff154964adbd8745ee42637f1a21aceb008a4d9fc2",
+      "src/wildlife/faunaAI.ts": "00fc009c5704a87d77535ee06d001446a58e8563c1aebffb2089c60daeb719a4",
+      "src/wildlife/rabbitAI.ts": "8adc2e33ecd819282992b52e179782e58b134dd81a41f57cd14ba481fb02d5e5",
+      "src/wildlife/frogAI.ts": "474c2f6b3262bdb5841b6f9705d4b5026e7ad6510ad5b6a04251edc6aa54d046",
+      "src/wildlife/mallardAI.ts": "2ed7ffbca7543bb7284c057aa6a589bc3ac1e8d9226d0e79c5d95110d0b3b71c",
+      "src/wildlife/robinAI.ts": "354b602e804f1505a7d8e0e0c40c9d75ec2a815ba3ddb59ff8293f73ee3dd832"
+    }
+  },
+  "diagnosticSHA256": {
+    "audit": "40ecbd86e7810c5b0ce762e6ba6b42ef6943eed2a38fd9b501981fddbdae13ce",
+    "walkingAudit": "5d2c14678b67640e999c974283167f064eb49d488fb655e4cf635afc38990f5b",
+    "synthetic": "6cd5e906552f5bd4fe3eb7a05f55f6e60b832d4f88c3f85dfec4680454865713"
+  },
+  "limits": [
+    "Desktop diagnostic overhead and host variability; no physical phone or universal FPS/stutter result.",
+    "Baseline idle census overlapped some initial validation; work counts are usable, timings are contextual rather than an isolated timing comparison.",
+    "Held-Right robin-grove captures stop after 21px against an obstacle; they are not continuous walking.",
+    "Synchronized AI benchmark excludes physics, streaming, persistence and presentation and holds committed motion.",
+    "Near synthetic case supplies one player per isolated actor to exercise near classification; this is an intentionally extreme multiplayer input.",
+    "Native path credits conservatively reserve a complete candidate; footprint tile queries and live steering queries are separate.",
+    "Intermediate sources/captures, including the first synthetic run with excess scheduler overhead, are excluded from delivered comparisons.",
+    "Final short moving lanes confirm movement throughout eight seconds; 15-second dog lanes stop for about five seconds."
+  ],
+  "captures": [
+    {
+      "lane": "before-census-final",
+      "stage": "before",
+      "repeat": 2,
+      "date": "2026-10-11T10:03:55.640Z",
+      "browser": "153.0.8010.12",
+      "scene": "cow",
+      "motion": "idle",
+      "seconds": 15.015899999976158,
+      "authorityHz": 60.010621348911314,
+      "maxTravelPx": 0,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 33.800000071525574,
+      "maxResimPx": 0,
+      "errors": [],
+      "activeFinal": 22,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.007348066337859433,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.04596685013059753,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.16154696190554793,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.5
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.013038673585291066,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.05348066308880379,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "updateFaunaAI": {
+          "calls": 2715,
+          "meanMs": 0.007440147435028469,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.3999999761581421
+        },
+        "updateRobinAI": {
+          "calls": 16290,
+          "meanMs": 0.0014671578225802615,
+          "p95Ms": 0,
+          "maxMs": 0.30000007152557373
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.06662983499179229,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.3999999761581421
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.000552486056122332,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.19867403322820507,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.6000000238418579
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00044198892393164873,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.003093922467521541,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.1217679570393009,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.30000007152557373
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 0.9060773471442375,
+          "p95Ms": 1.100000023841858,
+          "maxMs": 2.399999976158142
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-cow-provisional-v1": 2715,
+        "ai-admitted.full.wildlife-robin-v1": 16290,
+        "ai-admitted.full.player": 905,
+        "fauna-herd-sense": 2715,
+        "dirty-notification": 70610,
+        "planning-search.robin": 64,
+        "snapshot-checked": 57015,
+        "snapshot-created": 6652,
+        "planning-search.fauna": 10
+      }
+    },
+    {
+      "lane": "before-census-final",
+      "stage": "before",
+      "repeat": 4,
+      "date": "2026-10-11T10:03:55.640Z",
+      "browser": "153.0.8010.12",
+      "scene": "robins",
+      "motion": "idle",
+      "seconds": 15.015899999976158,
+      "authorityHz": 59.99508889768517,
+      "maxTravelPx": 0,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.60000002384186,
+      "maxResimPx": 0,
+      "errors": [],
+      "activeFinal": 44,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.009723757018041875,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 3.5
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.06712707136217402,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 3.5
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.19756905887666987,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 1.4000000953674316
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.025524862826858435,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.048287293397260636,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 2.5
+        },
+        "updateRabbitAI": {
+          "calls": 4525,
+          "meanMs": 0.004198895264725659,
+          "p95Ms": 0,
+          "maxMs": 0.8999999761581421
+        },
+        "updateRobinAI": {
+          "calls": 34586,
+          "meanMs": 0.001593130110370784,
+          "p95Ms": 0,
+          "maxMs": 1.3000000715255737
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.11999999884083785,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 1.4000000953674316
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0008839781113092412,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.4000000018441216,
+          "p95Ms": 0.5999999046325684,
+          "maxMs": 1
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00033149166001799355,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.004419889371039459,
+          "p95Ms": 0,
+          "maxMs": 0.3999999761581421
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.1691712723252523,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 2.8000000715255737
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.3848618790589644,
+          "p95Ms": 1.8000000715255737,
+          "maxMs": 4.700000047683716
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34586,
+        "ai-admitted.full.wildlife-rabbit-v1": 4525,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 136705,
+        "snapshot-checked": 81450,
+        "snapshot-created": 11823,
+        "planning-search.robin": 128,
+        "planning-search.rabbit": 18
+      }
+    },
+    {
+      "lane": "before-census-final",
+      "stage": "before",
+      "repeat": 6,
+      "date": "2026-10-11T10:03:55.640Z",
+      "browser": "153.0.8010.12",
+      "scene": "pond",
+      "motion": "idle",
+      "seconds": 15.016200000047684,
+      "authorityHz": 59.99309813924706,
+      "maxTravelPx": 0,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.299999952316284,
+      "maxResimPx": 0,
+      "errors": [],
+      "activeFinal": 25,
+      "residentFinal": 200,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.007569060898617487,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.0438674034334678,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.13281768316722048,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.30000007152557373
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.0167955802949094,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.04850828687130417,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "updateFrogAI": {
+          "calls": 2715,
+          "meanMs": 0.005561694080219304,
+          "p95Ms": 0,
+          "maxMs": 0.6000000238418579
+        },
+        "updateMallardAI": {
+          "calls": 1810,
+          "meanMs": 0.014309391527544728,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "updateFaunaAI": {
+          "calls": 2715,
+          "meanMs": 0.006961325475085067,
+          "p95Ms": 0.09999990463256836,
+          "maxMs": 0.30000007152557373
+        },
+        "updateRobinAI": {
+          "calls": 14651,
+          "meanMs": 0.0014947785850141116,
+          "p95Ms": 0,
+          "maxMs": 0.2999999523162842
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.10939226229546478,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.7000000476837158
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0006629835834819309,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.25977900831738887,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 0.5
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00033149166001799355,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.0024309395426544696,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.11480662756861902,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.2999999523162842
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 0.985856350745944,
+          "p95Ms": 1.1999999284744263,
+          "maxMs": 1.899999976158142
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-frog-v1": 2715,
+        "ai-admitted.full.wildlife-mallard-v1": 1810,
+        "ai-admitted.full.wildlife-fish-provisional-v1": 2715,
+        "ai-admitted.full.wildlife-robin-v1": 14651,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 85586,
+        "fauna-herd-sense": 2715,
+        "snapshot-checked": 47060,
+        "snapshot-created": 8953,
+        "planning-search.mallard": 1,
+        "planning-search.robin": 57,
+        "planning-search.frog": 12,
+        "planning-search.fauna": 10
+      }
+    },
+    {
+      "lane": "after-census-complete",
+      "stage": "delivered",
+      "repeat": 1,
+      "date": "2026-10-11T10:57:07.617Z",
+      "browser": "153.0.8010.12",
+      "scene": "cow",
+      "motion": "idle",
+      "seconds": 15.015899999976158,
+      "authorityHz": 59.996283415976635,
+      "maxTravelPx": 0,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.60000002384186,
+      "maxResimPx": 0,
+      "errors": [],
+      "activeFinal": 22,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.007817679577769495,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.19999992847442627
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.050276244411152374,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 0.30000007152557373
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.15922651791440848,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 1.2000000476837158
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.017679558274495667,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.19999992847442627
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.049723756906077346,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.30000007152557373
+        },
+        "updateFaunaAI": {
+          "calls": 2715,
+          "meanMs": 0.007440147171582526,
+          "p95Ms": 0.09999990463256836,
+          "maxMs": 0.6000000238418579
+        },
+        "updateRobinAI": {
+          "calls": 16290,
+          "meanMs": 0.0016206261275954741,
+          "p95Ms": 0,
+          "maxMs": 0.2999999523162842
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.07867403320186046,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.6000000238418579
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0011049725074135795,
+          "p95Ms": 0,
+          "maxMs": 0.19999992847442627
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.25635359326778856,
+          "p95Ms": 0.5,
+          "maxMs": 0.8000000715255737
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00033149166001799355,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.002983425203607886,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.12718231822904302,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.40000009536743164
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.0207734792930645,
+          "p95Ms": 1.7000000476837158,
+          "maxMs": 4.100000023841858
+        }
+      },
+      "maxStationaryMs": 15015.5,
+      "movementTrace": [
+        {
+          "ms": 1015.6000000238419,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 2016.1000000238419,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 3033.1999999284744,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 4050.7999999523163,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 5066,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 6066.299999952316,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 7082.600000023842,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 8082.699999928474,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 9099.199999928474,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 10115.899999976158,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 11131.699999928474,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 12132.5,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 13149.100000023842,
+          "wx": 496,
+          "wy": -1568
+        },
+        {
+          "ms": 14165.699999928474,
+          "wx": 496,
+          "wy": -1568
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-cow-provisional-v1": 2715,
+        "ai-admitted.full.wildlife-robin-v1": 16290,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 70043,
+        "fauna-herd-sense": 11,
+        "planning-search.fauna": 11,
+        "snapshot-checked": 57015,
+        "snapshot-created": 6496,
+        "planning-search.robin": 60
+      }
+    },
+    {
+      "lane": "after-census-complete",
+      "stage": "delivered",
+      "repeat": 2,
+      "date": "2026-10-11T10:57:07.617Z",
+      "browser": "153.0.8010.12",
+      "scene": "robins",
+      "motion": "idle",
+      "seconds": 15.016199999928475,
+      "authorityHz": 60.00026548780544,
+      "maxTravelPx": 0,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 35,
+      "maxResimPx": 0,
+      "errors": [],
+      "activeFinal": 44,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.00917127059968137,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.06066298359665423,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 2.0999999046325684
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.25160220960227164,
+          "p95Ms": 0.7000000476837158,
+          "maxMs": 2.200000047683716
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.02685082880831555,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.05712707148072469,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 0.3999999761581421
+        },
+        "updateRobinAI": {
+          "calls": 34596,
+          "meanMs": 0.0017718811340587844,
+          "p95Ms": 0,
+          "maxMs": 0.6000000238418579
+        },
+        "updateRabbitAI": {
+          "calls": 4525,
+          "meanMs": 0.002828729139507146,
+          "p95Ms": 0,
+          "maxMs": 0.6999999284744263
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.1371270705323193,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 1.399999976158142
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0012154699030502067,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.47834254299079515,
+          "p95Ms": 1,
+          "maxMs": 2
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00033149179174096543,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.005303867745794644,
+          "p95Ms": 0.09999990463256836,
+          "maxMs": 0.19999992847442627
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.17248618457857418,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 2.200000047683716
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.5119336998923707,
+          "p95Ms": 3.899999976158142,
+          "maxMs": 6.600000023841858
+        }
+      },
+      "maxStationaryMs": 15016,
+      "movementTrace": [
+        {
+          "ms": 1000.2999999523163,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 2017.8999999761581,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 3034.6999999284744,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 4050.899999976158,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 5066.299999952316,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 6082.299999952316,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 7082.899999976158,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 8099.5,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 9116,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 10116.099999904633,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 11132.699999928474,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 12132.799999952316,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 13149.199999928474,
+          "wx": -2608,
+          "wy": -8304
+        },
+        {
+          "ms": 14149.199999928474,
+          "wx": -2608,
+          "wy": -8304
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34596,
+        "ai-admitted.full.wildlife-rabbit-v1": 4525,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 135356,
+        "snapshot-checked": 81450,
+        "snapshot-created": 11728,
+        "planning-search.robin": 126,
+        "planning-search.rabbit": 20
+      }
+    },
+    {
+      "lane": "after-census-complete",
+      "stage": "delivered",
+      "repeat": 3,
+      "date": "2026-10-11T10:57:07.617Z",
+      "browser": "153.0.8010.12",
+      "scene": "pond",
+      "motion": "idle",
+      "seconds": 15.016600000023843,
+      "authorityHz": 60.00026548780544,
+      "maxTravelPx": 0,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.799999952316284,
+      "maxResimPx": 0,
+      "errors": [],
+      "activeFinal": 25,
+      "residentFinal": 200,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.01229281800886544,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.7000000476837158
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.07591160357986367,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 1.3000000715255737
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.21127071907507122,
+          "p95Ms": 0.6999999284744263,
+          "maxMs": 1
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.02342541494422196,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.07790055380341757,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.6000000238418579
+        },
+        "updateMallardAI": {
+          "calls": 1810,
+          "meanMs": 0.019337015652524832,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.30000007152557373
+        },
+        "updateRobinAI": {
+          "calls": 14669,
+          "meanMs": 0.0022496421186460275,
+          "p95Ms": 0,
+          "maxMs": 0.5
+        },
+        "updateFrogAI": {
+          "calls": 2715,
+          "meanMs": 0.005709023897160483,
+          "p95Ms": 0,
+          "maxMs": 0.6999999284744263
+        },
+        "updateFaunaAI": {
+          "calls": 2715,
+          "meanMs": 0.008103130842879771,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 1
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.1574585626138508,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 1.5
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0012154697713272348,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.39204419871061547,
+          "p95Ms": 0.8999999761581421,
+          "maxMs": 2.399999976158142
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00044198892393164873,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.004530386766676086,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.14828729405587548,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 0.7999999523162842
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.45569060718157,
+          "p95Ms": 3.899999976158142,
+          "maxMs": 6.399999976158142
+        }
+      },
+      "maxStationaryMs": 15016.300000071526,
+      "movementTrace": [
+        {
+          "ms": 1001.3000000715256,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 2018,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 3034.600000023842,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 4034.8000000715256,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 5051.100000023842,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 6066.5,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 7066.5,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 8066.5,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 9066.5,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 10066.5,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 11066.5,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 12066.600000023842,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 13083,
+          "wx": 3632,
+          "wy": -2928
+        },
+        {
+          "ms": 14083,
+          "wx": 3632,
+          "wy": -2928
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-frog-v1": 2715,
+        "ai-admitted.full.wildlife-mallard-v1": 1810,
+        "ai-admitted.full.wildlife-fish-provisional-v1": 2715,
+        "ai-admitted.full.wildlife-robin-v1": 14669,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 84383,
+        "snapshot-checked": 47060,
+        "snapshot-created": 8686,
+        "planning-search.robin": 59,
+        "planning-search.mallard": 1,
+        "planning-search.frog": 12,
+        "fauna-herd-sense": 8,
+        "planning-search.fauna": 8
+      }
+    },
+    {
+      "lane": "before-grove-held-15s",
+      "stage": "before",
+      "repeat": 1,
+      "date": "2026-10-11T10:20:05.502Z",
+      "browser": "153.0.8010.12",
+      "scene": "robins",
+      "motion": "walk",
+      "seconds": 15.015099999904633,
+      "authorityHz": 59.9994690314374,
+      "maxTravelPx": 21.33767554687529,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 50.89999997615814,
+      "maxResimPx": 0.00022960937485549948,
+      "errors": [],
+      "activeFinal": 44,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.00734806630492869,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.04872928251877674,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.1998895001016269,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.9000000953674316
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.02408839773736606,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.03679558032125399,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.2999999523162842
+        },
+        "updateRabbitAI": {
+          "calls": 4525,
+          "meanMs": 0.0036243095187192464,
+          "p95Ms": 0,
+          "maxMs": 0.7000000476837158
+        },
+        "updateRobinAI": {
+          "calls": 34580,
+          "meanMs": 0.0016454598026650706,
+          "p95Ms": 0,
+          "maxMs": 0.3999999761581421
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.11701657469101373,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.8000000715255737
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0005524863195682757,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.423756906209071,
+          "p95Ms": 0.7999999523162842,
+          "maxMs": 1.2999999523162842
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.00033149152829502166,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.0038674039735319865,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.1609944749273648,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.5
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.2648618799546805,
+          "p95Ms": 2,
+          "maxMs": 3.700000047683716
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34580,
+        "ai-admitted.full.wildlife-rabbit-v1": 4525,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 136446,
+        "snapshot-checked": 81450,
+        "snapshot-created": 12029,
+        "planning-search.robin": 126,
+        "planning-search.rabbit": 18
+      }
+    },
+    {
+      "lane": "before-grove-held-15s",
+      "stage": "before",
+      "repeat": 2,
+      "date": "2026-10-11T10:20:05.502Z",
+      "browser": "153.0.8010.12",
+      "scene": "robins",
+      "motion": "walk",
+      "seconds": 15.015299999952317,
+      "authorityHz": 59.997209431929356,
+      "maxTravelPx": 21.33767554687529,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.60000002384186,
+      "maxResimPx": 0.00022960937485549948,
+      "errors": [],
+      "activeFinal": 44,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3616,
+          "meanMs": 0.007439159318409135,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "streaming": {
+          "calls": 1808,
+          "meanMs": 0.047842920683654006,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.3999999761581421
+        },
+        "selection": {
+          "calls": 904,
+          "meanMs": 0.18683628223638618,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.8999999761581421
+        },
+        "decision-selection": {
+          "calls": 904,
+          "meanMs": 0.02046460124243677,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 904,
+          "meanMs": 0.049446901652665264,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "updateRabbitAI": {
+          "calls": 4520,
+          "meanMs": 0.0034955749996995506,
+          "p95Ms": 0,
+          "maxMs": 0.6000000238418579
+        },
+        "updateRobinAI": {
+          "calls": 34546,
+          "meanMs": 0.0013865570743765959,
+          "p95Ms": 0,
+          "maxMs": 0.30000007152557373
+        },
+        "ai-total": {
+          "calls": 904,
+          "meanMs": 0.10353982237587987,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 1.100000023841858
+        },
+        "pre-hooks": {
+          "calls": 904,
+          "meanMs": 0.0002212389908005706,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 904,
+          "meanMs": 0.3600663726044967,
+          "p95Ms": 0.5,
+          "maxMs": 1
+        },
+        "tags": {
+          "calls": 904,
+          "meanMs": 0.0002212389908005706,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 904,
+          "meanMs": 0.0034292034343280623,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 904,
+          "meanMs": 0.1366150443796563,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.3999999761581421
+        },
+        "tick": {
+          "calls": 904,
+          "meanMs": 1.1523230107484665,
+          "p95Ms": 1.5,
+          "maxMs": 3.799999952316284
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34546,
+        "ai-admitted.full.wildlife-rabbit-v1": 4520,
+        "ai-admitted.full.player": 904,
+        "dirty-notification": 136576,
+        "planning-search.robin": 128,
+        "snapshot-checked": 81360,
+        "snapshot-created": 11824,
+        "planning-search.rabbit": 18
+      }
+    },
+    {
+      "lane": "after-grove-held-15s",
+      "stage": "preWaterline",
+      "repeat": 1,
+      "date": "2026-10-11T10:20:45.091Z",
+      "browser": "153.0.8010.12",
+      "scene": "robins",
+      "motion": "walk",
+      "seconds": 15.0,
+      "authorityHz": 59.99003487792726,
+      "maxTravelPx": 21.33767554687529,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.39999997615814,
+      "maxResimPx": 0.00022960937485549948,
+      "errors": [],
+      "activeFinal": 44,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3616,
+          "meanMs": 0.0064159290848580085,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "streaming": {
+          "calls": 1808,
+          "meanMs": 0.047234512799609024,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "selection": {
+          "calls": 904,
+          "meanMs": 0.16261062078771338,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.5
+        },
+        "decision-selection": {
+          "calls": 904,
+          "meanMs": 0.021570796328308307,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "prop-selection": {
+          "calls": 904,
+          "meanMs": 0.035287610065620555,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "updateRobinAI": {
+          "calls": 34560,
+          "meanMs": 0.0013368055672833214,
+          "p95Ms": 0,
+          "maxMs": 0.30000007152557373
+        },
+        "updateRabbitAI": {
+          "calls": 4520,
+          "meanMs": 0.0017699115307985155,
+          "p95Ms": 0,
+          "maxMs": 0.30000007152557373
+        },
+        "ai-total": {
+          "calls": 904,
+          "meanMs": 0.1023230081902141,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.6999999284744263
+        },
+        "pre-hooks": {
+          "calls": 904,
+          "meanMs": 0.00022123885893188746,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 904,
+          "meanMs": 0.33860619524411395,
+          "p95Ms": 0.5,
+          "maxMs": 0.7000000476837158
+        },
+        "tags": {
+          "calls": 904,
+          "meanMs": 0.0003318584862008559,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 904,
+          "meanMs": 0.0037610620523976014,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 904,
+          "meanMs": 0.12820796576221433,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.30000007152557373
+        },
+        "tick": {
+          "calls": 904,
+          "meanMs": 1.082190266357059,
+          "p95Ms": 1.399999976158142,
+          "maxMs": 2.5
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34560,
+        "ai-admitted.full.wildlife-rabbit-v1": 4520,
+        "ai-admitted.full.player": 904,
+        "dirty-notification": 135363,
+        "planning-search.robin": 127,
+        "snapshot-checked": 81360,
+        "snapshot-created": 11754,
+        "planning-search.rabbit": 20
+      }
+    },
+    {
+      "lane": "after-grove-held-15s",
+      "stage": "preWaterline",
+      "repeat": 2,
+      "date": "2026-10-11T10:20:45.091Z",
+      "browser": "153.0.8010.12",
+      "scene": "robins",
+      "motion": "walk",
+      "seconds": 15.016400000095368,
+      "authorityHz": 59.997876181658924,
+      "maxTravelPx": 21.33767554687529,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 50.59999990463257,
+      "maxResimPx": 0.00021507812471099896,
+      "errors": [],
+      "activeFinal": 44,
+      "residentFinal": 243,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.0063259669101040665,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.0432044201792933,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.19138121723470108,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.6000000238418579
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.021988949854729583,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.2999999523162842
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.043204418203448725,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "updateRobinAI": {
+          "calls": 34600,
+          "meanMs": 0.0012890172934945608,
+          "p95Ms": 0,
+          "maxMs": 0.20000004768371582
+        },
+        "updateRabbitAI": {
+          "calls": 4525,
+          "meanMs": 0.0019005525968351417,
+          "p95Ms": 0,
+          "maxMs": 0.30000007152557373
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.10375690565583455,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.6000000238418579
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.0008839777161403255,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.3394475162358574,
+          "p95Ms": 0.5,
+          "maxMs": 0.6000000238418579
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.0005524861878453039,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.004419889371039459,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.13425414219745616,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.30000007152557373
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.1072928163886728,
+          "p95Ms": 1.4000000953674316,
+          "maxMs": 1.7999999523162842
+        }
+      },
+      "maxStationaryMs": null,
+      "movementTrace": null,
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34600,
+        "ai-admitted.full.wildlife-rabbit-v1": 4525,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 135583,
+        "planning-search.robin": 128,
+        "snapshot-checked": 81450,
+        "snapshot-created": 12042,
+        "planning-search.rabbit": 20
+      }
+    },
+    {
+      "lane": "before-held-15s",
+      "stage": "before",
+      "repeat": 1,
+      "date": "2026-10-11T10:58:06.243Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 15.015399999976157,
+      "authorityHz": 59.99282477814673,
+      "maxTravelPx": 625.1916809082031,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.799999952316284,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 43,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 3616,
+          "meanMs": 0.01053650466214239,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "streaming": {
+          "calls": 1808,
+          "meanMs": 0.0575774348283236,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 0.30000007152557373
+        },
+        "selection": {
+          "calls": 904,
+          "meanMs": 0.25519911536073264,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 1.7000000476837158
+        },
+        "decision-selection": {
+          "calls": 904,
+          "meanMs": 0.030088495891706077,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 904,
+          "meanMs": 0.07157079664479314,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.40000009536743164
+        },
+        "updateFaunaAI": {
+          "calls": 477,
+          "meanMs": 0.01069182319961004,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.9000000953674316
+        },
+        "updateRobinAI": {
+          "calls": 34356,
+          "meanMs": 0.0023140063009907193,
+          "p95Ms": 0,
+          "maxMs": 0.5
+        },
+        "ai-total": {
+          "calls": 904,
+          "meanMs": 0.15077433543922628,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 1.5
+        },
+        "pre-hooks": {
+          "calls": 904,
+          "meanMs": 0.0013274338129347404,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 904,
+          "meanMs": 0.5773230073726283,
+          "p95Ms": 0.8000000715255737,
+          "maxMs": 1.8000000715255737
+        },
+        "tags": {
+          "calls": 904,
+          "meanMs": 0.00033185835433217274,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 904,
+          "meanMs": 0.004646017751862517,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 904,
+          "meanMs": 0.1956858388354293,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.7999999523162842
+        },
+        "tick": {
+          "calls": 904,
+          "meanMs": 1.6808628297485082,
+          "p95Ms": 2.3000000715255737,
+          "maxMs": 9.200000047683716
+        },
+        "updateRabbitAI": {
+          "calls": 1408,
+          "meanMs": 0.006960226730866866,
+          "p95Ms": 0,
+          "maxMs": 1.399999976158142
+        }
+      },
+      "maxStationaryMs": 5248.300000071526,
+      "movementTrace": [
+        {
+          "ms": 1000.7999999523163,
+          "wx": -333.8534531347656,
+          "wy": 1632
+        },
+        {
+          "ms": 2016.6999999284744,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3017,
+          "wx": -204.76095435546875,
+          "wy": 1632
+        },
+        {
+          "ms": 4033.2999999523163,
+          "wx": -139.68127295898438,
+          "wy": 1632
+        },
+        {
+          "ms": 5033.5,
+          "wx": -75.66847846435547,
+          "wy": 1632
+        },
+        {
+          "ms": 6049.899999976158,
+          "wx": -10.588799928894044,
+          "wy": 1632
+        },
+        {
+          "ms": 7050,
+          "wx": 53.42400124145507,
+          "wy": 1632
+        },
+        {
+          "ms": 8066.299999952316,
+          "wx": 118.50367882324218,
+          "wy": 1632
+        },
+        {
+          "ms": 9066.599999904633,
+          "wx": 182.51648094726562,
+          "wy": 1632
+        },
+        {
+          "ms": 10083,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 11083.399999976158,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 12099.799999952316,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 13099.899999976158,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 14115,
+          "wx": 227.325439453125,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34356,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 477,
+        "ai-admitted.full.player": 904,
+        "fauna-herd-sense": 477,
+        "dirty-notification": 129065,
+        "snapshot-checked": 61709,
+        "snapshot-created": 11778,
+        "planning-search.robin": 136,
+        "ai-admitted.full.wildlife-rabbit-v1": 1408,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 7,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "before-held-15s",
+      "stage": "before",
+      "repeat": 2,
+      "date": "2026-10-11T10:58:06.243Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 15.000300000071526,
+      "authorityHz": 60.00199342170836,
+      "maxTravelPx": 625.1916809082031,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.89999997615814,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 43,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 3616,
+          "meanMs": 0.01017699156582883,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "streaming": {
+          "calls": 1808,
+          "meanMs": 0.05663716938115854,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 1.9000000953674316
+        },
+        "selection": {
+          "calls": 904,
+          "meanMs": 0.25962389240750167,
+          "p95Ms": 0.5,
+          "maxMs": 2
+        },
+        "decision-selection": {
+          "calls": 904,
+          "meanMs": 0.02466814180391025,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 904,
+          "meanMs": 0.07024336335933314,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.7000000476837158
+        },
+        "updateFaunaAI": {
+          "calls": 478,
+          "meanMs": 0.010878660688839198,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "updateRobinAI": {
+          "calls": 34337,
+          "meanMs": 0.0019716341056615983,
+          "p95Ms": 0,
+          "maxMs": 0.5
+        },
+        "ai-total": {
+          "calls": 904,
+          "meanMs": 0.12688053155367354,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.8999999761581421
+        },
+        "pre-hooks": {
+          "calls": 904,
+          "meanMs": 0.0011061948221341698,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 904,
+          "meanMs": 0.4481194691847911,
+          "p95Ms": 0.8000000715255737,
+          "maxMs": 1.5
+        },
+        "tags": {
+          "calls": 904,
+          "meanMs": 0.0004424779816011412,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 904,
+          "meanMs": 0.003982300779460806,
+          "p95Ms": 0,
+          "maxMs": 0.20000004768371582
+        },
+        "replication": {
+          "calls": 904,
+          "meanMs": 0.1762168154252314,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.7999999523162842
+        },
+        "tick": {
+          "calls": 904,
+          "meanMs": 1.477654869577526,
+          "p95Ms": 2.5999999046325684,
+          "maxMs": 5.299999952316284
+        },
+        "updateRabbitAI": {
+          "calls": 1406,
+          "meanMs": 0.0053342814804988765,
+          "p95Ms": 0,
+          "maxMs": 0.6000000238418579
+        }
+      },
+      "maxStationaryMs": 5233.200000047684,
+      "movementTrace": [
+        {
+          "ms": 1015.7000000476837,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2015.7000000476837,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3015.899999976158,
+          "wx": -204.76095435546875,
+          "wy": 1632
+        },
+        {
+          "ms": 4016.100000023842,
+          "wx": -140.74816749023438,
+          "wy": 1632
+        },
+        {
+          "ms": 5033.200000047684,
+          "wx": -75.66847846435547,
+          "wy": 1632
+        },
+        {
+          "ms": 6033.399999976158,
+          "wx": -11.655680155029298,
+          "wy": 1632
+        },
+        {
+          "ms": 7050,
+          "wx": 53.42400124145507,
+          "wy": 1632
+        },
+        {
+          "ms": 8066.399999976158,
+          "wx": 118.50367882324218,
+          "wy": 1632
+        },
+        {
+          "ms": 9082.5,
+          "wx": 183.58336021972656,
+          "wy": 1632
+        },
+        {
+          "ms": 10082.899999976158,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 11083.300000071526,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 12100.100000023842,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 13117.700000047684,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 14132.300000071526,
+          "wx": 227.325439453125,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34337,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 478,
+        "ai-admitted.full.player": 904,
+        "fauna-herd-sense": 478,
+        "dirty-notification": 128972,
+        "snapshot-checked": 61702,
+        "snapshot-created": 11764,
+        "planning-search.robin": 136,
+        "ai-admitted.full.wildlife-rabbit-v1": 1406,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 7,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "after-held-15s",
+      "stage": "delivered",
+      "repeat": 1,
+      "date": "2026-10-11T10:58:45.793Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 15.000200000047684,
+      "authorityHz": 60.00598066252451,
+      "maxTravelPx": 625.1916809082031,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.60000002384186,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 43,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 3616,
+          "meanMs": 0.007992256366837341,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "streaming": {
+          "calls": 1808,
+          "meanMs": 0.04701327367693977,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.30000007152557373
+        },
+        "selection": {
+          "calls": 904,
+          "meanMs": 0.19612831826758595,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.6999999284744263
+        },
+        "decision-selection": {
+          "calls": 904,
+          "meanMs": 0.02455752217664128,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 904,
+          "meanMs": 0.053871682787363505,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 0.5
+        },
+        "updateRobinAI": {
+          "calls": 34397,
+          "meanMs": 0.001532110314793818,
+          "p95Ms": 0,
+          "maxMs": 0.40000009536743164
+        },
+        "updateFaunaAI": {
+          "calls": 477,
+          "meanMs": 0.0077568135171566365,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.40000009536743164
+        },
+        "ai-total": {
+          "calls": 904,
+          "meanMs": 0.11515486425003119,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.8000000715255737
+        },
+        "pre-hooks": {
+          "calls": 904,
+          "meanMs": 0.0006637165767956624,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 904,
+          "meanMs": 0.3930309752447415,
+          "p95Ms": 0.7000000476837158,
+          "maxMs": 1.100000023841858
+        },
+        "tags": {
+          "calls": 904,
+          "meanMs": 0.0004424779816011412,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 904,
+          "meanMs": 0.0032079651028709072,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 904,
+          "meanMs": 0.15387167814558586,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.6000000238418579
+        },
+        "tick": {
+          "calls": 904,
+          "meanMs": 1.251106194426528,
+          "p95Ms": 2.100000023841858,
+          "maxMs": 5.5
+        },
+        "updateRabbitAI": {
+          "calls": 1408,
+          "meanMs": 0.003977272913537242,
+          "p95Ms": 0,
+          "maxMs": 0.7000000476837158
+        }
+      },
+      "maxStationaryMs": 5233.399999976158,
+      "movementTrace": [
+        {
+          "ms": 1015.7999999523163,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2016.3999999761581,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3032.899999976158,
+          "wx": -203.69407508300782,
+          "wy": 1632
+        },
+        {
+          "ms": 4032.899999976158,
+          "wx": -139.68127295898438,
+          "wy": 1632
+        },
+        {
+          "ms": 5049.600000023842,
+          "wx": -74.60159919189454,
+          "wy": 1632
+        },
+        {
+          "ms": 6049.600000023842,
+          "wx": -10.588799928894044,
+          "wy": 1632
+        },
+        {
+          "ms": 7065.899999976158,
+          "wx": 54.49088051391601,
+          "wy": 1632
+        },
+        {
+          "ms": 8066,
+          "wx": 118.50367882324218,
+          "wy": 1632
+        },
+        {
+          "ms": 9066,
+          "wx": 182.51648094726562,
+          "wy": 1632
+        },
+        {
+          "ms": 10081.799999952316,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 11082.600000023842,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 12083.100000023842,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 13083.700000047684,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 14099,
+          "wx": 227.325439453125,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34397,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 477,
+        "ai-admitted.full.player": 904,
+        "dirty-notification": 127725,
+        "snapshot-checked": 61709,
+        "snapshot-created": 11505,
+        "planning-search.robin": 136,
+        "ai-admitted.full.wildlife-rabbit-v1": 1408,
+        "fauna-herd-sense": 1,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 7,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "after-held-15s",
+      "stage": "delivered",
+      "repeat": 2,
+      "date": "2026-10-11T10:58:45.793Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 15.0175,
+      "authorityHz": 59.99827438581874,
+      "maxTravelPx": 625.1916809082031,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.89999997615814,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 43,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 3620,
+          "meanMs": 0.011519337293192827,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "streaming": {
+          "calls": 1810,
+          "meanMs": 0.06640884033224201,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 1.2000000476837158
+        },
+        "selection": {
+          "calls": 905,
+          "meanMs": 0.2845303847644869,
+          "p95Ms": 0.7999999523162842,
+          "maxMs": 2.100000023841858
+        },
+        "decision-selection": {
+          "calls": 905,
+          "meanMs": 0.030939227309674848,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "prop-selection": {
+          "calls": 905,
+          "meanMs": 0.07823204559515853,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.8999999761581421
+        },
+        "updateRobinAI": {
+          "calls": 34419,
+          "meanMs": 0.0021180161974293553,
+          "p95Ms": 0,
+          "maxMs": 1
+        },
+        "updateFaunaAI": {
+          "calls": 478,
+          "meanMs": 0.011087865260854425,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.7999999523162842
+        },
+        "ai-total": {
+          "calls": 905,
+          "meanMs": 0.16198895043431066,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 1.4000000953674316
+        },
+        "pre-hooks": {
+          "calls": 905,
+          "meanMs": 0.000773480847395586,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 905,
+          "meanMs": 0.5485082860809664,
+          "p95Ms": 1,
+          "maxMs": 2.5
+        },
+        "tags": {
+          "calls": 905,
+          "meanMs": 0.0004419890556546206,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 905,
+          "meanMs": 0.005524861483284123,
+          "p95Ms": 0.09999990463256836,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 905,
+          "meanMs": 0.17767956151488076,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.8000000715255737
+        },
+        "tick": {
+          "calls": 905,
+          "meanMs": 1.7226519339651034,
+          "p95Ms": 3.700000047683716,
+          "maxMs": 6.5
+        },
+        "updateRabbitAI": {
+          "calls": 1408,
+          "meanMs": 0.0057528413493524895,
+          "p95Ms": 0,
+          "maxMs": 0.7999999523162842
+        }
+      },
+      "maxStationaryMs": 5251.300000071526,
+      "movementTrace": [
+        {
+          "ms": 1015.4000000953674,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2015.7000000476837,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3017.2000000476837,
+          "wx": -204.76095435546875,
+          "wy": 1632
+        },
+        {
+          "ms": 4032.3000000715256,
+          "wx": -139.68127295898438,
+          "wy": 1632
+        },
+        {
+          "ms": 5032.300000071526,
+          "wx": -75.66847846435547,
+          "wy": 1632
+        },
+        {
+          "ms": 6032.900000095367,
+          "wx": -11.655680155029298,
+          "wy": 1632
+        },
+        {
+          "ms": 7049,
+          "wx": 53.42400124145507,
+          "wy": 1632
+        },
+        {
+          "ms": 8049,
+          "wx": 117.43679955078125,
+          "wy": 1632
+        },
+        {
+          "ms": 9065.5,
+          "wx": 182.51648094726562,
+          "wy": 1632
+        },
+        {
+          "ms": 10065.5,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 11081.300000071526,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 12082.100000023842,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 13098.600000023842,
+          "wx": 227.325439453125,
+          "wy": 1632
+        },
+        {
+          "ms": 14115,
+          "wx": 227.325439453125,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 34419,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 478,
+        "ai-admitted.full.player": 905,
+        "dirty-notification": 127711,
+        "snapshot-checked": 61771,
+        "snapshot-created": 11483,
+        "planning-search.robin": 136,
+        "ai-admitted.full.wildlife-rabbit-v1": 1408,
+        "fauna-herd-sense": 1,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 7,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "before-moving-8s",
+      "stage": "before",
+      "repeat": 1,
+      "date": "2026-10-11T11:01:27.518Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 8.016100000023842,
+      "authorityHz": 60.004215171962834,
+      "maxTravelPx": 513.1692810058594,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 34.90000009536743,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 40,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 1940,
+          "meanMs": 0.010360824508765309,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 1.100000023841858
+        },
+        "streaming": {
+          "calls": 970,
+          "meanMs": 0.05649484531166627,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 1.3000000715255737
+        },
+        "selection": {
+          "calls": 485,
+          "meanMs": 0.22680412444871725,
+          "p95Ms": 0.6000000238418579,
+          "maxMs": 2.299999952316284
+        },
+        "decision-selection": {
+          "calls": 485,
+          "meanMs": 0.024329898037861303,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 485,
+          "meanMs": 0.06412371138936465,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.3999999761581421
+        },
+        "updateFaunaAI": {
+          "calls": 478,
+          "meanMs": 0.012343095436255802,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.6999999284744263
+        },
+        "updateRobinAI": {
+          "calls": 17734,
+          "meanMs": 0.0017875267873961721,
+          "p95Ms": 0,
+          "maxMs": 0.5
+        },
+        "ai-total": {
+          "calls": 485,
+          "meanMs": 0.121443298428329,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.8999999761581421
+        },
+        "pre-hooks": {
+          "calls": 485,
+          "meanMs": 0.0012371129596356265,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 485,
+          "meanMs": 0.45360824668530336,
+          "p95Ms": 0.8999999761581421,
+          "maxMs": 1.2000000476837158
+        },
+        "tags": {
+          "calls": 485,
+          "meanMs": 0.0002061856161687792,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 485,
+          "meanMs": 0.0032989683839463697,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 485,
+          "meanMs": 0.16020618812325074,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.8999999761581421
+        },
+        "tick": {
+          "calls": 485,
+          "meanMs": 1.4389690733447518,
+          "p95Ms": 3.1999999284744263,
+          "maxMs": 5.599999904632568
+        },
+        "updateRabbitAI": {
+          "calls": 568,
+          "meanMs": 0.0059859158707336645,
+          "p95Ms": 0,
+          "maxMs": 0.6999999284744263
+        }
+      },
+      "maxStationaryMs": 0,
+      "movementTrace": [
+        {
+          "ms": 1016.3999999761581,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2032.5,
+          "wx": -267.7068772070312,
+          "wy": 1632
+        },
+        {
+          "ms": 3032.7999999523163,
+          "wx": -203.69407508300782,
+          "wy": 1632
+        },
+        {
+          "ms": 4033.399999976158,
+          "wx": -139.68127295898438,
+          "wy": 1632
+        },
+        {
+          "ms": 5049.899999976158,
+          "wx": -74.60159919189454,
+          "wy": 1632
+        },
+        {
+          "ms": 6065.899999976158,
+          "wx": -9.52191970275879,
+          "wy": 1632
+        },
+        {
+          "ms": 7066,
+          "wx": 54.49088051391601,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 17734,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 478,
+        "ai-admitted.full.player": 485,
+        "fauna-herd-sense": 478,
+        "dirty-notification": 69956,
+        "snapshot-checked": 33166,
+        "snapshot-created": 7070,
+        "planning-search.robin": 77,
+        "ai-admitted.full.wildlife-rabbit-v1": 568,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 3,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "before-moving-8s",
+      "stage": "before",
+      "repeat": 2,
+      "date": "2026-10-11T11:01:27.518Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 8.0165,
+      "authorityHz": 60.005703021538906,
+      "maxTravelPx": 513.1692810058594,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 35.10000002384186,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 40,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 1940,
+          "meanMs": 0.013453607891023773,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.3999999761581421
+        },
+        "streaming": {
+          "calls": 970,
+          "meanMs": 0.0803092789404171,
+          "p95Ms": 0.20000004768371582,
+          "maxMs": 0.8000000715255737
+        },
+        "selection": {
+          "calls": 485,
+          "meanMs": 0.27505154609680177,
+          "p95Ms": 0.7000000476837158,
+          "maxMs": 1.2999999523162842
+        },
+        "decision-selection": {
+          "calls": 485,
+          "meanMs": 0.032989690721649485,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 485,
+          "meanMs": 0.08391752513413576,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.40000009536743164
+        },
+        "updateFaunaAI": {
+          "calls": 478,
+          "meanMs": 0.013389121039641952,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "updateRobinAI": {
+          "calls": 17734,
+          "meanMs": 0.002165332135748699,
+          "p95Ms": 0,
+          "maxMs": 0.6000000238418579
+        },
+        "ai-total": {
+          "calls": 485,
+          "meanMs": 0.15092783416669392,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 1.0999999046325684
+        },
+        "pre-hooks": {
+          "calls": 485,
+          "meanMs": 0.001030928080843896,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 485,
+          "meanMs": 0.5216494869940059,
+          "p95Ms": 1,
+          "maxMs": 1.5
+        },
+        "tags": {
+          "calls": 485,
+          "meanMs": 0.0002061856161687792,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 485,
+          "meanMs": 0.005979381885725199,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 485,
+          "meanMs": 0.20618556774768632,
+          "p95Ms": 0.40000009536743164,
+          "maxMs": 0.8999999761581421
+        },
+        "tick": {
+          "calls": 485,
+          "meanMs": 1.8024742259192712,
+          "p95Ms": 4,
+          "maxMs": 14.199999928474426
+        },
+        "updateRabbitAI": {
+          "calls": 568,
+          "meanMs": 0.0066901405512447085,
+          "p95Ms": 0,
+          "maxMs": 0.6000000238418579
+        }
+      },
+      "maxStationaryMs": 0,
+      "movementTrace": [
+        {
+          "ms": 1016.3999999761581,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2016.6000000238419,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3016.600000023842,
+          "wx": -204.76095435546875,
+          "wy": 1632
+        },
+        {
+          "ms": 4032.5,
+          "wx": -139.68127295898438,
+          "wy": 1632
+        },
+        {
+          "ms": 5032.600000023842,
+          "wx": -75.66847846435547,
+          "wy": 1632
+        },
+        {
+          "ms": 6034.5,
+          "wx": -11.655680155029298,
+          "wy": 1632
+        },
+        {
+          "ms": 7049.600000023842,
+          "wx": 53.42400124145507,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 17734,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 478,
+        "ai-admitted.full.player": 485,
+        "fauna-herd-sense": 478,
+        "dirty-notification": 69934,
+        "snapshot-checked": 33166,
+        "snapshot-created": 7058,
+        "planning-search.robin": 77,
+        "ai-admitted.full.wildlife-rabbit-v1": 568,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 3,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "after-moving-8s",
+      "stage": "delivered",
+      "repeat": 1,
+      "date": "2026-10-11T11:01:53.180Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 8.0,
+      "authorityHz": 60.00670882441134,
+      "maxTravelPx": 512.1024017333984,
+      "frameP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 50.39999997615814,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 40,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 1936,
+          "meanMs": 0.01513429780390637,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.7000000476837158
+        },
+        "streaming": {
+          "calls": 968,
+          "meanMs": 0.0880165302063808,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 1.2999999523162842
+        },
+        "selection": {
+          "calls": 484,
+          "meanMs": 0.3198347108915818,
+          "p95Ms": 0.7999999523162842,
+          "maxMs": 1.2999999523162842
+        },
+        "decision-selection": {
+          "calls": 484,
+          "meanMs": 0.03140496074660751,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "prop-selection": {
+          "calls": 484,
+          "meanMs": 0.09194214777512984,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 0.6000000238418579
+        },
+        "updateRobinAI": {
+          "calls": 17707,
+          "meanMs": 0.0023267633555306678,
+          "p95Ms": 0,
+          "maxMs": 0.5
+        },
+        "updateFaunaAI": {
+          "calls": 478,
+          "meanMs": 0.012133890365456937,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.9000000953674316
+        },
+        "ai-total": {
+          "calls": 484,
+          "meanMs": 0.17148759936498217,
+          "p95Ms": 0.5,
+          "maxMs": 1.1999999284744263
+        },
+        "pre-hooks": {
+          "calls": 484,
+          "meanMs": 0.002066115948779524,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 484,
+          "meanMs": 0.5975206632259463,
+          "p95Ms": 1.100000023841858,
+          "maxMs": 1.7999999523162842
+        },
+        "tags": {
+          "calls": 484,
+          "meanMs": 0.0004132232390159418,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 484,
+          "meanMs": 0.006611570100153773,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 484,
+          "meanMs": 0.20867768299481101,
+          "p95Ms": 0.5,
+          "maxMs": 1
+        },
+        "tick": {
+          "calls": 484,
+          "meanMs": 1.966735537633423,
+          "p95Ms": 4.100000023841858,
+          "maxMs": 10.700000047683716
+        },
+        "updateRabbitAI": {
+          "calls": 566,
+          "meanMs": 0.004416961341359169,
+          "p95Ms": 0,
+          "maxMs": 1
+        }
+      },
+      "maxStationaryMs": 0,
+      "movementTrace": [
+        {
+          "ms": 1015.8000000715256,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2018.2000000476837,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3033.7000000476837,
+          "wx": -203.69407508300782,
+          "wy": 1632
+        },
+        {
+          "ms": 4049.2000000476837,
+          "wx": -138.61439368652344,
+          "wy": 1632
+        },
+        {
+          "ms": 5050.400000095367,
+          "wx": -74.60159919189454,
+          "wy": 1632
+        },
+        {
+          "ms": 6065.600000023842,
+          "wx": -9.52191970275879,
+          "wy": 1632
+        },
+        {
+          "ms": 7065.700000047684,
+          "wx": 54.49088051391601,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 17707,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 478,
+        "ai-admitted.full.player": 484,
+        "dirty-notification": 70026,
+        "snapshot-checked": 33102,
+        "snapshot-created": 7115,
+        "planning-search.robin": 79,
+        "ai-admitted.full.wildlife-rabbit-v1": 566,
+        "fauna-herd-sense": 1,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 3,
+        "dirty-callback-created": 40
+      }
+    },
+    {
+      "lane": "after-moving-8s",
+      "stage": "delivered",
+      "repeat": 2,
+      "date": "2026-10-11T11:01:53.180Z",
+      "browser": "153.0.8010.12",
+      "scene": "dog",
+      "motion": "walk",
+      "seconds": 8.000600000023843,
+      "authorityHz": 59.998509353449485,
+      "maxTravelPx": 512.1024017333984,
+      "frameP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "ackP95Ms": 35.200000047683716,
+      "maxResimPx": 1.598632815102974e-5,
+      "errors": [],
+      "activeFinal": 40,
+      "residentFinal": 241,
+      "phases": {
+        "interest-demand": {
+          "calls": 1936,
+          "meanMs": 0.009245867756280031,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.20000004768371582
+        },
+        "streaming": {
+          "calls": 968,
+          "meanMs": 0.05361570171580827,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.5
+        },
+        "selection": {
+          "calls": 484,
+          "meanMs": 0.20516529137437994,
+          "p95Ms": 0.3999999761581421,
+          "maxMs": 1.2999999523162842
+        },
+        "decision-selection": {
+          "calls": 484,
+          "meanMs": 0.024173554063828522,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.2999999523162842
+        },
+        "prop-selection": {
+          "calls": 484,
+          "meanMs": 0.06446280903067471,
+          "p95Ms": 0.19999992847442627,
+          "maxMs": 0.5
+        },
+        "updateRobinAI": {
+          "calls": 17706,
+          "meanMs": 0.0016717496637865526,
+          "p95Ms": 0,
+          "maxMs": 0.3999999761581421
+        },
+        "updateFaunaAI": {
+          "calls": 478,
+          "meanMs": 0.009205021369407367,
+          "p95Ms": 0.10000002384185791,
+          "maxMs": 0.6000000238418579
+        },
+        "ai-total": {
+          "calls": 484,
+          "meanMs": 0.11859503757855124,
+          "p95Ms": 0.2999999523162842,
+          "maxMs": 1
+        },
+        "pre-hooks": {
+          "calls": 484,
+          "meanMs": 0.0004132232390159418,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "physics": {
+          "calls": 484,
+          "meanMs": 0.42148760576878697,
+          "p95Ms": 0.8999999761581421,
+          "maxMs": 1.600000023841858
+        },
+        "tags": {
+          "calls": 484,
+          "meanMs": 0.0004132232390159418,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "overlap": {
+          "calls": 484,
+          "meanMs": 0.003925620031750892,
+          "p95Ms": 0,
+          "maxMs": 0.10000002384185791
+        },
+        "replication": {
+          "calls": 484,
+          "meanMs": 0.14524793206167616,
+          "p95Ms": 0.30000007152557373,
+          "maxMs": 0.5999999046325684
+        },
+        "tick": {
+          "calls": 484,
+          "meanMs": 1.3762396682392468,
+          "p95Ms": 2.600000023841858,
+          "maxMs": 11
+        },
+        "updateRabbitAI": {
+          "calls": 566,
+          "meanMs": 0.003180212140504547,
+          "p95Ms": 0,
+          "maxMs": 0.3999999761581421
+        }
+      },
+      "maxStationaryMs": 0,
+      "movementTrace": [
+        {
+          "ms": 1016.4000000953674,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "ms": 2016.5,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "ms": 3018.5,
+          "wx": -204.76095435546875,
+          "wy": 1632
+        },
+        {
+          "ms": 4032.4000000953674,
+          "wx": -139.68127295898438,
+          "wy": 1632
+        },
+        {
+          "ms": 5032.400000095367,
+          "wx": -75.66847846435547,
+          "wy": 1632
+        },
+        {
+          "ms": 6032.400000095367,
+          "wx": -11.655680155029298,
+          "wy": 1632
+        },
+        {
+          "ms": 7033,
+          "wx": 52.35711815429687,
+          "wy": 1632
+        }
+      ],
+      "counters": {
+        "ai-admitted.full.wildlife-robin-v1": 17706,
+        "ai-admitted.full.wildlife-dog-provisional-v1": 478,
+        "ai-admitted.full.player": 484,
+        "dirty-notification": 70024,
+        "snapshot-checked": 33102,
+        "snapshot-created": 7112,
+        "planning-search.robin": 79,
+        "ai-admitted.full.wildlife-rabbit-v1": 566,
+        "fauna-herd-sense": 1,
+        "planning-search.fauna": 1,
+        "planning-search.rabbit": 3,
+        "dirty-callback-created": 40
+      }
+    }
+  ],
+  "synthetic": {
+    "before": {
+      "actors": 96,
+      "steps": 180,
+      "physics": false,
+      "caveat": "Synthetic isolated AI work. Committed motion is held; no terrain generation, physics, persistence or rendering. Blocked/open occupancy; initially synchronized timers. No FPS/mobile claim.",
+      "captures": [
+        {
+          "repeat": 1,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.16696298333333048,
+            "p95": 0.21166699999997718,
+            "max": 5.747374999999977
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3170056333333321,
+            "p95": 0.1871669999999881,
+            "max": 5.747374999999977
+          },
+          "maxOccupancyQueries": 1936,
+          "totalOccupancyQueries": 2542,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.747374999999977, 0.1354170000000181, 0.1871669999999881, 0.18433399999997846,
+            0.14962500000001455, 0.12725000000000364, 0.12929100000002336, 0.12604099999998652,
+            0.11895800000002055, 0.12362500000000409, 0.12220800000000054, 0.11837500000001455,
+            0.12533400000000938, 0.11862500000000864, 0.14179099999995515, 0.11804100000000517,
+            0.11908399999998664, 0.11725000000001273, 0.11783399999995936, 0.12054200000000037,
+            0.12008400000001984, 0.12116700000001401, 0.12100000000003774, 0.12129199999998264,
+            0.17404199999998582, 0.12274999999999636, 0.12237499999997681, 0.12070800000003601,
+            0.119624999999985, 0.11895899999996118
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 1,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.07751366666666715,
+            "p95": 0.100750000000005,
+            "max": 3.9154589999999985
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.18019580000000512,
+            "p95": 0.0936659999999847,
+            "max": 3.9154589999999985
+          },
+          "maxOccupancyQueries": 1932,
+          "totalOccupancyQueries": 2536,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            3.9154589999999985, 0.05287500000002865, 0.0936659999999847, 0.09362499999997453,
+            0.04875000000004093, 0.04800000000000182, 0.04783300000002555, 0.04787499999997635,
+            0.04845800000003919, 0.04779200000001538, 0.04775000000000773, 0.04775000000000773,
+            0.04679100000004155, 0.04729199999997036, 0.04820799999998826, 0.0489170000000172,
+            0.04804099999995515, 0.046959000000015294, 0.04866700000002311, 0.0477910000000179,
+            0.047708000000000084, 0.04800000000000182, 0.04766699999998991, 0.047458000000005995,
+            0.04745899999994663, 0.05141700000001492, 0.051208000000031006, 0.04708299999998644,
+            0.0478750000000332, 0.04750000000001364
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 1,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.1606972277777768,
+            "p95": 0.17016699999999219,
+            "max": 7.961749999999995
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3840319000000022,
+            "p95": 0.19058300000000372,
+            "max": 7.961749999999995
+          },
+          "maxOccupancyQueries": 14878,
+          "totalOccupancyQueries": 15485,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            7.961749999999995, 0.13554199999998673, 0.1901250000000232, 0.17016699999999219,
+            0.10941600000001017, 0.19058300000000372, 0.12633299999998826, 0.11895900000001802,
+            0.10704199999997854, 0.11258300000002919, 0.11220800000000963, 0.11208299999998417,
+            0.10750000000001592, 0.11200000000002319, 0.11187499999999773, 0.11187499999999773,
+            0.11020800000000008, 0.11104199999999764, 0.11216699999999946, 0.11266699999998764,
+            0.11525000000000318, 0.11279100000001563, 0.11574999999999136, 0.11804100000000517,
+            0.11950000000001637, 0.12612500000000182, 0.12458399999997027, 0.12358299999999645,
+            0.11433300000004465, 0.11487499999998363
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 1,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.08637382222222116,
+            "p95": 0.09125000000000227,
+            "max": 6.1814580000000205
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.26173883333333187,
+            "p95": 0.11587499999995998,
+            "max": 6.1814580000000205
+          },
+          "maxOccupancyQueries": 14849,
+          "totalOccupancyQueries": 15456,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            6.1814580000000205, 0.06054100000000062, 0.11587499999995998, 0.10004199999997354,
+            0.05045899999998937, 0.05970800000000054, 0.058041000000002896, 0.05700000000001637,
+            0.05000000000001137, 0.05329199999999901, 0.05558300000001282, 0.059750000000008185,
+            0.05016599999999016, 0.04975000000001728, 0.05008300000002919, 0.050208999999995285,
+            0.04991699999999355, 0.052416999999991276, 0.05583400000000438, 0.06191600000005337,
+            0.060000000000002274, 0.04966699999999946, 0.04974999999996044, 0.04966699999999946,
+            0.050749999999993634, 0.05079200000000128, 0.05929099999997334, 0.053415999999970154,
+            0.05658299999998917, 0.05020799999999781
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 2,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.1658402500000016,
+            "p95": 0.18945899999999938,
+            "max": 5.86095899999998
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.32070833333333437,
+            "p95": 0.19429200000001856,
+            "max": 5.86095899999998
+          },
+          "maxOccupancyQueries": 1936,
+          "totalOccupancyQueries": 2542,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.86095899999998, 0.12729200000001129, 0.1871669999999881, 0.1892920000000231,
+            0.12299999999999045, 0.12279100000000653, 0.12220800000000054, 0.12287500000002183,
+            0.12195800000000645, 0.12166700000000219, 0.12166600000000471, 0.12183300000003783,
+            0.12162499999999454, 0.12149999999996908, 0.12179200000002766, 0.12133299999999281,
+            0.12183299999998098, 0.1219579999999496, 0.13333299999999326, 0.12191699999999628,
+            0.12116699999995717, 0.12266700000003539, 0.12274999999999636, 0.12179199999997081,
+            0.1218340000000353, 0.1220000000000141, 0.19429200000001856, 0.12179100000003018,
+            0.12225000000000819, 0.12270799999998871
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 2,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.07532086111110978,
+            "p95": 0.09233399999999392,
+            "max": 3.8212090000000103
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.17632649999999708,
+            "p95": 0.09066699999999628,
+            "max": 3.8212090000000103
+          },
+          "maxOccupancyQueries": 1932,
+          "totalOccupancyQueries": 2536,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            3.8212090000000103, 0.05608399999999847, 0.09066699999999628, 0.08879100000001472,
+            0.04766599999999244, 0.04862500000001546, 0.04737499999998818, 0.04720800000001191,
+            0.046749999999974534, 0.04720800000001191, 0.047083999999983916, 0.04741599999999835,
+            0.047167000000001735, 0.04670799999996689, 0.04712499999999409, 0.04712499999999409,
+            0.04699999999996862, 0.04695800000001782, 0.047083999999983916, 0.04720900000000938,
+            0.0489170000000172, 0.047584000000028936, 0.04758399999997209, 0.04712499999999409,
+            0.04729199999997036, 0.04766699999998991, 0.047250000000019554, 0.047416999999995824,
+            0.04887500000000955, 0.047624999999982265
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 2,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.1606377277777783,
+            "p95": 0.17000000000007276,
+            "max": 7.456916999999976
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.37312220000000024,
+            "p95": 0.19700000000000273,
+            "max": 7.456916999999976
+          },
+          "maxOccupancyQueries": 14878,
+          "totalOccupancyQueries": 15485,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            7.456916999999976, 0.13933399999996254, 0.18745799999999235, 0.19700000000000273,
+            0.12000000000000455, 0.11675000000002456, 0.11662499999999909, 0.1948749999999677,
+            0.11862500000000864, 0.11566600000003291, 0.11516599999998789, 0.1153749999999718,
+            0.12058400000000802, 0.11495800000000145, 0.11566699999997354, 0.11970800000000281,
+            0.12254100000001245, 0.12012500000003001, 0.11566700000003038, 0.16250000000002274,
+            0.12616699999995262, 0.12112500000000637, 0.11933299999998326, 0.12116600000001654,
+            0.12154199999997672, 0.12020800000004783, 0.1200420000000122, 0.1200420000000122,
+            0.11958299999997735, 0.11891700000001038
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 2,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.08660973888889127,
+            "p95": 0.09658400000000711,
+            "max": 6.017332999999894
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.254840166666664,
+            "p95": 0.09874999999999545,
+            "max": 6.017332999999894
+          },
+          "maxOccupancyQueries": 14849,
+          "totalOccupancyQueries": 15456,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            6.017332999999894, 0.060541999999941254, 0.09874999999999545, 0.09658400000000711,
+            0.05133299999999963, 0.050707999999985987, 0.05058300000007421, 0.05112500000007003,
+            0.0508750000000191, 0.050540999999952874, 0.05083399999989524, 0.05058299999996052,
+            0.04966699999999946, 0.04979199999991124, 0.04979200000002493, 0.049875000000042746,
+            0.049790999999913765, 0.05270799999993869, 0.050666000000092026, 0.06479100000001381,
+            0.07100000000002638, 0.056290999999987434, 0.053291000000058375, 0.05233299999997598,
+            0.05208299999992505, 0.052500000000009095, 0.0522080000000642, 0.052042000000028565,
+            0.05400000000008731, 0.05258400000002439
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 3,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.16386366666666594,
+            "p95": 0.19087500000000546,
+            "max": 5.828334000000041
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.31756803333333894,
+            "p95": 0.19087500000000546,
+            "max": 5.828334000000041
+          },
+          "maxOccupancyQueries": 1936,
+          "totalOccupancyQueries": 2542,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.828334000000041, 0.13287500000001273, 0.19020799999998417, 0.18849999999997635,
+            0.12208299999997507, 0.12541699999997036, 0.12341599999990649, 0.12320799999997689,
+            0.12270899999998619, 0.12024999999994179, 0.11954100000002654, 0.11820799999998144,
+            0.11812500000007731, 0.11816700000008495, 0.1179580000000442, 0.11804200000005949,
+            0.11870799999996962, 0.11933299999998326, 0.11983300000008512, 0.12133400000004713,
+            0.12162499999999454, 0.11845800000003237, 0.11870899999996709, 0.11962500000004184,
+            0.11808299999995597, 0.11770799999999326, 0.1184170000000222, 0.11858300000005784,
+            0.19087500000000546, 0.11870899999996709
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 3,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.07553953888888777,
+            "p95": 0.09120799999993778,
+            "max": 3.8517080000000306
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.17723603333333435,
+            "p95": 0.09120799999993778,
+            "max": 3.8517080000000306
+          },
+          "maxOccupancyQueries": 1932,
+          "totalOccupancyQueries": 2536,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            3.8517080000000306, 0.05770800000004783, 0.09120799999993778, 0.08854099999996379,
+            0.04783399999996618, 0.04737500000010186, 0.047458000000005995, 0.046708000000080574,
+            0.047499999999899956, 0.04745900000000347, 0.047333999999978005, 0.047333999999978005,
+            0.046875, 0.047458000000005995, 0.04770799999994324, 0.04737499999998818,
+            0.04766599999993559, 0.046875, 0.047667000000046755, 0.04750000000001364,
+            0.047333000000094216, 0.04720800000006875, 0.046790999999984706, 0.04750000000001364,
+            0.047124999999937245, 0.04716599999994742, 0.0472500000000764, 0.04624999999998636,
+            0.046583999999938897, 0.04658300000005511
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 3,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.1566639055555571,
+            "p95": 0.15858300000002146,
+            "max": 7.558667000000014
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3708874999999959,
+            "p95": 0.19070899999996982,
+            "max": 7.558667000000014
+          },
+          "maxOccupancyQueries": 14878,
+          "totalOccupancyQueries": 15485,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            7.558667000000014, 0.12833399999999529, 0.19070899999996982, 0.1905419999999367,
+            0.11920799999995779, 0.11308299999996052, 0.11779200000000856, 0.11870799999996962,
+            0.11474999999995816, 0.11587499999995998, 0.11258299999997234, 0.18779200000005858,
+            0.11620799999991505, 0.11529200000006767, 0.1132910000000038, 0.11520800000005238,
+            0.11308400000007168, 0.11362499999995634, 0.11283300000002328, 0.11279100000001563,
+            0.1124170000000504, 0.11245799999994688, 0.11616600000002109, 0.11549999999999727,
+            0.11662499999999909, 0.11704199999996945, 0.11691699999994398, 0.11283300000002328,
+            0.11387500000000728, 0.1124170000000504
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 3,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.08094302222221977,
+            "p95": 0.05716599999993832,
+            "max": 5.73012499999993
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.24414163333333364,
+            "p95": 0.110416999999984,
+            "max": 5.73012499999993
+          },
+          "maxOccupancyQueries": 14849,
+          "totalOccupancyQueries": 15456,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.73012499999993, 0.05716599999993832, 0.09600000000000364, 0.09424999999998818,
+            0.110416999999984, 0.04941699999994853, 0.05120799999997416, 0.04920800000002146,
+            0.05000000000006821, 0.05045899999993253, 0.04970900000000711, 0.04904199999998582,
+            0.04900000000009186, 0.04875000000004093, 0.04825000000005275, 0.04845799999998235,
+            0.04912500000000364, 0.05237499999998363, 0.04954099999997652, 0.04908299999999599,
+            0.05404199999998127, 0.049291000000039276, 0.048957999999970525, 0.048499999999989996,
+            0.04850000000010368, 0.048499999999989996, 0.048499999999989996, 0.04854199999999764,
+            0.04908299999999599, 0.04875000000004093
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 4,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.16357797222221962,
+            "p95": 0.18904200000008586,
+            "max": 5.661417000000029
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.311998600000004,
+            "p95": 0.18866700000000947,
+            "max": 5.661417000000029
+          },
+          "maxOccupancyQueries": 1936,
+          "totalOccupancyQueries": 2542,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.661417000000029, 0.18479200000001583, 0.18866700000000947, 0.1864579999999023,
+            0.12183300000003783, 0.1209159999999656, 0.12058300000001054, 0.12045799999998508,
+            0.1209999999999809, 0.12062500000001819, 0.12000000000000455, 0.1203330000000733,
+            0.12095900000008442, 0.1205410000000029, 0.12000000000000455, 0.12062500000001819,
+            0.12149999999996908, 0.12124999999991815, 0.12045799999998508, 0.12050000000010641,
+            0.12091699999996308, 0.12037500000008095, 0.12066700000002584, 0.12079199999993762,
+            0.12058299999989686, 0.1207920000000513, 0.12079100000005383, 0.12091699999996308,
+            0.12012500000003001, 0.1210839999999962
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 4,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.07677958333333726,
+            "p95": 0.09520799999995688,
+            "max": 3.6593749999999545
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.175824899999994,
+            "p95": 0.1752079999999978,
+            "max": 3.6593749999999545
+          },
+          "maxOccupancyQueries": 1932,
+          "totalOccupancyQueries": 2536,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            3.6593749999999545, 0.05195800000001327, 0.09216700000001765, 0.08954099999994014,
+            0.04804100000001199, 0.0464999999999236, 0.04733299999998053, 0.04787499999997635,
+            0.04754200000002129, 0.1752079999999978, 0.052416999999991276, 0.052207999999950516,
+            0.04683399999998983, 0.04679199999998218, 0.04662499999994907, 0.04695800000001782,
+            0.046875, 0.046542000000044936, 0.047083000000043285, 0.046875, 0.046708000000080574,
+            0.05899999999996908, 0.047416999999995824, 0.05058299999996052, 0.04795799999999417,
+            0.04741599999999835, 0.0472500000000764, 0.048040999999898304, 0.04825000000005275,
+            0.04737499999998818
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 4,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15985626111111187,
+            "p95": 0.17783299999996416,
+            "max": 8.052167000000054
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.381701266666668,
+            "p95": 0.17783299999996416,
+            "max": 8.052167000000054
+          },
+          "maxOccupancyQueries": 14878,
+          "totalOccupancyQueries": 15485,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            8.052167000000054, 0.11916699999994762, 0.17783299999996416, 0.1768329999999878,
+            0.11087499999996453, 0.1103329999999687, 0.10966599999994742, 0.1109159999999747,
+            0.11045799999999417, 0.10974999999996271, 0.10987499999998818, 0.10954100000003564,
+            0.11012500000003911, 0.11187499999994088, 0.11029199999995853, 0.10933299999999235,
+            0.10979199999997036, 0.10970800000006875, 0.11000000000001364, 0.10945800000001782,
+            0.11008300000003146, 0.17120899999997619, 0.110416999999984, 0.11041700000009769,
+            0.11058300000001964, 0.10991599999999835, 0.11016700000004676, 0.10958300000004328,
+            0.11020800000005693, 0.11045799999999417
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 4,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.08071619444444561,
+            "p95": 0.08679099999994833,
+            "max": 5.620292000000063
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.24064443333332594,
+            "p95": 0.10866699999996854,
+            "max": 5.620292000000063
+          },
+          "maxOccupancyQueries": 14849,
+          "totalOccupancyQueries": 15456,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.620292000000063, 0.05558300000006966, 0.09579199999996035, 0.09183300000006511,
+            0.04875000000004093, 0.04979199999991124, 0.052874999999971806, 0.04937500000005457,
+            0.05037500000003092, 0.050457999999935055, 0.05120799999997416, 0.0487910000000511,
+            0.04908299999999599, 0.049332999999933236, 0.10866699999996854, 0.05279199999995399,
+            0.05229199999996581, 0.04920800000002146, 0.052166000000056556, 0.0487910000000511,
+            0.04891699999996035, 0.04866699999990942, 0.04912500000000364, 0.05220899999994799,
+            0.05004199999996217, 0.04862500000001546, 0.04879199999993489, 0.04862500000001546,
+            0.048499999999989996, 0.04837499999996453
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 5,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.16747636666666116,
+            "p95": 0.19849999999996726,
+            "max": 5.884374999999977
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.32481943333333446,
+            "p95": 0.2452499999999418,
+            "max": 5.884374999999977
+          },
+          "maxOccupancyQueries": 1936,
+          "totalOccupancyQueries": 2542,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.884374999999977, 0.12879199999997581, 0.19233300000007603, 0.1873329999999669,
+            0.12087499999995543, 0.12087500000006912, 0.12187500000004547, 0.12225000000000819,
+            0.1855000000000473, 0.12266700000009223, 0.12154199999997672, 0.12066600000002836,
+            0.12049999999999272, 0.12116600000001654, 0.12050000000010641, 0.125583000000006,
+            0.12091699999996308, 0.12087499999995543, 0.12133299999993596, 0.12083399999994526,
+            0.11970800000005966, 0.12133400000004713, 0.12024999999994179, 0.11974999999995362,
+            0.1196669999999358, 0.1205410000000029, 0.12029200000006313, 0.12024999999994179,
+            0.13675000000000637, 0.2452499999999418
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 5,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.08065344999999663,
+            "p95": 0.1193749999999909,
+            "max": 3.7308750000000828
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.1822165666666668,
+            "p95": 0.2340830000000551,
+            "max": 3.7308750000000828
+          },
+          "maxOccupancyQueries": 1932,
+          "totalOccupancyQueries": 2536,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            3.7308750000000828, 0.09566699999993489, 0.10495800000001054, 0.09537499999999,
+            0.048417000000085864, 0.04804100000001199, 0.04787499999997635, 0.04841699999997218,
+            0.04733299999998053, 0.04233299999998508, 0.043416999999976724, 0.045707999999990534,
+            0.0432500000000573, 0.04362500000002001, 0.04295799999999872, 0.043207999999935964,
+            0.04233299999998508, 0.042832999999973254, 0.04270799999994779, 0.2340830000000551,
+            0.049999999999954525, 0.04808300000001964, 0.0674579999999878, 0.0681250000000091,
+            0.053167000000030384, 0.051916000000005624, 0.04770800000005693, 0.04920900000001893,
+            0.05058299999996052, 0.04683399999998983
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 5,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.1586735944444494,
+            "p95": 0.15724999999997635,
+            "max": 8.122291000000018
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3890041333333405,
+            "p95": 0.18716700000004494,
+            "max": 8.122291000000018
+          },
+          "maxOccupancyQueries": 14878,
+          "totalOccupancyQueries": 15485,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            8.122291000000018, 0.13083300000005238, 0.18716700000004494, 0.1871249999999236,
+            0.11570899999992434, 0.13025000000004638, 0.12320899999997437, 0.11295800000004874,
+            0.11333299999989777, 0.1187080000000833, 0.11837500000001455, 0.11670800000001691,
+            0.11404100000004291, 0.11216600000000199, 0.1129160000000411, 0.1135829999999487,
+            0.11291699999992488, 0.11300000000005639, 0.11379199999998946, 0.12129200000003948,
+            0.1179580000000442, 0.11391699999990124, 0.11833400000000438, 0.1142090000000735,
+            0.11379100000010567, 0.1190000000000282, 0.11716599999999744, 0.12612500000000182,
+            0.12554199999999582, 0.11370899999997164
+          ],
+          "firstPlanningAdmissionStep": 4
+        },
+        {
+          "repeat": 5,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.08245393888888847,
+            "p95": 0.09341700000004494,
+            "max": 5.777209000000084
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.2457931333333401,
+            "p95": 0.11725000000001273,
+            "max": 5.777209000000084
+          },
+          "maxOccupancyQueries": 14849,
+          "totalOccupancyQueries": 15456,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            5.777209000000084, 0.05704200000002402, 0.09441600000002381, 0.09341700000004494,
+            0.04850000000010368, 0.05529100000001108, 0.04941699999994853, 0.04800000000000182,
+            0.04554200000006858, 0.0482920000000604, 0.04874999999992724, 0.04795899999999165,
+            0.047791999999958534, 0.04833299999995688, 0.04779099999996106, 0.04808400000001711,
+            0.04808400000001711, 0.047458000000005995, 0.04766699999993307, 0.047915999999986525,
+            0.04783399999996618, 0.04795799999999417, 0.05337499999995998, 0.05070899999998346,
+            0.11725000000001273, 0.048499999999989996, 0.048125000000027285, 0.04837500000007822,
+            0.05562500000007731, 0.059082999999986896
+          ],
+          "firstPlanningAdmissionStep": 4
+        }
+      ]
+    },
+    "after": {
+      "actors": 96,
+      "steps": 180,
+      "physics": false,
+      "caveat": "Synthetic isolated AI work. Committed motion is held; no terrain generation, physics, persistence or rendering. Blocked/open occupancy; initially synchronized timers. No FPS/mobile claim.",
+      "captures": [
+        {
+          "repeat": 1,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15599859444444505,
+            "p95": 0.3191669999999931,
+            "max": 0.43008300000002464
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.30902086666666456,
+            "p95": 0.397542000000044,
+            "max": 0.43008300000002464
+          },
+          "maxOccupancyQueries": 64,
+          "totalOccupancyQueries": 2042,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.3568750000000023, 0.30508399999996527, 0.30604099999999335, 0.397542000000044,
+            0.29916699999995444, 0.33533299999999144, 0.32033400000000256, 0.2309579999999869,
+            0.2899580000000128, 0.2912499999999909, 0.2896250000000009, 0.33474999999998545,
+            0.3107500000000414, 0.43008300000002464, 0.31108299999999645, 0.31329200000004676,
+            0.2237079999999878, 0.3191669999999931, 0.28924999999998136, 0.281708999999978,
+            0.2932079999999928, 0.29316599999998516, 0.28583400000002257, 0.39587499999998954,
+            0.2647089999999821, 0.281332999999961, 0.3003330000000233, 0.30049999999999955,
+            0.28562500000003865, 0.33408399999996163
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 1,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.05848868333333238,
+            "p95": 0.14549999999997,
+            "max": 0.2478339999999548
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.1278680999999968,
+            "p95": 0.23283299999997098,
+            "max": 0.2478339999999548
+          },
+          "maxOccupancyQueries": 48,
+          "totalOccupancyQueries": 1127,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.09054200000002766, 0.07233400000001211, 0.15470899999996846, 0.16295800000000327,
+            0.1489169999999831, 0.15691699999996445, 0.1335830000000442, 0.2478339999999548,
+            0.15233299999999872, 0.12987499999997, 0.14549999999997, 0.12975000000000136,
+            0.13308399999999665, 0.14241699999996627, 0.14266599999996288, 0.14008300000000418,
+            0.13695899999999028, 0.11820800000003828, 0.13979199999999992, 0.10604200000000219,
+            0.11241599999999607, 0.13187499999997954, 0.1302079999999819, 0.13320800000002464,
+            0.23283299999997098, 0.14754200000004403, 0.04204099999998334, 0.04012500000004593,
+            0.04004200000002811, 0.041249999999990905
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 1,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15773378888888961,
+            "p95": 0.3720000000000141,
+            "max": 0.452541999999994
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3609277999999961,
+            "p95": 0.44874999999996135,
+            "max": 0.452541999999994
+          },
+          "maxOccupancyQueries": 675,
+          "totalOccupancyQueries": 13790,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.452541999999994, 0.4443329999999719, 0.3842920000000163, 0.3682080000000383,
+            0.3720000000000141, 0.36504100000001927, 0.34079200000002174, 0.24512499999997317,
+            0.34062499999998863, 0.44874999999996135, 0.36937500000004775, 0.4329579999999851,
+            0.34270899999995663, 0.338833999999963, 0.3649159999999938, 0.3176669999999717,
+            0.2987089999999739, 0.427708999999993, 0.3489579999999819, 0.3500829999999837,
+            0.37308300000000827, 0.3456249999999841, 0.3176249999999641, 0.433208000000036,
+            0.2676670000000172, 0.2998749999999859, 0.35354200000000446, 0.3448750000000018,
+            0.36733300000003055, 0.37137500000000045
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 1,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.06595183888889235,
+            "p95": 0.1985419999999749,
+            "max": 0.29000000000002046
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.16577913333333452,
+            "p95": 0.28066700000005085,
+            "max": 0.29000000000002046
+          },
+          "maxOccupancyQueries": 457,
+          "totalOccupancyQueries": 7744,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.09920799999997598, 0.0761669999999981, 0.2248339999999871, 0.1985419999999749,
+            0.1876659999999788, 0.2153329999999869, 0.1801669999999831, 0.29000000000002046,
+            0.20604200000002493, 0.14508299999999963, 0.20529099999998834, 0.1698329999999828,
+            0.14841699999999491, 0.19887500000004366, 0.18916699999999764, 0.17120800000003555,
+            0.18874999999997044, 0.15337500000003956, 0.17900000000003047, 0.11554100000000744,
+            0.28066700000005085, 0.19691700000004175, 0.2101669999999558, 0.19620800000001282,
+            0.1725839999999721, 0.1855419999999981, 0.050290999999958785, 0.049666000000001986,
+            0.04399999999998272, 0.04483300000003965
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 2,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.1639083000000015,
+            "p95": 0.32650000000001,
+            "max": 0.40579200000001947
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3158999333333384,
+            "p95": 0.39466700000002675,
+            "max": 0.40579200000001947
+          },
+          "maxOccupancyQueries": 64,
+          "totalOccupancyQueries": 2042,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.3651670000000422, 0.31337500000000773, 0.3152499999999918, 0.32954200000000355,
+            0.3176250000000209, 0.34058399999997846, 0.32175000000000864, 0.24354199999999082,
+            0.39466700000002675, 0.2986659999999688, 0.29666599999995924, 0.3242079999999987,
+            0.382000000000005, 0.32254199999999855, 0.3177909999999997, 0.314707999999996,
+            0.240333000000021, 0.32883300000003146, 0.40579200000001947, 0.31433299999997644,
+            0.29720799999995506, 0.2993330000000469, 0.29058400000002393, 0.3326250000000073,
+            0.26729100000000017, 0.2728330000000483, 0.2923330000000419, 0.2869999999999777,
+            0.32650000000001, 0.32391699999999446
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 2,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.06341228888888868,
+            "p95": 0.1566670000000272,
+            "max": 0.2502089999999839
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.13325153333332954,
+            "p95": 0.16262499999999136,
+            "max": 0.2502089999999839
+          },
+          "maxOccupancyQueries": 48,
+          "totalOccupancyQueries": 1127,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.10424999999997908, 0.08424999999999727, 0.1585839999999621, 0.15866700000003675,
+            0.14641699999998536, 0.16100000000000136, 0.15287499999999454, 0.1560000000000059,
+            0.15554199999996854, 0.1360419999999749, 0.15800000000001546, 0.1505409999999756,
+            0.14662500000002865, 0.1536670000000413, 0.15745800000001964, 0.2502089999999839,
+            0.1566670000000272, 0.12658399999997982, 0.16262499999999136, 0.11808400000001029,
+            0.11725000000001273, 0.13808299999999463, 0.14995799999996962, 0.13458400000001802,
+            0.13212499999997362, 0.14324999999996635, 0.0488330000000019, 0.04679199999998218,
+            0.046125000000017735, 0.046458999999970274
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 2,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15716065000000234,
+            "p95": 0.3844169999999849,
+            "max": 0.4727090000000089
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.36606950000000327,
+            "p95": 0.4645840000000021,
+            "max": 0.4727090000000089
+          },
+          "maxOccupancyQueries": 675,
+          "totalOccupancyQueries": 13790,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.4645840000000021, 0.3703750000000241, 0.3792500000000132, 0.38641699999999446,
+            0.4727090000000089, 0.3844169999999849, 0.3532910000000129, 0.26233300000001236,
+            0.3536250000000223, 0.3715410000000361, 0.36199999999996635, 0.4246249999999918,
+            0.4560419999999681, 0.34320900000000165, 0.3724579999999946, 0.33850000000001046,
+            0.23912500000000136, 0.3905419999999822, 0.3610840000000053, 0.35795799999999645,
+            0.42608300000000554, 0.3464159999999765, 0.3204170000000204, 0.37870900000001484,
+            0.2648330000000101, 0.2998749999999859, 0.3581670000000372, 0.3981670000000008,
+            0.3740410000000338, 0.37129199999998264
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 2,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.06499285000000252,
+            "p95": 0.19195799999999963,
+            "max": 0.31854199999997945
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.16431943333333077,
+            "p95": 0.309708999999998,
+            "max": 0.31854199999997945
+          },
+          "maxOccupancyQueries": 457,
+          "totalOccupancyQueries": 7744,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.0947079999999687, 0.07562500000000227, 0.31854199999997945, 0.23312499999997272,
+            0.2021249999999668, 0.20145800000000236, 0.16020800000001145, 0.19195799999999963,
+            0.18862500000000182, 0.1426249999999527, 0.19979100000000471, 0.1738749999999527,
+            0.1478749999999991, 0.309708999999998, 0.19533300000000509, 0.17808400000001257,
+            0.1656250000000341, 0.14716700000002447, 0.17525000000000546, 0.13891699999999219,
+            0.148208000000011, 0.1818749999999909, 0.19245800000004465, 0.17795799999998962,
+            0.16700000000003, 0.17095900000003894, 0.10695799999996325, 0.051541999999983545,
+            0.045624999999972715, 0.04637500000001182
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 3,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15941390000000538,
+            "p95": 0.3193750000000364,
+            "max": 0.44004199999994853
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3065181333333385,
+            "p95": 0.4054999999999609,
+            "max": 0.44004199999994853
+          },
+          "maxOccupancyQueries": 64,
+          "totalOccupancyQueries": 2042,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.3716670000000022, 0.30349999999998545, 0.35962500000005093, 0.44004199999994853,
+            0.296291999999994, 0.3327089999999089, 0.31291699999997036, 0.2340830000000551,
+            0.29204200000003766, 0.28995900000006714, 0.29104099999995015, 0.3273750000000746,
+            0.3043330000000424, 0.4054999999999609, 0.3138340000000426, 0.3193750000000364,
+            0.23591699999997218, 0.32691700000009405, 0.27579199999991033, 0.2760000000000673,
+            0.2845829999999978, 0.284041000000002, 0.27854200000001583, 0.3614579999999705,
+            0.2579999999999245, 0.2708750000000464, 0.2811250000000882, 0.27558299999998326,
+            0.2767079999999851, 0.3157089999999698
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 3,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.06096782222222082,
+            "p95": 0.1468330000000151,
+            "max": 0.30912500000010823
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.13524306666667296,
+            "p95": 0.27637500000003,
+            "max": 0.30912500000010823
+          },
+          "maxOccupancyQueries": 48,
+          "totalOccupancyQueries": 1127,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.08912500000008095, 0.07129200000008495, 0.15116699999998673, 0.1468330000000151,
+            0.141666999999984, 0.15245800000002419, 0.1249159999999847, 0.30912500000010823,
+            0.17391600000007656, 0.14454200000000128, 0.155208000000016, 0.13745899999992162,
+            0.14016700000001947, 0.1432079999999587, 0.14354100000002745, 0.1424170000000231,
+            0.13941699999998036, 0.1315829999999778, 0.14208399999995436, 0.10508400000003348,
+            0.1125409999999647, 0.13820899999996072, 0.14629100000001927, 0.17108300000006693,
+            0.27637500000003, 0.16250000000002274, 0.04099999999993997, 0.04112499999996544,
+            0.04270899999994526, 0.04025000000001455
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 3,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15236618333332722,
+            "p95": 0.3662090000000262,
+            "max": 0.5304169999999431
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.35618613333332405,
+            "p95": 0.5102909999999383,
+            "max": 0.5304169999999431
+          },
+          "maxOccupancyQueries": 675,
+          "totalOccupancyQueries": 13790,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.5102909999999383, 0.44841699999994944, 0.3807090000000244, 0.3662090000000262,
+            0.36324999999999363, 0.3704579999999851, 0.34162499999990814, 0.25341600000001563,
+            0.3574999999999591, 0.4690419999999449, 0.35199999999997544, 0.4130419999999049,
+            0.34924999999998363, 0.3434579999999414, 0.35570800000004965, 0.3121250000000373,
+            0.28529200000002675, 0.37733300000002146, 0.3419579999999769, 0.34370799999999235,
+            0.3631669999999758, 0.3274579999999787, 0.3062089999999671, 0.5304169999999431,
+            0.2531250000000682, 0.26670899999999165, 0.3035419999999931, 0.31262500000002547,
+            0.34120800000005147, 0.3463330000000724
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 3,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.06107964444444873,
+            "p95": 0.18375000000003183,
+            "max": 0.29187500000000455
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.15511816666667072,
+            "p95": 0.2850419999999758,
+            "max": 0.29187500000000455
+          },
+          "maxOccupancyQueries": 457,
+          "totalOccupancyQueries": 7744,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.09191699999996672, 0.07045800000003055, 0.21725000000003547, 0.2078750000000582,
+            0.18375000000003183, 0.21079200000008314, 0.1717079999999669, 0.1899590000000444,
+            0.2850419999999758, 0.13675000000000637, 0.19258400000001075, 0.15991699999995035,
+            0.13433299999996962, 0.17816700000003038, 0.1832920000000513, 0.16791699999998855,
+            0.16862500000002, 0.1461659999999938, 0.17937499999993634, 0.10908299999994142,
+            0.14220899999997982, 0.29187500000000455, 0.1922500000000582, 0.16999999999995907,
+            0.14637499999992087, 0.16687500000000455, 0.041166999999973086, 0.03979200000003402,
+            0.039709000000016204, 0.038333000000079664
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 4,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15445046666666762,
+            "p95": 0.3107919999999922,
+            "max": 0.47937500000000455
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.3009208666666723,
+            "p95": 0.40695800000003146,
+            "max": 0.47937500000000455
+          },
+          "maxOccupancyQueries": 64,
+          "totalOccupancyQueries": 2042,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.47937500000000455, 0.30637500000000273, 0.3091670000000022, 0.30454199999996945,
+            0.40695800000003146, 0.3138330000000451, 0.3112499999999727, 0.23470799999995506,
+            0.2888340000000653, 0.29141600000002654, 0.38829199999997854, 0.31570800000008603,
+            0.29425000000003365, 0.2837089999999307, 0.29008299999998144, 0.2961249999999609,
+            0.21175000000005184, 0.3093750000000455, 0.27783399999998437, 0.2707910000000311,
+            0.3229999999999791, 0.27929200000005494, 0.2748750000000655, 0.3107919999999922,
+            0.24466700000004948, 0.2555419999999913, 0.27174999999999727, 0.27054199999997763,
+            0.2705829999999878, 0.34220799999991414
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 4,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.05920299999999404,
+            "p95": 0.14983399999994162,
+            "max": 0.2359159999999747
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.12766249999998916,
+            "p95": 0.16162499999995816,
+            "max": 0.2359159999999747
+          },
+          "maxOccupancyQueries": 48,
+          "totalOccupancyQueries": 1127,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.08979199999998855, 0.15708300000005693, 0.15454199999999219, 0.1550409999999829,
+            0.13875000000007276, 0.15395799999998871, 0.13258299999995415, 0.14799999999991087,
+            0.1496669999999085, 0.13537499999995362, 0.14812500000005002, 0.12845800000002328,
+            0.13541700000007495, 0.16162499999995816, 0.154042000000004, 0.14983399999994162,
+            0.136792000000014, 0.1183330000000069, 0.2359159999999747, 0.11595800000009149,
+            0.11616700000001856, 0.1335830000000442, 0.13141699999994216, 0.13512499999990268,
+            0.1258749999999509, 0.12800000000004275, 0.04041699999993398, 0.03933299999994233,
+            0.03962500000000091, 0.04104199999994762
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 4,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.151271311111113,
+            "p95": 0.37058300000001054,
+            "max": 0.4390419999999722
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.35132783333333084,
+            "p95": 0.43791699999997036,
+            "max": 0.4390419999999722
+          },
+          "maxOccupancyQueries": 675,
+          "totalOccupancyQueries": 13790,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.4390419999999722, 0.3550829999999223, 0.3689999999999145, 0.37287499999990814,
+            0.37058300000001054, 0.39962500000001455, 0.43791699999997036, 0.2810419999999567,
+            0.3466249999999036, 0.3583340000000135, 0.3447920000000977, 0.4019579999999223,
+            0.3391669999999749, 0.4263339999999971, 0.3610000000001037, 0.30645800000002055,
+            0.2325420000000804, 0.36008400000002894, 0.3302080000000842, 0.3446249999999509,
+            0.3555829999999105, 0.3838330000000951, 0.30616700000007313, 0.3573749999999336,
+            0.25337500000000546, 0.2830420000000231, 0.3381249999999909, 0.3291659999999865,
+            0.3940830000000233, 0.36179200000003675
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 4,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.06152194444445058,
+            "p95": 0.18891599999994924,
+            "max": 0.2602080000000342
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.15470830000000813,
+            "p95": 0.2593329999999696,
+            "max": 0.2602080000000342
+          },
+          "maxOccupancyQueries": 457,
+          "totalOccupancyQueries": 7744,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.09408299999995506, 0.07312500000000455, 0.2145420000000513, 0.1910409999999274,
+            0.2593329999999696, 0.20612500000004275, 0.16950000000008458, 0.18891599999994924,
+            0.19783300000005966, 0.13974999999993543, 0.19837500000005548, 0.16170800000008967,
+            0.14408400000002075, 0.19170899999994617, 0.17633299999999963, 0.1687499999999318,
+            0.2602080000000342, 0.15270800000007512, 0.17670899999995981, 0.11329200000000128,
+            0.13754200000005312, 0.1790000000000873, 0.1884579999999687, 0.16816700000003948,
+            0.16124999999999545, 0.16637500000001637, 0.04025000000001455, 0.03858299999990322,
+            0.04083300000002055, 0.0426670000000513
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 5,
+          "blocked": true,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15293588888888948,
+            "p95": 0.30987500000003365,
+            "max": 0.38495800000009694
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.2964541666666719,
+            "p95": 0.3479169999999385,
+            "max": 0.38495800000009694
+          },
+          "maxOccupancyQueries": 64,
+          "totalOccupancyQueries": 2042,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.3479169999999385, 0.29920900000001893, 0.2998329999999214, 0.31045800000003965,
+            0.3059160000000247, 0.3347089999999753, 0.38495800000009694, 0.228458000000046,
+            0.2891670000000204, 0.29062499999997726, 0.28666599999996834, 0.3155420000000504,
+            0.2939169999999649, 0.28483300000004874, 0.29370799999992414, 0.29770799999994324,
+            0.30987500000003365, 0.31512500000008004, 0.2835420000000113, 0.27616699999998673,
+            0.28587499999991905, 0.2833329999999705, 0.2792500000000473, 0.3168749999999818,
+            0.24970900000005258, 0.25929199999995944, 0.3132500000000391, 0.27475000000004,
+            0.27587500000004184, 0.3070830000000342
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 5,
+          "blocked": true,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.05741206111111915,
+            "p95": 0.1415829999999687,
+            "max": 0.2245420000000422
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.12275556666667929,
+            "p95": 0.15670799999998053,
+            "max": 0.2245420000000422
+          },
+          "maxOccupancyQueries": 48,
+          "totalOccupancyQueries": 1127,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.08804199999997309, 0.07266700000002402, 0.15466600000002018, 0.15670799999998053,
+            0.1415829999999687, 0.1558750000000373, 0.13087500000006003, 0.15075000000001637,
+            0.1518750000000182, 0.13237499999991087, 0.15220799999997325, 0.1326250000000755,
+            0.13487500000007913, 0.2245420000000422, 0.14395899999999529, 0.140625,
+            0.13704199999995126, 0.11766700000009678, 0.13979199999994307, 0.10354100000006383,
+            0.11124999999992724, 0.13050000000009732, 0.12912500000004457, 0.13387499999998909,
+            0.12620800000001964, 0.12991599999998016, 0.040208000000006905, 0.039292000000045846,
+            0.038958999999977095, 0.04104200000006131
+          ],
+          "firstPlanningAdmissionStep": 26
+        },
+        {
+          "repeat": 5,
+          "blocked": false,
+          "near": true,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.15703907222222394,
+            "p95": 0.37037500000008095,
+            "max": 0.48762499999998
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.34855963333333195,
+            "p95": 0.44708299999990686,
+            "max": 0.48762499999998
+          },
+          "maxOccupancyQueries": 675,
+          "totalOccupancyQueries": 13790,
+          "admittedByTick30": 93,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.43562500000007276, 0.3618330000000469, 0.3714580000000751, 0.44708299999990686,
+            0.38770899999997255, 0.3679579999999305, 0.3470829999999978, 0.24462499999992815,
+            0.34600000000000364, 0.37162499999999454, 0.35450000000003, 0.48762499999998,
+            0.3372910000000502, 0.32191599999998743, 0.3444170000000213, 0.30424999999991087,
+            0.22612500000002456, 0.37037500000008095, 0.3384170000000495, 0.38029200000005403,
+            0.35829100000000835, 0.33008299999994506, 0.30741599999998925, 0.36016700000004676,
+            0.25129200000003493, 0.2862079999999878, 0.3864579999999478, 0.32929200000000947,
+            0.3534579999999323, 0.3479169999999385
+          ],
+          "firstPlanningAdmissionStep": 31
+        },
+        {
+          "repeat": 5,
+          "blocked": false,
+          "near": false,
+          "aiMs": {
+            "count": 180,
+            "mean": 0.0621717222222205,
+            "p95": 0.19583399999999074,
+            "max": 0.2872090000000753
+          },
+          "first30AiMs": {
+            "count": 30,
+            "mean": 0.15796799999999014,
+            "p95": 0.21954199999993307,
+            "max": 0.2872090000000753
+          },
+          "maxOccupancyQueries": 457,
+          "totalOccupancyQueries": 7744,
+          "admittedByTick30": 96,
+          "admittedByTick60": 96,
+          "first30StepMs": [
+            0.08916599999997743, 0.07162499999992633, 0.21362499999997908, 0.188666000000012,
+            0.17795799999998962, 0.20716600000002927, 0.17037500000003547, 0.189583999999968,
+            0.19716699999992215, 0.1390839999999116, 0.19583399999999074, 0.16041599999994105,
+            0.14279100000010203, 0.19687499999997726, 0.1752079999999978, 0.16912500000000819,
+            0.1711249999999609, 0.16562499999997726, 0.21954199999993307, 0.11166600000001381,
+            0.14554199999997763, 0.17929100000003473, 0.21329200000002402, 0.1837919999999258,
+            0.20345900000006623, 0.2872090000000753, 0.04691600000001017, 0.042374999999992724,
+            0.04191600000001472, 0.04262499999992997
+          ],
+          "firstPlanningAdmissionStep": 26
+        }
+      ]
+    }
+  },
+  "validation": {
+    "typecheck": "pass in combined checkout and frozen delivery",
+    "unitTests": 2428,
+    "unitFiles": 250,
+    "unitScope": "Final combined checkout including independent XR unit coverage; owned runtime sources match the frozen delivery.",
+    "lint": "pass in combined checkout and frozen delivery; baseline 118 warnings and 34 infos",
+    "build": "pass",
+    "streamingReadiness": "all six pass",
+    "browser": {
+      "fullBeforeWaterline": {
+        "passed": 545,
+        "skipped": 1,
+        "failed": 1,
+        "minutes": 22.3,
+        "failure": "GPU terrain pacing: global uploadedBytes changes after terrain is quiet; rows and surfaceBytes remain stable."
+      },
+      "optimizedOriginalRepeats": {
+        "passed": 4,
+        "failed": 1,
+        "workers": 2
+      },
+      "baselineFive": {
+        "passed": 5,
+        "failed": 0,
+        "workers": 2
+      },
+      "baselineTwenty": {
+        "passed": 19,
+        "failed": 1,
+        "workers": 2
+      },
+      "finalIsolated": {
+        "passed": 5,
+        "failed": 0,
+        "workers": 1
+      },
+      "finalAffectedDuck": {
+        "passed": 6,
+        "failed": 0
+      },
+      "finalWaterlineUnit": "pass",
+      "limits": "The same assertion reproduces on 86712fe. Global counter covers all raster texture pages; particular late-upload source/root cause not traced. No renderer/test assertions changed. Full suite precedes three-line duck waterline follow-up; final units, build, streaming and affected browsers cover final code."
+    },
+    "wildlifeStatusRefresh": "Attempted after final persisted progress; ignored campaign progress is absent, validated table retained."
+  },
+  "inventory": {
+    "candidates": 761,
+    "renewedCharacterIDs": [
+      "character:tiger",
+      "character:cat",
+      "character:dog",
+      "character:person",
+      "character:squirrel",
+      "character:bear"
+    ],
+    "fullChromiumRetinaVerified": true,
+    "sourceFingerprintsUnchanged": true,
+    "nonCharacterCandidatesUnchanged": true,
+    "reason": "Six character candidates hash raw shared Realm source; historical approvals and frozen pixels are preserved."
+  },
+  "streaming": {
+    "renderer": "canvas",
+    "browser": "153.0.8010.12",
+    "cases": [
+      {
+        "name": "cold",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "travelledPx": 0,
+        "staleCacheFrames": 0
+      },
+      {
+        "name": "standing",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "travelledPx": 0,
+        "staleCacheFrames": 0
+      },
+      {
+        "name": "walk",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "travelledPx": 220.84423828125,
+        "staleCacheFrames": 0
+      },
+      {
+        "name": "sprint",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "travelledPx": 468.6806640625,
+        "staleCacheFrames": 0
+      },
+      {
+        "name": "reverse",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "travelledPx": 736.1474609375,
+        "staleCacheFrames": 0
+      },
+      {
+        "name": "zoom-out",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "travelledPx": 0,
+        "staleCacheFrames": 0
+      }
+    ]
+  }
+}

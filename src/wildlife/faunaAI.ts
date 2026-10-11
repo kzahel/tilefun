@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { faunaProfile } from "./Fauna.js";
 import {
   restoreFaunaPose,
@@ -16,6 +17,7 @@ export function updateFaunaAI(
   environment: WildlifeEnvironment,
   animals: readonly Entity[],
   players: readonly PositionComponent[],
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = animal.fauna,
     p = faunaProfile(animal.type),
@@ -23,26 +25,26 @@ export function updateFaunaAI(
   if (!ai || !velocity || !animal.sprite || !p) return;
   if (animal.wanderAI?.state === "ridden") return;
   syncFaunaWater(animal, environment.isWater(animal.position));
-  const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
-    return ai.randomState / 4294967296;
-  };
-  const herd = ai.groupId
-    ? animals.filter(
+  const nearby = players.find((player) => distance(player, animal.position) < p.alarmDistance);
+  const herdAlarm = ai.groupId
+    ? animals.find(
         (a) =>
           a !== animal &&
           a.fauna?.groupId === ai.groupId &&
+          a.fauna?.alarmFrom &&
           distance(a.position, animal.position) < ai.radius * 1.5,
-      )
-    : [];
-  const nearby = players.find((player) => distance(player, animal.position) < p.alarmDistance);
-  const herdAlarm = herd.find((a) => a.fauna?.alarmFrom)?.fauna?.alarmFrom;
+      )?.fauna?.alarmFrom
+    : undefined;
   if (ai.state !== "recover" && (nearby || herdAlarm))
     startleFauna(animal, nearby ?? herdAlarm ?? animal.position);
   if (ai.motion) return;
   velocity.vx = velocity.vy = 0;
   ai.timer -= dt;
   if (ai.timer > 0) return;
+  const random = () => {
+    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    return ai.randomState / 4294967296;
+  };
   const rest = () => {
     ai.state = "rest";
     delete ai.actionElapsed;
@@ -55,6 +57,7 @@ export function updateFaunaAI(
     return;
   }
   const escaping = ai.state === "startle";
+  if (planning && !planning.claim(animal, escaping)) return;
   if (!escaping && ++ai.activity % 3 === 0) {
     ai.state = "action";
     ai.actionElapsed = 0;
@@ -63,10 +66,20 @@ export function updateFaunaAI(
     restoreFaunaPose(animal);
     return;
   }
+  // Cohesion is only needed for an admitted goal, not rest/committed travel.
+  const herd = ai.groupId
+    ? animals.filter(
+        (a) =>
+          a !== animal &&
+          a.fauna?.groupId === ai.groupId &&
+          distance(a.position, animal.position) < ai.radius * 1.5,
+      )
+    : [];
   const from = ai.alarmFrom ?? animal.position;
   let target: PositionComponent | undefined,
     best = -Infinity;
   for (let i = 0; i < 24; i++) {
+    if (planning && !planning.candidate(animal)) break;
     const away =
       distance(from, animal.position) < 1
         ? random() * Math.PI * 2
@@ -89,6 +102,7 @@ export function updateFaunaAI(
       continue;
     let clear = true;
     const steps = Math.ceil(length / 4);
+    if (planning && !planning.path(animal, steps)) continue;
     for (let j = 1; j <= steps; j++) {
       const sample = {
         wx: animal.position.wx + ((point.wx - animal.position.wx) * j) / steps,

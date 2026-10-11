@@ -1,11 +1,17 @@
 import { BALL_SCARE_SPEED_MULT } from "../config/constants.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { Direction, type Entity } from "./Entity.js";
 
 /**
  * Update wander AI for an entity. Transitions between idle and walking.
  * Uses a random callback for testability.
  */
-export function updateWanderAI(entity: Entity, dt: number, random: () => number): void {
+export function updateWanderAI(
+  entity: Entity,
+  dt: number,
+  random: () => number,
+  planning?: AiPlanningScheduler,
+): void {
   const ai = entity.wanderAI;
   const vel = entity.velocity;
   if (!ai || !vel) return;
@@ -52,7 +58,7 @@ export function updateWanderAI(entity: Entity, dt: number, random: () => number)
 
   ai.timer -= dt;
 
-  if (ai.timer <= 0) {
+  if (ai.timer <= 0 && (!planning || planning.claim(entity, false))) {
     if (ai.state === "idle") {
       ai.state = "walking";
       ai.timer = ai.walkMin + random() * (ai.walkMax - ai.walkMin);
@@ -116,6 +122,7 @@ export function updateBehaviorAI(
   random: () => number,
   playerPos: { wx: number; wy: number },
   buddies?: readonly Entity[],
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = entity.wanderAI;
   const vel = entity.velocity;
@@ -212,5 +219,5 @@ export function updateBehaviorAI(
   }
 
   // --- Default: normal wander ---
-  updateWanderAI(entity, dt, random);
+  updateWanderAI(entity, dt, random, planning);
 }

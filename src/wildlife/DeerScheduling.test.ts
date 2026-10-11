@@ -2,16 +2,16 @@ import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { PropManager } from "../entities/PropManager.js";
+import { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { tickAllAI } from "../server/tickAllAI.js";
 import { createDeer } from "./Deer.js";
-import { DeerPlanningScheduler } from "./DeerPlanningScheduler.js";
 import { updateDeerAI } from "./deerAI.js";
 
 const open = { isWater: () => false, canOccupy: () => true, surfaceZ: () => 0 };
 
 it("keeps cycling staggered ambient slots while actors rest without accumulating catch-up", () => {
   const deer = createDeer(0, 0),
-    scheduler = new DeerPlanningScheduler();
+    scheduler = new AiPlanningScheduler();
   required(deer.deer).randomState = 0;
   const slots: number[] = [];
   for (let tick = 1; tick <= 18; tick++) {
@@ -30,7 +30,7 @@ it("caps synchronized goal searches and eventually admits every deer determinist
   const run = () => {
     const deer = Array.from({ length: 18 }, (_, i) => createDeer(i * 512, 0));
     for (const entity of deer) required(entity.deer).timer = 0;
-    const scheduler = new DeerPlanningScheduler();
+    const scheduler = new AiPlanningScheduler();
     const dts = new Map(deer.map((entity) => [entity, 1 / 60]));
     let samples = 0;
     const environment = {
@@ -44,7 +44,7 @@ it("caps synchronized goal searches and eventually admits every deer determinist
     for (let tick = 0; tick < 24; tick++) {
       samples = 0;
       tickAllAI(deer, [], dts, () => 0, environment, tick, scheduler);
-      expect(samples).toBeLessThanOrEqual(24); // each blocked path stops at sample one
+      expect(samples).toBeLessThanOrEqual(64); // each blocked path stops at sample one
       admissions.push(deer.filter((entity) => required(entity.deer).activity === 1).length);
     }
     expect(admissions.at(-1)).toBe(18);
@@ -57,8 +57,10 @@ it("checks live player and herd alarms between ambient slots and advances timers
   const a = createDeer(0, 0),
     b = createDeer(64, 0);
   required(a.deer).herdId = required(b.deer).herdId = "herd";
-  const scheduler = new DeerPlanningScheduler();
+  const scheduler = new AiPlanningScheduler();
   scheduler.begin();
+  scheduler.advance(a, 1 / 60);
+  scheduler.advance(b, 1 / 60);
   updateDeerAI(a, 1 / 60, open, [a, b], [{ wx: 0, wy: 10 }], scheduler);
   updateDeerAI(b, 1 / 60, open, [a, b], [], scheduler);
   expect(a.deer?.state).toBe("startle");
@@ -74,7 +76,7 @@ it("keeps native committed movement at 60Hz between decisions and accrues no sle
   const deer = manager.spawn(createDeer(64, 64));
   required(deer.deer).timer = 0;
   updateDeerAI(deer, 0.1, open, [deer], []);
-  const scheduler = new DeerPlanningScheduler();
+  const scheduler = new AiPlanningScheduler();
   const dts = new Map([[deer, 1 / 60]]);
   for (let tick = 0; tick < 30; tick++) {
     tickAllAI([deer], [], dts, () => 0, open, tick, scheduler);

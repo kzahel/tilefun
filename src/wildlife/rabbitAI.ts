@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 import { restoreRabbitPose, settleRabbit, startleRabbit } from "./rabbitInteractions.js";
 
@@ -11,6 +12,7 @@ export function updateRabbitAI(
   environment: WildlifeEnvironment,
   animals: readonly Entity[],
   players: readonly PositionComponent[],
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = rabbit.rabbit,
     velocity = rabbit.velocity;
@@ -39,6 +41,7 @@ export function updateRabbitAI(
     let candidate: PositionComponent | undefined,
       best = -Infinity;
     for (let i = 0; i < 24; i++) {
+      if (planning && !planning.candidate(rabbit)) break;
       const angle = escaping
         ? away + (random() - 0.5) * (i < 16 ? 2 : Math.PI * 2)
         : random() * Math.PI * 2;
@@ -55,6 +58,7 @@ export function updateRabbitAI(
         continue;
       let clear = true;
       const steps = Math.ceil(length / 4);
+      if (planning && !planning.path(rabbit, steps)) continue;
       for (let step = 1; step <= steps; step++) {
         const f = step / steps;
         const p = {
@@ -99,7 +103,7 @@ export function updateRabbitAI(
   };
   ai.timer -= dt;
   if (ai.state === "startle") {
-    if (ai.timer <= 0) chooseHop(true);
+    if (ai.timer <= 0 && (!planning || planning.claim(rabbit, true))) chooseHop(true);
     return;
   }
   velocity.vx = velocity.vy = 0;
@@ -108,6 +112,7 @@ export function updateRabbitAI(
     rest();
     return;
   }
+  if (planning && !planning.claim(rabbit, false)) return;
   ai.activity++;
   if (ai.activity % 3 === 0) {
     ai.state = "action";

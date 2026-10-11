@@ -1,5 +1,6 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { restoreFrogPose, settleFrog, startleFrog } from "./frogInteractions.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 
@@ -12,6 +13,7 @@ export function updateFrogAI(
   environment: WildlifeEnvironment,
   animals: readonly Entity[],
   players: readonly PositionComponent[],
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = frog.frog,
     velocity = frog.velocity,
@@ -47,6 +49,7 @@ export function updateFrogAI(
         ? random() * Math.PI * 2
         : Math.atan2(frog.position.wy - from.wy, frog.position.wx - from.wx);
     for (let i = 0; i < 24; i++) {
+      if (planning && !planning.candidate(frog)) break;
       const angle = escaping
         ? away + (random() - 0.5) * (i < 12 ? 1.5 : Math.PI * 2)
         : random() * Math.PI * 2;
@@ -62,8 +65,10 @@ export function updateFrogAI(
       )
         continue;
       let clear = true;
-      for (let step = 1; step <= Math.ceil(length / 4); step++) {
-        const f = step / Math.ceil(length / 4);
+      const steps = Math.ceil(length / 4);
+      if (planning && !planning.path(frog, steps)) continue;
+      for (let step = 1; step <= steps; step++) {
+        const f = step / steps;
         const p = {
           wx: frog.position.wx + (point.wx - frog.position.wx) * f,
           wy: frog.position.wy + (point.wy - frog.position.wy) * f,
@@ -110,7 +115,7 @@ export function updateFrogAI(
   ai.timer -= dt;
   if (ai.state === "startle") {
     stop();
-    if (ai.timer <= 0) chooseMove(true);
+    if (ai.timer <= 0 && (!planning || planning.claim(frog, true))) chooseMove(true);
     return;
   }
   if (ai.state === "swim") {
@@ -159,6 +164,7 @@ export function updateFrogAI(
     rest();
     return;
   }
+  if (planning && !planning.claim(frog, false)) return;
   ai.activity++;
   if (ai.activity % 3 === 0) {
     ai.state = "blink";

@@ -70,6 +70,16 @@ inspection AI or clock is introduced. Six character-lab identities renew because
 their contract hashes raw Realm source; wildlife identities and source art stay
 unchanged, and existing approval records are not rewritten.
 
+[113](../tactical/113-shared-ai-planning.md) replaces the deer-only pilot with one
+Realm-owned planning scheduler for all six native wildlife families and ambient
+wander. Game and temporary ScenarioSession worlds share distance cadence, bounded
+candidate/path work, aged admission, immediate alarms and existing native motion.
+Chase/follow/route steering and 60Hz physics/publication remain live. Reload uses
+fresh transient scheduling phases while retaining durable semantic state. Source
+art and frozen review pixels remain unchanged; raw-Realm character identities
+renew through the ordinary inventory compiler. Final native game/lab validation
+is recorded in 113.
+
 ## Robin gameplay alignment
 
 [088](../tactical/088-wildlife-work-budgets.md) routes both game and labs through

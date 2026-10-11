@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [113 Shared AI planning](113-shared-ai-planning.md) | Shared cadence and bounded search work across all wildlife and ambient wander, with starvation prevention; desktop burst reduction validated, pre-existing GPU upload-test flake recorded |
 | [112 Coherent car presentation and test override](112-coherent-car-presentation-and-test-override.md) | Fixed world projection, immediate motion heading/rest hold and opt-in all-road-vehicle blue appearance; physics unchanged |
 | [111 Snapshot reuse and deer scheduling](111-server-snapshot-and-deer-scheduling.md) | Desktop first-slice implementation: immutable snapshot/dirty reuse and staggered budgeted deer goals; [performance](../topics/performance.md) |
 | [110 Server headroom proposal](110-server-headroom-proposal.md) | Complete investigation: current desktop CPU/timeline and AI search census; proposed bookkeeping and separate cadences; phone unavailable |

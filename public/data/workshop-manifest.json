@@ -14311,7 +14311,7 @@
       "name": "Tiger",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=tiger",
-      "fingerprint": "9c7e125a36f9589d92e7f6f28e62c3a5078bc77478b339499a89e7c56d6b7627",
+      "fingerprint": "3bf2a6bda69654abbbd25e84ec6492b0fd770788b2c84486909bcabaff1b03d7",
       "sourceFingerprint": "6016dcbacf5ac17d98a6174c7ee3fda51f8ef8d0bf233bd3efed308e01bdb36a",
       "characterId": "tiger"
     },
@@ -14322,7 +14322,7 @@
       "name": "Tuxedo Cat",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=cat",
-      "fingerprint": "0442ab945111e92a4fde736627a9d97e67d986de550493286380210321fea0af",
+      "fingerprint": "34e0cc390e403ec95cdba86f5c5007c07a5f88a75524763a2afe0a532ddbcfac",
       "sourceFingerprint": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99",
       "characterId": "cat"
     },
@@ -14333,7 +14333,7 @@
       "name": "Floppy Dog",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=dog",
-      "fingerprint": "a4611da8922713e005428eda5ca641aeedc5fbdbcc2cc32d3655266e44de7b2b",
+      "fingerprint": "33feec29997d330052225590a9ab86cab6e29798cb24d7bfcf8f41f4b230227d",
       "sourceFingerprint": "3055084b1619fd4bc2f945ea5efef31d264ae6e85719631a9b21cf4130b69200",
       "characterId": "dog"
     },
@@ -14344,7 +14344,7 @@
       "name": "Trail Explorer",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=person",
-      "fingerprint": "3920fe4c3d0356e64d5ca48da474c9258268868062b8ec7a9aa54cc5d129af59",
+      "fingerprint": "2d6116eee42dc0b1bd1570efcbfe05056c71cf3a01663905e92069b055a12d73",
       "sourceFingerprint": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
       "characterId": "person"
     },
@@ -14355,7 +14355,7 @@
       "name": "Russet Squirrel",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=squirrel",
-      "fingerprint": "a58458a42ae237712e6aa63d6077ce718b0084a7f328e1d5ea4127c14cc05451",
+      "fingerprint": "bacbcab3a42bdeda213003d3c8d026fc79551c67e1b90b49c28d6a2a2e4d7cb4",
       "sourceFingerprint": "03d5f92be37d50b8fd1c1a1f40171bf491085bc2d750b32d01f3165b46eb8c9d",
       "characterId": "squirrel"
     },
@@ -14366,7 +14366,7 @@
       "name": "Brown Bear",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=bear",
-      "fingerprint": "f722f5c5b3ea28c8d9e48635df31a6926bd3328e945f667a2a45f34164129105",
+      "fingerprint": "b85202f57c73d194612eabdfb6f3cac4516124099d2ee0f8d46ff8c6037c4856",
       "sourceFingerprint": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
       "characterId": "bear"
     },
@@ -29947,5 +29947,5 @@
       }
     }
   ],
-  "inputDigest": "394e2ee3d6d1ae06b203d083107761f8e3d1b7d307332e368113df094b4250ac"
+  "inputDigest": "16f81c9097a6dcff05b59d5a26d1b17284c5c6f4a55d21bddc53cf317f3df53f"
 }

@@ -1,5 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
-import type { DeerPlanningScheduler } from "./DeerPlanningScheduler.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import {
   DEER_FLEE_SPEED,
   DEER_WALK_SPEED,
@@ -17,12 +17,11 @@ export function updateDeerAI(
   environment: WildlifeEnvironment,
   animals: readonly Entity[],
   players: readonly PositionComponent[],
-  planning?: DeerPlanningScheduler,
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = deer.deer,
     velocity = deer.velocity;
   if (!ai || !velocity || !deer.sprite) return;
-  planning?.advance(deer, dt);
   const nearby = players.find((p) => distance(p, deer.position) < 38);
   // Urgent sensing stays live even between planning slots. Avoid building a herd
   // (and calculating every member's distance) on every idle/moving tick.
@@ -74,6 +73,7 @@ export function updateDeerAI(
   let target: PositionComponent | undefined,
     best = -Infinity;
   for (let i = 0; i < 24; i++) {
+    if (planning && !planning.candidate(deer)) break;
     const away =
       distance(from, deer.position) < 1
         ? random() * Math.PI * 2
@@ -94,6 +94,7 @@ export function updateDeerAI(
       continue;
     let clear = true;
     const steps = Math.ceil(length / 4);
+    if (planning && !planning.path(deer, steps)) continue;
     for (let j = 1; j <= steps; j++) {
       const p = {
         wx: deer.position.wx + ((point.wx - deer.position.wx) * j) / steps,

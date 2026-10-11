@@ -2,7 +2,7 @@
 
 Topic: wildlife
 Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay; the four exact pet drafts await human review. Other art expansion stays stopped.
-Updated: 2026-10-10.
+Updated: 2026-10-11.
 
 ## Horse riding
 
@@ -53,6 +53,20 @@ passes 2,133 units, 18 focused browser reruns and streaming readiness. Two full-
 review fixtures still require absent historical fox archives; feedback fails closed.
 Art production, review decisions, individual generation and saved phases are
 unchanged. [Performance](performance.md) owns whole-tick measurements.
+
+## Shared planning scheduling
+
+[113](../tactical/113-shared-ai-planning.md) extends the deer pilot to all six native
+AI families, including every common fauna/pet profile, under Realm-owned cadence,
+shared bounded search work and aging admission. Generic ambient wander uses the
+same gate; immediate alarms, native motion, following/chase/route steering and
+contact physics retain their existing rates. Cohesion is sensed only for admitted
+goals. Desktop regressions and native game/lab checks pass across the full roster;
+113 records bounded burst measurements, final waterline checks, streaming
+readiness and a GPU upload-test flake reproduced on original source. Production-table
+refresh was attempted after persisting this checkpoint; ignored campaign progress
+is absent in this checkout, so the last validated table is retained. Art production,
+frozen snapshots and human review decisions remain unchanged.
 
 ## Common pets: bounded resumption
 

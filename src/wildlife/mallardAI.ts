@@ -1,6 +1,7 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { setSpriteClip } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
+import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { settleMallard } from "./mallardInteractions.js";
 
 /** Synchronous occupancy queries need geometry, not an actor's AI/persistent state. */
@@ -23,6 +24,7 @@ export function updateMallardAI(
   environment: WildlifeEnvironment,
   flock: readonly Entity[],
   players: readonly PositionComponent[],
+  planning?: AiPlanningScheduler,
 ): void {
   const ai = duck.mallard,
     sprite = duck.sprite,
@@ -45,6 +47,7 @@ export function updateMallardAI(
   };
   const clearPath = (point: PositionComponent) => {
     const steps = Math.ceil(distance(duck.position, point) / 8);
+    if (planning && !planning.path(duck, steps)) return false;
     for (let i = 1; i <= steps; i++)
       if (
         !environment.canOccupy(duck, {
@@ -72,10 +75,12 @@ export function updateMallardAI(
       rest();
       return;
     }
+    if (planning && !planning.claim(duck, true)) return;
     const from = ai.alarmFrom ?? duck.position;
     let angle = Math.atan2(duck.position.wy - from.wy, duck.position.wx - from.wx);
     if (distance(duck.position, from) < 1) angle = random() * Math.PI * 2;
     for (let i = 0; i < 24; i++) {
+      if (planning && !planning.candidate(duck)) break;
       const heading = angle + (random() - 0.5) * (i < 12 ? 1.4 : Math.PI * 2);
       const length = 48 + random() * 48;
       const point = {
@@ -122,6 +127,7 @@ export function updateMallardAI(
     const preferWater = !environment.isWater(duck.position);
     let fallback: PositionComponent | undefined;
     for (let i = 0; i < 16; i++) {
+      if (planning && !planning.candidate(duck)) break;
       const angle = away
         ? Math.atan2(duck.position.wy - away.wy, duck.position.wx - away.wx) +
           (random() - 0.5) * 1.2
@@ -148,6 +154,7 @@ export function updateMallardAI(
     ai.timer = 16;
     ai.stuck = 0;
   };
+  const nearPlayer = players.find((p) => distance(duck.position, p) < 24);
   ai.timer -= dt;
   if (ai.state === "travel") {
     if (distance(duck.position, ai.last) < 0.15) ai.stuck += dt;
@@ -157,9 +164,16 @@ export function updateMallardAI(
   }
   if (ai.timer <= 0) {
     if (ai.state === "rest") {
+      if (planning && !planning.claim(duck, !!nearPlayer)) {
+        stop();
+        // Terrain edits/teleports remain visible while an ambient goal is queued.
+        duck.noShadow = environment.isWater(duck.position);
+        setSpriteClip(duck, 0);
+        return;
+      }
       // Alternate travel with occasional display cycles; RNG varies rests/targets.
-      ai.activity++;
-      if (ai.activity % 4 === 0) {
+      if (nearPlayer) chooseTarget(nearPlayer);
+      else if (++ai.activity % 4 === 0) {
         ai.state = "quack";
         ai.timer = 0.96;
       } else if (ai.activity % 4 === 2) {
@@ -168,8 +182,13 @@ export function updateMallardAI(
       } else chooseTarget();
     } else rest();
   }
-  const nearPlayer = players.find((p) => distance(duck.position, p) < 24);
-  if (nearPlayer && ai.state !== "travel") chooseTarget(nearPlayer);
+  if (
+    nearPlayer &&
+    ai.state !== "travel" &&
+    ai.timer > 0 &&
+    (!planning || planning.claim(duck, true))
+  )
+    chooseTarget(nearPlayer);
   if (ai.state === "travel") {
     let dx = ai.target.wx - duck.position.wx,
       dy = ai.target.wy - duck.position.wy;

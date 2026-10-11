@@ -7,7 +7,8 @@ identity/lifetime fixed, gameplay grass frame storage and terrain scheduler reco
 reused; static prop depth and elevation metadata cached; Canvas terrain resources
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
-Wildlife sleep, bounded robin planning and local predicted animation are delivered.
+Wildlife sleep, shared bounded planning across all native families and ambient
+wander, and local predicted animation are delivered.
 Updated: 2026-10-11.
 
 Owns current performance direction and the limits of the evidence.
@@ -223,7 +224,7 @@ alarms and committed motion still run at the existing full/reduced rate; ambient
 goal eligibility cycles through staggered 100ms simulation-time slots, with one
 decision/search start per Realm AI step. Alarms bypass cadence, but keep the
 shared start cap; rotating threat/proximity classes provide admission fairness.
-Other species retain their existing scheduling and robin quota.
+That slice retained the other species policies; 113 supersedes its deer-only scheduler.
 
 Two shallow desktop walking repeats measure replication mean 0.214–0.278ms
 before versus 0.175–0.182ms after, and tick p95 2.9–3.8ms versus 2.2–2.4ms.
@@ -234,8 +235,20 @@ stutter cure. Typechecks, 2,414 unit tests, lint, build and six streaming readin
 cases pass. The full browser run passes 543/skips one but has one intermittent
 GPU tap-walk startup failure; the original source reproduces the same assertion
 under matching two-worker concurrency. 111 retains the reruns and uncertainty;
-this is not a clean full-suite or an established input diagnosis. Next: extend due-work admission to one more species under a shared
-multispecies quota, test dense mixed wakes and measure on the phone when available.
+this is not a clean full-suite or an established input diagnosis. [113](../tactical/113-shared-ai-planning.md) extends due-work admission to all
+native wildlife families and generic ambient wander under shared start/candidate/
+path quotas, with distance cadence and aging fairness. Fast reactions, timers and
+native physics retain ownership; common fauna no longer allocates cohesion lists
+during every rest/motion update. Distance classification runs at 10Hz and priority
+sorting only happens for potential due goals. A 96-actor synthetic open-near wake reduces peak AI steps from 7.46–8.12ms to
+0.44–0.53ms, while every actor receives planning admission by step 60. Ordinary
+eight-second moving tick/p95 ranges overlap; this establishes peak work control,
+not a general frame-rate or phone improvement. All 2,428 units, typechecks/lint,
+build, final duck browser checks and six-case streaming readiness pass. The full
+browser run passes 545/skips one; a GPU global upload-stability assertion fails
+and reproduces on original source, with final isolated reruns passing. 113 owns
+capture provenance, the final waterline correction and the test limitation. Next: profile remaining
+dense collision/ground and nearby-actor work, then measure on the phone when available.
 Retain 60Hz player/contact physics and acknowledgement freshness; lower NPC
 publication cadence and compute workers remain distinct later experiments.
 

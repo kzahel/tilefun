@@ -1,7 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import { updateRouteAI } from "../entities/routeAI.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
-import type { DeerPlanningScheduler } from "../wildlife/DeerPlanningScheduler.js";
 import { updateDeerAI } from "../wildlife/deerAI.js";
 import { updateFaunaAI } from "../wildlife/faunaAI.js";
 import { updateFrogAI } from "../wildlife/frogAI.js";
@@ -9,6 +8,7 @@ import { updateMallardAI, type WildlifeEnvironment } from "../wildlife/mallardAI
 import { robinWorkBudget } from "../wildlife/RobinWorkBudget.js";
 import { updateRabbitAI } from "../wildlife/rabbitAI.js";
 import { updateRobinAI } from "../wildlife/robinAI.js";
+import type { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 
 /**
  * Run AI for all entities: tick-tier culling, chase/follow, wander.
@@ -27,80 +27,96 @@ export function tickAllAI(
   rng: () => number,
   wildlife?: WildlifeEnvironment,
   robinTurn = 0,
-  deerPlanning?: DeerPlanningScheduler,
+  planning?: AiPlanningScheduler,
 ): void {
-  // Collect buddies for hostile AI targeting (need all, not just ticked)
   const buddies = entities.filter((e) => e.wanderAI?.following);
+  let entries = [...entityTickDts].filter(
+    ([e]) => e.wanderAI || e.fauna || e.deer || e.robin || e.rabbit || e.frog || e.mallard,
+  );
+  const budget = planning?.budget ?? robinWorkBudget();
+  if (planning) {
+    planning.begin();
+    let due = false;
+    for (const [entity, dt] of entries) {
+      planning.advance(entity, dt, playerPositions);
+      const ai =
+        entity.fauna ??
+        entity.deer ??
+        entity.robin ??
+        entity.rabbit ??
+        entity.frog ??
+        entity.mallard;
+      if (ai) {
+        if (
+          ai.timer <= dt &&
+          !("motion" in ai && ai.motion) &&
+          ai.state !== "hop" &&
+          ai.state !== "flight"
+        )
+          due = true;
+      } else if (
+        entity.wanderAI &&
+        !entity.routeAI &&
+        entity.wanderAI.state !== "ridden" &&
+        entity.wanderAI.state !== "chasing" &&
+        entity.wanderAI.state !== "scared" &&
+        !entity.wanderAI.following &&
+        entity.wanderAI.timer <= dt
+      )
+        due = true;
+    }
+    // Ordinary committed movement/rest waits need neither priority maps nor sorting.
+    if (due && entries.length) {
+      const priorities = new Map(
+        entries.map(([entity]) => {
+          const ai =
+            entity.fauna ??
+            entity.deer ??
+            entity.robin ??
+            entity.rabbit ??
+            entity.frog ??
+            entity.mallard;
+          return [entity, planning.priority(entity, !!ai?.alarmFrom)] as const;
+        }),
+      );
+      const start = robinTurn % entries.length;
+      entries = entries.slice(start).concat(entries.slice(0, start));
+      entries.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
+    }
+  }
   const robins: [Entity, number][] = [];
-  const deer: [Entity, number][] = [];
-  for (const [entity, dt] of entityTickDts) {
+  for (const [entity, dt] of entries) {
     if (entity.fauna && wildlife) {
-      updateFaunaAI(entity, dt, wildlife, entities, playerPositions);
-      continue;
-    }
-    if (entity.deer && wildlife) {
-      deer.push([entity, dt]);
-      continue;
-    }
-    if (entity.robin && wildlife) {
-      robins.push([entity, dt]);
-      continue;
-    }
-    if (entity.rabbit && wildlife) {
-      updateRabbitAI(entity, dt, wildlife, entities, playerPositions);
-      continue;
-    }
-    if (entity.frog && wildlife) {
-      updateFrogAI(entity, dt, wildlife, entities, playerPositions);
-      continue;
-    }
-    if (entity.mallard && wildlife) {
-      updateMallardAI(entity, dt, wildlife, entities, playerPositions);
-      continue;
-    }
-    if (!entity.wanderAI) continue;
-    // Skip ridden entities — their velocity is controlled by the rider's input
-    if (entity.wanderAI.state === "ridden") continue;
-    if (entity.routeAI && !entity.wanderAI.following && entity.wanderAI.state !== "scared") {
-      updateRouteAI(entity, dt);
-      continue;
-    }
-    if (entity.wanderAI.chaseRange || entity.wanderAI.following || entity.wanderAI.befriendable) {
-      const nearest = nearestPlayerPos(entity.position, playerPositions);
-      updateBehaviorAI(entity, dt, rng, nearest, buddies);
-    } else {
-      updateWanderAI(entity, dt, rng);
+      updateFaunaAI(entity, dt, wildlife, entities, playerPositions, planning);
+    } else if (entity.deer && wildlife) {
+      updateDeerAI(entity, dt, wildlife, entities, playerPositions, planning);
+    } else if (entity.robin && wildlife) {
+      if (planning)
+        updateRobinAI(entity, dt, wildlife, entities, playerPositions, budget, planning);
+      else robins.push([entity, dt]);
+    } else if (entity.rabbit && wildlife) {
+      updateRabbitAI(entity, dt, wildlife, entities, playerPositions, planning);
+    } else if (entity.frog && wildlife) {
+      updateFrogAI(entity, dt, wildlife, entities, playerPositions, planning);
+    } else if (entity.mallard && wildlife) {
+      updateMallardAI(entity, dt, wildlife, entities, playerPositions, planning);
+    } else if (entity.wanderAI && entity.wanderAI.state !== "ridden") {
+      if (entity.routeAI && !entity.wanderAI.following && entity.wanderAI.state !== "scared") {
+        updateRouteAI(entity, dt);
+      } else if (
+        entity.wanderAI.chaseRange ||
+        entity.wanderAI.following ||
+        entity.wanderAI.befriendable
+      ) {
+        const nearest = nearestPlayerPos(entity.position, playerPositions);
+        updateBehaviorAI(entity, dt, rng, nearest, buddies, planning);
+      } else updateWanderAI(entity, dt, rng, planning);
     }
   }
-  if (wildlife && deer.length) {
-    deerPlanning?.begin();
-    const start = deerPlanning ? robinTurn % deer.length : 0;
-    const rotated = deer.slice(start).concat(deer.slice(0, start));
-    // Stable rotation gives equally urgent actors fair access after a synchronized
-    // wake. Existing alarms precede ambient goals; new alarms still react this tick.
-    if (deerPlanning) {
-      const rank = (entity: Entity) =>
-        entity.deer?.alarmFrom
-          ? 0
-          : playerPositions.some(
-                (p) =>
-                  (p.wx - entity.position.wx) ** 2 + (p.wy - entity.position.wy) ** 2 < 192 ** 2,
-              )
-            ? 1
-            : 2;
-      const priorities = new Map(rotated.map(([entity]) => [entity, rank(entity)]));
-      rotated.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
-    }
-    for (const [entity, dt] of rotated)
-      updateDeerAI(entity, dt, wildlife, entities, playerPositions, deerPlanning);
-  }
+  // Direct diagnostic callers without a Realm scheduler retain the robin quota.
   if (wildlife && robins.length) {
-    const budget = robinWorkBudget();
-    const rotated = robins
-      .slice(robinTurn % robins.length)
-      .concat(robins.slice(0, robinTurn % robins.length));
-    // Alarms have priority, then proximity. Rotation preserves fair admission
-    // within each class even when many timers expire together.
+    const start = robinTurn % robins.length;
+    const rotated = robins.slice(start).concat(robins.slice(0, start));
     const rank = (entity: Entity) =>
       entity.robin?.alarmFrom
         ? 0
