@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [108 Authored blue car gameplay](108-authored-blue-car-gameplay.md) | Shared GLB rendering, native silhouette ink and cosmetic wheel roll in game/Traffic; physics unchanged |
 | [107 Ground query reuse](107-ground-query-reuse.md) | Complete: shared per-pass candidate reuse, native phone controls and integration; [performance](../topics/performance.md) |
 | [106 Retained vehicle model bundles](106-retained-vehicle-model-bundles.md) | Exact final GLBs, Blender/texture sources and tracked replay dependencies; fresh-checkout validation |
 | [105 Red car and authoring skill](105-red-car-and-authoring-skill.md) | Source-checked compact-4 transfer, one-command Blender replay and reusable skill; ambulance remains the next new family |

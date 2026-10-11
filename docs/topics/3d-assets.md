@@ -69,10 +69,19 @@ or that changing the renderer alone makes the world ready for first person.
 
 The latest authored compact already exports a self-contained, Three.js-tested
 GLB with textured meshes and independent wheel pivots. No Blender runtime is
-required. Gameplay still uses the hard-coded diagnostic `CarMeshAsset`; a general
-GLB asset adapter, game-camera/ground registration, resource/fallback handling,
-wheel pose wiring and native-pixel outer-ink integration remain next work. The
-authored GLB includes internal window ink, not the image-space outer outline.
+required. [108](../tactical/108-authored-blue-car-gameplay.md) connects the retained
+blue `compact-1` v7 GLB to the shared optional game/lab mesh path, with explicit
+axis normalization, authored ground-center/world-pixel registration, nearest unlit
+paint, inward native-pixel silhouette ink and cosmetic distance-driven wheel roll.
+Missing/loading/failed models retain the complete sprite. The game selector is
+**Debug → Renderer → GPU + 3D car**, or `?renderer=gpu&meshes`.
+
+Only blue compact-1 uses this adapter; green/red and other vehicles retain their
+sprites. Simulation, prediction, input, cardinal colliders, roof support and
+persistence are unchanged. Wheel steering stays neutral; authored clearance is
+still unqualified. This optional inspection mode does not promote the model art.
+Continuous physical yaw/rotated collision and actual desktop/phone GPU timing
+remain separate next work.
 
 ## Current experiment and findings
 
@@ -219,8 +228,8 @@ Plan each implementation slice in a new tactical when it is taken up.
 | A2 | Inputs/tooling delivered; registration open | 098 freezes all vehicle directional crops/metadata and supplies landmark camera fitting; annotate real correspondences and resolve inconsistent sprite views |
 | A3 | Bounded trials delivered; choice open | 073 compares fitted/generated geometry and AI paint; 097 adds authored Blender geometry and cleaned named UVs. No production route selected |
 | A4 | Inspection evidence delivered; human judgment open | 097 retains source/front/back/side/top, oblique and turntable views, wheel contact and texture stages; no accepted all-angle car yet |
-| A5 | Proposed | Export/import the chosen candidate as a portable asset with provenance and explicit axis/scale conversion; establish bounded triangle/texture budgets from device evidence |
-| A6 | Diagnostic implementation delivered in 039–045 | Render the asset as an optional mesh body under the unchanged game projection, with continuous visual heading and a sprite fallback; engine work is tracked in the rendering topic |
+| A5 | Blue import delivered; device budgets open | 106 retains exact compact bundles; 108 imports blue with provenance and explicit axes/scale/ground. Establish triangle, draw-call and texture budgets from real device evidence |
+| A6 | Shared blue integration delivered in 108 | Optional authored GLB body under the unchanged game projection, with continuous cosmetic heading, wheel roll and sprite fallback; physical rotation remains separate |
 | A7 | Later | Test a second asset class before generalizing authoring, animation or batch generation; first-person coverage remains a later scope |
 
 The model-assisted investigation began with [070 — Model-assisted spatial assets and sprite
@@ -329,11 +338,12 @@ the experiment protocol, overlap cases, Windows setup checks and evidence record
   comparison protocol and renderer decision matrix.
 
 
-The optional `?renderer=gpu&meshes` path and renderer comparison tool now share
-`CarMeshAsset`, asset registration and isolated body depth. Continuous yaw plus
-diagnostic pitch/roll work under the unchanged game projection. This does not
-resolve A2–A5: the proxy still has flat wheels, incomplete hidden surfaces and
-unacceptable top-view artwork. No candidate has been promoted by this integration.
+The initial 039–045 integration used the older projected shell with flat painted
+wheels and unresolved top-view artwork. [108](../tactical/108-authored-blue-car-gameplay.md)
+now uses the retained authored blue GLB in game and renderer comparison, with
+actual rigid wheel roll and isolated body depth. Continuous cosmetic yaw and lab
+pitch/roll retain the unchanged game projection. This optional integration does
+not promote the model art or establish physical rotated collision/device budgets.
 
 The first four alternatives completed on 2026-10-08. [073](../tactical/073-spatial-pipeline-alternatives.md)
 records FLUX/Qwen editing on five assets/two seeds, matched TripoSG/TRELLIS

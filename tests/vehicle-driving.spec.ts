@@ -3,6 +3,7 @@ import type { ClientStateView, RemoteStateView } from "../src/client/ClientState
 import type { GameLoop } from "../src/core/GameLoop.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { TapMovement } from "../src/input/TapMovement.js";
+import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import { projectWorld } from "../src/rendering/Projection.js";
 import type { RequestMessage } from "../src/shared/requests.js";
 import type { WorkerClientTransport } from "../src/transport/WorkerClientTransport.js";
@@ -41,7 +42,13 @@ async function read(page: Page) {
 }
 async function start(page: Page, backend: string, cars = false) {
   const generation = createDescriptor("regional", 2026);
-  const arrival = cars ? { x: 300, y: 519, generation } : undefined;
+  const arrival = cars
+    ? {
+        x: backend.includes("meshes") ? 212 : 300,
+        y: backend.includes("meshes") ? 491 : 519,
+        generation,
+      }
+    : undefined;
   await page.goto(
     `/tilefun/?nogamepad&renderer=${backend}&generation=${encodeURIComponent(JSON.stringify(generation))}${arrival ? `&arrival=${encodeURIComponent(JSON.stringify(arrival))}` : ""}`,
   );
@@ -61,7 +68,7 @@ async function tapMode(page: Page, mode = "Tap to move") {
   await page.getByRole("button", { name: mode, exact: true }).tap();
   await page.getByRole("button", { name: "Back to game", exact: true }).tap();
 }
-for (const backend of ["canvas", "gpu"]) {
+for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
   test(`car boarding, tap destination, saved inside seat and exit (${backend})`, async ({
     page,
   }) => {
@@ -69,19 +76,45 @@ for (const backend of ["canvas", "gpu"]) {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await start(page, backend, true);
+    if (backend.includes("meshes")) {
+      // The seeded blue compact starts on the west street, outside the
+      // initial replica window. Let native traffic populate, then approach it.
+      await expect
+        .poll(
+          () =>
+            page.evaluate(() => {
+              const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+              return g.stateView.entities.some((e) => e.type.startsWith("vehicle-v1:"));
+            }),
+          { timeout: 15000 },
+        )
+        .toBe(true);
+      await page.evaluate(async () => {
+        const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+        await g.gcSendRequest({
+          type: "rcon",
+          requestId: g.nextRequestId++,
+          command: "tp 3360 7344",
+        });
+      });
+    }
     await expect
       .poll(
         () =>
-          page.evaluate(() => {
+          page.evaluate((mesh) => {
             const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-            return g.stateView.entities.some((e) => e.type.startsWith("vehicle-v1:"));
-          }),
+            return g.stateView.entities.some((e) =>
+              mesh ? e.type === "vehicle-v1:compact-1" : e.type.startsWith("vehicle-v1:"),
+            );
+          }, backend.includes("meshes")),
         { timeout: 15000 },
       )
       .toBe(true);
-    await page.evaluate(async () => {
+    await page.evaluate(async (mesh) => {
       const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-      const car = g.stateView.entities.find((e) => e.type.startsWith("vehicle-v1:"));
+      const car = g.stateView.entities.find((e) =>
+        mesh ? e.type === "vehicle-v1:compact-1" : e.type.startsWith("vehicle-v1:"),
+      );
       if (!car?.collider) throw Error("No car");
       const dir = car.sprite?.direction ?? 3;
       const dx = dir === 3 ? 1 : dir === 2 ? -1 : 0,
@@ -97,7 +130,7 @@ for (const backend of ["canvas", "gpu"]) {
         requestId: g.nextRequestId++,
         command: `tp ${x} ${y}`,
       });
-    });
+    }, backend.includes("meshes"));
     await expect(page.getByRole("button", { name: "Drive car · E", exact: true })).toBeVisible({
       timeout: 15000,
     });
@@ -105,6 +138,39 @@ for (const backend of ["canvas", "gpu"]) {
     await page.getByRole("button", { name: "Drive car · E", exact: true }).tap();
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toMatch(/^vehicle-v1:/);
+    if (backend.includes("meshes")) {
+      expect((await read(page)).type).toBe("vehicle-v1:compact-1");
+      await expect
+        .poll(() =>
+          page.locator("#game").evaluate((c) => {
+            const g = (
+              c as unknown as {
+                __game: {
+                  renderer: {
+                    getDiagnostics(): {
+                      gpu?: { meshAsset: string | null; meshParts: number; meshDraws: number };
+                    };
+                  };
+                };
+              }
+            ).__game;
+            return g.renderer.getDiagnostics().gpu;
+          }),
+        )
+        .toMatchObject({
+          meshAsset: "compact-1-authored-v7",
+          meshParts: 55,
+          meshDraws: expect.any(Number),
+        });
+    }
+    const wheelPose = () =>
+      page.locator("#game").evaluate((c) => {
+        const g = (c as unknown as { __game: Game & { renderer: GpuRenderBackend } }).__game;
+        return g.renderer.meshes.car.value?.object
+          .getObjectByName("Wheel_FL_Roll")
+          ?.quaternion.toArray();
+      });
+    const wheelBefore = backend.includes("meshes") ? await wheelPose() : null;
     const before = await read(page);
     const target = await page.evaluate(() => {
       const canvas = document.querySelector("#game") as HTMLCanvasElement;
@@ -142,6 +208,7 @@ for (const backend of ["canvas", "gpu"]) {
       .toBeGreaterThan(16);
     await expect.poll(async () => (await read(page)).target, { timeout: 10000 }).toBeNull();
     await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
+    if (backend.includes("meshes")) expect(await wheelPose()).not.toEqual(wheelBefore);
     await page.screenshot({ path: `/tmp/tilefun-driving-car-${backend}.png` });
     await page.evaluate(async () => {
       const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
@@ -158,6 +225,7 @@ for (const backend of ["canvas", "gpu"]) {
     await expect.poll(async () => (await read(page)).parent).toBeNull();
     expect(errors).toEqual([]);
   });
+  if (backend.includes("meshes")) continue;
   for (const mode of ["Tap to move", "Hold to move"]) {
     test(`train ${mode} starts, stops, reverses, and UI stays isolated (${backend})`, async ({
       page,

@@ -22,3 +22,6 @@ export function carVertexToLocal([x, y, z]: Point3): Point3 {
     z,
   ];
 }
+
+/** Retained compact-1 v7: units are world pixels, origin is the ground center. */
+export const COMPACT_CAR_GLB = "assets/models/vehicles/compact-1-v7.glb";

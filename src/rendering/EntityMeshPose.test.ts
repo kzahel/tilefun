@@ -32,3 +32,42 @@ it("normalizes full visual pose with explicit yaw/pitch/roll composition", () =>
   expect(poseOrientation(Math.PI / 2)[2]).toBeCloseTo(Math.SQRT1_2);
   expect(Math.hypot(...poseOrientation(0.7, 0.3, -0.2))).toBeCloseTo(1);
 });
+
+it("keeps cosmetic travel across borrowed render clones, with independent cars and lifecycle eviction", () => {
+  const car = createVehicle("compact-1", 10, 20);
+  car.id = 1;
+  car.velocity = { vx: 20, vy: 0 };
+  const other = createVehicle("compact-1", 100, 20);
+  other.id = 2;
+  const poses = new EntityMeshPose();
+  const original = structuredClone(car);
+  const first = poses.evaluate(car, 1);
+  const clone = structuredClone(car);
+  clone.position.wx += 4;
+  const before = structuredClone(clone);
+  expect(poses.evaluate(clone, 1.1)).toBe(first);
+  expect(first?.wheelTravel).toBeCloseTo(4);
+  expect(car).toEqual(original);
+  expect(clone).toEqual(before);
+  expect(poses.evaluate(other, 1.1)?.wheelTravel).toBe(0);
+  poses.retain([other]);
+  expect(poses.evaluate(clone, 1.2)?.wheelTravel).toBe(0);
+});
+
+it("rolls from displayed signed distance, holds at rest and fences teleports and visibility gaps", () => {
+  const car = createVehicle("compact-1", 0, 0);
+  car.velocity = { vx: 10, vy: 0 };
+  const poses = new EntityMeshPose();
+  const pose = poses.evaluate(car, 1);
+  poses.evaluate(car, 1.1, { wx: 4, wy: 0 });
+  expect(pose?.wheelTravel).toBe(4);
+  poses.evaluate(car, 1.2, { wx: 3, wy: 0 });
+  expect(pose?.wheelTravel).toBe(3);
+  poses.evaluate(car, 1.3, { wx: 3, wy: 0 });
+  expect(pose?.wheelTravel).toBe(3);
+  poses.evaluate(car, 1.4, { wx: 1000, wy: 0 });
+  poses.evaluate(car, 2, { wx: 1010, wy: 0 });
+  expect(pose?.wheelTravel).toBe(3);
+  poses.evaluate(car, 2.1, { wx: 1012, wy: 0 });
+  expect(pose?.wheelTravel).toBe(5);
+});

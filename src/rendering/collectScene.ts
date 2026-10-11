@@ -93,6 +93,7 @@ export function collectScene(
     : propSurfaces;
 
   const poseTime = performance.now() / 1000;
+  frame?.meshPoses.retain(entities);
   const insideParents = new Set(entities.filter(isDrivable).map((e) => e.id));
   // --- Entities ---
   for (const e of entities) {
@@ -151,7 +152,7 @@ export function collectScene(
     );
 
     const mesh =
-      frame?.meshPoses.evaluate(e, poseTime) ??
+      frame?.meshPoses.evaluate(e, poseTime, pos) ??
       (meshAsset
         ? { assetId: meshAsset, orientation: yawOrientation(entityHeading(e)), radius: 64 }
         : undefined);

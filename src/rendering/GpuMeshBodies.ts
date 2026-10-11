@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import type { Camera } from "./Camera.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
+import { CarPixelOutline } from "./CarPixelOutline.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { COMPACT_CAR_MESH, resolveBody } from "./MeshPresentation.js";
 import { projectWorld } from "./Projection.js";
@@ -14,6 +15,7 @@ export class GpuMeshBodies {
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
   private readonly target = new THREE.WebGLRenderTarget(1, 1, { depthBuffer: true });
+  private readonly outline = new CarPixelOutline();
   private readonly clearColor = new THREE.Color();
   private enabled = false;
   draws = 0;
@@ -39,14 +41,12 @@ export class GpuMeshBodies {
       renderer = surface.renderer;
     surface.flush();
     const radius = item.mesh.radius;
-    const resolution = Math.min(
-      1024,
-      Math.max(1, Math.ceil(radius * 2 * camera.scale * surface.transformScale)),
-    );
+    const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
     if (this.target.width !== resolution || this.target.height !== resolution)
       this.target.setSize(resolution, resolution);
     const object = this.car.value.object;
     object.quaternion.set(...item.mesh.orientation);
+    this.car.value.setTravel(item.mesh.wheelTravel ?? 0);
     this.scene.add(object);
     // Deliberately oblique: x maps to screen x, z-y maps to screen up.
     this.camera.projectionMatrix.set(
@@ -71,12 +71,15 @@ export class GpuMeshBodies {
     renderer.getClearColor(this.clearColor);
     const alpha = renderer.getClearAlpha();
     const previous = renderer.getRenderTarget();
+    let texture = this.target.texture;
     renderer.setScissorTest(false);
     try {
       renderer.setRenderTarget(this.target);
       renderer.setClearColor(0, 0);
       renderer.clear();
       renderer.render(this.scene, this.camera);
+      this.drawCalls += renderer.info.render.calls;
+      texture = this.outline.render(renderer, this.target);
       this.drawCalls += renderer.info.render.calls;
     } finally {
       renderer.setRenderTarget(previous);
@@ -87,7 +90,7 @@ export class GpuMeshBodies {
     surface.save();
     surface.globalAlpha = item.alpha ?? 1;
     surface.drawTexture(
-      this.target.texture,
+      texture,
       anchor.sx - radius * camera.scale,
       anchor.sy - radius * camera.scale,
       radius * 2 * camera.scale,
@@ -99,14 +102,19 @@ export class GpuMeshBodies {
     return true;
   }
   recover() {
+    this.outline.recover();
     this.target.dispose();
   }
   dispose() {
     this.ready.clear();
     this.car.dispose();
+    this.outline.dispose();
     this.target.dispose();
   }
   get targetBytes() {
-    return this.target.width * this.target.height * 8;
+    return (
+      this.target.width * this.target.height * 8 +
+      this.outline.target.width * this.outline.target.height * 4
+    );
   }
 }

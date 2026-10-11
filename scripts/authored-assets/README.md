@@ -37,12 +37,13 @@ still need the particular local revision they exercise.
 The exported self-contained GLB contains the mesh, UV texture, unlit material
 and rigid wheel hierarchy. Actual Three.js GLTFLoader import/render and independent
 wheel rotation were checked; Blender is not needed to consume the GLB at runtime.
-The game currently constructs its diagnostic car in `src/rendering/CarMeshAsset.ts`.
-It does not load these authored GLBs yet. Integration needs a shared asset adapter
-with GLB-axis/world-pixel/ground registration, resource disposal and sprite fallback,
-plus the native-pixel outer-ink pass and distance/steering-driven wheel transforms.
-Internal window ink is already painted into the atlas. Authoring views do not
-prove alignment under the gameplay camera or wheel steering clearance.
+The optional game/lab mesh path now loads blue compact-1 v7 through
+`src/rendering/CarMeshAsset.ts`; see [108](../../docs/tactical/108-authored-blue-car-gameplay.md).
+It normalizes GLB axes once, retains the authored world-pixel ground center,
+disposes resources/bitmaps, falls back to the sprite and adds native silhouette
+ink and distance-driven wheel roll. Internal window ink stays in the atlas.
+Green/red are retained inputs for later integration. Front steering remains
+neutral pending clearance qualification; physical rotated collision is separate.
 
 ## Shared process and family templates
 

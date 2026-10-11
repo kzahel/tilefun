@@ -1,81 +1,96 @@
 import * as THREE from "three";
-import { CAR_PROXY, carProxyPatches, sourceUV } from "../projection/CarProxy.js";
-import { extendOpaqueEdges } from "../projection/ProxyTexture.js";
-import { carVertexToLocal } from "./CarMeshDefinition.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
 
-/** Diagnostic asset adapter. Geometry/source provenance is shared with the original
- * projection lab. That older source-comparison tool retains its reference adapter.
+/** One retained blue car, shared by game and labs. The outer group owns the
+ * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
+ * Ground origin and world-pixel scale are already authored into the asset.
  */
 export class CarMeshAsset {
   readonly object = new THREE.Group();
-  private readonly resources: { dispose(): void }[] = [];
-  constructor(image: CanvasImageSource) {
-    const source = document.createElement("canvas");
-    source.width = 64;
-    source.height = 40;
-    const ctx = source.getContext("2d", { willReadFrequently: true });
-    if (!ctx) throw Error("Car source unavailable");
-    ctx.drawImage(image, ...CAR_PROXY.rect, 0, 0, 64, 40);
-    const top = document.createElement("canvas");
-    top.width = 64;
-    top.height = 40;
-    const topCtx = top.getContext("2d");
-    if (!topCtx) throw Error("Car top texture unavailable");
-    const pixels = ctx.getImageData(0, 0, 64, 40);
-    pixels.data.set(extendOpaqueEdges(pixels.data, 64, 40));
-    topCtx.putImageData(pixels, 0, 0);
-    const texture = (canvas: HTMLCanvasElement) => {
-      const t = new THREE.CanvasTexture(canvas);
-      t.colorSpace = THREE.SRGBColorSpace;
-      t.magFilter = t.minFilter = THREE.NearestFilter;
-      t.generateMipmaps = false;
-      this.resources.push(t);
-      return t;
-    };
-    const side = new THREE.MeshBasicMaterial({
-      map: texture(source),
-      alphaTest: 0.5,
-      side: THREE.DoubleSide,
+  private readonly resources = new Set<{ dispose(): void }>();
+  private readonly bitmaps = new Set<ImageBitmap>();
+  private readonly wheels: {
+    roll: THREE.Object3D;
+    rest: THREE.Quaternion;
+    axis: THREE.Vector3;
+    radius: number;
+  }[] = [];
+  private readonly rotation = new THREE.Quaternion();
+  readonly meshCount: number;
+  constructor(scene: THREE.Group) {
+    let meshes = 0;
+    scene.traverse((node) => {
+      if (!(node instanceof THREE.Mesh)) return;
+      meshes++;
+      this.resources.add(node.geometry);
+      const materials = Array.isArray(node.material) ? node.material : [node.material];
+      for (const material of materials) {
+        this.resources.add(material);
+        material.toneMapped = false;
+        for (const value of Object.values(material)) {
+          if (!(value instanceof THREE.Texture)) continue;
+          value.magFilter = value.minFilter = THREE.NearestFilter;
+          value.generateMipmaps = false;
+          value.needsUpdate = true;
+          this.resources.add(value);
+          if (typeof ImageBitmap !== "undefined" && value.image instanceof ImageBitmap)
+            this.bitmaps.add(value.image);
+        }
+      }
     });
-    const upper = new THREE.MeshBasicMaterial({ map: texture(top), side: THREE.DoubleSide });
-    const unknown = new THREE.MeshBasicMaterial({ color: 0xeea143, side: THREE.DoubleSide });
-    this.resources.push(side, upper, unknown);
-    for (const patch of carProxyPatches()) {
-      const geometry = new THREE.BufferGeometry();
-      // Source car faces -X; normalize once to +X with a half turn about Z.
-      geometry.setAttribute(
-        "position",
-        new THREE.Float32BufferAttribute(
-          patch.vertices.flatMap((p) => [...carVertexToLocal(p)]),
-          3,
-        ),
-      );
-      geometry.setAttribute(
-        "uv",
-        new THREE.Float32BufferAttribute(
-          patch.vertices.flatMap((p) => [...sourceUV(p)]),
-          2,
-        ),
-      );
-      geometry.setIndex([0, 1, 2, 0, 2, 3]);
-      geometry.computeVertexNormals();
-      this.resources.push(geometry);
-      this.object.add(
-        new THREE.Mesh(
-          geometry,
-          patch.surface === "top" ? upper : patch.surface === "side" ? side : unknown,
-        ),
-      );
+    this.meshCount = meshes;
+    try {
+      for (const id of ["FL", "FR", "RL", "RR"]) {
+        const roll = scene.getObjectByName(`Wheel_${id}_Roll`);
+        const steer = scene.getObjectByName(`Wheel_${id}_Steer`);
+        const radius: unknown = roll?.userData.wheel_radius;
+        const axis: unknown = roll?.userData.roll_axis_gltf;
+        if (
+          !roll ||
+          !steer ||
+          roll.parent !== steer ||
+          typeof radius !== "number" ||
+          !Number.isFinite(radius) ||
+          radius <= 0 ||
+          !Array.isArray(axis) ||
+          axis.length !== 3 ||
+          !axis.every((v) => typeof v === "number" && Number.isFinite(v)) ||
+          Math.hypot(...axis) === 0
+        )
+          throw Error(`Invalid authored car wheel ${id}`);
+        this.wheels.push({
+          roll,
+          rest: roll.quaternion.clone(),
+          axis: new THREE.Vector3(axis[0], axis[1], axis[2]).normalize(),
+          radius,
+        });
+      }
+      const normalized = new THREE.Group();
+      normalized.rotation.set(Math.PI / 2, 0, Math.PI, "ZYX");
+      normalized.add(scene);
+      this.object.add(normalized);
+    } catch (error) {
+      this.dispose();
+      throw error;
+    }
+  }
+  /** Absolute pose per draw: a shared resource never carries another car's phase. */
+  setTravel(distance: number) {
+    for (const wheel of this.wheels) {
+      this.rotation.setFromAxisAngle(wheel.axis, -distance / wheel.radius);
+      wheel.roll.quaternion.copy(wheel.rest).multiply(this.rotation);
     }
   }
   dispose() {
     for (const resource of this.resources) resource.dispose();
+    for (const bitmap of this.bitmaps) bitmap.close();
+    this.resources.clear();
+    this.bitmaps.clear();
     this.object.clear();
   }
 }
 export async function loadCarMesh(): Promise<CarMeshAsset> {
-  const image = new Image();
-  image.src = `${import.meta.env.BASE_URL}assets/tilesets/me-complete.png`;
-  await image.decode();
-  return new CarMeshAsset(image);
+  const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}${COMPACT_CAR_GLB}`);
+  return new CarMeshAsset(gltf.scene);
 }

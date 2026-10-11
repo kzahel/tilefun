@@ -185,6 +185,8 @@ function draw() {
     ...gpu.surface.stats,
     meshDraws: gpu.meshes.draws,
     meshState: gpu.meshes.car.state,
+    meshAsset: gpu.meshes.car.value ? COMPACT_CAR_MESH : null,
+    meshParts: gpu.meshes.car.value?.meshCount ?? 0,
     targetBytes: gpu.meshes.targetBytes,
   };
   result.textContent = JSON.stringify(report, null, 2);

@@ -4,7 +4,7 @@ Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; optional WebGL2 gameplay backend and shared mesh-car presentation delivered;
 Canvas2D remains the default pending performance/asset acceptance.
-Updated: 2026-10-07.
+Updated: 2026-10-11.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)
@@ -375,10 +375,25 @@ Canvas and GPU share placement, grass, shadows and room composition rules.
 still uploads CPU-prepared terrain/room images. It is not GPU terrain generation.
 Neutral `RenderBackend` frames never contain Three objects or decoded images.
 
-`EntityMeshPose` evaluates cosmetic orientation once in shared presentation.
-`CarMeshDefinition` normalizes the original source geometry into world-pixel
-coordinates and the sprite's ground anchor. `GpuMeshBodies` draws that body into
-one reusable depth target and composites it at its supplied scene position.
+`EntityMeshPose` evaluates cosmetic orientation and signed wheel travel once in
+shared presentation. Its view-owned ID cache survives borrowed render clones,
+evicts absent entities and clears on scene teardown. Travel uses interpolated
+positions; rest holds phase and teleports/visibility gaps establish a new sample.
+[108](../tactical/108-authored-blue-car-gameplay.md) replaces the older proxy with
+the retained blue compact-1 v7 GLB. `CarMeshAsset` converts +Y-up/-X-forward to
++Z-up/+X-forward once; authored world-pixel scale and Z=0 ground center need no
+sprite/camera offset. `CarMeshDefinition` also retains the earlier reference
+projection registration for historical reference checks.
+
+`GpuMeshBodies` draws that body into one reusable depth target at one texel per
+world pixel, applies inward silhouette ink in a second color target and composites
+it at its supplied scene position. Nearest enlargement keeps stroke width
+independent of zoom/DPR. Wheel transforms use the supplied absolute phase for
+each body, so the shared GLB cannot leak another car's pose. The compact's 128²
+target pair accounts for 192 KiB of color/depth storage, excluding model/driver
+resources. Geometry/material/texture ownership includes closing GLTFLoader image
+bitmaps at disposal. No driving or collision policy changes; steering remains
+neutral.
 Depth is local to a body: arbitrary interpenetrating objects are not supported.
 Missing/loading/failed assets retain the sprite. A generation-checked resource
 slot prevents late async publication after replacement or disposal.

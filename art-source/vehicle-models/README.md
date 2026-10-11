@@ -26,8 +26,10 @@ projection images. Inherited draft paint does not establish observation coverage
 
 These remain authored diagnostic assets. Retention does not promote gameplay
 art or grant a new human approval. Internal window ink is atlas paint; the outer
-pixel outline still requires a renderer pass. The game has not yet connected its
-diagnostic `CarMeshAsset` to these GLBs. Wheel steering clearance remains open.
+pixel outline requires a renderer pass. The optional game/lab mesh mode now loads
+the blue GLB with native silhouette ink and cosmetic wheel roll; see
+[108](../../docs/tactical/108-authored-blue-car-gameplay.md). Green/red integration
+and wheel steering clearance remain open.
 
 From the repository root:
 

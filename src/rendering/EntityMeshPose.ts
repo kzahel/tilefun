@@ -5,7 +5,10 @@ interface Pose {
   angle: number;
   time: number;
   orientation: [number, number, number, number];
-  instance: MeshInstance;
+  x: number;
+  y: number;
+  travel: number;
+  instance: MeshInstance & { wheelTravel: number };
 }
 export function meshAssetFor(entity: Pick<Entity, "type">): string | undefined {
   return entity.type === "vehicle-v1:compact-1" ? COMPACT_CAR_MESH : undefined;
@@ -26,15 +29,20 @@ export function entityHeading(entity: Entity): number {
   }
 }
 /** Cosmetic, view-owned orientation. Neither mesh selection nor backend clocks
- * drive it. Weak entity keys cannot retain unloaded entities or recycled IDs.
+ * drive it. View-owned IDs survive borrowed render clones; retain() evicts
+ * unloaded entities, and scene teardown clears the view.
  */
 export class EntityMeshPose {
-  private poses = new WeakMap<Entity, Pose>();
-  evaluate(entity: Entity, time: number): MeshInstance | undefined {
+  private poses = new Map<number, Pose>();
+  retain(entities: readonly Entity[]) {
+    const ids = new Set(entities.filter((e) => meshAssetFor(e)).map((e) => e.id));
+    for (const id of this.poses.keys()) if (!ids.has(id)) this.poses.delete(id);
+  }
+  evaluate(entity: Entity, time: number, position = entity.position): MeshInstance | undefined {
     const assetId = meshAssetFor(entity);
     if (!assetId) return undefined;
     const target = entityHeading(entity);
-    let pose = this.poses.get(entity);
+    let pose = this.poses.get(entity.id);
     if (!pose) {
       const orientation: [number, number, number, number] = [
         0,
@@ -42,9 +50,27 @@ export class EntityMeshPose {
         Math.sin(target / 2),
         Math.cos(target / 2),
       ];
-      pose = { angle: target, time, orientation, instance: { assetId, orientation, radius: 64 } };
-      this.poses.set(entity, pose);
+      pose = {
+        angle: target,
+        time,
+        orientation,
+        x: position.wx,
+        y: position.wy,
+        travel: 0,
+        instance: { assetId, orientation, radius: 64, wheelTravel: 0 },
+      };
+      this.poses.set(entity.id, pose);
     } else {
+      const elapsed = time - pose.time;
+      const dx = position.wx - pose.x,
+        dy = position.wy - pose.y;
+      // Teleports, visibility gaps and clock fences establish a new sample,
+      // rather than spinning wheels through an unseen displacement.
+      if (elapsed > 0 && elapsed <= 0.25 && Math.hypot(dx, dy) <= 32)
+        pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
+      pose.x = position.wx;
+      pose.y = position.wy;
+      pose.instance.wheelTravel = pose.travel;
       const dt = Math.max(0, Math.min(0.1, time - pose.time));
       const difference = Math.atan2(Math.sin(target - pose.angle), Math.cos(target - pose.angle));
       pose.angle += Math.max(-dt * Math.PI * 2, Math.min(dt * Math.PI * 2, difference));
@@ -55,6 +81,6 @@ export class EntityMeshPose {
     return pose.instance;
   }
   clear() {
-    this.poses = new WeakMap();
+    this.poses.clear();
   }
 }

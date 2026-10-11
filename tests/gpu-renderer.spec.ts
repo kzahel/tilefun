@@ -95,6 +95,10 @@ test("GPU host runs the shared game and retains the input/UI canvas", async ({ p
 test("optional mesh body rotates, composes in order and falls back atomically", async ({
   page,
 }) => {
+  const shaderErrors: string[] = [];
+  page.on("console", (m) => {
+    if (m.type() === "error" && m.text().includes("THREE.")) shaderErrors.push(m.text());
+  });
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
   const report = () =>
@@ -109,6 +113,8 @@ test("optional mesh body rotates, composes in order and falls back atomically", 
   );
   expect((await report()).meshDraws).toBe(1);
   expect((await report()).meshState).toBe("ready");
+  expect((await report()).meshParts).toBe(55);
+  expect(shaderErrors).toEqual([]);
   const picture = () =>
     page.locator("#gpu").evaluate((canvas: HTMLCanvasElement) => canvas.toDataURL());
   const first = await picture();
@@ -554,4 +560,18 @@ test("shared grass LOD fades consistently in Canvas and GPU and returns at ordin
       await page.screenshot({ path: `/tmp/tilefun-059-grass-${zoom}.png` });
     }
   }
+});
+
+test("missing authored GLB keeps the complete sprite body", async ({ page }) => {
+  await page.route("**/assets/models/vehicles/compact-1-v7.glb", (route) =>
+    route.fulfill({ status: 404, body: "missing model" }),
+  );
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const result = await page.evaluate(() =>
+    (
+      window as unknown as { rendererLab: { setMesh(value: boolean): Promise<unknown> } }
+    ).rendererLab.setMesh(true),
+  );
+  expect(result).toMatchObject({ meshState: "failed", meshDraws: 0, mismatches: 0 });
 });

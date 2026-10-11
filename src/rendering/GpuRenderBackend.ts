@@ -1,6 +1,7 @@
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
 import { GpuMeshBodies } from "./GpuMeshBodies.js";
 import { GpuRasterSurface } from "./GpuRasterSurface.js";
+import { COMPACT_CAR_MESH } from "./MeshPresentation.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
 import { RasterRenderBackend } from "./RasterRenderBackend.js";
 import { touchRaster } from "./RasterSurface.js";
@@ -94,6 +95,8 @@ export class GpuRenderBackend extends RasterRenderBackend {
         meshDraws: this.meshes.draws,
         meshDrawCalls: this.meshes.drawCalls,
         meshState: this.meshes.car.state,
+        meshAsset: this.meshes.car.value ? COMPACT_CAR_MESH : null,
+        meshParts: this.meshes.car.value?.meshCount ?? 0,
         targetBytes: this.meshes.targetBytes,
       },
     };

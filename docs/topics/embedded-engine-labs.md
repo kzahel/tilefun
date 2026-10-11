@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-10.
+Updated: 2026-10-11.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -509,3 +509,14 @@ before index updates/separation and never carried across ticks, edits, readiness
 or carrier motion. Prediction keeps the existing shared resolver without a cache.
 Native game/lab Worker contact checks pass on Canvas/GPU in the full 541-check
 browser run (one skipped); streaming readiness and phone timing are recorded in 107.
+
+## Authored blue car presentation
+
+[108](../tactical/108-authored-blue-car-gameplay.md) connects compact-1 v7 through
+shared `CarMeshAsset`, `EntityMeshPose` and `GpuMeshBodies` in the game, Traffic
+playground and renderer comparison. All three use the same axis normalization,
+wheel roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
+Traffic's Worker, input, collision and roof support remain native. This changes
+optional presentation only; the independent car-projection reference lab remains
+on its original source geometry. Steering clearance and rotated physics are later
+work.
