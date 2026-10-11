@@ -64,6 +64,35 @@ Green garbage truck v1 adds six wheels, a separate recessed rear-loader hinge
 and one tagged warning beacon in [119](../tactical/119-six-wheel-garbage-truck.md).
 Its own geometry/UV sources and 4×2 are retained; clearance and integration remain pending.
 
+## Source families for batching
+
+The [four-view family audit](../tactical/121-vehicle-source-families.md) compares
+all 45 sets / 990 pairs. There are **13 exact silhouette families**, unchanged
+when ignoring translucent shadows. This is source shape evidence, not proof of
+identical hidden geometry or template eligibility.
+
+| Shape group | Members | Paint reuse |
+| --- | --- | --- |
+| Compacts | compact 1–6 | All six are exact reversible recolors, including physical metadata. |
+| Buses A | buses 1–4 | Bus 1→2 and 3→4 are exact one-way recolors; 1→3/4 needs one paint pixel each. |
+| Buses B | buses 5–6 | Same silhouette after trimming; registration differs and paint needs edits. |
+| Large cars A | sedan 12, cars 7–11 and 13 | Same silhouette; car 8→9 exact one-way recolor, other paint differs. |
+| Large cars B | cars 14–20 | Same silhouette; distinct paint recipes needed. |
+| Large cars C | cars 21–26 | Same silhouette; distinct paint recipes needed. |
+| Additional sedans | all seven colors | Red/beige/orange/olive exact recolors; cyan/silver/dark need two source paint exceptions from red. Dark also has registration differences. |
+| Six singleton groups | police, ambulance, each garbage truck, each fire ladder pose | Equipment and cab-edge differences need explicit handling. |
+
+The two bus groups differ only at ten north-view mirror pixels; a common body
+with mirror variation is a fitting candidate. Garbage trucks differ at 34 west
+silhouette pixels after translation, with exact shapes in the other three views.
+Neither near-match bypasses the strict reuse checks.
+
+Suggested larger batch: one new additional sedan template and six siblings,
+plus the three queued compacts (ten models). A six-bus batch is the next useful
+new family, with mirror/paint/registration exceptions preserved. Each vehicle
+still requires its own source paint, exact retained bundle and 4×2 inspection.
+The audit does not advance any model/engine/review status.
+
 ## Work order
 
 - [x] Author the **ambulance**, with its own body, wheel positions, cab/box
@@ -72,8 +101,10 @@ Its own geometry/UV sources and 4×2 are retained; clearance and integration rem
   qualify per-asset registration instead of assuming the blue adapter fits all.
 - [ ] Complete **compact-3, compact-5 and compact-6** using the checked compact
   replay only when four-view shape/metadata and palette correspondence pass.
-- [ ] Inspect and group the **large cars, seven sedans and police car** into real
-  shape families. Fit a first template per family before transferring variants.
+- [x] Audit the full bank for exact four-view silhouettes and palette correspondence;
+  retain [family findings](../tactical/121-vehicle-source-families.md).
+- [ ] Fit the **three large-car shape families and additional sedan family**;
+  qualify internal geometry before transferring source-owned paint.
 - [ ] Fit a **bus** template, then its variants; preserve asymmetric door art.
 - [x] Author **police car** and **stowed fire truck** with their own geometry,
   source paint, wheel rigs and tagged lights; retain exact bundles and reviews.
@@ -112,8 +143,9 @@ models have been started. The later family order can change with owner prioritie
 
 ### Large car bank — 20 sets
 
-The source numbering spans 7–26; number 12 is named `sedan-12`. Family membership
-is still to be established from silhouettes and landmarks.
+The source numbering spans 7–26; number 12 is named `sedan-12`. The source audit
+establishes three exact silhouette groups above; internal geometry and fitted
+Blender templates still need qualification.
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |

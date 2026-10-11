@@ -8,6 +8,20 @@ remain explicit work. Normal builds never run this pipeline.
 
 ## Source and local output boundary
 
+Before choosing a batch, run the four-view source classifier:
+
+```text
+python scripts/authored-assets/audit_vehicle_families.py --out data/authored-assets/NEW_FAMILY_AUDIT
+python -m unittest discover -s scripts/authored-assets -p test_vehicle_families.py
+```
+
+It separates exact alpha/occupancy families, reversible and one-way global
+palette maps, physical registration and near matches. Source contact sheets,
+minimum paint-exception counts and input-pinned pair results stay in the fresh
+ignored output. See [121](../../docs/tactical/121-vehicle-source-families.md) for
+the 45-set findings. Identical silhouettes alone do not qualify window/fender
+geometry, hidden surfaces or authored atlas color roles.
+
 Git retains the exact final blue/green/red compact and ambulance model bundles in
 [`art-source/vehicle-models/`](../../art-source/vehicle-models/README.md), with
 self-contained GLBs in `public/assets/models/vehicles/`. Blender scenes, cleaned
