@@ -32,11 +32,13 @@ Outputs include:
 - `wheel-roll.gif` and fixed-body motion evidence.
 
 The runner is an offline replay, not an automatic approval or publisher. Retain
-local results in new ignored revision folders and preserve their hashes outside
-Git. Production review registration requires an explicitly retained review bundle;
+exploratory results in new ignored revision folders and preserve their hashes
+outside Git. Production review registration requires a retained review bundle;
 normal Workshop and game builds do not depend on these exploratory files.
-When the owner requests a final deliverable, retain its exact GLB, packed Blender
-source, texture and required dependency records in the tracked bundle directories.
+Every finished variant includes its exact GLB, packed Blender source, texture and
+required dependencies in the tracked bundle directories by default. Follow the
+next-vehicle commit checklist in `art-source/vehicle-models/README.md` from the
+repository root; retaining only scripts does not deliver the finished vehicle.
 
 For actual GLB wheel verification, `verify_wheel_rig.mjs` exercises ground contact,
 hierarchy, forward/reverse roll, independent motion and front steering in full

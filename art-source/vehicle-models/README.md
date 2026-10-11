@@ -3,6 +3,9 @@
 These are the exact final assets from the Blender authoring work. They are tracked
 deliverables; older intermediate models and scratch galleries remain ignored.
 
+The [vehicle porting checklist](../../docs/topics/vehicle-model-porting.md) tracks
+all 45 source sets, their model/engine status and the next authoring work.
+
 | Vehicle | Blender/texture/source bundle | Self-contained runtime GLB |
 | --- | --- | --- |
 | Blue `compact-1` | [v7](compact-1/v7/) | [compact-1-v7.glb](../../public/assets/models/vehicles/compact-1-v7.glb) |
@@ -45,6 +48,41 @@ for consuming the exact finished assets; normal builds do not run Blender. Write
 new work into fresh ignored workspaces. Do not overwrite these final revisions.
 The older construction examples in the authoring workflow document historical
 intermediate scenes; they are not required to consume or replay these bundles.
+
+## Next vehicle: what to commit and why
+
+Every finished vehicle includes its exact final asset bundle by default. Do not
+wait for a separate request to retain it. Generated final deliverables belong in
+Git because the game and the next author need them; exploratory renders, demos,
+intermediate exports and caches stay ignored. A deliberately throwaway experiment
+can remain local when the owner requests that scope.
+
+| Commit | Location | Why |
+| --- | --- | --- |
+| Exact final self-contained GLB | `public/assets/models/vehicles/<vehicle>-<revision>.glb` | A fresh checkout has the finished runtime asset without Blender or regeneration. |
+| Packed final `.blend` and exact cleaned texture atlas | `art-source/vehicle-models/<vehicle>/<revision>/` | Preserve editable geometry, UVs, materials and wheel hierarchy; scripts and a GLB alone cannot recover the finished authoring state. |
+| Frozen source crops and portable recipe | The same source bundle | Preserve the reference pixels, camera matching and paint/UV decisions needed to inspect or repeat the result. |
+| Rig/window records, projection draft and uncertainty records, palette or cleanup configuration used for this vehicle | The same source bundle, as applicable | Preserve animation conventions and distinguish observed paint from authored or inherited surfaces. Retain the inputs needed to revise the final result. |
+| Every required template, source texture, configuration and reusable helper | Tracked source/script directories; reference shared files rather than duplicating them | The recipe must not rely on an ignored scene, scratch gallery or a file available only on the author's machine. |
+| Catalog entry with exact hashes, provenance, source credits and current documentation | `catalog.json`, asset credits and the owning topic | Identify the exact delivered revision, verify its dependencies and explain its readiness and remaining work. |
+
+Before calling the vehicle delivered:
+
+1. Copy the final checkpoint bytes into a new tracked revision. Do not re-export
+   merely to commit, or overwrite an earlier retained revision.
+2. Make recipe paths repository-relative and account for every dependency in the
+   catalog. Preserve byte hashes across checkout using the existing Git attributes
+   and formatter exclusions; extend those guards for new pinned locations.
+3. Verify from a tracked-file-only checkout: hashes and recipe inputs resolve,
+   Blender textures are packed, GLB textures are embedded, and the exported wheel
+   hierarchy, axes and ground contacts work. Record native sprite/render comparisons
+   and novel-angle checks. Adapt verification expectations for a new vehicle family.
+4. Confirm normal builds consume the committed GLB without running Blender or
+   restoring scratch files. Keep inspection sheets, turntables and workspaces local
+   unless an exact review snapshot is required by the review contract.
+5. Update the catalog, owning topic and any changed authoring instructions. Follow
+   project validation and preserve the distinction between retaining a finished
+   diagnostic asset and obtaining production review approval.
 
 Original vehicle art is Modern Exteriors by LimeZu. See
 [asset credits](../../public/assets/SOURCES.md), the

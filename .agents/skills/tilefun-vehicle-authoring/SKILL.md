@@ -9,6 +9,10 @@ Work in the Tilefun repository root (contains `src/traffic/vehicles-v1.json` and
 review contracts. Use the repository's deterministic Blender tools; this task
 needs coherent geometry and reusable UVs, rather than a generated bitmap.
 
+Read `docs/topics/vehicle-model-porting.md` before choosing the next vehicle.
+It owns the full queue and each model's status; update its row, next action,
+evidence and summary counts at every authoring/delivery/integration checkpoint.
+
 ## Choose the route from evidence
 
 Identify the requested sprite in the vehicle bank before choosing a template.
@@ -72,8 +76,13 @@ with cleaned atlas and its own unused draft, atlas, GLB and recipe/provenance.
 Use fresh offline workspaces and retained revision directories. Preserve earlier
 candidate bytes. Keep exploratory outputs in the ignored vehicle folders or
 `data/authored-assets/`; normal builds and Workshop must not require them.
-Retain explicitly requested final models and required source dependencies in
-the tracked bundle directories, with exact hashes and portable recipes.
+For every finished vehicle, retain the exact final GLB, packed Blender/texture
+source bundle and all replay dependencies in tracked directories by default.
+Before delivery, read the next-vehicle commit checklist in
+`art-source/vehicle-models/README.md` from the repository root. It owns what to
+commit, why, byte preservation and tracked-file-only verification. Scripts alone
+are not a substitute for the finished assets; an explicitly throwaway experiment
+can remain local.
 When preparing a production review slice, register the new exact candidate/batch
 using retained, available review assets; chat feedback is not a formal promotion.
 Follow the project's validation and

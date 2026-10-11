@@ -17,6 +17,10 @@ owns engine interfaces and GPU integration; [performance](performance.md) owns
 measurements. [Research and investigations](../research/sprite-to-3d-and-renderer-options.md)
 records the experiments, external options and their limits.
 
+[Vehicle model porting](vehicle-model-porting.md) owns the running list of all
+45 vehicle sets, model/engine status and next actions. Update it at each vehicle
+checkpoint; the ambulance is the next new authoring target.
+
 ## Investigation evidence storage
 
 The evidence directories for investigations 070–075 under `docs/tactical/` are
@@ -35,6 +39,12 @@ records in [`art-source/vehicle-models/`](../../art-source/vehicle-models/README
 The catalog pins original capture hashes; the default compact replay now uses
 only tracked dependencies. A fresh clone does not need the ignored template or
 to reconstruct the final geometry from the initial pilot.
+
+This is the default delivery contract for subsequent finished vehicles: commit
+their exact final export, editable source bundle and required dependencies.
+The [next-vehicle checklist](../../art-source/vehicle-models/README.md#next-vehicle-what-to-commit-and-why)
+owns the file list, reasons and tracked-file-only verification; scripts alone do
+not deliver a finished model.
 
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those
