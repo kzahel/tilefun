@@ -1,0 +1,136 @@
+import { readFileSync } from "node:fs";
+// @ts-expect-error pngjs has no bundled declarations
+import { PNG } from "pngjs";
+import { expect, it } from "vitest";
+import { Direction, type Entity } from "../entities/Entity.js";
+import { createPlayer } from "../entities/Player.js";
+import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { Camera } from "./Camera.js";
+import { collectScene } from "./collectScene.js";
+import { SceneFrame } from "./SceneFrame.js";
+
+const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
+const terrain = { collectElevationItems: () => [] };
+
+function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, height = 0) {
+  const camera = new Camera();
+  camera.zoom = zoom;
+  camera.setViewport(400 * 3 * zoom, 300 * 3 * zoom);
+  camera.snapTo(200, 150);
+  return collectScene(
+    [entity],
+    [],
+    { ...world, getHeightAt: () => height },
+    camera,
+    camera.getVisibleChunkRange(),
+    alpha,
+    terrain,
+    [],
+    false,
+    undefined,
+    undefined,
+    frame,
+  );
+}
+
+it("collects an incoming bus while its center is above the screen and its front is visible", () => {
+  const bus = createVehicle("bus-2", 200, -40, Direction.Down);
+  // Actual committed artwork has an opaque front pixel five world pixels inside
+  // the viewport at this position, well before the old center-based cutoff.
+  const sheet: { width: number; data: Uint8Array } = PNG.sync.read(
+    readFileSync("public/assets/vehicles/bus-2-v1.png"),
+  );
+  const frontRow = 189;
+  expect(
+    Array.from(
+      { length: sheet.width },
+      (_, x) => sheet.data[(frontRow * sheet.width + x) * 4 + 3],
+    ).some((alpha) => alpha !== undefined && alpha > 0),
+  ).toBe(true);
+  expect(collect(bus)).toHaveLength(1);
+});
+
+it.each(VEHICLE_MODELS)("keeps %s sprite bounds at all four screen edges", (model) => {
+  for (const direction of [Direction.Down, Direction.Up, Direction.Left, Direction.Right]) {
+    const car = createVehicle(model, 200, 150, direction);
+    for (const zoom of [0.2, 1 / 3, 1]) {
+      for (const [wx, wy] of [
+        [-95, 150],
+        [495, 150],
+        [200, -79],
+        [200, 443],
+      ] as const) {
+        car.position = { wx, wy };
+        expect(collect(car, 1, zoom)).toHaveLength(1);
+      }
+      // Once the entire sprite and the existing effects margin leave the view,
+      // the collector must still avoid submitting it.
+      for (const [wx, wy] of [
+        [-113, 150],
+        [513, 150],
+        [200, -120],
+        [200, 461],
+      ] as const) {
+        car.position = { wx, wy };
+        expect(collect(car, 1, zoom)).toHaveLength(0);
+      }
+    }
+  }
+});
+
+it("culls at the interpolated position while a vehicle crosses the top edge", () => {
+  const bus = createVehicle("bus-2", 200, -200);
+  bus.prevPosition = { wx: 200, wy: -40 };
+  const before = structuredClone(bus);
+  expect(collect(bus, 0)).toHaveLength(1);
+  expect(collect(bus, 0.25)).toHaveLength(1);
+  expect(collect(bus, 1)).toHaveLength(0);
+  expect(bus).toEqual(before);
+});
+
+it("culls at the interpolated horizontal position", () => {
+  const bus = createVehicle("bus-2", -200, 150);
+  bus.prevPosition = { wx: -95, wy: 150 };
+  expect(collect(bus, 0)).toHaveLength(1);
+  expect(collect(bus, 1)).toHaveLength(0);
+});
+
+it("uses displayed height while a vehicle crosses the top edge", () => {
+  const bus = createVehicle("bus-2", 200, -40);
+  bus.prevWz = 0;
+  bus.wz = 200;
+  expect(collect(bus, 0)).toHaveLength(1);
+  expect(collect(bus, 1)).toHaveLength(0);
+});
+
+it("handles negative sprite offsets near the bottom edge", () => {
+  const player = createPlayer(200, 400);
+  if (!player.sprite) throw new Error("Missing player sprite");
+  player.sprite.drawOffsetY = -100;
+  expect(collect(player)).toHaveLength(1);
+  player.position.wy = 449;
+  expect(collect(player)).toHaveLength(0);
+});
+
+it("uses terrain and interpolated jump height for legacy entities", () => {
+  const player = createPlayer(200, -40);
+  delete player.wz;
+  player.prevJumpZ = 0;
+  player.jumpZ = 200;
+  if (!player.sprite) throw new Error("Missing player sprite");
+  player.sprite.drawOffsetY = 80;
+  expect(collect(player, 0)).toHaveLength(1);
+  expect(collect(player, 1)).toHaveLength(0);
+  player.position.wy = 350;
+  player.jumpZ = 0;
+  player.sprite.drawOffsetY = 0;
+  expect(collect(player)).toHaveLength(0);
+  expect(collect(player, 1, 1 / 3, undefined, 10)).toHaveLength(1);
+});
+
+it("retains conservative mesh bounds even when the fallback sprite is outside the view", () => {
+  const car = createVehicle("compact-1", 200, -100);
+  expect(collect(car, 1, 1 / 3, new SceneFrame())).toHaveLength(1);
+  car.position.wy = -120;
+  expect(collect(car, 1, 1 / 3, new SceneFrame())).toHaveLength(0);
+});

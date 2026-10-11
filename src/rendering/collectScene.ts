@@ -98,18 +98,6 @@ export function collectScene(
   // --- Entities ---
   for (const e of entities) {
     if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
-    const effectiveWy = e.position.wy - (e.wz ?? 0);
-    const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
-    const meshRadius = e.type.startsWith("train-curve-proof-v1") ? 96 : meshAsset ? 64 : 0;
-    const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
-    if (
-      e.position.wx + halfW < vpTL.wx - M ||
-      e.position.wx - halfW > vpBR.wx + M ||
-      effectiveWy + meshRadius * Math.SQRT2 < vpTL.wy - M ||
-      effectiveWy - Math.max(e.sprite.spriteHeight, meshRadius * Math.SQRT2) > vpBR.wy + M
-    )
-      continue;
-
     const pos = interpolatePosition(e.position, e.prevPosition, alpha);
 
     // Compute Z offset in world pixels
@@ -126,6 +114,28 @@ export function collectScene(
         e.prevJumpZ !== undefined ? e.prevJumpZ + (curJumpZ - e.prevJumpZ) * alpha : curJumpZ;
       zOffset = elevOffset + lerpedJumpZ;
     }
+
+    // Match the displayed sprite rectangle, including vehicles whose artwork
+    // extends below their ground-center anchor. Preserve conservative mesh
+    // bounds as well, so either the mesh or its sprite fallback can enter view.
+    const effectiveWy = pos.wy - zOffset;
+    const spriteBottom = effectiveWy + (e.sprite.drawOffsetY ?? 0);
+    const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
+    const meshRadius = e.type.startsWith("train-curve-proof-v1") ? 96 : meshAsset ? 64 : 0;
+    const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
+    const top = meshRadius
+      ? Math.min(spriteBottom - e.sprite.spriteHeight, effectiveWy - meshRadius * Math.SQRT2)
+      : spriteBottom - e.sprite.spriteHeight;
+    const bottom = meshRadius
+      ? Math.max(spriteBottom, effectiveWy + meshRadius * Math.SQRT2)
+      : spriteBottom;
+    if (
+      pos.wx + halfW < vpTL.wx - M ||
+      pos.wx - halfW > vpBR.wx + M ||
+      bottom < vpTL.wy - M ||
+      top > vpBR.wy + M
+    )
+      continue;
 
     // Shadow parameters
     const hasShadow = !e.flashHidden && !e.noShadow;

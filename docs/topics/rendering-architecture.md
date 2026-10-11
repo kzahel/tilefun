@@ -86,6 +86,17 @@ lab wrapper, while the input/UI canvas stays in document flow. See
 - `collectScene`, `collectSceneOrder`, grass frames and prop-depth metadata own
   outdoor interpolation, visibility and shadow/body ordering. Ground shadows
   precede bodies; elevated shadows immediately precede their associated body.
+- Entity viewport culling uses the displayed XY and height, including sprite
+  draw offsets, and unions that rectangle with conservative optional mesh bounds.
+  This keeps ground-centered vehicle fronts visible before their centers enter
+  the screen. Game and embedded labs share this collector on Canvas and GPU;
+  `collectScene.test.ts` covers the incoming bus's committed artwork, all 45
+  vehicle models at all four edges and three zooms, interpolation, legacy height
+  fallback and mesh bounds. Validation on 2026-10-11: typechecks, all 2,480 unit
+  tests, lint (existing warnings), inventories and production build pass. The
+  full Chromium run has 545 passes and two tap-movement failures (GPU water tap
+  and profile reload destination); both pass twice on a one-worker isolated
+  rerun, alongside the Canvas water-tap counterpart (six passes).
 - Ordinary sprite rectangles snap both projected edges, then derive their width
   and height from those endpoints. Rounding only the origin while retaining a
   fractional scaled size exposed one-pixel gaps/overlaps between forest repeat
