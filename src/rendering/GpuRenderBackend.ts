@@ -99,6 +99,8 @@ export class GpuRenderBackend extends RasterRenderBackend {
         meshParts: this.meshes.car.value?.meshCount ?? 0,
         ambulanceState: this.meshes.ambulance.state,
         ambulanceParts: this.meshes.ambulance.value?.meshCount ?? 0,
+        fireTruckState: this.meshes.fireTruck.state,
+        fireTruckParts: this.meshes.fireTruck.value?.meshCount ?? 0,
         targetBytes: this.meshes.targetBytes,
       },
     };

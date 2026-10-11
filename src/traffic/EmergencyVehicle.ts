@@ -2,7 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 
 /** Bit 0 enables lights/sound; bits 1–2 select quiet, two-tone or wail. */
 export function isEmergencyVehicle(entity: Pick<Entity, "type">): boolean {
-  return entity.type === "vehicle-v1:ambulance";
+  return entity.type === "vehicle-v1:ambulance" || entity.type === "vehicle-v1:fire-truck-ladder-1";
 }
 export function emergencyEnabled(state = 2): boolean {
   return (state & 1) !== 0;

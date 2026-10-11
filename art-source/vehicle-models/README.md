@@ -45,7 +45,8 @@ Fire v2 has 49 meshes/1,280 triangles, measured wheel-center landmarks, floor
 openings and cleaned wheel-local UVs. Its rig records the two-pixel placement
 tolerance; actual GLB verification checks center fit and floor/tire intersections,
 including negative regression probes. Cameras, fixed roof/details/ladder/lights
-are preserved. Steering clearance remains pending; see tactical 118.
+are preserved. [120](../../docs/tactical/120-firetruck-gameplay.md) connects v2
+to shared game/lab driving, lights and sound; steering clearance remains pending.
 Green garbage truck v1 has 52 meshes/1,476 triangles, six wheels on three axles,
 a separate `Loader_Hinge` and one amber warning lens. Its measured cap centers,
 floor openings, cleaned wheel-local UVs and roof/loader paint ownership are

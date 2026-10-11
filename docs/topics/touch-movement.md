@@ -49,7 +49,7 @@ keeps labs using their existing controls.
 
 [117](../tactical/117-ambulance-driving-controls.md) keeps the action triangle visible
 while inside a vehicle, including desktop mouse use. Fast uses the existing Sprint
-input; ambulance Siren and Style use Throw and Jump button presses once per hold.
+input; ambulance/firetruck Siren and Style use Throw and Jump button presses once per hold.
 On foot the original A/B/R behavior remains. Button touches stay claimed so they do
 not steer the joystick, tap destination or held world contact. Seat changes,
 menus and focus loss release held buttons; driving suppresses jumping/ball throwing.

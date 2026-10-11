@@ -6,7 +6,7 @@ import { VehicleEmergencyLights } from "./VehicleEmergencyLights.js";
 /** Retained vehicle resources, shared by game and labs. The outer group owns the
  * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
  * Ground origin is authored. A fixed lateral registration fits its width to
- * the compact game view; ambulance keeps its authored width. Tire radius, roof
+ * the compact game view; emergency vehicles keep their authored width. Tire radius, roof
  * height and camera projection remain unchanged.
  */
 export class CarMeshAsset {

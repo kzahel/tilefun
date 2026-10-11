@@ -4,14 +4,15 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
 import { isDrivable } from "../traffic/Driving.js";
+import { isEmergencyVehicle } from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
-import { entityHeading, meshAssetFor } from "./EntityMeshPose.js";
+import { entityFacingHeading, entityHeading, meshAssetFor } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
-import { AMBULANCE_MESH, yawOrientation } from "./MeshPresentation.js";
+import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
@@ -123,11 +124,9 @@ export function collectScene(
     const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
     const meshRadius = e.type.startsWith("train-curve-proof-v1")
       ? 96
-      : meshAsset === AMBULANCE_MESH
-        ? 112
-        : meshAsset
-          ? 64
-          : 0;
+      : meshAsset
+        ? vehicleMeshRadius(meshAsset)
+        : 0;
     const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     const top = meshRadius
       ? Math.min(spriteBottom - e.sprite.spriteHeight, effectiveWy - meshRadius * Math.SQRT2)
@@ -174,8 +173,11 @@ export function collectScene(
         : undefined);
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
-      ...(e.type === "vehicle-v1:ambulance" && (e.emergencyState ?? 2) & 1
+      ...(isEmergencyVehicle(e) && (e.emergencyState ?? 2) & 1
         ? {
+            emergencyHeight: e.type === "vehicle-v1:fire-truck-ladder-1" ? 28 : 40,
+            emergencyForward: e.type === "vehicle-v1:fire-truck-ladder-1" ? 64 : 0,
+            emergencyHeading: entityFacingHeading(e),
             emergencyFlash:
               poseTime % 1 < 0.12 || (poseTime % 1 >= 0.2 && poseTime % 1 < 0.32)
                 ? 1

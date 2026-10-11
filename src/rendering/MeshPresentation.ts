@@ -9,8 +9,13 @@ export interface MeshInstance {
   readonly emergencyEnabled?: boolean;
   readonly presentationTime?: number;
 }
+export const FIRE_TRUCK_MESH = "fire-truck-ladder-1-authored-v2";
 export const AMBULANCE_MESH = "ambulance-authored-v2";
 export const COMPACT_CAR_MESH = "compact-1-authored-v7";
+/** Shared conservative sphere for culling and the isolated body target. */
+export function vehicleMeshRadius(assetId: string): number {
+  return assetId === FIRE_TRUCK_MESH ? 144 : assetId === AMBULANCE_MESH ? 112 : 64;
+}
 export function yawOrientation(yaw: number): MeshInstance["orientation"] {
   return [0, 0, Math.sin(yaw / 2), Math.cos(yaw / 2)];
 }

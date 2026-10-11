@@ -554,8 +554,8 @@ supersedes 109's authored directional lens: body vertices now share the fixed
 world projection, with static lateral asset registration, immediate displayed
 motion heading and rest hold. All three use the same axis normalization, wheel
 roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
-`?renderer=gpu&meshes&allcars3d` also swaps every road vehicle's appearance in the
-game and Traffic lab; original types/colliders stay unchanged. Traffic reset
+`?renderer=gpu&meshes&allcars3d` swaps other road vehicles to the blue appearance in the
+game and Traffic lab; original types/colliders stay unchanged. Integrated ambulance/firetruck types retain their own assets. Traffic reset
 retains the view option. Traffic's Worker, input, collision and roof support remain
 native. This changes optional presentation only; the independent car-projection reference lab remains
 on its original source geometry. Steering clearance and rotated physics are later
@@ -569,3 +569,8 @@ Traffic playground's vehicle selector and emergency commands operate through
 ScenarioSession; held Fast/Shift uses the same sprint input and driven motion.
 SceneFrame receives host presentation time for cosmetic wheel/lens effects;
 paused labs hold the light phase. Game audio remains browser composition in AudioManager.
+
+[120](../tactical/120-firetruck-gameplay.md) adds stowed firetruck v2 to the same
+mesh resolver/resource lifecycle and emergency-state authority. Traffic selects
+its own GLB and uses ordinary held speed and siren controls; ladder motion remains
+outside this slice. Canvas/GPU sprites keep their complete fallback.

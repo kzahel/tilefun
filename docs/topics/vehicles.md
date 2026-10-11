@@ -22,11 +22,11 @@ All 180 vehicle review identities remain unchanged. The full browser run passes
 without the pre-existing touch-control edits. Vehicle views, grades and roof
 support checks pass; no unrelated touch changes are included in this grass fix.
 
-## Ambulance and driving actions
+## Emergency vehicles and driving actions
 
 [117](../tactical/117-ambulance-driving-controls.md) integrates the retained ambulance v2
 in the shared game/lab GPU mesh path. Driving keeps action buttons visible on desktop
-and touch: hold **Fast / Shift** for 1.6× car speed (1.5× train speed). Ambulances also
+and touch: hold **Fast / Shift** for 1.6× car speed (1.5× train speed). Ambulances and stowed firetrucks also
 have **Siren / B** to toggle lights and sound, and **Style / Space** to cycle EU-style
 two-tone, US-style wail and lights-only. Style selection survives switching off.
 These are stylized synthesized sounds; the local Kenney Impact Sounds pack has no siren.
@@ -37,7 +37,10 @@ it with traffic; exiting leaves the chosen lights/sound state on the vehicle.
 Tagged GLB lenses receive absolute enabled/time state on every draw; Canvas/GPU
 sprite fallback adds a small alternating blue roof-beacon overlay without changing
 approved sprite bytes. No geometry, damage or traffic priority rule changes.
-Traffic playground offers Blue car/Ambulance and driver action controls.
+[120](../tactical/120-firetruck-gameplay.md) connects corrected firetruck v2 through
+its own GPU resource, bounds, wheel rig and tagged blue lenses. Traffic playground
+offers Blue car/Ambulance/Firetruck and driver action controls. The ladder remains
+stowed; raised-ladder art continues using its own sprite and is excluded from traffic.
 Exact v2 art review and steering-clearance qualification remain open.
 
 ## Player driving

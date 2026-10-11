@@ -37,7 +37,7 @@ Owner login protects feedback. See [Workshop usage, setup and API](docs/tilefun-
 ## Features
 
 The game defaults to **GPU + 3D car**: the existing fixed game view rendered with
-WebGL2, with the authored blue compact car and ambulance, with sprite fallbacks for other vehicles.
+WebGL2, with the authored blue compact car, ambulance and stowed firetruck, with sprite fallbacks for other vehicles.
 Choose **☰ → Debug → Renderer** (or F3) to switch to Canvas or GPU sprites.
 `?renderer=canvas` selects Canvas explicitly; unsupported WebGL2 also falls back
 to Canvas. This does not enable the separate 3D collision view or spatial VR.
@@ -88,9 +88,9 @@ to travel and lift to stop; cars steer toward the held finger. **Get out · E**
 stops and finds clear ground.
 Off-road cars stay parked and saved; cars on suitable roads resume traffic.
 See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md). Driving keeps on-screen action buttons visible even on desktop:
-hold **Fast / Shift** to go faster. In an ambulance, **Siren / B** toggles flashing
+hold **Fast / Shift** to go faster. In an ambulance or firetruck, **Siren / B** toggles flashing
 lights and sound; **Style / Space** cycles EU-style two-tone, US-style wail and
-lights-only. Try the Ambulance selector in the Traffic playground.
+lights-only. Try the Ambulance or Firetruck selector in the Traffic playground.
 
 
 Waiting for a train? Go beside or onto a station bench in Play mode and tap

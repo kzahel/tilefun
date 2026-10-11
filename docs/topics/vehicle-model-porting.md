@@ -1,9 +1,9 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 7 models retained, 2 integrated
-in game/lab mesh mode. Blue and ambulance v2 use their own assets in main-game GPU mesh mode;
-police, stowed fire truck and green garbage truck await owner inspection.
+Status: 45 sprite sets inventoried; 7 models retained, 3 integrated
+in game/lab mesh mode. Blue, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
+Exact model art review remains open.
 Updated: 2026-10-11.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **7/45 retained models, 38/45 queued; 2/45 own-model
+Current progress: **7/45 retained models, 38/45 queued; 3/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -42,7 +42,8 @@ Evidence for existing models: [bundle catalog](../../art-source/vehicle-models/c
 and [106](../tactical/106-retained-vehicle-model-bundles.md). Blue's
 integration is recorded in [108](../tactical/108-authored-blue-car-gameplay.md)
 and [112](../tactical/112-coherent-car-presentation-and-test-override.md).
-The main game now defaults to GPU plus the blue car; other vehicle types retain
+The main game defaults to GPU with the blue car, ambulance v2 ([117](../tactical/117-ambulance-driving-controls.md))
+and firetruck v2 ([120](../tactical/120-firetruck-gameplay.md)); other vehicle types retain
 sprite fallbacks, per [rendering architecture](rendering-architecture.md).
 Ambulance v1's authoring, exact 4×2 and verification are recorded in
 [115](../tactical/115-authored-ambulance.md).
@@ -106,7 +107,7 @@ models have been started. The later family order can change with owner prioritie
 | `police-car` | [Retained v1](../../art-source/vehicle-models/police-car/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/police-car-v1/comparison.png), physical lamp-order contradiction and wheel fit; integrate its own GLB and light state. |
 | `garbage-truck-green` | [Retained v1](../../art-source/vehicle-models/garbage-truck-green/v1/) — owner inspection pending in [119](../tactical/119-six-wheel-garbage-truck.md) | Pending | Review [4×2](../../public/assets/models/vehicles/review/garbage-truck-green-v1/comparison.png), wheel scale and roof projection; qualify loader/steering clearance and integrate its own GLB. |
 | `garbage-truck-orange` | Queued | Pending | Check green-template eligibility; preserve its own paint and amber beacon lens. |
-| `fire-truck-ladder-1` (stowed) | [Retained v2](../../art-source/vehicle-models/fire-truck-ladder-1/v2/) — wheel correction in [118](../tactical/118-fire-truck-wheel-alignment.md); v1 retained | Pending | Review corrected [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/comparison.png); qualify ladder/steering clearance and remaining roof paint. |
+| `fire-truck-ladder-1` (stowed) | [Retained v2](../../art-source/vehicle-models/fire-truck-ladder-1/v2/) — wheel correction in [118](../tactical/118-fire-truck-wheel-alignment.md); v1 retained | Integrated in default GPU mesh mode | Review corrected [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/comparison.png); playtest [120](../tactical/120-firetruck-gameplay.md); qualify ladder/steering clearance and remaining roof paint. |
 | `fire-truck-ladder-2` (raised) | Queued | Pending | Fit raised equipment pose; qualify clearance before driving use. |
 
 ### Large car bank — 20 sets

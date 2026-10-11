@@ -66,10 +66,10 @@ it.each(VEHICLE_MODELS)("keeps %s sprite bounds at all four screen edges", (mode
       // Once the entire sprite and the existing effects margin leave the view,
       // the collector must still avoid submitting it.
       for (const [wx, wy] of [
-        [model === "ambulance" ? -129 : -113, 150],
-        [model === "ambulance" ? 529 : 513, 150],
-        [200, model === "ambulance" ? -177 : -120],
-        [200, model === "ambulance" ? 477 : 461],
+        [model === "fire-truck-ladder-1" ? -161 : model === "ambulance" ? -129 : -113, 150],
+        [model === "fire-truck-ladder-1" ? 561 : model === "ambulance" ? 529 : 513, 150],
+        [200, model === "fire-truck-ladder-1" ? -221 : model === "ambulance" ? -177 : -120],
+        [200, model === "fire-truck-ladder-1" ? 521 : model === "ambulance" ? 477 : 461],
       ] as const) {
         car.position = { wx, wy };
         expect(collect(car, 1, zoom)).toHaveLength(0);

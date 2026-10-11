@@ -432,6 +432,10 @@ independent wheel travel and native silhouette ink. Every draw sets lens state f
 replicated emergency flags and host presentation time; Canvas/GPU sprite fallback
 adds alternating blue roof beacons. Authority, persistence and audio remain outside
 the renderer. The allcars3d override preserves the ambulance's own asset.
+[120](../tactical/120-firetruck-gameplay.md) adds stowed firetruck v2 through a separate
+resource slot and a shared 144px conservative sphere for culling/body targets. It
+retains authored width, independent wheel roll, stowed equipment and absolute
+state/time for its two tagged lenses. The test override preserves its own asset too.
 Exact-revision art review and steering qualification remain open; the tagging
 contract originated in [116](../tactical/116-ambulance-beacons-and-light-tags.md).
 

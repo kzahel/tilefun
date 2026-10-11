@@ -4,7 +4,12 @@ import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
-import { AMBULANCE_MESH, COMPACT_CAR_MESH, resolveBody } from "./MeshPresentation.js";
+import {
+  AMBULANCE_MESH,
+  COMPACT_CAR_MESH,
+  FIRE_TRUCK_MESH,
+  resolveBody,
+} from "./MeshPresentation.js";
 import { projectWorld } from "./Projection.js";
 import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
@@ -13,6 +18,7 @@ import type { SpriteItem } from "./SceneItem.js";
 export class GpuMeshBodies {
   readonly car = new ResourceSlot<CarMeshAsset>();
   readonly ambulance = new ResourceSlot<CarMeshAsset>();
+  readonly fireTruck = new ResourceSlot<CarMeshAsset>();
   readonly ready = new Set<string>();
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
@@ -32,15 +38,25 @@ export class GpuMeshBodies {
     if (value && this.car.state === "empty") void this.car.load(() => loadCarMesh());
     if (value && this.ambulance.state === "empty")
       void this.ambulance.load(() => loadCarMesh("assets/models/vehicles/ambulance-v2.glb", 1));
+    if (value && this.fireTruck.state === "empty")
+      void this.fireTruck.load(() =>
+        loadCarMesh("assets/models/vehicles/fire-truck-ladder-1-v2.glb", 1),
+      );
   }
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
     this.ready.clear();
     if (this.enabled && this.car.state === "ready") this.ready.add(COMPACT_CAR_MESH);
     if (this.enabled && this.ambulance.state === "ready") this.ready.add(AMBULANCE_MESH);
+    if (this.enabled && this.fireTruck.state === "ready") this.ready.add(FIRE_TRUCK_MESH);
   }
   draw(camera: Camera, item: SpriteItem): boolean {
-    const asset = item.mesh?.assetId === AMBULANCE_MESH ? this.ambulance.value : this.car.value;
+    const asset =
+      item.mesh?.assetId === FIRE_TRUCK_MESH
+        ? this.fireTruck.value
+        : item.mesh?.assetId === AMBULANCE_MESH
+          ? this.ambulance.value
+          : this.car.value;
     if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return false;
     const { surface } = this,
       renderer = surface.renderer;
@@ -97,6 +113,7 @@ export class GpuMeshBodies {
     this.ready.clear();
     this.car.dispose();
     this.ambulance.dispose();
+    this.fireTruck.dispose();
     this.outline.dispose();
     this.target.dispose();
   }

@@ -122,23 +122,32 @@ it("overrides road vehicle appearance per view without replacing types, collisio
   expect(override.evaluate(green, 1.2)).not.toBe(first);
 });
 
-it("uses the ambulance's own mesh, conservative bounds and absolute enabled/time state", () => {
-  const car = createVehicle("ambulance", 0, 0);
-  const poses = new EntityMeshPose(true);
-  const original = structuredClone(car);
-  const off = poses.evaluate(car, 0.1);
-  expect(off).toMatchObject({
-    assetId: "ambulance-authored-v2",
-    radius: 112,
-    emergencyEnabled: false,
-    presentationTime: 0.1,
-  });
-  expect(car).toEqual(original);
-  car.emergencyState = 3;
-  expect(poses.evaluate(car, 0.2)).toMatchObject({ emergencyEnabled: true, presentationTime: 0.2 });
-  car.emergencyState = 2;
-  expect(poses.evaluate(car, 0.5)).toMatchObject({
-    emergencyEnabled: false,
-    presentationTime: 0.5,
-  });
-});
+it.each([
+  ["ambulance", "ambulance-authored-v2", 112],
+  ["fire-truck-ladder-1", "fire-truck-ladder-1-authored-v2", 144],
+] as const)(
+  "uses %s own mesh, conservative bounds and absolute enabled/time state",
+  (model, assetId, radius) => {
+    const car = createVehicle(model, 0, 0);
+    const poses = new EntityMeshPose(true);
+    const original = structuredClone(car);
+    const off = poses.evaluate(car, 0.1);
+    expect(off).toMatchObject({
+      assetId,
+      radius,
+      emergencyEnabled: false,
+      presentationTime: 0.1,
+    });
+    expect(car).toEqual(original);
+    car.emergencyState = 3;
+    expect(poses.evaluate(car, 0.2)).toMatchObject({
+      emergencyEnabled: true,
+      presentationTime: 0.2,
+    });
+    car.emergencyState = 2;
+    expect(poses.evaluate(car, 0.5)).toMatchObject({
+      emergencyEnabled: false,
+      presentationTime: 0.5,
+    });
+  },
+);

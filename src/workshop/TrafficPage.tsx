@@ -130,6 +130,7 @@ export default function TrafficPage() {
           >
             <option value="compact-1">Blue car</option>
             <option value="ambulance">Ambulance</option>
+            <option value="fire-truck-ladder-1">Firetruck</option>
           </select>
         </label>
         {driving && (
@@ -137,7 +138,7 @@ export default function TrafficPage() {
             Fast
           </button>
         )}
-        {driving && model === "ambulance" && (
+        {driving && (model === "ambulance" || model === "fire-truck-ladder-1") && (
           <>
             <button
               type="button"

@@ -17,7 +17,7 @@ import { RoadType } from "../road/RoadType.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
-import { validEmergencyState } from "./EmergencyVehicle.js";
+import { isEmergencyVehicle, validEmergencyState } from "./EmergencyVehicle.js";
 import {
   type Lane,
   type LaneGraph,
@@ -677,7 +677,8 @@ export class TrafficSystem {
         throw new Error("Invalid saved traffic record.");
       if (
         r.emergencyState !== undefined &&
-        (!validEmergencyState(r.emergencyState) || r.model !== "ambulance")
+        (!validEmergencyState(r.emergencyState) ||
+          !isEmergencyVehicle({ type: `vehicle-v1:${r.model}` }))
       )
         throw new Error("Invalid saved emergency state.");
       // Resolve the same local graph used when choosing the saved successor.

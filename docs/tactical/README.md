@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [120 Firetruck gameplay](120-firetruck-gameplay.md) | Own corrected v2 GLB in shared game/lab mesh mode; persistent siren/light state, driving buttons and boost |
 | [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |
 | [118 Fire truck wheel alignment](118-fire-truck-wheel-alignment.md) | Retained v2 with fitted axles, floor openings and wheel-local UVs; actual GLB placement/intersection regression checks; owner inspection pending |
 | [117 Police and fire truck models](117-police-and-fire-truck-models.md) | Retained police/stowed fire GLBs and exact 4×2/flash reviews; separate wheel rigs and ladder hinge; integration/clearance pending |

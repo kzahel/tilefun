@@ -13,6 +13,9 @@ export interface SpriteItem {
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
   emergencyFlash?: number;
+  emergencyHeight?: number;
+  emergencyForward?: number;
+  emergencyHeading?: number;
   kind: "sprite";
   sortKey: number;
   /** Interpolated world position (feet = bottom-center). */
