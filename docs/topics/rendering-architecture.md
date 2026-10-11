@@ -2,8 +2,8 @@
 
 Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
-desktop/Android validation delivered; optional WebGL2 gameplay backend and shared mesh-car presentation delivered;
-Canvas2D remains the default pending performance/asset acceptance.
+desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
+GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
 Updated: 2026-10-11.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
@@ -16,7 +16,7 @@ Changes to shared presentation, assets, preparation or lifecycle must account fo
 embedded consumers as well as gameplay; shared backend imports alone are not
 evidence of equivalent scheduling or resource behavior.
 
-The optional fixed-view GPU renderer preserves existing sprite presentation
+The fixed-view GPU renderer preserves existing sprite presentation
 and can replace individual sprite bodies with meshes. Entity orientation may
 vary continuously while the world camera projection stays fixed. Authored bodies
 may need explicit source-camera registration, as described for compact-1 below.
@@ -42,7 +42,7 @@ Worker simulation → replicated world + client prediction
                   frame builder + static content updates
                               ↓ ordered data + resource identities
                       renderer backend and resources
-                       Canvas2D default / optional WebGL2
+                       WebGL2 game default / Canvas2D fallback
 ```
 
 World chunks contain tile grids and content versions, never graphics resources.
@@ -54,7 +54,9 @@ eviction, resize, recovery and teardown. It does not decide depth/shadow order.
 
 `GameClientOptions.renderHostFactory` is the production selection point.
 `RenderHost` supplies the backend, asset configuration, viewport lifecycle and an
-independent HUD/touch/debug context. Canvas2D remains the default. The GPU host
+independent HUD/touch/debug context. Main-game startup selects GPU + 3D car unless
+the URL explicitly chooses Canvas or GPU sprites. Embedded scenario labs retain
+their Canvas reference default and can select the same GPU paths explicitly. The GPU host
 supplies a separate UI overlay and composes it for feedback capture. This works
 without changing physics, generation, editing or
 presentation policy. GameClient asset loading, procedural sprite creation and
@@ -166,7 +168,7 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
 | Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the backend |
 | HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
-| Optional GPU gameplay and diagnostics | `?renderer=gpu` selects the shared raster backend; `&meshes` enables the diagnostic car; renderer lab shares its body adapter |
+| GPU gameplay and diagnostics | Main game defaults to GPU + 3D car; `?renderer=canvas` selects Canvas, `?renderer=gpu` selects sprites, and `&meshes` enables the car; renderer lab shares its body adapter |
 | Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
 
 `TileRenderer` is now an internal Canvas terrain preparation/resource component.
@@ -223,12 +225,12 @@ from visual meshes. Existing height-aware physics can remain while that is teste
 [Parent 039](../tactical/039-fixed-view-gpu-parent.md) now tracks authorized
 autonomous delivery of the six implementation slices. These are follow-ups,
 not unfinished gates in the completed 022 refactor.
-Plan the next slice just in time; no GPU backend or Rust port is selected for
-production by this document.
+Plan the next slice just in time. The owner's 2026-10-11 default selection uses
+the delivered WebGL2 backend; a WebGPU or Rust migration remains unselected.
 
 | ID | State | Next evidence / decision |
 | --- | --- | --- |
-| G1 | Delivered, optional WebGL2 | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
+| G1 | Delivered, default in main game | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
 | G2 | Diagnostic car delivered; general import later | Portable mesh/material import, sprite fallback and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
 | G3 | Fixed-view pose delivered | One shared presentation path with optional mesh bodies and full transforms; first prove continuous car heading under the unchanged fixed projection, then expose diagnostic cameras |
 | G4 | Compatibility path delivered | Depth/cutout/transparent ordering, fallback sprites, elevation, indoors, picking, streamed edits and resource residency/lifecycle |
@@ -421,8 +423,10 @@ slot prevents late async publication after replacement or disposal.
 
 In the game, open **☰ → Debug → Renderer** (or press **F3**). Choose Canvas,
 GPU sprites, or GPU + 3D car. The selector switches live and updates only the
-renderer/mesh URL parameters, so refreshing retains the choice. Canvas stays the
-default; the GPU choices and car artwork remain experimental. The separate
+renderer/mesh URL parameters, so refreshing retains the choice, including explicit
+`renderer=canvas`. The owner selected GPU + 3D car as the main-game default on
+2026-10-11; this selection does not establish human art approval or a new performance
+claim. Embedded labs retain their Canvas reference default. The separate
 **3D View** control still opens collision/debug geometry.
 
 `SelectableRenderHost` owns replacement between frames, reusing loaded assets and
@@ -433,13 +437,38 @@ a disposed backend. A module-load failure leaves the current renderer running;
 unavailable WebGL2 construction selects Canvas. The selector is disabled while
 loading, and disposal prevents a late import from creating another host.
 
-Direct links still support `?renderer=gpu` for sprites and
+Direct links support `?renderer=canvas` for Canvas, `?renderer=gpu` for sprites and
 `?renderer=gpu&meshes` for the experimental car.
 The [renderer comparison tool](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/renderer-lab)
 exercises the same body adapter, pose and fallback. Its WebGPU/forced-WebGL2
 buttons probe portable geometry/materials, not the gameplay sprite shader.
 The older car projection lab remains a source/geometry investigation reference.
 DOM controls and the original Canvas UI/input surface remain in place.
+
+The current mono VR screen uploads a host-composed world plus Canvas HUD frame.
+GPU capture can reuse a caller-owned target, avoiding a new canvas each XR frame;
+ordinary feedback capture still creates an independent snapshot. XR reads the
+frame after the shared game loop ticks and follows live renderer selection.
+HTML menus remain outside that image. Spatial/stereo world rendering remains
+future work; actual headset timing and compatibility still need hardware evidence.
+
+Default-renderer validation (2026-10-11): typechecks, 2,374 unit tests, lint,
+catalog/manifest generation and production builds pass. The 545-check browser
+suite passed 542 checks initially; three Workshop checks passed on targeted retry
+with fresh test review data and the rebuilt standalone output. The first run had
+reused earlier catalog/vehicle feedback and an older standalone appearance manifest.
+Full Chromium covers default mesh startup, reusable composed capture, Canvas
+fallback, live switching/reload persistence, graphics recovery and actual authored
+car driving/save/reload. The XR unit check verifies composed-frame upload after
+the game tick and normal-loop restoration on exit. Quest/phone frame pacing is
+the next device checkpoint; these checks make no new performance claim.
+
+Pre-commit revalidation (2026-10-11): typechecks, all 2,428 unit tests, lint,
+catalog/manifest generation and the production build pass. The current full
+browser run passed 546 of 547 checks. The explicit GPU tap-movement water/animal
+interaction check failed to create its water destination and instead recorded an
+interaction; two of three isolated repeats passed. This intermittent browser
+failure remains unresolved and needs a focused input/setup investigation.
 
 Residency is a 64 MiB soft texture-page budget with age eviction, plus CPU source
 and staging images. Active working sets can exceed the soft budget. A single

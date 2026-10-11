@@ -36,6 +36,12 @@ Owner login protects feedback. See [Workshop usage, setup and API](docs/tilefun-
 
 ## Features
 
+The game defaults to **GPU + 3D car**: the existing fixed game view rendered with
+WebGL2, with the authored blue compact car and sprite fallbacks for other vehicles.
+Choose **☰ → Debug → Renderer** (or F3) to switch to Canvas or GPU sprites.
+`?renderer=canvas` selects Canvas explicitly; unsupported WebGL2 also falls back
+to Canvas. This does not enable the separate 3D collision view or spatial VR.
+
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it
 - **Collaborative editing** — See other players' editor cursors in real time, paint terrain together
 - **Configurable physics** — QuakeWorld-style friction and acceleration system. Tune CVars per-surface for ice skating, bouncy floors, or set friction/accel to 100 for traditional RPG movement. Mario-style stomp and bunny hopping built in

@@ -72,15 +72,16 @@ export function createGpuRenderHost(
       uiContext.clearRect(0, 0, canvas.width, canvas.height);
       renderer.beginFrame();
     },
-    captureFrame() {
+    captureFrame(target) {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");
       renderer.surface.flush();
-      const copy = document.createElement("canvas");
-      copy.width = canvas.width;
-      copy.height = canvas.height;
+      const copy = target ?? document.createElement("canvas");
+      if (copy.width !== canvas.width) copy.width = canvas.width;
+      if (copy.height !== canvas.height) copy.height = canvas.height;
       copy.dataset.generation = canvas.dataset.generation ?? "";
       const ctx = copy.getContext("2d");
       if (!ctx) throw Error("Capture canvas unavailable");
+      ctx.clearRect(0, 0, copy.width, copy.height);
       ctx.drawImage(world, 0, 0);
       ctx.drawImage(canvas, 0, 0);
       return copy;

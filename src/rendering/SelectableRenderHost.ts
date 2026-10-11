@@ -6,10 +6,16 @@ import type { RendererMode, RenderHost, RenderHostFactory } from "./RenderHost.j
 /** Browser composition owns backend changes; the same client/Worker keeps running. */
 export async function selectableRenderHostFactory(
   params: URLSearchParams,
-  options?: { embedded?: boolean },
+  options?: { embedded?: boolean; defaultMode?: RendererMode },
 ): Promise<RenderHostFactory> {
   const initial: RendererMode =
-    params.get("renderer") === "gpu" ? (params.has("meshes") ? "gpu-mesh" : "gpu") : "canvas";
+    params.get("renderer") === "gpu"
+      ? params.has("meshes")
+        ? "gpu-mesh"
+        : "gpu"
+      : params.get("renderer") === "canvas"
+        ? "canvas"
+        : (options?.defaultMode ?? "canvas");
   let createGpu =
     initial === "canvas" ? undefined : (await import("./GpuRenderHost.js")).createGpuRenderHost;
   return (canvas) => {
@@ -56,7 +62,7 @@ export async function selectableRenderHostFactory(
             const url = new URL(location.href);
             url.searchParams.delete("renderer");
             url.searchParams.delete("meshes");
-            if (mode !== "canvas") url.searchParams.set("renderer", "gpu");
+            url.searchParams.set("renderer", mode === "canvas" ? "canvas" : "gpu");
             if (mode === "gpu-mesh") url.searchParams.set("meshes", "");
             history.replaceState(history.state, "", url);
             return mode;
@@ -78,8 +84,8 @@ export async function selectableRenderHostFactory(
       beginFrame() {
         current.beginFrame();
       },
-      captureFrame() {
-        return current.captureFrame?.() ?? canvas;
+      captureFrame(target) {
+        return current.captureFrame?.(target) ?? canvas;
       },
       dispose() {
         if (disposed) return;

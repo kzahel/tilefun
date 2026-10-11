@@ -4,9 +4,12 @@ const SETTLE_MS = 1500;
 
 async function waitForGame(page: import("@playwright/test").Page) {
   await page.goto("/tilefun/");
-  await page.waitForFunction(() => document.querySelector("canvas")?.dataset.ready === "true", {
-    timeout: 10000,
-  });
+  await page.waitForFunction(
+    () => document.querySelector<HTMLCanvasElement>("#game")?.dataset.ready === "true",
+    {
+      timeout: 10000,
+    },
+  );
   await page.waitForTimeout(500);
   // Game starts in play mode — toggle to editor mode with Tab
   await page.keyboard.press("Tab");

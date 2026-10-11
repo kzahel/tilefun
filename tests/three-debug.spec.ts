@@ -13,7 +13,7 @@ test("Three.js debug view renders and releases its WebGL canvas", async ({ page 
     ).__game;
     game.consoleEngine.cvars.get("r_show3d")?.set(true);
   });
-  const debug = page.locator("body > canvas:not(#game)");
+  const debug = page.locator("body > canvas:not(#game):not([data-renderer=gpu])");
   await expect(debug).toHaveCount(1);
   await expect(debug).toBeVisible();
   expect(

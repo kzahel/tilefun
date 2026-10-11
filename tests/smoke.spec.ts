@@ -21,7 +21,10 @@ test("canvas has pixel content from spritesheet", async ({ page }) => {
   await page.waitForTimeout(100);
 
   const hasContent = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return false;
     // Sample center pixel — should have grass tile content
@@ -41,7 +44,10 @@ test("multiple chunks are rendered across the viewport", async ({ page }) => {
 
   // Sample several points across the canvas — all should have grass pixel content
   const allHaveContent = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return false;
 
@@ -87,7 +93,10 @@ test("camera movement via arrow keys does not crash", async ({ page }) => {
 
   // Verify still rendering after movement
   const hasContent = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return false;
     const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
@@ -125,7 +134,10 @@ test("player sprite visible at screen center", async ({ page }) => {
   // Sample a small area around center — at least one pixel should differ from
   // the terrain-only background (the player character sprite is drawn on top).
   const result = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return { hasPixels: false };
 
@@ -167,7 +179,10 @@ test("arrow key movement does not crash and keeps rendering", async ({ page }) =
 
   // Verify still rendering after movement
   const hasContent = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return false;
     const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
@@ -213,7 +228,10 @@ test("F3 toggles debug overlay", async ({ page }) => {
 
   // Capture top-left pixels BEFORE debug toggle
   const pixelsBefore = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return null;
     const data = ctx.getImageData(5, 5, 180, 55).data;
@@ -230,7 +248,10 @@ test("F3 toggles debug overlay", async ({ page }) => {
 
   // Check that top-left area changed (dark background + green text drawn)
   const pixelsAfter = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return null;
     const data = ctx.getImageData(5, 5, 180, 55).data;
@@ -294,7 +315,10 @@ test("no console errors after rapid scrolling through many chunks", async ({ pag
 
   // Verify rendering still works
   const hasContent = await page.evaluate(() => {
-    const c = document.getElementById("game") as HTMLCanvasElement;
+    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
+      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+    };
+    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
     const ctx = c.getContext("2d");
     if (!ctx) return false;
     const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;

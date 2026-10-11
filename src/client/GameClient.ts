@@ -1631,11 +1631,18 @@ export class GameClient {
       if (this.xrManager.active) {
         this.xrManager.exitVR();
       } else {
-        this.xrManager.enterVR(this.canvas, this.loop).catch((err) => {
-          console.error("[tilefun:xr] Failed to enter VR:", err);
-          vrBtn.textContent = "VR (failed)";
-          vrBtn.style.color = "#f66";
-        });
+        const frameTarget = document.createElement("canvas");
+        this.xrManager
+          .enterVR(
+            this.canvas,
+            this.loop,
+            () => this.renderHost.captureFrame?.(frameTarget) ?? this.canvas,
+          )
+          .catch((err) => {
+            console.error("[tilefun:xr] Failed to enter VR:", err);
+            vrBtn.textContent = "VR (failed)";
+            vrBtn.style.color = "#f66";
+          });
       }
     });
     this.xrManager.onSessionEnd = () => {

@@ -5,7 +5,7 @@ Status: car projection and orthographic inspection delivered; top-view appearanc
 unresolved. Authored Blender/UV compact-car pilot delivered for inspection.
 Reusable offline fitting/projection/inspection tools delivered; family-template
 fidelity remains open.
-Optional fixed-view GPU gameplay integration is delivered;
+Fixed-view GPU gameplay integration is delivered and is the main-game default;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
 remain unresolved. Game clipping is unchanged.
@@ -78,7 +78,8 @@ paint, inward native-pixel silhouette ink and cosmetic distance-driven wheel rol
 1.3× lateral registration widens the authored narrow front view before rotation;
 forward length, roof height and circular tire geometry stay unchanged. Heading
 follows displayed motion immediately and holds at rest. Missing/loading/failed
-models retain the complete sprite. The game selector is
+models retain the complete sprite. GPU + 3D car is the
+owner-selected main-game default as of 2026-10-11. The game selector is
 **Debug → Renderer → GPU + 3D car**, or `?renderer=gpu&meshes`.
 
 Normally only blue compact-1 uses this adapter. For testing, append `&allcars3d`
@@ -89,7 +90,7 @@ and GPU sprites still draw their original sprites. The override is view-local an
 survives renderer switches, scene resets and refresh via the URL.
 Simulation, prediction, input, cardinal colliders, roof support and persistence
 are unchanged. Wheel steering stays neutral; authored clearance is
-still unqualified. This optional inspection mode does not promote the model art.
+still unqualified. Selecting this renderer by default does not promote the model art.
 Continuous physical yaw/rotated collision and actual desktop/phone GPU timing
 remain separate next work.
 

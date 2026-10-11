@@ -1,6 +1,17 @@
 # WebXR VR Support — Architecture & Pain Points
 
-## Current State (Feb 2025)
+## Integration checkpoint (2026-10-11)
+
+The main game now defaults to GPU + 3D car. Its world uses a separate WebGL2
+canvas, so XR now uploads the render host's composed world plus Canvas HUD frame
+after each XR-driven game tick. The host reuses one capture target for the session;
+Canvas mode uses its original game canvas. This remains a mono virtual screen,
+and HTML UI remains invisible. Automated checks cover frame-source routing and
+capture reuse; headset behavior and upload cost still need hardware verification.
+Current renderer selection and lifetime contracts live in
+[rendering architecture](../topics/rendering-architecture.md).
+
+## Historical state (Feb 2025)
 
 We have basic immersive VR working on Meta Quest via the WebXR API:
 

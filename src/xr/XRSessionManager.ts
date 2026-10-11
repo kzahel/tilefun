@@ -39,6 +39,7 @@ void main() {
 export class XRSessionManager {
   private session: XRSession | null = null;
   private gameCanvas: HTMLCanvasElement | null = null;
+  private frameSource: (() => HTMLCanvasElement) | null = null;
   private gameLoop: GameLoop | null = null;
   private savedCanvasDisplay = "";
 
@@ -71,13 +72,18 @@ export class XRSessionManager {
 
   // ── enter / exit ───────────────────────────────────────────────────
 
-  async enterVR(gameCanvas: HTMLCanvasElement, gameLoop?: GameLoop): Promise<void> {
+  async enterVR(
+    gameCanvas: HTMLCanvasElement,
+    gameLoop?: GameLoop,
+    frameSource?: () => HTMLCanvasElement,
+  ): Promise<void> {
     if (!navigator.xr) throw new Error("WebXR not available");
 
     const glCanvas = document.createElement("canvas");
     const gl = glCanvas.getContext("webgl2", { xrCompatible: true });
     if (!gl) throw new Error("WebGL2 not available");
     this.gameCanvas = gameCanvas;
+    this.frameSource = frameSource ?? (() => gameCanvas);
 
     // Hide the DOM canvas so the browser doesn't composite it behind the VR view
     this.savedCanvasDisplay = gameCanvas.style.visibility;
@@ -288,10 +294,10 @@ export class XRSessionManager {
   }
 
   private blit(gl: WebGL2RenderingContext, sub: XRWebGLSubImage): void {
-    if (!this.gameCanvas) return;
+    if (!this.frameSource) return;
     // Upload current game frame
     gl.bindTexture(gl.TEXTURE_2D, this.canvasTex);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.gameCanvas);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.frameSource());
 
     // Render into the QuadLayer's texture
     gl.bindFramebuffer(gl.FRAMEBUFFER, this.fb);
@@ -332,6 +338,7 @@ export class XRSessionManager {
     this.canvasTex = null;
     this.fb = null;
     this.gameCanvas = null;
+    this.frameSource = null;
     this.onSessionEnd?.();
   }
 }

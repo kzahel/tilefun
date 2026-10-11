@@ -229,7 +229,12 @@ function createConnectionOverlay(onCancel: () => void) {
 }
 
 async function start() {
-  const renderHostFactory = await selectableRenderHostFactory(new URLSearchParams(location.search));
+  const renderHostFactory = await selectableRenderHostFactory(
+    new URLSearchParams(location.search),
+    {
+      defaultMode: "gpu-mesh",
+    },
+  );
   await import.meta.hot?.data.localShutdown;
   // Resolve player profile first
   const profileStore = new PlayerProfileStore();

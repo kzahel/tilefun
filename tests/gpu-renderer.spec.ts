@@ -69,10 +69,12 @@ test("GPU consumes the Canvas scene with retained textures and union clips", asy
   expect(errors).toEqual([]);
 });
 
-test("GPU host runs the shared game and retains the input/UI canvas", async ({ page }) => {
+test("default GPU mesh host runs the shared game and retains the input/UI canvas", async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/?renderer=gpu");
+  await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
   expect(
@@ -85,6 +87,40 @@ test("GPU host runs the shared game and retains the input/UI canvas", async ({ p
       ),
   ).toBe(true);
   await expect(page.locator("canvas[data-renderer=gpu][aria-hidden=true]")).toBeVisible();
+  await page.waitForFunction(
+    () =>
+      (
+        document.querySelector("#game") as unknown as {
+          __game: { renderer: { getDiagnostics(): { gpu: { meshState: string } } } };
+        }
+      ).__game.renderer.getDiagnostics().gpu.meshState === "ready",
+  );
+  const capture = await page.locator("#game").evaluate((canvas) => {
+    const game = (
+      canvas as unknown as {
+        __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
+      }
+    ).__game;
+    const target = document.createElement("canvas");
+    const first = game.renderHost.captureFrame?.(target);
+    const second = game.renderHost.captureFrame?.(target);
+    return {
+      mode: game.renderHost.rendererControl?.mode,
+      reused: first === target && second === target,
+      dimensions: [target.width, target.height],
+      expected: [(canvas as HTMLCanvasElement).width, (canvas as HTMLCanvasElement).height],
+      visible: target
+        .getContext("2d")
+        ?.getImageData(0, 0, target.width, target.height)
+        .data.some((v) => v !== 0),
+      independentSnapshot: game.renderHost.captureFrame?.() !== target,
+    };
+  });
+  expect(capture.mode).toBe("gpu-mesh");
+  expect(capture.reused).toBe(true);
+  expect(capture.dimensions).toEqual(capture.expected);
+  expect(capture.visible).toBe(true);
+  expect(capture.independentSnapshot).toBe(true);
   await page.keyboard.press("Escape");
   await page.keyboard.down("ArrowRight");
   await page.waitForTimeout(250);
@@ -412,7 +448,7 @@ test("unavailable WebGL2 leaves a usable Canvas game", async ({ page }) => {
       return Reflect.apply(original, this, [kind, ...args]);
     } as typeof original;
   });
-  await page.goto("/tilefun/?renderer=gpu");
+  await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-renderer", "canvas-fallback");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("canvas[data-renderer=gpu]")).toHaveCount(0);
@@ -429,7 +465,7 @@ test("debug renderer selector switches live without replacing the game or Worker
   await page.getByRole("button", { name: "☰", exact: true }).click();
   await page.getByRole("button", { name: "Debug", exact: true }).click();
   const selector = page.getByRole("combobox", { name: "Renderer", exact: true });
-  await expect(selector).toHaveValue("canvas");
+  await expect(selector).toHaveValue("gpu-mesh");
   const bounds = await selector.boundingBox();
   expect(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390).toBe(true);
   const original = await page.locator("#game").evaluateHandle((canvas) => {
@@ -472,7 +508,7 @@ test("debug renderer selector switches live without replacing the game or Worker
     ).toBe(true);
     const url = new URL(page.url());
     expect(url.searchParams.get("testflag")).toBe("keep");
-    expect(url.searchParams.get("renderer")).toBe(mode === "canvas" ? null : "gpu");
+    expect(url.searchParams.get("renderer")).toBe(mode === "canvas" ? "canvas" : "gpu");
     expect(url.searchParams.has("meshes")).toBe(mode === "gpu-mesh");
     if (mode === "gpu-mesh")
       await page.waitForFunction(
@@ -485,6 +521,9 @@ test("debug renderer selector switches live without replacing the game or Worker
       );
   }
   await original.dispose();
+  await page.reload();
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator("#game")).toHaveAttribute("data-renderer", "canvas");
   expect(errors).toEqual([]);
 });
 
