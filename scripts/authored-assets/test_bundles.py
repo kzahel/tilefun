@@ -12,7 +12,31 @@ class RetainedBundleTests(unittest.TestCase):
     def test_all_final_assets_and_source_dependencies_are_self_contained(self):
         self.assertEqual([(r['assetId'], r['revision']) for r in verify()],
                          [('compact-1','v7'),('compact-2','v7'),('compact-4','v1'),('ambulance','v1'),('ambulance','v2'),
-                          ('police-car','v1'),('fire-truck-ladder-1','v1'),('fire-truck-ladder-1','v2')])
+                          ('police-car','v1'),('fire-truck-ladder-1','v1'),('fire-truck-ladder-1','v2'),
+                          ('garbage-truck-green','v1')])
+
+    def test_tandem_axle_cannot_disappear_from_the_declared_wheel_set(self):
+        source=ROOT/'art-source/vehicle-models/garbage-truck-green/v1'
+        rig=read(source/'rig.json')
+        rig['wheels']=[wheel for wheel in rig['wheels'] if not wheel['id'].startswith('M')]
+        with self.assertRaisesRegex(ValueError,'Exported wheel set differs'):
+            glb_content(ROOT/'public/assets/models/vehicles/garbage-truck-green-v1.glb',
+                        source/'car-atlas.png',read(source/'geometry-audit.json'),rig)
+
+    def test_middle_axle_cannot_be_mislabeled_as_steerable(self):
+        source=ROOT/'art-source/vehicle-models/garbage-truck-green/v1'
+        rig=read(source/'rig.json')
+        next(wheel for wheel in rig['wheels'] if wheel['id']=='ML')['steering']=True
+        with self.assertRaisesRegex(ValueError,'Wheel steering contract changed'):
+            glb_content(ROOT/'public/assets/models/vehicles/garbage-truck-green-v1.glb',
+                        source/'car-atlas.png',read(source/'geometry-audit.json'),rig)
+
+    def test_amber_warning_semantics_must_survive_export(self):
+        source=ROOT/'art-source/vehicle-models/garbage-truck-green/v1'
+        lights=read(source/'lights.json');lights['lenses'][0]['signal']='emergency'
+        with self.assertRaisesRegex(ValueError,'light lens tags changed'):
+            glb_content(ROOT/'public/assets/models/vehicles/garbage-truck-green-v1.glb',
+                        source/'car-atlas.png',read(source/'geometry-audit.json'),read(source/'rig.json'),lights)
 
     def test_exported_light_phase_must_match_its_retained_contract(self):
         source = ROOT / 'art-source/vehicle-models/ambulance/v2'

@@ -1,0 +1,12 @@
+{
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "constructionScripts": {
+    "scripts/authored-assets/author_garbage_truck.py": "1bbfd28c3e462885b16ff831d62b7e3182afbd5ace174bfad1202abece4bcd93",
+    "scripts/authored-assets/author_emergency_vehicle.py": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab",
+    "scripts/authored-assets/build_emergency_vehicle.py": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62"
+  },
+  "configuration": "scripts/authored-assets/garbage-truck-family.json",
+  "configurationSha256": "d4fb524a2742d21d5b839e525d1597612f7171d38ddfe5219e26b3d2ba7d8884",
+  "retentionScript": "scripts/authored-assets/retain_vehicle.py",
+  "retentionScriptSha256": "cacca97eb4e411b53c5f32d2b3578c80c7a89096071b09481202e10aa065bc82"
+}

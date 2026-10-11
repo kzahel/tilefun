@@ -1,0 +1,54 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-garbage-truck-green-v1",
+  "candidateFingerprint": "1017a53a90abac49dcfb48edfb3773e3107212daf0802bb8034e0abe2d02f0d5",
+  "identity": {
+    "assetId": "garbage-truck-green",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "bfe3fcb598dd4000b7619dd6e0797aa2a2d24189423c247f1c0256907ca35e22",
+    "sourceAtlasSha256": "9fcb48627125ee3f686bbc650c4eb006be0c44baf3d998446e26855d43cf9793",
+    "lightPatternSha256": "28f1d8ac81c965ec8b61977c23a459b157d0044d4bf7940d2e0202e5b3a52fdb",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/garbage-truck-green-v1.glb",
+        "sha256": "1cb3af4b310611259c177ee9e71ff32e65dd31dd950f4babd517c338f0488557"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/comparison.png",
+        "sha256": "bd6b99d3fe9361d116dd5c9cca18c113b36aa2d308192b0d231fe197dbb4db7d"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/orbit.png",
+        "sha256": "986c3bba6266afbfd516f2d5ae27bc620190782276c580c6c12b00e042d5ff3e"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/silhouette.png",
+        "sha256": "e1d20b66bc5a2f97f5733d3769c986b87bf0b9d26ad4a54d6726a0fa167b8da7"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/lights.gif",
+        "sha256": "77f3175582e6f9169abd22e3ef2ba25cfd5e196494dc03a9a2240b6c11e8a165"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/lights-off.png",
+        "sha256": "0615e7f603b22fedee29d1bd666192800cccc21bcd2c53c057e6a01410692069"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/lights-a.png",
+        "sha256": "5da04a47ee7dc153f3bd31e9b7fe33bb13d720928183d82f0af4f7dbf70c39e2"
+      },
+      {
+        "url": "assets/models/vehicles/review/garbage-truck-green-v1/lights-b.png",
+        "sha256": "0615e7f603b22fedee29d1bd666192800cccc21bcd2c53c057e6a01410692069"
+      }
+    ]
+  },
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Six independently rotating wheels; front steering only. Loader mouth is recessed geometry with a separate hinge.",
+    "Cab/container roof depth and wheel sizes are diagnostic fits. Opposite source lamp placement conflicts with a fixed physical beacon; south/west reverse its position.",
+    "Steering and loader clearance, engine integration and exact-revision art approval remain pending."
+  ]
+}

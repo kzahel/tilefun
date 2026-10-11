@@ -6354,6 +6354,17 @@
       "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
     {
+      "id": "projection:authored-garbage-truck-green-v1",
+      "batchId": "authored-vehicles",
+      "name": "Green garbage truck · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/garbage-truck-green-v1/",
+      "kind": "projection",
+      "fingerprint": "1017a53a90abac49dcfb48edfb3773e3107212daf0802bb8034e0abe2d02f0d5",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
       "id": "geometry:deck-ramp-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -30015,5 +30026,5 @@
       }
     }
   ],
-  "inputDigest": "34b7e308a0c5466ad8dff60306f658565cc8f18fd842d7e291afe8c0e0ec8a36"
+  "inputDigest": "43d2a64fbabecbd0adcb0b8de3248334789b67cd3ba7df67767253611ec93076"
 }

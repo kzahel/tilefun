@@ -27,7 +27,9 @@ Police and stowed fire truck v1 now await inspection in
 [117](../tactical/117-police-and-fire-truck-models.md); the raised ladder remains
 queued. Fire v2 fixes wheel placement, floor intersections and tire UVs in
 [118](../tactical/118-fire-truck-wheel-alignment.md). Six source sets now have
-retained models across eight exact revisions.
+retained models across eight exact revisions at that checkpoint. Green garbage
+truck v1 now adds a seventh source set/ninth exact revision in
+[119](../tactical/119-six-wheel-garbage-truck.md).
 
 ## Investigation evidence storage
 
@@ -91,6 +93,16 @@ rectifying cap/tread paint. Actual GLB wheel centers are within 1.38 native
 pixels of observed wells. The verifier rejects a displaced axle and the old
 solid floor; roll is clear, steering/raised equipment remain unqualified.
 The earlier v1 and its review remain immutable.
+
+Green garbage truck v1 exercises tandem rear axles, partly hidden wheels, source
+side ownership, tapered/open loader geometry and a single amber warning beacon.
+It has 52 meshes/1,476 triangles and six independently rotating tire/hub assemblies
+with per-axle radii/tracks. The actual GLB passes measured wheel centers and floor
+clearance, all-wheel forward/reverse/independent motion, front-only steering and
+independent loader hinge motion. Probes read declared wheel/lens sets, including
+single-beacon dim phases; fixed paint and exact off reset are preserved.
+Roof-depth contradictions, rear-wheel physical scale and animated clearance remain
+inspection limits. Warning metadata does not add game controls or audio.
 
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those

@@ -16,6 +16,7 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Police car | [v1](police-car/v1/) | [police-car-v1.glb](../../public/assets/models/vehicles/police-car-v1.glb) |
 | Fire truck, stowed ladder | [v1](fire-truck-ladder-1/v1/) | [fire-truck-ladder-1-v1.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v1.glb) |
 | Fire truck wheel alignment | [v2](fire-truck-ladder-1/v2/) | [fire-truck-ladder-1-v2.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v2.glb) |
+| Green garbage truck | [v1](garbage-truck-green/v1/) | [garbage-truck-green-v1.glb](../../public/assets/models/vehicles/garbage-truck-green-v1.glb) |
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
@@ -44,6 +45,12 @@ openings and cleaned wheel-local UVs. Its rig records the two-pixel placement
 tolerance; actual GLB verification checks center fit and floor/tire intersections,
 including negative regression probes. Cameras, fixed roof/details/ladder/lights
 are preserved. Steering clearance remains pending; see tactical 118.
+Green garbage truck v1 has 52 meshes/1,476 triangles, six wheels on three axles,
+a separate `Loader_Hinge` and one amber warning lens. Its measured cap centers,
+floor openings, cleaned wheel-local UVs and roof/loader paint ownership are
+retained. Verification reads the complete rig set; dropping a middle axle or
+mislabeling it as steerable is rejected. Rear wheel scale and roof depth are
+diagnostic fits; steering/loader clearance and integration remain pending.
 Units are world pixels, Blender up is +Z and forward is -X, with
 tire contacts on Z=0. GLBs use Blender's +Y-up export conversion. The GLB embeds
 the cleaned atlas; Blender scenes pack their textures, including retained unused
@@ -106,6 +113,9 @@ Before calling the vehicle delivered:
    and novel-angle checks. Adapt verification expectations for a new vehicle family.
    Also compare wheel centers to painted source wells, inspect fender boundaries
    and floor/body intersections, and verify tread does not sample body paint.
+   Read the asset's declared wheel set and per-axle radii; do not assume four
+   wheels. Exercise every wheel independently and only declared steering axles.
+   A one-lens warning beacon has a dim phase, not a second alternating light group.
 4. Confirm normal builds consume the committed GLB without running Blender or
    restoring scratch files. Keep inspection sheets, turntables and workspaces local
    unless an exact review snapshot is required by the review contract.

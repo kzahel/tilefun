@@ -125,6 +125,50 @@ Negative probes must reject a displaced front axle and a solid floor. A working
 roll/steer hierarchy alone does not qualify wheel placement or steering clearance.
 See [118](../../docs/tactical/118-fire-truck-wheel-alignment.md).
 
+## Six-wheel garbage truck
+
+`author_garbage_truck.py` and `garbage-truck-family.json` define the green truck's
+own cab/container/loader geometry, measured landmarks, per-axle radii/tracks and
+UV ownership. Six tires/hubs have separate steer/roll nodes; only the front pair
+steers. The loader mouth has actual walls/sill/recess and a separate hinge.
+The smaller source rear caps and inconsistent roof depth are diagnostic fitting
+choices, not collider measurements or clearance qualification. Orange requires
+its own eligibility/paint check before transferring the family.
+
+```text
+python scripts/authored-assets/author_garbage_truck.py --out data/authored-assets/NEW_GARBAGE --blender BLENDER_EXECUTABLE
+python scripts/authored-assets/pipeline.py project --recipe data/authored-assets/NEW_GARBAGE/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_GARBAGE_PROJECTION
+python scripts/authored-assets/pipeline.py evaluate --recipe data/authored-assets/NEW_GARBAGE/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_GARBAGE_RENDER
+python scripts/authored-assets/inspect_vehicle.py --run data/authored-assets/NEW_GARBAGE_RENDER --out data/authored-assets/NEW_GARBAGE_INSPECTION
+node scripts/authored-assets/verify_vehicle_lights.mjs data/authored-assets/NEW_GARBAGE_FLASH /tilefun/data/authored-assets/NEW_GARBAGE_RENDER/asset.glb . data/authored-assets/NEW_GARBAGE/lights.json
+```
+
+The light contract reuses isolated emission gain, with optional `tilefun_signal`
+set to `warning`. One lens brightens at .05s and is dim at .55s; the probe verifies
+declared gains, visible contrast and exact off reset without assuming two groups.
+The fixed physical lamp reverses sides in south/west despite repeated sprite placement.
+The rig probe discovers roll nodes, compares them to the retained declared wheel
+set, checks every wheel independently, and exercises all tagged equipment hinges.
+
+## Retaining a source-owned family checkpoint
+
+After inspection, pack its own unused projection draft into the evaluated scene
+with `pack_draft.py`. `retain_vehicle.py` copies exact final bytes into a new
+revision, creates the 4×2/angle/contour/real-GLB flash review and appends its catalog
+record without changing earlier records. It needs a constructor's mesh/config/rig/
+paint/light records and a completed light probe; it is not a regeneration or
+promotion command. The existing committed checkpoints never need this command.
+
+```text
+python scripts/authored-assets/retain_vehicle.py --model data/authored-assets/NEW_GARBAGE --render data/authored-assets/NEW_GARBAGE_RENDER --projection data/authored-assets/NEW_GARBAGE_PROJECTION --inspection data/authored-assets/NEW_GARBAGE_INSPECTION --flash data/authored-assets/NEW_GARBAGE_FLASH --packed data/authored-assets/NEW_GARBAGE_PACKED.blend --config scripts/authored-assets/garbage-truck-family.json --constructor scripts/authored-assets/author_garbage_truck.py --constructor scripts/authored-assets/author_emergency_vehicle.py --constructor scripts/authored-assets/build_emergency_vehicle.py --revision vN --name "Green garbage truck" --note "Exact checkpoint limits and next review work"
+```
+
+Use a new numeric revision. The tool formats the new review JSON before pinning
+it; do not reformat frozen review/source files afterward. Register the retained
+candidate in Workshop, update the collection/queue, then run catalog and manifest
+generation after all public review inputs are final. Verify from tracked files
+alone using the delivery checklist. See [119](../../docs/tactical/119-six-wheel-garbage-truck.md).
+
 ## Engine readiness
 
 The exported self-contained GLB contains the mesh, UV texture, flat emissive/unlit paint

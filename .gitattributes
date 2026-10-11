@@ -29,3 +29,6 @@ scripts/authored-assets/build_emergency_vehicle.py text eol=lf
 scripts/authored-assets/emergency-families.json -text
 scripts/authored-assets/refine_fire_wheels.py text eol=lf
 scripts/authored-assets/fire-wheel-fit.json -text
+scripts/authored-assets/author_garbage_truck.py text eol=lf
+scripts/authored-assets/retain_vehicle.py text eol=lf
+scripts/authored-assets/garbage-truck-family.json -text

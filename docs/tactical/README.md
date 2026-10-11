@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |
 | [118 Fire truck wheel alignment](118-fire-truck-wheel-alignment.md) | Retained v2 with fitted axles, floor openings and wheel-local UVs; actual GLB placement/intersection regression checks; owner inspection pending |
 | [117 Police and fire truck models](117-police-and-fire-truck-models.md) | Retained police/stowed fire GLBs and exact 4×2/flash reviews; separate wheel rigs and ladder hinge; integration/clearance pending |
 | [116 Ambulance beacons and light tags](116-ambulance-beacons-and-light-tags.md) | Retained v2 with tapered beacons, thin bars, six tagged lenses and actual GLB pulse proof; game control/integration pending |

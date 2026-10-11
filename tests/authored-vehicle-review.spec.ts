@@ -6,6 +6,7 @@ for (const { asset, revision, name } of [
   { asset: "police-car", revision: "v1", name: "Police car" },
   { asset: "fire-truck-ladder-1", revision: "v1", name: "Fire truck · stowed ladder" },
   { asset: "fire-truck-ladder-1", revision: "v2", name: "Fire truck · stowed ladder" },
+  { asset: "garbage-truck-green", revision: "v1", name: "Green garbage truck" },
 ])
   test(`retained ${asset} ${revision} review opens its own comparison from Workshop on desktop and phone`, async ({
     page,

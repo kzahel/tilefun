@@ -76,7 +76,8 @@ try {
         if (
           !lens ||
           lens.userData.tilefun_group !== expected.group ||
-          lens.userData.tilefun_phase !== expected.phase
+          lens.userData.tilefun_phase !== expected.phase ||
+          (expected.signal && lens.userData.tilefun_signal !== expected.signal)
         )
           throw Error(`Exported lens differs from its light contract: ${expected.node}`);
       }
@@ -109,7 +110,23 @@ try {
         a = draw(true, 0.05),
         b = draw(true, 0.55),
         reset = draw(false, 0.05);
-      if (off !== reset || off === a || off === b || a === b)
+      for (const pose of poses) {
+        const expected = pattern.lenses.map((lens) => {
+          const phase = (((pose.time / pattern.periodSeconds + lens.phase) % 1) + 1) % 1;
+          return pose.enabled &&
+            pattern.pulseWindows.some(([start, end]) => phase >= start && phase < end)
+            ? pattern.peakGain
+            : 1;
+        });
+        if (JSON.stringify(pose.gains) !== JSON.stringify(expected))
+          throw Error("Flash gains differ from retained pattern");
+      }
+      if (
+        off !== reset ||
+        off === a ||
+        a === b ||
+        (poses[2].gains.some((gain) => gain > 1) ? off === b : off !== b)
+      )
         throw Error("Missing visible flash or off-state leaked between draws");
       const names = lenses.map((obj) => obj.name);
       effect.dispose();

@@ -1,0 +1,37 @@
+{
+  "names": [
+    "Warning-amber-lens"
+  ],
+  "poses": [
+    {
+      "enabled": false,
+      "time": 0,
+      "gains": [
+        1
+      ]
+    },
+    {
+      "enabled": true,
+      "time": 0.05,
+      "gains": [
+        4
+      ]
+    },
+    {
+      "enabled": true,
+      "time": 0.55,
+      "gains": [
+        1
+      ]
+    },
+    {
+      "enabled": false,
+      "time": 0.05,
+      "gains": [
+        1
+      ]
+    }
+  ],
+  "bodyAndHousingsUnchanged": true,
+  "offResetExact": true
+}

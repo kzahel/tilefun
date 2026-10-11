@@ -60,6 +60,17 @@ Stowed fire v2 corrects the initial axle/well mismatch with
 Use its retained v2 recipe for exact replay; the initial family constructor
 still represents immutable v1. Read tactical 118 before revising this family.
 
+Green garbage truck uses `author_garbage_truck.py` and
+`garbage-truck-family.json`, with six wheels, per-axle radii/tracks, an actual
+recessed loader mouth and a separate loader hinge. Read tactical 119 and the
+scripts README. Probe the entire declared wheel set and every independent wheel;
+never assume four wheels or shared radii. Verify steering flags against the rig.
+One amber lens carries `tilefun_signal=warning` alongside the compatible effect
+tags. Check its declared bright/dim phases; a dim half-cycle is valid for one lens.
+Camera/roof and opposite-view beacon contradictions stay explicit. Orange needs
+family eligibility before reuse. `retain_vehicle.py` packages this source-owned
+checkpoint after actual GLB light inspection; it never replaces prior revisions.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;

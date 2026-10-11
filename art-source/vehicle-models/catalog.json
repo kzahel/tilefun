@@ -905,6 +905,155 @@
         "orbit-2.png": "76eaa97445b275c234fc238a8ec09d54a083ddca45927d600b788cb0754c6b79",
         "orbit-3.png": "494e9e89070300e071efd18ee2f50d5f452750f5597e4db01fc026b017b76738"
       }
+    },
+    {
+      "assetId": "garbage-truck-green",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/garbage-truck-green-v1.glb",
+      "source": "art-source/vehicle-models/garbage-truck-green/v1",
+      "capturedCandidateId": "projection:authored-garbage-truck-green-v1",
+      "capturedCandidateSha256": "1017a53a90abac49dcfb48edfb3773e3107212daf0802bb8034e0abe2d02f0d5",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 52,
+        "triangles": 1476
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/authoring-provenance.json",
+          "sha256": "7721432a5be1683389f73ce74b5c5468ed9b5935674347deb7738dc1a998c3fc"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/car-atlas.png",
+          "sha256": "9fcb48627125ee3f686bbc650c4eb006be0c44baf3d998446e26855d43cf9793"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/car.blend",
+          "sha256": "bfe3fcb598dd4000b7619dd6e0797aa2a2d24189423c247f1c0256907ca35e22"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/coverage.json",
+          "sha256": "412580700c2499f142ad3a13bfcb12784af27b6dc1f7b98728a9ac5238b612d7"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/family-config.json",
+          "sha256": "45e15f98f9a6498816a6145ca7a069cbeb52f3d9d4338bf6b7d5db3806add24a"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/geometry-audit.json",
+          "sha256": "5fb32ec5b586f97b9100a7e86fc0e95ce8fa54c13f90b3395f42d40822bae286"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/inspection.json",
+          "sha256": "c0caedf20cb3ced4d7e7ff29f17993cc414ea9aa1ee36f909e9cb88dcdb16b4f"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/light-validation.json",
+          "sha256": "58eadd8572f690cd4529afec22b4914244b134173abeff3e2aea4896972a10d5"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/lights.json",
+          "sha256": "28f1d8ac81c965ec8b61977c23a459b157d0044d4bf7940d2e0202e5b3a52fdb"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/mesh-spec.json",
+          "sha256": "4caf0dfd034b8b6852b14c13df4293628af3f4888f05af9d0c78fb05d2b62da1"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/paint-ownership.json",
+          "sha256": "06f8b65a6fef0caf349e3f8ab4b12d91e91f07ec8980b4adc891fc1b4ecb01d4"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/projection-coverage.png",
+          "sha256": "52a7496bcfb5bfb7a0f678c0f297b1397083893aa295d3ce8e6ba29fb300667c"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/projection-draft.png",
+          "sha256": "02dda37c41d79c4305b3a2c4e142cddb6c35292a3bfdfcd76c8a7c4b32af28ee"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/projection-with-authored-fill.png",
+          "sha256": "17695646dabf1695d9c0a367abf6c30b6d373ffc1200d8281f8c12b1dcbf4f02"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/recipe.json",
+          "sha256": "80438908fdddbd4d9c961f1a3f6f6548c4b13685efdf0df604b7ba82363009ad"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/refs/east.png",
+          "sha256": "0f5b88ce5066691f727236db75a9c99b7b20a201c7b4ce32ba7212e31086097c"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/refs/north.png",
+          "sha256": "7a3006b02daf428d4a52876059a1436dcffbb51419e1dd1fc7a70d79bd675043"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/refs/south.png",
+          "sha256": "98ea6cb92f36a7d7af848d4feee74be3799353f501ec8416b73c3d3776fa6170"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/refs/west.png",
+          "sha256": "1b4024ccbe7c70455b01b09f80d81f099e93ff883c35a15c73316b9160b086d9"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/rig.json",
+          "sha256": "6a49e04ffc29d5cb035a416fbb5d77fe02256806139ce794b40a75741bb01d00"
+        },
+        {
+          "path": "art-source/vehicle-models/garbage-truck-green/v1/wheel-alignment.json",
+          "sha256": "52f952ccf71b82443c72a0f57c6e8e80c8f4c89a23720a957bbe8872556a11c5"
+        },
+        {
+          "path": "public/assets/models/vehicles/garbage-truck-green-v1.glb",
+          "sha256": "1cb3af4b310611259c177ee9e71ff32e65dd31dd950f4babd517c338f0488557"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/comparison.png",
+          "sha256": "bd6b99d3fe9361d116dd5c9cca18c113b36aa2d308192b0d231fe197dbb4db7d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/index.html",
+          "sha256": "743784f3a49728658054046e9c6e38dfe62d9867308103c247bd0d184509a53b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/lights-a.png",
+          "sha256": "5da04a47ee7dc153f3bd31e9b7fe33bb13d720928183d82f0af4f7dbf70c39e2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/lights-b.png",
+          "sha256": "0615e7f603b22fedee29d1bd666192800cccc21bcd2c53c057e6a01410692069"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/lights-off.png",
+          "sha256": "0615e7f603b22fedee29d1bd666192800cccc21bcd2c53c057e6a01410692069"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/lights.gif",
+          "sha256": "77f3175582e6f9169abd22e3ef2ba25cfd5e196494dc03a9a2240b6c11e8a165"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/orbit.png",
+          "sha256": "986c3bba6266afbfd516f2d5ae27bc620190782276c580c6c12b00e042d5ff3e"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/review.json",
+          "sha256": "4151299f6254fed2599fc38b05fbb25aa80350aaf9bc5e10e4aed165cd72b0ab"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/garbage-truck-green-v1/silhouette.png",
+          "sha256": "e1d20b66bc5a2f97f5733d3769c986b87bf0b9d26ad4a54d6726a0fa167b8da7"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "62668ca55d8c1c4864bbbb0cf228a43357b52b73edc0029e2d2eb9b7ee731785",
+        "west-render.png": "a5e1d2ace72c290a00c47765b252e8e3b418e1ed4937f5b2630a8a2cbb88bee1",
+        "north-render.png": "69315fb5214972d1de0d144b7171a08083d513a759c9fb0883309c7a7d4f346d",
+        "south-render.png": "7f9598b764a894a766305d273ebe2527d39e300b890134882d18196cab1450b8",
+        "orbit-0.png": "68b86908f7f1394bb06f2b9c3dc60002ce5dd10602f829a34f7d399aaa80b5ac",
+        "orbit-1.png": "3d86cf491f6a755f5bb398a3ac2f49e7e81c21be3e4eb339a71fc3b5c5b4b4be",
+        "orbit-2.png": "f2c9c1eeca523f96cd2ddea0914ea348303646408bb933ac2678f60be1afd429",
+        "orbit-3.png": "1640eedbf40c1b60168bf4a62187c5fb6535d5b6e73d85fc30968eb414b0aac2"
+      }
     }
   ],
   "dependencies": [

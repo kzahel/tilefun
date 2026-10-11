@@ -1,9 +1,24 @@
 /** Procedural rigid wheels: transform the assemblies, leaving the body fixed. */
 export function createWheelRig(scene, THREE) {
-  const wheels = ["FL", "FR", "RL", "RR"].map((id) => {
-    const roll = scene.getObjectByName(`Wheel_${id}_Roll`);
+  const rolls = [];
+  scene.traverse((node) => {
+    if (/^Wheel_[A-Z]+_Roll$/.test(node.name)) rolls.push(node);
+  });
+  if (!rolls.length) throw new Error("Missing wheel assemblies");
+  const order = ["FL", "FR", "ML", "MR", "RL", "RR"];
+  rolls.sort((a, b) => {
+    const idA = a.name.slice(6, -5),
+      idB = b.name.slice(6, -5);
+    const rank = (id) => (order.includes(id) ? order.indexOf(id) : order.length);
+    return rank(idA) - rank(idB) || idA.localeCompare(idB);
+  });
+  const seen = new Set();
+  const wheels = rolls.map((roll) => {
+    const id = roll.name.slice(6, -5);
+    if (seen.has(id)) throw new Error(`Duplicate wheel assembly ${id}`);
+    seen.add(id);
     const steer = scene.getObjectByName(`Wheel_${id}_Steer`);
-    if (!roll || !steer || roll.parent !== steer) throw new Error(`Missing wheel assembly ${id}`);
+    if (!steer || roll.parent !== steer) throw new Error(`Missing wheel assembly ${id}`);
     const radius = roll.userData.wheel_radius;
     const axis = roll.userData.roll_axis_gltf;
     if (!(radius > 0) || !Array.isArray(axis) || axis.length !== 3)

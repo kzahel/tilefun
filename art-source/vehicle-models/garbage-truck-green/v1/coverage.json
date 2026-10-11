@@ -1,0 +1,154 @@
+{
+  "counts": {
+    "0": 1623133,
+    "1": 11998,
+    "2": 3061,
+    "3": 208,
+    "4": 0
+  },
+  "legend": {
+    "0": "unused UV/gutter",
+    "1": "visible source sample",
+    "2": "unobserved",
+    "3": "overlapping UV surfaces",
+    "4": "source-view color disagreement"
+  },
+  "authoredFill": {
+    "image": "car-atlas.png",
+    "filledUVTexels": 1626402,
+    "meaning": "Existing authored atlas fills gutter/unseen/overlapping UV regions only. Coverage status remains unchanged; this is inferred paint, not source recovery."
+  },
+  "sourceViews": {
+    "Cab-east": [
+      "east"
+    ],
+    "Fender--31.5-east": [
+      "east"
+    ],
+    "Cab-west": [
+      "west"
+    ],
+    "Fender--31.5-west": [
+      "west"
+    ],
+    "Cab-roof": [
+      "north"
+    ],
+    "Windshield-glass": [
+      "south"
+    ],
+    "Windshield-frame": [],
+    "Front-fascia": [
+      "south"
+    ],
+    "Container-east": [
+      "east"
+    ],
+    "Container-shoulder-east": [
+      "east"
+    ],
+    "Container-west": [
+      "west"
+    ],
+    "Container-shoulder-west": [
+      "west"
+    ],
+    "Container-roof": [
+      "north"
+    ],
+    "Container-front": [],
+    "Chassis-coupling-0": [
+      "north"
+    ],
+    "Chassis-coupling-1": [],
+    "Chassis-coupling-2": [
+      "west"
+    ],
+    "Chassis-coupling-3": [
+      "east"
+    ],
+    "Chassis-coupling-4": [
+      "south"
+    ],
+    "Chassis-coupling-5": [
+      "north"
+    ],
+    "Loader-side-east": [
+      "east"
+    ],
+    "Loader-brace-east": [
+      "east"
+    ],
+    "Loader-side-west": [
+      "west"
+    ],
+    "Loader-brace-west": [
+      "west"
+    ],
+    "Loader-roof": [
+      "north"
+    ],
+    "Loader-rear-upper": [
+      "north"
+    ],
+    "Loader-rear-frame--1": [
+      "north"
+    ],
+    "Loader-mouth-wall--1": [],
+    "Loader-rear-frame-1": [
+      "north"
+    ],
+    "Loader-mouth-wall-1": [],
+    "Loader-mouth-sill": [
+      "north"
+    ],
+    "Loader-mouth-ceiling": [],
+    "Loader-mouth-back": [
+      "north"
+    ],
+    "Mirror--1": [],
+    "Mirror-1": [],
+    "Roof-vent-base": [],
+    "Roof-vent": [],
+    "Underfloor": [],
+    "Warning-amber-base": [],
+    "Warning-amber-lens": [],
+    "Tire_FL": [
+      "west"
+    ],
+    "Hub_FL": [
+      "west"
+    ],
+    "Tire_FR": [
+      "east"
+    ],
+    "Hub_FR": [
+      "east"
+    ],
+    "Tire_ML": [
+      "west"
+    ],
+    "Hub_ML": [
+      "west"
+    ],
+    "Tire_MR": [
+      "east"
+    ],
+    "Hub_MR": [
+      "east"
+    ],
+    "Tire_RL": [
+      "west"
+    ],
+    "Hub_RL": [
+      "west"
+    ],
+    "Tire_RR": [
+      "east"
+    ],
+    "Hub_RR": [
+      "east"
+    ]
+  },
+  "interpretation": "Counts measure UV texels, not surface area, accuracy or acceptance. Disagreements retain the most face-on visible original pixel and remain marked. Unknown and overlapping regions require authored cleanup. Gutters are not padded by this draft baker."
+}

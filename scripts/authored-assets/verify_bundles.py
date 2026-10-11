@@ -51,7 +51,13 @@ def glb_content(path, atlas, expected=None, rig=None, lights=None):
     if body not in model['nodes'][car]['children']:
         raise ValueError('Body is detached from CarRoot')
     wheels = {w['id']: w for w in rig['wheels']} if rig else {}
-    for wheel in ['FL', 'FR', 'RL', 'RR']:
+    expected_ids = set(wheels) if rig else {'FL', 'FR', 'RL', 'RR'}
+    exported_ids = {name[6:-5] for name in nodes if name.startswith('Wheel_') and name.endswith('_Roll')}
+    if rig and len(wheels) != len(rig['wheels']):
+        raise ValueError('Duplicate declared wheel IDs')
+    if exported_ids != expected_ids:
+        raise ValueError('Exported wheel set differs from its retained contract')
+    for wheel in expected_ids:
         steer, roll = nodes[f'Wheel_{wheel}_Steer'], nodes[f'Wheel_{wheel}_Roll']
         pivot = model['nodes'][roll]
         if (steer not in model['nodes'][car]['children'] or
@@ -61,6 +67,13 @@ def glb_content(path, atlas, expected=None, rig=None, lights=None):
         axis = expected_wheel.get('rollAxisGltf', rig.get('rollAxisGltf') if rig else [0, 0, -1])
         if pivot['extras']['wheel_radius'] != expected_wheel['radius'] or pivot['extras']['roll_axis_gltf'] != axis:
             raise ValueError(f'Wheel radius/axis changed: {wheel}')
+        if rig:
+            steering = expected_wheel.get('steering', expected_wheel.get('front', False))
+            if model['nodes'][steer].get('extras', {}).get('steering_enabled') != steering:
+                raise ValueError(f'Wheel steering contract changed: {wheel}')
+            x,y,z = expected_wheel.get('center', expected_wheel.get('centerBlender'))
+            if any(abs(a-b)>1e-5 for a,b in zip(model['nodes'][steer].get('translation',[0,0,0]),[x,z,-y])):
+                raise ValueError(f'Wheel center changed: {wheel}')
     if lights:
         tagged = {node['name']:node for node in model['nodes']
                   if node.get('extras', {}).get('tilefun_role') == 'emergency-light'}
@@ -71,7 +84,8 @@ def glb_content(path, atlas, expected=None, rig=None, lights=None):
             extra = node['extras']
             if ('mesh' not in node or extra.get('tilefun_effect_schema') != 1 or
                     extra.get('tilefun_channel') != lights['channel'] or
-                    extra.get('tilefun_group') != lens['group'] or extra.get('tilefun_phase') != lens['phase']):
+                    extra.get('tilefun_group') != lens['group'] or extra.get('tilefun_phase') != lens['phase'] or
+                    ('signal' in lens and extra.get('tilefun_signal') != lens['signal'])):
                 raise ValueError(f"Exported light lens tags changed: {lens['node']}")
         if any(node.get('extras', {}).get('tilefun_role') for node in model['nodes']
                if node.get('name', '').endswith('-base')):
@@ -87,7 +101,7 @@ def glb_content(path, atlas, expected=None, rig=None, lights=None):
         x, y, z = equipment['location']
         if any(abs(a-b) > 1e-5 for a,b in zip(node.get('translation', [0,0,0]), [x,z,-y])):
             raise ValueError(f"Equipment hinge moved: {equipment['name']}")
-    return {'meshes': len(model['meshes']), 'triangles': triangles, 'wheels': 4, 'embeddedAtlas': 'exact RGBA',
+    return {'meshes': len(model['meshes']), 'triangles': triangles, 'wheels': len(expected_ids), 'embeddedAtlas': 'exact RGBA',
             **({'taggedLenses':len(lights['lenses'])} if lights else {}),
             **({'equipmentNodes':len(rig['equipmentNodes'])} if rig and rig.get('equipmentNodes') else {})}
 

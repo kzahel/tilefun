@@ -40,7 +40,7 @@ for bundle in catalog['bundles']:
     assert images and all(image.packed_file is not None for image in images)
     car, body = bpy.data.objects['CarRoot'], bpy.data.objects['Body']
     assert body.parent == car
-    for wheel in ['FL', 'FR', 'RL', 'RR']:
+    for wheel in [w['id'] for w in rig['wheels']]:
         steer, roll = bpy.data.objects[f'Wheel_{wheel}_Steer'], bpy.data.objects[f'Wheel_{wheel}_Roll']
         assert steer.parent == car and roll.parent == steer and len(roll.children) == 2
         wheel_record = next(w for w in rig['wheels'] if w['id'] == wheel)

@@ -1,9 +1,9 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 6 models retained, 1 integrated
+Status: 45 sprite sets inventoried; 7 models retained, 1 integrated
 in game/lab mesh mode. Blue is the main-game GPU default; ambulance v2,
-police and stowed fire truck await owner inspection.
+police, stowed fire truck and green garbage truck await owner inspection.
 Updated: 2026-10-11.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **6/45 retained models, 39/45 queued; 1/45 own-model
+Current progress: **7/45 retained models, 38/45 queued; 1/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -52,11 +52,16 @@ Police and stowed fire truck are retained in
 [117](../tactical/117-police-and-fire-truck-models.md), with tagged light lenses,
 own wheel rigs and a separate fire ladder hinge. The bank's siren-capable types
 are ambulance, police and fire truck (two ladder sprite states). Green/orange
-garbage trucks carry amber warning beacons and remain queued.
+garbage trucks carry amber warning beacons; green is now retained and orange
+remains queued.
 
 Stowed fire v2 corrects owner-reported axle placement, floor/tire intersections
 and wheel UV ownership in [118](../tactical/118-fire-truck-wheel-alignment.md).
 V1 remains retained; the new exact comparison awaits owner inspection.
+
+Green garbage truck v1 adds six wheels, a separate recessed rear-loader hinge
+and one tagged warning beacon in [119](../tactical/119-six-wheel-garbage-truck.md).
+Its own geometry/UV sources and 4×2 are retained; clearance and integration remain pending.
 
 ## Work order
 
@@ -73,6 +78,7 @@ V1 remains retained; the new exact comparison awaits owner inspection.
   source paint, wheel rigs and tagged lights; retain exact bundles and reviews.
 - [ ] Fit the **raised fire ladder** pose and qualify hinge/steering clearance.
 - [ ] Fit **garbage trucks**, including separate amber beacon lenses.
+  Green is retained; check orange family/paint eligibility before transferring it.
 - [ ] Complete cross-vehicle engine qualification and exact-revision art review
   before considering the full bank ported for production.
 
@@ -98,7 +104,7 @@ models have been started. The later family order can change with owner prioritie
 | --- | --- | --- | --- |
 | `ambulance` | [Retained v2](../../art-source/vehicle-models/ambulance/v2/) — owner inspection pending; v1 retained | Pending | Review [beacons](../../public/assets/models/vehicles/review/ambulance-v2/comparison.png) and flashing; integrate its own GLB and switch state, qualify steering. |
 | `police-car` | [Retained v1](../../art-source/vehicle-models/police-car/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/police-car-v1/comparison.png), physical lamp-order contradiction and wheel fit; integrate its own GLB and light state. |
-| `garbage-truck-green` | Queued | Pending | Fit cab/container geometry and wheel rig; give the amber warning beacon its own lens. |
+| `garbage-truck-green` | [Retained v1](../../art-source/vehicle-models/garbage-truck-green/v1/) — owner inspection pending in [119](../tactical/119-six-wheel-garbage-truck.md) | Pending | Review [4×2](../../public/assets/models/vehicles/review/garbage-truck-green-v1/comparison.png), wheel scale and roof projection; qualify loader/steering clearance and integrate its own GLB. |
 | `garbage-truck-orange` | Queued | Pending | Check green-template eligibility; preserve its own paint and amber beacon lens. |
 | `fire-truck-ladder-1` (stowed) | [Retained v2](../../art-source/vehicle-models/fire-truck-ladder-1/v2/) — wheel correction in [118](../tactical/118-fire-truck-wheel-alignment.md); v1 retained | Pending | Review corrected [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/comparison.png); qualify ladder/steering clearance and remaining roof paint. |
 | `fire-truck-ladder-2` (raised) | Queued | Pending | Fit raised equipment pose; qualify clearance before driving use. |

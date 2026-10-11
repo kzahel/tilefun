@@ -1,0 +1,721 @@
+{
+  "regions": [
+    {
+      "region": "Cab-east",
+      "rect": [
+        0,
+        0,
+        160,
+        160
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Fender--31.5-east",
+      "rect": [
+        160,
+        0,
+        320,
+        160
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Cab-west",
+      "rect": [
+        320,
+        0,
+        480,
+        160
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Fender--31.5-west",
+      "rect": [
+        480,
+        0,
+        640,
+        160
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Cab-roof",
+      "rect": [
+        640,
+        0,
+        800,
+        160
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": "Observed pale roof rectified to cabin; painted beacon footprint removed, hardware owns its paint."
+    },
+    {
+      "region": "Windshield-glass",
+      "rect": [
+        800,
+        0,
+        960,
+        160
+      ],
+      "owner": "south",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Windshield-frame",
+      "rect": [
+        960,
+        0,
+        1120,
+        160
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Front-fascia",
+      "rect": [
+        1120,
+        0,
+        1280,
+        160
+      ],
+      "owner": "south",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Container-east",
+      "rect": [
+        0,
+        160,
+        160,
+        320
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Container-shoulder-east",
+      "rect": [
+        160,
+        160,
+        320,
+        320
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Container-west",
+      "rect": [
+        320,
+        160,
+        480,
+        320
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Container-shoulder-west",
+      "rect": [
+        480,
+        160,
+        640,
+        320
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Container-roof",
+      "rect": [
+        640,
+        160,
+        800,
+        320
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": "Roof panel strip rectified to observed north rows 28..80; roof projection differs from side-art depth."
+    },
+    {
+      "region": "Container-front",
+      "rect": [
+        800,
+        160,
+        960,
+        320
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Chassis-coupling-0",
+      "rect": [
+        960,
+        160,
+        1120,
+        320
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Chassis-coupling-1",
+      "rect": [
+        1120,
+        160,
+        1280,
+        320
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Chassis-coupling-2",
+      "rect": [
+        0,
+        320,
+        160,
+        480
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Chassis-coupling-3",
+      "rect": [
+        160,
+        320,
+        320,
+        480
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Chassis-coupling-4",
+      "rect": [
+        320,
+        320,
+        480,
+        480
+      ],
+      "owner": "south",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Chassis-coupling-5",
+      "rect": [
+        480,
+        320,
+        640,
+        480
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-side-east",
+      "rect": [
+        640,
+        320,
+        800,
+        480
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-brace-east",
+      "rect": [
+        800,
+        320,
+        960,
+        480
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-side-west",
+      "rect": [
+        960,
+        320,
+        1120,
+        480
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-brace-west",
+      "rect": [
+        1120,
+        320,
+        1280,
+        480
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-roof",
+      "rect": [
+        0,
+        480,
+        160,
+        640
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": "Rear roof uses only observed green roof rows 80..97; mouth paint belongs to recessed geometry."
+    },
+    {
+      "region": "Loader-rear-upper",
+      "rect": [
+        160,
+        480,
+        320,
+        640
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-rear-frame--1",
+      "rect": [
+        320,
+        480,
+        480,
+        640
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-mouth-wall--1",
+      "rect": [
+        480,
+        480,
+        640,
+        640
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-rear-frame-1",
+      "rect": [
+        640,
+        480,
+        800,
+        640
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-mouth-wall-1",
+      "rect": [
+        800,
+        480,
+        960,
+        640
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-mouth-sill",
+      "rect": [
+        960,
+        480,
+        1120,
+        640
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-mouth-ceiling",
+      "rect": [
+        1120,
+        480,
+        1280,
+        640
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Loader-mouth-back",
+      "rect": [
+        0,
+        640,
+        160,
+        800
+      ],
+      "owner": "north",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": "Mouth back owns observed loading opening; recession depth is inferred."
+    },
+    {
+      "region": "Mirror--1",
+      "rect": [
+        160,
+        640,
+        320,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Mirror-1",
+      "rect": [
+        320,
+        640,
+        480,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Roof-vent-base",
+      "rect": [
+        480,
+        640,
+        640,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Roof-vent",
+      "rect": [
+        640,
+        640,
+        800,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Underfloor",
+      "rect": [
+        800,
+        640,
+        960,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Warning-amber-base",
+      "rect": [
+        960,
+        640,
+        1120,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored."
+    },
+    {
+      "region": "Warning-amber-lens",
+      "rect": [
+        1120,
+        640,
+        1280,
+        800
+      ],
+      "owner": null,
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": "Observed amber/yellow palette gradient on physical lens; base remains separate and untagged."
+    },
+    {
+      "region": "Tire_FL",
+      "rect": [
+        0,
+        800,
+        160,
+        960
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          32.5,
+          98.5
+        ],
+        "capPaintRadii": [
+          9.5,
+          7
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Hub_FL",
+      "rect": [
+        160,
+        800,
+        320,
+        960
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          32.5,
+          99.5
+        ],
+        "capPaintRadii": [
+          4.1,
+          2.3779999999999997
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Tire_FR",
+      "rect": [
+        320,
+        800,
+        480,
+        960
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          95.5,
+          98.5
+        ],
+        "capPaintRadii": [
+          9.5,
+          7
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Hub_FR",
+      "rect": [
+        480,
+        800,
+        640,
+        960
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          95.5,
+          99.5
+        ],
+        "capPaintRadii": [
+          4.1,
+          2.3779999999999997
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Tire_ML",
+      "rect": [
+        640,
+        800,
+        800,
+        960
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          75.5,
+          95.5
+        ],
+        "capPaintRadii": [
+          6.5,
+          4
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Hub_ML",
+      "rect": [
+        800,
+        800,
+        960,
+        960
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          75.5,
+          96.5
+        ],
+        "capPaintRadii": [
+          3,
+          1.7399999999999998
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Tire_MR",
+      "rect": [
+        960,
+        800,
+        1120,
+        960
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          52.5,
+          95.5
+        ],
+        "capPaintRadii": [
+          6.5,
+          4
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Hub_MR",
+      "rect": [
+        1120,
+        800,
+        1280,
+        960
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          52.5,
+          96.5
+        ],
+        "capPaintRadii": [
+          3,
+          1.7399999999999998
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Tire_RL",
+      "rect": [
+        0,
+        960,
+        160,
+        1120
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          91.5,
+          95.5
+        ],
+        "capPaintRadii": [
+          6.5,
+          4
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Hub_RL",
+      "rect": [
+        160,
+        960,
+        320,
+        1120
+      ],
+      "owner": "west",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          91.5,
+          96.5
+        ],
+        "capPaintRadii": [
+          3,
+          1.7399999999999998
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Tire_RR",
+      "rect": [
+        320,
+        960,
+        480,
+        1120
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          36.5,
+          95.5
+        ],
+        "capPaintRadii": [
+          6.5,
+          4
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    },
+    {
+      "region": "Hub_RR",
+      "rect": [
+        480,
+        960,
+        640,
+        1120
+      ],
+      "owner": "east",
+      "inferred": "Nearest opaque edge outside observations; solid hidden faces and palette transfers are authored.",
+      "cleanup": {
+        "capSourceCenter": [
+          36.5,
+          96.5
+        ],
+        "capPaintRadii": [
+          3,
+          1.7399999999999998
+        ],
+        "treadAndHiddenCap": "Explicit palette fill; no body/fender sampling"
+      }
+    }
+  ],
+  "decisions": [
+    "New six-wheel family with tandem rear axles and independently owned opposite-side paint.",
+    "Observed smaller rear caps use smaller circular wheels and inset rear tracks; physical dimensions remain diagnostic, not gameplay colliders.",
+    "Rear loader is a separate hinge assembly with an actual recessed mouth and diagonal braces; animated clearance is unqualified.",
+    "One amber warning beacon uses the existing isolated lens effect contract. Repeated opposite-view lamp placement is a source contradiction; south/west reverse a fixed physical lamp.",
+    "Source cab roof and container projection are stylized; hidden faces and roof cleanup are explicit palette inferences."
+  ],
+  "limits": "Affine owned UV paint is cleaned authoring, not ray-visible recovery. Own projection/coverage remains separate."
+}

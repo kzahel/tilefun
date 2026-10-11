@@ -81,6 +81,9 @@ try {
           geometry: bundle.geometry ?? { meshObjects: 55, triangles: 842 },
           wheelWellFit: JSON.parse(await readFile(resolve(root, bundle.source, "rig.json"), "utf8"))
             .wheelWellFit,
+          wheelIds: JSON.parse(
+            await readFile(resolve(root, bundle.source, "rig.json"), "utf8"),
+          ).wheels.map((wheel) => wheel.id),
         })),
       )
     : (revision === "red-v1" ? [""] : ["", "green-"]).map((prefix) => ({
@@ -88,13 +91,19 @@ try {
         assetUrl: `/tilefun/demos/authored-car/${revision}/${prefix}car.glb`,
         geometry: { meshObjects: 55, triangles: revision === "v4" ? 834 : 842 },
       }));
-  for (const { prefix, assetUrl, geometry, wheelWellFit } of cases) {
+  for (const {
+    prefix,
+    assetUrl,
+    geometry,
+    wheelWellFit,
+    wheelIds = ["FL", "FR", "RL", "RR"],
+  } of cases) {
     const page = await browser.newPage();
     await page.goto(`${origin}/tilefun/__vehicle_rig_probe`, {
       waitUntil: "networkidle",
     });
     const result = await page.evaluate(
-      async ({ assetUrl, wheelWellFit }) => {
+      async ({ assetUrl, wheelWellFit, wheelIds }) => {
         const { THREE, GLTFLoader } = await import(
           "/tilefun/scripts/authored-assets/runtime/glb-imports.mjs"
         );
@@ -104,6 +113,11 @@ try {
         const gltf = await new GLTFLoader().loadAsync(assetUrl);
         const scene = gltf.scene;
         const rig = createWheelRig(scene, THREE);
+        if (
+          JSON.stringify(rig.wheels.map((wheel) => wheel.id).sort()) !==
+          JSON.stringify([...wheelIds].sort())
+        )
+          throw new Error("Exported wheel set differs from retained contract");
         const body = scene.getObjectByName("Body");
         const car = scene.getObjectByName("CarRoot");
         if (!body || !car || body.parent !== car) throw new Error("Missing rigid root/body parent");
@@ -205,11 +219,12 @@ try {
           const floor = scene.getObjectByName(wheelWellFit.floorMesh);
           const originalGeometry = floor.geometry;
           const solid = new THREE.BufferGeometry();
+          const bounds = new THREE.Box3().setFromObject(floor);
           const corners = [
-            [-70, 10, -23],
-            [70, 10, -23],
-            [70, 10, 23],
-            [-70, 10, 23],
+            [bounds.min.x, bounds.min.y, bounds.min.z],
+            [bounds.max.x, bounds.min.y, bounds.min.z],
+            [bounds.max.x, bounds.min.y, bounds.max.z],
+            [bounds.min.x, bounds.min.y, bounds.max.z],
           ];
           solid.setAttribute(
             "position",
@@ -289,21 +304,27 @@ try {
         });
         rig.setTravel(0);
         const rest = rig.wheels.map((wheel) => wheel.roll.quaternion.clone());
-        rig.setWheelTravel("FL", 2);
-        checkFixed();
-        if (
-          rig.wheels[0].roll.quaternion.angleTo(rest[0]) < 0.1 ||
-          rig.wheels.slice(1).some((wheel, k) => wheel.roll.quaternion.angleTo(rest[k + 1]) > 1e-6)
-        )
-          throw new Error("Wheels are not independent");
+        for (const selected of rig.wheels) {
+          rig.setTravel(0);
+          rig.setWheelTravel(selected.id, 2);
+          checkFixed();
+          if (
+            rig.wheels.some((wheel, k) =>
+              wheel.id === selected.id
+                ? wheel.roll.quaternion.angleTo(rest[k]) < 0.1
+                : wheel.roll.quaternion.angleTo(rest[k]) > 1e-6,
+            )
+          )
+            throw new Error("Wheels are not independent");
+        }
         rig.setSteering(0.2);
         checkFixed();
         if (
           rig.wheels
-            .slice(0, 2)
+            .filter((wheel) => wheel.steer.userData.steering_enabled)
             .some((wheel) => wheel.steer.quaternion.angleTo(wheel.restSteer) < 0.1) ||
           rig.wheels
-            .slice(2)
+            .filter((wheel) => !wheel.steer.userData.steering_enabled)
             .some((wheel) => wheel.steer.quaternion.angleTo(wheel.restSteer) > 1e-6)
         )
           throw new Error("Steering affected wrong assemblies");
@@ -316,7 +337,7 @@ try {
         checkFixed();
         const equipment = [];
         scene.traverse((obj) => {
-          if (obj.userData.tilefun_component === "ladder") equipment.push(obj);
+          if (obj.userData.tilefun_component && obj.userData.hinge_axis_gltf) equipment.push(obj);
         });
         for (const hinge of equipment) {
           if (hinge.parent !== body || !hinge.children.length)
@@ -384,11 +405,11 @@ try {
             : "not qualified",
         };
       },
-      { assetUrl, wheelWellFit },
+      { assetUrl, wheelWellFit, wheelIds },
     );
     assert.equal(result.meshes, geometry.meshObjects);
     assert.equal(result.triangles, geometry.triangles);
-    assert.equal(result.wheels, 4);
+    assert.equal(result.wheels, wheelIds.length);
     await page.locator("#rig-proof").screenshot({ path: resolve(output, `${prefix}rig.png`) });
     results.push({ prefix, ...result });
     await page.close();
