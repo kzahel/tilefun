@@ -560,3 +560,12 @@ retains the view option. Traffic's Worker, input, collision and roof support rem
 native. This changes optional presentation only; the independent car-projection reference lab remains
 on its original source geometry. Steering clearance and rotated physics are later
 work.
+
+## Ambulance driving controls
+
+[117](../tactical/117-ambulance-driving-controls.md) uses shared VehicleControl authority,
+TrafficSystem persistence, binary state and GPU mesh resources for ambulance v2.
+Traffic playground's vehicle selector and emergency commands operate through
+ScenarioSession; held Fast/Shift uses the same sprint input and driven motion.
+SceneFrame receives host presentation time for cosmetic wheel/lens effects;
+paused labs hold the light phase. Game audio remains browser composition in AudioManager.

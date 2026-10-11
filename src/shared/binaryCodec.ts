@@ -52,6 +52,7 @@ const BIT_LOCAL_OFFSET_X = 10;
 const BIT_LOCAL_OFFSET_Y = 11;
 const BIT_AIR_MOMENTUM_Y = 13;
 const BIT_JUMP_INPUT_STATE = 14;
+const BIT_EMERGENCY_STATE = 15;
 const BIT_AIR_MOMENTUM_X = 12;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
@@ -109,8 +110,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 // ---- FrameMessage binary codec ----
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
-const MAX_BASELINE_SIZE = 15 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
-const MAX_DELTA_SIZE = 8 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
+const MAX_BASELINE_SIZE = 16 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
+const MAX_DELTA_SIZE = 13 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -261,6 +262,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.airMomentumX !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_X;
   if (snap.airMomentumY !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_Y;
   if (snap.jumpInputState !== undefined) mask |= 1 << BIT_JUMP_INPUT_STATE;
+  if (snap.emergencyState !== undefined) mask |= 1 << BIT_EMERGENCY_STATE;
   view.setUint16(off, mask, true);
   off += 2;
 
@@ -330,6 +332,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     view.setFloat32(off, snap.jumpInputState, true);
     off += 4;
   }
+  if (snap.emergencyState !== undefined) view.setUint8(off++, snap.emergencyState);
   return off;
 }
 
@@ -429,6 +432,7 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     snap.jumpInputState = view.getFloat32(off, true);
     off += 4;
   }
+  if (mask & (1 << BIT_EMERGENCY_STATE)) snap.emergencyState = view.getUint8(off++);
   return [snap, off];
 }
 
@@ -527,10 +531,14 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     changeMask |= 1 << 15;
     if (delta.jumpInputState === null) nullMask |= 1 << 15;
   }
-  view.setUint16(off, changeMask, true);
-  off += 2;
-  view.setUint16(off, nullMask, true);
-  off += 2;
+  if (delta.emergencyState !== undefined) {
+    changeMask |= 1 << 16;
+    if (delta.emergencyState === null) nullMask |= 1 << 16;
+  }
+  view.setUint32(off, changeMask, true);
+  off += 4;
+  view.setUint32(off, nullMask, true);
+  off += 4;
 
   // Write values for changed, non-null fields
   if (changeMask & (1 << 0)) {
@@ -608,16 +616,18 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     view.setFloat32(off, delta.jumpInputState as number, true);
     off += 4;
   }
+  if (changeMask & (1 << 16) && !(nullMask & (1 << 16)))
+    view.setUint8(off++, delta.emergencyState as number);
   return off;
 }
 
 function readDelta(view: DataView, off: number): [EntityDelta, number] {
   const id = view.getUint32(off, true);
   off += 4;
-  const changeMask = view.getUint16(off, true);
-  off += 2;
-  const nullMask = view.getUint16(off, true);
-  off += 2;
+  const changeMask = view.getUint32(off, true);
+  off += 4;
+  const nullMask = view.getUint32(off, true);
+  off += 4;
 
   const delta: EntityDelta = { id };
 
@@ -776,6 +786,8 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
       off += 4;
     }
   }
+  if (changeMask & (1 << 16))
+    delta.emergencyState = nullMask & (1 << 16) ? null : view.getUint8(off++);
   return [delta, off];
 }
 

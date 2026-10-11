@@ -1712,6 +1712,7 @@ export class GameClient {
     return this.hamburgerOpen || this.optionsDialog.visible || this.focusPaused || document.hidden;
   }
   private clearPlayInput(sendNeutral = true): void {
+    this.audioManager.stopSirens();
     if (sendNeutral && this.scenes?.current instanceof PlayScene)
       this.scenes.current.cancelInput(this.transport);
     this.tapMovement.cancel();

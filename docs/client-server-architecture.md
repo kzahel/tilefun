@@ -169,3 +169,10 @@ the remote entities' source time, with local steering still interpolated locally
 Predicted landing binds its future roof offset back to the committed roof frame.
 These policies live in shared Realm/movement/replica/predictor code used by game
 and labs. [Idle travel evidence](research/idle-support-jump.md) owns acceptance.
+
+Ambulance emergency state is an optional byte in entity baselines and a new delta
+field with explicit removal. Delta change/null masks are now u32 (formerly u16);
+clients and servers must run the same build. The inside driver alone changes it,
+and TrafficSystem saves style/on-off through the normal durable traffic record.
+The existing sprint input boosts shared car prediction/authority and service-owned
+trains. [117](tactical/117-ambulance-driving-controls.md) owns feature validation.

@@ -51,6 +51,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
       ? stateView.getExtrapolationGhosts?.(extrapolateAmount)
       : undefined;
 
+  gc.sceneFrame.presentationTime = gc.time?.presentationSeconds ?? 0;
   const items = collectScene(
     gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities,
     stateView.props,

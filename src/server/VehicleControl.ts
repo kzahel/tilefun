@@ -8,6 +8,7 @@ import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { boardingDistance, isDrivable } from "../traffic/Driving.js";
+import { isEmergencyVehicle, nextEmergencyState } from "../traffic/EmergencyVehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -95,7 +96,11 @@ export class VehicleControl {
     this.sync();
     r.savePlayerData(session);
   }
-  input(session: PlayerSession, input: { dx: number; dy: number }, dt: number): void {
+  input(
+    session: PlayerSession,
+    input: { dx: number; dy: number; sprinting?: boolean },
+    dt: number,
+  ): void {
     const driver = this.drivers.get(session.player.id);
     if (!driver) return;
     if (!Number.isFinite(input.dx) || !Number.isFinite(input.dy)) {
@@ -108,17 +113,34 @@ export class VehicleControl {
     const train = [...(this.realm.railway?.services.values() ?? [])].find(
       (s) => s.driverId === session.player.id,
     );
-    if (train) train.driveInput = Math.sign(input.dx || -input.dy);
+    if (train) {
+      train.driveInput = Math.sign(input.dx || -input.dy);
+      train.driveBoost = input.sprinting === true;
+    }
     this.sync();
   }
-  /** Cars integrate command time only: an empty tick is not a release command.
-   * Trains still brake on their service clock. Neither refreshes the input deadline.
-   */
+  emergency(session: PlayerSession, action: "toggle" | "style"): void {
+    const vehicle = this.get(session);
+    if (
+      !vehicle ||
+      !isEmergencyVehicle(vehicle) ||
+      session.editorEnabled ||
+      (action !== "toggle" && action !== "style")
+    )
+      return;
+    vehicle.emergencyState = nextEmergencyState(vehicle.emergencyState, action);
+    const car = this.realm.traffic?.states.get(vehicle.id);
+    if (car) this.realm.traffic?.onChange?.(car, false);
+  }
+  /** Cars hold across input gaps; trains brake on the service clock. */
   missingInput(session: PlayerSession): void {
     const train = [...(this.realm.railway?.services.values() ?? [])].find(
       (s) => s.driverId === session.player.id,
     );
-    if (train) train.driveInput = 0;
+    if (train) {
+      train.driveInput = 0;
+      train.driveBoost = false;
+    }
   }
   stop(session: PlayerSession): void {
     const vehicle = this.get(session);
@@ -131,6 +153,7 @@ export class VehicleControl {
     if (train) {
       train.speed = 0;
       train.driveInput = 0;
+      train.driveBoost = false;
       for (const c of train.carriages) c.velocity = { vx: 0, vy: 0 };
     }
   }
@@ -148,6 +171,7 @@ export class VehicleControl {
     if (train) {
       delete train.driverId;
       delete train.driveInput;
+      delete train.driveBoost;
       // Resume the next station in the current direction, including after manual reversal.
       if (train.line.path) {
         const distance = train.record.distance ?? 0,

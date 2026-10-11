@@ -368,7 +368,7 @@ describe("EntityDelta binary codec", () => {
     expect(result.wanderAIState).toBeUndefined();
   });
 
-  it("position-only delta is 16 bytes", () => {
+  it("position-only delta is 20 bytes", () => {
     const delta: EntityDelta = {
       id: 42,
       position: { wx: 100, wy: 200 },
@@ -381,8 +381,8 @@ describe("EntityDelta binary codec", () => {
       entityDeltas: [delta],
     };
     const buf = encodeServerMessage(msg);
-    // 19 header + (4 id + 2 changeMask + 2 nullMask + 8 position) = 19 + 16 = 35
-    expect(buf.byteLength).toBe(43);
+    // 27 header + (4 id + 4 changeMask + 4 nullMask + 8 position) = 47
+    expect(buf.byteLength).toBe(47);
   });
 
   it("roundtrips velocity set to null", () => {

@@ -17,6 +17,7 @@ import { RoadType } from "../road/RoadType.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
+import { validEmergencyState } from "./EmergencyVehicle.js";
 import {
   type Lane,
   type LaneGraph,
@@ -52,6 +53,7 @@ export interface SavedTraffic {
   wx?: number;
   wy?: number;
   speed?: number;
+  emergencyState?: number;
   blockedSeconds?: number;
   vx?: number;
   vy?: number;
@@ -514,7 +516,7 @@ export class TrafficSystem {
     s.distance = Math.min(s.distance, s.lane.path.length);
     this.onChange?.(s, false);
   }
-  drive(s: TrafficState, input: { dx: number; dy: number }, dt: number): void {
+  drive(s: TrafficState, input: { dx: number; dy: number; sprinting?: boolean }, dt: number): void {
     s.entity.prevPosition = { ...s.entity.position };
     s.entity.prevWz = s.entity.wz ?? 0;
     const steps = Math.max(1, Math.ceil(dt * 60));
@@ -622,6 +624,7 @@ export class TrafficSystem {
   }
   snapshot(s: TrafficState): SavedTraffic {
     return {
+      ...(s.entity.emergencyState !== undefined ? { emergencyState: s.entity.emergencyState } : {}),
       parked: s.parked ?? false,
       facing: s.entity.sprite?.direction ?? 0,
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
@@ -672,6 +675,11 @@ export class TrafficSystem {
         typeof r.identity !== "string"
       )
         throw new Error("Invalid saved traffic record.");
+      if (
+        r.emergencyState !== undefined &&
+        (!validEmergencyState(r.emergencyState) || r.model !== "ambulance")
+      )
+        throw new Error("Invalid saved emergency state.");
       // Resolve the same local graph used when choosing the saved successor.
       const graph = this.strategy.trafficNetwork(r.wx ?? r.x, r.wy ?? r.y);
       const original =
@@ -723,6 +731,7 @@ export class TrafficSystem {
           : samplePath(activePath, r.distance),
         r.wz ?? 0,
       );
+      if (r.emergencyState !== undefined) s.entity.emergencyState = r.emergencyState;
       s.parked = r.parked ?? false;
       if (r.resumePath) s.resumePath = r.resumePath;
       s.speed = r.parked ? 0 : (r.speed ?? 0);

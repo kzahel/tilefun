@@ -11,7 +11,7 @@ import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { entityHeading, meshAssetFor } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
-import { yawOrientation } from "./MeshPresentation.js";
+import { AMBULANCE_MESH, yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
@@ -92,7 +92,7 @@ export function collectScene(
     ? [...propSurfaces, ...vehicleSurfaces]
     : propSurfaces;
 
-  const poseTime = performance.now() / 1000;
+  const poseTime = frame?.presentationTime ?? 0;
   frame?.meshPoses.retain(entities);
   const insideParents = new Set(entities.filter(isDrivable).map((e) => e.id));
   // --- Entities ---
@@ -121,7 +121,13 @@ export function collectScene(
     const effectiveWy = pos.wy - zOffset;
     const spriteBottom = effectiveWy + (e.sprite.drawOffsetY ?? 0);
     const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
-    const meshRadius = e.type.startsWith("train-curve-proof-v1") ? 96 : meshAsset ? 64 : 0;
+    const meshRadius = e.type.startsWith("train-curve-proof-v1")
+      ? 96
+      : meshAsset === AMBULANCE_MESH
+        ? 112
+        : meshAsset
+          ? 64
+          : 0;
     const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     const top = meshRadius
       ? Math.min(spriteBottom - e.sprite.spriteHeight, effectiveWy - meshRadius * Math.SQRT2)
@@ -164,10 +170,21 @@ export function collectScene(
     const mesh =
       frame?.meshPoses.evaluate(e, poseTime, pos) ??
       (meshAsset
-        ? { assetId: meshAsset, orientation: yawOrientation(entityHeading(e)), radius: 64 }
+        ? { assetId: meshAsset, orientation: yawOrientation(entityHeading(e)), radius: meshRadius }
         : undefined);
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
+      ...(e.type === "vehicle-v1:ambulance" && (e.emergencyState ?? 2) & 1
+        ? {
+            emergencyFlash:
+              poseTime % 1 < 0.12 || (poseTime % 1 >= 0.2 && poseTime % 1 < 0.32)
+                ? 1
+                : poseTime % 1 >= 0.5 &&
+                    (poseTime % 1 < 0.62 || (poseTime % 1 >= 0.7 && poseTime % 1 < 0.82))
+                  ? 2
+                  : 0,
+          }
+        : {}),
       kind: "sprite",
       sortKey,
       wx: pos.wx,

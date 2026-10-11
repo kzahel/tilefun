@@ -63,6 +63,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.jumpZ !== undefined) result.jumpZ = e.jumpZ;
   if (e.airMomentumX !== undefined) result.airMomentumX = e.airMomentumX;
   if (e.jumpInputState !== undefined) result.jumpInputState = e.jumpInputState;
+  if (e.emergencyState !== undefined) result.emergencyState = e.emergencyState;
   if (e.airMomentumY !== undefined) result.airMomentumY = e.airMomentumY;
   if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
   if (e.wz !== undefined) result.wz = e.wz;
@@ -91,6 +92,7 @@ function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
     e.airMomentumX !== s.airMomentumX ||
     e.airMomentumY !== s.airMomentumY ||
     e.jumpInputState !== s.jumpInputState ||
+    e.emergencyState !== s.emergencyState ||
     e.wz !== s.wz ||
     e.parentId !== s.parentId ||
     e.localOffsetX !== s.localOffsetX ||
@@ -211,6 +213,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.jumpZ !== undefined) result.jumpZ = s.jumpZ;
   if (s.airMomentumX !== undefined) result.airMomentumX = s.airMomentumX;
   if (s.jumpInputState !== undefined) result.jumpInputState = s.jumpInputState;
+  if (s.emergencyState !== undefined) result.emergencyState = s.emergencyState;
   if (s.airMomentumY !== undefined) result.airMomentumY = s.airMomentumY;
   if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;
   if (s.wz !== undefined) result.wz = s.wz;

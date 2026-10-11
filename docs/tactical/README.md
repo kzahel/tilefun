@@ -17,6 +17,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [117 Police and fire truck models](117-police-and-fire-truck-models.md) | Retained police/stowed fire GLBs and exact 4×2/flash reviews; separate wheel rigs and ladder hinge; integration/clearance pending |
 | [119 Dense ground support](119-dense-ground-support.md) | Delivered shared fine support candidates; 16–18% moving crowd phone tick improvement, wire/durable parity, ordinary native ranges overlap |
 | [118 Phone physics headroom](118-phone-physics-headroom.md) | Profile complete: crowded ground/support hotspot and read-only candidate census; dense support proposal, ordinary Canvas timeline limits |
+| [117 Ambulance driving controls](117-ambulance-driving-controls.md) | Own v2 model in shared game/lab mesh mode, persistent driving buttons, boost and authoritative lights/synthesized siren styles |
 | [115 Collision broad phase](115-collision-broad-phase.md) | Adaptive 32px collision grid and fused blocker; dense desktop/Pixel scaling gain, ordinary native ranges overlap; 384-phone stress still near/above tick budget |
 | [116 Ambulance beacons and light tags](116-ambulance-beacons-and-light-tags.md) | Retained v2 with tapered beacons, thin bars, six tagged lenses and actual GLB pulse proof; game control/integration pending |
 | [115 Authored ambulance](115-authored-ambulance.md) | Retained v1 for owner inspection: ambulance-specific Blender/UV geometry, rigid wheels and exact sprite/render 4×2; engine integration pending |

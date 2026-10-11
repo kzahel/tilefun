@@ -116,6 +116,8 @@ export interface Entity {
   proceduralId?: string;
   /** Launch-only ball exemption until its collider clears the thrower's body. Transient. */
   ballThrowerId?: number;
+  /** Emergency lights enabled and selected siren style; see EmergencyVehicle. */
+  emergencyState?: number;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

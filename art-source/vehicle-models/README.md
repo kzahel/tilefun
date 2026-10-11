@@ -32,7 +32,8 @@ triangles and its own body/roof geometry, source-owned side graphics and paint
 ownership records. All have four separate steer/roll tire+hub assemblies.
 Ambulance v2 has 56 meshes/1,388 triangles, six tagged light lenses and six fixed
 bases. Its source `lights.json` and the [light contract](../../docs/tactical/116-ambulance-beacons-and-light-tags.md)
-preserve phases and behavior; the game switch/asset integration remain pending.
+preserve phases and behavior; [117](../../docs/tactical/117-ambulance-driving-controls.md)
+connects the v2 GLB and authoritative switch in game/lab mesh mode.
 Police v1 and fire-truck v1 each have two tagged lenses with fixed bases and
 their own `lights.json`. Police uses a new sedan mesh; fire uses separate cab,
 pump and compartment geometry plus a `Ladder_Hinge` with child rails/rungs.

@@ -45,6 +45,15 @@ prediction/replay and authority submission. No physics, transport, generator or
 embedded lab simulation contract changes. The optional game context input owner
 keeps labs using their existing controls.
 
+## Driving buttons
+
+[117](../tactical/117-ambulance-driving-controls.md) keeps the action triangle visible
+while inside a vehicle, including desktop mouse use. Fast uses the existing Sprint
+input; ambulance Siren and Style use Throw and Jump button presses once per hold.
+On foot the original A/B/R behavior remains. Button touches stay claimed so they do
+not steer the joystick, tap destination or held world contact. Seat changes,
+menus and focus loss release held buttons; driving suppresses jumping/ball throwing.
+
 ## Evidence and next work
 
 Typechecks, all 2,188 unit tests (231 files), lint (existing 118 warnings / 34

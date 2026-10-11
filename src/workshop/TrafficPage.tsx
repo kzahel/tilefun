@@ -22,6 +22,9 @@ export default function TrafficPage() {
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0),
     [paused, setPaused] = useState(false);
+  const [model, setModel] = useState("compact-1");
+  const [driving, setDriving] = useState(false);
+  const [emergencyState, setEmergencyState] = useState(2);
   const [zoom, setZoom] = useState(0.75);
   const [terrainPacing, setTerrainPacing] = useState<TerrainPacing>("throughput");
   const presentation = useRef({ zoom, terrainPacing, paused });
@@ -34,7 +37,7 @@ export default function TrafficPage() {
     setError("");
     if (restart > 0) setPaused(false);
     keys.current.clear();
-    const host = new ScenarioPresentationHost(c, trafficRecipe(), {
+    const host = new ScenarioPresentationHost(c, trafficRecipe(model), {
       width: 960,
       height: 600,
       cameraOffsetY: -12,
@@ -45,7 +48,7 @@ export default function TrafficPage() {
           dx: Number(k.has("ArrowRight") || k.has("d")) - Number(k.has("ArrowLeft") || k.has("a")),
           dy: Number(k.has("ArrowDown") || k.has("s")) - Number(k.has("ArrowUp") || k.has("w")),
           jump: k.has(" "),
-          sprinting: false,
+          sprinting: k.has("Shift"),
         };
       },
       onError: (e) => {
@@ -55,6 +58,11 @@ export default function TrafficPage() {
       onFrame: (h) => {
         const s = h.session;
         const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
+        const occupied = s.view.playerEntity.parentId === car.id;
+        setDriving(occupied);
+        setEmergencyState(car.emergencyState ?? 2);
+        c.dataset.emergencyState = String(car.emergencyState ?? 2);
+        c.dataset.driving = String(occupied);
         c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
         c.dataset.carX = String(car.position.wx);
         c.dataset.carY = String(car.position.wy);
@@ -90,7 +98,7 @@ export default function TrafficPage() {
       keys.current.clear();
       scene.current = null;
     };
-  }, [restart]);
+  }, [restart, model]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -113,6 +121,46 @@ export default function TrafficPage() {
         a roof-ride test.
       </p>
       <div className="actions">
+        <label>
+          Vehicle{" "}
+          <select
+            aria-label="Playground vehicle"
+            value={model}
+            onChange={(e) => setModel(e.target.value)}
+          >
+            <option value="compact-1">Blue car</option>
+            <option value="ambulance">Ambulance</option>
+          </select>
+        </label>
+        {driving && (
+          <button type="button" {...touch("Shift")}>
+            Fast
+          </button>
+        )}
+        {driving && model === "ambulance" && (
+          <>
+            <button
+              type="button"
+              onClick={() => {
+                void scene.current
+                  ?.command({ kind: "vehicle-emergency", action: "toggle" })
+                  .catch((e) => setError(String(e)));
+              }}
+            >
+              Siren {emergencyState & 1 ? "On" : "Off"}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                void scene.current
+                  ?.command({ kind: "vehicle-emergency", action: "style" })
+                  .catch((e) => setError(String(e)));
+              }}
+            >
+              Style: {["Lights only", "EU two-tone", "US wail"][emergencyState >> 1]}
+            </button>
+          </>
+        )}
         <button
           type="button"
           onClick={() => {
@@ -218,9 +266,18 @@ export default function TrafficPage() {
           style={{ display: "block", width: "100%", touchAction: "none", borderRadius: 12 }}
           onKeyDown={(e) => {
             if (
-              ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
-                e.key,
-              )
+              [
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight",
+                "w",
+                "a",
+                "s",
+                "d",
+                " ",
+                "Shift",
+              ].includes(e.key)
             ) {
               keys.current.add(e.key);
               e.preventDefault();

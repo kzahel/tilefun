@@ -4,7 +4,7 @@ import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
-import { COMPACT_CAR_MESH, resolveBody } from "./MeshPresentation.js";
+import { AMBULANCE_MESH, COMPACT_CAR_MESH, resolveBody } from "./MeshPresentation.js";
 import { projectWorld } from "./Projection.js";
 import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
@@ -12,6 +12,7 @@ import type { SpriteItem } from "./SceneItem.js";
 /** One render target reused synchronously; only this body's triangles share depth. */
 export class GpuMeshBodies {
   readonly car = new ResourceSlot<CarMeshAsset>();
+  readonly ambulance = new ResourceSlot<CarMeshAsset>();
   readonly ready = new Set<string>();
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
@@ -28,16 +29,19 @@ export class GpuMeshBodies {
   }
   setEnabled(value: boolean) {
     this.enabled = value;
-    if (value && this.car.state === "empty") void this.car.load(loadCarMesh);
+    if (value && this.car.state === "empty") void this.car.load(() => loadCarMesh());
+    if (value && this.ambulance.state === "empty")
+      void this.ambulance.load(() => loadCarMesh("assets/models/vehicles/ambulance-v2.glb", 1));
   }
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
     this.ready.clear();
     if (this.enabled && this.car.state === "ready") this.ready.add(COMPACT_CAR_MESH);
+    if (this.enabled && this.ambulance.state === "ready") this.ready.add(AMBULANCE_MESH);
   }
   draw(camera: Camera, item: SpriteItem): boolean {
-    if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !this.car.value)
-      return false;
+    const asset = item.mesh?.assetId === AMBULANCE_MESH ? this.ambulance.value : this.car.value;
+    if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return false;
     const { surface } = this,
       renderer = surface.renderer;
     surface.flush();
@@ -45,9 +49,10 @@ export class GpuMeshBodies {
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
     if (this.target.width !== resolution || this.target.height !== resolution)
       this.target.setSize(resolution, resolution);
-    const object = this.car.value.object;
+    const object = asset.object;
     object.quaternion.set(...item.mesh.orientation);
-    this.car.value.setTravel(item.mesh.wheelTravel ?? 0);
+    asset.setTravel(item.mesh.wheelTravel ?? 0);
+    asset.setEmergency(item.mesh.emergencyEnabled ?? false, item.mesh.presentationTime ?? 0);
     this.scene.add(object);
     setCarMeshProjection(this.camera.projectionMatrix, radius);
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
@@ -91,6 +96,7 @@ export class GpuMeshBodies {
   dispose() {
     this.ready.clear();
     this.car.dispose();
+    this.ambulance.dispose();
     this.outline.dispose();
     this.target.dispose();
   }

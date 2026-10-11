@@ -13,6 +13,7 @@ import type { SceneItem } from "./SceneItem.js";
 export class SceneFrame {
   interior: InteriorPresentation | null = null;
   interiorKey = "";
+  presentationTime = 0;
   readonly meshPoses: EntityMeshPose;
   readonly overlays = new OverlayFrame();
   readonly drawOrder: number[] = [];

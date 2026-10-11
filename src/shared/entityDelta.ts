@@ -37,6 +37,7 @@ export interface EntityDelta {
   airMomentumX?: number | null;
   airMomentumY?: number | null;
   jumpInputState?: number | null;
+  emergencyState?: number | null;
   wz?: number | null;
   parentId?: number | null;
   localOffsetX?: number | null;
@@ -93,6 +94,7 @@ export function diffEntitySnapshots(
   diffOptionalNum("airMomentumX", prev, curr, ensure);
   diffOptionalNum("airMomentumY", prev, curr, ensure);
   diffOptionalNum("jumpInputState", prev, curr, ensure);
+  diffOptionalNum("emergencyState", prev, curr, ensure);
   diffOptionalNum("wz", prev, curr, ensure);
   diffOptionalNum("parentId", prev, curr, ensure);
   diffOptionalNum("localOffsetX", prev, curr, ensure);
@@ -136,6 +138,7 @@ type OptionalNumField =
   | "airMomentumX"
   | "airMomentumY"
   | "jumpInputState"
+  | "emergencyState"
   | "wz"
   | "parentId"
   | "localOffsetX"
@@ -313,6 +316,7 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "airMomentumX");
   applyOptionalNum(entity, delta, "airMomentumY");
   applyOptionalNum(entity, delta, "jumpInputState");
+  applyOptionalNum(entity, delta, "emergencyState");
   applyOptionalNum(entity, delta, "wz");
   applyOptionalNum(entity, delta, "parentId");
   applyOptionalNum(entity, delta, "localOffsetX");

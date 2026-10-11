@@ -425,11 +425,15 @@ untagged. `VehicleEmergencyLights` clones lens materials and pulses existing
 emissive/unlit paint from explicit enabled/shared-time inputs, setting absolute
 state on every draw and resetting off. It borrows atlas resources and restores
 materials on disposal. Actual GLB off/A/B captures verify visible alternation and
-unchanged body/base paint. This shared helper is available for integration; the
-ambulance resolver/registration and authoritative on/off state are still pending.
-Input, persistence, replication, shared pause/time policy, separate audio and
-Canvas fallback belong to that integration slice. See
-[116](../tactical/116-ambulance-beacons-and-light-tags.md).
+unchanged body/base paint. [117](../tactical/117-ambulance-driving-controls.md) connects
+ambulance v2 through its own resource slot and resolver in game/lab GPU mesh mode.
+It uses authored width, the same axis normalization, a 112px enclosing radius,
+independent wheel travel and native silhouette ink. Every draw sets lens state from
+replicated emergency flags and host presentation time; Canvas/GPU sprite fallback
+adds alternating blue roof beacons. Authority, persistence and audio remain outside
+the renderer. The allcars3d override preserves the ambulance's own asset.
+Exact-revision art review and steering qualification remain open; the tagging
+contract originated in [116](../tactical/116-ambulance-beacons-and-light-tags.md).
 
 `GpuMeshBodies` draws that body into one reusable depth target at one texel per
 world pixel, applies inward silhouette ink in a second color target and composites

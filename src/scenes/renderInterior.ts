@@ -52,6 +52,7 @@ export function renderInterior(gc: GameContext, alpha: number, particles: Partic
       .filter((p) => p.type !== INTERIOR_WALL_TYPE && !furnitureAsset(p.type))
       .map((p) => p.id),
   );
+  gc.sceneFrame.presentationTime = gc.time?.presentationSeconds ?? 0;
   const items = collectScene(
     gc.doorPresentation?.entities(gc.stateView.entities, gc.realmId ?? null) ??
       gc.stateView.entities,

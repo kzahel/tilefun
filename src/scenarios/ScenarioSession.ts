@@ -392,6 +392,10 @@ export class ScenarioSession {
       await this.realm.callTrain(this.player, command.benchId);
       return;
     }
+    if (command.kind === "vehicle-emergency") {
+      this.realm.vehicles.emergency(this.player, command.action);
+      return;
+    }
     if (command.kind === "enter-vehicle") {
       this.realm.vehicles.enter(this.player, command.entityId);
       return;

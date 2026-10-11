@@ -251,3 +251,81 @@ it("saves a driven train through a bend and holds the open route end until rever
     await s.close();
   }
 }, 15000);
+
+it("only the ambulance driver switches persistent emergency state across binary replicas and reload", async () => {
+  const input = recipe();
+  const carSpec = required(input.traffic?.[0]);
+  carSpec.model = "ambulance";
+  const s = await ScenarioSession.create(input);
+  try {
+    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    const other = new PlayerSession("spectator", s.realm.entityManager.spawn(createPlayer(0, 0)));
+    s.realm.vehicles.emergency(other, "toggle");
+    expect(car.entity.emergencyState).toBeUndefined();
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    s.realm.handleMessage(s.player.clientId, s.player, {
+      type: "vehicle-emergency",
+      action: "toggle",
+    });
+    expect(car.entity.emergencyState).toBe(3);
+    const predictor = new PlayerPredictor();
+    const player = deserializeEntity(serializeEntity(s.player.player));
+    const replica = deserializeEntity(serializeEntity(car.entity));
+    predictor.reset(player, replica);
+    expect(predictor.mount?.emergencyState).toBe(3);
+    replica.emergencyState = 5;
+    predictor.reconcile(player, 0, s.realm.world, [], [replica], replica.id);
+    expect(predictor.mount?.emergencyState).toBe(5);
+    delete replica.emergencyState;
+    predictor.reconcile(player, 0, s.realm.world, [], [replica], replica.id);
+    expect(predictor.mount?.emergencyState).toBeUndefined();
+    s.realm.vehicles.emergency(other, "style");
+    expect(car.entity.emergencyState).toBe(3);
+    s.realm.vehicles.emergency(s.player, "style");
+    expect(car.entity.emergencyState).toBe(5);
+    await s.reload();
+    const restored = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    expect(restored.entity.emergencyState).toBe(5);
+    s.realm.vehicles.emergency(s.player, "style");
+    expect(restored.entity.emergencyState).toBe(1); // lights only
+    s.realm.vehicles.emergency(s.player, "toggle");
+    expect(restored.entity.emergencyState).toBe(0);
+    s.realm.vehicles.exit(s.player);
+    s.realm.vehicles.emergency(s.player, "toggle");
+    expect(restored.entity.emergencyState).toBe(0);
+  } finally {
+    await s.close();
+  }
+});
+
+it("boost shares authority/prediction motion, remains normalized and brakes on release", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    const predictor = new PlayerPredictor();
+    predictor.reset(
+      deserializeEntity(serializeEntity(s.player.player)),
+      deserializeEntity(serializeEntity(car.entity)),
+    );
+    const input = { ...idle, dx: 1, dy: 1, sprinting: true };
+    for (let i = 0; i < 60; i++) {
+      predictor.update(
+        0.01667,
+        input,
+        s.realm.world,
+        s.realm.propManager.props,
+        s.realm.entityManager.entities,
+      );
+      await s.step(input);
+    }
+    const speed = Math.hypot(car.entity.velocity?.vx ?? 0, car.entity.velocity?.vy ?? 0);
+    expect(speed).toBeGreaterThan(112);
+    expect(speed).toBeLessThanOrEqual(179.201);
+    expect(predictor.mount?.position.wx).toBeCloseTo(car.entity.position.wx, 3);
+    for (let i = 0; i < 30; i++) await s.step(idle);
+    expect(car.entity.velocity).toEqual({ vx: 0, vy: 0 });
+  } finally {
+    await s.close();
+  }
+});

@@ -1,5 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
-import { COMPACT_CAR_MESH, type MeshInstance } from "./MeshPresentation.js";
+import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
+import { AMBULANCE_MESH, COMPACT_CAR_MESH, type MeshInstance } from "./MeshPresentation.js";
 
 interface Pose {
   angle: number;
@@ -8,9 +9,14 @@ interface Pose {
   x: number;
   y: number;
   travel: number;
-  instance: MeshInstance & { wheelTravel: number };
+  instance: MeshInstance & {
+    wheelTravel: number;
+    emergencyEnabled?: boolean;
+    presentationTime?: number;
+  };
 }
 export function meshAssetFor(entity: Pick<Entity, "type">, allCars3d = false): string | undefined {
+  if (entity.type === "vehicle-v1:ambulance") return AMBULANCE_MESH;
   return entity.type === "vehicle-v1:compact-1" ||
     (allCars3d && entity.type.startsWith("vehicle-v1:"))
     ? COMPACT_CAR_MESH
@@ -64,7 +70,12 @@ export class EntityMeshPose {
         x: position.wx,
         y: position.wy,
         travel: 0,
-        instance: { assetId, orientation, radius: 64, wheelTravel: 0 },
+        instance: {
+          assetId,
+          orientation,
+          radius: assetId === AMBULANCE_MESH ? 112 : 64,
+          wheelTravel: 0,
+        },
       };
       this.poses.set(entity.id, pose);
     } else {
@@ -94,6 +105,8 @@ export class EntityMeshPose {
       pose.orientation[2] = Math.sin(pose.angle / 2);
       pose.orientation[3] = Math.cos(pose.angle / 2);
     }
+    pose.instance.emergencyEnabled = emergencyEnabled(entity.emergencyState);
+    pose.instance.presentationTime = time;
     return pose.instance;
   }
   clear() {

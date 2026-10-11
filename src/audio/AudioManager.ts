@@ -1,3 +1,6 @@
+import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
+
 /**
  * Thin wrapper around the Web Audio API.
  * Handles lazy AudioContext creation, autoplay unlock, buffer preloading,
@@ -8,6 +11,94 @@ export class AudioManager {
   private buffers = new Map<string, AudioBuffer>();
   private unlocked = false;
   private master: GainNode | null = null;
+  private sirens = new Map<
+    number,
+    { style: number; source: AudioBufferSourceNode; gain: GainNode; pan: StereoPannerNode }
+  >();
+  private sirenBuffers = new Map<number, AudioBuffer>();
+
+  updateSirens(entities: readonly Entity[], listener: PositionComponent, enabled: boolean): void {
+    const ctx = this.ctx;
+    if (!ctx || ctx.state !== "running" || !enabled) {
+      this.stopSirens();
+      return;
+    }
+    const audible = new Set<number>();
+    for (const entity of entities) {
+      if (!isEmergencyVehicle(entity)) continue;
+      const style = sirenStyle(entity.emergencyState);
+      const distance = Math.hypot(
+        entity.position.wx - listener.wx,
+        entity.position.wy - listener.wy,
+      );
+      if (!emergencyEnabled(entity.emergencyState) || !style || distance >= 600) continue;
+      audible.add(entity.id);
+      let voice = this.sirens.get(entity.id);
+      if (voice && voice.style !== style) {
+        this.stopSiren(entity.id);
+        voice = undefined;
+      }
+      if (!voice) {
+        let buffer = this.sirenBuffers.get(style);
+        if (!buffer) {
+          buffer = ctx.createBuffer(1, ctx.sampleRate * 4, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          let phase = 0;
+          for (let i = 0; i < data.length; i++) {
+            const time = i / ctx.sampleRate;
+            const pitch =
+              style === 1
+                ? 500 + 80 * Math.tanh(12 * Math.sin(2 * Math.PI * time))
+                : 720 - 280 * Math.cos(Math.PI * time);
+            phase = (phase + pitch / ctx.sampleRate) % 1;
+            data[i] = 1 - 4 * Math.abs(phase - 0.5);
+          }
+          // Quiet seam avoids clicks when the loop wraps.
+          for (let i = 0; i < ctx.sampleRate * 0.01; i++) {
+            const fade = i / (ctx.sampleRate * 0.01);
+            data[i] = (data[i] ?? 0) * fade;
+            const end = data.length - i - 1;
+            data[end] = (data[end] ?? 0) * fade;
+          }
+          this.sirenBuffers.set(style, buffer);
+        }
+        const source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.loop = true;
+        const gain = ctx.createGain();
+        gain.gain.value = 0;
+        const pan = ctx.createStereoPanner();
+        source.connect(gain);
+        gain.connect(pan);
+        pan.connect(this.master ?? ctx.destination);
+        source.start();
+        voice = { style, source, gain, pan };
+        this.sirens.set(entity.id, voice);
+      }
+      voice.gain.gain.setTargetAtTime(0.12 * (1 - distance / 600) ** 2, ctx.currentTime, 0.03);
+      voice.pan.pan.setTargetAtTime(
+        Math.max(-1, Math.min(1, (entity.position.wx - listener.wx) / 400)),
+        ctx.currentTime,
+        0.03,
+      );
+    }
+    for (const id of this.sirens.keys()) if (!audible.has(id)) this.stopSiren(id);
+  }
+  private stopSiren(id: number): void {
+    const voice = this.sirens.get(id);
+    if (!voice || !this.ctx) return;
+    this.sirens.delete(id);
+    voice.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.01);
+    voice.source.onended = () => {
+      voice.source.disconnect();
+      voice.gain.disconnect();
+      voice.pan.disconnect();
+    };
+    voice.source.stop(this.ctx.currentTime + 0.06);
+  }
+  stopSirens(): void {
+    for (const id of this.sirens.keys()) this.stopSiren(id);
+  }
 
   /** Quiet game sounds while the Idea dialog owns the microphone/readback. */
   setIdeaDucking(enabled: boolean): void {

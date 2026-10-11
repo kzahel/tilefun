@@ -1,11 +1,13 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
+import { VehicleEmergencyLights } from "./VehicleEmergencyLights.js";
 
-/** One retained blue car, shared by game and labs. The outer group owns the
+/** Retained vehicle resources, shared by game and labs. The outer group owns the
  * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
  * Ground origin is authored. A fixed lateral registration fits its width to
- * the game view without changing tire radius, roof height or camera projection.
+ * the compact game view; ambulance keeps its authored width. Tire radius, roof
+ * height and camera projection remain unchanged.
  */
 export class CarMeshAsset {
   readonly object = new THREE.Group();
@@ -19,7 +21,8 @@ export class CarMeshAsset {
   }[] = [];
   private readonly rotation = new THREE.Quaternion();
   readonly meshCount: number;
-  constructor(scene: THREE.Group) {
+  private lights?: VehicleEmergencyLights;
+  constructor(scene: THREE.Group, lateralScale = 1.3) {
     let meshes = 0;
     scene.traverse((node) => {
       if (!(node instanceof THREE.Mesh)) return;
@@ -71,9 +74,17 @@ export class CarMeshAsset {
       normalized.rotation.set(Math.PI / 2, 0, Math.PI, "ZYX");
       normalized.add(scene);
       const registered = new THREE.Group();
-      registered.scale.y = 1.3;
+      registered.scale.y = lateralScale;
       registered.add(normalized);
       this.object.add(registered);
+      this.lights = new VehicleEmergencyLights(scene, {
+        periodSeconds: 1,
+        pulseWindows: [
+          [0, 0.12],
+          [0.2, 0.32],
+        ],
+        peakGain: 4,
+      });
     } catch (error) {
       this.dispose();
       throw error;
@@ -86,7 +97,11 @@ export class CarMeshAsset {
       wheel.roll.quaternion.copy(wheel.rest).multiply(this.rotation);
     }
   }
+  setEmergency(enabled: boolean, time: number) {
+    this.lights?.setState(enabled, time);
+  }
   dispose() {
+    this.lights?.dispose();
     for (const resource of this.resources) resource.dispose();
     for (const bitmap of this.bitmaps) bitmap.close();
     this.resources.clear();
@@ -94,7 +109,10 @@ export class CarMeshAsset {
     this.object.clear();
   }
 }
-export async function loadCarMesh(): Promise<CarMeshAsset> {
-  const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}${COMPACT_CAR_GLB}`);
-  return new CarMeshAsset(gltf.scene);
+export async function loadCarMesh(
+  path = COMPACT_CAR_GLB,
+  lateralScale = 1.3,
+): Promise<CarMeshAsset> {
+  const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}${path}`);
+  return new CarMeshAsset(gltf.scene, lateralScale);
 }

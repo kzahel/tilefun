@@ -15,6 +15,7 @@ import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { quantizeAxis, quantizeInputDtMs } from "../shared/binaryCodec.js";
 import { occupiedVehicle } from "../traffic/Driving.js";
+import { isEmergencyVehicle } from "../traffic/EmergencyVehicle.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
@@ -87,6 +88,8 @@ export class PlayScene implements GameScene {
   /** Entity IDs that have been seen with deathTimer (to detect ghost death onset). */
   private dyingEntities = new Set<number>();
   /** Accumulated throw charge time (seconds). 0 = not charging. */
+  private emergencyHeld = false;
+  private styleHeld = false;
   private throwChargeTime = 0;
   private wasThrowHeld = false;
   /** Track ball entity positions for water-splash effect on removal. */
@@ -258,9 +261,15 @@ export class PlayScene implements GameScene {
       gc.touchHold?.reset();
       gc.touchButtons.reset();
       this.occupiedId = vehicle?.id;
+      this.emergencyHeld = gc.actions.isHeld("throw");
+      this.styleHeld = gc.actions.isHeld("jump");
     }
-    gc.touchButtons.enabled = !vehicle;
+    gc.touchButtons.driving = !!vehicle;
+    gc.touchButtons.emergency = !!vehicle && isEmergencyVehicle(vehicle);
+    gc.touchButtons.emergencyState = vehicle?.emergencyState ?? 2;
     const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
+    gc.touchButtons.enabled = !inputLocked;
+    if (inputLocked) gc.touchButtons.reset();
     gc.touchJoystick.enabled = (gc.touchMovement ?? "joystick") === "joystick" && !inputLocked;
     if (inputLocked) {
       gc.touchHold?.reset();
@@ -288,7 +297,22 @@ export class PlayScene implements GameScene {
           !!vehicle && isTrain(vehicle),
           vehicle ? 24 : 0,
         ) ?? manual;
-    if (vehicle) rawMovement = { ...rawMovement, jump: false, sprinting: false };
+    const sirenHeld = !inputLocked && gc.actions.isHeld("throw");
+    const styleHeld = !inputLocked && gc.actions.isHeld("jump");
+    if (vehicle && isEmergencyVehicle(vehicle)) {
+      if (sirenHeld && !this.emergencyHeld)
+        gc.transport.send({ type: "vehicle-emergency", action: "toggle" });
+      if (styleHeld && !this.styleHeld)
+        gc.transport.send({ type: "vehicle-emergency", action: "style" });
+    }
+    this.emergencyHeld = sirenHeld;
+    this.styleHeld = styleHeld;
+    gc.audioManager.updateSirens(
+      gc.stateView.entities,
+      gc.stateView.playerEntity.position,
+      !inputLocked,
+    );
+    if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
     const commandDtMs = quantizeInputDtMs(dt * getTimeScale() * 1000);
@@ -565,6 +589,9 @@ export class PlayScene implements GameScene {
   }
 
   private stopMovement(gc: GameContext): void {
+    gc.audioManager.stopSirens();
+    this.emergencyHeld = false;
+    this.styleHeld = false;
     gc.tapMovement?.cancel();
     gc.trainTapMovement?.cancel();
     gc.touchHold?.reset();

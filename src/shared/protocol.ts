@@ -149,6 +149,7 @@ export type ClientMessage =
       editorTab: string;
       brushMode: string;
     }
+  | { type: "vehicle-emergency"; action: "toggle" | "style" }
   | { type: "throw-ball"; dirX: number; dirY: number; force: number }
   | { type: "identify"; displayName: string; profileId?: string; playerModel?: string }
   | { type: "set-player-model"; requestId: number; model: string }
@@ -199,6 +200,8 @@ export interface EntitySnapshot {
   airMomentumY?: number;
   /** Authoritative jump-button latch: bit 0 consumed, bit 1 held. */
   jumpInputState?: number;
+  /** Emergency lights enabled and selected siren style; see EmergencyVehicle. */
+  emergencyState?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

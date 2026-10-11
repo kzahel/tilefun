@@ -81,6 +81,7 @@ export class ScenarioPresentationHost {
   private steps = 0;
   private pausedViewKey = "";
   private poseSeconds = 0;
+  private lightSeconds = 0;
   private displayedPlayer: Entity | undefined;
   private vehicleControl: VehicleControl | undefined;
   private vehicleControls: boolean;
@@ -202,6 +203,7 @@ export class ScenarioPresentationHost {
     this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
     this.vehicleControl?.update(this.session.view, true, this.paused);
     if (this.paused) return;
+    this.lightSeconds += dt;
     try {
       this.camera.zoom = this.options.settings().zoom;
       this.camera.savePrev();
@@ -212,7 +214,7 @@ export class ScenarioPresentationHost {
       }
       const raw = this.options.input();
       const input = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities)
-        ? { ...raw, jump: false, sprinting: false }
+        ? { ...raw, jump: false }
         : raw;
       this.interpolate = this.session.submitInput(input, dt, this.camera.getVisibleChunkRange());
       if (this.interpolate) {
@@ -303,6 +305,7 @@ export class ScenarioPresentationHost {
           this.options.settings().terrainPacing,
         );
       this.drawOverlay(this.options.underlay);
+      this.frame.presentationTime = this.lightSeconds;
       const items = collectScene(
         entities,
         view.props,

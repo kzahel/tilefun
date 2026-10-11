@@ -27,6 +27,13 @@ interface ButtonDef {
 
 export class TouchButtons {
   enabled = true;
+  driving = false;
+  emergency = false;
+  emergencyState = 2;
+  private mouseButton: number | null = null;
+  private visibleButton(index: number): boolean {
+    return !this.driving || index === 2 || this.emergency;
+  }
   private canvas: HTMLCanvasElement;
   private buttons: ButtonDef[] = [
     { label: "A", pressed: false, touchId: null }, // jump
@@ -54,6 +61,11 @@ export class TouchButtons {
   }
 
   attach(): void {
+    this.canvas.addEventListener("mousedown", this.onMouseDown);
+    if (typeof window !== "undefined") {
+      window.addEventListener("mouseup", this.onMouseUp);
+      window.addEventListener("blur", this.onBlur);
+    }
     this.canvas.addEventListener("touchstart", this.onTouchStart, {
       passive: false,
     });
@@ -66,6 +78,11 @@ export class TouchButtons {
   }
 
   detach(): void {
+    this.canvas.removeEventListener("mousedown", this.onMouseDown);
+    if (typeof window !== "undefined") {
+      window.removeEventListener("mouseup", this.onMouseUp);
+      window.removeEventListener("blur", this.onBlur);
+    }
     this.canvas.removeEventListener("touchstart", this.onTouchStart);
     this.canvas.removeEventListener("touchend", this.onTouchEnd);
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
@@ -73,6 +90,7 @@ export class TouchButtons {
   }
 
   reset(): void {
+    this.mouseButton = null;
     for (const btn of this.buttons) {
       btn.pressed = false;
       btn.touchId = null;
@@ -83,37 +101,60 @@ export class TouchButtons {
   /** Render buttons on the canvas. Only draws on touch-capable devices. */
   draw(ctx: CanvasRenderingContext2D): void {
     if (!this.enabled) return;
-    if (!isTouchDevice()) return;
+    if (!this.driving && !isTouchDevice()) return;
 
     const positions = this.getPositions();
     for (let i = 0; i < this.buttons.length; i++) {
       const btn = this.buttons[i];
       const pos = positions[i];
-      if (!btn || !pos) continue;
+      if (!btn || !pos || !this.visibleButton(i)) continue;
 
       ctx.save();
       // Circle
-      ctx.globalAlpha = btn.pressed ? ALPHA_PRESSED : ALPHA_IDLE;
+      ctx.globalAlpha = this.driving
+        ? btn.pressed
+          ? 0.65
+          : 0.4
+        : btn.pressed
+          ? ALPHA_PRESSED
+          : ALPHA_IDLE;
       ctx.fillStyle = "white";
       ctx.beginPath();
       ctx.arc(pos.x, pos.y, BTN_RADIUS, 0, Math.PI * 2);
       ctx.fill();
 
       // Label
-      ctx.globalAlpha = btn.pressed ? LABEL_ALPHA_PRESSED : LABEL_ALPHA_IDLE;
+      ctx.globalAlpha = this.driving ? 1 : btn.pressed ? LABEL_ALPHA_PRESSED : LABEL_ALPHA_IDLE;
       ctx.fillStyle = "white";
       ctx.font = LABEL_FONT;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText(btn.label, pos.x, pos.y);
+      const label = this.driving
+        ? i === 2
+          ? "Fast"
+          : i === 1
+            ? this.emergencyState & 1
+              ? "Siren On"
+              : "Siren Off"
+            : (["Quiet", "EU", "US"][this.emergencyState >> 1] ?? "EU")
+        : btn.label;
+      ctx.fillText(label, pos.x, pos.y);
+      if (this.driving) {
+        ctx.font = "10px sans-serif";
+        ctx.fillText(
+          i === 2 ? "hold · Shift" : i === 1 ? "toggle · B" : "style · Space",
+          pos.x,
+          pos.y + 15,
+        );
+      }
       ctx.restore();
     }
   }
 
   /** Compute button center positions based on current canvas size. */
   private getPositions(): { x: number; y: number }[] {
-    const w = this.canvas.width;
-    const h = this.canvas.height;
+    const w = this.canvas.clientWidth || this.canvas.width;
+    const h = this.canvas.clientHeight || this.canvas.height;
 
     // A (jump) — bottom-right
     const aX = w - MARGIN - BTN_RADIUS;
@@ -136,7 +177,7 @@ export class TouchButtons {
     const positions = this.getPositions();
     for (let i = 0; i < positions.length; i++) {
       const pos = positions[i];
-      if (!pos) continue;
+      if (!pos || !this.visibleButton(i)) continue;
       const dx = x - pos.x;
       const dy = y - pos.y;
       if (dx * dx + dy * dy <= HIT_RADIUS * HIT_RADIUS) {
@@ -146,12 +187,35 @@ export class TouchButtons {
     return -1;
   }
 
+  private onBlur = (): void => this.reset();
+  private onMouseDown = (event: MouseEvent): void => {
+    if (!this.enabled || !this.driving || event.button !== 0) return;
+    const rect = this.canvas.getBoundingClientRect();
+    const index = this.hitTest(event.clientX - rect.left, event.clientY - rect.top);
+    if (index < 0 || this.buttons[index]?.touchId !== null) return;
+    const button = this.buttons[index];
+    if (!button) return;
+    this.mouseButton = index;
+    button.pressed = true;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  };
+  private onMouseUp = (): void => {
+    if (this.mouseButton !== null) {
+      const button = this.buttons[this.mouseButton];
+      if (button && button.touchId === null) button.pressed = false;
+      this.mouseButton = null;
+    }
+  };
   private onTouchStart = (e: TouchEvent): void => {
     if (!this.enabled) return;
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;
-      const btnIdx = this.hitTest(touch.clientX, touch.clientY);
+      const btnIdx = this.hitTest(
+        touch.clientX - (this.canvas.getBoundingClientRect?.().left ?? 0),
+        touch.clientY - (this.canvas.getBoundingClientRect?.().top ?? 0),
+      );
       if (btnIdx < 0) continue;
       const btn = this.buttons[btnIdx];
       if (!btn) continue;

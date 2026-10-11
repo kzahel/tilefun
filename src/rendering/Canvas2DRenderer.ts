@@ -240,6 +240,19 @@ function drawSprite(
     );
   }
 
+  if (item.emergencyFlash) {
+    const lamp = camera.worldToScreen(
+      item.wx + (item.emergencyFlash === 1 ? -9 : 9),
+      item.wy - item.zOffset - 40,
+    );
+    ctx.fillStyle = "#79dfff";
+    ctx.fillRect(
+      lamp.sx - 2 * camera.scale,
+      lamp.sy - camera.scale,
+      4 * camera.scale,
+      2 * camera.scale,
+    );
+  }
   ctx.restore();
 }
 

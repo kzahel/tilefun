@@ -12,6 +12,7 @@ export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem;
 export interface SpriteItem {
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
+  emergencyFlash?: number;
   kind: "sprite";
   sortKey: number;
   /** Interpolated world position (feet = bottom-center). */

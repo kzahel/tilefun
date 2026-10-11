@@ -6,7 +6,10 @@ export interface MeshInstance {
   readonly radius: number;
   /** Cosmetic signed world-pixel travel; evaluated by shared presentation. */
   readonly wheelTravel?: number;
+  readonly emergencyEnabled?: boolean;
+  readonly presentationTime?: number;
 }
+export const AMBULANCE_MESH = "ambulance-authored-v2";
 export const COMPACT_CAR_MESH = "compact-1-authored-v7";
 export function yawOrientation(yaw: number): MeshInstance["orientation"] {
   return [0, 0, Math.sin(yaw / 2), Math.cos(yaw / 2)];

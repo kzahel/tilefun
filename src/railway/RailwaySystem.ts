@@ -45,6 +45,7 @@ export interface RailServiceRecord {
 export interface RailService {
   driverId?: number;
   driveInput?: number;
+  driveBoost?: boolean;
   line: RailRoute;
   entity: Entity;
   carriages: Entity[];
@@ -59,7 +60,7 @@ export function drivenTrainSpeed(s: RailService, dt: number, distance: number): 
   const braking = !desired || (desired !== current && s.speed > 0);
   s.speed = Math.min(
     Math.max(0, s.speed + (braking ? -192 : 96) * dt),
-    192,
+    s.driveBoost ? 288 : 192,
     Math.sqrt(2 * 192 * distance),
   );
   return s.speed;

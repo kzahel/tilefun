@@ -1,8 +1,8 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 7 models retained, 1 integrated
-in game/lab mesh mode. Blue is the main-game GPU default; ambulance v2,
+Status: 45 sprite sets inventoried; 7 models retained, 2 integrated
+in game/lab mesh mode. Blue and ambulance v2 use their own assets in main-game GPU mesh mode;
 police, stowed fire truck and green garbage truck await owner inspection.
 Updated: 2026-10-11.
 
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **7/45 retained models, 38/45 queued; 1/45 own-model
+Current progress: **7/45 retained models, 38/45 queued; 2/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -102,7 +102,7 @@ models have been started. The later family order can change with owner prioritie
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `ambulance` | [Retained v2](../../art-source/vehicle-models/ambulance/v2/) — owner inspection pending; v1 retained | Pending | Review [beacons](../../public/assets/models/vehicles/review/ambulance-v2/comparison.png) and flashing; integrate its own GLB and switch state, qualify steering. |
+| `ambulance` | [Retained v2](../../art-source/vehicle-models/ambulance/v2/) — owner inspection pending; v1 retained | Integrated in default GPU mesh mode | Review [beacons](../../public/assets/models/vehicles/review/ambulance-v2/comparison.png) and flashing; playtest [117](../tactical/117-ambulance-driving-controls.md) and qualify steering. |
 | `police-car` | [Retained v1](../../art-source/vehicle-models/police-car/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/police-car-v1/comparison.png), physical lamp-order contradiction and wheel fit; integrate its own GLB and light state. |
 | `garbage-truck-green` | [Retained v1](../../art-source/vehicle-models/garbage-truck-green/v1/) — owner inspection pending in [119](../tactical/119-six-wheel-garbage-truck.md) | Pending | Review [4×2](../../public/assets/models/vehicles/review/garbage-truck-green-v1/comparison.png), wheel scale and roof projection; qualify loader/steering clearance and integrate its own GLB. |
 | `garbage-truck-orange` | Queued | Pending | Check green-template eligibility; preserve its own paint and amber beacon lens. |

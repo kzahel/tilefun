@@ -49,7 +49,7 @@ function facing(dx: number, dy: number, previous: Direction): Direction {
 /** Shared authority/replay car step. Call in small substeps; commit only a clear full body. */
 export function drivenCarPose(
   car: Entity,
-  input: { dx: number; dy: number },
+  input: { dx: number; dy: number; sprinting?: boolean },
   dt: number,
   world: World,
   props: readonly Prop[],
@@ -58,8 +58,9 @@ export function drivenCarPose(
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
   const length = Math.hypot(input.dx, input.dy);
   const scale = length > 1 ? 1 / length : 1;
-  const targetX = input.dx * scale * DRIVE_SPEED,
-    targetY = input.dy * scale * DRIVE_SPEED;
+  const speed = DRIVE_SPEED * (input.sprinting ? 1.6 : 1);
+  const targetX = input.dx * scale * speed,
+    targetY = input.dy * scale * speed;
   const old = car.velocity ?? { vx: 0, vy: 0 };
   const change = { vx: targetX - old.vx, vy: targetY - old.vy };
   const difference = Math.hypot(change.vx, change.vy);

@@ -1,0 +1,47 @@
+import { afterEach, expect, it, vi } from "vitest";
+import { TouchButtons } from "./TouchButtons.js";
+
+afterEach(() => vi.unstubAllGlobals());
+it("shows mouse-usable driving controls on desktop and releases boost on blur", () => {
+  const canvas = new EventTarget() as EventTarget & {
+    width: number;
+    height: number;
+    getBoundingClientRect(): { left: number; top: number };
+  };
+  Object.assign(canvas, {
+    width: 800,
+    height: 600,
+    getBoundingClientRect: () => ({ left: 0, top: 0 }),
+  });
+  const win = new EventTarget();
+  vi.stubGlobal("window", win);
+  vi.stubGlobal("navigator", { maxTouchPoints: 0 });
+  const buttons = new TouchButtons(canvas as unknown as HTMLCanvasElement);
+  const ctx = {
+    save: vi.fn(),
+    restore: vi.fn(),
+    beginPath: vi.fn(),
+    arc: vi.fn(),
+    fill: vi.fn(),
+    fillText: vi.fn(),
+  };
+  buttons.draw(ctx as unknown as CanvasRenderingContext2D);
+  expect(ctx.fillText).not.toHaveBeenCalled();
+  buttons.driving = true;
+  buttons.draw(ctx as unknown as CanvasRenderingContext2D);
+  expect(ctx.fillText.mock.calls.map((call) => call[0])).toEqual(["Fast", "hold · Shift"]);
+  buttons.emergency = true;
+  buttons.emergencyState = 5;
+  ctx.fillText.mockClear();
+  buttons.draw(ctx as unknown as CanvasRenderingContext2D);
+  expect(ctx.fillText.mock.calls.map((call) => call[0])).toContain("US");
+  expect(ctx.fillText.mock.calls.map((call) => call[0])).toContain("Siren On");
+  buttons.attach();
+  const down = new Event("mousedown", { cancelable: true });
+  Object.assign(down, { button: 0, clientX: 680, clientY: 548 });
+  canvas.dispatchEvent(down);
+  expect(buttons.sprintPressed).toBe(true);
+  win.dispatchEvent(new Event("blur"));
+  expect(buttons.sprintPressed).toBe(false);
+  buttons.detach();
+});

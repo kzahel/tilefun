@@ -1359,6 +1359,10 @@ export class Realm {
         this.worldAPI.events.emit("player-interact", { wx: msg.wx, wy: msg.wy });
         break;
 
+      case "vehicle-emergency": {
+        this.vehicles.emergency(session, msg.action);
+        break;
+      }
       case "throw-ball": {
         if (this.vehicles.get(session)) break;
         const player = session.player;
