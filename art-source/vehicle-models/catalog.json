@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-vehicle-model-bundles-v1",
-  "status": "Retained authored diagnostic models; not promoted gameplay assets",
+  "status": "Retained authored models; engine integration complete; exact production art approval pending",
   "bundles": [
     {
       "assetId": "compact-1",

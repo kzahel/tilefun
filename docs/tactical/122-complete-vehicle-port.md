@@ -1,7 +1,7 @@
 # Complete vehicle port
 
-Status: Active; owner authorized autonomous completion, commits and pushes per vehicle/batch.
-Date: 2026-10-11.
+Status: Complete; all 45 source vehicles authored, retained, engine-integrated and pushed.
+Date: 2026-10-11–2026-10-12.
 Owner: [vehicle model porting](../topics/vehicle-model-porting.md).
 
 Complete every source set's authored model, retained editable dependencies,
@@ -274,4 +274,48 @@ scanning to its entry HTML and disables HMR watching; ignored authoring trees
 cannot stall captures or introduce unrelated HTML import scan errors.
 
 Python's expected inventory still listed only the pre-large 25 revisions;
-it is reconciled to all 49. All 33 Python tests pass after that reconciliation. Stable-browser outcomes follow.
+it is reconciled to all 49. All 33 Python tests pass after that reconciliation.
+
+
+### Final integration validation (2026-10-12)
+
+The full stable browser run completes 620 checks: 609 pass, one skipped, ten fail.
+Four new warning-beacon checks exposed a traffic-lab keyboard gap and an initial
+boarding race in the test. The lab now routes driver-only B light toggles and
+Space siren styles, ignores repeated keydown toggles and preserves walking input.
+The beacon test waits for movement and a stopped truck before boarding. Tests
+exercise button controls and keyboard routing across all six light-bearing types.
+The resulting affected browser run passes **all 73 checks**: four beacon driving,
+eight siren driving, all own-model families and failed-load fallbacks, and all
+retained review pages on desktop and phone. Final typecheck, lint, build and 42
+focused unit tests pass. All 49 retained exports and dependency hashes still
+verify; 367 constructor/retainer and 42 configuration pins remain exact.
+
+Current Workshop discovery descriptions now state engine integration is complete
+and exact production art approval remains pending. Regeneration verifies 807
+candidates / 59 exclusions; only 46 current discovery exclusions and the input
+digest change from the service push. Every candidate identity and retained
+review capture stays exact. Catalog changes only its global status text; all 49
+bundle entries and dependencies are unchanged. The three remaining pinned Python
+helpers now have explicit LF attributes, preserving their existing bytes on
+Windows checkouts. The 45-entry gallery's local review/source links resolve.
+
+Batch commits pushed: compacts `1967356f`, sedans `bbf54c62`, buses `6fd142bf`,
+large cars `fadc1308`, and final service vehicles/integration `3ca70190`.
+
+
+The bounded single-worker baseline rerun passes reload, gesture handling and both
+mesh-enabled main-game driving variants (four pass). Four pre-existing failures
+remain: two phone art-review layouts and Canvas/plain-GPU tap driving reporting
+zero movement. The new/changed vehicle checks have no remaining failure. Full
+unit results retain the five platform-specific failures and loaded Workshop
+timeout documented above; the isolated relevant files pass. Logs are
+`data/authored-assets/service-final-{browser,baselines,unit,typecheck,lint,build}.log`.
+
+All engineering delivery steps are complete: **45 retained latest models, 49
+exact revisions, 45 own-model engine integrations, 184 independent rolling
+wheels, and six light-bearing vehicles**. Ordinary builds consume tracked assets;
+scratch authoring/test output stays ignored. The remaining next action is human
+inspection of the retained 4×2 gallery and exact production-art review. Any
+requested geometry/paint corrections become new immutable revisions; nonzero
+steering and ladder/loader animation require additional clearance qualification.

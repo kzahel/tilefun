@@ -14,7 +14,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | --- | --- |
 | [124 Native city workload](124-city-workload-profile.md) | Traffic terrain-read duplication, wide-view driving/replication and renderer attribution; thermal-limited phone scope; no runtime change |
 | [123 NPC movement profile and fauna lookup](123-npc-movement-profile.md) | Type registry removes repeated scans; 8.7% aggregate dense moving phone mean saving, mixed tails; slower box prototype reverted |
-| [122 Complete vehicle port](122-complete-vehicle-port.md) | Active autonomous full-bank authoring, exact bundle retention, own-model game/lab integration and batch commits/pushes |
+| [122 Complete vehicle port](122-complete-vehicle-port.md) | Complete: 45 own models/integrations, 49 exact retained revisions, 184 rolling wheels; batch commits/pushes and tracked-only verification |
 | [121 Vehicle source families](121-vehicle-source-families.md) | Audited all 45 sets: 13 exact four-view silhouette families, pure/one-way recolors and explicit near-match/paint exceptions for batch planning |
 | [120 Firetruck gameplay](120-firetruck-gameplay.md) | Own corrected v2 GLB in shared game/lab mesh mode; persistent siren/light state, driving buttons and boost |
 | [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |

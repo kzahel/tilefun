@@ -45,7 +45,12 @@ for (const [model, parts, resource] of [
       }
       await page.getByRole("button", { name: "Siren Off", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-emergency-state", "3");
-      await page.getByRole("button", { name: "Style: EU two-tone", exact: true }).click();
+      await canvas.focus();
+      await page.keyboard.press("b");
+      await expect(canvas).toHaveAttribute("data-emergency-state", "2");
+      await page.keyboard.press("b");
+      await expect(canvas).toHaveAttribute("data-emergency-state", "3");
+      await page.keyboard.press("Space");
       await expect(canvas).toHaveAttribute("data-emergency-state", "5");
       await page.getByRole("button", { name: "Style: US wail", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-emergency-state", "1");

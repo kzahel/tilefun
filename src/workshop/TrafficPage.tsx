@@ -317,6 +317,21 @@ export default function TrafficPage() {
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none", borderRadius: 12 }}
           onKeyDown={(e) => {
+            const vehicle = { type: `vehicle-v1:${model}` };
+            const lightAction =
+              e.key.toLowerCase() === "b"
+                ? "toggle"
+                : e.key === " " && isEmergencyVehicle(vehicle)
+                  ? "style"
+                  : undefined;
+            if (driving && hasVehicleLights(vehicle) && lightAction) {
+              e.preventDefault();
+              if (!e.repeat)
+                scene.current
+                  ?.command({ kind: "vehicle-emergency", action: lightAction })
+                  .catch((e) => setError(String(e)));
+              return;
+            }
             if (
               [
                 "ArrowUp",

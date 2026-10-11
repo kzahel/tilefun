@@ -4,7 +4,7 @@ Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 Owns renderer boundaries and resource/frame lifetimes. [Performance](performance.md)
 owns timing and allocation evidence; [client/server architecture](../client-server-architecture.md)

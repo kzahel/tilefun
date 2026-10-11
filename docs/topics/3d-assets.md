@@ -10,7 +10,7 @@ Fixed-view GPU gameplay integration is delivered and is the main-game default;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
 remain unresolved. Game clipping is unchanged.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
 to physical proxies, and cross-view quality. [Rendering architecture](rendering-architecture.md)

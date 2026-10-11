@@ -63,3 +63,8 @@ scripts/authored-assets/orange-garbage-family.json -text
 scripts/authored-assets/raised-fire-family.json -text
 scripts/authored-assets/service-floor-revisions.json -text
 scripts/authored-assets/verify_all_vehicle_clearance.py text eol=lf
+
+# Remaining frozen replay helpers also retain LF constructor bytes.
+scripts/authored-assets/author_variant.py text eol=lf
+scripts/authored-assets/pack_draft.py text eol=lf
+scripts/authored-assets/transfer_variant.py text eol=lf

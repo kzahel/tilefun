@@ -12,7 +12,14 @@ for (const model of ["garbage-truck-green", "garbage-truck-orange"]) {
       const canvas = page.getByLabel("Generated traffic playground");
       await expect(canvas).toHaveAttribute("data-ready", "true");
       await canvas.focus();
+      const initialPlayerX = Number(await canvas.getAttribute("data-player-x"));
       await page.keyboard.down("ArrowLeft");
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-player-x")))
+        .toBeLessThan(initialPlayerX - 8);
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-speed")))
+        .toBeLessThan(0.1);
       await expect(page.getByRole("button", { name: "Drive car · E", exact: true })).toBeVisible();
       await page.keyboard.up("ArrowLeft");
       await page.getByRole("button", { name: "Drive car · E", exact: true }).click();
@@ -35,8 +42,11 @@ for (const model of ["garbage-truck-green", "garbage-truck-orange"]) {
       await canvas.focus();
       await page.keyboard.press("Space");
       await expect(canvas).toHaveAttribute("data-emergency-state", "1");
-      await page.keyboard.press("b");
+      await page.keyboard.down("b");
       await expect(canvas).toHaveAttribute("data-emergency-state", "0");
+      await page.keyboard.down("b");
+      await expect(canvas).toHaveAttribute("data-emergency-state", "0");
+      await page.keyboard.up("b");
       const before = Number(await canvas.getAttribute("data-car-x"));
       await page.keyboard.down("ArrowRight");
       await page.keyboard.down("Shift");

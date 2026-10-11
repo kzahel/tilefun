@@ -4,7 +4,7 @@ Topic: vehicle-model-porting
 Status: all 45 source sets have retained own Blender/UV models and shared
 engine integrations (49 exact retained revisions). Production model art review
 remains open; runtime keeps steering neutral and equipment at its authored rest pose.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
 the sprite bank to editable Blender models and engine assets. Update this list

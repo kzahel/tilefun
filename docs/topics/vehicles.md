@@ -2,7 +2,7 @@
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversion
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
@@ -307,7 +307,8 @@ cylinders at neutral steering. These visual proofs do not change collision proxi
 Ambulance, police and both fire trucks accept driver-only persistent siren state
 0–5: enable bit plus lights-only/EU/US style. Green and orange garbage accept only
 0/1 silent amber beacon state; style commands have no effect. B/touch toggles the
-lights; Space selects a siren style only on siren vehicles. Both Canvas and GPU
+lights; Space selects a siren style only on siren vehicles. The traffic lab uses
+the same shortcuts, suppressing repeated keydown toggles. Both Canvas and GPU
 sprite fallback keep colored flashing, and loaded GLBs pulse named lens materials.
 Audio never creates a siren for warning trucks. Wrong drivers/editor mode cannot
 change state; saved invalid state is rejected before publishing any vehicle.

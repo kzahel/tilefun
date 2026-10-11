@@ -242,8 +242,7 @@ export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidat
       kind: "projection",
       fingerprint,
       sourceFingerprint: review.identity.sourceFingerprint,
-      excluded:
-        "Retained model inspection; engine qualification and production art approval remain pending.",
+      excluded: "Retained model inspection; exact production art approval remains pending.",
     });
   }
   return candidates;
