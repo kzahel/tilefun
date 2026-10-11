@@ -283,9 +283,27 @@ Against frozen `e969d8a`, accelerated 384-dog travel whole-tick means fall from
 candidates fall 92–93%; all eight full wire/durable traces match. Ordinary native
 walking ranges overlap at 1.16–1.31 versus 1.22–1.29ms mean and 1.5–1.7 versus
 1.6ms p95, with uninterrupted 512–513px travel near 60Hz. Idle ranges also overlap.
-This establishes dense workload scaling, not a phone/FPS/desync claim. The phone
-was unavailable. Next: repeat controls on a cooled phone, then profile a separate
-fine ground/prop candidate path while preserving live support and per-pass reuse.
+The desktop comparison establishes dense workload scaling; the phone follow-up
+below supplies device evidence without an FPS/desync claim.
+
+115's matched physical Pixel 7a follow-up records 384-dog travel tick means of
+34.57–38.72ms original versus 13.52–14.84ms delivered, including index costs,
+with publication separate. P95 falls from 40.1–44.1 to 16.4–18.0ms; 96-dog
+travel means fall from 4.69–5.39 to 3.05–3.40ms. These accelerated phone Worker
+controls exclude rendering/real IndexedDB/planning and do not prove whole-game
+60Hz capacity. At 384 actors, delivered p95 still reaches 18ms before publication.
+All entry/end readings are 25.1–28.0°C/status zero, with charging unchanged.
+
+Ordinary Canvas/Worker/IndexedDB walking ranges overlap at 6.84–7.15 versus
+6.80–6.95ms mean, and 9.9–10.3 versus 10.2–10.4ms p95. All four controls travel
+continuously 512–513px near 60Hz with frame p95 16.8ms and no page errors.
+Idle means overlap too; delivered idle p95 is slightly higher in these repeats.
+There is no demonstrated sparse-play gain or desync/stutter reproduction.
+[Phone evidence](../benchmarks/115-collision-broad-phase-phone.json) retains
+matched source/probe hashes, sixteen shallow crowd/eight native/four counting
+captures and thermal/order/diagnostic limits. Runtime source is unchanged.
+Next: profile remaining crowded ground/support and prop work on the phone,
+preserving live support and per-pass reuse before selecting another change.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

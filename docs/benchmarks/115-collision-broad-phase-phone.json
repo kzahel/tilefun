@@ -1,0 +1,2441 @@
+{
+  "schema": "tilefun-collision-broad-phase-phone/v1",
+  "baseCommit": "e969d8ae3f27dcc93239596b2d5f88aec64eceb9",
+  "afterCommit": "9929a42312b91768fce0c18995dc5ed8e507c77d",
+  "device": {
+    "model": "Pixel 7a",
+    "apiLevel": 37,
+    "browser": "154.0.8037.126",
+    "charging": "AC charging unchanged throughout"
+  },
+  "sourceSHA256": {
+    "before": {
+      "src/entities/EntityManager.ts": "05c3d3521a2eeea376d90abde0a8430b251c310b3f335d4de868623acf0beea4",
+      "src/entities/SpatialHash.ts": "7fa1203ce2207bfd006d0719224d83eab86f977ce0d058783ca6a9eb62fc184a",
+      "src/entities/collision.ts": "6c82433bb760c0293a53260abd36f8e894c8aedc7f209e8d38c6f48fcdc6c0ac",
+      "src/server/Realm.ts": "9da23a495fcffcc145fa0dbfa6370e1de06f4cc7d220ac0e856185b6f46b565e",
+      "src/server/ServerLoop.ts": "75c70bdba18fac7adb3b04c1357e9189c5bb36445cd0a7ed1ba4996960afac5a"
+    },
+    "after": {
+      "src/entities/EntityManager.ts": "63301e4e54e9bb2591e4436d267dfdbfb70073bc756dc4611a8fb510d0247b60",
+      "src/entities/SpatialHash.ts": "77ef19eb611452ec38346666582268bec4beefa73e50a3b7d623c878fa384ec8",
+      "src/entities/CollisionIndex.ts": "182d69513e9971041a416945e125eb547ef1542a9959e247445a6afa827f6522",
+      "src/entities/collision.ts": "6c82433bb760c0293a53260abd36f8e894c8aedc7f209e8d38c6f48fcdc6c0ac",
+      "src/server/Realm.ts": "9da23a495fcffcc145fa0dbfa6370e1de06f4cc7d220ac0e856185b6f46b565e",
+      "src/server/ServerLoop.ts": "75c70bdba18fac7adb3b04c1357e9189c5bb36445cd0a7ed1ba4996960afac5a"
+    }
+  },
+  "probeSHA256": {
+    "cdp-proxy.mjs": "4b45a07c29ce9cfb8e12f287990a87fc06f0bcad2fb26ec15a6fe509a8a7b639",
+    "crowd-run.mjs": "83b79e34a22f9574265d0d275b75054bc8e29163804f65da4020fd77ee5d5120",
+    "crowd-series.mjs": "f985a9a79a62507e95a9329da5f39240c63bb3f518d585392ba4ccdf2a11d80a",
+    "native-series.mjs": "1272ba38b26469bff4af34f2b334376a7e388a1e24b3c6ebbf9e0382d83dc65e",
+    "before/broad-phase-audit.mjs": "9309b35fd9ee7a9a6b39feb1690c886fae7ada2ac94e18518fe75dec247c0d60",
+    "before/phone-collision.worker.mjs": "772c107fb5d05a2fd9283649d4c48dfc9fce75ba93e973fb3cb3946c71f4fb67",
+    "after/broad-phase-audit.mjs": "9309b35fd9ee7a9a6b39feb1690c886fae7ada2ac94e18518fe75dec247c0d60",
+    "after/phone-collision.worker.mjs": "772c107fb5d05a2fd9283649d4c48dfc9fce75ba93e973fb3cb3946c71f4fb67"
+  },
+  "limits": [
+    "Sequential physical-device captures on frozen runtime with identical assets/dependencies; no competing builds/tests during sampling. Runtime hashes match the delivered commit.",
+    "Native ordinary game uses Canvas, production Worker/ServerLoop/prediction and real IndexedDB in fresh isolated origins. Eight seconds Right walking or twelve seconds idle, with two repeats per source. Existing diagnostic phase/AI wrappers and one-second pose observation remain; no runtime or timing policy override.",
+    "Dense fixture ports the committed crowd runner to a dedicated physical-phone Worker. Accelerated fixed 60Hz simulation steps, memory persistence, no rendering/real IndexedDB or network delivery, held rest/travel excludes planning. setTimeout(0) yields every20 steps, outside timers. 60 warmup/180 retained ticks. All index maintenance is inside physics/tick; replication separate. These are workload costs, not real-time Worker deadlines or whole-game FPS.",
+    "Two shallow repeats in source order before/after/after/before; second repeat reverses population order. Separate counting runs excluded from timing conclusions. Browser Workers recreated per case. All dogs must advance expected 88px during travel or the run fails.",
+    "Entry <=29C and thermal status zero; all captured starts/ends 25.1\u201328C/status zero. Temperature/run order and CPU scheduling still vary; no thermal-normalized hardware capacity claim.",
+    "Initial ordinary Chrome attachment attempts timed out before sampling, excluded. Temporary CDP proxy resumes/detaches pre-existing targets and exposes only newly created benchmark targets to Playwright; identical route for both sources. No per-tick game transport crosses this proxy. Task-owned tabs/Workers/servers/USB routes closed and original home foreground restored; existing Chrome tabs retained.",
+    "Ordinary mean/p95 ranges overlap overall; idle delivered p95 is slightly higher in these two repeats. No demonstrated sparse-play performance gain, desync/stutter reproduction or cure. Dense384 p95 still reaches18ms before separate publication cost, so do not claim complete60Hz headroom at that load."
+  ],
+  "nativeOrder": [
+    "before-walk-1",
+    "after-walk-1",
+    "after-idle-1",
+    "before-idle-1",
+    "before-idle-2",
+    "after-idle-2",
+    "after-walk-2",
+    "before-walk-2"
+  ],
+  "crowdOrder": [
+    "before-crowd-0",
+    "after-crowd-0",
+    "after-crowd-1",
+    "before-crowd-1",
+    "before-crowd-count",
+    "after-crowd-count"
+  ],
+  "native": [
+    {
+      "source": "before",
+      "repeat": 1,
+      "motion": "walk",
+      "date": "2026-10-11T13:51:19.792Z",
+      "seconds": 8.017799999952317,
+      "thermalsBefore": {
+        "batteryC": 25.1,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 25.2,
+        "thermalStatus": 0
+      },
+      "authorityHz": 60.00074075006241,
+      "frames": {
+        "count": 481,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 16.80000000000291
+      },
+      "framesOver25": 0,
+      "ackMs": {
+        "count": 348,
+        "p50": 36.10000002384186,
+        "p95": 68.69999992847443,
+        "p99": 70.89999997615814,
+        "max": 152.59999990463257
+      },
+      "maxReplay": 8,
+      "maxResim": 2.9062499947940523e-5,
+      "travelPx": 513.1692802783202,
+      "positions": [
+        {
+          "seconds": 1,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "seconds": 2,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "seconds": 3,
+          "wx": -205.82783290039063,
+          "wy": 1632
+        },
+        {
+          "seconds": 4,
+          "wx": -141.81504676269532,
+          "wy": 1632
+        },
+        {
+          "seconds": 5,
+          "wx": -77.80224318359376,
+          "wy": 1632
+        },
+        {
+          "seconds": 6,
+          "wx": -13.789439879760744,
+          "wy": 1632
+        },
+        {
+          "seconds": 7,
+          "wx": 50.223360336914055,
+          "wy": 1632
+        },
+        {
+          "seconds": 8,
+          "wx": 115.30304100585937,
+          "wy": 1632
+        }
+      ],
+      "resident": 241,
+      "activeLast": 40,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 487,
+          "totalMs": 3329.3000004291534,
+          "max": 30.199999928474426,
+          "p50": 6.700000047683716,
+          "p95": 9.899999976158142,
+          "p99": 13.199999928474426,
+          "mean": 6.836344970080397
+        },
+        "physics": {
+          "count": 487,
+          "totalMs": 1001.8000010251999,
+          "max": 6.199999928474426,
+          "p50": 2.0999999046325684,
+          "p95": 3.100000023841858,
+          "p99": 3.700000047683716,
+          "mean": 2.0570841910168376
+        },
+        "selection": {
+          "count": 487,
+          "totalMs": 393.6000020503998,
+          "max": 2.299999952316284,
+          "p50": 0.8000000715255737,
+          "p95": 1.1999999284744263,
+          "p99": 1.399999976158142,
+          "mean": 0.8082135565716628
+        },
+        "streaming": {
+          "count": 974,
+          "totalMs": 357.3000018596649,
+          "max": 2.799999952316284,
+          "p50": 0.30000007152557373,
+          "p95": 0.7000000476837158,
+          "p99": 1.1999999284744263,
+          "mean": 0.36683778425016933
+        },
+        "replication": {
+          "count": 487,
+          "totalMs": 383.3000000715256,
+          "max": 7.100000023841858,
+          "p50": 0.7000000476837158,
+          "p95": 1.100000023841858,
+          "p99": 1.899999976158142,
+          "mean": 0.7870636551776706
+        },
+        "updateFaunaAI": {
+          "count": 481,
+          "totalMs": 26.700000524520874,
+          "max": 2.8000000715255737,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.20000004768371582,
+          "mean": 0.055509356599835497
+        },
+        "updateRobinAI": {
+          "count": 17833,
+          "totalMs": 177.69999957084656,
+          "max": 4.600000023841858,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.009964672212799112
+        }
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 1,
+      "motion": "walk",
+      "date": "2026-10-11T13:52:12.634Z",
+      "seconds": 8.002599999904632,
+      "thermalsBefore": {
+        "batteryC": 25.2,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 25.2,
+        "thermalStatus": 0
+      },
+      "authorityHz": 59.995794109455886,
+      "frames": {
+        "count": 480,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000291
+      },
+      "framesOver25": 0,
+      "ackMs": {
+        "count": 453,
+        "p50": 35.39999997615814,
+        "p95": 37.39999997615814,
+        "p99": 68.5,
+        "max": 177.30000007152557
+      },
+      "maxReplay": 9,
+      "maxResim": 1.598632815102974e-5,
+      "travelPx": 512.1023864746094,
+      "positions": [
+        {
+          "seconds": 1,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "seconds": 2,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "seconds": 3,
+          "wx": -204.76095435546875,
+          "wy": 1632
+        },
+        {
+          "seconds": 4,
+          "wx": -140.74816749023438,
+          "wy": 1632
+        },
+        {
+          "seconds": 5,
+          "wx": -76.73535773681641,
+          "wy": 1632
+        },
+        {
+          "seconds": 6,
+          "wx": -12.722560381164552,
+          "wy": 1632
+        },
+        {
+          "seconds": 7,
+          "wx": 51.29023888183593,
+          "wy": 1632
+        }
+      ],
+      "resident": 241,
+      "activeLast": 40,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 486,
+          "totalMs": 3380.1000006198883,
+          "max": 50.200000047683716,
+          "p50": 6.700000047683716,
+          "p95": 10.399999976158142,
+          "p99": 12.799999952316284,
+          "mean": 6.954938272880429
+        },
+        "physics": {
+          "count": 486,
+          "totalMs": 1036.9000012874603,
+          "max": 7.899999976158142,
+          "p50": 2.100000023841858,
+          "p95": 3.3000000715255737,
+          "p99": 6.200000047683716,
+          "mean": 2.133539097299301
+        },
+        "selection": {
+          "count": 486,
+          "totalMs": 355.7999986410141,
+          "max": 1.600000023841858,
+          "p50": 0.7000000476837158,
+          "p95": 1,
+          "p99": 1.2000000476837158,
+          "mean": 0.7320987626358315
+        },
+        "streaming": {
+          "count": 972,
+          "totalMs": 349.09999918937683,
+          "max": 1.5,
+          "p50": 0.30000007152557373,
+          "p95": 0.6000000238418579,
+          "p99": 1,
+          "mean": 0.3591563777668486
+        },
+        "replication": {
+          "count": 486,
+          "totalMs": 397.8999990224838,
+          "max": 6.300000071525574,
+          "p50": 0.7999999523162842,
+          "p95": 1.2000000476837158,
+          "p99": 2.200000047683716,
+          "mean": 0.8187242778240408
+        },
+        "updateFaunaAI": {
+          "count": 479,
+          "totalMs": 21.899999618530273,
+          "max": 2.200000047683716,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.20000004768371582,
+          "mean": 0.04572024972553293
+        },
+        "updateRobinAI": {
+          "count": 17791,
+          "totalMs": 178.6000007390976,
+          "max": 5.799999952316284,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.01003878369620019
+        }
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 1,
+      "motion": "idle",
+      "date": "2026-10-11T13:52:41.222Z",
+      "seconds": 12.000700000047683,
+      "thermalsBefore": {
+        "batteryC": 25.2,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 25.4,
+        "thermalStatus": 0
+      },
+      "authorityHz": 59.99734818326862,
+      "frames": {
+        "count": 720,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.799999999999272,
+        "max": 16.80000000000291
+      },
+      "framesOver25": 0,
+      "ackMs": {
+        "count": 667,
+        "p50": 35.60000002384186,
+        "p95": 52.299999952316284,
+        "p99": 68,
+        "max": 71.10000002384186
+      },
+      "maxReplay": 2,
+      "maxResim": 0,
+      "travelPx": 0,
+      "positions": [],
+      "resident": 242,
+      "activeLast": 23,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 725,
+          "totalMs": 4616.000000715256,
+          "max": 24,
+          "p50": 6.099999904632568,
+          "p95": 9.200000047683716,
+          "p99": 12.200000047683716,
+          "mean": 6.366896552710697
+        },
+        "physics": {
+          "count": 725,
+          "totalMs": 1149.5999991893768,
+          "max": 6.5,
+          "p50": 1.5,
+          "p95": 2.399999976158142,
+          "p99": 2.8000000715255737,
+          "mean": 1.5856551712956921
+        },
+        "selection": {
+          "count": 725,
+          "totalMs": 588.3999990224838,
+          "max": 8.299999952316284,
+          "p50": 0.7000000476837158,
+          "p95": 1.100000023841858,
+          "p99": 1.399999976158142,
+          "mean": 0.8115862055482536
+        },
+        "streaming": {
+          "count": 1450,
+          "totalMs": 555.6000018119812,
+          "max": 3.1999999284744263,
+          "p50": 0.3999999761581421,
+          "p95": 0.6999999284744263,
+          "p99": 0.8999999761581421,
+          "mean": 0.38317241504274563
+        },
+        "replication": {
+          "count": 725,
+          "totalMs": 572.9999997615814,
+          "max": 7.899999976158142,
+          "p50": 0.7000000476837158,
+          "p95": 1.1999999284744263,
+          "p99": 2.100000023841858,
+          "mean": 0.7903448272573537
+        },
+        "updateFaunaAI": {
+          "count": 725,
+          "totalMs": 57.40000021457672,
+          "max": 5.899999976158142,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "p99": 0.30000007152557373,
+          "mean": 0.07917241408907134
+        },
+        "updateRobinAI": {
+          "count": 15818,
+          "totalMs": 193.19999778270721,
+          "max": 6.400000095367432,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.012213933353313137
+        }
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 1,
+      "motion": "idle",
+      "date": "2026-10-11T13:53:14.970Z",
+      "seconds": 12.011700000047684,
+      "thermalsBefore": {
+        "batteryC": 25.4,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 25.4,
+        "thermalStatus": 0
+      },
+      "authorityHz": 59.99718633896593,
+      "frames": {
+        "count": 720,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 33.400000000001455
+      },
+      "framesOver25": 1,
+      "ackMs": {
+        "count": 651,
+        "p50": 35.59999990463257,
+        "p95": 52.699999928474426,
+        "p99": 54.39999997615814,
+        "max": 59.199999928474426
+      },
+      "maxReplay": 2,
+      "maxResim": 0,
+      "travelPx": 0,
+      "positions": [],
+      "resident": 242,
+      "activeLast": 23,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 726,
+          "totalMs": 4378.599998116493,
+          "max": 13.399999976158142,
+          "p50": 5.800000071525574,
+          "p95": 8.100000023841858,
+          "p99": 9.699999928474426,
+          "mean": 6.03112947398966
+        },
+        "physics": {
+          "count": 726,
+          "totalMs": 1062.9000002145767,
+          "max": 9.600000023841858,
+          "p50": 1.399999976158142,
+          "p95": 2.1999999284744263,
+          "p99": 2.5,
+          "mean": 1.4640495870724197
+        },
+        "selection": {
+          "count": 726,
+          "totalMs": 626.6999995708466,
+          "max": 2.0999999046325684,
+          "p50": 0.8000000715255737,
+          "p95": 1.2000000476837158,
+          "p99": 1.399999976158142,
+          "mean": 0.8632231399047473
+        },
+        "streaming": {
+          "count": 1452,
+          "totalMs": 552.3999993801117,
+          "max": 5.300000071525574,
+          "p50": 0.3999999761581421,
+          "p95": 0.6999999284744263,
+          "p99": 0.8000000715255737,
+          "mean": 0.38044077092294193
+        },
+        "replication": {
+          "count": 726,
+          "totalMs": 522.3999993801117,
+          "max": 6.799999952316284,
+          "p50": 0.6999999284744263,
+          "p95": 1,
+          "p99": 1.1999999284744263,
+          "mean": 0.7195592277962971
+        },
+        "updateFaunaAI": {
+          "count": 726,
+          "totalMs": 46.10000002384186,
+          "max": 2.399999976158142,
+          "p50": 0,
+          "p95": 0.19999992847442627,
+          "p99": 0.20000004768371582,
+          "mean": 0.0634986226223717
+        },
+        "updateRobinAI": {
+          "count": 15838,
+          "totalMs": 176.09999871253967,
+          "max": 1.399999976158142,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.011118828053576188
+        }
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 2,
+      "motion": "idle",
+      "date": "2026-10-11T13:53:48.748Z",
+      "seconds": 12.003899999976158,
+      "thermalsBefore": {
+        "batteryC": 25.7,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 25.7,
+        "thermalStatus": 0
+      },
+      "authorityHz": 60.00033149342561,
+      "frames": {
+        "count": 718,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 50
+      },
+      "framesOver25": 1,
+      "ackMs": {
+        "count": 592,
+        "p50": 35.89999997615814,
+        "p95": 53.39999997615814,
+        "p99": 68.60000002384186,
+        "max": 71.39999997615814
+      },
+      "maxReplay": 4,
+      "maxResim": 0,
+      "travelPx": 0,
+      "positions": [],
+      "resident": 242,
+      "activeLast": 23,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 725,
+          "totalMs": 4909.700001716614,
+          "max": 11.299999952316284,
+          "p50": 6.799999952316284,
+          "p95": 9.100000023841858,
+          "p99": 10.100000023841858,
+          "mean": 6.772000002367743
+        },
+        "physics": {
+          "count": 725,
+          "totalMs": 1196.2999992370605,
+          "max": 3.0999999046325684,
+          "p50": 1.600000023841858,
+          "p95": 2.399999976158142,
+          "p99": 2.700000047683716,
+          "mean": 1.6500689644649111
+        },
+        "selection": {
+          "count": 725,
+          "totalMs": 732.7999992370605,
+          "max": 5.899999976158142,
+          "p50": 1,
+          "p95": 1.3000000715255737,
+          "p99": 1.5,
+          "mean": 1.0107586196373248
+        },
+        "streaming": {
+          "count": 1450,
+          "totalMs": 603.3999993801117,
+          "max": 5.199999928474426,
+          "p50": 0.3999999761581421,
+          "p95": 0.7000000476837158,
+          "p99": 1,
+          "mean": 0.41613793060697357
+        },
+        "replication": {
+          "count": 725,
+          "totalMs": 542.0000002384186,
+          "max": 1.5,
+          "p50": 0.7000000476837158,
+          "p95": 1,
+          "p99": 1.2000000476837158,
+          "mean": 0.7475862072254049
+        },
+        "updateFaunaAI": {
+          "count": 725,
+          "totalMs": 52.900001764297485,
+          "max": 3.299999952316284,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "p99": 0.20000004768371582,
+          "mean": 0.07296551967489308
+        },
+        "updateRobinAI": {
+          "count": 15818,
+          "totalMs": 206.09999990463257,
+          "max": 4.100000023841858,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.013029460102707837
+        }
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 2,
+      "motion": "idle",
+      "date": "2026-10-11T13:54:22.426Z",
+      "seconds": 12.012400000095367,
+      "thermalsBefore": {
+        "batteryC": 25.7,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 26,
+        "thermalStatus": 0
+      },
+      "authorityHz": 59.99983425495716,
+      "frames": {
+        "count": 718,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000291,
+        "max": 66.60000000000218
+      },
+      "framesOver25": 1,
+      "ackMs": {
+        "count": 713,
+        "p50": 35.5,
+        "p95": 38.199999928474426,
+        "p99": 39.89999997615814,
+        "max": 85.29999995231628
+      },
+      "maxReplay": 4,
+      "maxResim": 0,
+      "travelPx": 0,
+      "positions": [],
+      "resident": 242,
+      "activeLast": 23,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 725,
+          "totalMs": 4713.200000286102,
+          "max": 16.299999952316284,
+          "p50": 6.200000047683716,
+          "p95": 9.300000071525574,
+          "p99": 12.200000047683716,
+          "mean": 6.500965517636003
+        },
+        "physics": {
+          "count": 725,
+          "totalMs": 1189.3999999761581,
+          "max": 7.5,
+          "p50": 1.5,
+          "p95": 2.399999976158142,
+          "p99": 3.700000047683716,
+          "mean": 1.6405517241050458
+        },
+        "selection": {
+          "count": 725,
+          "totalMs": 577.4000005722046,
+          "max": 6.600000023841858,
+          "p50": 0.7000000476837158,
+          "p95": 1.2000000476837158,
+          "p99": 1.600000023841858,
+          "mean": 0.796413793892696
+        },
+        "streaming": {
+          "count": 1450,
+          "totalMs": 567.4999980926514,
+          "max": 5.5,
+          "p50": 0.3999999761581421,
+          "p95": 0.6999999284744263,
+          "p99": 1,
+          "mean": 0.39137930902941476
+        },
+        "replication": {
+          "count": 725,
+          "totalMs": 603.9000020027161,
+          "max": 7,
+          "p50": 0.7999999523162842,
+          "p95": 1.1999999284744263,
+          "p99": 2.600000023841858,
+          "mean": 0.8329655200037462
+        },
+        "updateFaunaAI": {
+          "count": 725,
+          "totalMs": 57.30000019073486,
+          "max": 8.100000023841858,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "p99": 0.20000004768371582,
+          "mean": 0.07903448302170325
+        },
+        "updateRobinAI": {
+          "count": 15830,
+          "totalMs": 216.60000097751617,
+          "max": 5.899999976158142,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.013682880668194326
+        }
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 2,
+      "motion": "walk",
+      "date": "2026-10-11T13:54:55.676Z",
+      "seconds": 8.017200000047684,
+      "thermalsBefore": {
+        "batteryC": 26,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 26.2,
+        "thermalStatus": 0
+      },
+      "authorityHz": 60.0014815184154,
+      "frames": {
+        "count": 481,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 16.80000000000291
+      },
+      "framesOver25": 0,
+      "ackMs": {
+        "count": 406,
+        "p50": 35.699999928474426,
+        "p95": 52,
+        "p99": 72.69999992847443,
+        "max": 170.10000002384186
+      },
+      "maxReplay": 9,
+      "maxResim": 1.598632815102974e-5,
+      "travelPx": 513.1692802783202,
+      "positions": [
+        {
+          "seconds": 1,
+          "wx": -332.7865586035156,
+          "wy": 1632
+        },
+        {
+          "seconds": 2,
+          "wx": -268.7737717382812,
+          "wy": 1632
+        },
+        {
+          "seconds": 3,
+          "wx": -204.7609536279297,
+          "wy": 1632
+        },
+        {
+          "seconds": 4,
+          "wx": -140.74816749023438,
+          "wy": 1632
+        },
+        {
+          "seconds": 5,
+          "wx": -76.73535700927735,
+          "wy": 1632
+        },
+        {
+          "seconds": 6,
+          "wx": -12.722560381164552,
+          "wy": 1632
+        },
+        {
+          "seconds": 7,
+          "wx": 51.29023888183593,
+          "wy": 1632
+        },
+        {
+          "seconds": 8,
+          "wx": 115.30304100585937,
+          "wy": 1632
+        }
+      ],
+      "resident": 241,
+      "activeLast": 40,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 487,
+          "totalMs": 3311.699999809265,
+          "max": 48.89999997615814,
+          "p50": 6.600000023841858,
+          "p95": 10.200000047683716,
+          "p99": 12.5,
+          "mean": 6.800205338417382
+        },
+        "physics": {
+          "count": 487,
+          "totalMs": 947.2999978065491,
+          "max": 4,
+          "p50": 1.9000000953674316,
+          "p95": 3.299999952316284,
+          "p99": 3.700000047683716,
+          "mean": 1.9451745334836736
+        },
+        "selection": {
+          "count": 487,
+          "totalMs": 431.900000333786,
+          "max": 3.399999976158142,
+          "p50": 0.8999999761581421,
+          "p95": 1.2999999523162842,
+          "p99": 1.5,
+          "mean": 0.8868583169071581
+        },
+        "streaming": {
+          "count": 974,
+          "totalMs": 347,
+          "max": 1.1999999284744263,
+          "p50": 0.30000007152557373,
+          "p95": 0.6000000238418579,
+          "p99": 0.8999999761581421,
+          "mean": 0.35626283367556466
+        },
+        "replication": {
+          "count": 487,
+          "totalMs": 401.5999995470047,
+          "max": 5.199999928474426,
+          "p50": 0.7999999523162842,
+          "p95": 1.2000000476837158,
+          "p99": 2.1999999284744263,
+          "mean": 0.8246406561540137
+        },
+        "updateFaunaAI": {
+          "count": 479,
+          "totalMs": 24.699999690055847,
+          "max": 2.799999952316284,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.2999999523162842,
+          "mean": 0.05156576135711033
+        },
+        "updateRobinAI": {
+          "count": 17803,
+          "totalMs": 164.79999947547913,
+          "max": 1.5,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.009256866790736343
+        }
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 2,
+      "motion": "walk",
+      "date": "2026-10-11T13:55:25.243Z",
+      "seconds": 8.002,
+      "thermalsBefore": {
+        "batteryC": 26.2,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 26.2,
+        "thermalStatus": 0
+      },
+      "authorityHz": 60.009898539965356,
+      "frames": {
+        "count": 479,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 33.30000000000291
+      },
+      "framesOver25": 1,
+      "ackMs": {
+        "count": 455,
+        "p50": 52.199999928474426,
+        "p95": 54.299999952316284,
+        "p99": 85.70000004768372,
+        "max": 120.89999997615814
+      },
+      "maxReplay": 8,
+      "maxResim": 1.598632815102974e-5,
+      "travelPx": 512.1024017333983,
+      "positions": [
+        {
+          "seconds": 1,
+          "wx": -332.78657313476555,
+          "wy": 1632
+        },
+        {
+          "seconds": 2,
+          "wx": -268.77375575195305,
+          "wy": 1632
+        },
+        {
+          "seconds": 3,
+          "wx": -204.7609536279297,
+          "wy": 1632
+        },
+        {
+          "seconds": 4,
+          "wx": -140.74816676269532,
+          "wy": 1632
+        },
+        {
+          "seconds": 5,
+          "wx": -76.73535700927735,
+          "wy": 1632
+        },
+        {
+          "seconds": 6,
+          "wx": -12.72255965362549,
+          "wy": 1632
+        },
+        {
+          "seconds": 7,
+          "wx": 51.29023960937499,
+          "wy": 1632
+        }
+      ],
+      "resident": 241,
+      "activeLast": 40,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      },
+      "errors": [],
+      "timings": {
+        "tick": {
+          "count": 486,
+          "totalMs": 3473.29999935627,
+          "max": 33.60000002384186,
+          "p50": 7.100000023841858,
+          "p95": 10.299999952316284,
+          "p99": 12.5,
+          "mean": 7.146707817605494
+        },
+        "physics": {
+          "count": 486,
+          "totalMs": 1008.2999995946884,
+          "max": 7,
+          "p50": 2.100000023841858,
+          "p95": 3.200000047683716,
+          "p99": 4,
+          "mean": 2.074691357190717
+        },
+        "selection": {
+          "count": 486,
+          "totalMs": 405.29999816417694,
+          "max": 2.399999976158142,
+          "p50": 0.8000000715255737,
+          "p95": 1.2000000476837158,
+          "p99": 2,
+          "mean": 0.8339506135065369
+        },
+        "streaming": {
+          "count": 972,
+          "totalMs": 377.2000000476837,
+          "max": 5,
+          "p50": 0.3999999761581421,
+          "p95": 0.7000000476837158,
+          "p99": 1.2999999523162842,
+          "mean": 0.3880658436704565
+        },
+        "replication": {
+          "count": 486,
+          "totalMs": 395.20000076293945,
+          "max": 4.899999976158142,
+          "p50": 0.7999999523162842,
+          "p95": 1.2000000476837158,
+          "p99": 2.299999952316284,
+          "mean": 0.8131687258496697
+        },
+        "updateFaunaAI": {
+          "count": 479,
+          "totalMs": 26.299999237060547,
+          "max": 2.299999952316284,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.20000004768371582,
+          "mean": 0.054906052686974
+        },
+        "updateRobinAI": {
+          "count": 17797,
+          "totalMs": 177.10000133514404,
+          "max": 6.200000047683716,
+          "p50": 0,
+          "p95": 0.10000002384185791,
+          "p99": 0.10000002384185791,
+          "mean": 0.009951115431541499
+        }
+      }
+    }
+  ],
+  "crowd": [
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:19.678Z",
+      "errors": [],
+      "population": 96,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 3.95888888835907,
+        "p50": 3.600000023841858,
+        "p95": 5.900000095367432,
+        "max": 15.600000023841858
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.26499999894036186,
+        "p50": 0.19999992847442627,
+        "p95": 0.30000007152557373,
+        "max": 13.899999976158142
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.08777777618832058,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.40000009536743164
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.22166666719648573,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 2.399999976158142
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.059444442722532485,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "max": 0.2999999523162842
+        },
+        "physics": {
+          "count": 180,
+          "mean": 2.9438888874318865,
+          "p50": 2.700000047683716,
+          "p95": 4.200000047683716,
+          "max": 8.600000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 26.5,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 26.5,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:19.678Z",
+      "errors": [],
+      "population": 96,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 4.688888879617055,
+        "p50": 4.399999976158142,
+        "p95": 6.600000023841858,
+        "max": 13.5
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.5011111219724019,
+        "p50": 0.3999999761581421,
+        "p95": 0.7000000476837158,
+        "max": 14.100000023841858
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.09833333161142137,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.6000000238418579
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.21777777738041348,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1.100000023841858
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.0700000007947286,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "max": 1.100000023841858
+        },
+        "physics": {
+          "count": 180,
+          "mean": 3.783333335982429,
+          "p50": 3.600000023841858,
+          "p95": 5.299999952316284,
+          "max": 12.299999952316284
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 26.8,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 26.8,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:19.678Z",
+      "errors": [],
+      "population": 384,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 27.565000006225375,
+        "p50": 26.799999952316284,
+        "p95": 32,
+        "max": 38.5
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.6083333273728688,
+        "p50": 0.5,
+        "p95": 0.8999999761581421,
+        "max": 13.200000047683716
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.1305555608537462,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.7999999523162842
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.7883333338631524,
+          "p50": 0.7000000476837158,
+          "p95": 1.600000023841858,
+          "max": 2.399999976158142
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.2094444473584493,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 0.6000000238418579
+        },
+        "physics": {
+          "count": 180,
+          "mean": 24.239999992979897,
+          "p50": 23.600000023841858,
+          "p95": 28.600000023841858,
+          "max": 33.60000002384186
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 26.8,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:19.678Z",
+      "errors": [],
+      "population": 384,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 34.570555555158194,
+        "p50": 34.5,
+        "p95": 40.09999990463257,
+        "max": 44.700000047683716
+      },
+      "replication": {
+        "count": 180,
+        "mean": 1.7438888861073387,
+        "p50": 1.600000023841858,
+        "p95": 2.5,
+        "max": 15.100000023841858
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.16222222050031027,
+          "p50": 0.10000002384185791,
+          "p95": 0.2999999523162842,
+          "max": 1.2999999523162842
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.8705555505222744,
+          "p50": 0.7999999523162842,
+          "p95": 1.5999999046325684,
+          "max": 2.299999952316284
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.23222222593095568,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 0.8999999761581421
+        },
+        "physics": {
+          "count": 180,
+          "mean": 31.39444444709354,
+          "p50": 31.399999976158142,
+          "p95": 36,
+          "max": 39.39999997615814
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:50.777Z",
+      "errors": [],
+      "population": 96,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 2.7561111085944705,
+        "p50": 2.600000023841858,
+        "p95": 3.5,
+        "max": 9
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.24611111217074924,
+        "p50": 0.19999992847442627,
+        "p95": 0.30000007152557373,
+        "max": 12.599999904632568
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.0844444453716278,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.7000000476837158
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.23388888902134367,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 2.600000023841858
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06333333055178324,
+          "p50": 0.09999990463256836,
+          "p95": 0.19999992847442627,
+          "max": 0.7999999523162842
+        },
+        "physics": {
+          "count": 180,
+          "mean": 1.7361111097865634,
+          "p50": 1.6999999284744263,
+          "p95": 2.200000047683716,
+          "max": 3.100000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:50.777Z",
+      "errors": [],
+      "population": 96,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 3.0461111095216538,
+        "p50": 2.899999976158142,
+        "p95": 4.100000023841858,
+        "max": 7.599999904632568
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.5316666689183976,
+        "p50": 0.3999999761581421,
+        "p95": 0.7000000476837158,
+        "max": 16.40000009536743
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.08111110991901821,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.6999999284744263
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.23333333598242867,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 1.5
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.05722222394413418,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "max": 0.20000004768371582
+        },
+        "physics": {
+          "count": 180,
+          "mean": 2.1577777802944182,
+          "p50": 2,
+          "p95": 2.899999976158142,
+          "max": 6.100000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:50.777Z",
+      "errors": [],
+      "population": 384,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 11.89777777923478,
+        "p50": 11.699999928474426,
+        "p95": 14.699999928474426,
+        "max": 18.899999976158142
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.6522222207652197,
+        "p50": 0.5,
+        "p95": 0.7999999523162842,
+        "max": 18.5
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.13944444523917304,
+          "p50": 0.10000002384185791,
+          "p95": 0.2999999523162842,
+          "max": 1.899999976158142
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.8200000001324548,
+          "p50": 0.7000000476837158,
+          "p95": 1.5999999046325684,
+          "max": 2.700000047683716
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.2127777768505944,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 0.8000000715255737
+        },
+        "physics": {
+          "count": 180,
+          "mean": 8.480555559529199,
+          "p50": 8.200000047683716,
+          "p95": 11.200000047683716,
+          "max": 12.200000047683716
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:57:50.777Z",
+      "errors": [],
+      "population": 384,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 13.524444441662894,
+        "p50": 13.200000047683716,
+        "p95": 16.399999976158142,
+        "max": 23.09999990463257
+      },
+      "replication": {
+        "count": 180,
+        "mean": 1.7755555596616532,
+        "p50": 1.600000023841858,
+        "p95": 2.799999952316284,
+        "max": 14.399999976158142
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.14944443901379903,
+          "p50": 0.10000002384185791,
+          "p95": 0.2999999523162842,
+          "max": 1
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.8833333326710595,
+          "p50": 0.7999999523162842,
+          "p95": 1.5,
+          "max": 4.300000071525574
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.23888889484935336,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 2.5
+        },
+        "physics": {
+          "count": 180,
+          "mean": 10.373333340883255,
+          "p50": 10.100000023841858,
+          "p95": 13.199999928474426,
+          "max": 16.100000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:21.344Z",
+      "errors": [],
+      "population": 384,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 12.224999997350904,
+        "p50": 11.100000023841858,
+        "p95": 17.699999928474426,
+        "max": 50.700000047683716
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.6661111116409302,
+        "p50": 0.5,
+        "p95": 0.8999999761581421,
+        "max": 17.200000047683716
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.14277777936723496,
+          "p50": 0.10000002384185791,
+          "p95": 0.30000007152557373,
+          "max": 0.7000000476837158
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.9122222304344177,
+          "p50": 0.7999999523162842,
+          "p95": 1.5,
+          "max": 10.300000071525574
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.25111110276646087,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1.9000000953674316
+        },
+        "physics": {
+          "count": 180,
+          "mean": 8.486666675408681,
+          "p50": 7.899999976158142,
+          "p95": 11.700000047683716,
+          "max": 35
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:21.344Z",
+      "errors": [],
+      "population": 384,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 14.843333336379793,
+        "p50": 14.799999952316284,
+        "p95": 18,
+        "max": 24.700000047683716
+      },
+      "replication": {
+        "count": 180,
+        "mean": 1.8722222208976746,
+        "p50": 1.600000023841858,
+        "p95": 3,
+        "max": 15.5
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.15833333200878566,
+          "p50": 0.10000002384185791,
+          "p95": 0.2999999523162842,
+          "max": 1.5
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.9233333375718858,
+          "p50": 0.7999999523162842,
+          "p95": 1.899999976158142,
+          "max": 2.899999976158142
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.23555555211173163,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1
+        },
+        "physics": {
+          "count": 180,
+          "mean": 11.29888888862398,
+          "p50": 11.200000047683716,
+          "p95": 13.900000095367432,
+          "max": 18.600000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:21.344Z",
+      "errors": [],
+      "population": 96,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 3.009444442060259,
+        "p50": 2.8000000715255737,
+        "p95": 4.200000047683716,
+        "max": 8.299999952316284
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.27555555833710565,
+        "p50": 0.19999992847442627,
+        "p95": 0.3999999761581421,
+        "max": 12.300000071525574
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.09666666785875956,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 1.1999999284744263
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.2366666575272878,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1.600000023841858
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06222222712304857,
+          "p50": 0.10000002384185791,
+          "p95": 0.10000002384185791,
+          "max": 0.5
+        },
+        "physics": {
+          "count": 180,
+          "mean": 1.9011111173364852,
+          "p50": 1.8000000715255737,
+          "p95": 2.399999976158142,
+          "max": 5.100000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:21.344Z",
+      "errors": [],
+      "population": 96,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 3.3961111148198446,
+        "p50": 3.200000047683716,
+        "p95": 4.799999952316284,
+        "max": 7.5
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.5766666670640309,
+        "p50": 0.5,
+        "p95": 0.8999999761581421,
+        "max": 13.399999976158142
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.09055555727746752,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.3999999761581421
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.2488888786898719,
+          "p50": 0.20000004768371582,
+          "p95": 0.40000009536743164,
+          "max": 1.0999999046325684
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06500000026490953,
+          "p50": 0.09999990463256836,
+          "p95": 0.19999992847442627,
+          "max": 0.5
+        },
+        "physics": {
+          "count": 180,
+          "mean": 2.3827777769830494,
+          "p50": 2.299999952316284,
+          "p95": 3.200000047683716,
+          "max": 6
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:59.525Z",
+      "errors": [],
+      "population": 384,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 31.24611111548212,
+        "p50": 30.5,
+        "p95": 37.699999928474426,
+        "max": 50.799999952316284
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.6977777732743158,
+        "p50": 0.5999999046325684,
+        "p95": 0.8000000715255737,
+        "max": 16.299999952316284
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.13388889100816515,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.2999999523162842
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.9322222226195865,
+          "p50": 0.8000000715255737,
+          "p95": 1.600000023841858,
+          "max": 4
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.23833332922723557,
+          "p50": 0.20000004768371582,
+          "p95": 0.30000007152557373,
+          "max": 1
+        },
+        "physics": {
+          "count": 180,
+          "mean": 27.598888889948526,
+          "p50": 26.800000071525574,
+          "p95": 33.5,
+          "max": 46.89999997615814
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:59.525Z",
+      "errors": [],
+      "population": 384,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 38.72277777658569,
+        "p50": 38.5,
+        "p95": 44.10000002384186,
+        "max": 56
+      },
+      "replication": {
+        "count": 180,
+        "mean": 2.0027777784400516,
+        "p50": 1.7999999523162842,
+        "p95": 3.399999976158142,
+        "max": 15.299999952316284
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.1505555596616533,
+          "p50": 0.10000002384185791,
+          "p95": 0.30000007152557373,
+          "max": 1.2000000476837158
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.9677777760558658,
+          "p50": 0.8999999761581421,
+          "p95": 1.600000023841858,
+          "max": 3.5
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.24444445106718277,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 0.8000000715255737
+        },
+        "physics": {
+          "count": 180,
+          "mean": 35.267777783340875,
+          "p50": 35.10000002384186,
+          "p95": 40.799999952316284,
+          "max": 52.89999997615814
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 385,
+      "thermalsBefore": {
+        "batteryC": 27.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.8,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:59.525Z",
+      "errors": [],
+      "population": 96,
+      "motion": "stationary",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 4.378888885180156,
+        "p50": 4.200000047683716,
+        "p95": 5.300000071525574,
+        "max": 8.600000023841858
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.2927777820163303,
+        "p50": 0.19999992847442627,
+        "p95": 0.30000007152557373,
+        "max": 17.5
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.10111110938919915,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.9000000953674316
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.24000000490082635,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1.3000000715255737
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06111110978656345,
+          "p50": 0.09999990463256836,
+          "p95": 0.10000002384185791,
+          "max": 0.20000004768371582
+        },
+        "physics": {
+          "count": 180,
+          "mean": 3.295000000132455,
+          "p50": 3.200000047683716,
+          "p95": 3.700000047683716,
+          "max": 7.400000095367432
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 27.8,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.8,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:58:59.525Z",
+      "errors": [],
+      "population": 96,
+      "motion": "moving",
+      "counting": false,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 5.386111107799742,
+        "p50": 5.200000047683716,
+        "p95": 6.800000071525574,
+        "max": 11.5
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.571666669845581,
+        "p50": 0.5,
+        "p95": 0.8000000715255737,
+        "max": 13.400000095367432
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.10333333214124044,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 1
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.26666666666666666,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 2.4000000953674316
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06888888478279113,
+          "p50": 0.09999990463256836,
+          "p95": 0.20000004768371582,
+          "max": 0.20000004768371582
+        },
+        "physics": {
+          "count": 180,
+          "mean": 4.312222219838036,
+          "p50": 4.199999928474426,
+          "p95": 5.200000047683716,
+          "max": 8.600000023841858
+        }
+      },
+      "counts": {},
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 27.8,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      }
+    }
+  ],
+  "counts": [
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:59:14.538Z",
+      "errors": [],
+      "population": 96,
+      "motion": "stationary",
+      "counting": true,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 5.189444442590077,
+        "p50": 4.600000023841858,
+        "p95": 7.899999976158142,
+        "max": 23.800000071525574
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.34333333637979296,
+        "p50": 0.20000004768371582,
+        "p95": 0.5,
+        "max": 14.799999952316284
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.12444444828563267,
+          "p50": 0.10000002384185791,
+          "p95": 0.3999999761581421,
+          "max": 0.8999999761581421
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.2816666709052192,
+          "p50": 0.20000004768371582,
+          "p95": 0.5,
+          "max": 2
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.07944445080227322,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.8999999761581421
+        },
+        "physics": {
+          "count": 180,
+          "mean": 3.8166666686534882,
+          "p50": 3.399999976158142,
+          "p95": 5.399999976158142,
+          "max": 18.600000023841858
+        }
+      },
+      "counts": {
+        "chunkQueries": 18720,
+        "chunkCandidates": 1065060
+      },
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "before",
+      "repeat": 0,
+      "date": "2026-10-11T13:59:14.538Z",
+      "errors": [],
+      "population": 96,
+      "motion": "moving",
+      "counting": true,
+      "cellSize": null,
+      "ticks": {
+        "count": 180,
+        "mean": 5.573888887961705,
+        "p50": 5.199999928474426,
+        "p95": 7.700000047683716,
+        "max": 11.699999928474426
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.6255555576748318,
+        "p50": 0.5,
+        "p95": 1.100000023841858,
+        "max": 14.300000071525574
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.09777777791023254,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.40000009536743164
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.2566666622956594,
+          "p50": 0.20000004768371582,
+          "p95": 0.5,
+          "max": 2.0999999046325684
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06500000225173103,
+          "p50": 0.09999990463256836,
+          "p95": 0.19999992847442627,
+          "max": 0.20000004768371582
+        },
+        "physics": {
+          "count": 180,
+          "mean": 4.529999999867545,
+          "p50": 4.199999928474426,
+          "p95": 6.600000023841858,
+          "max": 10
+        }
+      },
+      "counts": {
+        "chunkQueries": 18874,
+        "chunkCandidates": 1148324
+      },
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:59:31.173Z",
+      "errors": [],
+      "population": 96,
+      "motion": "stationary",
+      "counting": true,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 3.0250000066227383,
+        "p50": 2.899999976158142,
+        "p95": 4,
+        "max": 5.900000095367432
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.2727777686383989,
+        "p50": 0.19999992847442627,
+        "p95": 0.3999999761581421,
+        "max": 14.300000071525574
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.09000000357627869,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 0.5
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.23666666216320462,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1.5
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.066666665342119,
+          "p50": 0.10000002384185791,
+          "p95": 0.10000002384185791,
+          "max": 0.3999999761581421
+        },
+        "physics": {
+          "count": 180,
+          "mean": 1.9444444431198968,
+          "p50": 1.899999976158142,
+          "p95": 2.4000000953674316,
+          "max": 4.5
+        }
+      },
+      "counts": {
+        "chunkQueries": 1440,
+        "chunkCandidates": 123300,
+        "fineQueries": 17280,
+        "fineCandidates": 194400
+      },
+      "traceSHA256": null,
+      "expectedActorTravelPx": 0,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      }
+    },
+    {
+      "source": "after",
+      "repeat": 0,
+      "date": "2026-10-11T13:59:31.173Z",
+      "errors": [],
+      "population": 96,
+      "motion": "moving",
+      "counting": true,
+      "cellSize": 32,
+      "ticks": {
+        "count": 180,
+        "mean": 3.3594444433848065,
+        "p50": 3.200000047683716,
+        "p95": 4.599999904632568,
+        "max": 6.099999904632568
+      },
+      "replication": {
+        "count": 180,
+        "mean": 0.5694444451067183,
+        "p50": 0.40000009536743164,
+        "p95": 0.8000000715255737,
+        "max": 16.600000023841858
+      },
+      "phases": {
+        "streaming": {
+          "count": 180,
+          "mean": 0.09055555727746752,
+          "p50": 0.10000002384185791,
+          "p95": 0.20000004768371582,
+          "max": 1.2000000476837158
+        },
+        "selection": {
+          "count": 180,
+          "mean": 0.24277777671813966,
+          "p50": 0.20000004768371582,
+          "p95": 0.3999999761581421,
+          "max": 1.2000000476837158
+        },
+        "decisions": {
+          "count": 180,
+          "mean": 0.06666666997803582,
+          "p50": 0.10000002384185791,
+          "p95": 0.10000002384185791,
+          "max": 0.20000004768371582
+        },
+        "physics": {
+          "count": 180,
+          "mean": 2.3827777769830494,
+          "p50": 2.299999952316284,
+          "p95": 3.1999999284744263,
+          "max": 4.5
+        }
+      },
+      "counts": {
+        "chunkQueries": 1594,
+        "chunkCandidates": 128360,
+        "fineQueries": 17280,
+        "fineCandidates": 178667
+      },
+      "traceSHA256": null,
+      "expectedActorTravelPx": 88,
+      "resident": 97,
+      "thermalsBefore": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28,
+        "thermalStatus": 0
+      }
+    }
+  ],
+  "countMatchesDesktop": true,
+  "validation": {
+    "typecheck": "all three configurations pass",
+    "unit": {
+      "files": 252,
+      "passed": 2491
+    },
+    "lint": {
+      "errors": 0,
+      "existingWarnings": 118,
+      "existingInfos": 34
+    },
+    "runtimeChanged": false,
+    "retainedRuntimeValidation": "9929a42 build, all547 browser checks and six streaming-readiness cases passed. Frozen/current runtime hashes match; docs/evidence only in this follow-up.",
+    "cleanup": "Owned tabs, Workers, Vite/proxy processes and USB routes closed; original home foreground restored and existing Chrome tabs retained."
+  }
+}
