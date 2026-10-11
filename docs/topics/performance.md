@@ -247,8 +247,26 @@ not a general frame-rate or phone improvement. All 2,428 units, typechecks/lint,
 build, final duck browser checks and six-case streaming readiness pass. The full
 browser run passes 545/skips one; a GPU global upload-stability assertion fails
 and reproduces on original source, with final isolated reruns passing. 113 owns
-capture provenance, the final waterline correction and the test limitation. Next: profile remaining
-dense collision/ground and nearby-actor work, then measure on the phone when available.
+capture provenance, the final waterline correction and the test limitation.
+
+[114](../tactical/114-authority-work-profile.md) follows with nine native desktop
+captures and separate deep/shallow/sampled CPU crowd lanes against frozen 113
+production source. At 96/384 stationary nearby dogs, movement probes evaluate
+5,136/46,352 entity AABBs per tick despite no overlaps; chunk-sized candidates
+and the global spanning-body supplement scale poorly. Separate Node CPU captures
+attribute about half the 384-dog sampled active time to collision resolution.
+These accelerated crowd controls exclude rendering/real IndexedDB and suppress
+planning; they are attribution, not a native Worker/phone deadline result.
+Ordinary native walking is continuously moving at about 60Hz with work spread
+across physics, selection, snapshot validation, streaming and mutation reads.
+Ground reuse remains effective (about 26 resolutions/10 candidate lookups per
+tick); dirty handling receives about 145 notifications for 40 actors, but only
+0.070ms measured nested time in that deep desktop capture. Next: prototype a
+footprint-aware narrow collision/support query, account for index/update costs,
+and compare dense and sparse scenes before phone acceptance. Temporary blocker
+Set/filter removal is a smaller independent slice; record fast paths are secondary.
+114 owns counts, source/probe hashes, timings and measurement limits. No runtime
+policy change or stutter cause is established by this profile.
 Retain 60Hz player/contact physics and acknowledgement freshness; lower NPC
 publication cadence and compute workers remain distinct later experiments.
 
