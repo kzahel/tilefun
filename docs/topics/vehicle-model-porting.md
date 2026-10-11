@@ -1,8 +1,8 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 10 models retained, 8 integrated
-in game/lab mesh mode. All six compacts, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
+Status: 45 sprite sets inventoried; 17 models retained, 15 integrated
+in game/lab mesh mode. All six compacts, seven additional sedans, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
 Exact model art review remains open.
 Updated: 2026-10-11.
 
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **10/45 retained models, 35/45 queued; 8/45 own-model
+Current progress: **17/45 retained models, 28/45 queued; 15/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -65,6 +65,13 @@ and one tagged warning beacon in [119](../tactical/119-six-wheel-garbage-truck.m
 Its own geometry/UV sources and 4×2 are retained; clearance and integration remain pending.
 
 The complete-bank pass in [122](../tactical/122-complete-vehicle-port.md) retains compact 3/5/6 and integrates all six colors through a shared own-asset registry. Every compact passes actual GPU draw/reset/disposal checks; the failed-load browser probe preserves gameplay with sprites. The inherited compact body still needs steering/floor qualification and exact art review.
+
+Seven additional sedans now have an independent family body, own UV paint,
+four radius-six wheel assemblies and open wheel floors. Dark-source registration
+is explicit; every view samples that color's own reference, preserving localized
+paint exceptions. The fitted roof cannot reproduce both opposing highlights
+exactly. [122](../tactical/122-complete-vehicle-port.md) records actual GLB wheel,
+GPU and tracked-only checks; exact production art review remains open.
 
 ## Source families for batching
 
@@ -176,13 +183,13 @@ Blender templates still need qualification.
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `unindexed-sedan-beige` | Queued | Pending | Fit a sedan template; check all four silhouettes and windows. |
-| `unindexed-sedan-cyan` | Queued | Pending | Verify shape and palette correspondence before template reuse. |
-| `unindexed-sedan-dark` | Queued | Pending | Verify shape and palette correspondence before template reuse. |
-| `unindexed-sedan-olive` | Queued | Pending | Verify shape and palette correspondence before template reuse. |
-| `unindexed-sedan-orange` | Queued | Pending | Verify shape and palette correspondence before template reuse. |
-| `unindexed-sedan-red` | Queued | Pending | Verify shape and palette correspondence before template reuse. |
-| `unindexed-sedan-silver` | Queued | Pending | Verify shape and palette correspondence before template reuse. |
+| `unindexed-sedan-beige` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-beige/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
+| `unindexed-sedan-cyan` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-cyan/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
+| `unindexed-sedan-dark` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-dark/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
+| `unindexed-sedan-olive` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-olive/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
+| `unindexed-sedan-orange` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-orange/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
+| `unindexed-sedan-red` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-red/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
+| `unindexed-sedan-silver` | [Retained v1](../../art-source/vehicle-models/unindexed-sedan-silver/v1/) | Default GPU integrated | Review own 4×2 and roof-paint projection limits; steering remains neutral. |
 
 ### Buses — 6 sets
 

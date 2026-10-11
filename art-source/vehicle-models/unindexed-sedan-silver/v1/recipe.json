@@ -1,0 +1,404 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "unindexed-sedan-silver",
+  "family": "additional-sedan",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    80,
+    80
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/car.blend",
+    "sha256": "272947f2c266452ef2a8f3418c16d0995881602d2d41d7bbfdc932f18af174be"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        1056,
+        1696,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        45
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 silver \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          40,
+          45
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "a9cae9b5-6ae2-41d2-87ef-1f7586db6190",
+        "createdAt": "2026-10-03T10:48:51.051Z",
+        "candidateFingerprint": "7f43cd886b9d9dda2dd3918bf70c576ce07d4e5c07967ac987993d1ea1becfd0",
+        "metadataFingerprint": "b1562f899aca4575e338bcf9a3383b9f4b7ea942b481e1446cd70c33623f73be"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          40,
+          54.90440384019635
+        ],
+        "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+      },
+      "sourceSha256": "4cfa6c817c8a9c6bee3e5d628e0f1d202ae4c0c0fa97ea1c856bfc100bac191a"
+    },
+    {
+      "id": "west",
+      "rect": [
+        1056,
+        1648,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        45
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 silver \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          40,
+          45
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "07e9af3f-6fef-4420-b225-7e0e64551858",
+        "createdAt": "2026-10-03T10:48:51.603Z",
+        "candidateFingerprint": "e495fe2f9c2b655fe8a0d75a2deadd77767fd0988960054e339e3cca697ce9c9",
+        "metadataFingerprint": "4f685a26b6dd05fd6c65503a5331410e22d391f248caf19c89faf567b72451b4"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          40,
+          54.90440384019635
+        ],
+        "status": "Independent opposite side source ownership; no reflection"
+      },
+      "sourceSha256": "18285009a3ee65950009e5bf96c37d32fc38b001445e9e2a6f90db8e05ad1cd0"
+    },
+    {
+      "id": "north",
+      "rect": [
+        1024,
+        1664,
+        32,
+        80
+      ],
+      "anchor": [
+        16,
+        72
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 silver \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          16,
+          72
+        ],
+        "footprint": [
+          -13,
+          -54,
+          26,
+          54
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "sourceApproval": {
+        "id": "70c5d830-6948-4fb7-b4bf-ad0a4ba91e09",
+        "createdAt": "2026-10-03T10:48:50.910Z",
+        "candidateFingerprint": "83190d4f75e828c28e64228085503f5abeef1d436c365712931096a15b11c34f",
+        "metadataFingerprint": "66557f9c7b006fe6e664ce5c9747af482915a3110fa9fafb8e66baafcc0e4013"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        24,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 57.425942865427494,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.9709095165133557,
+        "origin": [
+          40,
+          43.425
+        ],
+        "status": "Explicit depth/height fit against roof, glazing and front/rear source contours; width registered independently"
+      },
+      "sourceSha256": "d1448c926234ffed2aca171daf89be269e797556c7749502a5f0104d7e0091e3"
+    },
+    {
+      "id": "south",
+      "rect": [
+        992,
+        1664,
+        32,
+        80
+      ],
+      "anchor": [
+        16,
+        72
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 silver \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          16,
+          72
+        ],
+        "footprint": [
+          -13,
+          -54,
+          26,
+          54
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "sourceApproval": {
+        "id": "02465aff-9c62-4f0e-9609-56231ba1e151",
+        "createdAt": "2026-10-03T10:48:51.360Z",
+        "candidateFingerprint": "e44044fd40c6ebf37943c1b73f0425cb22b50d944f7ce7dd1901aea6c0148cd0",
+        "metadataFingerprint": "d7fa09e7190f2e999c03cd7b22429afaf6c8ae8eaea42ab1ad40c2565eac54de"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        24,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 62.13901833866092,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.9219067992312985,
+        "origin": [
+          40,
+          40.71395626620078
+        ],
+        "status": "Explicit depth/height fit against roof, glazing and front/rear source contours; width registered independently"
+      },
+      "sourceSha256": "56edac49cc361b64e23ed06f8cab130493c9f5716913693ff87fd049a57ee53c"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1536,
+    "material": "unindexed-sedan-silver palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Passenger-body-east": [
+        "east"
+      ],
+      "Fender--20.5-east": [
+        "east"
+      ],
+      "Fender-23.5-east": [
+        "east"
+      ],
+      "Passenger-body-west": [
+        "west"
+      ],
+      "Fender--20.5-west": [
+        "west"
+      ],
+      "Fender-23.5-west": [
+        "west"
+      ],
+      "Roof": [
+        "north"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Rear-window-glass": [
+        "north"
+      ],
+      "Rear-window-frame": [],
+      "Hood": [
+        "south"
+      ],
+      "Trunk": [
+        "north"
+      ],
+      "Cabin-windows-east": [
+        "east"
+      ],
+      "Cabin-windows-west": [
+        "west"
+      ],
+      "Front-fascia": [
+        "south"
+      ],
+      "Front-corner--1": [
+        "south"
+      ],
+      "Front-corner-1": [
+        "south"
+      ],
+      "Rear-fascia": [
+        "north"
+      ],
+      "Rear-corner--1": [
+        "north"
+      ],
+      "Rear-corner-1": [
+        "north"
+      ],
+      "Underfloor": [],
+      "Mirror--1": [],
+      "Mirror-1": [],
+      "Tire_FL": [
+        "east"
+      ],
+      "Hub_FL": [
+        "east"
+      ],
+      "Tire_FR": [
+        "west"
+      ],
+      "Hub_FR": [
+        "west"
+      ],
+      "Tire_RL": [
+        "east"
+      ],
+      "Hub_RL": [
+        "east"
+      ],
+      "Tire_RR": [
+        "west"
+      ],
+      "Hub_RR": [
+        "west"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

@@ -6398,6 +6398,83 @@
       "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
     {
+      "id": "projection:authored-unindexed-sedan-red-v1",
+      "batchId": "authored-vehicles",
+      "name": "Red sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-red-v1/",
+      "kind": "projection",
+      "fingerprint": "e06f543bb54c1af9d5a8e0e528e94ff4d9c2373adf80f2aeb7d2bc29c55f86b1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-unindexed-sedan-beige-v1",
+      "batchId": "authored-vehicles",
+      "name": "Beige sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-beige-v1/",
+      "kind": "projection",
+      "fingerprint": "0d47b64e132602767510eef3c2fe96f7eecac5fda1c0f962930887edf5338ef8",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-unindexed-sedan-cyan-v1",
+      "batchId": "authored-vehicles",
+      "name": "Cyan sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-cyan-v1/",
+      "kind": "projection",
+      "fingerprint": "51361edb7840025e449e8c56c1e9ef172f365a4536be4e31715c4e39f6638be1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-unindexed-sedan-orange-v1",
+      "batchId": "authored-vehicles",
+      "name": "Orange sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-orange-v1/",
+      "kind": "projection",
+      "fingerprint": "b0986a3466f12718baa517aef8152f96382f702ebd28feae180eb2ba3f666e12",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-unindexed-sedan-silver-v1",
+      "batchId": "authored-vehicles",
+      "name": "Silver sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-silver-v1/",
+      "kind": "projection",
+      "fingerprint": "d9a940e0addcd96d678d35ca2254630005cb3e29947a95b2c8af5a920b4603c4",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-unindexed-sedan-olive-v1",
+      "batchId": "authored-vehicles",
+      "name": "Olive sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-olive-v1/",
+      "kind": "projection",
+      "fingerprint": "d16127b2e19e3026ff68742b829d6b82ed80343ead0d1d790f9dc6c40b389418",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-unindexed-sedan-dark-v1",
+      "batchId": "authored-vehicles",
+      "name": "Dark sedan · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/unindexed-sedan-dark-v1/",
+      "kind": "projection",
+      "fingerprint": "252f26a2d699dafce95771443558bc81bef8faa0808d4634bec60071338e5beb",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
       "id": "geometry:deck-ramp-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -30059,5 +30136,5 @@
       }
     }
   ],
-  "inputDigest": "9f82cc7fe7fd4971c9aedc0ed413849fdc57df8b70385710a0a7ee4be2a406f7"
+  "inputDigest": "47cc415cf0c997501c84df15a868f7519a795233818b466ecb000297de06cc41"
 }

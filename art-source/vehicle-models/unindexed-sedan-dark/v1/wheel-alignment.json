@@ -1,0 +1,88 @@
+{
+  "schema": "tilefun-wheel-well-fit-v1",
+  "observations": [
+    {
+      "wheel": "FL",
+      "view": "east",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          41,
+          48.90440384019635
+        ],
+        "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+      },
+      "sourceCenter": [
+        20.5,
+        53.5
+      ],
+      "errorPixels": 7.105427357601002e-15
+    },
+    {
+      "wheel": "FR",
+      "view": "west",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          41,
+          48.90440384019635
+        ],
+        "status": "Independent opposite side source ownership; no reflection"
+      },
+      "sourceCenter": [
+        61.5,
+        53.5
+      ],
+      "errorPixels": 7.105427357601002e-15
+    },
+    {
+      "wheel": "RL",
+      "view": "east",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          41,
+          48.90440384019635
+        ],
+        "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+      },
+      "sourceCenter": [
+        64.5,
+        53.5
+      ],
+      "errorPixels": 7.105427357601002e-15
+    },
+    {
+      "wheel": "RR",
+      "view": "west",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          41,
+          48.90440384019635
+        ],
+        "status": "Independent opposite side source ownership; no reflection"
+      },
+      "sourceCenter": [
+        17.5,
+        53.5
+      ],
+      "errorPixels": 7.105427357601002e-15
+    }
+  ],
+  "floorMesh": "Underfloor",
+  "maxCenterErrorPixels": 2,
+  "status": "Measured rest/roll centers; steering and loader clearance unqualified"
+}

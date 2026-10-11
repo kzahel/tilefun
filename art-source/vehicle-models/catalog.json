@@ -1417,6 +1417,909 @@
         "orbit-2.png": "fb4337179684943553b3b8e1e576823acb2146cf499fd4a0557b958cc1531517",
         "orbit-3.png": "393549dfb8b5f48e419de35f6dadddca7f3d71eb589cd32c215cc7c97cfd700b"
       }
+    },
+    {
+      "assetId": "unindexed-sedan-red",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-red-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-red/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-red-v1",
+      "capturedCandidateSha256": "e06f543bb54c1af9d5a8e0e528e94ff4d9c2373adf80f2aeb7d2bc29c55f86b1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/car-atlas.png",
+          "sha256": "8ea7c2b786c34d26add98a4a176a85e86cda2d49c87aba4ce04d3847c689f9db"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/car.blend",
+          "sha256": "b0cffef8b406a6ca441acf5185340203180660c5d57a7ef412c07fe46b27ed8a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/family-config.json",
+          "sha256": "9102e1c0d33d9628147524fda199e7c66cbf20a6806681fb88a870415ff50e03"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/inspection.json",
+          "sha256": "1973d2e36fa48f4d29ab2c70c6eafc914fec19afc7db240dbf1279ab74c6a376"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/mesh-spec.json",
+          "sha256": "92daf131a690639f040199dcc6134dd850428f8265ebb3a0c0e41c17f545d163"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/paint-ownership.json",
+          "sha256": "a16909c0e1688b28d7e05ce5fd87b92ff99bfb5696c59cc19591ac03734c0a80"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/projection-coverage.png",
+          "sha256": "7252171678ff1b8da436e8f88b9d957952ca00968c4f9e03c4871e86554f955a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/projection-draft.png",
+          "sha256": "e802bcde84c283da36448ea64f0a5e0f8937982722298920a4097293ff2d6225"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/projection-with-authored-fill.png",
+          "sha256": "085ffdf7c7c9ebf1118054d38e717acf8975a29a7076d9de017179483e197974"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/recipe.json",
+          "sha256": "b96363029c0be5748b8e42050e8b96724fb559b55a6b3f4e1216ef417effc7ae"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/refs/east.png",
+          "sha256": "79fa9f8f216200eed324f77fd142b8c51b7d4d6af14d91afe91b59dfdb10a6c3"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/refs/north.png",
+          "sha256": "a359d4ebaf3a66fb02f8bc892a2372768c801529c4bf45881ba0e11871efbeb5"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/refs/south.png",
+          "sha256": "c262d8a4adeea81e1e92329b036a0323663ab6eca5338b59ff6b9733442ca80a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/refs/west.png",
+          "sha256": "11377b8d5c5967564bb4caec13d954a504259a20774c8ed6f3c68041fe743abd"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/rig.json",
+          "sha256": "5a6bc275d75b519fd3be153611c30336aeb8f7f1fc5f2fff9320e7e1821ec493"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-red/v1/wheel-alignment.json",
+          "sha256": "0994910f0c959581543795a79c6bd065663c356e08f5744a22a57ffe2a47eef4"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-red-v1.glb",
+          "sha256": "cc551d38ff2213e281597623cab8f4eb75ea59a2988df57169813dadf0a8a85d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-red-v1/comparison.png",
+          "sha256": "4ae962765d322ac454c4449238758d3b83fe9adab94d55d5a1229d7b37b107e8"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-red-v1/index.html",
+          "sha256": "f5d5f9db6e6cc16e603c52bc6f4e5eee0d5d54618e08cfaa5e8abb19d5bed4f6"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-red-v1/orbit.png",
+          "sha256": "22238c2203d97d85acb73ab1c5ab7f7c36a27d051977cd02f31435ee0e17556b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-red-v1/review.json",
+          "sha256": "6a715bafe953b2122b67eb72a98ebc252d03cff09f6fdd679e1344c33f4a81e6"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-red-v1/silhouette.png",
+          "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "4b9c226901cfecc3238bc916bba3850ff71aebb26b9cbbb1cbb4633307b1a253",
+        "west-render.png": "ea54e923a4abafcfdbcf3bd00bde7013ea5bec063c5ad8a9767bf937955c2e97",
+        "north-render.png": "797c35c41804edddf7caa5cedef5083891eaf947132e31f1c92233b159572e81",
+        "south-render.png": "2d658c68d0a066810b466d484c3e1225aac90f886f6f137bed195aa869fa3134",
+        "orbit-0.png": "0af522f0647bf95605ebd0b5b096c12760ad217ef5ac8dcbb40b49dad0fa2fd8",
+        "orbit-1.png": "9574da08e4d5af598efefc2f662c6adc26f56000abc2f5b6cba173c8fdcdae33",
+        "orbit-2.png": "18424dc7d1339295110550c83fbb79054996ee652269e2d3888a04d20e186c46",
+        "orbit-3.png": "1af63a377e5eba67d9747cec12aa5be52f210876e50845fd2d7aefa1bfe85faf"
+      }
+    },
+    {
+      "assetId": "unindexed-sedan-beige",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-beige-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-beige/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-beige-v1",
+      "capturedCandidateSha256": "0d47b64e132602767510eef3c2fe96f7eecac5fda1c0f962930887edf5338ef8",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/car-atlas.png",
+          "sha256": "1725b755790782f123872b8043cd60f838a7ab452e14398af41e80201c4480ca"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/car.blend",
+          "sha256": "5aa116d58f86f75da0f2b3c34f149df8a70937fa401531efeaaf6805aa693c59"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/family-config.json",
+          "sha256": "81e000a5888a11b826afc51a60d8bd92228166be8d8ab1f367be27b22b609520"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/inspection.json",
+          "sha256": "0e84ccd432412b7f97a44b936415aef770e5866eba37e0afe4cc98c929c3bf7a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/mesh-spec.json",
+          "sha256": "705dbef70f26cd0210046881ebee4fced1797a7d58676a30839c15ca7b32dca0"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/paint-ownership.json",
+          "sha256": "a16909c0e1688b28d7e05ce5fd87b92ff99bfb5696c59cc19591ac03734c0a80"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/projection-coverage.png",
+          "sha256": "7252171678ff1b8da436e8f88b9d957952ca00968c4f9e03c4871e86554f955a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/projection-draft.png",
+          "sha256": "f4190b669d2a9187256fd217776b169f5ba479e4bcc178114e5179abea52b090"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/projection-with-authored-fill.png",
+          "sha256": "7be3f1e20c9548f8c1fd613cf0db177ce3804dc7852f54f2a958b9ae77d1006b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/recipe.json",
+          "sha256": "e8710e696d11000d857420b3a7d4bafbdf08f6e894fcc60d6822019fcda758a8"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/refs/east.png",
+          "sha256": "ad181ea2c562f8aabc7fa69a750cb6ad9ff0483592e3c701bfa67fe37f6358dc"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/refs/north.png",
+          "sha256": "9e1b3dae45e8f0871d5f0b5bfb66eb24bdd75783811630abbe169c816bc8cdb7"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/refs/south.png",
+          "sha256": "3a938e4e0671571897d847afc3b229a139c0826c53b7b2186cf26da107ef015a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/refs/west.png",
+          "sha256": "91c76543390f31326ef689a234edd66e16a54366259b152f5dd3b3f69e6e6375"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/rig.json",
+          "sha256": "5a6bc275d75b519fd3be153611c30336aeb8f7f1fc5f2fff9320e7e1821ec493"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-beige/v1/wheel-alignment.json",
+          "sha256": "0994910f0c959581543795a79c6bd065663c356e08f5744a22a57ffe2a47eef4"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-beige-v1.glb",
+          "sha256": "c6ea6f57c1551fd6a136e83d87d448bead41fd32a3a12a140bd7177d645e4d20"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-beige-v1/comparison.png",
+          "sha256": "fdbd3656fe2eb5e8f509504c0322c7b221dced37cd3211d4e1df31b7816940a9"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-beige-v1/index.html",
+          "sha256": "1a82737ae5ce0be31bd110a57d05ccad673d7928e1ec1a6cccb080ddf03a054a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-beige-v1/orbit.png",
+          "sha256": "21de55905d83874c1fbf9af35103cc037f184bac9a628a4cd1d9536b723cb889"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-beige-v1/review.json",
+          "sha256": "6415242703372c533b082638763b36153ade380fd87ac124b973d68e5f989da1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-beige-v1/silhouette.png",
+          "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "42ca01a9f2335a392fecfa48c36716719969110ca47276fd822d313d6bde9dbc",
+        "west-render.png": "3fbbce0bc558a716d0e9778b80bf4afc54ec831b42c8d5ba958c3ffe181b1ca0",
+        "north-render.png": "65bb05435b8a81daa7e01b351bd53ee1a52026ebc141b051dad439e346e12801",
+        "south-render.png": "dd3a7da3f97f5ec9084001ea7ede5f4268f89721afc8a6a165709c44fe812039",
+        "orbit-0.png": "552541b85931f105b2afaa6f6c4a8afdd0aee3da44c033282fe6c6fb1488ba16",
+        "orbit-1.png": "1c78fb6d18f93cc046628e7f2af172b4119956313daf3c04047fa04c25ac8531",
+        "orbit-2.png": "ad1761c7c6b2bbd310ccfa6bd6cd26220efac46433d24a2fc0bff5ac552be69d",
+        "orbit-3.png": "864d012103acd946ac35f0a08752b25ff5a027adf4ece06ae78fcd2d89666161"
+      }
+    },
+    {
+      "assetId": "unindexed-sedan-cyan",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-cyan-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-cyan/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-cyan-v1",
+      "capturedCandidateSha256": "51361edb7840025e449e8c56c1e9ef172f365a4536be4e31715c4e39f6638be1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/car-atlas.png",
+          "sha256": "aa795d902a5756d6a826d0e34c543da8cef864ca41f1037e808b11edea3b5ff8"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/car.blend",
+          "sha256": "0d12b1b4e9c5ce4af45384ea466da65bcfa416a48bf64cee93ba8e310198b239"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/family-config.json",
+          "sha256": "ee4c06f29ef91ed25ae13c886305b517b5b77111fad236be3ec668f099d5d631"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/inspection.json",
+          "sha256": "ff6c3922dad6c288da9c23901b556d2459298c48987223d545d5d9c57fcc0fb1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/mesh-spec.json",
+          "sha256": "cf6b69aaac8ff53522b0ed3ff497a4dd297e81c7f5799e92c83dafdec847897d"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/paint-ownership.json",
+          "sha256": "a16909c0e1688b28d7e05ce5fd87b92ff99bfb5696c59cc19591ac03734c0a80"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/projection-coverage.png",
+          "sha256": "7252171678ff1b8da436e8f88b9d957952ca00968c4f9e03c4871e86554f955a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/projection-draft.png",
+          "sha256": "64b0116e4465c9513d8b8bf0a429ad8a77c4ab8835f4d3b716cfefd364175b5e"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/projection-with-authored-fill.png",
+          "sha256": "f7aaa34ee8511882f9d8ae439de8310b886a04ccb2ec4523eb4d4428b64a5b44"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/recipe.json",
+          "sha256": "7a9b1322ad57abea5c6d5b3d8af7923c44e4c673ecf288ffacb19276277f58f2"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/refs/east.png",
+          "sha256": "d57aaa455fb684821383fe02c3951bf3215cbcff219eab519ffe130dcccbfb7f"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/refs/north.png",
+          "sha256": "4dd0b75d11ae6f0342a53d0c99daaa38e5316a81760feb8b5628e866cc47c28e"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/refs/south.png",
+          "sha256": "b095cb553a0ece5201cc927aff84247141bbbf2be7a6d2acb3b3a1d111c742fd"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/refs/west.png",
+          "sha256": "3436b97e3f45bfc1932089297c639b4c3ae323beca12fed9e7f76658abf17b89"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/rig.json",
+          "sha256": "5a6bc275d75b519fd3be153611c30336aeb8f7f1fc5f2fff9320e7e1821ec493"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-cyan/v1/wheel-alignment.json",
+          "sha256": "0994910f0c959581543795a79c6bd065663c356e08f5744a22a57ffe2a47eef4"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-cyan-v1.glb",
+          "sha256": "95340134ee8401074608824bfe22a939d00271369357c7d4f3449dd88e3b1bb3"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-cyan-v1/comparison.png",
+          "sha256": "b99bc46b86e3b17918d56b3375142f0b0104b7e9bfb0d04833a79c3ece237baa"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-cyan-v1/index.html",
+          "sha256": "a9a138b7e3d20b8224f02434e85247f811894443b26ff3c1953d001923cd9859"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-cyan-v1/orbit.png",
+          "sha256": "a25ce2d88783c4d6f7db611c3730fbba40c111196a76ed2773f34d69e29386c2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-cyan-v1/review.json",
+          "sha256": "94455ced82b2f49bf8f920e4444f6c68491f952006b8d8860ce70e4203cffdf1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-cyan-v1/silhouette.png",
+          "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "5b404e037f1d37449440be4a887e10cb5bd4a5609c3cfb9107d09bed50f0047d",
+        "west-render.png": "763c9463c58f9c881ee44aae2a4685ca851c84e45e983ffb1b512578d00c89f3",
+        "north-render.png": "8ca09b1f07d17653815b7625923473159d9299abe2f90ef1a5aa8f0d3c7de63a",
+        "south-render.png": "a84cce6ea501f48be848d15525ef759b4c751c0e6bac5aab0ae6cf9f3449675e",
+        "orbit-0.png": "4d58fe5772af843ce68f0c29abfec319ec358f87be160f8b0bc347b58663178c",
+        "orbit-1.png": "e3c03516111a4722a3080ccaa888a52eb686f98fe8bb4380e36ac4cc00872a11",
+        "orbit-2.png": "6674f56f97c4ba245d4b6d022d07d07e42f550dd085f4847f79d0213491d468c",
+        "orbit-3.png": "2d7bcd476574699170131f22dfe9b4d1d8cd36b706ab0d2a03992daa4b601d42"
+      }
+    },
+    {
+      "assetId": "unindexed-sedan-orange",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-orange-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-orange/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-orange-v1",
+      "capturedCandidateSha256": "b0986a3466f12718baa517aef8152f96382f702ebd28feae180eb2ba3f666e12",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/car-atlas.png",
+          "sha256": "b6e7aacccfecf9f7f53f5cb27e798badf5184c2d290c893b1c99f818a5e944ad"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/car.blend",
+          "sha256": "81d331d3a98f309abd83ea4142c6be1e30243deb8104deeec5cb331422881222"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/family-config.json",
+          "sha256": "4d1539992a52d96cd3347555d2593dedde85b053d8fb0e7a48aed2e763f87248"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/inspection.json",
+          "sha256": "27714c69a49ab1993e373c6c7e8ce380039cca5401b42b6aa5172ece0f01c7a9"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/mesh-spec.json",
+          "sha256": "634a418e4c3286a35827b31247286d2747a24f55463b03d69a8dabb6fa21eece"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/paint-ownership.json",
+          "sha256": "a16909c0e1688b28d7e05ce5fd87b92ff99bfb5696c59cc19591ac03734c0a80"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/projection-coverage.png",
+          "sha256": "7252171678ff1b8da436e8f88b9d957952ca00968c4f9e03c4871e86554f955a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/projection-draft.png",
+          "sha256": "0ee8038aaba4f6051a5f62e714bfc2c071e80dd8224df09749fbd614158271d2"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/projection-with-authored-fill.png",
+          "sha256": "ab49f4e550c2a5d952df87c44dcdb58d81da8a1ee526a7c390b65e685ea05e6c"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/recipe.json",
+          "sha256": "00094cfce152a7816382c5247eda790340ad695cd8afb756698ab819aa914ca0"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/refs/east.png",
+          "sha256": "6a26ec23d00a6b47417567c03f1d4c79a12911fd0735567405c91c2443ea35af"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/refs/north.png",
+          "sha256": "ad947925df6d0728f3a9978d08986fccd80cd89cb21de172edb994f9b9a29e94"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/refs/south.png",
+          "sha256": "2bb04e42b7992907c8c0283d5cfb5c6e2d57326f9d78180535ad28164ca78b18"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/refs/west.png",
+          "sha256": "9bd07c0013267e4ac42a1d2d7e5f8cb77fb8e7301703172e62dcd27f91ddc289"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/rig.json",
+          "sha256": "5a6bc275d75b519fd3be153611c30336aeb8f7f1fc5f2fff9320e7e1821ec493"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-orange/v1/wheel-alignment.json",
+          "sha256": "0994910f0c959581543795a79c6bd065663c356e08f5744a22a57ffe2a47eef4"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-orange-v1.glb",
+          "sha256": "a084dc3e6553abe82d52571a5af80753ab763876b2441da9f5e158e29431f899"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-orange-v1/comparison.png",
+          "sha256": "85066edd64783c9607312257348932fa458222780ed98915ad73620bdd401fe0"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-orange-v1/index.html",
+          "sha256": "348d1282c0c253d13275b6bfbd00cbe939292c85292c22ba161c954137e0261a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-orange-v1/orbit.png",
+          "sha256": "887b6564e2e228ee8fec8e54fd01658d5a87a2c7062ea92ef88ecc422fa85c6a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-orange-v1/review.json",
+          "sha256": "8bec1e7bd04ccb00cff154bbb8987080600b5f3af13bc0be3a3b79a9391c96d1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-orange-v1/silhouette.png",
+          "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "e965f8167a9021ee276b4eb86a62d4e701cb42b864c310760622287bdcb9f716",
+        "west-render.png": "673ca95cafd61e09b4a928c844a32c26525c8fe25cd89fceea1b5ef1f3343adf",
+        "north-render.png": "7d22c56ed7db9f2927919569ee6b7fe536f2aca5476c33cd4f3317aa5551966a",
+        "south-render.png": "0c49c8c8db38421210c856e9e207c43250477a689f00e3d7b0eca713376c193f",
+        "orbit-0.png": "c1faf176f588e750702f6c102ce29ad88fbbecfe81bec120bf4ba73ca0cf8dfe",
+        "orbit-1.png": "8f74c44bfd7485c849e4e68e8ae256c134dddf722c4c456330243eaafcf80d26",
+        "orbit-2.png": "1358d97aa0da81bd6e2776111588d2a961adfe245ca685b3e7dc0a91a6dbb355",
+        "orbit-3.png": "a8b54b541404f5c0767b3bbbb0ca19932e5138bda1da6f5caf3d189fa322d815"
+      }
+    },
+    {
+      "assetId": "unindexed-sedan-silver",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-silver-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-silver/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-silver-v1",
+      "capturedCandidateSha256": "d9a940e0addcd96d678d35ca2254630005cb3e29947a95b2c8af5a920b4603c4",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/car-atlas.png",
+          "sha256": "2aaa3d0128c5bfa72d57cb2976e8942567b9258a97c4e8e7760fdbf061108ef7"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/car.blend",
+          "sha256": "272947f2c266452ef2a8f3418c16d0995881602d2d41d7bbfdc932f18af174be"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/family-config.json",
+          "sha256": "5f861b5778c1ba8bea30a5342cefa5003d2f3230c664ca3de92356186e2f7ace"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/inspection.json",
+          "sha256": "6c479948336e92711ae1f2d0128f6d67a6449c6b6d8e0c2b7cd75e25ebbab7b3"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/mesh-spec.json",
+          "sha256": "cd0009ed95e51a7263c76b37880571fabb5b83de317d43915a6532fc00aadf2a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/paint-ownership.json",
+          "sha256": "a16909c0e1688b28d7e05ce5fd87b92ff99bfb5696c59cc19591ac03734c0a80"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/projection-coverage.png",
+          "sha256": "7252171678ff1b8da436e8f88b9d957952ca00968c4f9e03c4871e86554f955a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/projection-draft.png",
+          "sha256": "d6f48edebf65edb5693a7610a96826fccf55e27b2d058b6afcd7514ec113edb1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/projection-with-authored-fill.png",
+          "sha256": "138d1f3174b2df1145f5ed5198628545a056eb7ee3aed350e72392ed04b8f30d"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/recipe.json",
+          "sha256": "22151cfd5b1579c7dcd8ead957bbb2e498097a23956003b8992785803cbd1b11"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/refs/east.png",
+          "sha256": "4cfa6c817c8a9c6bee3e5d628e0f1d202ae4c0c0fa97ea1c856bfc100bac191a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/refs/north.png",
+          "sha256": "d1448c926234ffed2aca171daf89be269e797556c7749502a5f0104d7e0091e3"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/refs/south.png",
+          "sha256": "56edac49cc361b64e23ed06f8cab130493c9f5716913693ff87fd049a57ee53c"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/refs/west.png",
+          "sha256": "18285009a3ee65950009e5bf96c37d32fc38b001445e9e2a6f90db8e05ad1cd0"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/rig.json",
+          "sha256": "5a6bc275d75b519fd3be153611c30336aeb8f7f1fc5f2fff9320e7e1821ec493"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-silver/v1/wheel-alignment.json",
+          "sha256": "0994910f0c959581543795a79c6bd065663c356e08f5744a22a57ffe2a47eef4"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-silver-v1.glb",
+          "sha256": "e5239fda888cbd3083160ce602c015ae6ea59075296f96f2f63a3038197a592b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-silver-v1/comparison.png",
+          "sha256": "4e0fe2253a6e2f58b079c4d5126a2584ea35410fbcce7cc52b8eb1065abcb2be"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-silver-v1/index.html",
+          "sha256": "864bba38cc11166497f51f018e9d377c1589f2c2369b941d7e15d53414bc36f4"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-silver-v1/orbit.png",
+          "sha256": "ca8c95c1541e957f239a7fab628b820f94fdbf02b52d9224a6e84ac73607da26"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-silver-v1/review.json",
+          "sha256": "7f90ca8c331a42658689b6b627138d1a15a5c944131c78e44d0d47ca6fb2cd1d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-silver-v1/silhouette.png",
+          "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "900b5ecb1b1dd4a08365b988d222f019f2bd744d75b06442bac1b5f93a4c57c9",
+        "west-render.png": "50ace18636bfc7114ebf92c605f2e4a7eed88a5dec95fd5f225a99e3b9f912f2",
+        "north-render.png": "33b8b1ae8a967fd1ea828f839cc2e5628de92efcf48334af81ef7b3a071a8710",
+        "south-render.png": "ef4f3b550e7aa5df98be472545a6763ef56177d3ae46630c160ccea73fd70cb3",
+        "orbit-0.png": "3aa0ab005b4720c8c1dd36223806666bd53b507856cda723ec1af9004e1bce70",
+        "orbit-1.png": "a847ea62689c8f407baaefdf2748ffd0b88d848d049c8d1aaeaf17cb3275bdd9",
+        "orbit-2.png": "f2068e3ea5beaa99959b0fa5a1e22ee30aeac20bea7455c7187c13f71e297e60",
+        "orbit-3.png": "f1fa7f7e8a21296792ac82154de71d24d94cfdc689754ac2580e15d5333204d7"
+      }
+    },
+    {
+      "assetId": "unindexed-sedan-olive",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-olive-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-olive/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-olive-v1",
+      "capturedCandidateSha256": "d16127b2e19e3026ff68742b829d6b82ed80343ead0d1d790f9dc6c40b389418",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/car-atlas.png",
+          "sha256": "6eab2a68e9cf46c1ebe1f9ae61f1eff0d1dc3a8b0a8c513c42431a500c7d7db0"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/car.blend",
+          "sha256": "dfbf6adc60bd42adc665c00f5395a64ade32fd14c160938b566fd00529050b49"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/family-config.json",
+          "sha256": "19f1de17b49f77a54d6d413cad18a43df2dfa3652ad26b7cd5172ee393ac882f"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/inspection.json",
+          "sha256": "0e07f601110904e5ded885d02d89c233bf4e8f2c38b058116e4e43a593cbfd08"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/mesh-spec.json",
+          "sha256": "1346eb2f17e29452f8d9f08cf9d6f8eaf58c3e55a2c5ea0e7d0ef068ccf6d592"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/paint-ownership.json",
+          "sha256": "a16909c0e1688b28d7e05ce5fd87b92ff99bfb5696c59cc19591ac03734c0a80"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/projection-coverage.png",
+          "sha256": "7252171678ff1b8da436e8f88b9d957952ca00968c4f9e03c4871e86554f955a"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/projection-draft.png",
+          "sha256": "5d407d9e4bbcfbaf0013c515949f41dad35b10058e5e8e33a492853681af32be"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/projection-with-authored-fill.png",
+          "sha256": "a15a2612aa7e20fe84af7b9db95562307433b846a57323a09c9564dcaf51694b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/recipe.json",
+          "sha256": "47c5e1e9926c5c0e5a17c9277991945256c579994ecf8b21934fc097acf725cc"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/refs/east.png",
+          "sha256": "e943255389d756d16b777eae2b3b2b849f2f19a950e57cf2bc154936289784d3"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/refs/north.png",
+          "sha256": "9d0ce3002a6071e0195cf66f2a6cd409dab54c64d92ac97c293f39409284ad8b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/refs/south.png",
+          "sha256": "1d0f566b30934eac5fc386eb202debc72ed76b66e03ea2ec82cc6e370b4a1454"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/refs/west.png",
+          "sha256": "3a3c0e6e741edf00af0cbede6f382c6ccfa0ee243b8393f71630c71a8d6f763e"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/rig.json",
+          "sha256": "5a6bc275d75b519fd3be153611c30336aeb8f7f1fc5f2fff9320e7e1821ec493"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-olive/v1/wheel-alignment.json",
+          "sha256": "0994910f0c959581543795a79c6bd065663c356e08f5744a22a57ffe2a47eef4"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-olive-v1.glb",
+          "sha256": "b112c52bab3d122e27b76f12042e689f7e71281e2e97241b9411601e57560bf8"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-olive-v1/comparison.png",
+          "sha256": "31c6686ed9bdfe1c6c4624a64e82fa933ad5383cb6d65f0d865c2135549265d3"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-olive-v1/index.html",
+          "sha256": "ed066588681773a9923ea8dce59f54b4afb9a5d17479a5608ae4e1db5687b408"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-olive-v1/orbit.png",
+          "sha256": "5e01c55a51594a2a0f063d0b4c725871893a9949b04e77cad9a436410820eb31"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-olive-v1/review.json",
+          "sha256": "baf9a1ca83b28e2812b9018312a492c46e1914081daa3762cad536c96d2feedb"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-olive-v1/silhouette.png",
+          "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "2403c2004553dfd0d34161e6f3b288a26ab699f6fa4683b9217bc56d78319756",
+        "west-render.png": "fd1cd3064680568e35d4ccbff965cd4e33261631ef9f8161bffe21b3de5585de",
+        "north-render.png": "96dcba5cf2a36132cd01efc19076f7cf61b967fbbdb37e2bef9d07284250574e",
+        "south-render.png": "fb37d239040747615ece7dd785bbf69877d14131620389c9e81ca1a0436fc735",
+        "orbit-0.png": "7c3c796fe7e9671310c1987e7cc63ccc8c684a4b2b0ced6abf5d294fdb8cb2c7",
+        "orbit-1.png": "18add2aa5988e5b9daa0b85f8afcc287aff43fc5612b011dfc64f5d70ad81f73",
+        "orbit-2.png": "2e9bb9034bc6de656464f69a003cd5f34e26032860e773381fbe8f39b09d8f97",
+        "orbit-3.png": "79cec5261d9b5109729b2a3968f5cce4165691e0d0d52ed283c9fc651f724b1e"
+      }
+    },
+    {
+      "assetId": "unindexed-sedan-dark",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/unindexed-sedan-dark-v1.glb",
+      "source": "art-source/vehicle-models/unindexed-sedan-dark/v1",
+      "capturedCandidateId": "projection:authored-unindexed-sedan-dark-v1",
+      "capturedCandidateSha256": "252f26a2d699dafce95771443558bc81bef8faa0808d4634bec60071338e5beb",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 32,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/authoring-provenance.json",
+          "sha256": "53c8e431343c258ef530e884e0a4e128cfe56b419a9075fe33572e916051a638"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/car-atlas.png",
+          "sha256": "d2a769ae3cc35ad1f8de892a9ba5898198d180d0582b752d53ccb475ee85dfdb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/car.blend",
+          "sha256": "21f9e68d9b85bcd1231f1ae6593f8fcb8866fe903f139a7a52e768fb970050dc"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/coverage.json",
+          "sha256": "6587f7f139da9335d4d90ed9c89d65c48e7a81d4dfed6148fba457efdd184e5b"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/family-config.json",
+          "sha256": "5f953ff472c4d09d60c408d3618edefc9d88b71096e51b15be01d5f3fc1fe5b3"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/geometry-audit.json",
+          "sha256": "167a9618c24e03bc24122fb40beafc2174732fe38951b40d53f79f0871267ed1"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/inspection.json",
+          "sha256": "376865c0f2f7ac08f88a5e18589f55f523a11a9d5dc3de063d11d26dca8695f4"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/mesh-spec.json",
+          "sha256": "33fcae94253c976523678463ba87a8cb0d600e243f98f8483d560de1006014c2"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/paint-ownership.json",
+          "sha256": "aceb65e34362f2e591b21b03edcefa6fcdf485208f9714e3049b41b69ee9cc45"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/projection-coverage.png",
+          "sha256": "116383d0a47b8a60b4e88cc876f7d17982956902a27d78a99e205cdcdd14ae17"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/projection-draft.png",
+          "sha256": "20ea3c202a6ffcbad83fefac074746f19a5a6b0749221ce112c64d32a5aa72a5"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/projection-with-authored-fill.png",
+          "sha256": "b0287ef148636b2a5f2b0cd717966b275d82acbd46da5b03bd239a824ddc6515"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/recipe.json",
+          "sha256": "a773011675c1f0b0bd9acb957ef85a1d002ed34d7a00bcd67238353025528d83"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/refs/east.png",
+          "sha256": "71f94f04f75f33838807c75d5730d6b52aa91f745dd33e5dfb98a54ab245cafa"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/refs/north.png",
+          "sha256": "2cb5b7db8dd807b04d2ac3e8971baf056c185d3d68bcf3d1111c41ddccd3d6eb"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/refs/south.png",
+          "sha256": "92ee6a6c7825b39c3289b5d1130447753291426dacb3c02517ed4aad76712b54"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/refs/west.png",
+          "sha256": "1ed65d87dced6d93b8173e098f1c0d4fcdc56f800fd94f6024504848c8ab360e"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/rig.json",
+          "sha256": "3a4d2cf1e69a0ed64f9f604c9f7b79eda8649e0e7422f90795d85f78aefc1a7f"
+        },
+        {
+          "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/wheel-alignment.json",
+          "sha256": "30141261f6a967af8d13f012af98630dc3ca47d99830c351e175c52a98cb7150"
+        },
+        {
+          "path": "public/assets/models/vehicles/unindexed-sedan-dark-v1.glb",
+          "sha256": "5c7a366098149eed6e41720dea5d1fb96323560c606e8393d22d25d99d757430"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-dark-v1/comparison.png",
+          "sha256": "4bcb47016d48d71c7e6374e329ff443b48709eed2aa8114687afdbd9acda59c6"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-dark-v1/index.html",
+          "sha256": "4fe3b5032012e87131ce016323bef4f094f91a2b4fcea4bd29d4a49842776863"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-dark-v1/orbit.png",
+          "sha256": "b51a5eb972d4f1697f0ab1b2d451f91b8e9cc870abd9ffa5c18212ab9a1c8263"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-dark-v1/review.json",
+          "sha256": "22eead7a471ee8097f71258611e977a7bebe5c9717d3491a416351be433f3d1b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/unindexed-sedan-dark-v1/silhouette.png",
+          "sha256": "8adaeb70048b34375cc8ae128e1fe3bf92ebce02110f63ff6b506622de7f5509"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "e63e8c3fa317c97d4cfa07e615f16e46db44a31788ea0fd2bdc867aa5b09a2da",
+        "west-render.png": "0a80064b43b624d6fcdd5837ba28334b6f81a38ff4cd5b72194aeb41b7dcf542",
+        "north-render.png": "d59affb05777ab2b7358f16610ad99f6367414e1bfe42638fa3680dbce3da8f4",
+        "south-render.png": "6f7c7c9f5e89000e47809c2b40c4576c3b5872e2181869310bb39a41991a91dd",
+        "orbit-0.png": "34efd1e13a3d2a095a632933f60846c96b223d14dc7e0e54ded31ffdd3cc99b8",
+        "orbit-1.png": "3afb625b44918bcc5990094d31df646180a111ee32a4cafdadb579e57af30233",
+        "orbit-2.png": "175c55d5b2a1a9a35aa176404de8d7acb30d5c525f34faf770f889b2f074e0a8",
+        "orbit-3.png": "46efc2e633cb5015fe95973903396cdeef43063016cdc6c4a3ae8c7d2fb6ded4"
+      }
     }
   ],
   "dependencies": [

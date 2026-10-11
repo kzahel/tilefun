@@ -37,24 +37,57 @@ test("every compact uses its own GLB in the shared traffic presentation", async 
   expect(errors).toEqual([]);
 });
 
-test("failed own-model fetch keeps the traffic scene and sprite fallback available", async ({
-  page,
-}) => {
-  await page.route("**/assets/models/vehicles/compact-6-v1.glb", (route) => route.abort());
+test("every additional sedan loads its own GLB in shared traffic", async ({ page }) => {
+  test.setTimeout(90_000);
   await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
-  await page.getByLabel("Playground vehicle", { exact: true }).selectOption("compact-6");
   const canvas = page.getByLabel("Generated traffic playground");
-  await expect(canvas).toHaveAttribute("data-ready", "true");
-  await expect
-    .poll(() =>
-      canvas.evaluate((c: TrafficCanvas) => {
-        const gpu = c.__presentationDiagnostics?.().terrain as unknown as {
-          gpu?: { vehicleAssets?: Record<string, { state: string; meshes: number }> };
-        };
-        return gpu?.gpu?.vehicleAssets?.["compact-6-authored-v1"];
-      }),
-    )
-    .toMatchObject({ state: "failed", meshes: 0 });
-  await page.getByRole("button", { name: "Pause", exact: true }).click();
-  await expect(canvas).toHaveAttribute("data-ready", "true");
+  for (const color of ["red", "beige", "cyan", "orange", "silver", "olive", "dark"]) {
+    const vehicle = `unindexed-sedan-${color}`;
+    await page.getByLabel("Playground vehicle", { exact: true }).selectOption(vehicle);
+    await expect(canvas).toHaveAttribute("data-ready", "true");
+    await expect
+      .poll(() =>
+        canvas.evaluate((c: TrafficCanvas, id) => {
+          const gpu = c.__presentationDiagnostics?.().terrain as unknown as {
+            gpu?: { vehicleAssets?: Record<string, { state: string; meshes: number }> };
+          };
+          return gpu?.gpu?.vehicleAssets?.[id];
+        }, `${vehicle}-authored-v1`),
+      )
+      .toMatchObject({ state: "ready", meshes: 32 });
+    expect(
+      await canvas.evaluate(
+        (c: TrafficCanvas) => c.__presentationDiagnostics?.().meshEligibleVehicleTypes,
+      ),
+    ).toContain(`vehicle-v1:${vehicle}`);
+    await expect
+      .poll(() =>
+        canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
+      )
+      .toBeGreaterThan(0);
+  }
 });
+
+for (const vehicle of ["compact-6", "unindexed-sedan-dark"]) {
+  test(`failed ${vehicle} fetch keeps the traffic scene and sprite fallback available`, async ({
+    page,
+  }) => {
+    await page.route(`**/assets/models/vehicles/${vehicle}-v1.glb`, (route) => route.abort());
+    await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
+    await page.getByLabel("Playground vehicle", { exact: true }).selectOption(vehicle);
+    const canvas = page.getByLabel("Generated traffic playground");
+    await expect(canvas).toHaveAttribute("data-ready", "true");
+    await expect
+      .poll(() =>
+        canvas.evaluate((c: TrafficCanvas, id) => {
+          const gpu = c.__presentationDiagnostics?.().terrain as unknown as {
+            gpu?: { vehicleAssets?: Record<string, { state: string; meshes: number }> };
+          };
+          return gpu?.gpu?.vehicleAssets?.[id];
+        }, `${vehicle}-authored-v1`),
+      )
+      .toMatchObject({ state: "failed", meshes: 0 });
+    await page.getByRole("button", { name: "Pause", exact: true }).click();
+    await expect(canvas).toHaveAttribute("data-ready", "true");
+  });
+}

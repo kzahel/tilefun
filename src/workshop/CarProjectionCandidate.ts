@@ -25,6 +25,27 @@ import garbageReview from "../../public/assets/models/vehicles/review/garbage-tr
 import policeReview from "../../public/assets/models/vehicles/review/police-car-v1/review.json" with {
   type: "json",
 };
+import sedanBeigeReview from "../../public/assets/models/vehicles/review/unindexed-sedan-beige-v1/review.json" with {
+  type: "json",
+};
+import sedanCyanReview from "../../public/assets/models/vehicles/review/unindexed-sedan-cyan-v1/review.json" with {
+  type: "json",
+};
+import sedanDarkReview from "../../public/assets/models/vehicles/review/unindexed-sedan-dark-v1/review.json" with {
+  type: "json",
+};
+import sedanOliveReview from "../../public/assets/models/vehicles/review/unindexed-sedan-olive-v1/review.json" with {
+  type: "json",
+};
+import sedanOrangeReview from "../../public/assets/models/vehicles/review/unindexed-sedan-orange-v1/review.json" with {
+  type: "json",
+};
+import sedanRedReview from "../../public/assets/models/vehicles/review/unindexed-sedan-red-v1/review.json" with {
+  type: "json",
+};
+import sedanSilverReview from "../../public/assets/models/vehicles/review/unindexed-sedan-silver-v1/review.json" with {
+  type: "json",
+};
 import { sha256 } from "../art/ArtSource.js";
 import { CAR_PROXY, carProxyPatches } from "../projection/CarProxy.js";
 import geometrySource from "../projection/CarProxy.ts?raw";
@@ -72,6 +93,13 @@ export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidat
     { review: compactCyanReview, name: "Cyan compact" },
     { review: compactOrangeReview, name: "Orange compact" },
     { review: compactSilverReview, name: "Silver compact" },
+    { review: sedanRedReview, name: "Red sedan" },
+    { review: sedanBeigeReview, name: "Beige sedan" },
+    { review: sedanCyanReview, name: "Cyan sedan" },
+    { review: sedanOrangeReview, name: "Orange sedan" },
+    { review: sedanSilverReview, name: "Silver sedan" },
+    { review: sedanOliveReview, name: "Olive sedan" },
+    { review: sedanDarkReview, name: "Dark sedan" },
   ];
   for (const { review, name } of reviews) {
     for (const file of review.identity.files) {

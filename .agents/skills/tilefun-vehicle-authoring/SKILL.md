@@ -71,6 +71,17 @@ Camera/roof and opposite-view beacon contradictions stay explicit. Orange needs
 family eligibility before reuse. `retain_vehicle.py` packages this source-owned
 checkpoint after actual GLB light inspection; it never replaces prior revisions.
 
+For the additional sedan family, use the tracked
+`scripts/authored-assets/additional-sedan-family.json` with
+`prepare_family_vehicle.py`, then `retain_family.py` into a fresh revision.
+`author_passenger_vehicle.py` checks four-view normalized alpha, records explicit
+per-crop origin shifts and samples every color's own source, including local
+paint exceptions. Sloped cabin sides preserve side glass in end views; roof and
+front/rear windows have separate owners. Inspect opposing roof-paint/projection
+limits, all native borders and actual wheel/floor fit. This family is independent
+of the compact and police templates; the ordinary retained-source checklist and
+own-asset engine qualification still apply.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;

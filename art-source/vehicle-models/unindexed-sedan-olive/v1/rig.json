@@ -1,0 +1,166 @@
+{
+  "root": "CarRoot",
+  "body": "Body",
+  "units": "world pixels",
+  "forward": [
+    -1,
+    0,
+    0
+  ],
+  "up": [
+    0,
+    0,
+    1
+  ],
+  "rollAxisBlender": [
+    0,
+    1,
+    0
+  ],
+  "rollAxisGltf": [
+    0,
+    0,
+    -1
+  ],
+  "drivingRule": "angle=-signedForwardDistance/radius; forward is -X",
+  "wheels": [
+    {
+      "id": "FL",
+      "center": [
+        -20.5,
+        -13.2,
+        6
+      ],
+      "radius": 6,
+      "steering": true,
+      "steer": "Wheel_FL_Steer",
+      "roll": "Wheel_FL_Roll"
+    },
+    {
+      "id": "FR",
+      "center": [
+        -20.5,
+        13.2,
+        6
+      ],
+      "radius": 6,
+      "steering": true,
+      "steer": "Wheel_FR_Steer",
+      "roll": "Wheel_FR_Roll"
+    },
+    {
+      "id": "RL",
+      "center": [
+        23.5,
+        -13.2,
+        6
+      ],
+      "radius": 6,
+      "steering": false,
+      "steer": "Wheel_RL_Steer",
+      "roll": "Wheel_RL_Roll"
+    },
+    {
+      "id": "RR",
+      "center": [
+        23.5,
+        13.2,
+        6
+      ],
+      "radius": 6,
+      "steering": false,
+      "steer": "Wheel_RR_Steer",
+      "roll": "Wheel_RR_Roll"
+    }
+  ],
+  "steeringClearance": "unqualified",
+  "equipmentNodes": [],
+  "wheelWellFit": {
+    "schema": "tilefun-wheel-well-fit-v1",
+    "observations": [
+      {
+        "wheel": "FL",
+        "view": "east",
+        "camera": {
+          "azimuth": -90,
+          "elevation": 40,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            40,
+            54.90440384019635
+          ],
+          "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+        },
+        "sourceCenter": [
+          19.5,
+          59.5
+        ],
+        "errorPixels": 7.105427357601002e-15
+      },
+      {
+        "wheel": "FR",
+        "view": "west",
+        "camera": {
+          "azimuth": 90,
+          "elevation": 40,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            40,
+            54.90440384019635
+          ],
+          "status": "Independent opposite side source ownership; no reflection"
+        },
+        "sourceCenter": [
+          60.5,
+          59.5
+        ],
+        "errorPixels": 7.105427357601002e-15
+      },
+      {
+        "wheel": "RL",
+        "view": "east",
+        "camera": {
+          "azimuth": -90,
+          "elevation": 40,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            40,
+            54.90440384019635
+          ],
+          "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+        },
+        "sourceCenter": [
+          63.5,
+          59.5
+        ],
+        "errorPixels": 7.105427357601002e-15
+      },
+      {
+        "wheel": "RR",
+        "view": "west",
+        "camera": {
+          "azimuth": 90,
+          "elevation": 40,
+          "horizontalScale": 1,
+          "verticalStretch": 1,
+          "origin": [
+            40,
+            54.90440384019635
+          ],
+          "status": "Independent opposite side source ownership; no reflection"
+        },
+        "sourceCenter": [
+          16.5,
+          59.5
+        ],
+        "errorPixels": 7.105427357601002e-15
+      }
+    ],
+    "floorMesh": "Underfloor",
+    "maxCenterErrorPixels": 2,
+    "status": "Measured rest/roll centers; steering and loader clearance unqualified"
+  }
+}

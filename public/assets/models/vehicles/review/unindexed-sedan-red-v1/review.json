@@ -1,0 +1,39 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-unindexed-sedan-red-v1",
+  "candidateFingerprint": "e06f543bb54c1af9d5a8e0e528e94ff4d9c2373adf80f2aeb7d2bc29c55f86b1",
+  "identity": {
+    "assetId": "unindexed-sedan-red",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "b0cffef8b406a6ca441acf5185340203180660c5d57a7ef412c07fe46b27ed8a",
+    "sourceAtlasSha256": "8ea7c2b786c34d26add98a4a176a85e86cda2d49c87aba4ce04d3847c689f9db",
+    "files": [
+      {
+        "url": "assets/models/vehicles/unindexed-sedan-red-v1.glb",
+        "sha256": "cc551d38ff2213e281597623cab8f4eb75ea59a2988df57169813dadf0a8a85d"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-red-v1/comparison.png",
+        "sha256": "4ae962765d322ac454c4449238758d3b83fe9adab94d55d5a1229d7b37b107e8"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-red-v1/orbit.png",
+        "sha256": "22238c2203d97d85acb73ab1c5ab7f7c36a27d051977cd02f31435ee0e17556b"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-red-v1/silhouette.png",
+        "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+      }
+    ]
+  },
+  "name": "red sedan",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent additional-sedan body, not a compact or police palette transfer.",
+    "Source-owned paint per view; roof rectangle excludes rear glass; hidden shoulders are explicit palette fills.",
+    "Dark variant and localized palette exceptions require their own source/camera registration before reuse.",
+    "Side elevation is independently fitted to source tire centers, roof and hood; north/south retain incompatible front/rear depth estimates.",
+    "The single north-owned roof cannot reproduce both opposing paint highlights exactly; front/rear and side glass have separate ownership."
+  ]
+}

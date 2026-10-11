@@ -14,6 +14,13 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Red `compact-4` | [v1](compact-4/v1/) | [compact-4-v1.glb](../../public/assets/models/vehicles/compact-4-v1.glb) |
 | Orange `compact-5` | [v1](compact-5/v1/) | [compact-5-v1.glb](../../public/assets/models/vehicles/compact-5-v1.glb) |
 | Silver `compact-6` | [v1](compact-6/v1/) | [compact-6-v1.glb](../../public/assets/models/vehicles/compact-6-v1.glb) |
+| Red additional sedan | [v1](unindexed-sedan-red/v1/) | [unindexed-sedan-red-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-red-v1.glb) |
+| Beige additional sedan | [v1](unindexed-sedan-beige/v1/) | [unindexed-sedan-beige-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-beige-v1.glb) |
+| Cyan additional sedan | [v1](unindexed-sedan-cyan/v1/) | [unindexed-sedan-cyan-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-cyan-v1.glb) |
+| Orange additional sedan | [v1](unindexed-sedan-orange/v1/) | [unindexed-sedan-orange-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-orange-v1.glb) |
+| Silver additional sedan | [v1](unindexed-sedan-silver/v1/) | [unindexed-sedan-silver-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-silver-v1.glb) |
+| Olive additional sedan | [v1](unindexed-sedan-olive/v1/) | [unindexed-sedan-olive-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-olive-v1.glb) |
+| Dark additional sedan | [v1](unindexed-sedan-dark/v1/) | [unindexed-sedan-dark-v1.glb](../../public/assets/models/vehicles/unindexed-sedan-dark-v1.glb) |
 | Ambulance | [v1](ambulance/v1/) | [ambulance-v1.glb](../../public/assets/models/vehicles/ambulance-v1.glb) |
 | Ambulance beacon refinement | [v2](ambulance/v2/) | [ambulance-v2.glb](../../public/assets/models/vehicles/ambulance-v2.glb) |
 | Police car | [v1](police-car/v1/) | [police-car-v1.glb](../../public/assets/models/vehicles/police-car-v1.glb) |
@@ -56,6 +63,13 @@ floor openings, cleaned wheel-local UVs and roof/loader paint ownership are
 retained. Verification reads the complete rig set; dropping a middle axle or
 mislabeling it as steerable is rejected. Rear wheel scale and roof depth are
 diagnostic fits; steering/loader clearance and integration remain pending.
+The seven additional sedans in [122](../../docs/tactical/122-complete-vehicle-port.md)
+use an independently fitted passenger body: 32 meshes / 1,096 triangles, four
+radius-six wheels, cut floor openings and separate sloped cabin/window surfaces.
+Every color retains its own paint, packed atlas/draft, editable mesh spec and
+explicit crop registration. Source roof highlights and opposing projections
+remain imperfect fits; nonzero steering and exact art review remain open.
+
 Units are world pixels, Blender up is +Z and forward is -X, with
 tire contacts on Z=0. GLBs use Blender's +Y-up export conversion. The GLB embeds
 the cleaned atlas; Blender scenes pack their textures, including retained unused

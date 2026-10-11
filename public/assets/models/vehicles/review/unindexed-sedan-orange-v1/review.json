@@ -1,0 +1,39 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-unindexed-sedan-orange-v1",
+  "candidateFingerprint": "b0986a3466f12718baa517aef8152f96382f702ebd28feae180eb2ba3f666e12",
+  "identity": {
+    "assetId": "unindexed-sedan-orange",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "81d331d3a98f309abd83ea4142c6be1e30243deb8104deeec5cb331422881222",
+    "sourceAtlasSha256": "b6e7aacccfecf9f7f53f5cb27e798badf5184c2d290c893b1c99f818a5e944ad",
+    "files": [
+      {
+        "url": "assets/models/vehicles/unindexed-sedan-orange-v1.glb",
+        "sha256": "a084dc3e6553abe82d52571a5af80753ab763876b2441da9f5e158e29431f899"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-orange-v1/comparison.png",
+        "sha256": "85066edd64783c9607312257348932fa458222780ed98915ad73620bdd401fe0"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-orange-v1/orbit.png",
+        "sha256": "887b6564e2e228ee8fec8e54fd01658d5a87a2c7062ea92ef88ecc422fa85c6a"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-orange-v1/silhouette.png",
+        "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+      }
+    ]
+  },
+  "name": "orange sedan",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent additional-sedan body, not a compact or police palette transfer.",
+    "Source-owned paint per view; roof rectangle excludes rear glass; hidden shoulders are explicit palette fills.",
+    "Dark variant and localized palette exceptions require their own source/camera registration before reuse.",
+    "Side elevation is independently fitted to source tire centers, roof and hood; north/south retain incompatible front/rear depth estimates.",
+    "The single north-owned roof cannot reproduce both opposing paint highlights exactly; front/rear and side glass have separate ownership."
+  ]
+}

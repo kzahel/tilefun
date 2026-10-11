@@ -34,7 +34,7 @@ resolve conflicts preserving unrelated work and immutable evidence.
 
 - Source family audit pushed as `6667b41f`, rebased over remote firetruck gameplay.
 - Compact family: exact compact 3/5/6 v1 bundles retained; all six own assets
-  integrated through the shared registry. Validation and baseline failure triage complete; remote checkpoint follows.
+  integrated through the shared registry. Validation and baseline failure triage complete; pushed as `1967356f`.
 
 ### Compact family evidence
 
@@ -88,3 +88,40 @@ stays neutral. Source-camera contradictions and exact art review remain open.
 Retention/integration are diagnostic delivery, not production art promotion.
 
 Current exact counts and each vehicle's next action live in the owning topic.
+
+### Additional sedan checkpoint
+
+Seven v1 models are retained locally and integrated through their own registry
+entries, radius 80 and authored width. Cabin side slopes and separate UV owners
+remove hidden side-glass loss from end views. All seven own source refs are
+sampled, including small paint exceptions; normalized four-view alpha is exact
+within the fitted family, with each crop's origin delta recorded. The dark
+variant has distinct registration. Each has 32 meshes / 1,096 triangles and four
+radius-six wheels. Rest/roll floor clearance and source well fit pass the real
+GLB probe, including displaced-axle and solid-floor negative checks. Source
+projection/roof highlights remain imperfect; nonzero steering stays unqualified.
+
+All seven native 4×2 and novel-angle strips inspected. New retained recipes are
+self-contained and final bundles verify with all earlier bytes unchanged. The
+actual GPU probe passes all fifteen registered own assets; every sedan draws
+3,125 visible native target pixels, resets byte-exactly, preserves simulation and
+disposes its resources. All seven gameplay selections and dark failed-load sprite
+fallback pass. Workshop verifies 777 candidates / 29 exclusions, adding only the
+seven exact sedan identities. Typecheck/lint/build and 33 Python tests pass;
+culling expectations now reflect larger sedan bounds, and 68 focused rendering
+tests pass. A Git index checkout at
+`data/authored-assets/full-vehicle-port/sedan-tracked-001/` verifies all nineteen
+bundles, packed scenes and actual GLB rigs, and passes the fifteen-asset GPU probe.
+All seven recipes reproduce their eight pinned native/novel hashes (56 exact
+frames). The six ordinary color scenes share geometry/UV/hierarchy hash
+`d2a3383ebc3552e1f57f4d401e54d0c6a9e7ba7c7744979611cc8a382fd11ca4`;
+dark's explicit UV registration has hash
+`dea5915338f71884fafe9501317894c2758a63c96c7c922e8bef0219b949d0df`.
+
+Full Chromium: 557 pass / 1 skipped / 13 fail. Rerun clears the seven new review
+checks after correcting test display-name casing, and the three existing timing
+cases. The same two phone-layout and Canvas driving failures remain from the
+original-HEAD baseline above. No introduced failure remains. Full unit rerun:
+2,507 pass / 10 skipped; five Windows symlink/SIGKILL failures and one persistence
+timeout. The isolated persistence file passes all four tests. Validation logs
+are `data/authored-assets/sedan-*.log`; original retained pixels are unchanged.

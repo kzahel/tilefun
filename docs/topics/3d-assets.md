@@ -39,6 +39,16 @@ other source retains its sprite fallback. New compact recipes use their retained
 packed scene and own atlas/draft; normal builds do not run Blender. The source
 family fit and existing clearance/review limits remain explicit.
 
+[122](../tactical/122-complete-vehicle-port.md) also fits the seven additional
+sedans independently. Seventeen source sets now have retained models across
+nineteen exact revisions, with fifteen own-asset game/lab integrations. Cabin
+sides slope inward so side glass remains visible in front/back views. Source
+shape gates record each crop's origin delta, including dark's registration;
+each UV owner samples its own color rather than assuming a global palette map.
+Four radius-six wheels fit measured source wells and pass actual floor/roll
+checks and displaced-axle/solid-floor negative probes. A north-owned roof retains
+opposing paint/projection differences. Exact art review remains separate.
+
 ## Investigation evidence storage
 
 The evidence directories for investigations 070–075 under `docs/tactical/` are

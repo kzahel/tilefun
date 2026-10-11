@@ -50,7 +50,7 @@ it("collects an incoming bus while its center is above the screen and its front 
   expect(collect(bus)).toHaveLength(1);
 });
 
-it.each(VEHICLE_MODELS)("keeps %s sprite bounds at all four screen edges", (model) => {
+it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edges", (model) => {
   for (const direction of [Direction.Down, Direction.Up, Direction.Left, Direction.Right]) {
     const car = createVehicle(model, 200, 150, direction);
     for (const zoom of [0.2, 1 / 3, 1]) {
@@ -64,12 +64,31 @@ it.each(VEHICLE_MODELS)("keeps %s sprite bounds at all four screen edges", (mode
         expect(collect(car, 1, zoom)).toHaveLength(1);
       }
       // Once the entire sprite and the existing effects margin leave the view,
-      // the collector must still avoid submitting it.
+      // the collector must still avoid submitting it. Additional sedans use an
+      // 80px enclosing mesh bound, so their vertical exit is farther away.
       for (const [wx, wy] of [
         [model === "fire-truck-ladder-1" ? -161 : model === "ambulance" ? -129 : -113, 150],
         [model === "fire-truck-ladder-1" ? 561 : model === "ambulance" ? 529 : 513, 150],
-        [200, model === "fire-truck-ladder-1" ? -221 : model === "ambulance" ? -177 : -120],
-        [200, model === "fire-truck-ladder-1" ? 521 : model === "ambulance" ? 477 : 461],
+        [
+          200,
+          model === "fire-truck-ladder-1"
+            ? -221
+            : model === "ambulance"
+              ? -177
+              : model.startsWith("unindexed-sedan-")
+                ? -145
+                : -120,
+        ],
+        [
+          200,
+          model === "fire-truck-ladder-1"
+            ? 521
+            : model === "ambulance"
+              ? 477
+              : model.startsWith("unindexed-sedan-")
+                ? 495
+                : 461,
+        ],
       ] as const) {
         car.position = { wx, wy };
         expect(collect(car, 1, zoom)).toHaveLength(0);

@@ -1,0 +1,404 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "unindexed-sedan-dark",
+  "family": "additional-sedan",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    80,
+    80
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/unindexed-sedan-dark/v1/car.blend",
+    "sha256": "21f9e68d9b85bcd1231f1ae6593f8fcb8866fe903f139a7a52e768fb970050dc"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        1344,
+        1696,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        39
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 dark \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          40,
+          39
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "b965b2bf-dff9-486d-b067-13b42af36de6",
+        "createdAt": "2026-10-03T10:48:52.950Z",
+        "candidateFingerprint": "159a944d8ff813bb5e450a67c2267cff76eb3da4fb8c662a7fcdf8343b2993b7",
+        "metadataFingerprint": "7cf988e5e517e54c23b96492f98c171d1649da7549655abf4681314fee948280"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          41,
+          48.90440384019635
+        ],
+        "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+      },
+      "sourceSha256": "71f94f04f75f33838807c75d5730d6b52aa91f745dd33e5dfb98a54ab245cafa"
+    },
+    {
+      "id": "west",
+      "rect": [
+        1344,
+        1648,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        39
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 dark \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          40,
+          39
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "ddd1ef05-e1e2-4f7f-b4b4-a58fe660b0f0",
+        "createdAt": "2026-10-03T10:48:53.727Z",
+        "candidateFingerprint": "5551ebaa19a92e4cd346f938fd3b42ff6530f463b95580659360317346a281b0",
+        "metadataFingerprint": "b4e4a3ed1646936c7c2a93be06e01cfce75684f53c702d693047c629cd5dc4c9"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        16
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 40,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          41,
+          48.90440384019635
+        ],
+        "status": "Independent opposite side source ownership; no reflection"
+      },
+      "sourceSha256": "1ed65d87dced6d93b8173e098f1c0d4fcdc56f800fd94f6024504848c8ab360e"
+    },
+    {
+      "id": "north",
+      "rect": [
+        1312,
+        1664,
+        32,
+        80
+      ],
+      "anchor": [
+        16,
+        73
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 dark \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          16,
+          73
+        ],
+        "footprint": [
+          -13,
+          -54,
+          26,
+          54
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "sourceApproval": {
+        "id": "135cdcd6-895d-402f-a7b7-38e2c2e22b07",
+        "createdAt": "2026-10-03T10:48:52.781Z",
+        "candidateFingerprint": "d2ee7c6f41a05eb0ffa583d0459422de1099c48a5b144601f7623aef05ef5cd5",
+        "metadataFingerprint": "98ed9673add1cb180a04dca84b58af3e179e22529a655153ab5b5e327e67fadd"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        24,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 57.425942865427494,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.9709095165133557,
+        "origin": [
+          40,
+          44.425
+        ],
+        "status": "Explicit depth/height fit against roof, glazing and front/rear source contours; width registered independently"
+      },
+      "sourceSha256": "2cb5b7db8dd807b04d2ac3e8971baf056c185d3d68bcf3d1111c41ddccd3d6eb"
+    },
+    {
+      "id": "south",
+      "rect": [
+        1280,
+        1664,
+        32,
+        80
+      ],
+      "anchor": [
+        16,
+        73
+      ],
+      "metadata": {
+        "name": "Sedan \u00b7 dark \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "sedan",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          16,
+          73
+        ],
+        "footprint": [
+          -13,
+          -54,
+          26,
+          54
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 26,
+            "height": 54,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -27
+      },
+      "sourceApproval": {
+        "id": "4a2cc480-1407-45dd-9ea7-0bce93a7d149",
+        "createdAt": "2026-10-03T10:48:53.496Z",
+        "candidateFingerprint": "c50bac7aed77fbe42912c53faf5b6bf4319c276b7842552604c624e5c0a6759f",
+        "metadataFingerprint": "2dcf7caa953a7e34c894f7ea230fb95fa09f9f1f21904fcd701523957f56e8c9"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        24,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 62.13901833866092,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.9219067992312985,
+        "origin": [
+          40,
+          41.71395626620078
+        ],
+        "status": "Explicit depth/height fit against roof, glazing and front/rear source contours; width registered independently"
+      },
+      "sourceSha256": "92ee6a6c7825b39c3289b5d1130447753291426dacb3c02517ed4aad76712b54"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1536,
+    "material": "unindexed-sedan-dark palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Passenger-body-east": [
+        "east"
+      ],
+      "Fender--20.5-east": [
+        "east"
+      ],
+      "Fender-23.5-east": [
+        "east"
+      ],
+      "Passenger-body-west": [
+        "west"
+      ],
+      "Fender--20.5-west": [
+        "west"
+      ],
+      "Fender-23.5-west": [
+        "west"
+      ],
+      "Roof": [
+        "north"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Rear-window-glass": [
+        "north"
+      ],
+      "Rear-window-frame": [],
+      "Hood": [
+        "south"
+      ],
+      "Trunk": [
+        "north"
+      ],
+      "Cabin-windows-east": [
+        "east"
+      ],
+      "Cabin-windows-west": [
+        "west"
+      ],
+      "Front-fascia": [
+        "south"
+      ],
+      "Front-corner--1": [
+        "south"
+      ],
+      "Front-corner-1": [
+        "south"
+      ],
+      "Rear-fascia": [
+        "north"
+      ],
+      "Rear-corner--1": [
+        "north"
+      ],
+      "Rear-corner-1": [
+        "north"
+      ],
+      "Underfloor": [],
+      "Mirror--1": [],
+      "Mirror-1": [],
+      "Tire_FL": [
+        "east"
+      ],
+      "Hub_FL": [
+        "east"
+      ],
+      "Tire_FR": [
+        "west"
+      ],
+      "Hub_FR": [
+        "west"
+      ],
+      "Tire_RL": [
+        "east"
+      ],
+      "Hub_RL": [
+        "east"
+      ],
+      "Tire_RR": [
+        "west"
+      ],
+      "Hub_RR": [
+        "west"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

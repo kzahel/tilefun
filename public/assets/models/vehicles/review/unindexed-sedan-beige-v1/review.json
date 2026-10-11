@@ -1,0 +1,39 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-unindexed-sedan-beige-v1",
+  "candidateFingerprint": "0d47b64e132602767510eef3c2fe96f7eecac5fda1c0f962930887edf5338ef8",
+  "identity": {
+    "assetId": "unindexed-sedan-beige",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "5aa116d58f86f75da0f2b3c34f149df8a70937fa401531efeaaf6805aa693c59",
+    "sourceAtlasSha256": "1725b755790782f123872b8043cd60f838a7ab452e14398af41e80201c4480ca",
+    "files": [
+      {
+        "url": "assets/models/vehicles/unindexed-sedan-beige-v1.glb",
+        "sha256": "c6ea6f57c1551fd6a136e83d87d448bead41fd32a3a12a140bd7177d645e4d20"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-beige-v1/comparison.png",
+        "sha256": "fdbd3656fe2eb5e8f509504c0322c7b221dced37cd3211d4e1df31b7816940a9"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-beige-v1/orbit.png",
+        "sha256": "21de55905d83874c1fbf9af35103cc037f184bac9a628a4cd1d9536b723cb889"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-beige-v1/silhouette.png",
+        "sha256": "6b0ef89d27249e855239ee3ee09128e2f92b2c1b56c8320aa68a537fa5f15a49"
+      }
+    ]
+  },
+  "name": "beige sedan",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent additional-sedan body, not a compact or police palette transfer.",
+    "Source-owned paint per view; roof rectangle excludes rear glass; hidden shoulders are explicit palette fills.",
+    "Dark variant and localized palette exceptions require their own source/camera registration before reuse.",
+    "Side elevation is independently fitted to source tire centers, roof and hood; north/south retain incompatible front/rear depth estimates.",
+    "The single north-owned roof cannot reproduce both opposing paint highlights exactly; front/rear and side glass have separate ownership."
+  ]
+}

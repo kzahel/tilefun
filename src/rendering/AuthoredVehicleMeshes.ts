@@ -17,6 +17,13 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
       lateralScale: 1.3,
     };
   }),
+  ...(["red", "beige", "cyan", "orange", "silver", "olive", "dark"] as const).map((color) => ({
+    vehicle: `unindexed-sedan-${color}`,
+    assetId: `unindexed-sedan-${color}-authored-v1`,
+    path: `assets/models/vehicles/unindexed-sedan-${color}-v1.glb`,
+    radius: 80,
+    lateralScale: 1,
+  })),
   {
     vehicle: "ambulance",
     assetId: "ambulance-authored-v2",

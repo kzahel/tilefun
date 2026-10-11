@@ -1,0 +1,299 @@
+{
+  "family": "additional-sedan",
+  "vehicles": [
+    "unindexed-sedan-red",
+    "unindexed-sedan-beige",
+    "unindexed-sedan-cyan",
+    "unindexed-sedan-orange",
+    "unindexed-sedan-silver",
+    "unindexed-sedan-olive",
+    "unindexed-sedan-dark"
+  ],
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": -1,
+    "west": 1
+  },
+  "body": {
+    "front": -39,
+    "rear": 37,
+    "halfWidth": 13,
+    "endHalfWidth": 8,
+    "base": 4,
+    "belt": 15,
+    "frontDeck": 15,
+    "rearDeck": 15,
+    "mirrorOffset": 15,
+    "frontEndDeck": 10,
+    "rearEndDeck": 9
+  },
+  "cab": {
+    "front": -11,
+    "rear": 12,
+    "screenFront": -22,
+    "screenRear": 18,
+    "roof": 27,
+    "sideTop": 24,
+    "halfWidth": 9.5,
+    "roofPaintRect": [
+      32,
+      18,
+      48,
+      37
+    ],
+    "roofFillPixel": [
+      40,
+      25
+    ],
+    "frontScreenBase": 15,
+    "rearScreenBase": 18
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -20.5,
+      "radius": 6,
+      "trackHalfWidth": 13.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": true,
+      "centers": {
+        "east": [
+          19.5,
+          43.5
+        ],
+        "west": [
+          60.5,
+          43.5
+        ]
+      },
+      "paintRadii": [
+        6.5,
+        4.5
+      ]
+    },
+    {
+      "id": "R",
+      "x": 23.5,
+      "radius": 6,
+      "trackHalfWidth": 13.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": false,
+      "centers": {
+        "east": [
+          63.5,
+          43.5
+        ],
+        "west": [
+          16.5,
+          43.5
+        ]
+      },
+      "paintRadii": [
+        6.5,
+        4.5
+      ]
+    }
+  ],
+  "floorMargin": 1,
+  "maxCenterErrorPixels": 2,
+  "cameras": {
+    "east": {
+      "azimuth": -90,
+      "elevation": 40,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        40,
+        54.90440384019635
+      ],
+      "status": "Independent source side well/roof fit; raw crop has +16 vertical canvas padding"
+    },
+    "west": {
+      "azimuth": 90,
+      "elevation": 40,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        40,
+        54.90440384019635
+      ],
+      "status": "Independent opposite side source ownership; no reflection"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 57.425942865427494,
+      "horizontalScale": 1.1,
+      "verticalStretch": 0.9709095165133557,
+      "origin": [
+        40,
+        43.425
+      ],
+      "status": "Explicit depth/height fit against roof, glazing and front/rear source contours; width registered independently"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 62.13901833866092,
+      "horizontalScale": 1.1,
+      "verticalStretch": 0.9219067992312985,
+      "origin": [
+        40,
+        40.71395626620078
+      ],
+      "status": "Explicit depth/height fit against roof, glazing and front/rear source contours; width registered independently"
+    }
+  },
+  "notes": [
+    "Independent additional-sedan body, not a compact or police palette transfer.",
+    "Source-owned paint per view; roof rectangle excludes rear glass; hidden shoulders are explicit palette fills.",
+    "Dark variant and localized palette exceptions require their own source/camera registration before reuse.",
+    "Side elevation is independently fitted to source tire centers, roof and hood; north/south retain incompatible front/rear depth estimates.",
+    "The single north-owned roof cannot reproduce both opposing paint highlights exactly; front/rear and side glass have separate ownership."
+  ],
+  "landmarks": {
+    "north": [
+      {
+        "x": -39,
+        "z": 10,
+        "canvasY": 3
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 39
+      },
+      {
+        "x": 37,
+        "z": 4,
+        "canvasY": 74
+      }
+    ],
+    "south": [
+      {
+        "x": 37,
+        "z": 9,
+        "canvasY": 3
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 37
+      },
+      {
+        "x": -39,
+        "z": 4,
+        "canvasY": 74
+      }
+    ]
+  },
+  "seed": "unindexed-sedan-red",
+  "sourceRegistration": {
+    "seed": "unindexed-sedan-red",
+    "vehicle": "unindexed-sedan-cyan",
+    "observations": [
+      {
+        "view": "east",
+        "seedRect": [
+          1056,
+          1600,
+          80,
+          48
+        ],
+        "targetRect": [
+          1344,
+          1600,
+          80,
+          48
+        ],
+        "seedRgbaSha256": "56bce3eb208d15445ab329ed721d17273d8e48ac5e99adef76f1bfeb57b5a912",
+        "targetRgbaSha256": "04f33cc8554553eaad0e4a88accbab0d22f7e4b291a9ba4273e6bd4198a6651e",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "west",
+        "seedRect": [
+          1056,
+          1552,
+          80,
+          48
+        ],
+        "targetRect": [
+          1344,
+          1552,
+          80,
+          48
+        ],
+        "seedRgbaSha256": "834cad9211c7dd5ff00a96ba2497d279fa9a7215144b42bae06730500cd5c2c8",
+        "targetRgbaSha256": "3dd7eaec954933b6b4c27c3e064e8626bcbebcee2dd40ecafb0c5801cb587bdc",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "north",
+        "seedRect": [
+          1024,
+          1568,
+          32,
+          80
+        ],
+        "targetRect": [
+          1312,
+          1568,
+          32,
+          80
+        ],
+        "seedRgbaSha256": "9739a2a6533b9fe7f40b4c54c3e0614dff3dfb0a6b7c3b395b2eb1b65e75eca0",
+        "targetRgbaSha256": "b90320bd16c2db49e71c9eecc61fc4eaeffe79c0836f2f8f806de01e53cd1253",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "south",
+        "seedRect": [
+          992,
+          1568,
+          32,
+          80
+        ],
+        "targetRect": [
+          1280,
+          1568,
+          32,
+          80
+        ],
+        "seedRgbaSha256": "8b29718235073b1ef5c0e5a212402942d45dfefc4d5cb7655762d1c9db13769f",
+        "targetRgbaSha256": "51018ba8b66cbfc55f417adf10b0e021bbb7909032e0fdeba31c229a50e2130d",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      }
+    ],
+    "paint": "Every UV owner samples this vehicle, including local paint exceptions."
+  },
+  "wheels": {
+    "radius": 6
+  }
+}

@@ -10,6 +10,13 @@ for (const { asset, revision, name } of [
   { asset: "compact-3", revision: "v1", name: "Cyan compact" },
   { asset: "compact-5", revision: "v1", name: "Orange compact" },
   { asset: "compact-6", revision: "v1", name: "Silver compact" },
+  { asset: "unindexed-sedan-red", revision: "v1", name: "Red sedan" },
+  { asset: "unindexed-sedan-beige", revision: "v1", name: "Beige sedan" },
+  { asset: "unindexed-sedan-cyan", revision: "v1", name: "Cyan sedan" },
+  { asset: "unindexed-sedan-orange", revision: "v1", name: "Orange sedan" },
+  { asset: "unindexed-sedan-silver", revision: "v1", name: "Silver sedan" },
+  { asset: "unindexed-sedan-olive", revision: "v1", name: "Olive sedan" },
+  { asset: "unindexed-sedan-dark", revision: "v1", name: "Dark sedan" },
 ])
   test(`retained ${asset} ${revision} review opens its own comparison from Workshop on desktop and phone`, async ({
     page,
@@ -25,7 +32,7 @@ for (const { asset, revision, name } of [
       new RegExp(`/assets/models/vehicles/review/${asset}-${revision}/$`),
     );
     await expect(
-      page.getByRole("heading", { name: `${name} ${revision}`, exact: true }),
+      page.getByRole("heading", { name: new RegExp(`^${name} ${revision}$`, "i") }),
     ).toBeVisible();
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 900 });

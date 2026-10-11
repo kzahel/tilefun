@@ -585,3 +585,25 @@ absolute pose/light reset, simulation isolation, unknown IDs and disposal. An
 optional second argument selects a tracked-only checkout root. Browser gameplay
 checks additionally cover every compact selection and a failed GLB load. See
 [122](../../docs/tactical/122-complete-vehicle-port.md) for checkpoint evidence.
+
+## Additional sedan family
+
+`additional-sedan-family.json` records the independent body, sloped cabin,
+source cameras and measured wheel wells. `author_passenger_vehicle.py` validates
+whole four-view family alpha after tight-crop registration, records each origin
+delta, and samples this vehicle's own source paint for every owner. The source
+family gate does not infer hidden geometry. Dark's crop offsets and the small
+cyan/silver/dark paint differences remain explicit.
+
+```text
+python scripts/authored-assets/prepare_family_vehicle.py --vehicle unindexed-sedan-red --config scripts/authored-assets/additional-sedan-family.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_SEDAN
+python scripts/authored-assets/retain_family.py --model data/authored-assets/NEW_SEDAN --template scripts/authored-assets/additional-sedan-family.json --revision v1 --name "Red sedan"
+```
+
+Preparation preserves the own unused draft/coverage and packs it with the final
+clean atlas. Retention copies exact checkpoint bytes into a new revision, with
+mesh/rig/config/paint records, frozen refs, portable recipe, provenance and pinned
+4×2/contour/novel-angle reviews. Light-bearing models must use the light retainer
+with actual GLB flash evidence. Run actual GLB wheel/floor, packed-source, native
+replay and engine probes from tracked files before pushing. The single roof's
+opposing highlights and inconsistent camera depths remain review limitations.

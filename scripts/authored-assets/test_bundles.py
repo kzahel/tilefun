@@ -13,7 +13,8 @@ class RetainedBundleTests(unittest.TestCase):
         self.assertEqual([(r['assetId'], r['revision']) for r in verify()],
                          [('compact-1','v7'),('compact-2','v7'),('compact-4','v1'),('ambulance','v1'),('ambulance','v2'),
                           ('police-car','v1'),('fire-truck-ladder-1','v1'),('fire-truck-ladder-1','v2'),
-                          ('garbage-truck-green','v1'),('compact-3','v1'),('compact-5','v1'),('compact-6','v1')])
+                          ('garbage-truck-green','v1'),('compact-3','v1'),('compact-5','v1'),('compact-6','v1')] +
+                         [(f'unindexed-sedan-{color}', 'v1') for color in ['red','beige','cyan','orange','silver','olive','dark']])
 
     def test_tandem_axle_cannot_disappear_from_the_declared_wheel_set(self):
         source=ROOT/'art-source/vehicle-models/garbage-truck-green/v1'

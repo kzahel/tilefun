@@ -134,6 +134,13 @@ export default function TrafficPage() {
             <option value="compact-4">Red car</option>
             <option value="compact-5">Orange car</option>
             <option value="compact-6">Silver car</option>
+            <option value="unindexed-sedan-red">Red sedan</option>
+            <option value="unindexed-sedan-beige">Beige sedan</option>
+            <option value="unindexed-sedan-cyan">Cyan sedan</option>
+            <option value="unindexed-sedan-orange">Orange sedan</option>
+            <option value="unindexed-sedan-silver">Silver sedan</option>
+            <option value="unindexed-sedan-olive">Olive sedan</option>
+            <option value="unindexed-sedan-dark">Dark sedan</option>
             <option value="ambulance">Ambulance</option>
             <option value="fire-truck-ladder-1">Firetruck</option>
           </select>

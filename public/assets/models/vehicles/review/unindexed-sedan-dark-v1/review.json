@@ -1,0 +1,39 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-unindexed-sedan-dark-v1",
+  "candidateFingerprint": "252f26a2d699dafce95771443558bc81bef8faa0808d4634bec60071338e5beb",
+  "identity": {
+    "assetId": "unindexed-sedan-dark",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "21f9e68d9b85bcd1231f1ae6593f8fcb8866fe903f139a7a52e768fb970050dc",
+    "sourceAtlasSha256": "d2a769ae3cc35ad1f8de892a9ba5898198d180d0582b752d53ccb475ee85dfdb",
+    "files": [
+      {
+        "url": "assets/models/vehicles/unindexed-sedan-dark-v1.glb",
+        "sha256": "5c7a366098149eed6e41720dea5d1fb96323560c606e8393d22d25d99d757430"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-dark-v1/comparison.png",
+        "sha256": "4bcb47016d48d71c7e6374e329ff443b48709eed2aa8114687afdbd9acda59c6"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-dark-v1/orbit.png",
+        "sha256": "b51a5eb972d4f1697f0ab1b2d451f91b8e9cc870abd9ffa5c18212ab9a1c8263"
+      },
+      {
+        "url": "assets/models/vehicles/review/unindexed-sedan-dark-v1/silhouette.png",
+        "sha256": "8adaeb70048b34375cc8ae128e1fe3bf92ebce02110f63ff6b506622de7f5509"
+      }
+    ]
+  },
+  "name": "dark sedan",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent additional-sedan body, not a compact or police palette transfer.",
+    "Source-owned paint per view; roof rectangle excludes rear glass; hidden shoulders are explicit palette fills.",
+    "Dark variant and localized palette exceptions require their own source/camera registration before reuse.",
+    "Side elevation is independently fitted to source tire centers, roof and hood; north/south retain incompatible front/rear depth estimates.",
+    "The single north-owned roof cannot reproduce both opposing paint highlights exactly; front/rear and side glass have separate ownership."
+  ]
+}
