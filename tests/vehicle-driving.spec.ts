@@ -3,6 +3,7 @@ import type { ClientStateView, RemoteStateView } from "../src/client/ClientState
 import type { GameLoop } from "../src/core/GameLoop.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { TapMovement } from "../src/input/TapMovement.js";
+import { authoredVehicleForType } from "../src/rendering/AuthoredVehicleMeshes.js";
 import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import { projectWorld } from "../src/rendering/Projection.js";
 import type { RequestMessage } from "../src/shared/requests.js";
@@ -150,35 +151,65 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     if (backend.includes("meshes")) {
       if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
       else expect((await read(page)).type).toBe("vehicle-v1:compact-1");
+      const expectedAsset =
+        authoredVehicleForType((await read(page)).type ?? "")?.assetId ?? "compact-1-authored-v7";
       await expect
         .poll(() =>
-          page.locator("#game").evaluate((c) => {
+          page.locator("#game").evaluate((c, assetId) => {
             const g = (
               c as unknown as {
-                __game: {
-                  renderer: {
-                    getDiagnostics(): {
-                      gpu?: { meshAsset: string | null; meshParts: number; meshDraws: number };
-                    };
+                __game: Game & {
+                  renderer: GpuRenderBackend;
+                  sceneFrame: {
+                    meshPoses: { poses: Map<number, { instance: { assetId: string } }> };
                   };
                 };
               }
             ).__game;
-            return g.renderer.getDiagnostics().gpu;
-          }),
+            const pose = g.sceneFrame.meshPoses.poses.get(
+              g.remoteView.serverPlayerEntity.parentId ?? -1,
+            );
+            return {
+              drivenAsset: pose?.instance.assetId,
+              ownState: g.renderer.meshes.assetStates[assetId]?.state,
+              ownError: g.renderer.meshes.assetStates[assetId]?.error,
+              ownMeshes: g.renderer.meshes.assetStates[assetId]?.meshes ?? 0,
+              draws: g.renderer.meshes.draws,
+            };
+          }, expectedAsset),
         )
         .toMatchObject({
-          meshAsset: "compact-1-authored-v7",
-          meshParts: 55,
-          meshDraws: expect.any(Number),
+          drivenAsset: expectedAsset,
+          ownState: "ready",
+          ownError: null,
+          ownMeshes: expect.any(Number),
+          draws: expect.any(Number),
         });
+      const diagnostics = await page.locator("#game").evaluate((c, assetId) => {
+        const g = (c as unknown as { __game: Game & { renderer: GpuRenderBackend } }).__game;
+        return {
+          meshes: g.renderer.meshes.assetStates[assetId]?.meshes ?? 0,
+          draws: g.renderer.meshes.draws,
+        };
+      }, expectedAsset);
+      expect(diagnostics.meshes).toBeGreaterThan(0);
+      expect(diagnostics.draws).toBeGreaterThan(0);
     }
+    // The same loaded GLB can draw multiple actors. Measure this driver's pose;
+    // exported roll axes and backend application are covered by actual asset probes.
     const wheelPose = () =>
       page.locator("#game").evaluate((c) => {
-        const g = (c as unknown as { __game: Game & { renderer: GpuRenderBackend } }).__game;
-        return g.renderer.meshes.car.value?.object
-          .getObjectByName("Wheel_FL_Roll")
-          ?.quaternion.toArray();
+        const g = (
+          c as unknown as {
+            __game: Game & {
+              sceneFrame: {
+                meshPoses: { poses: Map<number, { instance: { wheelTravel?: number } }> };
+              };
+            };
+          }
+        ).__game;
+        return g.sceneFrame.meshPoses.poses.get(g.remoteView.serverPlayerEntity.parentId ?? -1)
+          ?.instance.wheelTravel;
       });
     const wheelBefore = backend.includes("meshes") ? await wheelPose() : null;
     const before = await read(page);

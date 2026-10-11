@@ -2320,6 +2320,780 @@
         "orbit-2.png": "175c55d5b2a1a9a35aa176404de8d7acb30d5c525f34faf770f889b2f074e0a8",
         "orbit-3.png": "46efc2e633cb5015fe95973903396cdeef43063016cdc6c4a3ae8c7d2fb6ded4"
       }
+    },
+    {
+      "assetId": "bus-1",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/bus-1-v1.glb",
+      "source": "art-source/vehicle-models/bus-1/v1",
+      "capturedCandidateId": "projection:authored-bus-1-v1",
+      "capturedCandidateSha256": "95924c80a5f9cba7b5bb308bd5089808dbfbe9ec0b43ff4112422861d994b238",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 39,
+        "triangles": 1112
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/authoring-provenance.json",
+          "sha256": "ddbf15cd30c11df63a79a492d39107f4c7f8e4d9e7fc6615383bebc71647ffeb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/car-atlas.png",
+          "sha256": "10bc93fe2f3b2d92bca19a3f4ab311c8cf3a5d5de7ac183991db643ec10790d5"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/car.blend",
+          "sha256": "8f066035db5c6f4aa4c1cbf2a32c6ef0430810441cc20f0cacd2f7ac8699a312"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/coverage.json",
+          "sha256": "4869aab074d15066d8a8d1e68f4705a3592651ae95c3262486de68f972d6bc0f"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/family-config.json",
+          "sha256": "c1d7d5cd153b4f07ad2f498b7edbfd361779805ddec016496ec18696e870a1d5"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/geometry-audit.json",
+          "sha256": "d726b7463b32b089f58022670eb88e7e9c71c82954415d320084301311fe0962"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/inspection.json",
+          "sha256": "d38f405b2f3fbed163eb6da4d8bef9781bbbcaf9a4f32197633a671d040a96de"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/mesh-spec.json",
+          "sha256": "a92a8036bd515e65bb4c1407d03e35d4194813e3171b538d29d646a46cd76d07"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/paint-ownership.json",
+          "sha256": "808c263681c0a66d4adb57ec1c29543f972c2fab88867a600f8d261becb1e003"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/projection-coverage.png",
+          "sha256": "7578f740f86acc732ffb468e25957938c35688f51938d5c68ef8436ea95efeb0"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/projection-draft.png",
+          "sha256": "cdde62ac7ff057b200223992366569e424e71fed38e200862e9259d301205538"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/projection-with-authored-fill.png",
+          "sha256": "84d5c447fcf859cd753551ae0028dbdbd2adb397279175d670f3cef7c733fe7e"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/recipe.json",
+          "sha256": "53cc971b35a6970e0752caa8bb752e3851b67bac1888e421d0aa4aad9aaf5edd"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/refs/east.png",
+          "sha256": "94734ed9ab122992aa9696f6e16e27cb8439452297fab5dcff6c75f928a48a1b"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/refs/north.png",
+          "sha256": "6713efcfb22d42a5dbfbbac0a93046dfa44abbad98f2d47c287c14e98765cf4c"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/refs/south.png",
+          "sha256": "1fb8aac3acc0642ded53b7ec2fee47b417b1388af42eecf64cedbd0ade5eda06"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/refs/west.png",
+          "sha256": "c5629dc35b38a84af80197fa12fb64ec33dd51426faeb5ec20e79152161f70f3"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/rig.json",
+          "sha256": "a0788dfd71b8512a8eaf1630b9dc45dcca2b2b3180f2b825d3e4eb6153a56383"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-1/v1/wheel-alignment.json",
+          "sha256": "fd9d3266c5399aa6d8d95fe7c4949719e26c7d6ca493b11732055cd883c46e86"
+        },
+        {
+          "path": "public/assets/models/vehicles/bus-1-v1.glb",
+          "sha256": "93d11a8be55a40b3b48c24fb5723991985ba4e0e05721954346160cded109e3b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-1-v1/comparison.png",
+          "sha256": "aead2d8326efd451bfd8127638a5f36ac05889e4e9f03346739a805c10bd4a1b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-1-v1/index.html",
+          "sha256": "c2ac83e0ce35d491e99e5d19eaacd8130dcaa1f7d7fb92c22d9f850c48901426"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-1-v1/orbit.png",
+          "sha256": "f4895facbfb00226278a3c2dc3b5ffbfaffacf72f24cc97f8e324e80f6024759"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-1-v1/review.json",
+          "sha256": "e6d7b823b366d703b488ee99c7f8b2a602f4057b0fc21d10bcb8fe434fe5503b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-1-v1/silhouette.png",
+          "sha256": "9bddbb04a3bc2b3bc05c980c3bc7530ee4e24e5b43ff482c8fabb902adbc8fe2"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "46d9979f18be5cf15728bf51ca3cc44a8065a69be0b299ff2ffff7ba79b5d709",
+        "west-render.png": "f8500e5e7f8f58a94afd86253389a520573fe69c08edeb5b3efa3d5c3989c15f",
+        "north-render.png": "5088c2a8b8e566d5c0e12b2acce3eff97a4e39393a4062d20592c927a8ee7f3d",
+        "south-render.png": "74c92b6a9060d97143ff3964e207412145469e92a9e8bd685e5cd0026ca7d7d8",
+        "orbit-0.png": "89ff271dbf0d7a55967edfb2a9cc91bde4861bcc5745cc10d650be1d5c2f3de6",
+        "orbit-1.png": "459ae7893e23803eb92d95ade0fc89dd1754a472d112b59388ed970878913099",
+        "orbit-2.png": "c2eadd6ed31ee464283f9480521b3ef0dea080b43006eb04a4830295cb628eb6",
+        "orbit-3.png": "a1d9696879b3812fac9f89599ebf770b40c46531f3ac45f57d405c1ada45cfc6"
+      }
+    },
+    {
+      "assetId": "bus-2",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/bus-2-v1.glb",
+      "source": "art-source/vehicle-models/bus-2/v1",
+      "capturedCandidateId": "projection:authored-bus-2-v1",
+      "capturedCandidateSha256": "0b071bebc3ca5ec55defc97f2dd7a603d995f6d9be81e3902e0d729fe862afec",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 39,
+        "triangles": 1112
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/authoring-provenance.json",
+          "sha256": "ddbf15cd30c11df63a79a492d39107f4c7f8e4d9e7fc6615383bebc71647ffeb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/car-atlas.png",
+          "sha256": "557f53660e42e528a757e4cdfca8b60f7053e1106ecc77fd553b2e672db12e30"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/car.blend",
+          "sha256": "ddf8aa7ee21c201e7d4d414d0ef089b557de53a977e8916c04716f40cb5a6dda"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/coverage.json",
+          "sha256": "4869aab074d15066d8a8d1e68f4705a3592651ae95c3262486de68f972d6bc0f"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/family-config.json",
+          "sha256": "f97ffca1003925ca64a04b4c7c8b1aa0b92a219798db13783eed480ea0eed92d"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/geometry-audit.json",
+          "sha256": "d726b7463b32b089f58022670eb88e7e9c71c82954415d320084301311fe0962"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/inspection.json",
+          "sha256": "682a7a417bb12d996b3413662e20e33e69e6681f3f5be8a2710a397334651437"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/mesh-spec.json",
+          "sha256": "11b883a6107355e50664a8ee0af1431b285b8b676bb61d821944b9107dba248b"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/paint-ownership.json",
+          "sha256": "808c263681c0a66d4adb57ec1c29543f972c2fab88867a600f8d261becb1e003"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/projection-coverage.png",
+          "sha256": "7578f740f86acc732ffb468e25957938c35688f51938d5c68ef8436ea95efeb0"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/projection-draft.png",
+          "sha256": "2693045ba0d3fc51fa8f68d1884adf5534117e489ec7b7c1633601cb514b7b0e"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/projection-with-authored-fill.png",
+          "sha256": "63438927fd3302a3041568a64d02212359c1ba9c2932d62a66bb6f522057db5f"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/recipe.json",
+          "sha256": "69084b6dcbcbbb61178dcc5322453109c42550ca4b575bf903485eaa0376d756"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/refs/east.png",
+          "sha256": "b4088ac954e7a0ee7584e1c9d5392ca6261a3b6e493dc1c328d8b721fe70d336"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/refs/north.png",
+          "sha256": "804ee25f1af76a8b480c8e099b0883c5540d0cdd6b08fde95d5edc04312b0672"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/refs/south.png",
+          "sha256": "491b3b5e66d9b4236397740b0a0c061f3ceea0c6b6f3e0f9206d1162851b22bf"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/refs/west.png",
+          "sha256": "76814aae5525bbea6141a00a3c4b93cc68e8f92975c0b03130ca3b470a874bc5"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/rig.json",
+          "sha256": "a0788dfd71b8512a8eaf1630b9dc45dcca2b2b3180f2b825d3e4eb6153a56383"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-2/v1/wheel-alignment.json",
+          "sha256": "fd9d3266c5399aa6d8d95fe7c4949719e26c7d6ca493b11732055cd883c46e86"
+        },
+        {
+          "path": "public/assets/models/vehicles/bus-2-v1.glb",
+          "sha256": "b77cb3e55f34a424903649f9207f38838147e9c728ffcf840454e9ad4c60075d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-2-v1/comparison.png",
+          "sha256": "e3f1295e84d7487b44b1c04fdedeb3c2eed0ae35122125653db6e615cf6ef4f5"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-2-v1/index.html",
+          "sha256": "a3423b71b990e05032aa259ad9df0f14fa8a1ffadd49c3eb6dad07d4ad967ccb"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-2-v1/orbit.png",
+          "sha256": "c12ae6a1ad3427a0d88d920f887ec931fd3291f7818397eaafc96943db951c7a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-2-v1/review.json",
+          "sha256": "1f75b66a924a7553894567b393e8af9839da84a49cb05b402402c0fa957a8d97"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-2-v1/silhouette.png",
+          "sha256": "9bddbb04a3bc2b3bc05c980c3bc7530ee4e24e5b43ff482c8fabb902adbc8fe2"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "eba0da00f725f9454a3ba9b2ff39feb837c4200877da7808af3124de37610161",
+        "west-render.png": "7beced4f3bb1289af5e390f9fa4289a0c3a41402d0b7ce46e545a90c90181e36",
+        "north-render.png": "498872964a650389ac8ed34057acfd59070ada3fd893d9d7cf54caeb0f7287ba",
+        "south-render.png": "a3dd142afee79b0e406cf38726ac17653832bb7139bdb025bde9c71f082e0375",
+        "orbit-0.png": "0378b432552da6f93d427d7a0d3b817790026f388d51897ddc9edba44b09dd55",
+        "orbit-1.png": "1a6dad5c9083cee221d054376d7a14bfe2dbc948d994f16df069c89cdedf307f",
+        "orbit-2.png": "c6fe73faca7376a5a9c7121f67eb835f8196830dedee4789aadcebd40e643108",
+        "orbit-3.png": "73211a79c38c9b28087378df6d0f55dd2bf755f81df6e6bcc9a2f46e63d1df47"
+      }
+    },
+    {
+      "assetId": "bus-3",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/bus-3-v1.glb",
+      "source": "art-source/vehicle-models/bus-3/v1",
+      "capturedCandidateId": "projection:authored-bus-3-v1",
+      "capturedCandidateSha256": "dc88326fe07697767ba8f4055795243e9a7f046780e0b4dbd91af8150c8bd777",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 39,
+        "triangles": 1112
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/authoring-provenance.json",
+          "sha256": "ddbf15cd30c11df63a79a492d39107f4c7f8e4d9e7fc6615383bebc71647ffeb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/car-atlas.png",
+          "sha256": "f3dc76036e2d2294f1cc46debaa445acb6875eeab0228dce1b26fda6d79b8e58"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/car.blend",
+          "sha256": "bdbc924d1461c899002d227c19b46337d64481b4870026bb2446eb8641cc4a8c"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/coverage.json",
+          "sha256": "4869aab074d15066d8a8d1e68f4705a3592651ae95c3262486de68f972d6bc0f"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/family-config.json",
+          "sha256": "3000cf81ad48f42e6a47af9ebe47b3b7f02b353fb3559e2a9a1735b7868bd88b"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/geometry-audit.json",
+          "sha256": "d726b7463b32b089f58022670eb88e7e9c71c82954415d320084301311fe0962"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/inspection.json",
+          "sha256": "6558cd3cf0e3edda34fe43f16183ebc19f3dd7e3825748f28298e28fc1bc8a9c"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/mesh-spec.json",
+          "sha256": "4c12506bb50fb6b55a61412dad101bca176572b90c815825135c74b8c2317835"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/paint-ownership.json",
+          "sha256": "808c263681c0a66d4adb57ec1c29543f972c2fab88867a600f8d261becb1e003"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/projection-coverage.png",
+          "sha256": "7578f740f86acc732ffb468e25957938c35688f51938d5c68ef8436ea95efeb0"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/projection-draft.png",
+          "sha256": "290a8fca29fb6c821ac52a0f11a391e6236d22c255dc58984f8706fb6e11cf89"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/projection-with-authored-fill.png",
+          "sha256": "71b760be870228f9341ccbf349a8a120337a0486e01b9fcc4db6599602262ce9"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/recipe.json",
+          "sha256": "6d7de21b3450fbdcb786e7994efeb17cd0955cb0edb724ec608cf9e33c2d9602"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/refs/east.png",
+          "sha256": "cd213cc71a54fc685cefc3fec607795b94413e7627c1daae763d372d42838fa4"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/refs/north.png",
+          "sha256": "480868cf119c2a52c63c0154c2322350c8383a644044c5085ec1fe34b6af0313"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/refs/south.png",
+          "sha256": "05d391dd3be62f1d2773f6efe43e252dcae34523d7590226dd5540b3b51d4993"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/refs/west.png",
+          "sha256": "a74193f67b31717b024a861a46048e90b6cc905bfd71b6b4a67f68aad84131f0"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/rig.json",
+          "sha256": "a0788dfd71b8512a8eaf1630b9dc45dcca2b2b3180f2b825d3e4eb6153a56383"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-3/v1/wheel-alignment.json",
+          "sha256": "fd9d3266c5399aa6d8d95fe7c4949719e26c7d6ca493b11732055cd883c46e86"
+        },
+        {
+          "path": "public/assets/models/vehicles/bus-3-v1.glb",
+          "sha256": "dbf090dfd41809b95fb81ab0dc51eb098b9f523b5bc90e2dbc65f0bad7c5d656"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-3-v1/comparison.png",
+          "sha256": "546000db31b29666905ab9e05cb4801c27b920f69eca9393240b490b0d929560"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-3-v1/index.html",
+          "sha256": "1faf9b23902ff3557240fb42850b83e95cd26aaf5f199187c947c08349fb4214"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-3-v1/orbit.png",
+          "sha256": "9a216ac84e70f4f0d8d9b6d33d501cd4352991414f5ac28fba2b364ed310133a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-3-v1/review.json",
+          "sha256": "5e2bbad03e85148a4d3248589fdd2bd64bb59690cd9dc84d00a7c7bbe04cd47b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-3-v1/silhouette.png",
+          "sha256": "9bddbb04a3bc2b3bc05c980c3bc7530ee4e24e5b43ff482c8fabb902adbc8fe2"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "786d0451cb96f9b0545175209ae35d2894c1837ba15398240a9824f8a5765be5",
+        "west-render.png": "ddadf4063515655bb92600761c1f385096b8975e4f45ed834a5a68aae6dc98ea",
+        "north-render.png": "08e455efff4967c0f6658ced223d0fe19d33226ee3c538ebfdce2c94786c9aea",
+        "south-render.png": "d61b40513b9c8c1b08d2d08f0bb5b239801544788f88e086a629934e57f58547",
+        "orbit-0.png": "3ad0807f6b2f0f6e7ecebb183ae2cf73f4b01e67d6092bf0edf34d8e416c1597",
+        "orbit-1.png": "790c2abf83aa57df753e7d29c7da82ebc631ae9bb71642f9b0fef958b195cc41",
+        "orbit-2.png": "edc7a66fe908dd4b7cfe48ede2777e8336d47202e6efa5700996bfde96c34c51",
+        "orbit-3.png": "c3374d62b33126701770c4a8710aeb42664ed64c0165abf75861c9da08cb85db"
+      }
+    },
+    {
+      "assetId": "bus-4",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/bus-4-v1.glb",
+      "source": "art-source/vehicle-models/bus-4/v1",
+      "capturedCandidateId": "projection:authored-bus-4-v1",
+      "capturedCandidateSha256": "9a27ada4d172c50bd47bb486769a29c2fd6c4365d07c0683ef51790745153a17",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 39,
+        "triangles": 1112
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/authoring-provenance.json",
+          "sha256": "ddbf15cd30c11df63a79a492d39107f4c7f8e4d9e7fc6615383bebc71647ffeb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/car-atlas.png",
+          "sha256": "cfd92c5ed4bc9b9eb1cd0158a34bef895b2c47f9618b607824a72a829764d65a"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/car.blend",
+          "sha256": "ab139c077157589c0e91e9813a83d843e744d80f2543ef52c95becb40c8ff694"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/coverage.json",
+          "sha256": "4869aab074d15066d8a8d1e68f4705a3592651ae95c3262486de68f972d6bc0f"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/family-config.json",
+          "sha256": "e7bc60a0af601bcb25529e19f88343a411274e0112767836df86e501e752101c"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/geometry-audit.json",
+          "sha256": "d726b7463b32b089f58022670eb88e7e9c71c82954415d320084301311fe0962"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/inspection.json",
+          "sha256": "8e191448d465407d9b5f0cf0399cb27bb3ec874ba0041eeaf0ce1e935d9a5725"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/mesh-spec.json",
+          "sha256": "7704c96f7bde0574185ab7e44b58dea72933c1fe36b40bb300b5310f8c97f925"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/paint-ownership.json",
+          "sha256": "808c263681c0a66d4adb57ec1c29543f972c2fab88867a600f8d261becb1e003"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/projection-coverage.png",
+          "sha256": "7578f740f86acc732ffb468e25957938c35688f51938d5c68ef8436ea95efeb0"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/projection-draft.png",
+          "sha256": "50c504409ce012f1d5bd07bce5a36814a8fbba82b316497cd3241fb44ae1b442"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/projection-with-authored-fill.png",
+          "sha256": "2e85c693d76376cb806c911b96b92a8f63d092d49c0e11d6a1f5b320938a694b"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/recipe.json",
+          "sha256": "32a25f37f94d42de02eae2b756fe2086dadfefc1a9efc2aa6a70a74e6035fc04"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/refs/east.png",
+          "sha256": "697dd42aafb26be3425e32ea44e5e670b733fac92138e3085e5378794d283287"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/refs/north.png",
+          "sha256": "c1afb22304c252ceab38f1e5369129548f1344e115c0c99753f6e26790fda354"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/refs/south.png",
+          "sha256": "41848c571ca6700b7e9497f9f8f7cbc4c9f7b7f6126b92327d7f3d9ded6bee91"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/refs/west.png",
+          "sha256": "ac8ddbc42eb480bcb48258cec56c18a98a4076f412cb5472e839226698156479"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/rig.json",
+          "sha256": "a0788dfd71b8512a8eaf1630b9dc45dcca2b2b3180f2b825d3e4eb6153a56383"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-4/v1/wheel-alignment.json",
+          "sha256": "fd9d3266c5399aa6d8d95fe7c4949719e26c7d6ca493b11732055cd883c46e86"
+        },
+        {
+          "path": "public/assets/models/vehicles/bus-4-v1.glb",
+          "sha256": "48924160a7071fb12b82f5c685c37e2c767be13f4268c3862ff48258675828ad"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-4-v1/comparison.png",
+          "sha256": "50ef1b901c3ffb0f6ddda5abf2ef78f8d6e0e30d68708b48a9d4ff6ace3412b7"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-4-v1/index.html",
+          "sha256": "2595e4369623b628200d8ee9abc80eefdbaef573ec01cf6af12899fed32a99c8"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-4-v1/orbit.png",
+          "sha256": "24ecbc95beb743f4faf334747bc672ff9f32b8d29c3a0fccd4aac071c3f7ffa2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-4-v1/review.json",
+          "sha256": "7e10434ecc76503335e85f588736f99e6b103e592a3a551d1a17a249afbe90e2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-4-v1/silhouette.png",
+          "sha256": "9bddbb04a3bc2b3bc05c980c3bc7530ee4e24e5b43ff482c8fabb902adbc8fe2"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "f6e1ef5375bed8b073387322a46f3481bba9b3aad3b709d41f4c9e87afdea275",
+        "west-render.png": "e0fe112a4c1d3fd7564a722b704b154f04b3c226653db424a49d7be0ce443633",
+        "north-render.png": "e4516e965bbb6e89b5b5e0325a005b82b2f08bd9ba1d0797fdd77f45082d5173",
+        "south-render.png": "6921e0ed6e306bf589aa0352b66fba84e16f85d7e787f04cd4d9469e3c2b6428",
+        "orbit-0.png": "e7ce8bcc91cf20f66a27a89e91735fab19f3794c271ec45b34e17600245d23f2",
+        "orbit-1.png": "02e3f2ce0a1249d6c15c85d6f71c73721d6f0194438a2dd1587de9d474e6177e",
+        "orbit-2.png": "30c3835888c4d7afef309a1750f7130c0229c1a5ff58849580ce6e5c8f364842",
+        "orbit-3.png": "ae9c18c2815b25e0f4ddf7b653c0c11109ef757f0d4ee9ef10885ccf1731f288"
+      }
+    },
+    {
+      "assetId": "bus-5",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/bus-5-v1.glb",
+      "source": "art-source/vehicle-models/bus-5/v1",
+      "capturedCandidateId": "projection:authored-bus-5-v1",
+      "capturedCandidateSha256": "1ae8aea949cb0842b1d9a7acdb2785987ede5efeb7c5a6ebbbea3bb76b0a2771",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 39,
+        "triangles": 1112
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/authoring-provenance.json",
+          "sha256": "7021e9d073db8d1e5efecea1bf76fd12a92aa7c6ee606dc1e601a9f99f25c471"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/car-atlas.png",
+          "sha256": "5ffc4cc1e8c25f7f58292bb5aa5a6b61db61bcf572e7db6eb36efab4fb1dbe80"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/car.blend",
+          "sha256": "dfc1195a9980c04e451a565233352132662480b5989993be9b641ec1da44e762"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/coverage.json",
+          "sha256": "71ef4ca4c437d7a9fc91f4336aa1d171a1d983d89b5fc188c5ba10025046d4fa"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/family-config.json",
+          "sha256": "48d3397115aaa37c0e83cd54b06f4a47590cc1b409cf0320d9439cf43c4b89f3"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/geometry-audit.json",
+          "sha256": "ab91f2ddc306b87610391fd8097cb865c805f0d23e6b1a233870fb2d4603e272"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/inspection.json",
+          "sha256": "90e2c303b5456289afefd85a1f2dd526ac3ca163c44535a17dee19218c1e5535"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/mesh-spec.json",
+          "sha256": "0d62a062d325e3cb796dc0f2e609fd8f76ad3992b901648020035b597e7dbb39"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/paint-ownership.json",
+          "sha256": "a00d957c45473781f8dcecf57efb433e0a36233e6824eb0f6bf7349f2ac34b8d"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/projection-coverage.png",
+          "sha256": "f3b71753c4c190877e1173934cde54106a04f83bead30b0e1ac39fc27e22280d"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/projection-draft.png",
+          "sha256": "08684ee834283438185b89c4c6be14ebbc3b23e4e3eb4696a59f36d6f25f0af4"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/projection-with-authored-fill.png",
+          "sha256": "f99f971e8449ff41c2c9f30fc0cc24741ef81a75629201d0a5e669be54068483"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/recipe.json",
+          "sha256": "4d5c59bc127cf3b525b8fd58ca3799513976e71f047f36f46a83e30ecd3956a6"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/refs/east.png",
+          "sha256": "7f2d4ea81df639c64b38b82bf71e09012c819012c1163a6a6aee7130219be3ca"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/refs/north.png",
+          "sha256": "ad49771e1e29d59f59a58d0460378e9f3f7de0648f841758828c121cdad76c51"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/refs/south.png",
+          "sha256": "732ed057d4ecc068112a28114d51e084d40f1dc1c8a23b8f8930d49bd62f9c0d"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/refs/west.png",
+          "sha256": "cea52d3cd3148d82e6724b1768937fc3d323528dad02c55ec552add6bd1fd1bf"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/rig.json",
+          "sha256": "a0788dfd71b8512a8eaf1630b9dc45dcca2b2b3180f2b825d3e4eb6153a56383"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-5/v1/wheel-alignment.json",
+          "sha256": "fd9d3266c5399aa6d8d95fe7c4949719e26c7d6ca493b11732055cd883c46e86"
+        },
+        {
+          "path": "public/assets/models/vehicles/bus-5-v1.glb",
+          "sha256": "57af346281bc9c3e71a1fb69c194db4f975ac7aa4fc9c625118084634d51a72b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-5-v1/comparison.png",
+          "sha256": "948cded9f3b990eee1d86acf4489ecbce1c32535b20343445a33999608fd32b8"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-5-v1/index.html",
+          "sha256": "52e026194925843e5e285fb9ff797f702682aff15f52b3ce476a85ce46a2d705"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-5-v1/orbit.png",
+          "sha256": "b905d0a56786f841a281c3fb9b8802df0b27cb5b10844cdcf2c63a4bab8cecd4"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-5-v1/review.json",
+          "sha256": "0226888621dd5b1592fedaeea9c5aa4fae6d7864346e0cf1d0ca2a6c1cf3396d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-5-v1/silhouette.png",
+          "sha256": "0251fd548f6a45baf846f722f61c52aaac750ef88988a62fb5cde6a80b52b23b"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "c3f006c6db17941c210912b095b813cfa88065317ad4cded89f079348ded4f0f",
+        "west-render.png": "4b709b367da50a1ee072ac6a88140f708249d521daf66cf041b6825313cd0129",
+        "north-render.png": "e4e99bc674ebc809c819138ae4ed24d66aa146f74a4323a8aad00935fe3bdacf",
+        "south-render.png": "5c0a597923de1fa3b0e3451075c588a6f800f21de2635bcb7b3ebe2ad310b835",
+        "orbit-0.png": "d1b460280700943c79cd954a7c745680c33535a45de1fdfe6431484a01e930d2",
+        "orbit-1.png": "3ffa35d44c16e5d9ca7308d90479bea51298b113f94f18b1b28702796074031a",
+        "orbit-2.png": "cec78cb94752ead9585f2805400cda9a00ce6a3ddd2ef2a44c22fe8ee52d2192",
+        "orbit-3.png": "91abfb3848e3fc13efee2560409401e86896644dc38bad79a851d7f6531cba8c"
+      }
+    },
+    {
+      "assetId": "bus-6",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/bus-6-v1.glb",
+      "source": "art-source/vehicle-models/bus-6/v1",
+      "capturedCandidateId": "projection:authored-bus-6-v1",
+      "capturedCandidateSha256": "53e0e5b97fdd22f5da62aadab07fc5ab04ebab9332fc38f538696b1e9629f2ea",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 39,
+        "triangles": 1112
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/authoring-provenance.json",
+          "sha256": "7021e9d073db8d1e5efecea1bf76fd12a92aa7c6ee606dc1e601a9f99f25c471"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/car-atlas.png",
+          "sha256": "98039285024e3479be454c89f76e9be22e60074a15db460c9405be30843ac90e"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/car.blend",
+          "sha256": "e2610837712c9d67069370f5ad183640cacd110cbc5369f086b84c0a9d4efc0c"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/coverage.json",
+          "sha256": "71ef4ca4c437d7a9fc91f4336aa1d171a1d983d89b5fc188c5ba10025046d4fa"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/family-config.json",
+          "sha256": "4e120f0ae80a0160fdbaa843be111daca9735ad0f239c2850a16288108958635"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/geometry-audit.json",
+          "sha256": "ab91f2ddc306b87610391fd8097cb865c805f0d23e6b1a233870fb2d4603e272"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/inspection.json",
+          "sha256": "2548dec60f7ca7099a3cc3252c8f5e3b4c9e43f64bdd5c81a95d0771756d8d48"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/mesh-spec.json",
+          "sha256": "b2ab3a2b00ae265a083514d331746c11be151da281b19a4e5a952a1572c445b7"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/paint-ownership.json",
+          "sha256": "a192bd79fb0e4cd11258a3c2149b5774a3b8fc50c7506c2597f7bf3284461ac1"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/projection-coverage.png",
+          "sha256": "6c3c317c4e4dfbe40ba74f120fd6653afd4a9dcd9b39d963f357397fad386b04"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/projection-draft.png",
+          "sha256": "25f023524fd06ba9bc2887db36c13480c1edd77b623c7388327d68c1c5f781f5"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/projection-with-authored-fill.png",
+          "sha256": "9d146622c4bd8197cd3d198f3d8d7c02f2b3951d3ad743c69e2523da37c95fd3"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/recipe.json",
+          "sha256": "13573252769254f52492f97459d7c8af770582e759dd8c701e61dd39d79b9a6e"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/refs/east.png",
+          "sha256": "db9b01ab99de5e86b3579eee3965ab952dfe12f6458a60badc576abfaad9dcc6"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/refs/north.png",
+          "sha256": "075bbedd8b036097ae9fae6bec610316905d31bb1da9ba6391a19d7305343119"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/refs/south.png",
+          "sha256": "a48e384a71486cf40529581d1fb8aad0c92eafaa1d5415fa3fb49decbc80aa01"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/refs/west.png",
+          "sha256": "17e8cd4bab67e6710546ff050e6923867672a8d22f8cfaa171563a4009e9ce5d"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/rig.json",
+          "sha256": "ed2e89b5ac8bc0049477c0a6353cf45d239bb3e69c27f800d35dd5b1bdef2697"
+        },
+        {
+          "path": "art-source/vehicle-models/bus-6/v1/wheel-alignment.json",
+          "sha256": "8613438b534e1b586c5b76d4b54274913bdf032ea6558c779430854909d95927"
+        },
+        {
+          "path": "public/assets/models/vehicles/bus-6-v1.glb",
+          "sha256": "af2d339efe3df2f6d0e1e9defa68338f69892ef3dfa25e08efa5210bb0db1f24"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-6-v1/comparison.png",
+          "sha256": "9b54b1d11cef774afff8112ac1b646dfe4b2a81f5bc551177a72ba5921d41c3e"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-6-v1/index.html",
+          "sha256": "8c2aa9b76f1718a42fd0879199b467cab4e79d458197a1050d97ac61193ab6b4"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-6-v1/orbit.png",
+          "sha256": "5b13722376818dc658bcd88d5882dbc3b30b26ea1ecf3fad6082b983323e1e51"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-6-v1/review.json",
+          "sha256": "0fc740d283ad9b9e64bdcbe92aac6d80df0d6e3edaba3d4049db32edec79ad2c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/bus-6-v1/silhouette.png",
+          "sha256": "cfea8fa2314e696ff2c447db8a5aeab8248fe02e693112794b89a25038c48bda"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "a39e2ec1b71bee082baa4614e255aeecd152d95305288c6179cb371e8a415a15",
+        "west-render.png": "07d55bd7c4065e811fa0c951f85a521044e3d14e9badb7f77fd66530e8657ef6",
+        "north-render.png": "e2370f456dcda01d1d3fa8ac0bb4f90ee5f4fce1777a469acc1eeda5f5bf0308",
+        "south-render.png": "4533a80c25c0c154cb9616874780fbc88166dbf673433b37e704d09f85497646",
+        "orbit-0.png": "5f31b6ab817f91538e3a6f49fe07bb3d4d6990f15f45b094e6bbef5e070b4830",
+        "orbit-1.png": "f5e85ecffe4decae125d39aa4309073e398cb03d7156581282a38fb74b4c9b52",
+        "orbit-2.png": "b9574ee5ce68b7ea85fcb1d6c3ffaf242b56d0921631b828d8465faa57d6128d",
+        "orbit-3.png": "e934fce69df28c94e27ad7cf789af2963ff7ef6f443a5f8b5e8ff76283f9125d"
+      }
     }
   ],
   "dependencies": [

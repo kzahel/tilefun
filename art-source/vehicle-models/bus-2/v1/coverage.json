@@ -1,0 +1,119 @@
+{
+  "counts": {
+    "0": 2348394,
+    "1": 10625,
+    "2": 277,
+    "3": 0,
+    "4": 0
+  },
+  "legend": {
+    "0": "unused UV/gutter",
+    "1": "visible source sample",
+    "2": "unobserved",
+    "3": "overlapping UV surfaces",
+    "4": "source-view color disagreement"
+  },
+  "authoredFill": {
+    "image": "car-atlas.png",
+    "filledUVTexels": 2348671,
+    "meaning": "Existing authored atlas fills gutter/unseen/overlapping UV regions only. Coverage status remains unchanged; this is inferred paint, not source recovery."
+  },
+  "sourceViews": {
+    "Bus-body-east": [
+      "east"
+    ],
+    "Fender--36-east": [
+      "east"
+    ],
+    "Fender-24-east": [
+      "east"
+    ],
+    "Bus-body-west": [
+      "west"
+    ],
+    "Fender--36-west": [
+      "west"
+    ],
+    "Fender-24-west": [
+      "west"
+    ],
+    "Roof": [
+      "north"
+    ],
+    "Roof-shoulder-east": [],
+    "Front-roof-corner-east": [
+      "east"
+    ],
+    "Rear-roof-corner-east": [
+      "east"
+    ],
+    "Roof-shoulder-west": [],
+    "Front-roof-corner-west": [
+      "west"
+    ],
+    "Rear-roof-corner-west": [
+      "west"
+    ],
+    "Windshield-glass": [
+      "south"
+    ],
+    "Windshield-frame": [],
+    "Rear-roof-edge": [
+      "north"
+    ],
+    "Rear-window-glass": [
+      "north"
+    ],
+    "Rear-window-frame": [],
+    "Front-fascia": [
+      "south"
+    ],
+    "Front-corner-east": [
+      "east"
+    ],
+    "Front-corner-west": [
+      "west"
+    ],
+    "Rear-fascia": [
+      "north"
+    ],
+    "Rear-corner-east": [
+      "east"
+    ],
+    "Rear-corner-west": [
+      "west"
+    ],
+    "Underfloor": [],
+    "Underfloor-front-bevel": [],
+    "Underfloor-rear-bevel": [],
+    "Mirror-arm--1": [],
+    "Mirror--1": [],
+    "Mirror-arm-1": [],
+    "Mirror-1": [],
+    "Tire_FL": [
+      "west"
+    ],
+    "Hub_FL": [
+      "west"
+    ],
+    "Tire_FR": [
+      "east"
+    ],
+    "Hub_FR": [
+      "east"
+    ],
+    "Tire_RL": [
+      "west"
+    ],
+    "Hub_RL": [
+      "west"
+    ],
+    "Tire_RR": [
+      "east"
+    ],
+    "Hub_RR": [
+      "east"
+    ]
+  },
+  "interpretation": "Counts measure UV texels, not surface area, accuracy or acceptance. Disagreements retain the most face-on visible original pixel and remain marked. Unknown and overlapping regions require authored cleanup. Gutters are not padded by this draft baker."
+}

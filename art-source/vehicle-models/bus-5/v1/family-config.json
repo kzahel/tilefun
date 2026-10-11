@@ -1,0 +1,240 @@
+{
+  "family": "bus-b",
+  "seed": "bus-5",
+  "vehicles": [
+    "bus-5",
+    "bus-6"
+  ],
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -54,
+    "rear": 54,
+    "halfWidth": 18,
+    "endHalfWidth": 14,
+    "base": 6,
+    "sideTop": 44,
+    "roof": 51,
+    "roofHalfWidth": 16,
+    "endBase": 9
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -36,
+      "radius": 8,
+      "trackHalfWidth": 16.5,
+      "tireWidth": 3,
+      "hubRadius": 3.5,
+      "steering": true,
+      "centers": {
+        "east": [
+          92,
+          56.5
+        ],
+        "west": [
+          22,
+          56.5
+        ]
+      },
+      "paintRadii": [
+        8,
+        6
+      ]
+    },
+    {
+      "id": "R",
+      "x": 24,
+      "radius": 8,
+      "trackHalfWidth": 16.5,
+      "tireWidth": 3,
+      "hubRadius": 3.5,
+      "steering": false,
+      "centers": {
+        "east": [
+          32,
+          56.5
+        ],
+        "west": [
+          80,
+          56.5
+        ]
+      },
+      "paintRadii": [
+        8,
+        6
+      ]
+    }
+  ],
+  "floorMargin": 1,
+  "maxCenterErrorPixels": 2,
+  "mirrors": {
+    "x": -47.4,
+    "halfWidth": 18.4,
+    "z": 30,
+    "width": 1.5,
+    "height": 9.5,
+    "bySide": {
+      "L": {
+        "halfWidth": 17.4
+      },
+      "R": {
+        "height": 5.5
+      }
+    }
+  },
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 38,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        56,
+        75.72217947299193
+      ],
+      "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 38,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        57,
+        75.72217947299193
+      ],
+      "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 49.899092453787766,
+      "horizontalScale": 1.06,
+      "verticalStretch": 0.9373390451603185,
+      "origin": [
+        56,
+        69.5
+      ],
+      "status": "Long roof and end-fascia depth/height hypothesis; inspect native contours"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 49.899092453787766,
+      "horizontalScale": 1.06,
+      "verticalStretch": 0.9373390451603185,
+      "origin": [
+        56,
+        75.5
+      ],
+      "status": "Long roof and end-fascia depth/height hypothesis; inspect native contours"
+    }
+  },
+  "notes": [
+    "Independent long-body bus; original east/right-side door and west/opposite-side window paint are separate owners.",
+    "Roof ventilation artwork is north-owned; opposing source roof depth/vent placement and mirror projections may disagree.",
+    "All source crops, per-axle wheel wells and registration are retained. Only neutral steering is supported; nonzero steering is unqualified.",
+    "Roof shoulders use an explicit roof-palette fill so source vent/window edges do not replay across separate surfaces; corner faces close the roof/end joins.",
+    "Bus B source north removes seven left-mirror pixels and three upper right-mirror pixels; separate side mirror dimensions preserve this variation. Other source views repeat the earlier mirror shape, an explicit projection discrepancy."
+  ],
+  "sourceRegistration": {
+    "seed": "bus-5",
+    "vehicle": "bus-5",
+    "observations": [
+      {
+        "view": "east",
+        "seedRect": [
+          208,
+          1456,
+          112,
+          64
+        ],
+        "targetRect": [
+          208,
+          1456,
+          112,
+          64
+        ],
+        "seedRgbaSha256": "0661798fd0ee81e0a2b0c1ee6d5505ea02aa1c30b234ff001c99abc460ba9a7b",
+        "targetRgbaSha256": "0661798fd0ee81e0a2b0c1ee6d5505ea02aa1c30b234ff001c99abc460ba9a7b",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "west",
+        "seedRect": [
+          208,
+          1392,
+          112,
+          64
+        ],
+        "targetRect": [
+          208,
+          1392,
+          112,
+          64
+        ],
+        "seedRgbaSha256": "4cb28eb57069550431cedf2433db6ff56f5f218f8bb9b8b3b1fd262ac8512c29",
+        "targetRgbaSha256": "4cb28eb57069550431cedf2433db6ff56f5f218f8bb9b8b3b1fd262ac8512c29",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "north",
+        "seedRect": [
+          368,
+          1392,
+          48,
+          112
+        ],
+        "targetRect": [
+          368,
+          1392,
+          48,
+          112
+        ],
+        "seedRgbaSha256": "09f2858bf2fed97ed4ab43f0a5113b99cacd2c010ca2f5f96d61251471d77f0f",
+        "targetRgbaSha256": "09f2858bf2fed97ed4ab43f0a5113b99cacd2c010ca2f5f96d61251471d77f0f",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "south",
+        "seedRect": [
+          320,
+          1392,
+          48,
+          112
+        ],
+        "targetRect": [
+          320,
+          1392,
+          48,
+          112
+        ],
+        "seedRgbaSha256": "0e1b0f398a6734fc6a3edf8924a20d9aada928cde25c3aae530dc0ed96ae764a",
+        "targetRgbaSha256": "0e1b0f398a6734fc6a3edf8924a20d9aada928cde25c3aae530dc0ed96ae764a",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      }
+    ],
+    "paint": "Every UV owner samples this vehicle, including local paint exceptions."
+  },
+  "wheels": {
+    "radius": 8
+  }
+}

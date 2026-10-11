@@ -1,0 +1,17 @@
+{
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "configuration": "scripts/authored-assets/bus-a-family.json",
+  "configurationSha256": "e221783f2434de8183c164c35d70f2fcf7b9720662e31f7f79d22ad65695da65",
+  "scripts": {
+    "scripts/authored-assets/author_bus_vehicle.py": "2ca26f58ed9192c6ba571dc5f7c5a0465554f04e9224367c257a8c7631cad4d2",
+    "scripts/authored-assets/author_passenger_vehicle.py": "28029c640a771aa5ace628082768b00c2db4a196448e32ab46ecca15315749b4",
+    "scripts/authored-assets/author_emergency_vehicle.py": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab",
+    "scripts/authored-assets/author_garbage_truck.py": "1bbfd28c3e462885b16ff831d62b7e3182afbd5ace174bfad1202abece4bcd93",
+    "scripts/authored-assets/build_emergency_vehicle.py": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62",
+    "scripts/authored-assets/prepare_bus_vehicle.py": "c50debec31940085cf04df639bb29f340bb1dde61e3a9b4160f77021d41e2e80",
+    "scripts/authored-assets/retain_bus.py": "a700dd53b696d064054c1356534d00a6adbc326390a380070d9d67a6263ad321",
+    "scripts/authored-assets/retain_vehicle.py": "cacca97eb4e411b53c5f32d2b3578c80c7a89096071b09481202e10aa065bc82",
+    "scripts/authored-assets/pack_draft.py": "c814bc6cb42d3ad1189236138bf195fec247295aed00316d50cf7a63b195a726"
+  },
+  "status": "Own source paint and independent family geometry; explicit crop registration, hidden fill and projection contradictions; unreviewed"
+}

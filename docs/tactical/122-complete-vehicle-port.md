@@ -91,7 +91,7 @@ Current exact counts and each vehicle's next action live in the owning topic.
 
 ### Additional sedan checkpoint
 
-Seven v1 models are retained locally and integrated through their own registry
+Seven v1 models are retained and integrated through their own registry
 entries, radius 80 and authored width. Cabin side slopes and separate UV owners
 remove hidden side-glass loss from end views. All seven own source refs are
 sampled, including small paint exceptions; normalized four-view alpha is exact
@@ -125,3 +125,43 @@ original-HEAD baseline above. No introduced failure remains. Full unit rerun:
 2,507 pass / 10 skipped; five Windows symlink/SIGKILL failures and one persistence
 timeout. The isolated persistence file passes all four tests. Validation logs
 are `data/authored-assets/sedan-*.log`; original retained pixels are unchanged.
+The batch rebased over remote `323823ab`; regenerated combined-source manifest,
+typecheck/build and all 20 vehicle browser checks pass. Pushed as `bbf54c62`.
+
+### Bus checkpoint
+
+Six v1 buses are retained with independent long-body geometry, owned asymmetric
+door/window paint and geometric glazing borders. Each has 39 meshes / 1,112
+triangles, four radius-eight wheel rigs and explicit A/B mirror differences. All
+native 4×2 and novel-angle strips inspected. Side axle error is zero east / one
+pixel west. Actual GLB rest/roll main-floor checks pass, including displaced-axle
+and solid-floor negative probes. Two separately declared sloped floor ends clear
+actual exported tire/hub rotation spheres by at least 5.86058 model units. Nine
+roll/steer probe poses leave them fixed; moving a floor end into a wheel is rejected
+and exact transforms restore. Whole-body nonzero steering is unqualified, so
+gameplay keeps steering neutral. Source roof vent depths and opposing mirrors
+cannot both match exactly and remain in the retained paint/config records.
+
+The registry integrates all six own GLBs with radius 112 in game/lab mesh mode.
+Actual GPU draw/reset/disposal and simulation-isolation checks pass all 21
+registered vehicles; each bus draws 8,565 native target pixels. All 25 retained
+bundles verify; 33 Python tests and 74 focused rendering/culling/frame tests pass.
+Typecheck passes. Git index checkout `data/authored-assets/full-vehicle-port/bus-tracked-001/`
+passes all 25 exact bundles, packed Blender sources, actual wheel/floor and
+additional-floor probes, and the 21-asset GPU probe. Six recipes reproduce all
+48 native/novel pinned hashes exactly. Workshop verifies 783 candidates / 35
+exclusions; earlier 777 candidate records are unchanged. Typecheck/build/lint
+pass with 119 existing warnings / 34 infos. Full unit run: 2,515 pass / 10 skipped;
+five existing Windows symlink/SIGKILL cases and one loaded-suite Workshop timeout
+fail. Isolated Workshop file passes all 13 tests.
+
+Full Chromium: 571 pass / 1 skipped / 7 fail. Rerun clears Canvas driving, pinch
+and PWA timing. Two phone review-layout failures remain from the earlier baseline.
+Plain GPU driving's zero-movement failure also reproduces on pre-bus `bbf54c62`
+in a fresh archive checkout at `bus-baseline-001/`. The allcars driving test now
+checks the driver's own ready asset and cached instance travel, instead of the
+blue shared wheel object which is no longer its model. Its stable-build rerun passes. An intermediate concurrent root build invalidated
+one load result; it is excluded from qualification. No introduced browser failure
+remains.
+Logs are `data/authored-assets/bus-*.log`; current counts and every vehicle's
+next action live in the owning topic.

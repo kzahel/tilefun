@@ -1,0 +1,100 @@
+{
+  "family": "bus-a",
+  "seed": "bus-1",
+  "vehicles": ["bus-1", "bus-2", "bus-3", "bus-4"],
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -54,
+    "rear": 54,
+    "halfWidth": 18,
+    "endHalfWidth": 14,
+    "base": 6,
+    "sideTop": 44,
+    "roof": 51,
+    "roofHalfWidth": 16,
+    "endBase": 9
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -36,
+      "radius": 8,
+      "trackHalfWidth": 16.5,
+      "tireWidth": 3,
+      "hubRadius": 3.5,
+      "steering": true,
+      "centers": {
+        "east": [92, 56.5],
+        "west": [22, 56.5]
+      },
+      "paintRadii": [8, 6]
+    },
+    {
+      "id": "R",
+      "x": 24,
+      "radius": 8,
+      "trackHalfWidth": 16.5,
+      "tireWidth": 3,
+      "hubRadius": 3.5,
+      "steering": false,
+      "centers": {
+        "east": [32, 56.5],
+        "west": [80, 56.5]
+      },
+      "paintRadii": [8, 6]
+    }
+  ],
+  "floorMargin": 1,
+  "maxCenterErrorPixels": 2,
+  "mirrors": {
+    "x": -47.4,
+    "halfWidth": 18.4,
+    "z": 30,
+    "width": 1.5,
+    "height": 9.5
+  },
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 38,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [56, 75.72217947299193],
+      "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 38,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [57, 75.72217947299193],
+      "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 49.899092453787766,
+      "horizontalScale": 1.06,
+      "verticalStretch": 0.9373390451603185,
+      "origin": [56, 69.5],
+      "status": "Long roof and end-fascia depth/height hypothesis; inspect native contours"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 49.899092453787766,
+      "horizontalScale": 1.06,
+      "verticalStretch": 0.9373390451603185,
+      "origin": [56, 75.5],
+      "status": "Long roof and end-fascia depth/height hypothesis; inspect native contours"
+    }
+  },
+  "notes": [
+    "Independent long-body bus; original east/right-side door and west/opposite-side window paint are separate owners.",
+    "Roof ventilation artwork is north-owned; opposing source roof depth/vent placement and mirror projections may disagree.",
+    "All source crops, per-axle wheel wells and registration are retained. Only neutral steering is supported; nonzero steering is unqualified.",
+    "Roof shoulders use an explicit roof-palette fill so source vent/window edges do not replay across separate surfaces; corner faces close the roof/end joins."
+  ]
+}

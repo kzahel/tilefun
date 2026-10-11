@@ -49,6 +49,14 @@ Four radius-six wheels fit measured source wells and pass actual floor/roll
 checks and displaced-axle/solid-floor negative probes. A north-owned roof retains
 opposing paint/projection differences. Exact art review remains separate.
 
+Six own-source buses in [122](../tactical/122-complete-vehicle-port.md) bring the
+queue to 23 retained sets / 25 revisions and 21 own-asset game/lab integrations.
+The connected long body has asymmetric paint, separate end glazing, four
+radius-eight wheel rigs and A/B mirror geometry. Actual wheel/well/open-floor
+checks and additional sloped-floor rotation-sphere probes pass. Roof vent and
+opposing mirror projection differences remain explicit; whole-body nonzero
+steering is unqualified. All exact source/GLB/comparison dependencies are tracked.
+
 ## Investigation evidence storage
 
 The evidence directories for investigations 070–075 under `docs/tactical/` are

@@ -6299,6 +6299,72 @@
       "excluded": "Exploratory orbit view; not an immutable approval snapshot."
     },
     {
+      "id": "projection:authored-bus-1-v1",
+      "batchId": "authored-vehicles",
+      "name": "Bus 1 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/bus-1-v1/",
+      "kind": "projection",
+      "fingerprint": "95924c80a5f9cba7b5bb308bd5089808dbfbe9ec0b43ff4112422861d994b238",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-bus-2-v1",
+      "batchId": "authored-vehicles",
+      "name": "Bus 2 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/bus-2-v1/",
+      "kind": "projection",
+      "fingerprint": "0b071bebc3ca5ec55defc97f2dd7a603d995f6d9be81e3902e0d729fe862afec",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-bus-3-v1",
+      "batchId": "authored-vehicles",
+      "name": "Bus 3 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/bus-3-v1/",
+      "kind": "projection",
+      "fingerprint": "dc88326fe07697767ba8f4055795243e9a7f046780e0b4dbd91af8150c8bd777",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-bus-4-v1",
+      "batchId": "authored-vehicles",
+      "name": "Bus 4 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/bus-4-v1/",
+      "kind": "projection",
+      "fingerprint": "9a27ada4d172c50bd47bb486769a29c2fd6c4365d07c0683ef51790745153a17",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-bus-5-v1",
+      "batchId": "authored-vehicles",
+      "name": "Bus 5 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/bus-5-v1/",
+      "kind": "projection",
+      "fingerprint": "1ae8aea949cb0842b1d9a7acdb2785987ede5efeb7c5a6ebbbea3bb76b0a2771",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-bus-6-v1",
+      "batchId": "authored-vehicles",
+      "name": "Bus 6 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/bus-6-v1/",
+      "kind": "projection",
+      "fingerprint": "53e0e5b97fdd22f5da62aadab07fc5ab04ebab9332fc38f538696b1e9629f2ea",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
       "id": "projection:authored-ambulance-v1",
       "batchId": "authored-vehicles",
       "name": "Ambulance · authored model v1",
@@ -30136,5 +30202,5 @@
       }
     }
   ],
-  "inputDigest": "47cc415cf0c997501c84df15a868f7519a795233818b466ecb000297de06cc41"
+  "inputDigest": "00cd3e276e22bc6489cc2ebd753a14ebb7fc9e47a125a0cfe18c507d4b9fa33c"
 }

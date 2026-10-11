@@ -1,8 +1,8 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 17 models retained, 15 integrated
-in game/lab mesh mode. All six compacts, seven additional sedans, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
+Status: 45 sprite sets inventoried; 23 models retained, 21 integrated
+in game/lab mesh mode. All six compacts, seven additional sedans, six buses, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
 Exact model art review remains open.
 Updated: 2026-10-11.
 
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **17/45 retained models, 28/45 queued; 15/45 own-model
+Current progress: **23/45 retained models, 22/45 queued; 21/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -72,6 +72,14 @@ is explicit; every view samples that color's own reference, preserving localized
 paint exceptions. The fitted roof cannot reproduce both opposing highlights
 exactly. [122](../tactical/122-complete-vehicle-port.md) records actual GLB wheel,
 GPU and tracked-only checks; exact production art review remains open.
+
+Six buses have a connected long body, asymmetric doors/windows, separate roof and
+end glazing, four radius-eight wheels and source-owned paint. A/B use their own
+four-view shape gate and mirror configurations. The main level floor has wheel
+cutouts; both sloped ends are separately declared and qualified against actual
+exported tire/hub bounds. [122](../tactical/122-complete-vehicle-port.md) records
+the exact 4×2, real GLB and engine checks. Opposing roof vents and mirror drawings
+remain projection limitations; only neutral steering is used in gameplay.
 
 ## Source families for batching
 
@@ -195,12 +203,12 @@ Blender templates still need qualification.
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `bus-1` | Queued | Pending | Fit a bus template, including asymmetric doors and long-body wheel spacing. |
-| `bus-2` | Queued | Pending | Compare geometry and graphics before reusing the bus template. |
-| `bus-3` | Queued | Pending | Compare geometry and graphics before reusing the bus template. |
-| `bus-4` | Queued | Pending | Compare geometry and graphics before reusing the bus template. |
-| `bus-5` | Queued | Pending | Compare geometry and graphics before reusing the bus template. |
-| `bus-6` | Queued | Pending | Compare geometry and graphics before reusing the bus template. |
+| `bus-1` | [Retained v1](../../art-source/vehicle-models/bus-1/v1/) | Default GPU integrated | Review own 4×2, roof vent projection and mirror limits; neutral steering. |
+| `bus-2` | [Retained v1](../../art-source/vehicle-models/bus-2/v1/) | Default GPU integrated | Review own 4×2, roof vent projection and mirror limits; neutral steering. |
+| `bus-3` | [Retained v1](../../art-source/vehicle-models/bus-3/v1/) | Default GPU integrated | Review own 4×2, roof vent projection and mirror limits; neutral steering. |
+| `bus-4` | [Retained v1](../../art-source/vehicle-models/bus-4/v1/) | Default GPU integrated | Review own 4×2, roof vent projection and mirror limits; neutral steering. |
+| `bus-5` | [Retained v1](../../art-source/vehicle-models/bus-5/v1/) | Default GPU integrated | Review own 4×2, roof vent projection and mirror limits; neutral steering. |
+| `bus-6` | [Retained v1](../../art-source/vehicle-models/bus-6/v1/) | Default GPU integrated | Review own 4×2, roof vent projection and mirror limits; neutral steering. |
 
 ## Checklist for each vehicle
 

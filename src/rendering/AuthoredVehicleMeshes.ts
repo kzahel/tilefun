@@ -24,6 +24,13 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
     radius: 80,
     lateralScale: 1,
   })),
+  ...([1, 2, 3, 4, 5, 6] as const).map((number) => ({
+    vehicle: `bus-${number}`,
+    assetId: `bus-${number}-authored-v1`,
+    path: `assets/models/vehicles/bus-${number}-v1.glb`,
+    radius: 112,
+    lateralScale: 1,
+  })),
   {
     vehicle: "ambulance",
     assetId: "ambulance-authored-v2",

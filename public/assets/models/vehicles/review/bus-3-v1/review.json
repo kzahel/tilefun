@@ -1,0 +1,38 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-bus-3-v1",
+  "candidateFingerprint": "dc88326fe07697767ba8f4055795243e9a7f046780e0b4dbd91af8150c8bd777",
+  "identity": {
+    "assetId": "bus-3",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "bdbc924d1461c899002d227c19b46337d64481b4870026bb2446eb8641cc4a8c",
+    "sourceAtlasSha256": "f3dc76036e2d2294f1cc46debaa445acb6875eeab0228dce1b26fda6d79b8e58",
+    "files": [
+      {
+        "url": "assets/models/vehicles/bus-3-v1.glb",
+        "sha256": "dbf090dfd41809b95fb81ab0dc51eb098b9f523b5bc90e2dbc65f0bad7c5d656"
+      },
+      {
+        "url": "assets/models/vehicles/review/bus-3-v1/comparison.png",
+        "sha256": "546000db31b29666905ab9e05cb4801c27b920f69eca9393240b490b0d929560"
+      },
+      {
+        "url": "assets/models/vehicles/review/bus-3-v1/orbit.png",
+        "sha256": "9a216ac84e70f4f0d8d9b6d33d501cd4352991414f5ac28fba2b364ed310133a"
+      },
+      {
+        "url": "assets/models/vehicles/review/bus-3-v1/silhouette.png",
+        "sha256": "9bddbb04a3bc2b3bc05c980c3bc7530ee4e24e5b43ff482c8fabb902adbc8fe2"
+      }
+    ]
+  },
+  "name": "Bus 3",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent long-body bus; original east/right-side door and west/opposite-side window paint are separate owners.",
+    "Roof ventilation artwork is north-owned; opposing source roof depth/vent placement and mirror projections may disagree.",
+    "All source crops, per-axle wheel wells and registration are retained. Only neutral steering is supported; nonzero steering is unqualified.",
+    "Roof shoulders use an explicit roof-palette fill so source vent/window edges do not replay across separate surfaces; corner faces close the roof/end joins."
+  ]
+}

@@ -82,6 +82,15 @@ limits, all native borders and actual wheel/floor fit. This family is independen
 of the compact and police templates; the ordinary retained-source checklist and
 own-asset engine qualification still apply.
 
+For buses, use `bus-a-family.json` (1–4) or `bus-b-family.json` (5–6),
+`prepare_bus_vehicle.py` and `retain_bus.py`. Read the bus workflow in the scripts
+README. Keep asymmetric doors and source facing directions explicit. Separate
+sloped floor ends are declared in `wheelWellFit.extraFloorMeshes`; run both the
+ordinary actual GLB wheel/main-floor probe and `verify_floor_bevels.mjs` against
+every retained bus. The latter proves actual tire/hub sphere separation and
+rejects a displaced floor end. Roof vents/opposing mirrors and whole-body
+steering remain explicit limitations.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;

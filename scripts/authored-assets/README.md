@@ -607,3 +607,29 @@ mesh/rig/config/paint records, frozen refs, portable recipe, provenance and pinn
 with actual GLB flash evidence. Run actual GLB wheel/floor, packed-source, native
 replay and engine probes from tracked files before pushing. The single roof's
 opposing highlights and inconsistent camera depths remain review limitations.
+
+## Bus families
+
+`bus-a-family.json` fits buses 1–4; `bus-b-family.json` fits buses 5–6. The
+second family changes north-view mirror geometry instead of bypassing a shape
+mismatch. `author_bus_vehicle.py` checks its own family alpha and samples each
+vehicle's own refs, preserving one-pixel and larger paint exceptions. East faces
+right, unlike the additional sedan family. Roof shoulders have explicit palette
+fill; geometric corner surfaces close the end joins. Opposing roof vent/mirror
+projections are recorded limitations.
+
+```text
+python scripts/authored-assets/prepare_bus_vehicle.py --vehicle bus-1 --config scripts/authored-assets/bus-a-family.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_BUS
+python scripts/authored-assets/retain_bus.py --model data/authored-assets/NEW_BUS --template scripts/authored-assets/bus-a-family.json --revision v1 --name "Bus 1"
+node scripts/authored-assets/verify_floor_bevels.mjs data/authored-assets/NEW_FLOOR_PROBE OPTIONAL_CHECKOUT_ROOT
+```
+
+Run the ordinary actual GLB wheel/well/main-floor checks too. Additional sloped
+floor meshes are declared in `rig.json` → `wheelWellFit.extraFloorMeshes`. The
+bevel probe reads exported tire/hub vertices, proves longitudinal separation
+from enclosing rotation spheres, checks fixed floors through roll/steer poses
+and rejects an intentionally displaced floor end. That proof covers only those
+extra floor meshes; it does not qualify whole-body nonzero steering. Retain all
+exact final source, paint, projection draft and review dependencies using the
+ordinary checklist, then verify replay and own-model engine fallback from tracked
+files. Normal builds consume the committed GLB.

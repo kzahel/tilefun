@@ -1,0 +1,39 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-bus-5-v1",
+  "candidateFingerprint": "1ae8aea949cb0842b1d9a7acdb2785987ede5efeb7c5a6ebbbea3bb76b0a2771",
+  "identity": {
+    "assetId": "bus-5",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "dfc1195a9980c04e451a565233352132662480b5989993be9b641ec1da44e762",
+    "sourceAtlasSha256": "5ffc4cc1e8c25f7f58292bb5aa5a6b61db61bcf572e7db6eb36efab4fb1dbe80",
+    "files": [
+      {
+        "url": "assets/models/vehicles/bus-5-v1.glb",
+        "sha256": "57af346281bc9c3e71a1fb69c194db4f975ac7aa4fc9c625118084634d51a72b"
+      },
+      {
+        "url": "assets/models/vehicles/review/bus-5-v1/comparison.png",
+        "sha256": "948cded9f3b990eee1d86acf4489ecbce1c32535b20343445a33999608fd32b8"
+      },
+      {
+        "url": "assets/models/vehicles/review/bus-5-v1/orbit.png",
+        "sha256": "b905d0a56786f841a281c3fb9b8802df0b27cb5b10844cdcf2c63a4bab8cecd4"
+      },
+      {
+        "url": "assets/models/vehicles/review/bus-5-v1/silhouette.png",
+        "sha256": "0251fd548f6a45baf846f722f61c52aaac750ef88988a62fb5cde6a80b52b23b"
+      }
+    ]
+  },
+  "name": "Bus 5",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent long-body bus; original east/right-side door and west/opposite-side window paint are separate owners.",
+    "Roof ventilation artwork is north-owned; opposing source roof depth/vent placement and mirror projections may disagree.",
+    "All source crops, per-axle wheel wells and registration are retained. Only neutral steering is supported; nonzero steering is unqualified.",
+    "Roof shoulders use an explicit roof-palette fill so source vent/window edges do not replay across separate surfaces; corner faces close the roof/end joins.",
+    "Bus B source north removes seven left-mirror pixels and three upper right-mirror pixels; separate side mirror dimensions preserve this variation. Other source views repeat the earlier mirror shape, an explicit projection discrepancy."
+  ]
+}

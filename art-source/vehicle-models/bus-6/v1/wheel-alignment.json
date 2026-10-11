@@ -1,0 +1,92 @@
+{
+  "schema": "tilefun-wheel-well-fit-v1",
+  "observations": [
+    {
+      "wheel": "FL",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          56,
+          75.72217947299193
+        ],
+        "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+      },
+      "sourceCenter": [
+        21,
+        80.5
+      ],
+      "errorPixels": 1.0
+    },
+    {
+      "wheel": "FR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          56,
+          75.72217947299193
+        ],
+        "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+      },
+      "sourceCenter": [
+        92,
+        80.5
+      ],
+      "errorPixels": 0.0
+    },
+    {
+      "wheel": "RL",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          56,
+          75.72217947299193
+        ],
+        "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+      },
+      "sourceCenter": [
+        79,
+        80.5
+      ],
+      "errorPixels": 1.0
+    },
+    {
+      "wheel": "RR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          56,
+          75.72217947299193
+        ],
+        "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+      },
+      "sourceCenter": [
+        32,
+        80.5
+      ],
+      "errorPixels": 0.0
+    }
+  ],
+  "floorMesh": "Underfloor",
+  "maxCenterErrorPixels": 2,
+  "status": "Measured rest/roll centers; steering and loader clearance unqualified",
+  "extraFloorMeshes": [
+    "Underfloor-front-bevel",
+    "Underfloor-rear-bevel"
+  ]
+}

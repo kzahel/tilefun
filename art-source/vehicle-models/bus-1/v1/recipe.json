@@ -1,0 +1,413 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "bus-1",
+  "family": "bus-a",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    112,
+    112
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/bus-1/v1/car.blend",
+    "sha256": "8f066035db5c6f4aa4c1cbf2a32c6ef0430810441cc20f0cacd2f7ac8699a312"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        208,
+        1200,
+        112,
+        64
+      ],
+      "anchor": [
+        56,
+        61
+      ],
+      "metadata": {
+        "name": "Bus 1 \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "bus",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          56,
+          61
+        ],
+        "footprint": [
+          -52,
+          -32,
+          104,
+          32
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "sourceApproval": {
+        "id": "15a6271a-c85d-4329-95e1-806edccb75df",
+        "createdAt": "2026-10-03T10:47:47.503Z",
+        "candidateFingerprint": "0a9f3bebc96149948de72a07b67477790e31a828d308c6c1f2b8c834157be817",
+        "metadataFingerprint": "173875e49ef5b5c6e041c6529aa04252a2e7c18a4cf0804e1ad84a96768cd02c"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        24
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          56,
+          75.72217947299193
+        ],
+        "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+      },
+      "sourceSha256": "94734ed9ab122992aa9696f6e16e27cb8439452297fab5dcff6c75f928a48a1b"
+    },
+    {
+      "id": "west",
+      "rect": [
+        208,
+        1136,
+        112,
+        64
+      ],
+      "anchor": [
+        56,
+        61
+      ],
+      "metadata": {
+        "name": "Bus 1 \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "bus",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          56,
+          61
+        ],
+        "footprint": [
+          -52,
+          -32,
+          104,
+          32
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 104,
+            "height": 32,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -16
+      },
+      "sourceApproval": {
+        "id": "4c34c48e-e62a-4f6e-a58d-b90fb57bc1c8",
+        "createdAt": "2026-10-03T10:48:10.173Z",
+        "candidateFingerprint": "20727d022ca447f78fce203c266700f476c2c4010e3bc61cf38d26fa50990661",
+        "metadataFingerprint": "14b79fa508b527ddea2e68f47a71667e1823e86c55f4945307bd42429147d794"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        24
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1,
+        "origin": [
+          57,
+          75.72217947299193
+        ],
+        "status": "Side wheel wells, roof and body landmarks; east source faces right, west faces left"
+      },
+      "sourceSha256": "c5629dc35b38a84af80197fa12fb64ec33dd51426faeb5ec20e79152161f70f3"
+    },
+    {
+      "id": "north",
+      "rect": [
+        368,
+        1136,
+        48,
+        112
+      ],
+      "anchor": [
+        24,
+        103
+      ],
+      "metadata": {
+        "name": "Bus 1 \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "bus",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          24,
+          103
+        ],
+        "footprint": [
+          -19,
+          -86,
+          38,
+          86
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "sourceApproval": {
+        "id": "c1945688-1933-4871-9251-c3f1afe886ef",
+        "createdAt": "2026-10-03T10:47:46.473Z",
+        "candidateFingerprint": "9b3956fa1a58b1c8c7ba31d6fa4ec9b9a76acb5ca49636975f5f01c8b1201441",
+        "metadataFingerprint": "f70f8c6bfe2f0c7890da89dbb4375aaa05f162173da022e240f4f2130e80d909"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        32,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 49.899092453787766,
+        "horizontalScale": 1.06,
+        "verticalStretch": 0.9373390451603185,
+        "origin": [
+          56,
+          69.5
+        ],
+        "status": "Long roof and end-fascia depth/height hypothesis; inspect native contours"
+      },
+      "sourceSha256": "6713efcfb22d42a5dbfbbac0a93046dfa44abbad98f2d47c287c14e98765cf4c"
+    },
+    {
+      "id": "south",
+      "rect": [
+        320,
+        1136,
+        48,
+        112
+      ],
+      "anchor": [
+        24,
+        109
+      ],
+      "metadata": {
+        "name": "Bus 1 \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "bus",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          24,
+          109
+        ],
+        "footprint": [
+          -19,
+          -86,
+          38,
+          86
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 38,
+            "height": 86,
+            "zHeight": 40
+          }
+        ],
+        "depthOffset": -43
+      },
+      "sourceApproval": {
+        "id": "50d5042c-0fbc-4200-887e-4280e3f88dae",
+        "createdAt": "2026-10-03T10:48:03.052Z",
+        "candidateFingerprint": "7784dc2414b180b02c94dafbf3a3c11847e4c400f057395c07fb4615d891114d",
+        "metadataFingerprint": "4b187f62a30649ffb00753492aedc5bdd7ab259f6b72cb8ba330f6bdfe7ed88c"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        32,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 49.899092453787766,
+        "horizontalScale": 1.06,
+        "verticalStretch": 0.9373390451603185,
+        "origin": [
+          56,
+          75.5
+        ],
+        "status": "Long roof and end-fascia depth/height hypothesis; inspect native contours"
+      },
+      "sourceSha256": "1fb8aac3acc0642ded53b7ec2fee47b417b1388af42eecf64cedbd0ade5eda06"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1536,
+    "material": "bus-1 palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Bus-body-east": [
+        "east"
+      ],
+      "Fender--36-east": [
+        "east"
+      ],
+      "Fender-24-east": [
+        "east"
+      ],
+      "Bus-body-west": [
+        "west"
+      ],
+      "Fender--36-west": [
+        "west"
+      ],
+      "Fender-24-west": [
+        "west"
+      ],
+      "Roof": [
+        "north"
+      ],
+      "Roof-shoulder-east": [],
+      "Front-roof-corner-east": [
+        "east"
+      ],
+      "Rear-roof-corner-east": [
+        "east"
+      ],
+      "Roof-shoulder-west": [],
+      "Front-roof-corner-west": [
+        "west"
+      ],
+      "Rear-roof-corner-west": [
+        "west"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Rear-roof-edge": [
+        "north"
+      ],
+      "Rear-window-glass": [
+        "north"
+      ],
+      "Rear-window-frame": [],
+      "Front-fascia": [
+        "south"
+      ],
+      "Front-corner-east": [
+        "east"
+      ],
+      "Front-corner-west": [
+        "west"
+      ],
+      "Rear-fascia": [
+        "north"
+      ],
+      "Rear-corner-east": [
+        "east"
+      ],
+      "Rear-corner-west": [
+        "west"
+      ],
+      "Underfloor": [],
+      "Underfloor-front-bevel": [],
+      "Underfloor-rear-bevel": [],
+      "Mirror-arm--1": [],
+      "Mirror--1": [],
+      "Mirror-arm-1": [],
+      "Mirror-1": [],
+      "Tire_FL": [
+        "west"
+      ],
+      "Hub_FL": [
+        "west"
+      ],
+      "Tire_FR": [
+        "east"
+      ],
+      "Hub_FR": [
+        "east"
+      ],
+      "Tire_RL": [
+        "west"
+      ],
+      "Hub_RL": [
+        "west"
+      ],
+      "Tire_RR": [
+        "east"
+      ],
+      "Hub_RR": [
+        "east"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

@@ -28,6 +28,13 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Fire truck wheel alignment | [v2](fire-truck-ladder-1/v2/) | [fire-truck-ladder-1-v2.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v2.glb) |
 | Green garbage truck | [v1](garbage-truck-green/v1/) | [garbage-truck-green-v1.glb](../../public/assets/models/vehicles/garbage-truck-green-v1.glb) |
 
+| Bus 1 | [v1](bus-1/v1/) | [bus-1-v1.glb](../../public/assets/models/vehicles/bus-1-v1.glb) |
+| Bus 2 | [v1](bus-2/v1/) | [bus-2-v1.glb](../../public/assets/models/vehicles/bus-2-v1.glb) |
+| Bus 3 | [v1](bus-3/v1/) | [bus-3-v1.glb](../../public/assets/models/vehicles/bus-3-v1.glb) |
+| Bus 4 | [v1](bus-4/v1/) | [bus-4-v1.glb](../../public/assets/models/vehicles/bus-4-v1.glb) |
+| Bus 5 | [v1](bus-5/v1/) | [bus-5-v1.glb](../../public/assets/models/vehicles/bus-5-v1.glb) |
+| Bus 6 | [v1](bus-6/v1/) | [bus-6-v1.glb](../../public/assets/models/vehicles/bus-6-v1.glb) |
+
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
 rig metadata. Blue/green include the captured top-ink configuration; all four v1 palette variants also

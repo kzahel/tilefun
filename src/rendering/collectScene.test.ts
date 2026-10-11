@@ -67,13 +67,27 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
       // the collector must still avoid submitting it. Additional sedans use an
       // 80px enclosing mesh bound, so their vertical exit is farther away.
       for (const [wx, wy] of [
-        [model === "fire-truck-ladder-1" ? -161 : model === "ambulance" ? -129 : -113, 150],
-        [model === "fire-truck-ladder-1" ? 561 : model === "ambulance" ? 529 : 513, 150],
+        [
+          model === "fire-truck-ladder-1"
+            ? -161
+            : model === "ambulance" || model.startsWith("bus-")
+              ? -129
+              : -113,
+          150,
+        ],
+        [
+          model === "fire-truck-ladder-1"
+            ? 561
+            : model === "ambulance" || model.startsWith("bus-")
+              ? 529
+              : 513,
+          150,
+        ],
         [
           200,
           model === "fire-truck-ladder-1"
             ? -221
-            : model === "ambulance"
+            : model === "ambulance" || model.startsWith("bus-")
               ? -177
               : model.startsWith("unindexed-sedan-")
                 ? -145
@@ -83,7 +97,7 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
           200,
           model === "fire-truck-ladder-1"
             ? 521
-            : model === "ambulance"
+            : model === "ambulance" || model.startsWith("bus-")
               ? 477
               : model.startsWith("unindexed-sedan-")
                 ? 495

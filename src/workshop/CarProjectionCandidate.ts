@@ -4,6 +4,24 @@ import ambulanceReview from "../../public/assets/models/vehicles/review/ambulanc
 import ambulanceLightsReview from "../../public/assets/models/vehicles/review/ambulance-v2/review.json" with {
   type: "json",
 };
+import bus1Review from "../../public/assets/models/vehicles/review/bus-1-v1/review.json" with {
+  type: "json",
+};
+import bus2Review from "../../public/assets/models/vehicles/review/bus-2-v1/review.json" with {
+  type: "json",
+};
+import bus3Review from "../../public/assets/models/vehicles/review/bus-3-v1/review.json" with {
+  type: "json",
+};
+import bus4Review from "../../public/assets/models/vehicles/review/bus-4-v1/review.json" with {
+  type: "json",
+};
+import bus5Review from "../../public/assets/models/vehicles/review/bus-5-v1/review.json" with {
+  type: "json",
+};
+import bus6Review from "../../public/assets/models/vehicles/review/bus-6-v1/review.json" with {
+  type: "json",
+};
 import compactCyanReview from "../../public/assets/models/vehicles/review/compact-3-v1/review.json" with {
   type: "json",
 };
@@ -84,6 +102,12 @@ export async function buildCarProjectionCandidate(): Promise<WorkshopCandidate> 
 export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidate[]> {
   const candidates: WorkshopCandidate[] = [];
   const reviews = [
+    { review: bus1Review, name: "Bus 1" },
+    { review: bus2Review, name: "Bus 2" },
+    { review: bus3Review, name: "Bus 3" },
+    { review: bus4Review, name: "Bus 4" },
+    { review: bus5Review, name: "Bus 5" },
+    { review: bus6Review, name: "Bus 6" },
     { review: ambulanceReview, name: "Ambulance" },
     { review: ambulanceLightsReview, name: "Ambulance" },
     { review: policeReview, name: "Police car" },

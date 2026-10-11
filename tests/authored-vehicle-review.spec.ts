@@ -1,6 +1,12 @@
 import { expect, test } from "@playwright/test";
 
 for (const { asset, revision, name } of [
+  { asset: "bus-1", revision: "v1", name: "Bus 1" },
+  { asset: "bus-2", revision: "v1", name: "Bus 2" },
+  { asset: "bus-3", revision: "v1", name: "Bus 3" },
+  { asset: "bus-4", revision: "v1", name: "Bus 4" },
+  { asset: "bus-5", revision: "v1", name: "Bus 5" },
+  { asset: "bus-6", revision: "v1", name: "Bus 6" },
   { asset: "ambulance", revision: "v1", name: "Ambulance" },
   { asset: "ambulance", revision: "v2", name: "Ambulance" },
   { asset: "police-car", revision: "v1", name: "Police car" },
