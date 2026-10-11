@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [122 Native city workload](122-city-workload-profile.md) | Traffic terrain-read duplication, wide-view driving/replication and renderer attribution; thermal-limited phone scope; no runtime change |
 | [121 NPC movement profile and fauna lookup](121-npc-movement-profile.md) | Type registry removes repeated scans; 8.7% aggregate dense moving phone mean saving, mixed tails; slower box prototype reverted |
 | [120 Firetruck gameplay](120-firetruck-gameplay.md) | Own corrected v2 GLB in shared game/lab mesh mode; persistent siren/light state, driving buttons and boost |
 | [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |

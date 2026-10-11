@@ -340,6 +340,28 @@ parity, diagnostics, [evidence](../benchmarks/121-npc-movement-profile.json) and
 validation scope. Next: measure removal of ignored land/fully aquatic water reads
 with unchanged shore transitions; GPU/touch symptom tracing remains separate.
 
+[122](../tactical/122-city-workload-profile.md) zooms out to the real generated city,
+normal traffic/pedestrians, Worker, IndexedDB, driving and GPU rendering. Separate
+per-car/tick census records about 1,234 road and height reads each per standing
+core tick, with 81.7% duplicate cells. Sparse body candidates make terrain reuse a
+stronger first traffic candidate than another crowded-body change. Wide-view
+player driving still scans full resident lists (roughly 700–1,100 props in the
+captured neighborhoods); replication and interest/streaming also become material.
+Shallow desktop 0.05 overview driving averages 1.76–1.86ms server/2.33–2.45ms
+render CPU with about 617 raster draws/frame; camera residency grows while active
+pedestrians stay bounded. Normal-width phone driving has 7.7ms tick p95/16.7ms
+rAF p95 at 31.1–31.3°C/status zero. A 0.1 overview-driving warning lane reaches
+50ms rAF p95 with only 5.5ms tick p95, but ends at thermal status one and is not
+clean capacity acceptance. The fixed 32°C subsequent gate times out with zero
+cases; no cool-phone 0.05/GLB-city result exists. Two explicit desktop compact
+variants exercise actual mesh draws. [Evidence](../benchmarks/122-city-workload-profile.json)
+retains all 30 cases, pilots, capture flaws, failures and source/probe hashes.
+Next server slice: measure per-car lookahead road/height reuse with fresh live
+obstacle checks; wide-view driving candidates, snapshot/interest costs and actual
+phone main/GPU tracing are distinct follow-ups. 121's unused-water-read candidate
+remains lower priority after this native city profile. No runtime policy changes
+or original-desync explanation are established by 122.
+
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority
 ticks and acknowledgement tails; correction error stays below 0.00003px and

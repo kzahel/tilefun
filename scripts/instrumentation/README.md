@@ -97,6 +97,45 @@ Run these timing probes sequentially without concurrent validation. They charact
 known faults/workloads rather than asserting FPS acceptance or modifying gameplay.
 [Evidence and next work](../../docs/research/mobile-desync-investigation.md).
 
+## Native city workload
+
+`node scripts/instrumentation/city-audit.mjs --arrival=core --overview-zoom=0.05 --seconds=8 --warm-seconds=4 --output=/tmp/tilefun-city-audit`
+profiles standing, walking, driving, warmed overview and zoom entry in a fresh
+seed-2026 city through the real game, dedicated Worker, IndexedDB and GPU renderer.
+Use `--stages=standing,drive,overview-drive,zoom-entry` to select/order stages;
+repeated stage names are allowed. `--arrival=gateway` uses the existing city-center
+inspection; `core` uses the same plan's central north/south extent. Overview zooms
+are 0.05/0.1/0.25. Default GPU/mesh mode still has sprite fallbacks for native models.
+`--renderer=canvas` or `--meshes=false` changes the renderer control explicitly.
+
+Native driving setup stops and boards an existing horizontal-route car. Record its
+actual model, lane and pose: load/spawn timing can select different neighborhoods
+and populations, so these are workload profiles, not matched before/after controls.
+`--drive-model=compact-1` replaces that one car through the production factory to
+exercise actual authored GLB draws without increasing the car count; it is an
+explicit fixture variant. Subsequent motion uses native input. Travel and actual
+mesh draw counters distinguish blocked/unused-model runs. Captures retain timings,
+counts, server/frame timelines, input acknowledgement delay and correction error.
+`--deep=true` adds per-query/traffic counters and per-car/per-tick distinct terrain
+cells; `--cpu=true` samples only the owned Worker and main page at 1ms. Run these
+attribution lanes separately from shallow timings; inclusive phases overlap.
+
+Physical CDP uses `--cdp=URL --port=PORT --android-device-cli=PATH` and defaults to
+native touch joystick input (`--touch=false` selects keyboard). The default entry
+and post-setup gate is <=32°C/status zero; `--cooldown-seconds=60` is bounded.
+A changed end thermal status retains that capture and stops subsequent cases.
+Use machine-control's Android guide for owned USB routes, preserve original routes
+and foreground state, then remove only task-owned routes. The runner closes its
+own tabs/Workers/server and clears only its isolated origin; it disconnects CDP
+without closing the user's Chrome. Task-local private/raw reports remain outside
+Git. `--root=PATH --revision=LABEL` profiles a frozen Git archive; source/probe hashes
+are recorded alongside the supplied revision label.
+
+[122](../../docs/tactical/122-city-workload-profile.md) records the initial captures,
+thermal-stopped phone coverage, scene selection differences and next proposals.
+Callback cadence does not measure displayed GPU presentation; these profiles do
+not reproduce the original desync or establish crowded-city capacity.
+
 ## Render and authority rates
 
 `npx tsx scripts/instrumentation/prediction-rates.ts --output=/tmp/prediction-rates.json`
