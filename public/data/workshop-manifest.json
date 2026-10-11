@@ -6299,6 +6299,226 @@
       "excluded": "Exploratory orbit view; not an immutable approval snapshot."
     },
     {
+      "id": "projection:authored-car-7-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 7 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-7-v1/",
+      "kind": "projection",
+      "fingerprint": "39914f40e69c631edff144d5cca24fc168b7262e9d3806f82fba8574e1f28af2",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-8-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 8 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-8-v1/",
+      "kind": "projection",
+      "fingerprint": "51f119f96e31aa5934aa39cffc15bbd8d4679c7be0d568fe62e8f57b1c7cfa82",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-9-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 9 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-9-v1/",
+      "kind": "projection",
+      "fingerprint": "0db2343068df752de63c6610947c3a047c9dbb65b6902a32dfa3dc464c30806e",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-10-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 10 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-10-v1/",
+      "kind": "projection",
+      "fingerprint": "4c3c09ea1277c48d8eda74fba0ac5dc17372c41971fd48da98effe7c7d643dc6",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-11-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 11 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-11-v1/",
+      "kind": "projection",
+      "fingerprint": "b0eca6bd5f63a0eb0d9b81c7de395abd814217d6a8d465640aacc7432b193e9b",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-sedan-12-v1",
+      "batchId": "authored-vehicles",
+      "name": "Beige sedan 12 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/sedan-12-v1/",
+      "kind": "projection",
+      "fingerprint": "f76d4402ad2c9e2fe58d9073ece87ab51485c8fa80e4cf0be41c9b734973057d",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-13-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 13 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-13-v1/",
+      "kind": "projection",
+      "fingerprint": "c2e41d7da17fcf4378f2dcf9b6d47b0d66f5a791035e06f65c3d5ddaa8c947e0",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-14-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 14 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-14-v1/",
+      "kind": "projection",
+      "fingerprint": "112b615705b1499d1bd919cbc16f07b7483b7060ab4524a34cf70f5c9a1d145c",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-15-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 15 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-15-v1/",
+      "kind": "projection",
+      "fingerprint": "2e8a778d4a50cb38f82b766033295535aedca3c1c668af1480d61cbcb5dddbe9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-16-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 16 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-16-v1/",
+      "kind": "projection",
+      "fingerprint": "dbcffbaf8390be2746a3f3fddec23314a4cea88d73c32f4ba67dffd0d39918a0",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-17-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 17 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-17-v1/",
+      "kind": "projection",
+      "fingerprint": "7eb3bf243b40ed8b4871389a0ab1c7329f9913fb2638c08f7507d2a6bb938d62",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-18-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 18 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-18-v1/",
+      "kind": "projection",
+      "fingerprint": "c8999b9eeb2ab95aa14cdf7ac8965760c955651fa6aa9124f228f2a4ca9ec1ce",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-19-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 19 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-19-v1/",
+      "kind": "projection",
+      "fingerprint": "7815cb3dd41ae30e3c0c51cb688e6dc04a007eabf9f47ac9bb798af969938c76",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-20-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 20 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-20-v1/",
+      "kind": "projection",
+      "fingerprint": "317161780a953d169ecc3270edae2f81f70946d337c09e1ae051a7fd5a7f3aa9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-21-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 21 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-21-v1/",
+      "kind": "projection",
+      "fingerprint": "22276343016bd20f6e98f2fdcd3c4fbff95b21501c3359ffc8dc9791d60e933a",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-22-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 22 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-22-v1/",
+      "kind": "projection",
+      "fingerprint": "a7e55f35257da646a937f41fa23d25015dd90d90a2f0aef0345497303e1bdfa9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-23-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 23 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-23-v1/",
+      "kind": "projection",
+      "fingerprint": "ec4f86c2440faf37c242b4a93b69c1682922232f64009f2caef05d41271e744d",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-24-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 24 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-24-v1/",
+      "kind": "projection",
+      "fingerprint": "8cf2a9dcfebba94e8241bf3426ac37f2da96e6adccac22f8770967cf3d43bc77",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-25-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 25 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-25-v1/",
+      "kind": "projection",
+      "fingerprint": "0ab9f8e32d2cff31cb58155cbe403093b290403c5866a908f86e8d3c1704fbf5",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-car-26-v1",
+      "batchId": "authored-vehicles",
+      "name": "Car 26 · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/car-26-v1/",
+      "kind": "projection",
+      "fingerprint": "587f92632f640b1d467861f426d7f367cd2b73656948bbd12d677c7b3632f06e",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
       "id": "projection:authored-bus-1-v1",
       "batchId": "authored-vehicles",
       "name": "Bus 1 · authored model v1",
@@ -30202,5 +30422,5 @@
       }
     }
   ],
-  "inputDigest": "00cd3e276e22bc6489cc2ebd753a14ebb7fc9e47a125a0cfe18c507d4b9fa33c"
+  "inputDigest": "f6b1a54a610d45658bbe50ff7c447c3dba8a35277dd4e3452456992869856f81"
 }

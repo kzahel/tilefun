@@ -57,6 +57,17 @@ checks and additional sloped-floor rotation-sphere probes pass. Roof vent and
 opposing mirror projection differences remain explicit; whole-body nonzero
 steering is unqualified. All exact source/GLB/comparison dependencies are tracked.
 
+Twenty own-source large cars in [122](../tactical/122-complete-vehicle-port.md)
+bring the queue to 43 retained sets / 45 revisions and 41 own-asset integrations.
+Three separately fitted silhouette families preserve their own source paint,
+sloped glazing, geometric borders and four independent wheel assemblies.
+Actual exported tire/hub cylinder envelopes prove whole-body clearance through
+all neutral roll angles, including hood/cabin/fenders; deliberate collisions
+are rejected before retention. Nonzero steering and exact production art review
+remain open. Opposing roof highlights and camera-depth differences are explicit
+fitting limits. Orange garbage and raised fire remain the final two new models.
+
+
 ## Investigation evidence storage
 
 The evidence directories for investigations 070–075 under `docs/tactical/` are

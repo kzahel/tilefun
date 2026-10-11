@@ -1,0 +1,365 @@
+{
+  "family": "large-car-b",
+  "vehicles": [
+    "car-14",
+    "car-15",
+    "car-16",
+    "car-17",
+    "car-18",
+    "car-19",
+    "car-20"
+  ],
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -33,
+    "rear": 34,
+    "halfWidth": 13,
+    "endHalfWidth": 8,
+    "base": 0,
+    "belt": 13,
+    "frontDeck": 13,
+    "rearDeck": 13,
+    "mirrorOffset": 15,
+    "frontEndDeck": 9,
+    "rearEndDeck": 9,
+    "endBase": 0,
+    "cornerInset": 4
+  },
+  "cab": {
+    "front": -9,
+    "rear": 19,
+    "screenFront": -18,
+    "screenRear": 28,
+    "roof": 19,
+    "sideTop": 24,
+    "halfWidth": 10,
+    "roofPaintRect": [
+      28,
+      13,
+      51,
+      34
+    ],
+    "roofFillPixel": [
+      38,
+      35
+    ],
+    "frontScreenBase": 13,
+    "rearScreenBase": 13,
+    "windshieldPaintCorners": [
+      [
+        51,
+        36
+      ],
+      [
+        28,
+        36
+      ],
+      [
+        28,
+        47
+      ],
+      [
+        51,
+        47
+      ]
+    ],
+    "rearWindowPaintCorners": [
+      [
+        51,
+        35
+      ],
+      [
+        28,
+        35
+      ],
+      [
+        28,
+        49
+      ],
+      [
+        51,
+        49
+      ]
+    ],
+    "hoodPaintRect": [
+      28,
+      49,
+      52,
+      58
+    ],
+    "trunkPaintRect": [
+      28,
+      51,
+      52,
+      58
+    ],
+    "frontFasciaPaintRect": [
+      27,
+      55,
+      52,
+      61
+    ],
+    "rearFasciaPaintRect": [
+      27,
+      52,
+      52,
+      61
+    ]
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -20.5,
+      "radius": 6,
+      "trackHalfWidth": 13.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": true,
+      "centers": {
+        "east": [
+          60.5,
+          43.5
+        ],
+        "west": [
+          20.5,
+          43.5
+        ]
+      },
+      "paintRadii": [
+        6.5,
+        4.5
+      ]
+    },
+    {
+      "id": "R",
+      "x": 23.5,
+      "radius": 6,
+      "trackHalfWidth": 13.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": false,
+      "centers": {
+        "east": [
+          16.5,
+          43.5
+        ],
+        "west": [
+          64.5,
+          43.5
+        ]
+      },
+      "paintRadii": [
+        6.5,
+        4.5
+      ]
+    }
+  ],
+  "floorMargin": 1,
+  "maxCenterErrorPixels": 2,
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 50,
+      "horizontalScale": 1,
+      "verticalStretch": 1.17,
+      "origin": [
+        40,
+        43.19567944217589
+      ],
+      "status": "Independent large-car side well/roof fit; source east faces right."
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 50,
+      "horizontalScale": 1,
+      "verticalStretch": 1.17,
+      "origin": [
+        41,
+        43.19567944217589
+      ],
+      "status": "Independent large-car side well/roof fit; source east faces right."
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 46.78484332431897,
+      "horizontalScale": 1.1,
+      "verticalStretch": 1.0249532281646752,
+      "origin": [
+        40,
+        35.06320541760722
+      ],
+      "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 84.34257101169005,
+      "horizontalScale": 1.1,
+      "verticalStretch": 0.847720360749878,
+      "origin": [
+        40,
+        33.37763975155279
+      ],
+      "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+    }
+  },
+  "notes": [
+    "Independent tall hatchback body and own source paint; not a palette-only substitute.",
+    "Four-view alpha family gate preserves explicit crop shifts and localized skylight/door/trim exceptions.",
+    "Observed roof is rectified from north; opposing paint/projection disagreements remain explicit.",
+    "Wheel floor rest/roll qualified separately; only neutral steering is supported.",
+    "Glass and deck UVs use bounded observed rectangles so adjacent sky/hood/fascia pixels cannot leak; this retains own palette/graphic exceptions.",
+    "End camera depths and fascia height disagree between opposite source drawings; inspect exact native and novel angles instead of assuming a universal projection.",
+    "Deck, glass and end fascia UVs are bounded own observed regions; curved corners belong to own side views. This prevents duplicate glass, bumper and roof graphics across adjoining surfaces.",
+    "Hidden geometry and source projection contradictions are explicit; normalized alpha does not establish identical unseen paint or shape.",
+    "Wheel clearance: belt and inner hood/trunk deck are above the radius-6 tire envelope; tapered end decks retain the source bumper height. Actual GLB cylinder proof covers every neutral roll angle; steering is unqualified."
+  ],
+  "landmarks": {
+    "north": [
+      {
+        "x": -39,
+        "z": 10,
+        "canvasY": 3
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 39
+      },
+      {
+        "x": 37,
+        "z": 4,
+        "canvasY": 74
+      }
+    ],
+    "south": [
+      {
+        "x": 37,
+        "z": 9,
+        "canvasY": 3
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 37
+      },
+      {
+        "x": -39,
+        "z": 4,
+        "canvasY": 74
+      }
+    ]
+  },
+  "seed": "car-15",
+  "sourceRegistration": {
+    "seed": "car-15",
+    "vehicle": "car-19",
+    "observations": [
+      {
+        "view": "east",
+        "seedRect": [
+          1040,
+          5600,
+          80,
+          48
+        ],
+        "targetRect": [
+          688,
+          5504,
+          80,
+          48
+        ],
+        "seedRgbaSha256": "d53ef6d8c81aae442d48f257d610cabadf42cd88febc3180d721f47bb4a20286",
+        "targetRgbaSha256": "b3557861045e05261ffa95981fd5fdb179f1b40969a5ba3ab9259687c7c86d10",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "west",
+        "seedRect": [
+          1040,
+          5648,
+          80,
+          48
+        ],
+        "targetRect": [
+          688,
+          5552,
+          80,
+          48
+        ],
+        "seedRgbaSha256": "304bc8f29552611758ac9906118acf984092dc5f0f5efdf8b790d404cacfa9ef",
+        "targetRgbaSha256": "b663423204b542c2907373ccc8ed61af8d81ee14994a5267600b5b7c29423977",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "north",
+        "seedRect": [
+          1168,
+          5616,
+          48,
+          64
+        ],
+        "targetRect": [
+          816,
+          5520,
+          48,
+          64
+        ],
+        "seedRgbaSha256": "c04b12cd8d95f914f5ea8eff845e90f89f6c8c3612e2b5f5d9adcbc9f88527e3",
+        "targetRgbaSha256": "508de524ef9d84f6b7abc0679e9a75e1219567dd89072cdead8433aef99e1c0c",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      },
+      {
+        "view": "south",
+        "seedRect": [
+          1120,
+          5616,
+          48,
+          64
+        ],
+        "targetRect": [
+          768,
+          5520,
+          48,
+          64
+        ],
+        "seedRgbaSha256": "68a64fdc21e7511fb4a6bdb35dc26a75c06217d940ba57752e0d5a41e1f8c2dc",
+        "targetRgbaSha256": "5ff820d043974b9490c0d74cc1d3f4a0fbde3c32bcf2fbe419c79a3a79035fad",
+        "canvasOriginDelta": [
+          0,
+          0
+        ],
+        "normalizedAlpha": "exact"
+      }
+    ],
+    "paint": "Every UV owner samples this vehicle, including local paint exceptions."
+  },
+  "wheels": {
+    "radius": 6
+  }
+}

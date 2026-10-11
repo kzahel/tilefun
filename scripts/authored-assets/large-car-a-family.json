@@ -1,0 +1,164 @@
+{
+  "family": "large-car-a",
+  "vehicles": ["car-7", "car-8", "car-9", "car-10", "car-11", "sedan-12", "car-13"],
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -39,
+    "rear": 39,
+    "halfWidth": 14,
+    "endHalfWidth": 9,
+    "base": 0,
+    "belt": 13,
+    "frontDeck": 13,
+    "rearDeck": 13,
+    "mirrorOffset": 16,
+    "frontEndDeck": 11,
+    "rearEndDeck": 11,
+    "endBase": 0
+  },
+  "cab": {
+    "front": -9,
+    "rear": 18,
+    "screenFront": -23,
+    "screenRear": 29,
+    "roof": 22,
+    "sideTop": 24,
+    "halfWidth": 12,
+    "roofPaintRect": [28, 22, 51, 42],
+    "roofFillPixel": [38, 35],
+    "frontScreenBase": 13,
+    "rearScreenBase": 13,
+    "windshieldPaintCorners": [[51, 46], [28, 46], [28, 56], [51, 56]],
+    "rearWindowPaintCorners": [[51, 45], [28, 45], [28, 56], [51, 56]],
+    "hoodPaintRect": [27, 58, 52, 70],
+    "trunkPaintRect": [27, 58, 52, 70],
+    "frontFasciaPaintRect": [27, 70, 52, 76],
+    "rearFasciaPaintRect": [27, 70, 52, 76]
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -24.5,
+      "radius": 6,
+      "trackHalfWidth": 14.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": true,
+      "centers": {
+        "east": [64.5, 43.5],
+        "west": [14.5, 43.5]
+      },
+      "paintRadii": [6.5, 4.5]
+    },
+    {
+      "id": "R",
+      "x": 21.5,
+      "radius": 6,
+      "trackHalfWidth": 14.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": false,
+      "centers": {
+        "east": [18.5, 43.5],
+        "west": [60.5, 43.5]
+      },
+      "paintRadii": [6.5, 4.5]
+    }
+  ],
+  "floorMargin": 1,
+  "maxCenterErrorPixels": 2,
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 50,
+      "horizontalScale": 1,
+      "verticalStretch": 1.17,
+      "origin": [40, 50.29940744372668],
+      "status": "Independent large-car side well/roof fit; source east faces right."
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 50,
+      "horizontalScale": 1,
+      "verticalStretch": 1.17,
+      "origin": [39, 50.29940744372668],
+      "status": "Independent large-car side well/roof fit; source east faces right."
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 49.572665186690216,
+      "horizontalScale": 1,
+      "verticalStretch": 1.0825573627321223,
+      "origin": [39.5, 44.861111111111114],
+      "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 75.75264555113164,
+      "horizontalScale": 1,
+      "verticalStretch": 0.9066751440293338,
+      "origin": [39.5, 42.72727272727273],
+      "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+    }
+  },
+  "notes": [
+    "Independent long sedan body, source-owned roof/window/side paint; no palette-only approximation.",
+    "Four-view alpha family gate preserves explicit crop shifts and localized skylight/door/trim exceptions.",
+    "Observed roof is rectified from north; opposing paint/projection disagreements remain explicit.",
+    "Wheel floor rest/roll qualified separately; only neutral steering is supported.",
+    "Deck, glass and end fascia UVs are bounded own observed regions; curved corners belong to own side views. This prevents duplicate glass, bumper and roof graphics across adjoining surfaces.",
+    "Hidden geometry and source projection contradictions are explicit; normalized alpha does not establish identical unseen paint or shape.",
+    "Wheel clearance: belt and inner hood/trunk deck are above the radius-6 tire envelope; tapered end decks retain the source bumper height. Actual GLB cylinder proof covers every neutral roll angle; steering is unqualified."
+  ],
+  "landmarks": {
+    "north": [
+      {
+        "x": -39,
+        "z": 10,
+        "canvasY": 3
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 39
+      },
+      {
+        "x": 37,
+        "z": 4,
+        "canvasY": 74
+      }
+    ],
+    "south": [
+      {
+        "x": 37,
+        "z": 9,
+        "canvasY": 3
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 37
+      },
+      {
+        "x": -39,
+        "z": 4,
+        "canvasY": 74
+      }
+    ]
+  },
+  "seed": "car-8"
+}

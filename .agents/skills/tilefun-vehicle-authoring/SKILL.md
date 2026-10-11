@@ -154,3 +154,14 @@ using retained, available review assets; chat feedback is not a formal promotion
 Follow the project's validation and
 inventory commands, reporting existing platform failures separately. Update
 the owning topic and tactical, and name the next family-specific fitting step.
+
+
+For large cars 7–26, use the three explicit `large-car-*-family.json`
+configurations and `prepare_large_car.py` / `retain_large_car.py`.
+Retain only after actual exported whole-body wheel-envelope qualification:
+`verify_body_wheel_envelopes.py` proves every neutral roll angle against
+hood, cabin, fenders and floors, rejects a hood deliberately moved into tires,
+and pins the exact GLB hash in `body-wheel-clearance.json`. A passing main-floor
+or independent-wheel probe alone does not establish whole-body clearance.
+Keep the bounded own roof/glass/deck UV regions and geometric window frames;
+do not transfer cameras or hidden paint merely because source alpha matches.

@@ -1,0 +1,41 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-car-10-v1",
+  "candidateFingerprint": "4c3c09ea1277c48d8eda74fba0ac5dc17372c41971fd48da98effe7c7d643dc6",
+  "identity": {
+    "assetId": "car-10",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "47a650f33985c8d1ac6f2be893e4efbd618f0bd5397c1532501bc30861d27f3a",
+    "sourceAtlasSha256": "ab095a4c8c515e3e6ff557b88dc2fad61b14c52a0e71ef8e0eec55f47f62a02d",
+    "files": [
+      {
+        "url": "assets/models/vehicles/car-10-v1.glb",
+        "sha256": "63ffebaf44ccf8340c95647a144d0071dc007357e73f31b25cbe0cdf81f0dd7e"
+      },
+      {
+        "url": "assets/models/vehicles/review/car-10-v1/comparison.png",
+        "sha256": "ef75aeff8b7ae9ceaaa9c8e590b2e9853bd406548eea595fb57c18b1315a8824"
+      },
+      {
+        "url": "assets/models/vehicles/review/car-10-v1/orbit.png",
+        "sha256": "2f17b1ace6cc2770ba44ce94a0bd5ed7b184537e53dfa76c957e2930d3819587"
+      },
+      {
+        "url": "assets/models/vehicles/review/car-10-v1/silhouette.png",
+        "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+      }
+    ]
+  },
+  "name": "Car 10",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent long sedan body, source-owned roof/window/side paint; no palette-only approximation.",
+    "Four-view alpha family gate preserves explicit crop shifts and localized skylight/door/trim exceptions.",
+    "Observed roof is rectified from north; opposing paint/projection disagreements remain explicit.",
+    "Wheel floor rest/roll qualified separately; only neutral steering is supported.",
+    "Deck, glass and end fascia UVs are bounded own observed regions; curved corners belong to own side views. This prevents duplicate glass, bumper and roof graphics across adjoining surfaces.",
+    "Hidden geometry and source projection contradictions are explicit; normalized alpha does not establish identical unseen paint or shape.",
+    "Wheel clearance: belt and inner hood/trunk deck are above the radius-6 tire envelope; tapered end decks retain the source bumper height. Actual GLB cylinder proof covers every neutral roll angle; steering is unqualified."
+  ]
+}

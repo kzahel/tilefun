@@ -165,3 +165,50 @@ one load result; it is excluded from qualification. No introduced browser failur
 remains.
 Logs are `data/authored-assets/bus-*.log`; current counts and every vehicle's
 next action live in the owning topic.
+
+
+### Large-car checkpoint
+
+Twenty v1 large cars are retained in three independent A/B/C bodies, with their
+own frozen references, clean UV atlas, unused draft/coverage and packed editable
+Blender scene. Each has 34 meshes, four radius-six wheel assemblies and two
+separately declared tapered floors; A/C have 1,100 triangles and B has 1,096.
+All native 4×2 and novel-angle strips inspected. Owned bounded roof/glass/deck
+UV regions and separate geometric borders avoid cross-surface window paint.
+Localized stripes, skylight and palette exceptions remain source-owned.
+Opposing roof highlights and incompatible end-camera depths remain review limits.
+
+A full-body check discovered hood/cabin/wheel crossings in the initial scratch
+fits, despite passing main-floor checks. Those fits were never retained. The
+final belt/decks/cabin bases are raised to 13, retaining the lower end bumper
+height. Actual GLB triangle clipping against exported tire/hub cylinders proves
+positive whole-body clearance through every neutral roll angle for all twenty.
+Minimum tire gaps are 0.47996 for A/C and 0.28318 for B. Deliberately lowered hood,
+displaced axle and solid floor are rejected, with exact reset. Wheel centers fit
+native side landmarks within 1.5e-7 pixels. Separate tapered floors clear rotation
+spheres by at least 2.39999 A, 0.39999 B and 1.39999 C model units. Nonzero steering
+remains unqualified; runtime steering stays neutral.
+
+The own-asset registry uses radius 80 and authored width for all twenty. Actual
+shared GPU checks pass all 41 integrations: visible native pixels are 3,407 for A,
+2,672 B and 3,055 C, with byte-exact absolute reset,
+simulation isolation, lazy-load fallback and resource disposal. All 45 retained
+bundles verify; 33 Python tests, typecheck/lint and 78 focused pose/culling/frame
+tests pass. Initial full unit run had twenty newly stale culling expectations,
+corrected for the larger enclosing mesh radius, plus the five known Windows
+symlink/SIGKILL failures. Earlier assets and exact review identities are preserved.
+Git index checkout `data/authored-assets/full-vehicle-port/large-tracked-001/`
+verifies all 45 retained bundles and 42 constructor/config receipts, audits every
+packed Blender atlas/reference, and passes the 41-asset actual GPU probe. All
+twenty recipes reproduce their eight native/novel hashes exactly (160 frames).
+Workshop verifies 803 candidates / 55 exclusions; all 783 earlier candidate
+records and all 25 earlier retained catalog entries are unchanged. Full unit
+rerun: 2,519 pass / 10 skipped; five known Windows symlink/SIGKILL cases and a
+loaded Workshop timeout remain. Isolated Workshop file passes all 13 tests.
+Full Chromium: 595 pass / 1 skipped / 7 fail. Stable rerun clears pinch, reload
+and tap/fullscreen timing cases; the two known phone-layout cases and Canvas/plain
+GPU driving failures remain from earlier baselines. The PWA static-assets test
+was scanning large local authoring trees through an unnecessary HMR watcher;
+disabling that watcher clears both launcher tests (2 pass). All twenty gameplay
+selections, own GPU loading and failed-load sprite fallback pass. No introduced
+browser failure remains. Logs are `data/authored-assets/large-*.log`.

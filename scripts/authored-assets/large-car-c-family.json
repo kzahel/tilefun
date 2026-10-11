@@ -1,0 +1,167 @@
+{
+  "family": "large-car-c",
+  "vehicles": ["car-21", "car-22", "car-23", "car-24", "car-25", "car-26"],
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -35,
+    "rear": 36,
+    "halfWidth": 14,
+    "endHalfWidth": 9,
+    "base": 0,
+    "belt": 13,
+    "frontDeck": 13,
+    "rearDeck": 13,
+    "mirrorOffset": 16,
+    "frontEndDeck": 11,
+    "rearEndDeck": 11,
+    "endBase": 0,
+    "cornerInset": 6
+  },
+  "cab": {
+    "front": -8,
+    "rear": 13,
+    "screenFront": -21,
+    "screenRear": 26,
+    "roof": 22,
+    "sideTop": 24,
+    "halfWidth": 12,
+    "roofPaintRect": [28, 26, 51, 44],
+    "roofFillPixel": [38, 35],
+    "frontScreenBase": 13,
+    "rearScreenBase": 13,
+    "windshieldPaintCorners": [[51, 46], [28, 46], [28, 58], [51, 58]],
+    "rearWindowPaintCorners": [[51, 45], [28, 45], [28, 59], [51, 59]],
+    "hoodPaintRect": [27, 60, 52, 70],
+    "trunkPaintRect": [27, 61, 52, 68],
+    "frontFasciaPaintRect": [27, 68, 52, 73],
+    "rearFasciaPaintRect": [27, 62, 52, 71]
+  },
+  "axles": [
+    {
+      "id": "F",
+      "x": -18.5,
+      "radius": 6,
+      "trackHalfWidth": 13.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": true,
+      "centers": {
+        "east": [58.5, 43.5],
+        "west": [21.5, 43.5]
+      },
+      "paintRadii": [6.5, 4.5]
+    },
+    {
+      "id": "R",
+      "x": 22.5,
+      "radius": 6,
+      "trackHalfWidth": 13.2,
+      "tireWidth": 2.2,
+      "hubRadius": 2.5,
+      "steering": false,
+      "centers": {
+        "east": [17.5, 43.5],
+        "west": [62.5, 43.5]
+      },
+      "paintRadii": [6.5, 4.5]
+    }
+  ],
+  "floorMargin": 1,
+  "maxCenterErrorPixels": 2,
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 50,
+      "horizontalScale": 1,
+      "verticalStretch": 1.17,
+      "origin": [40, 51.19567944217589],
+      "status": "Independent large-car side well/roof fit; source east faces right."
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 50,
+      "horizontalScale": 1,
+      "verticalStretch": 1.17,
+      "origin": [40, 51.19567944217589],
+      "status": "Independent large-car side well/roof fit; source east faces right."
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 60.407131603826166,
+      "horizontalScale": 1.08,
+      "verticalStretch": 0.9235732310975339,
+      "origin": [39.5, 43.775510204081634],
+      "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 75.43972438064309,
+      "horizontalScale": 1.08,
+      "verticalStretch": 0.8548787063485409,
+      "origin": [39.5, 42.72340425531915],
+      "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+    }
+  },
+  "notes": [
+    "Independent coupe body and own source paint; not a palette-only substitute.",
+    "Four-view alpha family gate preserves explicit crop shifts and localized skylight/door/trim exceptions.",
+    "Observed roof is rectified from north; opposing paint/projection disagreements remain explicit.",
+    "Wheel floor rest/roll qualified separately; only neutral steering is supported.",
+    "Glass and deck UVs use bounded observed rectangles so adjacent sky/hood/fascia pixels cannot leak; this retains own palette/graphic exceptions.",
+    "End camera depths and fascia height disagree between opposite source drawings; inspect exact native and novel angles instead of assuming a universal projection.",
+    "Deck, glass and end fascia UVs are bounded own observed regions; curved corners belong to own side views. This prevents duplicate glass, bumper and roof graphics across adjoining surfaces.",
+    "Hidden geometry and source projection contradictions are explicit; normalized alpha does not establish identical unseen paint or shape.",
+    "Wheel clearance: belt and inner hood/trunk deck are above the radius-6 tire envelope; tapered end decks retain the source bumper height. Actual GLB cylinder proof covers every neutral roll angle; steering is unqualified."
+  ],
+  "landmarks": {
+    "north": [
+      {
+        "x": -39,
+        "z": 10,
+        "canvasY": 3
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 39
+      },
+      {
+        "x": 37,
+        "z": 4,
+        "canvasY": 74
+      }
+    ],
+    "south": [
+      {
+        "x": 37,
+        "z": 9,
+        "canvasY": 3
+      },
+      {
+        "x": 12,
+        "z": 27,
+        "canvasY": 18
+      },
+      {
+        "x": -11,
+        "z": 27,
+        "canvasY": 37
+      },
+      {
+        "x": -39,
+        "z": 4,
+        "canvasY": 74
+      }
+    ]
+  },
+  "seed": "car-24"
+}

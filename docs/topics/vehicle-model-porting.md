@@ -1,8 +1,8 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 23 models retained, 21 integrated
-in game/lab mesh mode. All six compacts, seven additional sedans, six buses, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
+Status: 45 sprite sets inventoried; 43 models retained, 41 integrated
+in game/lab mesh mode. All six compacts, seven additional sedans, six buses, all 20 large cars, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
 Exact model art review remains open.
 Updated: 2026-10-11.
 
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **23/45 retained models, 22/45 queued; 21/45 own-model
+Current progress: **43/45 retained models, 2/45 queued; 41/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -104,9 +104,9 @@ with mirror variation is a fitting candidate. Garbage trucks differ at 34 west
 silhouette pixels after translation, with exact shapes in the other three views.
 Neither near-match bypasses the strict reuse checks.
 
-Suggested larger batch: one new additional sedan template and six siblings,
-plus the three queued compacts (ten models). A six-bus batch is the next useful
-new family, with mirror/paint/registration exceptions preserved. Each vehicle
+The compact, additional sedan, six-bus and twenty-large-car batches are retained
+and integrated. The remaining authoring work is orange garbage and raised fire,
+plus police/green-garbage integration and final cross-vehicle qualification. Each vehicle
 still requires its own source paint, exact retained bundle and 4×2 inspection.
 The audit does not advance any model/engine/review status.
 
@@ -122,7 +122,7 @@ The audit does not advance any model/engine/review status.
   retain [family findings](../tactical/121-vehicle-source-families.md).
 - [ ] Fit the **three large-car shape families and additional sedan family**;
   qualify internal geometry before transferring source-owned paint.
-- [ ] Fit a **bus** template, then its variants; preserve asymmetric door art.
+- [x] Fit a **bus** template, then its variants; preserve asymmetric door art.
 - [x] Author **police car** and **stowed fire truck** with their own geometry,
   source paint, wheel rigs and tagged lights; retain exact bundles and reviews.
 - [ ] Fit the **raised fire ladder** pose and qualify hinge/steering clearance.
@@ -162,30 +162,30 @@ models have been started. The later family order can change with owner prioritie
 
 The source numbering spans 7–26; number 12 is named `sedan-12`. The source audit
 establishes three exact silhouette groups above; internal geometry and fitted
-Blender templates still need qualification.
+Blender templates now have actual GLB whole-body neutral-roll qualification.
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `car-7` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-8` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-9` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-10` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-11` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `sedan-12` (beige) | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-13` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-14` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-15` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-16` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-17` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-18` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-19` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-20` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-21` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-22` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-23` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-24` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-25` | Queued | Pending | Inspect four views; identify body family and template route. |
-| `car-26` | Queued | Pending | Inspect four views; identify body family and template route. |
+| `car-7` | [Retained v1](../../art-source/vehicle-models/car-7/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-8` | [Retained v1](../../art-source/vehicle-models/car-8/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-9` | [Retained v1](../../art-source/vehicle-models/car-9/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-10` | [Retained v1](../../art-source/vehicle-models/car-10/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-11` | [Retained v1](../../art-source/vehicle-models/car-11/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `sedan-12` (beige) | [Retained v1](../../art-source/vehicle-models/sedan-12/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-13` | [Retained v1](../../art-source/vehicle-models/car-13/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-14` | [Retained v1](../../art-source/vehicle-models/car-14/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-15` | [Retained v1](../../art-source/vehicle-models/car-15/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-16` | [Retained v1](../../art-source/vehicle-models/car-16/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-17` | [Retained v1](../../art-source/vehicle-models/car-17/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-18` | [Retained v1](../../art-source/vehicle-models/car-18/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-19` | [Retained v1](../../art-source/vehicle-models/car-19/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-20` | [Retained v1](../../art-source/vehicle-models/car-20/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-21` | [Retained v1](../../art-source/vehicle-models/car-21/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-22` | [Retained v1](../../art-source/vehicle-models/car-22/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-23` | [Retained v1](../../art-source/vehicle-models/car-23/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-24` | [Retained v1](../../art-source/vehicle-models/car-24/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-25` | [Retained v1](../../art-source/vehicle-models/car-25/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
+| `car-26` | [Retained v1](../../art-source/vehicle-models/car-26/v1/) | Default GPU integrated | Review exact 4×2 and opposing roof/camera limitations; neutral-roll whole-body clearance verified, steering unqualified. |
 
 ### Additional sedans — 7 sets
 
@@ -236,3 +236,14 @@ must appear here as new rows; obsolete rows need an explicit scope decision.
 
 Source-family references and crop caveats: [road vehicle audit](../research/road-vehicles.md).
 Authoring commands: [workflow](../../scripts/authored-assets/README.md).
+
+
+Twenty large cars now use three independent fitted bodies and their own paint,
+with four radius-six wheels, sloped glazing and separate frames. All native 4×2
+and novel angles were inspected. Actual GLB cylinder proofs cover hood, cabin,
+fenders and floors through every neutral wheel-roll angle; lowered-hood,
+displaced-axle and solid-floor negative probes reject collisions. Inner decks
+and cabin bases were corrected before retention after an initial floor-only
+check missed hood/window intersections. Nonzero steering is unqualified.
+Own end/roof UV paint preserves localized exceptions, while incompatible source
+camera depths and opposing roof highlights remain exact-revision review limits.

@@ -3094,6 +3094,2666 @@
         "orbit-2.png": "b9574ee5ce68b7ea85fcb1d6c3ffaf242b56d0921631b828d8465faa57d6128d",
         "orbit-3.png": "e934fce69df28c94e27ad7cf789af2963ff7ef6f443a5f8b5e8ff76283f9125d"
       }
+    },
+    {
+      "assetId": "car-7",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-7-v1.glb",
+      "source": "art-source/vehicle-models/car-7/v1",
+      "capturedCandidateId": "projection:authored-car-7-v1",
+      "capturedCandidateSha256": "39914f40e69c631edff144d5cca24fc168b7262e9d3806f82fba8574e1f28af2",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-7/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/body-wheel-clearance.json",
+          "sha256": "2a8dc8204a10bcda6d10bb2b32ffbe335a1c32b7cf32b63bad9db6bfab86a3d2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/car-atlas.png",
+          "sha256": "ffcc39cdb00313e010a4edc1eaa9a71008acd7c740a301cd5263306d03e7d9a7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/car.blend",
+          "sha256": "e15be81bb318c4c6d6d6b49299e567bce5f7484aca33aeb226389a8fdf5b089d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/family-config.json",
+          "sha256": "7caea6566f95776abc11e354cc5a99b07d4663edf8870244e03ffdb1b4316b57"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/inspection.json",
+          "sha256": "bad5852287bf46058acd83f27a9f0b88b44c32aedd91d563e47b04d86f3f30d0"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/mesh-spec.json",
+          "sha256": "31a8bb67e6dafc065c3c592f09d3ef0bb172c2ed9e00133534e7fab80bdd0875"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/projection-draft.png",
+          "sha256": "159d73f9472a1a54d518945d4be736ea79b3d8c0648b4d156bf76bf6f7bf0d92"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/projection-with-authored-fill.png",
+          "sha256": "309166916adbc9ab841148c50339b3cd14cc6ad57de23b04786180f8c5c38915"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/recipe.json",
+          "sha256": "0a4e8f8899965a5d2d5301f14bbf90e3922db6bb031599503b526bc70d666b5b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/refs/east.png",
+          "sha256": "f4f31610e6c3ab4b00846da2642fa5c8ff0765ad9b7fe25ffdab21a03619819d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/refs/north.png",
+          "sha256": "effbdf3f1dbdf1ed111ddfb4255b7b200ab4965b149720282ba4b841431e8235"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/refs/south.png",
+          "sha256": "b4c7fbd5a6155114ab0f71aa1f2e2dac1063f57371cdeb3a7b313fb7526eee4b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/refs/west.png",
+          "sha256": "e0d7fae3862cf543d3a1c8ebc3ff3a7046ffccd496aba8fc3e8b4d2ee72a28ca"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/car-7/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-7-v1.glb",
+          "sha256": "9ec3c990b0b171f8fa7a123bd03d264968af99b495e31948d593a327665392ce"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-7-v1/comparison.png",
+          "sha256": "cca670be10889a0ea85ce067e3075d34f441d395e517bc4d5d1cfc411727787d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-7-v1/index.html",
+          "sha256": "b4e8284831d00de13573ab3c8d9907bcd659c8edd1a8ae11a239a09093c5b5d7"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-7-v1/orbit.png",
+          "sha256": "66ff132881bfa530ab2a4f4802c57247750e2ebad7db926554875894f8a5fb5c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-7-v1/review.json",
+          "sha256": "ce84ba887802c74b5c119b07d5a34cc0fede8e2418cfdd0b09fa7eb9459a369b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-7-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "e1e072e01c22773b9657708ed1763562be1e3543a07be92c9ac0406803db3a37",
+        "west-render.png": "5317ad72fd76b2df109bd9fc6f7709e842135e51ece794c88a16ca146168cf60",
+        "north-render.png": "e72a806a315a8c3d33a5716a3da45a2660f34f2e92d6ccea2d527ba9fa6cdde3",
+        "south-render.png": "9115f15108c7a96ff2a1a577a65f64fa35df1062d8cf9bbce83f86cf22d0615b",
+        "orbit-0.png": "569fb5bc9a78d28ad7f481e48a13a389a535eb5cfe2516fe088ec83df3fa6e1c",
+        "orbit-1.png": "a5f92ae3c8c0dad48fba22218c9df20c2601848676d5a3e19c0bafefeb564b9a",
+        "orbit-2.png": "0913d885be3c8ec1d7d6b3baf998e960fbfb034759f73fc8fbac970e737bf623",
+        "orbit-3.png": "44f9755b72f799bfa519577aac8e21617784a28c3e7d5f68faf893ece62bd772"
+      }
+    },
+    {
+      "assetId": "car-8",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-8-v1.glb",
+      "source": "art-source/vehicle-models/car-8/v1",
+      "capturedCandidateId": "projection:authored-car-8-v1",
+      "capturedCandidateSha256": "51f119f96e31aa5934aa39cffc15bbd8d4679c7be0d568fe62e8f57b1c7cfa82",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-8/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/body-wheel-clearance.json",
+          "sha256": "9c16b71ce0375619a3d92fbf410d0a53ca9ca38ceded83ce62aec91ba44d1ab7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/car-atlas.png",
+          "sha256": "3ca3c3d29d1fa30b5efe8a729317298f8f1b05e4c0f9fb2c97ab0a64e192f1cf"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/car.blend",
+          "sha256": "e3f920d2d1ccd24ff9e652e7655fc866dc1a164ce9e25a02fcbd09a55714081c"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/family-config.json",
+          "sha256": "8935189a100b171b2a138e3140d4628a1f49de4def0ce64645ef926b483a3bf1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/inspection.json",
+          "sha256": "afe1ea739397f0666fff6a4d968fe8a2ffa44e001dae913519f361c1e2e1d02b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/mesh-spec.json",
+          "sha256": "23a80bfb176eb4ec354d8ac30e2fd5565157ad25abb51dab7849d3198e8c437c"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/projection-draft.png",
+          "sha256": "8c9584187b444c312fae668f03f64d602892e0e1d461d217337e6e8efd1f1e37"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/projection-with-authored-fill.png",
+          "sha256": "98718d14f5c502d8c4d30c1279d6ea4156d1b7853bb83a68dc8f110198f4d7f8"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/recipe.json",
+          "sha256": "00dfc449098173eb3d90554d2c89a91c6e5c42a7428c0f5bd6dd71c70f454d88"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/refs/east.png",
+          "sha256": "fd389b64db2fe6c4daf9f22427068ee7511394d5d79aa24f6d3bfc0ef27d8f36"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/refs/north.png",
+          "sha256": "1b5aa9b15c5a52fd25765838b6e3a9be417abd0211b095f78b8ce2001b2c61f7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/refs/south.png",
+          "sha256": "9f3367b450c10510cf258d564784310dc6fec5db75a1c01fd5a88a8d503ab7c1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/refs/west.png",
+          "sha256": "6cfa5fa43e546ba7299f6d6edb5be1a2598019defabbb0d57cc4f3404b23dfba"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/car-8/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-8-v1.glb",
+          "sha256": "26057d0bc3f5bff102187ef3ab375f93d7fb5d1ecf4996c603f9118e6ff02759"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-8-v1/comparison.png",
+          "sha256": "6da24d1a6b78d702504373dd9ce318f4de0cb0dbf5c557dacd8cd3c9e275ba1d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-8-v1/index.html",
+          "sha256": "de408d3ad6f01d5d9719dfbda9249eb36b07980511e8734d7fe41304f193c21d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-8-v1/orbit.png",
+          "sha256": "3ec496f5b408450bc04828a6e707b223f770fcbb3ecce0d846267d6f8fbfd37f"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-8-v1/review.json",
+          "sha256": "529f50b3c217af57d65bbd88cb878260d36ff1c6f8c6e4fdcbb5e135fa1d257c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-8-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "f877791b55b788221b0cd9567d7447a082ecbc280c3a3e8d59e68680c6a15e27",
+        "west-render.png": "8b51b77211fe52c40d70b90929339af9220ebcdcc7280ba18dcf52bf8025c6e2",
+        "north-render.png": "1f1051e11fd2c820e343fccbd577c69ebda4227677b0bf1f513e6670e7eec052",
+        "south-render.png": "5d45b0cb5acac72b5ac746b61a6ee012ea740a601fde193dd0f7e6f80f8d01dc",
+        "orbit-0.png": "5bd8d78813af19100725309d2162bfe2c9279add276b4c8eba59459cefaa425d",
+        "orbit-1.png": "a740c94853880ea36272444fb30df88f534a29b4cf07f16df6d2743c9a6d73a9",
+        "orbit-2.png": "49a1cc24761710b200ae0fee4d395d0bf0bc2e436c0d73514fc4dfe5a89478dc",
+        "orbit-3.png": "23c27e7c8211e711b33e2ed33a581854be18a7c6ffd70c53074d6a4826639003"
+      }
+    },
+    {
+      "assetId": "car-9",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-9-v1.glb",
+      "source": "art-source/vehicle-models/car-9/v1",
+      "capturedCandidateId": "projection:authored-car-9-v1",
+      "capturedCandidateSha256": "0db2343068df752de63c6610947c3a047c9dbb65b6902a32dfa3dc464c30806e",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-9/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/body-wheel-clearance.json",
+          "sha256": "d458de606b2e23bb768f6ade5aa3aa8866cbbe9bbd10b80837f28ae23df64d8d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/car-atlas.png",
+          "sha256": "083d7804d3b3d2d437d678e77874d55461d237393d9914b4b9b2e5f9256a507f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/car.blend",
+          "sha256": "ff762d4e77369c9277e671499fe200100fdb40f489b4a4f4fe4294d82089d861"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/family-config.json",
+          "sha256": "ff1eea87a457dac324c07914b64c4f6e7f2435f1c70637ca64f0b32397f87118"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/inspection.json",
+          "sha256": "7869660aa467252660bf357060026da75388ae0c83c1105d854356ba9197f41e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/mesh-spec.json",
+          "sha256": "e2423c3a637af49ec557b694cef23fa4eb2f6a79e02d53e1c15c11c5e218e916"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/projection-draft.png",
+          "sha256": "85518c6f0608986ffe6673d664dc0682bfdb09d0fb4c994f5095d342ef0cfb35"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/projection-with-authored-fill.png",
+          "sha256": "afc0d53a468033db257bc7e10b9006150caa12972669b38c34c5b63704ed1755"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/recipe.json",
+          "sha256": "6aba5e77a289c170f441c1cf16d27d507f55f0cfb6381ce45e0fe04b8e217b90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/refs/east.png",
+          "sha256": "e293d43bf23f58599770164efc43cc5d0c7fb260d4cf90f2ab7dff2e881f1f57"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/refs/north.png",
+          "sha256": "b940c4e5b51416ab8bdc4ddb83bb5566545b644caf5fe95e8674020d5061835b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/refs/south.png",
+          "sha256": "b97bcf8d3ae208123800aa1c8ed6c203a35952e72ce7523d88e3295eddfadcb0"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/refs/west.png",
+          "sha256": "53069887438d84f031ac5618f87e5130902a4313c1aff041f09fa8251a114144"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/car-9/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-9-v1.glb",
+          "sha256": "9eabfae8b60a3b4a6728d204b81cd02b0a6f3bc4e65097ca258a92481cb79066"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-9-v1/comparison.png",
+          "sha256": "b0f5538b5d7b468945834d03ce345a463a72804ffc7fb24a5f5943542f646624"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-9-v1/index.html",
+          "sha256": "0b28014fe36681e1be10f1e84318a8d6943e1f8c4540dd34869f371442e0bbe0"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-9-v1/orbit.png",
+          "sha256": "a3f1d03ab308223550eaf129434846d3cbd1ade4ea8f17b9a0e8b9af02518e2f"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-9-v1/review.json",
+          "sha256": "3c004326a32d1a00a3592c9ca15d97fc90118b0472efcbaa7005e1f4302f7429"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-9-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "9fdd8552278a26152753897ed11f5a6aff9e3df90537f7847399bcd80928e909",
+        "west-render.png": "40e5c691c19d15665e467aea2ef31f3ae276ac1e50d936b82a3aadb7f02c5b15",
+        "north-render.png": "ebbe6d18b049b5c997a4f2e7582e79b257e0eedebc5b9ae1493ec0d7b3b6e70c",
+        "south-render.png": "14459f5631b4c86309754ebc3c6699c0e01aa367dd580b3aa577adb494d71d58",
+        "orbit-0.png": "bb4302d8f19a399f1e5e6d84175fe816ccb04845b7fc486d9f4a92efe13c2400",
+        "orbit-1.png": "d5fc79a25d0b267e0d5a5007873c535588f4d90aa27f3d2b9532251772f6fb56",
+        "orbit-2.png": "fb403aeb7dd7969a40373b3a75f2b33a0ad110ab60e25e4518915e1f2a96a70d",
+        "orbit-3.png": "f66e790a653c110300f8b77946c00e08b98b08a844365e2cb65a978bb12fca57"
+      }
+    },
+    {
+      "assetId": "car-10",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-10-v1.glb",
+      "source": "art-source/vehicle-models/car-10/v1",
+      "capturedCandidateId": "projection:authored-car-10-v1",
+      "capturedCandidateSha256": "4c3c09ea1277c48d8eda74fba0ac5dc17372c41971fd48da98effe7c7d643dc6",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-10/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/body-wheel-clearance.json",
+          "sha256": "ccf9f2e454cffbbe5f1dcebc5fbaa012b5167afee003162987c3d76c0e3016be"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/car-atlas.png",
+          "sha256": "ab095a4c8c515e3e6ff557b88dc2fad61b14c52a0e71ef8e0eec55f47f62a02d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/car.blend",
+          "sha256": "47a650f33985c8d1ac6f2be893e4efbd618f0bd5397c1532501bc30861d27f3a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/family-config.json",
+          "sha256": "700d358211d54d5e10f38dc72d2d04980cf87e0258521ec5cf0a69fd1b5823eb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/inspection.json",
+          "sha256": "30a27dc8b0e4fe2e190bb2076fb2a4ca6ab83394902d6dc1f9065dc2fedbd148"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/mesh-spec.json",
+          "sha256": "ebfdc5fbbdc740473dd55c07fc3c824340718a1e5980d5c9f5dbd89f99335a4d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/projection-draft.png",
+          "sha256": "2aeca2042bb2347dd19d469a912ea37b404b398ca6c5b7def8496fbbbdc0a891"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/projection-with-authored-fill.png",
+          "sha256": "39f8be482bc4f51fe5a13417f08cecf796493edb15fe10e2196c97d81b37d49f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/recipe.json",
+          "sha256": "55ccc1bc3d43a36a7055521944830e1a6f9a3128663406b767614f1e121925a7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/refs/east.png",
+          "sha256": "70fddd450693adc94ab0f0d993b860d23f0f98d15e2e2ae33a6dcacab53ae081"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/refs/north.png",
+          "sha256": "91f8799c91a2f120d4a139ed3c40d300094ddaf049f22f07f73c6a370fa24f08"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/refs/south.png",
+          "sha256": "bb8347e84263af87d8a5d7f6b521b1eae2597ed4449e94f02016697713e3077b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/refs/west.png",
+          "sha256": "dd4e2e03bf4dd4c302afd69a779b3bf660fb0ae753f0afaf7e5f5be406336a66"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/car-10/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-10-v1.glb",
+          "sha256": "63ffebaf44ccf8340c95647a144d0071dc007357e73f31b25cbe0cdf81f0dd7e"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-10-v1/comparison.png",
+          "sha256": "ef75aeff8b7ae9ceaaa9c8e590b2e9853bd406548eea595fb57c18b1315a8824"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-10-v1/index.html",
+          "sha256": "c10b082001e6f693a3891c700e1269d6ecbe1714cc1882ff972e88377eeff7db"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-10-v1/orbit.png",
+          "sha256": "2f17b1ace6cc2770ba44ce94a0bd5ed7b184537e53dfa76c957e2930d3819587"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-10-v1/review.json",
+          "sha256": "e53619ea0eb840c3514838beb42a3a2ac85c9e53032e8a7f82647f8bc9e766ef"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-10-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "1d2311d3284f4d9cdf7a6b94aefbae95fd44c3cd081356cd78a1fb191bb329f4",
+        "west-render.png": "18f38267494627c8c01ef4a467a7228f40a95460da0b0875328db1a5ff41bfd0",
+        "north-render.png": "217f19cc081b52ffae020b5c561388067415d0d29d5b48924c8cb9f15f9013a0",
+        "south-render.png": "f78506fc8b045fc91f49d613c102fc0f832413150226c48af35b5bb4eaad6df2",
+        "orbit-0.png": "28c48c32e1c373e3b46b631b69cf62f0e189d8aaa71b4ad490b6462f27e22acf",
+        "orbit-1.png": "011d5a5be0291e1fbe42979f7a78262502e96e07a8645638a554f0d4287b5d27",
+        "orbit-2.png": "7dd83f3695ae373f2e9d33a4064d1c623491df718b12b1d9567496952b79f4c1",
+        "orbit-3.png": "d73b533faf73c969e06571c87dd5a802e227b478f1a8708312c32b6b7c24a8f8"
+      }
+    },
+    {
+      "assetId": "car-11",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-11-v1.glb",
+      "source": "art-source/vehicle-models/car-11/v1",
+      "capturedCandidateId": "projection:authored-car-11-v1",
+      "capturedCandidateSha256": "b0eca6bd5f63a0eb0d9b81c7de395abd814217d6a8d465640aacc7432b193e9b",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-11/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/body-wheel-clearance.json",
+          "sha256": "6712045970e9a19e644b4878b42872735141cb419b663f35c30881d0870b838b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/car-atlas.png",
+          "sha256": "82eebcb1934e51edbc4c14080871aa4aa9876cd92099a2bda8903c75459320c4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/car.blend",
+          "sha256": "095d639ddf729500a9ae37fd18df329dd9f3e19374964bfd8f9c8257df1f8cf0"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/family-config.json",
+          "sha256": "3887089b6d49d019cd61024d9dcb2440c100303babf372ba736441f378ee80cc"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/inspection.json",
+          "sha256": "964e6fdbc422468156716c96a4821fab6ab0aa4bd73fef77781dc9c1b752a204"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/mesh-spec.json",
+          "sha256": "0435231455de38c7b296b428084d5118c8fa1a8aaed928a1cdfe228aa40e9318"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/projection-draft.png",
+          "sha256": "1c19c9ee0cd4b011bf40cf7c6d0562d4a02aa7b95062cd6217169a77876f4419"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/projection-with-authored-fill.png",
+          "sha256": "66f80784b519f380d66ce07e0a552213d1b19313fc42c404994009e853de6af1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/recipe.json",
+          "sha256": "c57be8ab9d46328c5ff9d61a153da0a71c74f2efd36a1be570c2fac7d81b36f1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/refs/east.png",
+          "sha256": "b7ae2e537123125caba4e554b25b558d681de3f5e17af71bb5caa1d9ff5a4cb9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/refs/north.png",
+          "sha256": "e225b2aa5207fa4dc4266a7c1c4932cde28fd4413f377bd8340fdf6e592c1f4a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/refs/south.png",
+          "sha256": "917a6fdee3922eb225f64354678b99be9484649b7e28a33e40d1954536283a5b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/refs/west.png",
+          "sha256": "bb9f31c2edb3089f3bf9d7b2f24aa1451f2e0afd60b6222434397ce02adb9555"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/car-11/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-11-v1.glb",
+          "sha256": "b27d54cc3bacc14792f0a4de452399f43878749361cf18139abc64534ebc9d41"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-11-v1/comparison.png",
+          "sha256": "5b3e63415b65281345b3cf72725b8af7e5734046d6e76f16bc87aba2f9c0fb18"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-11-v1/index.html",
+          "sha256": "3676e7189a893c4b1e76e33524ef7b3c946d80cf9d70ae3b47b12307282e5cd2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-11-v1/orbit.png",
+          "sha256": "061fd13bd11308d32c61e328e049c81f147d0e93dbc289264feb0485dc556c79"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-11-v1/review.json",
+          "sha256": "b1137a7107d1fb2b3782c960c621eefb8787989f05fbf1ce5bdcf1b1c55a5eaa"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-11-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "e7c3739b20d3777ccc2fe684405c78d4a39fe1fff9ab79d4384d48906eaed523",
+        "west-render.png": "453c7fa535d0be594960bd62c7ba5bde0bd6ea486ffe55a0ddfa71867f579af1",
+        "north-render.png": "9a2c2849940b460876b3a8a279f9cb2a9d626b211523061e4d94016cfe5ec3a2",
+        "south-render.png": "db1a361a8e0973f4998f2054d797c37401854ca8fc527db8de1f5ba8edfee994",
+        "orbit-0.png": "0f84dfe5a2d423a709e24b695292481a49b6c860850f15449f30a41b548107b9",
+        "orbit-1.png": "f5b52f65159f9af3ec3d269278c2f84b44dd5821acb5615df2781a112f320e10",
+        "orbit-2.png": "a5af085922c36be4e44eb9a52258ecd6a1c751e4d658584b5b30376013aaafd1",
+        "orbit-3.png": "c266313c160e9b5a8d689890932fefddbf6d6d8664d51209af9166d31374b98e"
+      }
+    },
+    {
+      "assetId": "sedan-12",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/sedan-12-v1.glb",
+      "source": "art-source/vehicle-models/sedan-12/v1",
+      "capturedCandidateId": "projection:authored-sedan-12-v1",
+      "capturedCandidateSha256": "f76d4402ad2c9e2fe58d9073ece87ab51485c8fa80e4cf0be41c9b734973057d",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/body-wheel-clearance.json",
+          "sha256": "f44e649bac73736cc8447b9e48ecafa482b0cc72ff3e166e29ba811035169101"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/car-atlas.png",
+          "sha256": "c5627bafde11bb34652c6c952ea82e5383e57017d21b26e61005d0f21f2019b9"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/car.blend",
+          "sha256": "8cc6d4afca50459ada89db67ae8d89eaf3fd111e263f417982f5205d7189455c"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/family-config.json",
+          "sha256": "57036102a1e5886015bb78e6822a80d9512b2dab0236c1c2c25fd9149183ee1c"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/inspection.json",
+          "sha256": "00a276bdf214e16be982bdb76d1c49427d1e1c6c5870c96eafbdc0286ea048c0"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/mesh-spec.json",
+          "sha256": "9e9e06113e3ee195b60be00b7df74833e4547fafd55000ea72da5e77c303e095"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/projection-draft.png",
+          "sha256": "91b0253e1bf8b65b64a69f2a0f8f19de75431d1a5f05bba02a121249e5a87923"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/projection-with-authored-fill.png",
+          "sha256": "9e72dbba149b3eca7df04b28af7fbe7fc931143e45ab3c789d77733829e97732"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/recipe.json",
+          "sha256": "d62112655e8bf47e2715ba50162dc1015d8c81cd8707368eedf2d329e28df884"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/refs/east.png",
+          "sha256": "b80ca12b204a6e55eac519b39cc153e2c74d492f1995414ae0cf9f71196975d3"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/refs/north.png",
+          "sha256": "e9821b6dbeddaa75115cbefb9af9b1bd8aed50c9cbd684ee550227d66cafbef2"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/refs/south.png",
+          "sha256": "7d990f481770eabf91f65dbc1afe0648808988394dc7f601bc64a0264804cae2"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/refs/west.png",
+          "sha256": "241739aff19917a50004b7a30bc6a3207be67650241f98ba150685d32c8add79"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/sedan-12/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/sedan-12-v1.glb",
+          "sha256": "f5f8ede2538b7bb8495cdf153c334503bb85e5f188f6390b20a59675352f0891"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/sedan-12-v1/comparison.png",
+          "sha256": "fd960d1bcc5c173b009b74eadfa5c8ace4be518d62ab8c3dda67542cafbd1fcc"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/sedan-12-v1/index.html",
+          "sha256": "f3048ff7b8b6b1b2206f20cbe1c10962987954a74124c5f94384e86b948d90d2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/sedan-12-v1/orbit.png",
+          "sha256": "9986e8bb1ae11f46b8a1c9e74824f2d24ae797a492bd09d0bc35efa9893c2c9f"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/sedan-12-v1/review.json",
+          "sha256": "99472cb440291b159e606cb68a3041384d92ea618cff39d41c87b94bfe7b344a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/sedan-12-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "6deeaa03fde07d693fb2ad71729d545dd4ba89ce21aa381983a245983b500e38",
+        "west-render.png": "b43f40518d992a42c286c4e1f39090e0e8081475dd013a6d7884adb1c1c499e7",
+        "north-render.png": "bfe577ecfbdd9705f5580dca22ac3c3ada5e7255b8979515ae77f669db815ca8",
+        "south-render.png": "8fb3195d20d39659f955178baa0a4c3320a584a2aac8c2891e17dfbe96dd0f86",
+        "orbit-0.png": "ded0e7d7655e3ec7f5f27d824be2d02b53e1e80456944008c7b06c6710a41527",
+        "orbit-1.png": "74902c053586ce6b37c864141d983cd9c47fc6226a5437fa891f8be0c44ecd0c",
+        "orbit-2.png": "fd699e85d78463ed4dc658640971e02773c59eb623d8c362df499924f2264682",
+        "orbit-3.png": "690a4a1a3a3c9dc5ce258d3dbfc697dee70455552697003a2bc1857868ee2be6"
+      }
+    },
+    {
+      "assetId": "car-13",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-13-v1.glb",
+      "source": "art-source/vehicle-models/car-13/v1",
+      "capturedCandidateId": "projection:authored-car-13-v1",
+      "capturedCandidateSha256": "c2e41d7da17fcf4378f2dcf9b6d47b0d66f5a791035e06f65c3d5ddaa8c947e0",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-13/v1/authoring-provenance.json",
+          "sha256": "7dfeca3ef185ba267b4a459cc99fc7bd71ddb1b21d11b17c3b33355f452ff3f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/body-wheel-clearance.json",
+          "sha256": "28e8b4580f8d892d77adb4e39a8e53eafe075923eb4cbfba6c32f3047b369d93"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/car-atlas.png",
+          "sha256": "e95190363cc53936171d227bfcd8221ea191cca099ee439b4c7a548720765938"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/car.blend",
+          "sha256": "8f4aad80532e7ffe1db3327eb7dfc7d00edc0d3f3d7d6b41912374c9caea366d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/coverage.json",
+          "sha256": "c2c3a4b3e4c85f696298a78cb158d9288897147d9f1e15ddc90c0b475ca893a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/family-config.json",
+          "sha256": "2498b2a9c3cadd5543fdbd51aa1a1448286f08c6435da9aa3de5f7ca731d32b1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/geometry-audit.json",
+          "sha256": "a23edf3946efeb3adb5bdfa89763cedd794416cac910b3433304406c2e8111f4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/inspection.json",
+          "sha256": "7d4b2112fe008f0e6cfb0e94d5ebb2251ac65eebc995a9dd7223837e25c9fbfc"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/mesh-spec.json",
+          "sha256": "5048ae135ed10b2408f895c69d4bd1ed1eee045b4946d3cdf2778d835ee274ed"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/paint-ownership.json",
+          "sha256": "1696101ee834b3da4542a8a8b4b019d6c1ffaec7ddfb32ac45c1c3108c9166f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/projection-coverage.png",
+          "sha256": "a5f3fc9205bf2d774187428a15248eb2edd56931cc722471db1312110dcef395"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/projection-draft.png",
+          "sha256": "8f55ad8b6813bf16d878ba24b43d91c1ace7a8e1bad9bc8153afc151a80d8e23"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/projection-with-authored-fill.png",
+          "sha256": "e299a481ec0ef893344d71fb51e43d9e6bf42bd0ce0935aabc32d6863867e4cb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/recipe.json",
+          "sha256": "52138dc4ca2b8cf58dddec9641c11613512dc1a74685e8b80cd9c4019c834f33"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/refs/east.png",
+          "sha256": "e77d46740b915b2abd858cbe44a783ad21425057f208c0cd6c129d2694e13e87"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/refs/north.png",
+          "sha256": "59e45ae71416d9b11a2028744ecafff3f4029437b226a47f1dc8b291c1b840b2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/refs/south.png",
+          "sha256": "704350fa46a9ed32827e26355f890ff97e59fc5c6f6b7ced9bc39dd14e8e5352"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/refs/west.png",
+          "sha256": "f3a50ee7f9ac80a7a6ee41c1c31c79c1c29f40b0a3539e20f7bd2db26bf43790"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/rig.json",
+          "sha256": "26e188efdfe9b6f220190522f8e0e783c38b759c36170b645a975ea37ef22370"
+        },
+        {
+          "path": "art-source/vehicle-models/car-13/v1/wheel-alignment.json",
+          "sha256": "9920c1742501a24df4fbdf514c8280fa091c87b7fc9227513f0d27ff1865e155"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-13-v1.glb",
+          "sha256": "95be6d5dacf62041d35fbbfe7763ef910c164164ac255d7d0684fc415e249e30"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-13-v1/comparison.png",
+          "sha256": "21bcb2d1d2dbb3823ef65c7369f2e6703bf73f0d6db8496881ec69126d956567"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-13-v1/index.html",
+          "sha256": "7a03c8f3f9f9de52daebe60ec316c693f5c7f7d63b0e7fc781fc61db05c7aae9"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-13-v1/orbit.png",
+          "sha256": "1c219fc4486c6cb2ba97e68d366ea483aef2e78eb5a3963d68998729aaf4238b"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-13-v1/review.json",
+          "sha256": "707f125cb09b71d62cc00a3b6c1a874e051e783fa5cb046561d47dd437492d37"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-13-v1/silhouette.png",
+          "sha256": "9ffcf1c8c94c3cdee8de8729ba8dc1b5ab632d47e12b541acf6083bc5e34b66f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "03d57289cfefa262e449be2f3797669be2171c5ea90a1914c3eb5bd86b046864",
+        "west-render.png": "3bab4c4d4af950bb054ce5cb7cbc52f07c349c6330b11c058fb405571b4777f0",
+        "north-render.png": "5dd9a123e9feae6e76fdc8de98c3f521a4c55a7547524a16b9a3ed0bf00c8498",
+        "south-render.png": "a200e93d3237277ae2216cab0f427908e1b40f477a550fa18429465662d08f96",
+        "orbit-0.png": "a40ceee8d9866386fddad66e51f3618f49a2896804e421bf8d3218a05d808d93",
+        "orbit-1.png": "11428d8ac09d261ec2db609e1dc5b7938a1443531910cbdfdfa425cd38275de6",
+        "orbit-2.png": "a030a50ea4bca7d0ebccd861599ee535deca1b3503fa0730c5b3ff90208a0464",
+        "orbit-3.png": "c2cd56d71d882645d6bb1add154573176787e36dc2e2a21377b97ee57bb43fb8"
+      }
+    },
+    {
+      "assetId": "car-14",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-14-v1.glb",
+      "source": "art-source/vehicle-models/car-14/v1",
+      "capturedCandidateId": "projection:authored-car-14-v1",
+      "capturedCandidateSha256": "112b615705b1499d1bd919cbc16f07b7483b7060ab4524a34cf70f5c9a1d145c",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-14/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/body-wheel-clearance.json",
+          "sha256": "45a1f06e0be594869fe4c8539cc7fa2839b60d75ba2d845b2fff863309b18c45"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/car-atlas.png",
+          "sha256": "7df3035a409b92e7ee54b535cccfcec7ceb349b8e668bdf4d3398b82667686f9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/car.blend",
+          "sha256": "fdf27c788426212d05ec87b2d71cb2552353e253d78a231ec8d9c79f75e82665"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/family-config.json",
+          "sha256": "bb86bea21ca131920448b631517adb619fd4a84e6326b508defd687153767374"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/inspection.json",
+          "sha256": "8e65256cf0842ae5b0dce1119e71d41be0d1a22eb6f67b8d067f1279d5d9ca19"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/mesh-spec.json",
+          "sha256": "faf08dca393e57a91189bf6a85cadb6447ee23568d276bb700f75884356c9425"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/projection-draft.png",
+          "sha256": "b9d7b51022beff6f5e6e5946b55ae42bb40fd8317682f34364be38460c64cda2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/projection-with-authored-fill.png",
+          "sha256": "696e20a31fec40354318f395a6a35bd05ab5c01796cd0acfc97b67a2279fbf44"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/recipe.json",
+          "sha256": "db67474fa65a9b21747ee8e4c81a45b43e19b5ada5dd0b94cfcda54f11a8b1b6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/refs/east.png",
+          "sha256": "c2f6bfc8ae6a47ad911ca720d06b9e44f73a34500d4edbbb89656de4db7afcdd"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/refs/north.png",
+          "sha256": "4496906d6e0e59a29dad3475921ad1f81a7ce032cce999fee938fedb4d678207"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/refs/south.png",
+          "sha256": "e243d48db181dfb3ad964dcd9d1f9314c8eaa023af7d12592040391494b8ff90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/refs/west.png",
+          "sha256": "ce5bd4769ce674fa86bdba183c3ca06f1d3b84dd01f3d9bd624698028407cbb5"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-14/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-14-v1.glb",
+          "sha256": "4e812155a027abd5d80dbda115cd969e4d2e8518d2ac012369d43e7df32f2ee1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-14-v1/comparison.png",
+          "sha256": "7947ec32e958875dfe6c0aa48a95dc7a436448ce336106336fb945bb7cc0ce7d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-14-v1/index.html",
+          "sha256": "56b3dcc2f3dc28d07b890d19796a08fa50a45e030d20fa0f4465538304fe08cc"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-14-v1/orbit.png",
+          "sha256": "78ebda4243973fcde9a3ed2765df6cc138824df220680fd2a247e0472d58d31d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-14-v1/review.json",
+          "sha256": "46ce822c9aef7c235ed833b398ffb0a3baeb0eab0139fcd4a1c40fd2507c2f81"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-14-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "eb9b5302d1288d9d17ded9fa8c0ea2dd8d20196490c41955bf479c27148eca7e",
+        "west-render.png": "b1b68776bcddb072ed8d14b1267277a09a904a5df169be468ee418449b83dc3f",
+        "north-render.png": "13e4286a5e2b2357e5445c43bed9eec4b4d6ed1a2324046f03eb9778cc8cacb9",
+        "south-render.png": "5e64d7f3027d8b7ecd4970af4f56be29f829a1bbf2bc9247786b673fa8668dd1",
+        "orbit-0.png": "eaf5e7575627714157355497dd75569cdda86794bb78bfed8524ac95379dd2ed",
+        "orbit-1.png": "6de4406ef0368e65b24c378baa2f532525e57e89de32caa0925b4d9ff9e57d4a",
+        "orbit-2.png": "d96a12d9c924243ba23e15b97065b1fd42cae70b6dd664fa7e47b1cd043053c5",
+        "orbit-3.png": "714ebf5506eb11cf67cd5e893e2742922bfe53b31b1a95c95e370ac784302058"
+      }
+    },
+    {
+      "assetId": "car-15",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-15-v1.glb",
+      "source": "art-source/vehicle-models/car-15/v1",
+      "capturedCandidateId": "projection:authored-car-15-v1",
+      "capturedCandidateSha256": "2e8a778d4a50cb38f82b766033295535aedca3c1c668af1480d61cbcb5dddbe9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-15/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/body-wheel-clearance.json",
+          "sha256": "c0ec054a6e72653731ce9620ccb44960958cd888e24c10c1a502703aec3869b3"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/car-atlas.png",
+          "sha256": "f31afc9963483a5b264e06a3fe30705f2650d1bd0d89dbf319f32a855b9b0b9b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/car.blend",
+          "sha256": "0e72237c37ce1f53a50a723ba35899b3e9ddb629953650c7745640306fa1cdde"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/family-config.json",
+          "sha256": "98eb29cc780e092a99c216e181e35480d2ef73ef4602e94fb2ea76260a6d06fa"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/inspection.json",
+          "sha256": "8111abecc33f57899577c122a9aec5ebbbd99268cc1f3432c249d9e9c967f109"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/mesh-spec.json",
+          "sha256": "35e1d52219563ae378399d5f366641cd3906f913369838eadc4cf29236c8c0ce"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/projection-draft.png",
+          "sha256": "008fa065771e13e6705719968c27a37b1a2b80813e65893f50ee4397eeefac73"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/projection-with-authored-fill.png",
+          "sha256": "9b2d57638618be22fac589aa282d1d48c40ae647cc591996b35acbc4b7670a44"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/recipe.json",
+          "sha256": "b9d661f8db0d05cae83632c4a8d3d1024196a290de23aa79b38cc08c4f19b234"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/refs/east.png",
+          "sha256": "7122ee80e9b78a81a0f9a28b5c5d7bf53f613ab6ecc34c43a0e385bf17175d51"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/refs/north.png",
+          "sha256": "a2a6c41315264e1a3c2694bc119ffdb689a8a0f9dd1565da3fc99d658c773285"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/refs/south.png",
+          "sha256": "f509af4ad073235a18d8da5e12709eaeda936f41b5baf0f34b50fb1601bfc0c5"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/refs/west.png",
+          "sha256": "597b310d1205c8f9d53cb76208d703dd2093114fbafadaf9c4130e0f7fc995c2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-15/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-15-v1.glb",
+          "sha256": "94f07fcf984ef9664476bd6582a602dfa9b241ab91054ef359b43e810624023e"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-15-v1/comparison.png",
+          "sha256": "1f018976a1cb025bd90d1c8b236db8aeace750f639651664b6015b23b5360391"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-15-v1/index.html",
+          "sha256": "be81d9a9e4954b18b061f107864a7bb07a62a72b0236a24bba59aabb7bdf1384"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-15-v1/orbit.png",
+          "sha256": "e3ec04183a1be5338ad9fc2eb67b6a0f618e6a693136b1814130d51a264e9a22"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-15-v1/review.json",
+          "sha256": "08be6f3a71ff3433a07b22c3101f60b649372a3e7e8fcae96832535f8869e2cd"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-15-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "2b14c8fbdb4e4a6e7a5ce2f6a930ce7aea083b39831af12537b70ab04615a7ff",
+        "west-render.png": "313a6de0b46bfa7927d4e1379f27fd693d362900a1183b0f16617c197dbdd9d3",
+        "north-render.png": "49b0d52bd97c7fd151bb3f730becf5ddaf9d54c2c74b8d67a90bb6f8461c5404",
+        "south-render.png": "76f56d336a2ed99f5d59785917ba04644b43b81de632f8b2a702b5b2c5a8abdb",
+        "orbit-0.png": "9fbcebc1c684ccb81364f72307b0c4a047fdb7b3180b8d0268876d3405890f7b",
+        "orbit-1.png": "ef69fa5e1ac2532db792282ae17c1cc20cca42d2bef34a00b637a3dc8e47f160",
+        "orbit-2.png": "949170dcafec66e85af8a413e890d30f88628fec57c19e2c089f4bc748a0a591",
+        "orbit-3.png": "4bc44bb69e1344c8d9c4e9a2be98cb3f8abeb3734fc661159340da2c670b4151"
+      }
+    },
+    {
+      "assetId": "car-16",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-16-v1.glb",
+      "source": "art-source/vehicle-models/car-16/v1",
+      "capturedCandidateId": "projection:authored-car-16-v1",
+      "capturedCandidateSha256": "dbcffbaf8390be2746a3f3fddec23314a4cea88d73c32f4ba67dffd0d39918a0",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-16/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/body-wheel-clearance.json",
+          "sha256": "a51b9636fbd65183176d32b155da6370cfb7b79b273fc151d1402133039075d3"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/car-atlas.png",
+          "sha256": "915b563c6215779a62fa7309580b7ebdb73364162d1f283c1c9d597da3858bad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/car.blend",
+          "sha256": "f5c9a2f17ee453e9aea41accf304316a6a09491e551e25b4bccdb7346cb5dba8"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/family-config.json",
+          "sha256": "65ae96523049163818232bec6dd7c50c25de18128111271233dbf7419ccb9001"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/inspection.json",
+          "sha256": "58b2b2a908c3ab06b7b897626efb36ba6bfc65a1046b34ff99ce245ab6c2af89"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/mesh-spec.json",
+          "sha256": "17912ed866ee1ac35c30426ef0c362e6854fb1cae46d3781f6ff94b9a24c6ac7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/projection-draft.png",
+          "sha256": "88b1fda941f4f3a5af7c3cce6abd6e3a44c248c874189ecaa4814f48a6e70939"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/projection-with-authored-fill.png",
+          "sha256": "6f119b9f54741d59a1d17118cf13c6227dc5acf5c6d8c6c51b93d76306278dff"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/recipe.json",
+          "sha256": "393542f0664560c2f85fdbe34f529fb41152d93da927fe33ac3f17d722044857"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/refs/east.png",
+          "sha256": "04a6ad13e5c863bd10b3bdbec3bdca18bcbe7a0941a224d3b1388d7b2188c716"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/refs/north.png",
+          "sha256": "3b68c7e973aaf39d3004f9a446d211d4ffa4ea78dbc3cfde6ea036dae75bc03d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/refs/south.png",
+          "sha256": "ad102dadea4a17c3aea5670cf4995c9147ca2a45ec9a22b686fe1c354e35f624"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/refs/west.png",
+          "sha256": "8559ccee74768aa10a0a55c33f4fe12be83a289a652a0e264e232e7f6803cd4b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-16/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-16-v1.glb",
+          "sha256": "59db9de4bd36b8e529453098c7d9a691cc3b152db3c6bc4bb9f46fb4be605717"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-16-v1/comparison.png",
+          "sha256": "550406f34e0ef1b7f63af7c4c8cc7b4d6f0e831f6e5abd176ca3c02d25a3d135"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-16-v1/index.html",
+          "sha256": "1b3270236895977f0c8337e8f901a722eb2f0dd7242815d250d0e4f64e059632"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-16-v1/orbit.png",
+          "sha256": "97bb3f04d84ae0ed5d871dce45d20ca66427c9ebf9e24399c1a95e2cb08239df"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-16-v1/review.json",
+          "sha256": "be888e16055cb39829b47825a34a4ea7ff6aa169e9224643c64ac228eceab3cb"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-16-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "797d57b66e93f61d7bc2cbc690bf9ee27c8320071866ad3c062e826c3721fce4",
+        "west-render.png": "22edbc61edad50a66d6d426f68c700f1c194d2366f1bb0d8d4fbff6124dfb810",
+        "north-render.png": "ff0c8a94a11d3d3416d9317843c7400948b6a85b51aa245ed125e54658be6f38",
+        "south-render.png": "35623b262911bb050d18329307bf2acecd9543909dc29d68ade3514c30390da9",
+        "orbit-0.png": "031cb94100747419a8d82703ab6ab78cb39d0b6360474e2f23399d0a4105a78a",
+        "orbit-1.png": "4a0bbe1c08249794a27bd078b7aa557559a2cac75563efac4e739db4a8a78c68",
+        "orbit-2.png": "114ebb25f3727009cf1f1f4cef509ed2b7000ac977c9a4cbbae96904ea434121",
+        "orbit-3.png": "95e09a13c1e3759b02df2c63625d49d962e7835bad7b43324f7b9cbadcab383c"
+      }
+    },
+    {
+      "assetId": "car-17",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-17-v1.glb",
+      "source": "art-source/vehicle-models/car-17/v1",
+      "capturedCandidateId": "projection:authored-car-17-v1",
+      "capturedCandidateSha256": "7eb3bf243b40ed8b4871389a0ab1c7329f9913fb2638c08f7507d2a6bb938d62",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-17/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/body-wheel-clearance.json",
+          "sha256": "1f0befacfe9a626d856c61deb18892b69eb7cbd35c496c844c989af5891f51a9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/car-atlas.png",
+          "sha256": "bf12a75c1406a8553b9081ef308f6176e648d48b2cfe687f655317740cdf1590"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/car.blend",
+          "sha256": "b6ec9b3f9d3461222a6fb499a444ff3cd76dff9bce8c219db1c64adca330fcb5"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/family-config.json",
+          "sha256": "464a88b02937912f77e85296a495726633529a855453bccb90f9b72b49c4c715"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/inspection.json",
+          "sha256": "2728be37e38233b622d5db1516eafcd91331faf74bea163632e42b2c0fbc68d4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/mesh-spec.json",
+          "sha256": "194ad5a1564dc14ce46cbdeec1587d57ac73b471b9165ac433153022c3e51bc0"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/projection-draft.png",
+          "sha256": "ca3d001d6cd5b4166d973243ad18004d35e3f46cac51c05820d07fa569e15f87"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/projection-with-authored-fill.png",
+          "sha256": "a8095bffc8f06c780e5a685e068b6056278ee7124a21451f61d039274960b292"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/recipe.json",
+          "sha256": "c83ef9143871fa570dc38e2d8ee8a1feffa4f848bd54fca10959c6390998715d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/refs/east.png",
+          "sha256": "29904e41074b3fe61cf600b05715f87fdad12bb0eb35ad7926d2fae90a19ec52"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/refs/north.png",
+          "sha256": "039f737e848665695dcf1f541c0b51107707622d57fc55b0a9bebc8ca8f399d1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/refs/south.png",
+          "sha256": "7bdf24c998756954a5496b0a8ecb18f6c642b6cfb46aaa7fd4ac5a20a605624d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/refs/west.png",
+          "sha256": "d5abafb7dd0f9e04d5039a080b45a3da7a435df43065ab5917f7f296645f8306"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-17/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-17-v1.glb",
+          "sha256": "b487c98b527d577178b67f52e6be72d827ee7bbe61a8780982170a40d65853f1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-17-v1/comparison.png",
+          "sha256": "f55c00e047124f3130fbaa64fc4d7db25229f1dc3356ddfde0c9b05cc319f3f1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-17-v1/index.html",
+          "sha256": "c198b425556b3a607f4b28c57bc4a6fa14f6853db47624e2262f2c96e1539fc0"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-17-v1/orbit.png",
+          "sha256": "55c138d2d97065ff2eaf64b2d3e4729ce22a7f218e0eb1cb9fd423f4947dac08"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-17-v1/review.json",
+          "sha256": "3ff2aacf7bac967f377f55ebcf438566caae622ecd4c776445c048081b3eebda"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-17-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "5a802322b15152c3c34c9cb5c0b8523e018826e6329f677b148bef22ff52ebfa",
+        "west-render.png": "5238e190e45baa5706f34bd8d54520d6013a3fd6a95494446a80d4539d753f98",
+        "north-render.png": "24da553570e85d1e031ace03fbb4a4329aee4b01be3445b13218d265648c3f98",
+        "south-render.png": "ac87ed2ed61f399d14f93fa801db85b6675b3aea09b26f289d166bf72a3741a8",
+        "orbit-0.png": "2bac3ffe3787001fc6c58c8fff7f3a73d429913165a2e80e6044a845961ade27",
+        "orbit-1.png": "0b29c25d502b4c8ded024d97ecc65219740bd064567dab97f090b822b6fc3472",
+        "orbit-2.png": "766ba2128d24a7eab7776a463c0e8503631775160291328a031a7f26c85084df",
+        "orbit-3.png": "4ff3f3c4e877e43af921e901e6407325872f6287fb9baa826d65a9b97f2b5fd8"
+      }
+    },
+    {
+      "assetId": "car-18",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-18-v1.glb",
+      "source": "art-source/vehicle-models/car-18/v1",
+      "capturedCandidateId": "projection:authored-car-18-v1",
+      "capturedCandidateSha256": "c8999b9eeb2ab95aa14cdf7ac8965760c955651fa6aa9124f228f2a4ca9ec1ce",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-18/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/body-wheel-clearance.json",
+          "sha256": "9e73c8ac47e5d890c54c7c2200eab7c092ae296385ad347524baff8327712109"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/car-atlas.png",
+          "sha256": "0cdaa450000165d47017f65366d6a1abce91495c3c567d9796e110ecb3d79860"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/car.blend",
+          "sha256": "97cb9601a6a69483dad85ddbaa7ee590c178bddbaffe2e6c6b149a9b2845d9c3"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/family-config.json",
+          "sha256": "a99dbd981c00b010284bab193da56498164d42c6ccd1a5afd8738d08a0e590a7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/inspection.json",
+          "sha256": "ba40c57214ebd3cbbbb617fc8fa578d98541c43e542edeec6a9c55267fc24539"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/mesh-spec.json",
+          "sha256": "ec05847f67817ee8d1978785babf5d6b1d0e3b2df954a83d4d9efd104e74cf16"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/projection-draft.png",
+          "sha256": "8820e48d63ab71e7184c669c179d4422e94bcdaedc4400f88e3b6724f1703a19"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/projection-with-authored-fill.png",
+          "sha256": "f54f08cc2b72c0e657b6713b6be13baee79faf6e90d7ed2a4c7149c722d32771"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/recipe.json",
+          "sha256": "64efa764ca67ace93b11149ca3d8277bb664d7f3bf3f5f1bd5064a42eee0c12a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/refs/east.png",
+          "sha256": "49d68d808cedc38a820287564df0444fabc6b49ecfdd83a29760f2a0963261b8"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/refs/north.png",
+          "sha256": "6a903a6182e4e913890a9728bc5ce9598a76703d663784034abc1995d781f41e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/refs/south.png",
+          "sha256": "4bff5e216510648e9ded51b6718aa2439c037915f1b88c3c8426087761f54119"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/refs/west.png",
+          "sha256": "bc7cc31c82a4da821b748a4daea95e09513e9263e944fd6a32d9bdf8b97295e4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-18/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-18-v1.glb",
+          "sha256": "66a578fa6cc5a05097dc6f93b16631c05ff4b5b9f822050ab1c2ff66fcdbc998"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-18-v1/comparison.png",
+          "sha256": "ef78fb7c575c4ff4ac1ae3e00023a878d7a9dab9d9126c8269de4a20f12a20d7"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-18-v1/index.html",
+          "sha256": "317bfcc53478340f689914ec1b9b0851ed24a440fe9f30b9efb33ea477b0aeb8"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-18-v1/orbit.png",
+          "sha256": "23b3849e03119f38d585a0cc4d2f3b57c25a3820e78c31766be2ebd3972d66d5"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-18-v1/review.json",
+          "sha256": "d5b39d80d4374cc916792b13f95f6d2f41be120c80e3365dd004e8b047a47ddb"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-18-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "05b3e2662be4535e4c137e7c5f85c778d1f70e9d9d9cd43c4371b65e280284f4",
+        "west-render.png": "4a585fb0f0f18714665f8b4d9536007567aea3143181ba73d18f32195bd02015",
+        "north-render.png": "2a657e34f3f511ab299d5da6d85744e6968256e1097fcb95b0359db4bd0fd254",
+        "south-render.png": "1bcc7f9959501c01ca7ccc627e8c60255522be9804cfc48b0470766de28af4ce",
+        "orbit-0.png": "d742b2d3f8d0775eda5db860ed4e9714bb454f13757d18d3be9ee50ac2fce71a",
+        "orbit-1.png": "6dd18e1ad7863b2da2fb7a61e79c9aa9d192f0f927f027ae3a51309a41d24bc9",
+        "orbit-2.png": "0a55d78157aac4fa176e53f858b2127009c8727202f919510af697898a58bc03",
+        "orbit-3.png": "49d063434037afb7047e127b91feebc902c1d4b135a90a1b59b8e741f9dba93f"
+      }
+    },
+    {
+      "assetId": "car-19",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-19-v1.glb",
+      "source": "art-source/vehicle-models/car-19/v1",
+      "capturedCandidateId": "projection:authored-car-19-v1",
+      "capturedCandidateSha256": "7815cb3dd41ae30e3c0c51cb688e6dc04a007eabf9f47ac9bb798af969938c76",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-19/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/body-wheel-clearance.json",
+          "sha256": "9b1dfbee3040545c347b0d94476a22ade5f9d34275a9ffab1efe37c86c3cf4f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/car-atlas.png",
+          "sha256": "604732317b4d952afd9ef18b510ad5b83bbbb72c7c9c6c1ec45555ecf7728e31"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/car.blend",
+          "sha256": "caf929cefdc561ae74b00857c94eea89647b987afabbf43e4b848109d06bb82d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/family-config.json",
+          "sha256": "824c289dcfcb897e7841b082e5d11dae2b7f2f5c6b8e7c3bf2b0f116fc970db2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/inspection.json",
+          "sha256": "9c94d7a94752da568416db9c2f238aa5f10f9a437db57142e690220217a36319"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/mesh-spec.json",
+          "sha256": "cd16c2d263a9c51f586d66728aef14f3828b3bbe1a06bcba716adf1a6277b495"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/projection-draft.png",
+          "sha256": "113338cd758fecde254315fda13776dfbfcaf007ec32017ddd77a8e062effcd5"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/projection-with-authored-fill.png",
+          "sha256": "cc2a2d274fb8117c25928b293c90634f5526547ac500d7aefbea7011b7c6f297"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/recipe.json",
+          "sha256": "ac3d3748ad18dba1783a0bbb5bfc703a775ba675280480af59008b31bf918bbc"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/refs/east.png",
+          "sha256": "5c5dbf7c24d0a219c19f8af9b2febf9b43175f85fa5e86de74a33dbb546c10fc"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/refs/north.png",
+          "sha256": "b2d2cc514bfaf24ffe2110f27e91e6a87d6fffce4c06fae902c4732da5cd3a1a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/refs/south.png",
+          "sha256": "b14f605f622db41e395ef19677c2282ab39e0a89cb841b3a4f0d61719346ffc2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/refs/west.png",
+          "sha256": "255593e87c32ef9adb897e1e456adc9bee85d9ea7aabdde2b672e109a72670fe"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-19/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-19-v1.glb",
+          "sha256": "0e9c2d148bcf042515e1b055ec3a6d7dd17254fe60ddec89b2b2aa9581644b47"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-19-v1/comparison.png",
+          "sha256": "f65014ffe475355dba660b280610645e1dbbbfa014100e4be43d860bd3fd5d4d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-19-v1/index.html",
+          "sha256": "6ff0deb23df0b4e3dace5aaca650b311809fcba27bb6ef4604da45b748df0ac3"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-19-v1/orbit.png",
+          "sha256": "4c20d756cc53ce33ed41e3712a46e4b2c3d53a85931326aeb511c4df0a26000d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-19-v1/review.json",
+          "sha256": "e4dd414f6a833071a5208ef3cceeb82754800452bacb1e2732ec07476c9dc9d2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-19-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "2fad8e06df8cce964ce1e90cbb97bb762d57d3c4bc12b100fcebb515e056b911",
+        "west-render.png": "c4357df7e41cfe78b593d3eba4ffd323fc2ffd80ddf15bd3919e9a82ef83fa79",
+        "north-render.png": "54bf39888ec49d6b32ab1f0abd09951658242efda3b35fe7bf29d1d17a4f7434",
+        "south-render.png": "bb7bfad6b1a2fae764536b89d3e7ed4624d0c00210017794879663bdf315da82",
+        "orbit-0.png": "6936192faee1775354995c246b3e41b434e0c64e908ec33124a30f0327db329e",
+        "orbit-1.png": "07e4cf4be2fe90473ff2bfb934f7d9f7116bada5b321f7e2a1ba13b3aed9e48e",
+        "orbit-2.png": "291d2ce0c48aa3a0d0272117a3ba7be598224e7255333bb4f68c51c9aab8317a",
+        "orbit-3.png": "ea7a5b17d12aca7d8bb7612252cdbd8e095eb9d4f13b076090c86668ca1c7f7a"
+      }
+    },
+    {
+      "assetId": "car-20",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-20-v1.glb",
+      "source": "art-source/vehicle-models/car-20/v1",
+      "capturedCandidateId": "projection:authored-car-20-v1",
+      "capturedCandidateSha256": "317161780a953d169ecc3270edae2f81f70946d337c09e1ae051a7fd5a7f3aa9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1096
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-20/v1/authoring-provenance.json",
+          "sha256": "400bb31d24f18fdfa7e8392d43d444840588b65cdc6aa129320a28ef8a2c59ea"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/body-wheel-clearance.json",
+          "sha256": "a544a9ad2eadac7f8c0aa4f8bb0b4c006e27fa8a7b45080289bb15e822691d74"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/car-atlas.png",
+          "sha256": "80399759258385d93f3a703ed39ef68fa5cdbd7f59a68cb5a09868e2b676aee6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/car.blend",
+          "sha256": "d18abf59f45fc1ac059988e9882b85f08a1b4464466f52ec6fd39540c7d9baa6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/coverage.json",
+          "sha256": "6c3e363c192bc62b5c544e63b0e8c19e7a41fcf0860fbcc7f9134fb6a3f16e12"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/family-config.json",
+          "sha256": "6403b7b8083c19b7db30aa1595e340d75c2d16ae0e71cb2720e0c645e7a7ff14"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/geometry-audit.json",
+          "sha256": "5179e473cbded4f3920fe07c64d06ceffb751c5242eab015fdf7ded097bf2758"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/inspection.json",
+          "sha256": "ec7a80d03d60ce52a72f3747c870c346c8571720243613ba546b8b3915c5b7da"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/mesh-spec.json",
+          "sha256": "5e23e6e446e8e1791d9971bc129d1edfbcefbab3b1dd047ac2909155fffd0f07"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/paint-ownership.json",
+          "sha256": "5814f007b7a9a12c239b329ae34e18454fde1cb8b1647456ff7e99667fe9a53b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/projection-coverage.png",
+          "sha256": "cb24f2d8bea26dedc6280e633125a19e968f809eaad41cecf8a207a88df31f10"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/projection-draft.png",
+          "sha256": "aeecf71ed7b12e83a0f3688865f3b1b7f5272953276ee4c54f4bb16400b18fd5"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/projection-with-authored-fill.png",
+          "sha256": "fd29c2ab280e04455550ff3a4184b6baf4abf07e3f4a45a1c2f0f60c030da817"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/recipe.json",
+          "sha256": "455bdbdf5101b1796092f1af8926c550f475a0eed9e51839325c55c013c377ff"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/refs/east.png",
+          "sha256": "fb8447e34aeb07def86c4b685ebbc2d8afe401913dc6f6d68bd351e10b7fb158"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/refs/north.png",
+          "sha256": "475ddbdd9db2fe4e145e759042a367091b0a591b149a8241d324554a69d83960"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/refs/south.png",
+          "sha256": "1463975c50e8980d23b6083810868daa2b1cfb5a99391aa46e9b48bfcdf6b153"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/refs/west.png",
+          "sha256": "f2972c923fce26ce015b652700fa982488b005f117672870d182cfb8a64b0327"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/rig.json",
+          "sha256": "6f77ad8cc4cf06658d15a4843c14d5bd3276f5b6ac5fbd8e79e00f36d49eab90"
+        },
+        {
+          "path": "art-source/vehicle-models/car-20/v1/wheel-alignment.json",
+          "sha256": "bd56a287ae6e35e60c73c5bbdcc2484b44b6e33f3663bf7a4ded0bb600a418ca"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-20-v1.glb",
+          "sha256": "8f39206c6fb97b639058f02790ab5e6f8b13fd84d2619636aab965f823dac61e"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-20-v1/comparison.png",
+          "sha256": "ba8b1280415e987a8971e107bf6ebe7857efdec721e98d1d9244a2ba61f27142"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-20-v1/index.html",
+          "sha256": "3039b9356a715153cf9bfcf6acd4db083ad2e39f86b4f24580bea28325a4f668"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-20-v1/orbit.png",
+          "sha256": "c37c03f79c91e270d5e07a5790a1401ae77ed5b1770c19916f3797d5654a8c53"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-20-v1/review.json",
+          "sha256": "5ef4a08841c6b010743299bafd6cc5d62596c8a789c432fcaa9096b9f40890a5"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-20-v1/silhouette.png",
+          "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "c50a58241628e8e1c1f89dc1d8e76dbc09463d60a1b1e982a74666b22eee5ef2",
+        "west-render.png": "18720916913cb50e4ae241cc249ac906a2d1c18f87f90b006d8789e77b79e775",
+        "north-render.png": "89755302afa5617fc6f443d523a57cf4c9232c6028776a965e77479b7dec3df5",
+        "south-render.png": "f4f9b2df3d29c362c5d306b209df27171c4d908032b4b17462d75c093706130e",
+        "orbit-0.png": "0b26b0f8415872b682fefd0fca763e1d1c1a39e2d5060d0c957b8f98439ed87c",
+        "orbit-1.png": "7e973b53dee0ffc928df9fe77d7b6f07d6876edd7fa0995ff96e0fc4e774a12f",
+        "orbit-2.png": "f32bc43bced4a8f2b17cab88e62b7ab407fcaa1ba05a6f091dbd8ef4f5cd6acb",
+        "orbit-3.png": "058054c4ff209b559c35a142afc9f747c2378072b6ddb065a98063804498e7ae"
+      }
+    },
+    {
+      "assetId": "car-21",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-21-v1.glb",
+      "source": "art-source/vehicle-models/car-21/v1",
+      "capturedCandidateId": "projection:authored-car-21-v1",
+      "capturedCandidateSha256": "22276343016bd20f6e98f2fdcd3c4fbff95b21501c3359ffc8dc9791d60e933a",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-21/v1/authoring-provenance.json",
+          "sha256": "40d72cf4f4514ea0c97b6ccd4f33fc381b4e13983d2a17871eb5844c26f2da77"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/body-wheel-clearance.json",
+          "sha256": "daf1f7c8c285228321e5774c75cc9c13b812b58bc3da6def1c56f49f676a260e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/car-atlas.png",
+          "sha256": "768f429c331c5d38ba4b1f597aa1e6ca15bae2cb226bb1eb99f037638807912b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/car.blend",
+          "sha256": "b635401e993fd3a2fdb0a70f45c6fe05a2f3e2949c5a33dd02b9f468b94a7534"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/coverage.json",
+          "sha256": "64479cfd239d0f338bf8fc6492ccb3268e4987a1193639e17373b77f3d174e84"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/family-config.json",
+          "sha256": "4c77c7e3fa4323a154df42056cc7d68d31899b898034dfda2d5744429b5905a8"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/geometry-audit.json",
+          "sha256": "88e72b4506d6471232a2f525d46a62d451ca291ef82b7773b0f6a56bfbcc29f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/inspection.json",
+          "sha256": "5e0497ad7aed6799922358ea3675aafb63f0733a910ad98d77569f2438fce34e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/mesh-spec.json",
+          "sha256": "32d9269414198c1c9ec16f595b5c42b48df5343e94c1953700a41e060d00dd9f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/paint-ownership.json",
+          "sha256": "5fee53c49a9d369f67f7a6cd011ab1e0233d9de9e0848b94d2b2dbad648fd71a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/projection-coverage.png",
+          "sha256": "4b16cca4f70a2724e35b33ab1ce8d055f40f8e399098d0fa0154fa1d2da0e8ad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/projection-draft.png",
+          "sha256": "76506a7f06c6cfdaf448b27fbb6b31b832c7465185d4f3609133eeac81b43192"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/projection-with-authored-fill.png",
+          "sha256": "9ae0a9eca48a5f77ce2aecc8a422a423ac5ba493da99bbe2e985c169f4faac8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/recipe.json",
+          "sha256": "198ab0b5b46c4eda5c05da758a5c480159c5a121e80d1f8da3fd093aaed5c1b8"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/refs/east.png",
+          "sha256": "7d9f709736fdd88268691d9c4c6807bc3aa95643d63df0cf01e148823af02e69"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/refs/north.png",
+          "sha256": "ab2f5f082030a5c04c7eb0376bd51662f90355921697111d1102f15b111d3cfa"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/refs/south.png",
+          "sha256": "3d49ddfee339dbf5971a78aa7762d3b30d0283cf75b2feeaacd90eb8a09105a8"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/refs/west.png",
+          "sha256": "33f7b26af5b378301312eb45b32bc19b9558c5e8fdbceb4ae93a05343a1fb80d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/rig.json",
+          "sha256": "e460caa397935ecb3f59e2f548c9f3a33f899b18af014861cb6c560a856ccf8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-21/v1/wheel-alignment.json",
+          "sha256": "9456f10cc2650154da9b58ef8d8ca9015f4f10a040f6ac667055b4ad5e12ad99"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-21-v1.glb",
+          "sha256": "08b12799c2e6beb8be958d3fee6c049009285ef580ecd035043cc7f3474c46df"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-21-v1/comparison.png",
+          "sha256": "7fa7a4e497061ec554cdd1d52d2e42b2224c0f415f93c28b6d9ade9edab21844"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-21-v1/index.html",
+          "sha256": "607ab7e50ff5de3ab187421a8af9c789af6663c8eeb2d39aadc7b854a902c771"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-21-v1/orbit.png",
+          "sha256": "bc7fec11ba35f2518b3f99003fec12b8eb4daa86d085e9d374ecfede5014eacc"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-21-v1/review.json",
+          "sha256": "3b563e3f90260802f2ea13317d9ab6b9fe7e3f4ff7770750c1344bbf4a7e83ba"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-21-v1/silhouette.png",
+          "sha256": "cea6205da5669adec16fd8f00e813bfa1f34924f5e4f53bd1a8885502ea8f527"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "54a1e90c2dddcfc2f7faf500efd1153ca94a7f1c9d7f542483e1fb1766666b39",
+        "west-render.png": "0452084d62d9f6588671fb3112e3567e1c07cfdbf436053fbf0fd15d28626ac3",
+        "north-render.png": "720a981c904d101177466fec585981c61a131cc553c4c1c5c44377a05686b83e",
+        "south-render.png": "27cbfd52c1609703d2bf2a99d264c1838e29c948e97caf1f258d6e3fe0e4fd41",
+        "orbit-0.png": "c115861903ac8bf11a9b070e77118bc93382fcbce324ba6a74cf4a91d4104041",
+        "orbit-1.png": "88ecbe06339e41be44e356b8738fb3d70726c4413ce761189b4aa24a969b12e6",
+        "orbit-2.png": "5eebadbffb8b7dfba2c7a9fe35bdbaf8db2480e00b533931769da89eb9775f72",
+        "orbit-3.png": "80959c0648e79c84860a7acb66e76453b2adad838416a9b1cc5d5a6d164ab5c9"
+      }
+    },
+    {
+      "assetId": "car-22",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-22-v1.glb",
+      "source": "art-source/vehicle-models/car-22/v1",
+      "capturedCandidateId": "projection:authored-car-22-v1",
+      "capturedCandidateSha256": "a7e55f35257da646a937f41fa23d25015dd90d90a2f0aef0345497303e1bdfa9",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-22/v1/authoring-provenance.json",
+          "sha256": "40d72cf4f4514ea0c97b6ccd4f33fc381b4e13983d2a17871eb5844c26f2da77"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/body-wheel-clearance.json",
+          "sha256": "ab84c5a94308850ce289a7b1378fa9aef49d31f6398375570492229cd2c1f8cd"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/car-atlas.png",
+          "sha256": "1fbf8b3dc3057e3c09fc99021ed78466152e3a7bdd0fd32a2cd04165a930177a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/car.blend",
+          "sha256": "657ac415cf5e3968eaa3ba53a2278688f73688d5b348b8fda0e3596a4ab5c3a2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/coverage.json",
+          "sha256": "64479cfd239d0f338bf8fc6492ccb3268e4987a1193639e17373b77f3d174e84"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/family-config.json",
+          "sha256": "68f9a38249ed7bd79ba6df46ba68b0d719a370f27cf5231fb4962854cea8c9cf"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/geometry-audit.json",
+          "sha256": "88e72b4506d6471232a2f525d46a62d451ca291ef82b7773b0f6a56bfbcc29f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/inspection.json",
+          "sha256": "387b41aeffb2f6a3cc81ebe474289aa8917715553059d1238a2d421d138020cb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/mesh-spec.json",
+          "sha256": "f81dfaac3abe227a3732c254e8ed440e002a92039e0edf4ba514dae09f608783"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/paint-ownership.json",
+          "sha256": "5fee53c49a9d369f67f7a6cd011ab1e0233d9de9e0848b94d2b2dbad648fd71a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/projection-coverage.png",
+          "sha256": "4b16cca4f70a2724e35b33ab1ce8d055f40f8e399098d0fa0154fa1d2da0e8ad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/projection-draft.png",
+          "sha256": "c7472c6a5a67984efcba794387cd27101cb38b789a6bd986cbcfa54150ca6280"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/projection-with-authored-fill.png",
+          "sha256": "3b2d5b3a9158c2ff4edec4f3284bb95fce68131d4ae2e245255adc39f622d23e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/recipe.json",
+          "sha256": "8a030bac9c5cff9c933ce9a44e41ec7bd05d08c9790a5befa71a87fa8222a79e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/refs/east.png",
+          "sha256": "5bf19f6260c33ea7f8e3f1cdbb2f40f3594a01734bd0de807b229bf23a3b9478"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/refs/north.png",
+          "sha256": "4b270900d13664ba8ca643c183c2ac75c54649751daffca0c8ba3788fb14f1f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/refs/south.png",
+          "sha256": "93ec19caadf983a5d2886a007087546924afe392f344db923b4c5472f24d6160"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/refs/west.png",
+          "sha256": "f297f0d55d7a8939e8832c5c66112446c8d17d9f3e2c8944b733dca3611c6c73"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/rig.json",
+          "sha256": "e460caa397935ecb3f59e2f548c9f3a33f899b18af014861cb6c560a856ccf8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-22/v1/wheel-alignment.json",
+          "sha256": "9456f10cc2650154da9b58ef8d8ca9015f4f10a040f6ac667055b4ad5e12ad99"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-22-v1.glb",
+          "sha256": "e9770157117cf512e8ad1bf002ce88bb4c0ce8e5fdc99644d739427ceba6dbbb"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-22-v1/comparison.png",
+          "sha256": "0fbfb696d0126647f58282bfbe98a362db0ef3574bcc651fe614162d464946cc"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-22-v1/index.html",
+          "sha256": "1fcd9d5b503ac794231797f75783c80d22090665270fb4bb25121af99970ffae"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-22-v1/orbit.png",
+          "sha256": "5b06786de4cf42b662f9e223a730d35fd62549752c469873085120c622fe4c67"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-22-v1/review.json",
+          "sha256": "00877cff32e23be3f13dd1bc0e3f6e3e28ad89e26acf68c5899e1b6aebf40b12"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-22-v1/silhouette.png",
+          "sha256": "cea6205da5669adec16fd8f00e813bfa1f34924f5e4f53bd1a8885502ea8f527"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "ad2d801d7cdeb714e0d4d8bd1ba17bd2545b442b8942dbb89b1a29a928522c0d",
+        "west-render.png": "4c0a5ed64843011fdd903e10331388a5c90eb258d33e07ee1ca8564f2d305cb0",
+        "north-render.png": "6507c2f9e61714f00dd823e2e980ff19799d7131b410dce91dd33b29a1508fb8",
+        "south-render.png": "d82938ed86fb04cd29138b2543b360767f788beea858c3bcda89af476ec725a5",
+        "orbit-0.png": "118e2cb9ed8e60b5087e4dc7da5a5c901f79e71adf818b16c0bce23fa49c5b2b",
+        "orbit-1.png": "70b21cc50a2ed76669e3b0be1987dfb235f43dd3ae8b7a7883ae0189e70bfa95",
+        "orbit-2.png": "b881cd586c8af258300cc5830d76dff4d99568f3897d20b35191840aceb6fafd",
+        "orbit-3.png": "b99c98dbe5f9d57d9eb8298d70cd3b647de4553bde547f1c0d64a01c0358e4f4"
+      }
+    },
+    {
+      "assetId": "car-23",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-23-v1.glb",
+      "source": "art-source/vehicle-models/car-23/v1",
+      "capturedCandidateId": "projection:authored-car-23-v1",
+      "capturedCandidateSha256": "ec4f86c2440faf37c242b4a93b69c1682922232f64009f2caef05d41271e744d",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-23/v1/authoring-provenance.json",
+          "sha256": "40d72cf4f4514ea0c97b6ccd4f33fc381b4e13983d2a17871eb5844c26f2da77"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/body-wheel-clearance.json",
+          "sha256": "ef0f4dd4c299b80b138445b3961b5ab49a037ce74664b4096d563213eee2286c"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/car-atlas.png",
+          "sha256": "a3fe99ad952e7689d2fcaa92f03c3f2d1e3aa47fedb7e35f07dcf0af8e8639d2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/car.blend",
+          "sha256": "dd72b357d6c942ae162c8d63793fbea3fbd00bcf31ec769ecaeeed21404d9295"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/coverage.json",
+          "sha256": "64479cfd239d0f338bf8fc6492ccb3268e4987a1193639e17373b77f3d174e84"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/family-config.json",
+          "sha256": "94f3d89743eb5b2b1bee4323f126579bc1ee40c84c9a89072b124aa26e4e31ce"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/geometry-audit.json",
+          "sha256": "88e72b4506d6471232a2f525d46a62d451ca291ef82b7773b0f6a56bfbcc29f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/inspection.json",
+          "sha256": "b020bc5479d1cc822fe5b01bc70c48b0354590db1edc5987df32cc44b6135267"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/mesh-spec.json",
+          "sha256": "fa66415de0190b6b54f989325c8d7858117b2b76a140638ce1c8ef7452e4a0a0"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/paint-ownership.json",
+          "sha256": "5fee53c49a9d369f67f7a6cd011ab1e0233d9de9e0848b94d2b2dbad648fd71a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/projection-coverage.png",
+          "sha256": "4b16cca4f70a2724e35b33ab1ce8d055f40f8e399098d0fa0154fa1d2da0e8ad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/projection-draft.png",
+          "sha256": "506e274f3a65af11f2a97aa56947c4621edfe1916ec8149147e620623820aaf9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/projection-with-authored-fill.png",
+          "sha256": "240a8a72e2f845c6c197921d3326f1061451aaf5138a612a94a940721d8e89e9"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/recipe.json",
+          "sha256": "190bb0d73324bba0fd31773166db98e674cdf262415f8ca4b2c438c6f4f3c7df"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/refs/east.png",
+          "sha256": "9cb001a27ec9bba5d3e9e7bc475346c97a56c1877994fcc1165973bb7865d88b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/refs/north.png",
+          "sha256": "dc0e56a414b1ca8cc40282f172e14b63f567582489d51c0b2b753bd8af6c05cd"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/refs/south.png",
+          "sha256": "ac893a8c286691afc8cfeb6caeba99aea06b507ca6d0a6f0a155f951cbbc2c33"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/refs/west.png",
+          "sha256": "7733f903a7201ab99029d0a24614e2ecbf94c9f50280604380efc125bde90cd6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/rig.json",
+          "sha256": "e460caa397935ecb3f59e2f548c9f3a33f899b18af014861cb6c560a856ccf8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-23/v1/wheel-alignment.json",
+          "sha256": "9456f10cc2650154da9b58ef8d8ca9015f4f10a040f6ac667055b4ad5e12ad99"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-23-v1.glb",
+          "sha256": "294c5e07cced27ba82651c983d8258efbd87bd45942cb27adab3130aadd974b9"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-23-v1/comparison.png",
+          "sha256": "d4a20cbf6c1a612f4d8970990ed44d343db298b1d88596e9e32bf2a9618246e1"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-23-v1/index.html",
+          "sha256": "db48c2406ddcb91ff8df28841b6d12585cbd594cce6ff0bb71d4662d2f652f7a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-23-v1/orbit.png",
+          "sha256": "f1556783ab01783c4da2f98031f0344819f49f5d78f2e170ab8497f3d3b30003"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-23-v1/review.json",
+          "sha256": "a7ffe18ec00705bd1f4f9ee051e616963c4fc30f5622b4f0fff2e94ce284bfda"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-23-v1/silhouette.png",
+          "sha256": "cea6205da5669adec16fd8f00e813bfa1f34924f5e4f53bd1a8885502ea8f527"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "c5b846d8a2ece28f602aa6ed2f8cd87d8a29949dfbe1682889c0c5d59b447df6",
+        "west-render.png": "c7bf46f384897339faece0ceafbf8cb365c44104f57a577e5df36ca87db1d47d",
+        "north-render.png": "b6a545a8bb403c0c7b3dfe5f4e830d4872971e47afed8a9b2da9820c8e4a1f2a",
+        "south-render.png": "1c7c76b65fc3f9bbd3eee444d7128475dac6215062136878909b3a0d2d3639a9",
+        "orbit-0.png": "34d98bdb11603ea315903a1305abc71c45085a1d6219566300bb8ed224dc2efd",
+        "orbit-1.png": "6e30cbd95482abd1707945291e017feff14af462d03f8504c2ae38229bcb3af0",
+        "orbit-2.png": "fe5a2ee5b947ed096e908f03dbc00e7c991146904ed3da4097a5fb2bf40cc1e2",
+        "orbit-3.png": "f9c3a053e64c4f1f822e0aa90e15d7a129af2a6ad9a49f90271ecd1fc61ff102"
+      }
+    },
+    {
+      "assetId": "car-24",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-24-v1.glb",
+      "source": "art-source/vehicle-models/car-24/v1",
+      "capturedCandidateId": "projection:authored-car-24-v1",
+      "capturedCandidateSha256": "8cf2a9dcfebba94e8241bf3426ac37f2da96e6adccac22f8770967cf3d43bc77",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-24/v1/authoring-provenance.json",
+          "sha256": "40d72cf4f4514ea0c97b6ccd4f33fc381b4e13983d2a17871eb5844c26f2da77"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/body-wheel-clearance.json",
+          "sha256": "7cb00d964f622a702928db0bd46fa68afdd2d1788dd802c19da882d18c42eb9f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/car-atlas.png",
+          "sha256": "6924ef93205968fefab8e6044ba7ea17577e68dd46eec40cbd2d1bcac7fa4595"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/car.blend",
+          "sha256": "23dda723e4267615b5ca34bd2b2a56a6a5cfdad42e48d0740011930fd8158456"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/coverage.json",
+          "sha256": "64479cfd239d0f338bf8fc6492ccb3268e4987a1193639e17373b77f3d174e84"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/family-config.json",
+          "sha256": "9dec3ebebd725dff5c91e5aed91a306a2d3c41880907882d821af2c00ca19f57"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/geometry-audit.json",
+          "sha256": "88e72b4506d6471232a2f525d46a62d451ca291ef82b7773b0f6a56bfbcc29f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/inspection.json",
+          "sha256": "d2bcc14b023073dfccb78c66f072dcdaa6cbf6804e6708fd85f1f0610ca87f86"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/mesh-spec.json",
+          "sha256": "e3ae2bed08a68244834bb7dafafad1b243ac276f48631f4ab25f6e3aceb9eeba"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/paint-ownership.json",
+          "sha256": "5fee53c49a9d369f67f7a6cd011ab1e0233d9de9e0848b94d2b2dbad648fd71a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/projection-coverage.png",
+          "sha256": "4b16cca4f70a2724e35b33ab1ce8d055f40f8e399098d0fa0154fa1d2da0e8ad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/projection-draft.png",
+          "sha256": "ee7f074a1ebca69b10fd26d775cb24d5ca8588bab10bf9612f6adbe568865682"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/projection-with-authored-fill.png",
+          "sha256": "098fe2506ef2513adfabc9b20a7da6e31c7c0c853cab9ebb5efbfdc69764eae6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/recipe.json",
+          "sha256": "94e52ccdbc12a98fa17bcd45ac4822ea8db3b8bc6796bffcf86effe8d3579c28"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/refs/east.png",
+          "sha256": "adfd3a4377bc245ae820adae7de0aed0e9624fb56f88732ebfcb9f318ad36999"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/refs/north.png",
+          "sha256": "315f50385af22d259aaf7faed815ef9020ebb11c1ea0277f72e514dd21b1191d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/refs/south.png",
+          "sha256": "d918163d56bddc4a9e93bc9455ce7ddafab12538c38332a0230e485a5bdc33b7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/refs/west.png",
+          "sha256": "003e2696e9b9e02feab7823ccb0907c1a7d358361a8e23e009aff337c7022766"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/rig.json",
+          "sha256": "e460caa397935ecb3f59e2f548c9f3a33f899b18af014861cb6c560a856ccf8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-24/v1/wheel-alignment.json",
+          "sha256": "9456f10cc2650154da9b58ef8d8ca9015f4f10a040f6ac667055b4ad5e12ad99"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-24-v1.glb",
+          "sha256": "4803a8aa7e15fff34bc614708312ba0f8fa9a8ec5d4f0be18c0d73524455617c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-24-v1/comparison.png",
+          "sha256": "1127609422922fde97e2d80af133a9f2e7327158b1e2295ad30274cd9af6af8a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-24-v1/index.html",
+          "sha256": "d7d64c708a1cff1ff4021e7538cb6bd931157d03e3d6739ab1cfd3286028ac7c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-24-v1/orbit.png",
+          "sha256": "9c39fa377c50110a0b7ccb2767393cee922926f6ae4b53a8f8cda0f17a0e9bcc"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-24-v1/review.json",
+          "sha256": "cfeaebbd29262bc754f34043a21c50365742b87eba3a516986fcfcde7136d2cb"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-24-v1/silhouette.png",
+          "sha256": "cea6205da5669adec16fd8f00e813bfa1f34924f5e4f53bd1a8885502ea8f527"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "ece5fc8d93fffa10a327e0d96986516fc899587bb548748b01504720ed784609",
+        "west-render.png": "2053a30d574834bd53b18f84e0e13f8f081e22f559dd29a50a062d228d584f89",
+        "north-render.png": "a47356fd656c61cf6dd626cef5cee23465939c030cb74edd317763c17bed12de",
+        "south-render.png": "ad1b8ce1b06cf8c44d3e919ec57c99001a2d56a00a124ac2005fcc95b5f7722a",
+        "orbit-0.png": "90d6d1c0e8ec475464317fc9849be2df22b4e063d12d4b317e5e10a6a6fc5c42",
+        "orbit-1.png": "f44300379dbb036856c9f86103edd68c0233731cc056e4aabfc7461f0391647a",
+        "orbit-2.png": "af262d82ebf7a0d72f22433f68560ef9c64cf3af564c3dd3511ab2bd61a4382c",
+        "orbit-3.png": "98c83c1bdce5ba6e4a47b1cc37cceed1addfce248c396f521bd7a02764610080"
+      }
+    },
+    {
+      "assetId": "car-25",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-25-v1.glb",
+      "source": "art-source/vehicle-models/car-25/v1",
+      "capturedCandidateId": "projection:authored-car-25-v1",
+      "capturedCandidateSha256": "0ab9f8e32d2cff31cb58155cbe403093b290403c5866a908f86e8d3c1704fbf5",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-25/v1/authoring-provenance.json",
+          "sha256": "40d72cf4f4514ea0c97b6ccd4f33fc381b4e13983d2a17871eb5844c26f2da77"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/body-wheel-clearance.json",
+          "sha256": "59ad49eb74f169a33629bad463d900ff91e4922b9987ab60c394a0573cd1cf60"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/car-atlas.png",
+          "sha256": "4c3ae82cf5e629ccba8b5ed786a0d7be423ed3b5fe1c029f467ce3d224c121d5"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/car.blend",
+          "sha256": "ba01362a280dd4b552de1d05a1d75b78d1d9369e5c8e67a2136fd8bbd1a97f59"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/coverage.json",
+          "sha256": "64479cfd239d0f338bf8fc6492ccb3268e4987a1193639e17373b77f3d174e84"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/family-config.json",
+          "sha256": "9a37f6fc4b71fd6ebaeb3dd502ae45ee81412238b8bd6b0d7c896f26bd35e300"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/geometry-audit.json",
+          "sha256": "88e72b4506d6471232a2f525d46a62d451ca291ef82b7773b0f6a56bfbcc29f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/inspection.json",
+          "sha256": "8bc6cf256471f64bdf7ccc40b6fc7ce6814b906f5ec9c134afbe723ce063ecc3"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/mesh-spec.json",
+          "sha256": "10a3df323ac30ba413f7d8b3408a64eae15b28efd85124d6e8e8bb798e143c8b"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/paint-ownership.json",
+          "sha256": "5fee53c49a9d369f67f7a6cd011ab1e0233d9de9e0848b94d2b2dbad648fd71a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/projection-coverage.png",
+          "sha256": "4b16cca4f70a2724e35b33ab1ce8d055f40f8e399098d0fa0154fa1d2da0e8ad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/projection-draft.png",
+          "sha256": "d349770ea33cbe985e2cdd87fff9487f6243b9db3b80d7b586d744f52a972bb3"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/projection-with-authored-fill.png",
+          "sha256": "68d8a13527885845826a1f10d261c31f9d462c9da5b1eec7dcdb7d7cc4d04976"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/recipe.json",
+          "sha256": "961ee36afe0ba2a0239b3f31f606d62e237e4ae9ccc88508b677437495805efc"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/refs/east.png",
+          "sha256": "378a5914756c3354a9b6b4de95fdb504072941546b946003493daef97412fc35"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/refs/north.png",
+          "sha256": "83907bca3c2897c70e95be9f3cbf221673ffc3f5d7a55651924ae8a5bcc02e01"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/refs/south.png",
+          "sha256": "475b9413735360c69711885f26afd7a4e57067681fe58e4fd396f1efd32ad6aa"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/refs/west.png",
+          "sha256": "8b2664d99f548dff49ce9d409447678977cf30c653962b4b9aa2266a94d49405"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/rig.json",
+          "sha256": "e460caa397935ecb3f59e2f548c9f3a33f899b18af014861cb6c560a856ccf8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-25/v1/wheel-alignment.json",
+          "sha256": "9456f10cc2650154da9b58ef8d8ca9015f4f10a040f6ac667055b4ad5e12ad99"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-25-v1.glb",
+          "sha256": "252fb784d1fff205e84df88532402bdea7cce4336ee515a19c3d9fe89a0beb98"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-25-v1/comparison.png",
+          "sha256": "6e0f515f9f01b481cea5aaac607f670948b0a8bd748e0d1448c2048b6db6840e"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-25-v1/index.html",
+          "sha256": "a7410453113341ff46e87e3dc2328514ca0c84b77ea3be0ff05c01f337698219"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-25-v1/orbit.png",
+          "sha256": "20c2fada2622cb52e13d8d8ca2ce088253147e56d43ece51e146d7545c81af5d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-25-v1/review.json",
+          "sha256": "eb887de86b13c9b2568992fc400c1de3d8e6aeaf0e0bfb44ab089246a5e8562d"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-25-v1/silhouette.png",
+          "sha256": "cea6205da5669adec16fd8f00e813bfa1f34924f5e4f53bd1a8885502ea8f527"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "1ab8670406b695d82f990014ed40613ff367d5b36d2e10ec89afc61e7a130add",
+        "west-render.png": "6ca4ddf466bb4288d14991cd958520c4a183123c5262208cfbeafeb1c4bbc0e6",
+        "north-render.png": "3a85d8c4de72ef0b2800d63972d6b39fd335d94c31479c348c2a38d343458f8e",
+        "south-render.png": "7835531ff48ab58b07086fa6b04d6020e7f8bfa449fc8cd35cb1a8eb697f631d",
+        "orbit-0.png": "6620be0e62dafdfbaafb77ee58fd68b5e5689d8b673bdc6e334100e539bc19de",
+        "orbit-1.png": "0bcbafbd59de5c6ff95e30b2f79fe936599bff80341659061586ae0a08f26d04",
+        "orbit-2.png": "8b7ce888dc3e55f01950c7d2506ac6b59dc5ec998be444f2e526a1d6ee1823ba",
+        "orbit-3.png": "82e68210cda8f7c9c6025c78c9bf162be4b4d371f44553db087e7ce4461f9710"
+      }
+    },
+    {
+      "assetId": "car-26",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/car-26-v1.glb",
+      "source": "art-source/vehicle-models/car-26/v1",
+      "capturedCandidateId": "projection:authored-car-26-v1",
+      "capturedCandidateSha256": "587f92632f640b1d467861f426d7f367cd2b73656948bbd12d677c7b3632f06e",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 34,
+        "triangles": 1100
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/car-26/v1/authoring-provenance.json",
+          "sha256": "40d72cf4f4514ea0c97b6ccd4f33fc381b4e13983d2a17871eb5844c26f2da77"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/body-wheel-clearance.json",
+          "sha256": "3e2f99f15213762456e4cd3e65978685498494814827eff44272bdc02a3e9535"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/car-atlas.png",
+          "sha256": "fe41f487f55c10e801506445c7aaf30fe22eee62224853f2029b052da543211e"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/car.blend",
+          "sha256": "262e9de70a57157d4a3fea091636614e8cd31da1c1172d01c3c76a12a8a2a8b2"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/coverage.json",
+          "sha256": "64479cfd239d0f338bf8fc6492ccb3268e4987a1193639e17373b77f3d174e84"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/family-config.json",
+          "sha256": "001f7d03b9231372540e2914040074d3fbef60fb6cffd5063f38d4e7e66672b4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/geometry-audit.json",
+          "sha256": "88e72b4506d6471232a2f525d46a62d451ca291ef82b7773b0f6a56bfbcc29f6"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/inspection.json",
+          "sha256": "f1c514787d31f54389de0a1e54fc924b5d5ef02be0ba886cef503e105f619253"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/lights.json",
+          "sha256": "56653c7873763f35fc6166da9632c1a8356870dadbb3c9d77bda1415216630bb"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/mesh-spec.json",
+          "sha256": "e8226aa0cd0c25dbef04fd26e9ec023c8125916930d20b65e7c17fff53201a33"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/paint-ownership.json",
+          "sha256": "5fee53c49a9d369f67f7a6cd011ab1e0233d9de9e0848b94d2b2dbad648fd71a"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/projection-coverage.png",
+          "sha256": "4b16cca4f70a2724e35b33ab1ce8d055f40f8e399098d0fa0154fa1d2da0e8ad"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/projection-draft.png",
+          "sha256": "265d67de7024d3a1fab99ced77c0b886b349f533098d22545993636b66d73202"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/projection-with-authored-fill.png",
+          "sha256": "c7c3b0b0aaba57f1a24639d003f45f050223feac5f09ea33561199b7e77c40a1"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/recipe.json",
+          "sha256": "5b5da7032aaa179c41cddd2435ec4f2be1632d8b0eab985e4acf829306d0ddb4"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/refs/east.png",
+          "sha256": "6b0fa299ae88c909d7ed543bf660964ce7b2eed1f7e63f85bd63aabdea61185d"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/refs/north.png",
+          "sha256": "170efa5101bfa5d25a75ceec3892ba148a140e17a03a8aa32c4bf7d43441e4f7"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/refs/south.png",
+          "sha256": "122d0dc5cdd22ddc888c8396e5d0dd666019a5e18333ca4dfd005386ef350a09"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/refs/west.png",
+          "sha256": "b4bbb3048779e18c616e47f0228c74933cc516db5709390d952f8abcbd06a516"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/rig.json",
+          "sha256": "e460caa397935ecb3f59e2f548c9f3a33f899b18af014861cb6c560a856ccf8f"
+        },
+        {
+          "path": "art-source/vehicle-models/car-26/v1/wheel-alignment.json",
+          "sha256": "9456f10cc2650154da9b58ef8d8ca9015f4f10a040f6ac667055b4ad5e12ad99"
+        },
+        {
+          "path": "public/assets/models/vehicles/car-26-v1.glb",
+          "sha256": "90b84dd523b7ec365e3f805f7d988cadf45c77a247f283dd5a5a04c816d1de9c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-26-v1/comparison.png",
+          "sha256": "191417f7502226d6d97a541ed5ceddffb88ee9b14a75a1c098ed63e99552f502"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-26-v1/index.html",
+          "sha256": "5380452d5effc61c5ac01f147f4d68605c8c53e262d4607159551c59e0b07fb0"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-26-v1/orbit.png",
+          "sha256": "ff322d71719013efb70d54f1a4d9ad1cd64c48ee73dac543eb8169d35b5483c3"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-26-v1/review.json",
+          "sha256": "4120ae87f6d3cde4d4d745e1486523086527e02a49580fcf4b190c3e405151d3"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/car-26-v1/silhouette.png",
+          "sha256": "cea6205da5669adec16fd8f00e813bfa1f34924f5e4f53bd1a8885502ea8f527"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "dd461eecf10c2e982cf14169d6f9aa8a2be93cc83532116c883a2a4ef372dac5",
+        "west-render.png": "85055287a7b4d36046441aa033d07bd90022ff5538e30ee2b4dc984e4e92a662",
+        "north-render.png": "43fd0976a35ee4afacdf4ced8ea7703b0ac96db97d728212ce1bfbe8dc4631e4",
+        "south-render.png": "80c8ac3f3730bff7d884ceb7356e1bc83ca6d7f7fee2fcb3927874afb189cb7e",
+        "orbit-0.png": "a208b00e7317d480ce8fbe6c80caf4a825c8ac067f322ace7a2869fb4994228d",
+        "orbit-1.png": "28cf1be50abdf21dfa708886be0fb233ef7d3de8095f7e5ac39c9153b6c34956",
+        "orbit-2.png": "a6b98b8657881f72aaa457c99047efd23292a5f26fe4c4072584911e399d7820",
+        "orbit-3.png": "d9bed448506d35567d412a22e7abb74f484970d8cce6b8894af893144415b993"
+      }
     }
   ],
   "dependencies": [

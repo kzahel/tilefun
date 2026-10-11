@@ -1,0 +1,91 @@
+{
+  "assetId": "sedan-12",
+  "revision": "v1",
+  "glbSha256": "f5f8ede2538b7bb8495cdf153c334503bb85e5f188f6390b20a59675352f0891",
+  "clearance": [
+    {
+      "part": "Hub_FL",
+      "gap": 4.658910229766716,
+      "nearestBody": "Mirror--1",
+      "radius": 2.50000030187146,
+      "axialBounds": [
+        -15.75,
+        -15.34999942779541
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.4799618341275078,
+      "nearestBody": "Fender--24.5-west",
+      "radius": 6.000000403076593,
+      "axialBounds": [
+        -15.300000190734863,
+        -13.09999942779541
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": 4.658910229766716,
+      "nearestBody": "Mirror-1",
+      "radius": 2.50000030187146,
+      "axialBounds": [
+        15.34999942779541,
+        15.75
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.4799618341275078,
+      "nearestBody": "Fender--24.5-east",
+      "radius": 6.000000403076593,
+      "axialBounds": [
+        13.09999942779541,
+        15.300000190734863
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 40.572612806692085,
+      "nearestBody": "Mirror--1",
+      "radius": 2.50000030187146,
+      "axialBounds": [
+        -15.75,
+        -15.34999942779541
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.4799618341275078,
+      "nearestBody": "Fender-21.5-west",
+      "radius": 6.000000403076593,
+      "axialBounds": [
+        -15.300000190734863,
+        -13.09999942779541
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 40.572612806692085,
+      "nearestBody": "Mirror-1",
+      "radius": 2.50000030187146,
+      "axialBounds": [
+        15.34999942779541,
+        15.75
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.4799618341275078,
+      "nearestBody": "Fender-21.5-east",
+      "radius": 6.000000403076593,
+      "axialBounds": [
+        13.09999942779541,
+        15.300000190734863
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "loweredHoodRejected": true,
+  "restored": true
+}

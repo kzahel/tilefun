@@ -31,6 +31,17 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
     radius: 112,
     lateralScale: 1,
   })),
+  ...Array.from({ length: 20 }, (_, index) => {
+    const number = index + 7;
+    const vehicle = number === 12 ? "sedan-12" : `car-${number}`;
+    return {
+      vehicle,
+      assetId: `${vehicle}-authored-v1`,
+      path: `assets/models/vehicles/${vehicle}-v1.glb`,
+      radius: 80,
+      lateralScale: 1,
+    };
+  }),
   {
     vehicle: "ambulance",
     assetId: "ambulance-authored-v2",

@@ -15,7 +15,8 @@ test("Vite dev serving applies the deployment prefix once to launcher assets", a
   const server = await createServer({
     configFile: false,
     base: "/tilefun/",
-    server: { host: "127.0.0.1", port: 0 },
+    // Asset serving needs no HMR watcher; avoid scanning local authoring workspaces.
+    server: { host: "127.0.0.1", port: 0, watch: null },
     optimizeDeps: { noDiscovery: true, include: [] },
     logLevel: "error",
   });

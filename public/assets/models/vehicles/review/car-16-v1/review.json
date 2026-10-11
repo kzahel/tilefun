@@ -1,0 +1,43 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-car-16-v1",
+  "candidateFingerprint": "dbcffbaf8390be2746a3f3fddec23314a4cea88d73c32f4ba67dffd0d39918a0",
+  "identity": {
+    "assetId": "car-16",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "f5c9a2f17ee453e9aea41accf304316a6a09491e551e25b4bccdb7346cb5dba8",
+    "sourceAtlasSha256": "915b563c6215779a62fa7309580b7ebdb73364162d1f283c1c9d597da3858bad",
+    "files": [
+      {
+        "url": "assets/models/vehicles/car-16-v1.glb",
+        "sha256": "59db9de4bd36b8e529453098c7d9a691cc3b152db3c6bc4bb9f46fb4be605717"
+      },
+      {
+        "url": "assets/models/vehicles/review/car-16-v1/comparison.png",
+        "sha256": "550406f34e0ef1b7f63af7c4c8cc7b4d6f0e831f6e5abd176ca3c02d25a3d135"
+      },
+      {
+        "url": "assets/models/vehicles/review/car-16-v1/orbit.png",
+        "sha256": "97bb3f04d84ae0ed5d871dce45d20ca66427c9ebf9e24399c1a95e2cb08239df"
+      },
+      {
+        "url": "assets/models/vehicles/review/car-16-v1/silhouette.png",
+        "sha256": "e54c3a252ec3a670dc64c5b27a1fb6a058f70fc5f1692f1454e8daf147ac04df"
+      }
+    ]
+  },
+  "name": "Car 16",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent tall hatchback body and own source paint; not a palette-only substitute.",
+    "Four-view alpha family gate preserves explicit crop shifts and localized skylight/door/trim exceptions.",
+    "Observed roof is rectified from north; opposing paint/projection disagreements remain explicit.",
+    "Wheel floor rest/roll qualified separately; only neutral steering is supported.",
+    "Glass and deck UVs use bounded observed rectangles so adjacent sky/hood/fascia pixels cannot leak; this retains own palette/graphic exceptions.",
+    "End camera depths and fascia height disagree between opposite source drawings; inspect exact native and novel angles instead of assuming a universal projection.",
+    "Deck, glass and end fascia UVs are bounded own observed regions; curved corners belong to own side views. This prevents duplicate glass, bumper and roof graphics across adjoining surfaces.",
+    "Hidden geometry and source projection contradictions are explicit; normalized alpha does not establish identical unseen paint or shape.",
+    "Wheel clearance: belt and inner hood/trunk deck are above the radius-6 tire envelope; tapered end decks retain the source bumper height. Actual GLB cylinder proof covers every neutral roll angle; steering is unqualified."
+  ]
+}

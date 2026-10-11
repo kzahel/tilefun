@@ -106,15 +106,15 @@ it("overrides road vehicle appearance per view without replacing types, collisio
   });
   const original = structuredClone(cars);
   for (const car of cars) {
-    expect(normal.evaluate(car, 1) !== undefined).toBe(
-      car.type.startsWith("vehicle-v1:compact-") || car.type === "vehicle-v1:bus-2",
-    );
+    expect(normal.evaluate(car, 1) !== undefined).toBe(true);
     const expected =
       car.type === "vehicle-v1:compact-2"
         ? "compact-2-authored-v7"
         : car.type === "vehicle-v1:bus-2"
           ? "bus-2-authored-v1"
-          : "compact-1-authored-v7";
+          : car.type === "vehicle-v1:car-24"
+            ? "car-24-authored-v1"
+            : "compact-1-authored-v7";
     expect(override.evaluate(car, 1)?.assetId).toBe(expected);
     expect(override.assetFor(car)).toBe(expected);
   }
@@ -136,6 +136,10 @@ it.each([
   ["compact-4", "compact-4-authored-v1", 64],
   ["compact-5", "compact-5-authored-v1", 64],
   ["compact-6", "compact-6-authored-v1", 64],
+  ["car-7", "car-7-authored-v1", 80],
+  ["car-15", "car-15-authored-v1", 80],
+  ["car-24", "car-24-authored-v1", 80],
+  ["sedan-12", "sedan-12-authored-v1", 80],
   ["bus-1", "bus-1-authored-v1", 112],
   ["bus-2", "bus-2-authored-v1", 112],
   ["bus-3", "bus-3-authored-v1", 112],

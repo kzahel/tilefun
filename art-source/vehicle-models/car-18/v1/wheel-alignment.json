@@ -1,0 +1,92 @@
+{
+  "schema": "tilefun-wheel-well-fit-v1",
+  "observations": [
+    {
+      "wheel": "FL",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 50,
+        "horizontalScale": 1,
+        "verticalStretch": 1.17,
+        "origin": [
+          41,
+          43.19567944217589
+        ],
+        "status": "Independent large-car side well/roof fit; source east faces right."
+      },
+      "sourceCenter": [
+        20.5,
+        51.5
+      ],
+      "errorPixels": 0.0
+    },
+    {
+      "wheel": "FR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 50,
+        "horizontalScale": 1,
+        "verticalStretch": 1.17,
+        "origin": [
+          40,
+          43.19567944217589
+        ],
+        "status": "Independent large-car side well/roof fit; source east faces right."
+      },
+      "sourceCenter": [
+        60.5,
+        51.5
+      ],
+      "errorPixels": 0.0
+    },
+    {
+      "wheel": "RL",
+      "view": "west",
+      "camera": {
+        "azimuth": -90,
+        "elevation": 50,
+        "horizontalScale": 1,
+        "verticalStretch": 1.17,
+        "origin": [
+          41,
+          43.19567944217589
+        ],
+        "status": "Independent large-car side well/roof fit; source east faces right."
+      },
+      "sourceCenter": [
+        64.5,
+        51.5
+      ],
+      "errorPixels": 0.0
+    },
+    {
+      "wheel": "RR",
+      "view": "east",
+      "camera": {
+        "azimuth": 90,
+        "elevation": 50,
+        "horizontalScale": 1,
+        "verticalStretch": 1.17,
+        "origin": [
+          40,
+          43.19567944217589
+        ],
+        "status": "Independent large-car side well/roof fit; source east faces right."
+      },
+      "sourceCenter": [
+        16.5,
+        51.5
+      ],
+      "errorPixels": 0.0
+    }
+  ],
+  "floorMesh": "Underfloor",
+  "maxCenterErrorPixels": 2,
+  "status": "Measured source centers and main-floor rest/roll; separately declared tapered ends; steering unqualified",
+  "extraFloorMeshes": [
+    "Underfloor-front-bevel",
+    "Underfloor-rear-bevel"
+  ]
+}

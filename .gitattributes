@@ -42,3 +42,11 @@ scripts/authored-assets/prepare_bus_vehicle.py text eol=lf
 scripts/authored-assets/retain_bus.py text eol=lf
 scripts/authored-assets/bus-a-family.json -text
 scripts/authored-assets/bus-b-family.json -text
+
+scripts/authored-assets/author_large_car.py text eol=lf
+scripts/authored-assets/prepare_large_car.py text eol=lf
+scripts/authored-assets/retain_large_car.py text eol=lf
+scripts/authored-assets/large-car-a-family.json -text
+scripts/authored-assets/large-car-b-family.json -text
+scripts/authored-assets/large-car-c-family.json -text
+scripts/authored-assets/verify_body_wheel_envelopes.py text eol=lf

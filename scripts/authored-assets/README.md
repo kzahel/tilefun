@@ -633,3 +633,35 @@ extra floor meshes; it does not qualify whole-body nonzero steering. Retain all
 exact final source, paint, projection draft and review dependencies using the
 ordinary checklist, then verify replay and own-model engine fallback from tracked
 files. Normal builds consume the committed GLB.
+
+
+## Large-car families
+
+`large-car-a-family.json` fits car 7–11, sedan 12 and car 13;
+B fits 14–20 and C fits 21–26. Each group has its own geometry, source
+cameras and four-view alpha gate. Paint always comes from that vehicle's
+own frozen references, including localized stripes and roof/window exceptions.
+Sloped cabin surfaces, bounded roof/glass/deck UV regions and separate dark
+window frames prevent source projections from leaking between surfaces.
+
+```text
+python scripts/authored-assets/prepare_large_car.py --vehicle car-8 --config scripts/authored-assets/large-car-a-family.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_LARGE_CAR
+python scripts/authored-assets/retain_large_car.py --model data/authored-assets/NEW_LARGE_CAR --template scripts/authored-assets/large-car-a-family.json --revision v1 --name "Car 8"
+```
+
+Before retention, run `verify_body_wheel_envelopes.py` in Blender with a
+checkout-shaped diagnostic catalog containing only these new GLBs. Copy the
+matching report to each checkpoint's `body-wheel-clearance.json`; retention
+requires its exact GLB hash, rejected lowered-hood probe and restored baseline.
+The proof clips every fixed body triangle to each exported tire/hub axial slab
+and proves positive radial separation from cylinders enclosing every neutral
+roll angle. Run the ordinary wheel/main-floor and separately declared tapered
+floor probes too. A floor-only check cannot qualify hood/cabin clearance.
+Nonzero steering remains unqualified and gameplay keeps it neutral.
+
+Source roof highlights and end-view camera depths are inconsistent; the owned
+North roof and physical cabin cannot reproduce both opposing illustrations
+exactly. Record these limitations in the configuration and exact-revision
+reviews. Commit final GLBs, packed scenes, own clean atlas/draft/coverage,
+frozen refs, recipes, rig/paint/proof records and review captures. Authoring
+scripts alone are insufficient deliverables; scratch preparations remain ignored.

@@ -1,0 +1,406 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "car-20",
+  "family": "large-car-b",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    80,
+    64
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/car-20/v1/car.blend",
+    "sha256": "d18abf59f45fc1ac059988e9882b85f08a1b4464466f52ec6fd39540c7d9baa6"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        688,
+        5600,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        45
+      ],
+      "metadata": {
+        "name": "Car 20 \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "car",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          40,
+          45
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "ce931a53-121b-469e-a0c1-18e7ae1985d8",
+        "createdAt": "2026-10-03T10:48:41.266Z",
+        "candidateFingerprint": "c527e8156e653e7f151ef37ecf08760c4a449bc6a28bddd62f58b4ccc0e8a0c0",
+        "metadataFingerprint": "f514a5510f339f89f69a0464cd6616d1c14ee7922c99b1cc84d2fcbb0442d988"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        8
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 50,
+        "horizontalScale": 1,
+        "verticalStretch": 1.17,
+        "origin": [
+          40,
+          43.19567944217589
+        ],
+        "status": "Independent large-car side well/roof fit; source east faces right."
+      },
+      "sourceSha256": "fb8447e34aeb07def86c4b685ebbc2d8afe401913dc6f6d68bd351e10b7fb158"
+    },
+    {
+      "id": "west",
+      "rect": [
+        688,
+        5648,
+        80,
+        48
+      ],
+      "anchor": [
+        40,
+        45
+      ],
+      "metadata": {
+        "name": "Car 20 \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "car",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          40,
+          45
+        ],
+        "footprint": [
+          -36,
+          -24,
+          72,
+          24
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 72,
+            "height": 24,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -12
+      },
+      "sourceApproval": {
+        "id": "8a65bc19-448e-45c2-bc8f-b29fb6f0b005",
+        "createdAt": "2026-10-03T10:48:41.720Z",
+        "candidateFingerprint": "e6c79b138ef3f190bfbe007b748f80a1775bef3a6101c828d4b7c4466340aca3",
+        "metadataFingerprint": "9ecac9c4644576aa110d1292c1acb58d0210f92844f49e6dae5a1f5712829ae1"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        8
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 50,
+        "horizontalScale": 1,
+        "verticalStretch": 1.17,
+        "origin": [
+          41,
+          43.19567944217589
+        ],
+        "status": "Independent large-car side well/roof fit; source east faces right."
+      },
+      "sourceSha256": "f2972c923fce26ce015b652700fa982488b005f117672870d182cfb8a64b0327"
+    },
+    {
+      "id": "north",
+      "rect": [
+        816,
+        5616,
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        60
+      ],
+      "metadata": {
+        "name": "Car 20 \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "car",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          24,
+          60
+        ],
+        "footprint": [
+          -20,
+          -52,
+          40,
+          52
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "sourceApproval": {
+        "id": "d593e64e-b340-4892-99ee-f0fc86234166",
+        "createdAt": "2026-10-03T10:48:41.051Z",
+        "candidateFingerprint": "86590bc3b7db18a0bf8be578354ae031e789dee7286a93e1ec6c35a3187e2a6b",
+        "metadataFingerprint": "526aa128c1d802df5294528f6736e5a3e352df2dff7bf86c9a5d1688764d06d2"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        16,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 46.78484332431897,
+        "horizontalScale": 1.1,
+        "verticalStretch": 1.0249532281646752,
+        "origin": [
+          40,
+          35.06320541760722
+        ],
+        "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+      },
+      "sourceSha256": "475ddbdd9db2fe4e145e759042a367091b0a591b149a8241d324554a69d83960"
+    },
+    {
+      "id": "south",
+      "rect": [
+        768,
+        5616,
+        48,
+        64
+      ],
+      "anchor": [
+        24,
+        60
+      ],
+      "metadata": {
+        "name": "Car 20 \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "car",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          24,
+          60
+        ],
+        "footprint": [
+          -20,
+          -52,
+          40,
+          52
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 40,
+            "height": 52,
+            "zHeight": 28
+          }
+        ],
+        "depthOffset": -26
+      },
+      "sourceApproval": {
+        "id": "cf7a5a19-746a-4d6c-b67a-4a532ad2fa71",
+        "createdAt": "2026-10-03T10:48:41.469Z",
+        "candidateFingerprint": "5bb4ef77fbc65953d28cfea3c006618fccb5e34563790442a633392e9e3c2dee",
+        "metadataFingerprint": "e218ccf10a11a78159be53926fbb7e419efc5e37f1332e1b4b2a67d2672f657d"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        16,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 84.34257101169005,
+        "horizontalScale": 1.1,
+        "verticalStretch": 0.847720360749878,
+        "origin": [
+          40,
+          33.37763975155279
+        ],
+        "status": "Independent end-view depth/height fit; observed roof/window landmarks."
+      },
+      "sourceSha256": "1463975c50e8980d23b6083810868daa2b1cfb5a99391aa46e9b48bfcdf6b153"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1536,
+    "material": "car-20 palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Passenger-body-east": [
+        "east"
+      ],
+      "Fender--20.5-east": [
+        "east"
+      ],
+      "Fender-23.5-east": [
+        "east"
+      ],
+      "Passenger-body-west": [
+        "west"
+      ],
+      "Fender--20.5-west": [
+        "west"
+      ],
+      "Fender-23.5-west": [
+        "west"
+      ],
+      "Roof": [
+        "north"
+      ],
+      "Windshield-glass": [
+        "south"
+      ],
+      "Windshield-frame": [],
+      "Rear-window-glass": [
+        "north"
+      ],
+      "Rear-window-frame": [],
+      "Hood": [
+        "south"
+      ],
+      "Trunk": [
+        "north"
+      ],
+      "Cabin-windows-east": [
+        "east"
+      ],
+      "Cabin-windows-west": [
+        "west"
+      ],
+      "Front-fascia": [
+        "south"
+      ],
+      "Front-corner--1": [
+        "west"
+      ],
+      "Front-corner-1": [
+        "east"
+      ],
+      "Rear-fascia": [
+        "north"
+      ],
+      "Rear-corner--1": [
+        "west"
+      ],
+      "Rear-corner-1": [
+        "east"
+      ],
+      "Underfloor": [],
+      "Underfloor-front-bevel": [],
+      "Underfloor-rear-bevel": [],
+      "Mirror--1": [],
+      "Mirror-1": [],
+      "Tire_FL": [
+        "west"
+      ],
+      "Hub_FL": [
+        "west"
+      ],
+      "Tire_FR": [
+        "east"
+      ],
+      "Hub_FR": [
+        "east"
+      ],
+      "Tire_RL": [
+        "west"
+      ],
+      "Hub_RL": [
+        "west"
+      ],
+      "Tire_RR": [
+        "east"
+      ],
+      "Hub_RR": [
+        "east"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

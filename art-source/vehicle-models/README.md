@@ -27,13 +27,32 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Fire truck, stowed ladder | [v1](fire-truck-ladder-1/v1/) | [fire-truck-ladder-1-v1.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v1.glb) |
 | Fire truck wheel alignment | [v2](fire-truck-ladder-1/v2/) | [fire-truck-ladder-1-v2.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v2.glb) |
 | Green garbage truck | [v1](garbage-truck-green/v1/) | [garbage-truck-green-v1.glb](../../public/assets/models/vehicles/garbage-truck-green-v1.glb) |
-
 | Bus 1 | [v1](bus-1/v1/) | [bus-1-v1.glb](../../public/assets/models/vehicles/bus-1-v1.glb) |
 | Bus 2 | [v1](bus-2/v1/) | [bus-2-v1.glb](../../public/assets/models/vehicles/bus-2-v1.glb) |
 | Bus 3 | [v1](bus-3/v1/) | [bus-3-v1.glb](../../public/assets/models/vehicles/bus-3-v1.glb) |
 | Bus 4 | [v1](bus-4/v1/) | [bus-4-v1.glb](../../public/assets/models/vehicles/bus-4-v1.glb) |
 | Bus 5 | [v1](bus-5/v1/) | [bus-5-v1.glb](../../public/assets/models/vehicles/bus-5-v1.glb) |
 | Bus 6 | [v1](bus-6/v1/) | [bus-6-v1.glb](../../public/assets/models/vehicles/bus-6-v1.glb) |
+| Car 7 | [v1](car-7/v1/) | [car-7-v1.glb](../../public/assets/models/vehicles/car-7-v1.glb) |
+| Car 8 | [v1](car-8/v1/) | [car-8-v1.glb](../../public/assets/models/vehicles/car-8-v1.glb) |
+| Car 9 | [v1](car-9/v1/) | [car-9-v1.glb](../../public/assets/models/vehicles/car-9-v1.glb) |
+| Car 10 | [v1](car-10/v1/) | [car-10-v1.glb](../../public/assets/models/vehicles/car-10-v1.glb) |
+| Car 11 | [v1](car-11/v1/) | [car-11-v1.glb](../../public/assets/models/vehicles/car-11-v1.glb) |
+| Beige sedan 12 | [v1](sedan-12/v1/) | [sedan-12-v1.glb](../../public/assets/models/vehicles/sedan-12-v1.glb) |
+| Car 13 | [v1](car-13/v1/) | [car-13-v1.glb](../../public/assets/models/vehicles/car-13-v1.glb) |
+| Car 14 | [v1](car-14/v1/) | [car-14-v1.glb](../../public/assets/models/vehicles/car-14-v1.glb) |
+| Car 15 | [v1](car-15/v1/) | [car-15-v1.glb](../../public/assets/models/vehicles/car-15-v1.glb) |
+| Car 16 | [v1](car-16/v1/) | [car-16-v1.glb](../../public/assets/models/vehicles/car-16-v1.glb) |
+| Car 17 | [v1](car-17/v1/) | [car-17-v1.glb](../../public/assets/models/vehicles/car-17-v1.glb) |
+| Car 18 | [v1](car-18/v1/) | [car-18-v1.glb](../../public/assets/models/vehicles/car-18-v1.glb) |
+| Car 19 | [v1](car-19/v1/) | [car-19-v1.glb](../../public/assets/models/vehicles/car-19-v1.glb) |
+| Car 20 | [v1](car-20/v1/) | [car-20-v1.glb](../../public/assets/models/vehicles/car-20-v1.glb) |
+| Car 21 | [v1](car-21/v1/) | [car-21-v1.glb](../../public/assets/models/vehicles/car-21-v1.glb) |
+| Car 22 | [v1](car-22/v1/) | [car-22-v1.glb](../../public/assets/models/vehicles/car-22-v1.glb) |
+| Car 23 | [v1](car-23/v1/) | [car-23-v1.glb](../../public/assets/models/vehicles/car-23-v1.glb) |
+| Car 24 | [v1](car-24/v1/) | [car-24-v1.glb](../../public/assets/models/vehicles/car-24-v1.glb) |
+| Car 25 | [v1](car-25/v1/) | [car-25-v1.glb](../../public/assets/models/vehicles/car-25-v1.glb) |
+| Car 26 | [v1](car-26/v1/) | [car-26-v1.glb](../../public/assets/models/vehicles/car-26-v1.glb) |
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and

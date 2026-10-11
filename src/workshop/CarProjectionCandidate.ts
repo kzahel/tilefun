@@ -22,6 +22,63 @@ import bus5Review from "../../public/assets/models/vehicles/review/bus-5-v1/revi
 import bus6Review from "../../public/assets/models/vehicles/review/bus-6-v1/review.json" with {
   type: "json",
 };
+import large0Review from "../../public/assets/models/vehicles/review/car-7-v1/review.json" with {
+  type: "json",
+};
+import large1Review from "../../public/assets/models/vehicles/review/car-8-v1/review.json" with {
+  type: "json",
+};
+import large2Review from "../../public/assets/models/vehicles/review/car-9-v1/review.json" with {
+  type: "json",
+};
+import large3Review from "../../public/assets/models/vehicles/review/car-10-v1/review.json" with {
+  type: "json",
+};
+import large4Review from "../../public/assets/models/vehicles/review/car-11-v1/review.json" with {
+  type: "json",
+};
+import large6Review from "../../public/assets/models/vehicles/review/car-13-v1/review.json" with {
+  type: "json",
+};
+import large7Review from "../../public/assets/models/vehicles/review/car-14-v1/review.json" with {
+  type: "json",
+};
+import large8Review from "../../public/assets/models/vehicles/review/car-15-v1/review.json" with {
+  type: "json",
+};
+import large9Review from "../../public/assets/models/vehicles/review/car-16-v1/review.json" with {
+  type: "json",
+};
+import large10Review from "../../public/assets/models/vehicles/review/car-17-v1/review.json" with {
+  type: "json",
+};
+import large11Review from "../../public/assets/models/vehicles/review/car-18-v1/review.json" with {
+  type: "json",
+};
+import large12Review from "../../public/assets/models/vehicles/review/car-19-v1/review.json" with {
+  type: "json",
+};
+import large13Review from "../../public/assets/models/vehicles/review/car-20-v1/review.json" with {
+  type: "json",
+};
+import large14Review from "../../public/assets/models/vehicles/review/car-21-v1/review.json" with {
+  type: "json",
+};
+import large15Review from "../../public/assets/models/vehicles/review/car-22-v1/review.json" with {
+  type: "json",
+};
+import large16Review from "../../public/assets/models/vehicles/review/car-23-v1/review.json" with {
+  type: "json",
+};
+import large17Review from "../../public/assets/models/vehicles/review/car-24-v1/review.json" with {
+  type: "json",
+};
+import large18Review from "../../public/assets/models/vehicles/review/car-25-v1/review.json" with {
+  type: "json",
+};
+import large19Review from "../../public/assets/models/vehicles/review/car-26-v1/review.json" with {
+  type: "json",
+};
 import compactCyanReview from "../../public/assets/models/vehicles/review/compact-3-v1/review.json" with {
   type: "json",
 };
@@ -41,6 +98,9 @@ import garbageReview from "../../public/assets/models/vehicles/review/garbage-tr
   type: "json",
 };
 import policeReview from "../../public/assets/models/vehicles/review/police-car-v1/review.json" with {
+  type: "json",
+};
+import large5Review from "../../public/assets/models/vehicles/review/sedan-12-v1/review.json" with {
   type: "json",
 };
 import sedanBeigeReview from "../../public/assets/models/vehicles/review/unindexed-sedan-beige-v1/review.json" with {
@@ -102,6 +162,26 @@ export async function buildCarProjectionCandidate(): Promise<WorkshopCandidate> 
 export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidate[]> {
   const candidates: WorkshopCandidate[] = [];
   const reviews = [
+    { review: large0Review, name: "Car 7" },
+    { review: large1Review, name: "Car 8" },
+    { review: large2Review, name: "Car 9" },
+    { review: large3Review, name: "Car 10" },
+    { review: large4Review, name: "Car 11" },
+    { review: large5Review, name: "Beige sedan 12" },
+    { review: large6Review, name: "Car 13" },
+    { review: large7Review, name: "Car 14" },
+    { review: large8Review, name: "Car 15" },
+    { review: large9Review, name: "Car 16" },
+    { review: large10Review, name: "Car 17" },
+    { review: large11Review, name: "Car 18" },
+    { review: large12Review, name: "Car 19" },
+    { review: large13Review, name: "Car 20" },
+    { review: large14Review, name: "Car 21" },
+    { review: large15Review, name: "Car 22" },
+    { review: large16Review, name: "Car 23" },
+    { review: large17Review, name: "Car 24" },
+    { review: large18Review, name: "Car 25" },
+    { review: large19Review, name: "Car 26" },
     { review: bus1Review, name: "Bus 1" },
     { review: bus2Review, name: "Bus 2" },
     { review: bus3Review, name: "Bus 3" },

@@ -64,7 +64,7 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
         expect(collect(car, 1, zoom)).toHaveLength(1);
       }
       // Once the entire sprite and the existing effects margin leave the view,
-      // the collector must still avoid submitting it. Additional sedans use an
+      // the collector must still avoid submitting it. Additional sedans and large cars use an
       // 80px enclosing mesh bound, so their vertical exit is farther away.
       for (const [wx, wy] of [
         [
@@ -89,7 +89,9 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
             ? -221
             : model === "ambulance" || model.startsWith("bus-")
               ? -177
-              : model.startsWith("unindexed-sedan-")
+              : model.startsWith("unindexed-sedan-") ||
+                  model.startsWith("car-") ||
+                  model === "sedan-12"
                 ? -145
                 : -120,
         ],
@@ -99,7 +101,9 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
             ? 521
             : model === "ambulance" || model.startsWith("bus-")
               ? 477
-              : model.startsWith("unindexed-sedan-")
+              : model.startsWith("unindexed-sedan-") ||
+                  model.startsWith("car-") ||
+                  model === "sedan-12"
                 ? 495
                 : 461,
         ],

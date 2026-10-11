@@ -1,0 +1,18 @@
+{
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "configuration": "scripts/authored-assets/large-car-b-family.json",
+  "configurationSha256": "725c43af7f4379bd222cf6b8188899c6a80940171a37248eb75ee2b1bd3fb436",
+  "scripts": {
+    "scripts/authored-assets/author_large_car.py": "5b0d2b87b322f1a5ac01995db8640783920277fbb6ccb2063f62dbbb3b433efb",
+    "scripts/authored-assets/author_passenger_vehicle.py": "28029c640a771aa5ace628082768b00c2db4a196448e32ab46ecca15315749b4",
+    "scripts/authored-assets/author_emergency_vehicle.py": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab",
+    "scripts/authored-assets/author_garbage_truck.py": "1bbfd28c3e462885b16ff831d62b7e3182afbd5ace174bfad1202abece4bcd93",
+    "scripts/authored-assets/build_emergency_vehicle.py": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62",
+    "scripts/authored-assets/prepare_large_car.py": "49e0a2c4375424951f7cdd09b605536c4d44dfda2099e0f83ad0db44dc729dfd",
+    "scripts/authored-assets/retain_large_car.py": "33a5fc66ff54d6c3e1529eaad5029ceab338ac6b9f3315f24faa239eeb9f3050",
+    "scripts/authored-assets/retain_vehicle.py": "cacca97eb4e411b53c5f32d2b3578c80c7a89096071b09481202e10aa065bc82",
+    "scripts/authored-assets/pack_draft.py": "c814bc6cb42d3ad1189236138bf195fec247295aed00316d50cf7a63b195a726",
+    "scripts/authored-assets/verify_body_wheel_envelopes.py": "feee098b47ecfdc82e7bce00b21034a85c00deb91712e1aded265ab22de81f72"
+  },
+  "status": "Own source paint and independent family geometry; explicit crop registration, hidden fill and projection contradictions; unreviewed"
+}
