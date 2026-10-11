@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity } from "./Entity.js";
-import { SpatialHash } from "./SpatialHash.js";
+import { COLLISION_CROWD_SIZE, SpatialHash } from "./SpatialHash.js";
 
 function makeEntity(id: number, wx: number, wy: number): Entity {
   return {
@@ -16,6 +16,27 @@ function makeEntity(id: number, wx: number, wy: number): Entity {
 }
 
 describe("SpatialHash", () => {
+  it("tracks crowd admission through movement, removal and clear", () => {
+    const hash = new SpatialHash();
+    const first = Array.from({ length: COLLISION_CROWD_SIZE }, (_, i) => makeEntity(i + 1, 10, 10));
+    for (const e of first.slice(0, -1)) hash.insert(e);
+    expect(hash.hasCrowdedCells()).toBe(false);
+    const crossing = first[first.length - 1];
+    if (!crossing) throw new Error("Missing crowd boundary body");
+    hash.insert(crossing);
+    expect(hash.hasCrowdedCells()).toBe(true);
+    crossing.position.wx = 300;
+    hash.update(crossing);
+    expect(hash.hasCrowdedCells()).toBe(false);
+    for (let i = 0; i < COLLISION_CROWD_SIZE - 1; i++) hash.insert(makeEntity(100 + i, 300, 10));
+    expect(hash.hasCrowdedCells()).toBe(true);
+    hash.remove(crossing);
+    expect(hash.hasCrowdedCells()).toBe(false);
+    hash.insert(makeEntity(200, 300, 10));
+    expect(hash.hasCrowdedCells()).toBe(true);
+    hash.clear();
+    expect(hash.hasCrowdedCells()).toBe(false);
+  });
   it("inserts and queries entities in the correct cell", () => {
     const hash = new SpatialHash();
     const e = makeEntity(1, 10, 10);

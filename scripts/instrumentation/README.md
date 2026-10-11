@@ -349,6 +349,24 @@ It does not claim a real hidden-tab lifecycle test: automated pages are forced
 visible in the measured setup. [Evidence and rerun](../../docs/research/train-refresh-pacing.md).
 
 
+## Collision broad-phase scaling
+
+Run `node --import tsx scripts/instrumentation/collision-broad-phase.mjs
+--output=/tmp/tilefun-collision-broad-phase` for three repeats of 0/24/96/384
+resting/traveling native dogs through production Realm/ScenarioSession. It uses
+memory persistence, fixed 60Hz steps, 60 warmup/180 retained ticks and no rendering
+or real IndexedDB; this is accelerated workload scaling, not native deadlines.
+Whole tick/physics includes index maintenance; replication is reported separately.
+Every traveling dog must advance 88px or the capture fails.
+
+`--count --repeats=1` adds candidate counts and a hash over every retained tick's
+wire/durable state, excluding random record IDs. Hash allocation still affects GC,
+so use a separate shallow run for timing. `--cell-size=32|64` changes only the
+diagnostic instance constructor; it is not a production setting. Run frozen source
+pairs sequentially without concurrent tests/builds, then compare sparse native
+Worker game controls. [115](../../docs/tactical/115-collision-broad-phase.md) owns
+accepted source/probe hashes, equivalence, desktop results and phone limits.
+
 ## Rotated vehicle collision demand
 
 `npm run vehicle-collision:bench -- --output=/tmp/tilefun-vehicle-collision`

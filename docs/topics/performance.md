@@ -190,8 +190,8 @@ fall about 62%; a minimal timer pair measures walking
 ground mean 0.516–0.536ms original versus 0.476–0.478ms reuse (about 9% less).
 Whole-tick/EntityManager ranges overlap, including slightly higher idle means;
 this is a modest phase saving, with no demonstrated stutter cure. The tactical
-owns full results and validation. NPC collision-blocker Set/filter fusion, finer
-spatial buckets and prop-query reuse remain local candidates.
+owns full results and validation. 115 below delivers NPC collision-blocker fusion
+and adaptive fine collision buckets; ground/prop candidates remain separate work.
 
 [110](../tactical/110-server-headroom-proposal.md) zooms out with thirteen current
 frozen-source desktop captures, a separate timeline and exact AI search-entry counts.
@@ -261,14 +261,31 @@ Ordinary native walking is continuously moving at about 60Hz with work spread
 across physics, selection, snapshot validation, streaming and mutation reads.
 Ground reuse remains effective (about 26 resolutions/10 candidate lookups per
 tick); dirty handling receives about 145 notifications for 40 actors, but only
-0.070ms measured nested time in that deep desktop capture. Next: prototype a
-footprint-aware narrow collision/support query, account for index/update costs,
-and compare dense and sparse scenes before phone acceptance. Temporary blocker
-Set/filter removal is a smaller independent slice; record fast paths are secondary.
+0.070ms measured nested time in that deep desktop capture. The resulting collision
+prototype is delivered in 115 below; support queries and record fast paths remain
+separate candidates.
 114 owns counts, source/probe hashes, timings and measurement limits. No runtime
 policy change or stutter cause is established by this profile.
 Retain 60Hz player/contact physics and acknowledgement freshness; lower NPC
 publication cadence and compute workers remain distinct later experiments.
+
+[115](../tactical/115-collision-broad-phase.md) delivers a separate 32px footprint
+grid for crowded EntityManager movement, refreshing every mover before later
+queries and rebuilding all resident solid bodies, including sleepers. A cached
+density guard retains coarse queries for sparse passes, after an always-on
+prototype added overhead. The narrow blocker fuses exclusions, solidity, height
+and overlap checks without temporary Set/filter allocation. Ground support,
+replication, residency, separation and 60Hz player physics keep their owners.
+
+Against frozen `e969d8a`, accelerated 384-dog travel whole-tick means fall from
+25.06–25.52ms to 9.16–9.89ms, including index costs, with replication separate.
+96-dog travel means fall from 2.65–2.80 to 1.59–1.71ms. 384-dog collision
+candidates fall 92–93%; all eight full wire/durable traces match. Ordinary native
+walking ranges overlap at 1.16–1.31 versus 1.22–1.29ms mean and 1.5–1.7 versus
+1.6ms p95, with uninterrupted 512–513px travel near 60Hz. Idle ranges also overlap.
+This establishes dense workload scaling, not a phone/FPS/desync claim. The phone
+was unavailable. Next: repeat controls on a cooled phone, then profile a separate
+fine ground/prop candidate path while preserving live support and per-pass reuse.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

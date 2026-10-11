@@ -2,6 +2,8 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { getEntityAABB } from "./collision.js";
 import type { Entity } from "./Entity.js";
 
+export const COLLISION_CROWD_SIZE = 32;
+
 /**
  * Spatial hash grid for fast entity lookups by position.
  * Cell size = 1 chunk (CHUNK_SIZE_PX = 256px).
@@ -16,6 +18,11 @@ export class SpatialHash {
   private entityCell = new Map<number, number>();
   /** Footprints crossing a cell edge must appear in queries beyond their origin cell. */
   private spanningEntities = new Map<number, Entity>();
+  private readonly crowdedCells = new Set<number>();
+
+  hasCrowdedCells(): boolean {
+    return this.crowdedCells.size > 0;
+  }
 
   /** Pack chunk coordinates into a single integer key. Handles negative coords up to +-32767. */
   private static key(cx: number, cy: number): number {
@@ -40,6 +47,7 @@ export class SpatialHash {
       this.cells.set(k, bucket);
     }
     bucket.push(entity);
+    if (bucket.length === COLLISION_CROWD_SIZE) this.crowdedCells.add(k);
   }
 
   /** Remove an entity from the hash. */
@@ -56,6 +64,7 @@ export class SpatialHash {
         const last = bucket[bucket.length - 1];
         if (last) bucket[idx] = last;
         bucket.pop();
+        if (bucket.length === COLLISION_CROWD_SIZE - 1) this.crowdedCells.delete(k);
       }
       if (bucket.length === 0) this.cells.delete(k);
     }
@@ -89,6 +98,7 @@ export class SpatialHash {
           const last = bucket[bucket.length - 1];
           if (last) bucket[idx] = last;
           bucket.pop();
+          if (bucket.length === COLLISION_CROWD_SIZE - 1) this.crowdedCells.delete(oldKey);
         }
         if (bucket.length === 0) this.cells.delete(oldKey);
       }
@@ -101,6 +111,7 @@ export class SpatialHash {
       this.cells.set(newKey, bucket);
     }
     bucket.push(entity);
+    if (bucket.length === COLLISION_CROWD_SIZE) this.crowdedCells.add(newKey);
   }
 
   /** Query all entities in a chunk coordinate range (inclusive). */
@@ -161,5 +172,6 @@ export class SpatialHash {
     this.cells.clear();
     this.entityCell.clear();
     this.spanningEntities.clear();
+    this.crowdedCells.clear();
   }
 }

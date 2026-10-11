@@ -23,10 +23,10 @@ import {
 } from "../wildlife/rabbitInteractions.js";
 import { prepareRobinMotion, settleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { CollisionIndex } from "./CollisionIndex.js";
 import type { AABB } from "./collision.js";
 import {
   aabbLacksWater,
-  aabbOverlapsAnyEntity,
   aabbOverlapsPropWalls,
   aabbsOverlap,
   getEntityAABB,
@@ -38,7 +38,7 @@ import type { Entity } from "./Entity.js";
 import { ENTITY_DEFS } from "./EntityDefs.js";
 import type { Prop } from "./Prop.js";
 import type { PropManager } from "./PropManager.js";
-import { SpatialHash } from "./SpatialHash.js";
+import { COLLISION_CROWD_SIZE, SpatialHash } from "./SpatialHash.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "./spriteAnimation.js";
 import { onWanderBlocked } from "./wanderAI.js";
 
@@ -61,6 +61,7 @@ export class EntityManager {
   }
   readonly byId = new Map<number, Entity>();
   readonly spatialHash = new SpatialHash();
+  readonly collisionIndex = new CollisionIndex();
   private nextId = 1;
 
   /** Optional hook for TagServiceImpl to receive tag change notifications. */
@@ -85,6 +86,7 @@ export class EntityManager {
     this.byId.set(entity.id, entity);
     this.spatialHash.insert(entity);
     this.onSpawn?.(entity);
+    this.collisionIndex.update(entity);
     return entity;
   }
 
@@ -95,6 +97,7 @@ export class EntityManager {
     this.entities.push(entity);
     this.byId.set(entity.id, entity);
     this.spatialHash.insert(entity);
+    this.collisionIndex.update(entity);
     this.nextId = Math.max(this.nextId, entity.id + 1);
   }
 
@@ -122,6 +125,20 @@ export class EntityManager {
   ): void {
     const playerSet = new Set(players);
     const active = entityTickDts ? [...entityTickDts.keys()] : this.entities;
+    // Sparse chunk queries are already short. Pay the resident-index build cost
+    // only when a queried neighborhood can contain a crowded origin bucket.
+    const useCollisionIndex =
+      active.length >= COLLISION_CROWD_SIZE &&
+      this.spatialHash.hasCrowdedCells() &&
+      active.some((entity) => {
+        if (!entity.collider || entity.collider.solid === false) return false;
+        const { wx, wy } = entity.position;
+        return (
+          this.spatialHash.getCell(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX))
+            .length >= COLLISION_CROWD_SIZE
+        );
+      });
+    if (useCollisionIndex) this.collisionIndex.rebuild(this.entities);
 
     // Save previous positions for render interpolation (only for ticking entities)
     for (const entity of active) {
@@ -163,20 +180,32 @@ export class EntityManager {
           const elevStepUp = self.jumpVZ !== undefined ? 0 : STEP_UP_THRESHOLD;
           if (isElevationBlocked3D(aabb, selfWz, getHeight, elevStepUp)) return true;
         }
-        const excludeIds = alsoExclude ? new Set([self.id, alsoExclude.id]) : new Set([self.id]);
-        const minCx = Math.floor(aabb.left / CHUNK_SIZE_PX);
-        const maxCx = Math.floor(aabb.right / CHUNK_SIZE_PX);
-        const minCy = Math.floor(aabb.top / CHUNK_SIZE_PX);
-        const maxCy = Math.floor(aabb.bottom / CHUNK_SIZE_PX);
-        let nearby = this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy);
-        // 3D entity-entity filtering: skip entities whose Z ranges don't overlap with ours
-        nearby = nearby.filter((e) => {
-          if (e.parentId === self.id) return false; // children (e.g. rider) don't block parent
+        const nearby = useCollisionIndex
+          ? this.collisionIndex.query(aabb)
+          : this.spatialHash.queryRange(
+              Math.floor(aabb.left / CHUNK_SIZE_PX),
+              Math.floor(aabb.top / CHUNK_SIZE_PX),
+              Math.floor(aabb.right / CHUNK_SIZE_PX),
+              Math.floor(aabb.bottom / CHUNK_SIZE_PX),
+            );
+        for (const e of nearby) {
+          if (
+            e.id === self.id ||
+            e.id === alsoExclude?.id ||
+            e.parentId === self.id ||
+            !e.collider ||
+            e.collider.solid === false
+          )
+            continue;
           const eWz = e.wz ?? 0;
           const eHeight = e.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-          return zRangesOverlap(selfWz, selfHeight, eWz, eHeight);
-        });
-        return aabbOverlapsAnyEntity(aabb, excludeIds, nearby);
+          if (
+            zRangesOverlap(selfWz, selfHeight, eWz, eHeight) &&
+            aabbsOverlap(aabb, getEntityAABB(e.position, e.collider))
+          )
+            return true;
+        }
+        return false;
       };
 
     // --- Phase 1: Push entities in each player's path, then move players ---
@@ -254,6 +283,7 @@ export class EntityManager {
             blockMask,
             makeExtraBlocker(entity, player),
           );
+          if (useCollisionIndex) this.collisionIndex.update(entity);
         }
 
         // Now move the player — entities are still solid blockers.
@@ -264,6 +294,7 @@ export class EntityManager {
         player.position.wx += player.velocity.vx * dt;
         player.position.wy += player.velocity.vy * dt;
       }
+      if (useCollisionIndex && this.byId.has(player.id)) this.collisionIndex.update(player);
     }
 
     // --- Phase 2: Move NPCs (using per-entity tick dt when available) ---
@@ -331,7 +362,10 @@ export class EntityManager {
         entity.position.wx += dx;
         entity.position.wy += dy;
       }
+      if (useCollisionIndex) this.collisionIndex.update(entity);
     }
+
+    this.collisionIndex.finish();
 
     // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
     if (getHeight) {
@@ -548,6 +582,7 @@ export class EntityManager {
     const entity = this.entities[idx];
     if (entity) {
       this.spatialHash.remove(entity);
+      this.collisionIndex.remove(entity);
       this.onDespawn?.(entity, persist);
       for (const listener of this.removalListeners) listener(entity, persist);
       if (persist) this.onRemove?.(entity);

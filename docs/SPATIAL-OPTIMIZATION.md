@@ -1,6 +1,6 @@
 # Spatial indexing and entity tick scheduling
 
-Current behavior checked 2026-10-03. The
+Current behavior checked 2026-10-11. The
 [original optimization plan](archive/spatial-optimization-plan.md) is historical;
 it incorrectly describes tick tiers as still wholly pending for today's code.
 
@@ -10,6 +10,16 @@ it incorrectly describes tick tiers as still wholly pending for today's code.
   over EntityManager's entities. Movement changes buckets when crossing a chunk
   boundary. Removal finds the entity within its bucket before swap-removing it;
   the whole removal operation is not strictly constant-time.
+- [CollisionIndex](../src/entities/CollisionIndex.ts) adds a separate 32px
+  footprint grid only for crowded EntityManager movement passes. Cached coarse
+  density selects it when at least 32 actors are active and an active solid body
+  occupies a chunk with at least 32 resident entities. Admitted passes rebuild
+  all resident solid bodies, including sleepers, then refresh each mover before
+  later actors query. Ordinary spanning bodies populate intersected cells; huge
+  edited bodies use a bounded supplemental fallback. Narrow checks read live
+  geometry/height. Sparse passes retain coarse collision queries; ground support,
+  separation, replication and residency retain their coarse-index contracts.
+  [115](tactical/115-collision-broad-phase.md) owns costs and equivalence evidence.
 - [Realm](../src/server/Realm.ts) computes effective entity tick durations across
   all active sessions' visible ranges. Nearby entities step each simulation
   substep, mid-range entities accumulate time and step at a reduced cadence,

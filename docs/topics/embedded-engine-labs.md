@@ -529,6 +529,16 @@ or carrier motion. Prediction keeps the existing shared resolver without a cache
 Native game/lab Worker contact checks pass on Canvas/GPU in the full 541-check
 browser run (one skipped); streaming readiness and phone timing are recorded in 107.
 
+## Collision candidate reduction (2026-10-11)
+
+[115](../tactical/115-collision-broad-phase.md) adds the same adaptive collision
+grid to shared EntityManager in the game Worker and ScenarioSession labs. Each
+crowded movement pass indexes resident solid bodies, including sleepers, and
+refreshes movers sequentially; sparse passes keep chunk queries. Fixed physics,
+prediction, support and lab lifecycle retain existing owners. The committed Realm
+crowd fixture checks whole-tick costs and exact wire/durable outcomes; native game
+controls and shared contact/ground regressions cover the ordinary path.
+
 ## Authored blue car presentation
 
 [108](../tactical/108-authored-blue-car-gameplay.md) connects compact-1 v7 through
