@@ -1,0 +1,5255 @@
+{
+  "schema": "tilefun-dense-ground-support/v1",
+  "date": "2026-10-11",
+  "source": {
+    "baseline": "b2b52d332a869e80385326a7c5513d5fbb041d41",
+    "candidate": "Baseline plus src/entities/EntityManager.ts and src/entities/CollisionIndex.ts only; concurrent ambulance changes excluded.",
+    "runtimeSHA256": {
+      "before": {
+        "src/entities/EntityManager.ts": "63301e4e54e9bb2591e4436d267dfdbfb70073bc756dc4611a8fb510d0247b60",
+        "src/entities/CollisionIndex.ts": "182d69513e9971041a416945e125eb547ef1542a9959e247445a6afa827f6522"
+      },
+      "after": {
+        "src/entities/EntityManager.ts": "049f3dc03a26bed437f8be253758cc0ebf9212c159b6575d4e5872388af68a60",
+        "src/entities/CollisionIndex.ts": "1cc14f85b12305436fdad944c454800441725656ec86f3cf6d69627d5167fa3f"
+      }
+    }
+  },
+  "environment": {
+    "model": "Pixel 7a",
+    "androidApi": 37,
+    "browser": "154.0.8037.126",
+    "charging": "AC unchanged"
+  },
+  "method": {
+    "clean": "16 physical phone dedicated Worker crowd lanes, 60 warmup/180 retained 1/60s ticks. Native held rest/travel, verified 0/88px actor motion, separate replication, index costs included. Before/after/after/before order, reversed populations on repeat. Excludes renderer, real IndexedDB, network delivery and new planning. Entry gate <=29C/status zero; every crowd reading exactly 27C.",
+    "native": "Eight native Canvas/Worker/real IndexedDB controls: two 8s continuous keyboard walks and two 12s idle captures per source. Same ABBA source order. Single ground boundary timer, no deep counters, trace or CPU sampling. Entry <=29C/status zero; entry/end 27.0-28.8C. Keyboard controls are not touch/GPU acceptance.",
+    "diagnostics": "Separate eight phase, eight census and eight parity lanes. Original <=29C diagnostic cooling attempt timed out at 30C with zero cases retained. Diagnostic-only rerun uses <=31C/status zero and records 30.2-30.7C, excluded from clean tick gain claims. ABBA phase ordering; cold/GC/JIT/OS outliers retained, including original moving-phase 161.8ms tick. Warm phases corroborate attribution, not hardware-normalized comparisons against 27C controls.",
+    "parity": "Four before/after pairs: 96/384 actors x rest/travel. SHA-256 of every retained full serializeEntity + encodeActor frame (persistent identifier omitted), then SHA-256 of 180 frame digests joined with newline. Crypto digest awaits happen outside tick/replication timers. Those lane timings are overhead and not clean evidence.",
+    "cleanup": "Owned pages/Workers/Vite/CDP proxy stopped, task ADB routes removed and original routes verified, prior foreground app restored.",
+    "privacy": "Raw host/world IDs, browser URLs and device identifiers remain temporary."
+  },
+  "probesSHA256": {
+    "crowd-run.mjs": "2595530c07da3d085f9549c7490496e9bf2feaec00ebe5d39b451fd20ca2b557",
+    "extra-crowd-run.mjs": "624ea469ad91ca0da7fb42b19981e2624231a06ba5b010b95631d96f2fba4ad3",
+    "parity-run.mjs": "1f6ffe6a3d482b2c7c2e7c0fac0fa78695089ca76cf5db267496128545008f0e",
+    "phone-series.mjs": "ca00e085437089676dd3707c6ab846fe411acf3bc203497ab2cf127df6482f90",
+    "extra-series.mjs": "43b3e6fc1e3db8369a25bbd07fcf1ecac1746bab409e42cdb609aef952b45053",
+    "before/scripts/instrumentation/phone-collision.worker.mjs": "7db23cae7b8d0b7e7d30784c9dfc4b042fab2237cbbec973533e83012182be2e",
+    "before/scripts/instrumentation/phone-support-parity.worker.mjs": "2cc741281b6ed808cc362958f4b935d515a2d0307315ef9b39347affb7bd5bfa",
+    "before/scripts/instrumentation/support-audit.mjs": "10d21a88ee1905761f9c3c47f3c82b722e3f466916277b147738c6b1738be410",
+    "before-phase/src/entities/EntityManager.ts": "c8a311fd7d264ab7249bbad3de3a5bdf2c7bc73746958370be9ea4c95400decb",
+    "after-phase/src/entities/EntityManager.ts": "8a5a3cf1782f83f24e5bf4c417a852f2ec19ed44744d90e4aa07a2abf1d50fb1",
+    "before-census/src/physics/surfaceHeight.ts": "ee05fd0951bc324e8156f253184e4857ad8be76c3b33ae58cdb3d3099aa9f56e",
+    "after-census/src/physics/surfaceHeight.ts": "ee05fd0951bc324e8156f253184e4857ad8be76c3b33ae58cdb3d3099aa9f56e"
+  },
+  "cleanCrowd": [
+    {
+      "lane": "after-crowd0",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.619444,
+            "p50": 2.3,
+            "p95": 5,
+            "max": 7.1
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.274444,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 16.8
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.108333,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 2.7
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.209444,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.055556,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.605,
+              "p50": 1.5,
+              "p95": 2.4,
+              "max": 4.2
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.846111,
+            "p50": 2.7,
+            "p95": 4.1,
+            "max": 6.1
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.508333,
+            "p50": 0.4,
+            "p95": 0.8,
+            "max": 13.3
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.092222,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.6
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.22,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.3
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.065556,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.946667,
+              "p50": 1.9,
+              "p95": 2.7,
+              "max": 4.6
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 9.253333,
+            "p50": 8.8,
+            "p95": 12,
+            "max": 17.6
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.638889,
+            "p50": 0.5,
+            "p95": 0.8,
+            "max": 16.1
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.138889,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.3
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.782778,
+              "p50": 0.7,
+              "p95": 1.5,
+              "max": 2.3
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.232222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.7
+            },
+            "physics": {
+              "count": 180,
+              "mean": 6.001667,
+              "p50": 5.6,
+              "p95": 8.2,
+              "max": 11.8
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 10.658889,
+            "p50": 10.4,
+            "p95": 13.1,
+            "max": 20.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.662778,
+            "p50": 1.5,
+            "p95": 2.4,
+            "max": 14.4
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.129444,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.4
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.883333,
+              "p50": 0.8,
+              "p95": 1.7,
+              "max": 4.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.226667,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.1
+            },
+            "physics": {
+              "count": 180,
+              "mean": 7.66,
+              "p50": 7.4,
+              "p95": 9.5,
+              "max": 16.5
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "after-crowd1",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 9.936111,
+            "p50": 8.7,
+            "p95": 15.3,
+            "max": 37
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.676667,
+            "p50": 0.5,
+            "p95": 1,
+            "max": 16.7
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.147778,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.8
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.855,
+              "p50": 0.7,
+              "p95": 1.4,
+              "max": 7.4
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.267778,
+              "p50": 0.2,
+              "p95": 0.5,
+              "max": 8.7
+            },
+            "physics": {
+              "count": 180,
+              "mean": 6.405556,
+              "p50": 5.6,
+              "p95": 9,
+              "max": 31.3
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 11.043889,
+            "p50": 10.8,
+            "p95": 13.7,
+            "max": 17.2
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.731667,
+            "p50": 1.5,
+            "p95": 2.9,
+            "max": 14.4
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.128889,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.8
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.818889,
+              "p50": 0.7,
+              "p95": 1.5,
+              "max": 2.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.232222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.3
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.028333,
+              "p50": 7.6,
+              "p95": 10.8,
+              "max": 12.8
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.448889,
+            "p50": 2.3,
+            "p95": 3.2,
+            "max": 5.2
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.23,
+            "p50": 0.1,
+            "p95": 0.3,
+            "max": 12.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.080556,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.6
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.191111,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.053333,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.517222,
+              "p50": 1.5,
+              "p95": 2,
+              "max": 2.9
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.843333,
+            "p50": 2.6,
+            "p95": 4.1,
+            "max": 6.5
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.487222,
+            "p50": 0.4,
+            "p95": 0.7,
+            "max": 11.4
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.075556,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.6
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.230556,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.4
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.053889,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.973889,
+              "p50": 1.9,
+              "p95": 2.8,
+              "max": 5.7
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "before-crowd0",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.670556,
+            "p50": 2.4,
+            "p95": 4.3,
+            "max": 9.7
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.228333,
+            "p50": 0.2,
+            "p95": 0.3,
+            "max": 10.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.081667,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.8
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.208333,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.4
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.062222,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.8
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.675,
+              "p50": 1.5,
+              "p95": 2.6,
+              "max": 6.9
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.963889,
+            "p50": 2.8,
+            "p95": 4.1,
+            "max": 7.3
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.489444,
+            "p50": 0.4,
+            "p95": 0.7,
+            "max": 14.3
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.094444,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1.9
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.219444,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.063333,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.8
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.075,
+              "p50": 2,
+              "p95": 2.8,
+              "max": 5.3
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 10.634444,
+            "p50": 10.1,
+            "p95": 13.8,
+            "max": 18.5
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.655,
+            "p50": 0.5,
+            "p95": 0.9,
+            "max": 13.1
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.146111,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.5
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.787222,
+              "p50": 0.7,
+              "p95": 1.5,
+              "max": 2.8
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.212778,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 7.491111,
+              "p50": 7.1,
+              "p95": 9.9,
+              "max": 13.1
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 12.701111,
+            "p50": 12.4,
+            "p95": 15.2,
+            "max": 23.1
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.716667,
+            "p50": 1.5,
+            "p95": 2.5,
+            "max": 14.7
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.133333,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1.6
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.842222,
+              "p50": 0.8,
+              "p95": 1.4,
+              "max": 3.9
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.205,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1
+            },
+            "physics": {
+              "count": 180,
+              "mean": 9.670556,
+              "p50": 9.4,
+              "p95": 11.9,
+              "max": 14.2
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "before-crowd1",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 11.127222,
+            "p50": 10.4,
+            "p95": 15,
+            "max": 35.4
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.652222,
+            "p50": 0.5,
+            "p95": 0.8,
+            "max": 15
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.14,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.6
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.778333,
+              "p50": 0.7,
+              "p95": 1.1,
+              "max": 2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.214444,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.9
+            },
+            "physics": {
+              "count": 180,
+              "mean": 7.867222,
+              "p50": 7.4,
+              "p95": 10.3,
+              "max": 19.1
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 13.395,
+            "p50": 13.2,
+            "p95": 16.1,
+            "max": 23
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.833889,
+            "p50": 1.5,
+            "p95": 3.2,
+            "max": 15.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.152778,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.9
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.841111,
+              "p50": 0.8,
+              "p95": 1.4,
+              "max": 4.8
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.203889,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4
+            },
+            "physics": {
+              "count": 180,
+              "mean": 10.397778,
+              "p50": 10.1,
+              "p95": 13.2,
+              "max": 18.5
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.68,
+            "p50": 2.4,
+            "p95": 3.7,
+            "max": 6.2
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.246667,
+            "p50": 0.2,
+            "p95": 0.5,
+            "max": 12.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.08,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.5
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.207222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.1
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.065,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.3
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.703333,
+              "p50": 1.6,
+              "p95": 2.5,
+              "max": 4.7
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.949444,
+            "p50": 2.8,
+            "p95": 3.9,
+            "max": 7.6
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.503333,
+            "p50": 0.4,
+            "p95": 0.9,
+            "max": 12.4
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.079444,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.7
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.221111,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.7
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.056667,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.088333,
+              "p50": 2,
+              "p95": 2.8,
+              "max": 5.3
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 27,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    }
+  ],
+  "native": [
+    {
+      "lane": "after-walk0",
+      "motion": "walk",
+      "elapsedMs": 8015.5,
+      "authorityHz": 60.000247,
+      "frames": {
+        "count": 481,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 17.2
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 481,
+        "p50": 2.4,
+        "p95": 4.2,
+        "p99": 6,
+        "max": 9
+      },
+      "updateMs": {
+        "count": 481,
+        "p50": 2.9,
+        "p95": 4.8,
+        "p99": 7.3,
+        "max": 12.4
+      },
+      "ackMs": {
+        "count": 397,
+        "p50": 36.4,
+        "p95": 54.3,
+        "p99": 69.8,
+        "max": 161.9
+      },
+      "maxReplay": 8,
+      "maxResimPx": 2.9e-5,
+      "travelPx": 513.16928,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.5,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 1944,
+            "totalMs": 86.800001,
+            "max": 1.4,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 972,
+            "totalMs": 338.2,
+            "max": 1.9,
+            "p50": 0.3,
+            "p95": 0.7,
+            "p99": 1.1
+          },
+          "selection": {
+            "count": 486,
+            "totalMs": 433.199999,
+            "max": 6.2,
+            "p50": 0.9,
+            "p95": 1.2,
+            "p99": 2.7
+          },
+          "decision-selection": {
+            "count": 486,
+            "totalMs": 48.400001,
+            "max": 1.9,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 486,
+            "totalMs": 154.5,
+            "max": 4.9,
+            "p50": 0.3,
+            "p95": 0.5,
+            "p99": 1.5
+          },
+          "updateRobinAI": {
+            "count": 17772,
+            "totalMs": 163.499999,
+            "max": 5.8,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 477,
+            "totalMs": 31.0,
+            "max": 4.5,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "pre-hooks": {
+            "count": 486,
+            "totalMs": 1.7,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 486,
+            "totalMs": 192.6,
+            "max": 0.9,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 0.8
+          },
+          "physics": {
+            "count": 486,
+            "totalMs": 959.0,
+            "max": 9.6,
+            "p50": 1.9,
+            "p95": 3.2,
+            "p99": 3.7
+          },
+          "tags": {
+            "count": 486,
+            "totalMs": 0.8,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 486,
+            "totalMs": 11.7,
+            "max": 0.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 486,
+            "totalMs": 339.199999,
+            "max": 2.7,
+            "p50": 0.7,
+            "p95": 1.1,
+            "p99": 1.3
+          },
+          "tick": {
+            "count": 486,
+            "totalMs": 3275.100001,
+            "max": 37.7,
+            "p50": 6.5,
+            "p95": 9.9,
+            "p99": 12.3
+          },
+          "updateRabbitAI": {
+            "count": 570,
+            "totalMs": 11.900001,
+            "max": 2.4,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 241,
+        "props": 932,
+        "visible": 10,
+        "halo": 40,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "after-walk1",
+      "motion": "walk",
+      "elapsedMs": 8015.1,
+      "authorityHz": 59.99458,
+      "frames": {
+        "count": 478,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 49.9
+      },
+      "framesOver25": 2,
+      "renderMs": {
+        "count": 478,
+        "p50": 2.4,
+        "p95": 3.9,
+        "p99": 6.2,
+        "max": 9.2
+      },
+      "updateMs": {
+        "count": 481,
+        "p50": 2.7,
+        "p95": 3.8,
+        "p99": 6,
+        "max": 11.5
+      },
+      "ackMs": {
+        "count": 420,
+        "p50": 35.7,
+        "p95": 50.6,
+        "p99": 82.3,
+        "max": 174.8
+      },
+      "maxReplay": 9,
+      "maxResimPx": 2.9e-5,
+      "travelPx": 513.16928,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 28.1,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28.3,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 1952,
+            "totalMs": 92.499996,
+            "max": 5.9,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 976,
+            "totalMs": 376.699999,
+            "max": 6,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 1.3
+          },
+          "selection": {
+            "count": 488,
+            "totalMs": 459.099999,
+            "max": 2.3,
+            "p50": 1,
+            "p95": 1.3,
+            "p99": 1.6
+          },
+          "decision-selection": {
+            "count": 488,
+            "totalMs": 47.7,
+            "max": 0.5,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 488,
+            "totalMs": 115.200001,
+            "max": 1.1,
+            "p50": 0.2,
+            "p95": 0.4,
+            "p99": 0.8
+          },
+          "updateRobinAI": {
+            "count": 17825,
+            "totalMs": 159.100001,
+            "max": 1.5,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 478,
+            "totalMs": 23.900001,
+            "max": 2.1,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "pre-hooks": {
+            "count": 488,
+            "totalMs": 2.3,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 488,
+            "totalMs": 205.200001,
+            "max": 6.3,
+            "p50": 0.4,
+            "p95": 0.8,
+            "p99": 0.9
+          },
+          "physics": {
+            "count": 488,
+            "totalMs": 943.100001,
+            "max": 8,
+            "p50": 1.9,
+            "p95": 3.1,
+            "p99": 3.6
+          },
+          "tags": {
+            "count": 488,
+            "totalMs": 1.7,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 488,
+            "totalMs": 11.8,
+            "max": 0.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 488,
+            "totalMs": 394.8,
+            "max": 6.7,
+            "p50": 0.8,
+            "p95": 1.2,
+            "p99": 2.4
+          },
+          "tick": {
+            "count": 488,
+            "totalMs": 3353.200001,
+            "max": 39.1,
+            "p50": 6.7,
+            "p95": 10,
+            "p99": 13.3
+          },
+          "updateRabbitAI": {
+            "count": 572,
+            "totalMs": 12.6,
+            "max": 1.6,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 241,
+        "props": 932,
+        "visible": 10,
+        "halo": 40,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "before-walk0",
+      "motion": "walk",
+      "elapsedMs": 8012.6,
+      "authorityHz": 60.003704,
+      "frames": {
+        "count": 481,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 481,
+        "p50": 2.8,
+        "p95": 4.4,
+        "p99": 5.8,
+        "max": 9
+      },
+      "updateMs": {
+        "count": 481,
+        "p50": 2.9,
+        "p95": 4.1,
+        "p99": 5.1,
+        "max": 9.6
+      },
+      "ackMs": {
+        "count": 436,
+        "p50": 35.7,
+        "p95": 50.3,
+        "p99": 56.4,
+        "max": 156.2
+      },
+      "maxReplay": 8,
+      "maxResimPx": 2.9e-5,
+      "travelPx": 513.169281,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 27,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 1948,
+            "totalMs": 94.8,
+            "max": 0.6,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 974,
+            "totalMs": 346.900001,
+            "max": 6,
+            "p50": 0.3,
+            "p95": 0.6,
+            "p99": 1
+          },
+          "selection": {
+            "count": 487,
+            "totalMs": 385.7,
+            "max": 2,
+            "p50": 0.8,
+            "p95": 1.1,
+            "p99": 1.4
+          },
+          "decision-selection": {
+            "count": 487,
+            "totalMs": 51.3,
+            "max": 0.7,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 487,
+            "totalMs": 116.399999,
+            "max": 1.3,
+            "p50": 0.2,
+            "p95": 0.4,
+            "p99": 0.8
+          },
+          "updateRobinAI": {
+            "count": 17789,
+            "totalMs": 172.899999,
+            "max": 1.7,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 478,
+            "totalMs": 24.9,
+            "max": 2.3,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "pre-hooks": {
+            "count": 487,
+            "totalMs": 2.4,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 487,
+            "totalMs": 220.000001,
+            "max": 1.2,
+            "p50": 0.4,
+            "p95": 0.8,
+            "p99": 1
+          },
+          "physics": {
+            "count": 487,
+            "totalMs": 1084.3,
+            "max": 5.6,
+            "p50": 2.2,
+            "p95": 3.5,
+            "p99": 4.1
+          },
+          "tags": {
+            "count": 487,
+            "totalMs": 1.0,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 487,
+            "totalMs": 16.200001,
+            "max": 1.8,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 487,
+            "totalMs": 439.099998,
+            "max": 6.7,
+            "p50": 0.9,
+            "p95": 1.3,
+            "p99": 2.2
+          },
+          "tick": {
+            "count": 487,
+            "totalMs": 3508.099999,
+            "max": 40.4,
+            "p50": 7,
+            "p95": 10.4,
+            "p99": 13
+          },
+          "updateRabbitAI": {
+            "count": 570,
+            "totalMs": 15.100001,
+            "max": 3.1,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 241,
+        "props": 932,
+        "visible": 10,
+        "halo": 40,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "before-walk1",
+      "motion": "walk",
+      "elapsedMs": 8012.5,
+      "authorityHz": 60.000741,
+      "frames": {
+        "count": 480,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "framesOver25": 1,
+      "renderMs": {
+        "count": 480,
+        "p50": 2.3,
+        "p95": 4.2,
+        "p99": 5.5,
+        "max": 11.1
+      },
+      "updateMs": {
+        "count": 481,
+        "p50": 2.8,
+        "p95": 4,
+        "p99": 5.2,
+        "max": 6.9
+      },
+      "ackMs": {
+        "count": 444,
+        "p50": 35.6,
+        "p95": 52,
+        "p99": 69.1,
+        "max": 152.2
+      },
+      "maxReplay": 8,
+      "maxResimPx": 1.6e-5,
+      "travelPx": 513.16928,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 28.6,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28.8,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 1948,
+            "totalMs": 90.399998,
+            "max": 0.6,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 974,
+            "totalMs": 347.499997,
+            "max": 2.4,
+            "p50": 0.3,
+            "p95": 0.7,
+            "p99": 1
+          },
+          "selection": {
+            "count": 487,
+            "totalMs": 412.300001,
+            "max": 1.6,
+            "p50": 0.9,
+            "p95": 1.2,
+            "p99": 1.3
+          },
+          "decision-selection": {
+            "count": 487,
+            "totalMs": 47.100001,
+            "max": 0.3,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 487,
+            "totalMs": 109.2,
+            "max": 1.7,
+            "p50": 0.2,
+            "p95": 0.3,
+            "p99": 0.8
+          },
+          "updateRobinAI": {
+            "count": 17839,
+            "totalMs": 164.7,
+            "max": 4.8,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 477,
+            "totalMs": 21.6,
+            "max": 2.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "pre-hooks": {
+            "count": 487,
+            "totalMs": 2.0,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 487,
+            "totalMs": 193.2,
+            "max": 2.8,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 0.8
+          },
+          "physics": {
+            "count": 487,
+            "totalMs": 937.7,
+            "max": 5,
+            "p50": 1.9,
+            "p95": 3,
+            "p99": 3.6
+          },
+          "tags": {
+            "count": 487,
+            "totalMs": 0.4,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0
+          },
+          "overlap": {
+            "count": 487,
+            "totalMs": 10.499999,
+            "max": 0.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 487,
+            "totalMs": 382.3,
+            "max": 6.5,
+            "p50": 0.7,
+            "p95": 1.2,
+            "p99": 2.6
+          },
+          "tick": {
+            "count": 487,
+            "totalMs": 3252.099998,
+            "max": 31.4,
+            "p50": 6.5,
+            "p95": 9.8,
+            "p99": 12.8
+          },
+          "updateRabbitAI": {
+            "count": 572,
+            "totalMs": 12.500001,
+            "max": 1.8,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 241,
+        "props": 932,
+        "visible": 10,
+        "halo": 40,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 5,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 5,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "after-idle0",
+      "motion": "idle",
+      "elapsedMs": 12012.5,
+      "authorityHz": 59.997186,
+      "frames": {
+        "count": 720,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "framesOver25": 1,
+      "renderMs": {
+        "count": 720,
+        "p50": 2.5,
+        "p95": 3.5,
+        "p99": 3.9,
+        "max": 5.7
+      },
+      "updateMs": {
+        "count": 721,
+        "p50": 2.9,
+        "p95": 4.2,
+        "p99": 4.5,
+        "max": 6.1
+      },
+      "ackMs": {
+        "count": 641,
+        "p50": 35.9,
+        "p95": 53.5,
+        "p99": 55.5,
+        "max": 65
+      },
+      "maxReplay": 2,
+      "maxResimPx": 0,
+      "travelPx": 0,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 27.5,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.8,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 2904,
+            "totalMs": 184.300001,
+            "max": 0.8,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 1452,
+            "totalMs": 544.800002,
+            "max": 1.7,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 0.9
+          },
+          "selection": {
+            "count": 726,
+            "totalMs": 561.0,
+            "max": 6.7,
+            "p50": 0.7,
+            "p95": 1.1,
+            "p99": 1.4
+          },
+          "decision-selection": {
+            "count": 726,
+            "totalMs": 65.399999,
+            "max": 0.3,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 726,
+            "totalMs": 158.1,
+            "max": 0.7,
+            "p50": 0.2,
+            "p95": 0.3,
+            "p99": 0.4
+          },
+          "updateRobinAI": {
+            "count": 15835,
+            "totalMs": 185.200001,
+            "max": 1.3,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 726,
+            "totalMs": 54.1,
+            "max": 7.2,
+            "p50": 0.1,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "pre-hooks": {
+            "count": 726,
+            "totalMs": 3.3,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 726,
+            "totalMs": 271.399999,
+            "max": 1.2,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 0.8
+          },
+          "physics": {
+            "count": 726,
+            "totalMs": 1135.399999,
+            "max": 7,
+            "p50": 1.5,
+            "p95": 2.3,
+            "p99": 2.7
+          },
+          "tags": {
+            "count": 726,
+            "totalMs": 1.3,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 726,
+            "totalMs": 12.6,
+            "max": 0.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 726,
+            "totalMs": 561.699999,
+            "max": 6.9,
+            "p50": 0.7,
+            "p95": 1.1,
+            "p99": 1.7
+          },
+          "tick": {
+            "count": 726,
+            "totalMs": 4414.899997,
+            "max": 17.9,
+            "p50": 5.8,
+            "p95": 8.6,
+            "p99": 10.3
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 23,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "after-idle1",
+      "motion": "idle",
+      "elapsedMs": 12015.2,
+      "authorityHz": 59.998512,
+      "frames": {
+        "count": 721,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 17.3
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 721,
+        "p50": 2.6,
+        "p95": 3.5,
+        "p99": 3.9,
+        "max": 5.9
+      },
+      "updateMs": {
+        "count": 721,
+        "p50": 2.8,
+        "p95": 3.9,
+        "p99": 4.4,
+        "max": 12.2
+      },
+      "ackMs": {
+        "count": 650,
+        "p50": 35.9,
+        "p95": 52.2,
+        "p99": 54.5,
+        "max": 61.8
+      },
+      "maxReplay": 2,
+      "maxResimPx": 0,
+      "travelPx": 0,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 27.8,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28.1,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 2908,
+            "totalMs": 172.7,
+            "max": 1,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 1454,
+            "totalMs": 562.700002,
+            "max": 6.4,
+            "p50": 0.4,
+            "p95": 0.6,
+            "p99": 0.8
+          },
+          "selection": {
+            "count": 727,
+            "totalMs": 586.299999,
+            "max": 1.5,
+            "p50": 0.8,
+            "p95": 1.2,
+            "p99": 1.3
+          },
+          "decision-selection": {
+            "count": 727,
+            "totalMs": 79.5,
+            "max": 5.6,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 727,
+            "totalMs": 195.0,
+            "max": 5.3,
+            "p50": 0.3,
+            "p95": 0.4,
+            "p99": 0.6
+          },
+          "updateFaunaAI": {
+            "count": 727,
+            "totalMs": 52.600001,
+            "max": 4,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2
+          },
+          "updateRobinAI": {
+            "count": 15862,
+            "totalMs": 208.100001,
+            "max": 5.9,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "pre-hooks": {
+            "count": 727,
+            "totalMs": 3.7,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 727,
+            "totalMs": 291.100002,
+            "max": 2.6,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 0.8
+          },
+          "physics": {
+            "count": 727,
+            "totalMs": 1234.299997,
+            "max": 7.8,
+            "p50": 1.6,
+            "p95": 2.6,
+            "p99": 3.1
+          },
+          "tags": {
+            "count": 727,
+            "totalMs": 2.2,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 727,
+            "totalMs": 19.0,
+            "max": 0.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 727,
+            "totalMs": 571.200001,
+            "max": 2.2,
+            "p50": 0.8,
+            "p95": 1.1,
+            "p99": 1.4
+          },
+          "tick": {
+            "count": 727,
+            "totalMs": 4663.899998,
+            "max": 14.4,
+            "p50": 6.3,
+            "p95": 9.1,
+            "p99": 12.1
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 23,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "before-idle0",
+      "motion": "idle",
+      "elapsedMs": 12007.4,
+      "authorityHz": 59.99884,
+      "frames": {
+        "count": 720,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 33.3
+      },
+      "framesOver25": 1,
+      "renderMs": {
+        "count": 720,
+        "p50": 2.5,
+        "p95": 3.7,
+        "p99": 5,
+        "max": 5.7
+      },
+      "updateMs": {
+        "count": 721,
+        "p50": 2.9,
+        "p95": 3.9,
+        "p99": 4.3,
+        "max": 8.1
+      },
+      "ackMs": {
+        "count": 693,
+        "p50": 35.7,
+        "p95": 48.2,
+        "p99": 53.6,
+        "max": 68.4
+      },
+      "maxReplay": 3,
+      "maxResimPx": 0,
+      "travelPx": 0,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 27.1,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 27.3,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 2900,
+            "totalMs": 215.399999,
+            "max": 0.8,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 1450,
+            "totalMs": 629.300001,
+            "max": 6.2,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 1
+          },
+          "selection": {
+            "count": 725,
+            "totalMs": 627.999999,
+            "max": 6.9,
+            "p50": 0.9,
+            "p95": 1.2,
+            "p99": 1.3
+          },
+          "decision-selection": {
+            "count": 725,
+            "totalMs": 74.500001,
+            "max": 0.3,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 725,
+            "totalMs": 168.499999,
+            "max": 6.1,
+            "p50": 0.2,
+            "p95": 0.3,
+            "p99": 0.4
+          },
+          "updateRobinAI": {
+            "count": 15821,
+            "totalMs": 214.699999,
+            "max": 1.7,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 725,
+            "totalMs": 65.500001,
+            "max": 5.9,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.5
+          },
+          "pre-hooks": {
+            "count": 725,
+            "totalMs": 3.5,
+            "max": 0.2,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 725,
+            "totalMs": 316.200001,
+            "max": 6.4,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 1
+          },
+          "physics": {
+            "count": 725,
+            "totalMs": 1316.000001,
+            "max": 8.2,
+            "p50": 1.8,
+            "p95": 2.6,
+            "p99": 3.7
+          },
+          "tags": {
+            "count": 725,
+            "totalMs": 2.099999,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 725,
+            "totalMs": 16.799999,
+            "max": 1.3,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 725,
+            "totalMs": 616.899998,
+            "max": 6.7,
+            "p50": 0.8,
+            "p95": 1.2,
+            "p99": 1.6
+          },
+          "tick": {
+            "count": 725,
+            "totalMs": 4982.499999,
+            "max": 18.8,
+            "p50": 6.9,
+            "p95": 9.5,
+            "p99": 13.7
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 23,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    },
+    {
+      "lane": "before-idle1",
+      "motion": "idle",
+      "elapsedMs": 12011,
+      "authorityHz": 60.003145,
+      "frames": {
+        "count": 721,
+        "p50": 16.7,
+        "p95": 16.7,
+        "p99": 16.8,
+        "max": 16.9
+      },
+      "framesOver25": 0,
+      "renderMs": {
+        "count": 721,
+        "p50": 2.2,
+        "p95": 3.1,
+        "p99": 3.5,
+        "max": 5.8
+      },
+      "updateMs": {
+        "count": 721,
+        "p50": 2.6,
+        "p95": 3.7,
+        "p99": 4.2,
+        "max": 11.4
+      },
+      "ackMs": {
+        "count": 688,
+        "p50": 35.3,
+        "p95": 52.5,
+        "p99": 53.3,
+        "max": 53.6
+      },
+      "maxReplay": 2,
+      "maxResimPx": 0,
+      "travelPx": 0,
+      "pageErrors": 0,
+      "thermalsBefore": {
+        "batteryC": 28.3,
+        "thermalStatus": 0
+      },
+      "thermalsAfter": {
+        "batteryC": 28.6,
+        "thermalStatus": 0
+      },
+      "authority": {
+        "timings": {
+          "interest-demand": {
+            "count": 2904,
+            "totalMs": 161.1,
+            "max": 2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2
+          },
+          "streaming": {
+            "count": 1452,
+            "totalMs": 581.6,
+            "max": 5.9,
+            "p50": 0.4,
+            "p95": 0.7,
+            "p99": 1.2
+          },
+          "selection": {
+            "count": 726,
+            "totalMs": 680.300002,
+            "max": 5.5,
+            "p50": 0.9,
+            "p95": 1.3,
+            "p99": 2.8
+          },
+          "decision-selection": {
+            "count": 726,
+            "totalMs": 67.899998,
+            "max": 1.3,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.3
+          },
+          "prop-selection": {
+            "count": 726,
+            "totalMs": 242.0,
+            "max": 6,
+            "p50": 0.3,
+            "p95": 0.5,
+            "p99": 0.7
+          },
+          "updateRobinAI": {
+            "count": 15839,
+            "totalMs": 196.300001,
+            "max": 5.2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "updateFaunaAI": {
+            "count": 726,
+            "totalMs": 51.6,
+            "max": 3.3,
+            "p50": 0.1,
+            "p95": 0.2,
+            "p99": 0.4
+          },
+          "pre-hooks": {
+            "count": 726,
+            "totalMs": 6.4,
+            "max": 2,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "physics.ground-tracking": {
+            "count": 726,
+            "totalMs": 274.900001,
+            "max": 6.5,
+            "p50": 0.3,
+            "p95": 0.7,
+            "p99": 1.5
+          },
+          "physics": {
+            "count": 726,
+            "totalMs": 1146.7,
+            "max": 7.7,
+            "p50": 1.4,
+            "p95": 2.7,
+            "p99": 4.7
+          },
+          "tags": {
+            "count": 726,
+            "totalMs": 1.4,
+            "max": 0.1,
+            "p50": 0,
+            "p95": 0,
+            "p99": 0.1
+          },
+          "overlap": {
+            "count": 726,
+            "totalMs": 22.100001,
+            "max": 3.8,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1
+          },
+          "replication": {
+            "count": 726,
+            "totalMs": 517.100002,
+            "max": 5,
+            "p50": 0.7,
+            "p95": 1,
+            "p99": 1.3
+          },
+          "tick": {
+            "count": 726,
+            "totalMs": 4681.400001,
+            "max": 13.7,
+            "p50": 6.2,
+            "p95": 9.4,
+            "p99": 12
+          }
+        },
+        "movementCounts": {
+          "stationary": 0,
+          "moving": 0
+        },
+        "resident": 242,
+        "props": 964,
+        "visible": 3,
+        "halo": 23,
+        "species": {
+          "wildlife-robin-v1": 221,
+          "wildlife-dog-provisional-v1": 1,
+          "wildlife-rabbit-v1": 8,
+          "player": 1,
+          "wildlife-fish-provisional-v1": 3,
+          "wildlife-frog-v1": 2,
+          "wildlife-deer-v1": 3,
+          "wildlife-mallard-v1": 2,
+          "wildlife-cat-provisional-v1": 1
+        }
+      }
+    }
+  ],
+  "warmPhases": [
+    {
+      "lane": "after-phase0",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 11.707778,
+            "p50": 10.9,
+            "p95": 17.2,
+            "max": 40.4
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.759444,
+            "p50": 1.6,
+            "p95": 2.8,
+            "max": 14.8
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.171667,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 2
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.964444,
+              "p50": 0.8,
+              "p95": 2,
+              "max": 8.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.262778,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 2.2
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.385556,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 3.4
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 3.942222,
+              "p50": 3.5,
+              "p95": 6,
+              "max": 12.5
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 2.297778,
+              "p50": 2.1,
+              "p95": 3.5,
+              "max": 9.6
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.267778,
+              "p50": 0.2,
+              "p95": 0.5,
+              "max": 1.6
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.907778,
+              "p50": 0.9,
+              "p95": 1.5,
+              "max": 2.2
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.302778,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 1.5
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.192222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.3
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.310556,
+              "p50": 7.8,
+              "p95": 11.9,
+              "max": 17.8
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.3,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.3,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 9.467778,
+            "p50": 9,
+            "p95": 12.8,
+            "max": 15.4
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.620556,
+            "p50": 0.5,
+            "p95": 0.8,
+            "max": 13.5
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.143889,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.4
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.793889,
+              "p50": 0.7,
+              "p95": 1.4,
+              "max": 1.9
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.2,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.4
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.333333,
+              "p50": 0.3,
+              "p95": 0.6,
+              "max": 1.8
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001667,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 2.692778,
+              "p50": 2.4,
+              "p95": 4.2,
+              "max": 7.1
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 1.712778,
+              "p50": 1.6,
+              "p95": 3.1,
+              "max": 3.7
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.195,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.4
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.88,
+              "p50": 0.8,
+              "p95": 1.3,
+              "max": 2.8
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.261667,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1.1
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.161111,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4
+            },
+            "physics": {
+              "count": 180,
+              "mean": 6.254444,
+              "p50": 5.8,
+              "p95": 8.7,
+              "max": 10.9
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.3,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "after-phase1",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 10.111667,
+            "p50": 9.2,
+            "p95": 15.1,
+            "max": 24.6
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.730556,
+            "p50": 0.6,
+            "p95": 1,
+            "max": 11.2
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.145556,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.3
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.895556,
+              "p50": 0.7,
+              "p95": 1.6,
+              "max": 6.4
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.232778,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.6
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.365556,
+              "p50": 0.3,
+              "p95": 0.6,
+              "max": 3.3
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001667,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 2.694444,
+              "p50": 2.5,
+              "p95": 3.8,
+              "max": 6.3
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 1.760556,
+              "p50": 1.6,
+              "p95": 2.5,
+              "max": 6.6
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.217778,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 0.7
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.931111,
+              "p50": 0.8,
+              "p95": 1.4,
+              "max": 5.4
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.299444,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 2.7
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.223889,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 6.3
+            },
+            "physics": {
+              "count": 180,
+              "mean": 6.515556,
+              "p50": 6,
+              "p95": 9.1,
+              "max": 16.2
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 11.719444,
+            "p50": 11.3,
+            "p95": 15.5,
+            "max": 17.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.763889,
+            "p50": 1.6,
+            "p95": 2.6,
+            "max": 16.8
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.140556,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.9
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.864444,
+              "p50": 0.8,
+              "p95": 1.6,
+              "max": 2.7
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.237778,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.4
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.37,
+              "p50": 0.3,
+              "p95": 0.6,
+              "max": 4.1
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001667,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 4.168333,
+              "p50": 3.7,
+              "p95": 6.2,
+              "max": 9.4
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 2.331111,
+              "p50": 2.1,
+              "p95": 3.8,
+              "max": 6.6
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.231111,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 0.7
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.922778,
+              "p50": 0.9,
+              "p95": 1.5,
+              "max": 5.9
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.306667,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1.6
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.2,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.9
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.547222,
+              "p50": 8.2,
+              "p95": 11.4,
+              "max": 14.5
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "before-phase0",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 13.877222,
+            "p50": 12.5,
+            "p95": 17.7,
+            "max": 161.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.782222,
+            "p50": 1.5,
+            "p95": 3,
+            "max": 15.9
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.181111,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 2.5
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.907778,
+              "p50": 0.7,
+              "p95": 1.6,
+              "max": 12.7
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.21,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.3
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.358889,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 6
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.000556,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 4.053889,
+              "p50": 3.4,
+              "p95": 6.3,
+              "max": 53
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 4.404444,
+              "p50": 4,
+              "p95": 5.8,
+              "max": 39.3
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.263333,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 2.9
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.945,
+              "p50": 0.8,
+              "p95": 1.8,
+              "max": 11.4
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.347222,
+              "p50": 0.3,
+              "p95": 0.6,
+              "max": 4.6
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.206667,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.5
+            },
+            "physics": {
+              "count": 180,
+              "mean": 10.598889,
+              "p50": 9.4,
+              "p95": 13.6,
+              "max": 119
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.2,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.3,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 11.316111,
+            "p50": 10.6,
+            "p95": 15.1,
+            "max": 21
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.58,
+            "p50": 0.5,
+            "p95": 0.8,
+            "max": 12.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.131111,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.798333,
+              "p50": 0.7,
+              "p95": 1.6,
+              "max": 3.4
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.239444,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.2
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.364444,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 7
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 2.597222,
+              "p50": 2.4,
+              "p95": 3.8,
+              "max": 7.9
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 3.521667,
+              "p50": 3.3,
+              "p95": 5.4,
+              "max": 11
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.236667,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 4.2
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.843889,
+              "p50": 0.8,
+              "p95": 1.3,
+              "max": 2.7
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.270556,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.7
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.173333,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.7
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.029444,
+              "p50": 7.5,
+              "p95": 11.5,
+              "max": 16.9
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.3,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.3,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "before-phase1",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 13.058333,
+            "p50": 12.3,
+            "p95": 16.2,
+            "max": 43.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.738333,
+            "p50": 0.6,
+            "p95": 1.2,
+            "max": 14.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.150556,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.9
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.971111,
+              "p50": 0.8,
+              "p95": 1.9,
+              "max": 7.3
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.228333,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.367222,
+              "p50": 0.4,
+              "p95": 0.5,
+              "max": 1
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 2.972222,
+              "p50": 2.8,
+              "p95": 3.7,
+              "max": 9.4
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 3.961667,
+              "p50": 3.8,
+              "p95": 5.1,
+              "max": 11.5
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.260556,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 3.7
+            },
+            "separation": {
+              "count": 180,
+              "mean": 1.061111,
+              "p50": 1,
+              "p95": 1.2,
+              "max": 14.2
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.412778,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 13.2
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.212222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 3.6
+            },
+            "physics": {
+              "count": 180,
+              "mean": 9.27,
+              "p50": 8.7,
+              "p95": 11.1,
+              "max": 37
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": false,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 15.137222,
+            "p50": 14.9,
+            "p95": 18.7,
+            "max": 26.3
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.950556,
+            "p50": 1.7,
+            "p95": 3.2,
+            "max": 15.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.17,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.9
+            },
+            "selection": {
+              "count": 180,
+              "mean": 1.003889,
+              "p50": 0.9,
+              "p95": 1.7,
+              "max": 7.7
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.293333,
+              "p50": 0.2,
+              "p95": 0.9,
+              "max": 2
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.365,
+              "p50": 0.3,
+              "p95": 0.6,
+              "max": 1.8
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.000556,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 4.44,
+              "p50": 4.1,
+              "p95": 6.5,
+              "max": 9.5
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 4.852222,
+              "p50": 4.6,
+              "p95": 6.5,
+              "max": 12.2
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.28,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 1.6
+            },
+            "separation": {
+              "count": 180,
+              "mean": 1.041667,
+              "p50": 0.9,
+              "p95": 2,
+              "max": 5.4
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.337778,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 1.9
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.216667,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.6
+            },
+            "physics": {
+              "count": 180,
+              "mean": 11.562222,
+              "p50": 11.1,
+              "p95": 14.6,
+              "max": 18.8
+            }
+          },
+          "counts": {},
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    }
+  ],
+  "census": [
+    {
+      "lane": "after-census-results",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 2.921111,
+            "p50": 2.7,
+            "p95": 3.9,
+            "max": 8.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.346111,
+            "p50": 0.2,
+            "p95": 0.3,
+            "max": 26.9
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.078889,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.4
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.268889,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 2.5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.058889,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.3
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.081111,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.2
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.002222,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 0.810556,
+              "p50": 0.8,
+              "p95": 1.1,
+              "max": 3.5
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 0.523889,
+              "p50": 0.5,
+              "p95": 0.7,
+              "max": 2.8
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.048889,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.271111,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.063889,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.2
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.036667,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 1.851111,
+              "p50": 1.7,
+              "p95": 2.4,
+              "max": 5.9
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 87300,
+            "supportResolutions": 17460,
+            "supportEntityCandidates": 211860,
+            "supportPropCandidates": 0,
+            "fineQueries": 34560,
+            "fineCandidates": 388800
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 3.280556,
+            "p50": 3.1,
+            "p95": 4.7,
+            "max": 12.5
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.556111,
+            "p50": 0.5,
+            "p95": 0.8,
+            "max": 14.1
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.088333,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.4
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.249444,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.068889,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.7
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.095556,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.3
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.000556,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 1.144444,
+              "p50": 1,
+              "p95": 1.7,
+              "max": 10.3
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 0.595556,
+              "p50": 0.6,
+              "p95": 0.8,
+              "max": 1.2
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.061111,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.6
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.257222,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.084444,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.043889,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.293333,
+              "p50": 2.1,
+              "p95": 3.3,
+              "max": 11.5
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 85932,
+            "supportResolutions": 17460,
+            "supportEntityCandidates": 195478,
+            "supportPropCandidates": 0,
+            "fineQueries": 34560,
+            "fineCandidates": 357027
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 10.516667,
+            "p50": 10.2,
+            "p95": 13,
+            "max": 15.9
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.66,
+            "p50": 0.6,
+            "p95": 0.8,
+            "max": 14.9
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.139444,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.5
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.908889,
+              "p50": 0.8,
+              "p95": 1.9,
+              "max": 3.4
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.224444,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.9
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.355,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 1.8
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001667,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 2.963333,
+              "p50": 2.8,
+              "p95": 4.4,
+              "max": 5.9
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 1.958889,
+              "p50": 1.9,
+              "p95": 2.8,
+              "max": 3.9
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.224444,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.8
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.977222,
+              "p50": 0.9,
+              "p95": 1.4,
+              "max": 2.8
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.297222,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1.6
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.188889,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1
+            },
+            "physics": {
+              "count": 180,
+              "mean": 6.983889,
+              "p50": 6.7,
+              "p95": 9,
+              "max": 10.8
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 346500,
+            "supportResolutions": 69300,
+            "supportEntityCandidates": 749700,
+            "supportPropCandidates": 0,
+            "fineQueries": 138240,
+            "fineCandidates": 1360800
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 12.253333,
+            "p50": 12.1,
+            "p95": 14.7,
+            "max": 20.4
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.908333,
+            "p50": 1.7,
+            "p95": 2.9,
+            "max": 17
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.135,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.1
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.949444,
+              "p50": 0.8,
+              "p95": 1.7,
+              "max": 5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.249444,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.3
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.341111,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 0.7
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 4.259444,
+              "p50": 4,
+              "p95": 6.4,
+              "max": 10.9
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 2.543333,
+              "p50": 2.4,
+              "p95": 3.7,
+              "max": 5.4
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.259444,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1
+            },
+            "separation": {
+              "count": 180,
+              "mean": 1.003889,
+              "p50": 0.9,
+              "p95": 1.8,
+              "max": 3.3
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.302778,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1.4
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.196111,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.929444,
+              "p50": 8.6,
+              "p95": 11.1,
+              "max": 16
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 341028,
+            "supportResolutions": 69300,
+            "supportEntityCandidates": 692192,
+            "supportPropCandidates": 0,
+            "fineQueries": 138240,
+            "fineCandidates": 1249706
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "before-census-results",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 3.187222,
+            "p50": 2.9,
+            "p95": 4,
+            "max": 28.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.374444,
+            "p50": 0.2,
+            "p95": 0.3,
+            "max": 29.8
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.088889,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.8
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.242222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2.5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.061667,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.5
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.092778,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1.3
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 0.841111,
+              "p50": 0.8,
+              "p95": 1.1,
+              "max": 7.2
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 0.673889,
+              "p50": 0.6,
+              "p95": 0.9,
+              "max": 6.1
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.054444,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.5
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.292222,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 3.5
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.072778,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.6
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.053889,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.6
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.091667,
+              "p50": 1.9,
+              "p95": 2.7,
+              "max": 18.9
+            }
+          },
+          "counts": {
+            "chunkQueries": 1440,
+            "chunkCandidates": 123300,
+            "supportResolutions": 17460,
+            "supportEntityCandidates": 959220,
+            "supportPropCandidates": 0,
+            "fineQueries": 17280,
+            "fineCandidates": 194400
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 3.406111,
+            "p50": 3.2,
+            "p95": 4.8,
+            "max": 7
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.543333,
+            "p50": 0.4,
+            "p95": 0.8,
+            "max": 13
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.089444,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.241667,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.1
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.061111,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.7
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.11,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 1.105,
+              "p50": 1,
+              "p95": 1.8,
+              "max": 3.9
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 0.768889,
+              "p50": 0.7,
+              "p95": 1.1,
+              "max": 2
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.055556,
+              "p50": 0.1,
+              "p95": 0.1,
+              "max": 0.2
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.263333,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.2
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.075556,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.9
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.045,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.7
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.436667,
+              "p50": 2.3,
+              "p95": 3.6,
+              "max": 5
+            }
+          },
+          "counts": {
+            "chunkQueries": 1594,
+            "chunkCandidates": 128360,
+            "supportResolutions": 17460,
+            "supportEntityCandidates": 1036146,
+            "supportPropCandidates": 0,
+            "fineQueries": 17280,
+            "fineCandidates": 178667
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 12.374444,
+            "p50": 12.1,
+            "p95": 14.5,
+            "max": 22.2
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.65,
+            "p50": 0.5,
+            "p95": 0.8,
+            "max": 15.4
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.158333,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.5
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.872778,
+              "p50": 0.8,
+              "p95": 1.6,
+              "max": 2.7
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.252222,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 3.3
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.365,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 1.3
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0,
+              "p50": 0,
+              "p95": 0,
+              "max": 0
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 2.852778,
+              "p50": 2.7,
+              "p95": 4,
+              "max": 5.3
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 3.942778,
+              "p50": 3.7,
+              "p95": 5.5,
+              "max": 6.1
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.238889,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.6
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.922222,
+              "p50": 0.9,
+              "p95": 1.3,
+              "max": 2.5
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.296111,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 2.2
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.187778,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.1
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.820556,
+              "p50": 8.5,
+              "p95": 10.6,
+              "max": 12.4
+            }
+          },
+          "counts": {
+            "chunkQueries": 2520,
+            "chunkCandidates": 638280,
+            "supportResolutions": 69300,
+            "supportEntityCandidates": 8481780,
+            "supportPropCandidates": 0,
+            "fineQueries": 69120,
+            "fineCandidates": 680400
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 14.053889,
+            "p50": 13.9,
+            "p95": 17.3,
+            "max": 24.1
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.810556,
+            "p50": 1.6,
+            "p95": 2.8,
+            "max": 15.1
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.158333,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 1.5
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.923333,
+              "p50": 0.8,
+              "p95": 1.6,
+              "max": 5.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.241111,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2
+            },
+            "setup": {
+              "count": 180,
+              "mean": 0.346111,
+              "p50": 0.3,
+              "p95": 0.5,
+              "max": 1.3
+            },
+            "passive-player-movement": {
+              "count": 180,
+              "mean": 0.001111,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1
+            },
+            "npc-movement": {
+              "count": 180,
+              "mean": 4.097778,
+              "p50": 3.9,
+              "p95": 5.3,
+              "max": 12.6
+            },
+            "ground-tracking": {
+              "count": 180,
+              "mean": 4.615,
+              "p50": 4.5,
+              "p95": 5.8,
+              "max": 6.5
+            },
+            "first-index": {
+              "count": 180,
+              "mean": 0.256667,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 0.8
+            },
+            "separation": {
+              "count": 180,
+              "mean": 0.947778,
+              "p50": 0.9,
+              "p95": 1.4,
+              "max": 4.3
+            },
+            "attachments-index": {
+              "count": 180,
+              "mean": 0.326111,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 2.4
+            },
+            "animation": {
+              "count": 180,
+              "mean": 0.196111,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4
+            },
+            "physics": {
+              "count": 180,
+              "mean": 10.798889,
+              "p50": 10.5,
+              "p95": 12.9,
+              "max": 19.2
+            }
+          },
+          "counts": {
+            "chunkQueries": 2982,
+            "chunkCandidates": 685420,
+            "supportResolutions": 69300,
+            "supportEntityCandidates": 9197912,
+            "supportPropCandidates": 0,
+            "fineQueries": 69120,
+            "fineCandidates": 625446
+          },
+          "traceSHA256": null,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    }
+  ],
+  "parity": [
+    {
+      "lane": "after-parity",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 3.986111,
+            "p50": 3.1,
+            "p95": 7.1,
+            "max": 26
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.351111,
+            "p50": 0.2,
+            "p95": 0.5,
+            "max": 14.8
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.195556,
+              "p50": 0.1,
+              "p95": 0.9,
+              "max": 1.2
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.302778,
+              "p50": 0.2,
+              "p95": 0.6,
+              "max": 2.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.087222,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.7
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.336111,
+              "p50": 1.9,
+              "p95": 4.4,
+              "max": 15.5
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 87300,
+            "fineQueries": 34560,
+            "fineCandidates": 388800
+          },
+          "traceSHA256": "5f8170c9cf70a154f29e3bb8f140ff4422dbb7971e977c16bd8d5b82e76f316f",
+          "frameCount": 180,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 3.979444,
+            "p50": 3.5,
+            "p95": 6.3,
+            "max": 8.2
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.655556,
+            "p50": 0.5,
+            "p95": 1.2,
+            "max": 12.6
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.195556,
+              "p50": 0.1,
+              "p95": 0.7,
+              "max": 2.2
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.261667,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 1.1
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.071111,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 1.3
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.615,
+              "p50": 2.3,
+              "p95": 4.4,
+              "max": 6.8
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 85932,
+            "fineQueries": 34560,
+            "fineCandidates": 357027
+          },
+          "traceSHA256": "248c724b78d72fcfef5f22761db14ff52f49dc91f3854d4d7b971a04f0726009",
+          "frameCount": 180,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 11.256111,
+            "p50": 10.5,
+            "p95": 16.7,
+            "max": 25.6
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.647778,
+            "p50": 0.6,
+            "p95": 0.7,
+            "max": 13.7
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.443889,
+              "p50": 0.2,
+              "p95": 2.8,
+              "max": 5.8
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.900556,
+              "p50": 0.9,
+              "p95": 1.2,
+              "max": 3
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.240556,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 1.5
+            },
+            "physics": {
+              "count": 180,
+              "mean": 7.015,
+              "p50": 6.8,
+              "p95": 9,
+              "max": 12.2
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 346500,
+            "fineQueries": 138240,
+            "fineCandidates": 1360800
+          },
+          "traceSHA256": "0517f24b498d68a849f6e898c61cabbc7ea24d74f1e1b7328ba8b5f21aade712",
+          "frameCount": 180,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 13.336667,
+            "p50": 12.6,
+            "p95": 21.8,
+            "max": 27.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.954444,
+            "p50": 1.8,
+            "p95": 2.7,
+            "max": 15
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.467222,
+              "p50": 0.2,
+              "p95": 0.8,
+              "max": 6.7
+            },
+            "selection": {
+              "count": 180,
+              "mean": 1.059444,
+              "p50": 0.9,
+              "p95": 1.8,
+              "max": 6.5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.266667,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.9
+            },
+            "physics": {
+              "count": 180,
+              "mean": 9.123333,
+              "p50": 8.8,
+              "p95": 11.4,
+              "max": 17.3
+            }
+          },
+          "counts": {
+            "chunkQueries": 900,
+            "chunkCandidates": 341028,
+            "fineQueries": 138240,
+            "fineCandidates": 1249706
+          },
+          "traceSHA256": "2556e3380b89717d8b376f4aa9ea4e376cac58803df4bad2bb4e0dba783c2bb1",
+          "frameCount": 180,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.7,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    },
+    {
+      "lane": "before-parity",
+      "browser": "154.0.8037.126",
+      "cases": [
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 4.029444,
+            "p50": 3.1,
+            "p95": 6.1,
+            "max": 42.7
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.325,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 13.1
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.202222,
+              "p50": 0.1,
+              "p95": 1,
+              "max": 1.1
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.298333,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 4.2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.086111,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.8
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.416667,
+              "p50": 1.9,
+              "p95": 3.7,
+              "max": 23.4
+            }
+          },
+          "counts": {
+            "chunkQueries": 1440,
+            "chunkCandidates": 123300,
+            "fineQueries": 17280,
+            "fineCandidates": 194400
+          },
+          "traceSHA256": "5f8170c9cf70a154f29e3bb8f140ff4422dbb7971e977c16bd8d5b82e76f316f",
+          "frameCount": 180,
+          "expectedActorTravelPx": 0,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.4,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 96,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 3.837778,
+            "p50": 3.5,
+            "p95": 6.1,
+            "max": 10.5
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.595556,
+            "p50": 0.5,
+            "p95": 0.9,
+            "max": 13.9
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.195556,
+              "p50": 0.1,
+              "p95": 1.1,
+              "max": 2.2
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.281667,
+              "p50": 0.2,
+              "p95": 0.5,
+              "max": 2
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.065,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.7
+            },
+            "physics": {
+              "count": 180,
+              "mean": 2.519444,
+              "p50": 2.3,
+              "p95": 3.8,
+              "max": 8.2
+            }
+          },
+          "counts": {
+            "chunkQueries": 1594,
+            "chunkCandidates": 128360,
+            "fineQueries": 17280,
+            "fineCandidates": 178667
+          },
+          "traceSHA256": "248c724b78d72fcfef5f22761db14ff52f49dc91f3854d4d7b971a04f0726009",
+          "frameCount": 180,
+          "expectedActorTravelPx": 88,
+          "resident": 97,
+          "thermalsBefore": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "rest",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 12.869444,
+            "p50": 12.2,
+            "p95": 19.4,
+            "max": 25.6
+          },
+          "replication": {
+            "count": 180,
+            "mean": 0.699444,
+            "p50": 0.6,
+            "p95": 0.8,
+            "max": 13.2
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.388333,
+              "p50": 0.2,
+              "p95": 0.5,
+              "max": 5.9
+            },
+            "selection": {
+              "count": 180,
+              "mean": 0.906667,
+              "p50": 0.8,
+              "p95": 1.3,
+              "max": 3.5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.218333,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.6
+            },
+            "physics": {
+              "count": 180,
+              "mean": 8.657778,
+              "p50": 8.2,
+              "p95": 11.5,
+              "max": 14.8
+            }
+          },
+          "counts": {
+            "chunkQueries": 2520,
+            "chunkCandidates": 638280,
+            "fineQueries": 69120,
+            "fineCandidates": 680400
+          },
+          "traceSHA256": "0517f24b498d68a849f6e898c61cabbc7ea24d74f1e1b7328ba8b5f21aade712",
+          "frameCount": 180,
+          "expectedActorTravelPx": 0,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          }
+        },
+        {
+          "repeat": 0,
+          "population": 384,
+          "motion": "moving",
+          "counting": true,
+          "cellSize": 32,
+          "ticks": {
+            "count": 180,
+            "mean": 15.618333,
+            "p50": 15,
+            "p95": 23.6,
+            "max": 28.8
+          },
+          "replication": {
+            "count": 180,
+            "mean": 1.901667,
+            "p50": 1.7,
+            "p95": 2.5,
+            "max": 16.9
+          },
+          "phases": {
+            "streaming": {
+              "count": 180,
+              "mean": 0.443333,
+              "p50": 0.2,
+              "p95": 1.2,
+              "max": 6.8
+            },
+            "selection": {
+              "count": 180,
+              "mean": 1.021111,
+              "p50": 0.9,
+              "p95": 1.8,
+              "max": 4.5
+            },
+            "decisions": {
+              "count": 180,
+              "mean": 0.258889,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 1.8
+            },
+            "physics": {
+              "count": 180,
+              "mean": 11.412222,
+              "p50": 11.3,
+              "p95": 13.5,
+              "max": 17.9
+            }
+          },
+          "counts": {
+            "chunkQueries": 2982,
+            "chunkCandidates": 685420,
+            "fineQueries": 69120,
+            "fineCandidates": 625446
+          },
+          "traceSHA256": "2556e3380b89717d8b376f4aa9ea4e376cac58803df4bad2bb4e0dba783c2bb1",
+          "frameCount": 180,
+          "expectedActorTravelPx": 88,
+          "resident": 385,
+          "thermalsBefore": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          },
+          "thermalsAfter": {
+            "batteryC": 30.5,
+            "thermalStatus": 0
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "scope": "Typecheck/unit/lint use current checkout; build/browser/readiness use frozen candidate excluding concurrent ambulance work.",
+    "typecheck": {
+      "passed": true,
+      "configurations": 3
+    },
+    "unit": {
+      "passed": true,
+      "tests": 2515,
+      "files": 257
+    },
+    "lint": {
+      "passed": true,
+      "errors": 0,
+      "warnings": 119,
+      "infos": 34
+    },
+    "build": {
+      "passed": true,
+      "manifestChangedKeys": ["inputDigest"],
+      "unchangedCandidateIdentities": 763
+    },
+    "browser": {
+      "fullRun": {
+        "passed": 546,
+        "failed": 2,
+        "skipped": 1,
+        "minutes": 23.3,
+        "workers": 2
+      },
+      "failureAssertions": [
+        "GPU flat tap walking: travel remains zero",
+        "GPU vehicle tap driving: travel remains zero"
+      ],
+      "candidateSerialRepeats": {
+        "passed": 6,
+        "failed": 0,
+        "workers": 1,
+        "repeatsPerCheck": 3
+      },
+      "candidateParallelRepeats": {
+        "passed": 5,
+        "failed": 1,
+        "workers": 2,
+        "repeatsPerCheck": 3,
+        "failure": "same GPU vehicle zero travel"
+      },
+      "baselineParallelRepeats": {
+        "passed": 6,
+        "failed": 0,
+        "workers": 2,
+        "repeatsPerCheck": 3
+      },
+      "baselineExtendedParallelRepeats": {
+        "passed": 19,
+        "failed": 1,
+        "workers": 2,
+        "repeatsPerCheck": 10,
+        "failure": "same GPU vehicle zero travel"
+      },
+      "interpretation": "Driving failure reproduces before this change. Flat walking uses unchanged sparse path and does not reproduce in focused runs. Exact tap failure cause unresolved; full suite is not entirely green.",
+      "logsSHA256": {
+        "playwright.log": "345d0216d74f57eee617812f342f50e1ad529b1bc350e64921d531883dcd4d29",
+        "playwright-rerun.log": "e3c534c22cf7c43859ff28f0f8d93bbd8d3c9126441fdc63753d293d255de2ee",
+        "playwright-rerun-parallel.log": "d3ab40058177960dab8473db5888522297302a1a8b1bbe004b0966157a80bf28",
+        "playwright-before.log": "6359f80cc63d3288f67ae058c6bff4f1303b634ee438c3a28dae059224299232",
+        "playwright-before-stress.log": "4f5dda2819eeb7b2fd59bbdf7d6356e302e5c7fd7c9dfda68e09a18ce839504a"
+      }
+    },
+    "streamingReadiness": {
+      "passed": true,
+      "command": "npm run streaming:bench -- --assert-ready",
+      "fixture": "current regional generator, bundled headless Chromium, Canvas/Worker/IndexedDB",
+      "stages": [
+        {
+          "name": "cold",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "name": "standing",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "name": "walk",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "name": "sprint",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "name": "reverse",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        },
+        {
+          "name": "zoom-out",
+          "missingDataFrames": 0,
+          "incompleteCacheFrames": 0
+        }
+      ],
+      "pageErrors": 0,
+      "readinessFailures": 0,
+      "logSHA256": "c7208f8fa9be1f8570a2b6ac3446fd3beb90e085bdb3ecc4dd86c8d561fe81cd",
+      "interpretation": "Readiness validation, separate from phone timing-gain measurements."
+    }
+  }
+}

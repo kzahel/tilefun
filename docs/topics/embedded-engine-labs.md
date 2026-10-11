@@ -122,6 +122,12 @@ command. Canvas/GPU checks exercise flight, actual crown rest, pause/reload and
 player contact with zero maximum upward velocity after controlled landing. The
 game's spatial chirp is intentionally absent in the silent scenario lab.
 
+[119](../tactical/119-dense-ground-support.md) narrows crowded ground/support
+candidates through shared EntityManager. The resident movement index is read-only
+through ground tracking with live support Z; sparse chunk/prop reuse, player
+jump/landing and prediction retain their owners. Game and ScenarioSession labs
+consume the same path, including sleeper/edit invalidation and moving roofs.
+
 ## Required architecture
 
 **An engine change is incomplete until its affected embedded lab consumers have

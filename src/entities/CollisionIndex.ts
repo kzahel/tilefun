@@ -13,10 +13,12 @@ interface Membership {
 }
 
 /**
- * Collision-only broad phase for one synchronous EntityManager movement pass.
+ * Body broad phase for one synchronous EntityManager movement/ground pass.
  * Rebuild from all resident bodies before movement (including sleepers and edits),
- * then refresh each moved body before another actor can query it. Chunk queries
- * for visibility, support and residency remain owned by SpatialHash.
+ * then refresh each moved body before another actor can query it. After movement,
+ * finish freezes XY membership for read-only ground queries with live support Z.
+ * Stop querying before separation/attachments can move bodies again. Sparse
+ * ground, visibility and residency queries remain owned by SpatialHash.
  */
 export class CollisionIndex {
   private readonly cells = new Map<string, Entity[]>();
@@ -97,6 +99,7 @@ export class CollisionIndex {
     if (state?.epoch === this.epoch) this.unindex(entity, state);
   }
 
+  /** Stop movement refreshes; read-only queries remain valid until later XY edits. */
   finish(): void {
     this.moving = false;
   }

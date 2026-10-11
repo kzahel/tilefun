@@ -365,6 +365,8 @@ export class EntityManager {
       if (useCollisionIndex) this.collisionIndex.update(entity);
     }
 
+    // Freeze XY membership after movement. Dense ground tracking below may still
+    // query this snapshot and read live support heights before any later movement.
     this.collisionIndex.finish();
 
     // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
@@ -384,11 +386,17 @@ export class EntityManager {
         if (!candidates) {
           candidates = {
             props: propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy),
-            entities: this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy),
+            entities: useCollisionIndex
+              ? []
+              : this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy),
           };
           groundCandidates.set(key, candidates);
         }
-        return resolveGroundZForTracking(e, getHeight, candidates.props, candidates.entities);
+        const entities =
+          useCollisionIndex && footprint
+            ? this.collisionIndex.query(footprint)
+            : candidates.entities;
+        return resolveGroundZForTracking(e, getHeight, candidates.props, entities);
       };
 
       for (const entity of active) {

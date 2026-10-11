@@ -309,9 +309,24 @@ support census scans about 51,100 entity candidates per tick; this fixture has
 no props. Separate read-only fine-index comparisons reduce matched dog candidates
 from 132 to 9 per resolution with zero flat-fixture height mismatches. That is a
 proposal and candidate-count result, not a shipped change or predicted saving.
-Next bounded slice: extend dense index ownership through ground tracking, keeping
-live geometry/Z and sparse per-pass chunk reuse, with adversarial support and
-native game/lab checks before a matched phone timing comparison.
+[119](../tactical/119-dense-ground-support.md) delivers that slice through shared
+EntityManager: the refreshed movement index is read-only through dense ground
+tracking, while live support Z, sparse chunk candidates and per-range props retain
+their contracts. A moving support is visible at its new footprint before the
+coarse hash refresh. Adversarial dense tests cover roofs, sleepers/edits, negative
+seams, oversized bodies, steps, jumps, excavations and all-resident support parity.
+
+Clean matched Pixel 7a 384-dog moving tick means improve from 12.70–13.40ms to
+10.66–11.04ms (16–18%), and p95 from 15.2–16.1ms to 13.1–13.7ms. Index costs are
+included; publication remains separate. Moving support candidates fall 92.5%.
+All four 180-frame phone wire/durable parity pairs match. Sparse native walking
+means/p95 overlap, and there is no demonstrated ordinary-play gain or stable
+whole-game 60Hz claim. Resting/smaller-population tails are mixed. Clean crowds
+are 27°C; separate warmer attribution/census/parity diagnostics are explicitly
+excluded from timing-gain claims. [119 evidence](../benchmarks/119-dense-ground-support.json)
+retains all captures and thermal/order limits.
+Next: profile remaining NPC movement, terrain/prop lookups and allocation before
+choosing another bounded server optimization.
 
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority

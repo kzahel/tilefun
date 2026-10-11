@@ -15,6 +15,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |
 | [118 Fire truck wheel alignment](118-fire-truck-wheel-alignment.md) | Retained v2 with fitted axles, floor openings and wheel-local UVs; actual GLB placement/intersection regression checks; owner inspection pending |
 | [117 Police and fire truck models](117-police-and-fire-truck-models.md) | Retained police/stowed fire GLBs and exact 4×2/flash reviews; separate wheel rigs and ladder hinge; integration/clearance pending |
+| [119 Dense ground support](119-dense-ground-support.md) | Delivered shared fine support candidates; 16–18% moving crowd phone tick improvement, wire/durable parity, ordinary native ranges overlap |
 | [118 Phone physics headroom](118-phone-physics-headroom.md) | Profile complete: crowded ground/support hotspot and read-only candidate census; dense support proposal, ordinary Canvas timeline limits |
 | [115 Collision broad phase](115-collision-broad-phase.md) | Adaptive 32px collision grid and fused blocker; dense desktop/Pixel scaling gain, ordinary native ranges overlap; 384-phone stress still near/above tick budget |
 | [116 Ambulance beacons and light tags](116-ambulance-beacons-and-light-tags.md) | Retained v2 with tapered beacons, thin bars, six tagged lenses and actual GLB pulse proof; game control/integration pending |
