@@ -1,0 +1,111 @@
+{
+  "family": "fire-truck",
+  "atlasCell": 192,
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "body": {
+    "front": -70,
+    "rear": 70,
+    "halfWidth": 23,
+    "base": 10
+  },
+  "cab": {
+    "rear": -20,
+    "front": -69,
+    "roof": 52,
+    "halfWidth": 23,
+    "screenTop": 47,
+    "screenBottom": 26
+  },
+  "box": {
+    "front": 8,
+    "rear": 70,
+    "halfWidth": 23,
+    "roofHalfWidth": 17,
+    "sideTop": 49,
+    "roof": 52
+  },
+  "pump": {
+    "front": -20,
+    "rear": 8,
+    "halfWidth": 21,
+    "roof": 48
+  },
+  "ladder": {
+    "pivot": [
+      68,
+      0,
+      59
+    ],
+    "length": 60,
+    "halfWidth": 6.5,
+    "railHalfHeight": 1.7,
+    "rungSpacing": 4.4,
+    "pose": "stowed",
+    "steeringAndEquipmentClearance": "unqualified"
+  },
+  "wheels": {
+    "frontAxle": -35.5,
+    "rearAxle": 40.5,
+    "radius": 10.5,
+    "halfWidthCenter": 23.1,
+    "tireWidth": 3,
+    "hubRadius": 4.4
+  },
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 55,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        72,
+        97
+      ],
+      "status": "Fire truck source axles, ladder and cab roof hypothesis"
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 55,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        72,
+        97
+      ],
+      "status": "Independent west compartment lettering and fittings"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 60,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        72,
+        100
+      ],
+      "status": "Fire rear equipment, cab roof and wheel footprint hypothesis"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 60,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        72,
+        100
+      ],
+      "status": "Fire front windshield, roof and bumper hypothesis"
+    }
+  },
+  "notes": [
+    "Independent truck geometry with source-owned side lettering and compartments.",
+    "Separate ladder hinge and mesh components; raised pose requires its own fit and clearance review.",
+    "Cab and rear roof use north-owned paint. Unseen paint and ladder undersurface are inferred, not recovered source pixels.",
+    "Wheel and arch axles share the measured source centers; diagnostic cameras stay unchanged.",
+    "Tires remain circular, grounded and independently rotating. Cap UVs use local rectified wheel paint rather than sampling body pixels.",
+    "Floor openings remove tire intersections; this verifies rest/roll fit, not steering clearance."
+  ]
+}

@@ -15,6 +15,7 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Ambulance beacon refinement | [v2](ambulance/v2/) | [ambulance-v2.glb](../../public/assets/models/vehicles/ambulance-v2.glb) |
 | Police car | [v1](police-car/v1/) | [police-car-v1.glb](../../public/assets/models/vehicles/police-car-v1.glb) |
 | Fire truck, stowed ladder | [v1](fire-truck-ladder-1/v1/) | [fire-truck-ladder-1-v1.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v1.glb) |
+| Fire truck wheel alignment | [v2](fire-truck-ladder-1/v2/) | [fire-truck-ladder-1-v2.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v2.glb) |
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
@@ -38,6 +39,11 @@ Hinge motion is independently verified; raised-pose/clearance qualification is
 pending. Both retain their own raw UV projection and source-ownership decisions.
 The [review collection](../../public/assets/models/vehicles/review/index.html)
 links their exact 4×2 sheets, novel angles, contours and real GLB flashing previews.
+Fire v2 has 49 meshes/1,280 triangles, measured wheel-center landmarks, floor
+openings and cleaned wheel-local UVs. Its rig records the two-pixel placement
+tolerance; actual GLB verification checks center fit and floor/tire intersections,
+including negative regression probes. Cameras, fixed roof/details/ladder/lights
+are preserved. Steering clearance remains pending; see tactical 118.
 Units are world pixels, Blender up is +Z and forward is -X, with
 tire contacts on Z=0. GLBs use Blender's +Y-up export conversion. The GLB embeds
 the cleaned atlas; Blender scenes pack their textures, including retained unused
@@ -98,6 +104,8 @@ Before calling the vehicle delivered:
    Blender textures are packed, GLB textures are embedded, and the exported wheel
    hierarchy, axes and ground contacts work. Record native sprite/render comparisons
    and novel-angle checks. Adapt verification expectations for a new vehicle family.
+   Also compare wheel centers to painted source wells, inspect fender boundaries
+   and floor/body intersections, and verify tread does not sample body paint.
 4. Confirm normal builds consume the committed GLB without running Blender or
    restoring scratch files. Keep inspection sheets, turntables and workspaces local
    unless an exact review snapshot is required by the review contract.

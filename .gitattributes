@@ -27,3 +27,5 @@ src/rendering/VehicleEmergencyLights.ts text eol=lf
 scripts/authored-assets/author_emergency_vehicle.py text eol=lf
 scripts/authored-assets/build_emergency_vehicle.py text eol=lf
 scripts/authored-assets/emergency-families.json -text
+scripts/authored-assets/refine_fire_wheels.py text eol=lf
+scripts/authored-assets/fire-wheel-fit.json -text

@@ -1,0 +1,73 @@
+{
+  "recipeSha256": "9dceaf599570b12c20fc27fdf2b94d601fba7e2115838278efd8ae70deac6bfe",
+  "silhouettes": {
+    "east": {
+      "iou": 0.8644139387539599,
+      "sourceOnly": 870,
+      "renderOnly": 414,
+      "meanBoundaryDistancePixels": 3.0933355121567843,
+      "maxBoundaryDistancePixels": 7.0
+    },
+    "west": {
+      "iou": 0.864322669200718,
+      "sourceOnly": 870,
+      "renderOnly": 415,
+      "meanBoundaryDistancePixels": 3.093441555686865,
+      "maxBoundaryDistancePixels": 7.0
+    },
+    "north": {
+      "iou": 0.9168999557978488,
+      "sourceOnly": 175,
+      "renderOnly": 389,
+      "meanBoundaryDistancePixels": 1.2471548913688377,
+      "maxBoundaryDistancePixels": 4.0
+    },
+    "south": {
+      "iou": 0.9153150566958519,
+      "sourceOnly": 141,
+      "renderOnly": 449,
+      "meanBoundaryDistancePixels": 1.4034392770423345,
+      "maxBoundaryDistancePixels": 6.0
+    }
+  },
+  "windshieldGeometrySha256": null,
+  "topEdge": {},
+  "limits": "IoU includes painted shadows; contours do not measure internal fender/window fit. Optional t=.90 top-band probe belongs to the configured compact aperture, not every asset.",
+  "metrics": {
+    "views": {
+      "east": {
+        "silhouetteIoU": 0.8644139387539599,
+        "sourceOnlyPixels": 870,
+        "renderOnlyPixels": 414,
+        "intersectionPixels": 8186,
+        "rgbMAEOnIntersection": 29.793020604283736,
+        "exactRGBPixelsOnIntersection": 3185
+      },
+      "west": {
+        "silhouetteIoU": 0.864322669200718,
+        "sourceOnlyPixels": 870,
+        "renderOnlyPixels": 415,
+        "intersectionPixels": 8186,
+        "rgbMAEOnIntersection": 29.163531232185033,
+        "exactRGBPixelsOnIntersection": 3271
+      },
+      "north": {
+        "silhouetteIoU": 0.9168999557978488,
+        "sourceOnlyPixels": 175,
+        "renderOnlyPixels": 389,
+        "intersectionPixels": 6223,
+        "rgbMAEOnIntersection": 15.725695002410413,
+        "exactRGBPixelsOnIntersection": 3810
+      },
+      "south": {
+        "silhouetteIoU": 0.9153150566958519,
+        "sourceOnlyPixels": 141,
+        "renderOnlyPixels": 449,
+        "intersectionPixels": 6377,
+        "rgbMAEOnIntersection": 46.58831216350426,
+        "exactRGBPixelsOnIntersection": 1247
+      }
+    },
+    "interpretation": "Diagnostic measurements, not acceptance scores. Alpha includes painted shadows unless explicitly masked. RGB error is measured only on opaque overlap; examine missing/extra pixels and all-angle renders too."
+  }
+}

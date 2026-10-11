@@ -55,6 +55,11 @@ independent hinge motion on the actual GLB. A working hinge does not qualify
 the raised source pose or clearance. Per-vehicle light probes read that asset's
 `lights.json` instead of assuming ambulance's lens count.
 
+Stowed fire v2 corrects the initial axle/well mismatch with
+`refine_fire_wheels.py` and `fire-wheel-fit.json`, preserving tracked v1.
+Use its retained v2 recipe for exact replay; the initial family constructor
+still represents immutable v1. Read tactical 118 before revising this family.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;
@@ -82,6 +87,14 @@ recipe instead of treating the compact's camera or landmarks as universal.
   the actual exported GLB. Compact forward is -X; inspect export axis conversion.
   Distance-driven roll is `-distance/radius`. A working pivot does not prove
   steering clearance.
+- **Wheel wells are a separate acceptance check:** measure visible source wheel
+  centers and project the actual exported cap centers with unchanged cameras.
+  Inspect each tire against its painted well and fender in both side views;
+  a valid pivot and whole-body silhouette score do not prove placement. Check
+  floor/body triangles for tire intersections. Caps own wheel paint; tread and
+  hidden caps must not sample nearby fender/body pixels. Record landmarks and
+  tolerance in the rig; run the real GLB wheel-well probe, including displaced
+  axle and solid-floor negative checks where supported.
 - **Preserve uncertainty:** raw projection, conflicts and unseen masks are
   separate from cleaned paint. Choose source owners for disagreeing UV regions;
   author hidden surfaces explicitly. A palette transfer inherits hidden surfaces

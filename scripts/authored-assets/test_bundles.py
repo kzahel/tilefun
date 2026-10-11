@@ -12,7 +12,7 @@ class RetainedBundleTests(unittest.TestCase):
     def test_all_final_assets_and_source_dependencies_are_self_contained(self):
         self.assertEqual([(r['assetId'], r['revision']) for r in verify()],
                          [('compact-1','v7'),('compact-2','v7'),('compact-4','v1'),('ambulance','v1'),('ambulance','v2'),
-                          ('police-car','v1'),('fire-truck-ladder-1','v1')])
+                          ('police-car','v1'),('fire-truck-ladder-1','v1'),('fire-truck-ladder-1','v2')])
 
     def test_exported_light_phase_must_match_its_retained_contract(self):
         source = ROOT / 'art-source/vehicle-models/ambulance/v2'

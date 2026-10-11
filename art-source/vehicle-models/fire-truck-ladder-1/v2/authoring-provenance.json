@@ -1,0 +1,12 @@
+{
+  "baseSource": "art-source/vehicle-models/fire-truck-ladder-1/v1",
+  "baseSceneSha256": "c4e3d1337207b1928f109a3cbbc29bbed87b21d584dac8d774f4528ddf8fab4f",
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "constructionScripts": {
+    "refine_fire_wheels.py": "da3540adf5770a1292ed02da87fd31e8bbf8a4ad9f75486bbc297cad29c3afb7",
+    "author_emergency_vehicle.py": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab",
+    "build_emergency_vehicle.py": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62"
+  },
+  "configuration": "scripts/authored-assets/fire-wheel-fit.json",
+  "configurationSha256": "0423de666937deb63db41000de02158d62709793adf129f4d4121771dc78e685"
+}

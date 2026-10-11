@@ -1,0 +1,24 @@
+{
+  "baseSource": "art-source/vehicle-models/fire-truck-ladder-1/v1",
+  "baseSceneSha256": "c4e3d1337207b1928f109a3cbbc29bbed87b21d584dac8d774f4528ddf8fab4f",
+  "changedComponents": [
+    "Cab-east",
+    "Fender--49-east",
+    "Cab-west",
+    "Fender--49-west",
+    "Compartments-east",
+    "Fender-43-east",
+    "Compartments-west",
+    "Fender-43-west",
+    "Underfloor",
+    "Tire_FL",
+    "Hub_FL",
+    "Tire_FR",
+    "Hub_FR",
+    "Tire_RL",
+    "Hub_RL",
+    "Tire_RR",
+    "Hub_RR"
+  ],
+  "fixedBodyRoofLadderLights": "Exact mesh records preserved"
+}

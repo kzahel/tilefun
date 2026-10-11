@@ -7,6 +7,9 @@ import ambulanceLightsReview from "../../public/assets/models/vehicles/review/am
 import fireReview from "../../public/assets/models/vehicles/review/fire-truck-ladder-1-v1/review.json" with {
   type: "json",
 };
+import fireWheelsReview from "../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/review.json" with {
+  type: "json",
+};
 import policeReview from "../../public/assets/models/vehicles/review/police-car-v1/review.json" with {
   type: "json",
 };
@@ -52,6 +55,7 @@ export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidat
     { review: ambulanceLightsReview, name: "Ambulance" },
     { review: policeReview, name: "Police car" },
     { review: fireReview, name: "Fire truck · stowed ladder" },
+    { review: fireWheelsReview, name: "Fire truck · stowed ladder" },
   ];
   for (const { review, name } of reviews) {
     for (const file of review.identity.files) {

@@ -1,0 +1,42 @@
+{
+  "names": [
+    "Fire-blue-1-lens",
+    "Fire-blue--1-lens"
+  ],
+  "poses": [
+    {
+      "enabled": false,
+      "time": 0,
+      "gains": [
+        1,
+        1
+      ]
+    },
+    {
+      "enabled": true,
+      "time": 0.05,
+      "gains": [
+        1,
+        4
+      ]
+    },
+    {
+      "enabled": true,
+      "time": 0.55,
+      "gains": [
+        4,
+        1
+      ]
+    },
+    {
+      "enabled": false,
+      "time": 0.05,
+      "gains": [
+        1,
+        1
+      ]
+    }
+  ],
+  "bodyAndHousingsUnchanged": true,
+  "offResetExact": true
+}

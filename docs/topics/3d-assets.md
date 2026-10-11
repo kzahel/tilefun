@@ -25,7 +25,9 @@ its light refinement and actual GLB flash proof are recorded in
 [116](../tactical/116-ambulance-beacons-and-light-tags.md).
 Police and stowed fire truck v1 now await inspection in
 [117](../tactical/117-police-and-fire-truck-models.md); the raised ladder remains
-queued. Six source sets now have retained models across seven exact revisions.
+queued. Fire v2 fixes wheel placement, floor intersections and tire UVs in
+[118](../tactical/118-fire-truck-wheel-alignment.md). Six source sets now have
+retained models across eight exact revisions.
 
 ## Investigation evidence storage
 
@@ -82,6 +84,13 @@ wheel footprints and body proportions remain review limitations. See
 [117](../tactical/117-police-and-fire-truck-models.md) and the
 [running queue](vehicle-model-porting.md). Game control/audio and per-model
 integration remain pending.
+
+Stowed fire v2 preserves cameras and fixed body/roof/ladder/light component
+records while refitting axles and openings, clearing the floor from tires and
+rectifying cap/tread paint. Actual GLB wheel centers are within 1.38 native
+pixels of observed wells. The verifier rejects a displaced axle and the old
+solid floor; roll is clear, steering/raised equipment remain unqualified.
+The earlier v1 and its review remain immutable.
 
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those

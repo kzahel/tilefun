@@ -72,25 +72,29 @@ try {
     await page.close();
   }
   const cases = bundles
-    ? JSON.parse(
-        await readFile(resolve(root, "art-source/vehicle-models/catalog.json"), "utf8"),
-      ).bundles.map((bundle) => ({
-        prefix: `${bundle.assetId}-${bundle.revision}-`,
-        assetUrl: `/tilefun/${bundle.glb.replace(/^public\//, "")}`,
-        geometry: bundle.geometry ?? { meshObjects: 55, triangles: 842 },
-      }))
+    ? await Promise.all(
+        JSON.parse(
+          await readFile(resolve(root, "art-source/vehicle-models/catalog.json"), "utf8"),
+        ).bundles.map(async (bundle) => ({
+          prefix: `${bundle.assetId}-${bundle.revision}-`,
+          assetUrl: `/tilefun/${bundle.glb.replace(/^public\//, "")}`,
+          geometry: bundle.geometry ?? { meshObjects: 55, triangles: 842 },
+          wheelWellFit: JSON.parse(await readFile(resolve(root, bundle.source, "rig.json"), "utf8"))
+            .wheelWellFit,
+        })),
+      )
     : (revision === "red-v1" ? [""] : ["", "green-"]).map((prefix) => ({
         prefix,
         assetUrl: `/tilefun/demos/authored-car/${revision}/${prefix}car.glb`,
         geometry: { meshObjects: 55, triangles: revision === "v4" ? 834 : 842 },
       }));
-  for (const { prefix, assetUrl, geometry } of cases) {
+  for (const { prefix, assetUrl, geometry, wheelWellFit } of cases) {
     const page = await browser.newPage();
     await page.goto(`${origin}/tilefun/__vehicle_rig_probe`, {
       waitUntil: "networkidle",
     });
     const result = await page.evaluate(
-      async ({ assetUrl }) => {
+      async ({ assetUrl, wheelWellFit }) => {
         const { THREE, GLTFLoader } = await import(
           "/tilefun/scripts/authored-assets/runtime/glb-imports.mjs"
         );
@@ -106,6 +110,129 @@ try {
         scene.updateMatrixWorld(true);
         const fixed = body.children.map((obj) => [obj.name, [...obj.matrixWorld.elements]]);
         const centers = rig.wheels.map((w) => w.roll.getWorldPosition(new THREE.Vector3()));
+        function checkWheelWells() {
+          const wheelWellErrors = [];
+          if (wheelWellFit) {
+            const floor = scene.getObjectByName(wheelWellFit.floorMesh);
+            if (!floor?.isMesh) throw new Error("Missing wheel-well floor mesh");
+            const positions = floor.geometry.attributes.position;
+            const indices = floor.geometry.index;
+            const triangles = [];
+            for (let i = 0; i < (indices?.count ?? positions.count); i += 3) {
+              const points = [0, 1, 2].map((k) =>
+                floor.localToWorld(
+                  new THREE.Vector3().fromBufferAttribute(
+                    positions,
+                    indices ? indices.getX(i + k) : i + k,
+                  ),
+                ),
+              );
+              triangles.push(new THREE.Triangle(...points));
+            }
+            const floorBox = new THREE.Box3().setFromObject(floor);
+            if (Math.abs(floorBox.max.y - floorBox.min.y) > 1e-5)
+              throw new Error("Wheel floor probe requires a level rest floor");
+            for (const observation of wheelWellFit.observations) {
+              const wheel = rig.wheels.find((w) => w.id === observation.wheel);
+              const center = wheel.roll.getWorldPosition(new THREE.Vector3());
+              const tire = wheel.roll.children.find((obj) => obj.name.startsWith("Tire"));
+              const bounds = new THREE.Box3().setFromObject(tire);
+              const outer = new THREE.Vector3(
+                center.x,
+                center.y,
+                center.z > 0 ? bounds.max.z : bounds.min.z,
+              );
+              const camera = observation.camera;
+              const a = (camera.azimuth * Math.PI) / 180,
+                e = (camera.elevation * Math.PI) / 180;
+              const x = outer.x,
+                y = -outer.z,
+                z = outer.y;
+              const pixel = [
+                camera.origin[0] + camera.horizontalScale * (-Math.sin(a) * x + Math.cos(a) * y),
+                camera.origin[1] +
+                  camera.horizontalScale *
+                    camera.verticalStretch *
+                    (Math.sin(e) * (Math.cos(a) * x + Math.sin(a) * y) - Math.cos(e) * z),
+              ];
+              const error = Math.hypot(...pixel.map((v, k) => v - observation.sourceCenter[k]));
+              if (error > wheelWellFit.maxCenterErrorPixels)
+                throw new Error(`${wheel.id} misses its source wheel well by ${error} pixels`);
+              wheelWellErrors.push({ wheel: wheel.id, errorPixels: error });
+              const dz = floorBox.min.y - center.y;
+              const halfspan = Math.sqrt(wheel.radius ** 2 - dz ** 2);
+              const lo = Math.max(floorBox.min.z, bounds.min.z),
+                hi = Math.min(floorBox.max.z, bounds.max.z);
+              for (let ix = -12; ix <= 12; ix++)
+                for (let iz = 1; iz <= 3; iz++) {
+                  const point = new THREE.Vector3(
+                    center.x + (halfspan * 0.99 * ix) / 12,
+                    floorBox.min.y,
+                    lo + ((hi - lo) * iz) / 4,
+                  );
+                  if (
+                    hi > lo &&
+                    triangles.some(
+                      (tri) =>
+                        tri.closestPointToPoint(point, new THREE.Vector3()).distanceTo(point) <
+                        1e-5,
+                    )
+                  )
+                    throw new Error(`Floor intersects ${wheel.id} tire inside its wheel well`);
+                }
+            }
+          }
+          return wheelWellErrors;
+        }
+        const wheelWellErrors = checkWheelWells();
+        const wheelWellRegression = [];
+        if (wheelWellFit) {
+          const front = rig.wheels[0].steer;
+          const restPosition = front.position.clone();
+          front.position.x -= 14;
+          scene.updateMatrixWorld(true);
+          let rejected = false;
+          try {
+            checkWheelWells();
+          } catch (error) {
+            rejected = error.message.includes("misses its source wheel well");
+          } finally {
+            front.position.copy(restPosition);
+            scene.updateMatrixWorld(true);
+          }
+          if (!rejected) throw new Error("Wheel-well probe accepted a displaced front axle");
+          wheelWellRegression.push("displaced front axle rejected");
+          const floor = scene.getObjectByName(wheelWellFit.floorMesh);
+          const originalGeometry = floor.geometry;
+          const solid = new THREE.BufferGeometry();
+          const corners = [
+            [-70, 10, -23],
+            [70, 10, -23],
+            [70, 10, 23],
+            [-70, 10, 23],
+          ];
+          solid.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(
+              corners.flatMap((point) => floor.worldToLocal(new THREE.Vector3(...point)).toArray()),
+              3,
+            ),
+          );
+          solid.setIndex([0, 1, 2, 0, 2, 3]);
+          floor.geometry = solid;
+          rejected = false;
+          try {
+            checkWheelWells();
+          } catch (error) {
+            rejected = error.message.includes("Floor intersects");
+          } finally {
+            floor.geometry = originalGeometry;
+            solid.dispose();
+          }
+          if (!rejected) throw new Error("Wheel-well probe accepted the old solid floor");
+          wheelWellRegression.push("solid floor intersecting tires rejected");
+          checkWheelWells();
+        }
         function checkFixed() {
           scene.updateMatrixWorld(true);
           if (
@@ -250,9 +377,14 @@ try {
           frontSteeringOnly: "verified",
           equipmentHinges: equipment.length,
           equipmentMotion: equipment.length ? "independent; clearance unqualified" : "none",
+          wheelWellErrors,
+          wheelWellRegression,
+          wheelFloorClearance: wheelWellFit
+            ? "rest/roll verified; steering unqualified"
+            : "not qualified",
         };
       },
-      { assetUrl },
+      { assetUrl, wheelWellFit },
     );
     assert.equal(result.meshes, geometry.meshObjects);
     assert.equal(result.triangles, geometry.triangles);

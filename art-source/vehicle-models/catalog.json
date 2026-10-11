@@ -748,6 +748,163 @@
         "orbit-2.png": "64b25137632c9e2f2d760a24db2b1b259f209684aac4e0d4321bdd94eeb23205",
         "orbit-3.png": "3176acde3e150557977c1aa0c3d2f9b77fdcd33c8fe6f6e24b9d3f1a5b88e796"
       }
+    },
+    {
+      "assetId": "fire-truck-ladder-1",
+      "revision": "v2",
+      "glb": "public/assets/models/vehicles/fire-truck-ladder-1-v2.glb",
+      "source": "art-source/vehicle-models/fire-truck-ladder-1/v2",
+      "capturedCandidateId": "projection:authored-fire-truck-ladder-1-v2",
+      "capturedCandidateSha256": "b35e7e15930a61e9b1b868aca2ff52faf947296d8e4f996462864abab1dd44a1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 49,
+        "triangles": 1280
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/authoring-provenance.json",
+          "sha256": "5a12d2a158e33c527c79370b9c951720a63ba9e9d8c41d8709c8665c9ee90ecf"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/car-atlas.png",
+          "sha256": "2ef608c8537d52d173ad14c01594fc35c4aa736436aee54e3a8aa5db0f69c268"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/car.blend",
+          "sha256": "543ceea33a48399795dfaaa85ea8726cb957dc63934462fc415537d2adf2c359"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/coverage.json",
+          "sha256": "84bafbceced3f2e47de65302b515197612abbb4bbab54e77458278555d41f6fc"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/family-config.json",
+          "sha256": "045c472db40694ad99af3ad36017fbe2b69f67fd1677c39ff4c2f2fa98e4847d"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/geometry-audit.json",
+          "sha256": "d8dcf31102ff31bd0378d38890a1e8acff35c272c6b524ade16e6faae113cf54"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/inspection.json",
+          "sha256": "a1b432c15507d88eb5f9aa5de79408a0ff61c98b58da89a491b6a112dc25d3da"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/light-validation.json",
+          "sha256": "1ce2f4803fe368657f9f8064585a15ba08d712633f7cf4c07ebeb68c27a529c6"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/lights.json",
+          "sha256": "aabe99929da13c6fff2cd331748cb1e746f0c6bc2a2fdce531e988ef738bc640"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/mesh-spec.json",
+          "sha256": "5753e3a7f468a27b5d9acd803b7fd00ffe78d6c581ad5a88e0088a79ea10f1e6"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/paint-ownership.json",
+          "sha256": "4e5b67de71831d3713804f136969e37cfec81fc57b14fe07b222b898cd1f1a7f"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/projection-coverage.png",
+          "sha256": "79b285ea04a88d7515055f92ce7f7bf7fb4fa8745b93241e21b120762cc7f922"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/projection-draft.png",
+          "sha256": "af464f3f5710de44333042ce18062418ecf33d5e15ece0864770a466461c81e0"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/projection-with-authored-fill.png",
+          "sha256": "80ec5a0208a25bd9cc7cb4c9b1fc6752faff629ff8b06e7b6ac0aa4ce0d8e5de"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/recipe.json",
+          "sha256": "9dceaf599570b12c20fc27fdf2b94d601fba7e2115838278efd8ae70deac6bfe"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/refs/east.png",
+          "sha256": "1ded21e6642e8e38615dd7eafb34770cfd9c7e1f1606d310e4e439415849f19f"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/refs/north.png",
+          "sha256": "8dea9238628b5fb2e36c314b54582b8cac290895c977014afd71b9abbe660721"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/refs/south.png",
+          "sha256": "ebd5503fa2a522b28acb348b1f4b6adb1d7e02b9310b1d5874b0e4985b7bf922"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/refs/west.png",
+          "sha256": "197c79b900f1638aa6d03cfdee1500dd0722c3db06bce9258a6b6b7bf1871f9d"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/revision-audit.json",
+          "sha256": "adaf295f4080ae62312b69e1341427f45b150a295ab8af2fb995129f2ae2f744"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/rig.json",
+          "sha256": "cd2995bbda543a435eb53f9c2a616ca9ba368a53c3bc0620b7245eb19a443afa"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/wheel-alignment.json",
+          "sha256": "b7d36a6df1c487941f436a0860f30083bb0e25065ba12eb54c22e5a0243f2e4e"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v2/wheel-fit.json",
+          "sha256": "678336490bf4dc376752caef55d4741f8f0e9968fa343350e4a29afc1c70e824"
+        },
+        {
+          "path": "public/assets/models/vehicles/fire-truck-ladder-1-v2.glb",
+          "sha256": "b6b6888ba337d30270f80de6e26b35114b25da4a78a215f3a1e2dd0708742f83"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/comparison.png",
+          "sha256": "1dde20258b80a819a4df6c14fe83bb46b300f0c4184d1ec03eeed7b029ab4103"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/index.html",
+          "sha256": "ba4296f8831cd73880ef70a0a69e3eef8565c4a64992755438831776697e5662"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/lights-a.png",
+          "sha256": "1f59796e6920623a8bb4a955eeb963f83d9ffb18f6dd645e5baf588ddd01fc55"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/lights-b.png",
+          "sha256": "15f1ee4c6a58403881b697d4d1fcaaa6cf4fbae706d5e3d19eeceda0fb72e236"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/lights-off.png",
+          "sha256": "fe9937383c6a56d4a9d4b5dfbc7c343ff3a6db2ad6bcaa5fc9dc6f6afa32d288"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/lights.gif",
+          "sha256": "1dd55b93c39d708690849a6afaafd0319936f952483993086da17d63adb36e65"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/orbit.png",
+          "sha256": "97338a1e546cbd4ff7b1bcd4970b0afdec9ba264c4276f896dbfd386dfa2ed64"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/review.json",
+          "sha256": "36417dcdb7e542e4c08179b4d6b7a1a0fabbabff96c4e0abb5181e2f095d0874"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v2/silhouette.png",
+          "sha256": "7b6a66e5c94a904cb67a9cb71243925d352dae0c4b1b38c6d03b349adf128e46"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "9b793cd896a398f6fa10c4a1a962fc8b1b15dd28aef70a3d72e39ce65dee59ab",
+        "west-render.png": "94ff4ff7934443e411635538dd047c1fbe2d7137f59d45a2e502846c891d3b8d",
+        "north-render.png": "63ca36e5e131a0763134e1e548cea8d9d59c7e211db01c1e4e615c4dcc980692",
+        "south-render.png": "94608166a6b143a10043bf30dd07d5c66db71228db31952e6fb3e7f8ef7eadb3",
+        "orbit-0.png": "2297f36cb9ee004d5c040f4b0a0f3517af3d362b3f7a2df33e385df55bdbfc5d",
+        "orbit-1.png": "e6ebdbe8837be55e609ab7c52c3b86d5a35d6934a9ae845205ee128250f5f408",
+        "orbit-2.png": "76eaa97445b275c234fc238a8ec09d54a083ddca45927d600b788cb0754c6b79",
+        "orbit-3.png": "494e9e89070300e071efd18ee2f50d5f452750f5597e4db01fc026b017b76738"
+      }
     }
   ],
   "dependencies": [

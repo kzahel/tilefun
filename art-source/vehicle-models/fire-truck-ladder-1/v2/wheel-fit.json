@@ -1,0 +1,56 @@
+{
+  "schema": "tilefun-fire-wheel-fit-v1",
+  "baseSource": "art-source/vehicle-models/fire-truck-ladder-1/v1",
+  "baseSceneSha256": "c4e3d1337207b1928f109a3cbbc29bbed87b21d584dac8d774f4528ddf8fab4f",
+  "wheels": {
+    "frontAxle": -35.5,
+    "rearAxle": 40.5,
+    "radius": 10.5,
+    "halfWidthCenter": 23.1,
+    "tireWidth": 3,
+    "hubRadius": 4.4
+  },
+  "observedCaps": {
+    "east": {
+      "front": [
+        107.5,
+        72.5
+      ],
+      "rear": [
+        31.5,
+        72.5
+      ]
+    },
+    "west": {
+      "front": [
+        36.5,
+        72.5
+      ],
+      "rear": [
+        112.5,
+        72.5
+      ]
+    }
+  },
+  "capPaintRadii": {
+    "Tire": [
+      10.5,
+      7
+    ],
+    "Hub": [
+      4.4,
+      2.5
+    ]
+  },
+  "hubPaintOffset": [
+    0,
+    1.5
+  ],
+  "floorMargin": 0.75,
+  "maxCenterErrorPixels": 2,
+  "notes": [
+    "Wheel and arch axles share the measured source centers; diagnostic cameras stay unchanged.",
+    "Tires remain circular, grounded and independently rotating. Cap UVs use local rectified wheel paint rather than sampling body pixels.",
+    "Floor openings remove tire intersections; this verifies rest/roll fit, not steering clearance."
+  ]
+}

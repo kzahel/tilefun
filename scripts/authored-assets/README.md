@@ -108,6 +108,23 @@ paint; those fills are explicit authoring decisions. Preserve earlier reviews,
 register the new retained inspection and follow the commit checklist above.
 See [117](../../docs/tactical/117-police-and-fire-truck-models.md).
 
+The initial fire constructor is retained v1. For the wheel-fit correction, use
+the separate refinement and measured `fire-wheel-fit.json` configuration:
+
+```text
+python scripts/authored-assets/refine_fire_wheels.py --out data/authored-assets/NEW_FIRE_WHEELS --blender BLENDER_EXECUTABLE
+python scripts/authored-assets/pipeline.py evaluate --recipe art-source/vehicle-models/fire-truck-ladder-1/v2/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_FIRE_V2_REPLAY
+```
+
+It checks the tracked base scene, refits axles/fenders, opens the underfloor
+and rectifies wheel-local paint without moving cameras or fixed detail meshes.
+`rig.json`'s `wheelWellFit` records measured source centers and camera parameters.
+The actual GLB `--bundles` probe verifies those centers within two native pixels
+and checks floor/tire intersection at rest (circular roll preserves clearance).
+Negative probes must reject a displaced front axle and a solid floor. A working
+roll/steer hierarchy alone does not qualify wheel placement or steering clearance.
+See [118](../../docs/tactical/118-fire-truck-wheel-alignment.md).
+
 ## Engine readiness
 
 The exported self-contained GLB contains the mesh, UV texture, flat emissive/unlit paint

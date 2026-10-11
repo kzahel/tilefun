@@ -54,6 +54,10 @@ own wheel rigs and a separate fire ladder hinge. The bank's siren-capable types
 are ambulance, police and fire truck (two ladder sprite states). Green/orange
 garbage trucks carry amber warning beacons and remain queued.
 
+Stowed fire v2 corrects owner-reported axle placement, floor/tire intersections
+and wheel UV ownership in [118](../tactical/118-fire-truck-wheel-alignment.md).
+V1 remains retained; the new exact comparison awaits owner inspection.
+
 ## Work order
 
 - [x] Author the **ambulance**, with its own body, wheel positions, cab/box
@@ -96,7 +100,7 @@ models have been started. The later family order can change with owner prioritie
 | `police-car` | [Retained v1](../../art-source/vehicle-models/police-car/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/police-car-v1/comparison.png), physical lamp-order contradiction and wheel fit; integrate its own GLB and light state. |
 | `garbage-truck-green` | Queued | Pending | Fit cab/container geometry and wheel rig; give the amber warning beacon its own lens. |
 | `garbage-truck-orange` | Queued | Pending | Check green-template eligibility; preserve its own paint and amber beacon lens. |
-| `fire-truck-ladder-1` (stowed) | [Retained v1](../../art-source/vehicle-models/fire-truck-ladder-1/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v1/comparison.png), roof paint and wheel fit; qualify ladder/steering clearance. |
+| `fire-truck-ladder-1` (stowed) | [Retained v2](../../art-source/vehicle-models/fire-truck-ladder-1/v2/) — wheel correction in [118](../tactical/118-fire-truck-wheel-alignment.md); v1 retained | Pending | Review corrected [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v2/comparison.png); qualify ladder/steering clearance and remaining roof paint. |
 | `fire-truck-ladder-2` (raised) | Queued | Pending | Fit raised equipment pose; qualify clearance before driving use. |
 
 ### Large car bank — 20 sets
@@ -161,6 +165,8 @@ with evidence for that exact revision.
 - [ ] Inspect matched sprite/render 4×2, contour differences and novel angles.
 - [ ] Verify exported wheel components, independent roll, axes and ground contacts;
   qualify steering clearance for any supported steering pose.
+- [ ] Measure actual exported wheel centers against source wells in both side
+  views; check floor/body intersections and cap/tread UV ownership separately.
 - [ ] Commit the exact final GLB, packed Blender/texture source and dependencies;
   verify the delivery from tracked files alone and link its catalog entry.
 - [ ] Integrate its own asset in the shared game/lab path; verify registration,

@@ -6343,6 +6343,17 @@
       "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
     {
+      "id": "projection:authored-fire-truck-ladder-1-v2",
+      "batchId": "authored-vehicles",
+      "name": "Fire truck · stowed ladder · authored model v2",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/fire-truck-ladder-1-v2/",
+      "kind": "projection",
+      "fingerprint": "b35e7e15930a61e9b1b868aca2ff52faf947296d8e4f996462864abab1dd44a1",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
       "id": "geometry:deck-ramp-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -30004,5 +30015,5 @@
       }
     }
   ],
-  "inputDigest": "0867639e0f0a91c2cb5ff9a4da0872d3f1af7d4161d4157761dbabd56a97d33e"
+  "inputDigest": "34b7e308a0c5466ad8dff60306f658565cc8f18fd842d7e291afe8c0e0ec8a36"
 }
