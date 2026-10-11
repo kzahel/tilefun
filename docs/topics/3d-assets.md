@@ -17,6 +17,10 @@ owns engine interfaces and GPU integration; [performance](performance.md) owns
 measurements. [Research and investigations](../research/sprite-to-3d-and-renderer-options.md)
 records the experiments, external options and their limits.
 
+[Vehicle model porting](vehicle-model-porting.md) owns the running list of all
+45 vehicle sets, model/engine status and next actions. Update it at each vehicle
+checkpoint; the ambulance is the next new authoring target.
+
 ## Investigation evidence storage
 
 The evidence directories for investigations 070–075 under `docs/tactical/` are

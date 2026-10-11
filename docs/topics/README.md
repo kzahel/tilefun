@@ -25,6 +25,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Gameplay scenarios](gameplay-scenarios.md) | Shared runtime recipes for interactive labs and integration tests |
 | [Embedded engine labs](embedded-engine-labs.md) | Game/lab architectural alignment, shared presentation hosting and drift prevention |
 | [Vehicles](vehicles.md) | Approved vehicle bank, generated traffic, roof riding and Workshop playground |
+| [Vehicle model porting](vehicle-model-porting.md) | All 45 sprite sets, Blender model delivery, per-vehicle engine integration and next actions |
 | [Trains](trains.md) | Proposed generated town railways, paired local/express tracks, stations, forks, bridges and tunnels |
 | [World geometry](world-geometry.md) | First ramp/deck/passage engine lab; direction and open terrain/indoor decisions for connected stacked spaces |
 | [Characters](characters.md) | Shared character definitions, Workshop motion/geometry validation, and future NPC/player integration |

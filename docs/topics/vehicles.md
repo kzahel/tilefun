@@ -2,7 +2,11 @@
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-10.
+Updated: 2026-10-11.
+
+The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversion
+of all 45 sprite sets to Blender/GLB assets and their individual engine status.
+This is separate from the approved sprite bank and vehicle gameplay behavior.
 
 ## Grass occlusion
 

@@ -3,6 +3,9 @@
 These are the exact final assets from the Blender authoring work. They are tracked
 deliverables; older intermediate models and scratch galleries remain ignored.
 
+The [vehicle porting checklist](../../docs/topics/vehicle-model-porting.md) tracks
+all 45 source sets, their model/engine status and the next authoring work.
+
 | Vehicle | Blender/texture/source bundle | Self-contained runtime GLB |
 | --- | --- | --- |
 | Blue `compact-1` | [v7](compact-1/v7/) | [compact-1-v7.glb](../../public/assets/models/vehicles/compact-1-v7.glb) |

@@ -9,6 +9,10 @@ Work in the Tilefun repository root (contains `src/traffic/vehicles-v1.json` and
 review contracts. Use the repository's deterministic Blender tools; this task
 needs coherent geometry and reusable UVs, rather than a generated bitmap.
 
+Read `docs/topics/vehicle-model-porting.md` before choosing the next vehicle.
+It owns the full queue and each model's status; update its row, next action,
+evidence and summary counts at every authoring/delivery/integration checkpoint.
+
 ## Choose the route from evidence
 
 Identify the requested sprite in the vehicle bank before choosing a template.
