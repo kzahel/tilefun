@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import type { Camera } from "./Camera.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
+import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { COMPACT_CAR_MESH, resolveBody } from "./MeshPresentation.js";
@@ -48,25 +49,7 @@ export class GpuMeshBodies {
     object.quaternion.set(...item.mesh.orientation);
     this.car.value.setTravel(item.mesh.wheelTravel ?? 0);
     this.scene.add(object);
-    // Deliberately oblique: x maps to screen x, z-y maps to screen up.
-    this.camera.projectionMatrix.set(
-      1 / radius,
-      0,
-      0,
-      0,
-      0,
-      -1 / radius,
-      1 / radius,
-      0,
-      0,
-      -1 / (radius * 4),
-      -1 / (radius * 4),
-      0,
-      0,
-      0,
-      0,
-      1,
-    );
+    setCarMeshProjection(this.camera.projectionMatrix, radius, item.mesh.orientation);
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
     renderer.getClearColor(this.clearColor);
     const alpha = renderer.getClearAlpha();

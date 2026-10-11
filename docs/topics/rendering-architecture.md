@@ -18,8 +18,9 @@ evidence of equivalent scheduling or resource behavior.
 
 The optional fixed-view GPU renderer preserves existing sprite presentation
 and can replace individual sprite bodies with meshes. Entity orientation may
-vary continuously while the camera projection stays fixed. The following
-invariants govern that extension; they remain requirements for further assets and backends.
+vary continuously while the world camera projection stays fixed. Authored bodies
+may need explicit source-camera registration, as described for compact-1 below.
+The following invariants govern that extension; they remain requirements for further assets and backends.
 
 ## Architecture
 
@@ -298,8 +299,10 @@ acquire different gameplay or presentation rules.
    including zoom, shake, pixel rounding, viewport and DPR conventions. A generic
    tilted orthographic camera is not automatically equivalent to this projection.
    Sprites, mesh anchors, shadows, clips and editor overlays must agree at known
-   world points. Mesh-local vertices rotate before projection; the fixed camera
-   does not rotate with the entity. Ground picking uses the matching inverse;
+   world points. Mesh-local vertices rotate before projection. Compact-1 uses
+   smoothly blended authored side/front camera metrics for its body only; this
+   compensates for the sprite bank's different directional lenses without moving
+   the world camera, anchors, terrain or input picking. Ground picking uses the matching inverse;
    elevated picking requires an explicit height/surface policy, since a screen
    point has no unique 3D inverse. UI coordinates stay in the host's UI contract.
 
@@ -384,6 +387,14 @@ the retained blue compact-1 v7 GLB. `CarMeshAsset` converts +Y-up/-X-forward to
 +Z-up/+X-forward once; authored world-pixel scale and Z=0 ground center need no
 sprite/camera offset. `CarMeshDefinition` also retains the earlier reference
 projection registration for historical reference checks.
+
+[109](../tactical/109-blue-car-camera-registration.md) corrects the initial model
+projection: a generic `y-z` lens made front/rear views tall and thin.
+`CarMeshProjection` uses the retained 42-degree side and 70-degree front/rear
+camera metrics, including horizontal scale and vertical stretch. Squared ground
+heading blends those metrics continuously through turns, with no cardinal snap
+or camera orbit. World anchors, height offsets, viewport, zoom and picking still
+use `projectWorld`; the GLB, physics and collision bytes are unchanged.
 
 `GpuMeshBodies` draws that body into one reusable depth target at one texel per
 world pixel, applies inward silhouette ink in a second color target and composites

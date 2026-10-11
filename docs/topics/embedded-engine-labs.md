@@ -514,7 +514,9 @@ browser run (one skipped); streaming readiness and phone timing are recorded in 
 
 [108](../tactical/108-authored-blue-car-gameplay.md) connects compact-1 v7 through
 shared `CarMeshAsset`, `EntityMeshPose` and `GpuMeshBodies` in the game, Traffic
-playground and renderer comparison. All three use the same axis normalization,
+playground and renderer comparison. [109](../tactical/109-blue-car-camera-registration.md)
+corrects body proportions with shared authored side/front camera registration;
+the world camera and game controls are unchanged. All three use the same axis normalization,
 wheel roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
 Traffic's Worker, input, collision and roof support remain native. This changes
 optional presentation only; the independent car-projection reference lab remains

@@ -73,7 +73,10 @@ required. [108](../tactical/108-authored-blue-car-gameplay.md) connects the reta
 blue `compact-1` v7 GLB to the shared optional game/lab mesh path, with explicit
 axis normalization, authored ground-center/world-pixel registration, nearest unlit
 paint, inward native-pixel silhouette ink and cosmetic distance-driven wheel roll.
-Missing/loading/failed models retain the complete sprite. The game selector is
+[109](../tactical/109-blue-car-camera-registration.md) aligns the body lens with
+the retained side/front camera presets and blends through turns, correcting the
+initial tall/thin front/rear appearance. The world camera and mesh anchors stay
+on the ordinary game projection. Missing/loading/failed models retain the complete sprite. The game selector is
 **Debug → Renderer → GPU + 3D car**, or `?renderer=gpu&meshes`.
 
 Only blue compact-1 uses this adapter; green/red and other vehicles retain their

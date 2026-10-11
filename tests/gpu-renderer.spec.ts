@@ -143,6 +143,73 @@ test("optional mesh body rotates, composes in order and falls back atomically", 
   expect(after.targetBytes).toBeLessThanOrEqual(1024 * 1024 * 8);
 });
 
+test("authored car proportions match sprite views across headings and zoom", async ({ page }) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const results = await page.evaluate(async () => {
+    const lab = (
+      window as unknown as {
+        rendererLab: {
+          setMesh(value: boolean): Promise<unknown>;
+          setYaw(value: number): unknown;
+          setZoom(value: number): unknown;
+        };
+      }
+    ).rendererLab;
+    await lab.setMesh(true);
+    const bounds = (id: string) => {
+      const canvas = document.querySelector<HTMLCanvasElement>(`#${id}`);
+      if (!canvas) throw Error("Missing comparison canvas");
+      const copy = document.createElement("canvas");
+      copy.width = canvas.width;
+      copy.height = canvas.height;
+      const ctx = copy.getContext("2d", { willReadFrequently: true });
+      if (!ctx) throw Error("Missing comparison context");
+      ctx.drawImage(canvas, 0, 0);
+      const pixels = ctx.getImageData(0, 0, copy.width, copy.height).data;
+      let left = copy.width,
+        right = -1,
+        top = copy.height,
+        bottom = -1;
+      // Blue body paint excludes background, green fixture, shadow and marker.
+      // Compare visible source/model extents, not transparent sprite padding.
+      for (let y = 0; y < copy.height; y++)
+        for (let x = 0; x < copy.width; x++) {
+          const offset = (y * copy.width + x) * 4;
+          const r = pixels[offset] ?? 0,
+            g = pixels[offset + 1] ?? 0,
+            b = pixels[offset + 2] ?? 0;
+          if (b > r * 1.18 && b > g * 1.12 && b > 85 && r < 160) {
+            left = Math.min(left, x);
+            right = Math.max(right, x);
+            top = Math.min(top, y);
+            bottom = Math.max(bottom, y);
+          }
+        }
+      return { width: right - left + 1, height: bottom - top + 1 };
+    };
+    const samples = [];
+    for (const zoom of [0.5, 1])
+      for (const yaw of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) {
+        lab.setZoom(zoom);
+        lab.setYaw(yaw);
+        samples.push({ zoom, yaw, sprite: bounds("reference"), model: bounds("gpu") });
+      }
+    return samples;
+  });
+  expect(results).toHaveLength(8);
+  for (const { sprite, model } of results) {
+    expect(model.width).toBeGreaterThan(0);
+    expect(model.height).toBeGreaterThan(0);
+    expect(model.width / sprite.width).toBeGreaterThan(0.88);
+    expect(model.width / sprite.width).toBeLessThan(1.12);
+    expect(model.height / sprite.height).toBeGreaterThan(0.88);
+    expect(model.height / sprite.height).toBeLessThan(1.12);
+    expect(model.height / model.width / (sprite.height / sprite.width)).toBeGreaterThan(0.88);
+    expect(model.height / model.width / (sprite.height / sprite.width)).toBeLessThan(1.12);
+  }
+});
+
 test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
