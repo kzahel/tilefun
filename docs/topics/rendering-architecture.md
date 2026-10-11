@@ -419,6 +419,18 @@ The opt-in `?renderer=gpu&meshes&allcars3d` flag selects the blue body for every
 colliders and sprite fallbacks remain intact. A bus may retain a larger collision
 body than its compact test appearance. Trains and other actors are excluded.
 
+Retained ambulance v2 supplies six separately tagged emergency-light lenses.
+GLB node extras identify schema, role, channel, group and phase; fixed bases are
+untagged. `VehicleEmergencyLights` clones lens materials and pulses existing
+emissive/unlit paint from explicit enabled/shared-time inputs, setting absolute
+state on every draw and resetting off. It borrows atlas resources and restores
+materials on disposal. Actual GLB off/A/B captures verify visible alternation and
+unchanged body/base paint. This shared helper is available for integration; the
+ambulance resolver/registration and authoritative on/off state are still pending.
+Input, persistence, replication, shared pause/time policy, separate audio and
+Canvas fallback belong to that integration slice. See
+[116](../tactical/116-ambulance-beacons-and-light-tags.md).
+
 `GpuMeshBodies` draws that body into one reusable depth target at one texel per
 world pixel, applies inward silhouette ink in a second color target and composites
 it at its supplied scene position. Nearest enlargement keeps stroke width

@@ -1,0 +1,54 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-ambulance-v2",
+  "candidateFingerprint": "14bcee43b596dc4228ed0b035d98fe678f6bad8773da01dcb8582f8b3b2561c3",
+  "identity": {
+    "assetId": "ambulance",
+    "revision": "v2",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "c8286f4b3bbe8df3537962a0300e915ca45e0cf678cad369e270cc0065bae989",
+    "sourceAtlasSha256": "6c1d3534643bb1f6dac4efd95aaf90bfa3b485d26e0d07589959b5bfe7aafd4b",
+    "lightPatternSha256": "88b02c3f30ee5d0c771e056b26cf8417b28345a6e686e97045b9a8579a4f33dd",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/ambulance-v2.glb",
+        "sha256": "4d8cdfff33cf363b9abaaab424b1271e0edf0200ba54f2a27d0ff7892d4efe25"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/comparison.png",
+        "sha256": "75b53f317e874eb25a1ba13c09b43d396d9c9d3b79e9fc6a5c7e178d01238b60"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/orbit.png",
+        "sha256": "d9a62690c6bd47df31ef41b2bff8d9e51f742e982ea7704ef59ed814354f5958"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/silhouette.png",
+        "sha256": "90089982484116fda82a4e04f7475bb81d4955b828cc856b2632db9feeb9e185"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/lights.gif",
+        "sha256": "4d1f5c80d383508c48c552f805fa6fa36d8cf7e66070e5864858a358951a69b9"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/lights-off.png",
+        "sha256": "e64e5e3433fd75d0de1dbc741f70b708628203658a30e5b62816c50f510c2cfd"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/lights-a.png",
+        "sha256": "1b4e0cc9725cff5a0b66526cd135d3dfe069d526c771aedaa9de7c1b7901e714"
+      },
+      {
+        "url": "assets/models/vehicles/review/ambulance-v2/lights-b.png",
+        "sha256": "6ae4296d8ec59a12a7c3c7e646d4ade820de56ccdabd0a70d6df3e9e94b426ea"
+      }
+    ]
+  },
+  "status": "Retained diagnostic awaiting owner inspection; not promoted",
+  "notes": [
+    "Six tagged blue lens meshes, separate fixed bases; body/windows/wheels/UVs unchanged from v1.",
+    "GLB-tested emissive double pulse; shared helper available, game integration and control not wired.",
+    "Roof paint contradictions and rear-view cab appearance remain as in v1; steering clearance remains unqualified."
+  ]
+}

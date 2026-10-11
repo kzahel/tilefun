@@ -1,6 +1,9 @@
 import ambulanceReview from "../../public/assets/models/vehicles/review/ambulance-v1/review.json" with {
   type: "json",
 };
+import ambulanceLightsReview from "../../public/assets/models/vehicles/review/ambulance-v2/review.json" with {
+  type: "json",
+};
 import { sha256 } from "../art/ArtSource.js";
 import { CAR_PROXY, carProxyPatches } from "../projection/CarProxy.js";
 import geometrySource from "../projection/CarProxy.ts?raw";
@@ -38,7 +41,7 @@ export async function buildCarProjectionCandidate(): Promise<WorkshopCandidate> 
 /** Exact retained comparison sheets stay discoverable without granting art approval. */
 export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidate[]> {
   const candidates: WorkshopCandidate[] = [];
-  for (const review of [ambulanceReview]) {
+  for (const review of [ambulanceReview, ambulanceLightsReview]) {
     for (const file of review.identity.files) {
       const response = await fetch(`/tilefun/${file.url}`);
       if (!response.ok) throw new Error(`Missing retained vehicle review asset: ${file.url}`);
@@ -51,10 +54,10 @@ export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidat
     candidates.push({
       id: review.candidateId,
       batchId: "authored-vehicles",
-      name: "Ambulance · authored model v1",
+      name: `Ambulance · authored model ${review.identity.revision}`,
       prompt:
         "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
-      url: "/tilefun/assets/models/vehicles/review/ambulance-v1/",
+      url: `/tilefun/assets/models/vehicles/review/ambulance-${review.identity.revision}/`,
       kind: "projection",
       fingerprint,
       sourceFingerprint: review.identity.sourceFingerprint,

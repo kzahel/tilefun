@@ -23,6 +23,7 @@ const gallery =
 await mkdir(output, { recursive: true });
 const server = await createServer({
   root,
+  cacheDir: resolve(output, "vite-cache"),
   configFile: false,
   base: "/tilefun/",
   server: { port: 0, host: "127.0.0.1" },
@@ -74,7 +75,7 @@ try {
     ? JSON.parse(
         await readFile(resolve(root, "art-source/vehicle-models/catalog.json"), "utf8"),
       ).bundles.map((bundle) => ({
-        prefix: `${bundle.assetId}-`,
+        prefix: `${bundle.assetId}-${bundle.revision}-`,
         assetUrl: `/tilefun/${bundle.glb.replace(/^public\//, "")}`,
         geometry: bundle.geometry ?? { meshObjects: 55, triangles: 842 },
       }))

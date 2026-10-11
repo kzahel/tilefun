@@ -1,0 +1,20 @@
+{
+  "schema": "tilefun-ambulance-lights-v1",
+  "sourceRevision": "ambulance/v1",
+  "bars": [
+    { "id": "front", "x": -17, "halfWidth": 18, "base": 48.5, "height": 1.8, "phase": 0 },
+    { "id": "rear", "x": 46.5, "halfWidth": 18, "base": 48.5, "height": 1.8, "phase": 0.5 }
+  ],
+  "beacons": [
+    { "id": "front-left", "center": [-25, -12.5, 46], "supportHeight": 42, "phase": 0 },
+    { "id": "front-right", "center": [-25, 12.5, 46], "supportHeight": 42, "phase": 0.5 },
+    { "id": "rear-left", "center": [51, -12.5, 45], "supportHeight": 44.8, "phase": 0.5 },
+    { "id": "rear-right", "center": [51, 12.5, 45], "supportHeight": 44.8, "phase": 0 }
+  ],
+  "beaconProfile": [[0, 2], [2.4, 1.8], [3.5, 0.75]],
+  "segments": 12,
+  "periodSeconds": 1,
+  "pulseWindows": [[0, 0.12], [0.2, 0.32]],
+  "peakGain": 4,
+  "note": "Four small tapered beacon lenses accompany two thin light bars. Body/cameras/wheels remain from retained v1. Hidden beacon paint and supports are inferred from the observed east blue cluster, not claimed as recovered geometry. Default off; state/control and sound are independent."
+}

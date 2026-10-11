@@ -12,6 +12,7 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Green `compact-2` | [v7](compact-2/v7/) | [compact-2-v7.glb](../../public/assets/models/vehicles/compact-2-v7.glb) |
 | Red `compact-4` | [v1](compact-4/v1/) | [compact-4-v1.glb](../../public/assets/models/vehicles/compact-4-v1.glb) |
 | Ambulance | [v1](ambulance/v1/) | [ambulance-v1.glb](../../public/assets/models/vehicles/ambulance-v1.glb) |
+| Ambulance beacon refinement | [v2](ambulance/v2/) | [ambulance-v2.glb](../../public/assets/models/vehicles/ambulance-v2.glb) |
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
@@ -22,9 +23,12 @@ copied unchanged after checking the original inspection receipts. Recipe wrapper
 only update paths to tracked, portable dependencies. `catalog.json` records SHA-256
 pins, capture identities and the expected native/novel rendered-image hashes.
 
-The compacts have 55 meshes/842 triangles; the ambulance has 54 meshes/1,024
+The compacts have 55 meshes/842 triangles; ambulance v1 has 54 meshes/1,024
 triangles and its own body/roof geometry, source-owned side graphics and paint
 ownership records. All have four separate steer/roll tire+hub assemblies.
+Ambulance v2 has 56 meshes/1,388 triangles, six tagged light lenses and six fixed
+bases. Its source `lights.json` and the [light contract](../../docs/tactical/116-ambulance-beacons-and-light-tags.md)
+preserve phases and behavior; the game switch/asset integration remain pending.
 Units are world pixels, Blender up is +Z and forward is -X, with
 tire contacts on Z=0. GLBs use Blender's +Y-up export conversion. The GLB embeds
 the cleaned atlas; Blender scenes pack their textures, including retained unused
@@ -70,7 +74,7 @@ can remain local when the owner requests that scope.
 | Exact final self-contained GLB | `public/assets/models/vehicles/<vehicle>-<revision>.glb` | A fresh checkout has the finished runtime asset without Blender or regeneration. |
 | Packed final `.blend` and exact cleaned texture atlas | `art-source/vehicle-models/<vehicle>/<revision>/` | Preserve editable geometry, UVs, materials and wheel hierarchy; scripts and a GLB alone cannot recover the finished authoring state. |
 | Frozen source crops and portable recipe | The same source bundle | Preserve the reference pixels, camera matching and paint/UV decisions needed to inspect or repeat the result. |
-| Rig/window records, projection draft and uncertainty records, palette or cleanup configuration used for this vehicle | The same source bundle, as applicable | Preserve animation conventions and distinguish observed paint from authored or inherited surfaces. Retain the inputs needed to revise the final result. |
+| Rig/window/light records, projection draft and uncertainty records, palette or cleanup configuration used for this vehicle | The same source bundle, as applicable | Preserve animation axes, lens tags/groups/phases and pulse patterns; distinguish observed paint from authored or inherited surfaces. Retain the inputs needed to revise the final result. |
 | Every required template, source texture, configuration and reusable helper | Tracked source/script directories; reference shared files rather than duplicating them | The recipe must not rely on an ignored scene, scratch gallery or a file available only on the author's machine. |
 | Catalog entry with exact hashes, provenance, source credits and current documentation | `catalog.json`, asset credits and the owning topic | Identify the exact delivered revision, verify its dependencies and explain its readiness and remaining work. |
 

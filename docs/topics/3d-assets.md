@@ -19,8 +19,10 @@ records the experiments, external options and their limits.
 
 [Vehicle model porting](vehicle-model-porting.md) owns the running list of all
 45 vehicle sets, model/engine status and next actions. Update it at each vehicle
-checkpoint; ambulance v1 now awaits owner inspection in
-[115](../tactical/115-authored-ambulance.md).
+checkpoint; ambulance v1's authoring is recorded in
+[115](../tactical/115-authored-ambulance.md). V2 now awaits owner inspection;
+its light refinement and actual GLB flash proof are recorded in
+[116](../tactical/116-ambulance-beacons-and-light-tags.md).
 
 ## Investigation evidence storage
 
@@ -58,6 +60,13 @@ steering clearance remain open; engine integration and production promotion are
 pending. The generic raw renderer now overscans long/tall meshes before camera
 registration instead of clipping them; the blue compact's eight recorded render
 hashes remain unchanged. See [115](../tactical/115-authored-ambulance.md).
+
+Ambulance v2 refines tapered beacons and thinner light bars without changing body,
+window or wheel geometry/UVs. Six lens meshes carry versioned GLB extras; their
+six fixed bases remain untagged. The shared emergency-light helper pulses imported
+emissive/unlit paint from an explicit enabled/time input, with material isolation
+and exact off reset verified on the GLB. Gameplay control and per-asset integration
+remain pending. V1 and its original capture identity remain intact.
 
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those

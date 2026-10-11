@@ -10,7 +10,16 @@ from verify_bundles import glb_content, verify
 
 class RetainedBundleTests(unittest.TestCase):
     def test_all_final_assets_and_source_dependencies_are_self_contained(self):
-        self.assertEqual([r['assetId'] for r in verify()], ['compact-1', 'compact-2', 'compact-4', 'ambulance'])
+        self.assertEqual([(r['assetId'], r['revision']) for r in verify()],
+                         [('compact-1','v7'),('compact-2','v7'),('compact-4','v1'),('ambulance','v1'),('ambulance','v2')])
+
+    def test_exported_light_phase_must_match_its_retained_contract(self):
+        source = ROOT / 'art-source/vehicle-models/ambulance/v2'
+        lights = read(source / 'lights.json')
+        lights['lenses'][0]['phase'] = .123
+        with self.assertRaisesRegex(ValueError, 'light lens tags changed'):
+            glb_content(ROOT / 'public/assets/models/vehicles/ambulance-v2.glb', source / 'car-atlas.png',
+                        read(source / 'geometry-audit.json'), read(source / 'rig.json'), lights)
 
     def test_ambulance_cannot_pass_with_compact_geometry_expectations(self):
         source = ROOT / 'art-source/vehicle-models/ambulance/v1'

@@ -2,7 +2,7 @@
 
 Topic: vehicle-model-porting
 Status: 45 sprite sets inventoried; 4 exact model bundles retained, 1 integrated
-in game/lab mesh mode. Blue is the main-game GPU default; ambulance v1 awaits owner inspection.
+in game/lab mesh mode. Blue is the main-game GPU default; ambulance v2 awaits owner inspection.
 Updated: 2026-10-11.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
@@ -45,6 +45,8 @@ The main game now defaults to GPU plus the blue car; other vehicle types retain
 sprite fallbacks, per [rendering architecture](rendering-architecture.md).
 Ambulance v1's authoring, exact 4×2 and verification are recorded in
 [115](../tactical/115-authored-ambulance.md).
+Its beacon refinement and emergency-light contract are in
+[116](../tactical/116-ambulance-beacons-and-light-tags.md); v1 remains retained.
 
 ## Work order
 
@@ -82,7 +84,7 @@ models have been started. The later family order can change with owner prioritie
 
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
-| `ambulance` | [Retained v1](../../art-source/vehicle-models/ambulance/v1/) — owner inspection pending | Pending | Review the [4×2](../../public/assets/models/vehicles/review/ambulance-v1/comparison.png), roof paint, rear-facing cab and rear trim; qualify steering before integration. |
+| `ambulance` | [Retained v2](../../art-source/vehicle-models/ambulance/v2/) — owner inspection pending; v1 retained | Pending | Review [beacons](../../public/assets/models/vehicles/review/ambulance-v2/comparison.png) and flashing; integrate its own GLB and switch state, qualify steering. |
 | `police-car` | Queued | Pending | Inspect body family; preserve livery, windows and separate light-bar geometry. |
 | `garbage-truck-green` | Queued | Pending | Fit cab/container geometry and wheel rig from the original views. |
 | `garbage-truck-orange` | Queued | Pending | Check geometry correspondence before reusing the green truck template. |

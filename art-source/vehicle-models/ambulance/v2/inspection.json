@@ -1,0 +1,41 @@
+{
+  "recipeSha256": "f069570d4434a6c597551f5b016f1d96062b4e7c49e67aec85b716f1f8affe0c",
+  "metrics": {
+    "views": {
+      "east": {
+        "silhouetteIoU": 0.9249728724228802,
+        "sourceOnlyPixels": 298,
+        "renderOnlyPixels": 186,
+        "intersectionPixels": 5967,
+        "rgbMAEOnIntersection": 24.164683537232555,
+        "exactRGBPixelsOnIntersection": 3111
+      },
+      "west": {
+        "silhouetteIoU": 0.9249728724228802,
+        "sourceOnlyPixels": 298,
+        "renderOnlyPixels": 186,
+        "intersectionPixels": 5967,
+        "rgbMAEOnIntersection": 24.745935981230097,
+        "exactRGBPixelsOnIntersection": 3107
+      },
+      "north": {
+        "silhouetteIoU": 0.9295707849181882,
+        "sourceOnlyPixels": 186,
+        "renderOnlyPixels": 111,
+        "intersectionPixels": 3920,
+        "rgbMAEOnIntersection": 18.993707482993198,
+        "exactRGBPixelsOnIntersection": 2433
+      },
+      "south": {
+        "silhouetteIoU": 0.9081632653061225,
+        "sourceOnlyPixels": 224,
+        "renderOnlyPixels": 208,
+        "intersectionPixels": 4272,
+        "rgbMAEOnIntersection": 17.298455056179776,
+        "exactRGBPixelsOnIntersection": 2319
+      }
+    },
+    "interpretation": "Diagnostic measurements, not acceptance scores. Alpha includes painted shadows unless explicitly masked. RGB error is measured only on opaque overlap; examine missing/extra pixels and all-angle renders too."
+  },
+  "note": "Exact body/wheel/UV hash retained from v1; geometry changes restricted to roof lights. Hidden beacon paint is explicit source-palette transfer."
+}

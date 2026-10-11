@@ -10,7 +10,7 @@ docs/tactical/072-conditioning-fidelity/**/*.json -text
 
 # Retained vehicle scenes, exports, textures and receipts are byte-exact captures.
 art-source/vehicle-models/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
-public/assets/models/vehicles/** -text
+public/assets/models/vehicles/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # These replay inputs are pinned by the retained bundle catalog.
 scripts/authored-assets/compact-final-setup.json -text
 scripts/authored-assets/compact-variant-template.json -text
@@ -18,3 +18,8 @@ scripts/authored-assets/ambulance-family.json -text
 # Constructor hashes in the ambulance capture receipt use LF source bytes.
 scripts/authored-assets/author_ambulance.py text eol=lf
 scripts/authored-assets/build_ambulance.py text eol=lf
+scripts/authored-assets/refine_ambulance_lights.py text eol=lf
+scripts/authored-assets/refine_ambulance_lights_blender.py text eol=lf
+scripts/authored-assets/ambulance-lights.json -text
+# The frozen light preview records the shared effect's source-byte hash.
+src/rendering/VehicleEmergencyLights.ts text eol=lf

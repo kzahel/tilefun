@@ -39,6 +39,12 @@ ambulance section in `scripts/authored-assets/README.md` and the current tracker
 before choosing construction or refinement. Its own cameras, radius-8 wheels,
 asymmetric side graphics and roof ownership must not inherit compact defaults.
 
+For emergency-light revisions, preserve earlier captures and use separate lens
+meshes with versioned `tilefun_*` GLB extras; fixed bases must remain untagged.
+Read the light contract in `docs/tactical/116-ambulance-beacons-and-light-tags.md`.
+V2's refinement and real GLB probe preserve body/wheel UVs and verify material
+isolation, phase alternation and off reset. Asset tags do not wire a gameplay switch.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;

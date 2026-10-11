@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ambulance v2 · sprite and model review</title>
+<style>
+  body { margin: 0 auto; padding: 24px; max-width: 1184px; background: #253139; color: #edf3f5; font: 16px/1.5 system-ui,sans-serif; }
+  h1 { margin-bottom: 8px; }
+  img { width: 100%; height: auto; image-rendering: pixelated; }
+  a { color: #9bdaff; }
+  figure { margin: 24px 0; }
+  figcaption { color: #b4c4cd; }
+</style>
+<h1>Ambulance v2</h1>
+<p>Original sprites above, matched Blender renders below. Compare the body shape,
+windows, wheels, blue lights and rear doors.</p>
+<figure><img src="comparison.png" alt="Four columns comparing original ambulance sprites above matched Blender renders: east, west, rear and front."><figcaption>The same model and texture are used in all four directions.</figcaption></figure>
+<figure><img src="orbit.png" alt="Ambulance model from four additional angles."><figcaption>Additional angles show the body, roof and wheel geometry.</figcaption></figure>
+<p>The roof panel paint differs between source directions. This version uses the
+rear-view roof pattern throughout; the cab and rear fittings still need review.</p>
+<figure><img src="lights.gif" alt="Actual GLB alternating double-flash preview"><figcaption>Tagged lenses pulse; fixed housings and body stay unchanged. Game control is not wired yet.</figcaption></figure>
+<details><summary>Silhouette differences</summary><img src="silhouette.png" alt="Source and model silhouette differences in all four directions."></details>
+<p><a href="../../ambulance-v2.glb">Download the model</a> ·
+<a href="/tilefun/workshop.html">Tilefun Workshop</a></p>
+<p>Sprite source: Modern Exteriors by LimeZu. Authored diagnostic awaiting review;
+game integration and production art approval are pending.</p>
+</html>

@@ -7,7 +7,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     name: "Authored vehicle models",
     description:
       "Inspect retained sprite/model comparisons and additional angles for the ambulance.",
-    url: "assets/models/vehicles/review/ambulance-v1/",
+    url: "assets/models/vehicles/review/ambulance-v2/",
     mode: "link",
   },
   {

@@ -17,7 +17,7 @@ def local(root, value):
     return path
 
 
-def glb_content(path, atlas, expected=None, rig=None):
+def glb_content(path, atlas, expected=None, rig=None, lights=None):
     blob = path.read_bytes()
     magic, version, size = struct.unpack_from('<III', blob)
     if (magic, version, size) != (0x46546C67, 2, len(blob)):
@@ -61,7 +61,23 @@ def glb_content(path, atlas, expected=None, rig=None):
         axis = expected_wheel.get('rollAxisGltf', rig.get('rollAxisGltf') if rig else [0, 0, -1])
         if pivot['extras']['wheel_radius'] != expected_wheel['radius'] or pivot['extras']['roll_axis_gltf'] != axis:
             raise ValueError(f'Wheel radius/axis changed: {wheel}')
-    return {'meshes': len(model['meshes']), 'triangles': triangles, 'wheels': 4, 'embeddedAtlas': 'exact RGBA'}
+    if lights:
+        tagged = {node['name']:node for node in model['nodes']
+                  if node.get('extras', {}).get('tilefun_role') == 'emergency-light'}
+        if set(tagged) != {lens['node'] for lens in lights['lenses']}:
+            raise ValueError('Exported light lens set differs from its contract')
+        for lens in lights['lenses']:
+            node = tagged[lens['node']]
+            extra = node['extras']
+            if ('mesh' not in node or extra.get('tilefun_effect_schema') != 1 or
+                    extra.get('tilefun_channel') != lights['channel'] or
+                    extra.get('tilefun_group') != lens['group'] or extra.get('tilefun_phase') != lens['phase']):
+                raise ValueError(f"Exported light lens tags changed: {lens['node']}")
+        if any(node.get('extras', {}).get('tilefun_role') for node in model['nodes']
+               if node.get('name', '').endswith('-base')):
+            raise ValueError('A fixed light housing was tagged as a lens')
+    return {'meshes': len(model['meshes']), 'triangles': triangles, 'wheels': 4, 'embeddedAtlas': 'exact RGBA',
+            **({'taggedLenses':len(lights['lenses'])} if lights else {})}
 
 
 def verify(root=ROOT):
@@ -87,7 +103,8 @@ def verify(root=ROOT):
                 raise ValueError('Frozen source crop changed')
         results.append({'assetId': bundle['assetId'], 'revision': bundle['revision'],
                         **glb_content(local(root, bundle['glb']), source / 'car-atlas.png',
-                                      bundle.get('geometry'), read(source / 'rig.json'))})
+                                      bundle.get('geometry'), read(source / 'rig.json'),
+                                      read(source / 'lights.json') if (source / 'lights.json').exists() else None)})
     return results
 
 

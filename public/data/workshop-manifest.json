@@ -5,7 +5,7 @@
       "id": "authored-vehicles",
       "name": "Authored vehicle models",
       "description": "Inspect retained sprite/model comparisons and additional angles for the ambulance.",
-      "url": "assets/models/vehicles/review/ambulance-v1/",
+      "url": "assets/models/vehicles/review/ambulance-v2/",
       "mode": "link"
     },
     {
@@ -6306,6 +6306,17 @@
       "url": "/tilefun/assets/models/vehicles/review/ambulance-v1/",
       "kind": "projection",
       "fingerprint": "8fa95f15aecfbbf940e422aa145236a5faf9500ab0e0e622808e6c3cc0620835",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-ambulance-v2",
+      "batchId": "authored-vehicles",
+      "name": "Ambulance · authored model v2",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/ambulance-v2/",
+      "kind": "projection",
+      "fingerprint": "14bcee43b596dc4228ed0b035d98fe678f6bad8773da01dcb8582f8b3b2561c3",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
@@ -29971,5 +29982,5 @@
       }
     }
   ],
-  "inputDigest": "2005d514da7771cfdc4f4d41adf2aa52228070a4ce1ca9e39aa117afad41ad24"
+  "inputDigest": "b0fe83b9fb49e31b3e67e6f53eb1e2d5bc53f8fa58aaffd93a64b7fef62319ec"
 }

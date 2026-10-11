@@ -1,0 +1,12 @@
+{
+  "sourceBank": "src/traffic/vehicles-v1.json",
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "baseScene": "art-source/vehicle-models/ambulance/v1/car.blend",
+  "baseSceneSha256": "dad40be50ea0e6e2bacf63c31493480fc1075f396d9e7db3b9febc636078cace",
+  "constructionScripts": {
+    "refine_ambulance_lights.py": "9bbc6b1bceca993119740542cda2e09a1dc3a0d2f81e9a4b486ae06afd7d311b",
+    "refine_ambulance_lights_blender.py": "0aa1ba57ed22aa7438390513e554bf78d8933144ff5f28bee53c4354e61f1ead"
+  },
+  "configurationSha256": "e28d82b2f8638185d1b7a521e9091d370fcddf17bd04b8e7342aa98508c7e294",
+  "status": "New unreviewed lights revision; game control not wired"
+}

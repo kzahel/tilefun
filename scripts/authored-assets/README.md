@@ -61,9 +61,26 @@ each bundle's audited mesh/triangle counts and recorded wheel radii; the ambulan
 must not inherit compact-only assertions. Body/roof paint contradictions and
 steering clearance remain review/qualification work. Game integration is pending.
 
+V2 refines only the roof lights from tracked v1, retaining body/windows/wheel UVs:
+
+```text
+python scripts/authored-assets/refine_ambulance_lights.py --out data/authored-assets/NEW_AMBULANCE_LIGHTS --blender BLENDER_EXECUTABLE
+python scripts/authored-assets/pipeline.py evaluate --recipe art-source/vehicle-models/ambulance/v2/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_AMBULANCE_V2_REPLAY
+node scripts/authored-assets/verify_vehicle_lights.mjs data/authored-assets/NEW_FLASH_CHECK
+```
+
+Its `lights.json` records six lens nodes, groups/phases and double pulses. Blender
+custom properties become versioned GLB extras. Fixed bases are not tagged. The
+shared `VehicleEmergencyLights` helper clones tagged materials and modulates their
+existing emissive/unlit paint; explicit enabled/time inputs prevent state leaking
+between cached draws. The real GLB probe checks the declared lens count/groups/
+phases, off/A/B pixels and fixed paint.
+This is asset capability and shared appearance code, not wired gameplay control.
+See [116](../../docs/tactical/116-ambulance-beacons-and-light-tags.md).
+
 ## Engine readiness
 
-The exported self-contained GLB contains the mesh, UV texture, unlit material
+The exported self-contained GLB contains the mesh, UV texture, flat emissive/unlit paint
 and rigid wheel hierarchy. Actual Three.js GLTFLoader import/render and independent
 wheel rotation were checked; Blender is not needed to consume the GLB at runtime.
 The optional game/lab mesh path now loads blue compact-1 v7 through
