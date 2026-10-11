@@ -66,8 +66,9 @@ for (const renderer of ["canvas", "gpu"]) {
           x: horse?.position.wx ?? 0,
         };
       }, faunaType("horse"));
-    await page.keyboard.down("ArrowRight");
-    await page.keyboard.down("Space");
+    // Send the jump/movement chord without a protocol round trip between keys.
+    // Slow CI must not walk into and startle the horse before initiating the jump.
+    await Promise.all([page.keyboard.down("Space"), page.keyboard.down("ArrowRight")]);
     await expect
       .poll(async () => (await read()).state, { timeout: 4000, intervals: [30] })
       .toBe("ridden");

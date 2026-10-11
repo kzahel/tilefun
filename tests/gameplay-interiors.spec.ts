@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { stopLocalWorld } from "./helpers/local-world.js";
 
 const source = new DenseDistrictSource(regionalWorld(2026), true);
 for (const kind of ["apartment", "shop"] as const)
@@ -108,6 +109,10 @@ for (const kind of ["apartment", "shop"] as const)
       });
       await expect.poll(remainingFurniture).toBe(5);
       await page.getByRole("button", { name: "Return to street" }).click();
+      // The click starts an asynchronous realm transfer; save its completed destination.
+      await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
+      await expect(enter).toBeVisible();
+      await stopLocalWorld(page);
       await page.goto("/tilefun/");
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
       const resume = page.getByRole("button", { name: "Resume", exact: true });
@@ -130,6 +135,7 @@ for (const kind of ["apartment", "shop"] as const)
         .toBe(120);
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
       // A reload resumes the same interior, including the saved furniture.
+      await stopLocalWorld(page);
       await page.goto("/tilefun/");
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
       const resumeAfterInterior = page.getByRole("button", { name: "Resume", exact: true });

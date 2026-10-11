@@ -2,13 +2,21 @@
 
 Topic: touch-movement
 Status: Joystick, tap and hold movement delivered; all validation passes, child device trial next.
-Updated: 2026-10-10.
+Updated: 2026-10-11.
 
 Options is available from the gear, hamburger and main menu. It offers Joystick
 (default), Tap to move and Hold to move, remembered per local browser profile.
 Missing/invalid preferences fall back to Joystick; failed persistence leaves the
 chosen mode usable for the session with feedback in the dialog.
 [086](../tactical/086-tap-to-move-and-options.md) records the original tap slice.
+
+Browser targeting waits for the scene's rendered camera capture before projecting
+touch coordinates. The slow first-tap/fullscreen regression controls the page clock
+for exactly 600ms, keeping CDP scheduling delays outside the 800ms gesture limit;
+wall time is fixed before pausing to prevent a past-time request race. The authority
+retains its ordinary clock. Focus-loss cancellation remains exercised. The water
+fixture clears ambient chickens before staging its one interaction subject, so an
+unrelated nearby animal cannot claim the destination tap.
 
 ## Hold contract
 

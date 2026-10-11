@@ -26,8 +26,8 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
       d.pending === 0
     );
   }, arrival);
-  const sample = () =>
-    page.evaluate(async () => {
+  const sample = (direction: number) =>
+    page.evaluate(async (direction) => {
       // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
       const g = (document.querySelector("#game") as any).__game;
       const x = g.stateView.playerEntity.position.wx;
@@ -35,7 +35,9 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
         missing = 0,
         maxSurfaces = 0;
       const visited = new Set<string>();
-      for (let i = 0; i < 210; i++) {
+      // Display frames are not simulation time. Keep the original minimum
+      // coverage, then wait for the required traversal with a bounded frame cap.
+      for (let i = 0; i < 600; i++) {
         await new Promise(requestAnimationFrame);
         // PlayScene restores the simulation camera after rendering. Inspect
         // the same interpolated view that prepared the last frame's caches;
@@ -57,6 +59,7 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
             `Preparation exceeded its work/residency bound: ${JSON.stringify({ range, haloArea, ...d })}`,
           );
         maxSurfaces = Math.max(maxSurfaces, d.surfaceBytes);
+        if (i >= 209 && direction * (g.stateView.playerEntity.position.wx - x) > 450) break;
       }
       return {
         dx: g.stateView.playerEntity.position.wx - x,
@@ -65,13 +68,13 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
         visited: visited.size,
         maxSurfaces,
       };
-    });
+    }, direction);
   await page.keyboard.down("Shift");
   await page.keyboard.down("ArrowLeft");
-  const outward = await sample();
+  const outward = await sample(-1);
   await page.keyboard.up("ArrowLeft");
   await page.keyboard.down("ArrowRight");
-  const back = await sample();
+  const back = await sample(1);
   await page.keyboard.up("ArrowRight");
   await page.keyboard.up("Shift");
   expect(outward.dx).toBeLessThan(-400);

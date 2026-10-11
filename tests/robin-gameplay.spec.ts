@@ -1,7 +1,9 @@
 import { expect, test } from "@playwright/test";
 import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import type { ActorRecord } from "../src/persistence/ActorRecords.js";
 import { ROBIN_TYPE } from "../src/wildlife/Robin.js";
+import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium" });
 for (const renderer of ["canvas", "gpu"]) {
@@ -181,28 +183,42 @@ test("ordinary grove robins support manual creation and durable deletion on worl
     removed = original[0];
   if (!removed) throw new Error("Missing generated robin");
   await page.locator("#game").click({ position: { x: 300, y: 170 } });
-  await expect.poll(async () => (await robins()).length).toBe(original.length + 1);
+  await expect
+    .poll(async () => (await robins()).length)
+    .toBeGreaterThanOrEqual(original.length + 1);
+  const savedRobins = async () =>
+    (await worldRecords(page))
+      .filter((r) => r.collection === "entities")
+      .map((r) => r.value as ActorRecord)
+      .filter((r) => r.type === ROBIN_TYPE);
+  await flushLocalWorld(page);
+  const beforeDeletion = await savedRobins();
+  const manual = beforeDeletion.filter((r) => !r.proceduralId);
+  expect(manual).toHaveLength(1);
   await page.evaluate((id) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
     g.transport.send({ type: "edit-delete-entity", entityId: id });
   }, removed.id);
   await expect.poll(async () => (await robins()).some((r) => r.id === removed.id)).toBe(false);
-  await expect.poll(async () => (await robins()).length).toBe(original.length);
   await page.getByRole("button", { name: "Exit editor", exact: true }).click();
-  await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    g.loop.stop();
-    const host = g.netEmulatedTransport.base as unknown as {
-      setHidden(v: boolean): void;
-      flush(): Promise<void>;
-      shutdown(): Promise<void>;
-    };
-    host.setHidden(true);
-    await host.flush();
-    await host.shutdown();
-  });
+  await stopLocalWorld(page);
+  const afterDeletion = await savedRobins();
+  const deleted = beforeDeletion.filter(
+    (r) => !afterDeletion.some((saved) => saved.persistentId === r.persistentId),
+  );
+  expect(deleted).toHaveLength(1);
+  expect(deleted[0]?.proceduralId).toBeTruthy();
+  expect(afterDeletion.some((r) => r.persistentId === manual[0]?.persistentId)).toBe(true);
   await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await expect.poll(async () => (await robins()).length).toBe(original.length);
+  await expect.poll(async () => (await robins()).length).toBeGreaterThanOrEqual(2);
   await page.screenshot({ path: "/tmp/tilefun-robins-game.png" });
+  // Reopening may stream extra individuals. Verify the exact saved edit identities instead.
+  await stopLocalWorld(page);
+  const reopened = await savedRobins();
+  expect(reopened.some((r) => r.persistentId === manual[0]?.persistentId)).toBe(true);
+  expect(reopened.some((r) => r.proceduralId === deleted[0]?.proceduralId)).toBe(false);
+  expect(
+    (await worldRecords(page)).find((r) => r.key === deleted[0]?.proceduralId)?.value,
+  ).toMatchObject({ deleted: true });
 });

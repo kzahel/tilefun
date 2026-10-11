@@ -3,7 +3,7 @@
 Topic: patterns-and-interiors
 Status: Workshop/game pattern drawing and persistent gameplay room editing
 implemented; tree-kit review/promotion and Workshop-to-game prefab import remain.
-Updated: 2026-10-03.
+Updated: 2026-10-11.
 
 Owns the shared semantic editing contract and current interior direction.
 [Tactical 011](../tactical/011-shared-pattern-brushes-and-room-drawing.md) records
@@ -92,6 +92,11 @@ shutdown. Ordinary navigation/crashes cannot await unload: realm transfers are
 committed immediately, movement checkpoints run every five seconds, and hiding/
 unloading makes a best-effort save. Camera restoration requires both the same
 profile and realm; legacy unscoped coordinates are discarded.
+
+The gameplay interior browser regression waits for the outdoor realm and doorway
+after **Return to street**, then awaits local authority shutdown before navigating.
+A click only starts the transfer; immediate navigation can legitimately restore
+the previous indoor checkpoint. Indoor furniture reload uses the same save fence.
 
 Evidence: `RealmBrowser.test.ts` covers restart/resume, fallback, location-write
 failure, takeover during successful/failed commits and explicit exit selection;

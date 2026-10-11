@@ -94,6 +94,19 @@ Both failures reproduce serially without competing browser tests.
 
 ## Evidence and validation
 
+The streaming browser regression retains at least 210 sampled display frames per
+direction and its existing travel/readiness/cache bounds, but allows up to 600
+frames to complete 450px of traversal. Display frames do not establish simulation
+time; the prior fixed-frame window could return only 309px on hosted CI. This is
+a traversal readiness check, not a frame-rate or throughput benchmark.
+
+CI harness validation (2026-10-11): typechecks, 2,520 units, 11 Worker tests,
+Worker build, lint (existing warnings) and production build pass. The full browser
+run passed 555 cases and exposed two touch failures; both were corrected and pass
+the normal `--last-failed` rerun. Twelve final touch repeats pass, as do six aquatic
+ball repeats at 4× CPU throttling and the earlier 18 throttled regression checks.
+These checks cover all 557 browser scenarios across the full run and reruns.
+
 The [local server recovery investigation](../research/local-server-recovery-investigation.md)
 tracks the 2026-10-10 intermittent map/streaming report. Seeded pond arrival,
 rejected open-water arrival and repeated distant travel have not reproduced the

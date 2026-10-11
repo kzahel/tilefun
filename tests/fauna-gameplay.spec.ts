@@ -149,11 +149,17 @@ for (const profile of FAUNA_PROFILES) {
             });
       }, TerrainId.DeepWater);
     }
-    await page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      const p = g.stateView.playerEntity.position;
-      g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
-    }, TYPE);
+    // A minimum-force ball splashes down before 100px. Aquatic bodies need
+    // to meet its first descending arc; dry-ground subjects can meet a bounce.
+    const distance = ["pond", "deep"].includes(profile.habitat) ? 75 : 100;
+    await page.evaluate(
+      ({ type, distance }) => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const p = g.stateView.playerEntity.position;
+        g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + distance, wy: p.wy });
+      },
+      { type: TYPE, distance },
+    );
     const deer = () =>
       page.evaluate((type) => {
         const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;

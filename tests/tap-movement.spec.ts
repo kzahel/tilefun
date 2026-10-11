@@ -90,6 +90,13 @@ async function state(page: Page) {
   });
 }
 async function point(page: Page, dx: number, dy = 0, entityType: string | null = null) {
+  // Scene changes can precede their first rendered camera/view capture.
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+      ),
+  );
   const pose = await page.evaluate(
     ({ entityType }) => {
       const c = document.querySelector("#game") as HTMLCanvasElement;
@@ -136,6 +143,7 @@ for (const renderer of ["canvas", "gpu"]) {
   test(`first slow world tap keeps its destination through fullscreen; focus loss cancels it (${renderer})`, async ({
     page,
   }) => {
+    await page.clock.install();
     await start(page, renderer);
     await page.reload();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
@@ -147,12 +155,18 @@ for (const renderer of ["canvas", "gpu"]) {
       const g = (c as unknown as { __game: TestGame }).__game;
       return g.tapMovement.resolve(c, p.x, p.y);
     }, p);
+    // Keep the 600ms gesture inside the 800ms tap limit even when CDP is slow.
+    // Only the page input clock is controlled; the authority keeps its real clock.
+    // Fix wall time before pausing so protocol latency cannot make it a past instant.
+    const pauseTime = new Date();
+    await page.clock.setFixedTime(pauseTime);
+    await page.clock.pauseAt(pauseTime);
     const session = await page.context().newCDPSession(page);
     await session.send("Input.dispatchTouchEvent", {
       type: "touchStart",
       touchPoints: [{ ...p, id: 1 }],
     });
-    await page.waitForTimeout(600);
+    await page.clock.fastForward(600);
     expect((await state(page)).target).toBeNull();
     await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
     await expect.poll(async () => (await state(page)).target).not.toBeNull();
@@ -160,6 +174,8 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(() => page.evaluate(() => document.fullscreenElement === document.documentElement))
       .toBe(true);
+    await page.clock.setSystemTime(pauseTime.getTime() + 600);
+    await page.clock.resume();
     const other = await page.context().newPage();
     await other.goto("about:blank");
     await other.bringToFront();
@@ -277,6 +293,23 @@ for (const renderer of ["canvas", "gpu"]) {
     await start(page, renderer);
     await page.getByTestId("main-menu-toggle").tap();
     await page.getByRole("button", { name: "Edit", exact: true }).tap();
+    // Flat worlds can already have ambient chickens. Keep only the staged
+    // interaction subject, so an unrelated animal cannot claim the water tap.
+    await page.evaluate(() => {
+      const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+      g.debugPanel.paused = true;
+      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+      for (const e of g.stateView.entities)
+        if (e.type === "chicken") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
+    });
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+          return g.stateView.entities.filter((e) => e.type === "chicken").length;
+        }),
+      )
+      .toBe(0);
     await page.evaluate(() => {
       const c = document.querySelector("#game") as HTMLCanvasElement;
       const g = (c as unknown as { __game: TestGame }).__game;
@@ -303,10 +336,12 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(async () =>
         page.evaluate(() => {
           const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
-          return g.stateView.entities.some((e) => e.type === "chicken" && e.wanderAI?.befriendable);
+          return g.stateView.entities.filter(
+            (e) => e.type === "chicken" && e.wanderAI?.befriendable,
+          ).length;
         }),
       )
-      .toBe(true);
+      .toBe(1);
     await page.getByTestId("main-menu-toggle").tap();
     await page.getByRole("button", { name: "Play", exact: true }).tap();
     const waterTap = await point(page, 65);
