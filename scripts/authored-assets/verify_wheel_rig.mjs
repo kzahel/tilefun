@@ -1,13 +1,15 @@
 /** Verify real GLB wheel parenting, axle math, independent motion and static body. */
 import assert from "node:assert/strict";
-import { mkdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { chromium } from "@playwright/test";
 import { createServer } from "vite";
 
 const output = resolve(process.argv[2] ?? "data/authored-assets/wheel-rig-check");
 const revision = process.argv[3] ?? "v4";
-assert(["v4", "v5", "v6", "v7", "red-v1"].includes(revision));
+const bundles = revision === "--bundles";
+const root = resolve(process.argv[4] ?? ".");
+assert(bundles || ["v4", "v5", "v6", "v7", "red-v1"].includes(revision));
 const gallery =
   revision === "red-v1"
     ? "red.html"
@@ -20,11 +22,26 @@ const gallery =
           : "rigged.html";
 await mkdir(output, { recursive: true });
 const server = await createServer({
+  root,
   configFile: false,
   base: "/tilefun/",
   server: { port: 0, host: "127.0.0.1" },
   logLevel: "error",
   optimizeDeps: { entries: [], include: ["three", "three/addons/loaders/GLTFLoader.js"] },
+  plugins: [
+    {
+      name: "vehicle-rig-probe",
+      configureServer(probeServer) {
+        probeServer.middlewares.use((request, response, next) => {
+          if (request.url?.split("?")[0] !== "/tilefun/__vehicle_rig_probe") return next();
+          response.setHeader("Content-Type", "text/html");
+          response.end(
+            "<!doctype html><html><head><title>Vehicle rig verification</title></head><body></body></html>",
+          );
+        });
+      },
+    },
+  ],
 });
 await server.listen();
 const origin = `http://127.0.0.1:${server.httpServer.address().port}`;
@@ -32,7 +49,7 @@ const results = [];
 let browser;
 try {
   browser = await chromium.launch({ channel: "chromium", headless: true });
-  for (const width of [1440, 390]) {
+  for (const width of bundles ? [] : [1440, 390]) {
     const page = await browser.newPage({ viewport: { width, height: 900 } });
     const errors = [];
     page.on("pageerror", (reason) => errors.push(reason.message));
@@ -53,22 +70,31 @@ try {
     results.push({ width, images: "loaded", overflow: false });
     await page.close();
   }
-  for (const prefix of revision === "red-v1" ? [""] : ["", "green-"]) {
+  const cases = bundles
+    ? JSON.parse(
+        await readFile(resolve(root, "art-source/vehicle-models/catalog.json"), "utf8"),
+      ).bundles.map((bundle) => ({
+        prefix: `${bundle.assetId}-`,
+        assetUrl: `/tilefun/${bundle.glb.replace(/^public\//, "")}`,
+      }))
+    : (revision === "red-v1" ? [""] : ["", "green-"]).map((prefix) => ({
+        prefix,
+        assetUrl: `/tilefun/demos/authored-car/${revision}/${prefix}car.glb`,
+      }));
+  for (const { prefix, assetUrl } of cases) {
     const page = await browser.newPage();
-    await page.goto(`${origin}/tilefun/demos/authored-car/index.html`, {
+    await page.goto(`${origin}/tilefun/__vehicle_rig_probe`, {
       waitUntil: "networkidle",
     });
     const result = await page.evaluate(
-      async ({ prefix, revision }) => {
+      async ({ assetUrl }) => {
         const { THREE, GLTFLoader } = await import(
           "/tilefun/scripts/authored-assets/runtime/glb-imports.mjs"
         );
         const { createWheelRig } = await import(
           "/tilefun/scripts/authored-assets/runtime/wheel-rig.mjs"
         );
-        const gltf = await new GLTFLoader().loadAsync(
-          `/tilefun/demos/authored-car/${revision}/${prefix}car.glb`,
-        );
+        const gltf = await new GLTFLoader().loadAsync(assetUrl);
         const scene = gltf.scene;
         const rig = createWheelRig(scene, THREE);
         const body = scene.getObjectByName("Body");
@@ -185,7 +211,7 @@ try {
           frontSteeringOnly: "verified",
         };
       },
-      { prefix, revision },
+      { assetUrl },
     );
     assert.equal(result.meshes, 55);
     assert.equal(result.triangles, revision === "v4" ? 834 : 842);

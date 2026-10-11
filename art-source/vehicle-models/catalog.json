@@ -1,0 +1,227 @@
+{
+  "schema": "tilefun-vehicle-model-bundles-v1",
+  "status": "Retained authored diagnostic models; not promoted gameplay assets",
+  "bundles": [
+    {
+      "assetId": "compact-1",
+      "revision": "v7",
+      "glb": "public/assets/models/vehicles/compact-1-v7.glb",
+      "source": "art-source/vehicle-models/compact-1/v7",
+      "capturedCandidateId": "projection:authored-compact-car-v7",
+      "capturedCandidateSha256": "a9fe16e0cd4264f20e4c3958303de2241d7d55d33d18838b038c46d24374aedf",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "files": [
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/car.blend",
+          "sha256": "54f7e844131842102d13df4d4a9025eb205722fa64ece257743d703ab7559000"
+        },
+        {
+          "path": "public/assets/models/vehicles/compact-1-v7.glb",
+          "sha256": "b568aa8d826c8ba78a3ed63b4198ba5c02f22fd74496d3a8dd6a6e537f5df1fd"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/car-atlas.png",
+          "sha256": "dfc309969d2689deacf99a7e4b0df013c1ccb4e0d40e3c26d11691a18a787ceb"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/rig.json",
+          "sha256": "cf12f79ff783fadba1398bf168feae22b01bd9e07354f12f142d933f988145bc"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/windshield.json",
+          "sha256": "d3e9c69825f4564793b643aab9bddfda0f68dabd81cdb20a4f599d7a4a9194b4"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/refs/east.png",
+          "sha256": "ef67361eb740667ab2a7ef67b9e8223bf0779f1ba9ae7ae8f603062f832d7cd3"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/refs/west.png",
+          "sha256": "7bb9ab3d0182b37a6ca486e22985ed991c283256d23d46f9a29f5aa8297adce7"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/refs/north.png",
+          "sha256": "f66dd303e8f97a739f86f1ff7d195c2b86109d1133b206ade311ed2c0047aba9"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/refs/south.png",
+          "sha256": "87f635d6f8453bb28dbeba6c0c37558acd107fa123dd9c5c0cad22cdcd5c0c50"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/top-ink-config.json",
+          "sha256": "abb554b21f05e6063d501fdaa1a273217067aea0147b7511e5f5ec17153cf821"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-1/v7/recipe.json",
+          "sha256": "2623029b37466564800fc20d9795e80c416746fd132fae6e7523dac3f48e566b"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "a633d94ad6b3702f05ba4cfd034a36dd0f0c88c2d60ce40d8a082b59c6bbca6f",
+        "north-render.png": "92eaaba3a1ef91a5b3b0809a295a4c0c678634baedbb231db7248f12d294e22a",
+        "orbit-0.png": "52fa67f08c332de99e067952094d499656e4ad8558bd7ce0ba84ac5747ba417f",
+        "orbit-1.png": "a2a8b5edb28636cdcf16f01829e8964bf54bda697e8ef7d7c69d94f678342595",
+        "orbit-2.png": "4efe814d02af3ae0a2b2c926f5681a83cecd453602f883e885f977a9112b4db0",
+        "orbit-3.png": "f30583c91b8feab77fcc223b104063a7179044ed7c1f3ff3f62faa3a1d62d2d5",
+        "south-render.png": "086fdd29541f9bd8a2419788c17a508a186704379312bdd9c2d5b1f2e4350a7f",
+        "west-render.png": "28bc5a0af6aba30f03528c6aed5e15511b985ae1dafbbbd6bc4eedb0041deb8a"
+      }
+    },
+    {
+      "assetId": "compact-2",
+      "revision": "v7",
+      "glb": "public/assets/models/vehicles/compact-2-v7.glb",
+      "source": "art-source/vehicle-models/compact-2/v7",
+      "capturedCandidateId": "projection:authored-compact-car-v7",
+      "capturedCandidateSha256": "a9fe16e0cd4264f20e4c3958303de2241d7d55d33d18838b038c46d24374aedf",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "files": [
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/car.blend",
+          "sha256": "f5c86958ef2de4a0f3fed8288d95b19280c2262650976ee5b2a59e7824e2161a"
+        },
+        {
+          "path": "public/assets/models/vehicles/compact-2-v7.glb",
+          "sha256": "c81145d16bb98e10f62e9785df5ccbaed30ec32867ce102f6c60502e5f49ac2e"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/car-atlas.png",
+          "sha256": "ae60f2fc29311739655ffe209ecc33e6361b2650cc6534a98863dc2f27c92a29"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/rig.json",
+          "sha256": "cf12f79ff783fadba1398bf168feae22b01bd9e07354f12f142d933f988145bc"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/windshield.json",
+          "sha256": "d3e9c69825f4564793b643aab9bddfda0f68dabd81cdb20a4f599d7a4a9194b4"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/refs/east.png",
+          "sha256": "1072595649d0b965e7b758620bd47601d670b4f251d3d67cdb9b3d87dda7e268"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/refs/west.png",
+          "sha256": "b6f71e2d78ea55f8bac18b4318297c1e93b1c76e074f63c19992b8a5b748d5d3"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/refs/north.png",
+          "sha256": "0339b4e0035c728bdb5f1057a6965f1613c31577a51fdf52b9e2b28c30da1006"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/refs/south.png",
+          "sha256": "8157dcc324567bb652d2721fe5ea235abef2eb349762f0561e8a7b7a22388598"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/top-ink-config.json",
+          "sha256": "abb554b21f05e6063d501fdaa1a273217067aea0147b7511e5f5ec17153cf821"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-2/v7/recipe.json",
+          "sha256": "5247805a7f808bff1f4f99ecdeb9c9c3bfae8d5f248e7badb5cf586a226dd00d"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "8a30ad4510a8cb4b22105f1b14995a9f18d56844c3aae121bebadba2d3cecaf5",
+        "north-render.png": "84e1387eb535bd58a99ed2d63f4ae1bc3d96f22d3b06abbd1c2f726d9dd216b8",
+        "orbit-0.png": "b2a227dc8a7fc7e0366fb238384ff72102f9a935270110d6369ad53ee9ae203e",
+        "orbit-1.png": "65caa53f64d57c3dfff46d9585fa1cf431777a1b5a56e951639e0135ad7bbd50",
+        "orbit-2.png": "2c48e3858e3fbdfad1ae08c5cff84a594d725510fb023b64a70c288012d2b736",
+        "orbit-3.png": "5903260e21515ad4460b415ff1b4bc0cf24cc88e2d772104ebf0e606efbe24a8",
+        "south-render.png": "04830f2f2bcd1fd7bc8155e157980541c2955bb416b8740a4074d19220595d43",
+        "west-render.png": "cecfa734297988127a6cd43e367d17af9e372a9864c6bea4797d429b19a43d6d"
+      }
+    },
+    {
+      "assetId": "compact-4",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/compact-4-v1.glb",
+      "source": "art-source/vehicle-models/compact-4/v1",
+      "capturedCandidateId": "projection:authored-compact-4-v1",
+      "capturedCandidateSha256": "94ae5a2a7b9a2c5df908017e57e8ecdaa867228fa3fcc5cffd386485c3b5c5ee",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "files": [
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/car.blend",
+          "sha256": "fbca03e16641fb582174d09b556c813daa5dac9d770f9f0aea20e1d58732d7c1"
+        },
+        {
+          "path": "public/assets/models/vehicles/compact-4-v1.glb",
+          "sha256": "7c03d2def08776ae15a646985224cffc9fb7b902752ac57f9db5f810b8f51889"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/car-atlas.png",
+          "sha256": "51f0aa6304584a8b85820030049e0f5206c615ffd45f93ea6579f2f2918289bf"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/rig.json",
+          "sha256": "cf12f79ff783fadba1398bf168feae22b01bd9e07354f12f142d933f988145bc"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/windshield.json",
+          "sha256": "d3e9c69825f4564793b643aab9bddfda0f68dabd81cdb20a4f599d7a4a9194b4"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/refs/east.png",
+          "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/refs/west.png",
+          "sha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/refs/north.png",
+          "sha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/refs/south.png",
+          "sha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/projection-draft.png",
+          "sha256": "ab93a6fb00569bdf50e8d604693489afca8e6979ec0304aafe15c8a8378c020b"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/projection-coverage.png",
+          "sha256": "8abbbece9b08bea3ded59a8399de98ddf0d0ff7bb39bb2f077a7e20045b1d94e"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/coverage.json",
+          "sha256": "8f423a73d48b1f913140cef724156588bcfa382db4ad46092fdcbc8161b965d2"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/transfer.json",
+          "sha256": "33780b60910d6730e1808994d9477356c88410e3f07485e0d65c95f54de84f46"
+        },
+        {
+          "path": "art-source/vehicle-models/compact-4/v1/recipe.json",
+          "sha256": "b52d88e411c0ab45049f59c58274bd1ad85dfd22fa80d254f58f832a7463a11f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "13ce4a9d61a7b5a8db9eef98b4ded501aeb54a431f85b61a77803798e0a4d93f",
+        "north-render.png": "ff44e4a91f1cb3b9b19d7c413d2d3724bc295c8becbf5440e859b82bd412b15d",
+        "orbit-0.png": "9f46c00529ab3485a1291e4ae46ee394583b7f667e8f7d6bfc9144526e6d6cae",
+        "orbit-1.png": "012fa6086d5e6fd728a31391030ff548e1ed3ea6173330bd7fcd4b7ccbce08ef",
+        "orbit-2.png": "5281b4b27810daa9e06a71cd18182ce7f612c649fbd03b9eaa07a411542ded8b",
+        "orbit-3.png": "037863a52a43ebfaf8f6ca8d44d3974b6766319fcf17a2098cf62ef4d614f285",
+        "south-render.png": "673a9657a305da2161df9b1f9fa686f85801cc42a83d04211f2aa3ad7feedabb",
+        "west-render.png": "3aae8c49602c61b60394eb0612cfda805b0240fba930e85b60021be517d37f05"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "scripts/authored-assets/compact-variant-template.json",
+      "sha256": "3fdd47389c647045203f4102fb44989dc932daa250327f747c5c10d7b00f3996"
+    },
+    {
+      "path": "scripts/authored-assets/compact-final-setup.json",
+      "sha256": "78dedc6d634c63ec6b7819abff95e14ef30e24cf521d9aa015ce96392669018b"
+    },
+    {
+      "path": "public/assets/tilesets/me-complete.png",
+      "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+    }
+  ]
+}

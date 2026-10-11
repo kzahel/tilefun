@@ -23,11 +23,11 @@ before reusing the fitted mesh/UVs. Unmapped authored colours require explicit
 material roles. Do not bypass a mismatch with nearest-colour guesses or hide
 shape errors by moving cameras.
 
-Vehicle experiment scenes/exports and galleries are local, Git-ignored files.
-Check that the pinned template bundle exists before choosing palette replay;
-a fresh checkout contains the tools and recipes, not the generated v7 model.
-Restore the exact local bundle or author a new template with explicit new pins.
-Do not silently replace missing inputs or commit generated experiment files.
+Exact final blue/green/red bundles are tracked in `art-source/vehicle-models/`,
+with self-contained GLBs in `public/assets/models/vehicles/`. The default compact
+palette replay uses these pinned, tracked dependencies and works in a fresh clone.
+Run `verify_bundles.py` before using them. Older experiments/galleries stay ignored.
+Do not silently replace missing inputs or overwrite a retained final revision.
 
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
@@ -72,6 +72,8 @@ with cleaned atlas and its own unused draft, atlas, GLB and recipe/provenance.
 Use fresh offline workspaces and retained revision directories. Preserve earlier
 candidate bytes. Keep exploratory outputs in the ignored vehicle folders or
 `data/authored-assets/`; normal builds and Workshop must not require them.
+Retain explicitly requested final models and required source dependencies in
+the tracked bundle directories, with exact hashes and portable recipes.
 When preparing a production review slice, register the new exact candidate/batch
 using retained, available review assets; chat feedback is not a formal promotion.
 Follow the project's validation and

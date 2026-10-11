@@ -25,7 +25,8 @@ data/
 /docs/tactical/074-alpha-geometry/
 /docs/tactical/075-alpha-guard-framing/
 
-# Local Blender vehicle experiments: generated scenes, textures, exports and galleries.
-# Keep reusable authoring code/configuration in scripts/authored-assets/ instead.
+# Old Blender vehicle experiments and scratch galleries remain local.
+# Retained final sources live in art-source/vehicle-models/; runtime GLBs in
+# public/assets/models/vehicles/. Never ignore those tracked deliverables.
 /art-source/vehicles/
 /public/demos/authored-car/

@@ -8,25 +8,29 @@ remain explicit work. Normal builds never run this pipeline.
 
 ## Source and local output boundary
 
-Git retains these scripts, hand-authored configuration/landmarks, the vehicle
-authoring skill and written findings. Generated Blender scenes, UV atlases,
-GLB exports, comparison images, measurements and scratch galleries stay local
-in ignored `art-source/vehicles/`, `public/demos/authored-car/` and `data/`.
-They are preserved on disk, but unavailable in a fresh clone. Normal game builds
-and Workshop do not load or register these exploratory bundles.
+Git retains the exact final blue/green/red model bundles in
+[`art-source/vehicle-models/`](../../art-source/vehicle-models/README.md), with
+self-contained GLBs in `public/assets/models/vehicles/`. Blender scenes, cleaned
+atlases, frozen crops, portable recipes and rig/windshield records are included.
+Their original model/texture bytes are preserved and pinned in the bundle catalog.
 
-The compact palette replay below requires the existing v7 local template bundle,
-including the scene/atlas pinned in `compact-variant-template.json` and its
-windshield/rig records. Back up or restore that bundle outside Git for exact
-replay. A fresh clone can extract all vehicle sources and create the initial
-geometry with [compact-pilot](compact-pilot/README.md); later family refinements
-are the construction/paint steps recorded below. Recreated `.blend` bytes are
-not guaranteed to match an archived scene: a new template needs new explicit
-pins and visual validation, rather than disabling hash checks.
+The default `compact-variant-template.json` and `compact-final-setup.json` use
+only tracked inputs. Exact finished models are available immediately in a fresh
+clone; replay is optional, not a substitute for retaining the deliverables.
 
-Reusable browser outline and wheel helpers are retained in `runtime/`.
-The existing browser verification scripts exercise local galleries/exports;
-restore their declared revision before running them.
+```text
+python scripts/authored-assets/verify_bundles.py
+node scripts/authored-assets/verify_wheel_rig.mjs data/authored-assets/NEW_RIG_CHECK --bundles
+python scripts/authored-assets/pipeline.py evaluate --recipe art-source/vehicle-models/compact-4/v1/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_INSPECTION
+```
+
+Older intermediate scenes, scratch galleries and new exploratory outputs remain
+local in ignored `art-source/vehicles/`, `public/demos/authored-car/` and `data/`.
+The historical construction recipes below can require those intermediate bundles;
+they are not prerequisites for the final models or the default palette replay.
+Normal builds never regenerate the retained models. Reusable browser helpers live
+in `runtime/`; the `--bundles` rig check needs no gallery. Legacy gallery checks
+still need the particular local revision they exercise.
 
 ## Engine readiness
 
@@ -110,14 +114,14 @@ Every workspace, projection and evaluation output must be a new directory.
 ```powershell
 $blenderExe = 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
 python scripts/authored-assets/pipeline.py list
-python scripts/authored-assets/pipeline.py init --vehicle compact-1 --setup scripts/authored-assets/compact-1-setup.json --out data/authored-assets/my-compact-v2
+python scripts/authored-assets/pipeline.py init --vehicle compact-1 --setup scripts/authored-assets/compact-final-setup.json --out data/authored-assets/my-compact-v2
 ```
 
 `init` creates frozen `refs/*.png`, editable `recipe.json` and an optional
-`working.blend` copied from the setup template. The compact setup uses the
-unaccepted 097 prototype and approximate source cameras; copying it is a starting
-point, not proof of a faithful model. Original atlas pixels, source approvals and
-registered 097 bytes are never changed. The input adapter covers all 45 vehicle
+`working.blend` copied from the setup template. The final compact setup uses the
+tracked v7 model and retained source cameras. Copying it is a starting point for
+editing; use the guarded palette runner for a source-matched variant. Original
+atlas pixels, source approvals and retained model bytes are never changed. The input adapter covers all 45 vehicle
 IDs in the existing bank, **not** 45 completed models.
 
 Open `working.blend` and edit the geometry/UVs. Keep the asset in world-pixel units,
@@ -210,6 +214,13 @@ guards and measurement semantics. The real Blender smoke checks visible source
 bytes, occlusion rejection, ambiguous overlapping UVs and explicit source-view
 ownership. All Blender operations
 run in isolated background processes and never drive the user's open scene.
+
+## Historical compact-family construction
+
+The remaining sections document the original intermediate fitting/paint sequence.
+Their named v1–v6 scene/demo inputs remain ignored local evidence. Use the tracked
+final bundle and palette route above for a fresh-checkout replay; older construction
+is optional and requires restoring its explicitly named intermediate inputs.
 
 ## Compact-family window and fender refinement
 

@@ -1,0 +1,565 @@
+{
+  "vehicle": "compact-4",
+  "templateVehicle": "compact-1",
+  "checks": [
+    {
+      "view": "east",
+      "identicalAlpha": true,
+      "identicalPhysicalMetadata": true,
+      "opaqueSourcePixels": 1809
+    },
+    {
+      "view": "west",
+      "identicalAlpha": true,
+      "identicalPhysicalMetadata": true,
+      "opaqueSourcePixels": 1809
+    },
+    {
+      "view": "north",
+      "identicalAlpha": true,
+      "identicalPhysicalMetadata": true,
+      "opaqueSourcePixels": 1594
+    },
+    {
+      "view": "south",
+      "identicalAlpha": true,
+      "identicalPhysicalMetadata": true,
+      "opaqueSourcePixels": 1580
+    }
+  ],
+  "configSha256": "2255e883ab09cb0e45932f6b43c104b2874d31d896fbb1dbdad8792b14ec640d",
+  "templateBlendSha256": "54f7e844131842102d13df4d4a9025eb205722fa64ece257743d703ab7559000",
+  "templateAtlasSha256": "dfc309969d2689deacf99a7e4b0df013c1ccb4e0d40e3c26d11691a18a787ceb",
+  "atlasSha256": "51f0aa6304584a8b85820030049e0f5206c615ffd45f93ea6579f2f2918289bf",
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "observedPalette": [
+    {
+      "from": [
+        58,
+        58,
+        80,
+        255
+      ],
+      "to": [
+        58,
+        58,
+        80,
+        255
+      ]
+    },
+    {
+      "from": [
+        22,
+        82,
+        185,
+        255
+      ],
+      "to": [
+        127,
+        33,
+        76,
+        255
+      ]
+    },
+    {
+      "from": [
+        66,
+        128,
+        221,
+        255
+      ],
+      "to": [
+        186,
+        39,
+        88,
+        255
+      ]
+    },
+    {
+      "from": [
+        73,
+        149,
+        227,
+        255
+      ],
+      "to": [
+        197,
+        52,
+        88,
+        255
+      ]
+    },
+    {
+      "from": [
+        80,
+        167,
+        232,
+        255
+      ],
+      "to": [
+        211,
+        68,
+        92,
+        255
+      ]
+    },
+    {
+      "from": [
+        93,
+        192,
+        240,
+        255
+      ],
+      "to": [
+        227,
+        90,
+        90,
+        255
+      ]
+    },
+    {
+      "from": [
+        149,
+        227,
+        227,
+        255
+      ],
+      "to": [
+        225,
+        132,
+        132,
+        255
+      ]
+    },
+    {
+      "from": [
+        143,
+        161,
+        200,
+        255
+      ],
+      "to": [
+        143,
+        161,
+        200,
+        255
+      ]
+    },
+    {
+      "from": [
+        60,
+        107,
+        215,
+        255
+      ],
+      "to": [
+        161,
+        18,
+        80,
+        255
+      ]
+    },
+    {
+      "from": [
+        164,
+        187,
+        213,
+        255
+      ],
+      "to": [
+        164,
+        187,
+        213,
+        255
+      ]
+    },
+    {
+      "from": [
+        186,
+        210,
+        224,
+        255
+      ],
+      "to": [
+        186,
+        210,
+        224,
+        255
+      ]
+    },
+    {
+      "from": [
+        39,
+        53,
+        115,
+        255
+      ],
+      "to": [
+        74,
+        42,
+        61,
+        255
+      ]
+    },
+    {
+      "from": [
+        70,
+        70,
+        94,
+        255
+      ],
+      "to": [
+        70,
+        70,
+        94,
+        255
+      ]
+    },
+    {
+      "from": [
+        86,
+        89,
+        114,
+        255
+      ],
+      "to": [
+        86,
+        89,
+        114,
+        255
+      ]
+    },
+    {
+      "from": [
+        115,
+        140,
+        168,
+        255
+      ],
+      "to": [
+        115,
+        140,
+        168,
+        255
+      ]
+    },
+    {
+      "from": [
+        203,
+        42,
+        42,
+        255
+      ],
+      "to": [
+        203,
+        42,
+        42,
+        255
+      ]
+    },
+    {
+      "from": [
+        150,
+        139,
+        171,
+        255
+      ],
+      "to": [
+        150,
+        139,
+        171,
+        255
+      ]
+    },
+    {
+      "from": [
+        168,
+        43,
+        45,
+        255
+      ],
+      "to": [
+        168,
+        43,
+        45,
+        255
+      ]
+    },
+    {
+      "from": [
+        235,
+        228,
+        242,
+        255
+      ],
+      "to": [
+        235,
+        228,
+        242,
+        255
+      ]
+    },
+    {
+      "from": [
+        86,
+        86,
+        114,
+        255
+      ],
+      "to": [
+        86,
+        86,
+        114,
+        255
+      ]
+    },
+    {
+      "from": [
+        115,
+        115,
+        168,
+        255
+      ],
+      "to": [
+        115,
+        115,
+        168,
+        255
+      ]
+    },
+    {
+      "from": [
+        248,
+        248,
+        248,
+        255
+      ],
+      "to": [
+        248,
+        248,
+        248,
+        255
+      ]
+    },
+    {
+      "from": [
+        217,
+        50,
+        50,
+        255
+      ],
+      "to": [
+        217,
+        50,
+        50,
+        255
+      ]
+    },
+    {
+      "from": [
+        252,
+        92,
+        70,
+        255
+      ],
+      "to": [
+        252,
+        92,
+        70,
+        255
+      ]
+    },
+    {
+      "from": [
+        212,
+        212,
+        230,
+        255
+      ],
+      "to": [
+        212,
+        212,
+        230,
+        255
+      ]
+    },
+    {
+      "from": [
+        131,
+        136,
+        151,
+        255
+      ],
+      "to": [
+        131,
+        136,
+        151,
+        255
+      ]
+    },
+    {
+      "from": [
+        185,
+        185,
+        213,
+        255
+      ],
+      "to": [
+        185,
+        185,
+        213,
+        255
+      ]
+    }
+  ],
+  "authoredColorPolicies": [
+    {
+      "rgb": [
+        39,
+        46,
+        65
+      ],
+      "keep": true,
+      "role": "Unused atlas background"
+    },
+    {
+      "rgb": [
+        57,
+        150,
+        223
+      ],
+      "sourceRgb": [
+        80,
+        167,
+        232
+      ],
+      "role": "Body highlight"
+    },
+    {
+      "rgb": [
+        49,
+        59,
+        88
+      ],
+      "keep": true,
+      "role": "Neutral trim ink"
+    },
+    {
+      "rgb": [
+        36,
+        68,
+        118
+      ],
+      "sourceRgb": [
+        39,
+        53,
+        115
+      ],
+      "role": "Body shade"
+    },
+    {
+      "rgb": [
+        127,
+        169,
+        206
+      ],
+      "keep": true,
+      "role": "Authored glass"
+    },
+    {
+      "rgb": [
+        36,
+        108,
+        197
+      ],
+      "sourceRgb": [
+        66,
+        128,
+        221
+      ],
+      "role": "Body paint"
+    },
+    {
+      "rgb": [
+        52,
+        57,
+        72
+      ],
+      "keep": true,
+      "role": "Rubber"
+    },
+    {
+      "rgb": [
+        41,
+        48,
+        68
+      ],
+      "keep": true,
+      "role": "Underside"
+    },
+    {
+      "rgb": [
+        88,
+        194,
+        231
+      ],
+      "sourceRgb": [
+        93,
+        192,
+        240
+      ],
+      "role": "Roof highlight"
+    },
+    {
+      "rgb": [
+        132,
+        202,
+        226
+      ],
+      "sourceRgb": [
+        149,
+        227,
+        227
+      ],
+      "role": "Body stripe"
+    },
+    {
+      "rgb": [
+        83,
+        97,
+        120
+      ],
+      "keep": true,
+      "role": "Hub gutter"
+    },
+    {
+      "rgb": [
+        176,
+        204,
+        224
+      ],
+      "keep": true,
+      "role": "Glass reflection"
+    },
+    {
+      "rgb": [
+        220,
+        85,
+        95
+      ],
+      "keep": true,
+      "role": "Rear light"
+    },
+    {
+      "rgb": [
+        243,
+        242,
+        230
+      ],
+      "keep": true,
+      "role": "Front light"
+    }
+  ],
+  "changedAtlasTexels": 284572,
+  "status": "Authored family texture transfer; hidden surfaces inherited, observation coverage unchanged; unreviewed"
+}

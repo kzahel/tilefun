@@ -47,13 +47,14 @@ def transfer(vehicle, config_path, output):
     if digest(source) != target['source']['sha256']:
         raise ValueError('Source bank changed.')
     blend, atlas_path = ROOT / config['blend'], ROOT / config['atlas']
-    for path in [blend, atlas_path, ROOT / config['windshield'], ROOT / config['rig']]:
+    dependencies = [(ROOT / config[key], config[key + 'Sha256'] if key in ['blend', 'atlas'] else config.get(key + 'Sha256'))
+                    for key in ['blend', 'atlas', 'setup', 'windshield', 'rig']]
+    for path, pin in dependencies:
         if not path.is_file():
             raise FileNotFoundError(
-                f'Local template input is missing: {path}. Restore the pinned ignored '
-                'template bundle or author a new template; see scripts/authored-assets/README.md.')
-    for path, pin in [(blend, config['blendSha256']), (atlas_path, config['atlasSha256'])]:
-        if digest(path) != pin:
+                f'Template input is missing: {path}. The default final bundle is tracked; '
+                'check checkout completeness or your custom template configuration.')
+        if pin and digest(path) != pin:
             raise ValueError(f'Template bytes changed: {path.name}')
     mapping, checks = correspondences(template, target, Image.open(source).convert('RGBA'))
     observed_mapping = dict(mapping)

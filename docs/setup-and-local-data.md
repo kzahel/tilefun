@@ -6,6 +6,11 @@ Indoor Workbench and World / Terrain Explorer. Original downloaded asset packs
 are not required for normal development or builds. Saved feedback and worlds
 are separate state and do not travel with Git.
 
+The exact final blue/green/red compact-car GLBs and their editable Blender/texture
+bundles are also committed. See [retained vehicle models](../art-source/vehicle-models/README.md).
+They need no restoration from ignored experiment folders. Blender/Python are only
+needed for authoring or optional replay, not for accessing the finished GLBs.
+
 ## Start a fresh checkout
 
 Use Node.js 24 and npm 11.19 or newer, consistent with the engines and lockfiles

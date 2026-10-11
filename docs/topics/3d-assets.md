@@ -9,7 +9,7 @@ Optional fixed-view GPU gameplay integration is delivered;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
 remain unresolved. Game clipping is unchanged.
-Updated: 2026-10-10.
+Updated: 2026-10-11.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
 to physical proxies, and cross-view quality. [Rendering architecture](rendering-architecture.md)
@@ -26,17 +26,22 @@ directories require the local evidence and are unavailable in a fresh clone.
 Written findings and the recipes in `scripts/spatial-assets/` remain in Git.
 Ignoring the evidence does not delete it or promote any generated artwork.
 
-The owner also requested source-only commits for Blender vehicle experiments
-097–093. `art-source/vehicles/` and `public/demos/authored-car/` are now local,
-Git-ignored bundles: generated scenes, atlases, GLBs, crops, comparisons, records
-and scratch galleries are preserved on disk but absent from fresh clones.
-The reusable skill, Python geometry/paint constructors, fitting configurations,
-GLSL outline and wheel helpers remain in Git under `.agents/skills/` and
-`scripts/authored-assets/`. Historical gallery/evidence links below require those
-local bundles. Their scratch-only Workshop registrations have been removed;
-normal builds and the committed manifest do not depend on ignored experiment files.
-Exact compact palette replay requires restoration of the pinned local v7 bundle;
-the initial compact geometry constructor can run from committed sprite sources.
+The initial source-only commit kept all Blender vehicle outputs ignored. The
+owner subsequently required the exact finished models and replay dependencies
+in Git. [106](../tactical/106-retained-vehicle-model-bundles.md) retains blue/green
+v7 and red v1 as byte-exact GLBs in `public/assets/models/vehicles/`, with their
+packed Blender scenes, atlases, frozen crops, portable recipes and rig/window
+records in [`art-source/vehicle-models/`](../../art-source/vehicle-models/README.md).
+The catalog pins original capture hashes; the default compact replay now uses
+only tracked dependencies. A fresh clone does not need the ignored template or
+to reconstruct the final geometry from the initial pilot.
+
+Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
+remain ignored local evidence. Historical gallery links below require those
+bundles. Scratch-only Workshop registrations remain removed; retaining final
+models does not promote them to gameplay or establish a human review approval.
+The reusable skill, constructors, fitted configurations and outline/wheel helpers
+remain tracked. New exploratory work belongs in fresh ignored workspaces.
 
 Rebuild report previews from the retained external experiment bundles when
 needed. Preserve those bundles for exact historical evidence: rerunning model
@@ -77,7 +82,7 @@ with volumetric wheels/arches, named UV islands, retained sprite-projection draf
 and deliberately cleaned palette-matched paint. It has 438 triangles, a 512-square
 atlas, a self-contained GLB, actual six-view/stage/game-scale sheets and a 24-frame
 turntable. Workshop initially registered it as a separate excluded diagnostic;
-the source-only cleanup above now keeps it local.
+the original scratch gallery remains local; final deliverables are retained above.
 The original art and collision/support metadata are unchanged. Top/side/oblique
 views are coherent by agent inspection; the native-scale candidate remains
 plainer/softer than the sprites. Final paint is authored interpretation, not exact

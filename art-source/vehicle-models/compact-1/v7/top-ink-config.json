@@ -1,0 +1,5 @@
+{
+  "topStrokeWorldWidth": 1.85,
+  "paletteSampleEast": [11, 55],
+  "note": "092 top windscreen stroke extends slightly into glass. The previous 0.8-world-unit top frame projected to less than one side-view pixel and could disappear. Preserve side/bottom ink, geometry and silhouette."
+}

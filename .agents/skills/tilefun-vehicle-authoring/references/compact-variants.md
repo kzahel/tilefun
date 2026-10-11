@@ -4,10 +4,10 @@ Run from the Tilefun repository root. Locate the installed Blender executable an
 pass it explicitly; require host Python/Pillow and Blender's bundled NumPy.
 Normal game builds use retained assets and never run authoring.
 
-Prerequisite: restore the local v7 template bundle referenced by
-`compact-variant-template.json`. Its `.blend`, atlas, windshield and rig records
-live in ignored `art-source/vehicles/` and `public/demos/authored-car/`; they are
-not present in a fresh clone. Preserve their recorded hashes. A newly authored
+The exact final template and dependencies referenced by
+`compact-variant-template.json` are tracked in `art-source/vehicle-models/`.
+Verify them with `python scripts/authored-assets/verify_bundles.py`; no ignored
+scene or gallery is needed. Preserve their recorded hashes. A newly authored
 template needs its own configuration/pins, not a bypass of these checks.
 
 ```text
@@ -35,6 +35,8 @@ The runner is an offline replay, not an automatic approval or publisher. Retain
 local results in new ignored revision folders and preserve their hashes outside
 Git. Production review registration requires an explicitly retained review bundle;
 normal Workshop and game builds do not depend on these exploratory files.
+When the owner requests a final deliverable, retain its exact GLB, packed Blender
+source, texture and required dependency records in the tracked bundle directories.
 
 For actual GLB wheel verification, `verify_wheel_rig.mjs` exercises ground contact,
 hierarchy, forward/reverse roll, independent motion and front steering in full
@@ -43,6 +45,9 @@ from a new family's recorded rig/audit instead of assuming 55 meshes or radius 4
 This gallery harness needs that local revision's gallery and exports. Reusable
 GLB imports, wheel transforms and pixel-outline shader code live in
 `scripts/authored-assets/runtime/`, separately from the ignored galleries.
+Use `node scripts/authored-assets/verify_wheel_rig.mjs NEW_OUTPUT --bundles` to
+check all three tracked final GLBs without scratch galleries; append a checkout
+root argument to test an isolated tracked-file snapshot.
 
 If correspondence fails, preserve the failure and switch to a new fitting/paint
 recipe. An ambulance requires a longer/taller body, new wheel positions, separate

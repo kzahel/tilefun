@@ -1,0 +1,351 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "compact-4",
+  "family": "compact",
+  "source": {
+    "image": "public/assets/tilesets/me-complete.png",
+    "sha256": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737"
+  },
+  "canvas": [
+    64,
+    64
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/vehicle-models/compact-1/v7/car.blend",
+    "sha256": "54f7e844131842102d13df4d4a9025eb205722fa64ece257743d703ab7559000"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        96,
+        1344,
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        60
+      ],
+      "metadata": {
+        "name": "Compact 4 \u00b7 east",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "compact",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "east",
+        "anchor": [
+          32,
+          60
+        ],
+        "footprint": [
+          -28,
+          -20,
+          56,
+          20
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "sourceApproval": {
+        "id": "4ca53d78-213e-44d2-ba57-1e01c81174fc",
+        "createdAt": "2026-10-03T10:47:40.322Z",
+        "candidateFingerprint": "971490d91360df701cfee8d3a07c40c94b05a6b3de5515b2003192ac82bf7c94",
+        "metadataFingerprint": "f20fb14f1c66dc9ceccd95b7fb4e7a24650981a5948de4202c0b325df2c2d4aa"
+      },
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        0
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 42,
+        "horizontalScale": 1.04,
+        "verticalStretch": 1.21,
+        "origin": [
+          30.5,
+          51.5
+        ],
+        "status": "085 landmark-guided hypothesis"
+      },
+      "sourceSha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb"
+    },
+    {
+      "id": "west",
+      "rect": [
+        0,
+        1344,
+        64,
+        64
+      ],
+      "anchor": [
+        32,
+        61
+      ],
+      "metadata": {
+        "name": "Compact 4 \u00b7 west",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "compact",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "west",
+        "anchor": [
+          32,
+          61
+        ],
+        "footprint": [
+          -28,
+          -20,
+          56,
+          20
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 56,
+            "height": 20,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -10
+      },
+      "sourceApproval": {
+        "id": "639cd298-2ccc-4ab4-912d-41b76fbfc1db",
+        "createdAt": "2026-10-03T10:47:41.236Z",
+        "candidateFingerprint": "5618c3c95866538c35adc59ddc3bb50aea67ecd2a4fc54e7098a97a1277912ae",
+        "metadataFingerprint": "cfe6c5aa348001e38c2beb6df180b42fedda745ddaffd1fbfbc42f2d9f47e492"
+      },
+      "source": "refs/west.png",
+      "offset": [
+        0,
+        0
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 42,
+        "horizontalScale": 1.04,
+        "verticalStretch": 1.21,
+        "origin": [
+          33.5,
+          52.5
+        ],
+        "status": "085 landmark-guided hypothesis"
+      },
+      "sourceSha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa"
+    },
+    {
+      "id": "north",
+      "rect": [
+        64,
+        1344,
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        60
+      ],
+      "metadata": {
+        "name": "Compact 4 \u00b7 north",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "compact",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "north",
+        "anchor": [
+          16,
+          60
+        ],
+        "footprint": [
+          -12,
+          -44,
+          24,
+          44
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "sourceApproval": {
+        "id": "eef73190-7f20-4551-8078-dc5a095cfdb5",
+        "createdAt": "2026-10-03T10:47:39.855Z",
+        "candidateFingerprint": "3843d33b8324437057c6b9adb85eba418c25ea06cb514fad4edeae61bb979cc0",
+        "metadataFingerprint": "eb56148909783fd8890068ff5a447b675869dfc1af0a00c583cba8199fd9ac34"
+      },
+      "source": "refs/north.png",
+      "offset": [
+        16,
+        0
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 70,
+        "horizontalScale": 1.3,
+        "verticalStretch": 0.8186,
+        "origin": [
+          32,
+          35.5
+        ],
+        "status": "085 landmark-guided hypothesis"
+      },
+      "sourceSha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6"
+    },
+    {
+      "id": "south",
+      "rect": [
+        160,
+        1344,
+        32,
+        64
+      ],
+      "anchor": [
+        16,
+        60
+      ],
+      "metadata": {
+        "name": "Compact 4 \u00b7 south",
+        "category": "vehicle",
+        "kind": "prop",
+        "tags": [
+          "vehicle",
+          "compact",
+          "review proposal"
+        ],
+        "settings": [
+          "road"
+        ],
+        "facing": "south",
+        "anchor": [
+          16,
+          60
+        ],
+        "footprint": [
+          -12,
+          -44,
+          24,
+          44
+        ],
+        "colliders": [
+          {
+            "offsetX": 0,
+            "offsetY": 0,
+            "width": 24,
+            "height": 44,
+            "zHeight": 24
+          }
+        ],
+        "depthOffset": -22
+      },
+      "sourceApproval": {
+        "id": "601cbe64-0440-47bc-81e2-adf2b418ab97",
+        "createdAt": "2026-10-03T10:47:40.787Z",
+        "candidateFingerprint": "f1382f4bdc2ed1366af3a02bcd7da0e399f720ce69fe814c042051c4658038e4",
+        "metadataFingerprint": "e1be6c27ff9d9efe8d855b6eea770e24dbf61c25e32ff2d4452e71b7c5102510"
+      },
+      "source": "refs/south.png",
+      "offset": [
+        16,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 70,
+        "horizontalScale": 1.3,
+        "verticalStretch": 0.8186,
+        "origin": [
+          32,
+          35.5
+        ],
+        "status": "085 landmark-guided hypothesis"
+      },
+      "sourceSha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1024,
+    "material": "Sprite palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "window-left-front": [
+        "east"
+      ],
+      "window-left-rear": [
+        "east"
+      ],
+      "window-right-front": [
+        "west"
+      ],
+      "window-right-rear": [
+        "west"
+      ],
+      "fender-left-0": [
+        "east"
+      ],
+      "fender-left-1": [
+        "east"
+      ],
+      "fender-right-0": [
+        "west"
+      ],
+      "fender-right-1": [
+        "west"
+      ],
+      "cabin-left": [
+        "east"
+      ],
+      "cabin-right": [
+        "west"
+      ],
+      "windshield": [
+        "south"
+      ]
+    }
+  },
+  "reviewStatus": "offline diagnostic; unreviewed",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

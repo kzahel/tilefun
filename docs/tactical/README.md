@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [106 Retained vehicle model bundles](106-retained-vehicle-model-bundles.md) | Exact final GLBs, Blender/texture sources and tracked replay dependencies; fresh-checkout validation |
 | [105 Red car and authoring skill](105-red-car-and-authoring-skill.md) | Source-checked compact-4 transfer, one-command Blender replay and reusable skill; ambulance remains the next new family |
 | [104 Visible top windshield ink](104-visible-top-windshield-ink.md) | Widened top stroke survives native sampling in all four cameras on both colours; geometry/other paint fixed, diagnostic review open |
 | [103 Dark windshield frame](103-dark-windshield-frame.md) | Continuous original-palette navy border around front glass on both compacts; glass/geometry/rig fixed, diagnostic review open |

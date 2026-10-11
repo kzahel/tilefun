@@ -49,6 +49,7 @@
     {
       "includes": [
         "art-source/wildlife-v2/**/*.json",
+        "art-source/vehicle-models/**/*.json",
         "public/demos/wildlife-v2/**/*.json",
         "src/wildlife/reviews.json"
       ],
