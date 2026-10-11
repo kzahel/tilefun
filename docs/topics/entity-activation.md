@@ -4,7 +4,7 @@ Topic: entity-activation
 Status: incremental persistence and shared lazy residency are implemented.
 World containers, traffic records, bounded admission and recovery validation
 are complete.
-Updated: 2026-10-10.
+Updated: 2026-10-11.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
 [Performance](performance.md) owns broader timing evidence and renderer work;
@@ -82,6 +82,13 @@ halo readiness and in-place procedural edits. Unchanged props make no support
 queries and reuse the selected array. Removal, world replacement and teardown
 release references/listeners; collision geometry and moving entity readiness
 remain live. Game and embedded scenarios share the Realm selector.
+
+[107](../tactical/107-ground-query-reuse.md) assembles each exact ground-query range
+once per synchronous EntityManager ground pass. Cached lists include sleeping
+collision bodies and retain live objects; every actor still samples terrain and
+support heights. The lists end before index updates and do not survive movement,
+edits, readiness or a later tick. Activity selection and support behavior stay
+unchanged; [performance](performance.md) owns device results.
 
 Movement remains fixed-step in both active tiers; nominal reduced decision rate
 is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic

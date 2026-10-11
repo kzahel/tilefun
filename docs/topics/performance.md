@@ -8,7 +8,7 @@ reused; static prop depth and elevation metadata cached; Canvas terrain resource
 removed from world chunks; neutral frame/backend separation delivered, with raster
 scheduling and cold-entry presentation remaining as separate performance work.
 Wildlife sleep, bounded robin planning and local predicted animation are delivered.
-Updated: 2026-10-10.
+Updated: 2026-10-11.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -176,12 +176,23 @@ ordered ticket values are stable, including repeated empty railway/attachment
 submissions. Exact lease expiry and backwards clock changes across retained expiry
 boundaries reassemble it; residency still reconciles every update with fresh maps/values. Native phone demand
 assembly averages about 78% less walking/80% less idle; streaming mean falls from
-0.70–0.84ms to 0.35–0.38ms per tick. Walking whole-tick p95 overlaps at
+0.70–0.84ms to 0.35–0.38ms per streaming update (two updates per tick). Walking
+whole-tick p95 overlaps at
 10.5–10.7ms; idle p95 falls from 10.0–10.4ms to 9.3–9.6ms in two samples each.
-This is another phase saving, with rare spikes still present. Next, profile NPC
-ground/support queries for safe reuse across unchanged position and geometry;
-carrier motion and live edits must invalidate any support cache. Finer spatial
-indices remain a later candidate.
+This is another phase saving, with rare spikes still present.
+
+[107](../tactical/107-ground-query-reuse.md) profiles repeated NPC ground/support
+ranges and reuses their candidate lists within one synchronous ground pass. Every
+actor still resolves fresh terrain/support heights through live objects; nothing
+survives the next movement, edit, readiness change or tick. Phone candidate queries
+fall about 62%; a minimal timer pair measures walking
+ground mean 0.516–0.536ms original versus 0.476–0.478ms reuse (about 9% less).
+Whole-tick/EntityManager ranges overlap, including slightly higher idle means;
+this is a modest phase saving, with no demonstrated stutter cure. The tactical
+owns full results and validation. Next, measure/fuse NPC collision-blocker filtering
+to remove its per-probe exclusion Set and filtered-array allocations while retaining
+self/rider/Z/solidity policy. Finer spatial buckets and prop-query reuse remain
+later candidates.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

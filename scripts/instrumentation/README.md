@@ -57,6 +57,13 @@ which can pause the Worker. Deep timings/query wrappers and sampling add overhea
 use separate shallow controls for ordinary timing. Source markers fail closed if
 the phase structure changes. [092](../../docs/tactical/092-authority-physics-profile.md)
 owns the measurement boundary and results.
+`--entity-reference=PATH` substitutes a frozen EntityManager against the same
+companion modules. Deep physics profiling also times ground-phase prop/entity
+queries and counts `repeatedRanges`, resetting its range set at every ground pass.
+These wrappers add overhead; compare with matching deep probes, and keep shallow
+controls for ordinary timing. `--ground-profile=true` alone adds only a ground-phase
+timer pair per EntityManager update, with no per-query/subphase wrappers. [107](../../docs/tactical/107-ground-query-reuse.md)
+owns the ground-query comparison.
 `--collision-reference=PATH` substitutes a frozen collision module in the isolated
 probe server for original-policy comparisons. The report records the control;
 hold companion modules and input conditions fixed. [093](../../docs/tactical/093-identical-collision-probes.md)

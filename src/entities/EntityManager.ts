@@ -36,6 +36,7 @@ import {
 } from "./collision.js";
 import type { Entity } from "./Entity.js";
 import { ENTITY_DEFS } from "./EntityDefs.js";
+import type { Prop } from "./Prop.js";
 import type { PropManager } from "./PropManager.js";
 import { SpatialHash } from "./SpatialHash.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "./spriteAnimation.js";
@@ -334,18 +335,26 @@ export class EntityManager {
 
     // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
     if (getHeight) {
+      // Membership is stable during this synchronous pass. Keep live objects: earlier
+      // ground snaps must still affect later support checks. Never reuse across ticks,
+      // movement, index updates, edits or streaming changes.
+      const groundCandidates = new Map<string, { props: Prop[]; entities: Entity[] }>();
       const computeGroundZ = (e: Entity): number => {
         const footprint = e.collider ? getEntityAABB(e.position, e.collider) : null;
         const minCx = Math.floor((footprint?.left ?? e.position.wx) / CHUNK_SIZE_PX);
         const maxCx = Math.floor((footprint?.right ?? e.position.wx) / CHUNK_SIZE_PX);
         const minCy = Math.floor((footprint?.top ?? e.position.wy) / CHUNK_SIZE_PX);
         const maxCy = Math.floor((footprint?.bottom ?? e.position.wy) / CHUNK_SIZE_PX);
-        return resolveGroundZForTracking(
-          e,
-          getHeight,
-          propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy),
-          this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy),
-        );
+        const key = `${minCx},${minCy},${maxCx},${maxCy}`;
+        let candidates = groundCandidates.get(key);
+        if (!candidates) {
+          candidates = {
+            props: propManager.getPropsInChunkRange(minCx, minCy, maxCx, maxCy),
+            entities: this.spatialHash.queryRange(minCx, minCy, maxCx, maxCy),
+          };
+          groundCandidates.set(key, candidates);
+        }
+        return resolveGroundZForTracking(e, getHeight, candidates.props, candidates.entities);
       };
 
       for (const entity of active) {

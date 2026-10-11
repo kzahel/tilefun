@@ -42,13 +42,15 @@ invalidated the original cache prototype and eliminated its useful savings.
 | --- | --- | --- | --- | --- |
 | Demand assembly mean per call | 0.272–0.289ms | 0.054–0.056ms | 0.233–0.239ms | 0.051–0.052ms |
 | Demand assembly p95 per call | 0.5ms | 0.1–0.2ms | 0.4ms | 0.1ms |
-| Streaming mean per tick | 0.793–0.841ms | 0.375–0.381ms | 0.698–0.710ms | 0.349–0.360ms |
-| Streaming p95 per tick | 1.2–1.3ms | 0.6–0.7ms | 1.0–1.1ms | 0.6ms |
+| Streaming mean per update | 0.793–0.841ms | 0.375–0.381ms | 0.698–0.710ms | 0.349–0.360ms |
+| Streaming p95 per update | 1.2–1.3ms | 0.6–0.7ms | 1.0–1.1ms | 0.6ms |
 | Whole tick mean | 7.271–7.541ms | 6.777–6.807ms | 7.624–7.654ms | 7.077–7.430ms |
 | Whole tick p95 | 10.0–10.4ms | 9.3–9.6ms | 10.5ms | 10.5–10.7ms |
 
-Demand assembly is called twice per streaming update. Across the two samples,
-its mean falls about 80% idle/78% walking; streaming mean falls about 54% idle/50%
+Demand assembly is called twice per streaming update; there are two streaming
+updates per authority tick. The table reports per-update timings, not their sum
+per tick (units corrected during 107 against the retained counts). Across the two
+samples, its mean falls about 80% idle/78% walking; streaming mean falls about 54% idle/50%
 walking. Whole-tick mean improves about 0.6ms idle/0.4ms walking, but walking p95
 does not improve and maxima still reach 38–39ms. This does not establish a stutter
 or desync cure, rare-hitch causality, or the proposed 4–6ms whole-tick p95 target.

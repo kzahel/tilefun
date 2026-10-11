@@ -497,3 +497,15 @@ use the shared collector; scenario commands/reload retain the authoritative
 occupied parent. Parent resolution retains live service-owned bodies outside the
 ordinary actor tick set without simulating them twice. Phone game checks exercise
 car tap destinations and train side-tap start/stop/reversal on Canvas and GPU.
+
+
+## Ground-query reuse (2026-10-11)
+
+[Tactical 107](../tactical/107-ground-query-reuse.md) reuses exact-range candidate
+lists only inside EntityManager's synchronous ground pass. Game and scenario
+authority share this owner. Terrain and support outcomes are still resolved for
+every actor, with live objects preserving earlier ground snaps. Lists are dropped
+before index updates/separation and never carried across ticks, edits, readiness
+or carrier motion. Prediction keeps the existing shared resolver without a cache.
+Native game/lab Worker contact checks pass on Canvas/GPU in the full 541-check
+browser run (one skipped); streaming readiness and phone timing are recorded in 107.

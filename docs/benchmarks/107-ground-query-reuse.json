@@ -1,0 +1,1038 @@
+{
+  "schema": "tilefun-ground-query-reuse/v1",
+  "baseCommit": "31cc2e5946c1f3737d08f492f6cbb50b7914fabc",
+  "device": {
+    "model": "Pixel 7a",
+    "androidApi": 37,
+    "browser": "154.0.8037.126",
+    "physical": true,
+    "charging": true
+  },
+  "source": {
+    "baseCommit": "31cc2e5946c1f3737d08f492f6cbb50b7914fabc",
+    "sourceSHA256": {
+      "src/entities/EntityManager.ts": "05c3d3521a2eeea376d90abde0a8430b251c310b3f335d4de868623acf0beea4",
+      "src/server/Realm.ts": "3677d16ec15738511b3bcd469e348a04631564ee6512b97a175dcd7a00933820",
+      "src/entities/PropManager.ts": "6623266926094b07ee00f0da17826693badea1ddc87b22580bc25d621b4689b0",
+      "src/entities/SpatialHash.ts": "7fa1203ce2207bfd006d0719224d83eab86f977ce0d058783ca6a9eb62fc184a",
+      "src/physics/surfaceHeight.ts": "2192455a54c760cedecff41e2266ea185dece888bf433706f1a9658ca33dddfa",
+      "scripts/instrumentation/mobile-authority.mjs": "fd2357bffd0b01ce693ef8e401b7cac8c04d26773105f2d5df59a4178187f2c0"
+    },
+    "entityReferenceSHA256": "e073e3c61f28e4ec622740c87db748d4ee452691d6c1e8946ed1d3bfe63c1653",
+    "queryProbeSHA256": "7e56ead1bb54c3a4b09ddaea878fa1897c65ece2a293bdf5314f36af25bbce2c",
+    "groundProbeSHA256": "fd2357bffd0b01ce693ef8e401b7cac8c04d26773105f2d5df59a4178187f2c0"
+  },
+  "method": {
+    "scenario": "fresh thicket seed 2026 dog clearing; native Worker/Canvas/IndexedDB",
+    "secondsPerCapture": 15,
+    "warmupSeconds": 2,
+    "input": "Right key through CDP; idle has no input",
+    "shallowOrder": "walk B/A/A/B, then idle B/A/A/B",
+    "groundOrder": "walk B/A/A/B with one timer pair per EntityManager update",
+    "deepOrder": "walk B/A with query/subphase wrappers; no CPU sampling",
+    "isolatedData": true,
+    "heavyValidationDuringSampling": false,
+    "exploratoryCapturesExcluded": 3,
+    "cleanup": {
+      "originalForegroundRestored": true,
+      "ownedReverseReleased": true,
+      "ownedForwardReleased": true,
+      "unexpectedOwnedPagesClosed": 0
+    }
+  },
+  "shallow": [
+    {
+      "sample": "walk-before-1",
+      "date": "2026-10-11T05:19:44.890Z",
+      "motion": "walk",
+      "originalManager": true,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.003973773097556,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 2.319404629914474,
+          "p50Ms": 2.299999952316284,
+          "p95Ms": 3.3000000715255737,
+          "p99Ms": 7.600000023841858,
+          "maxMs": 8.600000023841858
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.0493936032681113,
+          "p50Ms": 1,
+          "p95Ms": 1.399999976158142,
+          "p99Ms": 2.200000047683716,
+          "maxMs": 6.800000071525574
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 7.550716647896772,
+          "p50Ms": 7.399999976158142,
+          "p95Ms": 10.399999976158142,
+          "p99Ms": 14,
+          "maxMs": 45.10000002384186
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 1,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.124800908203,
+      "thermalBefore": {
+        "batteryC": 29.2,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 29.4,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "walk-after-1",
+      "date": "2026-10-11T05:20:23.636Z",
+      "motion": "walk",
+      "originalManager": false,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 59.99562945736202,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 2.364277840712105,
+          "p50Ms": 2.200000047683716,
+          "p95Ms": 3.700000047683716,
+          "p99Ms": 7.699999928474426,
+          "maxMs": 8.699999928474426
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.06108048824386,
+          "p50Ms": 1,
+          "p95Ms": 1.5,
+          "p99Ms": 2.899999976158142,
+          "maxMs": 7.5
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 7.501323043182903,
+          "p50Ms": 7.299999952316284,
+          "p95Ms": 11.099999904632568,
+          "p99Ms": 14.799999952316284,
+          "maxMs": 34.39999997615814
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.1247863769531,
+      "thermalBefore": {
+        "batteryC": 29.4,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 29.5,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "walk-after-2",
+      "date": "2026-10-11T05:21:02.494Z",
+      "motion": "walk",
+      "originalManager": false,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.00238420079146,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 2.24641675683603,
+          "p50Ms": 2.200000047683716,
+          "p95Ms": 3.399999976158142,
+          "p99Ms": 4.100000023841858,
+          "maxMs": 8.899999976158142
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.046968026355714,
+          "p50Ms": 1,
+          "p95Ms": 1.5,
+          "p99Ms": 1.8000000715255737,
+          "maxMs": 9
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 7.255347298550632,
+          "p50Ms": 7,
+          "p95Ms": 10.399999976158142,
+          "p99Ms": 12.700000047683716,
+          "maxMs": 38.700000047683716
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "maxResimPx": 1.7441406328089215e-5,
+      "maxTravelPx": 624.124800908203,
+      "thermalBefore": {
+        "batteryC": 29.5,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 29.7,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "walk-before-2",
+      "date": "2026-10-11T05:21:41.401Z",
+      "motion": "walk",
+      "originalManager": true,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.00834553159252,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 2.333737593632943,
+          "p50Ms": 2.200000047683716,
+          "p95Ms": 3.6999999284744263,
+          "p99Ms": 4.899999976158142,
+          "maxMs": 16.700000047683716
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.0651598682477166,
+          "p50Ms": 1,
+          "p95Ms": 1.5,
+          "p99Ms": 2.3000000715255737,
+          "maxMs": 7.199999928474426
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 7.554465269043533,
+          "p50Ms": 7.399999976158142,
+          "p95Ms": 10.700000047683716,
+          "p99Ms": 12.399999976158142,
+          "maxMs": 48.200000047683716
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.124800908203,
+      "thermalBefore": {
+        "batteryC": 29.7,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 29.9,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "idle-before-1",
+      "date": "2026-10-11T05:22:20.120Z",
+      "motion": "idle",
+      "originalManager": true,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.004371179452185,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 1.6747519308834644,
+          "p50Ms": 1.600000023841858,
+          "p95Ms": 2.4000000953674316,
+          "p99Ms": 2.799999952316284,
+          "maxMs": 4.5
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.091730981835194,
+          "p50Ms": 1.0999999046325684,
+          "p95Ms": 1.5,
+          "p99Ms": 1.600000023841858,
+          "maxMs": 7.100000023841858
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 6.960418964299767,
+          "p50Ms": 6.899999976158142,
+          "p95Ms": 9.200000047683716,
+          "p99Ms": 11.700000047683716,
+          "maxMs": 15.299999952316284
+        }
+      },
+      "groundQueries": {},
+      "active": 22,
+      "resident": 242,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 1,
+      "maxResimPx": 0,
+      "maxTravelPx": 0,
+      "thermalBefore": {
+        "batteryC": 29.9,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 30.1,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "idle-after-1",
+      "date": "2026-10-11T05:22:58.661Z",
+      "motion": "idle",
+      "originalManager": false,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.00039735324591,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 1.667144433797523,
+          "p50Ms": 1.600000023841858,
+          "p95Ms": 2.5,
+          "p99Ms": 3,
+          "maxMs": 7.5
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.1441014338748852,
+          "p50Ms": 1.100000023841858,
+          "p95Ms": 1.5999999046325684,
+          "p99Ms": 2.200000047683716,
+          "maxMs": 7
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 6.973098125978236,
+          "p50Ms": 6.900000095367432,
+          "p95Ms": 9.400000095367432,
+          "p99Ms": 11.600000023841858,
+          "maxMs": 13.400000095367432
+        }
+      },
+      "groundQueries": {},
+      "active": 22,
+      "resident": 242,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 1,
+      "maxResimPx": 0,
+      "maxTravelPx": 0,
+      "thermalBefore": {
+        "batteryC": 30.3,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 30.5,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "idle-after-2",
+      "date": "2026-10-11T05:23:37.118Z",
+      "motion": "idle",
+      "originalManager": false,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.00079471270222,
+      "timings": {
+        "physics": {
+          "count": 907,
+          "meanMs": 1.6190738713465294,
+          "p50Ms": 1.5,
+          "p95Ms": 2.399999976158142,
+          "p99Ms": 7,
+          "maxMs": 8.300000071525574
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.074200660548899,
+          "p50Ms": 1,
+          "p95Ms": 1.5999999046325684,
+          "p99Ms": 2.600000023841858,
+          "maxMs": 6.899999976158142
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 6.414553469307762,
+          "p50Ms": 6.100000023841858,
+          "p95Ms": 8.899999976158142,
+          "p99Ms": 13.399999976158142,
+          "maxMs": 14.899999976158142
+        }
+      },
+      "groundQueries": {},
+      "active": 22,
+      "resident": 242,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 1,
+      "maxResimPx": 0,
+      "maxTravelPx": 0,
+      "thermalBefore": {
+        "batteryC": 30.5,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 30.8,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "idle-before-2",
+      "date": "2026-10-11T05:24:15.615Z",
+      "motion": "idle",
+      "originalManager": true,
+      "deepProfile": false,
+      "groundProfile": false,
+      "authorityHz": 60.002121622169696,
+      "timings": {
+        "physics": {
+          "count": 906,
+          "meanMs": 1.5982339961112992,
+          "p50Ms": 1.5,
+          "p95Ms": 2.299999952316284,
+          "p99Ms": 2.899999976158142,
+          "maxMs": 7.800000071525574
+        },
+        "replication": {
+          "count": 906,
+          "meanMs": 1.0678807953598746,
+          "p50Ms": 1,
+          "p95Ms": 1.5,
+          "p99Ms": 1.7000000476837158,
+          "maxMs": 6.899999976158142
+        },
+        "tick": {
+          "count": 906,
+          "meanMs": 6.292052978185102,
+          "p50Ms": 6,
+          "p95Ms": 8.5,
+          "p99Ms": 10.699999928474426,
+          "maxMs": 15.699999928474426
+        }
+      },
+      "groundQueries": {},
+      "active": 22,
+      "resident": 242,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "maxResimPx": 0,
+      "maxTravelPx": 0,
+      "thermalBefore": {
+        "batteryC": 30.8,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 31,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    }
+  ],
+  "groundOnly": [
+    {
+      "sample": "walk-before-1",
+      "date": "2026-10-11T05:25:16.680Z",
+      "motion": "walk",
+      "originalManager": true,
+      "deepProfile": false,
+      "groundProfile": true,
+      "authorityHz": 60.00079471270222,
+      "timings": {
+        "physics.ground-tracking": {
+          "count": 907,
+          "meanMs": 0.5160970227852414,
+          "p50Ms": 0.5,
+          "p95Ms": 0.8000000715255737,
+          "p99Ms": 1,
+          "maxMs": 6
+        },
+        "physics": {
+          "count": 907,
+          "meanMs": 2.389195145950822,
+          "p50Ms": 2.299999952316284,
+          "p95Ms": 3.8000000715255737,
+          "p99Ms": 7.399999976158142,
+          "maxMs": 8.799999952316284
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.0159867702271737,
+          "p50Ms": 1,
+          "p95Ms": 1.4000000953674316,
+          "p99Ms": 2.6999999284744263,
+          "maxMs": 6.700000047683716
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 7.431642776813107,
+          "p50Ms": 7.199999928474426,
+          "p95Ms": 11.200000047683716,
+          "p99Ms": 14,
+          "maxMs": 43.89999997615814
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.1247863769531,
+      "thermalBefore": {
+        "batteryC": 31.4,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 31.4,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "walk-after-1",
+      "date": "2026-10-11T05:25:55.682Z",
+      "motion": "walk",
+      "originalManager": false,
+      "deepProfile": false,
+      "groundProfile": true,
+      "authorityHz": 60.00066372415624,
+      "timings": {
+        "physics.ground-tracking": {
+          "count": 905,
+          "meanMs": 0.47646408937254003,
+          "p50Ms": 0.5,
+          "p95Ms": 0.7999999523162842,
+          "p99Ms": 0.9000000953674316,
+          "maxMs": 6.399999976158142
+        },
+        "physics": {
+          "count": 905,
+          "meanMs": 2.2456353573509342,
+          "p50Ms": 2.200000047683716,
+          "p95Ms": 3.5,
+          "p99Ms": 3.9000000953674316,
+          "maxMs": 8.699999928474426
+        },
+        "replication": {
+          "count": 905,
+          "meanMs": 1.0430939285794674,
+          "p50Ms": 1,
+          "p95Ms": 1.4000000953674316,
+          "p99Ms": 2.899999976158142,
+          "maxMs": 7.300000071525574
+        },
+        "tick": {
+          "count": 905,
+          "meanMs": 7.276022101370669,
+          "p50Ms": 7.099999904632568,
+          "p95Ms": 10.699999928474426,
+          "p99Ms": 13.399999976158142,
+          "maxMs": 48.10000002384186
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 1,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.1247863769531,
+      "thermalBefore": {
+        "batteryC": 31.4,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 31.5,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "walk-after-2",
+      "date": "2026-10-11T05:26:34.631Z",
+      "motion": "walk",
+      "originalManager": false,
+      "deepProfile": false,
+      "groundProfile": true,
+      "authorityHz": 59.97786452302222,
+      "timings": {
+        "physics.ground-tracking": {
+          "count": 906,
+          "meanMs": 0.47748344176126106,
+          "p50Ms": 0.5,
+          "p95Ms": 0.7999999523162842,
+          "p99Ms": 1,
+          "maxMs": 4.600000023841858
+        },
+        "physics": {
+          "count": 906,
+          "meanMs": 2.2736203102086554,
+          "p50Ms": 2.100000023841858,
+          "p95Ms": 3.600000023841858,
+          "p99Ms": 4.399999976158142,
+          "maxMs": 8.899999976158142
+        },
+        "replication": {
+          "count": 906,
+          "meanMs": 1.0631346552577239,
+          "p50Ms": 1,
+          "p95Ms": 1.5,
+          "p99Ms": 2.200000047683716,
+          "maxMs": 7.5
+        },
+        "tick": {
+          "count": 906,
+          "meanMs": 7.271302428992905,
+          "p50Ms": 7,
+          "p95Ms": 10.600000023841858,
+          "p99Ms": 13,
+          "maxMs": 38.5
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 0,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.1247863769531,
+      "thermalBefore": {
+        "batteryC": 31.5,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 31.7,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "walk-before-2",
+      "date": "2026-10-11T05:27:13.135Z",
+      "motion": "walk",
+      "originalManager": true,
+      "deepProfile": false,
+      "groundProfile": true,
+      "authorityHz": 60.001589446457004,
+      "timings": {
+        "physics.ground-tracking": {
+          "count": 907,
+          "meanMs": 0.5357221602867824,
+          "p50Ms": 0.5,
+          "p95Ms": 0.8999999761581421,
+          "p99Ms": 1.100000023841858,
+          "maxMs": 6.700000047683716
+        },
+        "physics": {
+          "count": 907,
+          "meanMs": 2.276956998920756,
+          "p50Ms": 2.1999999284744263,
+          "p95Ms": 3.5999999046325684,
+          "p99Ms": 8.200000047683716,
+          "maxMs": 9.200000047683716
+        },
+        "replication": {
+          "count": 907,
+          "meanMs": 1.0304299907095509,
+          "p50Ms": 1,
+          "p95Ms": 1.5,
+          "p99Ms": 2.600000023841858,
+          "maxMs": 6.199999928474426
+        },
+        "tick": {
+          "count": 907,
+          "meanMs": 7.248952592878121,
+          "p50Ms": 7,
+          "p95Ms": 10.699999928474426,
+          "p99Ms": 15.300000071525574,
+          "maxMs": 39.299999952316284
+        }
+      },
+      "groundQueries": {},
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.700000000000728,
+      "framesOver25Ms": 1,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.1247863769531,
+      "thermalBefore": {
+        "batteryC": 31.7,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 31.7,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    }
+  ],
+  "deep": [
+    {
+      "sample": "deep-before-walk",
+      "date": "2026-10-11T05:18:26.870Z",
+      "motion": "walk",
+      "originalManager": true,
+      "deepProfile": true,
+      "groundProfile": false,
+      "authorityHz": 60.00265498473384,
+      "timings": {
+        "player.input-phase": {
+          "count": 1810,
+          "meanMs": 0.28707182387620706,
+          "p50Ms": 0.10000002384185791,
+          "p95Ms": 0.7999999523162842,
+          "p99Ms": 0.9000000953674316,
+          "maxMs": 6.5
+        },
+        "physics.npc-movement": {
+          "count": 905,
+          "meanMs": 1.399447512363202,
+          "p50Ms": 1.399999976158142,
+          "p95Ms": 2.100000023841858,
+          "p99Ms": 2.600000023841858,
+          "maxMs": 7.5
+        },
+        "ground-tracking.props-query": {
+          "count": 25655,
+          "meanMs": 0.0035314753050461217,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000002384185791,
+          "maxMs": 0.7000000476837158
+        },
+        "ground-tracking.entities-query": {
+          "count": 25655,
+          "meanMs": 0.006423699151840017,
+          "p50Ms": 0,
+          "p95Ms": 0.10000002384185791,
+          "p99Ms": 0.10000002384185791,
+          "maxMs": 3.6999999284744263
+        },
+        "physics.ground-tracking": {
+          "count": 905,
+          "meanMs": 0.7907182354953407,
+          "p50Ms": 0.7999999523162842,
+          "p95Ms": 1.3000000715255737,
+          "p99Ms": 1.5,
+          "maxMs": 4.799999952316284
+        },
+        "physics": {
+          "count": 905,
+          "meanMs": 2.676795579320159,
+          "p50Ms": 2.600000023841858,
+          "p95Ms": 3.9000000953674316,
+          "p99Ms": 4.5,
+          "maxMs": 9.199999928474426
+        },
+        "replication": {
+          "count": 905,
+          "meanMs": 1.0333701661937145,
+          "p50Ms": 1,
+          "p95Ms": 1.399999976158142,
+          "p99Ms": 1.7000000476837158,
+          "maxMs": 5.600000023841858
+        },
+        "tick": {
+          "count": 905,
+          "meanMs": 7.918563536122359,
+          "p50Ms": 7.799999952316284,
+          "p95Ms": 11,
+          "p99Ms": 13.100000023841858,
+          "maxMs": 39
+        }
+      },
+      "groundQueries": {
+        "ground-tracking.props": {
+          "calls": 25655,
+          "candidates": 320763,
+          "maxCandidates": 28,
+          "repeatedRanges": 16074
+        },
+        "ground-tracking.entities": {
+          "calls": 25655,
+          "candidates": 115116,
+          "maxCandidates": 11,
+          "repeatedRanges": 16074
+        }
+      },
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "maxResimPx": 1.598632815102974e-5,
+      "maxTravelPx": 624.1247863769531,
+      "thermalBefore": {
+        "batteryC": 28.9,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 29,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    },
+    {
+      "sample": "deep-after-walk",
+      "date": "2026-10-11T05:19:05.610Z",
+      "motion": "walk",
+      "originalManager": false,
+      "deepProfile": true,
+      "groundProfile": false,
+      "authorityHz": 59.99947078765751,
+      "timings": {
+        "player.input-phase": {
+          "count": 1816,
+          "meanMs": 0.2368942725632159,
+          "p50Ms": 0,
+          "p95Ms": 0.7000000476837158,
+          "p99Ms": 1,
+          "maxMs": 1.7999999523162842
+        },
+        "physics.npc-movement": {
+          "count": 908,
+          "meanMs": 1.3954845795547384,
+          "p50Ms": 1.3000000715255737,
+          "p95Ms": 2.1999999284744263,
+          "p99Ms": 2.600000023841858,
+          "maxMs": 7.099999904632568
+        },
+        "ground-tracking.props-query": {
+          "count": 9637,
+          "meanMs": 0.004461969566800429,
+          "p50Ms": 0,
+          "p95Ms": 0,
+          "p99Ms": 0.10000002384185791,
+          "maxMs": 1
+        },
+        "ground-tracking.entities-query": {
+          "count": 9637,
+          "meanMs": 0.007886271735525136,
+          "p50Ms": 0,
+          "p95Ms": 0.10000002384185791,
+          "p99Ms": 0.10000002384185791,
+          "maxMs": 5.600000023841858
+        },
+        "physics.ground-tracking": {
+          "count": 908,
+          "meanMs": 0.6023127726783837,
+          "p50Ms": 0.6000000238418579,
+          "p95Ms": 0.9000000953674316,
+          "p99Ms": 1.2000000476837158,
+          "maxMs": 6.5
+        },
+        "physics": {
+          "count": 908,
+          "meanMs": 2.4970264272017624,
+          "p50Ms": 2.5,
+          "p95Ms": 3.799999952316284,
+          "p99Ms": 4.600000023841858,
+          "maxMs": 8.600000023841858
+        },
+        "replication": {
+          "count": 908,
+          "meanMs": 1.0126651981065977,
+          "p50Ms": 1,
+          "p95Ms": 1.399999976158142,
+          "p99Ms": 2.5,
+          "maxMs": 7.100000023841858
+        },
+        "tick": {
+          "count": 908,
+          "meanMs": 7.368832595941779,
+          "p50Ms": 7.199999928474426,
+          "p95Ms": 10.600000023841858,
+          "p99Ms": 13.100000023841858,
+          "maxMs": 43.5
+        }
+      },
+      "groundQueries": {
+        "ground-tracking.props": {
+          "calls": 9637,
+          "candidates": 119103,
+          "maxCandidates": 28,
+          "repeatedRanges": 0
+        },
+        "ground-tracking.entities": {
+          "calls": 9637,
+          "candidates": 36979,
+          "maxCandidates": 13,
+          "repeatedRanges": 0
+        }
+      },
+      "active": 43,
+      "resident": 241,
+      "framesP95Ms": 16.799999999999272,
+      "framesOver25Ms": 0,
+      "maxResimPx": 2.9062499947940523e-5,
+      "maxTravelPx": 624.1248016357421,
+      "thermalBefore": {
+        "batteryC": 29,
+        "thermalStatus": 0
+      },
+      "thermalAfter": {
+        "batteryC": 29.2,
+        "thermalStatus": 0
+      },
+      "errors": [],
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "dpr": 2.625
+      }
+    }
+  ],
+  "limits": [
+    "Two shallow samples per policy/motion, two ground-only walking samples per policy, one deep walking sample per policy.",
+    "Deep query wrappers add overhead; do not interpret deep phase reduction as ordinary savings.",
+    "Ground-only timings still include one timer pair/record per update.",
+    "Whole-tick p95 overlaps; no demonstrated cure for stutters/desync or the original save.",
+    "Short charging controls do not establish sustained thermal, lower-end-phone or native-touch performance.",
+    "Per-phase percentiles cannot be added."
+  ],
+  "validation": {
+    "status": "passed",
+    "typecheck": "passed all three",
+    "unitTests": 2367,
+    "unitFiles": 244,
+    "workshopCandidates": 761,
+    "candidateRecordsChanged": 0,
+    "artCatalogChanged": false,
+    "lint": {
+      "warnings": 118,
+      "infos": 34,
+      "errors": 0
+    },
+    "productionBuild": "passed",
+    "browserPassed": 541,
+    "browserSkipped": 1,
+    "browserFailed": 0,
+    "browserMinutes": 22.4,
+    "streaming": [
+      {
+        "name": "cold",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "standing",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "walk",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "sprint",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "reverse",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "zoom-out",
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      }
+    ],
+    "isolatedTestPorts": true,
+    "archiveUsesReadOnlyParentGitMetadata": true
+  }
+}

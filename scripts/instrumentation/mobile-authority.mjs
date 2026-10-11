@@ -15,6 +15,7 @@ const port = Number(option("port", "0"));
 const seconds = Number(option("seconds", "15"));
 const motion = option("motion", "idle");
 const physicsProfile = option("physics-profile", "false") === "true";
+const groundProfile = option("ground-profile", "false") === "true";
 const workerCpu = option("worker-cpu", "false") === "true";
 if (!["idle", "walk"].includes(motion)) throw Error("--motion must be idle or walk");
 const output = option("output", path.join(os.tmpdir(), "tilefun-mobile-authority"));
@@ -32,6 +33,10 @@ const aiReference = aiReferencePath ? await readFile(aiReferencePath, "utf8") : 
 const interestReferencePath = option("interest-reference", "");
 const interestReference = interestReferencePath
   ? await readFile(interestReferencePath, "utf8")
+  : undefined;
+const entityReferencePath = option("entity-reference", "");
+const entityReference = entityReferencePath
+  ? await readFile(entityReferencePath, "utf8")
   : undefined;
 const controls = option("controls", "baseline,visible-ai,sleep-hidden,no-ai,baseline").split(",");
 const scenes = option("scenes", "dog").split(",");
@@ -83,12 +88,27 @@ const server = await createServer({
           if (code.split(from).length !== 2) throw Error(`Physics probe marker changed in ${id}`);
           code = code.replace(from, to);
         };
-        if (physicsProfile && id.split("?")[0].endsWith("/src/entities/EntityManager.ts")) {
+        if (id.split("?")[0].endsWith("/src/entities/EntityManager.ts")) {
+          code = entityReference ?? code;
+          if (!physicsProfile) {
+            if (groundProfile) {
+              replaceOnce(
+                "// --- Phase 2.5:",
+                "const __groundStart = performance.now(); // --- Phase 2.5:",
+              );
+              replaceOnce(
+                "// Update spatial hash after all movement",
+                'globalThis.__diagnosticProfile?.record("physics.ground-tracking", performance.now() - __groundStart); // Update spatial hash after all movement',
+              );
+            }
+            return code;
+          }
           replaceOnce(
             "const playerSet = new Set(players);",
             `let __phase = "setup", __start = performance.now();
             const __mark = (next) => {
               globalThis.__diagnosticProfile?.record("physics." + __phase, performance.now() - __start);
+              if (next === "ground-tracking") globalThis.__diagnosticProfile?.beginGround();
               __phase = next; globalThis.__diagnosticPhysicsPhase = next; __start = performance.now();
             };
             globalThis.__diagnosticPhysicsPhase = "setup";
@@ -184,12 +204,14 @@ const report = {
   instrumented: true,
   motion,
   physicsProfile,
+  groundProfile,
   workerCpu,
   robinReference: !!robinReference,
   realmReference: !!realmReference,
   collisionReference: !!collisionReference,
   aiReference: !!aiReference,
   interestReference: !!interestReference,
+  entityReference: !!entityReference,
   cases: [],
 };
 let page;
@@ -254,8 +276,10 @@ try {
           t.values[(t.count - 1) % 6000] = ms;
         };
         const movementCounts = { stationary: 0, moving: 0 };
+        const groundRanges = new Set();
         globalThis.__diagnosticProfile = {
           record,
+          beginGround: () => groundRanges.clear(),
           recordMovement: (dx, dy) => {
             movementCounts[dx === 0 && dy === 0 ? "stationary" : "moving"]++;
           },
@@ -286,10 +310,20 @@ try {
           ]) {
             const original = owner[key];
             owner[key] = function (...args) {
+              const phase = globalThis.__diagnosticPhysicsPhase ?? "outside";
+              const ground = phase === "ground-tracking" && label !== "index";
+              const start = ground ? performance.now() : 0;
               const result = original.apply(this, args);
-              const name = `${globalThis.__diagnosticPhysicsPhase ?? "outside"}.${label}`;
+              const name = `${phase}.${label}`;
               queryCounts[name] ??= { calls: 0, candidates: 0, maxCandidates: 0 };
               const counts = queryCounts[name];
+              if (ground) {
+                record(`${name}-query`, performance.now() - start);
+                const range = `${label}:${args.join(",")}`;
+                counts.repeatedRanges ??= 0;
+                if (groundRanges.has(range)) counts.repeatedRanges++;
+                groundRanges.add(range);
+              }
               counts.calls++;
               counts.candidates += result?.length ?? 0;
               counts.maxCandidates = Math.max(counts.maxCandidates, result?.length ?? 0);
