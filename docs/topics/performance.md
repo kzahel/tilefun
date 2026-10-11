@@ -302,8 +302,26 @@ There is no demonstrated sparse-play gain or desync/stutter reproduction.
 [Phone evidence](../benchmarks/115-collision-broad-phase-phone.json) retains
 matched source/probe hashes, sixteen shallow crowd/eight native/four counting
 captures and thermal/order/diagnostic limits. Runtime source is unchanged.
-Next: profile remaining crowded ground/support and prop work on the phone,
-preserving live support and per-pass reuse before selecting another change.
+[118](../tactical/118-phone-physics-headroom.md) completes the next physical-phone
+profile on frozen 115 source. At 384 moving dogs, ground tracking takes
+4.24–4.47ms mean (about 43% of physics), versus 3.78–3.86ms movement. The original
+support census scans about 51,100 entity candidates per tick; this fixture has
+no props. Separate read-only fine-index comparisons reduce matched dog candidates
+from 132 to 9 per resolution with zero flat-fixture height mismatches. That is a
+proposal and candidate-count result, not a shipped change or predicted saving.
+Next bounded slice: extend dense index ownership through ground tracking, keeping
+live geometry/Z and sparse per-pass chunk reuse, with adversarial support and
+native game/lab checks before a matched phone timing comparison.
+
+Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
+8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority
+ticks and acknowledgement tails; correction error stays below 0.00003px and
+warping is not reproduced. A 45-second idle trace has one 33.4ms interval with
+neither slow authority nor owned-thread GC overlapping it. Do not attribute that
+hitch to server overload or GC. Reproducing the original symptom with the actual
+renderer/input mode and GPU/presentation plus sequence/publication timing remains
+separate work. [Evidence](../benchmarks/118-phone-physics-headroom.json) records
+phase/count/CPU/timeline scope and 25.1–28.5°C/status-zero controls.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.
