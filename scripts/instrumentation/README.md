@@ -136,6 +136,14 @@ thermal-stopped phone coverage, scene selection differences and next proposals.
 Callback cadence does not measure displayed GPU presentation; these profiles do
 not reproduce the original desync or establish crowded-city capacity.
 
+`node --import tsx scripts/instrumentation/traffic-road-parity.mjs --reference=PATH --output=/tmp/tilefun-traffic-road-parity`
+compares a supplied original TrafficSystem with the current implementation through
+fresh native ScenarioSession traces. Original prototype methods use current matching
+companion modules; complete actor/traffic/reservation state, binary frame bytes and
+flushed durable records must match. Crossings, turns, road edits, reload, bridge/garage
+grades and deleted supports are covered. Query counts are separate from shallow
+city timing. [125](../../docs/tactical/125-traffic-lookahead-terrain-reuse.md) owns results.
+
 ## Render and authority rates
 
 `npx tsx scripts/instrumentation/prediction-rates.ts --output=/tmp/prediction-rates.json`

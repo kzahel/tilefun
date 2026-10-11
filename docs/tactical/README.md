@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [125 Traffic lookahead terrain reuse](125-traffic-lookahead-terrain-reuse.md) | Per-car flat-road reuse: 26.6% less phone traffic work, noisy 4.1% whole-tick mean saving; exact parity and live contacts retained |
 | [124 Native city workload](124-city-workload-profile.md) | Traffic terrain-read duplication, wide-view driving/replication and renderer attribution; thermal-limited phone scope; no runtime change |
 | [123 NPC movement profile and fauna lookup](123-npc-movement-profile.md) | Type registry removes repeated scans; 8.7% aggregate dense moving phone mean saving, mixed tails; slower box prototype reverted |
 | [122 Complete vehicle port](122-complete-vehicle-port.md) | Complete: 45 own models/integrations, 49 exact retained revisions, 184 rolling wheels; batch commits/pushes and tracked-only verification |

@@ -201,9 +201,22 @@ export class TrafficSystem {
       bottom: pose.y + c.height / 2,
     };
   }
-  private roadClear(box: AABB, surfaceFollowing = false) {
+  // Scratch storage for one flat-road car's synchronous lookahead/reservation.
+  // Exact coordinates guard direct-map collisions; overwrites only lose reuse.
+  private readonly roadProbeX = new Float64Array(256);
+  private readonly roadProbeY = new Float64Array(256);
+  private readonly roadProbeClear = new Uint8Array(256);
+  private roadClear(box: AABB, surfaceFollowing = false, reuseRoad = false) {
     for (let y = Math.floor(box.top / 16); y <= Math.floor((box.bottom - 0.01) / 16); y++)
       for (let x = Math.floor(box.left / 16); x <= Math.floor((box.right - 0.01) / 16); x++) {
+        const slot = (x & 15) | ((y & 15) << 4);
+        if (
+          reuseRoad &&
+          this.roadProbeClear[slot] &&
+          this.roadProbeX[slot] === x &&
+          this.roadProbeY[slot] === y
+        )
+          continue;
         const road = this.world.getRoadAt(x, y);
         if (
           !road ||
@@ -215,6 +228,11 @@ export class TrafficSystem {
               road === RoadType.RailHorizontalBottom))
         )
           return false;
+        if (reuseRoad) {
+          this.roadProbeX[slot] = x;
+          this.roadProbeY[slot] = y;
+          this.roadProbeClear[slot] = 1;
+        }
       }
     return true;
   }
@@ -309,11 +327,11 @@ export class TrafficSystem {
     }
     return { z, reason: "" };
   }
-  private blocked(s: TrafficState, ahead: number): string {
+  private blocked(s: TrafficState, ahead: number, reuseRoad = false): string {
     if (s.lane.surfaceFollowing) return this.surfaceProbe(s, ahead).reason;
     const box = this.box(s, ahead),
       height = s.entity.collider?.physicalHeight ?? 24;
-    if (!this.roadClear(box)) return "road unavailable";
+    if (!this.roadClear(box, false, reuseRoad)) return "road unavailable";
     const props = this.props.getPropsInChunkRange(
       Math.floor(box.left / CHUNK_SIZE_PX),
       Math.floor(box.top / CHUNK_SIZE_PX),
@@ -336,7 +354,7 @@ export class TrafficSystem {
     }
     return "";
   }
-  private reserve(s: TrafficState): boolean {
+  private reserve(s: TrafficState, reuseRoad = false): boolean {
     if (s.turn || s.reservation === s.lane.to) return true;
     if (!s.next) return false;
     const owner = this.reservations.get(s.lane.to);
@@ -344,7 +362,7 @@ export class TrafficSystem {
     // Require a clear road/prop/pedestrian exit as well as vehicle queue space.
     const exitAhead = s.lane.path.length - s.distance + turnPath(s.lane, s.next).length;
     for (let d = 0; d <= Math.max(72, s.entity.collider?.width ?? 0); d += 8)
-      if (this.blocked(s, exitAhead + d)) return false;
+      if (this.blocked(s, exitAhead + d, reuseRoad)) return false;
     // Require room for the whole vehicle beyond the junction before entering.
     const exit = samplePath(s.next.path, Math.max(72, s.entity.collider?.width ?? 0));
     const box = {
@@ -390,15 +408,18 @@ export class TrafficSystem {
       const lookahead = Math.max(24, (s.speed * s.speed) / (2 * TRAFFIC_BRAKE) + 12);
       let clearance = lookahead,
         reason = "";
+      // No edits/callbacks or car movement occur within this synchronous sweep.
+      // Later cars, movement/support checks and rerouting always start fresh.
+      this.roadProbeClear.fill(0);
       for (let d = 0; d <= lookahead; d += 4) {
-        const r = this.blocked(s, d);
+        const r = this.blocked(s, d, true);
         if (r) {
           clearance = Math.max(0, d - this.settings.gap);
           reason = r;
           break;
         }
       }
-      if (!s.turn && end - s.distance < lookahead + half + 8 && !this.reserve(s)) {
+      if (!s.turn && end - s.distance < lookahead + half + 8 && !this.reserve(s, true)) {
         clearance = Math.min(clearance, Math.max(0, end - s.distance - half - 8));
         reason = "junction";
       }

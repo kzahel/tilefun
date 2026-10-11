@@ -272,3 +272,63 @@ it.each(["garbage-truck-green", "garbage-truck-orange", "car-8"])(
     expect(f.traffic.states.size).toBe(count);
   },
 );
+
+it("reads overlapping flat-road tiles once within a car sweep, then observes edits next tick", () => {
+  const f = fixture();
+  f.player.position = { wx: 2000, wy: 2000 };
+  f.entities.spatialHash.update(f.player);
+  let reads = new Map<string, number>();
+  let road = 5;
+  let height = 0;
+  f.world.getRoadAt = (x, y) => {
+    const key = `${x},${y}`;
+    reads.set(key, (reads.get(key) ?? 0) + 1);
+    return road;
+  };
+  f.world.getHeightAt = () => height;
+  f.traffic.tick(1 / 60, []);
+  expect(reads.size).toBeGreaterThan(0);
+  expect([...reads.values()].every((n) => n === 1)).toBe(true);
+  expect(f.car.speed).toBeGreaterThan(0);
+  const before = { ...f.car.entity.position };
+  reads = new Map();
+  height = 1;
+  f.traffic.tick(1 / 60, []);
+  expect(f.car.entity.position).toEqual(before);
+  expect(f.car.waiting).toBe("road unavailable");
+  expect(reads.size).toBeGreaterThan(0);
+  height = 0;
+  road = 0;
+  f.traffic.tick(1 / 60, []);
+  expect(f.car.entity.position).toEqual(before);
+  road = 5;
+  f.traffic.tick(1 / 60, []);
+  expect(f.car.speed).toBeGreaterThan(0);
+});
+
+it("drops road reuse before callbacks and later cars even for overlapping footprints", () => {
+  const f = fixture();
+  f.player.position = { wx: 2000, wy: 2000 };
+  f.entities.spatialHash.update(f.player);
+  const second = f.traffic.add("compact-1", f.car.lane, f.car.distance + 6);
+  f.world.getHeightAt = () => 0;
+  f.traffic.onChange = (s) => {
+    if (s === f.car) f.world.getRoadAt = () => 0;
+  };
+  f.traffic.tick(1 / 60, []);
+  expect(second.waiting).toBe("road unavailable");
+  expect(second.speed).toBe(0);
+});
+
+it("does not confuse different road cells that share a scratch slot", () => {
+  const f = fixture();
+  f.player.position = { wx: 2000, wy: 2000 };
+  f.entities.spatialHash.update(f.player);
+  f.world.getHeightAt = () => 0;
+  // A deliberately fast lookahead spans more than the scratch grid's 16 tiles.
+  f.car.speed = f.traffic.settings.speed = 200;
+  const first = Math.floor(f.car.entity.position.wx / 16);
+  f.world.getRoadAt = (x) => (x >= first + 16 ? 0 : 5);
+  f.traffic.tick(1 / 60, []);
+  expect(f.car.waiting).toBe("road unavailable");
+});

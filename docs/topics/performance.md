@@ -375,6 +375,19 @@ phone main/GPU tracing are distinct follow-ups. 123's unused-water-read candidat
 remains lower priority after this native city profile. No runtime policy changes
 or original-desync explanation are established by 124.
 
+[125](../tactical/125-traffic-lookahead-terrain-reuse.md) reuses successful flat-road
+checks only within one car's synchronous lookahead/reservation. A fixed scratch
+grid checks exact coordinates and resets per car; bodies, props and reservations
+remain live, while bridge/garage grade queries retain the original path. Eight
+shallow phone standing captures at 30.9–31.5°C/status zero reduce traffic mean
+2.398→1.761ms (26.6%); total server mean 6.220→5.963ms (4.1%, noisy pairs).
+This buys scoped headroom, not stable displayed-frame or desync acceptance.
+The optimized native driving capture is not admitted after setup loses the fixed
+32°C gate. Nine native deterministic flat/grade traces match state, binary frames,
+flushed records and live body/prop query counts. Next: conservative swept local
+candidates for player driving on authority and predictor, including rider support
+and headroom; snapshot/interest and phone GPU/display tracing stay separate.
+
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority
 ticks and acknowledgement tails; correction error stays below 0.00003px and
