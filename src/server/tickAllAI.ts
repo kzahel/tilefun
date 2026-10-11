@@ -1,6 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import { updateRouteAI } from "../entities/routeAI.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
+import type { DeerPlanningScheduler } from "../wildlife/DeerPlanningScheduler.js";
 import { updateDeerAI } from "../wildlife/deerAI.js";
 import { updateFaunaAI } from "../wildlife/faunaAI.js";
 import { updateFrogAI } from "../wildlife/frogAI.js";
@@ -26,17 +27,19 @@ export function tickAllAI(
   rng: () => number,
   wildlife?: WildlifeEnvironment,
   robinTurn = 0,
+  deerPlanning?: DeerPlanningScheduler,
 ): void {
   // Collect buddies for hostile AI targeting (need all, not just ticked)
   const buddies = entities.filter((e) => e.wanderAI?.following);
   const robins: [Entity, number][] = [];
+  const deer: [Entity, number][] = [];
   for (const [entity, dt] of entityTickDts) {
     if (entity.fauna && wildlife) {
       updateFaunaAI(entity, dt, wildlife, entities, playerPositions);
       continue;
     }
     if (entity.deer && wildlife) {
-      updateDeerAI(entity, dt, wildlife, entities, playerPositions);
+      deer.push([entity, dt]);
       continue;
     }
     if (entity.robin && wildlife) {
@@ -68,6 +71,28 @@ export function tickAllAI(
     } else {
       updateWanderAI(entity, dt, rng);
     }
+  }
+  if (wildlife && deer.length) {
+    deerPlanning?.begin();
+    const start = deerPlanning ? robinTurn % deer.length : 0;
+    const rotated = deer.slice(start).concat(deer.slice(0, start));
+    // Stable rotation gives equally urgent actors fair access after a synchronized
+    // wake. Existing alarms precede ambient goals; new alarms still react this tick.
+    if (deerPlanning) {
+      const rank = (entity: Entity) =>
+        entity.deer?.alarmFrom
+          ? 0
+          : playerPositions.some(
+                (p) =>
+                  (p.wx - entity.position.wx) ** 2 + (p.wy - entity.position.wy) ** 2 < 192 ** 2,
+              )
+            ? 1
+            : 2;
+      const priorities = new Map(rotated.map(([entity]) => [entity, rank(entity)]));
+      rotated.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
+    }
+    for (const [entity, dt] of rotated)
+      updateDeerAI(entity, dt, wildlife, entities, playerPositions, deerPlanning);
   }
   if (wildlife && robins.length) {
     const budget = robinWorkBudget();

@@ -12,6 +12,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [111 Snapshot reuse and deer scheduling](111-server-snapshot-and-deer-scheduling.md) | Desktop first-slice implementation: immutable snapshot/dirty reuse and staggered budgeted deer goals; [performance](../topics/performance.md) |
+| [110 Server headroom proposal](110-server-headroom-proposal.md) | Complete investigation: current desktop CPU/timeline and AI search census; proposed bookkeeping and separate cadences; phone unavailable |
 | [109 Blue car camera registration](109-blue-car-camera-registration.md) | Authored directional lens metrics correct tall/thin model proportions; world projection and physics unchanged |
 | [108 Authored blue car gameplay](108-authored-blue-car-gameplay.md) | Shared GLB rendering, native silhouette ink and cosmetic wheel roll in game/Traffic; physics unchanged |
 | [107 Ground query reuse](107-ground-query-reuse.md) | Complete: shared per-pass candidate reuse, native phone controls and integration; [performance](../topics/performance.md) |

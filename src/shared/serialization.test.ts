@@ -1,12 +1,15 @@
 import { describe, expect, it } from "vitest";
+import { required } from "../art/ArtCatalog.js";
 import type { Entity } from "../entities/Entity.js";
 import { Direction } from "../entities/Entity.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import type { Prop } from "../entities/Prop.js";
 import { Chunk } from "../world/Chunk.js";
 import {
   applyChunkSnapshot,
   deserializeEntity,
   deserializeProp,
+  reuseEntitySnapshot,
   serializeChunk,
   serializeEntity,
   serializeProp,
@@ -331,5 +334,216 @@ describe("Chunk serialization", () => {
 
     expect(target.subgrid[50]).toBe(8);
     expect(target.roadGrid[0]).toBe(1);
+  });
+});
+
+describe("immutable snapshot reuse", () => {
+  it("reuses identical wire state despite server-only clocks and component replacement", () => {
+    const e = makeFullEntity();
+    const previous = serializeEntity(e);
+    e.position = { ...e.position };
+    e.velocity = { ...required(e.velocity) };
+    required(e.sprite).frameCol++;
+    required(e.sprite).animTimer++;
+    required(e.wanderAI).timer++;
+    expect(reuseEntitySnapshot(e, previous)).toBe(previous);
+    expect(reuseEntitySnapshot(e, previous)).toEqual(serializeEntity(e));
+  });
+
+  const changes: [string, (e: Entity) => void][] = [
+    [
+      "id",
+      (e) => {
+        e.id++;
+      },
+    ],
+    [
+      "type",
+      (e) => {
+        e.type = "player";
+      },
+    ],
+    [
+      "x",
+      (e) => {
+        e.position.wx++;
+      },
+    ],
+    [
+      "y",
+      (e) => {
+        e.position.wy++;
+      },
+    ],
+    [
+      "vx",
+      (e) => {
+        required(e.velocity).vx++;
+      },
+    ],
+    [
+      "vy",
+      (e) => {
+        required(e.velocity).vy++;
+      },
+    ],
+    [
+      "velocity removal",
+      (e) => {
+        e.velocity = null;
+      },
+    ],
+    [
+      "sprite removal",
+      (e) => {
+        e.sprite = null;
+      },
+    ],
+    [
+      "direction",
+      (e) => {
+        required(e.sprite).direction = Direction.Left;
+      },
+    ],
+    [
+      "moving",
+      (e) => {
+        required(e.sprite).moving = false;
+      },
+    ],
+    [
+      "row",
+      (e) => {
+        required(e.sprite).frameRow++;
+      },
+    ],
+    [
+      "clip",
+      (e) => {
+        required(e.sprite).clip = 3;
+      },
+    ],
+    [
+      "clip clock",
+      (e) => {
+        required(e.sprite).clipElapsedMs = 123;
+      },
+    ],
+    [
+      "flip",
+      (e) => {
+        required(e.sprite).flipX = false;
+      },
+    ],
+    [
+      "duration",
+      (e) => {
+        required(e.sprite).frameDuration = 23;
+      },
+    ],
+    [
+      "AI removal",
+      (e) => {
+        e.wanderAI = null;
+      },
+    ],
+    [
+      "AI state",
+      (e) => {
+        required(e.wanderAI).state = "idle";
+      },
+    ],
+    [
+      "AI x",
+      (e) => {
+        required(e.wanderAI).dirX++;
+      },
+    ],
+    [
+      "AI y",
+      (e) => {
+        required(e.wanderAI).dirY++;
+      },
+    ],
+    [
+      "following",
+      (e) => {
+        required(e.wanderAI).following = true;
+      },
+    ],
+    [
+      "tag",
+      (e) => {
+        required(e.tags).delete("befriendable");
+      },
+    ],
+    ...(
+      [
+        "flashHidden",
+        "noShadow",
+        "deathTimer",
+        "jumpZ",
+        "jumpVZ",
+        "wz",
+        "airMomentumX",
+        "airMomentumY",
+        "jumpInputState",
+        "parentId",
+        "localOffsetX",
+        "localOffsetY",
+      ] as const
+    ).map(
+      (key) =>
+        [
+          key,
+          (e: Entity) => {
+            Reflect.set(e, key, key === "flashHidden" || key === "noShadow" ? false : 13);
+          },
+        ] as [string, (e: Entity) => void],
+    ),
+  ];
+  it.each(changes)("refreshes %s and removal without mutating previous state", (_name, change) => {
+    const e = makeFullEntity();
+    const previous = serializeEntity(e),
+      saved = structuredClone(previous);
+    change(e);
+    const next = reuseEntitySnapshot(e, previous);
+    expect(next).not.toBe(previous);
+    expect(next).toEqual(serializeEntity(e));
+    expect(previous).toEqual(saved);
+    // Returning to the old values is also checked against the serializer.
+    const restored = makeFullEntity();
+    expect(reuseEntitySnapshot(restored, next)).toEqual(serializeEntity(restored));
+  });
+  it("refreshes optional sprite values, player model and definition-relative duration", () => {
+    const e = makeFullEntity();
+    e.type = "player";
+    e.playerModel = "other";
+    required(e.sprite).clip = 1;
+    required(e.sprite).clipElapsedMs = 0;
+    required(e.sprite).flipX = false;
+    let previous = serializeEntity(e);
+    for (const key of ["clip", "clipElapsedMs", "flipX"] as const) {
+      delete required(e.sprite)[key];
+      const next = reuseEntitySnapshot(e, previous);
+      expect(next).not.toBe(previous);
+      expect(next).toEqual(serializeEntity(e));
+      previous = next;
+    }
+    delete e.playerModel;
+    expect(reuseEntitySnapshot(e, previous)).toEqual(serializeEntity(e));
+    e.type = "chicken";
+    const def = required(required(ENTITY_DEFS.chicken).sprite),
+      duration = def.frameDuration;
+    previous = serializeEntity(e);
+    try {
+      def.frameDuration = required(e.sprite).frameDuration;
+      const next = reuseEntitySnapshot(e, previous);
+      expect(next).not.toBe(previous);
+      expect(next).toEqual(serializeEntity(e));
+      expect(next.spriteState?.frameDuration).toBeUndefined();
+    } finally {
+      def.frameDuration = duration;
+    }
   });
 });

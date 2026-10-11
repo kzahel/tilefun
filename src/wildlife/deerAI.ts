@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { DeerPlanningScheduler } from "./DeerPlanningScheduler.js";
 import {
   DEER_FLEE_SPEED,
   DEER_WALK_SPEED,
@@ -16,28 +17,34 @@ export function updateDeerAI(
   environment: WildlifeEnvironment,
   animals: readonly Entity[],
   players: readonly PositionComponent[],
+  planning?: DeerPlanningScheduler,
 ): void {
   const ai = deer.deer,
     velocity = deer.velocity;
   if (!ai || !velocity || !deer.sprite) return;
-  const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
-    return ai.randomState / 4294967296;
-  };
-  const herd = ai.herdId
-    ? animals.filter(
-        (a) =>
-          a !== deer && a.deer?.herdId === ai.herdId && distance(a.position, deer.position) < 128,
-      )
-    : [];
+  planning?.advance(deer, dt);
   const nearby = players.find((p) => distance(p, deer.position) < 38);
-  const herdAlarm = herd.find((a) => a.deer?.alarmFrom)?.deer?.alarmFrom;
+  // Urgent sensing stays live even between planning slots. Avoid building a herd
+  // (and calculating every member's distance) on every idle/moving tick.
+  const herdAlarm = ai.herdId
+    ? animals.find(
+        (a) =>
+          a !== deer &&
+          a.deer?.herdId === ai.herdId &&
+          a.deer?.alarmFrom &&
+          distance(a.position, deer.position) < 128,
+      )?.deer?.alarmFrom
+    : undefined;
   if (ai.state !== "recover" && (nearby || herdAlarm))
     startleDeer(deer, nearby ?? herdAlarm ?? deer.position);
   if (ai.motion) return;
   velocity.vx = velocity.vy = 0;
   ai.timer -= dt;
   if (ai.timer > 0) return;
+  const random = () => {
+    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    return ai.randomState / 4294967296;
+  };
   const rest = () => {
     ai.state = "rest";
     ai.timer = 2 + random() * 4;
@@ -49,6 +56,7 @@ export function updateDeerAI(
     return;
   }
   const escaping = ai.state === "startle";
+  if (planning && !planning.claim(deer, escaping)) return;
   if (!escaping && ++ai.activity % 3 === 0) {
     ai.state = "action";
     ai.timer = 0.8;
@@ -56,6 +64,13 @@ export function updateDeerAI(
     return;
   }
   const from = ai.alarmFrom ?? deer.position;
+  // Ambient cohesion is sensed only when a goal is actually due and admitted.
+  const herd = ai.herdId
+    ? animals.filter(
+        (a) =>
+          a !== deer && a.deer?.herdId === ai.herdId && distance(a.position, deer.position) < 128,
+      )
+    : [];
   let target: PositionComponent | undefined,
     best = -Infinity;
   for (let i = 0; i < 24; i++) {

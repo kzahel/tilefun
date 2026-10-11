@@ -61,6 +61,15 @@ teleport/fall command. Canvas/GPU checks cover walking, pause/reload and landing
 with no automatic upward player velocity. No lab-specific animal physics or AI
 is introduced; no historical approval snapshot is regenerated.
 
+[111](../tactical/111-server-snapshot-and-deer-scheduling.md) applies the deer
+ambient planning cadence/quota through shared Realm, so game and ScenarioSession
+retain the same motion, alarms, contacts, sleep and reload policy. RealmReplicator
+also reuses unchanged wire snapshots after complete live scalar checks; lab
+publication still uses the ordinary 60Hz frames and native protocol. No separate
+inspection AI or clock is introduced. Six character-lab identities renew because
+their contract hashes raw Realm source; wildlife identities and source art stay
+unchanged, and existing approval records are not rewritten.
+
 ## Robin gameplay alignment
 
 [088](../tactical/088-wildlife-work-budgets.md) routes both game and labs through

@@ -72,6 +72,10 @@ type GetMetaFn = () => SavedMeta;
 export class SaveManager {
   private saveTimer: ReturnType<typeof setTimeout> | null = null;
   private dirtyRecords = new Map<string, () => SaveEntry>();
+  private readonly recordKeys = new WeakMap<
+    () => SaveEntry,
+    { collection: string; key: string; identity: string }
+  >();
   private dirtyChunks = new Set<string>();
   private dirtyPlayers = new Map<string, SavedPlayerData>();
   private metaDirty = false;
@@ -140,7 +144,15 @@ export class SaveManager {
   }
 
   markRecordDirty(collection: string, key: string, snapshot: () => SaveEntry): void {
-    this.dirtyRecords.set(JSON.stringify([collection, key]), snapshot);
+    let cached = this.recordKeys.get(snapshot);
+    if (!cached || cached.collection !== collection || cached.key !== key) {
+      cached = { collection, key, identity: JSON.stringify([collection, key]) };
+      this.recordKeys.set(snapshot, cached);
+    }
+    if (this.dirtyRecords.get(cached.identity) !== snapshot)
+      this.dirtyRecords.set(cached.identity, snapshot);
+    // A synchronous flush can cancel the timer while another write is in flight.
+    // Repeated notifications must still ensure a future save is scheduled.
     this.scheduleSave();
   }
 

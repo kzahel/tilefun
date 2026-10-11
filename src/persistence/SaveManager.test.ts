@@ -95,3 +95,37 @@ it("pauses mutation producers under slow or failed storage and resumes after ack
   expect(executor.records.size).toBe(2049);
   await saves.close();
 });
+
+it("coalesces a stable live snapshot without losing mutations across an in-flight write", async () => {
+  const executor = new MemoryRecordStore();
+  const saves = new SaveManager(new RecordPersistenceStore(executor));
+  saves.bind(() => undefined, meta);
+  await saves.open();
+  let value = 1;
+  const snapshot = () => ({ collection: "entities", key: "actor", scope: "0,0", value });
+  for (let i = 0; i < 100; i++) saves.markRecordDirty("entities", "actor", snapshot);
+  expect(saves.dirtyCount).toBe(1);
+  let acknowledge = () => {};
+  const blocked = new Promise<void>((resolve) => {
+    acknowledge = resolve;
+  });
+  let entered = () => {};
+  const started = new Promise<void>((resolve) => {
+    entered = resolve;
+  });
+  executor.beforeCommit = async () => {
+    entered();
+    await blocked;
+  };
+  const flushing = saves.flushAsync();
+  await started;
+  value = 2;
+  saves.markRecordDirty("entities", "actor", snapshot);
+  acknowledge();
+  await flushing;
+  expect((await executor.read("entities", "actor"))?.value).toBe(1);
+  expect(saves.hasDirty).toBe(true);
+  delete executor.beforeCommit;
+  await saves.close();
+  expect((await executor.read("entities", "actor"))?.value).toBe(2);
+});

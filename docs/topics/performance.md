@@ -189,10 +189,55 @@ fall about 62%; a minimal timer pair measures walking
 ground mean 0.516–0.536ms original versus 0.476–0.478ms reuse (about 9% less).
 Whole-tick/EntityManager ranges overlap, including slightly higher idle means;
 this is a modest phase saving, with no demonstrated stutter cure. The tactical
-owns full results and validation. Next, measure/fuse NPC collision-blocker filtering
-to remove its per-probe exclusion Set and filtered-array allocations while retaining
-self/rider/Z/solidity policy. Finer spatial buckets and prop-query reuse remain
-later candidates.
+owns full results and validation. NPC collision-blocker Set/filter fusion, finer
+spatial buckets and prop-query reuse remain local candidates.
+
+[110](../tactical/110-server-headroom-proposal.md) zooms out with thirteen current
+frozen-source desktop captures, a separate timeline and exact AI search-entry counts.
+Nearby routines are admitted at 60Hz, but goal searches are timer/motion gated:
+one dog has 1,204 updates and five searches in 20 seconds; the robin group has
+25,424 updates and 101 searches. Aggregate AI averages 0.076–0.122ms per desktop
+tick across three scenes. Serialization/snapshot construction and mutation/dirty
+bookkeeping remain material recurring costs. The trace has regular Worker GC,
+but no overlap with its slowest ticks and no reproduction of the phone's large
+spikes. The phone was unavailable; these are desktop attribution, not phone
+headroom or an optimization result. Longer Right controls become obstacle-blocked;
+short walking controls are reported separately. 110 owns the staged proposal;
+[111](../tactical/111-server-snapshot-and-deer-scheduling.md) delivers its first
+bookkeeping slice and a deer planning pilot on desktop.
+
+111 reuses immutable entity snapshots after comparing every transmitted scalar,
+including live tags, clips, support/attachment state, optional removals and
+definition-relative duration. Each build checks live values, including edits
+between clients within one tick; durable dirty observers alone are insufficient.
+Unchanged snapshots skip allocation and delta comparison. Stable lazy actor save
+callbacks and cached dirty keys avoid repeated callback/key creation; spatial
+membership and descendant invalidation still run immediately, and flush barriers
+retain later mutations. Persistence encoding was already lazy.
+
+In a warm 20-second deer capture, snapshots fall from 102,255 constructions to
+8,464 across 102,425 checks (91.7% reused), and new actor dirty callbacks fall
+from 100,432 to zero despite 100,213 notifications. Deer cohort sensing happens
+only on admitted goals: 2,406 herd-list builds become eight. Nearby deer timers,
+alarms and committed motion still run at the existing full/reduced rate; ambient
+goal eligibility cycles through staggered 100ms simulation-time slots, with one
+decision/search start per Realm AI step. Alarms bypass cadence, but keep the
+shared start cap; rotating threat/proximity classes provide admission fairness.
+Other species retain their existing scheduling and robin quota.
+
+Two shallow desktop walking repeats measure replication mean 0.214–0.278ms
+before versus 0.175–0.182ms after, and tick p95 2.9–3.8ms versus 2.2–2.4ms.
+Earlier deeper pairs have overlapping tick p95 ranges. All ten accepted captures
+have zero page errors and authority near 60Hz; walking controls cover about 625px.
+These are instrumented desktop results, not phone headroom or a demonstrated
+stutter cure. Typechecks, 2,414 unit tests, lint, build and six streaming readiness
+cases pass. The full browser run passes 543/skips one but has one intermittent
+GPU tap-walk startup failure; the original source reproduces the same assertion
+under matching two-worker concurrency. 111 retains the reruns and uncertainty;
+this is not a clean full-suite or an established input diagnosis. Next: extend due-work admission to one more species under a shared
+multispecies quota, test dense mixed wakes and measure on the phone when available.
+Retain 60Hz player/contact physics and acknowledgement freshness; lower NPC
+publication cadence and compute workers remain distinct later experiments.
 
 The [original mobile investigation](../research/mobile-desync-investigation.md)
 measured 23–26ms tick p95 on a Pixel 7a with about 160 active countryside actors.

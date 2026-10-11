@@ -11,6 +11,7 @@ import {
   encodeActor,
   observeActor,
 } from "./ActorRecords.js";
+import type { SaveEntry } from "./PersistenceStore.js";
 import type { SaveManager } from "./SaveManager.js";
 
 export interface FeatureRecord {
@@ -34,6 +35,10 @@ export class RealmRecords {
   private membership = new WeakMap<Entity | Prop, string>();
   private children = new Map<number, Set<Entity>>();
   private parentOf = new WeakMap<Entity, number>();
+  private readonly dirtySnapshots = new WeakMap<
+    Entity | Prop,
+    { key: string; snapshot: () => SaveEntry }
+  >();
 
   root(actor: Entity | Prop): Entity | Prop {
     let root = actor;
@@ -199,18 +204,26 @@ export class RealmRecords {
     this.index(actor);
     const collection = "isProp" in actor ? "props" : "entities";
     const key = actor.persistentId;
-    this.saves.markRecordDirty(collection, key, () => ({
-      collection,
-      key,
-      scope: this.scope(actor),
-      value: {
-        ...encodeActor(
-          actor,
-          "parentId" in actor ? this.entities.byId.get(actor.parentId ?? -1) : undefined,
-        ),
-        ...(actor.proceduralId ? { originScope: this.origins.get(actor) } : {}),
-      },
-    }));
+    let cached = this.dirtySnapshots.get(actor);
+    if (!cached || cached.key !== key) {
+      cached = {
+        key,
+        snapshot: () => ({
+          collection,
+          key,
+          scope: this.scope(actor),
+          value: {
+            ...encodeActor(
+              actor,
+              "parentId" in actor ? this.entities.byId.get(actor.parentId ?? -1) : undefined,
+            ),
+            ...(actor.proceduralId ? { originScope: this.origins.get(actor) } : {}),
+          },
+        }),
+      };
+      this.dirtySnapshots.set(actor, cached);
+    }
+    this.saves.markRecordDirty(collection, key, cached.snapshot);
     if (!("isProp" in actor))
       for (const child of [...(this.children.get(actor.id) ?? [])]) this.changed(child);
   }

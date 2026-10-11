@@ -90,6 +90,21 @@ support heights. The lists end before index updates and do not survive movement,
 edits, readiness or a later tick. Activity selection and support behavior stay
 unchanged; [performance](performance.md) owns device results.
 
+[110](../tactical/110-server-headroom-proposal.md) distinguishes routine admission
+from actual AI searches and proposes separate fast/slow work. The first pilot,
+[111](../tactical/111-server-snapshot-and-deer-scheduling.md), gives deer staggered
+100ms simulation-time ambient goal slots and one shared decision/search start
+per Realm AI step. Threats bypass the cadence but share the start cap; alarm and
+player proximity checks, rest/recovery timers, native motion, collision and support
+remain at existing admitted rates. Herd cohesion is queried only for due goals,
+using live actors rather than stale cached memberships. Rotation within stable
+threat/proximity classes prevents synchronized same-class wakes from monopolizing
+admission. Sleeping actors accrue no elapsed wall time or catch-up work. The
+cadence is transient; committed motion/RNG remain durable, while future goal
+choice timing may shift by a slot or quota wait after reload. Other species and
+the existing 60/15Hz admission retain their previous policy. A shared multispecies
+quota and wider sensing split remain proposed.
+
 Movement remains fixed-step in both active tiers; nominal reduced decision rate
 is 15 Hz at a 60 Hz server rate. Sleeping/retiring actors preserve semantic
 state without wall-clock catch-up. Balls, entity physics, separation, attachments

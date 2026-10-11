@@ -90,6 +90,7 @@ import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import { DeerPlanningScheduler } from "../wildlife/DeerPlanningScheduler.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
@@ -983,6 +984,7 @@ export class Realm {
             },
           },
           this.robinTurn++,
+          this.deerPlanning,
         );
 
         // ── TickService.preSimulation ──
@@ -2283,6 +2285,7 @@ export class Realm {
   private readonly propActivity = new RealmPropActivity();
   private readonly wildlifeActivity = new WildlifeActivity();
   private robinTurn = 0;
+  private readonly deerPlanning = new DeerPlanningScheduler();
   private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {
     const decisions = new Map<Entity, number>();
     for (const entity of this.previousActive) if (!active.has(entity)) entity.tickAccumulator = 0;

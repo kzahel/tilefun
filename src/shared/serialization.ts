@@ -72,6 +72,71 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   return result;
 }
 
+/** Reuse an owned, immutable snapshot only when every transmitted value still matches. */
+export function reuseEntitySnapshot(e: Entity, previous?: EntitySnapshot): EntitySnapshot {
+  return previous && entitySnapshotMatches(e, previous) ? previous : serializeEntity(e);
+}
+
+function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
+  if (
+    e.id !== s.id ||
+    e.type !== s.type ||
+    e.position.wx !== s.position.wx ||
+    e.position.wy !== s.position.wy ||
+    e.flashHidden !== s.flashHidden ||
+    e.noShadow !== s.noShadow ||
+    e.deathTimer !== s.deathTimer ||
+    e.jumpZ !== s.jumpZ ||
+    e.jumpVZ !== s.jumpVZ ||
+    e.airMomentumX !== s.airMomentumX ||
+    e.airMomentumY !== s.airMomentumY ||
+    e.jumpInputState !== s.jumpInputState ||
+    e.wz !== s.wz ||
+    e.parentId !== s.parentId ||
+    e.localOffsetX !== s.localOffsetX ||
+    e.localOffsetY !== s.localOffsetY
+  )
+    return false;
+  const velocity = e.velocity;
+  if (
+    velocity
+      ? !s.velocity || velocity.vx !== s.velocity.vx || velocity.vy !== s.velocity.vy
+      : s.velocity !== null
+  )
+    return false;
+  const sprite = e.sprite,
+    savedSprite = s.spriteState;
+  if (sprite) {
+    if (!savedSprite) return false;
+    const defSprite = ENTITY_DEFS[e.type]?.sprite;
+    const frameDuration =
+      defSprite && sprite.frameDuration !== defSprite.frameDuration
+        ? sprite.frameDuration
+        : undefined;
+    if (
+      sprite.direction !== savedSprite.direction ||
+      sprite.moving !== savedSprite.moving ||
+      sprite.frameRow !== savedSprite.frameRow ||
+      sprite.clip !== savedSprite.clip ||
+      sprite.clipElapsedMs !== savedSprite.clipElapsedMs ||
+      sprite.flipX !== savedSprite.flipX ||
+      (e.type === "player" && e.playerModel ? e.playerModel : undefined) !== savedSprite.model ||
+      frameDuration !== savedSprite.frameDuration
+    )
+      return false;
+  } else if (savedSprite !== null) return false;
+  const ai = e.wanderAI,
+    savedAI = s.wanderAIState;
+  return ai
+    ? !!savedAI &&
+        ai.state === savedAI.state &&
+        ai.dirX === savedAI.dirX &&
+        ai.dirY === savedAI.dirY &&
+        ai.following === savedAI.following &&
+        (e.tags?.has("befriendable") ?? false) === savedAI.befriendable
+    : savedAI === null;
+}
+
 export function deserializeEntity(s: EntitySnapshot): Entity {
   const def = ENTITY_DEFS[s.type];
 

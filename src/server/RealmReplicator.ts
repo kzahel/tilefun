@@ -1,4 +1,5 @@
 import { RENDER_DISTANCE } from "../config/constants.js";
+import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import {
@@ -22,7 +23,7 @@ import type {
   ServerMessage,
   SyncChunksMessage,
 } from "../shared/protocol.js";
-import { serializeChunk, serializeEntity, serializeProp } from "../shared/serialization.js";
+import { reuseEntitySnapshot, serializeChunk, serializeProp } from "../shared/serialization.js";
 import type { World } from "../world/World.js";
 import type { PlayerSession } from "./PlayerSession.js";
 
@@ -90,6 +91,10 @@ function createClientDeltaState(): ClientDeltaState {
 /** Owns per-client baselines and translates live realm state into protocol messages. */
 export class RealmReplicator {
   private readonly clientDeltaStates = new Map<string, ClientDeltaState>();
+  // Object identity prevents recycled IDs from borrowing another actor's state.
+  // Weak keys release actors after despawn; each build checks live wire values,
+  // including edits made between two clients' builds within the same tick.
+  private snapshots = new WeakMap<Entity, EntitySnapshot>();
 
   clearClient(clientId: string): void {
     this.clientDeltaStates.delete(clientId);
@@ -97,6 +102,7 @@ export class RealmReplicator {
 
   clear(): void {
     this.clientDeltaStates.clear();
+    this.snapshots = new WeakMap();
   }
 
   build(clientId: string, source: ReplicationSource): ServerMessage[] {
@@ -175,13 +181,14 @@ export class RealmReplicator {
     const entityDeltas: EntityDelta[] = [];
 
     for (const entity of nearbyEntities) {
-      const snapshot = serializeEntity(entity);
+      const snapshot = reuseEntitySnapshot(entity, this.snapshots.get(entity));
+      this.snapshots.set(entity, snapshot);
       currentEntityIds.add(entity.id);
       const prev = lastSent.get(entity.id);
       if (!prev) {
         // New entity — send full baseline
         entityBaselines.push(snapshot);
-      } else {
+      } else if (prev !== snapshot) {
         // Known entity — diff and send delta if changed
         const d = diffEntitySnapshots(prev, snapshot);
         if (d) entityDeltas.push(d);
