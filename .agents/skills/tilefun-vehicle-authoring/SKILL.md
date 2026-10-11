@@ -45,6 +45,16 @@ Read the light contract in `docs/tactical/116-ambulance-beacons-and-light-tags.m
 V2's refinement and real GLB probe preserve body/wheel UVs and verify material
 isolation, phase alternation and off reset. Asset tags do not wire a gameplay switch.
 
+Police and stowed fire truck have independent fitted configurations in
+`scripts/authored-assets/emergency-families.json`; use the police/fire section
+of the scripts README and `author_emergency_vehicle.py`. Do not inherit the
+compact geometry or assume their side cameras face the same screen direction.
+Police source colors repeat across opposite views; record the physical bar's
+south/west reversal. Fire rails/rungs must parent only to `Ladder_Hinge`; verify
+independent hinge motion on the actual GLB. A working hinge does not qualify
+the raised source pose or clearance. Per-vehicle light probes read that asset's
+`lights.json` instead of assuming ambulance's lens count.
+
 For a different body, use `scripts/authored-assets/README.md` and the generic
 `pipeline.py init → calibrate → project → evaluate` tools. Author or fit a new
 family template. Camera fitting needs correspondences spanning depth and height;

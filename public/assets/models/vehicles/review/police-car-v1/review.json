@@ -1,0 +1,55 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-police-car-v1",
+  "candidateFingerprint": "4cf1cfa00f20edbaab5986e095bd1b8ca2c2eec6ac0444cc55f43f289e3cecd2",
+  "identity": {
+    "assetId": "police-car",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "a43fa9bafce9f368e244a7d04f9a93e704cffe221ce380099e1b70978e572658",
+    "sourceAtlasSha256": "6aee03aba45514859f86584682d6ac5e307b24d810894193e6027d7ed1858570",
+    "lightPatternSha256": "0f4b64cd3345c6e2296f2ecde838f6a0557f81646b39964228503c4e44bfe35f",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/police-car-v1.glb",
+        "sha256": "c0aa2251ed8823eb44465209e62d57898d4628d0a40e8149fc948b4bfe43d85a"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/comparison.png",
+        "sha256": "640a4d9280df0a182cee798ebf58209dd000e6246dcabc036ca3adb1d8e5bec6"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/orbit.png",
+        "sha256": "ebb2da449f6b712b9835a5decfc04571d67c740ffad85a26c5c7ae73f2533083"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/silhouette.png",
+        "sha256": "03c869bfd5696aabd9d6f4f3b35ce6a7cf75351a716a273bd7b22b0435f35a1f"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/lights.gif",
+        "sha256": "b86600d7821901e42ad99fff3c78b5f31ce1c6d47705bc8414e5cee70bf80af8"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/lights-off.png",
+        "sha256": "dbf91347d5429e36518a42a317208d6841643360136f89dab8a7983f35035bed"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/lights-a.png",
+        "sha256": "9040f36d3ed38bfdb18d6dbb471f2e0899465f444a8560f07d392ebd391964c6"
+      },
+      {
+        "url": "assets/models/vehicles/review/police-car-v1/lights-b.png",
+        "sha256": "d93de559285a544aa0b586c492d2f8df036f6fe24bde8e24aa84f1e2735ade6c"
+      }
+    ]
+  },
+  "status": "Retained diagnostic awaiting owner inspection; not promoted",
+  "notes": [
+    "New sedan geometry; not a compact palette variant.",
+    "The source repeats the same screen ordering of red and blue in opposing views. A physical bar reverses screen order: north/east ownership is retained; south/west reversal is an explicit source contradiction.",
+    "Two tagged lenses with fixed bases; GLB-tested emissive pulses. Game control/audio and steering clearance remain pending.",
+    "Wheel footprint, hood/cab proportions and bar paint remain approximate; physical lamp ordering reverses in south/west."
+  ]
+}

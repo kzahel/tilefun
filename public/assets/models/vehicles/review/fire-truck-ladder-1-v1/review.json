@@ -1,0 +1,56 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-fire-truck-ladder-1-v1",
+  "candidateFingerprint": "c8e1bed653cc7bfe6e30708725c2bbb894d03398c550c50d139120bf201a9c68",
+  "identity": {
+    "assetId": "fire-truck-ladder-1",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "c4e3d1337207b1928f109a3cbbc29bbed87b21d584dac8d774f4528ddf8fab4f",
+    "sourceAtlasSha256": "d0261f21258a433c4ee05b9fc142dac1179247eddd97fab33fa9e499a68f8b6a",
+    "lightPatternSha256": "aabe99929da13c6fff2cd331748cb1e746f0c6bc2a2fdce531e988ef738bc640",
+    "lightEffectSourceSha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978",
+    "files": [
+      {
+        "url": "assets/models/vehicles/fire-truck-ladder-1-v1.glb",
+        "sha256": "3d955aa5edbb1ba0523c9157a040c3249cf8dd945c1837efb3075319f5390ff0"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/comparison.png",
+        "sha256": "74fd2b3cc47a75a2b9fdfdaf0110ed9672a06d3ac0870563c4ed8e44f89a238f"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/orbit.png",
+        "sha256": "3782b899ce8221644783f375cdd7bf87465ffd7f4a588556d2275691b1cc0f33"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/silhouette.png",
+        "sha256": "e1e3c68508b16b386b75cb5b90c57cce9ca10204e75e80f3d8cdf8cfc779f45e"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/lights.gif",
+        "sha256": "f9756c718b31793850e118293d71c41915a6f7783c8af9d7e07dc60ba9f72131"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/lights-off.png",
+        "sha256": "b2917f6720d674b6c932d4e6e4da57c01156d65ae499dd8ea81c7fbe6b50f02f"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/lights-a.png",
+        "sha256": "892bd61aa539c724a50cabada05003a706899085c176ffd2b5128395556cdd9c"
+      },
+      {
+        "url": "assets/models/vehicles/review/fire-truck-ladder-1-v1/lights-b.png",
+        "sha256": "b46d94562ef1d5d9e14d8057b60ea6adcb916d3d31cae349860666dcf985a4be"
+      }
+    ]
+  },
+  "status": "Retained diagnostic awaiting owner inspection; not promoted",
+  "notes": [
+    "Independent truck geometry with source-owned side lettering and compartments.",
+    "Separate ladder hinge and mesh components; raised pose requires its own fit and clearance review.",
+    "Cab and rear roof use north-owned paint. Unseen paint and ladder undersurface are inferred, not recovered source pixels.",
+    "Two tagged lenses with fixed bases; GLB-tested emissive pulses. Game control/audio and steering clearance remain pending.",
+    "North-owned cab roof paint places panels differently in the front view. Ladder length/height and wheel footprint remain approximate; raised pose and hinge clearance are unqualified."
+  ]
+}

@@ -1,8 +1,9 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 4 exact model bundles retained, 1 integrated
-in game/lab mesh mode. Blue is the main-game GPU default; ambulance v2 awaits owner inspection.
+Status: 45 sprite sets inventoried; 6 models retained, 1 integrated
+in game/lab mesh mode. Blue is the main-game GPU default; ambulance v2,
+police and stowed fire truck await owner inspection.
 Updated: 2026-10-11.
 
 Owns the running vehicle-by-vehicle queue, progress and next action for porting
@@ -20,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **4/45 retained models, 41/45 queued; 1/45 own-model
+Current progress: **6/45 retained models, 39/45 queued; 1/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -47,6 +48,11 @@ Ambulance v1's authoring, exact 4×2 and verification are recorded in
 [115](../tactical/115-authored-ambulance.md).
 Its beacon refinement and emergency-light contract are in
 [116](../tactical/116-ambulance-beacons-and-light-tags.md); v1 remains retained.
+Police and stowed fire truck are retained in
+[117](../tactical/117-police-and-fire-truck-models.md), with tagged light lenses,
+own wheel rigs and a separate fire ladder hinge. The bank's siren-capable types
+are ambulance, police and fire truck (two ladder sprite states). Green/orange
+garbage trucks carry amber warning beacons and remain queued.
 
 ## Work order
 
@@ -59,8 +65,10 @@ Its beacon refinement and emergency-light contract are in
 - [ ] Inspect and group the **large cars, seven sedans and police car** into real
   shape families. Fit a first template per family before transferring variants.
 - [ ] Fit a **bus** template, then its variants; preserve asymmetric door art.
-- [ ] Fit **garbage trucks**, then **fire trucks**, including separate equipment
-  components and raised-ladder clearance. Inspect sources before choosing reuse.
+- [x] Author **police car** and **stowed fire truck** with their own geometry,
+  source paint, wheel rigs and tagged lights; retain exact bundles and reviews.
+- [ ] Fit the **raised fire ladder** pose and qualify hinge/steering clearance.
+- [ ] Fit **garbage trucks**, including separate amber beacon lenses.
 - [ ] Complete cross-vehicle engine qualification and exact-revision art review
   before considering the full bank ported for production.
 
@@ -85,10 +93,10 @@ models have been started. The later family order can change with owner prioritie
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
 | `ambulance` | [Retained v2](../../art-source/vehicle-models/ambulance/v2/) — owner inspection pending; v1 retained | Pending | Review [beacons](../../public/assets/models/vehicles/review/ambulance-v2/comparison.png) and flashing; integrate its own GLB and switch state, qualify steering. |
-| `police-car` | Queued | Pending | Inspect body family; preserve livery, windows and separate light-bar geometry. |
-| `garbage-truck-green` | Queued | Pending | Fit cab/container geometry and wheel rig from the original views. |
-| `garbage-truck-orange` | Queued | Pending | Check geometry correspondence before reusing the green truck template. |
-| `fire-truck-ladder-1` (stowed) | Queued | Pending | Fit truck geometry with separate ladder/equipment components. |
+| `police-car` | [Retained v1](../../art-source/vehicle-models/police-car/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/police-car-v1/comparison.png), physical lamp-order contradiction and wheel fit; integrate its own GLB and light state. |
+| `garbage-truck-green` | Queued | Pending | Fit cab/container geometry and wheel rig; give the amber warning beacon its own lens. |
+| `garbage-truck-orange` | Queued | Pending | Check green-template eligibility; preserve its own paint and amber beacon lens. |
+| `fire-truck-ladder-1` (stowed) | [Retained v1](../../art-source/vehicle-models/fire-truck-ladder-1/v1/) — owner inspection pending | Pending | Review [4×2](../../public/assets/models/vehicles/review/fire-truck-ladder-1-v1/comparison.png), roof paint and wheel fit; qualify ladder/steering clearance. |
 | `fire-truck-ladder-2` (raised) | Queued | Pending | Fit raised equipment pose; qualify clearance before driving use. |
 
 ### Large car bank — 20 sets

@@ -187,6 +187,33 @@ try {
         rig.setTravel(0);
         rig.setSteering(0);
         checkFixed();
+        const equipment = [];
+        scene.traverse((obj) => {
+          if (obj.userData.tilefun_component === "ladder") equipment.push(obj);
+        });
+        for (const hinge of equipment) {
+          if (hinge.parent !== body || !hinge.children.length)
+            throw new Error("Ladder detached from its body hinge");
+          const stationary = [];
+          scene.traverse((obj) => {
+            if (obj.isMesh && !hinge.getObjectById(obj.id))
+              stationary.push([obj, [...obj.matrixWorld.elements]]);
+          });
+          const restRotation = hinge.quaternion.clone();
+          const child = hinge.children.find((obj) => obj.isMesh);
+          if (!child) throw new Error("Ladder hinge has no geometry");
+          const restChild = [...child.matrixWorld.elements];
+          const axis = new THREE.Vector3(...hinge.userData.hinge_axis_gltf).normalize();
+          hinge.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(axis, 0.2));
+          scene.updateMatrixWorld(true);
+          if (JSON.stringify(restChild) === JSON.stringify([...child.matrixWorld.elements]))
+            throw new Error("Ladder did not move with its hinge");
+          for (const [obj, matrix] of stationary)
+            if (JSON.stringify(matrix) !== JSON.stringify([...obj.matrixWorld.elements]))
+              throw new Error("Ladder rotation moved a fixed mesh or wheel");
+          hinge.quaternion.copy(restRotation);
+          checkFixed();
+        }
         let meshes = 0,
           triangles = 0;
         scene.traverse((obj) => {
@@ -221,6 +248,8 @@ try {
           forwardReverseRadius: "verified",
           independentWheel: "verified",
           frontSteeringOnly: "verified",
+          equipmentHinges: equipment.length,
+          equipmentMotion: equipment.length ? "independent; clearance unqualified" : "none",
         };
       },
       { assetUrl },

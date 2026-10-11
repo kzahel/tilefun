@@ -1,0 +1,29 @@
+{
+  "schema": "tilefun-vehicle-lights-v1",
+  "channel": "emergencyLights",
+  "periodSeconds": 1,
+  "pulseWindows": [
+    [
+      0,
+      0.12
+    ],
+    [
+      0.2,
+      0.32
+    ]
+  ],
+  "peakGain": 4,
+  "lenses": [
+    {
+      "node": "Police-blue-lens",
+      "group": "Police-blue",
+      "phase": 0
+    },
+    {
+      "node": "Police-red-lens",
+      "group": "Police-red",
+      "phase": 0.5
+    }
+  ],
+  "fixedHousings": "Untagged separate base meshes; no rotations required"
+}

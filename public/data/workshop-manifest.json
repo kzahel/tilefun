@@ -4,8 +4,8 @@
     {
       "id": "authored-vehicles",
       "name": "Authored vehicle models",
-      "description": "Inspect retained sprite/model comparisons and additional angles for the ambulance.",
-      "url": "assets/models/vehicles/review/ambulance-v2/",
+      "description": "Inspect retained sprite/model comparisons, additional angles and flashing lights for emergency vehicles.",
+      "url": "assets/models/vehicles/review/",
       "mode": "link"
     },
     {
@@ -6317,6 +6317,28 @@
       "url": "/tilefun/assets/models/vehicles/review/ambulance-v2/",
       "kind": "projection",
       "fingerprint": "14bcee43b596dc4228ed0b035d98fe678f6bad8773da01dcb8582f8b3b2561c3",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-police-car-v1",
+      "batchId": "authored-vehicles",
+      "name": "Police car · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/police-car-v1/",
+      "kind": "projection",
+      "fingerprint": "4cf1cfa00f20edbaab5986e095bd1b8ca2c2eec6ac0444cc55f43f289e3cecd2",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
+    },
+    {
+      "id": "projection:authored-fire-truck-ladder-1-v1",
+      "batchId": "authored-vehicles",
+      "name": "Fire truck · stowed ladder · authored model v1",
+      "prompt": "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
+      "url": "/tilefun/assets/models/vehicles/review/fire-truck-ladder-1-v1/",
+      "kind": "projection",
+      "fingerprint": "c8e1bed653cc7bfe6e30708725c2bbb894d03398c550c50d139120bf201a9c68",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "excluded": "Retained model inspection; engine qualification and production art approval remain pending."
     },
@@ -29982,5 +30004,5 @@
       }
     }
   ],
-  "inputDigest": "b0fe83b9fb49e31b3e67e6f53eb1e2d5bc53f8fa58aaffd93a64b7fef62319ec"
+  "inputDigest": "0867639e0f0a91c2cb5ff9a4da0872d3f1af7d4161d4157761dbabd56a97d33e"
 }

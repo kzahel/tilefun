@@ -23,3 +23,7 @@ scripts/authored-assets/refine_ambulance_lights_blender.py text eol=lf
 scripts/authored-assets/ambulance-lights.json -text
 # The frozen light preview records the shared effect's source-byte hash.
 src/rendering/VehicleEmergencyLights.ts text eol=lf
+# New emergency-family constructor receipts also preserve portable source hashes.
+scripts/authored-assets/author_emergency_vehicle.py text eol=lf
+scripts/authored-assets/build_emergency_vehicle.py text eol=lf
+scripts/authored-assets/emergency-families.json -text

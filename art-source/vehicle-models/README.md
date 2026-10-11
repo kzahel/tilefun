@@ -13,6 +13,8 @@ all 45 source sets, their model/engine status and the next authoring work.
 | Red `compact-4` | [v1](compact-4/v1/) | [compact-4-v1.glb](../../public/assets/models/vehicles/compact-4-v1.glb) |
 | Ambulance | [v1](ambulance/v1/) | [ambulance-v1.glb](../../public/assets/models/vehicles/ambulance-v1.glb) |
 | Ambulance beacon refinement | [v2](ambulance/v2/) | [ambulance-v2.glb](../../public/assets/models/vehicles/ambulance-v2.glb) |
+| Police car | [v1](police-car/v1/) | [police-car-v1.glb](../../public/assets/models/vehicles/police-car-v1.glb) |
+| Fire truck, stowed ladder | [v1](fire-truck-ladder-1/v1/) | [fire-truck-ladder-1-v1.glb](../../public/assets/models/vehicles/fire-truck-ladder-1-v1.glb) |
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
@@ -29,6 +31,13 @@ ownership records. All have four separate steer/roll tire+hub assemblies.
 Ambulance v2 has 56 meshes/1,388 triangles, six tagged light lenses and six fixed
 bases. Its source `lights.json` and the [light contract](../../docs/tactical/116-ambulance-beacons-and-light-tags.md)
 preserve phases and behavior; the game switch/asset integration remain pending.
+Police v1 and fire-truck v1 each have two tagged lenses with fixed bases and
+their own `lights.json`. Police uses a new sedan mesh; fire uses separate cab,
+pump and compartment geometry plus a `Ladder_Hinge` with child rails/rungs.
+Hinge motion is independently verified; raised-pose/clearance qualification is
+pending. Both retain their own raw UV projection and source-ownership decisions.
+The [review collection](../../public/assets/models/vehicles/review/index.html)
+links their exact 4×2 sheets, novel angles, contours and real GLB flashing previews.
 Units are world pixels, Blender up is +Z and forward is -X, with
 tire contacts on Z=0. GLBs use Blender's +Y-up export conversion. The GLB embeds
 the cleaned atlas; Blender scenes pack their textures, including retained unused

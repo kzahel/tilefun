@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [117 Police and fire truck models](117-police-and-fire-truck-models.md) | Retained police/stowed fire GLBs and exact 4×2/flash reviews; separate wheel rigs and ladder hinge; integration/clearance pending |
 | [116 Ambulance beacons and light tags](116-ambulance-beacons-and-light-tags.md) | Retained v2 with tapered beacons, thin bars, six tagged lenses and actual GLB pulse proof; game control/integration pending |
 | [115 Authored ambulance](115-authored-ambulance.md) | Retained v1 for owner inspection: ambulance-specific Blender/UV geometry, rigid wheels and exact sprite/render 4×2; engine integration pending |
 | [114 Remaining authority work](114-authority-work-profile.md) | Complete desktop profile: dense collision candidate scaling, effective ground reuse and recurring record/snapshot work; narrow footprint queries recommended |

@@ -1,0 +1,10 @@
+{
+  "sourceBank": "src/traffic/vehicles-v1.json",
+  "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+  "constructionScripts": {
+    "author_emergency_vehicle.py": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab",
+    "build_emergency_vehicle.py": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62"
+  },
+  "configurationSha256": "208c6db2a6d7991675284297ed36ff9da8b6e54de483f5dad8f02aa6956f672a",
+  "status": "Unreviewed authored model; steering/equipment clearance and game integration pending"
+}

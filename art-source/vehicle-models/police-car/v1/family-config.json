@@ -1,0 +1,81 @@
+{
+  "family": "police-sedan",
+  "atlasCell": 128,
+  "sideOwners": {
+    "east": -1,
+    "west": 1
+  },
+  "body": {
+    "front": -38,
+    "rear": 38,
+    "halfWidth": 13,
+    "base": 5
+  },
+  "cab": {
+    "front": -11,
+    "rear": 12,
+    "roof": 31,
+    "halfWidth": 9.5,
+    "screenFront": -22,
+    "screenRear": 24,
+    "belt": 15
+  },
+  "wheels": {
+    "frontAxle": -24,
+    "rearAxle": 24,
+    "radius": 4.4,
+    "halfWidthCenter": 13.2,
+    "tireWidth": 2.2,
+    "hubRadius": 2.1
+  },
+  "cameras": {
+    "east": {
+      "azimuth": -90,
+      "elevation": 55,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        40,
+        52
+      ],
+      "status": "Police source wheel contacts, roof and hood landmark hypothesis"
+    },
+    "west": {
+      "azimuth": 90,
+      "elevation": 55,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        40,
+        52.5
+      ],
+      "status": "Independent police west source ownership; tighter approved crop"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 60,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        40,
+        44
+      ],
+      "status": "Police rear width, roof bar and bumper hypothesis"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 60,
+      "horizontalScale": 1,
+      "verticalStretch": 1,
+      "origin": [
+        40,
+        44
+      ],
+      "status": "Police front width, windshield and bumper hypothesis"
+    }
+  },
+  "notes": [
+    "New sedan geometry; not a compact palette variant.",
+    "The source repeats the same screen ordering of red and blue in opposing views. A physical bar reverses screen order: north/east ownership is retained; south/west reversal is an explicit source contradiction."
+  ]
+}

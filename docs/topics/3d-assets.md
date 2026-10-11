@@ -23,6 +23,9 @@ checkpoint; ambulance v1's authoring is recorded in
 [115](../tactical/115-authored-ambulance.md). V2 now awaits owner inspection;
 its light refinement and actual GLB flash proof are recorded in
 [116](../tactical/116-ambulance-beacons-and-light-tags.md).
+Police and stowed fire truck v1 now await inspection in
+[117](../tactical/117-police-and-fire-truck-models.md); the raised ladder remains
+queued. Six source sets now have retained models across seven exact revisions.
 
 ## Investigation evidence storage
 
@@ -67,6 +70,18 @@ six fixed bases remain untagged. The shared emergency-light helper pulses import
 emissive/unlit paint from an explicit enabled/time input, with material isolation
 and exact off reset verified on the GLB. Gameplay control and per-asset integration
 remain pending. V1 and its original capture identity remain intact.
+
+Police v1 and stowed fire truck v1 add two independently fitted families, retained
+with packed Blender/atlas/draft sources, self-contained GLBs and exact 4×2,
+contour, novel-angle and actual GLB flashing reviews. Each has two tagged light
+lenses and four steer/roll wheel assemblies. Fire's rails/rungs parent to a
+separate `Ladder_Hinge`; independent motion is verified, while raised-pose and
+clearance qualification remain queued. Police source art repeats red/blue ordering
+in opposing views, so the physical bar reverses in south/west. Cab roof paint,
+wheel footprints and body proportions remain review limitations. See
+[117](../tactical/117-police-and-fire-truck-models.md) and the
+[running queue](vehicle-model-porting.md). Game control/audio and per-model
+integration remain pending.
 
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those

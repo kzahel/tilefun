@@ -458,6 +458,296 @@
         "orbit-2.png": "6f424e8c5856d467e3a1f2ba55d2b7e9a52296e58337510045a3b131e1baa9b6",
         "orbit-3.png": "84dbd9f51ddb55336f9d8ab563177c58dd3bb63ff6d4e55f49cfc218c2466878"
       }
+    },
+    {
+      "assetId": "police-car",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/police-car-v1.glb",
+      "source": "art-source/vehicle-models/police-car/v1",
+      "capturedCandidateId": "projection:authored-police-car-v1",
+      "capturedCandidateSha256": "4cf1cfa00f20edbaab5986e095bd1b8ca2c2eec6ac0444cc55f43f289e3cecd2",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 37,
+        "triangles": 1248
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/police-car/v1/authoring-provenance.json",
+          "sha256": "bbab6d7d8fdb0144e96fda9a8a232829f9cd186712d1f3006ba885233e8a55d5"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/car-atlas.png",
+          "sha256": "6aee03aba45514859f86584682d6ac5e307b24d810894193e6027d7ed1858570"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/car.blend",
+          "sha256": "a43fa9bafce9f368e244a7d04f9a93e704cffe221ce380099e1b70978e572658"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/coverage.json",
+          "sha256": "f1a10d5160c3eb59dc9092adf8119fb5c479651353530a5afc177cc3d988df05"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/family-config.json",
+          "sha256": "28146b5ccc30b4e37104aee84e1f9c3046a3840c6d4d63f7f61ca84c169a53d5"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/geometry-audit.json",
+          "sha256": "806527c8db67f7ce91a92de9e2c7a71a5400fe4f54cef3b772b70f4134cdbc89"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/inspection.json",
+          "sha256": "fc907fd96831431a50f4187bc3e343e87779fc6b8a3e9162b7e76ac9d60f727b"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/light-validation.json",
+          "sha256": "b717c3390b2bd2af1bcc7f44d23e2f6fbb8feda68c5f03e3a66719a988ecd7dd"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/lights.json",
+          "sha256": "0f4b64cd3345c6e2296f2ecde838f6a0557f81646b39964228503c4e44bfe35f"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/mesh-spec.json",
+          "sha256": "99a2265301b1bec3791af93ada47e881daeb2d8646f246f181137af62db9257e"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/paint-ownership.json",
+          "sha256": "87dd1a88aa06b45e46abf58808fca62caf2d692b7f4c067d1eabe0ce89ae8b9a"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/projection-coverage.png",
+          "sha256": "ab94cfa6083eb7bfd7c7e75c100df61de7f623c9a457d646a3f6f646b717882b"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/projection-draft.png",
+          "sha256": "f4891d9826b47c4a467d5e8c60a252e1c2c78f701279c246b68dd401f1cfcfdb"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/projection-with-authored-fill.png",
+          "sha256": "4afa4a4ba1b9509e135c8c72f7aa5eeb2c2299636881aac4cfe904681acf3bc3"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/recipe.json",
+          "sha256": "72ab496a76ca78dcb03969b51c290cb8022a4685c1ad4885cca6769f2e82c0c5"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/refs/east.png",
+          "sha256": "f46750123b5429cd4c111d7c29eb355880c46607a172ad08ae1be4839fc442e5"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/refs/north.png",
+          "sha256": "49355af487e2971edeeef99e3937055b64a89469cd0a7b6bbda1d8a2de05d62f"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/refs/south.png",
+          "sha256": "3d8f4b523edef17e780e88c967047da627d7a122d851c0e7fc855f47759e0194"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/refs/west.png",
+          "sha256": "6c40c59a2420e6e7ced86cdc8c394c3cfb1ae9caa13645ac1e8681e6c4b7e1dc"
+        },
+        {
+          "path": "art-source/vehicle-models/police-car/v1/rig.json",
+          "sha256": "5846f1cee9556c9fd114cad1fb0764b5f4a9e2bb8ee5da53f1bd074869b455ff"
+        },
+        {
+          "path": "public/assets/models/vehicles/police-car-v1.glb",
+          "sha256": "c0aa2251ed8823eb44465209e62d57898d4628d0a40e8149fc948b4bfe43d85a"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/comparison.png",
+          "sha256": "640a4d9280df0a182cee798ebf58209dd000e6246dcabc036ca3adb1d8e5bec6"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/index.html",
+          "sha256": "edcc5e2ceace1ddbf570c95441a890d2208e699cde798e5f967e729d59a59fd2"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/lights-a.png",
+          "sha256": "9040f36d3ed38bfdb18d6dbb471f2e0899465f444a8560f07d392ebd391964c6"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/lights-b.png",
+          "sha256": "d93de559285a544aa0b586c492d2f8df036f6fe24bde8e24aa84f1e2735ade6c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/lights-off.png",
+          "sha256": "dbf91347d5429e36518a42a317208d6841643360136f89dab8a7983f35035bed"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/lights.gif",
+          "sha256": "b86600d7821901e42ad99fff3c78b5f31ce1c6d47705bc8414e5cee70bf80af8"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/orbit.png",
+          "sha256": "ebb2da449f6b712b9835a5decfc04571d67c740ffad85a26c5c7ae73f2533083"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/review.json",
+          "sha256": "16439a3e76eb7751d1214b2718495f0eb1d05ab3a28173099a9cf7573ca6f434"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/police-car-v1/silhouette.png",
+          "sha256": "03c869bfd5696aabd9d6f4f3b35ce6a7cf75351a716a273bd7b22b0435f35a1f"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "13c7ad7b1424c548114da668ca38956cc12821b1d83a16dcf1de175c8e99ce2e",
+        "west-render.png": "583fe3c292b7823256a165fce6d5a1320cce62e7a6100363ff7cfe9922624d78",
+        "north-render.png": "fcf60315ef76a6cec3c66744b953ea219ba70b2b02c19bf04d412eef7faf7125",
+        "south-render.png": "0f9fe4cea7c1c64af9f1af8a1d800552e9e6c85f95c60014c3250af1a64f12f5",
+        "orbit-0.png": "ae266f343ebcb10784261cceac1dadbb54b7b4e379866ef947703360882702c4",
+        "orbit-1.png": "f7db2164d4b484b725cd6a896b058f10ffc49fa5b905a5e6086d5f217a5d717f",
+        "orbit-2.png": "308df25809d6cf35d70707b73b8946bdfd789ff456c6a259c2f651d71e473d0b",
+        "orbit-3.png": "e89c884318194b77ab71b10cdb91bf205adce21c2b58f824fce2fad10bbfd27a"
+      }
+    },
+    {
+      "assetId": "fire-truck-ladder-1",
+      "revision": "v1",
+      "glb": "public/assets/models/vehicles/fire-truck-ladder-1-v1.glb",
+      "source": "art-source/vehicle-models/fire-truck-ladder-1/v1",
+      "capturedCandidateId": "projection:authored-fire-truck-ladder-1-v1",
+      "capturedCandidateSha256": "c8e1bed653cc7bfe6e30708725c2bbb894d03398c550c50d139120bf201a9c68",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "geometry": {
+        "meshObjects": 49,
+        "triangles": 1260
+      },
+      "files": [
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/authoring-provenance.json",
+          "sha256": "bbab6d7d8fdb0144e96fda9a8a232829f9cd186712d1f3006ba885233e8a55d5"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/car-atlas.png",
+          "sha256": "d0261f21258a433c4ee05b9fc142dac1179247eddd97fab33fa9e499a68f8b6a"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/car.blend",
+          "sha256": "c4e3d1337207b1928f109a3cbbc29bbed87b21d584dac8d774f4528ddf8fab4f"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/coverage.json",
+          "sha256": "e0001c0ab3099543420faee01808ccf3202947e47d5c7e071f92f0e749259364"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/family-config.json",
+          "sha256": "9fb74b74d54acfbc1b80382fd8a371277baca00ebabdfe2b0d20a204778ce647"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/geometry-audit.json",
+          "sha256": "767b8ce82ee58c451deff08432e047fa3068f41efdc78b78f97ec4bcf18175b9"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/inspection.json",
+          "sha256": "51faface601f0ac5050d5bd7b15492cae80a8bb41dff03226a947f353755ed6c"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/light-validation.json",
+          "sha256": "1ce2f4803fe368657f9f8064585a15ba08d712633f7cf4c07ebeb68c27a529c6"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/lights.json",
+          "sha256": "aabe99929da13c6fff2cd331748cb1e746f0c6bc2a2fdce531e988ef738bc640"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/mesh-spec.json",
+          "sha256": "5688ee46e913e126296df2c239dd0253fe56455d8d8638f6d2fe0007c89e8d81"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/paint-ownership.json",
+          "sha256": "3faecc75d08a756e2fbd3d4b03762dcb0a1e726117163721ef4922535404c538"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/projection-coverage.png",
+          "sha256": "68b5c6cd4205cbee227e721bc6e1a524f7b1a2c9e6ae099ddf7f6ad2cdcb02fe"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/projection-draft.png",
+          "sha256": "b19b191a99b9fea830196ad81d0ab533c11c04891e4963084b8f5db5a81f4afd"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/projection-with-authored-fill.png",
+          "sha256": "2a45697efcd101db72436bc5b0a21d7b2326da32243b8a9ccc1f3afaa4f3d554"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/recipe.json",
+          "sha256": "9b2112b6d4127b1a9b5caf7af4da6b5fdd85f7090263a2d24144403a2ad0e91c"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/refs/east.png",
+          "sha256": "1ded21e6642e8e38615dd7eafb34770cfd9c7e1f1606d310e4e439415849f19f"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/refs/north.png",
+          "sha256": "8dea9238628b5fb2e36c314b54582b8cac290895c977014afd71b9abbe660721"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/refs/south.png",
+          "sha256": "ebd5503fa2a522b28acb348b1f4b6adb1d7e02b9310b1d5874b0e4985b7bf922"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/refs/west.png",
+          "sha256": "197c79b900f1638aa6d03cfdee1500dd0722c3db06bce9258a6b6b7bf1871f9d"
+        },
+        {
+          "path": "art-source/vehicle-models/fire-truck-ladder-1/v1/rig.json",
+          "sha256": "58381d4449e06373bd3f01f344b9eab560e109886f86c68030a3f4845c7a42be"
+        },
+        {
+          "path": "public/assets/models/vehicles/fire-truck-ladder-1-v1.glb",
+          "sha256": "3d955aa5edbb1ba0523c9157a040c3249cf8dd945c1837efb3075319f5390ff0"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/comparison.png",
+          "sha256": "74fd2b3cc47a75a2b9fdfdaf0110ed9672a06d3ac0870563c4ed8e44f89a238f"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/index.html",
+          "sha256": "245725b7371bd847e68423ea8cc70f3a7e93a7060c1e366f55293cf3e21c9002"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/lights-a.png",
+          "sha256": "892bd61aa539c724a50cabada05003a706899085c176ffd2b5128395556cdd9c"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/lights-b.png",
+          "sha256": "b46d94562ef1d5d9e14d8057b60ea6adcb916d3d31cae349860666dcf985a4be"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/lights-off.png",
+          "sha256": "b2917f6720d674b6c932d4e6e4da57c01156d65ae499dd8ea81c7fbe6b50f02f"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/lights.gif",
+          "sha256": "f9756c718b31793850e118293d71c41915a6f7783c8af9d7e07dc60ba9f72131"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/orbit.png",
+          "sha256": "3782b899ce8221644783f375cdd7bf87465ffd7f4a588556d2275691b1cc0f33"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/review.json",
+          "sha256": "94ffa5c62f4cfbdaf938ebc0b9a5272636c7aba2834273131feed833f2f86111"
+        },
+        {
+          "path": "public/assets/models/vehicles/review/fire-truck-ladder-1-v1/silhouette.png",
+          "sha256": "e1e3c68508b16b386b75cb5b90c57cce9ca10204e75e80f3d8cdf8cfc779f45e"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "66f8b7121f6e1a72bd46a01775f733ab3ecf1d532d2f48fb8ef76ed11ab85f16",
+        "west-render.png": "bc2141dd17a9558c0a4751f47f7eb878fc4a14047a4e9ff4921bad8d39d4ffde",
+        "north-render.png": "2bf3e37d33589da9ada2f967777763de9b08deb4b518d6b486466b092bdd14bb",
+        "south-render.png": "86ff1362bdb1eb57bf49849025dd9dae953587d28d82795d947a4fa3cf178f7d",
+        "orbit-0.png": "476fabed4b9245a49b2b66bd52215bc31468abad5b720ee9e20cc2cdd4338c7f",
+        "orbit-1.png": "69523f90153f4fd8df8d234ad9c3957aee3b705e30800f83387e9912465d1dcd",
+        "orbit-2.png": "64b25137632c9e2f2d760a24db2b1b259f209684aac4e0d4321bdd94eeb23205",
+        "orbit-3.png": "3176acde3e150557977c1aa0c3d2f9b77fdcd33c8fe6f6e24b9d3f1a5b88e796"
+      }
     }
   ],
   "dependencies": [

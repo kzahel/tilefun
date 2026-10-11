@@ -78,6 +78,36 @@ phases, off/A/B pixels and fixed paint.
 This is asset capability and shared appearance code, not wired gameplay control.
 See [116](../../docs/tactical/116-ambulance-beacons-and-light-tags.md).
 
+## Police and fire families
+
+`emergency-families.json` records independently fitted sedan and truck dimensions,
+source cameras, wheel radii and paint decisions. The generic component builder
+consumes an explicit mesh spec; it does not infer family shape from a palette.
+
+```text
+python scripts/authored-assets/author_emergency_vehicle.py --vehicle police-car --out data/authored-assets/NEW_POLICE --blender BLENDER_EXECUTABLE
+python scripts/authored-assets/author_emergency_vehicle.py --vehicle fire-truck-ladder-1 --out data/authored-assets/NEW_FIRE --blender BLENDER_EXECUTABLE
+python scripts/authored-assets/pipeline.py project --recipe data/authored-assets/NEW_POLICE/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_POLICE_PROJECTION
+python scripts/authored-assets/pipeline.py evaluate --recipe art-source/vehicle-models/police-car/v1/recipe.json --blender BLENDER_EXECUTABLE --out data/authored-assets/NEW_POLICE_REPLAY
+node scripts/authored-assets/verify_vehicle_lights.mjs data/authored-assets/NEW_POLICE_FLASH /tilefun/assets/models/vehicles/police-car-v1.glb . art-source/vehicle-models/police-car/v1/lights.json
+```
+
+Use the analogous fire paths for its light check and retained-scene replay.
+Each vehicle has two lens nodes; the light verifier reads its contract rather
+than assuming ambulance's six. Keep bases/body paint untagged. `Ladder_Hinge`
+parents only fire rails/rungs and declares its glTF axis; `--bundles` verifies
+independent hinge motion without moving the body/wheels. It does not qualify
+equipment clearance or establish a match to the raised source pose.
+
+Both source bundles retain their own visibility-tested draft/coverage, cleaned
+atlas, packed scene, component spec and portable recipe. Camera/canvas offsets
+are independent of the compact/ambulance defaults. Police east faces the opposite
+screen direction from fire/ambulance, and its repeated source lamp colors conflict
+with fixed physical placement. Hidden roof fills remove duplicate lamp/ladder
+paint; those fills are explicit authoring decisions. Preserve earlier reviews,
+register the new retained inspection and follow the commit checklist above.
+See [117](../../docs/tactical/117-police-and-fire-truck-models.md).
+
 ## Engine readiness
 
 The exported self-contained GLB contains the mesh, UV texture, flat emissive/unlit paint

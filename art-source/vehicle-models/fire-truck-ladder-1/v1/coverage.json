@@ -1,0 +1,149 @@
+{
+  "counts": {
+    "0": 2342942,
+    "1": 13029,
+    "2": 2461,
+    "3": 864,
+    "4": 0
+  },
+  "legend": {
+    "0": "unused UV/gutter",
+    "1": "visible source sample",
+    "2": "unobserved",
+    "3": "overlapping UV surfaces",
+    "4": "source-view color disagreement"
+  },
+  "authoredFill": {
+    "image": "car-atlas.png",
+    "filledUVTexels": 2346267,
+    "meaning": "Existing authored atlas fills gutter/unseen/overlapping UV regions only. Coverage status remains unchanged; this is inferred paint, not source recovery."
+  },
+  "sourceViews": {
+    "Cab-east": [
+      "east"
+    ],
+    "Fender--49-east": [
+      "east"
+    ],
+    "Cab-west": [
+      "west"
+    ],
+    "Fender--49-west": [
+      "west"
+    ],
+    "Compartments-east": [
+      "east"
+    ],
+    "Fender-43-east": [
+      "east"
+    ],
+    "Compartments-west": [
+      "west"
+    ],
+    "Fender-43-west": [
+      "west"
+    ],
+    "Roof-shoulder-east": [
+      "east"
+    ],
+    "Roof-shoulder-west": [
+      "west"
+    ],
+    "Compartment-roof": [
+      "north"
+    ],
+    "Pump-platform-0": [
+      "north"
+    ],
+    "Pump-platform-1": [],
+    "Pump-platform-2": [
+      "west"
+    ],
+    "Pump-platform-3": [
+      "east"
+    ],
+    "Pump-platform-4": [
+      "south"
+    ],
+    "Pump-platform-5": [
+      "north"
+    ],
+    "Cab-roof": [
+      "north"
+    ],
+    "Windshield-glass": [
+      "south"
+    ],
+    "Windshield-frame": [],
+    "Front-fascia": [
+      "south"
+    ],
+    "Rear-equipment": [
+      "north"
+    ],
+    "Underfloor": [],
+    "Ladder-rail--1-0": [
+      "north"
+    ],
+    "Ladder-rail--1-1": [],
+    "Ladder-rail--1-2": [
+      "west"
+    ],
+    "Ladder-rail--1-3": [
+      "east"
+    ],
+    "Ladder-rail--1-4": [
+      "south"
+    ],
+    "Ladder-rail--1-5": [
+      "north"
+    ],
+    "Ladder-rail-1-0": [
+      "north"
+    ],
+    "Ladder-rail-1-1": [],
+    "Ladder-rail-1-2": [
+      "west"
+    ],
+    "Ladder-rail-1-3": [
+      "east"
+    ],
+    "Ladder-rail-1-4": [
+      "south"
+    ],
+    "Ladder-rail-1-5": [
+      "north"
+    ],
+    "Ladder-rungs": [],
+    "Ladder-mount": [],
+    "Fire-blue--1-base": [],
+    "Fire-blue--1-lens": [],
+    "Fire-blue-1-base": [],
+    "Fire-blue-1-lens": [],
+    "Tire_FL": [
+      "west"
+    ],
+    "Hub_FL": [
+      "west"
+    ],
+    "Tire_FR": [
+      "east"
+    ],
+    "Hub_FR": [
+      "east"
+    ],
+    "Tire_RL": [
+      "west"
+    ],
+    "Hub_RL": [
+      "west"
+    ],
+    "Tire_RR": [
+      "east"
+    ],
+    "Hub_RR": [
+      "east"
+    ]
+  },
+  "interpretation": "Counts measure UV texels, not surface area, accuracy or acceptance. Disagreements retain the most face-on visible original pixel and remain marked. Unknown and overlapping regions require authored cleanup. Gutters are not padded by this draft baker."
+}

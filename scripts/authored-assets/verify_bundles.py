@@ -76,8 +76,20 @@ def glb_content(path, atlas, expected=None, rig=None, lights=None):
         if any(node.get('extras', {}).get('tilefun_role') for node in model['nodes']
                if node.get('name', '').endswith('-base')):
             raise ValueError('A fixed light housing was tagged as a lens')
+    for equipment in (rig or {}).get('equipmentNodes', []):
+        index = nodes[equipment['name']]
+        node = model['nodes'][index]
+        parent = model['nodes'][nodes[equipment['parent']]]
+        if index not in parent.get('children', []) or not node.get('children'):
+            raise ValueError(f"Equipment hierarchy changed: {equipment['name']}")
+        if any(node.get('extras', {}).get(key) != value for key, value in equipment['extras'].items()):
+            raise ValueError(f"Equipment tags changed: {equipment['name']}")
+        x, y, z = equipment['location']
+        if any(abs(a-b) > 1e-5 for a,b in zip(node.get('translation', [0,0,0]), [x,z,-y])):
+            raise ValueError(f"Equipment hinge moved: {equipment['name']}")
     return {'meshes': len(model['meshes']), 'triangles': triangles, 'wheels': 4, 'embeddedAtlas': 'exact RGBA',
-            **({'taggedLenses':len(lights['lenses'])} if lights else {})}
+            **({'taggedLenses':len(lights['lenses'])} if lights else {}),
+            **({'equipmentNodes':len(rig['equipmentNodes'])} if rig and rig.get('equipmentNodes') else {})}
 
 
 def verify(root=ROOT):

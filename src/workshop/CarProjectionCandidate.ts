@@ -4,6 +4,12 @@ import ambulanceReview from "../../public/assets/models/vehicles/review/ambulanc
 import ambulanceLightsReview from "../../public/assets/models/vehicles/review/ambulance-v2/review.json" with {
   type: "json",
 };
+import fireReview from "../../public/assets/models/vehicles/review/fire-truck-ladder-1-v1/review.json" with {
+  type: "json",
+};
+import policeReview from "../../public/assets/models/vehicles/review/police-car-v1/review.json" with {
+  type: "json",
+};
 import { sha256 } from "../art/ArtSource.js";
 import { CAR_PROXY, carProxyPatches } from "../projection/CarProxy.js";
 import geometrySource from "../projection/CarProxy.ts?raw";
@@ -41,7 +47,13 @@ export async function buildCarProjectionCandidate(): Promise<WorkshopCandidate> 
 /** Exact retained comparison sheets stay discoverable without granting art approval. */
 export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidate[]> {
   const candidates: WorkshopCandidate[] = [];
-  for (const review of [ambulanceReview, ambulanceLightsReview]) {
+  const reviews = [
+    { review: ambulanceReview, name: "Ambulance" },
+    { review: ambulanceLightsReview, name: "Ambulance" },
+    { review: policeReview, name: "Police car" },
+    { review: fireReview, name: "Fire truck · stowed ladder" },
+  ];
+  for (const { review, name } of reviews) {
     for (const file of review.identity.files) {
       const response = await fetch(`/tilefun/${file.url}`);
       if (!response.ok) throw new Error(`Missing retained vehicle review asset: ${file.url}`);
@@ -54,10 +66,10 @@ export async function buildAuthoredVehicleCandidates(): Promise<WorkshopCandidat
     candidates.push({
       id: review.candidateId,
       batchId: "authored-vehicles",
-      name: `Ambulance · authored model ${review.identity.revision}`,
+      name: `${name} · authored model ${review.identity.revision}`,
       prompt:
         "Compare the original sprites above matched Blender renders, then inspect the roof, windows, wheels and rear fittings in the additional angles.",
-      url: `/tilefun/assets/models/vehicles/review/ambulance-${review.identity.revision}/`,
+      url: `/tilefun/assets/models/vehicles/review/${review.identity.assetId}-${review.identity.revision}/`,
       kind: "projection",
       fingerprint,
       sourceFingerprint: review.identity.sourceFingerprint,

@@ -1,21 +1,26 @@
 import { expect, test } from "@playwright/test";
 
-for (const revision of ["v1", "v2"])
-  test(`retained ambulance ${revision} review opens its own comparison from Workshop on desktop and phone`, async ({
+for (const { asset, revision, name } of [
+  { asset: "ambulance", revision: "v1", name: "Ambulance" },
+  { asset: "ambulance", revision: "v2", name: "Ambulance" },
+  { asset: "police-car", revision: "v1", name: "Police car" },
+  { asset: "fire-truck-ladder-1", revision: "v1", name: "Fire truck · stowed ladder" },
+])
+  test(`retained ${asset} ${revision} review opens its own comparison from Workshop on desktop and phone`, async ({
     page,
   }) => {
     await page.goto(
-      `/tilefun/workshop.html#/review/projection%3Aauthored-ambulance-${revision}?show=all`,
+      `/tilefun/workshop.html#/review/projection%3Aauthored-${asset}-${revision}?show=all`,
     );
     await expect(
-      page.getByRole("heading", { name: `Ambulance · authored model ${revision}` }),
+      page.getByRole("heading", { name: `${name} · authored model ${revision}` }),
     ).toBeVisible();
     await page.getByRole("link", { name: "Open comparison" }).click();
     await expect(page).toHaveURL(
-      new RegExp(`/assets/models/vehicles/review/ambulance-${revision}/$`),
+      new RegExp(`/assets/models/vehicles/review/${asset}-${revision}/$`),
     );
     await expect(
-      page.getByRole("heading", { name: `Ambulance ${revision}`, exact: true }),
+      page.getByRole("heading", { name: `${name} ${revision}`, exact: true }),
     ).toBeVisible();
     for (const width of [1440, 390]) {
       await page.setViewportSize({ width, height: 900 });
@@ -31,7 +36,7 @@ for (const revision of ["v1", "v2"])
       );
     }
     const response = await page.request.get(
-      `/tilefun/assets/models/vehicles/ambulance-${revision}.glb`,
+      `/tilefun/assets/models/vehicles/${asset}-${revision}.glb`,
     );
     expect(response.ok()).toBe(true);
     expect((await response.body()).subarray(0, 4).toString()).toBe("glTF");

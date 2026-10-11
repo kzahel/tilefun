@@ -11,7 +11,8 @@ from verify_bundles import glb_content, verify
 class RetainedBundleTests(unittest.TestCase):
     def test_all_final_assets_and_source_dependencies_are_self_contained(self):
         self.assertEqual([(r['assetId'], r['revision']) for r in verify()],
-                         [('compact-1','v7'),('compact-2','v7'),('compact-4','v1'),('ambulance','v1'),('ambulance','v2')])
+                         [('compact-1','v7'),('compact-2','v7'),('compact-4','v1'),('ambulance','v1'),('ambulance','v2'),
+                          ('police-car','v1'),('fire-truck-ladder-1','v1')])
 
     def test_exported_light_phase_must_match_its_retained_contract(self):
         source = ROOT / 'art-source/vehicle-models/ambulance/v2'
@@ -25,6 +26,14 @@ class RetainedBundleTests(unittest.TestCase):
         source = ROOT / 'art-source/vehicle-models/ambulance/v1'
         with self.assertRaisesRegex(ValueError, 'recorded audit'):
             glb_content(ROOT / 'public/assets/models/vehicles/ambulance-v1.glb', source / 'car-atlas.png')
+
+    def test_fire_ladder_must_remain_a_separate_hinge_with_its_declared_axis(self):
+        source = ROOT / 'art-source/vehicle-models/fire-truck-ladder-1/v1'
+        rig = read(source / 'rig.json')
+        rig['equipmentNodes'][0]['extras']['hinge_axis_gltf'] = [1, 0, 0]
+        with self.assertRaisesRegex(ValueError, 'Equipment tags changed'):
+            glb_content(ROOT / 'public/assets/models/vehicles/fire-truck-ladder-1-v1.glb',
+                        source / 'car-atlas.png', read(source / 'geometry-audit.json'), rig)
 
     def test_default_replay_inputs_produce_the_retained_red_atlas(self):
         with tempfile.TemporaryDirectory() as tmp:
