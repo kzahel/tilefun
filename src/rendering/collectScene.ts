@@ -99,7 +99,7 @@ export function collectScene(
   for (const e of entities) {
     if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
     const effectiveWy = e.position.wy - (e.wz ?? 0);
-    const meshAsset = meshAssetFor(e);
+    const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
     const meshRadius = e.type.startsWith("train-curve-proof-v1") ? 96 : meshAsset ? 64 : 0;
     const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     if (

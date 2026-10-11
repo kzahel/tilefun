@@ -1,6 +1,7 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { createPlayer } from "../entities/Player.js";
+import { createVehicle } from "../traffic/Vehicle.js";
 import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
@@ -10,6 +11,45 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 import type { TileRenderer } from "./TileRenderer.js";
 
 afterEach(() => vi.restoreAllMocks());
+
+it("collects override mesh bodies with complete original sprite fallbacks and unmodified actors", () => {
+  const car = createVehicle("compact-2", 128, 128);
+  const bus = createVehicle("bus-2", 160, 128);
+  bus.id = 2;
+  const player = createPlayer(128, 160);
+  player.id = 3;
+  const actors = [car, bus, player];
+  const original = structuredClone(actors);
+  const camera = new Camera();
+  camera.setViewport(768, 768);
+  camera.snapTo(128, 128);
+  const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
+  const frame = new SceneFrame({ allCars3d: true });
+  const items = collectScene(
+    actors,
+    [],
+    world,
+    camera,
+    camera.getVisibleChunkRange(),
+    1,
+    { collectElevationItems: () => [] },
+    [],
+    false,
+    undefined,
+    undefined,
+    frame,
+  );
+  const sprites = items.filter((item) => item.kind === "sprite");
+  expect(sprites.filter((item) => item.mesh).length).toBe(2);
+  for (const entity of [car, bus]) {
+    const item = sprites.find((sprite) => sprite.sheetKey === entity.sprite?.sheetKey);
+    expect(item?.mesh?.assetId).toBe("compact-1-authored-v7");
+    expect(item?.spriteWidth).toBe(entity.sprite?.spriteWidth);
+    expect(item?.spriteHeight).toBe(entity.sprite?.spriteHeight);
+  }
+  expect(sprites.find((item) => item.sheetKey === player.sprite?.sheetKey)?.mesh).toBeUndefined();
+  expect(actors).toEqual(original);
+});
 
 it("preserves sorted mixed scenes across borrowed frames and releases surface/particle references", () => {
   vi.spyOn(performance, "now").mockReturnValue(750);

@@ -10,8 +10,11 @@ interface Pose {
   travel: number;
   instance: MeshInstance & { wheelTravel: number };
 }
-export function meshAssetFor(entity: Pick<Entity, "type">): string | undefined {
-  return entity.type === "vehicle-v1:compact-1" ? COMPACT_CAR_MESH : undefined;
+export function meshAssetFor(entity: Pick<Entity, "type">, allCars3d = false): string | undefined {
+  return entity.type === "vehicle-v1:compact-1" ||
+    (allCars3d && entity.type.startsWith("vehicle-v1:"))
+    ? COMPACT_CAR_MESH
+    : undefined;
 }
 export function entityHeading(entity: Entity): number {
   const velocity = entity.velocity;
@@ -34,12 +37,16 @@ export function entityHeading(entity: Entity): number {
  */
 export class EntityMeshPose {
   private poses = new Map<number, Pose>();
+  constructor(readonly allCars3d = false) {}
+  assetFor(entity: Pick<Entity, "type">) {
+    return meshAssetFor(entity, this.allCars3d);
+  }
   retain(entities: readonly Entity[]) {
-    const ids = new Set(entities.filter((e) => meshAssetFor(e)).map((e) => e.id));
+    const ids = new Set(entities.filter((e) => this.assetFor(e)).map((e) => e.id));
     for (const id of this.poses.keys()) if (!ids.has(id)) this.poses.delete(id);
   }
   evaluate(entity: Entity, time: number, position = entity.position): MeshInstance | undefined {
-    const assetId = meshAssetFor(entity);
+    const assetId = this.assetFor(entity);
     if (!assetId) return undefined;
     const target = entityHeading(entity);
     let pose = this.poses.get(entity.id);
@@ -66,14 +73,23 @@ export class EntityMeshPose {
         dy = position.wy - pose.y;
       // Teleports, visibility gaps and clock fences establish a new sample,
       // rather than spinning wheels through an unseen displacement.
-      if (elapsed > 0 && elapsed <= 0.25 && Math.hypot(dx, dy) <= 32)
+      const distance = Math.hypot(dx, dy);
+      if (elapsed > 0 && elapsed <= 0.25 && distance <= 32) {
         pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
+        // Point along this body's displayed motion, with no separate turn lag.
+        // Repeated/resting samples retain the last heading, including diagonals.
+        if (distance > 0.001) pose.angle = Math.atan2(dy, dx);
+      } else if (
+        elapsed > 0 &&
+        entity.velocity &&
+        Math.hypot(entity.velocity.vx, entity.velocity.vy) > 0.01
+      ) {
+        // A new timeline/teleport sample uses velocity, never teleport displacement.
+        pose.angle = target;
+      }
       pose.x = position.wx;
       pose.y = position.wy;
       pose.instance.wheelTravel = pose.travel;
-      const dt = Math.max(0, Math.min(0.1, time - pose.time));
-      const difference = Math.atan2(Math.sin(target - pose.angle), Math.cos(target - pose.angle));
-      pose.angle += Math.max(-dt * Math.PI * 2, Math.min(dt * Math.PI * 2, difference));
       pose.time = time;
       pose.orientation[2] = Math.sin(pose.angle / 2);
       pose.orientation[3] = Math.cos(pose.angle / 2);

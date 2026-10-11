@@ -73,15 +73,22 @@ required. [108](../tactical/108-authored-blue-car-gameplay.md) connects the reta
 blue `compact-1` v7 GLB to the shared optional game/lab mesh path, with explicit
 axis normalization, authored ground-center/world-pixel registration, nearest unlit
 paint, inward native-pixel silhouette ink and cosmetic distance-driven wheel roll.
-[109](../tactical/109-blue-car-camera-registration.md) aligns the body lens with
-the retained side/front camera presets and blends through turns, correcting the
-initial tall/thin front/rear appearance. The world camera and mesh anchors stay
-on the ordinary game projection. Missing/loading/failed models retain the complete sprite. The game selector is
+[112](../tactical/112-coherent-car-presentation-and-test-override.md) supersedes
+109's directional body lens with the fixed world `x, y-z` projection. A static
+1.3× lateral registration widens the authored narrow front view before rotation;
+forward length, roof height and circular tire geometry stay unchanged. Heading
+follows displayed motion immediately and holds at rest. Missing/loading/failed
+models retain the complete sprite. The game selector is
 **Debug → Renderer → GPU + 3D car**, or `?renderer=gpu&meshes`.
 
-Only blue compact-1 uses this adapter; green/red and other vehicles retain their
-sprites. Simulation, prediction, input, cardinal colliders, roof support and
-persistence are unchanged. Wheel steering stays neutral; authored clearance is
+Normally only blue compact-1 uses this adapter. For testing, append `&allcars3d`
+to `?renderer=gpu&meshes` in the game or Traffic lab: all `vehicle-v1:` road
+vehicles, including buses/vans, use the blue appearance. Their original types,
+sprites, colliders and persistence remain unchanged; trains are excluded. Canvas
+and GPU sprites still draw their original sprites. The override is view-local and
+survives renderer switches, scene resets and refresh via the URL.
+Simulation, prediction, input, cardinal colliders, roof support and persistence
+are unchanged. Wheel steering stays neutral; authored clearance is
 still unqualified. This optional inspection mode does not promote the model art.
 Continuous physical yaw/rotated collision and actual desktop/phone GPU timing
 remain separate next work.

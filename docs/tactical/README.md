@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [112 Coherent car presentation and test override](112-coherent-car-presentation-and-test-override.md) | Fixed world projection, immediate motion heading/rest hold and opt-in all-road-vehicle blue appearance; physics unchanged |
 | [111 Snapshot reuse and deer scheduling](111-server-snapshot-and-deer-scheduling.md) | Desktop first-slice implementation: immutable snapshot/dirty reuse and staggered budgeted deer goals; [performance](../topics/performance.md) |
 | [110 Server headroom proposal](110-server-headroom-proposal.md) | Complete investigation: current desktop CPU/timeline and AI search census; proposed bookkeeping and separate cadences; phone unavailable |
 | [109 Blue car camera registration](109-blue-car-camera-registration.md) | Authored directional lens metrics correct tall/thin model proportions; world projection and physics unchanged |

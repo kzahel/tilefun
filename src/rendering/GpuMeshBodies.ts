@@ -49,7 +49,7 @@ export class GpuMeshBodies {
     object.quaternion.set(...item.mesh.orientation);
     this.car.value.setTravel(item.mesh.wheelTravel ?? 0);
     this.scene.add(object);
-    setCarMeshProjection(this.camera.projectionMatrix, radius, item.mesh.orientation);
+    setCarMeshProjection(this.camera.projectionMatrix, radius);
     this.camera.projectionMatrixInverse.copy(this.camera.projectionMatrix).invert();
     renderer.getClearColor(this.clearColor);
     const alpha = renderer.getClearAlpha();

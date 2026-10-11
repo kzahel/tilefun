@@ -157,7 +157,9 @@ export class GameClient {
   private get renderer(): RenderBackend {
     return this.renderHost.renderer;
   }
-  private readonly sceneFrame = new SceneFrame();
+  private readonly sceneFrame = new SceneFrame({
+    allCars3d: new URLSearchParams(location.search).has("allcars3d"),
+  });
   private actions: ActionManager;
   private touchJoystick: TouchJoystick;
   private touchButtons: TouchButtons;

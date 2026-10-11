@@ -68,7 +68,7 @@ async function tapMode(page: Page, mode = "Tap to move") {
   await page.getByRole("button", { name: mode, exact: true }).tap();
   await page.getByRole("button", { name: "Back to game", exact: true }).tap();
 }
-for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
+for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
   test(`car boarding, tap destination, saved inside seat and exit (${backend})`, async ({
     page,
   }) => {
@@ -76,7 +76,10 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await start(page, backend, true);
-    if (backend.includes("meshes")) {
+    const override = backend.includes("allcars3d");
+    const exactBlue = backend.includes("meshes") && !override;
+    const desiredModel = exactBlue ? "blue" : override ? "other" : "any";
+    if (exactBlue) {
       // The seeded blue compact starts on the west street, outside the
       // initial replica window. Let native traffic populate, then approach it.
       await expect
@@ -101,19 +104,25 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     await expect
       .poll(
         () =>
-          page.evaluate((mesh) => {
+          page.evaluate((mode) => {
             const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-            return g.stateView.entities.some((e) =>
-              mesh ? e.type === "vehicle-v1:compact-1" : e.type.startsWith("vehicle-v1:"),
+            return g.stateView.entities.some(
+              (e) =>
+                e.type.startsWith("vehicle-v1:") &&
+                (mode !== "blue" || e.type === "vehicle-v1:compact-1") &&
+                (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
             );
-          }, backend.includes("meshes")),
+          }, desiredModel),
         { timeout: 15000 },
       )
       .toBe(true);
-    await page.evaluate(async (mesh) => {
+    await page.evaluate(async (mode) => {
       const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-      const car = g.stateView.entities.find((e) =>
-        mesh ? e.type === "vehicle-v1:compact-1" : e.type.startsWith("vehicle-v1:"),
+      const car = g.stateView.entities.find(
+        (e) =>
+          e.type.startsWith("vehicle-v1:") &&
+          (mode !== "blue" || e.type === "vehicle-v1:compact-1") &&
+          (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
       );
       if (!car?.collider) throw Error("No car");
       const dir = car.sprite?.direction ?? 3;
@@ -130,7 +139,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
         requestId: g.nextRequestId++,
         command: `tp ${x} ${y}`,
       });
-    }, backend.includes("meshes"));
+    }, desiredModel);
     await expect(page.getByRole("button", { name: "Drive car · E", exact: true })).toBeVisible({
       timeout: 15000,
     });
@@ -139,7 +148,8 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toMatch(/^vehicle-v1:/);
     if (backend.includes("meshes")) {
-      expect((await read(page)).type).toBe("vehicle-v1:compact-1");
+      if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
+      else expect((await read(page)).type).toBe("vehicle-v1:compact-1");
       await expect
         .poll(() =>
           page.locator("#game").evaluate((c) => {
@@ -209,6 +219,70 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     await expect.poll(async () => (await read(page)).target, { timeout: 10000 }).toBeNull();
     await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
     if (backend.includes("meshes")) expect(await wheelPose()).not.toEqual(wheelBefore);
+    if (backend.includes("meshes")) {
+      // Sample the same displayed pose cache used by the collector. The shared
+      // GPU asset draws several cars, so its last quaternion need not be ours.
+      await page.keyboard.down("ArrowDown");
+      await page.keyboard.down("ArrowRight");
+      const alignment = await page.evaluate(async () => {
+        const g = (
+          document.querySelector("#game") as unknown as {
+            __game: Game & {
+              sceneFrame: {
+                meshPoses: { poses: Map<number, { x: number; y: number; orientation: number[] }> };
+              };
+            };
+          }
+        ).__game;
+        const id = g.remoteView.serverPlayerEntity.parentId;
+        if (id === undefined) throw Error("Missing driver parent");
+        const samples: { x: number; y: number; angle: number }[] = [];
+        for (let i = 0; i < 30; i++) {
+          await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+          const pose = g.sceneFrame.meshPoses.poses.get(id);
+          if (!pose) throw Error("Missing displayed car pose");
+          samples.push({
+            x: pose.x,
+            y: pose.y,
+            angle: 2 * Math.atan2(pose.orientation[2] ?? 0, pose.orientation[3] ?? 1),
+          });
+        }
+        return samples.slice(1).flatMap((sample, i) => {
+          const previous = samples[i];
+          if (!previous) return [];
+          const dx = sample.x - previous.x,
+            dy = sample.y - previous.y;
+          if (Math.hypot(dx, dy) < 0.001) return [];
+          const error = Math.atan2(
+            Math.sin(sample.angle - Math.atan2(dy, dx)),
+            Math.cos(sample.angle - Math.atan2(dy, dx)),
+          );
+          return [error];
+        });
+      });
+      await page.keyboard.up("ArrowDown");
+      await page.keyboard.up("ArrowRight");
+      expect(alignment.length).toBeGreaterThan(5);
+      expect(Math.max(...alignment.map(Math.abs))).toBeLessThan(0.001);
+      await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
+      const stoppedHeading = () =>
+        page.evaluate(() => {
+          const g = (
+            document.querySelector("#game") as unknown as {
+              __game: Game & {
+                sceneFrame: { meshPoses: { poses: Map<number, { orientation: number[] }> } };
+              };
+            }
+          ).__game;
+          return g.sceneFrame.meshPoses.poses
+            .get(g.remoteView.serverPlayerEntity.parentId ?? -1)
+            ?.orientation.slice();
+        });
+      const stopped = await stoppedHeading();
+      await page.waitForTimeout(350);
+      expect(await stoppedHeading()).toEqual(stopped);
+      if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
+    }
     await page.screenshot({ path: `/tmp/tilefun-driving-car-${backend}.png` });
     await page.evaluate(async () => {
       const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
@@ -220,6 +294,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     await page.goto(`/tilefun/?nogamepad&renderer=${backend}`);
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
+    expect((await read(page)).type).toBe(before.type);
     if ((await read(page)).editing) await page.keyboard.press("Tab");
     await page.getByRole("button", { name: "Get out · E", exact: true }).tap();
     await expect.poll(async () => (await read(page)).parent).toBeNull();

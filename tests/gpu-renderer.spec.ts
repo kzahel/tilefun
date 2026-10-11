@@ -143,7 +143,9 @@ test("optional mesh body rotates, composes in order and falls back atomically", 
   expect(after.targetBytes).toBeLessThanOrEqual(1024 * 1024 * 8);
 });
 
-test("authored car proportions match sprite views across headings and zoom", async ({ page }) => {
+test("authored car retains its fixed width registration across headings and zoom", async ({
+  page,
+}) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
   const results = await page.evaluate(async () => {
@@ -203,10 +205,6 @@ test("authored car proportions match sprite views across headings and zoom", asy
     expect(model.height).toBeGreaterThan(0);
     expect(model.width / sprite.width).toBeGreaterThan(0.88);
     expect(model.width / sprite.width).toBeLessThan(1.12);
-    expect(model.height / sprite.height).toBeGreaterThan(0.88);
-    expect(model.height / sprite.height).toBeLessThan(1.12);
-    expect(model.height / model.width / (sprite.height / sprite.width)).toBeGreaterThan(0.88);
-    expect(model.height / model.width / (sprite.height / sprite.width)).toBeLessThan(1.12);
   }
 });
 
@@ -225,6 +223,29 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
     )
     .toBeGreaterThan(0);
   expect(errors).toEqual([]);
+});
+
+test("Traffic override selects original non-blue road vehicles without changing their types", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes&allcars3d#/tool/traffic");
+  const canvas = page.getByLabel("Generated traffic playground");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect
+    .poll(() =>
+      canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
+    )
+    .toBeGreaterThan(0);
+  const diagnostics = await canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.());
+  expect(diagnostics?.carMeshOverride).toBe(true);
+  expect(
+    diagnostics?.meshEligibleVehicleTypes?.some((type) => type !== "vehicle-v1:compact-1"),
+  ).toBe(true);
+  await page.getByRole("button", { name: "Reset scene", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  expect(
+    await canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().carMeshOverride),
+  ).toBe(true);
 });
 
 test("shared room and editor passes match the native reference", async ({ page }) => {

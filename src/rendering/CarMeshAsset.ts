@@ -4,7 +4,8 @@ import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
 
 /** One retained blue car, shared by game and labs. The outer group owns the
  * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
- * Ground origin and world-pixel scale are already authored into the asset.
+ * Ground origin is authored. A fixed lateral registration fits its width to
+ * the game view without changing tire radius, roof height or camera projection.
  */
 export class CarMeshAsset {
   readonly object = new THREE.Group();
@@ -69,7 +70,10 @@ export class CarMeshAsset {
       const normalized = new THREE.Group();
       normalized.rotation.set(Math.PI / 2, 0, Math.PI, "ZYX");
       normalized.add(scene);
-      this.object.add(normalized);
+      const registered = new THREE.Group();
+      registered.scale.y = 1.3;
+      registered.add(normalized);
+      this.object.add(registered);
     } catch (error) {
       this.dispose();
       throw error;

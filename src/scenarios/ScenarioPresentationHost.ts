@@ -65,7 +65,9 @@ export class ScenarioPresentationHost {
   readonly session: ScenarioClient;
   readonly camera = new Camera();
   readonly ready: Promise<void>;
-  private readonly frame = new SceneFrame();
+  private readonly frame = new SceneFrame({
+    allCars3d: new URLSearchParams(location.search).has("allcars3d"),
+  });
   private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private host: RenderHost | undefined;
@@ -390,6 +392,14 @@ export class ScenarioPresentationHost {
       cameraX: this.renderX,
       cameraY: this.renderY,
       pixelSnap: this.camera.pixelSnap,
+      carMeshOverride: this.frame.meshPoses.allCars3d,
+      meshEligibleVehicleTypes: [
+        ...new Set(
+          this.session.view.entities
+            .filter((entity) => this.frame.meshPoses.assetFor(entity))
+            .map((entity) => entity.type),
+        ),
+      ],
       // Optional backend diagnostics stay outside presentation policy.
       meshDraws: (terrain as typeof terrain & { gpu?: { meshDraws: number } })?.gpu?.meshDraws ?? 0,
     };

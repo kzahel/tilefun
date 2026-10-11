@@ -13,12 +13,16 @@ import type { SceneItem } from "./SceneItem.js";
 export class SceneFrame {
   interior: InteriorPresentation | null = null;
   interiorKey = "";
-  readonly meshPoses = new EntityMeshPose();
+  readonly meshPoses: EntityMeshPose;
   readonly overlays = new OverlayFrame();
   readonly drawOrder: number[] = [];
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
+
+  constructor(options?: { allCars3d?: boolean }) {
+    this.meshPoses = new EntityMeshPose(options?.allCars3d);
+  }
 
   begin(hasGrass: boolean): SceneItem[] {
     this.release();

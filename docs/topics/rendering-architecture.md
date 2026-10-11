@@ -300,9 +300,10 @@ acquire different gameplay or presentation rules.
    tilted orthographic camera is not automatically equivalent to this projection.
    Sprites, mesh anchors, shadows, clips and editor overlays must agree at known
    world points. Mesh-local vertices rotate before projection. Compact-1 uses
-   smoothly blended authored side/front camera metrics for its body only; this
-   compensates for the sprite bank's different directional lenses without moving
-   the world camera, anchors, terrain or input picking. Ground picking uses the matching inverse;
+   the same fixed `x, y-z` projection for all headings, with static lateral asset
+   registration before rotation. Direction-dependent lenses distort the screen
+   heading and are prohibited in the shared gameplay path. Ground picking uses the
+   matching inverse;
    elevated picking requires an explicit height/surface policy, since a screen
    point has no unique 3D inverse. UI coordinates stay in the host's UI contract.
 
@@ -388,13 +389,22 @@ the retained blue compact-1 v7 GLB. `CarMeshAsset` converts +Y-up/-X-forward to
 sprite/camera offset. `CarMeshDefinition` also retains the earlier reference
 projection registration for historical reference checks.
 
-[109](../tactical/109-blue-car-camera-registration.md) corrects the initial model
-projection: a generic `y-z` lens made front/rear views tall and thin.
-`CarMeshProjection` uses the retained 42-degree side and 70-degree front/rear
-camera metrics, including horizontal scale and vertical stretch. Squared ground
-heading blends those metrics continuously through turns, with no cardinal snap
-or camera orbit. World anchors, height offsets, viewport, zoom and picking still
-use `projectWorld`; the GLB, physics and collision bytes are unchanged.
+[112](../tactical/112-coherent-car-presentation-and-test-override.md) supersedes
+109's heading-dependent authored lens. It made a 45° movement appear to face
+38.2°, while extra cosmetic turn smoothing and cardinal rest fallback added drift.
+`CarMeshProjection` now matches fixed `projectWorld` at every heading, zoom and
+height. `CarMeshAsset` adds a static 1.3× lateral registration before entity
+rotation; forward length, 24-pixel roof height, wheel radius and Z=0 stay intact.
+The sprite bank's directional cameras cannot all match one coherent projection;
+width registration remains checked without distorting heading to match heights.
+Cosmetic yaw follows valid displayed displacement immediately and holds at rest;
+new moving poses use velocity and teleports/visibility gaps fence travel. This
+is presentation only, with no change to input, simulation or collision.
+
+The opt-in `?renderer=gpu&meshes&allcars3d` flag selects the blue body for every
+`vehicle-v1:` road vehicle in the shared game/lab collector. Original actor types,
+colliders and sprite fallbacks remain intact. A bus may retain a larger collision
+body than its compact test appearance. Trains and other actors are excluded.
 
 `GpuMeshBodies` draws that body into one reusable depth target at one texel per
 world pixel, applies inward silhouette ink in a second color target and composites

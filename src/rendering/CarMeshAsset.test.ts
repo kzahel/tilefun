@@ -20,7 +20,7 @@ function fixture() {
   return { scene, map, material };
 }
 
-it("normalizes GLB basis vectors once, preserving world-pixel scale and ground origin", () => {
+it("registers GLB axes and fixed lateral width while preserving tire/roof height and ground origin", () => {
   const { scene } = fixture();
   const asset = new CarMeshAsset(scene);
   asset.object.updateMatrixWorld(true);
@@ -34,7 +34,7 @@ it("normalizes GLB basis vectors once, preserving world-pixel scale and ground o
   // GLB front, vertical and lateral axes become game +X, +Z and ground Y.
   close(world([-31, 0, 0]), [31, 0, 0]);
   close(world([0, 24, 0]), [0, 0, 24]);
-  close(world([0, 0, -10]), [0, -10, 0]);
+  close(world([0, 0, -10]), [0, -13, 0]);
   close(world([0, 0, 0]), [0, 0, 0]);
   asset.object.rotation.z = Math.PI / 2;
   asset.object.updateMatrixWorld(true);

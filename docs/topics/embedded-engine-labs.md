@@ -523,11 +523,14 @@ browser run (one skipped); streaming readiness and phone timing are recorded in 
 
 [108](../tactical/108-authored-blue-car-gameplay.md) connects compact-1 v7 through
 shared `CarMeshAsset`, `EntityMeshPose` and `GpuMeshBodies` in the game, Traffic
-playground and renderer comparison. [109](../tactical/109-blue-car-camera-registration.md)
-corrects body proportions with shared authored side/front camera registration;
-the world camera and game controls are unchanged. All three use the same axis normalization,
-wheel roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
-Traffic's Worker, input, collision and roof support remain native. This changes
-optional presentation only; the independent car-projection reference lab remains
+playground and renderer comparison. [112](../tactical/112-coherent-car-presentation-and-test-override.md)
+supersedes 109's authored directional lens: body vertices now share the fixed
+world projection, with static lateral asset registration, immediate displayed
+motion heading and rest hold. All three use the same axis normalization, wheel
+roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
+`?renderer=gpu&meshes&allcars3d` also swaps every road vehicle's appearance in the
+game and Traffic lab; original types/colliders stay unchanged. Traffic reset
+retains the view option. Traffic's Worker, input, collision and roof support remain
+native. This changes optional presentation only; the independent car-projection reference lab remains
 on its original source geometry. Steering clearance and rotated physics are later
 work.

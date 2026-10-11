@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
 import { Direction } from "../entities/Entity.js";
 import { createVehicle } from "../traffic/Vehicle.js";
-import { EntityMeshPose } from "./EntityMeshPose.js";
+import { EntityMeshPose, meshAssetFor } from "./EntityMeshPose.js";
 import { poseOrientation } from "./MeshPresentation.js";
 
-it("smooths shortest heading, reuses storage and never changes physical state", () => {
+it("retains heading without displayed motion, reuses storage and never changes physical state", () => {
   const car = createVehicle("compact-1", 10, 20, Direction.Left),
     poses = new EntityMeshPose();
   car.velocity = { vx: -10, vy: 0.1 };
@@ -70,4 +70,54 @@ it("rolls from displayed signed distance, holds at rest and fences teleports and
   expect(pose?.wheelTravel).toBe(3);
   poses.evaluate(car, 2.1, { wx: 1012, wy: 0 });
   expect(pose?.wheelTravel).toBe(5);
+});
+
+it("follows interpolated movement immediately and holds diagonal heading when stopped", () => {
+  const car = createVehicle("compact-1", 0, 0, Direction.Down);
+  car.velocity = { vx: 0, vy: 10 };
+  const poses = new EntityMeshPose();
+  const pose = poses.evaluate(car, 1);
+  if (!pose) throw Error("Missing car pose");
+  const angle = () => 2 * Math.atan2(pose.orientation[2], pose.orientation[3]);
+  // Rendered diagonal differs from the latest replicated velocity. Follow the
+  // visible body positions, so snapshot/interpolation timing cannot add yaw lag.
+  poses.evaluate(car, 1.016, { wx: 1, wy: 1 });
+  expect(angle()).toBeCloseTo(Math.PI / 4);
+  car.velocity = { vx: 0, vy: 0 };
+  if (!car.sprite) throw Error("Missing sprite");
+  car.sprite.direction = Direction.Down;
+  poses.evaluate(car, 1.032, { wx: 1, wy: 1 });
+  poses.evaluate(car, 1.2, { wx: 1, wy: 1 });
+  expect(angle()).toBeCloseTo(Math.PI / 4);
+  poses.evaluate(car, 1.216, { wx: 0, wy: 1 });
+  expect(Math.abs(angle())).toBeCloseTo(Math.PI);
+  // Teleport/rest gap cannot infer a direction from the large displacement.
+  poses.evaluate(car, 2, { wx: 1000, wy: 1000 });
+  expect(Math.abs(angle())).toBeCloseTo(Math.PI);
+});
+
+it("overrides road vehicle appearance per view without replacing types, collision or train/player art", () => {
+  const normal = new EntityMeshPose();
+  const override = new EntityMeshPose(true);
+  const cars = ["compact-1", "compact-2", "bus-2", "car-24"].map((model, i) => {
+    const car = createVehicle(model, i * 100, 0);
+    car.id = i + 1;
+    return car;
+  });
+  const original = structuredClone(cars);
+  for (const car of cars) {
+    expect(normal.evaluate(car, 1) !== undefined).toBe(car.type === "vehicle-v1:compact-1");
+    expect(override.evaluate(car, 1)?.assetId).toBe("compact-1-authored-v7");
+    expect(override.assetFor(car)).toBe("compact-1-authored-v7");
+  }
+  expect(cars).toEqual(original);
+  for (const type of ["player", "train-curve-proof-v1", "train-v1:blue", "wildlife-v2:deer"])
+    expect(meshAssetFor({ type }, true)).toBeUndefined();
+  const green = cars[1];
+  if (!green) throw Error("Missing green car");
+  const first = override.evaluate(green, 1);
+  override.retain([green]);
+  expect(override.evaluate(structuredClone(green), 1.1)).toBe(first);
+  override.retain([]);
+  expect(override.evaluate(green, 1.2)).not.toBe(first);
 });
