@@ -325,8 +325,20 @@ whole-game 60Hz claim. Resting/smaller-population tails are mixed. Clean crowds
 are 27°C; separate warmer attribution/census/parity diagnostics are explicitly
 excluded from timing-gain claims. [119 evidence](../benchmarks/119-dense-ground-support.json)
 retains all captures and thermal/order limits.
-Next: profile remaining NPC movement, terrain/prop lookups and allocation before
-choosing another bounded server optimization.
+[121](../tactical/121-npc-movement-profile.md) follows that profile and indexes
+static fauna profiles by type, preserving original object identity for every
+species/coat. At 384 moving dogs, six lookups per actor/tick formerly perform
+6,912 type comparisons per tick; the comparisons disappear with identical query
+counts and full wire/durable frames. Four matched warmed phone repeats reduce
+aggregate mean tick from 12.457ms to 11.369ms (8.7%), with paired improvements
+5.7–15.7%. P95 remains mixed/overlapping and over-budget outliers remain. All
+accepted timing readings are 33.0–33.3°C/status zero; this is not a comparison
+against cooler 119 controls or whole-game 60Hz proof. Smaller/native walking
+results overlap. A direct body-overlap prototype was slower and reverted.
+121 retains its failures, thermal-stopped partial phone parity and full desktop
+parity, diagnostics, [evidence](../benchmarks/121-npc-movement-profile.json) and
+validation scope. Next: measure removal of ignored land/fully aquatic water reads
+with unchanged shore transitions; GPU/touch symptom tracing remains separate.
 
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority

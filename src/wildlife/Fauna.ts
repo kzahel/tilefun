@@ -936,8 +936,9 @@ export function petCoat(species: "cat" | "dog", roll: number): FaunaSpecies {
   return coats[Math.min(coats.length - 1, Math.max(0, Math.floor(roll * coats.length)))] ?? species;
 }
 export const faunaType = (species: FaunaSpecies) => `wildlife-${species}-provisional-v1`;
+const profilesByType = new Map(FAUNA_PROFILES.map((p) => [faunaType(p.species), p]));
 export const faunaProfile = (type: string | undefined) =>
-  FAUNA_PROFILES.find((p) => faunaType(p.species) === type);
+  type === undefined ? undefined : profilesByType.get(type);
 export interface FaunaBehavior {
   home: PositionComponent;
   shelter: PositionComponent;

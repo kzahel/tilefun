@@ -128,6 +128,12 @@ through ground tracking with live support Z; sparse chunk/prop reuse, player
 jump/landing and prediction retain their owners. Game and ScenarioSession labs
 consume the same path, including sleeper/edit invalidation and moving roofs.
 
+[121](../tactical/121-npc-movement-profile.md) indexes fauna metadata through the
+shared type lookup used by Realm, motion/contact and game/ScenarioSession consumers.
+Original profile objects and all species/coat definitions remain live and identical;
+AI cadence, physics, waterline transitions and presentation keep their owners.
+Native fauna/wildlife/settlement checks exercise Canvas/GPU game and lab consumers.
+
 ## Required architecture
 
 **An engine change is incomplete until its affected embedded lab consumers have

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [121 NPC movement profile and fauna lookup](121-npc-movement-profile.md) | Type registry removes repeated scans; 8.7% aggregate dense moving phone mean saving, mixed tails; slower box prototype reverted |
 | [120 Firetruck gameplay](120-firetruck-gameplay.md) | Own corrected v2 GLB in shared game/lab mesh mode; persistent siren/light state, driving buttons and boost |
 | [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |
 | [118 Fire truck wheel alignment](118-fire-truck-wheel-alignment.md) | Retained v2 with fitted axles, floor openings and wheel-local UVs; actual GLB placement/intersection regression checks; owner inspection pending |
