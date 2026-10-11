@@ -106,9 +106,11 @@ it("overrides road vehicle appearance per view without replacing types, collisio
   });
   const original = structuredClone(cars);
   for (const car of cars) {
-    expect(normal.evaluate(car, 1) !== undefined).toBe(car.type === "vehicle-v1:compact-1");
-    expect(override.evaluate(car, 1)?.assetId).toBe("compact-1-authored-v7");
-    expect(override.assetFor(car)).toBe("compact-1-authored-v7");
+    expect(normal.evaluate(car, 1) !== undefined).toBe(car.type.startsWith("vehicle-v1:compact-"));
+    const expected =
+      car.type === "vehicle-v1:compact-2" ? "compact-2-authored-v7" : "compact-1-authored-v7";
+    expect(override.evaluate(car, 1)?.assetId).toBe(expected);
+    expect(override.assetFor(car)).toBe(expected);
   }
   expect(cars).toEqual(original);
   for (const type of ["player", "train-curve-proof-v1", "train-v1:blue", "wildlife-v2:deer"])
@@ -123,6 +125,11 @@ it("overrides road vehicle appearance per view without replacing types, collisio
 });
 
 it.each([
+  ["compact-2", "compact-2-authored-v7", 64],
+  ["compact-3", "compact-3-authored-v1", 64],
+  ["compact-4", "compact-4-authored-v1", 64],
+  ["compact-5", "compact-5-authored-v1", 64],
+  ["compact-6", "compact-6-authored-v1", 64],
   ["ambulance", "ambulance-authored-v2", 112],
   ["fire-truck-ladder-1", "fire-truck-ladder-1-authored-v2", 144],
 ] as const)(

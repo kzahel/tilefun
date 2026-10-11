@@ -43,7 +43,9 @@ it("collects override mesh bodies with complete original sprite fallbacks and un
   expect(sprites.filter((item) => item.mesh).length).toBe(2);
   for (const entity of [car, bus]) {
     const item = sprites.find((sprite) => sprite.sheetKey === entity.sprite?.sheetKey);
-    expect(item?.mesh?.assetId).toBe("compact-1-authored-v7");
+    expect(item?.mesh?.assetId).toBe(
+      entity === car ? "compact-2-authored-v7" : "compact-1-authored-v7",
+    );
     expect(item?.spriteWidth).toBe(entity.sprite?.spriteWidth);
     expect(item?.spriteHeight).toBe(entity.sprite?.spriteHeight);
   }

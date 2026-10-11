@@ -1,0 +1,121 @@
+{
+  "root": "CarRoot",
+  "body": "Body",
+  "wheels": [
+    {
+      "id": "FL",
+      "steer": "Wheel_FL_Steer",
+      "roll": "Wheel_FL_Roll",
+      "meshes": [
+        "Tire \u00b7 -17 \u00b7 -1",
+        "Hub \u00b7 -17 \u00b7 -1"
+      ],
+      "centerBlender": [
+        -17.299999237060547,
+        -10.550000190734863,
+        4.099999904632568
+      ],
+      "radius": 4.1,
+      "rollAxisBlender": [
+        0,
+        1,
+        0
+      ],
+      "rollAxisGltf": [
+        0,
+        0,
+        -1
+      ],
+      "front": true
+    },
+    {
+      "id": "FR",
+      "steer": "Wheel_FR_Steer",
+      "roll": "Wheel_FR_Roll",
+      "meshes": [
+        "Tire \u00b7 -17 \u00b7 1",
+        "Hub \u00b7 -17 \u00b7 1"
+      ],
+      "centerBlender": [
+        -17.299999237060547,
+        10.550000190734863,
+        4.099999904632568
+      ],
+      "radius": 4.1,
+      "rollAxisBlender": [
+        0,
+        1,
+        0
+      ],
+      "rollAxisGltf": [
+        0,
+        0,
+        -1
+      ],
+      "front": true
+    },
+    {
+      "id": "RL",
+      "steer": "Wheel_RL_Steer",
+      "roll": "Wheel_RL_Roll",
+      "meshes": [
+        "Tire \u00b7 17 \u00b7 -1",
+        "Hub \u00b7 17 \u00b7 -1"
+      ],
+      "centerBlender": [
+        15.399999618530273,
+        -10.550000190734863,
+        4.099999904632568
+      ],
+      "radius": 4.1,
+      "rollAxisBlender": [
+        0,
+        1,
+        0
+      ],
+      "rollAxisGltf": [
+        0,
+        0,
+        -1
+      ],
+      "front": false
+    },
+    {
+      "id": "RR",
+      "steer": "Wheel_RR_Steer",
+      "roll": "Wheel_RR_Roll",
+      "meshes": [
+        "Tire \u00b7 17 \u00b7 1",
+        "Hub \u00b7 17 \u00b7 1"
+      ],
+      "centerBlender": [
+        15.399999618530273,
+        10.550000190734863,
+        4.099999904632568
+      ],
+      "radius": 4.1,
+      "rollAxisBlender": [
+        0,
+        1,
+        0
+      ],
+      "rollAxisGltf": [
+        0,
+        0,
+        -1
+      ],
+      "front": false
+    }
+  ],
+  "configSha256": "c13af1f79a3e3b344f7dad06093b1a1a6c7ae1720877512017e4fa90f7ae61b2",
+  "wheelRadiusUnchanged": true,
+  "geometryChanges": [
+    "Sloping lower nose",
+    "Longer rear roof edge",
+    "Higher deck/cabin join",
+    "Lower sill",
+    "Adjusted axle positions"
+  ],
+  "meshObjects": 55,
+  "inferred": "Body fit and rigid steering pivots are authored hypotheses; steering clearance is not qualified."
+}

@@ -32,3 +32,4 @@ scripts/authored-assets/fire-wheel-fit.json -text
 scripts/authored-assets/author_garbage_truck.py text eol=lf
 scripts/authored-assets/retain_vehicle.py text eol=lf
 scripts/authored-assets/garbage-truck-family.json -text
+scripts/authored-assets/retain_variant.py text eol=lf

@@ -1,0 +1,40 @@
+{
+  "schema": "tilefun-authored-vehicle-review-v1",
+  "candidateId": "projection:authored-compact-6-v1",
+  "candidateFingerprint": "3835bf3a930cd4d7d32b89adc52a234298bbf95ed8f00d5f7cd99df8dd5bbdf1",
+  "identity": {
+    "assetId": "compact-6",
+    "revision": "v1",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "sourceBundleSha256": "f656acb8b9e93432499f09fb7ee9188414e6fc6838774c66eafa2e061fb9169a",
+    "sourceAtlasSha256": "03748676e514f778cb68944ca4b67bf1e183a637e124b4ab1021e064e752bba0",
+    "files": [
+      {
+        "url": "assets/models/vehicles/compact-6-v1.glb",
+        "sha256": "16f52eb181c95525c5a9b7dfcd7c1fbe68bfa05dc28181a8cdaf1e054f515fef"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-6-v1/comparison.png",
+        "sha256": "631a6b27451f970b9b810670b16d323550e46a3745d345d56d20c287b305b32b"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-6-v1/orbit.png",
+        "sha256": "e2247b6400fd77ce7c2dd238aca56278d066995b265db87fbf0b177e0befc133"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-6-v1/silhouette.png",
+        "sha256": "1812ce7e20fb54597ed730a6cfb5916c01ae9c25277dea9e70f05bbf6f19e8db"
+      },
+      {
+        "url": "assets/models/vehicles/review/compact-6-v1/wheels.gif",
+        "sha256": "9f5cc5fc888a0023d5fbce207a727ed316fc6b31978897ba860984161679c0df"
+      }
+    ]
+  },
+  "name": "Silver compact",
+  "status": "Awaiting owner inspection; not promoted",
+  "notes": [
+    "Checked four-view palette variant; geometry/UVs match the retained compact template.",
+    "Internal ink, rigid wheel motion and hidden paint inherited; source-camera contradictions remain explicit."
+  ]
+}

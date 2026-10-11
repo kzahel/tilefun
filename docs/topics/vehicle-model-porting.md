@@ -1,8 +1,8 @@
 # Vehicle model porting checklist
 
 Topic: vehicle-model-porting
-Status: 45 sprite sets inventoried; 7 models retained, 3 integrated
-in game/lab mesh mode. Blue, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
+Status: 45 sprite sets inventoried; 10 models retained, 8 integrated
+in game/lab mesh mode. All six compacts, ambulance v2 and stowed firetruck v2 use their own assets in main-game GPU mesh mode.
 Exact model art review remains open.
 Updated: 2026-10-11.
 
@@ -21,7 +21,7 @@ Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both
 fire-truck ladder states have their own row; they may share a future articulated
 model. Trains and other asset classes have separate workflows.
 
-Current progress: **7/45 retained models, 38/45 queued; 3/45 own-model
+Current progress: **10/45 retained models, 35/45 queued; 8/45 own-model
 engine integrations.** All source sets have four views;
 source extraction support alone does not count as an authored model.
 
@@ -42,7 +42,7 @@ Evidence for existing models: [bundle catalog](../../art-source/vehicle-models/c
 and [106](../tactical/106-retained-vehicle-model-bundles.md). Blue's
 integration is recorded in [108](../tactical/108-authored-blue-car-gameplay.md)
 and [112](../tactical/112-coherent-car-presentation-and-test-override.md).
-The main game defaults to GPU with the blue car, ambulance v2 ([117](../tactical/117-ambulance-driving-controls.md))
+The main game defaults to GPU with all six compact colors ([122](../tactical/122-complete-vehicle-port.md)), ambulance v2 ([117](../tactical/117-ambulance-driving-controls.md))
 and firetruck v2 ([120](../tactical/120-firetruck-gameplay.md)); other vehicle types retain
 sprite fallbacks, per [rendering architecture](rendering-architecture.md).
 Ambulance v1's authoring, exact 4×2 and verification are recorded in
@@ -63,6 +63,8 @@ V1 remains retained; the new exact comparison awaits owner inspection.
 Green garbage truck v1 adds six wheels, a separate recessed rear-loader hinge
 and one tagged warning beacon in [119](../tactical/119-six-wheel-garbage-truck.md).
 Its own geometry/UV sources and 4×2 are retained; clearance and integration remain pending.
+
+The complete-bank pass in [122](../tactical/122-complete-vehicle-port.md) retains compact 3/5/6 and integrates all six colors through a shared own-asset registry. Every compact passes actual GPU draw/reset/disposal checks; the failed-load browser probe preserves gameplay with sprites. The inherited compact body still needs steering/floor qualification and exact art review.
 
 ## Source families for batching
 
@@ -97,9 +99,9 @@ The audit does not advance any model/engine/review status.
 
 - [x] Author the **ambulance**, with its own body, wheel positions, cab/box
   windows and source-owned graphics. Retain and inspect its exact final bundle.
-- [ ] Connect the retained **green and red compacts** to their own engine assets;
+- [x] Connect the retained **green and red compacts** to their own engine assets;
   qualify per-asset registration instead of assuming the blue adapter fits all.
-- [ ] Complete **compact-3, compact-5 and compact-6** using the checked compact
+- [x] Complete **compact-3, compact-5 and compact-6** using the checked compact
   replay only when four-view shape/metadata and palette correspondence pass.
 - [x] Audit the full bank for exact four-view silhouettes and palette correspondence;
   retain [family findings](../tactical/121-vehicle-source-families.md).
@@ -124,11 +126,11 @@ models have been started. The later family order can change with owner prioritie
 | Vehicle ID | Model | Engine | Next action |
 | --- | --- | --- | --- |
 | `compact-1` (blue) | [Retained v7](../../art-source/vehicle-models/compact-1/v7/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
-| `compact-2` (green) | [Retained v7](../../art-source/vehicle-models/compact-2/v7/) | Pending | Load its own GLB; verify game/lab registration, ink and wheel motion. |
-| `compact-3` | Queued | Pending | Run compact eligibility checks; author and inspect its own paint. |
-| `compact-4` (red) | [Retained v1](../../art-source/vehicle-models/compact-4/v1/) | Pending | Load its own GLB; verify game/lab registration, ink and wheel motion. |
-| `compact-5` | Queued | Pending | Run compact eligibility checks; author and inspect its own paint. |
-| `compact-6` | Queued | Pending | Run compact eligibility checks; author and inspect its own paint. |
+| `compact-2` (green) | [Retained v7](../../art-source/vehicle-models/compact-2/v7/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
+| `compact-3` (cyan) | [Retained v1](../../art-source/vehicle-models/compact-3/v1/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
+| `compact-4` (red) | [Retained v1](../../art-source/vehicle-models/compact-4/v1/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
+| `compact-5` (orange) | [Retained v1](../../art-source/vehicle-models/compact-5/v1/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
+| `compact-6` (silver) | [Retained v1](../../art-source/vehicle-models/compact-6/v1/) | Default GPU integrated | Qualify steering clearance and exact-revision art review. |
 
 ### Emergency and service vehicles — 6 sets
 

@@ -129,6 +129,11 @@ export default function TrafficPage() {
             onChange={(e) => setModel(e.target.value)}
           >
             <option value="compact-1">Blue car</option>
+            <option value="compact-2">Green car</option>
+            <option value="compact-3">Cyan car</option>
+            <option value="compact-4">Red car</option>
+            <option value="compact-5">Orange car</option>
+            <option value="compact-6">Silver car</option>
             <option value="ambulance">Ambulance</option>
             <option value="fire-truck-ladder-1">Firetruck</option>
           </select>

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [122 Complete vehicle port](122-complete-vehicle-port.md) | Active autonomous full-bank authoring, exact bundle retention, own-model game/lab integration and batch commits/pushes |
 | [121 Vehicle source families](121-vehicle-source-families.md) | Audited all 45 sets: 13 exact four-view silhouette families, pure/one-way recolors and explicit near-match/paint exceptions for batch planning |
 | [120 Firetruck gameplay](120-firetruck-gameplay.md) | Own corrected v2 GLB in shared game/lab mesh mode; persistent siren/light state, driving buttons and boost |
 | [119 Six-wheel garbage truck](119-six-wheel-garbage-truck.md) | Retained green truck with six independent wheels, recessed loader hinge and single warning beacon; generalized wheel/light checks; owner inspection pending |

@@ -574,3 +574,10 @@ paused labs hold the light phase. Game audio remains browser composition in Audi
 mesh resolver/resource lifecycle and emergency-state authority. Traffic selects
 its own GLB and uses ordinary held speed and siren controls; ladder motion remains
 outside this slice. Canvas/GPU sprites keep their complete fallback.
+
+[122](../tactical/122-complete-vehicle-port.md) exposes all six compact colors in
+the Traffic playground. Each uses its own retained asset through the shared
+`AuthoredVehicleMeshes` registry, pose resolver and lazy GPU resource path.
+Failed or pending model loads preserve the same sprite gameplay; no lab-specific
+asset transform or driving implementation is introduced. The compact gameplay
+browser test exercises every selection and an aborted silver GLB request.

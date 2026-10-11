@@ -439,6 +439,32 @@ state/time for its two tagged lenses. The test override preserves its own asset 
 Exact-revision art review and steering qualification remain open; the tagging
 contract originated in [116](../tactical/116-ambulance-beacons-and-light-tags.md).
 
+[122](../tactical/122-complete-vehicle-port.md) gives every compact color its own
+GLB through `AuthoredVehicleMeshes`. The registry owns type/asset IDs, enclosing
+radii and lateral registration. Pose resolution, culling and GPU resource
+selection use the same definitions. Unregistered vehicles retain sprites; the
+`allcars3d` test override applies only to those vehicles. Additional assets load
+on first eligible draw and continue using sprites while loading or after failure.
+Resources are bounded by the registry and disposed with the renderer; per-frame
+ready state prevents a mid-frame load from changing the selected draw path.
+Traffic playground selects each compact through the same shared collector.
+Actual GPU probes check visible own-model pixels, absolute pose/light reset,
+simulation isolation and resource disposal. Browser tests check all six colors
+and compact-6 load failure with working sprite gameplay.
+
+[122](../tactical/122-complete-vehicle-port.md) gives every compact color its own
+GLB through `AuthoredVehicleMeshes`. The registry owns type/asset IDs, enclosing
+radii and lateral registration. Pose resolution, culling and GPU resource
+selection use the same definitions. Unregistered vehicles retain sprites; the
+`allcars3d` test override applies only to those vehicles. Additional assets load
+on first eligible draw and continue using sprites while loading or after failure.
+Resources are bounded by the registry and disposed with the renderer; per-frame
+ready state prevents a mid-frame load from changing the selected draw path.
+Traffic playground selects each compact through the same shared collector.
+Actual GPU probes check visible own-model pixels, absolute pose/light reset,
+simulation isolation and resource disposal. Browser tests check all six colors
+and compact-6 load failure with working sprite gameplay.
+
 `GpuMeshBodies` draws that body into one reusable depth target at one texel per
 world pixel, applies inward silhouette ink in a second color target and composites
 it at its supplied scene position. Nearest enlargement keeps stroke width

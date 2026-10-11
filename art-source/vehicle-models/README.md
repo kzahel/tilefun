@@ -10,7 +10,10 @@ all 45 source sets, their model/engine status and the next authoring work.
 | --- | --- | --- |
 | Blue `compact-1` | [v7](compact-1/v7/) | [compact-1-v7.glb](../../public/assets/models/vehicles/compact-1-v7.glb) |
 | Green `compact-2` | [v7](compact-2/v7/) | [compact-2-v7.glb](../../public/assets/models/vehicles/compact-2-v7.glb) |
+| Cyan `compact-3` | [v1](compact-3/v1/) | [compact-3-v1.glb](../../public/assets/models/vehicles/compact-3-v1.glb) |
 | Red `compact-4` | [v1](compact-4/v1/) | [compact-4-v1.glb](../../public/assets/models/vehicles/compact-4-v1.glb) |
+| Orange `compact-5` | [v1](compact-5/v1/) | [compact-5-v1.glb](../../public/assets/models/vehicles/compact-5-v1.glb) |
+| Silver `compact-6` | [v1](compact-6/v1/) | [compact-6-v1.glb](../../public/assets/models/vehicles/compact-6-v1.glb) |
 | Ambulance | [v1](ambulance/v1/) | [ambulance-v1.glb](../../public/assets/models/vehicles/ambulance-v1.glb) |
 | Ambulance beacon refinement | [v2](ambulance/v2/) | [ambulance-v2.glb](../../public/assets/models/vehicles/ambulance-v2.glb) |
 | Police car | [v1](police-car/v1/) | [police-car-v1.glb](../../public/assets/models/vehicles/police-car-v1.glb) |
@@ -20,7 +23,7 @@ all 45 source sets, their model/engine status and the next authoring work.
 
 Each source bundle contains the original packed `.blend`, exact cleaned atlas,
 frozen directional crops, portable evaluation recipe, windshield geometry and
-rig metadata. Blue/green include the captured top-ink configuration; red also
+rig metadata. Blue/green include the captured top-ink configuration; all four v1 palette variants also
 retains its raw projection, uncertainty mask/record and palette-transfer record.
 The `.blend`, atlas, GLB, crop and captured geometry/configuration bytes were
 copied unchanged after checking the original inspection receipts. Recipe wrappers
@@ -62,8 +65,9 @@ These remain authored diagnostic assets. Retention does not promote gameplay
 art or grant a new human approval. Internal window ink is atlas paint; the outer
 pixel outline requires a renderer pass. The optional game/lab mesh mode now loads
 the blue GLB with native silhouette ink and cosmetic wheel roll; see
-[108](../../docs/tactical/108-authored-blue-car-gameplay.md). Green/red integration
-and wheel steering clearance remain open. The ambulance's exact
+[108](../../docs/tactical/108-authored-blue-car-gameplay.md). All six compact colors now use their own assets through the shared registry in
+[122](../../docs/tactical/122-complete-vehicle-port.md). Wheel steering/floor
+qualification and exact art review remain open. The ambulance's exact
 [4×2 review sheet](../../public/assets/models/vehicles/review/ambulance-v1/comparison.png)
 and [additional angles](../../public/assets/models/vehicles/review/ambulance-v1/orbit.png)
 are retained review snapshots, registered as an excluded Workshop inspection.
