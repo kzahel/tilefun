@@ -18,6 +18,10 @@ The default `compact-variant-template.json` and `compact-final-setup.json` use
 only tracked inputs. Exact finished models are available immediately in a fresh
 clone; replay is optional, not a substitute for retaining the deliverables.
 
+Every finished vehicle retains its exact final bundle by default. Follow the
+[next-vehicle commit checklist](../../art-source/vehicle-models/README.md#next-vehicle-what-to-commit-and-why)
+for required files, their purpose and verification without ignored dependencies.
+
 ```text
 python scripts/authored-assets/verify_bundles.py
 node scripts/authored-assets/verify_wheel_rig.mjs data/authored-assets/NEW_RIG_CHECK --bundles

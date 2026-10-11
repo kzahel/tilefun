@@ -36,6 +36,12 @@ The catalog pins original capture hashes; the default compact replay now uses
 only tracked dependencies. A fresh clone does not need the ignored template or
 to reconstruct the final geometry from the initial pilot.
 
+This is the default delivery contract for subsequent finished vehicles: commit
+their exact final export, editable source bundle and required dependencies.
+The [next-vehicle checklist](../../art-source/vehicle-models/README.md#next-vehicle-what-to-commit-and-why)
+owns the file list, reasons and tracked-file-only verification; scripts alone do
+not deliver a finished model.
+
 Older `art-source/vehicles/`, `public/demos/authored-car/` and `data/` artifacts
 remain ignored local evidence. Historical gallery links below require those
 bundles. Scratch-only Workshop registrations remain removed; retaining final
