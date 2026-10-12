@@ -8,6 +8,7 @@ import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import { projectWorld } from "../src/rendering/Projection.js";
 import type { RequestMessage } from "../src/shared/requests.js";
 import type { WorkerClientTransport } from "../src/transport/WorkerClientTransport.js";
+import { worldTap } from "./helpers/worldTap.js";
 
 type Game = {
   stateView: ClientStateView;
@@ -237,7 +238,8 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       target.p.wy + target.dy,
       target.z,
     );
-    await page.touchscreen.tap(
+    await worldTap(
+      page,
       target.rect.x + (point.sx * target.rect.width) / target.camera.viewportWidth,
       target.rect.y + (point.sy * target.rect.height) / target.camera.viewportHeight,
     );

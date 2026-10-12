@@ -2,7 +2,7 @@
 
 Topic: touch-movement
 Status: Joystick, tap and hold movement delivered; all validation passes, child device trial next.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 Options is available from the gear, hamburger and main menu. It offers Joystick
 (default), Tap to move and Hold to move, remembered per local browser profile.
@@ -16,7 +16,13 @@ for exactly 600ms, keeping CDP scheduling delays outside the 800ms gesture limit
 wall time is fixed before pausing to prevent a past-time request race. The authority
 retains its ordinary clock. Focus-loss cancellation remains exercised. The water
 fixture clears ambient chickens before staging its one interaction subject, so an
-unrelated nearby animal cannot claim the destination tap.
+unrelated nearby animal cannot claim the destination tap. The pure walking fixture
+also removes random initial chickens before its first destination. Native world
+taps use `tests/helpers/worldTap.ts`, which queues CDP touch-down and touch-up
+without a protocol round trip during the held contact. Touch duration remains
+bounded by the ordinary 800ms recognizer; the explicit 600ms fullscreen and
+rejected-gesture checks retain their own controlled clocks. Driving destination
+taps share this helper (2026-10-12 CI follow-up).
 
 ## Hold contract
 

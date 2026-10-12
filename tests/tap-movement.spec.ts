@@ -14,6 +14,7 @@ import { projectWorld } from "../src/rendering/Projection.js";
 import type { RenderView } from "../src/rendering/RenderFrame.js";
 import type { ClientMessage, ServerMessage } from "../src/shared/protocol.js";
 import { ACTIVE_PROFILE_KEY } from "../src/shared/storageKeys.js";
+import { worldTap } from "./helpers/worldTap.js";
 
 type TestGame = {
   gcSendRequest(message: unknown): Promise<{ meta: { id: string } }>;
@@ -136,7 +137,7 @@ async function point(page: Page, dx: number, dy = 0, entityType: string | null =
 }
 async function tapOffset(page: Page, dx: number, dy = 0) {
   const p = await point(page, dx, dy);
-  await page.touchscreen.tap(p.x, p.y);
+  await worldTap(page, p.x, p.y);
 }
 
 for (const renderer of ["canvas", "gpu"]) {
@@ -192,6 +193,24 @@ for (const renderer of ["canvas", "gpu"]) {
     page,
   }) => {
     await start(page, renderer);
+    // Random initial chickens can claim a locomotion tap as an interaction.
+    // Animal interaction has its own staged fixture below.
+    await page.evaluate(async () => {
+      const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+      await g.gcSendRequest({
+        type: "rcon",
+        requestId: g.nextRequestId++,
+        command: "kill_all chicken",
+      });
+    });
+    await expect
+      .poll(() =>
+        page.evaluate(() => {
+          const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+          return g.stateView.entities.filter((e) => e.type === "chicken").length;
+        }),
+      )
+      .toBe(0);
     const original = await state(page);
     await tapOffset(page, 60);
     await expect.poll(async () => (await state(page)).wx).toBeGreaterThan(original.wx + 8);
