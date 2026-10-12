@@ -218,20 +218,29 @@ export async function sampleCityClient(seconds) {
     const result = render(...args);
     const ms = performance.now() - start;
     renders.push(ms);
+    if (window.__cityTrace)
+      performance.measure("tilefun.render", { start, end: performance.now() });
     timeline.push({ kind: "render", start: performance.timeOrigin + start, ms });
     return result;
   };
   const start = await new Promise(requestAnimationFrame);
+  performance.mark("tilefun.sample.start");
+  window.__cityRenderProfile?.reset();
   lastFrame = start;
+  let renderProfile;
   try {
     while (performance.now() - start < seconds * 1000) {
       const now = await new Promise(requestAnimationFrame),
         ms = now - lastFrame;
       frames.push(ms);
+      if (window.__cityTrace) performance.measure("tilefun.frame", { start: lastFrame, end: now });
       timeline.push({ kind: "frame", start: performance.timeOrigin + lastFrame, ms });
       lastFrame = now;
     }
   } finally {
+    performance.mark("tilefun.sample.end");
+    renderProfile = window.__cityRenderProfile?.();
+    delete window.__cityTrace;
     callbacks.render = render;
     callbacks.update = update;
     g.transport.send = send;
@@ -248,6 +257,7 @@ export async function sampleCityClient(seconds) {
     };
   };
   return {
+    ...(renderProfile ? { renderProfile } : {}),
     elapsedMs: performance.now() - start,
     frames: summary(frames),
     framesOver25: frames.filter((x) => x > 25).length,
@@ -262,10 +272,14 @@ export async function sampleCityClient(seconds) {
     replicated: g.stateView.entities.length,
     renderer: g.renderer.getDiagnostics(),
     gpuDelta: Object.fromEntries(
-      ["drawCalls", "frames", "uploadedBytes", "vertexUploadedBytes", "meshDrawCalls"].map((k) => [
-        k,
-        (g.renderer.getDiagnostics().gpu?.[k] ?? 0) - (gpuBefore[k] ?? 0),
-      ]),
+      [
+        "drawCalls",
+        "frames",
+        "uploadedBytes",
+        "vertexUploadedBytes",
+        "meshDrawCalls",
+        "meshDraws",
+      ].map((k) => [k, (g.renderer.getDiagnostics().gpu?.[k] ?? 0) - (gpuBefore[k] ?? 0)]),
     ),
     canvas: { width: g.canvas.width, height: g.canvas.height },
     camera: {
@@ -277,6 +291,110 @@ export async function sampleCityClient(seconds) {
     timeline,
     viewport: { width: innerWidth, height: innerHeight, dpr: devicePixelRatio },
     zoom: g.camera.zoom,
+  };
+}
+
+// Opt-in inclusive renderer timers and target-allocation census. Separate from
+// shallow timing captures; private runtime fields are diagnostic-only hooks.
+export function installCityRenderProfile() {
+  const backend = document.querySelector("#game").__game.renderer;
+  const totals = {},
+    targetSizes = {},
+    assets = {};
+  const restores = [];
+  const wrap = (owner, method, label, census) => {
+    if (!owner || typeof owner[method] !== "function") return;
+    const original = owner[method];
+    owner[method] = function (...args) {
+      const start = performance.now();
+      try {
+        census?.(this, args);
+        return original.apply(this, args);
+      } finally {
+        totals[label] ??= { calls: 0, ms: 0 };
+        const row = totals[label];
+        row.calls++;
+        row.ms += performance.now() - start;
+      }
+    };
+    restores.push(() => {
+      owner[method] = original;
+    });
+  };
+  for (const method of ["beginFrame", "prepareTerrain", "collectTerrain", "collectElevationItems"])
+    wrap(backend, method, method);
+  wrap(backend, "submit", "submit", (_, args) => {
+    const key = `pass:${args[1].kind}`;
+    totals[key] ??= { calls: 0, items: 0 };
+    const row = totals[key];
+    row.calls++;
+    row.items += args[1].items?.length ?? args[1].draws?.length ?? 0;
+  });
+  wrap(backend.surface, "flush", "flush");
+  wrap(backend.surface, "page", "page");
+  wrap(backend.meshes, "draw", "mesh", (_, args) => {
+    const id = args[1].mesh?.assetId;
+    if (id) assets[id] = (assets[id] ?? 0) + 1;
+  });
+  for (const [label, target] of [
+    ["body", backend.meshes?.target],
+    ["outline", backend.meshes?.outline?.target],
+  ])
+    wrap(target, "setSize", `resize:${label}`, (self, args) => {
+      if (self.width === args[0] && self.height === args[1]) return;
+      const key = `${label}:${args[0]}x${args[1]}`;
+      targetSizes[key] = (targetSizes[key] ?? 0) + 1;
+    });
+  window.__cityRenderProfile = () => {
+    for (const restore of restores.reverse()) restore();
+    delete window.__cityRenderProfile;
+    return { totals, targetSizes, assets };
+  };
+  window.__cityRenderProfile.reset = () => {
+    for (const records of [totals, targetSizes, assets])
+      for (const key of Object.keys(records)) delete records[key];
+  };
+}
+
+// Diagnostic intervention only: retain the original exact-resolution body and
+// outline targets per size. Submission/order/projection remain native. Restore
+// the original resources and dispose every cloned target before closing the page.
+export function installCityMeshTargetReuse() {
+  const meshes = document.querySelector("#game").__game.renderer.meshes;
+  if (!meshes) throw Error("Mesh target reuse requires the GPU backend");
+  const body = meshes.target,
+    outline = meshes.outline.target,
+    draw = meshes.draw;
+  const pairs = new Map();
+  meshes.draw = function (camera, item) {
+    if (item.mesh && this.ready.has(item.mesh.assetId)) {
+      const resolution = Math.min(1024, Math.max(1, Math.ceil(item.mesh.radius * 2)));
+      let pair = pairs.get(resolution);
+      if (!pair) {
+        pair = { body: body.clone(), outline: outline.clone() };
+        pair.body.setSize(resolution, resolution);
+        pair.outline.setSize(resolution, resolution);
+        pairs.set(resolution, pair);
+      }
+      this.target = pair.body;
+      this.outline.target = pair.outline;
+    }
+    return draw.call(this, camera, item);
+  };
+  window.__cityMeshTargetReuse = () => {
+    const result = {
+      sizes: [...pairs.keys()].sort((a, b) => a - b),
+      bytes: [...pairs.keys()].reduce((sum, size) => sum + size * size * 12, 0),
+    };
+    meshes.draw = draw;
+    meshes.target = body;
+    meshes.outline.target = outline;
+    for (const pair of pairs.values()) {
+      pair.body.dispose();
+      pair.outline.dispose();
+    }
+    delete window.__cityMeshTargetReuse;
+    return result;
   };
 }
 

@@ -9,7 +9,7 @@ removed from world chunks; neutral frame/backend separation delivered, with rast
 scheduling and cold-entry presentation remaining as separate performance work.
 Wildlife sleep, shared bounded planning across all native families and ambient
 wander, and local predicted animation are delivered.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -401,9 +401,23 @@ entity lists. Authority body queries include spanning footprints. Four cool-phon
 0.541→0.154ms (71.5%) and whole-server mean 4.099→3.879ms (5.4%). Whole main-update
 mean is 1.328→1.067ms; this includes work beyond prediction. Frame p95 remains
 50ms, with about 234 authored mesh calls/frame and 8.1–8.3ms render means. Native
-pose/authority/prediction parity and validation are recorded in 126. The next
-priority is a cool-phone main/GPU/display trace of that remaining wide-view hitch;
-snapshot/interest and historical body-query scale are separate measured proposals.
+pose/authority/prediction parity and validation are recorded in 126.
+
+[127](../tactical/127-wide-view-investigation.md) reproduces the remaining phone
+wide-view cost with native GPU meshes, sprite controls and browser tracing.
+Mesh submission averages 8.28ms versus 4.93–4.98ms with sprites, but callback
+p95 remains 50ms. A stationary census records three body and three outline target
+size changes/frame. All 45 models have 32–56 primitives sharing one opaque source
+material. Exact-size target reuse has a modest, unproven timing result; it does
+not restore 60Hz. A cool sprite-only drive still records about 12.4MiB of texture
+uploads and 3,274 Canvas raster batches in eight seconds. GPU-service requests
+overlap slow callbacks; their elapsed/thread CPU times are not hardware GPU or
+physical-display timings. One stationary trace has a late thermal-status change
+and is excluded from clean pacing comparisons. The next proposed slice is shared
+runtime vehicle geometry batching with independent wheels/lights and native pixel
+parity, followed by sprite submission and separately measured terrain pacing.
+No production renderer/LOD/terrain policy changes in this investigation.
+Snapshot/interest and historical body-query scale remain separate measured proposals.
 
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority

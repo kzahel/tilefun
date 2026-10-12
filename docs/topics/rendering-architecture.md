@@ -189,6 +189,15 @@ composition choices, not hidden alternative gameplay pipelines.
 
 ## Evidence and limits
 
+[127](../tactical/127-wide-view-investigation.md) profiles native phone wide views.
+Per-car body/outline passes retain native-world resolution and resize their shared
+targets between model sizes. The registered models contain 32–56 primitives with
+one opaque source material; wheels and runtime emergency-lens materials remain
+independently controlled. Compatible rigid-geometry batching is the next proposed
+shared asset-loading slice, with exact native image and lifecycle validation for
+game and embedded labs. The target-reuse experiment is benchmark-only and does not
+establish a stable phone pacing win. Production rendering policy stays unchanged.
+
 [034](../tactical/034-renderer-completion.md) owns final integrated evidence.
 The recording backend runs the actual outdoor/editor/indoor entry points with no
 Canvas context, using shared terrain/elevation builders. It checks data-only

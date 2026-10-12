@@ -1,14 +1,20 @@
 // Production city/Worker/IndexedDB/renderer profiling. No simulation-policy controls.
 import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, open, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 import { readAndroidThermals, waitForAndroidCool } from "../android-thermal-gate.mjs";
-import { cityReady, installCityAuthority, sampleCityClient } from "./city-audit-profile.mjs";
+import {
+  cityReady,
+  installCityAuthority,
+  installCityMeshTargetReuse,
+  installCityRenderProfile,
+  sampleCityClient,
+} from "./city-audit-profile.mjs";
 import { startWorkerCpu, summarizeWorkerCpu } from "./worker-cpu.mjs";
 
 const option = (key, fallback) =>
@@ -30,6 +36,12 @@ if (!["gateway", "core"].includes(arrivalKind) || ![0.05, 0.1, 0.25].includes(ov
 const jobs = option("stages", "standing,walk,drive,overview,overview-drive").split(",");
 const deep = option("deep", "false") === "true",
   cpu = option("cpu", "false") === "true";
+const trace = option("trace", "false") === "true",
+  renderProfile = option("render-profile", "false") === "true";
+const meshTargetReuse = option("mesh-target-reuse", "false") === "true";
+if (meshTargetReuse && (renderer !== "gpu" || !meshes))
+  throw Error("Mesh target reuse requires GPU meshes");
+if (trace && cpu) throw Error("Trace and CPU sampling must use separate attribution captures");
 const touch = option("touch", endpoint ? "true" : "false") === "true";
 const androidCli = option("android-device-cli", ""),
   maxC = Number(option("max-battery-c", "32"));
@@ -42,8 +54,10 @@ if (
   )
 )
   throw Error("Unknown stage");
-for (const [k, v] of Object.entries({ seconds, warmSeconds, cooldown }))
+for (const [k, v] of Object.entries({ seconds, warmSeconds }))
   if (!Number.isFinite(v) || v < 2 || v > 60) throw Error(`Invalid ${k}: expected 2–60`);
+if (!Number.isFinite(cooldown) || cooldown < 2 || cooldown > 600)
+  throw Error("Invalid cooldown: expected 2–600 seconds");
 if (!Number.isFinite(maxC) || maxC < 15 || maxC > 34) throw Error("Invalid thermal gate");
 await mkdir(output, { recursive: true });
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-city-data-"));
@@ -65,6 +79,9 @@ const report = {
   touch,
   deep,
   cpu,
+  trace,
+  renderProfile,
+  meshTargetReuse,
   seconds,
   warmSeconds,
   overviewZoom,
@@ -90,6 +107,12 @@ for (const file of [
   "src/traffic/DrivingQueries.ts",
   "src/client/PlayerPredictor.ts",
   "src/client/ClientStateView.ts",
+  "src/rendering/GpuMeshBodies.ts",
+  "src/rendering/CarPixelOutline.ts",
+  "src/rendering/GpuRasterSurface.ts",
+  "src/rendering/GpuRenderBackend.ts",
+  "src/rendering/RasterRenderBackend.ts",
+  "src/rendering/collectScene.ts",
   "src/scenarios/NaturalLandscapeRecipe.ts",
   "src/generation/regional/DenseDistrictPlanner.ts",
 ])
@@ -146,7 +169,7 @@ const server = await createServer({
   server: { host: "127.0.0.1", port, strictPort: true, hmr: false },
   logLevel: "error",
 });
-let browser, page, context, cdp, profiler;
+let browser, page, context, cdp, profiler, activeTrace;
 const errors = [];
 const save = () => writeFile(path.join(output, "report.json"), JSON.stringify(report, null, 2));
 try {
@@ -280,6 +303,7 @@ try {
         };
       }, driveModel);
     }
+    if (meshTargetReuse) await page.evaluate(installCityMeshTargetReuse);
     const zoom = stage.startsWith("overview") ? overviewZoom : 1;
     await page.evaluate((z) => document.querySelector("#game").__game.debugPanel.setZoom(z), zoom);
     await page.waitForFunction(
@@ -289,8 +313,10 @@ try {
     await page.waitForFunction(cityReady, null, { timeout: 60000 });
     await page.waitForTimeout(warmSeconds * 1000);
     const thermalStart = androidCli ? readAndroidThermals(androidCli) : undefined;
-    if (thermalStart && (thermalStart.batteryC > maxC || thermalStart.thermalStatus !== 0))
+    if (thermalStart && (thermalStart.batteryC > maxC || thermalStart.thermalStatus !== 0)) {
+      report.setupThermalFailure = { stage, gate, thermalStart };
       throw Error("Thermal gate lost during setup");
+    }
     const begin = await worker.evaluate(() => globalThis.__cityRead().population);
     await worker.evaluate(() => globalThis.__cityReset());
     let points;
@@ -320,21 +346,37 @@ try {
       await cdp.send("Profiler.start");
       profiler = await startWorkerCpu(browser, worker.url());
     }
+    if (renderProfile) await page.evaluate(installCityRenderProfile);
+    let traceComplete;
+    if (trace) {
+      traceComplete = new Promise((resolve) => cdp.once("Tracing.tracingComplete", resolve));
+      await cdp.send("Tracing.start", {
+        transferMode: "ReturnAsStream",
+        categories:
+          "devtools.timeline,toplevel,blink.user_timing,cc,viz,gpu,v8,disabled-by-default-devtools.timeline,disabled-by-default-devtools.timeline.frame,disabled-by-default-v8.gc",
+      });
+      activeTrace = cdp;
+      await page.evaluate(() => {
+        window.__cityTrace = true;
+      });
+    }
     const data = await page.evaluate(sampleCityClient, seconds);
     const authority = await worker.evaluate(() => globalThis.__cityRead());
     let cpuSummary, mainCpu;
     if (profiler) {
-      const profile = await profiler.stop();
+      const [profile, mainResult] = await Promise.all([profiler.stop(), cdp.send("Profiler.stop")]);
       profiler = undefined;
       await writeFile(
         path.join(output, `${report.cases.length}-${stage}.cpuprofile`),
         JSON.stringify(profile),
+        { mode: 0o600 },
       );
       cpuSummary = summarizeWorkerCpu(profile);
-      const main = (await cdp.send("Profiler.stop")).profile;
+      const main = mainResult.profile;
       await writeFile(
         path.join(output, `${report.cases.length}-${stage}-main.cpuprofile`),
         JSON.stringify(main),
+        { mode: 0o600 },
       );
       mainCpu = summarizeWorkerCpu(main);
     }
@@ -343,6 +385,31 @@ try {
       else await page.keyboard.up(key);
     }
     const thermalEnd = androidCli ? readAndroidThermals(androidCli) : undefined;
+    if (meshTargetReuse)
+      data.meshTargetReuse = await page.evaluate(() => window.__cityMeshTargetReuse());
+    if (trace) {
+      await cdp.send("Tracing.end");
+      const { stream } = await traceComplete;
+      activeTrace = undefined;
+      // Raw browser traces may contain unrelated browser metadata; keep them local.
+      const file = await open(
+        path.join(output, `${report.cases.length}-${stage}-trace.json`),
+        "w",
+        0o600,
+      );
+      try {
+        for (;;) {
+          const chunk = await cdp.send("IO.read", { handle: stream, size: 1024 * 1024 });
+          await file.writeFile(
+            chunk.base64Encoded ? Buffer.from(chunk.data, "base64") : chunk.data,
+          );
+          if (chunk.eof) break;
+        }
+      } finally {
+        await file.close();
+        await cdp.send("IO.close", { handle: stream });
+      }
+    }
     const row = {
       stage,
       arrival,
@@ -399,8 +466,15 @@ try {
   await save();
   throw error;
 } finally {
+  if (activeTrace) await activeTrace.send("Tracing.end").catch(() => {});
   if (profiler) await profiler.close().catch(() => {});
   if (page) {
+    await page
+      .evaluate(() => {
+        window.__cityRenderProfile?.();
+        window.__cityMeshTargetReuse?.();
+      })
+      .catch(() => {});
     await page.keyboard.up("ArrowRight").catch(() => {});
     await page.keyboard.up("ArrowLeft").catch(() => {});
     await cdp
