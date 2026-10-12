@@ -44,6 +44,10 @@ for (const renderer of ["canvas", "gpu"]) {
       // longer than the real jump approach while leaving the editor.
       g.debugPanel.paused = true;
       g.transport.send({ type: "set-debug", paused: true, noclip: false });
+      // Flat worlds seed random solid chickens; keep the riding path clear.
+      for (const entity of g.stateView.entities)
+        if (entity.type === "chicken")
+          g.transport.send({ type: "edit-delete-entity", entityId: entity.id });
       const p = g.stateView.playerEntity.position;
       g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 28, wy: p.wy });
     }, faunaType("horse"));
@@ -51,7 +55,10 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(() =>
         page.evaluate((type) => {
           const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-          return g.stateView.entities.some((e) => e.type === type);
+          return (
+            g.stateView.entities.some((e) => e.type === type) &&
+            !g.stateView.entities.some((e) => e.type === "chicken")
+          );
         }, faunaType("horse")),
       )
       .toBe(true);

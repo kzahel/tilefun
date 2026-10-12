@@ -59,11 +59,22 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0))
       .toBe(true);
-    await page.getByRole("button", { name: "Hop onto frog", exact: true }).click();
+    const hopOntoFrog = page.getByRole("button", { name: "Hop onto frog", exact: true });
     await expect
       .poll(
-        async () => (await poses()).some((f) => f.state === "scared" && f.clip === 1 && f.z > 3),
-        { intervals: [30] },
+        async () => {
+          const frogs = await poses();
+          if (frogs.some((f) => f.state === "scared" && f.clip === 1 && f.z > 3)) return true;
+          // The control picks the first grounded, non-scared frog. During a
+          // hop's push-off that frog can move away before the player lands;
+          // when none qualifies the control does nothing. Try a resting target
+          // and let any alarm finish before trying another real landing.
+          const target = frogs.find((f) => f.state !== "scared" && f.z === 0);
+          if (!frogs.some((f) => f.state === "scared") && target?.clip === 0)
+            await hopOntoFrog.click();
+          return false;
+        },
+        { timeout: 10000, intervals: [30] },
       )
       .toBe(true);
     await expect

@@ -2,7 +2,7 @@
 
 Topic: wildlife
 Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay; the four exact pet drafts await human review. Other art expansion stays stopped.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 ## Horse riding
 
@@ -28,6 +28,17 @@ one browser task. The horse starts inside its 38px alarm radius; waiting for
 editor exit on slow CI otherwise lets it flee before the jump. A 1.2-second
 handoff reproduces the failure in both renderers; ten delayed checks pass with
 the staged setup (2026-10-12). Gameplay and startled-horse unit coverage are unchanged.
+The fixture also removes randomly seeded solid chickens through editor commands:
+the [CI failure capture](https://github.com/kzahel/tilefun/actions/runs/38291733989)
+shows one overlapping the horse's path, consistent
+with its unchanged X despite a 160px/s commanded velocity. A full-suite prediction
+recovery capture independently showed the same chicken obstruction. The riding,
+speed, travel and dismount assertions remain unchanged (2026-10-12). Staging a
+chicken at the horse's front reproduces the exact CI result in Canvas and GPU
+(X remains 28, expected greater than 58); both forced-obstruction checks pass
+with the fixture cleanup.
+All twelve repeated horse/frog checks (three per fixture and renderer) pass after
+both corrections; typechecks, lint, build and all 2,627 unit tests also pass.
 Robin reopening
 checks the manual actor's persistent identity and the deleted generated actor's
 tombstone instead of a total count that varies with streamed nearby populations.
@@ -409,6 +420,15 @@ and isolated streaming readiness. The full browser suite passes 395/397, with th
 two previously recorded missing archived fox-preview failures. Gameplay evidence
 is in 078; all 27 exact wildlife review candidates remain unchanged. No art approval
 or new art production is implied. The rabbit follow-up is recorded below.
+
+CI browser timing correction (2026-10-12): `tests/frog-gameplay.spec.ts` waits for
+the **Hop onto frog** control's first eligible target to be resting, and retries
+real landing attempts within ten seconds. A grounded pose alone can be a hop's
+push-off or scared recovery; the control ignores scared/airborne frogs and can
+have no eligible target. Clicking in that window reproduced the former escape-hop
+assertion failure in both renderers. Three GPU runs with the same forced window
+pass after the correction. The physical escape-hop, recovery and player-velocity
+assertions remain intact; no simulation, art or review identity changes.
 
 ## Provisional gameplay: meadow rabbits
 

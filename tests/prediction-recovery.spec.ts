@@ -33,6 +33,24 @@ for (const renderer of ["canvas", "gpu"]) {
           ),
         )
         .toBe(true);
+      if (i === 0) {
+        // Random solid chickens can block this flat-world movement fixture.
+        await page.evaluate(() => {
+          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          for (const entity of g.stateView.entities)
+            if (entity.type === "chicken")
+              g.transport.send({ type: "edit-delete-entity", entityId: entity.id });
+        });
+        await expect
+          .poll(() =>
+            page.evaluate(() => {
+              const g = (document.querySelector("#game") as unknown as { __game: GameClient })
+                .__game;
+              return g.stateView.entities.some((e) => e.type === "chicken");
+            }),
+          )
+          .toBe(false);
+      }
       await page.waitForTimeout(150);
       await page.keyboard.press("Tab");
       await expect

@@ -4,7 +4,7 @@ Topic: player-prediction
 Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
 support travel verified; local predicted animation and bounded backlog recovery
 delivered. Varying moving-contact acceptance remains next.
-Updated: 2026-10-10.
+Updated: 2026-10-12.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)
@@ -12,6 +12,15 @@ owns transport/replication delivery; [vehicles](vehicles.md) and [trains](trains
 own their autonomous motion and service behavior.
 
 ## Current status
+
+Browser fixture correction (2026-10-12): the edit/play recovery check removes
+randomly seeded solid chickens through normal editor commands before its first
+movement attempt. A full-suite Canvas capture showed a chicken blocking the
+player's path. The original hold duration, post-release authority/prediction
+convergence, forward travel and strictly increasing input sequence checks remain
+intact across all three scene replacements. No engine behavior changes.
+The full browser run passed 632/633 with this one blocked Canvas case; after
+cleanup, all six repeated recovery checks (three per renderer) pass.
 
 Indexed driving queries (2026-10-12):
 [126](../tactical/126-driving-collision-neighborhoods.md) gives published prop
