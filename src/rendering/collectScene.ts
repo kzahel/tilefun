@@ -9,9 +9,10 @@ import {
   isWarningVehicle,
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
-import { hasMovingRoof } from "../traffic/RoofSupport.js";
+import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
+import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { entityFacingHeading, entityHeading, meshAssetFor } from "./EntityMeshPose.js";
@@ -82,8 +83,9 @@ export function collectScene(
   const hasExcavations = planarProps.some((p) =>
     (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
   );
-  const vehicleSurfaces = entities.flatMap((e) =>
-    hasMovingRoof(e) && e.collider
+  const movingRoofs = entities.filter(hasMovingRoof);
+  const vehicleSurfaces = movingRoofs.flatMap((e) =>
+    e.collider
       ? [
           {
             bounds: getEntityAABB(e.position, e.collider),
@@ -124,6 +126,17 @@ export function collectScene(
     // extends below their ground-center anchor. Preserve conservative mesh
     // bounds as well, so either the mesh or its sprite fallback can enter view.
     const effectiveWy = pos.wy - zOffset;
+    const support = !hasMovingRoof(e) ? roofSupport(e, movingRoofs) : undefined;
+    const supportMesh = support ? authoredVehicleForType(support.type ?? "") : undefined;
+    const meshRoofSupport =
+      supportMesh && support?.collider
+        ? {
+            assetId: supportMesh.assetId,
+            heightDelta:
+              (support.collider.physicalHeight ?? 0) *
+              (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
+          }
+        : undefined;
     const spriteBottom = effectiveWy + (e.sprite.drawOffsetY ?? 0);
     const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
     const meshRadius = meshAsset
@@ -137,7 +150,7 @@ export function collectScene(
       : spriteBottom - e.sprite.spriteHeight;
     const bottom = meshRadius
       ? Math.max(spriteBottom, effectiveWy + meshRadius * Math.SQRT2)
-      : spriteBottom;
+      : spriteBottom + (meshRoofSupport?.heightDelta ?? 0);
     if (
       pos.wx + halfW < vpTL.wx - M ||
       pos.wx - halfW > vpBR.wx + M ||
@@ -177,6 +190,7 @@ export function collectScene(
         : undefined);
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
+      ...(meshRoofSupport ? { meshRoofSupport } : {}),
       ...(hasVehicleLights(e) && vehicleLightState(e) & 1
         ? {
             emergencyHeight: e.type.startsWith("vehicle-v1:fire-truck-ladder-")

@@ -40,6 +40,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.surface = surface;
     this.meshes = new GpuMeshBodies(surface);
     surface.meshBody = (camera, item) => this.meshes.draw(camera, item);
+    surface.meshReady = this.meshes.ready;
     const ctx = this.overlay.getContext("2d");
     if (!ctx) throw Error("Overlay surface unavailable");
     this.overlayContext = ctx;

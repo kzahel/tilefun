@@ -8,6 +8,17 @@ The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversio
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
 This is separate from the approved sprite bank and vehicle gameplay behavior.
 
+## Game-camera proportions and contact
+
+[130](../tactical/130-vehicle-game-camera-fit.md) fits all 45 model side heights to
+the native sprites under the actual fixed world projection. A static Z=0 registration
+keeps tire contacts grounded at diagonals and adds one mesh-only contact shadow.
+Travel heading follows displayed forward motion without backwards correction flips;
+rest retains diagonal orientation. Roof riders adjust their display attachment only
+while the fitted support mesh is ready. Physical bounds, authority and sprite fallback
+remain unchanged. Exact [fit inspection](https://tilefun.graehlarts.com/tilefun/assets/models/vehicles/review/game-fit-v2/)
+is registered separately from the immutable Blender/model comparisons.
+
 ## Editor placement
 
 [128](../tactical/128-editor-vehicle-placement.md) adds **Edit → Vehicles** with all

@@ -23,6 +23,7 @@ export type RasterSurface = Pick<
   | "imageSmoothingEnabled"
 > & {
   meshBody?: (camera: Camera, item: SpriteItem) => boolean;
+  meshReady?: ReadonlySet<string>;
   pixelShadow?: (cx: number, cy: number, rx: number, ry: number) => void;
 };
 

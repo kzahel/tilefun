@@ -1,0 +1,31 @@
+{
+  "candidateId": "authored-vehicle-game-fit-v2",
+  "identity": {
+    "revision": "game-fit-v2",
+    "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "files": [
+      {
+        "url": "assets/models/vehicles/review/game-fit-v2/comparison.png",
+        "sha256": "188610977ada85b17ccb6575c95a6d580cb35931068dcafc4bdcb94a51475940"
+      },
+      {
+        "url": "assets/models/vehicles/review/game-fit-v2/report.json",
+        "sha256": "83b20e4cce6f561e0d0d4f44af056353048045078265b1ba56f95d036ed7a77d"
+      },
+      {
+        "url": "assets/models/vehicles/review/game-fit-v2/fits.json",
+        "sha256": "b2ac59802731d143da839ab1b25d943c38273fdc0c719e6f2d7a4b817cabb231"
+      }
+    ],
+    "engineSources": {
+      "src/rendering/CarMeshAsset.ts": "17038fcd06580aae60067aa695f193b29a34dbeafb83db44b42eeb4f1191626d",
+      "src/rendering/EntityMeshPose.ts": "4349fa790d694376e038a145cdd8a57e2be86a3f6a1992af8671328a5e65b30f",
+      "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+      "src/rendering/vehicle-mesh-fits.json": "b2ac59802731d143da839ab1b25d943c38273fdc0c719e6f2d7a4b817cabb231",
+      "src/rendering/AuthoredVehicleMeshes.ts": "0c4ba0bd8166ec5f4b733cc453ca38efd4f76c6b9fbbccf5b758912f9a7b0da1",
+      "art-source/vehicle-models/catalog.json": "a087556bbebb3938f9e7f331bee00aaed9fb3e748169d2d99601ca9c2e43892a",
+      "src/traffic/vehicles-v1.json": "79cc6b59a727101304bde0beb7fe7e810703f3037ab9fcd4260334c55d8bf4c6"
+    }
+  },
+  "candidateFingerprint": "2adbd7b9ef4c86052d2eeca33c5e79a14412210f425c4066b29654ba5e322a34"
+}

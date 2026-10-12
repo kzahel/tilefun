@@ -20,6 +20,7 @@ const endpoint = option("cdp", ""),
 const filter = option("models", "").split(",").filter(Boolean);
 const diagnose = option("diagnose-parts", "false") === "true";
 const dense = option("dense", "false") === "true";
+const gameFit = option("game-fit", "false") === "true";
 const probePoints = option("probe-points", "")
   .split(",")
   .filter(Boolean)
@@ -62,7 +63,7 @@ const server = await createServer({
           export { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
           export { CarMeshAsset } from "./CarMeshAsset.ts";
           export { CarMeshAsset as Original } from "./CarMeshAsset.reference.ts";
-          export { AUTHORED_VEHICLE_MESHES } from "./AuthoredVehicleMeshes.ts";
+          export { AUTHORED_VEHICLE_MESHES, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.ts";
           export { AUTHORED_TRAIN_MESHES } from "./AuthoredTrainMeshes.ts";
           export { setCarMeshProjection } from "./CarMeshProjection.ts";
           export { poseOrientation } from "./MeshPresentation.ts";
@@ -102,13 +103,14 @@ try {
     `http://127.0.0.1:${server.httpServer.address().port}/tilefun/__vehicle-parity.html`,
   );
   const report = await page.evaluate(
-    async ({ filter, diagnose, probePoints, dense }) => {
+    async ({ filter, diagnose, probePoints, dense, gameFit }) => {
       const {
         THREE,
         GLTFLoader,
         CarMeshAsset,
         Original,
         AUTHORED_VEHICLE_MESHES,
+        vehicleMeshHeightScale,
         AUTHORED_TRAIN_MESHES,
         setCarMeshProjection,
         poseOrientation,
@@ -173,8 +175,13 @@ try {
                 node.material = material;
               });
             }
-          const before = new Original(beforeScene, model.lateralScale);
+          const fit =
+            gameFit && "vehicle" in model
+              ? { heightScale: vehicleMeshHeightScale(model.vehicle), contactShadow: true }
+              : {};
+          const before = new Original(beforeScene, model.lateralScale, fit);
           const after = new CarMeshAsset(afterScene, model.lateralScale, {
+            ...fit,
             batch: "vehicle" in model,
             preserveParts: model.batchPreserveParts,
           });
@@ -336,7 +343,7 @@ try {
         renderer.forceContextLoss();
       }
     },
-    { filter, diagnose, probePoints, dense },
+    { filter, diagnose, probePoints, dense, gameFit },
   );
   report.physical = !!endpoint;
   report.diagnoseParts = diagnose;

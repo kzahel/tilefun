@@ -197,7 +197,9 @@ function drawSprite(
   // Offset draw origin so sprite frame is centered horizontally
   // and extends upward from feet.
   const halfW = item.spriteWidth / 2;
-  const bottom = item.wy - item.zOffset + item.drawOffsetY;
+  const support = item.meshRoofSupport;
+  const roofDelta = support && ctx.meshReady?.has(support.assetId) ? support.heightDelta : 0;
+  const bottom = item.wy - item.zOffset + roofDelta + item.drawOffsetY;
   const screen = camera.worldToScreen(item.wx - halfW, bottom - item.spriteHeight);
   const end = camera.worldToScreen(item.wx + halfW, bottom);
   const region = sheet.getRegion(item.frameCol, item.frameRow);

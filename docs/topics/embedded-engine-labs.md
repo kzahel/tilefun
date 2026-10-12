@@ -26,6 +26,11 @@ Native pixel comparisons cover every road model and current train prototype; gam
 Traffic browser assertions check compiled counts, fallback, switching and recovery.
 No separate lab mesh compiler, simulation policy or art activation is introduced.
 
+[130](../tactical/130-vehicle-game-camera-fit.md) shares fixed model-height fitting,
+grounded mesh contact shadows, displayed-motion heading and ready-only roof-rider
+attachment through ordinary game/ScenarioPresentationHost collection and raster
+consumption. Direct authoring defaults and train inspection remain unchanged.
+
 ## Farmstead and settlement alignment
 
 [084](../tactical/084-common-pets-and-variations.md) adds four native pet-coat

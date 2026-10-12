@@ -12,6 +12,8 @@ export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem;
 export interface SpriteItem {
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
+  /** Sprite rider's visual attachment, applied only while its supporting mesh is ready. */
+  meshRoofSupport?: { assetId: string; heightDelta: number };
   emergencyFlash?: number;
   emergencyColors?: readonly [string, string];
   emergencySide?: number;

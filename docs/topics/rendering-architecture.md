@@ -421,14 +421,17 @@ projection registration for historical reference checks.
 [112](../tactical/112-coherent-car-presentation-and-test-override.md) supersedes
 109's heading-dependent authored lens. It made a 45° movement appear to face
 38.2°, while extra cosmetic turn smoothing and cardinal rest fallback added drift.
-`CarMeshProjection` now matches fixed `projectWorld` at every heading, zoom and
-height. `CarMeshAsset` adds a static 1.3× lateral registration before entity
-rotation; forward length, 24-pixel roof height, wheel radius and Z=0 stay intact.
-The sprite bank's directional cameras cannot all match one coherent projection;
-width registration remains checked without distorting heading to match heights.
-Cosmetic yaw follows valid displayed displacement immediately and holds at rest;
-new moving poses use velocity and teleports/visibility gaps fence travel. This
-is presentation only, with no change to input, simulation or collision.
+`CarMeshProjection` matches fixed `projectWorld` at every heading, zoom and height.
+[130](../tactical/130-vehicle-game-camera-fit.md) adds fixed per-model vertical
+registration around Z=0 to match all 45 source side heights within one native pixel.
+The compact's existing 1.3× lateral registration remains. These are visual transforms
+before entity yaw; physical metadata and immutable source geometry stay intact.
+Ground contacts remain fixed through wheel roll and diagonal yaw, with one mesh-only
+contact ellipse. End views retain the source-camera contradictions.
+Cosmetic yaw follows displayed forward movement, using velocity to reject backwards
+interpolation corrections; it holds at rest. Teleports/visibility gaps fence travel.
+Roof sprites attach to fitted visual support only while that exact mesh is ready;
+Canvas and loading/failure fallbacks retain their original support appearance.
 
 The opt-in `?renderer=gpu&meshes&allcars3d` flag selects the blue body for every
 `vehicle-v1:` road vehicle in the shared game/lab collector. Original actor types,

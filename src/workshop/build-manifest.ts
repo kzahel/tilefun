@@ -18,6 +18,7 @@ import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import { buildVehicleCandidates } from "./VehicleCandidates.js";
+import { buildVehicleGameFitCandidate } from "./VehicleGameFitCandidate.js";
 import { buildWildlifeCandidates, WILDLIFE_BATCHES } from "./WildlifeCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 import {
@@ -46,6 +47,10 @@ try {
   candidates.push(...(await buildNaturalCandidates(catalog)));
   candidates.push(await buildCarProjectionCandidate());
   candidates.push(...(await buildAuthoredVehicleCandidates()));
+  candidates.push(
+    await buildVehicleGameFitCandidate("v1"),
+    await buildVehicleGameFitCandidate("v2"),
+  );
   candidates.push(await buildAuthoredTrainCandidate("v1"), await buildAuthoredTrainCandidate("v3"));
   candidates.push(
     await buildWorldGeometryCandidate(),

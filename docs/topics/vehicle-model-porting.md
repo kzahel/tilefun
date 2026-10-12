@@ -82,6 +82,16 @@ exported tire/hub bounds. [122](../tactical/122-complete-vehicle-port.md) record
 the exact 4×2, real GLB and engine checks. Opposing roof vents and mirror drawings
 remain projection limitations; only neutral steering is used in gameplay.
 
+## Game-camera qualification
+
+[130](../tactical/130-vehicle-game-camera-fit.md) keeps all 45 retained source rows
+and 45 own-model integrations intact while adding fixed runtime vertical registrations.
+All source side silhouettes now match in-world height within one native pixel;
+actual tire contacts stay at Z=0 through eight yaws/four roll phases. End-view camera
+contradictions remain recorded. A separate frozen game-fit candidate covers this
+presentation change; it does not promote any source model art or update old approvals.
+Next checkpoint: owner inspection of live proportions, diagonals and roof attachment.
+
 ## Source families for batching
 
 [129](../tactical/129-vehicle-geometry-batching.md) adds runtime GPU road-model

@@ -5,12 +5,53 @@ import { expect, it } from "vitest";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
 import { SceneFrame } from "./SceneFrame.js";
 
 const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
 const terrain = { collectElevationItems: () => [] };
+
+it.each(VEHICLE_MODELS)(
+  "attaches a roof passenger to %s fitted mesh without changing physics or fallback height",
+  (model) => {
+    const car = createVehicle(model, 200, 150);
+    car.id = 1;
+    car.wz = 16;
+    const player = createPlayer(200, 150);
+    player.id = 2;
+    player.wz = 16 + (car.collider?.physicalHeight ?? 0);
+    const before = structuredClone(player);
+    const camera = new Camera();
+    camera.setViewport(600, 400);
+    camera.snapTo(200, 150);
+    const items = collectScene(
+      [car, player],
+      [],
+      world,
+      camera,
+      camera.getVisibleChunkRange(),
+      1,
+      terrain,
+      [],
+      false,
+      undefined,
+      undefined,
+      new SceneFrame(),
+    );
+    const rider = items.find(
+      (item) => item.kind === "sprite" && item.sheetKey === player.sprite?.sheetKey,
+    );
+    if (rider?.kind !== "sprite") throw Error("Missing rider");
+    expect(rider.zOffset).toBe(player.wz);
+    expect(rider.meshRoofSupport).toEqual({
+      assetId: authoredVehicleForType(car.type)?.assetId,
+      heightDelta: (car.collider?.physicalHeight ?? 0) * (1 - vehicleMeshHeightScale(model)),
+    });
+    expect(player).toEqual(before);
+  },
+);
 
 function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, height = 0) {
   const camera = new Camera();

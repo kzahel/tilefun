@@ -80,6 +80,7 @@ export class GpuRasterSurface implements RasterSurface {
   fillStyle: string | CanvasGradient | CanvasPattern = "#000";
   imageSmoothingEnabled = false;
   meshBody?: NonNullable<RasterSurface["meshBody"]>;
+  meshReady?: ReadonlySet<string>;
   lost = false;
   disposed = false;
   readonly stats = {

@@ -111,15 +111,22 @@ export class EntityMeshPose {
       const distance = Math.hypot(dx, dy);
       if (elapsed > 0 && elapsed <= 0.25 && distance <= 32) {
         pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
-        // Point along this body's displayed motion, with no separate turn lag.
-        // Repeated/resting samples retain the last heading, including diagonals.
-        if (distance > 0.001 && !train) pose.angle = Math.atan2(dy, dx);
+        if (distance > 0.001 && !train) {
+          const moving =
+            entity.velocity && Math.hypot(entity.velocity.vx, entity.velocity.vy) > 0.01;
+          const motionHeading = moving ? target : pose.angle;
+          // Follow displayed motion, but reject backwards snapshot corrections.
+          // Velocity is the forward/reverse intent, not a second turn clock.
+          if (dx * Math.cos(motionHeading) + dy * Math.sin(motionHeading) > 0)
+            pose.angle = Math.atan2(dy, dx);
+        }
       } else if (
         elapsed > 0 &&
+        !train &&
         entity.velocity &&
         Math.hypot(entity.velocity.vx, entity.velocity.vy) > 0.01
       ) {
-        // A new timeline/teleport sample uses velocity, never teleport displacement.
+        // A timeline/teleport fence uses current motion, never the jump vector.
         pose.angle = target;
       }
       pose.x = position.wx;

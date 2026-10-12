@@ -6,15 +6,19 @@ import { batchVehicleGeometry } from "./VehicleGeometryBatches.js";
 
 export interface CarMeshAssetOptions {
   batch?: boolean;
+  /** Fixed game-local Z registration. Applied after rigid wheel pose, before yaw. */
+  heightScale?: number;
+  /** Ground-plane contact cue; native sprite fallback already contains its shadow. */
+  contactShadow?: boolean;
   /** Qualified source surfaces retain their independent raster/depth ordering. */
   preserveParts?: readonly string[];
 }
 
 /** Retained vehicle resources, shared by game and labs. The outer group owns the
  * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
- * Ground origin is authored. A fixed lateral registration fits its width to
- * the compact game view; emergency vehicles keep their authored width. Tire radius, roof
- * height and camera projection remain unchanged.
+ * Ground origin and wheel rig are authored. Fixed lateral and optional vertical
+ * registrations fit the game-camera silhouette around Z=0 before entity yaw.
+ * Direct authoring callers keep native height; the world projection stays fixed.
  */
 export class CarMeshAsset {
   readonly object = new THREE.Group();
@@ -104,8 +108,32 @@ export class CarMeshAsset {
       normalized.add(scene);
       const registered = new THREE.Group();
       registered.scale.y = lateralScale;
+      registered.scale.z = options?.heightScale ?? 1;
       registered.add(normalized);
       this.object.add(registered);
+      if (options?.contactShadow) {
+        this.object.updateMatrixWorld(true);
+        const bounds = new THREE.Box3().setFromObject(this.object, true);
+        const center = bounds.getCenter(new THREE.Vector3());
+        const size = bounds.getSize(new THREE.Vector3());
+        const geometry = new THREE.CircleGeometry(1, 32);
+        const material = new THREE.MeshBasicMaterial({
+          color: 0x000000,
+          transparent: true,
+          opacity: 0.2,
+          side: THREE.DoubleSide,
+          forceSinglePass: true,
+          depthWrite: false,
+          toneMapped: false,
+        });
+        const shadow = new THREE.Mesh(geometry, material);
+        shadow.name = "Game-contact-shadow";
+        shadow.position.set(center.x, center.y, -0.01);
+        shadow.scale.set(size.x * 0.48, size.y * 0.48, 1);
+        this.object.add(shadow);
+        this.resources.add(geometry);
+        this.resources.add(material);
+      }
       this.lights = new VehicleEmergencyLights(scene, {
         periodSeconds: 1,
         pulseWindows: [

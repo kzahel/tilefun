@@ -1,3 +1,10 @@
+import fits from "./vehicle-mesh-fits.json" with { type: "json" };
+
+/** Fixed native side-height calibration under the actual x,y-z game camera. */
+export function vehicleMeshHeightScale(vehicle: string): number {
+  return fits[vehicle as keyof typeof fits] ?? 1;
+}
+
 /** Retained own-model registrations; sprite bodies remain the loading/failure fallback. */
 export interface AuthoredVehicleMesh {
   readonly vehicle: string;

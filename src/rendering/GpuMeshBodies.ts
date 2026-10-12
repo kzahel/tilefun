@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
-import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
+import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
@@ -60,6 +60,8 @@ export class GpuMeshBodies {
       void slot.load(() =>
         loadCarMesh(definition.path, definition.lateralScale, {
           batch: !!vehicle,
+          heightScale: vehicle ? vehicleMeshHeightScale(vehicle.vehicle) : 1,
+          contactShadow: !!vehicle,
           preserveParts: vehicle?.batchPreserveParts ?? [],
         }),
       );

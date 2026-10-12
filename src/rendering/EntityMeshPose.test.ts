@@ -72,16 +72,18 @@ it("rolls from displayed signed distance, holds at rest and fences teleports and
   expect(pose?.wheelTravel).toBe(5);
 });
 
-it("follows interpolated movement immediately and holds diagonal heading when stopped", () => {
+it("follows displayed forward motion, ignores interpolation rewinds and holds diagonal stops", () => {
   const car = createVehicle("compact-1", 0, 0, Direction.Down);
   car.velocity = { vx: 0, vy: 10 };
   const poses = new EntityMeshPose();
   const pose = poses.evaluate(car, 1);
   if (!pose) throw Error("Missing car pose");
   const angle = () => 2 * Math.atan2(pose.orientation[2], pose.orientation[3]);
-  // Rendered diagonal differs from the latest replicated velocity. Follow the
-  // visible body positions, so snapshot/interpolation timing cannot add yaw lag.
+  car.velocity = { vx: 10, vy: 10 };
   poses.evaluate(car, 1.016, { wx: 1, wy: 1 });
+  expect(angle()).toBeCloseTo(Math.PI / 4);
+  // A replication/prediction correction moves the displayed point backwards.
+  poses.evaluate(car, 1.025, { wx: 0.9, wy: 0.9 });
   expect(angle()).toBeCloseTo(Math.PI / 4);
   car.velocity = { vx: 0, vy: 0 };
   if (!car.sprite) throw Error("Missing sprite");
@@ -89,6 +91,7 @@ it("follows interpolated movement immediately and holds diagonal heading when st
   poses.evaluate(car, 1.032, { wx: 1, wy: 1 });
   poses.evaluate(car, 1.2, { wx: 1, wy: 1 });
   expect(angle()).toBeCloseTo(Math.PI / 4);
+  car.velocity = { vx: -10, vy: 0 };
   poses.evaluate(car, 1.216, { wx: 0, wy: 1 });
   expect(Math.abs(angle())).toBeCloseTo(Math.PI);
   // Teleport/rest gap cannot infer a direction from the large displacement.

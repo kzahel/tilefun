@@ -44,6 +44,41 @@ it("registers GLB axes and fixed lateral width while preserving tire/roof height
   asset.dispose();
 });
 
+it("keeps fitted tire contacts on the ground through diagonal yaw and absolute wheel roll", () => {
+  const { scene } = fixture();
+  // Use a genuinely circular tire rather than the deliberately crude fixture box.
+  for (const id of ["FL", "FR", "RL", "RR"]) {
+    const roll = required(scene.getObjectByName(`Wheel_${id}_Roll`));
+    const tire = roll.children[0] as THREE.Mesh;
+    tire.geometry = new THREE.CylinderGeometry(4.1, 4.1, 2, 128);
+    tire.geometry.rotateX(Math.PI / 2);
+  }
+  const asset = new CarMeshAsset(scene, 1.3, { heightScale: 0.631, contactShadow: true });
+  for (let yaw = 0; yaw < Math.PI * 2; yaw += Math.PI / 4) {
+    asset.object.rotation.z = yaw;
+    for (const travel of [0, 7, -13, 0]) {
+      asset.setTravel(travel);
+      asset.object.updateMatrixWorld(true);
+      for (const id of ["FL", "FR", "RL", "RR"]) {
+        const tire = required(scene.getObjectByName(`Wheel_${id}_Roll`)).children[0] as THREE.Mesh;
+        const points = tire.geometry.getAttribute("position");
+        let bottom = Infinity;
+        for (let i = 0; i < points.count; i++) {
+          const p = new THREE.Vector3()
+            .fromBufferAttribute(points, i)
+            .applyMatrix4(tire.matrixWorld);
+          bottom = Math.min(bottom, p.z);
+        }
+        expect(bottom).toBeGreaterThan(-0.001);
+        expect(bottom).toBeLessThan(0.002);
+      }
+      const shadow = required(asset.object.getObjectByName("Game-contact-shadow"));
+      expect(shadow.getWorldPosition(new THREE.Vector3()).z).toBeCloseTo(-0.01);
+    }
+  }
+  asset.dispose();
+});
+
 it("applies absolute rigid wheel travel without moving pivots, then frees shared resources once", () => {
   const { scene, material, map } = fixture();
   const freeMaterial = vi.spyOn(material, "dispose");
