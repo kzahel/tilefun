@@ -80,6 +80,11 @@ menu, travel and focus changes cancel the hold, requiring a fresh finger-down.
 See [touch movement](docs/topics/touch-movement.md) and [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
 for the behavior and remaining device trial.
 
+**Edit → Vehicles** lets you choose any of the 45 vehicles and click/tap clear dry
+ground to place it parked, including in existing worlds without roads. **Vehicles
+→ Delete** removes one by tapping its body. Placed vehicles stay parked after you
+get out and save their position, lights and occupied driver seat.
+
 In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train · E**
 (or press E). Your character disappears inside; other players can ride visibly on
 its roof. Cars use ordinary movement controls, including diagonals, or a straight

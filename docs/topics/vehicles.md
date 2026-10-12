@@ -8,6 +8,23 @@ The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversio
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
 This is separate from the approved sprite bank and vehicle gameplay behavior.
 
+## Editor placement
+
+[128](../tactical/128-editor-vehicle-placement.md) adds **Edit → Vehicles** with all
+45 labelled thumbnails. Click/tap clear dry ground to place a parked vehicle in
+any outdoor world, including existing flat worlds without generated roads. Its
+sprite and ground footprint preview follow the cursor. **Play → Drive car / E**
+uses normal driving, speed and lights controls. Vehicles remain parked when the
+driver leaves, save their facing/position/lights and occupied seat, and rehydrate
+through normal streaming. **Vehicles → Delete** removes the visible vehicle body
+and its durable record. No generated-road route is needed for a placed vehicle.
+
+Realm/TrafficSystem owns placement admission and rejects unavailable terrain,
+water and whole-body overlap. Placed vehicles use the existing traffic persistence
+codec with a parked-placement flag; they do not consume automatic traffic quotas.
+The 1,024 resident vehicle budget remains enforced. Indoor editors still accept
+furniture only. Native asset bytes and approved physical bounds remain unchanged.
+
 ## Grass occlusion
 
 Grass blades that overlap a displayed vehicle now sort below its sprite. The

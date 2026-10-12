@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [128 Editor vehicle placement](128-editor-vehicle-placement.md) | All 45 parked vehicles in a dedicated picker; shared driving, lights, durable placement/reload and deletion |
 | [127 Authored blue train](127-authored-blue-train.md) | Complete blue prototype: three own carriages, 24 wheels, exact v1/v3 bundles and shared-engine moving review; live activation pending |
 | [127 Wide-view investigation](127-wide-view-investigation.md) | Phone mesh draws, exact-size target churn and moving-camera raster pressure; vehicle geometry batching proposed; production policy unchanged |
 | [126 Driving collision neighborhoods](126-driving-collision-neighborhoods.md) | Local prop searches retain snapshot/roof/ground dependencies; cool-phone wide driving phase 71.5% lower, whole tick 5.4% lower; frame p95 still 50ms |

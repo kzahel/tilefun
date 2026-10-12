@@ -1,9 +1,11 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
-import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { Direction } from "../entities/Entity.js";
 import { compileTreeRun } from "../patterns/FencedTrees.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RemoteEditorCursor } from "../shared/protocol.js";
+import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { EditorMode } from "./EditorMode.js";
@@ -96,7 +98,7 @@ export function collectEditorOverlay(
           }
       }
   }
-  if (!model.indoor) collectCursor(out, camera, editor, model);
+  if (!model.indoor) collectCursor(out, camera, editor, model, world);
   const error = (message: string, maxWidth: number) => {
     out.rect(12, 12, Math.min(camera.viewportWidth - 24, maxWidth), 38, "#201410dd");
     out.label(message, 20, 36, "#ffa090", "14px monospace");
@@ -150,10 +152,46 @@ function collectCursor(
   camera: Camera,
   editor: EditorMode,
   model: EditorModel,
+  world: World,
 ): void {
   const scale = camera.scale,
     tileSize = TILE_SIZE * scale;
   const red = model.effectivePaintMode === "unpaint";
+  if (model.editorTab === "vehicles") {
+    if (![editor.cursorWorldX, editor.cursorWorldY].every(Number.isFinite)) return;
+    const view = vehicleView(model.selectedVehicleType, Direction.Right);
+    const collider = view?.metadata.colliders[0];
+    if (!collider) return;
+    const z =
+      world.getHeightAt(
+        Math.floor(editor.cursorWorldX / 16),
+        Math.floor(editor.cursorWorldY / 16),
+      ) * ELEVATION_PX;
+    const p = camera.worldToScreen(editor.cursorWorldX, editor.cursorWorldY - z);
+    out.rect(
+      p.sx - (collider.width / 2) * scale,
+      p.sy,
+      collider.width * scale,
+      collider.height * scale,
+      model.deleteMode ? "rgba(255,80,80,0.2)" : "rgba(255,255,255,0.15)",
+      model.deleteMode ? "#f55" : "#fff",
+      1,
+    );
+    if (!model.deleteMode) {
+      const d = out.next("sprite");
+      d.sheetKey = model.selectedVehicleType;
+      d.srcX = 0;
+      d.srcY = vehicleFrameDirection(model.selectedVehicleType, Direction.Right) * 224;
+      d.srcWidth = 192;
+      d.srcHeight = 224;
+      d.x = p.sx - 96 * scale;
+      d.y = p.sy - 144 * scale;
+      d.width = 192 * scale;
+      d.height = 224 * scale;
+      d.alpha = 0.45;
+    }
+    return;
+  }
   if (model.editorTab === "elevation") {
     if (!Number.isFinite(editor.cursorTileX)) return;
     const half = Math.floor(model.elevationGridSize / 2);

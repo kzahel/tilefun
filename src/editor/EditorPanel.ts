@@ -1,8 +1,10 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_ELEVATION } from "../config/constants.js";
+import { Direction } from "../entities/Entity.js";
 import { getPropSheetInfo, PROP_PALETTE } from "../entities/PropFactories.js";
 import { RoadType } from "../road/RoadType.js";
+import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
 import type { EditorModel } from "./EditorModel.js";
 import {
   ALL_TABS,
@@ -16,6 +18,7 @@ import {
   type RoadPaletteEntry,
   STRUCTURE_PALETTE,
   TERRAIN_TABS,
+  VEHICLE_PALETTE,
 } from "./EditorPalettes.js";
 import type { BrushMode, PaintMode } from "./EditorTypes.js";
 
@@ -61,6 +64,8 @@ export class EditorPanel {
   private readonly roadRow: HTMLDivElement;
   private readonly structureRow: HTMLDivElement;
   private readonly entityRow: HTMLDivElement;
+  private readonly vehicleRow: HTMLDivElement;
+  private readonly vehicleButtons: HTMLButtonElement[] = [];
   private readonly elevationRow: HTMLDivElement;
   private readonly elevationHeightButtons: HTMLButtonElement[] = [];
   private readonly elevationGridButtons: HTMLButtonElement[] = [];
@@ -138,6 +143,7 @@ export class EditorPanel {
         road: "\ud83d\udee3\ufe0f",
         structure: "\ud83c\udfd7\ufe0f",
         entities: "\ud83d\udc25",
+        vehicles: "🚗",
         props: "\ud83c\udf32",
         elevation: "\u26f0\ufe0f",
         patterns: "▥",
@@ -147,6 +153,7 @@ export class EditorPanel {
         road: "Road",
         structure: "Structure",
         entities: "Entities",
+        vehicles: "Vehicles",
         props: "Props",
         elevation: "Elevation",
         patterns: "Patterns",
@@ -268,6 +275,28 @@ export class EditorPanel {
     this.entityRow.appendChild(this.buildDeleteButton());
 
     this.paletteScroll.appendChild(this.entityRow);
+
+    // --- Parked vehicles ---
+    this.vehicleRow = document.createElement("div");
+    this.vehicleRow.style.cssText = ROW_STYLE;
+    this.vehicleRow.setAttribute("role", "group");
+    this.vehicleRow.setAttribute("aria-label", "Vehicle picker");
+    for (const entry of VEHICLE_PALETTE) {
+      const button = document.createElement("button");
+      button.style.cssText = `${BTN_STYLE}width: 96px; height: 78px; padding: 2px; flex-direction: column;`;
+      button.textContent = entry.label;
+      button.title = `Place ${entry.label} (click map)`;
+      button.setAttribute("aria-label", entry.label);
+      button.onclick = () => {
+        this.model.selectedVehicleType = entry.type;
+        this.model.deleteMode = false;
+        this.syncFromModel();
+      };
+      this.vehicleButtons.push(button);
+      this.vehicleRow.append(button);
+    }
+    this.vehicleRow.append(this.makeSeparator(), this.buildDeleteButton());
+    this.paletteScroll.append(this.vehicleRow);
 
     // --- Props row ---
     this.propsRow = document.createElement("div");
@@ -524,6 +553,11 @@ export class EditorPanel {
               model.selectedPropType
                 .replace(/^(prop-interior-furniture:|prop-|atlas:)/, "")
                 .replace(/[-_]/g, " "));
+      case "vehicles":
+        return model.deleteMode
+          ? "Delete vehicles"
+          : (VEHICLE_PALETTE.find((entry) => entry.type === model.selectedVehicleType)?.label ??
+              "Vehicles");
       case "entities":
         return model.deleteMode
           ? "Delete entities"
@@ -858,6 +892,7 @@ export class EditorPanel {
     this.roadRow.style.display = isRoad ? "flex" : "none";
     this.structureRow.style.display = this.model.editorTab === "structure" ? "flex" : "none";
     this.entityRow.style.display = this.model.editorTab === "entities" ? "flex" : "none";
+    this.vehicleRow.style.display = this.model.editorTab === "vehicles" ? "flex" : "none";
     this.propsRow.style.display =
       !this.model.indoor && this.model.editorTab === "props" ? "flex" : "none";
     this.elevationRow.style.display = this.model.editorTab === "elevation" ? "flex" : "none";
@@ -944,6 +979,11 @@ export class EditorPanel {
   }
 
   private updateEntitySelection(): void {
+    for (const [index, entry] of VEHICLE_PALETTE.entries()) {
+      const button = this.vehicleButtons[index];
+      if (button)
+        button.style.borderColor = entry.type === this.model.selectedVehicleType ? "#fff" : "#888";
+    }
     for (let i = 0; i < ENTITY_PALETTE.length; i++) {
       const btn = this.entityButtons[i];
       const entry = ENTITY_PALETTE[i];
@@ -1025,6 +1065,25 @@ export class EditorPanel {
       }
     }
 
+    for (const [index, entry] of VEHICLE_PALETTE.entries()) {
+      const button = this.vehicleButtons[index],
+        sheet = sheets.get(entry.type);
+      const view = vehicleView(entry.type, Direction.Right),
+        collider = view?.metadata.colliders[0];
+      if (!button || !sheet || !view || !collider) continue;
+      const frame = sheet.getRegion(0, vehicleFrameDirection(entry.type, Direction.Right));
+      this.renderPreviewCanvas(button, sheet, 0, 0, 92, 48, {
+        x: frame.x + 96 - (view.metadata.anchor[0] ?? 0) - collider.offsetX,
+        y: frame.y + 144 - (view.metadata.anchor[1] ?? 0) - collider.offsetY + collider.height / 2,
+        width: view.rect[2] ?? 1,
+        height: view.rect[3] ?? 1,
+      });
+      const label = document.createElement("span");
+      label.textContent = entry.label;
+      label.style.cssText = "font-size: 10px; line-height: 12px; pointer-events: none;";
+      button.append(label);
+    }
+
     // Prop buttons: draw sprite preview from the prop's own sheet
     for (let i = 0; i < PROP_PALETTE.length; i++) {
       const btn = this.propButtons[i];
@@ -1058,6 +1117,7 @@ export class EditorPanel {
     row: number,
     btnW: number,
     btnH: number,
+    source?: { x: number; y: number; width: number; height: number },
   ): void {
     const canvas = document.createElement("canvas");
     const pad = 4; // account for border
@@ -1070,7 +1130,7 @@ export class EditorPanel {
     if (!ctx) return;
     ctx.imageSmoothingEnabled = false;
 
-    const region = sheet.getRegion(col, row);
+    const region = source ?? sheet.getRegion(col, row);
     // Scale sprite to fit canvas, centered
     const scaleX = cw / region.width;
     const scaleY = ch / region.height;

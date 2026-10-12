@@ -598,6 +598,11 @@ retain the same snapshot index during queued replay. Complete entity history
 remains available for roof selection; separate rider sweeps and global excavation
 presence retain native headroom/ground policy. No lab-only collision owner is added.
 
+[128](../tactical/128-editor-vehicle-placement.md) gives every outdoor Realm the
+shared traffic service, using an empty route graph when no roads exist. Game and
+ScenarioSession retain identical placement, driving, collision, lights and durable
+restore behavior. Placed anchors never enter automatic routing; generated-lane
+traffic and authored fixtures retain their existing movement owner.
 
 ## Authored blue train inspection
 

@@ -12,6 +12,7 @@ export class EditorModel {
   selectedNaturalIndex = 8;
   selectedRoadType: RoadType = RoadType.Asphalt;
   selectedEntityType = "chicken";
+  selectedVehicleType = "vehicle-v1:compact-1";
   selectedPropType = "prop-flower-red";
   deleteMode = false;
   indoor = false;

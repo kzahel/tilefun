@@ -6,7 +6,7 @@ import {
   aabbsOverlap,
   getEntityAABB,
 } from "../entities/collision.js";
-import type { Entity } from "../entities/Entity.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { actorScope } from "../persistence/ActorRecords.js";
@@ -14,6 +14,7 @@ import { querySurfacePatch } from "../physics/SurfacePatch.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { bridgePart } from "../railway/RoadRailBridge.js";
 import { RoadType } from "../road/RoadType.js";
+import { generateUUID } from "../shared/uuid.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
@@ -45,7 +46,29 @@ import {
   vehicleView,
 } from "./Vehicle.js";
 
+export const EMPTY_TRAFFIC_ROUTES: TrafficRouteSource = {
+  trafficNetwork: () => ({ lanes: new Map(), outgoing: new Map() }),
+};
+
+/** A parked placement anchor is bookkeeping, never a generated road or route. */
+function placementLane(identity: string, x: number, y: number): Lane {
+  const a = { x, y },
+    b = { x: x + 1, y };
+  return {
+    id: identity,
+    from: identity,
+    to: identity,
+    a,
+    b,
+    direction: Direction.Right,
+    width: 0,
+    intercity: false,
+    path: path([a, b]),
+  };
+}
+
 export interface SavedTraffic {
+  placed?: boolean;
   parked?: boolean;
   facing?: number;
   resumePath?: Path;
@@ -70,6 +93,7 @@ export interface SavedTraffic {
   choices: number;
 }
 export interface TrafficState {
+  placed?: boolean;
   driverId?: number;
   parked?: boolean;
   resumePath?: Path;
@@ -163,6 +187,63 @@ export class TrafficSystem {
     this.states.set(entity.id, s);
     if (persist) this.onChange?.(s, false);
     return s;
+  }
+  /** Editor placement uses the same full-body dry-ground checks as driving. */
+  place(model: string, wx: number, wy: number): TrafficState | undefined {
+    if (
+      !VEHICLE_MODELS.includes(model) ||
+      this.states.size >= 1024 ||
+      ![wx, wy].every(Number.isFinite) ||
+      Math.abs(wx) > 2 ** 28 ||
+      Math.abs(wy) > 2 ** 28
+    )
+      return;
+    const candidate = createVehicle(model, wx, wy);
+    candidate.id = -1; // Unpublished candidates must not alias the player/entity ID zero.
+    const bounds = getEntityAABB(candidate.position, required(candidate.collider));
+    for (
+      let y = Math.floor(bounds.top / CHUNK_SIZE_PX);
+      y <= Math.floor((bounds.bottom - 0.001) / CHUNK_SIZE_PX);
+      y++
+    )
+      for (
+        let x = Math.floor(bounds.left / CHUNK_SIZE_PX);
+        x <= Math.floor((bounds.right - 0.001) / CHUNK_SIZE_PX);
+        x++
+      )
+        if (!this.world.getChunkIfLoaded(x, y)) return;
+    candidate.wz = candidate.groundZ = resolveGroundZForTracking(
+      candidate,
+      (x, y) => this.world.getHeightAt(x, y),
+      this.props.props,
+      [],
+    );
+    if (
+      !drivenCarPose(
+        candidate,
+        { dx: 0, dy: 0 },
+        1 / 60,
+        this.world,
+        this.props.props,
+        this.entities.entities,
+        this.drivingQueries,
+      )
+    )
+      return;
+    const identity = `placed-vehicle-v1:${generateUUID()}`;
+    const state = this.add(
+      model,
+      placementLane(identity, wx, wy),
+      0,
+      false,
+      { x: wx, y: wy, direction: Direction.Right },
+      candidate.wz,
+    );
+    state.entity.proceduralId = identity;
+    state.placed = state.parked = true;
+    state.waiting = "parked";
+    this.onChange?.(state, false);
+    return state;
   }
   private network(s: TrafficState): LaneGraph {
     return this.strategy.trafficNetwork(s.entity.position.wx, s.entity.position.wy);
@@ -585,6 +666,7 @@ export class TrafficSystem {
     s.parked = true;
     if (
       resume &&
+      !s.placed &&
       this.roadClear(getEntityAABB(s.entity.position, required(s.entity.collider)), true)
     ) {
       const graph = this.network(s);
@@ -651,6 +733,7 @@ export class TrafficSystem {
   snapshot(s: TrafficState): SavedTraffic {
     return {
       ...(s.entity.emergencyState !== undefined ? { emergencyState: s.entity.emergencyState } : {}),
+      ...(s.placed ? { placed: true } : {}),
       parked: s.parked ?? false,
       facing: s.entity.sprite?.direction ?? 0,
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
@@ -706,10 +789,26 @@ export class TrafficSystem {
         !validVehicleLightState({ type: `vehicle-v1:${r.model}` }, r.emergencyState)
       )
         throw new Error("Invalid saved emergency state.");
+      if (r.placed !== undefined && typeof r.placed !== "boolean")
+        throw new Error("Invalid placed vehicle state.");
+      if (
+        r.placed &&
+        (!r.identity.startsWith("placed-vehicle-v1:") ||
+          r.laneId !== r.identity ||
+          !r.parked ||
+          r.nextId !== null ||
+          r.turning ||
+          r.distance !== 0 ||
+          r.resumePath)
+      )
+        throw new Error("Invalid placed vehicle route.");
       // Resolve the same local graph used when choosing the saved successor.
-      const graph = this.strategy.trafficNetwork(r.wx ?? r.x, r.wy ?? r.y);
-      const original =
-        graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId);
+      const graph = r.placed
+        ? EMPTY_TRAFFIC_ROUTES.trafficNetwork(0, 0)
+        : this.strategy.trafficNetwork(r.wx ?? r.x, r.wy ?? r.y);
+      const original = r.placed
+        ? placementLane(r.identity, r.x, r.y)
+        : (graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId));
       if (r.parked !== undefined && typeof r.parked !== "boolean")
         throw new Error("Invalid parked state.");
       if (r.facing !== undefined && ![0, 1, 2, 3].includes(r.facing))
@@ -758,6 +857,7 @@ export class TrafficSystem {
         r.wz ?? 0,
       );
       if (r.emergencyState !== undefined) s.entity.emergencyState = r.emergencyState;
+      s.placed = r.placed ?? false;
       s.parked = r.parked ?? false;
       if (r.resumePath) s.resumePath = r.resumePath;
       s.speed = r.parked ? 0 : (r.speed ?? 0);
@@ -796,7 +896,9 @@ export class TrafficSystem {
         )
       )
         this.remove(s);
-    if (this.states.size >= Math.min(32, players.length * 12)) return;
+    let automaticCount = 0;
+    for (const state of this.states.values()) if (!state.placed) automaticCount++;
+    if (this.states.size >= 1024 || automaticCount >= Math.min(32, players.length * 12)) return;
     for (const player of players) {
       const network = this.strategy.trafficNetwork(player.position.wx, player.position.wy);
       const spawnDistance = (lane: Lane) => {
@@ -824,7 +926,7 @@ export class TrafficSystem {
         })
         .sort((a, b) => a.id.localeCompare(b.id));
       for (const lane of lanes) {
-        if (this.states.size >= Math.min(32, players.length * 12)) break;
+        if (this.states.size >= 1024 || automaticCount >= Math.min(32, players.length * 12)) break;
         if (lane.intercity && hash(`${lane.id}:${Math.floor(this.time / 30)}`) % 6 !== 0) continue;
         const sample = samplePath(lane.path, spawnDistance(lane));
         const dist = Math.hypot(sample.x - player.position.wx, sample.y - player.position.wy);
@@ -858,7 +960,10 @@ export class TrafficSystem {
         ) {
           this.states.delete(s.entity.id);
           this.entities.remove(s.entity.id, false);
-        } else this.onChange?.(s, false);
+        } else {
+          automaticCount++;
+          this.onChange?.(s, false);
+        }
       }
     }
   }

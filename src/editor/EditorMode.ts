@@ -1,5 +1,5 @@
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
-import type { Entity } from "../entities/Entity.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import { type InteriorIdentity, interiorRealmId } from "../interiors/GameplayInterior.js";
@@ -13,6 +13,7 @@ import { type GridPoint, gridLine, strokeCells } from "../patterns/GridStroke.js
 import { applyPatternEdit, type PatternEdit } from "../patterns/PatternDocument.js";
 import type { TreeBrushCommand } from "../patterns/TreeBrushEditor.js";
 import type { Camera } from "../rendering/Camera.js";
+import { vehicleView } from "../traffic/Vehicle.js";
 import type { EditorModel } from "./EditorModel.js";
 
 export type { BrushMode, PaintMode, SubgridShape } from "./EditorTypes.js";
@@ -98,6 +99,8 @@ export class EditorMode {
   props: readonly Prop[] = [];
 
   // Tile-mode cursor (whole tile)
+  cursorWorldX = -Infinity;
+  cursorWorldY = -Infinity;
   cursorTileX = -Infinity;
   cursorTileY = -Infinity;
 
@@ -396,7 +399,10 @@ export class EditorMode {
     this.pendingEntitySpawns.push({
       wx,
       wy,
-      entityType: this.model.selectedEntityType,
+      entityType:
+        this.model.editorTab === "vehicles"
+          ? this.model.selectedVehicleType
+          : this.model.selectedEntityType,
     });
   }
 
@@ -418,16 +424,35 @@ export class EditorMode {
     let bestEntityId = -1;
     let bestPropId = -1;
     for (const entity of this.entities) {
+      if (this.model.editorTab === "vehicles" && !entity.type.startsWith("vehicle-v1:")) continue;
       const dx = entity.position.wx - wx;
       const dy = entity.position.wy - wy;
-      const dist = Math.sqrt(dx * dx + dy * dy);
+      let dist = Math.sqrt(dx * dx + dy * dy);
+      const view = vehicleView(entity.type, entity.sprite?.direction ?? Direction.Right);
+      const collider = view?.metadata.colliders[0];
+      if (view && collider) {
+        const left = entity.position.wx - (view.metadata.anchor[0] ?? 0) - collider.offsetX;
+        const top =
+          entity.position.wy -
+          (entity.wz ?? 0) -
+          (view.metadata.anchor[1] ?? 0) -
+          collider.offsetY +
+          collider.height / 2;
+        if (
+          wx >= left &&
+          wx <= left + (view.rect[2] ?? 0) &&
+          wy >= top &&
+          wy <= top + (view.rect[3] ?? 0)
+        )
+          dist = 0;
+      }
       if (dist < bestDist) {
         bestDist = dist;
         bestEntityId = entity.id;
         bestPropId = -1;
       }
     }
-    for (const prop of this.props) {
+    for (const prop of this.model.editorTab === "vehicles" ? [] : this.props) {
       const dx = prop.position.wx - wx;
       const dy = prop.position.wy - wy;
       const dist = Math.sqrt(dx * dx + dy * dy);
@@ -582,6 +607,9 @@ export class EditorMode {
   }
 
   private updateCursor(sx: number, sy: number): void {
+    const world = this.screenToWorld(sx, sy);
+    this.cursorWorldX = world.wx;
+    this.cursorWorldY = world.wy;
     const { tx, ty } = this.screenToTile(sx, sy);
     this.cursorTileX = tx;
     this.cursorTileY = ty;
@@ -614,7 +642,7 @@ export class EditorMode {
       return;
     }
 
-    if (this.model.editorTab === "entities") {
+    if (this.model.editorTab === "entities" || this.model.editorTab === "vehicles") {
       if (e.button === 0 && !this.model.deleteMode) {
         this.spawnEntityAt(sx, sy);
       } else if (e.button === 2 || (e.button === 0 && this.model.deleteMode)) {
@@ -711,6 +739,7 @@ export class EditorMode {
       // Defer single-touch paint — a second finger may arrive for pinch/pan.
       const [first] = this.activeTouches.values();
       if (first) {
+        if (this.model.editorTab === "vehicles") this.updateCursor(first.sx, first.sy);
         this.touchPaintStart = { sx: first.sx, sy: first.sy };
         this.touchPaintTimer = setTimeout(() => {
           this.commitTouchPaint();
@@ -746,6 +775,7 @@ export class EditorMode {
         // In entity/props mode, don't drag-to-spam
         if (
           this.model.editorTab !== "entities" &&
+          this.model.editorTab !== "vehicles" &&
           this.model.editorTab !== "props" &&
           !this.wasPinching
         ) {
@@ -793,7 +823,7 @@ export class EditorMode {
     const start = this.touchPaintStart;
     this.cancelTouchPaint();
     if (!start) return;
-    if (this.model.editorTab === "entities") {
+    if (this.model.editorTab === "entities" || this.model.editorTab === "vehicles") {
       if (this.model.deleteMode) {
         this.deleteEntityAt(start.sx, start.sy);
       } else {

@@ -3853,11 +3853,11 @@
       "consumers": [
         {
           "system": "Editor",
-          "source": "src/editor/EditorModel.ts:15"
+          "source": "src/editor/EditorModel.ts:16"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorModel.ts:18"
+          "source": "src/editor/EditorModel.ts:19"
         },
         {
           "system": "Gameplay",
@@ -20461,7 +20461,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:328"
+          "source": "src/editor/EditorPanel.ts:357"
         },
         {
           "system": "Interiors",
@@ -20595,7 +20595,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:330"
+          "source": "src/editor/EditorPanel.ts:359"
         },
         {
           "system": "Interiors",
@@ -20693,7 +20693,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:329"
+          "source": "src/editor/EditorPanel.ts:358"
         },
         {
           "system": "Interiors",
@@ -20759,7 +20759,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:331"
+          "source": "src/editor/EditorPanel.ts:360"
         },
         {
           "system": "Interiors",
@@ -20825,7 +20825,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:332"
+          "source": "src/editor/EditorPanel.ts:361"
         },
         {
           "system": "Interiors",
@@ -20915,7 +20915,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:333"
+          "source": "src/editor/EditorPanel.ts:362"
         },
         {
           "system": "Interiors",
@@ -21019,7 +21019,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:334"
+          "source": "src/editor/EditorPanel.ts:363"
         },
         {
           "system": "Interiors",
@@ -21065,7 +21065,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:335"
+          "source": "src/editor/EditorPanel.ts:364"
         },
         {
           "system": "Interiors",
@@ -22278,6 +22278,10 @@
           "source": "src/assets/GameAssets.ts"
         },
         {
+          "system": "Editor",
+          "source": "src/editor/EditorModel.ts:15"
+        },
+        {
           "system": "Gameplay",
           "source": "src/rendering/RendererLab.ts:205"
         },
@@ -23181,7 +23185,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorMode.ts:89"
+          "source": "src/editor/EditorMode.ts:90"
         },
         {
           "system": "Gameplay",
@@ -23253,11 +23257,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1290"
+          "source": "src/server/Realm.ts:1299"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2301"
+          "source": "src/server/Realm.ts:2318"
         },
         {
           "system": "Gameplay",
@@ -23327,7 +23331,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:81"
+          "source": "src/editor/EditorPalettes.ts:83"
         },
         {
           "system": "Gameplay",
@@ -23381,7 +23385,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:82"
+          "source": "src/editor/EditorPalettes.ts:84"
         },
         {
           "system": "Gameplay",
@@ -23439,7 +23443,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:83"
+          "source": "src/editor/EditorPalettes.ts:85"
         },
         {
           "system": "Gameplay",
@@ -23477,7 +23481,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:84"
+          "source": "src/editor/EditorPalettes.ts:86"
         },
         {
           "system": "Gameplay",
@@ -23515,7 +23519,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:87"
+          "source": "src/editor/EditorPalettes.ts:89"
         },
         {
           "system": "Gameplay",
@@ -23557,7 +23561,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:88"
+          "source": "src/editor/EditorPalettes.ts:90"
         },
         {
           "system": "Gameplay",
@@ -23599,7 +23603,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:89"
+          "source": "src/editor/EditorPalettes.ts:91"
         },
         {
           "system": "Gameplay",
@@ -23645,7 +23649,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:90"
+          "source": "src/editor/EditorPalettes.ts:92"
         },
         {
           "system": "Gameplay",
@@ -23695,7 +23699,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:91"
+          "source": "src/editor/EditorPalettes.ts:93"
         },
         {
           "system": "Gameplay",
@@ -23741,7 +23745,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:85"
+          "source": "src/editor/EditorPalettes.ts:87"
         },
         {
           "system": "Gameplay",
@@ -23783,7 +23787,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:86"
+          "source": "src/editor/EditorPalettes.ts:88"
         },
         {
           "system": "Gameplay",
@@ -23821,7 +23825,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:92"
+          "source": "src/editor/EditorPalettes.ts:94"
         },
         {
           "system": "Gameplay",
@@ -23851,7 +23855,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:93"
+          "source": "src/editor/EditorPalettes.ts:95"
         },
         {
           "system": "Gameplay",
@@ -23881,7 +23885,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:94"
+          "source": "src/editor/EditorPalettes.ts:96"
         },
         {
           "system": "Gameplay",
@@ -23911,7 +23915,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:95"
+          "source": "src/editor/EditorPalettes.ts:97"
         },
         {
           "system": "Gameplay",
@@ -23965,7 +23969,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2265"
+          "source": "src/server/Realm.ts:2282"
         },
         {
           "system": "Gameplay",
@@ -23995,7 +23999,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:96"
+          "source": "src/editor/EditorPalettes.ts:98"
         },
         {
           "system": "Gameplay",
@@ -24045,7 +24049,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:97"
+          "source": "src/editor/EditorPalettes.ts:99"
         },
         {
           "system": "Gameplay",

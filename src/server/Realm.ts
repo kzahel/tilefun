@@ -88,7 +88,11 @@ import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js
 import type { ClientMessage } from "../shared/protocol.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
-import { type TrafficRouteSource, TrafficSystem } from "../traffic/TrafficSystem.js";
+import {
+  EMPTY_TRAFFIC_ROUTES,
+  type TrafficRouteSource,
+  TrafficSystem,
+} from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
@@ -305,9 +309,14 @@ export class Realm {
     const trafficRoutes =
       this.options.traffic ??
       (this.generator?.terrain instanceof TrafficStrategy ? this.generator.terrain : undefined);
-    this.traffic = trafficRoutes
-      ? new TrafficSystem(this.world, this.entityManager, this.propManager, trafficRoutes)
-      : null;
+    this.traffic = this.interior
+      ? null
+      : new TrafficSystem(
+          this.world,
+          this.entityManager,
+          this.propManager,
+          trafficRoutes ?? EMPTY_TRAFFIC_ROUTES,
+        );
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -1424,6 +1433,7 @@ export class Realm {
         break;
 
       case "edit-spawn":
+        if (msg.entityType.startsWith("vehicle-v1:") && !session.editorEnabled) break;
         this.handleSpawn(msg.entityType, msg.wx, msg.wy);
         break;
 
@@ -1566,9 +1576,14 @@ export class Realm {
     const trafficRoutes =
       this.options.traffic ??
       (this.generator?.terrain instanceof TrafficStrategy ? this.generator.terrain : undefined);
-    this.traffic = trafficRoutes
-      ? new TrafficSystem(this.world, this.entityManager, this.propManager, trafficRoutes)
-      : null;
+    this.traffic = this.interior
+      ? null
+      : new TrafficSystem(
+          this.world,
+          this.entityManager,
+          this.propManager,
+          trafficRoutes ?? EMPTY_TRAFFIC_ROUTES,
+        );
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -2071,7 +2086,9 @@ export class Realm {
   private handleSpawn(entityType: string, wx: number, wy: number): void {
     let changed = false;
     if (this.interior && (!furnitureAsset(entityType) || !this.roomState)) return;
-    if (isPropType(entityType)) {
+    if (entityType.startsWith("vehicle-v1:")) {
+      changed = !!this.traffic?.place(entityType.slice(11), wx, wy);
+    } else if (isPropType(entityType)) {
       const prop = createProp(entityType, wx, wy);
       if (this.interior && this.roomGeometry) {
         try {

@@ -1,6 +1,7 @@
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { RoadType } from "../road/RoadType.js";
+import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
@@ -13,6 +14,7 @@ export type EditorTab =
   | "road"
   | "structure"
   | "entities"
+  | "vehicles"
   | "props"
   | "elevation"
   | "patterns";
@@ -102,11 +104,36 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   })),
 ];
 
+const compactColors = ["Blue", "Green", "Cyan", "Red", "Orange", "Silver"];
+const vehicleNames: Record<string, string> = {
+  ambulance: "Ambulance",
+  "police-car": "Police car",
+  "fire-truck-ladder-1": "Firetruck",
+  "fire-truck-ladder-2": "Raised-ladder firetruck",
+  "garbage-truck-green": "Green garbage truck",
+  "garbage-truck-orange": "Orange garbage truck",
+  "sedan-12": "Beige sedan 12",
+};
+export const VEHICLE_PALETTE: EntityPaletteEntry[] = VEHICLE_MODELS.map((model) => {
+  const color = model.replace("unindexed-sedan-", "");
+  const label =
+    vehicleNames[model] ??
+    (model.startsWith("compact-")
+      ? `${compactColors[Number(model.slice(8)) - 1]} car`
+      : model.startsWith("unindexed-sedan-")
+        ? `${color[0]?.toUpperCase()}${color.slice(1)} sedan`
+        : model.startsWith("bus-")
+          ? `Bus ${model.slice(4)}`
+          : `Car ${model.slice(4)}`);
+  return { type: `vehicle-v1:${model}`, label, color: "#51777b" };
+});
+
 export const ALL_TABS: EditorTab[] = [
   "natural",
   "road",
   "structure",
   "entities",
+  "vehicles",
   "props",
   "elevation",
   "patterns",
