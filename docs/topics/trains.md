@@ -65,6 +65,12 @@ City-train browser coverage releases boarding movement at the carriage center
 instead of after a fixed wall-time hold. It still requires actual 44px roof
 support, mid-bend reload, arrival and alighting; hosted software GPU contention
 must not make the scripted input walk beyond the roof before asserting support.
+The fixture waits for a ready canvas, a real player, exited editor mode and an
+approach admitted by both predicted and authoritative poses before pressing Jump.
+A GPU-mesh CI run stopped 12px short of the carriage center after the initial
+held jump; staging the walking approach prevents spending that edge during startup.
+All three complete game journeys and the phone saved-roof check pass locally,
+plus three GPU-mesh boarding checks with fourfold CPU throttling (2026-10-12).
 
 ## Requested direction
 

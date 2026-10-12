@@ -19,8 +19,10 @@ const read = (page: Page) =>
     const server = g.stateView.serverPlayerPosition;
     return {
       editing: g.stateView.editorEnabled,
+      playerId: player.id,
       x: player.position.wx,
       y: player.position.wy,
+      serverY: server?.wy ?? null,
       z: player.wz ?? 0,
       serverZ: server?.wz ?? 0,
       trainX: car?.position.wx ?? 0,
@@ -44,19 +46,33 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     );
     await page.getByPlaceholder("World name...").fill(`City train ride ${backend}`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect(page.locator("#game")).toHaveAttribute(
       "data-generation",
       JSON.stringify(createDescriptor("regional", 2026)),
     );
     await expect.poll(async () => (await read(page)).trainX, { timeout: 15000 }).toBe(2543 * 16);
+    await expect.poll(async () => (await read(page)).playerId).not.toBe(-1);
     await expect
       .poll(async () => (await read(page)).railChunks, { timeout: 15000 })
       .toBeGreaterThan(0);
     if ((await read(page)).editing) await page.keyboard.press("Tab");
+    await expect.poll(async () => (await read(page)).editing).toBe(false);
     const boardingY = (await read(page)).trainY;
     await page.keyboard.down("ArrowDown");
-    await page.keyboard.down("Space");
     try {
+      // Admit the approach before spending the one held jump edge. A jump
+      // during startup can finish before walking reaches the carriage.
+      await expect
+        .poll(
+          async () => {
+            const state = await read(page);
+            return Math.min(state.y, state.serverY ?? Number.NEGATIVE_INFINITY);
+          },
+          { intervals: [30], timeout: 15000 },
+        )
+        .toBeGreaterThanOrEqual(boardingY - 24);
+      await page.keyboard.down("Space");
       // Release at the roof center rather than after wall time: software GPU
       // contention can make a fixed hold overshoot the carriage or stop short.
       await expect

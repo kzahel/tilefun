@@ -54,6 +54,8 @@ hosted software GPU rendering can otherwise starve the simulation Worker.
 CI splits the suite across four independent runners, each with isolated auth/data
 and one browser worker. Individual assertion deadlines remain explicit. Long
 headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
+Each CI shard stops at its first test failure so GitHub publishes its job logs
+promptly; other shards continue independently. Local runs collect all failures.
 The raster verification renders every Workshop candidate in headless-shell and
 full Chromium, checks the committed fingerprints and leaves the manifest intact.
 CI runs it on Ubuntu x64 so CPU-specific blending differences cannot hide behind
