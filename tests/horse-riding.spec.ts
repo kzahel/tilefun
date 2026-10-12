@@ -40,6 +40,10 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.evaluate((type) => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       if (!g.stateView.editorEnabled) throw new Error("Editor not active");
+      // Stage a stationary horse inside its alarm radius. Automation may take
+      // longer than the real jump approach while leaving the editor.
+      g.debugPanel.paused = true;
+      g.transport.send({ type: "set-debug", paused: true, noclip: false });
       const p = g.stateView.playerEntity.position;
       g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 28, wy: p.wy });
     }, faunaType("horse"));
@@ -66,9 +70,14 @@ for (const renderer of ["canvas", "gpu"]) {
           x: horse?.position.wx ?? 0,
         };
       }, faunaType("horse"));
-    // Send the jump/movement chord without a protocol round trip between keys.
-    // Slow CI must not walk into and startle the horse before initiating the jump.
-    await Promise.all([page.keyboard.down("Space"), page.keyboard.down("ArrowRight")]);
+    // Resume and deliver the chord in one browser task, through the normal
+    // keyboard handlers. No authority tick can flee before the input is ready.
+    await page.evaluate(() => {
+      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      g.debugPanel.paused = false;
+      for (const key of [" ", "ArrowRight"])
+        window.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+    });
     await expect
       .poll(async () => (await read()).state, { timeout: 4000, intervals: [30] })
       .toBe("ridden");

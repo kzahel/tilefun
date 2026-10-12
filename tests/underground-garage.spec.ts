@@ -27,13 +27,30 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect(canvas).toHaveAttribute("data-player-z", "-48");
     await canvas.screenshot({ path: `/tmp/tilefun-garage-${renderer}-underground.png` });
     await canvas.focus();
-    await page.keyboard.down("Space");
-    await expect
-      .poll(async () => Number(await canvas.getAttribute("data-player-z")))
-      .toBeGreaterThan(-30);
-    expect(Number(await canvas.getAttribute("data-player-z"))).toBeLessThanOrEqual(-20 + 0.001);
-    await page.keyboard.up("Space");
-    await expect(canvas).toHaveAttribute("data-player-z", "-48");
+    // Record the displayed jump height in the browser. Cross-process polling
+    // can miss the entire short ceiling-limited jump on a software GPU runner.
+    const jump = await canvas.evaluateHandle((element) => {
+      const sample = () => Number(element.getAttribute("data-player-z"));
+      const probe = { maxZ: sample(), observer: null as MutationObserver | null };
+      probe.observer = new MutationObserver(() => {
+        probe.maxZ = Math.max(probe.maxZ, sample());
+      });
+      probe.observer.observe(element, {
+        attributes: true,
+        attributeFilter: ["data-player-z"],
+      });
+      return probe;
+    });
+    try {
+      await page.keyboard.down("Space");
+      await expect.poll(() => jump.evaluate((probe) => probe.maxZ)).toBeGreaterThan(-30);
+      await page.keyboard.up("Space");
+      await expect(canvas).toHaveAttribute("data-player-z", "-48");
+      expect(await jump.evaluate((probe) => probe.maxZ)).toBeLessThanOrEqual(-20 + 0.001);
+    } finally {
+      await jump.evaluate((probe) => probe.observer?.disconnect());
+      await jump.dispose();
+    }
     await page.getByRole("button", { name: "Start at street", exact: true }).click();
     await expect(canvas).toHaveAttribute("data-player-x", "80");
     await expect(canvas).toHaveAttribute("data-player-z", "0");

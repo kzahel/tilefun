@@ -295,3 +295,12 @@ ceilings stop the service with a rider; generated road decks are 96px high with 
 still traverse both approaches. Curved routes remain level and avoid roads;
 existing admitted road crossings retain their straight services. Native train
 pixels and promoted banks remain unchanged.
+
+## Browser jump evidence (2026-10-12)
+
+`tests/underground-garage.spec.ts` records the maximum displayed jump height with
+a browser-local attribute observer. Hosted software GPU polling can miss the
+entire short ceiling-limited jump between protocol reads. The check still requires
+rising above -30px, staying at or below the -20px ceiling limit and returning to
+the -48px floor; it disconnects the observer afterward. Shared physics and lab
+presentation are unchanged.

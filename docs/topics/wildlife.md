@@ -22,8 +22,13 @@ now boards rather than starting an escape. No artwork or recorded human decision
 
 Regression coverage: `HorseRiding.test.ts`, the horse cases in `FaunaBodies.test.ts`,
 `tests/horse-riding.spec.ts` and the Canvas/GPU horse cases in `tests/fauna-gameplay.spec.ts`.
-The keyboard browser check sends Jump and movement together, avoiding a protocol
-round trip that can walk into the horse before jumping on slow CI. Robin reopening
+The keyboard browser check stages the nearby horse with the existing debug pause,
+then resumes and delivers Jump/movement through the normal keyboard handlers in
+one browser task. The horse starts inside its 38px alarm radius; waiting for
+editor exit on slow CI otherwise lets it flee before the jump. A 1.2-second
+handoff reproduces the failure in both renderers; ten delayed checks pass with
+the staged setup (2026-10-12). Gameplay and startled-horse unit coverage are unchanged.
+Robin reopening
 checks the manual actor's persistent identity and the deleted generated actor's
 tombstone instead of a total count that varies with streamed nearby populations.
 Aquatic ball-hit fixtures start 75px away, within a minimum-force throw's first
