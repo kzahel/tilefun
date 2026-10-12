@@ -1,8 +1,10 @@
 import { expect, test } from "@playwright/test";
+import type { GameClient } from "../src/client/GameClient.js";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 
 const version = CURRENT_REGIONAL_VERSION;
 test(`${version} prepares terrain before sprinting and revisiting it`, async ({ page }) => {
+  test.setTimeout(60_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   const generation = { type: "regional", version, seed: 2026, preset: "temperate-v1" };
@@ -26,6 +28,13 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
       d.pending === 0
     );
   }, arrival);
+  // This checks terrain readiness during traversal. Moving traffic must not
+  // turn it into a collision/timing lottery at the starting road intersection.
+  await page.evaluate(() => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    g.debugPanel.noclip = true;
+    g.transport.send({ type: "set-debug", paused: false, noclip: true });
+  });
   const sample = (direction: number) =>
     page.evaluate(async (direction) => {
       // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
@@ -35,9 +44,10 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
         missing = 0,
         maxSurfaces = 0;
       const visited = new Set<string>();
-      // Display frames are not simulation time. Keep the original minimum
-      // coverage, then wait for the required traversal with a bounded frame cap.
-      for (let i = 0; i < 600; i++) {
+      // Keep minimum display coverage and require actual travel, bounded by
+      // elapsed time rather than a frame count that varies with refresh rate.
+      const deadline = performance.now() + 20_000;
+      for (let i = 0; performance.now() < deadline; i++) {
         await new Promise(requestAnimationFrame);
         // PlayScene restores the simulation camera after rendering. Inspect
         // the same interpolated view that prepared the last frame's caches;

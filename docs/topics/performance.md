@@ -95,10 +95,14 @@ Both failures reproduce serially without competing browser tests.
 ## Evidence and validation
 
 The streaming browser regression retains at least 210 sampled display frames per
-direction and its existing travel/readiness/cache bounds, but allows up to 600
-frames to complete 450px of traversal. Display frames do not establish simulation
-time; the prior fixed-frame window could return only 309px on hosted CI. This is
-a traversal readiness check, not a frame-rate or throughput benchmark.
+direction and its existing travel/readiness/cache bounds, with a 20-second
+elapsed-time limit to complete 450px of traversal. Display frames do not establish
+simulation time; fixed-frame windows could return only 309px on hosted CI.
+The 2026-10-12 CI run also stopped at 363px beside moving road traffic; this
+terrain-only check now uses the existing debug noclip path to isolate traversal
+from transient vehicle collisions. Native collision checks remain in their own
+browser/unit suites. This is a traversal readiness check, not a frame-rate or
+throughput benchmark.
 
 CI harness validation (2026-10-11): typechecks, 2,520 units, 11 Worker tests,
 Worker build, lint (existing warnings) and production build pass. The full browser
