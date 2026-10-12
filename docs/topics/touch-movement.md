@@ -16,8 +16,11 @@ for exactly 600ms, keeping CDP scheduling delays outside the 800ms gesture limit
 wall time is fixed before pausing to prevent a past-time request race. The authority
 retains its ordinary clock. Focus-loss cancellation remains exercised. The water
 fixture clears ambient chickens before staging its one interaction subject, so an
-unrelated nearby animal cannot claim the destination tap. The pure walking fixture
-also removes random initial chickens before its first destination. Native world
+unrelated nearby animal cannot claim the destination tap. Flat locomotion
+fixtures also remove random initial chickens before destination taps, including
+after reload in the slow-first-tap case. Staging a chicken at that case's
+destination reproduces CI's null target: the normal befriend branch correctly
+claims the tap. Native world
 taps use `tests/helpers/worldTap.ts`, which queues CDP touch-down and touch-up
 without a protocol round trip during the held contact. Touch duration remains
 bounded by the ordinary 800ms recognizer; the explicit 600ms fullscreen and

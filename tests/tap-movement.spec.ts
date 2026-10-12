@@ -71,10 +71,31 @@ async function start(
     });
   }, destination);
   await expect.poll(async () => (await state(page)).id).not.toBe(-1);
+  if (!destination || destination.generation.type === "flat") await clearAmbientChickens(page);
   await page.locator('button[aria-label="Options"]').tap();
   await page.getByRole("button", { name: mode, exact: true }).tap();
   await expect(page.getByRole("status").filter({ hasText: "Movement saved" })).toBeVisible();
   await page.getByRole("button", { name: "Back to game", exact: true }).tap();
+}
+async function clearAmbientChickens(page: Page) {
+  // Locomotion fixtures must not turn a world tap into a random animal interaction.
+  // The interaction case below stages its own subject explicitly.
+  await page.evaluate(async () => {
+    const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+    await g.gcSendRequest({
+      type: "rcon",
+      requestId: g.nextRequestId++,
+      command: "kill_all chicken",
+    });
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+        return g.stateView.entities.filter((e) => e.type === "chicken").length;
+      }),
+    )
+    .toBe(0);
 }
 async function state(page: Page) {
   return page.evaluate(() => {
@@ -149,6 +170,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.reload();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect.poll(async () => (await state(page)).id).not.toBe(-1);
+    await clearAmbientChickens(page);
     expect(await page.evaluate(() => document.fullscreenElement)).toBeNull();
     const p = await point(page, 60);
     const expected = await page.evaluate((p) => {
@@ -193,24 +215,6 @@ for (const renderer of ["canvas", "gpu"]) {
     page,
   }) => {
     await start(page, renderer);
-    // Random initial chickens can claim a locomotion tap as an interaction.
-    // Animal interaction has its own staged fixture below.
-    await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
-      await g.gcSendRequest({
-        type: "rcon",
-        requestId: g.nextRequestId++,
-        command: "kill_all chicken",
-      });
-    });
-    await expect
-      .poll(() =>
-        page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
-          return g.stateView.entities.filter((e) => e.type === "chicken").length;
-        }),
-      )
-      .toBe(0);
     const original = await state(page);
     await tapOffset(page, 60);
     await expect.poll(async () => (await state(page)).wx).toBeGreaterThan(original.wx + 8);
