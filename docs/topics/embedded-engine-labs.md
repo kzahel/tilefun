@@ -588,3 +588,12 @@ the Traffic playground and main-game renderer. Each uses its own retained asset 
 Failed or pending model loads preserve the same sprite gameplay; no lab-specific
 asset transform or driving implementation is introduced. The compact gameplay
 browser test exercises every selection and an aborted silver GLB request.
+
+## Player driving neighborhoods (2026-10-12)
+
+[126](../tactical/126-driving-collision-neighborhoods.md) narrows shared
+`drivenCarPose` prop searches using live authority indexes and lazy indexes of
+immutable RemoteStateView prop snapshots. Game and ScenarioClient prediction
+retain the same snapshot index during queued replay. Complete entity history
+remains available for roof selection; separate rider sweeps and global excavation
+presence retain native headroom/ground policy. No lab-only collision owner is added.

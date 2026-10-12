@@ -10,6 +10,7 @@ import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { isTrain } from "../railway/Train.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
+import { type DrivingQueries, drivingQueries } from "./DrivingQueries.js";
 import { movingPassengerPosition } from "./MovingSupport.js";
 import { roofSupport } from "./RoofSupport.js";
 import { applyVehicleFacing, isVehicle } from "./Vehicle.js";
@@ -54,6 +55,7 @@ export function drivenCarPose(
   world: World,
   props: readonly Prop[],
   entities: readonly Entity[],
+  queries?: DrivingQueries,
 ): Entity | undefined {
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
   const length = Math.hypot(input.dx, input.dy);
@@ -96,18 +98,28 @@ export function drivenCarPose(
     )
   )
     return;
-  const z = resolveGroundZForTracking(next, (x, y) => world.getHeightAt(x, y), props, []);
+  queries ??= drivingQueries(props);
+  // Include offset feet outside the collider as well as both cardinal poses.
+  const bounds = {
+    ...swept,
+    left: Math.min(swept.left, next.position.wx),
+    right: Math.max(swept.right, next.position.wx),
+    top: Math.min(swept.top, next.position.wy),
+    bottom: Math.max(swept.bottom, next.position.wy),
+  };
+  const localProps = queries?.props(bounds) ?? props;
+  const z = resolveGroundZForTracking(next, (x, y) => world.getHeightAt(x, y), localProps, []);
   const beforeZ = car.wz ?? 0;
   if (Math.abs(z - beforeZ) > Math.hypot(velocity.vx, velocity.vy) * dt * 0.5 + 0.001) return;
   next.wz = next.groundZ = z;
   const height = next.collider.physicalHeight ?? 24;
-  for (const prop of props)
+  for (const prop of localProps)
     if (
       aabbOverlapsPropWalls(before, prop.position, prop, beforeZ, height) ||
       aabbOverlapsPropWalls(after, prop.position, prop, z, height)
     )
       return;
-  for (const other of entities) {
+  for (const other of queries?.bodies?.(swept) ?? entities) {
     if (
       other.id === car.id ||
       other.parentId === car.id ||
@@ -137,7 +149,7 @@ export function drivenCarPose(
     };
     const roofZ = z + height;
     if (
-      props.some((p) =>
+      (queries?.props(sweep) ?? props).some((p) =>
         aabbOverlapsPropWalls(
           sweep,
           p.position,

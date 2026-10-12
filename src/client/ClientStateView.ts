@@ -34,6 +34,7 @@ import type {
   SyncSessionMessage,
 } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
+import { registerDrivingProps } from "../traffic/DrivingQueries.js";
 import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor, ReconcileDiagnostics } from "./PlayerPredictor.js";
@@ -461,6 +462,7 @@ export class RemoteStateView implements ClientStateView {
   /** Apply props sync. */
   private applySyncProps(msg: SyncPropsMessage): void {
     this._props = msg.props.map(deserializeProp);
+    registerDrivingProps(this._props);
   }
 
   /** Apply physics CVars sync for client prediction. */

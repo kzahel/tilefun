@@ -116,7 +116,8 @@ exercise actual authored GLB draws without increasing the car count; it is an
 explicit fixture variant. Subsequent motion uses native input. Travel and actual
 mesh draw counters distinguish blocked/unused-model runs. Captures retain timings,
 counts, server/frame timelines, input acknowledgement delay and correction error.
-`--deep=true` adds per-query/traffic counters and per-car/per-tick distinct terrain
+`--deep=true` adds indexed authority driving candidate counts when available,
+per-query/traffic counters and per-car/per-tick distinct terrain
 cells; `--cpu=true` samples only the owned Worker and main page at 1ms. Run these
 attribution lanes separately from shallow timings; inclusive phases overlap.
 
@@ -143,6 +144,18 @@ companion modules; complete actor/traffic/reservation state, binary frame bytes 
 flushed durable records must match. Crossings, turns, road edits, reload, bridge/garage
 grades and deleted supports are covered. Query counts are separate from shallow
 city timing. [125](../../docs/tactical/125-traffic-lookahead-terrain-reuse.md) owns results.
+
+`node --import tsx scripts/instrumentation/driving-query-parity.mjs --reference=PATH --output=/tmp/tilefun-driving-query-parity`
+compares a supplied original Driving.ts with indexed authority and immutable replica
+snapshot queries on identical geometry. All 45 models/cardinal poses, mixed inputs,
+three step sizes and nine authored/native-city cases must match complete returned
+poses. Candidate counts are attribution, not timing or capacity acceptance.
+
+`node --import tsx scripts/instrumentation/driving-native-parity.mjs --before-root=PATH --after-root=PATH --output=/tmp/tilefun-driving-native-parity`
+compares matching frozen source trees through the existing native authority,
+binary-replica/predictor and camera fixture at 30/60Hz authority/120Hz presentation.
+Sixteen four-second delayed-input/snapshot, turn/release traces must hash identically.
+[126](../../docs/tactical/126-driving-collision-neighborhoods.md) owns scope and results.
 
 ## Render and authority rates
 

@@ -87,12 +87,21 @@ for (const file of [
   "src/traffic/TrafficSystem.ts",
   "src/traffic/MovingSupport.ts",
   "src/traffic/Driving.ts",
+  "src/traffic/DrivingQueries.ts",
+  "src/client/PlayerPredictor.ts",
+  "src/client/ClientStateView.ts",
   "src/scenarios/NaturalLandscapeRecipe.ts",
   "src/generation/regional/DenseDistrictPlanner.ts",
 ])
-  report.sourcesSHA256[file] = createHash("sha256")
-    .update(await readFile(path.join(root, file)))
-    .digest("hex");
+  try {
+    report.sourcesSHA256[file] = createHash("sha256")
+      .update(await readFile(path.join(root, file)))
+      .digest("hex");
+  } catch (error) {
+    if (file === "src/traffic/DrivingQueries.ts" && error.code === "ENOENT")
+      report.sourcesSHA256[file] = null;
+    else throw error;
+  }
 const server = await createServer({
   root,
   configFile: false,

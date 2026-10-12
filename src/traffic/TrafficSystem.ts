@@ -17,6 +17,7 @@ import { RoadType } from "../road/RoadType.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { drivenCarPose } from "./Driving.js";
+import { createDrivingQueries, type DrivingQueries } from "./DrivingQueries.js";
 import { validVehicleLightState } from "./EmergencyVehicle.js";
 import {
   type Lane,
@@ -111,6 +112,7 @@ export class TrafficSystem {
         y - margin < (r.maxCy + 1) * CHUNK_SIZE_PX,
     );
   }
+  private readonly drivingQueries: DrivingQueries;
   private spawnClock = 0;
   private retired = new Map<string, number>();
   private time = 0;
@@ -120,6 +122,7 @@ export class TrafficSystem {
     readonly props: PropManager,
     readonly strategy: TrafficRouteSource,
   ) {
+    this.drivingQueries = createDrivingQueries(props, entities);
     entities.removalListeners.add((entity, destroyed) => {
       const state = this.states.get(entity.id);
       if (!state) return;
@@ -550,6 +553,7 @@ export class TrafficSystem {
         this.world,
         this.props.props,
         this.entities.entities,
+        this.drivingQueries,
       );
       const plan =
         next && planMovingPassengers(s.entity, next, this.entities, this.props, this.world);

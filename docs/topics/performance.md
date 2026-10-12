@@ -388,6 +388,19 @@ flushed records and live body/prop query counts. Next: conservative swept local
 candidates for player driving on authority and predictor, including rider support
 and headroom; snapshot/interest and phone GPU/display tracing stay separate.
 
+[126](../tactical/126-driving-collision-neighborhoods.md) narrows shared car prop
+queries using live authority indexes and lazy immutable replica-snapshot indexes,
+retained during queued replay. Ground queries keep all excavation metadata;
+separate rider sweeps preserve headroom, and roof selection/history keep full
+entity lists. Authority body queries include spanning footprints. Four cool-phone
+0.1 overview drives with matching entry populations lower driving mean
+0.541→0.154ms (71.5%) and whole-server mean 4.099→3.879ms (5.4%). Whole main-update
+mean is 1.328→1.067ms; this includes work beyond prediction. Frame p95 remains
+50ms, with about 234 authored mesh calls/frame and 8.1–8.3ms render means. Native
+pose/authority/prediction parity and validation are recorded in 126. The next
+priority is a cool-phone main/GPU/display trace of that remaining wide-view hitch;
+snapshot/interest and historical body-query scale are separate measured proposals.
+
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority
 ticks and acknowledgement tails; correction error stays below 0.00003px and

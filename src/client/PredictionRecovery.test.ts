@@ -2,8 +2,12 @@ import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import type { Prop } from "../entities/Prop.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { Movement } from "../input/ActionManager.js";
+import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
+import { drivingQueries, registerDrivingProps } from "../traffic/DrivingQueries.js";
+import { createVehicle } from "../traffic/Vehicle.js";
 import { World } from "../world/World.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
 import { predictInput } from "./predictInput.js";
@@ -306,4 +310,66 @@ describe("prediction backlog recovery", () => {
     expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
     expect(f.predictor.recoveryDiagnostics.retainedInputs).toBe(0);
   });
+});
+
+it("keeps indexed driving replay on its captured prop snapshot while newer props arrive", () => {
+  const world = new World(new FlatStrategy());
+  for (let y = -2; y <= 2; y++) for (let x = -2; x <= 4; x++) world.getChunk(x, y);
+  const car = createVehicle("compact-1", 0, 0);
+  car.id = 2;
+  const driver = createPlayer(0, 0);
+  driver.id = 1;
+  driver.collider = null;
+  driver.parentId = car.id;
+  driver.jumpZ = 0;
+  const predictor = new PlayerPredictor(undefined, undefined, () => 0);
+  const reference = new PlayerPredictor(undefined, undefined, () => 0);
+  predictor.reset(structuredClone(driver), structuredClone(car));
+  reference.reset(structuredClone(driver), structuredClone(car));
+  const props: Prop[] = [];
+  registerDrivingProps(props);
+  const plain = props.slice();
+  const query = required(drivingQueries(props));
+  const read = query.props;
+  let oldReads = 0;
+  query.props = (box) => {
+    oldReads++;
+    return read(box);
+  };
+  for (let i = 1; i <= 96; i++) {
+    for (const p of [predictor, reference]) p.storeInput(i, right, DT);
+    predictor.update(DT, right, world, props, [car]);
+    reference.update(DT, right, world, plain, [car]);
+  }
+  predictor.reconcile(driver, 0, world, props, [car], car.id);
+  reference.reconcile(driver, 0, world, plain, [car], car.id);
+  expect(predictor.recoveryDiagnostics.status).toBe("replaying");
+  const capturedReads = oldReads;
+  const edited = [
+    surfaceProp(
+      { left: 64, top: -32, right: 96, bottom: 32 },
+      {
+        id: "new-slab",
+        spaceId: "outside",
+        z: 16,
+        riseX: 0,
+        riseY: 0,
+        thickness: 16,
+        connectsTo: [],
+      },
+    ),
+  ];
+  required(edited[0]).id = 1;
+  registerDrivingProps(edited);
+  let seq = 96;
+  for (let i = 0; i < 12 && predictor.recoveryDiagnostics.status === "replaying"; i++) {
+    ++seq;
+    for (const p of [predictor, reference]) p.storeInput(seq, right, DT);
+    predictor.update(DT, right, world, edited, [car]);
+    reference.update(DT, right, world, edited.slice(), [car]);
+    expect(predictor.mount?.position).toEqual(reference.mount?.position);
+  }
+  expect(oldReads).toBeGreaterThan(capturedReads);
+  expect(predictor.recoveryDiagnostics.status).toBe("ready");
+  expect(predictor.mount?.position).toEqual(reference.mount?.position);
 });

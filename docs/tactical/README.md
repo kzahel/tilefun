@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [126 Driving collision neighborhoods](126-driving-collision-neighborhoods.md) | Local prop searches retain snapshot/roof/ground dependencies; cool-phone wide driving phase 71.5% lower, whole tick 5.4% lower; frame p95 still 50ms |
 | [125 Traffic lookahead terrain reuse](125-traffic-lookahead-terrain-reuse.md) | Per-car flat-road reuse: 26.6% less phone traffic work, noisy 4.1% whole-tick mean saving; exact parity and live contacts retained |
 | [124 Native city workload](124-city-workload-profile.md) | Traffic terrain-read duplication, wide-view driving/replication and renderer attribution; thermal-limited phone scope; no runtime change |
 | [123 NPC movement profile and fauna lookup](123-npc-movement-profile.md) | Type registry removes repeated scans; 8.7% aggregate dense moving phone mean saving, mixed tails; slower box prototype reverted |

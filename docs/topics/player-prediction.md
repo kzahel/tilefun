@@ -13,6 +13,16 @@ own their autonomous motion and service behavior.
 
 ## Current status
 
+Indexed driving queries (2026-10-12):
+[126](../tactical/126-driving-collision-neighborhoods.md) gives published prop
+snapshots lazy local indexes. Frozen replay requests retain their own snapshot's
+index; newer props do not rebind a running replay. Collision-history bodies and
+roof-support ordering remain complete, while independent rider sweeps preserve
+headroom. Direct mutable callers keep full-list behavior. A long mounted-car
+recovery regression exercises old/new props with indexed and full-list controls;
+16 native 30/60Hz delayed-input/snapshot/turn/release traces match the baseline.
+Timing and remaining wide-view frame stalls are owned by performance/126.
+
 Inside-car driving follow-up (2026-10-10):
 [car jitter evidence](../research/car-driving-prediction-jitter.md) isolates extra
 unacknowledged braking/movement on missing-input ticks, confirmed in real Worker

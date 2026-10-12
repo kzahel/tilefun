@@ -6841,7 +6841,7 @@
       "name": "Car crossing the railway bridge",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-bridge#/tool/world-geometry",
-      "fingerprint": "c010728d50099cc8a7e83ec53c2891105b0ff5dacf28b2cac93c92354b312a5a",
+      "fingerprint": "d487ca15a54924f43ef639dd4d5863b4705a043c6c8408215d03e572fcbd10d4",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6851,7 +6851,7 @@
       "name": "Car entering an underground garage",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry",
-      "fingerprint": "a94e834e3d7612350ad088fa68c0e35323f59bcf619eb3042a185ae69742d4f1",
+      "fingerprint": "c3752e657c3ecd3f7af4632be0a3c3d21c737bab027c3ce4a99c754bff2dbe20",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6901,7 +6901,7 @@
       "name": "Generated road bridge · seed 100",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-100#/tool/world-geometry",
-      "fingerprint": "fe79999bc7b8a17e6bce614615c62831d4e8fe8b63c0361c4b81022970c045c1",
+      "fingerprint": "d67ce88eb21dcee008c3c419a908f73bd3f2b489797f9c4fc82f26a9f45f688f",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -6911,7 +6911,7 @@
       "name": "Generated road bridge · seed 42",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry",
-      "fingerprint": "bf26a0a57b04c0be6ccd31e26064250d6442e0c8502c578b583acad43bb8c6d1",
+      "fingerprint": "5428b5d4cfa62066514350528524c3fe7968c1623e966fc8814bc4a82ba82d73",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -6921,7 +6921,7 @@
       "name": "Generated road bridge · seed 3",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-3#/tool/world-geometry",
-      "fingerprint": "820d75397dfe0221adb5a688025228e67a447d930049386cb4c8830b96a73e32",
+      "fingerprint": "6b2baf8271365a5bd712731541aa557224442c6cb52e3ca397b6126cfadf18d7",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -30466,5 +30466,5 @@
       }
     }
   ],
-  "inputDigest": "d2554b8930c9b651d11b0895bde87e8b2bde36cc29d20ab27f8db88897717a29"
+  "inputDigest": "4be2474ceb35dbdab18b93ef04d870262788f7446e881b540e3c05ffa71a58f8"
 }

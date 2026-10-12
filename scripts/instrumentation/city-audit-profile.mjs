@@ -102,6 +102,11 @@ export function installCityAuthority({ deep }) {
   ])
     if (owner) wrap(owner, method, label);
   if (deep) {
+    if (realm.traffic?.drivingQueries) {
+      wrap(realm.traffic.drivingQueries, "props", "driving.prop-candidates", true);
+      if (realm.traffic.drivingQueries.bodies)
+        wrap(realm.traffic.drivingQueries, "bodies", "driving.body-candidates", true);
+    }
     for (const method of ["blocked", "surfaceProbe", "populate", "choose", "reserve"])
       wrap(realm.traffic, method, `traffic.${method}`);
     for (const [owner, method, label] of [

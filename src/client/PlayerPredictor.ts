@@ -17,6 +17,7 @@ import { createMovementContext, createSurfaceSampler } from "../physics/Simulati
 import { isTrain } from "../railway/Train.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { drivenCarPose } from "../traffic/Driving.js";
+import { retainDrivingQueries } from "../traffic/DrivingQueries.js";
 import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { isVehicle } from "../traffic/Vehicle.js";
@@ -550,6 +551,8 @@ export class PlayerPredictor {
   }
 
   private freezeRequest(request: ReconcileRequest): ReconcileRequest {
+    const props = request.props.slice();
+    retainDrivingQueries(request.props, props);
     return {
       ...request,
       player: this.clonePlayer(request.player),
@@ -562,7 +565,7 @@ export class PlayerPredictor {
         collider: e.collider && { ...e.collider },
         wanderAI: e.wanderAI && { ...e.wanderAI },
       })),
-      props: request.props.slice(),
+      props,
     };
   }
 
