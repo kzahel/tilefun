@@ -1,0 +1,171 @@
+{
+  "assetId": "train-blue-front",
+  "revision": "v3",
+  "glbSha256": "62846f9558f1181fa734cdcc096e588065940185e3315bd9c1a415d526b2b239",
+  "clearance": [
+    {
+      "part": "Hub_F2L",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -11.75,
+        -11.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_F2L",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -11.300000190734863,
+        -8.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_F2R",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        11.350000381469727,
+        11.75
+      ]
+    },
+    {
+      "part": "Tire_F2R",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        8.699999809265137,
+        11.300000190734863
+      ]
+    },
+    {
+      "part": "Hub_FL",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -11.75,
+        -11.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -11.300000190734863,
+        -8.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        11.350000381469727,
+        11.75
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        8.699999809265137,
+        11.300000190734863
+      ]
+    },
+    {
+      "part": "Hub_R2L",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -11.75,
+        -11.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_R2L",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -11.300000190734863,
+        -8.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_R2R",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        11.350000381469727,
+        11.75
+      ]
+    },
+    {
+      "part": "Tire_R2R",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        8.699999809265137,
+        11.300000190734863
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -11.75,
+        -11.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -11.300000190734863,
+        -8.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        11.350000381469727,
+        11.75
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        8.699999809265137,
+        11.300000190734863
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

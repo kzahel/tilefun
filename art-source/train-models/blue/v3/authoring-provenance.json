@@ -1,0 +1,115 @@
+{
+  "schema": "tilefun-train-authoring-v1",
+  "dependencies": [
+    {
+      "path": "scripts/authored-assets/author_blue_train.py",
+      "sha256": "a65e9aa78fd7f32b5ae15fe59686580d156d1a112caa5b2b0ff0be2d0bfa2983"
+    },
+    {
+      "path": "scripts/authored-assets/build_blue_train.py",
+      "sha256": "192a3e3cd831488c2af78d5776f01d0f06ca575ad6c987c0e9d5f579586b9b7b"
+    },
+    {
+      "path": "scripts/authored-assets/blue-train-family.json",
+      "sha256": "c4c7e74182237fb3961238f734a0ac4df7f691480d45281663b1cc1b2c96db80"
+    },
+    {
+      "path": "scripts/authored-assets/retain_blue_train.py",
+      "sha256": "fb3c209edfb4a6b1e91cc36a1434bda2b17f63dd20fac843d7c743173f8d0faa"
+    },
+    {
+      "path": "scripts/authored-assets/refine_blue_train_v2.py",
+      "sha256": "d486be36d06f8d31ff9edbda6b81378f7d45d191d35c006d4ac43296035e23e6"
+    },
+    {
+      "path": "scripts/authored-assets/retain_blue_train_v2.py",
+      "sha256": "539a5ecca6cfb3d3d734f61cc73166ea3686012421ed69ccec8631293fdb22b8"
+    },
+    {
+      "path": "scripts/authored-assets/verify_blue_train_v2.mjs",
+      "sha256": "63ab225635043f4422143c422fed6f7560271994b29cf1b9af72309a715d0e1a"
+    },
+    {
+      "path": "scripts/authored-assets/pack_train_draft.py",
+      "sha256": "02db9163e71fc92c4abc76ea72ac13ffca9398cf5d24e6b9776b69e7fe5d0328"
+    },
+    {
+      "path": "scripts/authored-assets/author_emergency_vehicle.py",
+      "sha256": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab"
+    },
+    {
+      "path": "scripts/authored-assets/build_emergency_vehicle.py",
+      "sha256": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62"
+    },
+    {
+      "path": "scripts/authored-assets/pipeline.py",
+      "sha256": "ed51e22ba7629a65fccca504924b07613b8ab579d0f1fa2b53fa780390024967"
+    },
+    {
+      "path": "scripts/authored-assets/projection_math.py",
+      "sha256": "75b26c9c05756e1c6027d562673ff4677e96dc2f13a571f58aaf7e739098ffd3"
+    },
+    {
+      "path": "scripts/authored-assets/render.py",
+      "sha256": "064f00b8bdd08eb8e109610d6d6ac323075486c331353204b20b2b87d2993ea3"
+    },
+    {
+      "path": "scripts/authored-assets/project.py",
+      "sha256": "4482bac91da47a7d3faea2edaec45d947ff5751cb4274f0ea0b8f88d04258e7a"
+    },
+    {
+      "path": "scripts/authored-assets/pixel_style.py",
+      "sha256": "d4b0d0105ac6405469792018ca731bf5e38ddabf9a5d9bb7a15b6ef074c317f9"
+    },
+    {
+      "path": "scripts/authored-assets/pack_draft.py",
+      "sha256": "c814bc6cb42d3ad1189236138bf195fec247295aed00316d50cf7a63b195a726"
+    },
+    {
+      "path": "scripts/authored-assets/inspect_vehicle.py",
+      "sha256": "8543c64b3ff78ab0ee58236e4889783dc67872362cdeea19301caf4fd5520b92"
+    },
+    {
+      "path": "scripts/authored-assets/silhouette_report.py",
+      "sha256": "d61ad53fd4c988d24fc4858dbf20a7f6b11fc1b8d93b19101f7c32c8c5554157"
+    },
+    {
+      "path": "scripts/authored-assets/verify_vehicle_body_clearance.py",
+      "sha256": "6edeeb76fed98b739a8e5c2e013e77197d4f01f16597589a19d8b359248be965"
+    },
+    {
+      "path": "scripts/authored-assets/verify_blue_train.mjs",
+      "sha256": "e064c3f87fa22a0e45d827c74486879d7c1e075ae3e03eff7dc8db05d7c60535"
+    },
+    {
+      "path": "scripts/authored-assets/verify_train_bundles.py",
+      "sha256": "77d91e766b4a52de9cca123708204a5fc4e107d5bf6c2164325e3a6c3c162c52"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/rear/car.blend",
+      "sha256": "81e95064165ce476eb88ec81bc328556b517188d6e2f2ddfdde9258acf1b72ee"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/middle/car.blend",
+      "sha256": "a421d43903ff4bf076785a4d28537b79f94d5a790f45f5d765b5fd59eda54fab"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/front/car.blend",
+      "sha256": "49526e1febc02326b002f920b0ed9c217bacf4bfbdf0466d450d32d8bea965ad"
+    },
+    {
+      "path": "src/railway/RailwaySource.json",
+      "sha256": "5cf107929197e3c90b0831b55ac2656e7d3615e9a5c12f1f1cbdaa1c066a3ea2"
+    },
+    {
+      "path": "public/assets/tilesets/railway-review-v1.png",
+      "sha256": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23"
+    }
+  ],
+  "liveActivation": "Pending owner moving-art review; main-game train rendering/physics unchanged",
+  "limits": [
+    "Source side/end lengths differ; matched-camera comparison is not fixed-camera game parity.",
+    "Static couplers have gaps/overlaps on native curved spacing; see moving review.",
+    "Bogies/couplers remain at rest; wheels are inferred under opaque skirts."
+  ]
+}

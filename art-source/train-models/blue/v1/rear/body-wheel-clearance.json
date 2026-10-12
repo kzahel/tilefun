@@ -1,0 +1,171 @@
+{
+  "assetId": "train-blue-rear",
+  "revision": "v1",
+  "glbSha256": "24cb6f10eb29bb6b2331ac98ec3358f12ae43d6e6734b3cbbb07d64f726a08cb",
+  "clearance": [
+    {
+      "part": "Hub_F2L",
+      "gap": 3.3999992563548695,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000007436451305,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_F2L",
+      "gap": 0.9999980926513672,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.000001907348633,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_F2R",
+      "gap": 3.3999992563548695,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000007436451305,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_F2R",
+      "gap": 0.9999980926513672,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.000001907348633,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    },
+    {
+      "part": "Hub_FL",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    },
+    {
+      "part": "Hub_R2L",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_R2L",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_R2R",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_R2R",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 3.3999992563548695,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000007436451305,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.9999980926513672,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.000001907348633,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 3.3999992563548695,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000007436451305,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.9999980926513672,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.000001907348633,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

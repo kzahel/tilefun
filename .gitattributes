@@ -68,3 +68,27 @@ scripts/authored-assets/verify_all_vehicle_clearance.py text eol=lf
 scripts/authored-assets/author_variant.py text eol=lf
 scripts/authored-assets/pack_draft.py text eol=lf
 scripts/authored-assets/transfer_variant.py text eol=lf
+
+# Exact retained train prototype files and pinned replay inputs.
+art-source/train-models/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+public/assets/models/trains/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/authored-assets/author_blue_train.py text eol=lf
+scripts/authored-assets/build_blue_train.py text eol=lf
+scripts/authored-assets/retain_blue_train.py text eol=lf
+scripts/authored-assets/verify_train_bundles.py text eol=lf
+scripts/authored-assets/verify_blue_train.mjs text eol=lf
+scripts/authored-assets/pipeline.py text eol=lf
+scripts/authored-assets/projection_math.py text eol=lf
+scripts/authored-assets/render.py text eol=lf
+scripts/authored-assets/project.py text eol=lf
+scripts/authored-assets/pixel_style.py text eol=lf
+scripts/authored-assets/inspect_vehicle.py text eol=lf
+scripts/authored-assets/silhouette_report.py text eol=lf
+scripts/authored-assets/blue-train-family.json -text
+src/railway/RailwaySource.json -text
+
+# V2 train refinement preserves its archived v1 source and straight rail fit.
+scripts/authored-assets/refine_blue_train_v2.py text eol=lf
+scripts/authored-assets/retain_blue_train_v2.py text eol=lf
+scripts/authored-assets/verify_blue_train_v2.mjs text eol=lf
+scripts/authored-assets/pack_train_draft.py text eol=lf

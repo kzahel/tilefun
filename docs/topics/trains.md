@@ -2,7 +2,7 @@
 
 Topic: trains
 Status: generated two-city trains, broad curves, cached pixel tracks, inside driving and saved roof riding delivered; loops remain authored lab fixtures.
-Updated: 2026-10-10.
+Updated: 2026-10-12.
 
 Owns generated railway networks, town stations, train services, railway structures
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
@@ -439,3 +439,43 @@ support-after-reopen evidence rather than attributing it to a backend or claimin
 it fixed. [Full run](/tmp/tilefun-wildlife-standing-browser-full.log),
 [isolated rerun](/tmp/tilefun-wildlife-standing-train-rerun.log),
 [failure capture](/tmp/tilefun-wildlife-standing-train-failure/test-failed-1.png).
+
+
+## Authored train model queue
+
+The 45-set road-model bank excludes trains. The owner requested the live blue
+train on 2026-10-12. [127](../tactical/127-authored-blue-train.md) authors and retains
+three source-owned carriages and their matched 4×2 / real service motion evidence.
+Live rendering, native sprite banks, rail authority, current curve spacing,
+collision/support surfaces and service behavior remain unchanged pending exact
+moving-art review. The existing gate above applies; no production approval is
+inferred from technical checks.
+
+| Source family | Model status | Engine status | Next action |
+| --- | --- | --- | --- |
+| Blue local | Three current v3 carriage bundles, six retained revisions, 24 independently rolling wheels | Explicit shared-engine inspection only; live sprites unchanged | Inspect 4×2, fixed-camera loops, coupler joins and actual reversal before activation |
+| Green | Queued | Preview source only | Audit geometry and palette correspondence after blue review |
+| Orange | Queued | Preview source only | Vertical middle source missing; audit two-end consist independently |
+| Grey | Queued | Preview source only | Audit geometry and palette correspondence |
+| White express | Queued | Preview source only | Audit distinct cab/roof/end shapes before reuse |
+
+The [blue comparison and motion review](../../public/assets/models/trains/review/blue-v3/index.html)
+is retained with the [source catalog](../../art-source/train-models/catalog.json).
+World Geometry offers authored blue loop, winding reversal and existing-city
+fixtures with an explicit prototype opt-in. Default game/labs still select native
+sprites. Mesh heading follows each replicated increasing track tangent, so reverse
+travel changes signed wheel roll without flipping physical end cars. Missing,
+loading, failed, disabled or Canvas mesh presentation keeps native train crops.
+
+Eight inferred wheels sit under each original opaque skirt; tires/hubs parent to
+roll pivots, steering pivots parent to their named bogies, and body/couplers stay
+fixed. Whole-body exported cylinder proofs cover all neutral roll angles.
+Bogies/couplers stay at rest; arbitrary articulation requires a new clearance proof.
+V3 matches the 44-unit native roof support and inferred wheel centers to straight
+rails at ±10. V1 preserves the earlier 40-unit roof / ±16 inferred wheel prototype.
+Curved bogie contact and animated coupling still need qualification.
+Static coupler endpoints can separate by about 50 model pixels on native curved
+spacing. Side/end source lengths differ (136/160/160 versus 109/112/143), so matched
+source cameras are diagnostic fits, not fixed-camera gameplay parity. Review the
+actual moving joins before deciding on articulated connectors or a separate,
+explicit train spacing/support redesign; never silently change live physics.

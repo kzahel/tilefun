@@ -1,0 +1,171 @@
+{
+  "assetId": "train-blue-middle",
+  "revision": "v1",
+  "glbSha256": "e5b0958bac59082d99c678e11f673001905d6f1cc0f517a8bdaa622109abd157",
+  "clearance": [
+    {
+      "part": "Hub_F2L",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_F2L",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_F2R",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_F2R",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    },
+    {
+      "part": "Hub_FL",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_FL",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_FR",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_FR",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-F",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    },
+    {
+      "part": "Hub_R2L",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_R2L",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_R2R",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_R2R",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    },
+    {
+      "part": "Hub_RL",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        -17.75,
+        -17.350000381469727
+      ]
+    },
+    {
+      "part": "Tire_RL",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        -17.299999237060547,
+        -14.699999809265137
+      ]
+    },
+    {
+      "part": "Hub_RR",
+      "gap": 3.3999990621062786,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 2.6000009378937214,
+      "axialBounds": [
+        17.350000381469727,
+        17.75
+      ]
+    },
+    {
+      "part": "Tire_RR",
+      "gap": 0.9999993962570803,
+      "nearestBody": "Bogie-frame-R",
+      "radius": 5.00000060374292,
+      "axialBounds": [
+        14.699999809265137,
+        17.299999237060547
+      ]
+    }
+  ],
+  "neutralRoll": "All angles enclosed by actual tire/hub cylinders",
+  "steering": "Unqualified",
+  "bodyTriangleIntoTireRejected": true,
+  "restored": true
+}

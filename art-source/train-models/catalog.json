@@ -1,0 +1,870 @@
+{
+  "schema": "tilefun-retained-train-bundles-v1",
+  "status": "Blue train v3 retained for inspection; live activation awaits moving-art review",
+  "bundles": [
+    {
+      "assetId": "train-blue-rear",
+      "revision": "v1",
+      "source": "art-source/train-models/blue/v1/rear",
+      "glb": "public/assets/models/trains/blue-rear-v1.glb",
+      "geometry": {
+        "meshObjects": 36,
+        "triangles": 1558
+      },
+      "files": [
+        {
+          "path": "art-source/train-models/blue/v1/rear/body-wheel-clearance.json",
+          "sha256": "f26808679105b5278ce617db29f23958e05347b66cb22a5c8c8bee5c918bffb3"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/car-atlas.png",
+          "sha256": "53fe08e68a4edf65d05d1dc6891abd916147c8aad8abb699402b9c81e0fd9cd2"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/car.blend",
+          "sha256": "81e95064165ce476eb88ec81bc328556b517188d6e2f2ddfdde9258acf1b72ee"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/coverage.json",
+          "sha256": "6b7035348218d39dfa3c67a3bcb54182f0f3d14b6315dbc045660889cdae9bd5"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/engine-wheel-validation.json",
+          "sha256": "0d47b4e46fad4541f1b049e2423d054ee3940f6222a5b3d91b4068a28da25cb0"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/family-config.json",
+          "sha256": "3cfe38ec17cae206ece61b9c1976f9c7ce29eef3672e4debf663ce3fe843a2c6"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/geometry-audit.json",
+          "sha256": "62b5245c41100ea3006e00d259f633cae145c0b5a691588957e119273b9c795d"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/inspection.json",
+          "sha256": "2aa2fb885206ba3d84b748665693397298741b156993cbf2f2847997784f7640"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/mesh-spec.json",
+          "sha256": "c3708c7917a5b999b67b21c97fcccb081d77092adcd29009422a14ebce698df5"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/paint-ownership.json",
+          "sha256": "977fb222d0c6017911dd14c50b253703c2ea6ae9452ca9b6765ebdc900a1957f"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/projection-coverage.png",
+          "sha256": "f2e3fd82ae18419e11c6509e8583b75e4d0b213099baaa4ce7bdfec676b66bb7"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/projection-draft.png",
+          "sha256": "9ce0323b631d527371dcd1197a70d7d64acb8bce3088479513931519b884f121"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/projection-with-authored-fill.png",
+          "sha256": "53fe08e68a4edf65d05d1dc6891abd916147c8aad8abb699402b9c81e0fd9cd2"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/recipe.json",
+          "sha256": "23f083313ad39fc8419371216135c7b9de60ec0c1060dd3a2350ea7fcde3824f"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/refs/east.png",
+          "sha256": "7b125941cf57acc16d9cde05be9c3b2a1d8af32d44db65098dca1dc79421620e"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/refs/north.png",
+          "sha256": "a393a45bea54bbf5ae614bd364fa09b8fc51a1f95b2ab6c9c03ba81b990abf85"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/refs/south.png",
+          "sha256": "e2dfaa3c8a0a4a2128cbd484b09440cf958400a2ae26e2024f29bef14de8d05d"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/refs/west.png",
+          "sha256": "5c559738bf0b1e4dfbb3990ffe28aaca645636435bee4e01aed2acafb62bbcb5"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/rear/rig.json",
+          "sha256": "459bc848ee007d38bfbaa38a469b313577d9af2b1f8dc00a3fde12384c9e1f6b"
+        },
+        {
+          "path": "public/assets/models/trains/blue-rear-v1.glb",
+          "sha256": "24cb6f10eb29bb6b2331ac98ec3358f12ae43d6e6734b3cbbb07d64f726a08cb"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "ba492515382fabe551adca6828bcaf02f000958db1b2fb7b4487acae291412c8",
+        "west-render.png": "4c6600672157ed658016ce75e0faab24b91e2b98fff8a2fe395cb37ccde37ee3",
+        "north-render.png": "92dc66f6b4eafe352f19ed75e9feb9d984684acc5bb80ada4c7c37a38ccb209b",
+        "south-render.png": "73bac7b5f7346388c1dca6a6ef2be8a6d6d9688b43e3f47b82b59c49754f4482",
+        "orbit-0.png": "358c6a7677eb3aa53cf1ccbc6bd9db0a6087163930114bbdc411fe2caf9b6863",
+        "orbit-1.png": "97f50f97bbe3a62a9c3ef078ee6db89f2a60aa13efabd91ddc812abd6f71b6c6",
+        "orbit-2.png": "e5ebf249ec32bca979081e70a99583c0bc8226b13f58ce7e2b997cd226812248",
+        "orbit-3.png": "13dbed1197169663015915ab7c3c7ca0b9657b062011bbf4f2993c8d7dfb6f9a"
+      }
+    },
+    {
+      "assetId": "train-blue-middle",
+      "revision": "v1",
+      "source": "art-source/train-models/blue/v1/middle",
+      "glb": "public/assets/models/trains/blue-middle-v1.glb",
+      "geometry": {
+        "meshObjects": 40,
+        "triangles": 1560
+      },
+      "files": [
+        {
+          "path": "art-source/train-models/blue/v1/middle/body-wheel-clearance.json",
+          "sha256": "be0600c615b82084fb44a56fec174d54eb3e565025c98681cd8433caa48af481"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/car-atlas.png",
+          "sha256": "985e0d2df397b820f56f9beccc08c316c454143707f5d6472e741349920cf877"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/car.blend",
+          "sha256": "a421d43903ff4bf076785a4d28537b79f94d5a790f45f5d765b5fd59eda54fab"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/coverage.json",
+          "sha256": "8342b102e88d8bff2eeb2969c0cc7b41248aea3871521f015edef24fae30990c"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/engine-wheel-validation.json",
+          "sha256": "3e4d1523f3b0aa8004febdd953df4d43f494c6261027b6758ea72ed48eb42e69"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/family-config.json",
+          "sha256": "2533df3dced311c396b49384c41ae812b33f6634379f853b1c9417402353059e"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/geometry-audit.json",
+          "sha256": "dc08ba13ad26e6918986a80f9ed69607fe1d1d87c7eaa484a27fba8954652632"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/inspection.json",
+          "sha256": "083ee0323b0ba50f96ee89122d18bb4d93ce6770e25dda7722781a886d72e984"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/mesh-spec.json",
+          "sha256": "0e07ad2c7949b93d293d143365982905449164078f82d0c6ac04c97e9cbaef35"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/paint-ownership.json",
+          "sha256": "ccee25ebe63d977e47d503ef81d231af9ad648c076e7daef1c0d88a4b457907d"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/projection-coverage.png",
+          "sha256": "b6917374343ec7476cea84440c5e65109e309b2188275b6e3fcf72a4f1353015"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/projection-draft.png",
+          "sha256": "d37c9e85ace6f5a529df676f52fcc9a528e6a302898f0ab86bdde79615ba2264"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/projection-with-authored-fill.png",
+          "sha256": "985e0d2df397b820f56f9beccc08c316c454143707f5d6472e741349920cf877"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/recipe.json",
+          "sha256": "3b08df845f1cad3db713f31b4f8817e1341e366f7f3274e160cf5048a0c8edc2"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/refs/east.png",
+          "sha256": "244aded035319aca7f29ac476769d03500fdf0beeebe6a296347c53e202ee64a"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/refs/north.png",
+          "sha256": "f27d62a442ff50b55c9a15029507869a3b537c482b9a0448f32e610cacf6ad03"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/refs/south.png",
+          "sha256": "f27d62a442ff50b55c9a15029507869a3b537c482b9a0448f32e610cacf6ad03"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/refs/west.png",
+          "sha256": "244aded035319aca7f29ac476769d03500fdf0beeebe6a296347c53e202ee64a"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/middle/rig.json",
+          "sha256": "04fe4b61b2893891ea80e586ffe0cfa8cb38880d4ff52bf848cbb5a9d40cea1d"
+        },
+        {
+          "path": "public/assets/models/trains/blue-middle-v1.glb",
+          "sha256": "e5b0958bac59082d99c678e11f673001905d6f1cc0f517a8bdaa622109abd157"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "4c6b7328fca817250c6e957a7877e3d7ee554f366520f9f5e78865634cbea0e4",
+        "west-render.png": "81eeeecfc4c88c8708a1c57b6134bc5ec790fc28a5fddb4cf39ef63518a6404a",
+        "north-render.png": "b8c4fbdc357e9b10fb2dc62bf9a9460135eea2375a7ba683916f43e1f90ce0f7",
+        "south-render.png": "0ae4be3ea8d485e58bd7148d497e200d42ef336b3ee29a49ba0d281b472f14fb",
+        "orbit-0.png": "a04d831fc6d779a19602a23d26efd71243f1fae399c0958219dd91511be21c13",
+        "orbit-1.png": "19d568228e54705c845b4a92275d7236b1755c4a4536f22809a4b49bf220da55",
+        "orbit-2.png": "42440a4ab89aac3d0d34ff5229da01392faf8c2da2e222ba789183b55a82c307",
+        "orbit-3.png": "d1dc778bf99870a74429637ce8d3d8097dc4ee79a6dfbb04b0147e2059cdd919"
+      }
+    },
+    {
+      "assetId": "train-blue-front",
+      "revision": "v1",
+      "source": "art-source/train-models/blue/v1/front",
+      "glb": "public/assets/models/trains/blue-front-v1.glb",
+      "geometry": {
+        "meshObjects": 42,
+        "triangles": 1570
+      },
+      "files": [
+        {
+          "path": "art-source/train-models/blue/v1/front/body-wheel-clearance.json",
+          "sha256": "be54273576f0b0fd84f9ccdad2dd4bae6365d1f953564ea3b1742f1860e102d5"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/car-atlas.png",
+          "sha256": "a5211b05e1c02a908c774081c755df012ff794454e748a70d52a6831411d8b24"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/car.blend",
+          "sha256": "49526e1febc02326b002f920b0ed9c217bacf4bfbdf0466d450d32d8bea965ad"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/coverage.json",
+          "sha256": "64bb05ee2748aeb62af601d15fcacec9f358c6d13d133d7e8224f5bcccf3541e"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/engine-wheel-validation.json",
+          "sha256": "7e1cef7538acd5df32ac4f897de0d7f1041e1e063bda8c0893bd6eb8b6775a8d"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/family-config.json",
+          "sha256": "27c8c7415611dda3470870ff6e0f78063e435a95e89c8fd54934fb014a8984eb"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/geometry-audit.json",
+          "sha256": "756f4ea76feb4f6c59ffc02da7984c145b9b39043fdde509465faffa7d2dceac"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/inspection.json",
+          "sha256": "7bce0b2d0d2c59c697628f348e2b93b6294c2b8f05ad9d70fcd92ee3c3b09b8c"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/mesh-spec.json",
+          "sha256": "2b48f433f1c1f4c38acd574c66f9b0cc58105f3c9bc8a03da48ca9f60736f009"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/paint-ownership.json",
+          "sha256": "83f0ee75160a61211ec5428d3ec059003385176c43665bcc27524e2982922280"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/projection-coverage.png",
+          "sha256": "e5f594b409c2f4e00743a62890471e2c53988b771b2bd5310bc4528713a402b9"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/projection-draft.png",
+          "sha256": "62e0428ce26a0bfcca3b32ea695dd7e69b05edf4f072d2ce2434213c2e7709b4"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/projection-with-authored-fill.png",
+          "sha256": "a5211b05e1c02a908c774081c755df012ff794454e748a70d52a6831411d8b24"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/recipe.json",
+          "sha256": "40e3d689d7a64f13c41e8e94ea7670bb9ee6961bc7ac64dd4be676d59b4c1c4a"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/refs/east.png",
+          "sha256": "5c559738bf0b1e4dfbb3990ffe28aaca645636435bee4e01aed2acafb62bbcb5"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/refs/north.png",
+          "sha256": "e2dfaa3c8a0a4a2128cbd484b09440cf958400a2ae26e2024f29bef14de8d05d"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/refs/south.png",
+          "sha256": "a393a45bea54bbf5ae614bd364fa09b8fc51a1f95b2ab6c9c03ba81b990abf85"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/refs/west.png",
+          "sha256": "7b125941cf57acc16d9cde05be9c3b2a1d8af32d44db65098dca1dc79421620e"
+        },
+        {
+          "path": "art-source/train-models/blue/v1/front/rig.json",
+          "sha256": "09ba28b77887ec422c6260dbeac5b61d1eb7ebd22e1b6e5c8505503621338743"
+        },
+        {
+          "path": "public/assets/models/trains/blue-front-v1.glb",
+          "sha256": "9901021f08e5777e08936b1545acc5845daf36480aff61c654fdef92fba38364"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "7d91398ed0b8dcbf20311c067297da3d01e9bc7e930c83584aab73e7b05cd4a7",
+        "west-render.png": "39afd7726fb916ea84eb2d787ce6674aa15d4a04b4c3b8fe9381fb517e7c588c",
+        "north-render.png": "1f0a1ab9388eed3622ac2323e6076719746c1a2dfb0a3d4ebf402f2ed3fb53ba",
+        "south-render.png": "b51adb03272270c0f3506e24fcd953a0cf112b827d8bcce82493708755a3c257",
+        "orbit-0.png": "3da92d80fb78bba09b5174c736a47de33c115534368552b3cb54d45a3c6e9671",
+        "orbit-1.png": "1f5f8fd8ac00fa2f32bd7ac4f026f91fd74ae5fdc03ece001938ff2acd79ea76",
+        "orbit-2.png": "8e1363c30ca47d7c693763d0e6e85bf63d675e3a9bed4577b5f217093fc91f9d",
+        "orbit-3.png": "e4a0460c09ac3eb96b088b823af04caa6db6afeacf7f834e4f481b87d174670a"
+      }
+    },
+    {
+      "assetId": "train-blue-rear",
+      "revision": "v3",
+      "source": "art-source/train-models/blue/v3/rear",
+      "glb": "public/assets/models/trains/blue-rear-v3.glb",
+      "geometry": {
+        "meshObjects": 36,
+        "triangles": 1558
+      },
+      "files": [
+        {
+          "path": "art-source/train-models/blue/v3/rear/body-wheel-clearance.json",
+          "sha256": "54104da2dfd36e2a7bf662c91db4c8c52df98b45c185753ed9cc6b588cbe7415"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/car-atlas.png",
+          "sha256": "53fe08e68a4edf65d05d1dc6891abd916147c8aad8abb699402b9c81e0fd9cd2"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/car.blend",
+          "sha256": "3676fa336bcedda1c4bbdb707ddd54fe85a2541b2704e20f23f6d20858f29799"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/coverage.json",
+          "sha256": "6b7035348218d39dfa3c67a3bcb54182f0f3d14b6315dbc045660889cdae9bd5"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/engine-wheel-validation.json",
+          "sha256": "3524dcc67c56b1c7b04f401b4cf59ec08dadb93aeec759417a444113e560b080"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/family-config.json",
+          "sha256": "8de8c59f637da7d23aca61b694ca15c17cc4173d42ea1c93ed0e246b6028f263"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/geometry-audit.json",
+          "sha256": "87891555b66e42ad8a7b517965ee3b3e360eb80bb1b24c1d4fe5a6b1e3240413"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/geometry-refinement.json",
+          "sha256": "5de4c08f82fe03fb426876c845753aee7fd26406160335ebcc5154e9708e66a1"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/inspection.json",
+          "sha256": "a016b69e53e74b03187debda7099077cdb869b57aa5efe6526b3dbe8fe524161"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/mesh-spec.json",
+          "sha256": "838aefee9931f119c305ce5d375845784916a68127fe97e453fe7ed0d336aeed"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/paint-ownership.json",
+          "sha256": "977fb222d0c6017911dd14c50b253703c2ea6ae9452ca9b6765ebdc900a1957f"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/projection-coverage.png",
+          "sha256": "f2e3fd82ae18419e11c6509e8583b75e4d0b213099baaa4ce7bdfec676b66bb7"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/projection-draft.png",
+          "sha256": "f426f3d0d3d243622afd64fec4584da3b63466e30d8ee4be21106e1114c7c01c"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/projection-with-authored-fill.png",
+          "sha256": "bc86677c656c7018b2bcf6657cf9b7a60ea1f873cbf8e5ecb3bd252a2baf91b9"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/recipe.json",
+          "sha256": "f43863869ecf11ed2dce2f68806a06063df2e25a56cecc0fa70c6a0171295e03"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/refs/east.png",
+          "sha256": "7b125941cf57acc16d9cde05be9c3b2a1d8af32d44db65098dca1dc79421620e"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/refs/north.png",
+          "sha256": "a393a45bea54bbf5ae614bd364fa09b8fc51a1f95b2ab6c9c03ba81b990abf85"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/refs/south.png",
+          "sha256": "e2dfaa3c8a0a4a2128cbd484b09440cf958400a2ae26e2024f29bef14de8d05d"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/refs/west.png",
+          "sha256": "5c559738bf0b1e4dfbb3990ffe28aaca645636435bee4e01aed2acafb62bbcb5"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/rear/rig.json",
+          "sha256": "b066e5b5506a5031e25128bb7109b81b7592720c563b3bbf8fbc9b1151280ee4"
+        },
+        {
+          "path": "public/assets/models/trains/blue-rear-v3.glb",
+          "sha256": "c6a775e4587fce2e3dc54de9748c30699b58a9be916cb12792b2d1d44256bd0c"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "20bd70878acee6b17fec6d456885812c4e4e8f214bb89dab9bb78868cca36dd7",
+        "west-render.png": "3780c623b778466b039baa80587d4c7834bfb5c8bf95e3d254405b87021bb724",
+        "north-render.png": "569293c7f73ee2cb77857df7607cb0fc78dd09977dc39661c017d9efc4427a96",
+        "south-render.png": "51537b1d2baba8277dfd83ba16d6c50c124f225bf6a43e8c6807f4773b7e40d2",
+        "orbit-0.png": "f6e601ae52abb047949eacbd5cecb43814981bd387cc36a8d9ac0b989e6a958b",
+        "orbit-1.png": "cc19e645e5838a8c801a04dde55d735b2fd3af8e579a9474f65ebafccc7aecc7",
+        "orbit-2.png": "410d96dca8abc6bb652340650f938d08bf62769a416eee4eadaa2f85d61db775",
+        "orbit-3.png": "c8410c16d338f32123d04410247c28233a630402f67b49f6abebd25ca55fe3b0"
+      }
+    },
+    {
+      "assetId": "train-blue-middle",
+      "revision": "v3",
+      "source": "art-source/train-models/blue/v3/middle",
+      "glb": "public/assets/models/trains/blue-middle-v3.glb",
+      "geometry": {
+        "meshObjects": 40,
+        "triangles": 1560
+      },
+      "files": [
+        {
+          "path": "art-source/train-models/blue/v3/middle/body-wheel-clearance.json",
+          "sha256": "d8e3c541ee61a34fcfd7769ecab0fa0ded3235dc28ccdab4b7e2e0ca1a20c26d"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/car-atlas.png",
+          "sha256": "985e0d2df397b820f56f9beccc08c316c454143707f5d6472e741349920cf877"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/car.blend",
+          "sha256": "feb92d8b5c1041fe7181875234401afb36dce36c5deacda16e68ebd067bb3a80"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/coverage.json",
+          "sha256": "113997b61228fea73b1e4dbc7b3ebd47dbcdf5dafd84af60151f864b7a0cfef2"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/engine-wheel-validation.json",
+          "sha256": "52b4851b6146bd8a6abfd0311a4ca6856b10a4b4cf065ec41ea1aecf12ce4960"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/family-config.json",
+          "sha256": "efa09e474a038d1e6cf7255f516fceef6d03e91e5736d29c448cbc1806b52338"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/geometry-audit.json",
+          "sha256": "34639755f459852b07a142158d79d85c43e45fe7dcdcd1815dfc8a274fa24bba"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/geometry-refinement.json",
+          "sha256": "832988de197658fc170aa2bd86a5180cf70a96ea0424fed2f5081dd1a2a61ff2"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/inspection.json",
+          "sha256": "bba018a44e9169506547af2f1089151e4671c025b0632ca90c43dd498e1726e6"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/mesh-spec.json",
+          "sha256": "ba01a174c09a5b91763dd8a85d04526d65cedd4c937298f0ea711b2f118b85f2"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/paint-ownership.json",
+          "sha256": "ccee25ebe63d977e47d503ef81d231af9ad648c076e7daef1c0d88a4b457907d"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/projection-coverage.png",
+          "sha256": "223d652cc6c1a4b88acb19d36a27f153baf67b4d93a98f6283ee6a50145af015"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/projection-draft.png",
+          "sha256": "dfc8849938978dc642c04a9af73c21853207560d6ecc7eee67b83ecc17ae81dd"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/projection-with-authored-fill.png",
+          "sha256": "a1ff84d66c178e8624d0325c2801fc267484c5525e8b7f27af4d0d234b61b045"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/recipe.json",
+          "sha256": "ed9236ae29471cc3324a68ffb593e9d13967d5c14ba1c7cefa4285df12950c5b"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/refs/east.png",
+          "sha256": "244aded035319aca7f29ac476769d03500fdf0beeebe6a296347c53e202ee64a"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/refs/north.png",
+          "sha256": "f27d62a442ff50b55c9a15029507869a3b537c482b9a0448f32e610cacf6ad03"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/refs/south.png",
+          "sha256": "f27d62a442ff50b55c9a15029507869a3b537c482b9a0448f32e610cacf6ad03"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/refs/west.png",
+          "sha256": "244aded035319aca7f29ac476769d03500fdf0beeebe6a296347c53e202ee64a"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/middle/rig.json",
+          "sha256": "f04c4cd62af66be9032a569083731c5c635a18983715adf6ed647f819f333457"
+        },
+        {
+          "path": "public/assets/models/trains/blue-middle-v3.glb",
+          "sha256": "2f400009387db2fb7141659815045a690ae2a9ad6465647f621374fa2f149c78"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "7260f0f1921ec10538fb62401025f62e4c700a3bf7f241f5f8508e64a8bf9d00",
+        "west-render.png": "fd6b44efacd822a75ca958e2b3a1e442ffefae473bafd78141e3a587cfaf643c",
+        "north-render.png": "1ea15e68dac37bfc4466d7e5e0b20c41734d46fcf8f251bebac2f002dabe0d01",
+        "south-render.png": "ef03b4f702d1c79558a622c131c58363e95eb685e10d5f8513fb032ff630b0e6",
+        "orbit-0.png": "29ac2a469f95777822e7f9da3a82deb427980d895fbd3b137fd583d668e58e98",
+        "orbit-1.png": "3aa17c838516ad52ae25b47ccd9b47cc3fc2353a93ee4153091f4fc805071c51",
+        "orbit-2.png": "677943e8ca047cfd4e04749baec0e1f74b3686e9f186c6d2248a5c6285c05327",
+        "orbit-3.png": "017a6f9fd455f7531e930ac7a403c26f4962cbd2416de84a3dbf60265bc39c2b"
+      }
+    },
+    {
+      "assetId": "train-blue-front",
+      "revision": "v3",
+      "source": "art-source/train-models/blue/v3/front",
+      "glb": "public/assets/models/trains/blue-front-v3.glb",
+      "geometry": {
+        "meshObjects": 42,
+        "triangles": 1570
+      },
+      "files": [
+        {
+          "path": "art-source/train-models/blue/v3/front/body-wheel-clearance.json",
+          "sha256": "24d3491a057fa9236a928244c40b5afe90779bbe8ccc452b20a869a8bc300502"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/car-atlas.png",
+          "sha256": "a5211b05e1c02a908c774081c755df012ff794454e748a70d52a6831411d8b24"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/car.blend",
+          "sha256": "74bb82e8d2569d8aaf82f1f802077e43527c21f06f3e3437ff68bdacae9ca1c6"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/coverage.json",
+          "sha256": "64bb05ee2748aeb62af601d15fcacec9f358c6d13d133d7e8224f5bcccf3541e"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/engine-wheel-validation.json",
+          "sha256": "1b3358d4527de766aa628c29460c97abdb18a7dabcb5ba6b136b78d65a9fd8f8"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/family-config.json",
+          "sha256": "3e7b56865155bc49d1c1eeac09ffa3ab0599a79c09b43ecaed05374a21b635e5"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/geometry-audit.json",
+          "sha256": "db8683096f489531e83a261ec0589563b15fe842102204c87724d551a3a94824"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/geometry-refinement.json",
+          "sha256": "0571dd664897016fc798f6f80ec69889f38cb94624afaa1bde3756214e10ba9e"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/inspection.json",
+          "sha256": "62cacd92a17922547c249da0a91e53e06cecc13d900abbaca219675a049006a4"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/mesh-spec.json",
+          "sha256": "b0e4f2d35681a40282c8d789209dc4a3cdb994729687815bf29d47d1d82ae9d7"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/paint-ownership.json",
+          "sha256": "83f0ee75160a61211ec5428d3ec059003385176c43665bcc27524e2982922280"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/projection-coverage.png",
+          "sha256": "e5f594b409c2f4e00743a62890471e2c53988b771b2bd5310bc4528713a402b9"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/projection-draft.png",
+          "sha256": "50a2ed834bffac0f1adeaec5fb5eccae9cab3435e713c239e410f30ec59a5390"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/projection-with-authored-fill.png",
+          "sha256": "55cfd8b43458fe8b0d39bc6134616d01e841b8369c10e329941f3f80046e8759"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/recipe.json",
+          "sha256": "c31010f62805a5c67ea809426a4835bfe4cb834fe3140729c5b20a323007eeb4"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/refs/east.png",
+          "sha256": "5c559738bf0b1e4dfbb3990ffe28aaca645636435bee4e01aed2acafb62bbcb5"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/refs/north.png",
+          "sha256": "e2dfaa3c8a0a4a2128cbd484b09440cf958400a2ae26e2024f29bef14de8d05d"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/refs/south.png",
+          "sha256": "a393a45bea54bbf5ae614bd364fa09b8fc51a1f95b2ab6c9c03ba81b990abf85"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/refs/west.png",
+          "sha256": "7b125941cf57acc16d9cde05be9c3b2a1d8af32d44db65098dca1dc79421620e"
+        },
+        {
+          "path": "art-source/train-models/blue/v3/front/rig.json",
+          "sha256": "23c77f51a75af2f90d8393ca430f164370cbbe366bde8f10ecca7fe29d75fc73"
+        },
+        {
+          "path": "public/assets/models/trains/blue-front-v3.glb",
+          "sha256": "62846f9558f1181fa734cdcc096e588065940185e3315bd9c1a415d526b2b239"
+        }
+      ],
+      "nativeAndNovelRenderSha256": {
+        "east-render.png": "4b29cf8eab69c1b078269f48130f9892d9ab6618badddeec75375a0d1023ddec",
+        "west-render.png": "306c051308f9298336744e73bd9fb4d293bb656ace1fc651d4f2db2f36535e0c",
+        "north-render.png": "8711fed955aa393401d1f3e62da23ad9f3ffa8a45defdb2d07054570d99d49e0",
+        "south-render.png": "b6aa75e820e798f31a360deb4c64da7337faef60c78f22bb37ac6ee47f1bc9f6",
+        "orbit-0.png": "8d94c7965c6fdbb5d5349169ac33bf0d4cf69a8537bbf9de093b9508ff0cd12e",
+        "orbit-1.png": "0f5225da8d9ef00832f4132303b378a6c0bbca2487bdc28bf32866022f2c4b1f",
+        "orbit-2.png": "dcbfbf00e6a774d441c605fc06c88a89d6609b820ab72492986914fb2609d248",
+        "orbit-3.png": "8d3ab33550b7b0cb08f42239b8dd94e33e6d183114bb5822bd5875fc73f6250f"
+      }
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "scripts/authored-assets/author_blue_train.py",
+      "sha256": "a65e9aa78fd7f32b5ae15fe59686580d156d1a112caa5b2b0ff0be2d0bfa2983"
+    },
+    {
+      "path": "scripts/authored-assets/build_blue_train.py",
+      "sha256": "192a3e3cd831488c2af78d5776f01d0f06ca575ad6c987c0e9d5f579586b9b7b"
+    },
+    {
+      "path": "scripts/authored-assets/blue-train-family.json",
+      "sha256": "c4c7e74182237fb3961238f734a0ac4df7f691480d45281663b1cc1b2c96db80"
+    },
+    {
+      "path": "scripts/authored-assets/retain_blue_train.py",
+      "sha256": "fb3c209edfb4a6b1e91cc36a1434bda2b17f63dd20fac843d7c743173f8d0faa"
+    },
+    {
+      "path": "scripts/authored-assets/author_emergency_vehicle.py",
+      "sha256": "bc7ea63252112cda26c821f1896cf204978d51dec0fd165a09ea04776cd2c0ab"
+    },
+    {
+      "path": "scripts/authored-assets/build_emergency_vehicle.py",
+      "sha256": "fc1eab40508d6f0d814ccbd81a2f1bce84bf69806e58e06fe2a2da3083948c62"
+    },
+    {
+      "path": "scripts/authored-assets/pipeline.py",
+      "sha256": "ed51e22ba7629a65fccca504924b07613b8ab579d0f1fa2b53fa780390024967"
+    },
+    {
+      "path": "scripts/authored-assets/projection_math.py",
+      "sha256": "75b26c9c05756e1c6027d562673ff4677e96dc2f13a571f58aaf7e739098ffd3"
+    },
+    {
+      "path": "scripts/authored-assets/render.py",
+      "sha256": "064f00b8bdd08eb8e109610d6d6ac323075486c331353204b20b2b87d2993ea3"
+    },
+    {
+      "path": "scripts/authored-assets/project.py",
+      "sha256": "4482bac91da47a7d3faea2edaec45d947ff5751cb4274f0ea0b8f88d04258e7a"
+    },
+    {
+      "path": "scripts/authored-assets/pixel_style.py",
+      "sha256": "d4b0d0105ac6405469792018ca731bf5e38ddabf9a5d9bb7a15b6ef074c317f9"
+    },
+    {
+      "path": "scripts/authored-assets/pack_draft.py",
+      "sha256": "c814bc6cb42d3ad1189236138bf195fec247295aed00316d50cf7a63b195a726"
+    },
+    {
+      "path": "scripts/authored-assets/inspect_vehicle.py",
+      "sha256": "8543c64b3ff78ab0ee58236e4889783dc67872362cdeea19301caf4fd5520b92"
+    },
+    {
+      "path": "scripts/authored-assets/silhouette_report.py",
+      "sha256": "d61ad53fd4c988d24fc4858dbf20a7f6b11fc1b8d93b19101f7c32c8c5554157"
+    },
+    {
+      "path": "scripts/authored-assets/verify_vehicle_body_clearance.py",
+      "sha256": "6edeeb76fed98b739a8e5c2e013e77197d4f01f16597589a19d8b359248be965"
+    },
+    {
+      "path": "scripts/authored-assets/verify_blue_train.mjs",
+      "sha256": "e064c3f87fa22a0e45d827c74486879d7c1e075ae3e03eff7dc8db05d7c60535"
+    },
+    {
+      "path": "scripts/authored-assets/verify_train_bundles.py",
+      "sha256": "77d91e766b4a52de9cca123708204a5fc4e107d5bf6c2164325e3a6c3c162c52"
+    },
+    {
+      "path": "src/railway/RailwaySource.json",
+      "sha256": "5cf107929197e3c90b0831b55ac2656e7d3615e9a5c12f1f1cbdaa1c066a3ea2"
+    },
+    {
+      "path": "public/assets/tilesets/railway-review-v1.png",
+      "sha256": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23"
+    },
+    {
+      "path": "scripts/authored-assets/refine_blue_train_v2.py",
+      "sha256": "d486be36d06f8d31ff9edbda6b81378f7d45d191d35c006d4ac43296035e23e6"
+    },
+    {
+      "path": "scripts/authored-assets/retain_blue_train_v2.py",
+      "sha256": "539a5ecca6cfb3d3d734f61cc73166ea3686012421ed69ccec8631293fdb22b8"
+    },
+    {
+      "path": "scripts/authored-assets/verify_blue_train_v2.mjs",
+      "sha256": "63ab225635043f4422143c422fed6f7560271994b29cf1b9af72309a715d0e1a"
+    },
+    {
+      "path": "scripts/authored-assets/pack_train_draft.py",
+      "sha256": "02db9163e71fc92c4abc76ea72ac13ffca9398cf5d24e6b9776b69e7fe5d0328"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/rear/car.blend",
+      "sha256": "81e95064165ce476eb88ec81bc328556b517188d6e2f2ddfdde9258acf1b72ee"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/middle/car.blend",
+      "sha256": "a421d43903ff4bf076785a4d28537b79f94d5a790f45f5d765b5fd59eda54fab"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/front/car.blend",
+      "sha256": "49526e1febc02326b002f920b0ed9c217bacf4bfbdf0466d450d32d8bea965ad"
+    }
+  ],
+  "sharedFiles": [
+    {
+      "path": "art-source/train-models/blue/v1/authoring-provenance.json",
+      "sha256": "3605ba12df7b2c669bb2f52bdbeedef0428c63d2f96eadcc1082657ab5459a52"
+    },
+    {
+      "path": "art-source/train-models/blue/v1/motion-validation.json",
+      "sha256": "188ff8af65f463c2ca18fb06d0941744e1b7e8b64060a8a921afab7b61f71f47"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/comparison.png",
+      "sha256": "764e4307b0a4614351e697b719cc6e631fff3a28f2ccf8bc2504b9779e906749"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/front-comparison.png",
+      "sha256": "477e83004aec443940082a83ecb7a0143288185fabc7ca158a2b86fb41fa8615"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/front-orbit.png",
+      "sha256": "02dcacbe3578912b8a09353c3642892d85e7536ba4bb38a9a57269227b3d6f03"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/front-silhouette.png",
+      "sha256": "5de07ec71fcfc0c1d57b70a3655905cc291b2efee615703239c3d3ea52c5751a"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/index.html",
+      "sha256": "d03485ac7ae15e5cae32846be4f4c273648451ff20c86dd0e4bf6228f3d3962f"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/loop.gif",
+      "sha256": "06bb8f2535d3829809f57003434807c8c53ed0bbcc8e3dbd9f136a450ff77802"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/middle-comparison.png",
+      "sha256": "26309e699b2b3570e5a38109631e895aa903f7e39192748588a2441ef203dc28"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/middle-orbit.png",
+      "sha256": "b892779faee4049b216c63cb6b99a0977cb8e92b9235a8646158301dc7fa0713"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/middle-silhouette.png",
+      "sha256": "f364ee178c6cbc90fba24b0c2c69263a3ca7e6bf270e37e0aa1493daf958cf79"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/rear-comparison.png",
+      "sha256": "19345e5e532fabec569c0ae4b103532a0f005354bfcb26d1019a74cec6fa2b1e"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/rear-orbit.png",
+      "sha256": "12ea8008b62f0be0fc891e4c0d8d432ff748edd7ebfd9ceacae465287fc7abfa"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/rear-silhouette.png",
+      "sha256": "3ee589502ca29bd5dbab7abd67f0953d703209f6cdc2984e2d05094fe4b6b09b"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/reversal.gif",
+      "sha256": "f47382b5cd30bf2cc161340f0a5e564d7bc7127ef0a6c848424832c4ea263dc0"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v1/review.json",
+      "sha256": "d624a7efe02bf0be65e6bd2de2dcb7ea7049643aa67058caa8f752fb8bc168a6"
+    },
+    {
+      "path": "art-source/train-models/blue/v3/authoring-provenance.json",
+      "sha256": "762544aa5cf8066bc1db0e8eb8a79167140e980b44f3f7f92d40021c3d59616f"
+    },
+    {
+      "path": "art-source/train-models/blue/v3/motion-validation.json",
+      "sha256": "0de8d007c97fa5fbb1e5e8ee3edc19ccb13a4582524183750625d502d85e303e"
+    },
+    {
+      "path": "art-source/train-models/blue/v3/native-contract.json",
+      "sha256": "ab3204e864ba7e152dfc12d9c4b9e2e4c13c2e9dc7949ebcbf8864215e0ac194"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/comparison.png",
+      "sha256": "9a4d2d56442ea16607202b14ede5ec670fab77b887213257678207141ae75b2d"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/front-comparison.png",
+      "sha256": "5786efff15f5b39ee5b276b8a6ae997f2c5e40dc0e4152d26ec889b03f13f22a"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/front-orbit.png",
+      "sha256": "619bcd1e525d6c485e94812e1a2a1647245ff920a77efa11d2a2994238d77858"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/front-silhouette.png",
+      "sha256": "3260fe436a8dba6428bb7fb0f3bd24d041e49d272848b2c00569695097cfdf17"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/index.html",
+      "sha256": "4d53dfbbd933da1d8cd694a5a3a5690327e2f7be19d92b7136aeb43998430b00"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/loop.gif",
+      "sha256": "132264cb42acf99754c44043eac8769f8bfd6cb3a77865f3152d0ae2fc50a22d"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/middle-comparison.png",
+      "sha256": "33521a8b58e2bffd1f4e925d12c677184fe286af08bd20f53d70a7808159dec9"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/middle-orbit.png",
+      "sha256": "74ecd789c92f60878fc6ce01058260ef39ab7c27fb68dec386d097bafe5cf99d"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/middle-silhouette.png",
+      "sha256": "3bf5446ad27e2b6115e864d787db4914c4a11cdad9a5c104c00389e39d25b952"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/rear-comparison.png",
+      "sha256": "d74a5786016f8e498f31723d1267d8d0c67cb66294ed54456ba625cb462c9710"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/rear-orbit.png",
+      "sha256": "a9e458e0366651aa640971e65f89b677de5f93d5b0632d6ce386d6a84aaacff6"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/rear-silhouette.png",
+      "sha256": "214dc8222555a03125c0dcce836bc9aa1f12079214b9b80966790815dfb0668c"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/reversal.gif",
+      "sha256": "4187be4ecb0bedecc81b0abd74b3bde8dd8b663f5d5b4b633d4e98c5211bfc99"
+    },
+    {
+      "path": "public/assets/models/trains/review/blue-v3/review.json",
+      "sha256": "f8686251095346822d347a45d49a752bd27dfd3582934fb2817ce73dc3a089d8"
+    }
+  ]
+}

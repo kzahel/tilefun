@@ -45,6 +45,8 @@ export interface ScenarioPresentationOptions {
   terrain?: boolean;
   pixelExactShadows?: boolean;
   background?: string;
+  /** Explicit train-art inspector opt-in; never selected by the main game. */
+  authoredTrainPrototype?: boolean;
   /** Four-direction sprite inspection: pauses authority and overrides only the displayed pose. */
   poseCycle?(): { fps: number; frameCount: number } | undefined;
   surfaceVisibility?(): SurfaceVisibility;
@@ -65,9 +67,7 @@ export class ScenarioPresentationHost {
   readonly session: ScenarioClient;
   readonly camera = new Camera();
   readonly ready: Promise<void>;
-  private readonly frame = new SceneFrame({
-    allCars3d: new URLSearchParams(location.search).has("allcars3d"),
-  });
+  private readonly frame: SceneFrame;
   private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private host: RenderHost | undefined;
@@ -91,6 +91,10 @@ export class ScenarioPresentationHost {
     recipe: ScenarioRecipe,
     private readonly options: ScenarioPresentationOptions,
   ) {
+    this.frame = new SceneFrame({
+      allCars3d: new URLSearchParams(location.search).has("allcars3d"),
+      authoredTrainPrototype: options.authoredTrainPrototype ?? false,
+    });
     this.vehicleControls = !!(recipe.traffic || recipe.railways);
     this.session = new ScenarioClient(recipe);
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));

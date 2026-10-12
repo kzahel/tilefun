@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [127 Authored blue train](127-authored-blue-train.md) | Complete blue prototype: three own carriages, 24 wheels, exact v1/v3 bundles and shared-engine moving review; live activation pending |
 | [126 Driving collision neighborhoods](126-driving-collision-neighborhoods.md) | Local prop searches retain snapshot/roof/ground dependencies; cool-phone wide driving phase 71.5% lower, whole tick 5.4% lower; frame p95 still 50ms |
 | [125 Traffic lookahead terrain reuse](125-traffic-lookahead-terrain-reuse.md) | Per-car flat-road reuse: 26.6% less phone traffic work, noisy 4.1% whole-tick mean saving; exact parity and live contacts retained |
 | [124 Native city workload](124-city-workload-profile.md) | Traffic terrain-read duplication, wide-view driving/replication and renderer attribution; thermal-limited phone scope; no runtime change |

@@ -1,0 +1,242 @@
+{
+  "schema": "authored-assets-v1",
+  "assetId": "train-blue-front",
+  "family": "blue-local-train",
+  "source": {
+    "image": "public/assets/tilesets/railway-review-v1.png",
+    "sha256": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23"
+  },
+  "canvas": [
+    160,
+    143
+  ],
+  "workingBlend": "car.blend",
+  "template": {
+    "path": "art-source/train-models/blue/v3/front/car.blend",
+    "sha256": "74bb82e8d2569d8aaf82f1f802077e43527c21f06f3e3437ff68bdacae9ca1c6"
+  },
+  "views": [
+    {
+      "id": "east",
+      "rect": [
+        168,
+        105,
+        160,
+        62
+      ],
+      "sourceName": "Exterior_Train_Blue_Right",
+      "anchor": [
+        80.0,
+        47
+      ],
+      "source": "refs/east.png",
+      "offset": [
+        0,
+        40
+      ],
+      "camera": {
+        "azimuth": 90,
+        "elevation": 32.54292390406173,
+        "horizontalScale": 1.0,
+        "verticalStretch": 1.073278825674728,
+        "origin": [
+          80.0,
+          93.21428571428571
+        ],
+        "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+      },
+      "sourceSha256": "5c559738bf0b1e4dfbb3990ffe28aaca645636435bee4e01aed2acafb62bbcb5"
+    },
+    {
+      "id": "west",
+      "rect": [
+        872,
+        1,
+        136,
+        62
+      ],
+      "sourceName": "Exterior_Train_Blue_Left",
+      "anchor": [
+        68.0,
+        47
+      ],
+      "source": "refs/west.png",
+      "offset": [
+        12,
+        40
+      ],
+      "camera": {
+        "azimuth": -90,
+        "elevation": 32.54292390406173,
+        "horizontalScale": 0.85,
+        "verticalStretch": 1.262680971382033,
+        "origin": [
+          80.0,
+          93.21428571428571
+        ],
+        "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+      },
+      "sourceSha256": "7b125941cf57acc16d9cde05be9c3b2a1d8af32d44db65098dca1dc79421620e"
+    },
+    {
+      "id": "north",
+      "rect": [
+        339,
+        107,
+        41,
+        109
+      ],
+      "sourceName": "Train_Blue_Back_Down",
+      "anchor": [
+        20.5,
+        94
+      ],
+      "source": "refs/north.png",
+      "offset": [
+        59,
+        17
+      ],
+      "camera": {
+        "azimuth": 0,
+        "elevation": 71.69154833894734,
+        "horizontalScale": 1,
+        "verticalStretch": 0.6557940191991235,
+        "origin": [
+          80.0,
+          75.87204700410524
+        ],
+        "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+      },
+      "sourceSha256": "e2dfaa3c8a0a4a2128cbd484b09440cf958400a2ae26e2024f29bef14de8d05d"
+    },
+    {
+      "id": "south",
+      "rect": [
+        451,
+        104,
+        41,
+        143
+      ],
+      "sourceName": "Train_Blue_Front_Down",
+      "anchor": [
+        20.5,
+        128
+      ],
+      "source": "refs/south.png",
+      "offset": [
+        59,
+        0
+      ],
+      "camera": {
+        "azimuth": 180,
+        "elevation": 40.67623107922905,
+        "horizontalScale": 1,
+        "verticalStretch": 1.050665073410384,
+        "origin": [
+          80.0,
+          89.84501591892717
+        ],
+        "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+      },
+      "sourceSha256": "a393a45bea54bbf5ae614bd364fa09b8fc51a1f95b2ab6c9c03ba81b990abf85"
+    }
+  ],
+  "appearance": "unlit",
+  "projection": {
+    "atlasSize": 1536,
+    "material": "train-blue-front palette \u00b7 cleaned UV atlas",
+    "textureNode": "Clean atlas",
+    "sourceViews": {
+      "Skirt-east": [
+        "east"
+      ],
+      "Roof-shoulder-east": [
+        "east"
+      ],
+      "Skirt-west": [
+        "west"
+      ],
+      "Roof-shoulder-west": [
+        "west"
+      ],
+      "Roof": [
+        "south"
+      ],
+      "Chassis": [],
+      "Negative-end-lower": [
+        "south"
+      ],
+      "Negative-end-windscreen-glass": [
+        "south"
+      ],
+      "Negative-end-windscreen-frame": [],
+      "Negative-end-roof": [
+        "south"
+      ],
+      "Negative-end-corner--1": [
+        "south"
+      ],
+      "Negative-end-corner-1": [
+        "south"
+      ],
+      "Positive-end-lower": [
+        "north"
+      ],
+      "Positive-end-upper": [
+        "north"
+      ],
+      "Positive-end-corner--1": [
+        "north"
+      ],
+      "Positive-end-corner-1": [
+        "north"
+      ],
+      "Bellows-body-0": [
+        "south"
+      ],
+      "Bellows-body-1": [],
+      "Bellows-body-2": [
+        "west"
+      ],
+      "Bellows-body-3": [
+        "east"
+      ],
+      "Bellows-body-4": [
+        "south"
+      ],
+      "Bellows-body-5": [
+        "north"
+      ],
+      "Coupler-head-negative": [],
+      "Coupler-head-positive": [],
+      "Bogie-frame-F": [],
+      "Tire_FL": [],
+      "Hub_FL": [],
+      "Tire_FR": [],
+      "Hub_FR": [],
+      "Tire_F2L": [],
+      "Hub_F2L": [],
+      "Tire_F2R": [],
+      "Hub_F2R": [],
+      "Bogie-frame-R": [],
+      "Tire_RL": [],
+      "Hub_RL": [],
+      "Tire_RR": [],
+      "Hub_RR": [],
+      "Tire_R2L": [],
+      "Hub_R2L": [],
+      "Tire_R2R": [],
+      "Hub_R2R": []
+    }
+  },
+  "reviewStatus": "Retained train prototype; moving-art review before live activation",
+  "pixelStyle": {
+    "outline": "inner",
+    "outlineColor": [
+      58,
+      58,
+      80
+    ],
+    "logicalPixelWidth": 1
+  }
+}

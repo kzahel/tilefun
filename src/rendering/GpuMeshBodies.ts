@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
@@ -47,7 +48,7 @@ export class GpuMeshBodies {
   }
   /** Lazy family loads never replace their source sprite before the next frame. */
   private request(assetId: string) {
-    const definition = authoredVehicleForAsset(assetId);
+    const definition = authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId);
     if (!this.enabled || !definition) return undefined;
     let slot = this.slots.get(assetId);
     if (!slot) {

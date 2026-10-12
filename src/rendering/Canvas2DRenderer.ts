@@ -188,8 +188,8 @@ function drawSprite(
   sheets: Map<string, Spritesheet>,
 ): void {
   if (item.flashHidden) return;
-  if (drawCurveTrain(ctx, camera, item, sheets)) return;
   if (ctx.meshBody?.(camera, item)) return;
+  if (drawCurveTrain(ctx, camera, item, sheets)) return;
   const sheet = sheets.get(item.sheetKey);
   if (!sheet) return;
 

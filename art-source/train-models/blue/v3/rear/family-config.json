@@ -1,0 +1,70 @@
+{
+  "family": "blue-local-train",
+  "length": 136,
+  "cabSign": 1,
+  "connectorLength": 0,
+  "sources": {
+    "east": "Exterior_Train_Blue_Left",
+    "west": "Exterior_Train_Blue_Right",
+    "north": "Train_Blue_Front_Down",
+    "south": "Train_Blue_Back_Down"
+  },
+  "cameras": {
+    "east": {
+      "azimuth": 90,
+      "elevation": 32.54292390406173,
+      "horizontalScale": 1.0,
+      "verticalStretch": 1.073278825674728,
+      "origin": [
+        80.0,
+        93.21428571428571
+      ],
+      "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+    },
+    "west": {
+      "azimuth": -90,
+      "elevation": 32.54292390406173,
+      "horizontalScale": 1.1764705882352942,
+      "verticalStretch": 0.9122870018235189,
+      "origin": [
+        80.0,
+        93.21428571428571
+      ],
+      "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+    },
+    "north": {
+      "azimuth": 0,
+      "elevation": 40.67623107922905,
+      "horizontalScale": 1,
+      "verticalStretch": 1.188188299622352,
+      "origin": [
+        80.0,
+        92.31167009138818
+      ],
+      "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+    },
+    "south": {
+      "azimuth": 180,
+      "elevation": 71.69154833894734,
+      "horizontalScale": 1,
+      "verticalStretch": 0.7610953039722478,
+      "origin": [
+        80.0,
+        76.65435485380758
+      ],
+      "status": "Recorded native fit after roof-to-support alignment; no gameplay camera change"
+    }
+  },
+  "sideOwners": {
+    "east": 1,
+    "west": -1
+  },
+  "notes": [
+    "Native roof/end projection varies between drawings.",
+    "Eight wheels per carriage are inferred beneath source skirts.",
+    "Couplers and bogie yaw stay at rest for first motion inspection."
+  ],
+  "revision": "v2",
+  "roof": 44,
+  "trackHalfGauge": 10
+}

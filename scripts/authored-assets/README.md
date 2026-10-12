@@ -711,3 +711,60 @@ simulation isolation, lazy load/failure/disabled sprite fallback and disposal.
 Fixed probes use static Vite serving with no HMR watcher to avoid scanning local
 scratch trees. Workshop's manifest scan is limited to its declared entry HTML;
 compiler and normal-Chromium identities still verify every earlier candidate.
+
+
+## Blue train prototype
+
+Use a train-specific template; do not reuse road-car geometry/cameras. The first
+blue prototype freezes six pieces from `src/railway/RailwaySource.json` and its
+tracked review atlas. `author_blue_train.py --part rear|middle|front --config
+scripts/authored-assets/blue-train-family.json --out NEW_WORKSPACE --blender BLENDER`
+constructs separate bodies, bogies, eight roll pivots and static couplers with own
+paint. `build_blue_train.py` parents wheels to their bogies while preserving the
+measured rest centers. Existing road-car constructors remain immutable.
+
+Use the ordinary `pipeline.py evaluate` / `project` / `inspect_vehicle.py` /
+`pack_draft.py` workflow on each carriage. `verify_vehicle_body_clearance.py`
+accepts a diagnostic catalog of the three new exports for whole-body neutral-roll
+proof and deliberate collision rejection. `verify_blue_train.mjs NEW_OUTPUT ROOT`
+exercises actual `CarMeshAsset`, shared GPU drawing and production ScenarioSession
+loop/corridor services, including independent wheel travel, fixed bogies/body,
+actual reverse velocity, disposal and mid-bend reload. It records static coupler
+endpoint mismatches honestly; these measurements do not establish acceptance.
+
+The initial `retain_blue_train.py` pins three exact v1 bundles and their matched
+4×2 / real fixed-camera motion comparisons. It deliberately refuses overwriting
+existing evidence. Current retained recipes replay directly from their packed
+scenes; `verify_train_bundles.py --root CHECKOUT` and Blender
+`audit_train_blends.py -- CHECKOUT OUTPUT` verify tracked-only deliveries. Use a
+new versioned retainer/constructor for any changed revision; the existing catalog
+pins the exact original sources. [Train source delivery](../../art-source/train-models/README.md)
+owns what to commit and why.
+
+The shared engine requires explicit `authoredTrainPrototype` presentation opt-in;
+only the three authored-train World Geometry inspection fixtures provide it.
+Main-game/default labs retain native sprites and unchanged rail simulation.
+Track tangent orients physical ends independently of travel direction. A fixed
+lateral reflection registers the original source sides before yaw; there are no
+heading-dependent gameplay cameras. Eight hidden wheels roll per carriage; bogie
+yaw/coupler motion and live activation await their own qualification/review.
+
+
+Blue v2 uses `refine_blue_train_v2.py` in Blender with `PART NEW_WORKSPACE`.
+It starts from tracked v1 scenes and preserves all UV/source pixels, raises upper
+body vertices four units to 44-unit roof support and moves wheel centers to
+straight ±10 rails. `verify_blue_train_v2.mjs` checks actual imported roof/gauge,
+all 24 wheels and real motion; `retain_blue_train_v2.py` appends exact v2 bundles
+without changing archived v1 sources/review files. The new scenes and their own
+unused v2 projection drafts remain packed and independently replayable. Mutable
+engine contract hashes are receipts, not required frozen runtime dependencies.
+
+
+The v2 geometry refinement is delivered as package **v3**. Use
+`pack_train_draft.py` instead of reloading an already packed draft: it asserts
+that the draft is unused, loads a fresh image, checks its packed PNG bytes and
+keeps the active atlas/geometry unchanged. The first unpublished v2 packaging
+attempt is ignored scratch; archived v1 is unchanged. Final retention uses
+`retain_blue_train_v2.py ... --revision v3` with the fresh `-packed-002.blend`
+inputs. Current inspection registrations select v3, and exact source audits cover
+all six retained v1/v3 carriage bundles.

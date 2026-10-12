@@ -1,0 +1,7 @@
+{
+  "straightTrackHalfGauge": 10,
+  "nativeRoofSupportHeight": 44,
+  "trackShaderSourceSha256": "dfb7fa0736ab3e10b893c2307c1e11a9050845a255ba4bfdf60292bffc7791e7",
+  "curveTrainSourceSha256": "f13759ed7690ec7fe2289bad7513d12fcb65c650a853be9900c732da21cfa562",
+  "status": "Captured contract evidence; current engine source may evolve independently"
+}

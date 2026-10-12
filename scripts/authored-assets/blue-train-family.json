@@ -1,0 +1,167 @@
+{
+  "rear": {
+    "family": "blue-local-train",
+    "length": 136,
+    "cabSign": 1,
+    "connectorLength": 0,
+    "sources": {
+      "east": "Exterior_Train_Blue_Left",
+      "west": "Exterior_Train_Blue_Right",
+      "north": "Train_Blue_Front_Down",
+      "south": "Train_Blue_Back_Down"
+    },
+    "cameras": {
+      "east": {
+        "azimuth": 90,
+        "elevation": 30,
+        "horizontalScale": 1.0,
+        "verticalStretch": 1.1547005383792515,
+        "origin": [80.0, 93.5],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "west": {
+        "azimuth": -90,
+        "elevation": 30,
+        "horizontalScale": 1.1764705882352942,
+        "verticalStretch": 0.9814954576223637,
+        "origin": [80.0, 93.5],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "north": {
+        "azimuth": 0,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1.2579022111436786,
+        "origin": [80.0, 92.31167009138818],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "south": {
+        "azimuth": 180,
+        "elevation": 70,
+        "horizontalScale": 1,
+        "verticalStretch": 0.7689408186812158,
+        "origin": [80.0, 76.65435485380758],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      }
+    },
+    "sideOwners": {
+      "east": 1,
+      "west": -1
+    },
+    "notes": [
+      "Native roof/end projection varies between drawings.",
+      "Eight wheels per carriage are inferred beneath source skirts.",
+      "Couplers and bogie yaw stay at rest for first motion inspection."
+    ]
+  },
+  "middle": {
+    "family": "blue-local-train",
+    "length": 160,
+    "cabSign": 0,
+    "connectorLength": 16,
+    "sources": {
+      "east": "Exterior_Train_Blue_Middle",
+      "west": "Exterior_Train_Blue_Middle",
+      "north": "Train_Blue_Middle_Down",
+      "south": "Train_Blue_Middle_Down"
+    },
+    "cameras": {
+      "east": {
+        "azimuth": 90,
+        "elevation": 30,
+        "horizontalScale": 1.0,
+        "verticalStretch": 1.1547005383792515,
+        "origin": [80.0, 78.0],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "west": {
+        "azimuth": -90,
+        "elevation": 30,
+        "horizontalScale": 1.0,
+        "verticalStretch": 1.1547005383792515,
+        "origin": [80.0, 78.0],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "north": {
+        "azimuth": 0,
+        "elevation": 65,
+        "horizontalScale": 1,
+        "verticalStretch": 0.6909597249368262,
+        "origin": [80.0, 61.77826225454111],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "south": {
+        "azimuth": 180,
+        "elevation": 65,
+        "horizontalScale": 1,
+        "verticalStretch": 0.6909597249368262,
+        "origin": [80.0, 61.77826225454111],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      }
+    },
+    "sideOwners": {
+      "east": 1,
+      "west": -1
+    },
+    "notes": [
+      "Native roof/end projection varies between drawings.",
+      "Eight wheels per carriage are inferred beneath source skirts.",
+      "Couplers and bogie yaw stay at rest for first motion inspection."
+    ]
+  },
+  "front": {
+    "family": "blue-local-train",
+    "length": 160,
+    "cabSign": -1,
+    "connectorLength": 16,
+    "sources": {
+      "east": "Exterior_Train_Blue_Right",
+      "west": "Exterior_Train_Blue_Left",
+      "north": "Train_Blue_Back_Down",
+      "south": "Train_Blue_Front_Down"
+    },
+    "cameras": {
+      "east": {
+        "azimuth": 90,
+        "elevation": 30,
+        "horizontalScale": 1.0,
+        "verticalStretch": 1.1547005383792515,
+        "origin": [80.0, 93.5],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "west": {
+        "azimuth": -90,
+        "elevation": 30,
+        "horizontalScale": 0.85,
+        "verticalStretch": 1.3584712216226489,
+        "origin": [80.0, 93.5],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "north": {
+        "azimuth": 0,
+        "elevation": 70,
+        "horizontalScale": 1,
+        "verticalStretch": 0.6625540682978728,
+        "origin": [80.0, 75.87204700410524],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      },
+      "south": {
+        "azimuth": 180,
+        "elevation": 38,
+        "horizontalScale": 1,
+        "verticalStretch": 1.11231016113727,
+        "origin": [80.0, 89.84501591892717],
+        "status": "Explicit native source fit; incompatible directional lengths not gameplay lenses"
+      }
+    },
+    "sideOwners": {
+      "east": 1,
+      "west": -1
+    },
+    "notes": [
+      "Native roof/end projection varies between drawings.",
+      "Eight wheels per carriage are inferred beneath source skirts.",
+      "Couplers and bogie yaw stay at rest for first motion inspection."
+    ]
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schema": "tilefun-authored-train-review-v1",
+  "candidateId": "projection:authored-blue-train-v1",
+  "candidateFingerprint": "a40c5b8b66c895e81f4a322c38e125ae3a4df24f4f40a6f1f5f9442ad19c8a17",
+  "identity": {
+    "assetId": "blue-train",
+    "revision": "v1",
+    "sourceFingerprint": "c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23",
+    "sourceBundles": [
+      {
+        "part": "rear",
+        "blendSha256": "81e95064165ce476eb88ec81bc328556b517188d6e2f2ddfdde9258acf1b72ee",
+        "atlasSha256": "53fe08e68a4edf65d05d1dc6891abd916147c8aad8abb699402b9c81e0fd9cd2"
+      },
+      {
+        "part": "middle",
+        "blendSha256": "a421d43903ff4bf076785a4d28537b79f94d5a790f45f5d765b5fd59eda54fab",
+        "atlasSha256": "985e0d2df397b820f56f9beccc08c316c454143707f5d6472e741349920cf877"
+      },
+      {
+        "part": "front",
+        "blendSha256": "49526e1febc02326b002f920b0ed9c217bacf4bfbdf0466d450d32d8bea965ad",
+        "atlasSha256": "a5211b05e1c02a908c774081c755df012ff794454e748a70d52a6831411d8b24"
+      }
+    ],
+    "files": [
+      {
+        "url": "assets/models/trains/blue-rear-v1.glb",
+        "sha256": "24cb6f10eb29bb6b2331ac98ec3358f12ae43d6e6734b3cbbb07d64f726a08cb"
+      },
+      {
+        "url": "assets/models/trains/blue-middle-v1.glb",
+        "sha256": "e5b0958bac59082d99c678e11f673001905d6f1cc0f517a8bdaa622109abd157"
+      },
+      {
+        "url": "assets/models/trains/blue-front-v1.glb",
+        "sha256": "9901021f08e5777e08936b1545acc5845daf36480aff61c654fdef92fba38364"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/comparison.png",
+        "sha256": "764e4307b0a4614351e697b719cc6e631fff3a28f2ccf8bc2504b9779e906749"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/front-comparison.png",
+        "sha256": "477e83004aec443940082a83ecb7a0143288185fabc7ca158a2b86fb41fa8615"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/front-orbit.png",
+        "sha256": "02dcacbe3578912b8a09353c3642892d85e7536ba4bb38a9a57269227b3d6f03"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/front-silhouette.png",
+        "sha256": "5de07ec71fcfc0c1d57b70a3655905cc291b2efee615703239c3d3ea52c5751a"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/loop.gif",
+        "sha256": "06bb8f2535d3829809f57003434807c8c53ed0bbcc8e3dbd9f136a450ff77802"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/middle-comparison.png",
+        "sha256": "26309e699b2b3570e5a38109631e895aa903f7e39192748588a2441ef203dc28"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/middle-orbit.png",
+        "sha256": "b892779faee4049b216c63cb6b99a0977cb8e92b9235a8646158301dc7fa0713"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/middle-silhouette.png",
+        "sha256": "f364ee178c6cbc90fba24b0c2c69263a3ca7e6bf270e37e0aa1493daf958cf79"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/rear-comparison.png",
+        "sha256": "19345e5e532fabec569c0ae4b103532a0f005354bfcb26d1019a74cec6fa2b1e"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/rear-orbit.png",
+        "sha256": "12ea8008b62f0be0fc891e4c0d8d432ff748edd7ebfd9ceacae465287fc7abfa"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/rear-silhouette.png",
+        "sha256": "3ee589502ca29bd5dbab7abd67f0953d703209f6cdc2984e2d05094fe4b6b09b"
+      },
+      {
+        "url": "assets/models/trains/review/blue-v1/reversal.gif",
+        "sha256": "f47382b5cd30bf2cc161340f0a5e564d7bc7127ef0a6c848424832c4ea263dc0"
+      }
+    ]
+  },
+  "status": "Awaiting exact moving-art review before live activation",
+  "limits": [
+    "Source side/end lengths differ; matched-camera comparison is not fixed-camera game parity.",
+    "Static couplers have gaps/overlaps on native curved spacing; see moving review.",
+    "Bogies/couplers remain at rest; wheels are inferred under opaque skirts."
+  ]
+}

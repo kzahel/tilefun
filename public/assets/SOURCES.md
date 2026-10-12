@@ -96,3 +96,14 @@ transparency. The [A01 packet](../../docs/tactical/053-semantic-tileset-map/pack
 pins their exact original bytes; these review sources do not establish gameplay
 animation timing, door mechanics or approval. Companion GIFs remain supporting
 research evidence and are not repacked here.
+
+
+### Authored blue train prototype
+
+`models/trains/blue-{rear,middle,front}-{v1,v3}.glb` and
+`models/trains/review/blue-{v1,v3}/` reconstruct LimeZu Modern Exteriors blue train
+pieces from the unchanged `tilesets/railway-review-v1.png` bank. New Blender
+geometry, owned UV atlases and wheel/bogie/coupler rigs are retained with exact
+sources and dependencies in `art-source/train-models/blue/{v1,v3}/`. The model/motion
+inspection captures are unapproved prototypes; the existing live train sprite
+bank stays unchanged. Source credit: https://limezu.itch.io/modernexteriors

@@ -126,10 +126,10 @@ export function collectScene(
     const effectiveWy = pos.wy - zOffset;
     const spriteBottom = effectiveWy + (e.sprite.drawOffsetY ?? 0);
     const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
-    const meshRadius = e.type.startsWith("train-curve-proof-v1")
-      ? 96
-      : meshAsset
-        ? vehicleMeshRadius(meshAsset)
+    const meshRadius = meshAsset
+      ? vehicleMeshRadius(meshAsset)
+      : e.type.startsWith("train-curve-proof-v1")
+        ? 96
         : 0;
     const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     const top = meshRadius

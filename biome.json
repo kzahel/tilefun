@@ -50,6 +50,8 @@
       "includes": [
         "art-source/wildlife-v2/**/*.json",
         "art-source/vehicle-models/**/*.json",
+        "art-source/train-models/**/*.json",
+        "public/assets/models/trains/review/**/*.json",
         "public/demos/wildlife-v2/**/*.json",
         "src/wildlife/reviews.json"
       ],

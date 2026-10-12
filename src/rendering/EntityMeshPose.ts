@@ -1,5 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
+import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { COMPACT_CAR_MESH, type MeshInstance, vehicleMeshRadius } from "./MeshPresentation.js";
 
@@ -16,11 +17,27 @@ interface Pose {
     presentationTime?: number;
   };
 }
-export function meshAssetFor(entity: Pick<Entity, "type">, allCars3d = false): string | undefined {
+export function meshAssetFor(
+  entity: Pick<Entity, "type">,
+  allCars3d = false,
+  trainPrototype = false,
+): string | undefined {
   return (
+    (trainPrototype ? authoredTrainForType(entity.type)?.assetId : undefined) ??
     authoredVehicleForType(entity.type)?.assetId ??
     (allCars3d && entity.type.startsWith("vehicle-v1:") ? COMPACT_CAR_MESH : undefined)
   );
+}
+/** Physical ends follow the increasing path tangent on both travel directions.
+ * Velocity supplies a continuous tangent, oriented by the replicated heading.
+ * Straight grade carriages retain the native horizontal consist orientation. */
+export function trainMeshHeading(entity: Entity): number {
+  if (!entity.type.startsWith("train-curve-proof-v1")) return 0;
+  const heading = ((entity.sprite?.frameRow ?? 0) * Math.PI * 2) / 256;
+  const velocity = entity.velocity;
+  if (!velocity || Math.hypot(velocity.vx, velocity.vy) <= 0.01) return heading;
+  const moving = Math.atan2(velocity.vy, velocity.vx);
+  return Math.cos(moving - heading) < 0 ? moving + Math.PI : moving;
 }
 export function entityHeading(entity: Entity): number {
   const velocity = entity.velocity;
@@ -46,9 +63,12 @@ export function entityFacingHeading(entity: Pick<Entity, "sprite">): number {
  */
 export class EntityMeshPose {
   private poses = new Map<number, Pose>();
-  constructor(readonly allCars3d = false) {}
+  constructor(
+    readonly allCars3d = false,
+    readonly trainPrototype = false,
+  ) {}
   assetFor(entity: Pick<Entity, "type">) {
-    return meshAssetFor(entity, this.allCars3d);
+    return meshAssetFor(entity, this.allCars3d, this.trainPrototype);
   }
   retain(entities: readonly Entity[]) {
     const ids = new Set(entities.filter((e) => this.assetFor(e)).map((e) => e.id));
@@ -57,7 +77,8 @@ export class EntityMeshPose {
   evaluate(entity: Entity, time: number, position = entity.position): MeshInstance | undefined {
     const assetId = this.assetFor(entity);
     if (!assetId) return undefined;
-    const target = entityHeading(entity);
+    const train = this.trainPrototype && !!authoredTrainForType(entity.type);
+    const target = train ? trainMeshHeading(entity) : entityHeading(entity);
     let pose = this.poses.get(entity.id);
     if (!pose) {
       const orientation: [number, number, number, number] = [
@@ -92,7 +113,7 @@ export class EntityMeshPose {
         pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
         // Point along this body's displayed motion, with no separate turn lag.
         // Repeated/resting samples retain the last heading, including diagonals.
-        if (distance > 0.001) pose.angle = Math.atan2(dy, dx);
+        if (distance > 0.001 && !train) pose.angle = Math.atan2(dy, dx);
       } else if (
         elapsed > 0 &&
         entity.velocity &&
@@ -105,6 +126,7 @@ export class EntityMeshPose {
       pose.y = position.wy;
       pose.instance.wheelTravel = pose.travel;
       pose.time = time;
+      if (train) pose.angle = target;
       pose.orientation[2] = Math.sin(pose.angle / 2);
       pose.orientation[3] = Math.cos(pose.angle / 2);
     }

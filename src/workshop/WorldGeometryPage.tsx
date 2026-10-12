@@ -27,6 +27,10 @@ import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometry
 import { drawCurvedRailLayout } from "./CurvedTrainPreview.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 
+export type GeometryCanvas = HTMLCanvasElement & {
+  __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
+};
+
 export default function WorldGeometryPage() {
   return new URLSearchParams(location.search).get("geometry")?.startsWith("nature-") ? (
     <NaturalLandscapePage />
@@ -35,19 +39,22 @@ export default function WorldGeometryPage() {
   );
 }
 function GeometryFixtures() {
-  const canvas = useRef<HTMLCanvasElement>(null),
+  const canvas = useRef<GeometryCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
   const [fixture, setFixture] = useState(
     () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
-  const cityTrains = fixture === "city-trains";
+  const trainPrototype = fixture.startsWith("train-authored-");
+  const trainLoop = fixture === "train-loop" || fixture === "train-authored-loop";
+  const cityTrains = fixture === "city-trains" || fixture === "train-authored-city";
   const generated = generatedIndex >= 0;
   const garage = fixture === "garage" || fixture === "car-garage",
     crossing = fixture === "crossing" || fixture === "car-bridge" || generated,
     vehicle = fixture === "car-garage" || fixture === "car-bridge",
     trainGrade = fixture === "train-grades";
-  const trainCurve = fixture === "train-loop" || fixture === "train-winding" || cityTrains;
+  const trainCurve =
+    trainLoop || fixture === "train-winding" || fixture === "train-authored-winding" || cityTrains;
   const [followTrain, setFollowTrain] = useState(!trainCurve || cityTrains);
   const [reverse, setReverse] = useState(false);
   const generatedScene = useMemo(
@@ -59,9 +66,9 @@ function GeometryFixtures() {
       cityTrains
         ? cityTrainRecipe()
         : trainCurve
-          ? curvedTrainRecipe(fixture === "train-loop", reverse)
+          ? curvedTrainRecipe(trainLoop, reverse)
           : undefined,
-    [trainCurve, fixture, reverse, cityTrains],
+    [trainCurve, trainLoop, reverse, cityTrains],
   );
   const curveAlignment = curveRecipe?.railways?.[0]?.path
     ? railAlignment(curveRecipe.railways[0].path)
@@ -97,6 +104,7 @@ function GeometryFixtures() {
                   ? undergroundGarageRecipe()
                   : worldGeometryRecipe()),
       {
+        authoredTrainPrototype: trainPrototype,
         width: 960,
         height: crossing ? 720 : 640,
         fixedCamera: generatedScene
@@ -123,7 +131,7 @@ function GeometryFixtures() {
                   ? 0.75
                   : 0.4
                 : trainCurve
-                  ? fixture === "train-loop"
+                  ? trainLoop
                     ? 0.14
                     : 0.1
                   : 0.09
@@ -204,7 +212,7 @@ function GeometryFixtures() {
             trainCurve
               ? cityTrains
                 ? "CITY-TO-CITY ROOF RIDING"
-                : fixture === "train-loop"
+                : trainLoop
                   ? "TOWN LOOP · FOUR STOPS"
                   : "WINDING INTER-TOWN ROUTE"
               : generated
@@ -275,6 +283,7 @@ function GeometryFixtures() {
             )
             .join(",");
           c.dataset.carriageCount = String(carriages.length);
+          c.dataset.trainArt = trainPrototype ? "authored-prototype" : "native-sprites";
           c.dataset.carriageHeights = carriages.map((e) => (e.wz ?? 0).toFixed(2)).join(",");
           c.dataset.trainCamera = settings.current.followTrain ? "follow" : "overview";
           const train = h.session.view.entities.find(
@@ -313,6 +322,7 @@ function GeometryFixtures() {
       },
     );
     scene.current = host;
+    c.__presentationDiagnostics = () => host.getDiagnostics();
     void host.ready
       .then(() => {
         if (alive) c.dataset.ready = "true";
@@ -325,6 +335,7 @@ function GeometryFixtures() {
     return () => {
       alive = false;
       delete c.dataset.ready;
+      delete c.__presentationDiagnostics;
       host.dispose();
       scene.current = null;
       keys.current.clear();
@@ -361,21 +372,23 @@ function GeometryFixtures() {
       <p className="eyebrow">ENGINE PROOF / SCHEMATIC GEOMETRY</p>
       <h1>World geometry lab</h1>
       <p>
-        {trainCurve
-          ? cityTrains
-            ? "Jump from the station onto the train roof and ride from Willowhaven to Willowbridge. This is the real generated world, with broad curves, native train sprites and eight-second station stops. Walk on the roof, jump off or save/reload during the ride."
-            : "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Ride the roof, run either direction and save/reload mid-bend. Native blue train sprites switch cardinal views at corners. Pixel tracks use the production terrain renderer; town/platform markers are schematic."
-          : generated
-            ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
-            : trainGrade
-              ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Native carriages stay horizontal, so slope joins are a visible limitation of this proof."
-              : vehicle
-                ? "Watch the car follow the ramp with full-body clearance. It stops at the far end. Run the opposite direction to start a fresh return trip. The chassis stays level in this first proof."
-                : crossing
-                  ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
-                  : garage
-                    ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
-                    : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
+        {trainPrototype
+          ? "Inspect the blue train's three authored carriages with unchanged service spacing and physics. Watch curves, joins and reversal. Static couplers can leave gaps or overlap; the main game retains native sprites until exact moving-art review. Select GPU + meshes through the review link to see the prototype."
+          : trainCurve
+            ? cityTrains
+              ? "Jump from the station onto the train roof and ride from Willowhaven to Willowbridge. This is the real generated world, with broad curves, native train sprites and eight-second station stops. Walk on the roof, jump off or save/reload during the ride."
+              : "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Ride the roof, run either direction and save/reload mid-bend. Native blue train sprites switch cardinal views at corners. Pixel tracks use the production terrain renderer; town/platform markers are schematic."
+            : generated
+              ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
+              : trainGrade
+                ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Native carriages stay horizontal, so slope joins are a visible limitation of this proof."
+                : vehicle
+                  ? "Watch the car follow the ramp with full-body clearance. It stops at the far end. Run the opposite direction to start a fresh return trip. The chassis stays level in this first proof."
+                  : crossing
+                    ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
+                    : garage
+                      ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
+                      : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
         Arrows/WASD move; Space jumps.
       </p>
       <p>
@@ -407,6 +420,9 @@ function GeometryFixtures() {
           <option value="car-bridge">Car over railway bridge</option>
           <option value="car-garage">Car in underground garage</option>
           <option value="city-trains">City-to-city trains · generated world</option>
+          <option value="train-authored-loop">Authored blue train · curve/join inspection</option>
+          <option value="train-authored-winding">Authored blue train · reversal inspection</option>
+          <option value="train-authored-city">Authored blue train · existing city service</option>
           <option value="train-loop">Train around a town · four stops</option>
           <option value="train-winding">Winding train route between towns</option>
           <option value="train-grades">Train over bridge and through tunnel</option>

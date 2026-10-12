@@ -524,3 +524,11 @@ all masks, provider inputs, raw arrays, materials and full/reduced captures.
 Next: keep framing independent of alpha; test procedural foliage around the
 recovered trunk and explicit frame/cloth/support geometry for table/tent.
 No universal threshold, production candidate or human acceptance is established.
+
+
+[127](../tactical/127-authored-blue-train.md) extends the workflow to the live blue
+train as an inspection prototype: three independently authored carriage bodies,
+owned UV paint, packed scenes/drafts and 24 wheels parented to named bogies. The
+matched 4×2 and native-versus-mesh loop/reversal captures are tracked; source end
+projection and static coupling limits remain explicit. The [train topic](trains.md)
+owns its five-family queue and exact moving-art gate before live activation.

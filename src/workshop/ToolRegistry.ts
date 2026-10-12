@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "authored-trains",
+    name: "Authored train models",
+    description:
+      "Inspect the blue train's retained carriage comparisons, curves, joins and reversal before live activation.",
+    url: "assets/models/trains/review/blue-v3/",
+    mode: "link",
+  },
+  {
     id: "authored-vehicles",
     name: "Authored vehicle models",
     description:
@@ -205,6 +213,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "authored-trains",
+    name: "Authored train models",
+    description:
+      "Exact retained blue carriage and moving-art prototype evidence; live activation awaits owner inspection.",
+    toolId: "authored-trains",
+  },
   {
     id: "authored-vehicles",
     name: "Authored vehicle models",

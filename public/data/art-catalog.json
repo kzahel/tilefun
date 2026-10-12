@@ -22004,6 +22004,10 @@
         {
           "system": "Gameplay",
           "source": "src/railway/Train.ts:54"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/AuthoredTrainMeshes.ts:16"
         }
       ]
     },
@@ -22026,6 +22030,10 @@
         {
           "system": "Gameplay",
           "source": "src/railway/Train.ts:55"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/AuthoredTrainMeshes.ts:18"
         }
       ]
     },
@@ -22048,6 +22056,10 @@
         {
           "system": "Gameplay",
           "source": "src/railway/Train.ts:57"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/AuthoredTrainMeshes.ts:20"
         }
       ]
     },
@@ -25249,7 +25261,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:320"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:324"
         },
         {
           "system": "Editor",

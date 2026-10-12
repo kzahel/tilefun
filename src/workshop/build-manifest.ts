@@ -3,6 +3,7 @@ import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { buildAuthoredTrainCandidate } from "./AuthoredTrainCandidate.js";
 import {
   buildAuthoredVehicleCandidates,
   buildCarProjectionCandidate,
@@ -45,6 +46,7 @@ try {
   candidates.push(...(await buildNaturalCandidates(catalog)));
   candidates.push(await buildCarProjectionCandidate());
   candidates.push(...(await buildAuthoredVehicleCandidates()));
+  candidates.push(await buildAuthoredTrainCandidate("v1"), await buildAuthoredTrainCandidate("v3"));
   candidates.push(
     await buildWorldGeometryCandidate(),
     await buildWorldGeometryCandidate("garage"),

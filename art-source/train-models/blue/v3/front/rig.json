@@ -1,0 +1,214 @@
+{
+  "root": "TrainRoot",
+  "body": "Body",
+  "units": "world pixels",
+  "forward": [
+    -1,
+    0,
+    0
+  ],
+  "up": [
+    0,
+    0,
+    1
+  ],
+  "rollAxisBlender": [
+    0,
+    1,
+    0
+  ],
+  "rollAxisGltf": [
+    0,
+    0,
+    -1
+  ],
+  "drivingRule": "angle=-signedForwardDistance/radius; forward is -X",
+  "wheels": [
+    {
+      "id": "FL",
+      "center": [
+        -52.800000000000004,
+        -10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_FL_Steer",
+      "roll": "Wheel_FL_Roll",
+      "bogie": "Bogie_F"
+    },
+    {
+      "id": "FR",
+      "center": [
+        -52.800000000000004,
+        10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_FR_Steer",
+      "roll": "Wheel_FR_Roll",
+      "bogie": "Bogie_F"
+    },
+    {
+      "id": "F2L",
+      "center": [
+        -36.800000000000004,
+        -10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_F2L_Steer",
+      "roll": "Wheel_F2L_Roll",
+      "bogie": "Bogie_F"
+    },
+    {
+      "id": "F2R",
+      "center": [
+        -36.800000000000004,
+        10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_F2R_Steer",
+      "roll": "Wheel_F2R_Roll",
+      "bogie": "Bogie_F"
+    },
+    {
+      "id": "RL",
+      "center": [
+        36.800000000000004,
+        -10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_RL_Steer",
+      "roll": "Wheel_RL_Roll",
+      "bogie": "Bogie_R"
+    },
+    {
+      "id": "RR",
+      "center": [
+        36.800000000000004,
+        10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_RR_Steer",
+      "roll": "Wheel_RR_Roll",
+      "bogie": "Bogie_R"
+    },
+    {
+      "id": "R2L",
+      "center": [
+        52.800000000000004,
+        -10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_R2L_Steer",
+      "roll": "Wheel_R2L_Roll",
+      "bogie": "Bogie_R"
+    },
+    {
+      "id": "R2R",
+      "center": [
+        52.800000000000004,
+        10.0,
+        5
+      ],
+      "radius": 5,
+      "steering": false,
+      "steer": "Wheel_R2R_Steer",
+      "roll": "Wheel_R2R_Roll",
+      "bogie": "Bogie_R"
+    }
+  ],
+  "steeringClearance": "No train steering; bogie yaw remains at rest",
+  "equipmentNodes": [
+    {
+      "name": "Bellows",
+      "parent": "Body",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "extras": {
+        "tilefun_role": "train-bellows",
+        "articulation": "rest-only"
+      }
+    },
+    {
+      "name": "Coupler_negative",
+      "parent": "Body",
+      "location": [
+        -80.0,
+        0,
+        15
+      ],
+      "extras": {
+        "tilefun_role": "train-coupler",
+        "articulation": "rest-only"
+      }
+    },
+    {
+      "name": "Coupler_positive",
+      "parent": "Body",
+      "location": [
+        80.0,
+        0,
+        15
+      ],
+      "extras": {
+        "tilefun_role": "train-coupler",
+        "articulation": "rest-only"
+      }
+    },
+    {
+      "name": "Bogie_F",
+      "parent": "Body",
+      "location": [
+        -44.800000000000004,
+        0,
+        11
+      ],
+      "extras": {
+        "tilefun_role": "train-bogie",
+        "yawClearance": "rest-only"
+      }
+    },
+    {
+      "name": "Bogie_R",
+      "parent": "Body",
+      "location": [
+        44.800000000000004,
+        0,
+        11
+      ],
+      "extras": {
+        "tilefun_role": "train-bogie",
+        "yawClearance": "rest-only"
+      }
+    }
+  ],
+  "bodyLength": 160,
+  "carriageRole": "front",
+  "wheelObservation": "Wheels inferred under original opaque skirt; not visible source landmarks",
+  "roofSupportFit": {
+    "visualRoof": 44,
+    "nativeSupportHeight": 44,
+    "collisionChanged": false
+  },
+  "straightRailFit": {
+    "trackHalfGauge": 10,
+    "wheelCenterHalfGauge": 10,
+    "source": "src/rendering/RailTrackRaster.ts",
+    "curvedBogieYaw": "rest-only; not rail-contact qualified"
+  }
+}

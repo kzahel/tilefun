@@ -1,3 +1,4 @@
+import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 
 /** Data-only optional presentation. SpriteItem remains the complete fallback. */
@@ -16,7 +17,7 @@ export const AMBULANCE_MESH = "ambulance-authored-v3";
 export const COMPACT_CAR_MESH = "compact-1-authored-v7";
 /** Shared conservative sphere for culling and the isolated body target. */
 export function vehicleMeshRadius(assetId: string): number {
-  return authoredVehicleForAsset(assetId)?.radius ?? 64;
+  return authoredVehicleForAsset(assetId)?.radius ?? authoredTrainForAsset(assetId)?.radius ?? 64;
 }
 export function yawOrientation(yaw: number): MeshInstance["orientation"] {
   return [0, 0, Math.sin(yaw / 2), Math.cos(yaw / 2)];

@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-11.
+Updated: 2026-10-12.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -597,3 +597,15 @@ immutable RemoteStateView prop snapshots. Game and ScenarioClient prediction
 retain the same snapshot index during queued replay. Complete entity history
 remains available for roof selection; separate rider sweeps and global excavation
 presence retain native headroom/ground policy. No lab-only collision owner is added.
+
+
+## Authored blue train inspection
+
+[127](../tactical/127-authored-blue-train.md) adds three World Geometry fixture
+opt-ins for retained blue carriage models: loop, winding reversal and existing
+city service. They use ordinary ScenarioClient/Worker rail authority, SceneFrame
+pose evaluation, mesh readiness/publication, fixed projection and ordered sprite
+fallback. Only diagnostic presentation opts in; main-game/default labs retain
+native train sprites. The native routes, spacing, colliders, support and movement
+are unchanged. A read-only canvas diagnostics hook exposes the same host state
+for browser qualification. Exact moving-art review precedes live activation.

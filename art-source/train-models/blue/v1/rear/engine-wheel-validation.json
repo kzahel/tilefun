@@ -1,0 +1,17 @@
+{
+  "assetId": "train-blue-rear-authored-v1",
+  "wheels": [
+    "Wheel_F2L_Roll",
+    "Wheel_F2R_Roll",
+    "Wheel_FL_Roll",
+    "Wheel_FR_Roll",
+    "Wheel_R2L_Roll",
+    "Wheel_R2R_Roll",
+    "Wheel_RL_Roll",
+    "Wheel_RR_Roll"
+  ],
+  "signedRoll": true,
+  "absoluteReset": true,
+  "fixedBody": true,
+  "bogieParents": true
+}

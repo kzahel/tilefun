@@ -1,0 +1,11 @@
+{
+  "schema": "tilefun-blue-train-refinement-v2",
+  "baseBlend": "art-source/train-models/blue/v1/rear/car.blend",
+  "baseBlendSha256": "81e95064165ce476eb88ec81bc328556b517188d6e2f2ddfdde9258acf1b72ee",
+  "atlasUnchanged": true,
+  "uvCoordinatesUnchanged": true,
+  "roofDelta": 4,
+  "straightTrackHalfGauge": 10,
+  "simulationChanged": false,
+  "limits": "Bogies/couplers remain at rest; native spacing and source projection differences remain explicit"
+}

@@ -1,0 +1,100 @@
+{
+  "counts": {
+    "0": 2341944,
+    "1": 16397,
+    "2": 955,
+    "3": 0,
+    "4": 0
+  },
+  "legend": {
+    "0": "unused UV/gutter",
+    "1": "visible source sample",
+    "2": "unobserved",
+    "3": "overlapping UV surfaces",
+    "4": "source-view color disagreement"
+  },
+  "authoredFill": {
+    "image": "car-atlas.png",
+    "filledUVTexels": 2342899,
+    "meaning": "Existing authored atlas fills gutter/unseen/overlapping UV regions only. Coverage status remains unchanged; this is inferred paint, not source recovery."
+  },
+  "sourceViews": {
+    "Skirt-east": [
+      "east"
+    ],
+    "Roof-shoulder-east": [
+      "east"
+    ],
+    "Skirt-west": [
+      "west"
+    ],
+    "Roof-shoulder-west": [
+      "west"
+    ],
+    "Roof": [
+      "south"
+    ],
+    "Chassis": [],
+    "Negative-end-lower": [
+      "south"
+    ],
+    "Negative-end-upper": [
+      "south"
+    ],
+    "Negative-end-corner--1": [
+      "south"
+    ],
+    "Negative-end-corner-1": [
+      "south"
+    ],
+    "Positive-end-lower": [
+      "north"
+    ],
+    "Positive-end-upper": [
+      "north"
+    ],
+    "Positive-end-corner--1": [
+      "north"
+    ],
+    "Positive-end-corner-1": [
+      "north"
+    ],
+    "Bellows-body-0": [
+      "south"
+    ],
+    "Bellows-body-1": [],
+    "Bellows-body-2": [
+      "west"
+    ],
+    "Bellows-body-3": [
+      "east"
+    ],
+    "Bellows-body-4": [
+      "south"
+    ],
+    "Bellows-body-5": [
+      "north"
+    ],
+    "Coupler-head-negative": [],
+    "Coupler-head-positive": [],
+    "Bogie-frame-F": [],
+    "Tire_FL": [],
+    "Hub_FL": [],
+    "Tire_FR": [],
+    "Hub_FR": [],
+    "Tire_F2L": [],
+    "Hub_F2L": [],
+    "Tire_F2R": [],
+    "Hub_F2R": [],
+    "Bogie-frame-R": [],
+    "Tire_RL": [],
+    "Hub_RL": [],
+    "Tire_RR": [],
+    "Hub_RR": [],
+    "Tire_R2L": [],
+    "Hub_R2L": [],
+    "Tire_R2R": [],
+    "Hub_R2R": []
+  },
+  "interpretation": "Counts measure UV texels, not surface area, accuracy or acceptance. Disagreements retain the most face-on visible original pixel and remain marked. Unknown and overlapping regions require authored cleanup. Gutters are not padded by this draft baker."
+}
