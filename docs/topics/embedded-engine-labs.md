@@ -560,8 +560,9 @@ supersedes 109's authored directional lens: body vertices now share the fixed
 world projection, with static lateral asset registration, immediate displayed
 motion heading and rest hold. All three use the same axis normalization, wheel
 roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
-`?renderer=gpu&meshes&allcars3d` swaps other road vehicles to the blue appearance in the
-game and Traffic lab; original types/colliders stay unchanged. Integrated ambulance/firetruck types retain their own assets. Traffic reset
+`?renderer=gpu&meshes&allcars3d` supplies a blue fallback for unregistered road
+vehicle types in the game and Traffic lab; all 45 registered types use their own
+assets. Original types/colliders stay unchanged. Traffic reset
 retains the view option. Traffic's Worker, input, collision and roof support remain
 native. This changes optional presentation only; the independent car-projection reference lab remains
 on its original source geometry. Steering clearance and rotated physics are later
@@ -581,8 +582,8 @@ mesh resolver/resource lifecycle and emergency-state authority. Traffic selects
 its own GLB and uses ordinary held speed and siren controls; ladder motion remains
 outside this slice. Canvas/GPU sprites keep their complete fallback.
 
-[122](../tactical/122-complete-vehicle-port.md) exposes all six compact colors in
-the Traffic playground. Each uses its own retained asset through the shared
+[122](../tactical/122-complete-vehicle-port.md) exposes all 45 vehicle choices in
+the Traffic playground and main-game renderer. Each uses its own retained asset through the shared
 `AuthoredVehicleMeshes` registry, pose resolver and lazy GPU resource path.
 Failed or pending model loads preserve the same sprite gameplay; no lab-specific
 asset transform or driving implementation is introduced. The compact gameplay

@@ -26,7 +26,7 @@ support checks pass; no unrelated touch changes are included in this grass fix.
 
 [117](../tactical/117-ambulance-driving-controls.md) integrates the retained ambulance v2
 in the shared game/lab GPU mesh path. Driving keeps action buttons visible on desktop
-and touch: hold **Fast / Shift** for 1.6× car speed (1.5× train speed). Ambulances and stowed firetrucks also
+and touch: hold **Fast / Shift** for 1.6× car speed (1.5× train speed). Ambulances, police cars and both firetruck variants also
 have **Siren / B** to toggle lights and sound, and **Style / Space** to cycle EU-style
 two-tone, US-style wail and lights-only. Style selection survives switching off.
 These are stylized synthesized sounds; the local Kenney Impact Sounds pack has no siren.
@@ -35,13 +35,16 @@ Nearby listeners hear distance-attenuated, panned loops; menus/focus loss stop p
 Only the inside driver may switch emergency state. Authority replicates and saves
 it with traffic; exiting leaves the chosen lights/sound state on the vehicle.
 Tagged GLB lenses receive absolute enabled/time state on every draw; Canvas/GPU
-sprite fallback adds a small alternating blue roof-beacon overlay without changing
+sprite fallback adds blue/red emergency or amber warning flashes without changing
 approved sprite bytes. No geometry, damage or traffic priority rule changes.
 [120](../tactical/120-firetruck-gameplay.md) connects corrected firetruck v2 through
 its own GPU resource, bounds, wheel rig and tagged blue lenses. Traffic playground
-offers Blue car/Ambulance/Firetruck and driver action controls. The ladder remains
-stowed; raised-ladder art continues using its own sprite and is excluded from traffic.
-Exact v2 art review and steering-clearance qualification remain open.
+offers all 45 models and driver action controls through the shared registry in
+[122](../tactical/122-complete-vehicle-port.md). Both garbage trucks have silent
+**Beacon / B** controls. Raised firetrucks use their own model with the authored
+rest pose and remain excluded from automatic traffic; the other 44 types retain
+normal road-width admission. All types preserve complete sprite fallback.
+Exact model-art review and nonzero steering/equipment-motion qualification remain open.
 
 ## Player driving
 

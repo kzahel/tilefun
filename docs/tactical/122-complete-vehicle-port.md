@@ -319,3 +319,32 @@ scratch authoring/test output stays ignored. The remaining next action is human
 inspection of the retained 4×2 gallery and exact production-art review. Any
 requested geometry/paint corrections become new immutable revisions; nonzero
 steering and ladder/loader animation require additional clearance qualification.
+
+
+### Main-game handoff verification (2026-10-12)
+
+The owner requested integrating the completed bank into the game. Current main
+already contains all 45 own-model registrations and selects GPU mesh mode by
+default; the delivery commits included that integration. Fresh verification on
+`e30a1ce` confirms all 45 latest asset files match the live server byte-for-byte.
+The shared real-GPU engine probe passes every own asset, visible rendering,
+absolute travel/light reset, disabled/unknown fallback, simulation isolation and
+disposal. All 2,561 units (258 files), typechecks, lint (119 warnings/34 infos) and
+production build pass. Twenty-five serial browser checks pass: every compact,
+additional sedan, bus and large car; eleven failed-load fallbacks; all four siren
+vehicle types on Canvas/GPU; and both mesh-enabled main-game boarding/driving,
+saved-seat and exit variants. All four silent amber-beacon browser checks also pass for both garbage trucks
+on Canvas/GPU, including button/keyboard control and style-command exclusion:
+**29 focused browser checks pass in total**.
+
+README and current vehicle/lab topics now describe all 45 integrations, siren
+versus silent beacon controls, and own-model precedence over the old allcars3d
+fallback. Automatic traffic retains its 44-type admission and excludes raised
+ladder vehicles. No runtime code, source art, retained bundles or review identities
+changed in this handoff. Next: owner playtest of the whole bank in ordinary cities
+and exact-revision model-art review through the retained gallery.
+
+Evidence: [GPU report](/tmp/tilefun-all-vehicles-gpu-20261012/engine-vehicles.json),
+[unit log](/tmp/tilefun-all-vehicles-unit.log),
+[browser log](/tmp/tilefun-all-vehicles-browser.log),
+[beacon log](/tmp/tilefun-all-vehicles-beacons.log).
