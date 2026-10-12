@@ -193,10 +193,17 @@ composition choices, not hidden alternative gameplay pipelines.
 Per-car body/outline passes retain native-world resolution and resize their shared
 targets between model sizes. The registered models contain 32–56 primitives with
 one opaque source material; wheels and runtime emergency-lens materials remain
-independently controlled. Compatible rigid-geometry batching is the next proposed
-shared asset-loading slice, with exact native image and lifecycle validation for
-game and embedded labs. The target-reuse experiment is benchmark-only and does not
-establish a stable phone pacing win. Production rendering policy stays unchanged.
+independently controlled. [129](../tactical/129-vehicle-geometry-batching.md) compiles
+compatible opaque siblings at road-model loading without baking transforms or
+changing literal vertices/triangles. Qualified raster-sensitive parts stay separate;
+missing declarations fail closed into the existing sprite fallback. Parent wheel/
+equipment groups and tagged light materials keep their independent state. Original
+and compiled geometry share asset-owned disposal; source meshCount remains authored
+part count while drawMeshCount/drawMeshes report compiled meshes. Game and labs use
+the same GPU factory opt-in; direct source callers and train prototypes retain
+their original hierarchy. Exact desktop RGBA qualification and cool-phone timing
+are recorded separately. Target reuse remains benchmark-only; terrain/LOD, target
+resolution and renderer defaults stay unchanged.
 
 [034](../tactical/034-renderer-completion.md) owns final integrated evidence.
 The recording backend runs the actual outdoor/editor/indoor entry points with no

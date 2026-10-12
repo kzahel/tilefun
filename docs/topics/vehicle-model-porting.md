@@ -84,6 +84,13 @@ remain projection limitations; only neutral steering is used in gameplay.
 
 ## Source families for batching
 
+[129](../tactical/129-vehicle-geometry-batching.md) adds runtime GPU road-model
+batching separately from source-family authoring. Registry batchPreserveParts
+declares qualified raster-sensitive surfaces; updated exports must keep those
+names or requalify them with the native body/outline comparator. The source part
+count and immutable retained GLBs remain unchanged. Compiled draw counts and
+performance evidence belong to the rendering/performance topics.
+
 The [four-view family audit](../tactical/121-vehicle-source-families.md) compares
 all 45 sets / 990 pairs. There are **13 exact silhouette families**, unchanged
 when ignoring translucent shadows. This is source shape evidence, not proof of

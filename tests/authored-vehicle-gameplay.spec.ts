@@ -22,7 +22,7 @@ test("every compact uses its own GLB in the shared traffic presentation", async 
           return gpu?.gpu?.vehicleAssets?.[id];
         }, assetId),
       )
-      .toMatchObject({ state: "ready", meshes: 55 });
+      .toMatchObject({ state: "ready", meshes: 55, drawMeshes: 8 });
     expect(
       await canvas.evaluate(
         (c: TrafficCanvas) => c.__presentationDiagnostics?.().meshEligibleVehicleTypes,
@@ -54,7 +54,7 @@ test("every additional sedan loads its own GLB in shared traffic", async ({ page
           return gpu?.gpu?.vehicleAssets?.[id];
         }, `${vehicle}-authored-v1`),
       )
-      .toMatchObject({ state: "ready", meshes: 32 });
+      .toMatchObject({ state: "ready", meshes: 32, drawMeshes: 5 });
     expect(
       await canvas.evaluate(
         (c: TrafficCanvas) => c.__presentationDiagnostics?.().meshEligibleVehicleTypes,

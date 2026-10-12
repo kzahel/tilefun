@@ -419,6 +419,18 @@ parity, followed by sprite submission and separately measured terrain pacing.
 No production renderer/LOD/terrain policy changes in this investigation.
 Snapshot/interest and historical body-query scale remain separate measured proposals.
 
+[129](../tactical/129-vehicle-geometry-batching.md) delivers shared runtime road-model
+batching, preserving parent motion, tagged lights and qualified raster-sensitive
+surfaces. All 43,776 desktop paired poses across 45 road models/three unchanged train
+prototypes have identical body/outline RGBA. Four cool-phone native wide drives in
+reverse comparison order reduce mesh calls 244.76→44.21/frame (81.9%) and render mean
+7.44→6.52ms (12.3%). Raster calls remain about 170/frame and callback p95 remains
+50ms. Phone hardware pixel comparison is unmeasured after disconnection; discrete
+desktop image coverage and physical timing are separate evidence lanes. The next
+measured rendering slice is sprite submission/batching, with moving-camera terrain
+raster pacing kept separate and gated on readiness/backlog. No terrain/LOD or
+authority/prediction policy changes are included.
+
 Ordinary walking ground is only 0.55ms mean in 118's diagnostic control. Two
 8-second Canvas traces maintain 16.7ms rAF p95 despite occasional long authority
 ticks and acknowledgement tails; correction error stays below 0.00003px and

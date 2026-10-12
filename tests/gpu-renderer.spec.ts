@@ -95,6 +95,20 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
         }
       ).__game.renderer.getDiagnostics().gpu.meshState === "ready",
   );
+  expect(
+    await page.locator("#game").evaluate((canvas) => {
+      const game = (
+        canvas as unknown as {
+          __game: {
+            renderer: {
+              getDiagnostics(): { gpu: { vehicleAssets: Record<string, { drawMeshes: number }> } };
+            };
+          };
+        }
+      ).__game;
+      return game.renderer.getDiagnostics().gpu.vehicleAssets["compact-1-authored-v7"]?.drawMeshes;
+    }),
+  ).toBe(8);
   const capture = await page.locator("#game").evaluate((canvas) => {
     const game = (
       canvas as unknown as {

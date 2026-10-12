@@ -18,6 +18,14 @@ client animation lead from changing the frozen frame after pause/reload.
 The [scenario topic](gameplay-scenarios.md) owns that clock contract and the
 replacement-host error guard used by furniture playtest.
 
+[129](../tactical/129-vehicle-geometry-batching.md) batches road-model geometry through
+the shared GPU asset factory used by game and ScenarioPresentationHost. Independent
+wheel/equipment groups, tagged lights and qualified source surfaces stay intact;
+source hierarchy remains the default for direct authoring probes and train prototypes.
+Native pixel comparisons cover every road model and current train prototype; game/
+Traffic browser assertions check compiled counts, fallback, switching and recovery.
+No separate lab mesh compiler, simulation policy or art activation is introduced.
+
 ## Farmstead and settlement alignment
 
 [084](../tactical/084-common-pets-and-variations.md) adds four native pet-coat

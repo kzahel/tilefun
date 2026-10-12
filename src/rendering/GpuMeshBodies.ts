@@ -48,7 +48,8 @@ export class GpuMeshBodies {
   }
   /** Lazy family loads never replace their source sprite before the next frame. */
   private request(assetId: string) {
-    const definition = authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId);
+    const vehicle = authoredVehicleForAsset(assetId);
+    const definition = vehicle ?? authoredTrainForAsset(assetId);
     if (!this.enabled || !definition) return undefined;
     let slot = this.slots.get(assetId);
     if (!slot) {
@@ -56,7 +57,12 @@ export class GpuMeshBodies {
       this.slots.set(assetId, slot);
     }
     if (slot.state === "empty")
-      void slot.load(() => loadCarMesh(definition.path, definition.lateralScale));
+      void slot.load(() =>
+        loadCarMesh(definition.path, definition.lateralScale, {
+          batch: !!vehicle,
+          preserveParts: vehicle?.batchPreserveParts ?? [],
+        }),
+      );
     return slot;
   }
   get assetStates() {
@@ -66,6 +72,7 @@ export class GpuMeshBodies {
         {
           state: slot.state,
           meshes: slot.value?.meshCount ?? 0,
+          drawMeshes: slot.value?.drawMeshCount ?? 0,
           error: slot.error,
         },
       ]),

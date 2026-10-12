@@ -5,6 +5,8 @@ export interface AuthoredVehicleMesh {
   readonly path: string;
   readonly radius: number;
   readonly lateralScale: number;
+  /** Preserve qualified raster-sensitive source parts while batching siblings. */
+  readonly batchPreserveParts?: readonly string[];
 }
 export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
   ...([1, 2, 3, 4, 5, 6] as const).map((number) => {
@@ -15,6 +17,7 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
       path: `assets/models/vehicles/compact-${number}-${revision}.glb`,
       radius: 64,
       lateralScale: 1.3,
+      batchPreserveParts: ["Hood", "Raised_fender_·_left_·_-17", "Raised_fender_·_right_·_-17"],
     };
   }),
   ...(["red", "beige", "cyan", "orange", "silver", "olive", "dark"] as const).map((color) => ({
@@ -30,6 +33,7 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
     path: `assets/models/vehicles/bus-${number}-v1.glb`,
     radius: 112,
     lateralScale: 1,
+    batchPreserveParts: ["Rear-roof-edge"],
   })),
   ...Array.from({ length: 20 }, (_, index) => {
     const number = index + 7;
@@ -40,6 +44,9 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
       path: `assets/models/vehicles/${vehicle}-v1.glb`,
       radius: 80,
       lateralScale: 1,
+      ...(number >= 14 && number <= 20
+        ? { batchPreserveParts: ["Cabin-windows-west", "Windshield-frame"] }
+        : {}),
     };
   }),
   ...(
@@ -52,6 +59,22 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
       path: `assets/models/vehicles/${vehicle}-${revision}.glb`,
       radius: vehicle === "fire-truck-ladder-2" ? 192 : vehicle === "police-car" ? 80 : 144,
       lateralScale: 1,
+      ...(vehicle.startsWith("garbage-truck")
+        ? {
+            batchPreserveParts: [
+              ...Array.from({ length: 6 }, (_, i) => `Chassis-coupling-${i}`),
+              "Container-front",
+              "Loader-rear-frame-1",
+              "Loader-rear-frame--1",
+              "Loader-side-east",
+              "Loader-side-west",
+            ],
+          }
+        : vehicle === "police-car"
+          ? { batchPreserveParts: ["Sedan-west", "Trunk"] }
+          : vehicle === "fire-truck-ladder-2"
+            ? { batchPreserveParts: ["Cab-roof", "Cab-west"] }
+            : {}),
     };
   }),
   {
@@ -60,6 +83,12 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
     path: "assets/models/vehicles/ambulance-v3.glb",
     radius: 112,
     lateralScale: 1,
+    batchPreserveParts: [
+      "Roof-panel-0-rear",
+      "Roof-panel-0-west",
+      "Roof-panel-1-rear",
+      "Roof-panel-1-west",
+    ],
   },
   {
     vehicle: "fire-truck-ladder-1",
@@ -67,6 +96,7 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
     path: "assets/models/vehicles/fire-truck-ladder-1-v2.glb",
     radius: 144,
     lateralScale: 1,
+    batchPreserveParts: ["Cab-roof", "Cab-west"],
   },
 ];
 const byType = new Map(AUTHORED_VEHICLE_MESHES.map((d) => [`vehicle-v1:${d.vehicle}`, d]));

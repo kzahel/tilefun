@@ -70,6 +70,51 @@ it("applies absolute rigid wheel travel without moving pivots, then frees shared
   expect(asset.object.children).toHaveLength(0);
 });
 
+it("compiles body and wheel siblings once, retains tagged light control and disposes every geometry once", () => {
+  const { scene, material } = fixture();
+  for (const id of ["FL", "FR", "RL", "RR"])
+    required(scene.getObjectByName(`Wheel_${id}_Roll`)).add(
+      new THREE.Mesh(new THREE.BoxGeometry(), material),
+    );
+  scene.add(
+    new THREE.Mesh(new THREE.BoxGeometry(), material),
+    new THREE.Mesh(new THREE.BoxGeometry(), material),
+  );
+  const lens = new THREE.Mesh(new THREE.BoxGeometry(), material);
+  lens.userData = {
+    tilefun_effect_schema: 1,
+    tilefun_role: "emergency-light",
+    tilefun_channel: "emergencyLights",
+    tilefun_group: "left",
+    tilefun_phase: 0,
+  };
+  scene.add(lens);
+  const geometries = new Set<THREE.BufferGeometry>();
+  scene.traverse((node) => {
+    if (node instanceof THREE.Mesh) geometries.add(node.geometry);
+  });
+  const asset = new CarMeshAsset(scene, 1.3, { batch: true });
+  expect(asset.meshCount).toBe(11);
+  expect(asset.drawMeshCount).toBe(6);
+  scene.traverse((node) => {
+    if (node instanceof THREE.Mesh) geometries.add(node.geometry);
+  });
+  const frees = [...geometries].map((geometry) => vi.spyOn(geometry, "dispose"));
+  asset.setEmergency(true, 0.05);
+  expect((lens.material as THREE.MeshBasicMaterial).color.r).toBe(4);
+  asset.setEmergency(false, 0.05);
+  expect((lens.material as THREE.MeshBasicMaterial).color.r).toBe(1);
+  asset.setTravel(7);
+  asset.setTravel(0);
+  for (const id of ["FL", "FR", "RL", "RR"])
+    expect(required(scene.getObjectByName(`Wheel_${id}_Roll`)).quaternion.toArray()).toEqual([
+      0, 0, 0, 1,
+    ]);
+  asset.dispose();
+  asset.dispose();
+  for (const free of frees) expect(free).toHaveBeenCalledTimes(1);
+});
+
 it("rolls every six-wheel axle by its own radius and resets absolute phases without moving body or pivots", () => {
   const { scene, material } = fixture();
   const body = new THREE.Mesh(new THREE.BoxGeometry(40, 10, 20), material);
@@ -130,3 +175,20 @@ it.each(["radius", "parent", "duplicate"])(
     expect(freeMap).toHaveBeenCalledTimes(1);
   },
 );
+
+it("keeps source hierarchy by default and fails closed if a qualified batching surface disappears", () => {
+  const { scene, material } = fixture();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(), material);
+  body.name = "Body-panel";
+  scene.add(body, new THREE.Mesh(new THREE.BoxGeometry(), material));
+  const asset = new CarMeshAsset(scene);
+  expect(asset.drawMeshCount).toBe(asset.meshCount);
+  expect(scene.getObjectByName("Body-panel")).toBe(body);
+  asset.dispose();
+  const next = fixture();
+  const free = vi.spyOn(next.material, "dispose");
+  expect(
+    () => new CarMeshAsset(next.scene, 1, { batch: true, preserveParts: ["missing"] }),
+  ).toThrow("Missing qualified vehicle part");
+  expect(free).toHaveBeenCalledTimes(1);
+});

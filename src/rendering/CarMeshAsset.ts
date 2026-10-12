@@ -2,6 +2,13 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
 import { VehicleEmergencyLights } from "./VehicleEmergencyLights.js";
+import { batchVehicleGeometry } from "./VehicleGeometryBatches.js";
+
+export interface CarMeshAssetOptions {
+  batch?: boolean;
+  /** Qualified source surfaces retain their independent raster/depth ordering. */
+  preserveParts?: readonly string[];
+}
 
 /** Retained vehicle resources, shared by game and labs. The outer group owns the
  * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
@@ -21,8 +28,10 @@ export class CarMeshAsset {
   }[] = [];
   private readonly rotation = new THREE.Quaternion();
   readonly meshCount: number;
+  /** Compiled draw meshes; meshCount retains the authored source-part count. */
+  readonly drawMeshCount: number;
   private lights?: VehicleEmergencyLights;
-  constructor(scene: THREE.Group, lateralScale = 1.3) {
+  constructor(scene: THREE.Group, lateralScale = 1.3, options?: CarMeshAssetOptions) {
     let meshes = 0;
     scene.traverse((node) => {
       if (!(node instanceof THREE.Mesh)) return;
@@ -79,6 +88,17 @@ export class CarMeshAsset {
           radius,
         });
       }
+      if (options?.batch)
+        for (const name of options.preserveParts ?? [])
+          if (!(scene.getObjectByName(name) instanceof THREE.Mesh))
+            throw Error(`Missing qualified vehicle part ${name}`);
+      this.drawMeshCount = options?.batch
+        ? batchVehicleGeometry(
+            scene,
+            (geometry) => this.resources.add(geometry),
+            new Set(options.preserveParts),
+          )
+        : meshes;
       const normalized = new THREE.Group();
       normalized.rotation.set(Math.PI / 2, 0, Math.PI, "ZYX");
       normalized.add(scene);
@@ -121,7 +141,8 @@ export class CarMeshAsset {
 export async function loadCarMesh(
   path = COMPACT_CAR_GLB,
   lateralScale = 1.3,
+  options?: CarMeshAssetOptions,
 ): Promise<CarMeshAsset> {
   const gltf = await new GLTFLoader().loadAsync(`${import.meta.env.BASE_URL}${path}`);
-  return new CarMeshAsset(gltf.scene, lateralScale);
+  return new CarMeshAsset(gltf.scene, lateralScale, options);
 }

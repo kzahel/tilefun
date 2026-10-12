@@ -108,6 +108,9 @@ for (const file of [
   "src/client/PlayerPredictor.ts",
   "src/client/ClientStateView.ts",
   "src/rendering/GpuMeshBodies.ts",
+  "src/rendering/CarMeshAsset.ts",
+  "src/rendering/VehicleGeometryBatches.ts",
+  "src/rendering/AuthoredVehicleMeshes.ts",
   "src/rendering/CarPixelOutline.ts",
   "src/rendering/GpuRasterSurface.ts",
   "src/rendering/GpuRenderBackend.ts",
@@ -121,13 +124,17 @@ for (const file of [
       .update(await readFile(path.join(root, file)))
       .digest("hex");
   } catch (error) {
-    if (file === "src/traffic/DrivingQueries.ts" && error.code === "ENOENT")
+    if (
+      ["src/traffic/DrivingQueries.ts", "src/rendering/VehicleGeometryBatches.ts"].includes(file) &&
+      error.code === "ENOENT"
+    )
       report.sourcesSHA256[file] = null;
     else throw error;
   }
 const server = await createServer({
   root,
   configFile: false,
+  cacheDir: path.join(temp, "vite-cache"),
   base: "/tilefun/",
   optimizeDeps: { entries: ["index.html"] },
   plugins: [
