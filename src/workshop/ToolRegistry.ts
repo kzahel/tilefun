@@ -6,7 +6,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     id: "authored-trains",
     name: "Authored train models",
     description:
-      "Inspect the blue train's retained carriage comparisons, curves, joins and reversal before live activation.",
+      "Inspect the active blue train's retained carriage comparisons, curves, joins and reversal.",
     url: "assets/models/trains/review/blue-v3/",
     mode: "link",
   },
@@ -217,7 +217,7 @@ export const CITY_BATCHES: ReviewBatch[] = [
     id: "authored-trains",
     name: "Authored train models",
     description:
-      "Exact retained blue carriage and moving-art prototype evidence; live activation awaits owner inspection.",
+      "Exact retained blue carriage and moving-art evidence; reviewed v3 models are active in GPU + meshes.",
     toolId: "authored-trains",
   },
   {

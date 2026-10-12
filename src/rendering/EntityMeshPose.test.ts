@@ -99,7 +99,7 @@ it("follows displayed forward motion, ignores interpolation rewinds and holds di
   expect(Math.abs(angle())).toBeCloseTo(Math.PI);
 });
 
-it("overrides road vehicle appearance per view without replacing types, collision or train/player art", () => {
+it("overrides road vehicle appearance per view without replacing types, collision or unrelated art", () => {
   const normal = new EntityMeshPose();
   const override = new EntityMeshPose(true);
   const cars = ["compact-1", "compact-2", "bus-2", "car-24"].map((model, i) => {
@@ -122,7 +122,7 @@ it("overrides road vehicle appearance per view without replacing types, collisio
     expect(override.assetFor(car)).toBe(expected);
   }
   expect(cars).toEqual(original);
-  for (const type of ["player", "train-curve-proof-v1", "train-v1:blue", "wildlife-v2:deer"])
+  for (const type of ["player", "train-local-v1", "train-v1:blue", "wildlife-v2:deer"])
     expect(meshAssetFor({ type }, true)).toBeUndefined();
   const green = cars[1];
   if (!green) throw Error("Missing green car");

@@ -21,8 +21,8 @@ export class SceneFrame {
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
 
-  constructor(options?: { allCars3d?: boolean; authoredTrainPrototype?: boolean }) {
-    this.meshPoses = new EntityMeshPose(options?.allCars3d, options?.authoredTrainPrototype);
+  constructor(options?: { allCars3d?: boolean; authoredTrains?: boolean }) {
+    this.meshPoses = new EntityMeshPose(options?.allCars3d, options?.authoredTrains);
   }
 
   begin(hasGrass: boolean): SceneItem[] {

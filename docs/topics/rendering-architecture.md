@@ -68,6 +68,12 @@ share camera interpolation, terrain policy and room submission with gameplay. GP
 lab wrapper, while the input/UI canvas stays in document flow. See
 [embedded engine labs](embedded-engine-labs.md) for lifecycle and migration boundaries.
 
+The reviewed blue v3 rear/middle/front train meshes now share the road models'
+ordinary game/lab mesh selection. Each carriage retains physical end orientation
+when travel reverses. Backend-disabled, loading and failed assets draw the native
+carriage crop. Retained model/review pixels and authoritative train geometry stay
+unchanged; [trains](trains.md) records owner acceptance and the remaining join limits.
+
 ## Data and resource contracts
 
 - `SpriteCatalog` exposes immutable image/tile dimensions and sprite-region

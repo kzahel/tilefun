@@ -1,6 +1,6 @@
 # Authored blue train prototype
 
-Status: Complete prototype; exact v1/v3 sources and shared-engine inspection delivered. Live activation awaits moving-art review.
+Status: Complete prototype and owner-authorized v3 game activation; exact v1/v3 sources and review snapshots retained.
 Date: 2026-10-12.
 Owner: [trains](../topics/trains.md), [3D assets](../topics/3d-assets.md).
 
@@ -158,3 +158,76 @@ the stable single-worker rerun, clearing the transient driving failures. The two
 known phone art-review layout failures remain outside this train change, as do
 Windows symlink/process-death unit limitations. Retained train/road hashes still
 verify after rebase. Final tree/remote equality is checked after push.
+
+
+## Owner review and game activation
+
+The owner opened the v3 authored loop on the LAN preview and said "seems fine".
+After confirmation that it was lab-only, the owner instructed "Good proceed.
+Commit and push when done" on 2026-10-12. This authorizes the exact reviewed v3
+rear/middle/front carriages in game. Workshop verdict records stay untouched.
+Acceptance identifies `projection:authored-blue-train-v3`, fingerprint
+`cdbc3e28d32880ad678c51aeccfcae57c315d654e5f7caf951bfd29ffbaa07ac`,
+and its retained source identity
+`c590a7be6ecf32db36515e2f0010306b21c9c9743aa0f6f60fd9c52525bd5e23`.
+
+Shared mesh selection now defaults to these three carriages in GameClient and
+ScenarioPresentationHost. The authored fixture aliases remain available;
+`nativeTrains` explicitly restores a native-art lab comparison. Canvas, GPU sprites,
+loading and failed meshes keep native crops. Continuous path orientation and
+signed wheel roll are unchanged. Physics, native spacing, 44px roof support,
+body/UV/source bundles and frozen motion/comparison snapshots are untouched.
+Rest bogies/couplers retain the reviewed gap/overlap limitation.
+The six supported curve/straight carriage types use the model bank; legacy
+`train-local-v1` single-body services keep their native whole-train sprite.
+
+The inventory rebuild keeps all 809 candidates and both exact blue-train
+fingerprints. Current v3 is no longer excluded after owner acceptance;
+archived v1 stays excluded. The 170 nature/geometry/character fingerprints renew
+conservatively because their contracts hash shared collector/presentation source.
+Retained art banks, source bundles and approval snapshots are unchanged.
+
+Validation on 2026-10-12: typechecks, lint (119 existing warnings / 34 infos),
+production build and all six retained train bundle/dependency/embedded-atlas/rig
+checks pass. The four focused presentation suites pass all 90 tests. Full units:
+2,564 pass / 10 skip; five known Windows symlink/process-death failures plus
+static-file symlink setup/cleanup errors remain. One Workshop API timeout clears
+on its 13/13 isolated rerun.
+
+Full Chromium: 623 pass / one skip / seven failures. All nine train activation
+cases pass: actual default-game own GLBs, backend switching, native-art comparison,
+loop/city/winding motion, retained exact review and failed-front fallback. The
+additional GPU + meshes complete city journey passes boarding, bends, mid-bend
+reopen, arrival and alighting. Existing train call/driving/grade/bridge checks pass.
+
+The final single-worker selection passes 16 of 20, including all nine new train
+cases, tools index, both walking backends, both dev reloads and both mesh-car
+boarding variants. The two known phone review layouts and Canvas/GPU-sprite car
+tap destinations remain. An isolated Vite harness serves all three changed
+game presentation modules verbatim from pre-activation HEAD `4c01e42`; the same
+car assertion (zero displacement versus >16px) fails with both Canvas and GPU
+sprites there. Canvas also passes one baseline run, retaining its timing-sensitive
+evidence. No train test or car assertion is weakened.
+
+The final LAN build serves byte-exact v3 assets; actual shared GPU diagnostics
+show all three carriages ready and moving without page errors. Other train
+families, whole-train legacy sprites and unqualified articulation stay deferred.
+
+
+Final synchronization rebases activation onto `ea71baca`, the road-vehicle
+game-camera fit. Both collector imports and both topic records are retained;
+review inventories are recompiled from the combined source. Train loading keeps
+height scale 1 and its original shadow path; road height/contact/roof fitting
+stays scoped to road definitions. No retained train bytes or physics change.
+
+Combined validation passes typechecks, lint, 145 focused tests across the six
+affected presentation/asset/roof suites, production build and all 12 focused
+Chromium cases, including the full GPU + meshes city journey, main activation,
+failed-load/native comparison, tools index and road-fit archive. All 811 current
+candidate identities verify (62 compiler exclusions); both exact train identities
+stay unchanged. The frozen actual-engine probe again passes all 24 independent
+wheels, 44px roofs, 20px straight gauge, four loop headings, signed reversal,
+mid-bend reload and disabled fallback/disposal. Its hard-coded
+`liveTrainDefault` receipt label is historical inspection metadata; the new
+main-game browser test verifies the actual active default. Broader-suite failure
+evidence above is from before this final rebase, not a claimed new full rerun.

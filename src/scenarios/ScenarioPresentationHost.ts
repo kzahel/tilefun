@@ -45,8 +45,8 @@ export interface ScenarioPresentationOptions {
   terrain?: boolean;
   pixelExactShadows?: boolean;
   background?: string;
-  /** Explicit train-art inspector opt-in; never selected by the main game. */
-  authoredTrainPrototype?: boolean;
+  /** Use the reviewed train models by default; false retains a native-art comparison. */
+  authoredTrains?: boolean;
   /** Four-direction sprite inspection: pauses authority and overrides only the displayed pose. */
   poseCycle?(): { fps: number; frameCount: number } | undefined;
   surfaceVisibility?(): SurfaceVisibility;
@@ -93,7 +93,7 @@ export class ScenarioPresentationHost {
   ) {
     this.frame = new SceneFrame({
       allCars3d: new URLSearchParams(location.search).has("allcars3d"),
-      authoredTrainPrototype: options.authoredTrainPrototype ?? false,
+      authoredTrains: options.authoredTrains ?? true,
     });
     this.vehicleControls = !!(recipe.traffic || recipe.railways);
     this.session = new ScenarioClient(recipe);

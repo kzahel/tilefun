@@ -5,11 +5,12 @@ import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { EntityMeshPose, meshAssetFor } from "./EntityMeshPose.js";
 
-it("keeps the live and allcars train sprite paths unchanged; inspection has three physical identities", () => {
+it("selects three reviewed carriage identities by default, independently of the road override", () => {
   const types = ["train-curve-proof-v1:rear", "train-curve-proof-v1", "train-curve-proof-v1:front"];
   for (const [i, type] of types.entries()) {
-    expect(meshAssetFor({ type })).toBeUndefined();
-    expect(meshAssetFor({ type }, true)).toBeUndefined();
+    expect(meshAssetFor({ type })).toBe(`train-blue-${["rear", "middle", "front"][i]}-authored-v3`);
+    expect(meshAssetFor({ type }, true)).toBe(meshAssetFor({ type }));
+    expect(meshAssetFor({ type }, false, false)).toBeUndefined();
     expect(meshAssetFor({ type }, false, true)).toBe(
       `train-blue-${["rear", "middle", "front"][i]}-authored-v3`,
     );
@@ -25,7 +26,7 @@ it("reverses signed wheel travel while retaining the physical end orientation an
   if (!train) throw Error("Missing front carriage");
   train.id = 3;
   train.velocity = { vx: 10, vy: 0 };
-  const poses = new EntityMeshPose(false, true);
+  const poses = new EntityMeshPose();
   const first = poses.evaluate(train, 1);
   if (!first) throw Error("Missing inspection pose");
   train.position.wx += 4;
@@ -51,7 +52,7 @@ it("uses independent continuous curve tangents and preserves them when velocity 
   const path = curvedTrainRecipe().railways?.[0]?.path;
   if (!path) throw Error("Missing train fixture");
   const cars = createCurveTrain(new RailAlignment(path), 900);
-  const poses = new EntityMeshPose(false, true);
+  const poses = new EntityMeshPose();
   const orientations = cars.map((car, i) => {
     car.id = i + 1;
     const angle = ((car.sprite?.frameRow ?? 0) * Math.PI) / 128;

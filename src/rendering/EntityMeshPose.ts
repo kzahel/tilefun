@@ -20,10 +20,10 @@ interface Pose {
 export function meshAssetFor(
   entity: Pick<Entity, "type">,
   allCars3d = false,
-  trainPrototype = false,
+  authoredTrains = true,
 ): string | undefined {
   return (
-    (trainPrototype ? authoredTrainForType(entity.type)?.assetId : undefined) ??
+    (authoredTrains ? authoredTrainForType(entity.type)?.assetId : undefined) ??
     authoredVehicleForType(entity.type)?.assetId ??
     (allCars3d && entity.type.startsWith("vehicle-v1:") ? COMPACT_CAR_MESH : undefined)
   );
@@ -65,10 +65,10 @@ export class EntityMeshPose {
   private poses = new Map<number, Pose>();
   constructor(
     readonly allCars3d = false,
-    readonly trainPrototype = false,
+    readonly authoredTrains = true,
   ) {}
   assetFor(entity: Pick<Entity, "type">) {
-    return meshAssetFor(entity, this.allCars3d, this.trainPrototype);
+    return meshAssetFor(entity, this.allCars3d, this.authoredTrains);
   }
   retain(entities: readonly Entity[]) {
     const ids = new Set(entities.filter((e) => this.assetFor(e)).map((e) => e.id));
@@ -77,7 +77,7 @@ export class EntityMeshPose {
   evaluate(entity: Entity, time: number, position = entity.position): MeshInstance | undefined {
     const assetId = this.assetFor(entity);
     if (!assetId) return undefined;
-    const train = this.trainPrototype && !!authoredTrainForType(entity.type);
+    const train = this.authoredTrains && !!authoredTrainForType(entity.type);
     const target = train ? trainMeshHeading(entity) : entityHeading(entity);
     let pose = this.poses.get(entity.id);
     if (!pose) {

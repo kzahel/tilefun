@@ -446,14 +446,16 @@ it fixed. [Full run](/tmp/tilefun-wildlife-standing-browser-full.log),
 The 45-set road-model bank excludes trains. The owner requested the live blue
 train on 2026-10-12. [127](../tactical/127-authored-blue-train.md) authors and retains
 three source-owned carriages and their matched 4×2 / real service motion evidence.
-Live rendering, native sprite banks, rail authority, current curve spacing,
-collision/support surfaces and service behavior remain unchanged pending exact
-moving-art review. The existing gate above applies; no production approval is
-inferred from technical checks.
+The owner reviewed the LAN curved-service v3 lab in chat ("seems fine") and
+explicitly authorized game activation ("Good proceed. Commit and push when done").
+The shared game/lab mesh selection now uses these exact rear/middle/front models
+by default. Native sprite banks, rail authority, curve spacing, collision/support
+surfaces and service behavior are unchanged. This records chat acceptance of the
+blue v3 scope; it does not manufacture Workshop verdicts or approve other families.
 
 | Source family | Model status | Engine status | Next action |
 | --- | --- | --- | --- |
-| Blue local | Three current v3 carriage bundles, six retained revisions, 24 independently rolling wheels | Explicit shared-engine inspection only; live sprites unchanged | Inspect 4×2, fixed-camera loops, coupler joins and actual reversal before activation |
+| Blue local | Three current v3 carriage bundles, six retained revisions, 24 independently rolling wheels | Active in the game and shared labs in GPU + meshes; native sprite fallback | Playtest boarding/roof riding and joins; audit Green next |
 | Green | Queued | Preview source only | Audit geometry and palette correspondence after blue review |
 | Orange | Queued | Preview source only | Vertical middle source missing; audit two-end consist independently |
 | Grey | Queued | Preview source only | Audit geometry and palette correspondence |
@@ -462,10 +464,14 @@ inferred from technical checks.
 The [blue comparison and motion review](../../public/assets/models/trains/review/blue-v3/index.html)
 is retained with the [source catalog](../../art-source/train-models/catalog.json).
 World Geometry offers authored blue loop, winding reversal and existing-city
-fixtures with an explicit prototype opt-in. Default game/labs still select native
-sprites. Mesh heading follows each replicated increasing track tangent, so reverse
+fixtures as well as ordinary loop/city fixtures. Game and labs share reviewed
+model selection. The game defaults to GPU + meshes; lab backend defaults remain
+Canvas. `nativeTrains` on World Geometry retains an explicit source-art comparison.
+Mesh heading follows each replicated increasing track tangent, so reverse
 travel changes signed wheel roll without flipping physical end cars. Missing,
 loading, failed, disabled or Canvas mesh presentation keeps native train crops.
+The six supported curve/straight carriage types use the model bank; legacy
+`train-local-v1` single-body services keep their native whole-train sprite.
 
 Eight inferred wheels sit under each original opaque skirt; tires/hubs parent to
 roll pivots, steering pivots parent to their named bogies, and body/couplers stay
@@ -476,6 +482,7 @@ rails at ±10. V1 preserves the earlier 40-unit roof / ±16 inferred wheel proto
 Curved bogie contact and animated coupling still need qualification.
 Static coupler endpoints can separate by about 50 model pixels on native curved
 spacing. Side/end source lengths differ (136/160/160 versus 109/112/143), so matched
-source cameras are diagnostic fits, not fixed-camera gameplay parity. Review the
-actual moving joins before deciding on articulated connectors or a separate,
+source cameras are diagnostic fits, not fixed-camera gameplay parity. The owner
+accepted the moving v3 joins for activation; this does not qualify articulated
+connectors. Review new geometry before deciding on articulated connectors or a separate,
 explicit train spacing/support redesign; never silently change live physics.

@@ -4,6 +4,9 @@ import { PNG } from "pngjs";
 import { expect, it } from "vitest";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import { createCurveTrain } from "../railway/CurveTrain.js";
+import { RailAlignment } from "../railway/RailPath.js";
+import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
@@ -73,6 +76,29 @@ function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, he
     frame,
   );
 }
+
+it("keeps a native train comparison disabled and uses physical heading in frameless collection", () => {
+  const path = curvedTrainRecipe().railways?.[0]?.path;
+  if (!path) throw Error("Missing train path");
+  const train = createCurveTrain(new RailAlignment(path), 900)[2];
+  if (!train?.sprite) throw Error("Missing front carriage");
+  train.position = { wx: 200, wy: 150 };
+  train.prevPosition = { ...train.position };
+  train.sprite.frameRow = 32;
+  train.velocity = { vx: -10, vy: -10 };
+  const original = structuredClone(train);
+  const native = collect(train, 1, 1 / 3, new SceneFrame({ authoredTrains: false }))[0];
+  if (native?.kind !== "sprite") throw Error("Missing native train");
+  expect(native.mesh).toBeUndefined();
+  for (const frame of [undefined, new SceneFrame()]) {
+    const item = collect(train, 1, 1 / 3, frame)[0];
+    if (item?.kind !== "sprite") throw Error("Missing train body");
+    expect(item.mesh?.assetId).toBe("train-blue-front-authored-v3");
+    expect(item.mesh?.orientation[2]).toBeCloseTo(Math.sin(Math.PI / 8));
+    expect(item.mesh?.orientation[3]).toBeCloseTo(Math.cos(Math.PI / 8));
+  }
+  expect(train).toEqual(original);
+});
 
 it("collects an incoming bus while its center is above the screen and its front is visible", () => {
   const bus = createVehicle("bus-2", 200, -40, Direction.Down);

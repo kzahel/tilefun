@@ -1,9 +1,11 @@
 # Retained train models
 
-Blue v3 is the current inspection prototype with three independent carriage GLBs and
-packed Blender/texture bundles. The live game continues using its native train
-sprites. [Train topic](../../docs/topics/trains.md) owns the moving-art review gate;
-[127](../../docs/tactical/127-authored-blue-train.md) records this prototype.
+Blue v3 has three independent carriage GLBs and packed Blender/texture bundles.
+The owner accepted the curved-service LAN review and authorized these exact
+models in the game on 2026-10-12. Shared GPU + meshes now uses them by default;
+Canvas, disabled meshes and failed loads keep native train sprites.
+[Train topic](../../docs/topics/trains.md) owns the remaining moving-art gates;
+[127](../../docs/tactical/127-authored-blue-train.md) records authoring and activation.
 
 Commit the exact finished GLBs under `public/assets/models/trains/`, every packed
 `.blend`, clean atlas, own unused projection/coverage, frozen reference, source
@@ -32,5 +34,5 @@ Original art: Modern Exteriors by LimeZu. See [credits](../../public/assets/SOUR
 
 V1 remains archived. V3 preserves its paint/UVs while raising the roof to native
 44-unit support and moving inferred wheels to the straight ±10 rail gauge.
-Interactive fixtures use current v3; old comparisons/GIFs remain exact historical
+Game and interactive fixtures use current v3; old comparisons/GIFs remain exact historical
 evidence. Bogie yaw and coupling on curves remain at rest and unqualified.

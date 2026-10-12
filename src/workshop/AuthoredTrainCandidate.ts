@@ -29,6 +29,11 @@ export async function buildAuthoredTrainCandidate(
     kind: "projection",
     fingerprint,
     sourceFingerprint: review.identity.sourceFingerprint,
-    excluded: "Retained train prototype; exact moving-art review required before live activation.",
+    ...(revision === "v1"
+      ? {
+          excluded:
+            "Historical train prototype; the reviewed v3 carriages are active in mesh mode.",
+        }
+      : {}),
   };
 }

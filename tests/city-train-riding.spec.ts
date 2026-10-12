@@ -32,7 +32,7 @@ const read = (page: Page) =>
         .length,
     };
   });
-for (const backend of ["canvas", "gpu"]) {
+for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
   test(`ride a generated train between cities, reopen mid-bend and alight (${backend})`, async ({
     page,
   }) => {

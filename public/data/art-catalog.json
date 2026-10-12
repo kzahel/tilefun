@@ -23001,11 +23001,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:200"
+          "source": "src/rendering/collectScene.ts:212"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:210"
+          "source": "src/rendering/collectScene.ts:222"
         },
         {
           "system": "Gameplay",

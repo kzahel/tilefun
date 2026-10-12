@@ -12,10 +12,16 @@ import {
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
+import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
-import { entityFacingHeading, entityHeading, meshAssetFor } from "./EntityMeshPose.js";
+import {
+  entityFacingHeading,
+  entityHeading,
+  meshAssetFor,
+  trainMeshHeading,
+} from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
 import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
@@ -138,7 +144,7 @@ export function collectScene(
           }
         : undefined;
     const spriteBottom = effectiveWy + (e.sprite.drawOffsetY ?? 0);
-    const meshAsset = frame?.meshPoses.assetFor(e) ?? meshAssetFor(e);
+    const meshAsset = frame ? frame.meshPoses.assetFor(e) : meshAssetFor(e);
     const meshRadius = meshAsset
       ? vehicleMeshRadius(meshAsset)
       : e.type.startsWith("train-curve-proof-v1")
@@ -186,7 +192,13 @@ export function collectScene(
     const mesh =
       frame?.meshPoses.evaluate(e, poseTime, pos) ??
       (meshAsset
-        ? { assetId: meshAsset, orientation: yawOrientation(entityHeading(e)), radius: meshRadius }
+        ? {
+            assetId: meshAsset,
+            orientation: yawOrientation(
+              authoredTrainForType(e.type) ? trainMeshHeading(e) : entityHeading(e),
+            ),
+            radius: meshRadius,
+          }
         : undefined);
     const spriteItem = {
       ...(mesh ? { mesh } : {}),

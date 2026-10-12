@@ -1,4 +1,4 @@
-/** Inspection-only registrations. Main-game train sprites remain the default. */
+/** Reviewed blue carriage registrations shared by the game and embedded labs. */
 export const AUTHORED_TRAIN_MESHES = (["rear", "middle", "front"] as const).map((part) => ({
   part,
   assetId: `train-blue-${part}-authored-v3`,

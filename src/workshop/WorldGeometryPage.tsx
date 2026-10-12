@@ -46,6 +46,7 @@ function GeometryFixtures() {
   );
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
   const trainPrototype = fixture.startsWith("train-authored-");
+  const authoredTrains = !new URLSearchParams(location.search).has("nativeTrains");
   const trainLoop = fixture === "train-loop" || fixture === "train-authored-loop";
   const cityTrains = fixture === "city-trains" || fixture === "train-authored-city";
   const generated = generatedIndex >= 0;
@@ -104,7 +105,7 @@ function GeometryFixtures() {
                   ? undergroundGarageRecipe()
                   : worldGeometryRecipe()),
       {
-        authoredTrainPrototype: trainPrototype,
+        authoredTrains,
         width: 960,
         height: crossing ? 720 : 640,
         fixedCamera: generatedScene
@@ -283,7 +284,7 @@ function GeometryFixtures() {
             )
             .join(",");
           c.dataset.carriageCount = String(carriages.length);
-          c.dataset.trainArt = trainPrototype ? "authored-prototype" : "native-sprites";
+          c.dataset.trainArt = authoredTrains ? "authored-blue-v3" : "native-sprites";
           c.dataset.carriageHeights = carriages.map((e) => (e.wz ?? 0).toFixed(2)).join(",");
           c.dataset.trainCamera = settings.current.followTrain ? "follow" : "overview";
           const train = h.session.view.entities.find(
@@ -373,15 +374,15 @@ function GeometryFixtures() {
       <h1>World geometry lab</h1>
       <p>
         {trainPrototype
-          ? "Inspect the blue train's three authored carriages with unchanged service spacing and physics. Watch curves, joins and reversal. Static couplers can leave gaps or overlap; the main game retains native sprites until exact moving-art review. Select GPU + meshes through the review link to see the prototype."
+          ? "Inspect the blue train's three authored carriages with unchanged service spacing and physics. Watch curves, joins and reversal. Static couplers can leave gaps or overlap. These reviewed carriages also run in the main game. Select GPU + meshes to see the models; Canvas and GPU sprites keep the source artwork."
           : trainCurve
             ? cityTrains
-              ? "Jump from the station onto the train roof and ride from Willowhaven to Willowbridge. This is the real generated world, with broad curves, native train sprites and eight-second station stops. Walk on the roof, jump off or save/reload during the ride."
-              : "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Ride the roof, run either direction and save/reload mid-bend. Native blue train sprites switch cardinal views at corners. Pixel tracks use the production terrain renderer; town/platform markers are schematic."
+              ? "Jump from the station onto the train roof and ride from Willowhaven to Willowbridge. This is the real generated world, with broad curves and eight-second station stops. GPU + meshes uses the reviewed blue carriages; Canvas and GPU sprites retain native artwork. Walk on the roof, jump off or save/reload during the ride."
+              : "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Ride the roof, run either direction and save/reload mid-bend. GPU + meshes uses the reviewed blue carriages with continuous track headings; native sprite fallback switches cardinal views at corners. Pixel tracks use the production terrain renderer; town/platform markers are schematic."
             : generated
               ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
               : trainGrade
-                ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Native carriages stay horizontal, so slope joins are a visible limitation of this proof."
+                ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Carriages stay horizontal, so slope joins are a visible limitation of this proof."
                 : vehicle
                   ? "Watch the car follow the ramp with full-body clearance. It stops at the far end. Run the opposite direction to start a fresh return trip. The chassis stays level in this first proof."
                   : crossing

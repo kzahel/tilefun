@@ -527,8 +527,11 @@ No universal threshold, production candidate or human acceptance is established.
 
 
 [127](../tactical/127-authored-blue-train.md) extends the workflow to the live blue
-train as an inspection prototype: three independently authored carriage bodies,
+train with three independently authored carriage bodies,
 owned UV paint, packed scenes/drafts and 24 wheels parented to named bogies. The
 matched 4×2 and native-versus-mesh loop/reversal captures are tracked; source end
 projection and static coupling limits remain explicit. The [train topic](trains.md)
-owns its five-family queue and exact moving-art gate before live activation.
+owns its five-family queue. After reviewing the v3 curved-service LAN lab, the
+owner authorized these exact three carriages in game. Shared mesh mode now uses
+them by default; native art remains the Canvas/disabled/failed-load fallback.
+The review gate still applies to other families and changed geometry.

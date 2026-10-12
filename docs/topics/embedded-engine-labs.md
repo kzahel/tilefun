@@ -31,6 +31,17 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
+## Reviewed blue train alignment
+
+The owner accepted the v3 curve lab and authorized game activation on 2026-10-12.
+Game and ScenarioPresentationHost now select the same three reviewed blue carriage
+models by default, using shared continuous track headings and signed wheel travel.
+GPU + meshes renders them; Canvas, GPU sprites and failed/lazy loads retain native
+crops. World Geometry offers `nativeTrains` for source-art comparison; its authored
+fixture aliases remain usable. No lab-only physics, service spacing, roof support
+or backend-default change is introduced. Main-game backend switching and the
+existing curve/roof/save/reload scenarios qualify this integration.
+
 ## Farmstead and settlement alignment
 
 [084](../tactical/084-common-pets-and-variations.md) adds four native pet-coat
