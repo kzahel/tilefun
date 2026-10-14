@@ -39,8 +39,8 @@
     "vehicle-collision:bench": "node scripts/benchmark-vehicle-collision.mjs"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.14",
-    "@playwright/test": "^1.63.0",
+    "@biomejs/biome": "^2.5.15",
+    "@playwright/test": "^1.64.0",
     "@types/node": "^24.19.0",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.3.0",
@@ -49,15 +49,15 @@
     "@types/webxr": "^0.5.24",
     "@types/ws": "^8.18.2",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
-    "@vitejs/plugin-react": "^6.1.1",
+    "@vitejs/plugin-react": "^6.1.2",
     "pngjs": "^7.0.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",
-    "vite": "^8.3.1",
-    "vitest": "^5.0.2"
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.104.0",
+    "@tanstack/react-query": "^5.104.1",
     "peerjs": "^1.5.5",
     "qrcode": "^1.5.4",
     "react": "^19.3.0",
