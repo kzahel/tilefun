@@ -27,6 +27,7 @@ export default defineConfig({
   server: {
     host: true, // listen on all interfaces, not just localhost
     allowedHosts: ["tilefun.graehlarts.com"],
+    watch: { ignored: ["**/playwright-report/**", "**/test-results/**"] },
   },
   clearScreen: false,
   build: {

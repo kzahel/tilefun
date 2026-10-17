@@ -529,7 +529,19 @@ window.addEventListener("beforeunload", () => {
 
 if (import.meta.hot) {
   // Vite awaits this hook before navigation; ordinary beforeunload cannot await a Worker save.
-  import.meta.hot.on("vite:beforeFullReload", async () => {
+  import.meta.hot.on("vite:beforeFullReload", async (payload) => {
+    // Vite notifies every page before deciding whether an HTML edit targets it.
+    // An unrelated lab/report must not shut down this page's live authority.
+    if (payload.path?.endsWith(".html")) {
+      const pagePath = decodeURI(window.location.pathname);
+      const targetPath = import.meta.env.BASE_URL + payload.path.slice(1);
+      if (
+        pagePath !== targetPath &&
+        payload.path !== "/index.html" &&
+        !(pagePath.endsWith("/") && `${pagePath}index.html` === targetPath)
+      )
+        return;
+    }
     client?.saveHMRState();
     await localHost?.shutdown();
     if (server) {

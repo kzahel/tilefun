@@ -2,12 +2,35 @@
 
 Topic: game-diagnostics
 Status: automatic fault intake, durable browser outbox, local authority watchdog and owner inbox delivered; synthetic crash/hang/reload and streaming validation complete.
-Updated: 2026-10-10.
+Updated: 2026-10-17.
 
 Owns fault collection, delivery, retention, access and hang detection. The original
 intermittent map/streaming report remains unreproduced; see the
 [recovery investigation](../research/local-server-recovery-investigation.md).
 [095](../tactical/095-game-fault-reports.md) records implementation and validation.
+
+## Live development freeze (2026-10-17)
+
+During a Chromebook play session, the live development tab retained a stopped
+Worker transport while client prediction/rendering continued and no fault was
+reported. The Vite service log showed `playwright-report/index.html` reload events
+at the failure checkpoint. Vite broadcasts `vite:beforeFullReload` before checking
+whether an HTML path matches the current page; our handler unconditionally shut
+down the authority even when Vite then left the game page open. This is an
+intentional lifecycle shutdown, so the hang watchdog had already been cleared.
+
+The handler now applies Vite's current-page HTML matching before saving/shutting
+down. The dev watcher also excludes `playwright-report` and `test-results`.
+A bounded check against the running Vite service kept the same page and advancing
+replicated ticks (32 → 93 → 154) after an unrelated Workshop HTML update and a
+test-report write; touching game code then performed a real reload with healthy
+authority. Typechecks and focused lint passed. The broad browser suite was stopped
+at the user's request in favor of live iteration. This fixes the identified
+development reload path; it does not establish a cause for independent
+production/storage stalls. The user switched to the static
+GitHub Pages build during inspection, where authority ticks and chunk residency
+were healthy. Live debugging uses the existing device via Machine Control's
+ChromeOS native CDP route; private device details stay outside the repository.
 
 ## Collection and recovery
 

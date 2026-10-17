@@ -318,6 +318,11 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked,
     );
+    gc.audioManager.updateTrains(
+      gc.stateView.entities,
+      gc.stateView.playerEntity.position,
+      !inputLocked && !gc.debugPanel.paused,
+    );
     if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
@@ -596,6 +601,7 @@ export class PlayScene implements GameScene {
 
   private stopMovement(gc: GameContext): void {
     gc.audioManager.stopSirens();
+    gc.audioManager.stopTrains();
     this.emergencyHeld = false;
     this.styleHeld = false;
     gc.tapMovement?.cancel();

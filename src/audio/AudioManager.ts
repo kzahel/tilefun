@@ -1,5 +1,6 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
+import { TrainAudio } from "./TrainAudio.js";
 
 /**
  * Thin wrapper around the Web Audio API.
@@ -16,6 +17,20 @@ export class AudioManager {
     { style: number; source: AudioBufferSourceNode; gain: GainNode; pan: StereoPannerNode }
   >();
   private sirenBuffers = new Map<number, AudioBuffer>();
+  private trains: TrainAudio | null = null;
+
+  updateTrains(entities: readonly Entity[], listener: PositionComponent, enabled: boolean): void {
+    if (!enabled || !this.ctx || this.ctx.state !== "running") {
+      this.stopTrains();
+      return;
+    }
+    this.trains ??= new TrainAudio(this.ctx, this.master ?? this.ctx.destination);
+    this.trains.update(entities, listener);
+  }
+
+  stopTrains(): void {
+    this.trains?.stop();
+  }
 
   updateSirens(entities: readonly Entity[], listener: PositionComponent, enabled: boolean): void {
     const ctx = this.ctx;

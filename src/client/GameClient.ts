@@ -1713,6 +1713,7 @@ export class GameClient {
   }
   private clearPlayInput(sendNeutral = true): void {
     this.audioManager.stopSirens();
+    this.audioManager.stopTrains();
     if (sendNeutral && this.scenes?.current instanceof PlayScene)
       this.scenes.current.cancelInput(this.transport);
     this.tapMovement.cancel();

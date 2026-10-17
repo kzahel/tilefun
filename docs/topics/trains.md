@@ -2,11 +2,37 @@
 
 Topic: trains
 Status: generated two-city trains, broad curves, cached pixel tracks, inside driving and saved roof riding delivered; loops remain authored lab fixtures.
-Updated: 2026-10-12.
+Updated: 2026-10-17.
 
 Owns generated railway networks, town stations, train services, railway structures
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
 [city generation](city-generation.md) owns regional revisions and promotion.
+
+## Train sounds
+
+Play mode now synthesizes airy chugs, paired rail clacks and a warm two-part
+whistle through the existing AudioManager master gain. Rolling cadence follows
+the magnitude of replicated velocity, including curves and reverse travel.
+The middle carriage owns one voice for the whole consist; legacy single-body
+trains use their body. Moving trains whistle on becoming audible and every
+18 seconds thereafter. Stopped trains are quiet. Sounds fade with distance up
+to 750 world pixels and pan toward the train.
+
+Browser autoplay unlock still requires a user gesture. Menu/input locks, debug
+pause, editing, scene exit, focus loss and hidden tabs fade and stop both rolling
+and whistle sources. The Idea dialog retains its existing master-gain ducking.
+No rail authority, persisted state, artwork or sound downloads change; embedded
+labs retain their existing silent browser composition, like their sirens.
+`src/audio/TrainAudio.test.ts` covers synthesis, cadence, spatial attenuation,
+voice reuse and cleanup; `tests/train-audio.spec.ts` exercises a generated service,
+Chromium audio rendering and menu/focus/editor silence.
+Train-audio validation: all 2,634 unit tests, typechecks, lint, build and the
+focused browser audio check passed. The broad browser run was interrupted for
+the live Chromebook investigation in [game diagnostics](game-diagnostics.md);
+it is not recorded as a complete browser pass.
+
+Next: listen together beside a station and while riding, then tune the whistle
+and clatter balance from play feedback.
 
 ## Calling a train from a station bench
 

@@ -101,6 +101,9 @@ lights-only. Garbage trucks use **Beacon / B** for silent amber lights.
 Try any of the 45 vehicle choices in the Traffic playground.
 
 
+Moving trains chug and clatter faster as they speed up, with a two-part whistle
+on departure and during the journey. Nearby trains sound louder; stopped trains are quiet.
+
 Waiting for a train? Go beside or onto a station bench in Play mode and tap
 **Call train · E** (or press E). The same train appears immediately at that station
 and waits eight seconds to let you board. If someone is driving or riding it,
