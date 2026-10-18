@@ -105,6 +105,7 @@ export interface PredatorBehavior {
     to: PositionComponent;
     startZ: number;
     endZ: number;
+    previousZ?: number;
     lift: number;
     attack: boolean;
   };

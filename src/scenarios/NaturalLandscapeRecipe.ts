@@ -102,7 +102,10 @@ export function naturalLandscapeRecipe(
   const predator = PREDATOR_PROFILES.find((p) => p.species === id);
   if (!at && predator) {
     const deer = createDeer(108, 64),
-      rabbit = createRabbit(128, 104);
+      rabbit = createRabbit(
+        predator.fierce?.kind === "spider" ? 100 : 128,
+        predator.fierce?.kind === "spider" ? 88 : 104,
+      );
     // This fixture models a natural population. Editor-created animals carry
     // neither lineage field and are never replaced when eaten.
     deer.naturalSpawnId = `nature-${id}-deer`;

@@ -9,6 +9,7 @@ import { zRangesOverlap } from "../physics/AABB3D.js";
 import {
   applyGroundTracking,
   isElevationBlocked3D,
+  resolveGroundZForLanding,
   resolveGroundZForTracking,
 } from "../physics/surfaceHeight.js";
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
@@ -378,7 +379,7 @@ export class EntityManager {
       // ground snaps must still affect later support checks. Never reuse across ticks,
       // movement, index updates, edits or streaming changes.
       const groundCandidates = new Map<string, { props: Prop[]; entities: Entity[] }>();
-      const computeGroundZ = (e: Entity): number => {
+      const computeGroundZ = (e: Entity, landingFrom?: number): number => {
         const footprint = e.collider ? getEntityAABB(e.position, e.collider) : null;
         const minCx = Math.floor((footprint?.left ?? e.position.wx) / CHUNK_SIZE_PX);
         const maxCx = Math.floor((footprint?.right ?? e.position.wx) / CHUNK_SIZE_PX);
@@ -399,7 +400,9 @@ export class EntityManager {
           useCollisionIndex && footprint
             ? this.collisionIndex.query(footprint)
             : candidates.entities;
-        return resolveGroundZForTracking(e, getHeight, candidates.props, entities);
+        return landingFrom === undefined
+          ? resolveGroundZForTracking(e, getHeight, candidates.props, entities)
+          : resolveGroundZForLanding(e, getHeight, candidates.props, entities, landingFrom);
       };
 
       for (const entity of active) {
@@ -422,8 +425,19 @@ export class EntityManager {
           continue;
         }
         if (entity.predator?.flight) {
-          if (entity.predator.flight.elapsed >= entity.predator.flight.duration)
-            settlePredatorFlight(entity, computeGroundZ(entity));
+          const flight = entity.predator.flight;
+          const previousZ = flight.previousZ ?? entity.wz ?? 0;
+          const ground = computeGroundZ(entity, previousZ);
+          if (
+            flight.elapsed >= flight.duration ||
+            (previousZ > (entity.wz ?? 0) &&
+              (entity.wz ?? 0) <= ground &&
+              ground <= previousZ + 0.001)
+          )
+            settlePredatorFlight(
+              entity,
+              ground <= previousZ + 0.001 ? ground : computeGroundZ(entity),
+            );
           continue;
         }
         if (entity.robin?.motion) {

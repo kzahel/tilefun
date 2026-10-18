@@ -30,8 +30,8 @@
     {
       "id": "giant-spider",
       "revision": "fierce-v1",
-      "state": "planned",
-      "gameplay": false
+      "state": "draft-ready",
+      "gameplay": true
     }
   ],
   "reviewStatus": "pending",

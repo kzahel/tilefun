@@ -3293,5 +3293,106 @@
         "sha256": "ee549706f9fb0c63b727f4e4564bb713088ab135608197a0d129d04743f4cc23"
       }
     ]
+  },
+  {
+    "id": "giant-spider-fierce-v1",
+    "animalId": "giant-spider",
+    "revision": "fierce-v1",
+    "name": "Giant spider",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giant-spider/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-giant-spider-fierce-v1",
+      "name": "Giant spider sheet",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-giant-spider-fierce-v1-scene",
+      "name": "Giant spider scene",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "d6563baabf5f42375348ee3da825a0a7c0d6636519f0f27dd9fd30769075cf97",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-giant-spider-fierce-v1-contact",
+      "name": "Giant spider contact",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/contact-sheet-native.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3f8260a4ba3e317f3b616c9d0df9ea9b078b561951b2dafa2a812f0766eb3816",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/giant-spider/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/contact-sheet-native.png",
+        "sha256": "3f8260a4ba3e317f3b616c9d0df9ea9b078b561951b2dafa2a812f0766eb3816"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/den.png",
+        "sha256": "b9847d3bdbcffd87394d4a8e9e72a8feb5a5e8d5e6bced85db206aa74bd93f49"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/index.html",
+        "sha256": "1b6cd0a1acd78e14f339045ea82d16b10f5db315e88baf280fd0422b10d9602f"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/preview-native.gif",
+        "sha256": "7ee8446b3ff6475479e430c60c62107b98173687c80af3c7e05a3ec722bd9949"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/preview.gif",
+        "sha256": "6e4e2ed43b63c65469a35ab36e7495b2daf0d12095c3617a94b6aff8050bb65a"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/review-observations.md",
+        "sha256": "b396b5de8ab4a89a87d46a235bcc254a17a2f7635f9d835548387e6c465f29ee"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scale-reference-native.png",
+        "sha256": "999315317164cd63bd5e6f3dd4ade83254be3d5826392b885d1a9186241d707e"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scene-background.png",
+        "sha256": "c5d37f60866085dfd7097b02557e2ab5c2eaafe107e5494b0b98ee0796a36f06"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scene-native.gif",
+        "sha256": "785a1b121b3944300e9fa8ed2181203ac444b443de0bdaf33cf1fb827ce57866"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scene-native.png",
+        "sha256": "d6563baabf5f42375348ee3da825a0a7c0d6636519f0f27dd9fd30769075cf97"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+        "sha256": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/source-audit.json",
+        "sha256": "fd505d3227c5f8114f63b0cf0f5f0b6098a8a12dc497694a6ca9aca64881c127"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/sprite.json",
+        "sha256": "f855d5bd3f64fb3c14e870e87d84d960464d361aa8f6c4758f67d4c16ef17bcc"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/validation.json",
+        "sha256": "a2a7d9a375669c9d7a9044f811a23f5d044eda80264f32650441faf23936590d"
+      }
+    ]
   }
 ]

@@ -14,6 +14,26 @@ export interface FierceBehaviorProfile {
 /** Release each bank only after its source, native playback and gameplay pass. */
 export const FIERCE_PROFILES: readonly PredatorProfile[] = [
   {
+    species: "giant-spider",
+    label: "Giant spider",
+    revision: "fierce-v1",
+    speed: 8 / 1.2,
+    chaseSpeed: 48,
+    weight: 65,
+    size: 96,
+    anchorY: 72,
+    body: [32, 20, 18],
+    fierce: {
+      kind: "spider",
+      stride: 0.8,
+      chargeStride: 1.4,
+      windup: 0.2,
+      chargeSeconds: 4,
+      sense: 80,
+      displayRadius: 80,
+    },
+  },
+  {
     species: "griffin",
     label: "Griffin",
     revision: "fierce-v1",

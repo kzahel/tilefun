@@ -22,7 +22,7 @@ export function restorePredatorPose(e: Entity): void {
     e,
     ai.flight
       ? 6
-      : ai.state === "sleep" && fierce
+      : (ai.state === "sleep" || ai.state === "ambush") && fierce
         ? 5
         : ai.state === "feed"
           ? 2
@@ -57,6 +57,7 @@ export function preparePredatorFlight(e: Entity, dt: number): void {
   const step = Math.min(speed, d / dt);
   e.velocity.vx = d > 0.001 ? (dx / d) * step : 0;
   e.velocity.vy = d > 0.001 ? (dy / d) * step : 0;
+  f.previousZ = e.wz ?? f.startZ;
   e.wz = predatorFlightZ(f.startZ, f.endZ, t, f.lift);
   e.jumpZ = Math.sin(Math.PI * t) * f.lift;
   if (e.sprite && d > 0.001) e.sprite.frameRow = e.sprite.direction = directionFromVelocity(dx, dy);

@@ -20,7 +20,7 @@ import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
 import { FIERCE_DENS } from "../wildlife/FierceDens.js";
-import { FOOD_WEB } from "../wildlife/FoodWeb.js";
+import { creatureSpecies, FOOD_WEB } from "../wildlife/FoodWeb.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -207,6 +207,11 @@ export default function NaturalLandscapePage() {
           audioTime.current = now;
           c.dataset.creatureCalls = String(sound.creatureAudioDiagnostics.played);
         }
+        c.dataset.foodWebActors = JSON.stringify(
+          h.session.view.entities
+            .filter((e) => creatureSpecies(e))
+            .map((e) => ({ id: e.id, type: e.type })),
+        );
         c.dataset.predatorPoses = JSON.stringify(
           h.session.view.entities
             .filter((e) => PREDATOR_PROFILES.some((p) => predatorType(p.species) === e.type))

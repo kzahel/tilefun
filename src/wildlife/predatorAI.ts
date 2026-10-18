@@ -277,16 +277,19 @@ export function updatePredatorAI(
     return;
   }
   if (prey) {
+    if (ai.state !== "stalk") alarmPrey(prey, e.position);
     const d = distance(e.position, prey.position);
     if (ai.state === "stalk" && (d < 52 || ai.elapsed > 2)) enter(e, "chase", 0);
-    if (ai.state === "chase" && bodyGap(e, prey) <= 4) enter(e, "pounce", 0);
+    if (
+      ai.state === "chase" &&
+      bodyGap(e, prey) <= 4 &&
+      (!prey.rabbit || !["startle", "hop"].includes(prey.rabbit.state))
+    )
+      enter(e, "pounce", 0);
     if (ai.state === "pounce" && ai.elapsed > 0.9) {
       ai.cooldown = 3;
       enter(e, "rest", 1);
       return;
-    }
-    if (ai.state !== "stalk") {
-      alarmPrey(prey, e.position);
     }
   }
   if (ai.timer <= 0 && (!planning || planning.claim(e, false))) {
@@ -387,13 +390,17 @@ export function updatePredatorAI(
       else if (perch && clearPredatorFlight(e, perch, perch.z, env, planning))
         launchPredatorFlight(e, perch, perch.z, false);
       else enter(e, "rest", 2);
-    } else if (!ai.targetId && fierce?.kind === "dragon") {
+    } else if (!ai.targetId && (fierce?.kind === "dragon" || fierce?.kind === "spider")) {
       if (distance(e.position, ai.home) > 5 && clearPath(e, ai.home, env, planning)) {
         if (ai.state !== "patrol") enter(e, "patrol", 0.3);
         ai.aim = { ...ai.home };
       } else {
         ai.activity = (ai.activity ?? 0) + 1;
-        enter(e, ai.activity % 3 === 0 ? "sleep" : "guard", ai.activity % 3 === 0 ? 5 : 2);
+        enter(
+          e,
+          fierce.kind === "spider" ? "ambush" : ai.activity % 3 === 0 ? "sleep" : "guard",
+          fierce.kind === "spider" ? 2 : ai.activity % 3 === 0 ? 5 : 2,
+        );
       }
     } else if (!ai.targetId && (!ai.aim || ai.elapsed > 4 || distance(e.position, ai.aim) < 3)) {
       const angle = random(e) * Math.PI * 2;

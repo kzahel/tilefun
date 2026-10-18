@@ -1,0 +1,22 @@
+{
+  "identity": "giant-spider-fierce-v1",
+  "poses": 164,
+  "binaryAlpha": true,
+  "paletteColors": 9,
+  "canvas": [
+    96,
+    96
+  ],
+  "anchor": [
+    48,
+    72
+  ],
+  "idleVisibleHeights": {
+    "down": 30,
+    "up": 29,
+    "left": 35,
+    "right": 35
+  },
+  "sequenceDurationMs": 7448,
+  "status": "Integrity only; independent visual observation and human review remain separate."
+}

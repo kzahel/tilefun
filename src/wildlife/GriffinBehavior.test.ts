@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
+import { createProp } from "../entities/PropFactories.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { createDeer } from "./Deer.js";
@@ -91,3 +92,47 @@ it.each([false, true])(
     }
   },
 );
+
+it("lands on an ordinary perch inserted beneath an already committed descending arc", async () => {
+  const bird = createPredator("griffin", 88, 64);
+  bird.wz = 52;
+  Object.assign(required(bird.predator), {
+    state: "flight",
+    denPlaced: true,
+    flight: {
+      elapsed: 0.5,
+      duration: 1,
+      from: { wx: 64, wy: 64 },
+      to: { wx: 112, wy: 64 },
+      startZ: 48,
+      endZ: 0,
+      lift: 28,
+      attack: false,
+    },
+  });
+  const session = await ScenarioSession.create({
+    version: 1,
+    id: "edited-griffin-landing",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(64, 192),
+    props: [],
+    actors: [bird],
+    traffic: [],
+  });
+  try {
+    await session.step(idle);
+    const animal = () => required(session.realm.entityManager.entities.find((e) => e.predator));
+    expect(animal().wz).toBeGreaterThan(24);
+    session.realm.propManager.add(createProp("prop-griffin-perch", 112, 64));
+    for (let i = 0; i < 60 && animal().predator?.flight; i++) await session.step(idle);
+    expect(animal().predator?.flight).toBeUndefined();
+    expect(animal().predator?.state).toBe("perch");
+    expect(animal().wz).toBe(24);
+    expect(animal().jumpZ).toBeUndefined();
+    expect(animal().position.wx).toBeLessThanOrEqual(112);
+    await session.reload();
+    expect(animal().wz).toBe(24);
+  } finally {
+    await session.close();
+  }
+});

@@ -276,6 +276,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "prop-spider-web",
+      "name": "prop spider web",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/den.png",
+      "width": 80,
+      "height": 40,
+      "tileSize": 16,
+      "fingerprint": "b9847d3bdbcffd87394d4a8e9e72a8feb5a5e8d5e6bced85db206aa74bd93f49",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "prop-griffin-perch",
       "name": "prop griffin perch",
       "image": "demos/wildlife-v2/griffin/fierce-v1/den.png",
@@ -333,6 +343,16 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-giant-spider-predator-v1",
+      "name": "wildlife giant spider predator v1",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2216,6 +2236,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-giant-spider-fierce-v1",
+      "name": "wildlife v2 giant spider fierce v1",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -3632,6 +3662,24 @@
       ]
     },
     {
+      "id": "prop:prop-spider-web",
+      "sheetId": "prop-spider-web",
+      "rect": [
+        0,
+        0,
+        80,
+        40
+      ],
+      "label": "prop-spider-web",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FierceDens.ts:16"
+        }
+      ]
+    },
+    {
       "id": "prop:prop-griffin-perch",
       "sheetId": "prop-griffin-perch",
       "rect": [
@@ -3649,7 +3697,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FierceDens.ts:16"
+          "source": "src/wildlife/FierceDens.ts:25"
         }
       ]
     },
@@ -3667,7 +3715,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FierceDens.ts:25"
+          "source": "src/wildlife/FierceDens.ts:34"
         }
       ]
     },
@@ -4597,11 +4645,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:798"
+          "source": "src/generation/regional/NaturalLandscape.ts:819"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:992"
+          "source": "src/generation/regional/NaturalLandscape.ts:1013"
         },
         {
           "system": "World generation",
@@ -23308,6 +23356,28 @@
       ]
     },
     {
+      "id": "sprite:prop-spider-web",
+      "sheetId": "prop-spider-web",
+      "rect": [
+        0,
+        0,
+        80,
+        40
+      ],
+      "label": "prop-spider-web · registered 80×40 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FierceDens.ts:16"
+        }
+      ]
+    },
+    {
       "id": "sprite:prop-griffin-perch",
       "sheetId": "prop-griffin-perch",
       "rect": [
@@ -23329,7 +23399,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FierceDens.ts:16"
+          "source": "src/wildlife/FierceDens.ts:25"
         }
       ]
     },
@@ -23351,7 +23421,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FierceDens.ts:25"
+          "source": "src/wildlife/FierceDens.ts:34"
         }
       ]
     },
@@ -23419,6 +23489,24 @@
         384
       ],
       "label": "wildlife-brown-bear-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-giant-spider-predator-v1",
+      "sheetId": "wildlife-giant-spider-predator-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-giant-spider-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -26967,11 +27055,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:798"
+          "source": "src/generation/regional/NaturalLandscape.ts:819"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:992"
+          "source": "src/generation/regional/NaturalLandscape.ts:1013"
         },
         {
           "system": "World generation",

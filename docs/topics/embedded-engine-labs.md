@@ -40,7 +40,10 @@ same source banks, collisions, save/reload and audio/footstep consumers. Source
 reviews remain immutable pending identities. Dragons guard durable hoards; wolves
 coordinate stable packs. Griffin flight uses shared PredatorMotion and the ordinary
 EntityManager collision/landing loop, including mid-flight saves, interruption
-and actual rock/tree support. The spider stage remains in progress.
+and actual rock/tree support, including ordinary landing-surface queries when
+scenery is edited during descent. Live review fingerprints include Realm,
+EntityManager, movement, diets, fierce profiles and dens. Spider web ambush and natural/placed food-chain
+compositions also run ordinary shared authority; the lab has no private AI.
 
 ## City outskirts speedways
 

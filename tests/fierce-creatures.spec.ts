@@ -47,11 +47,15 @@ for (const p of FIERCE_PROFILES)
         Math.hypot((fed?.x ?? 0) - (warning?.x ?? 0), (fed?.y ?? 0) - (warning?.y ?? 0)),
       ).toBeGreaterThan(10);
       await canvas.screenshot({ path: testInfo.outputPath("feeding.png") });
-      if (["dragon", "griffin"].includes(p.fierce?.kind ?? "")) {
+      if (["dragon", "griffin", "spider"].includes(p.fierce?.kind ?? "")) {
         const dens = JSON.parse((await canvas.getAttribute("data-fierce-dens")) ?? "[]");
         expect(dens).toHaveLength(1);
         expect(dens[0]?.type).toBe(
-          p.fierce?.kind === "dragon" ? "prop-dragon-hoard" : "prop-griffin-perch",
+          p.fierce?.kind === "dragon"
+            ? "prop-dragon-hoard"
+            : p.fierce?.kind === "griffin"
+              ? "prop-griffin-perch"
+              : "prop-spider-web",
         );
         await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
         await expect(canvas).toHaveAttribute("data-reload-count", "1");

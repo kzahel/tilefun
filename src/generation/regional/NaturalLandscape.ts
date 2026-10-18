@@ -658,6 +658,27 @@ export class NaturalLandscape {
         predator,
       });
     }
+    if (p.fierce?.kind === "spider") {
+      // Its explicit diet excludes deer. Seed small natural prey in the web's
+      // clearing without changing any pre-existing glade/animal identity.
+      for (let i = 0; i < 2; i++) {
+        const x = wx + 40 + i * 16,
+          y = wy + 24 - i * 32;
+        if (Math.floor(x / 256) !== cx || Math.floor(y / 256) !== cy) continue;
+        const rabbit = required(createRabbit(x, y).rabbit);
+        rabbit.home = { wx, wy };
+        rabbit.radius = 112;
+        rabbit.randomState = Math.floor(h(8361 + i) * 4294967296) >>> 0;
+        actors.push({
+          featureId: `wildlife:fierce-prey:${this.world.seed}:${glade.id}:${i}`,
+          type: RABBIT_TYPE,
+          wx: x,
+          wy: y,
+          route: [],
+          rabbit,
+        });
+      }
+    }
     return actors;
   }
 

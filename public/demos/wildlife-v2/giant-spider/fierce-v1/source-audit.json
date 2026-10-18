@@ -1,0 +1,36 @@
+{
+  "identity": "giant-spider-fierce-v1",
+  "poses": 164,
+  "meshCount": 52,
+  "fixedLengthLinkChecks": 3936,
+  "plantedGroundContacts": 1216,
+  "stanceTravelCompensationChecks": 544,
+  "maxProjectionError": 5.000000001587068e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 1.37888,
+      "head": 1.87292,
+      "shoulder": 1.71232,
+      "pelvis": 1.39385
+    },
+    "up": {
+      "body": 1.37888,
+      "head": 1.44195,
+      "shoulder": 1.46054,
+      "pelvis": 1.93161
+    },
+    "left": {
+      "body": 1.60044,
+      "head": 1.91641,
+      "shoulder": 1.75593,
+      "pelvis": 1.39449
+    },
+    "right": {
+      "body": 1.60044,
+      "head": 1.47329,
+      "shoulder": 1.43466,
+      "pelvis": 1.8376
+    }
+  },
+  "status": "Saved-source integrity passes; human art approval is separate."
+}
