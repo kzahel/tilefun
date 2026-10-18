@@ -6,6 +6,7 @@ import {
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import { PeerConnectionDiagnostics } from "./PeerConnectionDiagnostics.js";
 import { peerOptions } from "./peerOptions.js";
 import type { ConnectionIdentity, IClientTransport, IServerTransport } from "./Transport.js";
 import { routeServerMessageChannel } from "./webrtcChannels.js";
@@ -32,6 +33,7 @@ export class PeerHostTransport {
   private remoteClients = new Map<string, DataConnection>();
   private remoteEntitiesFallbackLogged = new Set<string>();
   private closed = false;
+  private diagnostics = new WeakMap<DataConnection, PeerConnectionDiagnostics>();
 
   constructor(peerId?: string) {
     const opts = peerOptions();
@@ -70,7 +72,7 @@ export class PeerHostTransport {
           }
           const conn = self.remoteClients.get(clientId);
           if (conn?.open) {
-            conn.send(encodeServerMessage(msg));
+            self.diagnostics.get(conn)?.send(msg.type, encodeServerMessage(msg));
           }
         }
       },
@@ -87,7 +89,7 @@ export class PeerHostTransport {
             self.logRemoteEntitiesFallbackOnce(clientId);
           }
           if (conn.open) {
-            conn.send(buf);
+            self.diagnostics.get(conn)?.send(msg.type, buf);
           }
         }
       },
@@ -128,7 +130,7 @@ export class PeerHostTransport {
 
     this.peer.on("disconnected", () => {
       console.warn("[tilefun] P2P host disconnected from signaling server — attempting reconnect");
-      this.peer.reconnect();
+      if (!this.closed) this.peer.reconnect();
     });
 
     this.peer.on("error", (err) => {
@@ -197,13 +199,18 @@ export class PeerHostTransport {
     this.remoteEntitiesFallbackLogged.delete(clientId);
 
     this.remoteClients.set(clientId, conn);
+    const diagnostics = new PeerConnectionDiagnostics("host", conn);
+    this.diagnostics.set(conn, diagnostics);
 
     conn.on("open", () => {
+      if (this.closed || this.remoteClients.get(clientId) !== conn) return;
+      diagnostics.opened();
       console.log(`[tilefun] P2P guest connected: ${clientId}`);
       this.connectHandler?.(clientId);
     });
 
     conn.on("data", (data) => {
+      if (this.closed || this.remoteClients.get(clientId) !== conn) return;
       try {
         const buf =
           data instanceof ArrayBuffer ? data : ((data as Uint8Array).buffer as ArrayBuffer);
@@ -216,6 +223,7 @@ export class PeerHostTransport {
 
     conn.on("close", () => {
       if (this.remoteClients.get(clientId) === conn) {
+        if (!this.closed) diagnostics.log("host channel closed");
         this.remoteClients.delete(clientId);
         this.remoteEntitiesFallbackLogged.delete(clientId);
         this.disconnectHandler?.(clientId);
@@ -223,11 +231,12 @@ export class PeerHostTransport {
     });
 
     conn.on("error", (err) => {
-      console.error(`[tilefun] P2P error for ${clientId}:`, err);
+      diagnostics.log("host connection error", err);
       if (this.remoteClients.get(clientId) === conn) {
         this.remoteClients.delete(clientId);
         this.remoteEntitiesFallbackLogged.delete(clientId);
         this.disconnectHandler?.(clientId);
+        conn.close();
       }
     });
   }

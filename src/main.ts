@@ -170,7 +170,8 @@ const STATUS_LABELS: Record<PeerGuestStatus, string> = {
   "connecting-host": "Searching for host...",
   "ice-checking": "Establishing peer connection...",
   "ice-connected": "Opening data channel...",
-  "datachannel-open": "Connected!",
+  "datachannel-open": "Loading world...",
+  "receiving-state": "Connected!",
   reconnecting: "Reconnecting to host...",
   failed: "Connection failed",
 };
@@ -209,12 +210,18 @@ function createConnectionOverlay(onCancel: () => void) {
   `;
   cancelBtn.addEventListener("click", onCancel);
 
-  el.append(spinner, statusEl, detailEl, cancelBtn);
+  const retryBtn = document.createElement("button");
+  retryBtn.textContent = "Retry";
+  retryBtn.style.cssText = cancelBtn.style.cssText;
+  retryBtn.hidden = true;
+  retryBtn.addEventListener("click", () => window.location.reload());
+  el.append(spinner, statusEl, detailEl, retryBtn, cancelBtn);
 
   activateMenu(el, onCancel, false);
   return {
     el,
     update(status: PeerGuestStatus, detail?: string) {
+      retryBtn.hidden = status !== "failed";
       statusEl.textContent = STATUS_LABELS[status] || status;
       detailEl.textContent = detail || "";
       if (status === "failed") {
@@ -319,7 +326,7 @@ async function start() {
       window.location.href = url.toString();
     });
     document.body.appendChild(overlay.el);
-    overlay.el.querySelector("button")?.focus();
+    overlay.el.querySelector<HTMLButtonElement>("button:not([hidden])")?.focus();
 
     peerTransport.onStatus = (status, detail) => {
       overlay.update(status, detail);
@@ -344,8 +351,13 @@ async function start() {
           activateMenu(overlay.el, () => cancelSessionJoin());
         }
         overlay.update(status, detail);
-      } else if (status === "datachannel-open") {
+        if (status === "failed")
+          overlay.el.querySelector<HTMLButtonElement>("button:not([hidden])")?.focus();
+      } else if (status === "receiving-state") {
+        deactivateMenu(overlay.el);
         overlay.el.remove();
+      } else if (overlay.el.parentNode) {
+        overlay.update(status, detail);
       }
     };
 
@@ -368,7 +380,7 @@ async function start() {
     const peerHost = new PeerHostTransport(playerId);
     const overlay = createConnectionOverlay(cancelSessionJoin);
     document.body.append(overlay.el);
-    overlay.el.querySelector("button")?.focus();
+    overlay.el.querySelector<HTMLButtonElement>("button:not([hidden])")?.focus();
     let peerId: string;
     try {
       peerId = await peerHost.ready();

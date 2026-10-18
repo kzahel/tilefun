@@ -1,8 +1,8 @@
 # Multiplayer networking
 
 Topic: multiplayer-networking
-Status: dependent entity frames and world transitions use reliable ordered sync.
-The bounded correctness fix is complete; broader network investigation is deferred.
+Status: reliable ordered replication and fragmented P2P snapshots; bounded guest
+recovery with failure diagnostics. Broader network investigation is deferred.
 Updated: 2026-10-18.
 
 Owns ongoing transport/replication decisions and gaps. The
@@ -20,6 +20,54 @@ PeerJS guests negotiate **binary** serialization: its built-in chunking keeps wo
 snapshots below SCTP message limits. Raw serialization disconnected guests during
 initial world transfer; the two-browser host/join/leave regression exercises actual
 signaling and world data. Matching builds remain required for the gameplay codec.
+
+## P2P reconnect-loop correction (2026-10-18)
+
+The raw-serialization build reproduced the reported zoom-1 loop through the real
+PeerJS host/guest game with local signaling. A 507,306-byte `sync-chunks` expansion
+exceeded Chromium's measured 262,144-byte SCTP message limit. PeerJS caught the
+native send exception and closed; reconnect then retried a 662,134-byte baseline.
+Resetting the retry count on every channel open made every drop `Attempt 1/5`.
+These sizes are one seeded reproduction, not universal browser limits.
+
+Guests now negotiate PeerJS binary serialization (also integrated by the packaged
+host/join work above). It wraps the existing gameplay ArrayBuffer and fragments it;
+reliable SCTP delivery alone does not remove the per-message size limit. The same
+large transfers and a forced reconnect passed with packets at most 16,331 bytes.
+Both endpoints still require matching gameplay codecs; old raw guests must update.
+
+PeerJS error-level logging is enabled through a shared logger that retains original
+exception objects/stacks. Per-connection diagnostics retain only the last outgoing
+message type/byte count, age, native state, buffered bytes and negotiated message
+limit. Native handles/limits survive PeerJS clearing its fields before `close`.
+No payloads, per-frame histories or routine telemetry uploads are added.
+
+Guest recovery allows five retries at two-second intervals. An unopened attempt
+times out after 30 seconds; duplicate/obsolete connection callbacks and canceled
+timers cannot start extra retries. The budget resets only after ten seconds of
+advancing server frames without a gap over three seconds. Brief opens, repeated
+old ticks and idle time cannot reset it. A terminal failure leaves Retry (reload
+this invitation) and Back (leave the invitation) usable instead of emitting a
+synthetic kick that covers those controls with another overlay. Reconnect overlays
+wait for decoded world frames or a lobby list before disappearing.
+
+[Guest lifecycle unit tests](../../src/transport/PeerGuestTransport.test.ts) cover
+short-lived connections, health reset, gaps, stale callbacks, offer errors, attempt
+timeouts and cancellation. [P2P browser regressions](../../tests/p2p-recovery.spec.ts)
+use a local PeerServer and full bundled Chromium with fresh browser contexts:
+preload the host overview, join, zoom to 1, require a reassembled message over
+the negotiated SCTP limit, force native channel closure and require resumed
+replication. A second case exhausts rapid reconnects and exercises Retry and Back.
+This is local native SCTP correctness evidence, not WAN/NAT/congestion or
+cross-browser coverage.
+
+Validation: typechecks, 2,867 unit tests, lint (existing warnings), production
+build, regenerated catalog/manifest and all six streaming readiness scenarios
+pass. Both new P2P browser cases pass in isolation and the full suite. The full
+browser run records 706 passes and one failure in the previously recorded
+`authored-train` renderer-swap snapshot check: it briefly reads no carriages.
+Two of three one-worker isolated reruns pass; one repeats that snapshot failure.
+The intermittent train check remains separate follow-up work.
 
 ## Current contract
 
