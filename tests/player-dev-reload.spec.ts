@@ -41,6 +41,7 @@ test("dev full reload restores the indoor player and scopes the editor camera to
       `${origin}?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     await page.getByRole("button", { name: /Enter apartment/ }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
     const state = () =>

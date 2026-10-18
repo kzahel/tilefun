@@ -84,6 +84,7 @@ for (const [name, x, y, spectators] of [
     });
     await page.goto(`/tilefun/?${params}`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     const canvas = page.locator("#game");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect

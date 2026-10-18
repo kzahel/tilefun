@@ -183,6 +183,7 @@ test("main-game handoff realizes shopping centers and native parked cars", async
   await page.goto(link);
   await page.getByPlaceholder("World name...").fill("City shopping integration");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 30000 });
   await expect
     .poll(() =>

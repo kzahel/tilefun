@@ -104,3 +104,12 @@ world joins before capturing container identity. No menu runtime behavior change
 All six generation/recreation checks pass three consecutive single-worker full
 Chromium runs (18 checks total); typechecks and lint pass. The full eight-case
 vehicle-driving file also passes, including the prior CI reversal failure.
+
+The subsequent predator deletion failure in run
+[39172392731](https://github.com/kzahel/tilefun/actions/runs/39172392731)
+exposes the same old-world identity race as the train renderer check. A successful
+creation request is followed by an asynchronous join; initial canvas readiness
+and matching generation metadata can still belong to the prior world. The
+creation-fixture audit adds the missing menu-close wait before inspecting or
+acting on the new world in 29 browser test files. Existing equivalent waits and
+invalid-seed checks are retained. No product or gameplay assertions are relaxed.

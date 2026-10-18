@@ -17,6 +17,7 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
     `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await page.waitForFunction(({ x, y }) => {
     // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
     const g = (document.querySelector("#game") as any).__game;

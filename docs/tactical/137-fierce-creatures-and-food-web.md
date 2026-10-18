@@ -210,3 +210,11 @@ All 2,871 unit tests, the three focused food-chain cases, typechecks and lint pa
 locally. The required
 production-status refresh was attempted, but this checkout lacks the local
 `data/wildlife-campaign-v2/progress.json`; existing production status is preserved.
+
+The next CI run reaches small-dragon editing but fails deletion (two animals
+remain instead of one). Like the train renderer fixture, this test can capture
+an old-world entity ID before the requested new world joins. Waiting for the
+creation menu to close before querying animals fixes the fixture; all nine
+predator species pass twice (18 browser checks), including durable reopening.
+The shared creation-fixture audit is recorded in 139. No wildlife runtime,
+artwork, population rules or assertions changed.

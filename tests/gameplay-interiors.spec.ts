@@ -27,6 +27,7 @@ for (const kind of ["apartment", "shop"] as const)
       `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     const enter = page.getByRole("button", { name: new RegExp(`Enter ${kind}`) });
     await expect(enter).toBeVisible();
     await page.keyboard.press("e");

@@ -9,6 +9,7 @@ async function flatWorld(page: Page) {
     `/tilefun/?perf&nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
   await page.waitForFunction(() => {
     // biome-ignore lint/suspicious/noExplicitAny: test hook

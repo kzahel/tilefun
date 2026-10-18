@@ -88,6 +88,7 @@ test("ordinary ball throws ricochet from a robin, trigger a short escape flight"
     `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
@@ -161,6 +162,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   );
   await page.getByPlaceholder("World name...").fill("Durable robin grove");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const robins = () =>
     page.evaluate((type) => {

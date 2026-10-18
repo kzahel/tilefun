@@ -25,6 +25,7 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   ]);
   await page.getByRole("textbox", { name: "World seed" }).fill("2026");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute(
     "data-generation",
     JSON.stringify(createDescriptor("regional", 2026)),
@@ -98,6 +99,7 @@ test("explorer handoff preserves settings and game reports an invalid seed", asy
   await expect(page.getByRole("alert")).toContainText("Seed");
   await page.getByRole("textbox", { name: "World seed" }).fill("2026");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "regional");
 });
 

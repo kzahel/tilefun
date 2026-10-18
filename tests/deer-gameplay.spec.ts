@@ -81,6 +81,7 @@ test("ordinary ball throws ricochet from a deer, trigger a short grounded escape
     `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
@@ -144,6 +145,7 @@ test("ordinary woodland deer support manual creation and durable deletion on wor
   );
   await page.getByPlaceholder("World name...").fill("Durable deer woodland");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const deer = () =>
     page.evaluate((type) => {

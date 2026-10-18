@@ -6,6 +6,7 @@ async function play(page: Page) {
     `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
   await page.waitForFunction(
     () => (document.querySelector("#game") as HTMLCanvasElement).dataset.ready === "true",

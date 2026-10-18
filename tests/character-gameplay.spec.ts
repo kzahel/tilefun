@@ -53,6 +53,7 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
   await page.getByTestId("player-model-picker").locator("summary").click();
   await openCreate(page);
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();

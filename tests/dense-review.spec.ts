@@ -134,6 +134,7 @@ test("archived dense review hands off to the current station start with a moving
   await expect(page.locator("#regional-revision")).toHaveValue("regional-v5");
   await page.getByRole("link", { name: "Create current world with this seed" }).click();
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute(
     "data-generation",
     JSON.stringify(createDescriptor("regional", 2026)),
@@ -174,6 +175,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
   await expect(page.locator("#app")).toHaveAttribute("data-tile-complete", "true");
   await page.getByRole("link", { name: "Play here" }).click();
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute(
     "data-generation",
     JSON.stringify(generation),
@@ -294,6 +296,7 @@ for (const kind of ["shop", "apartment"] as const)
       `/tilefun/?generation=${encodeURIComponent(JSON.stringify(createDescriptor("regional", 2026)))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     const enter = page.getByRole("button", { name: new RegExp(`Enter ${kind}`) });
     await expect(enter).toBeVisible();
     await enter.click();

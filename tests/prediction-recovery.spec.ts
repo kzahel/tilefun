@@ -11,6 +11,7 @@ for (const renderer of ["canvas", "gpu"]) {
       `/tilefun/?perf&nogamepad&renderer=${renderer}&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;

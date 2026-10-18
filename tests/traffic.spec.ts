@@ -62,6 +62,7 @@ test("traffic revision creates a real Worker world and survives reload", async (
   await expect(c).toHaveAttribute("data-ready", "true");
   await page.getByPlaceholder("World name...").fill("Traffic test");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(c).toHaveAttribute("data-generation", JSON.stringify(generation));
   await expect
     .poll(

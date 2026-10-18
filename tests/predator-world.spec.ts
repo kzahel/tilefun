@@ -34,6 +34,7 @@ for (const p of PREDATOR_PROFILES) {
     );
     await page.getByPlaceholder("World name...").fill(`Natural ${p.species}`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     const game = page.locator("#game");
     await expect(game).toHaveAttribute("data-ready", "true", { timeout: 15000 });
     const animals = () =>

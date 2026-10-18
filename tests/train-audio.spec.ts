@@ -27,6 +27,7 @@ test("moving trains produce real stereo audio and silence on menu/focus/scene ex
   );
   await page.getByPlaceholder("World name...").fill("Train sounds");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect
     .poll(() =>
       page.evaluate(() => {

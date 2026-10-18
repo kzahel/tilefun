@@ -46,6 +46,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     );
     await page.getByPlaceholder("World name...").fill(`City train ride ${backend}`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect(page.locator("#game")).toHaveAttribute(
       "data-generation",

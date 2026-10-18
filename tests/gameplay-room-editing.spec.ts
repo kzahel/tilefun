@@ -69,6 +69,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
     `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await enter(page);
   await page.locator("#game").click({ position: { x: 700, y: 100 } });
   await page.keyboard.press("Tab");

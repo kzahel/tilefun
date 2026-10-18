@@ -94,6 +94,7 @@ test("ordinary ball throws ricochet from a frog, trigger a croak and a short esc
     `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
@@ -169,6 +170,7 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
   );
   await page.getByPlaceholder("World name...").fill("Durable frog pond");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const frogs = () =>
     page.evaluate((type) => {

@@ -13,6 +13,7 @@ for (const phone of [false, true]) {
       `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("regional", 2026)))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
+    await expect(page.getByTestId("world-menu")).toBeHidden();
     await expect(page.locator("#game")).toHaveAttribute(
       "data-generation",
       JSON.stringify(createDescriptor("regional", 2026)),

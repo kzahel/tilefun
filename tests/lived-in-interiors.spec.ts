@@ -37,6 +37,7 @@ for (const renderer of ["canvas", "gpu"])
         `/tilefun/?renderer=${renderer}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
       );
       await page.getByRole("button", { name: "New World", exact: true }).click();
+      await expect(page.getByTestId("world-menu")).toBeHidden();
       await page.getByRole("button", { name: /^Enter (shop|apartment)/ }).click();
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
       await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "idle");
