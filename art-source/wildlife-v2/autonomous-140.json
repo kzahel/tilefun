@@ -121,9 +121,13 @@
     "butterfly": {
       "name": "Butterfly",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T21:24:47Z",
+      "receipt": "art-source/wildlife-v2/butterfly/roster-v2/receipt.json",
+      "evidence": "Fresh painted wing panels; 1040 rigid wing checks, 24 ground-rest foot contacts; 65 half-poses/facing; byte-identical replay; 328 exact crops; physical airborne save/reload; landing-only spider catches and natural-only replacement; seven browser checks"
     },
     "ant": {
       "name": "Ant",
@@ -262,9 +266,9 @@
     "red-squirrel": {
       "name": "Red squirrel",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2"
     },
     "bear": {
       "name": "Brown bear",
@@ -1559,6 +1563,13 @@
         "chicken"
       ],
       "validation": "Typecheck/lint/build, 899-candidate manifest, three chicken browser tests and streaming --assert-ready pass. Full units: 2836 pass, 5 known Windows failures, 10 skipped. 169 fixed natural expansion slots preserve original habitat owners."
+    },
+    {
+      "utc": "2026-10-18T21:24:47Z",
+      "completed": [
+        "butterfly"
+      ],
+      "validation": "Typecheck/lint/build, 904-candidate manifest, seven butterfly/food-chain browser tests pass. Full rerun: 2853 pass, 5 known Windows failures, 10 skipped. Body-contact tests sample active short escapes; catch rules reject airborne prey over 1px."
     }
   ],
   "existingOutsideRoster": [
@@ -1572,6 +1583,12 @@
   "familyReferences": {
     "ground-birds": {
       "animal": "chicken",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    },
+    "flutterers": {
+      "animal": "butterfly",
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"

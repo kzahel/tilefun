@@ -4913,5 +4913,102 @@
         "sha256": "e2a1370f3da4c996c9c0d85efafd0943afc77b38b23abf2543cc170e005bc7b3"
       }
     ]
+  },
+  {
+    "id": "butterfly-roster-v2",
+    "animalId": "butterfly",
+    "revision": "roster-v2",
+    "name": "Butterfly · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/butterfly/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-butterfly-roster-v2",
+      "name": "Butterfly sheet",
+      "image": "demos/wildlife-v2/butterfly/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "480839ec7e39795e12275c3607b52d19647876d1881e2e35ea00e0e7b2fd8f8d",
+      "source": "art-source/wildlife-v2/butterfly/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-butterfly-roster-v2-scene",
+      "name": "Butterfly scene",
+      "image": "demos/wildlife-v2/butterfly/roster-v2/scene-native.png",
+      "width": 288,
+      "height": 56,
+      "tileSize": 16,
+      "fingerprint": "e964ae8f9f1f4f8866d30d17d6514d9e2bc4c0de5240d7d15a75cd002fdc30b9",
+      "source": "art-source/wildlife-v2/butterfly/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-butterfly-roster-v2-contact",
+      "name": "Butterfly contact",
+      "image": "demos/wildlife-v2/butterfly/roster-v2/contact-sheet-native.png",
+      "width": 256,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "ad3a82eb7ab9735d643d51f09aed3c28e69546c37f32191877ac45a6b0bb5553",
+      "source": "art-source/wildlife-v2/butterfly/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/butterfly/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/contact-sheet-native.png",
+        "sha256": "ad3a82eb7ab9735d643d51f09aed3c28e69546c37f32191877ac45a6b0bb5553"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/index.html",
+        "sha256": "d9bf560f2a1ed0d59fe9f8711223a1c13b614e3b3c75fde7aa3807c13f0f9ec4"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/pixel-audit.json",
+        "sha256": "488e93d7eaef5d6d3c5ceaddb2c0585a99e9a4e912d234f895ba6829a0fb41fc"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/preview-native.gif",
+        "sha256": "0ab70f555197580c044b9ea65be774032210160d7d8fdb140428e6a53ef81684"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/preview.gif",
+        "sha256": "d57a095b8e1d41ba3e36a79218f277ca9929fbe2f8bc987d56442e57b4bdfab6"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/review-observations.md",
+        "sha256": "f11c524086d2e4b5d69dd8b9c67d2e1171cad1da2299584b1cbf9002deebf1ec"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/scene-background.png",
+        "sha256": "44edc921e3ac613b03be21f49e741e43caeb222d1ce3f0537ac6b05054863922"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/scene-native.png",
+        "sha256": "e964ae8f9f1f4f8866d30d17d6514d9e2bc4c0de5240d7d15a75cd002fdc30b9"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/sheet.png",
+        "sha256": "480839ec7e39795e12275c3607b52d19647876d1881e2e35ea00e0e7b2fd8f8d"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/source-audit.json",
+        "sha256": "042bdab023de20b924d191453ef2dba2cee8809d09f52730e38ebad61dafc95b"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/sprite.json",
+        "sha256": "77219b5dd0df6960e617233f19aeb15367fa97f3b15916e263297f19bfc8cdaf"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/travel-native.gif",
+        "sha256": "5316d42d5302af4b7ceb6f877ba45aff3b66be797608945e6c6854a0c099b86c"
+      },
+      {
+        "path": "demos/wildlife-v2/butterfly/roster-v2/validation.json",
+        "sha256": "4a4ba6882061dcd5dc4b7dcb7744a760e3558bf09d4f1bd171fa9138b431ce1e"
+      }
+    ]
   }
 ]

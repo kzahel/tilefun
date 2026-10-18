@@ -1,0 +1,15 @@
+{
+  "identity": "butterfly-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "distinctFlutterPoses": {
+    "down": 24,
+    "up": 19,
+    "left": 22,
+    "right": 22
+  },
+  "wingPaint": "Fixed orange/black/cream source decals, actual wing facing and layer order",
+  "worldFlight": "Shared physical short airborne arcs, with ordinary grounded landings"
+}

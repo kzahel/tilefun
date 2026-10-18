@@ -13,7 +13,16 @@ const pasture = ["deer", "sheep", "goat", "piglet", "kangaroo"] as const;
 /** Explicit game food web. Direction means hunter → prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
-  "giant-spider": ["ant", "rabbit", "frog", "robin", "chicken", "pigeon", "king-cobra"],
+  "giant-spider": [
+    "ant",
+    "butterfly",
+    "rabbit",
+    "frog",
+    "robin",
+    "chicken",
+    "pigeon",
+    "king-cobra",
+  ],
   "dire-wolf": [...small, ...pasture, "fox", "giant-spider"],
   panther: [...small, ...pasture, "fox", "king-cobra", "giant-spider"],
   tiger: [...small, ...pasture, "fox", "cow", "horse", "panther", "dire-wolf", "giant-spider"],

@@ -47,6 +47,12 @@ its ordinary factory/profile automatically; neither owns a private spawn or
 animation policy. Full Chromium game/lab tests and isolated streaming readiness
 pass. Existing natural/placed food lineage rules apply unchanged.
 
+Butterfly short flights use the existing shared timed Fauna airborne path,
+including exact phase/height hydration and ground landing. Spiders use the
+explicit diet entry; shared catch resolution rejects airborne prey above
+1px and preserves natural-only replacement in both game and embedded lab.
+Seven Canvas/GPU butterfly/food-chain browser checks pass.
+
 ## Fierce creatures
 
 [139](../tactical/139-horse-motion-study.md) activates the completed horse and

@@ -4,14 +4,16 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**10 newly completed; 0 in progress; 170 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**11 newly completed; 1 in progress; 168 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
 | Red fox | finished-game-active | [Playback](../public/demos/wildlife-v2/fox/motion-v2/index.html) |
 | African elephant | finished-game-active | [Playback](../public/demos/wildlife-v2/elephant/motion-v2/index.html) |
+| Butterfly | finished-game-active | [Playback](../public/demos/wildlife-v2/butterfly/roster-v2/index.html) |
 | Cat | finished-game-active | [Playback](../public/demos/wildlife-v2/cat/motion-v2/index.html) |
 | Dog | finished-game-active | [Playback](../public/demos/wildlife-v2/dog/motion-v2/index.html) |
+| Red squirrel | in-progress | [Playback](../public/demos/wildlife-v2/red-squirrel/roster-v2/index.html) |
 | White-tailed deer | finished-game-active | [Playback](../public/demos/wildlife-v2/deer/motion-v2/index.html) |
 | Cow | finished-game-active | [Playback](../public/demos/wildlife-v2/cow/motion-v2/index.html) |
 | Sheep | finished-game-active | [Playback](../public/demos/wildlife-v2/sheep/motion-v2/index.html) |
@@ -21,7 +23,7 @@
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T21:02:30.237Z (18/10/2026, 23:02:30 Berlin).
+Snapshot: 2026-10-18T21:25:21.351Z (18/10/2026, 23:25:21 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

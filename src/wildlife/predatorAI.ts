@@ -459,6 +459,7 @@ export function resolvePredatorCatches(
     if (
       !prey?.collider ||
       Math.abs((hunter.wz ?? 0) - (prey.wz ?? 0)) > 4 ||
+      (prey.jumpZ ?? 0) > 1 ||
       (prey.rabbit?.state === "hop" && (prey.wz ?? 0) > (env.surfaceZ?.(prey.position) ?? 0) + 1)
     )
       continue;

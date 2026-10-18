@@ -42,8 +42,14 @@ already delivered, leaving 170 remaining. The hen has a two-legged planted
 walk and peck, and spawns through a separate fixed expansion bank. New profiles
 leave existing habitat owner selection intact; the shared world/editor/lab
 consume the same definition and ordinary natural-origin meal policy. Ground-
-bird source/playback, three game tests and streaming readiness pass. Butterfly
-and red squirrel family prototypes are next.
+bird source/playback, three game tests and streaming readiness pass. Butterfly also now spawns as a fresh orange/black/cream flutterer. Shared
+physical short flights land/rest between trips and preserve midair save phase.
+Spiders can hunt it after landing; catch resolution rejects jumpZ above 1px.
+Natural replacements retain lineage and placed butterflies remain finite.
+Source/replay/crops, seven game/food-chain browser tests and the final full
+unit rerun pass apart from the five documented Windows failures. Eleven new
+entries plus sixteen delivered leave 169 remaining. Red squirrel integration
+and a fresh gorilla prototype are next.
 
 ## Horse and giraffe motion
 

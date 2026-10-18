@@ -177,8 +177,12 @@ describe.each(FAUNA_PROFILES)("$species ordinary wildlife body", (p) => {
           return;
         }
         expect(animal.wanderAI?.state).toBe("scared");
-        for (let i = 0; i < 40; i++) await s.step(idle, 1 / 60);
+        for (let i = 0; i < 40 && animal.fauna?.state !== "flee"; i++) await s.step(idle, 1 / 60);
         expect(animal.fauna?.state).toBe("flee");
+        // Capture an active phase even for a short butterfly flight.
+        for (let i = 0; i < 5; i++) await s.step(idle, 1 / 60);
+        expect(animal.fauna?.state).toBe("flee");
+        expect(animal.fauna?.motion?.elapsed).toBeGreaterThan(0);
         const saved = encodeActor(animal);
         await s.reload();
         const restored = required(s.realm.entityManager.entities.find((e) => e.type === TYPE));

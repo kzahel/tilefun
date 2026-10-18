@@ -197,6 +197,7 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       required(animal.fauna).timer = 0;
       updateFaunaAI(animal, 0.1, open, [animal], []);
       expect(animal.fauna?.state).toBe("travel");
+      const target = { ...required(animal.fauna).target };
       for (let i = 0; i < 27; i++)
         manager.update(
           1 / 60,
@@ -206,8 +207,12 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
           undefined,
           () => 0,
         );
+      const travelled = p.hop
+        ? Math.hypot(target.wx - 64, target.wy - 64) *
+          Math.max(0, Math.min(1, (0.45 - p.hop.push) / (p.hop.land - p.hop.push)))
+        : WALK_SPEED * 0.45;
       expect(Math.hypot(animal.position.wx - 64, animal.position.wy - 64)).toBeCloseTo(
-        p.hop ? 0 : WALK_SPEED * 0.45,
+        travelled,
         3,
       );
       if (p.hop && animal.fauna?.motion) expect(animal.wz ?? 0).toBeGreaterThanOrEqual(0);

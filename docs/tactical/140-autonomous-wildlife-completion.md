@@ -113,3 +113,21 @@ assertion; distinguish them from newly introduced failures.
   evidence uses compact hulls to avoid repeating this storage cost.
   Current total: ten new completions, sixteen preserved/delivered, 170 remaining.
   Ground-bird prototype is agent-inspected; human art review remains pending.
+
+- 21:24 UTC: fresh `butterfly/roster-v2` finished in world/editor/shared lab.
+  Four fixed painted orange/black/cream wing panels, basking rest, leg tuck
+  and coiling-proboscis action. Two wing beats per 640ms short physical flight
+  arc; six foot pads rest on ground between trips. Source audit covers 65
+  half-poses/facing, 1,040 rigid wing distances and 24 rest contacts. Replay
+  and 328 exact Chromium crops pass. Explicit spider diet includes butterfly.
+  Catch resolution now rejects prey with jumpZ above 1px, preserving airborne
+  phases; focused tests prove landing-only catches, natural lineage replacement
+  and no replacement for manually created butterflies. Physical arc/airborne
+  save/reload and seven Canvas/GPU food-chain/gameplay browser checks pass.
+  Generic hop distance tests now check actual progress between push and landing;
+  contact tests capture active short escape phases before they finish. The
+  first full run exposed these two old-duration assumptions; both were fixed.
+  Final full rerun: 2,853 pass, five known Windows failures, ten skipped.
+  Typecheck/lint/build and 904-candidate manifest pass. Final art remains pending
+  human review. Eleven new entries plus sixteen delivered leave 169 remaining.
+  Red squirrel source/native/replay ready; gorilla follows after integration.
