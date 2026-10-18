@@ -54,6 +54,7 @@ export class ProceduralActors {
         if (!factory) throw new Error(`Unsupported generated actor: ${p.type}`);
         const entity = factory(p.wx, p.wy);
         entity.proceduralId = p.featureId;
+        entity.naturalSpawnId = p.featureId;
         if (p.resident) {
           entity.resident = structuredClone(p.resident);
           entity.persistentId = p.featureId;

@@ -4,6 +4,22 @@ Topic: wildlife
 Status: all 22 existing-sheet species, four pet variants and four authorized predators have durable provisional gameplay. Predator art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
+## Fierce creatures and natural-only replacement
+
+The owner explicitly authorizes T. rex, small dragon, dire wolf, griffin and giant
+spider, their distinct behaviors and cross-species hunting in [137](../tactical/137-fierce-creatures-and-food-web.md).
+The [fantasy manifest](../../art-source/wildlife-v2/fantasy-batch.json) tracks only
+these five; historical campaign/repair holds stay active and art approval remains
+human-owned.
+
+Meal replacements now require known world origin: `proceduralId` identifies
+existing generated animals and durable `naturalSpawnId` carries that lineage
+through their offspring/reloads. Player-created animals have neither and are
+eaten without replacement, even when no safe replacement position exists. Natural
+meals still defer until a safe replacement exists. Ordinary deletion never
+respawns an animal. Unmarked offspring from old saves are not guessed natural.
+This supersedes the unconditional meal-replacement contract from 132.
+
 ## Entity picker visibility
 
 The Entities palette fits each first-frame visible silhouette into its 60 × 40px

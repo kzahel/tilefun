@@ -203,6 +203,23 @@ export function writeStatus() {
       "",
     );
   }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/fantasy-batch.json"))) {
+    const batch = read("art-source/wildlife-v2/fantasy-batch.json");
+    lines.splice(
+      lines.indexOf("## Whole roster"),
+      0,
+      "## Authorized fierce creatures",
+      "",
+      "[Tactical 137](tactical/137-fierce-creatures-and-food-web.md). Five named creatures only; explicit food web and natural-only replacement. Human art review remains pending.",
+      "",
+      "| Creature | State | Gameplay |",
+      "| --- | --- | --- |",
+      ...batch.animals.map((p) =>
+        `| ${clean(p.id)} | ${clean(p.state)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
+      ),
+      "",
+    );
+  }
   const output = resolve(ROOT, "docs/wildlife-status.md");
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));

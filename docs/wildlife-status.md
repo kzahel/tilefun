@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T14:39:19.938Z (18/10/2026, 16:39:19 Berlin).
+Snapshot: 2026-10-18T15:19:29.273Z (18/10/2026, 17:19:29 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -233,6 +233,18 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | panther | draft-ready | Editable art and exact pending review; world/editor/hunting/reload validated · [Playback](../public/demos/wildlife-v2/panther/hunt-v1/index.html) | Provisional |
 | lion | draft-ready | Own mane/body source and pending review; world/editor/hunting/reload validated · [Playback](../public/demos/wildlife-v2/lion/hunt-v1/index.html) | Provisional |
 | brown-bear | draft-ready | Own broad bear anatomy/gait and pending review; world/editor/hunting/reload validated · [Playback](../public/demos/wildlife-v2/brown-bear/hunt-v1/index.html) | Provisional |
+
+## Authorized fierce creatures
+
+[Tactical 137](tactical/137-fierce-creatures-and-food-web.md). Five named creatures only; explicit food web and natural-only replacement. Human art review remains pending.
+
+| Creature | State | Gameplay |
+| --- | --- | --- |
+| t-rex | planned | Pending |
+| small-dragon | planned | Pending |
+| dire-wolf | planned | Pending |
+| griffin | planned | Pending |
+| giant-spider | planned | Pending |
 
 ## Whole roster
 

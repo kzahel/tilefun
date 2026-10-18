@@ -223,8 +223,8 @@ export function updatePredatorAI(
   restorePredatorPose(e);
 }
 
-/** Called after collision resolution. A meal creates exactly one new durable
- * identity; no generic removal hook respawns manually deleted animals. */
+/** Called after collision resolution. Only world-origin prey receives a new
+ * durable replacement; player-created prey and ordinary deletions stay gone. */
 export function resolvePredatorCatches(
   manager: EntityManager,
   active: readonly Entity[],
@@ -246,8 +246,12 @@ export function resolvePredatorCatches(
     if (bodyGap(hunter, prey) > 3 || !clearPath(hunter, prey.position, env)) continue;
     const habitat = prey.deer ?? prey.rabbit;
     if (!habitat) continue;
+    // proceduralId supports existing generated saves; replacements retain lineage
+    // without reusing that tombstoned procedural identity. Unknown old origins
+    // are deliberately not inferred from species, habitat or location.
+    const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
     let replacement: Entity | undefined;
-    for (let i = 0; i < 24; i++) {
+    for (let i = 0; naturalSpawnId && i < 24; i++) {
       const angle = random(hunter) * Math.PI * 2,
         r = 48 + random(hunter) * Math.max(0, habitat.radius - 64);
       const point = {
@@ -286,13 +290,14 @@ export function resolvePredatorCatches(
       fresh.radius = habitat.radius;
       fresh.randomState = (random(hunter) * 4294967296) >>> 0;
       if (candidate.deer && prey.deer?.herdId) candidate.deer.herdId = prey.deer.herdId;
+      candidate.naturalSpawnId = naturalSpawnId;
       durableId(candidate);
       replacement = candidate;
       break;
     }
-    if (!replacement) continue;
+    if (naturalSpawnId && !replacement) continue;
     // These synchronous mutations enter the same RealmRecords flush transaction.
-    manager.spawn(replacement);
+    if (replacement) manager.spawn(replacement);
     manager.remove(prey.id);
     ai.meals++;
     ai.cooldown = 35 + random(hunter) * 20;

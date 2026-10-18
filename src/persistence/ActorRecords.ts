@@ -29,6 +29,7 @@ export interface ActorRecord {
 
 /** Explicit semantic fields. Render frames, spatial state and script attributes are transient. */
 export const DURABLE_ENTITY_FIELDS = [
+  "naturalSpawnId",
   "velocity",
   "wanderAI",
   "mallard",

@@ -62,20 +62,23 @@ export function naturalLandscapeRecipe(
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
   const predator = PREDATOR_PROFILES.find((p) => p.species === id);
-  if (!at && predator)
+  if (!at && predator) {
+    const deer = createDeer(108, 64),
+      rabbit = createRabbit(128, 104);
+    // This fixture models a natural population. Editor-created animals carry
+    // neither lineage field and are never replaced when eaten.
+    deer.naturalSpawnId = `nature-${id}-deer`;
+    rabbit.naturalSpawnId = `nature-${id}-rabbit`;
     return {
       version: 1,
       id: `nature-${id}-${profile}-v1`,
       generation: FLAT_SCENARIO,
       player: createPlayer(64, 160),
       props: [],
-      actors: [
-        createPredator(predator.species, 64, 64),
-        createDeer(108, 64),
-        createRabbit(128, 104),
-      ],
+      actors: [createPredator(predator.species, 64, 64), deer, rabbit],
       traffic: [],
     };
+  }
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);

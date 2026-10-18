@@ -115,6 +115,8 @@ export interface Entity {
   playerModel?: string;
   /** Stable generated identity; authoritative residency metadata, separate from runtime IDs. */
   proceduralId?: string;
+  /** Original world-spawn owner, retained by meal replacements; absent on player creations. */
+  naturalSpawnId?: string;
   /** Launch-only ball exemption until its collider clears the thrower's body. Transient. */
   ballThrowerId?: number;
   /** Emergency lights enabled and selected siren style; see EmergencyVehicle. */

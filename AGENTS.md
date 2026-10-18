@@ -29,7 +29,8 @@ For cross-project context, see `~/code/dotfiles/projects/README.md` when availab
   existing frozen-torso repairs plus the explicit four-pet authorization in
   [084](docs/tactical/084-common-pets-and-variations.md) and the explicit tiger-only
   pilot in [131](docs/tactical/131-predators-and-prehistoric-creatures.md) and
-  four-predator art/gameplay in [132](docs/tactical/132-predator-hunting-and-replacement.md);
+  four-predator art/gameplay in [132](docs/tactical/132-predator-hunting-and-replacement.md),
+  and five fierce creatures in [137](docs/tactical/137-fierce-creatures-and-food-web.md);
   other expansion stays stopped.
   Provisional gameplay with existing drafts follows the wildlife topic.
 - Keep this file short: agent guardrails and routing only. Put progress logs,
