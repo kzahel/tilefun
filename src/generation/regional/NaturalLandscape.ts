@@ -22,6 +22,7 @@ import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { FarmsteadSource } from "./FarmsteadPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
+import { RacetrackSource, racetrackReserved } from "./RacetrackPlanner.js";
 import {
   type Bounds,
   intersects,
@@ -113,6 +114,7 @@ export class NaturalLandscape {
   readonly railways: RailwayPlanner;
   readonly farms: FarmsteadSource;
   private readonly districts: DenseDistrictSource;
+  private readonly racetracks: RacetrackSource;
   private dryRefugePlanner?: NaturalLandscape;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private lagoons = new Map<string, NaturalPond | null>();
@@ -130,6 +132,7 @@ export class NaturalLandscape {
     this.railways = new RailwayPlanner(world);
     this.farms = new FarmsteadSource(world);
     this.districts = new DenseDistrictSource(world, true);
+    this.racetracks = new RacetrackSource(world);
   }
   private buildReservations(cx: number, cy: number) {
     const bounds = {
@@ -157,6 +160,7 @@ export class NaturalLandscape {
         })),
       lines: this.railways.query(bounds),
       farms: this.farms.query(bounds),
+      tracks: this.racetracks.query(bounds),
     };
   }
   /** r includes the proposed feature's footprint/visual clearance. */
@@ -172,6 +176,7 @@ export class NaturalLandscape {
         this.reservations.delete(this.reservations.keys().next().value ?? "");
     }
     if (this.farms.reserved(plans.farms, x, y, r)) return true;
+    if (plans.tracks.some((t) => racetrackReserved(t, x, y, r + 4))) return true;
     if (plans.centers.some((b) => near(b, x, y, r + 4))) return true;
     if (plans.region.settlements.some((s) => near(s.bounds, x, y, r + 4))) return true;
     if (plans.region.connections.some((c) => pathDistance(c.points, x, y) <= c.width / 2 + r))

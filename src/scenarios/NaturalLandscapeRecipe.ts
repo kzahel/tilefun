@@ -7,6 +7,7 @@ import {
   type LandscapeProfile,
   NaturalLandscape,
 } from "../generation/regional/NaturalLandscape.js";
+import { RacetrackSource } from "../generation/regional/RacetrackPlanner.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { createDeer } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES } from "../wildlife/Fauna.js";
@@ -35,6 +36,7 @@ export const NATURAL_CASES = [
   { id: "farmstead", name: "Countryside · connected farmstead", seed: 2026, x: 380, y: 897 },
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
+  { id: "racetrack", name: "City outskirts · oval speedway", seed: 2026, x: 462, y: 455 },
   { id: "city-pets", name: "City · cats & dogs", seed: 2026, x: 306, y: 540 },
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
   { id: "grove", name: "Open woodland", seed: 2026, x: -160, y: -512 },
@@ -82,6 +84,20 @@ export function naturalLandscapeRecipe(
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);
+  if (!at && id === "racetrack") {
+    const track = new RacetrackSource(regionalWorld(point.seed)).owner(0, 0);
+    if (!track) throw Error("Missing generated racetrack inspection");
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: createDescriptor("regional", point.seed),
+      landscape: profile,
+      player: createPlayer(track.center.x * 16, (track.center.y + 37) * 16),
+      props: [],
+      traffic: [],
+      trafficPopulation: true,
+    };
+  }
   // Pet-coat arrivals inspect real seeded settlement individuals, whose greens
   // are intentionally excluded by the countryside-only dry-arrival search.
   if (!at && FAUNA_PROFILES.find((p) => p.species === id)?.variantOf) {

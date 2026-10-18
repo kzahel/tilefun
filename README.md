@@ -189,6 +189,13 @@ Inspect the [farmstead](https://tilefun.graehlarts.com/tilefun/workshop.html?geo
 or [city center](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket#/tool/world-geometry)
 in temporary worlds with walking and Save / reload controls.
 
+Fresh regional cities also have large oval speedways on clear outskirts, linked
+to the outer boulevard. Eight sports cars race around two lanes beside checkered
+markings, red/white kerbs, spectator seating and picnic areas. Cars brake for
+people; stopped cars can be driven normally. Look east or west of a city, or
+choose **City outskirts · oval speedway** in the Workshop's World Geometry tool.
+Use a fresh world to inspect the new generation.
+
 ## Characters
 
 Open **Edit → Entities** to place Tiger, Tuxedo Cat, Floppy Dog, Trail Explorer,

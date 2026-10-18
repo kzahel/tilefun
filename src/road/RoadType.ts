@@ -24,6 +24,11 @@ export enum RoadType {
   RailCurveProof = 78,
   /** Native parking ground cells, composed into the ordinary chunk terrain. */
   ParkingStart = 79,
+  /** Current racetrack paint. Parking cells occupy 79–162. */
+  RaceCurbRed = 163,
+  RaceCurbWhite = 164,
+  RaceStart = 165,
+  RaceLane = 166,
 }
 
 /** True if the road type is any non-None road (draws asphalt base). */

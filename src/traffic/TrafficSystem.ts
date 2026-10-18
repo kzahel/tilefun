@@ -319,6 +319,8 @@ export class TrafficSystem {
           !road ||
           road === 2 ||
           road === 6 ||
+          road === RoadType.RaceCurbRed ||
+          road === RoadType.RaceCurbWhite ||
           (!surfaceFollowing &&
             (this.world.getHeightAt(x, y) !== 0 ||
               road === RoadType.RailHorizontalTop ||
@@ -640,6 +642,7 @@ export class TrafficSystem {
     this.time += dt;
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
+      this.populateRacers(players);
       this.populateShopping();
       this.populate(players);
       this.spawnClock = 2;
@@ -686,7 +689,7 @@ export class TrafficSystem {
         reason = "route end";
       }
       const target = Math.min(
-        s.turn ? Math.min(24, this.settings.speed) : this.settings.speed,
+        s.lane.race?.speed ?? (s.turn ? Math.min(24, this.settings.speed) : this.settings.speed),
         Math.sqrt(2 * TRAFFIC_BRAKE * clearance),
       );
       s.speed =
@@ -781,13 +784,16 @@ export class TrafficSystem {
       s.distance += move;
       if (s.distance >= end && s.next) {
         s.distance -= end;
-        if (s.turn) {
+        const connector = s.turn ?? turnPath(s.lane, s.next);
+        // Tangent circuit segments share an endpoint: finish their zero-length
+        // connector now, so every published/saved distance belongs to its path.
+        if (s.turn || connector.length < 0.001) {
           s.lane = s.next;
           delete s.resumePath;
           s.next = undefined;
           s.turn = undefined;
           s.choices++;
-        } else s.turn = turnPath(s.lane, s.next);
+        } else s.turn = connector;
       }
       for (const [node, owner] of this.reservations) {
         if (owner !== s.entity.id) continue;
@@ -871,6 +877,9 @@ export class TrafficSystem {
       const choices = [...graph.lanes.values()]
         .flatMap((lane) => {
           if (
+            // A player parks on the circuit; ordinary road-merge connectors
+            // must never cut across its curved racing lanes or grassy infield.
+            lane.race ||
             lane.width < vehicleRoadWidth(s.entity.type) ||
             !nextLanes(graph, lane, vehicleRoadWidth(s.entity.type)).length
           )
@@ -1167,6 +1176,7 @@ export class TrafficSystem {
       };
       const lanes = [...network.lanes.values()]
         .filter((l) => {
+          if (l.race) return false;
           const p = samplePath(l.path, spawnDistance(l));
           return (
             l.path.length > 160 &&
@@ -1216,6 +1226,31 @@ export class TrafficSystem {
         }
       }
     }
+  }
+  /** Fixed, durable starting grid; moved/deleted racers never refill their old slot. */
+  private populateRacers(players: readonly Entity[]) {
+    const seen = new Set<string>();
+    for (const player of players)
+      for (const lane of this.strategy
+        .trafficNetwork(player.position.wx, player.position.wy)
+        .lanes.values()) {
+        if (!lane.race || seen.has(lane.id)) continue;
+        seen.add(lane.id);
+        const distance = lane.path.length / 2,
+          pose = samplePath(lane.path, distance);
+        const id = this.identity(lane.race.model, lane, distance);
+        if (
+          this.states.size >= 1024 ||
+          !this.visible(pose.x, pose.y) ||
+          !this.canSpawn(id, pose.x, pose.y) ||
+          [...this.states.values()].some((s) => s.entity.proceduralId === id)
+        )
+          continue;
+        const state = this.add(lane.race.model, lane, distance, false);
+        if (this.blocked(state, 0)) {
+          this.entities.remove(state.entity.id, false);
+        } else this.onChange?.(state, false);
+      }
   }
   /** Keep a small halo around supported passengers regardless of free-camera position. */
   supportRanges(players: readonly Entity[]): ChunkRange[] {

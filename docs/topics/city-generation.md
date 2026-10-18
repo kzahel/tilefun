@@ -99,6 +99,22 @@ use the same production generator, shared Worker authority and persistence.
 Their local traffic is suppressed to focus inspection; ordinary game traffic
 remains enabled. Use the regional planning link for settlement-scale geometry.
 
+## City outskirts speedways
+
+[138](../tactical/138-city-outskirts-racetracks.md) adds large oval racetracks beside
+eligible cities, with a paved approach, checkered start line, red/white kerbs,
+eight circulating sports cars, 24 durable spectators and furnished seating/picnic
+areas. East/west placement avoids trunk roads and railways; the venue and access
+reserve dry ground before rural/natural scenery. Existing outer-boulevard driving
+width remains intact. Villages retain their compact footprint. The current
+regional-v13 descriptor remains unchanged; inspect fresh terrain.
+
+The World Geometry **City outskirts · oval speedway** scene uses production
+generation, traffic and shared Worker presentation/save semantics. Its four
+landscape-profile compositions are registered for review; existing promoted banks
+and human decisions remain unchanged. Seed 2026 has its first track at 462,455,
+with a safe spectator arrival at 462,492. See 137 for validation and next work.
+
 ## Next work
 
 [Parking lot patterns](../tactical/131-parking-lot-patterns.md) adds a new

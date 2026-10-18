@@ -31,6 +31,15 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
+## City outskirts speedways
+
+[138](../tactical/138-city-outskirts-racetracks.md) adds a native generated racetrack
+arrival to the natural-landscape playground. Production generation owns the oval,
+access, spectator props and durable population. TrafficSystem owns racing, braking,
+collision, roof support and save/reload in both game and lab; the shared terrain
+cache paints the saved kerb/start-line cells for Canvas and GPU. The lab adds only
+overview framing and inspection data, with the normal GPU/vehicle-mesh default.
+
 ## Lived-in interiors
 
 [136](../tactical/136-lived-in-interiors.md) adds resident activity decisions to the

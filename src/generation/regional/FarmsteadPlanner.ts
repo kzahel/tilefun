@@ -7,6 +7,7 @@ import { edgeHash } from "../RoadGenerator.js";
 import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { pathDistance } from "./PlanGeometry.js";
+import { RacetrackSource, racetrackReserved } from "./RacetrackPlanner.js";
 import {
   type Bounds,
   connectionForOwner,
@@ -41,9 +42,11 @@ export class FarmsteadSource {
   private cache = new Map<string, Farmstead | null>();
   private railways: RailwayPlanner;
   private readonly districts: DenseDistrictSource;
+  private readonly racetracks: RacetrackSource;
   constructor(readonly world: RegionalWorld) {
     this.railways = new RailwayPlanner(world);
     this.districts = new DenseDistrictSource(world, true);
+    this.racetracks = new RacetrackSource(world);
   }
   owner(cx: number, cy: number, axis: "east" | "south"): Farmstead | null {
     const key = `${cx}:${cy}:${axis}`;
@@ -129,6 +132,7 @@ export class FarmsteadSource {
       )
         continue;
       const lines = this.railways.query(reservation);
+      const tracks = this.racetracks.query(reservation);
       const blockedRail = (px: number, py: number, r: number) =>
         lines.some(
           (l) =>
@@ -143,7 +147,11 @@ export class FarmsteadSource {
       let valid = true;
       for (let py = bounds.minY; py <= bounds.maxY && valid; py += 4)
         for (let px = bounds.minX; px <= bounds.maxX; px += 4)
-          if (!dry(px, py) || blockedRail(px, py, 4)) {
+          if (
+            !dry(px, py) ||
+            blockedRail(px, py, 4) ||
+            tracks.some((t) => racetrackReserved(t, px, py, 4))
+          ) {
             valid = false;
             break;
           }
@@ -158,6 +166,7 @@ export class FarmsteadSource {
               py = a.y + ((b.y - a.y) * j) / steps;
             if (
               blockedRail(px, py, 4) ||
+              tracks.some((t) => racetrackReserved(t, px, py, 4)) ||
               [-3, 0, 3].some((d) => !dry(px + (a.y !== b.y ? d : 0), py + (a.x !== b.x ? d : 0)))
             )
               valid = false;

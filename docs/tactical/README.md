@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [138 City outskirts racetracks](138-city-outskirts-racetracks.md) | Large oval speedways, eight durable racing cars, spectator seating and a native game/lab inspection |
 | [137 Fierce creatures and food web](137-fierce-creatures-and-food-web.md) | In progress: five authorized fantasy/prehistoric creatures, cross-predator diets and natural-only meal replacement |
 | [132 Predator hunting and replacement](132-predator-hunting-and-replacement.md) | In progress: tiger hunting and nearby prey replacement, then panther/lion/bear art, shared behavior and world spawning |
 | [131 Predators and prehistoric creatures](131-predators-and-prehistoric-creatures.md) | Tiger Blender/pixel pilot delivered for pending review; panther/lion/bear and optional T. rex remain proposed |

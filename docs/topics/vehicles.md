@@ -433,6 +433,15 @@ Next: exact production model art review and gameplay playtesting; any animated
 steering or equipment motion requires its own clearance qualification.
 
 
+## Racetrack traffic
+
+[138](../tactical/138-city-outskirts-racetracks.md) gives eligible generated cities
+eight durable sports cars on two closed oval lanes. Their ordinary TrafficSystem
+routes carry lane-specific race speeds while retaining body collision/braking,
+roof support, player driving, streaming and saved identities. Ordinary traffic
+has no graph connection into the circuit. The shared natural-landscape playground
+exposes the same generated track and real population, with Canvas/GPU inspection.
+
 ## Shopping visits
 
 [133](../tactical/133-generated-shopping-centers.md) connects native road compacts

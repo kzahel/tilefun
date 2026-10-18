@@ -11,6 +11,8 @@ export interface RoadSegment {
   intercity: boolean;
 }
 export interface Lane {
+  /** Dedicated closed-circuit population; never selected by ordinary traffic. */
+  race?: { model: string; speed: number };
   /** Route follows shared terrain/slab support, including generated road bridges. */
   surfaceFollowing?: boolean;
   /** Required physical patches; absent/deleted/unready geometry blocks the route. */

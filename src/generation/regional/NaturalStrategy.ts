@@ -1,8 +1,11 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { RailwayStrategy } from "../../railway/RailwayStrategy.js";
+import { RoadType } from "../../road/RoadType.js";
 import type { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
+import { insideDenseBounds } from "./DenseDistrictPlanner.js";
 import { type LandscapeProfile, NaturalLandscape } from "./NaturalLandscape.js";
+import { racetrackReserved, racetrackSurface } from "./RacetrackPlanner.js";
 import { settlementPets } from "./SettlementPets.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
@@ -17,11 +20,17 @@ export class NaturalStrategy extends RailwayStrategy {
     super.generate(chunk, cx, cy);
     const bounds = { minX: cx * 16 - 1, minY: cy * 16 - 1, maxX: cx * 16 + 17, maxY: cy * 16 + 17 };
     const farms = this.nature.farms.query(bounds);
+    const tracks = this.racetracks.query(bounds);
     let changed = false;
     for (let sy = 0; sy < 33; sy++)
       for (let sx = 0; sx < 33; sx++) {
         const x = cx * 16 + sx / 2,
           y = cy * 16 + sy / 2;
+        if (tracks.some((t) => racetrackReserved(t, x, y))) {
+          chunk.setSubgrid(sx, sy, TerrainId.Grass);
+          changed = true;
+          continue;
+        }
         const farmTerrain = this.nature.farms.terrain(farms, x, y);
         if (farmTerrain !== undefined) {
           chunk.setSubgrid(sx, sy, farmTerrain);
@@ -39,6 +48,25 @@ export class NaturalStrategy extends RailwayStrategy {
         }
       }
     if (changed) deriveTerrain(chunk);
+    for (let ly = 0; ly < 16; ly++)
+      for (let lx = 0; lx < 16; lx++) {
+        const x = cx * 16 + lx,
+          y = cy * 16 + ly;
+        for (const track of tracks)
+          if (racetrackReserved(track, x + 0.5, y + 0.5)) {
+            const surface = racetrackSurface(track, x, y);
+            // Keep any pre-existing city/outbound road at the access junction.
+            const existing = chunk.getRoad(lx, ly);
+            if (
+              insideDenseBounds(track.bounds, x, y) ||
+              !existing ||
+              ((existing === RoadType.Sidewalk || existing === RoadType.CityPavement) &&
+                surface === RoadType.Asphalt)
+            )
+              chunk.setRoad(lx, ly, surface);
+            chunk.setHeight(lx, ly, 0);
+          }
+      }
   }
   override actors(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
@@ -50,7 +78,17 @@ export class NaturalStrategy extends RailwayStrategy {
       .query(bounds)
       .flatMap((p) => settlementPets(p, this.world.seed))
       .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
-    return [...super.actors(cx, cy), ...residents, ...pets, ...this.nature.wildlife(cx, cy)];
+    const spectators = this.racetracks
+      .query(bounds)
+      .flatMap((t) => t.actors)
+      .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
+    return [
+      ...super.actors(cx, cy),
+      ...residents,
+      ...pets,
+      ...spectators,
+      ...this.nature.wildlife(cx, cy),
+    ];
   }
   override placements(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
@@ -58,6 +96,21 @@ export class NaturalStrategy extends RailwayStrategy {
       ...super.placements(cx, cy),
       ...this.nature.farms.placements(this.nature.farms.query(bounds), bounds),
       ...this.nature.placements(cx, cy),
+      ...this.racetracks
+        .query({
+          minX: bounds.minX - 4,
+          minY: bounds.minY - 6,
+          maxX: bounds.maxX + 4,
+          maxY: bounds.maxY + 6,
+        })
+        .flatMap((t) => t.props)
+        .filter(
+          (p) =>
+            p.wx / 16 >= bounds.minX - 3 &&
+            p.wx / 16 < bounds.maxX + 3 &&
+            p.wy / 16 >= bounds.minY - 1 &&
+            p.wy / 16 < bounds.maxY + 6,
+        ),
     ];
   }
 }

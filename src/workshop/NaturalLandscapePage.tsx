@@ -38,13 +38,15 @@ export default function NaturalLandscapePage() {
     [follow, setFollow] = useState(caseId === "train");
   const [zoom, setZoom] = useState(
       FAUNA_PROFILES.find((p) => p.species === caseId)?.inspectionZoom ??
-        (caseId === "farmstead"
-          ? 0.25
-          : ["village-pets", "city-pets", "city-center"].includes(caseId)
-            ? 0.3
-            : caseId === "pond"
-              ? 0.4
-              : 0.8),
+        (caseId === "racetrack"
+          ? 0.13
+          : caseId === "farmstead"
+            ? 0.25
+            : ["village-pets", "city-pets", "city-center"].includes(caseId)
+              ? 0.3
+              : caseId === "pond"
+                ? 0.4
+                : 0.8),
     ),
     [reset, setReset] = useState(0),
     [error, setError] = useState("");
@@ -119,6 +121,7 @@ export default function NaturalLandscapePage() {
     setPaused(false);
     keys.current.clear();
     const h = new ScenarioPresentationHost(c, recipe, {
+      ...(caseId === "racetrack" ? { defaultRenderer: "gpu-mesh" as const } : {}),
       width: 960,
       height: 640,
       terrain: true,
@@ -146,7 +149,10 @@ export default function NaturalLandscapePage() {
               24,
           };
         }
-        return { wx: p.wx, wy: p.wy - (interpolateWz(target, alpha) ?? 0) - 24 };
+        return {
+          wx: p.wx,
+          wy: p.wy - (interpolateWz(target, alpha) ?? 0) - (caseId === "racetrack" ? 37 * 16 : 24),
+        };
       },
       settings: () => ({
         paused: settings.current.paused,
@@ -274,6 +280,22 @@ export default function NaturalLandscapePage() {
           })),
         );
         const view = h.session.view;
+        if (caseId === "racetrack") {
+          c.dataset.racerPoses = JSON.stringify(
+            view.entities
+              .filter((e) => /^vehicle-v1:car-2[1-6]$/.test(e.type))
+              .map((e) => ({
+                key: e.type,
+                x: e.position.wx,
+                y: e.position.wy,
+                vx: e.velocity?.vx,
+                vy: e.velocity?.vy,
+              })),
+          );
+          c.dataset.spectatorCount = String(
+            view.entities.filter((e) => e.type.startsWith("person")).length,
+          );
+        }
         c.dataset.cityBuildingCount = String(
           view.props.filter((p) => p.type.startsWith("prop-city-dense-v1-")).length,
         );
@@ -356,13 +378,15 @@ export default function NaturalLandscapePage() {
     setFollow(nextCase === "train");
     setZoom(
       FAUNA_PROFILES.find((p) => p.species === nextCase)?.inspectionZoom ??
-        (nextCase === "farmstead"
-          ? 0.25
-          : ["village-pets", "city-pets", "city-center"].includes(nextCase)
-            ? 0.3
-            : nextCase === "pond"
-              ? 0.4
-              : 0.8),
+        (nextCase === "racetrack"
+          ? 0.13
+          : nextCase === "farmstead"
+            ? 0.25
+            : ["village-pets", "city-pets", "city-center"].includes(nextCase)
+              ? 0.3
+              : nextCase === "pond"
+                ? 0.4
+                : 0.8),
     );
     setMessage("");
     const url = new URL(location.href);
@@ -462,6 +486,7 @@ export default function NaturalLandscapePage() {
             onChange={(e) => setZoom(Number(e.target.value))}
           >
             <option value={0.25}>Countryside</option>
+            <option value={0.13}>Speedway overview</option>
             <option value={0.3}>Scenery</option>
             <option value={0.4}>Wide</option>
             <option value={0.6}>Roomy</option>
@@ -477,7 +502,9 @@ export default function NaturalLandscapePage() {
         )}
       </div>
       <p>
-        {predatorCase ? (
+        {caseId === "racetrack" ? (
+          "City outskirts speedway · Eight cars race around the oval. Walk to the spectator seating, picnic area or track; cars stop for people. Use Arrows/WASD to walk, Space to jump, and E beside a stopped car to drive."
+        ) : predatorCase ? (
           "Hunting playground · Arrows/WASD to walk, Space to jump. Watch the predator hunt deer and rabbits; new prey returns nearby after a catch. Throw a ball in the game to interrupt a hunt."
         ) : (
           <>

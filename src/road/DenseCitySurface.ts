@@ -9,6 +9,7 @@ export function isCitySurface(type: number): boolean {
   return type >= RoadType.CityAsphalt && type <= RoadType.CityCrossVBottom;
 }
 export function isCityRoad(type: number): boolean {
+  if (type === RoadType.RaceCurbRed || type === RoadType.RaceCurbWhite) return false;
   if (isParkingSurface(type)) return isParkingRoad(type);
   return isRoad(type) && type !== RoadType.Sidewalk && type !== RoadType.CityPavement;
 }

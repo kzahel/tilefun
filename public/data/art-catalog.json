@@ -3628,6 +3628,10 @@
       "kind": "prop",
       "consumers": [
         {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:154"
+        },
+        {
           "system": "Street starter review (candidate)",
           "source": "src/generation/regional/StreetRecipes.ts:41"
         },
@@ -3885,7 +3889,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:182"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:191"
         }
       ]
     },
@@ -3911,7 +3915,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:182"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:191"
         }
       ]
     },
@@ -4354,6 +4358,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:718"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:155"
         }
       ]
     },
@@ -4445,11 +4453,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:744"
+          "source": "src/generation/regional/NaturalLandscape.ts:749"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:938"
+          "source": "src/generation/regional/NaturalLandscape.ts:943"
         },
         {
           "system": "World generation",
@@ -4485,7 +4493,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:72"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:80"
         }
       ]
     },
@@ -4562,6 +4570,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:220"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:157"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:158"
         }
       ]
     },
@@ -4599,7 +4615,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:175"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:184"
         }
       ]
     },
@@ -5105,7 +5121,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:171"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:180"
         },
         {
           "system": "Interiors",
@@ -5224,6 +5240,10 @@
           "source": "src/generation/regional/PublicSpaceRecipes.ts:50"
         },
         {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:153"
+        },
+        {
           "system": "Street starter review (candidate)",
           "source": "src/generation/regional/StreetRecipes.ts:138"
         },
@@ -5320,6 +5340,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/PublicSpaceRecipes.ts:46"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:140"
         },
         {
           "system": "World generation",
@@ -25147,11 +25171,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:189"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:198"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:189"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:198"
         },
         {
           "system": "Gameplay",
@@ -26484,6 +26508,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:718"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:155"
         }
       ]
     },
@@ -26583,11 +26611,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:744"
+          "source": "src/generation/regional/NaturalLandscape.ts:749"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:938"
+          "source": "src/generation/regional/NaturalLandscape.ts:943"
         },
         {
           "system": "World generation",
@@ -26623,7 +26651,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:72"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:80"
         }
       ]
     },
@@ -26708,6 +26736,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:220"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:157"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:158"
         }
       ]
     },
@@ -26749,7 +26785,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:175"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:184"
         }
       ]
     },
@@ -27151,7 +27187,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:75"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:83"
         }
       ]
     },

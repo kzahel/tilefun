@@ -15,6 +15,7 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { commercialSurfacePieces, isCommercialSurface } from "../road/CommercialCitySurface.js";
 import { denseCitySurfacePieces, isCitySurface } from "../road/DenseCitySurface.js";
 import { isParkingSurface, parkingSurfacePieces } from "../road/ParkingSurface.js";
+import { drawRaceSurface, isRaceSurface } from "../road/RaceSurface.js";
 import { computeRoadCardinalMask, getRoadSprite } from "../road/RoadAutotiler.js";
 import { getRoadSheetKey, isRoad, RoadType } from "../road/RoadType.js";
 import type { Chunk } from "../world/Chunk.js";
@@ -570,7 +571,9 @@ export class TileRenderer implements TerrainPresentation {
 
         // 4. Road layer (asphalt base + overlay autotile)
         const road = chunk.getRoad(lx, ly);
-        if (road === RoadType.RailCurveProof) {
+        if (isRaceSurface(road)) {
+          drawRaceSurface(offCtx, road, dx, dy);
+        } else if (road === RoadType.RailCurveProof) {
           drawRailTile(offCtx, chunk.railPaths, baseTx + lx, baseTy + ly, dx, dy);
         } else if (road === RoadType.RailHorizontalTop || road === RoadType.RailHorizontalBottom) {
           // Native grey straight rail, split into the two 16px terrain cells.

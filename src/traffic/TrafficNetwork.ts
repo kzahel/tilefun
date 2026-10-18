@@ -1,13 +1,16 @@
 import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
+import { RacetrackSource } from "../generation/regional/RacetrackPlanner.js";
 import {
   type Bounds,
   connectionForOwner,
   REGION_SIZE,
 } from "../generation/regional/RegionalPlanner.js";
 import { buildLaneGraph, generatedSegments, type LaneGraph } from "./LaneGraph.js";
+import { addRacetrackLanes } from "./RacetrackLanes.js";
 
 /** Current regional composition: connected town plans, terrain and road traffic. */
 export class TrafficStrategy extends DenseDistrictStrategy {
+  readonly racetracks = new RacetrackSource(this.world);
   private networks = new Map<string, LaneGraph>();
   constructor(world: ConstructorParameters<typeof DenseDistrictStrategy>[0]) {
     super(world, true);
@@ -40,6 +43,7 @@ export class TrafficStrategy extends DenseDistrictStrategy {
           if (c) connections.push(c);
         }
     const network = buildLaneGraph(generatedSegments(plans, connections));
+    addRacetrackLanes(network, this.racetracks.query(bounds));
     this.networks.set(key, network);
     if (this.networks.size > 8) this.networks.delete(this.networks.keys().next().value ?? "");
     return network;

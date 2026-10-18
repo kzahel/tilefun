@@ -2,7 +2,7 @@
 
 Topic: natural-landscapes
 Status: natural cover and patterned forests are the default current regional generation.
-Updated: 2026-10-09.
+Updated: 2026-10-18.
 
 Owns natural land cover, forest composition, scattered vegetation and small ponds
 in the current regional overworld. [City generation](city-generation.md) owns
@@ -11,6 +11,13 @@ terrain elevation, slopes and stacked spaces. [Tactical 068](../tactical/068-nat
 records the first review delivery and validation.
 
 ## Connected farmsteads and access lanes
+
+[138](../tactical/138-city-outskirts-racetracks.md) reserves eligible city-outskirts
+speedways and their access roads before farm, pond, forest and wildlife-home
+admission. The independent city-owned planner uses bounded 64-owner caches and
+does not call the natural or farm planners. Realization supplies dry level grass
+and ordinary saved road cells; distant natural cover retains its existing rules.
+City generation owns the venue geometry and traffic contract.
 
 [083](../tactical/083-farms-town-pets-and-larger-cities.md) composes an independent
 farm planner upstream of natural cover. Long dry inter-town road connections can

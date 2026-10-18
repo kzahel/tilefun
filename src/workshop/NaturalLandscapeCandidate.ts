@@ -10,6 +10,7 @@ import {
 } from "../generation/regional/NaturalLandscape.js";
 import planner from "../generation/regional/NaturalLandscape.ts?raw";
 import strategy from "../generation/regional/NaturalStrategy.ts?raw";
+import racetrack from "../generation/regional/RacetrackPlanner.ts?raw";
 import base from "../generation/regional/RegionalPlanner.ts?raw";
 import residents from "../generation/regional/ResidentFauna.ts?raw";
 import pets from "../generation/regional/SettlementPets.ts?raw";
@@ -19,6 +20,7 @@ import rail from "../railway/RailwayPlanner.ts?raw";
 import spriteDrawing from "../rendering/Canvas2DRenderer.ts?raw";
 import sceneCollection from "../rendering/collectScene.ts?raw";
 import drawing from "../rendering/RasterRenderBackend.ts?raw";
+import racePaint from "../road/RaceSurface.ts?raw";
 import {
   NATURAL_CASES,
   naturalCase,
@@ -27,6 +29,8 @@ import {
 } from "../scenarios/NaturalLandscapeRecipe.js";
 import recipes from "../scenarios/NaturalLandscapeRecipe.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
+import raceLanes from "../traffic/RacetrackLanes.ts?raw";
+import traffic from "../traffic/TrafficSystem.ts?raw";
 import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
@@ -42,7 +46,9 @@ export async function buildNaturalCandidate(
     kind: "geometry",
     name: `${c.name} · ${profile}`,
     prompt:
-      "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      id === "racetrack"
+        ? "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review."
+        : "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
     url: `/tilefun/workshop.html?geometry=nature-${id}&landscape=${profile}#/tool/world-geometry`,
     exploreUrl: naturalExplorerUrl(c, profile),
     fingerprint: await sha256(
@@ -57,6 +63,8 @@ export async function buildNaturalCandidate(
           districts,
           districtDrawing,
           strategy,
+          racetrack,
+          ...(id === "racetrack" ? { raceLanes, traffic, racePaint } : {}),
           base,
           rail,
           curves,
