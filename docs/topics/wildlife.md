@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species, four pet variants, four original predators, T. rex, small dragon and dire wolf have durable provisional gameplay. Two further authorized fierce creatures are in progress. New art remains pending human review; other expansion stays stopped.
+Status: all 22 existing-sheet species, four pet variants, four original predators, T. rex, small dragon, dire wolf and griffin have durable provisional gameplay. One further authorized fierce creatures are in progress. New art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
 ## Fierce creatures and natural-only replacement
@@ -25,7 +25,8 @@ return-home patrol, crouched/curl-tail sleep and smoky warnings. Visitors wake i
 without becoming prey. Hoards are ordinary editor props, created once per owner;
 deleting one remains durable. Its 196-pose body and separate accessory recipe
 have a portable pending review and exact replay. Dire wolves now spawn in stable three-member packs, howl, share valid prey and
-flank. Natural replacements preserve pack membership. Two fierce creatures are not yet released; 137 owns current
+flank. Natural replacements preserve pack membership. Griffins add collision-owned swoops, durable rock perches, tree/rock return and
+mid-flight reload. One fierce creature is not yet released; 137 owns current
 evidence and remaining stages.
 
 Meal replacements now require known world origin: `proceduralId` identifies

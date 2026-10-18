@@ -1011,6 +1011,9 @@ export class Realm {
             const ai = animal.predator,
               spec = denForPredator(animal.type);
             if (!ai || !spec || ai.denPlaced) return;
+            // A manually created hunter can already be mid-pursuit. Add its solid
+            // perch after that hunt, rather than embedding a rock under its feet.
+            if (spec.collider && ai.targetId) return;
             ai.denId ??= `wildlife:den:${animal.naturalSpawnId ?? animal.proceduralId ?? durableId(animal)}`;
             if (
               !this.propManager.props.some(
@@ -1018,11 +1021,68 @@ export class Realm {
               )
             ) {
               const prop = createFierceDen(spec, ai.home.wx, ai.home.wy);
+              if (spec.collider) {
+                const box = getEntityAABB(prop.position, spec.collider);
+                if (
+                  this.entityManager.entities.some(
+                    (other) =>
+                      other !== animal &&
+                      other.collider &&
+                      other.collider.solid !== false &&
+                      aabbsOverlap(box, getEntityAABB(other.position, other.collider)),
+                  ) ||
+                  this.propManager.props.some((other) =>
+                    aabbOverlapsPropWalls(box, other.position, other, 0, 24),
+                  )
+                )
+                  return;
+              }
               prop.persistentId = ai.denId;
               this.propManager.add(prop);
+              if (
+                spec.collider?.walkableTop &&
+                Math.hypot(animal.position.wx - ai.home.wx, animal.position.wy - ai.home.wy) < 4 &&
+                !ai.flight
+              ) {
+                animal.wz =
+                  getSurfaceZ(ai.home.wx, ai.home.wy, getHeight) + (spec.collider.zHeight ?? 0);
+                ai.state = "perch";
+                ai.timer = 1.5;
+                ai.elapsed = 0;
+              }
             }
             ai.denPlaced = true;
           },
+          predatorPerches: (home, radius) =>
+            this.propManager
+              .getPropsInChunkRange(
+                Math.floor((home.wx - radius) / 256),
+                Math.floor((home.wy - radius) / 256),
+                Math.floor((home.wx + radius) / 256),
+                Math.floor((home.wy + radius) / 256),
+              )
+              .flatMap((prop) => {
+                const surface =
+                  prop.type === "prop-griffin-perch"
+                    ? prop.collider
+                    : ["prop-oak-tree", "prop-palm-tree"].includes(prop.type)
+                      ? prop.walls?.find(
+                          (w) => w.walkableTop && w.passable && w.width >= 34 && w.height >= 22,
+                        )
+                      : undefined;
+                return surface?.walkableTop && surface.zHeight !== undefined
+                  ? [
+                      {
+                        wx: prop.position.wx + surface.offsetX,
+                        wy: prop.position.wy + surface.offsetY,
+                        z:
+                          getSurfaceZ(prop.position.wx, prop.position.wy, getHeight) +
+                          (surface.zBase ?? 0) +
+                          surface.zHeight,
+                      },
+                    ]
+                  : [];
+              }),
           perches: (home, radius) =>
             robinTreePerches(
               this.propManager.getPropsInChunkRange(

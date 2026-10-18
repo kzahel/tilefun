@@ -3192,5 +3192,106 @@
         "sha256": "5aa80f71ac71ea4455410c5700689f01d6489a1c06516e65f1d1f751a56fc615"
       }
     ]
+  },
+  {
+    "id": "griffin-fierce-v1",
+    "animalId": "griffin",
+    "revision": "fierce-v1",
+    "name": "Griffin",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/griffin/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-griffin-fierce-v1",
+      "name": "Griffin sheet",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-griffin-fierce-v1-scene",
+      "name": "Griffin scene",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "88564f286e4e81849b278bd31c607589f7bd3607d610d2501058b8c8a3be0650",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-griffin-fierce-v1-contact",
+      "name": "Griffin contact",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/contact-sheet-native.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "08f98a7b2efea539b50437052fc9703befda38776b89311216a95c81de4f2815",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/griffin/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/contact-sheet-native.png",
+        "sha256": "08f98a7b2efea539b50437052fc9703befda38776b89311216a95c81de4f2815"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/den.png",
+        "sha256": "3792ecf11cb0532bdd9815f91fe04d0122d82b9fd1d621d2e5a023ad30d6f964"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/index.html",
+        "sha256": "4bc8e2310bf6a67c493375e98852be46449e00d93441d7a3ab17e514c918b419"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/preview-native.gif",
+        "sha256": "2f4de36bc85235252caec9290dc8e17767d2d8c6a71aedc91a9c7afab01083f2"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/preview.gif",
+        "sha256": "1b4c95f9d53667b09dbe0cacfbbc02a3281f88556334749a0e2b407516d72bd9"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/review-observations.md",
+        "sha256": "b77249dd308287316f97b323485b3c1cfa5c2c745b221fd59b58a870fa0f0066"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scale-reference-native.png",
+        "sha256": "77192040708def478071f7959c796f0da6cdbc71a6b68b8366dd4aceecdfb56b"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scene-background.png",
+        "sha256": "0cc627bfe6ac090c190d5df642c40b75b61c820382fe0d92c3efdef976d9ba4b"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scene-native.gif",
+        "sha256": "7f218cc8fd75628691a4cccf3b5baff864b871694cc39721cf6f124c08916961"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scene-native.png",
+        "sha256": "88564f286e4e81849b278bd31c607589f7bd3607d610d2501058b8c8a3be0650"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+        "sha256": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/source-audit.json",
+        "sha256": "b1e92b03e9060a093d53b972f9c7e984d0f0305e050f5530d32681a0cb544dab"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/sprite.json",
+        "sha256": "c79f16a3f52d82b6b34195afab527dbf1355b3a3a5c3428b580eb9369aeff944"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/validation.json",
+        "sha256": "ee549706f9fb0c63b727f4e4564bb713088ab135608197a0d129d04743f4cc23"
+      }
+    ]
   }
 ]

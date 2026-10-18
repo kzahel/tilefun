@@ -1,0 +1,36 @@
+{
+  "identity": "griffin-fierce-v1",
+  "poses": 196,
+  "meshCount": 83,
+  "fixedLengthLinkChecks": 2352,
+  "plantedGroundContacts": 608,
+  "stanceTravelCompensationChecks": 272,
+  "maxProjectionError": 5.000000001587068e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 1.6087,
+      "head": 3.86311,
+      "shoulder": 3.03586,
+      "pelvis": 1.87399
+    },
+    "up": {
+      "body": 1.6087,
+      "head": 2.22099,
+      "shoulder": 2.23967,
+      "pelvis": 3.11802
+    },
+    "left": {
+      "body": 2.02213,
+      "head": 3.09787,
+      "shoulder": 2.60267,
+      "pelvis": 1.66861
+    },
+    "right": {
+      "body": 2.02213,
+      "head": 2.271,
+      "shoulder": 1.77581,
+      "pelvis": 2.49547
+    }
+  },
+  "status": "Saved-source integrity passes; human art approval is separate."
+}

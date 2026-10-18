@@ -17,7 +17,7 @@ current contracts. Historical repair holds and human art review remain separate.
   hunting and natural/editor/lab integration.
 - [x] Dire wolf: own canid source, howl, bounded pack coordination, hunting and
   natural/editor/lab integration.
-- [ ] Griffin: own eagle/lion source, perch, validated aerial approach and landing
+- [x] Griffin: own eagle/lion source, perch, validated aerial approach and landing
   attack, hunting and natural/editor/lab integration.
 - [ ] Giant spider: own eight-leg source, web ambush, sudden scuttle/pounce,
   hunting and natural/editor/lab integration.
@@ -111,3 +111,27 @@ the same five Windows symlink/WAL failures and ten skips. Typechecks, lint,
 build, 870 Workshop identities and streaming readiness pass. The first browser
 attempt overlapped a build replacing dist and lost its server; the completed
 build's clean rerun is the reported 34-pass evidence. Human art review is pending.
+
+Griffin checkpoint: own 83-mesh eagle/lion anatomy, 196 source poses and native
+rock-perch recipe. Saved audit: 2,352 fixed links, 608 planted contacts and 272
+stance/travel checks. Thirteen exports replay exactly; Chromium checks 392 facing
+crops and 98 scenery frames at native/4×. Review is registered and pending.
+
+Shared Realm creates one durable rock, admits only unoccupied placement and
+finds ordinary sufficiently broad tree/rock supports. PredatorMotion supplies
+finite, speed-bounded flight arcs; EntityManager retains collision-owned XY and
+actual landing support. Hunts warn, wind up, swoop, land and catch on the ground.
+A scare cancels the target while the committed safe arc finishes. Mid-flight
+save/reload preserves the path and phase. Cooldown returns to a perch; deleting
+the perch stays durable. All three new movement integration checks and all 97
+shared predator checks pass. All 39 focused browser checks pass, including both
+renderers' visible swoop, warning/call, feeding and perch reload. Typechecks,
+build, 875 Workshop identities and streaming readiness pass.
+
+The wolf-stage broader browser run reached 44 passes before the existing GPU
+train-reload failure (one interrupted deer case, 634 unrun).
+
+Griffin release qualification: full units have 2,801 passes with the same five
+Windows symlink/WAL failures and ten skips. Lint passes with the existing
+119 warnings/34 infos. The 39 focused browser checks, types, build and streaming
+are complete. This is provisional gameplay; human art review remains pending.

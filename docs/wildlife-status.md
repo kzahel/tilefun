@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T16:33:25.853Z (18/10/2026, 18:33:25 Berlin).
+Snapshot: 2026-10-18T16:42:58.895Z (18/10/2026, 18:42:58 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -243,7 +243,7 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | t-rex | draft-ready | Provisional |
 | small-dragon | draft-ready | Provisional |
 | dire-wolf | draft-ready | Provisional |
-| griffin | planned | Pending |
+| griffin | draft-ready | Provisional |
 | giant-spider | planned | Pending |
 
 ## Whole roster

@@ -642,7 +642,8 @@ export class NaturalLandscape {
       if (Math.floor(x / 256) !== cx || Math.floor(y / 256) !== cy) continue;
       const predator = required(createPredator(p.species, x, y).predator);
       predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
-      if (p.fierce?.kind === "dragon") predator.home = { wx, wy };
+      if (p.fierce && ["dragon", "griffin", "spider"].includes(p.fierce.kind))
+        predator.home = { wx, wy };
       if (p.fierce?.kind === "wolf") {
         predator.packId = `wildlife:pack:${this.world.seed}:${glade.id}`;
         predator.packRole = i;

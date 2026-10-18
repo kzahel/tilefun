@@ -1,0 +1,126 @@
+{
+  "identity": "griffin-fierce-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "griffin-fierce-v1",
+    "poses": 196,
+    "meshCount": 83,
+    "fixedLengthLinkChecks": 2352,
+    "plantedGroundContacts": 608,
+    "stanceTravelCompensationChecks": 272,
+    "maxProjectionError": 0.000005000000001587068,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.6087,
+        "head": 3.86311,
+        "shoulder": 3.03586,
+        "pelvis": 1.87399
+      },
+      "up": {
+        "body": 1.6087,
+        "head": 2.22099,
+        "shoulder": 2.23967,
+        "pelvis": 3.11802
+      },
+      "left": {
+        "body": 2.02213,
+        "head": 3.09787,
+        "shoulder": 2.60267,
+        "pelvis": 1.66861
+      },
+      "right": {
+        "body": 2.02213,
+        "head": 2.271,
+        "shoulder": 1.77581,
+        "pelvis": 2.49547
+      }
+    },
+    "status": "Saved-source integrity passes; human art approval is separate."
+  },
+  "capture": {
+    "species": "griffin",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 49,
+        "exactCropChecks": 196,
+        "exactSceneChecks": 49,
+        "errors": []
+      },
+      {
+        "scale": 4,
+        "chronologicalPoses": 49,
+        "exactCropChecks": 196,
+        "exactSceneChecks": 49,
+        "errors": []
+      }
+    ],
+    "playbackClips": [
+      "idle",
+      "walk",
+      "feed",
+      "display",
+      "charge",
+      "sleep",
+      "flight"
+    ],
+    "errors": []
+  },
+  "replay": {
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "contact-sheet-native.png": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "preview-native.gif": true,
+      "preview.gif": true,
+      "scene-native.gif": true,
+      "validation.json": true,
+      "source-audit.json": true,
+      "den.png": true,
+      "masters.json": true
+    }
+  },
+  "visualReview": {
+    "observer": "primary-agent",
+    "observations": "public/demos/wildlife-v2/griffin/fierce-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/griffin/fierce-v1/animal.blend": "6ee524b4cd3525571d54cc5282e2b8090db9b6bcaa568679c330c1ab7330e517",
+    "art-source/wildlife-v2/griffin/fierce-v1/audit.py": "292a89117500ef0368d5e28da1a520060c11c9e8be73125e0010b345cbb86460",
+    "art-source/wildlife-v2/griffin/fierce-v1/build.py": "8d75439ee2ced9e94d20340ef81ca9644b009d7441fd21fc917b93a32c83db48",
+    "art-source/wildlife-v2/griffin/fierce-v1/capture.mjs": "ebe2d344ad32045f3eded5fdd7cbc1c49c056bea4fd59d028f6bf761c895b6bb",
+    "art-source/wildlife-v2/griffin/fierce-v1/den.json": "9f564162fab2e3f2d6f1a95e5968a5f260135180a1f0c44035e6c814f2b28b87",
+    "art-source/wildlife-v2/griffin/fierce-v1/finish.py": "85a0f491ae35d80f3fb32c882ad024b2259469d92678f406a61afcd35cc934ec",
+    "art-source/wildlife-v2/griffin/fierce-v1/index.html": "4bc8e2310bf6a67c493375e98852be46449e00d93441d7a3ab17e514c918b419",
+    "art-source/wildlife-v2/griffin/fierce-v1/masters.json": "38a3698cece89e4199d8acd58336c48fe075b410628f233335a22acd068ff4d0",
+    "art-source/wildlife-v2/griffin/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "art-source/wildlife-v2/griffin/fierce-v1/README.md": "5b9cb07b3595f2fa6076adf6dcca3ac09395da3a556d8b88952dc2c87a6dbfc0",
+    "public/demos/wildlife-v2/griffin/fierce-v1/contact-sheet-native.png": "08f98a7b2efea539b50437052fc9703befda38776b89311216a95c81de4f2815",
+    "public/demos/wildlife-v2/griffin/fierce-v1/den.png": "3792ecf11cb0532bdd9815f91fe04d0122d82b9fd1d621d2e5a023ad30d6f964",
+    "public/demos/wildlife-v2/griffin/fierce-v1/index.html": "4bc8e2310bf6a67c493375e98852be46449e00d93441d7a3ab17e514c918b419",
+    "public/demos/wildlife-v2/griffin/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "public/demos/wildlife-v2/griffin/fierce-v1/preview-native.gif": "2f4de36bc85235252caec9290dc8e17767d2d8c6a71aedc91a9c7afab01083f2",
+    "public/demos/wildlife-v2/griffin/fierce-v1/preview.gif": "1b4c95f9d53667b09dbe0cacfbbc02a3281f88556334749a0e2b407516d72bd9",
+    "public/demos/wildlife-v2/griffin/fierce-v1/review-observations.md": "b77249dd308287316f97b323485b3c1cfa5c2c745b221fd59b58a870fa0f0066",
+    "public/demos/wildlife-v2/griffin/fierce-v1/scale-reference-native.png": "77192040708def478071f7959c796f0da6cdbc71a6b68b8366dd4aceecdfb56b",
+    "public/demos/wildlife-v2/griffin/fierce-v1/scene-background.png": "0cc627bfe6ac090c190d5df642c40b75b61c820382fe0d92c3efdef976d9ba4b",
+    "public/demos/wildlife-v2/griffin/fierce-v1/scene-native.gif": "7f218cc8fd75628691a4cccf3b5baff864b871694cc39721cf6f124c08916961",
+    "public/demos/wildlife-v2/griffin/fierce-v1/scene-native.png": "88564f286e4e81849b278bd31c607589f7bd3607d610d2501058b8c8a3be0650",
+    "public/demos/wildlife-v2/griffin/fierce-v1/sheet.png": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947",
+    "public/demos/wildlife-v2/griffin/fierce-v1/source-audit.json": "b1e92b03e9060a093d53b972f9c7e984d0f0305e050f5530d32681a0cb544dab",
+    "public/demos/wildlife-v2/griffin/fierce-v1/sprite.json": "c79f16a3f52d82b6b34195afab527dbf1355b3a3a5c3428b580eb9369aeff944",
+    "public/demos/wildlife-v2/griffin/fierce-v1/validation.json": "ee549706f9fb0c63b727f4e4564bb713088ab135608197a0d129d04743f4cc23",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-fierce.mjs": "465d4f6dd625207212600772c4fa9905124e40b8f3ac8cc39b4e36fc29d1360f",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

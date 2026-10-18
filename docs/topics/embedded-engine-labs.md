@@ -37,7 +37,10 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 replacement, an explicit food web, cross-predator meals and T. rex warning/charge
 states to shared Realm authority. Main game and the natural Worker lab use the
 same source banks, collisions, save/reload and audio/footstep consumers. Source
-reviews remain immutable pending identities; four further creatures are in progress.
+reviews remain immutable pending identities. Dragons guard durable hoards; wolves
+coordinate stable packs. Griffin flight uses shared PredatorMotion and the ordinary
+EntityManager collision/landing loop, including mid-flight saves, interruption
+and actual rock/tree support. The spider stage remains in progress.
 
 ## City outskirts speedways
 

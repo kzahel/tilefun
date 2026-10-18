@@ -16,6 +16,7 @@ import { faunaProfile } from "../wildlife/Fauna.js";
 import { prepareFaunaTravel, settleFauna, syncFaunaWater } from "../wildlife/faunaInteractions.js";
 import { prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
+import { preparePredatorFlight, settlePredatorFlight } from "../wildlife/PredatorMotion.js";
 import {
   prepareRabbitHop,
   RABBIT_HOP_DURATION,
@@ -317,13 +318,14 @@ export class EntityManager {
         );
       if (entity.fauna?.actionElapsed !== undefined) entity.fauna.actionElapsed += entityDt;
       if (entity.fauna?.motion) prepareFaunaTravel(entity, entityDt);
+      if (entity.predator?.flight) preparePredatorFlight(entity, entityDt);
       if (entity.robin?.motion) prepareRobinMotion(entity, entityDt);
       if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, entityDt);
       if (entity.frog?.state === "hop") prepareFrogHop(entity, entityDt);
       const isAquatic = ENTITY_DEFS[entity.type]?.aquatic === true;
       const isAmphibious = ENTITY_DEFS[entity.type]?.amphibious === true;
       const speedMult =
-        entity.collider && !isAquatic && !isAmphibious
+        entity.collider && !entity.predator?.flight && !isAquatic && !isAmphibious
           ? getSpeedMultiplier(entity.position, getCollision)
           : 1.0;
       const dx = entity.velocity.vx * entityDt * speedMult;
@@ -332,7 +334,8 @@ export class EntityManager {
       if (entity.collider) {
         // Aquatic entities: blocked by Solid only (water is passable),
         // plus an extra check that every tile under their AABB has water.
-        const entityBlockMask = isAquatic || isAmphibious ? CollisionFlag.Solid : blockMask;
+        const entityBlockMask =
+          isAquatic || isAmphibious || entity.predator?.flight ? CollisionFlag.Solid : blockMask;
         const baseBlocker = makeExtraBlocker(entity);
         const extraBlocker = isAquatic
           ? (aabb: AABB): boolean => {
@@ -416,6 +419,11 @@ export class EntityManager {
                 CollisionFlag.Water) !==
                 0,
             );
+          continue;
+        }
+        if (entity.predator?.flight) {
+          if (entity.predator.flight.elapsed >= entity.predator.flight.duration)
+            settlePredatorFlight(entity, computeGroundZ(entity));
           continue;
         }
         if (entity.robin?.motion) {

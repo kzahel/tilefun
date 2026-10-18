@@ -276,6 +276,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "prop-griffin-perch",
+      "name": "prop griffin perch",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/den.png",
+      "width": 64,
+      "height": 56,
+      "tileSize": 16,
+      "fingerprint": "3792ecf11cb0532bdd9815f91fe04d0122d82b9fd1d621d2e5a023ad30d6f964",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "prop-dragon-hoard",
       "name": "prop dragon hoard",
       "image": "demos/wildlife-v2/small-dragon/fierce-v1/den.png",
@@ -323,6 +333,16 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-griffin-predator-v1",
+      "name": "wildlife griffin predator v1",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2186,6 +2206,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-griffin-fierce-v1",
+      "name": "wildlife v2 griffin fierce v1",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -3602,6 +3632,28 @@
       ]
     },
     {
+      "id": "prop:prop-griffin-perch",
+      "sheetId": "prop-griffin-perch",
+      "rect": [
+        0,
+        0,
+        64,
+        56
+      ],
+      "label": "prop-griffin-perch",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1066"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FierceDens.ts:16"
+        }
+      ]
+    },
+    {
       "id": "prop:prop-dragon-hoard",
       "sheetId": "prop-dragon-hoard",
       "rect": [
@@ -3615,7 +3667,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FierceDens.ts:16"
+          "source": "src/wildlife/FierceDens.ts:25"
         }
       ]
     },
@@ -4483,6 +4535,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/server/Realm.ts:1068"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/robinPerches.ts:9"
         }
       ]
@@ -4541,11 +4597,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:797"
+          "source": "src/generation/regional/NaturalLandscape.ts:798"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:991"
+          "source": "src/generation/regional/NaturalLandscape.ts:992"
         },
         {
           "system": "World generation",
@@ -4574,6 +4630,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/SettlementPets.ts:22"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1068"
         },
         {
           "system": "Gameplay",
@@ -23248,6 +23308,32 @@
       ]
     },
     {
+      "id": "sprite:prop-griffin-perch",
+      "sheetId": "prop-griffin-perch",
+      "rect": [
+        0,
+        0,
+        64,
+        56
+      ],
+      "label": "prop-griffin-perch · registered 64×56 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1066"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FierceDens.ts:16"
+        }
+      ]
+    },
+    {
       "id": "sprite:prop-dragon-hoard",
       "sheetId": "prop-dragon-hoard",
       "rect": [
@@ -23265,7 +23351,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FierceDens.ts:16"
+          "source": "src/wildlife/FierceDens.ts:25"
         }
       ]
     },
@@ -23333,6 +23419,24 @@
         384
       ],
       "label": "wildlife-brown-bear-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-griffin-predator-v1",
+      "sheetId": "wildlife-griffin-predator-v1",
+      "rect": [
+        0,
+        0,
+        6272,
+        512
+      ],
+      "label": "wildlife-griffin-predator-v1 · registered 128×128 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -25171,19 +25275,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1402"
+          "source": "src/server/Realm.ts:1462"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1568"
+          "source": "src/server/Realm.ts:1628"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2243"
+          "source": "src/server/Realm.ts:2303"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2463"
+          "source": "src/server/Realm.ts:2523"
         },
         {
           "system": "Gameplay",
@@ -25983,7 +26087,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2427"
+          "source": "src/server/Realm.ts:2487"
         },
         {
           "system": "Gameplay",
@@ -26797,6 +26901,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/server/Realm.ts:1068"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/robinPerches.ts:9"
         }
       ]
@@ -26859,11 +26967,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:797"
+          "source": "src/generation/regional/NaturalLandscape.ts:798"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:991"
+          "source": "src/generation/regional/NaturalLandscape.ts:992"
         },
         {
           "system": "World generation",
@@ -26892,6 +27000,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/SettlementPets.ts:22"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1068"
         },
         {
           "system": "Gameplay",

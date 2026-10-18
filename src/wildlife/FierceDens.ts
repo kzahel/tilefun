@@ -12,6 +12,15 @@ export interface FierceDenSpec {
 /** Normal durable props, also available for independent editor placement. */
 export const FIERCE_DENS: readonly FierceDenSpec[] = [
   {
+    species: "griffin",
+    type: "prop-griffin-perch",
+    label: "Griffin rock perch",
+    width: 64,
+    height: 56,
+    collider: { offsetX: 0, offsetY: 0, width: 40, height: 24, zHeight: 24, walkableTop: true },
+    sortOffsetY: 0,
+  },
+  {
     species: "small-dragon",
     type: "prop-dragon-hoard",
     label: "Dragon treasure hoard",

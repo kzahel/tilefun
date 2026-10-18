@@ -24,8 +24,8 @@
     {
       "id": "griffin",
       "revision": "fierce-v1",
-      "state": "planned",
-      "gameplay": false
+      "state": "draft-ready",
+      "gameplay": true
     },
     {
       "id": "giant-spider",
