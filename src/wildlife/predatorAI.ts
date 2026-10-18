@@ -31,7 +31,7 @@ function enter(e: Entity, state: NonNullable<Entity["predator"]>["state"], timer
   ai.timer = timer;
   ai.elapsed = 0;
   if (e.velocity) e.velocity.vx = e.velocity.vy = 0;
-  delete ai.aim;
+  if (["rest", "feed", "scared", "patrol"].includes(state)) delete ai.aim;
   if (["rest", "feed", "scared"].includes(state)) delete ai.targetId;
   restorePredatorPose(e);
 }
@@ -68,6 +68,15 @@ export function startlePredator(e: Entity, from: PositionComponent): void {
   enter(e, "scared", 1.6);
   e.predator.alarmFrom = { ...from };
   e.predator.cooldown = Math.max(e.predator.cooldown, 12);
+}
+function bodyGap(a: Entity, b: Entity): number {
+  if (!a.collider || !b.collider) return Infinity;
+  const x = getEntityAABB(a.position, a.collider),
+    y = getEntityAABB(b.position, b.collider);
+  return Math.hypot(
+    Math.max(x.left - y.right, y.left - x.right, 0),
+    Math.max(x.top - y.bottom, y.top - x.bottom, 0),
+  );
 }
 function clearPath(
   e: Entity,
@@ -134,8 +143,8 @@ export function updatePredatorAI(
   if (prey) {
     const d = distance(e.position, prey.position);
     if (ai.state === "stalk" && (d < 52 || ai.elapsed > 2)) enter(e, "chase", 0);
-    if (ai.state === "chase" && d < 29) enter(e, "pounce", 0);
-    if (ai.state === "pounce" && ai.elapsed > 0.65) {
+    if (ai.state === "chase" && bodyGap(e, prey) <= 4) enter(e, "pounce", 0);
+    if (ai.state === "pounce" && ai.elapsed > 0.9) {
       ai.cooldown = 3;
       enter(e, "rest", 1);
       return;
@@ -170,6 +179,7 @@ export function updatePredatorAI(
       if (nearest) {
         ai.targetId = durableId(nearest);
         enter(e, "stalk", 0);
+        ai.aim = { ...nearest.position };
       }
     }
     const target = prey?.position;
@@ -223,7 +233,7 @@ export function resolvePredatorCatches(
 ): void {
   for (const hunter of active) {
     const ai = hunter.predator;
-    if (ai?.state !== "pounce" || ai.elapsed < 0.12 || !hunter.collider) continue;
+    if (ai?.state !== "pounce" || ai.elapsed < 0.48 || !hunter.collider) continue;
     const prey = active.find(
       (e) => e.persistentId === ai.targetId && manager.byId.has(e.id) && preyAnimal(e),
     );
@@ -233,16 +243,7 @@ export function resolvePredatorCatches(
       (prey.rabbit?.state === "hop" && (prey.wz ?? 0) > (env.surfaceZ?.(prey.position) ?? 0) + 1)
     )
       continue;
-    const a = getEntityAABB(hunter.position, hunter.collider),
-      b = getEntityAABB(prey.position, prey.collider);
-    if (
-      Math.hypot(
-        Math.max(a.left - b.right, b.left - a.right, 0),
-        Math.max(a.top - b.bottom, b.top - a.bottom, 0),
-      ) > 3 ||
-      !clearPath(hunter, prey.position, env)
-    )
-      continue;
+    if (bodyGap(hunter, prey) > 3 || !clearPath(hunter, prey.position, env)) continue;
     const habitat = prey.deer ?? prey.rabbit;
     if (!habitat) continue;
     let replacement: Entity | undefined;

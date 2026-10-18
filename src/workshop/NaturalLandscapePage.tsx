@@ -57,6 +57,7 @@ export default function NaturalLandscapePage() {
     settings = useRef({ paused, follow, zoom });
   settings.current = { paused, follow, zoom };
   const custom = caseId === "explore";
+  const predatorCase = PREDATOR_PROFILES.some((p) => p.species === caseId);
   const point = useMemo(
     () =>
       custom
@@ -442,6 +443,7 @@ export default function NaturalLandscapePage() {
           Composition{" "}
           <select
             aria-label="Landscape composition"
+            disabled={predatorCase}
             value={profile}
             onChange={(e) => change(caseId, landscapeProfile(e.target.value) ?? "balanced")}
           >
@@ -467,14 +469,24 @@ export default function NaturalLandscapePage() {
             <option value={1.3}>Close</option>
           </select>
         </label>
-        <a href={naturalExplorerUrl(point, profile)}>Regional planning overview →</a>
-        <a href={naturalExplorerUrl(point, profile, 16)}>Exact tile view →</a>
+        {!predatorCase && (
+          <>
+            <a href={naturalExplorerUrl(point, profile)}>Regional planning overview →</a>
+            <a href={naturalExplorerUrl(point, profile, 16)}>Exact tile view →</a>
+          </>
+        )}
       </div>
       <p>
-        Seed {point.seed} · {point.x}, {point.y} tiles · Arrows/WASD to walk, Space to jump. Forest
-        centers and edges use the same generator as the map.
-        {profile === "thicket" &&
-          " Forest rows have real collision; their cap edges and ground joins are part of this preview review."}
+        {predatorCase ? (
+          "Hunting playground · Arrows/WASD to walk, Space to jump. Watch the predator hunt deer and rabbits; new prey returns nearby after a catch. Throw a ball in the game to interrupt a hunt."
+        ) : (
+          <>
+            Seed {point.seed} · {point.x}, {point.y} tiles · Arrows/WASD to walk, Space to jump.
+            Forest centers and edges use the same generator as the map.
+            {profile === "thicket" &&
+              " Forest rows have real collision; their cap edges and ground joins are part of this preview review."}
+          </>
+        )}
       </p>
       {(prepared.error || error) && <p role="alert">{prepared.error || error}</p>}
       <div

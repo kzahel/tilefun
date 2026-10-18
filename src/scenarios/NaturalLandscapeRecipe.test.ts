@@ -45,7 +45,12 @@ it("runs forest movement and persists tree deletion and movement through reload"
 it("pins real locations and keeps explicit profiles available beside the natural default", () => {
   for (const c of NATURAL_CASES) {
     const r = naturalLandscapeRecipe(c.id, "balanced");
-    expect(r.landscape).toBe("balanced");
+    if (r.generation.type === "regional") expect(r.landscape).toBe("balanced");
+    else {
+      expect(r.generation.type).toBe("flat");
+      expect(r.landscape).toBeUndefined();
+      expect(r.actors?.some((e) => e.predator)).toBe(true);
+    }
     expect(r.generation.seed).toBe(c.seed);
   }
   const g = createGenerator(createDescriptor("regional", 2026));

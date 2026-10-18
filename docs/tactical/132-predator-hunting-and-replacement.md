@@ -35,7 +35,7 @@ a bounded four-predator exception; historical repair gates/campaign stay stopped
 
 - [x] Tiger behavior, replacement/persistence tests, editor/world/lab integration;
       validate, commit and push.
-- [ ] Panther own editable geometry/paint and pending review; same runtime;
+- [x] Panther own editable geometry/paint and pending review; same runtime;
       validate, commit and push.
 - [ ] Lion own mane/head/body and pending review; same runtime;
       validate, commit and push.
@@ -86,3 +86,45 @@ successfully in the focused set; ten static-file tests were skipped by a Windows
 symlink setup failure. The full browser suite will run again after the species
 stages. Streaming benchmark initially timed out loading its isolated tools page;
 retry is recorded separately. Evidence is in ignored data/predators-132/.
+
+## Panther checkpoint
+
+Panther hunt-v1 retains its own 47-mesh editable anatomy, unstriped charcoal/slate
+paint and amber eyes. The fixed wildlife projection and grounded IK method reuse
+the tiger authoring scaffold; the torso/pelvis/shoulders, smaller skull/cheeks and
+longer tail differ. The 116 saved poses pass 1,392 fixed-link / 432 planted-contact
+checks, actual native/4x Chromium playback covers all 29 chronological states and
+232 exact crops, and fresh Blender replay matches all nine image/metadata exports
+plus masters. Source, complete portable public bundle and exact pending Workshop
+review are registered; historical receipts/fingerprints remain intact.
+
+Shared runtime correction: enter a lunge based on footprint distance, retain
+pursuit velocity/aim across phase changes, and leave a brief visible jaw display
+before consumption. A production Realm test starts with an already fleeing deer
+and catches it without a premature lunge failure. Stationary and airborne rabbit
+cases also check replacement versus deferred catches. Panther patrol/stalk speed
+is 8px/s, chase 48px/s with a matching accelerated walk phase. No gallop is claimed.
+The seeded natural panther near tile (-461,-744), seed 2026 / thicket, belongs to
+a separate fixed predator owner beside a deer glade. Its editor and shared lab
+entry use the same definition/authority code.
+
+The lab profile regression found after the tiger checkpoint was corrected by
+keeping the flat hunting fixture free of the regional-only landscape setting;
+its contract test now covers this distinction. The UI identifies the hunting
+playground and omits misleading regional-map links for this flat fixture.
+
+Streaming validation initially hung on Vite module/CSS requests before the game
+loaded. A minimal diagnostic reproduced it; disabling filesystem watching for
+fixed captures removed the stall. The benchmark now uses watch:null (matching
+the manifest capture) and --assert-ready passes. It still uses the real game,
+shared authority, isolated data and bundled Chromium. Logs/report remain under
+ignored data/predators-132/streaming-verified.
+
+Panther validation checkpoint: typecheck, build and lint pass; 31 focused predator
+and scheduler checks pass, and the eight natural-recipe checks pass in the same
+validation sequence (the later isolated run corrected the rabbit contact fixture).
+Eight full-Chromium browser checks pass, including both renderers for tiger and
+panther and exact pending art/player evidence. The frozen panther playback bytes
+retain a narrowly scoped formatter exception; logic lint remains enabled and
+receipt verification protects the original byte identity. Streaming readiness
+passes after the capture-runner watcher correction above.

@@ -2606,5 +2606,102 @@
         "sha256": "eba68d2c42492aa8fb0a590bfcd76201743499e50f0c5cd79cc0343a00527975"
       }
     ]
+  },
+  {
+    "id": "panther-hunt-v1",
+    "animalId": "panther",
+    "revision": "hunt-v1",
+    "name": "Panther",
+    "batchId": "wildlife-v2-predators-132",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/panther/hunt-v1/",
+    "sheet": {
+      "id": "wildlife-v2-panther-hunt-v1",
+      "name": "Panther sheet",
+      "image": "demos/wildlife-v2/panther/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13",
+      "source": "art-source/wildlife-v2/panther/hunt-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-panther-hunt-v1-scene",
+      "name": "Panther scene",
+      "image": "demos/wildlife-v2/panther/hunt-v1/scene-native.png",
+      "width": 800,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "770f982484d81495533bd4860e14196eca12b5b871399cc804a61c8b4fe80b01",
+      "source": "art-source/wildlife-v2/panther/hunt-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-panther-hunt-v1-contact",
+      "name": "Panther contact",
+      "image": "demos/wildlife-v2/panther/hunt-v1/contact-sheet-native.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "44007919e72e3931d3cfaf894cf4c1853d94b1858ae82385c7964883c71604d5",
+      "source": "art-source/wildlife-v2/panther/hunt-v1"
+    },
+    "preview": "demos/wildlife-v2/panther/hunt-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/contact-sheet-native.png",
+        "sha256": "44007919e72e3931d3cfaf894cf4c1853d94b1858ae82385c7964883c71604d5"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/index.html",
+        "sha256": "1c0641692bcb14268d5911b8e52ad2c9ebef84adf955a710fe057b78090536f6"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/playback.js",
+        "sha256": "590afc654edb2906d261e126513a581559956f3a342e9f88938c79b00ffa11d3"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/preview-native.gif",
+        "sha256": "746f7d3b12c7b4862516199e98837db23bb1511dc24b500aa57c1cb75a407f15"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/preview.gif",
+        "sha256": "b4e3eb7137452d20190c32fb6078a01202c5a58fd83a1efc0c1ee695f654d522"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/review-observations.md",
+        "sha256": "9534499638998271db6fbb68087dcee20019adc41994342e99f3b132fa43e412"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/scale-reference-native.png",
+        "sha256": "1f6e86bebf97be8c52afe58fc8666d489b98a5e4c5d11881eaffca9ae02ec56c"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/scene-background.png",
+        "sha256": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/scene-native.gif",
+        "sha256": "16915d1d3c717d7f3ba0a47a12870fd80e5031a078733a60359225b56bacb9ca"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/scene-native.png",
+        "sha256": "770f982484d81495533bd4860e14196eca12b5b871399cc804a61c8b4fe80b01"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/sheet.png",
+        "sha256": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/source-audit.json",
+        "sha256": "3342591e4d3b9777bece0abff2418e8f90a30f34b8c1e7d7cb9cb94c4e6c520c"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/sprite.json",
+        "sha256": "10a8629209a86c06703d700b15d307bab7713c76efaea59d501e336cb5247e86"
+      },
+      {
+        "path": "demos/wildlife-v2/panther/hunt-v1/validation.json",
+        "sha256": "412d4e880624164a8cc5d6bf352acc4bb1e93636ab4a33d42705add2753d08bd"
+      }
+    ]
   }
 ]

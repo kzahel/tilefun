@@ -67,7 +67,6 @@ export function naturalLandscapeRecipe(
       version: 1,
       id: `nature-${id}-${profile}-v1`,
       generation: FLAT_SCENARIO,
-      landscape: profile,
       player: createPlayer(64, 160),
       props: [],
       actors: [

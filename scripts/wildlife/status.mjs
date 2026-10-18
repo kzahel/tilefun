@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { queue, ROOT } from "./campaign.mjs";
 import { petReceiptErrors } from "./check-pets.mjs";
+import { predatorReceiptErrors } from "./check-predators.mjs";
 import { tigerReceiptErrors } from "./check-tiger.mjs";
 
 const read = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8").replace(/^\uFEFF/, ""));
@@ -188,10 +189,17 @@ export function writeStatus() {
       "",
       "| Predator | State | Stage | Gameplay |",
       "| --- | --- | --- | --- |",
-      ...batch.animals.map(
-        (p) =>
-          `| ${clean(p.id)} | ${clean(p.state)} | ${clean(p.stage)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
-      ),
+      ...batch.animals.map((p) => {
+        const state =
+          p.state === "draft-ready" && predatorReceiptErrors(p.id).length
+            ? "Receipt needs checking"
+            : p.state;
+        const base = `public/demos/wildlife-v2/${p.id}/${p.revision}`;
+        const link = existsSync(resolve(ROOT, `${base}/index.html`))
+          ? ` · [Playback](../${base}/index.html)`
+          : "";
+        return `| ${clean(p.id)} | ${clean(state)} | ${clean(p.stage)}${link} | ${p.gameplay ? "Provisional" : "Pending"} |`;
+      }),
       "",
     );
   }

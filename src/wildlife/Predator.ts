@@ -3,6 +3,14 @@ import { Direction, type Entity, type PositionComponent } from "../entities/Enti
 import type { EntityDef } from "../entities/EntityDefs.js";
 
 export const PREDATOR_PROFILES = [
+  {
+    species: "panther",
+    label: "Panther",
+    revision: "hunt-v1",
+    speed: 8,
+    chaseSpeed: 48,
+    weight: 70,
+  },
   { species: "tiger", label: "Tiger", revision: "pilot-v1", speed: 8, chaseSpeed: 40, weight: 180 },
 ] as const;
 export type PredatorSpecies = (typeof PREDATOR_PROFILES)[number]["species"];
@@ -37,7 +45,13 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
           { name: "feed", start: 13, count: 8, frameDuration: 160, loop: true },
           { name: "display", start: 21, count: 8, frameDuration: 160, loop: false },
           // Grounded brisk walk pending a separately reviewed running source.
-          { name: "chase", start: 1, count: 12, frameDuration: 20, loop: true },
+          {
+            name: "chase",
+            start: 1,
+            count: 12,
+            frameDuration: (100 * p.speed) / p.chaseSpeed,
+            loop: true,
+          },
         ],
       },
       collider: { offsetX: 0, offsetY: 0, width: 22, height: 12, physicalHeight: 24, solid: true },

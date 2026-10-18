@@ -1,0 +1,111 @@
+{
+  "identity": "panther-hunt-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "panther-hunt-v1",
+    "poses": 116,
+    "fixedLengthLinkChecks": 1392,
+    "plantedGroundContacts": 432,
+    "stanceTravelCompensationChecks": 160,
+    "maxProjectionError": 0.000005000000001587068,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.45549,
+        "head": 2.12507,
+        "shoulder": 1.88401,
+        "pelvis": 1.49119
+      },
+      "up": {
+        "body": 1.45549,
+        "head": 1.49122,
+        "shoulder": 1.5817,
+        "pelvis": 1.9349
+      },
+      "left": {
+        "body": 1.59475,
+        "head": 1.96395,
+        "shoulder": 1.78807,
+        "pelvis": 1.48419
+      },
+      "right": {
+        "body": 1.59475,
+        "head": 1.68542,
+        "shoulder": 1.50954,
+        "pelvis": 1.76272
+      }
+    },
+    "status": "Saved-source integrity passes; visual observations and human approval separate."
+  },
+  "capture": {
+    "browser": "153.0.8010.12",
+    "results": [
+      {
+        "pet": "panther",
+        "scale": 1,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      },
+      {
+        "pet": "panther",
+        "scale": 4,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      }
+    ]
+  },
+  "replay": {
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "contact-sheet-native.png": true,
+      "preview.gif": true,
+      "preview-native.gif": true,
+      "scene-native.gif": true,
+      "masters.json": true
+    },
+    "note": "Blender save container identity is not a deterministic image artifact."
+  },
+  "visualReview": {
+    "observer": "coordinator",
+    "observations": "public/demos/wildlife-v2/panther/hunt-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/panther/hunt-v1/animal.blend": "4365b3fa22251e7718b4818cb00d192fdc0cf564046c7fc3ef59d372ad229abb",
+    "art-source/wildlife-v2/panther/hunt-v1/audit.py": "1099816d24da2dd80545c637e726976eee4339128221a79976f2cc9e1891e4bf",
+    "art-source/wildlife-v2/panther/hunt-v1/build.py": "f387500c54764665e52899933411410167a25dfa9ad7c8df2e29c656ac49db12",
+    "art-source/wildlife-v2/panther/hunt-v1/capture.mjs": "73a3bf379aaf97cb7e823790db45ef4527536b8992fe5ec48687784ebcf1b574",
+    "art-source/wildlife-v2/panther/hunt-v1/finish.py": "6dc4ed903ab2446d507d29b104c0010681e38be405a16391ff11fda6cb99026b",
+    "art-source/wildlife-v2/panther/hunt-v1/index.html": "1c0641692bcb14268d5911b8e52ad2c9ebef84adf955a710fe057b78090536f6",
+    "art-source/wildlife-v2/panther/hunt-v1/masters.json": "5d6b29a7b359eac8c2ac0c97e8b895f15e05ca7db4c735bc36de23adfccd8fe6",
+    "art-source/wildlife-v2/panther/hunt-v1/playback.js": "590afc654edb2906d261e126513a581559956f3a342e9f88938c79b00ffa11d3",
+    "art-source/wildlife-v2/panther/hunt-v1/README.md": "e7e9d2f485aac006ea0620a6cdb04462dcd46e0370014d0bdfe27f1511966a02",
+    "public/demos/wildlife-v2/panther/hunt-v1/contact-sheet-native.png": "44007919e72e3931d3cfaf894cf4c1853d94b1858ae82385c7964883c71604d5",
+    "public/demos/wildlife-v2/panther/hunt-v1/index.html": "1c0641692bcb14268d5911b8e52ad2c9ebef84adf955a710fe057b78090536f6",
+    "public/demos/wildlife-v2/panther/hunt-v1/playback.js": "590afc654edb2906d261e126513a581559956f3a342e9f88938c79b00ffa11d3",
+    "public/demos/wildlife-v2/panther/hunt-v1/preview-native.gif": "746f7d3b12c7b4862516199e98837db23bb1511dc24b500aa57c1cb75a407f15",
+    "public/demos/wildlife-v2/panther/hunt-v1/preview.gif": "b4e3eb7137452d20190c32fb6078a01202c5a58fd83a1efc0c1ee695f654d522",
+    "public/demos/wildlife-v2/panther/hunt-v1/review-observations.md": "9534499638998271db6fbb68087dcee20019adc41994342e99f3b132fa43e412",
+    "public/demos/wildlife-v2/panther/hunt-v1/scale-reference-native.png": "1f6e86bebf97be8c52afe58fc8666d489b98a5e4c5d11881eaffca9ae02ec56c",
+    "public/demos/wildlife-v2/panther/hunt-v1/scene-background.png": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a",
+    "public/demos/wildlife-v2/panther/hunt-v1/scene-native.gif": "16915d1d3c717d7f3ba0a47a12870fd80e5031a078733a60359225b56bacb9ca",
+    "public/demos/wildlife-v2/panther/hunt-v1/scene-native.png": "770f982484d81495533bd4860e14196eca12b5b871399cc804a61c8b4fe80b01",
+    "public/demos/wildlife-v2/panther/hunt-v1/sheet.png": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13",
+    "public/demos/wildlife-v2/panther/hunt-v1/source-audit.json": "3342591e4d3b9777bece0abff2418e8f90a30f34b8c1e7d7cb9cb94c4e6c520c",
+    "public/demos/wildlife-v2/panther/hunt-v1/sprite.json": "10a8629209a86c06703d700b15d307bab7713c76efaea59d501e336cb5247e86",
+    "public/demos/wildlife-v2/panther/hunt-v1/validation.json": "412d4e880624164a8cc5d6bf352acc4bb1e93636ab4a33d42705add2753d08bd",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-predator.mjs": "ec56382b22c8ccfb21159000157eb325af7df271aec922ecc5fe16c0a3232475",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

@@ -175,7 +175,9 @@ try {
             ]
           : []),
       ],
-      server: { host: "127.0.0.1", port, strictPort: true, hmr: false },
+      // Fixed captures do not need filesystem watching. On Windows the watcher
+      // can stall module/CSS responses before the benchmark even starts.
+      server: { host: "127.0.0.1", port, strictPort: true, hmr: false, watch: null },
       logLevel: "error",
     });
     await server.listen();

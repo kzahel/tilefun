@@ -25,7 +25,9 @@ the remaining recommendations are not implemented fixes.
 
 The isolated streaming runner now limits Vite dependency scanning to index.html;
 ignored archived review HTML is not a benchmark entry. Windows revision/dirty
-reads use Git through WSL. Failed game startup retains a screenshot, page errors
+reads use Git through WSL. Fixed captures disable Vite filesystem watching,
+which otherwise stalled initial module/CSS responses in the 132 Windows run.
+The --assert-ready traversal passes with this capture-only setting. Failed game startup retains a screenshot, page errors
 and visible text under the selected output directory before closing its owned
 browser/server. Six runner-matrix checks pass; [084](../tactical/084-common-pets-and-variations.md)
 records the pet-batch integration readiness run and its limits.

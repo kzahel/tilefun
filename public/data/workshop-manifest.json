@@ -499,6 +499,12 @@
       "toolId": "wildlife-v2"
     },
     {
+      "id": "wildlife-v2-predators-132",
+      "name": "Wildlife · predators-132",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -4787,6 +4793,46 @@
       }
     },
     {
+      "id": "nature:panther:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Panther · hunting & prey replacement · sparse",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-panther&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=sparse&zoom=0.8",
+      "fingerprint": "f01eaae75f57b24f75d18baed68a79aae90e7d1bf01fd1eddbad7f40696b20e1"
+    },
+    {
+      "id": "nature:panther:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Panther · hunting & prey replacement · balanced",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-panther&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=balanced&zoom=0.8",
+      "fingerprint": "07b3b0c7be2f160296f34236d209a2eca7f062d1d0e52441a582b71dd4d43b08"
+    },
+    {
+      "id": "nature:panther:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Panther · hunting & prey replacement · lush",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-panther&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=lush&zoom=0.8",
+      "fingerprint": "758f72b88b613990654b37cb188be9b9eac47cc8e17a90b91548e3cfcd8fd023"
+    },
+    {
+      "id": "nature:panther:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Panther · hunting & prey replacement · thicket",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-panther&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=thicket&zoom=0.8",
+      "fingerprint": "8ce111fd5839210cc9db71bb28112b1e343c87ecd4ff33e557e6e8a110813716"
+    },
+    {
       "id": "nature:tiger:sparse:v1",
       "batchId": "natural-landscapes",
       "kind": "geometry",
@@ -4794,7 +4840,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-tiger&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=sparse&zoom=0.8",
-      "fingerprint": "870a21bd842450666762598943c827fef0ac8573e67be076e98f22c6f9b108a5"
+      "fingerprint": "8c5ceac844d8959205fb6185ddf932646820798bad179dbc163b71fa5ffbe90c"
     },
     {
       "id": "nature:tiger:balanced:v1",
@@ -4804,7 +4850,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=balanced&zoom=0.8",
-      "fingerprint": "dffe4e6a0f9175aa2e1f0005495dfa29e8910eb4368d95f1e2652eaa66ed5efd"
+      "fingerprint": "6f293f3fe69cb37537ee1570dd642dccca7e8fa92637fd291617541df6a28950"
     },
     {
       "id": "nature:tiger:lush:v1",
@@ -4814,7 +4860,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-tiger&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=lush&zoom=0.8",
-      "fingerprint": "090a8df69b5e89b510fbeeb4f5f769a8778dc488a94ebf570456962e6c40b81b"
+      "fingerprint": "4d6e9fc749ef8c7a613966a309ed5b9faba0b4a82f4894e00eaacd9aa326ad2a"
     },
     {
       "id": "nature:tiger:thicket:v1",
@@ -4824,7 +4870,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-tiger&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=1&x=4&y=4&landscape=thicket&zoom=0.8",
-      "fingerprint": "47019f51800a063e2d07b813f4f68dbee443862d82b0984794d6e79ed8c590a3"
+      "fingerprint": "c6ab010085340e5265a6f86a7727de5ec4ab9eb30bef301e7338ed0b8d1d9945"
     },
     {
       "id": "nature:fox:sparse:v1",
@@ -4834,7 +4880,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fox&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-598&y=-538&landscape=sparse&zoom=0.8",
-      "fingerprint": "f01f0a6d35fcd16d0dafa1a21bd8a7a47e0008e8fbe723bd08cf81649717f166"
+      "fingerprint": "b0335760c23cef2813dc000cdfc3c78d974fdae9d9970d896b80739245da67c8"
     },
     {
       "id": "nature:fox:balanced:v1",
@@ -4844,7 +4890,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fox&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-598&y=-538&landscape=balanced&zoom=0.8",
-      "fingerprint": "a83dad0337eb100424371c586565ad3d12c8fb353162d1e7fc76dbb1a08396a7"
+      "fingerprint": "898c79c25a131d40c6d715053e5cf6a13234acf1a4146c9df57f3615571b1e35"
     },
     {
       "id": "nature:fox:lush:v1",
@@ -4854,7 +4900,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fox&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-598&y=-538&landscape=lush&zoom=0.8",
-      "fingerprint": "0d21d940c9c8285bdfccf6cd6ecbc46fa230a2c0ea73e86f92a28fa3c1cc5c13"
+      "fingerprint": "3f094505df25890a3450c69bd07bdcf21920abe720b7cb0f2b9319a0b52edce6"
     },
     {
       "id": "nature:fox:thicket:v1",
@@ -4864,7 +4910,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fox&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-598&y=-538&landscape=thicket&zoom=0.8",
-      "fingerprint": "c2f86ac0ac6c30f19b6bc4fe7aaded3dce49ca74e71121254c09c8f4ab82b917"
+      "fingerprint": "3d1401a09b6ae9f521115f11b75cb18c4b5a0168f38748ba9e1bc49c92db463f"
     },
     {
       "id": "nature:cat:sparse:v1",
@@ -4874,7 +4920,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=32&y=37&landscape=sparse&zoom=0.8",
-      "fingerprint": "5ed4a75940f75bf10854cd623a9265ef8792906f48fd42a3e3c99441a23704a5"
+      "fingerprint": "bdeee830367cd2a5ef610f5d566fd8fb3d8ce03fb1f528faa3bdd3f5ccb58878"
     },
     {
       "id": "nature:cat:balanced:v1",
@@ -4884,7 +4930,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=32&y=37&landscape=balanced&zoom=0.8",
-      "fingerprint": "89c2f6e604ce491952feb840d138b94040728ae2f27a44073358fa5f96ad1d4b"
+      "fingerprint": "0014526c5049c4d00a62993381b443ea99439d53024768652c20af90ccc5325b"
     },
     {
       "id": "nature:cat:lush:v1",
@@ -4894,7 +4940,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=32&y=37&landscape=lush&zoom=0.8",
-      "fingerprint": "accb2ad65e1ed6afa9a4cc5064950288f7f3b4dad68a6de4f467159641d1414f"
+      "fingerprint": "1a7a92705359b3e4500a03abb5ab53c929695f2b6e779e321d77f068e93918cc"
     },
     {
       "id": "nature:cat:thicket:v1",
@@ -4904,7 +4950,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=32&y=37&landscape=thicket&zoom=0.8",
-      "fingerprint": "b6a1844532ec18534f16eeec3e0801ed506492adc07e355bb7047c7cb859392a"
+      "fingerprint": "81f260a74270a927946801f88faf52e72a1a2c70f45a1c34731005e1eb83129e"
     },
     {
       "id": "nature:dog:sparse:v1",
@@ -4914,7 +4960,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-25&y=102&landscape=sparse&zoom=0.8",
-      "fingerprint": "530913bb188291efec47f99092f4e575fab2a298477f61d5f250447330174e86"
+      "fingerprint": "91ade8ca3ec02d8e393000db9636e2fc7f7973b3d5fe46fcf76dfebab220836d"
     },
     {
       "id": "nature:dog:balanced:v1",
@@ -4924,7 +4970,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-25&y=102&landscape=balanced&zoom=0.8",
-      "fingerprint": "09f001e5c05eb139b2e35d1c2fa78aa3c484b383dfc6a221d68379cdfb873732"
+      "fingerprint": "0e521586b96cac51171ae36a493e3aa690cfaca46be1a95e21d17dd30f7b7395"
     },
     {
       "id": "nature:dog:lush:v1",
@@ -4934,7 +4980,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-25&y=102&landscape=lush&zoom=0.8",
-      "fingerprint": "bd622b21daff4d443d0859291d1d6452d5378848b5a1c03d4eb1531d5a3eebd1"
+      "fingerprint": "acf00365cc6694e845150d017056e09b1ba796f6a38fdfa8daa4fa117711d28b"
     },
     {
       "id": "nature:dog:thicket:v1",
@@ -4944,7 +4990,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-25&y=102&landscape=thicket&zoom=0.8",
-      "fingerprint": "d1244b62bdfed4fd1e397109aee7bcdd4360d59a894afd77d441cc4b6fe35744"
+      "fingerprint": "2d906a9b21d6d06f3fbceda6a2de1c694f020832ad811ea2011a5e4cca4f5760"
     },
     {
       "id": "nature:cow:sparse:v1",
@@ -4954,7 +5000,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cow&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-98&landscape=sparse&zoom=0.8",
-      "fingerprint": "34fee0951401f82be00cc90806a427a679728149972b76c5db76a30484822397"
+      "fingerprint": "27774e3f202aca00544c26398c6357d6733b3a3c7df5b8d3db564cd5bdd17842"
     },
     {
       "id": "nature:cow:balanced:v1",
@@ -4964,7 +5010,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cow&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-98&landscape=balanced&zoom=0.8",
-      "fingerprint": "044f2d217351f2a6de1c838551afdcd271176f0718005beea2312d13663385f3"
+      "fingerprint": "1037e02978fd227e583fbf729563e14eac9e420f0e0da781fe1ceab3d77a8af6"
     },
     {
       "id": "nature:cow:lush:v1",
@@ -4974,7 +5020,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cow&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-98&landscape=lush&zoom=0.8",
-      "fingerprint": "f41baafb45e18ed95596a12a1ce68e137373432876edfa346849024eec48da76"
+      "fingerprint": "a795693f55b2017aa8465ed213b330c2a4aa3abc8a06667814a89aa021ddd533"
     },
     {
       "id": "nature:cow:thicket:v1",
@@ -4984,7 +5030,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cow&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-98&landscape=thicket&zoom=0.8",
-      "fingerprint": "08e8c71fe829f3a87c8550a4ccfd3496f11da436e27a0e0f31fae7e4e31e1c44"
+      "fingerprint": "19e07f9ba978d7ee39304a642de1227f9ba34f5fab88662b1de99d7464a21577"
     },
     {
       "id": "nature:sheep:sparse:v1",
@@ -4994,7 +5040,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-sheep&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-355&y=284&landscape=sparse&zoom=0.8",
-      "fingerprint": "e1335d2e5d96dfd5ac87b6a2bc37dce93d8c019d1a1c9e2dff3bfe5d669ac8a1"
+      "fingerprint": "be1339e1bab97a76cb3b9345eb18923b7d994f92bf8d832d048187bc2100031b"
     },
     {
       "id": "nature:sheep:balanced:v1",
@@ -5004,7 +5050,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-sheep&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-355&y=284&landscape=balanced&zoom=0.8",
-      "fingerprint": "f335d470568f2b978ea69f4e106387a9d29f088c949cff13bf741532f3fd270d"
+      "fingerprint": "d87030511690eeb20f20294f4868d1afb20620ed2d3733b92552c78036aae625"
     },
     {
       "id": "nature:sheep:lush:v1",
@@ -5014,7 +5060,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-sheep&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-355&y=284&landscape=lush&zoom=0.8",
-      "fingerprint": "86bf6fd16d74029a66a637e5dfaf38d70f56187f1d17b4ba245857c4e71a0f0a"
+      "fingerprint": "b20441dcc9483d5930028a69e03f61a97c65994e62becdc8529947d2b8e6ed4a"
     },
     {
       "id": "nature:sheep:thicket:v1",
@@ -5024,7 +5070,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-sheep&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-355&y=284&landscape=thicket&zoom=0.8",
-      "fingerprint": "dc5f91af95c164d044b0da6c3255ed5b1ef036480da8088dbfc96a7d870b4b13"
+      "fingerprint": "e40e99b39217149b0ff7cd5eaa3dd38ef1af2513c694c6696b60543522906034"
     },
     {
       "id": "nature:horse:sparse:v1",
@@ -5034,7 +5080,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-horse&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=105&y=290&landscape=sparse&zoom=0.8",
-      "fingerprint": "907d836002b7bf279fa560981944948f13e0eda30beb398bc99fed658eff20d8"
+      "fingerprint": "46963d902ded00d09aa604d4031396acc072f7ea62ece91cdf013d7e39fe88e3"
     },
     {
       "id": "nature:horse:balanced:v1",
@@ -5044,7 +5090,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-horse&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=105&y=290&landscape=balanced&zoom=0.8",
-      "fingerprint": "5ca4534192a750621ba6e03f8d006c4458f630ec0f09fa10fab7c2b187e4d143"
+      "fingerprint": "5bb94bdd9966a391194eec08752d5998a30e5e54242b3154f616880a031697e7"
     },
     {
       "id": "nature:horse:lush:v1",
@@ -5054,7 +5100,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-horse&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=105&y=290&landscape=lush&zoom=0.8",
-      "fingerprint": "78f6f34044a6ca1ce657f28f91aa4087de055a5870d2aff3131d22d90a462012"
+      "fingerprint": "c77b06e19421540d4118bef8b3cb8a0e41258a3716ec5278911adc2a74e2f966"
     },
     {
       "id": "nature:horse:thicket:v1",
@@ -5064,7 +5110,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-horse&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=105&y=290&landscape=thicket&zoom=0.8",
-      "fingerprint": "624a4df0f67b1251ff82ca188e7f55a8a2470e44e65d98d6d6eca9aea781cf23"
+      "fingerprint": "0bf998a3ad6a199e64eb738a4308e7450e9052c691cec045e18b98a2f4e44209"
     },
     {
       "id": "nature:piglet:sparse:v1",
@@ -5074,7 +5120,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-piglet&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-29&y=221&landscape=sparse&zoom=0.8",
-      "fingerprint": "a776de41d44307c05c7a12f26a9b6f7fbb42008ead9d1506039605b32aa9908b"
+      "fingerprint": "f4bd1000c55f9f6387853048d26b0abe03fda12014267033ab652e7ef564a483"
     },
     {
       "id": "nature:piglet:balanced:v1",
@@ -5084,7 +5130,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-piglet&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-29&y=221&landscape=balanced&zoom=0.8",
-      "fingerprint": "2057907836b953db33685eae8da5b6c30e51663cbe783c8faedd9e128eb72761"
+      "fingerprint": "daacbed6e160a0d79b069e738dcbe0622a308ac7e3b78748850528c7b94e4a35"
     },
     {
       "id": "nature:piglet:lush:v1",
@@ -5094,7 +5140,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-piglet&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-29&y=221&landscape=lush&zoom=0.8",
-      "fingerprint": "d8cc320259b97c76d0602a013ecee9dc6a5dd035ea7042f8f8a00f6c5f36b4e0"
+      "fingerprint": "e3f40a95711e047f748cb7d0e2ff5623a169bc8351ba2c0af79d4ac1352e3c69"
     },
     {
       "id": "nature:piglet:thicket:v1",
@@ -5104,7 +5150,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-piglet&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-29&y=221&landscape=thicket&zoom=0.8",
-      "fingerprint": "bedf26a92486b2817bfae75db61093111abeb095ae1be739c1014b39fce9bbe4"
+      "fingerprint": "01e3eaa20af9ef268eabd2b506e6a3214b41e123ea5755af549ab1117771587b"
     },
     {
       "id": "nature:goat:sparse:v1",
@@ -5114,7 +5160,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-goat&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-30&y=297&landscape=sparse&zoom=0.8",
-      "fingerprint": "76c928759d8cfb67fd6bb32aecc268f44528069808719733e6264b0cb76516df"
+      "fingerprint": "9c0e52e44671636ac12a79a992205f2fa134845d3ea79175c52e0da071a64ecb"
     },
     {
       "id": "nature:goat:balanced:v1",
@@ -5124,7 +5170,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-goat&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-30&y=297&landscape=balanced&zoom=0.8",
-      "fingerprint": "552f5ce90df1d0ee9a9cbabd0ae6aa61fb08bae7e759a919f1ce462c7f183899"
+      "fingerprint": "22f3485f8f9ac6a3242972dcd9c17e99cc63f92df4376909d5c6185d0da71e93"
     },
     {
       "id": "nature:goat:lush:v1",
@@ -5134,7 +5180,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-goat&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-30&y=297&landscape=lush&zoom=0.8",
-      "fingerprint": "7786cd1188db12ea9ca1af67e9889f79b631126c2f3737875073806c3f4a8c80"
+      "fingerprint": "40bc776092b479c45a97746357b33bf680c8e3dedaa1b98201ed502ee688711d"
     },
     {
       "id": "nature:goat:thicket:v1",
@@ -5144,7 +5190,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-goat&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-30&y=297&landscape=thicket&zoom=0.8",
-      "fingerprint": "42ccde627168ebcb8be570defed6348dd2cba4cb19d9a035241d6acbbea3d0b1"
+      "fingerprint": "c1b10d7a1931fc6fff188cda39f5a541dd58f4c6b3e2f3f7f9a4f8a94e660105"
     },
     {
       "id": "nature:elephant:sparse:v1",
@@ -5154,7 +5200,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-elephant&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=110&y=-89&landscape=sparse&zoom=0.8",
-      "fingerprint": "1fb1d46f0ce5e61c8cb9e7da4dcf2e37e500e3087b4e278012bffd5452aab49c"
+      "fingerprint": "ccaf1bdc13a2d38b7b736bdc1ba1f3203d6e7f180c1b7d1153ecd94efd542b36"
     },
     {
       "id": "nature:elephant:balanced:v1",
@@ -5164,7 +5210,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-elephant&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=110&y=-89&landscape=balanced&zoom=0.8",
-      "fingerprint": "4d8a842d542eebf2ae4ec48fa72ecfb44e1c57ca338906d054cc69201646e35a"
+      "fingerprint": "cc6744bc3114c9b3b2d5143c0127495b8c74b6646b12eeae286c000d22b0f411"
     },
     {
       "id": "nature:elephant:lush:v1",
@@ -5174,7 +5220,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-elephant&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=110&y=-89&landscape=lush&zoom=0.8",
-      "fingerprint": "26acce67688e817407176c1a4a7fc0063ec325c5057a0afccd3dd38529872451"
+      "fingerprint": "da78a0913e4294bd78fee7986c963ae072b4c7cdbee298ca76f17187fdea3934"
     },
     {
       "id": "nature:elephant:thicket:v1",
@@ -5184,7 +5230,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-elephant&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=110&y=-89&landscape=thicket&zoom=0.8",
-      "fingerprint": "c7d47a466ea081616d804d53299b121b516fa5cc770a9df619f2bf8a12ff4020"
+      "fingerprint": "54141a03d02c19e3904ed2cf13f7d0d579c828c3bdff8061f91c1127f23e39d5"
     },
     {
       "id": "nature:giraffe:sparse:v1",
@@ -5194,7 +5240,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-giraffe&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=101&y=-150&landscape=sparse&zoom=0.8",
-      "fingerprint": "7de6f5ebe92fa0af239265bee9955e2c6bc628ae37be36e71d592b9600759782"
+      "fingerprint": "2c2c0484a0ae06c615043f6ba2e957ca1f32c9d50dcad8a9de781de6e80e830e"
     },
     {
       "id": "nature:giraffe:balanced:v1",
@@ -5204,7 +5250,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-giraffe&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=101&y=-150&landscape=balanced&zoom=0.8",
-      "fingerprint": "03f81a433eb7aca476c11fe88b7aa09dc994bc2f8614b76905b7a49f3e90ffb7"
+      "fingerprint": "3769e1e8d73fecbd2a88860c96950cf97a33ae225aa60ec6928893daf73baed3"
     },
     {
       "id": "nature:giraffe:lush:v1",
@@ -5214,7 +5260,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-giraffe&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=101&y=-150&landscape=lush&zoom=0.8",
-      "fingerprint": "49915706d20dfd5e4d63b162130d783e9702133ec4603b35bd2ad65f5ac62e03"
+      "fingerprint": "04690ff6105f9d0d0919153983da396aae0c3280d6c25a9e5b76ab3a4877fb03"
     },
     {
       "id": "nature:giraffe:thicket:v1",
@@ -5224,7 +5270,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-giraffe&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=101&y=-150&landscape=thicket&zoom=0.8",
-      "fingerprint": "271de42aeffaafa0191a51f36f2e6b90a78ed7d0e86bbb135955be10d0dc22d1"
+      "fingerprint": "4d9e5e01d10b7906b85f28b201bd04374dc51c99b1501562a8cf598958d85a65"
     },
     {
       "id": "nature:kangaroo:sparse:v1",
@@ -5234,7 +5280,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-kangaroo&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-21&y=-22&landscape=sparse&zoom=0.8",
-      "fingerprint": "8a1d3d57efad5437d186bb809a07dfd59acda049584ac429c674c0a38167dc50"
+      "fingerprint": "707099401e8a94ee05821b4640f492937f8ef2fbaeb67be412064c15909b4522"
     },
     {
       "id": "nature:kangaroo:balanced:v1",
@@ -5244,7 +5290,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-kangaroo&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-21&y=-22&landscape=balanced&zoom=0.8",
-      "fingerprint": "3f98fe04e8d8646a4626ba7e0530a24cced0c335cf196cf734d55e061e59d21d"
+      "fingerprint": "e67f785c8040d2ad1fd1511de25543e9aa1389cf3f979ecf13ce77b36e11cc24"
     },
     {
       "id": "nature:kangaroo:lush:v1",
@@ -5254,7 +5300,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-kangaroo&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-21&y=-22&landscape=lush&zoom=0.8",
-      "fingerprint": "c6ad2b8bc2d31d676f1d1af6c5147ca12a5cb120e82f276f66e68021958e7e1a"
+      "fingerprint": "eca2335d39a56d5fda9baf0ba0efb351d4d6f01b75d5e5d7d0b7a31901157507"
     },
     {
       "id": "nature:kangaroo:thicket:v1",
@@ -5264,7 +5310,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-kangaroo&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-21&y=-22&landscape=thicket&zoom=0.8",
-      "fingerprint": "eededfd6079991b0634107b3a9c06e72c3e6d722f1a9dc14dbe54bebdda9695d"
+      "fingerprint": "39e6dff6da18a849e93750b1962eede78bc661c71ed6e4d69227e6197b7e39a9"
     },
     {
       "id": "nature:king-cobra:sparse:v1",
@@ -5274,7 +5320,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-king-cobra&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-156&landscape=sparse&zoom=0.8",
-      "fingerprint": "2ab412d16cd0fb1f68e8c47b49db94d799d3c5df89f7557bcbdd6ab3f738861c"
+      "fingerprint": "f588c3fbd68ee48bb67d0c6824a047cc61df3389b0f76e01d1cd2672cbe56134"
     },
     {
       "id": "nature:king-cobra:balanced:v1",
@@ -5284,7 +5330,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-king-cobra&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-156&landscape=balanced&zoom=0.8",
-      "fingerprint": "8a41664e3a4ef2f6854738391adc82ef69cf81be2a4f60ffd3fe92b2206f2676"
+      "fingerprint": "dc5fca0328c5d880e052ae15b0550e1b256cd8b1d18f4b9f2f405ba018e31dec"
     },
     {
       "id": "nature:king-cobra:lush:v1",
@@ -5294,7 +5340,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-king-cobra&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-156&landscape=lush&zoom=0.8",
-      "fingerprint": "702c5ee6a1d7b45994af6354fb58feaf0ba29e4356491904faa3cd7a58d38406"
+      "fingerprint": "9ca8f96b0f46d480d58d438e995ae515d4fcbcdc3ed25fddd257712788eeabb5"
     },
     {
       "id": "nature:king-cobra:thicket:v1",
@@ -5304,7 +5350,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-king-cobra&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=31&y=-156&landscape=thicket&zoom=0.8",
-      "fingerprint": "8ba501acdf23c191f93e321732ee41a89939e8d84fc969cac8507039c06368a8"
+      "fingerprint": "4fcf846de05be5becfd4b8be4995cfd42c38c818235e6dc4d39458a6df5df169"
     },
     {
       "id": "nature:ant:sparse:v1",
@@ -5314,7 +5360,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-ant&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=167&y=-32&landscape=sparse&zoom=0.8",
-      "fingerprint": "f0effe1dd5d4deedcf838cc8b8a40d4f5577ff87b933c40969bbc296586b54db"
+      "fingerprint": "e7055037aa6359c46836611fcadd128f55c8c3b173b055341ad291ca873303fe"
     },
     {
       "id": "nature:ant:balanced:v1",
@@ -5324,7 +5370,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-ant&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=167&y=-32&landscape=balanced&zoom=0.8",
-      "fingerprint": "bc7c38c3810538621eae984dc63c4990074f1fe1d60404e96b3916431d406b87"
+      "fingerprint": "54345114e6013a22f46be32cb750bf87baedbb645c5d95ef0a3ef9efadfae3b8"
     },
     {
       "id": "nature:ant:lush:v1",
@@ -5334,7 +5380,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-ant&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=167&y=-32&landscape=lush&zoom=0.8",
-      "fingerprint": "b43f9216a61a3a779512d579a39c1c64660d4eb006c6fdcbaed406002249e263"
+      "fingerprint": "1322c6790bde380c4b35e5f6932098b5f15ae9d37d76db48834df115ffa59745"
     },
     {
       "id": "nature:ant:thicket:v1",
@@ -5344,7 +5390,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-ant&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=167&y=-32&landscape=thicket&zoom=0.8",
-      "fingerprint": "e92d6032a21bd5be032b63b660aea75aa3429b7d72a6ee50a9d7b7631964cb52"
+      "fingerprint": "ca413d05ee6292d531623fe853c337fb02993da63cd2c85e92d9fef93a7a892b"
     },
     {
       "id": "nature:fish:sparse:v1",
@@ -5354,7 +5400,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fish&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=sparse&zoom=0.8",
-      "fingerprint": "50bd48ffed27311ed9bbb7c643343b7fb8108ed07bc3c5b8efdaaaee120196b7"
+      "fingerprint": "cf1ae0ca9a6698d661fdc6de741e6b8cfe3aa41ca7f83be30069ef0c4213863b"
     },
     {
       "id": "nature:fish:balanced:v1",
@@ -5364,7 +5410,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fish&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=balanced&zoom=0.8",
-      "fingerprint": "f4f52dd1cd085195f2763c52ca01b31e91091911ee91313f49334a2c7a3f7f0a"
+      "fingerprint": "cb53a7d3e5606d0c1a209186874d5c518b8eac80e8cbbfc0c8c8dcbf414a94e2"
     },
     {
       "id": "nature:fish:lush:v1",
@@ -5374,7 +5420,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fish&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=lush&zoom=0.8",
-      "fingerprint": "402095dad0ca581036f028ebf2f94e08af41214962e9438516c3b5880cf0c75b"
+      "fingerprint": "750e763a7aa50c59b989122821d2567ca78d4931f22a65fc709a7fbc9b6a9364"
     },
     {
       "id": "nature:fish:thicket:v1",
@@ -5384,7 +5430,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-fish&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=thicket&zoom=0.8",
-      "fingerprint": "253d465187e2455be03b76eec3252d25a79e09828bbcb906eff245e335623e2a"
+      "fingerprint": "6f536fe0b95dc8b614c1c0f629973d1d823fc1c31d9082518e557c7fcdee5310"
     },
     {
       "id": "nature:penguin:sparse:v1",
@@ -5394,7 +5440,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-penguin&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-676&y=-2997&landscape=sparse&zoom=0.8",
-      "fingerprint": "219f996722c1e40b3f231a8c188505d6d97974e6d817d1b67d19710c89d90b53"
+      "fingerprint": "4347c50c5fa8de8284b3701dd8792598ed622fc579911c8087e0102164640d0f"
     },
     {
       "id": "nature:penguin:balanced:v1",
@@ -5404,7 +5450,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-penguin&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-676&y=-2997&landscape=balanced&zoom=0.8",
-      "fingerprint": "067a23e1daf5e3da7750511b690fae441392f104680820fb90fc26f21ab00fa4"
+      "fingerprint": "44da63ef9a517cda919967b91f875d9096ece2b95a2ca3b469b2c484d5169318"
     },
     {
       "id": "nature:penguin:lush:v1",
@@ -5414,7 +5460,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-penguin&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-676&y=-2997&landscape=lush&zoom=0.8",
-      "fingerprint": "cd1d1c3d7f784ff029296c6f96f0a270e81e8de9ab55e96f698f76e323eb8bda"
+      "fingerprint": "9ce5140d5ab5058329c8e449caa24e2958c600e35154228151300076605e4bff"
     },
     {
       "id": "nature:penguin:thicket:v1",
@@ -5424,7 +5470,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-penguin&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-676&y=-2997&landscape=thicket&zoom=0.8",
-      "fingerprint": "a3dead16e53e0623e1c724ee684b5d0ac32da41db73610a13f990029133c627b"
+      "fingerprint": "6ceafcd9425f3a084d1cce5a4a4d69f308f2af00abe007b3e0ec9d0d22238cec"
     },
     {
       "id": "nature:harbor-seal:sparse:v1",
@@ -5434,7 +5480,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-harbor-seal&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-637&y=-2997&landscape=sparse&zoom=0.8",
-      "fingerprint": "ac5e16aa81c1686cbe67d31bc6b68ae180fbb598c42f6527f16038233c7409fa"
+      "fingerprint": "d93ce0badaa2ad3d510747a8c53abe24400106680380fee4179b73201a0fbc89"
     },
     {
       "id": "nature:harbor-seal:balanced:v1",
@@ -5444,7 +5490,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-harbor-seal&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-637&y=-2997&landscape=balanced&zoom=0.8",
-      "fingerprint": "8af2244853e692a6577bc111168e05b413e559a755e8b57993c267acc728f9ab"
+      "fingerprint": "4ffad84a08d96ae2a195c5280a33ca38b798c923cfcc95c319545f236ea49abe"
     },
     {
       "id": "nature:harbor-seal:lush:v1",
@@ -5454,7 +5500,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-harbor-seal&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-637&y=-2997&landscape=lush&zoom=0.8",
-      "fingerprint": "6d140afa361354e3a6a15812a73f04e492b5a9ee679e1a3fa83011418b407654"
+      "fingerprint": "4859af3cf3610fa021fc394f1e3cc44001971aa915355cfc843c2a713bf2176f"
     },
     {
       "id": "nature:harbor-seal:thicket:v1",
@@ -5464,7 +5510,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-harbor-seal&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-637&y=-2997&landscape=thicket&zoom=0.8",
-      "fingerprint": "965ca38c0b99d3ac902de8062ec9f310f436d02aa64cb0dff3e245a6a30a35e3"
+      "fingerprint": "00594efaed09f2bb92814d504160886563ecfa828dc10def4c0bc5476e79f33f"
     },
     {
       "id": "nature:manta-ray:sparse:v1",
@@ -5474,7 +5520,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-manta-ray&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-656&y=-2997&landscape=sparse&zoom=0.8",
-      "fingerprint": "ef162d1dc1277a3eaea4faad857c6c0c925da3bd0ff437f3b248135a0fea1b70"
+      "fingerprint": "30586c96e15c81d62b4de8c4cc034af7715e32ad44cf6abd1b79101fd1c1c2b2"
     },
     {
       "id": "nature:manta-ray:balanced:v1",
@@ -5484,7 +5530,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-manta-ray&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-656&y=-2997&landscape=balanced&zoom=0.8",
-      "fingerprint": "184e5c8269c3eca15c25b171b5fdc35558cc8e63921ca4c93423a6cddbd87060"
+      "fingerprint": "80037827ee47198e1647c57044740a194374b426ef306050526b4b1701fc6a25"
     },
     {
       "id": "nature:manta-ray:lush:v1",
@@ -5494,7 +5540,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-manta-ray&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-656&y=-2997&landscape=lush&zoom=0.8",
-      "fingerprint": "0d7c07f2b24a8dacedf400774e12c42a35d0299e08af0aa8c8e13d371224887c"
+      "fingerprint": "c96dd25225d324f9df7fe3c3e6e09079f0707a64c8df32ca890bc3319668020f"
     },
     {
       "id": "nature:manta-ray:thicket:v1",
@@ -5504,7 +5550,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-manta-ray&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-656&y=-2997&landscape=thicket&zoom=0.8",
-      "fingerprint": "d135b52ceb0033a18d08c20006638174ff9b0fd080c2b3e1d7e133eb97eb8f6b"
+      "fingerprint": "92e916d498ad087d4751d3f90bd55f500c4d06d4e48392b8e3c9d6265b75a179"
     },
     {
       "id": "nature:cat-ginger:sparse:v1",
@@ -5514,7 +5560,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-ginger&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2380&y=-2464&landscape=sparse&zoom=0.8",
-      "fingerprint": "87e95c71803340ca9be83753b5937b7baffd2b21dbec286d5a6afd3adb78a409"
+      "fingerprint": "84199e86eed1c0dc69a4db99b2e6959ac59a344716c58239876022187849a140"
     },
     {
       "id": "nature:cat-ginger:balanced:v1",
@@ -5524,7 +5570,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-ginger&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2380&y=-2464&landscape=balanced&zoom=0.8",
-      "fingerprint": "c89160df60d74243c3805c66ac5179cb7d1d9d7f576b2899951c67ee43081522"
+      "fingerprint": "e557119d4e30d59e128c995e61bbfbfcf3835955449a4da7c4ab73e49e282c24"
     },
     {
       "id": "nature:cat-ginger:lush:v1",
@@ -5534,7 +5580,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-ginger&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2380&y=-2464&landscape=lush&zoom=0.8",
-      "fingerprint": "e3c11651c6782efb8c7579aeff6ddcecb130383547ecbc170efaba2b6ac34d68"
+      "fingerprint": "42b0718def850dc898fbd5fe404c25a02e9d0a4ff5caee438bdfd5145a8d1690"
     },
     {
       "id": "nature:cat-ginger:thicket:v1",
@@ -5544,7 +5590,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-ginger&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2380&y=-2464&landscape=thicket&zoom=0.8",
-      "fingerprint": "b55a73407753bd5e27b9badf1d91ac321a6013972f1d6f16189d6bc1d7f6679e"
+      "fingerprint": "0a8753ba1bac7e4f4e6f2c8dea9609e5a57e36faaa6f2dc57dbe41ba642990f8"
     },
     {
       "id": "nature:cat-black:sparse:v1",
@@ -5554,7 +5600,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-black&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1434&y=-2735&landscape=sparse&zoom=0.8",
-      "fingerprint": "d3872b76f040fcac03c7467bc7302f548505791d758e2a832b39c42d9df604d4"
+      "fingerprint": "9ec11dfcc99c98da07165efd268ad46a8d542773463793f61b24664a1d029d09"
     },
     {
       "id": "nature:cat-black:balanced:v1",
@@ -5564,7 +5610,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-black&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1434&y=-2735&landscape=balanced&zoom=0.8",
-      "fingerprint": "671902bf98dbaf03a998a7869b2e3d3b9bf3ab5a551527a342a6e769cd5a3580"
+      "fingerprint": "c501bb82c281cc58d1bbde43431ea37763ba0506f39d28aca43afd19c3ac3abf"
     },
     {
       "id": "nature:cat-black:lush:v1",
@@ -5574,7 +5620,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-black&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1434&y=-2735&landscape=lush&zoom=0.8",
-      "fingerprint": "3630eef11c662cfd21b318ea029edb00b55e27cbde50499b992f97c77c72a6e7"
+      "fingerprint": "d1e0183ccf4bb01f9986a70f876d6a66823bc9e9294f751f2c74c33dcf11fd2e"
     },
     {
       "id": "nature:cat-black:thicket:v1",
@@ -5584,7 +5630,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-cat-black&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-1434&y=-2735&landscape=thicket&zoom=0.8",
-      "fingerprint": "0573b7c32017fd5298e11e90e60e7206ba185204e4c71ac49b26635f1984d0a3"
+      "fingerprint": "0bc1fe78c080ffc1aa77381b545e2185919ef74ebfeccce11b5956c3eec9f1e0"
     },
     {
       "id": "nature:dog-golden:sparse:v1",
@@ -5594,7 +5640,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-golden&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-690&y=-2734&landscape=sparse&zoom=0.8",
-      "fingerprint": "4d1ad01c9826b8d2e3dea600f939b9305f6fa7c0f6de6b27e432016f0ad998fc"
+      "fingerprint": "2eb37ccb4125676143382386fcf77afd64d2ca5ab2ab27b825a6ca87c1da369c"
     },
     {
       "id": "nature:dog-golden:balanced:v1",
@@ -5604,7 +5650,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-golden&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-690&y=-2734&landscape=balanced&zoom=0.8",
-      "fingerprint": "66f2be2b98d3f4abf41d2bd32fc732634a91fc81f508607cf29a93285f652ee6"
+      "fingerprint": "aa6df419ead305b5591beb6f3c8b04aa51f01e21720956a2257c0c2be95e6e12"
     },
     {
       "id": "nature:dog-golden:lush:v1",
@@ -5614,7 +5660,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-golden&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-690&y=-2734&landscape=lush&zoom=0.8",
-      "fingerprint": "afe63555730c0b79a15ca9379eb4a2841254d3f7623a184c0405cf090115d8b0"
+      "fingerprint": "493564ae86f3e57364449851510dd9c253c45cd8eaaa106d9b1b878f20d387c4"
     },
     {
       "id": "nature:dog-golden:thicket:v1",
@@ -5624,7 +5670,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-golden&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-690&y=-2734&landscape=thicket&zoom=0.8",
-      "fingerprint": "5bf437e5b1ca4c845492bfbd19bec703166e32d76d568d91b6528a7876abb54e"
+      "fingerprint": "1d99e46e6e5d1a9a862f711f1b7919001207e967a402862655fb56b358edb557"
     },
     {
       "id": "nature:dog-shepherd:sparse:v1",
@@ -5634,7 +5680,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-shepherd&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2395&y=-2469&landscape=sparse&zoom=0.8",
-      "fingerprint": "7f0e09b41559047e1641d571d3e4e655f9354e559ce2fc217a75833362c78ee4"
+      "fingerprint": "bdbddfb53d6e09d123f9a51bf9ef2b88bde641013d9892f9df148936c066da15"
     },
     {
       "id": "nature:dog-shepherd:balanced:v1",
@@ -5644,7 +5690,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-shepherd&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2395&y=-2469&landscape=balanced&zoom=0.8",
-      "fingerprint": "0ce26fb81674b2f8a3ad7922cb392d1d3ee6388c379cca390b98c1ce4af535d9"
+      "fingerprint": "b0456953c130ff1345e307ea1b34e0c5f4497ef7a39fc353b57e079d4e31ccaa"
     },
     {
       "id": "nature:dog-shepherd:lush:v1",
@@ -5654,7 +5700,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-shepherd&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2395&y=-2469&landscape=lush&zoom=0.8",
-      "fingerprint": "cf86f8df5e138b9743836e490f57a1255874738d18db3510223b45f820d6a98d"
+      "fingerprint": "d7eacaa010c10bee31ae74cacab11600044acacfc1e0022f170b1af9240f4959"
     },
     {
       "id": "nature:dog-shepherd:thicket:v1",
@@ -5664,7 +5710,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-dog-shepherd&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-2395&y=-2469&landscape=thicket&zoom=0.8",
-      "fingerprint": "1e87207bb3a6304ddc96cb016482b1ee2e5f492aae30604f01131ed88b27843c"
+      "fingerprint": "a886cb07eea25c1da41a1b6d625e3154256049fc036d6ef68ae3e50fdc4d140d"
     },
     {
       "id": "nature:farmstead:sparse:v1",
@@ -5674,7 +5720,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=sparse&zoom=0.8",
-      "fingerprint": "1a07d4c00c19dbf0745f96769e249c5c2d423ab0c6c9e18754e5c4b7d70a1ace"
+      "fingerprint": "82938d296516e52721afce8c53fc1d5ec092fe0e1c86fac1915173e822f6f8e8"
     },
     {
       "id": "nature:farmstead:balanced:v1",
@@ -5684,7 +5730,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=balanced&zoom=0.8",
-      "fingerprint": "8cc510e424237f2a4bdf18f59eca099f96d93fca462d6ec2c6cc1863d7b9ecea"
+      "fingerprint": "a1f95753fd8c67b872116537b54dc725b781a94f1e6943b3fa600c917a6324c2"
     },
     {
       "id": "nature:farmstead:lush:v1",
@@ -5694,7 +5740,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=lush&zoom=0.8",
-      "fingerprint": "7a49324583b760211ad479495e00f72e254c1c650f0b0122a33252dbe9331a0b"
+      "fingerprint": "a2a2abeaedd7e414c396e73a52ad9410097a297e3314ba31dccb597df38ae2c8"
     },
     {
       "id": "nature:farmstead:thicket:v1",
@@ -5704,7 +5750,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=thicket&zoom=0.8",
-      "fingerprint": "8d27e9b64cf77d7bb4836f82990aaf5bb21b8f6d48fa658cf70f60b5c208e93e"
+      "fingerprint": "8576470e72e79ea1d03518433287718d9df6dc98090bbe321e563cc02e517cee"
     },
     {
       "id": "nature:village-pets:sparse:v1",
@@ -5714,7 +5760,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=sparse&zoom=0.8",
-      "fingerprint": "d0b44ebd714d12276841a06d5ca328e80f3f64eda30c3cfe4c534415b949ee99"
+      "fingerprint": "0e37ee12c8d56df4fd291bce7c2c197185a343d5770597fc6b871dacfab6cdd1"
     },
     {
       "id": "nature:village-pets:balanced:v1",
@@ -5724,7 +5770,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=balanced&zoom=0.8",
-      "fingerprint": "8cbcfc794df906b57166fe0746cb27f6407e018890e902bc47d4c75e2d8b1ff1"
+      "fingerprint": "7ef39d538bd854c05966aa68003fdb513ce7ffa804eefe828ffa0a0daf7bec3d"
     },
     {
       "id": "nature:village-pets:lush:v1",
@@ -5734,7 +5780,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=lush&zoom=0.8",
-      "fingerprint": "1c983521b2336af769787a09adb899c7b022639f8a84e1001ea4d7a5c2bd6f76"
+      "fingerprint": "5b446a60f75c808e38b35c4c422eac0301590403de2577852ab0cd9811ccad9e"
     },
     {
       "id": "nature:village-pets:thicket:v1",
@@ -5744,7 +5790,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-village-pets&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=672&y=-592&landscape=thicket&zoom=0.8",
-      "fingerprint": "27cde8288501356db061646d2e98db23621af3388a36cc4c856fe4d2e0f918e5"
+      "fingerprint": "c8ef9fd6557521076ccc86271ed097642bcbb1d4117e24accf1ca8e3f3400dc5"
     },
     {
       "id": "nature:city-center:sparse:v1",
@@ -5754,7 +5800,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=sparse&zoom=0.8",
-      "fingerprint": "83cdf276e65d0026d8ee775c64db15e74cb28b6d0ddfb2bd69a6a2dcb61de9d3"
+      "fingerprint": "1398b3ef4cecd1ee35eb243f245425452511586dd2c9e3bf4eada248d355b9e0"
     },
     {
       "id": "nature:city-center:balanced:v1",
@@ -5764,7 +5810,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=balanced&zoom=0.8",
-      "fingerprint": "115b2dae3509f63db43587ad089689f11f6bcb3da989e052577caab6e628c220"
+      "fingerprint": "f02808b86912f868417739ab837af2e07e57c70d25cc1bdf2765c022e173011e"
     },
     {
       "id": "nature:city-center:lush:v1",
@@ -5774,7 +5820,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=lush&zoom=0.8",
-      "fingerprint": "5eaebc7ed0f8732b7194cdd2a7007999a8106298eabd5effb3cc2aa8082a8d7a"
+      "fingerprint": "1271bfa9945f4866a2de98eb3a193e194d5c5de18783730f37b281bcbcfb100e"
     },
     {
       "id": "nature:city-center:thicket:v1",
@@ -5784,7 +5830,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-center&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=300&y=519&landscape=thicket&zoom=0.8",
-      "fingerprint": "4ab40f6bd86247ec18282f8a5d8293b5538103fa84058b11e4d209281a08f286"
+      "fingerprint": "2876132caf62638ab9ae67aa911d41920de235002c8c0b11c671c08c2d3e25b3"
     },
     {
       "id": "nature:city-pets:sparse:v1",
@@ -5794,7 +5840,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=sparse&zoom=0.8",
-      "fingerprint": "32e87fc68ffb6541e7725f395d13e047984dd775176e676d043ead308cda01a8"
+      "fingerprint": "cffd036f9bf5b5fae7654dec6bf9db43e278eacf6e121d8c11ecfce681ee5fb6"
     },
     {
       "id": "nature:city-pets:balanced:v1",
@@ -5804,7 +5850,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=balanced&zoom=0.8",
-      "fingerprint": "ac0d1fab5c89fbbc529b1f5e068a3578e8c732e02f647cfd07350601b045eeeb"
+      "fingerprint": "74e48e25cb75f3d8ff54439da0d7e4c80563e894187286a5a0ff1eceb2f1900d"
     },
     {
       "id": "nature:city-pets:lush:v1",
@@ -5814,7 +5860,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=lush&zoom=0.8",
-      "fingerprint": "5d3e87456d6cf86b276339493f010dc51ed0b92f2899b922749b6a9e482c4e96"
+      "fingerprint": "a3ad2d3a89997fd8b35733b3258114180cf1a61705dd1cea19f895d6b7525aa8"
     },
     {
       "id": "nature:city-pets:thicket:v1",
@@ -5824,7 +5870,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-city-pets&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=306&y=540&landscape=thicket&zoom=0.8",
-      "fingerprint": "a8571cae9e7366c45148c633e60579c899ce4c88b57bc0597df8a610ef9ec062"
+      "fingerprint": "7a03574afd1b8b76e6aa9e7faa912664d073db753fb5cee6d2a632ed95d09f45"
     },
     {
       "id": "nature:meadow:sparse:v1",
@@ -5834,7 +5880,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-meadow&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=480&y=-512&landscape=sparse&zoom=0.8",
-      "fingerprint": "daffd0ae1769ee713ea46e7d5faf70f517e80cdf11d53a34b3865233e10c1fcc"
+      "fingerprint": "092fb93db358ad2f4d2635837cdc1edffcc185d811333579961bb782e05a54fd"
     },
     {
       "id": "nature:meadow:balanced:v1",
@@ -5844,7 +5890,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-meadow&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=480&y=-512&landscape=balanced&zoom=0.8",
-      "fingerprint": "09dd564d41c95c0a6ccd0bd45225e98da036faf7267254a40008d4a287d29e51"
+      "fingerprint": "cf502ee8c839430ecb6a258a3cc7867f58b46a41b5c706d588da3a1fc37e011f"
     },
     {
       "id": "nature:meadow:lush:v1",
@@ -5854,7 +5900,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-meadow&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=480&y=-512&landscape=lush&zoom=0.8",
-      "fingerprint": "e09a52fc3175dd1e121aadb56a763739409fb481bb9b43ed1a84087a7677b952"
+      "fingerprint": "2cf47c43c0159181467a75f2f40f9de47b4d267e8e19c3422ffad33f11bc4497"
     },
     {
       "id": "nature:meadow:thicket:v1",
@@ -5864,7 +5910,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-meadow&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=480&y=-512&landscape=thicket&zoom=0.8",
-      "fingerprint": "b29aa122de3f10d7220d2f0d0a8d002694e0b4ee3c83703f89fa0f444e3b9175"
+      "fingerprint": "dbcd132e424ffab20ad9f05c3bc84e521bbd901fbd5aa87bbfbb63514fdbc429"
     },
     {
       "id": "nature:grove:sparse:v1",
@@ -5874,7 +5920,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-grove&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-160&y=-512&landscape=sparse&zoom=0.8",
-      "fingerprint": "870d9e49cfbd67be6e7b5d88fdf29bc87b4fdf2af01cdb7a3253d66168747364"
+      "fingerprint": "d70943e53ead43498280499939060b8a011243573d142aeac96946b785111e57"
     },
     {
       "id": "nature:grove:balanced:v1",
@@ -5884,7 +5930,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-grove&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-160&y=-512&landscape=balanced&zoom=0.8",
-      "fingerprint": "7b663c12a3c91fb97b21584a980dc25d7525a695f5acdc78317ba11a020e66b6"
+      "fingerprint": "5cf75b26aba878e5aa752c2e6992c5623bac4aea2a6fd97d45cf8668d157fdd4"
     },
     {
       "id": "nature:grove:lush:v1",
@@ -5894,7 +5940,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-grove&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-160&y=-512&landscape=lush&zoom=0.8",
-      "fingerprint": "928993786e0fb1b59c3ecfd9d576cf38cb297e8b9adcf197145abace06c19fdd"
+      "fingerprint": "81d88f50d03b665a21b8e1eea037b9ee88339779a5f931856fb137a18396dbbf"
     },
     {
       "id": "nature:grove:thicket:v1",
@@ -5904,7 +5950,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-grove&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-160&y=-512&landscape=thicket&zoom=0.8",
-      "fingerprint": "8e73ec01ea73d1810916a6cddc807fe72a9c59207b4feade8a5d6fa10d6dc7aa"
+      "fingerprint": "173cddb172eeee599658527db6153c30c7a4b7b7cdda6f576738f493c6740228"
     },
     {
       "id": "nature:forest:sparse:v1",
@@ -5914,7 +5960,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-forest&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-416&y=-512&landscape=sparse&zoom=0.8",
-      "fingerprint": "c00e8d6796de78d13882c802cf9e6b7b9eedfed5075dc7acef970a14eead0d15"
+      "fingerprint": "694d379ad939e08cd67bb053b63d8f5e160b9f88d1aea01a30377e934e00e2d7"
     },
     {
       "id": "nature:forest:balanced:v1",
@@ -5924,7 +5970,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-forest&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-416&y=-512&landscape=balanced&zoom=0.8",
-      "fingerprint": "6de4c2bd949a101ac6f02bf30db1f5cde66a726da11565ea87c0788afaf67254"
+      "fingerprint": "5e6fba6beb5627b719ccbff96b326aa9ab949c411ab72b75b6dc115bf32e8c4e"
     },
     {
       "id": "nature:forest:lush:v1",
@@ -5934,7 +5980,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-forest&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-416&y=-512&landscape=lush&zoom=0.8",
-      "fingerprint": "b868bd6615d52fa81dfb0cd9981b5db4d1d237548d72a707ded2e5e59dba8f18"
+      "fingerprint": "91759212a842cc14356e61fa1b07f4182f1bc6a28f48a0462b92fad9faab0b9f"
     },
     {
       "id": "nature:forest:thicket:v1",
@@ -5944,7 +5990,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-forest&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-416&y=-512&landscape=thicket&zoom=0.8",
-      "fingerprint": "d96aae07f85a466e0192bd0f01f83ec9b5803eea5a0874b78d3712dd02f7c072"
+      "fingerprint": "72244ac2e54a0af2db1727f131429b68e5b872aa0a847527fef7429d6196c726"
     },
     {
       "id": "nature:edge:sparse:v1",
@@ -5954,7 +6000,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-edge&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=7&x=-384&y=-512&landscape=sparse&zoom=0.8",
-      "fingerprint": "963df4c83b5470bf9d1ed770440b77840166f6c3ee408c76205b9b936969108a"
+      "fingerprint": "8c40ab7288b006fea3c8cd204cdd82fce0cfa065f674b09fd30cdf754ec07a04"
     },
     {
       "id": "nature:edge:balanced:v1",
@@ -5964,7 +6010,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-edge&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=7&x=-384&y=-512&landscape=balanced&zoom=0.8",
-      "fingerprint": "3db59a10dc06c87b4640aafe4a1fc9ced138752f8adf05e2156fc0d3bb04afb0"
+      "fingerprint": "f114a249ddea87e86c05a1b7731a395654289bafdf3d1fc541c906ba6e88827a"
     },
     {
       "id": "nature:edge:lush:v1",
@@ -5974,7 +6020,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-edge&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=7&x=-384&y=-512&landscape=lush&zoom=0.8",
-      "fingerprint": "53d418a24e8c4789343bb2bf1412d49ba9e0828521eaef1ae985fb7759aa37b3"
+      "fingerprint": "dab8ff5628f8658840faded1aea2537d920915cb56a84b8b4e1b1260b7aad02c"
     },
     {
       "id": "nature:edge:thicket:v1",
@@ -5984,7 +6030,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-edge&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=7&x=-384&y=-512&landscape=thicket&zoom=0.8",
-      "fingerprint": "1e7cb8e57c8e3e5cc764c2d1bb587d9054d03482f8b60ef358cec74df5886a51"
+      "fingerprint": "bf787251736830699cf1a9c62fe3c8443d21c6fda9213f3beab9a54da40ca500"
     },
     {
       "id": "nature:pond:sparse:v1",
@@ -5994,7 +6040,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-pond&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=sparse&zoom=0.8",
-      "fingerprint": "655d62388a95a3ebe0d5ff3dc32f728769a7ae4f4b54f5c7da3cb3d26b01f94a"
+      "fingerprint": "31aafce6a34fa6dc7e49b7a0ea7a56c49bad2f1d25ead95d328a61351c9bff0b"
     },
     {
       "id": "nature:pond:balanced:v1",
@@ -6004,7 +6050,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-pond&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=balanced&zoom=0.8",
-      "fingerprint": "7f020c64136bfd8bfcc057e03f614772a22b5557047ae71bd0295a992e050e3d"
+      "fingerprint": "837e79f369aef4010ad693b0ca7572a3e56c47d82dc11ddec0c8654a7265fc32"
     },
     {
       "id": "nature:pond:lush:v1",
@@ -6014,7 +6060,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-pond&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=lush&zoom=0.8",
-      "fingerprint": "741e430a965a0cf1d1751cde030f9f97a4d658aeae0f0f27963c335a46ecfd7c"
+      "fingerprint": "af4e349e30dd2ab2be6c11204ceffd30644807a4f1ec8dda343025e2ea3fe898"
     },
     {
       "id": "nature:pond:thicket:v1",
@@ -6024,7 +6070,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-pond&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=227&y=-183&landscape=thicket&zoom=0.8",
-      "fingerprint": "86d1b63f891c5a4f641f10a0421b5b2e80fc3330db736995c8f3710fdf03b2e0"
+      "fingerprint": "c77f5f901e3f802549aa5eb57d5dbefb895553daac1741b56e089b647832a47e"
     },
     {
       "id": "nature:frogs:sparse:v1",
@@ -6034,7 +6080,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-frogs&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=236&y=-181&landscape=sparse&zoom=0.8",
-      "fingerprint": "3f168d0687d6922a664192527df5150bc367c6cb7c05a42190b5ed7126821966"
+      "fingerprint": "ae5a11838154e1ef3208d3ca9ff731157a8a857558c7b0d165634648a90e4be6"
     },
     {
       "id": "nature:frogs:balanced:v1",
@@ -6044,7 +6090,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-frogs&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=236&y=-181&landscape=balanced&zoom=0.8",
-      "fingerprint": "25b6ec494e525d6a360255ec90957d0c2198762d1c63406c69f4e50354a9b3a4"
+      "fingerprint": "2a2752f7f07a4b292f375070a8dbec2beebf05a4c94edcaca7fbf6ca46fcb552"
     },
     {
       "id": "nature:frogs:lush:v1",
@@ -6054,7 +6100,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-frogs&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=236&y=-181&landscape=lush&zoom=0.8",
-      "fingerprint": "72d825f928b020781c6e678e1ac2eb7d97072e3215d0d1979164dd29d7ed6f8e"
+      "fingerprint": "ab764a68b77de4fc0f2682a4f1ee326bfbc12a841274fe4a1f9ece6e12c0f828"
     },
     {
       "id": "nature:frogs:thicket:v1",
@@ -6064,7 +6110,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-frogs&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=236&y=-181&landscape=thicket&zoom=0.8",
-      "fingerprint": "e89004cbecfe2cfe0eb9d78f8617f03d1e098a34ed54163e850313cdb4847145"
+      "fingerprint": "817ff4b03a4332078b7ecaaed8c0c66ff9fca6f6700d0fa2a2bdbc10db02a4c3"
     },
     {
       "id": "nature:deer:sparse:v1",
@@ -6074,7 +6120,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-deer&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-164&y=-460&landscape=sparse&zoom=0.8",
-      "fingerprint": "558ba186694ad4933ccd5b90c43171419a41169658bccf42430abcf057985d2d"
+      "fingerprint": "b6076c3fb37b9b5cfb6dcda0df0b7eb18dd37dea6ccf4b5c15354bbf4bc2bbfc"
     },
     {
       "id": "nature:deer:balanced:v1",
@@ -6084,7 +6130,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-deer&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-164&y=-460&landscape=balanced&zoom=0.8",
-      "fingerprint": "93cb33c8823f16b6aebb8e240d5627985e6eaf6adb9f5db9b8f5b8cda86e16ca"
+      "fingerprint": "9d90c05f56a27b5801354e025364f2d12698685f9ff4ee007f8fee6740f22812"
     },
     {
       "id": "nature:deer:lush:v1",
@@ -6094,7 +6140,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-deer&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-164&y=-460&landscape=lush&zoom=0.8",
-      "fingerprint": "5af2a59ff106111f49148962d47cfcc22a0721ed96b50baec584002e57059245"
+      "fingerprint": "2716bb5831b7812ce27401cfecb35b9e127e2bcb596f4188ba39f012585cef9d"
     },
     {
       "id": "nature:deer:thicket:v1",
@@ -6104,7 +6150,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-deer&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-164&y=-460&landscape=thicket&zoom=0.8",
-      "fingerprint": "025f51d373f2373be0175d095a73a170e035facb6d8a06928386dc36983aa1d6"
+      "fingerprint": "4c81b9b2f9edbf58125b80810f89283d9e8bf1e01fe1ae770ee49af54cde474c"
     },
     {
       "id": "nature:robins:sparse:v1",
@@ -6114,7 +6160,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-robins&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-163&y=-519&landscape=sparse&zoom=0.8",
-      "fingerprint": "9170743ef78fe16bc198c4e961fdceabace18ad20d9150ac9aeb022224e8c70e"
+      "fingerprint": "f34e30f5a017198ebed995a88c0a79becd7ed5e29007f92f45e274579f0f694a"
     },
     {
       "id": "nature:robins:balanced:v1",
@@ -6124,7 +6170,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-robins&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-163&y=-519&landscape=balanced&zoom=0.8",
-      "fingerprint": "56f1a3051c490dcd42afa226161f23b3163af84851770128b41816534abffb5e"
+      "fingerprint": "6e35575929fd0aa1b8a36c3136af37b6209639d21c19c345c91055922c55160a"
     },
     {
       "id": "nature:robins:lush:v1",
@@ -6134,7 +6180,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-robins&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-163&y=-519&landscape=lush&zoom=0.8",
-      "fingerprint": "c09d9ca3d1bb296638a50037a8736c8a3b88d1bb6d64b221e7c4b96d7b6d2541"
+      "fingerprint": "88c2317517fdd1abc4ec21b97b21b694baaf05fcd49a8096d32793bcb21f730a"
     },
     {
       "id": "nature:robins:thicket:v1",
@@ -6144,7 +6190,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-robins&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-163&y=-519&landscape=thicket&zoom=0.8",
-      "fingerprint": "82f2364992442c60cdeb34a374b8a61249f234e1a7a3ffac4b6f2a6cd5a1d018"
+      "fingerprint": "6a06b9c3b5b3dc8ba52eea969d4cfd4068ce27fca71e84f0a879ed0b4e175d75"
     },
     {
       "id": "nature:rabbits:sparse:v1",
@@ -6154,7 +6200,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-rabbits&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-151&y=-529&landscape=sparse&zoom=0.8",
-      "fingerprint": "0e5fc3ec3c9ecd5ca1ce600ddc0da0c51beffb3134fb502187429e60d2b5fc72"
+      "fingerprint": "1a7d4401c3b0e0112a05fd57847a53551a33566ef773419962381e04c9e41a54"
     },
     {
       "id": "nature:rabbits:balanced:v1",
@@ -6164,7 +6210,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-rabbits&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-151&y=-529&landscape=balanced&zoom=0.8",
-      "fingerprint": "105d714ec4c356b54247f5d3ac831dc6197e74390f1fd88fb7d5fa646524ea07"
+      "fingerprint": "bc7c3930e585f691edf53fb488832acab067f8dfc010327aeaf4c3e32ff0928f"
     },
     {
       "id": "nature:rabbits:lush:v1",
@@ -6174,7 +6220,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-rabbits&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-151&y=-529&landscape=lush&zoom=0.8",
-      "fingerprint": "99160278c2509f9816e15d417a73e673069c6c034266412b161e7a111a467df7"
+      "fingerprint": "9cb96bb447b3fe857c2e56a22a01aed278b31a16a6ca6df2e67ef3262a9da0ee"
     },
     {
       "id": "nature:rabbits:thicket:v1",
@@ -6184,7 +6230,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-rabbits&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-151&y=-529&landscape=thicket&zoom=0.8",
-      "fingerprint": "d7427d1cec2d0d326bc0966019feaa7bd9270f3a1bd84d37c8a7caed6b6ac7e2"
+      "fingerprint": "7547093496e20af2a4a07a75fe2b22e89ec6ce4e158d7dc2dfd5807ccdcd5643"
     },
     {
       "id": "nature:train:sparse:v1",
@@ -6194,7 +6240,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-train&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=2543&y=-2713&landscape=sparse&zoom=0.8",
-      "fingerprint": "155dbe9f9554833d354f3f387847d015e72bcc145361f2ebb9790ecd0231e37f"
+      "fingerprint": "557382f4e4864b69ac0b5497074d39f3b5959390a59c5653f4ac82c0c24794f3"
     },
     {
       "id": "nature:train:balanced:v1",
@@ -6204,7 +6250,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-train&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=2543&y=-2713&landscape=balanced&zoom=0.8",
-      "fingerprint": "d8b05b31bce438b2e2b2f753b59f8b486c5a0c099a955cd327389207e760b442"
+      "fingerprint": "04c90238708f8418182b9a54ae889d1b5581443b469796d64ef383745e4862fb"
     },
     {
       "id": "nature:train:lush:v1",
@@ -6214,7 +6260,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-train&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=2543&y=-2713&landscape=lush&zoom=0.8",
-      "fingerprint": "83f6d60944954d132dd7e5700d9c2176fc08bf74d56281a02745fd77f808f1d8"
+      "fingerprint": "d943038dee43e27773f4cc6fff4bfd13350ce77e8985e7558a5989732246145a"
     },
     {
       "id": "nature:train:thicket:v1",
@@ -6224,7 +6270,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-train&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=2543&y=-2713&landscape=thicket&zoom=0.8",
-      "fingerprint": "43ffa67ba4cad2c89c7b9de1c06b9594de6361537155f3050d6f781f8ef610b9"
+      "fingerprint": "a787c868b1c8cd9d0ba56b40f7952a3ee4e41ce7091142cef54718ee970aa04a"
     },
     {
       "id": "nature:thicket-1:sparse:v1",
@@ -6234,7 +6280,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-1&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-73&y=-425&landscape=sparse&zoom=0.8",
-      "fingerprint": "0fa64df4d740fd44b0c52c195dfd63dfd6269f5a682754aeb03826a5da43489e"
+      "fingerprint": "bec84aebbd6358474f4b25d02d9f812302da5aad0f48445210632ed37f95cbd9"
     },
     {
       "id": "nature:thicket-1:balanced:v1",
@@ -6244,7 +6290,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-1&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-73&y=-425&landscape=balanced&zoom=0.8",
-      "fingerprint": "2557a356b1881148b2ab50a1f3d1c933524e2e3f04f932772f1c4f0c5335501f"
+      "fingerprint": "2ad6216463ddcb795b7d298bc4545f47096932166ba8e1adf96ef086e077d69a"
     },
     {
       "id": "nature:thicket-1:lush:v1",
@@ -6254,7 +6300,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-1&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-73&y=-425&landscape=lush&zoom=0.8",
-      "fingerprint": "05cfba228970870dd40c6fbd3145ea90102a04e292647b4f292662376843f0bf"
+      "fingerprint": "cc017384347d6508006678874f85210161df61349c79b05577631284a70b3a36"
     },
     {
       "id": "nature:thicket-1:thicket:v1",
@@ -6264,7 +6310,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-1&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-73&y=-425&landscape=thicket&zoom=0.8",
-      "fingerprint": "6fde7231047fc68451559db4a9359f2240655626114e92b323937e9bc48b3725"
+      "fingerprint": "b5e998a7a5053769b2151771e619ce6e3eb514a75c5218bf7ad9888f2322818f"
     },
     {
       "id": "nature:thicket-2:sparse:v1",
@@ -6274,7 +6320,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-2&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-193&y=-548&landscape=sparse&zoom=0.8",
-      "fingerprint": "b718275562083d4726e0d540a23311a1761ed3a8eb6ed5ea25fa0935d6d8841c"
+      "fingerprint": "0284331b63a18b79de679ed82468a84cc78ae99b0e42bdedb75574a9cfb33377"
     },
     {
       "id": "nature:thicket-2:balanced:v1",
@@ -6284,7 +6330,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-2&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-193&y=-548&landscape=balanced&zoom=0.8",
-      "fingerprint": "50bf87d53243aca35fb45844fbe62102bd379e53cf68e522f2cb47a3a7742095"
+      "fingerprint": "6b96e507dfe51b1f826c9390e17af81c3bd4cab411ff468794c5d730956cde59"
     },
     {
       "id": "nature:thicket-2:lush:v1",
@@ -6294,7 +6340,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-2&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-193&y=-548&landscape=lush&zoom=0.8",
-      "fingerprint": "1fcec78482df3664c1d221ce95c77b673f173e77b605804a3f04338051d8359f"
+      "fingerprint": "e032c1cf4899e07c8434e763d503159760fc94c2b9ffa4b64e396fb79940dcfa"
     },
     {
       "id": "nature:thicket-2:thicket:v1",
@@ -6304,7 +6350,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-2&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-193&y=-548&landscape=thicket&zoom=0.8",
-      "fingerprint": "71f7ef6f90903aebf8ead3a8dddd511f984883526c042411b9829763a9f32e8f"
+      "fingerprint": "f49be630132ba7822015f67a28786aaea6159e8c89917d64e820548dda630349"
     },
     {
       "id": "nature:thicket-3:sparse:v1",
@@ -6314,7 +6360,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-3&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=180&y=-554&landscape=sparse&zoom=0.8",
-      "fingerprint": "2a494f3a8133fe114946b83a9d9f8693a833e6dded088b11b04df77c8f328ddf"
+      "fingerprint": "7f53f04c25d076c364e2b676f61da63e5c88931e04c1c6ccae4c0236ec749531"
     },
     {
       "id": "nature:thicket-3:balanced:v1",
@@ -6324,7 +6370,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-3&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=180&y=-554&landscape=balanced&zoom=0.8",
-      "fingerprint": "4570965619eac540a6ddfb134a67b4b0da73165a146ffff20610fdc7c118b934"
+      "fingerprint": "32a690ed9c7cacd05145ff8416cebf372611c4bbac4128f4dfdfc643113d8346"
     },
     {
       "id": "nature:thicket-3:lush:v1",
@@ -6334,7 +6380,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-3&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=180&y=-554&landscape=lush&zoom=0.8",
-      "fingerprint": "c70592177a01fe7c6dee732ef75cb84748eb4d3a9b2c6b4a175f99ab43dda405"
+      "fingerprint": "e3133fcad4a547d0648bc7ffd8ee9ee97f75d58ebc5b61be4dd368630aba4641"
     },
     {
       "id": "nature:thicket-3:thicket:v1",
@@ -6344,7 +6390,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-thicket-3&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=180&y=-554&landscape=thicket&zoom=0.8",
-      "fingerprint": "a3adde3e343fc6cee526b3856e9d31ae2b094cfd6529b69a896cbeab98a3a94e"
+      "fingerprint": "9da37fb9fda0bf61471e4abfeafb3cce7487c36d3511a44c62356b72c9eca667"
     },
     {
       "id": "projection:compact-car-v1",
@@ -6913,7 +6959,7 @@
       "name": "Ramp, raised deck and lower passage",
       "prompt": "Walk above and below the deck, jump into its underside and switch cutaway visibility. Schematic engine proof; no art promotion.",
       "url": "/tilefun/workshop.html#/tool/world-geometry",
-      "fingerprint": "b612300b53f719cb8b0f55ec42fc21a5794c95c12a62b9e5da4002b0a5f0b9fe",
+      "fingerprint": "d6d81783ec48c145b3eb4d111472dcfc5084c6b6b307b720e416803b2dd77456",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6923,7 +6969,7 @@
       "name": "Underground garage, entrance and usable street",
       "prompt": "Walk down through an opening in terrain into a covered garage, return continuously, and compare street/garage space identity and reload.",
       "url": "/tilefun/workshop.html?geometry=garage#/tool/world-geometry",
-      "fingerprint": "1855ebe3879d628582b3ae43788e8e1ae85cffbe12e95e52b29533986e1fd20a",
+      "fingerprint": "a1a52b2165bc9cae66bfd5878932ae50cf2c5a4cb72dd10af66e3ecfe9a5b47f",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6933,7 +6979,7 @@
       "name": "Road bridge over a moving train",
       "prompt": "Walk both road approaches while the production train service passes beneath; inspect clearance, ordering and save/reload. Schematic engine proof.",
       "url": "/tilefun/workshop.html?geometry=crossing#/tool/world-geometry",
-      "fingerprint": "daf483477091c037152778b44f79ccf68262ce292c68a6f15208d8956f5e4988",
+      "fingerprint": "7756fa0fa9596bfe44613d1e7a9be11039cecdc6fa911ab11466fd5c2cb52e75",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6943,7 +6989,7 @@
       "name": "Car crossing the railway bridge",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-bridge#/tool/world-geometry",
-      "fingerprint": "6fe995f8eba6458085abf4ff659502bda508dcbecd8dde1a92185dcc066355a0",
+      "fingerprint": "ca379e1a6e396dc82fb06414af8f35806740401d34ef9b7a6783a94fc85c2594",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6953,7 +6999,7 @@
       "name": "Car entering an underground garage",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry",
-      "fingerprint": "bd65ef6939eaad55e583a4fbcff06f6ddc32bf217b8d6b9868ba19a847cbe8d2",
+      "fingerprint": "3a81e995585a0f53da61383bb5a20af454a8816ae49064a67854830d9951d0ce",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6963,7 +7009,7 @@
       "name": "Train grades, bridge and tunnel",
       "prompt": "Follow three independent carriage heights across ramps, bridge and tunnel, reverse at both termini and reload on a slope. Schematic proof with horizontal native art and visible slope-join limitations.",
       "url": "/tilefun/workshop.html?geometry=train-grades#/tool/world-geometry",
-      "fingerprint": "36271ee4b30d27b01b203e3b1a400870c37dac89dbf78daaa155dcc84bafd6d0",
+      "fingerprint": "b936f90c345bf1d55d5ddcb399842d1bed3c737eaeae52e58b0ae747f2c7c93f",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -6973,7 +7019,7 @@
       "name": "Train around town, four stops",
       "prompt": "Inspect smooth corners, station stops, roof riding, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views; tracks use the production terrain renderer. Town/platform markers remain schematic.",
       "url": "/tilefun/workshop.html?geometry=train-loop#/tool/world-geometry",
-      "fingerprint": "223145b822bd1a2f9dfcb504ef7e37d9fe21570dc5cee3657397ef3d377a6f6a",
+      "fingerprint": "c2abd4a5d620bb6fd7032bb6afcd4775fad1bcbac89ee650fe73b04ad4c4225b",
       "excluded": "Interactive engine experiment; native sprite motion, not a promoted art snapshot."
     },
     {
@@ -6983,7 +7029,7 @@
       "name": "Winding train between towns",
       "prompt": "Inspect smooth corners, station stops, roof riding, opposite direction and save/reload in a bend. Native blue train sprites switch cardinal views; tracks use the production terrain renderer. Town/platform markers remain schematic.",
       "url": "/tilefun/workshop.html?geometry=train-winding#/tool/world-geometry",
-      "fingerprint": "3260772620b4e868b608b93955a2337beb3a34b27d2cd5ccdcd008ad405d1ab0",
+      "fingerprint": "7a0e69d8b95fa737ac04de4c369a2ca2f28747122f9dd871d84662d196472e2b",
       "excluded": "Interactive engine experiment; native sprite motion, not a promoted art snapshot."
     },
     {
@@ -6993,7 +7039,7 @@
       "name": "Ride trains between generated cities",
       "prompt": "Jump from Willowhaven station onto the train roof, ride the curved route to Willowbridge and jump off. Save/reload during the ride. Production towns, tracks, stations, streaming and train authority; extra road traffic is disabled in this temporary scene.",
       "url": "/tilefun/workshop.html?geometry=city-trains#/tool/world-geometry",
-      "fingerprint": "83ad6c7eeb36ff13955a0feee5450d5ee75d0740c8ef9245b31d700a134f635b",
+      "fingerprint": "74e6dd9a97bb08ee5ac703c67682184cd2db95b1522183c0e94e183e5db338cc",
       "excluded": "Interactive generated-world experiment; no immutable art bank promotion."
     },
     {
@@ -7003,7 +7049,7 @@
       "name": "Generated road bridge · seed 100",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-100#/tool/world-geometry",
-      "fingerprint": "ebd77d0a1b37267810e69eaefb02001e0746f95af7c9ecc5b36208eaac6f70e1",
+      "fingerprint": "bd4c715a0b3073d46248cd907034eb213763aeffc195380ae6b50ebfe8edcaf8",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -7013,7 +7059,7 @@
       "name": "Generated road bridge · seed 42",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry",
-      "fingerprint": "ae1094cf2fea83ee2cef032913bf13112ed8c4bf81dfcb8451368e54721b93e8",
+      "fingerprint": "434b51113214a2acb505c1e5d7dc6af148c509cddce6edf79676792ddf19cc9b",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -7023,7 +7069,7 @@
       "name": "Generated road bridge · seed 3",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-3#/tool/world-geometry",
-      "fingerprint": "1c5734d2c9785b45252220d84baacd06c21414eb69c64fedaf3f4893ef95621b",
+      "fingerprint": "0b56a782ef25608298360b33d9874e120bc2a79b375b23d61db9c0afaf3cceab",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -14932,7 +14978,7 @@
       "name": "Tiger",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=tiger",
-      "fingerprint": "0ff7b8d02213e4ee7414b14bdda4d8e11f9fde2e4837126defb1e49dc1143917",
+      "fingerprint": "e149a63c452cf236ecbd0629c63c705c694af3928c50d2238a7859676bac8957",
       "sourceFingerprint": "6016dcbacf5ac17d98a6174c7ee3fda51f8ef8d0bf233bd3efed308e01bdb36a",
       "characterId": "tiger"
     },
@@ -14943,7 +14989,7 @@
       "name": "Tuxedo Cat",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=cat",
-      "fingerprint": "38a5a607df720d28316c3341ff5c2a3d97c810147232c8d20ead6bad35056d41",
+      "fingerprint": "73114c62be13ca105f4dd31d0bcd4116fc2ff0739924baf2bcf819d39d3e0e65",
       "sourceFingerprint": "3419d15cdc76b7bac85001a793f3f6a1fa2243910b1ce2d552de7c9a1ae58b99",
       "characterId": "cat"
     },
@@ -14954,7 +15000,7 @@
       "name": "Floppy Dog",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=dog",
-      "fingerprint": "05ef2210cdeffedaf4f4495829e02571ccfa109963ba9047ec11947c843bea0e",
+      "fingerprint": "2dfe314b71e32561a841cf69d146e889f4689f540b99b4be9e38826fa046ffed",
       "sourceFingerprint": "3055084b1619fd4bc2f945ea5efef31d264ae6e85719631a9b21cf4130b69200",
       "characterId": "dog"
     },
@@ -14965,7 +15011,7 @@
       "name": "Trail Explorer",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=person",
-      "fingerprint": "a37169c3885fb7166698510b78defd6c494c1d171fc1cd6fcb2faa3d926a1714",
+      "fingerprint": "08361e0872e24003f1acff949ba8b77349bc08a3380963ecdde9d905177e146c",
       "sourceFingerprint": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
       "characterId": "person"
     },
@@ -14976,7 +15022,7 @@
       "name": "Russet Squirrel",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=squirrel",
-      "fingerprint": "53469722d15e273f2f0fc0ce51908697da0e4052bcee4bbfa735f7a6a1c473ef",
+      "fingerprint": "0a3d899b151ddefd5588fbaa8d96fefd4cdee0da2bd6e15cdf9bbd287e2d14bd",
       "sourceFingerprint": "03d5f92be37d50b8fd1c1a1f40171bf491085bc2d750b32d01f3165b46eb8c9d",
       "characterId": "squirrel"
     },
@@ -14987,7 +15033,7 @@
       "name": "Brown Bear",
       "prompt": "Test all four directions, stopping, feet, ground bounds, height, stairs and depth sorting. Save the exact settings you tested.",
       "url": "/tilefun/workshop.html#/tool/character-lab?character=bear",
-      "fingerprint": "20978bba7522ad31c0883f00f0248674f06ea2594e02d3242a1565765debf7b2",
+      "fingerprint": "861f1f525f00379a2bd35ea7e49be2d40746a1720e8a054fe62c6daa1d9008fe",
       "sourceFingerprint": "589eaeb9a0caa6f77877c9d0408db05156ac5ff162a419d7f96d4fb109b47d0d",
       "characterId": "bear"
     },
@@ -16332,6 +16378,48 @@
           "revision": "02cd14653be7dee89c6bd720daa5bc4b86d96cfcdc510dfa62f1fcb0603c5da7",
           "renderFingerprint": "6cca6e6ea581a15f2d8ca66647b693063bb01f8b7f73d925d15b160e020beaf7",
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-tiger-pilot-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-panther-hunt-v1",
+      "batchId": "wildlife-v2-predators-132",
+      "kind": "wildlife",
+      "name": "Panther",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-panther-hunt-v1",
+      "fingerprint": "aac5ab4b0a95d7ef27f261a103c6e7308154fe77607b325dec191394b05c4fa5",
+      "sourceFingerprint": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-panther-hunt-v1",
+        "prefabIds": [],
+        "revision": "26ce93b763cdf1d709a726736664e60c0f3d92e698570cc965cef18f3055a158",
+        "renderFingerprint": "aac5ab4b0a95d7ef27f261a103c6e7308154fe77607b325dec191394b05c4fa5",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-panther-hunt-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-panther-hunt-v1",
+        "fingerprint": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13",
+        "sheetSize": [
+          2784,
+          384
+        ],
+        "rect": [
+          0,
+          0,
+          2784,
+          384
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-panther-hunt-v1",
+          "prefabIds": [],
+          "revision": "26ce93b763cdf1d709a726736664e60c0f3d92e698570cc965cef18f3055a158",
+          "renderFingerprint": "aac5ab4b0a95d7ef27f261a103c6e7308154fe77607b325dec191394b05c4fa5",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-panther-hunt-v1"
         }
       }
     },
@@ -30610,5 +30698,5 @@
       }
     }
   ],
-  "inputDigest": "9e2aa3d9774c12bdc5bf3042744d05d55b362e9901138318e0e6159e5ec50481"
+  "inputDigest": "9286c00c86bc5a5e9f9b16a33b6bbb8fe384d4c44eeaf1083c04d9eb3f4744b5"
 }

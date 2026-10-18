@@ -44,7 +44,9 @@
   "overrides": [
     {
       "includes": ["public/data/workshop-manifest.json"],
-      "files": { "maxSize": 2097152 }
+      "files": {
+        "maxSize": 2097152
+      }
     },
     {
       "includes": [
@@ -55,8 +57,12 @@
         "public/demos/wildlife-v2/**/*.json",
         "src/wildlife/reviews.json"
       ],
-      "files": { "maxSize": 33554432 },
-      "formatter": { "enabled": false }
+      "files": {
+        "maxSize": 33554432
+      },
+      "formatter": {
+        "enabled": false
+      }
     },
     {
       "includes": [
@@ -93,6 +99,15 @@
             "noNonNullAssertion": "off"
           }
         }
+      }
+    },
+    {
+      "includes": [
+        "art-source/wildlife-v2/panther/hunt-v1/playback.js",
+        "public/demos/wildlife-v2/panther/hunt-v1/playback.js"
+      ],
+      "formatter": {
+        "enabled": false
       }
     }
   ],

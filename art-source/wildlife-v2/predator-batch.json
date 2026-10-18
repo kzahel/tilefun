@@ -13,9 +13,9 @@
     {
       "id": "panther",
       "revision": "hunt-v1",
-      "state": "queued",
-      "stage": "Own feline prototype",
-      "gameplay": false
+      "state": "draft-ready",
+      "stage": "Editable art and exact pending review; world/editor/hunting/reload validated",
+      "gameplay": true
     },
     {
       "id": "lion",

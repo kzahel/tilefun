@@ -15,9 +15,13 @@ test("portable pet and tiger drafts have exact pending review and usable native/
   page,
 }) => {
   const pets = definitions.filter((d) =>
-    ["wildlife-v2-common-pets-084", "wildlife-v2-tiger-131"].includes(d.batchId),
+    ["wildlife-v2-common-pets-084", "wildlife-v2-tiger-131", "wildlife-v2-predators-132"].includes(
+      d.batchId,
+    ),
   );
-  expect(pets).toHaveLength(5);
+  expect(pets).toHaveLength(
+    5 + definitions.filter((d) => d.batchId === "wildlife-v2-predators-132").length,
+  );
   for (const pet of pets) {
     const id = `pattern:wildlife-v2-${pet.id}`;
     expect(manifest.candidates.find((c) => c.id === id)?.kind).toBe("wildlife");
@@ -57,7 +61,8 @@ test("wildlife revisions preserve native pixels or block feedback on missing arc
       (d) =>
         d.batchId.startsWith("wildlife-v2-supervised-") ||
         d.batchId === "wildlife-v2-common-pets-084" ||
-        d.batchId === "wildlife-v2-tiger-131",
+        d.batchId === "wildlife-v2-tiger-131" ||
+        d.batchId === "wildlife-v2-predators-132",
     );
     expect(pilots.length).toBeGreaterThan(0);
     for (const d of pilots) {

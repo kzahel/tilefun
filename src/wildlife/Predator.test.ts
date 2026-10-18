@@ -20,14 +20,14 @@ import { createRabbit } from "./Rabbit.js";
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
-  const setup = () => {
+  const setup = (factory = createDeer) => {
     const manager = new EntityManager();
     const hunter = manager.spawn(createPredator(p.species, 0, 0));
-    const prey = manager.spawn(createDeer(21, 0));
+    const prey = manager.spawn(factory(21, 0));
     durableId(prey);
     Object.assign(required(hunter.predator), {
       state: "pounce",
-      elapsed: 0.2,
+      elapsed: 0.5,
       targetId: prey.persistentId,
     });
     return { manager, hunter, prey };
@@ -54,6 +54,22 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     manager.remove(replacement.id);
     resolvePredatorCatches(manager, [...manager.entities], open, []);
     expect(manager.entities.some((e) => e.deer)).toBe(false);
+  });
+  it("replaces a rabbit in its own habitat and leaves an airborne rabbit alive", () => {
+    const { manager, hunter, prey } = setup(createRabbit);
+    prey.position.wx = 17;
+    required(prey.rabbit).state = "hop";
+    prey.wz = 3;
+    resolvePredatorCatches(manager, [...manager.entities], open, []);
+    expect(manager.byId.has(prey.id)).toBe(true);
+    required(prey.rabbit).state = "rest";
+    prey.wz = 0;
+    resolvePredatorCatches(manager, [...manager.entities], open, []);
+    const replacement = required(manager.entities.find((e) => e.rabbit));
+    expect(replacement.persistentId).not.toBe(prey.persistentId);
+    expect(replacement.rabbit?.home).toEqual(prey.rabbit?.home);
+    expect(hunter.predator?.meals).toBe(1);
+    expect(manager.entities.filter((e) => e.rabbit)).toHaveLength(1);
   });
   it.each(["wall", "water", "height", "no replacement"])("defers an unsafe catch: %s", (reason) => {
     const { manager, hunter, prey } = setup();
@@ -106,6 +122,39 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     expect(hunter.predator?.targetId).toBeUndefined();
     expect(ball.velocity?.vx).toBeLessThan(0);
     expect(hunter.deathTimer).toBeUndefined();
+  });
+  it("catches an already fleeing deer without lunging too early or pausing pursuit", async () => {
+    const hunter = createPredator(p.species, 64, 64),
+      prey = createDeer(92, 64);
+    Object.assign(required(hunter.predator), {
+      state: "chase",
+      timer: 0,
+      targetId: durableId(prey),
+    });
+    Object.assign(required(prey.deer), {
+      state: "flee",
+      target: { wx: 192, wy: 64 },
+      motion: { elapsed: 0, duration: 5, escaping: true },
+    });
+    const session = await ScenarioSession.create({
+      version: 1,
+      id: `moving-prey-${p.species}`,
+      generation: FLAT_SCENARIO,
+      player: createPlayer(64, 160),
+      props: [],
+      actors: [hunter, prey],
+    });
+    try {
+      for (
+        let i = 0;
+        i < 150 && !session.realm.entityManager.entities.find((e) => e.predator)?.predator?.meals;
+        i++
+      )
+        await session.step(idle);
+      expect(session.realm.entityManager.entities.find((e) => e.predator)?.predator?.meals).toBe(1);
+    } finally {
+      await session.close();
+    }
   });
   it("hunts in the production Realm and reloads feeding/replacement without resurrection", async () => {
     const hunter = createPredator(p.species, 64, 64),

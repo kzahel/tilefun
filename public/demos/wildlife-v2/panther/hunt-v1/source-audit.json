@@ -1,0 +1,35 @@
+{
+  "identity": "panther-hunt-v1",
+  "poses": 116,
+  "fixedLengthLinkChecks": 1392,
+  "plantedGroundContacts": 432,
+  "stanceTravelCompensationChecks": 160,
+  "maxProjectionError": 5.000000001587068e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 1.45549,
+      "head": 2.12507,
+      "shoulder": 1.88401,
+      "pelvis": 1.49119
+    },
+    "up": {
+      "body": 1.45549,
+      "head": 1.49122,
+      "shoulder": 1.5817,
+      "pelvis": 1.9349
+    },
+    "left": {
+      "body": 1.59475,
+      "head": 1.96395,
+      "shoulder": 1.78807,
+      "pelvis": 1.48419
+    },
+    "right": {
+      "body": 1.59475,
+      "head": 1.68542,
+      "shoulder": 1.50954,
+      "pelvis": 1.76272
+    }
+  },
+  "status": "Saved-source integrity passes; visual observations and human approval separate."
+}

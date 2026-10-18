@@ -1288,3 +1288,11 @@ manual deletion remains permanent. Players, pets and farm animals are excluded.
 Existing tiger pixels remain pilot-v1; accelerated walk/lowered-head feeding and
 a grounded jaw-display lunge are provisional animation reuse. All art review
 remains pending. The other three authorized predators are the next stages.
+
+Predator 132 panther checkpoint: new hunt-v1 Blender/pixel source and complete
+portable pending review are registered; rare world spawning, editor placement,
+shared hunting and Canvas/GPU reload checks pass. The common lunge now begins at
+footprint contact distance, carries pursuit through phase changes and briefly
+shows the jaw before a catch. Already-fleeing deer and airborne/grounded rabbit
+cases cover the corrected behavior. Tiger and historical source pixels remain
+unchanged. Lion and brown bear remain the next authorized stages.
