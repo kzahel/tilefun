@@ -59,3 +59,13 @@ assertion; distinguish them from newly introduced failures.
   per animal pass. Typecheck/lint/build, 889-candidate manifest and six Canvas/GPU
   gameplay/ball checks pass. Full units: 2,820 pass, five known Windows failures,
   ten skipped. All changed pixels remain pending human review. Cow/fox next.
+
+- 20:35 UTC: cow and fox `motion-v2` finished and selected in shared gameplay.
+  Cow retains Holstein patches, pink muzzle/udder and articulated tufted tail;
+  fox retains russet/cream coat, socks, pointed ears and bushy cream tail tip.
+  32-pose cycles match 12px/s (cow, 1.6s) and 22px/s (fox, 640ms). Moving
+  torso/head paint and connected four-link limbs replace the frozen torso.
+  Byte-identical replays, 328 Chromium crops per animal, six Canvas/GPU/ball
+  checks, typecheck/lint/build and 891-candidate manifest pass. Full units:
+  2,820 pass, five known Windows failures, ten skipped. Cat/dog next; keep
+  existing pet coat clip ranges independent of their repaired base species.

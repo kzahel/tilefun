@@ -1,0 +1,17 @@
+{
+  "identity": "cow-motion-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "retainedCoatMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.9999999999999964,
+    "up": 2.0,
+    "left": 2.0,
+    "right": 2.0
+  },
+  "rootTravelPixelsPerCycle": 19.200000000000003,
+  "walkDurationMs": 1600,
+  "velocityPixelsPerSecond": 12.000000000000002
+}

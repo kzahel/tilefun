@@ -18079,6 +18079,90 @@
       }
     },
     {
+      "id": "pattern:wildlife-v2-cow-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Cow · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cow-motion-v2",
+      "fingerprint": "b124fd280edcafd584752cbb145eebd2cbd792973daa8b10af71afd23f77a91f",
+      "sourceFingerprint": "9d1e41d2b5cfe5fee11d0e3ada107bfd8d75eae35bea76a4ddd861db5b69a041",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-cow-motion-v2",
+        "prefabIds": [],
+        "revision": "caa1046c0aec1a4c70ff8dc1febf7fedff1f8232e5762cd874bbef89339c7529",
+        "renderFingerprint": "b124fd280edcafd584752cbb145eebd2cbd792973daa8b10af71afd23f77a91f",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cow-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-cow-motion-v2",
+        "fingerprint": "9d1e41d2b5cfe5fee11d0e3ada107bfd8d75eae35bea76a4ddd861db5b69a041",
+        "sheetSize": [
+          2624,
+          256
+        ],
+        "rect": [
+          0,
+          0,
+          2624,
+          256
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-cow-motion-v2",
+          "prefabIds": [],
+          "revision": "caa1046c0aec1a4c70ff8dc1febf7fedff1f8232e5762cd874bbef89339c7529",
+          "renderFingerprint": "b124fd280edcafd584752cbb145eebd2cbd792973daa8b10af71afd23f77a91f",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cow-motion-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-fox-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Red fox · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-motion-v2",
+      "fingerprint": "4c03cb38b6555eb72396beaf4741fbaba08121de67d8d7f652e3bf0e891f0402",
+      "sourceFingerprint": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-fox-motion-v2",
+        "prefabIds": [],
+        "revision": "53097753d544de4ecc3664d0956aac30ae80aed12f5175584893f947c11ba4db",
+        "renderFingerprint": "4c03cb38b6555eb72396beaf4741fbaba08121de67d8d7f652e3bf0e891f0402",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-fox-motion-v2",
+        "fingerprint": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
+        "sheetSize": [
+          1968,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1968,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-fox-motion-v2",
+          "prefabIds": [],
+          "revision": "53097753d544de4ecc3664d0956aac30ae80aed12f5175584893f947c11ba4db",
+          "renderFingerprint": "4c03cb38b6555eb72396beaf4741fbaba08121de67d8d7f652e3bf0e891f0402",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-fox-motion-v2"
+        }
+      }
+    },
+    {
       "id": "vehicle:compact-1:north",
       "batchId": "vehicles",
       "name": "Compact 1 · north",
@@ -32353,5 +32437,5 @@
       }
     }
   ],
-  "inputDigest": "15dd44bfb0937457f0fe1c86d8cb665baba1350a6a85b358b905327e843ca70a"
+  "inputDigest": "174f973b4d611b3aec4ffc536558b41f3e70230b1b463eabdba759d54070a540"
 }

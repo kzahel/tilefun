@@ -4,20 +4,22 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**4 newly completed; 2 in progress; 186 queued; 4 completed before this run.** Final pixels retain their own human-review status.
+**6 newly completed; 2 in progress; 184 queued; 4 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
-| Red fox | in-progress | [Playback](../public/demos/wildlife-v2/fox/motion-v2/index.html) |
+| Red fox | finished-game-active | [Playback](../public/demos/wildlife-v2/fox/motion-v2/index.html) |
+| Cat | in-progress | [Playback](../public/demos/wildlife-v2/cat/motion-v2/index.html) |
+| Dog | in-progress | [Playback](../public/demos/wildlife-v2/dog/motion-v2/index.html) |
 | White-tailed deer | finished-game-active | [Playback](../public/demos/wildlife-v2/deer/motion-v2/index.html) |
-| Cow | in-progress | [Playback](../public/demos/wildlife-v2/cow/motion-v2/index.html) |
+| Cow | finished-game-active | [Playback](../public/demos/wildlife-v2/cow/motion-v2/index.html) |
 | Sheep | finished-game-active | [Playback](../public/demos/wildlife-v2/sheep/motion-v2/index.html) |
 | Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
 | Goat | finished-game-active | [Playback](../public/demos/wildlife-v2/goat/motion-v2/index.html) |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T20:29:57.154Z (18/10/2026, 22:29:57 Berlin).
+Snapshot: 2026-10-18T20:34:57.665Z (18/10/2026, 22:34:57 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

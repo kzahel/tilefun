@@ -398,11 +398,11 @@
     {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
-      "image": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
-      "width": 816,
+      "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
+      "width": 1968,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "4c6c2a09eaaa6f8d08423f7146f8db2b4b3f9bb7f3bc3dc355750017d140c5ab",
+      "fingerprint": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -428,11 +428,11 @@
     {
       "id": "wildlife-cow-provisional-v1",
       "name": "wildlife cow provisional v1",
-      "image": "demos/wildlife-v2/cow/draft-v1/sheet.png",
-      "width": 1600,
+      "image": "demos/wildlife-v2/cow/motion-v2/sheet.png",
+      "width": 2624,
       "height": 256,
       "tileSize": 16,
-      "fingerprint": "0550c1208a8cabc8028a18b78c2e0757b2fa3ed353d3ba7b364c151f7e20152e",
+      "fingerprint": "9d1e41d2b5cfe5fee11d0e3ada107bfd8d75eae35bea76a4ddd861db5b69a041",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2333,6 +2333,26 @@
       "height": 192,
       "tileSize": 16,
       "fingerprint": "72bee51b5816c69955c66577add82bae9e6eb14654452a81c567bb8495a90c59",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cow-motion-v2",
+      "name": "wildlife v2 cow motion v2",
+      "image": "demos/wildlife-v2/cow/motion-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "9d1e41d2b5cfe5fee11d0e3ada107bfd8d75eae35bea76a4ddd861db5b69a041",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-fox-motion-v2",
+      "name": "wildlife v2 fox motion v2",
+      "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -23687,7 +23707,7 @@
       "rect": [
         0,
         0,
-        816,
+        1968,
         192
       ],
       "label": "wildlife-fox-provisional-v1 · registered 48×48 frames",
@@ -23749,7 +23769,7 @@
       "rect": [
         0,
         0,
-        1600,
+        2624,
         256
       ],
       "label": "wildlife-cow-provisional-v1 · registered 64×64 frames",
@@ -25649,7 +25669,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:176"
+          "source": "src/wildlife/Fauna.ts:200"
         },
         {
           "system": "Gameplay",

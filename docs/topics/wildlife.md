@@ -3,7 +3,7 @@
 Topic: wildlife
 Status: all 22 existing-sheet species, four pet variants, four original predators
 and all five authorized fierce creatures have durable provisional gameplay. New
-art remains pending human review; other expansion stays stopped.
+art remains pending human review; the current completion run authorizes expansion.
 Updated: 2026-10-18.
 
 ## Current eight-hour completion run
@@ -27,7 +27,9 @@ source replays and 328 native/enlarged Chromium crops pass; six shared game
 checks pass. These exact finished identities await human art review. Deer and
 goat also use repaired banks, retaining the doe tail flag and goat horns/beard.
 Their 960ms walks match 18px/s; source replay and six game/browser checks pass.
-Cow and fox are next.
+Cow and fox also use moving-body repairs, retaining their original coats and
+actions. Their 1.6s/640ms cycles match 12px/s and 22px/s; source, playback and
+six shared game checks pass. Cat and dog are next.
 
 ## Horse and giraffe motion
 
