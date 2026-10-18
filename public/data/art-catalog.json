@@ -20801,7 +20801,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:358"
+          "source": "src/editor/EditorPanel.ts:372"
         },
         {
           "system": "Interiors",
@@ -20951,7 +20951,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:360"
+          "source": "src/editor/EditorPanel.ts:374"
         },
         {
           "system": "Interiors",
@@ -21057,7 +21057,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:359"
+          "source": "src/editor/EditorPanel.ts:373"
         },
         {
           "system": "Interiors",
@@ -21127,7 +21127,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:361"
+          "source": "src/editor/EditorPanel.ts:375"
         },
         {
           "system": "Interiors",
@@ -21201,7 +21201,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:362"
+          "source": "src/editor/EditorPanel.ts:376"
         },
         {
           "system": "Interiors",
@@ -21311,7 +21311,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:363"
+          "source": "src/editor/EditorPanel.ts:377"
         },
         {
           "system": "Interiors",
@@ -21427,7 +21427,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:364"
+          "source": "src/editor/EditorPanel.ts:378"
         },
         {
           "system": "Interiors",
@@ -21473,7 +21473,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:365"
+          "source": "src/editor/EditorPanel.ts:379"
         },
         {
           "system": "Interiors",
@@ -25287,7 +25287,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorMode.ts:90"
+          "source": "src/editor/EditorMode.ts:91"
         },
         {
           "system": "Gameplay",

@@ -34,6 +34,36 @@ see the [performance plan, setup and recorded results](docs/tactical/012-streami
 global review inbox, source-art annotations, requests, history and all tools.
 Owner login protects feedback. See [Workshop usage, setup and API](docs/tilefun-workshop.md).
 
+## Steam Deck / desktop package
+
+Build the bundled Linux game with `npm run desktop:build:linux`, then use
+`npm run deck:doctor`, `npm run deck:install`, and `npm run deck:launch` with a
+local [machine-control](../machine-control/) checkout. Gaming Mode lists it as
+**Devkit Game: tilefun**. The package uses Chromium GPU rendering and includes
+all single-player assets and the authority Worker. Saves live in Electron's
+stable user-data directory, independently of package upgrades.
+
+The shared menu now separates **Resume**, **Worlds**, **Multiplayer**, **Options**
+and **Character**. Create/manage worlds inside Worlds; host, enter an invitation
+code/link, or browse public games inside Multiplayer. Hosting/joining flushes local
+saves first. Online play requires signaling and a working peer connection.
+
+| Control | Action |
+| --- | --- |
+| Left stick | Move; pan while building |
+| A / B | Jump or select / back |
+| Menu / View | Pause menu / world map |
+| Y / X | Interact or editor tools / throw |
+| LB / RB | Build–Play / horn |
+| RT | Sprint; paint/place while building |
+| Right stick / LT | Building cursor / erase |
+
+D-pad/stick focus, A select, B back and an on-screen text keyboard cover game
+menus and editor tools. **Save and quit** flushes the authority before closing.
+Browser saves and packaged saves are separate. See
+[Steam Deck and menus](docs/topics/steam-deck-and-menus.md) for runtime, installation
+and acceptance details.
+
 ## Features
 
 The game defaults to **GPU + 3D car**: the existing fixed game view rendered with
@@ -207,7 +237,7 @@ keeps the same player movement and collision rules.
 
 ## Play ideas
 
-Open the game menu and choose **💡 Idea**. Hold the big button to speak, allowing
+Open the game menu, then **More → Idea**. Hold the big button to speak, allowing
 microphone access if the browser asks. Release to turn off the microphone and
 finish the words. Tap the resulting words to hear them aloud;
 **Try again** replaces them and **Send** sends the text plus a picture of the game.

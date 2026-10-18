@@ -1,4 +1,5 @@
 import type { TouchMovementMode } from "../input/TapMovement.js";
+import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
 import "./OptionsDialog.css";
 
 export class OptionsDialog {
@@ -24,6 +25,10 @@ export class OptionsDialog {
     title.textContent = "Options";
     const close = this.button("Close", () => this.hide());
     header.append(title, close);
+    const controls = document.createElement("p");
+    controls.textContent =
+      "Controller: A Jump · X Throw / Siren · Y Interact · RT Sprint · RB Horn · LB Build / Play · View Map · Menu Pause. In menus: A Select · B Back. Select a text field with A to type.";
+
     const heading = document.createElement("h2");
     heading.textContent = "Movement";
     const choices = document.createElement("div");
@@ -65,6 +70,11 @@ export class OptionsDialog {
       this.status,
       this.button("Back to game", () => this.hide()),
     );
+    const controlHelp = document.createElement("details");
+    const controlSummary = document.createElement("summary");
+    controlSummary.textContent = "Controller controls";
+    controlHelp.append(controlSummary, controls);
+    d.append(controlHelp);
     d.addEventListener("cancel", (e) => {
       e.preventDefault();
       this.hide();
@@ -83,16 +93,19 @@ export class OptionsDialog {
     this.setMode(mode);
     this.pinch.checked = pinchZoom;
     if (!this.visible) this.dialog.showModal();
+    activateMenu(this.dialog, () => this.hide(), false);
     this.cards.find((c) => c.dataset.mode === mode)?.focus();
   }
   hide(): void {
     if (!this.visible) return;
+    deactivateMenu(this.dialog);
     this.dialog.close();
     this.closed();
     this.opener?.focus();
   }
   destroy(): void {
     document.removeEventListener("fullscreenchange", this.fullscreen);
+    deactivateMenu(this.dialog);
     this.dialog.remove();
   }
   private button(text: string, action: () => void): HTMLButtonElement {

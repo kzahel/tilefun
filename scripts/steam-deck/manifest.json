@@ -1,0 +1,9 @@
+{
+  "schema": "steamdeck-testbed.game.v1",
+  "game_id": "tilefun",
+  "payload": "../../dist/desktop/Tilefun-linux-x64",
+  "argv": ["./run.sh"],
+  "env": {},
+  "runtime": null,
+  "force_appid": ""
+}

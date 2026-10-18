@@ -5,6 +5,7 @@ import { Direction } from "../entities/Entity.js";
 import { getPropSheetInfo, PROP_PALETTE } from "../entities/PropFactories.js";
 import { RoadType } from "../road/RoadType.js";
 import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
+import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import type { EditorModel } from "./EditorModel.js";
 import {
   ALL_TABS,
@@ -87,6 +88,19 @@ export class EditorPanel {
   private readonly propButtons: HTMLButtonElement[] = [];
   private readonly deleteButtons: HTMLButtonElement[] = [];
   private readonly brushModeButtons: Map<BrushMode, HTMLButtonElement> = new Map();
+  private controllerOpen = false;
+  toggleController(): void {
+    if (!this.visible) return;
+    this.controllerOpen = !this.controllerOpen;
+    if (this.controllerOpen) {
+      this.minimized = false;
+      this.updateTray();
+      activateMenu(this.container, () => {
+        this.controllerOpen = false;
+        deactivateMenu(this.container);
+      });
+    } else deactivateMenu(this.container);
+  }
   private readonly bridgeButton: HTMLButtonElement;
   private readonly subgridSeparator: HTMLDivElement;
   private readonly sizeLabel: HTMLSpanElement;
@@ -869,6 +883,10 @@ export class EditorPanel {
   }
 
   set visible(v: boolean) {
+    if (!v) {
+      this.controllerOpen = false;
+      deactivateMenu(this.container);
+    }
     if (v && !this.visible) this.minimized = false;
     this.container.style.display = v ? "flex" : "none";
     if (v) {

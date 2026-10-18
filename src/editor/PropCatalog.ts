@@ -4,6 +4,7 @@ import {
   getAtlasThemes,
   isAtlasLoaded,
 } from "../assets/AtlasIndex.js";
+import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 
 const OVERLAY_STYLE = `
   position: fixed; inset: 0; z-index: 250;
@@ -77,7 +78,7 @@ export class PropCatalog {
   private themeSelect: HTMLSelectElement;
   private countLabel: HTMLSpanElement;
   private grid: HTMLDivElement;
-  private cells: { el: HTMLDivElement; entry: AtlasSpriteEntry }[] = [];
+  private cells: { el: HTMLButtonElement; entry: AtlasSpriteEntry }[] = [];
   private meCompleteImage: CanvasImageSource | null = null;
   private thumbnailsRendered = false;
 
@@ -205,6 +206,7 @@ export class PropCatalog {
       this.renderThumbnails();
       this.thumbnailsRendered = true;
     }
+    activateMenu(this.overlay, () => this.requestClose(), false);
     // Touch users can browse immediately without the keyboard covering the grid.
     if (window.matchMedia("(pointer: fine)").matches) this.searchInput.focus();
   }
@@ -215,13 +217,15 @@ export class PropCatalog {
   }
 
   hide(): void {
+    deactivateMenu(this.overlay);
     this.overlay.style.display = "none";
   }
 
   private buildCells(): void {
     const entries = getAtlasEntries();
     for (const entry of entries) {
-      const cell = document.createElement("div");
+      const cell = document.createElement("button");
+      cell.type = "button";
       cell.style.cssText = CELL_STYLE;
       cell.title = `${entry.sprite.name} (${entry.sprite.w}x${entry.sprite.h}) — ${formatTheme(entry.sprite.theme)}`;
 

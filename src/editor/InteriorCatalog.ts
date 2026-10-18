@@ -23,6 +23,7 @@ import {
   drawGenericHomeVariantPreview,
 } from "../interiors/GenericHomeGeometry.js";
 import { drawRoomGrammarPreview } from "../interiors/RoomGrammar.js";
+import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 
 const MAX_VISIBLE_ENTRIES = 720;
 const DEFAULT_DESIGN = "generic-home-designs/generic-home-1";
@@ -433,10 +434,11 @@ export class InteriorCatalog {
     this.applyFilter();
     this.renderPrefabPreview();
     this.renderGeneratedRoomPreview();
-    this.searchInput.focus();
+    activateMenu(this.overlay, () => this.requestClose());
   }
 
   hide(): void {
+    deactivateMenu(this.overlay);
     this.overlay.style.display = "none";
   }
 

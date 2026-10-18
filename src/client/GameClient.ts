@@ -32,6 +32,8 @@ import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
+import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
+import { requestSessionNavigation } from "../ui/sessionNavigation.js";
 import { DoorPresentation } from "./DoorPresentation.js";
 import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
@@ -350,6 +352,7 @@ export class GameClient {
       },
     );
     this.mainMenu.onOptions = (opener) => this.openOptions(opener);
+    this.mainMenu.onBuild = () => this.toggleEditor();
     this.worldMap = new WorldMap({
       snapshot: () =>
         this.gcSendRequest({ type: "get-world-map", requestId: this.nextRequestId++ }),
@@ -591,6 +594,7 @@ export class GameClient {
       return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
     });
     this.actions.on("enter_place", () => {
+      if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
       if (!this.vehicleControl.activate()) this.doorControl.activate();
     });
     this.loop = new GameLoop({
@@ -978,6 +982,7 @@ export class GameClient {
     this.mainMenu.onSwitchProfile = () => {
       if (!this.profileStore) return;
       const picker = new ProfilePicker();
+      picker.onCancel = () => picker.hide();
       const store = this.profileStore;
 
       const showList = () => {
@@ -993,14 +998,14 @@ export class GameClient {
         // Save selected profile, clear tab session, reload with new identity
         localStorage.setItem(ACTIVE_PROFILE_KEY, profile.id);
         sessionStorage.removeItem(TAB_SESSION_KEY);
-        window.location.reload();
+        requestSessionNavigation(location.href);
       };
 
       picker.onCreate = (name) => {
         store.createProfile(name).then((newProfile) => {
           localStorage.setItem(ACTIVE_PROFILE_KEY, newProfile.id);
           sessionStorage.removeItem(TAB_SESSION_KEY);
-          window.location.reload();
+          requestSessionNavigation(location.href);
         });
       };
 
@@ -1029,13 +1034,15 @@ export class GameClient {
     }
 
     this.loop.start();
-    this.canvas.dataset.ready = "true";
     if (!this.serialized) this.showWorldIdentity(this.localServer.worldGeneration);
     if (
-      (new URL(location.href).searchParams.has("generation") || handoffWorldId) &&
+      (new URL(location.href).searchParams.has("generation") ||
+        new URL(location.href).searchParams.has("desktop") ||
+        handoffWorldId) &&
       !this.scenes.has(MenuScene)
     )
       await this.toggleMenu();
+    this.canvas.dataset.ready = "true";
   }
 
   /** Set hosting info to display in the main menu (when this client is hosting P2P). */
@@ -1084,7 +1091,7 @@ export class GameClient {
     this.mapButton?.remove();
     this.actions.detach();
     this.consoleUI.destroy();
-    this.mainMenu.characterPicker.destroy();
+    this.mainMenu.destroy();
   }
 
   // ---- Actions ----
@@ -1448,6 +1455,7 @@ export class GameClient {
       cursor: pointer; user-select: none; line-height: 1;
     `;
 
+    panel.inert = true;
     let panelOpen = false;
     let ideaSnapshot: IdeaSnapshot | undefined;
     const openPanel = () => {
@@ -1465,11 +1473,13 @@ export class GameClient {
       } catch {
         ideaSnapshot = undefined;
       }
+      activateMenu(panel, closePanel);
       panelOpen = true;
       backdrop.style.display = "";
       panel.style.transform = "translateX(0)";
     };
     const closePanel = () => {
+      deactivateMenu(panel);
       panel.inert = true;
       this.hamburgerOpen = false;
       this.clearPlayInput();
@@ -1478,6 +1488,10 @@ export class GameClient {
       panel.style.transform = "translateX(-100%)";
     };
     hamburger.addEventListener("click", () => {
+      if (window.tilefunDesktop) {
+        void this.toggleMenu();
+        return;
+      }
       if (panelOpen) closePanel();
       else openPanel();
     });
@@ -1658,6 +1672,30 @@ export class GameClient {
       vrBtn.style.color = "#4fc3f7";
     };
 
+    this.mainMenu.setTools([
+      {
+        label: "Idea",
+        run: () => {
+          this.mainMenu.onClose?.();
+          openPanel();
+          ideaBtn.click();
+        },
+      },
+      {
+        label: "Debug",
+        run: () => {
+          this.mainMenu.onClose?.();
+          debugBtn.click();
+        },
+      },
+      {
+        label: "Interiors",
+        run: () => {
+          this.mainMenu.onClose?.();
+          interiorsBtn.click();
+        },
+      },
+    ]);
     document.body.append(backdrop, panel, hamburger);
   }
 

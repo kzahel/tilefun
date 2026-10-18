@@ -7,6 +7,7 @@ import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor
 import { createGenerator } from "../src/generation/Generator.js";
 import { DistrictStrategy } from "../src/generation/regional/DistrictStrategy.js";
 import { FsWorldRegistry } from "../src/persistence/FsWorldRegistry.js";
+import { openWorlds } from "./helpers/gameMenu.js";
 
 // Exercise real HTTP, WebSocket snapshots, filesystem saves, and two independent clients.
 test("two clients share a persistent interior and cross-origin explorer reads live authority", async ({
@@ -81,7 +82,8 @@ test("two clients share a persistent interior and cross-origin explorer reads li
     for (const p of [page, two]) {
       await p.goto(`http://localhost:4174${url}`);
       await expect(p.locator("#game")).toHaveAttribute("data-ready", "true");
-      await p.getByText("Network checkpoint", { exact: true }).click();
+      await openWorlds(p);
+      await p.getByRole("button", { name: "Play Network checkpoint", exact: true }).click();
       await expect(p.getByRole("button", { name: /Enter apartment/ })).toBeVisible();
       await p.getByRole("button", { name: /Enter apartment/ }).click();
       await expect(p.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
@@ -130,7 +132,8 @@ test("two clients share a persistent interior and cross-origin explorer reads li
     await start();
     await page.goto(`http://localhost:4174${url}`);
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    await page.getByText("Network checkpoint", { exact: true }).click();
+    await openWorlds(page);
+    await page.getByRole("button", { name: "Play Network checkpoint", exact: true }).click();
     await page.getByRole("button", { name: /Enter apartment/ }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
     await expect.poll(() => furnitureCount(page)).toBe(17);

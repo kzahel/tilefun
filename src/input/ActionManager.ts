@@ -1,6 +1,12 @@
 import type { XRSessionManager } from "../xr/XRSessionManager.js";
 import type { ActionMapConfig, ActionName } from "./ActionMap.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
+import {
+  CONTROLLER_ACTIONS,
+  CONTROLLER_EVENT,
+  type ControllerCommand,
+  controllerInput,
+} from "./ControllerInput.js";
 import { GamepadPoller } from "./GamepadPoller.js";
 import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
@@ -85,23 +91,27 @@ export class ActionManager {
     window.addEventListener("keydown", this.onKeyDown);
     window.addEventListener("keyup", this.onKeyUp);
     window.addEventListener("blur", this.onBlur);
+    window.addEventListener(CONTROLLER_EVENT, this.onController);
   }
 
   detach(): void {
     window.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("keyup", this.onKeyUp);
     window.removeEventListener("blur", this.onBlur);
+    window.removeEventListener(CONTROLLER_EVENT, this.onController);
     this.clearHeld();
   }
 
   clearHeld(): void {
     this.keysDown.clear();
+    controllerInput.reset();
     this.hornPressLatched = false;
   }
 
   // --- Continuous action polling ---
 
   isHeld(action: ActionName): boolean {
+    if (this.gamepadPoller && controllerInput.held.has(action)) return true;
     // Check XR controller buttons
     const xr = this.gamepadPoller?.xrManager;
     if (xr?.active) {
@@ -162,6 +172,7 @@ export class ActionManager {
     if (this.isHeld("pan_right")) dx += 1;
     if (this.isHeld("pan_up")) dy -= 1;
     if (this.isHeld("pan_down")) dy += 1;
+    if (this.gamepadPoller && dx === 0 && dy === 0) return controllerInput.movement;
     return { dx, dy };
   }
 
@@ -207,6 +218,12 @@ export class ActionManager {
 
   private onKeyUp = (e: KeyboardEvent): void => {
     this.keysDown.delete(e.key);
+  };
+
+  private onController = (event: Event): void => {
+    if (!this.gamepadPoller || event.defaultPrevented) return;
+    const action = CONTROLLER_ACTIONS[(event as CustomEvent<ControllerCommand>).detail];
+    if (action) for (const callback of this.listeners.get(action) ?? []) callback();
   };
 
   private onBlur = (): void => {

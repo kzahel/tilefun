@@ -1,4 +1,5 @@
 import type { PlayerProfile } from "../persistence/PlayerProfileStore.js";
+import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
 
 const OVERLAY_STYLE = `
   position: fixed; inset: 0; z-index: 250;
@@ -66,6 +67,7 @@ export class ProfilePicker {
   private overlay: HTMLDivElement;
 
   onSelect: ((profile: PlayerProfile) => void) | null = null;
+  onCancel: (() => void) | null = null;
   onCreate: ((name: string) => void) | null = null;
 
   constructor() {
@@ -110,14 +112,17 @@ export class ProfilePicker {
     grid.appendChild(this.createNewPlayerCard(profiles.length));
 
     this.overlay.appendChild(grid);
+    activateMenu(this.overlay, () => this.onCancel?.());
   }
 
   hide(): void {
     this.overlay.style.display = "none";
+    deactivateMenu(this.overlay);
   }
 
-  private createProfileCard(profile: PlayerProfile, index: number): HTMLDivElement {
-    const card = document.createElement("div");
+  private createProfileCard(profile: PlayerProfile, index: number): HTMLButtonElement {
+    const card = document.createElement("button");
+    card.type = "button";
     card.style.cssText = CARD_STYLE;
     card.addEventListener("mouseenter", () => {
       card.style.background = "rgba(255,255,255,0.15)";
@@ -155,8 +160,9 @@ export class ProfilePicker {
     return card;
   }
 
-  private createNewPlayerCard(profileCount: number): HTMLDivElement {
-    const card = document.createElement("div");
+  private createNewPlayerCard(profileCount: number): HTMLButtonElement {
+    const card = document.createElement("button");
+    card.type = "button";
     card.style.cssText = CARD_STYLE;
     card.style.borderStyle = "dashed";
     card.addEventListener("mouseenter", () => {
@@ -214,6 +220,7 @@ export class ProfilePicker {
       } else {
         error.textContent = "Wrong PIN";
         pinInput.value = "";
+        activateMenu(this.overlay, () => this.onSelect?.(null as unknown as PlayerProfile), false);
         pinInput.focus();
       }
     };
@@ -244,6 +251,7 @@ export class ProfilePicker {
     btnRow.append(backBtn, okBtn);
     this.overlay.append(pinInput, error, btnRow);
 
+    activateMenu(this.overlay, () => this.onSelect?.(null as unknown as PlayerProfile), false);
     pinInput.focus();
   }
 
@@ -290,6 +298,7 @@ export class ProfilePicker {
     btnRow.append(backBtn, createBtn);
     this.overlay.append(nameInput, btnRow);
 
+    activateMenu(this.overlay, () => this.onSelect?.(null as unknown as PlayerProfile), false);
     nameInput.focus();
     nameInput.select();
   }

@@ -42,6 +42,7 @@ export class EditScene implements GameScene {
 
     // Bind editor-specific actions
     this.unsubscribes.push(
+      gc.actions.on("enter_place", () => gc.editorPanel.toggleController()),
       gc.actions.on("toggle_paint_mode", () => gc.editorModel.toggleMode()),
       gc.actions.on("cycle_bridge_depth", () => gc.editorModel.cycleBridgeDepth()),
       gc.actions.on("cycle_brush_shape", () => gc.editorModel.cycleBrushShape()),
@@ -67,6 +68,7 @@ export class EditScene implements GameScene {
 
     // Re-bind editor-specific actions
     this.unsubscribes.push(
+      gc.actions.on("enter_place", () => gc.editorPanel.toggleController()),
       gc.actions.on("toggle_paint_mode", () => gc.editorModel.toggleMode()),
       gc.actions.on("cycle_bridge_depth", () => gc.editorModel.cycleBridgeDepth()),
       gc.actions.on("cycle_brush_shape", () => gc.editorModel.cycleBrushShape()),
@@ -111,6 +113,7 @@ export class EditScene implements GameScene {
     gc.editorMode.roomState = gc.stateView.roomState ?? null;
     gc.editorMode.interior = gc.stateView.interior ?? null;
     gc.editorMode.update(dt);
+    gc.editorModel.setTemporaryUnpaint(gc.editorMode.rightClickUnpaint);
 
     const paintMode = gc.editorModel.effectivePaintMode;
     const bridgeDepth = gc.editorModel.bridgeDepth;

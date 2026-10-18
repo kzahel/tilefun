@@ -2,6 +2,7 @@ import { expect, type Page, test } from "@playwright/test";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { openHome } from "./helpers/gameMenu.js";
 
 const source = new DenseDistrictSource(regionalWorld(2026), true);
 const lot = source
@@ -179,6 +180,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
     .toBeGreaterThan(360);
   await page.reload();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await openHome(page);
   const resume = page.getByRole("button", { name: "Resume", exact: true });
   await resume.click();
   await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);

@@ -2,6 +2,7 @@ import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import { controllerInput } from "../input/ControllerInput.js";
 import { type InteriorIdentity, interiorRealmId } from "../interiors/GameplayInterior.js";
 import {
   compileGameplayRoom,
@@ -269,6 +270,11 @@ export class EditorMode {
   }
 
   detach(): void {
+    this.cursorElement?.remove();
+    this.cursorElement = undefined;
+    this.controllerPainting = false;
+    this.controllerCursorActive = false;
+    controllerInput.reset();
     window.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("blur", this.onBlur);
     this.canvas.removeEventListener("mousedown", this.onMouseDown);
@@ -289,7 +295,69 @@ export class EditorMode {
   }
 
   /** Call from game loop to apply continuous key-based panning. */
+  private controllerCursor = { x: 0.5, y: 0.35 };
+  private controllerPainting = false;
+  private controllerCursorActive = false;
+  private controllerErase = false;
+  private cursorElement: HTMLDivElement | undefined;
+  private updateController(dt: number): void {
+    const pad = controllerInput;
+    if (
+      pad.rightStick.dx ||
+      pad.rightStick.dy ||
+      pad.movement.dx ||
+      pad.movement.dy ||
+      pad.held.has("sprint") ||
+      pad.erase
+    )
+      this.controllerCursorActive = true;
+    if (!pad.connected || pad.uiActive() || !this.controllerCursorActive) {
+      if (this.cursorElement) this.cursorElement.hidden = true;
+      if (this.controllerPainting) {
+        this.finishPattern();
+        this.isPainting = false;
+        this.rightClickUnpaint = false;
+        this.controllerPainting = false;
+      }
+      return;
+    }
+    if (!this.cursorElement) {
+      this.cursorElement = document.createElement("div");
+      this.cursorElement.style.cssText =
+        "position:fixed;pointer-events:none;z-index:95;width:18px;height:18px;border:2px solid #ffe69b;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px #172731;";
+      this.cursorElement.setAttribute("aria-hidden", "true");
+      document.body.append(this.cursorElement);
+    }
+    this.cursorElement.hidden = false;
+    const rect = this.canvas.getBoundingClientRect();
+    this.controllerCursor.x = Math.max(
+      0,
+      Math.min(1, this.controllerCursor.x + (pad.rightStick.dx * dt * 500) / rect.width),
+    );
+    this.controllerCursor.y = Math.max(
+      0,
+      Math.min(1, this.controllerCursor.y + (pad.rightStick.dy * dt * 500) / rect.height),
+    );
+    const sx = this.controllerCursor.x * this.canvas.width,
+      sy = this.controllerCursor.y * this.canvas.height;
+    this.cursorElement.style.left = `${rect.x + this.controllerCursor.x * rect.width}px`;
+    this.cursorElement.style.top = `${rect.y + this.controllerCursor.y * rect.height}px`;
+    this.updateCursor(sx, sy);
+    const painting = pad.held.has("sprint") || pad.erase;
+    if (this.controllerPainting && (!painting || pad.erase !== this.controllerErase)) {
+      this.finishPattern();
+      this.isPainting = false;
+      this.rightClickUnpaint = false;
+      this.controllerPainting = false;
+    }
+    if (painting && !this.controllerPainting) {
+      this.controllerPainting = true;
+      this.controllerErase = pad.erase;
+      this.beginStroke(sx, sy, pad.erase ? 2 : 0);
+    } else if (painting && this.isPainting) this.paintAt(sx, sy);
+  }
   update(dt: number): void {
+    this.updateController(dt);
     const PAN_SPEED = CHUNK_SIZE * TILE_SIZE * 2; // 2 chunks/sec
     const { dx, dy } = this.actions.getPanDirection();
     if (dx !== 0 || dy !== 0) {
@@ -642,28 +710,34 @@ export class EditorMode {
       return;
     }
 
+    this.controllerCursorActive = false;
+    this.beginStroke(sx, sy, e.button);
+  }
+
+  private beginStroke(sx: number, sy: number, button: number): void {
     if (this.model.editorTab === "entities" || this.model.editorTab === "vehicles") {
-      if (e.button === 0 && !this.model.deleteMode) {
+      if (button === 0 && !this.model.deleteMode) {
         this.spawnEntityAt(sx, sy);
-      } else if (e.button === 2 || (e.button === 0 && this.model.deleteMode)) {
+      } else if (button === 2 || (button === 0 && this.model.deleteMode)) {
         this.deleteEntityAt(sx, sy);
       }
       return;
     }
 
     if (this.model.editorTab === "props") {
-      if (e.button === 0 && !this.model.deleteMode) {
+      if (button === 0 && !this.model.deleteMode) {
         this.spawnPropAt(sx, sy);
-      } else if (e.button === 2 || (e.button === 0 && this.model.deleteMode)) {
+      } else if (button === 2 || (button === 0 && this.model.deleteMode)) {
         this.deleteEntityAt(sx, sy);
       }
       return;
     }
 
     // Left button = paint terrain, Right button = unpaint
-    if (e.button === 0 || e.button === 2) {
+    if (button === 0 || button === 2) {
       this.isPainting = true;
-      this.rightClickUnpaint = e.button === 2;
+      this.rightClickUnpaint = button === 2;
+      this.model.setTemporaryUnpaint(this.rightClickUnpaint);
       this.lastPaintedTile.tx = -Infinity;
       this.lastPaintedTile.ty = -Infinity;
       this.lastPaintedSubgrid.gsx = -Infinity;
@@ -675,6 +749,7 @@ export class EditorMode {
   }
 
   private handleMouseMove(e: MouseEvent): void {
+    if (e.movementX || e.movementY) this.controllerCursorActive = false;
     if (this.activeTouches.size > 0 || this.wasPinching) return;
 
     const { sx, sy } = this.canvasCoords(e);

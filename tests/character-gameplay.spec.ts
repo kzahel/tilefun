@@ -3,6 +3,7 @@ import { PROMOTED_CHARACTERS } from "../src/characters/PromotedCharacters.js";
 import type { Entity } from "../src/entities/Entity.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { ClientMessage } from "../src/shared/protocol.js";
+import { openCreate } from "./helpers/gameMenu.js";
 
 type GameHarness = {
   stateView: { playerEntity: Entity; entities: Entity[] };
@@ -21,10 +22,15 @@ const playerSheet = (page: Page) =>
   );
 async function choose(page: Page, name: string) {
   const picker = page.getByTestId("player-model-picker");
-  if (!(await picker.isVisible())) {
+  const menu = page.getByTestId("world-menu");
+  if (!(await menu.isVisible())) {
     await page.getByTestId("main-menu-toggle").click();
     await page.getByRole("button", { name: "Menu", exact: true }).click();
   }
+  await expect(menu).toBeVisible();
+  while ((await menu.getAttribute("data-page")) !== "home")
+    await menu.getByRole("button", { name: "Back", exact: true }).click();
+  await menu.getByRole("button", { name: "Character", exact: true }).click();
   if (!(await picker.evaluate((el) => (el as HTMLDetailsElement).open)))
     await picker.locator("summary").click();
   await picker.getByRole("button", { name, exact: true }).click();
@@ -45,6 +51,7 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
   await choose(page, "Trail Explorer");
   await expect.poll(() => playerSheet(page)).toBe("character-person-v1");
   await page.getByTestId("player-model-picker").locator("summary").click();
+  await openCreate(page);
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
   await page.getByTestId("main-menu-toggle").click();

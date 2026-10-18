@@ -30,7 +30,7 @@ export class HostingBanner {
   ) {
     const directory = options?.directory ?? null;
 
-    const url = new URL(window.location.href);
+    const url = new URL("https://tilefun.graehlarts.com/tilefun/");
     url.searchParams.delete("host");
     url.searchParams.delete("multiplayer");
     url.searchParams.delete("server");
@@ -102,7 +102,7 @@ export class HostingBanner {
     const btnRow = createHostingButtons(this.info);
 
     this.overlay.append(headerRow, urlEl, qr, btnRow);
-    document.body.appendChild(this.overlay);
+    if (!window.tilefunDesktop) document.body.appendChild(this.overlay);
   }
 
   destroy(): void {
@@ -139,12 +139,17 @@ export function createHostingButtons(info: HostingInfo): HTMLDivElement {
     cursor: pointer;
   `;
   copyBtn.addEventListener("click", () => {
-    navigator.clipboard.writeText(info.joinUrl).then(() => {
-      copyBtn.textContent = "Copied!";
-      setTimeout(() => {
-        copyBtn.textContent = "Copy Link";
-      }, 2000);
-    });
+    navigator.clipboard
+      .writeText(info.joinUrl)
+      .then(() => {
+        copyBtn.textContent = "Copied!";
+        setTimeout(() => {
+          copyBtn.textContent = "Copy Link";
+        }, 2000);
+      })
+      .catch(() => {
+        copyBtn.textContent = "Copy unavailable — use join code";
+      });
   });
   btnRow.appendChild(copyBtn);
 

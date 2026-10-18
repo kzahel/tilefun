@@ -2,6 +2,7 @@ import { expect, type Page, test } from "@playwright/test";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { NaturalLandscape } from "../src/generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { openHome } from "./helpers/gameMenu.js";
 
 async function flatWorld(page: Page) {
   await page.goto(
@@ -165,7 +166,8 @@ test("an unhandled local Worker failure offers reload with the authority stack",
   await overlay.getByRole("button", { name: "Reload", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("#tilefun-error-overlay")).toHaveCount(0);
-  // The generation handoff URL opens the world picker again after reload.
+  // The generation handoff URL opens Create; Resume belongs to Home.
+  await openHome(page);
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   await page.getByRole("button", { name: "Open world map" }).click();
   await expect(page.getByTestId("world-map")).toHaveAttribute("data-settled", "true");

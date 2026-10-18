@@ -1,0 +1,7 @@
+{
+  "name": "tilefun-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tilefun desktop game",
+  "main": "main.cjs"
+}

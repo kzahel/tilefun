@@ -11,6 +11,7 @@ import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import type { OverviewResult } from "../generation/Overview.js";
 import { type Point, QUERY_LIMITS } from "../generation/regional/RegionalPlanner.js";
 import type { WorldMapMessage, WorldMapPlayer } from "../shared/protocol.js";
+import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
 import "./WorldMap.css";
 
 interface MapActions {
@@ -71,6 +72,13 @@ export class WorldMap {
       this.button("Find me", () => this.centerSelf()),
       this.button("Zoom in", () => this.zoom(2)),
       this.button("Zoom out", () => this.zoom(0.5)),
+      this.button("←", () => this.panController(-1, 0)),
+      this.button("↑", () => this.panController(0, -1)),
+      this.button("↓", () => this.panController(0, 1)),
+      this.button("→", () => this.panController(1, 0)),
+      this.button("Travel to center", () => {
+        void this.travel({ x: this.view.x, y: this.view.y });
+      }),
       this.count,
     );
     this.canvas.setAttribute(
@@ -145,12 +153,13 @@ export class WorldMap {
     this.status.textContent = "Loading your world…";
     this.previousFocus =
       document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    this.canvas.focus();
+    activateMenu(this.root, () => this.actions.close());
     this.resized();
     void this.refresh(this.epoch);
   }
 
   hide(): void {
+    deactivateMenu(this.root);
     this.open = false;
     this.epoch++;
     this.root.hidden = true;
@@ -280,6 +289,15 @@ export class WorldMap {
   private zoom(factor: number): void {
     this.cancelHold();
     this.view = this.bounded({ ...this.view, zoom: this.view.zoom * factor });
+    this.changed();
+  }
+  private panController(dx: number, dy: number): void {
+    this.view = this.bounded({
+      ...this.view,
+      x: this.view.x + (dx * this.width) / this.view.zoom / 4,
+      y: this.view.y + (dy * this.height) / this.view.zoom / 4,
+    });
+    this.target = { x: this.view.x, y: this.view.y };
     this.changed();
   }
   private bounded(view: ViewState): ViewState {

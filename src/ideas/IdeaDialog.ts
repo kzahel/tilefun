@@ -1,4 +1,5 @@
 import type { AudioManager } from "../audio/AudioManager.js";
+import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import type { IdeaSnapshot } from "./captureIdea.js";
 import { flushIdeas, pendingIdeas, queueIdea, uploadIdea } from "./IdeaOutbox.js";
 import { IdeaSpeech, recognitionConstructor, speakIdea } from "./IdeaSpeech.js";
@@ -65,8 +66,10 @@ export class IdeaDialog {
       this.pointer = null;
       this.keyHeld = false;
       this.speech.stop();
+      deactivateMenu(this.dialog);
       this.dialog.close();
       this.dialog.showModal();
+      activateMenu(this.dialog, () => this.onClose(), false);
     }
   };
   private onVisibility = () => {
@@ -271,6 +274,7 @@ export class IdeaDialog {
         : "Hold the big button. Speak after the chime.";
     document.body.append(dialog);
     dialog.showModal();
+    activateMenu(dialog, () => this.onClose(), false);
     this.render();
     window.addEventListener("blur", this.onBlur);
     document.addEventListener("visibilitychange", this.onVisibility);
@@ -385,6 +389,7 @@ export class IdeaDialog {
     window.removeEventListener("blur", this.onBlur);
     document.removeEventListener("visibilitychange", this.onVisibility);
     document.removeEventListener("fullscreenchange", this.onFullscreen);
+    deactivateMenu(this.dialog);
     this.dialog.close();
     this.dialog.remove();
   }

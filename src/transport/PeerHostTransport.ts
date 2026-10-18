@@ -6,6 +6,7 @@ import {
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import { peerOptions } from "./peerOptions.js";
 import type { ConnectionIdentity, IClientTransport, IServerTransport } from "./Transport.js";
 import { routeServerMessageChannel } from "./webrtcChannels.js";
 
@@ -33,15 +34,7 @@ export class PeerHostTransport {
   private closed = false;
 
   constructor(peerId?: string) {
-    const opts = {
-      debug: 0 as const,
-      config: {
-        iceServers: [
-          { urls: "stun:stun.l.google.com:19302" },
-          { urls: "stun:stun1.l.google.com:19302" },
-        ],
-      },
-    };
+    const opts = peerOptions();
     this.peer = peerId ? new Peer(peerId, opts) : new Peer(opts);
 
     const self = this;
@@ -144,13 +137,30 @@ export class PeerHostTransport {
   }
 
   /** Resolves with the peer ID once connected to the PeerJS signaling server. */
-  ready(): Promise<string> {
+  ready(timeoutMs = 30_000): Promise<string> {
     if (this.peer.open) {
       return Promise.resolve(this.peer.id);
     }
     return new Promise((resolve, reject) => {
-      this.peer.on("open", (id) => resolve(id));
-      this.peer.on("error", (err) => reject(err));
+      const cleanup = () => {
+        clearTimeout(timer);
+        this.peer.off("open", opened);
+        this.peer.off("error", failed);
+      };
+      const opened = (id: string) => {
+        cleanup();
+        resolve(id);
+      };
+      const failed = (error: Error) => {
+        cleanup();
+        reject(error);
+      };
+      const timer = setTimeout(() => {
+        cleanup();
+        reject(new Error("Signaling timed out. Check your internet connection and try again."));
+      }, timeoutMs);
+      this.peer.on("open", opened);
+      this.peer.on("error", failed);
     });
   }
 

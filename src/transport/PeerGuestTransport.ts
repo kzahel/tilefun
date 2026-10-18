@@ -1,6 +1,7 @@
 import Peer from "peerjs";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import { peerOptions } from "./peerOptions.js";
 import type { IClientTransport } from "./Transport.js";
 import { classifyClientMessageChannel } from "./webrtcChannels.js";
 
@@ -47,15 +48,7 @@ export class PeerGuestTransport implements IClientTransport {
 
     this.emitStatus("connecting-signaling");
 
-    this.peer = new Peer({
-      debug: 0,
-      config: {
-        iceServers: [
-          { urls: "stun:stun.l.google.com:19302" },
-          { urls: "stun:stun1.l.google.com:19302" },
-        ],
-      },
-    });
+    this.peer = new Peer(peerOptions());
 
     this.peer.on("disconnected", () => {
       console.warn("[tilefun] P2P guest disconnected from signaling server");
@@ -118,7 +111,8 @@ export class PeerGuestTransport implements IClientTransport {
     this.conn = this.peer.connect(this.hostPeerId, {
       metadata: { uuid: this.guestUuid },
       reliable: true,
-      serialization: "raw",
+      // PeerJS chunks large world snapshots below SCTP message limits.
+      serialization: "binary",
     });
 
     this.conn.on("open", () => {

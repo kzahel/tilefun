@@ -36,10 +36,17 @@
     "streaming:bench": "node scripts/benchmark-streaming.mjs",
     "streaming:matrix": "node scripts/benchmark-streaming-matrix.mjs",
     "test:streaming": "node --test scripts/streaming-matrix.test.mjs",
-    "vehicle-collision:bench": "node scripts/benchmark-vehicle-collision.mjs"
+    "vehicle-collision:bench": "node scripts/benchmark-vehicle-collision.mjs",
+    "desktop:build": "npm run build && node scripts/build-desktop.mjs",
+    "desktop:build:linux": "npm run build && node scripts/build-desktop.mjs --linux",
+    "deck:doctor": "node scripts/steam-deck.mjs doctor",
+    "deck:install": "node scripts/steam-deck.mjs install",
+    "deck:launch": "node scripts/steam-deck.mjs launch",
+    "deck:status": "node scripts/steam-deck.mjs status"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
+    "@electron/packager": "^20.3.0",
     "@playwright/test": "^1.63.0",
     "@types/node": "^24.19.0",
     "@types/qrcode": "^1.5.6",
@@ -50,6 +57,8 @@
     "@types/ws": "^8.18.2",
     "@vitejs/plugin-basic-ssl": "^2.3.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "electron": "^44.9.0",
+    "peer": "^1.0.2",
     "pngjs": "^7.0.0",
     "tsx": "^4.23.15",
     "typescript": "^7.0.2",

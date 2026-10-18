@@ -10,6 +10,11 @@ Missing/invalid preferences fall back to Joystick; failed persistence leaves the
 chosen mode usable for the session with feedback in the dialog.
 [086](../tactical/086-tap-to-move-and-options.md) records the original tap slice.
 
+Shared Options now participates in controller focus/back navigation. The main
+menu uses separate Worlds, Multiplayer and Character pages; the browser sidebar
+and gear shortcut remain. [Steam Deck and menus](steam-deck-and-menus.md) owns
+controller semantics and packaged acceptance.
+
 Browser targeting waits for the scene's rendered camera capture before projecting
 touch coordinates. The slow first-tap/fullscreen regression controls the page clock
 for exactly 600ms, keeping CDP scheduling delays outside the 800ms gesture limit;

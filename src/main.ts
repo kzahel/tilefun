@@ -1,6 +1,8 @@
+import "./ui/Menus.css";
 import { GameClient } from "./client/GameClient.js";
 import { FaultReporter, reportFault, setFaultReporter } from "./diagnostics/FaultReporter.js";
 import { performanceMetrics } from "./diagnostics/PerformanceMetrics.js";
+import { controllerInput } from "./input/ControllerInput.js";
 import { enableFirstTouchFullscreen } from "./input/firstTouchFullscreen.js";
 import type { PlayerProfile } from "./persistence/PlayerProfileStore.js";
 import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
@@ -17,6 +19,7 @@ import { WebRtcClientTransport } from "./transport/WebRtcClientTransport.js";
 import { WebSocketClientTransport } from "./transport/WebSocketClientTransport.js";
 import { WorkerClientTransport } from "./transport/WorkerClientTransport.js";
 import { HostingBanner } from "./ui/HostingBanner.js";
+import { activateMenu, deactivateMenu } from "./ui/MenuNavigation.js";
 import { ProfilePicker } from "./ui/ProfilePicker.js";
 
 const canvasEl = document.getElementById("game") as HTMLCanvasElement | null;
@@ -32,6 +35,7 @@ const disableFirstTouchFullscreen = enableFirstTouchFullscreen();
 // ?host                  → P2P host: run server in-browser, accept WebRTC guests
 // ?join=PEER_ID          → P2P guest: connect to host via WebRTC DataChannel
 // (neither)              → single-player, in-browser server
+controllerInput.start();
 const params = new URLSearchParams(window.location.search);
 performanceMetrics.enabled = params.has("perf");
 const serverParam = params.get("server"); // e.g. "localhost:3001"
@@ -207,6 +211,7 @@ function createConnectionOverlay(onCancel: () => void) {
 
   el.append(spinner, statusEl, detailEl, cancelBtn);
 
+  activateMenu(el, onCancel, false);
   return {
     el,
     update(status: PeerGuestStatus, detail?: string) {
@@ -227,6 +232,39 @@ function createConnectionOverlay(onCancel: () => void) {
     },
   };
 }
+
+async function saveSession(): Promise<void> {
+  if (localHost) await localHost.flush();
+  if (server) await server.flushAsync();
+}
+function cancelSessionJoin(): void {
+  const url = new URL(location.href);
+  url.searchParams.delete("join");
+  url.searchParams.delete("host");
+  location.assign(url.href);
+}
+let navigating = false;
+window.addEventListener("tilefun-navigate", (event) => {
+  if (navigating) return;
+  navigating = true;
+  const url = (event as CustomEvent<string>).detail;
+  void saveSession()
+    .then(() => {
+      location.assign(url);
+    })
+    .catch((error) => {
+      navigating = false;
+      showErrorOverlay(new Error(`Couldn't save: ${String(error)}`), true);
+    });
+});
+window.tilefunDesktop?.onPrepareQuit(() => {
+  void saveSession()
+    .then(() => window.tilefunDesktop?.finishQuit())
+    .catch((error) => {
+      showErrorOverlay(new Error(`Couldn't save: ${String(error)}`), true);
+      window.tilefunDesktop?.finishQuit(String(error));
+    });
+});
 
 async function start() {
   const renderHostFactory = await selectableRenderHostFactory(
@@ -281,6 +319,7 @@ async function start() {
       window.location.href = url.toString();
     });
     document.body.appendChild(overlay.el);
+    overlay.el.querySelector("button")?.focus();
 
     peerTransport.onStatus = (status, detail) => {
       overlay.update(status, detail);
@@ -290,15 +329,20 @@ async function start() {
       await peerTransport.ready(30_000, abortCtrl.signal);
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") return;
+      peerTransport.close();
       overlay.update("failed", err instanceof Error ? err.message : String(err));
       return; // stay on the overlay so user can read the error and cancel
     }
+    deactivateMenu(overlay.el);
     overlay.el.remove();
 
     // Keep listening for reconnection events — re-show overlay if connection drops
     peerTransport.onStatus = (status, detail) => {
       if (status === "reconnecting" || status === "failed") {
-        if (!overlay.el.parentNode) document.body.appendChild(overlay.el);
+        if (!overlay.el.parentNode) {
+          document.body.appendChild(overlay.el);
+          activateMenu(overlay.el, () => cancelSessionJoin());
+        }
         overlay.update(status, detail);
       } else if (status === "datachannel-open") {
         overlay.el.remove();
@@ -322,7 +366,19 @@ async function start() {
     // P2P Host mode: local server + PeerJS for remote guests
     // Use profile ID as peer ID so the join URL survives host refreshes
     const peerHost = new PeerHostTransport(playerId);
-    const peerId = await peerHost.ready();
+    const overlay = createConnectionOverlay(cancelSessionJoin);
+    document.body.append(overlay.el);
+    overlay.el.querySelector("button")?.focus();
+    let peerId: string;
+    try {
+      peerId = await peerHost.ready();
+    } catch (error) {
+      peerHost.peer.destroy();
+      overlay.update("failed", String(error));
+      return;
+    }
+    deactivateMenu(overlay.el);
+    overlay.el.remove();
     console.log(`[tilefun] Hosting P2P game. Peer ID: ${peerId}`);
     const { GameServer } = await import("./server/GameServer.js");
     server = new GameServer(peerHost.serverSide, browserServerDependencies());
@@ -428,7 +484,7 @@ function hideLocalHost(): void {
 }
 
 /** Show a full-screen error overlay with recovery options. */
-function showErrorOverlay(error: unknown): void {
+function showErrorOverlay(error: unknown, recoverable = false): void {
   reportFault(
     error instanceof Error && error.name === "LocalServerHang" ? "server-hang" : "fatal",
     error,
@@ -441,6 +497,9 @@ function showErrorOverlay(error: unknown): void {
 
   const overlay = document.createElement("div");
   overlay.id = "tilefun-error-overlay";
+  overlay.setAttribute("role", "alertdialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", recoverable ? "Couldn't save" : "Something went wrong");
   overlay.style.cssText = `
     position: fixed; inset: 0; z-index: 9999;
     background: rgba(10, 10, 30, 0.95);
@@ -450,7 +509,7 @@ function showErrorOverlay(error: unknown): void {
 
   const title = document.createElement("div");
   title.style.cssText = "font-size: 24px; font-weight: bold; color: #f66; margin-bottom: 16px;";
-  title.textContent = "Something went wrong";
+  title.textContent = recoverable ? "Couldn't save" : "Something went wrong";
 
   const msgEl = document.createElement("div");
   msgEl.style.cssText =
@@ -497,12 +556,23 @@ function showErrorOverlay(error: unknown): void {
     });
   }
 
-  btnRow.append(reloadBtn);
-  if (joinPeerId || serverParam || multiplayer) {
+  const dismiss = () => {
+    if (!recoverable) return;
+    deactivateMenu(overlay);
+    overlay.remove();
+  };
+  const backBtn = document.createElement("button");
+  backBtn.textContent = "Back to game";
+  backBtn.style.cssText = btnStyle;
+  backBtn.onclick = dismiss;
+  btnRow.append(recoverable ? backBtn : reloadBtn);
+  if (!recoverable && (joinPeerId || serverParam || multiplayer)) {
     btnRow.append(singlePlayerBtn);
   }
   overlay.append(title, msgEl, stackEl, btnRow);
   document.body.appendChild(overlay);
+  activateMenu(overlay, dismiss);
+  (recoverable ? backBtn : reloadBtn).focus();
 }
 
 // Catch init errors

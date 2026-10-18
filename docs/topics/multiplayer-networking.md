@@ -10,6 +10,17 @@ Owns ongoing transport/replication decisions and gaps. The
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
+## Packaged host/join and shared menus
+
+[Steam Deck and menus](steam-deck-and-menus.md) owns desktop packaging and UI.
+Host/join/leave preserve the current installation origin and await local authority
+persistence. Public invitation URLs always target the hosted web game. Optional
+`peerServer` selects a self-hosted PeerJS broker for isolated WebRTC integration.
+PeerJS guests negotiate **binary** serialization: its built-in chunking keeps world
+snapshots below SCTP message limits. Raw serialization disconnected guests during
+initial world transfer; the two-browser host/join/leave regression exercises actual
+signaling and world data. Matching builds remain required for the gameplay codec.
+
 ## Current contract
 
 - [RealmReplicator](../../src/server/RealmReplicator.ts) builds per-client frames

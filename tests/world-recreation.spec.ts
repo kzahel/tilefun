@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import { openWorlds } from "./helpers/gameMenu.js";
 
 test("retired browser worlds stay listed and recreate with the same seed in a new container", async ({
   page,
@@ -46,6 +47,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
   await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.keyboard.press("Escape");
+  await openWorlds(page);
   await expect(
     page.getByText("Retired generator — recreate to play.", { exact: true }),
   ).toBeVisible();
@@ -64,6 +66,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
   );
   expect(recreated).not.toBe(original);
   await page.keyboard.press("Escape");
+  await openWorlds(page);
   await expect(page.getByText("Retired town", { exact: true })).toBeVisible();
   await expect(page.getByText("Retired town (recreated)", { exact: true })).toBeVisible();
 });

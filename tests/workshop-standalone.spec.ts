@@ -55,6 +55,7 @@ test("standalone serves Workshop login, native reviews and both protected compat
     await expect
       .poll(async () => {
         if (child?.exitCode !== null) throw Error(logs);
+        if (!logs.includes(`Server listening on ${base}`)) return false;
         try {
           return (await fetch(base + "/tilefun/api/auth/session")).ok;
         } catch {
@@ -71,6 +72,8 @@ test("standalone serves Workshop login, native reviews and both protected compat
     await page.getByLabel("Password", { exact: true }).fill(WORKSHOP_TEST_PASSWORD);
     await page.getByRole("button", { name: "Sign in", exact: true }).click();
     await expect(page.getByRole("heading", { name: "What’s ready to look at?" })).toBeVisible();
+    const freshInbox = await (await context.request.get("/tilefun/api/workshop/inbox")).json();
+    expect(freshInbox.manifestCurrent).toBe(true);
     await page.goto("/tilefun/workshop.html#/review/surface%3Asurface-v1-narrow");
     await expect(page.locator('[data-review-ready="true"]')).toBeVisible();
     await page.getByRole("button", { name: "Looks right ✓", exact: true }).click();
@@ -116,12 +119,15 @@ test("standalone serves Workshop login, native reviews and both protected compat
       "Standalone compatibility",
     );
   } finally {
-    await context.close();
-    if (child && child.exitCode === null) {
-      const exited = new Promise<void>((resolve) => child?.once("exit", () => resolve()));
-      child.kill("SIGTERM");
-      await exited;
+    try {
+      await context.close();
+    } finally {
+      if (child && child.exitCode === null) {
+        const exited = new Promise<void>((resolve) => child?.once("exit", () => resolve()));
+        child.kill("SIGTERM");
+        await exited;
+      }
+      await rm(directory, { recursive: true, force: true });
     }
-    await rm(directory, { recursive: true, force: true });
   }
 });

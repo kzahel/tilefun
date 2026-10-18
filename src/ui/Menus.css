@@ -1,0 +1,157 @@
+[data-menu-root] :focus-visible,
+[data-menu-root] :focus {
+  /* biome-ignore lint/complexity/noImportantStyles: override legacy inline control outlines. */
+  outline: 3px solid #ffe69b !important;
+  outline-offset: 3px;
+}
+.game-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(160deg, #15252ef5, #111923f5);
+  color: #f1f5ed;
+  font:
+    18px system-ui,
+    sans-serif;
+  padding: 24px 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.game-menu[hidden],
+.game-menu [hidden] {
+  display: none;
+}
+.game-menu h1 {
+  font-size: 34px;
+  letter-spacing: 3px;
+  margin: 0 0 16px;
+  color: #d7edc3;
+}
+.game-menu h2 {
+  margin: 8px 0 16px;
+  font-size: 24px;
+}
+.menu-page {
+  width: min(100%, 520px);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.menu-page button,
+.menu-page input,
+.menu-page select,
+.text-keyboard button {
+  box-sizing: border-box;
+  font: inherit;
+  color: #f4f5ec;
+  background: #344650;
+  border: 2px solid #718189;
+  border-radius: 4px;
+  padding: 12px 16px;
+  min-height: 48px;
+}
+.menu-page button {
+  cursor: pointer;
+  box-shadow:
+    inset 0 2px #ffffff12,
+    0 3px #0005;
+}
+.menu-page button:hover {
+  background: #435e63;
+}
+.menu-page button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.menu-page input,
+.menu-page select {
+  width: 100%;
+}
+.menu-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.menu-page p {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+.menu-page .menu-primary {
+  background: #426546;
+  border-color: #9eb58d;
+}
+.menu-page .menu-danger,
+.game-menu > .menu-danger {
+  color: #ffd0bd;
+}
+.menu-muted {
+  color: #bbcad0;
+  font-size: 15px;
+}
+.menu-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.menu-row > * {
+  flex: 1;
+  min-width: 0;
+}
+.menu-world {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  background: #ffffff08;
+  border: 1px solid #68787d;
+  border-radius: 5px;
+}
+.menu-world strong {
+  font-size: 20px;
+}
+.menu-help {
+  margin-top: 18px;
+  color: #b6c7ba;
+  font-size: 14px;
+}
+.text-keyboard {
+  width: min(850px, 92vw);
+  max-height: 85vh;
+  color: white;
+  background: #172731;
+  border: 2px solid #9eb58d;
+  border-radius: 8px;
+  font: 18px system-ui;
+}
+.text-keyboard::backdrop {
+  background: #000a;
+}
+.text-keyboard p {
+  overflow-wrap: anywhere;
+  min-height: 24px;
+}
+.keyboard-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 8px;
+}
+.keyboard-grid button {
+  padding: 8px 2px;
+  min-width: 0;
+}
+@media (max-height: 550px) {
+  .game-menu {
+    padding: 12px;
+  }
+  .game-menu h1 {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+  .menu-page {
+    gap: 8px;
+  }
+}

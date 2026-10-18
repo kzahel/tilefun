@@ -3,6 +3,7 @@ import {
   createDescriptor,
   LATEST_REGIONAL_REVISION,
 } from "../src/generation/GenerationDescriptor.js";
+import { openCreate, openWorlds } from "./helpers/gameMenu.js";
 
 test("new worlds and the explorer default to the newest regional revision", async ({ page }) => {
   await page.goto("/tilefun/");
@@ -12,6 +13,7 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   );
   expect(initial).toMatchObject({ type: "regional", version: LATEST_REGIONAL_REVISION });
   await page.keyboard.press("Escape");
+  await openCreate(page);
   const type = page.getByRole("combobox", { name: "World type" });
   const revision = page.getByRole("combobox", { name: "Regional revision" });
   await expect(type).toHaveValue("regional");
@@ -79,6 +81,7 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
     await expect(canvas).toHaveAttribute("data-generator", worldType);
     await expect(canvas).toHaveAttribute("data-generation", JSON.stringify(generation));
     await page.keyboard.press("Escape");
+    await openWorlds(page);
     await expect(
       page.getByText(`${worldType} · seed 2026 · ${generation.version}`, { exact: true }),
     ).toBeVisible();
@@ -218,7 +221,8 @@ test("Play here creates at the preview location and saved inspection includes a 
   );
   await expect(page.getByRole("combobox", { name: "World type" })).toBeDisabled();
   await page.getByRole("link", { name: "Play here" }).click();
-  await page.getByText("Play here district", { exact: true }).click();
+  await openWorlds(page);
+  await page.getByRole("button", { name: "Play Play here district", exact: true }).click();
   await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();
   await expect
     .poll(async () =>
