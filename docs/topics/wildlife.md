@@ -6,6 +6,25 @@ and all five authorized fierce creatures have durable provisional gameplay. New
 art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
+## Horse and giraffe motion
+
+The owner rejected the old horse/giraffe animation's frozen body and disconnected
+legs, then authorized a horse-first slow side-view clay prototype in
+[139](../tactical/139-horse-motion-study.md). The separate `horse/motion-study-v3`
+source moves the torso, carries buried shoulder/hip articulation with it and
+uses distinct fore/hind joint solves with fixed lengths and planted hooves.
+Side, world travel and four unchanged native game projections are under review.
+The owner accepted the prototype in chat on 2026-10-18 and explicitly authorized
+finishing both animals and committing them. New `horse/motion-v2` and
+`giraffe/motion-v2` retain the existing coats, sizes, anchors and physical bodies,
+with source-driven body/head paint, articulated limbs and grounded stance.
+The shared game/lab profiles select these repaired banks. Horse walk covers
+32px in 1.6s at 20px/s; giraffe covers 44.8px in 3.2s at 14px/s, with paired
+lateral footfalls. Flee and riding retain their ordinary proportional timing.
+The prototype's chat acceptance does not invent a Workshop vote for changed
+finished pixels; new exact identities remain pending human review. Other
+historical species holds and immutable original banks remain unchanged.
+
 ## Fierce creatures and natural-only replacement
 
 The owner explicitly authorizes T. rex, small dragon, dire wolf, griffin and giant

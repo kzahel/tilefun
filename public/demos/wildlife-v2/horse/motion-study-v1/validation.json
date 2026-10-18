@@ -1,0 +1,8 @@
+{
+  "identity": "horse-motion-study-v1",
+  "browser": "bundled full Chromium",
+  "chronologicalPoses": 96,
+  "exactNativeCrops": 384,
+  "controls": "pause/play, step, view, range keyboard scrubbing and speed selection validated",
+  "errors": []
+}

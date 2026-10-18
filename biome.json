@@ -43,6 +43,24 @@
   },
   "overrides": [
     {
+      "includes": [
+        "public/demos/wildlife-v2/horse/motion-study-v1/playback.js",
+        "public/demos/wildlife-v2/horse/motion-study-v2/playback.js",
+        "public/demos/wildlife-v2/horse/motion-study-v1/index.html",
+        "public/demos/wildlife-v2/horse/motion-study-v2/index.html"
+      ],
+      "formatter": {
+        "enabled": false
+      },
+      "linter": {
+        "rules": {
+          "a11y": {
+            "useButtonType": "off"
+          }
+        }
+      }
+    },
+    {
       "includes": ["public/data/workshop-manifest.json"],
       "files": {
         "maxSize": 2097152

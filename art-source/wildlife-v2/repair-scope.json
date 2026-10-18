@@ -6,6 +6,7 @@
   "authorizedTigerBatch": "art-source/wildlife-v2/tiger-batch.json",
   "authorizedPredatorBatch": "art-source/wildlife-v2/predator-batch.json",
   "authorizedFantasyBatch": "art-source/wildlife-v2/fantasy-batch.json",
+  "authorizedLongLeggedRepairs": "art-source/wildlife-v2/long-legged-repairs.json",
   "reason": "Owner limits further work to touching up existing animals with frozen walking torsos. No more new animals.",
   "existingAnimalIds": [
     "ant",

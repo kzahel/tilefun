@@ -3394,5 +3394,554 @@
         "sha256": "a2a7d9a375669c9d7a9044f811a23f5d044eda80264f32650441faf23936590d"
       }
     ]
+  },
+  {
+    "id": "horse-motion-study-v1",
+    "animalId": "horse",
+    "revision": "motion-study-v1",
+    "name": "Horse anatomy and motion · clay study",
+    "batchId": "wildlife-v2-horse-motion-139",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/horse/motion-study-v1/",
+    "sheet": {
+      "id": "wildlife-v2-horse-motion-study-v1",
+      "name": "Horse clay study sheet",
+      "image": "demos/wildlife-v2/horse/motion-study-v1/sheet.png",
+      "width": 2560,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "9cee459ded9682348a2e84e8b35e7c11c46df059161f4e4dbd22c120bb3101a2",
+      "source": "art-source/wildlife-v2/horse/motion-study-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-horse-motion-study-v1-scene",
+      "name": "Horse clay study scene",
+      "image": "demos/wildlife-v2/horse/motion-study-v1/scene-native.png",
+      "width": 512,
+      "height": 160,
+      "tileSize": 16,
+      "fingerprint": "6da479927c91cb637418d43eb592483a4c43d5266334d198ce3c7ef5e0c7cd7d",
+      "source": "art-source/wildlife-v2/horse/motion-study-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-horse-motion-study-v1-contact",
+      "name": "Horse clay study contact",
+      "image": "demos/wildlife-v2/horse/motion-study-v1/contact-sheet-native.png",
+      "width": 640,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "9f85cf48801cb3899f3840d1016dfcf797445492dd6b11d83b3d29caf7062d54",
+      "source": "art-source/wildlife-v2/horse/motion-study-v1"
+    },
+    "preview": "demos/wildlife-v2/horse/motion-study-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/contact-sheet-native.png",
+        "sha256": "9f85cf48801cb3899f3840d1016dfcf797445492dd6b11d83b3d29caf7062d54"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/index.html",
+        "sha256": "c44bb56b7592171f58e2e7b3537578bb28689a2975c0ca5e23266d33f462fa72"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/playback.js",
+        "sha256": "2333617656b2b5aed005c0fde4fedc5542d975438a5546f4a135cf42596228c9"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/preview-native.gif",
+        "sha256": "40d01fe6a2068d2c211816d88508ef81b426d1a0ee6671c8de8352ea15481956"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/preview.gif",
+        "sha256": "2dad834c217c0a449c4e5d1a20cc2a02d072b3182d2832e98b7967a8c4ee54a0"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/scene-native.png",
+        "sha256": "6da479927c91cb637418d43eb592483a4c43d5266334d198ce3c7ef5e0c7cd7d"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/sheet.png",
+        "sha256": "9cee459ded9682348a2e84e8b35e7c11c46df059161f4e4dbd22c120bb3101a2"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/side-frames.webp",
+        "sha256": "13e56295cf82fe1c5268e456f9214c522817dc874b24568c66e699a4049804be"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/side-poster.png",
+        "sha256": "b7634a500028e2cc2dd58042df450bbbdf0c58e4b2c0c178bf42942d1a69dcee"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/side-slow.gif",
+        "sha256": "bad7356000fb9c1706d050fbfc642c72c5c6e7a3ae29dbe7b3cdf84601e762fa"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/side-slow.mp4",
+        "sha256": "94a2302c758e572b39fff91b62c9b14b53c1e5e5129f9b1d9ca2c006f0d3a12f"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/source-audit.json",
+        "sha256": "b0abbd03be5dc41c77ff9781c8f7ea04b95074d377e869c46ed5aa85fe7a7a54"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/sprite.json",
+        "sha256": "6ddc432b07c31d541789b0f63f3b98bdf4273bee3f4769be28c8692f632f151c"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/travel-frames.webp",
+        "sha256": "2243395eb70e7d2ca4adf4bbf66e3e425bbd4b43b8bc510a00ed6ae2f1f9a2b5"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/travel-native.gif",
+        "sha256": "7bf11c9ac9860fa231561d9608ea9a63c57b681c0b38d4f66ffc014344f96763"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/travel-poster.png",
+        "sha256": "13e4a01bae8d8261e3d6064c6b322c1ad8a103ad657815b6d2691ae9c0bf5a41"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/travel-slow.gif",
+        "sha256": "127b10bff09d8404f6d861dd2a0ab9bb1eb60d6aa635dae4e838d004341e43dc"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/travel-slow.mp4",
+        "sha256": "638524da3b461edccd8a84f99b6f7f159a7084ff5865a06aa70bd14fec317419"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v1/validation.json",
+        "sha256": "423179c8ad5dedf9ce795e66e7db89d27729752f7cc254163b8f390739952a1a"
+      }
+    ]
+  },
+  {
+    "id": "horse-motion-study-v2",
+    "animalId": "horse",
+    "revision": "motion-study-v2",
+    "name": "Horse anatomy and motion · clay study v2",
+    "batchId": "wildlife-v2-horse-motion-139",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/horse/motion-study-v2/",
+    "sheet": {
+      "id": "wildlife-v2-horse-motion-study-v2",
+      "name": "Horse clay study sheet",
+      "image": "demos/wildlife-v2/horse/motion-study-v2/sheet.png",
+      "width": 2560,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "83d04e795aca44fc7d58bf58f82ae1892e58f9b7ee83c99bd948b0388dcdb13f",
+      "source": "art-source/wildlife-v2/horse/motion-study-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-horse-motion-study-v2-scene",
+      "name": "Horse clay study scene",
+      "image": "demos/wildlife-v2/horse/motion-study-v2/scene-native.png",
+      "width": 512,
+      "height": 160,
+      "tileSize": 16,
+      "fingerprint": "51d4844350919f10bea4f8cdb9deb449545bfd5e3dbc7e56ff25a6cb95aae2d7",
+      "source": "art-source/wildlife-v2/horse/motion-study-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-horse-motion-study-v2-contact",
+      "name": "Horse clay study contact",
+      "image": "demos/wildlife-v2/horse/motion-study-v2/contact-sheet-native.png",
+      "width": 640,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "286a2a14ccd7feb4ab3d83244638103859fc9a04bc4b1afd1a5de9240f30e5f4",
+      "source": "art-source/wildlife-v2/horse/motion-study-v2"
+    },
+    "preview": "demos/wildlife-v2/horse/motion-study-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/contact-sheet-native.png",
+        "sha256": "286a2a14ccd7feb4ab3d83244638103859fc9a04bc4b1afd1a5de9240f30e5f4"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/index.html",
+        "sha256": "e425e4f4e022b2adff0798d5783c733a78ad4be0906562bcb89258c4f6244528"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/playback.js",
+        "sha256": "2333617656b2b5aed005c0fde4fedc5542d975438a5546f4a135cf42596228c9"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/preview-native.gif",
+        "sha256": "b38d5b18e29570c72d298645cd77ada6f0cf22b67d7103e6b76c5be58de70453"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/preview.gif",
+        "sha256": "91291c85e611a590bbc7c0f8a73ab6a415ce439a1b3676405a065b2dc6974f0a"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/scene-native.png",
+        "sha256": "51d4844350919f10bea4f8cdb9deb449545bfd5e3dbc7e56ff25a6cb95aae2d7"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/sheet.png",
+        "sha256": "83d04e795aca44fc7d58bf58f82ae1892e58f9b7ee83c99bd948b0388dcdb13f"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/side-frames.webp",
+        "sha256": "0f474acc0a46c692ae4e6cdf4fcbf97dfe032ebb00fc877c298adfc94c134203"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/side-poster.png",
+        "sha256": "79a6de50d523884f734d6a0565b44871177b5b8dca907ff22a88c3fe4e005357"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/side-slow.gif",
+        "sha256": "00cc4204d8a7b9f5dc478488b7b52c84391aec4656218817a48d552b897baae2"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/side-slow.mp4",
+        "sha256": "77a9df72cc181a90c29eed444518cbbd1fea585b5020e3f82c32b4fcfc512aa4"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/source-audit.json",
+        "sha256": "2883392ae8737c00628bd48d4bf465c50d7da75bfdbf9d03df4f3fff49abeb78"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/sprite.json",
+        "sha256": "adfbb25ae9653c23b4ca81d1c693886fae675053034facd9ce656e840a62edff"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/travel-frames.webp",
+        "sha256": "cfabb20de2141e3240188805f71e5b15f94448d8b14b5c154cb2f7f9c636ac73"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/travel-native.gif",
+        "sha256": "9b93676455af3f33a3c2c39bae7f120782672cc60979837ea5c653e40f1f8698"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/travel-poster.png",
+        "sha256": "bb4067bc3ee13673cec15b07c1ebdb596daad39abaa965b86e65d37a220f266a"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/travel-slow.gif",
+        "sha256": "fc478e2f6f81cfb807eb6ae9f9f5797569eaf4b8460c169613e0639e13379178"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/travel-slow.mp4",
+        "sha256": "51e089184c6fe2fb41dfefb62e467f17a5065e4d22c7b975662e3d886a8cd1c7"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v2/validation.json",
+        "sha256": "1479cf51d97ff4f6d239f8f156f02e689ce745e13273406363db976a8854647b"
+      }
+    ]
+  },
+  {
+    "id": "horse-motion-study-v3",
+    "animalId": "horse",
+    "revision": "motion-study-v3",
+    "name": "Horse anatomy and motion · clay study v3",
+    "batchId": "wildlife-v2-horse-motion-139",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/horse/motion-study-v3/",
+    "sheet": {
+      "id": "wildlife-v2-horse-motion-study-v3",
+      "name": "Horse clay study sheet",
+      "image": "demos/wildlife-v2/horse/motion-study-v3/sheet.png",
+      "width": 2560,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "98b868043fc565421a0461b607443f597ceb59b3f475027bbb8d7d87491f51a5",
+      "source": "art-source/wildlife-v2/horse/motion-study-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-horse-motion-study-v3-scene",
+      "name": "Horse clay study scene",
+      "image": "demos/wildlife-v2/horse/motion-study-v3/scene-native.png",
+      "width": 512,
+      "height": 160,
+      "tileSize": 16,
+      "fingerprint": "51d4844350919f10bea4f8cdb9deb449545bfd5e3dbc7e56ff25a6cb95aae2d7",
+      "source": "art-source/wildlife-v2/horse/motion-study-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-horse-motion-study-v3-contact",
+      "name": "Horse clay study contact",
+      "image": "demos/wildlife-v2/horse/motion-study-v3/contact-sheet-native.png",
+      "width": 640,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "286a2a14ccd7feb4ab3d83244638103859fc9a04bc4b1afd1a5de9240f30e5f4",
+      "source": "art-source/wildlife-v2/horse/motion-study-v3"
+    },
+    "preview": "demos/wildlife-v2/horse/motion-study-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/contact-sheet-native.png",
+        "sha256": "286a2a14ccd7feb4ab3d83244638103859fc9a04bc4b1afd1a5de9240f30e5f4"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/framing-audit.json",
+        "sha256": "5c71daedf1f4f6c4f70c0abafadb45aa564fe797dc5675f44822e82c6569b61f"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/index.html",
+        "sha256": "48bca9693a3a127238b4c45a11fd1e7d30f9aa263f161cd46d2e11cd0c5712e8"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/playback.js",
+        "sha256": "072ff686c7f3053421bebaab657b2ea1046a1f0e8f83dca37aa8f4986436dd98"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/preview-native.gif",
+        "sha256": "b95fd6f50b8a3a66eed923494006241c6fcf11daad0b9b882edc88b398bf4ba3"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/preview.gif",
+        "sha256": "d0270d2b209eb78375795fbcb6ca35fa731e0a6a6a2060aecfed0305e3fede01"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/scene-native.png",
+        "sha256": "51d4844350919f10bea4f8cdb9deb449545bfd5e3dbc7e56ff25a6cb95aae2d7"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/sheet.png",
+        "sha256": "98b868043fc565421a0461b607443f597ceb59b3f475027bbb8d7d87491f51a5"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/side-frames.webp",
+        "sha256": "0f474acc0a46c692ae4e6cdf4fcbf97dfe032ebb00fc877c298adfc94c134203"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/side-poster.png",
+        "sha256": "79a6de50d523884f734d6a0565b44871177b5b8dca907ff22a88c3fe4e005357"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/side-slow.gif",
+        "sha256": "00cc4204d8a7b9f5dc478488b7b52c84391aec4656218817a48d552b897baae2"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/side-slow.mp4",
+        "sha256": "77a9df72cc181a90c29eed444518cbbd1fea585b5020e3f82c32b4fcfc512aa4"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/source-audit.json",
+        "sha256": "dc2cc389b797bc95ef418051605f6ffa2e8445bf9bea3b0055cb61d47f001d74"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/sprite.json",
+        "sha256": "f06b64b62e1ddb01f85c9292ad5918b6fe85e291127831c5dbb00c737974ea6a"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/travel-frames.webp",
+        "sha256": "fefa124aa42084f02b2ff9dd399cf0cf7a95f69cbbb35cbe2db2f849c67b9862"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/travel-native.gif",
+        "sha256": "bb424fbc3abfa4c596cfcba089d9bc636dd159ded6cab2b92cc4f6b2ebcbc4da"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/travel-poster.png",
+        "sha256": "eff615ebb67296e05725e51c5a965a6f437fe513f2d1b725a268a05e4537bc77"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/travel-slow.gif",
+        "sha256": "6169de538e77972abe7a068dd764a9ea5617707a7b1f92662aac34fb8a78dcfb"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/travel-slow.mp4",
+        "sha256": "d027ce109dcb05f9d1114f6ec53f89b33017c2ed58989812d010f561b08cf396"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-study-v3/validation.json",
+        "sha256": "355653cacee86d49d2d474e0f6aacf53597e30014fd6e7f3f5d4e4a014a931d1"
+      }
+    ]
+  },
+  {
+    "id": "horse-motion-v2",
+    "animalId": "horse",
+    "revision": "motion-v2",
+    "name": "Horse · completed motion repair",
+    "batchId": "wildlife-v2-long-legged-139",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/horse/motion-v2/",
+    "sheet": {
+      "id": "wildlife-v2-horse-motion-v2",
+      "name": "horse repaired sheet",
+      "image": "demos/wildlife-v2/horse/motion-v2/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809",
+      "source": "art-source/wildlife-v2/horse/motion-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-horse-motion-v2-scene",
+      "name": "horse repaired scene",
+      "image": "demos/wildlife-v2/horse/motion-v2/scene-native.png",
+      "width": 320,
+      "height": 120,
+      "tileSize": 16,
+      "fingerprint": "583b6533279a444c7c19f94cf215d9aae4d2a2b1a6bc35bb50f9b68b8b36f75a",
+      "source": "art-source/wildlife-v2/horse/motion-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-horse-motion-v2-contact",
+      "name": "horse repaired contact",
+      "image": "demos/wildlife-v2/horse/motion-v2/contact-sheet-native.png",
+      "width": 640,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "1e4d473ad8340b0db9cd383b3b84b7b55bac084372189b43d86e4db33c4d6a3f",
+      "source": "art-source/wildlife-v2/horse/motion-v2"
+    },
+    "preview": "demos/wildlife-v2/horse/motion-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/contact-sheet-native.png",
+        "sha256": "1e4d473ad8340b0db9cd383b3b84b7b55bac084372189b43d86e4db33c4d6a3f"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/index.html",
+        "sha256": "2aee2a26e9026bbf677d68da5f74c5021aba5b2ad164ad29cc0b3f8a2fdb7ece"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/pixel-audit.json",
+        "sha256": "b89d40f7561131768bed6cb6f9a53dea32dc22df1a459c609dcf425a639a64be"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/preview-native.gif",
+        "sha256": "76ea314f0d2d052807d13e837c2d753ddf5f80083312d872bfa8c189b957e158"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/preview.gif",
+        "sha256": "94c292f06dfb5dd894a1bfcfe5ffe33c621fc0bc59840d0d07f73fee3c916273"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/review-observations.md",
+        "sha256": "7c00f1a18585e969496f687a6a67b69cf9e7897cedcef448060dbb8b40967562"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/scene-background.png",
+        "sha256": "0e57f0b240398ab1a5b188ab18c39df60a478992375a3faf182890126c0fd98d"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/scene-native.png",
+        "sha256": "583b6533279a444c7c19f94cf215d9aae4d2a2b1a6bc35bb50f9b68b8b36f75a"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/sheet.png",
+        "sha256": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/source-audit.json",
+        "sha256": "87d68aeb01c5c1ac1dc2ec073d4c003e5e957ae052211d14e9bd3f1ea8a7c6aa"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/sprite.json",
+        "sha256": "83aa9fee9367e230b331994491375ace18092a5e0491c930f786e7e3a361d187"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/travel-native.gif",
+        "sha256": "628d0845e65f6918eb0e1eb6d5e2ec64f36b8941ae3022a7860f164e5a1f3bd5"
+      },
+      {
+        "path": "demos/wildlife-v2/horse/motion-v2/validation.json",
+        "sha256": "21aa1b412b4dfdba6cdb310bedde1662cc13028a75784a79c1c5f871773be22b"
+      }
+    ]
+  },
+  {
+    "id": "giraffe-motion-v2",
+    "animalId": "giraffe",
+    "revision": "motion-v2",
+    "name": "Giraffe · completed motion repair",
+    "batchId": "wildlife-v2-long-legged-139",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giraffe/motion-v2/",
+    "sheet": {
+      "id": "wildlife-v2-giraffe-motion-v2",
+      "name": "giraffe repaired sheet",
+      "image": "demos/wildlife-v2/giraffe/motion-v2/sheet.png",
+      "width": 5904,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
+      "source": "art-source/wildlife-v2/giraffe/motion-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-giraffe-motion-v2-scene",
+      "name": "giraffe repaired scene",
+      "image": "demos/wildlife-v2/giraffe/motion-v2/scene-native.png",
+      "width": 576,
+      "height": 184,
+      "tileSize": 16,
+      "fingerprint": "9fbd5ba8550d8f8549445118b7479c044b3797c13e420fffb23497b59041cf48",
+      "source": "art-source/wildlife-v2/giraffe/motion-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-giraffe-motion-v2-contact",
+      "name": "giraffe repaired contact",
+      "image": "demos/wildlife-v2/giraffe/motion-v2/contact-sheet-native.png",
+      "width": 1152,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "340f57b84e80d82839c5155726e828f38a03e57c769b311d8762e4e20bdef03e",
+      "source": "art-source/wildlife-v2/giraffe/motion-v2"
+    },
+    "preview": "demos/wildlife-v2/giraffe/motion-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/contact-sheet-native.png",
+        "sha256": "340f57b84e80d82839c5155726e828f38a03e57c769b311d8762e4e20bdef03e"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/index.html",
+        "sha256": "549205afcb441458d23de1b9d4315a561e3e6317ca9f82e8f05bbb9e3fd5333b"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/pixel-audit.json",
+        "sha256": "3c17f3762aa1597a847fa6af45989d7fd6a159a40d1e27985fdc59e629edaf03"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/preview-native.gif",
+        "sha256": "0f8a6d4d69571f2b9c3231fbae3d81d8d314f6d6d9c72e24dd9f1ede0e2edb2e"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/preview.gif",
+        "sha256": "b9ef08104dd85ef741e2a6f0ff761ba279349d0736e5ef20d5c2077252271165"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/review-observations.md",
+        "sha256": "b857e883bde0ff0029e9021ba4c43341e7a89dc105463f7c5d7055a55c7a384f"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/scene-background.png",
+        "sha256": "41e366442156c0a3b9314df4e93fa0333aef09343e50e0333bef96b21f7328ce"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/scene-native.png",
+        "sha256": "9fbd5ba8550d8f8549445118b7479c044b3797c13e420fffb23497b59041cf48"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/sheet.png",
+        "sha256": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/source-audit.json",
+        "sha256": "0de0e8f51194bf6a3f04213a4acaee3544010e679990c42ae99e6f10d60ce01b"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/sprite.json",
+        "sha256": "2f3cceec1ad429f1e7d4aa08ce30579816e51e321484787a3a41a69e1ff863b5"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/travel-native.gif",
+        "sha256": "71251944062068b5da333fd701318382b84bc213d974f427a0a8f83f8f114ab7"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe/motion-v2/validation.json",
+        "sha256": "7b9b802af075bc13f5a49b1c89e7c61b5875398af873d0c8b95880eacf3fd78e"
+      }
+    ]
   }
 ]

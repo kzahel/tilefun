@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T17:14:17.865Z (18/10/2026, 19:14:17 Berlin).
+Snapshot: 2026-10-18T19:46:00.590Z (18/10/2026, 21:46:00 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -245,6 +245,23 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | dire-wolf | draft-ready | Provisional |
 | griffin | draft-ready | Provisional |
 | giant-spider | draft-ready | Provisional |
+
+## Focused horse motion study
+
+[Tactical 139](tactical/139-horse-motion-study.md). Owner accepted this clay prototype in chat and authorized completing both animals; the active finished banks are listed below.
+
+| Animal | State | Review |
+| --- | --- | --- |
+| Horse | accepted-in-chat | Prototype accepted by owner in chat; completed pixel banks have separate pending identities · [Playback](../public/demos/wildlife-v2/horse/motion-study-v3/index.html) |
+
+## Completed horse and giraffe motion repairs
+
+[Tactical 139](tactical/139-horse-motion-study.md). Owner accepted the horse prototype and authorized completing/activating both animals. New final pixels have distinct pending review identities; other historical holds remain.
+
+| Animal | State | Gameplay |
+| --- | --- | --- |
+| horse | finished-game-active · [Playback](../public/demos/wildlife-v2/horse/motion-v2/index.html) | Active |
+| giraffe | finished-game-active · [Playback](../public/demos/wildlife-v2/giraffe/motion-v2/index.html) | Active |
 
 ## Whole roster
 

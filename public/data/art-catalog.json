@@ -448,11 +448,11 @@
     {
       "id": "wildlife-horse-provisional-v1",
       "name": "wildlife horse provisional v1",
-      "image": "demos/wildlife-v2/horse/draft-v1/sheet.png",
-      "width": 2000,
+      "image": "demos/wildlife-v2/horse/motion-v2/sheet.png",
+      "width": 3280,
       "height": 320,
       "tileSize": 16,
-      "fingerprint": "d90732a9a52e4586c049dbeddac83a19427405dcb8d677f2883d9bdb0037a73a",
+      "fingerprint": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -488,11 +488,11 @@
     {
       "id": "wildlife-giraffe-provisional-v1",
       "name": "wildlife giraffe provisional v1",
-      "image": "demos/wildlife-v2/giraffe/draft-v1/sheet.png",
-      "width": 3600,
+      "image": "demos/wildlife-v2/giraffe/motion-v2/sheet.png",
+      "width": 5904,
       "height": 576,
       "tileSize": 16,
-      "fingerprint": "b4717b9455e0de1cf74a6cb92c3522e3912a28dbdf434f0e2699a74cab6d76f5",
+      "fingerprint": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2243,6 +2243,56 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-horse-motion-study-v1",
+      "name": "wildlife v2 horse motion study v1",
+      "image": "demos/wildlife-v2/horse/motion-study-v1/sheet.png",
+      "width": 2560,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "9cee459ded9682348a2e84e8b35e7c11c46df059161f4e4dbd22c120bb3101a2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-horse-motion-study-v2",
+      "name": "wildlife v2 horse motion study v2",
+      "image": "demos/wildlife-v2/horse/motion-study-v2/sheet.png",
+      "width": 2560,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "83d04e795aca44fc7d58bf58f82ae1892e58f9b7ee83c99bd948b0388dcdb13f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-horse-motion-study-v3",
+      "name": "wildlife v2 horse motion study v3",
+      "image": "demos/wildlife-v2/horse/motion-study-v3/sheet.png",
+      "width": 2560,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "98b868043fc565421a0461b607443f597ceb59b3f475027bbb8d7d87491f51a5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-horse-motion-v2",
+      "name": "wildlife v2 horse motion v2",
+      "image": "demos/wildlife-v2/horse/motion-v2/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-giraffe-motion-v2",
+      "name": "wildlife v2 giraffe motion v2",
+      "image": "demos/wildlife-v2/giraffe/motion-v2/sheet.png",
+      "width": 5904,
+      "height": 576,
+      "tileSize": 16,
+      "fingerprint": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -23695,7 +23745,7 @@
       "rect": [
         0,
         0,
-        2000,
+        3280,
         320
       ],
       "label": "wildlife-horse-provisional-v1 · registered 80×80 frames",
@@ -23767,7 +23817,7 @@
       "rect": [
         0,
         0,
-        3600,
+        5904,
         576
       ],
       "label": "wildlife-giraffe-provisional-v1 · registered 144×144 frames",

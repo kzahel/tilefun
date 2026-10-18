@@ -536,6 +536,18 @@
       "toolId": "wildlife-v2"
     },
     {
+      "id": "wildlife-v2-horse-motion-139",
+      "name": "Wildlife · horse-motion-139",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
+      "id": "wildlife-v2-long-legged-139",
+      "name": "Wildlife · long-legged-139",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -17683,6 +17695,216 @@
       }
     },
     {
+      "id": "pattern:wildlife-v2-horse-motion-study-v1",
+      "batchId": "wildlife-v2-horse-motion-139",
+      "kind": "wildlife",
+      "name": "Horse anatomy and motion · clay study",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v1",
+      "fingerprint": "668bd8d877afe5f48748d0485a90436c766bdd4b021724884515904b6895f87e",
+      "sourceFingerprint": "9cee459ded9682348a2e84e8b35e7c11c46df059161f4e4dbd22c120bb3101a2",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-horse-motion-study-v1",
+        "prefabIds": [],
+        "revision": "3b971b9488eb1b5647ff5a9506d37677cfc36a8e96c2da6d324d023916544da5",
+        "renderFingerprint": "668bd8d877afe5f48748d0485a90436c766bdd4b021724884515904b6895f87e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-horse-motion-study-v1",
+        "fingerprint": "9cee459ded9682348a2e84e8b35e7c11c46df059161f4e4dbd22c120bb3101a2",
+        "sheetSize": [
+          2560,
+          320
+        ],
+        "rect": [
+          0,
+          0,
+          2560,
+          320
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-horse-motion-study-v1",
+          "prefabIds": [],
+          "revision": "3b971b9488eb1b5647ff5a9506d37677cfc36a8e96c2da6d324d023916544da5",
+          "renderFingerprint": "668bd8d877afe5f48748d0485a90436c766bdd4b021724884515904b6895f87e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-horse-motion-study-v2",
+      "batchId": "wildlife-v2-horse-motion-139",
+      "kind": "wildlife",
+      "name": "Horse anatomy and motion · clay study v2",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v2",
+      "fingerprint": "2e9c9a4308de5410f567f1f988307a4248a7d7807c2991d5b54b55f3006f9026",
+      "sourceFingerprint": "83d04e795aca44fc7d58bf58f82ae1892e58f9b7ee83c99bd948b0388dcdb13f",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-horse-motion-study-v2",
+        "prefabIds": [],
+        "revision": "a4840fa3290d99219743ce4946545f29db99b52acc6a9b8c281dcde2a9089784",
+        "renderFingerprint": "2e9c9a4308de5410f567f1f988307a4248a7d7807c2991d5b54b55f3006f9026",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-horse-motion-study-v2",
+        "fingerprint": "83d04e795aca44fc7d58bf58f82ae1892e58f9b7ee83c99bd948b0388dcdb13f",
+        "sheetSize": [
+          2560,
+          320
+        ],
+        "rect": [
+          0,
+          0,
+          2560,
+          320
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-horse-motion-study-v2",
+          "prefabIds": [],
+          "revision": "a4840fa3290d99219743ce4946545f29db99b52acc6a9b8c281dcde2a9089784",
+          "renderFingerprint": "2e9c9a4308de5410f567f1f988307a4248a7d7807c2991d5b54b55f3006f9026",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-horse-motion-study-v3",
+      "batchId": "wildlife-v2-horse-motion-139",
+      "kind": "wildlife",
+      "name": "Horse anatomy and motion · clay study v3",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v3",
+      "fingerprint": "dc9c5d3a4689c8c65a4195f24fae956b09f654d3ef955605a71b39ae5b6a10b3",
+      "sourceFingerprint": "98b868043fc565421a0461b607443f597ceb59b3f475027bbb8d7d87491f51a5",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-horse-motion-study-v3",
+        "prefabIds": [],
+        "revision": "c7a9cb4f21fb447ce772c8ee2d5ba6b6b97c95225987015bd78eafdf932299e6",
+        "renderFingerprint": "dc9c5d3a4689c8c65a4195f24fae956b09f654d3ef955605a71b39ae5b6a10b3",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v3"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-horse-motion-study-v3",
+        "fingerprint": "98b868043fc565421a0461b607443f597ceb59b3f475027bbb8d7d87491f51a5",
+        "sheetSize": [
+          2560,
+          320
+        ],
+        "rect": [
+          0,
+          0,
+          2560,
+          320
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-horse-motion-study-v3",
+          "prefabIds": [],
+          "revision": "c7a9cb4f21fb447ce772c8ee2d5ba6b6b97c95225987015bd78eafdf932299e6",
+          "renderFingerprint": "dc9c5d3a4689c8c65a4195f24fae956b09f654d3ef955605a71b39ae5b6a10b3",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-study-v3"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-horse-motion-v2",
+      "batchId": "wildlife-v2-long-legged-139",
+      "kind": "wildlife",
+      "name": "Horse · completed motion repair",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-v2",
+      "fingerprint": "0df9079ef8c2bc076ab9ff0a3d6dba3e1227c06de820282fc6c0f77016e62149",
+      "sourceFingerprint": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-horse-motion-v2",
+        "prefabIds": [],
+        "revision": "de4ae427e7e3ad78bb18478820a5f97e62786f6b7f2fc24c46776593a62f1e3c",
+        "renderFingerprint": "0df9079ef8c2bc076ab9ff0a3d6dba3e1227c06de820282fc6c0f77016e62149",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-horse-motion-v2",
+        "fingerprint": "20de0a97c9ed1a6e925fcca09cacac6a083fc7588dad6315f5783e2961c8b809",
+        "sheetSize": [
+          3280,
+          320
+        ],
+        "rect": [
+          0,
+          0,
+          3280,
+          320
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-horse-motion-v2",
+          "prefabIds": [],
+          "revision": "de4ae427e7e3ad78bb18478820a5f97e62786f6b7f2fc24c46776593a62f1e3c",
+          "renderFingerprint": "0df9079ef8c2bc076ab9ff0a3d6dba3e1227c06de820282fc6c0f77016e62149",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-horse-motion-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-giraffe-motion-v2",
+      "batchId": "wildlife-v2-long-legged-139",
+      "kind": "wildlife",
+      "name": "Giraffe · completed motion repair",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-giraffe-motion-v2",
+      "fingerprint": "0954b0688fd7f308a2ba26e746b3f72968d83a392d7111c03cacd61b33c5653a",
+      "sourceFingerprint": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-giraffe-motion-v2",
+        "prefabIds": [],
+        "revision": "4bd859df39a9585b6fb27d1219c926b251b51ed69ccde1c46b6b7111a6da4855",
+        "renderFingerprint": "0954b0688fd7f308a2ba26e746b3f72968d83a392d7111c03cacd61b33c5653a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-giraffe-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-giraffe-motion-v2",
+        "fingerprint": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
+        "sheetSize": [
+          5904,
+          576
+        ],
+        "rect": [
+          0,
+          0,
+          5904,
+          576
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-giraffe-motion-v2",
+          "prefabIds": [],
+          "revision": "4bd859df39a9585b6fb27d1219c926b251b51ed69ccde1c46b6b7111a6da4855",
+          "renderFingerprint": "0954b0688fd7f308a2ba26e746b3f72968d83a392d7111c03cacd61b33c5653a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-giraffe-motion-v2"
+        }
+      }
+    },
+    {
       "id": "vehicle:compact-1:north",
       "batchId": "vehicles",
       "name": "Compact 1 · north",
@@ -31957,5 +32179,5 @@
       }
     }
   ],
-  "inputDigest": "f6d0f6dfbd354e2342f39774ab01b19223c7bc1b94e586d9fe61a593310bdd83"
+  "inputDigest": "c48df5c480acf09202effbfd249f2c21e712b471c555c6b11a2d681c49dcb2c6"
 }

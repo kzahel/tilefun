@@ -14,6 +14,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | --- | --- |
 | [140 Shared input UX and reverse](140-shared-input-ux-and-reverse.md) | Shared cursor/tool selection, native map gestures, named action paddles and reverse driving |
 | [139 Steam Deck package and controller menus](139-steam-deck-package-and-controller-menus.md) | Delivered: Linux game package, shared submenus, controller UI and P2P host/join |
+| [139 Horse and giraffe motion](139-horse-motion-study.md) | Accepted horse prototype; both completed motion banks active in game/lab, new final pixels pending review |
 | [138 City outskirts racetracks](138-city-outskirts-racetracks.md) | Large oval speedways, eight durable racing cars, spectator seating and a native game/lab inspection |
 | [137 Fierce creatures and food web](137-fierce-creatures-and-food-web.md) | In progress: five authorized fantasy/prehistoric creatures, cross-predator diets and natural-only meal replacement |
 | [132 Predator hunting and replacement](132-predator-hunting-and-replacement.md) | In progress: tiger hunting and nearby prey replacement, then panther/lion/bear art, shared behavior and world spawning |

@@ -1,6 +1,8 @@
 # Retain source players, descriptors and immutable native review render inputs.
 # Animation evidence, guides and diagnostic captures live in the checksum archive.
 */*/*
+!horse/motion-v2/*
+!giraffe/motion-v2/*
 !ant/draft-v1/contact-sheet-native.png
 !ant/draft-v1/scene-native.png
 !ant/draft-v1/sheet.png
@@ -295,3 +297,67 @@
 !giant-spider/fierce-v1/source-audit.json
 !giant-spider/fierce-v1/sprite.json
 !giant-spider/fierce-v1/validation.json
+
+# Focused owner-authorized horse motion study 139, pending human review.
+!horse/motion-study-v1/contact-sheet-native.png
+!horse/motion-study-v1/index.html
+!horse/motion-study-v1/playback.js
+!horse/motion-study-v1/preview-native.gif
+!horse/motion-study-v1/preview.gif
+!horse/motion-study-v1/scene-native.png
+!horse/motion-study-v1/sheet.png
+!horse/motion-study-v1/side-frames.webp
+!horse/motion-study-v1/side-poster.png
+!horse/motion-study-v1/side-slow.gif
+!horse/motion-study-v1/side-slow.mp4
+!horse/motion-study-v1/source-audit.json
+!horse/motion-study-v1/sprite.json
+!horse/motion-study-v1/travel-frames.webp
+!horse/motion-study-v1/travel-native.gif
+!horse/motion-study-v1/travel-poster.png
+!horse/motion-study-v1/travel-slow.gif
+!horse/motion-study-v1/travel-slow.mp4
+!horse/motion-study-v1/validation.json
+
+# Focused owner-authorized horse motion study 139, pending human review.
+!horse/motion-study-v2/contact-sheet-native.png
+!horse/motion-study-v2/index.html
+!horse/motion-study-v2/playback.js
+!horse/motion-study-v2/preview-native.gif
+!horse/motion-study-v2/preview.gif
+!horse/motion-study-v2/scene-native.png
+!horse/motion-study-v2/sheet.png
+!horse/motion-study-v2/side-frames.webp
+!horse/motion-study-v2/side-poster.png
+!horse/motion-study-v2/side-slow.gif
+!horse/motion-study-v2/side-slow.mp4
+!horse/motion-study-v2/source-audit.json
+!horse/motion-study-v2/sprite.json
+!horse/motion-study-v2/travel-frames.webp
+!horse/motion-study-v2/travel-native.gif
+!horse/motion-study-v2/travel-poster.png
+!horse/motion-study-v2/travel-slow.gif
+!horse/motion-study-v2/travel-slow.mp4
+!horse/motion-study-v2/validation.json
+
+# Focused owner-authorized horse motion study 139, pending human review.
+!horse/motion-study-v3/contact-sheet-native.png
+!horse/motion-study-v3/framing-audit.json
+!horse/motion-study-v3/index.html
+!horse/motion-study-v3/playback.js
+!horse/motion-study-v3/preview-native.gif
+!horse/motion-study-v3/preview.gif
+!horse/motion-study-v3/scene-native.png
+!horse/motion-study-v3/sheet.png
+!horse/motion-study-v3/side-frames.webp
+!horse/motion-study-v3/side-poster.png
+!horse/motion-study-v3/side-slow.gif
+!horse/motion-study-v3/side-slow.mp4
+!horse/motion-study-v3/source-audit.json
+!horse/motion-study-v3/sprite.json
+!horse/motion-study-v3/travel-frames.webp
+!horse/motion-study-v3/travel-native.gif
+!horse/motion-study-v3/travel-poster.png
+!horse/motion-study-v3/travel-slow.gif
+!horse/motion-study-v3/travel-slow.mp4
+!horse/motion-study-v3/validation.json

@@ -1,0 +1,36 @@
+{
+  "identity": "horse-motion-study-v3",
+  "renders": 224,
+  "views": [
+    {
+      "view": "down",
+      "poses": 32,
+      "minimumTransparentMarginPixels": 8
+    },
+    {
+      "view": "up",
+      "poses": 32,
+      "minimumTransparentMarginPixels": 8
+    },
+    {
+      "view": "left",
+      "poses": 32,
+      "minimumTransparentMarginPixels": 13
+    },
+    {
+      "view": "right",
+      "poses": 32,
+      "minimumTransparentMarginPixels": 13
+    },
+    {
+      "view": "side",
+      "poses": 32,
+      "minimumTransparentMarginPixels": 22
+    },
+    {
+      "view": "travel",
+      "poses": 64,
+      "minimumTransparentMarginPixels": 22
+    }
+  ]
+}

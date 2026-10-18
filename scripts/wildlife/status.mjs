@@ -222,6 +222,39 @@ export function writeStatus() {
       "",
     );
   }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/horse-motion-study.json"))) {
+    const study = read("art-source/wildlife-v2/horse-motion-study.json");
+    lines.splice(
+      lines.indexOf("## Whole roster"),
+      0,
+      "## Focused horse motion study",
+      "",
+      "[Tactical 139](tactical/139-horse-motion-study.md). Owner accepted this clay prototype in chat and authorized completing both animals; the active finished banks are listed below.",
+      "",
+      "| Animal | State | Review |",
+      "| --- | --- | --- |",
+      `| Horse | ${clean(study.state)} | ${clean(study.reviewStatus)} · [Playback](../public/demos/wildlife-v2/horse/${study.revision}/index.html) |`,
+      "",
+    );
+  }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/long-legged-repairs.json"))) {
+    const repairs = read("art-source/wildlife-v2/long-legged-repairs.json");
+    lines.splice(
+      lines.indexOf("## Whole roster"),
+      0,
+      "## Completed horse and giraffe motion repairs",
+      "",
+      "[Tactical 139](tactical/139-horse-motion-study.md). Owner accepted the horse prototype and authorized completing/activating both animals. New final pixels have distinct pending review identities; other historical holds remain.",
+      "",
+      "| Animal | State | Gameplay |",
+      "| --- | --- | --- |",
+      ...repairs.scope.map(
+        (animal) =>
+          `| ${clean(animal)} | ${clean(repairs.state)} · [Playback](../public/demos/wildlife-v2/${animal}/${repairs.revision}/index.html) | ${repairs.gameplay ? "Active" : "Checking"} |`,
+      ),
+      "",
+    );
+  }
   const output = resolve(ROOT, "docs/wildlife-status.md");
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));

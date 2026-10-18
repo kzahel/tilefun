@@ -33,6 +33,13 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Fierce creatures
 
+[139](../tactical/139-horse-motion-study.md) activates the completed horse and
+giraffe motion banks through ordinary shared `Fauna` profiles. Game and natural
+Worker playground use the same 32-pose walk/flee clips and native anchors.
+Ground stride matches existing walk speed; mounted horse timing retains the
+existing speed ratio. Physical bounds, authority and riding rules are unchanged.
+Canvas/GPU checks cover walking, pause/reload, escape and mounting/dismounting.
+
 [137](../tactical/137-fierce-creatures-and-food-web.md) adds natural-origin meal
 replacement, an explicit food web, cross-predator meals and T. rex warning/charge
 states to shared Realm authority. Main game and the natural Worker lab use the

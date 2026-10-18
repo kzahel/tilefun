@@ -98,7 +98,7 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       expect(metadata.identity).toBe(p.identity);
       expect(metadata.anchor).toEqual(p.anchor);
       expect(metadata.frameWidth).toBe(p.size);
-      if (p.variantOf) {
+      if (p.variantOf || p.species === "horse" || p.species === "giraffe") {
         expect(
           (p.speed * required(CLIPS[1]).count * required(CLIPS[1]).frameDuration) / 1000,
         ).toBeCloseTo(metadata.rootTravelPixelsPerCycle);

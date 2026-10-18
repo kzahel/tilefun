@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horse anatomy and motion study</title>
+<style>
+body{margin:24px auto;max-width:1000px;padding:0 16px;background:#252c2e;color:#f1eee5;font:16px system-ui}h1{font-size:26px}p{line-height:1.5}button,select,input{font:inherit;margin:6px;padding:6px}canvas{display:block;max-width:100%;height:auto;background:#e7e4db}#native{image-rendering:pixelated;width:960px;margin-top:16px}a{color:#a9dcec}label{display:inline-block}#pose{width:250px}
+</style>
+<h1>Horse anatomy and motion study</h1>
+<p>Clay prototype for review. Buried shoulder and hip articulation, distinct forelegs and hindlegs, body weight transfer and grounded stance. Blue: forelegs. Terracotta: hindlegs. The original game art remains in use.</p>
+<label>View <select id="view"><option value="side">Side · in place</option><option value="travel">Side · world travel</option></select></label>
+<label>Speed <select id="speed"><option value="0.5">50%</option><option value="1">100%</option><option value="0.25">25%</option></select></label>
+<button id="pause">Pause</button><button id="step">Next pose</button>
+<label>Pose <input id="pose" type="range" min="0" max="31" value="0"></label><output id="status"></output>
+<canvas id="study" width="640" height="580"></canvas>
+<p>Game projection · down / up / left / right · original 80px cells, enlarged 3×. The ground anchor is fixed; the torso moves inside each cell.</p>
+<canvas id="native" width="320" height="80"></canvas>
+<p><a href="side-slow.gif">Slow side GIF</a> · <a href="travel-slow.gif">Travelling GIF</a> · <a href="travel-native.gif">Four-facing native travel</a> · <a href="source-audit.json">Evaluated Blender audit</a></p>
+<script type="module" src="playback.js"></script>
+</html>

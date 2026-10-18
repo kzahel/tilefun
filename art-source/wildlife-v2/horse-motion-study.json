@@ -1,0 +1,12 @@
+{
+  "identity": "horse-motion-study-139",
+  "authorization": "Owner Proceed after proposal for a slow side-view horse anatomy and weight-transfer prototype, 2026-10-18",
+  "state": "accepted-in-chat",
+  "revision": "motion-study-v3",
+  "supersedes": "v1 source Euler interpolation; v2 travel-camera ear crop. Both exact prior studies remain archived.",
+  "animal": "horse",
+  "gameplay": false,
+  "reviewStatus": "Prototype accepted by owner in chat; completed pixel banks have separate pending identities",
+  "scope": "One clay motion prototype. Existing registered horse art, giraffe and historical broad repair gates remain unchanged.",
+  "next": "Horse and giraffe completion is tracked by long-legged-repairs.json; inspect the finished banks in ordinary play."
+}

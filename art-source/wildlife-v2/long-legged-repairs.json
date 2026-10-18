@@ -1,0 +1,20 @@
+{
+  "identity": "long-legged-repairs-139",
+  "authorization": "Owner: Looks fine proceed. I trust u. Complete both. Commit (2026-10-18)",
+  "approvedMotionPrototype": "horse-motion-study-v3 (chat acceptance, not an invented Workshop vote)",
+  "scope": ["horse", "giraffe"],
+  "revision": "motion-v2",
+  "state": "finished-game-active",
+  "reviewStatus": "new finished pixels pending; prototype accepted in chat",
+  "gameplay": true,
+  "historicalOtherSpeciesHolds": "unchanged",
+  "validation": {
+    "sourceReplay": "byte-identical both animals",
+    "focusedBrowserTests": 8,
+    "unitTestsPassed": 2820,
+    "knownWindowsUnitFailures": 5,
+    "typecheckLintBuild": "pass",
+    "workshopCandidateParity": 885,
+    "broadBrowser": "45 passed, then known GPU city-train reload failure; stopped with max-failures=1"
+  }
+}
