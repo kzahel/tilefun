@@ -1,6 +1,8 @@
 import { expect, it } from "vitest";
+import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import { buildLaneGraph } from "../traffic/LaneGraph.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
@@ -66,6 +68,61 @@ it("keeps a roof passenger supported through a generated junction in the real Re
     expect(session.handles.car).toBeDefined();
     await session.command({ kind: "traffic-position", roof: true });
     expect(session.player.player.wz).toBe(24);
+  } finally {
+    await session.close();
+  }
+}, 30000);
+
+it("clears competing junction queues through Realm save/reload", async () => {
+  const segments = [];
+  for (let i = 0; i <= 2; i++) {
+    segments.push({ a: { x: 0, y: i * 40 }, b: { x: 80, y: i * 40 }, width: 4, intercity: false });
+    segments.push({ a: { x: i * 40, y: 0 }, b: { x: i * 40, y: 80 }, width: 4, intercity: false });
+  }
+  const graph = buildLaneGraph(segments);
+  const incoming = [...graph.lanes.values()].filter((lane) => lane.to === "40,40");
+  const session = await ScenarioSession.create({
+    version: 1,
+    id: "junction-queues",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(760, 760),
+    props: [],
+    trafficLanes: [...graph.lanes.values()],
+    roads: [
+      { left: -128, right: 896, top: -128, bottom: 896 },
+      { left: 896, right: 1408, top: -128, bottom: 896 },
+      { left: -128, right: 1408, top: 896, bottom: 1408 },
+    ],
+    traffic: incoming.map((lane, i) => ({
+      name: `car-${i}`,
+      model: "compact-1",
+      laneId: lane.id,
+      x: 640,
+      y: 640,
+      distance: lane.path.length - 110,
+    })),
+  });
+  try {
+    const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
+    for (let i = 0; i < 180; i++) await session.step(idle);
+    await session.reload();
+    for (let i = 0; i < 1800; i++) await session.step(idle);
+    for (let i = 0; i < incoming.length; i++) {
+      const car = required(
+        session.realm.traffic?.states.get(required(session.handles[`car-${i}`])),
+      );
+      expect(
+        car.choices,
+        JSON.stringify({
+          waiting: car.waiting,
+          position: car.entity.position,
+          distance: car.distance,
+          turn: !!car.turn,
+          reservation: car.reservation,
+          next: car.next?.id,
+        }),
+      ).toBeGreaterThan(0);
+    }
   } finally {
     await session.close();
   }

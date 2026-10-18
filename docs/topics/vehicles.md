@@ -169,6 +169,38 @@ two fire-truck ladder states), even with no feedback. The original
 [traffic and roof-riding plan](../tactical/017-generated-road-traffic-and-roof-riding.md)
 owns implementation sequencing and acceptance.
 
+## Intersection queues
+
+The 2026-10-18 traffic-jam investigation reproduced permanent four-approach
+queues and a turning car trapped by a waiting approach after save/reload.
+TrafficSystem now checks the actual directional vehicle footprints over a full
+vehicle length of exit instead of a padded rectangle that can include opposing
+traffic. Queued approaches retain the configured safety gap outside the junction,
+leaving room for the collider's direction change during left turns. Flat-road
+queues saved inside that gap can ease backward at up to 8px/s to yield to the
+junction owner, with live body/road/prop checks and the normal passenger plan;
+a blocked rear stays stopped. Exclusive
+junction ownership and road, prop, pedestrian and vehicle checks remain enforced.
+
+Exit failures retain their actual reason: a missing road or prop obstruction can
+use the existing three-second alternate-turn search instead of waiting forever
+under the generic junction label. Occupied exits continue yielding until clear.
+This is shared authority behavior for the normal game and embedded traffic labs;
+no generated worlds, saved route format, vehicle geometry or approved art changes.
+
+`TrafficJunction.test.ts` checks four simultaneous approaches on 4-, 6- and 8-tile
+roads, with left, straight and right turns, continuous non-overlap, occupied-exit
+release, rerouting around a missing exit road, recovery of old close-stopped
+queues and rear-pedestrian safety. `ScenarioTraffic.test.ts` also
+checks four competing queues through production Realm persistence/reload.
+
+Validation: typechecks, all 2,735 unit tests, lint and the production build pass.
+The full bundled-Chromium run passes 658/659; the lone train renderer-switch
+assertion passes on an isolated rerun against the same build. All traffic,
+driving, parking, grade and roof-riding browser checks pass. Inventory regeneration
+changes seven explicitly excluded interactive scenario fingerprints and the input
+digest; approved art identities remain unchanged.
+
 ## Agreed gameplay direction
 
 Gentle autonomous traffic uses procedurally generated roads only: mostly city

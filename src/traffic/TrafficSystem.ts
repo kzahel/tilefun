@@ -451,33 +451,32 @@ export class TrafficSystem {
     }
     return "";
   }
-  private reserve(s: TrafficState, reuseRoad = false): boolean {
-    if (s.turn || s.reservation === s.lane.to) return true;
-    if (!s.next) return false;
+  /** Returns a blocking reason, or an empty string after securing the junction. */
+  private reserve(s: TrafficState, reuseRoad = false): string {
+    if (s.turn || s.reservation === s.lane.to) return "";
+    if (!s.next) return "route end";
     const owner = this.reservations.get(s.lane.to);
-    if (owner !== undefined && owner !== s.entity.id) return false;
-    // Require a clear road/prop/pedestrian exit as well as vehicle queue space.
+    if (owner !== undefined && owner !== s.entity.id) return "junction";
+    // Check actual directional footprints through a whole vehicle length of exit.
+    // A padded corridor box also covers the opposite lane and can deadlock all
+    // approaches even when every selected exit is physically clear.
     const exitAhead = s.lane.path.length - s.distance + turnPath(s.lane, s.next).length;
-    for (let d = 0; d <= Math.max(72, s.entity.collider?.width ?? 0); d += 8)
-      if (this.blocked(s, exitAhead + d, reuseRoad)) return false;
-    // Require room for the whole vehicle beyond the junction before entering.
-    const exit = samplePath(s.next.path, Math.max(72, s.entity.collider?.width ?? 0));
-    const box = {
-      left: Math.min(required(s.next.path.points[0]).x, exit.x) - 28,
-      right: Math.max(required(s.next.path.points[0]).x, exit.x) + 28,
-      top: Math.min(required(s.next.path.points[0]).y, exit.y) - 28,
-      bottom: Math.max(required(s.next.path.points[0]).y, exit.y) + 28,
-    };
-    for (const other of this.states.values())
-      if (
-        other !== s &&
-        other.entity.collider &&
-        aabbsOverlap(box, getEntityAABB(other.entity.position, other.entity.collider))
-      )
-        return false;
+    const exitView = required(vehicleView(s.entity.type, s.next.direction));
+    const exitCollider = required(exitView.metadata.colliders[0]);
+    const exitLength = Math.max(
+      72,
+      s.entity.collider?.width ?? 0,
+      s.entity.collider?.height ?? 0,
+      exitCollider.width,
+      exitCollider.height,
+    );
+    for (let d = 0; d < exitLength + 8; d += 8) {
+      const reason = this.blocked(s, exitAhead + Math.min(d, exitLength), reuseRoad);
+      if (reason) return reason;
+    }
     this.reservations.set(s.lane.to, s.entity.id);
     s.reservation = s.lane.to;
-    return true;
+    return "";
   }
   /** Called once per physics tick after player input. No wander AI, damage or pushing. */
   get shoppingDiagnostics() {
@@ -671,9 +670,16 @@ export class TrafficSystem {
           break;
         }
       }
-      if (!s.turn && end - s.distance < lookahead + half + 8 && !this.reserve(s, true)) {
-        clearance = Math.min(clearance, Math.max(0, end - s.distance - half - 8));
-        reason = "junction";
+      // Queued approaches must leave the configured gap outside turning bodies,
+      // including the sideways footprint change halfway through a left turn.
+      const stopMargin = half + 8 + (s.next ? this.settings.gap : 0);
+      if (!s.turn && end - s.distance < lookahead + stopMargin) {
+        const junctionReason = this.reserve(s, true);
+        if (junctionReason) {
+          clearance = Math.min(clearance, Math.max(0, end - s.distance - stopMargin));
+          // Preserve exit failures so a lost road/prop obstruction can reroute.
+          reason ||= junctionReason;
+        }
       }
       if (!s.next) {
         clearance = Math.min(clearance, Math.max(0, end - s.distance - half));
@@ -695,6 +701,24 @@ export class TrafficSystem {
         reason = surface.reason;
       }
       if (move < 0.001) s.speed = 0;
+      const owner = this.reservations.get(s.lane.to);
+      const overshoot = s.distance - (end - stopMargin);
+      if (
+        move === 0 &&
+        !s.turn &&
+        !s.lane.surfaceFollowing &&
+        owner !== undefined &&
+        owner !== s.entity.id &&
+        overshoot > 0.001
+      ) {
+        // Old saved queues can already occupy the turning safety gap. Ease back
+        // along the same lane only when both body probes and passenger plans fit.
+        const retreat = Math.min(s.distance, overshoot, 8 * dt, 4);
+        if (!this.blocked(s, 0) && !this.blocked(s, -retreat)) {
+          move = -retreat;
+          reason = "yielding junction";
+        }
+      }
       const before = { ...s.entity.position };
       s.entity.prevPosition = before;
       s.entity.prevWz = s.entity.wz ?? 0;
@@ -728,9 +752,9 @@ export class TrafficSystem {
         if (next.wz !== undefined) s.entity.wz = s.entity.groundZ = next.wz;
         s.entity.velocity = { vx: (pose.x - before.wx) / dt, vy: (pose.y - before.wy) / dt };
       }
-      if (s.entity.sprite) s.entity.sprite.moving = move > 0;
+      if (s.entity.sprite) s.entity.sprite.moving = Math.abs(move) > 0;
       s.waiting = reason;
-      s.blockedSeconds = move < 0.001 ? s.blockedSeconds + dt : 0;
+      s.blockedSeconds = Math.abs(move) < 0.001 ? s.blockedSeconds + dt : 0;
       if (
         s.blockedSeconds > 3 &&
         !s.turn &&
