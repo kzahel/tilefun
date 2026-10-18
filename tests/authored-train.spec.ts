@@ -19,6 +19,9 @@ test("main-game default draws reviewed carriages and backend changes retain the 
   );
   await page.getByPlaceholder("World name...").fill("Reviewed blue train gameplay");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  // The old world remains ready while the create/join requests are in flight.
+  // Capture carriage identities only after the new realm has replaced it.
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   const canvas = page.locator("#game");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect(canvas).toHaveAttribute("data-renderer", "gpu");
@@ -54,6 +57,8 @@ test("main-game default draws reviewed carriages and backend changes retain the 
       };
     });
   const ready = async () => {
+    // GPU asset diagnostics can survive a realm join before its first snapshot.
+    await expect.poll(async () => (await read()).cars).toHaveLength(3);
     await expect.poll(read, { timeout: 20000 }).toMatchObject({
       mode: "gpu-mesh",
       states: [

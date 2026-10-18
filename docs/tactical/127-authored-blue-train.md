@@ -231,3 +231,18 @@ mid-bend reload and disabled fallback/disposal. Its hard-coded
 `liveTrainDefault` receipt label is historical inspection metadata; the new
 main-game browser test verifies the actual active default. Broader-suite failure
 evidence above is from before this final rebase, not a claimed new full rerun.
+
+## Browser synchronization checkpoint (2026-10-18)
+
+The default-game backend-switch check reproduced an intermittent identity failure
+in the full suite and a focused repeat: it could capture the old world's carriages
+while New World creation/join was still in flight. GPU readiness diagnostics can
+also survive the join before the new realm's first entity snapshot arrives.
+The check now waits for the world menu to close after joining and for all three
+carriages before capturing identities. Exact asset, roof-height and identity
+assertions across all three backends remain. No runtime or art changed.
+
+The corrected default-game check passes ten consecutive single-worker full
+Chromium runs; typechecks and lint pass. The original full local suite was
+interrupted after this failure (71 passed) to isolate it; full CI remains the
+combined-suite verification.
