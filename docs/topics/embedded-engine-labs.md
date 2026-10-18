@@ -41,6 +41,12 @@ independent frame ranges, preserving their immutable animation after base
 cat/dog repairs. Canvas/GPU checks cover motion, contacts, pause/reload and
 grounded escapes for every repaired species and all four pet coats.
 
+The fresh hen in 140 uses a new shared Fauna definition and fixed natural
+expansion slots in the regional generator. The editor and landscape lab obtain
+its ordinary factory/profile automatically; neither owns a private spawn or
+animation policy. Full Chromium game/lab tests and isolated streaming readiness
+pass. Existing natural/placed food lineage rules apply unchanged.
+
 ## Fierce creatures
 
 [139](../tactical/139-horse-motion-study.md) activates the completed horse and

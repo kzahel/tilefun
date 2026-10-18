@@ -37,8 +37,13 @@ Elephant now completes the frozen-torso queue: broad column limbs, moving
 paint and its retained trunk/tail action; 1.6s walk at 14px/s. Source/replay,
 playback and three game/browser checks pass. The eleven other existing banks
 were inspected read-only and retained; [preservation observations](../../art-source/wildlife-v2/autonomous-140-preserved.json)
-pin their original hashes. Nine new repairs plus sixteen delivered roster
-entries leave 171 remaining. Next: chicken, butterfly and red squirrel.
+pin their original hashes. Nine repairs and a fresh buff hen now complete ten new entries; sixteen were
+already delivered, leaving 170 remaining. The hen has a two-legged planted
+walk and peck, and spawns through a separate fixed expansion bank. New profiles
+leave existing habitat owner selection intact; the shared world/editor/lab
+consume the same definition and ordinary natural-origin meal policy. Ground-
+bird source/playback, three game tests and streaming readiness pass. Butterfly
+and red squirrel family prototypes are next.
 
 ## Horse and giraffe motion
 

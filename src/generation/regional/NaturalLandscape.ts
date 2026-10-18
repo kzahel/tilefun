@@ -11,6 +11,7 @@ import {
   type FaunaSpecies,
   faunaType,
 } from "../../wildlife/Fauna.js";
+import { FAUNA_EXPANSION_ROSTER } from "../../wildlife/FaunaExpansion.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import { createPredator, PREDATOR_PROFILES, predatorType } from "../../wildlife/Predator.js";
@@ -120,6 +121,7 @@ export class NaturalLandscape {
   private lagoons = new Map<string, NaturalPond | null>();
   private ponds = new Map<string, NaturalPond | null>();
   private faunaHomes = new Map<string, FaunaHome | null>();
+  private expansionFaunaHomes = new Map<string, FaunaHome | null>();
   private deerGlades = new Map<string, RabbitGlade | null>();
   private glades = new Map<string, RabbitGlade | null>();
   private forests = new Map<string, ForestRow[]>();
@@ -268,11 +270,13 @@ export class NaturalLandscape {
     for (let cy = Math.floor((y - margin) / 64); cy <= Math.floor((y + margin) / 64); cy++)
       for (let cx = Math.floor((x - margin) / 64); cx <= Math.floor((x + margin) / 64); cx++) {
         const fauna = dry.faunaHome(cx, cy),
+          expansion = dry.faunaHome(cx, cy, true),
           rabbit = dry.rabbitGlade(cx, cy),
           deer = dry.deerGlade(cx, cy);
         if (
           [
             fauna && { ...fauna, r: fauna.clearance },
+            expansion && { ...expansion, r: expansion.clearance },
             rabbit && { ...rabbit, r: 8 },
             deer && { ...deer, r: 11 },
           ].some((h) => h && Math.hypot(h.x - x, h.y - y) < radius + h.r + 2)
@@ -708,11 +712,14 @@ export class NaturalLandscape {
     return actors;
   }
   /** Stable fixed-roster owner selection; never fill an inactive species with another one. */
-  faunaHome(cx: number, cy: number): FaunaHome | null {
+  faunaHome(cx: number, cy: number, expansion = false): FaunaHome | null {
     const key = `${cx},${cy}`;
-    if (this.faunaHomes.has(key)) return this.faunaHomes.get(key) ?? null;
-    const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
-    const species = FAUNA_ROSTER[Math.floor(h(8011) * FAUNA_ROSTER.length)];
+    const cache = expansion ? this.expansionFaunaHomes : this.faunaHomes;
+    const roster = expansion ? FAUNA_EXPANSION_ROSTER : FAUNA_ROSTER;
+    if (cache.has(key)) return cache.get(key) ?? null;
+    const h = (salt: number) =>
+      valueNoise(cx, cy, this.world.seed + salt + (expansion ? 30000 : 0));
+    const species = roster[Math.floor(h(8011) * roster.length)];
     const profile = FAUNA_PROFILES.find((p) => p.species === species);
     let home: FaunaHome | null = null;
     if (profile && h(8001) < 0.65 && !["pond", "shore", "deep"].includes(profile.habitat)) {
@@ -720,9 +727,12 @@ export class NaturalLandscape {
       for (let attempt = 0; attempt < 4 && !home; attempt++) {
         const x = cx * 64 + 24 + h(8021 + attempt * 2) * 16,
           y = cy * 64 + 24 + h(8022 + attempt * 2) * 16;
+        const occupied = expansion ? this.faunaHome(cx, cy) : null;
         const rabbit = this.rabbitGlade(cx, cy),
           deer = this.deerGlade(cx, cy);
         if (
+          (occupied &&
+            Math.hypot(x - occupied.x, y - occupied.y) < clearance + occupied.clearance + 4) ||
           this.reserved(x, y, clearance) ||
           this.pondBank(x, y, clearance) ||
           this.inThicket(x, y, clearance) ||
@@ -750,53 +760,66 @@ export class NaturalLandscape {
           ) < 0.13
         )
           continue;
-        home = { id: `fauna-home:${cx}:${cy}`, species: profile.species, x, y, clearance };
+        home = {
+          id: `${expansion ? "fauna-expansion-home" : "fauna-home"}:${cx}:${cy}`,
+          species: profile.species,
+          x,
+          y,
+          clearance,
+        };
       }
     }
-    this.faunaHomes.set(key, home);
-    if (this.faunaHomes.size > 128)
-      this.faunaHomes.delete(this.faunaHomes.keys().next().value ?? "");
+    cache.set(key, home);
+    if (cache.size > 128) cache.delete(cache.keys().next().value ?? "");
     return home;
   }
   private faunaClearing(x: number, y: number): boolean {
     // Largest current/proposed ground body has a 160px home and 56px body.
     for (let cy = Math.floor((y - 20) / 64); cy <= Math.floor((y + 20) / 64); cy++)
       for (let cx = Math.floor((x - 20) / 64); cx <= Math.floor((x + 20) / 64); cx++) {
-        const home = this.faunaHome(cx, cy);
-        if (home && Math.hypot(x - home.x, y - home.y) < home.clearance) return true;
+        for (const expansion of [false, true]) {
+          const home = this.faunaHome(cx, cy, expansion);
+          if (home && Math.hypot(x - home.x, y - home.y) < home.clearance) return true;
+        }
       }
     return false;
   }
   private fauna(cx: number, cy: number): ActorPlacement[] {
-    const home = this.faunaHome(Math.floor(cx / 4), Math.floor(cy / 4));
-    if (!home) return [];
-    const p = FAUNA_PROFILES.find((p) => p.species === home.species);
-    if (!p) return [];
-    const h = (salt: number) =>
-      valueNoise(Math.floor(cx / 4), Math.floor(cy / 4), this.world.seed + salt);
-    const groupId = `wildlife:${home.species}:${this.world.seed}:${home.id}`;
     const actors: ActorPlacement[] = [];
-    for (let i = 0; i < p.group; i++) {
-      const angle = h(8031) * Math.PI * 2 + (i * Math.PI * 2) / p.group;
-      const separation = p.group === 1 ? 0 : Math.max(24, p.body[0] + 8);
-      const wx = home.x * 16 + Math.cos(angle) * separation,
-        wy = home.y * 16 + Math.sin(angle) * separation;
-      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
-      const fauna = createFauna(p.species, wx, wy).fauna;
-      if (!fauna) throw new Error("Missing fauna behavior");
-      fauna.home = { wx: home.x * 16, wy: home.y * 16 };
-      fauna.shelter = { wx: (home.x + 4) * 16, wy: home.y * 16 };
-      if (p.group > 1) fauna.groupId = groupId;
-      fauna.timer = 1.5 + i * 0.5;
-      fauna.randomState = Math.floor(h(8041 + i) * 4294967296) >>> 0;
-      actors.push({
-        featureId: `${groupId}:${i}`,
-        type: faunaType(p.species),
-        wx,
-        wy,
-        route: [],
-        fauna,
-      });
+    for (const expansion of [false, true]) {
+      const home = this.faunaHome(Math.floor(cx / 4), Math.floor(cy / 4), expansion);
+      if (!home) continue;
+      const p = FAUNA_PROFILES.find((p) => p.species === home.species);
+      if (!p) continue;
+      const h = (salt: number) =>
+        valueNoise(
+          Math.floor(cx / 4),
+          Math.floor(cy / 4),
+          this.world.seed + salt + (expansion ? 30000 : 0),
+        );
+      const groupId = `wildlife:${home.species}:${this.world.seed}:${home.id}`;
+      for (let i = 0; i < p.group; i++) {
+        const angle = h(8031) * Math.PI * 2 + (i * Math.PI * 2) / p.group;
+        const separation = p.group === 1 ? 0 : Math.max(24, p.body[0] + 8);
+        const wx = home.x * 16 + Math.cos(angle) * separation,
+          wy = home.y * 16 + Math.sin(angle) * separation;
+        if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+        const fauna = createFauna(p.species, wx, wy).fauna;
+        if (!fauna) throw new Error("Missing fauna behavior");
+        fauna.home = { wx: home.x * 16, wy: home.y * 16 };
+        fauna.shelter = { wx: (home.x + 4) * 16, wy: home.y * 16 };
+        if (p.group > 1) fauna.groupId = groupId;
+        fauna.timer = 1.5 + i * 0.5;
+        fauna.randomState = Math.floor(h(8041 + i) * 4294967296) >>> 0;
+        actors.push({
+          featureId: `${groupId}:${i}`,
+          type: faunaType(p.species),
+          wx,
+          wy,
+          route: [],
+          fauna,
+        });
+      }
     }
     return actors;
   }
@@ -1025,6 +1048,7 @@ export class NaturalLandscape {
       glades: this.glades.size,
       deerGlades: this.deerGlades.size,
       faunaHomes: this.faunaHomes.size,
+      expansionFaunaHomes: this.expansionFaunaHomes.size,
       lagoons: this.lagoons.size,
     };
   }

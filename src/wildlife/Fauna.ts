@@ -1,5 +1,6 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { PET_ART } from "./PetVariants.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
@@ -22,7 +23,10 @@ export const FAUNA_ROSTER = [
   "harbor-seal",
   "manta-ray",
 ] as const;
-export type FaunaSpecies = (typeof FAUNA_ROSTER)[number] | (typeof PET_ART)[number]["id"];
+export type FaunaSpecies =
+  | (typeof FAUNA_ROSTER)[number]
+  | (typeof FAUNA_EXPANSION_ROSTER)[number]
+  | (typeof PET_ART)[number]["id"];
 export interface FaunaProfile {
   species: FaunaSpecies;
   variantOf?: "cat" | "dog";
@@ -924,6 +928,31 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
     interest: 0,
     habitat: "deep",
     inspectionZoom: 0.4,
+  },
+  {
+    species: "chicken",
+    label: "Buff hen",
+    image: "demos/wildlife-v2/chicken/roster-v2/sheet.png",
+    identity: "chicken-roster-v2-pixels-01",
+    sha256: "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d",
+    size: 48,
+    anchor: [24, 35],
+    inspection: [931, -231],
+    clips: [
+      { name: "idle", start: 0, count: 1, frameDuration: 100, loop: true },
+      { name: "walk", start: 1, count: 32, frameDuration: 40, loop: true },
+      { name: "action", start: 33, count: 8, frameDuration: 100, loop: false },
+      { name: "flee", start: 1, count: 32, frameDuration: 20, loop: true },
+    ],
+    body: [10, 6, 16],
+    speed: 10,
+    radius: 64,
+    step: 20,
+    alarmDistance: 20,
+    group: 3,
+    cohesion: 0.14,
+    interest: 0.12,
+    habitat: "pasture",
   },
 ];
 export const FAUNA_PROFILES: readonly FaunaProfile[] = [

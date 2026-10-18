@@ -4816,5 +4816,102 @@
         "sha256": "b3d36617479e348b809e52da0d63e4c3bcfb496d3f421b3738ff88a3045719ab"
       }
     ]
+  },
+  {
+    "id": "chicken-roster-v2",
+    "animalId": "chicken",
+    "revision": "roster-v2",
+    "name": "Chicken · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/chicken/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-chicken-roster-v2",
+      "name": "Chicken sheet",
+      "image": "demos/wildlife-v2/chicken/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d",
+      "source": "art-source/wildlife-v2/chicken/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-chicken-roster-v2-scene",
+      "name": "Chicken scene",
+      "image": "demos/wildlife-v2/chicken/roster-v2/scene-native.png",
+      "width": 192,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "64855a481f899820c352dd7463932e70a782c7867e25fffc93b0d73be67e8a57",
+      "source": "art-source/wildlife-v2/chicken/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-chicken-roster-v2-contact",
+      "name": "Chicken contact",
+      "image": "demos/wildlife-v2/chicken/roster-v2/contact-sheet-native.png",
+      "width": 384,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "46dbfcc31744909d1417404379fa2871b5f82a1500bafea34aa4582fc213830a",
+      "source": "art-source/wildlife-v2/chicken/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/chicken/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/contact-sheet-native.png",
+        "sha256": "46dbfcc31744909d1417404379fa2871b5f82a1500bafea34aa4582fc213830a"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/index.html",
+        "sha256": "a8923a828cde7f811f50d95e0591771f4850441191a3dbe7b464bbce3d8a571f"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/pixel-audit.json",
+        "sha256": "8e27d3b2f5e9e735593a26e78dd3ed7e5ee2037f3352ef361fc4e97b8aaf0fd3"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/preview-native.gif",
+        "sha256": "6299c451e4434852b588a949e48d4bf1b8ca0b0d244780226d5256d804db08e4"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/preview.gif",
+        "sha256": "8e338fc554f912677c9ec09cab446719b0c0d040ca1f9159c8747e08c19e5f90"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/review-observations.md",
+        "sha256": "3c8e4f69688d36c6f8de79f00c63f14a142a487f727d3305eb2cc824aad5fb8c"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/scene-background.png",
+        "sha256": "4f829f75a8c93d4ae52cd3f09b30d7972c1d3cd4f0e0d8ccd42625333e002c89"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/scene-native.png",
+        "sha256": "64855a481f899820c352dd7463932e70a782c7867e25fffc93b0d73be67e8a57"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/sheet.png",
+        "sha256": "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/source-audit.json",
+        "sha256": "e42786894aeee5f47fa395306f4de40a268daa453bdc5521d5941016c7f2ec62"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/sprite.json",
+        "sha256": "cba79fdc8de45b83c8eadb84e1a724f9c6b75bd78c356b045030c312e51c0a7b"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/travel-native.gif",
+        "sha256": "22b50218b8be432b1d049cb351a9ae2a6d66ee9874da56e2b83346099574d94b"
+      },
+      {
+        "path": "demos/wildlife-v2/chicken/roster-v2/validation.json",
+        "sha256": "e2a1370f3da4c996c9c0d85efafd0943afc77b38b23abf2543cc170e005bc7b3"
+      }
+    ]
   }
 ]

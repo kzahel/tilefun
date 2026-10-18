@@ -566,6 +566,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-chicken-provisional-v1",
+      "name": "wildlife chicken provisional v1",
+      "image": "demos/wildlife-v2/chicken/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -2383,6 +2393,16 @@
       "height": 448,
       "tileSize": 16,
       "fingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-chicken-roster-v2",
+      "name": "wildlife v2 chicken roster v2",
+      "image": "demos/wildlife-v2/chicken/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4785,11 +4805,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:819"
+          "source": "src/generation/regional/NaturalLandscape.ts:842"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1013"
+          "source": "src/generation/regional/NaturalLandscape.ts:1036"
         },
         {
           "system": "World generation",
@@ -24046,6 +24066,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-chicken-provisional-v1",
+      "sheetId": "wildlife-chicken-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1968,
+        192
+      ],
+      "label": "wildlife-chicken-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -25629,6 +25667,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/wildlife/Fauna.ts:933"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FaunaExpansion.ts:11"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/FoodWeb.ts:9"
         },
         {
@@ -25695,11 +25741,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:10"
+          "source": "src/wildlife/Fauna.ts:11"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:200"
+          "source": "src/wildlife/Fauna.ts:204"
         },
         {
           "system": "Gameplay",
@@ -25762,6 +25808,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/Pigeon.ts:16"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FaunaExpansion.ts:98"
         },
         {
           "system": "Gameplay",
@@ -26100,6 +26150,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:236"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FaunaExpansion.ts:101"
         },
         {
           "system": "Gameplay",
@@ -27203,11 +27257,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:819"
+          "source": "src/generation/regional/NaturalLandscape.ts:842"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1013"
+          "source": "src/generation/regional/NaturalLandscape.ts:1036"
         },
         {
           "system": "World generation",

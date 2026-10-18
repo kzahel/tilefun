@@ -45,6 +45,14 @@ participating in the ordinary building/interior lookup. Player enter/exit behavi
 and persistence are owned by [patterns and interiors](patterns-and-interiors.md).
 No terrain regeneration or parking-specific renderer is required for this door fix.
 
+[Wildlife completion 140](../tactical/140-autonomous-wildlife-completion.md) adds
+a fixed natural expansion roster separately from the original habitat-owner
+slots. Unfinished species leave empty slots; activating a profile does not
+reshuffle existing species selection. Both banks have independent bounded
+caches and whole-body dry refuges, with the dry-only planner still upstream of
+pond admission. The first new hen uses ordinary generated actor identity and
+shared game/lab authority. Current development worlds remain disposable.
+
 ## Exact review scenes and asset banks
 
 Review approval remains tied to exact candidate identities. The twenty existing city

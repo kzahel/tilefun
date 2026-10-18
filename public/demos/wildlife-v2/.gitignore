@@ -380,3 +380,6 @@
 
 # Verified pending motion identities, owner-authorized autonomous run 140.
 !elephant/motion-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!chicken/roster-v2/*

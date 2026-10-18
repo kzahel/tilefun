@@ -341,9 +341,13 @@
     "chicken": {
       "name": "Chicken",
       "family": "Birds",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T21:00:00Z",
+      "receipt": "art-source/wildlife-v2/chicken/roster-v2/receipt.json",
+      "evidence": "Fresh empty Blender source; 1056 fixed limb checks and planted biped steps; 65 half-poses/facing; 2px native torso motion; byte-identical replay; 328 exact Chromium crops; three Canvas/GPU/ball checks; stable expansion owner and streaming readiness checks"
     },
     "bee": {
       "name": "Bee",
@@ -1548,6 +1552,13 @@
       ],
       "preservedExisting": 11,
       "validation": "All eleven frozen-torso repairs now delivered, including accepted horse/giraffe. Typecheck/lint/build, 894-candidate manifest and three elephant browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Existing eleven other motion banks inspected read-only and retained."
+    },
+    {
+      "utc": "2026-10-18T21:00:00Z",
+      "completed": [
+        "chicken"
+      ],
+      "validation": "Typecheck/lint/build, 899-candidate manifest, three chicken browser tests and streaming --assert-ready pass. Full units: 2836 pass, 5 known Windows failures, 10 skipped. 169 fixed natural expansion slots preserve original habitat owners."
     }
   ],
   "existingOutsideRoster": [
@@ -1557,5 +1568,13 @@
     "dire-wolf",
     "griffin",
     "giant-spider"
-  ]
+  ],
+  "familyReferences": {
+    "ground-birds": {
+      "animal": "chicken",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    }
+  }
 }

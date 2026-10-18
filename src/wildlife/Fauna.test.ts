@@ -166,7 +166,7 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
           cy = Math.floor(placement.wy / 256),
           ai = required(placement.fauna);
         expect(generator.actors?.(cx, cy)).toContainEqual(placement);
-        if (p.group > 1) expect(ai.groupId).toContain("fauna-home:");
+        if (p.group > 1) expect(ai.groupId).toMatch(/fauna-(?:expansion-)?home:/);
         else expect(ai.groupId).toBeUndefined();
         const props = [-1, 0, 1]
           .flatMap((dx) => [-1, 0, 1].flatMap((dy) => n.placements(cx + dx, cy + dy)))

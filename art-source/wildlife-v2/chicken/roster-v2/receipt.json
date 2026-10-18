@@ -1,0 +1,143 @@
+{
+  "identity": "chicken-roster-v2",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-140",
+  "sourceAudit": {
+    "identity": "chicken-roster-v2",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "walkPoses": 128,
+    "allClipPoses": 164,
+    "continuousSamplesPerFacing": 65,
+    "fixedLengthLinkChecks": 1056,
+    "plantedGroundContacts": 184,
+    "plantedTravelPairs": 168,
+    "maxContinuousEndpointGapWorldUnits": 0.001385882202591713,
+    "maxHalfPoseRotationStepDegrees": 7.431039398977452,
+    "maxContactSlideWorldUnits": 6.143906154658885e-8,
+    "meshLocalGeometrySha256": {
+      "pear torso": "5d729ab6dd961bc8089d371aedff1db4505e9d2ae16ad1279cb90d074c272704",
+      "round breast": "eb59775ffec0231cb9da93d822c5206ad7e4000c50c457209beed08cfabc9e6e",
+      "feather neck": "7e17773b5956fe5961625f4ce42cfc24c1864611da61165c6c3c0c6b5b61ea3e",
+      "small skull": "7b4c01949da4f403652efa12d8c7ad70f24186e035032e42f1d467339d2f37f1",
+      "short pointed beak": "81e93598fa9e9f0a50062e7f25c8dcc160935a7040fdb29571b0b7db294a88cc",
+      "eye -1": "c4b9501c9e41bdab50b67e476cab0a7793e51a1f7cc102c761427e673400414e",
+      "wattle -1": "bf29e9e8833de9471722804cfe9100811876b4d5fb9e93156833f296e8c0944b",
+      "folded feather wing -1": "7fb95a3f96934d1d4d723caa835b136907dea1a2cbdb4115e01a3f43cfe4a779",
+      "wing highlight -1": "a51d472450f1b882b6e978a3462a2862fac4c0be6069923df47388fd31cf839a",
+      "eye 1": "c4b9501c9e41bdab50b67e476cab0a7793e51a1f7cc102c761427e673400414e",
+      "wattle 1": "bf29e9e8833de9471722804cfe9100811876b4d5fb9e93156833f296e8c0944b",
+      "folded feather wing 1": "7fb95a3f96934d1d4d723caa835b136907dea1a2cbdb4115e01a3f43cfe4a779",
+      "wing highlight 1": "a51d472450f1b882b6e978a3462a2862fac4c0be6069923df47388fd31cf839a",
+      "comb lobe 0": "3b71ece03e350d6c24d525ab61f5e1018f8a7051708dc4b656a7ebc10221f2c1",
+      "comb lobe 1": "3b71ece03e350d6c24d525ab61f5e1018f8a7051708dc4b656a7ebc10221f2c1",
+      "comb lobe 2": "3b71ece03e350d6c24d525ab61f5e1018f8a7051708dc4b656a7ebc10221f2c1",
+      "raised tail feather 0": "157fe3f73c93cfbe16e547dea3e1a3ff286d18eae9f75933e98ad6dc2d58db89",
+      "raised tail feather 1": "131ff17bcf6ac10481d43a50215751f4b8f5e5ca6e4b82b8fe87d937fd8c2e0c",
+      "raised tail feather 2": "a86d6e295e5f05d97a25e33d2142fe049dc6c467a5467fb7828cc3c6a0cabdea",
+      "leg-1-link-0": "e60ef5adea01d29ddf93aa90047c8be15f7f5264c94494a1d6cda5f0ccad3ace",
+      "leg-1-link-1": "cab4f2af89aeacd10e04aac45810685ffdcd3a4771f52fa97e32d05f7f8db79a",
+      "leg-1-link-2": "a63f2829a61d2bfa7a44f8dc5f0b4f77200d2542c7d0fbd6f5613c80ad990d4a",
+      "leg-1-link-3": "76b7fbe9ec44250bcc0c116511a1ac5fa59fe625194677896f89e06bb4227c89",
+      "leg-1-hoof": "0d985a046380dd0583e5b203c4c4a58cdc6dadbccd9dcd75331cdd431a30b149",
+      "leg-1-joint-volume-1": "0f688febcb641e2e199f477846999d4bbc0b6c3da98146813956f4d1da62253f",
+      "leg-1-joint-volume-2": "8b54741a910634ff20027a9097dc75891405a2a63d98050f9041eb4dfc19f064",
+      "leg-1-joint-volume-3": "d82428466b87cd7ee92d2c7ae24d234fe8a71e8963cfebe3e7c1cf142e8455df",
+      "leg1-link-0": "e60ef5adea01d29ddf93aa90047c8be15f7f5264c94494a1d6cda5f0ccad3ace",
+      "leg1-link-1": "cab4f2af89aeacd10e04aac45810685ffdcd3a4771f52fa97e32d05f7f8db79a",
+      "leg1-link-2": "a63f2829a61d2bfa7a44f8dc5f0b4f77200d2542c7d0fbd6f5613c80ad990d4a",
+      "leg1-link-3": "76b7fbe9ec44250bcc0c116511a1ac5fa59fe625194677896f89e06bb4227c89",
+      "leg1-hoof": "0d985a046380dd0583e5b203c4c4a58cdc6dadbccd9dcd75331cdd431a30b149",
+      "leg1-joint-volume-1": "0f688febcb641e2e199f477846999d4bbc0b6c3da98146813956f4d1da62253f",
+      "leg1-joint-volume-2": "8b54741a910634ff20027a9097dc75891405a2a63d98050f9041eb4dfc19f064",
+      "leg1-joint-volume-3": "d82428466b87cd7ee92d2c7ae24d234fe8a71e8963cfebe3e7c1cf142e8455df"
+    },
+    "bodyRangePixels": {
+      "down": 1.1490669250488281,
+      "up": 1.1490654945373535,
+      "left": 1.3460168838500977,
+      "right": 1.3460168838500977
+    }
+  },
+  "pixelAudit": {
+    "identity": "chicken-roster-v2-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "retainedRigidPaintMasters": true,
+    "bodyPaintCentroidRangePixels": {
+      "down": 2,
+      "up": 2,
+      "left": 2,
+      "right": 2
+    },
+    "rootTravelPixelsPerCycle": 12.8,
+    "walkDurationMs": 1280,
+    "velocityPixelsPerSecond": 10
+  },
+  "validation": {
+    "identity": "chicken-roster-v2",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "chicken-roster-v2",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "46dbfcc31744909d1417404379fa2871b5f82a1500bafea34aa4582fc213830a",
+      "pixel-audit.json": "8e27d3b2f5e9e735593a26e78dd3ed7e5ee2037f3352ef361fc4e97b8aaf0fd3",
+      "preview-native.gif": "6299c451e4434852b588a949e48d4bf1b8ca0b0d244780226d5256d804db08e4",
+      "preview.gif": "8e338fc554f912677c9ec09cab446719b0c0d040ca1f9159c8747e08c19e5f90",
+      "scene-background.png": "4f829f75a8c93d4ae52cd3f09b30d7972c1d3cd4f0e0d8ccd42625333e002c89",
+      "scene-native.png": "64855a481f899820c352dd7463932e70a782c7867e25fffc93b0d73be67e8a57",
+      "sheet.png": "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d",
+      "source-audit.json": "e42786894aeee5f47fa395306f4de40a268daa453bdc5521d5941016c7f2ec62",
+      "sprite.json": "cba79fdc8de45b83c8eadb84e1a724f9c6b75bd78c356b045030c312e51c0a7b",
+      "travel-native.gif": "22b50218b8be432b1d049cb351a9ae2a6d66ee9874da56e2b83346099574d94b"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/chicken/roster-v2/audit.py": "92eaeb090f97949f859f3e8cf576b58d09de5d53d292091595c71d754cc4b92c",
+    "art-source/wildlife-v2/chicken/roster-v2/build.py": "cc620962a0eba0146a6e4ca666a609df1bd62e729f55688a41f97ad910267f8c",
+    "art-source/wildlife-v2/chicken/roster-v2/chicken.blend": "bcf0e408b2564814a62216991159db0b071e8618077d4914f1f6575293ce8330",
+    "art-source/wildlife-v2/chicken/roster-v2/finish.py": "1e565f9d022bcc452a6f36a507ad5b4af813ff38f411e1ee43b40c269d6acaa2",
+    "art-source/wildlife-v2/chicken/roster-v2/inputs.json": "445c8fa5321b300f14783db0cdfb3fbe53aee19d8b36c7f32625a655a5a8c113",
+    "art-source/wildlife-v2/chicken/roster-v2/masters.json": "356cd2c0c661b991952053881fdedfd10fabba2f5650a96967a5a255cba4d612",
+    "art-source/wildlife-v2/chicken/roster-v2/projection.json": "e4cc340aca4336ed6e8b2ad7505968a3eafe69feb1c62ab53c80f991e0da6606",
+    "art-source/wildlife-v2/chicken/roster-v2/README.md": "933ee73c4c13a7f70edf563eb8a3187c79fdfa64f9295f64af985f0f264f4f57",
+    "public/demos/wildlife-v2/chicken/roster-v2/contact-sheet-native.png": "46dbfcc31744909d1417404379fa2871b5f82a1500bafea34aa4582fc213830a",
+    "public/demos/wildlife-v2/chicken/roster-v2/index.html": "a8923a828cde7f811f50d95e0591771f4850441191a3dbe7b464bbce3d8a571f",
+    "public/demos/wildlife-v2/chicken/roster-v2/pixel-audit.json": "8e27d3b2f5e9e735593a26e78dd3ed7e5ee2037f3352ef361fc4e97b8aaf0fd3",
+    "public/demos/wildlife-v2/chicken/roster-v2/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/chicken/roster-v2/preview-native.gif": "6299c451e4434852b588a949e48d4bf1b8ca0b0d244780226d5256d804db08e4",
+    "public/demos/wildlife-v2/chicken/roster-v2/preview.gif": "8e338fc554f912677c9ec09cab446719b0c0d040ca1f9159c8747e08c19e5f90",
+    "public/demos/wildlife-v2/chicken/roster-v2/review-observations.md": "3c8e4f69688d36c6f8de79f00c63f14a142a487f727d3305eb2cc824aad5fb8c",
+    "public/demos/wildlife-v2/chicken/roster-v2/scene-background.png": "4f829f75a8c93d4ae52cd3f09b30d7972c1d3cd4f0e0d8ccd42625333e002c89",
+    "public/demos/wildlife-v2/chicken/roster-v2/scene-native.png": "64855a481f899820c352dd7463932e70a782c7867e25fffc93b0d73be67e8a57",
+    "public/demos/wildlife-v2/chicken/roster-v2/sheet.png": "9881a07cf29eb567f9446d080f6910b9a589c7748b7960fa91815a5ff3e2695d",
+    "public/demos/wildlife-v2/chicken/roster-v2/source-audit.json": "e42786894aeee5f47fa395306f4de40a268daa453bdc5521d5941016c7f2ec62",
+    "public/demos/wildlife-v2/chicken/roster-v2/sprite.json": "cba79fdc8de45b83c8eadb84e1a724f9c6b75bd78c356b045030c312e51c0a7b",
+    "public/demos/wildlife-v2/chicken/roster-v2/travel-native.gif": "22b50218b8be432b1d049cb351a9ae2a6d66ee9874da56e2b83346099574d94b",
+    "public/demos/wildlife-v2/chicken/roster-v2/validation.json": "e2a1370f3da4c996c9c0d85efafd0943afc77b38b23abf2543cc170e005bc7b3",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/capture-motion-v2.mjs": "473aa0d69dff10869d7749578e54e61f29aefe886f61d611f07bb72c9d39a453",
+    "scripts/wildlife/register-motion-v2.mjs": "774c1a1381cf82a28f5f89774ab291d91f5d2ae653116f089aa821ca73090af5",
+    "scripts/wildlife/replay-motion-v2.py": "4fcd155c813b0cddfd13523bfa49e4a76246af810e230059490217d612483e6d"
+  }
+}

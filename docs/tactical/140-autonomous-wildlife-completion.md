@@ -95,3 +95,21 @@ assertion; distinguish them from newly introduced failures.
   Current roster accounting: nine newly completed, sixteen already delivered,
   171 remaining. Next unfinished family prototypes: chicken, butterfly and
   red squirrel, before expanding related species.
+
+- 21:00 UTC: fresh buff hen `chicken/roster-v2` completed and selected in the
+  world/editor/shared Worker lab. Empty-scene species source retains pear body,
+  folded wings, broad raised fan, red comb/wattles and actual three-forward/one-
+  back toes. Biped four-link walk has moving torso, planted stance and 12.8px
+  travel/1.28s at 10px/s; peck rotates the bill down into its feather neck.
+  New fixed 169-slot natural expansion bank is separate from original owners:
+  inactive slots stay empty, caches are bounded, admission clears full bodies
+  and reserves dry homes upstream of water. No saved-world version emulation.
+  Source replay, 328 exact crops, three Canvas/GPU/ball tests, typecheck/lint/
+  build, 899-candidate manifest and isolated streaming --assert-ready pass.
+  Full units: 2,836 pass, five known Windows failures, ten skipped.
+  Biome excludes the two immutable dense cat/dog projection JSON evidence blobs
+  (64/89 MiB) from text linting; exact source receipts/replays still pin/check
+  them. Authoring scripts, definitions and tests remain linted. Future projected
+  evidence uses compact hulls to avoid repeating this storage cost.
+  Current total: ten new completions, sixteen preserved/delivered, 170 remaining.
+  Ground-bird prototype is agent-inspected; human art review remains pending.
