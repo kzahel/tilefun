@@ -630,6 +630,7 @@ export class NaturalLandscape {
     if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) return [];
     const predator = required(createPredator(p.species, wx, wy).predator);
     predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
+    if (p.fierce?.kind === "dragon") predator.home = { wx, wy };
     predator.randomState = Math.floor(h(8353) * 4294967296) >>> 0;
     return [
       {

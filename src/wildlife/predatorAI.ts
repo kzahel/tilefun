@@ -148,10 +148,33 @@ export function updatePredatorAI(
   if (!ai || !v || !e.sprite) return;
   const profile = required(predatorProfile(e.type)),
     fierce = profile.fierce;
+  if (fierce && ["dragon", "griffin", "spider"].includes(fierce.kind) && !ai.denPlaced)
+    env.ensurePredatorDen?.(e);
   ai.timer -= dt;
   ai.elapsed += dt;
   ai.cooldown = Math.max(0, ai.cooldown - dt);
+  ai.warningCooldown = Math.max(0, (ai.warningCooldown ?? 0) - dt);
   v.vx = v.vy = 0;
+  if (
+    fierce?.kind === "dragon" &&
+    !ai.targetId &&
+    ["sleep", "guard"].includes(ai.state) &&
+    !ai.warningCooldown
+  ) {
+    const visitor = players.find((p) => distance(p, ai.home) < 64);
+    if (visitor) {
+      ai.warningCooldown = 10;
+      enter(e, "display", 1.28);
+      ai.displaySerial = (ai.displaySerial ?? 0) + 1;
+      e.sprite.direction = directionFromVelocity(
+        visitor.wx - e.position.wx,
+        visitor.wy - e.position.wy,
+      );
+      e.sprite.frameRow = e.sprite.direction;
+      restorePredatorPose(e);
+      return;
+    }
+  }
   if (ai.targetId) ai.huntElapsed = (ai.huntElapsed ?? 0) + dt;
   if (ai.state === "evade") {
     if (ai.timer <= 0) {
@@ -222,6 +245,8 @@ export function updatePredatorAI(
         ai.state === "display" ? (fierce?.windup ?? 0.3) : 0,
       );
       ai.aim = { ...prey.position };
+    } else if (ai.timer <= 0 && !prey) {
+      enter(e, fierce?.kind === "dragon" ? "guard" : "rest", 2);
     }
     restorePredatorPose(e);
     return;
@@ -291,6 +316,14 @@ export function updatePredatorAI(
       else {
         ai.cooldown = 3;
         enter(e, "rest", 1);
+      }
+    } else if (!ai.targetId && fierce?.kind === "dragon") {
+      if (distance(e.position, ai.home) > 5 && clearPath(e, ai.home, env, planning)) {
+        if (ai.state !== "patrol") enter(e, "patrol", 0.3);
+        ai.aim = { ...ai.home };
+      } else {
+        ai.activity = (ai.activity ?? 0) + 1;
+        enter(e, ai.activity % 3 === 0 ? "sleep" : "guard", ai.activity % 3 === 0 ? 5 : 2);
       }
     } else if (!ai.targetId && (!ai.aim || ai.elapsed > 4 || distance(e.position, ai.aim) < 3)) {
       const angle = random(e) * Math.PI * 2;
@@ -410,7 +443,15 @@ export function resolvePredatorCatches(
       const fresh = habitatOf(candidate);
       fresh.home = { ...habitat.home };
       fresh.radius = habitat.radius;
-      for (const key of ["shelter", "herdId", "groupId", "habitatBounds", "packId"]) {
+      for (const key of [
+        "shelter",
+        "herdId",
+        "groupId",
+        "habitatBounds",
+        "packId",
+        "denId",
+        "denPlaced",
+      ]) {
         const value = Reflect.get(habitat, key);
         if (value !== undefined) Reflect.set(fresh, key, JSON.parse(JSON.stringify(value)));
       }

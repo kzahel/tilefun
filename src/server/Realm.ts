@@ -59,7 +59,7 @@ import {
 } from "../interiors/GameplayRoom.js";
 import { updateResident } from "../interiors/ResidentBehavior.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
-import { actorScope } from "../persistence/ActorRecords.js";
+import { actorScope, durableId } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -98,6 +98,7 @@ import {
 } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
+import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import type { WildlifeEnvironment } from "../wildlife/mallardAI.js";
@@ -1006,6 +1007,22 @@ export class Realm {
           ? this.propActivity.select(this.propManager, this.streaming)
           : this.propManager.props;
         const wildlifeEnvironment: WildlifeEnvironment = {
+          ensurePredatorDen: (animal) => {
+            const ai = animal.predator,
+              spec = denForPredator(animal.type);
+            if (!ai || !spec || ai.denPlaced) return;
+            ai.denId ??= `wildlife:den:${animal.naturalSpawnId ?? animal.proceduralId ?? durableId(animal)}`;
+            if (
+              !this.propManager.props.some(
+                (p) => p.persistentId === ai.denId || p.proceduralId === ai.denId,
+              )
+            ) {
+              const prop = createFierceDen(spec, ai.home.wx, ai.home.wy);
+              prop.persistentId = ai.denId;
+              this.propManager.add(prop);
+            }
+            ai.denPlaced = true;
+          },
           perches: (home, radius) =>
             robinTreePerches(
               this.propManager.getPropsInChunkRange(

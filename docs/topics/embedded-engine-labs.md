@@ -31,8 +31,6 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
-## City outskirts speedways
-
 ## Fierce creatures
 
 [137](../tactical/137-fierce-creatures-and-food-web.md) adds natural-origin meal

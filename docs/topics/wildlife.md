@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species, four pet variants, four original predators and T. rex have durable provisional gameplay. Four further authorized fierce creatures are in progress. New art remains pending human review; other expansion stays stopped.
+Status: all 22 existing-sheet species, four pet variants, four original predators, T. rex and small dragon have durable provisional gameplay. Three further authorized fierce creatures are in progress. New art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
 ## Fierce creatures and natural-only replacement
@@ -20,7 +20,11 @@ companion cats/dogs, following and ridden animals stay protected. Smaller
 predators abandon their own hunts and escape. The lab's **Who can eat whom?**
 table exposes the rules. Spatial synthesized calls and weight-scaled footsteps
 share game/lab audio code. Its 164-pose source/portable pending review reproduces
-byte-for-byte. Other four fierce creatures are not yet released; 137 owns current
+byte-for-byte. The small dragon now adds a guarded, durable treasure hoard,
+return-home patrol, crouched/curl-tail sleep and smoky warnings. Visitors wake it
+without becoming prey. Hoards are ordinary editor props, created once per owner;
+deleting one remains durable. Its 196-pose body and separate accessory recipe
+have a portable pending review and exact replay. Three fierce creatures are not yet released; 137 owns current
 evidence and remaining stages.
 
 Meal replacements now require known world origin: `proceduralId` identifies

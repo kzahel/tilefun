@@ -39,6 +39,14 @@ for (const p of FIERCE_PROFILES)
         Math.hypot((fed?.x ?? 0) - (warning?.x ?? 0), (fed?.y ?? 0) - (warning?.y ?? 0)),
       ).toBeGreaterThan(10);
       await canvas.screenshot({ path: testInfo.outputPath("feeding.png") });
+      if (p.fierce?.kind === "dragon") {
+        const dens = JSON.parse((await canvas.getAttribute("data-fierce-dens")) ?? "[]");
+        expect(dens).toHaveLength(1);
+        expect(dens[0]?.type).toBe("prop-dragon-hoard");
+        await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+        await expect(canvas).toHaveAttribute("data-reload-count", "1");
+        expect(JSON.parse((await canvas.getAttribute("data-fierce-dens")) ?? "[]")).toEqual(dens);
+      }
       await page.getByText("Who can eat whom?", { exact: true }).click();
       await expect(
         page

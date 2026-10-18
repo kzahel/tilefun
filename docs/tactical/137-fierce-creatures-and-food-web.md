@@ -13,7 +13,7 @@ current contracts. Historical repair holds and human art review remain separate.
   the five new species; no self-eating, player/pet/rider meals or duplicate catches.
 - [x] T. rex: own biped source, head/tail/weight transfer, heavy patrol, roar,
   wind-up/short charge, feeding/rest and natural/editor/lab integration.
-- [ ] Small dragon: own winged body, guarded treasure, sleep/wake/display,
+- [x] Small dragon: own winged body, guarded treasure, sleep/wake/display,
   hunting and natural/editor/lab integration.
 - [ ] Dire wolf: own canid source, howl, bounded pack coordination, hunting and
   natural/editor/lab integration.
@@ -74,3 +74,22 @@ Typechecks, lint, build, 848 exact Workshop identities and streaming readiness
 pass. Full units: 2,757 pass with the same five Windows symlink/WAL failures and
 ten skips. Broader browser fail-fast: 45 pass, the same GPU train-reload distance
 failure, one interrupted deer case and 623 unrun. Human art review is pending.
+
+Small-dragon checkpoint: own 71-mesh horned/winged quadruped, keyed smoke, curled
+tail rest and 196 native poses. Saved-source audit: 2,352 fixed links, 608 planted
+contacts and 272 stance/travel checks. Thirteen native/accessory/master/audit
+exports replay byte-for-byte; normal Chromium checks 49 states at native/4×,
+392 facing crops and 98 exact scenery comparisons. The separate integer-vector
+hoard recipe is pinned with the body bank in its pending review.
+
+Shared Realm creates one ordinary durable hoard per owner. Dragons return home,
+guard, sleep and warn visitors without targeting them. Deleting the hoard stays
+durable; natural predator replacements retain den ownership without duplication.
+All 86 focused units pass. Full units: 2,771 pass, the existing five Windows
+symlink/WAL failures and ten skips. Typechecks, lint, build and 853 Workshop
+identities pass. Browser hunting/audio/hoard reload, world placement/deletion,
+picker and reviews pass after freezing AI for the editing-only fixture; live
+food-web hunts otherwise legitimately remove the very actor being edited.
+The hunting tests continue to run live authority. Streaming readiness passes.
+Broader fail-fast: 45 pass, the existing GPU train-reload distance failure,
+one interrupted deer case and 628 unrun. Art remains pending human review.

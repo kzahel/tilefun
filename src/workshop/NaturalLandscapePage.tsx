@@ -19,6 +19,7 @@ import {
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
+import { FIERCE_DENS } from "../wildlife/FierceDens.js";
 import { FOOD_WEB } from "../wildlife/FoodWeb.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
@@ -217,6 +218,11 @@ export default function NaturalLandscapePage() {
               frame: e.sprite?.frameCol,
               state: e.wanderAI?.state,
             })),
+        );
+        c.dataset.fierceDens = JSON.stringify(
+          h.session.view.props
+            .filter((p) => FIERCE_DENS.some((d) => d.type === p.type))
+            .map((p) => ({ type: p.type, x: p.position.wx, y: p.position.wy })),
         );
         const ducks = h.session.view.entities.filter((e) => e.type === MALLARD_TYPE);
         c.dataset.wildlifeCount = String(ducks.length);

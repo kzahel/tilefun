@@ -44,6 +44,13 @@ for (const p of PREDATOR_PROFILES) {
           .map((e) => ({ id: e.id, x: e.position.wx, y: e.position.wy }));
       }, type);
     await expect.poll(async () => (await animals()).length).toBeGreaterThan(0);
+    // This case checks editing and durable deletion. Keep food-web hunts from
+    // eating/replacing the exact actor while the placement UI is being exercised.
+    await page.evaluate(() => {
+      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      g.debugPanel.paused = true;
+      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+    });
     const original = await animals(),
       removed = original[0];
     if (!removed) throw Error("Missing generated predator");
@@ -82,6 +89,11 @@ for (const p of PREDATOR_PROFILES) {
     });
     await page.goto("/tilefun/?nogamepad");
     await expect(game).toHaveAttribute("data-ready", "true");
+    await page.evaluate(() => {
+      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      g.debugPanel.paused = true;
+      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+    });
     await expect.poll(async () => (await animals()).length).toBe(original.length);
   });
 }

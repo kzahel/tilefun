@@ -15,6 +15,7 @@ import {
 import { treeRunLength, treeRunProp } from "../patterns/FencedTrees.js";
 import { forestRowDefinition, forestRowProp, forestRowWalls } from "../patterns/ForestThicket.js";
 import { bridgePart, roadRailBridgeProp } from "../railway/RoadRailBridge.js";
+import { createFierceDen, FIERCE_DENS, fierceDenSpec } from "../wildlife/FierceDens.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -102,6 +103,12 @@ function makeStairSteps(config: {
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
 const PROP_DEFS: Record<string, PropDef> = {
+  ...Object.fromEntries(
+    FIERCE_DENS.map((d) => [
+      d.type,
+      { sheetKey: d.type, col: 0, row: 0, width: d.width, height: d.height, collider: d.collider },
+    ]),
+  ),
   "prop-rail-platform-edge": {
     sheetKey: "railway-review-v1",
     col: 264 / 16,
@@ -576,6 +583,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  const den = fierceDenSpec(type);
+  if (den) return createFierceDen(den, wx, wy);
   const shopping = shoppingSceneryProp(type, wx, wy);
   if (shopping) return shopping;
   const forest = forestRowProp(type, wx, wy);
@@ -692,6 +701,14 @@ export interface PropPaletteEntry {
 }
 
 export const PROP_PALETTE: PropPaletteEntry[] = [
+  ...FIERCE_DENS.map(
+    (d): PropPaletteEntry => ({
+      type: d.type,
+      label: d.label,
+      color: "#b79550",
+      category: "nature",
+    }),
+  ),
   ...[...STREET_PROP_RECIPES, ...COMMERCIAL_STREET_PROPS].map(
     (p): PropPaletteEntry => ({
       type: p.type,

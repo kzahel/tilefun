@@ -94,6 +94,9 @@ export interface PredatorBehavior {
   activity?: number;
   packId?: string;
   displaySerial?: number;
+  warningCooldown?: number;
+  denId?: string;
+  denPlaced?: boolean;
   flight?: {
     elapsed: number;
     duration: number;

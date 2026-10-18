@@ -1,0 +1,22 @@
+{
+  "identity": "small-dragon-fierce-v1",
+  "poses": 196,
+  "binaryAlpha": true,
+  "paletteColors": 10,
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    96
+  ],
+  "idleVisibleHeights": {
+    "down": 54,
+    "up": 51,
+    "left": 56,
+    "right": 56
+  },
+  "sequenceDurationMs": 8320,
+  "status": "Integrity only; independent visual observation and human review remain separate."
+}

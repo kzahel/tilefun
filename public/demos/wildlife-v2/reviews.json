@@ -2994,5 +2994,106 @@
         "sha256": "9c9dddada5d20221914ff54fefc95b4805c84049fc6c4d1bec836fe05f655449"
       }
     ]
+  },
+  {
+    "id": "small-dragon-fierce-v1",
+    "animalId": "small-dragon",
+    "revision": "fierce-v1",
+    "name": "Small dragon",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/small-dragon/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-small-dragon-fierce-v1",
+      "name": "Small dragon sheet",
+      "image": "demos/wildlife-v2/small-dragon/fierce-v1/sheet.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "506038f4757b8eb0c9ab27077e213dc9e664fae462087dfa3a3add44ff26e4e2",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-small-dragon-fierce-v1-scene",
+      "name": "Small dragon scene",
+      "image": "demos/wildlife-v2/small-dragon/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "c2a1d5872518066dd096d1cb40bcc1a8feea93267b1adb3780c50e6c573d0ef5",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-small-dragon-fierce-v1-contact",
+      "name": "Small dragon contact",
+      "image": "demos/wildlife-v2/small-dragon/fierce-v1/contact-sheet-native.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "f50000336e8769c6cadc19195823068bc623359fa33d8bb2485f4852d19a6f16",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/small-dragon/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/contact-sheet-native.png",
+        "sha256": "f50000336e8769c6cadc19195823068bc623359fa33d8bb2485f4852d19a6f16"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/den.png",
+        "sha256": "dd2e4d1e03f4e547fcd9e75f7c3a10e766e7f82bc8072caf19ac7675cacc9d8a"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/index.html",
+        "sha256": "79023b41898028c45dc91605b8a95e1d9ebe0a926b878b502534ce2fc25c7635"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/preview-native.gif",
+        "sha256": "eede81b3db6acf469e9b3b26db666484669c1122b01a611f3adb09443ee93d4b"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/preview.gif",
+        "sha256": "28fde046d5c25a43b1eadcd3b7f57850c97d13b7c52b4e3f0c364b3e50978c5e"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/review-observations.md",
+        "sha256": "0fbd089878105b949845ad256b267f5e3881df607e2d3bc415a6c00cd968eea1"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scale-reference-native.png",
+        "sha256": "c30a4307675d358047f9df051df29b62060863a89253e061801279594cde4379"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scene-background.png",
+        "sha256": "c90ceb88bb621832295472f4567f51b5ae247d02a80c6e542bda43533e9ef5e0"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scene-native.gif",
+        "sha256": "7b1c5e49c13bd5264996db536026f37818f0a3abd45855702c3e4e8e91697caf"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scene-native.png",
+        "sha256": "c2a1d5872518066dd096d1cb40bcc1a8feea93267b1adb3780c50e6c573d0ef5"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/sheet.png",
+        "sha256": "506038f4757b8eb0c9ab27077e213dc9e664fae462087dfa3a3add44ff26e4e2"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/source-audit.json",
+        "sha256": "4dc1e1a88d46c6defcd28b877b838296bbb79f3cd55ca26b8360fae9b5dc57b9"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/sprite.json",
+        "sha256": "ed40b0c5a9b4f67b339c71b9c6747b4cd1e038647288812e918526e704ddf2c5"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/validation.json",
+        "sha256": "f5121109ce26fe90feaa5b2b5c0ec8f5b5eba5653067ca7bdbb645615f69a353"
+      }
+    ]
   }
 ]

@@ -1,0 +1,36 @@
+{
+  "identity": "small-dragon-fierce-v1",
+  "poses": 196,
+  "meshCount": 71,
+  "fixedLengthLinkChecks": 2352,
+  "plantedGroundContacts": 608,
+  "stanceTravelCompensationChecks": 272,
+  "maxProjectionError": 5.000000001587068e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 1.7236,
+      "head": 4.16559,
+      "shoulder": 3.16902,
+      "pelvis": 2.00328
+    },
+    "up": {
+      "body": 1.7236,
+      "head": 2.13781,
+      "shoulder": 2.27332,
+      "pelvis": 3.19755
+    },
+    "left": {
+      "body": 2.13704,
+      "head": 3.40507,
+      "shoulder": 2.76188,
+      "pelvis": 1.76039
+    },
+    "right": {
+      "body": 2.13704,
+      "head": 2.5782,
+      "shoulder": 1.93502,
+      "pelvis": 2.58721
+    }
+  },
+  "status": "Saved-source integrity passes; human art approval is separate."
+}
