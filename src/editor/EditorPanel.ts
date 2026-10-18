@@ -255,7 +255,8 @@ export class EditorPanel {
     for (const entry of ENTITY_PALETTE) {
       const btn = document.createElement("button");
       btn.style.cssText = `
-        width: 64px; height: 44px; border: 2px solid #555; border-radius: 4px;
+        width: 64px; height: 44px; padding: 0; box-sizing: border-box;
+        border: 2px solid #555; border-radius: 4px;
         background: ${entry.color}; color: #fff; font: bold 9px monospace;
         cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         display: flex; align-items: center; justify-content: center;
@@ -1054,14 +1055,15 @@ export class EditorPanel {
       }
     }
 
-    // Entity buttons: draw first sprite frame
+    // Fit the visible creature, not the transparent animation/anchor margins.
     for (let i = 0; i < ENTITY_PALETTE.length; i++) {
       const btn = this.entityButtons[i];
       const entry = ENTITY_PALETTE[i];
       if (!btn || !entry) continue;
       const sheet = sheets.get(entry.type);
       if (sheet) {
-        this.renderPreviewCanvas(btn, sheet, 0, 0, 64, 44);
+        this.renderPreviewCanvas(btn, sheet, 0, 0, 64, 44, this.entityPreviewRegion(sheet));
+        btn.style.background = "#4b5563";
       }
     }
 
@@ -1107,6 +1109,49 @@ export class EditorPanel {
         }
       }
     }
+  }
+
+  /** Find visible pixels in the first frame without changing the gameplay sheet. */
+  private entityPreviewRegion(sheet: Spritesheet): ReturnType<Spritesheet["getRegion"]> {
+    const region = sheet.getRegion(0, 0);
+    const frame = document.createElement("canvas");
+    frame.width = region.width;
+    frame.height = region.height;
+    const ctx = frame.getContext("2d", { willReadFrequently: true });
+    if (!ctx) return region;
+    ctx.drawImage(
+      sheet.image,
+      region.x,
+      region.y,
+      region.width,
+      region.height,
+      0,
+      0,
+      frame.width,
+      frame.height,
+    );
+    const pixels = ctx.getImageData(0, 0, frame.width, frame.height).data;
+    let left = frame.width;
+    let top = frame.height;
+    let right = -1;
+    let bottom = -1;
+    for (let y = 0; y < frame.height; y++) {
+      for (let x = 0; x < frame.width; x++) {
+        if (!pixels[(y * frame.width + x) * 4 + 3]) continue;
+        left = Math.min(left, x);
+        top = Math.min(top, y);
+        right = Math.max(right, x);
+        bottom = Math.max(bottom, y);
+      }
+    }
+    return right < left
+      ? region
+      : {
+          x: region.x + left,
+          y: region.y + top,
+          width: right - left + 1,
+          height: bottom - top + 1,
+        };
   }
 
   /** Draw a spritesheet tile into a canvas inside a button. */

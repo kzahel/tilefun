@@ -4,6 +4,27 @@ Topic: wildlife
 Status: all 22 existing-sheet species, four pet variants and four authorized predators have durable provisional gameplay. Predator art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
+## Entity picker visibility
+
+The Entities palette fits each first-frame visible silhouette into its 60 × 40px
+preview, trimming transparent animation/anchor margins only in the thumbnail.
+A neutral slate background keeps dark animals visible, and zero button padding
+prevents CSS from squeezing the canvas. Source sheets, world size and anchors
+retain their existing contracts. Desktop (1280px) and phone (390px) browser checks
+cover every entity's visible fill and button bounds, plus enlarged silhouettes'
+centering and proportions;
+both reproduce the old undersized previews and pass with the fix. All six existing
+mobile-editor scrolling/minimizing/placement checks also pass.
+
+Validation after rebasing onto the upstream traffic fix: typechecks, lint, build,
+catalog and all 839 Workshop candidate identities pass. Full units: 2,720 pass,
+five existing Windows symlink/WAL failures and ten skipped tests. All eight
+focused picker/mobile browser checks pass. The broader browser run uses
+`--max-failures=1`: 45 pass, then the previously recorded GPU city-train reload
+distance failure (223px versus the 192px limit); one in-flight deer test is
+interrupted and 614 do not run. The prior predator full-run log records the same
+train assertion at 228px. This is not a full browser-suite pass.
+
 ## Authorized predators and eaten-prey replacement
 
 The owner now authorizes tiger hunting and nearby replacement of eaten prey,
