@@ -225,3 +225,26 @@ test/benchmark browser processes and servers finish with their runners.
 Human art approval remains pending. Next: review the native animations and
 playtest hunting frequency; dedicated run/lunge animation is a further refinement
 of the explicitly provisional accelerated walk/jaw-display runtime.
+
+## Post-rebase combined-head validation
+
+The final documentation push rebased cleanly over upstream city/parking,
+vehicle-horn/performance and lived-in-resident changes through 95c29b3b. Predator
+implementation files and frozen art were preserved. Since those commits change
+shared simulation and actor persistence, the combined head was validated again:
+
+- Typecheck, build and lint pass.
+- Full units: **2,706 passed / 5 failed / 10 skipped, 2,721 total**. The failures
+  are the same five Windows symlink/process-death cases listed above.
+- **23 full-Chromium targeted browser checks pass**: all 16 predator/art checks
+  plus seven lived-in-interior checks against the new resident behavior.
+- Isolated streaming --assert-ready passes with no reported errors/failures.
+- A fresh 150-second four-predator soak records 13 meals, preserving two deer and
+  two rabbits through all 1,500 samples and both reloads, with no duplicate live
+  prey identity or resurrected killed actor.
+
+Post-rebase logs use the *-post-rebase filenames/directories in
+ignored data/predators-132/. The 646-case/33.4-minute full browser result above is
+specifically the predator build before the concurrent upstream rebase; it is not
+presented as a full-suite run of the later city/vehicle/resident changes. No
+new predator code or pixels were needed to integrate those changes.

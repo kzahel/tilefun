@@ -1316,3 +1316,11 @@ validation completes with 632 passed / 13 failed / 1 skipped; all 16 predator/ar
 checks pass and all failing test titles match the pre-implementation run. Evidence
 and unresolved broad-suite limitations belong to tactical 132. Next
 product step is playtesting hunt frequency and reviewing the native animations.
+
+The completion push rebased over concurrent city/vehicle/resident work. Combined
+head revalidation passes typecheck/build/lint, all 23 targeted predator/art and
+lived-in-interior browser checks, streaming readiness and a fresh repeated-meal
+population/reload soak. Full combined units: 2,706 passed / the same five Windows
+failures / ten skips. Tactical 132 distinguishes this evidence from its earlier
+full 646-case browser run. All four implementation stages and art receipts remain
+intact; human animation review and hunt-frequency playtesting are next.
