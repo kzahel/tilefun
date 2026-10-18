@@ -35,10 +35,12 @@ describe("explicit creature food web", () => {
     expect(canEat(rex, createPlayer(0, 0))).toBe(false);
     for (const p of FAUNA_PROFILES.filter((p) => p.variantOf || ["cat", "dog"].includes(p.species)))
       expect(canEat(rex, createFauna(p.species, 30, 0))).toBe(false);
-    const horse = createFauna("horse", 24, 0);
-    expect(canEat(rex, horse)).toBe(true);
-    required(horse.wanderAI).state = "ridden";
-    expect(canEat(rex, horse)).toBe(false);
+    for (const species of ["horse", "donkey", "mule"] as const) {
+      const mount = createFauna(species, 24, 0);
+      expect(canEat(rex, mount)).toBe(true);
+      required(mount.wanderAI).state = "ridden";
+      expect(canEat(rex, mount)).toBe(false);
+    }
     const deer = createDeer(20, 0);
     required(deer.wanderAI).following = true;
     expect(canEat(rex, deer)).toBe(false);

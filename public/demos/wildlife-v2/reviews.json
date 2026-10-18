@@ -5758,5 +5758,377 @@
         "sha256": "8e60f42c10970673b021519073105c415680189f86f7c1dbad81c6fb858551d5"
       }
     ]
+  },
+  {
+    "id": "donkey-roster-v2",
+    "animalId": "donkey",
+    "revision": "roster-v2",
+    "name": "Donkey · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/donkey/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-donkey-roster-v2",
+      "name": "Donkey sheet",
+      "image": "demos/wildlife-v2/donkey/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "54e8a43d58036df8f8a20be83bd188cdfe64ed01e32112ee8a9d7562b887538a",
+      "source": "art-source/wildlife-v2/donkey/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-donkey-roster-v2-scene",
+      "name": "Donkey scene",
+      "image": "demos/wildlife-v2/donkey/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "1f3ad11cb84e5e2e3eed085d39f9e09f205aa654468120b2e971bcebf0714c3f",
+      "source": "art-source/wildlife-v2/donkey/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-donkey-roster-v2-contact",
+      "name": "Donkey contact",
+      "image": "demos/wildlife-v2/donkey/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8c3e030f25cfcaac15fb322b996911fc4e733c12361c05f0058df184ff522eba",
+      "source": "art-source/wildlife-v2/donkey/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/donkey/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/contact-sheet-native.png",
+        "sha256": "8c3e030f25cfcaac15fb322b996911fc4e733c12361c05f0058df184ff522eba"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/index.html",
+        "sha256": "209e1958f6fba61757b6201b4f16e3490dc0cb0fe195acce304c5d6564db666d"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/pixel-audit.json",
+        "sha256": "2b1c2b56b51276bfe5ab4f661615c5bceea2879c02e255141d9a3517d956ed7f"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/preview-native.gif",
+        "sha256": "c420ff8e4588525562585f671b37433785abeaf606775d03a6fe2f17868e3ed3"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/preview.gif",
+        "sha256": "5d5a875f70c37d4280cf6a336780089c1bba93cc0399b7799da9177a492976b4"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/scene-native.png",
+        "sha256": "1f3ad11cb84e5e2e3eed085d39f9e09f205aa654468120b2e971bcebf0714c3f"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/sheet.png",
+        "sha256": "54e8a43d58036df8f8a20be83bd188cdfe64ed01e32112ee8a9d7562b887538a"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/source-audit.json",
+        "sha256": "52dbe303a9879e1b2f8db4067ead7812ac740f9829cb3760f877fde0be5e2af9"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/sprite.json",
+        "sha256": "37949fee6fc6d539a5c6c094a48c17db50ae7540d80d0d0529492c6b1eb4ddae"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/travel-native.gif",
+        "sha256": "9af692b87e4345748a8058db233ee27c1ebe65eccb7048ebd21ad2b3bfcee6ea"
+      },
+      {
+        "path": "demos/wildlife-v2/donkey/roster-v2/validation.json",
+        "sha256": "29585182b147547f6763667db272b77af051c0fe7a203283d10f016523ab8c14"
+      }
+    ]
+  },
+  {
+    "id": "mule-roster-v2",
+    "animalId": "mule",
+    "revision": "roster-v2",
+    "name": "Mule · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/mule/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-mule-roster-v2",
+      "name": "Mule sheet",
+      "image": "demos/wildlife-v2/mule/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "5387006bb25fc9d122cfa477a1bb1ea87842ee3474e789dda21ee522b7c058bd",
+      "source": "art-source/wildlife-v2/mule/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-mule-roster-v2-scene",
+      "name": "Mule scene",
+      "image": "demos/wildlife-v2/mule/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "cd6da217077b2d79cebc90ce37beb972eb3f7ff90b30ac9a6b38f0cb89ca2358",
+      "source": "art-source/wildlife-v2/mule/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-mule-roster-v2-contact",
+      "name": "Mule contact",
+      "image": "demos/wildlife-v2/mule/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8a5b785734b2d14c09d17660df3012a909804556ee36c800db00fcf7a497dc0c",
+      "source": "art-source/wildlife-v2/mule/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/mule/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/contact-sheet-native.png",
+        "sha256": "8a5b785734b2d14c09d17660df3012a909804556ee36c800db00fcf7a497dc0c"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/index.html",
+        "sha256": "99fb002c083db7c51f484d450386b5f0767e418e72a58acac78c7ba434f78e43"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/pixel-audit.json",
+        "sha256": "7c1f392a90482292c6a623529b3da9f09d3162208640bd2109f7e9108aa43cd0"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/preview-native.gif",
+        "sha256": "7eaeff12be00298365382b97fda214d6794edfa6ed6ebd38969c606a6981cc61"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/preview.gif",
+        "sha256": "2bd554c1296c83e4ec4ba5cdd43f1bbf9cf151340f75d85d0456a4210f5f49d8"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/scene-native.png",
+        "sha256": "cd6da217077b2d79cebc90ce37beb972eb3f7ff90b30ac9a6b38f0cb89ca2358"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/sheet.png",
+        "sha256": "5387006bb25fc9d122cfa477a1bb1ea87842ee3474e789dda21ee522b7c058bd"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/source-audit.json",
+        "sha256": "613453127caff0327d49c5f2923ea4e8e890ab0e0b11443a436a89a95bdb9ba5"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/sprite.json",
+        "sha256": "13374c63c838190e06732313af462666e2267889b39877cdfbc493bd9b7cb60c"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/travel-native.gif",
+        "sha256": "a5b79374ca11a06339a9f236eac54ea872ef84341960984a5e4ade4b7bb9b49a"
+      },
+      {
+        "path": "demos/wildlife-v2/mule/roster-v2/validation.json",
+        "sha256": "d88253090d8c47025d58d7c37091da9fdaa479abf10e8b232eaacdff5d5cf3d3"
+      }
+    ]
+  },
+  {
+    "id": "llama-roster-v2",
+    "animalId": "llama",
+    "revision": "roster-v2",
+    "name": "Llama · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/llama/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-llama-roster-v2",
+      "name": "Llama sheet",
+      "image": "demos/wildlife-v2/llama/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3b563909383f39b1e499aeec44fdb0cc885d872f2081de66980a22ddfefbc72e",
+      "source": "art-source/wildlife-v2/llama/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-llama-roster-v2-scene",
+      "name": "Llama scene",
+      "image": "demos/wildlife-v2/llama/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "cc4acbdb68ef3f9447229765d62e6a7286988406a6354fcf50c331c57249c38a",
+      "source": "art-source/wildlife-v2/llama/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-llama-roster-v2-contact",
+      "name": "Llama contact",
+      "image": "demos/wildlife-v2/llama/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "5446ec6934cc9c5056eb9e89b2c74a2f178f0f966d2a9a2e52e602b02578474b",
+      "source": "art-source/wildlife-v2/llama/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/llama/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/contact-sheet-native.png",
+        "sha256": "5446ec6934cc9c5056eb9e89b2c74a2f178f0f966d2a9a2e52e602b02578474b"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/index.html",
+        "sha256": "d97c63813543afc219ad04f9f8d8e7a52950b2f79b9bcf332b0cd3e191163e4b"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/pixel-audit.json",
+        "sha256": "1528a5e82dbc002fa300e5039998052bd813a4336c1c78edc8d0616998df1510"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/preview-native.gif",
+        "sha256": "02eda9064f7a0808ca071880f03d9f0c49e225637f3cf2cf5175b11785a8809f"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/preview.gif",
+        "sha256": "06c1df1b2546c0a360b9e10cbe0608f08d6bf4611ce7fec55a187ee618167fb4"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/scene-native.png",
+        "sha256": "cc4acbdb68ef3f9447229765d62e6a7286988406a6354fcf50c331c57249c38a"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/sheet.png",
+        "sha256": "3b563909383f39b1e499aeec44fdb0cc885d872f2081de66980a22ddfefbc72e"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/source-audit.json",
+        "sha256": "802e4c29cdfb56c54a87c300647df876b1d5a6cc1f4d0af7b52374d449f3fe6c"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/sprite.json",
+        "sha256": "44cd0ae3573c6f943a4555783063df6d69fa07f03ffb8343c46c9001637edc9f"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/travel-native.gif",
+        "sha256": "807ead9fc05953e057caa79da18614031060e8b72959044a540e98617c27bdde"
+      },
+      {
+        "path": "demos/wildlife-v2/llama/roster-v2/validation.json",
+        "sha256": "49e4a719ba034110a106a528ee46ca3f6e572c8ad50c054261684fc8f2bc5346"
+      }
+    ]
+  },
+  {
+    "id": "alpaca-roster-v2",
+    "animalId": "alpaca",
+    "revision": "roster-v2",
+    "name": "Alpaca · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/alpaca/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-alpaca-roster-v2",
+      "name": "Alpaca sheet",
+      "image": "demos/wildlife-v2/alpaca/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "ee03f6099f75673aab4031da211b98137618800e70832ac78c0b83914ddeae2b",
+      "source": "art-source/wildlife-v2/alpaca/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-alpaca-roster-v2-scene",
+      "name": "Alpaca scene",
+      "image": "demos/wildlife-v2/alpaca/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "2a04b74e56d7ec9e16ae5adbb1a67c4999a0aadef738dde4cdedfc0e1c8d46df",
+      "source": "art-source/wildlife-v2/alpaca/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-alpaca-roster-v2-contact",
+      "name": "Alpaca contact",
+      "image": "demos/wildlife-v2/alpaca/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "fd23a57b8d1aee89ec1eb9b3bdd0f8c2dbb9bf1ff0a80fd442f0bfacb0e509a0",
+      "source": "art-source/wildlife-v2/alpaca/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/alpaca/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/contact-sheet-native.png",
+        "sha256": "fd23a57b8d1aee89ec1eb9b3bdd0f8c2dbb9bf1ff0a80fd442f0bfacb0e509a0"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/index.html",
+        "sha256": "36c864c6511727f0fb9d321192afea7e31893c0f9ab21fc21d237724bc0a0b64"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/pixel-audit.json",
+        "sha256": "cd88e221ee2106611ba8f5dd07a9e199780f980eefbae3fde2084923c3cfb1bd"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/preview-native.gif",
+        "sha256": "7c4e0bd68fddf5183fdb989fa031a948f9009f17218fba25a9aac7ce2d7216ec"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/preview.gif",
+        "sha256": "7588c9e190cae1d2f558d1691e7c9e024eafa742d3cb9e8eced0f6da2a1b2309"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/scene-native.png",
+        "sha256": "2a04b74e56d7ec9e16ae5adbb1a67c4999a0aadef738dde4cdedfc0e1c8d46df"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/sheet.png",
+        "sha256": "ee03f6099f75673aab4031da211b98137618800e70832ac78c0b83914ddeae2b"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/source-audit.json",
+        "sha256": "8a04498797cb290289db1fd478567fd40b6727d6c1f815caa78c9c72bc1c32fe"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/sprite.json",
+        "sha256": "9203d68968cf3b192e9990bb8c0525664f2a5645d325be6b0edd0f302cca3777"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/travel-native.gif",
+        "sha256": "0e0c303f76c8109a74fb61d0b41db31f88a12b7251fc41f4f4e59ae662443d79"
+      },
+      {
+        "path": "demos/wildlife-v2/alpaca/roster-v2/validation.json",
+        "sha256": "f6d0339a846b0c985331897cba004fdabd8fd97ee9289ae286f29f9cbdc9eeb1"
+      }
+    ]
   }
 ]

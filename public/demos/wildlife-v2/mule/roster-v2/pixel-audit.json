@@ -1,0 +1,18 @@
+{
+  "identity": "mule-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "retainedRigidPaintMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.0000000000000036,
+    "up": 2.0,
+    "left": 1.9999999999999964,
+    "right": 1.9999999999999964
+  },
+  "rootTravelPixelsPerCycle": 26.879999999999995,
+  "walkDurationMs": 1920,
+  "velocityPixelsPerSecond": 13.999999999999998
+}

@@ -248,3 +248,24 @@ assertion; distinguish them from newly introduced failures.
   Full units: 2,971 pass, five known Windows failures, ten skipped. Nineteen new
   entries plus sixteen delivered leave 161 remaining. Donkey/mule/llama/alpaca
   begin next; source helpers pinned by these receipts must remain immutable.
+
+- 23:07 UTC: fresh donkey, mule, llama and alpaca `roster-v2` completed.
+  Independent grey/brown equine bodies and tan/cream camelid silhouettes retain
+  the common camera/native scale. Two-link fixed-length necks carry heads through
+  grazing; buried shoulders/hips follow body heave above planted articulated
+  limbs. Camelids have paired-toe meshes; equines full hooves, mane and tail
+  brush. Native review refined long-neck proportions and donkey coat contrast.
+  Dense action keys preserve continuous attachment and native jaw movement.
+  Per-species audit checks 6,272 limb, 784 neck and 1,176 tail links, 1,244
+  contacts and 688 planted travel pairs across 129 walk and 65 action samples.
+  Neck/head/body attachments and exact loops pass. All four replays are
+  byte-identical, and 1,312 exact Chromium crops pass. Compact native foot
+  silhouettes retain every one of the ten output artifacts byte-identically,
+  reducing redundant projected mesh data to about 0.8-1.2MB per source bank.
+  Natural pasture groups use existing slots; food tiers include the new grazers.
+  Donkey/mule share riding at 64/80px/s and remain protected while ridden.
+  Typecheck/lint/build, 964-candidate manifest, twelve browser checks and
+  streaming --assert-ready pass. Full units: 3,023 pass, five known Windows
+  failures, ten skipped. Twenty-three newly completed plus sixteen delivered
+  leave 157 remaining. Five feline hunter sources begin next. All new exact
+  identities remain pending human art review.

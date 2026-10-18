@@ -406,3 +406,9 @@
 !wolf/roster-v2/*
 !coyote/roster-v2/*
 !spotted-hyena/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!donkey/roster-v2/*
+!mule/roster-v2/*
+!llama/roster-v2/*
+!alpaca/roster-v2/*

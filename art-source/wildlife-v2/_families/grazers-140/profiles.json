@@ -1,0 +1,350 @@
+{
+  "donkey": {
+    "label": "Grey donkey",
+    "torso": [
+      0,
+      -0.1,
+      1.8
+    ],
+    "radii": [
+      0.54,
+      0.93,
+      0.52
+    ],
+    "chest": [
+      0,
+      0.5,
+      1.83
+    ],
+    "chestRadii": [
+      0.5,
+      0.45,
+      0.57
+    ],
+    "neckBase": [
+      0,
+      0.65,
+      1.98
+    ],
+    "neckLengths": [
+      0.53,
+      0.51
+    ],
+    "neckRadius": 0.24,
+    "head": [
+      0,
+      1.13,
+      2.48
+    ],
+    "grazeHead": [
+      0,
+      1.42,
+      1.43
+    ],
+    "headKind": "equine",
+    "earHeight": 0.62,
+    "mane": true,
+    "foreHip": [
+      0.36,
+      0.59,
+      1.65
+    ],
+    "hindHip": [
+      0.37,
+      -0.73,
+      1.58
+    ],
+    "foreLengths": [
+      0.72,
+      0.72,
+      0.38,
+      0.17
+    ],
+    "hindLengths": [
+      0.7,
+      0.7,
+      0.36,
+      0.17
+    ],
+    "tailLengths": [
+      0.4,
+      0.36,
+      0.3
+    ],
+    "tailRadius": 0.065,
+    "tailUp": false,
+    "cloven": false,
+    "walkSpeed": 12,
+    "walkMs": 60,
+    "palette": {
+      "K": "#3b3f40",
+      "B": "#a7aaa1",
+      "H": "#c8c9bd",
+      "C": "#d3cdb9",
+      "M": "#525653",
+      "E": "#272f30",
+      "N": "#293435"
+    }
+  },
+  "mule": {
+    "label": "Brown mule",
+    "torso": [
+      0,
+      -0.1,
+      1.98
+    ],
+    "radii": [
+      0.56,
+      1.02,
+      0.57
+    ],
+    "chest": [
+      0,
+      0.53,
+      2.03
+    ],
+    "chestRadii": [
+      0.53,
+      0.48,
+      0.61
+    ],
+    "neckBase": [
+      0,
+      0.7,
+      2.18
+    ],
+    "neckLengths": [
+      0.56,
+      0.54
+    ],
+    "neckRadius": 0.25,
+    "head": [
+      0,
+      1.23,
+      2.7
+    ],
+    "grazeHead": [
+      0,
+      1.52,
+      1.58
+    ],
+    "headKind": "equine",
+    "earHeight": 0.57,
+    "mane": true,
+    "foreHip": [
+      0.39,
+      0.64,
+      1.8
+    ],
+    "hindHip": [
+      0.4,
+      -0.78,
+      1.73
+    ],
+    "foreLengths": [
+      0.8,
+      0.8,
+      0.4,
+      0.18
+    ],
+    "hindLengths": [
+      0.77,
+      0.77,
+      0.39,
+      0.18
+    ],
+    "tailLengths": [
+      0.42,
+      0.39,
+      0.32
+    ],
+    "tailRadius": 0.07,
+    "tailUp": false,
+    "cloven": false,
+    "walkSpeed": 14,
+    "walkMs": 60,
+    "palette": {
+      "K": "#3e3028",
+      "B": "#916b49",
+      "H": "#b89060",
+      "C": "#cdb68c",
+      "M": "#503b2d",
+      "E": "#252b29",
+      "N": "#2b2c29"
+    }
+  },
+  "llama": {
+    "label": "Brown llama",
+    "torso": [
+      0,
+      -0.08,
+      1.85
+    ],
+    "radii": [
+      0.57,
+      0.89,
+      0.64
+    ],
+    "chest": [
+      0,
+      0.47,
+      1.91
+    ],
+    "chestRadii": [
+      0.49,
+      0.45,
+      0.62
+    ],
+    "neckBase": [
+      0,
+      0.66,
+      2.04
+    ],
+    "neckLengths": [
+      0.89,
+      0.86
+    ],
+    "neckRadius": 0.21,
+    "head": [
+      0,
+      1.01,
+      3.7
+    ],
+    "grazeHead": [
+      0,
+      1.6,
+      1.34
+    ],
+    "headKind": "camelid",
+    "earHeight": 0.46,
+    "mane": false,
+    "foreHip": [
+      0.33,
+      0.55,
+      1.63
+    ],
+    "hindHip": [
+      0.35,
+      -0.67,
+      1.58
+    ],
+    "foreLengths": [
+      0.74,
+      0.74,
+      0.36,
+      0.17
+    ],
+    "hindLengths": [
+      0.72,
+      0.72,
+      0.35,
+      0.17
+    ],
+    "tailLengths": [
+      0.23,
+      0.21,
+      0.19
+    ],
+    "tailRadius": 0.16,
+    "tailUp": true,
+    "cloven": true,
+    "walkSpeed": 12,
+    "walkMs": 70,
+    "palette": {
+      "K": "#624435",
+      "B": "#b28c60",
+      "H": "#d2b185",
+      "C": "#e2ccaa",
+      "M": "#74533d",
+      "E": "#2f3531",
+      "N": "#323731"
+    }
+  },
+  "alpaca": {
+    "label": "Cream alpaca",
+    "torso": [
+      0,
+      -0.06,
+      1.57
+    ],
+    "radii": [
+      0.64,
+      0.77,
+      0.64
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.67
+    ],
+    "chestRadii": [
+      0.55,
+      0.43,
+      0.6
+    ],
+    "neckBase": [
+      0,
+      0.54,
+      1.78
+    ],
+    "neckLengths": [
+      0.63,
+      0.61
+    ],
+    "neckRadius": 0.28,
+    "head": [
+      0,
+      0.83,
+      2.9
+    ],
+    "grazeHead": [
+      0,
+      1.32,
+      1.16
+    ],
+    "headKind": "camelid",
+    "earHeight": 0.31,
+    "mane": false,
+    "foreHip": [
+      0.32,
+      0.46,
+      1.36
+    ],
+    "hindHip": [
+      0.34,
+      -0.58,
+      1.31
+    ],
+    "foreLengths": [
+      0.65,
+      0.64,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.32,
+      0.15
+    ],
+    "tailLengths": [
+      0.19,
+      0.18,
+      0.16
+    ],
+    "tailRadius": 0.19,
+    "tailUp": true,
+    "cloven": true,
+    "walkSpeed": 10,
+    "walkMs": 70,
+    "palette": {
+      "K": "#928776",
+      "B": "#d8cdb3",
+      "H": "#f2e6cc",
+      "C": "#e7d8ba",
+      "M": "#a3937b",
+      "E": "#353c36",
+      "N": "#393d35"
+    }
+  }
+}

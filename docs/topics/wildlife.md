@@ -4,7 +4,7 @@ Topic: wildlife
 Status: original banks, pets and fierce creatures retain provisional gameplay.
 The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
-Updated: 2026-10-18.
+Updated: 2026-10-19.
 
 ## Current eight-hour completion run
 
@@ -83,8 +83,16 @@ these hunters. A player-placed wolf eaten by T. rex remains gone after reload.
 Calls are distinct bounded synthesizers and footsteps use the shared weights.
 Source/replays and 1,944 exact crops pass; ten world/lab browser checks and
 streaming readiness pass. Full units have 2,971 passes and the five known Windows
-failures. Nineteen new entries plus sixteen delivered leave 161 remaining.
-Donkey, mule, llama and alpaca are the next related-animal batch.
+failures. Donkey, mule, llama and alpaca now also spawn as distinct pasture
+groups. Their independent two-link necks carry the head through grazing above
+planted limbs, with retained native jaw motion. Native silhouette review led
+to longer llama/alpaca necks and a clearer grey donkey coat. Donkey and mule
+ride through shared mount code at 64/80px/s; riders remain protected prey.
+Source/replays and 1,312 exact crops pass. Twelve Canvas/GPU/body/ball browser
+checks, streaming readiness and the 964-candidate manifest pass. Full units have
+3,023 passes and the five known Windows failures. Twenty-three new entries plus
+sixteen delivered leave 157 remaining. Jaguar, leopard, cheetah, lynx and bobcat
+are the next feline hunter batch.
 
 ## Horse and giraffe motion
 

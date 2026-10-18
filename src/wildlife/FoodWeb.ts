@@ -8,7 +8,17 @@ import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = ["mallard-duck", "robin", "chicken", "pigeon", "crow", "seagull"] as const;
 const small = ["rabbit", "frog", "red-squirrel", ...birds] as const;
-const pasture = ["deer", "sheep", "goat", "piglet", "kangaroo"] as const;
+const pasture = [
+  "deer",
+  "sheep",
+  "goat",
+  "piglet",
+  "kangaroo",
+  "donkey",
+  "mule",
+  "llama",
+  "alpaca",
+] as const;
 
 /** Explicit game food web. Direction means hunter → prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */

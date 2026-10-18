@@ -666,6 +666,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-donkey-provisional-v1",
+      "name": "wildlife donkey provisional v1",
+      "image": "demos/wildlife-v2/donkey/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "54e8a43d58036df8f8a20be83bd188cdfe64ed01e32112ee8a9d7562b887538a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-mule-provisional-v1",
+      "name": "wildlife mule provisional v1",
+      "image": "demos/wildlife-v2/mule/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "5387006bb25fc9d122cfa477a1bb1ea87842ee3474e789dda21ee522b7c058bd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-llama-provisional-v1",
+      "name": "wildlife llama provisional v1",
+      "image": "demos/wildlife-v2/llama/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3b563909383f39b1e499aeec44fdb0cc885d872f2081de66980a22ddfefbc72e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-alpaca-provisional-v1",
+      "name": "wildlife alpaca provisional v1",
+      "image": "demos/wildlife-v2/alpaca/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "ee03f6099f75673aab4031da211b98137618800e70832ac78c0b83914ddeae2b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -2583,6 +2623,46 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "2bb072d95d260481f413e7e4dd0269fa41d2d91a1ae39c2787cd7bc319bdb3e2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-donkey-roster-v2",
+      "name": "wildlife v2 donkey roster v2",
+      "image": "demos/wildlife-v2/donkey/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "54e8a43d58036df8f8a20be83bd188cdfe64ed01e32112ee8a9d7562b887538a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-mule-roster-v2",
+      "name": "wildlife v2 mule roster v2",
+      "image": "demos/wildlife-v2/mule/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "5387006bb25fc9d122cfa477a1bb1ea87842ee3474e789dda21ee522b7c058bd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-llama-roster-v2",
+      "name": "wildlife v2 llama roster v2",
+      "image": "demos/wildlife-v2/llama/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3b563909383f39b1e499aeec44fdb0cc885d872f2081de66980a22ddfefbc72e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-alpaca-roster-v2",
+      "name": "wildlife v2 alpaca roster v2",
+      "image": "demos/wildlife-v2/alpaca/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "ee03f6099f75673aab4031da211b98137618800e70832ac78c0b83914ddeae2b",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -24426,6 +24506,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-donkey-provisional-v1",
+      "sheetId": "wildlife-donkey-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-donkey-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-mule-provisional-v1",
+      "sheetId": "wildlife-mule-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-mule-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-llama-provisional-v1",
+      "sheetId": "wildlife-llama-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-llama-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-alpaca-provisional-v1",
+      "sheetId": "wildlife-alpaca-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-alpaca-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -26021,11 +26173,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:23"
+          "source": "src/wildlife/FoodWeb.ts:33"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:145"
+          "source": "src/wildlife/FoodWeb.ts:155"
         }
       ]
     },
@@ -26091,27 +26243,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:48"
+          "source": "src/wildlife/FoodWeb.ts:58"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:61"
+          "source": "src/wildlife/FoodWeb.ts:71"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:74"
+          "source": "src/wildlife/FoodWeb.ts:84"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:100"
+          "source": "src/wildlife/FoodWeb.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:118"
+          "source": "src/wildlife/FoodWeb.ts:128"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:145"
+          "source": "src/wildlife/FoodWeb.ts:155"
         }
       ]
     },
@@ -26161,15 +26313,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:24"
+          "source": "src/wildlife/FoodWeb.ts:34"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:145"
+          "source": "src/wildlife/FoodWeb.ts:155"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:146"
+          "source": "src/wildlife/FoodWeb.ts:156"
         }
       ]
     },
@@ -26211,7 +26363,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:146"
+          "source": "src/wildlife/FoodWeb.ts:156"
         }
       ]
     },
@@ -26257,7 +26409,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:147"
+          "source": "src/wildlife/FoodWeb.ts:157"
         }
       ]
     },
@@ -26303,7 +26455,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:148"
+          "source": "src/wildlife/FoodWeb.ts:158"
         }
       ]
     },
@@ -26349,7 +26501,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:149"
+          "source": "src/wildlife/FoodWeb.ts:159"
         }
       ]
     },
@@ -26503,7 +26655,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:145"
+          "source": "src/wildlife/FoodWeb.ts:155"
         }
       ]
     },
@@ -26549,7 +26701,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:145"
+          "source": "src/wildlife/FoodWeb.ts:155"
         }
       ]
     },

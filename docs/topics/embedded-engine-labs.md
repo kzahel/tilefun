@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-18.
+Updated: 2026-10-19.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -89,6 +89,12 @@ and additional natural prey feed the ordinary shared hunter AI. Ten browser
 checks cover Worker-lab meals, real-world spawning/editor/deletion, and no
 replacement for a player-placed wolf eaten by T. rex. Calls and weighted steps
 are shared by game and labs; onset/mute/pause/removal guards cover the new voices.
+
+Donkey/mule/llama/alpaca use shared ordinary Fauna definitions and existing
+fixed expansion slots. Their articulated necks are source-authoring mechanics;
+runtime consumes committed native frames with the same authority phase in game
+and labs. Donkey/mule enable the existing mount code, body-aware falling arrival
+and durable mounted reload. All twelve new Canvas/GPU/ball checks pass.
 
 ## Fierce creatures
 

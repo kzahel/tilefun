@@ -1,0 +1,18 @@
+{
+  "identity": "donkey-roster-v2",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 41,
+      "exactFacingCrops": 164
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 41,
+      "exactFacingCrops": 164
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

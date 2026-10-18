@@ -1,0 +1,17 @@
+{
+  "files": [
+    "art-source/wildlife-v2/camera.json",
+    "art-source/wildlife-v2/_families/grazers-140/README.md",
+    "art-source/wildlife-v2/_families/grazers-140/profiles.json",
+    "art-source/wildlife-v2/_families/grazers-140/build.py",
+    "art-source/wildlife-v2/_families/grazers-140/finish.py",
+    "art-source/wildlife-v2/_families/grazers-140/audit.py"
+  ],
+  "referenceAssets": [
+    {
+      "path": "public/demos/pixel-characters/person-32.png",
+      "sha256": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+      "purpose": "common character-scale scene comparison"
+    }
+  ]
+}

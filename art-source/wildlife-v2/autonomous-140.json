@@ -426,16 +426,24 @@
     "donkey": {
       "name": "Donkey",
       "family": "Farm & livestock",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:07:28Z",
+      "receipt": "art-source/wildlife-v2/donkey/roster-v2/receipt.json",
+      "evidence": "129 walk and 65 action source samples/facing; 6272 limb, 784 neck and 1176 tail links; 1244 ground contacts and 688 planted travel pairs; independent head/jaw grazing motion, byte-identical replay and 328 exact Chromium crops; shared game/body/riding checks"
     },
     "mule": {
       "name": "Mule",
       "family": "Farm & livestock",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:07:28Z",
+      "receipt": "art-source/wildlife-v2/mule/roster-v2/receipt.json",
+      "evidence": "129 walk and 65 action source samples/facing; 6272 limb, 784 neck and 1176 tail links; 1244 ground contacts and 688 planted travel pairs; independent head/jaw grazing motion, byte-identical replay and 328 exact Chromium crops; shared game/body/riding checks"
     },
     "wild-turkey": {
       "name": "Wild turkey",
@@ -447,16 +455,24 @@
     "llama": {
       "name": "Llama",
       "family": "Farm & livestock",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:07:28Z",
+      "receipt": "art-source/wildlife-v2/llama/roster-v2/receipt.json",
+      "evidence": "129 walk and 65 action source samples/facing; 6272 limb, 784 neck and 1176 tail links; 1244 ground contacts and 688 planted travel pairs; independent head/jaw grazing motion, byte-identical replay and 328 exact Chromium crops; shared game/body/riding checks"
     },
     "alpaca": {
       "name": "Alpaca",
       "family": "Farm & livestock",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:07:28Z",
+      "receipt": "art-source/wildlife-v2/alpaca/roster-v2/receipt.json",
+      "evidence": "129 walk and 65 action source samples/facing; 6272 limb, 784 neck and 1176 tail links; 1244 ground contacts and 688 planted travel pairs; independent head/jaw grazing motion, byte-identical replay and 328 exact Chromium crops; shared game/body/riding checks"
     },
     "hamster": {
       "name": "Hamster",
@@ -518,37 +534,37 @@
     "jaguar": {
       "name": "Jaguar",
       "family": "Felids (big cats)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "leopard": {
       "name": "Leopard",
       "family": "Felids (big cats)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "cheetah": {
       "name": "Cheetah",
       "family": "Felids (big cats)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "lynx": {
       "name": "Eurasian lynx",
       "family": "Felids (big cats)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "bobcat": {
       "name": "Bobcat",
       "family": "Felids (big cats)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "panda": {
       "name": "Panda",
@@ -1659,6 +1675,26 @@
         "spotted-hyena"
       ],
       "validation": "Typecheck/lint/build, 944-candidate manifest, ten real browser checks and streaming --assert-ready pass. Full units: 2971 pass, 5 known Windows failures, 10 skipped. Natural hunters fill fixed expansion slots with additional legal local prey; original predator owners remain fixed. Manual wolf eaten by rex stays gone after reload. Distinct bounded calls and shared weighted footsteps pass."
+    },
+    {
+      "utc": "2026-10-18T23:01:00Z",
+      "prepared": [
+        "donkey",
+        "mule",
+        "llama",
+        "alpaca"
+      ],
+      "validation": "129 walk and 65 action samples/facing; fixed limbs/necks/tails and planted contacts. Corrected native silhouettes, preserved grazing head/jaw motion, byte-identical source replay and 1312 exact Chromium crops pass. 353 focused movement/body/food-web checks pass. Compact source foot guides retain all ten artifacts byte-identically. Broader game validation remains."
+    },
+    {
+      "utc": "2026-10-18T23:07:28Z",
+      "completed": [
+        "donkey",
+        "mule",
+        "llama",
+        "alpaca"
+      ],
+      "validation": "Typecheck/lint/build, 964-candidate manifest, twelve browser checks and streaming --assert-ready pass. Full units: 3023 pass, 5 known Windows failures, 10 skipped. Natural grazing groups have connected articulated necks; donkey/mule ride at 64/80px/s and remain protected while ridden. Compact native foot guides retain all ten outputs byte-identically."
     }
   ],
   "existingOutsideRoster": [
@@ -1722,6 +1758,18 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/ground-hunters-140/README.md"
+    },
+    "articulated-grazers": {
+      "animals": [
+        "donkey",
+        "mule",
+        "llama",
+        "alpaca"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/grazers-140/README.md"
     }
   }
 }
