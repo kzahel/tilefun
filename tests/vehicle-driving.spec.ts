@@ -442,6 +442,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       expect((await read(page)).type).toMatch(/^train/);
       await checkHorn(page, "train");
       const session = await page.context().newCDPSession(page);
+      const forwardStart = await read(page);
       if (mode === "Hold to move")
         await session.send("Input.dispatchTouchEvent", {
           type: "touchStart",
@@ -449,6 +450,9 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
         });
       else await page.touchscreen.tap(530, 300);
       await expect.poll(async () => (await read(page)).speed).toBeGreaterThan(24);
+      // Leave room to reverse before stopping: speed alone can be reached
+      // within eight pixels of the route endpoint where this train starts.
+      await expect.poll(async () => (await read(page)).x).toBeGreaterThan(forwardStart.x + 32);
       if (mode === "Hold to move") {
         await page.waitForTimeout(1000);
         expect((await read(page)).speed).toBeGreaterThan(24);

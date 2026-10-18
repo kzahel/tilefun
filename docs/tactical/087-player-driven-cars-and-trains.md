@@ -108,6 +108,21 @@ Validation on 2026-10-10:
   [staged affected checks](/tmp/tilefun-driving-staged-browser.log),
   [profile retry](/tmp/tilefun-driving-staged-retry.log).
 
+### Train reversal staging (2026-10-19)
+
+CI run [39167803681](https://github.com/kzahel/tilefun/actions/runs/39167803681)
+passes the garage regressions, then exposes a train-tap test staging error:
+the first start/stop can finish at x=40855.461, only 7.461px from the route end
+at x=40848. The next assertion requires more than 8px of reverse travel, so the
+ordinary route-end stop correctly prevents it. Reaching the speed threshold
+alone does not establish enough travel for the reverse probe.
+
+The test now requires at least 32px of forward travel before stopping, for both
+Tap and Hold on Canvas/GPU. Speed, stopped-position, reverse displacement and
+Options input-isolation assertions remain. No gameplay behavior changed.
+All four variants pass three consecutive single-worker full Chromium runs
+(12 checks total); typechecks and lint pass.
+
 ## Next work
 
 Playtest entering, finding the exit action and train side taps with the child.
