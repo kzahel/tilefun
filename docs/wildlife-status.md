@@ -1,6 +1,19 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T19:46:00.590Z (18/10/2026, 21:46:00 Berlin).
+## Active autonomous completion run
+
+[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
+
+**2 newly completed; 0 in progress; 190 queued; 4 completed before this run.** Final pixels retain their own human-review status.
+
+| Animal | Current state | Inspection |
+| --- | --- | --- |
+| Sheep | finished-game-active | [Playback](../public/demos/wildlife-v2/sheep/motion-v2/index.html) |
+| Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
+
+## Historical campaign snapshot
+
+Snapshot: 2026-10-18T20:20:45.234Z (18/10/2026, 22:20:45 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

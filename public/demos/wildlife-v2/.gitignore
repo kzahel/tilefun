@@ -361,3 +361,7 @@
 !horse/motion-study-v3/travel-slow.gif
 !horse/motion-study-v3/travel-slow.mp4
 !horse/motion-study-v3/validation.json
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!sheep/motion-v2/*
+!piglet/motion-v2/*

@@ -256,6 +256,33 @@ export function writeStatus() {
     );
   }
   const output = resolve(ROOT, "docs/wildlife-status.md");
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/autonomous-140.json"))) {
+    const run = read("art-source/wildlife-v2/autonomous-140.json");
+    const entries = Object.entries(run.tasks);
+    const finished = entries.filter(([, t]) => t.state === "finished-game-active");
+    const active = entries.filter(([, t]) => t.state === "in-progress");
+    lines.splice(
+      2,
+      0,
+      "## Active autonomous completion run",
+      "",
+      `[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline ${clean(run.deadlineUtc)}. State: ${clean(run.state)}.`,
+      "",
+      `**${finished.length} newly completed; ${active.length} in progress; ${entries.filter(([, t]) => t.state === "queued").length} queued; ${entries.filter(([, t]) => t.state === "already-completed").length} completed before this run.** Final pixels retain their own human-review status.`,
+      "",
+      "| Animal | Current state | Inspection |",
+      "| --- | --- | --- |",
+      ...entries
+        .filter(([, t]) => ["in-progress", "finished-game-active", "blocked"].includes(t.state))
+        .map(
+          ([id, t]) =>
+            `| ${clean(t.name)} | ${clean(t.state)} | ${t.revision && existsSync(resolve(ROOT, `public/demos/wildlife-v2/${id}/${t.revision}/index.html`)) ? `[Playback](../public/demos/wildlife-v2/${id}/${t.revision}/index.html)` : clean(t.detail ?? "Source/animation work")} |`,
+        ),
+      "",
+      "## Historical campaign snapshot",
+      "",
+    );
+  }
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));
   renameSync(temporary, output);

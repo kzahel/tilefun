@@ -548,6 +548,12 @@
       "toolId": "wildlife-v2"
     },
     {
+      "id": "wildlife-v2-autonomous-140",
+      "name": "Wildlife · autonomous-140",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -17905,6 +17911,90 @@
       }
     },
     {
+      "id": "pattern:wildlife-v2-sheep-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Sheep · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-sheep-motion-v2",
+      "fingerprint": "1278a3ba22c43680198ee4d3033f4f815d8926de2e52d5eae87a7a7b966c0a6b",
+      "sourceFingerprint": "258fc640b891fceb6b2f272bfc2796f10dcb78410550acc46bdf379a022cad46",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-sheep-motion-v2",
+        "prefabIds": [],
+        "revision": "27746c0915eb0495dc6afdb1da67c8810ede373d002b81a794013c588ac04798",
+        "renderFingerprint": "1278a3ba22c43680198ee4d3033f4f815d8926de2e52d5eae87a7a7b966c0a6b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-sheep-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-sheep-motion-v2",
+        "fingerprint": "258fc640b891fceb6b2f272bfc2796f10dcb78410550acc46bdf379a022cad46",
+        "sheetSize": [
+          1968,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1968,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-sheep-motion-v2",
+          "prefabIds": [],
+          "revision": "27746c0915eb0495dc6afdb1da67c8810ede373d002b81a794013c588ac04798",
+          "renderFingerprint": "1278a3ba22c43680198ee4d3033f4f815d8926de2e52d5eae87a7a7b966c0a6b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-sheep-motion-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-piglet-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Pig · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-piglet-motion-v2",
+      "fingerprint": "a4cf26b14632ce5d45209672f3f0f91108814195eb70cb7d65c687d1137569b2",
+      "sourceFingerprint": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-piglet-motion-v2",
+        "prefabIds": [],
+        "revision": "20398931bd7b07402ed7f7f7811333c78a9a5807a4823cfc8a2d9e8b69c8b64a",
+        "renderFingerprint": "a4cf26b14632ce5d45209672f3f0f91108814195eb70cb7d65c687d1137569b2",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-piglet-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-piglet-motion-v2",
+        "fingerprint": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
+        "sheetSize": [
+          1968,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1968,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-piglet-motion-v2",
+          "prefabIds": [],
+          "revision": "20398931bd7b07402ed7f7f7811333c78a9a5807a4823cfc8a2d9e8b69c8b64a",
+          "renderFingerprint": "a4cf26b14632ce5d45209672f3f0f91108814195eb70cb7d65c687d1137569b2",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-piglet-motion-v2"
+        }
+      }
+    },
+    {
       "id": "vehicle:compact-1:north",
       "batchId": "vehicles",
       "name": "Compact 1 · north",
@@ -32179,5 +32269,5 @@
       }
     }
   ],
-  "inputDigest": "c48df5c480acf09202effbfd249f2c21e712b471c555c6b11a2d681c49dcb2c6"
+  "inputDigest": "a72fa1eb282a527424a33e818d127c346a2d156745f4e4099016a98421e995a3"
 }

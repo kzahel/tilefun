@@ -438,11 +438,11 @@
     {
       "id": "wildlife-sheep-provisional-v1",
       "name": "wildlife sheep provisional v1",
-      "image": "demos/wildlife-v2/sheep/draft-v1/sheet.png",
-      "width": 1200,
+      "image": "demos/wildlife-v2/sheep/motion-v2/sheet.png",
+      "width": 1968,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "b046916b03b19fbe4d1d5dc253402df7d0fdb5f25997553c70929dbea4ed0223",
+      "fingerprint": "258fc640b891fceb6b2f272bfc2796f10dcb78410550acc46bdf379a022cad46",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -458,11 +458,11 @@
     {
       "id": "wildlife-piglet-provisional-v1",
       "name": "wildlife piglet provisional v1",
-      "image": "demos/wildlife-v2/piglet/draft-v1/sheet.png",
-      "width": 1008,
+      "image": "demos/wildlife-v2/piglet/motion-v2/sheet.png",
+      "width": 1968,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "41e27f5048daf8e479044074314fc1af47ceb3228f2f150d9bc4ef7ff75c095a",
+      "fingerprint": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2293,6 +2293,26 @@
       "height": 576,
       "tileSize": 16,
       "fingerprint": "c13a30249649add57b76ab875a57ee25bf2a9f751774ab67773ed6a8da836341",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sheep-motion-v2",
+      "name": "wildlife v2 sheep motion v2",
+      "image": "demos/wildlife-v2/sheep/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "258fc640b891fceb6b2f272bfc2796f10dcb78410550acc46bdf379a022cad46",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-piglet-motion-v2",
+      "name": "wildlife v2 piglet motion v2",
+      "image": "demos/wildlife-v2/piglet/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -23727,7 +23747,7 @@
       "rect": [
         0,
         0,
-        1200,
+        1968,
         192
       ],
       "label": "wildlife-sheep-provisional-v1 · registered 48×48 frames",
@@ -23763,7 +23783,7 @@
       "rect": [
         0,
         0,
-        1008,
+        1968,
         192
       ],
       "label": "wildlife-piglet-provisional-v1 · registered 48×48 frames",

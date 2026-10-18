@@ -1,0 +1,17 @@
+{
+  "identity": "piglet-motion-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "retainedCoatMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.0,
+    "up": 2.0,
+    "left": 2.0,
+    "right": 2.0
+  },
+  "rootTravelPixelsPerCycle": 13.439999999999998,
+  "walkDurationMs": 960,
+  "velocityPixelsPerSecond": 13.999999999999998
+}

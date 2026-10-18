@@ -6,6 +6,27 @@ and all five authorized fierce creatures have durable provisional gameplay. New
 art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
+## Current eight-hour completion run
+
+The owner now explicitly authorizes all remaining animals in the retained
+196-animal list, autonomously for up to eight hours. [140](../tactical/140-autonomous-wildlife-completion.md)
+owns this run (2026-10-18 20:05:24 UTC to 2026-10-19 04:05:24 UTC) and its
+[tracked ledger](../../art-source/wildlife-v2/autonomous-140.json). Start with
+sheep/pig and the remaining frozen-torso repairs, then unfinished families.
+The accepted horse/giraffe work sets the motion/connection standard. This latest
+authorization supersedes historical expansion and sequencing holds for the run;
+old campaign records remain history, and exact banks/human art review ownership
+stay immutable. Commit completed verified batches; report incomplete work
+honestly at the deadline. No claim that every remaining species fits in eight hours.
+
+Sheep and piglet now use repaired `motion-v2` banks in the game and lab. Their
+32-pose walks retain the original coats/scale, move the torso/head and carry
+connected fixed-volume cloven limbs through planted steps. Native paint moves
+2px in each facing; root travel matches their existing movement speeds. Both
+source replays and 328 native/enlarged Chromium crops pass; six shared game
+checks pass. These exact finished identities await human art review. Deer and
+goat are next.
+
 ## Horse and giraffe motion
 
 The owner rejected the old horse/giraffe animation's frozen body and disconnected
