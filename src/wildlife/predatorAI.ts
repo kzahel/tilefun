@@ -269,6 +269,7 @@ export function updatePredatorAI(
     if (!prey && ai.cooldown <= 0) {
       let nearest: Entity | undefined,
         best = fierce?.sense ?? 144;
+      let packTarget: Entity | undefined;
       // The active population is already spatially bounded; inspect at most 24
       // candidates per admitted turn, rotating to avoid starving later actors.
       const start = Math.floor(random(e) * Math.max(1, animals.length));
@@ -276,6 +277,26 @@ export function updatePredatorAI(
         if (planning && !planning.candidate(e)) break;
         const a = required(animals[(start + i) % animals.length]);
         const d = distance(e.position, a.position);
+        const ally = a.predator;
+        if (
+          fierce?.kind === "wolf" &&
+          a !== e &&
+          a.type === e.type &&
+          ally?.targetId &&
+          (ai.packId
+            ? ally.packId === ai.packId
+            : !ally.packId && distance(ai.home, ally.home) < 96)
+        ) {
+          const shared = animals.find((animal) => animal.persistentId === ally.targetId);
+          if (
+            shared &&
+            canEat(e, shared) &&
+            distance(e.position, shared.position) < (fierce?.sense ?? 160) &&
+            distance(shared.position, ai.home) < ai.radius &&
+            clearPath(e, shared.position, env, planning)
+          )
+            packTarget = shared;
+        }
         if (
           canEat(e, a) &&
           d < best &&
@@ -286,12 +307,17 @@ export function updatePredatorAI(
           best = d;
         }
       }
+      nearest = packTarget ?? nearest;
       if (nearest) {
         ai.targetId = durableId(nearest);
         ai.huntElapsed = 0;
-        enter(e, fierce ? "display" : "stalk", fierce ? 1.28 : 0);
+        enter(
+          e,
+          packTarget ? "chase" : fierce ? "display" : "stalk",
+          fierce && !packTarget ? 1.28 : 0,
+        );
         ai.aim = { ...nearest.position };
-        if (fierce) {
+        if (fierce && !packTarget) {
           ai.displaySerial = (ai.displaySerial ?? 0) + 1;
           e.sprite.direction = directionFromVelocity(
             nearest.position.wx - e.position.wx,
@@ -310,7 +336,14 @@ export function updatePredatorAI(
         }
       }
     }
-    const target = prey?.position;
+    let target = prey?.position;
+    if (target && fierce?.kind === "wolf" && ai.packRole && prey && bodyGap(e, prey) > 24) {
+      const dx = target.wx - e.position.wx,
+        dy = target.wy - e.position.wy;
+      const d = Math.hypot(dx, dy) || 1,
+        side = ai.packRole % 2 ? 1 : -1;
+      target = { wx: target.wx - (dy / d) * 12 * side, wy: target.wy + (dx / d) * 12 * side };
+    }
     if (target) {
       if (clearPath(e, target, env, planning)) ai.aim = { ...target };
       else {
@@ -449,6 +482,7 @@ export function resolvePredatorCatches(
         "groupId",
         "habitatBounds",
         "packId",
+        "packRole",
         "denId",
         "denPlaced",
       ]) {

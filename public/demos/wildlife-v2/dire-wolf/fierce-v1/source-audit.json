@@ -1,0 +1,36 @@
+{
+  "identity": "dire-wolf-fierce-v1",
+  "poses": 164,
+  "meshCount": 55,
+  "fixedLengthLinkChecks": 1968,
+  "plantedGroundContacts": 608,
+  "stanceTravelCompensationChecks": 272,
+  "maxProjectionError": 5.000000001587068e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 1.60869,
+      "head": 3.61804,
+      "shoulder": 2.83732,
+      "pelvis": 1.76898
+    },
+    "up": {
+      "body": 1.60869,
+      "head": 1.752,
+      "shoulder": 2.02869,
+      "pelvis": 3.01301
+    },
+    "left": {
+      "body": 2.02213,
+      "head": 3.14704,
+      "shoulder": 2.57276,
+      "pelvis": 1.68642
+    },
+    "right": {
+      "body": 2.02213,
+      "head": 2.32017,
+      "shoulder": 1.74589,
+      "pelvis": 2.51328
+    }
+  },
+  "status": "Saved-source integrity passes; human art approval is separate."
+}

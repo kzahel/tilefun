@@ -14,6 +14,26 @@ export interface FierceBehaviorProfile {
 /** Release each bank only after its source, native playback and gameplay pass. */
 export const FIERCE_PROFILES: readonly PredatorProfile[] = [
   {
+    species: "dire-wolf",
+    label: "Dire wolf",
+    revision: "fierce-v1",
+    speed: 12,
+    chaseSpeed: 64,
+    weight: 110,
+    size: 96,
+    anchorY: 72,
+    body: [24, 14, 26],
+    fierce: {
+      kind: "wolf",
+      stride: 1.44,
+      chargeStride: 2.52,
+      windup: 0.35,
+      chargeSeconds: 5,
+      sense: 160,
+      displayRadius: 112,
+    },
+  },
+  {
     species: "t-rex",
     label: "T. rex",
     revision: "fierce-v1",

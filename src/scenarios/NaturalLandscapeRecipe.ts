@@ -19,6 +19,9 @@ import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  { id: "wolf-pack", name: "Dire wolves · coordinated pack", seed: 1, x: 4, y: 4 },
+  { id: "food-web-natural", name: "Food web · natural population", seed: 1, x: 4, y: 4 },
+  { id: "food-web-placed", name: "Food web · player-created population", seed: 1, x: 4, y: 4 },
   ...PREDATOR_PROFILES.map((p) => ({
     id: p.species,
     name: `${p.label} · hunting & prey replacement`,
@@ -63,6 +66,39 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (!at && ["wolf-pack", "food-web-natural", "food-web-placed"].includes(id)) {
+    const pack = [
+      createPredator("dire-wolf", 64, 64),
+      createPredator("dire-wolf", 48, 88),
+      createPredator("dire-wolf", 48, 40),
+    ];
+    for (const [i, wolf] of pack.entries())
+      if (wolf.predator) {
+        wolf.predator.packId = "lab-pack";
+        wolf.predator.packRole = i;
+        wolf.predator.timer = i * 0.2;
+      }
+    const actors =
+      id === "wolf-pack"
+        ? [...pack, createDeer(128, 64), createRabbit(140, 100)]
+        : [
+            createPredator("t-rex", 64, 64),
+            createPredator("dire-wolf", 112, 64),
+            createDeer(176, 64),
+            createRabbit(160, 120),
+          ];
+    if (id !== "food-web-placed")
+      for (const [i, actor] of actors.entries()) actor.naturalSpawnId = `nature-${id}-${i}`;
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: FLAT_SCENARIO,
+      player: createPlayer(64, 192),
+      props: [],
+      actors,
+      traffic: [],
+    };
+  }
   const predator = PREDATOR_PROFILES.find((p) => p.species === id);
   if (!at && predator) {
     const deer = createDeer(108, 64),

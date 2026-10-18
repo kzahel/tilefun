@@ -69,7 +69,9 @@ export default function NaturalLandscapePage() {
     settings = useRef({ paused, follow, zoom, sounds });
   settings.current = { paused, follow, zoom, sounds };
   const custom = caseId === "explore";
-  const predatorCase = PREDATOR_PROFILES.some((p) => p.species === caseId);
+  const predatorCase =
+    PREDATOR_PROFILES.some((p) => p.species === caseId) ||
+    ["wolf-pack", "food-web-natural", "food-web-placed"].includes(caseId);
   const point = useMemo(
     () =>
       custom

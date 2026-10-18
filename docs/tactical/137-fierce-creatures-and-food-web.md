@@ -15,7 +15,7 @@ current contracts. Historical repair holds and human art review remain separate.
   wind-up/short charge, feeding/rest and natural/editor/lab integration.
 - [x] Small dragon: own winged body, guarded treasure, sleep/wake/display,
   hunting and natural/editor/lab integration.
-- [ ] Dire wolf: own canid source, howl, bounded pack coordination, hunting and
+- [x] Dire wolf: own canid source, howl, bounded pack coordination, hunting and
   natural/editor/lab integration.
 - [ ] Griffin: own eagle/lion source, perch, validated aerial approach and landing
   attack, hunting and natural/editor/lab integration.
@@ -93,3 +93,21 @@ food-web hunts otherwise legitimately remove the very actor being edited.
 The hunting tests continue to run live authority. Streaming readiness passes.
 Broader fail-fast: 45 pass, the existing GPU train-reload distance failure,
 one interrupted deer case and 628 unrun. Art remains pending human review.
+
+Dire-wolf checkpoint: separate 55-mesh canid, raised-muzzle howl and 164 source
+poses. Saved-source audit passes 1,968 fixed-link checks, 608 planted contacts and
+272 stance/travel checks. Twelve artifacts replay exactly; independent Chromium
+checks 328 facing crops and 82 native scenery frames across native/4× playback.
+Natural three-member packs have stable IDs/roles. Pack mates share a valid target
+within the bounded candidate/path budget and flank from opposite sides; distinct
+packs ignore one another's target. Eaten natural wolves retain pack membership,
+while manually created wolves stay gone. Pack and paired natural/placed food-web
+compositions are available in the shared Worker lab. Focused units: 102 pass.
+
+Wolf release qualification: all 34 focused browser checks pass, including both
+renderers, calls/charges/meals/reload, seven natural predator types, placement,
+durable deletion, picker and exact pending reviews. Full units: 2,786 pass with
+the same five Windows symlink/WAL failures and ten skips. Typechecks, lint,
+build, 870 Workshop identities and streaming readiness pass. The first browser
+attempt overlapped a build replacing dist and lost its server; the completed
+build's clean rerun is the reported 34-pass evidence. Human art review is pending.

@@ -3,11 +3,36 @@
   "authorization": "Owner explicitly requested T. rex, small dragon, dire wolf, griffin and giant spider end to end, hunting each other through explicit diets, natural-only eaten-prey replacement, and per-stage commits/pushes.",
   "motionContract": "body-motion-20261004",
   "animals": [
-    { "id": "t-rex", "revision": "fierce-v1", "state": "draft-ready", "gameplay": true },
-    { "id": "small-dragon", "revision": "fierce-v1", "state": "draft-ready", "gameplay": true },
-    { "id": "dire-wolf", "revision": "fierce-v1", "state": "planned", "gameplay": false },
-    { "id": "griffin", "revision": "fierce-v1", "state": "planned", "gameplay": false },
-    { "id": "giant-spider", "revision": "fierce-v1", "state": "planned", "gameplay": false }
+    {
+      "id": "t-rex",
+      "revision": "fierce-v1",
+      "state": "draft-ready",
+      "gameplay": true
+    },
+    {
+      "id": "small-dragon",
+      "revision": "fierce-v1",
+      "state": "draft-ready",
+      "gameplay": true
+    },
+    {
+      "id": "dire-wolf",
+      "revision": "fierce-v1",
+      "state": "draft-ready",
+      "gameplay": true
+    },
+    {
+      "id": "griffin",
+      "revision": "fierce-v1",
+      "state": "planned",
+      "gameplay": false
+    },
+    {
+      "id": "giant-spider",
+      "revision": "fierce-v1",
+      "state": "planned",
+      "gameplay": false
+    }
   ],
   "reviewStatus": "pending",
   "historicalCampaign": "stopped"

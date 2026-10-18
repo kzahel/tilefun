@@ -93,6 +93,7 @@ export interface PredatorBehavior {
   huntElapsed?: number;
   activity?: number;
   packId?: string;
+  packRole?: number;
   displaySerial?: number;
   warningCooldown?: number;
   denId?: string;

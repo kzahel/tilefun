@@ -3095,5 +3095,102 @@
         "sha256": "f5121109ce26fe90feaa5b2b5c0ec8f5b5eba5653067ca7bdbb645615f69a353"
       }
     ]
+  },
+  {
+    "id": "dire-wolf-fierce-v1",
+    "animalId": "dire-wolf",
+    "revision": "fierce-v1",
+    "name": "Dire wolf",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dire-wolf/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-dire-wolf-fierce-v1",
+      "name": "Dire wolf sheet",
+      "image": "demos/wildlife-v2/dire-wolf/fierce-v1/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "aac78a8cd07bac2966f200d00be1b5a6f9da41c03d137526996106331fa12c96",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-dire-wolf-fierce-v1-scene",
+      "name": "Dire wolf scene",
+      "image": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "dd89248aacdd47d1d0787475b98b1d192b3aa8185f86105f61690257758c258e",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-dire-wolf-fierce-v1-contact",
+      "name": "Dire wolf contact",
+      "image": "demos/wildlife-v2/dire-wolf/fierce-v1/contact-sheet-native.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3e105532442c4979d03f9aaf6e30376a5566f2aa6d854bef7006bce87a15288b",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/dire-wolf/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/contact-sheet-native.png",
+        "sha256": "3e105532442c4979d03f9aaf6e30376a5566f2aa6d854bef7006bce87a15288b"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/index.html",
+        "sha256": "d531331ea6df280cc4c55843565e5a43683cc8f54b0995cebe2e9c68fdfe848c"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/preview-native.gif",
+        "sha256": "6410a1b343e792b12dfd3c4f88d5dee975252bbc1f7965e84f3db801548c528b"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/preview.gif",
+        "sha256": "2ac34c96faab860fc698a3421f2b634eff0de958a2f4b4ae213e2fafa2a3c17f"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/review-observations.md",
+        "sha256": "bdcb2e501f7710ceced77ab3e91c3d6cc7fef5874e85669f60a97f81dcb1b9a2"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scale-reference-native.png",
+        "sha256": "a7f49ea2091ecfa98387419cd6cb11a5815fc1afa7f7a72cd069516ec5f9901c"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-background.png",
+        "sha256": "f9a620c54a38026118c8f624cb24eb421ca9f96d67bfa306b6c9d0cb58e9d68e"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.gif",
+        "sha256": "f7c3cba01eaf4813893e4da267e36ece6f3cd48ba2627118062c893aead2e07d"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.png",
+        "sha256": "dd89248aacdd47d1d0787475b98b1d192b3aa8185f86105f61690257758c258e"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/sheet.png",
+        "sha256": "aac78a8cd07bac2966f200d00be1b5a6f9da41c03d137526996106331fa12c96"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/source-audit.json",
+        "sha256": "519194419b0682c0ad114660d123644e6b5339bd677c275de0c96e0f1922f704"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/sprite.json",
+        "sha256": "cbde8a4d4d37feaa9aa892ebbc4f8ff98ee98c19adb0a73aca3403e599862ddc"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/validation.json",
+        "sha256": "5aa80f71ac71ea4455410c5700689f01d6489a1c06516e65f1d1f751a56fc615"
+      }
+    ]
   }
 ]
