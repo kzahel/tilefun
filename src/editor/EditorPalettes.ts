@@ -6,6 +6,7 @@ import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { ROBIN_TYPE } from "../wildlife/Robin.js";
 
@@ -76,6 +77,11 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),
   { type: MALLARD_TYPE, label: "Mallard duck", color: "#638f66" },
   { type: FROG_TYPE, label: "Common frog", color: "#937b4c" },
+  ...PREDATOR_PROFILES.map((p) => ({
+    type: predatorType(p.species),
+    label: p.label,
+    color: "#ad713a",
+  })),
   ...FAUNA_PROFILES.map((p) => ({ type: faunaType(p.species), label: p.label, color: "#b59365" })),
   { type: DEER_TYPE, label: "Deer", color: "#b59365" },
   { type: ROBIN_TYPE, label: "Robin", color: "#bc5836" },

@@ -4,6 +4,7 @@
   "allowNewAnimals": false,
   "authorizedPetBatch": "art-source/wildlife-v2/pet-batch.json",
   "authorizedTigerBatch": "art-source/wildlife-v2/tiger-batch.json",
+  "authorizedPredatorBatch": "art-source/wildlife-v2/predator-batch.json",
   "reason": "Owner limits further work to touching up existing animals with frozen walking torsos. No more new animals.",
   "existingAnimalIds": [
     "ant",

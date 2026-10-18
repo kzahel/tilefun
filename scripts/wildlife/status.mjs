@@ -177,6 +177,24 @@ export function writeStatus() {
       "",
     );
   }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/predator-batch.json"))) {
+    const batch = read("art-source/wildlife-v2/predator-batch.json");
+    lines.splice(
+      lines.indexOf("## Whole roster"),
+      0,
+      "## Authorized predator gameplay and art",
+      "",
+      "[Tactical 132](tactical/132-predator-hunting-and-replacement.md). Separate bounded authorization; historical holds remain active and human art review stays pending.",
+      "",
+      "| Predator | State | Stage | Gameplay |",
+      "| --- | --- | --- | --- |",
+      ...batch.animals.map(
+        (p) =>
+          `| ${clean(p.id)} | ${clean(p.state)} | ${clean(p.stage)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
+      ),
+      "",
+    );
+  }
   const output = resolve(ROOT, "docs/wildlife-status.md");
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));

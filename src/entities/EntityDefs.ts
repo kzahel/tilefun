@@ -6,6 +6,7 @@ import { DEER_DEF, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_DEFS } from "../wildlife/Fauna.js";
 import { FROG_DEF, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_DEF, MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { PREDATOR_DEFS } from "../wildlife/Predator.js";
 import { RABBIT_DEF, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { ROBIN_DEF, ROBIN_TYPE } from "../wildlife/Robin.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
@@ -163,6 +164,7 @@ function wormDef(n: number): EntityDef {
 export const ENTITY_DEFS: Record<string, EntityDef> = {
   ...CHARACTER_ENTITY_DEFS,
   ...FAUNA_DEFS,
+  ...PREDATOR_DEFS,
   [MALLARD_TYPE]: MALLARD_DEF,
   [FROG_TYPE]: FROG_DEF,
   [RABBIT_TYPE]: RABBIT_DEF,

@@ -8,12 +8,23 @@ import {
   NaturalLandscape,
 } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { createDeer } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES } from "../wildlife/Fauna.js";
+import { createPredator, PREDATOR_PROFILES } from "../wildlife/Predator.js";
+import { createRabbit } from "../wildlife/Rabbit.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
+import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  ...PREDATOR_PROFILES.map((p) => ({
+    id: p.species,
+    name: `${p.label} · hunting & prey replacement`,
+    seed: 1,
+    x: 4,
+    y: 4,
+  })),
   ...FAUNA_PROFILES.map((p) => ({
     id: p.species,
     name: `${p.label} · ${p.habitat} refuge`,
@@ -50,6 +61,22 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  const predator = PREDATOR_PROFILES.find((p) => p.species === id);
+  if (!at && predator)
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: FLAT_SCENARIO,
+      landscape: profile,
+      player: createPlayer(64, 160),
+      props: [],
+      actors: [
+        createPredator(predator.species, 64, 64),
+        createDeer(108, 64),
+        createRabbit(128, 104),
+      ],
+      traffic: [],
+    };
   if (id === "train")
     return { ...cityTrainRecipe(), id: `nature-train-${profile}-v1`, landscape: profile };
   const point = at ?? naturalCase(id);

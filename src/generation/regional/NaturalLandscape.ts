@@ -1,3 +1,4 @@
+import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
@@ -12,6 +13,7 @@ import {
 } from "../../wildlife/Fauna.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
+import { createPredator, PREDATOR_PROFILES, predatorType } from "../../wildlife/Predator.js";
 import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
 import { createRobin, ROBIN_TYPE } from "../../wildlife/Robin.js";
 import type { ActorPlacement } from "../Generator.js";
@@ -377,6 +379,7 @@ export class NaturalLandscape {
       ...this.robins(cx, cy),
       ...this.deer(cx, cy),
       ...this.fauna(cx, cy),
+      ...this.predators(cx, cy),
       ...this.waterFauna(cx, cy),
     ];
     if (!pond) return actors;
@@ -559,6 +562,33 @@ export class NaturalLandscape {
         if (glade && Math.hypot(x - glade.x, y - glade.y) < 11) return true;
       }
     return false;
+  }
+  predators(cx: number, cy: number): ActorPlacement[] {
+    const gx = Math.floor(cx / 4),
+      gy = Math.floor(cy / 4);
+    const glade = this.deerGlade(gx, gy);
+    const h = (salt: number) => valueNoise(gx, gy, this.world.seed + salt);
+    if (!glade || h(8151) > 0.4) return [];
+    // Separate owner selection leaves the old fixed fauna roster and homes intact.
+    const species = ["tiger", "panther", "lion", "brown-bear"][Math.floor(h(8152) * 4)];
+    const p = PREDATOR_PROFILES.find((p) => p.species === species);
+    if (!p) return [];
+    const wx = (glade.x + 5) * 16,
+      wy = (glade.y + 4) * 16;
+    if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) return [];
+    const predator = required(createPredator(p.species, wx, wy).predator);
+    predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
+    predator.randomState = Math.floor(h(8153) * 4294967296) >>> 0;
+    return [
+      {
+        featureId: `wildlife:predator:${this.world.seed}:${glade.id}`,
+        type: predatorType(p.species),
+        wx,
+        wy,
+        route: [],
+        predator,
+      },
+    ];
   }
   private deer(cx: number, cy: number): ActorPlacement[] {
     const gx = Math.floor(cx / 4),

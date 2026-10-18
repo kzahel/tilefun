@@ -19,6 +19,7 @@ import { startleDeer } from "../wildlife/deerInteractions.js";
 import { startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
+import { startlePredator } from "../wildlife/predatorAI.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import { startleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -208,6 +209,8 @@ export function tickBallPhysics(
             other.velocity.vy = 0;
           }
           entityManager.spawn(createGem(other.position.wx, other.position.wy));
+        } else if (other.predator) {
+          startlePredator(other, ball.position);
         } else if (other.fauna) {
           startleFauna(other, ball.position);
         } else if (other.deer) {

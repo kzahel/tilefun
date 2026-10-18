@@ -8,6 +8,7 @@ import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FROG_IMAGE, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_IMAGE, MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
 import { RABBIT_IMAGE, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { ROBIN_IMAGE, ROBIN_TYPE } from "../wildlife/Robin.js";
 import { loadImage } from "./AssetLoader.js";
@@ -39,6 +40,12 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  ...PREDATOR_PROFILES.map((p) => ({
+    key: predatorType(p.species),
+    path: `demos/wildlife-v2/${p.species}/${p.revision}/sheet.png`,
+    w: 96,
+    h: 96,
+  })),
   ...FAUNA_PROFILES.map((p) => ({
     key: faunaType(p.species),
     path: p.image,

@@ -18,6 +18,7 @@ import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
+import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { ROBIN_TYPE } from "../wildlife/Robin.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
@@ -162,6 +163,20 @@ export default function NaturalLandscapePage() {
         sprinting: false,
       }),
       onFrame: (h) => {
+        c.dataset.predatorPoses = JSON.stringify(
+          h.session.view.entities
+            .filter((e) => PREDATOR_PROFILES.some((p) => predatorType(p.species) === e.type))
+            .map((e) => ({
+              id: e.id,
+              type: e.type,
+              x: e.position.wx,
+              y: e.position.wy,
+              z: e.wz ?? 0,
+              clip: e.sprite?.clip,
+              frame: e.sprite?.frameCol,
+              state: e.wanderAI?.state,
+            })),
+        );
         const ducks = h.session.view.entities.filter((e) => e.type === MALLARD_TYPE);
         c.dataset.wildlifeCount = String(ducks.length);
         c.dataset.wildlifePoses = JSON.stringify(

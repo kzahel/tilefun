@@ -97,7 +97,9 @@ import type { IServerTransport } from "../transport/Transport.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
+import type { WildlifeEnvironment } from "../wildlife/mallardAI.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
+import { resolvePredatorCatches, startlePredator } from "../wildlife/predatorAI.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import { startleRobin } from "../wildlife/robinInteractions.js";
 import { robinTreePerches } from "../wildlife/robinPerches.js";
@@ -945,53 +947,54 @@ export class Realm {
         this.propManager.simulationProps = this.streaming
           ? this.propActivity.select(this.propManager, this.streaming)
           : this.propManager.props;
+        const wildlifeEnvironment: WildlifeEnvironment = {
+          perches: (home, radius) =>
+            robinTreePerches(
+              this.propManager.getPropsInChunkRange(
+                Math.floor((home.wx - radius) / 256),
+                Math.floor((home.wy - radius) / 256),
+                Math.floor((home.wx + radius) / 256),
+                Math.floor((home.wy + radius) / 256),
+              ),
+            ),
+          surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
+          isWater: (p) =>
+            (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
+              CollisionFlag.Water) !==
+            0,
+          isDeepWater: (p) =>
+            this.world.getBlendBaseAt(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) ===
+            TerrainId.DeepWater,
+          canOccupy: (entity, p) => {
+            if (!entity.collider) return false;
+            const box = getEntityAABB(p, entity.collider);
+            if (
+              aabbOverlapsSolid(
+                box,
+                (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+                CollisionFlag.Solid,
+              )
+            )
+              return false;
+            return !this.propManager
+              .getPropsNearPosition(p, entity.collider)
+              .some((prop) =>
+                aabbOverlapsPropWalls(
+                  box,
+                  prop.position,
+                  prop,
+                  entity.wz ?? 0,
+                  entity.collider?.physicalHeight ?? 9,
+                ),
+              );
+          },
+        };
         tickAllAI(
           active,
           playerPositions,
           decisions,
           this.options.random ?? Math.random,
-          {
-            perches: (home, radius) =>
-              robinTreePerches(
-                this.propManager.getPropsInChunkRange(
-                  Math.floor((home.wx - radius) / 256),
-                  Math.floor((home.wy - radius) / 256),
-                  Math.floor((home.wx + radius) / 256),
-                  Math.floor((home.wy + radius) / 256),
-                ),
-              ),
-            surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
-            isWater: (p) =>
-              (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
-                CollisionFlag.Water) !==
-              0,
-            isDeepWater: (p) =>
-              this.world.getBlendBaseAt(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) ===
-              TerrainId.DeepWater,
-            canOccupy: (entity, p) => {
-              if (!entity.collider) return false;
-              const box = getEntityAABB(p, entity.collider);
-              if (
-                aabbOverlapsSolid(
-                  box,
-                  (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-                  CollisionFlag.Solid,
-                )
-              )
-                return false;
-              return !this.propManager
-                .getPropsNearPosition(p, entity.collider)
-                .some((prop) =>
-                  aabbOverlapsPropWalls(
-                    box,
-                    prop.position,
-                    prop,
-                    entity.wz ?? 0,
-                    entity.collider?.physicalHeight ?? 9,
-                  ),
-                );
-            },
-          },
+          wildlifeEnvironment,
           this.robinTurn++,
           this.aiPlanning,
         );
@@ -1013,6 +1016,8 @@ export class Realm {
           preSteppedEntityIds,
           (tx, ty) => this.world.getBlendBaseAt(tx, ty),
         );
+
+        resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
 
         this.traffic?.tick(
           stepDt,
@@ -2035,7 +2040,8 @@ export class Realm {
             return;
           }
         }
-        if (animal.fauna) startleFauna(animal, p.position);
+        if (animal.predator) startlePredator(animal, p.position);
+        else if (animal.fauna) startleFauna(animal, p.position);
         else if (animal.deer) startleDeer(animal, p.position);
         else if (animal.robin) startleRobin(animal, p.position);
         else if (animal.rabbit) startleRabbit(animal, p.position);

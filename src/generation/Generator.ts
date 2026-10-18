@@ -13,6 +13,7 @@ import { generateStructuresForChunk, type StructurePlacement } from "./Structure
 import type { TerrainStrategy } from "./TerrainStrategy.js";
 
 export interface ActorPlacement {
+  readonly predator?: import("../wildlife/Predator.js").PredatorBehavior;
   readonly fauna?: import("../wildlife/Fauna.js").FaunaBehavior;
   readonly deer?: import("../wildlife/Deer.js").DeerBehavior;
   readonly robin?: import("../wildlife/Robin.js").RobinBehavior;

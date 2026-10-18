@@ -1,0 +1,37 @@
+{
+  "identity": "predators-132-20261018",
+  "authorization": "Owner requested tiger hunting with nearby eaten-prey replacement, then panther/lion/brown-bear art, world spawning and equivalent hunting; commit and push stages.",
+  "motionContract": "body-motion-20261004",
+  "animals": [
+    {
+      "id": "tiger",
+      "revision": "pilot-v1",
+      "state": "runtime-ready",
+      "stage": "Stalk/chase/lunge/feed, one-for-one replacement, persistence and shared labs verified",
+      "gameplay": true
+    },
+    {
+      "id": "panther",
+      "revision": "hunt-v1",
+      "state": "queued",
+      "stage": "Own feline prototype",
+      "gameplay": false
+    },
+    {
+      "id": "lion",
+      "revision": "hunt-v1",
+      "state": "queued",
+      "stage": "Own mane/body prototype",
+      "gameplay": false
+    },
+    {
+      "id": "brown-bear",
+      "revision": "hunt-v1",
+      "state": "queued",
+      "stage": "Own bear anatomy/gait prototype",
+      "gameplay": false
+    }
+  ],
+  "reviewStatus": "pending",
+  "historicalCampaign": "stopped"
+}

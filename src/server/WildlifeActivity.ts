@@ -10,6 +10,7 @@ interface Observer {
 
 export function isWildlife(entity: Entity): boolean {
   return !!(
+    entity.predator ||
     entity.fauna ||
     entity.deer ||
     entity.robin ||

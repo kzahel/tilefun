@@ -42,6 +42,7 @@ export class AiPlanningScheduler {
     if (!clock) {
       const seed =
         (
+          entity.predator ??
           entity.fauna ??
           entity.deer ??
           entity.robin ??

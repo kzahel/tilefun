@@ -8,6 +8,7 @@ import { restoreDeerPose } from "../wildlife/deerInteractions.js";
 import { restoreFaunaPose } from "../wildlife/faunaInteractions.js";
 import { restoreFrogPose } from "../wildlife/frogInteractions.js";
 import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
+import { restorePredatorPose } from "../wildlife/predatorAI.js";
 import { restoreRabbitPose } from "../wildlife/rabbitInteractions.js";
 import { restoreRobinPose } from "../wildlife/robinInteractions.js";
 
@@ -35,6 +36,7 @@ export const DURABLE_ENTITY_FIELDS = [
   "robin",
   "deer",
   "fauna",
+  "predator",
   "routeAI",
   "deathTimer",
   "wz",
@@ -130,6 +132,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     restoreRobinPose(actor);
     restoreDeerPose(actor);
     restoreFaunaPose(actor);
+    restorePredatorPose(actor);
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;

@@ -5,6 +5,7 @@ import { updateDeerAI } from "../wildlife/deerAI.js";
 import { updateFaunaAI } from "../wildlife/faunaAI.js";
 import { updateFrogAI } from "../wildlife/frogAI.js";
 import { updateMallardAI, type WildlifeEnvironment } from "../wildlife/mallardAI.js";
+import { updatePredatorAI } from "../wildlife/predatorAI.js";
 import { robinWorkBudget } from "../wildlife/RobinWorkBudget.js";
 import { updateRabbitAI } from "../wildlife/rabbitAI.js";
 import { updateRobinAI } from "../wildlife/robinAI.js";
@@ -40,6 +41,7 @@ export function tickAllAI(
     for (const [entity, dt] of entries) {
       planning.advance(entity, dt, playerPositions);
       const ai =
+        entity.predator ??
         entity.fauna ??
         entity.deer ??
         entity.robin ??
@@ -70,6 +72,7 @@ export function tickAllAI(
       const priorities = new Map(
         entries.map(([entity]) => {
           const ai =
+            entity.predator ??
             entity.fauna ??
             entity.deer ??
             entity.robin ??
@@ -86,7 +89,9 @@ export function tickAllAI(
   }
   const robins: [Entity, number][] = [];
   for (const [entity, dt] of entries) {
-    if (entity.fauna && wildlife) {
+    if (entity.predator && wildlife) {
+      updatePredatorAI(entity, dt, wildlife, entities, playerPositions, planning);
+    } else if (entity.fauna && wildlife) {
       updateFaunaAI(entity, dt, wildlife, entities, playerPositions, planning);
     } else if (entity.deer && wildlife) {
       updateDeerAI(entity, dt, wildlife, entities, playerPositions, planning);

@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T12:37:32.436Z (18/10/2026, 14:37:32 Berlin).
+Snapshot: 2026-10-18T13:00:04.200Z (18/10/2026, 15:00:04 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -222,6 +222,17 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | Animal | State | Current stage | Inspection |
 | --- | --- | --- | --- |
 | Tiger | draft-ready | Exact Blender/pixel pilot delivered; human review pending | [Playback](../public/demos/wildlife-v2/tiger/pilot-v1/index.html) · [Observations](../public/demos/wildlife-v2/tiger/pilot-v1/review-observations.md) |
+
+## Authorized predator gameplay and art
+
+[Tactical 132](tactical/132-predator-hunting-and-replacement.md). Separate bounded authorization; historical holds remain active and human art review stays pending.
+
+| Predator | State | Stage | Gameplay |
+| --- | --- | --- | --- |
+| tiger | runtime-ready | Stalk/chase/lunge/feed, one-for-one replacement, persistence and shared labs verified | Provisional |
+| panther | queued | Own feline prototype | Pending |
+| lion | queued | Own mane/body prototype | Pending |
+| brown-bear | queued | Own bear anatomy/gait prototype | Pending |
 
 ## Whole roster
 

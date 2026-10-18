@@ -2,6 +2,7 @@ import type { DeerBehavior } from "../wildlife/Deer.js";
 import type { FaunaBehavior } from "../wildlife/Fauna.js";
 import type { FrogBehavior } from "../wildlife/Frog.js";
 import type { MallardBehavior } from "../wildlife/Mallard.js";
+import type { PredatorBehavior } from "../wildlife/Predator.js";
 import type { RabbitBehavior } from "../wildlife/Rabbit.js";
 import type { RobinBehavior } from "../wildlife/Robin.js";
 
@@ -122,6 +123,7 @@ export interface Entity {
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;
   robin?: RobinBehavior;
+  predator?: PredatorBehavior;
   deer?: DeerBehavior;
   fauna?: FaunaBehavior;
   routeAI?: {

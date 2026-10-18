@@ -4,6 +4,17 @@ Topic: wildlife
 Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay. The new tiger art pilot is delivered for pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
+## Authorized predators and eaten-prey replacement
+
+The owner now authorizes tiger hunting and nearby replacement of eaten prey,
+then panther, lion and brown bear with their own art, world spawning and shared
+hunting. [132](../tactical/132-predator-hunting-and-replacement.md) owns stages and
+validation; [the predator manifest](../../art-source/wildlife-v2/predator-batch.json)
+tracks the bounded batch. Replacement applies only to predator meals, one new
+same-species individual per eaten prey. Ordinary deletion stays durable. This
+supersedes the no-replacement rule only for this explicit event, and opens these
+four predators only; historical repair/campaign holds and art review remain.
+
 ## Proposed predator and prehistoric batch
 
 On 2026-10-18 the owner said “ok do tiger then,” authorizing the first natural
@@ -1269,3 +1280,11 @@ Retained three rejected revisions include the corrected0.008unit toe-floor gap.
 Native profile15/front16/rear17px; primary anatomy text available, direct image
 downloads blocked WinError10013. Full findings in its review-observations.md;
 ground-bird siblings stay gated. Ready22/blocked8/queued166, no human feedback.
+
+Predator 132 gameplay checkpoint: tiger now has provisional editor placement,
+rare deer-glade world ownership and the shared hunting/feeding behavior. A meal
+replaces one deer/rabbit with a new durable identity in its existing habitat;
+manual deletion remains permanent. Players, pets and farm animals are excluded.
+Existing tiger pixels remain pilot-v1; accelerated walk/lowered-head feeding and
+a grounded jaw-display lunge are provisional animation reuse. All art review
+remains pending. The other three authorized predators are the next stages.
