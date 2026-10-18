@@ -17,6 +17,7 @@ if (process.argv.includes("--check")) {
   const server = await createServer({
     configFile: false,
     base: "/tilefun/",
+    cacheDir: "node_modules/.vite-workshop-manifest",
     // Fixed capture has no HMR and must not scan ignored authoring HTML.
     server: { port: 0, host: "127.0.0.1", watch: null },
     optimizeDeps: { entries: ["workshop-manifest.html"] },

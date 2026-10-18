@@ -33,6 +33,15 @@ The worker install supplies the Cloudflare types needed by `npm run typecheck`;
 it is not needed simply to run the browser game/labs. No Cloudflare deployment
 is required for those local tools.
 
+The long-running development server uses `node_modules/.vite-dev` for optimized
+dependencies. Manifest rendering uses `.vite-workshop-manifest`; streaming runs
+use their temporary run directory. Keep standalone tooling caches separate from
+the live server: replacing a running server's optimized dependencies can make
+Workshop open as a blank page with HTTP 504 “Outdated Optimize Dep” errors.
+The 2026-10-18 fix was checked by fresh-loading the public city parking view
+before and after manifest raster verification and streaming readiness, with
+native meshes ready and no browser or failed-resource errors at each checkpoint.
+
 For validation:
 
 ```sh

@@ -159,6 +159,7 @@ try {
     server = await createServer({
       configFile: false,
       base: "/tilefun/",
+      cacheDir: path.join(temp, "vite-cache"),
       optimizeDeps: { entries: ["index.html"] },
       plugins: [
         react(),

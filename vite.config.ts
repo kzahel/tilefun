@@ -12,6 +12,8 @@ const useHttps = process.env.HTTPS === "1";
 
 export default defineConfig({
   base: "/tilefun/",
+  // Standalone capture/benchmark servers must not replace the live dev cache.
+  cacheDir: "node_modules/.vite-dev",
   define: {
     "import.meta.env.VITE_BUILD_ID": JSON.stringify(
       process.env.VITE_BUILD_ID ?? new Date().toISOString(),
