@@ -1,12 +1,13 @@
 import { expect, it } from "vitest";
 import { required } from "../../art/ArtCatalog.js";
 import { createProp, isPropType } from "../../entities/PropFactories.js";
-import { RoadType } from "../../road/RoadType.js";
+import { isCityRoad } from "../../road/DenseCitySurface.js";
+import { isParkingSurface } from "../../road/ParkingSurface.js";
 import { buildLaneGraph, generatedSegments } from "../../traffic/LaneGraph.js";
 import { shoppingLot } from "../../traffic/ShoppingCenter.js";
-import { shoppingScenery } from "../../traffic/ShoppingScenery.js";
 import { DenseDistrictSource, denseSurfaceAt } from "./DenseDistrictPlanner.js";
 import { settlementForOwner } from "./RegionalPlanner.js";
+import { shoppingScenery } from "./ShoppingScenery.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
 it("gives every current city one or two road-connected centers without extending grid streets into the lots", () => {
@@ -43,9 +44,9 @@ it("gives every current city one or two road-connected centers without extending
               for (let d = 0; d <= length; d += 8) {
                 const px = a.wx + ((b.wx - a.wx) * d) / length,
                   py = a.wy + ((b.wy - a.wy) * d) / length;
-                expect(denseSurfaceAt(plan, Math.floor(px / 16), Math.floor(py / 16))).toBe(
-                  RoadType.CityAsphalt,
-                );
+                expect(
+                  isCityRoad(denseSurfaceAt(plan, Math.floor(px / 16), Math.floor(py / 16))),
+                ).toBe(true);
               }
             }
           const entry = required(visit.arrival[0]);
@@ -61,8 +62,10 @@ it("gives every current city one or two road-connected centers without extending
             [...graph.lanes.values()].every((l) => l.path.points.every((p) => p.y >= c.roadY - 64)),
           ).toBe(true);
           expect(
-            denseSurfaceAt(plan, Math.floor((c.wx + 104) / 16), Math.floor((c.wy + 128) / 16)),
-          ).toBe(RoadType.None);
+            isParkingSurface(
+              denseSurfaceAt(plan, Math.floor((c.wx + 104) / 16), Math.floor((c.wy + 128) / 16)),
+            ),
+          ).toBe(true);
         }
         expect(source.owner(x, y)).toEqual(plan);
       }

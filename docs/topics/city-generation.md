@@ -109,9 +109,8 @@ car scale references. Three new exact candidates await review under
 `parking-patterns`. These are static compositions, separate from the old v7
 archive. [132](../tactical/132-parking-shopping-visits.md) adds a separate
 [playable shopping-trip view](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/parking-lab?play=1):
-four reserved paired bays, occupants walking into shops and back, and at most two
-cars maneuvering. Shared Realm authority owns routes, collision, crossing admission
-and saved phases. [133](../tactical/133-generated-shopping-centers.md) integrates one road-connected
+occupants walking into shops and back, with bounded car maneuvers. Shared Realm
+authority owns routes, collision, crossing admission and saved phases. [133](../tactical/133-generated-shopping-centers.md) integrates one road-connected
 center in every current city, or two in larger cities, along the northern boulevard.
 Centers extend the reserved area 60 tiles north of the street grid (184×228 or
 272×228 tiles overall). Native parked cars use durable traffic ownership; one existing compact road car
@@ -120,6 +119,14 @@ The [generated city preview](https://tilefun.graehlarts.com/tilefun/workshop.htm
 uses the real generator and offers a main-game new-world handoff. Inspect fresh
 generation; existing saved terrain is not migrated. Nature/farm reservations now
 protect the new center footprints without altering distant habitat reservations.
+
+[134](../tactical/134-parking-as-city-terrain.md) makes pavement, bay markings,
+crossings and islands ordinary saved road-grid cells (79–162), rendered through
+native terrain chunks. Production regional planning owns the layout; only buildings,
+trees, carts and pay stations are props. Both playable lab URLs now use this same
+city generator and native parked population. Three static pattern reviews keep
+identical pixels. Retired saved pavement prop IDs become inert; existing saved
+terrain is not rewritten, so inspect the new pavement in a fresh city/world.
 
 [Natural landscapes](natural-landscapes.md) now supplies the default regional
 composition, including patterned forests, scattered trees and ponds. The owner

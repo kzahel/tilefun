@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-18",
+  "environment": "macOS desktop, bundled full Playwright Chromium, native GPU vehicle meshes, five-second windows; not physical phone evidence",
+  "world": {
+    "seed": 2026,
+    "arrivalTiles": [254, 347]
+  },
+  "samples": [
+    {
+      "viewport": [1280, 900],
+      "cpuThrottle": 1,
+      "reports": [
+        {
+          "zoom": 0.5,
+          "mode": "stationary-mesh",
+          "fps": 60.14707057846458,
+          "frameP95": 16.700000000000728,
+          "renderP50": 0.7000000476837158,
+          "renderP95": 0.8000001907348633,
+          "drawCalls": 28.375415282392026,
+          "meshCalls": 80,
+          "meshBodies": 8,
+          "terrainRows": 0,
+          "uploads": 2,
+          "sceneItems": 368,
+          "entities": 62,
+          "props": 190,
+          "terrainPending": 0,
+          "position": {
+            "wx": 4064,
+            "wy": 5552
+          }
+        },
+        {
+          "zoom": 0.5,
+          "mode": "moving-mesh",
+          "fps": 60.10863487499003,
+          "frameP95": 16.700000000000728,
+          "renderP50": 0.7000000476837158,
+          "renderP95": 0.9000000953674316,
+          "drawCalls": 41.199335548172755,
+          "meshCalls": 66.97674418604652,
+          "meshBodies": 6.6976744186046515,
+          "terrainRows": 160,
+          "uploads": 7,
+          "sceneItems": 866,
+          "entities": 82,
+          "props": 235,
+          "terrainPending": 0,
+          "position": {
+            "wx": 3657.892123265625,
+            "wy": 5552
+          }
+        },
+        {
+          "zoom": 0.25,
+          "mode": "stationary-mesh",
+          "fps": 60.13145014683265,
+          "frameP95": 16.700000000004366,
+          "renderP50": 1.0999999046325684,
+          "renderP95": 1.2000000476837158,
+          "drawCalls": 146.22259136212625,
+          "meshCalls": 50,
+          "meshBodies": 5,
+          "terrainRows": 0,
+          "uploads": 2,
+          "sceneItems": 203,
+          "entities": 175,
+          "props": 508,
+          "terrainPending": 0,
+          "position": {
+            "wx": 2991.35888671875,
+            "wy": 5552
+          }
+        },
+        {
+          "zoom": 0.25,
+          "mode": "moving-mesh",
+          "fps": 60.08703637219333,
+          "frameP95": 16.799999999995634,
+          "renderP50": 1,
+          "renderP95": 1.2000000476837158,
+          "drawCalls": 154.6843853820598,
+          "meshCalls": 20.764119601328904,
+          "meshBodies": 2.0764119601328903,
+          "terrainRows": 256,
+          "uploads": 6,
+          "sceneItems": 260,
+          "entities": 174,
+          "props": 547,
+          "terrainPending": 0,
+          "position": {
+            "wx": 2638.2214646093753,
+            "wy": 5552
+          }
+        }
+      ],
+      "errors": []
+    },
+    {
+      "viewport": [390, 844],
+      "cpuThrottle": 4,
+      "reports": [
+        {
+          "zoom": 0.1,
+          "mode": "stationary-mesh",
+          "fps": 60.19638821613297,
+          "frameP95": 16.700000000000728,
+          "renderP50": 7.400000095367432,
+          "renderP95": 8.5,
+          "drawCalls": 229.58139534883722,
+          "meshCalls": 196,
+          "meshBodies": 20,
+          "terrainRows": 0,
+          "uploads": 0,
+          "sceneItems": 341,
+          "entities": 156,
+          "props": 499,
+          "terrainPending": 0,
+          "position": {
+            "wx": 4064,
+            "wy": 5552
+          }
+        },
+        {
+          "zoom": 0.1,
+          "mode": "moving-mesh",
+          "fps": 60.19036954029955,
+          "frameP95": 16.799999999999272,
+          "renderP50": 7.200000047683716,
+          "renderP95": 9.700000047683716,
+          "drawCalls": 243.5747508305648,
+          "meshCalls": 194.2059800664452,
+          "meshBodies": 19.82059800664452,
+          "terrainRows": 608,
+          "uploads": 30,
+          "sceneItems": 387,
+          "entities": 178,
+          "props": 525,
+          "terrainPending": 0,
+          "position": {
+            "wx": 3657.892123265625,
+            "wy": 5552
+          }
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "beforeControls": {
+    "reports": [
+      {
+        "zoom": 0.1,
+        "mode": "moving-mesh-cache",
+        "fps": 19.889810450106406,
+        "frameP95": 100.09999999999854,
+        "renderP50": 19,
+        "renderP95": 91.29999995231628,
+        "drawCalls": 260.69,
+        "meshCalls": 180,
+        "meshBodies": 18,
+        "cacheBuilds": 536,
+        "cacheBytes": 4057888,
+        "sceneItems": 396,
+        "parts": 4032,
+        "entities": 161,
+        "props": 522,
+        "terrainPending": 0,
+        "position": {
+          "wx": 3707.661981484376,
+          "wy": 5552
+        }
+      },
+      {
+        "zoom": 0.1,
+        "mode": "moving-mesh-bypass",
+        "fps": 44.0915348255905,
+        "frameP95": 33.400000000001455,
+        "renderP50": 14.300000190734863,
+        "renderP95": 16.90000009536743,
+        "drawCalls": 257.61990950226243,
+        "meshCalls": 180,
+        "meshBodies": 18,
+        "cacheBuilds": 0,
+        "cacheBytes": 0,
+        "sceneItems": 359,
+        "parts": 4994,
+        "entities": 154,
+        "props": 519,
+        "terrainPending": 0,
+        "position": {
+          "wx": 4071.4682181249996,
+          "wy": 5552
+        }
+      },
+      {
+        "zoom": 0.1,
+        "mode": "moving-sprites-cache",
+        "fps": 17.212680638416295,
+        "frameP95": 100.10000000000218,
+        "renderP50": 16.799999952316284,
+        "renderP95": 92.29999995231628,
+        "drawCalls": 260.2307692307692,
+        "meshCalls": 0,
+        "meshBodies": 0,
+        "cacheBuilds": 520,
+        "cacheBytes": 4080928,
+        "sceneItems": 396,
+        "parts": 4032,
+        "entities": 161,
+        "props": 522,
+        "terrainPending": 0,
+        "position": {
+          "wx": 3699.1269560156275,
+          "wy": 5552
+        }
+      },
+      {
+        "zoom": 0.1,
+        "mode": "moving-sprites-bypass",
+        "fps": 50.104800879285015,
+        "frameP95": 33.39999999999782,
+        "renderP50": 12.5,
+        "renderP95": 15.199999809265137,
+        "drawCalls": 259.21115537848607,
+        "meshCalls": 0,
+        "meshBodies": 0,
+        "cacheBuilds": 0,
+        "cacheBytes": 0,
+        "sceneItems": 359,
+        "parts": 4994,
+        "entities": 155,
+        "props": 519,
+        "terrainPending": 0,
+        "position": {
+          "wx": 4063.9999709374997,
+          "wy": 5552
+        }
+      }
+    ],
+    "errors": []
+  }
+}

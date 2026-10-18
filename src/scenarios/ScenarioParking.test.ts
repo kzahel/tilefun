@@ -3,7 +3,7 @@ import { required } from "../art/ArtCatalog.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import type { ParkingSystem } from "../traffic/ParkingSystem.js";
-import { parkingRecipe } from "./ParkingRecipe.js";
+import { parkingRecipe } from "./parkingTestFixture.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
 const range = { minCx: 0, maxCx: 4, minCy: 0, maxCy: 3 };

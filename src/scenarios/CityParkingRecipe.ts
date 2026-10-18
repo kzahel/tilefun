@@ -3,11 +3,10 @@ import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { SHOPPING_PARKED_BAYS } from "../traffic/ShoppingCenter.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
-/** Inspect the ordinary generated city with staged incoming and parked cars. */
+/** Inspect the ordinary generated city with one staged incoming road car. */
 export function cityParkingRecipe(): ScenarioRecipe {
   const strategy = new TrafficStrategy(regionalWorld(2026));
   const center = required(strategy.districts.owner(0, 0)?.shoppingCenters?.[0]);
@@ -28,12 +27,7 @@ export function cityParkingRecipe(): ScenarioRecipe {
     generation: createDescriptor("regional", 2026),
     player: createPlayer(center.wx + 608, center.wy + 192),
     props: [],
-    parkedVehicles: SHOPPING_PARKED_BAYS.map(([x, y], i) => ({
-      model: `compact-${1 + (i % 6)}`,
-      wx: center.wx + x,
-      wy: center.wy + y,
-      facing: i % 2 ? Direction.Down : Direction.Up,
-    })),
+    trafficPopulation: true,
     traffic: [
       {
         model: "compact-1",

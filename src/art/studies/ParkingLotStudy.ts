@@ -10,15 +10,19 @@ export type {
   ParkingCaseId,
   ParkingRect,
   ParkingStudy,
-} from "../../traffic/ParkingLayout.js";
-export { PARKING_CASES, PARKING_KIT, parkingStudy } from "../../traffic/ParkingLayout.js";
+} from "../../generation/regional/ParkingLayout.js";
+export {
+  PARKING_CASES,
+  PARKING_KIT,
+  parkingLayout as parkingStudy,
+} from "../../generation/regional/ParkingLayout.js";
 
 import {
   PARKING_CASES,
   type ParkingBay,
   type ParkingCaseId,
-  parkingStudy,
-} from "../../traffic/ParkingLayout.js";
+  parkingLayout,
+} from "../../generation/regional/ParkingLayout.js";
 
 export function drawParkingStudy(
   canvas: HTMLCanvasElement,
@@ -27,7 +31,7 @@ export function drawParkingStudy(
   cars = true,
   geometry = false,
 ) {
-  const plan = parkingStudy(id);
+  const plan = parkingLayout(id);
   canvas.width = plan.width;
   canvas.height = plan.height;
   const ctx = reviewContext2D(canvas);

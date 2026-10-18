@@ -1,4 +1,3 @@
-import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 import type { MeshInstance } from "./MeshPresentation.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
@@ -21,8 +20,6 @@ export interface SpriteItem {
   emergencyHeight?: number;
   emergencyForward?: number;
   emergencyHeading?: number;
-  /** Ordered static crops sharing this prop's depth; borrowed immutable data. */
-  parts?: readonly FacadePiece[] | undefined;
   kind: "sprite";
   sortKey: number;
   /** Interpolated world position (feet = bottom-center). */

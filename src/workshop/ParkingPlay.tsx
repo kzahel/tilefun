@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { cityParkingRecipe } from "../scenarios/CityParkingRecipe.js";
-import { parkingRecipe } from "../scenarios/ParkingRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import type { ScenarioResponse } from "../scenarios/ScenarioProtocol.js";
 import { ErrorMessage } from "./App.js";
@@ -10,8 +9,8 @@ export interface ParkingCanvas extends HTMLCanvasElement {
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 }
 
-export function ParkingPlay({ city = false }: { city?: boolean }) {
-  const recipe = useMemo(() => (city ? cityParkingRecipe() : parkingRecipe()), [city]);
+export function ParkingPlay() {
+  const recipe = useMemo(cityParkingRecipe, []);
   const canvas = useRef<ParkingCanvas>(null);
   const scene = useRef<ScenarioPresentationHost | null>(null);
   const keys = useRef(new Set<string>());
@@ -33,9 +32,7 @@ export function ParkingPlay({ city = false }: { city?: boolean }) {
       defaultRenderer: "gpu-mesh",
       width: 960,
       height: 720,
-      fixedCamera: city
-        ? { wx: recipe.player.position.wx + 32, wy: recipe.player.position.wy + 352 }
-        : { wx: 640, wy: 480 },
+      fixedCamera: { wx: recipe.player.position.wx + 32, wy: recipe.player.position.wy + 352 },
       settings: () => settings.current,
       input: () => ({
         dx: Number(keys.current.has("ArrowRight")) - Number(keys.current.has("ArrowLeft")),
@@ -97,7 +94,7 @@ export function ParkingPlay({ city = false }: { city?: boolean }) {
       keys.current.clear();
       window.removeEventListener("blur", clear);
     };
-  }, [restart, city, recipe]);
+  }, [restart, recipe]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -109,23 +106,16 @@ export function ParkingPlay({ city = false }: { city?: boolean }) {
   });
   return (
     <div className="parking-play">
-      <h2>{city ? "City road connection" : "Shopping trips"}</h2>
-      {city && (
-        <a
-          href={`/tilefun/?${new URLSearchParams({ generation: JSON.stringify(recipe.generation), arrival: JSON.stringify({ x: recipe.player.position.wx / 16, y: recipe.player.position.wy / 16, generation: recipe.generation }) })}`}
-        >
-          Play this city in a new world
-        </a>
-      )}
-      {city && (
-        <p>
-          This is a generated city shopping center. Follow the blue car from the boulevard, into its
-          space, and back to road traffic. One shopper visits at a time.
-        </p>
-      )}
+      <h2>City shopping trips</h2>
+      <a
+        href={`/tilefun/?${new URLSearchParams({ generation: JSON.stringify(recipe.generation), arrival: JSON.stringify({ x: recipe.player.position.wx / 16, y: recipe.player.position.wy / 16, generation: recipe.generation }) })}`}
+      >
+        Play this city in a new world
+      </a>
       <p>
-        Cars park, people walk to the shops, then return and drive home. Up to two cars maneuver at
-        once. The paired spaces near the shops are kept clear for forward exits.
+        This is a generated city shopping center, using the same city planner and terrain as the
+        main game. Follow the blue car from the boulevard, into its space, and back to road traffic.
+        One shopper visits at a time; cars wait if you block their route.
       </p>
       <div className="actions">
         <button type="button" onClick={() => setPaused(!paused)}>
@@ -170,7 +160,7 @@ export function ParkingPlay({ city = false }: { city?: boolean }) {
       </div>
       <p role="status">
         {status
-          ? `${status.maneuvers} / ${city ? 1 : 2} cars maneuvering · ${status.completed} completed shopping trips`
+          ? `${status.maneuvers} / 1 cars maneuvering · ${status.completed} completed shopping trips`
           : "Opening the shopping center…"}
       </p>
       <ErrorMessage error={error} />

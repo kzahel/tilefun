@@ -1,14 +1,14 @@
 import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
-import { parkingStudy } from "../traffic/ParkingLayout.js";
+import { parkingLayout } from "../generation/regional/ParkingLayout.js";
+import { shoppingScenery } from "../generation/regional/ShoppingScenery.js";
 import type { ParkingVisit } from "../traffic/ParkingSystem.js";
-import { shoppingScenery } from "../traffic/ShoppingScenery.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
 
-/** Live revision: four paired pull-through bays. Static v1 studies stay immutable. */
+/** Simulation-only test fixture; playable labs use cityParkingRecipe. */
 export function parkingRecipe(): ScenarioRecipe {
-  const plan = parkingStudy("shopping");
+  const plan = parkingLayout("shopping");
   const slots = [2, 5, 9, 12];
   const visits: ParkingVisit[] = slots.map((slot, i) => {
     const bay = required(plan.bays.find((b) => b.id === `shopping:0:${slot}`));
@@ -47,7 +47,7 @@ export function parkingRecipe(): ScenarioRecipe {
     };
   });
   const props = shoppingScenery.map((p) => structuredClone(p));
-  // Route pavement is ordinary saved road data; painted spaces remain native props.
+  // Plain test roads suffice for exercising the shared visit state machine.
   return {
     version: 1,
     id: "parking-visits-v1",

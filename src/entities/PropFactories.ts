@@ -4,6 +4,7 @@ import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import { COMMERCIAL_STREET_PROPS } from "../generation/regional/CommercialCityAssets.js";
+import { shoppingScenery, shoppingSceneryProp } from "../generation/regional/ShoppingScenery.js";
 import { STREET_PROP_RECIPES } from "../generation/regional/StreetRecipes.js";
 import {
   furnitureAsset,
@@ -14,7 +15,6 @@ import {
 import { treeRunLength, treeRunProp } from "../patterns/FencedTrees.js";
 import { forestRowDefinition, forestRowProp, forestRowWalls } from "../patterns/ForestThicket.js";
 import { bridgePart, roadRailBridgeProp } from "../railway/RoadRailBridge.js";
-import { shoppingScenery, shoppingSceneryProp } from "../traffic/ShoppingScenery.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {

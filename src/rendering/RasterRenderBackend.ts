@@ -16,7 +16,6 @@ import type {
   RenderView,
   TerrainPreparationOptions,
 } from "./RenderFrame.js";
-import { StaticSpriteCache } from "./StaticSpriteCache.js";
 import { type TerrainDrawOptions, TerrainFrame } from "./TerrainFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
 import { TileRenderer } from "./TileRenderer.js";
@@ -27,7 +26,6 @@ export class RasterRenderBackend implements RenderBackend {
   private readonly terrainFrame = new TerrainFrame();
   assets: SpriteCatalog;
   private disposed = false;
-  private readonly staticSprites = new StaticSpriteCache();
   private interior: CanvasInteriorResources | null = null;
 
   constructor(
@@ -140,7 +138,6 @@ export class RasterRenderBackend implements RenderBackend {
         this.drawOverlay(pass);
         break;
       case "clear":
-        this.staticSprites.beginFrame(camera);
         ctx.fillStyle = pass.color;
         ctx.fillRect(0, 0, view.viewportWidth, view.viewportHeight);
         break;
@@ -158,7 +155,6 @@ export class RasterRenderBackend implements RenderBackend {
           this.sheets,
           this.sheets.get("grass-blades"),
           this.terrain,
-          this.staticSprites,
         );
         break;
     }
@@ -187,7 +183,7 @@ export class RasterRenderBackend implements RenderBackend {
     this.terrain.releaseChunk(chunk);
   }
   getDiagnostics() {
-    return { ...this.terrain.getDiagnostics(), staticSprites: this.staticSprites.getDiagnostics() };
+    return this.terrain.getDiagnostics();
   }
 
   resize(width: number, height: number): void {
@@ -201,7 +197,6 @@ export class RasterRenderBackend implements RenderBackend {
   invalidateAssets(): void {
     this.assertLive();
     this.terrain.invalidateAssets();
-    this.staticSprites.clear();
     this.interior = null;
   }
 
@@ -226,7 +221,6 @@ export class RasterRenderBackend implements RenderBackend {
 
   clear(): void {
     this.terrain.clear();
-    this.staticSprites.clear();
     this.terrainFrame.clear();
     this.interior = null;
   }

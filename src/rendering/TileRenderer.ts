@@ -14,6 +14,7 @@ import {
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { commercialSurfacePieces, isCommercialSurface } from "../road/CommercialCitySurface.js";
 import { denseCitySurfacePieces, isCitySurface } from "../road/DenseCitySurface.js";
+import { isParkingSurface, parkingSurfacePieces } from "../road/ParkingSurface.js";
 import { computeRoadCardinalMask, getRoadSprite } from "../road/RoadAutotiler.js";
 import { getRoadSheetKey, isRoad, RoadType } from "../road/RoadType.js";
 import type { Chunk } from "../world/Chunk.js";
@@ -583,17 +584,23 @@ export class TileRenderer implements TerrainPresentation {
               dy,
               1,
             );
-        } else if (isCommercialSurface(road) || (isCitySurface(road) && getGlobalRoad)) {
+        } else if (
+          isParkingSurface(road) ||
+          isCommercialSurface(road) ||
+          (isCitySurface(road) && getGlobalRoad)
+        ) {
           const sheet = sheets.get("me-complete");
           if (sheet)
             drawCitySurfacePieces(
               offCtx,
               sheet,
-              isCommercialSurface(road)
-                ? commercialSurfacePieces(road, baseTx + lx, baseTy + ly)
-                : getGlobalRoad
-                  ? denseCitySurfacePieces(road, baseTx + lx, baseTy + ly, getGlobalRoad)
-                  : [],
+              isParkingSurface(road)
+                ? parkingSurfacePieces(road, baseTx + lx, baseTy + ly)
+                : isCommercialSurface(road)
+                  ? commercialSurfacePieces(road, baseTx + lx, baseTy + ly)
+                  : getGlobalRoad
+                    ? denseCitySurfacePieces(road, baseTx + lx, baseTy + ly, getGlobalRoad)
+                    : [],
               baseTx * TILE_SIZE,
               baseTy * TILE_SIZE,
             );

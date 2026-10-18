@@ -22473,7 +22473,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:320"
+          "source": "src/rendering/RendererLab.ts:319"
         }
       ]
     },
@@ -22491,7 +22491,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:321"
+          "source": "src/rendering/RendererLab.ts:320"
         }
       ]
     },
@@ -23357,19 +23357,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:206"
+          "source": "src/rendering/RendererLab.ts:205"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:274"
+          "source": "src/rendering/RendererLab.ts:273"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:278"
+          "source": "src/rendering/RendererLab.ts:277"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:282"
+          "source": "src/rendering/RendererLab.ts:281"
         }
       ]
     },
@@ -25289,7 +25289,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:194"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:195"
         }
       ]
     },
@@ -26331,15 +26331,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RasterRenderBackend.ts:159"
+          "source": "src/rendering/RasterRenderBackend.ts:156"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:211"
+          "source": "src/rendering/RendererLab.ts:210"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:215"
+          "source": "src/rendering/RendererLab.ts:214"
         },
         {
           "system": "Gameplay",

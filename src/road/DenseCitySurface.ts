@@ -1,4 +1,5 @@
 import { citySurfaceTileAt, type SurfacePiece } from "./CitySurfaceRecipes.js";
+import { isParkingRoad, isParkingSurface } from "./ParkingSurface.js";
 import { isRoad, RoadType } from "./RoadType.js";
 
 /** These persistent roadGrid values belong to the immutable city-surfaces-v1
@@ -8,6 +9,7 @@ export function isCitySurface(type: number): boolean {
   return type >= RoadType.CityAsphalt && type <= RoadType.CityCrossVBottom;
 }
 export function isCityRoad(type: number): boolean {
+  if (isParkingSurface(type)) return isParkingRoad(type);
   return isRoad(type) && type !== RoadType.Sidewalk && type !== RoadType.CityPavement;
 }
 export function denseCitySurfacePieces(

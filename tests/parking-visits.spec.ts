@@ -1,15 +1,54 @@
+import type { Locator } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 import type { ScenarioResponse } from "../src/scenarios/ScenarioProtocol.js";
 
 test.use({ channel: "chromium" });
+// Ordinary road cars resume their animation on the next authority tick after load.
+// Saved pose checks cover their durable position/heading, while pause checks retain
+// the exact live animation payload and headless tests retain all shopper phases.
+function savedPoses(value: string | null) {
+  return (
+    JSON.parse(value ?? "[]") as { type: string; position: unknown; direction: number }[]
+  ).map(({ type, position, direction }) => ({ type, position, direction }));
+}
+async function settledParking(canvas: Locator) {
+  await expect
+    .poll(
+      () =>
+        canvas.evaluate(
+          (c) =>
+            (
+              c as import("../src/workshop/ParkingPlay.js").ParkingCanvas
+            ).__presentationDiagnostics?.().terrain?.pending,
+        ),
+      { timeout: 45000 },
+    )
+    .toBe(0);
+}
+async function nativeParkedPopulation(canvas: Locator) {
+  await expect
+    .poll(
+      async () => {
+        const poses = JSON.parse((await canvas.getAttribute("data-poses")) ?? "[]") as {
+          type: string;
+        }[];
+        return poses.filter((p) => p.type.startsWith("vehicle-v1:compact-")).length;
+      },
+      { timeout: 15000 },
+    )
+    .toBeGreaterThanOrEqual(19);
+}
 for (const renderer of ["canvas", "gpu"] as const) {
-  test(`shopping visits, paused reload and phone controls (${renderer})`, async ({ page }) => {
+  test(`generated city shopping visits, paused reload and phone controls (${renderer})`, async ({
+    page,
+  }) => {
     test.setTimeout(180000);
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(`/tilefun/workshop.html?renderer=${renderer}#/tool/parking-lab?play=1`);
     const canvas = page.getByLabel("Playable shopping center");
     await expect(canvas).toHaveAttribute("data-ready", "true", { timeout: 30000 });
+    await nativeParkedPopulation(canvas);
     const status = async () =>
       JSON.parse((await canvas.getAttribute("data-parking")) ?? "null") as NonNullable<
         ScenarioResponse["parking"]
@@ -20,7 +59,7 @@ for (const renderer of ["canvas", "gpu"] as const) {
         async () => {
           const p = await status();
           if (!p) return false;
-          expect(p.maneuvers).toBeLessThanOrEqual(2);
+          expect(p.maneuvers).toBeLessThanOrEqual(1);
           for (const v of p.visits) observed.add(v.phase);
           return p.visits.some((v) => v.phase === "walking-to-shop");
         },
@@ -36,7 +75,10 @@ for (const renderer of ["canvas", "gpu"] as const) {
     expect(await canvas.getAttribute("data-poses")).toBe(before);
     await page.getByRole("button", { name: "Save / reload trips", exact: true }).click();
     await expect(canvas).toHaveAttribute("data-reload-count", "1");
-    await expect.poll(() => canvas.getAttribute("data-poses")).toBe(before);
+    await expect
+      .poll(async () => savedPoses(await canvas.getAttribute("data-poses")))
+      .toEqual(savedPoses(before));
+    await settledParking(canvas);
     await canvas.screenshot({ path: `/tmp/tilefun-parking-visits-${renderer}.png` });
     await page.getByRole("button", { name: "Resume trips", exact: true }).click();
     await expect
@@ -44,7 +86,7 @@ for (const renderer of ["canvas", "gpu"] as const) {
         async () => {
           const p = await status();
           if (!p) return 0;
-          expect(p.maneuvers).toBeLessThanOrEqual(2);
+          expect(p.maneuvers).toBeLessThanOrEqual(1);
           for (const v of p.visits) observed.add(v.phase);
           return p.completed;
         },
@@ -117,7 +159,11 @@ test("generated city uses 3D cars by default and keeps one road visitor through 
   const before = await canvas.getAttribute("data-poses");
   await page.getByRole("button", { name: "Save / reload trips", exact: true }).click();
   await expect(canvas).toHaveAttribute("data-reload-count", "1");
-  await expect.poll(() => canvas.getAttribute("data-poses")).toBe(before);
+  await expect
+    .poll(async () => savedPoses(await canvas.getAttribute("data-poses")))
+    .toEqual(savedPoses(before));
+  await nativeParkedPopulation(canvas);
+  await settledParking(canvas);
   await canvas.screenshot({ path: "/tmp/tilefun-city-shopping-3d.png" });
   await page.getByRole("button", { name: "Resume trips", exact: true }).click();
   await expect
@@ -167,5 +213,24 @@ test("main-game handoff realizes shopping centers and native parked cars", async
       }),
     )
     .toBeGreaterThan(3);
+  const ground = await page.evaluate(() => {
+    const game = (
+      document.querySelector("#game") as unknown as {
+        __game: import("../src/client/GameClient.js").GameClient;
+      }
+    ).__game;
+    const props = game.stateView.props.filter((p) => p.type.startsWith("prop-shopping-v1-"));
+    let parkingCells = 0;
+    for (const [, chunk] of game.stateView.world.chunks.entries())
+      parkingCells += chunk.roadGrid.filter((id) => id >= 79 && id < 163).length;
+    return {
+      parkingCells,
+      compoundGround: props.some((p) => !!p.sprite.parts),
+      cache: "staticSprites" in game.renderer.getDiagnostics(),
+    };
+  });
+  expect(ground.parkingCells).toBeGreaterThan(0);
+  expect(ground.compoundGround).toBe(false);
+  expect(ground.cache).toBe(false);
   await page.screenshot({ path: "/tmp/tilefun-main-game-shopping.png" });
 });

@@ -79,19 +79,16 @@ export default function ParkingPage() {
         <button type="button" aria-pressed={!live} onClick={() => setParams({ case: c.id })}>
           Layout patterns
         </button>
-        <button type="button" aria-pressed={live} onClick={() => setParams({ play: "1" })}>
-          Watch shopping trips
-        </button>
         <button
           type="button"
-          aria-pressed={live && params.get("city") === "1"}
+          aria-pressed={live}
           onClick={() => setParams({ play: "1", city: "1" })}
         >
-          City road connection
+          City shopping trips
         </button>
       </div>
       {live ? (
-        <ParkingPlay city={params.get("city") === "1"} />
+        <ParkingPlay />
       ) : (
         <>
           <fieldset className="parking-options" aria-label="Parking layouts">
@@ -149,7 +146,8 @@ export default function ParkingPage() {
             <canvas ref={canvas} aria-label={`${c.name} parking layout`} />
           </PreviewViewport>
           <p className="parking-caption">
-            The cars show how the spaces fit. Watch shopping trips to try the live parking cycle.
+            The cars show how the spaces fit. City shopping trips uses the normal generated city and
+            road traffic.
           </p>
           <div className="parking-kit">
             <h2>Parking tile kit</h2>

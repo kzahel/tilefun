@@ -22,6 +22,8 @@ export enum RoadType {
   RailHorizontalBottom = 77,
   /** Editable curved rail reservation; alignment supplies procedural pixel tracks. */
   RailCurveProof = 78,
+  /** Native parking ground cells, composed into the ordinary chunk terrain. */
+  ParkingStart = 79,
 }
 
 /** True if the road type is any non-None road (draws asphalt base). */

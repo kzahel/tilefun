@@ -169,12 +169,12 @@ camera intent only. Static v1 parking-pattern review snapshots remain separate.
 [133](../tactical/133-generated-shopping-centers.md) subsequently activates
 regional placement and ordinary road-traffic visits through these shared owners.
 
-The phone slowdown follow-up retains large static crop groups through the shared
-collector and RasterRenderBackend on Canvas/GPU. The game and ScenarioPresentationHost
-share stationary-view caching, moving-view fallback, source/edit invalidation and
-bounded teardown. The lab exposes host diagnostics for timing and cache inspection;
-its camera intent and native Worker trips are unchanged. See 132 for measured
-results and the limit of desktop CPU throttling as phone evidence.
+[134](../tactical/134-parking-as-city-terrain.md) replaces the authored playable
+parking fixture with `CityParkingRecipe` on both legacy play URLs. Production city
+planning, saved road cells, normal terrain chunks and TrafficSystem parked-car
+population serve the game and lab. Only one incoming road visitor is staged for
+inspection. The special static-sprite cache and its probe are removed from both
+consumers; normal host diagnostics remain. Static pattern reviews stay separate.
 
 ## Required architecture
 

@@ -169,7 +169,7 @@ export class ScenarioSession {
     });
     await this.realm.loadWorld(meta.id, registry, () => this.store);
     if ((this.recipe.trafficLanes || this.recipe.traffic) && this.realm.traffic) {
-      this.realm.traffic.canSpawn = () => false;
+      if (!this.recipe.trafficPopulation) this.realm.traffic.canSpawn = () => false;
       this.realm.traffic.settings.speed = this.recipe.trafficSpeed ?? 36;
     }
     this.player = new PlayerSession("scenario-player");

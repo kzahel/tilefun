@@ -1,9 +1,9 @@
-import { CITY_COMMERCIAL_ENVELOPE } from "../generation/regional/CityBuildingPrefabs.js";
 import {
   citySurfaceTileAt,
   type SurfacePiece,
   type SurfaceRect,
-} from "../road/CitySurfaceRecipes.js";
+} from "../../road/CitySurfaceRecipes.js";
+import { CITY_COMMERCIAL_ENVELOPE } from "./CityBuildingPrefabs.js";
 
 /** New, unpromoted compositions. Never rewrite the archived v7 parking scenes. */
 export const PARKING_CASES = [
@@ -54,7 +54,7 @@ export const PARKING_KIT = [
 const inside = (r: ParkingRect, x: number, y: number) =>
   x >= r.x && y >= r.y && x < r.x + r.width && y < r.y + r.height;
 
-export function parkingStudy(id: ParkingCaseId): ParkingStudy {
+export function parkingLayout(id: ParkingCaseId): ParkingStudy {
   const shopping = id === "shopping",
     parallel = id === "parallel";
   const width = shopping ? 1280 : 768,
@@ -160,4 +160,15 @@ export function parkingStudy(id: ParkingCaseId): ParkingStudy {
   add("Shopping carts", [1280, 608, 64, 80], shopping ? 1056 : 608, 96, "pavement");
   add("Parking pay station", [816, 224, 16, 32], 80, 176, "pavement");
   return { id, width, height, bays, drives, walks, pieces };
+}
+
+/** Objects stay in ordinary prop depth/collision; all other pieces are ground. */
+export function isParkingObject(label: string): boolean {
+  return [
+    "Commercial roof",
+    "Shopfront",
+    "Island tree",
+    "Shopping carts",
+    "Parking pay station",
+  ].includes(label);
 }

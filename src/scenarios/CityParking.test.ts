@@ -38,6 +38,7 @@ it("drives a native road car into a generated center and back, preserving identi
         const state = required(trip.states[0]);
         if (!phases.has(state.phase)) {
           phases.add(state.phase);
+          expect([...traffic.states.values()].filter((s) => s.placed)).toHaveLength(18);
           const saved = trip.snapshot();
           const pose = structuredClone(car.entity.position);
           await session.reload();

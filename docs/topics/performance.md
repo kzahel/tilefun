@@ -96,22 +96,21 @@ Both failures reproduce serially without competing browser tests.
 
 ## Parking lot rendering (2026-10-18)
 
-The shopping-trip lab originally expanded roughly 5,000 pavement/paint crops into
-separate scene items and Canvas image/state operations every frame. A 4× CPU-throttled
-bundled Chromium profile at a 390×844 CSS viewport measured only 35 callbacks in
-five seconds; Canvas restore dominated the main-thread profile. Static compound
-props now stay grouped through the shared collector, with backend-owned stationary
-screen composites on Canvas/GPU. Actor motion remains live in the normal Worker.
-[Rendering architecture](rendering-architecture.md#static-compound-sprites) owns
-cache contracts; [132](../tactical/132-parking-shopping-visits.md) owns timings and
-pixel/lifecycle evidence. Functional phone-width tests alone did not reveal this
-cost and are not a substitute for frame-cadence measurement.
+[134](../tactical/134-parking-as-city-terrain.md) removes the camera-dependent
+`StaticSpriteCache` introduced in 132. Parking pavement and paint now use saved
+road-grid cells and ordinary native terrain chunks, selected by city planning.
+Only buildings/trees/carts/pay stations remain props. The playable lab uses the
+same generated city as the main game. Warm pan/zoom/resize must not rebuild ground.
+[Rendering architecture](rendering-architecture.md#parking-ground-and-ordinary-terrain)
+owns this contract.
 
-[133](../tactical/133-generated-shopping-centers.md) records warmed default-3D
-samples after native parked cars and generated centers were integrated. Both
-phone-sized desktop scenes reach roughly 60 FPS under 4× CPU throttling; this
-does not establish physical phone FPS. Streaming readiness and the complete
-shopping-trip browser rerun pass.
+The earlier stationary-view results in [132](../tactical/132-parking-shopping-visits.md)
+and [133](../tactical/133-generated-shopping-centers.md) did not establish moving,
+zoomed-out performance. Follow-up 4× CPU-throttled desktop control samples measured
+roughly 20 FPS with repeated screen composites versus 44 FPS with that cache bypassed.
+These samples identify avoidable rendering work, not physical phone performance
+or a reproduction of the owner's exact desktop configuration. Tactical 134 records
+the replacement measurements and their limits.
 
 ## Evidence and validation
 

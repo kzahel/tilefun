@@ -1,7 +1,6 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import { createProp } from "../../entities/PropFactories.js";
-import { shoppingScenery } from "../../traffic/ShoppingScenery.js";
 import { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import type { ActorPlacement } from "../Generator.js";
@@ -16,6 +15,7 @@ import { DistrictStrategy, type FeaturePlacement } from "./DistrictStrategy.js";
 import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
 import { settlementGreenProps } from "./SettlementPets.js";
+import { shoppingScenery } from "./ShoppingScenery.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
 /** Shared dense realization using promoted facades, streets and walking routes.

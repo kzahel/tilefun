@@ -1,4 +1,5 @@
 import { TILE_SIZE } from "../../config/constants.js";
+import { parkingSurfaceAt } from "../../road/ParkingSurface.js";
 import { RoadType } from "../../road/RoadType.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
@@ -340,6 +341,7 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
   for (const c of plan.shoppingCenters ?? []) {
     const px = x * 16 - c.wx,
       py = y * 16 - c.wy;
+    if (px >= 0 && px < 1280 && py >= 0 && py < 960) return parkingSurfaceAt(px / 16, py / 16);
     if (px >= 16 && px < 1264 && py >= 208 && py < 944) return RoadType.CityAsphalt;
     if (((px >= 64 && px < 144) || (px >= 1120 && px < 1216)) && py >= 208 && py < 1024)
       return RoadType.CityAsphalt;

@@ -111,9 +111,10 @@ vehicle prompt and scenario controls. No art bank or geometry approval changed.
 [132](../tactical/132-parking-shopping-visits.md) adds bounded shopping visits
 through the shared Realm ParkingSystem: reserved bays, up to two car maneuvers,
 shoppers walking to storefronts and returning before departure, native collision
-and saved trip phases. The Parking lot lab hosts the authored fixture. Ordinary
-generated traffic diversion, general parking allocation and player passenger
-seats remain later work. [Trains](trains.md) owns whole-service track control.
+and saved trip phases. Generated cities and the playable lab now share normal city
+planning and road traffic diversion, with one visitor per center. [134](../tactical/134-parking-as-city-terrain.md)
+unifies the lab and terrain rendering. General parking allocation and player
+passenger seats remain later work. [Trains](trains.md) owns whole-service track control.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
 is the review entry point, linked from the sidebar, All tools and the global
@@ -128,8 +129,8 @@ owns implementation sequencing and acceptance.
 Gentle autonomous traffic uses procedurally generated roads only: mostly city
 circulation, with occasional intercity trips. Cars keep spacing, yield at
 intersections and stop for players/animals without collision damage. Painted
-roads and ordinary passenger seats are deferred. Authored NPC parking/shop visits
-are now available in the Parking lot lab; generated-town integration is pending.
+roads and ordinary passenger seats are deferred. NPC shopping visits are available
+in generated city centers and the Parking lot lab, using existing road cars.
 Player driving in 087 can leave generated roads for clear dry ground.
 
 A player can stand in front of a car to stop it, jump onto its roof, and ride

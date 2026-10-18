@@ -14,6 +14,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | --- | --- |
 | [132 Predator hunting and replacement](132-predator-hunting-and-replacement.md) | In progress: tiger hunting and nearby prey replacement, then panther/lion/bear art, shared behavior and world spawning |
 | [131 Predators and prehistoric creatures](131-predators-and-prehistoric-creatures.md) | Tiger Blender/pixel pilot delivered for pending review; panther/lion/bear and optional T. rex remain proposed |
+| [134 Parking as city terrain](134-parking-as-city-terrain.md) | Ordinary saved road cells and native terrain chunks; special sprite cache removed; playable lab uses production city planning |
 | [133 Generated shopping centers](133-generated-shopping-centers.md) | One/two connected centers per city, native parked cars, road visitors and durable shoppers; [city generation](../topics/city-generation.md) |
 | [132 Parking and shopping visits](132-parking-shopping-visits.md) | Shared Realm shopping cycle, native collision, saved visits and two-car maneuver cap; [vehicles](../topics/vehicles.md) |
 | [131 Parking lot patterns](131-parking-lot-patterns.md) | Three static source-backed parking studies; exact reviews and shared traffic follow-up; [city generation](../topics/city-generation.md) |

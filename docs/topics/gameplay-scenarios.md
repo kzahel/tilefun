@@ -22,13 +22,13 @@ Authored road rectangles are tile-aligned, bounded and seeded once; reload uses
 stored chunks. Vehicles may supply an initial height, restored from traffic records. `scenarioWalls` composes normal
 wall props. Recipes contain no update callbacks and need no DOM or image loading.
 
-- `ParkingRecipe`: 64-space shopping scenery and four authored shopping visits,
-  with shared Realm parking/aisle reservations, native cars and pedestrian
-  collision, independent trip persistence and a maximum of two car maneuvers.
-  [132](../tactical/132-parking-shopping-visits.md) owns scope and evidence.
-- `CityParkingRecipe`: real generated city shopping center with one staged incoming
-  road car; normal TrafficSystem admission, shared ParkingSystem and durable return
-  to road traffic. The UI offers a normal new-world handoff.
+- `CityParkingRecipe`: the sole playable parking fixture, using the real generated
+  city, normal terrain chunks and TrafficSystem parked population, with one staged
+  incoming road car. `trafficPopulation: true` retains the ordinary generated
+  traffic/parked population alongside that staged car. Normal admission, shared ParkingSystem and saved return to
+  road traffic also serve the main-game handoff. The former authored parking recipe
+  survives only as a headless simulation test fixture. See
+  [134](../tactical/134-parking-as-city-terrain.md).
 - `TrafficRecipe`: current regional lanes, a compact car and bus, braking/roof commands.
 - `FurnitureRecipe`: compiled furniture placements, reviewed body proposals and room edges.
 - `CharacterRecipe`: candidate settings, passage/step/clearance obstacles and scale reference.

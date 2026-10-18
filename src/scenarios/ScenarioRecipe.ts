@@ -29,6 +29,8 @@ export interface ScenarioRecipe {
   parking?: import("../traffic/ParkingSystem.js").ParkingLot;
   trafficLanes?: Lane[];
   trafficSpeed?: number;
+  /** Keep normal generated traffic/parked population alongside staged road cars. */
+  trafficPopulation?: boolean;
   roads?: { left: number; right: number; top: number; bottom: number }[];
   traffic?: {
     z?: number;

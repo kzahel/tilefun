@@ -151,27 +151,20 @@ images. Additive sprite arrival refreshes metadata without rebuilding unchanged
 terrain; replacing an existing source uses full invalidation. In-place image
 changes require explicit invalidation.
 
-## Static compound sprites
+## Parking ground and ordinary terrain
 
-Large multipart props can retain their ordered crops as one `SpriteItem` through
-shared game/lab submission. `RasterRenderBackend` owns `StaticSpriteCache` for both
-Canvas and GPU. Stationary snapped views rasterize the original absolute screen
-rectangles into a bounded scratch surface, then retain a cropped image. Preserving
-those absolute coordinates avoids Canvas nearest-neighbor texel-tie differences at
-fractional zooms; rescaling a native composite or rasterizing at a local origin
-failed the textured comparison. Moving/unsnapped views use original piece draws
-until the projected view settles. Planar slab scenes retain per-piece collection
-for their separate ordering constraints; frameless art references retain expansion.
+Parking pavement, bay paint, crossings, curbs and islands are saved 16px road-grid
+cells (IDs 79–162), selected by the regional district planner. `TileRenderer`
+composes their source layers into the ordinary native terrain chunk once; Canvas
+and GPU reuse that chunk while panning, zooming and resizing. Content edits,
+source replacement and normal chunk lifecycle own invalidation. Buildings, trees,
+carts and pay stations remain ordinary object props; cars and shoppers remain live.
 
-The cache keys immutable crop-array identity, placement/height, projected view and
-source-sheet identity. Shared recipe arrays at different placements have independent
-entries. Sprite edits replace the array; source replacement, recovery and teardown
-clear resources. Retention is capped at 128 entries and 16 MiB including scratch;
-unused entries expire after 120 frames. Resize/zoom changes qualify the new view
-before reuse. GPU texture residency keeps its existing independent bounded owner.
-[132](../tactical/132-parking-shopping-visits.md) records the parking slowdown and
-shared pixel/lifecycle/performance evidence. No simulation or art-bank change is
-part of this cache.
+There is no camera-dependent static-sprite composite cache. Multipart object props
+use normal per-piece scene collection. [134](../tactical/134-parking-as-city-terrain.md)
+replaces the cache introduced in 132 and records regression/performance evidence.
+The playable parking lab uses production city planning and the same terrain path.
+Static art reference views retain their independent exact review pixels.
 
 ## Invalidation and lifecycle
 
