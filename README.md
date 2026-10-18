@@ -46,6 +46,7 @@ to Canvas. This does not enable the separate 3D collision view or spatial VR.
 
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it
 - **Collaborative editing** — See other players' editor cursors in real time, paint terrain together
+- **Find your co-op players** — Small pointers and names mark nearby players; subtle screen-edge arrows point toward players outside your view in the same realm, in Play and Edit
 - **Configurable physics** — QuakeWorld-style friction and acceleration system. Tune CVars per-surface for ice skating, bouncy floors, or set friction/accel to 100 for traditional RPG movement. Mario-style stomp and bunny hopping built in
 - **2.5D height system** — 3D AABB collisions, walkable surfaces, cliff-edge falling, stair-step props, and a debug 3D renderer for visualizing collision volumes
 - **Client-side prediction** — Input replay reconciliation for responsive movement even over high-latency connections, including mount prediction

@@ -59,7 +59,15 @@ it("runs production outdoor/editor/indoor presentation on another backend withou
     editorModel: new EditorModel(),
     transport: {},
     console: { cvars: { get: () => undefined } },
-    stateView: { world, entities, props, remoteCursors: [], interior: null },
+    stateView: {
+      world,
+      entities,
+      props,
+      playerEntity: entities[0],
+      playerNames: {},
+      remoteCursors: [],
+      interior: null,
+    },
   } as unknown as GameContext;
   Object.defineProperty(gc, "ctx", {
     get() {

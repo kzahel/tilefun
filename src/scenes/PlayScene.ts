@@ -22,6 +22,7 @@ import {
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
 import type { IClientTransport } from "../transport/Transport.js";
+import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { ROBIN_TYPE } from "../wildlife/Robin.js";
@@ -601,6 +602,7 @@ export class PlayScene implements GameScene {
       renderWorld(gc);
       const particleItems = this.particles.collectItems();
       renderEntities(gc, alpha, particleItems);
+      drawPlayerMarkers(gc, alpha);
       drawGemHUD(gc);
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc);

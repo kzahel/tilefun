@@ -1,5 +1,6 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { collectEditorOverlay, collectRemoteCursors } from "../editor/collectEditorOverlay.js";
+import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -309,6 +310,7 @@ export class EditScene implements GameScene {
     }
 
     if (!gc.stateView.interior) renderEntities(gc, alpha);
+    drawPlayerMarkers(gc, alpha);
     renderDebugOverlay(gc);
     render3DDebug(gc);
     gc.camera.restoreActual();

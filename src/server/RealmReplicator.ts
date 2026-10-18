@@ -160,6 +160,11 @@ export class RealmReplicator {
       range.maxCx + buf,
       range.maxCy + buf,
     );
+    // Co-op location markers need live players even outside viewport interest.
+    // Sessions are realm-local, so players in other realms remain private.
+    for (const other of source.sessions.values()) {
+      if (!nearbyEntities.includes(other.player)) nearbyEntities.push(other.player);
+    }
     // Ensure the player entity is always included
     if (!nearbyEntities.includes(session.player)) {
       nearbyEntities.push(session.player);

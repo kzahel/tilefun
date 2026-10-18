@@ -25097,6 +25097,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/ui/PlayerMarkers.ts:34"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/ui/PlayerModelPicker.ts:50"
         },
         {
@@ -25853,7 +25857,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:818"
+          "source": "src/scenes/PlayScene.ts:820"
         },
         {
           "system": "Gameplay",

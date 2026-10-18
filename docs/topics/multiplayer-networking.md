@@ -3,7 +3,7 @@
 Topic: multiplayer-networking
 Status: dependent entity frames and world transitions use reliable ordered sync.
 The bounded correctness fix is complete; broader network investigation is deferred.
-Updated: 2026-10-03; checked against the current implementation.
+Updated: 2026-10-18.
 
 Owns ongoing transport/replication decisions and gaps. The
 [architecture guide](../client-server-architecture.md) owns runtime boundaries;
@@ -39,6 +39,16 @@ proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 - Worker replication is bounded/backpressured. The client applies frame deltas
   sequentially; it cannot discard an intermediate delta as if each frame were a
   complete snapshot. Realm transfers clear replication baselines.
+- Co-op players remain replicated throughout their current realm, even outside
+  viewport interest; other distant actors and terrain retain their ordinary
+  interest bounds. Play and Edit show a small colored pointer/name above other
+  players and an inset screen-edge arrow toward offscreen players. The HUD uses
+  displayed XY/height, camera projection and zoom on both Canvas and GPU, and
+  excludes the local player. Realm departure removes the marker through ordinary
+  entity exits; disconnected sessions retain the existing 60-second reconnect
+  grace period before removal. Players in another realm are not tracked. Immersive XR
+  does not draw these flat screen markers; embedded single-player labs have no
+  co-op HUD and retain their shared presentation path.
 
 ## Evidence and next work
 
@@ -48,6 +58,12 @@ Protocol coverage lives in [binary codec tests](../../src/shared/binaryCodec.tes
 [remote state tests](../../src/client/RemoteStateView.test.ts), and
 [channel policy tests](../../src/transport/webrtcChannels.test.ts).
 Worker lifecycle/readiness evidence lives in [performance](performance.md).
+Location-marker geometry and distant-player replication coverage live in
+[PlayerMarkers tests](../../src/ui/PlayerMarkers.test.ts) and
+[RealmReplicator tests](../../src/server/RealmReplicator.test.ts). The
+[two-client browser check](../../tests/player-markers.spec.ts) exercises real
+Canvas/GPU HUD submissions, distant movement, portrait resizing, editing and
+realm-departure cleanup with isolated dedicated-server data.
 
 [Tactical 014](../tactical/014-webrtc-delivery-validation.md) preserves the pre-fix
 loss/reordering audit and evidence. Its five known failures motivated

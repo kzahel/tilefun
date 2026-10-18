@@ -45,3 +45,39 @@ it("shares unchanged snapshots across clients while observing edits within the s
   replicator.clear();
   expect(frame("b").entityBaselines).toBeDefined();
 });
+
+it("replicates distant realm players for location markers while keeping other distant actors culled", () => {
+  const entityManager = new EntityManager();
+  const local = entityManager.spawn(createPlayer(0, 0));
+  const remote = entityManager.spawn(createPlayer(100_000, -100_000));
+  const chicken = entityManager.spawn(createChicken(100_000, -100_000));
+  const sessions = new Map([
+    ["local", new PlayerSession("local", local)],
+    ["remote", new PlayerSession("remote", remote)],
+  ]);
+  const source = {
+    world: new World(new FlatStrategy()),
+    entityManager,
+    propManager: new PropManager(),
+    sessions,
+    tickCounter: 1,
+    tickRate: 60,
+    physicsMult: 1,
+    playerNamesRevision: 0,
+    editorCursorsRevision: 0,
+  };
+  const replicator = new RealmReplicator();
+  const frame = () => replicator.build("local", source)[0] as FrameMessage;
+  const first = frame();
+  expect(first.entityBaselines?.map((e) => e.id)).toContain(remote.id);
+  expect(first.entityBaselines?.map((e) => e.id)).not.toContain(chicken.id);
+  remote.position.wx += 10;
+  expect(frame().entityDeltas?.find((e) => e.id === remote.id)?.position?.wx).toBe(100_010);
+  expect(frame().entityBaselines).toBeUndefined();
+  expect(frame().entityDeltas).toBeUndefined();
+  // Leaving/disconnecting from this realm retires the marker via ordinary exits.
+  sessions.delete("remote");
+  entityManager.remove(remote.id);
+  expect(frame().entityExits).toContain(remote.id);
+  expect(frame().entityExits).toBeUndefined();
+});
