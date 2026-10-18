@@ -273,6 +273,39 @@ export class MapRenderer {
             ctx.fill();
           }
     }
+    if (overlays.roads)
+      for (const track of result.racetracks ?? []) {
+        const { x, y } = track.center;
+        ctx.beginPath();
+        track.access.forEach((p, i) => {
+          if (i) ctx.lineTo(sx(p.x), sy(p.y));
+          else ctx.moveTo(sx(p.x), sy(p.y));
+        });
+        ctx.strokeStyle = "#5a6062";
+        ctx.lineWidth = Math.max(2, 6 * view.zoom);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(sx(x - 24), sy(y - 28));
+        ctx.lineTo(sx(x + 24), sy(y - 28));
+        ctx.arc(sx(x + 24), sy(y), 28 * view.zoom, -Math.PI / 2, Math.PI / 2);
+        ctx.lineTo(sx(x - 24), sy(y + 28));
+        ctx.arc(sx(x - 24), sy(y), 28 * view.zoom, Math.PI / 2, Math.PI * 1.5);
+        ctx.closePath();
+        ctx.strokeStyle = "#fcf7e8";
+        ctx.lineWidth = Math.max(5, 18 * view.zoom);
+        ctx.stroke();
+        ctx.strokeStyle = "#b84c35";
+        ctx.lineWidth = Math.max(3, 14 * view.zoom);
+        ctx.stroke();
+        // A small checkered start flag remains recognizable at map scale.
+        const fx = sx(x),
+          fy = sy(y - 28);
+        for (let row = 0; row < 2; row++)
+          for (let col = 0; col < 3; col++) {
+            ctx.fillStyle = (row + col) % 2 ? "#26302e" : "#ffffff";
+            ctx.fillRect(fx + col * 3, fy - 10 + row * 3, 3, 3);
+          }
+      }
     const placed: { x: number; y: number; width: number }[] = [];
     if (overlays.settlements) {
       for (const settlement of result.settlements) {
@@ -327,6 +360,23 @@ export class MapRenderer {
         ctx.fillText(settlement.name, x, y);
       }
     }
+    if (overlays.roads)
+      for (const track of result.racetracks ?? []) {
+        const x = sx(track.center.x),
+          y = sy(track.center.y);
+        if (x < -80 || x > width + 80 || y < -20 || y > height + 20) continue;
+        ctx.font = "600 11px system-ui";
+        const labelWidth = ctx.measureText(track.name).width + 12;
+        placed.push({ x, y, width: labelWidth });
+        ctx.fillStyle = "#fff8f4ee";
+        ctx.beginPath();
+        ctx.roundRect(x - labelWidth / 2, y - 10, labelWidth, 20, 4);
+        ctx.fill();
+        ctx.fillStyle = "#883e27";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(track.name, x, y);
+      }
     if (overlays.railways) {
       for (const station of (result.railways ?? []).flatMap((line) => line.stations)) {
         const x = sx(station.x),

@@ -28,6 +28,7 @@ export class WorldMap {
   private readonly title = document.createElement("h2");
   private readonly status = document.createElement("p");
   private readonly roster = document.createElement("div");
+  private readonly tracks = document.createElement("div");
   private readonly stops = document.createElement("div");
   private readonly count = document.createElement("span");
   private readonly renderer = new MapRenderer();
@@ -102,7 +103,21 @@ export class WorldMap {
     this.stops.className = "world-map-roster";
     this.stops.setAttribute("role", "group");
     this.stops.setAttribute("aria-label", "Train stops");
-    footer.append(hint, legend, this.stops, this.roster, this.status, note);
+    this.tracks.className = "world-map-roster";
+    this.tracks.setAttribute("role", "group");
+    this.tracks.setAttribute("aria-label", "Racetracks");
+    const trackLegend = document.createElement("small");
+    trackLegend.textContent = "Red ovals / checkered flags: racetracks";
+    footer.append(
+      hint,
+      legend,
+      this.stops,
+      trackLegend,
+      this.tracks,
+      this.roster,
+      this.status,
+      note,
+    );
     this.dialog.append(header, toolbar, this.canvas, footer);
     this.root.append(this.dialog);
     document.body.append(this.root);
@@ -220,6 +235,18 @@ export class WorldMap {
                 button.dataset.y = String(station.y);
                 this.stops.append(button);
               }
+              this.tracks.replaceChildren();
+              for (const track of this.result.racetracks ?? []) {
+                const button = this.button(track.name, () => {
+                  this.view.x = track.center.x;
+                  this.view.y = track.center.y;
+                  this.changed();
+                });
+                button.dataset.testid = "world-map-racetrack";
+                button.dataset.trackId = track.id;
+                this.tracks.append(button);
+              }
+              this.root.dataset.racetracks = String(this.result.racetracks?.length ?? 0);
               this.root.dataset.railLines = String(this.result.railways?.length ?? 0);
               this.root.dataset.settled = "true";
               this.draw();

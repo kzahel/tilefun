@@ -340,7 +340,12 @@ export default function NaturalLandscapePage() {
               })),
           );
           c.dataset.spectatorCount = String(
-            view.entities.filter((e) => e.type.startsWith("person")).length,
+            view.entities.filter(
+              (e) =>
+                e.type.startsWith("person") &&
+                Math.abs(e.position.wx / 16 - point.x) <= 64 &&
+                Math.abs(e.position.wy / 16 - point.y) <= 52,
+            ).length,
           );
         }
         c.dataset.cityBuildingCount = String(

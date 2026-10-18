@@ -3817,7 +3817,7 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:154"
+          "source": "src/generation/regional/RacetrackPlanner.ts:190"
         },
         {
           "system": "Street starter review (candidate)",
@@ -4549,7 +4549,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:155"
+          "source": "src/generation/regional/RacetrackPlanner.ts:191"
         }
       ]
     },
@@ -4769,11 +4769,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:157"
+          "source": "src/generation/regional/RacetrackPlanner.ts:193"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:158"
+          "source": "src/generation/regional/RacetrackPlanner.ts:194"
         }
       ]
     },
@@ -5437,7 +5437,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:153"
+          "source": "src/generation/regional/RacetrackPlanner.ts:189"
         },
         {
           "system": "Street starter review (candidate)",
@@ -5539,7 +5539,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:140"
+          "source": "src/generation/regional/RacetrackPlanner.ts:143"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/regional/RacetrackPlanner.ts:161"
         },
         {
           "system": "World generation",
@@ -25371,11 +25375,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2303"
+          "source": "src/server/Realm.ts:2306"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2523"
+          "source": "src/server/Realm.ts:2526"
         },
         {
           "system": "Gameplay",
@@ -26179,7 +26183,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2487"
+          "source": "src/server/Realm.ts:2490"
         },
         {
           "system": "Gameplay",
@@ -26955,7 +26959,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:155"
+          "source": "src/generation/regional/RacetrackPlanner.ts:191"
         }
       ]
     },
@@ -27191,11 +27195,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:157"
+          "source": "src/generation/regional/RacetrackPlanner.ts:193"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:158"
+          "source": "src/generation/regional/RacetrackPlanner.ts:194"
         }
       ]
     },

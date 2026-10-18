@@ -60,8 +60,11 @@ export function racetrackSurface(track: Racetrack, x: number, y: number): number
       return RoadType.RaceLane;
     return RoadType.Asphalt;
   }
+  const dx = Math.abs(x + 0.5 - track.center.x),
+    dy = y + 0.5 - track.center.y;
   const plaza =
-    Math.abs(x + 0.5 - track.center.x) <= 27 && y >= track.center.y + 39 && y < track.center.y + 49;
+    (dx <= 27 && ((dy >= 39 && dy < 49) || (dy <= -39 && dy > -49))) ||
+    (dx > 27 && radius >= 38 && radius < 43);
   if (plaza) return RoadType.CityPavement;
   const access = pathDistance(track.access, x + 0.5, y + 0.5);
   return access <= 3 ? RoadType.Asphalt : access <= 5 ? RoadType.CityPavement : RoadType.None;
@@ -149,6 +152,39 @@ export class RacetrackSource {
             ],
           });
         }
+      // Smaller groups on the other three sides keep the audience in view when
+      // approaching either bend or the start line, without filling the circuit.
+      for (let row = 0; row < 2; row++)
+        for (let col = 0; col < 6; col++) {
+          const dx = -23 + col * 8,
+            dy = -42 - row * 4;
+          add(`north-bench:${row}:${col}`, "prop-bench", dx, dy);
+          actors.push({
+            featureId: `${id}:north-spectator:${row}:${col}`,
+            type: `person${1 + ((row * 6 + col + 4) % 20)}`,
+            wx: (x + dx + 1.8) * 16,
+            wy: (y + dy) * 16,
+            route: [
+              { wx: (x + dx + 1.8) * 16, wy: (y + dy + 0.5) * 16, waitSeconds: 20 },
+              { wx: (x + dx + 1.8) * 16, wy: (y + dy) * 16, waitSeconds: 2 },
+            ],
+          });
+        }
+      for (const side of [-1, 1])
+        for (let i = 0; i < 6; i++) {
+          const dy = -20 + i * 8,
+            dx = side * (24 + Math.sqrt(40 * 40 - dy * dy));
+          actors.push({
+            featureId: `${id}:bend-spectator:${side}:${i}`,
+            type: `person${1 + ((i + (side > 0 ? 8 : 14)) % 20)}`,
+            wx: (x + dx) * 16,
+            wy: (y + dy) * 16,
+            route: [
+              { wx: (x + dx - side * 0.5) * 16, wy: (y + dy) * 16, waitSeconds: 20 },
+              { wx: (x + dx) * 16, wy: (y + dy) * 16, waitSeconds: 2 },
+            ],
+          });
+        }
       for (const dx of [-28, 28]) {
         add(`lamp:${dx}`, "prop-street-lamp", dx, 40);
         add(`bin:${dx}`, "prop-city-street-v1-bin-black", dx, 47);
@@ -169,11 +205,17 @@ export class RacetrackSource {
     return null;
   }
   query(bounds: Bounds): Racetrack[] {
+    const query = this.querySteps(bounds);
+    let step = query.next();
+    while (!step.done) step = query.next();
+    return step.value;
+  }
+  *querySteps(bounds: Bounds, maxOwners = 144): Generator<void, Racetrack[]> {
     const result: Racetrack[] = [];
     if (
       (Math.floor((bounds.maxX - bounds.minX) / REGION_SIZE) + 4) *
         (Math.floor((bounds.maxY - bounds.minY) / REGION_SIZE) + 4) >
-      144
+      Math.min(144, maxOwners)
     )
       return result;
     for (
@@ -201,6 +243,7 @@ export class RacetrackSource {
             }))
         )
           result.push(track);
+        yield;
       }
     return result;
   }

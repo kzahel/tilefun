@@ -1880,7 +1880,10 @@ export class Realm {
             this.propManager.add(createProp(placement.propType, placement.wx, placement.wy));
           }
         }
-        if (!seeded) this.proceduralActors.reconcile(this.generator, [key]);
+        // Track additions can populate already visited chunks. Stable origin
+        // records suppress moved/deleted spectators; other populations seed once.
+        if (!seeded || this.generation.type === "regional")
+          this.proceduralActors.reconcile(this.generator, [key], seeded);
       },
       trafficRecords,
     );

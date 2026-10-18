@@ -78,17 +78,20 @@ export class NaturalStrategy extends RailwayStrategy {
       .query(bounds)
       .flatMap((p) => settlementPets(p, this.world.seed))
       .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
-    const spectators = this.racetracks
-      .query(bounds)
-      .flatMap((t) => t.actors)
-      .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
     return [
       ...super.actors(cx, cy),
       ...residents,
       ...pets,
-      ...spectators,
+      ...this.spectators(cx, cy),
       ...this.nature.wildlife(cx, cy),
     ];
+  }
+  spectators(cx: number, cy: number) {
+    const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
+    return this.racetracks
+      .query(bounds)
+      .flatMap((t) => t.actors)
+      .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
   }
   override placements(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };

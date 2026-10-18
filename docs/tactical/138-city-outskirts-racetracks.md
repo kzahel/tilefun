@@ -20,8 +20,18 @@ spectators or other appropriate props. Implement, commit and push.
   Player-driven cars stay where they are parked on the circuit; road-merge
   connectors cannot cut across its curves or grassy infield. Tangent joins finish
   within the same tick so saved progress is valid even at a segment boundary.
-- Twenty-four durable spectators mill beside three rows of benches. Lamps, bins,
+- Forty-eight durable spectators occupy the southern seating plaza, a smaller
+  northern seating area and both bends. Smaller crowds on the other sides make
+  spectators visible away from the original southern entrance. Lamps, bins,
   umbrellas and picnic tables furnish the grounds, using existing game assets.
+- The world map and explorer show the generated oval, approach, checkered flag
+  and speedway name. The map's Racetracks group centers the chosen venue.
+  Overview queries enumerate bounded owners cooperatively, account for feature
+  budgets and return venue geometry without actor/prop payloads.
+- Missing track spectators backfill already seeded regional chunks. Stable origin
+  records suppress moved/deleted people and repeated loads cannot duplicate them;
+  other generated populations retain their one-time seeding rule. Saved terrain
+  is not repainted by this backfill.
 - The venue and access reserve dry, level ground before farms and natural cover
   are admitted. Forests, ponds and wildlife homes cannot occupy the venue.
   Chunk seams, stable IDs and query order remain deterministic. There is no
@@ -72,3 +82,41 @@ spectators, paused save/reload and the ordinary fresh-world path.
 
 Next: playtest the venue scale, racing speeds and spectator composition in a
 fresh regional world; review the registered composition before any art promotion.
+
+## Spectator visibility and map follow-up · 2026-10-18
+
+The original fresh-game crowd rendered correctly but occupied only the southern
+plaza, and its browser test checked benches rather than spectators. The new
+composition adds 12 people beside northern benches and six at each bend, all on
+paved spectator ground outside the kerbs. Browser checks now require the actual
+crowd at three ordinary-game arrivals and all 48 in both Workshop backends.
+
+A shared Realm save/reload regression models an already visited chunk without a
+spectator record, alongside a moved person and a deleted person. The missing
+person is added exactly once, the moved position survives and the deletion
+remains respected. Map tests cover desktop and phone views, production track
+coordinates, named centering and rendered oval pixels before visiting the venue.
+City pedestrian tests select their exact planned identities because a bend crowd
+now shares an edge chunk with the city boundary.
+
+Validation: typechecks, lint (existing 119 warnings / 34 infos), production build
+and all 2,871 unit tests across 290 files pass. The refreshed inventory verifies
+880 candidate identities in normal Chromium at retina scale. All seven focused
+racetrack browser checks pass. The final isolated streaming readiness report has
+zero errors/failures and zero missing, incomplete or stale frames in all six
+samples; the additions-only path does not enumerate wildlife or other actors.
+This remains readiness evidence, without a device frame-pacing claim.
+
+Full browser regression completed in 33 minutes: **710 passed**, with one
+intermittent touch-input claimed-Jump assertion (flat-world input, before map
+opening). The same unchanged check then passed three isolated repetitions and
+`npx playwright test --last-failed --reporter=list` passed the standard retry.
+All seven racetrack checks and both railway-map checks passed in the full run.
+No input implementation or test tolerances were changed for this failure.
+Local evidence:
+[regression log](/tmp/tilefun-racetrack-fix-browser-final.log),
+[standard retry](/tmp/tilefun-racetrack-fix-last-failed.log),
+[isolated input repetitions](/tmp/tilefun-racetrack-input-recheck.log),
+[readiness report](/tmp/tilefun-racetrack-fix-streaming-final/report.json),
+[north crowd](/tmp/tilefun-racetrack-north-new.png),
+[phone map](/tmp/tilefun-racetrack-map-phone.png).

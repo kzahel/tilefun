@@ -19,8 +19,9 @@ export class ProceduralActors {
       }
     };
   }
-  reconcile(generator: WorldGenerator, keys: Iterable<string>): void {
-    if (!generator.actors) return;
+  reconcile(generator: WorldGenerator, keys: Iterable<string>, additionsOnly = false): void {
+    const actors = additionsOnly ? generator.actorAdditions : generator.actors;
+    if (!actors) return;
     const loaded = new Set(keys);
     for (const entity of [...this.manager.entities])
       if (!this.persistent && entity.proceduralId && entity.routeAI) {
@@ -38,7 +39,7 @@ export class ProceduralActors {
     const active = new Set(this.manager.entities.map((e) => e.proceduralId));
     for (const key of loaded) {
       const [cx = 0, cy = 0] = key.split(",").map(Number);
-      for (const p of generator.actors(cx, cy)) {
+      for (const p of actors(cx, cy)) {
         if (
           this.persistent &&
           (Math.floor(p.wx / CHUNK_SIZE_PX) !== cx || Math.floor(p.wy / CHUNK_SIZE_PX) !== cy)

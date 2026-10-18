@@ -2,6 +2,7 @@ import { expect, it, vi } from "vitest";
 import { RailwayPlanner } from "../railway/RailwayPlanner.js";
 import { createDescriptor } from "./GenerationDescriptor.js";
 import { type OverviewResult, overviewSteps } from "./Overview.js";
+import { RacetrackSource } from "./regional/RacetrackPlanner.js";
 import { QUERY_LIMITS, type RegionalRequest } from "./regional/RegionalPlanner.js";
 import { regionalWorld } from "./regional/WorldDescriptor.js";
 
@@ -41,6 +42,7 @@ it("drops rail enumeration at bounded overview scale and on nonregional worlds",
   const result = overview(2026, request);
   expect(result.detail).toBe("overview");
   expect(result.railways).toEqual([]);
+  expect(result.racetracks).toEqual([]);
   expect(result.stats.features).toBe(0);
   const flat = overviewSteps(createDescriptor("flat", 2026), {
     ...request,
@@ -54,6 +56,32 @@ it("allows cancellation between owner plans instead of enumerating the remaining
   const planner = new RailwayPlanner(regionalWorld(2026));
   const owner = vi.spyOn(planner, "owner");
   const query = planner.querySteps({ minX: 0, minY: -4096, maxX: 4096, maxY: 0 });
+  expect(query.next().done).toBe(false);
+  expect(owner).toHaveBeenCalledTimes(1);
+  query.return([]);
+  expect(owner).toHaveBeenCalledTimes(1);
+});
+
+it("maps the production speedway without publishing actor/prop payloads", () => {
+  const track = new RacetrackSource(regionalWorld(2026)).owner(0, 0);
+  if (!track) throw Error("Missing speedway");
+  const result = overview(2026, {
+    bounds: track.bounds,
+    detail: "region",
+    sampleStep: 16,
+    limits: QUERY_LIMITS,
+  });
+  const { id, name, center, bounds, access } = track;
+  expect(result.racetracks).toContainEqual({ id, name, center, bounds, access });
+  expect(result.stats.features).toBeLessThanOrEqual(QUERY_LIMITS.maxFeatures);
+});
+it("bounds and cancels speedway enumeration", () => {
+  const source = new RacetrackSource(regionalWorld(2026));
+  const owner = vi.spyOn(source, "owner");
+  const bounds = { minX: 0, minY: 0, maxX: 2048, maxY: 2048 };
+  expect(source.querySteps(bounds, 1).next()).toEqual({ done: true, value: [] });
+  expect(owner).not.toHaveBeenCalled();
+  const query = source.querySteps(bounds);
   expect(query.next().done).toBe(false);
   expect(owner).toHaveBeenCalledTimes(1);
   query.return([]);

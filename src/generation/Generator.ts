@@ -29,6 +29,8 @@ export interface ActorPlacement {
 }
 export interface WorldGenerator {
   actors?(cx: number, cy: number): ActorPlacement[];
+  /** Explicit additions allowed in previously seeded chunks; identities still own lifecycle. */
+  actorAdditions?(cx: number, cy: number): ActorPlacement[];
   readonly descriptor: GenerationDescriptor;
   readonly terrain: TerrainStrategy;
   placements(
@@ -70,6 +72,7 @@ export function createGenerator(
         descriptor,
         terrain,
         actors: (cx, cy) => terrain.actors(cx, cy),
+        actorAdditions: (cx, cy) => terrain.spectators(cx, cy),
         placements: (cx, cy) => ({
           placements: terrain.placements(cx, cy),
           newIntersectionKeys: [],

@@ -1,6 +1,9 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
+import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
+import { ENTITY_FACTORIES } from "../../entities/EntityFactories.js";
+import { EntityManager } from "../../entities/EntityManager.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { isCityRoad } from "../../road/DenseCitySurface.js";
 import { PARKING_SURFACE_COUNT } from "../../road/ParkingSurface.js";
@@ -11,6 +14,7 @@ import { vehicleRoadWidth, vehicleView } from "../../traffic/Vehicle.js";
 import { Chunk } from "../../world/Chunk.js";
 import { createDescriptor } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
+import { ProceduralActors } from "../ProceduralActors.js";
 import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import { NaturalLandscape } from "./NaturalLandscape.js";
 import { pathDistance } from "./PlanGeometry.js";
@@ -32,7 +36,23 @@ it.each([2026, 42, 7])(
         count++;
         expect(settlementForOwner(world, cx, cy)?.kind).toBe("city");
         expect(intersects(track.bounds, required(cities.owner(cx, cy)).bounds)).toBe(false);
-        expect(track.actors).toHaveLength(24);
+        expect(track.actors).toHaveLength(48);
+        expect(track.actors.filter((a) => a.wy < track.center.y * 16 - 36 * 16)).toHaveLength(12);
+        const props = track.props.map((p) => createProp(p.propType, p.wx, p.wy));
+        for (const actor of track.actors) {
+          expect(racetrackReserved(track, actor.wx / 16, actor.wy / 16)).toBe(true);
+          for (const point of actor.route) {
+            const person = required(ENTITY_FACTORIES[actor.type])(point.wx, point.wy);
+            const body = getEntityAABB(person.position, required(person.collider));
+            expect(
+              props.some((p) => aabbOverlapsPropWalls(body, p.position, p, 0)),
+              actor.featureId,
+            ).toBe(false);
+            expect(
+              racetrackSurface(track, Math.floor(point.wx / 16), Math.floor(point.wy / 16)),
+            ).toBe(RoadType.CityPavement);
+          }
+        }
         for (const p of track.props)
           expect(createProp(p.propType, p.wx, p.wy).type).toBe(p.propType);
         const region = queryRegion(world, {
@@ -129,4 +149,19 @@ it("realizes saved track paint and dry shared chunk seams while excluding natura
         .filter((p) => racetrackReserved(track, p.wx / 16, p.wy / 16)),
     ).toHaveLength(0);
   }
+});
+
+it("backfills spectators without evaluating other seeded populations", () => {
+  const generator = createGenerator(createDescriptor("regional", 2026));
+  const strategy = generator.terrain as import("./NaturalStrategy.js").NaturalStrategy;
+  const actors = vi.spyOn(generator, "actors");
+  const wildlife = vi.spyOn(strategy.nature, "wildlife");
+  const manager = new EntityManager();
+  const population = new ProceduralActors(manager, new Set(), () => {});
+  population.persistent = true;
+  population.reconcile(generator, ["32,28"], true);
+  expect(manager.entities.length).toBeGreaterThan(0);
+  expect(manager.entities.every((e) => e.proceduralId?.includes(":racetrack:"))).toBe(true);
+  expect(actors).not.toHaveBeenCalled();
+  expect(wildlife).not.toHaveBeenCalled();
 });

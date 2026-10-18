@@ -211,7 +211,7 @@ describe("current dense districts and approved art", () => {
           cx++
         )
           for (const actor of g.actors?.(cx, cy) ?? [])
-            if (actor.route.length && actor.featureId.startsWith(`${plan.settlementId}:`))
+            if (actor.route.length && plan.actors.some((p) => p.featureId === actor.featureId))
               actorMap.set(actor.featureId, actor);
       const actors = [...actorMap.values()];
       const routeProps = [...props.values()];

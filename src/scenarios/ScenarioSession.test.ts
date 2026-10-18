@@ -3,6 +3,7 @@ import { RemoteStateView } from "../client/ClientStateView.js";
 import { createPlayer } from "../entities/Player.js";
 import { decodeServerMessage } from "../shared/binaryCodec.js";
 import { World } from "../world/World.js";
+import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
@@ -72,5 +73,38 @@ it("keeps candidate geometry and gravity local across simultaneous sessions and 
   } finally {
     await a.close();
     await b.close();
+  }
+});
+
+it("backfills missing track spectators in seeded chunks without duplicating moved or deleted people", async () => {
+  const s = await ScenarioSession.create(naturalLandscapeRecipe("racetrack", "thicket"));
+  try {
+    await s.ready({ minCx: 24, maxCx: 33, minCy: 24, maxCy: 31 });
+    const crowd = () =>
+      s.realm.entityManager.entities.filter((e) => e.proceduralId?.includes(":racetrack:"));
+    expect(crowd()).toHaveLength(48);
+    const [missing, moved, deleted] = crowd();
+    if (!missing || !moved || !deleted) throw Error("Missing spectators");
+    const ids = [missing.proceduralId, moved.proceduralId, deleted.proceduralId];
+    moved.position.wx += 256;
+    const movedAt = { ...moved.position };
+    s.realm.entityManager.remove(deleted.id);
+    await s.realm.flushAsync();
+    // Model a world that visited this chunk before the spectator feature existed:
+    // terrain and the seeded-origin marker survive, but this person has no record.
+    for (const [key, record] of s.records.records)
+      if (
+        (record.collection === "features" && record.key === ids[0]) ||
+        (record.collection === "entities" && record.key === missing.persistentId)
+      )
+        s.records.records.delete(key);
+    await s.reload();
+    await s.ready({ minCx: 24, maxCx: 33, minCy: 24, maxCy: 31 });
+    expect(crowd()).toHaveLength(47);
+    expect(crowd().filter((e) => e.proceduralId === ids[0])).toHaveLength(1);
+    expect(crowd().find((e) => e.proceduralId === ids[1])?.position).toEqual(movedAt);
+    expect(crowd().some((e) => e.proceduralId === ids[2])).toBe(false);
+  } finally {
+    await s.close();
   }
 });

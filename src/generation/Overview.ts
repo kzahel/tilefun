@@ -17,6 +17,7 @@ import {
   type NaturalPond,
   naturalHabitat,
 } from "./regional/NaturalLandscape.js";
+import { type Racetrack, RacetrackSource } from "./regional/RacetrackPlanner.js";
 import {
   LandCover,
   makeGrid,
@@ -33,6 +34,7 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   countryside?: CountryPlan[];
   /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
   railways?: RailLine[];
+  racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
   landscape?: LandscapeProfile;
   ponds?: NaturalPond[];
 };
@@ -65,6 +67,18 @@ export function* overviewSteps(
       if (result.stats.features + count <= request.limits.maxFeatures) {
         railways = lines;
         result.stats.features += count;
+      }
+    }
+    const racetracks: NonNullable<OverviewResult["racetracks"]> = [];
+    if (result.detail === "region") {
+      const tracks = yield* new RacetrackSource(regionalWorld(descriptor.seed)).querySteps(
+        request.bounds,
+        request.limits.maxOwners,
+      );
+      if (result.stats.features + tracks.length <= request.limits.maxFeatures) {
+        for (const { id, name, center, bounds, access } of tracks)
+          racetracks.push({ id, name, center, bounds, access });
+        result.stats.features += tracks.length;
       }
     }
     const source = new DenseDistrictSource(regionalWorld(descriptor.seed), true);
@@ -149,6 +163,7 @@ export function* overviewSteps(
       districts,
       countryside,
       railways,
+      racetracks,
       ...(landscape ? { landscape, ponds } : {}),
     };
   }
@@ -193,6 +208,7 @@ export function* overviewSteps(
     settlements: [],
     connections: [],
     railways: [],
+    racetracks: [],
     stats: { samples: count, owners: 0, features: 0, detailedChunks: 0 },
   };
 }
