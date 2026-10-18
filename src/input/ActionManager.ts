@@ -24,6 +24,13 @@ export class ActionManager {
   private boundKeys = new Set<string>();
   private readonly keysDown = new Set<string>();
   private readonly listeners = new Map<ActionName, Set<DiscreteCallback>>();
+  private hornPressLatched = false;
+  consumeHornPress(): boolean {
+    const touch = this.touchButtons?.consumeHornPress() ?? false;
+    const pressed = this.hornPressLatched || touch;
+    this.hornPressLatched = false;
+    return pressed;
+  }
   private touchJoystick: TouchJoystick | null = null;
   private touchButtons: TouchButtons | null = null;
   private gamepadPoller: GamepadPoller | null = new GamepadPoller();
@@ -84,11 +91,12 @@ export class ActionManager {
     window.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("keyup", this.onKeyUp);
     window.removeEventListener("blur", this.onBlur);
-    this.keysDown.clear();
+    this.clearHeld();
   }
 
   clearHeld(): void {
     this.keysDown.clear();
+    this.hornPressLatched = false;
   }
 
   // --- Continuous action polling ---
@@ -102,6 +110,7 @@ export class ActionManager {
     // Check on-screen touch buttons
     if (this.touchButtons) {
       if (action === "jump" && this.touchButtons.jumpPressed) return true;
+      if (action === "honk" && this.touchButtons.hornPressed) return true;
       if (action === "throw" && this.touchButtons.throwPressed) return true;
       if (action === "sprint" && this.touchButtons.sprintPressed) return true;
     }
@@ -201,13 +210,14 @@ export class ActionManager {
   };
 
   private onBlur = (): void => {
-    this.keysDown.clear();
+    this.clearHeld();
   };
 
   private fireActionsForKey(key: string): void {
     const actions = this.keyToActions.get(key);
     if (!actions) return;
     for (const action of actions) {
+      if (action === "honk") this.hornPressLatched = true;
       const callbacks = this.listeners.get(action);
       if (callbacks) {
         for (const cb of callbacks) {

@@ -21,6 +21,7 @@ import { retainDrivingQueries } from "../traffic/DrivingQueries.js";
 import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { isVehicle } from "../traffic/Vehicle.js";
+import type { VehiclePush } from "../traffic/VehiclePush.js";
 import type { World } from "../world/World.js";
 
 import { PredictionCollisionTimeline } from "./PredictionCollisionTimeline.js";
@@ -251,6 +252,7 @@ export class PlayerPredictor {
 
   /** The predicted mount entity (null when not riding). */
   private predictedMount: Entity | null = null;
+  private pushedBodies = new Map<number, Entity>();
 
   /** Mount entity ID from the latest server state. */
   private _mountId: number | null = null;
@@ -267,6 +269,7 @@ export class PlayerPredictor {
    * Called on first server state and on world load.
    */
   reset(serverPlayer: Entity, serverMount?: Entity): void {
+    this.pushedBodies.clear();
     this.presentationInputSeconds = this.presentationInputDt = 0;
     this.presentationEpoch = {};
     this.supportDisplayShift = this.flightDisplayShift = null;
@@ -573,6 +576,7 @@ export class PlayerPredictor {
   private copyPredictionState(source: PlayerPredictor): void {
     this.predicted = source.predicted;
     this.predictedMount = source.predictedMount;
+    this.pushedBodies = new Map(source.pushedBodies);
     this._mountId = source._mountId;
     this.mountOffsetX = source.mountOffsetX;
     this.mountOffsetY = source.mountOffsetY;
@@ -750,6 +754,7 @@ export class PlayerPredictor {
       const oldMountX = this.predictedMount.position.wx;
       const oldMountY = this.predictedMount.position.wy;
 
+      this.pushedBodies.clear();
       // Snap mount to server's authoritative position and Z state
       this.predictedMount.position.wx = serverMount.position.wx;
       this.predictedMount.position.wy = serverMount.position.wy;
@@ -1495,19 +1500,32 @@ export class PlayerPredictor {
           for (let i = 0; i < steps; i++) {
             const collider = this.predictedMount.collider;
             if (!collider) break;
+            const pushes: VehiclePush[] = [];
+            const bodies = queryEntities(getEntityAABB(this.predictedMount.position, collider)).map(
+              (body) => this.pushedBodies.get(body.id) ?? body,
+            );
             const next = drivenCarPose(
               this.predictedMount,
               movement,
               stepDt / steps,
               world,
               props,
-              queryEntities(getEntityAABB(this.predictedMount.position, collider)),
+              bodies,
+              undefined,
+              pushes,
             );
             if (!next) {
               this.predictedMount.velocity = { vx: 0, vy: 0 };
               if (this.predictedMount.sprite) this.predictedMount.sprite.moving = false;
               break;
             }
+            for (const push of pushes)
+              this.pushedBodies.set(push.entity.id, {
+                ...push.entity,
+                position: push.position,
+                wz: push.z,
+                ...((push.entity.jumpZ ?? 0) <= 0 ? { groundZ: push.z } : {}),
+              });
             this.predictedMount = next;
           }
           continue;

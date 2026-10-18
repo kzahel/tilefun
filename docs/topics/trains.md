@@ -2,11 +2,22 @@
 
 Topic: trains
 Status: generated two-city trains, broad curves, cached pixel tracks, inside driving and saved roof riding delivered; loops remain authored lab fixtures.
-Updated: 2026-10-17.
+Updated: 2026-10-18.
 
 Owns generated railway networks, town stations, train services, railway structures
 and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
 [city generation](city-generation.md) owns regional revisions and promotion.
+
+## Gentle pedestrian contact and manual whistle
+
+[135](../tactical/135-vehicle-horns-speeds-and-pushing.md) gives inside drivers
+**Whistle / H** alongside Fast; nearby co-op listeners hear a short spatial whistle.
+The existing autonomous journey sounds remain. Straight and curved services,
+automatic or driven, gently push ground-level players and movable actors at a
+capped contact speed. A wall, another body, unavailable terrain, water or unsafe
+ground transition blocks the entire plan and stops the service. Roof passengers
+keep normal support/carry rules; there is no damage or launch impulse. Shared
+vehicle contact policy and tuning are owned by the [vehicle topic](vehicles.md).
 
 ## Train sounds
 
@@ -216,7 +227,9 @@ beside a line to the second station at **3422,-2658**.
 One native blue double-ended three-section train serves each admitted line. It
 accelerates to 192 px/s, brakes at the ends, dwells eight seconds and reverses
 without mirroring the horizontal artwork. The whole 456px body is represented
-in collisions; players/props, edited-away rails and missing ready terrain stop it.
+in collisions; props, edited-away rails and missing ready terrain stop it.
+Ground-level players now receive the bounded gentle contact described in 135;
+blocked pushes stop the whole service.
 Stations have native platform edges and benches, a lamp and bin. They are basic
 outdoor platforms. Roof boarding is delivered below; station buildings remain later work.
 

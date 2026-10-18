@@ -4,7 +4,7 @@ Topic: player-prediction
 Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
 support travel verified; local predicted animation and bounded backlog recovery
 delivered. Varying moving-contact acceptance remains next.
-Updated: 2026-10-12.
+Updated: 2026-10-18.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)
@@ -12,6 +12,18 @@ owns transport/replication delivery; [vehicles](vehicles.md) and [trains](trains
 own their autonomous motion and service behavior.
 
 ## Current status
+
+Gentle driven-car contact (2026-10-18):
+[135](../tactical/135-vehicle-horns-speeds-and-pushing.md) uses the same per-model
+speed, acceleration and bounded push planner in authority and prediction. Pending
+car commands retain private displaced collision-body copies, cleared on authority
+rebase and copied into bounded scratch replay state; replica entities remain
+immutable. Complete quick horn presses are latched independently of held movement.
+The contact planner infers missing cached ground height from replicated absolute
+height minus jump lift, preserving airborne height and voluntary jump velocity.
+Sustained frozen-replica and per-profile/boost parity regressions pass. This does
+not replace the existing collision timeline, roof carry or source-time policy;
+varying remote voluntary motion retains the uncertainty described below.
 
 Browser fixture correction (2026-10-12): the edit/play recovery check removes
 randomly seeded solid chickens through normal editor commands before its first

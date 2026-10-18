@@ -246,3 +246,15 @@ describe("ActionManager", () => {
     expect(actions.getMovement().dy).toBe(0);
   });
 });
+
+it("latches a complete horn tap between simulation frames and clears pending input", () => {
+  const actions = new ActionManager();
+  actions.pressKey("h");
+  actions.releaseKey("h");
+  expect(actions.isHeld("honk")).toBe(false);
+  expect(actions.consumeHornPress()).toBe(true);
+  expect(actions.consumeHornPress()).toBe(false);
+  actions.pressKey("H");
+  actions.clearHeld();
+  expect(actions.consumeHornPress()).toBe(false);
+});

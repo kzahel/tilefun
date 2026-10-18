@@ -31,6 +31,16 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
+## Vehicle horns and contact profiles
+
+[135](../tactical/135-vehicle-horns-speeds-and-pushing.md) shares per-model driving
+profiles, bounded contact planning and private prediction contact copies between
+game and ScenarioClient. Straight/curved rail and TrafficSystem authority commit
+pushes only after all body and passenger checks pass. Traffic exposes Horn/H via
+the normal scenario command, transient Worker event and shared AudioManager. Labs
+without an audio consumer remain silent. Automatic road traffic and parking keep
+yielding; no lab-specific speed or pushing implementation is added.
+
 ## Reviewed blue train alignment
 
 The owner accepted the v3 curve lab and authorized game activation on 2026-10-12.

@@ -131,7 +131,7 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     await s.close();
   }
 });
-it("stops at full-body obstacles and rejects distant boarding and obstructed exits", async () => {
+it("nudges players at bounded speed and rejects distant boarding and obstructed exits", async () => {
   const s = await ScenarioSession.create(recipe());
   try {
     const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
@@ -142,9 +142,12 @@ it("stops at full-body obstacles and rejects distant boarding and obstructed exi
     const obstacle = s.realm.entityManager.spawn(
       createPlayer(car.entity.position.wx + 70, car.entity.position.wy),
     );
+    const beforePush = obstacle.position.wx;
     for (let i = 0; i < 80; i++) await s.step({ ...idle, dx: 1 });
+    expect(obstacle.position.wx).toBeGreaterThan(beforePush + 10);
     expect(car.entity.position.wx).toBeLessThan(obstacle.position.wx - 25);
-    expect(car.entity.velocity?.vx).toBe(0);
+    expect(car.entity.velocity?.vx).toBeGreaterThan(0);
+    expect(car.entity.velocity?.vx).toBeLessThanOrEqual(40);
     s.realm.world.getCollisionIfLoaded = () => 3;
     expect(() => s.realm.vehicles.exit(s.player)).toThrow(/No clear place/);
     expect(s.player.player.parentId).toBe(car.entity.id);
@@ -360,3 +363,119 @@ it.each(["garbage-truck-green", "garbage-truck-orange"])(
     }
   },
 );
+
+it("admits horn events only from the driver, rate limits them, and broadcasts the authoritative sound", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn" });
+    expect(s.realm.vehicles.takeHorns()).toEqual([]);
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn" });
+    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn" });
+    const { decodeServerMessage } = await import("../shared/binaryCodec.js");
+    const messages = s
+      .tick(1 / 60)
+      .map(decodeServerMessage)
+      .filter((m) => m.type === "vehicle-horn");
+    expect(messages).toEqual([
+      { type: "vehicle-horn", wx: car.entity.position.wx, wy: car.entity.position.wy, kind: "car" },
+    ]);
+    expect(s.realm.vehicles.takeHorns()).toEqual([]);
+    for (let i = 0; i < 50; i++) await s.step(idle);
+    s.realm.vehicles.honk(s.player);
+    expect(s.realm.vehicles.takeHorns()).toHaveLength(1);
+    s.realm.vehicles.exit(s.player);
+    s.realm.vehicles.honk(s.player);
+    expect(s.realm.vehicles.takeHorns()).toEqual([]);
+  } finally {
+    await s.close();
+  }
+});
+
+it.each(["car-25", "sedan-12", "bus-1", "garbage-truck-green"])(
+  "shares %s speed, acceleration and boost between authority and prediction",
+  async (model) => {
+    const input = recipe();
+    required(input.traffic?.[0]).model = model;
+    const s = await ScenarioSession.create(input);
+    try {
+      const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+      s.realm.vehicles.enter(s.player, car.entity.id);
+      const predictor = new PlayerPredictor();
+      predictor.reset(
+        deserializeEntity(serializeEntity(s.player.player)),
+        deserializeEntity(serializeEntity(car.entity)),
+      );
+      const { vehiclePerformance } = await import("../traffic/VehiclePerformance.js");
+      for (const sprinting of [false, true]) {
+        for (let i = 0; i < 150; i++) {
+          const movement = { ...idle, dx: 1, sprinting };
+          predictor.update(0.01667, movement, s.realm.world, [], s.realm.entityManager.entities);
+          await s.step(movement);
+        }
+        expect(car.entity.velocity?.vx).toBeCloseTo(
+          vehiclePerformance(car.entity.type).speed * (sprinting ? 1.6 : 1),
+          3,
+        );
+        expect(predictor.mount?.position.wx).toBeCloseTo(car.entity.position.wx, 3);
+      }
+    } finally {
+      await s.close();
+    }
+  },
+);
+
+it("predicts sustained nudging against a frozen replica without mutating its players", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    const obstacle = s.realm.entityManager.spawn(
+      createPlayer(
+        car.entity.position.wx + required(car.entity.collider).width / 2 + 5,
+        car.entity.position.wy,
+      ),
+    );
+    obstacle.wz = obstacle.groundZ = 0;
+    const bodies = s.realm.entityManager.entities.map((e) => deserializeEntity(serializeEntity(e)));
+    const before = structuredClone(bodies.find((e) => e.id === obstacle.id));
+    const predictor = new PlayerPredictor();
+    predictor.reset(
+      deserializeEntity(serializeEntity(s.player.player)),
+      deserializeEntity(serializeEntity(car.entity)),
+    );
+    for (let i = 0; i < 90; i++) {
+      const movement = { ...idle, dx: 1 };
+      predictor.update(0.01667, movement, s.realm.world, [], bodies);
+      await s.step(movement);
+    }
+    expect(obstacle.position.wx).toBeGreaterThan(required(before).position.wx + 20);
+    expect(predictor.mount?.position.wx).toBeCloseTo(car.entity.position.wx, 3);
+    expect(bodies.find((e) => e.id === obstacle.id)).toEqual(before);
+  } finally {
+    await s.close();
+  }
+});
+
+it("a curved service gently pushes at its front and preserves the train whistle command", async () => {
+  const s = await ScenarioSession.create(curvedTrainRecipe());
+  try {
+    const service = required(s.realm.railway?.services.get("curved-service"));
+    const car = required([...service.carriages].sort((a, b) => b.position.wx - a.position.wx)[0]);
+    s.player.player.position = { wx: car.position.wx, wy: car.position.wy - 24 };
+    s.realm.vehicles.enter(s.player, car.id);
+    s.realm.vehicles.honk(s.player);
+    expect(s.realm.vehicles.takeHorns()[0]?.kind).toBe("train");
+    const person = s.realm.entityManager.spawn(
+      createPlayer(car.position.wx + required(car.collider).width / 2 + 5, car.position.wy),
+    );
+    person.wz = person.groundZ = 0;
+    const x = person.position.wx;
+    for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1 });
+    expect(person.position.wx).toBeGreaterThan(x + 20);
+    expect(service.speed).toBeLessThanOrEqual(80.01);
+  } finally {
+    await s.close();
+  }
+});

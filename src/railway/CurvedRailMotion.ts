@@ -1,8 +1,11 @@
 import { required } from "../art/ArtCatalog.js";
-import { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { RoadType } from "../road/RoadType.js";
+import type { DrivingQueries } from "../traffic/DrivingQueries.js";
+import { TRAIN_PUSH } from "../traffic/VehiclePerformance.js";
+import { commitVehiclePushes, planVehiclePushes } from "../traffic/VehiclePush.js";
 import type { World } from "../world/World.js";
 import { createCurveTrain, curveOffsets } from "./CurveTrain.js";
 import { railAlignment, wrapDistance } from "./RailPath.js";
@@ -17,6 +20,8 @@ export function stepCurvedTrain(
   entities: EntityManager,
   props: PropManager,
   excludedRiderIds?: ReadonlySet<number>,
+  contact = false,
+  queries?: DrivingQueries,
 ): void {
   const alignment = railAlignment(required(s.line.path));
   const record = s.record;
@@ -115,23 +120,27 @@ export function stepCurvedTrain(
         s.speed = 0;
         return;
       }
-    for (const other of entities.spatialHash.queryRange(r.minCx, r.minCy, r.maxCx, r.maxCy)) {
-      if (
-        s.carriages.includes(other) ||
-        !other.collider ||
-        other.collider.solid === false ||
-        other.flashHidden ||
-        (other.wz ?? 0) >= 44 ||
-        (other.wz ?? 0) + (other.collider.physicalHeight ?? Infinity) <= 0
-      )
-        continue;
-      if (aabbsOverlap(swept, getEntityAABB(other.position, other.collider))) {
-        s.speed = 0;
-        return;
-      }
+  }
+  const pushes = planVehiclePushes(
+    s.carriages.map((car, i) => ({ before: car, after: required(poses[i]) })),
+    dt,
+    TRAIN_PUSH,
+    world,
+    props.props,
+    entities.entities,
+    queries,
+  );
+  if (!pushes) {
+    if (!contact && s.speed > TRAIN_PUSH.pushSpeed * 0.98) {
+      s.speed = Math.max(0, TRAIN_PUSH.pushSpeed * 0.98 - 96 * dt);
+      stepCurvedTrain(s, dt, world, entities, props, excludedRiderIds, true, queries);
+      return;
     }
+    s.speed = 0;
+    return;
   }
   // Commit atomically only after every body has cleared its next pose.
+  commitVehiclePushes(pushes, entities);
   record.distance = nextDistance;
   carryTrainPassengers(passengers, entities);
   for (const [i, car] of s.carriages.entries()) {

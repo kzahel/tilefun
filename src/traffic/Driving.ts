@@ -14,8 +14,9 @@ import { type DrivingQueries, drivingQueries } from "./DrivingQueries.js";
 import { movingPassengerPosition } from "./MovingSupport.js";
 import { roofSupport } from "./RoofSupport.js";
 import { applyVehicleFacing, isVehicle } from "./Vehicle.js";
+import { vehiclePerformance } from "./VehiclePerformance.js";
+import { planVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
-export const DRIVE_SPEED = 112;
 export function isDrivable(entity: Entity): boolean {
   return isVehicle(entity) || isTrain(entity);
 }
@@ -47,7 +48,8 @@ function facing(dx: number, dy: number, previous: Direction): Direction {
       : Direction.Up;
 }
 
-/** Shared authority/replay car step. Call in small substeps; commit only a clear full body. */
+/** Shared authority/replay car step. Supplying pushes opts into gentle contact planning.
+ * Call in small substeps; commit body, pushes and passengers together only after all clear. */
 export function drivenCarPose(
   car: Entity,
   input: { dx: number; dy: number; sprinting?: boolean },
@@ -56,18 +58,26 @@ export function drivenCarPose(
   props: readonly Prop[],
   entities: readonly Entity[],
   queries?: DrivingQueries,
+  pushes?: VehiclePush[],
+  contactSpeed?: number,
 ): Entity | undefined {
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
   const length = Math.hypot(input.dx, input.dy);
   const scale = length > 1 ? 1 / length : 1;
-  const speed = DRIVE_SPEED * (input.sprinting ? 1.6 : 1);
+  const performance = vehiclePerformance(car.type);
+  const speed = performance.speed * (input.sprinting ? 1.6 : 1);
   const targetX = input.dx * scale * speed,
     targetY = input.dy * scale * speed;
   const old = car.velocity ?? { vx: 0, vy: 0 };
   const change = { vx: targetX - old.vx, vy: targetY - old.vy };
   const difference = Math.hypot(change.vx, change.vy);
-  const amount = Math.min(1, ((length ? 224 : 448) * dt) / (difference || 1));
+  const amount = Math.min(1, ((length ? performance.acceleration : 448) * dt) / (difference || 1));
   const velocity = { vx: old.vx + change.vx * amount, vy: old.vy + change.vy * amount };
+  if (contactSpeed !== undefined) {
+    const factor = Math.min(1, contactSpeed / (Math.hypot(velocity.vx, velocity.vy) || 1));
+    velocity.vx *= factor;
+    velocity.vy *= factor;
+  }
   const next: Entity = {
     ...car,
     sprite: car.sprite && { ...car.sprite },
@@ -119,7 +129,7 @@ export function drivenCarPose(
       aabbOverlapsPropWalls(after, prop.position, prop, z, height)
     )
       return;
-  for (const other of queries?.bodies?.(swept) ?? entities) {
+  for (const other of pushes ? [] : (queries?.bodies?.(swept) ?? entities)) {
     if (
       other.id === car.id ||
       other.parentId === car.id ||
@@ -162,5 +172,32 @@ export function drivenCarPose(
       return;
   }
   if (next.sprite) next.sprite.moving = Math.hypot(velocity.vx, velocity.vy) > 0.01;
+  if (pushes) {
+    const plan = planVehiclePushes(
+      [{ before: car, after: next }],
+      dt,
+      performance,
+      world,
+      props,
+      entities,
+      queries,
+    );
+    if (!plan) {
+      if (contactSpeed === undefined)
+        return drivenCarPose(
+          car,
+          input,
+          dt,
+          world,
+          props,
+          entities,
+          queries,
+          pushes,
+          performance.pushSpeed * 0.98,
+        );
+      return;
+    }
+    pushes.push(...plan);
+  }
   return next;
 }

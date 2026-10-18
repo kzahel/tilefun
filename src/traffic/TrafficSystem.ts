@@ -33,6 +33,7 @@ import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js"
 import { ParkingSystem, type SavedParking } from "./ParkingSystem.js";
 import { roofSupport } from "./RoofSupport.js";
 import { SHOPPING_PARKED_BAYS, type ShoppingCenter, shoppingLot } from "./ShoppingCenter.js";
+import { commitVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
 export interface TrafficRouteSource {
   trafficNetwork(wx: number, wy: number): LaneGraph;
@@ -797,6 +798,7 @@ export class TrafficSystem {
     s.entity.prevWz = s.entity.wz ?? 0;
     const steps = Math.max(1, Math.ceil(dt * 60));
     for (let i = 0; i < steps; i++) {
+      const pushes: VehiclePush[] = [];
       const next = drivenCarPose(
         s.entity,
         input,
@@ -805,6 +807,7 @@ export class TrafficSystem {
         this.props.props,
         this.entities.entities,
         this.drivingQueries,
+        pushes,
       );
       const plan =
         next && planMovingPassengers(s.entity, next, this.entities, this.props, this.world);
@@ -813,6 +816,7 @@ export class TrafficSystem {
         if (s.entity.sprite) s.entity.sprite.moving = false;
         break;
       }
+      commitVehiclePushes(pushes, this.entities);
       carryMovingPassengers(plan, this.entities);
       Object.assign(s.entity, {
         position: next.position,

@@ -1,6 +1,6 @@
 /**
  * On-screen action buttons for touch/mobile play mode.
- * Renders 3 fixed-position buttons in the bottom-right corner:
+ * Renders on-foot actions and contextual driving controls at the bottom-right:
  *   - A (Jump) — primary, bottom-right
  *   - R (Sprint) — left of A
  *   - B (Throw) — above, between A and R
@@ -29,10 +29,18 @@ export class TouchButtons {
   enabled = true;
   driving = false;
   emergency = false;
+  train = false;
   warning = false;
   emergencyState = 2;
   private mouseButton: number | null = null;
+  private hornPressLatched = false;
+  consumeHornPress(): boolean {
+    const pressed = this.enabled && this.driving && this.hornPressLatched;
+    this.hornPressLatched = false;
+    return pressed;
+  }
   private visibleButton(index: number): boolean {
+    if (index === 3) return this.driving;
     return !this.driving || index === 2 || this.emergency || (index === 1 && this.warning);
   }
   private canvas: HTMLCanvasElement;
@@ -40,6 +48,7 @@ export class TouchButtons {
     { label: "A", pressed: false, touchId: null }, // jump
     { label: "B", pressed: false, touchId: null }, // throw
     { label: "R", pressed: false, touchId: null }, // sprint
+    { label: "Horn", pressed: false, touchId: null },
   ];
 
   /** Touch IDs claimed by buttons (shared with TouchJoystick to avoid conflicts). */
@@ -47,6 +56,10 @@ export class TouchButtons {
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
+  }
+
+  get hornPressed(): boolean {
+    return this.enabled && this.driving && (this.buttons[3]?.pressed ?? false);
   }
 
   get jumpPressed(): boolean {
@@ -91,6 +104,7 @@ export class TouchButtons {
   }
 
   reset(): void {
+    this.hornPressLatched = false;
     this.mouseButton = null;
     for (const btn of this.buttons) {
       btn.pressed = false;
@@ -99,7 +113,7 @@ export class TouchButtons {
     this.claimedTouches.clear();
   }
 
-  /** Render buttons on the canvas. Only draws on touch-capable devices. */
+  /** Touch actions on foot; driving actions also remain available with a mouse. */
   draw(ctx: CanvasRenderingContext2D): void {
     if (!this.enabled) return;
     if (!this.driving && !isTouchDevice()) return;
@@ -131,23 +145,33 @@ export class TouchButtons {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
       const label = this.driving
-        ? i === 2
-          ? "Fast"
-          : i === 1
-            ? this.emergencyState & 1
-              ? this.warning
-                ? "Beacon On"
-                : "Siren On"
-              : this.warning
-                ? "Beacon Off"
-                : "Siren Off"
-            : (["Quiet", "EU", "US"][this.emergencyState >> 1] ?? "EU")
+        ? i === 3
+          ? this.train
+            ? "Whistle"
+            : "Horn"
+          : i === 2
+            ? "Fast"
+            : i === 1
+              ? this.emergencyState & 1
+                ? this.warning
+                  ? "Beacon On"
+                  : "Siren On"
+                : this.warning
+                  ? "Beacon Off"
+                  : "Siren Off"
+              : (["Quiet", "EU", "US"][this.emergencyState >> 1] ?? "EU")
         : btn.label;
       ctx.fillText(label, pos.x, pos.y);
       if (this.driving) {
         ctx.font = "10px sans-serif";
         ctx.fillText(
-          i === 2 ? "hold · Shift" : i === 1 ? "toggle · B" : "style · Space",
+          i === 3
+            ? "honk · H"
+            : i === 2
+              ? "hold · Shift"
+              : i === 1
+                ? "toggle · B"
+                : "style · Space",
           pos.x,
           pos.y + 15,
         );
@@ -175,6 +199,7 @@ export class TouchButtons {
       { x: aX, y: aY }, // A = jump
       { x: bX, y: bY }, // B = throw
       { x: rX, y: rY }, // R = sprint
+      { x: aX, y: this.emergency ? aY - 2 * SPACING : aY },
     ];
   }
 
@@ -202,6 +227,7 @@ export class TouchButtons {
     if (!button) return;
     this.mouseButton = index;
     button.pressed = true;
+    if (index === 3) this.hornPressLatched = true;
     event.preventDefault();
     event.stopImmediatePropagation();
   };
@@ -227,6 +253,7 @@ export class TouchButtons {
       if (btn.touchId !== null) continue; // already held by another finger
       btn.touchId = touch.identifier;
       btn.pressed = true;
+      if (btnIdx === 3 && this.driving) this.hornPressLatched = true;
       this.claimedTouches.add(touch.identifier);
       e.preventDefault();
     }

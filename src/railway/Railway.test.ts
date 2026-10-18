@@ -81,7 +81,7 @@ describe("generated railway", () => {
     entities.remove(train.id, false);
     expect(entities.spatialHash.queryRange(1, 0, 1, 0)).not.toContain(train);
   });
-  it("stops at both stations, reverses without mirroring, and pauses before unready chunks or children", async () => {
+  it("stops at both stations, reverses without mirroring, and pauses before unready chunks and gently nudges children", async () => {
     const f = await fixture();
     for (let i = 0; i < 7; i++) f.tick();
     expect(f.service.entity.position.wx).toBe(f.line.start * 16);
@@ -101,8 +101,10 @@ describe("generated railway", () => {
     expect(f.service.entity.sprite?.flipX).toBe(false);
     f.player.position = { wx: f.line.start * 16 + 300, wy: f.line.y * 16 };
     f.entities.spatialHash.update(f.player);
+    const beforePush = f.player.position.wx;
     for (let i = 0; i < 20; i++) f.tick();
-    expect(f.service.speed).toBe(0);
+    expect(f.player.position.wx).toBeGreaterThan(beforePush);
+    expect(f.service.speed).toBeLessThanOrEqual(80);
     expect(f.service.entity.position.wx).toBeLessThan(f.player.position.wx - 224);
     await f.system.close();
     await f.saves.close();

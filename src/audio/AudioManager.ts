@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { VehicleHornMessage } from "../shared/protocol.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
 import { TrainAudio } from "./TrainAudio.js";
 
@@ -179,6 +180,42 @@ export class AudioManager {
   /** Get a preloaded buffer by key. */
   getBuffer(key: string): AudioBuffer | undefined {
     return this.buffers.get(key);
+  }
+
+  playVehicleHorn(horn: VehicleHornMessage, listener: PositionComponent): void {
+    const ctx = this.ctx;
+    if (ctx?.state !== "running") return;
+    const distance = Math.hypot(horn.wx - listener.wx, horn.wy - listener.wy);
+    if (distance >= 750) return;
+    const train = horn.kind === "train";
+    const duration = train ? 0.7 : 0.32;
+    const frequencies = train ? [440, 554, 660] : horn.kind === "heavy" ? [155, 196] : [350, 440];
+    const gain = ctx.createGain();
+    const now = ctx.currentTime;
+    gain.gain.setValueAtTime(0, now);
+    gain.gain.linearRampToValueAtTime(0.09 * (1 - distance / 750) ** 2, now + 0.02);
+    gain.gain.setValueAtTime(0.09 * (1 - distance / 750) ** 2, now + duration - 0.06);
+    gain.gain.linearRampToValueAtTime(0, now + duration);
+    const pan = ctx.createStereoPanner();
+    pan.pan.value = Math.max(-0.8, Math.min(0.8, (horn.wx - listener.wx) / 500));
+    gain.connect(pan);
+    pan.connect(this.master ?? ctx.destination);
+    let remaining = frequencies.length;
+    for (const frequency of frequencies) {
+      const voice = ctx.createOscillator();
+      voice.type = train ? "sine" : "triangle";
+      voice.frequency.value = frequency;
+      voice.connect(gain);
+      voice.onended = () => {
+        voice.disconnect();
+        if (--remaining === 0) {
+          gain.disconnect();
+          pan.disconnect();
+        }
+      };
+      voice.start(now);
+      voice.stop(now + duration);
+    }
   }
 
   /** Short provisional three-note robin call, using the existing spatial audio path. */

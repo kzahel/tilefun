@@ -74,6 +74,48 @@ rest pose and remain excluded from automatic traffic; the other 44 types retain
 normal road-width admission. All types preserve complete sprite fallback.
 Exact model-art review and nonzero steering/equipment-motion qualification remain open.
 
+## Horns, driving personality and gentle contact
+
+[135](../tactical/135-vehicle-horns-speeds-and-pushing.md) adds **Horn / H** on
+screen while driving, including desktop mouse and touch. Trains label it **Whistle**.
+The horn remains separate from emergency Siren/Style/Beacon controls. Authority
+admits one short sound per driver per 800ms and sends its current position and
+car/heavy/train voice to nearby co-op clients. Browser audio attenuates and pans
+it; menus, hidden pages and blocked input suppress incoming playback. Horns are
+transient events, not saved looping state. Traffic lab uses the same command,
+Worker event and browser audio; other scenario hosts can consume the shared event.
+
+Shared gameplay profiles set ordinary driving speed and acceleration independently
+of approved art/collision banks. All retain held Fast (1.6×):
+
+| Source model family | Base speed (world px/s) | Acceleration (world px/s²) |
+| --- | ---: | ---: |
+| Compact | 112 | 224 |
+| Sedans and cars 7–13 | 120 | 224 |
+| Cars 14–20 | 128 | 250 |
+| Lower sporty cars 21–26 | 156 | 300 |
+| Police | 144 | 280 |
+| Ambulance | 112 | 180 |
+| Buses | 88 | 120 |
+| Firetrucks | 88 | 104 |
+| Garbage trucks | 80 | 104 |
+
+Driven cars gently push players and movable actors/balls; automatic road traffic
+continues yielding. All trains share the contact planner on straight and curved
+services. Contact speed is capped at 40–44 for light cars, 64–72 for heavy vehicles
+and 80 for trains. Heavier vehicles can move heavier actors. Vehicle speed slows
+at contact rather than adding a launch impulse; voluntary walking/jumping velocity
+remains intact. Props, parked cars and other fixed bodies stay fixed. No damage,
+chain pushing, unsafe ground drops or wall squeezing is introduced. All body,
+push and roof-passenger plans must pass before committing any position. A blocked
+person/object stops the vehicle. Roof riders remain moving-support passengers.
+
+Prediction uses the same car planner and private contact-body copies during
+unacknowledged movement/replay, replacing them at authority reconciliation. It
+never writes pushed positions into the replica. Autonomous parking maneuvers keep
+their commanded speeds and pedestrian-blocking policy. Train service speeds and
+rail/body/roof geometries retain their existing contracts.
+
 ## Player driving
 
 [Inside-car prediction evidence](../research/car-driving-prediction-jitter.md)

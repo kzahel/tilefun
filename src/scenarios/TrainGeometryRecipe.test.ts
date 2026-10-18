@@ -106,12 +106,14 @@ for (const obstacle of [
       const service = required(s.realm.railway?.services.get("grade-shuttle"));
       if (obstacle === "street pedestrian" || obstacle === "underpass pedestrian")
         expect(service.record.target).toBe(0);
-      else {
+      else if (obstacle === "tunnel pedestrian" || obstacle === "bridge pedestrian") {
+        expect(s.player.player.position.wx).toBeGreaterThan(
+          obstacle === "bridge pedestrian" ? -524 : 1076,
+        );
+      } else {
         expect(service.speed).toBe(0);
         expect(service.record.target).toBe(1);
-        expect(service.entity.position.wx).toBeLessThan(
-          obstacle === "bridge pedestrian" ? -750 : obstacle === "track edit" ? -900 : 900,
-        );
+        expect(service.entity.position.wx).toBeLessThan(obstacle === "track edit" ? -900 : 900);
       }
     } finally {
       await s.close();

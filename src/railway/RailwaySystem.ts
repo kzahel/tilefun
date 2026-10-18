@@ -7,7 +7,14 @@ import type { SaveManager } from "../persistence/SaveManager.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { RoadType } from "../road/RoadType.js";
 import type { InterestTicket } from "../server/InterestManager.js";
+import { createDrivingQueries, type DrivingQueries } from "../traffic/DrivingQueries.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
+import { TRAIN_PUSH } from "../traffic/VehiclePerformance.js";
+import {
+  commitVehiclePushes,
+  planVehiclePushes,
+  type VehiclePush,
+} from "../traffic/VehiclePush.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { stepCurvedTrain } from "./CurvedRailMotion.js";
@@ -76,6 +83,7 @@ export class RailwaySystem {
   private wanted = new Set<string>();
   private closed = false;
   error: unknown;
+  private readonly drivingQueries: DrivingQueries;
   constructor(
     readonly planner: RailRouteSource,
     readonly world: World,
@@ -84,6 +92,7 @@ export class RailwaySystem {
     readonly saves: SaveManager,
     readonly prepare?: (range: ChunkRange) => Promise<void>,
   ) {
+    this.drivingQueries = createDrivingQueries(props, entities);
     entities.removalListeners.add((entity, destroyed) => {
       if (!destroyed) return;
       const state = [...this.services.values()].find((s) => s.carriages.includes(entity));
@@ -438,7 +447,16 @@ export class RailwaySystem {
       for (let i = 0; i < steps; i++) {
         if (s.line.path) {
           for (const car of s.carriages) if (car.velocity) car.velocity.vx = car.velocity.vy = 0;
-          stepCurvedTrain(s, step, this.world, this.entities, this.props, excludedRiderIds);
+          stepCurvedTrain(
+            s,
+            step,
+            this.world,
+            this.entities,
+            this.props,
+            excludedRiderIds,
+            false,
+            this.drivingQueries,
+          );
           continue;
         }
         if (s.driverId === undefined && s.record.dwell > 0) {
@@ -465,8 +483,15 @@ export class RailwaySystem {
         }
         if (s.driverId !== undefined) drivenTrainSpeed(s, step, distance);
         else s.speed = Math.min(SPEED, s.speed + ACCEL * step, Math.sqrt(2 * ACCEL * distance));
-        const dx = sign * Math.min(distance, s.speed * step);
-        const poses = this.probe(s, dx);
+        let dx = sign * Math.min(distance, s.speed * step);
+        let pushes: VehiclePush[] = [];
+        let poses = this.probe(s, dx, step, pushes);
+        if (!poses && s.speed > TRAIN_PUSH.pushSpeed * 0.98) {
+          s.speed = TRAIN_PUSH.pushSpeed * 0.98;
+          dx = sign * Math.min(distance, s.speed * step);
+          pushes = [];
+          poses = this.probe(s, dx, step, pushes);
+        }
         if (!poses) {
           s.speed = 0;
           e.velocity.vx = 0;
@@ -498,6 +523,7 @@ export class RailwaySystem {
           e.velocity.vx = 0;
           break;
         }
+        commitVehiclePushes(pushes, this.entities);
         carryTrainPassengers(passengers, this.entities);
         for (const [j, car] of s.carriages.entries()) {
           car.position.wx += dx;
@@ -521,7 +547,12 @@ export class RailwaySystem {
   }
   /** Probe every carriage before committing any pose; one obstruction stops the service.
    * Small substeps bound grade changes and prevent selecting another stacked floor. */
-  private probe(s: RailService, dx: number): number[] | undefined {
+  private probe(
+    s: RailService,
+    dx: number,
+    dt: number,
+    pushes: VehiclePush[],
+  ): number[] | undefined {
     const heights: number[] = [];
     for (const car of s.carriages) {
       const collider = required(car.collider),
@@ -580,29 +611,26 @@ export class RailwaySystem {
           aabbOverlapsPropWalls(next, p.position, p, z, height)
         )
           return;
-      for (const other of this.entities.spatialHash.queryRange(
-        range.minCx,
-        range.minCy,
-        range.maxCx,
-        range.maxCy,
-      )) {
-        if (
-          s.carriages.includes(other) ||
-          !other.collider ||
-          other.collider.solid === false ||
-          other.flashHidden
-        )
-          continue;
-        const base = other.wz ?? 0;
-        if (
-          base >= Math.max(z, beforeZ) + height ||
-          base + (other.collider.physicalHeight ?? Infinity) <= Math.min(z, beforeZ)
-        )
-          continue;
-        if (aabbsOverlap(swept, getEntityAABB(other.position, other.collider))) return;
-      }
       heights.push(z);
     }
+    const plan = planVehiclePushes(
+      s.carriages.map((car, i) => ({
+        before: car,
+        after: {
+          ...car,
+          position: { wx: car.position.wx + dx, wy: car.position.wy },
+          wz: required(heights[i]),
+        },
+      })),
+      dt,
+      TRAIN_PUSH,
+      this.world,
+      this.props.props,
+      this.entities.entities,
+      this.drivingQueries,
+    );
+    if (!plan) return;
+    pushes.push(...plan);
     return heights;
   }
   async settle() {

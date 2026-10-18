@@ -26,7 +26,15 @@ export interface RealmInfo {
 
 // ---- Client → Server messages ----
 
+export type VehicleHornMessage = {
+  type: "vehicle-horn";
+  wx: number;
+  wy: number;
+  kind: "car" | "heavy" | "train";
+};
+
 export type ClientMessage =
+  | { type: "vehicle-horn" }
   | { type: "call-train"; requestId: number; benchId: number }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }
@@ -350,6 +358,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 // ---- Server → Client messages ----
 
 export type ServerMessage =
+  | VehicleHornMessage
   | { type: "vehicle-controlled"; requestId: number }
   | { type: "train-called"; requestId: number }
   | import("../interiors/DoorTraversal.js").DoorMotion

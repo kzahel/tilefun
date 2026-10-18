@@ -1,8 +1,10 @@
 import { expect, type Page, test } from "@playwright/test";
+import type { AudioManager } from "../src/audio/AudioManager.js";
 import type { ClientStateView, RemoteStateView } from "../src/client/ClientStateView.js";
 import type { GameLoop } from "../src/core/GameLoop.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { TapMovement } from "../src/input/TapMovement.js";
+import type { TouchButtons } from "../src/input/TouchButtons.js";
 import { authoredVehicleForType } from "../src/rendering/AuthoredVehicleMeshes.js";
 import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import { projectWorld } from "../src/rendering/Projection.js";
@@ -11,6 +13,8 @@ import type { WorkerClientTransport } from "../src/transport/WorkerClientTranspo
 import { worldTap } from "./helpers/worldTap.js";
 
 type Game = {
+  audioManager: AudioManager;
+  touchButtons: TouchButtons;
   stateView: ClientStateView;
   remoteView: RemoteStateView;
   loop: GameLoop;
@@ -41,6 +45,35 @@ async function read(page: Page) {
       target: g.tapMovement.target,
     };
   });
+}
+async function checkHorn(page: Page, kind: "car" | "train") {
+  const canvas = page.locator("#game");
+  await canvas.evaluate((c) => {
+    const g = (c as unknown as { __game: Game }).__game;
+    const play = g.audioManager.playVehicleHorn.bind(g.audioManager);
+    (c as HTMLElement).dataset.horns = "0";
+    g.audioManager.playVehicleHorn = (message, listener) => {
+      (c as HTMLElement).dataset.horns = String(Number((c as HTMLElement).dataset.horns) + 1);
+      (c as HTMLElement).dataset.hornKind = message.kind;
+      play(message, listener);
+    };
+  });
+  await page.keyboard.press("h");
+  await expect(canvas).toHaveAttribute("data-horns", "1");
+  if (kind === "train") await expect(canvas).toHaveAttribute("data-horn-kind", "train");
+  await expect
+    .poll(() =>
+      canvas.evaluate((c) => (c as unknown as { __game: Game }).__game.audioManager.ready),
+    )
+    .toBe(true);
+  await page.waitForTimeout(850); // Authority admits one short horn per 800 ms.
+  const spot = await canvas.evaluate((c) => {
+    const g = (c as unknown as { __game: Game }).__game,
+      rect = c.getBoundingClientRect();
+    return { x: rect.right - 52, y: rect.bottom - 52 - (g.touchButtons.emergency ? 136 : 0) };
+  });
+  await page.touchscreen.tap(spot.x, spot.y);
+  await expect(canvas).toHaveAttribute("data-horns", "2");
 }
 async function start(page: Page, backend: string, cars = false) {
   const generation = createDescriptor("regional", 2026);
@@ -149,6 +182,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     await page.getByRole("button", { name: "Drive car · E", exact: true }).tap();
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toMatch(/^vehicle-v1:/);
+    await checkHorn(page, "car");
     if (backend.includes("meshes")) {
       if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
       else expect((await read(page)).type).toBe("vehicle-v1:compact-1");
@@ -373,6 +407,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       await enter.tap();
       await expect.poll(async () => (await read(page)).parent).not.toBeNull();
       expect((await read(page)).type).toMatch(/^train/);
+      await checkHorn(page, "train");
       const session = await page.context().newCDPSession(page);
       if (mode === "Hold to move")
         await session.send("Input.dispatchTouchEvent", {

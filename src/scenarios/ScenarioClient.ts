@@ -8,7 +8,7 @@ import {
   quantizeAxis,
   quantizeInputDtMs,
 } from "../shared/binaryCodec.js";
-import type { BufferedMessage } from "../shared/protocol.js";
+import type { BufferedMessage, VehicleHornMessage } from "../shared/protocol.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "../transport/OrderedWorkerChannel.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { World } from "../world/World.js";
@@ -32,6 +32,7 @@ export class ScenarioClient {
   readonly view = new RemoteStateView(new World());
   readonly predictor: PlayerPredictor;
   readonly ready: Promise<void>;
+  onHorn?: (message: VehicleHornMessage) => void;
   handles: Record<string, number> = {};
   traffic: ScenarioResponse["traffic"];
   parking: ScenarioResponse["parking"];
@@ -119,6 +120,7 @@ export class ScenarioClient {
       this.resetReplica = true;
     } else if (packet.type === "frame") {
       const message = decodeServerMessage(packet.buffer);
+      if (message.type === "vehicle-horn") this.onHorn?.(message);
       // Lab settings stay scoped; never change the page's global CVars.
       if (
         message.type !== "sync-cvars" &&

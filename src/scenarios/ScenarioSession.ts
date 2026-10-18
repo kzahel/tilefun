@@ -403,6 +403,10 @@ export class ScenarioSession {
       await this.realm.callTrain(this.player, command.benchId);
       return;
     }
+    if (command.kind === "vehicle-horn") {
+      this.realm.vehicles.honk(this.player);
+      return;
+    }
     if (command.kind === "vehicle-emergency") {
       this.realm.vehicles.emergency(this.player, command.action);
       return;

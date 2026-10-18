@@ -4,9 +4,10 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import { createPerson1 } from "../entities/Person.js";
 import type { PropManager } from "../entities/PropManager.js";
 import type { World } from "../world/World.js";
-import { DRIVE_SPEED, drivenCarPose } from "./Driving.js";
+import { drivenCarPose } from "./Driving.js";
 import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js";
 import { createVehicle } from "./Vehicle.js";
+import { vehiclePerformance } from "./VehiclePerformance.js";
 
 type Point = PositionComponent;
 export interface ParkingVisit {
@@ -274,7 +275,10 @@ export class ParkingSystem {
       car.velocity = { vx: (velocity.vx / oldSpeed) * speed, vy: (velocity.vy / oldSpeed) * speed };
     const pose = drivenCarPose(
       car,
-      { dx: ((dx / distance) * speed) / DRIVE_SPEED, dy: ((dy / distance) * speed) / DRIVE_SPEED },
+      {
+        dx: ((dx / distance) * speed) / vehiclePerformance(car.type).speed,
+        dy: ((dy / distance) * speed) / vehiclePerformance(car.type).speed,
+      },
       dt,
       this.world,
       this.props.props,

@@ -95,7 +95,10 @@ to travel and lift to stop; cars steer toward the held finger. **Get out · E**
 stops and finds clear ground.
 Off-road cars stay parked and saved; cars on suitable roads resume traffic.
 See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md). Driving keeps on-screen action buttons visible even on desktop:
-hold **Fast / Shift** to go faster. In an ambulance, police car or firetruck, **Siren / B** toggles flashing
+hold **Fast / Shift** to go faster and tap **Horn / H** to honk (**Whistle / H** in trains).
+Sportier cars drive faster; buses and heavy trucks accelerate more slowly. Driven
+cars and all trains gently nudge players and movable animals/balls, with stronger
+pushing from heavier vehicles. A blocked push stops the vehicle; there is no damage. In an ambulance, police car or firetruck, **Siren / B** toggles flashing
 lights and sound; **Style / Space** cycles EU-style two-tone, US-style wail and
 lights-only. Garbage trucks use **Beacon / B** for silent amber lights.
 Try any of the 45 vehicle choices in the Traffic playground.

@@ -1659,6 +1659,7 @@ export class GameServer {
       msg.type.startsWith("edit-") ||
       msg.type === "throw-ball" ||
       msg.type === "vehicle-emergency" ||
+      msg.type === "vehicle-horn" ||
       msg.type === "player-interact"
     ) {
       const report = (error: unknown) =>

@@ -1179,6 +1179,16 @@ export class Realm {
     for (const session of activeSessions) this.savePlayerData(session);
     this.worldAPI.advanceTime(dt);
 
+    for (const horn of this.vehicles.takeHorns()) {
+      for (const session of this.sessions.values())
+        if (
+          !session.transitioning &&
+          !dormantClientIds.has(session.clientId) &&
+          Math.hypot(session.player.position.wx - horn.wx, session.player.position.wy - horn.wy) <
+            750
+        )
+          transport.send(session.clientId, horn);
+    }
     // Broadcast state to all clients (serialized mode)
     if (broadcasting) {
       const ranges = [...this.sessions.values()]
@@ -1390,6 +1400,10 @@ export class Realm {
         this.worldAPI.events.emit("player-interact", { wx: msg.wx, wy: msg.wy });
         break;
 
+      case "vehicle-horn": {
+        this.vehicles.honk(session);
+        break;
+      }
       case "vehicle-emergency": {
         this.vehicles.emergency(session, msg.action);
         break;

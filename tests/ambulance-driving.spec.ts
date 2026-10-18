@@ -20,11 +20,19 @@ for (const [model, parts, resource] of [
       await page.getByLabel("Playground vehicle").selectOption(model);
       await expect(canvas).toHaveAttribute("data-ready", "true");
       await canvas.focus();
+      const initialPlayerX = Number(await canvas.getAttribute("data-player-x"));
       await page.keyboard.down("ArrowLeft");
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-player-x")))
+        .toBeLessThan(initialPlayerX - 8);
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-speed")))
+        .toBeLessThan(0.1);
       await expect(page.getByRole("button", { name: "Drive car · E", exact: true })).toBeVisible();
       await page.keyboard.up("ArrowLeft");
       await page.getByRole("button", { name: "Drive car · E", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-driving", "true");
+      await page.getByRole("button", { name: "Horn · H", exact: true }).click();
       if (backend.includes("meshes")) {
         await expect
           .poll(() =>

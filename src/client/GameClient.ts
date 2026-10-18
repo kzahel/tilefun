@@ -411,6 +411,14 @@ export class GameClient {
     };
     const routePatternStatus = (msg: ServerMessage) => {
       if (
+        msg.type === "vehicle-horn" &&
+        this.scenes.current instanceof PlayScene &&
+        !this.playInputBlocked &&
+        !this.storagePaused &&
+        !this.doorPresentation.busy
+      )
+        this.audioManager.playVehicleHorn(msg, this.stateView.playerEntity.position);
+      if (
         msg.type === "world-loaded" ||
         msg.type === "realm-joined" ||
         (msg.type === "door-motion" && msg.self)

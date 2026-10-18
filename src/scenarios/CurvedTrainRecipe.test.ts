@@ -81,7 +81,7 @@ for (const loop of [true, false])
       }
     }, 30000);
   }
-it("stops for a child, missing rails or unready terrain; retires and deletes the whole group", async () => {
+it("nudges a child and stops for missing rails or unready terrain; retires and deletes the whole group", async () => {
   const s = await ScenarioSession.create(curvedTrainRecipe());
   try {
     const railway = required(s.realm.railway);
@@ -90,8 +90,8 @@ it("stops for a child, missing rails or unready terrain; retires and deletes the
     const child = createPlayer(260, -512);
     const actor = s.realm.entityManager.spawn(child);
     for (let i = 0; i < 80; i++) await s.step(idle, 0.1);
-    expect(service.speed).toBe(0);
-    expect(service.entity.position.wx).toBeLessThan(40);
+    expect(actor.position.wx).toBeGreaterThan(280);
+    expect(service.entity.position.wx).toBeLessThan(actor.position.wx);
     s.realm.entityManager.remove(actor.id, false);
     const before = service.record.distance;
     railway.tick(1, () => false);

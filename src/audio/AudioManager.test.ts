@@ -77,3 +77,59 @@ it.each(["ambulance", "fire-truck-ladder-1", "police-car", "fire-truck-ladder-2"
     expect(sources).toHaveLength(4);
   },
 );
+
+it("plays distinct spatial car, heavy and train horns and cleans up their short voices", () => {
+  const node = () => ({ connect: vi.fn(), disconnect: vi.fn() });
+  const param = () => ({ value: 0, setValueAtTime: vi.fn(), linearRampToValueAtTime: vi.fn() });
+  const voices: {
+    frequency: ReturnType<typeof param>;
+    start: ReturnType<typeof vi.fn>;
+    stop: ReturnType<typeof vi.fn>;
+    disconnect: ReturnType<typeof vi.fn>;
+    onended?: () => void;
+  }[] = [];
+  const gains: ReturnType<typeof param>[] = [],
+    pans: ReturnType<typeof param>[] = [];
+  vi.stubGlobal(
+    "AudioContext",
+    class {
+      state = "running";
+      currentTime = 10;
+      destination = node();
+      createGain() {
+        const gain = param();
+        gains.push(gain);
+        return { ...node(), gain };
+      }
+      createStereoPanner() {
+        const pan = param();
+        pans.push(pan);
+        return { ...node(), pan };
+      }
+      createOscillator() {
+        const voice = { ...node(), frequency: param(), start: vi.fn(), stop: vi.fn() };
+        voices.push(voice);
+        return voice;
+      }
+    },
+  );
+  const audio = new AudioManager(),
+    listener = { wx: 0, wy: 0 };
+  audio.playVehicleHorn({ type: "vehicle-horn", wx: 0, wy: 0, kind: "car" }, listener);
+  expect(voices).toHaveLength(0);
+  audio.ensureContext();
+  audio.playVehicleHorn({ type: "vehicle-horn", wx: 800, wy: 0, kind: "car" }, listener);
+  expect(voices).toHaveLength(0);
+  for (const kind of ["car", "heavy", "train"] as const)
+    audio.playVehicleHorn({ type: "vehicle-horn", wx: 250, wy: 0, kind }, listener);
+  expect(voices.map((v) => v.frequency.value)).toEqual([350, 440, 155, 196, 440, 554, 660]);
+  expect(pans.map((p) => p.value)).toEqual([0.5, 0.5, 0.5]);
+  expect(gains[1]?.linearRampToValueAtTime.mock.calls[0]?.[0]).toBeCloseTo(0.04);
+  expect(gains[1]?.linearRampToValueAtTime.mock.calls[0]?.[1]).toBe(10.02);
+  expect(voices[0]?.stop).toHaveBeenCalledWith(10.32);
+  expect(voices[6]?.stop).toHaveBeenCalledWith(10.7);
+  for (const voice of voices) {
+    voice.onended?.();
+    expect(voice.disconnect).toHaveBeenCalled();
+  }
+});

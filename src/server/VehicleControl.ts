@@ -7,12 +7,15 @@ import {
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
+import { isTrain } from "../railway/Train.js";
+import type { VehicleHornMessage } from "../shared/protocol.js";
 import { boardingDistance, isDrivable } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -22,9 +25,33 @@ import { safeArrival } from "./SafeArrival.js";
 export class VehicleControl {
   private drivers = new Map<
     number,
-    { session: PlayerSession; vehicle: Entity; lastInput: number }
+    { session: PlayerSession; vehicle: Entity; lastInput: number; lastHorn?: number }
   >();
   constructor(private realm: Realm) {}
+  private horns: VehicleHornMessage[] = [];
+  honk(session: PlayerSession): void {
+    const driver = this.drivers.get(session.player.id);
+    if (!driver || session.editorEnabled || session.transitioning || session.retired) return;
+    const now = this.realm.worldAPI.time;
+    if (now - (driver.lastHorn ?? -Infinity) < 0.8) return;
+    driver.lastHorn = now;
+    const vehicle = driver.vehicle;
+    this.horns.push({
+      type: "vehicle-horn",
+      wx: vehicle.position.wx,
+      wy: vehicle.position.wy,
+      kind: isTrain(vehicle)
+        ? "train"
+        : vehiclePerformance(vehicle.type).pushWeight >= 500
+          ? "heavy"
+          : "car",
+    });
+  }
+  takeHorns(): VehicleHornMessage[] {
+    const horns = this.horns;
+    this.horns = [];
+    return horns;
+  }
   get(session: PlayerSession): Entity | undefined {
     return this.drivers.get(session.player?.id)?.vehicle;
   }

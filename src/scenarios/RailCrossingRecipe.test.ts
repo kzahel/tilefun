@@ -61,7 +61,7 @@ it("walks both road approaches while the real train passes underneath and surviv
   }
 });
 
-it("stops the train before an insufficient bridge clearance or a pedestrian at track height", async () => {
+it("stops before insufficient bridge clearance and gently pushes a pedestrian at track height", async () => {
   for (const obstruction of ["low ceiling", "pedestrian"] as const) {
     const recipe = railCrossingRecipe();
     if (obstruction === "low ceiling") {
@@ -74,9 +74,14 @@ it("stops the train before an insufficient bridge clearance or a pedestrian at t
         await s.command({ kind: "teleport", position: { wx: 0, wy: 8 }, z: 0 });
       for (let i = 0; i < 160; i++) await s.step(idle, 0.1);
       const train = required(s.realm.railway?.services.get("crossing-shuttle"));
-      expect(train.speed).toBe(0);
-      expect(train.entity.position.wx).toBeLessThan(-220);
-      expect(train.entity.position.wx).toBeGreaterThan(-384);
+      if (obstruction === "pedestrian") {
+        expect(s.player.player.position.wx).toBeGreaterThan(20);
+        expect(train.entity.position.wx).toBeLessThan(s.player.player.position.wx - 224);
+      } else {
+        expect(train.speed).toBe(0);
+        expect(train.entity.position.wx).toBeLessThan(-220);
+        expect(train.entity.position.wx).toBeGreaterThan(-384);
+      }
     } finally {
       await s.close();
     }

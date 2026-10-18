@@ -272,6 +272,7 @@ export class PlayScene implements GameScene {
     gc.touchButtons.driving = !!vehicle;
     gc.touchButtons.emergency = !!vehicle && isEmergencyVehicle(vehicle);
     gc.touchButtons.warning = !!vehicle && isWarningVehicle(vehicle);
+    gc.touchButtons.train = !!vehicle && isTrain(vehicle);
     gc.touchButtons.emergencyState = vehicle ? vehicleLightState(vehicle) : 2;
     const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
     gc.touchButtons.enabled = !inputLocked;
@@ -303,6 +304,8 @@ export class PlayScene implements GameScene {
           !!vehicle && isTrain(vehicle),
           vehicle ? 24 : 0,
         ) ?? manual;
+    const hornPressed = gc.actions.consumeHornPress();
+    if (vehicle && !inputLocked && hornPressed) gc.transport.send({ type: "vehicle-horn" });
     const sirenHeld = !inputLocked && gc.actions.isHeld("throw");
     const styleHeld = !inputLocked && gc.actions.isHeld("jump");
     if (vehicle && hasVehicleLights(vehicle)) {

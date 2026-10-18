@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
+import { AudioManager } from "../audio/AudioManager.js";
 import {
   TERRAIN_PACING,
   type TerrainPacing,
@@ -25,6 +26,12 @@ export default function TrafficPage() {
   const canvas = useRef<TrafficCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null),
     keys = useRef(new Set<string>());
+  const audio = useRef<AudioManager | null>(null);
+  const honk = () => {
+    audio.current ??= new AudioManager();
+    audio.current.tryResume();
+    void scene.current?.command({ kind: "vehicle-horn" }).catch((e) => setError(String(e)));
+  };
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0),
     [paused, setPaused] = useState(false);
@@ -81,6 +88,10 @@ export default function TrafficPage() {
         c.dataset.playerY = String(s.view.playerEntity.position.wy);
       },
     });
+    host.session.onHorn = (message) => {
+      if (presentation.current.paused || document.hidden) return;
+      audio.current?.playVehicleHorn(message, host.session.view.playerEntity.position);
+    };
     scene.current = host;
     void host.ready
       .then(() => {
@@ -184,6 +195,11 @@ export default function TrafficPage() {
         {driving && (
           <button type="button" {...touch("Shift")}>
             Fast
+          </button>
+        )}
+        {driving && (
+          <button type="button" onClick={honk}>
+            Horn · H
           </button>
         )}
         {driving && hasVehicleLights({ type: `vehicle-v1:${model}` }) && (
@@ -317,6 +333,11 @@ export default function TrafficPage() {
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none", borderRadius: 12 }}
           onKeyDown={(e) => {
+            if (driving && e.key.toLowerCase() === "h") {
+              e.preventDefault();
+              if (!e.repeat) honk();
+              return;
+            }
             const vehicle = { type: `vehicle-v1:${model}` };
             const lightAction =
               e.key.toLowerCase() === "b"
