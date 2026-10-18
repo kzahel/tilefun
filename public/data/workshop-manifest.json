@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "parking-lab",
+      "name": "Parking lot lab",
+      "description": "Big shopping-center parking, smaller town lots and long-bay patterns with native tiles and parked cars.",
+      "url": "workshop.html#/tool/parking-lab",
+      "mode": "review"
+    },
+    {
       "id": "authored-trains",
       "name": "Authored train models",
       "description": "Inspect the active blue train's retained carriage comparisons, curves, joins and reversal.",
@@ -257,6 +264,12 @@
       "name": "Fenced tree pattern kit",
       "description": "Five source-backed cap/repeat, erase/split and independent-row cases. Candidate art and ground footprint shared with the game brush.",
       "toolId": "patterns"
+    },
+    {
+      "id": "parking-patterns",
+      "name": "Parking lots & shopping center",
+      "description": "Three native-tile layout studies with parked-car scale references. Automatic parking is future work.",
+      "toolId": "parking-lab"
     },
     {
       "id": "pedestrians",
@@ -4705,6 +4718,132 @@
           "revision": "ab8da9ba8cb808f93476ae5ef5205a1212555b875986ff4e1fc1039d92b1b35a",
           "renderFingerprint": "3ae1acc3ab73817f78952d7885f84f9d458547a8b46582171cb94d5c86c6e974",
           "url": "/tilefun/workshop.html#/review/pattern%3Afenced-trees-v1-parallel"
+        }
+      }
+    },
+    {
+      "id": "pattern:parking-v1-shopping",
+      "batchId": "parking-patterns",
+      "kind": "pattern",
+      "name": "Shopping center",
+      "prompt": "64 spaces, paired rows, three wide aisles and a central walk to the shops. Inspect bay repeats, car scale, aisle space and pedestrian access. Static layout study: parked cars are scale references; automatic arrival/parking and town generation are future work.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-shopping",
+      "fingerprint": "40efb1917bfb1d647d31d1abc67350628e05745283e89428938670b97e2224c0",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "parking-v1-shopping",
+        "prefabIds": [],
+        "revision": "4fe315c6b105d6cd5efc8ef77cb93e37ad9a0949aafecc64959e49898e212c30",
+        "renderFingerprint": "40efb1917bfb1d647d31d1abc67350628e05745283e89428938670b97e2224c0",
+        "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-shopping"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          0,
+          1904,
+          208,
+          288
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "parking-v1-shopping",
+          "prefabIds": [],
+          "revision": "4fe315c6b105d6cd5efc8ef77cb93e37ad9a0949aafecc64959e49898e212c30",
+          "renderFingerprint": "40efb1917bfb1d647d31d1abc67350628e05745283e89428938670b97e2224c0",
+          "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-shopping"
+        }
+      }
+    },
+    {
+      "id": "pattern:parking-v1-town",
+      "batchId": "parking-patterns",
+      "kind": "pattern",
+      "name": "Town shops",
+      "prompt": "16 spaces in two rows, with one generous aisle and a short walk to the shops. Inspect bay repeats, car scale, aisle space and pedestrian access. Static layout study: parked cars are scale references; automatic arrival/parking and town generation are future work.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-town",
+      "fingerprint": "4eac64779e1b9a7d1aa73d8ec5d9b929e3bd6455994ebaf57c39c063fdbfd207",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "parking-v1-town",
+        "prefabIds": [],
+        "revision": "35cfe4ff661e1e7829a84c83519127e18b44c4f3f14af1519f7737485cf54167",
+        "renderFingerprint": "4eac64779e1b9a7d1aa73d8ec5d9b929e3bd6455994ebaf57c39c063fdbfd207",
+        "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-town"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          0,
+          1904,
+          208,
+          288
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "parking-v1-town",
+          "prefabIds": [],
+          "revision": "35cfe4ff661e1e7829a84c83519127e18b44c4f3f14af1519f7737485cf54167",
+          "renderFingerprint": "4eac64779e1b9a7d1aa73d8ec5d9b929e3bd6455994ebaf57c39c063fdbfd207",
+          "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-town"
+        }
+      }
+    },
+    {
+      "id": "pattern:parking-v1-parallel",
+      "batchId": "parking-patterns",
+      "kind": "pattern",
+      "name": "Long parking bays",
+      "prompt": "16 side-facing spaces around a central drive, using the native long-bay tiles. Inspect bay repeats, car scale, aisle space and pedestrian access. Static layout study: parked cars are scale references; automatic arrival/parking and town generation are future work.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-parallel",
+      "fingerprint": "894e0a896500ce1a6555f1b7735a7a0f131ebbf9104138e4b3fdcc90f585333e",
+      "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+      "review": {
+        "scene": "pattern",
+        "caseId": "parking-v1-parallel",
+        "prefabIds": [],
+        "revision": "6f6d20cc1e1c9f2c6f187f11dc5137b8cefbe19e7b6bf812748893d412dbb6b0",
+        "renderFingerprint": "894e0a896500ce1a6555f1b7735a7a0f131ebbf9104138e4b3fdcc90f585333e",
+        "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-parallel"
+      },
+      "art": {
+        "sheetId": "me-complete",
+        "fingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+        "sheetSize": [
+          2816,
+          8224
+        ],
+        "rect": [
+          0,
+          1904,
+          208,
+          288
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "parking-v1-parallel",
+          "prefabIds": [],
+          "revision": "6f6d20cc1e1c9f2c6f187f11dc5137b8cefbe19e7b6bf812748893d412dbb6b0",
+          "renderFingerprint": "894e0a896500ce1a6555f1b7735a7a0f131ebbf9104138e4b3fdcc90f585333e",
+          "url": "/tilefun/workshop.html#/review/pattern%3Aparking-v1-parallel"
         }
       }
     },
@@ -30862,5 +31001,5 @@
       }
     }
   ],
-  "inputDigest": "1bd439481aebaf2a086494ad85825b78139aeb7cbb666bda24986f2074c05a76"
+  "inputDigest": "5a6ecf6a756e449875b92d9fb2f0fc9e8bf3de8c698cad2cebbbd68322b05eaf"
 }

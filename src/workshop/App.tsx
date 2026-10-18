@@ -36,6 +36,7 @@ const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
 const FamilySheetsPage = lazy(() => import("./FamilySheetsPage.js"));
 const PatternPage = lazy(() => import("./PatternPage.js"));
+const ParkingPage = lazy(() => import("./ParkingPage.js"));
 const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
 const ScenePage = lazy(() => import("./ScenePage.js"));
 export const reviewPath = (id: string) => `/review/${encodeURIComponent(id)}`;
@@ -241,6 +242,7 @@ export function App() {
           {WORKSHOP_TOOLS.filter((tool) =>
             [
               "patterns",
+              "parking-lab",
               "outdoor",
               "traffic",
               "world-geometry",
@@ -266,6 +268,7 @@ export function App() {
               {(["review", "adapter"].includes(tool.mode) || tool.id === "patterns") &&
               [
                 "patterns",
+                "parking-lab",
                 "traffic",
                 "railways",
                 "vehicles",
@@ -959,6 +962,7 @@ function ToolPage() {
     location = useLocation();
   if (!tool) return <Navigate to="/tools" replace />;
   if (tool.id === "patterns") return <PatternPage />;
+  if (tool.id === "parking-lab") return <ParkingPage />;
   if (tool.id === "character-lab")
     return (
       <AuthGate>

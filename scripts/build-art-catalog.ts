@@ -9,6 +9,11 @@ import {
   required,
   validateRect,
 } from "../src/art/ArtCatalog.js";
+import {
+  PARKING_CASES,
+  parkingCarPiece,
+  parkingStudy,
+} from "../src/art/studies/ParkingLotStudy.js";
 import { registerTileVariants, SPRITE_MANIFEST } from "../src/assets/GameAssets.js";
 import { VEHICLE_VIEWS } from "../src/assets/vehicles/VehicleCatalog.js";
 import { BlendGraph } from "../src/autotile/BlendGraph.js";
@@ -446,6 +451,17 @@ for (const [part, rect] of Object.entries(FENCED_TREES.sources))
       },
     ],
   );
+
+const parkingSources = new Map<string, { rect: ArtRect; label: string }>();
+for (const c of PARKING_CASES) {
+  const plan = parkingStudy(c.id);
+  for (const p of [...plan.pieces, ...plan.bays.map(parkingCarPiece)])
+    parkingSources.set(p.rect.join(","), { rect: [...p.rect] as ArtRect, label: p.label });
+}
+for (const [key, p] of parkingSources)
+  add(`parking-study:${key}`, "me-complete", p.rect, `${p.label} (parking study)`, "recipe", [
+    { system: "Parking lot lab (candidate)", source: "src/art/studies/ParkingLotStudy.ts" },
+  ]);
 
 for (const [key, consumers] of references)
   if (key.startsWith("room-builder/") && interiors.has(key))

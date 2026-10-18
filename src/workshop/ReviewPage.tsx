@@ -679,9 +679,15 @@ function ReviewCase({
           {c.kind === "pattern" ? (
             <Link
               className="button"
-              to={`/tool/patterns?family=fenced-trees-v1&case=${c.review?.caseId}`}
+              to={
+                c.batchId === "parking-patterns"
+                  ? `/tool/parking-lab?case=${c.review?.caseId?.replace(/^parking-v1-/, "")}`
+                  : `/tool/patterns?family=fenced-trees-v1&case=${c.review?.caseId}`
+              }
             >
-              Draw with this kit →
+              {c.batchId === "parking-patterns"
+                ? "Compare parking layouts →"
+                : "Draw with this kit →"}
             </Link>
           ) : null}
           {c.art ? (

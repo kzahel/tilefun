@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-09.
+Updated: 2026-10-18.
 
 ## Current generation policy
 
@@ -100,6 +100,18 @@ Their local traffic is suppressed to focus inspection; ordinary game traffic
 remains enabled. Use the regional planning link for settlement-scale geometry.
 
 ## Next work
+
+[Parking lot patterns](../tactical/131-parking-lot-patterns.md) adds a new
+[Parking lot lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/parking-lab)
+for the owner's shopping-center request (2026-10-18): 64-space shopping center,
+16-space town lot and long side-facing bays, with native source tiles and parked
+car scale references. Three new exact candidates await review under
+`parking-patterns`. These are static compositions, separate from the old v7
+archive. Automatic parking and inclusion in some current towns remain next work;
+they must use shared production planning and traffic authority.
+The owner's follow-up requests a complete shopping visit: occupants leave parked
+cars, enter shops, return and drive away. Limit active parking/departure maneuvers
+to one or two cars at once, with reserved bays and coordinated aisle access.
 
 [Natural landscapes](natural-landscapes.md) now supplies the default regional
 composition, including patterned forests, scattered trees and ponds. The owner

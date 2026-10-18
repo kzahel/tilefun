@@ -1,5 +1,6 @@
 import { type ArtCatalog, required } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage } from "../art/ArtSource.js";
+import { PARKING_CASES } from "../art/studies/ParkingLotStudy.js";
 import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
@@ -42,6 +43,8 @@ try {
     candidates.push(await buildArtCandidate(canvas, definition, assets, catalog));
   for (const c of TREE_PATTERN_CASES)
     candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
+  for (const c of PARKING_CASES)
+    candidates.push(await buildPatternCandidate(canvas, `parking-v1-${c.id}`, assets, catalog));
   for (const id of DOOR_CASES)
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
   candidates.push(...(await buildNaturalCandidates(catalog)));

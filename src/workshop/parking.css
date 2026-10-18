@@ -1,0 +1,92 @@
+.parking-lab {
+  max-width: 1500px;
+  margin: auto;
+}
+.parking-options {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+  margin: 0 0 24px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.parking-options button {
+  text-align: left;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+.parking-options button[aria-pressed="true"] {
+  background: #dceadd;
+  border-color: #547d69;
+}
+.parking-options strong {
+  font-size: 16px;
+}
+.parking-options span,
+.parking-caption {
+  color: #526653;
+  line-height: 1.5;
+}
+.parking-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.parking-summary h2,
+.parking-summary p {
+  margin: 0 0 8px;
+}
+.parking-lab .canvas-stage {
+  height: min(70vh, 780px);
+  min-height: 320px;
+}
+.parking-lab canvas {
+  image-rendering: pixelated;
+}
+.parking-lab input[type="checkbox"] {
+  width: auto;
+}
+.parking-kit {
+  padding: 20px;
+  margin-top: 28px;
+  border: 1px solid #c5cfc3;
+  border-radius: 12px;
+}
+.parking-kit canvas {
+  display: block;
+  width: 100%;
+  max-width: 960px;
+  height: auto;
+}
+.parking-kit-labels {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 960px;
+  text-align: center;
+  gap: 8px;
+  margin: 8px 0 24px;
+  font-size: 13px;
+}
+@media (max-width: 700px) {
+  .parking-options {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .parking-options button {
+    padding: 12px;
+  }
+  .parking-summary {
+    display: block;
+  }
+  .parking-kit {
+    padding: 8px;
+  }
+  .parking-kit-labels {
+    font-size: 10px;
+    gap: 4px;
+  }
+}

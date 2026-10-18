@@ -14,6 +14,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | --- | --- |
 | [132 Predator hunting and replacement](132-predator-hunting-and-replacement.md) | In progress: tiger hunting and nearby prey replacement, then panther/lion/bear art, shared behavior and world spawning |
 | [131 Predators and prehistoric creatures](131-predators-and-prehistoric-creatures.md) | Tiger Blender/pixel pilot delivered for pending review; panther/lion/bear and optional T. rex remain proposed |
+| [131 Parking lot patterns](131-parking-lot-patterns.md) | Three static source-backed parking studies; exact reviews and shared traffic follow-up; [city generation](../topics/city-generation.md) |
 | [130 Vehicle game-camera fit](130-vehicle-game-camera-fit.md) | All 45 native side heights, diagonal contacts, contact shadows and correction-resistant travel heading; 629 browsers pass |
 | [129 Runtime vehicle geometry batching](129-vehicle-geometry-batching.md) | All road models compile compatible siblings with exact native pixel qualification; phone mesh calls 81.9% lower, render mean 12.3% lower; 50ms p95 remains |
 | [128 Editor vehicle placement](128-editor-vehicle-placement.md) | All 45 parked vehicles in a dedicated picker; shared driving, lights, durable placement/reload and deletion |

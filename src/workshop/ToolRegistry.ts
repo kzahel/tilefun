@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "parking-lab",
+    name: "Parking lot lab",
+    description:
+      "Big shopping-center parking, smaller town lots and long-bay patterns with native tiles and parked cars.",
+    url: "workshop.html#/tool/parking-lab",
+    mode: "review",
+  },
+  {
     id: "authored-trains",
     name: "Authored train models",
     description:
@@ -270,6 +278,13 @@ export const CITY_BATCHES: ReviewBatch[] = [
     description:
       "Five source-backed cap/repeat, erase/split and independent-row cases. Candidate art and ground footprint shared with the game brush.",
     toolId: "patterns",
+  },
+  {
+    id: "parking-patterns",
+    name: "Parking lots & shopping center",
+    description:
+      "Three native-tile layout studies with parked-car scale references. Automatic parking is future work.",
+    toolId: "parking-lab",
   },
   ...Object.entries(CITY_REVIEW_RUNS).map(([id, r]) => ({
     id,

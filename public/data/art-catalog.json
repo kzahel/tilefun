@@ -21430,6 +21430,924 @@
       ]
     },
     {
+      "id": "parking-study:96,1984,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1984,
+        16,
+        16
+      ],
+      "label": "Walking spine (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:112,1984,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1984,
+        16,
+        16
+      ],
+      "label": "Walking spine (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,2000,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        2000,
+        16,
+        16
+      ],
+      "label": "Walking spine (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:112,2000,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        2000,
+        16,
+        16
+      ],
+      "label": "Walking spine (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1904,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1904,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:32,1952,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1952,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:112,1904,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        112,
+        1904,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1920,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1920,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:80,1904,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        80,
+        1904,
+        16,
+        16
+      ],
+      "label": "Asphalt fill (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:16,1920,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1920,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:16,1904,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1904,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:32,1904,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        32,
+        1904,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1904,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1904,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1952,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1952,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:16,1952,16,16",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        1952,
+        16,
+        16
+      ],
+      "label": "Curb join (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,2112,48,80",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        2112,
+        48,
+        80
+      ],
+      "label": "Upright parking bay (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:48,2112,48,80",
+      "sheetId": "me-complete",
+      "rect": [
+        48,
+        2112,
+        48,
+        80
+      ],
+      "label": "Upright parking bay (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,2112,48,80",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        2112,
+        48,
+        80
+      ],
+      "label": "Upright parking bay (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1968,32,16",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1968,
+        32,
+        16
+      ],
+      "label": "Pedestrian crossing (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:2256,1936,112,96",
+      "sheetId": "me-complete",
+      "rect": [
+        2256,
+        1936,
+        112,
+        96
+      ],
+      "label": "Commercial roof (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:1120,2384,112,80",
+      "sheetId": "me-complete",
+      "rect": [
+        1120,
+        2384,
+        112,
+        80
+      ],
+      "label": "Shopfront (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:1600,2384,112,80",
+      "sheetId": "me-complete",
+      "rect": [
+        1600,
+        2384,
+        112,
+        80
+      ],
+      "label": "Shopfront (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1984,48,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1984,
+        48,
+        64
+      ],
+      "label": "Island curb (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:256,48,32,48",
+      "sheetId": "me-complete",
+      "rect": [
+        256,
+        48,
+        32,
+        48
+      ],
+      "label": "Island tree (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:1280,608,64,80",
+      "sheetId": "me-complete",
+      "rect": [
+        1280,
+        608,
+        64,
+        80
+      ],
+      "label": "Shopping carts (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:816,224,16,32",
+      "sheetId": "me-complete",
+      "rect": [
+        816,
+        224,
+        16,
+        32
+      ],
+      "label": "Parking pay station (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1152,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1152,
+        32,
+        64
+      ],
+      "label": "Compact 1 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1216,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1216,
+        32,
+        64
+      ],
+      "label": "Compact 2 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1280,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1280,
+        32,
+        64
+      ],
+      "label": "Compact 3 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1344,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1344,
+        32,
+        64
+      ],
+      "label": "Compact 4 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1408,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1408,
+        32,
+        64
+      ],
+      "label": "Compact 5 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:64,1472,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        64,
+        1472,
+        32,
+        64
+      ],
+      "label": "Compact 6 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1408,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1408,
+        32,
+        64
+      ],
+      "label": "Compact 5 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1472,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1472,
+        32,
+        64
+      ],
+      "label": "Compact 6 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1152,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1152,
+        32,
+        64
+      ],
+      "label": "Compact 1 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1216,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1216,
+        32,
+        64
+      ],
+      "label": "Compact 2 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1280,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1280,
+        32,
+        64
+      ],
+      "label": "Compact 3 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:160,1344,32,64",
+      "sheetId": "me-complete",
+      "rect": [
+        160,
+        1344,
+        32,
+        64
+      ],
+      "label": "Compact 4 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:16,2048,80,32",
+      "sheetId": "me-complete",
+      "rect": [
+        16,
+        2048,
+        80,
+        32
+      ],
+      "label": "Long parking bay (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1152,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1152,
+        64,
+        64
+      ],
+      "label": "Compact 1 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1216,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1216,
+        64,
+        64
+      ],
+      "label": "Compact 2 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1280,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1280,
+        64,
+        64
+      ],
+      "label": "Compact 3 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1344,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1344,
+        64,
+        64
+      ],
+      "label": "Compact 4 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1408,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1408,
+        64,
+        64
+      ],
+      "label": "Compact 5 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:96,1472,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        96,
+        1472,
+        64,
+        64
+      ],
+      "label": "Compact 6 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,1280,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1280,
+        64,
+        64
+      ],
+      "label": "Compact 3 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,1344,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1344,
+        64,
+        64
+      ],
+      "label": "Compact 4 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,1408,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1408,
+        64,
+        64
+      ],
+      "label": "Compact 5 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,1472,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1472,
+        64,
+        64
+      ],
+      "label": "Compact 6 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,1152,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1152,
+        64,
+        64
+      ],
+      "label": "Compact 1 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
+      "id": "parking-study:0,1216,64,64",
+      "sheetId": "me-complete",
+      "rect": [
+        0,
+        1216,
+        64,
+        64
+      ],
+      "label": "Compact 2 parked reference (parking study)",
+      "kind": "recipe",
+      "consumers": [
+        {
+          "system": "Parking lot lab (candidate)",
+          "source": "src/art/studies/ParkingLotStudy.ts"
+        }
+      ]
+    },
+    {
       "id": "architecture:room-builder/floors/c01-r31",
       "sheetId": "modern-interiors",
       "rect": [

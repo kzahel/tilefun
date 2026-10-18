@@ -10,7 +10,8 @@ test("game sidebar opens the central index and each listed destination is served
   await expect(page).toHaveURL(/\/tilefun\/workshop.html$/);
   await page.getByRole("link", { name: "All tools", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Find your tool." })).toBeVisible();
-  await expect(page.locator(".tool-card")).toHaveCount(27);
+  await expect(page.locator(".tool-card")).toHaveCount(28);
+  await expect(page.getByRole("heading", { name: "Parking lot lab", exact: true })).toBeVisible();
   await expect(
     page
       .locator(".tool-card")
