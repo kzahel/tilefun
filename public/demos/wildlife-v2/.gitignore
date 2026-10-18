@@ -365,3 +365,7 @@
 # Verified pending motion identities, owner-authorized autonomous run 140.
 !sheep/motion-v2/*
 !piglet/motion-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!deer/motion-v2/*
+!goat/motion-v2/*

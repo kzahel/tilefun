@@ -1,0 +1,17 @@
+{
+  "identity": "goat-motion-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "retainedCoatMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.0,
+    "up": 2.0,
+    "left": 2.0,
+    "right": 2.0
+  },
+  "rootTravelPixelsPerCycle": 17.28,
+  "walkDurationMs": 960,
+  "velocityPixelsPerSecond": 18.000000000000004
+}

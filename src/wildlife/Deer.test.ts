@@ -35,7 +35,7 @@ import { DEER_FLEE_SPEED, DEER_WALK_SPEED, startleDeer } from "./deerInteraction
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 
-it("uses unchanged native doe cells and real walk/alert ranges", () => {
+it("uses repaired native doe cells and speed-matched walk/alert ranges", () => {
   const metadata = JSON.parse(
     readFileSync(`public/${DEER_IMAGE.replace("sheet.png", "sprite.json")}`, "utf8"),
   );
@@ -48,10 +48,14 @@ it("uses unchanged native doe cells and real walk/alert ranges", () => {
   for (const clip of DEER_CLIPS.slice(0, 3)) {
     expect(metadata.clips[clip.name].start).toBe(clip.start);
     expect(metadata.clips[clip.name].count).toBe(clip.count);
-    expect(clip.frameDuration).toBe(1000 / metadata.fps);
+    expect(clip.frameDuration).toBe(metadata.clips[clip.name].frameDuration);
   }
   expect(DEER_CLIPS[3].start).toBe(DEER_CLIPS[1].start);
   expect(DEER_CLIPS[3].count).toBe(DEER_CLIPS[1].count);
+  expect((DEER_WALK_SPEED * DEER_CLIPS[1].count * DEER_CLIPS[1].frameDuration) / 1000).toBeCloseTo(
+    metadata.rootTravelPixelsPerCycle,
+    6,
+  );
   expect(DEER_FLEE_SPEED * DEER_CLIPS[3].frameDuration).toBe(
     DEER_WALK_SPEED * DEER_CLIPS[1].frameDuration,
   );
@@ -126,7 +130,7 @@ it("walks on the ground and resumes exact saved movement/animation without verti
   );
   expect(deer.wz).toBe(0);
   expect(deer.jumpZ).toBeUndefined();
-  expect(deer.sprite?.frameCol).toBe(5);
+  expect(deer.sprite?.frameCol).toBe(16);
   const restored = decodeActor(encodeActor(deer));
   if ("isProp" in restored) throw new Error("Expected deer");
   expect(restored.sprite?.frameCol).toBe(deer.sprite?.frameCol);
@@ -174,11 +178,11 @@ it("replicates timed walk phase in binary baselines/deltas and clears it at rest
     }),
   );
   if (wire.type !== "frame") throw new Error("Expected frame");
-  expect(deserializeEntity(required(wire.entityBaselines?.[0])).sprite?.frameCol).toBe(5);
+  expect(deserializeEntity(required(wire.entityBaselines?.[0])).sprite?.frameCol).toBe(15);
   const replica = deserializeEntity(before);
   applyEntityDelta(replica, required(wire.entityDeltas?.[0]));
   expect(replica.sprite?.clipElapsedMs).toBe(437);
-  expect(replica.sprite?.frameCol).toBe(5);
+  expect(replica.sprite?.frameCol).toBe(15);
   delete required(deer.sprite).clipElapsedMs;
   applyEntityDelta(replica, required(diffEntitySnapshots(after, serializeEntity(deer))));
   expect(replica.sprite?.clipElapsedMs).toBeUndefined();

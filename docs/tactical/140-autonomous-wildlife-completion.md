@@ -51,3 +51,11 @@ assertion; distinguish them from newly introduced failures.
   six sheep/pig browser checks pass. Full units: 2,820 pass, five known Windows
   symlink/WAL failures, ten skipped. Exact art identities remain pending review.
   Next: deer and goat.
+
+- 20:29 UTC: deer and goat `motion-v2` finished and selected in shared gameplay.
+  Both retain coat, scale and actions: doe white tail flag; goat neck/horns/beard
+  and ear/tail action. Connected fixed-volume four-link legs and moving torso;
+  32 poses over 960ms match 18px/s. Both source replays and 328 Chromium crops
+  per animal pass. Typecheck/lint/build, 889-candidate manifest and six Canvas/GPU
+  gameplay/ball checks pass. Full units: 2,820 pass, five known Windows failures,
+  ten skipped. All changed pixels remain pending human review. Cow/fox next.

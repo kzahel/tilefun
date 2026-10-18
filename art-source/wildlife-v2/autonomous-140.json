@@ -33,9 +33,9 @@
     "fox": {
       "name": "Red fox",
       "family": "Canids (wild)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "motion-v2"
     },
     "rabbit": {
       "name": "Rabbit",
@@ -194,16 +194,20 @@
     "deer": {
       "name": "White-tailed deer",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "motion-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T20:29:00Z",
+      "receipt": "art-source/wildlife-v2/deer/motion-v2/receipt.json",
+      "evidence": "65 half-pose samples/facing; fixed-length limbs; planted travel; native torso motion; byte-identical replay; 328 exact Chromium crops; six shared game checks across pair"
     },
     "cow": {
       "name": "Cow",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "motion-v2"
     },
     "sheep": {
       "name": "Sheep",
@@ -237,9 +241,13 @@
     "goat": {
       "name": "Goat",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "motion-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T20:29:00Z",
+      "receipt": "art-source/wildlife-v2/goat/motion-v2/receipt.json",
+      "evidence": "65 half-pose samples/facing; fixed-length limbs; planted travel; native torso motion; byte-identical replay; 328 exact Chromium crops; six shared game checks across pair"
     },
     "chicken": {
       "name": "Chicken",
@@ -1419,6 +1427,14 @@
         "piglet"
       ],
       "validation": "Typecheck, lint, build and six targeted browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Human art review pending."
+    },
+    {
+      "utc": "2026-10-18T20:29:00Z",
+      "completed": [
+        "deer",
+        "goat"
+      ],
+      "validation": "Typecheck, lint, build, 889-candidate manifest and six targeted browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Human art review pending."
     }
   ]
 }

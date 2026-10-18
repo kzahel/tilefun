@@ -1,15 +1,15 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 
-/** Existing adult doe draft: unchanged native pixels, no art approval implied. */
+/** Repaired adult doe motion; exact finished pixels remain pending human review. */
 export const DEER_TYPE = "wildlife-deer-v1";
-export const DEER_IMAGE = "demos/wildlife-v2/deer/draft-v1/sheet.png";
+export const DEER_IMAGE = "demos/wildlife-v2/deer/motion-v2/sheet.png";
 export const DEER_CLIPS = [
   { name: "idle", start: 0, count: 1, frameDuration: 100, loop: true },
-  { name: "walk", start: 1, count: 12, frameDuration: 100, loop: true },
-  { name: "action", start: 13, count: 8, frameDuration: 100, loop: false },
+  { name: "walk", start: 1, count: 32, frameDuration: 30, loop: true },
+  { name: "action", start: 33, count: 8, frameDuration: 100, loop: false },
   // Provisional brisk walk: reuse the native planted walk, without inventing a gallop.
-  { name: "flee", start: 1, count: 12, frameDuration: 50, loop: true },
+  { name: "flee", start: 1, count: 32, frameDuration: 15, loop: true },
 ] as const;
 export interface DeerBehavior {
   home: PositionComponent;

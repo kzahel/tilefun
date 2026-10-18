@@ -468,11 +468,11 @@
     {
       "id": "wildlife-goat-provisional-v1",
       "name": "wildlife goat provisional v1",
-      "image": "demos/wildlife-v2/goat/draft-v1/sheet.png",
-      "width": 1200,
+      "image": "demos/wildlife-v2/goat/motion-v2/sheet.png",
+      "width": 1968,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "f8391c93c469fb89eb9acfc9c486184e05abeb072d909325d2cac67ee3770266",
+      "fingerprint": "72bee51b5816c69955c66577add82bae9e6eb14654452a81c567bb8495a90c59",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -618,11 +618,11 @@
     {
       "id": "wildlife-deer-v1",
       "name": "wildlife deer v1",
-      "image": "demos/wildlife-v2/deer/draft-v1/sheet.png",
-      "width": 1008,
+      "image": "demos/wildlife-v2/deer/motion-v2/sheet.png",
+      "width": 1968,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "d089476583aa30fe8f327871cef490486ca009f6781d998e18d7ec991a2fd8ee",
+      "fingerprint": "b3b3dcf5e46b8c7b4132481effb763dfa43c481e51526639c387c24ebf613286",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2313,6 +2313,26 @@
       "height": 192,
       "tileSize": 16,
       "fingerprint": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-deer-motion-v2",
+      "name": "wildlife v2 deer motion v2",
+      "image": "demos/wildlife-v2/deer/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b3b3dcf5e46b8c7b4132481effb763dfa43c481e51526639c387c24ebf613286",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-goat-motion-v2",
+      "name": "wildlife v2 goat motion v2",
+      "image": "demos/wildlife-v2/goat/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "72bee51b5816c69955c66577add82bae9e6eb14654452a81c567bb8495a90c59",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -23801,7 +23821,7 @@
       "rect": [
         0,
         0,
-        1200,
+        1968,
         192
       ],
       "label": "wildlife-goat-provisional-v1 · registered 48×48 frames",
@@ -24075,7 +24095,7 @@
       "rect": [
         0,
         0,
-        1008,
+        1968,
         192
       ],
       "label": "wildlife-deer-v1 · registered 48×48 frames",

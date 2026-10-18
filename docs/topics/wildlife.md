@@ -25,7 +25,9 @@ connected fixed-volume cloven limbs through planted steps. Native paint moves
 2px in each facing; root travel matches their existing movement speeds. Both
 source replays and 328 native/enlarged Chromium crops pass; six shared game
 checks pass. These exact finished identities await human art review. Deer and
-goat are next.
+goat also use repaired banks, retaining the doe tail flag and goat horns/beard.
+Their 960ms walks match 18px/s; source replay and six game/browser checks pass.
+Cow and fox are next.
 
 ## Horse and giraffe motion
 
