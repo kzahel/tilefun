@@ -214,8 +214,8 @@ export function writeStatus() {
       "",
       "| Creature | State | Gameplay |",
       "| --- | --- | --- |",
-      ...batch.animals.map((p) =>
-        `| ${clean(p.id)} | ${clean(p.state)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
+      ...batch.animals.map(
+        (p) => `| ${clean(p.id)} | ${clean(p.state)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
       ),
       "",
     );
