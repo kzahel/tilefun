@@ -627,21 +627,61 @@ export class NaturalLandscape {
     if (!p) return [];
     const wx = (glade.x + 7) * 16,
       wy = (glade.y - 4) * 16;
-    if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) return [];
-    const predator = required(createPredator(p.species, wx, wy).predator);
-    predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
-    predator.randomState = Math.floor(h(8353) * 4294967296) >>> 0;
-    return [
-      {
-        featureId: `wildlife:fierce:${this.world.seed}:${glade.id}:0`,
+    const actors: ActorPlacement[] = [];
+    const offsets =
+      p.fierce?.kind === "wolf"
+        ? [
+            [0, 0],
+            [24, 12],
+            [-24, 12],
+          ]
+        : [[0, 0]];
+    for (const [i, offset] of offsets.entries()) {
+      const x = wx + required(offset[0]),
+        y = wy + required(offset[1]);
+      if (Math.floor(x / 256) !== cx || Math.floor(y / 256) !== cy) continue;
+      const predator = required(createPredator(p.species, x, y).predator);
+      predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
+      if (p.fierce && ["dragon", "griffin", "spider"].includes(p.fierce.kind))
+        predator.home = { wx, wy };
+      if (p.fierce?.kind === "wolf") {
+        predator.packId = `wildlife:pack:${this.world.seed}:${glade.id}`;
+        predator.packRole = i;
+      }
+      predator.randomState = Math.floor(h(8353 + i) * 4294967296) >>> 0;
+      actors.push({
+        featureId: `wildlife:fierce:${this.world.seed}:${glade.id}:${i}`,
         type: predatorType(p.species),
-        wx,
-        wy,
+        wx: x,
+        wy: y,
         route: [],
         predator,
-      },
-    ];
+      });
+    }
+    if (p.fierce?.kind === "spider") {
+      // Its explicit diet excludes deer. Seed small natural prey in the web's
+      // clearing without changing any pre-existing glade/animal identity.
+      for (let i = 0; i < 2; i++) {
+        const x = wx + 40 + i * 16,
+          y = wy + 24 - i * 32;
+        if (Math.floor(x / 256) !== cx || Math.floor(y / 256) !== cy) continue;
+        const rabbit = required(createRabbit(x, y).rabbit);
+        rabbit.home = { wx, wy };
+        rabbit.radius = 112;
+        rabbit.randomState = Math.floor(h(8361 + i) * 4294967296) >>> 0;
+        actors.push({
+          featureId: `wildlife:fierce-prey:${this.world.seed}:${glade.id}:${i}`,
+          type: RABBIT_TYPE,
+          wx: x,
+          wy: y,
+          route: [],
+          rabbit,
+        });
+      }
+    }
+    return actors;
   }
+
   private deer(cx: number, cy: number): ActorPlacement[] {
     const gx = Math.floor(cx / 4),
       gy = Math.floor(cy / 4),

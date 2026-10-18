@@ -18,6 +18,7 @@ for (const p of FIERCE_PROFILES)
           clip: number;
           x: number;
           y: number;
+          z: number;
         }[];
       await expect
         .poll(async () => (await poses())[0]?.clip, { timeout: 10000, intervals: [20] })
@@ -27,6 +28,13 @@ for (const p of FIERCE_PROFILES)
         .poll(async () => Number(await canvas.getAttribute("data-creature-calls")))
         .toBeGreaterThan(0);
       await canvas.screenshot({ path: testInfo.outputPath("warning.png") });
+      if (p.fierce?.kind === "griffin") {
+        await expect
+          .poll(async () => (await poses())[0]?.clip, { timeout: 10000, intervals: [20] })
+          .toBe(6);
+        expect((await poses())[0]?.z).toBeGreaterThan(8);
+        await canvas.screenshot({ path: testInfo.outputPath("swoop.png") });
+      }
       await expect
         .poll(async () => (await poses())[0]?.clip, { timeout: 10000, intervals: [20] })
         .toBe(4);
@@ -39,6 +47,20 @@ for (const p of FIERCE_PROFILES)
         Math.hypot((fed?.x ?? 0) - (warning?.x ?? 0), (fed?.y ?? 0) - (warning?.y ?? 0)),
       ).toBeGreaterThan(10);
       await canvas.screenshot({ path: testInfo.outputPath("feeding.png") });
+      if (["dragon", "griffin", "spider"].includes(p.fierce?.kind ?? "")) {
+        const dens = JSON.parse((await canvas.getAttribute("data-fierce-dens")) ?? "[]");
+        expect(dens).toHaveLength(1);
+        expect(dens[0]?.type).toBe(
+          p.fierce?.kind === "dragon"
+            ? "prop-dragon-hoard"
+            : p.fierce?.kind === "griffin"
+              ? "prop-griffin-perch"
+              : "prop-spider-web",
+        );
+        await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+        await expect(canvas).toHaveAttribute("data-reload-count", "1");
+        expect(JSON.parse((await canvas.getAttribute("data-fierce-dens")) ?? "[]")).toEqual(dens);
+      }
       await page.getByText("Who can eat whom?", { exact: true }).click();
       await expect(
         page

@@ -6,7 +6,7 @@ import { decodeActor, durableId, encodeActor } from "../persistence/ActorRecords
 import { createDeer } from "./Deer.js";
 import { createFauna, FAUNA_PROFILES } from "./Fauna.js";
 import { canEat, creatureSpecies, FOOD_WEB, HUNTING_DIETS } from "./FoodWeb.js";
-import { createPredator, PREDATOR_PROFILES, predatorType } from "./Predator.js";
+import { createPredator, PREDATOR_PROFILES } from "./Predator.js";
 import { resolvePredatorCatches, updatePredatorAI } from "./predatorAI.js";
 
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
@@ -28,8 +28,7 @@ describe("explicit creature food web", () => {
   });
   it("T. rex can eat a dire wolf, but wolves cannot eat a T. rex or players/pets/riders", () => {
     const rex = createPredator("t-rex", 0, 0);
-    const wolf = createPredator("panther", 40, 0);
-    wolf.type = predatorType("dire-wolf");
+    const wolf = createPredator("dire-wolf", 40, 0);
     expect(canEat(rex, wolf)).toBe(true);
     expect(canEat(wolf, rex)).toBe(false);
     expect(canEat(rex, rex)).toBe(false);

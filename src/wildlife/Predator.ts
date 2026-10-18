@@ -93,7 +93,11 @@ export interface PredatorBehavior {
   huntElapsed?: number;
   activity?: number;
   packId?: string;
+  packRole?: number;
   displaySerial?: number;
+  warningCooldown?: number;
+  denId?: string;
+  denPlaced?: boolean;
   flight?: {
     elapsed: number;
     duration: number;
@@ -101,6 +105,7 @@ export interface PredatorBehavior {
     to: PositionComponent;
     startZ: number;
     endZ: number;
+    previousZ?: number;
     lift: number;
     attack: boolean;
   };

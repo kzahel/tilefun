@@ -1,0 +1,22 @@
+{
+  "identity": "dire-wolf-fierce-v1",
+  "poses": 164,
+  "binaryAlpha": true,
+  "paletteColors": 9,
+  "canvas": [
+    96,
+    96
+  ],
+  "anchor": [
+    48,
+    72
+  ],
+  "idleVisibleHeights": {
+    "down": 40,
+    "up": 45,
+    "left": 27,
+    "right": 27
+  },
+  "sequenceDurationMs": 7552,
+  "status": "Integrity only; independent visual observation and human review remain separate."
+}

@@ -9,7 +9,7 @@ import { restoreDeerPose } from "../wildlife/deerInteractions.js";
 import { restoreFaunaPose } from "../wildlife/faunaInteractions.js";
 import { restoreFrogPose } from "../wildlife/frogInteractions.js";
 import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
-import { restorePredatorPose } from "../wildlife/predatorAI.js";
+import { restorePredatorPose } from "../wildlife/PredatorMotion.js";
 import { restoreRabbitPose } from "../wildlife/rabbitInteractions.js";
 import { restoreRobinPose } from "../wildlife/robinInteractions.js";
 

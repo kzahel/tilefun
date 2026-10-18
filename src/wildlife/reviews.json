@@ -2994,5 +2994,405 @@
         "sha256": "9c9dddada5d20221914ff54fefc95b4805c84049fc6c4d1bec836fe05f655449"
       }
     ]
+  },
+  {
+    "id": "small-dragon-fierce-v1",
+    "animalId": "small-dragon",
+    "revision": "fierce-v1",
+    "name": "Small dragon",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/small-dragon/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-small-dragon-fierce-v1",
+      "name": "Small dragon sheet",
+      "image": "demos/wildlife-v2/small-dragon/fierce-v1/sheet.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "506038f4757b8eb0c9ab27077e213dc9e664fae462087dfa3a3add44ff26e4e2",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-small-dragon-fierce-v1-scene",
+      "name": "Small dragon scene",
+      "image": "demos/wildlife-v2/small-dragon/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "c2a1d5872518066dd096d1cb40bcc1a8feea93267b1adb3780c50e6c573d0ef5",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-small-dragon-fierce-v1-contact",
+      "name": "Small dragon contact",
+      "image": "demos/wildlife-v2/small-dragon/fierce-v1/contact-sheet-native.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "f50000336e8769c6cadc19195823068bc623359fa33d8bb2485f4852d19a6f16",
+      "source": "art-source/wildlife-v2/small-dragon/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/small-dragon/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/contact-sheet-native.png",
+        "sha256": "f50000336e8769c6cadc19195823068bc623359fa33d8bb2485f4852d19a6f16"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/den.png",
+        "sha256": "dd2e4d1e03f4e547fcd9e75f7c3a10e766e7f82bc8072caf19ac7675cacc9d8a"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/index.html",
+        "sha256": "79023b41898028c45dc91605b8a95e1d9ebe0a926b878b502534ce2fc25c7635"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/preview-native.gif",
+        "sha256": "eede81b3db6acf469e9b3b26db666484669c1122b01a611f3adb09443ee93d4b"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/preview.gif",
+        "sha256": "28fde046d5c25a43b1eadcd3b7f57850c97d13b7c52b4e3f0c364b3e50978c5e"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/review-observations.md",
+        "sha256": "0fbd089878105b949845ad256b267f5e3881df607e2d3bc415a6c00cd968eea1"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scale-reference-native.png",
+        "sha256": "c30a4307675d358047f9df051df29b62060863a89253e061801279594cde4379"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scene-background.png",
+        "sha256": "c90ceb88bb621832295472f4567f51b5ae247d02a80c6e542bda43533e9ef5e0"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scene-native.gif",
+        "sha256": "7b1c5e49c13bd5264996db536026f37818f0a3abd45855702c3e4e8e91697caf"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/scene-native.png",
+        "sha256": "c2a1d5872518066dd096d1cb40bcc1a8feea93267b1adb3780c50e6c573d0ef5"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/sheet.png",
+        "sha256": "506038f4757b8eb0c9ab27077e213dc9e664fae462087dfa3a3add44ff26e4e2"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/source-audit.json",
+        "sha256": "4dc1e1a88d46c6defcd28b877b838296bbb79f3cd55ca26b8360fae9b5dc57b9"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/sprite.json",
+        "sha256": "ed40b0c5a9b4f67b339c71b9c6747b4cd1e038647288812e918526e704ddf2c5"
+      },
+      {
+        "path": "demos/wildlife-v2/small-dragon/fierce-v1/validation.json",
+        "sha256": "f5121109ce26fe90feaa5b2b5c0ec8f5b5eba5653067ca7bdbb645615f69a353"
+      }
+    ]
+  },
+  {
+    "id": "dire-wolf-fierce-v1",
+    "animalId": "dire-wolf",
+    "revision": "fierce-v1",
+    "name": "Dire wolf",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dire-wolf/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-dire-wolf-fierce-v1",
+      "name": "Dire wolf sheet",
+      "image": "demos/wildlife-v2/dire-wolf/fierce-v1/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "aac78a8cd07bac2966f200d00be1b5a6f9da41c03d137526996106331fa12c96",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-dire-wolf-fierce-v1-scene",
+      "name": "Dire wolf scene",
+      "image": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "dd89248aacdd47d1d0787475b98b1d192b3aa8185f86105f61690257758c258e",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-dire-wolf-fierce-v1-contact",
+      "name": "Dire wolf contact",
+      "image": "demos/wildlife-v2/dire-wolf/fierce-v1/contact-sheet-native.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3e105532442c4979d03f9aaf6e30376a5566f2aa6d854bef7006bce87a15288b",
+      "source": "art-source/wildlife-v2/dire-wolf/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/dire-wolf/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/contact-sheet-native.png",
+        "sha256": "3e105532442c4979d03f9aaf6e30376a5566f2aa6d854bef7006bce87a15288b"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/index.html",
+        "sha256": "d531331ea6df280cc4c55843565e5a43683cc8f54b0995cebe2e9c68fdfe848c"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/preview-native.gif",
+        "sha256": "6410a1b343e792b12dfd3c4f88d5dee975252bbc1f7965e84f3db801548c528b"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/preview.gif",
+        "sha256": "2ac34c96faab860fc698a3421f2b634eff0de958a2f4b4ae213e2fafa2a3c17f"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/review-observations.md",
+        "sha256": "bdcb2e501f7710ceced77ab3e91c3d6cc7fef5874e85669f60a97f81dcb1b9a2"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scale-reference-native.png",
+        "sha256": "a7f49ea2091ecfa98387419cd6cb11a5815fc1afa7f7a72cd069516ec5f9901c"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-background.png",
+        "sha256": "f9a620c54a38026118c8f624cb24eb421ca9f96d67bfa306b6c9d0cb58e9d68e"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.gif",
+        "sha256": "f7c3cba01eaf4813893e4da267e36ece6f3cd48ba2627118062c893aead2e07d"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.png",
+        "sha256": "dd89248aacdd47d1d0787475b98b1d192b3aa8185f86105f61690257758c258e"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/sheet.png",
+        "sha256": "aac78a8cd07bac2966f200d00be1b5a6f9da41c03d137526996106331fa12c96"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/source-audit.json",
+        "sha256": "519194419b0682c0ad114660d123644e6b5339bd677c275de0c96e0f1922f704"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/sprite.json",
+        "sha256": "cbde8a4d4d37feaa9aa892ebbc4f8ff98ee98c19adb0a73aca3403e599862ddc"
+      },
+      {
+        "path": "demos/wildlife-v2/dire-wolf/fierce-v1/validation.json",
+        "sha256": "5aa80f71ac71ea4455410c5700689f01d6489a1c06516e65f1d1f751a56fc615"
+      }
+    ]
+  },
+  {
+    "id": "griffin-fierce-v1",
+    "animalId": "griffin",
+    "revision": "fierce-v1",
+    "name": "Griffin",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/griffin/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-griffin-fierce-v1",
+      "name": "Griffin sheet",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-griffin-fierce-v1-scene",
+      "name": "Griffin scene",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "88564f286e4e81849b278bd31c607589f7bd3607d610d2501058b8c8a3be0650",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-griffin-fierce-v1-contact",
+      "name": "Griffin contact",
+      "image": "demos/wildlife-v2/griffin/fierce-v1/contact-sheet-native.png",
+      "width": 6272,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "08f98a7b2efea539b50437052fc9703befda38776b89311216a95c81de4f2815",
+      "source": "art-source/wildlife-v2/griffin/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/griffin/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/contact-sheet-native.png",
+        "sha256": "08f98a7b2efea539b50437052fc9703befda38776b89311216a95c81de4f2815"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/den.png",
+        "sha256": "3792ecf11cb0532bdd9815f91fe04d0122d82b9fd1d621d2e5a023ad30d6f964"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/index.html",
+        "sha256": "4bc8e2310bf6a67c493375e98852be46449e00d93441d7a3ab17e514c918b419"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/preview-native.gif",
+        "sha256": "2f4de36bc85235252caec9290dc8e17767d2d8c6a71aedc91a9c7afab01083f2"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/preview.gif",
+        "sha256": "1b4c95f9d53667b09dbe0cacfbbc02a3281f88556334749a0e2b407516d72bd9"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/review-observations.md",
+        "sha256": "b77249dd308287316f97b323485b3c1cfa5c2c745b221fd59b58a870fa0f0066"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scale-reference-native.png",
+        "sha256": "77192040708def478071f7959c796f0da6cdbc71a6b68b8366dd4aceecdfb56b"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scene-background.png",
+        "sha256": "0cc627bfe6ac090c190d5df642c40b75b61c820382fe0d92c3efdef976d9ba4b"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scene-native.gif",
+        "sha256": "7f218cc8fd75628691a4cccf3b5baff864b871694cc39721cf6f124c08916961"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/scene-native.png",
+        "sha256": "88564f286e4e81849b278bd31c607589f7bd3607d610d2501058b8c8a3be0650"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/sheet.png",
+        "sha256": "5baef5e4bb1100bf2d96fe9a0adcf3cdeae278d551cb4c0a01670ce03b1ee947"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/source-audit.json",
+        "sha256": "b1e92b03e9060a093d53b972f9c7e984d0f0305e050f5530d32681a0cb544dab"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/sprite.json",
+        "sha256": "c79f16a3f52d82b6b34195afab527dbf1355b3a3a5c3428b580eb9369aeff944"
+      },
+      {
+        "path": "demos/wildlife-v2/griffin/fierce-v1/validation.json",
+        "sha256": "ee549706f9fb0c63b727f4e4564bb713088ab135608197a0d129d04743f4cc23"
+      }
+    ]
+  },
+  {
+    "id": "giant-spider-fierce-v1",
+    "animalId": "giant-spider",
+    "revision": "fierce-v1",
+    "name": "Giant spider",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giant-spider/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-giant-spider-fierce-v1",
+      "name": "Giant spider sheet",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-giant-spider-fierce-v1-scene",
+      "name": "Giant spider scene",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "d6563baabf5f42375348ee3da825a0a7c0d6636519f0f27dd9fd30769075cf97",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-giant-spider-fierce-v1-contact",
+      "name": "Giant spider contact",
+      "image": "demos/wildlife-v2/giant-spider/fierce-v1/contact-sheet-native.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3f8260a4ba3e317f3b616c9d0df9ea9b078b561951b2dafa2a812f0766eb3816",
+      "source": "art-source/wildlife-v2/giant-spider/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/giant-spider/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/contact-sheet-native.png",
+        "sha256": "3f8260a4ba3e317f3b616c9d0df9ea9b078b561951b2dafa2a812f0766eb3816"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/den.png",
+        "sha256": "b9847d3bdbcffd87394d4a8e9e72a8feb5a5e8d5e6bced85db206aa74bd93f49"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/index.html",
+        "sha256": "1b6cd0a1acd78e14f339045ea82d16b10f5db315e88baf280fd0422b10d9602f"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/preview-native.gif",
+        "sha256": "7ee8446b3ff6475479e430c60c62107b98173687c80af3c7e05a3ec722bd9949"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/preview.gif",
+        "sha256": "6e4e2ed43b63c65469a35ab36e7495b2daf0d12095c3617a94b6aff8050bb65a"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/review-observations.md",
+        "sha256": "b396b5de8ab4a89a87d46a235bcc254a17a2f7635f9d835548387e6c465f29ee"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scale-reference-native.png",
+        "sha256": "999315317164cd63bd5e6f3dd4ade83254be3d5826392b885d1a9186241d707e"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scene-background.png",
+        "sha256": "c5d37f60866085dfd7097b02557e2ab5c2eaafe107e5494b0b98ee0796a36f06"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scene-native.gif",
+        "sha256": "785a1b121b3944300e9fa8ed2181203ac444b443de0bdaf33cf1fb827ce57866"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/scene-native.png",
+        "sha256": "d6563baabf5f42375348ee3da825a0a7c0d6636519f0f27dd9fd30769075cf97"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/sheet.png",
+        "sha256": "11ab7244ae66500619ab2e13d5fdb9f25e7153f20f619251615cd44f5d80f5f1"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/source-audit.json",
+        "sha256": "fd505d3227c5f8114f63b0cf0f5f0b6098a8a12dc497694a6ca9aca64881c127"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/sprite.json",
+        "sha256": "f855d5bd3f64fb3c14e870e87d84d960464d361aa8f6c4758f67d4c16ef17bcc"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-spider/fierce-v1/validation.json",
+        "sha256": "a2a7d9a375669c9d7a9044f811a23f5d044eda80264f32650441faf23936590d"
+      }
+    ]
   }
 ]

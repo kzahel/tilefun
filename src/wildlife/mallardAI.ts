@@ -8,6 +8,11 @@ import { settleMallard } from "./mallardInteractions.js";
 export type WildlifeBody = Pick<Entity, "collider" | "wz">;
 
 export interface WildlifeEnvironment {
+  ensurePredatorDen?(animal: Entity): void;
+  predatorPerches?(
+    home: PositionComponent,
+    radius: number,
+  ): readonly import("./Robin.js").RobinPerch[];
   canOccupy(body: WildlifeBody, point: PositionComponent): boolean;
   isWater(point: PositionComponent): boolean;
   isDeepWater?(point: PositionComponent): boolean;

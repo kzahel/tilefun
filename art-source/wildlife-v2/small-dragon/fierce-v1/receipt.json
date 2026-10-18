@@ -1,0 +1,127 @@
+{
+  "identity": "small-dragon-fierce-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "small-dragon-fierce-v1",
+    "poses": 196,
+    "meshCount": 71,
+    "fixedLengthLinkChecks": 2352,
+    "plantedGroundContacts": 608,
+    "stanceTravelCompensationChecks": 272,
+    "maxProjectionError": 0.000005000000001587068,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.7236,
+        "head": 4.16559,
+        "shoulder": 3.16902,
+        "pelvis": 2.00328
+      },
+      "up": {
+        "body": 1.7236,
+        "head": 2.13781,
+        "shoulder": 2.27332,
+        "pelvis": 3.19755
+      },
+      "left": {
+        "body": 2.13704,
+        "head": 3.40507,
+        "shoulder": 2.76188,
+        "pelvis": 1.76039
+      },
+      "right": {
+        "body": 2.13704,
+        "head": 2.5782,
+        "shoulder": 1.93502,
+        "pelvis": 2.58721
+      }
+    },
+    "status": "Saved-source integrity passes; human art approval is separate."
+  },
+  "capture": {
+    "species": "small-dragon",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 49,
+        "exactCropChecks": 196,
+        "exactSceneChecks": 49,
+        "errors": []
+      },
+      {
+        "scale": 4,
+        "chronologicalPoses": 49,
+        "exactCropChecks": 196,
+        "exactSceneChecks": 49,
+        "errors": []
+      }
+    ],
+    "playbackClips": [
+      "idle",
+      "walk",
+      "feed",
+      "display",
+      "charge",
+      "sleep",
+      "flight"
+    ],
+    "errors": []
+  },
+  "replay": {
+    "species": "small-dragon",
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "contact-sheet-native.png": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "preview-native.gif": true,
+      "preview.gif": true,
+      "scene-native.gif": true,
+      "validation.json": true,
+      "source-audit.json": true,
+      "den.png": true,
+      "masters.json": true
+    }
+  },
+  "visualReview": {
+    "observer": "primary-agent",
+    "observations": "public/demos/wildlife-v2/small-dragon/fierce-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/small-dragon/fierce-v1/animal.blend": "31e2ae70a8b9ce2ba8b82f5401bb55ee66b1fe7d76d2a772442e0e721f27c53c",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/audit.py": "f7ffa48db4a49c0c4be44a8087343867259e219120ba2b004372d983a582cec5",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/build.py": "09f9164e79156df94f6b899271525ef2a77e376bd69f7e24846a7b87a494cab1",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/capture.mjs": "757ea2cba450c7bffe8d787915f25dca6957b77e7210a53cb88b1bd6fed8c84d",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/den.json": "72906a5a5f711bd5da26f8e34ad64c5c6bce9e3acf895ebead5547d651e12df2",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/finish.py": "ea371a53dd743563a7b48b7e5b97b3ebb73070cdd3ace328acf970038a538ed8",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/index.html": "79023b41898028c45dc91605b8a95e1d9ebe0a926b878b502534ce2fc25c7635",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/masters.json": "1bf229e5404a0adf949a16bd90ee0e199583273d66e860ba6b7e6ce60cac21fd",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "art-source/wildlife-v2/small-dragon/fierce-v1/README.md": "916d31139c045f5b6699de564e059a24bebd46fbe9c349562fdb8929731e470d",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/contact-sheet-native.png": "f50000336e8769c6cadc19195823068bc623359fa33d8bb2485f4852d19a6f16",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/den.png": "dd2e4d1e03f4e547fcd9e75f7c3a10e766e7f82bc8072caf19ac7675cacc9d8a",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/index.html": "79023b41898028c45dc91605b8a95e1d9ebe0a926b878b502534ce2fc25c7635",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/preview-native.gif": "eede81b3db6acf469e9b3b26db666484669c1122b01a611f3adb09443ee93d4b",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/preview.gif": "28fde046d5c25a43b1eadcd3b7f57850c97d13b7c52b4e3f0c364b3e50978c5e",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/review-observations.md": "0fbd089878105b949845ad256b267f5e3881df607e2d3bc415a6c00cd968eea1",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/scale-reference-native.png": "c30a4307675d358047f9df051df29b62060863a89253e061801279594cde4379",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/scene-background.png": "c90ceb88bb621832295472f4567f51b5ae247d02a80c6e542bda43533e9ef5e0",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/scene-native.gif": "7b1c5e49c13bd5264996db536026f37818f0a3abd45855702c3e4e8e91697caf",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/scene-native.png": "c2a1d5872518066dd096d1cb40bcc1a8feea93267b1adb3780c50e6c573d0ef5",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/sheet.png": "506038f4757b8eb0c9ab27077e213dc9e664fae462087dfa3a3add44ff26e4e2",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/source-audit.json": "4dc1e1a88d46c6defcd28b877b838296bbb79f3cd55ca26b8360fae9b5dc57b9",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/sprite.json": "ed40b0c5a9b4f67b339c71b9c6747b4cd1e038647288812e918526e704ddf2c5",
+    "public/demos/wildlife-v2/small-dragon/fierce-v1/validation.json": "f5121109ce26fe90feaa5b2b5c0ec8f5b5eba5653067ca7bdbb645615f69a353",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-fierce.mjs": "465d4f6dd625207212600772c4fa9905124e40b8f3ac8cc39b4e36fc29d1360f",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

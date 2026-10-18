@@ -1,0 +1,22 @@
+{
+  "identity": "griffin-fierce-v1",
+  "poses": 196,
+  "binaryAlpha": true,
+  "paletteColors": 9,
+  "canvas": [
+    128,
+    128
+  ],
+  "anchor": [
+    64,
+    96
+  ],
+  "idleVisibleHeights": {
+    "down": 57,
+    "up": 45,
+    "left": 57,
+    "right": 57
+  },
+  "sequenceDurationMs": 8272,
+  "status": "Integrity only; independent visual observation and human review remain separate."
+}

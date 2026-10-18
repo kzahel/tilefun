@@ -65,6 +65,12 @@ Location-marker geometry and distant-player replication coverage live in
 Canvas/GPU HUD submissions, distant movement, portrait resizing, editing and
 realm-departure cleanup with isolated dedicated-server data.
 
+Validation on 2026-10-18: typechecks, lint, production build, 2,851 unit tests and
+streaming readiness pass after integrating current main. Both marker browser
+checks pass in isolation and in the full browser run. That full run records
+672 passes and two failures (train snapshot and touch Jump); both failures pass
+on a one-worker rerun alongside the marker checks after integration.
+
 [Tactical 014](../tactical/014-webrtc-delivery-validation.md) preserves the pre-fix
 loss/reordering audit and evidence. Its five known failures motivated
 [Tactical 015](../tactical/015-webrtc-ordered-delivery.md): ordered routing and

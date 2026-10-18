@@ -1,0 +1,122 @@
+{
+  "identity": "dire-wolf-fierce-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "dire-wolf-fierce-v1",
+    "poses": 164,
+    "meshCount": 55,
+    "fixedLengthLinkChecks": 1968,
+    "plantedGroundContacts": 608,
+    "stanceTravelCompensationChecks": 272,
+    "maxProjectionError": 0.000005000000001587068,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.60869,
+        "head": 3.61804,
+        "shoulder": 2.83732,
+        "pelvis": 1.76898
+      },
+      "up": {
+        "body": 1.60869,
+        "head": 1.752,
+        "shoulder": 2.02869,
+        "pelvis": 3.01301
+      },
+      "left": {
+        "body": 2.02213,
+        "head": 3.14704,
+        "shoulder": 2.57276,
+        "pelvis": 1.68642
+      },
+      "right": {
+        "body": 2.02213,
+        "head": 2.32017,
+        "shoulder": 1.74589,
+        "pelvis": 2.51328
+      }
+    },
+    "status": "Saved-source integrity passes; human art approval is separate."
+  },
+  "capture": {
+    "species": "dire-wolf",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactCropChecks": 164,
+        "exactSceneChecks": 41,
+        "errors": []
+      },
+      {
+        "scale": 4,
+        "chronologicalPoses": 41,
+        "exactCropChecks": 164,
+        "exactSceneChecks": 41,
+        "errors": []
+      }
+    ],
+    "playbackClips": [
+      "idle",
+      "walk",
+      "feed",
+      "display",
+      "charge",
+      "sleep"
+    ],
+    "errors": []
+  },
+  "replay": {
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "contact-sheet-native.png": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "preview-native.gif": true,
+      "preview.gif": true,
+      "scene-native.gif": true,
+      "validation.json": true,
+      "source-audit.json": true,
+      "masters.json": true
+    }
+  },
+  "visualReview": {
+    "observer": "primary-agent",
+    "observations": "public/demos/wildlife-v2/dire-wolf/fierce-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/animal.blend": "90ff429ce68729c9a9fb1f07e2876326f7a0c9f759c40fa69e55a4267736cacd",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/audit.py": "1aa2de795a88da520c9e241cd725971527f0a039ab9dd308782cb7a374d79d8c",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/build.py": "bbd4fd8858692281007c18cf83a7223af685baeeaa2c48e4ce502219a2104ebe",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/capture.mjs": "d207238d0f81d20d3bb1e226b36ce20d2d772c37023a2550a5c7800f771d62ec",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/finish.py": "afbdf0e6c6a6eb7ffbba7a7b8006a01b0dec0b5b7ee5c982ad71e504af763d70",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/index.html": "d531331ea6df280cc4c55843565e5a43683cc8f54b0995cebe2e9c68fdfe848c",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/masters.json": "a0268324199a541f0fe20c90a1780cbf8175e6087797564e8186148bd131b418",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "art-source/wildlife-v2/dire-wolf/fierce-v1/README.md": "6a4d7ba9331b6008ee644df6a8db0243770215632ebf8620684b6f14892db99a",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/contact-sheet-native.png": "3e105532442c4979d03f9aaf6e30376a5566f2aa6d854bef7006bce87a15288b",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/index.html": "d531331ea6df280cc4c55843565e5a43683cc8f54b0995cebe2e9c68fdfe848c",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/preview-native.gif": "6410a1b343e792b12dfd3c4f88d5dee975252bbc1f7965e84f3db801548c528b",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/preview.gif": "2ac34c96faab860fc698a3421f2b634eff0de958a2f4b4ae213e2fafa2a3c17f",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/review-observations.md": "bdcb2e501f7710ceced77ab3e91c3d6cc7fef5874e85669f60a97f81dcb1b9a2",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/scale-reference-native.png": "a7f49ea2091ecfa98387419cd6cb11a5815fc1afa7f7a72cd069516ec5f9901c",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/scene-background.png": "f9a620c54a38026118c8f624cb24eb421ca9f96d67bfa306b6c9d0cb58e9d68e",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.gif": "f7c3cba01eaf4813893e4da267e36ece6f3cd48ba2627118062c893aead2e07d",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/scene-native.png": "dd89248aacdd47d1d0787475b98b1d192b3aa8185f86105f61690257758c258e",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/sheet.png": "aac78a8cd07bac2966f200d00be1b5a6f9da41c03d137526996106331fa12c96",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/source-audit.json": "519194419b0682c0ad114660d123644e6b5339bd677c275de0c96e0f1922f704",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/sprite.json": "cbde8a4d4d37feaa9aa892ebbc4f8ff98ee98c19adb0a73aca3403e599862ddc",
+    "public/demos/wildlife-v2/dire-wolf/fierce-v1/validation.json": "5aa80f71ac71ea4455410c5700689f01d6489a1c06516e65f1d1f751a56fc615",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-fierce.mjs": "465d4f6dd625207212600772c4fa9905124e40b8f3ac8cc39b4e36fc29d1360f",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

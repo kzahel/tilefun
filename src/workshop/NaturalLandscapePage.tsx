@@ -19,7 +19,8 @@ import {
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
-import { FOOD_WEB } from "../wildlife/FoodWeb.js";
+import { FIERCE_DENS } from "../wildlife/FierceDens.js";
+import { creatureSpecies, FOOD_WEB } from "../wildlife/FoodWeb.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -68,7 +69,9 @@ export default function NaturalLandscapePage() {
     settings = useRef({ paused, follow, zoom, sounds });
   settings.current = { paused, follow, zoom, sounds };
   const custom = caseId === "explore";
-  const predatorCase = PREDATOR_PROFILES.some((p) => p.species === caseId);
+  const predatorCase =
+    PREDATOR_PROFILES.some((p) => p.species === caseId) ||
+    ["wolf-pack", "food-web-natural", "food-web-placed"].includes(caseId);
   const point = useMemo(
     () =>
       custom
@@ -204,6 +207,11 @@ export default function NaturalLandscapePage() {
           audioTime.current = now;
           c.dataset.creatureCalls = String(sound.creatureAudioDiagnostics.played);
         }
+        c.dataset.foodWebActors = JSON.stringify(
+          h.session.view.entities
+            .filter((e) => creatureSpecies(e))
+            .map((e) => ({ id: e.id, type: e.type })),
+        );
         c.dataset.predatorPoses = JSON.stringify(
           h.session.view.entities
             .filter((e) => PREDATOR_PROFILES.some((p) => predatorType(p.species) === e.type))
@@ -217,6 +225,11 @@ export default function NaturalLandscapePage() {
               frame: e.sprite?.frameCol,
               state: e.wanderAI?.state,
             })),
+        );
+        c.dataset.fierceDens = JSON.stringify(
+          h.session.view.props
+            .filter((p) => FIERCE_DENS.some((d) => d.type === p.type))
+            .map((p) => ({ type: p.type, x: p.position.wx, y: p.position.wy })),
         );
         const ducks = h.session.view.entities.filter((e) => e.type === MALLARD_TYPE);
         c.dataset.wildlifeCount = String(ducks.length);

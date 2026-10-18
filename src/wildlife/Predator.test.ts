@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { createBall } from "../entities/Ball.js";
+import type { Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { ProceduralActors } from "../generation/ProceduralActors.js";
@@ -16,11 +17,15 @@ import { createFauna } from "./Fauna.js";
 import { createPredator, PREDATOR_PROFILES, predatorType } from "./Predator.js";
 import { resolvePredatorCatches, startlePredator, updatePredatorAI } from "./predatorAI.js";
 import { createRabbit } from "./Rabbit.js";
+import { startleRabbit } from "./rabbitInteractions.js";
 
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
-  const setup = (factory = createDeer) => {
+  const preyFactory = p.fierce?.kind === "spider" ? createRabbit : createDeer;
+  const preyType = preyFactory(0, 0).type;
+  const habitat = (e: Entity) => required(e.deer ?? e.rabbit);
+  const setup = (factory = preyFactory) => {
     const manager = new EntityManager();
     const hunter = manager.spawn(createPredator(p.species, 0, 0));
     const prey = manager.spawn(factory(21, 0));
@@ -38,24 +43,24 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     prey.proceduralId = "generated-deer";
     const deleted = new Set<string>();
     new ProceduralActors(manager, deleted, () => {});
-    required(prey.deer).herdId = "herd";
+    if (prey.deer) prey.deer.herdId = "herd";
     const other = manager.spawn(createPredator(p.species, 0, 0));
     Object.assign(required(other.predator), hunter.predator);
     resolvePredatorCatches(manager, [...manager.entities], open, []);
-    const replacement = required(manager.entities.find((e) => e.deer));
-    expect(manager.entities.filter((e) => e.deer)).toHaveLength(1);
+    const replacement = required(manager.entities.find((e) => e.type === preyType));
+    expect(manager.entities.filter((e) => e.type === preyType)).toHaveLength(1);
     expect(replacement.persistentId).not.toBe(prey.persistentId);
     expect(replacement.proceduralId).toBeUndefined();
     expect(replacement.naturalSpawnId).toBe("generated-deer");
     expect(deleted.has("generated-deer")).toBe(true);
-    expect(replacement.deer?.home).toEqual(prey.deer?.home);
-    expect(replacement.deer?.herdId).toBe("herd");
+    expect(habitat(replacement).home).toEqual(habitat(prey).home);
+    if (replacement.deer) expect(replacement.deer.herdId).toBe("herd");
     expect(hunter.predator?.state).toBe("feed");
     expect(hunter.predator?.meals).toBe(1);
     expect(other.predator?.meals).toBe(0);
     manager.remove(replacement.id);
     resolvePredatorCatches(manager, [...manager.entities], open, []);
-    expect(manager.entities.some((e) => e.deer)).toBe(false);
+    expect(manager.entities.some((e) => e.type === preyType)).toBe(false);
   });
   it("replaces a rabbit in its own habitat and leaves an airborne rabbit alive", () => {
     const { manager, hunter, prey } = setup(createRabbit);
@@ -87,13 +92,13 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
       },
       [],
     );
-    expect(manager.entities.some((e) => e.deer)).toBe(false);
+    expect(manager.entities.some((e) => e.type === preyType)).toBe(false);
     expect(hunter.predator?.meals).toBe(1);
   });
   it("retains natural lineage after reload and replaces a second generation exactly once", () => {
     const { manager, hunter, prey } = setup();
     resolvePredatorCatches(manager, [...manager.entities], open, []);
-    const first = required(manager.entities.find((e) => e.deer));
+    const first = required(manager.entities.find((e) => e.type === preyType));
     const saved = encodeActor(first);
     const reloaded = decodeActor(saved) as typeof first;
     expect(reloaded.naturalSpawnId).toBe("world-prey");
@@ -107,7 +112,7 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
       targetId: reloaded.persistentId,
     });
     resolvePredatorCatches(manager, [...manager.entities], open, []);
-    const second = required(manager.entities.find((e) => e.deer));
+    const second = required(manager.entities.find((e) => e.type === preyType));
     expect(second.naturalSpawnId).toBe("world-prey");
     expect(second.persistentId).not.toBe(reloaded.persistentId);
     expect(hunter.predator?.meals).toBe(2);
@@ -164,19 +169,21 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     expect(ball.velocity?.vx).toBeLessThan(0);
     expect(hunter.deathTimer).toBeUndefined();
   });
-  it("catches an already fleeing deer without lunging too early or pausing pursuit", async () => {
+  it("catches already fleeing legal prey without lunging too early or pausing pursuit", async () => {
     const hunter = createPredator(p.species, 64, 64),
-      prey = createDeer(92, 64);
+      prey = preyFactory(92, 64);
     Object.assign(required(hunter.predator), {
       state: "chase",
       timer: 0,
       targetId: durableId(prey),
     });
-    Object.assign(required(prey.deer), {
-      state: "flee",
-      target: { wx: 192, wy: 64 },
-      motion: { elapsed: 0, duration: 5, escaping: true },
-    });
+    if (prey.rabbit) startleRabbit(prey, { wx: 60, wy: 64 });
+    else
+      Object.assign(required(prey.deer), {
+        state: "flee",
+        target: { wx: 192, wy: 64 },
+        motion: { elapsed: 0, duration: 5, escaping: true },
+      });
     const session = await ScenarioSession.create({
       version: 1,
       id: `moving-prey-${p.species}`,
@@ -199,10 +206,10 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
   });
   it("hunts in the production Realm and reloads feeding/replacement without resurrection", async () => {
     const hunter = createPredator(p.species, 64, 64),
-      prey = createDeer(88, 64);
+      prey = preyFactory(88, 64);
     prey.naturalSpawnId = `world-prey-${p.species}`;
     required(hunter.predator).timer = 0;
-    required(prey.deer).timer = 20;
+    habitat(prey).timer = 20;
     const session = await ScenarioSession.create({
       version: 1,
       id: `predator-${p.species}`,
@@ -214,24 +221,24 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     });
     try {
       const entities = () => session.realm.entityManager.entities;
-      const original = required(entities().find((e) => e.deer)).persistentId;
+      const original = required(entities().find((e) => e.type === preyType)).persistentId;
       for (let i = 0; i < 600 && !entities().find((e) => e.predator)?.predator?.meals; i++)
         await session.step(idle);
       const fed = required(entities().find((e) => e.predator));
       expect(fed.predator?.meals).toBe(1);
-      const replacement = required(entities().find((e) => e.deer));
+      const replacement = required(entities().find((e) => e.type === preyType));
       expect(replacement.persistentId).not.toBe(original);
       const saved = encodeActor(fed).state.predator;
       await session.reload();
       expect(entities().find((e) => e.type === predatorType(p.species))?.predator).toEqual(saved);
       expect(
         entities()
-          .filter((e) => e.deer)
+          .filter((e) => e.type === preyType)
           .map((e) => e.persistentId),
       ).toEqual([replacement.persistentId]);
-      session.realm.entityManager.remove(required(entities().find((e) => e.deer)).id);
+      session.realm.entityManager.remove(required(entities().find((e) => e.type === preyType)).id);
       await session.reload();
-      expect(entities().some((e) => e.deer)).toBe(false);
+      expect(entities().some((e) => e.type === preyType)).toBe(false);
     } finally {
       await session.close();
     }
