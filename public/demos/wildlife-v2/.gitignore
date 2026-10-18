@@ -377,3 +377,6 @@
 # Verified pending motion identities, owner-authorized autonomous run 140.
 !cat/motion-v2/*
 !dog/motion-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!elephant/motion-v2/*

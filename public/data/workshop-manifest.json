@@ -18247,6 +18247,48 @@
       }
     },
     {
+      "id": "pattern:wildlife-v2-elephant-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "African elephant · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-motion-v2",
+      "fingerprint": "c2d610e411f2991da4a6f8b3988a79845501ff0f339a854a414802b288b7bb2b",
+      "sourceFingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-elephant-motion-v2",
+        "prefabIds": [],
+        "revision": "80b170fafd1de68deb24d61e8d721ef6fcd80d45cd30060189a7c47fb42b0987",
+        "renderFingerprint": "c2d610e411f2991da4a6f8b3988a79845501ff0f339a854a414802b288b7bb2b",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-elephant-motion-v2",
+        "fingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
+        "sheetSize": [
+          4592,
+          448
+        ],
+        "rect": [
+          0,
+          0,
+          4592,
+          448
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-elephant-motion-v2",
+          "prefabIds": [],
+          "revision": "80b170fafd1de68deb24d61e8d721ef6fcd80d45cd30060189a7c47fb42b0987",
+          "renderFingerprint": "c2d610e411f2991da4a6f8b3988a79845501ff0f339a854a414802b288b7bb2b",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-elephant-motion-v2"
+        }
+      }
+    },
+    {
       "id": "vehicle:compact-1:north",
       "batchId": "vehicles",
       "name": "Compact 1 · north",
@@ -32521,5 +32563,5 @@
       }
     }
   ],
-  "inputDigest": "daba8341a746bd60c066595bbe2c5dcc4f8f8fe44a58e293657cac60e4115780"
+  "inputDigest": "0e200a37f62588da0ac347dadfa0f0a8f8cf4dfa0287562f6defac4b163db6d3"
 }

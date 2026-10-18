@@ -4719,5 +4719,102 @@
         "sha256": "6b0d36013b37b2f8a71d98fb704661684c796e778c9564ce184eada4f2a45835"
       }
     ]
+  },
+  {
+    "id": "elephant-motion-v2",
+    "animalId": "elephant",
+    "revision": "motion-v2",
+    "name": "African elephant · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/elephant/motion-v2/",
+    "sheet": {
+      "id": "wildlife-v2-elephant-motion-v2",
+      "name": "African elephant sheet",
+      "image": "demos/wildlife-v2/elephant/motion-v2/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
+      "source": "art-source/wildlife-v2/elephant/motion-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-elephant-motion-v2-scene",
+      "name": "African elephant scene",
+      "image": "demos/wildlife-v2/elephant/motion-v2/scene-native.png",
+      "width": 448,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "1c2377f02c541586bba945ad4779d6a6eed730d22ff01da31f0adabd9ad5d09d",
+      "source": "art-source/wildlife-v2/elephant/motion-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-elephant-motion-v2-contact",
+      "name": "African elephant contact",
+      "image": "demos/wildlife-v2/elephant/motion-v2/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "5442f52be5e0a973f44334a869bfb861a8ff62edf324c4f16fb4e1ccf269ef3f",
+      "source": "art-source/wildlife-v2/elephant/motion-v2"
+    },
+    "preview": "demos/wildlife-v2/elephant/motion-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/contact-sheet-native.png",
+        "sha256": "5442f52be5e0a973f44334a869bfb861a8ff62edf324c4f16fb4e1ccf269ef3f"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/index.html",
+        "sha256": "4290f337b567d3630945043a470a9282ed8833748d4216ca1b48fdcd53528862"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/pixel-audit.json",
+        "sha256": "bda220111c6acb7d3ce5642917c5d9d9a34c0982a315febcd781ba8415560620"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/preview-native.gif",
+        "sha256": "32a2f413d9555cd876b193820acca4644602a77eda7daeea1d863d080b784267"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/preview.gif",
+        "sha256": "5c764f69a54648ece8b38546402a2bdb47bd085aaa5538093a52a3d42c0aafa1"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/review-observations.md",
+        "sha256": "5f9019615052623006ee22afd9873e5e3a3e377dc26e17057bb7309044ca13ef"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/scene-background.png",
+        "sha256": "affe655d877bf5a4c6074a97369f68610ba7e17a85ab92ffb7b7fe41f5993aa4"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/scene-native.png",
+        "sha256": "1c2377f02c541586bba945ad4779d6a6eed730d22ff01da31f0adabd9ad5d09d"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/sheet.png",
+        "sha256": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/source-audit.json",
+        "sha256": "6dcd7856a0abda8364c03e7b048d34ec804a62a03c45a20480b46bf08c3c46e1"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/sprite.json",
+        "sha256": "6890956718f28d4297241338bab4bd7666a6864623e2c138d7232245bca06d5c"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/travel-native.gif",
+        "sha256": "bdc9d43f8e40ddf5aacc946910f94584a6bf13ee730221110ecce8f6115222cc"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/motion-v2/validation.json",
+        "sha256": "b3d36617479e348b809e52da0d63e4c3bcfb496d3f421b3738ff88a3045719ab"
+      }
+    ]
   }
 ]

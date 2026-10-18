@@ -4,12 +4,12 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**8 newly completed; 1 in progress; 182 queued; 5 completed before this run.** Final pixels retain their own human-review status.
+**9 newly completed; 0 in progress; 171 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
 | Red fox | finished-game-active | [Playback](../public/demos/wildlife-v2/fox/motion-v2/index.html) |
-| African elephant | in-progress | [Playback](../public/demos/wildlife-v2/elephant/motion-v2/index.html) |
+| African elephant | finished-game-active | [Playback](../public/demos/wildlife-v2/elephant/motion-v2/index.html) |
 | Cat | finished-game-active | [Playback](../public/demos/wildlife-v2/cat/motion-v2/index.html) |
 | Dog | finished-game-active | [Playback](../public/demos/wildlife-v2/dog/motion-v2/index.html) |
 | White-tailed deer | finished-game-active | [Playback](../public/demos/wildlife-v2/deer/motion-v2/index.html) |
@@ -20,7 +20,7 @@
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T20:40:43.992Z (18/10/2026, 22:40:43 Berlin).
+Snapshot: 2026-10-18T20:45:25.425Z (18/10/2026, 22:45:25 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

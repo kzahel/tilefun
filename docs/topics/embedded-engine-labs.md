@@ -31,6 +31,16 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
+## Wildlife motion repairs
+
+[140](../tactical/140-autonomous-wildlife-completion.md) selects completed sheep,
+pig, deer, goat, cow, fox, cat, dog and elephant motion banks in the ordinary
+shared definitions. The game and Worker landscape playground consume identical
+clips, speed-matched authored strides and anchors. Existing pet coat banks own
+independent frame ranges, preserving their immutable animation after base
+cat/dog repairs. Canvas/GPU checks cover motion, contacts, pause/reload and
+grounded escapes for every repaired species and all four pet coats.
+
 ## Fierce creatures
 
 [139](../tactical/139-horse-motion-study.md) activates the completed horse and

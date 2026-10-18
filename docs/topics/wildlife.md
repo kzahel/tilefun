@@ -33,7 +33,12 @@ six shared game checks pass. Cat and dog now also have repaired torso/limb
 motion, separate source-driven coat paint and retained face templates. Their
 640ms walks match 16px/s and 22px/s. All 18 base/coat browser checks pass; the
 four existing coat banks own their clip ranges independently of base repairs.
-Elephant is the last frozen-torso repair.
+Elephant now completes the frozen-torso queue: broad column limbs, moving
+paint and its retained trunk/tail action; 1.6s walk at 14px/s. Source/replay,
+playback and three game/browser checks pass. The eleven other existing banks
+were inspected read-only and retained; [preservation observations](../../art-source/wildlife-v2/autonomous-140-preserved.json)
+pin their original hashes. Nine new repairs plus sixteen delivered roster
+entries leave 171 remaining. Next: chicken, butterfly and red squirrel.
 
 ## Horse and giraffe motion
 

@@ -81,3 +81,17 @@ assertion; distinguish them from newly introduced failures.
   Corrected the ledger's existing Brown bear alias (`bear` roster, `brown-bear`
   runtime), avoiding duplicate production; six delivered extra predators/fantasy
   animals are recorded outside the retained roster. Elephant next.
+
+- 20:45 UTC: elephant `motion-v2` finished and selected in shared gameplay.
+  Broad fixed-volume column limbs, three-support lateral walk, moving original
+  torso/head paint and retained five-part trunk curl/tail. 32 poses/1.6s match
+  14px/s. Audit covers 2,112 limb, 820 trunk and 164 tail links; source replay
+  and 328 Chromium crops pass. Typecheck/lint/build, 894-candidate manifest and
+  three Canvas/GPU/ball tests pass. Full units: 2,820 pass, five known Windows
+  failures, ten skipped. All eleven frozen-torso repairs are delivered.
+  Read-only native strips inspected for the eleven other existing animals;
+  their convincing hops, waddles, slithers and aquatic motion are retained in
+  autonomous-140-preserved.json, with original hashes and no new approval.
+  Current roster accounting: nine newly completed, sixteen already delivered,
+  171 remaining. Next unfinished family prototypes: chicken, butterfly and
+  red squirrel, before expanding related species.

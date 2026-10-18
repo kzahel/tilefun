@@ -27,7 +27,18 @@
     "giraffe",
     "tiger",
     "lion",
-    "bear"
+    "bear",
+    "rabbit",
+    "mallard-duck",
+    "robin",
+    "fish",
+    "ant",
+    "king-cobra",
+    "frog",
+    "kangaroo",
+    "penguin",
+    "harbor-seal",
+    "manta-ray"
   ],
   "tasks": {
     "fox": {
@@ -44,16 +55,25 @@
     "rabbit": {
       "name": "Rabbit",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "pilot-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Gather/push/landing poses change limb and torso silhouette; the shared authority hop supplies world height. Compact face and rear ear/paw separation retained.",
+      "sheetSha256": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "elephant": {
       "name": "African elephant",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "draft-ready",
-      "revision": "motion-v2"
+      "revision": "motion-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T20:45:06Z",
+      "receipt": "art-source/wildlife-v2/elephant/motion-v2/receipt.json",
+      "evidence": "65 half-poses/facing; 2112 fixed limb links; 820 trunk and 164 tail link checks; planted travel; native torso motion; byte-identical replay; 328 exact Chromium crops; three shared game/browser checks"
     },
     "giraffe": {
       "name": "Giraffe",
@@ -65,23 +85,38 @@
     "mallard-duck": {
       "name": "Mallard duck",
       "family": "Birds",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Webbed-foot alternation and native one-pixel weight shift remain visible; folded-wing duck body and orange bill read in four directions.",
+      "sheetSha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "robin": {
       "name": "European robin",
       "family": "Birds",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v2",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Paired hop pushes and landing feet remain visible under the red-breasted body; source bank also has separate flap and song clips.",
+      "sheetSha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "fish": {
       "name": "Pond fish",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v2",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Forked tail and posterior body sweep through a lateral wave; near/far fins and rear-facing head distinction remain readable.",
+      "sheetSha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "butterfly": {
       "name": "Butterfly",
@@ -93,23 +128,38 @@
     "ant": {
       "name": "Ant",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v2",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Tripod legs alternate under distinct head/thorax/gaster segments; antennae stay separate at tiny native scale.",
+      "sheetSha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "king-cobra": {
       "name": "King cobra",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "A traveling body wave changes the long rear/profile curve while the raised hood/head retain direction; no quadruped-style bob is needed.",
+      "sheetSha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "frog": {
       "name": "Frog",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Leg gather/push/landing poses change the full squat silhouette and body height; the shared hop owns world travel.",
+      "sheetSha256": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "gorilla": {
       "name": "Gorilla",
@@ -121,9 +171,14 @@
     "kangaroo": {
       "name": "Kangaroo",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Crouch, strong hind-foot push, airborne tuck and landing alter torso/hip/feet relationships; the long tail follows the pose.",
+      "sheetSha256": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "crab": {
       "name": "Crab",
@@ -142,23 +197,38 @@
     "penguin": {
       "name": "Penguin",
       "family": "Birds",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Native torso lean alternates over separate feet; side flipper and front white bib distinguish the waddle facings.",
+      "sheetSha256": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "harbor-seal": {
       "name": "Harbor seal",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Haul changes shoulder/head height and fore-flipper support; body undulation and tail/flipper pose changes read in the native strip.",
+      "sheetSha256": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "manta-ray": {
       "name": "Manta ray",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "draft-v1",
+      "gameplay": true,
+      "inspectedUtc": "2026-10-18T20:43:00Z",
+      "evidence": "Broad pectoral wings flex through both down/up poses, including profile foreshortening; the central body and long thin tail remain coherent.",
+      "sheetSha256": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "reviewStatus": "pending; preserved existing bank"
     },
     "jellyfish": {
       "name": "Jellyfish",
@@ -1470,6 +1540,14 @@
         "dog"
       ],
       "validation": "Typecheck, lint, build, 893-candidate manifest and 18 targeted browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Existing pet banks retain independent frame ranges; human art review pending."
+    },
+    {
+      "utc": "2026-10-18T20:45:06Z",
+      "completed": [
+        "elephant"
+      ],
+      "preservedExisting": 11,
+      "validation": "All eleven frozen-torso repairs now delivered, including accepted horse/giraffe. Typecheck/lint/build, 894-candidate manifest and three elephant browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Existing eleven other motion banks inspected read-only and retained."
     }
   ],
   "existingOutsideRoster": [

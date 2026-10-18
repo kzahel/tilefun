@@ -478,11 +478,11 @@
     {
       "id": "wildlife-elephant-provisional-v1",
       "name": "wildlife elephant provisional v1",
-      "image": "demos/wildlife-v2/elephant/pilot-v2/sheet.png",
-      "width": 2352,
+      "image": "demos/wildlife-v2/elephant/motion-v2/sheet.png",
+      "width": 4592,
       "height": 448,
       "tileSize": 16,
-      "fingerprint": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+      "fingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2373,6 +2373,16 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-elephant-motion-v2",
+      "name": "wildlife v2 elephant motion v2",
+      "image": "demos/wildlife-v2/elephant/motion-v2/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -23879,7 +23889,7 @@
       "rect": [
         0,
         0,
-        2352,
+        4592,
         448
       ],
       "label": "wildlife-elephant-provisional-v1 · registered 112×112 frames",

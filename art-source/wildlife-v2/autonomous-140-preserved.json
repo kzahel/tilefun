@@ -1,0 +1,322 @@
+{
+  "identity": "wildlife-autonomous-140-preserved",
+  "inspectedUtc": "2026-10-18T20:43:00Z",
+  "method": "Read-only original sheet and metadata; six chronological locomotion samples in each native facing. Existing unit contracts validate live identities. Preserved images retain their original human review state.",
+  "animals": {
+    "rabbit": {
+      "reviewIdentity": "rabbit-pilot-v1",
+      "image": "public/demos/wildlife-v2/rabbit/pilot-v1/sheet.png",
+      "sha256": "cddda7c1152163ea73ef20bcae1f4b0b92ffe684af842ec2ae26b5ddef9b1110",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1
+        },
+        "hop": {
+          "start": 1,
+          "count": 8
+        },
+        "action": {
+          "start": 9,
+          "count": 6
+        }
+      },
+      "revision": "pilot-v1",
+      "agentObservation": "Gather/push/landing poses change limb and torso silhouette; the shared authority hop supplies world height. Compact face and rear ear/paw separation retained.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "mallard-duck": {
+      "reviewIdentity": "mallard-duck-draft-v1",
+      "image": "public/demos/wildlife-v2/mallard-duck/draft-v1/sheet.png",
+      "sha256": "a505598176fbd603e44fe19512c02d6c2194a7bcb376234a789d0777aa78d79e",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 160
+        },
+        "waddle": {
+          "start": 1,
+          "count": 8,
+          "description": "Alternating webbed feet; six discrete planted samples per side including zero-lift swing boundary; one-pixel weight transfer",
+          "durationMs": 1280
+        },
+        "swim": {
+          "start": 9,
+          "count": 8,
+          "description": "Alternating submerged power and feathered recovery paddles, wings folded",
+          "durationMs": 1280
+        },
+        "flap": {
+          "start": 17,
+          "count": 8,
+          "description": "Articulated secondary/primary downstroke and folding recovery; tucked feet",
+          "durationMs": 1280
+        },
+        "action": {
+          "start": 25,
+          "count": 6,
+          "description": "Quack with hinged lower bill and tail shiver; fixed skull",
+          "durationMs": 960
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "Webbed-foot alternation and native one-pixel weight shift remain visible; folded-wing duck body and orange bill read in four directions.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "robin": {
+      "reviewIdentity": "robin-draft-v2",
+      "image": "public/demos/wildlife-v2/robin/draft-v2/sheet.png",
+      "sha256": "76853dd7282f23839c41f6f8d401c2f2294d143b205cec3b92c924155f3efb9c",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 120
+        },
+        "hop": {
+          "start": 1,
+          "count": 8,
+          "description": "Paired gather/push/rise/apex/descend/landing/absorb/recover; three fixed segments per leg",
+          "durationMs": 960
+        },
+        "flap": {
+          "start": 9,
+          "count": 8,
+          "description": "Shoulder downstroke with folding elbow recovery, rigid head/body and tucked feet",
+          "durationMs": 960
+        },
+        "action": {
+          "start": 17,
+          "count": 6,
+          "description": "Perched-song bill hinge and tail cock; fixed head, no audio",
+          "durationMs": 720
+        }
+      },
+      "revision": "draft-v2",
+      "agentObservation": "Paired hop pushes and landing feet remain visible under the red-breasted body; source bank also has separate flap and song clips.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "fish": {
+      "reviewIdentity": "fish-draft-v2",
+      "image": "public/demos/wildlife-v2/fish/draft-v2/sheet.png",
+      "sha256": "b74f78bd83c06bd2c55a5f0c7d0bccbc81072843062b00a956d223d4e68cfb70",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 160
+        },
+        "swim": {
+          "start": 1,
+          "count": 8,
+          "description": "Posterior traveling axial wave through fixed-length spine links, lateral forked caudal beat and paired fin sculling",
+          "durationMs": 1280
+        },
+        "action": {
+          "start": 9,
+          "count": 6,
+          "description": "Ventral lip gape and pectoral feeding-hover scull around stable skull; source operculum movement is below pixel scale",
+          "durationMs": 960
+        }
+      },
+      "revision": "draft-v2",
+      "agentObservation": "Forked tail and posterior body sweep through a lateral wave; near/far fins and rear-facing head distinction remain readable.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "ant": {
+      "reviewIdentity": "ant-draft-v2",
+      "image": "public/demos/wildlife-v2/ant/draft-v2/sheet.png",
+      "sha256": "451bbd1b1a93f6c56b7bb2352ab7480fc1bb2f1ba6ec566fc7ae5e2b380a876f",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1
+        },
+        "crawl": {
+          "start": 1,
+          "count": 8
+        },
+        "action": {
+          "start": 9,
+          "count": 6
+        }
+      },
+      "revision": "draft-v2",
+      "agentObservation": "Tripod legs alternate under distinct head/thorax/gaster segments; antennae stay separate at tiny native scale.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "king-cobra": {
+      "reviewIdentity": "king-cobra-draft-v1",
+      "image": "public/demos/wildlife-v2/king-cobra/draft-v1/sheet.png",
+      "sha256": "065a84e7b2fb555c07ca6946e2548bb054ad63165e9d5235c139acb0ae404e3e",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 160,
+          "description": "Alert raised head and hood"
+        },
+        "slither": {
+          "start": 1,
+          "count": 8,
+          "durationMs": 1280,
+          "description": "Eight-pose posterior travelling bend wave, continuous sliding ventral support, fixed link lengths"
+        },
+        "action": {
+          "start": 9,
+          "count": 6,
+          "durationMs": 960,
+          "description": "Fixed skull tongue extension/retraction with fixed-length distal tail curl; rear tongue hidden"
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "A traveling body wave changes the long rear/profile curve while the raised hood/head retain direction; no quadruped-style bob is needed.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "frog": {
+      "reviewIdentity": "frog-draft-v1",
+      "image": "public/demos/wildlife-v2/frog/draft-v1/sheet.png",
+      "sha256": "c888340e50dc1140a4cade4594064bf2f73dbf605134c7be34d662fbad76b919",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 140,
+          "description": "Brown common frog crouch"
+        },
+        "hop": {
+          "start": 1,
+          "count": 8,
+          "durationMs": 1120,
+          "description": "Synchronous hind push, flight, fore-first landing and recovery, fixed limbs"
+        },
+        "swim": {
+          "start": 9,
+          "count": 8,
+          "durationMs": 1120,
+          "description": "Paired hind-leg kick/glide/recovery, no ground footfalls"
+        },
+        "action": {
+          "start": 17,
+          "count": 6,
+          "durationMs": 840,
+          "description": "Rigid eye bulb withdrawal/closure, fixed skull; rear iris hidden"
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "Leg gather/push/landing poses change the full squat silhouette and body height; the shared hop owns world travel.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "kangaroo": {
+      "reviewIdentity": "kangaroo-draft-v1",
+      "image": "public/demos/wildlife-v2/kangaroo/draft-v1/sheet.png",
+      "sha256": "1d63728f4e497dba7589b5d62236af1a9b1350ea5bbc73234e0066967211fd99",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 160,
+          "description": "Male red kangaroo alert stance"
+        },
+        "hop": {
+          "start": 1,
+          "count": 10,
+          "durationMs": 1600,
+          "description": "Synchronous hind push2, flight3-8, landing9; long feet and fixed-length balancing tail"
+        },
+        "action": {
+          "start": 11,
+          "count": 8,
+          "durationMs": 1280,
+          "description": "Independent ear swivel/listening, rigid skull and quiet tail"
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "Crouch, strong hind-foot push, airborne tuck and landing alter torso/hip/feet relationships; the long tail follows the pose.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "penguin": {
+      "reviewIdentity": "penguin-draft-v1",
+      "image": "public/demos/wildlife-v2/penguin/draft-v1/sheet.png",
+      "sha256": "89c63f9debfb60ddeac33bfb24ae4866255e38c00f447a649f01537958c066e5",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1,
+          "durationMs": 160,
+          "description": "Upright emperor, short dark web feet"
+        },
+        "walk": {
+          "start": 1,
+          "count": 8,
+          "durationMs": 1280,
+          "description": "Alternating short-leg waddle, fixed-length links, planted floor contacts"
+        },
+        "swim": {
+          "start": 9,
+          "count": 8,
+          "durationMs": 1280,
+          "description": "Rigid75deg forward posture, counter-pitched fixed-volume head; swept/feathered flippers"
+        },
+        "action": {
+          "start": 17,
+          "count": 8,
+          "durationMs": 1280,
+          "description": "Eight-pose flipper stretch/return, fixed skull/torso volumes"
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "Native torso lean alternates over separate feet; side flipper and front white bib distinguish the waddle facings.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "harbor-seal": {
+      "reviewIdentity": "harbor-seal-draft-v1",
+      "image": "public/demos/wildlife-v2/harbor-seal/draft-v1/sheet.png",
+      "sha256": "86ad47f5ac74f5af9bedf43298ed4e9301d8d2d8600314df6bae73dd7275cdbe",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1
+        },
+        "haul": {
+          "start": 1,
+          "count": 8
+        },
+        "swim": {
+          "start": 9,
+          "count": 8
+        },
+        "action": {
+          "start": 17,
+          "count": 6
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "Haul changes shoulder/head height and fore-flipper support; body undulation and tail/flipper pose changes read in the native strip.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    },
+    "manta-ray": {
+      "reviewIdentity": "manta-ray-draft-v1",
+      "image": "public/demos/wildlife-v2/manta-ray/draft-v1/sheet.png",
+      "sha256": "2e121610a645043417bf2864e70ee87d23118cf3434724554aa370127559418f",
+      "clips": {
+        "idle": {
+          "start": 0,
+          "count": 1
+        },
+        "swim": {
+          "start": 1,
+          "count": 12
+        },
+        "action": {
+          "start": 13,
+          "count": 8
+        }
+      },
+      "revision": "draft-v1",
+      "agentObservation": "Broad pectoral wings flex through both down/up poses, including profile foreshortening; the central body and long thin tail remain coherent.",
+      "status": "preserved existing gameplay, no changed pixels or new human approval"
+    }
+  }
+}
