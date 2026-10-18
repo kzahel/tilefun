@@ -5,6 +5,7 @@ import { createProp } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
 import { applyPatternEdit, type PatternEdit } from "../patterns/PatternDocument.js";
 import { deserializeProp, serializeProp } from "../shared/serialization.js";
+import { withBuildingLayout, withLivedInLayout } from "./BuildingDoors.js";
 import {
   INTERIOR_WALL_TYPE,
   type InteriorIdentity,
@@ -49,6 +50,42 @@ function fixture(buildingType = identity.buildingType) {
   return { id, state, props, player, editor };
 }
 describe("authoritative editable gameplay rooms", () => {
+  it("opens the whole street threshold in saved, edited and new rooms without changing internal jambs", () => {
+    const city = { ...identity, buildingType: "prop-city-dense-v1-condo-bay-3" };
+    for (const id of [
+      identity,
+      withBuildingLayout(city, { wx: 0, wy: 0 }),
+      withLivedInLayout(city, { wx: 0, wy: 0 }),
+    ]) {
+      const saved = initialRoom(id);
+      for (const state of [
+        saved,
+        { ...saved, document: applyPatternEdit(saved.document, extension) },
+      ]) {
+        const room = compileGameplayRoom(id, state);
+        for (const door of room.doors) {
+          const x = Math.floor(door.inside.wx / 32) * 2;
+          const y = Math.floor(door.inside.wy / 32) * 2;
+          for (const dx of [0, 1])
+            for (const dy of [0, 1]) {
+              const cell = room.map.cells[y + dy]?.[x + dx];
+              expect(cell?.semantic).toBe("opening");
+              expect(cell?.wall).toEqual([]);
+              expect(cell?.foreground).toEqual([]);
+            }
+          expect(room.onFloor({ x: x * 16, y: y * 16, width: 32, height: 6 })).toBe(true);
+          expect(room.onFloor({ x: x * 16 - 2, y: y * 16, width: 4, height: 6 })).toBe(false);
+        }
+        // Opening the street cutaway must not erase the kitchen/bedroom divider jamb.
+        if (id.layout) {
+          expect(room.map.cells[8]?.[5]?.semantic).toBe("wall");
+          expect(room.map.cells[8]?.[5]?.wall.length).toBeGreaterThan(0);
+          expect(room.onFloor({ x: 80, y: 128, width: 16, height: 16 })).toBe(false);
+        }
+      }
+    }
+  });
+
   for (const type of ["prop-regional-apartment-2", "prop-regional-bakery", "prop-country-house"])
     it(`preserves ${type} fixtures and permits a connected extension`, () => {
       const { id, state, props, player, editor } = fixture(type);

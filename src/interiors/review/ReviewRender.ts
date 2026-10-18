@@ -16,7 +16,9 @@ export function renderInteriorCandidate(
   atlas: HTMLImageElement,
 ) {
   if (c.building) {
-    const room = compileGameplayRoom(c.building, initialRoom(c.building));
+    const room = compileGameplayRoom(c.building, initialRoom(c.building), {
+      fullWidthEntrances: !c.legacyEntranceTrim,
+    });
     canvas.width = parseFloorPlan(c.sketch).width * 32;
     canvas.height = 10 * 32;
     const ctx = reviewContext2D(canvas);

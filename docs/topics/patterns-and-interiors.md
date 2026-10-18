@@ -41,6 +41,11 @@ corner and shared entrance hall. Bakeries use a restaurant with dining tables,
 service area and working kitchen; other shops use stocked food-market shelves,
 produce and a checkout. Each purpose has source-art wall and floor colors,
 additional whole-sprite furniture, entrance mats and shorter street thresholds.
+Street entrances now use the full 32px cutaway opening, with no isolated jamb
+cap over the threshold. The shared gameplay compiler corrects new, previously
+saved and edited rooms, while keeping internal divider jambs, saved anchors,
+furniture and edits. Frozen wall and v2 building review compositions explicitly
+retain their historical trim; the three current lived-in candidates show the fix.
 Older `shop-v2` and `apartment-v2` identities retain their original recipes. Audited facade
 thresholds expose both butcher doors and the bay/arched apartment entrances.
 Their left-to-right order matches the indoor south-wall openings. Both players

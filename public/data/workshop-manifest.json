@@ -15205,12 +15205,12 @@
       "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
       "url": "/tilefun/interior-review.html?stage=17&unchecked=0&case=lived-in-v3-home",
       "kind": "interior",
-      "fingerprint": "c85e6a5fdc315919ec91a5896aba54b66a0b5e16d5afb0f896ddf60999795e38",
+      "fingerprint": "3559a4e61b458224dbafde41ffa7ce68e68935e9b5499d3bc211140db2c26c8c",
       "interior": {
         "caseId": "lived-in-v3-home",
         "name": "Home · reading corner, kitchen, bedroom and indoor cat routes",
         "sketch": "###########\n#BBBB#KKKK#\n#BBBB#KKKK#\n#BBBB+KKKK#\n##+####+###\n#LLLLLLLLL#\n#LLLLLLLLL#\n#HHHHHHHHH#\n##+#####+##",
-        "fingerprint": "c85e6a5fdc315919ec91a5896aba54b66a0b5e16d5afb0f896ddf60999795e38",
+        "fingerprint": "3559a4e61b458224dbafde41ffa7ce68e68935e9b5499d3bc211140db2c26c8c",
         "furniture": [
           {
             "id": "bed",
@@ -15331,12 +15331,12 @@
       "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
       "url": "/tilefun/interior-review.html?stage=17&unchecked=0&case=lived-in-v3-restaurant",
       "kind": "interior",
-      "fingerprint": "d2230630ec7567d06285764dbc8bca1e3b316f89f0874f9a8563325cfb13d0d7",
+      "fingerprint": "9768c13152e31aad51bc5f311e3ae5f67b15b61ac7dfccd892ddc6ef0b815675",
       "interior": {
         "caseId": "lived-in-v3-restaurant",
         "name": "Restaurant · four dining tables, service and working kitchen",
         "sketch": "###########\n#KKKKKKKKK#\n#KKKKKKKKK#\n#####+#####\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n##+########",
-        "fingerprint": "d2230630ec7567d06285764dbc8bca1e3b316f89f0874f9a8563325cfb13d0d7",
+        "fingerprint": "9768c13152e31aad51bc5f311e3ae5f67b15b61ac7dfccd892ddc6ef0b815675",
         "furniture": [
           {
             "id": "fridge",
@@ -15457,12 +15457,12 @@
       "prompt": "Review the room and doorway joins. Tap the render to pin a problem.",
       "url": "/tilefun/interior-review.html?stage=17&unchecked=0&case=lived-in-v3-market",
       "kind": "interior",
-      "fingerprint": "3b3165a7809f6f61c5f87f6d59f393d2e406ed34a619c5f86d06ddbfe8046cfc",
+      "fingerprint": "c609219e0b04cc6e4a9621e5843aa9ed94095c1343561e221308eee3f15a6871",
       "interior": {
         "caseId": "lived-in-v3-market",
         "name": "Food shop · produce, bread, drinks and checkout",
         "sketch": "###########\n#KKKKKKKKK#\n#KKKKKKKKK#\n#####+#####\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n#LLLLLLLLL#\n##+#####+##",
-        "fingerprint": "3b3165a7809f6f61c5f87f6d59f393d2e406ed34a619c5f86d06ddbfe8046cfc",
+        "fingerprint": "c609219e0b04cc6e4a9621e5843aa9ed94095c1343561e221308eee3f15a6871",
         "furniture": [
           {
             "id": "stock-a",
@@ -31509,5 +31509,5 @@
       }
     }
   ],
-  "inputDigest": "6ee9201a94599482fd5acca558639983071918df9f95a2dae04f37d25ce081c5"
+  "inputDigest": "32b9ee728dae1c47ddf147a166410a09761e9e2e07795d62a4b61aac1ad54c49"
 }

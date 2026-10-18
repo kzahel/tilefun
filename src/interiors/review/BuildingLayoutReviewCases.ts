@@ -44,6 +44,7 @@ export function buildingLayoutReviewCases(): ReviewCase[] {
       id: `building-layout-v2-${id}`,
       name,
       stage: 16,
+      legacyEntranceTrim: true,
       building: identity,
       ...layout,
     };

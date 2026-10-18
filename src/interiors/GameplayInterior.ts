@@ -74,7 +74,7 @@ export function interiorPlan(identity: InteriorIdentity) {
     const plan = parseFloorPlan(sketch);
     return {
       plan,
-      map: dressLivedInMap(buildLayeredApartmentPlan(plan), identity),
+      map: dressLivedInMap(buildLayeredApartmentPlan(plan, { fullWidthEntrances: true }), identity),
       furniture,
       objects: compileFurniture(plan, furniture),
     };
@@ -104,7 +104,7 @@ export function interiorPlan(identity: InteriorIdentity) {
   const objects = compileFurniture(plan, furniture, INTERIOR_FLOOR);
   return {
     plan,
-    map: dressLivedInMap(buildLayeredApartmentPlan(plan), identity),
+    map: dressLivedInMap(buildLayeredApartmentPlan(plan, { fullWidthEntrances: true }), identity),
     furniture,
     objects,
   };

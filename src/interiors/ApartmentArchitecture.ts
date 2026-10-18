@@ -393,13 +393,22 @@ function placeHorizontalWall(map: LayeredInteriorMap, plan: FloorPlan, x: number
   }
 }
 
-function placeHorizontalDoor(map: LayeredInteriorMap, plan: FloorPlan, x: number, y: number): void {
+function placeHorizontalDoor(
+  map: LayeredInteriorMap,
+  plan: FloorPlan,
+  x: number,
+  y: number,
+  fullWidthEntrances: boolean,
+): void {
   const ox = x * SCALE;
   const oy = y * SCALE;
   // A sketch cell spans two atlas columns. Keep the passage in its left
   // column and use the right column for the source's one-tile jamb. The
   // approved room has a one-tile passage through a two-row divider.
   const frontEntrance = isRoom(at(plan, x, y - 1)) && at(plan, x, y + 1) === " ";
+  // Exterior cutaways have no tall door frame to join. A one-tile jamb
+  // here leaves an isolated wall cap in the middle of the street threshold.
+  if (frontEntrance && fullWidthEntrances) return;
   for (let dy = 0; dy < SCALE; dy++) {
     const cell = map.cells[oy + dy]?.[ox + 1];
     if (!cell) throw new Error(`Expanded passage cell ${x},${y} is missing`);
@@ -541,8 +550,16 @@ function placeInteriorJunctionCap(
   });
 }
 
+export interface ApartmentArchitectureOptions {
+  /** Open the full sketch cell at south entrances; frozen art keeps the original trim. */
+  fullWidthEntrances?: boolean;
+}
+
 /** Compiles an editable floor/wall/door sketch into independent visual layers. */
-export function buildLayeredApartmentPlan(plan: FloorPlan): LayeredInteriorMap {
+export function buildLayeredApartmentPlan(
+  plan: FloorPlan,
+  options: ApartmentArchitectureOptions = {},
+): LayeredInteriorMap {
   validateSidePassages(plan);
   const map = createLayeredInteriorMap(plan.width * SCALE, plan.height * SCALE);
   for (let y = 0; y < plan.height; y++) {
@@ -574,7 +591,7 @@ export function buildLayeredApartmentPlan(plan: FloorPlan): LayeredInteriorMap {
   for (let y = 0; y < plan.height; y++) {
     for (let x = 0; x < plan.width; x++) {
       if (at(plan, x, y) === "+" && axisAt(plan, x, y) === "horizontal") {
-        placeHorizontalDoor(map, plan, x, y);
+        placeHorizontalDoor(map, plan, x, y, options.fullWidthEntrances ?? false);
       }
       placeInteriorJunctionCap(map, plan, x, y);
     }

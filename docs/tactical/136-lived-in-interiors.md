@@ -86,3 +86,29 @@ review fingerprints remain unchanged.
 
 Next: expand purpose-specific shops and household/play routines, then design an
 explicit opt-in refresh for already visited interiors that preserves player edits.
+
+## Entrance wall follow-up (2026-10-18)
+
+The owner reported a remaining wall beside the entry door. Shortening the floor
+had left the original one-tile jamb cap inside a two-tile threshold, creating an
+isolated wall strip and an L-shaped floor opening. The shared apartment compiler
+now supports full-width exterior cutaways; production room compilation uses them
+for compact legacy rooms, saved v2 layouts, v3 layouts and player-edited rooms.
+Internal doorway jambs stay intact. No saved recipe, connection, furniture or
+anchor migration is needed. Static historical wall/v2 review compositions retain
+their exact trim, and the three current lived-in review candidates renew normally.
+
+Regression coverage checks both halves of every entrance for stray geometry and
+usable ground, preserves adjacent wall collision and checks internal divider
+jambs across original and edited plans. Fresh ordinary-gameplay Canvas/GPU
+captures cover the home, restaurant and two-door market.
+
+Follow-up validation passes: all three typechecks; 279 unit files / 2,773 tests;
+lint with the existing 119 warnings and 34 infos; production build; and all 670
+browser tests (29.5 minutes). Browser checks include both renderers, real multi-door
+traversal/fades, room edits/reload, two-client persistence and all 234 approved
+interior visual references. Catalog generation is current. Manifest generation
+verified all 848 candidates in normal Chromium at retina scale; only the three
+lived-in room fingerprints changed, preserving all 245 older interior identities.
+[Door close-up before (left) and after (right)](/tmp/tilefun-door-before-after.png)
+is temporary local evidence.

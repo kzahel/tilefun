@@ -41,6 +41,8 @@ export interface ReviewCase {
   profiles?: WallProfileOptions;
   furniture?: FurniturePlacement[];
   building?: InteriorIdentity;
+  /** Historical composition: retain the original south doorway cap. */
+  legacyEntranceTrim?: boolean;
 }
 type Grid = PlanCell[][];
 const rectangle = (w: number, h: number, floor: PlanCell = "L"): Grid =>

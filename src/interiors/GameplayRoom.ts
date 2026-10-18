@@ -8,7 +8,10 @@ import {
   parsePatternDocument,
   roomSketch,
 } from "../patterns/PatternDocument.js";
-import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
+import {
+  type ApartmentArchitectureOptions,
+  buildLayeredApartmentPlan,
+} from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
 import { buildingDoors } from "./BuildingDoors.js";
 import type { FurnitureRect } from "./FurnitureCatalog.js";
@@ -61,7 +64,11 @@ export function parseGameplayRoom(input: unknown): GameplayRoomState {
 /** The production compiler owns floor strips, shifted rails and door jambs.
  * Derive traversable ground from its floor layer, rather than a second wall solver.
  * The complement is compacted into collision rectangles, including voids. */
-export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayRoomState) {
+export function compileGameplayRoom(
+  identity: InteriorIdentity,
+  state: GameplayRoomState,
+  options: ApartmentArchitectureOptions = {},
+) {
   const original = initialRoom(identity);
   const legacy =
     !identity.layout && JSON.stringify(state.document) === JSON.stringify(original.document);
@@ -82,7 +89,10 @@ export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayR
     throw new Error(
       "Only connected street doorways may open onto the void. Interior doors must connect two rooms.",
     );
-  const map = dressLivedInMap(buildLayeredApartmentPlan(plan), identity);
+  const map = dressLivedInMap(
+    buildLayeredApartmentPlan(plan, { fullWidthEntrances: true, ...options }),
+    identity,
+  );
   const width = state.document.width * 32,
     height = state.document.height * 32;
   const mask = new Uint8Array(width * height);
@@ -115,8 +125,8 @@ export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayR
             1,
           );
         }
-        // Internal horizontal doors have a one-tile jamb; the original street
-        // threshold deliberately retains the legacy 32px passage.
+        // Internal horizontal doors have a one-tile jamb. Full-width street
+        // openings keep their opening semantic and their entire floor.
         if (
           cell.semantic === "wall" &&
           plan.rows[Math.floor(y / 2)]?.[Math.floor(x / 2)] === "+" &&
