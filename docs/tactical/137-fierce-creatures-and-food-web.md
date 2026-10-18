@@ -197,3 +197,16 @@ The final spider commit also includes grounded rabbit pounce timing, edited-perc
 landing, shared runtime review fingerprints and complete integration evidence.
 Next: owner playtest of the natural/placed food-web scenes and visual review of
 the five pending creature identities; further art changes require new revisions.
+
+## CI simulation budget (2026-10-19)
+
+Run [39170512267](https://github.com/kzahel/tilefun/actions/runs/39170512267)
+hits Vitest's default five-second timeout in the natural food-chain integration
+case at 5.124s; the placed counterpart passes at 4.184s. This case executes up to
+2,100 real Realm ticks and two persistence reloads. It now has an explicit
+15-second wall-clock budget for hosted CPU contention. Simulation steps, meal,
+population, origin and reload assertions are unchanged. No art or gameplay changes.
+All 2,871 unit tests, the three focused food-chain cases, typechecks and lint pass
+locally. The required
+production-status refresh was attempted, but this checkout lacks the local
+`data/wildlife-campaign-v2/progress.json`; existing production status is preserved.

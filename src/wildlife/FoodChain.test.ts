@@ -48,6 +48,9 @@ it.each(["food-web-natural", "food-web-placed"])(
       await session.close();
     }
   },
+  // Runs up to 2,100 real Realm ticks and two reloads; CI CPU contention can
+  // exceed Vitest's default five seconds without changing simulated behavior.
+  15_000,
 );
 it("a full wolf pack converges on one prey in the ordinary Realm and survives reload", async () => {
   const session = await ScenarioSession.create(naturalLandscapeRecipe("wolf-pack", "balanced"));
