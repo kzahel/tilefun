@@ -368,25 +368,62 @@ it("admits horn events only from the driver, rate limits them, and broadcasts th
   const s = await ScenarioSession.create(recipe());
   try {
     const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
-    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn" });
+    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn", active: true });
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
     s.realm.vehicles.enter(s.player, car.entity.id);
-    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn" });
-    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn" });
+    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn", active: true });
+    s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn", active: true });
     const { decodeServerMessage } = await import("../shared/binaryCodec.js");
     const messages = s
       .tick(1 / 60)
       .map(decodeServerMessage)
       .filter((m) => m.type === "vehicle-horn");
     expect(messages).toEqual([
-      { type: "vehicle-horn", wx: car.entity.position.wx, wy: car.entity.position.wy, kind: "car" },
+      {
+        type: "vehicle-horn",
+        vehicleId: car.entity.id,
+        active: true,
+        wx: car.entity.position.wx,
+        wy: car.entity.position.wy,
+        kind: "car",
+      },
     ]);
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
     for (let i = 0; i < 50; i++) await s.step(idle);
     s.realm.vehicles.honk(s.player);
     expect(s.realm.vehicles.takeHorns()).toHaveLength(1);
     s.realm.vehicles.exit(s.player);
+    expect(s.realm.vehicles.takeHorns()).toEqual([expect.objectContaining({ active: false })]);
     s.realm.vehicles.honk(s.player);
+    expect(s.realm.vehicles.takeHorns()).toEqual([]);
+  } finally {
+    await s.close();
+  }
+});
+
+it("sustains a held horn, releases immediately, and expires abandoned holds", async () => {
+  const { decodeServerMessage } = await import("../shared/binaryCodec.js");
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    for (let i = 0; i < 180; i++) {
+      if (i % 12 === 0) s.realm.vehicles.honk(s.player, true);
+      const horns = s
+        .tick(1 / 60)
+        .map(decodeServerMessage)
+        .filter((m) => m.type === "vehicle-horn");
+      expect(horns.every((h) => h.active)).toBe(true);
+    }
+    s.realm.vehicles.honk(s.player, false);
+    expect(s.realm.vehicles.takeHorns()).toEqual([expect.objectContaining({ active: false })]);
+    s.realm.vehicles.honk(s.player, true);
+    expect(s.realm.vehicles.takeHorns()).toEqual([expect.objectContaining({ active: true })]);
+    s.realm.worldAPI.advanceTime(0.61);
+    s.realm.vehicles.sync();
+    expect(s.realm.vehicles.takeHorns()).toEqual([expect.objectContaining({ active: false })]);
+    s.player.editorEnabled = true;
+    s.realm.vehicles.honk(s.player, true);
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
   } finally {
     await s.close();

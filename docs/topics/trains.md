@@ -11,7 +11,8 @@ and art suitability. [Vehicles](vehicles.md) owns delivered road traffic;
 ## Gentle pedestrian contact and manual whistle
 
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) gives inside drivers
-**Whistle / H** alongside Fast; nearby co-op listeners hear a short spatial whistle.
+**Whistle / H** alongside Fast; hold the key or screen button for a continuous
+spatial whistle and release to stop. Nearby co-op listeners hear the same hold.
 The existing autonomous journey sounds remain. Straight and curved services,
 automatic or driven, gently push ground-level players and movable actors at a
 capped contact speed. A wall, another body, unavailable terrain, water or unsafe

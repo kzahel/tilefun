@@ -78,12 +78,15 @@ Exact model-art review and nonzero steering/equipment-motion qualification remai
 
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) adds **Horn / H** on
 screen while driving, including desktop mouse and touch. Trains label it **Whistle**.
+Hold H or the screen button to sound the horn continuously; release to stop.
 The horn remains separate from emergency Siren/Style/Beacon controls. Authority
-admits one short sound per driver per 800ms and sends its current position and
-car/heavy/train voice to nearby co-op clients. Browser audio attenuates and pans
-it; menus, hidden pages and blocked input suppress incoming playback. Horns are
-transient events, not saved looping state. Traffic lab uses the same command,
-Worker event and browser audio; other scenario hosts can consume the shared event.
+verifies the driver and relays transient start/refresh/stop events, vehicle identity,
+position and car/heavy/train voice to nearby co-op clients. Held input refreshes
+at 200ms intervals; audio keeps one uninterrupted voice per vehicle. Releasing,
+leaving the seat, menus and focus loss stop playback. Authority expires abandoned
+holds after 600ms; browser voices also expire without refresh, including on a lost
+connection. Horn state is not saved. Traffic lab uses the same command, Worker
+event and browser audio; other scenario hosts can consume the shared event.
 
 Shared gameplay profiles set ordinary driving speed and acceleration independently
 of approved art/collision banks. All retain held Fast (1.6×):

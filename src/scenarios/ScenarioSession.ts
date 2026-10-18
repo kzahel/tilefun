@@ -404,7 +404,7 @@ export class ScenarioSession {
       return;
     }
     if (command.kind === "vehicle-horn") {
-      this.realm.vehicles.honk(this.player);
+      this.realm.vehicles.honk(this.player, command.active);
       return;
     }
     if (command.kind === "vehicle-emergency") {

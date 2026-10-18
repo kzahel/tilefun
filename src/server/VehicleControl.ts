@@ -25,19 +25,31 @@ import { safeArrival } from "./SafeArrival.js";
 export class VehicleControl {
   private drivers = new Map<
     number,
-    { session: PlayerSession; vehicle: Entity; lastInput: number; lastHorn?: number }
+    {
+      session: PlayerSession;
+      vehicle: Entity;
+      lastInput: number;
+      lastHorn?: number;
+      lastHornEvent?: number;
+      honking?: boolean;
+    }
   >();
   constructor(private realm: Realm) {}
   private horns: VehicleHornMessage[] = [];
-  honk(session: PlayerSession): void {
+  honk(session: PlayerSession, active = true): void {
     const driver = this.drivers.get(session.player.id);
-    if (!driver || session.editorEnabled || session.transitioning || session.retired) return;
+    if (!driver || typeof active !== "boolean") return;
+    if (active && (session.editorEnabled || session.transitioning || session.retired)) return;
     const now = this.realm.worldAPI.time;
-    if (now - (driver.lastHorn ?? -Infinity) < 0.8) return;
-    driver.lastHorn = now;
+    if (active) driver.lastHorn = now;
+    if (active === !!driver.honking && (!active || now - (driver.lastHornEvent ?? 0) < 0.1)) return;
+    driver.honking = active;
+    driver.lastHornEvent = now;
     const vehicle = driver.vehicle;
     this.horns.push({
       type: "vehicle-horn",
+      vehicleId: vehicle.id,
+      active,
       wx: vehicle.position.wx,
       wy: vehicle.position.wy,
       kind: isTrain(vehicle)
@@ -190,6 +202,7 @@ export class VehicleControl {
     }
   }
   exit(session: PlayerSession, forced = false): void {
+    this.honk(session, false);
     const vehicle = this.get(session);
     if (!vehicle) return;
     this.stop(session);
@@ -241,12 +254,20 @@ export class VehicleControl {
     this.realm.savePlayerData(session);
   }
   sync(): void {
-    for (const { session, vehicle, lastInput } of [...this.drivers.values()]) {
+    for (const { session, vehicle, lastInput, lastHorn, honking } of [...this.drivers.values()]) {
       if (!this.realm.entityManager.byId.has(vehicle.id)) {
         this.exit(session, true);
         continue;
       }
       if (this.realm.worldAPI.time - lastInput > 0.25) this.stop(session);
+      if (
+        honking &&
+        (this.realm.worldAPI.time - (lastHorn ?? 0) > 0.6 ||
+          session.editorEnabled ||
+          session.transitioning ||
+          session.retired)
+      )
+        this.honk(session, false);
       const p = session.player;
       p.position = { ...vehicle.position };
       p.wz = p.groundZ = vehicle.wz ?? 0;

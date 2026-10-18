@@ -1401,7 +1401,7 @@ export class Realm {
         break;
 
       case "vehicle-horn": {
-        this.vehicles.honk(session);
+        this.vehicles.honk(session, msg.active);
         break;
       }
       case "vehicle-emergency": {

@@ -95,6 +95,8 @@ export class PlayScene implements GameScene {
   /** Accumulated throw charge time (seconds). 0 = not charging. */
   private emergencyHeld = false;
   private styleHeld = false;
+  private hornHeld = false;
+  private hornRefresh = 0;
   private throwChargeTime = 0;
   private wasThrowHeld = false;
   /** Track ball entity positions for water-splash effect on removal. */
@@ -305,7 +307,14 @@ export class PlayScene implements GameScene {
           vehicle ? 24 : 0,
         ) ?? manual;
     const hornPressed = gc.actions.consumeHornPress();
-    if (vehicle && !inputLocked && hornPressed) gc.transport.send({ type: "vehicle-horn" });
+    const hornHeld = !!vehicle && !inputLocked && (gc.actions.isHeld("honk") || hornPressed);
+    this.hornRefresh += dt;
+    if (hornHeld !== this.hornHeld || (hornHeld && this.hornRefresh >= 0.2)) {
+      gc.transport.send({ type: "vehicle-horn", active: hornHeld });
+      this.hornRefresh = 0;
+    }
+    this.hornHeld = hornHeld;
+    if (inputLocked) gc.audioManager.stopHorns();
     const sirenHeld = !inputLocked && gc.actions.isHeld("throw");
     const styleHeld = !inputLocked && gc.actions.isHeld("jump");
     if (vehicle && hasVehicleLights(vehicle)) {
@@ -605,6 +614,10 @@ export class PlayScene implements GameScene {
   private stopMovement(gc: GameContext): void {
     gc.audioManager.stopSirens();
     gc.audioManager.stopTrains();
+    gc.audioManager.stopHorns();
+    gc.transport.send({ type: "vehicle-horn", active: false });
+    this.hornHeld = false;
+    this.hornRefresh = 0;
     this.emergencyHeld = false;
     this.styleHeld = false;
     gc.tapMovement?.cancel();

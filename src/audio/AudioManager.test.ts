@@ -2,7 +2,10 @@ import { afterEach, expect, it, vi } from "vitest";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { AudioManager } from "./AudioManager.js";
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+  vi.useRealTimers();
+  vi.unstubAllGlobals();
+});
 it.each(["ambulance", "fire-truck-ladder-1", "police-car", "fire-truck-ladder-2"])(
   "%s keeps one spatial looping voice, changes style, and stops for quiet/off/range/pause",
   (model) => {
@@ -78,9 +81,10 @@ it.each(["ambulance", "fire-truck-ladder-1", "police-car", "fire-truck-ladder-2"
   },
 );
 
-it("plays distinct spatial car, heavy and train horns and cleans up their short voices", () => {
+it("plays distinct spatial car, heavy and train horns and sustains voices until release or a lost heartbeat", () => {
+  vi.useFakeTimers();
   const node = () => ({ connect: vi.fn(), disconnect: vi.fn() });
-  const param = () => ({ value: 0, setValueAtTime: vi.fn(), linearRampToValueAtTime: vi.fn() });
+  const param = () => ({ value: 0, setTargetAtTime: vi.fn() });
   const voices: {
     frequency: ReturnType<typeof param>;
     start: ReturnType<typeof vi.fn>;
@@ -115,19 +119,45 @@ it("plays distinct spatial car, heavy and train horns and cleans up their short 
   );
   const audio = new AudioManager(),
     listener = { wx: 0, wy: 0 };
-  audio.playVehicleHorn({ type: "vehicle-horn", wx: 0, wy: 0, kind: "car" }, listener);
+  audio.playVehicleHorn(
+    { type: "vehicle-horn", vehicleId: 1, active: true, wx: 0, wy: 0, kind: "car" },
+    listener,
+  );
   expect(voices).toHaveLength(0);
   audio.ensureContext();
-  audio.playVehicleHorn({ type: "vehicle-horn", wx: 800, wy: 0, kind: "car" }, listener);
+  audio.playVehicleHorn(
+    { type: "vehicle-horn", vehicleId: 1, active: true, wx: 800, wy: 0, kind: "car" },
+    listener,
+  );
   expect(voices).toHaveLength(0);
-  for (const kind of ["car", "heavy", "train"] as const)
-    audio.playVehicleHorn({ type: "vehicle-horn", wx: 250, wy: 0, kind }, listener);
+  for (const [vehicleId, kind] of (["car", "heavy", "train"] as const).entries())
+    audio.playVehicleHorn(
+      { type: "vehicle-horn", vehicleId, active: true, wx: 250, wy: 0, kind },
+      listener,
+    );
   expect(voices.map((v) => v.frequency.value)).toEqual([350, 440, 155, 196, 440, 554, 660]);
   expect(pans.map((p) => p.value)).toEqual([0.5, 0.5, 0.5]);
-  expect(gains[1]?.linearRampToValueAtTime.mock.calls[0]?.[0]).toBeCloseTo(0.04);
-  expect(gains[1]?.linearRampToValueAtTime.mock.calls[0]?.[1]).toBe(10.02);
-  expect(voices[0]?.stop).toHaveBeenCalledWith(10.32);
-  expect(voices[6]?.stop).toHaveBeenCalledWith(10.7);
+  expect(gains[1]?.setTargetAtTime.mock.calls[0]?.[0]).toBeCloseTo(0.04);
+  expect(voices.every((v) => v.stop.mock.calls.length === 0)).toBe(true);
+  // Holding past the old duration renews the same oscillators without retriggering.
+  for (let i = 0; i < 20; i++) {
+    vi.advanceTimersByTime(200);
+    audio.playVehicleHorn(
+      { type: "vehicle-horn", vehicleId: 0, active: true, wx: 100, wy: 0, kind: "car" },
+      listener,
+    );
+  }
+  expect(voices).toHaveLength(7);
+  expect(voices[0]?.stop).not.toHaveBeenCalled();
+  expect(voices[2]?.stop).toHaveBeenCalled(); // Unrefreshed heavy/train voices expire.
+  audio.playVehicleHorn(
+    { type: "vehicle-horn", vehicleId: 0, active: false, wx: 100, wy: 0, kind: "car" },
+    listener,
+  );
+  expect(voices[0]?.stop).toHaveBeenCalledWith(10.06);
+  audio.stopHorns();
+  expect(vi.getTimerCount()).toBe(0);
+  vi.useRealTimers();
   for (const voice of voices) {
     voice.onended?.();
     expect(voice.disconnect).toHaveBeenCalled();

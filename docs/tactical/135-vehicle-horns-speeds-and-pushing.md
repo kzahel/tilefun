@@ -12,9 +12,11 @@ button, speeds matching vehicle character, and gentle pushing by cars/trains.
 - Horn/H is a contextual screen button on desktop and touch; trains say Whistle.
   Keyboard and touch presses latch across simulation frames, including a complete
   quick tap. Existing Fast, emergency styles, sirens and beacons remain available. Authority
-  verifies the inside driver, limits repeats to 800ms and sends a transient spatial
-  event to nearby realm clients. Car, heavy and train voices use short synthesized
-  Web Audio notes. Traffic consumes the same Worker event through AudioManager.
+  verifies the inside driver and relays transient spatial start/refresh/stop events
+  to nearby realm clients. Holding sounds one continuous car, heavy or train voice;
+  releasing stops it. Input refreshes every 200ms; abandoned server holds expire
+  after 600ms and browser voices after 700ms without refresh. Seat exit, menus and
+  focus loss stop playback. Traffic consumes the same Worker event through AudioManager.
 - VehiclePerformance owns speed/acceleration and contact capacity, independent of
   immutable art. Low sporty cars 21–26 have the highest ordinary speed; heavy
   buses/trucks accelerate slowly. Shared authority/prediction retain diagonal
@@ -48,6 +50,32 @@ Generated catalog/Workshop inventories are refreshed through their normal compil
 the manifest verifies 816 identities. All 180 vehicle review records remain unchanged;
 172 other behavior/source fingerprints were renewed. No art approval is inferred
 and promoted sprite/collision/model banks stay immutable.
+
+## Held-horn correction (2026-10-18)
+
+The owner clarified that H and the screen button must sound for the entire hold.
+Replaced fixed-duration one-shots and their 800ms cooldown with a driver-verified
+hold lease and a continuous per-vehicle oscillator group. Heartbeats update position
+and loudness without retriggering the sound. Explicit releases bypass refresh
+throttling, so releasing and pressing again works immediately. No saved state or
+art bytes change. Traffic lab pointer/keyboard controls use the same authority and
+audio lifecycle, including cancellation and disposal.
+
+Server tests cover a multi-second hold, immediate release
+and re-press, expiry and editor rejection; audio tests prove oscillator reuse over
+a four-second hold and cleanup on release/lost refresh. Browser coverage holds H
+and the actual touch button past the former duration, releases each and checks
+focus-loss cancellation for both cars and trains. All 16 affected car/train and
+emergency-vehicle browser scenarios pass on Canvas/GPU and authored mesh variants.
+Typecheck, lint (existing warnings only), build, catalog/manifest generation and
+streaming readiness pass. The unit run passed 2,669 tests with one unrelated 5s
+sidewalk-routing timeout during concurrent compilation; all 11 tests in that file
+passed on isolated rerun alongside the 27 audio/driver checks. The manifest still
+verifies 816 candidates; all 180 vehicle records are unchanged.
+
+Validation used a temporary copy of HEAD plus this correction, with isolated auth
+and bundled Chromium, because unrelated interior work was changing concurrently.
+The completion commit includes only the horn correction and its inventories/docs.
 
 ## Next
 

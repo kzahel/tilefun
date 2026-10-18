@@ -28,13 +28,15 @@ export interface RealmInfo {
 
 export type VehicleHornMessage = {
   type: "vehicle-horn";
+  vehicleId: number;
+  active: boolean;
   wx: number;
   wy: number;
   kind: "car" | "heavy" | "train";
 };
 
 export type ClientMessage =
-  | { type: "vehicle-horn" }
+  | { type: "vehicle-horn"; active: boolean }
   | { type: "call-train"; requestId: number; benchId: number }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }

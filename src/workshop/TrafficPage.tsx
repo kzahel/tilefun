@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import {
@@ -27,14 +27,16 @@ export default function TrafficPage() {
     scene = useRef<ScenarioPresentationHost | null>(null),
     keys = useRef(new Set<string>());
   const audio = useRef<AudioManager | null>(null);
-  const honk = () => {
-    audio.current ??= new AudioManager();
-    audio.current.tryResume();
-    void scene.current?.command({ kind: "vehicle-horn" }).catch((e) => setError(String(e)));
-  };
+  const hornState = useRef({ active: false, refreshed: 0 });
   const [error, setError] = useState(""),
     [restart, setRestart] = useState(0),
     [paused, setPaused] = useState(false);
+  const honk = useCallback((active: boolean) => {
+    audio.current ??= new AudioManager();
+    if (active) audio.current.tryResume();
+    hornState.current = { active, refreshed: performance.now() };
+    void scene.current?.command({ kind: "vehicle-horn", active }).catch((e) => setError(String(e)));
+  }, []);
   const [model, setModel] = useState("compact-1");
   const [driving, setDriving] = useState(false);
   const [emergencyState, setEmergencyState] = useState(2);
@@ -72,6 +74,14 @@ export default function TrafficPage() {
         const s = h.session;
         const car = s.view.entities.find((e) => e.id === s.handles.car) ?? s.view.playerEntity;
         const occupied = s.view.playerEntity.parentId === car.id;
+        const horn =
+          occupied && !presentation.current.paused && !document.hidden && keys.current.has("h");
+        if (
+          horn !== hornState.current.active ||
+          (horn && performance.now() - hornState.current.refreshed >= 200)
+        )
+          honk(horn);
+        if (presentation.current.paused || document.hidden) audio.current?.stopHorns();
         setDriving(occupied);
         setEmergencyState(vehicleLightState(car));
         c.dataset.emergencyState = String(vehicleLightState(car));
@@ -103,27 +113,48 @@ export default function TrafficPage() {
       .catch((e) => {
         if (alive) setError(String(e));
       });
-    const release = () => keys.current.clear();
+    const release = () => {
+      keys.current.clear();
+      honk(false);
+      audio.current?.stopHorns();
+    };
     window.addEventListener("blur", release);
+    const visibility = () => {
+      if (document.hidden) release();
+    };
+    document.addEventListener("visibilitychange", visibility);
     return () => {
       alive = false;
       delete c.__terrainDiagnostics;
       delete c.dataset.ready;
       delete c.__presentationDiagnostics;
+      audio.current?.stopHorns();
+      hornState.current = { active: false, refreshed: 0 };
       host.dispose();
       window.removeEventListener("blur", release);
+      document.removeEventListener("visibilitychange", visibility);
       keys.current.clear();
       scene.current = null;
     };
-  }, [restart, model]);
+  }, [restart, model, honk]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
       e.currentTarget.setPointerCapture(e.pointerId);
       keys.current.add(key);
+      if (key === "h") honk(true);
     },
-    onPointerUp: () => keys.current.delete(key),
-    onPointerCancel: () => keys.current.delete(key),
-    onLostPointerCapture: () => keys.current.delete(key),
+    onPointerUp: () => {
+      keys.current.delete(key);
+      if (key === "h") honk(false);
+    },
+    onPointerCancel: () => {
+      keys.current.delete(key);
+      if (key === "h") honk(false);
+    },
+    onLostPointerCapture: () => {
+      keys.current.delete(key);
+      if (key === "h") honk(false);
+    },
   });
   return (
     <section>
@@ -198,7 +229,7 @@ export default function TrafficPage() {
           </button>
         )}
         {driving && (
-          <button type="button" onClick={honk}>
+          <button type="button" {...touch("h")} style={{ touchAction: "none" }}>
             Horn · H
           </button>
         )}
@@ -335,7 +366,10 @@ export default function TrafficPage() {
           onKeyDown={(e) => {
             if (driving && e.key.toLowerCase() === "h") {
               e.preventDefault();
-              if (!e.repeat) honk();
+              if (!e.repeat) {
+                keys.current.add("h");
+                honk(true);
+              }
               return;
             }
             const vehicle = { type: `vehicle-v1:${model}` };
@@ -371,8 +405,17 @@ export default function TrafficPage() {
               e.preventDefault();
             }
           }}
-          onKeyUp={(e) => keys.current.delete(e.key)}
-          onBlur={() => keys.current.clear()}
+          onKeyUp={(e) => {
+            keys.current.delete(e.key);
+            if (e.key.toLowerCase() === "h") {
+              keys.current.delete("h");
+              honk(false);
+            }
+          }}
+          onBlur={() => {
+            keys.current.clear();
+            honk(false);
+          }}
         />
       </div>
       <div className="actions">

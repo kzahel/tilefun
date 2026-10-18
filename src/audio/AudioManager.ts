@@ -19,6 +19,15 @@ export class AudioManager {
   >();
   private sirenBuffers = new Map<number, AudioBuffer>();
   private trains: TrainAudio | null = null;
+  private horns = new Map<
+    number,
+    {
+      voices: OscillatorNode[];
+      gain: GainNode;
+      pan: StereoPannerNode;
+      timeout: ReturnType<typeof setTimeout>;
+    }
+  >();
 
   updateTrains(entities: readonly Entity[], listener: PositionComponent, enabled: boolean): void {
     if (!enabled || !this.ctx || this.ctx.state !== "running") {
@@ -182,40 +191,62 @@ export class AudioManager {
     return this.buffers.get(key);
   }
 
+  /** Refresh one continuous voice per vehicle; a lost connection cannot leave it sounding. */
   playVehicleHorn(horn: VehicleHornMessage, listener: PositionComponent): void {
     const ctx = this.ctx;
-    if (ctx?.state !== "running") return;
     const distance = Math.hypot(horn.wx - listener.wx, horn.wy - listener.wy);
-    if (distance >= 750) return;
-    const train = horn.kind === "train";
-    const duration = train ? 0.7 : 0.32;
-    const frequencies = train ? [440, 554, 660] : horn.kind === "heavy" ? [155, 196] : [350, 440];
-    const gain = ctx.createGain();
-    const now = ctx.currentTime;
-    gain.gain.setValueAtTime(0, now);
-    gain.gain.linearRampToValueAtTime(0.09 * (1 - distance / 750) ** 2, now + 0.02);
-    gain.gain.setValueAtTime(0.09 * (1 - distance / 750) ** 2, now + duration - 0.06);
-    gain.gain.linearRampToValueAtTime(0, now + duration);
-    const pan = ctx.createStereoPanner();
-    pan.pan.value = Math.max(-0.8, Math.min(0.8, (horn.wx - listener.wx) / 500));
-    gain.connect(pan);
-    pan.connect(this.master ?? ctx.destination);
-    let remaining = frequencies.length;
-    for (const frequency of frequencies) {
-      const voice = ctx.createOscillator();
-      voice.type = train ? "sine" : "triangle";
-      voice.frequency.value = frequency;
-      voice.connect(gain);
+    if (!horn.active || distance >= 750 || ctx?.state !== "running") {
+      this.stopHorn(horn.vehicleId);
+      return;
+    }
+    let sound = this.horns.get(horn.vehicleId);
+    if (!sound) {
+      const frequencies =
+        horn.kind === "train" ? [440, 554, 660] : horn.kind === "heavy" ? [155, 196] : [350, 440];
+      const gain = ctx.createGain();
+      gain.gain.value = 0;
+      const pan = ctx.createStereoPanner();
+      gain.connect(pan);
+      pan.connect(this.master ?? ctx.destination);
+      const voices = frequencies.map((frequency) => {
+        const voice = ctx.createOscillator();
+        voice.type = horn.kind === "train" ? "sine" : "triangle";
+        voice.frequency.value = frequency;
+        voice.connect(gain);
+        voice.start();
+        return voice;
+      });
+      sound = { voices, gain, pan, timeout: setTimeout(() => this.stopHorn(horn.vehicleId), 700) };
+      this.horns.set(horn.vehicleId, sound);
+    } else {
+      clearTimeout(sound.timeout);
+      sound.timeout = setTimeout(() => this.stopHorn(horn.vehicleId), 700);
+    }
+    sound.gain.gain.setTargetAtTime(0.09 * (1 - distance / 750) ** 2, ctx.currentTime, 0.01);
+    sound.pan.pan.value = Math.max(-0.8, Math.min(0.8, (horn.wx - listener.wx) / 500));
+  }
+
+  private stopHorn(id: number): void {
+    const sound = this.horns.get(id);
+    if (!sound || !this.ctx) return;
+    this.horns.delete(id);
+    clearTimeout(sound.timeout);
+    sound.gain.gain.setTargetAtTime(0, this.ctx.currentTime, 0.01);
+    let remaining = sound.voices.length;
+    for (const voice of sound.voices) {
       voice.onended = () => {
         voice.disconnect();
         if (--remaining === 0) {
-          gain.disconnect();
-          pan.disconnect();
+          sound.gain.disconnect();
+          sound.pan.disconnect();
         }
       };
-      voice.start(now);
-      voice.stop(now + duration);
+      voice.stop(this.ctx.currentTime + 0.06);
     }
+  }
+
+  stopHorns(): void {
+    for (const id of this.horns.keys()) this.stopHorn(id);
   }
 
   /** Short provisional three-note robin call, using the existing spatial audio path. */

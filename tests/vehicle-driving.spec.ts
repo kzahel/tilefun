@@ -53,7 +53,8 @@ async function checkHorn(page: Page, kind: "car" | "train") {
     const play = g.audioManager.playVehicleHorn.bind(g.audioManager);
     (c as HTMLElement).dataset.horns = "0";
     g.audioManager.playVehicleHorn = (message, listener) => {
-      (c as HTMLElement).dataset.horns = String(Number((c as HTMLElement).dataset.horns) + 1);
+      if (message.active)
+        (c as HTMLElement).dataset.horns = String(Number((c as HTMLElement).dataset.horns) + 1);
       (c as HTMLElement).dataset.hornKind = message.kind;
       play(message, listener);
     };
@@ -66,14 +67,46 @@ async function checkHorn(page: Page, kind: "car" | "train") {
       canvas.evaluate((c) => (c as unknown as { __game: Game }).__game.audioManager.ready),
     )
     .toBe(true);
-  await page.waitForTimeout(850); // Authority admits one short horn per 800 ms.
+  const sounding = () =>
+    canvas.evaluate(
+      (c) =>
+        (
+          (c as unknown as { __game: Game }).__game.audioManager as unknown as {
+            horns: Map<number, unknown>;
+          }
+        ).horns.size,
+    );
+  await expect.poll(sounding).toBe(0);
+  await page.keyboard.down("h");
+  await expect.poll(sounding).toBe(1);
+  await page.waitForTimeout(1500);
+  expect(await sounding()).toBe(1);
+  await page.keyboard.up("h");
+  await expect.poll(sounding).toBe(0);
   const spot = await canvas.evaluate((c) => {
     const g = (c as unknown as { __game: Game }).__game,
       rect = c.getBoundingClientRect();
     return { x: rect.right - 52, y: rect.bottom - 52 - (g.touchButtons.emergency ? 136 : 0) };
   });
-  await page.touchscreen.tap(spot.x, spot.y);
-  await expect(canvas).toHaveAttribute("data-horns", "2");
+  // Native touch hold exercises the same screen control as a quick tap.
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchStart",
+    touchPoints: [{ x: spot.x, y: spot.y }],
+  });
+  await expect.poll(sounding).toBe(1);
+  await page.waitForTimeout(1500);
+  expect(await sounding()).toBe(1);
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await expect.poll(sounding).toBe(0);
+  await cdp.detach();
+  // Focus loss stops a held keyboard horn without waiting for keyup.
+  await page.keyboard.down("h");
+  await expect.poll(sounding).toBe(1);
+  await page.evaluate(() => window.dispatchEvent(new Event("blur")));
+  await expect.poll(sounding).toBe(0);
+  await page.keyboard.up("h");
+  await page.evaluate(() => window.dispatchEvent(new Event("focus")));
 }
 async function start(page: Page, backend: string, cars = false) {
   const generation = createDescriptor("regional", 2026);
