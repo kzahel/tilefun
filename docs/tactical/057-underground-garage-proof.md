@@ -77,6 +77,19 @@ has its own excluded experiment candidate; it does not collect art approval.
   scenario ended with zero missing, incomplete or stale chunks. Final focused
   excavation/garage tests also passed after declaration validation was tightened.
 
+### CI traversal synchronization (2026-10-18)
+
+CI run [39153407491](https://github.com/kzahel/tilefun/actions/runs/39153407491)
+stopped the GPU walk at −47.961px: the actor's center entered the garage space
+while its footprint still overlapped the descending ramp. Space membership alone
+does not establish arrival on the flat floor. The browser check now holds movement
+until both displayed and authoritative heights reach −48, and similarly waits for
+both to reach 0 on exit. Exact height assertions remain; physics and space
+membership are unchanged.
+
+Typechecks, lint, all 2,871 unit tests, Worker checks, dependency audits, production
+build and verification of all 880 Workshop raster identities pass locally.
+
 ## Follow-on boundary
 
 Review descent, ceiling/retaining boundaries, same-XY level distinction and

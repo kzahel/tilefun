@@ -16,9 +16,11 @@ for (const renderer of ["canvas", "gpu"]) {
     await canvas.focus();
     await page.keyboard.down("ArrowRight");
     await expect(canvas).toHaveAttribute("data-space", "garage", { timeout: 8000 });
-    await page.keyboard.up("ArrowRight");
+    // Space membership changes before the whole footprint clears the ramp.
+    // Keep walking until prediction and authority both reach the flat floor.
     await expect(canvas).toHaveAttribute("data-player-z", "-48");
     await expect(canvas).toHaveAttribute("data-server-z", "-48");
+    await page.keyboard.up("ArrowRight");
     await expect(canvas).toHaveAttribute("data-server-space", "garage");
     await page.getByRole("button", { name: "Start at garage", exact: true }).click();
     await expect(canvas).toHaveAttribute("data-player-x", "80");
@@ -64,8 +66,9 @@ for (const renderer of ["canvas", "gpu"]) {
     await canvas.focus();
     await page.keyboard.down("ArrowLeft");
     await expect(canvas).toHaveAttribute("data-space", "outside", { timeout: 8000 });
-    await page.keyboard.up("ArrowLeft");
     await expect(canvas).toHaveAttribute("data-player-z", "0");
+    await expect(canvas).toHaveAttribute("data-server-z", "0");
+    await page.keyboard.up("ArrowLeft");
     await page.getByLabel("Geometry fixture").selectOption("deck");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect(canvas).toHaveAttribute("data-player-x", "-216");
