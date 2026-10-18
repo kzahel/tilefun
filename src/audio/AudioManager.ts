@@ -1,6 +1,8 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
+import { predatorProfile } from "../wildlife/Predator.js";
+import { creatureCallSamples } from "./CreatureCall.js";
 import { TrainAudio } from "./TrainAudio.js";
 
 /**
@@ -19,6 +21,10 @@ export class AudioManager {
   >();
   private sirenBuffers = new Map<number, AudioBuffer>();
   private trains: TrainAudio | null = null;
+  private creatureClips = new Map<number, number | undefined>();
+  private creatureVoices = new Map<number, AudioBufferSourceNode>();
+  private creatureBuffers = new Map<string, AudioBuffer>();
+  private creatureCallsPlayed = 0;
   private horns = new Map<
     number,
     {
@@ -28,6 +34,105 @@ export class AudioManager {
       timeout: ReturnType<typeof setTimeout>;
     }
   >();
+
+  /** Calls follow replicated display clips, so all hosts hear the same authority cue. */
+  updateCreatureCalls(
+    entities: readonly Entity[],
+    listener: PositionComponent,
+    enabled: boolean,
+  ): void {
+    if (!enabled) this.stopCreatureCalls();
+    const live = new Set<number>();
+    for (const entity of entities) {
+      const profile = predatorProfile(entity.type)?.fierce;
+      if (!profile) continue;
+      live.add(entity.id);
+      const previous = this.creatureClips.get(entity.id),
+        clip = entity.sprite?.clip;
+      this.creatureClips.set(entity.id, clip);
+      const distance = Math.hypot(
+        entity.position.wx - listener.wx,
+        entity.position.wy - listener.wy,
+      );
+      // Late joins/reloads in the middle of a display do not replay its onset.
+      if (
+        !enabled ||
+        previous === 3 ||
+        clip !== 3 ||
+        (entity.sprite?.clipElapsedMs ?? 0) > 180 ||
+        distance >= 480
+      )
+        continue;
+      this.playCreatureCall(
+        entity.id,
+        profile.kind,
+        0.15 * (1 - distance / 480) ** 2,
+        Math.max(-0.8, Math.min(0.8, (entity.position.wx - listener.wx) / 320)),
+      );
+    }
+    for (const id of this.creatureClips.keys()) if (!live.has(id)) this.creatureClips.delete(id);
+    for (const [id, source] of this.creatureVoices)
+      if (!live.has(id)) {
+        source.stop();
+        this.creatureVoices.delete(id);
+      }
+  }
+
+  playCreatureCall(
+    id: number,
+    kind: Parameters<typeof creatureCallSamples>[0],
+    volume: number,
+    pan: number,
+  ): void {
+    const ctx = this.ctx;
+    if (ctx?.state !== "running" || this.creatureVoices.size >= 6) return;
+    let buffer = this.creatureBuffers.get(kind);
+    if (!buffer) {
+      const samples = creatureCallSamples(kind, ctx.sampleRate);
+      buffer = ctx.createBuffer(1, samples.length, ctx.sampleRate);
+      buffer.getChannelData(0).set(samples);
+      this.creatureBuffers.set(kind, buffer);
+    }
+    this.creatureVoices.get(id)?.stop();
+    const source = ctx.createBufferSource(),
+      gain = ctx.createGain(),
+      panner = ctx.createStereoPanner();
+    source.buffer = buffer;
+    gain.gain.value = volume;
+    panner.pan.value = pan;
+    source.connect(gain);
+    gain.connect(panner);
+    panner.connect(this.master ?? ctx.destination);
+    source.onended = () => {
+      if (this.creatureVoices.get(id) === source) this.creatureVoices.delete(id);
+      source.disconnect();
+      gain.disconnect();
+      panner.disconnect();
+    };
+    this.creatureVoices.set(id, source);
+    this.creatureCallsPlayed++;
+    source.start();
+  }
+
+  stopCreatureCalls(): void {
+    for (const source of this.creatureVoices.values()) source.stop();
+    this.creatureVoices.clear();
+  }
+
+  get creatureAudioDiagnostics(): { active: number; played: number } {
+    return { active: this.creatureVoices.size, played: this.creatureCallsPlayed };
+  }
+
+  /** Release a lab-owned manager; main-game scenes only stop their borrowed voices. */
+  dispose(): void {
+    this.stopCreatureCalls();
+    this.stopHorns();
+    this.stopSirens();
+    this.stopTrains();
+    this.creatureClips.clear();
+    if (this.ctx) void this.ctx.close();
+    this.ctx = null;
+  }
 
   updateTrains(entities: readonly Entity[], listener: PositionComponent, enabled: boolean): void {
     if (!enabled || !this.ctx || this.ctx.state !== "running") {

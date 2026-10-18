@@ -2,6 +2,7 @@ import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { queue, ROOT } from "./campaign.mjs";
+import { fierceReceiptErrors } from "./check-fierce.mjs";
 import { petReceiptErrors } from "./check-pets.mjs";
 import { predatorReceiptErrors } from "./check-predators.mjs";
 import { tigerReceiptErrors } from "./check-tiger.mjs";
@@ -215,7 +216,8 @@ export function writeStatus() {
       "| Creature | State | Gameplay |",
       "| --- | --- | --- |",
       ...batch.animals.map(
-        (p) => `| ${clean(p.id)} | ${clean(p.state)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
+        (p) =>
+          `| ${clean(p.id)} | ${clean(p.state === "draft-ready" && fierceReceiptErrors(p.id).length ? "Receipt needs checking" : p.state)} | ${p.gameplay ? "Provisional" : "Pending"} |`,
       ),
       "",
     );

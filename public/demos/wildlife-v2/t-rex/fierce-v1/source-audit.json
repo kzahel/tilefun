@@ -1,0 +1,36 @@
+{
+  "identity": "t-rex-fierce-v1",
+  "poses": 164,
+  "meshCount": 62,
+  "fixedLengthLinkChecks": 984,
+  "plantedGroundContacts": 272,
+  "stanceTravelCompensationChecks": 104,
+  "maxProjectionError": 4.99938964537705e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 2.75776,
+      "head": 5.31912,
+      "shoulder": 4.08472,
+      "pelvis": 3.254
+    },
+    "up": {
+      "body": 2.75776,
+      "head": 3.41559,
+      "shoulder": 3.50627,
+      "pelvis": 4.0366
+    },
+    "left": {
+      "body": 2.97932,
+      "head": 3.92997,
+      "shoulder": 3.42155,
+      "pelvis": 2.73732
+    },
+    "right": {
+      "body": 2.97932,
+      "head": 3.48684,
+      "shoulder": 2.97843,
+      "pelvis": 3.18043
+    }
+  },
+  "status": "Saved-source integrity passes; human art approval is separate."
+}

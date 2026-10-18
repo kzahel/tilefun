@@ -1,0 +1,22 @@
+{
+  "identity": "t-rex-fierce-v1",
+  "poses": 164,
+  "binaryAlpha": true,
+  "paletteColors": 9,
+  "canvas": [
+    160,
+    160
+  ],
+  "anchor": [
+    80,
+    120
+  ],
+  "idleVisibleHeights": {
+    "down": 60,
+    "up": 97,
+    "left": 51,
+    "right": 51
+  },
+  "sequenceDurationMs": 7648,
+  "status": "Integrity only; independent visual observation and human review remain separate."
+}

@@ -125,12 +125,12 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     expect(manager.byId.has(prey.id)).toBe(true);
     expect(hunter.predator?.meals).toBe(0);
   });
-  it("targets only wild deer/rabbits, respects barriers, and a scare cancels the hunt", () => {
+  it("protects players and companions, respects barriers, and a scare cancels the hunt", () => {
     const hunter = createPredator(p.species, 0, 0);
     const protectedAnimals = [
       createPlayer(16, 0),
       createFauna("cat", 18, 0),
-      createFauna("sheep", 24, 0),
+      createFauna("dog", 24, 0),
     ];
     required(hunter.predator).timer = 0;
     updatePredatorAI(hunter, 0.1, open, [hunter, ...protectedAnimals], []);

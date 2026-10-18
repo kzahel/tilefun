@@ -1062,7 +1062,8 @@ export class EditorPanel {
       if (!btn || !entry) continue;
       const sheet = sheets.get(entry.type);
       if (sheet) {
-        this.renderPreviewCanvas(btn, sheet, 0, 0, 64, 44, this.entityPreviewRegion(sheet));
+        const row = entry.previewRow ?? 0;
+        this.renderPreviewCanvas(btn, sheet, 0, row, 64, 44, this.entityPreviewRegion(sheet, row));
         btn.style.background = "#4b5563";
       }
     }
@@ -1112,8 +1113,11 @@ export class EditorPanel {
   }
 
   /** Find visible pixels in the first frame without changing the gameplay sheet. */
-  private entityPreviewRegion(sheet: Spritesheet): ReturnType<Spritesheet["getRegion"]> {
-    const region = sheet.getRegion(0, 0);
+  private entityPreviewRegion(
+    sheet: Spritesheet,
+    row: number,
+  ): ReturnType<Spritesheet["getRegion"]> {
+    const region = sheet.getRegion(0, row);
     const frame = document.createElement("canvas");
     frame.width = region.width;
     frame.height = region.height;

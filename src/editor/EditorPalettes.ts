@@ -1,5 +1,6 @@
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
+import { Direction } from "../entities/Entity.js";
 import { RoadType } from "../road/RoadType.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
@@ -71,6 +72,7 @@ export interface EntityPaletteEntry {
   type: string;
   label: string;
   color: string;
+  previewRow?: Direction;
 }
 
 export const ENTITY_PALETTE: EntityPaletteEntry[] = [
@@ -81,6 +83,7 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
     type: predatorType(p.species),
     label: p.label,
     color: "#ad713a",
+    previewRow: p.fierce ? Direction.Right : Direction.Down,
   })),
   ...FAUNA_PROFILES.map((p) => ({ type: faunaType(p.species), label: p.label, color: "#b59365" })),
   { type: DEER_TYPE, label: "Deer", color: "#b59365" },

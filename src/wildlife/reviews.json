@@ -2897,5 +2897,102 @@
         "sha256": "8b97632c5e6526067d7f7d08c1f7ab05a552a57e139f489c80b3e5ea7ea7045b"
       }
     ]
+  },
+  {
+    "id": "t-rex-fierce-v1",
+    "animalId": "t-rex",
+    "revision": "fierce-v1",
+    "name": "T. rex",
+    "batchId": "wildlife-v2-fierce-137",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/t-rex/fierce-v1/",
+    "sheet": {
+      "id": "wildlife-v2-t-rex-fierce-v1",
+      "name": "T. rex sheet",
+      "image": "demos/wildlife-v2/t-rex/fierce-v1/sheet.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "fa04eafaab71449ded331ea46e2247082a537f0e68e639c0accf316fe328a43a",
+      "source": "art-source/wildlife-v2/t-rex/fierce-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-t-rex-fierce-v1-scene",
+      "name": "T. rex scene",
+      "image": "demos/wildlife-v2/t-rex/fierce-v1/scene-native.png",
+      "width": 960,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "ff7ed3e81068509700b59f9d150470f04f581097e533a4c99441506dc7677c72",
+      "source": "art-source/wildlife-v2/t-rex/fierce-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-t-rex-fierce-v1-contact",
+      "name": "T. rex contact",
+      "image": "demos/wildlife-v2/t-rex/fierce-v1/contact-sheet-native.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "085b8b94e65121a20157be1d7c3d07e2021c213ab6d0814171fe10a25f02636b",
+      "source": "art-source/wildlife-v2/t-rex/fierce-v1"
+    },
+    "preview": "demos/wildlife-v2/t-rex/fierce-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/contact-sheet-native.png",
+        "sha256": "085b8b94e65121a20157be1d7c3d07e2021c213ab6d0814171fe10a25f02636b"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/index.html",
+        "sha256": "f669d792d6f679acf975f06f149b361ededcb60dab06b26202c73ef8831de0a1"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/playback.js",
+        "sha256": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/preview-native.gif",
+        "sha256": "611faf070b5729d8dbde854104c62172a2e9c0ca9289478d0e4ec52120bb9caa"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/preview.gif",
+        "sha256": "da1cdfd4e5c15ea4d4b7068b34510e608799cb616eace3e5973dec287f39635b"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/review-observations.md",
+        "sha256": "07fd7f5547fd45af8009b747a0a839758546f2a85e502ca7ffdcbebd96dbaae2"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/scale-reference-native.png",
+        "sha256": "6a2bfdc598596e4e5cb260019233e255e9b9d6287c8f9984c59096ff4a55aba4"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/scene-background.png",
+        "sha256": "f9a620c54a38026118c8f624cb24eb421ca9f96d67bfa306b6c9d0cb58e9d68e"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/scene-native.gif",
+        "sha256": "432cc7eae8ed44a0207a12bebc8a5f731d2e229c565c0fac7acfb04abada2ad7"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/scene-native.png",
+        "sha256": "ff7ed3e81068509700b59f9d150470f04f581097e533a4c99441506dc7677c72"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/sheet.png",
+        "sha256": "fa04eafaab71449ded331ea46e2247082a537f0e68e639c0accf316fe328a43a"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/source-audit.json",
+        "sha256": "c0f51a781f509768c44d7f54f787a57fab5afeb643633a5bf10e565614ec6892"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/sprite.json",
+        "sha256": "25232ddc33e977594520bd8db2c608630e3222860f6b71adf831dd6058522852"
+      },
+      {
+        "path": "demos/wildlife-v2/t-rex/fierce-v1/validation.json",
+        "sha256": "9c9dddada5d20221914ff54fefc95b4805c84049fc6c4d1bec836fe05f655449"
+      }
+    ]
   }
 ]

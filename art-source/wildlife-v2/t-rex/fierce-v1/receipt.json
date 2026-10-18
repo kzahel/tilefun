@@ -1,0 +1,123 @@
+{
+  "identity": "t-rex-fierce-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "t-rex-fierce-v1",
+    "poses": 164,
+    "meshCount": 62,
+    "fixedLengthLinkChecks": 984,
+    "plantedGroundContacts": 272,
+    "stanceTravelCompensationChecks": 104,
+    "maxProjectionError": 0.00000499938964537705,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 2.75776,
+        "head": 5.31912,
+        "shoulder": 4.08472,
+        "pelvis": 3.254
+      },
+      "up": {
+        "body": 2.75776,
+        "head": 3.41559,
+        "shoulder": 3.50627,
+        "pelvis": 4.0366
+      },
+      "left": {
+        "body": 2.97932,
+        "head": 3.92997,
+        "shoulder": 3.42155,
+        "pelvis": 2.73732
+      },
+      "right": {
+        "body": 2.97932,
+        "head": 3.48684,
+        "shoulder": 2.97843,
+        "pelvis": 3.18043
+      }
+    },
+    "status": "Saved-source integrity passes; human art approval is separate."
+  },
+  "capture": {
+    "species": "t-rex",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactCropChecks": 164,
+        "exactSceneChecks": 41,
+        "errors": []
+      },
+      {
+        "scale": 4,
+        "chronologicalPoses": 41,
+        "exactCropChecks": 164,
+        "exactSceneChecks": 41,
+        "errors": []
+      }
+    ],
+    "playbackClips": [
+      "idle",
+      "walk",
+      "feed",
+      "display",
+      "charge",
+      "sleep"
+    ],
+    "errors": []
+  },
+  "replay": {
+    "species": "t-rex",
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "contact-sheet-native.png": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "preview-native.gif": true,
+      "preview.gif": true,
+      "scene-native.gif": true,
+      "validation.json": true,
+      "source-audit.json": true,
+      "masters.json": true
+    }
+  },
+  "visualReview": {
+    "observer": "primary-agent",
+    "observations": "public/demos/wildlife-v2/t-rex/fierce-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/t-rex/fierce-v1/animal.blend": "33e1770d4317f796abf4a02e74efd06e9a909704e19b56dd2c2e2f46764d45a9",
+    "art-source/wildlife-v2/t-rex/fierce-v1/audit.py": "b4e92de857fdc466938f04a887389dbd39555b379a611326c4ac3190bb188446",
+    "art-source/wildlife-v2/t-rex/fierce-v1/build.py": "823bea0b4a8cdee5330634bee6d0a9e30518434b604f083b214f92d859ce26f6",
+    "art-source/wildlife-v2/t-rex/fierce-v1/capture.mjs": "0f92c31e2ddbbe5b062cc8fd0f3d6099e2e47bee0d0b32dafbf26d2042c9c3a8",
+    "art-source/wildlife-v2/t-rex/fierce-v1/finish.py": "ceaa2dcd3a62fcac115e1433ffdd0996d8f8bb88157cc5278b203c2668cc66b5",
+    "art-source/wildlife-v2/t-rex/fierce-v1/index.html": "f669d792d6f679acf975f06f149b361ededcb60dab06b26202c73ef8831de0a1",
+    "art-source/wildlife-v2/t-rex/fierce-v1/masters.json": "8be496a769855a1ab1bedde7fbc22604fc3989cb614f50452c67560db590a435",
+    "art-source/wildlife-v2/t-rex/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "art-source/wildlife-v2/t-rex/fierce-v1/README.md": "cea3b7f8385b346e84e667dd0cfaccd426c2de6634f6f055ec08fd1416f1e4e9",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/contact-sheet-native.png": "085b8b94e65121a20157be1d7c3d07e2021c213ab6d0814171fe10a25f02636b",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/index.html": "f669d792d6f679acf975f06f149b361ededcb60dab06b26202c73ef8831de0a1",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/playback.js": "d35a73778ac57034f1995dce8a8f0415950a26f537624f7e309eb842a63f4746",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/preview-native.gif": "611faf070b5729d8dbde854104c62172a2e9c0ca9289478d0e4ec52120bb9caa",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/preview.gif": "da1cdfd4e5c15ea4d4b7068b34510e608799cb616eace3e5973dec287f39635b",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/review-observations.md": "07fd7f5547fd45af8009b747a0a839758546f2a85e502ca7ffdcbebd96dbaae2",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/scale-reference-native.png": "6a2bfdc598596e4e5cb260019233e255e9b9d6287c8f9984c59096ff4a55aba4",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/scene-background.png": "f9a620c54a38026118c8f624cb24eb421ca9f96d67bfa306b6c9d0cb58e9d68e",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/scene-native.gif": "432cc7eae8ed44a0207a12bebc8a5f731d2e229c565c0fac7acfb04abada2ad7",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/scene-native.png": "ff7ed3e81068509700b59f9d150470f04f581097e533a4c99441506dc7677c72",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/sheet.png": "fa04eafaab71449ded331ea46e2247082a537f0e68e639c0accf316fe328a43a",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/source-audit.json": "c0f51a781f509768c44d7f54f787a57fab5afeb643633a5bf10e565614ec6892",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/sprite.json": "25232ddc33e977594520bd8db2c608630e3222860f6b71adf831dd6058522852",
+    "public/demos/wildlife-v2/t-rex/fierce-v1/validation.json": "9c9dddada5d20221914ff54fefc95b4805c84049fc6c4d1bec836fe05f655449",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-fierce.mjs": "465d4f6dd625207212600772c4fa9905124e40b8f3ac8cc39b4e36fc29d1360f",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

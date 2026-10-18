@@ -1,0 +1,8960 @@
+{
+ "identity": "t-rex-fierce-v1-pixels-01",
+ "reviewStatus": "pending",
+ "image": "sheet.png",
+ "frameWidth": 160,
+ "frameHeight": 160,
+ "anchor": [
+  80,
+  120
+ ],
+ "rootMotion": false,
+ "cameraContract": {
+  "identity": "wildlife-v2-camera-01",
+  "projection": "ORTHO",
+  "artPerspective": "three-quarter top-down RPG on a square grid",
+  "elevationAboveGroundDegrees": 40,
+  "polarAngleFromVerticalDegrees": 50,
+  "target": [
+   0,
+   0,
+   0
+  ],
+  "cameraLocationAtDistance10": [
+   0,
+   -7.660444431,
+   6.427876097
+  ],
+  "modelYawDegrees": {
+   "down": 180,
+   "up": 0,
+   "left": 100,
+   "right": 260
+  },
+  "pixelsPerWorldUnit": 10,
+  "canvasPolicy": "Species-specific square canvas with padding; orthoScale = canvasWidth / pixelsPerWorldUnit. Ground-origin anchor and camera shift are recorded per species. Never resize an exported animal to fit its cell.",
+  "profileIdleHeightTargets": {
+   "fox": 14,
+   "rabbit": 13,
+   "elephant": 51,
+   "giraffe": 75
+  },
+  "calibration": "Coordinator inspected 30/40/50 degree studies and the revised fox beside exact Modern Exteriors roof/tree/cars and Explorer. 40 degrees gives readable upper back and separated limb depths. This is an artistic fit, not a claimed mathematical camera measurement of painted vendor art.",
+  "reviewStatus": "agent calibration; all human art approvals pending"
+ },
+ "orthoScale": 16.0,
+ "shiftY": 0.25,
+ "rootTravelPixelsPerCycle": 14.399999999999999,
+ "clips": {
+  "idle": {
+   "start": 0,
+   "count": 1,
+   "frameDuration": 180,
+   "rootTravelPixelsPerCycle": 0
+  },
+  "walk": {
+   "start": 1,
+   "count": 12,
+   "frameDuration": 100,
+   "rootTravelPixelsPerCycle": 14.399999999999999
+  },
+  "feed": {
+   "start": 13,
+   "count": 8,
+   "frameDuration": 160,
+   "rootTravelPixelsPerCycle": 0
+  },
+  "display": {
+   "start": 21,
+   "count": 8,
+   "frameDuration": 160,
+   "rootTravelPixelsPerCycle": 0
+  },
+  "charge": {
+   "start": 29,
+   "count": 8,
+   "frameDuration": 61.36363636363637,
+   "rootTravelPixelsPerCycle": 43.2
+  },
+  "sleep": {
+   "start": 37,
+   "count": 4,
+   "frameDuration": 280,
+   "rootTravelPixelsPerCycle": 0
+  }
+ },
+ "facings": {
+  "down": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 0,
+     "rect": [
+      160,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      123
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       118.69131,
+       10.15597
+      ],
+      "HR": [
+       71.0,
+       114.06324,
+       10.70752
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 1,
+     "rect": [
+      320,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      122
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.3235999643802643,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       117.91997,
+       10.24789
+      ],
+      "HR": [
+       71.0,
+       113.2919,
+       10.79944
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 2,
+     "rect": [
+      480,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      121
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9867578744888306,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       117.14862,
+       10.33982
+      ],
+      "HR": [
+       71.0,
+       112.73481,
+       10.6785
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 3,
+     "rect": [
+      640,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      59,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5636000037193298,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.7909684181213379,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       116.37728,
+       10.43174
+      ],
+      "HR": [
+       71.0,
+       112.75989,
+       10.42502
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 4,
+     "rect": [
+      800,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      119
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6836000680923462,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.3333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.60593,
+       10.52367
+      ],
+      "HR": [
+       71.0,
+       113.76842,
+       10.25406
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 5,
+     "rect": [
+      960,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.8036000728607178,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.4166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39938944578170776,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       114.83459,
+       10.61559
+      ],
+      "HR": [
+       71.0,
+       115.87443,
+       10.17519
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 6,
+     "rect": [
+      1120,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      123
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       114.06324,
+       10.70752
+      ],
+      "HR": [
+       71.0,
+       118.69132,
+       10.15597
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 7,
+     "rect": [
+      1280,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      58,
+      94,
+      122
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.32359999418258667,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       113.2919,
+       10.79944
+      ],
+      "HR": [
+       71.0,
+       117.91997,
+       10.24789
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 8,
+     "rect": [
+      1440,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      56,
+      94,
+      121
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9867578148841858,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       112.73481,
+       10.6785
+      ],
+      "HR": [
+       71.0,
+       117.14862,
+       10.33982
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 9,
+     "rect": [
+      1600,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      56,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.7909684181213379,
+        0.2814316153526306
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5636000037193298,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       112.75989,
+       10.42502
+      ],
+      "HR": [
+       71.0,
+       116.37728,
+       10.43174
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 10,
+     "rect": [
+      1760,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      56,
+      94,
+      119
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6835999488830566,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.33333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       113.76842,
+       10.25406
+      ],
+      "HR": [
+       71.0,
+       115.60594,
+       10.52367
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 11,
+     "rect": [
+      1920,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      58,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39938947558403015,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.8035999536514282,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.41666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.87442,
+       10.17519
+      ],
+      "HR": [
+       71.0,
+       114.83459,
+       10.61559
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 0,
+     "rect": [
+      2080,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 1,
+     "rect": [
+      2240,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      59,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 2,
+     "rect": [
+      2400,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      58,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 3,
+     "rect": [
+      2560,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      57,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 4,
+     "rect": [
+      2720,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      57,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 5,
+     "rect": [
+      2880,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      58,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 6,
+     "rect": [
+      3040,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      59,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 7,
+     "rect": [
+      3200,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 0,
+     "rect": [
+      3360,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 1,
+     "rect": [
+      3520,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 2,
+     "rect": [
+      3680,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      61,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 3,
+     "rect": [
+      3840,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      61,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 4,
+     "rect": [
+      4000,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      61,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 5,
+     "rect": [
+      4160,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      61,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 6,
+     "rect": [
+      4320,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 7,
+     "rect": [
+      4480,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 0,
+     "rect": [
+      4640,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      128
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       124.43012,
+       9.47204
+      ],
+      "HR": [
+       71.0,
+       110.54591,
+       11.1267
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 1,
+     "rect": [
+      4800,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       120.95907,
+       9.88571
+      ],
+      "HR": [
+       71.0,
+       107.33893,
+       11.48832
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 2,
+     "rect": [
+      4960,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      59,
+      94,
+      121
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39079999923706055,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       117.48802,
+       10.29937
+      ],
+      "HR": [
+       71.0,
+       110.94764,
+       10.64099
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 3,
+     "rect": [
+      5120,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      121
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.1918526142835617,
+        0.2748972177505493
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       114.01696,
+       10.71303
+      ],
+      "HR": [
+       71.0,
+       116.66099,
+       9.97027
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 4,
+     "rect": [
+      5280,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      60,
+      94,
+      128
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       110.54591,
+       11.1267
+      ],
+      "HR": [
+       71.0,
+       124.43012,
+       9.47204
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 5,
+     "rect": [
+      5440,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      57,
+      94,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       107.33893,
+       11.48832
+      ],
+      "HR": [
+       71.0,
+       120.95907,
+       9.88571
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 6,
+     "rect": [
+      5600,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      56,
+      94,
+      121
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39079999923706055,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       110.94764,
+       10.64099
+      ],
+      "HR": [
+       71.0,
+       117.48802,
+       10.29937
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 7,
+     "rect": [
+      5760,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      57,
+      94,
+      121
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.1918526142835617,
+        0.27489718794822693
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       116.66099,
+       9.97027
+      ],
+      "HR": [
+       71.0,
+       114.01696,
+       10.71303
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 0,
+     "rect": [
+      5920,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      63,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 1,
+     "rect": [
+      6080,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      63,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 2,
+     "rect": [
+      6240,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      63,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 3,
+     "rect": [
+      6400,
+      0,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      63,
+      94,
+      120
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.0,
+       115.82191,
+       10.49793
+      ],
+      "HR": [
+       71.0,
+       115.82191,
+       10.49793
+      ]
+     }
+    }
+   ]
+  },
+  "up": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 0,
+     "rect": [
+      160,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       121.30874,
+       9.84403
+      ],
+      "HR": [
+       89.0,
+       125.93681,
+       9.29248
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 1,
+     "rect": [
+      320,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      153
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.3235999643802643,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       122.08009,
+       9.75211
+      ],
+      "HR": [
+       89.0,
+       126.70816,
+       9.20056
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 2,
+     "rect": [
+      480,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9867578744888306,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       122.85143,
+       9.66018
+      ],
+      "HR": [
+       89.0,
+       125.42032,
+       9.1667
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 3,
+     "rect": [
+      640,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      53,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5636000037193298,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.7909684181213379,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       123.62278,
+       9.56826
+      ],
+      "HR": [
+       89.0,
+       122.92838,
+       9.21318
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 4,
+     "rect": [
+      800,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6836000680923462,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.3333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.39412,
+       9.47633
+      ],
+      "HR": [
+       89.0,
+       121.41989,
+       9.34219
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 5,
+     "rect": [
+      960,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      153
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.8036000728607178,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.4166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39938944578170776,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       125.16547,
+       9.38441
+      ],
+      "HR": [
+       89.0,
+       121.00888,
+       9.56329
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 6,
+     "rect": [
+      1120,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       125.93681,
+       9.29248
+      ],
+      "HR": [
+       89.0,
+       121.30874,
+       9.84403
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 7,
+     "rect": [
+      1280,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      150
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.32359999418258667,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       126.70816,
+       9.20056
+      ],
+      "HR": [
+       89.0,
+       122.08009,
+       9.75211
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 8,
+     "rect": [
+      1440,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      53,
+      94,
+      147
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9867578148841858,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       125.42032,
+       9.1667
+      ],
+      "HR": [
+       89.0,
+       122.85143,
+       9.66018
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 9,
+     "rect": [
+      1600,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      52,
+      94,
+      146
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.7909684181213379,
+        0.2814316153526306
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5636000037193298,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       122.92838,
+       9.21318
+      ],
+      "HR": [
+       89.0,
+       123.62278,
+       9.56826
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 10,
+     "rect": [
+      1760,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      53,
+      94,
+      147
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6835999488830566,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.33333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       121.41989,
+       9.34219
+      ],
+      "HR": [
+       89.0,
+       124.39412,
+       9.47633
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 11,
+     "rect": [
+      1920,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      150
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39938947558403015,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.8035999536514282,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.41666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       121.00888,
+       9.56329
+      ],
+      "HR": [
+       89.0,
+       125.16547,
+       9.38441
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 0,
+     "rect": [
+      2080,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 1,
+     "rect": [
+      2240,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      56,
+      94,
+      151
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 2,
+     "rect": [
+      2400,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      57,
+      94,
+      149
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 3,
+     "rect": [
+      2560,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      59,
+      94,
+      147
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 4,
+     "rect": [
+      2720,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      59,
+      94,
+      147
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 5,
+     "rect": [
+      2880,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      57,
+      94,
+      149
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 6,
+     "rect": [
+      3040,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      56,
+      94,
+      151
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 7,
+     "rect": [
+      3200,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 0,
+     "rect": [
+      3360,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 1,
+     "rect": [
+      3520,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 2,
+     "rect": [
+      3680,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      153
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 3,
+     "rect": [
+      3840,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      53,
+      94,
+      154
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 4,
+     "rect": [
+      4000,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      53,
+      94,
+      154
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 5,
+     "rect": [
+      4160,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      153
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 6,
+     "rect": [
+      4320,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 7,
+     "rect": [
+      4480,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 0,
+     "rect": [
+      4640,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       115.56994,
+       10.52796
+      ],
+      "HR": [
+       89.0,
+       129.45415,
+       8.8733
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 1,
+     "rect": [
+      4800,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      153
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       119.04099,
+       10.11429
+      ],
+      "HR": [
+       89.0,
+       132.45852,
+       8.49468
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 2,
+     "rect": [
+      4960,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      53,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39079999923706055,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       122.51204,
+       9.70063
+      ],
+      "HR": [
+       89.0,
+       124.74064,
+       8.99721
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 3,
+     "rect": [
+      5120,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      153
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.1918526142835617,
+        0.2748972177505493
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       125.9831,
+       9.28697
+      ],
+      "HR": [
+       89.0,
+       119.1274,
+       9.67633
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 4,
+     "rect": [
+      5280,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      55,
+      94,
+      152
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       129.45415,
+       8.8733
+      ],
+      "HR": [
+       89.0,
+       115.56994,
+       10.52796
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 5,
+     "rect": [
+      5440,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      149
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       132.45852,
+       8.49468
+      ],
+      "HR": [
+       89.0,
+       119.04099,
+       10.11429
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 6,
+     "rect": [
+      5600,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      52,
+      94,
+      146
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39079999923706055,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.74064,
+       8.99721
+      ],
+      "HR": [
+       89.0,
+       122.51204,
+       9.70063
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 7,
+     "rect": [
+      5760,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      54,
+      94,
+      149
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.1918526142835617,
+        0.27489718794822693
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       119.1274,
+       9.67633
+      ],
+      "HR": [
+       89.0,
+       125.9831,
+       9.28697
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 0,
+     "rect": [
+      5920,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      62,
+      94,
+      155
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 1,
+     "rect": [
+      6080,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      62,
+      94,
+      155
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 2,
+     "rect": [
+      6240,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      62,
+      94,
+      155
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 3,
+     "rect": [
+      6400,
+      160,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      67,
+      62,
+      94,
+      155
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.0,
+       124.17815,
+       9.50207
+      ],
+      "HR": [
+       89.0,
+       124.17815,
+       9.50207
+      ]
+     }
+    }
+   ]
+  },
+  "left": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 0,
+     "rect": [
+      160,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      128
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       83.56791,
+       125.46997,
+       9.34812
+      ],
+      "HR": [
+       87.53285,
+       113.27192,
+       10.80183
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 1,
+     "rect": [
+      320,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      75,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.3235999643802643,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       84.74967,
+       125.33603,
+       9.36408
+      ],
+      "HR": [
+       88.71462,
+       113.13797,
+       10.81779
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 2,
+     "rect": [
+      480,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      44,
+      73,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9867578744888306,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       85.93144,
+       125.20209,
+       9.38004
+      ],
+      "HR": [
+       88.15483,
+       112.27896,
+       10.73282
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 3,
+     "rect": [
+      640,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      44,
+      72,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5636000037193298,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.7909684181213379,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.11321,
+       125.06814,
+       9.39601
+      ],
+      "HR": [
+       86.22668,
+       111.26407,
+       10.60328
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 4,
+     "rect": [
+      800,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      44,
+      73,
+      150,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6836000680923462,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.3333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       88.29498,
+       124.9342,
+       9.41197
+      ],
+      "HR": [
+       84.29853,
+       111.23262,
+       10.55626
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 5,
+     "rect": [
+      960,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      75,
+      150,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.8036000728607178,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.4166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39938944578170776,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.47675,
+       124.80026,
+       9.42793
+      ],
+      "HR": [
+       82.37039,
+       112.29866,
+       10.60133
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 6,
+     "rect": [
+      1120,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      149,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       90.65852,
+       124.66631,
+       9.44389
+      ],
+      "HR": [
+       80.44224,
+       114.07557,
+       10.70605
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 7,
+     "rect": [
+      1280,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      41,
+      76,
+      149,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.32359999418258667,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       91.84029,
+       124.53237,
+       9.45986
+      ],
+      "HR": [
+       81.624,
+       113.94163,
+       10.72201
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 8,
+     "rect": [
+      1440,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      40,
+      75,
+      149,
+      126
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9867578148841858,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       91.2805,
+       123.67336,
+       9.37489
+      ],
+      "HR": [
+       82.80578,
+       113.80769,
+       10.73797
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 9,
+     "rect": [
+      1600,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      40,
+      75,
+      150,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.7909684181213379,
+        0.2814316153526306
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5636000037193298,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       89.35235,
+       122.65846,
+       9.24535
+      ],
+      "HR": [
+       83.98754,
+       113.67374,
+       10.75394
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 10,
+     "rect": [
+      1760,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      40,
+      75,
+      150,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6835999488830566,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.33333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.4242,
+       122.62702,
+       9.19833
+      ],
+      "HR": [
+       85.16932,
+       113.53981,
+       10.7699
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 11,
+     "rect": [
+      1920,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      41,
+      76,
+      151,
+      126
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39938947558403015,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.8035999536514282,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.41666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       85.49605,
+       123.69306,
+       9.2434
+      ],
+      "HR": [
+       86.35108,
+       113.40586,
+       10.78586
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 0,
+     "rect": [
+      2080,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 1,
+     "rect": [
+      2240,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      41,
+      77,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 2,
+     "rect": [
+      2400,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      39,
+      79,
+      150,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 3,
+     "rect": [
+      2560,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      38,
+      80,
+      149,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 4,
+     "rect": [
+      2720,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      38,
+      80,
+      149,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 5,
+     "rect": [
+      2880,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      39,
+      79,
+      150,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 6,
+     "rect": [
+      3040,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      41,
+      77,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 7,
+     "rect": [
+      3200,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 0,
+     "rect": [
+      3360,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 1,
+     "rect": [
+      3520,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 2,
+     "rect": [
+      3680,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      75,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 3,
+     "rect": [
+      3840,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      75,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 4,
+     "rect": [
+      4000,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      75,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 5,
+     "rect": [
+      4160,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      75,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 6,
+     "rect": [
+      4320,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 7,
+     "rect": [
+      4480,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 0,
+     "rect": [
+      4640,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      151,
+      129
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       74.77554,
+       126.4665,
+       9.22935
+      ],
+      "HR": [
+       92.92171,
+       112.66114,
+       10.87461
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 1,
+     "rect": [
+      4800,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      74,
+      151,
+      128
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       80.0935,
+       125.86376,
+       9.30119
+      ],
+      "HR": [
+       97.67989,
+       112.02055,
+       10.93039
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 2,
+     "rect": [
+      4960,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      44,
+      72,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39079999923706055,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       85.41146,
+       125.26102,
+       9.37302
+      ],
+      "HR": [
+       89.00322,
+       110.94937,
+       10.64079
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 3,
+     "rect": [
+      5120,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      43,
+      74,
+      150,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.1918526142835617,
+        0.2748972177505493
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       90.72943,
+       124.65828,
+       9.44485
+      ],
+      "HR": [
+       80.32655,
+       111.98285,
+       10.52779
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 4,
+     "rect": [
+      5280,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      76,
+      149,
+      126
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       96.04738,
+       124.05554,
+       9.51668
+      ],
+      "HR": [
+       71.64987,
+       115.07211,
+       10.58729
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 5,
+     "rect": [
+      5440,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      40,
+      76,
+      149,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       100.80556,
+       123.41494,
+       9.57245
+      ],
+      "HR": [
+       76.96783,
+       114.46937,
+       10.65912
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 6,
+     "rect": [
+      5600,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      40,
+      75,
+      150,
+      124
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39079999923706055,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       92.12889,
+       122.34377,
+       9.28285
+      ],
+      "HR": [
+       82.2858,
+       113.86662,
+       10.73095
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 7,
+     "rect": [
+      5760,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      40,
+      76,
+      150,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.1918526142835617,
+        0.27489718794822693
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       83.45222,
+       123.37725,
+       9.16985
+      ],
+      "HR": [
+       87.60376,
+       113.26388,
+       10.80278
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 0,
+     "rect": [
+      5920,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      81,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 1,
+     "rect": [
+      6080,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      81,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 2,
+     "rect": [
+      6240,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      81,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 3,
+     "rect": [
+      6400,
+      320,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      42,
+      82,
+      151,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       87.96409,
+       124.9717,
+       9.4075
+      ],
+      "HR": [
+       84.83842,
+       113.57731,
+       10.76543
+      ]
+     }
+    }
+   ]
+  },
+  "right": {
+   "frames": [
+    {
+     "clip": "idle",
+     "index": 0,
+     "rect": [
+      0,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 0,
+     "rect": [
+      160,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       79.55776,
+       114.07557,
+       10.70605
+      ],
+      "HR": [
+       69.34148,
+       124.66631,
+       9.44389
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 1,
+     "rect": [
+      320,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      75,
+      118,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.3235999643802643,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       78.376,
+       113.94163,
+       10.72201
+      ],
+      "HR": [
+       68.15971,
+       124.53237,
+       9.45986
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 2,
+     "rect": [
+      480,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      73,
+      117,
+      126
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9867578744888306,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       77.19423,
+       113.80769,
+       10.73797
+      ],
+      "HR": [
+       68.7195,
+       123.67336,
+       9.37489
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 3,
+     "rect": [
+      640,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      73,
+      117,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5636000037193298,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.7909684181213379,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       76.01246,
+       113.67374,
+       10.75394
+      ],
+      "HR": [
+       70.64765,
+       122.65846,
+       9.24535
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 4,
+     "rect": [
+      800,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      9,
+      73,
+      117,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6836000680923462,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.3333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333333,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       74.83068,
+       113.53981,
+       10.7699
+      ],
+      "HR": [
+       72.5758,
+       122.62702,
+       9.19833
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 5,
+     "rect": [
+      960,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      75,
+      118,
+      126
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.8036000728607178,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.4166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39938944578170776,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666667,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       73.64892,
+       113.40586,
+       10.78586
+      ],
+      "HR": [
+       74.50395,
+       123.69306,
+       9.2434
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 6,
+     "rect": [
+      1120,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      76,
+      119,
+      128
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9236000180244446,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.20360000431537628,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       72.46715,
+       113.27192,
+       10.80183
+      ],
+      "HR": [
+       76.4321,
+       125.46997,
+       9.34812
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 7,
+     "rect": [
+      1280,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      76,
+      120,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0435999631881714,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5833333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.32359999418258667,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.08333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.28538,
+       113.13797,
+       10.81779
+      ],
+      "HR": [
+       75.25033,
+       125.33603,
+       9.36408
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 8,
+     "rect": [
+      1440,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      75,
+      121,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9867578148841858,
+        0.12041902542114258
+       ],
+       "planted": false,
+       "phase": 0.6666666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.44359996914863586,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.16666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       71.84516,
+       112.27896,
+       10.73282
+      ],
+      "HR": [
+       74.06856,
+       125.20209,
+       9.38004
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 9,
+     "rect": [
+      1600,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      74,
+      122,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.7909684181213379,
+        0.2814316153526306
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.5636000037193298,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       73.77331,
+       111.26407,
+       10.60328
+      ],
+      "HR": [
+       72.88679,
+       125.06814,
+       9.39601
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 10,
+     "rect": [
+      1760,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      75,
+      121,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.5951789617538452,
+        0.31406447291374207
+       ],
+       "planted": false,
+       "phase": 0.8333333333333334,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6835999488830566,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.33333333333333337,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.70147,
+       111.23262,
+       10.55626
+      ],
+      "HR": [
+       71.70502,
+       124.9342,
+       9.41197
+      ]
+     }
+    },
+    {
+     "clip": "walk",
+     "index": 11,
+     "rect": [
+      1920,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      120,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39938947558403015,
+        0.203431636095047
+       ],
+       "planted": false,
+       "phase": 0.9166666666666666,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.8035999536514282,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.41666666666666663,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       77.62961,
+       112.29866,
+       10.60133
+      ],
+      "HR": [
+       70.52325,
+       124.80026,
+       9.42793
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 0,
+     "rect": [
+      2080,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 1,
+     "rect": [
+      2240,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      77,
+      120,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 2,
+     "rect": [
+      2400,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      79,
+      122,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 3,
+     "rect": [
+      2560,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      80,
+      123,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 4,
+     "rect": [
+      2720,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      80,
+      123,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 5,
+     "rect": [
+      2880,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      79,
+      122,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 6,
+     "rect": [
+      3040,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      77,
+      120,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "feed",
+     "index": 7,
+     "rect": [
+      3200,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 0,
+     "rect": [
+      3360,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 1,
+     "rect": [
+      3520,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 2,
+     "rect": [
+      3680,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      75,
+      118,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03591,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 3,
+     "rect": [
+      3840,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      75,
+      118,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03591,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 4,
+     "rect": [
+      4000,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      75,
+      118,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03591,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 5,
+     "rect": [
+      4160,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      75,
+      118,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6500000357627869,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03591,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 6,
+     "rect": [
+      4320,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "display",
+     "index": 7,
+     "rect": [
+      4480,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 0,
+     "rect": [
+      4640,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      76,
+      119,
+      126
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       88.35012,
+       115.07211,
+       10.58729
+      ],
+      "HR": [
+       63.95261,
+       124.05554,
+       9.51668
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 1,
+     "rect": [
+      4800,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      74,
+      118,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       83.03217,
+       114.46937,
+       10.65912
+      ],
+      "HR": [
+       59.19444,
+       123.41494,
+       9.57245
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 2,
+     "rect": [
+      4960,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      73,
+      117,
+      124
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.39079999923706055,
+        -1.4901161193847656e-08
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       77.7142,
+       113.86662,
+       10.73095
+      ],
+      "HR": [
+       67.87111,
+       122.34377,
+       9.28285
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 3,
+     "rect": [
+      5120,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      9,
+      74,
+      118,
+      125
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.1918526142835617,
+        0.2748972177505493
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       72.39624,
+       113.26388,
+       10.80278
+      ],
+      "HR": [
+       76.54778,
+       123.37725,
+       9.16985
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 4,
+     "rect": [
+      5280,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      10,
+      76,
+      119,
+      129
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.4708000421524048,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.5,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.6891999840736389,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.0,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       67.07828,
+       112.66114,
+       10.87461
+      ],
+      "HR": [
+       85.22447,
+       126.4665,
+       9.22935
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 5,
+     "rect": [
+      5440,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      11,
+      75,
+      121,
+      128
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.9539579153060913,
+        0.013223975896835327
+       ],
+       "planted": false,
+       "phase": 0.625,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        0.14920000731945038,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.125,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       62.3201,
+       112.02055,
+       10.93039
+      ],
+      "HR": [
+       79.9065,
+       125.86376,
+       9.30119
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 6,
+     "rect": [
+      5600,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      74,
+      122,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -1.0729053020477295,
+        0.2814315855503082
+       ],
+       "planted": false,
+       "phase": 0.75,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.39079999923706055,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.25,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       70.99678,
+       110.94937,
+       10.64079
+      ],
+      "HR": [
+       74.58854,
+       125.26102,
+       9.37302
+      ]
+     }
+    },
+    {
+     "clip": "charge",
+     "index": 7,
+     "rect": [
+      5760,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      75,
+      121,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.1918526142835617,
+        0.27489718794822693
+       ],
+       "planted": false,
+       "phase": 0.875,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.9308000206947327,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.375,
+       "stance": 0.62,
+       "stride": 4.32,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       79.67345,
+       111.98285,
+       10.52779
+      ],
+      "HR": [
+       69.27057,
+       124.65828,
+       9.44485
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 0,
+     "rect": [
+      5920,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      81,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 1,
+     "rect": [
+      6080,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      81,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        0.0
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 2,
+     "rect": [
+      6240,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      81,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    },
+    {
+     "clip": "sleep",
+     "index": 3,
+     "rect": [
+      6400,
+      480,
+      160,
+      160
+     ],
+     "visibleBounds": [
+      12,
+      82,
+      119,
+      127
+     ],
+     "contacts": {
+      "HL": {
+       "world": [
+        -0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      },
+      "HR": {
+       "world": [
+        0.8999999761581421,
+        -0.6499999761581421,
+        2.9802322387695312e-08
+       ],
+       "planted": true,
+       "phase": 0.31,
+       "stance": 0.62,
+       "stride": 1.44,
+       "baseY": -0.65
+      }
+     },
+     "projectedContacts": {
+      "HL": [
+       75.16158,
+       113.57731,
+       10.76543
+      ],
+      "HR": [
+       72.03592,
+       124.9717,
+       9.4075
+      ]
+     }
+    }
+   ]
+  }
+ }
+}

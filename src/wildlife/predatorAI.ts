@@ -1,25 +1,25 @@
 import { required } from "../art/ArtCatalog.js";
-import { getEntityAABB } from "../entities/collision.js";
+import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
-import { createDeer } from "./Deer.js";
 import { startleDeer } from "./deerInteractions.js";
+import { canEat } from "./FoodWeb.js";
+import { startleFauna } from "./faunaInteractions.js";
+import { startleFrog } from "./frogInteractions.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
-import { PREDATOR_PROFILES, predatorType } from "./Predator.js";
-import { createRabbit } from "./Rabbit.js";
+import { startleMallard } from "./mallardInteractions.js";
+import { predatorProfile } from "./Predator.js";
 import { startleRabbit } from "./rabbitInteractions.js";
+import { startleRobin } from "./robinInteractions.js";
 
 const distance = (a: PositionComponent, b: PositionComponent) =>
   Math.hypot(a.wx - b.wx, a.wy - b.wy);
-const preyAnimal = (e: Entity) =>
-  !!(e.deer || e.rabbit) &&
-  e.parentId === undefined &&
-  !e.wanderAI?.following &&
-  e.wanderAI?.state !== "ridden";
 const random = (e: Entity) => {
   const ai = required(e.predator);
   ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
@@ -31,14 +31,19 @@ function enter(e: Entity, state: NonNullable<Entity["predator"]>["state"], timer
   ai.timer = timer;
   ai.elapsed = 0;
   if (e.velocity) e.velocity.vx = e.velocity.vy = 0;
-  if (["rest", "feed", "scared", "patrol"].includes(state)) delete ai.aim;
-  if (["rest", "feed", "scared"].includes(state)) delete ai.targetId;
+  if (["rest", "feed", "scared", "patrol", "sleep", "guard", "ambush", "perch"].includes(state))
+    delete ai.aim;
+  if (["rest", "feed", "scared", "evade", "sleep", "guard", "ambush", "perch"].includes(state)) {
+    delete ai.targetId;
+    delete ai.huntElapsed;
+  }
   restorePredatorPose(e);
 }
 export function restorePredatorPose(e: Entity): void {
   const ai = e.predator;
   if (!ai || !e.sprite) return;
-  const moving = ["patrol", "stalk", "chase", "pounce"].includes(ai.state);
+  const fierce = predatorProfile(e.type)?.fierce;
+  const moving = ["patrol", "stalk", "chase", "pounce", "evade", "flight"].includes(ai.state);
   e.sprite.moving = moving;
   if (e.wanderAI)
     e.wanderAI.state =
@@ -51,17 +56,46 @@ export function restorePredatorPose(e: Entity): void {
             : "idle";
   setSpriteClip(
     e,
-    ai.state === "feed"
-      ? 2
-      : ai.state === "pounce" || ai.state === "scared"
-        ? 3
-        : ai.state === "chase"
-          ? 4
-          : moving
-            ? 1
-            : 0,
+    ai.flight
+      ? 6
+      : ai.state === "sleep" && fierce
+        ? 5
+        : ai.state === "feed"
+          ? 2
+          : ai.state === "display" || ai.state === "scared" || (ai.state === "pounce" && !fierce)
+            ? 3
+            : ai.state === "chase" || ai.state === "evade" || (ai.state === "pounce" && fierce)
+              ? 4
+              : moving
+                ? 1
+                : 0,
   );
   setSpriteClipElapsed(e, Math.round(ai.elapsed * 1000));
+}
+
+/** Cancel a smaller predator's own hunt before it escapes a larger hunter. */
+function alarmPrey(prey: Entity, from: PositionComponent): void {
+  if (prey.predator) {
+    if (prey.predator.alarmFrom) return;
+    enter(prey, "evade", 2.5);
+    prey.predator.alarmFrom = { ...from };
+    prey.predator.cooldown = Math.max(prey.predator.cooldown, 12);
+  } else if (prey.deer) startleDeer(prey, from);
+  else if (prey.rabbit) startleRabbit(prey, from);
+  else if (prey.fauna) startleFauna(prey, from);
+  else if (prey.robin) startleRobin(prey, from);
+  else if (prey.frog) startleFrog(prey, from);
+  else if (prey.mallard) startleMallard(prey, from);
+  else if (prey.wanderAI) {
+    prey.wanderAI.state = "scared";
+    prey.wanderAI.scaredTimer = 2;
+    const dx = prey.position.wx - from.wx,
+      dy = prey.position.wy - from.wy,
+      d = Math.hypot(dx, dy) || 1;
+    prey.wanderAI.dirX = dx / d;
+    prey.wanderAI.dirY = dy / d;
+    prey.wanderAI.timer = 0.3;
+  }
 }
 export function startlePredator(e: Entity, from: PositionComponent): void {
   if (!e.predator) return;
@@ -112,12 +146,51 @@ export function updatePredatorAI(
   const ai = e.predator,
     v = e.velocity;
   if (!ai || !v || !e.sprite) return;
-  const profile = required(PREDATOR_PROFILES.find((p) => predatorType(p.species) === e.type));
+  const profile = required(predatorProfile(e.type)),
+    fierce = profile.fierce;
   ai.timer -= dt;
   ai.elapsed += dt;
   ai.cooldown = Math.max(0, ai.cooldown - dt);
   v.vx = v.vy = 0;
-  if (ai.state === "feed" || ai.state === "scared" || (ai.state === "rest" && ai.timer > 0)) {
+  if (ai.targetId) ai.huntElapsed = (ai.huntElapsed ?? 0) + dt;
+  if (ai.state === "evade") {
+    if (ai.timer <= 0) {
+      delete ai.alarmFrom;
+      enter(e, "rest", 2);
+      return;
+    }
+    if (
+      ai.alarmFrom &&
+      (!ai.aim || distance(e.position, ai.aim) < 4) &&
+      (!planning || planning.claim(e, true))
+    ) {
+      const dx = e.position.wx - ai.alarmFrom.wx,
+        dy = e.position.wy - ai.alarmFrom.wy,
+        d = Math.hypot(dx, dy) || 1;
+      const point = { wx: e.position.wx + (dx / d) * 72, wy: e.position.wy + (dy / d) * 72 };
+      if (clearPath(e, point, env, planning)) ai.aim = point;
+    }
+    if (ai.aim) {
+      const dx = ai.aim.wx - e.position.wx,
+        dy = ai.aim.wy - e.position.wy,
+        d = Math.hypot(dx, dy);
+      const speed = Math.min(profile.chaseSpeed, d / dt);
+      if (d > 0.1) {
+        v.vx = (dx / d) * speed;
+        v.vy = (dy / d) * speed;
+        e.sprite.direction = directionFromVelocity(dx, dy);
+        e.sprite.frameRow = e.sprite.direction;
+      }
+    }
+    restorePredatorPose(e);
+    return;
+  }
+  if (
+    ai.state === "feed" ||
+    ai.state === "scared" ||
+    ai.state === "sleep" ||
+    (ai.state === "rest" && ai.timer > 0)
+  ) {
     if (ai.timer <= 0) {
       delete ai.alarmFrom;
       enter(e, "rest", 1 + random(e) * 2);
@@ -126,18 +199,31 @@ export function updatePredatorAI(
     return;
   }
   const prey = ai.targetId
-    ? animals.find((a) => a.persistentId === ai.targetId && preyAnimal(a))
+    ? animals.find((a) => a.persistentId === ai.targetId && canEat(e, a))
     : undefined;
   if (
     ai.targetId &&
     (!prey ||
-      ai.elapsed > 12 ||
+      (ai.huntElapsed ?? ai.elapsed) > 14 ||
+      (ai.state === "chase" && ai.elapsed > (fierce?.chargeSeconds ?? 12)) ||
       distance(e.position, ai.home) > ai.radius ||
       distance(prey.position, ai.home) > ai.radius ||
-      distance(prey.position, e.position) > 180)
+      distance(prey.position, e.position) > (fierce?.sense ?? 180) + 32)
   ) {
-    ai.cooldown = Math.max(ai.cooldown, 5);
+    ai.cooldown = Math.max(ai.cooldown, fierce ? 12 : 5);
     enter(e, "rest", 2);
+    return;
+  }
+  if (ai.state === "display" || ai.state === "windup") {
+    if (ai.timer <= 0 && prey) {
+      enter(
+        e,
+        ai.state === "display" ? "windup" : "chase",
+        ai.state === "display" ? (fierce?.windup ?? 0.3) : 0,
+      );
+      ai.aim = { ...prey.position };
+    }
+    restorePredatorPose(e);
     return;
   }
   if (prey) {
@@ -150,15 +236,14 @@ export function updatePredatorAI(
       return;
     }
     if (ai.state !== "stalk") {
-      startleDeer(prey, e.position);
-      startleRabbit(prey, e.position);
+      alarmPrey(prey, e.position);
     }
   }
   if (ai.timer <= 0 && (!planning || planning.claim(e, false))) {
     ai.timer = 0.15;
     if (!prey && ai.cooldown <= 0) {
       let nearest: Entity | undefined,
-        best = 144;
+        best = fierce?.sense ?? 144;
       // The active population is already spatially bounded; inspect at most 24
       // candidates per admitted turn, rotating to avoid starving later actors.
       const start = Math.floor(random(e) * Math.max(1, animals.length));
@@ -167,7 +252,7 @@ export function updatePredatorAI(
         const a = required(animals[(start + i) % animals.length]);
         const d = distance(e.position, a.position);
         if (
-          preyAnimal(a) &&
+          canEat(e, a) &&
           d < best &&
           distance(a.position, ai.home) < ai.radius &&
           clearPath(e, a.position, env, planning)
@@ -178,8 +263,26 @@ export function updatePredatorAI(
       }
       if (nearest) {
         ai.targetId = durableId(nearest);
-        enter(e, "stalk", 0);
+        ai.huntElapsed = 0;
+        enter(e, fierce ? "display" : "stalk", fierce ? 1.28 : 0);
         ai.aim = { ...nearest.position };
+        if (fierce) {
+          ai.displaySerial = (ai.displaySerial ?? 0) + 1;
+          e.sprite.direction = directionFromVelocity(
+            nearest.position.wx - e.position.wx,
+            nearest.position.wy - e.position.wy,
+          );
+          e.sprite.frameRow = e.sprite.direction;
+          alarmPrey(nearest, e.position);
+          for (let i = 0; i < Math.min(48, animals.length); i++) {
+            if (planning && !planning.candidate(e)) break;
+            const animal = required(animals[(start + i) % animals.length]);
+            if (canEat(e, animal) && distance(e.position, animal.position) < fierce.displayRadius)
+              alarmPrey(animal, e.position);
+          }
+          restorePredatorPose(e);
+          return;
+        }
       }
     }
     const target = prey?.position;
@@ -202,7 +305,7 @@ export function updatePredatorAI(
       ) {
         enter(e, "patrol", 0.3);
         ai.aim = point;
-      } else enter(e, "rest", 1);
+      } else enter(e, fierce && ai.cooldown > 0 ? "sleep" : "rest", fierce ? 2.5 : 1);
     }
   }
   if (ai.aim) {
@@ -233,9 +336,15 @@ export function resolvePredatorCatches(
 ): void {
   for (const hunter of active) {
     const ai = hunter.predator;
-    if (ai?.state !== "pounce" || ai.elapsed < 0.48 || !hunter.collider) continue;
+    if (
+      ai?.state !== "pounce" ||
+      ai.elapsed < 0.48 ||
+      !hunter.collider ||
+      !manager.byId.has(hunter.id)
+    )
+      continue;
     const prey = active.find(
-      (e) => e.persistentId === ai.targetId && manager.byId.has(e.id) && preyAnimal(e),
+      (e) => e.persistentId === ai.targetId && manager.byId.has(e.id) && canEat(hunter, e),
     );
     if (
       !prey?.collider ||
@@ -244,8 +353,7 @@ export function resolvePredatorCatches(
     )
       continue;
     if (bodyGap(hunter, prey) > 3 || !clearPath(hunter, prey.position, env)) continue;
-    const habitat = prey.deer ?? prey.rabbit;
-    if (!habitat) continue;
+    const habitat = habitatOf(prey);
     // proceduralId supports existing generated saves; replacements retain lineage
     // without reusing that tombstoned procedural identity. Unknown old origins
     // are deliberately not inferred from species, habitat or location.
@@ -258,11 +366,17 @@ export function resolvePredatorCatches(
         wx: habitat.home.wx + Math.cos(angle) * r,
         wy: habitat.home.wy + Math.sin(angle) * r,
       };
-      const candidate = prey.deer
-        ? createDeer(point.wx, point.wy)
-        : createRabbit(point.wx, point.wy);
+      const factory = ENTITY_FACTORIES[prey.type];
+      if (!factory) break;
+      const candidate = factory(point.wx, point.wy);
       candidate.wz = env.surfaceZ?.(point) ?? 0;
       const footprint = getEntityAABB(point, required(candidate.collider));
+      const separated = {
+        left: footprint.left - 8,
+        right: footprint.right + 8,
+        top: footprint.top - 8,
+        bottom: footprint.bottom + 8,
+      };
       const ground = [
         point,
         { wx: footprint.left, wy: footprint.top },
@@ -273,23 +387,35 @@ export function resolvePredatorCatches(
 
       if (
         distance(point, hunter.position) < 56 ||
-        players.some((p) => distance(point, p) < 24) ||
+        players.some(
+          (p) =>
+            distance(point, p) <
+            Math.max(footprint.right - footprint.left, footprint.bottom - footprint.top) / 2 + 24,
+        ) ||
         manager.entities.some(
-          (e) => e !== prey && e.collider?.solid !== false && distance(point, e.position) < 28,
+          (e) =>
+            e !== prey &&
+            e.collider &&
+            e.collider.solid !== false &&
+            aabbsOverlap(separated, getEntityAABB(e.position, e.collider)),
         ) ||
         ground.some(
-          (p) => env.isWater(p) || Math.abs((env.surfaceZ?.(p) ?? 0) - required(candidate.wz)) > 2,
+          (p) =>
+            env.isWater(p) !== (ENTITY_DEFS[candidate.type]?.aquatic === true) ||
+            Math.abs((env.surfaceZ?.(p) ?? 0) - required(candidate.wz)) > 2,
         ) ||
         !env.canOccupy(candidate, point)
       )
         continue;
-      const fresh = candidate.deer ?? candidate.rabbit;
-      if (!fresh) continue;
+      const fresh = habitatOf(candidate);
       fresh.home = { ...habitat.home };
-      fresh.shelter = { ...habitat.shelter };
       fresh.radius = habitat.radius;
-      fresh.randomState = (random(hunter) * 4294967296) >>> 0;
-      if (candidate.deer && prey.deer?.herdId) candidate.deer.herdId = prey.deer.herdId;
+      for (const key of ["shelter", "herdId", "groupId", "habitatBounds", "packId"]) {
+        const value = Reflect.get(habitat, key);
+        if (value !== undefined) Reflect.set(fresh, key, JSON.parse(JSON.stringify(value)));
+      }
+      if ("randomState" in fresh) fresh.randomState = (random(hunter) * 4294967296) >>> 0;
+      if (candidate.predator) candidate.predator.cooldown = 20;
       candidate.naturalSpawnId = naturalSpawnId;
       durableId(candidate);
       replacement = candidate;
@@ -303,4 +429,16 @@ export function resolvePredatorCatches(
     ai.cooldown = 35 + random(hunter) * 20;
     enter(hunter, "feed", 3.84);
   }
+}
+
+function habitatOf(e: Entity): { home: PositionComponent; radius: number } {
+  return (
+    e.predator ??
+    e.fauna ??
+    e.deer ??
+    e.rabbit ??
+    e.mallard ??
+    e.robin ??
+    e.frog ?? { home: { ...e.position }, radius: 128 }
+  );
 }

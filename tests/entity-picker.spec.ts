@@ -18,10 +18,10 @@ for (const viewport of [
     await page.getByTestId("main-menu-toggle").click();
     await page.getByRole("button", { name: "Edit", exact: true }).click();
     await page.locator('[data-editor-tab="entities"]').click();
-    const entries = ENTITY_PALETTE.map(({ type, label }) => {
+    const entries = ENTITY_PALETTE.map(({ type, label, previewRow }) => {
       const asset = SPRITE_MANIFEST.find((a) => a.key === type);
       if (!asset) throw Error(`Missing entity image: ${type}`);
-      return { label, path: asset.path, width: asset.w, height: asset.h };
+      return { label, path: asset.path, width: asset.w, height: asset.h, row: previewRow ?? 0 };
     });
     const measurements = await page.evaluate(async (entries) => {
       function bounds(canvas: HTMLCanvasElement) {
@@ -57,7 +57,17 @@ for (const viewport of [
           frame.height = entry.height;
           const ctx = frame.getContext("2d");
           if (!ctx) throw Error("Missing source context");
-          ctx.drawImage(image, 0, 0, entry.width, entry.height, 0, 0, entry.width, entry.height);
+          ctx.drawImage(
+            image,
+            0,
+            entry.row * entry.height,
+            entry.width,
+            entry.height,
+            0,
+            0,
+            entry.width,
+            entry.height,
+          );
           const source = bounds(frame),
             visible = bounds(preview);
           const scale = Math.min(preview.width / source.width, preview.height / source.height);

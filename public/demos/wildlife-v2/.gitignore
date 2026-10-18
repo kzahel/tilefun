@@ -212,3 +212,19 @@
 !brown-bear/hunt-v1/source-audit.json
 !brown-bear/hunt-v1/sprite.json
 !brown-bear/hunt-v1/validation.json
+
+# Fierce creatures 137: portable t-rex pending-review bank.
+!t-rex/fierce-v1/contact-sheet-native.png
+!t-rex/fierce-v1/index.html
+!t-rex/fierce-v1/playback.js
+!t-rex/fierce-v1/preview-native.gif
+!t-rex/fierce-v1/preview.gif
+!t-rex/fierce-v1/review-observations.md
+!t-rex/fierce-v1/scale-reference-native.png
+!t-rex/fierce-v1/scene-background.png
+!t-rex/fierce-v1/scene-native.gif
+!t-rex/fierce-v1/scene-native.png
+!t-rex/fierce-v1/sheet.png
+!t-rex/fierce-v1/source-audit.json
+!t-rex/fierce-v1/sprite.json
+!t-rex/fierce-v1/validation.json

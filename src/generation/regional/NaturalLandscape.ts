@@ -402,6 +402,7 @@ export class NaturalLandscape {
       ...this.deer(cx, cy),
       ...this.fauna(cx, cy),
       ...this.predators(cx, cy),
+      ...this.fiercePredators(cx, cy),
       ...this.waterFauna(cx, cy),
     ];
     if (!pond) return actors;
@@ -604,6 +605,35 @@ export class NaturalLandscape {
     return [
       {
         featureId: `wildlife:predator:${this.world.seed}:${glade.id}`,
+        type: predatorType(p.species),
+        wx,
+        wy,
+        route: [],
+        predator,
+      },
+    ];
+  }
+  fiercePredators(cx: number, cy: number): ActorPlacement[] {
+    const gx = Math.floor(cx / 4),
+      gy = Math.floor(cy / 4);
+    const glade = this.deerGlade(gx, gy);
+    const h = (salt: number) => valueNoise(gx, gy, this.world.seed + salt);
+    if (!glade || h(8351) > 0.28) return [];
+    // Fixed five-species owner order: staged releases never remap old habitats.
+    const species = ["t-rex", "small-dragon", "dire-wolf", "griffin", "giant-spider"][
+      Math.floor(h(8352) * 5)
+    ];
+    const p = PREDATOR_PROFILES.find((p) => p.species === species);
+    if (!p) return [];
+    const wx = (glade.x + 7) * 16,
+      wy = (glade.y - 4) * 16;
+    if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) return [];
+    const predator = required(createPredator(p.species, wx, wy).predator);
+    predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
+    predator.randomState = Math.floor(h(8353) * 4294967296) >>> 0;
+    return [
+      {
+        featureId: `wildlife:fierce:${this.world.seed}:${glade.id}:0`,
         type: predatorType(p.species),
         wx,
         wy,

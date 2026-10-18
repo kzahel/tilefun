@@ -9,9 +9,9 @@ current contracts. Historical repair holds and human art review remain separate.
 
 - [x] Natural-only replacement: durable origin, manual prey stays gone, repeated
   natural replacements retain lineage through reload, deletion never respawns.
-- [ ] Shared explicit food web covering native wildlife, existing predators and
+- [x] Shared explicit food web covering native wildlife, existing predators and
   the five new species; no self-eating, player/pet/rider meals or duplicate catches.
-- [ ] T. rex: own biped source, head/tail/weight transfer, heavy patrol, roar,
+- [x] T. rex: own biped source, head/tail/weight transfer, heavy patrol, roar,
   wind-up/short charge, feeding/rest and natural/editor/lab integration.
 - [ ] Small dragon: own winged body, guarded treasure, sleep/wake/display,
   hunting and natural/editor/lab integration.
@@ -52,3 +52,25 @@ tests remain. Broader browser fail-fast: 45 pass, known GPU city-train reload
 distance failure, one interrupted deer case and 615 unrun. No full browser pass
 is claimed. All six streaming readiness phases pass. Natural-only replacement is
 ready for its first commit/push; creature sources and the food web follow.
+
+Natural-only replacement is pushed as `b2bfc745` (status formatter follow-up
+`80350b16`). T. rex now has a separate 62-mesh biped source and 164 native poses.
+Independent saved-scene audit passes 984 fixed-link checks, 272 planted contacts
+and 104 stance/travel checks. Fresh replay reproduces twelve native/master/audit
+artifacts byte-for-byte. Normal Chromium verifies all 41 chronological states at
+native/4× scale, including 328 exact facing crops and 82 exact scenery comparisons.
+Its new pending Workshop identity is registered; human review is separate.
+Food-web, roar/wind-up/short charge, predator escape, generic species replacement,
+spatial call onset/cleanup and existing hunting pass 82 focused unit checks.
+Actual Worker, world spawn, picker and review checks are running before release.
+
+T. rex release checkpoint: rebased onto the upstream racetrack work through
+`41cbc0de`; both features remain intact. All 27 focused browser checks pass:
+Canvas/GPU roar/audio/charge/feed, five predators' meals/reload, actual natural
+spawn/editor/deletion/reopen, desktop/phone icons, native pending reviews and
+racetrack gameplay. New fierce picker icons use the recognizable side silhouette.
+World placement tests minimize the picker before clicking covered ground.
+Typechecks, lint, build, 848 exact Workshop identities and streaming readiness
+pass. Full units: 2,757 pass with the same five Windows symlink/WAL failures and
+ten skips. Broader browser fail-fast: 45 pass, the same GPU train-reload distance
+failure, one interrupted deer case and 623 unrun. Human art review is pending.

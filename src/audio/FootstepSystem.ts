@@ -4,6 +4,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { getMaterialForPropType } from "../entities/PropFactories.js";
 import type { Camera } from "../rendering/Camera.js";
+import { predatorProfile } from "../wildlife/Predator.js";
 import { worldToTile } from "../world/types.js";
 import type { World } from "../world/World.js";
 import type { AudioManager } from "./AudioManager.js";
@@ -27,7 +28,13 @@ interface FootstepState {
 
 /** Entity types that produce footstep sounds. */
 function hasFootsteps(type: string): boolean {
-  return type === "player" || type.startsWith("person") || type === "chicken" || type === "cow";
+  return (
+    type === "player" ||
+    type.startsWith("person") ||
+    type === "chicken" ||
+    type === "cow" ||
+    predatorProfile(type) !== undefined
+  );
 }
 
 const PLAYER_VOLUME = 0.35;
@@ -84,7 +91,7 @@ export class FootstepSystem {
         this.states.set(entity.id, state);
       }
 
-      const airborne = entity.jumpVZ !== undefined;
+      const airborne = entity.jumpVZ !== undefined || (entity.jumpZ ?? 0) > 1;
 
       // Detect jump launch (grounded → airborne)
       if (!state.wasAirborne && airborne) {

@@ -13,7 +13,10 @@ for (let gy = -12; gy < 12 && homes.size < PREDATOR_PROFILES.length; gy++)
   for (let gx = -12; gx < 12 && homes.size < PREDATOR_PROFILES.length; gx++)
     for (let dy = 0; dy < 4; dy++)
       for (let dx = 0; dx < 4; dx++)
-        for (const a of nature.predators(gx * 4 + dx, gy * 4 + dy))
+        for (const a of [
+          ...nature.predators(gx * 4 + dx, gy * 4 + dy),
+          ...nature.fiercePredators(gx * 4 + dx, gy * 4 + dy),
+        ])
           if (a.predator && !homes.has(a.type))
             homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
 
@@ -48,6 +51,8 @@ for (const p of PREDATOR_PROFILES) {
     await page.getByRole("button", { name: "Edit", exact: true }).click();
     await page.locator('[data-editor-tab="entities"]').click();
     await page.getByRole("button", { name: `Place ${p.label} (click map)`, exact: true }).click();
+    // Northern fierce habitats can put the home point behind the expanded picker.
+    await page.getByRole("button", { name: "Minimize editor tools", exact: true }).click();
     const point = await page.evaluate((home) => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       const camera = Reflect.get(g, "camera") as {

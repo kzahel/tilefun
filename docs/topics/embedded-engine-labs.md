@@ -33,6 +33,16 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## City outskirts speedways
 
+## Fierce creatures
+
+[137](../tactical/137-fierce-creatures-and-food-web.md) adds natural-origin meal
+replacement, an explicit food web, cross-predator meals and T. rex warning/charge
+states to shared Realm authority. Main game and the natural Worker lab use the
+same source banks, collisions, save/reload and audio/footstep consumers. Source
+reviews remain immutable pending identities; four further creatures are in progress.
+
+## City outskirts speedways
+
 [138](../tactical/138-city-outskirts-racetracks.md) adds a native generated racetrack
 arrival to the natural-landscape playground. Production generation owns the oval,
 access, spectator props and durable population. TrafficSystem owns racing, braking,

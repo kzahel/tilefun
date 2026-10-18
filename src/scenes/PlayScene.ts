@@ -335,6 +335,11 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked && !gc.debugPanel.paused,
     );
+    gc.audioManager.updateCreatureCalls(
+      gc.stateView.entities,
+      gc.stateView.playerEntity.position,
+      !inputLocked && !gc.debugPanel.paused,
+    );
     if (vehicle) rawMovement = { ...rawMovement, jump: false };
     this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
     const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked;
@@ -615,6 +620,7 @@ export class PlayScene implements GameScene {
     gc.audioManager.stopSirens();
     gc.audioManager.stopTrains();
     gc.audioManager.stopHorns();
+    gc.audioManager.stopCreatureCalls();
     gc.transport.send({ type: "vehicle-horn", active: false });
     this.hornHeld = false;
     this.hornRefresh = 0;

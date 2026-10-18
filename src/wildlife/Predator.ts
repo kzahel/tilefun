@@ -1,8 +1,13 @@
 import { required } from "../art/ArtCatalog.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import {
+  FIERCE_PROFILES,
+  type FierceBehaviorProfile,
+  type FierceSpecies,
+} from "./FierceCreatures.js";
 
-export const PREDATOR_PROFILES = [
+const ORIGINAL_PREDATORS = [
   {
     species: "panther",
     label: "Panther",
@@ -29,12 +34,54 @@ export const PREDATOR_PROFILES = [
     weight: 300,
   },
 ] as const;
-export type PredatorSpecies = (typeof PREDATOR_PROFILES)[number]["species"];
+export type PredatorSpecies = (typeof ORIGINAL_PREDATORS)[number]["species"] | FierceSpecies;
+export interface PredatorProfile {
+  species: PredatorSpecies;
+  label: string;
+  revision: string;
+  speed: number;
+  chaseSpeed: number;
+  weight: number;
+  size: number;
+  anchorY: number;
+  body: readonly [number, number, number];
+  fierce?: FierceBehaviorProfile;
+}
+export const PREDATOR_PROFILES: readonly PredatorProfile[] = [
+  ...ORIGINAL_PREDATORS.map((p) => ({
+    ...p,
+    size: 96,
+    anchorY: 72,
+    body: (p.species === "brown-bear" ? [28, 16, 24] : [22, 12, 24]) as readonly [
+      number,
+      number,
+      number,
+    ],
+  })),
+  ...FIERCE_PROFILES,
+];
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
+const profilesByType = new Map(PREDATOR_PROFILES.map((p) => [predatorType(p.species), p]));
+export const predatorProfile = (type: string) => profilesByType.get(type);
 export interface PredatorBehavior {
   home: PositionComponent;
   radius: number;
-  state: "rest" | "patrol" | "stalk" | "chase" | "pounce" | "feed" | "scared";
+  state:
+    | "rest"
+    | "patrol"
+    | "stalk"
+    | "display"
+    | "windup"
+    | "chase"
+    | "pounce"
+    | "feed"
+    | "scared"
+    | "evade"
+    | "sleep"
+    | "guard"
+    | "perch"
+    | "flight"
+    | "ambush";
   timer: number;
   elapsed: number;
   cooldown: number;
@@ -43,6 +90,20 @@ export interface PredatorBehavior {
   aim?: PositionComponent;
   alarmFrom?: PositionComponent;
   meals: number;
+  huntElapsed?: number;
+  activity?: number;
+  packId?: string;
+  displaySerial?: number;
+  flight?: {
+    elapsed: number;
+    duration: number;
+    from: PositionComponent;
+    to: PositionComponent;
+    startZ: number;
+    endZ: number;
+    lift: number;
+    attack: boolean;
+  };
 }
 export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
   PREDATOR_PROFILES.map((p) => [
@@ -50,11 +111,11 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
     {
       sprite: {
         sheetKey: predatorType(p.species),
-        spriteWidth: 96,
-        spriteHeight: 96,
+        spriteWidth: p.size,
+        spriteHeight: p.size,
         frameCount: 1,
         frameDuration: 100,
-        drawOffsetY: 24,
+        drawOffsetY: p.anchorY - p.size / 2,
         clips: [
           { name: "idle", start: 0, count: 1, frameDuration: 180, loop: true },
           { name: "walk", start: 1, count: 12, frameDuration: 100, loop: true },
@@ -63,19 +124,27 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
           // Grounded brisk walk pending a separately reviewed running source.
           {
             name: "chase",
-            start: 1,
-            count: 12,
-            frameDuration: (100 * p.speed) / p.chaseSpeed,
+            start: p.fierce ? 29 : 1,
+            count: p.fierce ? 8 : 12,
+            frameDuration: p.fierce
+              ? (p.fierce.chargeStride * 10 * 1000) / (p.chaseSpeed * 8)
+              : (100 * p.speed) / p.chaseSpeed,
             loop: true,
           },
+          ...(p.fierce
+            ? [{ name: "sleep", start: 37, count: 4, frameDuration: 280, loop: true }]
+            : []),
+          ...(p.fierce && ["dragon", "griffin"].includes(p.fierce.kind)
+            ? [{ name: "flight", start: 41, count: 8, frameDuration: 100, loop: true }]
+            : []),
         ],
       },
       collider: {
         offsetX: 0,
         offsetY: 0,
-        width: p.species === "brown-bear" ? 28 : 22,
-        height: p.species === "brown-bear" ? 16 : 12,
-        physicalHeight: 24,
+        width: p.body[0],
+        height: p.body[1],
+        physicalHeight: p.body[2],
         solid: true,
       },
       wanderAI: {
@@ -114,7 +183,7 @@ export function createPredator(species: PredatorSpecies, wx: number, wy: number)
     wanderAI: { ...required(def.wanderAI), state: "idle", timer: 0, dirX: 0, dirY: 0 },
     predator: {
       home: { wx, wy },
-      radius: 160,
+      radius: p.fierce ? 240 : 160,
       state: "rest",
       timer: 1.5,
       elapsed: 0,

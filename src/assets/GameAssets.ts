@@ -44,8 +44,8 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
   ...PREDATOR_PROFILES.map((p) => ({
     key: predatorType(p.species),
     path: `demos/wildlife-v2/${p.species}/${p.revision}/sheet.png`,
-    w: 96,
-    h: 96,
+    w: p.size,
+    h: p.size,
   })),
   ...FAUNA_PROFILES.map((p) => ({
     key: faunaType(p.species),

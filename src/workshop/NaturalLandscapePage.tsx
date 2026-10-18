@@ -1,5 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
+import { AudioManager } from "../audio/AudioManager.js";
+import { FootstepSystem } from "../audio/FootstepSystem.js";
+import { buildFootstepManifest } from "../audio/SurfaceType.js";
 import {
   LANDSCAPE_PROFILES,
   landscapeLabel,
@@ -16,6 +19,7 @@ import {
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
+import { FOOD_WEB } from "../wildlife/FoodWeb.js";
 import { FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -36,6 +40,11 @@ export default function NaturalLandscapePage() {
   );
   const [paused, setPaused] = useState(false),
     [follow, setFollow] = useState(caseId === "train");
+  const [sounds, setSounds] = useState(false);
+  const audio = useRef<AudioManager | null>(null),
+    footsteps = useRef<FootstepSystem | null>(null);
+  const audioTime = useRef(0);
+  useEffect(() => () => audio.current?.dispose(), []);
   const [zoom, setZoom] = useState(
       FAUNA_PROFILES.find((p) => p.species === caseId)?.inspectionZoom ??
         (caseId === "racetrack"
@@ -56,8 +65,8 @@ export default function NaturalLandscapePage() {
   const canvas = useRef<HTMLCanvasElement>(null),
     host = useRef<ScenarioPresentationHost | null>(null);
   const keys = useRef(new Set<string>()),
-    settings = useRef({ paused, follow, zoom });
-  settings.current = { paused, follow, zoom };
+    settings = useRef({ paused, follow, zoom, sounds });
+  settings.current = { paused, follow, zoom, sounds };
   const custom = caseId === "explore";
   const predatorCase = PREDATOR_PROFILES.some((p) => p.species === caseId);
   const point = useMemo(
@@ -170,6 +179,31 @@ export default function NaturalLandscapePage() {
         sprinting: false,
       }),
       onFrame: (h) => {
+        const sound = audio.current,
+          viewForAudio = h.session.view;
+        if (sound) {
+          const enabled = settings.current.sounds && !settings.current.paused && !document.hidden;
+          sound.updateCreatureCalls(
+            viewForAudio.entities,
+            viewForAudio.playerEntity.position,
+            enabled,
+          );
+          footsteps.current ??= new FootstepSystem(
+            sound,
+            () => h.session.view.world,
+            () => h.camera,
+            () => h.session.view.playerEntity,
+            () => h.session.view.props,
+          );
+          const now = performance.now();
+          if (enabled && audioTime.current)
+            footsteps.current.update(
+              Math.min(0.1, (now - audioTime.current) / 1000),
+              viewForAudio.entities,
+            );
+          audioTime.current = now;
+          c.dataset.creatureCalls = String(sound.creatureAudioDiagnostics.played);
+        }
         c.dataset.predatorPoses = JSON.stringify(
           h.session.view.entities
             .filter((e) => PREDATOR_PROFILES.some((p) => predatorType(p.species) === e.type))
@@ -366,6 +400,9 @@ export default function NaturalLandscapePage() {
     return () => {
       active = false;
       h.dispose();
+      audio.current?.stopCreatureCalls();
+      footsteps.current = null;
+      audioTime.current = 0;
       host.current = null;
       keys.current.clear();
       delete c.dataset.ready;
@@ -505,7 +542,7 @@ export default function NaturalLandscapePage() {
         {caseId === "racetrack" ? (
           "City outskirts speedway · Eight cars race around the oval. Walk to the spectator seating, picnic area or track; cars stop for people. Use Arrows/WASD to walk, Space to jump, and E beside a stopped car to drive."
         ) : predatorCase ? (
-          "Hunting playground · Arrows/WASD to walk, Space to jump. Watch the predator hunt deer and rabbits; new prey returns nearby after a catch. Throw a ball in the game to interrupt a hunt."
+          "Hunting playground · Arrows/WASD to walk, Space to jump. Natural prey returns nearby after a meal. Animals you place stay gone when eaten. Throw a ball in the game to interrupt a hunt."
         ) : (
           <>
             Seed {point.seed} · {point.x}, {point.y} tiles · Arrows/WASD to walk, Space to jump.
@@ -515,6 +552,44 @@ export default function NaturalLandscapePage() {
           </>
         )}
       </p>
+      {predatorCase && (
+        <details>
+          <summary>Who can eat whom?</summary>
+          <p>Players, companion cats and dogs, and ridden animals are protected.</p>
+          <table>
+            <thead>
+              <tr>
+                <th>Creature</th>
+                <th>Can hunt</th>
+              </tr>
+            </thead>
+            <tbody>
+              {FOOD_WEB.filter((r) => r.eats.length).map((r) => (
+                <tr key={r.species}>
+                  <td>
+                    {PREDATOR_PROFILES.find((p) => p.species === r.species)?.label ??
+                      r.species.replaceAll("-", " ")}
+                  </td>
+                  <td>{r.eats.map((s) => s.replaceAll("-", " ")).join(", ")}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      )}
+      <button
+        type="button"
+        onClick={() => {
+          audio.current ??= new AudioManager();
+          if (!sounds) {
+            audio.current.tryResume();
+            void audio.current.preload(buildFootstepManifest());
+          } else audio.current.stopCreatureCalls();
+          setSounds(!sounds);
+        }}
+      >
+        {sounds ? "Creature sounds on" : "Enable creature sounds"}
+      </button>
       {(prepared.error || error) && <p role="alert">{prepared.error || error}</p>}
       <div
         className="geometry-stage"

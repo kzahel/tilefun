@@ -316,6 +316,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-t-rex-predator-v1",
+      "name": "wildlife t rex predator v1",
+      "image": "demos/wildlife-v2/t-rex/fierce-v1/sheet.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "fa04eafaab71449ded331ea46e2247082a537f0e68e639c0accf316fe328a43a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
@@ -2113,6 +2123,16 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-t-rex-fierce-v1",
+      "name": "wildlife v2 t rex fierce v1",
+      "image": "demos/wildlife-v2/t-rex/fierce-v1/sheet.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "fa04eafaab71449ded331ea46e2247082a537f0e68e639c0accf316fe328a43a",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4453,11 +4473,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:749"
+          "source": "src/generation/regional/NaturalLandscape.ts:779"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:943"
+          "source": "src/generation/regional/NaturalLandscape.ts:973"
         },
         {
           "system": "World generation",
@@ -23232,6 +23252,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-t-rex-predator-v1",
+      "sheetId": "wildlife-t-rex-predator-v1",
+      "rect": [
+        0,
+        0,
+        6560,
+        640
+      ],
+      "label": "wildlife-t-rex-predator-v1 · registered 160×160 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-fox-provisional-v1",
       "sheetId": "wildlife-fox-provisional-v1",
       "rect": [
@@ -24879,7 +24917,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/FootstepSystem.ts:30"
+          "source": "src/audio/FootstepSystem.ts:32"
         },
         {
           "system": "Gameplay",
@@ -25089,7 +25127,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/FootstepSystem.ts:30"
+          "source": "src/audio/FootstepSystem.ts:34"
         },
         {
           "system": "Editor",
@@ -25097,7 +25135,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:89"
+          "source": "src/editor/EditorPalettes.ts:92"
         },
         {
           "system": "Gameplay",
@@ -25122,6 +25160,18 @@
         {
           "system": "Gameplay",
           "source": "src/server/testing/ReplicationDeliveryHarness.ts:30"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:9"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:16"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:76"
         }
       ]
     },
@@ -25147,11 +25197,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/FootstepSystem.ts:30"
+          "source": "src/audio/FootstepSystem.ts:35"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:90"
+          "source": "src/editor/EditorPalettes.ts:93"
         },
         {
           "system": "Gameplay",
@@ -25184,6 +25234,30 @@
         {
           "system": "Gameplay",
           "source": "src/wildlife/Fauna.ts:176"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:19"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:20"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:25"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:36"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:50"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:76"
         }
       ]
     },
@@ -25209,7 +25283,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:91"
+          "source": "src/editor/EditorPalettes.ts:94"
         },
         {
           "system": "Gameplay",
@@ -25222,6 +25296,22 @@
         {
           "system": "Gameplay",
           "source": "src/entities/Pigeon.ts:16"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:9"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:16"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:76"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:77"
         }
       ]
     },
@@ -25247,7 +25337,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:92"
+          "source": "src/editor/EditorPalettes.ts:95"
         },
         {
           "system": "Gameplay",
@@ -25260,6 +25350,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/Pigeon2.ts:16"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:77"
         }
       ]
     },
@@ -25285,7 +25379,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:95"
+          "source": "src/editor/EditorPalettes.ts:98"
         },
         {
           "system": "Gameplay",
@@ -25302,6 +25396,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/FishSpawner.ts:13"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:78"
         }
       ]
     },
@@ -25327,7 +25425,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:96"
+          "source": "src/editor/EditorPalettes.ts:99"
         },
         {
           "system": "Gameplay",
@@ -25344,6 +25442,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/FishSpawner.ts:13"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:79"
         }
       ]
     },
@@ -25369,7 +25471,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:97"
+          "source": "src/editor/EditorPalettes.ts:100"
         },
         {
           "system": "Gameplay",
@@ -25386,6 +25488,10 @@
         {
           "system": "Gameplay",
           "source": "src/entities/FishSpawner.ts:13"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:80"
         }
       ]
     },
@@ -25415,7 +25521,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:98"
+          "source": "src/editor/EditorPalettes.ts:101"
         },
         {
           "system": "Gameplay",
@@ -25465,7 +25571,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:99"
+          "source": "src/editor/EditorPalettes.ts:102"
         },
         {
           "system": "Gameplay",
@@ -25511,7 +25617,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:93"
+          "source": "src/editor/EditorPalettes.ts:96"
         },
         {
           "system": "Gameplay",
@@ -25528,6 +25634,14 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/CountrysidePlanner.ts:236"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:9"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:76"
         }
       ]
     },
@@ -25553,7 +25667,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:94"
+          "source": "src/editor/EditorPalettes.ts:97"
         },
         {
           "system": "Gameplay",
@@ -25566,6 +25680,14 @@
         {
           "system": "Gameplay",
           "source": "src/entities/Seagull.ts:15"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:9"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:76"
         }
       ]
     },
@@ -25591,7 +25713,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:100"
+          "source": "src/editor/EditorPalettes.ts:103"
         },
         {
           "system": "Gameplay",
@@ -25621,7 +25743,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:101"
+          "source": "src/editor/EditorPalettes.ts:104"
         },
         {
           "system": "Gameplay",
@@ -25651,7 +25773,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:102"
+          "source": "src/editor/EditorPalettes.ts:105"
         },
         {
           "system": "Gameplay",
@@ -25681,7 +25803,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:103"
+          "source": "src/editor/EditorPalettes.ts:106"
         },
         {
           "system": "Gameplay",
@@ -25731,7 +25853,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:812"
+          "source": "src/scenes/PlayScene.ts:818"
         },
         {
           "system": "Gameplay",
@@ -25773,7 +25895,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:104"
+          "source": "src/editor/EditorPalettes.ts:107"
         },
         {
           "system": "Gameplay",
@@ -25823,7 +25945,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:105"
+          "source": "src/editor/EditorPalettes.ts:108"
         },
         {
           "system": "Gameplay",
@@ -26611,11 +26733,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:749"
+          "source": "src/generation/regional/NaturalLandscape.ts:779"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:943"
+          "source": "src/generation/regional/NaturalLandscape.ts:973"
         },
         {
           "system": "World generation",

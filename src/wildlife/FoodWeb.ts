@@ -1,0 +1,122 @@
+import type { Entity } from "../entities/Entity.js";
+import { DEER_TYPE } from "./Deer.js";
+import { FAUNA_PROFILES, faunaType } from "./Fauna.js";
+import { FROG_TYPE } from "./Frog.js";
+import { MALLARD_TYPE } from "./Mallard.js";
+import { RABBIT_TYPE } from "./Rabbit.js";
+import { ROBIN_TYPE } from "./Robin.js";
+
+const birds = ["mallard-duck", "robin", "chicken", "pigeon", "crow", "seagull"] as const;
+const small = ["rabbit", "frog", ...birds] as const;
+const pasture = ["deer", "sheep", "goat", "piglet", "kangaroo"] as const;
+
+/** Explicit game food web. Direction means hunter → prey, never inferred from mass.
+ * These size/threat tiers are game rules, not a claim of measured animal ecology. */
+export const HUNTING_DIETS = {
+  "giant-spider": ["ant", "rabbit", "frog", "robin", "chicken", "pigeon", "king-cobra"],
+  "dire-wolf": [...small, ...pasture, "fox", "giant-spider"],
+  panther: [...small, ...pasture, "fox", "king-cobra", "giant-spider"],
+  tiger: [...small, ...pasture, "fox", "cow", "horse", "panther", "dire-wolf", "giant-spider"],
+  lion: [...small, ...pasture, "fox", "cow", "horse", "panther", "dire-wolf", "giant-spider"],
+  "brown-bear": [
+    ...small,
+    ...pasture,
+    "fox",
+    "cow",
+    "fish",
+    "panther",
+    "dire-wolf",
+    "giant-spider",
+  ],
+  griffin: [...small, ...pasture, "fox", "king-cobra", "panther", "dire-wolf", "giant-spider"],
+  "small-dragon": [
+    ...small,
+    ...pasture,
+    "fox",
+    "cow",
+    "horse",
+    "panther",
+    "tiger",
+    "lion",
+    "brown-bear",
+    "dire-wolf",
+    "griffin",
+    "giant-spider",
+  ],
+  "t-rex": [
+    ...small,
+    ...pasture,
+    "fox",
+    "cow",
+    "horse",
+    "elephant",
+    "giraffe",
+    "panther",
+    "tiger",
+    "lion",
+    "brown-bear",
+    "dire-wolf",
+    "small-dragon",
+    "griffin",
+    "giant-spider",
+  ],
+} as const;
+export type HuntingSpecies = keyof typeof HUNTING_DIETS;
+
+const identities = new Map<string, string>([
+  ...FAUNA_PROFILES.map((p) => [faunaType(p.species), p.species] as const),
+  [DEER_TYPE, "deer"],
+  [RABBIT_TYPE, "rabbit"],
+  [FROG_TYPE, "frog"],
+  [ROBIN_TYPE, "robin"],
+  [MALLARD_TYPE, "mallard-duck"],
+  ...Object.keys(HUNTING_DIETS).map(
+    (species) => [`wildlife-${species}-predator-v1`, species] as const,
+  ),
+  ...["chicken", "cow", "pigeon", "crow", "seagull"].map((species) => [species, species] as const),
+  ["pigeon2", "pigeon"],
+  ["fish1", "fish"],
+  ["fish2", "fish"],
+  ["fish3", "fish"],
+]);
+const companions = new Set([
+  "cat",
+  "dog",
+  ...FAUNA_PROFILES.filter((p) => p.variantOf).map((p) => p.species),
+]);
+const diets = new Map<string, ReadonlySet<string>>(
+  Object.entries(HUNTING_DIETS).map(([species, prey]) => [species, new Set(prey)]),
+);
+
+/** Every recognized animal has an identity, including safe pets and aquatic fauna.
+ * Unknown types (players, characters, vehicles, props) are never food. */
+export const creatureSpecies = (entity: Pick<Entity, "type">): string | undefined =>
+  identities.get(entity.type);
+export function dietFor(species: string): ReadonlySet<string> {
+  return diets.get(species) ?? EMPTY_DIET;
+}
+const EMPTY_DIET: ReadonlySet<string> = new Set();
+
+export function canEat(hunter: Entity, prey: Entity): boolean {
+  const species = creatureSpecies(prey),
+    predator = creatureSpecies(hunter);
+  return (
+    !!species &&
+    !!predator &&
+    hunter !== prey &&
+    species !== predator &&
+    !companions.has(species) &&
+    prey.deathTimer === undefined &&
+    hunter.deathTimer === undefined &&
+    prey.parentId === undefined &&
+    !prey.wanderAI?.following &&
+    prey.wanderAI?.state !== "ridden" &&
+    dietFor(predator).has(species)
+  );
+}
+
+export const FOOD_WEB = [...new Set(identities.values())].sort().map((species) => ({
+  species,
+  protected: companions.has(species),
+  eats: [...dietFor(species)],
+}));

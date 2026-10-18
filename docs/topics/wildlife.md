@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species, four pet variants and four authorized predators have durable provisional gameplay. Predator art remains pending human review; other expansion stays stopped.
+Status: all 22 existing-sheet species, four pet variants, four original predators and T. rex have durable provisional gameplay. Four further authorized fierce creatures are in progress. New art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
 ## Fierce creatures and natural-only replacement
@@ -11,6 +11,17 @@ spider, their distinct behaviors and cross-species hunting in [137](../tactical/
 The [fantasy manifest](../../art-source/wildlife-v2/fantasy-batch.json) tracks only
 these five; historical campaign/repair holds stay active and art approval remains
 human-owned.
+
+T. rex is now available in the world, editor and shared Worker lab. It roars and
+scatters edible prey, winds up, makes a bounded 88px/s charge, feeds and rests.
+The explicit `FoodWeb.ts` catalog covers every recognized wildlife species and
+defines predator-to-predator meals, including T. rex eating wolves; players,
+companion cats/dogs, following and ridden animals stay protected. Smaller
+predators abandon their own hunts and escape. The lab's **Who can eat whom?**
+table exposes the rules. Spatial synthesized calls and weight-scaled footsteps
+share game/lab audio code. Its 164-pose source/portable pending review reproduces
+byte-for-byte. Other four fierce creatures are not yet released; 137 owns current
+evidence and remaining stages.
 
 Meal replacements now require known world origin: `proceduralId` identifies
 existing generated animals and durable `naturalSpawnId` carries that lineage
