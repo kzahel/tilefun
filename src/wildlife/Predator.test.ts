@@ -110,7 +110,7 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
   });
   it("a real ball ricochets and interrupts the hunt without killing the predator", () => {
     const { manager, hunter } = setup();
-    const ball = manager.spawn(createBall(-13, 0));
+    const ball = manager.spawn(createBall(-required(hunter.collider).width / 2 - 2, 0));
     required(ball.velocity).vx = 100;
     tickBallPhysics(
       manager,

@@ -39,7 +39,7 @@ a bounded four-predator exception; historical repair gates/campaign stay stopped
       validate, commit and push.
 - [x] Lion own mane/head/body and pending review; same runtime;
       validate, commit and push.
-- [ ] Brown bear own body/paws/gait and pending review, correcting the historical
+- [x] Brown bear own body/paws/gait and pending review, correcting the historical
       failed anatomy rather than adopting it; same runtime; validate/commit/push.
 
 Default black panther is a melanistic leopard. Initial hunting is non-graphic;
@@ -145,3 +145,39 @@ owner exists near tile (410,-674), seed 2026 / thicket, beside a deer glade.
 Typecheck, build, lint and 41 focused predator/scheduler checks pass. Ten browser
 checks cover tiger/panther/lion hunting, feeding and reload in both Canvas and
 GPU plus exact pending-art review. All human art approvals remain pending.
+
+## Brown bear and four-species checkpoint
+
+Brown-bear hunt-v1 retains a 40-mesh independently proportioned body, wider hips,
+thicker legs, large paws, short tail and separate muzzle/ear volumes. Its .84-unit
+stride and 4/10 front footfall landings differ from the cats; source rise/pitch and
+grounded IK remain visible. All 116 source poses pass saved-scene projection,
+1,392 fixed-link and 432 planted-contact checks; 29 chronological states play in
+actual Chromium at both native and 4x scale with 232 exact crop checks. A fresh
+Blender rebuild reproduces nine public raster/metadata artifacts and masters
+byte for byte. The complete 14-file bundle is registered for exact pending art
+review, with all historical bear/tiger sources untouched.
+
+Bear patrol is 7px/s and chase is 42px/s with matched accelerated walk timing;
+its body collider is 28x16px with a 24px physical height. It uses the same bounded
+hunt, collision-resolved jaw-display lunge, feeding, cooldown and safe one-for-one
+replacement as the other three. A seeded natural owner exists near tile
+(-725,-611), seed 2026 / thicket, beside the ordinary deer habitat. The editor
+labels the quadruped tiger **Wild tiger** to distinguish it from the previously
+promoted upright **Tiger** character; both remain available.
+
+Fifty-one focused predator/scheduler tests pass. Targeted full-Chromium evidence
+covers all four predators hunting/feeding/reloading in Canvas and GPU, exact
+pending art/player verification, and ordinary regional-game natural spawning,
+editor creation, deletion and reopening. All sixteen checks pass across the main
+run and the corrected Wild tiger selector rerun. A 150-second logical-time soak
+with four predators produces 12 meals while maintaining exactly two deer and two
+rabbits at all 1,500 samples; two reloads retain all current prey identities and
+no old killed animal returns. Final streaming --assert-ready traversal passes.
+
+Final typecheck/build/lint pass (119 existing lint warnings / 34 infos). Full unit
+run: 2,660 pass / 5 fail / 10 skip across 2,675 tests. Failures are the same Windows
+FsSecurity symlink cases (3), privateDataPlugin symlink case (1), and SQLite
+process-death recovery case (1). Static-file symlink setup fails and skips its
+10 tests. All remaining unit files, including wildlife, are green. The final full
+Playwright run is still in progress and will be recorded after completion.

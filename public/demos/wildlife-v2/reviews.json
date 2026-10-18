@@ -2800,5 +2800,102 @@
         "sha256": "aa430f14c8db09dd6c48d5526aeb3c56a23369a194a9810f3cc914a53f193629"
       }
     ]
+  },
+  {
+    "id": "brown-bear-hunt-v1",
+    "animalId": "brown-bear",
+    "revision": "hunt-v1",
+    "name": "Brown bear",
+    "batchId": "wildlife-v2-predators-132",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/brown-bear/hunt-v1/",
+    "sheet": {
+      "id": "wildlife-v2-brown-bear-hunt-v1",
+      "name": "Brown bear sheet",
+      "image": "demos/wildlife-v2/brown-bear/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+      "source": "art-source/wildlife-v2/brown-bear/hunt-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-brown-bear-hunt-v1-scene",
+      "name": "Brown bear scene",
+      "image": "demos/wildlife-v2/brown-bear/hunt-v1/scene-native.png",
+      "width": 800,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "7604aca8b96d956369b373ef0fb44a68ebdb6ad36cc24b1ffad3ac74a5197658",
+      "source": "art-source/wildlife-v2/brown-bear/hunt-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-brown-bear-hunt-v1-contact",
+      "name": "Brown bear contact",
+      "image": "demos/wildlife-v2/brown-bear/hunt-v1/contact-sheet-native.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c1ca4e2edc72ecf7f307d435d2dc49c8f2e4c7d85207cdd89c634ee5fb52c21b",
+      "source": "art-source/wildlife-v2/brown-bear/hunt-v1"
+    },
+    "preview": "demos/wildlife-v2/brown-bear/hunt-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/contact-sheet-native.png",
+        "sha256": "c1ca4e2edc72ecf7f307d435d2dc49c8f2e4c7d85207cdd89c634ee5fb52c21b"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/index.html",
+        "sha256": "2c9507b109080db504182f27186c3b2edf242b5f90b066c854c2fbbdb2a927dd"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/playback.js",
+        "sha256": "e8d54f10e5cbf46c7c4d7f66de413eb6f48c1a10857cc3e143a59358b4d17f88"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/preview-native.gif",
+        "sha256": "aeaada09fc6f03d7497a590561942899e6705486b657eb6b894b1abe640f9206"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/preview.gif",
+        "sha256": "ba34ccb8464a919483658dd821f622d1065808cc8c7607b78d2dc4f275e0999a"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/review-observations.md",
+        "sha256": "d36e83a303428f7d282266959e1a62c4c0f2c95de5f971024f73c20d4be01b37"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/scale-reference-native.png",
+        "sha256": "31257debfa3a26e4a8daf1efe86522fff3e2dbed182873e1e3296d7c6ff9aff1"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/scene-background.png",
+        "sha256": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/scene-native.gif",
+        "sha256": "00eded312ee2039c82f2d155d19d6eeba23351caa45af56f8f2e6b24ebdc0194"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/scene-native.png",
+        "sha256": "7604aca8b96d956369b373ef0fb44a68ebdb6ad36cc24b1ffad3ac74a5197658"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/sheet.png",
+        "sha256": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/source-audit.json",
+        "sha256": "8dc49f6738b1ba6b785ed95b3ba219e9369cdd242af9dc64febda1a86bca2ac3"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/sprite.json",
+        "sha256": "3fd77305dc9d174e692e78d089c1ae58d2cdd6b5fc49091df63a966d3cb3857b"
+      },
+      {
+        "path": "demos/wildlife-v2/brown-bear/hunt-v1/validation.json",
+        "sha256": "8b97632c5e6526067d7f7d08c1f7ab05a552a57e139f489c80b3e5ea7ea7045b"
+      }
+    ]
   }
 ]

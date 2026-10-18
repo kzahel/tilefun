@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T13:18:50.636Z (18/10/2026, 15:18:50 Berlin).
+Snapshot: 2026-10-18T13:26:39.108Z (18/10/2026, 15:26:39 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -232,7 +232,7 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | tiger | runtime-ready | Stalk/chase/lunge/feed, one-for-one replacement, persistence and shared labs verified · [Playback](../public/demos/wildlife-v2/tiger/pilot-v1/index.html) | Provisional |
 | panther | draft-ready | Editable art and exact pending review; world/editor/hunting/reload validated · [Playback](../public/demos/wildlife-v2/panther/hunt-v1/index.html) | Provisional |
 | lion | draft-ready | Own mane/body source and pending review; world/editor/hunting/reload validated · [Playback](../public/demos/wildlife-v2/lion/hunt-v1/index.html) | Provisional |
-| brown-bear | queued | Own bear anatomy/gait prototype · [Playback](../public/demos/wildlife-v2/brown-bear/hunt-v1/index.html) | Pending |
+| brown-bear | draft-ready | Own broad bear anatomy/gait and pending review; world/editor/hunting/reload validated · [Playback](../public/demos/wildlife-v2/brown-bear/hunt-v1/index.html) | Provisional |
 
 ## Whole roster
 

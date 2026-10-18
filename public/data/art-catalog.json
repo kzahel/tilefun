@@ -306,6 +306,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-brown-bear-predator-v1",
+      "name": "wildlife brown bear predator v1",
+      "image": "demos/wildlife-v2/brown-bear/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
@@ -2053,6 +2063,16 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-brown-bear-hunt-v1",
+      "name": "wildlife v2 brown bear hunt v1",
+      "image": "demos/wildlife-v2/brown-bear/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -21603,6 +21623,24 @@
         384
       ],
       "label": "wildlife-lion-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-brown-bear-predator-v1",
+      "sheetId": "wildlife-brown-bear-predator-v1",
+      "rect": [
+        0,
+        0,
+        2784,
+        384
+      ],
+      "label": "wildlife-brown-bear-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {

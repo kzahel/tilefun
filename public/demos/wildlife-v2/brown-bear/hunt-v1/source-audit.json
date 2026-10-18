@@ -1,0 +1,35 @@
+{
+  "identity": "brown-bear-hunt-v1",
+  "poses": 116,
+  "fixedLengthLinkChecks": 1392,
+  "plantedGroundContacts": 432,
+  "stanceTravelCompensationChecks": 160,
+  "maxProjectionError": 4.99938964537705e-06,
+  "nativeProjectedMotionRangePx": {
+    "down": {
+      "body": 1.30228,
+      "head": 1.98309,
+      "shoulder": 1.73081,
+      "pelvis": 1.33798
+    },
+    "up": {
+      "body": 1.30228,
+      "head": 1.33801,
+      "shoulder": 1.4285,
+      "pelvis": 1.78169
+    },
+    "left": {
+      "body": 1.44154,
+      "head": 1.81074,
+      "shoulder": 1.63486,
+      "pelvis": 1.33098
+    },
+    "right": {
+      "body": 1.44154,
+      "head": 1.53221,
+      "shoulder": 1.35633,
+      "pelvis": 1.60951
+    }
+  },
+  "status": "Saved-source integrity passes; visual observations and human approval separate."
+}

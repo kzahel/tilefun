@@ -1301,3 +1301,13 @@ Predator 132 lion checkpoint: new editable hunt-v1 with a twelve-piece mane,
 complete portable pending review, fixed natural owner, editor placement and
 shared hunting is implemented. Both rendering paths preserve feeding on reload;
 41 focused checks pass. The authorized brown bear is the remaining stage.
+
+Predator 132 brown-bear checkpoint: all four authorized predators now have natural
+world owners, editor placement and shared bounded hunting/feeding. Brown bear has
+its own broad-body, short-tail editable hunt-v1 source with distinct footfall
+sequence; all new art is registered and pending human review. Exact receipts,
+51 focused checks, both renderers, ordinary-world creation/deletion/reopening,
+repeated replacement and two reloads pass. Full units are 2,660 passed with five
+existing Windows platform failures and ten static-file skips. Full browser
+validation is running; evidence and limitations belong to tactical 132. Next
+product step is playtesting hunt frequency and reviewing the native animations.

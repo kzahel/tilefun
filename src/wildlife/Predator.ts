@@ -11,8 +11,23 @@ export const PREDATOR_PROFILES = [
     chaseSpeed: 48,
     weight: 70,
   },
-  { species: "tiger", label: "Tiger", revision: "pilot-v1", speed: 8, chaseSpeed: 40, weight: 180 },
+  {
+    species: "tiger",
+    label: "Wild tiger",
+    revision: "pilot-v1",
+    speed: 8,
+    chaseSpeed: 40,
+    weight: 180,
+  },
   { species: "lion", label: "Lion", revision: "hunt-v1", speed: 8, chaseSpeed: 44, weight: 190 },
+  {
+    species: "brown-bear",
+    label: "Brown bear",
+    revision: "hunt-v1",
+    speed: 7,
+    chaseSpeed: 42,
+    weight: 300,
+  },
 ] as const;
 export type PredatorSpecies = (typeof PREDATOR_PROFILES)[number]["species"];
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
@@ -55,7 +70,14 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
           },
         ],
       },
-      collider: { offsetX: 0, offsetY: 0, width: 22, height: 12, physicalHeight: 24, solid: true },
+      collider: {
+        offsetX: 0,
+        offsetY: 0,
+        width: p.species === "brown-bear" ? 28 : 22,
+        height: p.species === "brown-bear" ? 16 : 12,
+        physicalHeight: 24,
+        solid: true,
+      },
       wanderAI: {
         idleMin: 2,
         idleMax: 5,

@@ -1,0 +1,111 @@
+{
+  "identity": "brown-bear-hunt-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "brown-bear-hunt-v1",
+    "poses": 116,
+    "fixedLengthLinkChecks": 1392,
+    "plantedGroundContacts": 432,
+    "stanceTravelCompensationChecks": 160,
+    "maxProjectionError": 0.00000499938964537705,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.30228,
+        "head": 1.98309,
+        "shoulder": 1.73081,
+        "pelvis": 1.33798
+      },
+      "up": {
+        "body": 1.30228,
+        "head": 1.33801,
+        "shoulder": 1.4285,
+        "pelvis": 1.78169
+      },
+      "left": {
+        "body": 1.44154,
+        "head": 1.81074,
+        "shoulder": 1.63486,
+        "pelvis": 1.33098
+      },
+      "right": {
+        "body": 1.44154,
+        "head": 1.53221,
+        "shoulder": 1.35633,
+        "pelvis": 1.60951
+      }
+    },
+    "status": "Saved-source integrity passes; visual observations and human approval separate."
+  },
+  "capture": {
+    "browser": "153.0.8010.12",
+    "results": [
+      {
+        "pet": "brown-bear",
+        "scale": 1,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      },
+      {
+        "pet": "brown-bear",
+        "scale": 4,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      }
+    ]
+  },
+  "replay": {
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "contact-sheet-native.png": true,
+      "preview.gif": true,
+      "preview-native.gif": true,
+      "scene-native.gif": true,
+      "masters.json": true
+    },
+    "note": "Blender save container identity is not a deterministic image artifact."
+  },
+  "visualReview": {
+    "observer": "coordinator",
+    "observations": "public/demos/wildlife-v2/brown-bear/hunt-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/brown-bear/hunt-v1/animal.blend": "5627758c78239dbcb515df7098693a16db6e8864a38b1df977c037d1463a5166",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/audit.py": "e83e7c36a6d69d203b12dbba750c6e60a1e5bfd6f2593b390ce3d3fa52ef9ddb",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/build.py": "b737f43dc9299bf996fd6e68ebf416b0dff009e8477df8aedca8d08dc2bf6fa6",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/capture.mjs": "b8d33407bee14bbe9838ea9a658a1dbc5504d025202b1b1bb921e2e99bee9edd",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/finish.py": "64cd216736eb477dfafc8353837a8bef7f50d72f36599985a228939709b519e3",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/index.html": "2c9507b109080db504182f27186c3b2edf242b5f90b066c854c2fbbdb2a927dd",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/masters.json": "c9de815e66358f845ea0fba300babe965d47013c344be0081476e1055b8e40db",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/playback.js": "e8d54f10e5cbf46c7c4d7f66de413eb6f48c1a10857cc3e143a59358b4d17f88",
+    "art-source/wildlife-v2/brown-bear/hunt-v1/README.md": "3f5a4f02096eaddd3aa6c4a8fc69cd5bf328e5c8653c0fc9a274a63404996aef",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/contact-sheet-native.png": "c1ca4e2edc72ecf7f307d435d2dc49c8f2e4c7d85207cdd89c634ee5fb52c21b",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/index.html": "2c9507b109080db504182f27186c3b2edf242b5f90b066c854c2fbbdb2a927dd",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/playback.js": "e8d54f10e5cbf46c7c4d7f66de413eb6f48c1a10857cc3e143a59358b4d17f88",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/preview-native.gif": "aeaada09fc6f03d7497a590561942899e6705486b657eb6b894b1abe640f9206",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/preview.gif": "ba34ccb8464a919483658dd821f622d1065808cc8c7607b78d2dc4f275e0999a",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/review-observations.md": "d36e83a303428f7d282266959e1a62c4c0f2c95de5f971024f73c20d4be01b37",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/scale-reference-native.png": "31257debfa3a26e4a8daf1efe86522fff3e2dbed182873e1e3296d7c6ff9aff1",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/scene-background.png": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/scene-native.gif": "00eded312ee2039c82f2d155d19d6eeba23351caa45af56f8f2e6b24ebdc0194",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/scene-native.png": "7604aca8b96d956369b373ef0fb44a68ebdb6ad36cc24b1ffad3ac74a5197658",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/sheet.png": "9c7a98d61ca3250a36802ebf30ce3097c0578d208912b9bdd4ac8fd182c00ecc",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/source-audit.json": "8dc49f6738b1ba6b785ed95b3ba219e9369cdd242af9dc64febda1a86bca2ac3",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/sprite.json": "3fd77305dc9d174e692e78d089c1ae58d2cdd6b5fc49091df63a966d3cb3857b",
+    "public/demos/wildlife-v2/brown-bear/hunt-v1/validation.json": "8b97632c5e6526067d7f7d08c1f7ab05a552a57e139f489c80b3e5ea7ea7045b",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-predator.mjs": "ec56382b22c8ccfb21159000157eb325af7df271aec922ecc5fe16c0a3232475",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

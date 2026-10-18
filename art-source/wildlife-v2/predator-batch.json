@@ -27,9 +27,9 @@
     {
       "id": "brown-bear",
       "revision": "hunt-v1",
-      "state": "queued",
-      "stage": "Own bear anatomy/gait prototype",
-      "gameplay": false
+      "state": "draft-ready",
+      "stage": "Own broad bear anatomy/gait and pending review; world/editor/hunting/reload validated",
+      "gameplay": true
     }
   ],
   "reviewStatus": "pending",
