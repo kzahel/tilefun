@@ -1,5 +1,7 @@
 import { expect, type Page } from "@playwright/test";
 export async function openHome(page: Page): Promise<void> {
+  // Own the opening toggle: a caller's preceding Escape may still be awaiting
+  // the Worker realm list, so a second Escape can close the newly opened menu.
   const menu = page.getByTestId("world-menu");
   if (!(await menu.isVisible())) await page.keyboard.press("Escape");
   await expect(menu).toBeVisible();

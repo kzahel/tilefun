@@ -9,6 +9,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
   await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
   await page.getByPlaceholder("World name...").fill("Retired town");
   await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute(
     "data-generation",
     JSON.stringify(generation),
@@ -46,12 +47,12 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
   });
   await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await page.keyboard.press("Escape");
   await openWorlds(page);
   await expect(
     page.getByText("Retired generator — recreate to play.", { exact: true }),
   ).toBeVisible();
   await page.getByRole("button", { name: "Recreate with same seed", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute(
     "data-generation",
     JSON.stringify(generation),
@@ -65,7 +66,6 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
       ).__game.mainMenu.currentWorldId,
   );
   expect(recreated).not.toBe(original);
-  await page.keyboard.press("Escape");
   await openWorlds(page);
   await expect(page.getByText("Retired town", { exact: true })).toBeVisible();
   await expect(page.getByText("Retired town (recreated)", { exact: true })).toBeVisible();

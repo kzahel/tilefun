@@ -91,3 +91,16 @@ default save directory; the opt-in debug endpoint and isolated acceptance save
 directory are not part of the normal launch configuration. Distribution beyond
 the measured Deck, Steam storefront integration, Steam Cloud and TURN relay
 service remain separate work. Next is a hands-on parent/child controller session.
+
+## CI menu navigation follow-up (2026-10-19)
+
+Run [39171151876](https://github.com/kzahel/tilefun/actions/runs/39171151876)
+exposes a duplicate menu toggle in world-generation tests. A preceding Escape
+starts an asynchronous Worker realm-list request; `openCreate`/`openWorlds` can
+still see a hidden menu and send another Escape, closing it after the first
+request completes. The helpers now own opening exclusively. Redundant toggles
+are removed from generation and recreation checks; recreation also waits for
+world joins before capturing container identity. No menu runtime behavior changed.
+All six generation/recreation checks pass three consecutive single-worker full
+Chromium runs (18 checks total); typechecks and lint pass. The full eight-case
+vehicle-driving file also passes, including the prior CI reversal failure.

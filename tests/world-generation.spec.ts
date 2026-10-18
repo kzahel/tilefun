@@ -12,7 +12,6 @@ test("new worlds and the explorer default to the newest regional revision", asyn
     (await page.locator("#game").getAttribute("data-generation")) ?? "null",
   );
   expect(initial).toMatchObject({ type: "regional", version: LATEST_REGIONAL_REVISION });
-  await page.keyboard.press("Escape");
   await openCreate(page);
   const type = page.getByRole("combobox", { name: "World type" });
   const revision = page.getByRole("combobox", { name: "Regional revision" });
@@ -80,7 +79,6 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect(canvas).toHaveAttribute("data-generator", worldType);
     await expect(canvas).toHaveAttribute("data-generation", JSON.stringify(generation));
-    await page.keyboard.press("Escape");
     await openWorlds(page);
     await expect(
       page.getByText(`${worldType} · seed 2026 · ${generation.version}`, { exact: true }),
