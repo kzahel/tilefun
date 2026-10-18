@@ -644,6 +644,13 @@ pending jobs and requested GPU upload bytes. The bounded gate enforces the row
 cap, catch-up and warm-cache reuse; it deliberately does not require zero
 transient gaps. `--assert-ready` remains the strict ordinary movement gate.
 
+The terrain-pacing browser regression attributes GPU upload bytes to terrain
+pass submission during its warm-cache assertion. Global `uploadedBytes`
+also includes newly visible vehicle/sprite pages (the 688,128-byte CI delta on
+2026-10-18 matches the page allocation investigated in 052). The regression
+forces an unrelated page upload during its warm sample and requires terrain
+uploads to remain unchanged; global upload stability is not a terrain invariant.
+
 This bounds terrain raster submission, not the whole frame. Membership scans,
 collection, entity counts, uploads and driver execution can still grow with the
 view. A row is indivisible, so time deadlines may overshoot. Next boundaries are
