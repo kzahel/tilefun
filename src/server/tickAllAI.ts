@@ -32,7 +32,9 @@ export function tickAllAI(
 ): void {
   const buddies = entities.filter((e) => e.wanderAI?.following);
   let entries = [...entityTickDts].filter(
-    ([e]) => e.wanderAI || e.fauna || e.deer || e.robin || e.rabbit || e.frog || e.mallard,
+    ([e]) =>
+      !e.resident &&
+      (e.wanderAI || e.fauna || e.deer || e.robin || e.rabbit || e.frog || e.mallard),
   );
   const budget = planning?.budget ?? robinWorkBudget();
   if (planning) {

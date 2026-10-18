@@ -11,6 +11,8 @@ import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog
 import { compileFurniture } from "./FurnitureLayout.js";
 import { furnitureCollider } from "./FurniturePhysics.js";
 import sources from "./gameplay-furniture-sources.json" with { type: "json" };
+import { indoorResidents } from "./IndoorResidents.js";
+import { dressLivedInMap } from "./LivedInLayouts.js";
 
 export class InvalidInteriorError extends Error {}
 
@@ -72,7 +74,7 @@ export function interiorPlan(identity: InteriorIdentity) {
     const plan = parseFloorPlan(sketch);
     return {
       plan,
-      map: buildLayeredApartmentPlan(plan),
+      map: dressLivedInMap(buildLayeredApartmentPlan(plan), identity),
       furniture,
       objects: compileFurniture(plan, furniture),
     };
@@ -100,7 +102,12 @@ export function interiorPlan(identity: InteriorIdentity) {
           { id: "dresser", asset: "dresser", x: 112, y: 100 },
         ];
   const objects = compileFurniture(plan, furniture, INTERIOR_FLOOR);
-  return { plan, map: buildLayeredApartmentPlan(plan), furniture, objects };
+  return {
+    plan,
+    map: dressLivedInMap(buildLayeredApartmentPlan(plan), identity),
+    furniture,
+    objects,
+  };
 }
 export function furnitureAsset(type: string): string | null {
   if (!type.startsWith(FURNITURE_PROP_PREFIX)) return null;
@@ -170,6 +177,10 @@ export function interiorGenerator(identity: InteriorIdentity, seed: number): Wor
   return {
     descriptor: createDescriptor("flat", seed),
     terrain: new FlatStrategy(),
+    actors: (cx, cy) =>
+      indoorResidents(identity).filter(
+        (p) => Math.floor(p.wx / 256) === cx && Math.floor(p.wy / 256) === cy,
+      ),
     placements: (cx, cy) => ({
       newIntersectionKeys: [],
       placements: fixtures

@@ -1,0 +1,42 @@
+{
+  "reader": {
+    "walk": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Molly_16x16.png",
+    "action": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Molly_reading_16x16.png",
+    "actionFrames": 18,
+    "sourceHashes": [
+      "d9dfa94bc46918bab8f9a7893c47d1c38226b1fea92f8f8dbac2f8146b34c723",
+      "0dd237f5d19039a247bf1afac9173560a9b9b0e71a7967627d29cc5283e38958"
+    ],
+    "outputHash": "728d9871ad8118c670295b0469f89001aab813938412b51d6db106974fa667d7"
+  },
+  "diner": {
+    "walk": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Alex_16x16.png",
+    "action": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Alex_sit3_16x16.png",
+    "actionFrames": 6,
+    "sourceHashes": [
+      "cb7c63daf33d4d2a6e919ea0cacdc179c6c41725ac33fc430aad9b9f8484f5c1",
+      "cf9fc90b4e66749f7b7fb4899a8c1c56aae2a46687f8b6f45c8511fe7ca39b6f"
+    ],
+    "outputHash": "7831a54d0850532f4e7f640ec1a84fbb359c4053ab3901e8819ba9b70fbbd060"
+  },
+  "cleaner": {
+    "walk": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Cleaner_girl_16x16.png",
+    "action": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Cleaner_girl_clean_16x16.png",
+    "actionFrames": 17,
+    "sourceHashes": [
+      "c362410da61ee3880568f75422b0f5e62c6e8235f50b83136a534ea6326def8f",
+      "10f012c66448d76a70391cc33429bd7edf5a27cf246bdc53e7c08b2d43e18ece"
+    ],
+    "outputHash": "f39d267a526b1a8a44606fcf639a3bde30c692bf34c8d360bb95978f5134b33b"
+  },
+  "chef": {
+    "walk": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Chef_Lucy_16x16.png",
+    "action": "assets/interiors/2_Characters/Old/Single_Characters_Legacy/16x16/Chef_Lucy_idle_anim_16x16.png",
+    "actionFrames": 6,
+    "sourceHashes": [
+      "dacec1ab1ca8a043f656ad1e8924d0d39f990716c410624db603223e64f82624",
+      "773ebb12da4c40883d8ab04ae6d829cc7af6e0001cdc199f3934ebd3de82d828"
+    ],
+    "outputHash": "e58b4ee7f7bf72199b306dc03c98c271f0044ea57b38c600595edef6eb61fc51"
+  }
+}

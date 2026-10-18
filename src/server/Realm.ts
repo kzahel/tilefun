@@ -57,6 +57,7 @@ import {
   parseGameplayRoom,
   validateRoomOccupancy,
 } from "../interiors/GameplayRoom.js";
+import { updateResident } from "../interiors/ResidentBehavior.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
 import { actorScope } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
@@ -262,6 +263,50 @@ export class Realm {
   lastLoadedPlayerPos = { wx: 0, wy: 0 };
   currentWorldId: string | null = null;
   interior: InteriorIdentity | null = null;
+  /** At most nearby visited rooms/door trips; supplied by GameServer. */
+  readonly backgroundResidents = new Set<Entity>();
+
+  residentCanOccupy(entity: Entity, position: { wx: number; wy: number }, actors = false): boolean {
+    if (!entity.collider) return false;
+    const box = getEntityAABB(position, entity.collider);
+    if (
+      this.roomGeometry &&
+      !this.roomGeometry.onFloor({
+        x: box.left,
+        y: box.top,
+        width: box.right - box.left,
+        height: box.bottom - box.top,
+      })
+    )
+      return false;
+    if (!this.world.chunks.get(Math.floor(position.wx / 256), Math.floor(position.wy / 256)))
+      return false;
+    if (
+      aabbOverlapsSolid(
+        box,
+        (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
+        CollisionFlag.Solid | CollisionFlag.Water,
+      )
+    )
+      return false;
+    if (
+      this.propManager
+        .getPropsNearPosition(position, entity.collider)
+        .some((prop) =>
+          aabbOverlapsPropWalls(box, prop.position, prop, 0, entity.collider?.physicalHeight ?? 24),
+        )
+    )
+      return false;
+    return (
+      !actors ||
+      !this.entityManager.entities.some(
+        (other) =>
+          other !== entity &&
+          other.collider &&
+          aabbsOverlap(box, getEntityAABB(other.position, other.collider)),
+      )
+    );
+  }
   roomEditor: GameplayRoomEditor | null = null;
   private roomGeometry: ReturnType<typeof compileGameplayRoom> | null = null;
   get roomState() {
@@ -274,7 +319,7 @@ export class Realm {
     validateRoomOccupancy(
       room,
       this.propManager.props,
-      [...this.sessions.values()].map((s) => s.player),
+      this.entityManager.entities.filter((e) => e.type === "player" || e.resident),
     );
     const old = this.propManager.props.find((p) => p.type === INTERIOR_WALL_TYPE);
     if (old) this.propManager.remove(old.id, false);
@@ -920,7 +965,7 @@ export class Realm {
         !dormantClientIds.has(s.clientId) &&
         this.sessionSupported(s, dt),
     );
-    if (activeSessions.length > 0) {
+    if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0)) {
       const physicsSteps = Math.max(1, this.physicsMult);
       const stepDt = dt / physicsSteps;
       const players = activeSessions.map((s) => s.player);
@@ -940,6 +985,11 @@ export class Realm {
         this.traffic?.tickShopping(stepDt, landingCarryExcluded);
         // Merge entity tick tiers across all active sessions' visible ranges.
         const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, stepDt);
+        if (!storagePaused)
+          for (const e of this.backgroundResidents)
+            if (!this.streaming || this.streaming.supported(e, stepDt))
+              entityTickDts.set(e, stepDt);
+        for (const [e] of entityTickDts) if (e.resident?.transferring) entityTickDts.delete(e);
         this.parking?.admitShoppers(entityTickDts, stepDt);
         this.traffic?.admitShoppingShoppers(entityTickDts, stepDt);
         for (const session of this.sessions.values()) {
@@ -1006,6 +1056,10 @@ export class Realm {
           this.robinTurn++,
           this.aiPlanning,
         );
+
+        for (const [entity, elapsed] of entityTickDts)
+          if (entity.resident)
+            updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
 
         // ── TickService.preSimulation ──
         this.worldAPI.tick.firePre(stepDt);
@@ -1494,7 +1548,7 @@ export class Realm {
             validateRoomOccupancy(
               room,
               proposed,
-              [...this.sessions.values()].map((s) => s.player),
+              this.entityManager.entities.filter((e) => e.type === "player" || e.resident),
             );
           } catch {
             break;
@@ -2169,7 +2223,7 @@ export class Realm {
           validateRoomOccupancy(
             this.roomGeometry,
             [...this.propManager.props, prop],
-            [...this.sessions.values()].map((s) => s.player),
+            this.entityManager.entities.filter((e) => e.type === "player" || e.resident),
           );
         } catch {
           return;

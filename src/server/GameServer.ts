@@ -7,6 +7,7 @@ import {
 import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
+import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { baseGameMod } from "../game/base-game.js";
@@ -20,7 +21,7 @@ import {
 import { createGenerator } from "../generation/Generator.js";
 import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
-import { buildingDoor, exteriorDoors, withBuildingLayout } from "../interiors/BuildingDoors.js";
+import { buildingDoor, exteriorDoors, withLivedInLayout } from "../interiors/BuildingDoors.js";
 import {
   atDoorThreshold,
   DOOR_FADE_MS,
@@ -52,6 +53,7 @@ import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
 import { type RealmDestination, RealmTransitions } from "./RealmTransitions.js";
+import { transferResident } from "./ResidentTransfer.js";
 import { type Arrival, safeArrival } from "./SafeArrival.js";
 import { ServerLoop } from "./ServerLoop.js";
 import type { WorldAPIImpl } from "./WorldAPI.js";
@@ -589,6 +591,7 @@ export class GameServer {
     const timing = performanceMetrics.start();
     const scaledDt = dt * this.timeScale;
     const dormantIds = new Set(this.dormantSessions.keys());
+    this.prepareResidentActivity(dormantIds);
     for (const realm of this.realms.values()) {
       realm.tick(
         scaledDt,
@@ -598,6 +601,7 @@ export class GameServer {
         this.locations?.pressured ?? false,
       );
     }
+    this.crossResidentDoors();
     if (this.locations && !this.checkpointPending && Date.now() - this.lastCheckpoint >= 5000) {
       this.lastCheckpoint = Date.now();
       this.checkpointPending = true;
@@ -610,6 +614,96 @@ export class GameServer {
     this.completedTicks++;
     this.checkIdleRealms();
     performanceMetrics.end("server.tick", timing);
+  }
+
+  private readonly residentTransfers = new Map<string, Promise<void>>();
+
+  /** Only visited interiors near an awake street player, or a visitor whose
+   * home is occupied, receive background work. Never simulate a whole city's homes. */
+  private prepareResidentActivity(dormant: ReadonlySet<string>): void {
+    const awake = (realm: Realm) =>
+      [...realm.sessions.values()].some(
+        (s) => !dormant.has(s.clientId) && !s.debugPaused && !s.transitioning && !s.retired,
+      );
+    let nearbyRooms = 0;
+    for (const realm of this.realms.values()) {
+      realm.backgroundResidents.clear();
+      const owners = new Set<string>();
+      const parent = realm.interior ? this.realms.get(realm.interior.parentWorldId) : undefined;
+      const door = realm.interior ? buildingDoor(realm.interior).outside : undefined;
+      const nearby =
+        parent &&
+        door &&
+        nearbyRooms < 4 &&
+        [...parent.sessions.values()].some(
+          (s) =>
+            !dormant.has(s.clientId) &&
+            !s.debugPaused &&
+            !s.retired &&
+            Math.hypot(s.player.position.wx - door.wx, s.player.position.wy - door.wy) < 384,
+        );
+      if (nearby) nearbyRooms++;
+      for (const entity of realm.entityManager.entities) {
+        const r = entity.resident;
+        if (!r) continue;
+        const home = this.realms.get(r.homeRealm);
+        if (nearby || (r.place === "outside" && home && awake(home))) {
+          realm.backgroundResidents.add(entity);
+          realm.idleSince = null;
+          const owner = `resident:${entity.persistentId}`;
+          owners.add(owner);
+          const cx = Math.floor(entity.position.wx / 256),
+            cy = Math.floor(entity.position.wy / 256);
+          realm.streaming?.interest.set(owner, [
+            {
+              range: { minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 },
+              activity: 0,
+              reason: "dependency",
+            },
+          ]);
+        }
+      }
+      realm.streaming?.interest.retainOwners(owners, "resident:");
+      if (!realm.sessions.size && !realm.backgroundResidents.size && realm.idleSince === null)
+        realm.idleSince = Date.now();
+    }
+  }
+
+  private crossResidentDoors(): void {
+    for (const realm of this.realms.values())
+      for (const entity of realm.entityManager.entities) {
+        const r = entity.resident,
+          id = entity.persistentId;
+        if (!r || !id || r.phase !== "transfer" || this.residentTransfers.has(id)) continue;
+        const crossing = this.moveResident(realm, entity)
+          .catch((error) => {
+            // An occupied/deleted doorway leaves the same resident waiting at its source.
+            if (entity.resident) {
+              delete entity.resident.transferring;
+              entity.resident.phase = "act";
+              entity.resident.elapsed = -2;
+            }
+            if (realm.saveManager?.pressured) this.reportStorageFailure(error);
+          })
+          .finally(() => this.residentTransfers.delete(id));
+        this.residentTransfers.set(id, crossing);
+        void this.trackOperation(crossing);
+      }
+  }
+
+  private async moveResident(source: Realm, entity: Entity): Promise<void> {
+    const r = entity.resident;
+    if (!r) throw new Error("Missing resident behavior");
+    r.transferring = true;
+    const home = await this.getOrCreateRealm(r.homeRealm);
+    if (!home.interior) throw new Error("Resident home is unavailable");
+    const door = buildingDoor(home.interior, r.doorId);
+    const destination = r.place === "inside" ? await this.getOrCreateRealm(r.parentRealm) : home;
+    const position = destination.interior ? door.arrival : door.outside;
+    const cx = Math.floor(position.wx / 256),
+      cy = Math.floor(position.wy / 256);
+    await destination.ensureReady({ minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 });
+    await transferResident(source, destination, entity, position);
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */
@@ -850,7 +944,7 @@ export class GameServer {
       ?.blocks.flatMap((b) => b.lots)
       .find((l) => l.id === parsed.featureId);
     if (!lot) throw new Error("Building is absent from the pinned district plan.");
-    const interior: InteriorIdentity = withBuildingLayout(
+    const interior: InteriorIdentity = withLivedInLayout(
       {
         version: "interior-v1",
         ...parsed,
@@ -1138,6 +1232,12 @@ export class GameServer {
     for (const [worldId, realm] of this.realms) {
       if (worldId === this.defaultRealmId) continue;
       if (realm.idleSince === null) continue;
+      if (
+        this.residentTransfers.size ||
+        realm.backgroundResidents.size ||
+        [...realm.entityManager.entities].some((e) => e.resident?.transferring)
+      )
+        continue;
       if (now - realm.idleSince >= GameServer.REALM_IDLE_TIMEOUT_MS) {
         console.log(`[tilefun] unloading idle realm: ${worldId}`);
         realm.idleSince = null;

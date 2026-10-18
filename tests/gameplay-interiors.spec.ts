@@ -44,7 +44,7 @@ for (const kind of ["apartment", "shop"] as const)
               .length,
         ),
       )
-      .toBe(kind === "apartment" ? 6 : 5);
+      .toBe(kind === "apartment" ? 18 : 13);
     await page.screenshot({ path: `/tmp/tilefun-gameplay-interior-${kind}.png` });
     if (kind === "apartment") {
       const player = () =>
@@ -61,9 +61,9 @@ for (const kind of ["apartment", "shop"] as const)
       await page.keyboard.up("Space");
       await expect.poll(async () => Math.abs((await player()).wz ?? 0)).toBeLessThan(1);
       const y = (await player()).position.wy;
-      await page.keyboard.down("ArrowDown");
-      await expect.poll(async () => (await player()).position.wy - y).toBeGreaterThan(4);
-      await page.keyboard.up("ArrowDown");
+      await page.keyboard.down("ArrowUp");
+      await expect.poll(async () => y - (await player()).position.wy).toBeGreaterThan(4);
+      await page.keyboard.up("ArrowUp");
     }
     await page.getByRole("button", { name: "Return to street" }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
@@ -92,7 +92,7 @@ for (const kind of ["apartment", "shop"] as const)
           return game.stateView.props.filter((p) => p.type.startsWith("prop-interior-furniture:"))
             .length;
         });
-      await expect.poll(remainingFurniture).toBe(kind === "apartment" ? 6 : 5);
+      await expect.poll(remainingFurniture).toBe(kind === "apartment" ? 18 : 13);
       await page.evaluate(() => {
         const game = (
           document.querySelector("#game") as unknown as {
@@ -101,13 +101,13 @@ for (const kind of ["apartment", "shop"] as const)
         ).__game;
         const bed = game.stateView.props.find((p) => p.proceduralId === "fixture:bed");
         if (!bed) throw new Error("Missing bed");
-        const table = game.stateView.props.find((p) => p.proceduralId === "fixture:side-table");
+        const table = game.stateView.props.find((p) => p.proceduralId === "fixture:bedside");
         if (!table) throw new Error("Missing side table");
-        game.transport.send({ type: "edit-move-prop", propId: table.id, wx: 120, wy: 112 });
+        game.transport.send({ type: "edit-move-prop", propId: table.id, wx: 96, wy: 80 });
         game.transport.send({ type: "edit-delete-prop", propId: bed.id });
         game.transport.send({ type: "flush" });
       });
-      await expect.poll(remainingFurniture).toBe(5);
+      await expect.poll(remainingFurniture).toBe(17);
       await page.getByRole("button", { name: "Return to street" }).click();
       // The click starts an asynchronous realm transfer; save its completed destination.
       await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
@@ -119,7 +119,7 @@ for (const kind of ["apartment", "shop"] as const)
       if (await resume.isVisible()) await resume.click();
       await expect(enter).toBeVisible();
       await enter.click();
-      await expect.poll(remainingFurniture).toBe(5);
+      await expect.poll(remainingFurniture).toBe(17);
       await expect
         .poll(() =>
           page.evaluate(
@@ -128,11 +128,11 @@ for (const kind of ["apartment", "shop"] as const)
                 document.querySelector("#game") as unknown as {
                   __game: import("../src/client/GameClient.js").GameClient;
                 }
-              ).__game.stateView.props.find((p) => p.proceduralId === "fixture:side-table")
-                ?.position.wx,
+              ).__game.stateView.props.find((p) => p.proceduralId === "fixture:bedside")?.position
+                .wx,
           ),
         )
-        .toBe(120);
+        .toBe(96);
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
       // A reload resumes the same interior, including the saved furniture.
       await stopLocalWorld(page);
@@ -141,7 +141,7 @@ for (const kind of ["apartment", "shop"] as const)
       const resumeAfterInterior = page.getByRole("button", { name: "Resume", exact: true });
       if (await resumeAfterInterior.isVisible()) await resumeAfterInterior.click();
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
-      await expect.poll(remainingFurniture).toBe(5);
+      await expect.poll(remainingFurniture).toBe(17);
     }
     expect(errors).toEqual([]);
   });

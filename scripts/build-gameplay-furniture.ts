@@ -1,12 +1,12 @@
 import { readFileSync, writeFileSync } from "node:fs";
-import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
+import { GAMEPLAY_FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
 
 const index = JSON.parse(readFileSync("public/data/modern-interiors-atlas.json", "utf8")) as {
   entries: { key: string; rect: number[] }[];
 };
 const entries = new Map(index.entries.map((entry) => [entry.key, entry.rect]));
 const facts = Object.fromEntries(
-  FURNITURE_CATALOG.map((def) => {
+  GAMEPLAY_FURNITURE_CATALOG.map((def) => {
     const rect = entries.get(def.key);
     if (!rect || rect[2] !== def.size[0] || rect[3] !== def.size[1])
       throw new Error(`Invalid source sprite: ${def.key}`);

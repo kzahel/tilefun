@@ -20,6 +20,7 @@ import {
   interiorPlan,
   interiorWalls,
 } from "./GameplayInterior.js";
+import { dressLivedInMap } from "./LivedInLayouts.js";
 
 export interface GameplayRoomState {
   version: 1;
@@ -81,7 +82,7 @@ export function compileGameplayRoom(identity: InteriorIdentity, state: GameplayR
     throw new Error(
       "Only connected street doorways may open onto the void. Interior doors must connect two rooms.",
     );
-  const map = buildLayeredApartmentPlan(plan);
+  const map = dressLivedInMap(buildLayeredApartmentPlan(plan), identity);
   const width = state.document.width * 32,
     height = state.document.height * 32;
   const mask = new Uint8Array(width * height);

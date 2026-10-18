@@ -126,6 +126,7 @@ export interface Entity {
   predator?: PredatorBehavior;
   deer?: DeerBehavior;
   fauna?: FaunaBehavior;
+  resident?: import("../interiors/ResidentBehavior.js").ResidentBehavior;
   routeAI?: {
     points: readonly RouteWaypoint[];
     index: number;

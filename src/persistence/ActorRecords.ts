@@ -3,6 +3,7 @@ import type { Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
+import { restoreResidentPose } from "../interiors/ResidentBehavior.js";
 import { generateUUID } from "../shared/uuid.js";
 import { restoreDeerPose } from "../wildlife/deerInteractions.js";
 import { restoreFaunaPose } from "../wildlife/faunaInteractions.js";
@@ -38,6 +39,7 @@ export const DURABLE_ENTITY_FIELDS = [
   "fauna",
   "predator",
   "routeAI",
+  "resident",
   "deathTimer",
   "wz",
   "jumpVZ",
@@ -62,6 +64,11 @@ export function encodeActor(actor: Entity | Prop, parent?: Entity): ActorRecord 
   const state: Partial<Entity> = {};
   if (!("isProp" in actor)) {
     for (const field of DURABLE_ENTITY_FIELDS) Object.assign(state, { [field]: actor[field] });
+  }
+  if (state.resident) {
+    const resident = JSON.parse(JSON.stringify(state.resident)) as NonNullable<Entity["resident"]>;
+    delete resident.transferring;
+    state.resident = resident;
   }
   // Semantic payload contains plain numeric/boolean/string data; JSON also strips
   // undefined optionals and unwraps mutation-observed component objects.
@@ -133,6 +140,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     restoreDeerPose(actor);
     restoreFaunaPose(actor);
     restorePredatorPose(actor);
+    restoreResidentPose(actor);
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;

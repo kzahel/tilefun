@@ -1526,6 +1526,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "indoor-reader",
+      "name": "indoor reader",
+      "image": "assets/sprites/indoor/reader.png",
+      "width": 768,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "728d9871ad8118c670295b0469f89001aab813938412b51d6db106974fa667d7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "indoor-diner",
+      "name": "indoor diner",
+      "image": "assets/sprites/indoor/diner.png",
+      "width": 384,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7831a54d0850532f4e7f640ec1a84fbb359c4053ab3901e8819ba9b70fbbd060",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "indoor-cleaner",
+      "name": "indoor cleaner",
+      "image": "assets/sprites/indoor/cleaner.png",
+      "width": 736,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "f39d267a526b1a8a44606fcf639a3bde30c692bf34c8d360bb95978f5134b33b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "indoor-chef",
+      "name": "indoor chef",
+      "image": "assets/sprites/indoor/chef.png",
+      "width": 384,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e58b4ee7f7bf72199b306dc03c98c271f0044ea57b38c600595edef6eb61fc51",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "prop-tent-blue",
       "name": "prop tent blue",
       "image": "assets/props/tent-blue.png",
@@ -4187,7 +4227,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:118"
+          "source": "src/assets/GameAssets.ts:125"
         },
         {
           "system": "Gameplay",
@@ -4233,7 +4273,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:119"
+          "source": "src/assets/GameAssets.ts:126"
         },
         {
           "system": "Gameplay",
@@ -4271,7 +4311,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:120"
+          "source": "src/assets/GameAssets.ts:127"
         },
         {
           "system": "Gameplay",
@@ -4301,7 +4341,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:121"
+          "source": "src/assets/GameAssets.ts:128"
         },
         {
           "system": "Gameplay",
@@ -4331,7 +4371,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:122"
+          "source": "src/assets/GameAssets.ts:129"
         },
         {
           "system": "Gameplay",
@@ -4365,7 +4405,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:123"
+          "source": "src/assets/GameAssets.ts:130"
         },
         {
           "system": "Gameplay",
@@ -4463,7 +4503,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:124"
+          "source": "src/assets/GameAssets.ts:131"
         },
         {
           "system": "Gameplay",
@@ -4493,7 +4533,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:125"
+          "source": "src/assets/GameAssets.ts:132"
         },
         {
           "system": "Gameplay",
@@ -4539,7 +4579,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:126"
+          "source": "src/assets/GameAssets.ts:133"
         },
         {
           "system": "Gameplay",
@@ -4577,7 +4617,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:128"
+          "source": "src/assets/GameAssets.ts:135"
         },
         {
           "system": "Gameplay",
@@ -4607,7 +4647,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:129"
+          "source": "src/assets/GameAssets.ts:136"
         },
         {
           "system": "Gameplay",
@@ -4641,7 +4681,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:130"
+          "source": "src/assets/GameAssets.ts:137"
         },
         {
           "system": "Gameplay",
@@ -4675,7 +4715,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:131"
+          "source": "src/assets/GameAssets.ts:138"
         },
         {
           "system": "Gameplay",
@@ -4705,7 +4745,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:132"
+          "source": "src/assets/GameAssets.ts:139"
         },
         {
           "system": "Gameplay",
@@ -4739,7 +4779,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:133"
+          "source": "src/assets/GameAssets.ts:140"
         },
         {
           "system": "Gameplay",
@@ -4769,7 +4809,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:134"
+          "source": "src/assets/GameAssets.ts:141"
         },
         {
           "system": "Gameplay",
@@ -4799,7 +4839,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:135"
+          "source": "src/assets/GameAssets.ts:142"
         },
         {
           "system": "Gameplay",
@@ -4829,7 +4869,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:136"
+          "source": "src/assets/GameAssets.ts:143"
         },
         {
           "system": "Gameplay",
@@ -4859,7 +4899,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:137"
+          "source": "src/assets/GameAssets.ts:144"
         },
         {
           "system": "Gameplay",
@@ -5069,11 +5109,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:39"
+          "source": "src/interiors/GameplayInterior.ts:41"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:91"
+          "source": "src/interiors/GameplayInterior.ts:93"
         },
         {
           "system": "Gameplay",
@@ -20545,7 +20585,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:38"
+          "source": "src/interiors/BuildingLayouts.ts:40"
         },
         {
           "system": "Interiors",
@@ -20557,11 +20597,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurniturePhysics.ts:15"
+          "source": "src/interiors/FurniturePhysics.ts:27"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:98"
+          "source": "src/interiors/GameplayInterior.ts:100"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:49"
         },
         {
           "system": "Interiors",
@@ -20599,7 +20643,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurniturePhysics.ts:11"
+          "source": "src/interiors/FurniturePhysics.ts:23"
         },
         {
           "system": "Interiors",
@@ -20641,6 +20685,18 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:51"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:51"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:89"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/review/FurnitureReviewCases.ts:27"
         },
         {
@@ -20679,15 +20735,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:39"
+          "source": "src/interiors/BuildingLayouts.ts:41"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:39"
+          "source": "src/interiors/BuildingLayouts.ts:41"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:47"
+          "source": "src/interiors/BuildingLayouts.ts:49"
         },
         {
           "system": "Interiors",
@@ -20719,11 +20775,19 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:100"
+          "source": "src/interiors/GameplayInterior.ts:102"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:100"
+          "source": "src/interiors/GameplayInterior.ts:102"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:52"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:52"
         },
         {
           "system": "Interiors",
@@ -20777,11 +20841,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:40"
+          "source": "src/interiors/BuildingLayouts.ts:42"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:40"
+          "source": "src/interiors/BuildingLayouts.ts:42"
         },
         {
           "system": "Interiors",
@@ -20801,15 +20865,19 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurniturePhysics.ts:16"
+          "source": "src/interiors/FurniturePhysics.ts:28"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:99"
+          "source": "src/interiors/GameplayInterior.ts:101"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:99"
+          "source": "src/interiors/GameplayInterior.ts:101"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:50"
         },
         {
           "system": "Interiors",
@@ -20843,15 +20911,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:41"
-        },
-        {
-          "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:46"
+          "source": "src/interiors/BuildingLayouts.ts:43"
         },
         {
           "system": "Interiors",
           "source": "src/interiors/BuildingLayouts.ts:48"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/BuildingLayouts.ts:50"
         },
         {
           "system": "Interiors",
@@ -20867,7 +20935,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:87"
+          "source": "src/interiors/GameplayInterior.ts:89"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:71"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:90"
         },
         {
           "system": "Interiors",
@@ -20909,15 +20985,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:42"
+          "source": "src/interiors/BuildingLayouts.ts:44"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:49"
+          "source": "src/interiors/BuildingLayouts.ts:51"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:49"
+          "source": "src/interiors/BuildingLayouts.ts:51"
         },
         {
           "system": "Interiors",
@@ -20949,15 +21025,35 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:88"
+          "source": "src/interiors/GameplayInterior.ts:90"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:88"
+          "source": "src/interiors/GameplayInterior.ts:90"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:95"
+          "source": "src/interiors/GameplayInterior.ts:97"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:62"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:78"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:79"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:80"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:81"
         },
         {
           "system": "Interiors",
@@ -20999,11 +21095,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:43"
+          "source": "src/interiors/BuildingLayouts.ts:45"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/BuildingLayouts.ts:50"
+          "source": "src/interiors/BuildingLayouts.ts:52"
         },
         {
           "system": "Interiors",
@@ -21019,11 +21115,19 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurniturePhysics.ts:18"
+          "source": "src/interiors/FurniturePhysics.ts:30"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:89"
+          "source": "src/interiors/GameplayInterior.ts:91"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:63"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:83"
         },
         {
           "system": "Interiors",
@@ -21069,7 +21173,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurniturePhysics.ts:19"
+          "source": "src/interiors/FurniturePhysics.ts:31"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:59"
         },
         {
           "system": "Interiors",
@@ -21115,7 +21223,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:93"
+          "source": "src/interiors/GameplayInterior.ts:95"
         },
         {
           "system": "Interiors",
@@ -21157,11 +21265,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/FurniturePhysics.ts:21"
+          "source": "src/interiors/FurniturePhysics.ts:33"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:94"
+          "source": "src/interiors/GameplayInterior.ts:96"
         },
         {
           "system": "Interiors",
@@ -21204,6 +21312,18 @@
         {
           "system": "Interiors",
           "source": "src/interiors/FurnitureMotion.ts:92"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:60"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:60"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:100"
         },
         {
           "system": "Interiors",
@@ -21258,6 +21378,18 @@
         {
           "system": "Interiors",
           "source": "src/interiors/FurnitureMotion.ts:82"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:64"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:84"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:97"
         },
         {
           "system": "Interiors",
@@ -21372,6 +21504,430 @@
         {
           "system": "Interiors",
           "source": "src/interiors/review/FurnitureReviewCases.ts:88"
+        }
+      ]
+    },
+    {
+      "id": "furniture:bookcase",
+      "sheetId": "modern-interiors",
+      "rect": [
+        608,
+        3822,
+        32,
+        48
+      ],
+      "label": "Bookcase",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:235"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:57"
+        }
+      ]
+    },
+    {
+      "id": "furniture:settee",
+      "sheetId": "modern-interiors",
+      "rect": [
+        1568,
+        5902,
+        32,
+        32
+      ],
+      "label": "Cream settee",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:245"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:58"
+        }
+      ]
+    },
+    {
+      "id": "furniture:kitchen-cabinet",
+      "sheetId": "modern-interiors",
+      "rect": [
+        32,
+        5902,
+        32,
+        32
+      ],
+      "label": "Kitchen cabinet",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:255"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurniturePhysics.ts:13"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:54"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:69"
+        }
+      ]
+    },
+    {
+      "id": "furniture:cooker",
+      "sheetId": "modern-interiors",
+      "rect": [
+        416,
+        5902,
+        32,
+        32
+      ],
+      "label": "Cooker and pan",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:265"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:83"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:55"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:55"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:70"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:70"
+        }
+      ]
+    },
+    {
+      "id": "furniture:fridge",
+      "sheetId": "modern-interiors",
+      "rect": [
+        1888,
+        3870,
+        32,
+        48
+      ],
+      "label": "Refrigerator",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:275"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:53"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:53"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:68"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:68"
+        }
+      ]
+    },
+    {
+      "id": "furniture:dining-table",
+      "sheetId": "modern-interiors",
+      "rect": [
+        896,
+        5902,
+        32,
+        32
+      ],
+      "label": "Dining table",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:285"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurniturePhysics.ts:16"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:61"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:74"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:75"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:76"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:77"
+        }
+      ]
+    },
+    {
+      "id": "furniture:bakery-display",
+      "sheetId": "modern-interiors",
+      "rect": [
+        1248,
+        5902,
+        32,
+        32
+      ],
+      "label": "Pastry display",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:295"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurniturePhysics.ts:17"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:73"
+        }
+      ]
+    },
+    {
+      "id": "furniture:stocked-fridge",
+      "sheetId": "modern-interiors",
+      "rect": [
+        576,
+        3870,
+        32,
+        48
+      ],
+      "label": "Stocked drinks fridge",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:305"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurniturePhysics.ts:18"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:87"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:91"
+        }
+      ]
+    },
+    {
+      "id": "furniture:checkout",
+      "sheetId": "modern-interiors",
+      "rect": [
+        1312,
+        3870,
+        32,
+        48
+      ],
+      "label": "Checkout",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:315"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:102"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:95"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:95"
+        }
+      ]
+    },
+    {
+      "id": "furniture:bread-shelf",
+      "sheetId": "modern-interiors",
+      "rect": [
+        864,
+        5742,
+        32,
+        32
+      ],
+      "label": "Bread shelf",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:325"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurniturePhysics.ts:20"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:72"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:88"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:92"
+        }
+      ]
+    },
+    {
+      "id": "furniture:produce",
+      "sheetId": "modern-interiors",
+      "rect": [
+        1472,
+        5742,
+        32,
+        32
+      ],
+      "label": "Produce display",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:335"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:108"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:93"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:94"
+        }
+      ]
+    },
+    {
+      "id": "furniture:flowers",
+      "sheetId": "modern-interiors",
+      "rect": [
+        640,
+        4014,
+        32,
+        48
+      ],
+      "label": "Flowering plant",
+      "kind": "furniture",
+      "consumers": [
+        {
+          "system": "Furniture catalog / workbench / gameplay interiors",
+          "source": "src/interiors/FurnitureCatalog.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/FurnitureCatalog.ts:345"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:56"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:82"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:82"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:96"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:96"
         }
       ]
     },
@@ -22389,6 +22945,10 @@
         },
         {
           "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:123"
+        },
+        {
+          "system": "Interiors",
           "source": "src/interiors/RoomGrammar.ts:5"
         }
       ]
@@ -22420,6 +22980,86 @@
         {
           "system": "Interiors",
           "source": "src/interiors/ApartmentWideWalls.ts:10"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:119"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:124"
+        }
+      ]
+    },
+    {
+      "id": "architecture:room-builder/floors/c01-r12",
+      "sheetId": "modern-interiors",
+      "rect": [
+        944,
+        8142,
+        16,
+        16
+      ],
+      "label": "room-builder/floors/c01-r12",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:115"
+        }
+      ]
+    },
+    {
+      "id": "architecture:room-builder/floors/c09-r14",
+      "sheetId": "modern-interiors",
+      "rect": [
+        496,
+        8174,
+        16,
+        16
+      ],
+      "label": "room-builder/floors/c09-r14",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:117"
+        }
+      ]
+    },
+    {
+      "id": "architecture:room-builder/floors/c09-r33",
+      "sheetId": "modern-interiors",
+      "rect": [
+        800,
+        8174,
+        16,
+        16
+      ],
+      "label": "room-builder/floors/c09-r33",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:118"
+        }
+      ]
+    },
+    {
+      "id": "architecture:room-builder/floors/c13-r33",
+      "sheetId": "modern-interiors",
+      "rect": [
+        496,
+        8190,
+        16,
+        16
+      ],
+      "label": "room-builder/floors/c13-r33",
+      "kind": "architecture",
+      "consumers": [
+        {
+          "system": "Interiors",
+          "source": "src/interiors/LivedInLayouts.ts:119"
         }
       ]
     },
@@ -22600,6 +23240,14 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:48"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:69"
         }
       ]
     },
@@ -23155,7 +23803,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:67"
+          "source": "src/assets/GameAssets.ts:68"
         },
         {
           "system": "Gameplay",
@@ -23181,7 +23829,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:68"
+          "source": "src/assets/GameAssets.ts:69"
         },
         {
           "system": "Gameplay",
@@ -23215,7 +23863,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:69"
+          "source": "src/assets/GameAssets.ts:70"
         },
         {
           "system": "Gameplay",
@@ -24203,7 +24851,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:83"
+          "source": "src/assets/GameAssets.ts:84"
         },
         {
           "system": "Gameplay",
@@ -24243,11 +24891,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:108"
+          "source": "src/client/PlayerPredictor.ts:109"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:1053"
+          "source": "src/client/PlayerPredictor.ts:1058"
         },
         {
           "system": "Gameplay",
@@ -24263,7 +24911,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:179"
+          "source": "src/entities/EntityDefs.ts:181"
         },
         {
           "system": "Gameplay",
@@ -24331,11 +24979,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1321"
+          "source": "src/server/Realm.ts:322"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2378"
+          "source": "src/server/Realm.ts:1385"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:1551"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:2226"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/Realm.ts:2446"
         },
         {
           "system": "Gameplay",
@@ -24359,7 +25019,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:139"
+          "source": "src/traffic/Driving.ts:149"
         },
         {
           "system": "Gameplay",
@@ -24367,7 +25027,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/ParkingSystem.ts:344"
+          "source": "src/traffic/ParkingSystem.ts:348"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/VehiclePush.ts:82"
         },
         {
           "system": "Gameplay",
@@ -24397,7 +25061,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:89"
+          "source": "src/assets/GameAssets.ts:90"
         },
         {
           "system": "Gameplay",
@@ -24421,7 +25085,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:219"
+          "source": "src/entities/EntityDefs.ts:221"
         },
         {
           "system": "World generation",
@@ -24455,7 +25119,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:94"
+          "source": "src/assets/GameAssets.ts:95"
         },
         {
           "system": "Gameplay",
@@ -24475,7 +25139,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:248"
+          "source": "src/entities/EntityDefs.ts:250"
         },
         {
           "system": "World generation",
@@ -24517,7 +25181,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:95"
+          "source": "src/assets/GameAssets.ts:96"
         },
         {
           "system": "Editor",
@@ -24525,7 +25189,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:278"
+          "source": "src/entities/EntityDefs.ts:280"
         },
         {
           "system": "Gameplay",
@@ -24555,7 +25219,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:96"
+          "source": "src/assets/GameAssets.ts:97"
         },
         {
           "system": "Editor",
@@ -24563,7 +25227,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:303"
+          "source": "src/entities/EntityDefs.ts:305"
         },
         {
           "system": "Gameplay",
@@ -24593,7 +25257,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:97"
+          "source": "src/assets/GameAssets.ts:98"
         },
         {
           "system": "Editor",
@@ -24601,7 +25265,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:328"
+          "source": "src/entities/EntityDefs.ts:330"
         },
         {
           "system": "Gameplay",
@@ -24635,7 +25299,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:98"
+          "source": "src/assets/GameAssets.ts:99"
         },
         {
           "system": "Editor",
@@ -24643,7 +25307,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:350"
+          "source": "src/entities/EntityDefs.ts:352"
         },
         {
           "system": "Gameplay",
@@ -24677,7 +25341,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:99"
+          "source": "src/assets/GameAssets.ts:100"
         },
         {
           "system": "Editor",
@@ -24685,7 +25349,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:372"
+          "source": "src/entities/EntityDefs.ts:374"
         },
         {
           "system": "Gameplay",
@@ -24719,7 +25383,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:100"
+          "source": "src/assets/GameAssets.ts:101"
         },
         {
           "system": "Gameplay",
@@ -24743,7 +25407,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:394"
+          "source": "src/entities/EntityDefs.ts:396"
         },
         {
           "system": "Gameplay",
@@ -24773,7 +25437,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:101"
+          "source": "src/assets/GameAssets.ts:102"
         },
         {
           "system": "Editor",
@@ -24789,15 +25453,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:491"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/EntityDefs.ts:493"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:67"
+          "source": "src/entities/EntityDefs.ts:495"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/EntityFactories.ts:69"
         }
       ]
     },
@@ -24819,7 +25483,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:102"
+          "source": "src/assets/GameAssets.ts:103"
         },
         {
           "system": "Editor",
@@ -24835,7 +25499,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:506"
+          "source": "src/entities/EntityDefs.ts:508"
         },
         {
           "system": "World generation",
@@ -24861,7 +25525,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:103"
+          "source": "src/assets/GameAssets.ts:104"
         },
         {
           "system": "Editor",
@@ -24869,7 +25533,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:531"
+          "source": "src/entities/EntityDefs.ts:533"
         },
         {
           "system": "Gameplay",
@@ -24899,7 +25563,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:104"
+          "source": "src/assets/GameAssets.ts:105"
         },
         {
           "system": "Editor",
@@ -24929,7 +25593,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:105"
+          "source": "src/assets/GameAssets.ts:106"
         },
         {
           "system": "Editor",
@@ -24959,7 +25623,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:106"
+          "source": "src/assets/GameAssets.ts:107"
         },
         {
           "system": "Editor",
@@ -24989,7 +25653,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:107"
+          "source": "src/assets/GameAssets.ts:108"
         },
         {
           "system": "Editor",
@@ -25019,7 +25683,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:108"
+          "source": "src/assets/GameAssets.ts:109"
         },
         {
           "system": "Gameplay",
@@ -25031,7 +25695,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:199"
+          "source": "src/entities/EntityDefs.ts:201"
         },
         {
           "system": "Gameplay",
@@ -25043,15 +25707,23 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:796"
+          "source": "src/scenes/PlayScene.ts:812"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2342"
+          "source": "src/server/Realm.ts:2410"
         },
         {
           "system": "Gameplay",
           "source": "src/server/RealmActivity.ts:51"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/VehiclePush.ts:65"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/VehiclePush.ts:82"
         }
       ]
     },
@@ -25073,7 +25745,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:109"
+          "source": "src/assets/GameAssets.ts:110"
         },
         {
           "system": "Editor",
@@ -25081,15 +25753,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:432"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/EntityDefs.ts:434"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:65"
+          "source": "src/entities/EntityDefs.ts:436"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/EntityFactories.ts:67"
         },
         {
           "system": "Gameplay",
@@ -25123,7 +25795,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:110"
+          "source": "src/assets/GameAssets.ts:111"
         },
         {
           "system": "Editor",
@@ -25139,15 +25811,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityDefs.ts:461"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/entities/EntityDefs.ts:463"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:66"
+          "source": "src/entities/EntityDefs.ts:465"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/EntityFactories.ts:68"
         },
         {
           "system": "Gameplay",
@@ -25528,6 +26200,134 @@
       ]
     },
     {
+      "id": "sprite:indoor-reader",
+      "sheetId": "indoor-reader",
+      "rect": [
+        0,
+        0,
+        768,
+        256
+      ],
+      "label": "indoor-reader · registered 32×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:61"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:87"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:101"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/ResidentBehavior.ts:86"
+        }
+      ]
+    },
+    {
+      "id": "sprite:indoor-diner",
+      "sheetId": "indoor-diner",
+      "rect": [
+        0,
+        0,
+        384,
+        256
+      ],
+      "label": "indoor-diner · registered 32×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:75"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:86"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:95"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:107"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/ResidentBehavior.ts:89"
+        }
+      ]
+    },
+    {
+      "id": "sprite:indoor-cleaner",
+      "sheetId": "indoor-cleaner",
+      "rect": [
+        0,
+        0,
+        736,
+        256
+      ],
+      "label": "indoor-cleaner · registered 32×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:65"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/ResidentBehavior.ts:87"
+        }
+      ]
+    },
+    {
+      "id": "sprite:indoor-chef",
+      "sheetId": "indoor-chef",
+      "rect": [
+        0,
+        0,
+        384,
+        256
+      ],
+      "label": "indoor-chef · registered 32×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:82"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/IndoorResidents.ts:88"
+        },
+        {
+          "system": "Interiors",
+          "source": "src/interiors/ResidentBehavior.ts:88"
+        }
+      ]
+    },
+    {
       "id": "sprite:prop-tent-blue",
       "sheetId": "prop-tent-blue",
       "rect": [
@@ -25545,7 +26345,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:118"
+          "source": "src/assets/GameAssets.ts:125"
         },
         {
           "system": "Gameplay",
@@ -25595,7 +26395,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:119"
+          "source": "src/assets/GameAssets.ts:126"
         },
         {
           "system": "Gameplay",
@@ -25637,7 +26437,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:120"
+          "source": "src/assets/GameAssets.ts:127"
         },
         {
           "system": "Gameplay",
@@ -25671,7 +26471,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:121"
+          "source": "src/assets/GameAssets.ts:128"
         },
         {
           "system": "Gameplay",
@@ -25705,7 +26505,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:122"
+          "source": "src/assets/GameAssets.ts:129"
         },
         {
           "system": "Gameplay",
@@ -25743,7 +26543,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:123"
+          "source": "src/assets/GameAssets.ts:130"
         },
         {
           "system": "Gameplay",
@@ -25845,7 +26645,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:124"
+          "source": "src/assets/GameAssets.ts:131"
         },
         {
           "system": "Gameplay",
@@ -25879,7 +26679,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:125"
+          "source": "src/assets/GameAssets.ts:132"
         },
         {
           "system": "Gameplay",
@@ -25929,7 +26729,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:126"
+          "source": "src/assets/GameAssets.ts:133"
         },
         {
           "system": "Gameplay",
@@ -25971,7 +26771,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:128"
+          "source": "src/assets/GameAssets.ts:135"
         },
         {
           "system": "Gameplay",
@@ -26005,7 +26805,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:129"
+          "source": "src/assets/GameAssets.ts:136"
         },
         {
           "system": "Gameplay",
@@ -26043,7 +26843,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:130"
+          "source": "src/assets/GameAssets.ts:137"
         },
         {
           "system": "Gameplay",
@@ -26081,7 +26881,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:131"
+          "source": "src/assets/GameAssets.ts:138"
         },
         {
           "system": "Gameplay",
@@ -26115,7 +26915,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:132"
+          "source": "src/assets/GameAssets.ts:139"
         },
         {
           "system": "Gameplay",
@@ -26153,7 +26953,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:133"
+          "source": "src/assets/GameAssets.ts:140"
         },
         {
           "system": "Gameplay",
@@ -26187,7 +26987,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:134"
+          "source": "src/assets/GameAssets.ts:141"
         },
         {
           "system": "Gameplay",
@@ -26221,7 +27021,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:135"
+          "source": "src/assets/GameAssets.ts:142"
         },
         {
           "system": "Gameplay",
@@ -26255,7 +27055,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:136"
+          "source": "src/assets/GameAssets.ts:143"
         },
         {
           "system": "Gameplay",
@@ -26289,7 +27089,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:137"
+          "source": "src/assets/GameAssets.ts:144"
         },
         {
           "system": "Gameplay",
@@ -26323,7 +27123,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:139"
+          "source": "src/assets/GameAssets.ts:146"
         },
         {
           "system": "Gameplay",

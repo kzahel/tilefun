@@ -1,4 +1,4 @@
-import { withBuildingLayout } from "../BuildingDoors.js";
+import { withBuildingLayout, withLivedInLayout } from "../BuildingDoors.js";
 import { buildingLayout } from "../BuildingLayouts.js";
 import type { ReviewCase } from "./ReviewCases.js";
 
@@ -46,6 +46,36 @@ export function buildingLayoutReviewCases(): ReviewCase[] {
       stage: 16,
       building: identity,
       ...layout,
+    };
+  });
+}
+
+export function livedInReviewCases(): ReviewCase[] {
+  return (
+    [
+      ["home", "Home · reading corner, kitchen, bedroom and indoor cat routes", "condo-bay-3"],
+      ["restaurant", "Restaurant · four dining tables, service and working kitchen", "bakery-3"],
+      ["market", "Food shop · produce, bread, drinks and checkout", "butcher-2"],
+    ] as const
+  ).map(([id, name, type]) => {
+    const identity = withLivedInLayout(
+      {
+        version: "interior-v1",
+        parentWorldId: "review",
+        featureId: "settlement:0:0:block:0:0:lot:0",
+        buildingType: `prop-city-dense-v1-${type}`,
+        floor: 0,
+        returnX: 0,
+        returnY: 0,
+      },
+      { wx: 0, wy: 0 },
+    );
+    return {
+      id: `lived-in-v3-${id}`,
+      name,
+      stage: 17,
+      building: identity,
+      ...buildingLayout(identity),
     };
   });
 }

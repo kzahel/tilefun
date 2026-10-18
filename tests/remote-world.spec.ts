@@ -99,8 +99,8 @@ test("two clients share a persistent interior and cross-origin explorer reads li
         return g.stateView.props.filter((p) => p.type.startsWith("prop-interior-furniture:"))
           .length;
       });
-    await expect.poll(() => furnitureCount(page)).toBe(6);
-    await expect.poll(() => furnitureCount(two)).toBe(6);
+    await expect.poll(() => furnitureCount(page)).toBe(18);
+    await expect.poll(() => furnitureCount(two)).toBe(18);
     await page.evaluate(() => {
       const g = (
         document.querySelector("#game") as unknown as {
@@ -112,7 +112,7 @@ test("two clients share a persistent interior and cross-origin explorer reads li
       g.transport.send({ type: "edit-delete-prop", propId: bed.id });
       g.transport.send({ type: "flush" });
     });
-    await expect.poll(() => furnitureCount(two)).toBe(5);
+    await expect.poll(() => furnitureCount(two)).toBe(17);
     await page.getByRole("button", { name: "Return to street" }).click();
     await expect(page.getByRole("button", { name: /Enter apartment/ })).toBeVisible();
     await page.goto(
@@ -133,7 +133,7 @@ test("two clients share a persistent interior and cross-origin explorer reads li
     await page.getByText("Network checkpoint", { exact: true }).click();
     await page.getByRole("button", { name: /Enter apartment/ }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
-    await expect.poll(() => furnitureCount(page)).toBe(5);
+    await expect.poll(() => furnitureCount(page)).toBe(17);
   } finally {
     await second.close();
     await stop();

@@ -1,6 +1,7 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
+import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
@@ -113,6 +114,12 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
     path: `assets/sprites/person${i + 1}.png`,
     w: 16,
     h: 32,
+  })),
+  ...INDOOR_ROLES.map((role) => ({
+    key: `indoor-${role}`,
+    path: `assets/sprites/indoor/${role}.png`,
+    w: 32,
+    h: 64,
   })),
   // Large props (each PNG is its own sheet)
   { key: "prop-tent-blue", path: "assets/props/tent-blue.png", w: 64, h: 64 },

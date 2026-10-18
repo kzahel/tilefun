@@ -2,7 +2,7 @@
 
 Topic: characters
 Status: six approved characters promoted to Entities; per-profile player model selection implemented.
-Updated: 2026-10-04.
+Updated: 2026-10-18.
 
 ## Current slice
 
@@ -177,3 +177,12 @@ changed during gameplay integration.
 Playtest all six in a real world and try model switching with co-op players.
 Then consider befriend/follow/stay interactions and model-specific abilities
 only if explicitly desired; appearance currently has no gameplay advantage.
+
+## Indoor activity roles
+
+The [interiors topic](patterns-and-interiors.md#indoor-residents-and-doorway-trips)
+owns the source-derived reader, diner, cleaner and chef used in new city rooms.
+They reuse legacy Modern Interiors pixels, registered definitions/factories and
+shared animation clips; they do not change the six promoted player models.
+The committed extraction manifest records source paths/hashes and output hashes.
+Normal builds consume the committed sheets without Python or private source art.

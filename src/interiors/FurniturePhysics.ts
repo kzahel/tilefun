@@ -8,6 +8,18 @@ export interface FurnitureBody {
 export type FurnitureBodies = Record<string, FurnitureBody>;
 export const FURNITURE_PHYSICS_VERSION = 2;
 export const FURNITURE_BODIES: FurnitureBodies = {
+  bookcase: { height: 32, walkableTop: false },
+  settee: { height: 12, walkableTop: false },
+  "kitchen-cabinet": { height: 12, walkableTop: false },
+  cooker: { height: 16, walkableTop: false },
+  fridge: { height: 32, walkableTop: false },
+  "dining-table": { height: 12, walkableTop: false },
+  "bakery-display": { height: 16, walkableTop: false },
+  "stocked-fridge": { height: 32, walkableTop: false },
+  checkout: { height: 16, walkableTop: false },
+  "bread-shelf": { height: 20, walkableTop: false },
+  produce: { height: 16, walkableTop: false },
+  flowers: { height: 32, walkableTop: false },
   "bunk-bed": { height: 24, walkableTop: true },
   wardrobe: { height: 32, walkableTop: true },
   worktable: { height: 10, walkableTop: true },

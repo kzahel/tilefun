@@ -68,9 +68,10 @@ test("review starts before verification finishes, uses only small sprites, and r
     expect(result.probe.hashes).toBe(reviewCases().length);
     expect(result.probe.firstHashes).toBeLessThan(10);
     expect(result.probe.lastTicks - result.probe.firstTicks).toBeGreaterThan(20);
-    // Active image + scratch, plus bounded gameplay floor/wall-band caches for
-    // the four new building layouts. Verification must not retain a canvas per case.
-    expect(result.probe.canvases).toBeLessThan(64);
+    // Active image/scratch plus at most six floor/wall-band caches per
+    // connected building layout; never a retained canvas for every review case.
+    const buildingCases = reviewCases().filter((c) => c.building).length;
+    expect(result.probe.canvases).toBeLessThan(40 + 6 * buildingCases);
     expect(result.resources.some((r) => r.name.includes("modern-interiors-atlas"))).toBe(false);
     const sprites = result.resources.filter((r) => r.name.includes("review-sprites"));
     expect(sprites.length).toBeGreaterThan(0);

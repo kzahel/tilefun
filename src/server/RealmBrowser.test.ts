@@ -1485,7 +1485,7 @@ for (const building of ["butcher", "condo-bay"])
       const local = server.getLocalSession();
       const guest = [...server.getSessions()].find((s) => s.clientId === "guest");
       const interior = server.worldInterior;
-      expect(interior?.layout).toBe(building === "butcher" ? "shop-v2" : "apartment-v2");
+      expect(interior?.layout).toBe(building === "butcher" ? "market-v3" : "home-v3");
       if (!interior) throw new Error("Missing interior");
       expect(local.realmId).toBe(guest?.realmId);
       const connections = buildingDoors(interior);
@@ -1864,3 +1864,49 @@ it("restores airborne departure motion on reopen and clears it on explicit trave
     await server.destroy();
   }
 });
+
+it("restaurant visitor walks out and returns with one durable identity while the player stays indoors", async () => {
+  const { server, transport, lot } = await cityDoorSetup("bakery");
+  try {
+    transport.clientSend("local", { type: "enter-building", requestId: 2400, featureId: lot.id });
+    await server.settle();
+    const session = server.getLocalSession();
+    session.doorArrivalUntil = 0;
+    session.visibleRange = { minCx: -1, minCy: -1, maxCx: 2, maxCy: 2 };
+    session.player.position = { wx: 48, wy: 240 };
+    expect(server.worldInterior?.layout).toBe("restaurant-v3");
+    const home = session.realmId;
+    const visitor = server.entityManager.entities.find((e) => e.persistentId?.endsWith(":visitor"));
+    if (!visitor?.resident) throw new Error("Missing dining visitor");
+    const persistentId = visitor.persistentId;
+    const seen = new Set<string>();
+    const positions: string[] = [];
+    for (let i = 0; i < 2400; i++) {
+      server.tick(1 / 30);
+      if (i % 30 === 0) {
+        await server.settle();
+        const realms = Reflect.get(server, "realms") as Map<string, import("./Realm.js").Realm>;
+        const owners = [...realms.values()].flatMap((realm) =>
+          realm.entityManager.entities
+            .filter((e) => e.persistentId === persistentId)
+            .map((e) => ({ realm, e })),
+        );
+        expect(owners).toHaveLength(1);
+        const owner = owners[0];
+        if (!owner) throw new Error("Missing visitor");
+        seen.add(owner.e.resident?.place ?? "missing");
+        positions.push(
+          `${owner.realm.currentWorldId}: ${owner.e.position.wx},${owner.e.position.wy} ${owner.e.resident?.phase} ${owner.e.resident?.index}`,
+        );
+        if (seen.has("outside") && owner.realm.currentWorldId === home) break;
+      }
+    }
+    expect(seen, positions.slice(-5).join("\n")).toEqual(new Set(["inside", "outside"]));
+    const returned = server.entityManager.entities.find((e) => e.persistentId === persistentId);
+    expect(returned?.resident?.place, positions.slice(-5).join("\n")).toBe("inside");
+    expect(session.realmId).toBe(home);
+    await server.flushAsync();
+  } finally {
+    await server.destroy();
+  }
+}, 30000);

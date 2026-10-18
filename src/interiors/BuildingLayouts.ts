@@ -1,9 +1,11 @@
 import type { FurniturePlacement } from "./FurnitureCatalog.js";
 import type { InteriorIdentity } from "./GameplayInterior.js";
+import { isLivedIn, type LivedInLayout, livedInLayout } from "./LivedInLayouts.js";
 
 /** Saved identities pin these recipes. Changes require a new layout ID. */
-export type BuildingLayout = "shop-v2" | "apartment-v2";
+export type BuildingLayout = "shop-v2" | "apartment-v2" | LivedInLayout;
 export function buildingLayout(identity: InteriorIdentity) {
+  if (isLivedIn(identity)) return livedInLayout(identity);
   const apartment = identity.layout === "apartment-v2";
   if (identity.layout !== "shop-v2" && !apartment) throw new Error("Unknown building layout");
   const rows = apartment

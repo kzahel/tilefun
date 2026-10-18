@@ -48,7 +48,7 @@ for (const kind of ["butcher", "condo-bay"]) {
         };
       });
     const before = await state();
-    expect(before.interior?.layout).toBe(kind === "butcher" ? "shop-v2" : "apartment-v2");
+    expect(before.interior?.layout).toBe(kind === "butcher" ? "market-v3" : "home-v3");
     const entry = before.interior?.doors?.find((d) => d.id === secondary.id);
     const exit = before.interior?.doors?.find((d) => d.id === "street");
     if (!entry || !exit) throw new Error("Missing room doors");

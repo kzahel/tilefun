@@ -31,6 +31,15 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
+## Lived-in interiors
+
+[136](../tactical/136-lived-in-interiors.md) adds resident activity decisions to the
+shared Realm tick, collision checks, durable actor state and animation clips.
+The normal game and embedded Realm consumers retain the same physics and
+presentation owners; no lab-only controller is introduced. New resident actors
+are seeded only by versioned gameplay interior recipes. Existing lab fixtures
+and approved static room compositions remain pinned.
+
 ## Vehicle horns and contact profiles
 
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) shares per-model driving

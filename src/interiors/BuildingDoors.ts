@@ -101,3 +101,22 @@ export function withBuildingLayout(
     })),
   };
 }
+
+/** First-visit gameplay recipes; old saved identities and review cases remain pinned. */
+export function withLivedInLayout(
+  identity: InteriorIdentity,
+  position: Prop["position"],
+): InteriorIdentity {
+  const base = withBuildingLayout(identity, position);
+  if (!base.layout) return base;
+  return {
+    ...base,
+    layout:
+      buildingRecipe(base.buildingType)?.kind !== "shop"
+        ? "home-v3"
+        : /bakery|cafe|restaurant|diner/.test(base.buildingType)
+          ? "restaurant-v3"
+          : "market-v3",
+    doors: (base.doors ?? []).map((door) => ({ ...door, inside: { ...door.inside, wy: 264 } })),
+  };
+}

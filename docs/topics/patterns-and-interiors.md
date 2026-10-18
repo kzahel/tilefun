@@ -3,7 +3,7 @@
 Topic: patterns-and-interiors
 Status: Workshop/game pattern drawing and persistent gameplay room editing
 implemented; tree-kit review/promotion and Workshop-to-game prefab import remain.
-Updated: 2026-10-11.
+Updated: 2026-10-18.
 
 Owns the shared semantic editing contract and current interior direction.
 [Tactical 011](../tactical/011-shared-pattern-brushes-and-room-drawing.md) records
@@ -35,9 +35,13 @@ connections into the realm; they do not create separate instances.
 Legacy identities resolve to the existing `street` connection. Explicit saved
 connections can share one interior; leaving uses the selected door's endpoint,
 not the player's entry history. The original street connection stays required.
-Newly visited city buildings (`prop-city-*`) use saved `shop-v2` or
-`apartment-v2` layouts. Shops have a sales floor and preparation room; apartments
-have a bedroom, kitchen, living area and shared entrance hall. Audited facade
+Newly visited city buildings (`prop-city-*`) use saved `home-v3`,
+`restaurant-v3` or `market-v3` layouts. Homes have a bedroom, kitchen, reading
+corner and shared entrance hall. Bakeries use a restaurant with dining tables,
+service area and working kitchen; other shops use stocked food-market shelves,
+produce and a checkout. Each purpose has source-art wall and floor colors,
+additional whole-sprite furniture, entrance mats and shorter street thresholds.
+Older `shop-v2` and `apartment-v2` identities retain their original recipes. Audited facade
 thresholds expose both butcher doors and the bay/arched apartment entrances.
 Their left-to-right order matches the indoor south-wall openings. Both players
 and empty arrival landings must retain a route to every exit after room edits.
@@ -48,9 +52,10 @@ the server validates its ID and proximity. Outdoor endpoints follow a moved
 building when its prop is available. No outdoor generator, facade art, promotion
 bank or existing approved review image changes.
 
-Previously visited rooms retain their saved identity, furniture, edits and single
-street exit. Either visible exterior entrance can enter such a room at its original
-landing; adding a second physical opening would require an explicit room migration.
+Previously visited rooms retain their saved identity, furniture, edits and
+connections. Legacy rooms with one street exit still use their original landing
+from either visible exterior entrance; adding a second physical opening requires
+an explicit room migration.
 Older regional/country-house recipes retain their original compact interiors.
 Upper floors and per-building authored variants remain future work.
 
@@ -59,9 +64,39 @@ also targets seamless connected indoor levels with cutaways and level/sector
 visibility. Reconciliation with the current per-floor realm model remains a
 design question; this does not change the existing door or persistence contracts.
 
-Four new layout cases are registered, unchecked, in Workshop's **Playable building
-layouts** batch (`rooms-16`). This is a runtime content change using existing art,
-not a human approval of those new furnished compositions.
+The four **Playable building layouts** cases (`rooms-16`) remain pinned. Three
+new compositions are registered, unchecked, in **Lived-in homes, restaurants and shops** (`rooms-17`):
+`lived-in-v3-home`, `lived-in-v3-restaurant` and `lived-in-v3-market`. Gameplay
+activation reuses source art; it does not imply human approval of the new
+compositions or their provisional furniture shapes.
+
+## Indoor residents and doorway trips
+
+[Tactical 136](../tactical/136-lived-in-interiors.md) adds four source-derived indoor
+people roles and the existing provisional cat to the new recipes. Homes include
+a reader, cleaner, diner and roaming cat. Restaurants include diners, a cook and
+a moving server; market staff and shoppers browse and restock. These are simple
+visual routines, without dialogue, orders, inventories or a full daily schedule.
+Role-specific stationary animation switches to directional walking between clear
+interaction spots. Browsing and service stops use standing poses. A bounded
+four-pixel route search uses compiled ground, furniture, wall rails and actor
+footprints; blocked actors wait and retry. Room/furniture edits protect residents
+as well as players.
+
+Each new room seeds one visitor who completes an indoor activity, walks through
+a real doorway, pauses on the sidewalk and returns. The stable persistent ID and
+activity state survive saving. An acknowledged atomic write moves record ownership
+between realm namespaces before publishing the destination entity. Occupied
+arrivals and storage failures leave the source actor waiting; rejected write intents
+are replaced with the original ownership before retry. Player locations and
+sessions do not participate in NPC travel.
+
+Simulation uses shared Realm physics/animation and normal replication on both
+Canvas and GPU. Only occupied rooms, at most four nearby previously visited rooms
+and visible/home-active visitors receive work. Temporary streaming dependency
+leases cover doorway preparation and background visitors. Unvisited buildings
+are not simulated. Broader purpose-specific shops, play activities, pet variants
+and an opt-in refresh for old rooms remain follow-up work.
 
 `PlayerLocationStore` owns one durable current-location record per profile
 (falling back to connection ID for legacy callers), separate from each realm's

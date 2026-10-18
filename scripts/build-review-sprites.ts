@@ -8,6 +8,7 @@ import { buildLayeredApartmentPlan } from "../src/interiors/ApartmentArchitectur
 import { parseFloorPlan } from "../src/interiors/ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../src/interiors/ApartmentWallProfiles.js";
 import { furnitureDefinition } from "../src/interiors/FurnitureCatalog.js";
+import { compileGameplayRoom, initialRoom } from "../src/interiors/GameplayRoom.js";
 import { reviewCases } from "../src/interiors/review/ReviewCases.js";
 
 const { PNG } = pngjs;
@@ -29,9 +30,11 @@ use("room-builder/3d-walls/c08-r01", 1, 1);
 for (const c of reviewCases()) {
   for (const item of c.furniture ?? []) use(furnitureDefinition(item.asset).key);
   const plan = parseFloorPlan(c.sketch);
-  const map = c.profiles
-    ? buildProfileApartmentPlan(plan, c.profiles)
-    : buildLayeredApartmentPlan(plan);
+  const map = c.building
+    ? compileGameplayRoom(c.building, initialRoom(c.building)).map
+    : c.profiles
+      ? buildProfileApartmentPlan(plan, c.profiles)
+      : buildLayeredApartmentPlan(plan);
   for (const row of map.cells)
     for (const cell of row)
       for (const layer of [cell.floor, cell.wall, cell.foreground, cell.objects])

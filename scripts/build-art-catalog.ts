@@ -29,7 +29,7 @@ import {
 } from "../src/generation/regional/CommercialCityAssets.js";
 import { DENSE_CITY_BUILDINGS } from "../src/generation/regional/DenseCityAssets.js";
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
-import { FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
+import { GAMEPLAY_FURNITURE_CATALOG as FURNITURE_CATALOG } from "../src/interiors/FurnitureCatalog.js";
 import { FENCED_TREES } from "../src/patterns/FencedTrees.js";
 import railwaySource from "../src/railway/RailwaySource.json" with { type: "json" };
 import {

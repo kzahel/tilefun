@@ -83,6 +83,10 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
     g.camera.zoom = 0.6;
   });
   const initial = (await state(page)).room;
+  const initialFurniture = (await state(page)).props.filter((p) =>
+    p.type.startsWith("prop-interior-furniture:"),
+  ).length;
+  expect(initialFurniture).toBeGreaterThan(10);
   const entryX = (await state(page)).player.wx;
   const streetCell: [number, number] = [Math.floor(entryX / 32), 8];
   await page.getByRole("button", { name: "Room rectangle", exact: true }).click();
@@ -110,13 +114,13 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await page.getByRole("button", { name: "Props", exact: false }).click();
   await page.getByRole("button", { name: "stool", exact: true }).click();
   await draw(page, [12, 6]);
-  await expect.poll(furnitureCount).toBe(7);
+  await expect.poll(furnitureCount).toBe(initialFurniture + 1);
   await page.getByRole("button", { name: "Delete", exact: true }).click();
   await draw(page, [12, 6]);
-  await expect.poll(furnitureCount).toBe(6);
+  await expect.poll(furnitureCount).toBe(initialFurniture);
   await page.getByRole("button", { name: "stool", exact: true }).click();
   await draw(page, [12, 6]);
-  await expect.poll(furnitureCount).toBe(7);
+  await expect.poll(furnitureCount).toBe(initialFurniture + 1);
   await page.getByRole("button", { name: "Rooms", exact: false }).click();
   // Invalid erasure cannot remove the street doorway or enter history.
   await draw(page, streetCell); // selected Door, same protected door = no-op
@@ -182,7 +186,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await expect
     .poll(async () => (await state(page)).props.find((p) => p.type === "prop-interior-wall")?.walls)
     .toEqual(walls);
-  await expect.poll(furnitureCount).toBe(7);
+  await expect.poll(furnitureCount).toBe(initialFurniture + 1);
   await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(360);
   if ((await state(page)).player.wx > entryX + 10) {
     await page.keyboard.down("ArrowLeft");

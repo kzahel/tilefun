@@ -3,8 +3,8 @@
   "atlas": "review-sprites.png",
   "tileSize": 16,
   "atlasWidth": 256,
-  "atlasHeight": 183,
-  "entryCount": 43,
+  "atlasHeight": 295,
+  "entryCount": 97,
   "summary": {
     "sourceKinds": {
       "home_design_layer": 44,
@@ -40,8 +40,208 @@
       "tags": ["room-builder", "arched-entryways", "architecture"]
     },
     {
-      "key": "room-builder/3d-walls/c08-r00",
+      "key": "room-builder/3d-walls/c00-r00",
       "rect": [32, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [0, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c00-r01",
+      "rect": [48, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [0, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c00-r03",
+      "rect": [64, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [0, 48, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c00-r04",
+      "rect": [80, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [0, 64, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c02-r00",
+      "rect": [96, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [32, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c02-r01",
+      "rect": [112, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [32, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c02-r02",
+      "rect": [128, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [32, 32, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c02-r03",
+      "rect": [144, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [32, 48, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c02-r04",
+      "rect": [160, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [32, 64, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c02-r05",
+      "rect": [176, 0, 16, 6],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [32, 80, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c03-r00",
+      "rect": [192, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [48, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c03-r02",
+      "rect": [208, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [48, 32, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c03-r03",
+      "rect": [224, 0, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [48, 48, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c03-r05",
+      "rect": [240, 0, 16, 6],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [48, 80, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c04-r00",
+      "rect": [0, 55, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [64, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c04-r01",
+      "rect": [16, 55, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [64, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c05-r00",
+      "rect": [32, 55, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [80, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c05-r01",
+      "rect": [48, 55, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [80, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c05-r02",
+      "rect": [64, 55, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [80, 32, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c05-r05",
+      "rect": [80, 55, 16, 6],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [80, 80, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c08-r00",
+      "rect": [96, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [128, 0, 16, 16],
@@ -51,7 +251,7 @@
     },
     {
       "key": "room-builder/3d-walls/c08-r01",
-      "rect": [48, 0, 16, 16],
+      "rect": [112, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [128, 16, 16, 16],
@@ -61,7 +261,7 @@
     },
     {
       "key": "room-builder/3d-walls/c08-r03",
-      "rect": [64, 0, 16, 16],
+      "rect": [128, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [128, 48, 16, 16],
@@ -71,7 +271,7 @@
     },
     {
       "key": "room-builder/3d-walls/c08-r04",
-      "rect": [80, 0, 16, 16],
+      "rect": [144, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [128, 64, 16, 16],
@@ -81,7 +281,7 @@
     },
     {
       "key": "room-builder/3d-walls/c09-r04",
-      "rect": [96, 0, 16, 16],
+      "rect": [160, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [144, 64, 16, 16],
@@ -91,7 +291,7 @@
     },
     {
       "key": "room-builder/3d-walls/c10-r00",
-      "rect": [112, 0, 16, 16],
+      "rect": [176, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [160, 0, 16, 16],
@@ -101,7 +301,7 @@
     },
     {
       "key": "room-builder/3d-walls/c10-r01",
-      "rect": [128, 0, 16, 16],
+      "rect": [192, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [160, 16, 16, 16],
@@ -111,7 +311,7 @@
     },
     {
       "key": "room-builder/3d-walls/c10-r02",
-      "rect": [144, 0, 16, 16],
+      "rect": [208, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [160, 32, 16, 16],
@@ -121,7 +321,7 @@
     },
     {
       "key": "room-builder/3d-walls/c10-r03",
-      "rect": [160, 0, 16, 16],
+      "rect": [224, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [160, 48, 16, 16],
@@ -131,7 +331,7 @@
     },
     {
       "key": "room-builder/3d-walls/c10-r04",
-      "rect": [176, 0, 16, 16],
+      "rect": [240, 55, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [160, 64, 16, 16],
@@ -141,7 +341,7 @@
     },
     {
       "key": "room-builder/3d-walls/c10-r05",
-      "rect": [192, 0, 16, 6],
+      "rect": [0, 71, 16, 6],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [160, 80, 16, 16],
@@ -151,7 +351,7 @@
     },
     {
       "key": "room-builder/3d-walls/c11-r00",
-      "rect": [208, 0, 16, 16],
+      "rect": [16, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [176, 0, 16, 16],
@@ -161,7 +361,7 @@
     },
     {
       "key": "room-builder/3d-walls/c11-r02",
-      "rect": [224, 0, 16, 16],
+      "rect": [32, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [176, 32, 16, 16],
@@ -171,7 +371,7 @@
     },
     {
       "key": "room-builder/3d-walls/c11-r03",
-      "rect": [240, 0, 16, 16],
+      "rect": [48, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [176, 48, 16, 16],
@@ -181,7 +381,7 @@
     },
     {
       "key": "room-builder/3d-walls/c11-r05",
-      "rect": [0, 55, 16, 6],
+      "rect": [64, 71, 16, 6],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [176, 80, 16, 16],
@@ -191,7 +391,7 @@
     },
     {
       "key": "room-builder/3d-walls/c12-r00",
-      "rect": [16, 55, 16, 16],
+      "rect": [80, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [192, 0, 16, 16],
@@ -201,7 +401,7 @@
     },
     {
       "key": "room-builder/3d-walls/c12-r01",
-      "rect": [32, 55, 16, 16],
+      "rect": [96, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [192, 16, 16, 16],
@@ -211,7 +411,7 @@
     },
     {
       "key": "room-builder/3d-walls/c13-r00",
-      "rect": [48, 55, 16, 16],
+      "rect": [112, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [208, 0, 16, 16],
@@ -221,7 +421,7 @@
     },
     {
       "key": "room-builder/3d-walls/c13-r01",
-      "rect": [64, 55, 16, 16],
+      "rect": [128, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [208, 16, 16, 16],
@@ -231,7 +431,7 @@
     },
     {
       "key": "room-builder/3d-walls/c13-r02",
-      "rect": [80, 55, 16, 16],
+      "rect": [144, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [208, 32, 16, 16],
@@ -241,7 +441,7 @@
     },
     {
       "key": "room-builder/3d-walls/c13-r03",
-      "rect": [96, 55, 16, 16],
+      "rect": [160, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [208, 48, 16, 16],
@@ -251,7 +451,7 @@
     },
     {
       "key": "room-builder/3d-walls/c13-r04",
-      "rect": [112, 55, 16, 16],
+      "rect": [176, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [208, 64, 16, 16],
@@ -261,7 +461,7 @@
     },
     {
       "key": "room-builder/3d-walls/c13-r05",
-      "rect": [128, 55, 16, 6],
+      "rect": [192, 71, 16, 6],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [208, 80, 16, 16],
@@ -271,7 +471,7 @@
     },
     {
       "key": "room-builder/3d-walls/c14-r04",
-      "rect": [144, 55, 16, 16],
+      "rect": [208, 71, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
       "sourceRect": [224, 64, 16, 16],
@@ -280,8 +480,198 @@
       "tags": ["room-builder", "3d-walls", "architecture"]
     },
     {
+      "key": "room-builder/3d-walls/c16-r00",
+      "rect": [224, 71, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [256, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c16-r01",
+      "rect": [240, 71, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [256, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c16-r03",
+      "rect": [0, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [256, 48, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c16-r04",
+      "rect": [16, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [256, 64, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c18-r00",
+      "rect": [32, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [288, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c18-r01",
+      "rect": [48, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [288, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c18-r02",
+      "rect": [64, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [288, 32, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c18-r05",
+      "rect": [80, 87, 16, 6],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [288, 80, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c19-r00",
+      "rect": [96, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [304, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c19-r02",
+      "rect": [112, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [304, 32, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c19-r03",
+      "rect": [128, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [304, 48, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c19-r05",
+      "rect": [144, 87, 16, 6],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [304, 80, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c20-r00",
+      "rect": [160, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [320, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c20-r01",
+      "rect": [176, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [320, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c21-r00",
+      "rect": [192, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [336, 0, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c21-r01",
+      "rect": [208, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [336, 16, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c21-r02",
+      "rect": [224, 87, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [336, 32, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/3d-walls/c21-r05",
+      "rect": [240, 87, 16, 6],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_3d_walls_16x16.png",
+      "sourceRect": [336, 80, 16, 16],
+      "theme": "room-builder",
+      "category": "3d-walls",
+      "tags": ["room-builder", "3d-walls", "architecture"]
+    },
+    {
+      "key": "room-builder/floors/c01-r12",
+      "rect": [0, 103, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floors_16x16.png",
+      "sourceRect": [16, 192, 16, 16],
+      "theme": "room-builder",
+      "category": "floors",
+      "tags": ["room-builder", "floors", "architecture"]
+    },
+    {
       "key": "room-builder/floors/c01-r31",
-      "rect": [160, 55, 16, 16],
+      "rect": [16, 103, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floors_16x16.png",
       "sourceRect": [16, 496, 16, 16],
@@ -290,8 +680,38 @@
       "tags": ["room-builder", "floors", "architecture"]
     },
     {
+      "key": "room-builder/floors/c09-r14",
+      "rect": [32, 103, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floors_16x16.png",
+      "sourceRect": [144, 224, 16, 16],
+      "theme": "room-builder",
+      "category": "floors",
+      "tags": ["room-builder", "floors", "architecture"]
+    },
+    {
+      "key": "room-builder/floors/c09-r33",
+      "rect": [48, 103, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floors_16x16.png",
+      "sourceRect": [144, 528, 16, 16],
+      "theme": "room-builder",
+      "category": "floors",
+      "tags": ["room-builder", "floors", "architecture"]
+    },
+    {
+      "key": "room-builder/floors/c13-r33",
+      "rect": [64, 103, 16, 16],
+      "sourceKind": "room_builder_tile",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floors_16x16.png",
+      "sourceRect": [208, 528, 16, 16],
+      "theme": "room-builder",
+      "category": "floors",
+      "tags": ["room-builder", "floors", "architecture"]
+    },
+    {
       "key": "room-builder/floors/c13-r35",
-      "rect": [176, 55, 16, 16],
+      "rect": [80, 103, 16, 16],
       "sourceKind": "room_builder_tile",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles/Room_Builder_Floors_16x16.png",
       "sourceRect": [208, 560, 16, 16],
@@ -301,7 +721,7 @@
     },
     {
       "key": "single/normal/art/art-singles-22",
-      "rect": [192, 55, 32, 32],
+      "rect": [96, 103, 32, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/7_Art_Singles/Art_Singles_22.png",
       "sourceRect": [0, 0, 32, 32],
@@ -312,7 +732,7 @@
     },
     {
       "key": "single/normal/art/art-singles-30",
-      "rect": [224, 55, 16, 32],
+      "rect": [128, 103, 16, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/7_Art_Singles/Art_Singles_30.png",
       "sourceRect": [0, 0, 16, 32],
@@ -323,7 +743,7 @@
     },
     {
       "key": "single/normal/art/art-singles-46",
-      "rect": [240, 55, 16, 32],
+      "rect": [144, 103, 16, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/7_Art_Singles/Art_Singles_46.png",
       "sourceRect": [0, 0, 16, 32],
@@ -334,7 +754,7 @@
     },
     {
       "key": "single/normal/bedroom/bedroom-singles-125",
-      "rect": [0, 87, 48, 48],
+      "rect": [160, 103, 48, 48],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/4_Bedroom_Singles/Bedroom_Singles_125.png",
       "sourceRect": [0, 0, 48, 48],
@@ -345,7 +765,7 @@
     },
     {
       "key": "single/normal/bedroom/bedroom-singles-140",
-      "rect": [48, 87, 16, 48],
+      "rect": [208, 103, 16, 48],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/4_Bedroom_Singles/Bedroom_Singles_140.png",
       "sourceRect": [0, 0, 16, 48],
@@ -356,7 +776,7 @@
     },
     {
       "key": "single/normal/bedroom/bedroom-singles-385",
-      "rect": [64, 87, 32, 32],
+      "rect": [224, 103, 32, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/4_Bedroom_Singles/Bedroom_Singles_385.png",
       "sourceRect": [0, 0, 32, 32],
@@ -366,8 +786,118 @@
       "tags": ["bedroom", "object"]
     },
     {
+      "key": "single/normal/classroom-and-library/classroom-and-library-singles-43",
+      "rect": [0, 151, 32, 48],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/5_Classroom_and_Library_Singles/Classroom_and_Library_Singles_43.png",
+      "sourceRect": [0, 0, 32, 48],
+      "variant": "normal",
+      "theme": "classroom-and-library",
+      "category": "object",
+      "tags": ["classroom-and-library", "object"]
+    },
+    {
+      "key": "single/normal/grocery-store/grocery-store-singles-57",
+      "rect": [32, 151, 32, 48],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/16_Grocery_Store_Singles/Grocery_Store_Singles_57.png",
+      "sourceRect": [0, 0, 32, 48],
+      "variant": "normal",
+      "theme": "grocery-store",
+      "category": "object",
+      "tags": ["grocery-store", "object"]
+    },
+    {
+      "key": "single/normal/grocery-store/grocery-store-singles-158",
+      "rect": [64, 151, 32, 48],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/16_Grocery_Store_Singles/Grocery_Store_Singles_158.png",
+      "sourceRect": [0, 0, 32, 48],
+      "variant": "normal",
+      "theme": "grocery-store",
+      "category": "object",
+      "tags": ["grocery-store", "object"]
+    },
+    {
+      "key": "single/normal/grocery-store/grocery-store-singles-250",
+      "rect": [96, 151, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/16_Grocery_Store_Singles/Grocery_Store_Singles_250.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "grocery-store",
+      "category": "object",
+      "tags": ["grocery-store", "object"]
+    },
+    {
+      "key": "single/normal/grocery-store/grocery-store-singles-256",
+      "rect": [128, 151, 32, 48],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/16_Grocery_Store_Singles/Grocery_Store_Singles_256.png",
+      "sourceRect": [0, 0, 32, 48],
+      "variant": "normal",
+      "theme": "grocery-store",
+      "category": "object",
+      "tags": ["grocery-store", "object"]
+    },
+    {
+      "key": "single/normal/grocery-store/grocery-store-singles-422",
+      "rect": [160, 151, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/16_Grocery_Store_Singles/Grocery_Store_Singles_422.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "grocery-store",
+      "category": "object",
+      "tags": ["grocery-store", "object"]
+    },
+    {
+      "key": "single/normal/kitchen/kitchen-singles-121",
+      "rect": [192, 151, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/12_Kitchen_Singles/Kitchen_Singles_121.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "kitchen",
+      "category": "object",
+      "tags": ["kitchen", "object"]
+    },
+    {
+      "key": "single/normal/kitchen/kitchen-singles-149",
+      "rect": [224, 151, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/12_Kitchen_Singles/Kitchen_Singles_149.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "kitchen",
+      "category": "object",
+      "tags": ["kitchen", "object"]
+    },
+    {
+      "key": "single/normal/kitchen/kitchen-singles-309",
+      "rect": [0, 199, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/12_Kitchen_Singles/Kitchen_Singles_309.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "kitchen",
+      "category": "object",
+      "tags": ["kitchen", "object"]
+    },
+    {
+      "key": "single/normal/kitchen/kitchen-singles-407",
+      "rect": [32, 199, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/12_Kitchen_Singles/Kitchen_Singles_407.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "kitchen",
+      "category": "object",
+      "tags": ["kitchen", "object"]
+    },
+    {
       "key": "single/normal/living-room/living-room-singles-13",
-      "rect": [96, 87, 32, 48],
+      "rect": [64, 199, 32, 48],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_13.png",
       "sourceRect": [0, 0, 32, 48],
@@ -378,7 +908,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-15",
-      "rect": [128, 87, 16, 32],
+      "rect": [96, 199, 16, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_15.png",
       "sourceRect": [0, 0, 16, 32],
@@ -388,8 +918,19 @@
       "tags": ["living-room", "object"]
     },
     {
+      "key": "single/normal/living-room/living-room-singles-18",
+      "rect": [112, 199, 32, 48],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_18.png",
+      "sourceRect": [0, 0, 32, 48],
+      "variant": "normal",
+      "theme": "living-room",
+      "category": "object",
+      "tags": ["living-room", "object"]
+    },
+    {
       "key": "single/normal/living-room/living-room-singles-27",
-      "rect": [144, 87, 16, 16],
+      "rect": [144, 199, 16, 16],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_27.png",
       "sourceRect": [0, 0, 16, 16],
@@ -399,8 +940,19 @@
       "tags": ["living-room", "object"]
     },
     {
+      "key": "single/normal/living-room/living-room-singles-33",
+      "rect": [160, 199, 32, 32],
+      "sourceKind": "single",
+      "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_33.png",
+      "sourceRect": [0, 0, 32, 32],
+      "variant": "normal",
+      "theme": "living-room",
+      "category": "object",
+      "tags": ["living-room", "object"]
+    },
+    {
       "key": "single/normal/living-room/living-room-singles-37",
-      "rect": [160, 87, 32, 48],
+      "rect": [192, 199, 32, 48],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_37.png",
       "sourceRect": [0, 0, 32, 48],
@@ -411,7 +963,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-55",
-      "rect": [192, 87, 32, 32],
+      "rect": [224, 199, 32, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_55.png",
       "sourceRect": [0, 0, 32, 32],
@@ -422,7 +974,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-63",
-      "rect": [224, 87, 16, 32],
+      "rect": [0, 247, 16, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_63.png",
       "sourceRect": [0, 0, 16, 32],
@@ -433,7 +985,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-71",
-      "rect": [240, 87, 16, 32],
+      "rect": [16, 247, 16, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_71.png",
       "sourceRect": [0, 0, 16, 32],
@@ -444,7 +996,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-79",
-      "rect": [0, 135, 16, 48],
+      "rect": [32, 247, 16, 48],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_79.png",
       "sourceRect": [0, 0, 16, 48],
@@ -455,7 +1007,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-107",
-      "rect": [16, 135, 32, 48],
+      "rect": [48, 247, 32, 48],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_107.png",
       "sourceRect": [0, 0, 32, 48],
@@ -466,7 +1018,7 @@
     },
     {
       "key": "single/normal/living-room/living-room-singles-116",
-      "rect": [48, 135, 16, 32],
+      "rect": [80, 247, 16, 32],
       "sourceKind": "single",
       "sourcePath": "assets/interiors/1_Interiors/16x16/Theme_Sorter_Singles/2_Living_Room_Singles/Living_Room_Singles_116.png",
       "sourceRect": [0, 0, 16, 32],

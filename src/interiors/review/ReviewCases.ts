@@ -4,7 +4,7 @@ import type { WallProfileOptions } from "../ApartmentWallProfiles.js";
 import type { FurniturePlacement } from "../FurnitureCatalog.js";
 import type { InteriorIdentity } from "../GameplayInterior.js";
 import { boundaryReviewCases } from "./BoundaryReviewCases.js";
-import { buildingLayoutReviewCases } from "./BuildingLayoutReviewCases.js";
+import { buildingLayoutReviewCases, livedInReviewCases } from "./BuildingLayoutReviewCases.js";
 import { connectionReviewCases } from "./ConnectionReviewCases.js";
 import { furnitureReviewCases } from "./FurnitureReviewCases.js";
 import { generatedReviewCases } from "./GeneratedReviewCases.js";
@@ -30,6 +30,7 @@ export const REVIEW_STAGES = [
   "Generated small counterexamples",
   "Furniture catalog",
   "Playable building layouts",
+  "Lived-in homes, restaurants and shops",
 ] as const;
 export interface ReviewCase {
   id: string;
@@ -281,5 +282,6 @@ export function reviewCases(): ReviewCase[] {
     ...generatedReviewCases(),
     ...furnitureReviewCases(),
     ...buildingLayoutReviewCases(),
+    ...livedInReviewCases(),
   ];
 }
