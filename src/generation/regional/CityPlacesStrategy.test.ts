@@ -11,7 +11,7 @@ import { Chunk } from "../../world/Chunk.js";
 import { cityPlacesSurfaceAt } from "./CityPlacesPlanner.js";
 import { regionalWorld } from "./WorldDescriptor.js";
 
-// Keep each exhaustive seed check within the normal test timeout on CI runners.
+// Keep exhaustive checks scoped to one seed; batch prop queries per sampled pose.
 it.each(
   (["regional-v7", "regional-v8", "regional-v9", "regional-v10"] as const).flatMap((revision) =>
     [2026, 42].map((seed) => ({ revision, seed })),
@@ -49,6 +49,7 @@ it.each(
           }
         }
       const lot = plan.places.find((p) => p.kind === "parking-lot");
+      const props = [...found.values()];
       if (lot) {
         expect(lot.bays).toHaveLength(6);
         expect(
@@ -66,11 +67,11 @@ it.each(
                 top: y * 16 + 3,
                 bottom: y * 16 + 13,
               };
-              for (const p of found.values())
-                expect(
-                  aabbOverlapsPropWalls(box, p.position, p),
-                  `${p.type} blocks pedestrian access`,
-                ).toBe(false);
+              const blockedBy = props.find((p) => aabbOverlapsPropWalls(box, p.position, p));
+              expect(
+                blockedBy,
+                `${blockedBy?.type} blocks pedestrian access at ${x},${y}`,
+              ).toBeUndefined();
             }
       for (const actor of plan.actors) {
         const entity = required(ENTITY_FACTORIES[actor.type])(actor.wx, actor.wy);
@@ -83,12 +84,11 @@ it.each(
               wx: a.wx + ((b.wx - a.wx) * n) / steps,
               wy: a.wy + ((b.wy - a.wy) * n) / steps,
             };
-            if (entity.collider)
-              for (const p of found.values())
-                expect(
-                  aabbOverlapsPropWalls(getEntityAABB(pos, entity.collider), p.position, p),
-                  `${actor.featureId} blocked by ${p.type}`,
-                ).toBe(false);
+            if (entity.collider) {
+              const box = getEntityAABB(pos, entity.collider);
+              const blockedBy = props.find((p) => aabbOverlapsPropWalls(box, p.position, p));
+              expect(blockedBy, `${actor.featureId} blocked by ${blockedBy?.type}`).toBeUndefined();
+            }
           }
         }
       }

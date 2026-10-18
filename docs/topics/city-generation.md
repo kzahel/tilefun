@@ -21,6 +21,10 @@ without version bumps (2026-10-04); development worlds are disposable. Keep the
 current behavior tests, deterministic replay, query-order independence, seam/geometry
 checks and stable IDs for the current implementation. Old same-version terrain/edits
 are not migrated: use a fresh world or explicit recreation to inspect new output.
+The exhaustive district/city-place route tests check terrain once per sampled
+actor pose and batch prop collision assertions per pose. This removes repeated
+work that exceeded CI's five-second timeout while retaining all route samples,
+prop obstruction checks and the default timeout (2026-10-18).
 This change does not automatically erase any saved worlds. Do not retain runtime
 branches or old world-output hashes to reproduce retired versions. The version
 in a save detects retired descriptors, not output drift within the active

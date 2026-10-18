@@ -214,6 +214,7 @@ describe("current dense districts and approved art", () => {
             if (actor.route.length && actor.featureId.startsWith(`${plan.settlementId}:`))
               actorMap.set(actor.featureId, actor);
       const actors = [...actorMap.values()];
+      const routeProps = [...props.values()];
       expect(actors).toHaveLength(plan.actors.length);
       for (const a of actors) {
         const entity = required(ENTITY_FACTORIES[a.type])(a.wx, a.wy);
@@ -233,11 +234,12 @@ describe("current dense districts and approved art", () => {
               `${a.featureId} terrain`,
             ).toBe(0);
             expect(
-              [...props.values()].some(
-                (p) =>
-                  aabbOverlapsPropWalls(b, p.position, p, 0) ||
-                  aabbOverlapsSolid(b, (x, y) => world.getCollision(x, y), 3),
-              ),
+              routeProps.some((p) => aabbOverlapsPropWalls(b, p.position, p, 0)),
+              `${a.featureId} route hits a prop`,
+            ).toBe(false);
+            // Terrain collision depends on the actor pose, not the prop count.
+            expect(
+              aabbOverlapsSolid(b, (x, y) => world.getCollision(x, y), 3),
               `${a.featureId} route collides`,
             ).toBe(false);
           }
