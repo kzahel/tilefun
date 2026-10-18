@@ -64,8 +64,13 @@ Original water actors retain identity/position/RNG, and small ponds separate
 crabs from the existing fish school. Bears explicitly include crab as prey.
 Source/replay/crops, nine aquatic/game browser checks and streaming readiness
 pass; the final full suite has 2,899 passes and the five known Windows failures.
-Fourteen new entries plus sixteen delivered leave 166 remaining; octopus is
-next, with its fresh eight-arm source already passing continuous mechanics checks.
+Octopus now also spawns in compatible deep lagoons. Its rust mantle moves
+above eight five-link arms with source-driven sucker marks and a curl action.
+Source/replay/crops and three game/browser checks pass; the full suite has
+2,910 passes and the five known Windows failures. Its deep-water lab uses
+.4 inspection zoom to include both dry arrival and animal. Fifteen new entries
+plus sixteen delivered leave 165 remaining; jellyfish source/native prototype
+is next, with a genuinely deforming closed bell and attached trailing arms.
 
 ## Horse and giraffe motion
 

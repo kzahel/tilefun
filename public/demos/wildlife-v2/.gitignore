@@ -395,3 +395,6 @@
 
 # Verified pending motion identities, owner-authorized autonomous run 140.
 !crab/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!octopus/roster-v2/*

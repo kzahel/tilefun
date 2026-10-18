@@ -6348,6 +6348,46 @@
       "fingerprint": "d4946bf58628fe15061b788394ce240d2e980ae9b9c6646774c50399db165968"
     },
     {
+      "id": "nature:octopus:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Rust octopus · deep refuge · sparse",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-octopus&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-7295&y=48020&landscape=sparse&zoom=0.8",
+      "fingerprint": "86419e0e5c0b0da2075ce974c4e3e1e641054b2eb6cf46b46e7434369d78bd35"
+    },
+    {
+      "id": "nature:octopus:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Rust octopus · deep refuge · balanced",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-octopus&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-7295&y=48020&landscape=balanced&zoom=0.8",
+      "fingerprint": "9a1edcd1bf97f670f0e759f136062789c693b351d7f63e1de94359a08bbef84a"
+    },
+    {
+      "id": "nature:octopus:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Rust octopus · deep refuge · lush",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-octopus&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-7295&y=48020&landscape=lush&zoom=0.8",
+      "fingerprint": "728cc8406f4fac7b7b0ee7e197411b6b31560021fb5331c04f367df3e72edc10"
+    },
+    {
+      "id": "nature:octopus:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Rust octopus · deep refuge · thicket",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-octopus&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-7295&y=48020&landscape=thicket&zoom=0.8",
+      "fingerprint": "6ab91506f0f0739265e38b9251253fa59132242eafe84bc2a189a81a10537f67"
+    },
+    {
       "id": "nature:cat-ginger:sparse:v1",
       "batchId": "natural-landscapes",
       "kind": "geometry",
@@ -18695,6 +18735,48 @@
           "revision": "0f54494cf4e9af9240581d466af64f62097c94a7f70c75da66f0c252e8a34011",
           "renderFingerprint": "af68bb181088edd33fe1c6e687804550a5206e3e5289a517d4a66146758af620",
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-crab-roster-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-octopus-roster-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Octopus · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-octopus-roster-v2",
+      "fingerprint": "2e57cf0be47e2e1375ae5b92f5872a3c78bfd67a5afe9e58afb7602bde8b8e8f",
+      "sourceFingerprint": "22e92eb63172d89587318666f6330fb87722498c7478ed7ac4b7f33102bfda43",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-octopus-roster-v2",
+        "prefabIds": [],
+        "revision": "82876f524b507a62cf429a4d3df2dcd49ea4f841a02e90a76c7a0911c7ab6a41",
+        "renderFingerprint": "2e57cf0be47e2e1375ae5b92f5872a3c78bfd67a5afe9e58afb7602bde8b8e8f",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-octopus-roster-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-octopus-roster-v2",
+        "fingerprint": "22e92eb63172d89587318666f6330fb87722498c7478ed7ac4b7f33102bfda43",
+        "sheetSize": [
+          1968,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1968,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-octopus-roster-v2",
+          "prefabIds": [],
+          "revision": "82876f524b507a62cf429a4d3df2dcd49ea4f841a02e90a76c7a0911c7ab6a41",
+          "renderFingerprint": "2e57cf0be47e2e1375ae5b92f5872a3c78bfd67a5afe9e58afb7602bde8b8e8f",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-octopus-roster-v2"
         }
       }
     },
@@ -32973,5 +33055,5 @@
       }
     }
   ],
-  "inputDigest": "e0bb33b1bade5ef729e5d3df3ae10426b675b14e6ce55857ac1f8be07dbba876"
+  "inputDigest": "46ef9f7d851ccc573bdc0e9e95919661ce334a4eb9e59fe21ac63d5a85f2f9ef"
 }

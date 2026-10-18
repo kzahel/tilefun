@@ -188,3 +188,20 @@ assertion; distinguish them from newly introduced failures.
   2,899 pass, five known Windows failures, ten skipped. Fourteen newly completed
   plus sixteen delivered leave 166 remaining. Octopus source/native prototype
   is underway; all new exact pixels remain pending human art review.
+
+- 22:16 UTC: fresh octopus `roster-v2` completed in world/editor/shared lab.
+  Independent rounded rust mantle, crown, paired golden slit eyes, siphon and
+  eight five-link arm chains with attached sucker marks. The moving mantle and
+  staggered arm waves use a 32-pose/960ms jet cycle; an eight-pose curl action
+  shortens the spread. Source checks 129 jet and 33 action samples/facing,
+  13,120 fixed arm links, constant geometry/scale and exact loop closure.
+  Endpoint separation is below .001 native px; mantle paint moves 1.18-3.35px.
+  Source replay and 328 exact Chromium crops pass. Fixed water slots admit
+  the swimmer only to complete deep-water footprints. Initial browser failures
+  were the lab framing check: dry arrival and swimmer fell outside the default
+  view. Established .4 deep-water inspection zoom fixes visibility; all three
+  Canvas/GPU/ball checks pass. Typecheck/lint/build and 924-candidate manifest
+  pass. Full units: 2,910 pass, five known Windows failures, ten skipped.
+  Fifteen newly completed plus sixteen delivered leave 165 remaining.
+  Jellyfish's closed deforming bell prototype passes independent volume and
+  attachment checks; final art for every new identity remains pending review.

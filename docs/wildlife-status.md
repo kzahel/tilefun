@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**14 newly completed; 1 in progress; 165 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**15 newly completed; 1 in progress; 164 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -13,7 +13,8 @@
 | Butterfly | finished-game-active | [Playback](../public/demos/wildlife-v2/butterfly/roster-v2/index.html) |
 | Gorilla | finished-game-active | [Playback](../public/demos/wildlife-v2/gorilla/roster-v2/index.html) |
 | Crab | finished-game-active | [Playback](../public/demos/wildlife-v2/crab/roster-v2/index.html) |
-| Octopus | in-progress | Source/animation work |
+| Octopus | finished-game-active | [Playback](../public/demos/wildlife-v2/octopus/roster-v2/index.html) |
+| Jellyfish | in-progress | Source/animation work |
 | Cat | finished-game-active | [Playback](../public/demos/wildlife-v2/cat/motion-v2/index.html) |
 | Dog | finished-game-active | [Playback](../public/demos/wildlife-v2/dog/motion-v2/index.html) |
 | Red squirrel | finished-game-active | [Playback](../public/demos/wildlife-v2/red-squirrel/roster-v2/index.html) |
@@ -26,7 +27,7 @@
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T22:08:22.002Z (19/10/2026, 00:08:22 Berlin).
+Snapshot: 2026-10-18T22:16:30.040Z (19/10/2026, 00:16:30 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

@@ -1,0 +1,17 @@
+{
+  "identity": "octopus-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "retainedRigidPaintMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 3.0882459312839075,
+    "up": 1.186852065163734,
+    "left": 3.3439094829291456,
+    "right": 2.3991666011478863
+  },
+  "sourceArmCount": 8,
+  "jetDurationMs": 960
+}

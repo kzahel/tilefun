@@ -5293,5 +5293,98 @@
         "sha256": "b08b335265ac2a73ecaacf55c6041a6a73c3324c106cb2e0e70c1e65ad1efeaa"
       }
     ]
+  },
+  {
+    "id": "octopus-roster-v2",
+    "animalId": "octopus",
+    "revision": "roster-v2",
+    "name": "Octopus · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/octopus/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-octopus-roster-v2",
+      "name": "Octopus sheet",
+      "image": "demos/wildlife-v2/octopus/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "22e92eb63172d89587318666f6330fb87722498c7478ed7ac4b7f33102bfda43",
+      "source": "art-source/wildlife-v2/octopus/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-octopus-roster-v2-scene",
+      "name": "Octopus scene",
+      "image": "demos/wildlife-v2/octopus/roster-v2/scene-native.png",
+      "width": 352,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "79a9374b371905e8cc3653d310605cb56ef3473d2a77b4e0b8303a69edba83ca",
+      "source": "art-source/wildlife-v2/octopus/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-octopus-roster-v2-contact",
+      "name": "Octopus contact",
+      "image": "demos/wildlife-v2/octopus/roster-v2/contact-sheet-native.png",
+      "width": 384,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "5c09b665f571fa846e32b8527afbe4c207b4c72b1a93a361ce460444917abe86",
+      "source": "art-source/wildlife-v2/octopus/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/octopus/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/contact-sheet-native.png",
+        "sha256": "5c09b665f571fa846e32b8527afbe4c207b4c72b1a93a361ce460444917abe86"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/index.html",
+        "sha256": "bd9e3c0f8e6cb42b7b69cabbfd7d8f55e6f0bdff90f28e5b063f3977047593e8"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/pixel-audit.json",
+        "sha256": "e27cd57d71dcaaa7e19b6eeccdd0dc4e63251f440dfc3f60b2424e4aabd5fa2b"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/preview-native.gif",
+        "sha256": "05296ac4dc4ea76aee4fba8781389847c936f29494881ac05301015307f774b5"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/preview.gif",
+        "sha256": "d6410013922d33c082432fa55b0204c1b2763e5f508e2efec0db3d535dbbc83d"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/scene-background.png",
+        "sha256": "cd1422d4ac03452da3c582dee9b9a676dade9f6f25bc1b77cb73df573451e088"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/scene-native.png",
+        "sha256": "79a9374b371905e8cc3653d310605cb56ef3473d2a77b4e0b8303a69edba83ca"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/sheet.png",
+        "sha256": "22e92eb63172d89587318666f6330fb87722498c7478ed7ac4b7f33102bfda43"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/source-audit.json",
+        "sha256": "d8c597f2c4a88b70d681723252823ddb473da12d2fdc2298e026d4dd97ca3da3"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/sprite.json",
+        "sha256": "bad0406013973f5b0cb4aff9c4884f7a57e08bcc4564f63f50ed12f32707fe7b"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/travel-native.gif",
+        "sha256": "8ebaad72fc56d6e8a92528551b776fce7c86c244e37b93f87c2a8eb4a34e3c22"
+      },
+      {
+        "path": "demos/wildlife-v2/octopus/roster-v2/validation.json",
+        "sha256": "66874bd105cc9cfe5b373fc53252b6c5e803169449175d0faeaba4f7f2a82d16"
+      }
+    ]
   }
 ]

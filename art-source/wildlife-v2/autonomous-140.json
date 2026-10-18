@@ -204,9 +204,14 @@
     "octopus": {
       "name": "Octopus",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T22:16:00Z",
+      "receipt": "art-source/wildlife-v2/octopus/roster-v2/receipt.json",
+      "evidence": "Eight five-link arms; 129 jet and 33 curl samples/facing; 13120 fixed arm links; moving mantle paint, exact loop closure, constant geometry/scale; byte-identical replay; 328 exact Chromium crops; three shared game/browser checks",
+      "agentObservation": "Rust mantle, crown, golden side eyes and independently narrowing sucker-marked arms read in native/enlarged strips. Mantle visibly heaves/pitches and arms curl. Deep-water lab uses .4 inspection zoom so the dry shore arrival and animal fit together. Exact final pixels pending human review."
     },
     "penguin": {
       "name": "Penguin",
@@ -247,9 +252,9 @@
     "jellyfish": {
       "name": "Jellyfish",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2"
     },
     "cat": {
       "name": "Cat",
@@ -1605,6 +1610,13 @@
         "crab"
       ],
       "validation": "Typecheck/lint/build, 919-candidate manifest, nine aquatic/crab browser checks and final streaming --assert-ready pass. Final full units: 2899 pass, 5 known Windows failures, 10 skipped. Fixed 42-species aquatic slots preserve original water actors/RNG; small-pond separation and four-direction sideways phase/reload regressions pass."
+    },
+    {
+      "utc": "2026-10-18T22:16:00Z",
+      "completed": [
+        "octopus"
+      ],
+      "validation": "Typecheck/lint/build, 924-candidate manifest and three browser checks pass. Full units: 2910 pass, 5 known Windows failures, 10 skipped. Deep-water fixture uses established .4 inspection zoom after initial visibility-only browser failures; no animal simulation change was needed."
     }
   ],
   "existingOutsideRoster": [
@@ -1642,6 +1654,12 @@
     },
     "sideways-crustaceans": {
       "animal": "crab",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    },
+    "eight-arm-aquatics": {
+      "animal": "octopus",
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"
