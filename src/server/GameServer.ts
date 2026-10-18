@@ -19,6 +19,7 @@ import {
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
+import { districtBuilding } from "../generation/regional/DistrictBuildings.js";
 import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { buildingDoor, exteriorDoors, withLivedInLayout } from "../interiors/BuildingDoors.js";
@@ -939,10 +940,10 @@ export class GameServer {
     if (!(terrain instanceof DistrictStrategy))
       throw new Error("World has no enterable districts.");
     const source = terrain.districts;
-    const lot = source
-      .owner(Number(match[1]), Number(match[2]))
-      ?.blocks.flatMap((b) => b.lots)
-      .find((l) => l.id === parsed.featureId);
+    const lot = districtBuilding(
+      source.owner(Number(match[1]), Number(match[2])),
+      parsed.featureId,
+    );
     if (!lot) throw new Error("Building is absent from the pinned district plan.");
     const interior: InteriorIdentity = withLivedInLayout(
       {

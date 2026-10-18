@@ -61,6 +61,26 @@ Previously visited rooms retain their saved identity, furniture, edits and
 connections. Legacy rooms with one street exit still use their original landing
 from either visible exterior entrance; adding a second physical opening requires
 an explicit room migration.
+Shopping-center storefronts now use the same door controls, walk-through travel,
+saved interiors and room editing (2026-10-18). All seven bakery/ice-cream facades
+retain their existing `prop-shopping-v1-*` types and procedural IDs. Their audited
+source doors have clear sidewalk landings, and each storefront gets its own
+`restaurant-v3` room, with its entrance on the clear central aisle rather than
+behind a seated customer. Server resolution checks the actual owner's shopping-center
+plan as well as ordinary block lots; roofs and accessories remain scenery.
+Existing current-generator malls gain doors on reload without regenerating terrain.
+The normal sprite/collider factory and road-cell parking surfaces are preserved.
+This fixes player entry; reliable road visitor scheduling remains separate work.
+Regression coverage includes all seven shops, distinct realm identities, collision
+and prop reconstruction, server exit/restart, and real-input browser traversal of
+both facade types with indoor reload and return to the same storefront.
+Validation: 2,775 unit tests, typechecks, lint (existing warnings), build and
+streaming readiness passed. All 22 focused browser checks passed across mall and
+city doors, lived-in/legacy interiors, parking visits and the train rerun. The
+initial full browser attempt was stopped after a train-count assertion; that
+exact test passed on the focused rerun. All 848 Workshop raster identities were
+verified; pinned exterior art and reviewed static compositions are unchanged.
+
 Older regional/country-house recipes retain their original compact interiors.
 Upper floors and per-building authored variants remain future work.
 

@@ -559,6 +559,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
   const outdoor = outdoorRuntimeAsset(type);
   if (outdoor) return outdoor.metadata.colliders?.map((c) => ({ ...c })) ?? null;
   if (type === INTERIOR_WALL_TYPE) return interiorWalls();
+  const shopping = shoppingScenery.find((p) => p.type === type);
+  if (shopping) return shopping.walls;
   const recipe = buildingRecipe(type);
   if (recipe)
     return [

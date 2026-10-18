@@ -47,7 +47,9 @@ export function exteriorEntrance(
 export function interiorRealmId(parentWorldId: string, featureId: string): string {
   if (
     !/^[a-zA-Z0-9-]{1,100}$/.test(parentWorldId) ||
-    !/^settlement:-?\d+:-?\d+:block:\d+:\d+:lot:\d+$/.test(featureId)
+    !/^settlement:-?\d+:-?\d+:(?:block:\d+:\d+:lot:\d+|shopping:\d+:prop-shopping-v1-(?:1|3|5|7|9|11|13))$/.test(
+      featureId,
+    )
   )
     throw new Error("Invalid building identity.");
   return `interior~${parentWorldId}~${encodeURIComponent(featureId)}~0`;

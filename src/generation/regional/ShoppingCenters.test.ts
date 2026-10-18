@@ -83,3 +83,92 @@ it("reconstructs each generated shopping prop through the durable prop factory",
     expect(copy.position).toEqual({ wx: p.position.wx + 1024, wy: p.position.wy - 2048 });
   }
 });
+
+it("connects all seven existing storefront identities to distinct furnished interiors and safe doors", async () => {
+  const { districtBuilding } = await import("./DistrictBuildings.js");
+  const { SHOPPING_BUILDINGS, shoppingSceneryPlacements } = await import("./ShoppingScenery.js");
+  const { denseDoorThresholds } = await import("./DenseDoorThresholds.js");
+  const { exteriorDoors, buildingDoors, withLivedInLayout } = await import(
+    "../../interiors/BuildingDoors.js"
+  );
+  const { interiorRealmId, parseInteriorId, interiorPlan, interiorGenerator } = await import(
+    "../../interiors/GameplayInterior.js"
+  );
+  const { createPlayer } = await import("../../entities/Player.js");
+  const { indoorResidents } = await import("../../interiors/IndoorResidents.js");
+  const { ENTITY_DEFS } = await import("../../entities/EntityDefs.js");
+  const { aabbOverlapsPropWalls, aabbsOverlap, getEntityAABB } = await import(
+    "../../entities/collision.js"
+  );
+  const { serializeProp, deserializeProp } = await import("../../shared/serialization.js");
+  const plan = new DenseDistrictSource(regionalWorld(2026), true).owner(0, 0);
+  const center = required(plan?.shoppingCenters?.[0]);
+  const placements = shoppingSceneryPlacements(center);
+  const realmIds = new Set<string>();
+  expect(SHOPPING_BUILDINGS).toHaveLength(7);
+  for (const recipe of SHOPPING_BUILDINGS) {
+    const p = required(placements.find((p) => p.propType === recipe.type));
+    const lot = required(districtBuilding(plan, p.featureId));
+    const prop = createProp(p.propType, p.wx, p.wy);
+    const outside = required(exteriorDoors(prop)[0]).outside;
+    const threshold = required(denseDoorThresholds(recipe).find((d) => d.primary));
+    expect(outside).toEqual({ wx: p.wx + threshold.dx, wy: p.wy + 16 });
+    expect(lot.entrance).toEqual({ x: outside.wx / 16, y: outside.wy / 16 });
+    const player = createPlayer(outside.wx, outside.wy);
+    expect(
+      aabbOverlapsPropWalls(
+        getEntityAABB(player.position, required(player.collider)),
+        prop.position,
+        prop,
+      ),
+    ).toBe(false);
+    expect(deserializeProp(serializeProp(prop)).walls).toEqual(prop.walls);
+    const identity = withLivedInLayout(
+      {
+        version: "interior-v1",
+        parentWorldId: "mall-world",
+        featureId: lot.id,
+        buildingType: lot.buildingType,
+        floor: 0,
+        returnX: lot.entrance.x,
+        returnY: lot.entrance.y,
+      },
+      prop.position,
+    );
+    expect(identity.layout).toBe("restaurant-v3");
+    expect(interiorPlan(identity).objects.length).toBeGreaterThan(3);
+    expect(buildingDoors(identity)[0]?.outside).toEqual(outside);
+    const connection = required(buildingDoors(identity)[0]);
+    const fixtures = interiorGenerator(identity, 2026)
+      .placements(0, 0, new Set())
+      .placements.map((p) => createProp(p.propType, p.wx, p.wy));
+    // A fresh approach must be possible without walking into furniture or seated customers.
+    for (let wy = connection.arrival.wy - 48; wy <= connection.inside.wy; wy += 2) {
+      const body = getEntityAABB({ wx: connection.arrival.wx, wy }, required(player.collider));
+      expect(fixtures.some((p) => aabbOverlapsPropWalls(body, p.position, p))).toBe(false);
+      expect(
+        indoorResidents(identity).some((actor) => {
+          const collider = required(ENTITY_DEFS[actor.type]?.collider);
+          return aabbsOverlap(body, getEntityAABB({ wx: actor.wx, wy: actor.wy }, collider));
+        }),
+      ).toBe(false);
+    }
+    const id = interiorRealmId(identity.parentWorldId, lot.id);
+    realmIds.add(id);
+    expect(parseInteriorId(id)?.featureId).toBe(lot.id);
+  }
+  expect(realmIds.size).toBe(7);
+  // Roofs, accessories and invented centers must never become interiors.
+  for (const p of placements.filter(
+    (p) => !SHOPPING_BUILDINGS.some((b) => b.type === p.propType),
+  )) {
+    expect(districtBuilding(plan, p.featureId)).toBeUndefined();
+    expect(() => interiorRealmId("mall-world", p.featureId)).toThrow();
+  }
+  expect(
+    districtBuilding(
+      plan,
+      `${center.id.replace(/:shopping:\d+$/, ":shopping:99")}:prop-shopping-v1-1`,
+    ),
+  ).toBeUndefined();
+});

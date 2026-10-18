@@ -1910,3 +1910,85 @@ it("restaurant visitor walks out and returns with one durable identity while the
     await server.destroy();
   }
 }, 30000);
+
+it("enters every mall shop, exits at its own facade and restores a saved mall interior", async () => {
+  const setup = await createTestSetup();
+  const { server, transport, registry } = setup;
+  const { DenseDistrictSource } = await import("../generation/regional/DenseDistrictPlanner.js");
+  const { regionalWorld } = await import("../generation/regional/WorldDescriptor.js");
+  const { shoppingBuilding, shoppingSceneryPlacements } = await import(
+    "../generation/regional/ShoppingScenery.js"
+  );
+  const { exteriorDoors, buildingDoors } = await import("../interiors/BuildingDoors.js");
+  const generation = createDescriptor("regional", 2026);
+  const plan = new DenseDistrictSource(regionalWorld(2026), true).owner(0, 0);
+  const center = plan?.shoppingCenters?.[0];
+  if (!center) throw new Error("Missing mall");
+  const shops = shoppingSceneryPlacements(center).filter((p) => shoppingBuilding(p.propType));
+  transport.connect("local", restoreProfile);
+  await server.settle();
+  const meta = await registry.createWorld(
+    "Mall doors",
+    undefined,
+    undefined,
+    undefined,
+    generation,
+  );
+  const identities = new Set<string>();
+  try {
+    for (const [i, shop] of shops.entries()) {
+      const outside = exteriorDoors({
+        type: shop.propType,
+        position: { wx: shop.wx, wy: shop.wy },
+      })[0]?.outside;
+      if (!outside) throw new Error("Missing mall door");
+      await server.loadWorld(meta.id, { x: outside.wx / 16, y: outside.wy / 16, generation });
+      // The factory reconstructs saved scenery with the same type/procedural ID.
+      expect(server.propManager.props.some((p) => p.proceduralId === shop.featureId)).toBe(true);
+      transport.clientSend("local", {
+        type: "enter-building",
+        requestId: 9000 + i,
+        featureId: shop.featureId,
+      });
+      await server.settle();
+      const interior = server.worldInterior;
+      expect(interior?.featureId).toBe(shop.featureId);
+      expect(interior?.layout).toBe("restaurant-v3");
+      if (!interior) throw new Error("Mall entry failed");
+      const connection = buildingDoors(interior)[0];
+      if (!connection) throw new Error("Missing mall connection");
+      identities.add(connection.insideRealmId);
+      expect(server.getLocalSession().player.position).toEqual(connection.arrival);
+      if (i === shops.length - 1) break; // Restart while inside the final shop.
+      server.getLocalSession().player.position = { ...connection.inside };
+      transport.clientSend("local", { type: "exit-building", requestId: 9100 + i });
+      await server.settle();
+      expect(server.worldInterior).toBeNull();
+      expect(server.getLocalSession().player.position).toEqual(outside);
+    }
+    expect(identities.size).toBe(7);
+    const interior = server.worldInterior;
+    await server.flushAsync();
+    await server.destroy();
+    const resumedTransport = new TestTransport();
+    const resumed = new GameServer(resumedTransport, { registry, createStore: setup.createStore });
+    try {
+      await resumed.init();
+      resumedTransport.connect("local", restoreProfile);
+      await resumed.settle();
+      expect(resumed.worldInterior).toEqual(interior);
+      if (!interior) throw new Error("Missing saved mall interior");
+      const connection = buildingDoors(interior)[0];
+      if (!connection) throw new Error("Missing saved mall connection");
+      resumed.getLocalSession().player.position = { ...connection.inside };
+      resumedTransport.clientSend("local", { type: "exit-building", requestId: 9200 });
+      await resumed.settle();
+      expect(resumed.worldInterior).toBeNull();
+      expect(resumed.getLocalSession().player.position).toEqual(connection.outside);
+    } finally {
+      await resumed.destroy();
+    }
+  } finally {
+    await server.destroy();
+  }
+});

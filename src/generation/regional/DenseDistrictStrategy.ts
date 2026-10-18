@@ -15,7 +15,7 @@ import { DistrictStrategy, type FeaturePlacement } from "./DistrictStrategy.js";
 import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
 import { settlementGreenProps } from "./SettlementPets.js";
-import { shoppingScenery } from "./ShoppingScenery.js";
+import { shoppingSceneryPlacements } from "./ShoppingScenery.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
 
 /** Shared dense realization using promoted facades, streets and walking routes.
@@ -110,14 +110,7 @@ export class DenseDistrictStrategy extends DistrictStrategy {
       for (const dy of [-4.5, 4.5])
         add(`${plan.id}:lamp:${dx}:${dy}`, "prop-street-lamp", x + dx, y + dy);
     props.push(...settlementGreenProps(plan));
-    for (const c of plan.shoppingCenters ?? [])
-      for (const p of shoppingScenery)
-        props.push({
-          featureId: `${c.id}:${p.type}`,
-          propType: p.type,
-          wx: c.wx + p.position.wx,
-          wy: c.wy + p.position.wy,
-        });
+    for (const c of plan.shoppingCenters ?? []) props.push(...shoppingSceneryPlacements(c));
     return props;
   }
   actors(cx: number, cy: number): ActorPlacement[] {

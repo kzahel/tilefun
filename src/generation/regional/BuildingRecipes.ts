@@ -1,6 +1,7 @@
 import { CITY_ARCHITECTURE_BUILDINGS } from "./CityArchitectureAssets.js";
 import { CITY_BUILDING_PREFABS } from "./CityBuildingPrefabs.js";
 import { DENSE_CITY_BUILDINGS } from "./DenseCityAssets.js";
+import { SHOPPING_BUILDINGS } from "./ShoppingScenery.js";
 
 /** Audited ME modular facade recipes. Source rectangles remain in the original atlas. */
 export interface FacadePiece {
@@ -82,6 +83,7 @@ export function buildingRecipe(type: string): BuildingRecipe | undefined {
     BUILDING_RECIPES.find((recipe) => recipe.type === type) ??
     DENSE_CITY_BUILDINGS.find((recipe) => recipe.type === type) ??
     CITY_ARCHITECTURE_BUILDINGS.find((recipe) => recipe.type === type) ??
-    CITY_BUILDING_PREFABS.find((recipe) => recipe.type === type)
+    CITY_BUILDING_PREFABS.find((recipe) => recipe.type === type) ??
+    SHOPPING_BUILDINGS.find((recipe) => recipe.type === type)
   );
 }

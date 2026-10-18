@@ -2,6 +2,7 @@ import { TILE_SIZE } from "../config/constants.js";
 import type { Prop } from "../entities/Prop.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { denseDoorThresholds } from "../generation/regional/DenseDoorThresholds.js";
+import { shoppingBuilding } from "../generation/regional/ShoppingScenery.js";
 import {
   exteriorEntrance,
   INTERIOR_ENTRY,
@@ -86,7 +87,8 @@ export function withBuildingLayout(
   identity: InteriorIdentity,
   position: Prop["position"],
 ): InteriorIdentity {
-  if (!identity.buildingType.startsWith("prop-city-")) return identity;
+  const shopping = shoppingBuilding(identity.buildingType);
+  if (!identity.buildingType.startsWith("prop-city-") && !shopping) return identity;
   const doors = exteriorDoors({ type: identity.buildingType, position }).sort(
     (a, b) => a.outside.wx - b.outside.wx,
   );
@@ -96,8 +98,9 @@ export function withBuildingLayout(
     layout: buildingRecipe(identity.buildingType)?.kind === "shop" ? "shop-v2" : "apartment-v2",
     doors: doors.map((door, i) => ({
       ...door,
-      inside: { wx: (i === 0 ? 2 : 8) * 32 + 8, wy: 8 * 32 + 16 },
-      arrival: { wx: (i === 0 ? 2 : 8) * 32 + 8, wy: 8 * 32 - 8 },
+      // The central restaurant aisle avoids the seated diner beside the left door.
+      inside: { wx: (shopping ? 5 : i === 0 ? 2 : 8) * 32 + 8, wy: 8 * 32 + 16 },
+      arrival: { wx: (shopping ? 5 : i === 0 ? 2 : 8) * 32 + 8, wy: 8 * 32 - 8 },
     })),
   };
 }
@@ -114,7 +117,8 @@ export function withLivedInLayout(
     layout:
       buildingRecipe(base.buildingType)?.kind !== "shop"
         ? "home-v3"
-        : /bakery|cafe|restaurant|diner/.test(base.buildingType)
+        : shoppingBuilding(base.buildingType) ||
+            /bakery|cafe|restaurant|diner/.test(base.buildingType)
           ? "restaurant-v3"
           : "market-v3",
     doors: (base.doors ?? []).map((door) => ({ ...door, inside: { ...door.inside, wy: 264 } })),

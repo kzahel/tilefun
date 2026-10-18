@@ -40,6 +40,11 @@ The same seed identifies the input, not an identical landscape across revisions.
 See [Tactical 035](../tactical/035-current-world-generation.md) for implementation
 and validation; [world explorer](../world-explorer.md) for navigation and handoff.
 
+Shopping-center stores retain their original generated scenery identities while
+participating in the ordinary building/interior lookup. Player enter/exit behavior
+and persistence are owned by [patterns and interiors](patterns-and-interiors.md).
+No terrain regeneration or parking-specific renderer is required for this door fix.
+
 ## Exact review scenes and asset banks
 
 Review approval remains tied to exact candidate identities. The twenty existing city

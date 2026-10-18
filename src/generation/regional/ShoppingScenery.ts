@@ -1,4 +1,8 @@
 import type { Prop } from "../../entities/Prop.js";
+import type { ShoppingCenter } from "../../traffic/ShoppingCenter.js";
+import type { BuildingRecipe } from "./BuildingRecipes.js";
+import { denseDoorThresholds } from "./DenseDoorThresholds.js";
+import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { isParkingObject, parkingLayout } from "./ParkingLayout.js";
 
 /** Reconstructible generated props: durable records store type and anchor. */
@@ -28,6 +32,47 @@ function buildScenery(): Prop[] {
     });
   }
   return props;
+}
+/** Door metadata for the existing facades; scenery keeps its original sprite/collision. */
+export const SHOPPING_BUILDINGS: readonly BuildingRecipe[] = shoppingScenery
+  .filter((p) => p.collider !== null)
+  .map((p) => {
+    const recipe: BuildingRecipe = {
+      type: p.type,
+      kind: "shop",
+      facing: "south",
+      width: p.sprite.spriteWidth,
+      height: p.sprite.spriteHeight,
+      groundDepth: 16,
+      entrance: { dx: 0, dy: 16 },
+      parts: [
+        {
+          frameCol: p.sprite.frameCol,
+          frameRow: p.sprite.frameRow,
+          spriteWidth: p.sprite.spriteWidth,
+          spriteHeight: p.sprite.spriteHeight,
+          dx: 0,
+          dy: 0,
+        },
+      ],
+    };
+    const door = denseDoorThresholds(recipe).find((d) => d.primary);
+    if (!door) throw new Error(`Missing storefront door: ${p.type}`);
+    // Keep the landing clear of the facade collider and align with the native door.
+    return { ...recipe, entrance: { dx: door.dx, dy: door.dy + 16 } };
+  });
+export function shoppingBuilding(type: string): BuildingRecipe | undefined {
+  return SHOPPING_BUILDINGS.find((b) => b.type === type);
+}
+
+/** One ID/anchor contract for generated scenery and server-side building lookup. */
+export function shoppingSceneryPlacements(center: ShoppingCenter): FeaturePlacement[] {
+  return shoppingScenery.map((p) => ({
+    featureId: `${center.id}:${p.type}`,
+    propType: p.type,
+    wx: center.wx + p.position.wx,
+    wy: center.wy + p.position.wy,
+  }));
 }
 export function shoppingSceneryProp(type: string, wx: number, wy: number): Prop | undefined {
   const template = shoppingScenery.find((p) => p.type === type);
