@@ -415,23 +415,27 @@
     "wolf": {
       "name": "Wolf",
       "family": "Canids (wild)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T22:42:00Z",
+      "receipt": "art-source/wildlife-v2/wolf/roster-v2/receipt.json",
+      "evidence": "129 walk/chase and 33 action source samples/facing; 10496 limb links, 1968 tail links, 1976 contacts and 1376 planted travel pairs; byte-identical replay; 648 exact Chromium crops; actual generated-population meals, lineage reload and shared game/browser checks"
     },
     "donkey": {
       "name": "Donkey",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "mule": {
       "name": "Mule",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "wild-turkey": {
       "name": "Wild turkey",
@@ -443,16 +447,16 @@
     "llama": {
       "name": "Llama",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "alpaca": {
       "name": "Alpaca",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "hamster": {
       "name": "Hamster",
@@ -478,16 +482,24 @@
     "coyote": {
       "name": "Coyote",
       "family": "Canids (wild)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T22:42:00Z",
+      "receipt": "art-source/wildlife-v2/coyote/roster-v2/receipt.json",
+      "evidence": "129 walk/chase and 33 action source samples/facing; 10496 limb links, 1968 tail links, 1976 contacts and 1376 planted travel pairs; byte-identical replay; 648 exact Chromium crops; actual generated-population meals, lineage reload and shared game/browser checks"
     },
     "spotted-hyena": {
       "name": "Spotted hyena",
       "family": "Canids (wild)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T22:42:00Z",
+      "receipt": "art-source/wildlife-v2/spotted-hyena/roster-v2/receipt.json",
+      "evidence": "129 walk/chase and 33 action source samples/facing; 10496 limb links, 1968 tail links, 1976 contacts and 1376 planted travel pairs; byte-identical replay; 648 exact Chromium crops; actual generated-population meals, lineage reload and shared game/browser checks"
     },
     "lion": {
       "name": "Lion",
@@ -1629,6 +1641,24 @@
         "jellyfish"
       ],
       "validation": "Typecheck/lint/build, 929-candidate manifest and three browser checks pass. Full units: 2921 pass, 5 known Windows failures, 10 skipped. Closed bell genuinely deforms with volume error below 8e-8 relative; native silhouette changes 4px in every facing."
+    },
+    {
+      "utc": "2026-10-18T22:37:00Z",
+      "prepared": [
+        "wolf",
+        "coyote",
+        "spotted-hyena"
+      ],
+      "validation": "Independent anatomy and native/enlarged walk/feed/display/chase inspection; 10496 limb and 1968 tail links per species; independent walk/chase planted travel; byte-identical replay; 1944 exact Chromium crops across three banks. 175 focused source/ecology/audio tests pass, including actual generated-population meals and lineage reload. Broader game validation remains."
+    },
+    {
+      "utc": "2026-10-18T22:42:00Z",
+      "completed": [
+        "wolf",
+        "coyote",
+        "spotted-hyena"
+      ],
+      "validation": "Typecheck/lint/build, 944-candidate manifest, ten real browser checks and streaming --assert-ready pass. Full units: 2971 pass, 5 known Windows failures, 10 skipped. Natural hunters fill fixed expansion slots with additional legal local prey; original predator owners remain fixed. Manual wolf eaten by rex stays gone after reload. Distinct bounded calls and shared weighted footsteps pass."
     }
   ],
   "existingOutsideRoster": [
@@ -1681,6 +1711,17 @@
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"
+    },
+    "ground-hunters": {
+      "animals": [
+        "wolf",
+        "coyote",
+        "spotted-hyena"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/ground-hunters-140/README.md"
     }
   }
 }

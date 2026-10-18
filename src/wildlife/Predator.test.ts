@@ -14,6 +14,7 @@ import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { createDeer } from "./Deer.js";
 import { createFauna } from "./Fauna.js";
+import { dietFor } from "./FoodWeb.js";
 import { createPredator, PREDATOR_PROFILES, predatorType } from "./Predator.js";
 import { resolvePredatorCatches, startlePredator, updatePredatorAI } from "./predatorAI.js";
 import { createRabbit } from "./Rabbit.js";
@@ -22,13 +23,15 @@ import { startleRabbit } from "./rabbitInteractions.js";
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
-  const preyFactory = p.fierce?.kind === "spider" ? createRabbit : createDeer;
+  const preyFactory = dietFor(p.species).has("deer") ? createDeer : createRabbit;
   const preyType = preyFactory(0, 0).type;
   const habitat = (e: Entity) => required(e.deer ?? e.rabbit);
   const setup = (factory = preyFactory) => {
     const manager = new EntityManager();
     const hunter = manager.spawn(createPredator(p.species, 0, 0));
-    const prey = manager.spawn(factory(21, 0));
+    const probe = factory(0, 0);
+    const contact = (required(hunter.collider).width + required(probe.collider).width) / 2 + 1;
+    const prey = manager.spawn(factory(contact, 0));
     prey.proceduralId = "world-prey";
     durableId(prey);
     Object.assign(required(hunter.predator), {
@@ -64,7 +67,7 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
   });
   it("replaces a rabbit in its own habitat and leaves an airborne rabbit alive", () => {
     const { manager, hunter, prey } = setup(createRabbit);
-    prey.position.wx = 17;
+    prey.position.wx = (required(hunter.collider).width + required(prey.collider).width) / 2 + 1;
     required(prey.rabbit).state = "hop";
     prey.wz = 3;
     resolvePredatorCatches(manager, [...manager.entities], open, []);
@@ -83,12 +86,14 @@ describe.each(PREDATOR_PROFILES)("$species hunting", (p) => {
     delete prey.proceduralId;
     const saved = decodeActor(encodeActor(prey)) as typeof prey;
     expect(saved.naturalSpawnId).toBeUndefined();
+    const corridorRadius = Math.max(30, Math.hypot(prey.position.wx, prey.position.wy) + 2);
+    expect(corridorRadius).toBeLessThan(56);
     resolvePredatorCatches(
       manager,
       [...manager.entities],
       {
         ...open,
-        canOccupy: (_e, point) => Math.hypot(point.wx, point.wy) < 30,
+        canOccupy: (_e, point) => Math.hypot(point.wx, point.wy) < corridorRadius,
       },
       [],
     );

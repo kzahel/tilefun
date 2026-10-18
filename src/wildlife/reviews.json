@@ -5479,5 +5479,284 @@
         "sha256": "306cbc2066d67793c7a8fb0b73ba84d8f8840bc93fde6dfa80dcfd677983ade5"
       }
     ]
+  },
+  {
+    "id": "wolf-roster-v2",
+    "animalId": "wolf",
+    "revision": "roster-v2",
+    "name": "Wolf · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/wolf/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-wolf-roster-v2",
+      "name": "Wolf sheet",
+      "image": "demos/wildlife-v2/wolf/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "88eea535d49696ced338823c40bf31c7d010454785909a49f9e57e6565fce341",
+      "source": "art-source/wildlife-v2/wolf/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-wolf-roster-v2-scene",
+      "name": "Wolf scene",
+      "image": "demos/wildlife-v2/wolf/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "9dc10959e117572582d52475ddf1babca0957f6dc3ccfb7aad0473e16c542845",
+      "source": "art-source/wildlife-v2/wolf/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-wolf-roster-v2-contact",
+      "name": "Wolf contact",
+      "image": "demos/wildlife-v2/wolf/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "9881837799a424952d0bfe8af82a0d2b16029a91b67623c23e596e00689f2644",
+      "source": "art-source/wildlife-v2/wolf/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/wolf/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/contact-sheet-native.png",
+        "sha256": "9881837799a424952d0bfe8af82a0d2b16029a91b67623c23e596e00689f2644"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/index.html",
+        "sha256": "3d669eb49ce8593b8e1256964ff4b9e70a2392836bc5934aab3aa03f8dca5164"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/pixel-audit.json",
+        "sha256": "e9cef34c75e45114d81b86f99291e9690bfc29722123a2e63c101ddc8a6fcd99"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/preview-native.gif",
+        "sha256": "9fa55765c7346d70a7ef8020363b228d4bb45ddbab406e7ab5b652b142e8627e"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/preview.gif",
+        "sha256": "bf52fd57acbfbc35a272346bbbf77878553561e2a09f3dbab9d7ade34cf03b93"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/scene-native.png",
+        "sha256": "9dc10959e117572582d52475ddf1babca0957f6dc3ccfb7aad0473e16c542845"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/sheet.png",
+        "sha256": "88eea535d49696ced338823c40bf31c7d010454785909a49f9e57e6565fce341"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/source-audit.json",
+        "sha256": "356ccd4a07be67a4bab098c94698d31853bd2b9793b44d48df9f9f00741ada49"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/sprite.json",
+        "sha256": "613209f4d3de50546b0458da2be84674b75a1f18d48392a227f8950bc191539e"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/travel-native.gif",
+        "sha256": "51da4ef2a697ac17a5657f8b941f31c50b005a90b44f298d7181ccfe90834491"
+      },
+      {
+        "path": "demos/wildlife-v2/wolf/roster-v2/validation.json",
+        "sha256": "daedac8aec17452a7c81da7e448994232324b5c34e8af6fb863bfe5c6002b4af"
+      }
+    ]
+  },
+  {
+    "id": "coyote-roster-v2",
+    "animalId": "coyote",
+    "revision": "roster-v2",
+    "name": "Coyote · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/coyote/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-coyote-roster-v2",
+      "name": "Coyote sheet",
+      "image": "demos/wildlife-v2/coyote/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e179275885056a5fb04548ec517adcb663cadd7d6ac183d28e57432677b3da71",
+      "source": "art-source/wildlife-v2/coyote/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-coyote-roster-v2-scene",
+      "name": "Coyote scene",
+      "image": "demos/wildlife-v2/coyote/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "14f9a34cdd84912ba4a3b3135d6fafee68ce60869166107655aafdcfc64d4a1b",
+      "source": "art-source/wildlife-v2/coyote/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-coyote-roster-v2-contact",
+      "name": "Coyote contact",
+      "image": "demos/wildlife-v2/coyote/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8ea37d86e835718e4162aa038f5a3782092d71c94ea522b88e2e86c2191852b6",
+      "source": "art-source/wildlife-v2/coyote/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/coyote/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/contact-sheet-native.png",
+        "sha256": "8ea37d86e835718e4162aa038f5a3782092d71c94ea522b88e2e86c2191852b6"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/index.html",
+        "sha256": "d1bfc4a356721a7c408cc787248542a61e07749aee5c5ebee4ddd399225850c5"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/pixel-audit.json",
+        "sha256": "bc2b3f87586eb6a5fac2a380d9bf6ee87d3412936e1f8628d2240f0ab21a512c"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/preview-native.gif",
+        "sha256": "da903a559fc1aef4ed1e9e1558fb522ac000a10af2475fb6244efad5311ab6e9"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/preview.gif",
+        "sha256": "ef2556e20e484bf22cfab233c4846f99e275041bff97ecc6d42a65e6131fc31e"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/scene-native.png",
+        "sha256": "14f9a34cdd84912ba4a3b3135d6fafee68ce60869166107655aafdcfc64d4a1b"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/sheet.png",
+        "sha256": "e179275885056a5fb04548ec517adcb663cadd7d6ac183d28e57432677b3da71"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/source-audit.json",
+        "sha256": "0b8b478f939ab16522fb5a5471215dbf3c788f2c6b6ee239e1873e2909fb9796"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/sprite.json",
+        "sha256": "3db0f120ab4b356b0f76b5ef2799362ccbbc073ee8569f0b9e9cefa3779b6be0"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/travel-native.gif",
+        "sha256": "c8b1f1833443750d494682bec0d8371ea667161f548dd86faab5afae857c295a"
+      },
+      {
+        "path": "demos/wildlife-v2/coyote/roster-v2/validation.json",
+        "sha256": "c8043562db22f2bc92fb0221a04b315c7ffea3bf4d7f88498edf41c6a69115db"
+      }
+    ]
+  },
+  {
+    "id": "spotted-hyena-roster-v2",
+    "animalId": "spotted-hyena",
+    "revision": "roster-v2",
+    "name": "Spotted hyena · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/spotted-hyena/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-spotted-hyena-roster-v2",
+      "name": "Spotted hyena sheet",
+      "image": "demos/wildlife-v2/spotted-hyena/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2bb072d95d260481f413e7e4dd0269fa41d2d91a1ae39c2787cd7bc319bdb3e2",
+      "source": "art-source/wildlife-v2/spotted-hyena/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-spotted-hyena-roster-v2-scene",
+      "name": "Spotted hyena scene",
+      "image": "demos/wildlife-v2/spotted-hyena/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "6cb11dc90721942cdbbb13226220c2d0b7f86b5d6b71bf662cd4d74366a61082",
+      "source": "art-source/wildlife-v2/spotted-hyena/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-spotted-hyena-roster-v2-contact",
+      "name": "Spotted hyena contact",
+      "image": "demos/wildlife-v2/spotted-hyena/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3ea383de0d84a2b4658d36d550902a5cda18a61bfbb489a900aec49b24083869",
+      "source": "art-source/wildlife-v2/spotted-hyena/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/spotted-hyena/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/contact-sheet-native.png",
+        "sha256": "3ea383de0d84a2b4658d36d550902a5cda18a61bfbb489a900aec49b24083869"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/index.html",
+        "sha256": "964b5b7d34c18d466ebbd241e9abdd3248768872ecc82635983de88b246e3a05"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/pixel-audit.json",
+        "sha256": "4a2e481d18f6bd839cbba8c16822e376f542b3397e979487e0fab27dbe2d6031"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/preview-native.gif",
+        "sha256": "9b3547ad3d92907407006b912fdce966d08a60c6a38e8804be4d20b9f4c73539"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/preview.gif",
+        "sha256": "a2a5692a7c6bec523a5da6a21fbbcd47cf214a2890cd791505447f81f307e7eb"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/scene-native.png",
+        "sha256": "6cb11dc90721942cdbbb13226220c2d0b7f86b5d6b71bf662cd4d74366a61082"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/sheet.png",
+        "sha256": "2bb072d95d260481f413e7e4dd0269fa41d2d91a1ae39c2787cd7bc319bdb3e2"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/source-audit.json",
+        "sha256": "8cd2ee6c24c2fb234d54d02dfab73b69aa7b8e0653d7986088319ff7b09ec70a"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/sprite.json",
+        "sha256": "0d82c7e8dacda4589f8ecd776cb28522f76868b5e2a271c87901ec3ec49315dd"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/travel-native.gif",
+        "sha256": "2e0fe6a74d7d1bc43be0a150506695ad2569e239303ab8b691ec18c9b9bce023"
+      },
+      {
+        "path": "demos/wildlife-v2/spotted-hyena/roster-v2/validation.json",
+        "sha256": "8e60f42c10970673b021519073105c415680189f86f7c1dbad81c6fb858551d5"
+      }
+    ]
   }
 ]

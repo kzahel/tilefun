@@ -223,3 +223,28 @@ assertion; distinguish them from newly introduced failures.
   Sixteen newly completed plus sixteen delivered leave 164 remaining.
   Wolf/coyote/spotted hyena source batch is underway. All new art stays pending
   human review; no vote or approval is inferred from agent inspection.
+
+- 22:42 UTC: fresh wolf, coyote and spotted hyena `roster-v2` completed.
+  Shared pinned empty-scene mechanics have independently authored proportions,
+  coats, heads, ears, tails and jaw parts. Grey wolf has a broad ruff; coyote
+  a narrower buff frame and longer muzzle/ears; hyena high shoulders/lower
+  haunches, rounded ears, mane and actual flank spots. Each bank has 324 poses:
+  independent 32-pose walk/chase plus feeding/display. Source audits check
+  10,496 limb links, 1,968 tail links, 1,976 contacts and 1,376 travel pairs per
+  species. Interpolated endpoint gap stays under .021 native px, body paint moves
+  at least 1px/facing, and constant meshes/scales/loops are verified. Replays
+  and 1,944 exact Chromium crops pass. Exact final pixels remain pending review.
+  New shared Predator art definitions preserve old clip banks. Fixed reserved
+  expansion homes seed additional legal nearby rabbits/deer, giving natural
+  hunters actual prey. Generated-population meals and lineage reload pass.
+  Coyote's smaller body exposed old fixed-distance catch fixtures; they now
+  place legal contact using actual widths and preserve the no-replacement-site
+  premise below 56px. Hyena chase speed is 42px/s with a matched authored stride,
+  allowing it to close on fleeing deer. Food-web tiers include the new hunters
+  as larger predators' prey. Calls are distinct bounded original synths.
+  Typecheck/lint/build, 944-candidate manifest, ten browser checks and streaming
+  --assert-ready pass. Browser proof includes Canvas/GPU meals/reload, real
+  world spawning/editor/deletion, and a manual wolf eaten by T. rex staying gone.
+  Full units: 2,971 pass, five known Windows failures, ten skipped. Nineteen new
+  entries plus sixteen delivered leave 161 remaining. Donkey/mule/llama/alpaca
+  begin next; source helpers pinned by these receipts must remain immutable.

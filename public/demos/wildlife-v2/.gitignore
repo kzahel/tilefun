@@ -401,3 +401,8 @@
 
 # Verified pending motion identities, owner-authorized autonomous run 140.
 !jellyfish/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!wolf/roster-v2/*
+!coyote/roster-v2/*
+!spotted-hyena/roster-v2/*

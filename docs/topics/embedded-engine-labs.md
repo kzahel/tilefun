@@ -82,6 +82,14 @@ closed volume-preserving bell deformation with attached rim arms. These are
 committed sprite frames at runtime, with identical source phase in game/lab.
 Deep-water inspection zoom includes the dry arrival and the complete animal.
 
+Natural wolf/coyote/hyena profiles add explicit authored clips to the shared
+Predator definition, preserving all original/fantasy banks. Their pounces keep
+the matched chase pose; feeding uses its own jaw action. Fixed expansion homes
+and additional natural prey feed the ordinary shared hunter AI. Ten browser
+checks cover Worker-lab meals, real-world spawning/editor/deletion, and no
+replacement for a player-placed wolf eaten by T. rex. Calls and weighted steps
+are shared by game and labs; onset/mute/pause/removal guards cover the new voices.
+
 ## Fierce creatures
 
 [139](../tactical/139-horse-motion-study.md) activates the completed horse and

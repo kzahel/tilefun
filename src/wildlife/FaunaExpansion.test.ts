@@ -5,6 +5,7 @@ import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { FAUNA_PROFILES, FAUNA_ROSTER, type FaunaProfile, faunaDefinition } from "./Fauna.js";
 import { FAUNA_EXPANSION_ROSTER, FAUNA_WATER_EXPANSION_ROSTER } from "./FaunaExpansion.js";
+import { NATURAL_HUNTER_PROFILES } from "./NaturalHunters.js";
 
 it("reserves the natural queue without changing original habitat owner slots", () => {
   expect(FAUNA_ROSTER).toEqual([
@@ -47,7 +48,7 @@ it("keeps expansion admission and eviction independent and query-order stable", 
   const home = first.faunaHome(14, -4, true);
   expect(home?.species).toBe("chicken");
   expect(home?.id).toBe("fauna-expansion-home:14:-4");
-  const active = new Set(FAUNA_PROFILES.map((p) => p.species));
+  const active = new Set([...FAUNA_PROFILES, ...NATURAL_HUNTER_PROFILES].map((p) => p.species));
   for (let i = 0; i < 400; i++) {
     const a = first.faunaHome(i, -i, true);
     const b = second.faunaHome(399 - i, i - 399, true);

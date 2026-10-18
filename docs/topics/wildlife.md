@@ -1,9 +1,9 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species, four pet variants, four original predators
-and all five authorized fierce creatures have durable provisional gameplay. New
-art remains pending human review; the current completion run authorizes expansion.
+Status: original banks, pets and fierce creatures retain provisional gameplay.
+The timed completion run adds verified repairs and new naturally spawning
+creatures. All changed art remains pending human review.
 Updated: 2026-10-18.
 
 ## Current eight-hour completion run
@@ -73,9 +73,18 @@ spawns as small deep-water groups. Its closed Blender bell actually deforms
 with reciprocal radial/height factors, preserving volume and attached rim
 arms. The native silhouette changes four pixels across the 1.28s pulse.
 Source/replay/crops and three game/browser checks pass; full units have 2,921
-passes and the five known Windows failures. Sixteen new entries plus sixteen
-delivered leave 164 remaining. Wolf, coyote and spotted hyena form the next
-hunter batch, with fresh geometry and shared food-web behavior.
+passes and the five known Windows failures. Wolf, coyote and spotted hyena
+now also spawn as distinct natural hunters with their own 32-pose walking and
+chasing strides, feeding/jaw motion and warning displays. Existing hunter banks
+keep their original clips. Fixed expansion slots own new natural clearings and
+small legal prey groups; real generated populations hunt and preserve replacement
+lineage through reload. Explicit food-web tiers allow larger predators to eat
+these hunters. A player-placed wolf eaten by T. rex remains gone after reload.
+Calls are distinct bounded synthesizers and footsteps use the shared weights.
+Source/replays and 1,944 exact crops pass; ten world/lab browser checks and
+streaming readiness pass. Full units have 2,971 passes and the five known Windows
+failures. Nineteen new entries plus sixteen delivered leave 161 remaining.
+Donkey, mule, llama and alpaca are the next related-animal batch.
 
 ## Horse and giraffe motion
 

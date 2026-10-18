@@ -44,8 +44,9 @@ export class AudioManager {
     if (!enabled) this.stopCreatureCalls();
     const live = new Set<number>();
     for (const entity of entities) {
-      const profile = predatorProfile(entity.type)?.fierce;
-      if (!profile) continue;
+      const profile = predatorProfile(entity.type),
+        kind = profile?.fierce?.kind ?? profile?.callKind;
+      if (!kind) continue;
       live.add(entity.id);
       const previous = this.creatureClips.get(entity.id),
         clip = entity.sprite?.clip;
@@ -65,7 +66,7 @@ export class AudioManager {
         continue;
       this.playCreatureCall(
         entity.id,
-        profile.kind,
+        kind,
         0.15 * (1 - distance / 480) ** 2,
         Math.max(-0.8, Math.min(0.8, (entity.position.wx - listener.wx) / 320)),
       );

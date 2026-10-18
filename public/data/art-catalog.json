@@ -396,6 +396,36 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-wolf-predator-v1",
+      "name": "wildlife wolf predator v1",
+      "image": "demos/wildlife-v2/wolf/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "88eea535d49696ced338823c40bf31c7d010454785909a49f9e57e6565fce341",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-coyote-predator-v1",
+      "name": "wildlife coyote predator v1",
+      "image": "demos/wildlife-v2/coyote/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e179275885056a5fb04548ec517adcb663cadd7d6ac183d28e57432677b3da71",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-spotted-hyena-predator-v1",
+      "name": "wildlife spotted hyena predator v1",
+      "image": "demos/wildlife-v2/spotted-hyena/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2bb072d95d260481f413e7e4dd0269fa41d2d91a1ae39c2787cd7bc319bdb3e2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
@@ -2523,6 +2553,36 @@
       "height": 128,
       "tileSize": 16,
       "fingerprint": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-wolf-roster-v2",
+      "name": "wildlife v2 wolf roster v2",
+      "image": "demos/wildlife-v2/wolf/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "88eea535d49696ced338823c40bf31c7d010454785909a49f9e57e6565fce341",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-coyote-roster-v2",
+      "name": "wildlife v2 coyote roster v2",
+      "image": "demos/wildlife-v2/coyote/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e179275885056a5fb04548ec517adcb663cadd7d6ac183d28e57432677b3da71",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-spotted-hyena-roster-v2",
+      "name": "wildlife v2 spotted hyena roster v2",
+      "image": "demos/wildlife-v2/spotted-hyena/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2bb072d95d260481f413e7e4dd0269fa41d2d91a1ae39c2787cd7bc319bdb3e2",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4925,11 +4985,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:894"
+          "source": "src/generation/regional/NaturalLandscape.ts:969"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1088"
+          "source": "src/generation/regional/NaturalLandscape.ts:1163"
         },
         {
           "system": "World generation",
@@ -23872,6 +23932,60 @@
       ]
     },
     {
+      "id": "sprite:wildlife-wolf-predator-v1",
+      "sheetId": "wildlife-wolf-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-wolf-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-coyote-predator-v1",
+      "sheetId": "wildlife-coyote-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-coyote-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-spotted-hyena-predator-v1",
+      "sheetId": "wildlife-spotted-hyena-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-spotted-hyena-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-fox-provisional-v1",
       "sheetId": "wildlife-fox-provisional-v1",
       "rect": [
@@ -25911,7 +26025,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:145"
         }
       ]
     },
@@ -25977,27 +26091,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:29"
+          "source": "src/wildlife/FoodWeb.ts:48"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:30"
+          "source": "src/wildlife/FoodWeb.ts:61"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:35"
+          "source": "src/wildlife/FoodWeb.ts:74"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:47"
+          "source": "src/wildlife/FoodWeb.ts:100"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:62"
+          "source": "src/wildlife/FoodWeb.ts:118"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:145"
         }
       ]
     },
@@ -26051,11 +26165,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:145"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:90"
+          "source": "src/wildlife/FoodWeb.ts:146"
         }
       ]
     },
@@ -26097,7 +26211,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:90"
+          "source": "src/wildlife/FoodWeb.ts:146"
         }
       ]
     },
@@ -26143,7 +26257,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:91"
+          "source": "src/wildlife/FoodWeb.ts:147"
         }
       ]
     },
@@ -26189,7 +26303,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:92"
+          "source": "src/wildlife/FoodWeb.ts:148"
         }
       ]
     },
@@ -26235,7 +26349,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:93"
+          "source": "src/wildlife/FoodWeb.ts:149"
         }
       ]
     },
@@ -26389,7 +26503,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:145"
         }
       ]
     },
@@ -26435,7 +26549,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:145"
         }
       ]
     },
@@ -27485,11 +27599,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:894"
+          "source": "src/generation/regional/NaturalLandscape.ts:969"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1088"
+          "source": "src/generation/regional/NaturalLandscape.ts:1163"
         },
         {
           "system": "World generation",

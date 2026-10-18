@@ -6,7 +6,9 @@ import { predatorProfile } from "./Predator.js";
 export function restorePredatorPose(e: Entity): void {
   const ai = e.predator;
   if (!ai || !e.sprite) return;
-  const fierce = predatorProfile(e.type)?.fierce;
+  const profile = predatorProfile(e.type),
+    fierce = profile?.fierce;
+  const chasePounce = !!(fierce || profile?.art);
   const moving = ["patrol", "stalk", "chase", "pounce", "evade", "flight"].includes(ai.state);
   e.sprite.moving = moving;
   if (e.wanderAI)
@@ -26,9 +28,11 @@ export function restorePredatorPose(e: Entity): void {
         ? 5
         : ai.state === "feed"
           ? 2
-          : ai.state === "display" || ai.state === "scared" || (ai.state === "pounce" && !fierce)
+          : ai.state === "display" ||
+              ai.state === "scared" ||
+              (ai.state === "pounce" && !chasePounce)
             ? 3
-            : ai.state === "chase" || ai.state === "evade" || (ai.state === "pounce" && fierce)
+            : ai.state === "chase" || ai.state === "evade" || (ai.state === "pounce" && chasePounce)
               ? 4
               : moving
                 ? 1

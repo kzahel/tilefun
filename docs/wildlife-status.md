@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**16 newly completed; 3 in progress; 161 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**19 newly completed; 4 in progress; 157 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -24,13 +24,17 @@
 | Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
 | Goat | finished-game-active | [Playback](../public/demos/wildlife-v2/goat/motion-v2/index.html) |
 | Chicken | finished-game-active | [Playback](../public/demos/wildlife-v2/chicken/roster-v2/index.html) |
-| Wolf | in-progress | Source/animation work |
-| Coyote | in-progress | Source/animation work |
-| Spotted hyena | in-progress | Source/animation work |
+| Wolf | finished-game-active | [Playback](../public/demos/wildlife-v2/wolf/roster-v2/index.html) |
+| Donkey | in-progress | Source/animation work |
+| Mule | in-progress | Source/animation work |
+| Llama | in-progress | Source/animation work |
+| Alpaca | in-progress | Source/animation work |
+| Coyote | finished-game-active | [Playback](../public/demos/wildlife-v2/coyote/roster-v2/index.html) |
+| Spotted hyena | finished-game-active | [Playback](../public/demos/wildlife-v2/spotted-hyena/roster-v2/index.html) |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T22:23:47.961Z (19/10/2026, 00:23:47 Berlin).
+Snapshot: 2026-10-18T22:42:46.885Z (19/10/2026, 00:42:46 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

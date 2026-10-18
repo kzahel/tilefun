@@ -1,0 +1,203 @@
+{
+  "wolf": {
+    "label": "Grey wolf",
+    "torso": [
+      0,
+      -0.1,
+      1.47
+    ],
+    "radii": [
+      0.43,
+      0.85,
+      0.43
+    ],
+    "chest": [
+      0,
+      0.48,
+      1.6
+    ],
+    "chestRadii": [
+      0.45,
+      0.45,
+      0.52
+    ],
+    "head": [
+      0,
+      1.03,
+      1.98
+    ],
+    "muzzle": 0.44,
+    "ears": "pointed",
+    "earHeight": 0.39,
+    "foreHip": [
+      0.31,
+      0.57,
+      1.4
+    ],
+    "hindHip": [
+      0.32,
+      -0.68,
+      1.29
+    ],
+    "foreLengths": [
+      0.65,
+      0.68,
+      0.34,
+      0.16
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.34,
+      0.16
+    ],
+    "tailRadius": 0.16,
+    "walkSpeed": 16,
+    "chaseSpeed": 40,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#333b3d",
+      "B": "#77817c",
+      "H": "#adb1a0",
+      "C": "#d1c7aa",
+      "M": "#565f5e",
+      "E": "#d6ac59",
+      "N": "#252f30"
+    }
+  },
+  "coyote": {
+    "label": "Coyote",
+    "torso": [
+      0,
+      -0.08,
+      1.32
+    ],
+    "radii": [
+      0.33,
+      0.77,
+      0.37
+    ],
+    "chest": [
+      0,
+      0.45,
+      1.42
+    ],
+    "chestRadii": [
+      0.35,
+      0.4,
+      0.43
+    ],
+    "head": [
+      0,
+      0.96,
+      1.82
+    ],
+    "muzzle": 0.48,
+    "ears": "pointed",
+    "earHeight": 0.43,
+    "foreHip": [
+      0.25,
+      0.53,
+      1.26
+    ],
+    "hindHip": [
+      0.26,
+      -0.62,
+      1.19
+    ],
+    "foreLengths": [
+      0.6,
+      0.62,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.57,
+      0.59,
+      0.32,
+      0.15
+    ],
+    "tailRadius": 0.13,
+    "walkSpeed": 14,
+    "chaseSpeed": 36,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#514235",
+      "B": "#9d865e",
+      "H": "#c7b387",
+      "C": "#e1d0a5",
+      "M": "#786948",
+      "E": "#b98a3e",
+      "N": "#2c3330"
+    }
+  },
+  "spotted-hyena": {
+    "label": "Spotted hyena",
+    "torso": [
+      0,
+      -0.1,
+      1.4
+    ],
+    "radii": [
+      0.49,
+      0.83,
+      0.45
+    ],
+    "chest": [
+      0,
+      0.45,
+      1.65
+    ],
+    "chestRadii": [
+      0.51,
+      0.47,
+      0.6
+    ],
+    "head": [
+      0,
+      1.05,
+      1.8
+    ],
+    "muzzle": 0.36,
+    "ears": "round",
+    "earHeight": 0.23,
+    "foreHip": [
+      0.35,
+      0.52,
+      1.49
+    ],
+    "hindHip": [
+      0.34,
+      -0.65,
+      1.13
+    ],
+    "foreLengths": [
+      0.7,
+      0.68,
+      0.35,
+      0.16
+    ],
+    "hindLengths": [
+      0.58,
+      0.57,
+      0.33,
+      0.15
+    ],
+    "tailRadius": 0.12,
+    "walkSpeed": 14,
+    "chaseSpeed": 42,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#49392e",
+      "B": "#b59a68",
+      "H": "#d8bc83",
+      "C": "#dfc791",
+      "M": "#6e553d",
+      "E": "#b97b38",
+      "N": "#302e29"
+    }
+  }
+}

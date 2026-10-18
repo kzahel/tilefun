@@ -1,11 +1,14 @@
 import { required } from "../art/ArtCatalog.js";
+import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
-import type { EntityDef } from "../entities/EntityDefs.js";
+import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import {
   FIERCE_PROFILES,
   type FierceBehaviorProfile,
   type FierceSpecies,
 } from "./FierceCreatures.js";
+
+import { NATURAL_HUNTER_PROFILES, type NaturalHunterSpecies } from "./NaturalHunters.js";
 
 const ORIGINAL_PREDATORS = [
   {
@@ -34,7 +37,10 @@ const ORIGINAL_PREDATORS = [
     weight: 300,
   },
 ] as const;
-export type PredatorSpecies = (typeof ORIGINAL_PREDATORS)[number]["species"] | FierceSpecies;
+export type PredatorSpecies =
+  | (typeof ORIGINAL_PREDATORS)[number]["species"]
+  | FierceSpecies
+  | NaturalHunterSpecies;
 export interface PredatorProfile {
   species: PredatorSpecies;
   label: string;
@@ -46,6 +52,14 @@ export interface PredatorProfile {
   anchorY: number;
   body: readonly [number, number, number];
   fierce?: FierceBehaviorProfile;
+  callKind?: CreatureCallKind;
+  art?: { identity: string; sha256: string; clips: readonly AnimationClip[] };
+  expansion?: {
+    habitat: "woodland" | "open";
+    radius: number;
+    group: number;
+    inspection: readonly [number, number];
+  };
 }
 export const PREDATOR_PROFILES: readonly PredatorProfile[] = [
   ...ORIGINAL_PREDATORS.map((p) => ({
@@ -59,6 +73,7 @@ export const PREDATOR_PROFILES: readonly PredatorProfile[] = [
     ],
   })),
   ...FIERCE_PROFILES,
+  ...NATURAL_HUNTER_PROFILES,
 ];
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
 const profilesByType = new Map(PREDATOR_PROFILES.map((p) => [predatorType(p.species), p]));
@@ -121,7 +136,7 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
         frameCount: 1,
         frameDuration: 100,
         drawOffsetY: p.anchorY - p.size / 2,
-        clips: [
+        clips: p.art?.clips ?? [
           { name: "idle", start: 0, count: 1, frameDuration: 180, loop: true },
           { name: "walk", start: 1, count: 12, frameDuration: 100, loop: true },
           { name: "feed", start: 13, count: 8, frameDuration: 160, loop: true },
@@ -188,7 +203,7 @@ export function createPredator(species: PredatorSpecies, wx: number, wy: number)
     wanderAI: { ...required(def.wanderAI), state: "idle", timer: 0, dirX: 0, dirY: 0 },
     predator: {
       home: { wx, wy },
-      radius: p.fierce ? 240 : 160,
+      radius: p.expansion?.radius ?? (p.fierce ? 240 : 160),
       state: "rest",
       timer: 1.5,
       elapsed: 0,

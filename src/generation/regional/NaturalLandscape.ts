@@ -17,6 +17,7 @@ import {
 } from "../../wildlife/FaunaExpansion.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
+import { NATURAL_HUNTER_PROFILES } from "../../wildlife/NaturalHunters.js";
 import { createPredator, PREDATOR_PROFILES, predatorType } from "../../wildlife/Predator.js";
 import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
 import { createRobin, ROBIN_TYPE } from "../../wildlife/Robin.js";
@@ -459,6 +460,7 @@ export class NaturalLandscape {
       ...this.fauna(cx, cy),
       ...this.predators(cx, cy),
       ...this.fiercePredators(cx, cy),
+      ...this.expansionPredators(cx, cy),
       ...this.waterFauna(cx, cy),
     ];
     if (!pond) return actors;
@@ -772,7 +774,12 @@ export class NaturalLandscape {
     const h = (salt: number) =>
       valueNoise(cx, cy, this.world.seed + salt + (expansion ? 30000 : 0));
     const species = roster[Math.floor(h(8011) * roster.length)];
-    const profile = FAUNA_PROFILES.find((p) => p.species === species);
+    const hunter = expansion
+      ? NATURAL_HUNTER_PROFILES.find((p) => p.species === species)
+      : undefined;
+    const profile =
+      FAUNA_PROFILES.find((p) => p.species === species) ??
+      (hunter ? { species: hunter.species, body: hunter.body, ...hunter.expansion } : undefined);
     let home: FaunaHome | null = null;
     if (profile && h(8001) < 0.65 && !["pond", "shore", "deep"].includes(profile.habitat)) {
       const clearance = Math.ceil(profile.radius / 16 + profile.body[0] / 32 + 4);
@@ -870,6 +877,74 @@ export class NaturalLandscape {
           wy,
           route: [],
           fauna,
+        });
+      }
+    }
+    return actors;
+  }
+  /** Natural hunters fill their reserved expansion slot, never original predator owners. */
+  expansionPredators(cx: number, cy: number): ActorPlacement[] {
+    const gx = Math.floor(cx / 4),
+      gy = Math.floor(cy / 4);
+    const home = this.faunaHome(gx, gy, true);
+    const p = NATURAL_HUNTER_PROFILES.find((p) => p.species === home?.species);
+    if (!home || !p) return [];
+    const wx = home.x * 16,
+      wy = home.y * 16;
+    const own = (x: number, y: number) => Math.floor(x / 256) === cx && Math.floor(y / 256) === cy;
+    const actors: ActorPlacement[] = [];
+    if (own(wx, wy)) {
+      const predator = required(createPredator(p.species, wx, wy).predator);
+      predator.home = { wx, wy };
+      predator.randomState =
+        Math.floor(valueNoise(gx, gy, this.world.seed + 38041) * 4294967296) >>> 0;
+      actors.push({
+        featureId: `wildlife:${p.species}:${this.world.seed}:${home.id}:0`,
+        type: predatorType(p.species),
+        wx,
+        wy,
+        route: [],
+        predator,
+      });
+    }
+    // The exclusive clearing needs local prey. These are additional natural owners;
+    // original rabbit/deer homes and editor-created individuals remain independent.
+    for (let i = 0; i < 2; i++) {
+      const x = wx + (i === 0 ? 64 : -64),
+        y = wy + 32;
+      if (!own(x, y)) continue;
+      const rabbit = required(createRabbit(x, y).rabbit);
+      rabbit.home = { wx, wy };
+      rabbit.shelter = { wx: x, wy: y };
+      rabbit.radius = 112;
+      rabbit.randomState =
+        Math.floor(valueNoise(gx, gy, this.world.seed + 38061 + i) * 4294967296) >>> 0;
+      actors.push({
+        featureId: `wildlife:expansion-prey:${p.species}:${this.world.seed}:${home.id}:rabbit:${i}`,
+        type: RABBIT_TYPE,
+        wx: x,
+        wy: y,
+        route: [],
+        rabbit,
+      });
+    }
+    if (p.species !== "coyote") {
+      const x = wx + 80,
+        y = wy - 32;
+      if (own(x, y)) {
+        const deer = required(createDeer(x, y).deer);
+        deer.home = { wx, wy };
+        deer.shelter = { wx: x, wy: y };
+        deer.radius = 112;
+        deer.randomState =
+          Math.floor(valueNoise(gx, gy, this.world.seed + 38071) * 4294967296) >>> 0;
+        actors.push({
+          featureId: `wildlife:expansion-prey:${p.species}:${this.world.seed}:${home.id}:deer:0`,
+          type: DEER_TYPE,
+          wx: x,
+          wy: y,
+          route: [],
+          deer,
         });
       }
     }

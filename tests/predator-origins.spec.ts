@@ -7,6 +7,7 @@ test.use({ channel: "chromium" });
 
 for (const pair of [
   { name: "deer", prey: DEER_TYPE, hunter: predatorType("tiger") },
+  { name: "wolf", prey: predatorType("wolf"), hunter: predatorType("t-rex") },
   { name: "brown bear", prey: predatorType("brown-bear"), hunter: predatorType("t-rex") },
 ])
   test(`a player-placed ${pair.name} is eaten without replacement in the real Worker world and stays gone on reload`, async ({
@@ -29,8 +30,7 @@ for (const pair of [
         const p = g.stateView.playerEntity.position;
         g.debugPanel.paused = true;
         g.transport.send({ type: "set-debug", paused: true, noclip: false });
-        // Isolate meal provenance from unrelated starter-world prey. Brown bear
-        // is slower than the T. rex; a wolf can legitimately escape its charge.
+        // Isolate meal provenance from unrelated starter-world prey.
         for (const e of g.stateView.entities)
           if (e.id !== g.stateView.playerEntity.id)
             g.transport.send({ type: "edit-delete-entity", entityId: e.id });

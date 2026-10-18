@@ -58,7 +58,11 @@ selects additional compatible profiles within already admitted ponds/lagoons.
 Inactive slots remain empty. Full water footprints are checked; pond expansion
 starts downstream of the original fish school, and original water actor identities,
 positions and RNG remain unchanged. Shore profiles await their own compatible
-admission. Current development worlds remain disposable.
+admission. New natural hunters also fill their reserved land expansion slots.
+Additional rabbit/deer owners inside these exclusive clearings supply legal
+nearby prey without moving original predator/glade selection. The new owned
+prey use ordinary procedural lineage and natural-only meal replacement.
+Current development worlds remain disposable.
 
 ## Exact review scenes and asset banks
 
