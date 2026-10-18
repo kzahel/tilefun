@@ -1,0 +1,430 @@
+{
+  "jaguar": {
+    "label": "Jaguar",
+    "torso": [
+      0,
+      -0.08,
+      1.51
+    ],
+    "radii": [
+      0.51,
+      0.94,
+      0.52
+    ],
+    "chest": [
+      0,
+      0.48,
+      1.67
+    ],
+    "chestRadii": [
+      0.53,
+      0.47,
+      0.56
+    ],
+    "head": [
+      0,
+      1.1,
+      2.06
+    ],
+    "skull": [
+      0.35,
+      0.31,
+      0.31
+    ],
+    "muzzleWidth": 0.25,
+    "earRadius": 0.13,
+    "tuft": 0,
+    "pattern": "large-rosette",
+    "foreHip": [
+      0.36,
+      0.57,
+      1.39
+    ],
+    "hindHip": [
+      0.37,
+      -0.72,
+      1.31
+    ],
+    "foreLengths": [
+      0.68,
+      0.7,
+      0.34,
+      0.16
+    ],
+    "hindLengths": [
+      0.68,
+      0.69,
+      0.34,
+      0.16
+    ],
+    "legRadii": [
+      0.19,
+      0.13,
+      0.085,
+      0.075
+    ],
+    "pawWidth": 0.16,
+    "tailLengths": [
+      0.34,
+      0.32,
+      0.3,
+      0.26
+    ],
+    "tailRadius": 0.13,
+    "walkSpeed": 16,
+    "chaseSpeed": 48,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#594126",
+      "B": "#c99445",
+      "H": "#e6bb73",
+      "C": "#efcf9b",
+      "M": "#664429",
+      "E": "#d0b34f",
+      "N": "#2d302b"
+    }
+  },
+  "leopard": {
+    "label": "Leopard",
+    "torso": [
+      0,
+      -0.08,
+      1.49
+    ],
+    "radii": [
+      0.4,
+      0.94,
+      0.45
+    ],
+    "chest": [
+      0,
+      0.48,
+      1.61
+    ],
+    "chestRadii": [
+      0.43,
+      0.44,
+      0.48
+    ],
+    "head": [
+      0,
+      1.08,
+      2.0
+    ],
+    "skull": [
+      0.29,
+      0.29,
+      0.28
+    ],
+    "muzzleWidth": 0.21,
+    "earRadius": 0.12,
+    "tuft": 0,
+    "pattern": "small-rosette",
+    "foreHip": [
+      0.3,
+      0.57,
+      1.37
+    ],
+    "hindHip": [
+      0.31,
+      -0.72,
+      1.31
+    ],
+    "foreLengths": [
+      0.65,
+      0.67,
+      0.33,
+      0.16
+    ],
+    "hindLengths": [
+      0.66,
+      0.66,
+      0.33,
+      0.16
+    ],
+    "legRadii": [
+      0.15,
+      0.11,
+      0.075,
+      0.065
+    ],
+    "pawWidth": 0.13,
+    "tailLengths": [
+      0.45,
+      0.43,
+      0.4,
+      0.37
+    ],
+    "tailRadius": 0.11,
+    "walkSpeed": 16,
+    "chaseSpeed": 46,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#5d452a",
+      "B": "#cca255",
+      "H": "#ebc98b",
+      "C": "#ead3a9",
+      "M": "#664827",
+      "E": "#ced18c",
+      "N": "#30362c"
+    }
+  },
+  "cheetah": {
+    "label": "Cheetah",
+    "torso": [
+      0,
+      -0.1,
+      1.65
+    ],
+    "radii": [
+      0.34,
+      1.02,
+      0.42
+    ],
+    "chest": [
+      0,
+      0.48,
+      1.75
+    ],
+    "chestRadii": [
+      0.39,
+      0.43,
+      0.51
+    ],
+    "head": [
+      0,
+      1.18,
+      2.23
+    ],
+    "skull": [
+      0.24,
+      0.27,
+      0.25
+    ],
+    "muzzleWidth": 0.18,
+    "earRadius": 0.11,
+    "tuft": 0,
+    "pattern": "solid-spots",
+    "foreHip": [
+      0.27,
+      0.59,
+      1.57
+    ],
+    "hindHip": [
+      0.28,
+      -0.77,
+      1.49
+    ],
+    "foreLengths": [
+      0.76,
+      0.76,
+      0.36,
+      0.16
+    ],
+    "hindLengths": [
+      0.73,
+      0.73,
+      0.35,
+      0.16
+    ],
+    "legRadii": [
+      0.13,
+      0.095,
+      0.065,
+      0.055
+    ],
+    "pawWidth": 0.12,
+    "tailLengths": [
+      0.46,
+      0.43,
+      0.4,
+      0.36
+    ],
+    "tailRadius": 0.115,
+    "walkSpeed": 20,
+    "chaseSpeed": 64,
+    "walkMs": 40,
+    "chaseMs": 15,
+    "palette": {
+      "K": "#6b512f",
+      "B": "#d6b16d",
+      "H": "#efd092",
+      "C": "#f2dfb7",
+      "M": "#39392a",
+      "E": "#8e973f",
+      "N": "#292f2b"
+    }
+  },
+  "lynx": {
+    "label": "Eurasian lynx",
+    "torso": [
+      0,
+      -0.06,
+      1.29
+    ],
+    "radii": [
+      0.43,
+      0.69,
+      0.46
+    ],
+    "chest": [
+      0,
+      0.39,
+      1.42
+    ],
+    "chestRadii": [
+      0.45,
+      0.39,
+      0.48
+    ],
+    "head": [
+      0,
+      0.82,
+      1.99
+    ],
+    "skull": [
+      0.28,
+      0.27,
+      0.28
+    ],
+    "muzzleWidth": 0.19,
+    "earRadius": 0.12,
+    "tuft": 0.23,
+    "pattern": "faint-spots",
+    "foreHip": [
+      0.29,
+      0.46,
+      1.2
+    ],
+    "hindHip": [
+      0.31,
+      -0.53,
+      1.13
+    ],
+    "foreLengths": [
+      0.59,
+      0.6,
+      0.31,
+      0.15
+    ],
+    "hindLengths": [
+      0.57,
+      0.57,
+      0.3,
+      0.15
+    ],
+    "legRadii": [
+      0.17,
+      0.13,
+      0.095,
+      0.085
+    ],
+    "pawWidth": 0.18,
+    "tailLengths": [
+      0.16,
+      0.14,
+      0.12
+    ],
+    "tailRadius": 0.14,
+    "walkSpeed": 14,
+    "chaseSpeed": 42,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#5a5144",
+      "B": "#a79678",
+      "H": "#c7b99b",
+      "C": "#e8dcc5",
+      "M": "#6b5e4c",
+      "E": "#bcba6a",
+      "N": "#2e3531"
+    }
+  },
+  "bobcat": {
+    "label": "Bobcat",
+    "torso": [
+      0,
+      -0.06,
+      1.22
+    ],
+    "radii": [
+      0.39,
+      0.66,
+      0.43
+    ],
+    "chest": [
+      0,
+      0.37,
+      1.35
+    ],
+    "chestRadii": [
+      0.4,
+      0.37,
+      0.44
+    ],
+    "head": [
+      0,
+      0.79,
+      1.84
+    ],
+    "skull": [
+      0.26,
+      0.26,
+      0.25
+    ],
+    "muzzleWidth": 0.18,
+    "earRadius": 0.12,
+    "tuft": 0.12,
+    "pattern": "short-spots",
+    "foreHip": [
+      0.27,
+      0.43,
+      1.14
+    ],
+    "hindHip": [
+      0.29,
+      -0.51,
+      1.09
+    ],
+    "foreLengths": [
+      0.57,
+      0.58,
+      0.3,
+      0.14
+    ],
+    "hindLengths": [
+      0.55,
+      0.56,
+      0.29,
+      0.14
+    ],
+    "legRadii": [
+      0.15,
+      0.11,
+      0.085,
+      0.075
+    ],
+    "pawWidth": 0.15,
+    "tailLengths": [
+      0.17,
+      0.15,
+      0.13
+    ],
+    "tailRadius": 0.12,
+    "walkSpeed": 14,
+    "chaseSpeed": 40,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#5d4533",
+      "B": "#b38854",
+      "H": "#d6b580",
+      "C": "#e4d2ac",
+      "M": "#6e513b",
+      "E": "#cfb071",
+      "N": "#29342d"
+    }
+  }
+}

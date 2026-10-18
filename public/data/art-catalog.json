@@ -426,6 +426,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-jaguar-predator-v1",
+      "name": "wildlife jaguar predator v1",
+      "image": "demos/wildlife-v2/jaguar/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e55e3128ebcf09869507b0c2370d695c1819eda59d922596a029a0189fdc8963",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-leopard-predator-v1",
+      "name": "wildlife leopard predator v1",
+      "image": "demos/wildlife-v2/leopard/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "161a1294936a47f7d4e0c2623b4cb7c8e6cd83e765fa0ac3694548612aaeb567",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-cheetah-predator-v1",
+      "name": "wildlife cheetah predator v1",
+      "image": "demos/wildlife-v2/cheetah/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c7beb1dc8ea3b83bcf3e7056adb974fece5d81f0f4044e0cf7fed92dd6b86b65",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-lynx-predator-v1",
+      "name": "wildlife lynx predator v1",
+      "image": "demos/wildlife-v2/lynx/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "d41012160813994f285e2a101c27ae019f136562a026536cab68c6d31ae600a7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-bobcat-predator-v1",
+      "name": "wildlife bobcat predator v1",
+      "image": "demos/wildlife-v2/bobcat/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "4fe6620c0187671c79ccf4b56d5d28a89dc95cdac3428f6a9481c750136d5355",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
@@ -2663,6 +2713,56 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "ee03f6099f75673aab4031da211b98137618800e70832ac78c0b83914ddeae2b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-jaguar-roster-v2",
+      "name": "wildlife v2 jaguar roster v2",
+      "image": "demos/wildlife-v2/jaguar/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e55e3128ebcf09869507b0c2370d695c1819eda59d922596a029a0189fdc8963",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-leopard-roster-v2",
+      "name": "wildlife v2 leopard roster v2",
+      "image": "demos/wildlife-v2/leopard/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "161a1294936a47f7d4e0c2623b4cb7c8e6cd83e765fa0ac3694548612aaeb567",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cheetah-roster-v2",
+      "name": "wildlife v2 cheetah roster v2",
+      "image": "demos/wildlife-v2/cheetah/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c7beb1dc8ea3b83bcf3e7056adb974fece5d81f0f4044e0cf7fed92dd6b86b65",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-lynx-roster-v2",
+      "name": "wildlife v2 lynx roster v2",
+      "image": "demos/wildlife-v2/lynx/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "d41012160813994f285e2a101c27ae019f136562a026536cab68c6d31ae600a7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-bobcat-roster-v2",
+      "name": "wildlife v2 bobcat roster v2",
+      "image": "demos/wildlife-v2/bobcat/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "4fe6620c0187671c79ccf4b56d5d28a89dc95cdac3428f6a9481c750136d5355",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -5065,11 +5165,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:969"
+          "source": "src/generation/regional/NaturalLandscape.ts:970"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1163"
+          "source": "src/generation/regional/NaturalLandscape.ts:1164"
         },
         {
           "system": "World generation",
@@ -24066,6 +24166,96 @@
       ]
     },
     {
+      "id": "sprite:wildlife-jaguar-predator-v1",
+      "sheetId": "wildlife-jaguar-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-jaguar-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-leopard-predator-v1",
+      "sheetId": "wildlife-leopard-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-leopard-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-cheetah-predator-v1",
+      "sheetId": "wildlife-cheetah-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-cheetah-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-lynx-predator-v1",
+      "sheetId": "wildlife-lynx-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-lynx-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-bobcat-predator-v1",
+      "sheetId": "wildlife-bobcat-predator-v1",
+      "rect": [
+        0,
+        0,
+        5184,
+        256
+      ],
+      "label": "wildlife-bobcat-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-fox-provisional-v1",
       "sheetId": "wildlife-fox-provisional-v1",
       "rect": [
@@ -26173,11 +26363,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:33"
+          "source": "src/wildlife/FoodWeb.ts:41"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:155"
+          "source": "src/wildlife/FoodWeb.ts:179"
         }
       ]
     },
@@ -26243,27 +26433,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:58"
+          "source": "src/wildlife/FoodWeb.ts:77"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:71"
+          "source": "src/wildlife/FoodWeb.ts:91"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:84"
+          "source": "src/wildlife/FoodWeb.ts:105"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:110"
+          "source": "src/wildlife/FoodWeb.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:128"
+          "source": "src/wildlife/FoodWeb.ts:152"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:155"
+          "source": "src/wildlife/FoodWeb.ts:179"
         }
       ]
     },
@@ -26313,15 +26503,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:34"
+          "source": "src/wildlife/FoodWeb.ts:42"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:155"
+          "source": "src/wildlife/FoodWeb.ts:179"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:156"
+          "source": "src/wildlife/FoodWeb.ts:180"
         }
       ]
     },
@@ -26363,7 +26553,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:156"
+          "source": "src/wildlife/FoodWeb.ts:180"
         }
       ]
     },
@@ -26409,7 +26599,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:157"
+          "source": "src/wildlife/FoodWeb.ts:181"
         }
       ]
     },
@@ -26455,7 +26645,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:158"
+          "source": "src/wildlife/FoodWeb.ts:182"
         }
       ]
     },
@@ -26501,7 +26691,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:159"
+          "source": "src/wildlife/FoodWeb.ts:183"
         }
       ]
     },
@@ -26655,7 +26845,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:155"
+          "source": "src/wildlife/FoodWeb.ts:179"
         }
       ]
     },
@@ -26701,7 +26891,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:155"
+          "source": "src/wildlife/FoodWeb.ts:179"
         }
       ]
     },
@@ -27751,11 +27941,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:969"
+          "source": "src/generation/regional/NaturalLandscape.ts:970"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1163"
+          "source": "src/generation/regional/NaturalLandscape.ts:1164"
         },
         {
           "system": "World generation",

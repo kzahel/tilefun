@@ -7,7 +7,7 @@ import { creatureCallSamples } from "./CreatureCall.js";
 afterEach(() => vi.unstubAllGlobals());
 
 describe("creature calls", () => {
-  it.each(["rex", "dragon", "wolf", "griffin", "spider", "coyote", "hyena"] as const)(
+  it.each(["rex", "dragon", "wolf", "griffin", "spider", "coyote", "hyena", "cat"] as const)(
     "%s has a bounded finite call with quiet edges",
     (kind) => {
       const samples = creatureCallSamples(kind, 8000);
@@ -20,7 +20,17 @@ describe("creature calls", () => {
       );
     },
   );
-  it.each(["t-rex", "wolf", "coyote", "spotted-hyena"] as const)(
+  it.each([
+    "t-rex",
+    "wolf",
+    "coyote",
+    "spotted-hyena",
+    "jaguar",
+    "leopard",
+    "cheetah",
+    "lynx",
+    "bobcat",
+  ] as const)(
     "%s plays one spatial call per display, suppresses late/muted calls and stops on pause/removal",
     (species) => {
       const sources: {

@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**23 newly completed; 5 in progress; 152 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**28 newly completed; 6 in progress; 146 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -31,15 +31,21 @@
 | Alpaca | finished-game-active | [Playback](../public/demos/wildlife-v2/alpaca/roster-v2/index.html) |
 | Coyote | finished-game-active | [Playback](../public/demos/wildlife-v2/coyote/roster-v2/index.html) |
 | Spotted hyena | finished-game-active | [Playback](../public/demos/wildlife-v2/spotted-hyena/roster-v2/index.html) |
-| Jaguar | in-progress | Source/animation work |
-| Leopard | in-progress | Source/animation work |
-| Cheetah | in-progress | Source/animation work |
-| Eurasian lynx | in-progress | Source/animation work |
-| Bobcat | in-progress | Source/animation work |
+| Jaguar | finished-game-active | [Playback](../public/demos/wildlife-v2/jaguar/roster-v2/index.html) |
+| Leopard | finished-game-active | [Playback](../public/demos/wildlife-v2/leopard/roster-v2/index.html) |
+| Cheetah | finished-game-active | [Playback](../public/demos/wildlife-v2/cheetah/roster-v2/index.html) |
+| Eurasian lynx | finished-game-active | [Playback](../public/demos/wildlife-v2/lynx/roster-v2/index.html) |
+| Bobcat | finished-game-active | [Playback](../public/demos/wildlife-v2/bobcat/roster-v2/index.html) |
+| Gemsbok | in-progress | Source/animation work |
+| Gazelle | in-progress | Source/animation work |
+| Impala | in-progress | Source/animation work |
+| Springbok | in-progress | Source/animation work |
+| Saiga antelope | in-progress | Source/animation work |
+| Gerenuk | in-progress | Source/animation work |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T23:07:28.348Z (19/10/2026, 01:07:28 Berlin).
+Snapshot: 2026-10-18T23:27:48.018Z (19/10/2026, 01:27:48 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

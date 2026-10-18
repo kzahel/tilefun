@@ -8,6 +8,7 @@ import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { creatureSpecies, dietFor } from "./FoodWeb.js";
 import { NATURAL_HUNTER_PROFILES } from "./NaturalHunters.js";
 import { createPredator, predatorType } from "./Predator.js";
 import { restorePredatorPose } from "./PredatorMotion.js";
@@ -62,7 +63,9 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
     expect(a).toEqual(collect(true));
     expect(a.filter((a) => a.predator)).toHaveLength(1);
     expect(a.filter((a) => a.rabbit)).toHaveLength(2);
-    expect(a.filter((a) => a.deer)).toHaveLength(p.species === "coyote" ? 0 : 1);
+    expect(a.filter((a) => a.deer)).toHaveLength(dietFor(p.species).has("deer") ? 1 : 0);
+    for (const prey of a.filter((e) => !e.predator))
+      expect(dietFor(p.species).has(creatureSpecies(prey) ?? "")).toBe(true);
     expect(new Set(a.map((a) => a.featureId)).size).toBe(a.length);
     const n = new NaturalLandscape(regionalWorld(2026), "thicket");
     for (const actor of a) expect(n.terrain(actor.wx / 16, actor.wy / 16)).toBe(TerrainId.Grass);

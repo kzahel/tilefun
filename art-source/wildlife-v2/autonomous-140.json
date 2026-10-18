@@ -534,37 +534,62 @@
     "jaguar": {
       "name": "Jaguar",
       "family": "Felids (big cats)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:27:47Z",
+      "receipt": "art-source/wildlife-v2/jaguar/roster-v2/receipt.json",
+      "evidence": "324 native poses; 129 walk/chase and 33 action samples/facing; constant meshes and fixed links/contact travel; native inspection; byte-identical ten-artifact replay; 648 exact Chromium crops; generated meals and lineage reload; 15 shared world/lab browser cases across family",
+      "reviewStatus": "pending human review"
     },
     "leopard": {
       "name": "Leopard",
       "family": "Felids (big cats)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:27:47Z",
+      "receipt": "art-source/wildlife-v2/leopard/roster-v2/receipt.json",
+      "evidence": "324 native poses; 129 walk/chase and 33 action samples/facing; constant meshes and fixed links/contact travel; native inspection; byte-identical ten-artifact replay; 648 exact Chromium crops; generated meals and lineage reload; 15 shared world/lab browser cases across family",
+      "reviewStatus": "pending human review"
     },
     "cheetah": {
       "name": "Cheetah",
       "family": "Felids (big cats)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:27:47Z",
+      "receipt": "art-source/wildlife-v2/cheetah/roster-v2/receipt.json",
+      "evidence": "324 native poses; 129 walk/chase and 33 action samples/facing; constant meshes and fixed links/contact travel; native inspection; byte-identical ten-artifact replay; 648 exact Chromium crops; generated meals and lineage reload; 15 shared world/lab browser cases across family",
+      "reviewStatus": "pending human review"
     },
     "lynx": {
       "name": "Eurasian lynx",
       "family": "Felids (big cats)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:27:47Z",
+      "receipt": "art-source/wildlife-v2/lynx/roster-v2/receipt.json",
+      "evidence": "324 native poses; 129 walk/chase and 33 action samples/facing; constant meshes and fixed links/contact travel; native inspection; byte-identical ten-artifact replay; 648 exact Chromium crops; generated meals and lineage reload; 15 shared world/lab browser cases across family",
+      "reviewStatus": "pending human review"
     },
     "bobcat": {
       "name": "Bobcat",
       "family": "Felids (big cats)",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:27:47Z",
+      "receipt": "art-source/wildlife-v2/bobcat/roster-v2/receipt.json",
+      "evidence": "324 native poses; 129 walk/chase and 33 action samples/facing; constant meshes and fixed links/contact travel; native inspection; byte-identical ten-artifact replay; 648 exact Chromium crops; generated meals and lineage reload; 15 shared world/lab browser cases across family",
+      "reviewStatus": "pending human review"
     },
     "panda": {
       "name": "Panda",
@@ -639,37 +664,42 @@
     "gemsbok-oryx": {
       "name": "Gemsbok",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
     },
     "gazelle": {
       "name": "Gazelle",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
     },
     "impala": {
       "name": "Impala",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
     },
     "springbok": {
       "name": "Springbok",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
     },
     "saiga-antelope": {
       "name": "Saiga antelope",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
     },
     "musk-ox": {
       "name": "Musk ox",
@@ -709,9 +739,10 @@
     "gerenuk": {
       "name": "Gerenuk",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
     },
     "capuchin-monkey": {
       "name": "White-faced capuchin",
@@ -1695,6 +1726,28 @@
         "alpaca"
       ],
       "validation": "Typecheck/lint/build, 964-candidate manifest, twelve browser checks and streaming --assert-ready pass. Full units: 3023 pass, 5 known Windows failures, 10 skipped. Natural grazing groups have connected articulated necks; donkey/mule ride at 64/80px/s and remain protected while ridden. Compact native foot guides retain all ten outputs byte-identically."
+    },
+    {
+      "utc": "2026-10-18T23:20:00Z",
+      "prepared": [
+        "jaguar",
+        "leopard",
+        "cheetah",
+        "lynx",
+        "bobcat"
+      ],
+      "validation": "251 focused hunting/food-web/audio/source/ecology checks pass; native coat and short-tail corrections inspected. Source replay and full game validation underway."
+    },
+    {
+      "utc": "2026-10-18T23:27:47Z",
+      "completed": [
+        "jaguar",
+        "leopard",
+        "cheetah",
+        "lynx",
+        "bobcat"
+      ],
+      "validation": "Typecheck/lint/build, 989-candidate manifest, fifteen browser cases and streaming --assert-ready pass. Final full units: 3104 pass, 5 known Windows failures, 10 skipped. Initial crossing/reopen timeout passed independently and with 15s integration allowances; final full rerun has no extra failures. 3240 exact crops and five byte-identical source replays pass."
     }
   ],
   "existingOutsideRoster": [
@@ -1770,6 +1823,19 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/grazers-140/README.md"
+    },
+    "felids": {
+      "animals": [
+        "jaguar",
+        "leopard",
+        "cheetah",
+        "lynx",
+        "bobcat"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/felids-140/README.md"
     }
   }
 }

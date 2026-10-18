@@ -90,9 +90,17 @@ to longer llama/alpaca necks and a clearer grey donkey coat. Donkey and mule
 ride through shared mount code at 64/80px/s; riders remain protected prey.
 Source/replays and 1,312 exact crops pass. Twelve Canvas/GPU/body/ball browser
 checks, streaming readiness and the 964-candidate manifest pass. Full units have
-3,023 passes and the five known Windows failures. Twenty-three new entries plus
-sixteen delivered leave 157 remaining. Jaguar, leopard, cheetah, lynx and bobcat
-are the next feline hunter batch.
+3,023 passes and the five known Windows failures. Jaguar, leopard, cheetah,
+Eurasian lynx and bobcat now also spawn and hunt with distinct coats, anatomy,
+tails and feeding/growling jaws. Separate walk/chase travel matches runtime;
+cheetah reaches 64px/s. Canonical diets determine their local natural prey.
+Five byte-identical replays, 3,240 exact crops, fifteen browser cases and streaming
+readiness pass. Typecheck/lint/build and the 989-candidate manifest pass. Final
+full units: 3,104 pass, five known Windows failures, ten skipped. Crossing and
+world-reopen checks use 15-second integration allowances after initial render-
+load timeouts; isolated and final full reruns pass. Twenty-eight new entries
+plus sixteen delivered leave 152 remaining. Six horned grazers begin next.
+All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion
 

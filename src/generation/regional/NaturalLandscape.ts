@@ -15,6 +15,7 @@ import {
   FAUNA_EXPANSION_ROSTER,
   FAUNA_WATER_EXPANSION_ROSTER,
 } from "../../wildlife/FaunaExpansion.js";
+import { dietFor } from "../../wildlife/FoodWeb.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import { NATURAL_HUNTER_PROFILES } from "../../wildlife/NaturalHunters.js";
@@ -928,7 +929,7 @@ export class NaturalLandscape {
         rabbit,
       });
     }
-    if (p.species !== "coyote") {
+    if (dietFor(p.species).has("deer")) {
       const x = wx + 80,
         y = wy - 32;
       if (own(x, y)) {

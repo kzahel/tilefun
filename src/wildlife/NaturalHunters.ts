@@ -1,7 +1,16 @@
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import type { AnimationClip } from "../entities/EntityDefs.js";
 
-export const NATURAL_HUNTER_SPECIES = ["wolf", "coyote", "spotted-hyena"] as const;
+export const NATURAL_HUNTER_SPECIES = [
+  "wolf",
+  "coyote",
+  "spotted-hyena",
+  "jaguar",
+  "leopard",
+  "cheetah",
+  "lynx",
+  "bobcat",
+] as const;
 export type NaturalHunterSpecies = (typeof NATURAL_HUNTER_SPECIES)[number];
 
 /** Authored ground hunters use their own clips; original and fantasy banks stay immutable. */
@@ -31,6 +40,9 @@ const clips: readonly AnimationClip[] = [
   { name: "display", start: 41, count: 8, frameDuration: 100, loop: false },
   { name: "chase", start: 49, count: 32, frameDuration: 20, loop: true },
 ];
+const cheetahClips: readonly AnimationClip[] = clips.map((clip) =>
+  clip.name === "chase" ? { ...clip, frameDuration: 15 } : clip,
+);
 export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
   {
     species: "wolf",
@@ -85,5 +97,120 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
       clips,
     },
     expansion: { habitat: "open", radius: 160, group: 1, inspection: [-356, 481] },
+  },
+  {
+    species: "jaguar",
+    callKind: "cat",
+    label: "Jaguar",
+    revision: "roster-v2",
+    speed: 16,
+    chaseSpeed: 48,
+    weight: 90,
+    size: 64,
+    anchorY: 48,
+    body: [24, 14, 27],
+    art: {
+      identity: "jaguar-roster-v2-pixels-01",
+      sha256: "e55e3128ebcf09869507b0c2370d695c1819eda59d922596a029a0189fdc8963",
+      clips: clips,
+    },
+    expansion: {
+      habitat: "woodland",
+      radius: 176,
+      group: 1,
+      inspection: [1320, -664],
+    },
+  },
+  {
+    species: "leopard",
+    callKind: "cat",
+    label: "Leopard",
+    revision: "roster-v2",
+    speed: 16,
+    chaseSpeed: 46,
+    weight: 60,
+    size: 64,
+    anchorY: 48,
+    body: [20, 12, 26],
+    art: {
+      identity: "leopard-roster-v2-pixels-01",
+      sha256: "161a1294936a47f7d4e0c2623b4cb7c8e6cd83e765fa0ac3694548612aaeb567",
+      clips: clips,
+    },
+    expansion: {
+      habitat: "woodland",
+      radius: 160,
+      group: 1,
+      inspection: [164, 800],
+    },
+  },
+  {
+    species: "cheetah",
+    callKind: "cat",
+    label: "Cheetah",
+    revision: "roster-v2",
+    speed: 20,
+    chaseSpeed: 64,
+    weight: 50,
+    size: 64,
+    anchorY: 48,
+    body: [18, 10, 29],
+    art: {
+      identity: "cheetah-roster-v2-pixels-01",
+      sha256: "c7beb1dc8ea3b83bcf3e7056adb974fece5d81f0f4044e0cf7fed92dd6b86b65",
+      clips: cheetahClips,
+    },
+    expansion: {
+      habitat: "open",
+      radius: 192,
+      group: 1,
+      inspection: [1758, 1434],
+    },
+  },
+  {
+    species: "lynx",
+    callKind: "cat",
+    label: "Eurasian lynx",
+    revision: "roster-v2",
+    speed: 14,
+    chaseSpeed: 42,
+    weight: 23,
+    size: 64,
+    anchorY: 48,
+    body: [18, 10, 23],
+    art: {
+      identity: "lynx-roster-v2-pixels-01",
+      sha256: "d41012160813994f285e2a101c27ae019f136562a026536cab68c6d31ae600a7",
+      clips: clips,
+    },
+    expansion: {
+      habitat: "woodland",
+      radius: 144,
+      group: 1,
+      inspection: [-487, -669],
+    },
+  },
+  {
+    species: "bobcat",
+    callKind: "cat",
+    label: "Bobcat",
+    revision: "roster-v2",
+    speed: 14,
+    chaseSpeed: 40,
+    weight: 12,
+    size: 64,
+    anchorY: 48,
+    body: [16, 9, 21],
+    art: {
+      identity: "bobcat-roster-v2-pixels-01",
+      sha256: "4fe6620c0187671c79ccf4b56d5d28a89dc95cdac3428f6a9481c750136d5355",
+      clips: clips,
+    },
+    expansion: {
+      habitat: "woodland",
+      radius: 128,
+      group: 1,
+      inspection: [1383, 1250],
+    },
   },
 ];

@@ -269,3 +269,23 @@ assertion; distinguish them from newly introduced failures.
   failures, ten skipped. Twenty-three newly completed plus sixteen delivered
   leave 157 remaining. Five feline hunter sources begin next. All new exact
   identities remain pending human art review.
+
+- 23:28 UTC: jaguar, leopard, cheetah, Eurasian lynx and bobcat completed.
+  Distinct stocky/slender builds, rosettes/spots, face markings, rounded or tufted
+  ears and long/bobbed tails. Native inspection corrected cheetah spot merging,
+  tapering tail rings and joint reach before freezing sources. Each bank has
+  324 poses, independent 32-pose walk/chase and eight-pose feeding/growling.
+  Cheetah chase is 64px/s at 15ms/pose; other cats use 20ms chase poses.
+  Independent audits check 10,496 limb links, fixed tails, buried roots, 1,976
+  contacts and 1,376 planted travel pairs/species. Endpoint interpolation gap
+  stays below .021 native px. All five replays preserve all ten artifacts;
+  3,240 exact native/enlarged Chromium crops pass. Final pixels remain pending
+  human review. Explicit diet tiers and bounded original growls are active.
+  Natural prey admission now consults the canonical diet instead of a coyote
+  exception. 251 focused checks, typecheck/lint/build, 989-candidate manifest,
+  fifteen browser cases and streaming readiness pass. A five-second integration
+  timeout under concurrent rendering passed in isolation; crossing/reopen tests
+  now use 15 seconds, consistent with neighboring readiness checks. Final full
+  units: 3,104 pass, five known Windows failures, ten skipped. Twenty-eight new
+  entries plus sixteen delivered leave 152 remaining. Six horned grazer sources
+  begin in isolation.

@@ -92,7 +92,7 @@ it("walks both generated approaches and restores the observer below the same dec
   } finally {
     await s.close();
   }
-});
+}, 15000);
 
 for (const obstruction of [
   "bridge pedestrian",

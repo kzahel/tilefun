@@ -20,9 +20,17 @@ const pasture = [
   "alpaca",
 ] as const;
 
+const smallerCats = ["cheetah", "lynx", "bobcat"] as const;
+const felids = ["jaguar", "leopard", ...smallerCats] as const;
+
 /** Explicit game food web. Direction means hunter → prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  jaguar: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
+  leopard: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
+  cheetah: [...small, "deer", "sheep", "goat", "piglet", "kangaroo", "alpaca"],
+  lynx: [...small, "fox"],
+  bobcat: [...small],
   "giant-spider": [
     "ant",
     "butterfly",
@@ -35,10 +43,20 @@ export const HUNTING_DIETS = {
     "king-cobra",
   ],
   coyote: [...small, "fox"],
-  wolf: [...small, ...pasture, "fox", "coyote"],
-  "spotted-hyena": [...small, ...pasture, "fox", "coyote", "wolf"],
-  "dire-wolf": [...small, ...pasture, "wolf", "coyote", "spotted-hyena", "fox", "giant-spider"],
+  wolf: [...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
+  "spotted-hyena": [...small, ...pasture, ...smallerCats, "fox", "coyote", "wolf"],
+  "dire-wolf": [
+    ...felids,
+    ...small,
+    ...pasture,
+    "wolf",
+    "coyote",
+    "spotted-hyena",
+    "fox",
+    "giant-spider",
+  ],
   panther: [
+    ...smallerCats,
     ...small,
     ...pasture,
     "wolf",
@@ -49,6 +67,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   tiger: [
+    ...felids,
     ...small,
     ...pasture,
     "wolf",
@@ -62,6 +81,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   lion: [
+    ...felids,
     ...small,
     ...pasture,
     "wolf",
@@ -75,6 +95,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "brown-bear": [
+    ...felids,
     "wolf",
     "coyote",
     "spotted-hyena",
@@ -89,6 +110,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   griffin: [
+    ...felids,
     ...small,
     ...pasture,
     "wolf",
@@ -101,6 +123,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    ...felids,
     "wolf",
     "coyote",
     "spotted-hyena",
@@ -119,6 +142,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    ...felids,
     "wolf",
     "coyote",
     "spotted-hyena",

@@ -412,3 +412,10 @@
 !mule/roster-v2/*
 !llama/roster-v2/*
 !alpaca/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!jaguar/roster-v2/*
+!leopard/roster-v2/*
+!cheetah/roster-v2/*
+!lynx/roster-v2/*
+!bobcat/roster-v2/*

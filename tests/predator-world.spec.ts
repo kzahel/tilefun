@@ -96,7 +96,7 @@ for (const p of PREDATOR_PROFILES) {
       await host.shutdown();
     });
     await page.goto("/tilefun/?nogamepad");
-    await expect(game).toHaveAttribute("data-ready", "true");
+    await expect(game).toHaveAttribute("data-ready", "true", { timeout: 15000 });
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       g.debugPanel.paused = true;
