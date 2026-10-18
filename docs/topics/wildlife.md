@@ -29,7 +29,11 @@ goat also use repaired banks, retaining the doe tail flag and goat horns/beard.
 Their 960ms walks match 18px/s; source replay and six game/browser checks pass.
 Cow and fox also use moving-body repairs, retaining their original coats and
 actions. Their 1.6s/640ms cycles match 12px/s and 22px/s; source, playback and
-six shared game checks pass. Cat and dog are next.
+six shared game checks pass. Cat and dog now also have repaired torso/limb
+motion, separate source-driven coat paint and retained face templates. Their
+640ms walks match 16px/s and 22px/s. All 18 base/coat browser checks pass; the
+four existing coat banks own their clip ranges independently of base repairs.
+Elephant is the last frozen-torso repair.
 
 ## Horse and giraffe motion
 

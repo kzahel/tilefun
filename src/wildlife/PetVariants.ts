@@ -3,6 +3,8 @@ export const PET_ART = [
   {
     id: "cat-ginger",
     species: "cat",
+    walkCount: 12,
+    stridePixels: 4,
     name: "Ginger tabby",
     identity: "cat-ginger-draft-v1-pixels-01",
     sha256: "ca117325a2aa18929c4dfbfb0bfd1e125a7dda18ee052af87b34715ecc2f42b9",
@@ -11,6 +13,8 @@ export const PET_ART = [
   {
     id: "cat-black",
     species: "cat",
+    walkCount: 12,
+    stridePixels: 4,
     name: "Black cat",
     identity: "cat-black-draft-v1-pixels-01",
     sha256: "ada428cfca901ba8bc2283e2f7dec2ae5c13a4ba66df493294b7a4cd78e7fc5c",
@@ -19,6 +23,8 @@ export const PET_ART = [
   {
     id: "dog-golden",
     species: "dog",
+    walkCount: 16,
+    stridePixels: 6,
     name: "Golden retriever",
     identity: "dog-golden-draft-v1-pixels-01",
     sha256: "0e70432f51e60f2e84a32c8a33784f329c5f72d665e374027bd4207b42b23ca9",
@@ -27,6 +33,8 @@ export const PET_ART = [
   {
     id: "dog-shepherd",
     species: "dog",
+    walkCount: 16,
+    stridePixels: 6,
     name: "Pointed-ear shepherd",
     identity: "dog-shepherd-draft-v1-pixels-01",
     sha256: "8bf182f58c62fe9f027773ff114182460bf46f976b46eda743c8a63bb071eb3e",

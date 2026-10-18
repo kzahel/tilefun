@@ -408,21 +408,21 @@
     {
       "id": "wildlife-cat-provisional-v1",
       "name": "wildlife cat provisional v1",
-      "image": "demos/wildlife-v2/cat/draft-v1/sheet.png",
-      "width": 1008,
+      "image": "demos/wildlife-v2/cat/motion-v2/sheet.png",
+      "width": 1968,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+      "fingerprint": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
       "source": "public/assets/SOURCES.md"
     },
     {
       "id": "wildlife-dog-provisional-v1",
       "name": "wildlife dog provisional v1",
-      "image": "demos/wildlife-v2/dog/draft-v1/sheet.png",
-      "width": 1600,
+      "image": "demos/wildlife-v2/dog/motion-v2/sheet.png",
+      "width": 2624,
       "height": 256,
       "tileSize": 16,
-      "fingerprint": "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+      "fingerprint": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2353,6 +2353,26 @@
       "height": 192,
       "tileSize": 16,
       "fingerprint": "dd107117861ab59fef3da9b64e326ba73c21f27d7f4825953391312ae3f31098",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cat-motion-v2",
+      "name": "wildlife v2 cat motion v2",
+      "image": "demos/wildlife-v2/cat/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dog-motion-v2",
+      "name": "wildlife v2 dog motion v2",
+      "image": "demos/wildlife-v2/dog/motion-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -23725,7 +23745,7 @@
       "rect": [
         0,
         0,
-        1008,
+        1968,
         192
       ],
       "label": "wildlife-cat-provisional-v1 · registered 48×48 frames",
@@ -23751,7 +23771,7 @@
       "rect": [
         0,
         0,
-        1600,
+        2624,
         256
       ],
       "label": "wildlife-dog-provisional-v1 · registered 64×64 frames",

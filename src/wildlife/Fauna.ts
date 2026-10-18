@@ -101,9 +101,9 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
   {
     species: "cat",
     label: "Cat",
-    image: "demos/wildlife-v2/cat/draft-v1/sheet.png",
-    identity: "cat-draft-v1-pixels-01",
-    sha256: "7deb523375c17ace54c264e135a3d92220d85b6d1b764e6f8d397530ebbb0f86",
+    image: "demos/wildlife-v2/cat/motion-v2/sheet.png",
+    identity: "cat-motion-v2-pixels-01",
+    sha256: "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
     size: 48,
     anchor: [24, 34],
     inspection: [32, 37],
@@ -118,13 +118,13 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
       {
         name: "walk",
         start: 1,
-        count: 12,
-        frameDuration: 160,
+        count: 32,
+        frameDuration: 20,
         loop: true,
       },
       {
         name: "action",
-        start: 13,
+        start: 33,
         count: 8,
         frameDuration: 160,
         loop: false,
@@ -132,8 +132,8 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
       {
         name: "flee",
         start: 1,
-        count: 12,
-        frameDuration: 80,
+        count: 32,
+        frameDuration: 10,
         loop: true,
       },
     ],
@@ -150,9 +150,9 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
   {
     species: "dog",
     label: "Dog",
-    image: "demos/wildlife-v2/dog/draft-v1/sheet.png",
-    identity: "dog-draft-v1-pixels-02",
-    sha256: "936fda286ee1c773aebfb852025f470da606f2f3907990ae2b9fee7307eef0bf",
+    image: "demos/wildlife-v2/dog/motion-v2/sheet.png",
+    identity: "dog-motion-v2-pixels-01",
+    sha256: "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
     size: 64,
     anchor: [32, 44],
     inspection: [-25, 102],
@@ -167,13 +167,13 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
       {
         name: "walk",
         start: 1,
-        count: 16,
-        frameDuration: 160,
+        count: 32,
+        frameDuration: 20,
         loop: true,
       },
       {
         name: "action",
-        start: 17,
+        start: 33,
         count: 8,
         frameDuration: 160,
         loop: false,
@@ -181,8 +181,8 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
       {
         name: "flee",
         start: 1,
-        count: 16,
-        frameDuration: 80,
+        count: 32,
+        frameDuration: 10,
         loop: true,
       },
     ],
@@ -931,7 +931,8 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...PET_ART.map((art): FaunaProfile => {
     const base = BASE_FAUNA_PROFILES.find((p) => p.species === art.species);
     if (!base) throw new Error(`Missing pet behavior: ${art.species}`);
-    const count = base.clips[1]?.count ?? 1;
+    // Each immutable coat bank owns its frame ranges independently of base repairs.
+    const count = art.walkCount;
     return {
       ...base,
       species: art.id,
@@ -942,12 +943,14 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
       sha256: art.sha256,
       inspection: art.inspection,
       // Match linear travel to the authored four/six-pixel walk stride.
-      speed: (art.species === "cat" ? 4 : 6) / (count * 0.08),
+      speed: art.stridePixels / (count * 0.08),
       step: art.species === "cat" ? 12 : 16,
-      clips: base.clips.map((c) => ({
-        ...c,
-        frameDuration: c.name === "walk" ? 80 : c.name === "flee" ? 40 : 160,
-      })),
+      clips: [
+        { name: "idle", start: 0, count: 1, frameDuration: 160, loop: true },
+        { name: "walk", start: 1, count, frameDuration: 80, loop: true },
+        { name: "action", start: 1 + count, count: 8, frameDuration: 160, loop: false },
+        { name: "flee", start: 1, count, frameDuration: 40, loop: true },
+      ],
     };
   }),
 ];

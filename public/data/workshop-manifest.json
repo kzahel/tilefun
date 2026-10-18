@@ -18163,6 +18163,90 @@
       }
     },
     {
+      "id": "pattern:wildlife-v2-cat-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Cat · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cat-motion-v2",
+      "fingerprint": "2b647382c97398209d8503cdcdaf8d2e6b2889593ba219a5eee792482a8079a5",
+      "sourceFingerprint": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-cat-motion-v2",
+        "prefabIds": [],
+        "revision": "2fa1bc40a464fd617bee9abfdabc36647d862d421fc147241469a9f9c6114102",
+        "renderFingerprint": "2b647382c97398209d8503cdcdaf8d2e6b2889593ba219a5eee792482a8079a5",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cat-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-cat-motion-v2",
+        "fingerprint": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
+        "sheetSize": [
+          1968,
+          192
+        ],
+        "rect": [
+          0,
+          0,
+          1968,
+          192
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-cat-motion-v2",
+          "prefabIds": [],
+          "revision": "2fa1bc40a464fd617bee9abfdabc36647d862d421fc147241469a9f9c6114102",
+          "renderFingerprint": "2b647382c97398209d8503cdcdaf8d2e6b2889593ba219a5eee792482a8079a5",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-cat-motion-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-dog-motion-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Dog · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-dog-motion-v2",
+      "fingerprint": "aa63725e1192fa0ce1bc4f990e4c990f2edb4a1b2234d4d2121e1808e1de49a1",
+      "sourceFingerprint": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-dog-motion-v2",
+        "prefabIds": [],
+        "revision": "2d6538177be64824ff0a091258f2eb4b883f49fb447c59a13bea36b242491327",
+        "renderFingerprint": "aa63725e1192fa0ce1bc4f990e4c990f2edb4a1b2234d4d2121e1808e1de49a1",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-dog-motion-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-dog-motion-v2",
+        "fingerprint": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
+        "sheetSize": [
+          2624,
+          256
+        ],
+        "rect": [
+          0,
+          0,
+          2624,
+          256
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-dog-motion-v2",
+          "prefabIds": [],
+          "revision": "2d6538177be64824ff0a091258f2eb4b883f49fb447c59a13bea36b242491327",
+          "renderFingerprint": "aa63725e1192fa0ce1bc4f990e4c990f2edb4a1b2234d4d2121e1808e1de49a1",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-dog-motion-v2"
+        }
+      }
+    },
+    {
       "id": "vehicle:compact-1:north",
       "batchId": "vehicles",
       "name": "Compact 1 · north",
@@ -32437,5 +32521,5 @@
       }
     }
   ],
-  "inputDigest": "174f973b4d611b3aec4ffc536558b41f3e70230b1b463eabdba759d54070a540"
+  "inputDigest": "daba8341a746bd60c066595bbe2c5dcc4f8f8fe44a58e293657cac60e4115780"
 }

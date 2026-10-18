@@ -4525,5 +4525,199 @@
         "sha256": "7849c7cc0bd467fb93b04b63600c7eb5fa407addfc9a28bbfedc8af7942748d8"
       }
     ]
+  },
+  {
+    "id": "cat-motion-v2",
+    "animalId": "cat",
+    "revision": "motion-v2",
+    "name": "Cat · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/cat/motion-v2/",
+    "sheet": {
+      "id": "wildlife-v2-cat-motion-v2",
+      "name": "Cat sheet",
+      "image": "demos/wildlife-v2/cat/motion-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e",
+      "source": "art-source/wildlife-v2/cat/motion-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-cat-motion-v2-scene",
+      "name": "Cat scene",
+      "image": "demos/wildlife-v2/cat/motion-v2/scene-native.png",
+      "width": 192,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "6fd5aec79d16f027c363ea11440b818b47dbf7aaa6db8ef4aefeed951eb507a5",
+      "source": "art-source/wildlife-v2/cat/motion-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-cat-motion-v2-contact",
+      "name": "Cat contact",
+      "image": "demos/wildlife-v2/cat/motion-v2/contact-sheet-native.png",
+      "width": 384,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "9b6ca318c72284ceb3233ac2d7aeac15e6a0339ee00c74d6060b1ff7ec7769d5",
+      "source": "art-source/wildlife-v2/cat/motion-v2"
+    },
+    "preview": "demos/wildlife-v2/cat/motion-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/contact-sheet-native.png",
+        "sha256": "9b6ca318c72284ceb3233ac2d7aeac15e6a0339ee00c74d6060b1ff7ec7769d5"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/index.html",
+        "sha256": "7df0ac53c66ee27ed7d7d76faad44bdcf4225d3c8e54cf18eab83e4d0412347c"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/pixel-audit.json",
+        "sha256": "e79cdf8eed4601b60be5689864fc39a51bee808d336b3d01aa6be81c0a9e9315"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/preview-native.gif",
+        "sha256": "e789b036bf66e07d26c23e5f3bf3fa1c3ee7d5ec149af057a5d3ab8a8fcd56a6"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/preview.gif",
+        "sha256": "880871edd85f4be341d0764051e3819bc020058965b8687c16d74af8f6a7ce0d"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/review-observations.md",
+        "sha256": "eac3632adb0bbd45bb65e05baa25a3c19f09e5d8c21a1197846999136d263405"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/scene-background.png",
+        "sha256": "4f829f75a8c93d4ae52cd3f09b30d7972c1d3cd4f0e0d8ccd42625333e002c89"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/scene-native.png",
+        "sha256": "6fd5aec79d16f027c363ea11440b818b47dbf7aaa6db8ef4aefeed951eb507a5"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/sheet.png",
+        "sha256": "fd883fcafa02ccb624ce732ed2e490ffce40ad51f65549365c4817320a2fd50e"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/source-audit.json",
+        "sha256": "5481e0bcc5dc0c07d88fbf06d30ba71623ac297d21d23eb2bd9282e829b7e3dd"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/sprite.json",
+        "sha256": "c1e26a877aa0219ea713536dcdda1057371ecd81d5ba3165d981a2ea8f1992be"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/travel-native.gif",
+        "sha256": "c26580e5617edce98748f2e610ddae51fdccd93436bf731446c3134675685631"
+      },
+      {
+        "path": "demos/wildlife-v2/cat/motion-v2/validation.json",
+        "sha256": "c953e11b1a328e9d46edcefc5230aaf3499728036337acba95c1c27052caddf3"
+      }
+    ]
+  },
+  {
+    "id": "dog-motion-v2",
+    "animalId": "dog",
+    "revision": "motion-v2",
+    "name": "Dog · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dog/motion-v2/",
+    "sheet": {
+      "id": "wildlife-v2-dog-motion-v2",
+      "name": "Dog sheet",
+      "image": "demos/wildlife-v2/dog/motion-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886",
+      "source": "art-source/wildlife-v2/dog/motion-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-dog-motion-v2-scene",
+      "name": "Dog scene",
+      "image": "demos/wildlife-v2/dog/motion-v2/scene-native.png",
+      "width": 256,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "a4eb206a379951e92500a9f957cce0f5e3e576a3d6ea86b0c98490bbca128e1b",
+      "source": "art-source/wildlife-v2/dog/motion-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-dog-motion-v2-contact",
+      "name": "Dog contact",
+      "image": "demos/wildlife-v2/dog/motion-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "426db1b61f5b3f0263c1051ff58ee186d6884c77fcadcb6e2dc6b320cf31c0be",
+      "source": "art-source/wildlife-v2/dog/motion-v2"
+    },
+    "preview": "demos/wildlife-v2/dog/motion-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/contact-sheet-native.png",
+        "sha256": "426db1b61f5b3f0263c1051ff58ee186d6884c77fcadcb6e2dc6b320cf31c0be"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/index.html",
+        "sha256": "f7d8bba7c6bf40341eb6c49a714f1afb79a75209f08fd74fee42adcf0d4d197f"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/pixel-audit.json",
+        "sha256": "01bcb14bd5ab45f8eac6bc15e7a38239e61689cd4f9953f2cc62679254592455"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/preview-native.gif",
+        "sha256": "aba1df045a3ee5f3f67f001a6771fb3a1434c8f93b1279c3e3c879729cb047c1"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/preview.gif",
+        "sha256": "3affe61cd525171dde7a01851780da981e0214791577be128d2971c56dd89b84"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/review-observations.md",
+        "sha256": "5f418414051a4de24b0c40e3db9773dda3f9f4490ee2d7524dd100d87001748d"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/scene-background.png",
+        "sha256": "1a86cce5d70096d2954c1bf45f58f316f8561d34e2c935a9f67e4e26e41537a2"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/scene-native.png",
+        "sha256": "a4eb206a379951e92500a9f957cce0f5e3e576a3d6ea86b0c98490bbca128e1b"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/sheet.png",
+        "sha256": "443f59102aa201821a3d2e2b893cf189106017b124fe3f31a9aeea2890d80886"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/source-audit.json",
+        "sha256": "f39350621e26ead175f2dc037da38564695498fac9e126c5481b31029da90a3a"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/sprite.json",
+        "sha256": "2e2c3c09fa5f2efa58cf01546bc8066d1cef5634a7a7affc76b4cb430af879aa"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/travel-native.gif",
+        "sha256": "30e1f490248a4a5408f7dcae5ccba4f4a27689742e9e5469d754f2af8bf224ff"
+      },
+      {
+        "path": "demos/wildlife-v2/dog/motion-v2/validation.json",
+        "sha256": "6b0d36013b37b2f8a71d98fb704661684c796e778c9564ce184eada4f2a45835"
+      }
+    ]
   }
 ]

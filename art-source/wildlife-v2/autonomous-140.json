@@ -27,7 +27,7 @@
     "giraffe",
     "tiger",
     "lion",
-    "brown-bear"
+    "bear"
   ],
   "tasks": {
     "fox": {
@@ -51,9 +51,9 @@
     "elephant": {
       "name": "African elephant",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "draft-ready",
-      "revision": null
+      "revision": "motion-v2"
     },
     "giraffe": {
       "name": "Giraffe",
@@ -170,16 +170,24 @@
     "cat": {
       "name": "Cat",
       "family": "Domestic pets",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "draft-ready",
-      "revision": "motion-v2"
+      "revision": "motion-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T20:40:26Z",
+      "receipt": "art-source/wildlife-v2/cat/motion-v2/receipt.json",
+      "evidence": "65 half-pose samples/facing; fixed-volume links; planted travel; 2px native torso motion; byte-identical replay; 328 exact Chromium crops; 18 browser checks including all four existing coat banks"
     },
     "dog": {
       "name": "Dog",
       "family": "Domestic pets",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "draft-ready",
-      "revision": "motion-v2"
+      "revision": "motion-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T20:40:26Z",
+      "receipt": "art-source/wildlife-v2/dog/motion-v2/receipt.json",
+      "evidence": "65 half-pose samples/facing; fixed-volume links; planted travel; 2px native torso motion; byte-identical replay; 328 exact Chromium crops; 18 browser checks including all four existing coat banks"
     },
     "red-squirrel": {
       "name": "Red squirrel",
@@ -191,9 +199,12 @@
     "bear": {
       "name": "Brown bear",
       "family": "Bears",
-      "state": "queued",
+      "state": "already-completed",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "hunt-v1",
+      "runtimeSpecies": "brown-bear",
+      "receipt": "art-source/wildlife-v2/brown-bear/hunt-v1/receipt.json",
+      "evidence": "Existing delivered brown-bear gameplay bank; roster bear is Brown bear, runtime uses brown-bear. Human art review remains pending."
     },
     "deer": {
       "name": "White-tailed deer",
@@ -1451,6 +1462,22 @@
         "fox"
       ],
       "validation": "Typecheck, lint, build, 891-candidate manifest and six targeted browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Human art review pending."
+    },
+    {
+      "utc": "2026-10-18T20:40:26Z",
+      "completed": [
+        "cat",
+        "dog"
+      ],
+      "validation": "Typecheck, lint, build, 893-candidate manifest and 18 targeted browser tests pass. Full units: 2820 pass, 5 known Windows failures, 10 skipped. Existing pet banks retain independent frame ranges; human art review pending."
     }
+  ],
+  "existingOutsideRoster": [
+    "panther",
+    "t-rex",
+    "small-dragon",
+    "dire-wolf",
+    "griffin",
+    "giant-spider"
   ]
 }

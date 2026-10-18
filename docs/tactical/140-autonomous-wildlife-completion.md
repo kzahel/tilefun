@@ -69,3 +69,15 @@ assertion; distinguish them from newly introduced failures.
   checks, typecheck/lint/build and 891-candidate manifest pass. Full units:
   2,820 pass, five known Windows failures, ten skipped. Cat/dog next; keep
   existing pet coat clip ranges independent of their repaired base species.
+
+- 20:40 UTC: cat and dog `motion-v2` finished and selected in shared gameplay.
+  Preserved face templates, palette, coat recipe and anatomy; separate torso
+  paint moves through source bases while paws, ears and tails stay independent.
+  32 poses/640ms match 16px/s cat and 22px/s dog. Four immutable pet variants
+  now own explicit clip counts/strides instead of inheriting base frame ranges.
+  Source replay, 328 exact Chromium crops per animal, typecheck/lint/build,
+  893-candidate manifest and all 18 base/coat Canvas/GPU/ball checks pass.
+  Full units: 2,820 pass, five known Windows failures, ten skipped.
+  Corrected the ledger's existing Brown bear alias (`bear` roster, `brown-bear`
+  runtime), avoiding duplicate production; six delivered extra predators/fantasy
+  animals are recorded outside the retained roster. Elephant next.

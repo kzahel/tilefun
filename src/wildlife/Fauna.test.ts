@@ -86,7 +86,7 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
         expect(improvement).toBeGreaterThan(20);
       });
 
-    it("uses unchanged native draft cells and real walk/alert ranges", () => {
+    it("uses exact native cells and authored walk/alert ranges and cadence", () => {
       const metadata = JSON.parse(
         readFileSync(`public/${IMAGE.replace("sheet.png", "sprite.json")}`, "utf8"),
       );
@@ -106,6 +106,8 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
       for (const clip of CLIPS.slice(0, 3)) {
         expect(metadata.clips[clip.name].start).toBe(clip.start);
         expect(metadata.clips[clip.name].count).toBe(clip.count);
+        if (metadata.clips[clip.name].frameDuration)
+          expect(clip.frameDuration).toBe(metadata.clips[clip.name].frameDuration);
         if (metadata.fps) expect(clip.frameDuration).toBeCloseTo(1000 / metadata.fps);
       }
       expect(required(CLIPS[3]).start).toBe(required(CLIPS[1]).start);

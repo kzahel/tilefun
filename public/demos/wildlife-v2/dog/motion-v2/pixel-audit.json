@@ -1,0 +1,18 @@
+{
+  "identity": "dog-motion-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "retainedFaceMasters": true,
+  "retainedSourceCoatRecipe": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.0,
+    "up": 2.0,
+    "left": 2.0,
+    "right": 2.0
+  },
+  "rootTravelPixelsPerCycle": 14.079999999999998,
+  "walkDurationMs": 640,
+  "velocityPixelsPerSecond": 21.999999999999996
+}
