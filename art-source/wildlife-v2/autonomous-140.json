@@ -252,9 +252,14 @@
     "jellyfish": {
       "name": "Jellyfish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T22:23:00Z",
+      "receipt": "art-source/wildlife-v2/jellyfish/roster-v2/receipt.json",
+      "evidence": "129 pulse and 33 action samples/facing; 648 closed volume checks, 208 manifold edges, 17056 fixed trailing-arm links; four-pixel native width change; byte-identical replay; 328 exact Chromium crops; three shared game/browser checks",
+      "agentObservation": "Pale pink/lavender bell widens/flattens visibly in native/enlarged strips; internal marks and trailing rim/oral arms remain connected. Small tendril details remain deliberately slender. Actual deformed skin preserves closed-mesh volume, rather than whole-image scaling. Exact final art pending human review."
     },
     "cat": {
       "name": "Cat",
@@ -410,9 +415,9 @@
     "wolf": {
       "name": "Wolf",
       "family": "Canids (wild)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "donkey": {
       "name": "Donkey",
@@ -473,16 +478,16 @@
     "coyote": {
       "name": "Coyote",
       "family": "Canids (wild)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "spotted-hyena": {
       "name": "Spotted hyena",
       "family": "Canids (wild)",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2"
     },
     "lion": {
       "name": "Lion",
@@ -1617,6 +1622,13 @@
         "octopus"
       ],
       "validation": "Typecheck/lint/build, 924-candidate manifest and three browser checks pass. Full units: 2910 pass, 5 known Windows failures, 10 skipped. Deep-water fixture uses established .4 inspection zoom after initial visibility-only browser failures; no animal simulation change was needed."
+    },
+    {
+      "utc": "2026-10-18T22:23:00Z",
+      "completed": [
+        "jellyfish"
+      ],
+      "validation": "Typecheck/lint/build, 929-candidate manifest and three browser checks pass. Full units: 2921 pass, 5 known Windows failures, 10 skipped. Closed bell genuinely deforms with volume error below 8e-8 relative; native silhouette changes 4px in every facing."
     }
   ],
   "existingOutsideRoster": [
@@ -1660,6 +1672,12 @@
     },
     "eight-arm-aquatics": {
       "animal": "octopus",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    },
+    "pulsing-aquatics": {
+      "animal": "jellyfish",
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"

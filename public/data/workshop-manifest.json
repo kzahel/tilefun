@@ -6388,6 +6388,46 @@
       "fingerprint": "6ab91506f0f0739265e38b9251253fa59132242eafe84bc2a189a81a10537f67"
     },
     {
+      "id": "nature:jellyfish:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Moon jellyfish · deep refuge · sparse",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-jellyfish&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-9635&y=-16517&landscape=sparse&zoom=0.8",
+      "fingerprint": "fd7410212c751b7daec712fabb8f4deed3ff22b9a2a3c0a300993b25a1952dcf"
+    },
+    {
+      "id": "nature:jellyfish:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Moon jellyfish · deep refuge · balanced",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-jellyfish&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-9635&y=-16517&landscape=balanced&zoom=0.8",
+      "fingerprint": "e8fd2b2a01799c479bf684dafc3c841d7a9bbca70dc0dc3cbc908d16f8eae498"
+    },
+    {
+      "id": "nature:jellyfish:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Moon jellyfish · deep refuge · lush",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-jellyfish&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-9635&y=-16517&landscape=lush&zoom=0.8",
+      "fingerprint": "7736cc613ad9f61533ad6ec7db9966e1fc7fe6dcbc30b21fcbc1417c7ca16a45"
+    },
+    {
+      "id": "nature:jellyfish:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "Moon jellyfish · deep refuge · thicket",
+      "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      "url": "/tilefun/workshop.html?geometry=nature-jellyfish&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-9635&y=-16517&landscape=thicket&zoom=0.8",
+      "fingerprint": "75bce60b73204ede86113cd42152cd0843e403f641a22ea32fc412189eb58dc7"
+    },
+    {
       "id": "nature:cat-ginger:sparse:v1",
       "batchId": "natural-landscapes",
       "kind": "geometry",
@@ -18777,6 +18817,48 @@
           "revision": "82876f524b507a62cf429a4d3df2dcd49ea4f841a02e90a76c7a0911c7ab6a41",
           "renderFingerprint": "2e57cf0be47e2e1375ae5b92f5872a3c78bfd67a5afe9e58afb7602bde8b8e8f",
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-octopus-roster-v2"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-v2-jellyfish-roster-v2",
+      "batchId": "wildlife-v2-autonomous-140",
+      "kind": "wildlife",
+      "name": "Jellyfish · completed motion",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-jellyfish-roster-v2",
+      "fingerprint": "5091e97481ec8dda3c0209d14970d5abaeca4b570fec47ab1de3853119a684f6",
+      "sourceFingerprint": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-jellyfish-roster-v2",
+        "prefabIds": [],
+        "revision": "1cf149defee558df85c48734bb6073c2a98e513d8c8e03044120cf651f4b1dfb",
+        "renderFingerprint": "5091e97481ec8dda3c0209d14970d5abaeca4b570fec47ab1de3853119a684f6",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-jellyfish-roster-v2"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-jellyfish-roster-v2",
+        "fingerprint": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
+        "sheetSize": [
+          1312,
+          128
+        ],
+        "rect": [
+          0,
+          0,
+          1312,
+          128
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-jellyfish-roster-v2",
+          "prefabIds": [],
+          "revision": "1cf149defee558df85c48734bb6073c2a98e513d8c8e03044120cf651f4b1dfb",
+          "renderFingerprint": "5091e97481ec8dda3c0209d14970d5abaeca4b570fec47ab1de3853119a684f6",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-jellyfish-roster-v2"
         }
       }
     },
@@ -33055,5 +33137,5 @@
       }
     }
   ],
-  "inputDigest": "46ef9f7d851ccc573bdc0e9e95919661ce334a4eb9e59fe21ac63d5a85f2f9ef"
+  "inputDigest": "dedb6322e05e15b09e0f92d445c1fee7ec0c2b5f412d40aac15800113ef7daa2"
 }

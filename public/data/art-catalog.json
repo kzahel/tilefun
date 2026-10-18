@@ -626,6 +626,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-jellyfish-provisional-v1",
+      "name": "wildlife jellyfish provisional v1",
+      "image": "demos/wildlife-v2/jellyfish/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -2503,6 +2513,16 @@
       "height": 192,
       "tileSize": 16,
       "fingerprint": "22e92eb63172d89587318666f6330fb87722498c7478ed7ac4b7f33102bfda43",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-jellyfish-roster-v2",
+      "name": "wildlife v2 jellyfish roster v2",
+      "image": "demos/wildlife-v2/jellyfish/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -24265,6 +24285,24 @@
         192
       ],
       "label": "wildlife-octopus-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-jellyfish-provisional-v1",
+      "sheetId": "wildlife-jellyfish-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1312,
+        128
+      ],
+      "label": "wildlife-jellyfish-provisional-v1 · registered 32×32 frames",
       "kind": "sprite",
       "consumers": [
         {

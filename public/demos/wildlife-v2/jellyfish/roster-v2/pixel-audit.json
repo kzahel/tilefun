@@ -1,0 +1,23 @@
+{
+  "identity": "jellyfish-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "evaluatedDeformingBell": true,
+  "bellWidthRangePixels": {
+    "down": 2.911087989807129,
+    "up": 2.911087989807129,
+    "left": 2.86776065826416,
+    "right": 2.8677597045898438
+  },
+  "nativeSilhouetteWidthRangePixels": {
+    "down": 4,
+    "up": 4,
+    "left": 4,
+    "right": 4
+  },
+  "sourceTendrils": 8,
+  "pulseDurationMs": 1280
+}

@@ -18,6 +18,16 @@ client animation lead from changing the frozen frame after pause/reload.
 The [scenario topic](gameplay-scenarios.md) owns that clock contract and the
 replacement-host error guard used by furniture playtest.
 
+## Shared reverse driving (2026-10-19)
+
+[140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
+ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
+30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh
+orientation uses replicated nose direction against velocity; signed backward
+wheel travel is shared by game and lab presentation. Traffic inspection maps R
+to reverse, L to lights and K to siren style, keeping Jump/Throw meanings separate.
+No Deck-only physics, control scheme or lab driving loop is introduced.
+
 [129](../tactical/129-vehicle-geometry-batching.md) batches road-model geometry through
 the shared GPU asset factory used by game and ScenarioPresentationHost. Independent
 wheel/equipment groups, tagged lights and qualified source surfaces stay intact;
@@ -66,15 +76,11 @@ slots in existing ponds/lagoons, retaining original water actors and RNG.
 Complete water footprints and small-pond separation are checked before spawning.
 No embedded lab owns a separate animation, aquatic or expansion policy.
 
-## Shared reverse driving (2026-10-19)
-
-[140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
-ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
-30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh
-orientation uses replicated nose direction against velocity; signed backward
-wheel travel is shared by game and lab presentation. Traffic inspection maps R
-to reverse, L to lights and K to siren style, keeping Jump/Throw meanings separate.
-No Deck-only physics, control scheme or lab driving loop is introduced.
+Octopus and jellyfish also use ordinary shared deep-water Fauna profiles.
+Octopus has eight independent arm chains; jellyfish's authoring source uses a
+closed volume-preserving bell deformation with attached rim arms. These are
+committed sprite frames at runtime, with identical source phase in game/lab.
+Deep-water inspection zoom includes the dry arrival and the complete animal.
 
 ## Fierce creatures
 

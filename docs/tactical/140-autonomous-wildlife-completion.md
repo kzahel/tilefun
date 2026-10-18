@@ -205,3 +205,21 @@ assertion; distinguish them from newly introduced failures.
   Fifteen newly completed plus sixteen delivered leave 165 remaining.
   Jellyfish's closed deforming bell prototype passes independent volume and
   attachment checks; final art for every new identity remains pending review.
+
+- 22:23 UTC: fresh jellyfish `roster-v2` completed in world/editor/shared lab.
+  Closed six-ring/16-sector bell, four internal marks, eight five-link rim
+  tendrils and four three-link oral arms. Actual radial/height shape keys use
+  factors r and 1/r^2, preserving mesh volume without animated object scale or
+  image squash. Float phase/amplitude channels drive the saved scene; an early
+  integer-property error was caught/fixed before registration. Source checks
+  648 volumes, 208 manifold edges and 17,056 fixed trailing-arm links across
+  129 pulse and 33 action samples/facing. Relative volume error stays below
+  8e-8; endpoint gap is below .0005 native px and rim gap below .009px. Native
+  silhouette changes four pixels per facing over the 32-pose/1.28s pulse.
+  Native/enlarged visual review, replay and 328 exact Chromium crops pass.
+  Deep-water groups use existing fixed water slots and shared phase/reload.
+  Typecheck/lint/build, 929-candidate manifest and three game/browser checks
+  pass. Full units: 2,921 pass, five known Windows failures, ten skipped.
+  Sixteen newly completed plus sixteen delivered leave 164 remaining.
+  Wolf/coyote/spotted hyena source batch is underway. All new art stays pending
+  human review; no vote or approval is inferred from agent inspection.

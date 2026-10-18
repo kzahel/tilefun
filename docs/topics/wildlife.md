@@ -68,9 +68,14 @@ Octopus now also spawns in compatible deep lagoons. Its rust mantle moves
 above eight five-link arms with source-driven sucker marks and a curl action.
 Source/replay/crops and three game/browser checks pass; the full suite has
 2,910 passes and the five known Windows failures. Its deep-water lab uses
-.4 inspection zoom to include both dry arrival and animal. Fifteen new entries
-plus sixteen delivered leave 165 remaining; jellyfish source/native prototype
-is next, with a genuinely deforming closed bell and attached trailing arms.
+.4 inspection zoom to include both dry arrival and animal. Jellyfish now also
+spawns as small deep-water groups. Its closed Blender bell actually deforms
+with reciprocal radial/height factors, preserving volume and attached rim
+arms. The native silhouette changes four pixels across the 1.28s pulse.
+Source/replay/crops and three game/browser checks pass; full units have 2,921
+passes and the five known Windows failures. Sixteen new entries plus sixteen
+delivered leave 164 remaining. Wolf, coyote and spotted hyena form the next
+hunter batch, with fresh geometry and shared food-web behavior.
 
 ## Horse and giraffe motion
 

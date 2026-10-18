@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**15 newly completed; 1 in progress; 164 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**16 newly completed; 3 in progress; 161 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -14,7 +14,7 @@
 | Gorilla | finished-game-active | [Playback](../public/demos/wildlife-v2/gorilla/roster-v2/index.html) |
 | Crab | finished-game-active | [Playback](../public/demos/wildlife-v2/crab/roster-v2/index.html) |
 | Octopus | finished-game-active | [Playback](../public/demos/wildlife-v2/octopus/roster-v2/index.html) |
-| Jellyfish | in-progress | Source/animation work |
+| Jellyfish | finished-game-active | [Playback](../public/demos/wildlife-v2/jellyfish/roster-v2/index.html) |
 | Cat | finished-game-active | [Playback](../public/demos/wildlife-v2/cat/motion-v2/index.html) |
 | Dog | finished-game-active | [Playback](../public/demos/wildlife-v2/dog/motion-v2/index.html) |
 | Red squirrel | finished-game-active | [Playback](../public/demos/wildlife-v2/red-squirrel/roster-v2/index.html) |
@@ -24,10 +24,13 @@
 | Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
 | Goat | finished-game-active | [Playback](../public/demos/wildlife-v2/goat/motion-v2/index.html) |
 | Chicken | finished-game-active | [Playback](../public/demos/wildlife-v2/chicken/roster-v2/index.html) |
+| Wolf | in-progress | Source/animation work |
+| Coyote | in-progress | Source/animation work |
+| Spotted hyena | in-progress | Source/animation work |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T22:16:30.040Z (19/10/2026, 00:16:30 Berlin).
+Snapshot: 2026-10-18T22:23:47.961Z (19/10/2026, 00:23:47 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

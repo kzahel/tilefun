@@ -5386,5 +5386,98 @@
         "sha256": "66874bd105cc9cfe5b373fc53252b6c5e803169449175d0faeaba4f7f2a82d16"
       }
     ]
+  },
+  {
+    "id": "jellyfish-roster-v2",
+    "animalId": "jellyfish",
+    "revision": "roster-v2",
+    "name": "Jellyfish · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/jellyfish/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-jellyfish-roster-v2",
+      "name": "Jellyfish sheet",
+      "image": "demos/wildlife-v2/jellyfish/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b",
+      "source": "art-source/wildlife-v2/jellyfish/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-jellyfish-roster-v2-scene",
+      "name": "Jellyfish scene",
+      "image": "demos/wildlife-v2/jellyfish/roster-v2/scene-native.png",
+      "width": 288,
+      "height": 72,
+      "tileSize": 16,
+      "fingerprint": "7bc4b52423c2155f458f175159cf6b12bbb41f977ec9cad6c0b4ce83d7f22f85",
+      "source": "art-source/wildlife-v2/jellyfish/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-jellyfish-roster-v2-contact",
+      "name": "Jellyfish contact",
+      "image": "demos/wildlife-v2/jellyfish/roster-v2/contact-sheet-native.png",
+      "width": 256,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "4033688f158d433a1713037213010452f8cc909466547e54d576adf83b8f4819",
+      "source": "art-source/wildlife-v2/jellyfish/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/jellyfish/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/contact-sheet-native.png",
+        "sha256": "4033688f158d433a1713037213010452f8cc909466547e54d576adf83b8f4819"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/index.html",
+        "sha256": "6cd13fab5292d930e4b9a2c510cd7868598e4f48aecdd5bbb267d0bea48bd7b1"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/pixel-audit.json",
+        "sha256": "497fc9c924bd40eb2f0f581b547533cabd61bc0a09fd266dc6f35210314ade52"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/preview-native.gif",
+        "sha256": "6258c102891f8fd3ef6cb05f5a249f3630c901d34ad4b82c9b30874ba54bc18b"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/preview.gif",
+        "sha256": "719de6168cb7941b899ecbb93986b8d25f93862a0c5be7f8bb962693e329e91d"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/scene-background.png",
+        "sha256": "9d846b3e8db6418cf77ede5049c685c424eaa64ca05399bd9f52acad29c6f8c0"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/scene-native.png",
+        "sha256": "7bc4b52423c2155f458f175159cf6b12bbb41f977ec9cad6c0b4ce83d7f22f85"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/sheet.png",
+        "sha256": "14b0cf9552e46d876a7e3d6795d12ccd3573b8a8222b7e2d677f85d7f7ca7d0b"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/source-audit.json",
+        "sha256": "aace5cbfb9022464f919eba1cc64669a82185abcab725d1d6fe7fb20a055e6ba"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/sprite.json",
+        "sha256": "59bd45a224e91486781184872a1d523234749af914fc583d7ca55ae293781cad"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/travel-native.gif",
+        "sha256": "5bdce43f2e81ab675a0de8a99b4939bc8e609398170ad25d0707e91fe0737456"
+      },
+      {
+        "path": "demos/wildlife-v2/jellyfish/roster-v2/validation.json",
+        "sha256": "306cbc2066d67793c7a8fb0b73ba84d8f8840bc93fde6dfa80dcfd677983ade5"
+      }
+    ]
   }
 ]

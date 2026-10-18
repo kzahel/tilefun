@@ -398,3 +398,6 @@
 
 # Verified pending motion identities, owner-authorized autonomous run 140.
 !octopus/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!jellyfish/roster-v2/*
