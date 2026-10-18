@@ -419,3 +419,11 @@
 !cheetah/roster-v2/*
 !lynx/roster-v2/*
 !bobcat/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!gemsbok-oryx/roster-v2/*
+!gazelle/roster-v2/*
+!impala/roster-v2/*
+!springbok/roster-v2/*
+!saiga-antelope/roster-v2/*
+!gerenuk/roster-v2/*

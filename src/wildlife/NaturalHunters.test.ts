@@ -63,7 +63,7 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
     expect(a).toEqual(collect(true));
     expect(a.filter((a) => a.predator)).toHaveLength(1);
     expect(a.filter((a) => a.rabbit)).toHaveLength(2);
-    expect(a.filter((a) => a.deer)).toHaveLength(dietFor(p.species).has("deer") ? 1 : 0);
+    expect(a.filter((a) => a.deer || a.fauna)).toHaveLength(dietFor(p.species).has("deer") ? 1 : 0);
     for (const prey of a.filter((e) => !e.predator))
       expect(dietFor(p.species).has(creatureSpecies(prey) ?? "")).toBe(true);
     expect(new Set(a.map((a) => a.featureId)).size).toBe(a.length);
@@ -106,4 +106,20 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
       await s.close();
     }
   }, 60000);
+});
+
+it("seeds authored antelopes as legal natural companions in hunter clearings", () => {
+  const n = new NaturalLandscape(regionalWorld(2026), "thicket");
+  const prey = NATURAL_HUNTER_PROFILES.flatMap((p) => {
+    const [x, y] = p.expansion.inspection;
+    const gx = Math.floor(x / 64),
+      gy = Math.floor(y / 64);
+    return Array.from({ length: 16 }, (_, i) =>
+      n.expansionPredators(gx * 4 + (i % 4), gy * 4 + Math.floor(i / 4)),
+    )
+      .flat()
+      .filter((a) => a.fauna);
+  });
+  expect(prey.length).toBeGreaterThan(0);
+  expect(prey.every((a) => a.featureId.startsWith("wildlife:expansion-prey:"))).toBe(true);
 });

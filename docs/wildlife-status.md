@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**28 newly completed; 6 in progress; 146 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**34 newly completed; 4 in progress; 142 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -36,16 +36,20 @@
 | Cheetah | finished-game-active | [Playback](../public/demos/wildlife-v2/cheetah/roster-v2/index.html) |
 | Eurasian lynx | finished-game-active | [Playback](../public/demos/wildlife-v2/lynx/roster-v2/index.html) |
 | Bobcat | finished-game-active | [Playback](../public/demos/wildlife-v2/bobcat/roster-v2/index.html) |
-| Gemsbok | in-progress | Source/animation work |
-| Gazelle | in-progress | Source/animation work |
-| Impala | in-progress | Source/animation work |
-| Springbok | in-progress | Source/animation work |
-| Saiga antelope | in-progress | Source/animation work |
-| Gerenuk | in-progress | Source/animation work |
+| American bison | in-progress | Source/animation work |
+| Water buffalo | in-progress | Source/animation work |
+| Gemsbok | finished-game-active | [Playback](../public/demos/wildlife-v2/gemsbok-oryx/roster-v2/index.html) |
+| Gazelle | finished-game-active | [Playback](../public/demos/wildlife-v2/gazelle/roster-v2/index.html) |
+| Impala | finished-game-active | [Playback](../public/demos/wildlife-v2/impala/roster-v2/index.html) |
+| Springbok | finished-game-active | [Playback](../public/demos/wildlife-v2/springbok/roster-v2/index.html) |
+| Saiga antelope | finished-game-active | [Playback](../public/demos/wildlife-v2/saiga-antelope/roster-v2/index.html) |
+| Musk ox | in-progress | Source/animation work |
+| Wildebeest | in-progress | Source/animation work |
+| Gerenuk | finished-game-active | [Playback](../public/demos/wildlife-v2/gerenuk/roster-v2/index.html) |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-18T23:27:48.018Z (19/10/2026, 01:27:48 Berlin).
+Snapshot: 2026-10-18T23:39:24.020Z (19/10/2026, 01:39:24 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

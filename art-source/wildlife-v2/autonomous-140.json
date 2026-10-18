@@ -650,70 +650,94 @@
     "american-bison": {
       "name": "American bison",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
     },
     "water-buffalo": {
       "name": "Water buffalo",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
     },
     "gemsbok-oryx": {
       "name": "Gemsbok",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:39:23Z",
+      "receipt": "art-source/wildlife-v2/gemsbok-oryx/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limbs/necks/tails and planted travel; native anatomy/coat inspection; ten-artifact byte-identical replay; 328 exact Chromium crops; 24 Canvas/GPU/world/body/ball browser cases across family; 12 natural/manual catch checks",
+      "reviewStatus": "pending human review"
     },
     "gazelle": {
       "name": "Gazelle",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:39:23Z",
+      "receipt": "art-source/wildlife-v2/gazelle/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limbs/necks/tails and planted travel; native anatomy/coat inspection; ten-artifact byte-identical replay; 328 exact Chromium crops; 24 Canvas/GPU/world/body/ball browser cases across family; 12 natural/manual catch checks",
+      "reviewStatus": "pending human review"
     },
     "impala": {
       "name": "Impala",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:39:23Z",
+      "receipt": "art-source/wildlife-v2/impala/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limbs/necks/tails and planted travel; native anatomy/coat inspection; ten-artifact byte-identical replay; 328 exact Chromium crops; 24 Canvas/GPU/world/body/ball browser cases across family; 12 natural/manual catch checks",
+      "reviewStatus": "pending human review"
     },
     "springbok": {
       "name": "Springbok",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:39:23Z",
+      "receipt": "art-source/wildlife-v2/springbok/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limbs/necks/tails and planted travel; native anatomy/coat inspection; ten-artifact byte-identical replay; 328 exact Chromium crops; 24 Canvas/GPU/world/body/ball browser cases across family; 12 natural/manual catch checks",
+      "reviewStatus": "pending human review"
     },
     "saiga-antelope": {
       "name": "Saiga antelope",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:39:23Z",
+      "receipt": "art-source/wildlife-v2/saiga-antelope/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limbs/necks/tails and planted travel; native anatomy/coat inspection; ten-artifact byte-identical replay; 328 exact Chromium crops; 24 Canvas/GPU/world/body/ball browser cases across family; 12 natural/manual catch checks",
+      "reviewStatus": "pending human review"
     },
     "musk-ox": {
       "name": "Musk ox",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
     },
     "wildebeest": {
       "name": "Wildebeest",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
     },
     "malayan-tapir": {
       "name": "Tapir",
@@ -739,10 +763,14 @@
     "gerenuk": {
       "name": "Gerenuk",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent horned grazer source anatomy; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-18T23:39:23Z",
+      "receipt": "art-source/wildlife-v2/gerenuk/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limbs/necks/tails and planted travel; native anatomy/coat inspection; ten-artifact byte-identical replay; 328 exact Chromium crops; 24 Canvas/GPU/world/body/ball browser cases across family; 12 natural/manual catch checks",
+      "reviewStatus": "pending human review"
     },
     "capuchin-monkey": {
       "name": "White-faced capuchin",
@@ -1748,6 +1776,30 @@
         "bobcat"
       ],
       "validation": "Typecheck/lint/build, 989-candidate manifest, fifteen browser cases and streaming --assert-ready pass. Final full units: 3104 pass, 5 known Windows failures, 10 skipped. Initial crossing/reopen timeout passed independently and with 15s integration allowances; final full rerun has no extra failures. 3240 exact crops and five byte-identical source replays pass."
+    },
+    {
+      "utc": "2026-10-18T23:31:46Z",
+      "prepared": [
+        "gemsbok-oryx",
+        "gazelle",
+        "impala",
+        "springbok",
+        "saiga-antelope",
+        "gerenuk"
+      ],
+      "validation": "Independent fixed limb/neck/tail source audits, native horn/coat/muzzle inspection, six byte-identical ten-artifact replays and 1968 exact Chromium crops pass. Twelve natural/manual antelope catch checks and thirty hunter/food-web tests pass. Full game validation underway."
+    },
+    {
+      "utc": "2026-10-18T23:39:23Z",
+      "completed": [
+        "gemsbok-oryx",
+        "gazelle",
+        "impala",
+        "springbok",
+        "saiga-antelope",
+        "gerenuk"
+      ],
+      "validation": "Typecheck/lint/build, 1019-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full final units: 3195 pass, 5 known Windows failures, 10 skipped. Initial concurrent-load Workshop timeouts pass in isolated 13-test recheck and clean full rerun. Six byte-identical replays, 1968 exact crops, 12 natural/manual catch tests and generated mixed-grazer hunter meals/lineage reload pass."
     }
   ],
   "existingOutsideRoster": [
@@ -1836,6 +1888,20 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/felids-140/README.md"
+    },
+    "horned-grazers": {
+      "animals": [
+        "gemsbok-oryx",
+        "gazelle",
+        "impala",
+        "springbok",
+        "saiga-antelope",
+        "gerenuk"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/antelopes-140/README.md"
     }
   }
 }

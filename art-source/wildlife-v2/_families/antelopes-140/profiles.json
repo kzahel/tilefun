@@ -1,0 +1,536 @@
+{
+  "gemsbok-oryx": {
+    "label": "Gemsbok",
+    "torso": [
+      0,
+      -0.08,
+      1.63
+    ],
+    "radii": [
+      0.5,
+      0.91,
+      0.49
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.67
+    ],
+    "chestRadii": [
+      0.47,
+      0.34,
+      0.5145
+    ],
+    "neckBase": [
+      0,
+      0.52,
+      1.83
+    ],
+    "neckLengths": [
+      0.63,
+      0.61
+    ],
+    "neckRadius": 0.18,
+    "head": [
+      0,
+      1.12,
+      2.65
+    ],
+    "grazeHead": [
+      0,
+      1.4,
+      1.4
+    ],
+    "headKind": "antelope",
+    "earHeight": 0.32,
+    "mane": false,
+    "foreHip": [
+      0.32,
+      0.46,
+      1.5299999999999998
+    ],
+    "hindHip": [
+      0.335,
+      -0.61,
+      1.48
+    ],
+    "foreLengths": [
+      0.7,
+      0.69,
+      0.35,
+      0.15
+    ],
+    "hindLengths": [
+      0.69,
+      0.68,
+      0.35,
+      0.15
+    ],
+    "tailLengths": [
+      0.2,
+      0.18,
+      0.15
+    ],
+    "tailRadius": 0.045,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 16,
+    "walkMs": 50,
+    "palette": {
+      "K": "#4a4132",
+      "B": "#9b947d",
+      "H": "#c8c0a5",
+      "C": "#e2d9bd",
+      "M": "#4e4535",
+      "E": "#202c2b",
+      "N": "#282a28"
+    },
+    "hornHeight": 1.65,
+    "hornKind": "straight"
+  },
+  "gazelle": {
+    "label": "Gazelle",
+    "torso": [
+      0,
+      -0.08,
+      1.5
+    ],
+    "radii": [
+      0.32,
+      0.7,
+      0.37
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.55
+    ],
+    "chestRadii": [
+      0.3008,
+      0.34,
+      0.3885
+    ],
+    "neckBase": [
+      0,
+      0.52,
+      1.7
+    ],
+    "neckLengths": [
+      0.54,
+      0.52
+    ],
+    "neckRadius": 0.14,
+    "head": [
+      0,
+      1.02,
+      2.42
+    ],
+    "grazeHead": [
+      0,
+      1.26,
+      1.31
+    ],
+    "headKind": "antelope",
+    "earHeight": 0.22,
+    "mane": false,
+    "foreHip": [
+      0.2048,
+      0.46,
+      1.4
+    ],
+    "hindHip": [
+      0.2144,
+      -0.61,
+      1.35
+    ],
+    "foreLengths": [
+      0.64,
+      0.63,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.33,
+      0.15
+    ],
+    "tailLengths": [
+      0.2,
+      0.18,
+      0.15
+    ],
+    "tailRadius": 0.045,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 18,
+    "walkMs": 40,
+    "palette": {
+      "K": "#4a4132",
+      "B": "#b18a55",
+      "H": "#d8b77c",
+      "C": "#e8d8ad",
+      "M": "#4e4535",
+      "E": "#202c2b",
+      "N": "#282a28"
+    },
+    "hornHeight": 0.64,
+    "hornKind": "lyre"
+  },
+  "impala": {
+    "label": "Impala",
+    "torso": [
+      0,
+      -0.08,
+      1.5
+    ],
+    "radii": [
+      0.38,
+      0.79,
+      0.43
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.55
+    ],
+    "chestRadii": [
+      0.35719999999999996,
+      0.34,
+      0.4515
+    ],
+    "neckBase": [
+      0,
+      0.52,
+      1.7
+    ],
+    "neckLengths": [
+      0.63,
+      0.61
+    ],
+    "neckRadius": 0.14,
+    "head": [
+      0,
+      1.12,
+      2.65
+    ],
+    "grazeHead": [
+      0,
+      1.38,
+      1.37
+    ],
+    "headKind": "antelope",
+    "earHeight": 0.25,
+    "mane": false,
+    "foreHip": [
+      0.2432,
+      0.46,
+      1.4
+    ],
+    "hindHip": [
+      0.2546,
+      -0.61,
+      1.35
+    ],
+    "foreLengths": [
+      0.64,
+      0.63,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.33,
+      0.15
+    ],
+    "tailLengths": [
+      0.2,
+      0.18,
+      0.15
+    ],
+    "tailRadius": 0.045,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 18,
+    "walkMs": 40,
+    "palette": {
+      "K": "#4a4132",
+      "B": "#ae7141",
+      "H": "#d79854",
+      "C": "#e6ce9b",
+      "M": "#4e4535",
+      "E": "#202c2b",
+      "N": "#282a28"
+    },
+    "hornHeight": 1.05,
+    "hornKind": "lyre"
+  },
+  "springbok": {
+    "label": "Springbok",
+    "torso": [
+      0,
+      -0.08,
+      1.5
+    ],
+    "radii": [
+      0.34,
+      0.74,
+      0.37
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.55
+    ],
+    "chestRadii": [
+      0.3196,
+      0.34,
+      0.3885
+    ],
+    "neckBase": [
+      0,
+      0.52,
+      1.7
+    ],
+    "neckLengths": [
+      0.54,
+      0.52
+    ],
+    "neckRadius": 0.14,
+    "head": [
+      0,
+      1.06,
+      2.42
+    ],
+    "grazeHead": [
+      0,
+      1.3,
+      1.31
+    ],
+    "headKind": "antelope",
+    "earHeight": 0.23,
+    "mane": false,
+    "foreHip": [
+      0.21760000000000002,
+      0.46,
+      1.4
+    ],
+    "hindHip": [
+      0.22780000000000003,
+      -0.61,
+      1.35
+    ],
+    "foreLengths": [
+      0.64,
+      0.63,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.33,
+      0.15
+    ],
+    "tailLengths": [
+      0.2,
+      0.18,
+      0.15
+    ],
+    "tailRadius": 0.045,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 18,
+    "walkMs": 40,
+    "palette": {
+      "K": "#4a4132",
+      "B": "#bc955c",
+      "H": "#dfc38b",
+      "C": "#f0dfb6",
+      "M": "#4e4535",
+      "E": "#202c2b",
+      "N": "#282a28"
+    },
+    "hornHeight": 0.62,
+    "hornKind": "hook"
+  },
+  "saiga-antelope": {
+    "label": "Saiga antelope",
+    "torso": [
+      0,
+      -0.08,
+      1.5
+    ],
+    "radii": [
+      0.42,
+      0.77,
+      0.43
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.55
+    ],
+    "chestRadii": [
+      0.3948,
+      0.34,
+      0.4515
+    ],
+    "neckBase": [
+      0,
+      0.52,
+      1.7
+    ],
+    "neckLengths": [
+      0.54,
+      0.52
+    ],
+    "neckRadius": 0.14,
+    "head": [
+      0,
+      1.09,
+      2.3
+    ],
+    "grazeHead": [
+      0,
+      1.33,
+      1.35
+    ],
+    "headKind": "antelope",
+    "earHeight": 0.24,
+    "mane": false,
+    "foreHip": [
+      0.2688,
+      0.46,
+      1.4
+    ],
+    "hindHip": [
+      0.2814,
+      -0.61,
+      1.35
+    ],
+    "foreLengths": [
+      0.64,
+      0.63,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.33,
+      0.15
+    ],
+    "tailLengths": [
+      0.2,
+      0.18,
+      0.15
+    ],
+    "tailRadius": 0.045,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 14,
+    "walkMs": 50,
+    "palette": {
+      "K": "#4a4132",
+      "B": "#baa879",
+      "H": "#d8c798",
+      "C": "#e8d9af",
+      "M": "#4e4535",
+      "E": "#202c2b",
+      "N": "#282a28"
+    },
+    "hornHeight": 0.63,
+    "hornKind": "saiga"
+  },
+  "gerenuk": {
+    "label": "Gerenuk",
+    "torso": [
+      0,
+      -0.08,
+      1.5
+    ],
+    "radii": [
+      0.32,
+      0.74,
+      0.37
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.55
+    ],
+    "chestRadii": [
+      0.3008,
+      0.34,
+      0.3885
+    ],
+    "neckBase": [
+      0,
+      0.52,
+      1.7
+    ],
+    "neckLengths": [
+      0.94,
+      0.91
+    ],
+    "neckRadius": 0.14,
+    "head": [
+      0,
+      1.17,
+      3.34
+    ],
+    "grazeHead": [
+      0,
+      1.4,
+      1.43
+    ],
+    "headKind": "antelope",
+    "earHeight": 0.27,
+    "mane": false,
+    "foreHip": [
+      0.2048,
+      0.46,
+      1.4
+    ],
+    "hindHip": [
+      0.2144,
+      -0.61,
+      1.35
+    ],
+    "foreLengths": [
+      0.64,
+      0.63,
+      0.33,
+      0.15
+    ],
+    "hindLengths": [
+      0.62,
+      0.61,
+      0.33,
+      0.15
+    ],
+    "tailLengths": [
+      0.2,
+      0.18,
+      0.15
+    ],
+    "tailRadius": 0.045,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 16,
+    "walkMs": 50,
+    "palette": {
+      "K": "#4a4132",
+      "B": "#a3774b",
+      "H": "#cfa16b",
+      "C": "#e8d6aa",
+      "M": "#4e4535",
+      "E": "#202c2b",
+      "N": "#282a28"
+    },
+    "hornHeight": 0.78,
+    "hornKind": "lyre"
+  }
+}

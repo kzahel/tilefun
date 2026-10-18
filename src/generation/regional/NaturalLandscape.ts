@@ -929,23 +929,45 @@ export class NaturalLandscape {
         rabbit,
       });
     }
-    if (dietFor(p.species).has("deer")) {
+    // This fixed companion bank adds varied legal grazers without resizing or
+    // remapping the original home banks. Diet admission is explicit, not body mass.
+    const grazerBank = [
+      "deer",
+      "gemsbok-oryx",
+      "gazelle",
+      "impala",
+      "springbok",
+      "saiga-antelope",
+      "gerenuk",
+    ] as const;
+    const legalGrazers = grazerBank.filter((species) => dietFor(p.species).has(species));
+    if (legalGrazers.length) {
+      const species = required(
+        legalGrazers[
+          Math.min(
+            legalGrazers.length - 1,
+            Math.floor(valueNoise(gx, gy, this.world.seed + 38069) * legalGrazers.length),
+          )
+        ],
+      );
       const x = wx + 80,
         y = wy - 32;
       if (own(x, y)) {
-        const deer = required(createDeer(x, y).deer);
-        deer.home = { wx, wy };
-        deer.shelter = { wx: x, wy: y };
-        deer.radius = 112;
-        deer.randomState =
-          Math.floor(valueNoise(gx, gy, this.world.seed + 38071) * 4294967296) >>> 0;
+        const seed = Math.floor(valueNoise(gx, gy, this.world.seed + 38071) * 4294967296) >>> 0;
+        const actor = species === "deer" ? createDeer(x, y) : createFauna(species, x, y);
+        const behavior = required(species === "deer" ? actor.deer : actor.fauna);
+        behavior.home = { wx, wy };
+        if (actor.deer) actor.deer.shelter = { wx: x, wy: y };
+        behavior.radius = 112;
+        behavior.randomState = seed;
+        if (actor.fauna) actor.fauna.groupId = `expansion-prey:${home.id}`;
         actors.push({
-          featureId: `wildlife:expansion-prey:${p.species}:${this.world.seed}:${home.id}:deer:0`,
-          type: DEER_TYPE,
+          featureId: `wildlife:expansion-prey:${p.species}:${this.world.seed}:${home.id}:${species}:0`,
+          type: actor.type,
           wx: x,
           wy: y,
           route: [],
-          deer,
+          ...(actor.deer ? { deer: actor.deer } : { fauna: required(actor.fauna) }),
         });
       }
     }

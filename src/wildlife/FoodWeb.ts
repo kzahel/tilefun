@@ -8,7 +8,17 @@ import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = ["mallard-duck", "robin", "chicken", "pigeon", "crow", "seagull"] as const;
 const small = ["rabbit", "frog", "red-squirrel", ...birds] as const;
+const antelopes = [
+  "gemsbok-oryx",
+  "gazelle",
+  "impala",
+  "springbok",
+  "saiga-antelope",
+  "gerenuk",
+] as const;
+const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const pasture = [
+  ...antelopes,
   "deer",
   "sheep",
   "goat",
@@ -28,7 +38,7 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 export const HUNTING_DIETS = {
   jaguar: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
   leopard: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
-  cheetah: [...small, "deer", "sheep", "goat", "piglet", "kangaroo", "alpaca"],
+  cheetah: [...small, ...lightAntelopes, "deer", "sheep", "goat", "piglet", "kangaroo", "alpaca"],
   lynx: [...small, "fox"],
   bobcat: [...small],
   "giant-spider": [

@@ -1,5 +1,6 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { PET_ART } from "./PetVariants.js";
 
@@ -1312,6 +1313,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
 ];
 export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...BASE_FAUNA_PROFILES,
+  ...ANTELOPE_PROFILES,
   ...PET_ART.map((art): FaunaProfile => {
     const base = BASE_FAUNA_PROFILES.find((p) => p.species === art.species);
     if (!base) throw new Error(`Missing pet behavior: ${art.species}`);

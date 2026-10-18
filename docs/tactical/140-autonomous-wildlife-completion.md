@@ -289,3 +289,25 @@ assertion; distinguish them from newly introduced failures.
   units: 3,104 pass, five known Windows failures, ten skipped. Twenty-eight new
   entries plus sixteen delivered leave 152 remaining. Six horned grazer sources
   begin in isolation.
+
+- 23:39 UTC: gemsbok, gazelle, impala, springbok, saiga and gerenuk completed.
+  Independent tapered closed horns, lateral ears, muzzle/nose shapes, masks,
+  flank/rump markings and neck proportions distinguish their empty-scene sources.
+  Native finishing preserves thin dark horns and surface markings. Thirty-two
+  walk poses and eight grazing poses/facing retain fixed linked necks/limbs,
+  independent cloven hooves and chewing jaws. Each audit checks 6,272 limb,
+  784 neck and 1,176 tail links, 1,244 contacts and 688 planted travel pairs.
+  Maximum endpoint interpolation gap stays below .031 native px; grazing head
+  travel is 6.4-16.8px. Six ten-artifact replays and 1,968 exact crops pass.
+  Separate typed family profiles use existing fixed expansion homes. Food tiers
+  include the new grazers; a fixed seven-species companion bank gives natural
+  hunter clearings varied legal prey. All generated hunters still eat and retain
+  replacement lineage after reload. Twelve explicit catches prove natural
+  antelopes replace their lineage and manual ones remain gone. Typecheck/lint/
+  build, 1,019-candidate manifest, 24 browser cases and streaming readiness pass.
+  Full final units: 3,195 pass, five known Windows failures, ten skipped.
+  Initial Workshop timeouts under concurrent heavy jobs pass in a 13-test
+  isolated recheck and a clean full rerun. Keep catalog/manifest generation
+  complete before tests, and avoid heavy render jobs during sensitive HTTP checks.
+  Thirty-four new entries plus sixteen delivered leave 146 remaining. Four
+  heavy bovid sources begin next. Every exact identity remains pending review.

@@ -100,6 +100,17 @@ full units: 3,104 pass, five known Windows failures, ten skipped. Crossing and
 world-reopen checks use 15-second integration allowances after initial render-
 load timeouts; isolated and final full reruns pass. Twenty-eight new entries
 plus sixteen delivered leave 152 remaining. Six horned grazers begin next.
+Gemsbok, gazelle, impala, springbok, saiga and gerenuk now also spawn in natural
+herds with distinct horns, coats, skulls and articulated grazing necks. A fixed
+seven-species companion bank gives hunter clearings varied legal grazers through
+canonical diets. Generated meals/lineage reload and twelve natural/manual
+antelope catch cases pass. All six replays and 1,968 exact crops pass, alongside
+24 game/browser cases, streaming readiness and the 1,019-candidate manifest.
+Typecheck/lint/build pass. Full final units: 3,195 pass, five known Windows
+failures, ten skipped. Initial concurrent-load Workshop timeouts pass isolated
+and in the clean full rerun; finish inventories before tests and avoid heavy
+render jobs during HTTP validation. Thirty-four new entries plus sixteen
+already delivered leave 146 remaining. Four heavy bovids begin next.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion
