@@ -58,6 +58,7 @@ export interface TerrainPreparationOptions {
   readonly rowBudget?: number;
 }
 export interface TerrainDiagnostics {
+  staticSprites?: { resident: number; bytes: number; builds: number; hits: number };
   resident: number;
   schedulerRecordsCreated: number;
   queuedJobs: number;

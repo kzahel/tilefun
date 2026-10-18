@@ -18,6 +18,7 @@ import { createRabbit, RABBIT_TYPE } from "../../wildlife/Rabbit.js";
 import { createRobin, ROBIN_TYPE } from "../../wildlife/Robin.js";
 import type { ActorPlacement } from "../Generator.js";
 import { fbm, valueNoise } from "../noise.js";
+import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { FarmsteadSource } from "./FarmsteadPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
@@ -111,6 +112,7 @@ export function naturalHabitat(
 export class NaturalLandscape {
   readonly railways: RailwayPlanner;
   readonly farms: FarmsteadSource;
+  private readonly districts: DenseDistrictSource;
   private dryRefugePlanner?: NaturalLandscape;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private lagoons = new Map<string, NaturalPond | null>();
@@ -127,6 +129,7 @@ export class NaturalLandscape {
     landscapeProfile(profile);
     this.railways = new RailwayPlanner(world);
     this.farms = new FarmsteadSource(world);
+    this.districts = new DenseDistrictSource(world, true);
   }
   private buildReservations(cx: number, cy: number) {
     const bounds = {
@@ -141,7 +144,20 @@ export class NaturalLandscape {
       sampleStep: 128,
       limits: QUERY_LIMITS,
     });
-    return { region, lines: this.railways.query(bounds), farms: this.farms.query(bounds) };
+    return {
+      region,
+      centers: this.districts
+        .query(bounds)
+        .flatMap((p) => p.shoppingCenters ?? [])
+        .map((c) => ({
+          minX: c.wx / 16,
+          minY: c.wy / 16,
+          maxX: (c.wx + 1280) / 16,
+          maxY: (c.roadY + 64) / 16,
+        })),
+      lines: this.railways.query(bounds),
+      farms: this.farms.query(bounds),
+    };
   }
   /** r includes the proposed feature's footprint/visual clearance. */
   reserved(x: number, y: number, r = 3): boolean {
@@ -156,6 +172,7 @@ export class NaturalLandscape {
         this.reservations.delete(this.reservations.keys().next().value ?? "");
     }
     if (this.farms.reserved(plans.farms, x, y, r)) return true;
+    if (plans.centers.some((b) => near(b, x, y, r + 4))) return true;
     if (plans.region.settlements.some((s) => near(s.bounds, x, y, r + 4))) return true;
     if (plans.region.connections.some((c) => pathDistance(c.points, x, y) <= c.width / 2 + r))
       return true;

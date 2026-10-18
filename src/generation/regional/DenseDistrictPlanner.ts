@@ -19,7 +19,10 @@ export interface DenseDistrictPlan extends DistrictPlan {
     | "city-places-v9"
     | "city-places-v10";
   readonly center: { x: number; y: number };
+  /** Original street-grid reservation before adding outlying centers. */
+  readonly gridBounds?: Bounds;
   readonly actors: ActorPlacement[];
+  readonly shoppingCenters?: readonly import("../../traffic/ShoppingCenter.js").ShoppingCenter[];
   /** Optional threshold-to-sidewalk connections; enabled for current gameplay. */
   readonly entrancePaths?: readonly {
     lotId: string;
@@ -309,8 +312,23 @@ export function currentDenseDistrict(settlement: Settlement, seed: number): Dens
     planDenseDistrict(settlement, seed, false, columns, 4),
     settlement,
   );
+  const roadY =
+    Math.min(
+      ...plan.streets
+        .filter((s) => s.points[0]?.y === s.points[1]?.y)
+        .map((s) => item(s.points, 0).y),
+    ) * 16;
+  const shoppingCenters = Array.from({ length: columns === 6 ? 2 : 1 }, (_, i) => ({
+    id: `${settlement.id}:shopping:${i}`,
+    wx: (plan.bounds.minX + 8 + i * 132) * 16,
+    wy: roadY - 1024,
+    roadY,
+  }));
   return {
     ...plan,
+    bounds: { ...plan.bounds, minY: roadY / 16 - 64 },
+    gridBounds: plan.bounds,
+    shoppingCenters,
     recipe: "current-dense-district-v1",
     id: `${settlement.id}:current-dense-district-v1`,
   };
@@ -319,15 +337,26 @@ export function currentDenseDistrict(settlement: Settlement, seed: number): Dens
  * tile composer/renderer resolves their original art in both game and preview.
  */
 export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): RoadType {
+  for (const c of plan.shoppingCenters ?? []) {
+    const px = x * 16 - c.wx,
+      py = y * 16 - c.wy;
+    if (px >= 16 && px < 1264 && py >= 208 && py < 944) return RoadType.CityAsphalt;
+    if (((px >= 64 && px < 144) || (px >= 1120 && px < 1216)) && py >= 208 && py < 1024)
+      return RoadType.CityAsphalt;
+  }
   const onH = plan.streets.find(
     (s) =>
       item(s.points, 0).y === item(s.points, 1).y &&
+      x >= Math.min(item(s.points, 0).x, item(s.points, 1).x) &&
+      x < Math.max(item(s.points, 0).x, item(s.points, 1).x) &&
       y >= item(s.points, 0).y - s.width / 2 &&
       y < item(s.points, 0).y + s.width / 2,
   );
   const onV = plan.streets.find(
     (s) =>
       item(s.points, 0).x === item(s.points, 1).x &&
+      y >= Math.min(item(s.points, 0).y, item(s.points, 1).y) &&
+      y < Math.max(item(s.points, 0).y, item(s.points, 1).y) &&
       x >= item(s.points, 0).x - s.width / 2 &&
       x < item(s.points, 0).x + s.width / 2,
   );
@@ -381,9 +410,14 @@ export function denseSurfaceAt(plan: DenseDistrictPlan, x: number, y: number): R
   if (
     plan.streets.some((s) => {
       const p = item(s.points, 0);
-      return p.y === item(s.points, 1).y
-        ? Math.abs(y + 0.5 - p.y) < s.width / 2 + 3
-        : Math.abs(x + 0.5 - p.x) < s.width / 2 + 3;
+      const q = item(s.points, 1);
+      return p.y === q.y
+        ? x >= Math.min(p.x, q.x) &&
+            x < Math.max(p.x, q.x) &&
+            Math.abs(y + 0.5 - p.y) < s.width / 2 + 3
+        : y >= Math.min(p.y, q.y) &&
+            y < Math.max(p.y, q.y) &&
+            Math.abs(x + 0.5 - p.x) < s.width / 2 + 3;
     })
   )
     return RoadType.CityPavement;

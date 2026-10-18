@@ -107,11 +107,19 @@ for the owner's shopping-center request (2026-10-18): 64-space shopping center,
 16-space town lot and long side-facing bays, with native source tiles and parked
 car scale references. Three new exact candidates await review under
 `parking-patterns`. These are static compositions, separate from the old v7
-archive. Automatic parking and inclusion in some current towns remain next work;
-they must use shared production planning and traffic authority.
-The owner's follow-up requests a complete shopping visit: occupants leave parked
-cars, enter shops, return and drive away. Limit active parking/departure maneuvers
-to one or two cars at once, with reserved bays and coordinated aisle access.
+archive. [132](../tactical/132-parking-shopping-visits.md) adds a separate
+[playable shopping-trip view](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/parking-lab?play=1):
+four reserved paired bays, occupants walking into shops and back, and at most two
+cars maneuvering. Shared Realm authority owns routes, collision, crossing admission
+and saved phases. [133](../tactical/133-generated-shopping-centers.md) integrates one road-connected
+center in every current city, or two in larger cities, along the northern boulevard.
+Centers extend the reserved area 60 tiles north of the street grid (184×228 or
+272×228 tiles overall). Native parked cars use durable traffic ownership; one existing compact road car
+visits each center at a time, then merges back from its actual exit pose.
+The [generated city preview](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/parking-lab?play=1&city=1)
+uses the real generator and offers a main-game new-world handoff. Inspect fresh
+generation; existing saved terrain is not migrated. Nature/farm reservations now
+protect the new center footprints without altering distant habitat reservations.
 
 [Natural landscapes](natural-landscapes.md) now supplies the default regional
 composition, including patterned forests, scattered trees and ponds. The owner

@@ -14,6 +14,7 @@ import {
 import { treeRunLength, treeRunProp } from "../patterns/FencedTrees.js";
 import { forestRowDefinition, forestRowProp, forestRowWalls } from "../patterns/ForestThicket.js";
 import { bridgePart, roadRailBridgeProp } from "../railway/RoadRailBridge.js";
+import { shoppingScenery, shoppingSceneryProp } from "../traffic/ShoppingScenery.js";
 import type { Prop, PropCollider } from "./Prop.js";
 
 interface PropDef {
@@ -575,6 +576,8 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
 }
 
 export function createProp(type: string, wx: number, wy: number): Prop {
+  const shopping = shoppingSceneryProp(type, wx, wy);
+  if (shopping) return shopping;
   const forest = forestRowProp(type, wx, wy);
   if (forest) return forest;
   const bridge = roadRailBridgeProp(type, wx, wy);
@@ -648,6 +651,7 @@ export function createProp(type: string, wx: number, wy: number): Prop {
 }
 
 export function isPropType(type: string): boolean {
+  if (shoppingScenery.some((p) => p.type === type)) return true;
   if (forestRowDefinition(type)) return true;
   if (bridgePart(type)) return true;
   if (treeRunLength(type) !== null) return true;

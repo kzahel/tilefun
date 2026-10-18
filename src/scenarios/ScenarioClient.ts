@@ -34,6 +34,7 @@ export class ScenarioClient {
   readonly ready: Promise<void>;
   handles: Record<string, number> = {};
   traffic: ScenarioResponse["traffic"];
+  parking: ScenarioResponse["parking"];
   clock: ScenarioResponse["clock"];
   private worker = new Worker(new URL("./scenario.worker.ts", import.meta.url), { type: "module" });
   private channel = new OrderedWorkerChannel<ScenarioPacket>((message, transfer) =>
@@ -136,6 +137,7 @@ export class ScenarioClient {
       }
       this.handles = response.handles;
       this.traffic = response.traffic;
+      this.parking = response.parking;
       this.clock = response.clock;
       const player = this.view.serverPlayerEntity;
       if (player.id !== -1) {

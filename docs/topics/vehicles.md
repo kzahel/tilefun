@@ -2,7 +2,7 @@
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-12.
+Updated: 2026-10-18.
 
 The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversion
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
@@ -108,8 +108,12 @@ deletion and disconnect release ownership; stale input brakes.
 
 Game and traffic/world geometry labs use the same Realm authority, predictor,
 vehicle prompt and scenario controls. No art bank or geometry approval changed.
-Visible NPC drivers getting out and wandering, and NPCs reclaiming parked cars,
-remain later work. [Trains](trains.md) owns whole-service track control.
+[132](../tactical/132-parking-shopping-visits.md) adds bounded shopping visits
+through the shared Realm ParkingSystem: reserved bays, up to two car maneuvers,
+shoppers walking to storefronts and returning before departure, native collision
+and saved trip phases. The Parking lot lab hosts the authored fixture. Ordinary
+generated traffic diversion, general parking allocation and player passenger
+seats remain later work. [Trains](trains.md) owns whole-service track control.
 
 [Vehicles in Workshop](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/vehicles)
 is the review entry point, linked from the sidebar, All tools and the global
@@ -124,7 +128,8 @@ owns implementation sequencing and acceptance.
 Gentle autonomous traffic uses procedurally generated roads only: mostly city
 circulation, with occasional intercity trips. Cars keep spacing, yield at
 intersections and stop for players/animals without collision damage. Painted
-roads, NPC parking/shop visits and ordinary passenger seats are deferred.
+roads and ordinary passenger seats are deferred. Authored NPC parking/shop visits
+are now available in the Parking lot lab; generated-town integration is pending.
 Player driving in 087 can leave generated roads for clear dry ground.
 
 A player can stand in front of a car to stop it, jump onto its roof, and ride
@@ -348,3 +353,15 @@ traffic still selects the existing 44 admitted source families.
 
 Next: exact production model art review and gameplay playtesting; any animated
 steering or equipment motion requires its own clearance qualification.
+
+
+## Shopping visits
+
+[133](../tactical/133-generated-shopping-centers.md) connects native road compacts
+to generated city shopping centers. Each center admits one visitor, keeps the same
+car and durable traffic identity throughout the shopper cycle, then uses the
+checked actual-pose road connector to resume traffic. Shopper/car phases survive
+save and streaming reload. Occupied shopping seats cannot be taken over.
+Eighteen native parked compacts per center use durable placement/edit semantics.
+Playable parking labs use the shared GPU/mesh default and native parked bodies;
+explicit sprite renderer choices retain their fallback.

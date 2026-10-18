@@ -30,10 +30,13 @@ import {
   turnPath,
 } from "./LaneGraph.js";
 import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js";
+import { ParkingSystem, type SavedParking } from "./ParkingSystem.js";
 import { roofSupport } from "./RoofSupport.js";
+import { SHOPPING_PARKED_BAYS, type ShoppingCenter, shoppingLot } from "./ShoppingCenter.js";
 
 export interface TrafficRouteSource {
   trafficNetwork(wx: number, wy: number): LaneGraph;
+  shoppingCenters?(wx: number, wy: number): readonly ShoppingCenter[];
 }
 
 import {
@@ -68,6 +71,9 @@ function placementLane(identity: string, x: number, y: number): Lane {
 }
 
 export interface SavedTraffic {
+  shopping?: { centerId: string; trip: SavedParking };
+  shoppingCooldown?: number;
+  shoppingTrips?: number;
   placed?: boolean;
   parked?: boolean;
   facing?: number;
@@ -93,6 +99,9 @@ export interface SavedTraffic {
   choices: number;
 }
 export interface TrafficState {
+  shopping?: ParkingSystem;
+  shoppingCooldown?: number;
+  shoppingTrips?: number;
   placed?: boolean;
   driverId?: number;
   parked?: boolean;
@@ -138,6 +147,7 @@ export class TrafficSystem {
   }
   private readonly drivingQueries: DrivingQueries;
   private spawnClock = 0;
+  private liveShopping = new Set<ParkingSystem>();
   private retired = new Map<string, number>();
   private time = 0;
   constructor(
@@ -152,6 +162,7 @@ export class TrafficSystem {
       if (!state) return;
       for (const [node, owner] of this.reservations)
         if (owner === entity.id) this.reservations.delete(node);
+      state.shopping?.dispose();
       this.states.delete(entity.id);
       if (destroyed) this.onChange?.(state, true);
     });
@@ -189,16 +200,17 @@ export class TrafficSystem {
     return s;
   }
   /** Editor placement uses the same full-body dry-ground checks as driving. */
-  place(model: string, wx: number, wy: number): TrafficState | undefined {
+  place(model: string, wx: number, wy: number, facing = Direction.Right): TrafficState | undefined {
     if (
       !VEHICLE_MODELS.includes(model) ||
+      ![Direction.Up, Direction.Down, Direction.Left, Direction.Right].includes(facing) ||
       this.states.size >= 1024 ||
       ![wx, wy].every(Number.isFinite) ||
       Math.abs(wx) > 2 ** 28 ||
       Math.abs(wy) > 2 ** 28
     )
       return;
-    const candidate = createVehicle(model, wx, wy);
+    const candidate = createVehicle(model, wx, wy, facing);
     candidate.id = -1; // Unpublished candidates must not alias the player/entity ID zero.
     const bounds = getEntityAABB(candidate.position, required(candidate.collider));
     for (
@@ -236,7 +248,7 @@ export class TrafficSystem {
       placementLane(identity, wx, wy),
       0,
       false,
-      { x: wx, y: wy, direction: Direction.Right },
+      { x: wx, y: wy, direction: facing },
       candidate.wz,
     );
     state.entity.proceduralId = identity;
@@ -467,6 +479,158 @@ export class TrafficSystem {
     return true;
   }
   /** Called once per physics tick after player input. No wander AI, damage or pushing. */
+  get shoppingDiagnostics() {
+    const states = [...this.states.values()];
+    const trips = states.flatMap((s) => (s.shopping ? [s.shopping.diagnostics] : []));
+    return {
+      maneuvers: trips.reduce((n, t) => n + t.maneuvers, 0),
+      completed: states.reduce((n, s) => n + (s.shoppingTrips ?? 0), 0),
+      visits: trips.flatMap((t) => t.visits),
+    };
+  }
+  private nearbyCenters() {
+    const centers = new Map<string, ShoppingCenter>();
+    for (const r of this.visibleRanges)
+      for (const c of this.strategy.shoppingCenters?.(
+        (r.minCx + r.maxCx + 1) * 128,
+        (r.minCy + r.maxCy + 1) * 128,
+      ) ?? [])
+        if (this.visible(c.wx + 640, c.wy + 480, 720)) centers.set(c.id, c);
+    return [...centers.values()];
+  }
+  /** Bounded terrain dependencies exist only while a center is near a live view. */
+  shoppingRanges(): ChunkRange[] {
+    return this.nearbyCenters().map((c) => ({
+      minCx: Math.floor(c.wx / 256),
+      maxCx: Math.floor((c.wx + 1279) / 256),
+      minCy: Math.floor(c.wy / 256),
+      maxCy: Math.floor((c.roadY + 63) / 256),
+    }));
+  }
+  private centerReady(c: ShoppingCenter) {
+    const b = shoppingLot(c, "compact-1").bounds;
+    for (let y = Math.floor(b.top / 256); y <= Math.floor((b.bottom - 1) / 256); y++)
+      for (let x = Math.floor(b.left / 256); x <= Math.floor((b.right - 1) / 256); x++)
+        if (!this.world.getChunkIfLoaded(x, y)) return false;
+    return true;
+  }
+  private tryShopping(s: TrafficState) {
+    if (
+      s.shoppingCooldown ||
+      s.turn ||
+      s.resumePath ||
+      s.lane.direction !== Direction.Left ||
+      !/^vehicle-v1:compact-[1-6]$/.test(s.entity.type)
+    )
+      return false;
+    for (const c of this.strategy.shoppingCenters?.(s.entity.position.wx, s.entity.position.wy) ??
+      []) {
+      if (
+        Math.abs(s.entity.position.wx - c.wx - 1176) > 0.8 ||
+        Math.abs(s.entity.position.wy - c.roadY + 32) > 0.8 ||
+        !this.centerReady(c) ||
+        !this.visible(c.wx + 640, c.wy + 480, 720)
+      )
+        continue;
+      if ([...this.states.values()].some((t) => t.shopping?.lot.id === c.id)) continue;
+      // Capture the actual road body; no entrance spawn or position replacement.
+      this.takeControl(s, -1);
+      delete s.driverId;
+      const shopping = new ParkingSystem(
+        shoppingLot(c, s.entity.type.slice(11)),
+        this.world,
+        this.entities,
+        this.props,
+        () => this.onChange?.(s, false),
+        undefined,
+        true,
+      );
+      shopping.bindCar(s.entity);
+      s.shopping = shopping;
+      this.onChange?.(s, false);
+      return true;
+    }
+    return false;
+  }
+  /** Shares the lab trip owner before generic pedestrian integration. */
+  syncShopping() {
+    for (const s of this.states.values()) s.shopping?.sync();
+  }
+  tickShopping(dt: number, excluded?: ReadonlySet<number>) {
+    this.liveShopping.clear();
+    for (const s of this.states.values()) {
+      const trip = s.shopping;
+      if (
+        !trip ||
+        !this.visible(
+          (trip.lot.bounds.left + trip.lot.bounds.right) / 2,
+          (trip.lot.bounds.top + trip.lot.bounds.bottom) / 2,
+          720,
+        )
+      )
+        continue;
+      this.liveShopping.add(trip);
+      trip.tick(dt, excluded);
+      if (trip.states[0]?.phase === "waiting") {
+        trip.dispose();
+        delete s.shopping;
+        s.shoppingCooldown = 120;
+        s.shoppingTrips = (s.shoppingTrips ?? 0) + 1;
+        this.releaseControl(s, true);
+      }
+    }
+  }
+  admitShoppingShoppers(dts: Map<Entity, number>, dt: number) {
+    for (const s of this.states.values()) {
+      if (!s.shopping) continue;
+      for (const state of s.shopping.states) if (state.shopper) dts.delete(state.shopper);
+      if (this.liveShopping.has(s.shopping)) s.shopping.admitShoppers(dts, dt);
+    }
+  }
+  private populateShopping() {
+    for (const c of this.nearbyCenters()) {
+      if (!this.centerReady(c)) continue;
+      for (const [i, p] of SHOPPING_PARKED_BAYS.entries()) {
+        if (this.states.size >= 1024) return;
+        const wx = c.wx + p[0],
+          wy = c.wy + p[1];
+        const identity = `placed-vehicle-v1:${c.id}:bay:${i}`;
+        if (
+          !this.visible(wx, wy) ||
+          !this.canSpawn(identity, wx, wy) ||
+          [...this.states.values()].some((s) => s.entity.proceduralId === identity)
+        )
+          continue;
+        const probe = createVehicle(
+          `compact-${1 + (i % 6)}`,
+          wx,
+          wy,
+          i % 2 ? Direction.Down : Direction.Up,
+        );
+        probe.id = -1;
+        if (
+          !drivenCarPose(
+            probe,
+            { dx: 0, dy: 0 },
+            1 / 60,
+            this.world,
+            this.props.props,
+            this.entities.entities,
+            this.drivingQueries,
+          )
+        )
+          continue;
+        const s = this.add(`compact-${1 + (i % 6)}`, placementLane(identity, wx, wy), 0, false, {
+          x: wx,
+          y: wy,
+          direction: i % 2 ? Direction.Down : Direction.Up,
+        });
+        s.entity.proceduralId = identity;
+        s.placed = s.parked = true;
+        this.onChange?.(s, false);
+      }
+    }
+  }
   tick(
     dt: number,
     players: readonly Entity[],
@@ -476,6 +640,7 @@ export class TrafficSystem {
     this.time += dt;
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
+      this.populateShopping();
       this.populate(players);
       this.spawnClock = 2;
     }
@@ -485,7 +650,9 @@ export class TrafficSystem {
         continue;
       }
       if (active && !active.has(s.entity)) continue;
+      s.shoppingCooldown = Math.max(0, (s.shoppingCooldown ?? 0) - dt);
       if (s.driverId !== undefined || s.parked) continue;
+      if (this.tryShopping(s)) continue;
       this.choose(s);
       const end = (s.turn ?? s.lane.path).length;
       const half = Math.max(s.entity.collider?.width ?? 0, s.entity.collider?.height ?? 0) / 2;
@@ -610,6 +777,9 @@ export class TrafficSystem {
     }
   }
   takeControl(s: TrafficState, playerId: number): void {
+    s.shopping?.dispose();
+    delete s.shopping;
+    s.shoppingCooldown = 120;
     s.driverId = playerId;
     s.parked = true;
     s.speed = 0;
@@ -727,6 +897,7 @@ export class TrafficSystem {
       if (owner === s.entity.id) this.reservations.delete(node);
     this.retired.set(s.entity.proceduralId ?? "", this.time + 30);
     if (this.retired.size > 256) this.retired.delete(this.retired.keys().next().value ?? "");
+    s.shopping?.dispose();
     this.states.delete(s.entity.id);
     this.entities.remove(s.entity.id, false);
   }
@@ -734,6 +905,11 @@ export class TrafficSystem {
     return {
       ...(s.entity.emergencyState !== undefined ? { emergencyState: s.entity.emergencyState } : {}),
       ...(s.placed ? { placed: true } : {}),
+      ...(s.shopping
+        ? { shopping: { centerId: s.shopping.lot.id, trip: s.shopping.snapshot() } }
+        : {}),
+      shoppingCooldown: s.shoppingCooldown ?? 0,
+      shoppingTrips: s.shoppingTrips ?? 0,
       parked: s.parked ?? false,
       facing: s.entity.sprite?.direction ?? 0,
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
@@ -762,6 +938,9 @@ export class TrafficSystem {
   prepareRestore(records: readonly SavedTraffic[]) {
     const identities = new Set([...this.states.values()].map((s) => s.entity.proceduralId));
     const reserved = new Set(this.reservations.keys());
+    const centers = new Set(
+      [...this.states.values()].flatMap((s) => (s.shopping ? [s.shopping.lot.id] : [])),
+    );
     return records.flatMap((r) => {
       if (identities.has(r.identity)) return [];
       if (
@@ -776,6 +955,8 @@ export class TrafficSystem {
           r.choices,
           r.speed ?? 0,
           r.blockedSeconds ?? 0,
+          r.shoppingCooldown ?? 0,
+          r.shoppingTrips ?? 0,
           r.vx ?? 0,
           r.vy ?? 0,
         ].every(Number.isFinite) ||
@@ -835,13 +1016,48 @@ export class TrafficSystem {
       if (r.distance < 0 || r.distance > activePath.length || (r.speed ?? 0) < 0)
         throw new Error("Invalid saved traffic progress.");
       if (r.turning) reserved.add(lane.to);
+      let shopping: ParkingSystem | undefined;
+      if (r.shopping) {
+        const center = this.strategy
+          .shoppingCenters?.(r.wx ?? r.x, r.wy ?? r.y)
+          .find((c) => c.id === r.shopping?.centerId);
+        if (
+          !center ||
+          centers.has(center.id) ||
+          r.placed ||
+          !r.parked ||
+          r.turning ||
+          r.resumePath ||
+          r.nextId
+        )
+          throw new Error("Invalid saved shopping center");
+        shopping = new ParkingSystem(
+          shoppingLot(center, r.model),
+          this.world,
+          this.entities,
+          this.props,
+          () => {},
+          r.shopping.trip,
+          true,
+        );
+        const car = shopping.states[0]?.car;
+        if (
+          shopping.states[0]?.phase === "waiting" ||
+          !car ||
+          car.position.wx !== r.wx ||
+          car.position.wy !== r.wy ||
+          car.proceduralId !== r.identity
+        )
+          throw new Error("Invalid saved shopping car");
+        centers.add(center.id);
+      }
       identities.add(r.identity);
-      return [{ r, lane, next, activePath }];
+      return [{ r, lane, next, activePath, shopping }];
     });
   }
   restore(records: readonly SavedTraffic[]) {
     const prepared = this.prepareRestore(records);
-    for (const { r, lane, next, activePath } of prepared) {
+    for (const { r, lane, next, activePath, shopping } of prepared) {
       const s = this.add(
         r.model,
         lane,
@@ -878,6 +1094,12 @@ export class TrafficSystem {
         : { wx: pose.x, wy: pose.y };
       applyVehicleFacing(s.entity, r.parked ? (r.facing ?? pose.direction) : pose.direction);
       this.entities.spatialHash.update(s.entity);
+      s.shoppingCooldown = r.shoppingCooldown ?? 0;
+      s.shoppingTrips = r.shoppingTrips ?? 0;
+      if (shopping) {
+        shopping.bindCar(s.entity, () => this.onChange?.(s, false));
+        s.shopping = shopping;
+      }
       this.onRestore?.(s, r);
     }
   }

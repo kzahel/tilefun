@@ -1,3 +1,4 @@
+import { required } from "../art/ArtCatalog.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TerrainId } from "../autotile/TerrainId.js";
@@ -86,6 +87,7 @@ import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
 import type { ClientMessage } from "../shared/protocol.js";
+import { type ParkingLot, ParkingSystem, type SavedParking } from "../traffic/ParkingSystem.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import {
@@ -152,6 +154,7 @@ export interface RealmOptions {
   /** Explicit route source for authored infrastructure/scenarios. */
   railways?: RailRouteSource;
   traffic?: TrafficRouteSource;
+  parking?: ParkingLot;
 }
 
 export class Realm {
@@ -226,6 +229,7 @@ export class Realm {
   private processedStructureKeys = new Set<string>();
   private proceduralActors!: ProceduralActors;
   traffic: TrafficSystem | null = null;
+  parking: ParkingSystem | null = null;
   railway: RailwaySystem | null = null;
   async callTrain(session: PlayerSession, benchId: number): Promise<void> {
     if (!this.railway || !Number.isSafeInteger(benchId)) throw Error("Train unavailable.");
@@ -932,8 +936,12 @@ export class Realm {
 
       const getHeight = (tx: number, ty: number) => this.world.getHeightAt(tx, ty);
       for (let step = 0; step < physicsSteps; step++) {
+        this.parking?.tick(stepDt, landingCarryExcluded);
+        this.traffic?.tickShopping(stepDt, landingCarryExcluded);
         // Merge entity tick tiers across all active sessions' visible ranges.
         const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, stepDt);
+        this.parking?.admitShoppers(entityTickDts, stepDt);
+        this.traffic?.admitShoppingShoppers(entityTickDts, stepDt);
         for (const session of this.sessions.values()) {
           if (session.transitioning || session.retired || Date.now() < session.doorArrivalUntil)
             entityTickDts.delete(session.player);
@@ -1006,6 +1014,7 @@ export class Realm {
           for (const car of service.carriages) preSteppedEntityIds.add(car.id);
         for (const vehicle of this.traffic?.states.values() ?? [])
           preSteppedEntityIds.add(vehicle.entity.id);
+        this.parking?.skipCars(preSteppedEntityIds);
         this.entityManager.update(
           stepDt,
           (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
@@ -1228,6 +1237,14 @@ export class Realm {
     }
     if (this.traffic) {
       this.traffic.visibleRanges = Array.isArray(range) ? range : [range as ChunkRange];
+      this.streaming?.interest.set(
+        "shopping",
+        this.traffic.shoppingRanges().map((r) => ({
+          range: r,
+          activity: 0,
+          reason: "dependency" as const,
+        })),
+      );
       const support = this.traffic.supportRanges([...this.sessions.values()].map((s) => s.player));
       if (support.length)
         range = [...(Array.isArray(range) ? range : [range as ChunkRange]), ...support];
@@ -1650,6 +1667,23 @@ export class Realm {
 
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
+    const parkingLot = this.options.parking;
+    this.parking =
+      parkingLot && !this.interior
+        ? new ParkingSystem(
+            parkingLot,
+            this.world,
+            this.entityManager,
+            this.propManager,
+            () =>
+              this.saveManager?.markRecordDirty("parkingVisits", parkingLot.id, () => ({
+                collection: "parkingVisits",
+                key: parkingLot.id,
+                value: required(this.parking).snapshot(),
+              })),
+            (await store.get("parkingVisits", parkingLot.id)) as SavedParking | undefined,
+          )
+        : null;
     if (
       this.interior &&
       savedMeta?.interior &&
@@ -1706,6 +1740,23 @@ export class Realm {
       trafficRecords,
     );
 
+    if (this.parking) {
+      const b = this.parking.lot.bounds;
+      // One bounded authored lot owns its complete movement/crossing dependency,
+      // independent of diagnostic camera zoom. Released with this Realm's streaming.
+      this.streaming.interest.set("parking", [
+        {
+          range: {
+            minCx: Math.floor(b.left / 256),
+            maxCx: Math.floor((b.right - 1) / 256),
+            minCy: Math.floor(b.top / 256),
+            maxCy: Math.floor((b.bottom - 1) / 256),
+          },
+          activity: 0,
+          reason: "dependency",
+        },
+      ]);
+    }
     const railwayRoutes =
       this.options.railways ??
       (this.generator.terrain instanceof RailwayStrategy
@@ -1830,6 +1881,8 @@ export class Realm {
     // Explicit readiness fences may load chunks after the ordinary budgeted pass.
     // Publish complete terrain even when authority will stay paused after reload.
     this.world.computeAutotile(this.blendGraph);
+    this.parking?.sync();
+    this.traffic?.syncShopping();
   }
 
   async flushAsync(): Promise<void> {
@@ -1878,6 +1931,7 @@ export class Realm {
     for (const prop of [...this.propManager.props]) this.propManager.remove(prop.id, false);
     for (const [key] of this.world.chunks.entries()) this.world.chunks.remove(key);
     this.records?.features.clear();
+    this.parking = null;
     this.sessions.clear();
     this.activity.clear();
     this.propActivity.clear();

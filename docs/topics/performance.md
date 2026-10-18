@@ -9,7 +9,7 @@ removed from world chunks; neutral frame/backend separation delivered, with rast
 scheduling and cold-entry presentation remaining as separate performance work.
 Wildlife sleep, shared bounded planning across all native families and ambient
 wander, and local predicted animation are delivered.
-Updated: 2026-10-12.
+Updated: 2026-10-18.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend
@@ -93,6 +93,25 @@ Both failures reproduce serially without competing browser tests.
   all entries. The cache stores backend-independent bounds and height/depth data,
   and dynamic actor/ghost sorting still runs every frame. One-shot collectors
   retain their existing independent output ownership.
+
+## Parking lot rendering (2026-10-18)
+
+The shopping-trip lab originally expanded roughly 5,000 pavement/paint crops into
+separate scene items and Canvas image/state operations every frame. A 4× CPU-throttled
+bundled Chromium profile at a 390×844 CSS viewport measured only 35 callbacks in
+five seconds; Canvas restore dominated the main-thread profile. Static compound
+props now stay grouped through the shared collector, with backend-owned stationary
+screen composites on Canvas/GPU. Actor motion remains live in the normal Worker.
+[Rendering architecture](rendering-architecture.md#static-compound-sprites) owns
+cache contracts; [132](../tactical/132-parking-shopping-visits.md) owns timings and
+pixel/lifecycle evidence. Functional phone-width tests alone did not reveal this
+cost and are not a substitute for frame-cadence measurement.
+
+[133](../tactical/133-generated-shopping-centers.md) records warmed default-3D
+samples after native parked cars and generated centers were integrated. Both
+phone-sized desktop scenes reach roughly 60 FPS under 4× CPU throttling; this
+does not establish physical phone FPS. Streaming readiness and the complete
+shopping-trip browser rerun pass.
 
 ## Evidence and validation
 

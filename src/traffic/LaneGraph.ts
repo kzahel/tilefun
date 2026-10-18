@@ -76,11 +76,10 @@ export function generatedSegments(
     for (const s of plan.streets) {
       const a = required(s.points[0]),
         b = required(s.points[1]);
-      // Streets extend to the district boundary in the generated surface contract.
-      const horizontal = a.y === b.y;
+      // Actual street endpoints remain fixed when a district gains outlying lots.
       segments.push({
-        a: { x: horizontal ? plan.bounds.minX : a.x, y: horizontal ? a.y : plan.bounds.minY },
-        b: { x: horizontal ? plan.bounds.maxX : b.x, y: horizontal ? b.y : plan.bounds.maxY },
+        a,
+        b,
         width: s.width,
         intercity: false,
       });

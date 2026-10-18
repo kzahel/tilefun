@@ -280,10 +280,16 @@ export const CITY_BATCHES: ReviewBatch[] = [
     toolId: "patterns",
   },
   {
+    id: "parking-visits",
+    name: "Shopping trips & parking",
+    description:
+      "Playable shopping visits with reserved bays, pedestrians and at most two car maneuvers.",
+    toolId: "parking-lab",
+  },
+  {
     id: "parking-patterns",
     name: "Parking lots & shopping center",
-    description:
-      "Three native-tile layout studies with parked-car scale references. Automatic parking is future work.",
+    description: "Three native-tile layout studies with parked-car scale references.",
     toolId: "parking-lab",
   },
   ...Object.entries(CITY_REVIEW_RUNS).map(([id, r]) => ({

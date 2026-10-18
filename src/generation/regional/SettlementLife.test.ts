@@ -306,7 +306,10 @@ it("keeps villages compact while seeded cities gain dense cores, edges and two s
         expect(new DenseDistrictSource(world, true).owner(cx, cy)).toEqual(plan);
         expect(plan.bounds.minX).toBeGreaterThanOrEqual(settlement.bounds.minX);
         expect(plan.bounds.maxX).toBeLessThanOrEqual(settlement.bounds.maxX);
-        expect(plan.bounds.minY).toBeGreaterThanOrEqual(settlement.bounds.minY);
+        expect(
+          Math.min(...plan.streets.flatMap((s) => s.points.map((p) => p.y))),
+        ).toBeGreaterThanOrEqual(settlement.bounds.minY);
+        expect(plan.bounds.minY).toBeGreaterThanOrEqual(settlement.bounds.minY - 64);
         expect(plan.bounds.maxY).toBeLessThanOrEqual(settlement.bounds.maxY);
         if (settlement.kind === "village") {
           expect(plan.blocks).toHaveLength(4);

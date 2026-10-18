@@ -31,7 +31,15 @@ it("carries a passenger along an intercity corridor back into city streets with 
     }
     scene.step({ dx: 0, dy: 0, jump: false, sprinting: false });
   }
-  expect(car.choices).toBeGreaterThan(3);
+  expect(
+    car.choices,
+    JSON.stringify({
+      position: car.entity.position,
+      waiting: car.waiting,
+      lane: car.lane.id,
+      shopping: car.shopping?.diagnostics,
+    }),
+  ).toBeGreaterThan(3);
   expect(car.lane.intercity).toBe(false);
   expect(scene.player.wz).toBe(24);
   expect(peakChunks).toBeLessThan(150);

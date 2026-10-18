@@ -268,3 +268,60 @@ it.each(["police-car", "garbage-truck-green", "garbage-truck-orange", "fire-truc
     expect(collect(car, 1, 1 / 3, frame)[0]).not.toHaveProperty("emergencyFlash");
   },
 );
+
+it("retains static compound crops for shared backends and expands references/slab ordering", async () => {
+  const { parkingRecipe } = await import("../scenarios/ParkingRecipe.js");
+  const props = parkingRecipe().props ?? [];
+  const camera = new Camera();
+  camera.pixelSnap = true;
+  camera.zoom = 0.24;
+  camera.setViewport(960, 720);
+  camera.snapTo(640, 480);
+  const collectProps = (frame?: SceneFrame) =>
+    collectScene(
+      [],
+      props,
+      world,
+      camera,
+      camera.getVisibleChunkRange(),
+      1,
+      terrain,
+      [],
+      false,
+      undefined,
+      undefined,
+      frame,
+    );
+  const native = collectProps();
+  const frame = new SceneFrame();
+  const grouped = collectProps(frame);
+  expect(native.length).toBeGreaterThan(4900);
+  expect(grouped.length).toBeLessThan(80);
+  expect(grouped.filter((i) => i.kind === "sprite" && i.parts)).toHaveLength(20);
+  expect(
+    grouped.reduce((n, i) => n + (i.kind === "sprite" && i.parts ? i.parts.length : 1), 0),
+  ).toBe(native.length);
+  frame.release();
+  expect(frame.items).toHaveLength(0);
+  camera.pixelSnap = false;
+  expect(collectProps(frame)).toHaveLength(native.length);
+  camera.pixelSnap = true;
+  const first = props[0];
+  if (!first) throw Error("Missing scenery");
+  first.collider = {
+    offsetX: 0,
+    offsetY: 0,
+    width: 16,
+    height: 16,
+    surface: {
+      id: "test-slab",
+      spaceId: "outdoors",
+      z: 8,
+      riseX: 0,
+      riseY: 0,
+      thickness: 4,
+      connectsTo: [],
+    },
+  };
+  expect(collectProps(frame)).toHaveLength(native.length);
+});

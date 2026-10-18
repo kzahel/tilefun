@@ -4,7 +4,7 @@ Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
 The identified interactive lab migrations are complete.
-Updated: 2026-10-12.
+Updated: 2026-10-18.
 
 Owns the architectural constraint that interactive labs are embedded consumers of
 the game engine and must evolve with it. [Gameplay scenarios](gameplay-scenarios.md)
@@ -157,6 +157,24 @@ shared type lookup used by Realm, motion/contact and game/ScenarioSession consum
 Original profile objects and all species/coat definitions remain live and identical;
 AI cadence, physics, waterline transitions and presentation keep their owners.
 Native fauna/wildlife/settlement checks exercise Canvas/GPU game and lab consumers.
+
+## Parking shopping visits
+
+[132](../tactical/132-parking-shopping-visits.md) adds a playable view to the
+Parking lot lab through ScenarioPresentationHost and the ordinary scenario Worker.
+Realm owns the bounded ParkingSystem; native drive sweeps, moving roof support,
+EntityManager pedestrian collision, animation, replication and saved trip phases
+serve both authored game infrastructure and the lab. React supplies controls and
+camera intent only. Static v1 parking-pattern review snapshots remain separate.
+[133](../tactical/133-generated-shopping-centers.md) subsequently activates
+regional placement and ordinary road-traffic visits through these shared owners.
+
+The phone slowdown follow-up retains large static crop groups through the shared
+collector and RasterRenderBackend on Canvas/GPU. The game and ScenarioPresentationHost
+share stationary-view caching, moving-view fallback, source/edit invalidation and
+bounded teardown. The lab exposes host diagnostics for timing and cache inspection;
+its camera intent and native Worker trips are unchanged. See 132 for measured
+results and the limit of desktop CPU throttling as phone evidence.
 
 ## Required architecture
 
@@ -638,3 +656,14 @@ fallback. Only diagnostic presentation opts in; main-game/default labs retain
 native train sprites. The native routes, spacing, colliders, support and movement
 are unchanged. A read-only canvas diagnostics hook exposes the same host state
 for browser qualification. Exact moving-art review precedes live activation.
+
+
+## Generated shopping centers
+
+[133](../tactical/133-generated-shopping-centers.md) reuses the same ParkingSystem
+for external TrafficSystem-owned cars. TrafficRecords owns each native car and its
+shopper snapshot; Realm readiness synchronizes restored occupants and admits live
+shopper integration. Generated city preview and main game share these owners.
+Parking presentation requests GPU meshes through the shared selectable host default,
+while explicit renderer URLs remain authoritative. Native parked cars replace
+painted references only in playable views; static review pixels remain independent.

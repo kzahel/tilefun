@@ -1,0 +1,62 @@
+{
+  "date": "2026-10-18",
+  "browser": "153.0.8010.12",
+  "device": "Apple M4 Pro / macOS / bundled full Chromium",
+  "limits": "Desktop CPU throttling, stationary warmed view; not a physical phone measurement.",
+  "sourceHashes": {
+    "src/traffic/TrafficSystem.ts": "1a047d8b9dd6ac1e490c0c31e03704751be177d17d570192c534cd0166022a3d",
+    "src/scenarios/ParkingRecipe.ts": "c1d7bbf8d7873a60df6105a406a9835efed648e46d4bbddd29927f5baf3e8548",
+    "src/scenarios/CityParkingRecipe.ts": "a4d749f80931479ec713d8fdb88d76ac7be53b58682d0d07f7b94f8e0aec3108",
+    "src/rendering/StaticSpriteCache.ts": "b7a91cf8d9e2b5448ebf80b8d6793871b4ebf2151e3c64ad305e1e128b2be5ba",
+    "src/workshop/ParkingPlay.tsx": "8160ee61dcdf52b63257fa1b599c1b5211a2f61a82fb0c730190d62d0efc0841"
+  },
+  "reports": [
+    {
+      "scene": "authored four-visit lot",
+      "cpuThrottle": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "renderer": "gpu",
+      "frames": 301,
+      "elapsedMs": 5004.900000047684,
+      "fps": 60.141061758902715,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 16.799999999999272,
+      "poses": 33,
+      "errors": [],
+      "meshDraws": 44324,
+      "cache": {
+        "buildsDuringSample": 0,
+        "retainedBytes": 5379628
+      },
+      "authorityTicks": 301,
+      "drawCallsPerFrame": 96.27574750830564
+    },
+    {
+      "scene": "generated city",
+      "cpuThrottle": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "renderer": "gpu",
+      "frames": 301,
+      "elapsedMs": 5006.300000047682,
+      "fps": 60.124243452676254,
+      "medianMs": 16.700000000000728,
+      "p95Ms": 16.700000000000728,
+      "poses": 19,
+      "errors": [],
+      "meshDraws": 26125,
+      "cache": {
+        "buildsDuringSample": 0,
+        "retainedBytes": 5260452
+      },
+      "authorityTicks": 301,
+      "drawCallsPerFrame": 78.0
+    }
+  ],
+  "conditions": "Production build; stationary view, terrain settled plus ten seconds; default GPU mesh renderer; five-second samples, sequential scenes."
+}

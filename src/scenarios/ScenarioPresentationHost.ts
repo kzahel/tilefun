@@ -47,6 +47,7 @@ export interface ScenarioPresentationOptions {
   background?: string;
   /** Use the reviewed train models by default; false retains a native-art comparison. */
   authoredTrains?: boolean;
+  defaultRenderer?: import("../rendering/RenderHost.js").RendererMode;
   /** Four-direction sprite inspection: pauses authority and overrides only the displayed pose. */
   poseCycle?(): { fps: number; frameCount: number } | undefined;
   surfaceVisibility?(): SurfaceVisibility;
@@ -95,7 +96,7 @@ export class ScenarioPresentationHost {
       allCars3d: new URLSearchParams(location.search).has("allcars3d"),
       authoredTrains: options.authoredTrains ?? true,
     });
-    this.vehicleControls = !!(recipe.traffic || recipe.railways);
+    this.vehicleControls = !!(recipe.traffic || recipe.railways || recipe.parkedVehicles);
     this.session = new ScenarioClient(recipe);
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));
     this.camera.setViewport(options.width, options.height);
@@ -121,7 +122,10 @@ export class ScenarioPresentationHost {
     const [assets, , factory] = await Promise.all([
       loading,
       this.session.ready,
-      selectableRenderHostFactory(new URLSearchParams(location.search), { embedded: true }),
+      selectableRenderHostFactory(new URLSearchParams(location.search), {
+        embedded: true,
+        ...(this.options.defaultRenderer ? { defaultMode: this.options.defaultRenderer } : {}),
+      }),
     ]);
     if (this.disposed) return;
     this.host = factory(canvas);

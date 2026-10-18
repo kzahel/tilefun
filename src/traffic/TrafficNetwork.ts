@@ -12,6 +12,13 @@ export class TrafficStrategy extends DenseDistrictStrategy {
   constructor(world: ConstructorParameters<typeof DenseDistrictStrategy>[0]) {
     super(world, true);
   }
+  shoppingCenters(wx: number, wy: number) {
+    const x = wx / 16,
+      y = wy / 16;
+    return this.districts
+      .query({ minX: x - 96, minY: y - 96, maxX: x + 96, maxY: y + 96 })
+      .flatMap((p) => p.shoppingCenters ?? []);
+  }
   trafficNetwork(wx: number, wy: number): LaneGraph {
     const cx = Math.floor(wx / 16 / REGION_SIZE),
       cy = Math.floor(wy / 16 / REGION_SIZE),

@@ -6,6 +6,7 @@ import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
+import type { StaticSpriteCache } from "./StaticSpriteCache.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 /** Canvas-specific resource resolution stays on the drawing side of the boundary. */
@@ -45,6 +46,7 @@ export function drawScenePass2D(
   sheets: Map<string, Spritesheet>,
   grassSheet: Spritesheet | undefined,
   terrain?: CanvasTerrainSource,
+  staticSprites?: StaticSpriteCache,
 ): void {
   if (pass.clipRects) {
     ctx.save();
@@ -65,6 +67,7 @@ export function drawScenePass2D(
           pass.pixelExactShadows,
           terrain,
           entry < 0,
+          staticSprites,
         );
     }
   } finally {
@@ -82,6 +85,7 @@ export function drawSceneEntry2D(
   pixelExactShadows = false,
   terrain?: CanvasTerrainSource,
   shadow = false,
+  staticSprites?: StaticSpriteCache,
 ): void {
   if (shadow) {
     if (item.kind === "sprite") drawOneShadow(ctx, camera, item, pixelExactShadows);
@@ -89,7 +93,7 @@ export function drawSceneEntry2D(
   }
   switch (item.kind) {
     case "sprite":
-      drawSprite(ctx, camera, item, sheets);
+      drawSprite(ctx, camera, item, sheets, staticSprites);
       break;
     case "elevation": {
       if (!terrain) throw new Error("Elevation drawing requires terrain resources");
@@ -186,12 +190,25 @@ function drawSprite(
   camera: Camera,
   item: SpriteItem,
   sheets: Map<string, Spritesheet>,
+  staticSprites?: StaticSpriteCache,
 ): void {
   if (item.flashHidden) return;
   if (ctx.meshBody?.(camera, item)) return;
   if (drawCurveTrain(ctx, camera, item, sheets)) return;
   const sheet = sheets.get(item.sheetKey);
   if (!sheet) return;
+
+  if (item.parts) {
+    if (staticSprites?.draw(ctx, camera, item, sheet)) return;
+    for (const part of item.parts)
+      drawSprite(
+        ctx,
+        camera,
+        { ...item, ...part, parts: undefined, wx: item.wx + part.dx, wy: item.wy + part.dy },
+        sheets,
+      );
+    return;
+  }
 
   // Position is at feet (bottom-center of the sprite frame).
   // Offset draw origin so sprite frame is centered horizontally

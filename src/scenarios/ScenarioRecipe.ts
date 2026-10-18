@@ -14,11 +14,19 @@ export interface ScenarioRecipe {
   player: Entity;
   props: Prop[];
   actors?: Entity[];
+  /** Native parked bodies use durable TrafficRecords, just like editor placement. */
+  parkedVehicles?: {
+    model: string;
+    wx: number;
+    wy: number;
+    facing: import("../entities/Entity.js").Direction;
+  }[];
   /** Authored straight or curved tracks, served by the production RailwaySystem. */
   railways?: RailRoute[];
   /** Initial saved positions for generated services in temporary review worlds. */
   railwayStarts?: { id: string; x: number; target: 0 | 1 }[];
   physics?: Partial<MovementPhysicsParams>;
+  parking?: import("../traffic/ParkingSystem.js").ParkingLot;
   trafficLanes?: Lane[];
   trafficSpeed?: number;
   roads?: { left: number; right: number; top: number; bottom: number }[];

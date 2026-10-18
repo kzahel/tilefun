@@ -9,6 +9,7 @@ import {
   parkingStudy,
 } from "../art/studies/ParkingLotStudy.js";
 import { ErrorMessage, reviewPath } from "./App.js";
+import { ParkingPlay } from "./ParkingPlay.js";
 import { PreviewViewport } from "./PreviewViewport.js";
 import { reviewAssets } from "./ReviewAssets.js";
 import "./parking.css";
@@ -17,6 +18,7 @@ export default function ParkingPage() {
   const [params, setParams] = useSearchParams();
   const c = PARKING_CASES.find((c) => c.id === params.get("case")) ?? required(PARKING_CASES[0]);
   const plan = parkingStudy(c.id);
+  const live = params.get("play") === "1";
   const [cars, setCars] = useState(true),
     [grid, setGrid] = useState(false);
   const [error, setError] = useState<unknown>(null),
@@ -24,6 +26,7 @@ export default function ParkingPage() {
   const canvas = useRef<HTMLCanvasElement>(null),
     kit = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
+    if (live) return;
     let cancelled = false;
     setReady(false);
     setError(null);
@@ -61,7 +64,7 @@ export default function ParkingPage() {
     return () => {
       cancelled = true;
     };
-  }, [c.id, cars, grid]);
+  }, [c.id, cars, grid, live]);
   return (
     <section className="parking-lab" data-parking-ready={ready}>
       <div className="page-heading">
@@ -72,69 +75,97 @@ export default function ParkingPage() {
         </div>
         <span className="tag">Layout preview</span>
       </div>
-      <fieldset className="parking-options" aria-label="Parking layouts">
-        {PARKING_CASES.map((item) => (
-          <button
-            type="button"
-            key={item.id}
-            aria-pressed={c.id === item.id}
-            onClick={() => setParams({ case: item.id })}
+      <div className="actions">
+        <button type="button" aria-pressed={!live} onClick={() => setParams({ case: c.id })}>
+          Layout patterns
+        </button>
+        <button type="button" aria-pressed={live} onClick={() => setParams({ play: "1" })}>
+          Watch shopping trips
+        </button>
+        <button
+          type="button"
+          aria-pressed={live && params.get("city") === "1"}
+          onClick={() => setParams({ play: "1", city: "1" })}
+        >
+          City road connection
+        </button>
+      </div>
+      {live ? (
+        <ParkingPlay city={params.get("city") === "1"} />
+      ) : (
+        <>
+          <fieldset className="parking-options" aria-label="Parking layouts">
+            {PARKING_CASES.map((item) => (
+              <button
+                type="button"
+                key={item.id}
+                aria-pressed={c.id === item.id}
+                onClick={() => setParams({ case: item.id })}
+              >
+                <strong>{item.name}</strong>
+                <span>{item.description}</span>
+              </button>
+            ))}
+          </fieldset>
+          <div className="parking-summary">
+            <div>
+              <h2>{c.name}</h2>
+              <p>{c.description}</p>
+            </div>
+            <Link className="button" to={reviewPath(`pattern:parking-v1-${c.id}`)}>
+              Review this layout →
+            </Link>
+          </div>
+          <ErrorMessage error={error} />
+          <PreviewViewport
+            width={plan.width}
+            height={plan.height}
+            status={
+              ready
+                ? `${plan.bays.length} spaces · ${cars ? plan.bays.filter((b) => b.occupied).length : 0} parked cars`
+                : "Loading tiles…"
+            }
+            controls={
+              <>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={cars}
+                    onChange={(e) => setCars(e.target.checked)}
+                  />{" "}
+                  Show parked cars
+                </label>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={grid}
+                    onChange={(e) => setGrid(e.target.checked)}
+                  />{" "}
+                  Tile grid & drive aisles
+                </label>
+              </>
+            }
           >
-            <strong>{item.name}</strong>
-            <span>{item.description}</span>
-          </button>
-        ))}
-      </fieldset>
-      <div className="parking-summary">
-        <div>
-          <h2>{c.name}</h2>
-          <p>{c.description}</p>
-        </div>
-        <Link className="button" to={reviewPath(`pattern:parking-v1-${c.id}`)}>
-          Review this layout →
-        </Link>
-      </div>
-      <ErrorMessage error={error} />
-      <PreviewViewport
-        width={plan.width}
-        height={plan.height}
-        status={
-          ready
-            ? `${plan.bays.length} spaces · ${cars ? plan.bays.filter((b) => b.occupied).length : 0} parked cars`
-            : "Loading tiles…"
-        }
-        controls={
-          <>
-            <label>
-              <input type="checkbox" checked={cars} onChange={(e) => setCars(e.target.checked)} />{" "}
-              Show parked cars
-            </label>
-            <label>
-              <input type="checkbox" checked={grid} onChange={(e) => setGrid(e.target.checked)} />{" "}
-              Tile grid & drive aisles
-            </label>
-          </>
-        }
-      >
-        <canvas ref={canvas} aria-label={`${c.name} parking layout`} />
-      </PreviewViewport>
-      <p className="parking-caption">
-        The cars show how the spaces fit. Driving in, choosing a space and parking will come after
-        the layout review.
-      </p>
-      <div className="parking-kit">
-        <h2>Parking tile kit</h2>
-        <p>Original tile artwork, repeated at its native size.</p>
-        <canvas ref={kit} aria-label="Native parking tile patterns" />
-        <div className="parking-kit-labels">
-          {PARKING_KIT.map((item) => (
-            <span key={item.name}>{item.name}</span>
-          ))}
-        </div>
-        <a href="/tilefun/art-workbench.html?sheet=me-complete&rect=0,1904,208,288">
-          Inspect these source tiles ↗
-        </a>
-      </div>
+            <canvas ref={canvas} aria-label={`${c.name} parking layout`} />
+          </PreviewViewport>
+          <p className="parking-caption">
+            The cars show how the spaces fit. Watch shopping trips to try the live parking cycle.
+          </p>
+          <div className="parking-kit">
+            <h2>Parking tile kit</h2>
+            <p>Original tile artwork, repeated at its native size.</p>
+            <canvas ref={kit} aria-label="Native parking tile patterns" />
+            <div className="parking-kit-labels">
+              {PARKING_KIT.map((item) => (
+                <span key={item.name}>{item.name}</span>
+              ))}
+            </div>
+            <a href="/tilefun/art-workbench.html?sheet=me-complete&rect=0,1904,208,288">
+              Inspect these source tiles ↗
+            </a>
+          </div>
+        </>
+      )}
     </section>
   );
 }

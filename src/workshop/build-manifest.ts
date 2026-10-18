@@ -14,6 +14,7 @@ import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildFamilySheetCandidates } from "./FamilySheetCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
 import { buildNaturalCandidates } from "./NaturalLandscapeCandidate.js";
+import { buildParkingVisitCandidate } from "./ParkingVisitCandidate.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
@@ -47,6 +48,8 @@ try {
     candidates.push(await buildPatternCandidate(canvas, `parking-v1-${c.id}`, assets, catalog));
   for (const id of DOOR_CASES)
     candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
+  candidates.push(await buildParkingVisitCandidate());
+  candidates.push(await buildParkingVisitCandidate(true));
   candidates.push(...(await buildNaturalCandidates(catalog)));
   candidates.push(await buildCarProjectionCandidate());
   candidates.push(...(await buildAuthoredVehicleCandidates()));

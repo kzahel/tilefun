@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-18",
+  "scene": "parking-visits-v1",
+  "device": "Apple M4 Pro / macOS / bundled full Chromium",
+  "browser": "153.0.8010.12",
+  "conditions": "Production build, bundled full Chromium, 390×844 CSS viewport, lot scrolled into view, 10 s settling, then 4× CPU throttle and 5 s capture; no concurrent tests/builds.",
+  "limits": "Desktop CPU throttling and rAF callbacks do not establish physical phone FPS. The configured phone testbed was unavailable.",
+  "originalCanvasProfile": {
+    "conditions": "Earlier unoptimized production build, same desktop/browser/viewport and 4× CPU throttle, five-second target window after scene readiness; not a paired steady-state ABBA experiment.",
+    "frames": 35,
+    "canvasDrawImages": 176651,
+    "medianMs": 166.6,
+    "p95Ms": 166.7,
+    "dominantMainThreadFunction": "CanvasRenderingContext2D.restore"
+  },
+  "sourceHashes": {
+    "src/rendering/StaticSpriteCache.ts": "b7a91cf8d9e2b5448ebf80b8d6793871b4ebf2151e3c64ad305e1e128b2be5ba",
+    "src/rendering/collectScene.ts": "4cedfe328d037032ca2383fdbea28919e0ec36afa00272c27c2c868583035ddd",
+    "src/rendering/RasterRenderBackend.ts": "a28f6026b09b8e01ef4540108d3499237283555619d9404b069d5164a8764701",
+    "src/rendering/Canvas2DRenderer.ts": "8a2686811201492b2334f3f5dabe99492d028b91bd1d1c3840d685fcdc4d99d4"
+  },
+  "reports": [
+    {
+      "backend": "canvas",
+      "cpuThrottle": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvasRect": {
+        "x": 14,
+        "y": 572.359375,
+        "width": 362,
+        "height": 271.5,
+        "top": 572.359375,
+        "right": 376,
+        "bottom": 843.859375,
+        "left": 14
+      },
+      "frames": 301,
+      "elapsedMs": 5001.600000047683,
+      "fps": 60.180742161934255,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.799999999999272,
+      "canvasDrawImagesPerFrame": 107,
+      "cacheBefore": {
+        "resident": 20,
+        "bytes": 5379628,
+        "builds": 40,
+        "hits": 12460
+      },
+      "cacheAfter": {
+        "resident": 20,
+        "bytes": 5379628,
+        "builds": 40,
+        "hits": 18480
+      },
+      "authorityTicks": 301,
+      "gpuDrawCallsPerFrame": null,
+      "gpuUploads": null,
+      "errors": []
+    },
+    {
+      "backend": "gpu",
+      "cpuThrottle": 4,
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "canvasRect": {
+        "x": 14,
+        "y": 572.359375,
+        "width": 362,
+        "height": 271.5,
+        "top": 572.359375,
+        "right": 376,
+        "bottom": 843.859375,
+        "left": 14
+      },
+      "frames": 301,
+      "elapsedMs": 5007.899999904632,
+      "fps": 60.10503404735161,
+      "medianMs": 16.69999999999891,
+      "p95Ms": 16.799999999999272,
+      "canvasDrawImagesPerFrame": null,
+      "cacheBefore": {
+        "resident": 20,
+        "bytes": 5379628,
+        "builds": 40,
+        "hits": 12460
+      },
+      "cacheAfter": {
+        "resident": 20,
+        "bytes": 5379628,
+        "builds": 40,
+        "hits": 18480
+      },
+      "authorityTicks": 301,
+      "gpuDrawCallsPerFrame": 73,
+      "gpuUploads": 0,
+      "errors": []
+    }
+  ]
+}

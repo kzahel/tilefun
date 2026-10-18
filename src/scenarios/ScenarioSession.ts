@@ -121,6 +121,7 @@ export class ScenarioSession {
     this.realm = new Realm([baseGameMod], {
       physics: () => this.physics,
       ambientSpawns: false,
+      ...(this.recipe.parking ? { parking: this.recipe.parking } : {}),
       ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),
       ...(this.recipe.trafficLanes
         ? {
@@ -265,6 +266,16 @@ export class ScenarioSession {
       for (const prop of this.recipe.props) this.realm.propManager.add(structuredClone(prop));
       for (const actor of this.recipe.actors ?? [])
         this.realm.entityManager.spawn(structuredClone(actor));
+      for (const fixture of this.recipe.parkedVehicles ?? []) {
+        await this.ready({
+          minCx: Math.floor(fixture.wx / 256) - 1,
+          maxCx: Math.floor(fixture.wx / 256) + 1,
+          minCy: Math.floor(fixture.wy / 256) - 1,
+          maxCy: Math.floor(fixture.wy / 256) + 1,
+        });
+        if (!this.realm.traffic?.place(fixture.model, fixture.wx, fixture.wy, fixture.facing))
+          throw new Error("Blocked parked scenario vehicle");
+      }
       for (const fixture of this.recipe.traffic ?? []) {
         const traffic = this.realm.traffic;
         const lane = traffic?.strategy

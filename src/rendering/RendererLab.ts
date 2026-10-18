@@ -17,6 +17,7 @@ import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import { probeSpriteSeams } from "./SpriteSeamProbe.js";
+import { probeStaticSprites } from "./StaticSpriteProbe.js";
 
 function required<T>(value: T | null | undefined): T {
   if (value == null) throw Error("Missing renderer lab element");
@@ -366,6 +367,7 @@ const lab = {
   },
   gpu,
   probeSpriteSeams,
+  probeStaticSprites,
   probeCameraStability,
 };
 (window as unknown as { rendererLab: typeof lab }).rendererLab = lab;

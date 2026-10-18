@@ -334,7 +334,17 @@ export function collectScene(
       shadowTerrainZ: 0,
       flashHidden: false,
     } satisfies SpriteItem;
-    if (p.sprite.parts) {
+    if (
+      p.sprite.parts &&
+      frame &&
+      camera.pixelSnap &&
+      !planarProps.length &&
+      p.sprite.parts.length >= 32
+    ) {
+      // Keep static groups intact through submission. Planar slabs still need
+      // independent part bounds for their per-piece ordering constraints.
+      items.push({ ...baseItem, parts: p.sprite.parts });
+    } else if (p.sprite.parts) {
       for (const part of p.sprite.parts) {
         const partItem = {
           ...baseItem,

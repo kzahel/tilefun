@@ -4,6 +4,7 @@ import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
+import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { pathDistance } from "./PlanGeometry.js";
 import {
@@ -39,8 +40,10 @@ const inside = (b: Bounds, x: number, y: number, r = 0) =>
 export class FarmsteadSource {
   private cache = new Map<string, Farmstead | null>();
   private railways: RailwayPlanner;
+  private readonly districts: DenseDistrictSource;
   constructor(readonly world: RegionalWorld) {
     this.railways = new RailwayPlanner(world);
+    this.districts = new DenseDistrictSource(world, true);
   }
   owner(cx: number, cy: number, axis: "east" | "south"): Farmstead | null {
     const key = `${cx}:${cy}:${axis}`;
@@ -111,7 +114,11 @@ export class FarmsteadSource {
         sampleStep: 128,
         limits: QUERY_LIMITS,
       });
-      if (region.settlements.some((s) => intersects(s.bounds, bounds))) continue;
+      if (
+        this.districts.query(bounds).some((p) => intersects(p.bounds, bounds)) ||
+        region.settlements.some((s) => intersects(s.bounds, bounds))
+      )
+        continue;
       if (
         region.connections.some(
           (c) =>

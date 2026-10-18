@@ -30,7 +30,7 @@ export class VehicleControl {
   }
   available(id: number): boolean {
     const car = this.realm.traffic?.states.get(id);
-    if (car) return car.driverId === undefined;
+    if (car) return car.driverId === undefined && !car.shopping;
     const train = [...(this.realm.railway?.services.values() ?? [])].find((s) =>
       s.carriages.some((c) => c.id === id),
     );
@@ -62,7 +62,7 @@ export class VehicleControl {
     );
     if ((!car && !train) || train?.retiring || train?.record.deleted)
       throw Error("Vehicle unavailable.");
-    if (car?.driverId !== undefined || train?.driverId !== undefined)
+    if (car?.shopping || car?.driverId !== undefined || train?.driverId !== undefined)
       throw Error("Someone is already driving.");
     if (
       !restore &&

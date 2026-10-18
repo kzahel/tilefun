@@ -25,6 +25,7 @@ export type ScenarioResponse = {
   id: number;
   frames: ArrayBuffer[];
   handles: Record<string, number>;
+  parking?: import("../traffic/ParkingSystem.js").ParkingSystem["diagnostics"];
   traffic?: { speed: number; waiting: string; count: number };
   error?: string;
   clock?: { mode: "manual" | "realtime"; running: boolean; ticks: number };

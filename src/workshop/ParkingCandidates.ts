@@ -41,7 +41,7 @@ export async function buildParkingCandidate(
     batchId: "parking-patterns",
     kind: "pattern",
     name: c.name,
-    prompt: `${c.description} Inspect bay repeats, car scale, aisle space and pedestrian access. Static layout study: parked cars are scale references; automatic arrival/parking and town generation are future work.`,
+    prompt: `${c.description} Inspect bay repeats, car scale, aisle space and pedestrian access. Static layout study: parked cars are scale references. Watch shopping trips and City road connection demonstrate live visits and generated city centers.`,
     url,
     fingerprint,
     sourceFingerprint: source.fingerprint,

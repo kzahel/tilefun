@@ -1,6 +1,7 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import { createProp } from "../../entities/PropFactories.js";
+import { shoppingScenery } from "../../traffic/ShoppingScenery.js";
 import { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import type { ActorPlacement } from "../Generator.js";
@@ -43,7 +44,14 @@ export class DenseDistrictStrategy extends DistrictStrategy {
           y = baseY + ly,
           plan = this.districts.at(x, y);
         if (plan) {
-          chunk.setRoad(lx, ly, this.surface(plan, x, y));
+          const road = this.surface(plan, x, y);
+          const northEdge = plan.gridBounds?.minY ?? plan.bounds.minY;
+          const inCenter = plan.shoppingCenters?.some(
+            (c) => x * 16 >= c.wx && x * 16 < c.wx + 1280 && y * 16 >= c.wy && y * 16 < c.roadY,
+          );
+          // New northern reservations must retain existing intercity corridors.
+          if (y >= northEdge || inCenter || (road && !chunk.getRoad(lx, ly)))
+            chunk.setRoad(lx, ly, road);
           chunk.setHeight(lx, ly, 0);
         }
       }
@@ -102,6 +110,14 @@ export class DenseDistrictStrategy extends DistrictStrategy {
       for (const dy of [-4.5, 4.5])
         add(`${plan.id}:lamp:${dx}:${dy}`, "prop-street-lamp", x + dx, y + dy);
     props.push(...settlementGreenProps(plan));
+    for (const c of plan.shoppingCenters ?? [])
+      for (const p of shoppingScenery)
+        props.push({
+          featureId: `${c.id}:${p.type}`,
+          propType: p.type,
+          wx: c.wx + p.position.wx,
+          wy: c.wy + p.position.wy,
+        });
     return props;
   }
   actors(cx: number, cy: number): ActorPlacement[] {

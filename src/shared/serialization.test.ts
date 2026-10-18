@@ -229,6 +229,13 @@ describe("Entity serialization", () => {
 });
 
 describe("Prop serialization", () => {
+  it("preserves explicit ground-layer ordering through a snapshot roundtrip", () => {
+    const prop = makeFullProp();
+    prop.sortOffsetY = -2048;
+    const snapshot = serializeProp(prop);
+    expect(snapshot.sortOffsetY).toBe(-2048);
+    expect(deserializeProp(JSON.parse(JSON.stringify(snapshot))).sortOffsetY).toBe(-2048);
+  });
   it("round-trips a prop and reconstructs walls from definition", () => {
     const prop = makeFullProp();
     const snapshot = serializeProp(prop);

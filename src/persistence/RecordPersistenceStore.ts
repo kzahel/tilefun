@@ -13,6 +13,7 @@ export const WORLD_COLLECTIONS = [
   "features",
   "actorOrigins",
   "traffic",
+  "parkingVisits",
 ];
 
 /** Shared domain-facing facade; all adapters use exactly this coordination path. */
