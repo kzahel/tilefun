@@ -1,0 +1,111 @@
+{
+  "identity": "lion-hunt-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "sourceAudit": {
+    "identity": "lion-hunt-v1",
+    "poses": 116,
+    "fixedLengthLinkChecks": 1392,
+    "plantedGroundContacts": 432,
+    "stanceTravelCompensationChecks": 160,
+    "maxProjectionError": 0.000005000000001587068,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.45549,
+        "head": 2.12507,
+        "shoulder": 1.88401,
+        "pelvis": 1.49119
+      },
+      "up": {
+        "body": 1.45549,
+        "head": 1.49122,
+        "shoulder": 1.5817,
+        "pelvis": 1.9349
+      },
+      "left": {
+        "body": 1.59475,
+        "head": 1.96395,
+        "shoulder": 1.78807,
+        "pelvis": 1.48419
+      },
+      "right": {
+        "body": 1.59475,
+        "head": 1.68542,
+        "shoulder": 1.50954,
+        "pelvis": 1.76272
+      }
+    },
+    "status": "Saved-source integrity passes; visual observations and human approval separate."
+  },
+  "capture": {
+    "browser": "153.0.8010.12",
+    "results": [
+      {
+        "pet": "lion",
+        "scale": 1,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      },
+      {
+        "pet": "lion",
+        "scale": 4,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      }
+    ]
+  },
+  "replay": {
+    "status": "byte-identical",
+    "checks": {
+      "sheet.png": true,
+      "sprite.json": true,
+      "scene-native.png": true,
+      "scene-background.png": true,
+      "scale-reference-native.png": true,
+      "contact-sheet-native.png": true,
+      "preview.gif": true,
+      "preview-native.gif": true,
+      "scene-native.gif": true,
+      "masters.json": true
+    },
+    "note": "Blender save container identity is not a deterministic image artifact."
+  },
+  "visualReview": {
+    "observer": "coordinator",
+    "observations": "public/demos/wildlife-v2/lion/hunt-v1/review-observations.md"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/lion/hunt-v1/animal.blend": "91b2bfc406fbd86112f95392328f70529b21c9caa72e927ebd668134cc6d8339",
+    "art-source/wildlife-v2/lion/hunt-v1/audit.py": "ce30f20d0bdfdca395fbe5875720f98f9e9f45bce6a4a53d4f6b6024faae0307",
+    "art-source/wildlife-v2/lion/hunt-v1/build.py": "346c6a07a243dee5abd2f5043f114bfa37cc7d817275ab1a34ca881e5e7febcd",
+    "art-source/wildlife-v2/lion/hunt-v1/capture.mjs": "fb83966df2b654df854c1e4bdc7f8772dbe89eafd714a8c2062ab4aa9e412c5f",
+    "art-source/wildlife-v2/lion/hunt-v1/finish.py": "9d58411db44acbe5e69f7a75d8cd98a99e736a7529f0cdfebe0d84f601bc9c6f",
+    "art-source/wildlife-v2/lion/hunt-v1/index.html": "41c6ee25941d17a36e9aa7949c08f188ffb6e59343eccf2d693acbf64a2aef78",
+    "art-source/wildlife-v2/lion/hunt-v1/masters.json": "ba22070a6e139df5d0aef177337e1e6b2075fe281e50a22b75f205f51ba30267",
+    "art-source/wildlife-v2/lion/hunt-v1/playback.js": "24400411b79952e85088c1f48fa1a8d795bbd3d7cb7458fd2802f5086f75aefa",
+    "art-source/wildlife-v2/lion/hunt-v1/README.md": "c1b27538ee768dcfa6b21bacc511471a5c8cff6efddb4fd7656630a7c1740426",
+    "public/demos/wildlife-v2/lion/hunt-v1/contact-sheet-native.png": "a593ecfe74b2b342d64d420b0768cf6ec83b2199a0abffb7f8649b64f11324f7",
+    "public/demos/wildlife-v2/lion/hunt-v1/index.html": "41c6ee25941d17a36e9aa7949c08f188ffb6e59343eccf2d693acbf64a2aef78",
+    "public/demos/wildlife-v2/lion/hunt-v1/playback.js": "24400411b79952e85088c1f48fa1a8d795bbd3d7cb7458fd2802f5086f75aefa",
+    "public/demos/wildlife-v2/lion/hunt-v1/preview-native.gif": "61b3cf50d071bef6ed403e9639aa216e7dac3751719b33fed8ed7802d3d658f7",
+    "public/demos/wildlife-v2/lion/hunt-v1/preview.gif": "72bd12fb94e525685adfe0372db318ebbd7d16ec1baceb590c8edab81236bd12",
+    "public/demos/wildlife-v2/lion/hunt-v1/review-observations.md": "8ba95f744cd61b1b258caa3c49662faece76d082fd805d1688c70ea27340fb04",
+    "public/demos/wildlife-v2/lion/hunt-v1/scale-reference-native.png": "2be8efb95d5881f8c622e9a81cf619a05249f4c6e253cb1959829a6bedad0390",
+    "public/demos/wildlife-v2/lion/hunt-v1/scene-background.png": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a",
+    "public/demos/wildlife-v2/lion/hunt-v1/scene-native.gif": "0bb9edf91ae7d6234575adc9d2d044cb8dada8467e7c529ede0c3b4f6709a4b6",
+    "public/demos/wildlife-v2/lion/hunt-v1/scene-native.png": "e0979b9f4731eb1044eafe6082e89d9c76b67f94d40c49d01e789fb227e2d38c",
+    "public/demos/wildlife-v2/lion/hunt-v1/sheet.png": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5",
+    "public/demos/wildlife-v2/lion/hunt-v1/source-audit.json": "1d19a7842f857396374cec3ca8d138390f04125edc4c458ef5a63108f199a06f",
+    "public/demos/wildlife-v2/lion/hunt-v1/sprite.json": "7a3892f3f26c8318e6157476d013fcd1156cf90a16e58accbe5a6e838c8079a5",
+    "public/demos/wildlife-v2/lion/hunt-v1/validation.json": "aa430f14c8db09dd6c48d5526aeb3c56a23369a194a9810f3cc914a53f193629",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "scripts/wildlife/register-predator.mjs": "ec56382b22c8ccfb21159000157eb325af7df271aec922ecc5fe16c0a3232475",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

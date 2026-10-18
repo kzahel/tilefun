@@ -1296,3 +1296,8 @@ footprint contact distance, carries pursuit through phase changes and briefly
 shows the jaw before a catch. Already-fleeing deer and airborne/grounded rabbit
 cases cover the corrected behavior. Tiger and historical source pixels remain
 unchanged. Lion and brown bear remain the next authorized stages.
+
+Predator 132 lion checkpoint: new editable hunt-v1 with a twelve-piece mane,
+complete portable pending review, fixed natural owner, editor placement and
+shared hunting is implemented. Both rendering paths preserve feeding on reload;
+41 focused checks pass. The authorized brown bear is the remaining stage.

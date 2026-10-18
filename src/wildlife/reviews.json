@@ -2703,5 +2703,102 @@
         "sha256": "412d4e880624164a8cc5d6bf352acc4bb1e93636ab4a33d42705add2753d08bd"
       }
     ]
+  },
+  {
+    "id": "lion-hunt-v1",
+    "animalId": "lion",
+    "revision": "hunt-v1",
+    "name": "Lion",
+    "batchId": "wildlife-v2-predators-132",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/lion/hunt-v1/",
+    "sheet": {
+      "id": "wildlife-v2-lion-hunt-v1",
+      "name": "Lion sheet",
+      "image": "demos/wildlife-v2/lion/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5",
+      "source": "art-source/wildlife-v2/lion/hunt-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-lion-hunt-v1-scene",
+      "name": "Lion scene",
+      "image": "demos/wildlife-v2/lion/hunt-v1/scene-native.png",
+      "width": 800,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "e0979b9f4731eb1044eafe6082e89d9c76b67f94d40c49d01e789fb227e2d38c",
+      "source": "art-source/wildlife-v2/lion/hunt-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-lion-hunt-v1-contact",
+      "name": "Lion contact",
+      "image": "demos/wildlife-v2/lion/hunt-v1/contact-sheet-native.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a593ecfe74b2b342d64d420b0768cf6ec83b2199a0abffb7f8649b64f11324f7",
+      "source": "art-source/wildlife-v2/lion/hunt-v1"
+    },
+    "preview": "demos/wildlife-v2/lion/hunt-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/contact-sheet-native.png",
+        "sha256": "a593ecfe74b2b342d64d420b0768cf6ec83b2199a0abffb7f8649b64f11324f7"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/index.html",
+        "sha256": "41c6ee25941d17a36e9aa7949c08f188ffb6e59343eccf2d693acbf64a2aef78"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/playback.js",
+        "sha256": "24400411b79952e85088c1f48fa1a8d795bbd3d7cb7458fd2802f5086f75aefa"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/preview-native.gif",
+        "sha256": "61b3cf50d071bef6ed403e9639aa216e7dac3751719b33fed8ed7802d3d658f7"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/preview.gif",
+        "sha256": "72bd12fb94e525685adfe0372db318ebbd7d16ec1baceb590c8edab81236bd12"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/review-observations.md",
+        "sha256": "8ba95f744cd61b1b258caa3c49662faece76d082fd805d1688c70ea27340fb04"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/scale-reference-native.png",
+        "sha256": "2be8efb95d5881f8c622e9a81cf619a05249f4c6e253cb1959829a6bedad0390"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/scene-background.png",
+        "sha256": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/scene-native.gif",
+        "sha256": "0bb9edf91ae7d6234575adc9d2d044cb8dada8467e7c529ede0c3b4f6709a4b6"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/scene-native.png",
+        "sha256": "e0979b9f4731eb1044eafe6082e89d9c76b67f94d40c49d01e789fb227e2d38c"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/sheet.png",
+        "sha256": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/source-audit.json",
+        "sha256": "1d19a7842f857396374cec3ca8d138390f04125edc4c458ef5a63108f199a06f"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/sprite.json",
+        "sha256": "7a3892f3f26c8318e6157476d013fcd1156cf90a16e58accbe5a6e838c8079a5"
+      },
+      {
+        "path": "demos/wildlife-v2/lion/hunt-v1/validation.json",
+        "sha256": "aa430f14c8db09dd6c48d5526aeb3c56a23369a194a9810f3cc914a53f193629"
+      }
+    ]
   }
 ]

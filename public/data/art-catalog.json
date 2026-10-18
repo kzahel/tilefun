@@ -296,6 +296,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-lion-predator-v1",
+      "name": "wildlife lion predator v1",
+      "image": "demos/wildlife-v2/lion/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/pilot-v2/sheet.png",
@@ -2033,6 +2043,16 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "af9e96f36744dc75212192046821327f51cfe8324cdb6036ee28666f855aae13",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-lion-hunt-v1",
+      "name": "wildlife v2 lion hunt v1",
+      "image": "demos/wildlife-v2/lion/hunt-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0e30d887ca6df4b14a3ed496839b0590bf216c1645e998711e153800a01dded5",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -21565,6 +21585,24 @@
         384
       ],
       "label": "wildlife-tiger-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-lion-predator-v1",
+      "sheetId": "wildlife-lion-predator-v1",
+      "rect": [
+        0,
+        0,
+        2784,
+        384
+      ],
+      "label": "wildlife-lion-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {

@@ -1,0 +1,21 @@
+{
+  "identity": "lion-hunt-v1",
+  "poses": 116,
+  "binaryAlpha": true,
+  "canvas": [
+    96,
+    96
+  ],
+  "anchor": [
+    48,
+    72
+  ],
+  "idleVisibleHeights": {
+    "down": 36,
+    "up": 43,
+    "left": 27,
+    "right": 27
+  },
+  "sequenceDurationMs": 6040,
+  "status": "Integrity only; visual review separate."
+}

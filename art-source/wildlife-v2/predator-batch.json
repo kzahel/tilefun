@@ -20,9 +20,9 @@
     {
       "id": "lion",
       "revision": "hunt-v1",
-      "state": "queued",
-      "stage": "Own mane/body prototype",
-      "gameplay": false
+      "state": "draft-ready",
+      "stage": "Own mane/body source and pending review; world/editor/hunting/reload validated",
+      "gameplay": true
     },
     {
       "id": "brown-bear",

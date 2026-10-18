@@ -37,7 +37,7 @@ a bounded four-predator exception; historical repair gates/campaign stay stopped
       validate, commit and push.
 - [x] Panther own editable geometry/paint and pending review; same runtime;
       validate, commit and push.
-- [ ] Lion own mane/head/body and pending review; same runtime;
+- [x] Lion own mane/head/body and pending review; same runtime;
       validate, commit and push.
 - [ ] Brown bear own body/paws/gait and pending review, correcting the historical
       failed anatomy rather than adopting it; same runtime; validate/commit/push.
@@ -128,3 +128,20 @@ panther and exact pending art/player evidence. The frozen panther playback bytes
 retain a narrowly scoped formatter exception; logic lint remains enabled and
 receipt verification protects the original byte identity. Streaming readiness
 passes after the capture-runner watcher correction above.
+
+## Lion checkpoint
+
+Lion hunt-v1 adds its own 58-mesh editable source with enlarged chest/skull and
+twelve separately editable mane masses; dark mane paint was inspected after
+native-size correction. All 116 saved poses pass the fixed-link/contact/weight
+transfer audit. Fresh source replay matches nine image/metadata artifacts and
+masters; actual Chromium visits 29 chronological states per scale with 232 exact
+crop checks. Its complete 14-file public bundle and pending Workshop candidate
+are portable and all prior review objects remain exact.
+
+The lion shares ordinary world/editor/Worker authority behavior, at 8px/s patrol
+and 44px/s chase with matching accelerated planted walk timing. A fixed natural
+owner exists near tile (410,-674), seed 2026 / thicket, beside a deer glade.
+Typecheck, build, lint and 41 focused predator/scheduler checks pass. Ten browser
+checks cover tiger/panther/lion hunting, feeding and reload in both Canvas and
+GPU plus exact pending-art review. All human art approvals remain pending.

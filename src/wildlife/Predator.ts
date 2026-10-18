@@ -12,6 +12,7 @@ export const PREDATOR_PROFILES = [
     weight: 70,
   },
   { species: "tiger", label: "Tiger", revision: "pilot-v1", speed: 8, chaseSpeed: 40, weight: 180 },
+  { species: "lion", label: "Lion", revision: "hunt-v1", speed: 8, chaseSpeed: 44, weight: 190 },
 ] as const;
 export type PredatorSpecies = (typeof PREDATOR_PROFILES)[number]["species"];
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
