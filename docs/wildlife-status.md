@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-18T13:26:39.108Z (18/10/2026, 15:26:39 Berlin).
+Snapshot: 2026-10-18T13:58:10.815Z (18/10/2026, 15:58:10 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

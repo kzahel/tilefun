@@ -1,7 +1,7 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay. The new tiger art pilot is delivered for pending human review; other expansion stays stopped.
+Status: all 22 existing-sheet species, four pet variants and four authorized predators have durable provisional gameplay. Predator art remains pending human review; other expansion stays stopped.
 Updated: 2026-10-18.
 
 ## Authorized predators and eaten-prey replacement
@@ -10,7 +10,10 @@ The owner now authorizes tiger hunting and nearby replacement of eaten prey,
 then panther, lion and brown bear with their own art, world spawning and shared
 hunting. [132](../tactical/132-predator-hunting-and-replacement.md) owns stages and
 validation; [the predator manifest](../../art-source/wildlife-v2/predator-batch.json)
-tracks the bounded batch. Replacement applies only to predator meals, one new
+tracks the completed implementation batch. Tiger, panther, lion and brown bear
+now share world/editor/Worker hunting and safe prey replacement. Use **Wild tiger**
+in the editor for the quadruped; the older upright Tiger character remains. All
+four art reviews remain pending. Replacement applies only to predator meals, one new
 same-species individual per eaten prey. Ordinary deletion stays durable. This
 supersedes the no-replacement rule only for this explicit event, and opens these
 four predators only; historical repair/campaign holds and art review remain.
@@ -1309,5 +1312,7 @@ sequence; all new art is registered and pending human review. Exact receipts,
 51 focused checks, both renderers, ordinary-world creation/deletion/reopening,
 repeated replacement and two reloads pass. Full units are 2,660 passed with five
 existing Windows platform failures and ten static-file skips. Full browser
-validation is running; evidence and limitations belong to tactical 132. Next
+validation completes with 632 passed / 13 failed / 1 skipped; all 16 predator/art
+checks pass and all failing test titles match the pre-implementation run. Evidence
+and unresolved broad-suite limitations belong to tactical 132. Next
 product step is playtesting hunt frequency and reviewing the native animations.

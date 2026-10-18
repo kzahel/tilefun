@@ -1,7 +1,7 @@
 # Predator hunting and prey replacement
 
 Topic: wildlife
-Status: implementation in progress.
+Status: complete; four implementation stages committed/pushed and final validation recorded.
 Updated: 2026-10-18.
 
 Owner explicitly authorized tiger gameplay with nearby replacement of eaten prey,
@@ -25,7 +25,9 @@ a bounded four-predator exception; historical repair gates/campaign stay stopped
   ordinary actor records. Reopening must neither duplicate prey nor resurrect
   a killed/deleted original. Replacement/deletion share one persistence commit.
 - Place all four predators manually in older worlds and seed rare suitable
-  countryside habitats in fresh areas. Preserve the existing fauna roster IDs
+  countryside deer-glade owners when absent. Previously visited regional glades
+  can initialize missing predator owners too; saved identities/deletions take
+  priority. Preserve the existing fauna roster IDs
   and homes. Embedded scenes use production AI/physics/persistence.
 - Preserve tiger pilot-v1 and blocked historical bear sources. New art gets new
   identities, editable Blender sources, native motion inspection and exact pending
@@ -180,4 +182,46 @@ run: 2,660 pass / 5 fail / 10 skip across 2,675 tests. Failures are the same Win
 FsSecurity symlink cases (3), privateDataPlugin symlink case (1), and SQLite
 process-death recovery case (1). Static-file symlink setup fails and skips its
 10 tests. All remaining unit files, including wildlife, are green. The final full
-Playwright run is still in progress and will be recorded after completion.
+Playwright result is recorded below.
+
+Implementation commits (all pushed to main without a required rebase): tiger
+cfa3bfb9, panther 8a5044fa, lion 2a7d7101, brown bear 9f662460. The final packaging
+check finds all 75 distinct new predator receipt dependencies tracked; all three
+new receipts and the original tiger/four-pet receipts verify without changed
+artifact hashes. The full browser run used the committed source without further code or pixel
+changes. Next product step: human native-motion review and playtesting
+hunt frequency, with dedicated running/lunging art still a separate animation
+refinement rather than a claim of the provisional accelerated walk/display reuse.
+
+## Final validation and handoff
+
+Completed the full browser run against the four-predator build: **632 passed,
+13 failed, 1 skipped / 646 tests**, 33.4 minutes. All **16 predator and exact-art
+browser checks pass**: hunting/feeding/reload in both renderers; real regional
+spawning/editor placement/deletion/reopening for each animal; and pending-review
+playback, integrity/tamper protection and archived-evidence guards.
+
+All 13 failing browser test titles exactly match failures recorded before this
+implementation in data/tiger-131/browser-tests.log. There are no new failing
+browser cases relative to that run. The repeated failures cover city train GPU
+riding (2), live renderer switching (1), phone building review layout (1), shared
+apartment entry (1), gameplay room editing (1), hotel sign mobile review (1),
+furniture review (1), interior review filtering/phone rounds (2), development
+reload (2), and remote-world interior/explorer integration (1). These remain
+unresolved; this result does not claim that the broad suite is green.
+
+Final checks: typecheck and build pass; lint exits successfully with the existing
+119 warnings / 34 infos; full units are 2,660 passed / 5 existing Windows failures /
+10 skipped. The 51 focused predator/planning tests pass, as does the isolated
+streaming --assert-ready traversal. Fresh authoring replay, source/crop audits,
+75 tracked receipt dependencies and original tiger/common-pet receipt checks
+all pass. The repeated-meal/two-reload soak retains constant prey population.
+
+Raw evidence is in ignored data/predators-132/: final-validation.json,
+unit-full-final.log, browser-full-final.log, population-soak.log, per-stage logs,
+native/4x art and gameplay captures, and streaming-final/report.json. All owned
+test/benchmark browser processes and servers finish with their runners.
+
+Human art approval remains pending. Next: review the native animations and
+playtest hunting frequency; dedicated run/lunge animation is a further refinement
+of the explicitly provisional accelerated walk/jaw-display runtime.
