@@ -38,6 +38,8 @@ export interface FaunaProfile {
   inspection: readonly [number, number];
   inspectionZoom?: number;
   swimSpeed?: number;
+  /** Body faces perpendicular to motion; authored scuttle travels along local +X. */
+  sideways?: boolean;
   hop?: { duration: number; push: number; land: number; height: number };
   anchor: readonly [number, number];
   clips: readonly AnimationClip[];
@@ -1030,6 +1032,32 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
     cohesion: 0.12,
     interest: 0,
     habitat: "woodland",
+  },
+  {
+    species: "crab",
+    label: "Rust crab",
+    image: "demos/wildlife-v2/crab/roster-v2/sheet.png",
+    identity: "crab-roster-v2-pixels-01",
+    sha256: "3b74d8d4b721a04fdc5c3f2305b7d278cc649867608fe736a8ea9adcb354e2f2",
+    size: 32,
+    anchor: [16, 22],
+    inspection: [-311, -2233],
+    clips: [
+      { name: "idle", start: 0, count: 1, frameDuration: 100, loop: true },
+      { name: "walk", start: 1, count: 32, frameDuration: 30, loop: true },
+      { name: "action", start: 33, count: 8, frameDuration: 100, loop: false },
+      { name: "flee", start: 1, count: 32, frameDuration: 15, loop: true },
+    ],
+    body: [22, 9, 10],
+    speed: 20 / 3,
+    sideways: true,
+    radius: 64,
+    step: 12,
+    alarmDistance: 14,
+    group: 2,
+    cohesion: 0.1,
+    interest: 0,
+    habitat: "pond",
   },
 ];
 export const FAUNA_PROFILES: readonly FaunaProfile[] = [

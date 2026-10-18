@@ -168,3 +168,23 @@ assertion; distinguish them from newly introduced failures.
   T. rex and dragon explicitly eat gorilla; ordinary lineage rules apply.
   Thirteen newly completed plus sixteen delivered leave 167 remaining. Crab
   source/native prototype is in progress. All new art remains pending review.
+
+- 22:08 UTC: fresh crab `roster-v2` completed in world/editor/shared lab.
+  Empty-scene source has a broad rust carapace, raised eyes, eight three-link
+  walking legs and two articulated forked pincers. Interleaved tetrapods carry
+  the shell along local +X with a .66 stance fraction; 32 poses/960ms match
+  6.6667px/s and 6.4px travel. Shared perpendicular heading preserves real
+  travel/native phase in all four world directions and reload. Source checks
+  7,872 leg links, 1,312 claw links, 1,952 contacts and 1,344 planted travel pairs;
+  endpoint separation is below .005 native px, with 2px painted shell motion.
+  Read-only raw source views, native/enlarged strips, replay and 328 exact
+  Chromium crops pass. Pincer detail remains subtle at the small native scale.
+  New fixed 42-species water slots admit compatible profiles into existing
+  ponds/lagoons without changing original actor identity, position or RNG.
+  Full water footprints and small-pond fish separation have regression tests.
+  Bears explicitly include crabs; natural-only replacement remains shared.
+  Typecheck/lint/build, 919-candidate manifest, nine crab/original aquatic
+  browser checks and final streaming --assert-ready pass. Final full units:
+  2,899 pass, five known Windows failures, ten skipped. Fourteen newly completed
+  plus sixteen delivered leave 166 remaining. Octopus source/native prototype
+  is underway; all new exact pixels remain pending human art review.

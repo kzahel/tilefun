@@ -53,6 +53,29 @@ explicit diet entry; shared catch resolution rejects airborne prey above
 1px and preserves natural-only replacement in both game and embedded lab.
 Seven Canvas/GPU butterfly/food-chain browser checks pass.
 
+The fresh gorilla also uses the shared Fauna definition: diagonal knuckle walk,
+chest-beat display, ordinary alarms and escape. Its slower cadence sets the
+full-cycle recovery allowance in shared gameplay checks. Expansion admission
+fits around original water refuges so a new land profile cannot remove an
+existing aquatic scenario population.
+
+The crab uses the same shared motion clock with a perpendicular facing map
+for its local +X scuttle. Heading, saved native phase and physical travel match
+in all four world directions. Aquatic expansion uses 42 fixed reserved species
+slots in existing ponds/lagoons, retaining original water actors and RNG.
+Complete water footprints and small-pond separation are checked before spawning.
+No embedded lab owns a separate animation, aquatic or expansion policy.
+
+## Shared reverse driving (2026-10-19)
+
+[140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
+ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
+30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh
+orientation uses replicated nose direction against velocity; signed backward
+wheel travel is shared by game and lab presentation. Traffic inspection maps R
+to reverse, L to lights and K to siren style, keeping Jump/Throw meanings separate.
+No Deck-only physics, control scheme or lab driving loop is introduced.
+
 ## Fierce creatures
 
 [139](../tactical/139-horse-motion-study.md) activates the completed horse and
@@ -740,19 +763,3 @@ shopper integration. Generated city preview and main game share these owners.
 Parking presentation requests GPU meshes through the shared selectable host default,
 while explicit renderer URLs remain authoritative. Native parked cars replace
 painted references only in playable views; static review pixels remain independent.
-
-The fresh gorilla also uses the shared Fauna definition: diagonal knuckle walk,
-chest-beat display, ordinary alarms and escape. Its slower cadence sets the
-full-cycle recovery allowance in shared gameplay checks. Expansion admission
-fits around original water refuges so a new land profile cannot remove an
-existing aquatic scenario population.
-
-## Shared reverse driving (2026-10-19)
-
-[140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
-ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
-30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh
-orientation uses replicated nose direction against velocity; signed backward
-wheel travel is shared by game and lab presentation. Traffic inspection maps R
-to reverse, L to lights and K to siren style, keeping Jump/Throw meanings separate.
-No Deck-only physics, control scheme or lab driving loop is introduced.

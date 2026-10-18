@@ -1,0 +1,18 @@
+{
+  "identity": "crab-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "retainedRigidPaintMasters": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.0,
+    "up": 2.0,
+    "left": 2.0,
+    "right": 2.0
+  },
+  "rootTravelPixelsPerCycle": 6.4,
+  "walkDurationMs": 960,
+  "velocityPixelsPerSecond": 6.666666666666667
+}

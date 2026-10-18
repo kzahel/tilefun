@@ -9,10 +9,11 @@ export function restoreFaunaPose(animal: Entity): void {
   if (!ai || !animal.sprite || !p) return;
   animal.sprite.moving = !!ai.motion;
   if (ai.motion) {
-    animal.sprite.direction = directionFromVelocity(
-      ai.target.wx - animal.position.wx,
-      ai.target.wy - animal.position.wy,
-    );
+    const dx = ai.target.wx - animal.position.wx,
+      dy = ai.target.wy - animal.position.wy;
+    animal.sprite.direction = p.sideways
+      ? directionFromVelocity(dy, -dx)
+      : directionFromVelocity(dx, dy);
     animal.sprite.frameRow = animal.sprite.direction;
   }
   const swim = p.habitat === "shore" && ai.water;

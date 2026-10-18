@@ -56,8 +56,16 @@ T. rex and dragon explicitly include it as prey. Independent source/replay,
 392 exact playback crops and three gorilla game checks pass. A new land-profile
 admission regression protects original water refuges; six existing aquatic
 browser checks and streaming readiness also pass. The full suite has 2,881
-passes and the five known Windows failures. Thirteen new entries plus sixteen
-delivered leave 167 remaining; crab is the next new family prototype.
+passes and the five known Windows failures. Crab now also spawns in compatible
+ponds/lagoons through a fixed 42-species aquatic expansion pool. Its eight
+connected walking legs carry a moving shell sideways; the shared body-facing
+map preserves local +X travel and saved phase in all four world directions.
+Original water actors retain identity/position/RNG, and small ponds separate
+crabs from the existing fish school. Bears explicitly include crab as prey.
+Source/replay/crops, nine aquatic/game browser checks and streaming readiness
+pass; the final full suite has 2,899 passes and the five known Windows failures.
+Fourteen new entries plus sixteen delivered leave 166 remaining; octopus is
+next, with its fresh eight-arm source already passing continuous mechanics checks.
 
 ## Horse and giraffe motion
 

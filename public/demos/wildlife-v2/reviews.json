@@ -5200,5 +5200,98 @@
         "sha256": "8412a3f42823e025f6e7ace8b684cd81bbf7f829479a5883c528b1e6e816d345"
       }
     ]
+  },
+  {
+    "id": "crab-roster-v2",
+    "animalId": "crab",
+    "revision": "roster-v2",
+    "name": "Crab · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/crab/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-crab-roster-v2",
+      "name": "Crab sheet",
+      "image": "demos/wildlife-v2/crab/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "3b74d8d4b721a04fdc5c3f2305b7d278cc649867608fe736a8ea9adcb354e2f2",
+      "source": "art-source/wildlife-v2/crab/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-crab-roster-v2-scene",
+      "name": "Crab scene",
+      "image": "demos/wildlife-v2/crab/roster-v2/scene-native.png",
+      "width": 288,
+      "height": 72,
+      "tileSize": 16,
+      "fingerprint": "b3308a2b57b86a948ee9b2f97c5e020195eb9e0b6cbadea351f96e247b0c1e18",
+      "source": "art-source/wildlife-v2/crab/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-crab-roster-v2-contact",
+      "name": "Crab contact",
+      "image": "demos/wildlife-v2/crab/roster-v2/contact-sheet-native.png",
+      "width": 256,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "cd9dd569e6104fa240d49ed0c4617ab3179d6ff139fbd0e6db4a6ab64d47b27f",
+      "source": "art-source/wildlife-v2/crab/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/crab/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/contact-sheet-native.png",
+        "sha256": "cd9dd569e6104fa240d49ed0c4617ab3179d6ff139fbd0e6db4a6ab64d47b27f"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/index.html",
+        "sha256": "870cbd606082139fcf434c41e297a32793eb506b16a56a891438660784bf314b"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/pixel-audit.json",
+        "sha256": "599e85cb611b2fa2656e8a14e0e8f9d647e8a44d6eddbd947aafcd8666276d83"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/preview-native.gif",
+        "sha256": "d9eac277ed4cc631aa57b30a6727757381b72e91281a7910a8891a3019b485be"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/preview.gif",
+        "sha256": "1e05816a2afca3ce66a03fbacfe413902ca1d3cd3fadc678ed61af387342ccc5"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/scene-background.png",
+        "sha256": "09783317ae9c33e36dee73f7d8a1e72e27986c1e63ec3e6008b75b1a9031c15a"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/scene-native.png",
+        "sha256": "b3308a2b57b86a948ee9b2f97c5e020195eb9e0b6cbadea351f96e247b0c1e18"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/sheet.png",
+        "sha256": "3b74d8d4b721a04fdc5c3f2305b7d278cc649867608fe736a8ea9adcb354e2f2"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/source-audit.json",
+        "sha256": "f7bf985f9addc2e01afc1c3d52da23403395f87ee920fef606965af632dae1e6"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/sprite.json",
+        "sha256": "0b59fee94e84f0d759029af4210f9e6c508e62bd420f79e7f3d6ab81530144a8"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/travel-native.gif",
+        "sha256": "7440c7f84215f28396524f8c5af95dce5eb04c4fdf31d91ac59769e0bd66872a"
+      },
+      {
+        "path": "demos/wildlife-v2/crab/roster-v2/validation.json",
+        "sha256": "b08b335265ac2a73ecaacf55c6041a6a73c3324c106cb2e0e70c1e65ad1efeaa"
+      }
+    ]
   }
 ]

@@ -53,7 +53,12 @@ caches and whole-body dry refuges. Original dry owners reserve upstream of
 pond admission; expansion homes fit around admitted water. Activating new land
 profiles must never veto an existing pond or lagoon. A profile-activation
 regression checks the same refuges with and without all active expansion species. The first new hen uses ordinary generated actor identity and
-shared game/lab authority. Current development worlds remain disposable.
+shared game/lab authority. A separate fixed 42-species aquatic expansion pool
+selects additional compatible profiles within already admitted ponds/lagoons.
+Inactive slots remain empty. Full water footprints are checked; pond expansion
+starts downstream of the original fish school, and original water actor identities,
+positions and RNG remain unchanged. Shore profiles await their own compatible
+admission. Current development worlds remain disposable.
 
 ## Exact review scenes and asset banks
 

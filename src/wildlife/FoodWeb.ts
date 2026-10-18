@@ -34,6 +34,7 @@ export const HUNTING_DIETS = {
     "fox",
     "cow",
     "fish",
+    "crab",
     "panther",
     "dire-wolf",
     "giant-spider",

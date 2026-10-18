@@ -1,9 +1,10 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
+import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { FAUNA_PROFILES, FAUNA_ROSTER, type FaunaProfile } from "./Fauna.js";
-import { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
+import { FAUNA_PROFILES, FAUNA_ROSTER, type FaunaProfile, faunaDefinition } from "./Fauna.js";
+import { FAUNA_EXPANSION_ROSTER, FAUNA_WATER_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 
 it("reserves the natural queue without changing original habitat owner slots", () => {
   expect(FAUNA_ROSTER).toEqual([
@@ -82,4 +83,65 @@ it("keeps original water refuges identical when expansion species become active"
   } finally {
     profiles.splice(0, profiles.length, ...saved);
   }
+});
+
+it("keeps every original water actor and RNG unchanged when water expansion activates", () => {
+  expect(FAUNA_WATER_EXPANSION_ROSTER).toHaveLength(42);
+  const roster = JSON.parse(readFileSync("art-source/wildlife-v2/roster.json", "utf8")) as {
+    animals: { id: string; form: string; media: string[] }[];
+  };
+  const original = new Set(["fish", "manta-ray", "penguin", "harbor-seal", "mallard-duck", "frog"]);
+  expect([...FAUNA_WATER_EXPANSION_ROSTER].sort()).toEqual(
+    roster.animals
+      .filter((a) => a.form === "natural" && a.media.includes("water") && !original.has(a.id))
+      .map((a) => a.id)
+      .sort(),
+  );
+  const collect = () => {
+    const n = new NaturalLandscape(regionalWorld(2026), "thicket");
+    return Array.from({ length: 64 }, (_, i) => n.wildlife(-23 + (i % 8), -144 + Math.floor(i / 8)))
+      .flat()
+      .filter((a) => a.type === "wildlife-fish-provisional-v1");
+  };
+  const active = collect();
+  expect(active.length).toBeGreaterThan(0);
+  const profiles = FAUNA_PROFILES as FaunaProfile[],
+    saved = [...profiles];
+  try {
+    profiles.splice(
+      0,
+      profiles.length,
+      ...saved.filter(
+        (p) => !(FAUNA_WATER_EXPANSION_ROSTER as readonly string[]).includes(p.species),
+      ),
+    );
+    expect(collect()).toEqual(active);
+  } finally {
+    profiles.splice(0, profiles.length, ...saved);
+  }
+});
+
+it("starts crabs clear of the original fish even in a small pond", () => {
+  const n = new NaturalLandscape(regionalWorld(2026), "thicket");
+  const pond = n.pond(-87, 67);
+  expect(pond?.ry).toBeLessThan(6);
+  if (!pond) throw Error("Missing small-pond fixture");
+  const cx = Math.floor(pond.x / 16),
+    cy = Math.floor(pond.y / 16);
+  const animals = Array.from({ length: 9 }, (_, i) =>
+    n.wildlife(cx + (i % 3) - 1, cy + Math.floor(i / 3) - 1),
+  )
+    .flat()
+    .filter((a) => a.featureId.includes(`${pond.id}:`));
+  const crabs = animals.filter((a) => a.type === "wildlife-crab-provisional-v1");
+  const fish = animals.filter((a) => a.type === "wildlife-fish-provisional-v1");
+  expect(crabs).toHaveLength(2);
+  expect(fish).toHaveLength(3);
+  const bounds = (a: (typeof animals)[number]) => {
+    const p = FAUNA_PROFILES.find((p) => a.type === `wildlife-${p.species}-provisional-v1`);
+    if (!p) throw Error("Missing profile");
+    return getEntityAABB({ wx: a.wx, wy: a.wy }, faunaDefinition(p).collider);
+  };
+  for (const crab of crabs)
+    for (const f of fish) expect(aabbsOverlap(bounds(crab), bounds(f))).toBe(false);
 });

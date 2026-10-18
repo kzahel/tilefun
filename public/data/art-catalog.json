@@ -606,6 +606,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-crab-provisional-v1",
+      "name": "wildlife crab provisional v1",
+      "image": "demos/wildlife-v2/crab/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "3b74d8d4b721a04fdc5c3f2305b7d278cc649867608fe736a8ea9adcb354e2f2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -2463,6 +2473,16 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "4ea2ebb49becdcb64612ce98f18f18d73898ba9866b882dae8f826884e4f39b7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-crab-roster-v2",
+      "name": "wildlife v2 crab roster v2",
+      "image": "demos/wildlife-v2/crab/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "3b74d8d4b721a04fdc5c3f2305b7d278cc649867608fe736a8ea9adcb354e2f2",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4865,11 +4885,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:840"
+          "source": "src/generation/regional/NaturalLandscape.ts:894"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1034"
+          "source": "src/generation/regional/NaturalLandscape.ts:1088"
         },
         {
           "system": "World generation",
@@ -24198,6 +24218,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-crab-provisional-v1",
+      "sheetId": "wildlife-crab-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1312,
+        128
+      ],
+      "label": "wildlife-crab-provisional-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -25781,7 +25819,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:933"
+          "source": "src/wildlife/Fauna.ts:935"
         },
         {
           "system": "Gameplay",
@@ -25797,7 +25835,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:89"
         }
       ]
     },
@@ -25859,7 +25897,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:204"
+          "source": "src/wildlife/Fauna.ts:206"
         },
         {
           "system": "Gameplay",
@@ -25875,15 +25913,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:46"
+          "source": "src/wildlife/FoodWeb.ts:47"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:61"
+          "source": "src/wildlife/FoodWeb.ts:62"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:89"
         }
       ]
     },
@@ -25937,11 +25975,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:89"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:90"
         }
       ]
     },
@@ -25983,7 +26021,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:90"
         }
       ]
     },
@@ -26029,7 +26067,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:90"
+          "source": "src/wildlife/FoodWeb.ts:91"
         }
       ]
     },
@@ -26075,7 +26113,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:91"
+          "source": "src/wildlife/FoodWeb.ts:92"
         }
       ]
     },
@@ -26121,7 +26159,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:92"
+          "source": "src/wildlife/FoodWeb.ts:93"
         }
       ]
     },
@@ -26275,7 +26313,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:89"
         }
       ]
     },
@@ -26321,7 +26359,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:89"
         }
       ]
     },
@@ -27371,11 +27409,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:840"
+          "source": "src/generation/regional/NaturalLandscape.ts:894"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1034"
+          "source": "src/generation/regional/NaturalLandscape.ts:1088"
         },
         {
           "system": "World generation",

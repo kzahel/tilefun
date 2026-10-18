@@ -192,16 +192,21 @@
     "crab": {
       "name": "Crab",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T22:08:00Z",
+      "receipt": "art-source/wildlife-v2/crab/roster-v2/receipt.json",
+      "evidence": "129 walk and 33 claw samples/facing; 7872 leg links, 1312 claw links, 1952 contacts, 1344 travel pairs; byte-identical replay; 328 exact Chromium crops; sideways physical heading/reload in four directions; nine shared browser checks",
+      "agentObservation": "Wide rust carapace and eight articulated legs read in native/enlarged strips. Warm claw tips distinguish the two forked pincers; fine detail is subtle at native 32px. Independent raw Blender rest views inspected. Exact final art remains pending human review."
     },
     "octopus": {
       "name": "Octopus",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2"
     },
     "penguin": {
       "name": "Penguin",
@@ -1593,6 +1598,13 @@
         "gorilla"
       ],
       "validation": "Typecheck/lint/build, 914-candidate manifest, nine browser checks and streaming --assert-ready pass. Final full units: 2881 pass, 5 known Windows failures, 10 skipped. Fixed expansion-versus-water admission regression; new land profiles cannot remove original ponds/lagoons. Slow recovery tests account for queued movement and cadence."
+    },
+    {
+      "utc": "2026-10-18T22:08:00Z",
+      "completed": [
+        "crab"
+      ],
+      "validation": "Typecheck/lint/build, 919-candidate manifest, nine aquatic/crab browser checks and final streaming --assert-ready pass. Final full units: 2899 pass, 5 known Windows failures, 10 skipped. Fixed 42-species aquatic slots preserve original water actors/RNG; small-pond separation and four-direction sideways phase/reload regressions pass."
     }
   ],
   "existingOutsideRoster": [
@@ -1624,6 +1636,12 @@
     },
     "primates": {
       "animal": "gorilla",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    },
+    "sideways-crustaceans": {
+      "animal": "crab",
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"

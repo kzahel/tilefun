@@ -11,7 +11,10 @@ import {
   type FaunaSpecies,
   faunaType,
 } from "../../wildlife/Fauna.js";
-import { FAUNA_EXPANSION_ROSTER } from "../../wildlife/FaunaExpansion.js";
+import {
+  FAUNA_EXPANSION_ROSTER,
+  FAUNA_WATER_EXPANSION_ROSTER,
+} from "../../wildlife/FaunaExpansion.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../../wildlife/Mallard.js";
 import { createPredator, PREDATOR_PROFILES, predatorType } from "../../wildlife/Predator.js";
@@ -321,7 +324,11 @@ export class NaturalLandscape {
               this.world.seed +
                 8241 +
                 i +
-                (FAUNA_ROSTER as readonly FaunaSpecies[]).indexOf(species) * 19,
+                ((FAUNA_ROSTER as readonly FaunaSpecies[]).includes(species)
+                  ? (FAUNA_ROSTER as readonly FaunaSpecies[]).indexOf(species)
+                  : FAUNA_ROSTER.length +
+                    (FAUNA_WATER_EXPANSION_ROSTER as readonly FaunaSpecies[]).indexOf(species)) *
+                  19,
             ) * 4294967296,
           ) >>> 0;
         fauna.timer = 1.5 + i * 0.5;
@@ -335,7 +342,53 @@ export class NaturalLandscape {
         });
       });
     };
+    // Separate fixed slots never fill inactive species or alter original water owners.
+    const expansion = (refuge: NaturalPond) => {
+      const species =
+        FAUNA_WATER_EXPANSION_ROSTER[
+          Math.floor(
+            valueNoise(refuge.x, refuge.y, this.world.seed + 8351) *
+              FAUNA_WATER_EXPANSION_ROSTER.length,
+          )
+        ];
+      if (!species) return;
+      const p = FAUNA_PROFILES.find((p) => p.species === species);
+      if (!p || !["pond", "deep"].includes(p.habitat)) return;
+      if (p.habitat === "deep" && !refuge.id.startsWith("lagoon:")) return;
+      const home = {
+        wx: refuge.x * 16,
+        wy: (refuge.y + refuge.ry * (refuge.id.startsWith("pond:") ? 0.5 : 0.3)) * 16,
+      };
+      const positions = Array.from({ length: p.group }, (_, i) => ({
+        wx: home.wx + (i - (p.group - 1) / 2) * (p.body[0] + 12),
+        wy: home.wy,
+      }));
+      // Match the authority's complete collider footprint, including every water tile.
+      for (const point of positions) {
+        for (
+          let ty = Math.floor((point.wy - p.body[1] / 2) / 16);
+          ty <= Math.floor((point.wy + p.body[1] / 2 - 0.001) / 16);
+          ty++
+        ) {
+          for (
+            let tx = Math.floor((point.wx - p.body[0] / 2) / 16);
+            tx <= Math.floor((point.wx + p.body[0] / 2 - 0.001) / 16);
+            tx++
+          ) {
+            const terrain = this.terrain(tx + 0.5, ty + 0.5);
+            if (
+              p.habitat === "deep"
+                ? terrain !== TerrainId.DeepWater
+                : ![TerrainId.ShallowWater, TerrainId.DeepWater].includes(terrain)
+            )
+              return;
+          }
+        }
+      }
+      add(species, refuge, home, positions);
+    };
     if (pond) {
+      expansion(pond);
       const home = { wx: pond.x * 16, wy: pond.y * 16 };
       add(
         "fish",
@@ -348,6 +401,7 @@ export class NaturalLandscape {
       );
     }
     if (lagoon) {
+      expansion(lagoon);
       const home = { wx: lagoon.x * 16, wy: (lagoon.y - lagoon.ry * 0.45) * 16 };
       add("manta-ray", lagoon, home, [home]);
       // Opposite open sandy arcs give both shore groups space to change gait.
