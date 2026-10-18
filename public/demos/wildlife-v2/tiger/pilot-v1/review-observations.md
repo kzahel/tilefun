@@ -1,0 +1,35 @@
+# Tiger pilot v1 — agent observations
+
+Human review: pending.
+
+## projection
+
+All four facings show the upper back under the shared elevated square-grid camera. Profiles retain separated near/far leg depths; front/rear are taller rather than normalized to the side bounds.
+
+## anatomy
+
+Viewed every chronological walk, sniff and display panel at native and 3x scale. Long orange torso, short cream muzzle, rounded ears, muscular haunches, broad paws, flank stripes and low curved ringed tail read as a natural tiger. Rear has two weight-bearing hind legs and an attached tail.
+
+## headVolume
+
+The same complete skull/marking master follows evaluated head translation throughout walking. Sniff lowers the head without shrinking it. The jaw-open mouth is separately drawn in front/profile; the small sniff pitch is simplified in the face master.
+
+## contacts
+
+The fresh saved-source audit checks both endpoints of 1392 constant-length links and 432 planted ground contacts. Native walk panels show distinct raised passing paws; matching travel uses 9.6px/cycle and 75-percent stance, with 160 explicit stance-cancellation checks.
+
+## continuousPlayback
+
+Full bundled Chromium observed all 29 chronological poses at native and 4x scales without errors and compared all four actual player crops with the retained sheet (232 exact facing-crop checks). Opened browser-native scenery and enlarged travel captures, plus every chronological clip panel. Walk closures return to the first pose without a resizing jump.
+
+## sceneScale
+
+Opened native scenery beside Explorer and a same-density Explorer/tiger/elephant comparison. Profile tiger is 24 visible pixels high; the elephant remains the larger animal. Ground anchors align without scaling either source. Native front/rear remain legible, with small facial details deliberately simplified.
+
+## weightTransfer
+
+Walk panels show the shoulder/back and hip mass changing height while the planted paws hold the ground. Saved-source body range is 1.455-1.595px across facings; shoulder and pelvis have distinct 1.484-1.935px projected ranges due to pitch. Integer finishing retains the movement; the root stays fixed and no whole-sprite postprocess bounce is applied.
+
+## Limits
+
+This is a small pixel-art pilot with a compact, friendly-looking face. Tail bands and far paws merge at some native pixels; no fine whiskers/toes are promised. Rear jaw display is occluded and reads mainly as a slight head lift. The sniff face simplifies nine-degree source pitch to a fixed-volume drawing. No run, attack, sound, natural spawning, gameplay integration or runtime GLB rig is delivered. Human approval is pending.

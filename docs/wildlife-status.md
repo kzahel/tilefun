@@ -1,6 +1,6 @@
 # Wildlife production status
 
-Snapshot: 2026-10-10T05:31:49.157Z (10/10/2026, 07:31:49 Berlin).
+Snapshot: 2026-10-18T12:37:32.436Z (18/10/2026, 14:37:32 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
@@ -10,7 +10,7 @@ Draft ready means retained sprite sheets/animation sources and a validated produ
 
 **Historical campaign paused:** Only existing frozen-torso repairs are authorized. New animal production is canceled; sheep/pig correction review precedes any other existing repairs. The separately authorized four-pet batch is tracked below.
 
-**Historical roster scope: existing frozen-torso repairs.** 166 unfinished roster entries stay outside production. The named common-pet batch is the only expansion exception.
+**Historical roster scope: existing frozen-torso repairs.** 166 unfinished roster entries stay outside production. Named pet/tiger exceptions are tracked separately below.
 
 [Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/060-wildlife-fresh-production.md) · [Latest session activity](../data/wildlife-campaign-v2/background-02-worker/checkpoint.md)
 
@@ -214,6 +214,14 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | Black cat | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/cat-black/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/cat-black/draft-v1/review-observations.md) |
 | Golden retriever | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/dog-golden/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/dog-golden/draft-v1/review-observations.md) |
 | Pointed-ear shepherd | draft-ready | Provisional | [Playback](../public/demos/wildlife-v2/dog-shepherd/draft-v1/index.html) · [Observations](../public/demos/wildlife-v2/dog-shepherd/draft-v1/review-observations.md) |
+
+## Authorized tiger pilot
+
+[Tactical 131](tactical/131-predators-and-prehistoric-creatures.md): tiger-only Blender/pixel art. Historical repair holds remain active. Human review is pending; gameplay is a separate slice.
+
+| Animal | State | Current stage | Inspection |
+| --- | --- | --- | --- |
+| Tiger | draft-ready | Exact Blender/pixel pilot delivered; human review pending | [Playback](../public/demos/wildlife-v2/tiger/pilot-v1/index.html) · [Observations](../public/demos/wildlife-v2/tiger/pilot-v1/review-observations.md) |
 
 ## Whole roster
 

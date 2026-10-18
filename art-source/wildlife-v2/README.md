@@ -54,6 +54,11 @@ pixel masters and exact pending receipts are retained in their own new IDs.
 This batch includes its small native review PNG/GIF/player artifacts in Git so
 a fresh checkout can review all four without the historical evidence archive.
 Large guide/contact studies and browser captures remain ignored local evidence.
+Tactical 131 separately authorizes one natural tiger pilot under tiger-batch.json.
+Its editable source, pixel masters, deterministic replay, independent saved-scene
+audit and small native review/player assets are retained in tiger/pilot-v1.
+Human review is pending; gameplay and other predators are separate work. This
+does not release the historical sheep/pig correction or broad-production holds.
 Other production is limited to existing frozen-torso repairs. Changed review
 renderer source produces fresh pending fingerprints; all human art approvals
 remain separate.

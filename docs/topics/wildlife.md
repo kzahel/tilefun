@@ -1,8 +1,45 @@
 # Wildlife art and ecology
 
 Topic: wildlife
-Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay; the four exact pet drafts await human review. Other art expansion stays stopped.
-Updated: 2026-10-12.
+Status: all 22 existing-sheet species and four new pet variants have durable provisional gameplay. The new tiger art pilot is delivered for pending human review; other expansion stays stopped.
+Updated: 2026-10-18.
+
+## Proposed predator and prehistoric batch
+
+On 2026-10-18 the owner said “ok do tiger then,” authorizing the first natural
+quadruped tiger pilot in 131. The bounded [tiger manifest](../../art-source/wildlife-v2/tiger-batch.json)
+owns its status. Use the proposed elephant-style Blender/pixel workflow and
+independently inspect source-driven weight transfer, planted feet and fixed
+volumes. This authorization creates a tiger-only exception; the sheep/pig repair
+gate, historical campaign and other new-species holds remain active. Gameplay
+integration is a later slice.
+
+Tiger `pilot-v1` now retains an editable 46-mesh Blender source, palette masters,
+96px four-facing sheet and portable native animation/review evidence. Its idle,
+12-frame walk and eight-frame sniff/display clips total 116 poses. Saved-source
+audit passes 1,392 fixed-link checks, 432 planted contacts and 160 stance/travel
+checks. Body rise survives native finishing (1.455–1.595px projected range).
+Fresh replay reproduces nine sprite/metadata/player artifacts byte-for-byte;
+bundled full Chromium verifies all 29 chronological states at native/4× size,
+including 232 exact facing-crop checks. The new `wildlife-v2-tiger-131` Workshop
+batch is pending; no human approval or natural spawning is implied. `check-tiger.mjs`
+verifies its exact receipt without changing historical campaign gates. Tactical
+131 and the retained source README own delivery details and remaining limits.
+Final typechecks, lint, build, 19 historical gate tests, exact receipts and
+normal-Chromium manifest parity pass; all 811 prior fingerprints remain exact.
+The full browser run passes 610 with 23 failures in unchanged layout/gameplay/
+reload cases and one optional skip; all wildlife and tiger review/player checks
+pass. Full units pass 2,617 with five Windows filesystem/process failures plus
+two timeouts that pass on the focused one-worker rerun. See 131 for limitations.
+
+The owner's 2026-10-18 planning request covers lions, panthers, tigers, bears and
+possibly T. rex. [131](../tactical/131-predators-and-prehistoric-creatures.md)
+proposes a tiger-first Blender/pixel pilot, subsequent big cats, a separate bear
+family and an optional prehistoric biped pilot. Output format and gameplay tone
+remain discussion points. This is planning only: existing production scope,
+motion holds, immutable revisions and human review decisions remain unchanged.
+The historical natural bear failed visual inspection; upright Tiger/Brown Bear
+characters do not substitute for these proposed quadrupeds.
 
 ## Horse riding
 

@@ -1,0 +1,21 @@
+{
+  "identity": "tiger-pilot-v1",
+  "poses": 116,
+  "binaryAlpha": true,
+  "canvas": [
+    96,
+    96
+  ],
+  "anchor": [
+    48,
+    72
+  ],
+  "idleVisibleHeights": {
+    "down": 36,
+    "up": 39,
+    "left": 24,
+    "right": 24
+  },
+  "sequenceDurationMs": 6040,
+  "status": "Integrity only; visual review separate."
+}

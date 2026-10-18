@@ -27,7 +27,9 @@ For cross-project context, see `~/code/dotfiles/projects/README.md` when availab
   contract requires coordinator-reviewed correction prototypes before more repairs.
 - Wildlife art production follows `art-source/wildlife-v2/repair-scope.json`:
   existing frozen-torso repairs plus the explicit four-pet authorization in
-  [084](docs/tactical/084-common-pets-and-variations.md); other expansion stays stopped.
+  [084](docs/tactical/084-common-pets-and-variations.md) and the explicit tiger-only
+  pilot in [131](docs/tactical/131-predators-and-prehistoric-creatures.md);
+  other expansion stays stopped.
   Provisional gameplay with existing drafts follows the wildlife topic.
 - Keep this file short: agent guardrails and routing only. Put progress logs,
   benchmark captures and detailed review state in the owning docs. `CLAUDE.md`

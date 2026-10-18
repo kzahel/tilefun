@@ -1,0 +1,126 @@
+{
+  "identity": "tiger-pilot-v1",
+  "status": "draft-ready",
+  "reviewStatus": "pending",
+  "motionContract": "body-motion-20261004",
+  "visualReview": {
+    "observer": "coordinator",
+    "date": "2026-10-18",
+    "result": "pilot-ready; human review pending",
+    "checks": {
+      "projection": "All four facings show the upper back under the shared elevated square-grid camera. Profiles retain separated near/far leg depths; front/rear are taller rather than normalized to the side bounds.",
+      "anatomy": "Viewed every chronological walk, sniff and display panel at native and 3x scale. Long orange torso, short cream muzzle, rounded ears, muscular haunches, broad paws, flank stripes and low curved ringed tail read as a natural tiger. Rear has two weight-bearing hind legs and an attached tail.",
+      "headVolume": "The same complete skull/marking master follows evaluated head translation throughout walking. Sniff lowers the head without shrinking it. The jaw-open mouth is separately drawn in front/profile; the small sniff pitch is simplified in the face master.",
+      "contacts": "The fresh saved-source audit checks both endpoints of 1392 constant-length links and 432 planted ground contacts. Native walk panels show distinct raised passing paws; matching travel uses 9.6px/cycle and 75-percent stance, with 160 explicit stance-cancellation checks.",
+      "continuousPlayback": "Full bundled Chromium observed all 29 chronological poses at native and 4x scales without errors and compared all four actual player crops with the retained sheet (232 exact facing-crop checks). Opened browser-native scenery and enlarged travel captures, plus every chronological clip panel. Walk closures return to the first pose without a resizing jump.",
+      "sceneScale": "Opened native scenery beside Explorer and a same-density Explorer/tiger/elephant comparison. Profile tiger is 24 visible pixels high; the elephant remains the larger animal. Ground anchors align without scaling either source. Native front/rear remain legible, with small facial details deliberately simplified.",
+      "weightTransfer": "Walk panels show the shoulder/back and hip mass changing height while the planted paws hold the ground. Saved-source body range is 1.455-1.595px across facings; shoulder and pelvis have distinct 1.484-1.935px projected ranges due to pitch. Integer finishing retains the movement; the root stays fixed and no whole-sprite postprocess bounce is applied."
+    },
+    "iterations": [
+      "Initial longer leg links produced excessively angled knees; shortened fixed lengths and thicker leg envelopes corrected that silhouette.",
+      "Initial tail collapsed to a near-straight ink line; thicker source sections and an authored downward/upward curve give a visible low tail with restrained bands.",
+      "Initial sniff rotated the skull around its own unchanged anchor, leaving final pixels too still. Added source-driven rigid head lowering/advance; final native panels retain the action."
+    ],
+    "limits": "This is a small pixel-art pilot with a compact, friendly-looking face. Tail bands and far paws merge at some native pixels; no fine whiskers/toes are promised. Rear jaw display is occluded and reads mainly as a slight head lift. The sniff face simplifies nine-degree source pitch to a fixed-volume drawing. No run, attack, sound, natural spawning, gameplay integration or runtime GLB rig is delivered. Human approval is pending."
+  },
+  "sourceAudit": {
+    "identity": "tiger-pilot-v1",
+    "poses": 116,
+    "fixedLengthLinkChecks": 1392,
+    "plantedGroundContacts": 432,
+    "stanceTravelCompensationChecks": 160,
+    "maxProjectionError": 5.000000001587068e-06,
+    "nativeProjectedMotionRangePx": {
+      "down": {
+        "body": 1.45549,
+        "head": 2.12507,
+        "shoulder": 1.88401,
+        "pelvis": 1.49119
+      },
+      "up": {
+        "body": 1.45549,
+        "head": 1.49122,
+        "shoulder": 1.5817,
+        "pelvis": 1.9349
+      },
+      "left": {
+        "body": 1.59475,
+        "head": 1.96395,
+        "shoulder": 1.78807,
+        "pelvis": 1.48419
+      },
+      "right": {
+        "body": 1.59475,
+        "head": 1.68542,
+        "shoulder": 1.50954,
+        "pelvis": 1.76272
+      }
+    },
+    "status": "Saved-source integrity passes; visual observations and human approval separate."
+  },
+  "browser": {
+    "browser": "153.0.8010.12",
+    "results": [
+      {
+        "pet": "tiger",
+        "scale": 1,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      },
+      {
+        "pet": "tiger",
+        "scale": 4,
+        "chronologicalPoses": 29,
+        "exactCropChecks": 116,
+        "errors": []
+      }
+    ]
+  },
+  "replay": {
+    "exactArtifacts": [
+      "sheet.png",
+      "sprite.json",
+      "scene-native.png",
+      "scale-reference-native.png",
+      "preview.gif",
+      "preview-native.gif",
+      "scene-native.gif",
+      "playback.js",
+      "index.html"
+    ],
+    "status": "byte-identical"
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/tiger/pilot-v1/animal.blend": "14684028dcf93808a61c0b533c782bf50c14bc8c171e6969ca6138ac3dee4171",
+    "art-source/wildlife-v2/tiger/pilot-v1/audit.py": "f98cf4a81b5e87d0074c62b397c9bd7b769112afd2568d248db4ce4e8464e92e",
+    "art-source/wildlife-v2/tiger/pilot-v1/build.py": "ed40da8c7ff6889c8d3036bbb4f485cbe529793eb9109ff40efc95f96c65a65d",
+    "art-source/wildlife-v2/tiger/pilot-v1/capture.mjs": "1e9526c5377eef58b33aa6536941b41ab4fa70c7003a5185292db779a7f64d8a",
+    "art-source/wildlife-v2/tiger/pilot-v1/finalize.py": "9285a00f6774f72a457a9c4cca282a40d054855a54bbd2f1eaeafe6895667741",
+    "art-source/wildlife-v2/tiger/pilot-v1/finish.py": "9b37b80a145a00af20a7415b2647d759182c3fc2c893b082b08d81e6181e6d30",
+    "art-source/wildlife-v2/tiger/pilot-v1/index.html": "47e1ccb900778edf58785bee45a6b8de30ae39d46e289d14a82235ec1d009625",
+    "art-source/wildlife-v2/tiger/pilot-v1/masters.json": "8bd2f9f99ab43e112b2e9c2b575f1c2ab3d8602dd778d55ed5e1903d14f25e03",
+    "art-source/wildlife-v2/tiger/pilot-v1/playback.js": "cfde5a36b0c3048223f7f8601236e5beab4cbde170a4c7c153014e94e0b38058",
+    "art-source/wildlife-v2/tiger/pilot-v1/README.md": "edde3fbb64bef2ef168605f60fb7ff50bf88b1fd8e2a74edc165ee54c86326c0",
+    "art-source/wildlife-v2/tiger/pilot-v1/review.json": "115a517531139f89e3938a8c639e3d0065ff4282ec23f54c5d10d96440be545d",
+    "public/demos/wildlife-v2/tiger/pilot-v1/sheet.png": "af254ecb451ace421d44ea7b6e8040aa0da49199cc946c7ed63030bc977d540e",
+    "public/demos/wildlife-v2/tiger/pilot-v1/sprite.json": "3c0124d1c05b1a1a9dff1e3bda56867b672f2b686de5f9cbd730f7c3210a5449",
+    "public/demos/wildlife-v2/tiger/pilot-v1/scene-native.png": "de46bcc444e5735a61f1153916a84b34234073a70860ab4f16a073290884ac37",
+    "public/demos/wildlife-v2/tiger/pilot-v1/scene-background.png": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a",
+    "public/demos/wildlife-v2/tiger/pilot-v1/scale-reference-native.png": "3747b8e43835b80beae3cc058f19b5ea662a7099ccbbbfc0078552eeedfe89ce",
+    "public/demos/wildlife-v2/tiger/pilot-v1/contact-sheet-native.png": "68a7e308dc5e5c9664c7f522e648bc288c92ee4b9cf216c23125bd00b0a81cb9",
+    "public/demos/wildlife-v2/tiger/pilot-v1/preview.gif": "a4181b143edbcf28afb479883b461e0d5d503a0c580b8b417222fa1e90ab06fc",
+    "public/demos/wildlife-v2/tiger/pilot-v1/preview-native.gif": "235dcaeb9ea9e528b3f4ba9f66f0dd6cf81751018e155dd733f6202801e023ef",
+    "public/demos/wildlife-v2/tiger/pilot-v1/scene-native.gif": "5a7b96349611e8280ea15fa0d01c234b03c9485bc58af87305c4e87b9c341fdd",
+    "public/demos/wildlife-v2/tiger/pilot-v1/playback.js": "cfde5a36b0c3048223f7f8601236e5beab4cbde170a4c7c153014e94e0b38058",
+    "public/demos/wildlife-v2/tiger/pilot-v1/index.html": "47e1ccb900778edf58785bee45a6b8de30ae39d46e289d14a82235ec1d009625",
+    "public/demos/wildlife-v2/tiger/pilot-v1/review-observations.md": "7ab5e521bfdedea3285632890612e58787d1f57a67f7542bbf5108b3825cc590",
+    "public/demos/wildlife-v2/tiger/pilot-v1/source-audit.json": "e5d891f105ef144a443e157c10ce5ec7a5f00cd5cfdfcc20644fda1805d9466a",
+    "public/demos/wildlife-v2/tiger/pilot-v1/validation.json": "eba68d2c42492aa8fb0a590bfcd76201743499e50f0c5cd79cc0343a00527975",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "public/assets/tilesets/me-complete.png": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
+    "public/demos/pixel-characters/person-32.png": "d08e3266bb79910cba1ecf5b93be00586f008329fd9ad6c3e29fa0de53a26aae",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sheet.png": "b3b20693ea06895147f6ad13fb04006991dcb7f31a00863d197070d7de3eef94",
+    "public/demos/wildlife-v2/elephant/pilot-v2/sprite.json": "57326bdd97c5ea3027cd3480931a620250565f08be3615c0f14e886867f48618"
+  }
+}

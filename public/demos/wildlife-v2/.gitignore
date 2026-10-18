@@ -148,3 +148,19 @@
 !sheep/draft-v1/scene-native.png
 !sheep/draft-v1/sheet.png
 !sheep/draft-v1/sprite.json
+
+# Tiger 131 keeps its complete small review bundle portable.
+!tiger/pilot-v1/contact-sheet-native.png
+!tiger/pilot-v1/index.html
+!tiger/pilot-v1/playback.js
+!tiger/pilot-v1/preview-native.gif
+!tiger/pilot-v1/preview.gif
+!tiger/pilot-v1/review-observations.md
+!tiger/pilot-v1/scale-reference-native.png
+!tiger/pilot-v1/scene-background.png
+!tiger/pilot-v1/scene-native.gif
+!tiger/pilot-v1/scene-native.png
+!tiger/pilot-v1/sheet.png
+!tiger/pilot-v1/source-audit.json
+!tiger/pilot-v1/sprite.json
+!tiger/pilot-v1/validation.json

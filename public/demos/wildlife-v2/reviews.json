@@ -2509,5 +2509,102 @@
         "sha256": "5196eed14ccd3e2f1f73aedb6784f92b873bf04d805fc150d2080ca7aacc872b"
       }
     ]
+  },
+  {
+    "id": "tiger-pilot-v1",
+    "animalId": "tiger",
+    "revision": "pilot-v1",
+    "name": "Tiger",
+    "batchId": "wildlife-v2-tiger-131",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/tiger/pilot-v1/",
+    "sheet": {
+      "id": "wildlife-v2-tiger-pilot-v1",
+      "name": "Tiger sheet",
+      "image": "demos/wildlife-v2/tiger/pilot-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "af254ecb451ace421d44ea7b6e8040aa0da49199cc946c7ed63030bc977d540e",
+      "source": "art-source/wildlife-v2/tiger/pilot-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-tiger-pilot-v1-scene",
+      "name": "Tiger scene",
+      "image": "demos/wildlife-v2/tiger/pilot-v1/scene-native.png",
+      "width": 800,
+      "height": 260,
+      "tileSize": 16,
+      "fingerprint": "de46bcc444e5735a61f1153916a84b34234073a70860ab4f16a073290884ac37",
+      "source": "art-source/wildlife-v2/tiger/pilot-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-tiger-pilot-v1-contact",
+      "name": "Tiger contact",
+      "image": "demos/wildlife-v2/tiger/pilot-v1/contact-sheet-native.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "68a7e308dc5e5c9664c7f522e648bc288c92ee4b9cf216c23125bd00b0a81cb9",
+      "source": "art-source/wildlife-v2/tiger/pilot-v1"
+    },
+    "preview": "demos/wildlife-v2/tiger/pilot-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/sheet.png",
+        "sha256": "af254ecb451ace421d44ea7b6e8040aa0da49199cc946c7ed63030bc977d540e"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/sprite.json",
+        "sha256": "3c0124d1c05b1a1a9dff1e3bda56867b672f2b686de5f9cbd730f7c3210a5449"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/scene-native.png",
+        "sha256": "de46bcc444e5735a61f1153916a84b34234073a70860ab4f16a073290884ac37"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/scene-background.png",
+        "sha256": "7061925fe7c8042b306800224540fefc5245859bd4266a70c23ceac3049cb86a"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/scale-reference-native.png",
+        "sha256": "3747b8e43835b80beae3cc058f19b5ea662a7099ccbbbfc0078552eeedfe89ce"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/contact-sheet-native.png",
+        "sha256": "68a7e308dc5e5c9664c7f522e648bc288c92ee4b9cf216c23125bd00b0a81cb9"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/preview.gif",
+        "sha256": "a4181b143edbcf28afb479883b461e0d5d503a0c580b8b417222fa1e90ab06fc"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/preview-native.gif",
+        "sha256": "235dcaeb9ea9e528b3f4ba9f66f0dd6cf81751018e155dd733f6202801e023ef"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/scene-native.gif",
+        "sha256": "5a7b96349611e8280ea15fa0d01c234b03c9485bc58af87305c4e87b9c341fdd"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/playback.js",
+        "sha256": "cfde5a36b0c3048223f7f8601236e5beab4cbde170a4c7c153014e94e0b38058"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/index.html",
+        "sha256": "47e1ccb900778edf58785bee45a6b8de30ae39d46e289d14a82235ec1d009625"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/review-observations.md",
+        "sha256": "7ab5e521bfdedea3285632890612e58787d1f57a67f7542bbf5108b3825cc590"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/source-audit.json",
+        "sha256": "e5d891f105ef144a443e157c10ce5ec7a5f00cd5cfdfcc20644fda1805d9466a"
+      },
+      {
+        "path": "demos/wildlife-v2/tiger/pilot-v1/validation.json",
+        "sha256": "eba68d2c42492aa8fb0a590bfcd76201743499e50f0c5cd79cc0343a00527975"
+      }
+    ]
   }
 ]

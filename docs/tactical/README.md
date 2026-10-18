@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [131 Predators and prehistoric creatures](131-predators-and-prehistoric-creatures.md) | Tiger Blender/pixel pilot delivered for pending review; panther/lion/bear and optional T. rex remain proposed |
 | [130 Vehicle game-camera fit](130-vehicle-game-camera-fit.md) | All 45 native side heights, diagonal contacts, contact shadows and correction-resistant travel heading; 629 browsers pass |
 | [129 Runtime vehicle geometry batching](129-vehicle-geometry-batching.md) | All road models compile compatible siblings with exact native pixel qualification; phone mesh calls 81.9% lower, render mean 12.3% lower; 50ms p95 remains |
 | [128 Editor vehicle placement](128-editor-vehicle-placement.md) | All 45 parked vehicles in a dedicated picker; shared driving, lights, durable placement/reload and deletion |

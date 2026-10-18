@@ -85,6 +85,11 @@ Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
   Blender-made roster. Use `~/code/mclone` as a reference for both variety and
   the Blender workflow; new Tilefun art still follows the existing
   [art review](topics/art-review.md) process.
+- Predators and prehistoric creatures (owner planning request, 2026-10-18):
+  lions, black panthers, tigers, bears and possibly T. rex. Proposed sequencing,
+  Blender delivery and motion/review gates live in
+  [131](tactical/131-predators-and-prehistoric-creatures.md); planning does not
+  restart the stopped wildlife campaign. Further fantasy animals remain open.
 
 ## Local multiplayer and controllers
 

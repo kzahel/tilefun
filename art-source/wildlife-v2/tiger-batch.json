@@ -1,0 +1,14 @@
+{
+  "identity": "tiger-pilot-131-20261018",
+  "authorization": "Owner said 'ok do tiger then' on 2026-10-18 after tactical 131's elephant-workflow proposal.",
+  "revision": "pilot-v1",
+  "animalId": "tiger",
+  "name": "Tiger",
+  "state": "draft-ready",
+  "stage": "Exact Blender/pixel pilot delivered; human review pending",
+  "reviewStatus": "pending",
+  "gameplay": false,
+  "scope": "One natural quadruped tiger, editable Blender poses and finished pixel sprites for exact Workshop review. No other predators or runtime integration.",
+  "motionContract": "body-motion-20261004",
+  "gateDisposition": "Explicit bounded new-pilot authorization, as with 084's pets. Historical sheep/pig repair and broad-production holds remain active; tiger must independently demonstrate moving-body, fixed-volume, planted-foot motion."
+}

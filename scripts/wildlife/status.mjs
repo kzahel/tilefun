@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { queue, ROOT } from "./campaign.mjs";
 import { petReceiptErrors } from "./check-pets.mjs";
+import { tigerReceiptErrors } from "./check-tiger.mjs";
 
 const read = (path) => JSON.parse(readFileSync(resolve(ROOT, path), "utf8").replace(/^\uFEFF/, ""));
 export function writeStatus() {
@@ -70,7 +71,7 @@ export function writeStatus() {
     ...(result.scope?.allowNewAnimals === false
       ? [
           "",
-          `**Historical roster scope: existing frozen-torso repairs.** ${counts["Out of scope"] ?? 0} unfinished roster entries stay outside production. The named common-pet batch is the only expansion exception.`,
+          `**Historical roster scope: existing frozen-torso repairs.** ${counts["Out of scope"] ?? 0} unfinished roster entries stay outside production. Named pet/tiger exceptions are tracked separately below.`,
         ]
       : []),
     "",
@@ -154,6 +155,27 @@ export function writeStatus() {
       "",
     ];
     lines.splice(lines.indexOf("## Whole roster"), 0, ...section);
+  }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/tiger-batch.json"))) {
+    const batch = read("art-source/wildlife-v2/tiger-batch.json");
+    const base = `public/demos/wildlife-v2/${batch.animalId}/${batch.revision}`;
+    const errors = batch.state === "draft-ready" ? tigerReceiptErrors() : [];
+    const state = errors.length ? "Receipt needs checking" : batch.state;
+    const links = existsSync(resolve(ROOT, `${base}/index.html`))
+      ? `[Playback](../${base}/index.html) · [Observations](../${base}/review-observations.md)`
+      : "-";
+    lines.splice(
+      lines.indexOf("## Whole roster"),
+      0,
+      "## Authorized tiger pilot",
+      "",
+      "[Tactical 131](tactical/131-predators-and-prehistoric-creatures.md): tiger-only Blender/pixel art. Historical repair holds remain active. Human review is pending; gameplay is a separate slice.",
+      "",
+      "| Animal | State | Current stage | Inspection |",
+      "| --- | --- | --- | --- |",
+      `| ${clean(batch.name)} | ${clean(state)} | ${clean(batch.stage)} | ${links} |`,
+      "",
+    );
   }
   const output = resolve(ROOT, "docs/wildlife-status.md");
   const temporary = `${output}.${process.pid}.tmp`;

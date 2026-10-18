@@ -1996,6 +1996,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-tiger-pilot-v1",
+      "name": "wildlife v2 tiger pilot v1",
+      "image": "demos/wildlife-v2/tiger/pilot-v1/sheet.png",
+      "width": 2784,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "af254ecb451ace421d44ea7b6e8040aa0da49199cc946c7ed63030bc977d540e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

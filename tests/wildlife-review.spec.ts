@@ -11,11 +11,13 @@ const definitions = JSON.parse(
   readFileSync("src/wildlife/reviews.json", "utf8"),
 ) as WildlifeReview[];
 
-test("common pet drafts have exact pending review and usable native/travel playback", async ({
+test("portable pet and tiger drafts have exact pending review and usable native/travel playback", async ({
   page,
 }) => {
-  const pets = definitions.filter((d) => d.batchId === "wildlife-v2-common-pets-084");
-  expect(pets).toHaveLength(4);
+  const pets = definitions.filter((d) =>
+    ["wildlife-v2-common-pets-084", "wildlife-v2-tiger-131"].includes(d.batchId),
+  );
+  expect(pets).toHaveLength(5);
   for (const pet of pets) {
     const id = `pattern:wildlife-v2-${pet.id}`;
     expect(manifest.candidates.find((c) => c.id === id)?.kind).toBe("wildlife");
@@ -54,7 +56,8 @@ test("wildlife revisions preserve native pixels or block feedback on missing arc
     const pilots = definitions.filter(
       (d) =>
         d.batchId.startsWith("wildlife-v2-supervised-") ||
-        d.batchId === "wildlife-v2-common-pets-084",
+        d.batchId === "wildlife-v2-common-pets-084" ||
+        d.batchId === "wildlife-v2-tiger-131",
     );
     expect(pilots.length).toBeGreaterThan(0);
     for (const d of pilots) {
