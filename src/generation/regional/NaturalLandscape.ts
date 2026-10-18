@@ -261,7 +261,7 @@ export class NaturalLandscape {
     if (this.lagoons.size > 128) this.lagoons.delete(this.lagoons.keys().next().value ?? "");
     return lagoon;
   }
-  /** The dry-only planner is upstream: it never admits lagoons or calls this instance. */
+  /** Original dry owners reserve upstream. Expansion must fit existing water, never evict it. */
   private potentialDryHomeNear(x: number, y: number, radius: number): boolean {
     if (!this.dryRefugePlanner)
       this.dryRefugePlanner = new NaturalLandscape(this.world, this.profile, false);
@@ -270,13 +270,11 @@ export class NaturalLandscape {
     for (let cy = Math.floor((y - margin) / 64); cy <= Math.floor((y + margin) / 64); cy++)
       for (let cx = Math.floor((x - margin) / 64); cx <= Math.floor((x + margin) / 64); cx++) {
         const fauna = dry.faunaHome(cx, cy),
-          expansion = dry.faunaHome(cx, cy, true),
           rabbit = dry.rabbitGlade(cx, cy),
           deer = dry.deerGlade(cx, cy);
         if (
           [
             fauna && { ...fauna, r: fauna.clearance },
-            expansion && { ...expansion, r: expansion.clearance },
             rabbit && { ...rabbit, r: 8 },
             deer && { ...deer, r: 11 },
           ].some((h) => h && Math.hypot(h.x - x, h.y - y) < radius + h.r + 2)

@@ -149,3 +149,22 @@ assertion; distinguish them from newly introduced failures.
   Twelve newly completed plus sixteen delivered leave 168 remaining. Gorilla
   source walk is being refined before registration; primate art review stays
   pending.
+
+- 21:54 UTC: fresh gorilla `roster-v2` completed in world/editor/shared lab.
+  Wide moving chest, silver saddle, heavy face, connected long forearms and
+  actual knuckle contacts. Diagonal 32-pose/2.24s walk matches 10px/s; three
+  or four supports remain planted. Sixteen-pose chest beat has dense source
+  keys and alternating forearms above grounded hind feet. The independent
+  continuous audit caught a secondary wrist twist; a lateral bend-pole correction
+  reduces maximum chest-beat endpoint separation below .03 native px and
+  maximum source-sample rotation to 17.7 degrees. Walk gap stays below .05px.
+  Source replay, 392 exact crops, typecheck/lint/build and 914-candidate manifest
+  pass. Three gorilla and six original aquatic browser checks pass; streaming
+  --assert-ready passes. First full units exposed that expansion dry homes
+  could veto original lagoons; expansion now fits admitted water. A regression
+  compares all original refuges with/without active expansion profiles. Final
+  full units: 2,881 pass, five known Windows failures, ten skipped. The slower
+  complete recovery allowance includes queued travel, display, escape and rest.
+  T. rex and dragon explicitly eat gorilla; ordinary lineage rules apply.
+  Thirteen newly completed plus sixteen delivered leave 167 remaining. Crab
+  source/native prototype is in progress. All new art remains pending review.

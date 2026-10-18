@@ -5107,5 +5107,98 @@
         "sha256": "b654074d8053e8169867454240f728795e4cbf78316a7f305178bec078cab996"
       }
     ]
+  },
+  {
+    "id": "gorilla-roster-v2",
+    "animalId": "gorilla",
+    "revision": "roster-v2",
+    "name": "Gorilla · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/gorilla/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-gorilla-roster-v2",
+      "name": "Gorilla sheet",
+      "image": "demos/wildlife-v2/gorilla/roster-v2/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "4ea2ebb49becdcb64612ce98f18f18d73898ba9866b882dae8f826884e4f39b7",
+      "source": "art-source/wildlife-v2/gorilla/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-gorilla-roster-v2-scene",
+      "name": "Gorilla scene",
+      "image": "demos/wildlife-v2/gorilla/roster-v2/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "21c3ad18aeb631b9ec6a3135bd7d1c14b358a2f94930e4e41bac35bfb364c959",
+      "source": "art-source/wildlife-v2/gorilla/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-gorilla-roster-v2-contact",
+      "name": "Gorilla contact",
+      "image": "demos/wildlife-v2/gorilla/roster-v2/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e16d44711e5d7bd7ea0ab7ae03b4d23a078899a31a6a06efcc1bf5059169774d",
+      "source": "art-source/wildlife-v2/gorilla/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/gorilla/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/contact-sheet-native.png",
+        "sha256": "e16d44711e5d7bd7ea0ab7ae03b4d23a078899a31a6a06efcc1bf5059169774d"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/index.html",
+        "sha256": "758cf2ee41348e234a72f2edb7f8150df92635a67ab0396e018e455c8eeb9fa0"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/pixel-audit.json",
+        "sha256": "5df3af55473d016ee350b8040efa9dc40fece22f521aa61976d167c49fed50ef"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/preview-native.gif",
+        "sha256": "059019e1f6a9b6608c20a047cbe28c3eb39398055a417b47d89f7dbbbf0fe4fe"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/preview.gif",
+        "sha256": "4b1e98a081334c22e14da1eea0616beac80c8fede99d9cfb3995d0e8fe04d8e2"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/scene-background.png",
+        "sha256": "158431b6dcc3079fc724e7317c5ab7c303246e0a98844127e03f0688c3bb8200"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/scene-native.png",
+        "sha256": "21c3ad18aeb631b9ec6a3135bd7d1c14b358a2f94930e4e41bac35bfb364c959"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/sheet.png",
+        "sha256": "4ea2ebb49becdcb64612ce98f18f18d73898ba9866b882dae8f826884e4f39b7"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/source-audit.json",
+        "sha256": "6d9928a3cbbd659b3eea2269bb43b868bffaf50a16c8aa5a993b9acd09719bed"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/sprite.json",
+        "sha256": "5dc72e71df91e0a5f117772387cc1a8d97d9932bd6c05183db6f01279fbaadd2"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/travel-native.gif",
+        "sha256": "6a8884d4fb960af1299adf64d8cc8033eb41c6186550b94e3f4c52d3685f2883"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/roster-v2/validation.json",
+        "sha256": "8412a3f42823e025f6e7ace8b684cd81bbf7f829479a5883c528b1e6e816d345"
+      }
+    ]
   }
 ]

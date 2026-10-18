@@ -114,7 +114,11 @@ for (const profile of FAUNA_PROFILES) {
         )
         .toBe(true);
       await expect
-        .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
+        .poll(async () => (await poses()).every((f) => f.state !== "scared"), {
+          // A queued ordinary step, display, escape and recovery scale with body cadence.
+          timeout: Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000),
+          intervals: [30],
+        })
         .toBe(true);
       await expect(c).toHaveAttribute("data-player-max-vz", "0");
       expect(errors).toEqual([]);

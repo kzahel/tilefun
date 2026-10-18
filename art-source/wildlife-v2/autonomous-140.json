@@ -168,9 +168,14 @@
     "gorilla": {
       "name": "Gorilla",
       "family": "Primates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T21:54:00Z",
+      "receipt": "art-source/wildlife-v2/gorilla/roster-v2/receipt.json",
+      "evidence": "65 walk half-poses/facing and 129 chest-beat samples/facing; fixed links, planted travel, constant geometry, loop closure; byte-identical replay; 392 exact Chromium crops; nine game/browser checks including three gorilla and six original aquatic regressions",
+      "agentObservation": "Broad silver saddle, heavy brow and deep chest remain recognizable in native and enlarged front/rear/profile strips. Hands lift to alternate chest heights; a secondary wrist-pole correction removes the interpolated twist. Final pixels pending human review."
     },
     "kangaroo": {
       "name": "Kangaroo",
@@ -187,9 +192,9 @@
     "crab": {
       "name": "Crab",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2"
     },
     "octopus": {
       "name": "Octopus",
@@ -1581,6 +1586,13 @@
         "red-squirrel"
       ],
       "validation": "Typecheck/lint/build, 909-candidate manifest and three browser checks pass. Full units: 2867 pass, 5 known Windows failures, 10 skipped. Curled tail, physical bounds, held-nut feeding and explicit predator prey relationship."
+    },
+    {
+      "utc": "2026-10-18T21:54:00Z",
+      "completed": [
+        "gorilla"
+      ],
+      "validation": "Typecheck/lint/build, 914-candidate manifest, nine browser checks and streaming --assert-ready pass. Final full units: 2881 pass, 5 known Windows failures, 10 skipped. Fixed expansion-versus-water admission regression; new land profiles cannot remove original ponds/lagoons. Slow recovery tests account for queued movement and cadence."
     }
   ],
   "existingOutsideRoster": [
@@ -1606,6 +1618,12 @@
     },
     "small-bounding-mammals": {
       "animal": "red-squirrel",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    },
+    "primates": {
+      "animal": "gorilla",
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"

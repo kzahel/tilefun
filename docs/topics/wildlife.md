@@ -50,8 +50,14 @@ Source/replay/crops, seven game/food-chain browser tests and the final full
 unit rerun pass apart from the five documented Windows failures. Red squirrel now also spawns with a physical bound, connected curled tail
 and held-nut feeding. It is explicit small prey for the existing predators.
 Source/replay/crops and three game tests pass; the full suite retains only
-the five known Windows failures. Twelve new entries plus sixteen delivered
-leave 168 remaining. A fresh gorilla prototype is next.
+the five known Windows failures. Gorilla now also spawns as a fresh silverback:
+connected diagonal knuckle walk, moving chest and 16-pose chest-beat display.
+T. rex and dragon explicitly include it as prey. Independent source/replay,
+392 exact playback crops and three gorilla game checks pass. A new land-profile
+admission regression protects original water refuges; six existing aquatic
+browser checks and streaming readiness also pass. The full suite has 2,881
+passes and the five known Windows failures. Thirteen new entries plus sixteen
+delivered leave 167 remaining; crab is the next new family prototype.
 
 ## Horse and giraffe motion
 

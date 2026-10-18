@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { FAUNA_PROFILES, FAUNA_ROSTER } from "./Fauna.js";
+import { FAUNA_PROFILES, FAUNA_ROSTER, type FaunaProfile } from "./Fauna.js";
 import { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 
 it("reserves the natural queue without changing original habitat owner slots", () => {
@@ -58,4 +58,28 @@ it("keeps expansion admission and eviction independent and query-order stable", 
   expect(first.faunaHome(14, -4, true)).toEqual(home);
   expect(second.faunaHome(14, -4, true)).toEqual(home);
   expect(first.faunaHome(14, -4)).toEqual(second.faunaHome(14, -4));
+});
+
+it("keeps original water refuges identical when expansion species become active", () => {
+  const profiles = FAUNA_PROFILES as FaunaProfile[];
+  const saved = [...profiles];
+  const refuges = () => {
+    const n = new NaturalLandscape(regionalWorld(2026), "thicket");
+    return Array.from({ length: 144 }, (_, i) => {
+      const x = (i % 12) - 6,
+        y = Math.floor(i / 12) - 6;
+      return [n.pond(x, y), n.lagoon(x, y)];
+    });
+  };
+  const active = refuges();
+  try {
+    profiles.splice(
+      0,
+      profiles.length,
+      ...saved.filter((p) => !(FAUNA_EXPANSION_ROSTER as readonly string[]).includes(p.species)),
+    );
+    expect(refuges()).toEqual(active);
+  } finally {
+    profiles.splice(0, profiles.length, ...saved);
+  }
 });

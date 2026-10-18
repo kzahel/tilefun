@@ -741,6 +741,12 @@ Parking presentation requests GPU meshes through the shared selectable host defa
 while explicit renderer URLs remain authoritative. Native parked cars replace
 painted references only in playable views; static review pixels remain independent.
 
+The fresh gorilla also uses the shared Fauna definition: diagonal knuckle walk,
+chest-beat display, ordinary alarms and escape. Its slower cadence sets the
+full-cycle recovery allowance in shared gameplay checks. Expansion admission
+fits around original water refuges so a new land profile cannot remove an
+existing aquatic scenario population.
+
 ## Shared reverse driving (2026-10-19)
 
 [140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
