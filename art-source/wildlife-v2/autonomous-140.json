@@ -168,9 +168,9 @@
     "gorilla": {
       "name": "Gorilla",
       "family": "Primates",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "blocked",
-      "revision": null
+      "revision": "roster-v2"
     },
     "kangaroo": {
       "name": "Kangaroo",
@@ -266,9 +266,13 @@
     "red-squirrel": {
       "name": "Red squirrel",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "blocked",
-      "revision": "roster-v2"
+      "revision": "roster-v2",
+      "gameplay": true,
+      "completedUtc": "2026-10-18T21:33:00Z",
+      "receipt": "art-source/wildlife-v2/red-squirrel/roster-v2/receipt.json",
+      "evidence": "Fresh rodent source; 2688 fixed limb checks, 280 ground contacts, 672 tail links; 65 bound and 17 feeding half-poses/facing; byte-identical replay; 328 crops; three Canvas/GPU/ball checks; explicit small-prey diet"
     },
     "bear": {
       "name": "Brown bear",
@@ -1570,6 +1574,13 @@
         "butterfly"
       ],
       "validation": "Typecheck/lint/build, 904-candidate manifest, seven butterfly/food-chain browser tests pass. Full rerun: 2853 pass, 5 known Windows failures, 10 skipped. Body-contact tests sample active short escapes; catch rules reject airborne prey over 1px."
+    },
+    {
+      "utc": "2026-10-18T21:33:00Z",
+      "completed": [
+        "red-squirrel"
+      ],
+      "validation": "Typecheck/lint/build, 909-candidate manifest and three browser checks pass. Full units: 2867 pass, 5 known Windows failures, 10 skipped. Curled tail, physical bounds, held-nut feeding and explicit predator prey relationship."
     }
   ],
   "existingOutsideRoster": [
@@ -1589,6 +1600,12 @@
     },
     "flutterers": {
       "animal": "butterfly",
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending"
+    },
+    "small-bounding-mammals": {
+      "animal": "red-squirrel",
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
       "humanReview": "pending"

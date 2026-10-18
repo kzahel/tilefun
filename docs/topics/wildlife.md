@@ -47,9 +47,11 @@ physical short flights land/rest between trips and preserve midair save phase.
 Spiders can hunt it after landing; catch resolution rejects jumpZ above 1px.
 Natural replacements retain lineage and placed butterflies remain finite.
 Source/replay/crops, seven game/food-chain browser tests and the final full
-unit rerun pass apart from the five documented Windows failures. Eleven new
-entries plus sixteen delivered leave 169 remaining. Red squirrel integration
-and a fresh gorilla prototype are next.
+unit rerun pass apart from the five documented Windows failures. Red squirrel now also spawns with a physical bound, connected curled tail
+and held-nut feeding. It is explicit small prey for the existing predators.
+Source/replay/crops and three game tests pass; the full suite retains only
+the five known Windows failures. Twelve new entries plus sixteen delivered
+leave 168 remaining. A fresh gorilla prototype is next.
 
 ## Horse and giraffe motion
 

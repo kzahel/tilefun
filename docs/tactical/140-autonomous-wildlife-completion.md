@@ -131,3 +131,21 @@ assertion; distinguish them from newly introduced failures.
   Typecheck/lint/build and 904-candidate manifest pass. Final art remains pending
   human review. Eleven new entries plus sixteen delivered leave 169 remaining.
   Red squirrel source/native/replay ready; gorilla follows after integration.
+
+- 21:33 UTC: fresh red squirrel `roster-v2` completed in world/editor/lab.
+  Independent slim russet body, cream muzzle/paws, tufted ears and four fixed
+  curved tail sections. Source compresses/pitches through a 32-pose/640ms bound,
+  paired with the shared 6px physical arc (.10s push/.54s landing). Feeding
+  rears the chest and lifts both paws/nut to the muzzle while hind feet stay
+  planted. The small nut is deliberately dark against the coat; its native
+  detail remains subtle and the rear naturally hides it. Character-scale
+  comparison uses a common foot baseline. Source checks 2,688 limb links,
+  280 contacts, 672 tail links, 65 bound and 17 feeding half-poses/facing;
+  maximum interpolated endpoint gap is under .24 native px, with fixed geometry
+  and exact loop closure. Replay and 328 exact Chromium crops pass.
+  Small-prey diets and giant-spider diet explicitly include the squirrel.
+  Typecheck/lint/build, 909-candidate manifest and three Canvas/GPU/ball checks
+  pass. Full units: 2,867 pass, five known Windows failures, ten skipped.
+  Twelve newly completed plus sixteen delivered leave 168 remaining. Gorilla
+  source walk is being refined before registration; primate art review stays
+  pending.

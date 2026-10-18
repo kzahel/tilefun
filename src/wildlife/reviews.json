@@ -5010,5 +5010,102 @@
         "sha256": "4a4ba6882061dcd5dc4b7dcb7744a760e3558bf09d4f1bd171fa9138b431ce1e"
       }
     ]
+  },
+  {
+    "id": "red-squirrel-roster-v2",
+    "animalId": "red-squirrel",
+    "revision": "roster-v2",
+    "name": "Red squirrel · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/red-squirrel/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-red-squirrel-roster-v2",
+      "name": "Red squirrel sheet",
+      "image": "demos/wildlife-v2/red-squirrel/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "01d7f6c6a0bea6c93f9e11efdba36f1c50d4b96ab9df47565f07debe62be43e4",
+      "source": "art-source/wildlife-v2/red-squirrel/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-red-squirrel-roster-v2-scene",
+      "name": "Red squirrel scene",
+      "image": "demos/wildlife-v2/red-squirrel/roster-v2/scene-native.png",
+      "width": 352,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "756cbcd7ba7d5707e0f86163490b1ddf1aeb56c3d0984ac68703b45eb4dd49f5",
+      "source": "art-source/wildlife-v2/red-squirrel/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-red-squirrel-roster-v2-contact",
+      "name": "Red squirrel contact",
+      "image": "demos/wildlife-v2/red-squirrel/roster-v2/contact-sheet-native.png",
+      "width": 384,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "f3bae327101d874ca8665fe1aa49712080a50c224bd3ce5bed91779d2b67aa5f",
+      "source": "art-source/wildlife-v2/red-squirrel/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/red-squirrel/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/contact-sheet-native.png",
+        "sha256": "f3bae327101d874ca8665fe1aa49712080a50c224bd3ce5bed91779d2b67aa5f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/index.html",
+        "sha256": "e7dbb6df84d8a546cecc60d5cbac3002fd5debadb754da0a274cf909cf9fb847"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/pixel-audit.json",
+        "sha256": "057b4dec9451698429762436259bd73dd0d3b113af22452c1ea07b1c5d5a2c5f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/preview-native.gif",
+        "sha256": "dec508491f0b28eb8a07582d24d12de11ecb192eb5e9450f9f841108659e8747"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/preview.gif",
+        "sha256": "d77f3f2a17561509c02d5f15405d21cb3436498ae780ab050d1276bd6b6d4b21"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/review-observations.md",
+        "sha256": "721fb88c199aafbbf2267464a4fcc8e6eca0cc7d68c64a0676b43f46838b51c6"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/scene-background.png",
+        "sha256": "4a16c1c96af147fa5fa64df8714993c8ffac52373f8f6020931a66e6cdc916bb"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/scene-native.png",
+        "sha256": "756cbcd7ba7d5707e0f86163490b1ddf1aeb56c3d0984ac68703b45eb4dd49f5"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/sheet.png",
+        "sha256": "01d7f6c6a0bea6c93f9e11efdba36f1c50d4b96ab9df47565f07debe62be43e4"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/source-audit.json",
+        "sha256": "76ab69fe11312057420e1b96d1aab129a6d57cd73f3800eb353b18727e98b739"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/sprite.json",
+        "sha256": "66155993c9ccf1c4005dfe222588f1cc9bf220a0e113aa9ab62e145bf9583c10"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/travel-native.gif",
+        "sha256": "72b91a5d75946d157d044f4838be50d9e79ba7ffd9a848b028b868ccd34d9136"
+      },
+      {
+        "path": "demos/wildlife-v2/red-squirrel/roster-v2/validation.json",
+        "sha256": "b654074d8053e8169867454240f728795e4cbf78316a7f305178bec078cab996"
+      }
+    ]
   }
 ]

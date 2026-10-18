@@ -7,7 +7,7 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = ["mallard-duck", "robin", "chicken", "pigeon", "crow", "seagull"] as const;
-const small = ["rabbit", "frog", ...birds] as const;
+const small = ["rabbit", "frog", "red-squirrel", ...birds] as const;
 const pasture = ["deer", "sheep", "goat", "piglet", "kangaroo"] as const;
 
 /** Explicit game food web. Direction means hunter → prey, never inferred from mass.
@@ -16,6 +16,7 @@ export const HUNTING_DIETS = {
   "giant-spider": [
     "ant",
     "butterfly",
+    "red-squirrel",
     "rabbit",
     "frog",
     "robin",

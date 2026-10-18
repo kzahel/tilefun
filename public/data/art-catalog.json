@@ -586,6 +586,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-red-squirrel-provisional-v1",
+      "name": "wildlife red squirrel provisional v1",
+      "image": "demos/wildlife-v2/red-squirrel/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "01d7f6c6a0bea6c93f9e11efdba36f1c50d4b96ab9df47565f07debe62be43e4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -2423,6 +2433,16 @@
       "height": 128,
       "tileSize": 16,
       "fingerprint": "480839ec7e39795e12275c3607b52d19647876d1881e2e35ea00e0e7b2fd8f8d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-red-squirrel-roster-v2",
+      "name": "wildlife v2 red squirrel roster v2",
+      "image": "demos/wildlife-v2/red-squirrel/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "01d7f6c6a0bea6c93f9e11efdba36f1c50d4b96ab9df47565f07debe62be43e4",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -24122,6 +24142,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-red-squirrel-provisional-v1",
+      "sheetId": "wildlife-red-squirrel-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1968,
+        192
+      ],
+      "label": "wildlife-red-squirrel-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -25717,11 +25755,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:22"
+          "source": "src/wildlife/FoodWeb.ts:23"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:85"
+          "source": "src/wildlife/FoodWeb.ts:86"
         }
       ]
     },
@@ -25787,27 +25825,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:28"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/wildlife/FoodWeb.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:34"
+          "source": "src/wildlife/FoodWeb.ts:30"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:45"
+          "source": "src/wildlife/FoodWeb.ts:35"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:59"
+          "source": "src/wildlife/FoodWeb.ts:46"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:85"
+          "source": "src/wildlife/FoodWeb.ts:60"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:86"
         }
       ]
     },
@@ -25857,15 +25895,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:23"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:85"
+          "source": "src/wildlife/FoodWeb.ts:24"
         },
         {
           "system": "Gameplay",
           "source": "src/wildlife/FoodWeb.ts:86"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:87"
         }
       ]
     },
@@ -25907,7 +25945,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:86"
+          "source": "src/wildlife/FoodWeb.ts:87"
         }
       ]
     },
@@ -25953,7 +25991,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:87"
+          "source": "src/wildlife/FoodWeb.ts:88"
         }
       ]
     },
@@ -25999,7 +26037,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:89"
         }
       ]
     },
@@ -26045,7 +26083,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:89"
+          "source": "src/wildlife/FoodWeb.ts:90"
         }
       ]
     },
@@ -26199,7 +26237,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:85"
+          "source": "src/wildlife/FoodWeb.ts:86"
         }
       ]
     },
@@ -26245,7 +26283,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:85"
+          "source": "src/wildlife/FoodWeb.ts:86"
         }
       ]
     },
