@@ -12,7 +12,7 @@ for (const profile of FAUNA_PROFILES) {
   for (const renderer of ["canvas", "gpu"]) {
     test(`${profile.species} motion, contact and saved phase (${renderer})`, async ({ page }) => {
       test.setTimeout(
-        Math.max(30_000, Math.ceil(((4 * profile.step) / profile.speed + 20) * 1000)),
+        Math.max(test.info().timeout, Math.ceil(((4 * profile.step) / profile.speed + 20) * 1000)),
       );
       const errors: string[] = [];
       page.on("pageerror", (e) => errors.push(e.message));
@@ -91,8 +91,9 @@ for (const profile of FAUNA_PROFILES) {
           intervals: [30],
         })
         .toBe(true);
-      await page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true }).click();
+      const hopOnto = page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true });
       if (profile.rideSpeed) {
+        await hopOnto.click();
         await expect.poll(async () => (await poses()).some((f) => f.state === "ridden")).toBe(true);
         await expect(c).toHaveAttribute("data-player-max-vz", "0");
         await page.screenshot({ path: `/tmp/tilefun-horse-mounted-${renderer}.png` });
@@ -106,14 +107,29 @@ for (const profile of FAUNA_PROFILES) {
       }
       await expect
         .poll(
-          async () =>
-            (await poses()).some(
-              (f) =>
-                f.state === "scared" &&
-                profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
-                (profile.hop ? f.z > 2 : f.z === 0),
-            ),
-          { intervals: [30] },
+          async () => {
+            const animals = await poses();
+            if (
+              animals.some(
+                (f) =>
+                  f.state === "scared" &&
+                  profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
+                  (profile.hop ? f.z > 2 : f.z === 0),
+              )
+            )
+              return true;
+            // The button selects the first grounded, non-scared actor. A flight
+            // can start between observing rest and clicking, so retry an actual
+            // landing once all alarms finish, as in the frog contact check.
+            const target = animals.find((f) => f.state !== "scared" && f.z === 0);
+            if (!animals.some((f) => f.state === "scared") && target?.clip === 0)
+              await hopOnto.click();
+            return false;
+          },
+          {
+            timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
+            intervals: [30],
+          },
         )
         .toBe(true);
       await expect

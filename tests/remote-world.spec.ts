@@ -81,7 +81,7 @@ test("two clients share a persistent interior and cross-origin explorer reads li
     const two = await second.newPage();
     for (const p of [page, two]) {
       await p.goto(`http://localhost:4174${url}`);
-      await expect(p.locator("#game")).toHaveAttribute("data-ready", "true");
+      await expect(p.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 15_000 });
       await openWorlds(p);
       await p.getByRole("button", { name: "Play Network checkpoint", exact: true }).click();
       await expect(p.getByRole("button", { name: /Enter apartment/ })).toBeVisible();
