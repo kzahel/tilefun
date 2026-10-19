@@ -22,6 +22,31 @@ with their remaining lifetime. Shared game/lab authority, private car prediction
 and Canvas/GPU presentation implement the behavior. Full unit/browser and streaming
 readiness checks pass; 143 records the evidence and missing campaign-status input.
 
+## Animal browser locomotion correction
+
+The owner reported static dove/cobra previews on 2026-10-19. The browser's
+hard-coded walk/hop/swim/flap fallback selected the single idle frame for sixteen
+entries whose travel is named fly, slither, crawl, flutter, bound, jet or pulse.
+Previews now use the ordinary travel clip from each shared wildlife definition,
+matching the existing idle/travel/action ordering used by the AI. Mallard uses
+its waddle clip for ordinary locomotion instead of the former swim fallback.
+The preview readiness flag resets when its clip/facing changes and reports the
+actual selected clip after drawing. Existing pixels and gameplay AI are unchanged.
+
+The owner confirmed frog visibility recovered, consistent with a transient client
+issue. Fresh live Chromium checks found visible frog/mallard cards and four frogs
+with advancing AI in the pond scene. No frog-specific art or spawn correction is
+included. Regression coverage now checks all 132 browser entries in four facings:
+visible canvas pixels, the species travel clip, and a change in actual rendered
+pixels through its animation. A separate read-only scan confirmed all 528 native
+travel sequences contain visible frames and more than one distinct pose.
+
+Validation: all 528 rendered browser previews advance their actual pixels, across
+six passing full-Chromium cases including desktop/mobile browsing. Typecheck,
+lint, production build and the 1,391-candidate Workshop manifest pass. Full units:
+4,405 pass, five known Windows symlink/WAL failures and ten skips; static-files
+symlink fixture setup also retains its existing failure. No new diagnostics.
+
 ## Animal browser and delayed natural returns
 
 Owner request, 2026-10-19: extend the interactive lab with an animal browser and

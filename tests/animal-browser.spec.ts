@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
 test("browses animated animals by name, family and dates, then runs their real AI scene", async ({
@@ -73,3 +74,48 @@ test("mobile animal search fits the viewport and opens a hunting scene", async (
     "true",
   );
 });
+
+for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) {
+  test(`every animal has a visible animated locomotion preview facing ${direction}`, async ({
+    page,
+  }) => {
+    test.setTimeout(180_000);
+    await page.goto(
+      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+    );
+    await page.getByLabel("Preview facing", { exact: true }).selectOption(String(facing));
+    const search = page.getByLabel("Find animal", { exact: true });
+    for (const animal of ANIMAL_BROWSER_ENTRIES) {
+      expect(
+        animal.locomotion?.count,
+        `${animal.name} has an authored travel clip`,
+      ).toBeGreaterThan(1);
+      await search.fill(animal.name);
+      const canvas = page.locator(`[data-animal="${animal.id}"] canvas`);
+      await canvas.scrollIntoViewIfNeeded();
+      await expect(canvas, animal.name).toHaveAttribute("data-ready", "true");
+      await expect(canvas, animal.name).toHaveAttribute("data-clip", animal.locomotion?.name ?? "");
+      const before = await canvas.evaluate((c) => {
+        const ctx = (c as HTMLCanvasElement).getContext("2d");
+        const pixels = ctx?.getImageData(
+          0,
+          0,
+          (c as HTMLCanvasElement).width,
+          (c as HTMLCanvasElement).height,
+        ).data;
+        return {
+          image: (c as HTMLCanvasElement).toDataURL(),
+          visible: pixels?.some((v, i) => i % 4 === 3 && v > 0),
+        };
+      });
+      expect(before.visible, `${animal.name} paints visible pixels`).toBe(true);
+      await expect
+        .poll(() => canvas.evaluate((c) => (c as HTMLCanvasElement).toDataURL()), {
+          message: `${animal.name} ${direction} travel pixels advance`,
+          timeout: 5000,
+          intervals: [40, 80, 120],
+        })
+        .not.toBe(before.image);
+    }
+  });
+}
