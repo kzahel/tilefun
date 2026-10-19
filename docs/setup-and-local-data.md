@@ -85,6 +85,9 @@ Vehicle reload checks hold the first native touch through the keyboard-to-touch
 hint change, require the pressed button to remain under the finger, then release
 and require authority to relinquish the seat. Vehicle instructions/errors sit
 above the bottom-left button so text changes cannot move its touch target.
+Review tests wait for intercepted feedback requests before inspecting their
+payloads: optimistic approval counts and pending-save text can appear before
+the request reaches the test route.
 Each CI shard stops at its first test failure so GitHub publishes its job logs
 promptly; other shards continue independently. Local runs collect all failures.
 The raster verification renders every Workshop candidate in headless-shell and

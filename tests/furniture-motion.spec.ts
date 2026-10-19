@@ -37,6 +37,7 @@ test("shared movement stops at furniture, supports precise placement, and saves 
   await page.locator("#note").fill("Testing collision context");
   await page.locator("#report").click();
   await expect(page.locator("#sync")).toContainText("pending");
+  await expect.poll(() => posts.length).toBe(1);
   expect(posts[0]?.caseId).toBe("furniture-motion-wardrobe");
   expect(posts[0]?.playtest).toMatchObject({ selected: "wardrobe", mode: "place" });
   expect(posts[0]?.furniture).toEqual([{ id: "wardrobe", asset: "wardrobe", x: 22, y: 88 }]);
@@ -242,6 +243,7 @@ test("approval advances past checked sets offline and finishes the new batch wit
   await page.locator("#good").click();
   await expect(page.locator("#scene")).toHaveValue("dresser");
   await expect(page.locator("#sync")).toContainText("pending");
+  await expect.poll(() => posts.length).toBe(1);
   expect(posts[0]?.caseId).toBe("furniture-motion-bedside");
   const id = posts[0]?.id;
   offline = false;
