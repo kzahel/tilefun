@@ -1,0 +1,133 @@
+{
+  "identity": "dugong-roster-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-147",
+  "sourceAudit": {
+    "identity": "dugong-roster-v3",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "closedMeshVolumes": 19,
+    "allClipPoses": 164,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 0,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 984,
+    "finAttachmentChecks": 1296,
+    "maxContinuousEndpointGapWorldUnits": 4.915124923727108e-7,
+    "maxTailRootGapWorldUnits": 1.228781230931777e-7,
+    "maxLoopMatrixDelta": 3.5762786865234375e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.2347790645122037,
+    "bodyMotionRangePixels": {
+      "down": 2.1493582725524902,
+      "up": 1.2185425758361816,
+      "left": 1.744041919708252,
+      "right": 1.744041919708252
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "barrel rib cage": "4d24d8f5daeb136d16cbc2558d417b91c4a2ea9479b83162de7c9c79d4e3e522",
+      "thick neck": "7afcbb2a6b7eaa49019bbec525f9c5e648ec55932804f30e675f4f969dbcc1fc",
+      "rounded skull": "c240250016b173db873153c7e724bd5bbd6d36d66b82f2a70caf8f1725542edf",
+      "small eye -1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+      "nostril -1": "0394c0583f9c283d1f8970dc8166a81dcef805dbd76a4af2f1d359491a8633af",
+      "downturned snout lobe -1": "5ed54516410569992da202c5d29c2ddab939bd93f8441f60758f90c9b76161bb",
+      "small eye 1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+      "nostril 1": "0394c0583f9c283d1f8970dc8166a81dcef805dbd76a4af2f1d359491a8633af",
+      "downturned snout lobe 1": "5ed54516410569992da202c5d29c2ddab939bd93f8441f60758f90c9b76161bb",
+      "soft lower lip": "741c13e22aa358b72e13dd53e661f2ff20e31665f8daf4463bf6eaf4785cef7f",
+      "small tusk -1": "8135a48b2a9a4034faaea0d1671345edaa40b1bcefc85f32a4791af67cb11871",
+      "small tusk 1": "8135a48b2a9a4034faaea0d1671345edaa40b1bcefc85f32a4791af67cb11871",
+      "rounded flipper 0": "10b61abe869471aabc3223cab9e5d802f57f786a16823d5aa271e7330ea3dced",
+      "rounded flipper 1": "10b61abe869471aabc3223cab9e5d802f57f786a16823d5aa271e7330ea3dced",
+      "TAIL-link-0": "8e754c879ad2df8e0710989efd3d1a93b5ef92fee16882c48b645129f8884041",
+      "TAIL-link-1": "11301a02ce5d2fee63f1aea277548ab70eef8c6449c457c68ece8059e515d830",
+      "TAIL-link-2": "af8530cb045da0ca35f27252efff323bf82ac4417fbe659605d8a53fb925c18d",
+      "horizontal fluke -1": "3a486bbff3ddc38f677373e305b2b2f8465d3632a8eb8d8abc5398662ff75439",
+      "horizontal fluke 1": "a7a6a3bc58926c6a4ae36ed4131e95316c8ef6ac5a46bffc9e8ea7f0a2a84b71"
+    }
+  },
+  "pixelAudit": {
+    "identity": "dugong-roster-v3-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 2.1424789428710938,
+      "up": 1.218165397644043,
+      "left": 1.744041919708252,
+      "right": 1.744041919708252
+    },
+    "independentSwimAndChase": false
+  },
+  "validation": {
+    "identity": "dugong-roster-v3",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "dugong-roster-v3",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "235897c7780c53d7fb87be2bf6f88a2db482495ccf3142cc7e332cd48fbef339",
+      "pixel-audit.json": "f8c5e9e27af70776e1d965b252fa4b25c16d70829f25e2aa467c9d86e4d36d53",
+      "preview-native.gif": "3f99817b7eb1d594fa8d0d421ccf8d2410844dcd1e4cc7d9b87f14413c1bc324",
+      "preview.gif": "8de7d90473d3be51eda683dca639594a6776965d9a1dddabb68c3a324adbc072",
+      "scene-background.png": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63",
+      "scene-native.png": "dce6d49695699ecaa8665d0ef5ebf89af89b68ca5efc54637ed875af39ade02e",
+      "sheet.png": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+      "source-audit.json": "585ad772e8937582262778675c4e197e11ac021b33a21c9a0e83061e84cba475",
+      "sprite.json": "47c1963c9dd8750c3a088c29f562253fad4bfbef82bc5c27b7efa481b0eb9b0d",
+      "travel-native.gif": "85e0e61117ca8914dc5a08f2f3f9065ed1d4594777df6ebf86feae71ecfb4ea1"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/dugong/roster-v3/audit.py": "3c3414f43373a73ccabca2b3112bf822848d0cf75247163713edb44f9f95bd5d",
+    "art-source/wildlife-v2/dugong/roster-v3/build.py": "a53cd523dab5fdc23d5025f136ddcaa6b303c94a5cb961e811982a348981ad31",
+    "art-source/wildlife-v2/dugong/roster-v3/dugong.blend": "23bde2b7bfa283b7db8d6b1e0a4c2983a93d2b52619fe4b37c4efc8c8594d088",
+    "art-source/wildlife-v2/dugong/roster-v3/finish.py": "98e909876b99f139fb9990e6cbdd8d91ae25cd472ff2e49b01d1bc2d0f115ce0",
+    "art-source/wildlife-v2/dugong/roster-v3/inputs.json": "e1a64e752c14d0d0a03afdd29329ca4e6ffaba2fba29926327b4b5a827c8d3df",
+    "art-source/wildlife-v2/dugong/roster-v3/masters.json": "881dcfaa5a4770f90fe77bec08bccd770e9466ea8a502269203f68276dbb8f0e",
+    "art-source/wildlife-v2/dugong/roster-v3/projection.json": "2d8fa2630b5bdf19bcf385c4bdbfdff5ebb6f163a7011af4306f1050e84e2f46",
+    "art-source/wildlife-v2/dugong/roster-v3/README.md": "121bb7eb376249468900702f23c99d9b65b38f774a4d31fd831874f62a816c12",
+    "public/demos/wildlife-v2/dugong/roster-v3/contact-sheet-native.png": "235897c7780c53d7fb87be2bf6f88a2db482495ccf3142cc7e332cd48fbef339",
+    "public/demos/wildlife-v2/dugong/roster-v3/index.html": "1e5203648bfd1cf148ab217cfda48fd76026d317f59ff4483ea8ff63b1f4e961",
+    "public/demos/wildlife-v2/dugong/roster-v3/pixel-audit.json": "f8c5e9e27af70776e1d965b252fa4b25c16d70829f25e2aa467c9d86e4d36d53",
+    "public/demos/wildlife-v2/dugong/roster-v3/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/dugong/roster-v3/preview-native.gif": "3f99817b7eb1d594fa8d0d421ccf8d2410844dcd1e4cc7d9b87f14413c1bc324",
+    "public/demos/wildlife-v2/dugong/roster-v3/preview.gif": "8de7d90473d3be51eda683dca639594a6776965d9a1dddabb68c3a324adbc072",
+    "public/demos/wildlife-v2/dugong/roster-v3/scene-background.png": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63",
+    "public/demos/wildlife-v2/dugong/roster-v3/scene-native.png": "dce6d49695699ecaa8665d0ef5ebf89af89b68ca5efc54637ed875af39ade02e",
+    "public/demos/wildlife-v2/dugong/roster-v3/sheet.png": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+    "public/demos/wildlife-v2/dugong/roster-v3/source-audit.json": "585ad772e8937582262778675c4e197e11ac021b33a21c9a0e83061e84cba475",
+    "public/demos/wildlife-v2/dugong/roster-v3/sprite.json": "47c1963c9dd8750c3a088c29f562253fad4bfbef82bc5c27b7efa481b0eb9b0d",
+    "public/demos/wildlife-v2/dugong/roster-v3/travel-native.gif": "85e0e61117ca8914dc5a08f2f3f9065ed1d4594777df6ebf86feae71ecfb4ea1",
+    "public/demos/wildlife-v2/dugong/roster-v3/validation.json": "f104bb8bcdba55939e651f297fd836530f24fcdf414c07aac4eba14395904cfa",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/sirenians-147/build.py": "cca365f4007244db59fdb7966ff5d0994bf8779c849a743e40bc53e331d2847b",
+    "art-source/wildlife-v2/_families/sirenians-147/geometry.py": "45d63eb7c0a7fd5ad6590f711caa3850134aa4284e68081fa8ee23795a232bd4",
+    "art-source/wildlife-v2/_families/sirenians-147/finish.py": "6c7ef0a9d23db7e6fdede05eb6b7376ad17388eb6f221844de5d5d75ed423478",
+    "art-source/wildlife-v2/_families/sirenians-147/audit.py": "5151238651eb87820f2c0b566e39a808d96e81e80839a7fa95e8220a8ede0613",
+    "art-source/wildlife-v2/_families/sirenians-147/profiles.json": "5144c45b5a21bf5c88e9c4ace01b88ef3fea445dc5f649b53b9cba77f3ca499f",
+    "art-source/wildlife-v2/_families/sirenians-147/README.md": "accf9f71148e3af430711f293f85cdfeed0a28e70ec607a4637c5296d6b28fba",
+    "scripts/wildlife/capture-continuation-147.mjs": "88570dbd188754ea22facfa962d89bd300d60063fcadc55941ee492325d72d44",
+    "scripts/wildlife/register-continuation-147.mjs": "19fd1e154da656ecc8aefad4d975f5501fb08ed978582af779a97def882b563a",
+    "scripts/wildlife/replay-continuation-147.py": "c42f911aacb9a1c8f9f86416c7e8c64ade58dd9c5d593ac11a08f7ba55e82cf3"
+  }
+}

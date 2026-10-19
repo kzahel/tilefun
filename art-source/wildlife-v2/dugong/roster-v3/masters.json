@@ -1,0 +1,13 @@
+{
+  "identity": "dugong-roster-v3-pixels-01",
+  "palette": {
+    "B": "#9b9480",
+    "H": "#b5ad97",
+    "W": "#d1c6aa",
+    "M": "#575b4c",
+    "E": "#2b3932",
+    "T": "#e5d8b7",
+    "G": "#b1aa8e"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

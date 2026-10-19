@@ -41,6 +41,7 @@ const birds = [
   "seagull",
 ] as const;
 const small = [
+  "bat",
   "aye-aye",
   "kinkajou",
   "opossum",
@@ -85,6 +86,7 @@ const groundPrimates = [
   "japanese-macaque",
 ] as const;
 const pasture = [
+  "wallaby",
   "sloth",
   "binturong",
   "giant-anteater",
@@ -183,8 +185,20 @@ export const HUNTING_DIETS = {
   ],
   swordfish: ["fish", "pufferfish", "anglerfish", "octopus"],
   anglerfish: ["fish", "crab"],
-  owl: ["mouse", "rat", "red-squirrel", "rabbit", "frog", "gecko", "robin", "sparrow", "dove"],
+  owl: [
+    "bat",
+    "mouse",
+    "rat",
+    "red-squirrel",
+    "rabbit",
+    "frog",
+    "gecko",
+    "robin",
+    "sparrow",
+    "dove",
+  ],
   hawk: [
+    "bat",
     "mouse",
     "rat",
     "red-squirrel",
@@ -197,6 +211,7 @@ export const HUNTING_DIETS = {
     "pigeon",
   ],
   eagle: [
+    "bat",
     "aye-aye",
     "kinkajou",
     "opossum",
@@ -281,6 +296,8 @@ export const HUNTING_DIETS = {
   dolphin: ["fish", "octopus", "crab"],
   narwhal: ["fish", "octopus", "crab"],
   shark: [
+    "manatee",
+    "dugong",
     "swordfish",
     "anglerfish",
     "ocean-sunfish",
@@ -298,6 +315,8 @@ export const HUNTING_DIETS = {
   ],
   "hammerhead-shark": ["fish", "manta-ray", "octopus", "crab"],
   orca: [
+    "manatee",
+    "dugong",
     "swordfish",
     "anglerfish",
     "ocean-sunfish",

@@ -198,6 +198,21 @@ pass both renderers without changing gameplay. Typecheck, isolated lint/build an
 sources; eight arthropods are in source authoring with species-specific leg counts.
 
 
+Eleventh checkpoint: bat, wallaby, manatee and dugong join natural worlds,
+editor placement and browser Watch AI. Bat has eight finger bones and14 closed
+wing membranes; wallaby has fixed hind legs, connected forearms and balancing tail.
+Both use physical bounded flights/hops and source-matched landing clocks. Hanging
+roosts and open-air navigation are future work. Manatee paddle tail and dugong
+forked flukes use closed volumes, attached flippers and shared deep-water authority.
+Directed diets preserve airborne safety and delayed natural-only replacement.
+Validation: **5,208 full-unit passes**, five known Windows failures and ten skips;
+557 focused source/body/food-web checks; **30 browser cases /708 visible previews**,
+including wombat regressions; four exact replays and1,312 native/3x crops. Typecheck,
+isolated lint/build and1,620-candidate normal Chromium inventory pass. Exact pixels
+remain pending human review. **167/196 implemented;29 remaining.** Shore mammals4,
+arthropods8 and legless creatures5 remain in source verification/refinement.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

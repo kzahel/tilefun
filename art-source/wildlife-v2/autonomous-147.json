@@ -605,11 +605,16 @@
     "bat": {
       "name": "Bat",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:51:11.315571Z",
-      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/bat/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
     },
     "meerkat": {
       "name": "Meerkat",
@@ -786,11 +791,16 @@
     "wallaby": {
       "name": "Wallaby",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:53:49.288457Z",
-      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/wallaby/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
     },
     "wombat": {
       "name": "Wombat",
@@ -1282,20 +1292,30 @@
     "manatee": {
       "name": "Manatee",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:49:27.849725Z",
-      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/manatee/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
     },
     "dugong": {
       "name": "Dugong",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:49:27.852257Z",
-      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/dugong/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
     },
     "walrus": {
       "name": "Walrus",
@@ -1329,23 +1349,29 @@
     "moray-eel": {
       "name": "Moray eel",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
     },
     "electric-eel": {
       "name": "Electric eel",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
     },
     "gaboon-viper": {
       "name": "Gaboon viper",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
     },
     "iguana": {
       "name": "Iguana",
@@ -1542,16 +1568,20 @@
     "snail": {
       "name": "Snail",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
     },
     "worm": {
       "name": "Earthworm",
       "family": "Other invertebrates",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
     },
     "elephant-upright": {
       "name": "Upright elephant",
@@ -1669,6 +1699,16 @@
         "tasmanian-devil"
       ],
       "validation": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    {
+      "utc": "2026-10-19T14:57:34.921650Z",
+      "completed": [
+        "bat",
+        "wallaby",
+        "manatee",
+        "dugong"
+      ],
+      "validation": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
     }
   ]
 }

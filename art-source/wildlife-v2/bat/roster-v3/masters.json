@@ -1,0 +1,15 @@
+{
+  "identity": "bat-roster-v3-pixels-01",
+  "palette": {
+    "B": "#76634f",
+    "H": "#9a8064",
+    "C": "#b19a77",
+    "M": "#493f39",
+    "T": "#b0a28b",
+    "R": "#9b796c",
+    "N": "#20282b",
+    "K": "#2c302f",
+    "E": "#d3b78d"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

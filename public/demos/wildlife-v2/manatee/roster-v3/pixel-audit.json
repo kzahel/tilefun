@@ -1,0 +1,16 @@
+{
+  "identity": "manatee-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.1424789428710938,
+    "up": 1.218165397644043,
+    "left": 1.744041919708252,
+    "right": 1.744041919708252
+  },
+  "independentSwimAndChase": false
+}

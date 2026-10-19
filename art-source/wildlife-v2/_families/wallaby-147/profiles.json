@@ -1,0 +1,79 @@
+{
+  "wallaby": {
+    "label": "Red-necked wallaby",
+    "canvas": 80,
+    "anchor": [
+      40,
+      60
+    ],
+    "coreRadii": [
+      0.31,
+      0.34,
+      0.65
+    ],
+    "bodyZ": 1.05,
+    "headY": 0.33,
+    "headZ": 1.95,
+    "headRadii": [
+      0.2,
+      0.25,
+      0.22
+    ],
+    "wingLength": 0.9,
+    "hipX": 0.16,
+    "hipY": -0.06,
+    "footX": 0.19,
+    "hindFootX": 0.19,
+    "legLengths": [
+      0.42,
+      0.48,
+      0.22
+    ],
+    "hindLengths": [
+      0.42,
+      0.48,
+      0.22
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 22,
+    "motionMs": 25,
+    "motionClip": "hop",
+    "exampleDistance": 17.6,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 12
+    },
+    "palette": {
+      "B": "#9a8268",
+      "H": "#b69c79",
+      "C": "#d9c7a4",
+      "M": "#6b5744",
+      "T": "#b4a18b",
+      "R": "#9c7965",
+      "N": "#262d2b",
+      "K": "#323832",
+      "E": "#c6b18a"
+    },
+    "beakLength": 0.48,
+    "tailLength": 0.38,
+    "neckRadii": [
+      0.15,
+      0.2,
+      0.36
+    ],
+    "breastRadii": [
+      0.24,
+      0.25,
+      0.48
+    ],
+    "wingUpper": 0.4,
+    "webbedFeet": false,
+    "flapCycles": 5,
+    "wingKey": "B",
+    "headKey": "B",
+    "tailKey": "B"
+  }
+}

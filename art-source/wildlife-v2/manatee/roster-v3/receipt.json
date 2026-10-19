@@ -1,0 +1,136 @@
+{
+  "identity": "manatee-roster-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-147",
+  "sourceAudit": {
+    "identity": "manatee-roster-v3",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "closedMeshVolumes": 22,
+    "allClipPoses": 164,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 0,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 984,
+    "finAttachmentChecks": 1296,
+    "maxContinuousEndpointGapWorldUnits": 4.915124923727108e-7,
+    "maxTailRootGapWorldUnits": 1.228781230931777e-7,
+    "maxLoopMatrixDelta": 3.5762786865234375e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.2347790645122037,
+    "bodyMotionRangePixels": {
+      "down": 2.1493582725524902,
+      "up": 1.2185425758361816,
+      "left": 1.744041919708252,
+      "right": 1.744041919708252
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "barrel rib cage": "8a947f85874fe98febac76b59e0bb93df251581608933b64dd3be1dbb5bd9cac",
+      "thick neck": "7afcbb2a6b7eaa49019bbec525f9c5e648ec55932804f30e675f4f969dbcc1fc",
+      "rounded skull": "d0161e52b195dfc371448fc6a0db9446d5ed6054e860bfdef21bdcc0f6e540b7",
+      "small eye -1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+      "nostril -1": "0394c0583f9c283d1f8970dc8166a81dcef805dbd76a4af2f1d359491a8633af",
+      "parted upper lip -1": "8502de82b180037e24db8912752af5add846fd49b55f94da2630fa6de8b7bdec",
+      "small eye 1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+      "nostril 1": "0394c0583f9c283d1f8970dc8166a81dcef805dbd76a4af2f1d359491a8633af",
+      "parted upper lip 1": "8502de82b180037e24db8912752af5add846fd49b55f94da2630fa6de8b7bdec",
+      "soft lower lip": "741c13e22aa358b72e13dd53e661f2ff20e31665f8daf4463bf6eaf4785cef7f",
+      "rounded flipper 0": "10b61abe869471aabc3223cab9e5d802f57f786a16823d5aa271e7330ea3dced",
+      "flipper nail 0 0": "b9d4d1c13f717aaaab9a36dfde193ccd58d4b6e75c4207c77e61abf06d787098",
+      "flipper nail 0 1": "b9d4d1c13f717aaaab9a36dfde193ccd58d4b6e75c4207c77e61abf06d787098",
+      "flipper nail 0 2": "b9d4d1c13f717aaaab9a36dfde193ccd58d4b6e75c4207c77e61abf06d787098",
+      "rounded flipper 1": "10b61abe869471aabc3223cab9e5d802f57f786a16823d5aa271e7330ea3dced",
+      "flipper nail 1 0": "b9d4d1c13f717aaaab9a36dfde193ccd58d4b6e75c4207c77e61abf06d787098",
+      "flipper nail 1 1": "b9d4d1c13f717aaaab9a36dfde193ccd58d4b6e75c4207c77e61abf06d787098",
+      "flipper nail 1 2": "b9d4d1c13f717aaaab9a36dfde193ccd58d4b6e75c4207c77e61abf06d787098",
+      "TAIL-link-0": "8e754c879ad2df8e0710989efd3d1a93b5ef92fee16882c48b645129f8884041",
+      "TAIL-link-1": "11301a02ce5d2fee63f1aea277548ab70eef8c6449c457c68ece8059e515d830",
+      "TAIL-link-2": "af8530cb045da0ca35f27252efff323bf82ac4417fbe659605d8a53fb925c18d",
+      "rounded paddle tail": "058c3d2fe6f96393117ecc89a8daf1930099455b8fc8f573df7c69c2136b9a15"
+    }
+  },
+  "pixelAudit": {
+    "identity": "manatee-roster-v3-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 2.1424789428710938,
+      "up": 1.218165397644043,
+      "left": 1.744041919708252,
+      "right": 1.744041919708252
+    },
+    "independentSwimAndChase": false
+  },
+  "validation": {
+    "identity": "manatee-roster-v3",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "manatee-roster-v3",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "b33660b8982e05926fb1f0aeeb176a0dbe1dd73de5a3d0acc1d826f4153e0fde",
+      "pixel-audit.json": "6acd7973e7913246dd777985b2875f03f6c3f819e352ecba7b76e0e506f1abc8",
+      "preview-native.gif": "e97ac142aac018cd65f6eb104871ff8ed42a5c97a9526f56a6ef3959682935ec",
+      "preview.gif": "493c9e37d2c6281e2544faa01a7b396cfe0dc88733bcfbd8be15f571d4adae81",
+      "scene-background.png": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63",
+      "scene-native.png": "1cbaaa137fa8b909b039d4061c22fdbebc1cccd33cd0ce10ea84d7847584547d",
+      "sheet.png": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+      "source-audit.json": "cd1f20cee87fc6a9750d125ecd20f5bffcb541a2968d040ab0eb6beea9ece26b",
+      "sprite.json": "a2d1fea87a452e25d23f6eda0e7d2eed9e908b6529d7968616daea0edb4f1cb0",
+      "travel-native.gif": "944851f7d72edabb145f34687de1bdb9bab3a69dfc9135442fa27197a6a75c72"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/manatee/roster-v3/audit.py": "9f6e8f43fbe5e93e63939b02b4a8d802c2273a9eb0a6a40056e50d3fd0126a9c",
+    "art-source/wildlife-v2/manatee/roster-v3/build.py": "3c99e12c8935d7949a8dd05795be478ffa9fd3388fa9e6d7d29ec7c2b800c195",
+    "art-source/wildlife-v2/manatee/roster-v3/finish.py": "2851989331b96c90e3c53de87f3ce54648982de4c8f6d99db86362502225ed2b",
+    "art-source/wildlife-v2/manatee/roster-v3/inputs.json": "e1a64e752c14d0d0a03afdd29329ca4e6ffaba2fba29926327b4b5a827c8d3df",
+    "art-source/wildlife-v2/manatee/roster-v3/manatee.blend": "93fbb150e0dd8b9f8a71a386a399d857a39b84343ff3c86a2e638639163eecb2",
+    "art-source/wildlife-v2/manatee/roster-v3/masters.json": "ca9d7254eec422740067937d396a05afdca67f161cb9773bd7e6e89af40542ed",
+    "art-source/wildlife-v2/manatee/roster-v3/projection.json": "0fefa5eb0df7ae2507276e0b1e162e7cf57483c943a27f30ce09e7e48df90ae9",
+    "art-source/wildlife-v2/manatee/roster-v3/README.md": "27616f246933fb4acf9acff7f33fae3852d6968e2129b3f2958719d85648ddbf",
+    "public/demos/wildlife-v2/manatee/roster-v3/contact-sheet-native.png": "b33660b8982e05926fb1f0aeeb176a0dbe1dd73de5a3d0acc1d826f4153e0fde",
+    "public/demos/wildlife-v2/manatee/roster-v3/index.html": "600e7991c603db8ce8ab7dad0210ceda32fe486c18ead9dad25e5a28a4afcd73",
+    "public/demos/wildlife-v2/manatee/roster-v3/pixel-audit.json": "6acd7973e7913246dd777985b2875f03f6c3f819e352ecba7b76e0e506f1abc8",
+    "public/demos/wildlife-v2/manatee/roster-v3/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/manatee/roster-v3/preview-native.gif": "e97ac142aac018cd65f6eb104871ff8ed42a5c97a9526f56a6ef3959682935ec",
+    "public/demos/wildlife-v2/manatee/roster-v3/preview.gif": "493c9e37d2c6281e2544faa01a7b396cfe0dc88733bcfbd8be15f571d4adae81",
+    "public/demos/wildlife-v2/manatee/roster-v3/scene-background.png": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63",
+    "public/demos/wildlife-v2/manatee/roster-v3/scene-native.png": "1cbaaa137fa8b909b039d4061c22fdbebc1cccd33cd0ce10ea84d7847584547d",
+    "public/demos/wildlife-v2/manatee/roster-v3/sheet.png": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+    "public/demos/wildlife-v2/manatee/roster-v3/source-audit.json": "cd1f20cee87fc6a9750d125ecd20f5bffcb541a2968d040ab0eb6beea9ece26b",
+    "public/demos/wildlife-v2/manatee/roster-v3/sprite.json": "a2d1fea87a452e25d23f6eda0e7d2eed9e908b6529d7968616daea0edb4f1cb0",
+    "public/demos/wildlife-v2/manatee/roster-v3/travel-native.gif": "944851f7d72edabb145f34687de1bdb9bab3a69dfc9135442fa27197a6a75c72",
+    "public/demos/wildlife-v2/manatee/roster-v3/validation.json": "40619924552d40e0303548f99bebbce3e530eb7013dfcb2d0218ee8d1db05cb3",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/sirenians-147/build.py": "cca365f4007244db59fdb7966ff5d0994bf8779c849a743e40bc53e331d2847b",
+    "art-source/wildlife-v2/_families/sirenians-147/geometry.py": "45d63eb7c0a7fd5ad6590f711caa3850134aa4284e68081fa8ee23795a232bd4",
+    "art-source/wildlife-v2/_families/sirenians-147/finish.py": "6c7ef0a9d23db7e6fdede05eb6b7376ad17388eb6f221844de5d5d75ed423478",
+    "art-source/wildlife-v2/_families/sirenians-147/audit.py": "5151238651eb87820f2c0b566e39a808d96e81e80839a7fa95e8220a8ede0613",
+    "art-source/wildlife-v2/_families/sirenians-147/profiles.json": "5144c45b5a21bf5c88e9c4ace01b88ef3fea445dc5f649b53b9cba77f3ca499f",
+    "art-source/wildlife-v2/_families/sirenians-147/README.md": "accf9f71148e3af430711f293f85cdfeed0a28e70ec607a4637c5296d6b28fba",
+    "scripts/wildlife/capture-continuation-147.mjs": "88570dbd188754ea22facfa962d89bd300d60063fcadc55941ee492325d72d44",
+    "scripts/wildlife/register-continuation-147.mjs": "19fd1e154da656ecc8aefad4d975f5501fb08ed978582af779a97def882b563a",
+    "scripts/wildlife/replay-continuation-147.py": "c42f911aacb9a1c8f9f86416c7e8c64ade58dd9c5d593ac11a08f7ba55e82cf3"
+  }
+}

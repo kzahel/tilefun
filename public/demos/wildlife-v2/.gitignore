@@ -590,3 +590,9 @@
 !opossum/roster-v3/*
 !echidna/roster-v3/*
 !tasmanian-devil/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!bat/roster-v3/*
+!wallaby/roster-v3/*
+!manatee/roster-v3/*
+!dugong/roster-v3/*

@@ -1,0 +1,79 @@
+{
+  "bat": {
+    "label": "Bat",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.38,
+      0.28
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.88,
+    "headRadii": [
+      0.19,
+      0.2,
+      0.2
+    ],
+    "wingLength": 0.9,
+    "hipX": 0.09,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.18,
+      0.22,
+      0.12
+    ],
+    "hindLengths": [
+      0.18,
+      0.22,
+      0.12
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 18,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 8
+    },
+    "palette": {
+      "B": "#76634f",
+      "H": "#9a8064",
+      "C": "#b19a77",
+      "M": "#493f39",
+      "T": "#b0a28b",
+      "R": "#9b796c",
+      "N": "#20282b",
+      "K": "#2c302f",
+      "E": "#d3b78d"
+    },
+    "beakLength": 0.48,
+    "tailLength": 0.38,
+    "neckRadii": [
+      0.13,
+      0.21,
+      0.21
+    ],
+    "breastRadii": [
+      0.19,
+      0.27,
+      0.22
+    ],
+    "wingUpper": 0.4,
+    "webbedFeet": false,
+    "flapCycles": 5,
+    "wingKey": "B",
+    "headKey": "B",
+    "tailKey": "B"
+  }
+}

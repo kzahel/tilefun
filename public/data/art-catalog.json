@@ -1726,6 +1726,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-bat-provisional-v1",
+      "name": "wildlife bat provisional v1",
+      "image": "demos/wildlife-v2/bat/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c3df8641d60c6fe475edc1d9240e360efdf6709dfdb29e0b78214d7673ba19d1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-wallaby-provisional-v1",
+      "name": "wildlife wallaby provisional v1",
+      "image": "demos/wildlife-v2/wallaby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "642bde4eb5e1a239636c605add6815720a99931875fb6019fbbe3f7ad0fdf5b9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-manatee-provisional-v1",
+      "name": "wildlife manatee provisional v1",
+      "image": "demos/wildlife-v2/manatee/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-dugong-provisional-v1",
+      "name": "wildlife dugong provisional v1",
+      "image": "demos/wildlife-v2/dugong/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -5193,6 +5233,46 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-bat-roster-v3",
+      "name": "wildlife v2 bat roster v3",
+      "image": "demos/wildlife-v2/bat/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c3df8641d60c6fe475edc1d9240e360efdf6709dfdb29e0b78214d7673ba19d1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-wallaby-roster-v3",
+      "name": "wildlife v2 wallaby roster v3",
+      "image": "demos/wildlife-v2/wallaby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "642bde4eb5e1a239636c605add6815720a99931875fb6019fbbe3f7ad0fdf5b9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-manatee-roster-v3",
+      "name": "wildlife v2 manatee roster v3",
+      "image": "demos/wildlife-v2/manatee/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dugong-roster-v3",
+      "name": "wildlife v2 dugong roster v3",
+      "image": "demos/wildlife-v2/dugong/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -28952,6 +29032,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-bat-provisional-v1",
+      "sheetId": "wildlife-bat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-bat-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-wallaby-provisional-v1",
+      "sheetId": "wildlife-wallaby-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3280,
+        320
+      ],
+      "label": "wildlife-wallaby-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-manatee-provisional-v1",
+      "sheetId": "wildlife-manatee-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-manatee-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-dugong-provisional-v1",
+      "sheetId": "wildlife-dugong-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-dugong-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -30985,7 +31137,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:956"
+          "source": "src/wildlife/Fauna.ts:957"
         },
         {
           "system": "Gameplay",
@@ -30997,15 +31149,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:212"
+          "source": "src/wildlife/FoodWeb.ts:227"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:367"
+          "source": "src/wildlife/FoodWeb.ts:386"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:546"
+          "source": "src/wildlife/FoodWeb.ts:565"
         },
         {
           "system": "Gameplay",
@@ -31067,39 +31219,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:32"
+          "source": "src/wildlife/Fauna.ts:33"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:227"
+          "source": "src/wildlife/Fauna.ts:228"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:147"
+          "source": "src/wildlife/FoodWeb.ts:149"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:418"
+          "source": "src/wildlife/FoodWeb.ts:437"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:435"
+          "source": "src/wildlife/FoodWeb.ts:454"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:452"
+          "source": "src/wildlife/FoodWeb.ts:471"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:491"
+          "source": "src/wildlife/FoodWeb.ts:510"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:519"
+          "source": "src/wildlife/FoodWeb.ts:538"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:546"
+          "source": "src/wildlife/FoodWeb.ts:565"
         }
       ]
     },
@@ -31153,23 +31305,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:197"
+          "source": "src/wildlife/FoodWeb.ts:211"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:213"
+          "source": "src/wildlife/FoodWeb.ts:228"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:368"
+          "source": "src/wildlife/FoodWeb.ts:387"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:546"
+          "source": "src/wildlife/FoodWeb.ts:565"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:547"
+          "source": "src/wildlife/FoodWeb.ts:566"
         },
         {
           "system": "Gameplay",
@@ -31215,7 +31367,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:547"
+          "source": "src/wildlife/FoodWeb.ts:566"
         }
       ]
     },
@@ -31261,7 +31413,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:548"
+          "source": "src/wildlife/FoodWeb.ts:567"
         }
       ]
     },
@@ -31307,7 +31459,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:549"
+          "source": "src/wildlife/FoodWeb.ts:568"
         }
       ]
     },
@@ -31353,7 +31505,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:550"
+          "source": "src/wildlife/FoodWeb.ts:569"
         }
       ]
     },
@@ -31511,11 +31663,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:215"
+          "source": "src/wildlife/FoodWeb.ts:230"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:546"
+          "source": "src/wildlife/FoodWeb.ts:565"
         },
         {
           "system": "Gameplay",
@@ -31565,7 +31717,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:546"
+          "source": "src/wildlife/FoodWeb.ts:565"
         },
         {
           "system": "Gameplay",
