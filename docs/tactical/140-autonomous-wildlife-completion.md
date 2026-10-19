@@ -397,3 +397,23 @@ assertion; distinguish them from newly introduced failures.
   readiness pass. Full bounded units: 3,405 pass, five known Windows failures,
   ten skipped. Fifty-one new entries plus sixteen delivered leave 129 remaining.
   Ten small-mammal sources are underway. Exact pixels remain pending review.
+
+- 01:36 UTC: mouse, rat, hamster, guinea pig, chinchilla, hedgehog, porcupine,
+  raccoon, skunk and red panda completed. Fresh skulls/ears/muzzles, hamster cheek
+  pouches, guinea-pig blaze/patch, short/bare/furry tails, raccoon mask, skunk
+  stripes/plume and red-panda mask/dark limbs/rings distinguish their scenes.
+  Hedgehog/porcupine quills are closed 3D cones: independent saved mesh audits
+  check 24/35 manifold volumes. Tail rings paint actual visible source faces.
+  Each bank has 164 poses, 5,248 fixed limb links, 1,312 buried hip roots, 984 tail
+  checks, 988 contacts and 688 planted travel pairs. Native torso paint moves
+  at least 1px in every facing. Ten ten-artifact source replays and 3,280 exact
+  crops pass. Fixed expansion homes use the shared world/editor/lab authority.
+  Wild small/medium prey enter explicit food tiers; sixteen catch tests retain
+  natural home/group/lineage and leave placed prey gone. Domestic hamster and
+  guinea pig remain protected from every hunter. Typecheck/lint/build,
+  1,154-candidate manifest, forty browser cases and streaming readiness pass.
+  Full bounded units: 3,553 pass, five known Windows failures, ten skipped.
+  Fresh inbox/notes have zero pending requests/fixes/notes. Sixty-one new entries
+  plus sixteen delivered leave 119 remaining. Seven ground-bird sources are
+  underway; correct their neck bend continuity and density before registration.
+  Exact pixels remain pending human review.

@@ -155,7 +155,17 @@ fish meals persist replacement lineage and feeding pose through reload; placed
 fish stay finite. Three source replays, 1,944 exact crops, nine browser cases,
 typecheck/lint/build and streaming readiness pass. Full bounded units: 3,405
 pass, five known Windows failures, ten skipped. Fifty-one new entries plus
-sixteen delivered leave 129 remaining. Ten small-mammal sources are underway.
+sixteen delivered leave 129 remaining. Mouse, rat, hamster, guinea pig,
+chinchilla, hedgehog, porcupine, raccoon, skunk and red panda now also use fresh
+world/editor/lab banks. Anatomy includes distinct cheek pouches, ears, quills,
+masks, stripes and tail shapes; tail rings follow source surfaces. Quills are
+closed 3D volumes, and limb roots remain buried through motion. Each has 164
+poses with at least 1px of native torso motion and matched planted travel.
+Ten source replays, 3,280 exact crops, forty browser cases, typecheck/lint/build
+and streaming readiness pass. Full bounded units: 3,553 pass, five known Windows
+failures, ten skipped. Wild prey retain natural-only replacement; domestic
+hamster/guinea pig are protected. Sixty-one new entries plus sixteen delivered
+leave 119 remaining. Seven ground-bird sources are underway.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion

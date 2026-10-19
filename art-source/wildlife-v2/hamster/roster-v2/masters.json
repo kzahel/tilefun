@@ -1,0 +1,13 @@
+{
+  "identity": "hamster-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#c28b48",
+    "H": "#e3b667",
+    "C": "#f0dbb2",
+    "M": "#a56c40",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

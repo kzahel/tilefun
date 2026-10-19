@@ -1,0 +1,17 @@
+{
+  "identity": "rat-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.1434782608695642,
+    "up": 1.3733233979135662,
+    "left": 1.514970645792566,
+    "right": 1.514970645792566
+  },
+  "rootTravelPixelsPerCycle": 11.52,
+  "plantedTravel": true
+}

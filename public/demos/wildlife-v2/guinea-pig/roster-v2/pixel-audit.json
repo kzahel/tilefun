@@ -1,0 +1,17 @@
+{
+  "identity": "guinea-pig-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7130541871921139,
+    "up": 1.3131578947368396,
+    "left": 1.4252005347593553,
+    "right": 1.5502005347593553
+  },
+  "rootTravelPixelsPerCycle": 9.6,
+  "plantedTravel": true
+}

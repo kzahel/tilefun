@@ -1,0 +1,13 @@
+{
+  "identity": "skunk-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#343c40",
+    "H": "#515a5e",
+    "C": "#e5dfc9",
+    "M": "#242e34",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

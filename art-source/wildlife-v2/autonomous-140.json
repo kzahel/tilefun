@@ -448,9 +448,10 @@
     "wild-turkey": {
       "name": "Wild turkey",
       "family": "Farm & livestock",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "llama": {
       "name": "Llama",
@@ -477,18 +478,26 @@
     "hamster": {
       "name": "Hamster",
       "family": "Domestic pets",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/hamster/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "guinea-pig": {
       "name": "Guinea pig",
       "family": "Domestic pets",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/guinea-pig/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "parrot": {
       "name": "Scarlet macaw",
@@ -892,58 +901,86 @@
     "mouse": {
       "name": "Field mouse",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/mouse/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "rat": {
       "name": "Rat",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/rat/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "chinchilla": {
       "name": "Chinchilla",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/chinchilla/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "hedgehog": {
       "name": "Hedgehog",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/hedgehog/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "porcupine": {
       "name": "Porcupine",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/porcupine/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "raccoon": {
       "name": "Raccoon",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/raccoon/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "skunk": {
       "name": "Skunk",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/skunk/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "beaver": {
       "name": "Beaver",
@@ -976,10 +1013,14 @@
     "red-panda": {
       "name": "Red panda",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:14:00Z"
+      "startedUtc": "2026-10-19T01:14:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:36:00Z",
+      "receipt": "art-source/wildlife-v2/red-panda/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hip roots, 984 tail checks, 988 contacts and 688 planted travel pairs; native body motion >=1px; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending human review"
     },
     "sloth": {
       "name": "Sloth",
@@ -1222,37 +1263,42 @@
     "peacock": {
       "name": "Peacock",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "ostrich": {
       "name": "Ostrich",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "emu": {
       "name": "Emu",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "cassowary": {
       "name": "Cassowary",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "kiwi": {
       "name": "Kiwi",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "secretary-bird": {
       "name": "Secretary bird",
@@ -1271,9 +1317,10 @@
     "kakapo": {
       "name": "Kakapo",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:29:00Z"
     },
     "great-blue-heron": {
       "name": "Great blue heron",
@@ -1953,6 +2000,22 @@
         "orca"
       ],
       "validation": "Typecheck/lint/build, 1104-candidate manifest, 9 browser cases and streaming --assert-ready pass. Full bounded units: 3405 pass, 5 known Windows failures, 10 skipped. Three ten-artifact replays and 1944 exact crops. New aquatic authority checks and existing land catch tests pass. Dry-bank arrival requires .3 game zoom for water placement; .4 lab framing includes lagoon and bank."
+    },
+    {
+      "utc": "2026-10-19T01:36:00Z",
+      "completed": [
+        "mouse",
+        "rat",
+        "hamster",
+        "guinea-pig",
+        "chinchilla",
+        "hedgehog",
+        "porcupine",
+        "raccoon",
+        "skunk",
+        "red-panda"
+      ],
+      "validation": "Typecheck/lint/build, 1154-candidate manifest, 40 browser cases and streaming --assert-ready pass. Full bounded units: 3553 pass, 5 known Windows failures, 10 skipped. Ten ten-artifact replays and 3280 exact crops. Closed/manifold quills: hedgehog 24, porcupine 35. Sixteen wild catch tests preserve natural lineage and finite manual prey; domestic hamster/guinea pig protected from every hunter."
     }
   ],
   "existingOutsideRoster": [
@@ -2114,6 +2177,24 @@
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/ocean-hunters-140/README.md",
       "roles": "deep-water predators; orca can eat either shark species"
+    },
+    "small-mammals": {
+      "animals": [
+        "mouse",
+        "rat",
+        "hamster",
+        "guinea-pig",
+        "chinchilla",
+        "hedgehog",
+        "porcupine",
+        "raccoon",
+        "skunk",
+        "red-panda"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/small-mammals-140/README.md"
     }
   }
 }

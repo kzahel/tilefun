@@ -1,0 +1,17 @@
+{
+  "identity": "hedgehog-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4948990549828167,
+    "up": 1.5890183559457327,
+    "left": 1.2623291310438134,
+    "right": 1.2623291310438134
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

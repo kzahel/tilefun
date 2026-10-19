@@ -1,0 +1,13 @@
+{
+  "identity": "chinchilla-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#92999b",
+    "H": "#bec5c3",
+    "C": "#deddd0",
+    "M": "#727a7f",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

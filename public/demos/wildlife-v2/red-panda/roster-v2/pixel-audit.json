@@ -1,0 +1,17 @@
+{
+  "identity": "red-panda-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.288135593220339,
+    "up": 1.3782383419689168,
+    "left": 1.3033428165007095,
+    "right": 1.3033428165007095
+  },
+  "rootTravelPixelsPerCycle": 16.64,
+  "plantedTravel": true
+}

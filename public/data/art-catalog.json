@@ -986,6 +986,106 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-mouse-provisional-v1",
+      "name": "wildlife mouse provisional v1",
+      "image": "demos/wildlife-v2/mouse/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3699dc4a8ec5013a587b1ac36780cea429f74d3c35bf2176c9709162d6cff821",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-rat-provisional-v1",
+      "name": "wildlife rat provisional v1",
+      "image": "demos/wildlife-v2/rat/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a3d35eaae787e25923d2fe7abb289f30bafb11fc3a78691f7bfcba74689643fe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-hamster-provisional-v1",
+      "name": "wildlife hamster provisional v1",
+      "image": "demos/wildlife-v2/hamster/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "f602031c52ede76cca9cb83d5ec1b455213d2f0617f0777f2670e53f89664fb2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-guinea-pig-provisional-v1",
+      "name": "wildlife guinea pig provisional v1",
+      "image": "demos/wildlife-v2/guinea-pig/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "90822f106d85d953f7794d0589c702aec526bed7150aea1e2f4aff28518b45da",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-chinchilla-provisional-v1",
+      "name": "wildlife chinchilla provisional v1",
+      "image": "demos/wildlife-v2/chinchilla/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8cc6fe2013df49602e25474dda199bcdb4aabb185f5e643310c5724028761ca2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-hedgehog-provisional-v1",
+      "name": "wildlife hedgehog provisional v1",
+      "image": "demos/wildlife-v2/hedgehog/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "4c9309bfd972f31b0e26f1259b1777f644df8d828fed75aec76f01fa3f590c36",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-porcupine-provisional-v1",
+      "name": "wildlife porcupine provisional v1",
+      "image": "demos/wildlife-v2/porcupine/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "83d051517b292a9e80fc033148b819d62ccb36b72a1a644a6c02a814af4d720e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-raccoon-provisional-v1",
+      "name": "wildlife raccoon provisional v1",
+      "image": "demos/wildlife-v2/raccoon/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "85626535162b313521b0a7a75ac832a11722e7e0bea1dae38b124f49212c8525",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-skunk-provisional-v1",
+      "name": "wildlife skunk provisional v1",
+      "image": "demos/wildlife-v2/skunk/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e248fc77c572c7d82725a622042095fa5043b535085ab25bba5514d9bc269de9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-red-panda-provisional-v1",
+      "name": "wildlife red panda provisional v1",
+      "image": "demos/wildlife-v2/red-panda/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "819fa414c4507ade6a29474f3036088d2376eeb6a4a0c2f8bfe43a289f4e8d82",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -3223,6 +3323,106 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-mouse-roster-v2",
+      "name": "wildlife v2 mouse roster v2",
+      "image": "demos/wildlife-v2/mouse/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3699dc4a8ec5013a587b1ac36780cea429f74d3c35bf2176c9709162d6cff821",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-rat-roster-v2",
+      "name": "wildlife v2 rat roster v2",
+      "image": "demos/wildlife-v2/rat/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a3d35eaae787e25923d2fe7abb289f30bafb11fc3a78691f7bfcba74689643fe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-hamster-roster-v2",
+      "name": "wildlife v2 hamster roster v2",
+      "image": "demos/wildlife-v2/hamster/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "f602031c52ede76cca9cb83d5ec1b455213d2f0617f0777f2670e53f89664fb2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-guinea-pig-roster-v2",
+      "name": "wildlife v2 guinea pig roster v2",
+      "image": "demos/wildlife-v2/guinea-pig/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "90822f106d85d953f7794d0589c702aec526bed7150aea1e2f4aff28518b45da",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-chinchilla-roster-v2",
+      "name": "wildlife v2 chinchilla roster v2",
+      "image": "demos/wildlife-v2/chinchilla/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8cc6fe2013df49602e25474dda199bcdb4aabb185f5e643310c5724028761ca2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-hedgehog-roster-v2",
+      "name": "wildlife v2 hedgehog roster v2",
+      "image": "demos/wildlife-v2/hedgehog/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "4c9309bfd972f31b0e26f1259b1777f644df8d828fed75aec76f01fa3f590c36",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-porcupine-roster-v2",
+      "name": "wildlife v2 porcupine roster v2",
+      "image": "demos/wildlife-v2/porcupine/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "83d051517b292a9e80fc033148b819d62ccb36b72a1a644a6c02a814af4d720e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-raccoon-roster-v2",
+      "name": "wildlife v2 raccoon roster v2",
+      "image": "demos/wildlife-v2/raccoon/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "85626535162b313521b0a7a75ac832a11722e7e0bea1dae38b124f49212c8525",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-skunk-roster-v2",
+      "name": "wildlife v2 skunk roster v2",
+      "image": "demos/wildlife-v2/skunk/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e248fc77c572c7d82725a622042095fa5043b535085ab25bba5514d9bc269de9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-red-panda-roster-v2",
+      "name": "wildlife v2 red panda roster v2",
+      "image": "demos/wildlife-v2/red-panda/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "819fa414c4507ade6a29474f3036088d2376eeb6a4a0c2f8bfe43a289f4e8d82",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -25642,6 +25842,186 @@
       ]
     },
     {
+      "id": "sprite:wildlife-mouse-provisional-v1",
+      "sheetId": "wildlife-mouse-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-mouse-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-rat-provisional-v1",
+      "sheetId": "wildlife-rat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-rat-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-hamster-provisional-v1",
+      "sheetId": "wildlife-hamster-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-hamster-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-guinea-pig-provisional-v1",
+      "sheetId": "wildlife-guinea-pig-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-guinea-pig-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-chinchilla-provisional-v1",
+      "sheetId": "wildlife-chinchilla-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-chinchilla-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-hedgehog-provisional-v1",
+      "sheetId": "wildlife-hedgehog-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-hedgehog-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-porcupine-provisional-v1",
+      "sheetId": "wildlife-porcupine-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-porcupine-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-raccoon-provisional-v1",
+      "sheetId": "wildlife-raccoon-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-raccoon-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-skunk-provisional-v1",
+      "sheetId": "wildlife-skunk-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-skunk-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-red-panda-provisional-v1",
+      "sheetId": "wildlife-red-panda-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-red-panda-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -27225,7 +27605,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:940"
+          "source": "src/wildlife/Fauna.ts:941"
         },
         {
           "system": "Gameplay",
@@ -27237,11 +27617,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:74"
+          "source": "src/wildlife/FoodWeb.ts:87"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:244"
         }
       ]
     },
@@ -27299,35 +27679,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:16"
+          "source": "src/wildlife/Fauna.ts:17"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:211"
+          "source": "src/wildlife/Fauna.ts:212"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:114"
+          "source": "src/wildlife/FoodWeb.ts:127"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:130"
+          "source": "src/wildlife/FoodWeb.ts:143"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:146"
+          "source": "src/wildlife/FoodWeb.ts:159"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:180"
+          "source": "src/wildlife/FoodWeb.ts:193"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:204"
+          "source": "src/wildlife/FoodWeb.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:244"
         }
       ]
     },
@@ -27377,15 +27757,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:75"
+          "source": "src/wildlife/FoodWeb.ts:88"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:244"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:232"
+          "source": "src/wildlife/FoodWeb.ts:245"
         }
       ]
     },
@@ -27427,7 +27807,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:232"
+          "source": "src/wildlife/FoodWeb.ts:245"
         }
       ]
     },
@@ -27473,7 +27853,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:233"
+          "source": "src/wildlife/FoodWeb.ts:246"
         }
       ]
     },
@@ -27519,7 +27899,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:234"
+          "source": "src/wildlife/FoodWeb.ts:247"
         }
       ]
     },
@@ -27565,7 +27945,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:235"
+          "source": "src/wildlife/FoodWeb.ts:248"
         }
       ]
     },
@@ -27719,7 +28099,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:244"
         }
       ]
     },
@@ -27765,7 +28145,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:244"
         }
       ]
     },

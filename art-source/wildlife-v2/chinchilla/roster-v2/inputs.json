@@ -1,0 +1,11 @@
+{
+  "files": [
+    "art-source/wildlife-v2/camera.json",
+    "art-source/wildlife-v2/_families/small-mammals-140/build.py",
+    "art-source/wildlife-v2/_families/small-mammals-140/geometry.py",
+    "art-source/wildlife-v2/_families/small-mammals-140/finish.py",
+    "art-source/wildlife-v2/_families/small-mammals-140/audit.py",
+    "art-source/wildlife-v2/_families/small-mammals-140/profiles.json",
+    "art-source/wildlife-v2/_families/small-mammals-140/README.md"
+  ]
+}

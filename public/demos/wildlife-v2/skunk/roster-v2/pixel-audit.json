@@ -1,0 +1,17 @@
+{
+  "identity": "skunk-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.230215827338128,
+    "up": 1.1924675959892355,
+    "left": 1.5303520009402334,
+    "right": 1.5303520009402334
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

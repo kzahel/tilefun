@@ -1,0 +1,13 @@
+{
+  "identity": "hedgehog-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#8d7455",
+    "H": "#b09a75",
+    "C": "#d0b895",
+    "M": "#554d42",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

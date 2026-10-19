@@ -1,0 +1,17 @@
+{
+  "identity": "raccoon-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.3032844164919624,
+    "up": 1.2265731541009188,
+    "left": 1.2827586206896555,
+    "right": 1.2827586206896555
+  },
+  "rootTravelPixelsPerCycle": 17.92,
+  "plantedTravel": true
+}

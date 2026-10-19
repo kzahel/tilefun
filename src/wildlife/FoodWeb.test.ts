@@ -33,7 +33,9 @@ describe("explicit creature food web", () => {
     expect(canEat(wolf, rex)).toBe(false);
     expect(canEat(rex, rex)).toBe(false);
     expect(canEat(rex, createPlayer(0, 0))).toBe(false);
-    for (const p of FAUNA_PROFILES.filter((p) => p.variantOf || ["cat", "dog"].includes(p.species)))
+    for (const p of FAUNA_PROFILES.filter(
+      (p) => p.variantOf || ["cat", "dog", "hamster", "guinea-pig"].includes(p.species),
+    ))
       expect(canEat(rex, createFauna(p.species, 30, 0))).toBe(false);
     for (const species of ["horse", "donkey", "mule", "camel"] as const) {
       const mount = createFauna(species, 24, 0);

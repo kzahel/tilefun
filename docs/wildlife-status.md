@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**51 newly completed; 10 in progress; 119 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**61 newly completed; 7 in progress; 112 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -27,10 +27,11 @@
 | Wolf | finished-game-active | [Playback](../public/demos/wildlife-v2/wolf/roster-v2/index.html) |
 | Donkey | finished-game-active | [Playback](../public/demos/wildlife-v2/donkey/roster-v2/index.html) |
 | Mule | finished-game-active | [Playback](../public/demos/wildlife-v2/mule/roster-v2/index.html) |
+| Wild turkey | in-progress | Source/animation work |
 | Llama | finished-game-active | [Playback](../public/demos/wildlife-v2/llama/roster-v2/index.html) |
 | Alpaca | finished-game-active | [Playback](../public/demos/wildlife-v2/alpaca/roster-v2/index.html) |
-| Hamster | in-progress | Source/animation work |
-| Guinea pig | in-progress | Source/animation work |
+| Hamster | finished-game-active | [Playback](../public/demos/wildlife-v2/hamster/roster-v2/index.html) |
+| Guinea pig | finished-game-active | [Playback](../public/demos/wildlife-v2/guinea-pig/roster-v2/index.html) |
 | Coyote | finished-game-active | [Playback](../public/demos/wildlife-v2/coyote/roster-v2/index.html) |
 | Spotted hyena | finished-game-active | [Playback](../public/demos/wildlife-v2/spotted-hyena/roster-v2/index.html) |
 | Jaguar | finished-game-active | [Playback](../public/demos/wildlife-v2/jaguar/roster-v2/index.html) |
@@ -58,21 +59,27 @@
 | Okapi | finished-game-active | [Playback](../public/demos/wildlife-v2/okapi/roster-v2/index.html) |
 | Warthog | finished-game-active | [Playback](../public/demos/wildlife-v2/warthog/roster-v2/index.html) |
 | Gerenuk | finished-game-active | [Playback](../public/demos/wildlife-v2/gerenuk/roster-v2/index.html) |
-| Field mouse | in-progress | Source/animation work |
-| Rat | in-progress | Source/animation work |
-| Chinchilla | in-progress | Source/animation work |
-| Hedgehog | in-progress | Source/animation work |
-| Porcupine | in-progress | Source/animation work |
-| Raccoon | in-progress | Source/animation work |
-| Skunk | in-progress | Source/animation work |
-| Red panda | in-progress | Source/animation work |
+| Field mouse | finished-game-active | [Playback](../public/demos/wildlife-v2/mouse/roster-v2/index.html) |
+| Rat | finished-game-active | [Playback](../public/demos/wildlife-v2/rat/roster-v2/index.html) |
+| Chinchilla | finished-game-active | [Playback](../public/demos/wildlife-v2/chinchilla/roster-v2/index.html) |
+| Hedgehog | finished-game-active | [Playback](../public/demos/wildlife-v2/hedgehog/roster-v2/index.html) |
+| Porcupine | finished-game-active | [Playback](../public/demos/wildlife-v2/porcupine/roster-v2/index.html) |
+| Raccoon | finished-game-active | [Playback](../public/demos/wildlife-v2/raccoon/roster-v2/index.html) |
+| Skunk | finished-game-active | [Playback](../public/demos/wildlife-v2/skunk/roster-v2/index.html) |
+| Red panda | finished-game-active | [Playback](../public/demos/wildlife-v2/red-panda/roster-v2/index.html) |
+| Peacock | in-progress | Source/animation work |
+| Ostrich | in-progress | Source/animation work |
+| Emu | in-progress | Source/animation work |
+| Cassowary | in-progress | Source/animation work |
+| Kiwi | in-progress | Source/animation work |
+| Kakapo | in-progress | Source/animation work |
 | Shark | finished-game-active | [Playback](../public/demos/wildlife-v2/shark/roster-v2/index.html) |
 | Hammerhead shark | finished-game-active | [Playback](../public/demos/wildlife-v2/hammerhead-shark/roster-v2/index.html) |
 | Orca | finished-game-active | [Playback](../public/demos/wildlife-v2/orca/roster-v2/index.html) |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T01:17:31.111Z (19/10/2026, 03:17:31 Berlin).
+Snapshot: 2026-10-19T01:36:16.919Z (19/10/2026, 03:36:16 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

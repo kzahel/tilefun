@@ -1,0 +1,13 @@
+{
+  "identity": "porcupine-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#695c4f",
+    "H": "#99856c",
+    "C": "#d2c7a6",
+    "M": "#3f3d38",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

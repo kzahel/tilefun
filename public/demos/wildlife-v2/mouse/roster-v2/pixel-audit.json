@@ -1,0 +1,17 @@
+{
+  "identity": "mouse-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.3735456215554223,
+    "up": 1.5,
+    "left": 1.673252279635257,
+    "right": 1.673252279635257
+  },
+  "rootTravelPixelsPerCycle": 9.6,
+  "plantedTravel": true
+}

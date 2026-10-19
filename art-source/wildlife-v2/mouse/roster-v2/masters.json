@@ -1,0 +1,13 @@
+{
+  "identity": "mouse-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#9a8f7d",
+    "H": "#c5b9a0",
+    "C": "#e4d9bf",
+    "M": "#be8b88",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

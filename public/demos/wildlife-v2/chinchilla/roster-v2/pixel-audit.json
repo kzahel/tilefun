@@ -1,0 +1,17 @@
+{
+  "identity": "chinchilla-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4575974208017897,
+    "up": 1.4534883720930267,
+    "left": 1.4499914000687966,
+    "right": 1.4499914000687966
+  },
+  "rootTravelPixelsPerCycle": 11.52,
+  "plantedTravel": true
+}

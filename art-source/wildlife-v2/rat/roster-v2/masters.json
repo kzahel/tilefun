@@ -1,0 +1,13 @@
+{
+  "identity": "rat-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#817a72",
+    "H": "#aaa297",
+    "C": "#c7bca9",
+    "M": "#ad8580",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

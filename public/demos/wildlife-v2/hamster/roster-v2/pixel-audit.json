@@ -1,0 +1,17 @@
+{
+  "identity": "hamster-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.514018691588788,
+    "up": 1.1140350877193015,
+    "left": 1.2701537307836546,
+    "right": 1.2701537307836546
+  },
+  "rootTravelPixelsPerCycle": 8.0,
+  "plantedTravel": true
+}

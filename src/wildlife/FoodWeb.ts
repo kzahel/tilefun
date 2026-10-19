@@ -7,7 +7,16 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = ["mallard-duck", "robin", "chicken", "pigeon", "crow", "seagull"] as const;
-const small = ["rabbit", "frog", "red-squirrel", ...birds] as const;
+const small = [
+  "rabbit",
+  "frog",
+  "red-squirrel",
+  "mouse",
+  "rat",
+  "chinchilla",
+  "hedgehog",
+  ...birds,
+] as const;
 const antelopes = [
   "gemsbok-oryx",
   "gazelle",
@@ -19,6 +28,10 @@ const antelopes = [
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
 const pasture = [
+  "porcupine",
+  "raccoon",
+  "skunk",
+  "red-panda",
   "moose",
   "elk",
   "warthog",
@@ -235,6 +248,8 @@ const identities = new Map<string, string>([
   ["fish3", "fish"],
 ]);
 const companions = new Set([
+  "hamster",
+  "guinea-pig",
   "cat",
   "dog",
   ...FAUNA_PROFILES.filter((p) => p.variantOf).map((p) => p.species),

@@ -1,0 +1,13 @@
+{
+  "identity": "red-panda-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#a85d3e",
+    "H": "#d58e57",
+    "C": "#e6d9b9",
+    "M": "#343b3c",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -6,6 +6,7 @@ import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { PANDA_PROFILE } from "./Panda.js";
 import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
 import { PET_ART } from "./PetVariants.js";
+import { SMALL_MAMMAL_PROFILES } from "./SmallMammals.js";
 import { UNGULATE_PROFILES } from "./Ungulates.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
@@ -1322,6 +1323,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...PATTERNED_GRAZER_PROFILES,
   PANDA_PROFILE,
   ...UNGULATE_PROFILES,
+  ...SMALL_MAMMAL_PROFILES,
   ...PET_ART.map((art): FaunaProfile => {
     const base = BASE_FAUNA_PROFILES.find((p) => p.species === art.species);
     if (!base) throw new Error(`Missing pet behavior: ${art.species}`);

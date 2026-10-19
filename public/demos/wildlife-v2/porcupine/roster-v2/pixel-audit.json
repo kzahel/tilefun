@@ -1,0 +1,17 @@
+{
+  "identity": "porcupine-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.342175066312997,
+    "up": 1.2745098039215677,
+    "left": 1.4205409841239813,
+    "right": 1.372010545477373
+  },
+  "rootTravelPixelsPerCycle": 11.52,
+  "plantedTravel": true
+}
