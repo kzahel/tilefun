@@ -1,0 +1,1292 @@
+{
+  "identity": "wildlife-autonomous-147",
+  "authorization": "Owner: make more animals from the list for the next eight hours, committing each and ensuring visibility in the lab; good now proceed (2026-10-19).",
+  "startedUtc": "2026-10-19T11:06:24Z",
+  "deadlineUtc": "2026-10-19T19:06:24Z",
+  "state": "active",
+  "allowNewAnimals": true,
+  "supersedes": "Historical expansion and sequencing holds for this explicit timed continuation; registered banks and human review remain immutable.",
+  "previousRun": "art-source/wildlife-v2/autonomous-140.json",
+  "tactical": "147-wildlife-continuation.md",
+  "tasks": {
+    "fox": {
+      "name": "Red fox",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "rabbit": {
+      "name": "Rabbit",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "pilot-v1"
+    },
+    "elephant": {
+      "name": "African elephant",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "giraffe": {
+      "name": "Giraffe",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": null
+    },
+    "mallard-duck": {
+      "name": "Mallard duck",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "robin": {
+      "name": "European robin",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "draft-v2"
+    },
+    "fish": {
+      "name": "Pond fish",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "draft-v2"
+    },
+    "butterfly": {
+      "name": "Butterfly",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "ant": {
+      "name": "Ant",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "draft-v2"
+    },
+    "king-cobra": {
+      "name": "King cobra",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "frog": {
+      "name": "Frog",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "gorilla": {
+      "name": "Gorilla",
+      "family": "Primates",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "kangaroo": {
+      "name": "Kangaroo",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "crab": {
+      "name": "Crab",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "octopus": {
+      "name": "Octopus",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "penguin": {
+      "name": "Penguin",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "harbor-seal": {
+      "name": "Harbor seal",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "manta-ray": {
+      "name": "Manta ray",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "jellyfish": {
+      "name": "Jellyfish",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cat": {
+      "name": "Cat",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "dog": {
+      "name": "Dog",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "red-squirrel": {
+      "name": "Red squirrel",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bear": {
+      "name": "Brown bear",
+      "family": "Bears",
+      "state": "already-completed",
+      "revision": "hunt-v1"
+    },
+    "deer": {
+      "name": "White-tailed deer",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "cow": {
+      "name": "Cow",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "sheep": {
+      "name": "Sheep",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "horse": {
+      "name": "Horse",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": null
+    },
+    "piglet": {
+      "name": "Pig",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "goat": {
+      "name": "Goat",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "chicken": {
+      "name": "Chicken",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bee": {
+      "name": "Bee",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "ladybug": {
+      "name": "Ladybug",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "owl": {
+      "name": "Owl",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "sea-turtle": {
+      "name": "Green sea turtle",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gecko": {
+      "name": "Tokay gecko",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wolf": {
+      "name": "Wolf",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "donkey": {
+      "name": "Donkey",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "mule": {
+      "name": "Mule",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wild-turkey": {
+      "name": "Wild turkey",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "llama": {
+      "name": "Llama",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "alpaca": {
+      "name": "Alpaca",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hamster": {
+      "name": "Hamster",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "guinea-pig": {
+      "name": "Guinea pig",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "parrot": {
+      "name": "Scarlet macaw",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "coyote": {
+      "name": "Coyote",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "spotted-hyena": {
+      "name": "Spotted hyena",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "lion": {
+      "name": "Lion",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": null
+    },
+    "tiger": {
+      "name": "Tiger",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": null
+    },
+    "jaguar": {
+      "name": "Jaguar",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "leopard": {
+      "name": "Leopard",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cheetah": {
+      "name": "Cheetah",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "lynx": {
+      "name": "Eurasian lynx",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bobcat": {
+      "name": "Bobcat",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "panda": {
+      "name": "Panda",
+      "family": "Bears",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "polar-bear": {
+      "name": "Polar bear",
+      "family": "Bears",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "moose": {
+      "name": "Moose",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "elk": {
+      "name": "Elk",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "zebra": {
+      "name": "Zebra",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "rhinoceros": {
+      "name": "White rhinoceros",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hippopotamus": {
+      "name": "Hippo",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "camel": {
+      "name": "Dromedary camel",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "american-bison": {
+      "name": "American bison",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "water-buffalo": {
+      "name": "Water buffalo",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gemsbok-oryx": {
+      "name": "Gemsbok",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gazelle": {
+      "name": "Gazelle",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "impala": {
+      "name": "Impala",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "springbok": {
+      "name": "Springbok",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "saiga-antelope": {
+      "name": "Saiga antelope",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "musk-ox": {
+      "name": "Musk ox",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wildebeest": {
+      "name": "Wildebeest",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "malayan-tapir": {
+      "name": "Tapir",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "okapi": {
+      "name": "Okapi",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "warthog": {
+      "name": "Warthog",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gerenuk": {
+      "name": "Gerenuk",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "capuchin-monkey": {
+      "name": "White-faced capuchin",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "chimpanzee": {
+      "name": "Chimpanzee",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "orangutan": {
+      "name": "Orangutan",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "ring-tailed-lemur": {
+      "name": "Ring-tailed lemur",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "mandrill": {
+      "name": "Mandrill",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "proboscis-monkey": {
+      "name": "Proboscis monkey",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "japanese-macaque": {
+      "name": "Japanese macaque",
+      "family": "Primates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "mouse": {
+      "name": "Field mouse",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "rat": {
+      "name": "Rat",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "chinchilla": {
+      "name": "Chinchilla",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hedgehog": {
+      "name": "Hedgehog",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "porcupine": {
+      "name": "Porcupine",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "raccoon": {
+      "name": "Raccoon",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "skunk": {
+      "name": "Skunk",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "beaver": {
+      "name": "Beaver",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bat": {
+      "name": "Bat",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "meerkat": {
+      "name": "Meerkat",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "river-otter": {
+      "name": "River otter",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "red-panda": {
+      "name": "Red panda",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "sloth": {
+      "name": "Sloth",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "capybara": {
+      "name": "Capybara",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "giant-anteater": {
+      "name": "Giant anteater",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "aardvark": {
+      "name": "Aardvark",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "armadillo": {
+      "name": "Armadillo",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "pangolin": {
+      "name": "Pangolin",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "mongoose": {
+      "name": "Mongoose",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "binturong": {
+      "name": "Binturong",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "honey-badger": {
+      "name": "Honey badger",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "fossa": {
+      "name": "Fossa",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "aye-aye": {
+      "name": "Aye-aye",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "white-nosed-coati": {
+      "name": "White-nosed coati",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "kinkajou": {
+      "name": "Kinkajou",
+      "family": "Small & exotic mammals",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "koala": {
+      "name": "Koala",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wallaby": {
+      "name": "Wallaby",
+      "family": "Marsupials & monotremes",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "wombat": {
+      "name": "Wombat",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "opossum": {
+      "name": "Opossum",
+      "family": "Marsupials & monotremes",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "tasmanian-devil": {
+      "name": "Tasmanian devil",
+      "family": "Marsupials & monotremes",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "platypus": {
+      "name": "Platypus",
+      "family": "Marsupials & monotremes",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "echidna": {
+      "name": "Echidna",
+      "family": "Marsupials & monotremes",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "quokka": {
+      "name": "Quokka",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "toucan": {
+      "name": "Toucan",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "great-hornbill": {
+      "name": "Great hornbill",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "eagle": {
+      "name": "Eagle",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "hawk": {
+      "name": "Hawk",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "pigeon": {
+      "name": "Pigeon",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "dove": {
+      "name": "Dove",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "raven": {
+      "name": "Raven",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:06:24Z",
+      "completedUtc": "2026-10-19T11:20:05Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/raven/roster-v3/receipt.json",
+      "evidence": "Byte-identical ten-artifact source replay; 328 exact native/3x crops; connected fixed-volume wing/leg audits; world/editor and real Worker lab Canvas/GPU flight, pause/reload and finite manual deaths; browser Watch AI visibility."
+    },
+    "crow": {
+      "name": "Crow",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:06:24Z",
+      "completedUtc": "2026-10-19T11:20:05Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/crow/roster-v3/receipt.json",
+      "evidence": "Byte-identical ten-artifact source replay; 328 exact native/3x crops; connected fixed-volume wing/leg audits; world/editor and real Worker lab Canvas/GPU flight, pause/reload and finite manual deaths; browser Watch AI visibility."
+    },
+    "flamingo": {
+      "name": "Flamingo",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "shoebill": {
+      "name": "Shoebill",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "pelican": {
+      "name": "Pelican",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "blue-footed-booby": {
+      "name": "Blue-footed booby",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "sparrow": {
+      "name": "Sparrow",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "peacock": {
+      "name": "Peacock",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "ostrich": {
+      "name": "Ostrich",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "emu": {
+      "name": "Emu",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cassowary": {
+      "name": "Cassowary",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "kiwi": {
+      "name": "Kiwi",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "secretary-bird": {
+      "name": "Secretary bird",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "marabou-stork": {
+      "name": "Marabou stork",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "kakapo": {
+      "name": "Kakapo",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "great-blue-heron": {
+      "name": "Great blue heron",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "atlantic-puffin": {
+      "name": "Atlantic puffin",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:06:24Z",
+      "completedUtc": "2026-10-19T11:20:05Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/atlantic-puffin/roster-v3/receipt.json",
+      "evidence": "Byte-identical ten-artifact source replay; 328 exact native/3x crops; connected fixed-volume wing/leg audits; world/editor and real Worker lab Canvas/GPU flight, pause/reload and finite manual deaths; browser Watch AI visibility."
+    },
+    "ruby-throated-hummingbird": {
+      "name": "Ruby-throated hummingbird",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "great-frigatebird": {
+      "name": "Great frigatebird",
+      "family": "Birds",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "ocean-sunfish": {
+      "name": "Ocean sunfish",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "swordfish": {
+      "name": "Swordfish",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "pufferfish": {
+      "name": "Pufferfish",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "shark": {
+      "name": "Shark",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hammerhead-shark": {
+      "name": "Hammerhead shark",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "whale-shark": {
+      "name": "Whale shark",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "dolphin": {
+      "name": "Dolphin",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "orca": {
+      "name": "Orca",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "humpback-whale": {
+      "name": "Humpback whale",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "blue-whale": {
+      "name": "Blue whale",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "narwhal": {
+      "name": "Narwhal",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cuttlefish": {
+      "name": "Cuttlefish",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "coconut-crab": {
+      "name": "Coconut crab",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "horseshoe-crab": {
+      "name": "Horseshoe crab",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "seahorse": {
+      "name": "Seahorse",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "starfish": {
+      "name": "Starfish",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "lobster": {
+      "name": "Lobster",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "shrimp": {
+      "name": "Shrimp",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "mantis-shrimp": {
+      "name": "Mantis shrimp",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "nautilus": {
+      "name": "Nautilus",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "sea-lion": {
+      "name": "Sea lion",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "manatee": {
+      "name": "Manatee",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "dugong": {
+      "name": "Dugong",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "walrus": {
+      "name": "Walrus",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "anglerfish": {
+      "name": "Anglerfish",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "leafy-seadragon": {
+      "name": "Leafy seadragon",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "moray-eel": {
+      "name": "Moray eel",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "electric-eel": {
+      "name": "Electric eel",
+      "family": "Marine & aquatic",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "gaboon-viper": {
+      "name": "Gaboon viper",
+      "family": "Reptiles & amphibians",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "iguana": {
+      "name": "Iguana",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "chameleon": {
+      "name": "Chameleon",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "pond-turtle": {
+      "name": "Pond turtle",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "land-tortoise": {
+      "name": "Land tortoise",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "crocodile": {
+      "name": "Crocodile",
+      "family": "Reptiles & amphibians",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "alligator": {
+      "name": "Alligator",
+      "family": "Reptiles & amphibians",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "komodo-dragon": {
+      "name": "Komodo dragon",
+      "family": "Reptiles & amphibians",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "salamander": {
+      "name": "Fire salamander",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "newt": {
+      "name": "Newt",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "axolotl": {
+      "name": "Axolotl",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "frilled-neck-lizard": {
+      "name": "Frilled-neck lizard",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "texas-horned-lizard": {
+      "name": "Texas horned lizard",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "dragonfly": {
+      "name": "Dragonfly",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "spider": {
+      "name": "Spider",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "stag-beetle": {
+      "name": "Stag beetle",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "grasshopper": {
+      "name": "Grasshopper",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cricket": {
+      "name": "Cricket",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "praying-mantis": {
+      "name": "Praying mantis",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "leaf-insect": {
+      "name": "Leaf insect",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "scorpion": {
+      "name": "Scorpion",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "roly-poly": {
+      "name": "Pill bug",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "earwig": {
+      "name": "Earwig (pincher bug)",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "centipede": {
+      "name": "Centipede",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "millipede": {
+      "name": "Millipede",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "snail": {
+      "name": "Snail",
+      "family": "Insects & arthropods",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "worm": {
+      "name": "Earthworm",
+      "family": "Other invertebrates",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "elephant-upright": {
+      "name": "Upright elephant",
+      "family": "Hoofed & large herbivores",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    },
+    "giraffe-upright": {
+      "name": "Upright giraffe",
+      "family": "Hoofed & large herbivores",
+      "state": "queued",
+      "historicalState": "queued",
+      "revision": null
+    }
+  },
+  "checkpoints": [
+    {
+      "utc": "2026-10-19T11:20:05Z",
+      "completed": [
+        "raven",
+        "crow",
+        "atlantic-puffin"
+      ],
+      "validation": "Typecheck/lint/build and streaming readiness pass. 20 browser cases pass, including all 135 entries in four facings (540 previews). Three byte-identical replays and 984 exact source crops. Full units: 4456 passed, 6 failed, 10 skipped; new authored-crow registration adds one legitimate roadkill type, fixed stale 12-type expectation; all 30 focused bird/roadkill tests then pass, leaving five known Windows symlink/WAL failures. Isolated wildlife-only build and 1406-candidate full Chromium manifest pass."
+    }
+  ]
+}

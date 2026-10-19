@@ -4,118 +4,15 @@
 
 ## Latest autonomous completion run
 
-[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: timebox-complete.
+[Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**106 newly completed; 0 in progress; 0 currently blocked; 74 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**3 newly completed; 0 in progress; 0 currently blocked; 71 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
-| Red fox | finished-game-active | [Playback](../public/demos/wildlife-v2/fox/motion-v2/index.html) |
-| African elephant | finished-game-active | [Playback](../public/demos/wildlife-v2/elephant/motion-v2/index.html) |
-| Butterfly | finished-game-active | [Playback](../public/demos/wildlife-v2/butterfly/roster-v2/index.html) |
-| Gorilla | finished-game-active | [Playback](../public/demos/wildlife-v2/gorilla/roster-v2/index.html) |
-| Crab | finished-game-active | [Playback](../public/demos/wildlife-v2/crab/roster-v2/index.html) |
-| Octopus | finished-game-active | [Playback](../public/demos/wildlife-v2/octopus/roster-v2/index.html) |
-| Jellyfish | finished-game-active | [Playback](../public/demos/wildlife-v2/jellyfish/roster-v2/index.html) |
-| Cat | finished-game-active | [Playback](../public/demos/wildlife-v2/cat/motion-v2/index.html) |
-| Dog | finished-game-active | [Playback](../public/demos/wildlife-v2/dog/motion-v2/index.html) |
-| Red squirrel | finished-game-active | [Playback](../public/demos/wildlife-v2/red-squirrel/roster-v2/index.html) |
-| White-tailed deer | finished-game-active | [Playback](../public/demos/wildlife-v2/deer/motion-v2/index.html) |
-| Cow | finished-game-active | [Playback](../public/demos/wildlife-v2/cow/motion-v2/index.html) |
-| Sheep | finished-game-active | [Playback](../public/demos/wildlife-v2/sheep/motion-v2/index.html) |
-| Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
-| Goat | finished-game-active | [Playback](../public/demos/wildlife-v2/goat/motion-v2/index.html) |
-| Chicken | finished-game-active | [Playback](../public/demos/wildlife-v2/chicken/roster-v2/index.html) |
-| Bee | finished-game-active | [Playback](../public/demos/wildlife-v2/bee/roster-v2/index.html) |
-| Ladybug | finished-game-active | [Playback](../public/demos/wildlife-v2/ladybug/roster-v2/index.html) |
-| Green sea turtle | finished-game-active | [Playback](../public/demos/wildlife-v2/sea-turtle/roster-v2/index.html) |
-| Tokay gecko | finished-game-active | [Playback](../public/demos/wildlife-v2/gecko/roster-v2/index.html) |
-| Wolf | finished-game-active | [Playback](../public/demos/wildlife-v2/wolf/roster-v2/index.html) |
-| Donkey | finished-game-active | [Playback](../public/demos/wildlife-v2/donkey/roster-v2/index.html) |
-| Mule | finished-game-active | [Playback](../public/demos/wildlife-v2/mule/roster-v2/index.html) |
-| Wild turkey | finished-game-active | [Playback](../public/demos/wildlife-v2/wild-turkey/roster-v2/index.html) |
-| Llama | finished-game-active | [Playback](../public/demos/wildlife-v2/llama/roster-v2/index.html) |
-| Alpaca | finished-game-active | [Playback](../public/demos/wildlife-v2/alpaca/roster-v2/index.html) |
-| Hamster | finished-game-active | [Playback](../public/demos/wildlife-v2/hamster/roster-v2/index.html) |
-| Guinea pig | finished-game-active | [Playback](../public/demos/wildlife-v2/guinea-pig/roster-v2/index.html) |
-| Scarlet macaw | finished-game-active | [Playback](../public/demos/wildlife-v2/parrot/roster-v2/index.html) |
-| Coyote | finished-game-active | [Playback](../public/demos/wildlife-v2/coyote/roster-v2/index.html) |
-| Spotted hyena | finished-game-active | [Playback](../public/demos/wildlife-v2/spotted-hyena/roster-v2/index.html) |
-| Jaguar | finished-game-active | [Playback](../public/demos/wildlife-v2/jaguar/roster-v2/index.html) |
-| Leopard | finished-game-active | [Playback](../public/demos/wildlife-v2/leopard/roster-v2/index.html) |
-| Cheetah | finished-game-active | [Playback](../public/demos/wildlife-v2/cheetah/roster-v2/index.html) |
-| Eurasian lynx | finished-game-active | [Playback](../public/demos/wildlife-v2/lynx/roster-v2/index.html) |
-| Bobcat | finished-game-active | [Playback](../public/demos/wildlife-v2/bobcat/roster-v2/index.html) |
-| Panda | finished-game-active | [Playback](../public/demos/wildlife-v2/panda/roster-v2/index.html) |
-| Polar bear | finished-game-active | [Playback](../public/demos/wildlife-v2/polar-bear/roster-v2/index.html) |
-| Moose | finished-game-active | [Playback](../public/demos/wildlife-v2/moose/roster-v2/index.html) |
-| Elk | finished-game-active | [Playback](../public/demos/wildlife-v2/elk/roster-v2/index.html) |
-| Zebra | finished-game-active | [Playback](../public/demos/wildlife-v2/zebra/roster-v2/index.html) |
-| White rhinoceros | finished-game-active | [Playback](../public/demos/wildlife-v2/rhinoceros/roster-v2/index.html) |
-| Hippo | finished-game-active | [Playback](../public/demos/wildlife-v2/hippopotamus/roster-v2/index.html) |
-| Dromedary camel | finished-game-active | [Playback](../public/demos/wildlife-v2/camel/roster-v2/index.html) |
-| American bison | finished-game-active | [Playback](../public/demos/wildlife-v2/american-bison/roster-v2/index.html) |
-| Water buffalo | finished-game-active | [Playback](../public/demos/wildlife-v2/water-buffalo/roster-v2/index.html) |
-| Gemsbok | finished-game-active | [Playback](../public/demos/wildlife-v2/gemsbok-oryx/roster-v2/index.html) |
-| Gazelle | finished-game-active | [Playback](../public/demos/wildlife-v2/gazelle/roster-v2/index.html) |
-| Impala | finished-game-active | [Playback](../public/demos/wildlife-v2/impala/roster-v2/index.html) |
-| Springbok | finished-game-active | [Playback](../public/demos/wildlife-v2/springbok/roster-v2/index.html) |
-| Saiga antelope | finished-game-active | [Playback](../public/demos/wildlife-v2/saiga-antelope/roster-v2/index.html) |
-| Musk ox | finished-game-active | [Playback](../public/demos/wildlife-v2/musk-ox/roster-v2/index.html) |
-| Wildebeest | finished-game-active | [Playback](../public/demos/wildlife-v2/wildebeest/roster-v2/index.html) |
-| Tapir | finished-game-active | [Playback](../public/demos/wildlife-v2/malayan-tapir/roster-v2/index.html) |
-| Okapi | finished-game-active | [Playback](../public/demos/wildlife-v2/okapi/roster-v2/index.html) |
-| Warthog | finished-game-active | [Playback](../public/demos/wildlife-v2/warthog/roster-v2/index.html) |
-| Gerenuk | finished-game-active | [Playback](../public/demos/wildlife-v2/gerenuk/roster-v2/index.html) |
-| Field mouse | finished-game-active | [Playback](../public/demos/wildlife-v2/mouse/roster-v2/index.html) |
-| Rat | finished-game-active | [Playback](../public/demos/wildlife-v2/rat/roster-v2/index.html) |
-| Chinchilla | finished-game-active | [Playback](../public/demos/wildlife-v2/chinchilla/roster-v2/index.html) |
-| Hedgehog | finished-game-active | [Playback](../public/demos/wildlife-v2/hedgehog/roster-v2/index.html) |
-| Porcupine | finished-game-active | [Playback](../public/demos/wildlife-v2/porcupine/roster-v2/index.html) |
-| Raccoon | finished-game-active | [Playback](../public/demos/wildlife-v2/raccoon/roster-v2/index.html) |
-| Skunk | finished-game-active | [Playback](../public/demos/wildlife-v2/skunk/roster-v2/index.html) |
-| Beaver | finished-game-active | [Playback](../public/demos/wildlife-v2/beaver/roster-v2/index.html) |
-| Red panda | finished-game-active | [Playback](../public/demos/wildlife-v2/red-panda/roster-v2/index.html) |
-| Capybara | finished-game-active | [Playback](../public/demos/wildlife-v2/capybara/roster-v2/index.html) |
-| Mongoose | finished-game-active | [Playback](../public/demos/wildlife-v2/mongoose/roster-v2/index.html) |
-| Honey badger | finished-game-active | [Playback](../public/demos/wildlife-v2/honey-badger/roster-v2/index.html) |
-| Fossa | finished-game-active | [Playback](../public/demos/wildlife-v2/fossa/roster-v2/index.html) |
-| White-nosed coati | finished-game-active | [Playback](../public/demos/wildlife-v2/white-nosed-coati/roster-v2/index.html) |
-| Koala | finished-game-active | [Playback](../public/demos/wildlife-v2/koala/roster-v2/index.html) |
-| Wombat | finished-game-active | [Playback](../public/demos/wildlife-v2/wombat/roster-v2/index.html) |
-| Quokka | finished-game-active | [Playback](../public/demos/wildlife-v2/quokka/roster-v2/index.html) |
-| Toucan | finished-game-active | [Playback](../public/demos/wildlife-v2/toucan/roster-v2/index.html) |
-| Great hornbill | finished-game-active | [Playback](../public/demos/wildlife-v2/great-hornbill/roster-v2/index.html) |
-| Pigeon | finished-game-active | [Playback](../public/demos/wildlife-v2/pigeon/roster-v2/index.html) |
-| Dove | finished-game-active | [Playback](../public/demos/wildlife-v2/dove/roster-v2/index.html) |
-| Sparrow | finished-game-active | [Playback](../public/demos/wildlife-v2/sparrow/roster-v2/index.html) |
-| Peacock | finished-game-active | [Playback](../public/demos/wildlife-v2/peacock/roster-v2/index.html) |
-| Ostrich | finished-game-active | [Playback](../public/demos/wildlife-v2/ostrich/roster-v2/index.html) |
-| Emu | finished-game-active | [Playback](../public/demos/wildlife-v2/emu/roster-v2/index.html) |
-| Cassowary | finished-game-active | [Playback](../public/demos/wildlife-v2/cassowary/roster-v2/index.html) |
-| Kiwi | finished-game-active | [Playback](../public/demos/wildlife-v2/kiwi/roster-v2/index.html) |
-| Kakapo | finished-game-active | [Playback](../public/demos/wildlife-v2/kakapo/roster-v2/index.html) |
-| Shark | finished-game-active | [Playback](../public/demos/wildlife-v2/shark/roster-v2/index.html) |
-| Hammerhead shark | finished-game-active | [Playback](../public/demos/wildlife-v2/hammerhead-shark/roster-v2/index.html) |
-| Whale shark | finished-game-active | [Playback](../public/demos/wildlife-v2/whale-shark/roster-v2/index.html) |
-| Dolphin | finished-game-active | [Playback](../public/demos/wildlife-v2/dolphin/roster-v2/index.html) |
-| Orca | finished-game-active | [Playback](../public/demos/wildlife-v2/orca/roster-v2/index.html) |
-| Humpback whale | finished-game-active | [Playback](../public/demos/wildlife-v2/humpback-whale/roster-v2/index.html) |
-| Blue whale | finished-game-active | [Playback](../public/demos/wildlife-v2/blue-whale/roster-v2/index.html) |
-| Narwhal | finished-game-active | [Playback](../public/demos/wildlife-v2/narwhal/roster-v2/index.html) |
-| Iguana | finished-game-active | [Playback](../public/demos/wildlife-v2/iguana/roster-v2/index.html) |
-| Chameleon | finished-game-active | [Playback](../public/demos/wildlife-v2/chameleon/roster-v2/index.html) |
-| Pond turtle | finished-game-active | [Playback](../public/demos/wildlife-v2/pond-turtle/roster-v2/index.html) |
-| Land tortoise | finished-game-active | [Playback](../public/demos/wildlife-v2/land-tortoise/roster-v2/index.html) |
-| Fire salamander | finished-game-active | [Playback](../public/demos/wildlife-v2/salamander/roster-v2/index.html) |
-| Newt | finished-game-active | [Playback](../public/demos/wildlife-v2/newt/roster-v2/index.html) |
-| Axolotl | finished-game-active | [Playback](../public/demos/wildlife-v2/axolotl/roster-v2/index.html) |
-| Frilled-neck lizard | finished-game-active | [Playback](../public/demos/wildlife-v2/frilled-neck-lizard/roster-v2/index.html) |
-| Texas horned lizard | finished-game-active | [Playback](../public/demos/wildlife-v2/texas-horned-lizard/roster-v2/index.html) |
-| Dragonfly | finished-game-active | [Playback](../public/demos/wildlife-v2/dragonfly/roster-v2/index.html) |
-| Stag beetle | finished-game-active | [Playback](../public/demos/wildlife-v2/stag-beetle/roster-v2/index.html) |
-| Grasshopper | finished-game-active | [Playback](../public/demos/wildlife-v2/grasshopper/roster-v2/index.html) |
-| Cricket | finished-game-active | [Playback](../public/demos/wildlife-v2/cricket/roster-v2/index.html) |
+| Raven | finished-game-active | [Playback](../public/demos/wildlife-v2/raven/roster-v3/index.html) |
+| Crow | finished-game-active | [Playback](../public/demos/wildlife-v2/crow/roster-v3/index.html) |
+| Atlantic puffin | finished-game-active | [Playback](../public/demos/wildlife-v2/atlantic-puffin/roster-v3/index.html) |
 
 ## Current gorilla shoulder study
 
@@ -127,7 +24,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T09:35:14.245Z (19/10/2026, 11:35:14 Berlin).
+Snapshot: 2026-10-19T11:20:05.871Z (19/10/2026, 13:20:05 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

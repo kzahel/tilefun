@@ -2,6 +2,7 @@ import { Direction, type Entity, type PositionComponent } from "../entities/Enti
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { BOVID_PROFILES } from "./Bovids.js";
+import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
@@ -1334,6 +1335,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...GROUND_BIRD_PROFILES,
   ...MARINE_FAUNA_PROFILES,
   ...FLYING_BIRD_PROFILES,
+  ...CONTINUATION_BIRD_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

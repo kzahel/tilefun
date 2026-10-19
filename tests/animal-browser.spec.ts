@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { CONTINUATION_BIRD_PROFILES } from "../src/wildlife/ContinuationBirds.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
@@ -11,7 +12,7 @@ test("browses animated animals by name, family and dates, then runs their real A
   const browser = page.locator(".animal-browser"),
     results = page.getByRole("region", { name: "Animal results" });
   await expect(browser).toBeVisible();
-  await expect(results.locator("article")).toHaveCount(132);
+  await expect(results.locator("article")).toHaveCount(ANIMAL_BROWSER_ENTRIES.length);
   const added = await results
     .locator("time")
     .evaluateAll((nodes) => nodes.map((n) => n.getAttribute("datetime") ?? ""));
@@ -117,5 +118,44 @@ for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) 
         })
         .not.toBe(before.image);
     }
+  });
+}
+
+for (const animal of CONTINUATION_BIRD_PROFILES) {
+  test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
+    page,
+  }) => {
+    await page.goto(
+      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+    );
+    await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
+    const card = page.locator(`[data-animal="${animal.species}"]`);
+    await expect(card.locator("canvas")).toHaveAttribute("data-ready", "true");
+    await card.getByRole("button", { name: "Watch AI", exact: true }).click();
+    await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(animal.species);
+    const stage = page.getByLabel("Natural landscape playground");
+    await expect(stage).toHaveAttribute("data-ready", "true");
+    const poses = async () =>
+      (
+        JSON.parse((await stage.getAttribute("data-fauna-poses")) ?? "[]") as {
+          species: string;
+          visible: boolean;
+          x: number;
+          y: number;
+          z: number;
+        }[]
+      ).filter((p) => p.species === animal.species);
+    await expect.poll(async () => (await poses()).some((p) => p.visible)).toBe(true);
+    const before = await poses();
+    await expect
+      .poll(
+        async () =>
+          (await poses()).some(
+            (p) => p.visible && p.z > 2 && before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
+          ),
+        { timeout: 12000, intervals: [30] },
+      )
+      .toBe(true);
+    await page.screenshot({ path: `data/wildlife-147-${animal.species}-lab.png` });
   });
 }

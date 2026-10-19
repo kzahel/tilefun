@@ -13942,5 +13942,284 @@
         "sha256": "aeadfcaf1f9371e74a518c2409f2902483ae15a4e6db40f7b66ce58b58aebcaa"
       }
     ]
+  },
+  {
+    "id": "raven-roster-v3",
+    "animalId": "raven",
+    "revision": "roster-v3",
+    "name": "Raven · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/raven/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-raven-roster-v3",
+      "name": "Raven sheet",
+      "image": "demos/wildlife-v2/raven/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+      "source": "art-source/wildlife-v2/raven/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-raven-roster-v3-scene",
+      "name": "Raven scene",
+      "image": "demos/wildlife-v2/raven/roster-v3/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "57146684260cf23b0aee129ead5960258102209303d06a4a976fe4428cfbb250",
+      "source": "art-source/wildlife-v2/raven/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-raven-roster-v3-contact",
+      "name": "Raven contact",
+      "image": "demos/wildlife-v2/raven/roster-v3/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "5d6564b08a0ddb43a66813658abe5a37fae288973e3b0fc18cdc3d78d9856aee",
+      "source": "art-source/wildlife-v2/raven/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/raven/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/contact-sheet-native.png",
+        "sha256": "5d6564b08a0ddb43a66813658abe5a37fae288973e3b0fc18cdc3d78d9856aee"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/index.html",
+        "sha256": "f165db18bb4e5c508314dff887339d7de541a033a9e54fdcc3ee80b2fb1772ea"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/pixel-audit.json",
+        "sha256": "25f3827a81221fbbf688897f74d3ca944e916c62c0a31f7b61bf88d61005106e"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/preview-native.gif",
+        "sha256": "1026a843b0b1e4388e2f3459e168f9e7fc166049852a6690a9ab8a49408448f7"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/preview.gif",
+        "sha256": "3080db56c88cdd535bc0b20151ff665d7b6fc50e7bf1710fb44915059213518b"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/scene-background.png",
+        "sha256": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/scene-native.png",
+        "sha256": "57146684260cf23b0aee129ead5960258102209303d06a4a976fe4428cfbb250"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/sheet.png",
+        "sha256": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/source-audit.json",
+        "sha256": "9a951f02ff3dcae87a19694f8caf5de8f040789786e1e06ce3662f7552f11541"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/sprite.json",
+        "sha256": "b49e2743852c64b3b2675883500d3a42fe11a128f1d10483b2d07e8479319245"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/travel-native.gif",
+        "sha256": "bed9d58b4c8f3f34dc2dfbe1b8355920851947d0dfb4081c8640530834e2894a"
+      },
+      {
+        "path": "demos/wildlife-v2/raven/roster-v3/validation.json",
+        "sha256": "38cb15f8c4172714eeb6ca518bc6fc183fddabfbff334cb07a01490a9d911492"
+      }
+    ]
+  },
+  {
+    "id": "crow-roster-v3",
+    "animalId": "crow",
+    "revision": "roster-v3",
+    "name": "Crow · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/crow/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-crow-roster-v3",
+      "name": "Crow sheet",
+      "image": "demos/wildlife-v2/crow/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a2cca2203ea0fa942a6963e55cee0241a0d0a88c03a1bfc5c82164c9877ff2e2",
+      "source": "art-source/wildlife-v2/crow/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-crow-roster-v3-scene",
+      "name": "Crow scene",
+      "image": "demos/wildlife-v2/crow/roster-v3/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "f1c6fdddb00409418f3ae141f4ddfd25851457c7aef3756b7d47671c2f669d11",
+      "source": "art-source/wildlife-v2/crow/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-crow-roster-v3-contact",
+      "name": "Crow contact",
+      "image": "demos/wildlife-v2/crow/roster-v3/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "00a18cee151d92284d748f92489e4ada6aabbbf5b24467c2034f47c3f98a49a6",
+      "source": "art-source/wildlife-v2/crow/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/crow/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/contact-sheet-native.png",
+        "sha256": "00a18cee151d92284d748f92489e4ada6aabbbf5b24467c2034f47c3f98a49a6"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/index.html",
+        "sha256": "39efac0f89f5b1633195ed69fec68b713e15ba241d14b9eb927f65d5a18fd907"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/pixel-audit.json",
+        "sha256": "23d359ec9d38ead7ea839632afce0de9005c79411fe59c6f0e9b285f592105bd"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/preview-native.gif",
+        "sha256": "310c4f3a2c00219e70e71c3981b4356109a3990b71e629b0399e0a5926d7ce09"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/preview.gif",
+        "sha256": "e2cc28343d4b2253bc2b27fe2b25194598f139126d4980f51dc432b11211a4ca"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/scene-background.png",
+        "sha256": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/scene-native.png",
+        "sha256": "f1c6fdddb00409418f3ae141f4ddfd25851457c7aef3756b7d47671c2f669d11"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/sheet.png",
+        "sha256": "a2cca2203ea0fa942a6963e55cee0241a0d0a88c03a1bfc5c82164c9877ff2e2"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/source-audit.json",
+        "sha256": "9f93e8cbc830ceea87290ffcebc2dfb8df39eccf080e2d15c17b679a97fe0e38"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/sprite.json",
+        "sha256": "8838ade361e8602d03272c8090127ef23d204ab174763617b483510d2cc0f81b"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/travel-native.gif",
+        "sha256": "45a269a39520307cc3b457d1397ed80c8970c1a0fe288e147a282f94df40fd11"
+      },
+      {
+        "path": "demos/wildlife-v2/crow/roster-v3/validation.json",
+        "sha256": "d427ed3e2a8b046eef111307c3af3b3f4f4d45c3495a75d527acd98a52f08aea"
+      }
+    ]
+  },
+  {
+    "id": "atlantic-puffin-roster-v3",
+    "animalId": "atlantic-puffin",
+    "revision": "roster-v3",
+    "name": "Atlantic puffin · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/atlantic-puffin/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-atlantic-puffin-roster-v3",
+      "name": "Atlantic puffin sheet",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
+      "source": "art-source/wildlife-v2/atlantic-puffin/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-atlantic-puffin-roster-v3-scene",
+      "name": "Atlantic puffin scene",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "27e52c4ad3590f55df7977bd943e3147710ec7937f5a858db936c798de1103b6",
+      "source": "art-source/wildlife-v2/atlantic-puffin/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-atlantic-puffin-roster-v3-contact",
+      "name": "Atlantic puffin contact",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "ccef5683b75289e176146354d961ec0e965ba387728c76d1fb297ce02832d71d",
+      "source": "art-source/wildlife-v2/atlantic-puffin/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/atlantic-puffin/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/contact-sheet-native.png",
+        "sha256": "ccef5683b75289e176146354d961ec0e965ba387728c76d1fb297ce02832d71d"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/index.html",
+        "sha256": "0737ba9d7b8ea263e802ac4fe84e2e0b23dc8e5f1ca0e5e5022073004ac1e6d6"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/pixel-audit.json",
+        "sha256": "e52b995865136c85c435fe2601c3ed65e1b6c09b350fdc351c1e4bf1f16e7582"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/preview-native.gif",
+        "sha256": "f7d35ce909a1e868ffe936b7d2fb0a9ba962296aa1c8d9faa2024537864a1486"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/preview.gif",
+        "sha256": "e5dc89f359929b71922a137c325c522b7ffa29b36ee817732d9541af6228199b"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/scene-background.png",
+        "sha256": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/scene-native.png",
+        "sha256": "27e52c4ad3590f55df7977bd943e3147710ec7937f5a858db936c798de1103b6"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+        "sha256": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/source-audit.json",
+        "sha256": "d5d936f9d1a742720615ba109d1f481a15c1c5817a4c4ecf8edb742dde8bcf61"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/sprite.json",
+        "sha256": "8ecf46bb83a5919be7a9662e4d54e9a339a841138fb1fe98874de13c93c1a8a5"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/travel-native.gif",
+        "sha256": "105ae411fd3c5d0a2d74d4fe325142365ab97df4160affe870f5434daa35b239"
+      },
+      {
+        "path": "demos/wildlife-v2/atlantic-puffin/roster-v3/validation.json",
+        "sha256": "16817155d1b53ce3efe3b746eb8f8eb944f4572c86c42119737632033fade073"
+      }
+    ]
   }
 ]

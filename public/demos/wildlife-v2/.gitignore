@@ -526,3 +526,8 @@
 
 # Owner-requested gorilla shoulder study, pending human review.
 !gorilla/shoulder-study-v1/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!raven/roster-v3/*
+!crow/roster-v3/*
+!atlantic-puffin/roster-v3/*

@@ -7,6 +7,8 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = [
+  "raven",
+  "atlantic-puffin",
   "dove",
   "sparrow",
   "parrot",

@@ -1316,6 +1316,36 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-raven-provisional-v1",
+      "name": "wildlife raven provisional v1",
+      "image": "demos/wildlife-v2/raven/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-crow-provisional-v1",
+      "name": "wildlife crow provisional v1",
+      "image": "demos/wildlife-v2/crow/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a2cca2203ea0fa942a6963e55cee0241a0d0a88c03a1bfc5c82164c9877ff2e2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-atlantic-puffin-provisional-v1",
+      "name": "wildlife atlantic puffin provisional v1",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -4343,6 +4373,36 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "ab30dd90ea43f73b48e3a9fd6a06f70aa4e0f1ad81d5645179d884d2c6f6fa19",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-raven-roster-v3",
+      "name": "wildlife v2 raven roster v3",
+      "image": "demos/wildlife-v2/raven/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-crow-roster-v3",
+      "name": "wildlife v2 crow roster v3",
+      "image": "demos/wildlife-v2/crow/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a2cca2203ea0fa942a6963e55cee0241a0d0a88c03a1bfc5c82164c9877ff2e2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-atlantic-puffin-roster-v3",
+      "name": "wildlife v2 atlantic puffin roster v3",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -27356,6 +27416,60 @@
       ]
     },
     {
+      "id": "sprite:wildlife-raven-provisional-v1",
+      "sheetId": "wildlife-raven-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-raven-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-crow-provisional-v1",
+      "sheetId": "wildlife-crow-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-crow-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-atlantic-puffin-provisional-v1",
+      "sheetId": "wildlife-atlantic-puffin-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-atlantic-puffin-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -29353,7 +29467,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:948"
+          "source": "src/wildlife/Fauna.ts:949"
         },
         {
           "system": "Gameplay",
@@ -29361,15 +29475,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:22"
+          "source": "src/wildlife/FoodWeb.ts:24"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:239"
+          "source": "src/wildlife/FoodWeb.ts:241"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:412"
+          "source": "src/wildlife/FoodWeb.ts:414"
         },
         {
           "system": "Gameplay",
@@ -29431,35 +29545,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:24"
+          "source": "src/wildlife/Fauna.ts:25"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:219"
+          "source": "src/wildlife/Fauna.ts:220"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:290"
+          "source": "src/wildlife/FoodWeb.ts:292"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:307"
+          "source": "src/wildlife/FoodWeb.ts:309"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:324"
+          "source": "src/wildlife/FoodWeb.ts:326"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:360"
+          "source": "src/wildlife/FoodWeb.ts:362"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:385"
+          "source": "src/wildlife/FoodWeb.ts:387"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:412"
+          "source": "src/wildlife/FoodWeb.ts:414"
         }
       ]
     },
@@ -29509,19 +29623,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:23"
+          "source": "src/wildlife/FoodWeb.ts:25"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:240"
+          "source": "src/wildlife/FoodWeb.ts:242"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:412"
+          "source": "src/wildlife/FoodWeb.ts:414"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:413"
+          "source": "src/wildlife/FoodWeb.ts:415"
         },
         {
           "system": "Gameplay",
@@ -29567,7 +29681,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:413"
+          "source": "src/wildlife/FoodWeb.ts:415"
         }
       ]
     },
@@ -29613,7 +29727,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:414"
+          "source": "src/wildlife/FoodWeb.ts:416"
         }
       ]
     },
@@ -29659,7 +29773,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:415"
+          "source": "src/wildlife/FoodWeb.ts:417"
         }
       ]
     },
@@ -29705,7 +29819,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:416"
+          "source": "src/wildlife/FoodWeb.ts:418"
         }
       ]
     },
@@ -29851,15 +29965,19 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/wildlife/ContinuationBirds.ts:61"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/FaunaExpansion.ts:101"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:24"
+          "source": "src/wildlife/FoodWeb.ts:26"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:412"
+          "source": "src/wildlife/FoodWeb.ts:414"
         },
         {
           "system": "Gameplay",
@@ -29905,11 +30023,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:25"
+          "source": "src/wildlife/FoodWeb.ts:27"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:412"
+          "source": "src/wildlife/FoodWeb.ts:414"
         },
         {
           "system": "Gameplay",

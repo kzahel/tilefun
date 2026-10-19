@@ -1,0 +1,15 @@
+{
+  "identity": "raven-roster-v3-pixels-01",
+  "palette": {
+    "B": "#26333d",
+    "H": "#536373",
+    "C": "#344452",
+    "M": "#25313d",
+    "N": "#141b25",
+    "E": "#d2b77b",
+    "K": "#141b25",
+    "T": "#43515b",
+    "R": "#737a7b"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -34,7 +34,8 @@ for (const line of output.split(/\r?\n/)) {
   if (line.startsWith("@")) date = new Date(line.slice(1)).toISOString();
   else if (line) additions.set(line, date);
 }
-const ledger = JSON.parse(readFileSync("art-source/wildlife-v2/autonomous-140.json", "utf8"));
+const previous = JSON.parse(readFileSync("art-source/wildlife-v2/autonomous-140.json", "utf8"));
+const ledger = JSON.parse(readFileSync("art-source/wildlife-v2/autonomous-147.json", "utf8"));
 const dates = Object.fromEntries(
   ANIMAL_BROWSER_ENTRIES.map((p) => {
     const bank = additions.get(`public/${p.image}`) ?? null;
@@ -49,7 +50,8 @@ const dates = Object.fromEntries(
         )
         .map(([, d]) => d)
         .sort()[0] ?? bank;
-    const completed = task?.completedUtc ? new Date(task.completedUtc).toISOString() : null;
+    const completion = task?.completedUtc ?? previous.tasks[p.id]?.completedUtc ?? task?.startedUtc;
+    const completed = completion ? new Date(completion).toISOString() : null;
     const added = completed && (!original || completed < original) ? completed : original;
     return [
       p.id,

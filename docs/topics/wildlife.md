@@ -6,6 +6,34 @@ The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
 Updated: 2026-10-19.
 
+## Active eight-hour continuation
+
+Owner authorized another approximately eight hours and said “good now proceed”
+on 2026-10-19. Window: **11:06:24–19:06:24 UTC**.
+[Tactical 147](../tactical/147-wildlife-continuation.md) and its
+[ledger](../../art-source/wildlife-v2/autonomous-147.json) own new progress.
+The previous run remains an immutable completed record: 122 roster animals
+already implemented, 74 remaining. Register new exact pending art identities,
+verify world/animal-browser animation and AI, commit and push finished batches.
+This explicit scope supersedes historical expansion/sequencing holds for this
+window; it does not invent human approvals or alter registered source banks.
+
+First checkpoint: raven, carrion crow and Atlantic puffin `roster-v3` are active
+in natural worlds, editor placement and the animal browser. Distinct original
+bills, tails, wing proportions, puffin face/breast and webbed feet; fixed linked
+legs and shoulder/elbow feather wings. Bounded landing-to-landing flights use
+shared Fauna authority. These three use dry-ground homes; open-air navigation,
+coastal swimming and corvid hunting are not implemented in this batch.
+All 135 browser entries pass four-facing visible animation checks, and the three
+new Watch AI paths show real moving natural animals. Twenty Canvas/GPU lab/game
+browser checks, three byte-identical source replays and 984 exact source crops
+pass. Typecheck/lint/build and streaming readiness pass. Full units had 4,456
+passing and the five known Windows failures plus one stale roadkill type count;
+authored crow legitimately joins legacy crow. Its explicit registration check
+was corrected and all 30 affected bird/roadkill tests pass. Exact new art remains
+pending human review. Roster: **125 of 196 implemented; 71 remaining**.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

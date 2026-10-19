@@ -257,7 +257,10 @@ export function writeStatus() {
   }
   const output = resolve(ROOT, "docs/wildlife-status.md");
   if (existsSync(resolve(ROOT, "art-source/wildlife-v2/autonomous-140.json"))) {
-    const run = read("art-source/wildlife-v2/autonomous-140.json");
+    const latestRun = existsSync(resolve(ROOT, "art-source/wildlife-v2/autonomous-147.json"))
+      ? "autonomous-147"
+      : "autonomous-140";
+    const run = read(`art-source/wildlife-v2/${latestRun}.json`);
     const entries = Object.entries(run.tasks);
     const finished = entries.filter(([, t]) => t.state === "finished-game-active");
     const active = entries.filter(([, t]) => t.state === "in-progress");
@@ -266,7 +269,7 @@ export function writeStatus() {
       0,
       "## Latest autonomous completion run",
       "",
-      `[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline ${clean(run.deadlineUtc)}. State: ${clean(run.state)}.`,
+      `[Current tactical](tactical/${run.tactical ?? "140-autonomous-wildlife-completion.md"}): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline ${clean(run.deadlineUtc)}. State: ${clean(run.state)}.`,
       "",
       `**${finished.length} newly completed; ${active.length} in progress; ${entries.filter(([, t]) => t.state === "blocked").length} currently blocked; ${entries.filter(([, t]) => t.state === "queued").length} queued; ${entries.filter(([, t]) => t.state === "already-completed").length} completed before this run.** Final pixels retain their own human-review status.`,
       "",

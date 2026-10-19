@@ -103,3 +103,8 @@ scripts/authored-assets/refine_blue_train_v2.py text eol=lf
 scripts/authored-assets/retain_blue_train_v2.py text eol=lf
 scripts/authored-assets/verify_blue_train_v2.mjs text eol=lf
 scripts/authored-assets/pack_train_draft.py text eol=lf
+
+# Exact wildlife continuation replay tools are receipt-pinned.
+scripts/wildlife/register-continuation-147.mjs text eol=lf
+scripts/wildlife/capture-continuation-147.mjs text eol=lf
+scripts/wildlife/replay-continuation-147.py text eol=lf
