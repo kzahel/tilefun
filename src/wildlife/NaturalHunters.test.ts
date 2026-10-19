@@ -60,9 +60,14 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
             source.records.find((r) => r.facing === "left" && r.clip === clip && r.index === index),
           ),
         );
-        const name = required(poses[0]).volumes.some((v) => v.name === "hind-1-foot")
-          ? "hind-1-foot"
-          : "leg-1-foot";
+        const planted = Object.entries(audit.footfallOffsets ?? {}).find(
+          ([, offset]) => Number(offset) === 0,
+        )?.[0];
+        const name = planted
+          ? `${planted}-foot`
+          : required(poses[0]).volumes.some((v) => v.name === "hind-1-foot")
+            ? "hind-1-foot"
+            : "leg-1-foot";
         const centers = poses.map((pose) => {
           const foot = required(pose.volumes.find((v) => v.name === name));
           const xs = foot.points.map((xy) => required(xy[0]));
@@ -86,7 +91,7 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
         expect(Math.max(...ys) - Math.min(...ys)).toBeGreaterThanOrEqual(1);
       }
     }
-    expect(walkTravel).toBeCloseTo(p.speed * duration("walk"), 2);
+    expect(walkTravel).toBeCloseTo(p.speed * duration(required(p.art.clips[1]).name), 2);
     expect(chaseTravel).toBeCloseTo(p.chaseSpeed * duration("chase"), 2);
     const hunter = createPredator(p.species, 0, 0);
     required(hunter.predator).state = "pounce";
@@ -113,8 +118,14 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
     const a = collect(false);
     expect(a).toEqual(collect(true));
     expect(a.filter((a) => a.predator)).toHaveLength(1);
-    expect(a.filter((a) => a.rabbit)).toHaveLength(2);
-    expect(a.filter((a) => a.deer || a.fauna)).toHaveLength(dietFor(p.species).has("deer") ? 1 : 0);
+    expect(a.filter((a) => a.rabbit)).toHaveLength(p.preySpecies ? 0 : 2);
+    expect(a.filter((a) => a.deer || a.fauna)).toHaveLength(
+      (p.preySpecies ? 2 : 0) + (dietFor(p.species).has("deer") ? 1 : 0),
+    );
+    if (p.preySpecies)
+      expect(a.filter((a) => a.fauna).every((a) => creatureSpecies(a) === p.preySpecies)).toBe(
+        true,
+      );
     for (const prey of a.filter((e) => !e.predator))
       expect(dietFor(p.species).has(creatureSpecies(prey) ?? "")).toBe(true);
     expect(new Set(a.map((a) => a.featureId)).size).toBe(a.length);

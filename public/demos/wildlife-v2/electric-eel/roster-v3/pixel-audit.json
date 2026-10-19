@@ -1,0 +1,17 @@
+{
+  "identity": "electric-eel-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.9251336898395692,
+    "up": 5.162927844588346,
+    "left": 2.0639080459770014,
+    "right": 1.8046875
+  },
+  "rootTravelPixelsPerCycle": 20.48,
+  "plantedTravel": true
+}

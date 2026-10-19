@@ -1,0 +1,17 @@
+{
+  "identity": "moray-eel-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7316091954022994,
+    "up": 4.958672349218645,
+    "left": 2.1174755502240856,
+    "right": 1.7724097581731826
+  },
+  "rootTravelPixelsPerCycle": 23.04,
+  "plantedTravel": true
+}

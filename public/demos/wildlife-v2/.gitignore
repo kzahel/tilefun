@@ -602,3 +602,10 @@
 !platypus/roster-v3/*
 !sea-lion/roster-v3/*
 !walrus/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!gaboon-viper/roster-v3/*
+!snail/roster-v3/*
+!worm/roster-v3/*
+!moray-eel/roster-v3/*
+!electric-eel/roster-v3/*

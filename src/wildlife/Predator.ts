@@ -3,6 +3,7 @@ import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { AQUATIC_HUNTER_PROFILES, type AquaticHunterSpecies } from "./AquaticHunters.js";
+import type { FaunaSpecies } from "./Fauna.js";
 import {
   FIERCE_PROFILES,
   type FierceBehaviorProfile,
@@ -48,6 +49,7 @@ export interface PredatorProfile {
   revision: string;
   speed: number;
   chaseSpeed: number;
+  preySpecies?: FaunaSpecies;
   weight: number;
   size: number;
   anchorY: number;

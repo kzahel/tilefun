@@ -1,0 +1,197 @@
+{
+  "gaboon-viper": {
+    "label": "Gaboon viper",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "head": [
+      0,
+      1.53,
+      0.24
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "count": 18,
+    "radius": 0.18,
+    "length": 0.17,
+    "speed": 6,
+    "walkMs": 50,
+    "chaseMs": 10,
+    "chaseSpeed": 40,
+    "hunter": true,
+    "motion": "slither",
+    "fauna": false,
+    "ground": true,
+    "palette": {
+      "K": "#27312c",
+      "N": "#171c18",
+      "B": "#967a59",
+      "C": "#d1bd8e",
+      "M": "#514238",
+      "H": "#bba475",
+      "T": "#d6c8a4",
+      "R": "#9b5154"
+    }
+  },
+  "snail": {
+    "label": "Garden snail",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "head": [
+      0,
+      0.48,
+      0.24
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "count": 8,
+    "radius": 0.12,
+    "length": 0.12,
+    "speed": 3,
+    "walkMs": 60,
+    "chaseMs": 20,
+    "chaseSpeed": 34,
+    "hunter": false,
+    "motion": "crawl",
+    "fauna": true,
+    "ground": true,
+    "palette": {
+      "K": "#27312c",
+      "N": "#171c18",
+      "B": "#675d48",
+      "C": "#d1bd8e",
+      "M": "#514238",
+      "H": "#bba475",
+      "T": "#d6c8a4",
+      "R": "#9b5154"
+    }
+  },
+  "worm": {
+    "label": "Earthworm",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "head": [
+      0,
+      0.91,
+      0.24
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "count": 14,
+    "radius": 0.11,
+    "length": 0.13,
+    "speed": 4,
+    "walkMs": 50,
+    "chaseMs": 20,
+    "chaseSpeed": 34,
+    "hunter": false,
+    "motion": "crawl",
+    "fauna": true,
+    "ground": true,
+    "palette": {
+      "K": "#27312c",
+      "N": "#171c18",
+      "B": "#a98170",
+      "C": "#d1a98c",
+      "M": "#514238",
+      "H": "#bba475",
+      "T": "#d6c8a4",
+      "R": "#9b5154"
+    }
+  },
+  "moray-eel": {
+    "label": "Moray eel",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "head": [
+      0,
+      1.87,
+      0.65
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "count": 22,
+    "radius": 0.15,
+    "length": 0.17,
+    "speed": 18,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "chaseSpeed": 34,
+    "hunter": true,
+    "motion": "swim",
+    "fauna": false,
+    "ground": false,
+    "palette": {
+      "K": "#27312c",
+      "N": "#171c18",
+      "B": "#8b8d58",
+      "C": "#d1bd8e",
+      "M": "#514238",
+      "H": "#bba475",
+      "T": "#d6c8a4",
+      "R": "#9b5154"
+    }
+  },
+  "electric-eel": {
+    "label": "Electric eel",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "head": [
+      0,
+      2.04,
+      0.65
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "count": 24,
+    "radius": 0.14,
+    "length": 0.17,
+    "speed": 16,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "chaseSpeed": 34,
+    "hunter": true,
+    "motion": "swim",
+    "fauna": false,
+    "ground": false,
+    "palette": {
+      "K": "#27312c",
+      "N": "#171c18",
+      "B": "#675d48",
+      "C": "#d1bd8e",
+      "M": "#514238",
+      "H": "#bba475",
+      "T": "#d6c8a4",
+      "R": "#9b5154"
+    }
+  }
+}

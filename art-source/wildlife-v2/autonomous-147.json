@@ -1239,16 +1239,20 @@
     "coconut-crab": {
       "name": "Coconut crab",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
     },
     "horseshoe-crab": {
       "name": "Horseshoe crab",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
     },
     "seahorse": {
       "name": "Seahorse",
@@ -1271,23 +1275,29 @@
     "lobster": {
       "name": "Lobster",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
     },
     "shrimp": {
       "name": "Shrimp",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
     },
     "mantis-shrimp": {
       "name": "Mantis shrimp",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
     },
     "nautilus": {
       "name": "Nautilus",
@@ -1379,29 +1389,44 @@
     "moray-eel": {
       "name": "Moray eel",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:49:08.323468Z",
-      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/moray-eel/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
     },
     "electric-eel": {
       "name": "Electric eel",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:49:08.323468Z",
-      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/electric-eel/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
     },
     "gaboon-viper": {
       "name": "Gaboon viper",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:49:08.323468Z",
-      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/gaboon-viper/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
     },
     "iguana": {
       "name": "Iguana",
@@ -1598,20 +1623,30 @@
     "snail": {
       "name": "Snail",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:49:08.323468Z",
-      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/snail/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
     },
     "worm": {
       "name": "Earthworm",
       "family": "Other invertebrates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:49:08.323468Z",
-      "progress": "Unregistered original connected body-chain source authoring; not runtime active."
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/worm/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
     },
     "elephant-upright": {
       "name": "Upright elephant",
@@ -1749,6 +1784,17 @@
         "walrus"
       ],
       "validation": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
+    },
+    {
+      "utc": "2026-10-19T15:34:58.978529Z",
+      "completed": [
+        "gaboon-viper",
+        "snail",
+        "worm",
+        "moray-eel",
+        "electric-eel"
+      ],
+      "validation": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "identity": "gaboon-viper-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 3.334215167548493,
+    "up": 3.3775400659458654,
+    "left": 1.525581395348837,
+    "right": 1.9073089700996633
+  },
+  "rootTravelPixelsPerCycle": 9.6,
+  "plantedTravel": true
+}

@@ -1,0 +1,14 @@
+{
+  "identity": "moray-eel-roster-v3-pixels-01",
+  "palette": {
+    "K": "#27312c",
+    "N": "#171c18",
+    "B": "#8b8d58",
+    "C": "#d1bd8e",
+    "M": "#514238",
+    "H": "#bba475",
+    "T": "#d6c8a4",
+    "R": "#9b5154"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -27,9 +27,13 @@ const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
   "$species hunting",
   (p) => {
-    const preyFactory = dietFor(p.species).has("deer") ? createDeer : createRabbit;
+    const preyFactory = p.preySpecies
+      ? (x: number, y: number) => createFauna(required(p.preySpecies), x, y)
+      : dietFor(p.species).has("deer")
+        ? createDeer
+        : createRabbit;
     const preyType = preyFactory(0, 0).type;
-    const habitat = (e: Entity) => required(e.deer ?? e.rabbit);
+    const habitat = (e: Entity) => required(e.deer ?? e.rabbit ?? e.fauna);
     const setup = (factory = preyFactory) => {
       const manager = new EntityManager();
       const hunter = manager.spawn(createPredator(p.species, 0, 0));
@@ -77,23 +81,27 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       tickWildlifeRespawns(manager, 120, open, []);
       expect(manager.entities.some((e) => e.type === preyType)).toBe(false);
     });
-    it("replaces a rabbit in its own habitat and leaves an airborne rabbit alive", () => {
-      const { manager, hunter, prey } = setup(createRabbit);
+    it("replaces admissible grounded prey and leaves it alive while airborne", () => {
+      const factory = p.preySpecies ? preyFactory : createRabbit;
+      const type = factory(0, 0).type;
+      const { manager, hunter, prey } = setup(factory);
       prey.position.wx = (required(hunter.collider).width + required(prey.collider).width) / 2 + 1;
-      required(prey.rabbit).state = "hop";
+      if (prey.rabbit) prey.rabbit.state = "hop";
+      prey.jumpZ = 3;
       prey.wz = 3;
       resolvePredatorCatches(manager, [...manager.entities], open, []);
       tickWildlifeRespawns(manager, 120, open, []);
       expect(manager.byId.has(prey.id)).toBe(true);
-      required(prey.rabbit).state = "rest";
+      if (prey.rabbit) prey.rabbit.state = "rest";
+      prey.jumpZ = 0;
       prey.wz = 0;
       resolvePredatorCatches(manager, [...manager.entities], open, []);
       tickWildlifeRespawns(manager, 120, open, []);
-      const replacement = required(manager.entities.find((e) => e.rabbit));
+      const replacement = required(manager.entities.find((e) => e.type === type));
       expect(replacement.persistentId).not.toBe(prey.persistentId);
-      expect(replacement.rabbit?.home).toEqual(replacement.position);
+      expect(habitat(replacement).home).toEqual(replacement.position);
       expect(hunter.predator?.meals).toBe(1);
-      expect(manager.entities.filter((e) => e.rabbit)).toHaveLength(1);
+      expect(manager.entities.filter((e) => e.type === type)).toHaveLength(1);
     });
     it("eats player-created prey without replacing it or requiring a replacement site", () => {
       const { manager, hunter, prey } = setup();
@@ -160,7 +168,7 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       required(hunter.predator).timer = 0;
       updatePredatorAI(hunter, 0.1, open, [hunter, ...protectedAnimals], []);
       expect(hunter.predator?.targetId).toBeUndefined();
-      const rabbit = createRabbit(32, 0);
+      const rabbit = p.preySpecies ? preyFactory(32, 0) : createRabbit(32, 0);
       required(hunter.predator).timer = 0;
       updatePredatorAI(hunter, 0.1, { ...open, canOccupy: () => false }, [hunter, rabbit], []);
       expect(hunter.predator?.targetId).toBeUndefined();
@@ -199,7 +207,7 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       });
       if (prey.rabbit) startleRabbit(prey, { wx: 60, wy: 64 });
       else
-        Object.assign(required(prey.deer), {
+        Object.assign(required(prey.deer ?? prey.fauna), {
           state: "flee",
           target: { wx: 192, wy: 64 },
           motion: { elapsed: 0, duration: 5, escaping: true },

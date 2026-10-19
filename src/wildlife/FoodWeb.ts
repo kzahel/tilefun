@@ -134,6 +134,7 @@ const pasture = [
 ] as const;
 
 const smallGroundHunters = [
+  "gaboon-viper",
   "tasmanian-devil",
   "mongoose",
   "honey-badger",
@@ -146,6 +147,9 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  "gaboon-viper": ["mouse", "rat", "red-squirrel", "frog", "gecko", "cricket", "ant"],
+  "moray-eel": ["fish", "crab", "octopus"],
+  "electric-eel": ["fish", "frog", "axolotl", "pond-turtle"],
   "tasmanian-devil": [...small, "king-cobra"],
   crocodile: [
     ...small,
@@ -177,6 +181,8 @@ export const HUNTING_DIETS = {
   ],
   "komodo-dragon": [...small, "deer", "piglet", "goat", "king-cobra", "fox"],
   "secretary-bird": [
+    "snail",
+    "worm",
     "king-cobra",
     "rabbit",
     "mouse",
@@ -190,6 +196,8 @@ export const HUNTING_DIETS = {
   swordfish: ["fish", "pufferfish", "anglerfish", "octopus"],
   anglerfish: ["fish", "crab"],
   owl: [
+    "snail",
+    "worm",
     "bat",
     "mouse",
     "rat",
@@ -202,6 +210,8 @@ export const HUNTING_DIETS = {
     "dove",
   ],
   hawk: [
+    "snail",
+    "worm",
     "bat",
     "mouse",
     "rat",
@@ -215,6 +225,8 @@ export const HUNTING_DIETS = {
     "pigeon",
   ],
   eagle: [
+    "snail",
+    "worm",
     "bat",
     "aye-aye",
     "kinkajou",
@@ -237,6 +249,8 @@ export const HUNTING_DIETS = {
     "hawk",
   ],
   mongoose: [
+    "snail",
+    "worm",
     "rabbit",
     "mouse",
     "rat",
@@ -249,6 +263,8 @@ export const HUNTING_DIETS = {
     "frog",
   ],
   "honey-badger": [
+    "snail",
+    "worm",
     "mongoose",
     "rabbit",
     "mouse",
@@ -282,6 +298,8 @@ export const HUNTING_DIETS = {
     "chameleon",
   ],
   "white-nosed-coati": [
+    "snail",
+    "worm",
     "rabbit",
     "mouse",
     "rat",
@@ -300,6 +318,8 @@ export const HUNTING_DIETS = {
   dolphin: ["fish", "octopus", "crab"],
   narwhal: ["fish", "octopus", "crab"],
   shark: [
+    "moray-eel",
+    "electric-eel",
     "sea-lion",
     "walrus",
     "river-otter",
@@ -323,6 +343,8 @@ export const HUNTING_DIETS = {
   ],
   "hammerhead-shark": ["fish", "manta-ray", "octopus", "crab"],
   orca: [
+    "moray-eel",
+    "electric-eel",
     "sea-lion",
     "walrus",
     "river-otter",
@@ -382,6 +404,8 @@ export const HUNTING_DIETS = {
   lynx: [...small, "fox"],
   bobcat: [...small],
   "giant-spider": [
+    "snail",
+    "worm",
     "bee",
     "ladybug",
     "dragonfly",

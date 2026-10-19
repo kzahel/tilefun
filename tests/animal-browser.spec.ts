@@ -11,6 +11,11 @@ import {
 import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
 import { GROUND_PRIMATE_PROFILES } from "../src/wildlife/GroundPrimates.js";
 import { GROUND_SPECIALIST_PROFILES } from "../src/wildlife/GroundSpecialists.js";
+import {
+  LEGLESS_FAUNA_PROFILES,
+  LEGLESS_LAND_HUNTER_PROFILES,
+  LEGLESS_WATER_HUNTER_PROFILES,
+} from "../src/wildlife/LeglessCreatures.js";
 import { MORE_MAMMAL_PROFILES } from "../src/wildlife/MoreMammals.js";
 import { REPTILE_HUNTER_PROFILES } from "../src/wildlife/ReptileHunters.js";
 import { SEABIRD_PROFILES } from "../src/wildlife/Seabirds.js";
@@ -153,6 +158,7 @@ for (const animal of [
   ...FOREST_SPECIALIST_PROFILES,
   ...MORE_MAMMAL_PROFILES,
   ...SHORE_MAMMAL_PROFILES,
+  ...LEGLESS_FAUNA_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
@@ -205,6 +211,8 @@ for (const animal of [
   ...DISTINCT_FISH_HUNTER_PROFILES,
   ...REPTILE_HUNTER_PROFILES,
   ...FOREST_HUNTER_PROFILES,
+  ...LEGLESS_LAND_HUNTER_PROFILES,
+  ...LEGLESS_WATER_HUNTER_PROFILES,
 ]) {
   test(`${animal.species} browser display opens a real moving shared hunter`, async ({ page }) => {
     await page.goto(

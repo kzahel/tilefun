@@ -18592,5 +18592,470 @@
         "sha256": "843d2c2f0ab52541d02bc9d2492b75219981f0c83cdc0c67f167329a18ba6df3"
       }
     ]
+  },
+  {
+    "id": "gaboon-viper-roster-v3",
+    "animalId": "gaboon-viper",
+    "revision": "roster-v3",
+    "name": "Gaboon viper · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/gaboon-viper/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-gaboon-viper-roster-v3",
+      "name": "Gaboon viper sheet",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+      "source": "art-source/wildlife-v2/gaboon-viper/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-gaboon-viper-roster-v3-scene",
+      "name": "Gaboon viper scene",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "16ad7bbe4f206b4241d2a3ad30f71a0eaa1c7f31d829172f1d405cddcbe1f927",
+      "source": "art-source/wildlife-v2/gaboon-viper/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-gaboon-viper-roster-v3-contact",
+      "name": "Gaboon viper contact",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ca4dc3a92efcca15b139cedfbd016a5b596e73cd7bcf1466b5c39947fef4c901",
+      "source": "art-source/wildlife-v2/gaboon-viper/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/gaboon-viper/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/contact-sheet-native.png",
+        "sha256": "ca4dc3a92efcca15b139cedfbd016a5b596e73cd7bcf1466b5c39947fef4c901"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/index.html",
+        "sha256": "1ed308d9e7ee39bf5c03590805328698100877bbbaf9b541c9fc1cb2d9646e0b"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/pixel-audit.json",
+        "sha256": "ab6ee706fdb040122e91d3862ec7436b2be5c2964af4042cf0bc9f062ce66b17"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/preview-native.gif",
+        "sha256": "ada6782dd4aa97e7f8baf5ecf51c2a1f54e66e8bdc0946855ea518f3e89085ce"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/preview.gif",
+        "sha256": "955d99b20bc9b122de4b8a338df39b3b985ca7b399b50a9d931c6459835ba7d5"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/scene-native.png",
+        "sha256": "16ad7bbe4f206b4241d2a3ad30f71a0eaa1c7f31d829172f1d405cddcbe1f927"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+        "sha256": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/source-audit.json",
+        "sha256": "9abc70d2a89045d8808de2eaa5f9062c8cbce27667526ef622df06180a88351b"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/sprite.json",
+        "sha256": "88d4641dabd622aca50fd59160cb99729500af29da0337cc4d00c3f638d5fc77"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/travel-native.gif",
+        "sha256": "a4e814101fd480de49092e5f35ce8ce9183e764360dd167bf956749066715dcf"
+      },
+      {
+        "path": "demos/wildlife-v2/gaboon-viper/roster-v3/validation.json",
+        "sha256": "1196cca5c6a8d8116805b657f313077a78a290e6315eedaab74a3afdc556692b"
+      }
+    ]
+  },
+  {
+    "id": "snail-roster-v3",
+    "animalId": "snail",
+    "revision": "roster-v3",
+    "name": "Snail · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/snail/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-snail-roster-v3",
+      "name": "Snail sheet",
+      "image": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031",
+      "source": "art-source/wildlife-v2/snail/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-snail-roster-v3-scene",
+      "name": "Snail scene",
+      "image": "demos/wildlife-v2/snail/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "6b22f69e33b310ae3de3a06e878a868c04497d4ac676d19d0d7d2f3d37fd5c0a",
+      "source": "art-source/wildlife-v2/snail/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-snail-roster-v3-contact",
+      "name": "Snail contact",
+      "image": "demos/wildlife-v2/snail/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3a72d6603018d21d519b19f71e66fd8446d85207d79dcd8779b1cdd857bce29c",
+      "source": "art-source/wildlife-v2/snail/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/snail/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/contact-sheet-native.png",
+        "sha256": "3a72d6603018d21d519b19f71e66fd8446d85207d79dcd8779b1cdd857bce29c"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/index.html",
+        "sha256": "88730b203fcdb96988332b1726f554c71abaec366c0f12068165bf0b4310d466"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/pixel-audit.json",
+        "sha256": "9bb1c26832df08508083fab5710d4013ac3fe4e7e6cf2fd47449ed6fa377b455"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/preview-native.gif",
+        "sha256": "9cbd493aee0753a78fcab6658f51f1078d5342d3a33e5236f501910476c0b01b"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/preview.gif",
+        "sha256": "8e63c3f98e2b2082c9c327b6f0b07caa1046c80667af743214b2ab9041cd5dec"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/scene-native.png",
+        "sha256": "6b22f69e33b310ae3de3a06e878a868c04497d4ac676d19d0d7d2f3d37fd5c0a"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+        "sha256": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/source-audit.json",
+        "sha256": "58f77ffafad3b49efcd5cecb9d54bd2df68d0969bfb9798bc3931e70eb6adf9e"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/sprite.json",
+        "sha256": "dda62a1743bbee4c73efbb752b25d99300ea6aedb612663f321c0325a4cf2aba"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/travel-native.gif",
+        "sha256": "7f6610627fae297ce2c7f175329972a9e07463ecce0067d6fa6539aa27f24bb3"
+      },
+      {
+        "path": "demos/wildlife-v2/snail/roster-v3/validation.json",
+        "sha256": "bc78c33c72c7f68f59323d20563ddda3d68d68a0cd77277eb9d1dac302597c0b"
+      }
+    ]
+  },
+  {
+    "id": "worm-roster-v3",
+    "animalId": "worm",
+    "revision": "roster-v3",
+    "name": "Earthworm · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/worm/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-worm-roster-v3",
+      "name": "Earthworm sheet",
+      "image": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
+      "source": "art-source/wildlife-v2/worm/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-worm-roster-v3-scene",
+      "name": "Earthworm scene",
+      "image": "demos/wildlife-v2/worm/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "de418fb8947c0f94d1a80fba0c4b5e5cd76f18f189eeadbf4fda996d480c1ae7",
+      "source": "art-source/wildlife-v2/worm/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-worm-roster-v3-contact",
+      "name": "Earthworm contact",
+      "image": "demos/wildlife-v2/worm/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "6c223d1c767e4d0b4ea23e7e28afc9a8d385cf7c5cb415adead30e0b20aa96d2",
+      "source": "art-source/wildlife-v2/worm/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/worm/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/contact-sheet-native.png",
+        "sha256": "6c223d1c767e4d0b4ea23e7e28afc9a8d385cf7c5cb415adead30e0b20aa96d2"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/index.html",
+        "sha256": "cb4f967d6b114d7532b2b448c2f0b54adacc1456a409a9242392449d06c239d0"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/pixel-audit.json",
+        "sha256": "19d14f5a48b7b5757be5d4942d30c063f76345585fc60e2e278da01ba577204b"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/preview-native.gif",
+        "sha256": "c40cc44816572ec5203e6bb7ffd09edd73e57f7de62644c5afee0f5693665547"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/preview.gif",
+        "sha256": "876785df409a6c541167634682c5bbd0c66f8e88f5232895c08b20400064a679"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/scene-native.png",
+        "sha256": "de418fb8947c0f94d1a80fba0c4b5e5cd76f18f189eeadbf4fda996d480c1ae7"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+        "sha256": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/source-audit.json",
+        "sha256": "52457f8217eb8482381f8def8018353acbfd458b430bbade17d332cfc42ed60e"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/sprite.json",
+        "sha256": "a5f2494390a2903f44c592f484e744d1b2269732b1d91090f90ec795f218501c"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/travel-native.gif",
+        "sha256": "9bd7a94df968842710b23000a52247a685a27b10e5088947c6db6f9e076c9768"
+      },
+      {
+        "path": "demos/wildlife-v2/worm/roster-v3/validation.json",
+        "sha256": "1bf791d9b34c56eae8ab8d01f1b71fd1585569b02157f0a8bbffd6a21fbc81cb"
+      }
+    ]
+  },
+  {
+    "id": "moray-eel-roster-v3",
+    "animalId": "moray-eel",
+    "revision": "roster-v3",
+    "name": "Moray eel · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/moray-eel/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-moray-eel-roster-v3",
+      "name": "Moray eel sheet",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+      "source": "art-source/wildlife-v2/moray-eel/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-moray-eel-roster-v3-scene",
+      "name": "Moray eel scene",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "65205b7dca191ae37b4c8a0e2d2174871c778f81047df928f664f7db66e4efb8",
+      "source": "art-source/wildlife-v2/moray-eel/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-moray-eel-roster-v3-contact",
+      "name": "Moray eel contact",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5c8f82c9e80a2ea3616e2cb1b8a812c07ccea7b4e7831ac8043d59a73ce70103",
+      "source": "art-source/wildlife-v2/moray-eel/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/moray-eel/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/contact-sheet-native.png",
+        "sha256": "5c8f82c9e80a2ea3616e2cb1b8a812c07ccea7b4e7831ac8043d59a73ce70103"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/index.html",
+        "sha256": "a91d649bbb3a717154336006734a5fa4cb0be2b60a2d04d76393e436d92828ab"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/pixel-audit.json",
+        "sha256": "b18ccd023daa4db0ea95bf5001fda2ffe280df8e7ba06b7aa58b6cf58d618012"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/preview-native.gif",
+        "sha256": "f53ae6518fe0a2fd576abb18808ca2042eddbde9747635ab8a5ce36350c4e67b"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/preview.gif",
+        "sha256": "d7325531c364a83c7ed61f81b0da9a72864f1b7df05a77c0244bf995b596fe05"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/scene-native.png",
+        "sha256": "65205b7dca191ae37b4c8a0e2d2174871c778f81047df928f664f7db66e4efb8"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+        "sha256": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/source-audit.json",
+        "sha256": "d90fa98cabf06eb00d57d88283e688847bf024334566017d71a492ea8e3b3e6c"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/sprite.json",
+        "sha256": "46c5e137f3e3273664542cd8695f509e2094b755617b2ddc692a0e9107c07af1"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/travel-native.gif",
+        "sha256": "7f279b1049e252a6b71f49e6109591543ebd5b290b9b76eb35c87edc202be7a9"
+      },
+      {
+        "path": "demos/wildlife-v2/moray-eel/roster-v3/validation.json",
+        "sha256": "7504dddc293637f954aa06bd8ea9dcf2442ce27344f9067ef78d47bb5c82bf03"
+      }
+    ]
+  },
+  {
+    "id": "electric-eel-roster-v3",
+    "animalId": "electric-eel",
+    "revision": "roster-v3",
+    "name": "Electric eel · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/electric-eel/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-electric-eel-roster-v3",
+      "name": "Electric eel sheet",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
+      "source": "art-source/wildlife-v2/electric-eel/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-electric-eel-roster-v3-scene",
+      "name": "Electric eel scene",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "b6d44cd1ac0e361001359aa0eefafe806962fad41a535ac01d23e62e7d0892d4",
+      "source": "art-source/wildlife-v2/electric-eel/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-electric-eel-roster-v3-contact",
+      "name": "Electric eel contact",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1a04b6279917c1290ffcbbc6e6abb87932d7c40c67ca1560dc92447f0cf5deda",
+      "source": "art-source/wildlife-v2/electric-eel/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/electric-eel/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/contact-sheet-native.png",
+        "sha256": "1a04b6279917c1290ffcbbc6e6abb87932d7c40c67ca1560dc92447f0cf5deda"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/index.html",
+        "sha256": "0d940dbd6cc05e4f56590da65e4340dfa4017671408fc9781385353ec98dfc1a"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/pixel-audit.json",
+        "sha256": "18b090fc4a8b4dffb0eeea3100535254f3cfa31181d584b8b34a2bf05e6e9b84"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/preview-native.gif",
+        "sha256": "cd71206037f8544042d5ecac64a202881885891466aae4dd59abb80ab0ff95f6"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/preview.gif",
+        "sha256": "5213d38454bd7e85ec139addacebee31e690a95868f55d30e0d9e13648e44fab"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/scene-native.png",
+        "sha256": "b6d44cd1ac0e361001359aa0eefafe806962fad41a535ac01d23e62e7d0892d4"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+        "sha256": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/source-audit.json",
+        "sha256": "613b8eb04e0276d9864743ec599f09c29b1c34f17baafc014ab7373c19265b73"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/sprite.json",
+        "sha256": "1381334e72f87caa9889278e3e2efb47fd5dd6eccb9e85174bae8b9a738c47da"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/travel-native.gif",
+        "sha256": "561f22a86f6c3f2ab94f1991886d4e30e7d310c1b84edda9e60fbd207919f175"
+      },
+      {
+        "path": "demos/wildlife-v2/electric-eel/roster-v3/validation.json",
+        "sha256": "fcb56409f3ea3bd9d92263d13fb1756d4e5e4bf3667d794032db5894c5b2900b"
+      }
+    ]
   }
 ]

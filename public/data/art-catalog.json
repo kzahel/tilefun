@@ -596,6 +596,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-gaboon-viper-predator-v1",
+      "name": "wildlife gaboon viper predator v1",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-tasmanian-devil-predator-v1",
       "name": "wildlife tasmanian devil predator v1",
       "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
@@ -623,6 +633,26 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-moray-eel-predator-v1",
+      "name": "wildlife moray eel predator v1",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-electric-eel-predator-v1",
+      "name": "wildlife electric eel predator v1",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -1803,6 +1833,26 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-snail-provisional-v1",
+      "name": "wildlife snail provisional v1",
+      "image": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-worm-provisional-v1",
+      "name": "wildlife worm provisional v1",
+      "image": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -5356,6 +5406,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-gaboon-viper-roster-v3",
+      "name": "wildlife v2 gaboon viper roster v3",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-snail-roster-v3",
+      "name": "wildlife v2 snail roster v3",
+      "image": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-worm-roster-v3",
+      "name": "wildlife v2 worm roster v3",
+      "image": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-moray-eel-roster-v3",
+      "name": "wildlife v2 moray eel roster v3",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-electric-eel-roster-v3",
+      "name": "wildlife v2 electric eel roster v3",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -7759,11 +7859,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1094"
+          "source": "src/generation/regional/NaturalLandscape.ts:1096"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1288"
+          "source": "src/generation/regional/NaturalLandscape.ts:1290"
         },
         {
           "system": "World generation",
@@ -27070,6 +27170,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-gaboon-viper-predator-v1",
+      "sheetId": "wildlife-gaboon-viper-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-gaboon-viper-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-tasmanian-devil-predator-v1",
       "sheetId": "wildlife-tasmanian-devil-predator-v1",
       "rect": [
@@ -27115,6 +27233,42 @@
         384
       ],
       "label": "wildlife-anglerfish-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-moray-eel-predator-v1",
+      "sheetId": "wildlife-moray-eel-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-moray-eel-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-electric-eel-predator-v1",
+      "sheetId": "wildlife-electric-eel-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-electric-eel-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -29256,6 +29410,42 @@
       ]
     },
     {
+      "id": "sprite:wildlife-snail-provisional-v1",
+      "sheetId": "wildlife-snail-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-snail-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-worm-provisional-v1",
+      "sheetId": "wildlife-worm-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-worm-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -31289,7 +31479,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:960"
+          "source": "src/wildlife/Fauna.ts:961"
         },
         {
           "system": "Gameplay",
@@ -31301,15 +31491,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:243"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:398"
+          "source": "src/wildlife/FoodWeb.ts:422"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:577"
+          "source": "src/wildlife/FoodWeb.ts:601"
         },
         {
           "system": "Gameplay",
@@ -31371,39 +31561,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:34"
+          "source": "src/wildlife/Fauna.ts:35"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:231"
+          "source": "src/wildlife/Fauna.ts:232"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:153"
+          "source": "src/wildlife/FoodWeb.ts:157"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:449"
+          "source": "src/wildlife/FoodWeb.ts:473"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:466"
+          "source": "src/wildlife/FoodWeb.ts:490"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:483"
+          "source": "src/wildlife/FoodWeb.ts:507"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:522"
+          "source": "src/wildlife/FoodWeb.ts:546"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:550"
+          "source": "src/wildlife/FoodWeb.ts:574"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:577"
+          "source": "src/wildlife/FoodWeb.ts:601"
         }
       ]
     },
@@ -31457,23 +31647,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:215"
+          "source": "src/wildlife/FoodWeb.ts:225"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:232"
+          "source": "src/wildlife/FoodWeb.ts:244"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:399"
+          "source": "src/wildlife/FoodWeb.ts:423"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:577"
+          "source": "src/wildlife/FoodWeb.ts:601"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:578"
+          "source": "src/wildlife/FoodWeb.ts:602"
         },
         {
           "system": "Gameplay",
@@ -31519,7 +31709,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:578"
+          "source": "src/wildlife/FoodWeb.ts:602"
         }
       ]
     },
@@ -31565,7 +31755,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:579"
+          "source": "src/wildlife/FoodWeb.ts:603"
         }
       ]
     },
@@ -31611,7 +31801,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:580"
+          "source": "src/wildlife/FoodWeb.ts:604"
         }
       ]
     },
@@ -31657,7 +31847,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:581"
+          "source": "src/wildlife/FoodWeb.ts:605"
         }
       ]
     },
@@ -31815,11 +32005,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:234"
+          "source": "src/wildlife/FoodWeb.ts:246"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:577"
+          "source": "src/wildlife/FoodWeb.ts:601"
         },
         {
           "system": "Gameplay",
@@ -31869,7 +32059,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:577"
+          "source": "src/wildlife/FoodWeb.ts:601"
         },
         {
           "system": "Gameplay",
@@ -32923,11 +33113,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1094"
+          "source": "src/generation/regional/NaturalLandscape.ts:1096"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1288"
+          "source": "src/generation/regional/NaturalLandscape.ts:1290"
         },
         {
           "system": "World generation",

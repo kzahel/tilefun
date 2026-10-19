@@ -234,6 +234,26 @@ manifest and streaming readiness pass. Exact art pending human review.
 five marine oddities are in source verification/refinement.
 
 
+Thirteenth checkpoint: Gaboon viper, snail, earthworm, moray eel and electric eel
+join seeded worlds, placement and the browser. Original closed fixed body chains,
+overlap joints, attached jaws, moving painted bodies and exact loop seams replace
+leg-based assumptions. Ground forms retain under0.03world-unit clearance; eels
+use shared deep-water authority. Viper hunts mouse prey; eels hunt aquatic prey;
+snail/worm crawl, forage and escape. Directed meals preserve delayed natural-only
+replacement. Electrical discharge and burrowing are future work.
+Natural hunter profiles can now specify their clearing prey. The viper receives
+actual mice in both its lab and ordinary natural clearing; existing hunters keep
+their rabbit defaults and stable identities. Shared source/ecology/meal tests
+support the configured prey rather than assuming every hunter eats a rabbit.
+Validation: **5,345 full-unit passes**, five known Windows failures and ten skips;
+49 focused checks; **28 browser cases /744 visible previews**; five exact replays
+and2,600 native/3x crops. Typecheck, isolated lint/build,1,665-candidate normal
+Chromium inventory and streaming readiness pass. Inbox/art notes: no pending
+requests. All exact art pending human review. **176/196 implemented;20 remaining.**
+Eight arthropods, five marine oddities and five crustacean/chelicerate prototypes
+are in source work; two upright companions remain queued.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted
