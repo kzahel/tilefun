@@ -61,6 +61,11 @@ The combined Beetle/bus production run covers 14 cases, seven per family: own GP
 model, failed-mesh fallback/roof support, mobile placement/boarding/driving/save/
 reload/deletion in Canvas/GPU/failed modes, and forward/reverse rolling turns with
 stopped heading. The broader unit run encountered known Windows failures and
-load timeouts; a lower-concurrency full rerun is in progress. Its final result
-will be recorded at the following pickup checkpoint. No whole-browser-suite pass
-is claimed.
+load timeouts. The completed lower-concurrency rerun passes 4,967 tests with the
+same five known Windows symlink/process-signal failures and ten static-server
+skips; all new vehicle checks pass. The first high-concurrency attempt was stopped
+while a long wildlife file was still active after several load timeouts; no clean
+result is claimed for that attempt. No whole-browser-suite pass is claimed.
+
+Integration is committed/pushed as `baa84509`; [151](151-pickup-pipeline-review.md)
+records the subsequent pickup appearance-review checkpoint.

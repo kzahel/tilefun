@@ -93,3 +93,9 @@ checks and compares the entire standalone HTML with the deterministic embedding
 of the frozen JS, CSS, manifest and every image/JSON/GLB/GIF asset. A baseline is
 optional extra evidence that earlier candidates remained byte-identical during
 a new authoring session. Never run `assemble` or `freeze` on a finished revision.
+
+The pickup review uses the same frozen-only commands with
+`scripts/vehicle-bake/family-pickup.json`, producing
+`data/vehicle-bake/pickup-review.html`. Its real open-bed triangle-ray proof is
+separate from neutral wheel clearance and visual coverage. Keep all three checks
+when adapting the family to another cargo vehicle.

@@ -51,6 +51,13 @@ side-owned door/window paint and a fresh-clone frozen-only offline command. Use
 `family-regression.mjs` when changing the review harness; old Beetle pixels must
 stay exact. New retained-input-map receipts use `runtime-export-v2.py`; preserve
 the original exporter because the Beetle's historical provenance pins its bytes.
+The pickup example in tactical 151 adds a real recessed cargo bed: floor, inner
+walls, wheelhouses, cab rear and tailgate own separate surface paint. Use its own
+`scripts/vehicle-bake/pickup/` geometry and bed-depth triangle-ray probe alongside
+native rear-oblique inspection. A dark top deck does not qualify an open bed.
+Its radius-8 wheels and coverage region are family-specific; the usual whole-body
+roll, far-crown visual checks and source-only replay still apply. Pickup runtime
+activation waits for owner appearance review.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

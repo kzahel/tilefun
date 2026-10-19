@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: red coupe, Beetle and school bus integrated; pickup review preparation in progress.
+Status: red coupe, Beetle and school bus integrated; pickup v1 delivered for appearance review.
 Updated: 2026-10-19.
 
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
@@ -110,6 +110,23 @@ collision, driving, roof support, streaming and save paths handle the new type.
 The combined rolling-steering implementation uses its measured 57.4px turning
 radius. Final Canvas/GPU checks include forward/reverse rolling turns, stopped
 heading, placement, boarding, save/reload/deletion and failed-mesh fallback.
+
+School-bus runtime integration is committed and pushed as `baa84509`. The exact
+reviewed model, fallback and measured bounds ship through ordinary editor/road
+traffic and game/lab paths. Fourteen combined Beetle/bus production-browser cases
+pass; [150](../tactical/150-school-bus-gameplay.md) owns detailed evidence.
+
+Pickup v1 is now a separate **2,984-triangle**, five-mesh candidate with one opaque
+512² unlit atlas (207,472 GLB bytes). It has a teal regular cab, rounded hood,
+continuous framed blue glass and a real recessed open cargo bed with inner walls,
+wheelhouses and tailgate. Its own semantic UV topology and four radius-8 wheels
+use the same pixel presentation. Actual full-roll clearance, explicit crown
+support, real bed-floor triangle rays, source-only replay and all 32 study/game
+views pass; visual inspection is separate from those geometric proofs.
+[151](../tactical/151-pickup-pipeline-review.md) owns the frozen review and retained
+source. Open `data/vehicle-bake/pickup-review.html` for standalone inspection.
+Pickup gameplay activation awaits owner appearance feedback. The remaining four
+queue entries are proposals and have not started.
 
 ## Pipeline invariants
 

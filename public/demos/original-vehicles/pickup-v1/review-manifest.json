@@ -1,0 +1,1041 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "pickup-v1",
+      "name": "Teal blue pickup truck",
+      "title": "Teal blue pickup truck \u00b7 classic regular cab experiment v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original pickup-specific semantic UV paint on actual cab/hood skin and explicit cargo components. No source projection, screen redraw or high-to-low transfer.",
+      "audit": {
+        "triangles": 2984,
+        "vertices": 5722,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 207472,
+        "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/pickup/v1/atlas.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/atlas.png",
+          "sha256": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/capture.json",
+          "sha256": "3583135ee3548d3194d1869a92dd4dbd5abca56de8135a9a47d15d7716336fd4"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-0.png",
+          "sha256": "7c721d01f2473d4b2d962d2ff608c7a637eb3912f3b0dc425698d48d5feb4212"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-1.png",
+          "sha256": "ec4f0ad4453c8d82ee606467598570cafb07ccb02cc8c93e9cd57be81e51a81a"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-10.png",
+          "sha256": "472181d06da39c0f086dd1298753c99b32ce2f3f60b19d6e99236c244143f00f"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-11.png",
+          "sha256": "d30098f4fcb9533f7dd409b19927e8d3a7ddc0d20215dbf4f38f282ae005a8f4"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-12.png",
+          "sha256": "e811cd6be6084f0aa9eab7fde1cb0f0839717128c52ecc8c88b4fc47d06ade39"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-13.png",
+          "sha256": "0459998f1ebdd8131c2fbabb98251636cff0a0dcbb6ba513a17d64208ca09631"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-14.png",
+          "sha256": "7986b89b62483efab8a3e5ca48ea47e7931bd93c1692b4499d93e897533c17c0"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-15.png",
+          "sha256": "525f03cbee932e8a9cfe0121cff04efbf9d3c9829c413359d4ffdfccd0dd781d"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-1x.png",
+          "sha256": "4f5f90db8c35a6aa8a66f706a4f20f96ab96e46f4cef51133a4055755bf2568d"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-2.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-2x.png",
+          "sha256": "dc252fb7b9ab3474daae04066f6d1d10d1fa3b8a886fd6b5f6eec381b14ff893"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-3.png",
+          "sha256": "f091e8637d6c6978967928f125a9f1413129621f052318179ea5cf49453c7c9c"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-3x.png",
+          "sha256": "3e222fa1caf0f7f847128d9e4e55c0518cda5811911010b2dbebf978af8a30db"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-4.png",
+          "sha256": "78104fbdbc48ce4806b298dbd70f9febacd3baf1e7e4bde1612b80a4e3fdeb85"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-5.png",
+          "sha256": "7f9386023e9a648d40f05190393cbe80258ced5def470895532636b4ef7c8248"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-6.png",
+          "sha256": "3327a21e9c0b00538b269c972f5644a2b619449f32a303879ae40b91c8bcc78f"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-7.png",
+          "sha256": "4aac92d5abd6914975470dcc2b62d515cf47fbcddc1ec427c8793b38ee3286f6"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-8.png",
+          "sha256": "51456395a7efb2da66e52d4907f5c542fdebfc1de3526e1bd62f8c3807371b8f"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/engine-9.png",
+          "sha256": "bb010cfb5f9e06aecb3e1a96656503d236ab7f4101e1d1b6a6f1567e9479cc09"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-0.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-1.png",
+          "sha256": "62a31c1f8dc866deb535e557ceb9c72052ee58409840a954f71ae94267227173"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-2.png",
+          "sha256": "dd9a0d9a4f1d1aec85c0154cb5c024c7b7a33d67f58a1dbac8068086c71feacf"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-3.png",
+          "sha256": "8dea83e5e72a6bba8dba12fd49026583e228417653ee243eedde51bce9f0d888"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c2869710cd1b7e70af61137d6b86b53b39c304a0da5bb98a4d87c357ebde71eb"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-5.png",
+          "sha256": "095941d0a8bc906c41a23457426d65da50563ec2abc694f69124c2eac60e9d56"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-6.png",
+          "sha256": "73b0cedb05e3c9135f09676d5214af729c0be1c0421e3566c71e40fb46fc8063"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-7.png",
+          "sha256": "eff146fad3ed9c0506023ad22795dd701502cb65d39b1b3af9dae789963890ac"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/inspection-engine.png",
+          "sha256": "e716bd89ce575b45f9c408800da435cb67a69407abae08700d873cc967da483e"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/inspection-phases.png",
+          "sha256": "f1891bf670e80852c4a8c36142c5cfabadad25524dda62c3bfd0f9035638674d"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/inspection-study.png",
+          "sha256": "55d1e7c4f3e0cbf3c9a14741ffc53ba0de80d4ade5dacda7cb0750750cbc0fc1"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-0.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-1.png",
+          "sha256": "050de001a9d9d23c6e21c5b4ff9976ac15600e19f021cdd47f2bd027589fc7f4"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-2.png",
+          "sha256": "54a3468d8da27e07eb9dd893b4caa0037e7e76e9687d21f37946a0d4c9a03263"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-3.png",
+          "sha256": "71bc04dfc803102880579e148b53b952fe886fa9d10d91fa8309de67503d2127"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-4.png",
+          "sha256": "2a635d876bcfa3be8289fb7b5e26a370b081d678a10df6befed44388862cf3e4"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-5.png",
+          "sha256": "17ee5111c0f9013dfd77b56d2fa8dd588715388ae16b249ee934bd2c1fd0dde2"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-6.png",
+          "sha256": "89abe6b77f9fd95888488f5099d93d1c453af663d94622e7ab2c60801ad63b67"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/roll-7.png",
+          "sha256": "9d73e2b48691d36b27f9d77b175d9581626eb5ad98a67ce69a96e0522ae369b0"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-0.png",
+          "sha256": "7d4b6c3b10e726e88bab7fc39b555a097d72de6cac1bfb2a98ccaba6bbae3f77"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-1.png",
+          "sha256": "a837f2c13741bf2089534a490b30454256e5e5a28772649e029704ddff6128a1"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-10.png",
+          "sha256": "8b4010d022d661c4ce9e2d393c74ff13cb767169d2a3e58f2c981040e55ccff0"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-11.png",
+          "sha256": "3c7bbea5f0a60eb17b8ac36cba5e35fc6de3fbb21106288c42066fbdc4c44360"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-12.png",
+          "sha256": "16721c55e586b4559ce1b71da26f5fb6ba4fbf41a2fe0da207710cc9ab2ea1f4"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-13.png",
+          "sha256": "b3d02d210cd2865965a2dff8b1a2031567695d18c67f1496468ecedf633f21bc"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-14.png",
+          "sha256": "fa0b0853ba2f07c2971ec1f4ba8b4428d88e02ffa60cd56bf5a9a7f9217a37b0"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-15.png",
+          "sha256": "cb1a9484bb3144f224f1268fa80cbfdf5a72c7d51caa91bb34e0091c69fcf8be"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-1x.png",
+          "sha256": "124576a30896f6a726cef1e972cda52b7952d8bc211c852205719047a1ac891a"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-2.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-2x.png",
+          "sha256": "678889b3faae7dcf704ee07c6acadffcc4efc2e9dcdb69c2297c62e78eb2824e"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-3.png",
+          "sha256": "f5cd1d2318b6e2293cbe409c14106d73aa45bfb56b096b3f44bcf1b61a00c36b"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-3x.png",
+          "sha256": "0a16132c1094497075c605afa0352ffb3e40eea35124bc1eaecf133ec787f5f9"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-4.png",
+          "sha256": "28e8473869a5e78b82cb5d5ca20c4469e550522b079166d637840b8f30a27928"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-5.png",
+          "sha256": "1ca589a25ce09ca9c504cf2247e9446a5a3b236349235d1d9d8ab72991e62066"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-6.png",
+          "sha256": "39b35d0391bdbedfc3d4cd08a7ee57d836275c14c7d5ba820c36dad67318083c"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-7.png",
+          "sha256": "73ea369fd70c39878166c7127a4064a73f2d029e124d871b2d01279e9cf517c1"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-8.png",
+          "sha256": "cbb4a6acf885ef04f3f71be49eb181eada0ec029e9dd60715643847d4f923016"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/study-9.png",
+          "sha256": "90df210c4fc2a1723f8696567443a2bfb9536aab344eeff589223a2d66dd7059"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/wire-engine.png",
+          "sha256": "2de6c517385cc023b5d67906e98fde546a6b934b59ee18b44e9258c3df7afe11"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/engine/wire-study.png",
+          "sha256": "6614dc03b170caa78e8733ccf4f282f74df03480b5e3de03a78d62db0be511ac"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/model.glb",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/model.glb",
+          "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/recipe.json",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/recipe.json",
+          "sha256": "74db2f17912a4abeee28942bcf2fdfe9d131115817f3e2cf6d008c1b329ca8c9"
+        },
+        {
+          "source": "demos/vehicle-bake/pickup/v1/report.json",
+          "retained": "demos/original-vehicles/pickup-v1/inputs/report.json",
+          "sha256": "cb6d795636daefdac89c636dcbf018ca01ec1eda1757ca590d2425fc63005851"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/pickup-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "pickup--v1",
+          "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+          "triangles": 2984,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 8.000001907348633,
+              "minimumGap": 1.5333348208295288,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 8.000001907348633,
+              "minimumGap": 1.5333348208295288,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 8.000001171379068,
+              "minimumGap": 1.5333365373963765,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 8.000001171379068,
+              "minimumGap": 1.5333365373963765,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 8.000000000000002,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/pickup-v1/browser-qa.json",
+          "sha256": "3bfb00b01c763334f66fd25bdbac802cf4718e543a092549c50208631d9ea99b"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/candidate.json",
+          "sha256": "5467a78a96599c74f35e921f96dd698bf1a80b4e9e710cf2be67bccb4a2b86b1"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/capture.json",
+          "sha256": "3583135ee3548d3194d1869a92dd4dbd5abca56de8135a9a47d15d7716336fd4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/contact-sheet.png",
+          "sha256": "3d9fc126d3ee12ecaba6710addc72a282889e18c7270928ac6cddbf846c2a831"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-0.png",
+          "sha256": "7c721d01f2473d4b2d962d2ff608c7a637eb3912f3b0dc425698d48d5feb4212"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-1.png",
+          "sha256": "ec4f0ad4453c8d82ee606467598570cafb07ccb02cc8c93e9cd57be81e51a81a"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-10.png",
+          "sha256": "472181d06da39c0f086dd1298753c99b32ce2f3f60b19d6e99236c244143f00f"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-11.png",
+          "sha256": "d30098f4fcb9533f7dd409b19927e8d3a7ddc0d20215dbf4f38f282ae005a8f4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-12.png",
+          "sha256": "e811cd6be6084f0aa9eab7fde1cb0f0839717128c52ecc8c88b4fc47d06ade39"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-13.png",
+          "sha256": "0459998f1ebdd8131c2fbabb98251636cff0a0dcbb6ba513a17d64208ca09631"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-14.png",
+          "sha256": "7986b89b62483efab8a3e5ca48ea47e7931bd93c1692b4499d93e897533c17c0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-15.png",
+          "sha256": "525f03cbee932e8a9cfe0121cff04efbf9d3c9829c413359d4ffdfccd0dd781d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-1x.png",
+          "sha256": "16d8814a5a328bbce1be1f95b46a7964c8e4e5867e7102cfd227e370395951b3"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-2.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-2x.png",
+          "sha256": "87b36cb2f06ee49deaee8fc1024eabdedc356476b84b8cfa81db7a424889c769"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-3.png",
+          "sha256": "f091e8637d6c6978967928f125a9f1413129621f052318179ea5cf49453c7c9c"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-3x.png",
+          "sha256": "fd984e3e41185c726e5e6534a6fd59afb15f2967c01d9dda3ef6594fc4cd158a"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-4.png",
+          "sha256": "78104fbdbc48ce4806b298dbd70f9febacd3baf1e7e4bde1612b80a4e3fdeb85"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-5.png",
+          "sha256": "7f9386023e9a648d40f05190393cbe80258ced5def470895532636b4ef7c8248"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-6.png",
+          "sha256": "3327a21e9c0b00538b269c972f5644a2b619449f32a303879ae40b91c8bcc78f"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-7.png",
+          "sha256": "4aac92d5abd6914975470dcc2b62d515cf47fbcddc1ec427c8793b38ee3286f6"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-8.png",
+          "sha256": "51456395a7efb2da66e52d4907f5c542fdebfc1de3526e1bd62f8c3807371b8f"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/engine-9.png",
+          "sha256": "bb010cfb5f9e06aecb3e1a96656503d236ab7f4101e1d1b6a6f1567e9479cc09"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-0.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-1.png",
+          "sha256": "62a31c1f8dc866deb535e557ceb9c72052ee58409840a954f71ae94267227173"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-2.png",
+          "sha256": "dd9a0d9a4f1d1aec85c0154cb5c024c7b7a33d67f58a1dbac8068086c71feacf"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-3.png",
+          "sha256": "8dea83e5e72a6bba8dba12fd49026583e228417653ee243eedde51bce9f0d888"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-4.png",
+          "sha256": "c2869710cd1b7e70af61137d6b86b53b39c304a0da5bb98a4d87c357ebde71eb"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-5.png",
+          "sha256": "095941d0a8bc906c41a23457426d65da50563ec2abc694f69124c2eac60e9d56"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-6.png",
+          "sha256": "73b0cedb05e3c9135f09676d5214af729c0be1c0421e3566c71e40fb46fc8063"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-roll-7.png",
+          "sha256": "eff146fad3ed9c0506023ad22795dd701502cb65d39b1b3af9dae789963890ac"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/game-turntable.gif",
+          "sha256": "789cdabf4628c729d9f7dd5600ee0fca6fc17647612f486c7a44c140753bda37"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-0.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-1.png",
+          "sha256": "050de001a9d9d23c6e21c5b4ff9976ac15600e19f021cdd47f2bd027589fc7f4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-2.png",
+          "sha256": "54a3468d8da27e07eb9dd893b4caa0037e7e76e9687d21f37946a0d4c9a03263"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-3.png",
+          "sha256": "71bc04dfc803102880579e148b53b952fe886fa9d10d91fa8309de67503d2127"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-4.png",
+          "sha256": "2a635d876bcfa3be8289fb7b5e26a370b081d678a10df6befed44388862cf3e4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-5.png",
+          "sha256": "17ee5111c0f9013dfd77b56d2fa8dd588715388ae16b249ee934bd2c1fd0dde2"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-6.png",
+          "sha256": "89abe6b77f9fd95888488f5099d93d1c453af663d94622e7ab2c60801ad63b67"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/roll-7.png",
+          "sha256": "9d73e2b48691d36b27f9d77b175d9581626eb5ad98a67ce69a96e0522ae369b0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-0.png",
+          "sha256": "7d4b6c3b10e726e88bab7fc39b555a097d72de6cac1bfb2a98ccaba6bbae3f77"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-1.png",
+          "sha256": "a837f2c13741bf2089534a490b30454256e5e5a28772649e029704ddff6128a1"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-10.png",
+          "sha256": "8b4010d022d661c4ce9e2d393c74ff13cb767169d2a3e58f2c981040e55ccff0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-11.png",
+          "sha256": "3c7bbea5f0a60eb17b8ac36cba5e35fc6de3fbb21106288c42066fbdc4c44360"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-12.png",
+          "sha256": "16721c55e586b4559ce1b71da26f5fb6ba4fbf41a2fe0da207710cc9ab2ea1f4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-13.png",
+          "sha256": "b3d02d210cd2865965a2dff8b1a2031567695d18c67f1496468ecedf633f21bc"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-14.png",
+          "sha256": "fa0b0853ba2f07c2971ec1f4ba8b4428d88e02ffa60cd56bf5a9a7f9217a37b0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-15.png",
+          "sha256": "cb1a9484bb3144f224f1268fa80cbfdf5a72c7d51caa91bb34e0091c69fcf8be"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-1x.png",
+          "sha256": "0894c393637850fd48717cdcaddc6544cc240f95c6cc83a3284540dcc77d1671"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-2.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-2x.png",
+          "sha256": "52dce18cbf6940571fb9f319adf160b2ee880f1ec2cdf54a7bcf3005c95f3d0a"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-3.png",
+          "sha256": "f5cd1d2318b6e2293cbe409c14106d73aa45bfb56b096b3f44bcf1b61a00c36b"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-3x.png",
+          "sha256": "db13c789338fbff765a8068e25709a6acfcea83bd41f4298e9f4941fab5b7599"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-4.png",
+          "sha256": "28e8473869a5e78b82cb5d5ca20c4469e550522b079166d637840b8f30a27928"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-5.png",
+          "sha256": "1ca589a25ce09ca9c504cf2247e9446a5a3b236349235d1d9d8ab72991e62066"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-6.png",
+          "sha256": "39b35d0391bdbedfc3d4cd08a7ee57d836275c14c7d5ba820c36dad67318083c"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-7.png",
+          "sha256": "73ea369fd70c39878166c7127a4064a73f2d029e124d871b2d01279e9cf517c1"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-8.png",
+          "sha256": "cbb4a6acf885ef04f3f71be49eb181eada0ec029e9dd60715643847d4f923016"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/study-9.png",
+          "sha256": "90df210c4fc2a1723f8696567443a2bfb9536aab344eeff589223a2d66dd7059"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/turntable.gif",
+          "sha256": "08eba5cdd59af6c630a526e94c1906d611e9138dd0b7fec7ea254e96388f78a5"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/viewer-desktop.png",
+          "sha256": "edaa0b2f1d2e11f4782409c0550b415d5b3d27812f2ea8a638ce23847cc2b62b"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/viewer-mobile.png",
+          "sha256": "edb49c8896072dcf0bb33fb6adb294879e8de5953f1b4cf82ad5e19170cb8368"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/wheel-phases.png",
+          "sha256": "2be43b59a2004c0f6db6c4dd9a04b57c04b77fd2d49296ab2ec6a4b0b66a996d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/wire-engine.png",
+          "sha256": "2de6c517385cc023b5d67906e98fde546a6b934b59ee18b44e9258c3df7afe11"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/captures/wire-study.png",
+          "sha256": "6614dc03b170caa78e8733ccf4f282f74df03480b5e3de03a78d62db0be511ac"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/clearance.json",
+          "sha256": "6831b9d4debf9f16f202a8f9d66162c7b34226981041e8c0e954a1f63b9b12ed"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/index.html",
+          "sha256": "853d41659899ccc147c60d1a30f1475233b2c963692a6f8e562eadb49a40af56"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/atlas.png",
+          "sha256": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/capture.json",
+          "sha256": "3583135ee3548d3194d1869a92dd4dbd5abca56de8135a9a47d15d7716336fd4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-0.png",
+          "sha256": "7c721d01f2473d4b2d962d2ff608c7a637eb3912f3b0dc425698d48d5feb4212"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-1.png",
+          "sha256": "ec4f0ad4453c8d82ee606467598570cafb07ccb02cc8c93e9cd57be81e51a81a"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-10.png",
+          "sha256": "472181d06da39c0f086dd1298753c99b32ce2f3f60b19d6e99236c244143f00f"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-11.png",
+          "sha256": "d30098f4fcb9533f7dd409b19927e8d3a7ddc0d20215dbf4f38f282ae005a8f4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-12.png",
+          "sha256": "e811cd6be6084f0aa9eab7fde1cb0f0839717128c52ecc8c88b4fc47d06ade39"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-13.png",
+          "sha256": "0459998f1ebdd8131c2fbabb98251636cff0a0dcbb6ba513a17d64208ca09631"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-14.png",
+          "sha256": "7986b89b62483efab8a3e5ca48ea47e7931bd93c1692b4499d93e897533c17c0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-15.png",
+          "sha256": "525f03cbee932e8a9cfe0121cff04efbf9d3c9829c413359d4ffdfccd0dd781d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-1x.png",
+          "sha256": "4f5f90db8c35a6aa8a66f706a4f20f96ab96e46f4cef51133a4055755bf2568d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-2.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-2x.png",
+          "sha256": "dc252fb7b9ab3474daae04066f6d1d10d1fa3b8a886fd6b5f6eec381b14ff893"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-3.png",
+          "sha256": "f091e8637d6c6978967928f125a9f1413129621f052318179ea5cf49453c7c9c"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-3x.png",
+          "sha256": "3e222fa1caf0f7f847128d9e4e55c0518cda5811911010b2dbebf978af8a30db"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-4.png",
+          "sha256": "78104fbdbc48ce4806b298dbd70f9febacd3baf1e7e4bde1612b80a4e3fdeb85"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-5.png",
+          "sha256": "7f9386023e9a648d40f05190393cbe80258ced5def470895532636b4ef7c8248"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-6.png",
+          "sha256": "3327a21e9c0b00538b269c972f5644a2b619449f32a303879ae40b91c8bcc78f"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-7.png",
+          "sha256": "4aac92d5abd6914975470dcc2b62d515cf47fbcddc1ec427c8793b38ee3286f6"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-8.png",
+          "sha256": "51456395a7efb2da66e52d4907f5c542fdebfc1de3526e1bd62f8c3807371b8f"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/engine-9.png",
+          "sha256": "bb010cfb5f9e06aecb3e1a96656503d236ab7f4101e1d1b6a6f1567e9479cc09"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-0.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-1.png",
+          "sha256": "62a31c1f8dc866deb535e557ceb9c72052ee58409840a954f71ae94267227173"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-2.png",
+          "sha256": "dd9a0d9a4f1d1aec85c0154cb5c024c7b7a33d67f58a1dbac8068086c71feacf"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-3.png",
+          "sha256": "8dea83e5e72a6bba8dba12fd49026583e228417653ee243eedde51bce9f0d888"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-4.png",
+          "sha256": "c2869710cd1b7e70af61137d6b86b53b39c304a0da5bb98a4d87c357ebde71eb"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-5.png",
+          "sha256": "095941d0a8bc906c41a23457426d65da50563ec2abc694f69124c2eac60e9d56"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-6.png",
+          "sha256": "73b0cedb05e3c9135f09676d5214af729c0be1c0421e3566c71e40fb46fc8063"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/game-roll-7.png",
+          "sha256": "eff146fad3ed9c0506023ad22795dd701502cb65d39b1b3af9dae789963890ac"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/inspection-engine.png",
+          "sha256": "e716bd89ce575b45f9c408800da435cb67a69407abae08700d873cc967da483e"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/inspection-phases.png",
+          "sha256": "f1891bf670e80852c4a8c36142c5cfabadad25524dda62c3bfd0f9035638674d"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/inspection-study.png",
+          "sha256": "55d1e7c4f3e0cbf3c9a14741ffc53ba0de80d4ade5dacda7cb0750750cbc0fc1"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-0.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-1.png",
+          "sha256": "050de001a9d9d23c6e21c5b4ff9976ac15600e19f021cdd47f2bd027589fc7f4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-2.png",
+          "sha256": "54a3468d8da27e07eb9dd893b4caa0037e7e76e9687d21f37946a0d4c9a03263"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-3.png",
+          "sha256": "71bc04dfc803102880579e148b53b952fe886fa9d10d91fa8309de67503d2127"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-4.png",
+          "sha256": "2a635d876bcfa3be8289fb7b5e26a370b081d678a10df6befed44388862cf3e4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-5.png",
+          "sha256": "17ee5111c0f9013dfd77b56d2fa8dd588715388ae16b249ee934bd2c1fd0dde2"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-6.png",
+          "sha256": "89abe6b77f9fd95888488f5099d93d1c453af663d94622e7ab2c60801ad63b67"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/roll-7.png",
+          "sha256": "9d73e2b48691d36b27f9d77b175d9581626eb5ad98a67ce69a96e0522ae369b0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-0.png",
+          "sha256": "7d4b6c3b10e726e88bab7fc39b555a097d72de6cac1bfb2a98ccaba6bbae3f77"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-1.png",
+          "sha256": "a837f2c13741bf2089534a490b30454256e5e5a28772649e029704ddff6128a1"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-10.png",
+          "sha256": "8b4010d022d661c4ce9e2d393c74ff13cb767169d2a3e58f2c981040e55ccff0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-11.png",
+          "sha256": "3c7bbea5f0a60eb17b8ac36cba5e35fc6de3fbb21106288c42066fbdc4c44360"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-12.png",
+          "sha256": "16721c55e586b4559ce1b71da26f5fb6ba4fbf41a2fe0da207710cc9ab2ea1f4"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-13.png",
+          "sha256": "b3d02d210cd2865965a2dff8b1a2031567695d18c67f1496468ecedf633f21bc"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-14.png",
+          "sha256": "fa0b0853ba2f07c2971ec1f4ba8b4428d88e02ffa60cd56bf5a9a7f9217a37b0"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-15.png",
+          "sha256": "cb1a9484bb3144f224f1268fa80cbfdf5a72c7d51caa91bb34e0091c69fcf8be"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-1x.png",
+          "sha256": "124576a30896f6a726cef1e972cda52b7952d8bc211c852205719047a1ac891a"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-2.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-2x.png",
+          "sha256": "678889b3faae7dcf704ee07c6acadffcc4efc2e9dcdb69c2297c62e78eb2824e"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-3.png",
+          "sha256": "f5cd1d2318b6e2293cbe409c14106d73aa45bfb56b096b3f44bcf1b61a00c36b"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-3x.png",
+          "sha256": "0a16132c1094497075c605afa0352ffb3e40eea35124bc1eaecf133ec787f5f9"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-4.png",
+          "sha256": "28e8473869a5e78b82cb5d5ca20c4469e550522b079166d637840b8f30a27928"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-5.png",
+          "sha256": "1ca589a25ce09ca9c504cf2247e9446a5a3b236349235d1d9d8ab72991e62066"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-6.png",
+          "sha256": "39b35d0391bdbedfc3d4cd08a7ee57d836275c14c7d5ba820c36dad67318083c"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-7.png",
+          "sha256": "73ea369fd70c39878166c7127a4064a73f2d029e124d871b2d01279e9cf517c1"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-8.png",
+          "sha256": "cbb4a6acf885ef04f3f71be49eb181eada0ec029e9dd60715643847d4f923016"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/study-9.png",
+          "sha256": "90df210c4fc2a1723f8696567443a2bfb9536aab344eeff589223a2d66dd7059"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/wire-engine.png",
+          "sha256": "2de6c517385cc023b5d67906e98fde546a6b934b59ee18b44e9258c3df7afe11"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/engine/wire-study.png",
+          "sha256": "6614dc03b170caa78e8733ccf4f282f74df03480b5e3de03a78d62db0be511ac"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/model.glb",
+          "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/recipe.json",
+          "sha256": "74db2f17912a4abeee28942bcf2fdfe9d131115817f3e2cf6d008c1b329ca8c9"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/inputs/report.json",
+          "sha256": "cb6d795636daefdac89c636dcbf018ca01ec1eda1757ca590d2425fc63005851"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/proofs/final-source-audit.json",
+          "sha256": "154a21074864430aa11b06665c2d59d47ba588a6016e0f81d1bad8cfafb50154"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/proofs/gif-audit.json",
+          "sha256": "25717c09cd31238ba96cb7d1ecb67251cf569441907e64d4c17af3fdd5de5208"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/proofs/independent-source-replay.json",
+          "sha256": "717f19fd1bbfd1318d5d8b4d696e40890a51f57ef0aa061347f0a42e8cd99baa"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/proofs/open-bed-geometry.json",
+          "sha256": "f58013bf9493fe35328d7d4d7c97f232e1c7e9dcc8babd3a1e1571383a1da13a"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/viewer.js",
+          "sha256": "f1241dd22ad00e0dcb4267b9b28b97ab768e7891881db1cf3fc9b790634c44aa"
+        },
+        {
+          "url": "demos/original-vehicles/pickup-v1/visual-inspection.json",
+          "sha256": "4859439b1173b47b596eba9a430e6ad400d4b39f940b5f757e2f74e3f24603a6"
+        }
+      ]
+    }
+  ]
+}

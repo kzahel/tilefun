@@ -1,0 +1,8 @@
+{
+  "candidates": [
+    {
+      "id": "pickup--v1",
+      "glb": "pickup/v1/model.glb"
+    }
+  ]
+}

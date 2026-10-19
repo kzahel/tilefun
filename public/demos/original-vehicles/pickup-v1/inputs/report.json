@@ -1,0 +1,401 @@
+{
+  "status": "complete",
+  "artReviewStatus": "awaiting-owner-review",
+  "family": "pickup",
+  "route": "pickup",
+  "revision": "v1",
+  "method": "Original pickup-specific semantic UV paint on actual cab/hood skin and explicit cargo components. No source projection, screen redraw or high-to-low transfer.",
+  "geometry": {
+    "triangles": 2984,
+    "vertices": 5722,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 207472,
+    "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.649999976158142,
+        -0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -28.695651759272042,
+        8.000000145124353,
+        15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.649999976158142,
+        0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -28.695651759272042,
+        8.000000145124353,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.6299999952316284,
+        -0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        28.347826004028324,
+        8.000000145124353,
+        15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.6299999952316284,
+        0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        28.347826004028324,
+        8.000000145124353,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/pickup/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/pickup/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/pickup/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "not integrated",
+  "triangles": 2984,
+  "vertexCount": 5722,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 207472,
+  "atlasBytes": 3284,
+  "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "atlasSha256": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "pickup--v1",
+    "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "triangles": 2984,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.5333348208295288,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.5333348208295288,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.000001171379068,
+        "minimumGap": 1.5333365373963765,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.000001171379068,
+        "minimumGap": 1.5333365373963765,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/pickup/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "minBlenderWorld": [
+      -46.69565200805664,
+      -19.478260040283203,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      47.21739196777344,
+      19.478260040283203,
+      35.13043212890625
+    ],
+    "dimensionsBlenderWorld": [
+      93.91304397583008,
+      38.956520080566406,
+      35.130431175231934
+    ],
+    "dimensionsSourceUnits": [
+      5.400000028610228,
+      2.239999904632568,
+      2.019999792575836
+    ]
+  },
+  "cargoBedEvidence": {
+    "status": "passed",
+    "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "centralDownwardRays": [
+      {
+        "xySource": [
+          0.8,
+          -0.35
+        ],
+        "firstSurfaceZSource": 0.7099997758865355
+      },
+      {
+        "xySource": [
+          0.8,
+          0
+        ],
+        "firstSurfaceZSource": 0.7100002694129943
+      },
+      {
+        "xySource": [
+          0.8,
+          0.35
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          1.2,
+          -0.35
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          1.2,
+          0
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          1.2,
+          0.35
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          1.8,
+          -0.35
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          1.8,
+          0
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          1.8,
+          0.35
+        ],
+        "firstSurfaceZSource": 0.7099997758865355
+      },
+      {
+        "xySource": [
+          2.2,
+          -0.35
+        ],
+        "firstSurfaceZSource": 0.7100000500679015
+      },
+      {
+        "xySource": [
+          2.2,
+          0
+        ],
+        "firstSurfaceZSource": 0.7099997758865355
+      },
+      {
+        "xySource": [
+          2.2,
+          0.35
+        ],
+        "firstSurfaceZSource": 0.7099997758865355
+      }
+    ],
+    "rayCount": 12
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/pickup/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/pickup/capture.mjs",
+    "python scripts/vehicle-bake/pickup/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/pickup/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/pickup/v1/evidence/clearance-input.json data/vehicle-bake/pickup/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/pickup/v1/model.glb --config art-source/vehicle-bake/pickup/v1/coverage-region.json --output data/vehicle-bake/pickup/recheck-coverage.json"
+  ],
+  "visualInspection": [
+    {
+      "evidence": "engine/inspection-study.png",
+      "headingCount": 16,
+      "finding": "Original teal regular-cab pickup reads clearly from all study headings. Rounded hood and short tall cab are separated from real open cargo tub. Continuous front windshield and both side-window blue clusters remain bounded by dark frames. Rear cab glass distinct from cargo floor. Far crowns under broad fender/body shoulders; near tires seated in open arches. No clipping or detached raised fender caps."
+    },
+    {
+      "evidence": "engine/inspection-engine.png",
+      "headingCount": 16,
+      "finding": "All unchanged game projection headings inspected at native density and nearest enlargement. Recessed dark floor, visible interior walls and raised rear wheelhouses read as open cargo bed, with bright metal rails and upright tailgate. No glass or deck across bed. Opposite heading pairs retain coherent paint and silhouette. Far wheels do not project above body/fenders; near tires retain dark open arch clearance."
+    },
+    {
+      "evidence": "engine/inspection-phases.png",
+      "phasesDegrees": [
+        0,
+        45,
+        90,
+        135,
+        -180,
+        -135,
+        -90,
+        -45
+      ],
+      "finding": "Eight signed roll phases per camera inspected. Body/fenders/glass/bed stay fixed. Tires remain seated and highlights roll; native hub aliases are ordinary angle sampling. Actual hierarchy audit additionally proves each independent wheel, fixed pivots, reverse quarter turns and absolute reset."
+    },
+    {
+      "evidence": [
+        "engine/wire-study.png",
+        "engine/wire-engine.png"
+      ],
+      "finding": "Actual-export wireframes inspected; cargo center contains the low floor and no elevated deck. Hood, cab, four fender shoulders and wheel separation are coherent. Whole-body exact cylinder clearance separately proves local body/floor pockets stay outside tires."
+    }
+  ],
+  "priorAssetsPreserved": {
+    "priorFilesVerified": 484,
+    "changedFiles": [],
+    "method": "SHA-256 comparison with pre-authoring ledger of prior finished source and frozen family bundles."
+  },
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBRecessedBedRays": 12,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "priorFrozenAssetsPreserved": true,
+    "authorDesktopMobileOffline": true,
+    "typecheck": "passed",
+    "lint": "passed with existing warnings",
+    "globalTests": "Author duplicate stopped at coordinator request after concurrent unrelated timeouts; coordinator owns global suite/build/inventories.",
+    "independentFamilyQA": "Separate QA worker owns frozen review; source checkpoint ready."
+  },
+  "limitations": [
+    "Owner appearance approval pending; no pickup runtime or catalog activation.",
+    "Original semantic surface paint; economical 51-component master uses runtime topology. No high-poly transfer claim.",
+    "Finite declared crown region is geometric support evidence; all 32 actual-GLB views were visually checked separately.",
+    "Full neutral roll only; nonzero steering, suspension, opening tailgate and gameplay handling unqualified.",
+    "No animated lamps or equipment. Minor native-pixel aliasing on grille/lamp/hub highlights varies with angle.",
+    "Exporter min sampler is nearest mipmap nearest; shared CarMeshAsset enforces nearest min/mag and disables mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/pickup/v1/atlas.png": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102",
+    "art-source/vehicle-bake/pickup/v1/audit-source.py": "ea384a9a50b1b0519dfc3924723f5c9e5e596dd029b538b8f9ad8024c9f08754",
+    "art-source/vehicle-bake/pickup/v1/build.py": "f138ad6930c9db48c5f605cbc84c5cc963aae2a4eb76a7a38e7c9183e2b5268e",
+    "art-source/vehicle-bake/pickup/v1/capture.mjs": "b7b445ece10e925de8f9be995bce7f8b7190e7ac27a438e4df6ba0114a12f27b",
+    "art-source/vehicle-bake/pickup/v1/car.blend": "d3ffa7c3aa53d7e4c801576d1e8094e20e236f0a405dc6aceb224139eed18df3",
+    "art-source/vehicle-bake/pickup/v1/coverage-region.json": "81ba13760858bd2017c6456c58e62fa23327d47f8fccf7913d8cc4e46568677e",
+    "art-source/vehicle-bake/pickup/v1/evidence/author-browser-qa.json": "3bfb00b01c763334f66fd25bdbac802cf4718e543a092549c50208631d9ea99b",
+    "art-source/vehicle-bake/pickup/v1/evidence/author-visual-inspection.json": "fad67df7dce896256392f0470068c7180b69fe4f82978a662794ae1647fc8bb2",
+    "art-source/vehicle-bake/pickup/v1/evidence/clearance-input.json": "e06ce75f1837d8515c1c4d3d7456ec03c4d6b5bfbdb1bc5c7d9eb2316b90fd95",
+    "art-source/vehicle-bake/pickup/v1/evidence/engine-capture.json": "3583135ee3548d3194d1869a92dd4dbd5abca56de8135a9a47d15d7716336fd4",
+    "art-source/vehicle-bake/pickup/v1/evidence/packed-source-audit.json": "4d6ffeaf0625558873156171993bfe285d6a6d43174ca1e5fe24209853f3215f",
+    "art-source/vehicle-bake/pickup/v1/evidence/prior-retained-preservation.json": "3334eaf57ecf6795af1b8d21009df9153a25b58acb38b36b3e8a70d2805a416f",
+    "art-source/vehicle-bake/pickup/v1/evidence/replay-verification.json": "62a772044892bf270e850c2622dfc7b9d6af8cd70477a74d9d5d609eb3b0e143",
+    "art-source/vehicle-bake/pickup/v1/evidence/shared-clearance.json": "6831b9d4debf9f16f202a8f9d66162c7b34226981041e8c0e954a1f63b9b12ed",
+    "art-source/vehicle-bake/pickup/v1/evidence/upper-wheel-coverage.json": "f65e2bfbeb231debd454910ccfb852d48feeac27461ff573daa8584ee811274d",
+    "art-source/vehicle-bake/pickup/v1/family.json": "4e2c4ddb97d039172f856dfae4c5f483cef470299d7ecc74470b2e592d66975f",
+    "art-source/vehicle-bake/pickup/v1/finalize.py": "fcff55ea3ccd005e692e2896604aa5604cd22f379f75cc0cecc0b1c5cd5baf28",
+    "art-source/vehicle-bake/pickup/v1/master.blend": "809b568db207ecbaf84ec1a48f04962be2c906e1bf55e780c85ea5f8b642ce66",
+    "art-source/vehicle-bake/pickup/v1/model.glb": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "art-source/vehicle-bake/pickup/v1/paint-ownership.json": "23f5a0d5233c5091d9f5264ab282a28c42c65ff997e05b5b05218fc8f0b8c70e",
+    "art-source/vehicle-bake/pickup/v1/palette-draft.png": "fbb88e1eafe69e416bfcf60a8f5fd70a14e9982258e8563556be50a51acd27c7",
+    "art-source/vehicle-bake/pickup/v1/recipe.json": "74db2f17912a4abeee28942bcf2fdfe9d131115817f3e2cf6d008c1b329ca8c9",
+    "art-source/vehicle-bake/pickup/v1/review.json": "167b39140dd5c5208701d268a92562b7dce88e3d646390956343e4760b8616b7",
+    "art-source/vehicle-bake/pickup/v1/sheets.py": "2906a73e6650d7b711217f315a0d600c21cc39c2f81b8eb9322a330b0b8f5472"
+  }
+}

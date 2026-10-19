@@ -1,0 +1,22 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "humanApproval": false,
+  "observations": [
+    "Independently inspected actual final GLB: all 16 study and 16 unchanged-game headings on native1x and nearest3x sheets, signed phase sheet, both wireframe PNGs and extracted actual GIF frames.",
+    "Classic regular cab reads distinctly from rounded front hood and separate open rear cargo tub. Teal paint and broad cool-blue glass remain coherent on opposite heading pairs.",
+    "Both side-window blue clusters remain continuous within dark frames. Front windshield and separate rear cab window stay on actual skin; no broken glass overlays observed.",
+    "Recessed bed floor/ribs, shadowed inner side walls, front bulkhead, wheelhouses and upright tailgate are visible from oblique views. No elevated cargo deck or glass roof. Actual triangle-ray depth proof is separate.",
+    "All heading sets show near-side wheels seated in real open arches; no far tire crowns above fender/body silhouette and no detached raised fender caps observed. This visual finding is independent of clearance and declared finite crown samples.",
+    "All eight signed phases per camera keep body, fenders, glass and cargo bed fixed. Rig audit proves four independent forward/reverse quarter turns, fixed pivots and absolute reset.",
+    "Final desktop1200x1050 and mobile390x844 screenshots inspected. Native224 card fits; actual128 STYLE reference remains separate; 2x/3x enlarged stage scrolls internally without page overflow.",
+    "Both 16-frame study/game GIFs preserve distinct heading progression and native/3x panels; frame duration160ms each."
+  ],
+  "limitations": [
+    "Owner appearance review remains pending; this is QA inspection, not human approval.",
+    "Finite declared crown sampling and vertical bed rays do not establish arbitrary camera or steering occlusion. Actual 32-view visual inspection is recorded separately.",
+    "Neutral roll only; steering, suspension, opening tailgate, lighting/equipment and runtime gameplay are unqualified.",
+    "Minor native-pixel grille/lamp/hub aliasing changes by angle; no blocking visual defect found.",
+    "Runtime-topology semantic component master; no separate high-poly transfer claim."
+  ]
+}

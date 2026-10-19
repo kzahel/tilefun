@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe, Beetle and owner-accepted school bus integrated. Pickup is being prepared for appearance review before gameplay activation.",
+  "gate": "Red coupe, Beetle and owner-accepted school bus integrated. Pickup v1 delivered for appearance review; further families remain ideas.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -40,9 +40,10 @@
       "name": "Pickup truck",
       "family": "Pickup",
       "priority": 4,
-      "status": "authoring",
+      "status": "review",
       "authorization": "2026-10-19 owner explicitly requested proceeding directly with pickup after approved school-bus integration",
-      "next": "Author own regular cab, recessed open cargo bed and larger tires; deliver exact native-pixel appearance review before runtime activation"
+      "next": "Owner review of teal pickup v1 cab, open bed, outlines/glass and wheel fit; gameplay integration follows appearance agreement",
+      "candidate": "pickup-v1"
     },
     {
       "id": "classic-roadster",

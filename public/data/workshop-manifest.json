@@ -12866,6 +12866,17 @@
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
+      "id": "projection:original-vehicle-pickup-v1",
+      "batchId": "original-vehicles",
+      "name": "Teal blue pickup truck · classic regular cab experiment v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/pickup-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "61fecf3a9ed8f9b60f7586f470cbcd933d8d3fa73c03f32ee831f45ec41d4163",
+      "sourceFingerprint": "61fecf3a9ed8f9b60f7586f470cbcd933d8d3fa73c03f32ee831f45ec41d4163",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
       "id": "authored-vehicle-game-fit-v1",
       "batchId": "authored-vehicles",
       "name": "All vehicles · game-camera fit v1",
@@ -43344,5 +43355,5 @@
       }
     }
   ],
-  "inputDigest": "fac7f915345111153ab50e8424d7d9b9f34ccbaf2d187818b24db4430e9041ae"
+  "inputDigest": "9cbc63b38b6cd0fed13b0106627493888677a2477267d690382d2ac44d57ac1b"
 }

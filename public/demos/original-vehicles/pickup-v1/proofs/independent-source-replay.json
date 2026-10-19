@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "retainedInputs": {
+    "art-source/vehicle-bake/pickup/v1/build.py": "f138ad6930c9db48c5f605cbc84c5cc963aae2a4eb76a7a38e7c9183e2b5268e",
+    "art-source/vehicle-bake/pickup/v1/family.json": "4e2c4ddb97d039172f856dfae4c5f483cef470299d7ecc74470b2e592d66975f",
+    "art-source/vehicle-bake/pickup/v1/coverage-region.json": "81ba13760858bd2017c6456c58e62fa23327d47f8fccf7913d8cc4e46568677e",
+    "art-source/vehicle-bake/pickup/v1/review.json": "167b39140dd5c5208701d268a92562b7dce88e3d646390956343e4760b8616b7",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+  },
+  "blendsOrIgnoredAuthorInputsCopied": false,
+  "isolatedRoot": "data/vehicle-bake/pickup-qa/source-replay-only",
+  "outputs": {
+    "model.glb": {
+      "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "bytes": 207472,
+      "exact": true
+    },
+    "atlas.png": {
+      "sha256": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102",
+      "bytes": 3284,
+      "exact": true
+    }
+  }
+}

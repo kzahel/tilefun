@@ -241,3 +241,26 @@ accepts explicit retained `inputHashes` maps as well as legacy role receipts.
 It verifies every declared dependency and requires the configured builder/family
 pins. School-bus export and native 224px fallback packing are tested in ignored
 output only; the ordinary game catalog stays unchanged until appearance approval.
+
+## Open cargo beds and the pickup example
+
+The pickup in [151](tactical/151-pickup-pipeline-review.md) adds a regular cab and
+real open cargo tub with independent semantic owners for the floor, inner walls,
+wheelhouses, cab rear and tailgate. Its constructor/configuration is under
+`scripts/vehicle-bake/pickup/`; the retained source is
+`art-source/vehicle-bake/pickup/v1/`. This economical component master uses direct
+surface paint; it is not a high-to-low transfer demonstration.
+
+Keep the cargo floor below the rails and keep upper deck geometry out of the open
+bed. Wheelhouses may project into the tub, but the lower chassis/floor must retain
+real wheel-local pockets. Inspect both rear obliques at native pixels so dark paint
+does not disguise a solid deck. The actual-GLB bed probe casts declared vertical
+rays onto real triangles and records floor/rail depth; it complements visual
+inspection and does not replace wheel clearance or coverage checks.
+
+The pickup uses the same native 224px viewport and fixed pixel density as the bus.
+Its four wheels have a world-space radius of 8px. Its own coverage region and
+whole-body roll proof are qualified independently. Reuse the frozen-only offline command with
+`scripts/vehicle-bake/family-pickup.json`; wait for owner appearance agreement before
+adding any pickup runtime catalog entry. The bus now has its own accepted runtime
+config, `runtime-school-bus-v1.json`, consumed by the existing versioned exporter.

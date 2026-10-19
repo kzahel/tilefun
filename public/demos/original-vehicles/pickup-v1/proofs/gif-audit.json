@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "gifs": [
+    {
+      "camera": "study",
+      "file": "turntable.gif",
+      "frames": 16,
+      "durationMs": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "sha256": "08eba5cdd59af6c630a526e94c1906d611e9138dd0b7fec7ea254e96388f78a5"
+    },
+    {
+      "camera": "engine",
+      "file": "game-turntable.gif",
+      "frames": 16,
+      "durationMs": [
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160,
+        160
+      ],
+      "sha256": "789cdabf4628c729d9f7dd5600ee0fca6fc17647612f486c7a44c140753bda37"
+    }
+  ]
+}
