@@ -531,3 +531,11 @@
 !raven/roster-v3/*
 !crow/roster-v3/*
 !atlantic-puffin/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!owl/roster-v3/*
+!eagle/roster-v3/*
+!hawk/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!owl/roster-v4/*

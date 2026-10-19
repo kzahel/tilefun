@@ -2,7 +2,7 @@ import type { PredatorProfile } from "./Predator.js";
 
 export type FierceSpecies = "t-rex" | "small-dragon" | "dire-wolf" | "griffin" | "giant-spider";
 export interface FierceBehaviorProfile {
-  kind: "rex" | "dragon" | "wolf" | "griffin" | "spider";
+  kind: "rex" | "dragon" | "wolf" | "griffin" | "spider" | "raptor";
   stride: number;
   chargeStride: number;
   windup: number;

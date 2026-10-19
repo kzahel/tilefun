@@ -7,6 +7,9 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = [
+  "owl",
+  "hawk",
+  "eagle",
   "raven",
   "atlantic-puffin",
   "dove",
@@ -99,6 +102,34 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter â†’ prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  owl: ["mouse", "rat", "red-squirrel", "rabbit", "frog", "gecko", "robin", "sparrow", "dove"],
+  hawk: [
+    "mouse",
+    "rat",
+    "red-squirrel",
+    "rabbit",
+    "frog",
+    "gecko",
+    "robin",
+    "sparrow",
+    "dove",
+    "pigeon",
+  ],
+  eagle: [
+    "mouse",
+    "rat",
+    "red-squirrel",
+    "rabbit",
+    "frog",
+    "chinchilla",
+    "chicken",
+    "pigeon",
+    "dove",
+    "crow",
+    "raven",
+    "owl",
+    "hawk",
+  ],
   mongoose: [
     "rabbit",
     "mouse",

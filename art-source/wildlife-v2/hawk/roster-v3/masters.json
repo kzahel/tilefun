@@ -1,0 +1,15 @@
+{
+  "identity": "hawk-roster-v3-pixels-01",
+  "palette": {
+    "B": "#7c6049",
+    "H": "#ac8b62",
+    "C": "#ddc89c",
+    "M": "#9c7954",
+    "N": "#27302f",
+    "E": "#e3bf61",
+    "K": "#27302f",
+    "T": "#d4ad51",
+    "R": "#b75c3b"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -1,8 +1,13 @@
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import type { AnimationClip } from "../entities/EntityDefs.js";
+import type { FierceBehaviorProfile } from "./FierceCreatures.js";
+import { RAPTOR_PROFILES } from "./Raptors.js";
 import { SMALL_GROUND_HUNTER_PROFILES } from "./SmallGroundHunters.js";
 
 export const NATURAL_HUNTER_SPECIES = [
+  "owl",
+  "eagle",
+  "hawk",
   "wolf",
   "coyote",
   "spotted-hyena",
@@ -28,6 +33,7 @@ export interface NaturalHunterProfile {
   chaseSpeed: number;
   weight: number;
   callKind: CreatureCallKind;
+  fierce?: FierceBehaviorProfile;
   size: number;
   anchorY: number;
   body: readonly [number, number, number];
@@ -243,4 +249,5 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
     },
   },
   ...SMALL_GROUND_HUNTER_PROFILES,
+  ...RAPTOR_PROFILES,
 ];

@@ -34,6 +34,27 @@ was corrected and all 30 affected bird/roadkill tests pass. Exact new art remain
 pending human review. Roster: **125 of 196 implemented; 71 remaining**.
 
 
+Second checkpoint: tawny owl, bald eagle and red-tailed hawk now join natural
+world spawning, editor placement and the lab browser. They use shared bounded
+predator flights, physical landings, ordinary perches, explicit diets, feeding,
+quiet/alert cycles and species calls. Eagle can hunt owl/hawk; larger hunters can
+hunt these birds. Natural meals retain the same delayed distant birth policy;
+manual prey remain finite. No airborne near-miss catches are allowed.
+The owl-v3 anatomy bank remains immutable; active owl-v4 raises chase speed from
+30 to 40px/s with matching source timing. Eagle/hawk use roster-v3. All art is
+pending human review. Browser **Action** now resolves hunters' display clips
+instead of falling back to idle. Native fixture props retain production type
+identity, enabling shared perch AI; custom fixture geometry remains anonymous.
+Raptor landings publish their actual support height. Contact from above requires
+real landed support/XY overlap and retains the airborne-prey meal guard.
+Validation: **4,544 unit passes**, five known Windows failures, ten skipped;
+388 focused hunting/source/audio checks; 27 real browser cases including 552
+four-facing previews; four byte-identical banks and 3,872 exact source crops.
+Typecheck, isolated lint/build, 1,423-candidate full Chromium manifest and
+streaming readiness pass. **128 of 196 implemented; 68 remaining.** Chimpanzee
+and orangutan source prototypes are next; neither is registered or active yet.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

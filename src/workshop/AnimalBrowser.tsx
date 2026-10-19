@@ -38,8 +38,11 @@ function AnimalPreview({
     canvas.dataset.ready = "false";
     const def = animal.sprite,
       clip =
-        (motion === "walk" ? animal.locomotion : def.clips?.find((c) => c.name === motion)) ??
-        def.clips?.[0];
+        (motion === "walk"
+          ? animal.locomotion
+          : motion === "action"
+            ? animal.action
+            : def.clips?.find((c) => c.name === motion)) ?? def.clips?.[0];
     const count = clip?.count ?? def.frameCount,
       duration = clip?.frameDuration ?? def.frameDuration,
       first = clip?.start ?? 0;

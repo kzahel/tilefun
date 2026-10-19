@@ -821,3 +821,14 @@ replay and saved in parked traffic records. Shared local/remote presentation
 interpolates its angle and meshes retain it at rest. Cardinal collision and
 sprite fallback remain tied to the immutable approved bank. Trains and automatic
 road motion keep their existing owners.
+
+## Native props in animal fixtures
+
+Raptor inspection adds optional bounded `ScenarioRecipe.nativeProps` placements.
+ScenarioSession creates them with the ordinary prop factory, preserving their
+production type and persistence. Custom fixture geometry keeps its anonymous
+scenario identity. This distinction matters to shared perch AI: a renamed
+fixture rock has collision but is not a recognized native perch. No lab-only
+perching or flight simulation is introduced; game and lab use PredatorMotion,
+Realm support collision and durable ordinary props. Native flight/reload and
+perch checks cover the boundary.

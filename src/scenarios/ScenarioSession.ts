@@ -1,4 +1,5 @@
 import { Direction } from "../entities/Entity.js";
+import { createProp } from "../entities/PropFactories.js";
 import { baseGameMod } from "../game/base-game.js";
 import type { Movement } from "../input/ActionManager.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
@@ -40,6 +41,11 @@ export class ScenarioSession {
       for (const c of p.walls ?? (p.collider ? [p.collider] : []))
         if (c.surface) validateSurfacePatch(c.surface, c.width, c.height);
     });
+    if (
+      (recipe.nativeProps?.length ?? 0) > 128 ||
+      recipe.nativeProps?.some((p) => !Number.isFinite(p.wx) || !Number.isFinite(p.wy))
+    )
+      throw new Error("Invalid native scenario props");
     validateExcavations(recipe.props);
     const patches = recipe.props
       .flatMap((p) => p.walls ?? (p.collider ? [p.collider] : []))
@@ -264,6 +270,8 @@ export class ScenarioSession {
           }
       }
       for (const prop of this.recipe.props) this.realm.propManager.add(structuredClone(prop));
+      for (const prop of this.recipe.nativeProps ?? [])
+        this.realm.propManager.add(createProp(prop.type, prop.wx, prop.wy));
       for (const actor of this.recipe.actors ?? [])
         this.realm.entityManager.spawn(structuredClone(actor));
       for (const fixture of this.recipe.parkedVehicles ?? []) {

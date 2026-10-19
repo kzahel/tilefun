@@ -33,3 +33,19 @@ in the sortable animal browser and its real shared-engine AI scenes.
   Isolated animal-only manifest has 1,406 verified candidates. New exact art is
   pending human review. Puffin currently has grounded homes and short flights;
   swimming is future work. Raptor flight/hunting is next.
+
+- Raptor checkpoint: owl, eagle and hawk active. Explicit directed diets include
+  eagle → owl/hawk and larger hunters → raptors, with no pet/player predation.
+  Seven clips, actual shared bounded swoops/landings, feeding and perching.
+  Original owl-v3 preserved after ecology exposed a 30px/s chase matching rabbit
+  escape speed; owl-v4 uses a source-matched 40px/s cycle.
+  Native fixture props preserve ordinary identities and persist, avoiding the
+  anonymous custom-fixture rename that hid perch semantics. Real support contact
+  after landing permits a grounded talon catch without bypassing airborne prey
+  protection; explicit vertical/horizontal/wall/water regressions pass.
+  4,544 unit passes with the five known Windows failures and ten skipped;
+  388 focused checks; 27 browser cases; 552 visible previews; four byte-identical
+  banks and 3,872 exact crops. Typecheck, isolated lint/build and 1,423 verified
+  candidates pass. Streaming --assert-ready passes from the main checkout; its
+  revision probe requires Git metadata absent from the extracted test snapshot.
+  128/196 implemented; 68 remaining. Chimpanzee/orangutan prototypes underway.

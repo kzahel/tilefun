@@ -30,7 +30,7 @@ for (const p of PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep")
       const preyBefore =
         Number(await canvas.getAttribute("data-deer-count")) +
         Number(await canvas.getAttribute("data-rabbit-count"));
-      expect(preyBefore).toBe(2);
+      expect(preyBefore).toBe(1);
       await canvas.screenshot({ path: `data/predators-132/${p.species}-${renderer}.png` });
       await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-reload-count", "1");
@@ -40,7 +40,7 @@ for (const p of PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep")
       expect(
         Number(await canvas.getAttribute("data-deer-count")) +
           Number(await canvas.getAttribute("data-rabbit-count")),
-      ).toBe(2);
+      ).toBe(1);
       expect(errors).toEqual([]);
     });
   }

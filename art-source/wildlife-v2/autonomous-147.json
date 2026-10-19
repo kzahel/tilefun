@@ -204,9 +204,16 @@
     "owl": {
       "name": "Owl",
       "family": "Birds",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v4",
+      "startedUtc": "2026-10-19T11:22:00Z",
+      "detail": "Registered roster-v3 anatomy preserved; new exact chase cadence reaches 40px/s instead of matching rabbit speed. Rechecking source replay and actual hunting.",
+      "completedUtc": "2026-10-19T11:49:51Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/owl/roster-v4/receipt.json",
+      "evidence": "Source fixed-volume links, planted source travel and eighth-pose geometry audited. Native/3x playback + byte-identical replay. Natural source-origin meals and durable birth queues; shared aerial flight, reload, interrupted landing and native perch checks. Real Canvas/GPU Worker scenes, browser action/swoop/feed and natural-world editor deletion pass."
     },
     "sea-turtle": {
       "name": "Green sea turtle",
@@ -464,16 +471,20 @@
     "chimpanzee": {
       "name": "Chimpanzee",
       "family": "Primates",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:49:51Z",
+      "detail": "New anatomical source prototypes underway; not registered or active. Original gorilla source stays unchanged."
     },
     "orangutan": {
       "name": "Orangutan",
       "family": "Primates",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:49:51Z",
+      "detail": "New anatomical source prototypes underway; not registered or active. Original gorilla source stays unchanged."
     },
     "ring-tailed-lemur": {
       "name": "Ring-tailed lemur",
@@ -732,16 +743,28 @@
     "eagle": {
       "name": "Eagle",
       "family": "Birds",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:22:00Z",
+      "completedUtc": "2026-10-19T11:49:51Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/eagle/roster-v3/receipt.json",
+      "evidence": "Source fixed-volume links, planted source travel and eighth-pose geometry audited. Native/3x playback + byte-identical replay. Natural source-origin meals and durable birth queues; shared aerial flight, reload, interrupted landing and native perch checks. Real Canvas/GPU Worker scenes, browser action/swoop/feed and natural-world editor deletion pass."
     },
     "hawk": {
       "name": "Hawk",
       "family": "Birds",
-      "state": "queued",
+      "state": "finished-game-active",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:22:00Z",
+      "completedUtc": "2026-10-19T11:49:51Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/hawk/roster-v3/receipt.json",
+      "evidence": "Source fixed-volume links, planted source travel and eighth-pose geometry audited. Native/3x playback + byte-identical replay. Natural source-origin meals and durable birth queues; shared aerial flight, reload, interrupted landing and native perch checks. Real Canvas/GPU Worker scenes, browser action/swoop/feed and natural-world editor deletion pass."
     },
     "pigeon": {
       "name": "Pigeon",
@@ -1287,6 +1310,15 @@
         "atlantic-puffin"
       ],
       "validation": "Typecheck/lint/build and streaming readiness pass. 20 browser cases pass, including all 135 entries in four facings (540 previews). Three byte-identical replays and 984 exact source crops. Full units: 4456 passed, 6 failed, 10 skipped; new authored-crow registration adds one legitimate roadkill type, fixed stale 12-type expectation; all 30 focused bird/roadkill tests then pass, leaving five known Windows symlink/WAL failures. Isolated wildlife-only build and 1406-candidate full Chromium manifest pass."
+    },
+    {
+      "utc": "2026-10-19T11:49:51Z",
+      "completed": [
+        "owl",
+        "eagle",
+        "hawk"
+      ],
+      "validation": "4544 unit passes, five known Windows failures and ten skipped. All388focused hunting/source/audio checks pass. 27 real Canvas/GPU lab/game browser cases pass, including 552 browser previews. Four ten-artifact byte-identical source banks and 3872 exact native/3x crops (owl-v3 preserved; owl-v4 active with corrected hunt cadence). Typecheck, isolated lint/build and 1423-candidate full Chromium manifest pass; streaming --assert-ready passes from main checkout."
     }
   ]
 }

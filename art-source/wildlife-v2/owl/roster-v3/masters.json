@@ -1,0 +1,15 @@
+{
+  "identity": "owl-roster-v3-pixels-01",
+  "palette": {
+    "B": "#806148",
+    "H": "#ae8e63",
+    "C": "#cbb389",
+    "M": "#967851",
+    "N": "#242a2b",
+    "E": "#d8b75d",
+    "K": "#242a2b",
+    "T": "#ab9260",
+    "R": "#ede0b8"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -13,6 +13,8 @@ export interface ScenarioRecipe {
   landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile;
   player: Entity;
   props: Prop[];
+  /** Known ordinary prop identities retain production AI semantics and persistence. */
+  nativeProps?: { type: string; wx: number; wy: number }[];
   actors?: Entity[];
   /** Native parked bodies use durable TrafficRecords, just like editor placement. */
   parkedVehicles?: {

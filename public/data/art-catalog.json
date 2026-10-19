@@ -526,6 +526,36 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-owl-predator-v1",
+      "name": "wildlife owl predator v1",
+      "image": "demos/wildlife-v2/owl/roster-v4/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-eagle-predator-v1",
+      "name": "wildlife eagle predator v1",
+      "image": "demos/wildlife-v2/eagle/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5a1338aa40193197c28a850c45b1fd37f8a4bb3d80dd52a61148fa2b12e75540",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-hawk-predator-v1",
+      "name": "wildlife hawk predator v1",
+      "image": "demos/wildlife-v2/hawk/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-shark-predator-v1",
       "name": "wildlife shark predator v1",
       "image": "demos/wildlife-v2/shark/roster-v2/sheet.png",
@@ -2223,6 +2253,16 @@
       "height": 896,
       "tileSize": 16,
       "fingerprint": "3c89ecdda89149c2a6a470b73cee0ccaa8761c6cc0afabbe3840f096fd1d72d0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle",
+      "name": "vehicle v1:beetle",
+      "image": "assets/vehicles/beetle-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "b26dd0ca1ea498477b11ca276b5dc7cb2bbadaadd0b58be90a9b15d452b9a9f5",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4406,6 +4446,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-owl-roster-v3",
+      "name": "wildlife v2 owl roster v3",
+      "image": "demos/wildlife-v2/owl/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-eagle-roster-v3",
+      "name": "wildlife v2 eagle roster v3",
+      "image": "demos/wildlife-v2/eagle/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5a1338aa40193197c28a850c45b1fd37f8a4bb3d80dd52a61148fa2b12e75540",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-hawk-roster-v3",
+      "name": "wildlife v2 hawk roster v3",
+      "image": "demos/wildlife-v2/hawk/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-owl-roster-v4",
+      "name": "wildlife v2 owl roster v4",
+      "image": "demos/wildlife-v2/owl/roster-v4/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -5851,6 +5931,10 @@
       "label": "prop-griffin-perch",
       "kind": "prop",
       "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:120"
+        },
         {
           "system": "Gameplay",
           "source": "src/server/Realm.ts:1072"
@@ -25559,6 +25643,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:120"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/Realm.ts:1072"
         },
         {
@@ -25977,6 +26065,60 @@
         256
       ],
       "label": "wildlife-white-nosed-coati-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-owl-predator-v1",
+      "sheetId": "wildlife-owl-predator-v1",
+      "rect": [
+        0,
+        0,
+        11616,
+        384
+      ],
+      "label": "wildlife-owl-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-eagle-predator-v1",
+      "sheetId": "wildlife-eagle-predator-v1",
+      "rect": [
+        0,
+        0,
+        11616,
+        384
+      ],
+      "label": "wildlife-eagle-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-hawk-predator-v1",
+      "sheetId": "wildlife-hawk-predator-v1",
+      "rect": [
+        0,
+        0,
+        11616,
+        384
+      ],
+      "label": "wildlife-hawk-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -29196,6 +29338,24 @@
       ]
     },
     {
+      "id": "sprite:vehicle-v1:beetle",
+      "sheetId": "vehicle-v1:beetle",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:player",
       "sheetId": "player",
       "rect": [
@@ -29317,11 +29477,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:50"
+          "source": "src/scenarios/ScenarioSession.ts:56"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:181"
+          "source": "src/scenarios/ScenarioSession.ts:187"
         },
         {
           "system": "Gameplay",
@@ -29475,15 +29635,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:24"
+          "source": "src/wildlife/FoodWeb.ts:27"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:241"
+          "source": "src/wildlife/FoodWeb.ts:125"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:414"
+          "source": "src/wildlife/FoodWeb.ts:272"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:445"
         },
         {
           "system": "Gameplay",
@@ -29553,27 +29717,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:292"
+          "source": "src/wildlife/FoodWeb.ts:323"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:309"
+          "source": "src/wildlife/FoodWeb.ts:340"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:326"
+          "source": "src/wildlife/FoodWeb.ts:357"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:362"
+          "source": "src/wildlife/FoodWeb.ts:393"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:387"
+          "source": "src/wildlife/FoodWeb.ts:418"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:414"
+          "source": "src/wildlife/FoodWeb.ts:445"
         }
       ]
     },
@@ -29623,19 +29787,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:25"
+          "source": "src/wildlife/FoodWeb.ts:28"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:242"
+          "source": "src/wildlife/FoodWeb.ts:116"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:414"
+          "source": "src/wildlife/FoodWeb.ts:126"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:415"
+          "source": "src/wildlife/FoodWeb.ts:273"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:445"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:446"
         },
         {
           "system": "Gameplay",
@@ -29681,7 +29853,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:415"
+          "source": "src/wildlife/FoodWeb.ts:446"
         }
       ]
     },
@@ -29727,7 +29899,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:416"
+          "source": "src/wildlife/FoodWeb.ts:447"
         }
       ]
     },
@@ -29773,7 +29945,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:417"
+          "source": "src/wildlife/FoodWeb.ts:448"
         }
       ]
     },
@@ -29819,7 +29991,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:418"
+          "source": "src/wildlife/FoodWeb.ts:449"
         }
       ]
     },
@@ -29973,11 +30145,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:26"
+          "source": "src/wildlife/FoodWeb.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:414"
+          "source": "src/wildlife/FoodWeb.ts:128"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:445"
         },
         {
           "system": "Gameplay",
@@ -30023,11 +30199,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:27"
+          "source": "src/wildlife/FoodWeb.ts:30"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:414"
+          "source": "src/wildlife/FoodWeb.ts:445"
         },
         {
           "system": "Gameplay",

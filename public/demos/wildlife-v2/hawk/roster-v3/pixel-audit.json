@@ -1,0 +1,17 @@
+{
+  "identity": "hawk-roster-v3-pixels-01",
+  "poses": 484,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.1052703857421875,
+    "up": 1.1033105850219727,
+    "left": 1.2356815338134766,
+    "right": 1.2356815338134766
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "chaseRootTravelPixelsPerCycle": 15.36
+}

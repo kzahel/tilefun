@@ -116,6 +116,9 @@ export function naturalLandscapeRecipe(
       generation: FLAT_SCENARIO,
       player: createPlayer(64, 160),
       props: [],
+      ...(predator.fierce?.kind === "raptor"
+        ? { nativeProps: [{ type: "prop-griffin-perch", wx: 32, wy: 64 }] }
+        : {}),
       actors: [createPredator(predator.species, 64, 64), deer, rabbit],
       traffic: [],
     };

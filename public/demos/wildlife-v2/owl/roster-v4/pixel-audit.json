@@ -1,0 +1,17 @@
+{
+  "identity": "owl-roster-v4-pixels-01",
+  "poses": 484,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.093153953552246,
+    "up": 1.091322898864746,
+    "left": 1.219651222229004,
+    "right": 1.219651222229004
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "chaseRootTravelPixelsPerCycle": 12.8
+}
