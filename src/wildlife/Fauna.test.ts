@@ -290,8 +290,11 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
         second = manager.spawn(createAnimal(128, 64));
       required(first.fauna).groupId = required(second.fauna).groupId = "test-herd";
       startleFauna(first, { wx: 40, wy: 64 });
-      updateFaunaAI(first, 0.5, open, [first, second], []);
-      updateFaunaAI(second, 0.5, open, [first, second], []);
+      // Let peers observe the brief warning instead of skipping it in a single coarse tick.
+      for (let i = 0; i < 5; i++) {
+        updateFaunaAI(first, 0.1, open, [first, second], []);
+        updateFaunaAI(second, 0.1, open, [first, second], []);
+      }
       for (const animal of [first, second]) {
         const ai = required(animal.fauna);
         expect(ai.state).toBe("flee");

@@ -311,3 +311,25 @@ assertion; distinguish them from newly introduced failures.
   complete before tests, and avoid heavy render jobs during sensitive HTTP checks.
   Thirty-four new entries plus sixteen delivered leave 146 remaining. Four
   heavy bovid sources begin next. Every exact identity remains pending review.
+
+- 00:08 UTC: American bison, water buffalo, musk ox and wildebeest completed.
+  Distinct broad bodies, skulls, tapered swept horns, coats and native silhouettes:
+  bison shoulder hump/forehead/beard, grey buffalo crescent horns, musk ox skirt/
+  saddle/horn boss, and wildebeest lighter haunches/mane/beard. Each source has
+  164 poses with fixed linked limbs, planted cloven hooves, two neck links and
+  grazing jaw motion. Endpoint interpolation stays below .016 native px.
+  Four ten-artifact source replays and 1,312 exact Chromium crops pass. Natural
+  herds use fixed existing expansion slots; explicit food tiers admit the new
+  prey without mass inference. All exact pixels remain pending human review.
+  Water-buffalo browser checks exposed repeated herd alarm echoes: recovered
+  peers could react again to another member's old escape. Shared fauna AI now
+  broadcasts only the brief visible startle display. A real generated-world
+  landing/reload/recovery test fails on old behavior and passes the correction.
+  Thirty-five existing fixtures now sample that display through bounded ticks
+  instead of skipping it with a single 500ms update. Typecheck/lint/build,
+  1,039-candidate manifest and streaming readiness pass. Final full units: 3,248
+  pass, five known Windows failures, ten skipped. Sixteen world/editor/body/
+  ball browser cases are covered; all eight motion cases pass on final recheck.
+  Thirty-eight new entries plus sixteen delivered leave 142 remaining. Zebra,
+  okapi, camel, panda and polar-bear sources are underway. Also check mount
+  heights against normal jumping when integrating the new camel.

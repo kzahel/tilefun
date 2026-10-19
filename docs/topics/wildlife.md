@@ -111,6 +111,18 @@ failures, ten skipped. Initial concurrent-load Workshop timeouts pass isolated
 and in the clean full rerun; finish inventories before tests and avoid heavy
 render jobs during HTTP validation. Thirty-four new entries plus sixteen
 already delivered leave 146 remaining. Four heavy bovids begin next.
+American bison, water buffalo, musk ox and wildebeest now also spawn as distinct
+heavy herds with fixed articulated necks/limbs, swept horns and separate coats.
+Four source replays and 1,312 exact crops pass. A generated buffalo landing
+exposed stale herd-alarm echoes; shared fauna now broadcasts the brief startle
+display rather than an ongoing escape. The regression rejects old behavior and
+passes the fix. Existing herd fixtures sample the display through bounded ticks.
+Sixteen browser cases are covered, with all eight motion cases rerun after the
+fix. Typecheck/lint/build, 1,039-candidate manifest and streaming readiness pass.
+Full final units: 3,248 pass, five known Windows failures, ten skipped. Thirty-
+eight new entries plus sixteen delivered leave 142 remaining. Zebra, okapi,
+camel, panda and polar bear are underway. New mounts must be reachable with a
+normal ground jump; verify donkey/mule support heights during camel integration.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion

@@ -594,16 +594,18 @@
     "panda": {
       "name": "Panda",
       "family": "Bears",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent bear anatomy; panda bamboo forage / polar bear hunter; provisional until source/game checks"
     },
     "polar-bear": {
       "name": "Polar bear",
       "family": "Bears",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent bear anatomy; panda bamboo forage / polar bear hunter; provisional until source/game checks"
     },
     "moose": {
       "name": "Moose",
@@ -622,9 +624,10 @@
     "zebra": {
       "name": "Zebra",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent patterned grazer anatomy and surface markings; provisional until source/game checks"
     },
     "rhinoceros": {
       "name": "White rhinoceros",
@@ -643,25 +646,34 @@
     "camel": {
       "name": "Dromedary camel",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent patterned grazer anatomy and surface markings; provisional until source/game checks"
     },
     "american-bison": {
       "name": "American bison",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:08:44Z",
+      "receipt": "art-source/wildlife-v2/american-bison/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limb/neck/tail links; native heavy-body/horn/coat inspection; byte-identical ten-artifact replay; 328 exact Chromium crops; world/editor/body/ball checks across family; shared herd-alarm regression",
+      "reviewStatus": "pending human review"
     },
     "water-buffalo": {
       "name": "Water buffalo",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:08:44Z",
+      "receipt": "art-source/wildlife-v2/water-buffalo/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limb/neck/tail links; native heavy-body/horn/coat inspection; byte-identical ten-artifact replay; 328 exact Chromium crops; world/editor/body/ball checks across family; shared herd-alarm regression",
+      "reviewStatus": "pending human review"
     },
     "gemsbok-oryx": {
       "name": "Gemsbok",
@@ -726,18 +738,26 @@
     "musk-ox": {
       "name": "Musk ox",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:08:44Z",
+      "receipt": "art-source/wildlife-v2/musk-ox/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limb/neck/tail links; native heavy-body/horn/coat inspection; byte-identical ten-artifact replay; 328 exact Chromium crops; world/editor/body/ball checks across family; shared herd-alarm regression",
+      "reviewStatus": "pending human review"
     },
     "wildebeest": {
       "name": "Wildebeest",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent heavy bovid source anatomy; provisional until visual/source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:08:44Z",
+      "receipt": "art-source/wildlife-v2/wildebeest/roster-v2/receipt.json",
+      "evidence": "164 native poses; 129 walk and 65 grazing samples/facing; fixed limb/neck/tail links; native heavy-body/horn/coat inspection; byte-identical ten-artifact replay; 328 exact Chromium crops; world/editor/body/ball checks across family; shared herd-alarm regression",
+      "reviewStatus": "pending human review"
     },
     "malayan-tapir": {
       "name": "Tapir",
@@ -749,9 +769,10 @@
     "okapi": {
       "name": "Okapi",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent patterned grazer anatomy and surface markings; provisional until source/game checks"
     },
     "warthog": {
       "name": "Warthog",
@@ -1800,6 +1821,26 @@
         "gerenuk"
       ],
       "validation": "Typecheck/lint/build, 1019-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full final units: 3195 pass, 5 known Windows failures, 10 skipped. Initial concurrent-load Workshop timeouts pass in isolated 13-test recheck and clean full rerun. Six byte-identical replays, 1968 exact crops, 12 natural/manual catch tests and generated mixed-grazer hunter meals/lineage reload pass."
+    },
+    {
+      "utc": "2026-10-18T23:42:37Z",
+      "prepared": [
+        "american-bison",
+        "water-buffalo",
+        "musk-ox",
+        "wildebeest"
+      ],
+      "validation": "Distinct heavy anatomy/horns/coat silhouettes inspected; independent linked limb/neck/tail audits; four byte-identical replays and 1312 exact Chromium crops pass. Typecheck/build and 1039-candidate manifest pass. Full unit validation runs without concurrent rendering; game/browser checks remain."
+    },
+    {
+      "utc": "2026-10-19T00:08:44Z",
+      "completed": [
+        "american-bison",
+        "water-buffalo",
+        "musk-ox",
+        "wildebeest"
+      ],
+      "validation": "Typecheck/lint/build, 1039-candidate manifest and streaming readiness pass. Final full units: 3248 pass, 5 known Windows failures, 10 skipped. Four source replays and 1312 exact crops pass. Sixteen world/lab/body/ball browser cases covered, with all eight motion cases rerun after the shared herd fix. Generated buffalo regression rejects old behavior and passes corrected behavior; 35 shared herd fixtures sample the visible warning instead of skipping it in one coarse tick."
     }
   ],
   "existingOutsideRoster": [
@@ -1902,6 +1943,18 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/antelopes-140/README.md"
+    },
+    "heavy-bovids": {
+      "animals": [
+        "american-bison",
+        "water-buffalo",
+        "musk-ox",
+        "wildebeest"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/bovids-140/README.md"
     }
   }
 }

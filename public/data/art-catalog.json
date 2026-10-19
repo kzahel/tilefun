@@ -816,6 +816,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-american-bison-provisional-v1",
+      "name": "wildlife american bison provisional v1",
+      "image": "demos/wildlife-v2/american-bison/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "84210ee6dc321b1803f4b6a2a56546f1cc8d3de5ece8d7b04ea0e2422f0f4f1e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-water-buffalo-provisional-v1",
+      "name": "wildlife water buffalo provisional v1",
+      "image": "demos/wildlife-v2/water-buffalo/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b8466f9936621a7617b79f29d572c9f7d523cf09f6f6b4fadf78acedd3a580e9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-musk-ox-provisional-v1",
+      "name": "wildlife musk ox provisional v1",
+      "image": "demos/wildlife-v2/musk-ox/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b629739ae88acb5024894f96ef5582c1441a00cc752cde352f29387ba06a694d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-wildebeest-provisional-v1",
+      "name": "wildlife wildebeest provisional v1",
+      "image": "demos/wildlife-v2/wildebeest/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7ee9e6551cab1f5a03208668f26e59dc1b1f6990a843e338717bae69e738416f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -2883,6 +2923,46 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "d103ec48ead32eadc6a62617f2320935244c574f543f4453806c0bd1ab474fb7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-american-bison-roster-v2",
+      "name": "wildlife v2 american bison roster v2",
+      "image": "demos/wildlife-v2/american-bison/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "84210ee6dc321b1803f4b6a2a56546f1cc8d3de5ece8d7b04ea0e2422f0f4f1e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-water-buffalo-roster-v2",
+      "name": "wildlife v2 water buffalo roster v2",
+      "image": "demos/wildlife-v2/water-buffalo/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b8466f9936621a7617b79f29d572c9f7d523cf09f6f6b4fadf78acedd3a580e9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-musk-ox-roster-v2",
+      "name": "wildlife v2 musk ox roster v2",
+      "image": "demos/wildlife-v2/musk-ox/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b629739ae88acb5024894f96ef5582c1441a00cc752cde352f29387ba06a694d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-wildebeest-roster-v2",
+      "name": "wildlife v2 wildebeest roster v2",
+      "image": "demos/wildlife-v2/wildebeest/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7ee9e6551cab1f5a03208668f26e59dc1b1f6990a843e338717bae69e738416f",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -24996,6 +25076,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-american-bison-provisional-v1",
+      "sheetId": "wildlife-american-bison-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-american-bison-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-water-buffalo-provisional-v1",
+      "sheetId": "wildlife-water-buffalo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-water-buffalo-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-musk-ox-provisional-v1",
+      "sheetId": "wildlife-musk-ox-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-musk-ox-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-wildebeest-provisional-v1",
+      "sheetId": "wildlife-wildebeest-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-wildebeest-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -26579,7 +26731,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:936"
+          "source": "src/wildlife/Fauna.ts:937"
         },
         {
           "system": "Gameplay",
@@ -26591,11 +26743,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:51"
+          "source": "src/wildlife/FoodWeb.ts:53"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:189"
+          "source": "src/wildlife/FoodWeb.ts:197"
         }
       ]
     },
@@ -26653,35 +26805,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:12"
+          "source": "src/wildlife/Fauna.ts:13"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:207"
+          "source": "src/wildlife/Fauna.ts:208"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:87"
+          "source": "src/wildlife/FoodWeb.ts:91"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:101"
+          "source": "src/wildlife/FoodWeb.ts:106"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:115"
+          "source": "src/wildlife/FoodWeb.ts:121"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:143"
+          "source": "src/wildlife/FoodWeb.ts:150"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:162"
+          "source": "src/wildlife/FoodWeb.ts:170"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:189"
+          "source": "src/wildlife/FoodWeb.ts:197"
         }
       ]
     },
@@ -26731,15 +26883,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:52"
+          "source": "src/wildlife/FoodWeb.ts:54"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:189"
+          "source": "src/wildlife/FoodWeb.ts:197"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:190"
+          "source": "src/wildlife/FoodWeb.ts:198"
         }
       ]
     },
@@ -26781,7 +26933,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:190"
+          "source": "src/wildlife/FoodWeb.ts:198"
         }
       ]
     },
@@ -26827,7 +26979,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:191"
+          "source": "src/wildlife/FoodWeb.ts:199"
         }
       ]
     },
@@ -26873,7 +27025,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:192"
+          "source": "src/wildlife/FoodWeb.ts:200"
         }
       ]
     },
@@ -26919,7 +27071,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:193"
+          "source": "src/wildlife/FoodWeb.ts:201"
         }
       ]
     },
@@ -27073,7 +27225,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:189"
+          "source": "src/wildlife/FoodWeb.ts:197"
         }
       ]
     },
@@ -27119,7 +27271,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:189"
+          "source": "src/wildlife/FoodWeb.ts:197"
         }
       ]
     },

@@ -17,7 +17,9 @@ const antelopes = [
   "gerenuk",
 ] as const;
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
+const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
 const pasture = [
+  "wildebeest",
   ...antelopes,
   "deer",
   "sheep",
@@ -56,6 +58,7 @@ export const HUNTING_DIETS = {
   wolf: [...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
   "spotted-hyena": [...small, ...pasture, ...smallerCats, "fox", "coyote", "wolf"],
   "dire-wolf": [
+    "musk-ox",
     ...felids,
     ...small,
     ...pasture,
@@ -77,6 +80,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   tiger: [
+    ...heavyBovids,
     ...felids,
     ...small,
     ...pasture,
@@ -91,6 +95,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   lion: [
+    ...heavyBovids,
     ...felids,
     ...small,
     ...pasture,
@@ -105,6 +110,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "brown-bear": [
+    ...heavyBovids,
     ...felids,
     "wolf",
     "coyote",
@@ -133,6 +139,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    ...heavyBovids,
     ...felids,
     "wolf",
     "coyote",
@@ -152,6 +159,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    ...heavyBovids,
     ...felids,
     "wolf",
     "coyote",

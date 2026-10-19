@@ -427,3 +427,9 @@
 !springbok/roster-v2/*
 !saiga-antelope/roster-v2/*
 !gerenuk/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!american-bison/roster-v2/*
+!water-buffalo/roster-v2/*
+!musk-ox/roster-v2/*
+!wildebeest/roster-v2/*

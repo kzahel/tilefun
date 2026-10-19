@@ -31,7 +31,9 @@ export function updateFaunaAI(
         (a) =>
           a !== animal &&
           a.fauna?.groupId === ai.groupId &&
-          a.fauna?.alarmFrom &&
+          // Broadcast the visible alert, not an old escape that can restart a recovered peer.
+          a.fauna?.state === "startle" &&
+          a.fauna.alarmFrom &&
           distance(a.position, animal.position) < ai.radius * 1.5,
       )?.fauna?.alarmFrom
     : undefined;
