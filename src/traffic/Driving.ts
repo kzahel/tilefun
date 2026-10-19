@@ -52,7 +52,7 @@ function facing(dx: number, dy: number, previous: Direction): Direction {
  * Call in small substeps; commit body, pushes and passengers together only after all clear. */
 export function drivenCarPose(
   car: Entity,
-  input: { dx: number; dy: number; sprinting?: boolean },
+  input: { dx: number; dy: number; sprinting?: boolean; reversing?: boolean },
   dt: number,
   world: World,
   props: readonly Prop[],
@@ -65,13 +65,26 @@ export function drivenCarPose(
   const length = Math.hypot(input.dx, input.dy);
   const scale = length > 1 ? 1 / length : 1;
   const performance = vehiclePerformance(car.type);
-  const speed = performance.speed * (input.sprinting ? 1.6 : 1);
-  const targetX = input.dx * scale * speed,
-    targetY = input.dy * scale * speed;
+  const previous = car.sprite?.direction ?? Direction.Down;
+  // Reverse is a shared held action: back along the nose, with optional directional steering.
+  // It is deliberately slower than forward driving and cannot be boosted.
+  const reverse = input.reversing === true;
+  const direction = length
+    ? { x: input.dx * scale, y: input.dy * scale }
+    : {
+        x: previous === Direction.Left ? -1 : previous === Direction.Right ? 1 : 0,
+        y: previous === Direction.Up ? -1 : previous === Direction.Down ? 1 : 0,
+      };
+  const speed = performance.speed * (reverse ? -0.5 : input.sprinting ? 1.6 : 1);
+  const targetX = (reverse ? direction.x : input.dx * scale) * speed,
+    targetY = (reverse ? direction.y : input.dy * scale) * speed;
   const old = car.velocity ?? { vx: 0, vy: 0 };
   const change = { vx: targetX - old.vx, vy: targetY - old.vy };
   const difference = Math.hypot(change.vx, change.vy);
-  const amount = Math.min(1, ((length ? performance.acceleration : 448) * dt) / (difference || 1));
+  const amount = Math.min(
+    1,
+    ((length || reverse ? performance.acceleration : 448) * dt) / (difference || 1),
+  );
   const velocity = { vx: old.vx + change.vx * amount, vy: old.vy + change.vy * amount };
   if (contactSpeed !== undefined) {
     const factor = Math.min(1, contactSpeed / (Math.hypot(velocity.vx, velocity.vy) || 1));
@@ -86,7 +99,11 @@ export function drivenCarPose(
   };
   applyVehicleFacing(
     next,
-    facing(velocity.vx, velocity.vy, car.sprite?.direction ?? Direction.Down),
+    reverse
+      ? facing(direction.x, direction.y, previous)
+      : length && velocity.vx * input.dx + velocity.vy * input.dy > 0
+        ? facing(velocity.vx, velocity.vy, previous)
+        : previous,
   );
   if (!car.collider || !next.collider) return;
   const before = getEntityAABB(car.position, car.collider),

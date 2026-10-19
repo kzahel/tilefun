@@ -54,11 +54,11 @@ for (const [model, parts, resource] of [
       await page.getByRole("button", { name: "Siren Off", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-emergency-state", "3");
       await canvas.focus();
-      await page.keyboard.press("b");
+      await page.keyboard.press("l");
       await expect(canvas).toHaveAttribute("data-emergency-state", "2");
-      await page.keyboard.press("b");
+      await page.keyboard.press("l");
       await expect(canvas).toHaveAttribute("data-emergency-state", "3");
-      await page.keyboard.press("Space");
+      await page.keyboard.press("k");
       await expect(canvas).toHaveAttribute("data-emergency-state", "5");
       await page.getByRole("button", { name: "Style: US wail", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-emergency-state", "1");
@@ -77,6 +77,19 @@ for (const [model, parts, resource] of [
         .toBeGreaterThan(before + 120);
       await page.keyboard.up("ArrowRight");
       await page.keyboard.up("Shift");
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-speed")))
+        .toBeLessThan(0.1);
+      const forwardX = Number(await canvas.getAttribute("data-car-x"));
+      await canvas.focus();
+      await page.keyboard.down("r");
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-car-x")))
+        .toBeLessThan(forwardX - 16);
+      await page.keyboard.up("r");
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-speed")))
+        .toBeLessThan(0.1);
       await page.getByRole("button", { name: "Siren On", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-emergency-state", "2");
       await page.getByRole("button", { name: "Get out · E", exact: true }).click();

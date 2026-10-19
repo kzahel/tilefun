@@ -151,7 +151,8 @@ function GeometryFixtures() {
             Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
             Number(keys.current.has("ArrowUp") || keys.current.has("w")),
           jump: keys.current.has(" "),
-          sprinting: false,
+          sprinting: keys.current.has("Shift"),
+          reversing: keys.current.has("r"),
         }),
         underlay: (frame, h) => {
           if (generated) return;
@@ -566,9 +567,19 @@ function GeometryFixtures() {
           style={{ display: "block", width: "100%", touchAction: "none" }}
           onKeyDown={(e) => {
             if (
-              ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
-                e.key,
-              )
+              [
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight",
+                "w",
+                "a",
+                "s",
+                "d",
+                " ",
+                "r",
+                "Shift",
+              ].includes(e.key)
             ) {
               e.preventDefault();
               keys.current.add(e.key);

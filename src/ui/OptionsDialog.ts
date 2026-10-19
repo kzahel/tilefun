@@ -27,7 +27,7 @@ export class OptionsDialog {
     header.append(title, close);
     const controls = document.createElement("p");
     controls.textContent =
-      "Controller: A Jump · X Throw / Siren · Y Interact · RT Sprint · RB Horn · LB Build / Play · View Map · Menu Pause. In menus: A Select · B Back. Select a text field with A to type.";
+      "A / Space Jump · X / B Throw · Y / E Interact · RT / Shift Fast · LT / R Reverse · RB / H Horn · D-pad ↑ / L Lights · D-pad → / K Siren style. LB / Tab Build–Play · View / G Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools; A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.";
 
     const heading = document.createElement("h2");
     heading.textContent = "Movement";

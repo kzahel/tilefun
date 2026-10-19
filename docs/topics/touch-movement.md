@@ -2,7 +2,7 @@
 
 Topic: touch-movement
 Status: Joystick, tap and hold movement delivered; all validation passes, child device trial next.
-Updated: 2026-10-12.
+Updated: 2026-10-19.
 
 Options is available from the gear, hamburger and main menu. It offers Joystick
 (default), Tap to move and Hold to move, remembered per local browser profile.
@@ -69,12 +69,19 @@ keeps labs using their existing controls.
 
 ## Driving buttons
 
-[117](../tactical/117-ambulance-driving-controls.md) keeps the action triangle visible
-while inside a vehicle, including desktop mouse use. Fast uses the existing Sprint
-input; ambulance/firetruck Siren and Style use Throw and Jump button presses once per hold.
-On foot the original A/B/R behavior remains. Button touches stay claimed so they do
-not steer the joystick, tap destination or held world contact. Seat changes,
-menus and focus loss release held buttons; driving suppresses jumping/ball throwing.
+[140](../tactical/140-shared-input-ux-and-reverse.md) replaces A/B/R circles with
+named action paddles in the same shared game UI. Fast stays in a fixed position;
+Jump/Throw retain their meanings, and driving offers Horn, Reverse and applicable
+Lights/Style actions. Hints reflect the most recently used keyboard/controller;
+touch uses action names. Nearby interactions use the same Y/E prompt on web/Deck
+and sit clear of the paddles. Lights use L/D-pad Up and style K/D-pad Right,
+independently of Jump/Throw. Held Reverse/R/LT backs up at half base speed.
+Button touches stay claimed so they do not steer the joystick, tap destination or
+held world contact. Seat changes, menus and focus loss release held buttons.
+
+World Map has its own native touch contact path: two fingers pan and zoom;
+lifting one continues panning without starting a travel hold. Cancellation and
+focus loss discard the gesture. This is independent of optional gameplay pinch.
 
 ## Evidence and next work
 

@@ -1,4 +1,15 @@
 import { expect, it } from "vitest";
+
+it("keeps the car nose forward and rolls wheels backwards during reverse", () => {
+  const car = createVehicle("compact-1", 0, 0, Direction.Right);
+  car.velocity = { vx: -20, vy: 0 };
+  const poses = new EntityMeshPose();
+  const pose = poses.evaluate(car, 1);
+  poses.evaluate(car, 1.1, { wx: -2, wy: 0 });
+  expect(pose?.wheelTravel).toBeCloseTo(-2);
+  expect(Math.abs(pose?.orientation[2] ?? 1)).toBeCloseTo(0);
+});
+
 import { Direction } from "../entities/Entity.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { EntityMeshPose, meshAssetFor } from "./EntityMeshPose.js";

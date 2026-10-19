@@ -1,5 +1,6 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { inputHint } from "../input/InputHints.js";
 import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 import { atDoorThreshold, DoorApproach, towardDoor } from "../interiors/DoorTraversal.js";
 
@@ -17,7 +18,7 @@ export class DoorControl {
   private realmKey = "";
   constructor(private readonly send: (request: DoorRequest) => Promise<unknown>) {
     this.root.style.cssText =
-      "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:80;max-width:80vw;text-align:center;color:white;font:13px monospace;";
+      "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:center;color:white;font:15px sans-serif;";
     this.button.style.cssText =
       "font:inherit;padding:10px 16px;border-radius:6px;border:1px solid #c5d3b6;color:white;background:#243a32;cursor:pointer;";
     this.button.hidden = true;
@@ -99,6 +100,8 @@ export class DoorControl {
     )
       this.activate(true);
     this.button.hidden = !this.request;
+    const hint = inputHint("E", "Y");
+    label = label.replace(" · E", hint ? ` · ${hint}` : "");
     if (this.button.textContent !== label) this.button.textContent = label;
     this.button.disabled = this.busy || locked;
   }

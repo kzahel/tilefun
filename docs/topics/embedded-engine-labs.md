@@ -711,3 +711,13 @@ shopper integration. Generated city preview and main game share these owners.
 Parking presentation requests GPU meshes through the shared selectable host default,
 while explicit renderer URLs remain authoritative. Native parked cars replace
 painted references only in playable views; static review pixels remain independent.
+
+## Shared reverse driving (2026-10-19)
+
+[140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
+ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
+30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh
+orientation uses replicated nose direction against velocity; signed backward
+wheel travel is shared by game and lab presentation. Traffic inspection maps R
+to reverse, L to lights and K to siren style, keeping Jump/Throw meanings separate.
+No Deck-only physics, control scheme or lab driving loop is introduced.

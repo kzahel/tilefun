@@ -2,7 +2,7 @@
 
 Topic: pinch-zoom
 Status: Optional gameplay pinch zoom delivered; physical device trial next.
-Updated: 2026-10-10.
+Updated: 2026-10-19.
 
 The gear, hamburger and main-menu Options dialog has a **Two-finger pinch to
 zoom** checkbox. It defaults to off and is remembered per local browser player
@@ -34,7 +34,9 @@ reset the gesture. New contacts are required after cancellation.
 It shares their claimed-touch set. The optional GameContext input owner is
 installed only in the main game; embedded labs retain their own controls, camera
 policies and simulation contracts. World Map pinch remains its independent
-map navigation gesture.
+map navigation gesture. Its native contact path also supports simultaneous pan
+and zoom and continues panning with the remaining finger; see
+[140](../tactical/140-shared-input-ux-and-reverse.md).
 
 ## Evidence and next work
 

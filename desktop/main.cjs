@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, net, protocol, session, shell } = require("electron");
 const path = require("node:path");
 const fs = require("node:fs");
+const { startGamescopeTouch } = require("./gamescope-touch.cjs");
 const { pathToFileURL } = require("node:url");
 
 // A stable secure origin preserves IndexedDB through upgrades, install paths and host/join reloads.
@@ -81,6 +82,8 @@ else {
         sandbox: true,
       },
     });
+    const stopTouch = startGamescopeTouch(process.pid);
+    app.once("will-quit", stopTouch);
     const external = (url) => {
       if (/^https?:\/\//.test(url)) void shell.openExternal(url);
     };

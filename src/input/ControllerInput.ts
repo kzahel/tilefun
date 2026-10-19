@@ -1,4 +1,6 @@
 import type { ActionName } from "./ActionMap.js";
+import { controllerPointer } from "./ControllerPointer.js";
+import { noteInputSource } from "./InputHints.js";
 
 export type ControllerCommand =
   | "up"
@@ -85,6 +87,7 @@ export class ControllerInput {
     this.movement = { dx: 0, dy: 0, sprinting: false, jump: false };
     this.previous.clear();
     this.repeating = undefined;
+    controllerPointer.reset();
   };
 
   sample(pads: readonly (Gamepad | null)[], now: number): ControllerCommand[] {
@@ -108,6 +111,7 @@ export class ControllerInput {
       this.source = gp.index;
     }
     const ui = this.uiActive();
+    if (meaningful(gp)) noteInputSource("controller");
     if (ui !== this.wasUI) {
       this.reset();
       this.wasUI = ui;
@@ -119,7 +123,24 @@ export class ControllerInput {
         return [];
       this.blocked = false;
     }
-    this.rightStick = ui ? { dx: 0, dy: 0 } : controllerAxes(gp.axes[2] ?? 0, gp.axes[3] ?? 0);
+    // Focus navigation takes ownership from the virtual pointer, so A acts on
+    // the newly focused control rather than the last right-stick target.
+    if (
+      ui &&
+      (buttons.slice(12, 16).some((button) => button.pressed) ||
+        Math.abs(axes.dx) > 0.5 ||
+        Math.abs(axes.dy) > 0.5)
+    )
+      controllerPointer.reset();
+    this.rightStick = controllerAxes(gp.axes[2] ?? 0, gp.axes[3] ?? 0);
+    const pointerSelected = controllerPointer.update(
+      this.rightStick.dx,
+      this.rightStick.dy,
+      now,
+      !!buttons[0]?.pressed || !!buttons[7]?.pressed,
+      ui,
+      !!buttons[6]?.pressed,
+    );
     this.erase = !ui && !!buttons[6]?.pressed;
     this.held.clear();
     if (!ui) {
@@ -127,6 +148,9 @@ export class ControllerInput {
       if (buttons[2]?.pressed) this.held.add("throw");
       if (buttons[5]?.pressed) this.held.add("honk");
       if (buttons[7]?.pressed) this.held.add("sprint");
+      if (buttons[6]?.pressed) this.held.add("reverse");
+      if (buttons[12]?.pressed) this.held.add("vehicle_lights");
+      if (buttons[15]?.pressed) this.held.add("vehicle_style");
     }
     this.movement = {
       ...(!ui ? axes : { dx: 0, dy: 0 }),
@@ -135,7 +159,8 @@ export class ControllerInput {
     };
     const commands = new Set<ControllerCommand>();
     for (const [index, command] of Object.entries(BUTTONS))
-      if (buttons[Number(index)]?.pressed) commands.add(command);
+      if (buttons[Number(index)]?.pressed && !(command === "confirm" && pointerSelected))
+        commands.add(command);
     if (ui) {
       if (axes.dy < -0.5) commands.add("up");
       if (axes.dy > 0.5) commands.add("down");

@@ -179,7 +179,8 @@ export default function NaturalLandscapePage() {
           Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
           Number(keys.current.has("ArrowUp") || keys.current.has("w")),
         jump: keys.current.has(" "),
-        sprinting: false,
+        sprinting: keys.current.has("Shift"),
+        reversing: keys.current.has("r"),
       }),
       onFrame: (h) => {
         const sound = audio.current,
@@ -623,9 +624,19 @@ export default function NaturalLandscapePage() {
           style={{ width: "100%", height: "100%", touchAction: "none" }}
           onKeyDown={(e) => {
             if (
-              ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", " ", "w", "a", "s", "d"].includes(
-                e.key,
-              )
+              [
+                "ArrowLeft",
+                "ArrowRight",
+                "ArrowUp",
+                "ArrowDown",
+                " ",
+                "w",
+                "a",
+                "s",
+                "d",
+                "r",
+                "Shift",
+              ].includes(e.key)
             ) {
               e.preventDefault();
               keys.current.add(e.key);

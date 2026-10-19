@@ -1,4 +1,5 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
+import { inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
@@ -18,7 +19,7 @@ export class VehicleControl {
   private targetKey = "";
   constructor(private send: (request: VehicleRequest) => Promise<unknown>) {
     this.root.style.cssText =
-      "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:80;max-width:85vw;text-align:center;color:white;font:15px sans-serif";
+      "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:center;color:white;font:15px sans-serif";
     this.button.style.cssText =
       "font:inherit;padding:12px 18px;min-height:48px;border-radius:8px;border:1px solid #c5d3b6;color:white;background:#243a32;cursor:pointer";
     this.root.dataset.vehicleControl = "";
@@ -75,26 +76,30 @@ export class VehicleControl {
         : null;
     this.root.hidden = !this.request;
     this.button.disabled = this.busy || locked;
-    const label = current
-      ? "Get out · E"
+    const action = current
+      ? "Get out"
       : candidate && isTrain(candidate)
-        ? "Drive train · E"
+        ? "Drive train"
         : bench
-          ? "Call train · E"
-          : "Drive car · E";
+          ? "Call train"
+          : "Drive car";
+    const hint = inputHint("E", "Y");
+    const label = `${action}${hint ? ` · ${hint}` : ""}`;
     if (this.button.textContent !== label) this.button.textContent = label;
     if (current && !this.busy && !this.error) {
       const hint = isTrain(current)
-        ? movementMode === "hold"
-          ? "Hold left / right to travel · lift to stop"
-          : movementMode === "tap"
-            ? "Tap left / right to travel · tap again to stop"
-            : "W/S or arrows to drive train"
-        : movementMode === "hold"
-          ? "Hold toward a direction to drive · lift to stop"
-          : movementMode === "tap"
-            ? "Tap a destination to drive"
-            : "WASD or arrows to drive car";
+        ? inputHint("W/S or arrows to drive train", "Left stick ↑/↓ to drive train") ||
+          (movementMode === "hold"
+            ? "Hold left / right to travel · lift to stop"
+            : movementMode === "tap"
+              ? "Tap left / right to travel · tap again to stop"
+              : "Drag left / right to drive train")
+        : inputHint("WASD / arrows · R to reverse", "Left stick · LT to reverse") ||
+          (movementMode === "hold"
+            ? "Hold toward a direction to drive · Reverse to back up"
+            : movementMode === "tap"
+              ? "Tap a destination to drive · Reverse to back up"
+              : "Drag to steer · Reverse to back up");
       if (this.status.textContent !== hint) this.status.textContent = hint;
     }
     return !!this.request;

@@ -26,7 +26,7 @@ const PHASE_MS = 1000 / 480;
 export async function runCarDrivingCase(
   serverHz: 30 | 60,
   profile: Profile,
-  motion: "cruise" | "turn-release" = "cruise",
+  motion: "cruise" | "turn-release" | "reverse" = "cruise",
 ) {
   const originalRate = getServerTickRate();
   const recipe = contactRecipe("car-roof");
@@ -122,13 +122,15 @@ export async function runCarDrivingCase(
         }
         const commandDt = quantizeInputDtMs(dt * 1000) / 1000;
         const input =
-          motion === "cruise" || step < 120
-            ? RIGHT
-            : step < 240
-              ? { ...RIGHT, dy: 1 }
-              : step < 360
-                ? { ...IDLE, dy: -1 }
-                : IDLE;
+          motion === "reverse"
+            ? { ...IDLE, reversing: true }
+            : motion === "cruise" || step < 120
+              ? RIGHT
+              : step < 240
+                ? { ...RIGHT, dy: 1 }
+                : step < 360
+                  ? { ...IDLE, dy: -1 }
+                  : IDLE;
         predictor.storeInput(++seq, input, commandDt);
         predictor.update(commandDt, input, view.world, view.props, view.serverEntities);
         // Every half-second, move one input across a server deadline. Delivery

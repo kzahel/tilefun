@@ -141,7 +141,7 @@ export class VehicleControl {
   }
   input(
     session: PlayerSession,
-    input: { dx: number; dy: number; sprinting?: boolean },
+    input: { dx: number; dy: number; sprinting?: boolean; reversing?: boolean },
     dt: number,
   ): void {
     const driver = this.drivers.get(session.player.id);

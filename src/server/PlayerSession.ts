@@ -42,6 +42,7 @@ export class PlayerSession {
     sprinting: boolean;
     jump: boolean;
     jumpPressed?: boolean;
+    reversing?: boolean;
     dtMs?: number;
     seq: number;
   }[] = [];

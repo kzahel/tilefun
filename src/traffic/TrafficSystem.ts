@@ -823,7 +823,11 @@ export class TrafficSystem {
     s.distance = Math.min(s.distance, s.lane.path.length);
     this.onChange?.(s, false);
   }
-  drive(s: TrafficState, input: { dx: number; dy: number; sprinting?: boolean }, dt: number): void {
+  drive(
+    s: TrafficState,
+    input: { dx: number; dy: number; sprinting?: boolean; reversing?: boolean },
+    dt: number,
+  ): void {
     s.entity.prevPosition = { ...s.entity.position };
     s.entity.prevWz = s.entity.wz ?? 0;
     const steps = Math.max(1, Math.ceil(dt * 60));

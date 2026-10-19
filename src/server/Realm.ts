@@ -1521,6 +1521,7 @@ export class Realm {
           dy: msg.dy,
           sprinting: msg.sprinting,
           jump: msg.jump,
+          ...(msg.reversing === true ? { reversing: true } : {}),
           seq: msg.seq,
           ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
           ...(msg.dtMs !== undefined ? { dtMs: msg.dtMs } : {}),

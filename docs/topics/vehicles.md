@@ -2,7 +2,7 @@
 
 Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
-Updated: 2026-10-18.
+Updated: 2026-10-19.
 
 The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversion
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
@@ -55,7 +55,7 @@ support checks pass; no unrelated touch changes are included in this grass fix.
 [117](../tactical/117-ambulance-driving-controls.md) integrates the retained ambulance v2
 in the shared game/lab GPU mesh path. Driving keeps action buttons visible on desktop
 and touch: hold **Fast / Shift** for 1.6× car speed (1.5× train speed). Ambulances, police cars and both firetruck variants also
-have **Siren / B** to toggle lights and sound, and **Style / Space** to cycle EU-style
+have **Siren / L / D-pad Up** to toggle lights and sound, and **Style / K / D-pad Right** to cycle EU-style
 two-tone, US-style wail and lights-only. Style selection survives switching off.
 These are stylized synthesized sounds; the local Kenney Impact Sounds pack has no siren.
 Nearby listeners hear distance-attenuated, panned loops; menus/focus loss stop playback.
@@ -69,10 +69,24 @@ approved sprite bytes. No geometry, damage or traffic priority rule changes.
 its own GPU resource, bounds, wheel rig and tagged blue lenses. Traffic playground
 offers all 45 models and driver action controls through the shared registry in
 [122](../tactical/122-complete-vehicle-port.md). Both garbage trucks have silent
-**Beacon / B** controls. Raised firetrucks use their own model with the authored
+**Beacon / L / D-pad Up** controls. Raised firetrucks use their own model with the authored
 rest pose and remain excluded from automatic traffic; the other 44 types retain
 normal road-width admission. All types preserve complete sprite fallback.
 Exact model-art review and nonzero steering/equipment-motion qualification remain open.
+
+## Shared reverse driving
+
+[140](../tactical/140-shared-input-ux-and-reverse.md) adds held Reverse (paddle,
+R key or LT) through the existing binary command, shared authority and prediction.
+It backs along the nose without steering input; directional input steers the nose
+while backing. Speed is half base speed, without boost. Release brakes normally.
+The ordinary collision, gentle push, roof-rider and terrain-readiness gates remain
+shared by game and embedded labs. Replicated facing keeps sprite/GPU noses forward
+and GPU wheels roll with signed backward travel. Gear state is not saved.
+
+Jump and Throw no longer toggle emergency actions while driving. The shared named
+paddles and Y/E interaction hints are the same on web and Deck; only input-source
+hints change. Traffic inspection uses R, L and K too.
 
 ## Horns, driving personality and gentle contact
 
@@ -420,8 +434,8 @@ cylinders at neutral steering. These visual proofs do not change collision proxi
 
 Ambulance, police and both fire trucks accept driver-only persistent siren state
 0–5: enable bit plus lights-only/EU/US style. Green and orange garbage accept only
-0/1 silent amber beacon state; style commands have no effect. B/touch toggles the
-lights; Space selects a siren style only on siren vehicles. The traffic lab uses
+0/1 silent amber beacon state; style commands have no effect. L / D-pad Up / touch toggles the
+lights; K / D-pad Right selects a siren style only on siren vehicles. The traffic lab uses
 the same shortcuts, suppressing repeated keydown toggles. Both Canvas and GPU
 sprite fallback keep colored flashing, and loaded GLBs pulse named lens materials.
 Audio never creates a siren for warning trucks. Wrong drivers/editor mode cannot

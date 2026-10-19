@@ -1,5 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
+import { isVehicle } from "../traffic/Vehicle.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { COMPACT_CAR_MESH, type MeshInstance, vehicleMeshRadius } from "./MeshPresentation.js";
@@ -41,8 +42,12 @@ export function trainMeshHeading(entity: Entity): number {
 }
 export function entityHeading(entity: Entity): number {
   const velocity = entity.velocity;
-  if (velocity && Math.hypot(velocity.vx, velocity.vy) > 0.01)
-    return Math.atan2(velocity.vy, velocity.vx);
+  if (velocity && Math.hypot(velocity.vx, velocity.vy) > 0.01) {
+    const moving = Math.atan2(velocity.vy, velocity.vx);
+    return isVehicle(entity) && Math.cos(moving - entityFacingHeading(entity)) < -0.01
+      ? moving + Math.PI
+      : moving;
+  }
   return entityFacingHeading(entity);
 }
 export function entityFacingHeading(entity: Pick<Entity, "sprite">): number {
@@ -117,8 +122,15 @@ export class EntityMeshPose {
           const motionHeading = moving ? target : pose.angle;
           // Follow displayed motion, but reject backwards snapshot corrections.
           // Velocity is the forward/reverse intent, not a second turn clock.
-          if (dx * Math.cos(motionHeading) + dy * Math.sin(motionHeading) > 0)
-            pose.angle = Math.atan2(dy, dx);
+          const backwards =
+            moving &&
+            entity.velocity &&
+            entity.velocity.vx * Math.cos(target) + entity.velocity.vy * Math.sin(target) < 0;
+          if (
+            (dx * Math.cos(motionHeading) + dy * Math.sin(motionHeading)) * (backwards ? -1 : 1) >
+            0
+          )
+            pose.angle = Math.atan2(dy, dx) + (backwards ? Math.PI : 0);
         }
       } else if (
         elapsed > 0 &&

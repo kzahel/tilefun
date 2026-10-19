@@ -149,7 +149,7 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
         command: `tp ${wx} ${wy - 16}`,
       });
     }, car);
-    await page.getByRole("button", { name: "Drive car · E", exact: true }).tap();
+    await page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ }).tap();
     await expect
       .poll(() =>
         page.evaluate(() => {
@@ -159,15 +159,15 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
       )
       .toBe(car.id);
     await page.locator("#game").focus();
-    await page.keyboard.press("b", { delay: 80 });
+    await page.keyboard.press("l", { delay: 80 });
     await expect.poll(async () => (await vehicles(page))[0]?.state).toBe(3);
     await page.keyboard.down("ArrowRight");
     await expect.poll(async () => (await vehicles(page))[0]?.wx ?? 0).toBeGreaterThan(car.wx + 30);
     await page.keyboard.up("ArrowRight");
     await reopen(page, renderer);
     await expect.poll(async () => (await vehicles(page))[0]?.state).toBe(3);
-    await expect(page.getByRole("button", { name: "Get out · E", exact: true })).toBeVisible();
-    await page.getByRole("button", { name: "Get out · E", exact: true }).tap();
+    await expect(page.getByRole("button", { name: /^Get out(?: · [EY])?$/ })).toBeVisible();
+    await page.getByRole("button", { name: /^Get out(?: · [EY])?$/ }).tap();
     const parked = (await vehicles(page))[0];
     if (!parked) throw Error("Lost vehicle");
     await page.waitForTimeout(350);

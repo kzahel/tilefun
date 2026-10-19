@@ -100,7 +100,7 @@ for (const backend of ["canvas", "gpu"]) {
     await expect.poll(async () => (await read(page)).count, { timeout: 15000 }).toBe(3);
     if ((await read(page)).editing) await page.keyboard.press("Tab");
     await teleport(page, (first.x - 12) * 16, (first.y - 3) * 16);
-    const call = page.getByRole("button", { name: "Call train · E", exact: true });
+    const call = page.getByRole("button", { name: /^Call train(?: · [EY])?$/ });
     await expect(call).toBeVisible();
     await expect
       .poll(async () => (await read(page)).trainX, { timeout: 20000 })

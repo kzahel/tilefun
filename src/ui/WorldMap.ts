@@ -77,8 +77,8 @@ export class WorldMap {
       this.button("↑", () => this.panController(0, -1)),
       this.button("↓", () => this.panController(0, 1)),
       this.button("→", () => this.panController(1, 0)),
-      this.button("Travel to center", () => {
-        void this.travel({ x: this.view.x, y: this.view.y });
+      this.button("Travel to selected point", () => {
+        void this.travel(this.target ?? { x: this.view.x, y: this.view.y });
       }),
       this.count,
     );
@@ -88,6 +88,12 @@ export class WorldMap {
     );
     this.canvas.setAttribute("data-testid", "world-map-canvas");
     this.canvas.tabIndex = 0;
+    this.canvas.dataset.controllerPoint = "true";
+    this.canvas.addEventListener("controller-point", (event) => {
+      const point = (event as CustomEvent<Point>).detail;
+      const rect = this.canvas.getBoundingClientRect();
+      this.selectPoint({ x: point.x - rect.left, y: point.y - rect.top });
+    });
     this.status.setAttribute("role", "status");
     this.status.textContent = "Loading your world…";
     const footer = document.createElement("footer");
@@ -131,6 +137,13 @@ export class WorldMap {
     this.canvas.addEventListener("pointerup", (event) => this.pointerUp(event, false));
     this.canvas.addEventListener("pointercancel", (event) => this.pointerUp(event, true));
     this.canvas.addEventListener("lostpointercapture", (event) => this.pointerUp(event, true));
+    // Native touchscreen contacts have their own path. Some device/browser stacks
+    // cancel secondary pointer events while still delivering complete touch lists.
+    this.canvas.addEventListener("touchstart", this.touchStart, { passive: false });
+    this.canvas.addEventListener("touchmove", this.touchMove, { passive: false });
+    this.canvas.addEventListener("touchend", this.touchEnd, { passive: false });
+    this.canvas.addEventListener("touchcancel", this.touchCancel, { passive: false });
+    window.addEventListener("blur", this.resetGesture);
     this.canvas.addEventListener(
       "wheel",
       (event) => {
@@ -187,14 +200,13 @@ export class WorldMap {
     this.map = null;
     this.target = null;
     this.busy = false;
-    this.pointers.clear();
-    this.gesture = null;
-    this.pinch = null;
+    this.resetGesture();
     this.previousFocus?.focus();
   }
 
   destroy(): void {
     this.hide();
+    window.removeEventListener("blur", this.resetGesture);
     this.resize.disconnect();
     this.root.remove();
   }
@@ -430,15 +442,21 @@ export class WorldMap {
     this.holdTimer = undefined;
   }
   private pointerDown(event: PointerEvent): void {
+    if (event.pointerType === "touch" && "ontouchstart" in window) return;
     if (this.busy || event.button !== 0) return;
     event.preventDefault();
     this.canvas.focus();
     this.canvas.setPointerCapture(event.pointerId);
-    const point = this.point(event);
-    this.pointers.set(event.pointerId, point);
+    this.beginContact(event.pointerId, this.point(event));
+  }
+  private beginContact(id: number, point: Point): void {
+    if (this.busy) return;
+    this.pointers.set(id, point);
     this.cancelHold();
     if (this.pointers.size > 1) {
       this.gesture = null;
+      this.pinch = null;
+      if (this.pointers.size !== 2) return;
       const [a, b] = [...this.pointers.values()];
       if (a && b)
         this.pinch = {
@@ -456,10 +474,14 @@ export class WorldMap {
     }, 650);
   }
   private pointerMove(event: PointerEvent): void {
+    if (event.pointerType === "touch" && "ontouchstart" in window) return;
     if (!this.pointers.has(event.pointerId) || this.busy) return;
     event.preventDefault();
-    const point = this.point(event);
-    this.pointers.set(event.pointerId, point);
+    this.moveContact(event.pointerId, this.point(event));
+  }
+  private moveContact(id: number, point: Point): void {
+    if (!this.pointers.has(id) || this.busy) return;
+    this.pointers.set(id, point);
     if (this.pinch && this.pointers.size >= 2) {
       const [a, b] = [...this.pointers.values()];
       if (!a || !b) return;
@@ -495,17 +517,68 @@ export class WorldMap {
     }
   }
   private pointerUp(event: PointerEvent, cancelled: boolean): void {
-    if (!this.pointers.has(event.pointerId)) return;
+    if (event.pointerType === "touch" && "ontouchstart" in window) return;
+    this.endContact(event.pointerId, this.point(event), cancelled);
+  }
+  private selectPoint(point: Point): void {
+    this.target = screenToWorld(this.view, this.width, this.height, point);
+    this.status.textContent = `Hold or choose Travel to selected point near ${Math.round(this.target.x)}, ${Math.round(this.target.y)}.`;
+    this.draw();
+  }
+  private endContact(id: number, point: Point, cancelled: boolean): void {
+    if (!this.pointers.has(id)) return;
     this.cancelHold();
     if (!cancelled && this.gesture && !this.gesture.dragged && !this.gesture.held) {
-      this.target = screenToWorld(this.view, this.width, this.height, this.point(event));
-      this.status.textContent = `Hold to travel near ${Math.round(this.target.x)}, ${Math.round(this.target.y)}.`;
-      this.draw();
+      this.selectPoint(point);
     }
-    this.pointers.delete(event.pointerId);
+    this.pointers.delete(id);
     this.gesture = null;
     this.pinch = null;
+    // Continue panning with the remaining finger; it must never become a travel hold.
+    if (!cancelled && this.pointers.size === 1) {
+      const origin = [...this.pointers.values()][0];
+      if (origin) this.gesture = { origin, view: { ...this.view }, dragged: true, held: false };
+    }
   }
+  private resetGesture = (): void => {
+    this.cancelHold();
+    this.pointers.clear();
+    this.gesture = null;
+    this.pinch = null;
+  };
+  private touchStart = (event: TouchEvent): void => {
+    event.preventDefault();
+    this.canvas.focus();
+    const rect = this.canvas.getBoundingClientRect();
+    for (const touch of event.changedTouches)
+      this.beginContact(touch.identifier, {
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top,
+      });
+  };
+  private touchMove = (event: TouchEvent): void => {
+    event.preventDefault();
+    const rect = this.canvas.getBoundingClientRect();
+    for (const touch of event.changedTouches)
+      this.moveContact(touch.identifier, {
+        x: touch.clientX - rect.left,
+        y: touch.clientY - rect.top,
+      });
+  };
+  private touchEnd = (event: TouchEvent): void => {
+    event.preventDefault();
+    const rect = this.canvas.getBoundingClientRect();
+    for (const touch of event.changedTouches)
+      this.endContact(
+        touch.identifier,
+        { x: touch.clientX - rect.left, y: touch.clientY - rect.top },
+        false,
+      );
+  };
+  private touchCancel = (event: TouchEvent): void => {
+    event.preventDefault();
+    this.resetGesture();
+  };
   private async travel(point: Point): Promise<void> {
     if (!this.map || this.busy) return;
     this.busy = true;

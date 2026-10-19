@@ -269,8 +269,8 @@ export class PlayScene implements GameScene {
       gc.touchHold?.reset();
       gc.touchButtons.reset();
       this.occupiedId = vehicle?.id;
-      this.emergencyHeld = gc.actions.isHeld("throw");
-      this.styleHeld = gc.actions.isHeld("jump");
+      this.emergencyHeld = gc.actions.isHeld("vehicle_lights");
+      this.styleHeld = gc.actions.isHeld("vehicle_style");
     }
     gc.touchButtons.driving = !!vehicle;
     gc.touchButtons.emergency = !!vehicle && isEmergencyVehicle(vehicle);
@@ -316,8 +316,8 @@ export class PlayScene implements GameScene {
     }
     this.hornHeld = hornHeld;
     if (inputLocked) gc.audioManager.stopHorns();
-    const sirenHeld = !inputLocked && gc.actions.isHeld("throw");
-    const styleHeld = !inputLocked && gc.actions.isHeld("jump");
+    const sirenHeld = !inputLocked && gc.actions.isHeld("vehicle_lights");
+    const styleHeld = !inputLocked && gc.actions.isHeld("vehicle_style");
     if (vehicle && hasVehicleLights(vehicle)) {
       if (sirenHeld && !this.emergencyHeld)
         gc.transport.send({ type: "vehicle-emergency", action: "toggle" });
@@ -352,6 +352,7 @@ export class PlayScene implements GameScene {
       sprinting: rawMovement.sprinting,
       jump: rawMovement.jump,
       jumpPressed,
+      reversing: !!vehicle && !isTrain(vehicle) && !inputLocked && gc.actions.isHeld("reverse"),
     };
     const seq = nextInputSequence(gc.transport);
     gc.transport.send({
@@ -362,6 +363,7 @@ export class PlayScene implements GameScene {
       sprinting: movement.sprinting,
       jump: movement.jump,
       jumpPressed: movement.jumpPressed,
+      reversing: movement.reversing,
       dtMs: commandDtMs,
     });
 

@@ -41,12 +41,14 @@ for (const model of ["garbage-truck-green", "garbage-truck-orange"]) {
       await expect(canvas).toHaveAttribute("data-emergency-state", "1");
       await canvas.focus();
       await page.keyboard.press("Space");
+      await page.keyboard.press("b");
+      await page.keyboard.press("k"); // warning trucks have no siren styles
       await expect(canvas).toHaveAttribute("data-emergency-state", "1");
-      await page.keyboard.down("b");
+      await page.keyboard.down("l");
       await expect(canvas).toHaveAttribute("data-emergency-state", "0");
-      await page.keyboard.down("b");
+      await page.keyboard.down("l");
       await expect(canvas).toHaveAttribute("data-emergency-state", "0");
-      await page.keyboard.up("b");
+      await page.keyboard.up("l");
       const before = Number(await canvas.getAttribute("data-car-x"));
       await page.keyboard.down("ArrowRight");
       await page.keyboard.down("Shift");

@@ -1,4 +1,4 @@
-import { expect, type Page, test } from "@playwright/test";
+import { expect, type Locator, type Page, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
 
@@ -30,6 +30,34 @@ async function focusWithPad(page: Page, name: string) {
   }
   throw Error(`Couldn't reach ${name} with D-pad`);
 }
+async function pointAt(page: Page, target: Locator) {
+  const box = await target.boundingBox();
+  if (!box) throw Error("Pointer target is missing");
+  await page.evaluate(
+    async ({ x, y }) => {
+      const pad = (window as unknown as { testPad: Gamepad }).testPad;
+      const axes = pad.axes as number[];
+      for (let frame = 0; frame < 400; frame++) {
+        const pointer = document.querySelector<HTMLElement>('[data-testid="controller-pointer"]');
+        const px = pointer ? Number.parseFloat(pointer.style.left) : innerWidth * 0.5;
+        const py = pointer ? Number.parseFloat(pointer.style.top) : innerHeight * 0.35;
+        const dx = x - px,
+          dy = y - py;
+        // Ease near the target: a fixed high speed can oscillate across it when
+        // real GPU frames are slower than the harness's observation cadence.
+        const aim = (delta: number) =>
+          Math.abs(delta) < 4 ? 0 : Math.sign(delta) * Math.min(0.6, 0.2 + Math.abs(delta) / 200);
+        axes[2] = aim(dx);
+        axes[3] = aim(dy);
+        if (!axes[2] && !axes[3]) return;
+        await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+      }
+      axes[2] = axes[3] = 0;
+      throw Error("Controller cursor did not reach the control");
+    },
+    { x: box.x + box.width / 2, y: box.y + box.height / 2 },
+  );
+}
 test.beforeEach(async ({ page }) => {
   await page.addInitScript(() => {
     const pad = {
@@ -42,6 +70,46 @@ test.beforeEach(async ({ page }) => {
     Object.assign(window, { testPad: pad });
     Object.defineProperty(navigator, "getGamepads", { value: () => [pad] });
   });
+});
+test("right-stick cursor selects editor tools and map controls with A and RT", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/tilefun/?desktop=1");
+  await expect(page.getByTestId("world-menu")).toBeVisible();
+  await press(page, 0);
+  // The game defaults to editing for a new profile.
+  const panel = page.getByTestId("editor-panel");
+  if (!(await panel.isVisible())) await press(page, 4);
+  // LT can erase immediately, before the right stick or paint trigger has been used.
+  await press(page, 6);
+  await expect(page.getByTestId("controller-pointer")).toBeVisible();
+  const entities = panel.locator('[data-editor-tab="entities"]');
+  await pointAt(page, entities);
+  await press(page, 7);
+  await expect(panel.getByTestId("editor-selection")).toContainText(/Chicken|Chick|Entities/i);
+  const vehicles = panel.locator('[data-editor-tab="vehicles"]');
+  await pointAt(page, vehicles);
+  await press(page, 0);
+  await expect(panel.getByTestId("editor-selection")).toContainText(/compact|car|vehicle/i);
+  await press(page, 4);
+  await press(page, 8);
+  const map = page.getByTestId("world-map");
+  await expect(map).toBeVisible();
+  const before = Number(await map.getAttribute("data-zoom"));
+  await pointAt(page, map.getByRole("button", { name: "Zoom in", exact: true }));
+  await press(page, 7);
+  await expect
+    .poll(async () => Number(await map.getAttribute("data-zoom")))
+    .toBeGreaterThan(before);
+  // Switching back to focus navigation must reclaim A from the old pointer.
+  await press(page, 15);
+  await expect(map.getByRole("button", { name: "Zoom out", exact: true })).toBeFocused();
+  await press(page, 0);
+  await expect.poll(async () => Number(await map.getAttribute("data-zoom"))).toBe(before);
+  await pointAt(page, map.getByTestId("world-map-canvas"));
+  await press(page, 0);
+  await expect(map.getByRole("status")).toContainText("Travel to selected point");
+  await press(page, 1);
+  await expect(map).toBeHidden();
 });
 test("Deck-sized menu, worlds, text keyboard, character and Options are controller complete", async ({
   page,

@@ -5329,7 +5329,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:79"
+          "source": "src/ui/DoorControl.ts:80"
         }
       ]
     },
@@ -25291,7 +25291,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorMode.ts:91"
+          "source": "src/editor/EditorMode.ts:92"
         },
         {
           "system": "Gameplay",
@@ -25359,7 +25359,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/PlayerSession.ts:82"
+          "source": "src/server/PlayerSession.ts:83"
         },
         {
           "system": "Gameplay",
@@ -25371,15 +25371,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1628"
+          "source": "src/server/Realm.ts:1629"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2306"
+          "source": "src/server/Realm.ts:2307"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2526"
+          "source": "src/server/Realm.ts:2527"
         },
         {
           "system": "Gameplay",
@@ -25403,7 +25403,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:149"
+          "source": "src/traffic/Driving.ts:166"
         },
         {
           "system": "Gameplay",
@@ -26179,11 +26179,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:820"
+          "source": "src/scenes/PlayScene.ts:822"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2490"
+          "source": "src/server/Realm.ts:2491"
         },
         {
           "system": "Gameplay",

@@ -47,6 +47,7 @@ import {
   type GenerationDescriptor,
 } from "../generation/GenerationDescriptor.js";
 import { ActionManager } from "../input/ActionManager.js";
+import { inputHint } from "../input/InputHints.js";
 import {
   TapMovement,
   type TapTarget,
@@ -627,6 +628,11 @@ export class GameClient {
                 ),
               ));
         this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
+        if (this.mapButton) {
+          const hint = inputHint("G", "View");
+          const label = `Map${hint ? ` · ${hint}` : ""}`;
+          if (this.mapButton.textContent !== label) this.mapButton.textContent = label;
+        }
         const vehiclePrompt = this.vehicleControl.update(
           this.stateView,
           this.initDone && ready && this.scenes.current instanceof PlayScene,

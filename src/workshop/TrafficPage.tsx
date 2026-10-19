@@ -64,6 +64,7 @@ export default function TrafficPage() {
           dy: Number(k.has("ArrowDown") || k.has("s")) - Number(k.has("ArrowUp") || k.has("w")),
           jump: k.has(" "),
           sprinting: k.has("Shift"),
+          reversing: k.has("r"),
         };
       },
       onError: (e) => {
@@ -374,9 +375,9 @@ export default function TrafficPage() {
             }
             const vehicle = { type: `vehicle-v1:${model}` };
             const lightAction =
-              e.key.toLowerCase() === "b"
+              e.key.toLowerCase() === "l"
                 ? "toggle"
-                : e.key === " " && isEmergencyVehicle(vehicle)
+                : e.key.toLowerCase() === "k" && isEmergencyVehicle(vehicle)
                   ? "style"
                   : undefined;
             if (driving && hasVehicleLights(vehicle) && lightAction) {
@@ -399,6 +400,7 @@ export default function TrafficPage() {
                 "d",
                 " ",
                 "Shift",
+                "r",
               ].includes(e.key)
             ) {
               keys.current.add(e.key);

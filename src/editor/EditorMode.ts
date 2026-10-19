@@ -3,6 +3,7 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import { controllerInput } from "../input/ControllerInput.js";
+import { controllerPointer } from "../input/ControllerPointer.js";
 import { type InteriorIdentity, interiorRealmId } from "../interiors/GameplayInterior.js";
 import {
   compileGameplayRoom,
@@ -252,6 +253,7 @@ export class EditorMode {
   }
 
   attach(): void {
+    controllerPointer.worldActive = true;
     window.addEventListener("keydown", this.onKeyDown);
     window.addEventListener("blur", this.onBlur);
     this.canvas.addEventListener("mousedown", this.onMouseDown);
@@ -270,10 +272,9 @@ export class EditorMode {
   }
 
   detach(): void {
-    this.cursorElement?.remove();
-    this.cursorElement = undefined;
+    controllerPointer.worldActive = false;
+    controllerPointer.reset();
     this.controllerPainting = false;
-    this.controllerCursorActive = false;
     controllerInput.reset();
     window.removeEventListener("keydown", this.onKeyDown);
     window.removeEventListener("blur", this.onBlur);
@@ -295,24 +296,17 @@ export class EditorMode {
   }
 
   /** Call from game loop to apply continuous key-based panning. */
-  private controllerCursor = { x: 0.5, y: 0.35 };
   private controllerPainting = false;
-  private controllerCursorActive = false;
   private controllerErase = false;
-  private cursorElement: HTMLDivElement | undefined;
-  private updateController(dt: number): void {
+  private updateController(): void {
     const pad = controllerInput;
     if (
-      pad.rightStick.dx ||
-      pad.rightStick.dy ||
-      pad.movement.dx ||
-      pad.movement.dy ||
-      pad.held.has("sprint") ||
-      pad.erase
-    )
-      this.controllerCursorActive = true;
-    if (!pad.connected || pad.uiActive() || !this.controllerCursorActive) {
-      if (this.cursorElement) this.cursorElement.hidden = true;
+      !pad.connected ||
+      pad.uiActive() ||
+      !controllerPointer.active ||
+      controllerPointer.overUI ||
+      controllerPointer.claimed
+    ) {
       if (this.controllerPainting) {
         this.finishPattern();
         this.isPainting = false;
@@ -321,27 +315,9 @@ export class EditorMode {
       }
       return;
     }
-    if (!this.cursorElement) {
-      this.cursorElement = document.createElement("div");
-      this.cursorElement.style.cssText =
-        "position:fixed;pointer-events:none;z-index:95;width:18px;height:18px;border:2px solid #ffe69b;border-radius:50%;transform:translate(-50%,-50%);box-shadow:0 0 0 2px #172731;";
-      this.cursorElement.setAttribute("aria-hidden", "true");
-      document.body.append(this.cursorElement);
-    }
-    this.cursorElement.hidden = false;
     const rect = this.canvas.getBoundingClientRect();
-    this.controllerCursor.x = Math.max(
-      0,
-      Math.min(1, this.controllerCursor.x + (pad.rightStick.dx * dt * 500) / rect.width),
-    );
-    this.controllerCursor.y = Math.max(
-      0,
-      Math.min(1, this.controllerCursor.y + (pad.rightStick.dy * dt * 500) / rect.height),
-    );
-    const sx = this.controllerCursor.x * this.canvas.width,
-      sy = this.controllerCursor.y * this.canvas.height;
-    this.cursorElement.style.left = `${rect.x + this.controllerCursor.x * rect.width}px`;
-    this.cursorElement.style.top = `${rect.y + this.controllerCursor.y * rect.height}px`;
+    const sx = ((controllerPointer.x - rect.left) / rect.width) * this.canvas.width;
+    const sy = ((controllerPointer.y - rect.top) / rect.height) * this.canvas.height;
     this.updateCursor(sx, sy);
     const painting = pad.held.has("sprint") || pad.erase;
     if (this.controllerPainting && (!painting || pad.erase !== this.controllerErase)) {
@@ -357,7 +333,7 @@ export class EditorMode {
     } else if (painting && this.isPainting) this.paintAt(sx, sy);
   }
   update(dt: number): void {
-    this.updateController(dt);
+    this.updateController();
     const PAN_SPEED = CHUNK_SIZE * TILE_SIZE * 2; // 2 chunks/sec
     const { dx, dy } = this.actions.getPanDirection();
     if (dx !== 0 || dy !== 0) {
@@ -710,7 +686,7 @@ export class EditorMode {
       return;
     }
 
-    this.controllerCursorActive = false;
+    controllerPointer.reset();
     this.beginStroke(sx, sy, e.button);
   }
 
@@ -749,7 +725,7 @@ export class EditorMode {
   }
 
   private handleMouseMove(e: MouseEvent): void {
-    if (e.movementX || e.movementY) this.controllerCursorActive = false;
+    if (e.movementX || e.movementY) controllerPointer.reset();
     if (this.activeTouches.size > 0 || this.wasPinching) return;
 
     const { sx, sy } = this.canvasCoords(e);

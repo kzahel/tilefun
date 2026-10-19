@@ -84,9 +84,8 @@ async function checkHorn(page: Page, kind: "car" | "train") {
   await page.keyboard.up("h");
   await expect.poll(sounding).toBe(0);
   const spot = await canvas.evaluate((c) => {
-    const g = (c as unknown as { __game: Game }).__game,
-      rect = c.getBoundingClientRect();
-    return { x: rect.right - 52, y: rect.bottom - 52 - (g.touchButtons.emergency ? 136 : 0) };
+    const rect = c.getBoundingClientRect();
+    return { x: rect.right - 52, y: rect.bottom - 120 };
   });
   // Native touch hold exercises the same screen control as a quick tap.
   const cdp = await page.context().newCDPSession(page);
@@ -208,11 +207,11 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
         command: `tp ${x} ${y}`,
       });
     }, desiredModel);
-    await expect(page.getByRole("button", { name: "Drive car · E", exact: true })).toBeVisible({
+    await expect(page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ })).toBeVisible({
       timeout: 15000,
     });
     await tapMode(page);
-    await page.getByRole("button", { name: "Drive car · E", exact: true }).tap();
+    await page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ }).tap();
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toMatch(/^vehicle-v1:/);
     await checkHorn(page, "car");
@@ -396,7 +395,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toBe(before.type);
     if ((await read(page)).editing) await page.keyboard.press("Tab");
-    await page.getByRole("button", { name: "Get out · E", exact: true }).tap();
+    await page.getByRole("button", { name: /^Get out(?: · [EY])?$/ }).tap();
     await expect.poll(async () => (await read(page)).parent).toBeNull();
     expect(errors).toEqual([]);
   });
@@ -409,7 +408,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       const errors: string[] = [];
       page.on("pageerror", (e) => errors.push(e.message));
       await start(page, backend);
-      const enter = page.getByRole("button", { name: "Drive train · E", exact: true });
+      const enter = page.getByRole("button", { name: /^Drive train(?: · [EY])?$/ });
       await expect
         .poll(
           () =>
@@ -481,7 +480,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       await page.getByRole("button", { name: "Back to game", exact: true }).tap();
       expect((await read(page)).speed).toBeLessThan(0.1);
       await page.screenshot({ path: `/tmp/tilefun-driving-train-${backend}.png` });
-      await page.getByRole("button", { name: "Get out · E", exact: true }).tap();
+      await page.getByRole("button", { name: /^Get out(?: · [EY])?$/ }).tap();
       await expect.poll(async () => (await read(page)).parent).toBeNull();
       expect(errors).toEqual([]);
     });

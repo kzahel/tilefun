@@ -1,8 +1,8 @@
 # Steam Deck and controller menus
 
 Topic: steam-deck-and-menus
-Status: implemented and accepted on the physical Deck; hands-on playtesting next.
-Updated: 2026-10-18.
+Status: shared controller/touch UX and reverse driving delivered; hands-on tuning next.
+Updated: 2026-10-19.
 
 ## Direction and ownership
 
@@ -38,9 +38,13 @@ or credentials in this repository.
 - Standard gamepad snapshots feed semantic gameplay/menu commands. One active
   source, radial dead zone, press edges and bounded UI repeat; neutral input is
   required after blur, reconnect and context changes to prevent action leakage.
-- A jump/confirm; B back; X throw/siren; Y interact; RT sprint; RB horn; LB build/play;
+- A jump/confirm; B back; X throw; Y interact; RT sprint; RB horn; LB build/play;
   View map; Menu pause. In editing, Y opens controller tools, left stick pans,
   right stick positions the cursor, RT places/paints and LT erases.
+  The same screen cursor reaches DOM tools and map controls: A/RT selects, with
+  UI holds consumed until release. LT/R reverses cars; D-pad Up/L toggles vehicle
+  lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
+  Named on-screen paddles and interaction prompts follow the last input source.
 - Public invitation links use the hosted game URL, while entering a code/link
   keeps the current installation's origin. P2P needs internet signaling and
   suitable peer connectivity; no new TURN relay is provided.
@@ -61,7 +65,13 @@ The resulting `dist/desktop/Tilefun-linux-x64/` contains the game, runtime,
 `run.sh` and build receipt. The Linux launcher selects X11 within Gamescope and
 clears Steam’s `LD_PRELOAD` overlay injection; the default injected launch hung
 Chromium before renderer startup on the measured Deck. GPU acceleration and
-the renderer sandbox remain enabled. Development labs and external workshop
+the renderer sandbox remain enabled. TouchEvents are explicitly enabled because
+Xwayland reports zero maximum contacts despite exposing a native touch device.
+The shell watches Gamescope's focus/Steam policy notifications and requests native
+touch passthrough only for its own process's focused app. It restores Steam's
+current touch policy on focus loss and quit; no durable Steam settings change.
+Ordinary Linux desktops without Gamescope keep their native input policy.
+Development labs and external workshop
 links remain in the browser’s More/sidebar, outside the packaged play menu.
 `deck:install` registers `Devkit Game: tilefun` in Gaming Mode without launching it.
 `deck:launch` is explicit. The initial payload
@@ -75,15 +85,21 @@ it is absent from the normal launch manifest.
 
 ## Acceptance and next work
 
-The physical Deck passed GPU startup, offline reload with external traffic blocked,
-save persistence through upgrades, save-failure recovery, normal quit and real
-public-signaling multiplayer in both host/guest directions. The full browser run
-passed 699 tests; its five failures were resolved and verified in focused reruns.
-All 2,856 unit tests, typechecks, lint, production inventory/build checks and the
-streaming readiness assertion passed. See the tactical for evidence boundaries.
+The packaged baseline passed GPU startup, offline reload with external traffic
+blocked, persistence through upgrades, save-failure recovery, normal quit and
+real public-signaling multiplayer in both host/guest directions; see 139.
 
-Next: play a parent/child session using the physical controls to assess focus
-travel, text entry, editor aiming and menu wording. Automated standard-gamepad
-snapshots cover behavior; physical button feel has not been manually evaluated.
+[140](../tactical/140-shared-input-ux-and-reverse.md) delivers the owner's
+cursor/tool, native map touch and action-label corrections plus reverse driving.
+The physical package passed scripted tool selection, reverse/braking and native
+Linux multi-touch delivery through Gamescope/Xwayland/Chromium. Final typechecks,
+all 2,876 unit tests, two shell policy tests, lint, production inventories/build
+and streaming readiness passed. The full 714-browser run had 709 passes; its five
+failures were resolved and passed in focused reruns. The final cursor/focus
+scenario passed three consecutive runs. All 880 Workshop identities are retained.
+
+Continue hands-on editing, driving and map trials to tune the shared web UI.
+Automated standard-gamepad snapshots and native contact injection establish the
+input path, not physical button/finger feel or child usability.
 
 [139](../tactical/139-steam-deck-package-and-controller-menus.md) owns execution and evidence.

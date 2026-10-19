@@ -29,6 +29,9 @@ export type ActionName =
   | "enter_place"
   | "throw"
   | "honk"
+  | "reverse"
+  | "vehicle_lights"
+  | "vehicle_style"
   | "zoom_0"
   | "zoom_1"
   | "zoom_2"
@@ -76,6 +79,9 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   // Play mode actions
   { action: "throw", keys: ["b"] },
   { action: "honk", keys: ["h", "H"] },
+  { action: "reverse", keys: ["r", "R"] },
+  { action: "vehicle_lights", keys: ["l", "L"] },
+  { action: "vehicle_style", keys: ["k", "K"] },
   { action: "enter_place", keys: ["e", "E"] },
   // Play mode zoom presets
   { action: "zoom_0", keys: ["0"] },

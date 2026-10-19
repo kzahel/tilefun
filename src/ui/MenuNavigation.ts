@@ -3,6 +3,7 @@ import {
   type ControllerCommand,
   controllerInput,
 } from "../input/ControllerInput.js";
+import { controllerPointer } from "../input/ControllerPointer.js";
 
 const menus = new Map<HTMLElement, { back: () => void; order: number }>();
 let order = 0;
@@ -176,6 +177,17 @@ function navigate(command: ControllerCommand, controller: boolean): boolean {
 }
 
 controllerInput.uiActive = () => !!activeMenu();
+controllerPointer.activateControl = (element) => {
+  if (
+    (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) &&
+    !["checkbox", "radio", "range"].includes(element.type)
+  )
+    textKeyboard(element);
+  else if (element instanceof HTMLSelectElement) {
+    element.selectedIndex = (element.selectedIndex + 1) % element.options.length;
+    element.dispatchEvent(new Event("change", { bubbles: true }));
+  } else element.click();
+};
 if (typeof window !== "undefined") {
   window.addEventListener(
     CONTROLLER_EVENT,

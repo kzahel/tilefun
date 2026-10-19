@@ -910,6 +910,7 @@ function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>
   if (msg.sprinting) flags |= 0x01;
   if (msg.jump) flags |= 0x02;
   if (msg.jumpPressed) flags |= 0x04;
+  if (msg.reversing) flags |= 0x08;
   view.setUint8(7, flags);
   const dtMs = quantizeInputDtMs(msg.dtMs ?? 0);
   view.setUint16(8, Math.round(dtMs * 100), true);
@@ -931,6 +932,7 @@ function decodePlayerInput(view: DataView): ClientMessage {
     sprinting: (flags & 0x01) !== 0,
     jump: (flags & 0x02) !== 0,
     ...((flags & 0x04) !== 0 ? { jumpPressed: true } : {}),
+    ...((flags & 0x08) !== 0 ? { reversing: true } : {}),
     ...(dtMs > 0 ? { dtMs } : {}),
   };
 }

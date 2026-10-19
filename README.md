@@ -57,9 +57,14 @@ saves first. Online play requires signaling and a working peer connection.
 | LB / RB | Build–Play / horn |
 | RT | Sprint; paint/place while building |
 | Right stick / LT | Building cursor / erase |
+| LT / R key while driving | Reverse at half speed; stick/arrows steer the nose |
+| D-pad ↑ / → | Vehicle lights / siren style (L / K on keyboard) |
 
 D-pad/stick focus, A select, B back and an on-screen text keyboard cover game
 menus and editor tools. **Save and quit** flushes the authority before closing.
+The right-stick cursor also selects visible tools and map controls with A or RT.
+Named action paddles show the current keyboard/controller hints; vehicle controls
+never reuse Jump and Throw. Touch maps support two-finger pan and zoom.
 Browser saves and packaged saves are separate. See
 [Steam Deck and menus](docs/topics/steam-deck-and-menus.md) for runtime, installation
 and acceptance details.
@@ -130,9 +135,9 @@ hold **Fast / Shift** to go faster and hold **Horn / H** to honk for as long as 
 hold it (**Whistle / H** in trains). Release to stop.
 Sportier cars drive faster; buses and heavy trucks accelerate more slowly. Driven
 cars and all trains gently nudge players and movable animals/balls, with stronger
-pushing from heavier vehicles. A blocked push stops the vehicle; there is no damage. In an ambulance, police car or firetruck, **Siren / B** toggles flashing
-lights and sound; **Style / Space** cycles EU-style two-tone, US-style wail and
-lights-only. Garbage trucks use **Beacon / B** for silent amber lights.
+pushing from heavier vehicles. A blocked push stops the vehicle; there is no damage. In an ambulance, police car or firetruck, **Siren / L / D-pad Up** toggles flashing
+lights and sound; **Style / K / D-pad Right** cycles EU-style two-tone, US-style wail and
+lights-only. Garbage trucks use **Beacon / L / D-pad Up** for silent amber lights.
 Try any of the 45 vehicle choices in the Traffic playground.
 
 

@@ -5,6 +5,17 @@ import {
 } from "../../scripts/instrumentation/car-driving-prediction-case.js";
 
 for (const hz of [30, 60] as const)
+  it(`replays reverse through binary input and authority without divergence (${hz}Hz)`, async () => {
+    const regular = await runCarDrivingCase(hz, "regular", "reverse");
+    const delayed = await runCarDrivingCase(hz, "late-input", "reverse");
+    expect(delayed.summary.maxReconcileShiftPx).toBeLessThan(0.001);
+    expect(delayed.summary.maxReconcileVelocityShift).toBeLessThan(0.001);
+    expect(delayed.summary.endAuthorityX).toBeCloseTo(regular.summary.endAuthorityX, 5);
+    expect(delayed.authority.some((sample) => sample.vx < -1)).toBe(true);
+    expect(delayed.summary.motionWithoutInputPx).toBe(0);
+  });
+
+for (const hz of [30, 60] as const)
   for (const profile of CAR_DRIVING_PROFILES)
     it(`keeps car prediction and 120Hz presentation continuous (${hz}Hz, ${profile})`, async () => {
       const result = await runCarDrivingCase(hz, profile);

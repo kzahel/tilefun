@@ -5,6 +5,56 @@ import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import { FsWorldRegistry } from "../src/persistence/FsWorldRegistry.js";
 
+for (const viewport of [
+  { width: 1280, height: 800 },
+  { width: 390, height: 844 },
+])
+  test(`native two-finger map pan and zoom continue into one-finger pan (${viewport.width})`, async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({ viewport, hasTouch: true });
+    try {
+      const page = await context.newPage();
+      await page.goto("/tilefun/");
+      await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+      await page.getByRole("button", { name: "Open world map" }).tap();
+      const map = page.getByTestId("world-map");
+      await expect(map).toHaveAttribute("data-settled", "true");
+      const box = await map.getByTestId("world-map-canvas").boundingBox();
+      if (!box) throw Error("No map canvas");
+      const session = await context.newCDPSession(page);
+      const a = { id: 1, x: box.x + box.width / 2 - 40, y: box.y + box.height / 2 };
+      const b = { id: 2, x: a.x + 80, y: a.y };
+      const beforeX = Number(await map.getAttribute("data-x"));
+      const beforeZoom = Number(await map.getAttribute("data-zoom"));
+      await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [a] });
+      await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [a, b] });
+      const endA = { ...a, x: a.x - 20, y: a.y + 24 };
+      const endB = { ...b, x: b.x + 60, y: b.y + 24 };
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [endA, endB],
+      });
+      await expect
+        .poll(async () => Number(await map.getAttribute("data-zoom")))
+        .toBeCloseTo(beforeZoom * 2);
+      await expect.poll(async () => Number(await map.getAttribute("data-x"))).toBeLessThan(beforeX);
+      await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [endB] });
+      const pinchX = Number(await map.getAttribute("data-x"));
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ ...endA, x: endA.x + 30 }],
+      });
+      await expect.poll(async () => Number(await map.getAttribute("data-x"))).toBeLessThan(pinchX);
+      await session.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
+      await page.waitForTimeout(750);
+      await expect(map).toBeVisible();
+      await session.detach();
+    } finally {
+      await context.close();
+    }
+  });
+
 test("in-game map keeps distant multiplayer players live and long-press travels safely", async ({
   browser,
   page,

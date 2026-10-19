@@ -1,23 +1,11 @@
-/**
- * On-screen action buttons for touch/mobile play mode.
- * Renders on-foot actions and contextual driving controls at the bottom-right:
- *   - A (Jump) — primary, bottom-right
- *   - R (Sprint) — left of A
- *   - B (Throw) — above, between A and R
- *
- * Button layout (triangle):
- *        [B]
- *   [R]      [A]
- */
+import { inputHint } from "./InputHints.js";
+
+/** Named action paddles, shared by touch, mouse, keyboard and controller hints. */
 const BTN_RADIUS = 28;
-const HIT_RADIUS = 40; // larger hit area for small fingers
+const HIT_RADIUS = 32; // larger hit area for small fingers
 const MARGIN = 24;
 const SPACING = 68;
 const LABEL_FONT = "bold 14px sans-serif";
-const ALPHA_IDLE = 0.2;
-const ALPHA_PRESSED = 0.45;
-const LABEL_ALPHA_IDLE = 0.45;
-const LABEL_ALPHA_PRESSED = 0.75;
 
 interface ButtonDef {
   label: string;
@@ -40,15 +28,24 @@ export class TouchButtons {
     return pressed;
   }
   private visibleButton(index: number): boolean {
-    if (index === 3) return this.driving;
-    return !this.driving || index === 2 || this.emergency || (index === 1 && this.warning);
+    if (index === 2) return true; // Fast always occupies the same slot.
+    if (!this.driving) return index < 2;
+    return (
+      index === 3 ||
+      (index === 6 && !this.train) ||
+      (index === 4 && (this.emergency || this.warning)) ||
+      (index === 5 && this.emergency)
+    );
   }
   private canvas: HTMLCanvasElement;
   private buttons: ButtonDef[] = [
-    { label: "A", pressed: false, touchId: null }, // jump
-    { label: "B", pressed: false, touchId: null }, // throw
-    { label: "R", pressed: false, touchId: null }, // sprint
+    { label: "Jump", pressed: false, touchId: null }, // jump
+    { label: "Throw", pressed: false, touchId: null }, // throw
+    { label: "Fast", pressed: false, touchId: null }, // sprint
     { label: "Horn", pressed: false, touchId: null },
+    { label: "Lights", pressed: false, touchId: null },
+    { label: "Style", pressed: false, touchId: null },
+    { label: "Reverse", pressed: false, touchId: null },
   ];
 
   /** Touch IDs claimed by buttons (shared with TouchJoystick to avoid conflicts). */
@@ -56,6 +53,16 @@ export class TouchButtons {
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
+  }
+
+  get reversePressed(): boolean {
+    return this.enabled && this.driving && !this.train && !!this.buttons[6]?.pressed;
+  }
+  get lightsPressed(): boolean {
+    return this.enabled && !!this.buttons[4]?.pressed;
+  }
+  get stylePressed(): boolean {
+    return this.enabled && !!this.buttons[5]?.pressed;
   }
 
   get hornPressed(): boolean {
@@ -116,7 +123,6 @@ export class TouchButtons {
   /** Touch actions on foot; driving actions also remain available with a mouse. */
   draw(ctx: CanvasRenderingContext2D): void {
     if (!this.enabled) return;
-    if (!this.driving && !isTouchDevice()) return;
 
     const positions = this.getPositions();
     for (let i = 0; i < this.buttons.length; i++) {
@@ -125,63 +131,52 @@ export class TouchButtons {
       if (!btn || !pos || !this.visibleButton(i)) continue;
 
       ctx.save();
-      // Circle
-      ctx.globalAlpha = this.driving
-        ? btn.pressed
-          ? 0.65
-          : 0.4
-        : btn.pressed
-          ? ALPHA_PRESSED
-          : ALPHA_IDLE;
-      ctx.fillStyle = "white";
+      ctx.globalAlpha = btn.pressed ? 0.95 : 0.8;
+      ctx.fillStyle = btn.pressed ? "#496853" : "#203a35";
       ctx.beginPath();
-      ctx.arc(pos.x, pos.y, BTN_RADIUS, 0, Math.PI * 2);
+      ctx.roundRect(pos.x - 32, pos.y - 26, 64, 52, 14);
       ctx.fill();
-
-      // Label
-      ctx.globalAlpha = this.driving ? 1 : btn.pressed ? LABEL_ALPHA_PRESSED : LABEL_ALPHA_IDLE;
-      ctx.fillStyle = "white";
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = "#fff4d5";
       ctx.font = LABEL_FONT;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const label = this.driving
-        ? i === 3
-          ? this.train
-            ? "Whistle"
-            : "Horn"
-          : i === 2
-            ? "Fast"
-            : i === 1
-              ? this.emergencyState & 1
-                ? this.warning
-                  ? "Beacon On"
-                  : "Siren On"
-                : this.warning
-                  ? "Beacon Off"
-                  : "Siren Off"
-              : (["Quiet", "EU", "US"][this.emergencyState >> 1] ?? "EU")
-        : btn.label;
-      ctx.fillText(label, pos.x, pos.y);
-      if (this.driving) {
-        ctx.font = "10px sans-serif";
-        ctx.fillText(
-          i === 3
-            ? "honk · H"
-            : i === 2
-              ? "hold · Shift"
-              : i === 1
-                ? "toggle · B"
-                : "style · Space",
-          pos.x,
-          pos.y + 15,
-        );
-      }
+      const label =
+        i === 3 && this.train
+          ? "Whistle"
+          : i === 4
+            ? this.warning
+              ? "Beacon"
+              : "Siren"
+            : btn.label;
+      ctx.fillText(label, pos.x, pos.y - 5);
+      const hints = [
+        ["Space", "A"],
+        ["B", "X"],
+        ["Shift", "RT"],
+        ["H", "RB"],
+        ["L", "D↑"],
+        ["K", "D→"],
+        ["R", "LT"],
+      ];
+      const hint = hints[i];
+      const badge = hint ? inputHint(hint[0] ?? "", hint[1] ?? "") : "";
+      ctx.font = "10px sans-serif";
+      ctx.fillText(
+        i === 4
+          ? `${this.emergencyState & 1 ? "On" : "Off"}${badge ? ` · ${badge}` : ""}`
+          : i === 5
+            ? `${["Quiet", "EU", "US"][this.emergencyState >> 1] ?? ""} · ${badge || "Tap"}`
+            : badge || "Hold",
+        pos.x,
+        pos.y + 13,
+      );
       ctx.restore();
     }
   }
 
   /** Compute button center positions based on current canvas size. */
-  private getPositions(): { x: number; y: number }[] {
+  getPositions(): { x: number; y: number }[] {
     const w = this.canvas.clientWidth || this.canvas.width;
     const h = this.canvas.clientHeight || this.canvas.height;
 
@@ -199,7 +194,10 @@ export class TouchButtons {
       { x: aX, y: aY }, // A = jump
       { x: bX, y: bY }, // B = throw
       { x: rX, y: rY }, // R = sprint
-      { x: aX, y: this.emergency ? aY - 2 * SPACING : aY },
+      { x: aX, y: aY - SPACING }, // horn
+      { x: rX, y: aY - SPACING }, // lights
+      { x: rX, y: aY - 2 * SPACING }, // style
+      { x: aX, y: aY }, // reverse
     ];
   }
 
@@ -210,7 +208,7 @@ export class TouchButtons {
       if (!pos || !this.visibleButton(i)) continue;
       const dx = x - pos.x;
       const dy = y - pos.y;
-      if (dx * dx + dy * dy <= HIT_RADIUS * HIT_RADIUS) {
+      if (Math.abs(dx) <= HIT_RADIUS && Math.abs(dy) <= 26) {
         return i;
       }
     }
@@ -219,7 +217,7 @@ export class TouchButtons {
 
   private onBlur = (): void => this.reset();
   private onMouseDown = (event: MouseEvent): void => {
-    if (!this.enabled || !this.driving || event.button !== 0) return;
+    if (!this.enabled || event.button !== 0) return;
     const rect = this.canvas.getBoundingClientRect();
     const index = this.hitTest(event.clientX - rect.left, event.clientY - rect.top);
     if (index < 0 || this.buttons[index]?.touchId !== null) return;
@@ -274,8 +272,4 @@ export class TouchButtons {
       }
     }
   };
-}
-
-function isTouchDevice(): boolean {
-  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 }

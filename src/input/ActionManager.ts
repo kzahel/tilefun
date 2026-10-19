@@ -20,6 +20,7 @@ export interface Movement {
   jump: boolean;
   /** Edge-triggered jump press sampled from input events (optional). */
   jumpPressed?: boolean;
+  reversing?: boolean;
 }
 
 type DiscreteCallback = () => void;
@@ -123,6 +124,9 @@ export class ActionManager {
       if (action === "honk" && this.touchButtons.hornPressed) return true;
       if (action === "throw" && this.touchButtons.throwPressed) return true;
       if (action === "sprint" && this.touchButtons.sprintPressed) return true;
+      if (action === "reverse" && this.touchButtons.reversePressed) return true;
+      if (action === "vehicle_lights" && this.touchButtons.lightsPressed) return true;
+      if (action === "vehicle_style" && this.touchButtons.stylePressed) return true;
     }
     const binding = this.config.find((b) => b.action === action);
     if (!binding) return false;
