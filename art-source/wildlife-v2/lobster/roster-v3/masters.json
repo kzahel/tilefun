@@ -1,0 +1,13 @@
+{
+  "identity": "lobster-roster-v3-pixels-01",
+  "palette": {
+    "K": "#26322b",
+    "N": "#141d18",
+    "B": "#b96546",
+    "C": "#dec5a0",
+    "M": "#614b38",
+    "H": "#ab7a50",
+    "T": "#e3cfab"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

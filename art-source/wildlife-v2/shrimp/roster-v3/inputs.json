@@ -1,0 +1,11 @@
+{
+  "files": [
+    "art-source/wildlife-v2/camera.json",
+    "art-source/wildlife-v2/_families/crustaceans-147/build.py",
+    "art-source/wildlife-v2/_families/crustaceans-147/geometry.py",
+    "art-source/wildlife-v2/_families/crustaceans-147/finish.py",
+    "art-source/wildlife-v2/_families/crustaceans-147/audit.py",
+    "art-source/wildlife-v2/_families/crustaceans-147/profiles.json",
+    "art-source/wildlife-v2/_families/crustaceans-147/README.md"
+  ]
+}

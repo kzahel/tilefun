@@ -1,0 +1,17 @@
+{
+  "identity": "lobster-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.9710413223140506,
+    "up": 1.9060150375939742,
+    "left": 1.7766140008284594,
+    "right": 1.7766140008284594
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

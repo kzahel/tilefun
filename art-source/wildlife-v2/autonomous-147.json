@@ -1244,20 +1244,30 @@
     "coconut-crab": {
       "name": "Coconut crab",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:27:49.991294Z",
-      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+      "progress": "Species-specific closed anatomy, planted attached legs and feeding arms, source clocks, seeded habitats, editor/lab visibility, directed meals and origin policy verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/coconut-crab/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:34:11.852025Z",
+      "evidence": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
     },
     "horseshoe-crab": {
       "name": "Horseshoe crab",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:27:49.991294Z",
-      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+      "progress": "Species-specific closed anatomy, planted attached legs and feeding arms, source clocks, seeded habitats, editor/lab visibility, directed meals and origin policy verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/horseshoe-crab/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:34:11.852025Z",
+      "evidence": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
     },
     "seahorse": {
       "name": "Seahorse",
@@ -1290,29 +1300,44 @@
     "lobster": {
       "name": "Lobster",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:27:49.991294Z",
-      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+      "progress": "Species-specific closed anatomy, planted attached legs and feeding arms, source clocks, seeded habitats, editor/lab visibility, directed meals and origin policy verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/lobster/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:34:11.852025Z",
+      "evidence": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
     },
     "shrimp": {
       "name": "Shrimp",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:27:49.991294Z",
-      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+      "progress": "Species-specific closed anatomy, planted attached legs and feeding arms, source clocks, seeded habitats, editor/lab visibility, directed meals and origin policy verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/shrimp/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:34:11.852025Z",
+      "evidence": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
     },
     "mantis-shrimp": {
       "name": "Mantis shrimp",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:27:49.991294Z",
-      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+      "progress": "Species-specific closed anatomy, planted attached legs and feeding arms, source clocks, seeded habitats, editor/lab visibility, directed meals and origin policy verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/mantis-shrimp/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:34:11.852025Z",
+      "evidence": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
     },
     "nautilus": {
       "name": "Nautilus",
@@ -1889,6 +1914,17 @@
         "starfish"
       ],
       "validation": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    },
+    {
+      "utc": "2026-10-19T16:34:11.852025Z",
+      "completed": [
+        "coconut-crab",
+        "horseshoe-crab",
+        "lobster",
+        "shrimp",
+        "mantis-shrimp"
+      ],
+      "validation": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
     }
   ]
 }

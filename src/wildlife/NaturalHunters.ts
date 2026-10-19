@@ -1,5 +1,6 @@
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import type { AnimationClip } from "../entities/EntityDefs.js";
+import { CRUSTACEAN_LAND_HUNTER_PROFILES } from "./Crustaceans.js";
 import type { FaunaSpecies } from "./Fauna.js";
 import type { FierceBehaviorProfile } from "./FierceCreatures.js";
 import { FOREST_HUNTER_PROFILES } from "./ForestSpecialists.js";
@@ -11,6 +12,7 @@ import { SMALL_GROUND_HUNTER_PROFILES } from "./SmallGroundHunters.js";
 import { SECRETARY_BIRD_PROFILES } from "./TallBirds.js";
 
 export const NATURAL_HUNTER_SPECIES = [
+  "coconut-crab",
   "spider",
   "praying-mantis",
   "scorpion",
@@ -273,5 +275,6 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
   ...REPTILE_HUNTER_PROFILES,
   ...LEGLESS_LAND_HUNTER_PROFILES,
   ...GROUND_ARTHROPOD_HUNTER_PROFILES,
+  ...CRUSTACEAN_LAND_HUNTER_PROFILES,
   ...FOREST_HUNTER_PROFILES,
 ];

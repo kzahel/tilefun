@@ -1,0 +1,13 @@
+{
+  "identity": "mantis-shrimp-roster-v3-pixels-01",
+  "palette": {
+    "K": "#26322b",
+    "N": "#141d18",
+    "B": "#638b62",
+    "C": "#dfad6e",
+    "M": "#487e9f",
+    "H": "#da8151",
+    "T": "#e3cfab"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

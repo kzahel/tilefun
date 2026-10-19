@@ -646,6 +646,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-coconut-crab-predator-v1",
+      "name": "wildlife coconut crab predator v1",
+      "image": "demos/wildlife-v2/coconut-crab/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b2b0241855de963e1786f66bb7ebd17cdb678a4e5d127c8cdb519e632cfdf168",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-tasmanian-devil-predator-v1",
       "name": "wildlife tasmanian devil predator v1",
       "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
@@ -703,6 +713,26 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-lobster-predator-v1",
+      "name": "wildlife lobster predator v1",
+      "image": "demos/wildlife-v2/lobster/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "88b6d06ddbd5d171b3e77d3e6df8aef0904f2d957650d73b02c2e813b725c6e6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-mantis-shrimp-predator-v1",
+      "name": "wildlife mantis shrimp predator v1",
+      "image": "demos/wildlife-v2/mantis-shrimp/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e7c1714c9e10ff00fc0ecf92b5f7889ce64aeb852035cad1c9ba7b9618c45c5e",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -1983,6 +2013,26 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-horseshoe-crab-provisional-v1",
+      "name": "wildlife horseshoe crab provisional v1",
+      "image": "demos/wildlife-v2/horseshoe-crab/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eabec44f8f79a58a98cedbfc8c09b19a8cc06d9e8534f2845a656018c9457d9d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-shrimp-provisional-v1",
+      "name": "wildlife shrimp provisional v1",
+      "image": "demos/wildlife-v2/shrimp/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0c434135d380fde40b80b7bd15bf27a8e8f472880a8794158f609b63bbd97915",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -5713,6 +5763,56 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-coconut-crab-roster-v3",
+      "name": "wildlife v2 coconut crab roster v3",
+      "image": "demos/wildlife-v2/coconut-crab/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b2b0241855de963e1786f66bb7ebd17cdb678a4e5d127c8cdb519e632cfdf168",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-horseshoe-crab-roster-v3",
+      "name": "wildlife v2 horseshoe crab roster v3",
+      "image": "demos/wildlife-v2/horseshoe-crab/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eabec44f8f79a58a98cedbfc8c09b19a8cc06d9e8534f2845a656018c9457d9d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-lobster-roster-v3",
+      "name": "wildlife v2 lobster roster v3",
+      "image": "demos/wildlife-v2/lobster/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "88b6d06ddbd5d171b3e77d3e6df8aef0904f2d957650d73b02c2e813b725c6e6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-shrimp-roster-v3",
+      "name": "wildlife v2 shrimp roster v3",
+      "image": "demos/wildlife-v2/shrimp/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0c434135d380fde40b80b7bd15bf27a8e8f472880a8794158f609b63bbd97915",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-mantis-shrimp-roster-v3",
+      "name": "wildlife v2 mantis shrimp roster v3",
+      "image": "demos/wildlife-v2/mantis-shrimp/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e7c1714c9e10ff00fc0ecf92b5f7889ce64aeb852035cad1c9ba7b9618c45c5e",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -27520,6 +27620,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-coconut-crab-predator-v1",
+      "sheetId": "wildlife-coconut-crab-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-coconut-crab-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-tasmanian-devil-predator-v1",
       "sheetId": "wildlife-tasmanian-devil-predator-v1",
       "rect": [
@@ -27619,6 +27737,42 @@
         384
       ],
       "label": "wildlife-cuttlefish-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-lobster-predator-v1",
+      "sheetId": "wildlife-lobster-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-lobster-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-mantis-shrimp-predator-v1",
+      "sheetId": "wildlife-mantis-shrimp-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-mantis-shrimp-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -29940,6 +30094,42 @@
       ]
     },
     {
+      "id": "sprite:wildlife-horseshoe-crab-provisional-v1",
+      "sheetId": "wildlife-horseshoe-crab-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-horseshoe-crab-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-shrimp-provisional-v1",
+      "sheetId": "wildlife-shrimp-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-shrimp-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -31973,7 +32163,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:963"
+          "source": "src/wildlife/Fauna.ts:964"
         },
         {
           "system": "Gameplay",
@@ -31985,15 +32175,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:308"
+          "source": "src/wildlife/FoodWeb.ts:321"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:505"
+          "source": "src/wildlife/FoodWeb.ts:526"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:684"
+          "source": "src/wildlife/FoodWeb.ts:705"
         },
         {
           "system": "Gameplay",
@@ -32055,39 +32245,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:37"
+          "source": "src/wildlife/Fauna.ts:38"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:234"
+          "source": "src/wildlife/Fauna.ts:235"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:204"
+          "source": "src/wildlife/FoodWeb.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:556"
+          "source": "src/wildlife/FoodWeb.ts:577"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:573"
+          "source": "src/wildlife/FoodWeb.ts:594"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:590"
+          "source": "src/wildlife/FoodWeb.ts:611"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:629"
+          "source": "src/wildlife/FoodWeb.ts:650"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:657"
+          "source": "src/wildlife/FoodWeb.ts:678"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:684"
+          "source": "src/wildlife/FoodWeb.ts:705"
         }
       ]
     },
@@ -32141,23 +32331,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:288"
+          "source": "src/wildlife/FoodWeb.ts:301"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:309"
+          "source": "src/wildlife/FoodWeb.ts:322"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:506"
+          "source": "src/wildlife/FoodWeb.ts:527"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:684"
+          "source": "src/wildlife/FoodWeb.ts:705"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:685"
+          "source": "src/wildlife/FoodWeb.ts:706"
         },
         {
           "system": "Gameplay",
@@ -32203,7 +32393,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:685"
+          "source": "src/wildlife/FoodWeb.ts:706"
         }
       ]
     },
@@ -32249,7 +32439,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:686"
+          "source": "src/wildlife/FoodWeb.ts:707"
         }
       ]
     },
@@ -32295,7 +32485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:687"
+          "source": "src/wildlife/FoodWeb.ts:708"
         }
       ]
     },
@@ -32341,7 +32531,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:688"
+          "source": "src/wildlife/FoodWeb.ts:709"
         }
       ]
     },
@@ -32499,11 +32689,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:311"
+          "source": "src/wildlife/FoodWeb.ts:324"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:684"
+          "source": "src/wildlife/FoodWeb.ts:705"
         },
         {
           "system": "Gameplay",
@@ -32553,7 +32743,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:684"
+          "source": "src/wildlife/FoodWeb.ts:705"
         },
         {
           "system": "Gameplay",

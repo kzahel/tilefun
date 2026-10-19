@@ -1,6 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { CONTINUATION_BIRD_PROFILES } from "../src/wildlife/ContinuationBirds.js";
 import {
+  CRUSTACEAN_FAUNA_PROFILES,
+  CRUSTACEAN_LAND_HUNTER_PROFILES,
+  CRUSTACEAN_WATER_HUNTER_PROFILES,
+} from "../src/wildlife/Crustaceans.js";
+import {
   DISTINCT_FISH_FAUNA_PROFILES,
   DISTINCT_FISH_HUNTER_PROFILES,
 } from "../src/wildlife/DistinctFish.js";
@@ -169,6 +174,7 @@ for (const animal of [
   ...LEGLESS_FAUNA_PROFILES,
   ...GROUND_ARTHROPOD_FAUNA_PROFILES,
   ...MARINE_ODDITY_FAUNA_PROFILES,
+  ...CRUSTACEAN_FAUNA_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
@@ -225,6 +231,8 @@ for (const animal of [
   ...GROUND_ARTHROPOD_HUNTER_PROFILES,
   ...LEGLESS_WATER_HUNTER_PROFILES,
   ...MARINE_ODDITY_HUNTER_PROFILES,
+  ...CRUSTACEAN_LAND_HUNTER_PROFILES,
+  ...CRUSTACEAN_WATER_HUNTER_PROFILES,
 ]) {
   test(`${animal.species} browser display opens a real moving shared hunter`, async ({ page }) => {
     await page.goto(

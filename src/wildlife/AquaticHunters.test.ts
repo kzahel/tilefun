@@ -49,7 +49,10 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
     Object.assign(required(e.predator), { state: "chase", elapsed: 0.275 });
     restorePredatorPose(e);
     expect(e.sprite?.clip).toBe(4);
-    expect(e.sprite?.frameCol).toBe(62);
+    const chase = required(p.art.clips.find((c) => c.name === "chase"));
+    expect(e.sprite?.frameCol).toBe(
+      chase.start + (Math.floor(275 / chase.frameDuration) % chase.count),
+    );
     expect(decodeActor(encodeActor(e))).toMatchObject({
       predator: e.predator,
       sprite: e.sprite,

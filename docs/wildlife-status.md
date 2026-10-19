@@ -6,7 +6,7 @@
 
 [Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**67 newly completed; 7 in progress; 0 currently blocked; 0 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**72 newly completed; 2 in progress; 0 currently blocked; 0 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -52,13 +52,13 @@
 | Swordfish | finished-game-active | [Playback](../public/demos/wildlife-v2/swordfish/roster-v3/index.html) |
 | Pufferfish | finished-game-active | [Playback](../public/demos/wildlife-v2/pufferfish/roster-v3/index.html) |
 | Cuttlefish | finished-game-active | [Playback](../public/demos/wildlife-v2/cuttlefish/roster-v3/index.html) |
-| Coconut crab | in-progress | [Playback](../public/demos/wildlife-v2/coconut-crab/roster-v3/index.html) |
-| Horseshoe crab | in-progress | [Playback](../public/demos/wildlife-v2/horseshoe-crab/roster-v3/index.html) |
+| Coconut crab | finished-game-active | [Playback](../public/demos/wildlife-v2/coconut-crab/roster-v3/index.html) |
+| Horseshoe crab | finished-game-active | [Playback](../public/demos/wildlife-v2/horseshoe-crab/roster-v3/index.html) |
 | Seahorse | finished-game-active | [Playback](../public/demos/wildlife-v2/seahorse/roster-v3/index.html) |
 | Starfish | finished-game-active | [Playback](../public/demos/wildlife-v2/starfish/roster-v3/index.html) |
-| Lobster | in-progress | [Playback](../public/demos/wildlife-v2/lobster/roster-v3/index.html) |
-| Shrimp | in-progress | [Playback](../public/demos/wildlife-v2/shrimp/roster-v3/index.html) |
-| Mantis shrimp | in-progress | [Playback](../public/demos/wildlife-v2/mantis-shrimp/roster-v3/index.html) |
+| Lobster | finished-game-active | [Playback](../public/demos/wildlife-v2/lobster/roster-v3/index.html) |
+| Shrimp | finished-game-active | [Playback](../public/demos/wildlife-v2/shrimp/roster-v3/index.html) |
+| Mantis shrimp | finished-game-active | [Playback](../public/demos/wildlife-v2/mantis-shrimp/roster-v3/index.html) |
 | Nautilus | finished-game-active | [Playback](../public/demos/wildlife-v2/nautilus/roster-v3/index.html) |
 | Sea lion | finished-game-active | [Playback](../public/demos/wildlife-v2/sea-lion/roster-v3/index.html) |
 | Manatee | finished-game-active | [Playback](../public/demos/wildlife-v2/manatee/roster-v3/index.html) |
@@ -95,7 +95,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T16:22:35.697Z (19/10/2026, 18:22:35 Berlin).
+Snapshot: 2026-10-19T16:34:12.195Z (19/10/2026, 18:34:12 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

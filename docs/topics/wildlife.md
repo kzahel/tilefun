@@ -296,6 +296,24 @@ The five crustaceans and two upright companions have passed source replay and
 native/3x playback verification and await runtime integration.
 
 
+Sixteenth checkpoint: coconut crab, horseshoe crab, lobster, shrimp and peacock
+mantis shrimp join seeded habitats, placement and the animated browser. Coconut
+crabs hunt on land; lobsters and mantis shrimp hunt in deep water. Horseshoe crabs
+and shrimp use deep-water forage, travel and escape. Distinct closed shields,
+segmented bodies, stalked eyes, antennae, tail fans and telsons use fixed links.
+Walking legs remain planted and attached; claws and club arms move independently.
+The food web includes mantis shrimp→lobster and larger marine hunters→both, with
+no reciprocal cycles. All retain natural-only delayed distant meal replacement.
+Shock effects and other special abilities remain future work.
+Validation: **5,627 full-unit passes**, five known Windows failures and ten skips;
+48 focused checks; **28 browser cases / 816 visible previews**; five exact replays
+and 2,600 native/3x crops. Typecheck, isolated lint/build and 1,755-candidate normal
+Chromium inventory pass. All 72 registered banks retain 1,629 pinned artifacts
+byte for byte. Three vehicle review objects remain exact. Art pending human review.
+**194/196 implemented; two remaining.** Both upright companion source banks have
+passed supported weight transfer, dense arm attachment, replay and playback checks.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

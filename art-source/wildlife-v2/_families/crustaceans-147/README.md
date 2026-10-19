@@ -1,0 +1,1 @@
+Original crustacean/chelicerate anatomy with species-correct walking appendages, planted linked ground travel, connected segmented tails and independently hinged feeding arms. Coconut crab is terrestrial; the others use underwater movement. Pending source verification and human review.
