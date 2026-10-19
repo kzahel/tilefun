@@ -119,11 +119,11 @@ of approved art/collision banks. All retain held Fast (1.6×):
 
 Driven cars gently push players and movable actors/balls; automatic road traffic
 continues yielding. All trains share the contact planner on straight and curved
-services. Contact speed is capped at 40–44 for light cars, 64–72 for heavy vehicles
+services. Gentle push speed is capped at 40–44 for light cars, 64–72 for heavy vehicles
 and 80 for trains. Heavier vehicles can move heavier actors. Vehicle speed slows
 at contact rather than adding a launch impulse; voluntary walking/jumping velocity
-remains intact. Props, parked cars and other fixed bodies stay fixed. No damage,
-chain pushing, unsafe ground drops or wall squeezing is introduced. All body,
+remains intact. Props, parked cars and other fixed bodies stay fixed. These pushes
+introduce no damage, chain pushing, unsafe ground drops or wall squeezing. All body,
 push and roof-passenger plans must pass before committing any position. A blocked
 person/object stops the vehicle. Roof riders remain moving-support passengers.
 
@@ -132,6 +132,17 @@ unacknowledged movement/replay, replacing them at authority reconciliation. It
 never writes pushed positions into the replica. Autonomous parking maneuvers keep
 their commanded speeds and pedestrian-blocking policy. Train service speeds and
 rail/body/roof geometries retain their existing contracts.
+
+## Small-animal roadkill
+
+[143](../tactical/143-small-animal-roadkill.md) adds the owner's authorized exception
+to gentle contact: driven cars and all trains run over eligible small wildlife on
+moving body contact, at any speed and in reverse. The [wildlife topic](wildlife.md#small-animal-roadkill)
+owns the species/protection and saved-remains policy. Terrain, other bodies and
+passengers must all pass before a planned death commits. Automatic road traffic
+and parking retain yielding. Private prediction removes only collision copies;
+game and embedded labs share authority and flattened/fading Canvas/GPU rendering.
+Full unit/browser and streaming readiness checks pass; 143 records the evidence.
 
 ## Player driving
 

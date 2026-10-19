@@ -158,6 +158,12 @@ release, blur, pause or disposal; abandoned holds expire. Labs
 without an audio consumer remain silent. Automatic road traffic and parking keep
 yielding; no lab-specific speed or pushing implementation is added.
 
+[143](../tactical/143-small-animal-roadkill.md) extends that shared contact planner
+with atomic small-animal roadkill. Game and labs use the same eligibility, swept
+body/height checks, inert actor factories, saved removal/lifetime and prediction
+copies. Canvas/GPU share destination-only sprite compression and fade. The lab
+keeps no separate collision or wildlife-death implementation.
+
 ## Reviewed blue train alignment
 
 The owner accepted the v3 curve lab and authorized game activation on 2026-10-12.

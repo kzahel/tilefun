@@ -200,7 +200,10 @@ function drawSprite(
   const support = item.meshRoofSupport;
   const roofDelta = support && ctx.meshReady?.has(support.assetId) ? support.heightDelta : 0;
   const bottom = item.wy - item.zOffset + roofDelta + item.drawOffsetY;
-  const screen = camera.worldToScreen(item.wx - halfW, bottom - item.spriteHeight);
+  const screen = camera.worldToScreen(
+    item.wx - halfW,
+    bottom - item.spriteHeight * (item.scaleY ?? 1),
+  );
   const end = camera.worldToScreen(item.wx + halfW, bottom);
   const region = sheet.getRegion(item.frameCol, item.frameRow);
   const dx = Math.floor(screen.sx);

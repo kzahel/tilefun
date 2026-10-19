@@ -48,7 +48,7 @@ export function surfaceSceneOrder(
           ...[left, right].map((x) => bounds.bottom - surfaceZAt(patch, bounds, x, bounds.bottom)),
         ) + patch.thickness;
       const bottom = item.wy - item.zOffset + item.drawOffsetY;
-      if (bottom <= north || bottom - item.spriteHeight >= south) continue;
+      if (bottom <= north || bottom - item.spriteHeight * (item.scaleY ?? 1) >= south) continue;
       const top = nearbySurfaceTop(patch, bounds, {
         left: item.wx,
         right: item.wx,

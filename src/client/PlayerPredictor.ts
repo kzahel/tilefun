@@ -1522,6 +1522,7 @@ export class PlayerPredictor {
             for (const push of pushes)
               this.pushedBodies.set(push.entity.id, {
                 ...push.entity,
+                ...(push.roadkill ? { collider: null } : {}),
                 position: push.position,
                 wz: push.z,
                 ...((push.entity.jumpZ ?? 0) <= 0 ? { groundZ: push.z } : {}),

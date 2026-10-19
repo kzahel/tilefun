@@ -10,6 +10,7 @@ import {
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
+import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
@@ -143,7 +144,10 @@ export function collectScene(
               (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
           }
         : undefined;
-    const spriteBottom = effectiveWy + (e.sprite.drawOffsetY ?? 0);
+    const remains = isRoadkill(e.type);
+    const scaleY = remains ? ROADKILL_SCALE_Y : 1;
+    const drawOffsetY = (e.sprite.drawOffsetY ?? 0) * scaleY;
+    const spriteBottom = effectiveWy + drawOffsetY;
     const meshAsset = frame ? frame.meshPoses.assetFor(e) : meshAssetFor(e);
     const meshRadius = meshAsset
       ? vehicleMeshRadius(meshAsset)
@@ -152,8 +156,11 @@ export function collectScene(
         : 0;
     const halfW = Math.max(e.sprite.spriteWidth / 2, meshRadius);
     const top = meshRadius
-      ? Math.min(spriteBottom - e.sprite.spriteHeight, effectiveWy - meshRadius * Math.SQRT2)
-      : spriteBottom - e.sprite.spriteHeight;
+      ? Math.min(
+          spriteBottom - e.sprite.spriteHeight * scaleY,
+          effectiveWy - meshRadius * Math.SQRT2,
+        )
+      : spriteBottom - e.sprite.spriteHeight * scaleY;
     const bottom = meshRadius
       ? Math.max(spriteBottom, effectiveWy + meshRadius * Math.SQRT2)
       : spriteBottom + (meshRoofSupport?.heightDelta ?? 0);
@@ -233,6 +240,15 @@ export function collectScene(
                   : 0,
           }
         : {}),
+      ...(remains
+        ? {
+            scaleY,
+            alpha: Math.max(
+              0,
+              Math.min(1, (e.deathTimer ?? ROADKILL_FADE_SECONDS) / ROADKILL_FADE_SECONDS),
+            ),
+          }
+        : {}),
       kind: "sprite",
       sortKey,
       wx: pos.wx,
@@ -244,7 +260,7 @@ export function collectScene(
       spriteWidth: e.sprite.spriteWidth,
       spriteHeight: e.sprite.spriteHeight,
       flipX: e.sprite.flipX ?? false,
-      drawOffsetY: e.sprite.drawOffsetY ?? 0,
+      drawOffsetY,
       hasShadow,
       shadowFeetWy,
       shadowWidth,

@@ -135,7 +135,11 @@ hold **Fast / Shift** to go faster and hold **Horn / H** to honk for as long as 
 hold it (**Whistle / H** in trains). Release to stop.
 Sportier cars drive faster; buses and heavy trucks accelerate more slowly. Driven
 cars and all trains gently nudge players and movable animals/balls, with stronger
-pushing from heavier vehicles. A blocked push stops the vehicle; there is no damage. In an ambulance, police car or firetruck, **Siren / L / D-pad Up** toggles flashing
+pushing from heavier vehicles. A blocked push stops the vehicle. Driven cars and
+trains run over small wildlife such as frogs, rabbits and grounded birds, leaving
+still, flattened remains that disappear after 30 seconds. Pets and following/ridden
+animals stay protected; other bodies retain gentle pushing. Automatic road traffic
+keeps yielding. In an ambulance, police car or firetruck, **Siren / L / D-pad Up** toggles flashing
 lights and sound; **Style / K / D-pad Right** cycles EU-style two-tone, US-style wail and
 lights-only. Garbage trucks use **Beacon / L / D-pad Up** for silent amber lights.
 Try any of the 45 vehicle choices in the Traffic playground.

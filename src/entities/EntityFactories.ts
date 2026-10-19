@@ -6,6 +6,7 @@ import { createFrog, FROG_TYPE } from "../wildlife/Frog.js";
 import { createMallard, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_FACTORIES } from "../wildlife/Predator.js";
 import { createRabbit, RABBIT_TYPE } from "../wildlife/Rabbit.js";
+import { createRoadkill, isSmallAnimal, roadkillType } from "../wildlife/Roadkill.js";
 import { createRobin, ROBIN_TYPE } from "../wildlife/Robin.js";
 import { createBall } from "./Ball.js";
 import { createCampfire } from "./Campfire.js";
@@ -94,3 +95,7 @@ export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity
   person19: createPerson19,
   person20: createPerson20,
 };
+
+for (const [type, factory] of Object.entries(ENTITY_FACTORIES))
+  if (isSmallAnimal(type))
+    ENTITY_FACTORIES[roadkillType(type)] = (wx, wy) => createRoadkill(factory(wx, wy));

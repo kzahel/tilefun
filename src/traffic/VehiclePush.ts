@@ -9,6 +9,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { Prop } from "../entities/Prop.js";
 import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
+import { canBecomeRoadkill, createRoadkill } from "../wildlife/Roadkill.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import type { DrivingQueries } from "./DrivingQueries.js";
@@ -17,6 +18,8 @@ export interface VehiclePush {
   entity: Entity;
   position: Entity["position"];
   z: number;
+  /** Planned removal, committed only with the complete vehicle/passenger step. */
+  roadkill?: boolean;
 }
 export interface VehicleMotion {
   before: Entity;
@@ -34,6 +37,34 @@ function overlapsHeight(entity: Entity, low: number, high: number): boolean {
   return (
     (entity.wz ?? 0) < high && (entity.wz ?? 0) + (entity.collider?.physicalHeight ?? 16) > low
   );
+}
+/** Intersect the moving box's six half-spaces over the step. The envelope is
+ * only broad phase: diagonal corner misses and height-separated crossings are safe. */
+function sweptBodyContact(before: Entity, after: Entity, other: Entity): boolean {
+  if (!before.collider || !after.collider || !other.collider) return false;
+  const a = getEntityAABB(before.position, before.collider);
+  const b = getEntityAABB(after.position, after.collider);
+  const target = getEntityAABB(other.position, other.collider);
+  const low = other.wz ?? 0;
+  const high = low + (other.collider.physicalHeight ?? 16);
+  let enter = 0,
+    leave = 1;
+  for (const [start, end] of [
+    [a.right - target.left, b.right - target.left],
+    [target.right - a.left, target.right - b.left],
+    [a.bottom - target.top, b.bottom - target.top],
+    [target.bottom - a.top, target.bottom - b.top],
+    [
+      (before.wz ?? 0) + (before.collider.physicalHeight ?? 24) - low,
+      (after.wz ?? 0) + (after.collider.physicalHeight ?? 24) - low,
+    ],
+    [high - (before.wz ?? 0), high - (after.wz ?? 0)],
+  ] as const) {
+    if (start <= 0 && end <= 0) return false;
+    if (start <= 0) enter = Math.max(enter, -start / (end - start));
+    else if (end <= 0) leave = Math.min(leave, start / (start - end));
+  }
+  return enter < leave;
 }
 /** Pure, all-or-nothing contact plan. No impulses, chain pushing, wall clipping or roof displacement. */
 export function planVehiclePushes(
@@ -76,6 +107,16 @@ export function planVehiclePushes(
         continue;
       const box = getEntityAABB(other.position, other.collider);
       if (!aabbsOverlap(swept, box)) continue;
+      if (distance > 0 && canBecomeRoadkill(other)) {
+        if (sweptBodyContact(before, after, other))
+          planned.set(other.id, {
+            entity: other,
+            position: { ...other.position },
+            z: other.wz ?? 0,
+            roadkill: true,
+          });
+        continue;
+      }
       if (
         !distance ||
         !other.velocity ||
@@ -109,6 +150,7 @@ export function planVehiclePushes(
   }
   const result = [...planned.values()];
   for (const push of result) {
+    if (push.roadkill) continue;
     const { entity, position } = push,
       collider = entity.collider;
     if (!collider) return;
@@ -143,6 +185,7 @@ export function planVehiclePushes(
     for (const other of queries?.bodies?.(swept) ?? entities) {
       if (
         other.id === entity.id ||
+        planned.get(other.id)?.roadkill ||
         movingIds.has(other.id) ||
         !other.collider ||
         other.collider.solid === false ||
@@ -169,7 +212,15 @@ export function planVehiclePushes(
   return result;
 }
 export function commitVehiclePushes(plan: readonly VehiclePush[], entities: EntityManager): void {
-  for (const { entity, position, z } of plan) {
+  for (const { entity, position, z, roadkill } of plan) {
+    if (roadkill) {
+      // A multi-carriage plan may meet the same animal more than once.
+      if (!entities.byId.has(entity.id)) continue;
+      const remains = createRoadkill(entity);
+      entities.remove(entity.id);
+      entities.spawn(remains);
+      continue;
+    }
     entity.position = position;
     if ((entity.jumpZ ?? 0) <= 0) entity.wz = entity.groundZ = z;
     entities.spatialHash.update(entity);

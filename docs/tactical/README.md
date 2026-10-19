@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [143 Small-animal roadkill](143-small-animal-roadkill.md) | Delivered: driven car/train contact, inert fading remains and durable deaths; full unit/browser and streaming checks pass |
 | [142 Red car low-poly pipeline](142-red-car-low-poly-pipeline.md) | In progress: YA texture/geometry experiments, actual-GLB review and reusable original-vehicle queue; other cars await owner agreement |
 | [141 Sports-car style experiments](141-sports-car-style-experiments.md) | Delivered for inspection: four YA Codex routes, retained scenes/sprites, native comparison and standalone interactive viewer |
 | [140 Shared input UX and reverse](140-shared-input-ux-and-reverse.md) | Shared cursor/tool selection, native map gestures, named action paddles and reverse driving |

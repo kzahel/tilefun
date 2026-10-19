@@ -6,6 +6,22 @@ The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
 Updated: 2026-10-19.
 
+## Small-animal roadkill
+
+[143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted
+roadkill rule for frogs, rabbits, robins, mallards, chickens, both pigeon variants,
+crows, seagulls and ants. Driven cars and all trains kill on moving physical body
+contact, including reverse and slow travel. Stationary bodies, diagonal near misses
+and height-separated animals do not cause deaths. Followers, attached/ridden
+animals and companion species remain protected; larger animals retain gentle contact.
+
+Deaths use ordinary durable removal, with no predator-meal replacement. Separate
+inert remains reuse unchanged source pixels, flattened at ground level for 30 seconds
+with a five-second fade. They have no AI, collision, support or shadow and reload
+with their remaining lifetime. Shared game/lab authority, private car prediction
+and Canvas/GPU presentation implement the behavior. Full unit/browser and streaming
+readiness checks pass; 143 records the evidence and missing campaign-status input.
+
 ## Animal browser and delayed natural returns
 
 Owner request, 2026-10-19: extend the interactive lab with an animal browser and

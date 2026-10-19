@@ -1,4 +1,5 @@
 import type { Mod } from "../server/WorldAPI.js";
+import { isRoadkill } from "../wildlife/Roadkill.js";
 import { BEFRIEND_RANGE, isBefriendHit } from "./playInteraction.js";
 
 // ── Combat constants ──
@@ -160,7 +161,7 @@ export const baseGameMod: Mod = {
           if (entity.deathTimer === undefined) continue;
           const remaining = entity.deathTimer - dt;
           entity.setDeathTimer(remaining);
-          entity.setFlashing(Math.floor(remaining * 16) % 2 === 0);
+          if (!isRoadkill(entity.type)) entity.setFlashing(Math.floor(remaining * 16) % 2 === 0);
           if (remaining <= 0) {
             dead.push(entity.id);
           }

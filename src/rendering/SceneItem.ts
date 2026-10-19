@@ -33,6 +33,8 @@ export interface SpriteItem {
   frameRow: number;
   spriteWidth: number;
   spriteHeight: number;
+  /** Destination-only vertical compression; source sheet pixels stay unchanged. */
+  scaleY?: number;
   flipX: boolean;
   /** Visual draw offset in world pixels (negative = draw higher). */
   drawOffsetY: number;

@@ -9,6 +9,7 @@ import { FROG_DEF, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_DEF, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_DEFS } from "../wildlife/Predator.js";
 import { RABBIT_DEF, RABBIT_TYPE } from "../wildlife/Rabbit.js";
+import { isSmallAnimal, roadkillDefinition, roadkillType } from "../wildlife/Roadkill.js";
 import { ROBIN_DEF, ROBIN_TYPE } from "../wildlife/Robin.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
@@ -578,3 +579,7 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
   person19: personDef(19),
   person20: personDef(20),
 };
+
+// Inert remains are replicated/persisted through the normal entity registry.
+for (const [type, def] of Object.entries(ENTITY_DEFS))
+  if (isSmallAnimal(type)) ENTITY_DEFS[roadkillType(type)] = roadkillDefinition(def);
