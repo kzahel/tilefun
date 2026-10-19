@@ -1,0 +1,13 @@
+{
+  "identity": "koala-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#8c9693",
+    "H": "#bac2b9",
+    "C": "#ded8be",
+    "M": "#5f6866",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -840,10 +840,14 @@
     "malayan-tapir": {
       "name": "Tapir",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:46:00Z"
+      "startedUtc": "2026-10-19T02:46:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:18:50Z",
+      "receipt": "art-source/wildlife-v2/malayan-tapir/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hips, 984 tail checks, 988 contacts and 688 planted travel pairs; native body paint motion; ten-artifact replay; 328 exact crops; four shared game/browser cases; twelve natural/manual origin tests; exact pixels pending review"
     },
     "okapi": {
       "name": "Okapi",
@@ -1017,10 +1021,14 @@
     "beaver": {
       "name": "Beaver",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:46:00Z"
+      "startedUtc": "2026-10-19T02:46:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:18:50Z",
+      "receipt": "art-source/wildlife-v2/beaver/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hips, 984 tail checks, 988 contacts and 688 planted travel pairs; native body paint motion; ten-artifact replay; 328 exact crops; four shared game/browser cases; twelve natural/manual origin tests; exact pixels pending review"
     },
     "bat": {
       "name": "Bat",
@@ -1065,10 +1073,14 @@
     "capybara": {
       "name": "Capybara",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:46:00Z"
+      "startedUtc": "2026-10-19T02:46:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:18:50Z",
+      "receipt": "art-source/wildlife-v2/capybara/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hips, 984 tail checks, 988 contacts and 688 planted travel pairs; native body paint motion; ten-artifact replay; 328 exact crops; four shared game/browser cases; twelve natural/manual origin tests; exact pixels pending review"
     },
     "giant-anteater": {
       "name": "Giant anteater",
@@ -1154,10 +1166,14 @@
     "koala": {
       "name": "Koala",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:46:00Z"
+      "startedUtc": "2026-10-19T02:46:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:18:50Z",
+      "receipt": "art-source/wildlife-v2/koala/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hips, 984 tail checks, 988 contacts and 688 planted travel pairs; native body paint motion; ten-artifact replay; 328 exact crops; four shared game/browser cases; twelve natural/manual origin tests; exact pixels pending review"
     },
     "wallaby": {
       "name": "Wallaby",
@@ -1169,10 +1185,14 @@
     "wombat": {
       "name": "Wombat",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:46:00Z"
+      "startedUtc": "2026-10-19T02:46:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:18:50Z",
+      "receipt": "art-source/wildlife-v2/wombat/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hips, 984 tail checks, 988 contacts and 688 planted travel pairs; native body paint motion; ten-artifact replay; 328 exact crops; four shared game/browser cases; twelve natural/manual origin tests; exact pixels pending review"
     },
     "opossum": {
       "name": "Opossum",
@@ -1205,10 +1225,14 @@
     "quokka": {
       "name": "Quokka",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:46:00Z"
+      "startedUtc": "2026-10-19T02:46:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:18:50Z",
+      "receipt": "art-source/wildlife-v2/quokka/roster-v2/receipt.json",
+      "evidence": "164 source poses; 5248 fixed limb links, 1312 buried hips, 984 tail checks, 988 contacts and 688 planted travel pairs; native body paint motion; ten-artifact replay; 328 exact crops; four shared game/browser cases; twelve natural/manual origin tests; exact pixels pending review"
     },
     "toucan": {
       "name": "Toucan",
@@ -2217,6 +2241,18 @@
         "texas-horned-lizard"
       ],
       "validation": "Typecheck/lint/build, 1269-candidate manifest, 16 browser cases and streaming --assert-ready pass. Full bounded units: 3852 pass, 5 known Windows failures, 10 skipped. Four ten-artifact replays and 1312 exact crops. Independent 322 eighth-pose samples per species keep endpoint gap below .058 native pixels and soles above ground. Six corrected insect review wrappers retain immutable bank bytes and pass 1968 exact crops."
+    },
+    {
+      "utc": "2026-10-19T03:18:50Z",
+      "completed": [
+        "beaver",
+        "capybara",
+        "koala",
+        "wombat",
+        "quokka",
+        "malayan-tapir"
+      ],
+      "validation": "Typecheck/lint/build, 1299-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full bounded units: 3942 pass, 5 known Windows failures, 10 skipped. 6 ten-artifact byte-identical replays and 1968 exact crops."
     }
   ],
   "existingOutsideRoster": [
@@ -2448,6 +2484,20 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/lizards-140/README.md"
+    },
+    "forest-herbivores": {
+      "animals": [
+        "beaver",
+        "capybara",
+        "koala",
+        "wombat",
+        "quokka",
+        "malayan-tapir"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/forest-herbivores-140/README.md"
     }
   }
 }

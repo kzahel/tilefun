@@ -1,0 +1,17 @@
+{
+  "identity": "quokka-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4586776859504127,
+    "up": 1.2287305550220893,
+    "left": 1.4836601307189525,
+    "right": 1.4836601307189525
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

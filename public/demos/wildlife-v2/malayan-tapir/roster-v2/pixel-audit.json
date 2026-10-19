@@ -1,0 +1,17 @@
+{
+  "identity": "malayan-tapir-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4502488445596668,
+    "up": 1.4860566970265765,
+    "left": 1.534178352889036,
+    "right": 1.534178352889036
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

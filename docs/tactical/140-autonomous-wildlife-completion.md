@@ -492,3 +492,17 @@ assertion; distinguish them from newly introduced failures.
   leave 96 remaining. Six forest mammals are next; six shelled/amphibian sources,
   four small hunters and six short-flight birds also have drafts/replays underway.
   Exact pixels remain pending human review.
+
+- 03:18 UTC: beaver, capybara, koala, wombat, quokka and Malayan tapir completed.
+  Fresh paddle tail/incisors, blunt capybara muzzle, koala nose/ear ruffs, broad
+  wombat haunches, narrow quokka tail and source-painted black/cream tapir saddle
+  retain distinct editable anatomy. Four fixed-link planted limbs carry moving
+  bodies, with 5,248 limb links, 1,312 buried hips, 984 tail checks, 988 contacts
+  and 688 planted travel pairs per bank. Source clock/loop range matches the
+  1.28s delivery. Ground foraging/escape profiles do not add swimming, climbing
+  or tree cutting. Twelve meal tests preserve natural lineage and finite placed
+  prey. The next checkpoint combines six shelled/amphibian creatures and four
+  small hunters so directed prey relationships land with their spawn profiles.
+  Typecheck/lint/build, 1299-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full bounded units: 3942 pass, 5 known Windows failures, 10 skipped. 6 ten-artifact byte-identical replays and 1968 exact crops.
+  90 new entries plus sixteen delivered leave 90 remaining.
+  Fresh inbox/notes are clear. Exact pixels remain pending human review.

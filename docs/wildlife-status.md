@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**84 newly completed; 22 in progress; 74 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**90 newly completed; 16 in progress; 74 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -61,7 +61,7 @@
 | Saiga antelope | finished-game-active | [Playback](../public/demos/wildlife-v2/saiga-antelope/roster-v2/index.html) |
 | Musk ox | finished-game-active | [Playback](../public/demos/wildlife-v2/musk-ox/roster-v2/index.html) |
 | Wildebeest | finished-game-active | [Playback](../public/demos/wildlife-v2/wildebeest/roster-v2/index.html) |
-| Tapir | in-progress | Source/animation work |
+| Tapir | finished-game-active | [Playback](../public/demos/wildlife-v2/malayan-tapir/roster-v2/index.html) |
 | Okapi | finished-game-active | [Playback](../public/demos/wildlife-v2/okapi/roster-v2/index.html) |
 | Warthog | finished-game-active | [Playback](../public/demos/wildlife-v2/warthog/roster-v2/index.html) |
 | Gerenuk | finished-game-active | [Playback](../public/demos/wildlife-v2/gerenuk/roster-v2/index.html) |
@@ -72,16 +72,16 @@
 | Porcupine | finished-game-active | [Playback](../public/demos/wildlife-v2/porcupine/roster-v2/index.html) |
 | Raccoon | finished-game-active | [Playback](../public/demos/wildlife-v2/raccoon/roster-v2/index.html) |
 | Skunk | finished-game-active | [Playback](../public/demos/wildlife-v2/skunk/roster-v2/index.html) |
-| Beaver | in-progress | Source/animation work |
+| Beaver | finished-game-active | [Playback](../public/demos/wildlife-v2/beaver/roster-v2/index.html) |
 | Red panda | finished-game-active | [Playback](../public/demos/wildlife-v2/red-panda/roster-v2/index.html) |
-| Capybara | in-progress | Source/animation work |
+| Capybara | finished-game-active | [Playback](../public/demos/wildlife-v2/capybara/roster-v2/index.html) |
 | Mongoose | in-progress | Source/animation work |
 | Honey badger | in-progress | Source/animation work |
 | Fossa | in-progress | Source/animation work |
 | White-nosed coati | in-progress | Source/animation work |
-| Koala | in-progress | Source/animation work |
-| Wombat | in-progress | Source/animation work |
-| Quokka | in-progress | Source/animation work |
+| Koala | finished-game-active | [Playback](../public/demos/wildlife-v2/koala/roster-v2/index.html) |
+| Wombat | finished-game-active | [Playback](../public/demos/wildlife-v2/wombat/roster-v2/index.html) |
+| Quokka | finished-game-active | [Playback](../public/demos/wildlife-v2/quokka/roster-v2/index.html) |
 | Toucan | in-progress | Source/animation work |
 | Great hornbill | in-progress | Source/animation work |
 | Pigeon | in-progress | Source/animation work |
@@ -117,7 +117,7 @@
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T03:04:49.743Z (19/10/2026, 05:04:49 Berlin).
+Snapshot: 2026-10-19T03:18:51.236Z (19/10/2026, 05:18:51 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

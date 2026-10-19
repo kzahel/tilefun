@@ -495,3 +495,11 @@
 !iguana/roster-v2/*
 !chameleon/roster-v2/*
 !texas-horned-lizard/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!beaver/roster-v2/*
+!capybara/roster-v2/*
+!koala/roster-v2/*
+!wombat/roster-v2/*
+!quokka/roster-v2/*
+!malayan-tapir/roster-v2/*

@@ -1216,6 +1216,66 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-beaver-provisional-v1",
+      "name": "wildlife beaver provisional v1",
+      "image": "demos/wildlife-v2/beaver/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8899a9b7bab6af621e67530c38032dcefbf0e5aa47305ec06c81ba2922604564",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-capybara-provisional-v1",
+      "name": "wildlife capybara provisional v1",
+      "image": "demos/wildlife-v2/capybara/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e971e51aef9936fd1db0f81fd044fbc0bce0af670df74988f0f6ccc8233773db",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-koala-provisional-v1",
+      "name": "wildlife koala provisional v1",
+      "image": "demos/wildlife-v2/koala/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b347c16c73220abdea9260e1630f21ef3cfe9d3e9c0532d0a2dd70df08bfc1bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-wombat-provisional-v1",
+      "name": "wildlife wombat provisional v1",
+      "image": "demos/wildlife-v2/wombat/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "9983a99d6d724558ed0ef11f7704255a9edaa1b58d6508ef493c1fb8564bb5bc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-quokka-provisional-v1",
+      "name": "wildlife quokka provisional v1",
+      "image": "demos/wildlife-v2/quokka/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2e1b2507d0476b88e422112de470712d3b121e716f6c22ee4b66681658496ed5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-malayan-tapir-provisional-v1",
+      "name": "wildlife malayan tapir provisional v1",
+      "image": "demos/wildlife-v2/malayan-tapir/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a6f11968b3f386b0f564b711889967c9d23a1738d1c6ba4f97d3fa6f00eb73f6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-gecko-provisional-v1",
       "name": "wildlife gecko provisional v1",
       "image": "demos/wildlife-v2/gecko/roster-v2/sheet.png",
@@ -3883,6 +3943,66 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "7db9bdb4ef1af2537be5962d8c2b1c5fc9fbd089ee118b809e635580754fd384",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-beaver-roster-v2",
+      "name": "wildlife v2 beaver roster v2",
+      "image": "demos/wildlife-v2/beaver/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8899a9b7bab6af621e67530c38032dcefbf0e5aa47305ec06c81ba2922604564",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-capybara-roster-v2",
+      "name": "wildlife v2 capybara roster v2",
+      "image": "demos/wildlife-v2/capybara/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e971e51aef9936fd1db0f81fd044fbc0bce0af670df74988f0f6ccc8233773db",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-koala-roster-v2",
+      "name": "wildlife v2 koala roster v2",
+      "image": "demos/wildlife-v2/koala/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b347c16c73220abdea9260e1630f21ef3cfe9d3e9c0532d0a2dd70df08bfc1bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-wombat-roster-v2",
+      "name": "wildlife v2 wombat roster v2",
+      "image": "demos/wildlife-v2/wombat/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "9983a99d6d724558ed0ef11f7704255a9edaa1b58d6508ef493c1fb8564bb5bc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-quokka-roster-v2",
+      "name": "wildlife v2 quokka roster v2",
+      "image": "demos/wildlife-v2/quokka/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2e1b2507d0476b88e422112de470712d3b121e716f6c22ee4b66681658496ed5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-malayan-tapir-roster-v2",
+      "name": "wildlife v2 malayan tapir roster v2",
+      "image": "demos/wildlife-v2/malayan-tapir/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a6f11968b3f386b0f564b711889967c9d23a1738d1c6ba4f97d3fa6f00eb73f6",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -26716,6 +26836,114 @@
       ]
     },
     {
+      "id": "sprite:wildlife-beaver-provisional-v1",
+      "sheetId": "wildlife-beaver-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-beaver-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-capybara-provisional-v1",
+      "sheetId": "wildlife-capybara-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-capybara-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-koala-provisional-v1",
+      "sheetId": "wildlife-koala-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-koala-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-wombat-provisional-v1",
+      "sheetId": "wildlife-wombat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-wombat-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-quokka-provisional-v1",
+      "sheetId": "wildlife-quokka-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-quokka-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-malayan-tapir-provisional-v1",
+      "sheetId": "wildlife-malayan-tapir-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-malayan-tapir-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-gecko-provisional-v1",
       "sheetId": "wildlife-gecko-provisional-v1",
       "rect": [
@@ -28479,7 +28707,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:945"
+          "source": "src/wildlife/Fauna.ts:946"
         },
         {
           "system": "Gameplay",
@@ -28491,11 +28719,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:136"
+          "source": "src/wildlife/FoodWeb.ts:143"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:293"
+          "source": "src/wildlife/FoodWeb.ts:300"
         }
       ]
     },
@@ -28553,35 +28781,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:21"
+          "source": "src/wildlife/Fauna.ts:22"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:216"
+          "source": "src/wildlife/Fauna.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:176"
+          "source": "src/wildlife/FoodWeb.ts:183"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:192"
+          "source": "src/wildlife/FoodWeb.ts:199"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:208"
+          "source": "src/wildlife/FoodWeb.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:242"
+          "source": "src/wildlife/FoodWeb.ts:249"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:266"
+          "source": "src/wildlife/FoodWeb.ts:273"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:293"
+          "source": "src/wildlife/FoodWeb.ts:300"
         }
       ]
     },
@@ -28631,15 +28859,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:137"
+          "source": "src/wildlife/FoodWeb.ts:144"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:293"
+          "source": "src/wildlife/FoodWeb.ts:300"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:294"
+          "source": "src/wildlife/FoodWeb.ts:301"
         }
       ]
     },
@@ -28681,7 +28909,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:294"
+          "source": "src/wildlife/FoodWeb.ts:301"
         }
       ]
     },
@@ -28727,7 +28955,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:295"
+          "source": "src/wildlife/FoodWeb.ts:302"
         }
       ]
     },
@@ -28773,7 +29001,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:296"
+          "source": "src/wildlife/FoodWeb.ts:303"
         }
       ]
     },
@@ -28819,7 +29047,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:297"
+          "source": "src/wildlife/FoodWeb.ts:304"
         }
       ]
     },
@@ -28973,7 +29201,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:293"
+          "source": "src/wildlife/FoodWeb.ts:300"
         }
       ]
     },
@@ -29019,7 +29247,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:293"
+          "source": "src/wildlife/FoodWeb.ts:300"
         }
       ]
     },

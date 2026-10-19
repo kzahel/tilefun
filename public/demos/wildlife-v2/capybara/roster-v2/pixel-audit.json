@@ -1,0 +1,17 @@
+{
+  "identity": "capybara-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.1973532447034572,
+    "up": 1.2425422186267525,
+    "left": 1.6997245179063398,
+    "right": 1.6997245179063398
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

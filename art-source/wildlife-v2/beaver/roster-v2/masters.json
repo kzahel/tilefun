@@ -1,0 +1,14 @@
+{
+  "identity": "beaver-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#76583d",
+    "H": "#a47e50",
+    "C": "#ded8be",
+    "M": "#4b4136",
+    "E": "#d3b066",
+    "N": "#242c31",
+    "T": "#d39a4e"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

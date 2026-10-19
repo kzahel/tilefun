@@ -3,6 +3,7 @@ import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { BOVID_PROFILES } from "./Bovids.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
+import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
 import { GROUND_BIRD_PROFILES } from "./GroundBirds.js";
 import { INSECT_PROFILES } from "./Insects.js";
 import { LIZARD_PROFILES } from "./Lizards.js";
@@ -1330,6 +1331,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...SMALL_MAMMAL_PROFILES,
   ...GROUND_BIRD_PROFILES,
   ...MARINE_FAUNA_PROFILES,
+  ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,
   ...INSECT_PROFILES,
   ...PET_ART.map((art): FaunaProfile => {

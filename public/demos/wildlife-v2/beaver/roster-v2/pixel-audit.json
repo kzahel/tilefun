@@ -1,0 +1,17 @@
+{
+  "identity": "beaver-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.3504841740135873,
+    "up": 1.3878380375350972,
+    "left": 1.358686322075016,
+    "right": 1.358686322075016
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

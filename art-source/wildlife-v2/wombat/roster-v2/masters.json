@@ -1,0 +1,13 @@
+{
+  "identity": "wombat-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#8e7b61",
+    "H": "#b39d79",
+    "C": "#ded8be",
+    "M": "#655b4a",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

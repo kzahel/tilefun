@@ -8,11 +8,12 @@ Updated: 2026-10-19.
 
 ## Current eight-hour completion run
 
-Latest checkpoint: 03:04 UTC. One hundred of the retained 196 entries are delivered
-(84 new this run, 16 preserved); 96 remain. Four low-bodied lizards now use
-source-verified planted movement and explicit food-web prey rules. Six forest
-mammals are next; further shelled/amphibian, small hunter and bird sources are
-underway. Exact new art remains pending human review.
+Latest checkpoint: 03:18 UTC. 106 of the retained 196 entries are delivered
+(90 new this run, 16 preserved); 90 remain. Six forest herbivores now spawn with
+source-verified planted movement and ground foraging/escape. Six shelled/amphibian
+creatures and four small hunters are next, with six short-flight birds also ready
+for integration.
+Exact new art remains pending human review.
 
 The owner now explicitly authorizes all remaining animals in the retained
 196-animal list, autonomously for up to eight hours. [140](../tactical/140-autonomous-wildlife-completion.md)

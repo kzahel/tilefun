@@ -1,0 +1,17 @@
+{
+  "identity": "koala-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7549668874172184,
+    "up": 1.4151515151515142,
+    "left": 1.3947368421052602,
+    "right": 1.3947368421052602
+  },
+  "rootTravelPixelsPerCycle": 10.24,
+  "plantedTravel": true
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "wombat-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.2460746074607414,
+    "up": 1.3388124362895013,
+    "left": 1.5526963562753053,
+    "right": 1.5526963562753053
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

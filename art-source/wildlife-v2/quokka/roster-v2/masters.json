@@ -1,0 +1,13 @@
+{
+  "identity": "quokka-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#9a8056",
+    "H": "#c1a574",
+    "C": "#ded8be",
+    "M": "#6c593f",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}
