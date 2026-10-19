@@ -1,0 +1,13 @@
+{
+  "identity": "dragonfly-roster-v2-pixels-01",
+  "palette": {
+    "K": "#29332d",
+    "B": "#5f9588",
+    "H": "#95baa2",
+    "M": "#4c6968",
+    "E": "#9b5444",
+    "W": "#c8d7cc",
+    "G": "#6e8b81"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -68,7 +68,7 @@ const pasture = [
 const smallerCats = ["cheetah", "lynx", "bobcat"] as const;
 const felids = ["jaguar", "leopard", ...smallerCats] as const;
 
-/** Explicit game food web. Direction means hunter → prey, never inferred from mass.
+/** Explicit game food web. Direction means hunter â†’ prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
   dolphin: ["fish", "octopus", "crab"],
@@ -115,6 +115,13 @@ export const HUNTING_DIETS = {
   lynx: [...small, "fox"],
   bobcat: [...small],
   "giant-spider": [
+    "bee",
+    "ladybug",
+    "dragonfly",
+    "stag-beetle",
+    "grasshopper",
+    "cricket",
+
     "ant",
     "butterfly",
     "red-squirrel",

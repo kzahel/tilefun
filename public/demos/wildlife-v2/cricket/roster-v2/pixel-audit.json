@@ -1,0 +1,21 @@
+{
+  "identity": "cricket-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.32059574127197266,
+    "up": 0.41411876678466797,
+    "left": 0.3279390335083008,
+    "right": 0.37399959564208984
+  },
+  "physicalHop": {
+    "duration": 0.64,
+    "push": 0.1,
+    "land": 0.54,
+    "height": 8
+  }
+}

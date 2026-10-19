@@ -1,0 +1,13 @@
+{
+  "identity": "grasshopper-roster-v2-pixels-01",
+  "palette": {
+    "K": "#29332d",
+    "B": "#79994b",
+    "H": "#b1b86d",
+    "M": "#4d6840",
+    "E": "#3b4538",
+    "W": "#dbd4aa",
+    "G": "#8d9b6f"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

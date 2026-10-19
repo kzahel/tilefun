@@ -1,0 +1,21 @@
+{
+  "identity": "ladybug-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.32370662689208984,
+    "up": 0.41590118408203125,
+    "left": 0.3308553695678711,
+    "right": 0.3805255889892578
+  },
+  "physicalHop": {
+    "duration": 0.8,
+    "push": 0.08,
+    "land": 0.72,
+    "height": 4
+  }
+}

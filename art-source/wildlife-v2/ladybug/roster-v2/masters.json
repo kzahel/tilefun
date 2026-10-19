@@ -1,0 +1,13 @@
+{
+  "identity": "ladybug-roster-v2-pixels-01",
+  "palette": {
+    "K": "#29332d",
+    "B": "#b74735",
+    "H": "#dd7350",
+    "M": "#414b3d",
+    "E": "#c5bf9c",
+    "W": "#e7dfc7",
+    "G": "#6c745e"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -1216,6 +1216,66 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-bee-provisional-v1",
+      "name": "wildlife bee provisional v1",
+      "image": "demos/wildlife-v2/bee/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "9826558c7d1e4cef63a67d11b5722b56f5741714ead9987d59d83c6216fa4aa1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ladybug-provisional-v1",
+      "name": "wildlife ladybug provisional v1",
+      "image": "demos/wildlife-v2/ladybug/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "4567a3a82dfe96a6a96f5aff9d2edd44bc9e89813e6efff765e2108d2cd96901",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-dragonfly-provisional-v1",
+      "name": "wildlife dragonfly provisional v1",
+      "image": "demos/wildlife-v2/dragonfly/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "6a65758eac3aa6864b25f376846ee8b36deea28a3e17bdda455818300069bfcb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-stag-beetle-provisional-v1",
+      "name": "wildlife stag beetle provisional v1",
+      "image": "demos/wildlife-v2/stag-beetle/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b4b08ef2ef8e92e1ebdf153b9682b63267384892b12728acbae32834a65db11e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-grasshopper-provisional-v1",
+      "name": "wildlife grasshopper provisional v1",
+      "image": "demos/wildlife-v2/grasshopper/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "c2fd6af6adff938c92831d3d62fddccac72ee6c41e1707388fc9e91841fcec45",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-cricket-provisional-v1",
+      "name": "wildlife cricket provisional v1",
+      "image": "demos/wildlife-v2/cricket/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "c924bcd4d12b8c1034a4354343cf584b1cb35e8d4fae86e5dc6ff28d49b0aef5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -3683,6 +3743,66 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-bee-roster-v2",
+      "name": "wildlife v2 bee roster v2",
+      "image": "demos/wildlife-v2/bee/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "9826558c7d1e4cef63a67d11b5722b56f5741714ead9987d59d83c6216fa4aa1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ladybug-roster-v2",
+      "name": "wildlife v2 ladybug roster v2",
+      "image": "demos/wildlife-v2/ladybug/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "4567a3a82dfe96a6a96f5aff9d2edd44bc9e89813e6efff765e2108d2cd96901",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dragonfly-roster-v2",
+      "name": "wildlife v2 dragonfly roster v2",
+      "image": "demos/wildlife-v2/dragonfly/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "6a65758eac3aa6864b25f376846ee8b36deea28a3e17bdda455818300069bfcb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-stag-beetle-roster-v2",
+      "name": "wildlife v2 stag beetle roster v2",
+      "image": "demos/wildlife-v2/stag-beetle/roster-v2/sheet.png",
+      "width": 1968,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "b4b08ef2ef8e92e1ebdf153b9682b63267384892b12728acbae32834a65db11e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-grasshopper-roster-v2",
+      "name": "wildlife v2 grasshopper roster v2",
+      "image": "demos/wildlife-v2/grasshopper/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "c2fd6af6adff938c92831d3d62fddccac72ee6c41e1707388fc9e91841fcec45",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cricket-roster-v2",
+      "name": "wildlife v2 cricket roster v2",
+      "image": "demos/wildlife-v2/cricket/roster-v2/sheet.png",
+      "width": 1312,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "c924bcd4d12b8c1034a4354343cf584b1cb35e8d4fae86e5dc6ff28d49b0aef5",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -26516,6 +26636,114 @@
       ]
     },
     {
+      "id": "sprite:wildlife-bee-provisional-v1",
+      "sheetId": "wildlife-bee-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1312,
+        128
+      ],
+      "label": "wildlife-bee-provisional-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ladybug-provisional-v1",
+      "sheetId": "wildlife-ladybug-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1312,
+        128
+      ],
+      "label": "wildlife-ladybug-provisional-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-dragonfly-provisional-v1",
+      "sheetId": "wildlife-dragonfly-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1968,
+        192
+      ],
+      "label": "wildlife-dragonfly-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-stag-beetle-provisional-v1",
+      "sheetId": "wildlife-stag-beetle-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1968,
+        192
+      ],
+      "label": "wildlife-stag-beetle-provisional-v1 · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-grasshopper-provisional-v1",
+      "sheetId": "wildlife-grasshopper-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1312,
+        128
+      ],
+      "label": "wildlife-grasshopper-provisional-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-cricket-provisional-v1",
+      "sheetId": "wildlife-cricket-provisional-v1",
+      "rect": [
+        0,
+        0,
+        1312,
+        128
+      ],
+      "label": "wildlife-cricket-provisional-v1 · registered 32×32 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -28099,7 +28327,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:943"
+          "source": "src/wildlife/Fauna.ts:944"
         },
         {
           "system": "Gameplay",
@@ -28111,11 +28339,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:124"
+          "source": "src/wildlife/FoodWeb.ts:131"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:281"
+          "source": "src/wildlife/FoodWeb.ts:288"
         }
       ]
     },
@@ -28173,35 +28401,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:19"
+          "source": "src/wildlife/Fauna.ts:20"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:214"
+          "source": "src/wildlife/Fauna.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:164"
+          "source": "src/wildlife/FoodWeb.ts:171"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:180"
+          "source": "src/wildlife/FoodWeb.ts:187"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:196"
+          "source": "src/wildlife/FoodWeb.ts:203"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:230"
+          "source": "src/wildlife/FoodWeb.ts:237"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:254"
+          "source": "src/wildlife/FoodWeb.ts:261"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:281"
+          "source": "src/wildlife/FoodWeb.ts:288"
         }
       ]
     },
@@ -28251,15 +28479,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:125"
+          "source": "src/wildlife/FoodWeb.ts:132"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:281"
+          "source": "src/wildlife/FoodWeb.ts:288"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:282"
+          "source": "src/wildlife/FoodWeb.ts:289"
         }
       ]
     },
@@ -28301,7 +28529,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:282"
+          "source": "src/wildlife/FoodWeb.ts:289"
         }
       ]
     },
@@ -28347,7 +28575,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:283"
+          "source": "src/wildlife/FoodWeb.ts:290"
         }
       ]
     },
@@ -28393,7 +28621,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:284"
+          "source": "src/wildlife/FoodWeb.ts:291"
         }
       ]
     },
@@ -28439,7 +28667,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:285"
+          "source": "src/wildlife/FoodWeb.ts:292"
         }
       ]
     },
@@ -28593,7 +28821,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:281"
+          "source": "src/wildlife/FoodWeb.ts:288"
         }
       ]
     },
@@ -28639,7 +28867,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:281"
+          "source": "src/wildlife/FoodWeb.ts:288"
         }
       ]
     },

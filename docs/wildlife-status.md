@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**74 newly completed; 6 in progress; 100 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**80 newly completed; 16 in progress; 84 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -24,9 +24,10 @@
 | Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
 | Goat | finished-game-active | [Playback](../public/demos/wildlife-v2/goat/motion-v2/index.html) |
 | Chicken | finished-game-active | [Playback](../public/demos/wildlife-v2/chicken/roster-v2/index.html) |
-| Bee | in-progress | Source/animation work |
-| Ladybug | in-progress | Source/animation work |
+| Bee | finished-game-active | [Playback](../public/demos/wildlife-v2/bee/roster-v2/index.html) |
+| Ladybug | finished-game-active | [Playback](../public/demos/wildlife-v2/ladybug/roster-v2/index.html) |
 | Green sea turtle | finished-game-active | [Playback](../public/demos/wildlife-v2/sea-turtle/roster-v2/index.html) |
+| Tokay gecko | in-progress | Source/animation work |
 | Wolf | finished-game-active | [Playback](../public/demos/wildlife-v2/wolf/roster-v2/index.html) |
 | Donkey | finished-game-active | [Playback](../public/demos/wildlife-v2/donkey/roster-v2/index.html) |
 | Mule | finished-game-active | [Playback](../public/demos/wildlife-v2/mule/roster-v2/index.html) |
@@ -59,6 +60,7 @@
 | Saiga antelope | finished-game-active | [Playback](../public/demos/wildlife-v2/saiga-antelope/roster-v2/index.html) |
 | Musk ox | finished-game-active | [Playback](../public/demos/wildlife-v2/musk-ox/roster-v2/index.html) |
 | Wildebeest | finished-game-active | [Playback](../public/demos/wildlife-v2/wildebeest/roster-v2/index.html) |
+| Tapir | in-progress | Source/animation work |
 | Okapi | finished-game-active | [Playback](../public/demos/wildlife-v2/okapi/roster-v2/index.html) |
 | Warthog | finished-game-active | [Playback](../public/demos/wildlife-v2/warthog/roster-v2/index.html) |
 | Gerenuk | finished-game-active | [Playback](../public/demos/wildlife-v2/gerenuk/roster-v2/index.html) |
@@ -69,7 +71,12 @@
 | Porcupine | finished-game-active | [Playback](../public/demos/wildlife-v2/porcupine/roster-v2/index.html) |
 | Raccoon | finished-game-active | [Playback](../public/demos/wildlife-v2/raccoon/roster-v2/index.html) |
 | Skunk | finished-game-active | [Playback](../public/demos/wildlife-v2/skunk/roster-v2/index.html) |
+| Beaver | in-progress | Source/animation work |
 | Red panda | finished-game-active | [Playback](../public/demos/wildlife-v2/red-panda/roster-v2/index.html) |
+| Capybara | in-progress | Source/animation work |
+| Koala | in-progress | Source/animation work |
+| Wombat | in-progress | Source/animation work |
+| Quokka | in-progress | Source/animation work |
 | Peacock | finished-game-active | [Playback](../public/demos/wildlife-v2/peacock/roster-v2/index.html) |
 | Ostrich | finished-game-active | [Playback](../public/demos/wildlife-v2/ostrich/roster-v2/index.html) |
 | Emu | finished-game-active | [Playback](../public/demos/wildlife-v2/emu/roster-v2/index.html) |
@@ -84,14 +91,23 @@
 | Humpback whale | finished-game-active | [Playback](../public/demos/wildlife-v2/humpback-whale/roster-v2/index.html) |
 | Blue whale | finished-game-active | [Playback](../public/demos/wildlife-v2/blue-whale/roster-v2/index.html) |
 | Narwhal | finished-game-active | [Playback](../public/demos/wildlife-v2/narwhal/roster-v2/index.html) |
-| Dragonfly | in-progress | Source/animation work |
-| Stag beetle | in-progress | Source/animation work |
-| Grasshopper | in-progress | Source/animation work |
-| Cricket | in-progress | Source/animation work |
+| Iguana | in-progress | Source/animation work |
+| Chameleon | in-progress | Source/animation work |
+| Pond turtle | in-progress | Source/animation work |
+| Land tortoise | in-progress | Source/animation work |
+| Fire salamander | in-progress | Source/animation work |
+| Newt | in-progress | Source/animation work |
+| Axolotl | in-progress | Source/animation work |
+| Frilled-neck lizard | in-progress | Source/animation work |
+| Texas horned lizard | in-progress | Source/animation work |
+| Dragonfly | finished-game-active | [Playback](../public/demos/wildlife-v2/dragonfly/roster-v2/index.html) |
+| Stag beetle | finished-game-active | [Playback](../public/demos/wildlife-v2/stag-beetle/roster-v2/index.html) |
+| Grasshopper | finished-game-active | [Playback](../public/demos/wildlife-v2/grasshopper/roster-v2/index.html) |
+| Cricket | finished-game-active | [Playback](../public/demos/wildlife-v2/cricket/roster-v2/index.html) |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T02:38:36.004Z (19/10/2026, 04:38:36 Berlin).
+Snapshot: 2026-10-19T02:51:39.085Z (19/10/2026, 04:51:39 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

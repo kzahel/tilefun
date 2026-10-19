@@ -1,0 +1,374 @@
+{
+  "bee": {
+    "label": "Bee",
+    "canvas": 32,
+    "anchor": [
+      16,
+      24
+    ],
+    "coreRadii": [
+      0.16,
+      0.3,
+      0.12
+    ],
+    "abdomenRadii": [
+      0.21,
+      0.27,
+      0.15
+    ],
+    "headRadii": [
+      0.12,
+      0.13,
+      0.12
+    ],
+    "bodyZ": 0.24,
+    "headY": 0.34,
+    "wingPairs": 2,
+    "wingLength": 0.85,
+    "legLengths": [
+      0.15,
+      0.17,
+      0.13
+    ],
+    "hindLengths": [
+      0.15,
+      0.17,
+      0.13
+    ],
+    "hipX": 0.095,
+    "hipY": 0.14,
+    "footX": 0.35,
+    "hindFootX": 0.35,
+    "hindRadius": 0.018,
+    "antennaLength": 0.25,
+    "speed": 12,
+    "motionMs": 20,
+    "motionClip": "fly",
+    "exampleDistance": 12,
+    "hop": {
+      "duration": 0.64,
+      "push": 0.04,
+      "land": 0.6,
+      "height": 6
+    },
+    "palette": {
+      "K": "#29332d",
+      "B": "#b38a38",
+      "H": "#e3b85a",
+      "M": "#6b5938",
+      "E": "#283039",
+      "W": "#e7e2c9",
+      "G": "#6c745e"
+    }
+  },
+  "ladybug": {
+    "label": "Ladybug",
+    "canvas": 32,
+    "anchor": [
+      16,
+      24
+    ],
+    "coreRadii": [
+      0.22,
+      0.3,
+      0.14
+    ],
+    "abdomenRadii": [
+      0.2,
+      0.25,
+      0.14
+    ],
+    "headRadii": [
+      0.12,
+      0.11,
+      0.11
+    ],
+    "bodyZ": 0.24,
+    "headY": 0.31,
+    "wingPairs": 1,
+    "wingLength": 0.8,
+    "legLengths": [
+      0.15,
+      0.17,
+      0.13
+    ],
+    "hindLengths": [
+      0.15,
+      0.17,
+      0.13
+    ],
+    "hipX": 0.12,
+    "hipY": 0.14,
+    "footX": 0.35,
+    "hindFootX": 0.35,
+    "hindRadius": 0.018,
+    "antennaLength": 0.18,
+    "speed": 8,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 8,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 4
+    },
+    "palette": {
+      "K": "#29332d",
+      "B": "#b74735",
+      "H": "#dd7350",
+      "M": "#414b3d",
+      "E": "#c5bf9c",
+      "W": "#e7dfc7",
+      "G": "#6c745e"
+    }
+  },
+  "dragonfly": {
+    "label": "Dragonfly",
+    "canvas": 48,
+    "anchor": [
+      24,
+      34
+    ],
+    "coreRadii": [
+      0.13,
+      0.28,
+      0.12
+    ],
+    "abdomenRadii": [
+      0.05,
+      0.2,
+      0.05
+    ],
+    "headRadii": [
+      0.15,
+      0.15,
+      0.12
+    ],
+    "bodyZ": 0.25,
+    "headY": 0.35,
+    "wingPairs": 2,
+    "wingLength": 1.2,
+    "legLengths": [
+      0.14,
+      0.16,
+      0.12
+    ],
+    "hindLengths": [
+      0.14,
+      0.16,
+      0.12
+    ],
+    "hipX": 0.08,
+    "hipY": 0.13,
+    "footX": 0.32,
+    "hindFootX": 0.32,
+    "hindRadius": 0.018,
+    "antennaLength": 0.1,
+    "speed": 20,
+    "motionMs": 20,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.64,
+      "push": 0.04,
+      "land": 0.6,
+      "height": 10
+    },
+    "palette": {
+      "K": "#29332d",
+      "B": "#5f9588",
+      "H": "#95baa2",
+      "M": "#4c6968",
+      "E": "#9b5444",
+      "W": "#c8d7cc",
+      "G": "#6e8b81"
+    }
+  },
+  "stag-beetle": {
+    "label": "Stag beetle",
+    "canvas": 48,
+    "anchor": [
+      24,
+      32
+    ],
+    "coreRadii": [
+      0.22,
+      0.38,
+      0.15
+    ],
+    "abdomenRadii": [
+      0.23,
+      0.29,
+      0.17
+    ],
+    "headRadii": [
+      0.14,
+      0.16,
+      0.12
+    ],
+    "bodyZ": 0.3,
+    "headY": 0.43,
+    "wingPairs": 1,
+    "wingLength": 0.9,
+    "legLengths": [
+      0.17,
+      0.19,
+      0.14
+    ],
+    "hindLengths": [
+      0.17,
+      0.19,
+      0.14
+    ],
+    "hipX": 0.14,
+    "hipY": 0.18,
+    "footX": 0.42,
+    "hindFootX": 0.42,
+    "hindRadius": 0.018,
+    "antennaLength": 0.18,
+    "speed": 8,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 10,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 5
+    },
+    "palette": {
+      "K": "#29332d",
+      "B": "#745b3f",
+      "H": "#aa8a59",
+      "M": "#453b31",
+      "E": "#c2ab77",
+      "W": "#d2bd8b",
+      "G": "#7e7756"
+    }
+  },
+  "grasshopper": {
+    "label": "Grasshopper",
+    "canvas": 32,
+    "anchor": [
+      16,
+      24
+    ],
+    "coreRadii": [
+      0.15,
+      0.38,
+      0.13
+    ],
+    "abdomenRadii": [
+      0.13,
+      0.29,
+      0.12
+    ],
+    "headRadii": [
+      0.13,
+      0.14,
+      0.13
+    ],
+    "bodyZ": 0.3,
+    "headY": 0.41,
+    "wingPairs": 1,
+    "wingLength": 0.7,
+    "legLengths": [
+      0.15,
+      0.17,
+      0.13
+    ],
+    "hindLengths": [
+      0.26,
+      0.36,
+      0.24
+    ],
+    "hipX": 0.09,
+    "hipY": 0.16,
+    "footX": 0.35,
+    "hindFootX": 0.48,
+    "hindRadius": 0.035,
+    "antennaLength": 0.6,
+    "speed": 16,
+    "motionMs": 20,
+    "motionClip": "hop",
+    "exampleDistance": 20,
+    "hop": {
+      "duration": 0.64,
+      "push": 0.1,
+      "land": 0.54,
+      "height": 10
+    },
+    "palette": {
+      "K": "#29332d",
+      "B": "#79994b",
+      "H": "#b1b86d",
+      "M": "#4d6840",
+      "E": "#3b4538",
+      "W": "#dbd4aa",
+      "G": "#8d9b6f"
+    }
+  },
+  "cricket": {
+    "label": "Cricket",
+    "canvas": 32,
+    "anchor": [
+      16,
+      24
+    ],
+    "coreRadii": [
+      0.17,
+      0.34,
+      0.14
+    ],
+    "abdomenRadii": [
+      0.16,
+      0.25,
+      0.14
+    ],
+    "headRadii": [
+      0.13,
+      0.14,
+      0.12
+    ],
+    "bodyZ": 0.28,
+    "headY": 0.37,
+    "wingPairs": 1,
+    "wingLength": 0.65,
+    "legLengths": [
+      0.15,
+      0.17,
+      0.13
+    ],
+    "hindLengths": [
+      0.24,
+      0.34,
+      0.23
+    ],
+    "hipX": 0.1,
+    "hipY": 0.16,
+    "footX": 0.35,
+    "hindFootX": 0.44,
+    "hindRadius": 0.035,
+    "antennaLength": 0.85,
+    "speed": 14,
+    "motionMs": 20,
+    "motionClip": "hop",
+    "exampleDistance": 16,
+    "hop": {
+      "duration": 0.64,
+      "push": 0.1,
+      "land": 0.54,
+      "height": 8
+    },
+    "palette": {
+      "K": "#29332d",
+      "B": "#7d6b49",
+      "H": "#b4a477",
+      "M": "#4d4b39",
+      "E": "#252f2b",
+      "W": "#c2b88f",
+      "G": "#797d5c"
+    }
+  }
+}

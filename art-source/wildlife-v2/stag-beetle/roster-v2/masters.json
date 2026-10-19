@@ -1,0 +1,13 @@
+{
+  "identity": "stag-beetle-roster-v2-pixels-01",
+  "palette": {
+    "K": "#29332d",
+    "B": "#745b3f",
+    "H": "#aa8a59",
+    "M": "#453b31",
+    "E": "#c2ab77",
+    "W": "#d2bd8b",
+    "G": "#7e7756"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

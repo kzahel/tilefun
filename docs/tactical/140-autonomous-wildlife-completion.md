@@ -457,3 +457,19 @@ assertion; distinguish them from newly introduced failures.
   bounded units: 3,702 pass, five known Windows failures, ten skipped. Fresh
   inbox/notes are clear. Seventy-four new entries plus sixteen delivered leave
   106 remaining. Six insect drafts are underway. Exact pixels await human review.
+
+- 02:51 UTC: bee, ladybug, dragonfly, stag beetle, grasshopper and cricket
+  completed. Distinct bands/spots, four-wing dragonfly, beetle covers/mandibles
+  and enlarged grasshopper/cricket hind limbs use fresh closed source volumes.
+  Six three-link legs fold during bounded physical flight/hop and plant at rest.
+  Each bank has 164 poses, 5,904 fixed limb links, 1,968 buried hips, 1,312 antenna
+  checks and 24 resting contacts. Wings remain attached and move in every facing.
+  Physical push/landing clocks match delivered motion; no unrestricted aerial
+  navigation is added. Giant spiders explicitly eat these six only after landing.
+  Twelve origin/height tests preserve natural lineage and keep placed prey finite.
+  Six ten-artifact replays and 1,968 exact crops pass. Typecheck/lint/build,
+  1,249-candidate manifest, 24 browser cases and streaming readiness pass. Full
+  bounded units: 3,792 pass, five known Windows failures, ten skipped. Fresh
+  inbox/notes are clear. Eighty new entries plus sixteen delivered leave 100
+  remaining. Four lizards and two further six-animal source batches are underway.
+  Exact pixels remain pending human review.

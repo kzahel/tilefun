@@ -8,10 +8,10 @@ Updated: 2026-10-19.
 
 ## Current eight-hour completion run
 
-Latest checkpoint: 02:39 UTC. Ninety of the retained 196 entries are delivered
-(74 new this run, 16 preserved); 106 remain. Six marine additions now spawn in
-deep water, with dolphin/narwhal hunting and natural orca cross-predator meals.
-Six insect drafts are in progress. Exact new art remains pending human review.
+Latest checkpoint: 02:51 UTC. Ninety-six of the retained 196 entries are delivered
+(80 new this run, 16 preserved); 100 remain. Six new insects use short physical
+flights/hops and become giant-spider prey after landing. Four lizards and two
+further six-animal source batches are underway. Exact new art awaits human review.
 
 The owner now explicitly authorizes all remaining animals in the retained
 196-animal list, autonomously for up to eight hours. [140](../tactical/140-autonomous-wildlife-completion.md)

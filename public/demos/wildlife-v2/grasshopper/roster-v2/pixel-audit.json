@@ -1,0 +1,21 @@
+{
+  "identity": "grasshopper-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.3185462951660156,
+    "up": 0.4190359115600586,
+    "left": 0.3260221481323242,
+    "right": 0.3760509490966797
+  },
+  "physicalHop": {
+    "duration": 0.64,
+    "push": 0.1,
+    "land": 0.54,
+    "height": 10
+  }
+}

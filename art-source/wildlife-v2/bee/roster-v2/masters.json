@@ -1,0 +1,13 @@
+{
+  "identity": "bee-roster-v2-pixels-01",
+  "palette": {
+    "K": "#29332d",
+    "B": "#b38a38",
+    "H": "#e3b85a",
+    "M": "#6b5938",
+    "E": "#283039",
+    "W": "#e7e2c9",
+    "G": "#6c745e"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

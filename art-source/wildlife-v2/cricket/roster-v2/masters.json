@@ -1,0 +1,13 @@
+{
+  "identity": "cricket-roster-v2-pixels-01",
+  "palette": {
+    "K": "#29332d",
+    "B": "#7d6b49",
+    "H": "#b4a477",
+    "M": "#4d4b39",
+    "E": "#252f2b",
+    "W": "#c2b88f",
+    "G": "#797d5c"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

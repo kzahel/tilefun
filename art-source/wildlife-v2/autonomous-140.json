@@ -380,18 +380,26 @@
     "bee": {
       "name": "Bee",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:27:00Z"
+      "startedUtc": "2026-10-19T02:27:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:51:00Z",
+      "receipt": "art-source/wildlife-v2/bee/roster-v2/receipt.json",
+      "evidence": "164 poses; 5904 fixed leg links, 1968 buried hips, 1312 antenna links, 24 resting contacts; attached closed wings; physical flight/hop clock; ten-artifact replay; 328 exact crops; four browser checks; airborne spider guard and natural/manual lineage tests; exact pixels pending review"
     },
     "ladybug": {
       "name": "Ladybug",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "paused",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:27:00Z"
+      "startedUtc": "2026-10-19T02:27:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:51:00Z",
+      "receipt": "art-source/wildlife-v2/ladybug/roster-v2/receipt.json",
+      "evidence": "164 poses; 5904 fixed leg links, 1968 buried hips, 1312 antenna links, 24 resting contacts; attached closed wings; physical flight/hop clock; ten-artifact replay; 328 exact crops; four browser checks; airborne spider guard and natural/manual lineage tests; exact pixels pending review"
     },
     "owl": {
       "name": "Owl",
@@ -415,9 +423,10 @@
     "gecko": {
       "name": "Tokay gecko",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:44:00Z"
     },
     "wolf": {
       "name": "Wolf",
@@ -820,9 +829,10 @@
     "malayan-tapir": {
       "name": "Tapir",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:46:00Z"
     },
     "okapi": {
       "name": "Okapi",
@@ -996,9 +1006,10 @@
     "beaver": {
       "name": "Beaver",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:46:00Z"
     },
     "bat": {
       "name": "Bat",
@@ -1043,9 +1054,10 @@
     "capybara": {
       "name": "Capybara",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:46:00Z"
     },
     "giant-anteater": {
       "name": "Giant anteater",
@@ -1127,9 +1139,10 @@
     "koala": {
       "name": "Koala",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:46:00Z"
     },
     "wallaby": {
       "name": "Wallaby",
@@ -1141,9 +1154,10 @@
     "wombat": {
       "name": "Wombat",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:46:00Z"
     },
     "opossum": {
       "name": "Opossum",
@@ -1176,9 +1190,10 @@
     "quokka": {
       "name": "Quokka",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:46:00Z"
     },
     "toucan": {
       "name": "Toucan",
@@ -1631,30 +1646,34 @@
     "iguana": {
       "name": "Iguana",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:44:00Z"
     },
     "chameleon": {
       "name": "Chameleon",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:44:00Z"
     },
     "pond-turtle": {
       "name": "Pond turtle",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:51:00Z"
     },
     "land-tortoise": {
       "name": "Land tortoise",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:51:00Z"
     },
     "crocodile": {
       "name": "Crocodile",
@@ -1680,45 +1699,54 @@
     "salamander": {
       "name": "Fire salamander",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:51:00Z"
     },
     "newt": {
       "name": "Newt",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:51:00Z"
     },
     "axolotl": {
       "name": "Axolotl",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:51:00Z"
     },
     "frilled-neck-lizard": {
       "name": "Frilled-neck lizard",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:51:00Z"
     },
     "texas-horned-lizard": {
       "name": "Texas horned lizard",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:44:00Z"
     },
     "dragonfly": {
       "name": "Dragonfly",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:27:00Z"
+      "startedUtc": "2026-10-19T02:27:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:51:00Z",
+      "receipt": "art-source/wildlife-v2/dragonfly/roster-v2/receipt.json",
+      "evidence": "164 poses; 5904 fixed leg links, 1968 buried hips, 1312 antenna links, 24 resting contacts; attached closed wings; physical flight/hop clock; ten-artifact replay; 328 exact crops; four browser checks; airborne spider guard and natural/manual lineage tests; exact pixels pending review"
     },
     "spider": {
       "name": "Spider",
@@ -1730,26 +1758,38 @@
     "stag-beetle": {
       "name": "Stag beetle",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:27:00Z"
+      "startedUtc": "2026-10-19T02:27:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:51:00Z",
+      "receipt": "art-source/wildlife-v2/stag-beetle/roster-v2/receipt.json",
+      "evidence": "164 poses; 5904 fixed leg links, 1968 buried hips, 1312 antenna links, 24 resting contacts; attached closed wings; physical flight/hop clock; ten-artifact replay; 328 exact crops; four browser checks; airborne spider guard and natural/manual lineage tests; exact pixels pending review"
     },
     "grasshopper": {
       "name": "Grasshopper",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:27:00Z"
+      "startedUtc": "2026-10-19T02:27:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:51:00Z",
+      "receipt": "art-source/wildlife-v2/grasshopper/roster-v2/receipt.json",
+      "evidence": "164 poses; 5904 fixed leg links, 1968 buried hips, 1312 antenna links, 24 resting contacts; attached closed wings; physical flight/hop clock; ten-artifact replay; 328 exact crops; four browser checks; airborne spider guard and natural/manual lineage tests; exact pixels pending review"
     },
     "cricket": {
       "name": "Cricket",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:27:00Z"
+      "startedUtc": "2026-10-19T02:27:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:51:00Z",
+      "receipt": "art-source/wildlife-v2/cricket/roster-v2/receipt.json",
+      "evidence": "164 poses; 5904 fixed leg links, 1968 buried hips, 1312 antenna links, 24 resting contacts; attached closed wings; physical flight/hop clock; ten-artifact replay; 328 exact crops; four browser checks; airborne spider guard and natural/manual lineage tests; exact pixels pending review"
     },
     "praying-mantis": {
       "name": "Praying mantis",
@@ -2105,6 +2145,18 @@
         "sea-turtle"
       ],
       "validation": "Typecheck/lint/build, 1219-candidate manifest, 31 browser cases and streaming --assert-ready pass. Full bounded units: 3702 pass, 5 known Windows failures, 10 skipped. Six ten-artifact byte-identical replays and 2608 exact crops. Natural orca lagoons include a legal predator companion; actual generated cross-predator meals retain lineage. Coordinate-based narwhal markings and stable geometric depth ordering remove replay nondeterminism."
+    },
+    {
+      "utc": "2026-10-19T02:51:00Z",
+      "completed": [
+        "bee",
+        "ladybug",
+        "dragonfly",
+        "stag-beetle",
+        "grasshopper",
+        "cricket"
+      ],
+      "validation": "Typecheck/lint/build, 1249-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full bounded units: 3792 pass, 5 known Windows failures, 10 skipped. Six ten-artifact byte-identical replays and 1968 exact crops. Twelve source-origin meal tests require airborne protection, landed meals, preserved natural lineage and finite placed prey."
     }
   ],
   "existingOutsideRoster": [
@@ -2309,6 +2361,21 @@
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/marine-140/README.md",
       "roles": "Dolphin/narwhal hunt fish, octopus and crab; orca can eat either; four gentle deep-water swimmers"
+    },
+    "insects": {
+      "animals": [
+        "bee",
+        "ladybug",
+        "dragonfly",
+        "stag-beetle",
+        "grasshopper",
+        "cricket"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/insects-140/README.md",
+      "roles": "short physical flights/hops; giant-spider prey only after landing"
     }
   }
 }

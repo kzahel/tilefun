@@ -1,0 +1,21 @@
+{
+  "identity": "dragonfly-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.338869571685791,
+    "up": 0.4238290786743164,
+    "left": 0.34641265869140625,
+    "right": 0.3865041732788086
+  },
+  "physicalHop": {
+    "duration": 0.64,
+    "push": 0.04,
+    "land": 0.6,
+    "height": 10
+  }
+}
