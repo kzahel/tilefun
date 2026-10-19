@@ -1,0 +1,16 @@
+{
+  "identity": "whale-shark-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.9834766387939453,
+    "up": 1.0749211311340332,
+    "left": 1.6052536964416504,
+    "right": 1.5736207962036133
+  },
+  "independentSwimAndChase": false
+}

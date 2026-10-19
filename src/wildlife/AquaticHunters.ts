@@ -1,6 +1,12 @@
 import type { AnimationClip } from "../entities/EntityDefs.js";
 
-export const AQUATIC_HUNTER_SPECIES = ["shark", "hammerhead-shark", "orca"] as const;
+export const AQUATIC_HUNTER_SPECIES = [
+  "shark",
+  "hammerhead-shark",
+  "orca",
+  "dolphin",
+  "narwhal",
+] as const;
 export type AquaticHunterSpecies = (typeof AQUATIC_HUNTER_SPECIES)[number];
 const clips: readonly AnimationClip[] = [
   { name: "idle", start: 0, count: 1, frameDuration: 100, loop: true },
@@ -75,6 +81,50 @@ export const AQUATIC_HUNTER_PROFILES = [
       radius: 176,
       group: 1,
       inspection: [-656, -2958],
+    },
+  },
+  {
+    species: "dolphin",
+    label: "Dolphin",
+    revision: "roster-v2",
+    speed: 20,
+    chaseSpeed: 44,
+    weight: 180,
+    size: 96,
+    anchorY: 72,
+    body: [30, 16, 18],
+    art: {
+      identity: "dolphin-roster-v2-pixels-01",
+      sha256: "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+      clips: clips,
+    },
+    expansion: {
+      habitat: "deep",
+      radius: 176,
+      group: 1,
+      inspection: [18532, -14421],
+    },
+  },
+  {
+    species: "narwhal",
+    label: "Narwhal",
+    revision: "roster-v2",
+    speed: 16,
+    chaseSpeed: 38,
+    weight: 650,
+    size: 96,
+    anchorY: 72,
+    body: [34, 18, 20],
+    art: {
+      identity: "narwhal-roster-v2-pixels-01",
+      sha256: "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c",
+      clips: clips,
+    },
+    expansion: {
+      habitat: "deep",
+      radius: 176,
+      group: 1,
+      inspection: [2661, 3727],
     },
   },
 ] as const;

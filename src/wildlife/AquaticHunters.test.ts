@@ -146,14 +146,14 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
     };
     const a = collect(false);
     expect(a).toEqual(collect(true));
-    expect(a.filter((a) => a.predator)).toHaveLength(1);
+    expect(a.filter((a) => a.predator)).toHaveLength(p.species === "orca" ? 2 : 1);
     expect(a.filter((a) => a.fauna)).toHaveLength(3);
-    expect(new Set(a.map((a) => a.featureId)).size).toBe(4);
+    expect(new Set(a.map((a) => a.featureId)).size).toBe(p.species === "orca" ? 5 : 4);
     const n = new NaturalLandscape(regionalWorld(2026), "thicket");
     for (const actor of a)
       expect(n.terrain(actor.wx / 16, actor.wy / 16)).toBe(TerrainId.DeepWater);
   });
-  it("hunts actual generated fish and reloads the same meal, pose and replacement lineage", async () => {
+  it("hunts actual generated prey and reloads the same meal, pose and replacement lineage", async () => {
     const recipe = naturalLandscapeRecipe(p.species, "thicket");
     expect(recipe.generation.type).toBe("regional");
     const s = await ScenarioSession.create(recipe);
@@ -167,6 +167,7 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
         e.naturalSpawnId?.startsWith(`wildlife:water-prey:${p.species}:`),
       );
       expect(replacements.length).toBeGreaterThan(0);
+      if (p.species === "orca") expect(replacements.some((e) => e.predator)).toBe(true);
       const saved = JSON.parse(JSON.stringify(hunter().predator)),
         frame = hunter().sprite?.frameCol,
         ids = replacements.map((e) => e.persistentId).sort();

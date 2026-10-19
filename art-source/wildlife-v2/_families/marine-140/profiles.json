@@ -1,0 +1,418 @@
+{
+  "whale-shark": {
+    "label": "Whale shark",
+    "canvas": 112,
+    "fauna": true,
+    "tailPlane": "vertical",
+    "bodyCenter": [
+      0,
+      -0.05,
+      1.18
+    ],
+    "bodyRadii": [
+      0.8,
+      2.4,
+      0.62
+    ],
+    "headPosition": [
+      0,
+      1.88,
+      1.17
+    ],
+    "headRadii": [
+      0.71,
+      0.83,
+      0.41
+    ],
+    "tailRoot": [
+      0,
+      -2.0,
+      1.13
+    ],
+    "tailLengths": [
+      0.82,
+      0.65,
+      0.48
+    ],
+    "tailRadius": 0.39,
+    "flukeWidth": 1.25,
+    "finPivots": [
+      [
+        -1,
+        -0.6240000000000001,
+        0.9119999999999999,
+        1.0999999999999999
+      ],
+      [
+        1,
+        0.6240000000000001,
+        0.9119999999999999,
+        1.0999999999999999
+      ]
+    ],
+    "finReach": 1.18,
+    "speed": 10,
+    "swimMs": 50,
+    "chaseMs": 25,
+    "palette": {
+      "B": "#6b858c",
+      "H": "#91a3a3",
+      "W": "#dcd9bf",
+      "M": "#4b6268",
+      "E": "#202e35",
+      "T": "#e8dfbf",
+      "G": "#a8b5ac"
+    },
+    "anchor": [
+      56,
+      76
+    ]
+  },
+  "dolphin": {
+    "label": "Dolphin",
+    "canvas": 96,
+    "fauna": false,
+    "tailPlane": "horizontal",
+    "bodyCenter": [
+      0,
+      -0.05,
+      1.02
+    ],
+    "bodyRadii": [
+      0.44,
+      1.4,
+      0.43
+    ],
+    "headPosition": [
+      0,
+      1.12,
+      1.12
+    ],
+    "headRadii": [
+      0.36,
+      0.5,
+      0.31
+    ],
+    "tailRoot": [
+      0,
+      -1.13,
+      0.99
+    ],
+    "tailLengths": [
+      0.54,
+      0.43,
+      0.32
+    ],
+    "tailRadius": 0.26,
+    "flukeWidth": 0.83,
+    "finPivots": [
+      [
+        -1,
+        -0.3432,
+        0.5319999999999999,
+        0.9400000000000001
+      ],
+      [
+        1,
+        0.3432,
+        0.5319999999999999,
+        0.9400000000000001
+      ]
+    ],
+    "finReach": 0.85,
+    "speed": 20,
+    "swimMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "B": "#7d9199",
+      "H": "#a3b3b5",
+      "W": "#dedfd3",
+      "M": "#4b6268",
+      "E": "#202e35",
+      "T": "#e8dfbf",
+      "G": "#a8b5ac"
+    }
+  },
+  "narwhal": {
+    "label": "Narwhal",
+    "canvas": 96,
+    "fauna": false,
+    "tailPlane": "horizontal",
+    "bodyCenter": [
+      0,
+      -0.08,
+      1.1
+    ],
+    "bodyRadii": [
+      0.55,
+      1.63,
+      0.52
+    ],
+    "headPosition": [
+      0,
+      1.34,
+      1.18
+    ],
+    "headRadii": [
+      0.46,
+      0.55,
+      0.4
+    ],
+    "tailRoot": [
+      0,
+      -1.34,
+      1.07
+    ],
+    "tailLengths": [
+      0.61,
+      0.49,
+      0.37
+    ],
+    "tailRadius": 0.31,
+    "flukeWidth": 0.92,
+    "finPivots": [
+      [
+        -1,
+        -0.42900000000000005,
+        0.6194,
+        1.02
+      ],
+      [
+        1,
+        0.42900000000000005,
+        0.6194,
+        1.02
+      ]
+    ],
+    "finReach": 0.72,
+    "speed": 16,
+    "swimMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "B": "#a6b3b3",
+      "H": "#748a93",
+      "W": "#e5e3d1",
+      "M": "#4b6268",
+      "E": "#202e35",
+      "T": "#e8dfbf",
+      "G": "#a8b5ac"
+    }
+  },
+  "humpback-whale": {
+    "label": "Humpback whale",
+    "canvas": 128,
+    "fauna": true,
+    "tailPlane": "horizontal",
+    "bodyCenter": [
+      0,
+      -0.08,
+      1.32
+    ],
+    "bodyRadii": [
+      0.91,
+      2.8,
+      0.76
+    ],
+    "headPosition": [
+      0,
+      2.2,
+      1.31
+    ],
+    "headRadii": [
+      0.78,
+      0.92,
+      0.54
+    ],
+    "tailRoot": [
+      0,
+      -2.38,
+      1.23
+    ],
+    "tailLengths": [
+      0.89,
+      0.72,
+      0.54
+    ],
+    "tailRadius": 0.49,
+    "flukeWidth": 1.52,
+    "finPivots": [
+      [
+        -1,
+        -0.7098000000000001,
+        1.0639999999999998,
+        1.24
+      ],
+      [
+        1,
+        0.7098000000000001,
+        1.0639999999999998,
+        1.24
+      ]
+    ],
+    "finReach": 2.1,
+    "speed": 8,
+    "swimMs": 50,
+    "chaseMs": 25,
+    "palette": {
+      "B": "#4f6471",
+      "H": "#758b94",
+      "W": "#d4d8d0",
+      "M": "#4b6268",
+      "E": "#202e35",
+      "T": "#e8dfbf",
+      "G": "#a8b5ac"
+    },
+    "anchor": [
+      64,
+      88
+    ],
+    "heave": 0.12
+  },
+  "blue-whale": {
+    "label": "Blue whale",
+    "canvas": 160,
+    "fauna": true,
+    "tailPlane": "horizontal",
+    "bodyCenter": [
+      0,
+      -0.08,
+      1.5
+    ],
+    "bodyRadii": [
+      1.04,
+      4.0,
+      0.85
+    ],
+    "headPosition": [
+      0,
+      3.37,
+      1.48
+    ],
+    "headRadii": [
+      0.92,
+      1.2,
+      0.53
+    ],
+    "tailRoot": [
+      0,
+      -3.5,
+      1.35
+    ],
+    "tailLengths": [
+      1.0,
+      0.82,
+      0.64
+    ],
+    "tailRadius": 0.57,
+    "flukeWidth": 1.75,
+    "finPivots": [
+      [
+        -1,
+        -0.8112,
+        1.52,
+        1.42
+      ],
+      [
+        1,
+        0.8112,
+        1.52,
+        1.42
+      ]
+    ],
+    "finReach": 1.4,
+    "speed": 7,
+    "swimMs": 50,
+    "chaseMs": 25,
+    "palette": {
+      "B": "#688d9e",
+      "H": "#95b1b6",
+      "W": "#d2ded7",
+      "M": "#4b6268",
+      "E": "#202e35",
+      "T": "#e8dfbf",
+      "G": "#a8b5ac"
+    },
+    "anchor": [
+      80,
+      104
+    ],
+    "heave": 0.14
+  },
+  "sea-turtle": {
+    "label": "Sea turtle",
+    "canvas": 64,
+    "fauna": true,
+    "tailPlane": "stub",
+    "bodyCenter": [
+      0,
+      -0.03,
+      0.84
+    ],
+    "bodyRadii": [
+      0.62,
+      0.91,
+      0.41
+    ],
+    "headPosition": [
+      0,
+      0.99,
+      0.68
+    ],
+    "headRadii": [
+      0.2,
+      0.29,
+      0.19
+    ],
+    "tailRoot": [
+      0,
+      -0.8,
+      0.69
+    ],
+    "tailLengths": [
+      0.08,
+      0.07,
+      0.06
+    ],
+    "tailRadius": 0.075,
+    "flukeWidth": 0.12,
+    "finPivots": [
+      [
+        -1,
+        -0.46,
+        0.52,
+        0.65
+      ],
+      [
+        1,
+        0.46,
+        0.52,
+        0.65
+      ],
+      [
+        -1,
+        -0.43,
+        -0.6,
+        0.64
+      ],
+      [
+        1,
+        0.43,
+        -0.6,
+        0.64
+      ]
+    ],
+    "finReach": 0.7,
+    "speed": 8,
+    "swimMs": 50,
+    "chaseMs": 25,
+    "palette": {
+      "B": "#65805a",
+      "H": "#a5ad71",
+      "W": "#d4c48f",
+      "M": "#415747",
+      "E": "#202e35",
+      "T": "#e8dfbf",
+      "G": "#c0b57a"
+    }
+  }
+}

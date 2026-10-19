@@ -10315,5 +10315,563 @@
         "sha256": "6ee07fcca71d53471d3e365f37ccf8da9bce06fc362dc93eb86efffcae7f204b"
       }
     ]
+  },
+  {
+    "id": "whale-shark-roster-v2",
+    "animalId": "whale-shark",
+    "revision": "roster-v2",
+    "name": "Whale shark · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/whale-shark/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-whale-shark-roster-v2",
+      "name": "Whale shark sheet",
+      "image": "demos/wildlife-v2/whale-shark/roster-v2/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "fc331cb0298856f6be72c68430bc1788ce65a292245a7fa57bf3b55ae33fcdad",
+      "source": "art-source/wildlife-v2/whale-shark/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-whale-shark-roster-v2-scene",
+      "name": "Whale shark scene",
+      "image": "demos/wildlife-v2/whale-shark/roster-v2/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "5733b03e8c22adb7a4ea316f8af98e7621269ccc47e47d45eccd1ad416d4e413",
+      "source": "art-source/wildlife-v2/whale-shark/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-whale-shark-roster-v2-contact",
+      "name": "Whale shark contact",
+      "image": "demos/wildlife-v2/whale-shark/roster-v2/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "7661d5c96cfdd17c9e93633a30af2d8ed71b0f954c36a0a28487c0eb5ecfde4a",
+      "source": "art-source/wildlife-v2/whale-shark/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/whale-shark/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/contact-sheet-native.png",
+        "sha256": "7661d5c96cfdd17c9e93633a30af2d8ed71b0f954c36a0a28487c0eb5ecfde4a"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/index.html",
+        "sha256": "695dbebceeeeddd29b37342523d9959f31de4e7920a8dc281b372d74f3bc356d"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/pixel-audit.json",
+        "sha256": "1ca9a9ec764ae4a1a67bff7c1149f51fdd517b3cfa873fba6ed42ddfb2fd799c"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/preview-native.gif",
+        "sha256": "f79db9ca3bfce4ec8cf10da6e6111a4bd52c35d8f552caf8b6c8fd886e3063fa"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/preview.gif",
+        "sha256": "f06c0628ca6a4143c0d9d102c0ebb87e153b6a0a08cf8af417335545a5b19e59"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/scene-background.png",
+        "sha256": "1a718929b16d9000cac0870e8356f66a8f7cc2906483e07a7b2a0ce6e6e1baff"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/scene-native.png",
+        "sha256": "5733b03e8c22adb7a4ea316f8af98e7621269ccc47e47d45eccd1ad416d4e413"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/sheet.png",
+        "sha256": "fc331cb0298856f6be72c68430bc1788ce65a292245a7fa57bf3b55ae33fcdad"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/source-audit.json",
+        "sha256": "d6a05bca6721d0e3003f41af148c67ec58fab921446e54568a4b26c7da302fa9"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/sprite.json",
+        "sha256": "321818bff8c6dede4d9ff00f682f4bf1aae29341fd7bfc9bd780b129fca32167"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/travel-native.gif",
+        "sha256": "10412abff776fd3726ff5aa0a53166f53576c30ee1be38e5b624e85d41d6ef0b"
+      },
+      {
+        "path": "demos/wildlife-v2/whale-shark/roster-v2/validation.json",
+        "sha256": "f35a2fc57590423864898167e635b3ec0efd66894615bc034bdefdfe49c5d9f5"
+      }
+    ]
+  },
+  {
+    "id": "dolphin-roster-v2",
+    "animalId": "dolphin",
+    "revision": "roster-v2",
+    "name": "Dolphin · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/dolphin/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-dolphin-roster-v2",
+      "name": "Dolphin sheet",
+      "image": "demos/wildlife-v2/dolphin/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+      "source": "art-source/wildlife-v2/dolphin/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-dolphin-roster-v2-scene",
+      "name": "Dolphin scene",
+      "image": "demos/wildlife-v2/dolphin/roster-v2/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "51588a053b667c477458e9f0e91d71dfaf23bdb8b0bc58cdf24f7afed46e4eb5",
+      "source": "art-source/wildlife-v2/dolphin/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-dolphin-roster-v2-contact",
+      "name": "Dolphin contact",
+      "image": "demos/wildlife-v2/dolphin/roster-v2/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e8a747f3519d83e7124f3646d607c43a17309ea1c235f1c9b3bf76eca2271217",
+      "source": "art-source/wildlife-v2/dolphin/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/dolphin/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/contact-sheet-native.png",
+        "sha256": "e8a747f3519d83e7124f3646d607c43a17309ea1c235f1c9b3bf76eca2271217"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/index.html",
+        "sha256": "9d82a05e367a1e9edcaad1221838c2a282a53640f02e2d2ffec914f5e9719649"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/pixel-audit.json",
+        "sha256": "dd112d0ad76635ebb2ce3b47db762fce3b661c3375d4d75c4dcffc2f5626f00b"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/preview-native.gif",
+        "sha256": "38a7b59c5314a189768fb7e6c326cfe678b8d0cfbfe0ba70a51faca9d7b96212"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/preview.gif",
+        "sha256": "2223419129b35136064709b5e241bd728810105c4e17fce79aee9fe99ddee50d"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/scene-background.png",
+        "sha256": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/scene-native.png",
+        "sha256": "51588a053b667c477458e9f0e91d71dfaf23bdb8b0bc58cdf24f7afed46e4eb5"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/sheet.png",
+        "sha256": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/source-audit.json",
+        "sha256": "c07b8dfdc62a4e2620107b658a53958ba3c4343f749e9480859742851808a3f2"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/sprite.json",
+        "sha256": "485c2167e414efe8310f8782b8e04d7673214207454d9a8430d9d3fce9dff6d6"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/travel-native.gif",
+        "sha256": "50ec30efa0247a9fc60f6719f730a7af2712bb33f458f2d93a1c05d790b792c5"
+      },
+      {
+        "path": "demos/wildlife-v2/dolphin/roster-v2/validation.json",
+        "sha256": "d27f5d0cf957ef37f5b39b88fe5d16492494375113451abf5a90b0af365099e8"
+      }
+    ]
+  },
+  {
+    "id": "narwhal-roster-v2",
+    "animalId": "narwhal",
+    "revision": "roster-v2",
+    "name": "Narwhal · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/narwhal/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-narwhal-roster-v2",
+      "name": "Narwhal sheet",
+      "image": "demos/wildlife-v2/narwhal/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c",
+      "source": "art-source/wildlife-v2/narwhal/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-narwhal-roster-v2-scene",
+      "name": "Narwhal scene",
+      "image": "demos/wildlife-v2/narwhal/roster-v2/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "29db54d363e5b3b8afc937004c345cbfc6a754306474942b60eead6cc0616dca",
+      "source": "art-source/wildlife-v2/narwhal/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-narwhal-roster-v2-contact",
+      "name": "Narwhal contact",
+      "image": "demos/wildlife-v2/narwhal/roster-v2/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cb322c57338be1b2055dcc9753af316ce41b48996d76e6b1ea630de2b51b6c33",
+      "source": "art-source/wildlife-v2/narwhal/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/narwhal/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/contact-sheet-native.png",
+        "sha256": "cb322c57338be1b2055dcc9753af316ce41b48996d76e6b1ea630de2b51b6c33"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/index.html",
+        "sha256": "cccd820d2f2f1eea2393b27250dab54c0a1b8f07c33c035728b4e7251e0dece6"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/pixel-audit.json",
+        "sha256": "44fec80887e235cd323ea21f48a3a25f5b9acc281920a3d60910d991fc867d1d"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/preview-native.gif",
+        "sha256": "9607737ce5206bada4a01372fa21eb1ef83c314dad0f5a1b3b0486ee6f82be7a"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/preview.gif",
+        "sha256": "025079436c35484f98e9ac18baf87792b3f28d8083bc40bc43a99f694e162293"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/scene-background.png",
+        "sha256": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/scene-native.png",
+        "sha256": "29db54d363e5b3b8afc937004c345cbfc6a754306474942b60eead6cc0616dca"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/sheet.png",
+        "sha256": "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/source-audit.json",
+        "sha256": "a5cd14ee0347c7d2c1866e71fafbfae9cdac1ebd7c18cc99f1a6905b2a421e29"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/sprite.json",
+        "sha256": "f7336c50d95402e07b3785c29b67c78022c582578942e438f1564fff431f1ff4"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/travel-native.gif",
+        "sha256": "e6b421d3b9a50478d3f2179b296851b8df7e6032d2f1a907f744f9a98265351e"
+      },
+      {
+        "path": "demos/wildlife-v2/narwhal/roster-v2/validation.json",
+        "sha256": "d4b7872b21ca2e33125f24205c18e66323f9cba58488f5c530d850ca1b446965"
+      }
+    ]
+  },
+  {
+    "id": "humpback-whale-roster-v2",
+    "animalId": "humpback-whale",
+    "revision": "roster-v2",
+    "name": "Humpback whale · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/humpback-whale/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-humpback-whale-roster-v2",
+      "name": "Humpback whale sheet",
+      "image": "demos/wildlife-v2/humpback-whale/roster-v2/sheet.png",
+      "width": 5248,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "0a0d557222242fc58dca238f1311d9031f57c4e7e05339052a19c91e0645fde0",
+      "source": "art-source/wildlife-v2/humpback-whale/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-humpback-whale-roster-v2-scene",
+      "name": "Humpback whale scene",
+      "image": "demos/wildlife-v2/humpback-whale/roster-v2/scene-native.png",
+      "width": 672,
+      "height": 168,
+      "tileSize": 16,
+      "fingerprint": "702770bc43c1730a3267efcabf000f1bcb7314a82b0d4ded6315b4e63cfcd30a",
+      "source": "art-source/wildlife-v2/humpback-whale/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-humpback-whale-roster-v2-contact",
+      "name": "Humpback whale contact",
+      "image": "demos/wildlife-v2/humpback-whale/roster-v2/contact-sheet-native.png",
+      "width": 1024,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "46883d9f61cfafbfd2b1a359df437092bc09010772d3a79cbd63311a2983cccb",
+      "source": "art-source/wildlife-v2/humpback-whale/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/humpback-whale/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/contact-sheet-native.png",
+        "sha256": "46883d9f61cfafbfd2b1a359df437092bc09010772d3a79cbd63311a2983cccb"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/index.html",
+        "sha256": "1361f12611fbeaa07f9619d57f32d2bd61b7dfc725e03fa1a19e58f885d8fef8"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/pixel-audit.json",
+        "sha256": "10f471813cd43886aabd86d7afbd853635ee22559736eedaab1e02b51148a8d3"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/preview-native.gif",
+        "sha256": "8b9d5012dd4f8a757a62440bf5ff598fcf3df407a54f4dda0608288bb7badc8c"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/preview.gif",
+        "sha256": "5a7cdc4e4c5efc9be1edf4290e4b5c82c5c31407fe02af0726f0527d99bc2707"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/scene-background.png",
+        "sha256": "f37f5e75167981b3483bfc65035645aafecf8f672f705ce024791a238b494106"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/scene-native.png",
+        "sha256": "702770bc43c1730a3267efcabf000f1bcb7314a82b0d4ded6315b4e63cfcd30a"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/sheet.png",
+        "sha256": "0a0d557222242fc58dca238f1311d9031f57c4e7e05339052a19c91e0645fde0"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/source-audit.json",
+        "sha256": "52d45cf6000e15dc53e107f0e8a0ae57343edabb1c377464d426b8cb442a6ce2"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/sprite.json",
+        "sha256": "3132299d62f6077b94dd24d1a3fda66e2245e54d4a58654d80b3e6e5ad78df0f"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/travel-native.gif",
+        "sha256": "f1aa72f4479703cf17aefafcda8f8216f9dcd30f5cde285e59087e6570ff7511"
+      },
+      {
+        "path": "demos/wildlife-v2/humpback-whale/roster-v2/validation.json",
+        "sha256": "0e344ca35adcb4c3bba226d41fac81f1583619378a8970fcb4138430f7b5db7e"
+      }
+    ]
+  },
+  {
+    "id": "blue-whale-roster-v2",
+    "animalId": "blue-whale",
+    "revision": "roster-v2",
+    "name": "Blue whale · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/blue-whale/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-blue-whale-roster-v2",
+      "name": "Blue whale sheet",
+      "image": "demos/wildlife-v2/blue-whale/roster-v2/sheet.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+      "source": "art-source/wildlife-v2/blue-whale/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-blue-whale-roster-v2-scene",
+      "name": "Blue whale scene",
+      "image": "demos/wildlife-v2/blue-whale/roster-v2/scene-native.png",
+      "width": 800,
+      "height": 200,
+      "tileSize": 16,
+      "fingerprint": "cda2f275ede2cc57644f023accdfc915b4824450118a96c7fb5e32cb61b50f44",
+      "source": "art-source/wildlife-v2/blue-whale/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-blue-whale-roster-v2-contact",
+      "name": "Blue whale contact",
+      "image": "demos/wildlife-v2/blue-whale/roster-v2/contact-sheet-native.png",
+      "width": 1280,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "870e60bf6fa292f41aa1493e70c6c876b895d752a10aaff39ead9624fc4377b1",
+      "source": "art-source/wildlife-v2/blue-whale/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/blue-whale/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/contact-sheet-native.png",
+        "sha256": "870e60bf6fa292f41aa1493e70c6c876b895d752a10aaff39ead9624fc4377b1"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/index.html",
+        "sha256": "1369ecb6f937170bc05b680e7a0b7379cd227f2b5c08843263c22d639f3f3c28"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/pixel-audit.json",
+        "sha256": "3d142f32f2d2517dc8308a7d1445b915eeda8198f3240c2cb99b8af48c3b0422"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/preview-native.gif",
+        "sha256": "bb668f28a6c93e9eaeee86b445c662431aa68f40cd3eec79f74b8430df6db6cd"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/preview.gif",
+        "sha256": "10fc511942699994fbc6b8e4263000c9f5c52bf496f6744a1b606a449c0663bf"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/scene-background.png",
+        "sha256": "1d8fdd9e2486176b1ff293e6c79ad0884fb51a4d1283bdb16ea20681e402954f"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/scene-native.png",
+        "sha256": "cda2f275ede2cc57644f023accdfc915b4824450118a96c7fb5e32cb61b50f44"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/sheet.png",
+        "sha256": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/source-audit.json",
+        "sha256": "0521fc54a00b38f85ef5b49050f991c3accc44616885d1fd81440bce7ccfc2b3"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/sprite.json",
+        "sha256": "d4a0d7cdf1443650cf21269110c30cb3ecd2cfe0daaba9bd03503fb71ddc0af9"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/travel-native.gif",
+        "sha256": "b82cff3680436482942ade00750b7a38b55c5c4a6aeb6140a487181c1cb4eaf1"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-whale/roster-v2/validation.json",
+        "sha256": "3663f5920380f2fe5f13a3ea2f3796b924e4aa10517b8f684584af22e8aeb75a"
+      }
+    ]
+  },
+  {
+    "id": "sea-turtle-roster-v2",
+    "animalId": "sea-turtle",
+    "revision": "roster-v2",
+    "name": "Green sea turtle · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/sea-turtle/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-sea-turtle-roster-v2",
+      "name": "Green sea turtle sheet",
+      "image": "demos/wildlife-v2/sea-turtle/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+      "source": "art-source/wildlife-v2/sea-turtle/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-sea-turtle-roster-v2-scene",
+      "name": "Green sea turtle scene",
+      "image": "demos/wildlife-v2/sea-turtle/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "313e7843f21cf57ab653bd7de88ba07b05589b4cd907646f6f6771c1c69526b9",
+      "source": "art-source/wildlife-v2/sea-turtle/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-sea-turtle-roster-v2-contact",
+      "name": "Green sea turtle contact",
+      "image": "demos/wildlife-v2/sea-turtle/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "2f99e23b8e53f220a8558ce95eb7397e1fcfb4ffb30f50b5054b3fe4b65cc962",
+      "source": "art-source/wildlife-v2/sea-turtle/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/sea-turtle/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/contact-sheet-native.png",
+        "sha256": "2f99e23b8e53f220a8558ce95eb7397e1fcfb4ffb30f50b5054b3fe4b65cc962"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/index.html",
+        "sha256": "fda2412c35148f3ba49382ea9d85ed9e14cf9dc2036e101c85d87f20e9961498"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/pixel-audit.json",
+        "sha256": "759db7e0ce092899f52e37aec09e29f54ee17782f37feacac97d4707f5998b4b"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/preview-native.gif",
+        "sha256": "c1dc139d14a4f9ae36b0ff7b47d88d8ec9202c740872c6f2089521fac596d944"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/preview.gif",
+        "sha256": "64d7835ae58dd52635571092b028b6969da8429078a0c5276f68b2db780bd929"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/scene-background.png",
+        "sha256": "ca73bf9ff84b9502c79a6133b4699c63bec4e3eaf5522873c0848b8421e6a203"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/scene-native.png",
+        "sha256": "313e7843f21cf57ab653bd7de88ba07b05589b4cd907646f6f6771c1c69526b9"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/sheet.png",
+        "sha256": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/source-audit.json",
+        "sha256": "eb76ed55ce81172227d857a4648d1cf5b3e51b5104d656ef242e9427a4c7827a"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/sprite.json",
+        "sha256": "40bc0860a2df3f7764c5d133eb0f0b1cb792cdc04434176ddacecdbcd5237759"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/travel-native.gif",
+        "sha256": "3c1a7b979ab62a4fa6e27b318e0271ae369dc4372e1d2d800228bec0a46e71f1"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-turtle/roster-v2/validation.json",
+        "sha256": "5b601fcb7c772f2e30e73969e7992bf98ecdce04581b5fc625c550525667137a"
+      }
+    ]
   }
 ]

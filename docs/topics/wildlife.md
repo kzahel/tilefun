@@ -8,6 +8,11 @@ Updated: 2026-10-19.
 
 ## Current eight-hour completion run
 
+Latest checkpoint: 02:39 UTC. Ninety of the retained 196 entries are delivered
+(74 new this run, 16 preserved); 106 remain. Six marine additions now spawn in
+deep water, with dolphin/narwhal hunting and natural orca cross-predator meals.
+Six insect drafts are in progress. Exact new art remains pending human review.
+
 The owner now explicitly authorizes all remaining animals in the retained
 196-animal list, autonomously for up to eight hours. [140](../tactical/140-autonomous-wildlife-completion.md)
 owns this run (2026-10-18 20:05:24 UTC to 2026-10-19 04:05:24 UTC) and its

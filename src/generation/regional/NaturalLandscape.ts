@@ -425,6 +425,53 @@ export class NaturalLandscape {
           ),
         );
         add("fish", refuge, home, wet, `wildlife:water-prey:${hunter.species}:fish`);
+        if (hunter.species === "orca") {
+          // A separate fixed companion bank creates an actual natural predator food chain.
+          const choices = ["shark", "dolphin", "narwhal"] as const;
+          const species =
+            choices[
+              Math.floor(valueNoise(refuge.x, refuge.y, this.world.seed + 8369) * choices.length)
+            ];
+          const companion = AQUATIC_HUNTER_PROFILES.find((p) => p.species === species);
+          const point = { wx: home.wx + 56, wy: home.wy };
+          let deep = !!companion;
+          if (companion) {
+            for (
+              let ty = Math.floor((point.wy - companion.body[1] / 2) / 16);
+              ty <= Math.floor((point.wy + companion.body[1] / 2 - 0.001) / 16);
+              ty++
+            )
+              for (
+                let tx = Math.floor((point.wx - companion.body[0] / 2) / 16);
+                tx <= Math.floor((point.wx + companion.body[0] / 2 - 0.001) / 16);
+                tx++
+              )
+                if (this.terrain(tx + 0.5, ty + 0.5) !== TerrainId.DeepWater) deep = false;
+          }
+          if (
+            companion &&
+            deep &&
+            Math.floor(point.wx / 256) === cx &&
+            Math.floor(point.wy / 256) === cy
+          ) {
+            const predator = required(
+              createPredator(companion.species, point.wx, point.wy).predator,
+            );
+            predator.home = { ...home };
+            predator.timer = 2.3;
+            predator.cooldown = 5;
+            predator.randomState =
+              Math.floor(valueNoise(refuge.x, refuge.y, this.world.seed + 8371) * 4294967296) >>> 0;
+            actors.push({
+              featureId: `wildlife:water-prey:orca:${companion.species}:${this.world.seed}:${refuge.id}:0`,
+              type: predatorType(companion.species),
+              wx: point.wx,
+              wy: point.wy,
+              route: [],
+              predator,
+            });
+          }
+        }
       } else add(species, refuge, home, positions);
     };
     if (pond) {

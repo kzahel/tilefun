@@ -516,6 +516,26 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-dolphin-predator-v1",
+      "name": "wildlife dolphin predator v1",
+      "image": "demos/wildlife-v2/dolphin/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-narwhal-predator-v1",
+      "name": "wildlife narwhal predator v1",
+      "image": "demos/wildlife-v2/narwhal/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
@@ -1153,6 +1173,46 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "80f2d5cffc3b686d3c93baec71132da287733d7403cd6e8c0cbae9c2da88cc34",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-whale-shark-provisional-v1",
+      "name": "wildlife whale shark provisional v1",
+      "image": "demos/wildlife-v2/whale-shark/roster-v2/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "fc331cb0298856f6be72c68430bc1788ce65a292245a7fa57bf3b55ae33fcdad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-humpback-whale-provisional-v1",
+      "name": "wildlife humpback whale provisional v1",
+      "image": "demos/wildlife-v2/humpback-whale/roster-v2/sheet.png",
+      "width": 5248,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "0a0d557222242fc58dca238f1311d9031f57c4e7e05339052a19c91e0645fde0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-blue-whale-provisional-v1",
+      "name": "wildlife blue whale provisional v1",
+      "image": "demos/wildlife-v2/blue-whale/roster-v2/sheet.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-sea-turtle-provisional-v1",
+      "name": "wildlife sea turtle provisional v1",
+      "image": "demos/wildlife-v2/sea-turtle/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -3566,6 +3626,66 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-whale-shark-roster-v2",
+      "name": "wildlife v2 whale shark roster v2",
+      "image": "demos/wildlife-v2/whale-shark/roster-v2/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "fc331cb0298856f6be72c68430bc1788ce65a292245a7fa57bf3b55ae33fcdad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dolphin-roster-v2",
+      "name": "wildlife v2 dolphin roster v2",
+      "image": "demos/wildlife-v2/dolphin/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-narwhal-roster-v2",
+      "name": "wildlife v2 narwhal roster v2",
+      "image": "demos/wildlife-v2/narwhal/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "978f2e21c6f22dd6b59a00b05dcbfce1090b832abf43fa3959903083515a855c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-humpback-whale-roster-v2",
+      "name": "wildlife v2 humpback whale roster v2",
+      "image": "demos/wildlife-v2/humpback-whale/roster-v2/sheet.png",
+      "width": 5248,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "0a0d557222242fc58dca238f1311d9031f57c4e7e05339052a19c91e0645fde0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-blue-whale-roster-v2",
+      "name": "wildlife v2 blue whale roster v2",
+      "image": "demos/wildlife-v2/blue-whale/roster-v2/sheet.png",
+      "width": 6560,
+      "height": 640,
+      "tileSize": 16,
+      "fingerprint": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sea-turtle-roster-v2",
+      "name": "wildlife v2 sea turtle roster v2",
+      "image": "demos/wildlife-v2/sea-turtle/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c2294cfe8f6955391712a44d5f45280ccc8667652e502602c2641c138b2a44d6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -5965,11 +6085,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1030"
+          "source": "src/generation/regional/NaturalLandscape.ts:1077"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1224"
+          "source": "src/generation/regional/NaturalLandscape.ts:1271"
         },
         {
           "system": "World generation",
@@ -25128,6 +25248,42 @@
       ]
     },
     {
+      "id": "sprite:wildlife-dolphin-predator-v1",
+      "sheetId": "wildlife-dolphin-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-dolphin-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-narwhal-predator-v1",
+      "sheetId": "wildlife-narwhal-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-narwhal-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-fox-provisional-v1",
       "sheetId": "wildlife-fox-provisional-v1",
       "rect": [
@@ -26279,6 +26435,78 @@
         384
       ],
       "label": "wildlife-peacock-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-whale-shark-provisional-v1",
+      "sheetId": "wildlife-whale-shark-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-whale-shark-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-humpback-whale-provisional-v1",
+      "sheetId": "wildlife-humpback-whale-provisional-v1",
+      "rect": [
+        0,
+        0,
+        5248,
+        512
+      ],
+      "label": "wildlife-humpback-whale-provisional-v1 · registered 128×128 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-blue-whale-provisional-v1",
+      "sheetId": "wildlife-blue-whale-provisional-v1",
+      "rect": [
+        0,
+        0,
+        6560,
+        640
+      ],
+      "label": "wildlife-blue-whale-provisional-v1 · registered 160×160 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-sea-turtle-provisional-v1",
+      "sheetId": "wildlife-sea-turtle-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-sea-turtle-provisional-v1 · registered 64×64 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -27871,7 +28099,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:942"
+          "source": "src/wildlife/Fauna.ts:943"
         },
         {
           "system": "Gameplay",
@@ -27883,11 +28111,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:101"
+          "source": "src/wildlife/FoodWeb.ts:124"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:258"
+          "source": "src/wildlife/FoodWeb.ts:281"
         }
       ]
     },
@@ -27945,35 +28173,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:18"
+          "source": "src/wildlife/Fauna.ts:19"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:213"
+          "source": "src/wildlife/Fauna.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:141"
+          "source": "src/wildlife/FoodWeb.ts:164"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:157"
+          "source": "src/wildlife/FoodWeb.ts:180"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:173"
+          "source": "src/wildlife/FoodWeb.ts:196"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:207"
+          "source": "src/wildlife/FoodWeb.ts:230"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:254"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:258"
+          "source": "src/wildlife/FoodWeb.ts:281"
         }
       ]
     },
@@ -28023,15 +28251,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:102"
+          "source": "src/wildlife/FoodWeb.ts:125"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:258"
+          "source": "src/wildlife/FoodWeb.ts:281"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:259"
+          "source": "src/wildlife/FoodWeb.ts:282"
         }
       ]
     },
@@ -28073,7 +28301,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:259"
+          "source": "src/wildlife/FoodWeb.ts:282"
         }
       ]
     },
@@ -28119,7 +28347,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:260"
+          "source": "src/wildlife/FoodWeb.ts:283"
         }
       ]
     },
@@ -28165,7 +28393,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:261"
+          "source": "src/wildlife/FoodWeb.ts:284"
         }
       ]
     },
@@ -28211,7 +28439,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:262"
+          "source": "src/wildlife/FoodWeb.ts:285"
         }
       ]
     },
@@ -28365,7 +28593,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:258"
+          "source": "src/wildlife/FoodWeb.ts:281"
         }
       ]
     },
@@ -28411,7 +28639,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:258"
+          "source": "src/wildlife/FoodWeb.ts:281"
         }
       ]
     },
@@ -29461,11 +29689,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1030"
+          "source": "src/generation/regional/NaturalLandscape.ts:1077"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1224"
+          "source": "src/generation/regional/NaturalLandscape.ts:1271"
         },
         {
           "system": "World generation",

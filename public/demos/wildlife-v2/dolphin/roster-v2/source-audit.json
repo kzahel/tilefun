@@ -1,0 +1,40 @@
+{
+  "identity": "dolphin-roster-v2",
+  "status": "mechanics-checked-final-pixels-pending-human-review",
+  "allClipPoses": 324,
+  "continuousSwimSamplesPerFacing": 129,
+  "continuousChaseSamplesPerFacing": 129,
+  "continuousFeedSamplesPerFacing": 33,
+  "fixedLengthTailChecks": 1968,
+  "finAttachmentChecks": 2592,
+  "maxContinuousEndpointGapWorldUnits": 5.992742401732511e-05,
+  "maxTailRootGapWorldUnits": 2.3868385845216947e-06,
+  "maxLoopMatrixDelta": 3.501772880554199e-07,
+  "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+  "bodyMotionRangePixels": {
+    "down": 1.9223613739013672,
+    "up": 1.1300239562988281,
+    "left": 1.5784921646118164,
+    "right": 1.5784921646118164
+  },
+  "feedingJawRangeRadians": 0.19999998807907104,
+  "meshLocalGeometrySha256": {
+    "fusiform rib cage": "4c1adab1d4447c765befef1c1a6015a94e9847b1f8a43b9ba8c2ba04d5c5c166",
+    "back plane": "df7cb964e05cbd01b0a607904881525aaad7c44f530f9e271a8919d89caf457c",
+    "skull": "bd5cc34c67bfb57776e3a8121176596b236082e5eeeec8a0aa633e8644c0c950",
+    "long rostrum": "405374a0324ab9d2fcb962e8794b2e2771afcc357954affde895a64a57c5bcfc",
+    "rostrum underside": "9876e1cfb57cbde58eb8dfed27fe8a33215d5091d90cd82940faccce587a7328",
+    "lower jaw": "4317074cf190d3ee5efeaeb9bf2251bb19eaa9f69e735075346232a16ce31c33",
+    "mouth lining": "6f1e29f3f436b794496fcc2fbbdd6c96822a29bd8c45287d3df8acbde8a07d45",
+    "eye -1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+    "eye 1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+    "dorsal fin": "1b025871cb780d26b3252e07d92d28fcbf97a6325da534afaa1519ac2a15b288",
+    "pectoral flipper 0": "7aca6ceaf3e6fec2707f13c63ffb0cc9d17014b7f523dcaf0d909e2f6a5f526e",
+    "pectoral flipper 1": "bf09d4b8f8630f7fe08482fe13e7455428d82279b383ac75ece44c8b3474871e",
+    "TAIL-link-0": "edace1974cdca52a04c4730e8cfab78b9d5d046d8b27f85bcaad004eb6b793dc",
+    "TAIL-link-1": "552998185aba6ded23d1cee37779e4b2d4f9f715fff0f03188c7ba64252d57ef",
+    "TAIL-link-2": "321617dbb202cc36b8fd655b2b9858f30d25185484cd3ae563026e4843db9d64",
+    "horizontal fluke -1": "95c29788002ddb71e38cc5a30b26bcf3f211f6816c59a414341541b45015eac5",
+    "horizontal fluke 1": "b1ea1c9a604ac51ff7535427fc09f7b53606d9ab6e8ee704181993994665e446"
+  }
+}

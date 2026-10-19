@@ -441,3 +441,19 @@ assertion; distinguish them from newly introduced failures.
   failures, ten skipped. Sixty-eight new entries plus sixteen delivered leave
   112 remaining. Six marine sources are underway. Exact pixels remain pending
   human review.
+
+- 02:39 UTC: whale shark, dolphin, narwhal, humpback whale, blue whale and sea
+  turtle completed. Fixed linked tails and attached flippers retain volume;
+  species-specific closed mesh fins, markings, tusk, pleats and turtle scutes
+  distinguish their editable sources. Four gentle profiles use swim/forage/escape;
+  dolphin and narwhal hunt fish, octopus and crab. Orca explicitly eats either,
+  whale shark and turtle; natural orca lagoons include one legal predator companion.
+  Actual generated cross-predator meals preserve origin/home/group and deep-water
+  placement. Placed creatures remain finite. Filter-feeding gestures do not add a
+  plankton resource simulation. Six ten-artifact byte-identical replays and 2,608
+  exact crops pass. Coordinate-based narwhal markings and stable geometric depth
+  ordering remove source replay nondeterminism. Typecheck/lint/build,
+  1,219-candidate manifest, 31 browser cases and streaming readiness pass. Full
+  bounded units: 3,702 pass, five known Windows failures, ten skipped. Fresh
+  inbox/notes are clear. Seventy-four new entries plus sixteen delivered leave
+  106 remaining. Six insect drafts are underway. Exact pixels await human review.

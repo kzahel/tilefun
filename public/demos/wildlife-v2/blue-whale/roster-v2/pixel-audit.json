@@ -1,0 +1,16 @@
+{
+  "identity": "blue-whale-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.7067136764526367,
+    "up": 1.5530681610107422,
+    "left": 2.2101259231567383,
+    "right": 2.2101211547851562
+  },
+  "independentSwimAndChase": false
+}

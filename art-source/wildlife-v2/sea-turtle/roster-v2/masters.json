@@ -1,0 +1,13 @@
+{
+  "identity": "sea-turtle-roster-v2-pixels-01",
+  "palette": {
+    "B": "#65805a",
+    "H": "#a5ad71",
+    "W": "#d4c48f",
+    "M": "#415747",
+    "E": "#202e35",
+    "T": "#e8dfbf",
+    "G": "#c0b57a"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

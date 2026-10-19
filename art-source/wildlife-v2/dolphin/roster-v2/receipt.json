@@ -1,0 +1,130 @@
+{
+  "identity": "dolphin-roster-v2",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-140",
+  "sourceAudit": {
+    "identity": "dolphin-roster-v2",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 324,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 129,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 1968,
+    "finAttachmentChecks": 2592,
+    "maxContinuousEndpointGapWorldUnits": 0.00005992742401732511,
+    "maxTailRootGapWorldUnits": 0.0000023868385845216947,
+    "maxLoopMatrixDelta": 3.501772880554199e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+    "bodyMotionRangePixels": {
+      "down": 1.9223613739013672,
+      "up": 1.1300239562988281,
+      "left": 1.5784921646118164,
+      "right": 1.5784921646118164
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "fusiform rib cage": "4c1adab1d4447c765befef1c1a6015a94e9847b1f8a43b9ba8c2ba04d5c5c166",
+      "back plane": "df7cb964e05cbd01b0a607904881525aaad7c44f530f9e271a8919d89caf457c",
+      "skull": "bd5cc34c67bfb57776e3a8121176596b236082e5eeeec8a0aa633e8644c0c950",
+      "long rostrum": "405374a0324ab9d2fcb962e8794b2e2771afcc357954affde895a64a57c5bcfc",
+      "rostrum underside": "9876e1cfb57cbde58eb8dfed27fe8a33215d5091d90cd82940faccce587a7328",
+      "lower jaw": "4317074cf190d3ee5efeaeb9bf2251bb19eaa9f69e735075346232a16ce31c33",
+      "mouth lining": "6f1e29f3f436b794496fcc2fbbdd6c96822a29bd8c45287d3df8acbde8a07d45",
+      "eye -1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+      "eye 1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+      "dorsal fin": "1b025871cb780d26b3252e07d92d28fcbf97a6325da534afaa1519ac2a15b288",
+      "pectoral flipper 0": "7aca6ceaf3e6fec2707f13c63ffb0cc9d17014b7f523dcaf0d909e2f6a5f526e",
+      "pectoral flipper 1": "bf09d4b8f8630f7fe08482fe13e7455428d82279b383ac75ece44c8b3474871e",
+      "TAIL-link-0": "edace1974cdca52a04c4730e8cfab78b9d5d046d8b27f85bcaad004eb6b793dc",
+      "TAIL-link-1": "552998185aba6ded23d1cee37779e4b2d4f9f715fff0f03188c7ba64252d57ef",
+      "TAIL-link-2": "321617dbb202cc36b8fd655b2b9858f30d25185484cd3ae563026e4843db9d64",
+      "horizontal fluke -1": "95c29788002ddb71e38cc5a30b26bcf3f211f6816c59a414341541b45015eac5",
+      "horizontal fluke 1": "b1ea1c9a604ac51ff7535427fc09f7b53606d9ab6e8ee704181993994665e446"
+    }
+  },
+  "pixelAudit": {
+    "identity": "dolphin-roster-v2-pixels-01",
+    "poses": 324,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 1.914942741394043,
+      "up": 1.1300239562988281,
+      "left": 1.5784921646118164,
+      "right": 1.5784921646118164
+    },
+    "independentSwimAndChase": true
+  },
+  "validation": {
+    "identity": "dolphin-roster-v2",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "dolphin-roster-v2",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "e8a747f3519d83e7124f3646d607c43a17309ea1c235f1c9b3bf76eca2271217",
+      "pixel-audit.json": "dd112d0ad76635ebb2ce3b47db762fce3b661c3375d4d75c4dcffc2f5626f00b",
+      "preview-native.gif": "38a7b59c5314a189768fb7e6c326cfe678b8d0cfbfe0ba70a51faca9d7b96212",
+      "preview.gif": "2223419129b35136064709b5e241bd728810105c4e17fce79aee9fe99ddee50d",
+      "scene-background.png": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48",
+      "scene-native.png": "51588a053b667c477458e9f0e91d71dfaf23bdb8b0bc58cdf24f7afed46e4eb5",
+      "sheet.png": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+      "source-audit.json": "c07b8dfdc62a4e2620107b658a53958ba3c4343f749e9480859742851808a3f2",
+      "sprite.json": "485c2167e414efe8310f8782b8e04d7673214207454d9a8430d9d3fce9dff6d6",
+      "travel-native.gif": "50ec30efa0247a9fc60f6719f730a7af2712bb33f458f2d93a1c05d790b792c5"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/dolphin/roster-v2/audit.py": "e54f1366df68a962b4d9c0ea245508d81e8f567761f1aa6c58ae920ed178819d",
+    "art-source/wildlife-v2/dolphin/roster-v2/build.py": "16f8c8e993120c549ca50a4b8a4a4d08a3b811b9d9a1f674a9443a690d07a8dc",
+    "art-source/wildlife-v2/dolphin/roster-v2/dolphin.blend": "5005ae1ad8afc07c232c81becc433cc32c18f771d4a1e7725e43fa4c46908b6b",
+    "art-source/wildlife-v2/dolphin/roster-v2/finish.py": "1d4f412e3b341ecbc3abf44b0d40345bf2bac01e57e670868df9cdbcd0a4046c",
+    "art-source/wildlife-v2/dolphin/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/dolphin/roster-v2/masters.json": "267ce8a517dcf47fafc91f7a77997717ee0765a9e00b7ba72b3d38ce92413773",
+    "art-source/wildlife-v2/dolphin/roster-v2/projection.json": "79a6eb75151596a736bda6aaa312eca685290346ec4b7f05d88270a4b03a654f",
+    "art-source/wildlife-v2/dolphin/roster-v2/README.md": "7cf9f2d86042ff6ca46ff70d2907479b0a8e2d579ad4e06665773388012d911f",
+    "public/demos/wildlife-v2/dolphin/roster-v2/contact-sheet-native.png": "e8a747f3519d83e7124f3646d607c43a17309ea1c235f1c9b3bf76eca2271217",
+    "public/demos/wildlife-v2/dolphin/roster-v2/index.html": "9d82a05e367a1e9edcaad1221838c2a282a53640f02e2d2ffec914f5e9719649",
+    "public/demos/wildlife-v2/dolphin/roster-v2/pixel-audit.json": "dd112d0ad76635ebb2ce3b47db762fce3b661c3375d4d75c4dcffc2f5626f00b",
+    "public/demos/wildlife-v2/dolphin/roster-v2/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/dolphin/roster-v2/preview-native.gif": "38a7b59c5314a189768fb7e6c326cfe678b8d0cfbfe0ba70a51faca9d7b96212",
+    "public/demos/wildlife-v2/dolphin/roster-v2/preview.gif": "2223419129b35136064709b5e241bd728810105c4e17fce79aee9fe99ddee50d",
+    "public/demos/wildlife-v2/dolphin/roster-v2/scene-background.png": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48",
+    "public/demos/wildlife-v2/dolphin/roster-v2/scene-native.png": "51588a053b667c477458e9f0e91d71dfaf23bdb8b0bc58cdf24f7afed46e4eb5",
+    "public/demos/wildlife-v2/dolphin/roster-v2/sheet.png": "0f83f6e80f2cca1cacf0086ce669065ab918f9c1272b19a397990d8a6c5b26b7",
+    "public/demos/wildlife-v2/dolphin/roster-v2/source-audit.json": "c07b8dfdc62a4e2620107b658a53958ba3c4343f749e9480859742851808a3f2",
+    "public/demos/wildlife-v2/dolphin/roster-v2/sprite.json": "485c2167e414efe8310f8782b8e04d7673214207454d9a8430d9d3fce9dff6d6",
+    "public/demos/wildlife-v2/dolphin/roster-v2/travel-native.gif": "50ec30efa0247a9fc60f6719f730a7af2712bb33f458f2d93a1c05d790b792c5",
+    "public/demos/wildlife-v2/dolphin/roster-v2/validation.json": "d27f5d0cf957ef37f5b39b88fe5d16492494375113451abf5a90b0af365099e8",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/marine-140/build.py": "c8fe3605cfd2857cd7f5ffb8df4718baa3c1542484f0b2ab43f94be0d5fc3e8e",
+    "art-source/wildlife-v2/_families/marine-140/geometry.py": "17642f4f499965f05b3e00416cf1e51ce1375e98324a601c0e429963f42edb83",
+    "art-source/wildlife-v2/_families/marine-140/finish.py": "d0d9e50c200806083135f8ea5f61001e7f156933687dc677ea25add340c76442",
+    "art-source/wildlife-v2/_families/marine-140/audit.py": "89f818173c2c24f4a754011ffa9775cb927112b0748ee620601db969a6e74491",
+    "art-source/wildlife-v2/_families/marine-140/profiles.json": "92ee044e8e0e36997365bed942f2e170e560f38734f949badfa7324b95a4a854",
+    "art-source/wildlife-v2/_families/marine-140/README.md": "11b5d5bb1b15077bd616e3103d5d5a01e8a9cc5966cc7403e669a325a9accfc3",
+    "scripts/wildlife/capture-motion-v2.mjs": "473aa0d69dff10869d7749578e54e61f29aefe886f61d611f07bb72c9d39a453",
+    "scripts/wildlife/register-motion-v2.mjs": "774c1a1381cf82a28f5f89774ab291d91f5d2ae653116f089aa821ca73090af5",
+    "scripts/wildlife/replay-motion-v2.py": "4fcd155c813b0cddfd13523bfa49e4a76246af810e230059490217d612483e6d"
+  }
+}

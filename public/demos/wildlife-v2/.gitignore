@@ -473,3 +473,11 @@
 !kakapo/roster-v2/*
 !wild-turkey/roster-v2/*
 !peacock/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!whale-shark/roster-v2/*
+!dolphin/roster-v2/*
+!narwhal/roster-v2/*
+!humpback-whale/roster-v2/*
+!blue-whale/roster-v2/*
+!sea-turtle/roster-v2/*

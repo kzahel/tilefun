@@ -1,0 +1,16 @@
+{
+  "identity": "narwhal-roster-v2-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.9339370727539062,
+    "up": 1.0900726318359375,
+    "left": 1.5698604583740234,
+    "right": 1.5698604583740234
+  },
+  "independentSwimAndChase": true
+}

@@ -1,0 +1,16 @@
+{
+  "identity": "sea-turtle-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.8495063781738281,
+    "up": 1.2004661560058594,
+    "left": 1.5850334167480469,
+    "right": 1.5660552978515625
+  },
+  "independentSwimAndChase": false
+}

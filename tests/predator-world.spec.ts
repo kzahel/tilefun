@@ -13,7 +13,8 @@ for (const p of PREDATOR_PROFILES) {
   if (!p.expansion) continue;
   const [x, y] = p.expansion.inspection;
   for (const a of nature.wildlife(Math.floor(x / 16), Math.floor(y / 16))) {
-    if (a.predator) homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
+    if (a.predator && a.type === predatorType(p.species))
+      homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
   }
 }
 for (let gy = -12; gy < 12 && homes.size < PREDATOR_PROFILES.length; gy++)

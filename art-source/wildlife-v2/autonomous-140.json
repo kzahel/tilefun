@@ -380,16 +380,18 @@
     "bee": {
       "name": "Bee",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:27:00Z"
     },
     "ladybug": {
       "name": "Ladybug",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "paused",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:27:00Z"
     },
     "owl": {
       "name": "Owl",
@@ -401,10 +403,14 @@
     "sea-turtle": {
       "name": "Green sea turtle",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:50:00Z"
+      "startedUtc": "2026-10-19T01:50:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:39:00Z",
+      "receipt": "art-source/wildlife-v2/sea-turtle/roster-v2/receipt.json",
+      "evidence": "Fixed linked tails/flippers; native body motion; independent saved-scene audit; ten-artifact byte-identical replay; exact native/enlarged Chromium crops; shared world/editor/save checks; deep-water habitat and explicit predator diets; exact pixels pending human review"
     },
     "gecko": {
       "name": "Tokay gecko",
@@ -1427,18 +1433,26 @@
     "whale-shark": {
       "name": "Whale shark",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:50:00Z"
+      "startedUtc": "2026-10-19T01:50:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:39:00Z",
+      "receipt": "art-source/wildlife-v2/whale-shark/roster-v2/receipt.json",
+      "evidence": "Fixed linked tails/flippers; native body motion; independent saved-scene audit; ten-artifact byte-identical replay; exact native/enlarged Chromium crops; shared world/editor/save checks; deep-water habitat and explicit predator diets; exact pixels pending human review"
     },
     "dolphin": {
       "name": "Dolphin",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:50:00Z"
+      "startedUtc": "2026-10-19T01:50:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:39:00Z",
+      "receipt": "art-source/wildlife-v2/dolphin/roster-v2/receipt.json",
+      "evidence": "Fixed linked tails/flippers; native body motion; independent saved-scene audit; ten-artifact byte-identical replay; exact native/enlarged Chromium crops; shared world/editor/save checks; deep-water habitat and explicit predator diets; exact pixels pending human review"
     },
     "orca": {
       "name": "Orca",
@@ -1455,26 +1469,38 @@
     "humpback-whale": {
       "name": "Humpback whale",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:50:00Z"
+      "startedUtc": "2026-10-19T01:50:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:39:00Z",
+      "receipt": "art-source/wildlife-v2/humpback-whale/roster-v2/receipt.json",
+      "evidence": "Fixed linked tails/flippers; native body motion; independent saved-scene audit; ten-artifact byte-identical replay; exact native/enlarged Chromium crops; shared world/editor/save checks; deep-water habitat and explicit predator diets; exact pixels pending human review"
     },
     "blue-whale": {
       "name": "Blue whale",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:50:00Z"
+      "startedUtc": "2026-10-19T01:50:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:39:00Z",
+      "receipt": "art-source/wildlife-v2/blue-whale/roster-v2/receipt.json",
+      "evidence": "Fixed linked tails/flippers; native body motion; independent saved-scene audit; ten-artifact byte-identical replay; exact native/enlarged Chromium crops; shared world/editor/save checks; deep-water habitat and explicit predator diets; exact pixels pending human review"
     },
     "narwhal": {
       "name": "Narwhal",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:50:00Z"
+      "startedUtc": "2026-10-19T01:50:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:39:00Z",
+      "receipt": "art-source/wildlife-v2/narwhal/roster-v2/receipt.json",
+      "evidence": "Fixed linked tails/flippers; native body motion; independent saved-scene audit; ten-artifact byte-identical replay; exact native/enlarged Chromium crops; shared world/editor/save checks; deep-water habitat and explicit predator diets; exact pixels pending human review"
     },
     "cuttlefish": {
       "name": "Cuttlefish",
@@ -1689,9 +1715,10 @@
     "dragonfly": {
       "name": "Dragonfly",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:27:00Z"
     },
     "spider": {
       "name": "Spider",
@@ -1703,23 +1730,26 @@
     "stag-beetle": {
       "name": "Stag beetle",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:27:00Z"
     },
     "grasshopper": {
       "name": "Grasshopper",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:27:00Z"
     },
     "cricket": {
       "name": "Cricket",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:27:00Z"
     },
     "praying-mantis": {
       "name": "Praying mantis",
@@ -2063,6 +2093,18 @@
         "peacock"
       ],
       "validation": "Typecheck/lint/build, 1189-candidate manifest, 28 browser cases and streaming --assert-ready pass. Full bounded units: 3644 pass, 5 known Windows failures, 10 skipped. Seven ten-artifact replays and 2296 exact crops. Stable neck bend plane and quarter-pose keys keep eighth-pose endpoint gap below .079 native px. Thirteen corrected review wrappers retain immutable banks and pass 5224 exact native/enlarged crops."
+    },
+    {
+      "utc": "2026-10-19T02:39:00Z",
+      "completed": [
+        "whale-shark",
+        "dolphin",
+        "narwhal",
+        "humpback-whale",
+        "blue-whale",
+        "sea-turtle"
+      ],
+      "validation": "Typecheck/lint/build, 1219-candidate manifest, 31 browser cases and streaming --assert-ready pass. Full bounded units: 3702 pass, 5 known Windows failures, 10 skipped. Six ten-artifact byte-identical replays and 2608 exact crops. Natural orca lagoons include a legal predator companion; actual generated cross-predator meals retain lineage. Coordinate-based narwhal markings and stable geometric depth ordering remove replay nondeterminism."
     }
   ],
   "existingOutsideRoster": [
@@ -2252,6 +2294,21 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/small-mammals-140/README.md"
+    },
+    "marine": {
+      "animals": [
+        "whale-shark",
+        "dolphin",
+        "narwhal",
+        "humpback-whale",
+        "blue-whale",
+        "sea-turtle"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/marine-140/README.md",
+      "roles": "Dolphin/narwhal hunt fish, octopus and crab; orca can eat either; four gentle deep-water swimmers"
     }
   }
 }

@@ -1,0 +1,16 @@
+{
+  "identity": "humpback-whale-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.3289108276367188,
+    "up": 1.314666748046875,
+    "left": 1.8913650512695312,
+    "right": 1.8913650512695312
+  },
+  "independentSwimAndChase": false
+}

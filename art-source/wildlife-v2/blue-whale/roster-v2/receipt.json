@@ -1,0 +1,136 @@
+{
+  "identity": "blue-whale-roster-v2",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-140",
+  "sourceAudit": {
+    "identity": "blue-whale-roster-v2",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 164,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 0,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 984,
+    "finAttachmentChecks": 1296,
+    "maxContinuousEndpointGapWorldUnits": 0.00011090553782927249,
+    "maxTailRootGapWorldUnits": 0.000005703389031365245,
+    "maxLoopMatrixDelta": 1.9371509552001953e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+    "bodyMotionRangePixels": {
+      "down": 2.7161788940429688,
+      "up": 1.5530681610107422,
+      "left": 2.2101259231567383,
+      "right": 2.2101211547851562
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "fusiform rib cage": "86d8058a19950592e7faa2058898ce5a478f6ad6864b1e63e5faa74a5f9318d6",
+      "back plane": "fa49cac41322c6798ae24860c2054c016f568dba4b249ad77ca7747145a957bc",
+      "skull": "b6427e6482c089c22834cacda73a55598cc06465746e010972bb2bd78248ca78",
+      "rounded rostrum": "2ded28aa816614acf1e102adbc6e534b58afa2e8fde303bea5240c954ce5e152",
+      "lower jaw": "ec516be474913caba2e7f784899b1f29e533e37128070173afa50503fac8e6cc",
+      "mouth lining": "a62ce8ae1c3571986de9452e0f07d8f978cde1995528abcb8330c5680e988fcd",
+      "eye -1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+      "eye 1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+      "ventral pleat 0": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "ventral pleat 1": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "ventral pleat 2": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "ventral pleat 3": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "ventral pleat 4": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "ventral pleat 5": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "ventral pleat 6": "4fbe16b3dbd8e8095e862078f37cb1aac9214a5aa0ce35fb1c9c7cf2ec9d269b",
+      "dorsal fin": "69d5a75d369692d75ac6d692ad6f0edfa7346b0ee670ab2a0f7af51c320019c7",
+      "pectoral flipper 0": "ce4600789616e363d5767261c99a2d6982ff8a41204b1cc7b933a73f6bb3e408",
+      "pectoral flipper 1": "3bed997d9809aba3eaf0b06deaf982e16e40b8b8a3f875c07168a413fa4e448c",
+      "TAIL-link-0": "d55ae6edd92fdc7c56852f871a72e4bb4890efc097a3d903033a8233b8b4a79d",
+      "TAIL-link-1": "1b5584753f1c0266d91dfd59b82dce4ebe8933ed6f68eaf71d8e7c12633bd2b6",
+      "TAIL-link-2": "4c826807a6085643fa2730a4f1e28e4d0543fb3c06119e8a06910f030ee29208",
+      "horizontal fluke -1": "3e584ca5d1944d8d210a0363368b3772a907734cfd929bd61b584bf2c4d44a56",
+      "horizontal fluke 1": "32c06bf0243f0546eda9aa40b4aff1a79163e96a732eca9141868a46df08c08d"
+    }
+  },
+  "pixelAudit": {
+    "identity": "blue-whale-roster-v2-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 2.7067136764526367,
+      "up": 1.5530681610107422,
+      "left": 2.2101259231567383,
+      "right": 2.2101211547851562
+    },
+    "independentSwimAndChase": false
+  },
+  "validation": {
+    "identity": "blue-whale-roster-v2",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "blue-whale-roster-v2",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "870e60bf6fa292f41aa1493e70c6c876b895d752a10aaff39ead9624fc4377b1",
+      "pixel-audit.json": "3d142f32f2d2517dc8308a7d1445b915eeda8198f3240c2cb99b8af48c3b0422",
+      "preview-native.gif": "bb668f28a6c93e9eaeee86b445c662431aa68f40cd3eec79f74b8430df6db6cd",
+      "preview.gif": "10fc511942699994fbc6b8e4263000c9f5c52bf496f6744a1b606a449c0663bf",
+      "scene-background.png": "1d8fdd9e2486176b1ff293e6c79ad0884fb51a4d1283bdb16ea20681e402954f",
+      "scene-native.png": "cda2f275ede2cc57644f023accdfc915b4824450118a96c7fb5e32cb61b50f44",
+      "sheet.png": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+      "source-audit.json": "0521fc54a00b38f85ef5b49050f991c3accc44616885d1fd81440bce7ccfc2b3",
+      "sprite.json": "d4a0d7cdf1443650cf21269110c30cb3ecd2cfe0daaba9bd03503fb71ddc0af9",
+      "travel-native.gif": "b82cff3680436482942ade00750b7a38b55c5c4a6aeb6140a487181c1cb4eaf1"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/blue-whale/roster-v2/audit.py": "e1302c7ba80d901d7ab9b944468c81e8ffe658d4b742fb166a48b34b2be7593c",
+    "art-source/wildlife-v2/blue-whale/roster-v2/blue-whale.blend": "e0ee081e1df87387665141c6c5e7752ad8af3fb0f24afa45c7dabd82f642cee5",
+    "art-source/wildlife-v2/blue-whale/roster-v2/build.py": "392265e3287815bf0a4cd8f5b3847f94a3d5083ace39b6d51ff794e9e6b06b4b",
+    "art-source/wildlife-v2/blue-whale/roster-v2/finish.py": "f53db1b699de52bb72b4967db59cb92208eae5b3243c156badb98ac3c56edb20",
+    "art-source/wildlife-v2/blue-whale/roster-v2/inputs.json": "be2315b0be55c88ee36d7e0d7589e9f9214d4debadecef468d2dfac8f32dcd4c",
+    "art-source/wildlife-v2/blue-whale/roster-v2/masters.json": "0dc0bd3ad0f4e455fe8f41485340c97637cb6e4e4ca08dbee1cc9f1518682208",
+    "art-source/wildlife-v2/blue-whale/roster-v2/projection.json": "a91d56c1711d67d55636d5ec92a957c9921725cbf7a9d702e54b3a1ff9e4b924",
+    "art-source/wildlife-v2/blue-whale/roster-v2/README.md": "73d5e115a832e407a90b4eedc61061a76f668553841f0b232c667e8cf7161567",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/contact-sheet-native.png": "870e60bf6fa292f41aa1493e70c6c876b895d752a10aaff39ead9624fc4377b1",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/index.html": "1369ecb6f937170bc05b680e7a0b7379cd227f2b5c08843263c22d639f3f3c28",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/pixel-audit.json": "3d142f32f2d2517dc8308a7d1445b915eeda8198f3240c2cb99b8af48c3b0422",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/preview-native.gif": "bb668f28a6c93e9eaeee86b445c662431aa68f40cd3eec79f74b8430df6db6cd",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/preview.gif": "10fc511942699994fbc6b8e4263000c9f5c52bf496f6744a1b606a449c0663bf",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/scene-background.png": "1d8fdd9e2486176b1ff293e6c79ad0884fb51a4d1283bdb16ea20681e402954f",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/scene-native.png": "cda2f275ede2cc57644f023accdfc915b4824450118a96c7fb5e32cb61b50f44",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/sheet.png": "15641849a3c5bf3a9d66694629ab00467a717fb5699204b1bf796a2c0950b875",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/source-audit.json": "0521fc54a00b38f85ef5b49050f991c3accc44616885d1fd81440bce7ccfc2b3",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/sprite.json": "d4a0d7cdf1443650cf21269110c30cb3ecd2cfe0daaba9bd03503fb71ddc0af9",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/travel-native.gif": "b82cff3680436482942ade00750b7a38b55c5c4a6aeb6140a487181c1cb4eaf1",
+    "public/demos/wildlife-v2/blue-whale/roster-v2/validation.json": "3663f5920380f2fe5f13a3ea2f3796b924e4aa10517b8f684584af22e8aeb75a",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/marine-140/build.py": "c8fe3605cfd2857cd7f5ffb8df4718baa3c1542484f0b2ab43f94be0d5fc3e8e",
+    "art-source/wildlife-v2/_families/marine-140/geometry.py": "17642f4f499965f05b3e00416cf1e51ce1375e98324a601c0e429963f42edb83",
+    "art-source/wildlife-v2/_families/marine-140/finish.py": "d0d9e50c200806083135f8ea5f61001e7f156933687dc677ea25add340c76442",
+    "art-source/wildlife-v2/_families/marine-140/audit.py": "89f818173c2c24f4a754011ffa9775cb927112b0748ee620601db969a6e74491",
+    "art-source/wildlife-v2/_families/marine-140/profiles.json": "92ee044e8e0e36997365bed942f2e170e560f38734f949badfa7324b95a4a854",
+    "art-source/wildlife-v2/_families/marine-140/README.md": "11b5d5bb1b15077bd616e3103d5d5a01e8a9cc5966cc7403e669a325a9accfc3",
+    "scripts/wildlife/capture-motion-v2.mjs": "473aa0d69dff10869d7749578e54e61f29aefe886f61d611f07bb72c9d39a453",
+    "scripts/wildlife/register-motion-v2.mjs": "774c1a1381cf82a28f5f89774ab291d91f5d2ae653116f089aa821ca73090af5",
+    "scripts/wildlife/replay-motion-v2.py": "4fcd155c813b0cddfd13523bfa49e4a76246af810e230059490217d612483e6d"
+  }
+}

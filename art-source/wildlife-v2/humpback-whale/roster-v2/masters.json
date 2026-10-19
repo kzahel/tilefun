@@ -1,0 +1,13 @@
+{
+  "identity": "humpback-whale-roster-v2-pixels-01",
+  "palette": {
+    "B": "#4f6471",
+    "H": "#758b94",
+    "W": "#d4d8d0",
+    "M": "#4b6268",
+    "E": "#202e35",
+    "T": "#e8dfbf",
+    "G": "#a8b5ac"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

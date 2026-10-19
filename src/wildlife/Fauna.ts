@@ -4,6 +4,7 @@ import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { BOVID_PROFILES } from "./Bovids.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { GROUND_BIRD_PROFILES } from "./GroundBirds.js";
+import { MARINE_FAUNA_PROFILES } from "./MarineFauna.js";
 import { PANDA_PROFILE } from "./Panda.js";
 import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
 import { PET_ART } from "./PetVariants.js";
@@ -1326,6 +1327,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...UNGULATE_PROFILES,
   ...SMALL_MAMMAL_PROFILES,
   ...GROUND_BIRD_PROFILES,
+  ...MARINE_FAUNA_PROFILES,
   ...PET_ART.map((art): FaunaProfile => {
     const base = BASE_FAUNA_PROFILES.find((p) => p.species === art.species);
     if (!base) throw new Error(`Missing pet behavior: ${art.species}`);

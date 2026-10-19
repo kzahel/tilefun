@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sea turtle finished motion</title>
+<style>body{max-width:1000px;margin:24px auto;padding:0 16px;background:#253137;color:#f2ebd7;font:16px system-ui}canvas{display:block;background:#879b82;image-rendering:pixelated;width:100%;height:auto}button,select,input{font:inherit;margin:6px;padding:5px}a{color:#a9dcec}</style>
+<h1>Sea turtle · finished motion</h1>
+<p>Rigid body heave/pitch, fixed linked tail and attached rotating flippers. Down / up / left / right.</p>
+<label>Clip <select id="clip"><option value="swim">Swim</option><option value="idle">Idle</option><option value="action">Forage</option></select></label>
+<label>Speed <select id="speed"><option value="1">100%</option><option value="0.5">50%</option><option value="0.25">25%</option></select></label>
+<button type="button" id="pause">Pause</button><button type="button" id="step">Next pose</button>
+<label>Pose <input id="pose" type="range" min="0" max="31" value="0"></label><output></output>
+<canvas></canvas>
+<p><a href="preview.gif">Animation</a> · <a href="travel-native.gif">Matching world travel</a> · <a href="source-audit.json">Source mechanics</a></p>
+<p>New family prototype; these exact pixels await human art review.</p>
+<script type="module" src="playback.js"></script></html>

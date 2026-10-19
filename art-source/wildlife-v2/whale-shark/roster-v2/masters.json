@@ -1,0 +1,13 @@
+{
+  "identity": "whale-shark-roster-v2-pixels-01",
+  "palette": {
+    "B": "#6b858c",
+    "H": "#91a3a3",
+    "W": "#dcd9bf",
+    "M": "#4b6268",
+    "E": "#202e35",
+    "T": "#e8dfbf",
+    "G": "#a8b5ac"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

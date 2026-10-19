@@ -71,9 +71,32 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter → prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
-  shark: ["fish", "harbor-seal", "penguin", "manta-ray", "octopus", "crab"],
+  dolphin: ["fish", "octopus", "crab"],
+  narwhal: ["fish", "octopus", "crab"],
+  shark: [
+    "dolphin",
+    "sea-turtle",
+    "fish",
+    "harbor-seal",
+    "penguin",
+    "manta-ray",
+    "octopus",
+    "crab",
+  ],
   "hammerhead-shark": ["fish", "manta-ray", "octopus", "crab"],
-  orca: ["shark", "hammerhead-shark", "fish", "harbor-seal", "penguin", "manta-ray", "octopus"],
+  orca: [
+    "dolphin",
+    "narwhal",
+    "whale-shark",
+    "sea-turtle",
+    "shark",
+    "hammerhead-shark",
+    "fish",
+    "harbor-seal",
+    "penguin",
+    "manta-ray",
+    "octopus",
+  ],
   "polar-bear": [
     ...small,
     ...pasture,

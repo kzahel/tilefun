@@ -1,0 +1,16 @@
+{
+  "identity": "dolphin-roster-v2-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.914942741394043,
+    "up": 1.1300239562988281,
+    "left": 1.5784921646118164,
+    "right": 1.5784921646118164
+  },
+  "independentSwimAndChase": true
+}
