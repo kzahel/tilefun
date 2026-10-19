@@ -373,7 +373,28 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     await expect.poll(async () => (await read(page)).parent).not.toBeNull();
     expect((await read(page)).type).toBe(before.type);
     if ((await read(page)).editing) await page.keyboard.press("Tab");
-    await page.getByRole("button", { name: /^Get out(?: · [EY])?$/ }).tap();
+    const exit = page.getByRole("button", { name: /^Get out(?: · [EY])?$/ });
+    await expect(exit).toBeVisible();
+    await expect(exit).toBeEnabled();
+    const box = await exit.boundingBox();
+    if (!box) throw Error("Missing exit control");
+    const contact = { x: box.x + box.width / 2, y: box.y + box.height / 2, id: 1 };
+    const touch = await page.context().newCDPSession(page);
+    try {
+      await touch.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [contact] });
+      // The first contact after reload switches keyboard hints to touch text.
+      // Keep the pressed control under the finger throughout that layout change.
+      await expect(exit).toHaveText("Get out");
+      const held = await exit.boundingBox();
+      if (!held) throw Error("Exit control disappeared during touch");
+      expect(contact.y).toBeGreaterThanOrEqual(held.y);
+      expect(contact.y).toBeLessThanOrEqual(held.y + held.height);
+      expect(contact.x).toBeGreaterThanOrEqual(held.x);
+      expect(contact.x).toBeLessThanOrEqual(held.x + held.width);
+    } finally {
+      await touch.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await touch.detach();
+    }
     await expect.poll(async () => (await read(page)).parent).toBeNull();
     expect(errors).toEqual([]);
   });

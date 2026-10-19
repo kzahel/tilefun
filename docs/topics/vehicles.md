@@ -218,6 +218,12 @@ are saved across unloading/reopening. There is no abandoned-car deletion policy.
 Saved driver seats restore by vehicle identity. Editing, explicit travel,
 deletion and disconnect release ownership; stale input brakes.
 
+The floating vehicle button stays anchored at the bottom left, with instructions
+and errors above it. Switching from keyboard hints to touch instructions on the
+first contact after reload must not move the pressed button away from the finger.
+The native held-touch driving regression checks that contact remains inside the
+button before release, then requires the authority to release the saved seat.
+
 Game and traffic/world geometry labs use the same Realm authority, predictor,
 vehicle prompt and scenario controls. No art bank or geometry approval changed.
 [132](../tactical/132-parking-shopping-visits.md) adds bounded shopping visits

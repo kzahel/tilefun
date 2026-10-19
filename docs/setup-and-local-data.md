@@ -60,14 +60,18 @@ Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
 With `CI` set, browser tests use one worker and a 60-second overall deadline:
 hosted software GPU rendering can otherwise starve the simulation Worker.
-CI splits the suite across eight independent runners, each with isolated auth/data
-and one browser worker. The 1,474-case suite outgrew four shards; eight reduce
-wall time while preserving the same per-runner CPU/GPU budget and full coverage.
+CI splits the suite across sixteen independent runners, each with isolated auth/data
+and one browser worker. The 1,474-case suite outgrew four shards; an eight-runner
+checkpoint still took over 34 minutes before the longest wildlife shards finished.
+Sixteen reduce wall time while preserving the same per-runner CPU/GPU budget and full coverage.
 Individual assertion deadlines remain explicit. Long
 headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
 Wildlife contact checks retry a grounded landing after any existing alarm finishes,
 because a flight can start between observing rest and clicking the inspection control.
-They still require the native escape clip and physical height. The raptor reload
+Rideable animals likewise require a resting target and a grounded player before
+retrying, so a walking camel cannot invalidate the sole mounting attempt and an
+in-flight landing is never repeatedly reset.
+Escape checks still require the native clip and physical height. The raptor reload
 check retains its bounded hunt/perch ticks with a 30-second wall-time budget.
 Game-catalog deep-link checks await the completed startup route before testing
 the return link, with a 15-second readiness allowance for hosted rendering.
@@ -77,6 +81,10 @@ population, position, height and saved flight-frame assertions remain in place.
 Resumed wildlife walks use the same species-scaled phase allowance as initial
 arrival. Vehicle boarding checks use an available generated car and verify its
 actual mesh asset; the expanded traffic roster does not guarantee a blue compact.
+Vehicle reload checks hold the first native touch through the keyboard-to-touch
+hint change, require the pressed button to remain under the finger, then release
+and require authority to relinquish the seat. Vehicle instructions/errors sit
+above the bottom-left button so text changes cannot move its touch target.
 Each CI shard stops at its first test failure so GitHub publishes its job logs
 promptly; other shards continue independently. Local runs collect all failures.
 The raster verification renders every Workshop candidate in headless-shell and

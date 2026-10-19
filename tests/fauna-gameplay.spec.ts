@@ -95,8 +95,33 @@ for (const profile of FAUNA_PROFILES) {
         .toBe(true);
       const hopOnto = page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true });
       if (profile.rideSpeed) {
-        await hopOnto.click();
-        await expect.poll(async () => (await poses()).some((f) => f.state === "ridden")).toBe(true);
+        let lastHop = -Infinity;
+        await expect
+          .poll(
+            async () => {
+              const animals = await poses();
+              if (animals.some((f) => f.state === "ridden")) return true;
+              const target = animals.find((f) => f.state !== "scared" && f.z === 0);
+              // A mount can start walking before the falling player reaches its
+              // back. Retry from the ground during rest, without interrupting a
+              // landing already in flight or resetting an active herd alarm.
+              if (
+                !animals.some((f) => f.state === "scared") &&
+                target?.clip === 0 &&
+                Number(await c.getAttribute("data-player-z")) === 0 &&
+                Date.now() - lastHop >= 1000
+              ) {
+                await hopOnto.click();
+                lastHop = Date.now();
+              }
+              return false;
+            },
+            {
+              timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
+              intervals: [30],
+            },
+          )
+          .toBe(true);
         await expect(c).toHaveAttribute("data-player-max-vz", "0");
         await page.screenshot({ path: `/tmp/tilefun-horse-mounted-${renderer}.png` });
         await page.getByRole("button", { name: "Pause", exact: true }).click();

@@ -19,14 +19,16 @@ export class VehicleControl {
   private targetKey = "";
   constructor(private send: (request: VehicleRequest) => Promise<unknown>) {
     this.root.style.cssText =
-      "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:center;color:white;font:15px sans-serif";
+      "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:left;color:white;font:15px sans-serif";
     this.button.style.cssText =
       "font:inherit;padding:12px 18px;min-height:48px;border-radius:8px;border:1px solid #c5d3b6;color:white;background:#243a32;cursor:pointer";
     this.root.dataset.vehicleControl = "";
     this.button.onclick = () => this.activate();
     this.status.setAttribute("role", "status");
     this.status.style.cssText = "background:#243a32;border-radius:6px;margin:4px 0;padding:4px";
-    this.root.append(this.button, this.status);
+    // Keep the button anchored while the first touch replaces keyboard hints
+    // or an authority error wraps the status onto another line.
+    this.root.append(this.status, this.button);
     this.root.hidden = true;
     document.body.append(this.root);
   }
