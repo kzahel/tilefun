@@ -549,3 +549,18 @@ assertion; distinguish them from newly introduced failures.
   current generic ground-hunter fixtures/companions assume rabbit/deer prey.
   Future hunter descriptors should publish both stride fields; the current frozen
   small-hunter banks are verified through measured travel and matched foot paths.
+
+- 05:08 UTC: rebased the 29 local wildlife commits onto upstream `de1b611b`
+  (desktop/controller/menu and city fixes), preserving both tactical indexes and
+  shared lab documentation. Source code merged automatically. Regenerated the
+  Workshop manifest from the combined source: all 1,379 candidate IDs remain,
+  with 612 updated fingerprints and a fresh input digest; full Chromium retina
+  parity passes. No human approval is inferred from refreshed identities.
+  Typecheck, lint (warnings), production build and five focused browser checks
+  pass: fox motion/contact/save in Canvas/GPU, horse mounting/dismounting in
+  Canvas/GPU, and portable pet/tiger pending review playback. The full browser
+  suite could not collect because the new upstream `peer` dependency is absent
+  from local node_modules. The unit run reported the five previously recorded
+  Windows filesystem/process failures plus forest-scenario and Workshop API
+  timeouts; it was stopped without a complete suite result. Follow-up validation
+  should install the updated dependencies and rerun bounded units/full browsers.
