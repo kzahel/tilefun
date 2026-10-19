@@ -7,6 +7,7 @@ import { createFauna } from "./Fauna.js";
 import { canEat } from "./FoodWeb.js";
 import { createPredator } from "./Predator.js";
 import { resolvePredatorCatches } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 describe.each(ANTELOPE_PROFILES)("$species prey ownership", (p) => {
@@ -30,11 +31,13 @@ describe.each(ANTELOPE_PROFILES)("$species prey ownership", (p) => {
       resolvePredatorCatches(manager, [...manager.entities], open, []);
       expect(manager.byId.has(prey.id)).toBe(false);
       expect(tiger.predator?.meals).toBe(1);
+      expect(manager.wildlifeRespawns.size).toBe(natural ? 1 : 0);
+      tickWildlifeRespawns(manager, 120, open, []);
       const replacements = manager.entities.filter((e) => e.type === prey.type);
       expect(replacements).toHaveLength(natural ? 1 : 0);
       if (natural) {
         expect(replacements[0]?.naturalSpawnId).toBe(prey.naturalSpawnId);
-        expect(replacements[0]?.fauna?.home).toEqual(prey.fauna?.home);
+        expect(replacements[0]?.fauna?.home).toEqual(replacements[0]?.position);
         expect(replacements[0]?.persistentId).not.toBe(prey.persistentId);
       }
     },

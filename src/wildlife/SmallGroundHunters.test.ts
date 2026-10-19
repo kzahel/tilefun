@@ -6,6 +6,7 @@ import { createFauna, faunaType } from "./Fauna.js";
 import { canEat } from "./FoodWeb.js";
 import { createPredator } from "./Predator.js";
 import { resolvePredatorCatches } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 const land = { isWater: () => false, canOccupy: () => true, surfaceZ: () => 0 };
 const cases = [
@@ -52,12 +53,14 @@ describe.each(cases)("$hunter directed meals", ({ hunter: species, prey: factory
       resolvePredatorCatches(manager, [...manager.entities], land, []);
       expect(manager.byId.has(prey.id)).toBe(false);
       expect(hunter.predator?.meals).toBe(1);
+      expect(manager.wildlifeRespawns.size).toBe(natural ? 1 : 0);
+      tickWildlifeRespawns(manager, 120, land, []);
       const replacements = manager.entities.filter((e) => e.type === prey.type);
       expect(replacements).toHaveLength(natural ? 1 : 0);
       if (natural) {
         const replacement = required(replacements[0]);
         expect(replacement.naturalSpawnId).toBe("natural-directed-prey");
-        expect((replacement.predator ?? replacement.fauna)?.home).toEqual({ wx: 120, wy: 64 });
+        expect((replacement.predator ?? replacement.fauna)?.home).toEqual(replacement.position);
         if (replacement.predator) {
           expect(replacement.predator.packId).toBe("original-small-hunter-pack");
           expect(replacement.predator.state).toBe("rest");

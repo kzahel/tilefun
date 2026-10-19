@@ -48,6 +48,14 @@ import { onWanderBlocked } from "./wanderAI.js";
 const PUSH_PLAYER_SPEED_MULT = 0.5;
 
 export class EntityManager {
+  readonly wildlifeRespawns = new Map<
+    string,
+    import("../wildlife/WildlifeRespawns.js").PendingWildlifeRespawn
+  >();
+  onWildlifeRespawnChanged?: (
+    id: string,
+    job: import("../wildlife/WildlifeRespawns.js").PendingWildlifeRespawn | undefined,
+  ) => void;
   canPlace?: (wx: number, wy: number) => boolean;
   canSpawn?: (entity: Entity) => boolean;
   beforeSpawn?: (entity: Entity) => void;
@@ -178,7 +186,7 @@ export class EntityManager {
         const selfHeight = self.collider?.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
         if (overlapsAnyProp(aabb, selfWz, selfHeight)) return true;
         if (getHeight) {
-          // Airborne entities can't step up — must be above terrain to pass
+          // Airborne entities can't step up â€” must be above terrain to pass
           const elevStepUp = self.jumpVZ !== undefined ? 0 : STEP_UP_THRESHOLD;
           if (isElevationBlocked3D(aabb, selfWz, getHeight, elevStepUp)) return true;
         }
@@ -211,7 +219,7 @@ export class EntityManager {
       };
 
     // --- Phase 1: Push entities in each player's path, then move players ---
-    // Player velocity is already friction/acceleration-adjusted — no speedMult needed.
+    // Player velocity is already friction/acceleration-adjusted â€” no speedMult needed.
     for (const player of players) {
       if (skipEntityIds?.has(player.id)) continue;
       if (player.velocity && player.collider) {
@@ -288,7 +296,7 @@ export class EntityManager {
           if (useCollisionIndex) this.collisionIndex.update(entity);
         }
 
-        // Now move the player — entities are still solid blockers.
+        // Now move the player â€” entities are still solid blockers.
         // Airborne players can fly over water tiles (land-in-water respawns them).
         const playerMask = player.jumpVZ !== undefined ? CollisionFlag.Solid : blockMask;
         resolveCollision(player, dx, dy, getCollision, playerMask, makeExtraBlocker(player));
@@ -373,7 +381,7 @@ export class EntityManager {
     // query this snapshot and read live support heights before any later movement.
     this.collisionIndex.finish();
 
-    // --- Phase 2.5: Ground tracking — snap wz to surface, detect cliff edges ---
+    // --- Phase 2.5: Ground tracking â€” snap wz to surface, detect cliff edges ---
     if (getHeight) {
       // Membership is stable during this synchronous pass. Keep live objects: earlier
       // ground snaps must still affect later support checks. Never reuse across ticks,
@@ -580,7 +588,7 @@ export class EntityManager {
         if (e.parentId === undefined || resolved.has(e.id)) continue;
         const parent = byId.get(e.parentId);
         if (!parent) {
-          // Parent removed — auto-detach
+          // Parent removed â€” auto-detach
           Reflect.set(e, "parentId", undefined);
           Reflect.set(e, "localOffsetX", undefined);
           Reflect.set(e, "localOffsetY", undefined);

@@ -1,5 +1,7 @@
 # Wildlife production status
 
+[Animal browser and AI playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry)
+
 ## Latest autonomous completion run
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: timebox-complete.
@@ -125,7 +127,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T05:11:36.652Z (19/10/2026, 07:11:36 Berlin).
+Snapshot: 2026-10-19T06:39:45.618Z (19/10/2026, 08:39:45 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

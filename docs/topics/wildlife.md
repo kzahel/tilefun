@@ -6,6 +6,54 @@ The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
 Updated: 2026-10-19.
 
+## Animal browser and delayed natural returns
+
+Owner request, 2026-10-19: extend the interactive lab with an animal browser and
+make eaten natural animals return later, much farther away. The
+[animal browser](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry)
+uses the existing Natural Landscape/World Geometry scenario host. It lists 132
+playable animals and coat variants, with name/family search, family filtering,
+newest/oldest-added, recently-updated and alphabetical/family sorting. Visible
+cards animate the current shared game banks, with locomotion/idle/action and
+four facings. Watch AI selects the ordinary scenario and follows the selected
+animal; the follow checkbox returns the camera to the player. Browsing creates no extra
+simulation Workers. Hidden cards stop animating and load their sheets on demand.
+Coat variants and the additional fierce creatures explain the difference from
+the retained 196-species production roster. Addition dates use the completion ledger where it predates the first
+committed species sheet; update dates use the ledger or active-bank addition. Regenerate the committed inventory explicitly with
+`npx tsx scripts/build-animal-browser-dates.ts`; builds need no Git history.
+
+Shared Realm authority now queues natural meal replacements for a randomized
+60–120 seconds of simulation time. A new individual returns 512–1,024 world
+pixels (32–64 tiles) from the meal, at least 512 pixels from every player, with
+its own home/shelter. Social group and natural lineage survive; old hunt/target
+state and old territory do not. Each full footprint must fit ready terrain,
+water/land policy, elevation, props and other solid actors. Unsafe or unloaded
+sites retry after five seconds; the catch itself need not wait for a birth site.
+Player-created prey and ordinary deletions still have no replacement.
+
+Pending returns are independent, bounded jobs (maximum 128) persisted as scoped
+`meta` records through the ordinary SaveManager transaction. The meal tombstone
+and queued birth commit together; the new actor and completed-job removal do too.
+Pause stops countdowns. Reload restores them without restarting the delay or
+resurrecting eaten actors. Jobs survive the hunter being removed. Reaching the
+queue limit defers additional natural catches rather than silently losing births.
+Game and embedded lab share these rules through Realm and the same raw behavior
+inputs in scenario review identities. The other machine owns live deployment;
+push publishes the implementation without claiming that it is already deployed.
+
+Validation: 4,362 unit tests pass; five known Windows symlink/WAL failures,
+static-files symlink fixture setup failure and ten skips remain. New tests cover
+the randomized countdown, distant placement, retries, manual origins, the queue
+limit, independent hunter lifetime, and real Realm save/reload through a complete
+return. Family lineage tests now step the delay and verify the new home. Desktop
+and 390px mobile browsing, actual animation/family/date sorting, the visible
+selected gorilla, Canvas/GPU food chains and manual-prey deletion pass browser
+checks. Typecheck/lint/build and isolated streaming readiness pass. The clean
+animal snapshot retains 1,380 Workshop identities; concurrent vehicle work has
+its own manifest refresh. Next: inspect the browser and return pacing on the live
+machine after it pulls these commits, then tune timings if playtesting warrants.
+
 ## Focused gorilla shoulder review
 
 On 2026-10-19 the owner requested clearer historical rejection labels and one
@@ -20,8 +68,8 @@ planted knuckle gait, body weight transfer and alternating chest beat are retain
 It has a separate pending review identity and preserves `roster-v2` gameplay.
 This explicit request is independent of the expired eight-hour authorization.
 The [study record](../../art-source/wildlife-v2/gorilla-shoulder-study.json) owns
-its current state. Next: owner inspection of the animation before further
-shape changes or selection for gameplay.
+its current state. The owner called the shown shoulder animation “Acceptable.
+Good.” on 2026-10-19; the Workshop decision record remains independently owned.
 
 Validation: the new bank replays ten artifacts byte-for-byte; both old and new
 gorilla receipts pass all 25 artifact checks each. Saved-scene checks retain

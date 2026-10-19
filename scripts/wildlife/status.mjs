@@ -299,6 +299,12 @@ export function writeStatus() {
       "",
     );
   }
+  lines.splice(
+    2,
+    0,
+    "[Animal browser and AI playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry)",
+    "",
+  );
   const temporary = `${output}.${process.pid}.tmp`;
   writeFileSync(temporary, lines.join("\n"));
   renameSync(temporary, output);

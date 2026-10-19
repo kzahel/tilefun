@@ -41,6 +41,17 @@ grounded mesh contact shadows, displayed-motion heading and ready-only roof-ride
 attachment through ordinary game/ScenarioPresentationHost collection and raster
 consumption. Direct authoring defaults and train inspection remain unchanged.
 
+## Animal browser and natural return timing
+
+The Natural Landscape page now includes the sortable/searchable animal browser.
+Its visible animated cards read ordinary shared sprite definitions; selecting an
+animal switches the existing ScenarioPresentationHost fixture. There is one
+simulation host, with no per-card Worker or separate animal AI. The same Realm
+now schedules natural meal returns after 60–120 simulated seconds at distant,
+validated ready sites. Independent scoped SaveManager records preserve pending
+returns through reload; the wildlife topic owns distances, retry policy and
+manual/natural origin rules. Scenario fingerprints include the return scheduler.
+
 ## Wildlife motion repairs
 
 [140](../tactical/140-autonomous-wildlife-completion.md) selects completed sheep,

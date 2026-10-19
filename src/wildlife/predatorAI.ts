@@ -1,8 +1,6 @@
 import { required } from "../art/ArtCatalog.js";
-import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import { getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
-import { ENTITY_DEFS } from "../entities/EntityDefs.js";
-import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { predatorFlightZ, restorePredatorPose } from "./PredatorMotion.js";
 
@@ -20,6 +18,7 @@ import { startleMallard } from "./mallardInteractions.js";
 import { predatorProfile } from "./Predator.js";
 import { startleRabbit } from "./rabbitInteractions.js";
 import { startleRobin } from "./robinInteractions.js";
+import { scheduleWildlifeRespawn } from "./WildlifeRespawns.js";
 
 const distance = (a: PositionComponent, b: PositionComponent) =>
   Math.hypot(a.wx - b.wx, a.wy - b.wy);
@@ -457,7 +456,7 @@ export function resolvePredatorCatches(
   manager: EntityManager,
   active: readonly Entity[],
   env: WildlifeEnvironment,
-  players: readonly PositionComponent[],
+  _players: readonly PositionComponent[],
 ): void {
   for (const hunter of active) {
     const ai = hunter.predator;
@@ -479,102 +478,11 @@ export function resolvePredatorCatches(
     )
       continue;
     if (bodyGap(hunter, prey) > 3 || !clearPath(hunter, prey.position, env)) continue;
-    const habitat = habitatOf(prey);
-    // proceduralId supports existing generated saves; replacements retain lineage
-    // without reusing that tombstoned procedural identity. Unknown old origins
-    // are deliberately not inferred from species, habitat or location.
     const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
-    let replacement: Entity | undefined;
-    for (let i = 0; naturalSpawnId && i < 24; i++) {
-      const angle = random(hunter) * Math.PI * 2,
-        r = 48 + random(hunter) * Math.max(0, habitat.radius - 64);
-      const point = {
-        wx: habitat.home.wx + Math.cos(angle) * r,
-        wy: habitat.home.wy + Math.sin(angle) * r,
-      };
-      const factory = ENTITY_FACTORIES[prey.type];
-      if (!factory) break;
-      const candidate = factory(point.wx, point.wy);
-      candidate.wz = env.surfaceZ?.(point) ?? 0;
-      const footprint = getEntityAABB(point, required(candidate.collider));
-      const separated = {
-        left: footprint.left - 8,
-        right: footprint.right + 8,
-        top: footprint.top - 8,
-        bottom: footprint.bottom + 8,
-      };
-      const ground = [
-        point,
-        { wx: footprint.left, wy: footprint.top },
-        { wx: footprint.right, wy: footprint.top },
-        { wx: footprint.left, wy: footprint.bottom },
-        { wx: footprint.right, wy: footprint.bottom },
-      ];
-
-      if (
-        distance(point, hunter.position) < 56 ||
-        players.some(
-          (p) =>
-            distance(point, p) <
-            Math.max(footprint.right - footprint.left, footprint.bottom - footprint.top) / 2 + 24,
-        ) ||
-        manager.entities.some(
-          (e) =>
-            e !== prey &&
-            e.collider &&
-            e.collider.solid !== false &&
-            aabbsOverlap(separated, getEntityAABB(e.position, e.collider)),
-        ) ||
-        ground.some(
-          (p) =>
-            env.isWater(p) !== (ENTITY_DEFS[candidate.type]?.aquatic === true) ||
-            Math.abs((env.surfaceZ?.(p) ?? 0) - required(candidate.wz)) > 2,
-        ) ||
-        (candidate.predator && !predatorHabitatAllows(candidate, point, env)) ||
-        !env.canOccupy(candidate, point)
-      )
-        continue;
-      const fresh = habitatOf(candidate);
-      fresh.home = { ...habitat.home };
-      fresh.radius = habitat.radius;
-      for (const key of [
-        "shelter",
-        "herdId",
-        "groupId",
-        "habitatBounds",
-        "packId",
-        "packRole",
-        "denId",
-        "denPlaced",
-      ]) {
-        const value = Reflect.get(habitat, key);
-        if (value !== undefined) Reflect.set(fresh, key, JSON.parse(JSON.stringify(value)));
-      }
-      if ("randomState" in fresh) fresh.randomState = (random(hunter) * 4294967296) >>> 0;
-      if (candidate.predator) candidate.predator.cooldown = 20;
-      candidate.naturalSpawnId = naturalSpawnId;
-      durableId(candidate);
-      replacement = candidate;
-      break;
-    }
-    if (naturalSpawnId && !replacement) continue;
-    // These synchronous mutations enter the same RealmRecords flush transaction.
-    if (replacement) manager.spawn(replacement);
+    if (naturalSpawnId && !scheduleWildlifeRespawn(manager, prey, () => random(hunter))) continue;
     manager.remove(prey.id);
     ai.meals++;
     ai.cooldown = 35 + random(hunter) * 20;
     enter(hunter, "feed", 3.84);
   }
-}
-
-function habitatOf(e: Entity): { home: PositionComponent; radius: number } {
-  return (
-    e.predator ??
-    e.fauna ??
-    e.deer ??
-    e.rabbit ??
-    e.mallard ??
-    e.robin ??
-    e.frog ?? { home: { ...e.position }, radius: 128 }
-  );
 }

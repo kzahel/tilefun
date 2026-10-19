@@ -8,6 +8,7 @@ import { canEat, creatureSpecies } from "./FoodWeb.js";
 import { updateFaunaAI } from "./faunaAI.js";
 import { createPredator } from "./Predator.js";
 import { resolvePredatorCatches } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 it("flies a short physical arc, restores its airborne pose, and lands on the target", () => {
   const manager = new EntityManager();
@@ -97,12 +98,14 @@ it.each([false, true])("waits for landing and respects natural lineage: %s", (na
   resolvePredatorCatches(manager, [...manager.entities], environment, []);
   expect(manager.byId.has(butterfly.id)).toBe(false);
   expect(hunter.predator?.meals).toBe(1);
+  expect(manager.wildlifeRespawns.size).toBe(natural ? 1 : 0);
+  tickWildlifeRespawns(manager, 120, environment, []);
   const survivors = manager.entities.filter((e) => e.type === butterfly.type);
   expect(survivors).toHaveLength(natural ? 1 : 0);
   if (natural) {
     expect(survivors[0]?.naturalSpawnId).toBe("test-natural-butterfly");
     expect(survivors[0]?.persistentId).not.toBe(butterfly.persistentId);
-    expect(survivors[0]?.fauna?.home).toEqual(habitat.home);
+    expect(survivors[0]?.fauna?.home).toEqual(survivors[0]?.position);
     expect(survivors[0]?.fauna?.groupId).toBe(habitat.groupId);
   }
 });

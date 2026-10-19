@@ -7,6 +7,7 @@ import { canEat } from "./FoodWeb.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
 import { createPredator } from "./Predator.js";
 import { resolvePredatorCatches } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 const land = { isWater: () => false, canOccupy: () => true, surfaceZ: () => 0 };
 describe.each(FOREST_HERBIVORE_PROFILES)("$species food-web origin", (p) => {
@@ -34,12 +35,14 @@ describe.each(FOREST_HERBIVORE_PROFILES)("$species food-web origin", (p) => {
       resolvePredatorCatches(manager, [...manager.entities], land, []);
       expect(manager.byId.has(prey.id)).toBe(false);
       expect(hunter.predator?.meals).toBe(1);
+      expect(manager.wildlifeRespawns.size).toBe(natural ? 1 : 0);
+      tickWildlifeRespawns(manager, 120, land, []);
       const replacements = manager.entities.filter((e) => e.type === prey.type);
       expect(replacements).toHaveLength(natural ? 1 : 0);
       if (natural) {
         const replacement = required(replacements[0]);
         expect(replacement.naturalSpawnId).toBe("natural-forest-herbivores");
-        expect(replacement.fauna?.home).toEqual({ wx: 120, wy: 64 });
+        expect(replacement.fauna?.home).toEqual(replacement.position);
         expect(replacement.fauna?.groupId).toBe("original-forest-herbivores-group");
         expect(replacement.persistentId).not.toBe(prey.persistentId);
       }

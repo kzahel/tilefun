@@ -17,6 +17,7 @@ import { canEat } from "./FoodWeb.js";
 import { createPredator, predatorType } from "./Predator.js";
 import { restorePredatorPose } from "./PredatorMotion.js";
 import { predatorHabitatAllows, resolvePredatorCatches, updatePredatorAI } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 const wet = {
   isWater: () => true,
@@ -97,17 +98,19 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
       resolvePredatorCatches(manager, [...manager.entities], wet, []);
       expect(manager.byId.has(fish.id)).toBe(false);
       expect(hunter.predator?.meals).toBe(1);
+      expect(manager.wildlifeRespawns.size).toBe(natural ? 1 : 0);
+      tickWildlifeRespawns(manager, 120, wet, []);
       const replacements = manager.entities.filter((e) => e.type === fish.type);
       expect(replacements).toHaveLength(natural ? 1 : 0);
       if (natural) {
         const replacement = required(replacements[0]);
         expect(replacement.naturalSpawnId).toBe("lagoon-fish");
-        expect(replacement.fauna?.home).toEqual(home);
+        expect(replacement.fauna?.home).toEqual(replacement.position);
         expect(replacement.fauna?.groupId).toBe("original-fish-school");
         expect(replacement.persistentId).not.toBe(fish.persistentId);
       }
     });
-  it("waits rather than consuming natural prey when no legal replacement water exists", () => {
+  it("waits to replace consumed natural prey when distant water is unavailable", () => {
     const manager = new EntityManager(),
       hunter = manager.spawn(createPredator(p.species, 0, 0));
     const fish = manager.spawn(createFauna("fish", required(hunter.collider).width / 2 + 4, 0));
@@ -123,8 +126,11 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
       { ...wet, isWater: (q) => Math.hypot(q.wx, q.wy) < 48 },
       [],
     );
-    expect(manager.byId.has(fish.id)).toBe(true);
-    expect(hunter.predator?.meals).toBe(0);
+    expect(manager.byId.has(fish.id)).toBe(false);
+    tickWildlifeRespawns(manager, 120, { ...wet, isWater: (q) => Math.hypot(q.wx, q.wy) < 48 }, []);
+    expect(manager.wildlifeRespawns.size).toBe(1);
+    expect(manager.entities.filter((e) => e.type === fish.type)).toHaveLength(0);
+    expect(hunter.predator?.meals).toBe(1);
   });
   it("seeds a stable lagoon owner and nearby legal fish regardless of chunk order", () => {
     const [x, y] = p.expansion.inspection,
@@ -163,23 +169,18 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
       expect(hunter().proceduralId).toContain("lagoon:");
       for (let i = 0; i < 1600 && !hunter().predator?.meals; i++) await s.step(idle);
       expect(hunter().predator?.meals).toBeGreaterThan(0);
-      const replacements = entities().filter((e) =>
-        e.naturalSpawnId?.startsWith(`wildlife:water-prey:${p.species}:`),
+      const pending = [...s.realm.entityManager.wildlifeRespawns.values()].filter((j) =>
+        j.actor.state.naturalSpawnId?.startsWith(`wildlife:water-prey:${p.species}:`),
       );
-      expect(replacements.length).toBeGreaterThan(0);
-      if (p.species === "orca") expect(replacements.some((e) => e.predator)).toBe(true);
-      const saved = JSON.parse(JSON.stringify(hunter().predator)),
-        frame = hunter().sprite?.frameCol,
-        ids = replacements.map((e) => e.persistentId).sort();
+      expect(pending.length).toBeGreaterThan(0);
+      expect(pending.every((j) => j.remaining > 0)).toBe(true);
+      const saved = JSON.parse(JSON.stringify(hunter().predator));
+      const queued = JSON.parse(
+        JSON.stringify([...s.realm.entityManager.wildlifeRespawns.values()]),
+      );
       await s.reload();
       expect(hunter().predator).toEqual(saved);
-      expect(hunter().sprite?.frameCol).toBe(frame);
-      expect(
-        entities()
-          .filter((e) => ids.includes(e.persistentId))
-          .map((e) => e.persistentId)
-          .sort(),
-      ).toEqual(ids);
+      expect([...s.realm.entityManager.wildlifeRespawns.values()]).toEqual(queued);
       const n = new NaturalLandscape(regionalWorld(2026), "thicket");
       expect(n.terrain(hunter().position.wx / 16, hunter().position.wy / 16)).toBe(
         TerrainId.DeepWater,
@@ -204,9 +205,10 @@ it("orcas can eat natural sharks without reciprocal hunts or player meals", () =
     targetId: durableId(shark),
   });
   resolvePredatorCatches(manager, [...manager.entities], wet, []);
+  tickWildlifeRespawns(manager, 120, wet, []);
   const replacement = required(manager.entities.find((e) => e.type === shark.type));
   expect(replacement.naturalSpawnId).toBe("natural-shark");
-  expect(replacement.predator?.home).toEqual({ wx: 100, wy: 100 });
+  expect(replacement.predator?.home).toEqual(replacement.position);
   expect(replacement.predator?.targetId).toBeUndefined();
   expect(orca.predator?.meals).toBe(1);
   expect(manager.entities.filter((e) => e.type === faunaType("fish"))).toHaveLength(0);

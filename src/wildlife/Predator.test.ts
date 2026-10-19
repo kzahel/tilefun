@@ -20,6 +20,8 @@ import { resolvePredatorCatches, startlePredator, updatePredatorAI } from "./pre
 import { createRabbit } from "./Rabbit.js";
 import { startleRabbit } from "./rabbitInteractions.js";
 
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
+
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
@@ -52,19 +54,27 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       const other = manager.spawn(createPredator(p.species, 0, 0));
       Object.assign(required(other.predator), hunter.predator);
       resolvePredatorCatches(manager, [...manager.entities], open, []);
+      tickWildlifeRespawns(manager, 120, open, []);
       const replacement = required(manager.entities.find((e) => e.type === preyType));
       expect(manager.entities.filter((e) => e.type === preyType)).toHaveLength(1);
       expect(replacement.persistentId).not.toBe(prey.persistentId);
       expect(replacement.proceduralId).toBeUndefined();
       expect(replacement.naturalSpawnId).toBe("generated-deer");
       expect(deleted.has("generated-deer")).toBe(true);
-      expect(habitat(replacement).home).toEqual(habitat(prey).home);
+      expect(habitat(replacement).home).toEqual(replacement.position);
+      expect(
+        Math.hypot(
+          replacement.position.wx - prey.position.wx,
+          replacement.position.wy - prey.position.wy,
+        ),
+      ).toBeGreaterThanOrEqual(512);
       if (replacement.deer) expect(replacement.deer.herdId).toBe("herd");
       expect(hunter.predator?.state).toBe("feed");
       expect(hunter.predator?.meals).toBe(1);
       expect(other.predator?.meals).toBe(0);
       manager.remove(replacement.id);
       resolvePredatorCatches(manager, [...manager.entities], open, []);
+      tickWildlifeRespawns(manager, 120, open, []);
       expect(manager.entities.some((e) => e.type === preyType)).toBe(false);
     });
     it("replaces a rabbit in its own habitat and leaves an airborne rabbit alive", () => {
@@ -73,13 +83,15 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       required(prey.rabbit).state = "hop";
       prey.wz = 3;
       resolvePredatorCatches(manager, [...manager.entities], open, []);
+      tickWildlifeRespawns(manager, 120, open, []);
       expect(manager.byId.has(prey.id)).toBe(true);
       required(prey.rabbit).state = "rest";
       prey.wz = 0;
       resolvePredatorCatches(manager, [...manager.entities], open, []);
+      tickWildlifeRespawns(manager, 120, open, []);
       const replacement = required(manager.entities.find((e) => e.rabbit));
       expect(replacement.persistentId).not.toBe(prey.persistentId);
-      expect(replacement.rabbit?.home).toEqual(prey.rabbit?.home);
+      expect(replacement.rabbit?.home).toEqual(replacement.position);
       expect(hunter.predator?.meals).toBe(1);
       expect(manager.entities.filter((e) => e.rabbit)).toHaveLength(1);
     });
@@ -105,6 +117,7 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
     it("retains natural lineage after reload and replaces a second generation exactly once", () => {
       const { manager, hunter, prey } = setup();
       resolvePredatorCatches(manager, [...manager.entities], open, []);
+      tickWildlifeRespawns(manager, 120, open, []);
       const first = required(manager.entities.find((e) => e.type === preyType));
       const saved = encodeActor(first);
       const reloaded = decodeActor(saved) as typeof first;
@@ -119,27 +132,24 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
         targetId: reloaded.persistentId,
       });
       resolvePredatorCatches(manager, [...manager.entities], open, []);
+      tickWildlifeRespawns(manager, 120, open, []);
       const second = required(manager.entities.find((e) => e.type === preyType));
       expect(second.naturalSpawnId).toBe("world-prey");
       expect(second.persistentId).not.toBe(reloaded.persistentId);
       expect(hunter.predator?.meals).toBe(2);
     });
-    it.each(["wall", "water", "height", "no replacement"])(
-      "defers an unsafe catch: %s",
-      (reason) => {
-        const { manager, hunter, prey } = setup();
-        if (reason === "height") prey.wz = 12;
-        const env = {
-          ...open,
-          canOccupy: (_: unknown, point: { wx: number; wy: number }) =>
-            reason === "no replacement" ? Math.hypot(point.wx, point.wy) < 30 : reason !== "wall",
-          isWater: () => reason === "water",
-        };
-        resolvePredatorCatches(manager, [...manager.entities], env, []);
-        expect(manager.byId.has(prey.id)).toBe(true);
-        expect(hunter.predator?.meals).toBe(0);
-      },
-    );
+    it.each(["wall", "water", "height"])("defers an unsafe catch: %s", (reason) => {
+      const { manager, hunter, prey } = setup();
+      if (reason === "height") prey.wz = 12;
+      const env = {
+        ...open,
+        canOccupy: () => reason !== "wall",
+        isWater: () => reason === "water",
+      };
+      resolvePredatorCatches(manager, [...manager.entities], env, []);
+      expect(manager.byId.has(prey.id)).toBe(true);
+      expect(hunter.predator?.meals).toBe(0);
+    });
     it("protects players and companions, respects barriers, and a scare cancels the hunt", () => {
       const hunter = createPredator(p.species, 0, 0);
       const protectedAnimals = [
@@ -238,21 +248,16 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
           await session.step(idle);
         const fed = required(entities().find((e) => e.predator));
         expect(fed.predator?.meals).toBe(1);
-        const replacement = required(entities().find((e) => e.type === preyType));
-        expect(replacement.persistentId).not.toBe(original);
+        expect(entities().some((e) => e.type === preyType)).toBe(false);
+        const pending = [...session.realm.entityManager.wildlifeRespawns.values()];
+        expect(pending).toHaveLength(1);
+        expect(pending[0]?.actor.persistentId).not.toBe(original);
+        expect(pending[0]?.remaining).toBeGreaterThan(59);
         const saved = encodeActor(fed).state.predator;
         await session.reload();
         expect(entities().find((e) => e.type === predatorType(p.species))?.predator).toEqual(saved);
-        expect(
-          entities()
-            .filter((e) => e.type === preyType)
-            .map((e) => e.persistentId),
-        ).toEqual([replacement.persistentId]);
-        session.realm.entityManager.remove(
-          required(entities().find((e) => e.type === preyType)).id,
-        );
-        await session.reload();
-        expect(entities().some((e) => e.type === preyType)).toBe(false);
+        expect([...session.realm.entityManager.wildlifeRespawns.values()]).toEqual(pending);
+        expect(entities().some((e) => e.persistentId === original)).toBe(false);
       } finally {
         await session.close();
       }

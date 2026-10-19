@@ -5783,7 +5783,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1066"
+          "source": "src/server/Realm.ts:1072"
         },
         {
           "system": "Gameplay",
@@ -6673,7 +6673,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1068"
+          "source": "src/server/Realm.ts:1074"
         },
         {
           "system": "Gameplay",
@@ -6771,7 +6771,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1068"
+          "source": "src/server/Realm.ts:1074"
         },
         {
           "system": "Gameplay",
@@ -25489,7 +25489,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1066"
+          "source": "src/server/Realm.ts:1072"
         },
         {
           "system": "Gameplay",
@@ -29199,23 +29199,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:323"
+          "source": "src/server/Realm.ts:329"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1462"
+          "source": "src/server/Realm.ts:1469"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1629"
+          "source": "src/server/Realm.ts:1636"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2307"
+          "source": "src/server/Realm.ts:2337"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2527"
+          "source": "src/server/Realm.ts:2557"
         },
         {
           "system": "Gameplay",
@@ -30039,7 +30039,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2491"
+          "source": "src/server/Realm.ts:2521"
         },
         {
           "system": "Gameplay",
@@ -30853,7 +30853,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1068"
+          "source": "src/server/Realm.ts:1074"
         },
         {
           "system": "Gameplay",
@@ -30955,7 +30955,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1068"
+          "source": "src/server/Realm.ts:1074"
         },
         {
           "system": "Gameplay",

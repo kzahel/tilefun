@@ -8,6 +8,7 @@ import { createFauna, FAUNA_PROFILES } from "./Fauna.js";
 import { canEat, creatureSpecies, FOOD_WEB, HUNTING_DIETS } from "./FoodWeb.js";
 import { createPredator, PREDATOR_PROFILES } from "./Predator.js";
 import { resolvePredatorCatches, updatePredatorAI } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 describe("explicit creature food web", () => {
@@ -47,7 +48,7 @@ describe("explicit creature food web", () => {
     required(deer.wanderAI).following = true;
     expect(canEat(rex, deer)).toBe(false);
   });
-  it("replaces an eaten natural predator, preserves its home and resets its old hunt", () => {
+  it("replaces an eaten natural predator, establishes a distant home and resets its old hunt", () => {
     const manager = new EntityManager();
     const rex = manager.spawn(createPredator("t-rex", 0, 0));
     const panther = manager.spawn(createPredator("panther", 36, 0));
@@ -60,9 +61,10 @@ describe("explicit creature food web", () => {
       targetId: durableId(panther),
     });
     resolvePredatorCatches(manager, [...manager.entities], open, []);
+    tickWildlifeRespawns(manager, 120, open, []);
     const replacement = required(manager.entities.find((e) => e.type === panther.type));
     expect(replacement.naturalSpawnId).toBe("world-panther");
-    expect(replacement.predator?.home).toEqual({ wx: 100, wy: 100 });
+    expect(replacement.predator?.home).toEqual(replacement.position);
     expect(replacement.predator?.packId).toBe("original-group");
     expect(replacement.predator?.targetId).toBeUndefined();
     expect(replacement.predator?.cooldown).toBeGreaterThan(0);

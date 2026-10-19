@@ -133,20 +133,18 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
       expect(h.proceduralId).toContain("fauna-expansion-home:");
       for (let i = 0; i < 1200 && !hunter().predator?.meals; i++) await s.step(idle);
       expect(hunter().predator?.meals).toBeGreaterThan(0);
-      const replacements = entities().filter((e) =>
-        e.naturalSpawnId?.startsWith(`wildlife:expansion-prey:${p.species}:`),
+      const pending = [...s.realm.entityManager.wildlifeRespawns.values()].filter((j) =>
+        j.actor.state.naturalSpawnId?.startsWith(`wildlife:expansion-prey:${p.species}:`),
       );
-      expect(replacements.length).toBeGreaterThan(0);
-      const ids = replacements.map((e) => e.persistentId),
-        meals = hunter().predator?.meals;
+      expect(pending.length).toBeGreaterThan(0);
+      expect(pending.every((j) => j.remaining > 0)).toBe(true);
+      const saved = JSON.parse(JSON.stringify(hunter().predator));
+      const queued = JSON.parse(
+        JSON.stringify([...s.realm.entityManager.wildlifeRespawns.values()]),
+      );
       await s.reload();
-      expect(hunter().predator?.meals).toBe(meals);
-      expect(
-        entities()
-          .filter((e) => ids.includes(e.persistentId))
-          .map((e) => e.persistentId)
-          .sort(),
-      ).toEqual(ids.sort());
+      expect(hunter().predator).toEqual(saved);
+      expect([...s.realm.entityManager.wildlifeRespawns.values()]).toEqual(queued);
     } finally {
       await s.close();
     }

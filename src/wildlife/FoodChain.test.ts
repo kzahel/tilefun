@@ -17,15 +17,21 @@ it.each(["food-web-natural", "food-web-placed"])(
         count = animals().length;
       for (let i = 0; i < 900 && !rex().predator?.meals; i++) {
         await session.step(idle);
-        if (id === "food-web-natural") expect(animals()).toHaveLength(count);
+        if (id === "food-web-natural")
+          expect(animals().length + session.realm.entityManager.wildlifeRespawns.size).toBe(count);
         else expect(animals().length).toBeLessThanOrEqual(count);
       }
       expect(rex().predator?.meals).toBeGreaterThan(0);
       expect(animals().some((e) => e.persistentId === original)).toBe(false);
       const next = animals().find((e) => creatureSpecies(e) === "dire-wolf");
       if (id === "food-web-natural") {
-        expect(next?.naturalSpawnId).toBe(wolf.naturalSpawnId);
-        expect(animals()).toHaveLength(count);
+        expect(
+          next?.naturalSpawnId ??
+            [...session.realm.entityManager.wildlifeRespawns.values()].find(
+              (j) => j.actor.type === wolf.type,
+            )?.actor.state.naturalSpawnId,
+        ).toBe(wolf.naturalSpawnId);
+        expect(animals().length + session.realm.entityManager.wildlifeRespawns.size).toBe(count);
       } else {
         expect(next).toBeUndefined();
         expect(animals().length).toBeLessThan(count);
@@ -40,7 +46,8 @@ it.each(["food-web-natural", "food-web-placed"])(
           .sort(),
       ).toEqual(survivors);
       for (let i = 0; i < 1200; i++) await session.step(idle);
-      if (id === "food-web-natural") expect(animals()).toHaveLength(count);
+      if (id === "food-web-natural")
+        expect(animals().length + session.realm.entityManager.wildlifeRespawns.size).toBe(count);
       else expect(animals().length).toBeLessThan(count);
       await session.reload();
       expect(animals().some((e) => e.persistentId === original)).toBe(false);

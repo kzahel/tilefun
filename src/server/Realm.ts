@@ -107,6 +107,12 @@ import { resolvePredatorCatches, startlePredator } from "../wildlife/predatorAI.
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import { startleRobin } from "../wildlife/robinInteractions.js";
 import { robinTreePerches } from "../wildlife/robinPerches.js";
+import {
+  type PendingWildlifeRespawn,
+  tickWildlifeRespawns,
+  WILDLIFE_RESPAWN_LIMIT,
+  WILDLIFE_RESPAWN_SCOPE,
+} from "../wildlife/WildlifeRespawns.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -537,14 +543,14 @@ export class Realm {
       `[tilefun:realm] addPlayer client=${session.clientId} player.id=${player.id} editorEnabled=${session.editorEnabled} inputQueue=${session.inputQueue.length} worldId=${this.currentWorldId}`,
     );
 
-    // Cancel idle timeout — realm is occupied again
+    // Cancel idle timeout â€” realm is occupied again
     this.idleSince = null;
   }
 
   /**
    * Remove a player from this realm: save per-player data, remove entity,
    * clean up session state.
-   * The session object itself is NOT deleted — it stays in GameServer's global map.
+   * The session object itself is NOT deleted â€” it stays in GameServer's global map.
    */
   removePlayer(clientId: string): void {
     this.treeBrush.forget(clientId);
@@ -718,7 +724,7 @@ export class Realm {
     const preSteppedEntityIds = new Set<number>();
     const landingCarryExcluded = new Set<number>();
 
-    // ── Phase 1: Process player inputs (per-session) ──
+    // â”€â”€ Phase 1: Process player inputs (per-session) â”€â”€
     // Drain each session's input queue and run full per-input simulation steps.
     // Entities stepped here are skipped in Phase 2 to avoid double simulation.
     for (const session of this.sessions.values()) {
@@ -741,7 +747,7 @@ export class Realm {
         continue;
       }
 
-      // ── Mount bookkeeping: auto-dismount if mount entity was removed ──
+      // â”€â”€ Mount bookkeeping: auto-dismount if mount entity was removed â”€â”€
       if (session.gameplaySession.mountId !== null) {
         const mount = this.entityManager.entities.find(
           (e) => e.id === session.gameplaySession.mountId,
@@ -921,7 +927,7 @@ export class Realm {
           this.vehicles.missingInput(session);
           continue;
         }
-        // No input this tick (timing jitter) — apply friction only.
+        // No input this tick (timing jitter) â€” apply friction only.
         // Don't call applyMovementPhysics here: it would set sprite.moving=false,
         // causing animation flicker on the client. Sprite state should only
         // change from actual player input, not from missing-input ticks.
@@ -953,9 +959,9 @@ export class Realm {
       }
     }
 
-    // ── Phase 2: AI + Physics (once, not per-session) ──
+    // â”€â”€ Phase 2: AI + Physics (once, not per-session) â”€â”€
     // Previously this ran inside the per-session loop, meaning N sessions
-    // caused N entity updates per tick — doubling/tripling movement speed.
+    // caused N entity updates per tick â€” doubling/tripling movement speed.
     const activeSessions = [...this.sessions.values()].filter(
       (s) =>
         !storagePaused &&
@@ -1138,7 +1144,7 @@ export class Realm {
           if (entity.resident)
             updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
 
-        // ── TickService.preSimulation ──
+        // â”€â”€ TickService.preSimulation â”€â”€
         this.worldAPI.tick.firePre(stepDt);
 
         for (const service of this.railway?.services.values() ?? [])
@@ -1157,6 +1163,7 @@ export class Realm {
           (tx, ty) => this.world.getBlendBaseAt(tx, ty),
         );
 
+        tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);
         resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
 
         this.traffic?.tick(
@@ -1173,7 +1180,7 @@ export class Realm {
 
         this.vehicles.sync();
 
-        // ── Jump physics for all players + mount detection on landing ──
+        // â”€â”€ Jump physics for all players + mount detection on landing â”€â”€
         for (const session of activeSessions) {
           if (preSteppedEntityIds.has(session.player.id)) continue;
           const p = session.player;
@@ -1217,7 +1224,7 @@ export class Realm {
           );
         }
 
-        // ── Ball physics (gravity, bouncing, entity collision) ──
+        // â”€â”€ Ball physics (gravity, bouncing, entity collision) â”€â”€
         tickBallPhysics(
           this.entityManager,
           stepDt,
@@ -1236,13 +1243,13 @@ export class Realm {
             this.records?.changed(entity);
         }
 
-        // ── TickService.postSimulation ──
+        // â”€â”€ TickService.postSimulation â”€â”€
         this.worldAPI.tick.firePost(stepDt);
 
-        // ── TagService removal detection ──
+        // â”€â”€ TagService removal detection â”€â”€
         this.worldAPI.tags.tick();
 
-        // ── OverlapService detection ──
+        // â”€â”€ OverlapService detection â”€â”€
         this.worldAPI.overlap.tick();
         this.entityManager.simulationEntities = undefined;
         this.propManager.simulationProps = undefined;
@@ -1254,7 +1261,7 @@ export class Realm {
       }
     }
 
-    // ── Phase 3: Spawners (per-session, near each player) ──
+    // â”€â”€ Phase 3: Spawners (per-session, near each player) â”€â”€
     for (const session of this.sessions.values()) {
       if (
         this.options.ambientSpawns === false ||
@@ -1545,8 +1552,8 @@ export class Realm {
         const player = session.player;
         const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
         // Add random jitter so consecutive throws spread out
-        const speedJitter = 1 + ((this.options.random ?? Math.random)() - 0.5) * 0.15; // ±7.5% speed
-        const angleJitter = ((this.options.random ?? Math.random)() - 0.5) * 0.18; // ±~5° direction
+        const speedJitter = 1 + ((this.options.random ?? Math.random)() - 0.5) * 0.15; // Â±7.5% speed
+        const angleJitter = ((this.options.random ?? Math.random)() - 0.5) * 0.18; // Â±~5Â° direction
         const baseAngle = Math.atan2(msg.dirY, msg.dirX) + angleJitter;
         const jitteredSpeed = speed * speedJitter;
         const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
@@ -1694,7 +1701,7 @@ export class Realm {
           maxCx: msg.maxCx,
           maxCy: msg.maxCy,
         };
-        // Don't call updateVisibleChunks here — it uses a single session's
+        // Don't call updateVisibleChunks here â€” it uses a single session's
         // range which unloads chunks that OTHER sessions need, creating
         // invisible collision walls for far-away players. The tick method
         // already computes the union of all sessions' visible ranges and
@@ -1813,6 +1820,29 @@ export class Realm {
 
     await this.saveManager.open();
     const savedMeta = await this.saveManager.loadMeta();
+    const returns = await this.saveManager.loadRecords("meta", WILDLIFE_RESPAWN_SCOPE);
+    if (returns.size > WILDLIFE_RESPAWN_LIMIT)
+      throw new Error("Wildlife return queue exceeds its limit.");
+    for (const [key, value] of returns) {
+      const job = value as PendingWildlifeRespawn;
+      if (
+        !key.startsWith("wildlife-respawn:") ||
+        !job.actor?.state.naturalSpawnId ||
+        !Number.isFinite(job.remaining) ||
+        job.remaining < 0
+      )
+        throw new Error("Invalid wildlife return record.");
+      this.entityManager.wildlifeRespawns.set(job.actor.persistentId, job);
+    }
+    this.entityManager.onWildlifeRespawnChanged = (id, job) => {
+      const key = `wildlife-respawn:${id}`;
+      this.saveManager?.markRecordDirty("meta", key, () => ({
+        collection: "meta",
+        key,
+        scope: WILDLIFE_RESPAWN_SCOPE,
+        ...(job ? { value: structuredClone(job) } : { value: null, deleted: true }),
+      }));
+    };
     const parkingLot = this.options.parking;
     this.parking =
       parkingLot && !this.interior
@@ -2122,7 +2152,7 @@ export class Realm {
       if (mount.sprite) mount.sprite.moving = false;
     }
 
-    // Hop off from riding height — wz is already tracked by resolveParentedPositions
+    // Hop off from riding height â€” wz is already tracked by resolveParentedPositions
     session.player.jumpZ = (session.player.wz ?? 0) - (session.player.groundZ ?? 0);
     session.player.jumpVZ = JUMP_VELOCITY * 0.5;
     delete session.player.noShadow;
@@ -2151,7 +2181,7 @@ export class Realm {
 
     for (const entity of this.entityManager.entities) {
       if (entity.id === player.id) continue;
-      if (entity.id === skipId) continue; // just dismounted — don't re-mount
+      if (entity.id === skipId) continue; // just dismounted â€” don't re-mount
       if (!entity.tags?.has("rideable")) continue;
       // Wildlife mounts require an actual landing on their back, not nearby ground.
       if (entity.fauna && entity.id !== contactId) continue;
@@ -2167,7 +2197,7 @@ export class Realm {
       player.localOffsetX = 0;
       player.localOffsetY = 0;
       // Snap player position to mount immediately (don't wait for
-      // resolveParentedPositions next tick) — avoids camera jump
+      // resolveParentedPositions next tick) â€” avoids camera jump
       player.position.wx = entity.position.wx;
       player.position.wy = entity.position.wy;
       // Visual lift: set wz above mount so the renderer elevates the

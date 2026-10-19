@@ -26,8 +26,8 @@ for (const id of ["food-web-natural", "food-web-placed"])
       await page.getByRole("button", { name: "Pause", exact: true }).click();
       const types = (await animals()).map((e) => e.type).sort();
       if (id === "food-web-natural") {
-        expect(types).toHaveLength(4);
-        expect(types).toContain(predatorType("dire-wolf"));
+        expect(types.length).toBeLessThan(4);
+        expect(types).not.toContain(predatorType("dire-wolf"));
       } else {
         expect(types.length).toBeLessThan(4);
         expect(types).not.toContain(predatorType("dire-wolf"));

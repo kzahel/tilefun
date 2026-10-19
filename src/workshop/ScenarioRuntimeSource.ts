@@ -14,11 +14,13 @@ import foodWeb from "../wildlife/FoodWeb.ts?raw";
 import predators from "../wildlife/Predator.ts?raw";
 import predatorMotion from "../wildlife/PredatorMotion.ts?raw";
 import predatorAI from "../wildlife/predatorAI.ts?raw";
+import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
 
 /** Live behavior reviews include host timing/transport, not just recipe/physics. */
 export const scenarioRuntimeSource = {
   generation,
   predatorAI,
+  wildlifeRespawns,
   predators,
   predatorMotion,
   fierceProfiles,

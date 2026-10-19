@@ -5,6 +5,7 @@ import { decodeActor, durableId, encodeActor } from "../persistence/ActorRecords
 import { createDeer } from "./Deer.js";
 import { createPredator } from "./Predator.js";
 import { resolvePredatorCatches, updatePredatorAI } from "./predatorAI.js";
+import { tickWildlifeRespawns } from "./WildlifeRespawns.js";
 
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 it("joins its own pack's prey, flanks, and rejects another pack's call", () => {
@@ -47,6 +48,7 @@ it.each([true, false])(
     resolvePredatorCatches(manager, [...manager.entities], open, []);
     expect(rex.predator?.meals).toBe(1);
     expect(manager.byId.has(wolf.id)).toBe(false);
+    tickWildlifeRespawns(manager, 120, open, []);
     const replacement = manager.entities.find((e) => e.type === wolf.type);
     if (natural) {
       expect(replacement?.naturalSpawnId).toBe("world-wolf");

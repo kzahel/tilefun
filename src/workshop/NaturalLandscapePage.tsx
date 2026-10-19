@@ -26,6 +26,8 @@ import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { ROBIN_TYPE } from "../wildlife/Robin.js";
+import AnimalBrowser from "./AnimalBrowser.js";
+import { ANIMAL_BROWSER_ENTRIES } from "./AnimalBrowserData.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
@@ -47,6 +49,9 @@ export default function NaturalLandscapePage() {
     () =>
       landscapeProfile(initial.get("landscape")) ??
       (caseId.startsWith("thicket-") ? "thicket" : "balanced"),
+  );
+  const [watchAnimal, setWatchAnimal] = useState(() =>
+    ANIMAL_BROWSER_ENTRIES.some((a) => a.scene === caseId),
   );
   const [paused, setPaused] = useState(false),
     [follow, setFollow] = useState(caseId === "train");
@@ -75,8 +80,8 @@ export default function NaturalLandscapePage() {
   const canvas = useRef<HTMLCanvasElement>(null),
     host = useRef<ScenarioPresentationHost | null>(null);
   const keys = useRef(new Set<string>()),
-    settings = useRef({ paused, follow, zoom, sounds });
-  settings.current = { paused, follow, zoom, sounds };
+    settings = useRef({ paused, follow, zoom, sounds, watchAnimal });
+  settings.current = { paused, follow, zoom, sounds, watchAnimal };
   const custom = caseId === "explore";
   const predatorCase =
     PREDATOR_PROFILES.some((p) => p.species === caseId) ||
@@ -148,7 +153,13 @@ export default function NaturalLandscapePage() {
       terrain: true,
       fixedCamera: (player, alpha) => {
         const train = host.current?.session.view.entities.find((e) => e.type === CURVE_TRAIN);
-        const target = settings.current.follow && train ? train : player;
+        const watched = settings.current.watchAnimal
+          ? ANIMAL_BROWSER_ENTRIES.find((a) => a.scene === caseId)
+          : undefined;
+        const animal = watched
+          ? host.current?.session.view.entities.find((e) => e.type === watched.type)
+          : undefined;
+        const target = animal ?? (settings.current.follow && train ? train : player);
         const p = interpolatePosition(target.position, target.prevPosition, alpha);
         const selected = FAUNA_PROFILES.find((p) => p.species === caseId);
         const ray =
@@ -438,6 +449,7 @@ export default function NaturalLandscapePage() {
     };
   }, [prepared, reset]);
   function change(nextCase: string, nextProfile: typeof profile) {
+    setWatchAnimal(ANIMAL_BROWSER_ENTRIES.some((a) => a.scene === nextCase));
     setCaseId(nextCase);
     setProfile(nextProfile);
     setFollow(nextCase === "train");
@@ -507,6 +519,16 @@ export default function NaturalLandscapePage() {
         around these thickets, between them and through clearings. These temporary worlds leave your
         saved worlds unchanged.
       </p>
+      <AnimalBrowser
+        selected={caseId}
+        onSelect={(scene) => {
+          if (scene === caseId) setReset(reset + 1);
+          change(scene, "thicket");
+          requestAnimationFrame(() =>
+            canvas.current?.scrollIntoView({ block: "center", behavior: "smooth" }),
+          );
+        }}
+      />
       <div
         className="actions"
         style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "end" }}
@@ -543,6 +565,16 @@ export default function NaturalLandscapePage() {
             ))}
           </select>
         </label>
+        {ANIMAL_BROWSER_ENTRIES.some((a) => a.scene === caseId) && (
+          <label>
+            <input
+              type="checkbox"
+              checked={watchAnimal}
+              onChange={(e) => setWatchAnimal(e.target.checked)}
+            />{" "}
+            Follow selected animal
+          </label>
+        )}
         <label>
           Zoom{" "}
           <select
@@ -570,7 +602,7 @@ export default function NaturalLandscapePage() {
         {caseId === "racetrack" ? (
           "City outskirts speedway · Eight cars race around the oval. Walk to the spectator seating, picnic area or track; cars stop for people. Use Arrows/WASD to walk, Space to jump, and E beside a stopped car to drive."
         ) : predatorCase ? (
-          "Hunting playground · Arrows/WASD to walk, Space to jump. Natural prey returns nearby after a meal. Animals you place stay gone when eaten. Throw a ball in the game to interrupt a hunt."
+          "Hunting playground · Arrows/WASD to walk, Space to jump. Eaten natural animals return after 60–120 seconds, far from the meal and away from players. Animals you place stay gone when eaten. Throw a ball in the game to interrupt a hunt."
         ) : (
           <>
             Seed {point.seed} · {point.x}, {point.y} tiles · Arrows/WASD to walk, Space to jump.

@@ -51,6 +51,14 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     mode: "adapter",
   },
   {
+    id: "animal-browser",
+    name: "Animal browser & AI playground",
+    description:
+      "Search animals, sort by date, preview their animations and watch real hunting and wildlife behavior.",
+    url: "workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+    mode: "link",
+  },
+  {
     id: "wildlife-v2",
     name: "Wildlife pilots",
     description:
