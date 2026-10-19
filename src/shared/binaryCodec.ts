@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x01 = FrameMessage (server→client)
+ *   0x04 = FrameMessage (u16 entity types) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x80 = player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -25,7 +25,8 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x01;
+const TAG_FRAME = 0x04;
+const TAG_LEGACY_FRAME = 0x01;
 const TAG_SYNC_CHUNKS = 0x03;
 const TAG_PLAYER_INPUT = 0x80;
 const TAG_JSON = 0xff;
@@ -73,6 +74,8 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
   const view = new DataView(buf);
   const tag = view.getUint8(0);
   if (tag === TAG_FRAME) return decodeFrameMessage(view, buf);
+  if (tag === TAG_LEGACY_FRAME)
+    throw new Error("Legacy entity frame: matching updated client and server builds are required");
   if (tag === TAG_SYNC_CHUNKS) return decodeSyncChunksMessage(view, buf);
   if (tag === TAG_JSON) return decodeJsonFallback(buf) as ServerMessage;
   throw new Error(`Unknown server message tag: 0x${tag.toString(16)}`);
@@ -112,7 +115,7 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
 // Fixed header, velocity, full sprite/AI, booleans, eleven 32-bit fields and lights.
-const MAX_BASELINE_SIZE = 17 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
+const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
 const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
@@ -236,10 +239,10 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   view.setUint32(off, snap.id, true);
   off += 4;
 
-  // entityTypeIndex (u8)
+  // entityTypeIndex (u16)
   const typeIdx = ENTITY_TYPE_TO_INDEX.get(snap.type) ?? 0;
-  view.setUint8(off, typeIdx);
-  off += 1;
+  view.setUint16(off, typeIdx, true);
+  off += 2;
 
   // position (2x f32)
   view.setFloat32(off, snap.position.wx, true);
@@ -347,8 +350,8 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
   const id = view.getUint32(off, true);
   off += 4;
 
-  const typeIdx = view.getUint8(off);
-  off += 1;
+  const typeIdx = view.getUint16(off, true);
+  off += 2;
   const type = indexToEntityType(typeIdx) ?? "unknown";
 
   const wx = view.getFloat32(off, true);

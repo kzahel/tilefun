@@ -49,3 +49,16 @@ in the sortable animal browser and its real shared-engine AI scenes.
   candidates pass. Streaming --assert-ready passes from the main checkout; its
   revision probe requires Git metadata absent from the extracted test snapshot.
   128/196 implemented; 68 remaining. Chimpanzee/orangutan prototypes underway.
+
+- Great-ape checkpoint: chimpanzee/orangutan active with connected knuckle walks,
+  visible body transfer and grooming; distinct proportions, faces and shoulder hair.
+  Natural origin meal replacements remain delayed/distant; placed prey stay finite.
+  Registry expansion exposed a real u8 type overflow (worm4 became ball). Baseline
+  type indices now use u16 and frame tag0x04; old0x01 frames are rejected. Matching
+  endpoint builds remain required. Boundary255/256 and following packet fields
+  roundtrip correctly; deltas unchanged. 4,580 unit passes and five known Windows
+  failures;1,170 focused ecology/source and109 codec/scenario checks;19 browser
+  cases including3 real P2P cases;560 visible previews;784 exact source crops and
+  two byte-identical ten-artifact replays. Type/lint/build/streaming readiness pass.
+  Baseline advances to vehicle schoolbus commit edbb5bda; preserve its inventory.
+  130/196 implemented;66 remaining. Five primates and four fish sources continue.

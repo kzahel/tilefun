@@ -281,8 +281,8 @@ Per-entity delta protocol:
 ### Phase 5: Binary Encoding ✅
 
 Replaced JSON with DataView/ArrayBuffer for hot-path messages. Type-byte
-headers (0x01=Frame, 0x03=SyncChunks, 0x80=player-input, 0xFF=JSON fallback).
-Entity type strings → u8 indices via `entityTypeIndex.ts`. SpriteState packed
+headers (0x04=Frame, 0x03=SyncChunks, 0x80=player-input, 0xFF=JSON fallback).
+Entity type strings → u16 indices via `entityTypeIndex.ts`. SpriteState packed
 into 2-4 bytes, WanderAIState into 3 bytes. Chunk arrays sent as raw bytes.
 
 - **Transport**: Single channel

@@ -1,0 +1,13 @@
+{
+  "identity": "orangutan-roster-v3-pixels-01",
+  "palette": {
+    "B": "#a5653a",
+    "H": "#cc9256",
+    "S": "#cc9256",
+    "F": "#64534a",
+    "M": "#8f7056",
+    "K": "#2d2d2a",
+    "P": "#74614c"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

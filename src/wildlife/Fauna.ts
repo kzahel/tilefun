@@ -6,6 +6,7 @@ import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
+import { GREAT_APE_PROFILES } from "./GreatApes.js";
 import { GROUND_BIRD_PROFILES } from "./GroundBirds.js";
 import { INSECT_PROFILES } from "./Insects.js";
 import { LIZARD_PROFILES } from "./Lizards.js";
@@ -1336,6 +1337,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...MARINE_FAUNA_PROFILES,
   ...FLYING_BIRD_PROFILES,
   ...CONTINUATION_BIRD_PROFILES,
+  ...GREAT_APE_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

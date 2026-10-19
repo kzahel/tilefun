@@ -10,6 +10,16 @@ Owns ongoing transport/replication decisions and gaps. The
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
+## Entity registry beyond 256 types
+
+Wildlife continuation [147](../tactical/147-wildlife-continuation.md) crosses the
+byte-sized registry limit. Baseline type indices now use little-endian u16;
+frame tag 0x04 distinguishes the wider layout. The old 0x01 layout is rejected
+explicitly. One extra byte is sent per full entity baseline; deltas are unchanged.
+Registry capacity is checked at initialization. The 255/256 boundary, following
+baselines/deltas/exits and all registered types are covered by codec regressions.
+All endpoints still require matching builds, including the sorted type registry.
+
 ## Driven-car heading codec
 
 [144](../tactical/144-rolling-car-steering.md) carries optional float32

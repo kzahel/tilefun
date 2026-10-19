@@ -14593,5 +14593,191 @@
         "sha256": "2e4c61687e4ecbf65332de9176c50e41605308ecaa84eaef4b4b92c7eaf210d9"
       }
     ]
+  },
+  {
+    "id": "chimpanzee-roster-v3",
+    "animalId": "chimpanzee",
+    "revision": "roster-v3",
+    "name": "Chimpanzee · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/chimpanzee/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-chimpanzee-roster-v3",
+      "name": "Chimpanzee sheet",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+      "source": "art-source/wildlife-v2/chimpanzee/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-chimpanzee-roster-v3-scene",
+      "name": "Chimpanzee scene",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "1837b26460ed756f2aefbf26941634eb335835e1b27fa383fcb9adb0fbbf0b77",
+      "source": "art-source/wildlife-v2/chimpanzee/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-chimpanzee-roster-v3-contact",
+      "name": "Chimpanzee contact",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2fa04677f0a2fe78a2e6273698d560cbae924345d83cb4d826d3f22fa5801451",
+      "source": "art-source/wildlife-v2/chimpanzee/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/chimpanzee/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/contact-sheet-native.png",
+        "sha256": "2fa04677f0a2fe78a2e6273698d560cbae924345d83cb4d826d3f22fa5801451"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/index.html",
+        "sha256": "ec5bae431f126757f4b044b6ad59ce31bbd8dd8651641a6dc4849024e6b62795"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/pixel-audit.json",
+        "sha256": "d50fdcd2cce43db4f9708a7b8c0ca20f058ad3672cc8210b29035fadefebc52e"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/preview-native.gif",
+        "sha256": "e170e54601f8503bd6786f8dd26a7b494cb42f58269d4ea1edf52bce196aa04b"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/preview.gif",
+        "sha256": "26f7ddd9bd2afde696995c76f033a46623393ce37b221da94baad6018ae6f4f7"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/scene-native.png",
+        "sha256": "1837b26460ed756f2aefbf26941634eb335835e1b27fa383fcb9adb0fbbf0b77"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+        "sha256": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/source-audit.json",
+        "sha256": "385dacd3c5d9a2319cf2c7eb03d2f8a84e901a56c0610dc746efb9988700b4ff"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/sprite.json",
+        "sha256": "af1756b346dbebadc364ad202264df6ac3b956d473745f219572a46d74f0f744"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/travel-native.gif",
+        "sha256": "91074544fb5e870a4dbd5b96ffed7d1ce703594bea363ddc7e898a00037473d3"
+      },
+      {
+        "path": "demos/wildlife-v2/chimpanzee/roster-v3/validation.json",
+        "sha256": "5c5f5a02e78d6ffb2f859c52eab1d2d86bcea68bd1fcdd5c6c9d564087b48180"
+      }
+    ]
+  },
+  {
+    "id": "orangutan-roster-v3",
+    "animalId": "orangutan",
+    "revision": "roster-v3",
+    "name": "Orangutan · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/orangutan/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-orangutan-roster-v3",
+      "name": "Orangutan sheet",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+      "source": "art-source/wildlife-v2/orangutan/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-orangutan-roster-v3-scene",
+      "name": "Orangutan scene",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "8094b70a4fefada0e083a4a6482b192f6bc0f3f9d1b2f3d984ebc11ec19101b6",
+      "source": "art-source/wildlife-v2/orangutan/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-orangutan-roster-v3-contact",
+      "name": "Orangutan contact",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a1804b55bd4ae1351d814d6ecc959780b7faa8333e71f021db7423eb9d49a02c",
+      "source": "art-source/wildlife-v2/orangutan/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/orangutan/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/contact-sheet-native.png",
+        "sha256": "a1804b55bd4ae1351d814d6ecc959780b7faa8333e71f021db7423eb9d49a02c"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/index.html",
+        "sha256": "8c4bb88cd21474ed08b6bba69200a6255ff4b8b21d3f8b30207cb46976181038"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/pixel-audit.json",
+        "sha256": "f76e7ab21fb3ec5571002aa3413000feedf6c2bb43a912171b48feb10a4521fa"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/preview-native.gif",
+        "sha256": "611f6a60428ee4573b49ce6224c490153cb43a873cdac005ff15cc78ae18dbca"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/preview.gif",
+        "sha256": "aba6ef9c46e15467ee4c0cc48575fc99da21ee42f990dac62be75c0cedcf542f"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/scene-native.png",
+        "sha256": "8094b70a4fefada0e083a4a6482b192f6bc0f3f9d1b2f3d984ebc11ec19101b6"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+        "sha256": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/source-audit.json",
+        "sha256": "70ce365c2f925d8aed726eeccd23919079f22c91f52f25f46f9515a16f3990c3"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/sprite.json",
+        "sha256": "a84e31910337ae5a98073b5cb74a07cd8b6cbde6b5266313327fe3fb878145b4"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/travel-native.gif",
+        "sha256": "f9ef90172e3d3a605fa2f5ba5f6cfc51c1630e31fd8c3b062e6a362d07f3a019"
+      },
+      {
+        "path": "demos/wildlife-v2/orangutan/roster-v3/validation.json",
+        "sha256": "050e773899a47bd6c81d33a04490d0963b4a1cfbdfb027bb455c6ee6d7d9fc46"
+      }
+    ]
   }
 ]

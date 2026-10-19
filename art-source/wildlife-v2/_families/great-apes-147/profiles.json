@@ -1,0 +1,46 @@
+{
+  "chimpanzee": {
+    "label": "Chimpanzee",
+    "scale": 0.7,
+    "frameMs": 35,
+    "foreLengths": [
+      1.15,
+      1.5,
+      0.35,
+      0.25
+    ],
+    "shoulderX": 0.62,
+    "shoulderRadius": 0.8,
+    "coat": {
+      "B": "#394342",
+      "H": "#68716a",
+      "S": "#68716a",
+      "F": "#ae9a7c",
+      "M": "#b7a58b",
+      "K": "#222b2d",
+      "P": "#776d5e"
+    }
+  },
+  "orangutan": {
+    "label": "Orangutan",
+    "scale": 0.8,
+    "frameMs": 50,
+    "foreLengths": [
+      1.35,
+      1.7,
+      0.35,
+      0.25
+    ],
+    "shoulderX": 0.7,
+    "shoulderRadius": 0.9,
+    "coat": {
+      "B": "#a5653a",
+      "H": "#cc9256",
+      "S": "#cc9256",
+      "F": "#64534a",
+      "M": "#8f7056",
+      "K": "#2d2d2a",
+      "P": "#74614c"
+    }
+  }
+}

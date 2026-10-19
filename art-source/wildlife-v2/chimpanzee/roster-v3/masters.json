@@ -1,0 +1,13 @@
+{
+  "identity": "chimpanzee-roster-v3-pixels-01",
+  "palette": {
+    "B": "#394342",
+    "H": "#68716a",
+    "S": "#68716a",
+    "F": "#ae9a7c",
+    "M": "#b7a58b",
+    "K": "#222b2d",
+    "P": "#776d5e"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

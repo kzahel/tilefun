@@ -6,18 +6,27 @@
 
 [Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**6 newly completed; 2 in progress; 0 currently blocked; 66 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**8 newly completed; 9 in progress; 0 currently blocked; 57 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
 | Owl | finished-game-active | [Playback](../public/demos/wildlife-v2/owl/roster-v4/index.html) |
-| Chimpanzee | in-progress | New anatomical source prototypes underway; not registered or active. Original gorilla source stays unchanged. |
-| Orangutan | in-progress | New anatomical source prototypes underway; not registered or active. Original gorilla source stays unchanged. |
+| White-faced capuchin | in-progress | [Playback](../public/demos/wildlife-v2/capuchin-monkey/roster-v3/index.html) |
+| Chimpanzee | finished-game-active | [Playback](../public/demos/wildlife-v2/chimpanzee/roster-v3/index.html) |
+| Orangutan | finished-game-active | [Playback](../public/demos/wildlife-v2/orangutan/roster-v3/index.html) |
+| Ring-tailed lemur | in-progress | [Playback](../public/demos/wildlife-v2/ring-tailed-lemur/roster-v3/index.html) |
+| Mandrill | in-progress | [Playback](../public/demos/wildlife-v2/mandrill/roster-v3/index.html) |
+| Proboscis monkey | in-progress | [Playback](../public/demos/wildlife-v2/proboscis-monkey/roster-v3/index.html) |
+| Japanese macaque | in-progress | [Playback](../public/demos/wildlife-v2/japanese-macaque/roster-v3/index.html) |
 | Eagle | finished-game-active | [Playback](../public/demos/wildlife-v2/eagle/roster-v3/index.html) |
 | Hawk | finished-game-active | [Playback](../public/demos/wildlife-v2/hawk/roster-v3/index.html) |
 | Raven | finished-game-active | [Playback](../public/demos/wildlife-v2/raven/roster-v3/index.html) |
 | Crow | finished-game-active | [Playback](../public/demos/wildlife-v2/crow/roster-v3/index.html) |
 | Atlantic puffin | finished-game-active | [Playback](../public/demos/wildlife-v2/atlantic-puffin/roster-v3/index.html) |
+| Ocean sunfish | in-progress | [Playback](../public/demos/wildlife-v2/ocean-sunfish/roster-v3/index.html) |
+| Swordfish | in-progress | [Playback](../public/demos/wildlife-v2/swordfish/roster-v3/index.html) |
+| Pufferfish | in-progress | [Playback](../public/demos/wildlife-v2/pufferfish/roster-v3/index.html) |
+| Anglerfish | in-progress | [Playback](../public/demos/wildlife-v2/anglerfish/roster-v3/index.html) |
 
 ## Current gorilla shoulder study
 
@@ -29,7 +38,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T11:49:52.316Z (19/10/2026, 13:49:52 Berlin).
+Snapshot: 2026-10-19T12:20:41.518Z (19/10/2026, 14:20:41 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

@@ -539,3 +539,7 @@
 
 # Verified pending motion identities, owner-authorized autonomous run 147.
 !owl/roster-v4/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!chimpanzee/roster-v3/*
+!orangutan/roster-v3/*

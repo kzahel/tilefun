@@ -1376,6 +1376,26 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-chimpanzee-provisional-v1",
+      "name": "wildlife chimpanzee provisional v1",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-orangutan-provisional-v1",
+      "name": "wildlife orangutan provisional v1",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -4483,6 +4503,26 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-chimpanzee-roster-v3",
+      "name": "wildlife v2 chimpanzee roster v3",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-orangutan-roster-v3",
+      "name": "wildlife v2 orangutan roster v3",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -27612,6 +27652,42 @@
       ]
     },
     {
+      "id": "sprite:wildlife-chimpanzee-provisional-v1",
+      "sheetId": "wildlife-chimpanzee-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4704,
+        384
+      ],
+      "label": "wildlife-chimpanzee-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-orangutan-provisional-v1",
+      "sheetId": "wildlife-orangutan-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4704,
+        384
+      ],
+      "label": "wildlife-orangutan-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -29627,7 +29703,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:949"
+          "source": "src/wildlife/Fauna.ts:950"
         },
         {
           "system": "Gameplay",
@@ -29639,15 +29715,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:125"
+          "source": "src/wildlife/FoodWeb.ts:127"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:272"
+          "source": "src/wildlife/FoodWeb.ts:274"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:445"
+          "source": "src/wildlife/FoodWeb.ts:447"
         },
         {
           "system": "Gameplay",
@@ -29709,35 +29785,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:25"
+          "source": "src/wildlife/Fauna.ts:26"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:220"
+          "source": "src/wildlife/Fauna.ts:221"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:323"
+          "source": "src/wildlife/FoodWeb.ts:325"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:340"
+          "source": "src/wildlife/FoodWeb.ts:342"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:357"
+          "source": "src/wildlife/FoodWeb.ts:359"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:393"
+          "source": "src/wildlife/FoodWeb.ts:395"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:418"
+          "source": "src/wildlife/FoodWeb.ts:420"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:445"
+          "source": "src/wildlife/FoodWeb.ts:447"
         }
       ]
     },
@@ -29791,23 +29867,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:116"
+          "source": "src/wildlife/FoodWeb.ts:118"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:126"
+          "source": "src/wildlife/FoodWeb.ts:128"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:273"
+          "source": "src/wildlife/FoodWeb.ts:275"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:445"
+          "source": "src/wildlife/FoodWeb.ts:447"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:446"
+          "source": "src/wildlife/FoodWeb.ts:448"
         },
         {
           "system": "Gameplay",
@@ -29853,7 +29929,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:446"
+          "source": "src/wildlife/FoodWeb.ts:448"
         }
       ]
     },
@@ -29899,7 +29975,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:447"
+          "source": "src/wildlife/FoodWeb.ts:449"
         }
       ]
     },
@@ -29945,7 +30021,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:448"
+          "source": "src/wildlife/FoodWeb.ts:450"
         }
       ]
     },
@@ -29991,7 +30067,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:449"
+          "source": "src/wildlife/FoodWeb.ts:451"
         }
       ]
     },
@@ -30149,11 +30225,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:128"
+          "source": "src/wildlife/FoodWeb.ts:130"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:445"
+          "source": "src/wildlife/FoodWeb.ts:447"
         },
         {
           "system": "Gameplay",
@@ -30203,7 +30279,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:445"
+          "source": "src/wildlife/FoodWeb.ts:447"
         },
         {
           "system": "Gameplay",

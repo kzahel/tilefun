@@ -1,0 +1,17 @@
+{
+  "identity": "chimpanzee-roster-v3-pixels-01",
+  "poses": 196,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.072463035583496,
+    "up": 1.072463035583496,
+    "left": 1.2291269302368164,
+    "right": 1.2291269302368164
+  },
+  "rootTravelPixelsPerCycle": 15.68,
+  "chaseRootTravelPixelsPerCycle": 15.68
+}

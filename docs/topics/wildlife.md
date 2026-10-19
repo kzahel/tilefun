@@ -52,8 +52,27 @@ Validation: **4,544 unit passes**, five known Windows failures, ten skipped;
 four-facing previews; four byte-identical banks and 3,872 exact source crops.
 Typecheck, isolated lint/build, 1,423-candidate full Chromium manifest and
 streaming readiness pass. **128 of 196 implemented; 68 remaining.** Chimpanzee
-and orangutan source prototypes are next; neither is registered or active yet.
+and orangutan follow in the next checkpoint below.
 
+
+Third checkpoint: chimpanzee and orangutan now have natural woodland homes,
+editor placement and browser entries. Narrow chimp torso/large ears and long-armed
+orangutan cheek flanges/throat pouch/shoulder hair use connected fixed-volume
+knuckle walks, body weight transfer and one-sided grooming. Ground behavior uses
+shared Fauna; climbing/brachiation remain future work. Large predator diets include
+both apes. Natural prey retain delayed distant replacements; placed prey are finite.
+
+Adding the apes crossed the 256-type binary registry limit: worm4 wrapped to ball.
+Baseline type indices now use u16, with frame tag 0x04 and explicit rejection of
+the legacy layout. All endpoints require matching builds; deltas are unchanged.
+The [network topic](multiplayer-networking.md) owns the wire contract.
+Validation: **4,580 unit passes**, five known Windows failures, ten skipped;
+1,170 focused ape/ecology and 109 codec/scenario checks; 19 browser cases including
+real P2P host/join, fragmented transfer and reconnect; **560** visible previews;
+two byte-identical banks and 784 exact crops. Typecheck/lint/build and streaming
+readiness pass. All new pixels remain pending human review.
+**130 of 196 implemented; 66 remaining.** Five remaining primates have audited
+unregistered banks; four distinct fish prototypes are also in progress.
 
 ## Small-animal roadkill
 

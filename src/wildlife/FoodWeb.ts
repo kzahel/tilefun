@@ -62,6 +62,8 @@ const antelopes = [
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
 const pasture = [
+  "chimpanzee",
+  "orangutan",
   "beaver",
   "capybara",
   "koala",

@@ -1,5 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { CONTINUATION_BIRD_PROFILES } from "../src/wildlife/ContinuationBirds.js";
+import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
@@ -33,9 +34,14 @@ test("browses animated animals by name, family and dates, then runs their real A
   await expect(preview).toHaveAttribute("data-ready", "true");
   await page.getByLabel("Find animal", { exact: true }).fill("");
   await page.getByLabel("Animal family", { exact: true }).selectOption("Primates");
-  await expect(results.locator("article")).toHaveCount(1);
-  await expect(results.locator("h3")).toHaveText("Silverback gorilla");
-  await results.getByRole("button", { name: "Watch AI", exact: true }).click();
+  await expect(results.locator("article")).toHaveCount(
+    ANIMAL_BROWSER_ENTRIES.filter((animal) => animal.family === "Primates").length,
+  );
+  await results
+    .locator("article")
+    .filter({ has: page.getByRole("heading", { name: "Silverback gorilla", exact: true }) })
+    .getByRole("button", { name: "Watch AI", exact: true })
+    .click();
   await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue("gorilla");
   await expect(page.getByLabel("Natural landscape playground")).toHaveAttribute(
     "data-ready",
@@ -121,7 +127,7 @@ for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) 
   });
 }
 
-for (const animal of CONTINUATION_BIRD_PROFILES) {
+for (const animal of [...CONTINUATION_BIRD_PROFILES, ...GREAT_APE_PROFILES]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
   }) => {
@@ -131,6 +137,12 @@ for (const animal of CONTINUATION_BIRD_PROFILES) {
     await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
     const card = page.locator(`[data-animal="${animal.species}"]`);
     await expect(card.locator("canvas")).toHaveAttribute("data-ready", "true");
+    if (!animal.hop) {
+      await page.getByLabel("Preview animation", { exact: true }).selectOption("action");
+      await expect(card.locator("canvas")).toHaveAttribute("data-clip", "action");
+      const frame = await card.locator("canvas").getAttribute("data-frame");
+      await expect.poll(() => card.locator("canvas").getAttribute("data-frame")).not.toBe(frame);
+    }
     await card.getByRole("button", { name: "Watch AI", exact: true }).click();
     await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(animal.species);
     const stage = page.getByLabel("Natural landscape playground");
@@ -151,7 +163,10 @@ for (const animal of CONTINUATION_BIRD_PROFILES) {
       .poll(
         async () =>
           (await poses()).some(
-            (p) => p.visible && p.z > 2 && before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
+            (p) =>
+              p.visible &&
+              (animal.hop ? p.z > 2 : p.z === 0) &&
+              before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
           ),
         { timeout: 12000, intervals: [30] },
       )
