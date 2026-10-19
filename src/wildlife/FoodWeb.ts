@@ -7,6 +7,11 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = [
+  "pelican",
+  "blue-footed-booby",
+  "great-frigatebird",
+  "ruby-throated-hummingbird",
+
   "owl",
   "hawk",
   "eagle",
@@ -114,7 +119,7 @@ const smallGroundHunters = ["mongoose", "honey-badger", "fossa", "white-nosed-co
 const smallerCats = ["cheetah", "lynx", "bobcat"] as const;
 const felids = ["jaguar", "leopard", ...smallerCats] as const;
 
-/** Explicit game food web. Direction means hunter â†’ prey, never inferred from mass.
+/** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
   swordfish: ["fish", "pufferfish", "anglerfish", "octopus"],

@@ -1,0 +1,15 @@
+{
+  "identity": "blue-footed-booby-roster-v3-pixels-01",
+  "palette": {
+    "B": "#e2e4d5",
+    "H": "#8b7f67",
+    "C": "#f0ead7",
+    "M": "#5e574c",
+    "T": "#67abc1",
+    "R": "#c5bca0",
+    "N": "#192b30",
+    "K": "#23323a",
+    "E": "#e0d4a5"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

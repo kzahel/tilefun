@@ -895,20 +895,28 @@
     "pelican": {
       "name": "Pelican",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ]
     },
     "blue-footed-booby": {
       "name": "Blue-footed booby",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ]
     },
     "sparrow": {
       "name": "Sparrow",
@@ -995,20 +1003,28 @@
     "ruby-throated-hummingbird": {
       "name": "Ruby-throated hummingbird",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ]
     },
     "great-frigatebird": {
       "name": "Great frigatebird",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ]
     },
     "ocean-sunfish": {
       "name": "Ocean sunfish",
@@ -1256,23 +1272,35 @@
     "crocodile": {
       "name": "Crocodile",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:26:00Z",
+      "evidence": [
+        "Distinct splayed quadruped anatomy source in progress; not active or registered."
+      ]
     },
     "alligator": {
       "name": "Alligator",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:26:00Z",
+      "evidence": [
+        "Distinct splayed quadruped anatomy source in progress; not active or registered."
+      ]
     },
     "komodo-dragon": {
       "name": "Komodo dragon",
       "family": "Reptiles & amphibians",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:26:00Z",
+      "evidence": [
+        "Distinct splayed quadruped anatomy source in progress; not active or registered."
+      ]
     },
     "salamander": {
       "name": "Fire salamander",
@@ -1471,6 +1499,16 @@
         "pangolin"
       ],
       "validation": "4803 unit passes, five known Windows failures and ten skipped;120 focused source/ecology/codec/authority checks;31 real Canvas/GPU browser cases and616 visible previews. Five ten-artifact byte-identical banks and1640 exact native/3x crops. Typecheck/isolated lint/build and1504candidate full Chromium manifest pass. Grounded walking/foraging; curling, burrowing and sentinel rearing remain future work."
+    },
+    {
+      "utc": "2026-10-19T13:30:33.385566Z",
+      "completed": [
+        "pelican",
+        "blue-footed-booby",
+        "great-frigatebird",
+        "ruby-throated-hummingbird"
+      ],
+      "validation": "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
     }
   ]
 }

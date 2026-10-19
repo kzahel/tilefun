@@ -563,3 +563,9 @@
 !aardvark/roster-v3/*
 !armadillo/roster-v3/*
 !pangolin/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!pelican/roster-v3/*
+!blue-footed-booby/roster-v3/*
+!great-frigatebird/roster-v3/*
+!ruby-throated-hummingbird/roster-v3/*

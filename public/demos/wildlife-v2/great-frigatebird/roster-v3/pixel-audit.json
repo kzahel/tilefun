@@ -1,0 +1,21 @@
+{
+  "identity": "great-frigatebird-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.3189239501953125,
+    "up": 0.5524635314941406,
+    "left": 0.30188655853271484,
+    "right": 0.43749332427978516
+  },
+  "physicalHop": {
+    "duration": 0.8,
+    "push": 0.08,
+    "land": 0.72,
+    "height": 12
+  }
+}

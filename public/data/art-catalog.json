@@ -1536,6 +1536,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-pelican-provisional-v1",
+      "name": "wildlife pelican provisional v1",
+      "image": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-blue-footed-booby-provisional-v1",
+      "name": "wildlife blue footed booby provisional v1",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-great-frigatebird-provisional-v1",
+      "name": "wildlife great frigatebird provisional v1",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "name": "wildlife ruby throated hummingbird provisional v1",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -4803,6 +4843,46 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-pelican-roster-v3",
+      "name": "wildlife v2 pelican roster v3",
+      "image": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-blue-footed-booby-roster-v3",
+      "name": "wildlife v2 blue footed booby roster v3",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-great-frigatebird-roster-v3",
+      "name": "wildlife v2 great frigatebird roster v3",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ruby-throated-hummingbird-roster-v3",
+      "name": "wildlife v2 ruby throated hummingbird roster v3",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -28220,6 +28300,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-pelican-provisional-v1",
+      "sheetId": "wildlife-pelican-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-pelican-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-blue-footed-booby-provisional-v1",
+      "sheetId": "wildlife-blue-footed-booby-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3280,
+        320
+      ],
+      "label": "wildlife-blue-footed-booby-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-great-frigatebird-provisional-v1",
+      "sheetId": "wildlife-great-frigatebird-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-great-frigatebird-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ruby-throated-hummingbird-provisional-v1",
+      "sheetId": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-ruby-throated-hummingbird-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -30235,7 +30387,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:953"
+          "source": "src/wildlife/Fauna.ts:954"
         },
         {
           "system": "Gameplay",
@@ -30243,19 +30395,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:27"
+          "source": "src/wildlife/FoodWeb.ts:32"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:145"
+          "source": "src/wildlife/FoodWeb.ts:150"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:300"
+          "source": "src/wildlife/FoodWeb.ts:305"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:473"
+          "source": "src/wildlife/FoodWeb.ts:478"
         },
         {
           "system": "Gameplay",
@@ -30317,35 +30469,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:29"
+          "source": "src/wildlife/Fauna.ts:30"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:224"
+          "source": "src/wildlife/Fauna.ts:225"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:351"
+          "source": "src/wildlife/FoodWeb.ts:356"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:368"
+          "source": "src/wildlife/FoodWeb.ts:373"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:385"
+          "source": "src/wildlife/FoodWeb.ts:390"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:421"
+          "source": "src/wildlife/FoodWeb.ts:426"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:446"
+          "source": "src/wildlife/FoodWeb.ts:451"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:473"
+          "source": "src/wildlife/FoodWeb.ts:478"
         }
       ]
     },
@@ -30395,27 +30547,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:28"
+          "source": "src/wildlife/FoodWeb.ts:33"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:133"
+          "source": "src/wildlife/FoodWeb.ts:138"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:146"
+          "source": "src/wildlife/FoodWeb.ts:151"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:301"
+          "source": "src/wildlife/FoodWeb.ts:306"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:473"
+          "source": "src/wildlife/FoodWeb.ts:478"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:474"
+          "source": "src/wildlife/FoodWeb.ts:479"
         },
         {
           "system": "Gameplay",
@@ -30461,7 +30613,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:474"
+          "source": "src/wildlife/FoodWeb.ts:479"
         }
       ]
     },
@@ -30507,7 +30659,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:475"
+          "source": "src/wildlife/FoodWeb.ts:480"
         }
       ]
     },
@@ -30553,7 +30705,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:476"
+          "source": "src/wildlife/FoodWeb.ts:481"
         }
       ]
     },
@@ -30599,7 +30751,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:477"
+          "source": "src/wildlife/FoodWeb.ts:482"
         }
       ]
     },
@@ -30753,15 +30905,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:29"
+          "source": "src/wildlife/FoodWeb.ts:34"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:148"
+          "source": "src/wildlife/FoodWeb.ts:153"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:473"
+          "source": "src/wildlife/FoodWeb.ts:478"
         },
         {
           "system": "Gameplay",
@@ -30807,11 +30959,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:30"
+          "source": "src/wildlife/FoodWeb.ts:35"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:473"
+          "source": "src/wildlife/FoodWeb.ts:478"
         },
         {
           "system": "Gameplay",

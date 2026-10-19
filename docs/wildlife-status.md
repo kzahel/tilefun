@@ -6,7 +6,7 @@
 
 [Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**22 newly completed; 9 in progress; 0 currently blocked; 43 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**22 newly completed; 8 in progress; 0 currently blocked; 40 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -27,20 +27,19 @@
 | Hawk | finished-game-active | [Playback](../public/demos/wildlife-v2/hawk/roster-v3/index.html) |
 | Raven | finished-game-active | [Playback](../public/demos/wildlife-v2/raven/roster-v3/index.html) |
 | Crow | finished-game-active | [Playback](../public/demos/wildlife-v2/crow/roster-v3/index.html) |
-| Flamingo | in-progress | Source/animation work |
-| Shoebill | in-progress | Source/animation work |
-| Pelican | in-progress | [Playback](../public/demos/wildlife-v2/pelican/roster-v3/index.html) |
-| Blue-footed booby | in-progress | [Playback](../public/demos/wildlife-v2/blue-footed-booby/roster-v3/index.html) |
-| Secretary bird | in-progress | Source/animation work |
-| Marabou stork | in-progress | Source/animation work |
-| Great blue heron | in-progress | Source/animation work |
+| Flamingo | in-progress | [Playback](../public/demos/wildlife-v2/flamingo/roster-v3/index.html) |
+| Shoebill | in-progress | [Playback](../public/demos/wildlife-v2/shoebill/roster-v3/index.html) |
+| Secretary bird | in-progress | [Playback](../public/demos/wildlife-v2/secretary-bird/roster-v3/index.html) |
+| Marabou stork | in-progress | [Playback](../public/demos/wildlife-v2/marabou-stork/roster-v3/index.html) |
+| Great blue heron | in-progress | [Playback](../public/demos/wildlife-v2/great-blue-heron/roster-v3/index.html) |
 | Atlantic puffin | finished-game-active | [Playback](../public/demos/wildlife-v2/atlantic-puffin/roster-v3/index.html) |
-| Ruby-throated hummingbird | in-progress | [Playback](../public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/index.html) |
-| Great frigatebird | in-progress | [Playback](../public/demos/wildlife-v2/great-frigatebird/roster-v3/index.html) |
 | Ocean sunfish | finished-game-active | [Playback](../public/demos/wildlife-v2/ocean-sunfish/roster-v3/index.html) |
 | Swordfish | finished-game-active | [Playback](../public/demos/wildlife-v2/swordfish/roster-v3/index.html) |
 | Pufferfish | finished-game-active | [Playback](../public/demos/wildlife-v2/pufferfish/roster-v3/index.html) |
 | Anglerfish | finished-game-active | [Playback](../public/demos/wildlife-v2/anglerfish/roster-v3/index.html) |
+| Crocodile | in-progress | Source/animation work |
+| Alligator | in-progress | Source/animation work |
+| Komodo dragon | in-progress | Source/animation work |
 
 ## Current gorilla shoulder study
 
@@ -52,7 +51,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T13:16:05.841Z (19/10/2026, 15:16:05 Berlin).
+Snapshot: 2026-10-19T13:30:46.502Z (19/10/2026, 15:30:46 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

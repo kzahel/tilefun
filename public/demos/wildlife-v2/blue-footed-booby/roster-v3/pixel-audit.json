@@ -1,0 +1,21 @@
+{
+  "identity": "blue-footed-booby-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.3207588195800781,
+    "up": 0.5575203895568848,
+    "left": 0.3032827377319336,
+    "right": 0.43960094451904297
+  },
+  "physicalHop": {
+    "duration": 0.8,
+    "push": 0.08,
+    "land": 0.72,
+    "height": 10
+  }
+}

@@ -17,6 +17,7 @@ import { MARINE_FAUNA_PROFILES } from "./MarineFauna.js";
 import { PANDA_PROFILE } from "./Panda.js";
 import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
 import { PET_ART } from "./PetVariants.js";
+import { SEABIRD_PROFILES } from "./Seabirds.js";
 import { SHELLED_AMPHIBIAN_PROFILES } from "./ShelledAmphibians.js";
 import { SMALL_MAMMAL_PROFILES } from "./SmallMammals.js";
 import { UNGULATE_PROFILES } from "./Ungulates.js";
@@ -357,7 +358,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
         loop: true,
       },
     ],
-    // The back is reachable with the default 150px/s jump and 500px/sÂ² gravity.
+    // The back is reachable with the default 150px/s jump and 500px/s squared gravity.
     // The head remains visual; support/collision represents the saddle height.
     body: [34, 14, 18],
     speed: 20,
@@ -1344,6 +1345,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...GROUND_PRIMATE_PROFILES,
   ...DISTINCT_FISH_FAUNA_PROFILES,
   ...GROUND_SPECIALIST_PROFILES,
+  ...SEABIRD_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

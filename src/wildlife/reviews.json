@@ -16081,5 +16081,377 @@
         "sha256": "4c23648c4371a713e13d70d0787f797b4004146272b9ccd4071c6a1c1e56e1e6"
       }
     ]
+  },
+  {
+    "id": "pelican-roster-v3",
+    "animalId": "pelican",
+    "revision": "roster-v3",
+    "name": "Pelican · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/pelican/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-pelican-roster-v3",
+      "name": "Pelican sheet",
+      "image": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+      "source": "art-source/wildlife-v2/pelican/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-pelican-roster-v3-scene",
+      "name": "Pelican scene",
+      "image": "demos/wildlife-v2/pelican/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "0d1060ae31337c67a3f9c5afe3a1418b3dcec11e62a948f980cf1b54388a51bb",
+      "source": "art-source/wildlife-v2/pelican/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-pelican-roster-v3-contact",
+      "name": "Pelican contact",
+      "image": "demos/wildlife-v2/pelican/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "dade65f46f56f8e7329547e7c18ebe47a3ab73d67a03df7b5ae1c1b225539cac",
+      "source": "art-source/wildlife-v2/pelican/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/pelican/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/contact-sheet-native.png",
+        "sha256": "dade65f46f56f8e7329547e7c18ebe47a3ab73d67a03df7b5ae1c1b225539cac"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/index.html",
+        "sha256": "214650ee42a0ebf15c2c6ab5ceca8bf0653624f7eecb70be8bb1f3702f926738"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/pixel-audit.json",
+        "sha256": "0cb4531bf38db8190d6f141957022f8c7b18e726ea92fb9c923a09ff6b486237"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/preview-native.gif",
+        "sha256": "7975c05828b2fa84a50db91fa179af33e8ba0f1dd62f8555452ebc8848006406"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/preview.gif",
+        "sha256": "df594a2a71a852b307557021aa6381ce39c3d1deb08c48f585c0250916afee49"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/scene-native.png",
+        "sha256": "0d1060ae31337c67a3f9c5afe3a1418b3dcec11e62a948f980cf1b54388a51bb"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+        "sha256": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/source-audit.json",
+        "sha256": "5ef90e8601f7f875e2032331cf1a165005288b042fd4305df0421a3488da2e4f"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/sprite.json",
+        "sha256": "8ea93471f6884fbbda9b6bcd7d85a6a61f7eb074f79417765308d1efd0e57ea1"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/travel-native.gif",
+        "sha256": "f9df3c0b750769274d2a915fc7dc69202f4660ec305c797b46cffe0f6edb3235"
+      },
+      {
+        "path": "demos/wildlife-v2/pelican/roster-v3/validation.json",
+        "sha256": "c80b2039f201edc29bd69bcd18de62362affcc0249a80b370f74e808c36b113e"
+      }
+    ]
+  },
+  {
+    "id": "blue-footed-booby-roster-v3",
+    "animalId": "blue-footed-booby",
+    "revision": "roster-v3",
+    "name": "Blue-footed booby · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/blue-footed-booby/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-blue-footed-booby-roster-v3",
+      "name": "Blue-footed booby sheet",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+      "source": "art-source/wildlife-v2/blue-footed-booby/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-blue-footed-booby-roster-v3-scene",
+      "name": "Blue-footed booby scene",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/scene-native.png",
+      "width": 480,
+      "height": 120,
+      "tileSize": 16,
+      "fingerprint": "4e679e561badb975e80959c9c765879c1de6062c3b21da0ccb8ca23024ebac3a",
+      "source": "art-source/wildlife-v2/blue-footed-booby/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-blue-footed-booby-roster-v3-contact",
+      "name": "Blue-footed booby contact",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/contact-sheet-native.png",
+      "width": 640,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "85dd82da33d5e6e72d9854794b4eec5e57152054f1d0d1530dfc1599117b6904",
+      "source": "art-source/wildlife-v2/blue-footed-booby/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/blue-footed-booby/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/contact-sheet-native.png",
+        "sha256": "85dd82da33d5e6e72d9854794b4eec5e57152054f1d0d1530dfc1599117b6904"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/index.html",
+        "sha256": "bc5034409808deecd8f997791c1a951cba3d0337e6802f2481b03958da612ed4"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/pixel-audit.json",
+        "sha256": "756c48aa0604e26965e6c2f7d324b67f2b2b4cf0a9de7f9bbac9a09680025b48"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/preview-native.gif",
+        "sha256": "c48acaf604c1556f7913c056b6e1023ed619389f450c6fb278e1996207e2d1ad"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/preview.gif",
+        "sha256": "e9e07dbc9cd99bd349cea5832ab53af9e6550ca33330a4435bbe2a48d7de0a24"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/scene-background.png",
+        "sha256": "a7f30bc2e9efebec81a044dcc8138f534286df18b1e8ad240df5a092817453e3"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/scene-native.png",
+        "sha256": "4e679e561badb975e80959c9c765879c1de6062c3b21da0ccb8ca23024ebac3a"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+        "sha256": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/source-audit.json",
+        "sha256": "b482597c3b934035622dd3410d84b9e80408ccff5091a51f1ea7032d3ba27ec3"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/sprite.json",
+        "sha256": "c842b3e7435ee1405862284942bd803003c52a31b027dd41decc3a706c6b0b50"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/travel-native.gif",
+        "sha256": "5fdc4b48b72aa8adba47031582a11ffdea72c429ac824018808f993db8680821"
+      },
+      {
+        "path": "demos/wildlife-v2/blue-footed-booby/roster-v3/validation.json",
+        "sha256": "8bceff77ad8dfeb8fe46435fdb1a19a39c4de3a36056e4463fc791967a225a4d"
+      }
+    ]
+  },
+  {
+    "id": "great-frigatebird-roster-v3",
+    "animalId": "great-frigatebird",
+    "revision": "roster-v3",
+    "name": "Great frigatebird · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/great-frigatebird/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-great-frigatebird-roster-v3",
+      "name": "Great frigatebird sheet",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+      "source": "art-source/wildlife-v2/great-frigatebird/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-great-frigatebird-roster-v3-scene",
+      "name": "Great frigatebird scene",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "04a6f504d038e8daf4bb66c21aea2d36d3088d54ef59b459d0d1f533c09c6899",
+      "source": "art-source/wildlife-v2/great-frigatebird/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-great-frigatebird-roster-v3-contact",
+      "name": "Great frigatebird contact",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "08635cb645877c6291ebfd190a512cf2fab45ccfaec24fbeca79c6456a5921c0",
+      "source": "art-source/wildlife-v2/great-frigatebird/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/great-frigatebird/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/contact-sheet-native.png",
+        "sha256": "08635cb645877c6291ebfd190a512cf2fab45ccfaec24fbeca79c6456a5921c0"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/index.html",
+        "sha256": "2c3edd6b1176216a4448cfa311cebce28fdcca11146230f533b1cbd1bfa876e0"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/pixel-audit.json",
+        "sha256": "3d9cff1f9e05f836e262af02e56c34c773eea05151a122d7824f3054dc2b6474"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/preview-native.gif",
+        "sha256": "dc2e403baae08a5757bd736dcb0ee899fa16d828c85fa066349bdee296efa96a"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/preview.gif",
+        "sha256": "521dde885d3ebc529d56676db0069977b74a4228602db715c369c289ed1efb4d"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/scene-native.png",
+        "sha256": "04a6f504d038e8daf4bb66c21aea2d36d3088d54ef59b459d0d1f533c09c6899"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+        "sha256": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/source-audit.json",
+        "sha256": "a92b1551cc5046606b054b571686c105110da5832223ae5deba8846e6c834b54"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/sprite.json",
+        "sha256": "78b0f3d476ba6d26597e6806d5470196faf7077423a550daf8acfc16c099736b"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/travel-native.gif",
+        "sha256": "4c26e2fc5f788fac0d46c7672bd8b90b4e440b42793b524768a94976b826c5ef"
+      },
+      {
+        "path": "demos/wildlife-v2/great-frigatebird/roster-v3/validation.json",
+        "sha256": "ac031f8e379d277c6684e0f5f223710854cb059a8b88f06a776fce7286998708"
+      }
+    ]
+  },
+  {
+    "id": "ruby-throated-hummingbird-roster-v3",
+    "animalId": "ruby-throated-hummingbird",
+    "revision": "roster-v3",
+    "name": "Ruby-throated hummingbird · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-ruby-throated-hummingbird-roster-v3",
+      "name": "Ruby-throated hummingbird sheet",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-ruby-throated-hummingbird-roster-v3-scene",
+      "name": "Ruby-throated hummingbird scene",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "c3a5ef3fc803143cf5975464dc9e359cf040847beef9d837cc2256f362063923",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-ruby-throated-hummingbird-roster-v3-contact",
+      "name": "Ruby-throated hummingbird contact",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "dddfd81ddff59e5b66bb5afbab229122992c3a95980c48adae9e5e9eb3fc30a2",
+      "source": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/contact-sheet-native.png",
+        "sha256": "dddfd81ddff59e5b66bb5afbab229122992c3a95980c48adae9e5e9eb3fc30a2"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/index.html",
+        "sha256": "20d7058cdfda8ca566120485d95dbb559200dc3031d7816e2d3d60dc4610c525"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/pixel-audit.json",
+        "sha256": "725cac03c1c88619db7a18d5522854d021890dffdff7f62a0c01926b6dfdeb7e"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/preview-native.gif",
+        "sha256": "2bd7aafcc027d75b09ea0d6de93baabce9e9034a8c3a23a3f77281976d7c3069"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/preview.gif",
+        "sha256": "9afba29e8b6f01202a1a6748b169339c92feca5a0b0ac12e2bb948e5a7a85f51"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/scene-background.png",
+        "sha256": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/scene-native.png",
+        "sha256": "c3a5ef3fc803143cf5975464dc9e359cf040847beef9d837cc2256f362063923"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+        "sha256": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/source-audit.json",
+        "sha256": "4262439aeb9ac6480e64813ffa763c395cbae6516617579e8a03aa020a8f4152"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sprite.json",
+        "sha256": "54332e55b23826699f485f5941a985544a2fe962f2204acc8f18ae182d7d00c2"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/travel-native.gif",
+        "sha256": "bdd7841e7bfaaad9a51f6e2a680444786af56730a51b0c5fb5f22ad7c745d627"
+      },
+      {
+        "path": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/validation.json",
+        "sha256": "c6f613a2f157a78382e6e6963cc45cba4e021e01ed3ab852f022d8500b4c4399"
+      }
+    ]
   }
 ]

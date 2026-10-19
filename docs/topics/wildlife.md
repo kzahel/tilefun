@@ -126,6 +126,23 @@ full Chromium manifest pass. All new art stays pending human review.
 integration; five tall-bird prototypes have connected three-link necks and planted
 biped gaits and are undergoing proportion refinement.
 
+
+Seventh checkpoint: pelican, blue-footed booby, great frigatebird and ruby-throated
+hummingbird now spawn naturally and join editor placement and the lab browser.
+Distinct bills/pouches, blue webbed feet, forked tail, gorget and wing proportions
+use connected shoulder/elbow feathers and tucking fixed-link legs. Denser source
+keys and independent eighth-pose audits preserve continuous leg planes. Physical
+landing-to-landing flights use shared authority; dry-ground homes are deliberate.
+Swimming, open-air navigation and sustained hummingbird hovering are future work.
+Large hunters can eat them after landing; natural-only delayed births remain.
+Validation: **4,871 unit passes**, five known Windows failures, ten skipped;
+60 focused checks; **26 browser cases**, including **632 visible previews**;
+four byte-identical banks and 1,312 exact native/3x crops. Typecheck, isolated
+lint/build and 1,524-candidate full Chromium manifest pass. Exact art pending review.
+**148 of 196 implemented; 48 remaining.** Five tall-bird banks have exact source
+playback evidence; three distinct reptile hunters are in source refinement.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted
