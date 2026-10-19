@@ -53,7 +53,7 @@ export async function installRtcProbe(page: Page): Promise<void> {
         if (!(event.data instanceof ArrayBuffer)) return;
         probe.bytes += event.data.byteLength;
         const bytes = new DataView(event.data);
-        if (bytes.byteLength < 19 || bytes.getUint8(0) !== 0x01) return;
+        if (bytes.byteLength < 19 || bytes.getUint8(0) !== 0x04) return;
         if (label === "sync") {
           probe.syncFrames++;
           return;

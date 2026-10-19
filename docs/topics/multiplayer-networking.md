@@ -19,6 +19,8 @@ explicitly. One extra byte is sent per full entity baseline; deltas are unchange
 Registry capacity is checked at initialization. The 255/256 boundary, following
 baselines/deltas/exits and all registered types are covered by codec regressions.
 All endpoints still require matching builds, including the sorted type registry.
+The native RTC delivery probe also recognizes `0x04`, so frame counters and
+held-baseline world-transition checks exercise the current wire layout.
 
 ## Driven-car heading codec
 
