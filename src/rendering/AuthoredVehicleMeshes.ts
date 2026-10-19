@@ -1,3 +1,4 @@
+import { ORIGINAL_VEHICLES } from "../traffic/OriginalVehicles.js";
 import fits from "./vehicle-mesh-fits.json" with { type: "json" };
 
 /** Fixed native side-height calibration under the actual x,y-z game camera. */
@@ -16,6 +17,7 @@ export interface AuthoredVehicleMesh {
   readonly batchPreserveParts?: readonly string[];
 }
 export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
+  ...ORIGINAL_VEHICLES.map((vehicle) => ({ vehicle: vehicle.id, ...vehicle.mesh })),
   ...([1, 2, 3, 4, 5, 6] as const).map((number) => {
     const revision = number <= 2 ? "v7" : "v1";
     return {

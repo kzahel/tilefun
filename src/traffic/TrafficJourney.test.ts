@@ -78,5 +78,5 @@ it("all admitted vehicle families turn on actual generated roads with stable roo
     expect(scene.player.wz, model).toBe(height);
   }
   // The current city boulevard admits the folded ladder truck as well.
-  expect(admitted).toBe(44);
+  expect(admitted).toBe(TRAFFIC_MODELS.length);
 }, 120000);

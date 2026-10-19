@@ -1,15 +1,15 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe v3 appearance accepted 2026-10-19. Beetle, school bus and pickup are queued follow-on experiments; gameplay integration is pending.",
+  "gate": "Red coupe appearance accepted and shared gameplay integrated. Beetle, school bus and pickup are queued follow-on experiments.",
   "vehicles": [
     {
       "id": "rosso-coupe",
       "name": "Red sports coupe",
       "family": "Low sports car",
       "priority": 1,
-      "status": "appearance-accepted",
+      "status": "integrated",
       "authorization": "Current red-car pipeline pilot only",
-      "next": "Commit final v3 asset/pipeline; integrate entity spawning and automatic road traffic in a separate implementation step",
+      "next": "Use Edit > Vehicles > Red sports coupe or encounter ordinary generated-road traffic; next pipeline examples are Beetle, school bus and pickup",
       "candidate": "a-reduced-projection--mid-fenders-v3",
       "ownerFeedback": "2026-10-19: good looks better; requested final asset commit"
     },

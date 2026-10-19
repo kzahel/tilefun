@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
+import { ORIGINAL_VEHICLES } from "../traffic/OriginalVehicles.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { AUTHORED_VEHICLE_MESHES } from "./AuthoredVehicleMeshes.js";
 
@@ -17,6 +18,11 @@ it("registers every source type exactly once and consumes its latest retained ex
   expect(AUTHORED_VEHICLE_MESHES).toHaveLength(VEHICLE_MODELS.length);
   expect(new Set(AUTHORED_VEHICLE_MESHES.map((d) => d.assetId)).size).toBe(VEHICLE_MODELS.length);
   for (const definition of AUTHORED_VEHICLE_MESHES) {
+    const original = ORIGINAL_VEHICLES.find((vehicle) => vehicle.id === definition.vehicle);
+    if (original) {
+      expect(definition).toEqual({ vehicle: original.id, ...original.mesh });
+      continue;
+    }
     const bundle = latest.get(definition.vehicle);
     expect(bundle, definition.vehicle).toBeDefined();
     expect(definition.path).toBe(bundle?.glb.replace(/^public\//, ""));

@@ -19,8 +19,10 @@ Original vehicles beyond the source bank have their own
 [topic and queue](original-vehicles.md). [141](../tactical/141-sports-car-style-experiments.md)
 compares initial art routes; [142](../tactical/142-red-car-low-poly-pipeline.md)
 now refines the preferred guide-finished red coupe into low-poly GLBs and reusable
-instructions. This study adds no source-bank row or game integration; the 45-set
-counts below continue to describe the existing sprite ports.
+instructions. [145](../tactical/145-original-coupe-gameplay.md) then integrates
+the owner-authorized original coupe with its own additive catalog, matching sprite
+fallback and normal spawning/traffic. The 45-set counts below still describe the
+existing sprite ports; the combined gameplay roster now has 46 own-model types.
 
 The inventory is the 45 unique `vehicleId` values in
 [`vehicles-v1.json`](../../src/traffic/vehicles-v1.json): 180 directional views.

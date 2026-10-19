@@ -5,7 +5,8 @@ red coupe in [142](tactical/142-red-car-low-poly-pipeline.md), derived from the
 owner-preferred approach 3 in [141](tactical/141-sports-car-style-experiments.md).
 This is a red-car pilot with reusable stages, not a validated automatic generator
 for arbitrary vehicles. The owner accepted corrected v3's appearance on 2026-10-19;
-other families remain queued, and gameplay integration is pending.
+other families remain queued. [145](tactical/145-original-coupe-gameplay.md)
+integrates the accepted car with shared spawning, traffic and sprite fallback.
 
 ## What each stage owns
 
@@ -164,3 +165,12 @@ Update `art-source/vehicle-bake/roster.json` first, then run
 activation separately. A promising original-car prototype does not change the
 existing 45-set sprite-port inventory. After the owner agrees to the red-car
 result, the next transferability tests are Beetle, school bus and pickup.
+
+For an accepted original's gameplay delivery, explicitly run
+`python scripts/vehicle-bake/export-runtime.py`. Retain the exact reviewed GLB
+under the runtime asset directory, a cardinal game-camera sprite sheet with the
+shared frame/origin contract, measured collision bounds and handling, and their
+provenance. Register it in the additive original catalog rather than changing
+the immutable source sprite bank. Verify editor placement, normal automatic road
+selection, driving/reload, live GPU use and failed/disabled-mesh fallback through
+the shared game/lab paths. Builds consume retained outputs without regenerating.

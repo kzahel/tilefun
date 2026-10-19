@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [145 — Original coupe gameplay](145-original-coupe-gameplay.md) | Delivered: original catalog, editor spawning, matching fallback, rolling driving and automatic road traffic; [original vehicles](../topics/original-vehicles.md) |
 | [144 Rolling car steering](144-rolling-car-steering.md) | Complete: shared signed rolling turns, persistent/replicated heading, Deck acceptance and prediction/render parity |
 | [143 Small-animal roadkill](143-small-animal-roadkill.md) | Delivered: driven car/train contact, inert fading remains and durable deaths; full unit/browser and streaming checks pass |
 | [142 Red car low-poly pipeline](142-red-car-low-poly-pipeline.md) | In progress: YA texture/geometry experiments, actual-GLB review and reusable original-vehicle queue; other cars await owner agreement |

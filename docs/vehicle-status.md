@@ -2,15 +2,15 @@
 
 Generated from [the roster](../art-source/vehicle-bake/roster.json) by `node scripts/vehicle-bake/status.mjs`.
 
-**1 appearance-accepted · 3 backlog · 4 idea.**
+**1 integrated · 3 backlog · 4 idea.**
 
-Red coupe v3 appearance accepted 2026-10-19. Beetle, school bus and pickup are queued follow-on experiments; gameplay integration is pending.
+Red coupe appearance accepted and shared gameplay integrated. Beetle, school bus and pickup are queued follow-on experiments.
 
 [Current red-car pilot](tactical/142-red-car-low-poly-pipeline.md) · [Pipeline topic](topics/original-vehicles.md)
 
 | Priority | Vehicle | Family | State | Next step |
 | ---: | --- | --- | --- | --- |
-| 1 | Red sports coupe | Low sports car | appearance-accepted | Commit final v3 asset/pipeline; integrate entity spawning and automatic road traffic in a separate implementation step |
+| 1 | Red sports coupe | Low sports car | integrated | Use Edit > Vehicles > Red sports coupe or encounter ordinary generated-road traffic; next pipeline examples are Beetle, school bus and pickup |
 | 2 | Beetle-style compact | Rounded compact | backlog | Test rounded roof/fenders and curved glass with the selected pipeline |
 | 3 | Yellow school bus | School bus | backlog | Test long body, repeated windows, stripes, asymmetric doors and wheelbase |
 | 4 | Pickup truck | Pickup | backlog | Test cab/bed separation, open cargo bed and larger tires |

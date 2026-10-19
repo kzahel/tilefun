@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: owner accepted corrected red-coupe appearance; gameplay integration pending.
+Status: red coupe integrated and validated in editor, traffic, Canvas and GPU.
 Updated: 2026-10-19.
 
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
@@ -31,11 +31,19 @@ feedback for GLB SHA-256
 `05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64`.
 Frozen review snapshots keep their original review-time metadata.
 
-The coupe currently has **no gameplay spawn entry or automatic road traffic**.
-It is registered only as a Workshop authoring/review candidate. Gameplay vehicle
-definitions and traffic selection still derive from `src/traffic/vehicles-v1.json`.
-Integration needs entity/visual registration, collision dimensions, native fallback
-and road selection/handling validation. The asset commit does not activate it.
+The owner then explicitly authorized gameplay integration, commit and push.
+[145](../tactical/145-original-coupe-gameplay.md) registers **Red sports coupe** in
+Edit → Vehicles, the shared Traffic playground and normal automatic road selection.
+`src/traffic/original-vehicles.json` owns its additive definition; the immutable
+source bank remains 45 types/180 views. The combined gameplay roster is 46 types,
+45 eligible for ordinary road traffic (raised ladder firetruck remains excluded).
+Its exact reviewed GLB is copied to the normal runtime asset directory with a
+matching four-view game-camera sprite fallback. Physical bounds are 82×36×19px,
+road-width admission is 84px, and shared sporty handling is 156px/s. Existing
+collision, driving, roof support, streaming and save paths handle the new type.
+The combined rolling-steering implementation uses its measured 57.4px turning
+radius. Final Canvas/GPU checks include forward/reverse rolling turns, stopped
+heading, placement, boarding, save/reload/deletion and failed-mesh fallback.
 
 ## Pipeline invariants
 

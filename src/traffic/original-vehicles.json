@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "vehicles": [
+    {
+      "id": "rosso-coupe",
+      "name": "Red sports coupe",
+      "sprite": "assets/vehicles/rosso-coupe-v1.png",
+      "mesh": {
+        "assetId": "rosso-coupe-authored-v3",
+        "path": "assets/models/vehicles/rosso-coupe-v3.glb",
+        "radius": 64,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 156,
+        "acceleration": 300,
+        "pushSpeed": 44,
+        "pushWeight": 120
+      },
+      "views": [
+        {
+          "id": "original-vehicle:rosso-coupe:south",
+          "vehicleId": "rosso-coupe",
+          "direction": "south",
+          "rect": [78, 94, 36, 87],
+          "metadata": {
+            "name": "Red sports coupe · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [18, 91.0],
+            "footprint": [-18.0, -82, 36, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 36,
+                "height": 82,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:rosso-coupe:north",
+          "vehicleId": "rosso-coupe",
+          "direction": "north",
+          "rect": [78, 321, 36, 84],
+          "metadata": {
+            "name": "Red sports coupe · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [18, 88.0],
+            "footprint": [-18.0, -82, 36, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 36,
+                "height": 82,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:rosso-coupe:west",
+          "vehicleId": "rosso-coupe",
+          "direction": "west",
+          "rect": [56, 561, 81, 46],
+          "metadata": {
+            "name": "Red sports coupe · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [40, 49.0],
+            "footprint": [-41.0, -36, 82, 36],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 36,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -18.0
+          }
+        },
+        {
+          "id": "original-vehicle:rosso-coupe:east",
+          "vehicleId": "rosso-coupe",
+          "direction": "east",
+          "rect": [55, 785, 81, 45],
+          "metadata": {
+            "name": "Red sports coupe · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [41, 49.0],
+            "footprint": [-41.0, -36, 82, 36],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 36,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -18.0
+          }
+        }
+      ]
+    }
+  ]
+}

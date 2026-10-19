@@ -27,6 +27,11 @@ Check upper tire coverage beneath real fenders independently of clearance. Inspe
 far-side crowns in elevated and game views; avoid exposed tires and isolated raised
 caps that spoil the body silhouette. The coupe coverage diagnostic is sampled
 geometry evidence and does not replace this visual check.
+For an owner-authorized original's gameplay integration, follow tactical 145 and
+the pipeline's runtime export step: exact reviewed GLB, matching game-camera
+cardinal fallback, measured physical bounds and shared catalog registration.
+Keep original entries separate from the immutable source bank; qualify ordinary
+editor/traffic, save/reload and failed-mesh fallback through game and lab paths.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

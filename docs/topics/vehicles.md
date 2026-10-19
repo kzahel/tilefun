@@ -8,6 +8,18 @@ The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversio
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
 This is separate from the approved sprite bank and vehicle gameplay behavior.
 
+## Original red sports coupe
+
+[145](../tactical/145-original-coupe-gameplay.md) adds **Red sports coupe** to
+Edit → Vehicles and ordinary generated-road traffic, plus the shared Traffic
+playground selector. It is `vehicle-v1:rosso-coupe`: an owner-authorized original
+alongside the immutable 45-type sprite bank, bringing gameplay to 46 vehicle types.
+The exact 2,299-triangle mesh and its matching cardinal fallback share the game
+camera; Canvas, disabled/failed/loading meshes preserve the same car. Conservative
+82×36×19px bounds and ordinary 84px road admission use existing authority paths;
+sporty driving is 156px/s with existing Fast and Reverse controls. Traffic remains
+bounded and selected normally, so a coupe need not appear at every road arrival.
+
 ## Game-camera proportions and contact
 
 [130](../tactical/130-vehicle-game-camera-fit.md) fits all 45 model side heights to

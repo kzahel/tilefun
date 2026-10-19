@@ -2,6 +2,7 @@ import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { Direction } from "../entities/Entity.js";
 import { RoadType } from "../road/RoadType.js";
+import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
@@ -126,6 +127,7 @@ const vehicleNames: Record<string, string> = {
 export const VEHICLE_PALETTE: EntityPaletteEntry[] = VEHICLE_MODELS.map((model) => {
   const color = model.replace("unindexed-sedan-", "");
   const label =
+    originalVehicle(model)?.name ??
     vehicleNames[model] ??
     (model.startsWith("compact-")
       ? `${compactColors[Number(model.slice(8)) - 1]} car`

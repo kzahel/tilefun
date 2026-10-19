@@ -4,6 +4,7 @@ import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/co
 import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
+import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
@@ -83,7 +84,7 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
   })),
   ...VEHICLE_MODELS.map((id) => ({
     key: `vehicle-v1:${id}`,
-    path: `assets/vehicles/${id}-v1.png`,
+    path: originalVehicle(id)?.sprite ?? `assets/vehicles/${id}-v1.png`,
     w: 192,
     h: 224,
   })),

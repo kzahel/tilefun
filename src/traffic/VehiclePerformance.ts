@@ -1,3 +1,5 @@
+import { originalVehicle } from "./OriginalVehicles.js";
+
 /** Shared gameplay tuning, independent of immutable art/collision snapshots. Units: world px/s. */
 export interface VehiclePerformance {
   speed: number;
@@ -23,6 +25,8 @@ const truck: VehiclePerformance = { speed: 80, acceleration: 104, pushSpeed: 72,
 export const TRAIN_PUSH = { pushSpeed: 80, pushWeight: 1000 };
 export function vehiclePerformance(type: string): VehiclePerformance {
   const model = type.replace(/^vehicle-v1:/, "");
+  const original = originalVehicle(model);
+  if (original) return original.performance;
   if (model.startsWith("bus-")) return bus;
   if (model.startsWith("garbage-truck-")) return truck;
   if (model.startsWith("fire-truck-")) return { ...truck, speed: 88 };
