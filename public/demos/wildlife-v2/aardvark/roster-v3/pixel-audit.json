@@ -1,0 +1,17 @@
+{
+  "identity": "aardvark-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5508650243163515,
+    "up": 1.7833907238904985,
+    "left": 1.9653307848044008,
+    "right": 1.9653307848044008
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

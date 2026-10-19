@@ -110,6 +110,22 @@ full Chromium manifest pass. All new art remains pending human review.
 **139 of 196 implemented; 57 remaining.** Five ground-specialist banks are ready
 for runtime integration; four more flying-bird prototypes are underway.
 
+Sixth checkpoint: meerkat, giant anteater, aardvark, armadillo and pangolin now
+spawn naturally, support editor placement and appear in the browser. Distinct
+snouts/ears/markings, the anteater's bushy tail and shoulder slash, eight closed
+armadillo armor bands and 58 closed pangolin body/tail scales are editable volumes.
+Buried fixed-length limbs, planted feet, linked tails and visible body paint motion
+are audited. Ordinary shared ground walking, foraging, escape and persistence are
+implemented; curling, burrowing and meerkat sentinel rearing remain future work.
+Explicit prey rows retain the natural/placed replacement policy.
+Validation: **4,803 unit passes**, five known Windows failures, ten skipped;
+120 focused checks; **31 browser cases / 616 visible previews**; five byte-identical
+banks and 1,640 exact crops. Typecheck, isolated lint/build and the 1,504-candidate
+full Chromium manifest pass. All new art stays pending human review.
+**144 of 196 implemented; 52 remaining.** Four new flying-bird banks are ready for
+integration; five tall-bird prototypes have connected three-link necks and planted
+biped gaits and are undergoing proportion refinement.
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

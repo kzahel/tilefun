@@ -30,6 +30,7 @@ const birds = [
   "seagull",
 ] as const;
 const small = [
+  "meerkat",
   "salamander",
   "newt",
   "axolotl",
@@ -69,6 +70,10 @@ const groundPrimates = [
   "japanese-macaque",
 ] as const;
 const pasture = [
+  "giant-anteater",
+  "aardvark",
+  "armadillo",
+  "pangolin",
   ...groundPrimates,
   "chimpanzee",
   "orangutan",
@@ -128,6 +133,7 @@ export const HUNTING_DIETS = {
     "pigeon",
   ],
   eagle: [
+    "meerkat",
     "capuchin-monkey",
     "ring-tailed-lemur",
     "mouse",

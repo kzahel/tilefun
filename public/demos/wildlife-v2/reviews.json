@@ -15616,5 +15616,470 @@
         "sha256": "030591380978d49515a689d8c385c08ff90db4f153dc82f3ddb9e08864af8446"
       }
     ]
+  },
+  {
+    "id": "meerkat-roster-v3",
+    "animalId": "meerkat",
+    "revision": "roster-v3",
+    "name": "Meerkat · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/meerkat/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-meerkat-roster-v3",
+      "name": "Meerkat sheet",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200",
+      "source": "art-source/wildlife-v2/meerkat/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-meerkat-roster-v3-scene",
+      "name": "Meerkat scene",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "9e884a3bc8a11112379a527abbe0ea73d836a943ac628d7b9e52fdf44c4bb6dc",
+      "source": "art-source/wildlife-v2/meerkat/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-meerkat-roster-v3-contact",
+      "name": "Meerkat contact",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ba4e91d4884823cac26fec980916bc9566cf43be64e0174021c8bd70e4b4d63e",
+      "source": "art-source/wildlife-v2/meerkat/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/meerkat/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/contact-sheet-native.png",
+        "sha256": "ba4e91d4884823cac26fec980916bc9566cf43be64e0174021c8bd70e4b4d63e"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/index.html",
+        "sha256": "a1e021b4038515bb0f642d6320a6600ccdb4f5df884977e8f81d043f6bace365"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/pixel-audit.json",
+        "sha256": "712a63aba593f7f9eb6ee070be0b57ff6ad257ff09f9078cc93102b3b8f8e6fc"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/preview-native.gif",
+        "sha256": "4bac7f48b65b666733a80543141a28a74062069c32b37fed998f588bef72054e"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/preview.gif",
+        "sha256": "20fc137357a9373a7b6bc6c9f280c24d592ad56ccd7ea744ae3631135ac3d5f7"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/scene-native.png",
+        "sha256": "9e884a3bc8a11112379a527abbe0ea73d836a943ac628d7b9e52fdf44c4bb6dc"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+        "sha256": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/source-audit.json",
+        "sha256": "b0c5c93530df7f3582c6e89caf4b3af0887adfedbb6d7ebe8d953c7829d92014"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/sprite.json",
+        "sha256": "31c3c29847a86cbb26ba692194e2475e959a97cd791e729efd1a7e1d0bd90c48"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/travel-native.gif",
+        "sha256": "0a92dc045c09a3e9a6dd6b8065a81f3ba7f7f3659035244a22888a4d56fb1e10"
+      },
+      {
+        "path": "demos/wildlife-v2/meerkat/roster-v3/validation.json",
+        "sha256": "31fdd527343401a3166b997b2f8483f3d57ff0d8904591b582017608e1e007d9"
+      }
+    ]
+  },
+  {
+    "id": "giant-anteater-roster-v3",
+    "animalId": "giant-anteater",
+    "revision": "roster-v3",
+    "name": "Giant anteater · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giant-anteater/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-giant-anteater-roster-v3",
+      "name": "Giant anteater sheet",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+      "source": "art-source/wildlife-v2/giant-anteater/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-giant-anteater-roster-v3-scene",
+      "name": "Giant anteater scene",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "a214265b4fd668817e9a2a60542d055d3066aa204bd6decb99a51ab6f448bb64",
+      "source": "art-source/wildlife-v2/giant-anteater/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-giant-anteater-roster-v3-contact",
+      "name": "Giant anteater contact",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "f5c07e96badc5c06098ea7d2987f680f50cbb83df50251a4555b552884a1e889",
+      "source": "art-source/wildlife-v2/giant-anteater/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/giant-anteater/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/contact-sheet-native.png",
+        "sha256": "f5c07e96badc5c06098ea7d2987f680f50cbb83df50251a4555b552884a1e889"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/index.html",
+        "sha256": "74e87b6bbad543ecfafd9a1a259e739dbf951745355faa4ae396dfbcdec27449"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/pixel-audit.json",
+        "sha256": "883160d42e9a3bc22afd5a8ef9486fe9faa2208698e67d32fd5c9cc03b6b5a15"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/preview-native.gif",
+        "sha256": "a91b9973edb0f37e8b746e271d99d6c8ce55170f98eb3237e0ded1c8d1f39221"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/preview.gif",
+        "sha256": "2aed2229b8961c7a128571609f9168ec8e339316a3663b8d987434477953e755"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/scene-background.png",
+        "sha256": "6632d41e5131bfc5af45c392964749c4bfe24672124c8362a01d1b0031b88521"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/scene-native.png",
+        "sha256": "a214265b4fd668817e9a2a60542d055d3066aa204bd6decb99a51ab6f448bb64"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+        "sha256": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/source-audit.json",
+        "sha256": "8c59b52323a7159906ad2a20b50a600b47a38e44d609921c46cd8955d5292ae5"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/sprite.json",
+        "sha256": "ae76d699a702a8d7291dbc81016082e8963e2e1e9024fa2d82004de719184a87"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/travel-native.gif",
+        "sha256": "8a324c1186c542036f957d4f71349fbb2ae8a388a881dbaf98e2ca10a6ae0b6c"
+      },
+      {
+        "path": "demos/wildlife-v2/giant-anteater/roster-v3/validation.json",
+        "sha256": "8e137e410f4f97c35d324f63d6c41e499117ce15eac0faad9e3a8482bcdc6ae3"
+      }
+    ]
+  },
+  {
+    "id": "aardvark-roster-v3",
+    "animalId": "aardvark",
+    "revision": "roster-v3",
+    "name": "Aardvark · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/aardvark/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-aardvark-roster-v3",
+      "name": "Aardvark sheet",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+      "source": "art-source/wildlife-v2/aardvark/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-aardvark-roster-v3-scene",
+      "name": "Aardvark scene",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "dcf443e4269b9f111677d8f536ed8ba24a447818d6c181e689fdf1108914f838",
+      "source": "art-source/wildlife-v2/aardvark/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-aardvark-roster-v3-contact",
+      "name": "Aardvark contact",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cc9c545d04efac6737e797421b33a87848003c17f996a458b172defbebf5a84e",
+      "source": "art-source/wildlife-v2/aardvark/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/aardvark/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/contact-sheet-native.png",
+        "sha256": "cc9c545d04efac6737e797421b33a87848003c17f996a458b172defbebf5a84e"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/index.html",
+        "sha256": "fe7ec56c0b33daaa175b635edfa853247b0f029270f7493c6ff07f3faa11b775"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/pixel-audit.json",
+        "sha256": "105ed35836c46a22b0ecd5f99449ddf552f8477cf8043db91db7f3111e75517e"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/preview-native.gif",
+        "sha256": "2eef3fb6ba2e49f6ecd270ffa272b362d02debde673f5dbc46b3b9db55ce257e"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/preview.gif",
+        "sha256": "3494fde1c02080b884cff421b8bdf5db1ccb521695184cd0258e0d7b8846dca0"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/scene-native.png",
+        "sha256": "dcf443e4269b9f111677d8f536ed8ba24a447818d6c181e689fdf1108914f838"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+        "sha256": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/source-audit.json",
+        "sha256": "2accae4dcc9fbdb84235233e1bfd602a140f9199a1394f1305a3af48eb00dd73"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/sprite.json",
+        "sha256": "8f142b3c80d25eb91c2768b22465792e8906cec8f2d7a3bcaf459f81bb4da217"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/travel-native.gif",
+        "sha256": "cacdf28fb9b9cbb764c12dee61ed263ef1278546d498796848d6709013f46776"
+      },
+      {
+        "path": "demos/wildlife-v2/aardvark/roster-v3/validation.json",
+        "sha256": "fbee8ab74056073a104ccc1eb61faa26d978404e8be797524c501e899c87defd"
+      }
+    ]
+  },
+  {
+    "id": "armadillo-roster-v3",
+    "animalId": "armadillo",
+    "revision": "roster-v3",
+    "name": "Armadillo · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/armadillo/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-armadillo-roster-v3",
+      "name": "Armadillo sheet",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe",
+      "source": "art-source/wildlife-v2/armadillo/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-armadillo-roster-v3-scene",
+      "name": "Armadillo scene",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "b202c1ffedbc296935bd5038b1ef16c9c9e4fdb87ac56cc3d49c67785ac3c007",
+      "source": "art-source/wildlife-v2/armadillo/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-armadillo-roster-v3-contact",
+      "name": "Armadillo contact",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "54fecc38cc65ff7bdaa7f1ec04ad1d32c18153b0ea6bc0067367fce1bbe47194",
+      "source": "art-source/wildlife-v2/armadillo/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/armadillo/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/contact-sheet-native.png",
+        "sha256": "54fecc38cc65ff7bdaa7f1ec04ad1d32c18153b0ea6bc0067367fce1bbe47194"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/index.html",
+        "sha256": "a0e6e05155221e6529a7e52f55f5c377e7a0f448571c0a509f58a2bb19005ce5"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/pixel-audit.json",
+        "sha256": "6f0d66a869f229d8ab617936622042cfe1898d7f5b990825b73ea80d9af4105c"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/preview-native.gif",
+        "sha256": "3aea82bfef6c6c7b04073414722f8a54e99c87f4ae9f3adcddb556c805f04957"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/preview.gif",
+        "sha256": "df970dd83f9f548b3698a12644e46624bb32c6674791fdf34bcb44a10d37e8c5"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/scene-native.png",
+        "sha256": "b202c1ffedbc296935bd5038b1ef16c9c9e4fdb87ac56cc3d49c67785ac3c007"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+        "sha256": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/source-audit.json",
+        "sha256": "df1034626cd26f296ca33d0ef3d8e1c6091d0354770839a723523b84c3ae6ad3"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/sprite.json",
+        "sha256": "ff092a440cb548031bd90e5f2c1efdd1b3150c47f3bdc504f325ea854b40d014"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/travel-native.gif",
+        "sha256": "db6d608466db38f9b6f790c9b85ba756fdf4719168df32e9c727e27a4d37dde0"
+      },
+      {
+        "path": "demos/wildlife-v2/armadillo/roster-v3/validation.json",
+        "sha256": "0bdce5f0c9976ed09d42add14e7dd8a1935db85fa2a999442478c1d6cc6ab9ab"
+      }
+    ]
+  },
+  {
+    "id": "pangolin-roster-v3",
+    "animalId": "pangolin",
+    "revision": "roster-v3",
+    "name": "Pangolin · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/pangolin/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-pangolin-roster-v3",
+      "name": "Pangolin sheet",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
+      "source": "art-source/wildlife-v2/pangolin/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-pangolin-roster-v3-scene",
+      "name": "Pangolin scene",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "b4e37991c764676d4af332f8ff39c68852a408110bbfc8eb2be13969663087e7",
+      "source": "art-source/wildlife-v2/pangolin/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-pangolin-roster-v3-contact",
+      "name": "Pangolin contact",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "948a77a507ade28b8daf91532f4f6e0e83a0aa28bc20b898ac6f8c69d33aeba5",
+      "source": "art-source/wildlife-v2/pangolin/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/pangolin/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/contact-sheet-native.png",
+        "sha256": "948a77a507ade28b8daf91532f4f6e0e83a0aa28bc20b898ac6f8c69d33aeba5"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/index.html",
+        "sha256": "7e512717379d2e635d5922090f2cd31fe61dc69bd298bc32abbe6ae38b1eddc6"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/pixel-audit.json",
+        "sha256": "ef7f79a471c919a745437bc6a677b76a2d5aff11bbb26ed0f84515ce76e35902"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/preview-native.gif",
+        "sha256": "0ce89088cd729066302f7c9d0e6a8bec18a7346a52294d317f7a70ac1aa825af"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/preview.gif",
+        "sha256": "e8b52163be3c5bec82a6bf58c02e90f842c050b70656d8bf0bcff458cc7edd70"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/scene-native.png",
+        "sha256": "b4e37991c764676d4af332f8ff39c68852a408110bbfc8eb2be13969663087e7"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+        "sha256": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/source-audit.json",
+        "sha256": "547fae2e0ce523dfee046695a37690c5bf0b737381cf068e101637e2ea344fa8"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/sprite.json",
+        "sha256": "5f4a03c08be530ac4f3501c8fd2b84ab0af7a191c8092208fd4611d0a75dd5d0"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/travel-native.gif",
+        "sha256": "e6cd28264f0221f39905d6e45833a80a518953ef65057a459038430042e93c06"
+      },
+      {
+        "path": "demos/wildlife-v2/pangolin/roster-v3/validation.json",
+        "sha256": "4c23648c4371a713e13d70d0787f797b4004146272b9ccd4071c6a1c1e56e1e6"
+      }
+    ]
   }
 ]

@@ -6,7 +6,7 @@
 
 [Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**17 newly completed; 9 in progress; 0 currently blocked; 48 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**22 newly completed; 9 in progress; 0 currently blocked; 43 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -18,20 +18,25 @@
 | Mandrill | finished-game-active | [Playback](../public/demos/wildlife-v2/mandrill/roster-v3/index.html) |
 | Proboscis monkey | finished-game-active | [Playback](../public/demos/wildlife-v2/proboscis-monkey/roster-v3/index.html) |
 | Japanese macaque | finished-game-active | [Playback](../public/demos/wildlife-v2/japanese-macaque/roster-v3/index.html) |
-| Meerkat | in-progress | [Playback](../public/demos/wildlife-v2/meerkat/roster-v3/index.html) |
-| Giant anteater | in-progress | [Playback](../public/demos/wildlife-v2/giant-anteater/roster-v3/index.html) |
-| Aardvark | in-progress | [Playback](../public/demos/wildlife-v2/aardvark/roster-v3/index.html) |
-| Armadillo | in-progress | [Playback](../public/demos/wildlife-v2/armadillo/roster-v3/index.html) |
-| Pangolin | in-progress | [Playback](../public/demos/wildlife-v2/pangolin/roster-v3/index.html) |
+| Meerkat | finished-game-active | [Playback](../public/demos/wildlife-v2/meerkat/roster-v3/index.html) |
+| Giant anteater | finished-game-active | [Playback](../public/demos/wildlife-v2/giant-anteater/roster-v3/index.html) |
+| Aardvark | finished-game-active | [Playback](../public/demos/wildlife-v2/aardvark/roster-v3/index.html) |
+| Armadillo | finished-game-active | [Playback](../public/demos/wildlife-v2/armadillo/roster-v3/index.html) |
+| Pangolin | finished-game-active | [Playback](../public/demos/wildlife-v2/pangolin/roster-v3/index.html) |
 | Eagle | finished-game-active | [Playback](../public/demos/wildlife-v2/eagle/roster-v3/index.html) |
 | Hawk | finished-game-active | [Playback](../public/demos/wildlife-v2/hawk/roster-v3/index.html) |
 | Raven | finished-game-active | [Playback](../public/demos/wildlife-v2/raven/roster-v3/index.html) |
 | Crow | finished-game-active | [Playback](../public/demos/wildlife-v2/crow/roster-v3/index.html) |
-| Pelican | in-progress | Source/animation work |
-| Blue-footed booby | in-progress | Source/animation work |
+| Flamingo | in-progress | Source/animation work |
+| Shoebill | in-progress | Source/animation work |
+| Pelican | in-progress | [Playback](../public/demos/wildlife-v2/pelican/roster-v3/index.html) |
+| Blue-footed booby | in-progress | [Playback](../public/demos/wildlife-v2/blue-footed-booby/roster-v3/index.html) |
+| Secretary bird | in-progress | Source/animation work |
+| Marabou stork | in-progress | Source/animation work |
+| Great blue heron | in-progress | Source/animation work |
 | Atlantic puffin | finished-game-active | [Playback](../public/demos/wildlife-v2/atlantic-puffin/roster-v3/index.html) |
-| Ruby-throated hummingbird | in-progress | Source/animation work |
-| Great frigatebird | in-progress | Source/animation work |
+| Ruby-throated hummingbird | in-progress | [Playback](../public/demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/index.html) |
+| Great frigatebird | in-progress | [Playback](../public/demos/wildlife-v2/great-frigatebird/roster-v3/index.html) |
 | Ocean sunfish | finished-game-active | [Playback](../public/demos/wildlife-v2/ocean-sunfish/roster-v3/index.html) |
 | Swordfish | finished-game-active | [Playback](../public/demos/wildlife-v2/swordfish/roster-v3/index.html) |
 | Pufferfish | finished-game-active | [Playback](../public/demos/wildlife-v2/pufferfish/roster-v3/index.html) |
@@ -47,7 +52,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T12:55:53.771Z (19/10/2026, 14:55:53 Berlin).
+Snapshot: 2026-10-19T13:16:05.841Z (19/10/2026, 15:16:05 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

@@ -556,3 +556,10 @@
 !swordfish/roster-v3/*
 !pufferfish/roster-v3/*
 !anglerfish/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!meerkat/roster-v3/*
+!giant-anteater/roster-v3/*
+!aardvark/roster-v3/*
+!armadillo/roster-v3/*
+!pangolin/roster-v3/*

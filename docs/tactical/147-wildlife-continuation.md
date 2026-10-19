@@ -85,3 +85,13 @@ in the sortable animal browser and its real shared-engine AI scenes.
   live fish counts reflect delayed births. All pixels pending human review.
   139/196 implemented;57 remaining. Ground-specialist5banks ready;flying-bird4sources
   underway with a continuous leg hock plane and denser independent source audits.
+
+- Ground-specialist checkpoint: meerkat, anteater, aardvark, armadillo and pangolin
+  active in natural worlds/editor/browser. Distinct source anatomy;8 closed armor
+  bands/58 closed scales;buried fixed limbs, planted travel and linked tails.
+  Shared walking/foraging/escape, with curling/burrowing/sentinel rearing future.
+  4,803 unit passes and five known Windows failures;120 focused checks;31 browser
+  cases/616 previews;1,640 exact crops and five byte-identical source replays;
+  typecheck/isolated lint/build/1,504-candidate manifest pass. All art pending review.
+  144/196 implemented;52 remaining. Four flight banks ready, five tall-bird sources
+  refining shorter hidden thighs/long lower legs and connected three-link necks.

@@ -1486,6 +1486,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-meerkat-provisional-v1",
+      "name": "wildlife meerkat provisional v1",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-giant-anteater-provisional-v1",
+      "name": "wildlife giant anteater provisional v1",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-aardvark-provisional-v1",
+      "name": "wildlife aardvark provisional v1",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-armadillo-provisional-v1",
+      "name": "wildlife armadillo provisional v1",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-pangolin-provisional-v1",
+      "name": "wildlife pangolin provisional v1",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -4703,6 +4753,56 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-meerkat-roster-v3",
+      "name": "wildlife v2 meerkat roster v3",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-giant-anteater-roster-v3",
+      "name": "wildlife v2 giant anteater roster v3",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-aardvark-roster-v3",
+      "name": "wildlife v2 aardvark roster v3",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-armadillo-roster-v3",
+      "name": "wildlife v2 armadillo roster v3",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-pangolin-roster-v3",
+      "name": "wildlife v2 pangolin roster v3",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -28030,6 +28130,96 @@
       ]
     },
     {
+      "id": "sprite:wildlife-meerkat-provisional-v1",
+      "sheetId": "wildlife-meerkat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-meerkat-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-giant-anteater-provisional-v1",
+      "sheetId": "wildlife-giant-anteater-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-giant-anteater-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-aardvark-provisional-v1",
+      "sheetId": "wildlife-aardvark-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-aardvark-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-armadillo-provisional-v1",
+      "sheetId": "wildlife-armadillo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-armadillo-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-pangolin-provisional-v1",
+      "sheetId": "wildlife-pangolin-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-pangolin-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -30045,7 +30235,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:952"
+          "source": "src/wildlife/Fauna.ts:953"
         },
         {
           "system": "Gameplay",
@@ -30057,15 +30247,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:139"
+          "source": "src/wildlife/FoodWeb.ts:145"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:294"
+          "source": "src/wildlife/FoodWeb.ts:300"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:467"
+          "source": "src/wildlife/FoodWeb.ts:473"
         },
         {
           "system": "Gameplay",
@@ -30127,35 +30317,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:28"
+          "source": "src/wildlife/Fauna.ts:29"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:223"
+          "source": "src/wildlife/Fauna.ts:224"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:345"
+          "source": "src/wildlife/FoodWeb.ts:351"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:362"
+          "source": "src/wildlife/FoodWeb.ts:368"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:379"
+          "source": "src/wildlife/FoodWeb.ts:385"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:415"
+          "source": "src/wildlife/FoodWeb.ts:421"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:440"
+          "source": "src/wildlife/FoodWeb.ts:446"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:467"
+          "source": "src/wildlife/FoodWeb.ts:473"
         }
       ]
     },
@@ -30209,23 +30399,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:128"
+          "source": "src/wildlife/FoodWeb.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:140"
+          "source": "src/wildlife/FoodWeb.ts:146"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:295"
+          "source": "src/wildlife/FoodWeb.ts:301"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:467"
+          "source": "src/wildlife/FoodWeb.ts:473"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:468"
+          "source": "src/wildlife/FoodWeb.ts:474"
         },
         {
           "system": "Gameplay",
@@ -30271,7 +30461,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:468"
+          "source": "src/wildlife/FoodWeb.ts:474"
         }
       ]
     },
@@ -30317,7 +30507,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:469"
+          "source": "src/wildlife/FoodWeb.ts:475"
         }
       ]
     },
@@ -30363,7 +30553,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:470"
+          "source": "src/wildlife/FoodWeb.ts:476"
         }
       ]
     },
@@ -30409,7 +30599,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:471"
+          "source": "src/wildlife/FoodWeb.ts:477"
         }
       ]
     },
@@ -30567,11 +30757,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:142"
+          "source": "src/wildlife/FoodWeb.ts:148"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:467"
+          "source": "src/wildlife/FoodWeb.ts:473"
         },
         {
           "system": "Gameplay",
@@ -30621,7 +30811,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:467"
+          "source": "src/wildlife/FoodWeb.ts:473"
         },
         {
           "system": "Gameplay",

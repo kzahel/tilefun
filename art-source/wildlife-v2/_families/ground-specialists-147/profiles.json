@@ -1,0 +1,532 @@
+{
+  "meerkat": {
+    "label": "Meerkat",
+    "torso": [
+      0,
+      -0.05,
+      1.12
+    ],
+    "radii": [
+      0.3,
+      0.63,
+      0.43
+    ],
+    "chest": [
+      0,
+      0.34,
+      1.18
+    ],
+    "chestRadii": [
+      0.29,
+      0.31,
+      0.35
+    ],
+    "head": [
+      0,
+      0.68,
+      1.48
+    ],
+    "skull": [
+      0.23,
+      0.26,
+      0.24
+    ],
+    "muzzleY": 0.23,
+    "muzzleRadii": [
+      0.15,
+      0.22,
+      0.12
+    ],
+    "earX": 0.1909,
+    "earZ": 0.15,
+    "earRadii": [
+      0.09,
+      0.06,
+      0.11
+    ],
+    "foreHip": [
+      0.21,
+      0.34,
+      1.0
+    ],
+    "hindHip": [
+      0.22,
+      -0.41,
+      0.96
+    ],
+    "foreLengths": [
+      0.48,
+      0.5,
+      0.22,
+      0.12
+    ],
+    "hindLengths": [
+      0.48,
+      0.5,
+      0.22,
+      0.12
+    ],
+    "legRadii": [
+      0.1,
+      0.075,
+      0.055,
+      0.04
+    ],
+    "footWidth": 0.13,
+    "footLength": 0.18,
+    "tailLengths": [
+      0.35,
+      0.4,
+      0.36
+    ],
+    "tailRadius": 0.07,
+    "tailY": -0.6359000000000001,
+    "tailAngle": 0.2,
+    "tailKey": "B",
+    "walkSpeed": 12,
+    "chaseSpeed": 24,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.14,
+    "forageDrop": 0.12,
+    "palette": {
+      "B": "#a99463",
+      "H": "#c4b383",
+      "C": "#ded4ad",
+      "M": "#67583f",
+      "K": "#292e2d",
+      "E": "#e3ce95",
+      "N": "#252c2b",
+      "T": "#d8cdb0"
+    },
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ]
+  },
+  "giant-anteater": {
+    "label": "Giant anteater",
+    "torso": [
+      0,
+      -0.05,
+      1.4
+    ],
+    "radii": [
+      0.55,
+      1.05,
+      0.65
+    ],
+    "chest": [
+      0,
+      0.58,
+      1.4
+    ],
+    "chestRadii": [
+      0.5,
+      0.51,
+      0.61
+    ],
+    "head": [
+      0,
+      1.07,
+      1.42
+    ],
+    "skull": [
+      0.32,
+      0.4,
+      0.28
+    ],
+    "muzzleY": 0.23,
+    "muzzleRadii": [
+      0.15,
+      0.22,
+      0.12
+    ],
+    "earX": 0.2656,
+    "earZ": 0.15,
+    "earRadii": [
+      0.09,
+      0.06,
+      0.11
+    ],
+    "foreHip": [
+      0.37,
+      0.55,
+      1.28
+    ],
+    "hindHip": [
+      0.35,
+      -0.7,
+      1.26
+    ],
+    "foreLengths": [
+      0.65,
+      0.75,
+      0.25,
+      0.16
+    ],
+    "hindLengths": [
+      0.65,
+      0.75,
+      0.25,
+      0.16
+    ],
+    "legRadii": [
+      0.17,
+      0.13,
+      0.1,
+      0.07
+    ],
+    "footWidth": 0.17,
+    "footLength": 0.25,
+    "tailLengths": [
+      0.75,
+      0.85,
+      0.8
+    ],
+    "tailRadius": 0.39,
+    "tailY": -1.0265000000000002,
+    "tailAngle": -0.2,
+    "tailKey": "B",
+    "walkSpeed": 12,
+    "chaseSpeed": 24,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.14,
+    "forageDrop": 0.12,
+    "palette": {
+      "B": "#676259",
+      "H": "#939083",
+      "C": "#c8c2a8",
+      "M": "#383b39",
+      "K": "#292e2d",
+      "E": "#e3ce95",
+      "N": "#252c2b",
+      "T": "#d8cdb0"
+    },
+    "canvas": 112,
+    "anchor": [
+      56,
+      84
+    ]
+  },
+  "aardvark": {
+    "label": "Aardvark",
+    "torso": [
+      0,
+      -0.1,
+      1.38
+    ],
+    "radii": [
+      0.55,
+      0.85,
+      0.62
+    ],
+    "chest": [
+      0,
+      0.44,
+      1.34
+    ],
+    "chestRadii": [
+      0.46,
+      0.44,
+      0.55
+    ],
+    "head": [
+      0,
+      0.92,
+      1.34
+    ],
+    "skull": [
+      0.3,
+      0.4,
+      0.29
+    ],
+    "muzzleY": 0.23,
+    "muzzleRadii": [
+      0.15,
+      0.22,
+      0.12
+    ],
+    "earX": 0.24899999999999997,
+    "earZ": 0.15,
+    "earRadii": [
+      0.09,
+      0.06,
+      0.11
+    ],
+    "foreHip": [
+      0.35,
+      0.43,
+      1.15
+    ],
+    "hindHip": [
+      0.36,
+      -0.55,
+      1.15
+    ],
+    "foreLengths": [
+      0.6,
+      0.6,
+      0.24,
+      0.13
+    ],
+    "hindLengths": [
+      0.6,
+      0.6,
+      0.24,
+      0.13
+    ],
+    "legRadii": [
+      0.16,
+      0.12,
+      0.085,
+      0.06
+    ],
+    "footWidth": 0.17,
+    "footLength": 0.25,
+    "tailLengths": [
+      0.35,
+      0.38,
+      0.34
+    ],
+    "tailRadius": 0.14,
+    "tailY": -0.8905,
+    "tailAngle": -0.2,
+    "tailKey": "M",
+    "walkSpeed": 10,
+    "chaseSpeed": 20,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.14,
+    "forageDrop": 0.12,
+    "palette": {
+      "B": "#9a8263",
+      "H": "#bca485",
+      "C": "#d6bfa0",
+      "M": "#806952",
+      "K": "#292e2d",
+      "E": "#e3ce95",
+      "N": "#252c2b",
+      "T": "#d8cdb0"
+    },
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ]
+  },
+  "armadillo": {
+    "label": "Armadillo",
+    "torso": [
+      0,
+      -0.07,
+      0.97
+    ],
+    "radii": [
+      0.48,
+      0.78,
+      0.4
+    ],
+    "chest": [
+      0,
+      0.38,
+      0.96
+    ],
+    "chestRadii": [
+      0.4,
+      0.4,
+      0.37
+    ],
+    "head": [
+      0,
+      0.71,
+      0.9
+    ],
+    "skull": [
+      0.26,
+      0.36,
+      0.26
+    ],
+    "muzzleY": 0.23,
+    "muzzleRadii": [
+      0.15,
+      0.22,
+      0.12
+    ],
+    "earX": 0.2158,
+    "earZ": 0.15,
+    "earRadii": [
+      0.09,
+      0.06,
+      0.11
+    ],
+    "foreHip": [
+      0.3,
+      0.36,
+      0.8
+    ],
+    "hindHip": [
+      0.31,
+      -0.5,
+      0.8
+    ],
+    "foreLengths": [
+      0.35,
+      0.38,
+      0.18,
+      0.1
+    ],
+    "hindLengths": [
+      0.35,
+      0.38,
+      0.18,
+      0.1
+    ],
+    "legRadii": [
+      0.12,
+      0.09,
+      0.06,
+      0.045
+    ],
+    "footWidth": 0.17,
+    "footLength": 0.25,
+    "tailLengths": [
+      0.32,
+      0.36,
+      0.32
+    ],
+    "tailRadius": 0.1,
+    "tailY": -0.7954000000000001,
+    "tailAngle": -0.2,
+    "tailKey": "M",
+    "walkSpeed": 8,
+    "chaseSpeed": 16,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.14,
+    "forageDrop": 0.12,
+    "palette": {
+      "B": "#797d74",
+      "H": "#a3a69a",
+      "C": "#c4bba0",
+      "M": "#595f5b",
+      "K": "#292e2d",
+      "E": "#e3ce95",
+      "N": "#252c2b",
+      "T": "#d8cdb0"
+    },
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ]
+  },
+  "pangolin": {
+    "label": "Pangolin",
+    "torso": [
+      0,
+      -0.05,
+      1.12
+    ],
+    "radii": [
+      0.48,
+      0.85,
+      0.51
+    ],
+    "chest": [
+      0,
+      0.4,
+      1.13
+    ],
+    "chestRadii": [
+      0.39,
+      0.42,
+      0.45
+    ],
+    "head": [
+      0,
+      0.85,
+      1.06
+    ],
+    "skull": [
+      0.24,
+      0.34,
+      0.26
+    ],
+    "muzzleY": 0.23,
+    "muzzleRadii": [
+      0.15,
+      0.22,
+      0.12
+    ],
+    "earX": 0.1992,
+    "earZ": 0.15,
+    "earRadii": [
+      0.09,
+      0.06,
+      0.11
+    ],
+    "foreHip": [
+      0.3,
+      0.4,
+      0.96
+    ],
+    "hindHip": [
+      0.32,
+      -0.55,
+      0.96
+    ],
+    "foreLengths": [
+      0.42,
+      0.44,
+      0.2,
+      0.12
+    ],
+    "hindLengths": [
+      0.42,
+      0.44,
+      0.2,
+      0.12
+    ],
+    "legRadii": [
+      0.12,
+      0.09,
+      0.06,
+      0.045
+    ],
+    "footWidth": 0.17,
+    "footLength": 0.25,
+    "tailLengths": [
+      0.55,
+      0.6,
+      0.55
+    ],
+    "tailRadius": 0.23,
+    "tailY": -0.8405,
+    "tailAngle": -0.2,
+    "tailKey": "M",
+    "walkSpeed": 8,
+    "chaseSpeed": 16,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "lift": 0.14,
+    "forageDrop": 0.12,
+    "palette": {
+      "B": "#69543d",
+      "H": "#ac895b",
+      "C": "#c0ab7c",
+      "M": "#856a48",
+      "K": "#292e2d",
+      "E": "#e3ce95",
+      "N": "#252c2b",
+      "T": "#d8cdb0"
+    },
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ]
+  }
+}

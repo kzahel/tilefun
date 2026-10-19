@@ -612,11 +612,15 @@
     "meerkat": {
       "name": "Meerkat",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:31:14.286425Z",
-      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/meerkat/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
     },
     "river-otter": {
       "name": "River otter",
@@ -647,38 +651,54 @@
     "giant-anteater": {
       "name": "Giant anteater",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:31:14.286425Z",
-      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/giant-anteater/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
     },
     "aardvark": {
       "name": "Aardvark",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:31:14.286425Z",
-      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/aardvark/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
     },
     "armadillo": {
       "name": "Armadillo",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:31:14.286425Z",
-      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/armadillo/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
     },
     "pangolin": {
       "name": "Pangolin",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:31:14.286425Z",
-      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/pangolin/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
     },
     "mongoose": {
       "name": "Mongoose",
@@ -857,16 +877,20 @@
     "flamingo": {
       "name": "Flamingo",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
     },
     "shoebill": {
       "name": "Shoebill",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
     },
     "pelican": {
       "name": "Pelican",
@@ -874,7 +898,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:53:52.325320Z"
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
     },
     "blue-footed-booby": {
       "name": "Blue-footed booby",
@@ -882,7 +907,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:53:52.325320Z"
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
     },
     "sparrow": {
       "name": "Sparrow",
@@ -923,16 +949,20 @@
     "secretary-bird": {
       "name": "Secretary bird",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
     },
     "marabou-stork": {
       "name": "Marabou stork",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
     },
     "kakapo": {
       "name": "Kakapo",
@@ -943,9 +973,11 @@
     "great-blue-heron": {
       "name": "Great blue heron",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
     },
     "atlantic-puffin": {
       "name": "Atlantic puffin",
@@ -966,7 +998,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:53:52.325320Z"
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
     },
     "great-frigatebird": {
       "name": "Great frigatebird",
@@ -974,7 +1007,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:53:52.325320Z"
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered."
     },
     "ocean-sunfish": {
       "name": "Ocean sunfish",
@@ -1426,6 +1460,17 @@
         "anglerfish"
       ],
       "validation": "4718 unit passes, five known Windows failures and ten skipped;116 focused source/ecology/codec/body/real-lagoon hunt and reload checks.32 distinct browser cases across22 new-fish/browser cases and all14 aquatic regressions (4 overlap);596 visible previews. Four ten-artifact byte-identical banks and1952 exact native/3x crops. Typecheck/isolated lint/build and1479candidate full Chromium manifest pass. Generic aquatic test anchors follow source dimensions and meal counts follow delayed replacements."
+    },
+    {
+      "utc": "2026-10-19T13:16:05.475390Z",
+      "completed": [
+        "meerkat",
+        "giant-anteater",
+        "aardvark",
+        "armadillo",
+        "pangolin"
+      ],
+      "validation": "4803 unit passes, five known Windows failures and ten skipped;120 focused source/ecology/codec/authority checks;31 real Canvas/GPU browser cases and616 visible previews. Five ten-artifact byte-identical banks and1640 exact native/3x crops. Typecheck/isolated lint/build and1504candidate full Chromium manifest pass. Grounded walking/foraging; curling, burrowing and sentinel rearing remain future work."
     }
   ]
 }

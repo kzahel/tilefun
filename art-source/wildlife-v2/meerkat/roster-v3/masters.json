@@ -1,0 +1,14 @@
+{
+  "identity": "meerkat-roster-v3-pixels-01",
+  "palette": {
+    "B": "#a99463",
+    "H": "#c4b383",
+    "C": "#ded4ad",
+    "M": "#67583f",
+    "K": "#292e2d",
+    "E": "#e3ce95",
+    "N": "#252c2b",
+    "T": "#d8cdb0"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

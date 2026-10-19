@@ -1,0 +1,17 @@
+{
+  "identity": "pangolin-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.8615812659401811,
+    "up": 1.4799888383959114,
+    "left": 1.7153809721153266,
+    "right": 1.7153809721153266
+  },
+  "rootTravelPixelsPerCycle": 10.24,
+  "plantedTravel": true
+}

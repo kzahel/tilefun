@@ -1,0 +1,17 @@
+{
+  "identity": "meerkat-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5788831248092734,
+    "up": 1.7105312208760495,
+    "left": 1.9013966480446882,
+    "right": 1.9013966480446882
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

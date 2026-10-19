@@ -1,0 +1,17 @@
+{
+  "identity": "giant-anteater-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5593048808697745,
+    "up": 1.7097192513368924,
+    "left": 1.8742483050424,
+    "right": 1.8742483050424
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}
