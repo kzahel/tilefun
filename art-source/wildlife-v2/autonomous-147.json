@@ -605,9 +605,11 @@
     "bat": {
       "name": "Bat",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:51:11.315571Z",
+      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
     },
     "meerkat": {
       "name": "Meerkat",
@@ -625,9 +627,11 @@
     "river-otter": {
       "name": "River otter",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
     },
     "red-panda": {
       "name": "Red panda",
@@ -762,9 +766,11 @@
     "wallaby": {
       "name": "Wallaby",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:53:49.288457Z",
+      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
     },
     "wombat": {
       "name": "Wombat",
@@ -793,9 +799,11 @@
     "platypus": {
       "name": "Platypus",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
     },
     "echidna": {
       "name": "Echidna",
@@ -1230,30 +1238,38 @@
     "sea-lion": {
       "name": "Sea lion",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
     },
     "manatee": {
       "name": "Manatee",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:49:27.849725Z",
+      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
     },
     "dugong": {
       "name": "Dugong",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:49:27.852257Z",
+      "progress": "New connected source bank authored during vehicle runtime hold; source replay/playback checks underway. Not registered or game active yet."
     },
     "walrus": {
       "name": "Walrus",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
     },
     "anglerfish": {
       "name": "Anglerfish",
@@ -1323,35 +1339,44 @@
     "crocodile": {
       "name": "Crocodile",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:26:00Z",
-      "evidence": [
-        "Distinct splayed quadruped anatomy source in progress; not active or registered."
-      ]
+      "evidence": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged.",
+      "progress": "Connected terrestrial hunting and world/editor/lab visibility verified. Swimming is future work; exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/crocodile/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:33:02.243756Z"
     },
     "alligator": {
       "name": "Alligator",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:26:00Z",
-      "evidence": [
-        "Distinct splayed quadruped anatomy source in progress; not active or registered."
-      ]
+      "evidence": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged.",
+      "progress": "Connected terrestrial hunting and world/editor/lab visibility verified. Swimming is future work; exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/alligator/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:33:02.243756Z"
     },
     "komodo-dragon": {
       "name": "Komodo dragon",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:26:00Z",
-      "evidence": [
-        "Distinct splayed quadruped anatomy source in progress; not active or registered."
-      ]
+      "evidence": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged.",
+      "progress": "Connected terrestrial hunting and world/editor/lab visibility verified. Swimming is future work; exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/komodo-dragon/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:33:02.243756Z"
     },
     "salamander": {
       "name": "Fire salamander",
@@ -1571,6 +1596,15 @@
         "great-blue-heron"
       ],
       "validation": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    {
+      "utc": "2026-10-19T14:33:02.243756Z",
+      "completed": [
+        "crocodile",
+        "alligator",
+        "komodo-dragon"
+      ],
+      "validation": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged."
     }
   ]
 }

@@ -16918,5 +16918,284 @@
         "sha256": "ae332d1940d043f9d8e081b0bb396e7bf64e6bfa374f137299ce3afd00bb90f0"
       }
     ]
+  },
+  {
+    "id": "crocodile-roster-v3",
+    "animalId": "crocodile",
+    "revision": "roster-v3",
+    "name": "Crocodile · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/crocodile/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-crocodile-roster-v3",
+      "name": "Crocodile sheet",
+      "image": "demos/wildlife-v2/crocodile/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+      "source": "art-source/wildlife-v2/crocodile/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-crocodile-roster-v3-scene",
+      "name": "Crocodile scene",
+      "image": "demos/wildlife-v2/crocodile/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "8974cad07e25caa6d8b0f49e7b56ac45a1b0e4ea726fd8e1563c68d314425e73",
+      "source": "art-source/wildlife-v2/crocodile/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-crocodile-roster-v3-contact",
+      "name": "Crocodile contact",
+      "image": "demos/wildlife-v2/crocodile/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b374874b2b6a8f227e8f18be44007886cfd83afc8ec8e679797760278558e513",
+      "source": "art-source/wildlife-v2/crocodile/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/crocodile/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/contact-sheet-native.png",
+        "sha256": "b374874b2b6a8f227e8f18be44007886cfd83afc8ec8e679797760278558e513"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/index.html",
+        "sha256": "0aa17f76470aa844b365724d36e14de13558abdbd1c57cdd81ecbc3cc324c7a4"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/pixel-audit.json",
+        "sha256": "81cc79248d115633d6312d7756ccc5e3b0f6388d7c4ba1ff31692ebebf51b6fd"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/preview-native.gif",
+        "sha256": "4931008442536e8abeb6ef6122395bf90a3239a5df9e8041df49b45159876da2"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/preview.gif",
+        "sha256": "511993092e8fbc0ba5cfb047bbbceba5b078dc1fbcb393fd2a7761479599ac5a"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/scene-native.png",
+        "sha256": "8974cad07e25caa6d8b0f49e7b56ac45a1b0e4ea726fd8e1563c68d314425e73"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/sheet.png",
+        "sha256": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/source-audit.json",
+        "sha256": "27ab36b0ced3df5ad26f46db71dbeb38115f3568cd8fcfa9bd5efe8ee0600d9e"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/sprite.json",
+        "sha256": "9f0005ba76ba2e6b1830f7f5a8cc13cd2fd2d0310c31eb81fb73882187c73f4d"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/travel-native.gif",
+        "sha256": "1f71e228aa0d6f542be5c108a488b9d77fb0b6777bdc3bf4fe03f45162be8c2e"
+      },
+      {
+        "path": "demos/wildlife-v2/crocodile/roster-v3/validation.json",
+        "sha256": "58f10905a96f4b0fd53fe91a8d1316ff4bc20f868a47b90c32c4e0fdb0f92af2"
+      }
+    ]
+  },
+  {
+    "id": "alligator-roster-v3",
+    "animalId": "alligator",
+    "revision": "roster-v3",
+    "name": "Alligator · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/alligator/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-alligator-roster-v3",
+      "name": "Alligator sheet",
+      "image": "demos/wildlife-v2/alligator/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6",
+      "source": "art-source/wildlife-v2/alligator/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-alligator-roster-v3-scene",
+      "name": "Alligator scene",
+      "image": "demos/wildlife-v2/alligator/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "d76235b7b9b8149048ce6c5792d759aa9ba72a99d7e5cb8f8957398976973cad",
+      "source": "art-source/wildlife-v2/alligator/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-alligator-roster-v3-contact",
+      "name": "Alligator contact",
+      "image": "demos/wildlife-v2/alligator/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a35c9de94bf3dd9a5c335a7ced6179e26ce9a1a131d5ee9367ca88d7debca713",
+      "source": "art-source/wildlife-v2/alligator/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/alligator/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/contact-sheet-native.png",
+        "sha256": "a35c9de94bf3dd9a5c335a7ced6179e26ce9a1a131d5ee9367ca88d7debca713"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/index.html",
+        "sha256": "9e27744c9ea2321b2d50b272fad76fdd6ee69a5ca9e564c56b366b99d6e86a45"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/pixel-audit.json",
+        "sha256": "d53e4807d5c9714a5ff2bb41175b3dacc5ed32b29a0f472bd64ebca681ed8176"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/preview-native.gif",
+        "sha256": "8702a19fea89e3f7a1d189143505e07868d239418bc82b0a45b75291874fd3a4"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/preview.gif",
+        "sha256": "a7a8136d3160ae3f58e0d548da5d0a515e35fd5237cdc170984624528fcce444"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/scene-native.png",
+        "sha256": "d76235b7b9b8149048ce6c5792d759aa9ba72a99d7e5cb8f8957398976973cad"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/sheet.png",
+        "sha256": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/source-audit.json",
+        "sha256": "e19d9148dfd28e413263bc8e0333f2b46d3563cb6fb50d8477e8d4ebf0343bb0"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/sprite.json",
+        "sha256": "39a3acac63919a959c96fed4e19d0d83041bca6c9d2fce90681496d5d7309eaa"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/travel-native.gif",
+        "sha256": "e7ad06cd6ee45f2b069997371743e7f701c2cc8f4df66e0e14c2838ba753e1db"
+      },
+      {
+        "path": "demos/wildlife-v2/alligator/roster-v3/validation.json",
+        "sha256": "bf2c6b51f1981a3ebc465d8a036700deecbf1a8f9d42608002fcafe68c7342f7"
+      }
+    ]
+  },
+  {
+    "id": "komodo-dragon-roster-v3",
+    "animalId": "komodo-dragon",
+    "revision": "roster-v3",
+    "name": "Komodo dragon · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/komodo-dragon/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-komodo-dragon-roster-v3",
+      "name": "Komodo dragon sheet",
+      "image": "demos/wildlife-v2/komodo-dragon/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4",
+      "source": "art-source/wildlife-v2/komodo-dragon/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-komodo-dragon-roster-v3-scene",
+      "name": "Komodo dragon scene",
+      "image": "demos/wildlife-v2/komodo-dragon/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "8ab821fa152efec77ca507ca6e042a95ebc6f040ad5d8da8ebdfcedbfe2da387",
+      "source": "art-source/wildlife-v2/komodo-dragon/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-komodo-dragon-roster-v3-contact",
+      "name": "Komodo dragon contact",
+      "image": "demos/wildlife-v2/komodo-dragon/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8d14102480f189c5e52348d98ef659841167e865263284a3801debf95bf0b661",
+      "source": "art-source/wildlife-v2/komodo-dragon/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/komodo-dragon/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/contact-sheet-native.png",
+        "sha256": "8d14102480f189c5e52348d98ef659841167e865263284a3801debf95bf0b661"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/index.html",
+        "sha256": "143ac2cccffac577d161ed26afea2f61cf040397055d89ead2379069b5f4a79e"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/pixel-audit.json",
+        "sha256": "f191337eb928d665e36cc3dcef47d7b8dbbca6e99acc68798863d97099589e79"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/preview-native.gif",
+        "sha256": "544c1efca0ad342d95cb90bd9baeac9b7504fdb74b16e971d68177d0abaf996f"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/preview.gif",
+        "sha256": "087a6597306494cb55360aeedec92b8d9b898aa8bf5398bc1df3fbec71a65375"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/scene-native.png",
+        "sha256": "8ab821fa152efec77ca507ca6e042a95ebc6f040ad5d8da8ebdfcedbfe2da387"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/sheet.png",
+        "sha256": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/source-audit.json",
+        "sha256": "cd07e4d6b6b6d2009c27a4655216ced04b36bc9d948a549b5f678704e41c04ea"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/sprite.json",
+        "sha256": "fb2877c45463e60e745e25e251b7f878ac7ebebc4bf60b20d1561a6dab9656f2"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/travel-native.gif",
+        "sha256": "b48b290135ebc883c2a502db1a163d69e8e5b35459b62a89eeb489f22cf16212"
+      },
+      {
+        "path": "demos/wildlife-v2/komodo-dragon/roster-v3/validation.json",
+        "sha256": "045fd6052d437b87c4cd67394bad6b45b42eb91120242ec9108e1b24589daf7a"
+      }
+    ]
   }
 ]

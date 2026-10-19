@@ -1,0 +1,13 @@
+{
+  "identity": "alligator-roster-v3-pixels-01",
+  "palette": {
+    "K": "#222d2c",
+    "B": "#46564e",
+    "H": "#6b7965",
+    "C": "#b7b28b",
+    "M": "#2d3e38",
+    "E": "#bca65e",
+    "N": "#192523"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

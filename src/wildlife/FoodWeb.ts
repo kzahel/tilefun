@@ -128,6 +128,35 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  crocodile: [
+    ...small,
+    ...pasture,
+    "cow",
+    "horse",
+    "wolf",
+    "tiger",
+    "lion",
+    "jaguar",
+    "leopard",
+    "alligator",
+    "komodo-dragon",
+    "king-cobra",
+  ],
+  alligator: [
+    ...small,
+    ...lightAntelopes,
+    ...groundPrimates,
+    "deer",
+    "beaver",
+    "capybara",
+    "piglet",
+    "goat",
+    "fox",
+    "wolf",
+    "komodo-dragon",
+    "king-cobra",
+  ],
+  "komodo-dragon": [...small, "deer", "piglet", "goat", "king-cobra", "fox"],
   "secretary-bird": [
     "king-cobra",
     "rabbit",
@@ -427,6 +456,9 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    "crocodile",
+    "alligator",
+    "komodo-dragon",
     ...smallGroundHunters,
     "rhinoceros",
     "hippopotamus",
@@ -452,6 +484,9 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    "crocodile",
+    "alligator",
+    "komodo-dragon",
     ...smallGroundHunters,
     "rhinoceros",
     "hippopotamus",

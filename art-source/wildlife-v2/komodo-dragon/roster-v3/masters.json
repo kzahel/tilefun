@@ -1,0 +1,13 @@
+{
+  "identity": "komodo-dragon-roster-v3-pixels-01",
+  "palette": {
+    "K": "#2d302e",
+    "B": "#817c61",
+    "H": "#a09a76",
+    "C": "#c7ba91",
+    "M": "#575b45",
+    "E": "#ae9a5b",
+    "N": "#222b28"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

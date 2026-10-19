@@ -576,3 +576,8 @@
 !secretary-bird/roster-v3/*
 !marabou-stork/roster-v3/*
 !great-blue-heron/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!crocodile/roster-v3/*
+!alligator/roster-v3/*
+!komodo-dragon/roster-v3/*

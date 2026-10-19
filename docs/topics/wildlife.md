@@ -164,6 +164,24 @@ flight birds to its expected finished-game-active state.
 replay evidence; seven forest-mammal/marsupial prototypes are under refinement.
 
 
+Ninth checkpoint: crocodile, alligator and Komodo dragon now have distinct
+closed snouts, scutes or forked tongues, buried splayed fixed-link legs, planted
+travel, moving torsos and connected tails. Native96px canvases keep editor/lab
+previews readable. Ground hunting bursts catch genuinely fleeing prey; explicit
+diets include larger predators eating smaller hunters. Swimming is future work.
+Natural-only delayed distant births and manual finite populations remain intact.
+Validation: **5,023 full-unit passes**, five known Windows failures and one food-web
+traversal timeout. Memoized completed DAG nodes remove repeated path expansion;
+all five food-web regressions then pass in milliseconds, retaining cycle checks.
+Also54 focused checks, **18 browser cases /664 previews**, three byte-identical
+source replays and1,944 exact native/3x crops. Typecheck, isolated lint/build and
+1,565-candidate full Chromium inventory pass. All three vehicle review records
+are byte-identical; live scenario fingerprints follow current shared code.
+**156/196 implemented;40 remaining.** Exact art pending human review. Seven forest
+specialists and four mixed mammals have verified source prototypes; four shore
+mammals are in source refinement.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted
