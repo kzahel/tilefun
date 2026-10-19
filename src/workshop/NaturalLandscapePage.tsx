@@ -8,6 +8,8 @@ import {
   landscapeLabel,
   landscapeProfile,
 } from "../generation/regional/NaturalLandscape.js";
+import { RacetrackSource, racetrackRadius } from "../generation/regional/RacetrackPlanner.js";
+import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { CURVE_TRAIN } from "../railway/CurveTrain.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import {
@@ -141,6 +143,8 @@ export default function NaturalLandscapePage() {
     const c = canvas.current,
       recipe = prepared.recipe;
     if (!c || !recipe) return;
+    const track =
+      caseId === "racetrack" ? new RacetrackSource(regionalWorld(point.seed)).owner(0, 0) : null;
     let active = true;
     setReady(false);
     setError("");
@@ -351,8 +355,14 @@ export default function NaturalLandscapePage() {
         if (caseId === "racetrack") {
           c.dataset.racerPoses = JSON.stringify(
             view.entities
-              .filter((e) => /^vehicle-v1:car-2[1-6]$/.test(e.type))
+              .filter((e) => {
+                if (!track || !/^vehicle-v1:car-2[1-6]$/.test(e.type)) return false;
+                // Road traffic can use the same models, outside the closed oval.
+                const radius = racetrackRadius(track, e.position.wx / 16, e.position.wy / 16);
+                return radius >= 20 && radius < 36;
+              })
               .map((e) => ({
+                id: e.id,
                 key: e.type,
                 x: e.position.wx,
                 y: e.position.wy,

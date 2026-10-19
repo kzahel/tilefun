@@ -15,7 +15,7 @@ for (const renderer of ["canvas", "gpu"]) {
     );
     const canvas = page.getByLabel("Natural landscape playground");
     await expect(canvas).toHaveAttribute("data-ready", "true");
-    type Pose = { key: string; x: number; y: number; vx: number; vy: number };
+    type Pose = { id: number; key: string; x: number; y: number; vx: number; vy: number };
     const poses = async () =>
       JSON.parse((await canvas.getAttribute("data-racer-poses")) ?? "[]") as Pose[];
     await expect.poll(async () => (await poses()).length).toBe(8);
@@ -32,7 +32,7 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(async () => {
         const after = await poses();
         return before.every((p) =>
-          after.some((q) => p.key === q.key && Math.hypot(q.x - p.x, q.y - p.y) > 30),
+          after.some((q) => p.id === q.id && Math.hypot(q.x - p.x, q.y - p.y) > 30),
         );
       })
       .toBe(true);

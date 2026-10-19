@@ -71,6 +71,11 @@ they never participate in upstream water reservations. They use ordinary shared
 Fauna authority and persistence, and the food web protects them as friendly
 companions. Existing quadruped banks and all three fixed pools remain unchanged.
 
+Racetrack lab diagnostics select sports cars inside the shared planner's oval,
+excluding nearby road traffic that uses the same model. Motion checks follow
+runtime actor IDs so two racers with the same appearance cannot stand in for
+each other; paused reload checks retain model and position matching.
+
 ## Exact review scenes and asset banks
 
 Review approval remains tied to exact candidate identities. The twenty existing city
