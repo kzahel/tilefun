@@ -332,3 +332,16 @@ it("does not confuse different road cells that share a scratch slot", () => {
   f.traffic.tick(1 / 60, []);
   expect(f.car.waiting).toBe("road unavailable");
 });
+
+it.each([NaN, Infinity, -4, 4])(
+  "rejects invalid saved heading %s before publishing any vehicle",
+  (vehicleHeading) => {
+    const f = fixture();
+    const record = required(f.traffic.save()[0]);
+    const count = f.traffic.states.size;
+    expect(() =>
+      f.traffic.restore([{ ...record, identity: "bad-heading", vehicleHeading }]),
+    ).toThrow(/heading/);
+    expect(f.traffic.states.size).toBe(count);
+  },
+);

@@ -105,18 +105,21 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     expect(
       Math.hypot(car.entity.velocity?.vx ?? 0, car.entity.velocity?.vy ?? 0),
     ).toBeLessThanOrEqual(112.001);
-    expect(car.entity.position.wy).toBeLessThan(initial.wy - 40);
+    expect(car.entity.position.wy).toBeLessThan(initial.wy - 30);
+    const savedHeading = car.entity.vehicleHeading;
     await s.reload();
     car = required(
       [...(s.realm.traffic?.states.values() ?? [])].find(
         (c) => c.entity.proceduralId === car.entity.proceduralId,
       ),
     );
+    expect(car.entity.vehicleHeading).toBe(savedHeading);
     expect(s.player.player.parentId).toBe(car.entity.id);
     expect(s.realm.vehicles.get(s.player)?.id).toBe(car.entity.id);
     expect(s.player.player.collider).toBeNull();
     for (let i = 0; i < 110; i++) await s.step({ ...idle, dy: -1 });
     const parked = { ...car.entity.position };
+    const parkedHeading = car.entity.vehicleHeading;
     s.realm.vehicles.exit(s.player);
     expect(car.parked).toBe(true);
     for (let i = 0; i < 60; i++) await s.step(idle);
@@ -127,6 +130,7 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     );
     expect(restored?.parked).toBe(true);
     expect(restored?.entity.position).toEqual(parked);
+    expect(restored?.entity.vehicleHeading).toBe(parkedHeading);
   } finally {
     await s.close();
   }

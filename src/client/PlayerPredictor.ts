@@ -261,7 +261,8 @@ export class PlayerPredictor {
   private mountOffsetX = 0;
   private mountOffsetY = 0;
 
-  /** Previous mount position for render interpolation. */
+  /** Previous mount pose for render interpolation. */
+  private _mountPrevHeading: number | undefined;
   private _mountPrevPosition: PositionComponent = { wx: 0, wy: 0 };
 
   /**
@@ -296,6 +297,7 @@ export class PlayerPredictor {
       this._mountId = serverMount.id;
       this.mountOffsetX = serverPlayer.localOffsetX ?? 0;
       this.mountOffsetY = serverPlayer.localOffsetY ?? 0;
+      this._mountPrevHeading = this.predictedMount.vehicleHeading;
       this._mountPrevPosition = {
         wx: this.predictedMount.position.wx,
         wy: this.predictedMount.position.wy,
@@ -380,6 +382,7 @@ export class PlayerPredictor {
     this._prevJumpZ = this.predicted.jumpZ ?? 0;
     this._prevWz = this.predicted.wz ?? 0;
     if (this.predictedMount) {
+      this._mountPrevHeading = this.predictedMount.vehicleHeading;
       this._mountPrevPosition = {
         wx: this.predictedMount.position.wx,
         wy: this.predictedMount.position.wy,
@@ -586,6 +589,7 @@ export class PlayerPredictor {
     this._prevJumpZ = source._prevJumpZ;
     this._prevWz = source._prevWz;
     this._mountPrevPosition = source._mountPrevPosition;
+    this._mountPrevHeading = source._mountPrevHeading;
     this.support = source.support;
     this.supportOffset = source.supportOffset;
     this.prevSupportOffset = source.prevSupportOffset;
@@ -728,6 +732,7 @@ export class PlayerPredictor {
         // Just started riding or mount changed
         this.predictedMount = this.clonePlayer(serverMount);
         this._mountId = serverMount.id;
+        this._mountPrevHeading = this.predictedMount.vehicleHeading;
         this._mountPrevPosition = {
           wx: serverMount.position.wx,
           wy: serverMount.position.wy,
@@ -759,6 +764,9 @@ export class PlayerPredictor {
       this.predictedMount.position.wx = serverMount.position.wx;
       this.predictedMount.position.wy = serverMount.position.wy;
       this.predictedMount.collider = serverMount.collider;
+      if (serverMount.vehicleHeading !== undefined)
+        this.predictedMount.vehicleHeading = serverMount.vehicleHeading;
+      else delete this.predictedMount.vehicleHeading;
       if (serverMount.emergencyState !== undefined)
         this.predictedMount.emergencyState = serverMount.emergencyState;
       else delete this.predictedMount.emergencyState;
@@ -800,6 +808,7 @@ export class PlayerPredictor {
       const mdx = this.predictedMount.position.wx - oldMountX;
       const mdy = this.predictedMount.position.wy - oldMountY;
       if (mdx * mdx + mdy * mdy > SNAP_THRESHOLD * SNAP_THRESHOLD) {
+        this._mountPrevHeading = this.predictedMount.vehicleHeading;
         this._mountPrevPosition = {
           wx: this.predictedMount.position.wx,
           wy: this.predictedMount.position.wy,
@@ -915,6 +924,7 @@ export class PlayerPredictor {
       this._prevJumpZ = live._prevJumpZ;
       this._prevWz = live._prevWz;
       this._mountPrevPosition = { ...live._mountPrevPosition };
+      this._mountPrevHeading = live._mountPrevHeading;
       this.prevSupportOffset = live.prevSupportOffset;
       this.prevPoseSourceSeconds = live.prevPoseSourceSeconds;
       this.presentationError = live.presentationError;
@@ -939,8 +949,10 @@ export class PlayerPredictor {
           this.predictedMount.position.wx - live.predictedMount.position.wx,
           this.predictedMount.position.wy - live.predictedMount.position.wy,
         ) > SNAP_THRESHOLD
-      )
+      ) {
+        this._mountPrevHeading = this.predictedMount.vehicleHeading;
         this._mountPrevPosition = { ...this.predictedMount.position };
+      }
       this._lastCorrection = {
         wx: predictedBefore.wx - authoritative.wx,
         wy: predictedBefore.wy - authoritative.wy,
@@ -1306,6 +1318,11 @@ export class PlayerPredictor {
     return this._prevWz;
   }
 
+  /** Get previous driven bearing for render interpolation. */
+  get mountPrevHeading(): number | undefined {
+    return this._mountPrevHeading;
+  }
+
   /** Get previous mount position for render interpolation. */
   get mountPrevPosition(): PositionComponent {
     return this._mountPrevPosition;
@@ -1611,6 +1628,8 @@ export class PlayerPredictor {
       collider: serverPlayer.collider ? { ...serverPlayer.collider } : null,
       wanderAI: serverPlayer.wanderAI ? { ...serverPlayer.wanderAI } : null,
     };
+    if (serverPlayer.vehicleHeading !== undefined)
+      clone.vehicleHeading = serverPlayer.vehicleHeading;
     if (serverPlayer.emergencyState !== undefined)
       clone.emergencyState = serverPlayer.emergencyState;
     if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;

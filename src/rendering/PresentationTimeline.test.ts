@@ -68,3 +68,15 @@ it("recovers a large source burst after a delivery hold and remains smooth after
   expect(next.time - resumed.time).toBeCloseTo(1 / 120);
   expect(next.time).toBeGreaterThan(held.time);
 });
+
+it("interpolates vehicle headings across the angle seam without spinning around or inventing state", () => {
+  const history = [
+    { ...pose(0), vehicleHeading: Math.PI - 0.1 },
+    { ...pose(1), vehicleHeading: -Math.PI + 0.1 },
+  ];
+  expect(sampleMotion(history, 0.5)?.vehicleHeading).toBeCloseTo(Math.PI);
+  expect(sampleMotion(history, 1.1)?.vehicleHeading).toBeCloseTo(Math.PI + 0.12);
+  expect(
+    sampleMotion([{ ...pose(0), vehicleHeading: 1 }, pose(1)], 0.5)?.vehicleHeading,
+  ).toBeUndefined();
+});

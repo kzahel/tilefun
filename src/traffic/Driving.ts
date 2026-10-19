@@ -13,7 +13,12 @@ import type { World } from "../world/World.js";
 import { type DrivingQueries, drivingQueries } from "./DrivingQueries.js";
 import { movingPassengerPosition } from "./MovingSupport.js";
 import { roofSupport } from "./RoofSupport.js";
-import { applyVehicleFacing, isVehicle } from "./Vehicle.js";
+import {
+  applyVehicleFacing,
+  isVehicle,
+  vehicleNoseHeading,
+  vehicleTurningRadius,
+} from "./Vehicle.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
 import { planVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
@@ -66,45 +71,121 @@ export function drivenCarPose(
   const scale = length > 1 ? 1 / length : 1;
   const performance = vehiclePerformance(car.type);
   const previous = car.sprite?.direction ?? Direction.Down;
-  // Reverse is a shared held action: back along the nose, with optional directional steering.
-  // It is deliberately slower than forward driving and cannot be boosted.
+  // Directional input steers toward a nose bearing. It never supplies sideways
+  // velocity: signed rolling distance turns the chassis, including in reverse.
+  const heading = vehicleNoseHeading(car);
   const reverse = input.reversing === true;
-  const direction = length
-    ? { x: input.dx * scale, y: input.dy * scale }
-    : {
-        x: previous === Direction.Left ? -1 : previous === Direction.Right ? 1 : 0,
-        y: previous === Direction.Up ? -1 : previous === Direction.Down ? 1 : 0,
-      };
-  const speed = performance.speed * (reverse ? -0.5 : input.sprinting ? 1.6 : 1);
-  const targetX = (reverse ? direction.x : input.dx * scale) * speed,
-    targetY = (reverse ? direction.y : input.dy * scale) * speed;
+  const targetSpeed =
+    performance.speed *
+    (reverse ? -0.5 : input.sprinting ? 1.6 : 1) *
+    (reverse ? 1 : length * scale);
   const old = car.velocity ?? { vx: 0, vy: 0 };
-  const change = { vx: targetX - old.vx, vy: targetY - old.vy };
-  const difference = Math.hypot(change.vx, change.vy);
-  const amount = Math.min(
-    1,
-    ((length || reverse ? performance.acceleration : 448) * dt) / (difference || 1),
-  );
-  const velocity = { vx: old.vx + change.vx * amount, vy: old.vy + change.vy * amount };
-  if (contactSpeed !== undefined) {
-    const factor = Math.min(1, contactSpeed / (Math.hypot(velocity.vx, velocity.vy) || 1));
-    velocity.vx *= factor;
-    velocity.vy *= factor;
-  }
+  const oldSpeed = old.vx * Math.cos(heading) + old.vy * Math.sin(heading);
+  const acceleration = (length || reverse ? performance.acceleration : 448) * dt;
+  let speed = oldSpeed + Math.max(-acceleration, Math.min(acceleration, targetSpeed - oldSpeed));
+  if (contactSpeed !== undefined) speed = Math.max(-contactSpeed, Math.min(contactSpeed, speed));
+  const distance = speed * dt;
+  const error = length
+    ? Math.atan2(
+        Math.sin(Math.atan2(input.dy, input.dx) - heading),
+        Math.cos(Math.atan2(input.dy, input.dx) - heading),
+      )
+    : 0;
+  const steering = reverse ? Math.sin(error) : Math.max(-1, Math.min(1, error / (Math.PI / 3)));
+  let turn = (steering * distance) / vehicleTurningRadius(car.type);
+  if (distance > 0) turn = Math.sign(turn) * Math.min(Math.abs(turn), Math.abs(error));
+  // Quantize the authoritative bearing to its wire representation before using
+  // it again, so binary replay and native simulation share the same turn state.
+  const nose = Math.fround(Math.atan2(Math.sin(heading + turn), Math.cos(heading + turn)));
+  const velocity = { vx: Math.cos(nose) * speed, vy: Math.sin(nose) * speed };
+  const middle = heading + turn / 2;
+  const arcScale = Math.abs(turn) > 0.000001 ? Math.sin(turn / 2) / (turn / 2) : 1;
   const next: Entity = {
+    ...car,
+    sprite: car.sprite && { ...car.sprite },
+    position: {
+      wx: car.position.wx + Math.cos(middle) * distance * arcScale,
+      wy: car.position.wy + Math.sin(middle) * distance * arcScale,
+    },
+    velocity,
+    vehicleHeading: nose,
+  };
+  applyVehicleFacing(next, facing(Math.cos(nose), Math.sin(nose), previous));
+  if (!checkedCarPose(car, next, dt, world, props, entities, queries, pushes !== undefined)) return;
+  if (pushes) {
+    const plan = planVehiclePushes(
+      [{ before: car, after: next }],
+      dt,
+      performance,
+      world,
+      props,
+      entities,
+      queries,
+    );
+    if (!plan) {
+      if (contactSpeed === undefined)
+        return drivenCarPose(
+          car,
+          input,
+          dt,
+          world,
+          props,
+          entities,
+          queries,
+          pushes,
+          performance.pushSpeed * 0.98,
+        );
+      return;
+    }
+    pushes.push(...plan);
+  }
+  return next;
+}
+
+/** NPC parking follows authored waypoints, with the same collision/passenger gates.
+ * Waypoints retain their existing directional integrator; they are not driver input. */
+export function routedCarPose(
+  car: Entity,
+  target: { vx: number; vy: number },
+  dt: number,
+  world: World,
+  props: readonly Prop[],
+  entities: readonly Entity[],
+): Entity | undefined {
+  const old = car.velocity ?? { vx: 0, vy: 0 };
+  const dx = target.vx - old.vx,
+    dy = target.vy - old.vy;
+  const factor = Math.min(
+    1,
+    (vehiclePerformance(car.type).acceleration * dt) / (Math.hypot(dx, dy) || 1),
+  );
+  const velocity = { vx: old.vx + dx * factor, vy: old.vy + dy * factor };
+  const next = {
     ...car,
     sprite: car.sprite && { ...car.sprite },
     position: { wx: car.position.wx + velocity.vx * dt, wy: car.position.wy + velocity.vy * dt },
     velocity,
   };
+  delete next.vehicleHeading;
   applyVehicleFacing(
     next,
-    reverse
-      ? facing(direction.x, direction.y, previous)
-      : length && velocity.vx * input.dx + velocity.vy * input.dy > 0
-        ? facing(velocity.vx, velocity.vy, previous)
-        : previous,
+    facing(velocity.vx, velocity.vy, car.sprite?.direction ?? Direction.Down),
   );
+  return checkedCarPose(car, next, dt, world, props, entities);
+}
+
+/** Pure full-body validation, shared by driven rolling motion and routed parking. */
+function checkedCarPose(
+  car: Entity,
+  next: Entity,
+  dt: number,
+  world: World,
+  props: readonly Prop[],
+  entities: readonly Entity[],
+  queries?: DrivingQueries,
+  planPushes = false,
+): Entity | undefined {
+  const velocity = next.velocity ?? { vx: 0, vy: 0 };
   if (!car.collider || !next.collider) return;
   const before = getEntityAABB(car.position, car.collider),
     after = getEntityAABB(next.position, next.collider);
@@ -146,7 +227,7 @@ export function drivenCarPose(
       aabbOverlapsPropWalls(after, prop.position, prop, z, height)
     )
       return;
-  for (const other of pushes ? [] : (queries?.bodies?.(swept) ?? entities)) {
+  for (const other of planPushes ? [] : (queries?.bodies?.(swept) ?? entities)) {
     if (
       other.id === car.id ||
       other.parentId === car.id ||
@@ -189,32 +270,5 @@ export function drivenCarPose(
       return;
   }
   if (next.sprite) next.sprite.moving = Math.hypot(velocity.vx, velocity.vy) > 0.01;
-  if (pushes) {
-    const plan = planVehiclePushes(
-      [{ before: car, after: next }],
-      dt,
-      performance,
-      world,
-      props,
-      entities,
-      queries,
-    );
-    if (!plan) {
-      if (contactSpeed === undefined)
-        return drivenCarPose(
-          car,
-          input,
-          dt,
-          world,
-          props,
-          entities,
-          queries,
-          pushes,
-          performance.pushSpeed * 0.98,
-        );
-      return;
-    }
-    pushes.push(...plan);
-  }
   return next;
 }

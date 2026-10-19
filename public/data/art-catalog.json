@@ -28951,7 +28951,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:48"
+          "source": "src/traffic/Vehicle.ts:77"
         }
       ]
     },
@@ -29103,11 +29103,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:140"
+          "source": "src/client/ClientStateView.ts:141"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:673"
+          "source": "src/client/ClientStateView.ts:686"
         },
         {
           "system": "Gameplay",
@@ -29115,7 +29115,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:1058"
+          "source": "src/client/PlayerPredictor.ts:1070"
         },
         {
           "system": "Gameplay",
@@ -29235,11 +29235,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:125"
+          "source": "src/shared/serialization.ts:127"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:166"
+          "source": "src/traffic/Driving.ts:247"
         },
         {
           "system": "Gameplay",

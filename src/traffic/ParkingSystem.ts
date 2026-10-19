@@ -4,10 +4,9 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import { createPerson1 } from "../entities/Person.js";
 import type { PropManager } from "../entities/PropManager.js";
 import type { World } from "../world/World.js";
-import { drivenCarPose } from "./Driving.js";
+import { drivenCarPose, routedCarPose } from "./Driving.js";
 import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js";
 import { createVehicle } from "./Vehicle.js";
-import { vehiclePerformance } from "./VehiclePerformance.js";
 
 type Point = PositionComponent;
 export interface ParkingVisit {
@@ -273,11 +272,11 @@ export class ParkingSystem {
     const oldSpeed = Math.hypot(velocity.vx, velocity.vy);
     if (oldSpeed > speed)
       car.velocity = { vx: (velocity.vx / oldSpeed) * speed, vy: (velocity.vy / oldSpeed) * speed };
-    const pose = drivenCarPose(
+    const pose = routedCarPose(
       car,
       {
-        dx: ((dx / distance) * speed) / vehiclePerformance(car.type).speed,
-        dy: ((dy / distance) * speed) / vehiclePerformance(car.type).speed,
+        vx: (dx / distance) * speed,
+        vy: (dy / distance) * speed,
       },
       dt,
       this.world,
@@ -293,6 +292,7 @@ export class ParkingSystem {
       stop(car);
       return false;
     }
+    delete car.vehicleHeading;
     car.position = pose.position;
     car.velocity = pose.velocity;
     car.collider = pose.collider;

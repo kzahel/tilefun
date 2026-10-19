@@ -192,3 +192,20 @@ it.each([
     });
   },
 );
+
+it("uses the shared driven heading at rest, in reverse, and on a fresh view after reload", () => {
+  const car = createVehicle("compact-1", 0, 0, Direction.Right);
+  car.vehicleHeading = Math.fround(Math.PI / 6);
+  car.velocity = { vx: 0, vy: 0 };
+  const poses = new EntityMeshPose();
+  const mesh = poses.evaluate(car, 1);
+  if (!mesh) throw Error("Missing driven mesh");
+  expect(2 * Math.atan2(mesh.orientation[2], mesh.orientation[3])).toBeCloseTo(car.vehicleHeading);
+  car.velocity = { vx: -20 * Math.cos(car.vehicleHeading), vy: -20 * Math.sin(car.vehicleHeading) };
+  poses.evaluate(car, 1.1, { wx: car.velocity.vx / 10, wy: car.velocity.vy / 10 });
+  expect(mesh.wheelTravel).toBeCloseTo(-2);
+  expect(2 * Math.atan2(mesh.orientation[2], mesh.orientation[3])).toBeCloseTo(car.vehicleHeading);
+  poses.clear();
+  const restored = poses.evaluate(car, 2);
+  expect(restored?.orientation).toEqual(mesh.orientation);
+});

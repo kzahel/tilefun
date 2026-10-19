@@ -19,6 +19,7 @@ import {
   setTimeScale,
 } from "../physics/PlayerMovement.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
+import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { GameServer } from "../server/GameServer.js";
 import { applyEntityDelta } from "../shared/entityDelta.js";
 import type {
@@ -213,7 +214,19 @@ export class RemoteStateView implements ClientStateView {
     this.presentedEntities = entities.map((e) => {
       if (e.id === this._playerEntityId && player) return player;
       if (mount && e.id === mount.id)
-        return { ...mount, prevPosition: this._predictor?.mountPrevPosition ?? mount.position };
+        return {
+          ...mount,
+          ...(mount.vehicleHeading === undefined
+            ? {}
+            : {
+                vehicleHeading: interpolateHeading(
+                  this._predictor?.mountPrevHeading ?? mount.vehicleHeading,
+                  mount.vehicleHeading,
+                  alpha,
+                ),
+              }),
+          prevPosition: this._predictor?.mountPrevPosition ?? mount.position,
+        };
       return e;
     });
   }

@@ -46,3 +46,20 @@ for (const hz of [30, 60] as const)
     expect(delayed.summary.endAuthoritySpeed).toBe(0);
     expect(delayed.summary.maxDriverCarSeparationPx).toBe(0);
   });
+
+for (const hz of [30, 60] as const)
+  it(`replays curved reverse, a rolling gear change and a diagonal stop (${hz}Hz)`, async () => {
+    const regular = await runCarDrivingCase(hz, "regular", "reverse-turn");
+    const delayed = await runCarDrivingCase(hz, "late-input", "reverse-turn");
+    expect(delayed.summary.maxReconcileShiftPx).toBeLessThan(0.001);
+    expect(delayed.summary.maxReconcileVelocityShift).toBeLessThan(0.001);
+    expect(delayed.summary.maxReconcileHeadingShift).toBeLessThan(0.00001);
+    expect(delayed.summary.endAuthorityHeading).toBeCloseTo(
+      regular.summary.endAuthorityHeading ?? 0,
+      5,
+    );
+    expect(delayed.summary.endAuthorityX).toBeCloseTo(regular.summary.endAuthorityX, 5);
+    expect(delayed.summary.endAuthorityY).toBeCloseTo(regular.summary.endAuthorityY, 5);
+    expect(delayed.summary.endAuthoritySpeed).toBe(0);
+    expect(delayed.summary.motionWithoutInputPx).toBe(0);
+  });

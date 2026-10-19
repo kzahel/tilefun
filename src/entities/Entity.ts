@@ -121,6 +121,8 @@ export interface Entity {
   ballThrowerId?: number;
   /** Emergency lights enabled and selected siren style; see EmergencyVehicle. */
   emergencyState?: number;
+  /** Driven-car nose angle in world radians, retained while parked. */
+  vehicleHeading?: number;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

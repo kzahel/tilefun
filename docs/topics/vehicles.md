@@ -74,12 +74,30 @@ rest pose and remain excluded from automatic traffic; the other 44 types retain
 normal road-width admission. All types preserve complete sprite fallback.
 Exact model-art review and nonzero steering/equipment-motion qualification remain open.
 
+## Rolling steering
+
+[144](../tactical/144-rolling-car-steering.md) makes driven cars turn with signed
+rolling distance. Directional input still aims the car; forward travel curves
+toward that bearing, while backing reverses the steering effect. Release brakes
+along the nose. There is no stationary pivot or sideways velocity. Turning radius
+uses the approved body's length, with a 40px minimum; long vehicles turn wider.
+Cars keep their nose through zero speed and while parked, including reload.
+
+One optional float32 `vehicleHeading` belongs to shared authority/prediction.
+It is replicated through baselines/deltas, restored before replay and persisted
+in traffic records; older records fall back to saved cardinal facing. GPU meshes
+use this bearing, with shortest-arc local/remote presentation interpolation and
+signed wheel travel. Sprite fallback and collision still use approved cardinal
+views/footprints. This is rolling motion, not rotated collision geometry or
+animated front-wheel steering. Automatic route traffic and trains retain their
+existing motion owners. Game, web, Deck and embedded labs share the same rules.
+
 ## Shared reverse driving
 
 [140](../tactical/140-shared-input-ux-and-reverse.md) adds held Reverse (paddle,
 R key or LT) through the existing binary command, shared authority and prediction.
-It backs along the nose without steering input; directional input steers the nose
-while backing. Speed is half base speed, without boost. Release brakes normally.
+It backs along the nose without steering input; directional input now follows
+the rolling-steering contract above. Speed is half base speed, without boost. Release brakes normally.
 The ordinary collision, gentle push, roof-rider and terrain-readiness gates remain
 shared by game and embedded labs. Replicated facing keeps sprite/GPU noses forward
 and GPU wheels roll with signed backward travel. Gear state is not saved.
@@ -160,9 +178,9 @@ braking remains service-timed. Collision, roofs and approved art are unchanged.
 owner's 2026-10-10 choice: explicit **Drive car · E** beside a stopped car,
 with the player hidden inside after authority grants the seat. One driver owns
 the car; other players can still walk/jump onto the roof and ride visibly.
-WASD/arrows or the movement stick drive directly, including normalized diagonals.
+WASD/arrows or the movement stick steer rolling turns, including normalized diagonals.
 Native cardinal views follow the heading with a small facing switch margin.
-In **Tap to move**, tap a destination to drive straight there without pathfinding;
+In **Tap to move**, tap a destination to steer there without pathfinding;
 arrival, obstacles and menu/focus changes stop the car.
 In **Hold to move**, steer toward the held finger and lift to brake;
 [touch movement](touch-movement.md) owns contact priority and cancellation. Cars keep whole-body,

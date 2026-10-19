@@ -78,6 +78,7 @@ export interface SavedTraffic {
   placed?: boolean;
   parked?: boolean;
   facing?: number;
+  vehicleHeading?: number;
   resumePath?: Path;
   persistentId?: string;
   originScope?: string;
@@ -748,6 +749,7 @@ export class TrafficSystem {
         s.entity.velocity = { vx: 0, vy: 0 };
       } else {
         carryMovingPassengers(passengers, this.entities);
+        if (Math.abs(move) > 0.000001) delete s.entity.vehicleHeading;
         s.entity.position = next.position;
         s.entity.collider = next.collider;
         s.entity.sprite = next.sprite;
@@ -860,6 +862,7 @@ export class TrafficSystem {
         wz: next.wz,
         groundZ: next.groundZ,
         sortOffsetY: next.sortOffsetY,
+        vehicleHeading: next.vehicleHeading,
       });
     }
     this.entities.spatialHash.update(s.entity);
@@ -953,6 +956,7 @@ export class TrafficSystem {
       shoppingTrips: s.shoppingTrips ?? 0,
       parked: s.parked ?? false,
       facing: s.entity.sprite?.direction ?? 0,
+      ...(s.entity.vehicleHeading !== undefined ? { vehicleHeading: s.entity.vehicleHeading } : {}),
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
       identity: required(s.entity.proceduralId),
       model: s.entity.type.slice(11),
@@ -1033,6 +1037,11 @@ export class TrafficSystem {
         : (graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId));
       if (r.parked !== undefined && typeof r.parked !== "boolean")
         throw new Error("Invalid parked state.");
+      if (
+        r.vehicleHeading !== undefined &&
+        (!Number.isFinite(r.vehicleHeading) || Math.abs(r.vehicleHeading) > Math.PI + 0.000001)
+      )
+        throw new Error("Invalid saved vehicle heading.");
       if (r.facing !== undefined && ![0, 1, 2, 3].includes(r.facing))
         throw new Error("Invalid saved facing.");
       if (
@@ -1134,6 +1143,8 @@ export class TrafficSystem {
         ? { wx: r.wx ?? pose.x, wy: r.wy ?? pose.y }
         : { wx: pose.x, wy: pose.y };
       applyVehicleFacing(s.entity, r.parked ? (r.facing ?? pose.direction) : pose.direction);
+      if (r.parked && r.vehicleHeading !== undefined)
+        s.entity.vehicleHeading = Math.fround(r.vehicleHeading);
       this.entities.spatialHash.update(s.entity);
       s.shoppingCooldown = r.shoppingCooldown ?? 0;
       s.shoppingTrips = r.shoppingTrips ?? 0;

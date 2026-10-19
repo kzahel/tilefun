@@ -41,6 +41,7 @@ export function trainMeshHeading(entity: Entity): number {
   return Math.cos(moving - heading) < 0 ? moving + Math.PI : moving;
 }
 export function entityHeading(entity: Entity): number {
+  if (isVehicle(entity) && entity.vehicleHeading !== undefined) return entity.vehicleHeading;
   const velocity = entity.velocity;
   if (velocity && Math.hypot(velocity.vx, velocity.vy) > 0.01) {
     const moving = Math.atan2(velocity.vy, velocity.vx);
@@ -145,7 +146,7 @@ export class EntityMeshPose {
       pose.y = position.wy;
       pose.instance.wheelTravel = pose.travel;
       pose.time = time;
-      if (train) pose.angle = target;
+      if (train || entity.vehicleHeading !== undefined) pose.angle = target;
       pose.orientation[2] = Math.sin(pose.angle / 2);
       pose.orientation[3] = Math.cos(pose.angle / 2);
     }

@@ -26,7 +26,7 @@ const PHASE_MS = 1000 / 480;
 export async function runCarDrivingCase(
   serverHz: 30 | 60,
   profile: Profile,
-  motion: "cruise" | "turn-release" | "reverse" = "cruise",
+  motion: "cruise" | "turn-release" | "reverse" | "reverse-turn" = "cruise",
 ) {
   const originalRate = getServerTickRate();
   const recipe = contactRecipe("car-roof");
@@ -69,8 +69,13 @@ export async function runCarDrivingCase(
       vx: number;
       advance: number;
     }[] = [];
-    const reconciliations: { step: number; ack: number; shift: number; velocityShift: number }[] =
-      [];
+    const reconciliations: {
+      step: number;
+      ack: number;
+      shift: number;
+      velocityShift: number;
+      headingShift: number;
+    }[] = [];
     const samples: {
       step: number;
       alpha: number;
@@ -92,6 +97,7 @@ export async function runCarDrivingCase(
         if (applied) {
           const beforeX = required(predictor.mount).position.wx;
           const beforeY = required(predictor.mount).position.wy;
+          const beforeHeading = predictor.mount?.vehicleHeading ?? 0;
           const beforeVx = required(predictor.mount).velocity?.vx ?? 0;
           const beforeVy = required(predictor.mount).velocity?.vy ?? 0;
           predictor.reconcile(
@@ -114,6 +120,12 @@ export async function runCarDrivingCase(
               required(predictor.mount).position.wx - beforeX,
               required(predictor.mount).position.wy - beforeY,
             ),
+            headingShift: Math.abs(
+              Math.atan2(
+                Math.sin((predictor.mount?.vehicleHeading ?? 0) - beforeHeading),
+                Math.cos((predictor.mount?.vehicleHeading ?? 0) - beforeHeading),
+              ),
+            ),
             velocityShift: Math.hypot(
               (required(predictor.mount).velocity?.vx ?? 0) - beforeVx,
               (required(predictor.mount).velocity?.vy ?? 0) - beforeVy,
@@ -122,15 +134,21 @@ export async function runCarDrivingCase(
         }
         const commandDt = quantizeInputDtMs(dt * 1000) / 1000;
         const input =
-          motion === "reverse"
-            ? { ...IDLE, reversing: true }
-            : motion === "cruise" || step < 120
+          motion === "reverse-turn"
+            ? step < 120
               ? RIGHT
-              : step < 240
-                ? { ...RIGHT, dy: 1 }
-                : step < 360
-                  ? { ...IDLE, dy: -1 }
-                  : IDLE;
+              : step < 360
+                ? { ...IDLE, dy: 1, reversing: true }
+                : IDLE
+            : motion === "reverse"
+              ? { ...IDLE, reversing: true }
+              : motion === "cruise" || step < 120
+                ? RIGHT
+                : step < 240
+                  ? { ...RIGHT, dy: 1 }
+                  : step < 360
+                    ? { ...IDLE, dy: -1 }
+                    : IDLE;
         predictor.storeInput(++seq, input, commandDt);
         predictor.update(commandDt, input, view.world, view.props, view.serverEntities);
         // Every half-second, move one input across a server deadline. Delivery
@@ -220,6 +238,8 @@ export async function runCarDrivingCase(
       profile,
       summary: {
         maxReconcileShiftPx: Math.max(0, ...cruiseReconciliations.map((s) => Math.abs(s.shift))),
+        maxReconcileHeadingShift: Math.max(0, ...cruiseReconciliations.map((s) => s.headingShift)),
+        endAuthorityHeading: car.vehicleHeading,
         maxReconcileVelocityShift: Math.max(
           0,
           ...cruiseReconciliations.map((s) => Math.abs(s.velocityShift)),

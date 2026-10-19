@@ -15,6 +15,7 @@ import {
   isWarningVehicle,
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { vehicleNoseHeading } from "../traffic/Vehicle.js";
 
 export type TrafficCanvas = HTMLCanvasElement & {
   /** Read-only, on-demand diagnostics for lab profiling and integration checks. */
@@ -90,7 +91,12 @@ export default function TrafficPage() {
         c.dataset.playerZ = String(s.view.playerEntity.wz ?? 0);
         c.dataset.carX = String(car.position.wx);
         c.dataset.carY = String(car.position.wy);
-        c.dataset.speed = String(s.traffic?.speed ?? 0);
+        c.dataset.carHeading = String(vehicleNoseHeading(car));
+        c.dataset.speed = String(
+          occupied
+            ? Math.hypot(car.velocity?.vx ?? 0, car.velocity?.vy ?? 0)
+            : (s.traffic?.speed ?? 0),
+        );
         c.dataset.waiting = s.traffic?.waiting ?? "";
         c.dataset.cars = String(
           s.view.entities.filter((e) => e.type.startsWith("vehicle-v1:")).length,

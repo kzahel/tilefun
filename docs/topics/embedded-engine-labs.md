@@ -800,3 +800,14 @@ shopper integration. Generated city preview and main game share these owners.
 Parking presentation requests GPU meshes through the shared selectable host default,
 while explicit renderer URLs remain authoritative. Native parked cars replace
 painted references only in playable views; static review pixels remain independent.
+
+## Rolling car steering (2026-10-19)
+
+[144](../tactical/144-rolling-car-steering.md) changes shared `drivenCarPose` to
+longitudinal motion and distance-based turning. Traffic, Natural landscape and
+World geometry keep ordinary directional axes/Reverse through ScenarioClient;
+none owns a steering integrator. Float32 nose state is replicated, restored for
+replay and saved in parked traffic records. Shared local/remote presentation
+interpolates its angle and meshes retain it at rest. Cardinal collision and
+sprite fallback remain tied to the immutable approved bank. Trains and automatic
+road motion keep their existing owners.

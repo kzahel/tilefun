@@ -176,3 +176,10 @@ clients and servers must run the same build. The inside driver alone changes it,
 and TrafficSystem saves style/on-off through the normal durable traffic record.
 The existing sprint input boosts shared car prediction/authority and service-owned
 trains. [117](tactical/117-ambulance-driving-controls.md) owns feature validation.
+
+Driven cars also carry optional float32 `vehicleHeading` in shared simulation,
+traffic saves and entity replication. Baseline presence masks are now u32;
+delta change/null masks retain u32 with heading at bit 17. Both endpoints require
+the same build. Prediction restores the bearing before replay; presentation
+interpolates shortest arcs on borrowed clones without writing physics state.
+See [rolling steering](tactical/144-rolling-car-steering.md).

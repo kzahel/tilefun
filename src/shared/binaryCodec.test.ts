@@ -185,6 +185,8 @@ describe("EntitySnapshot binary codec", () => {
       airMomentumX: 192.5,
       airMomentumY: -36.25,
       jumpInputState: 3,
+      emergencyState: 5,
+      vehicleHeading: Math.fround(-2.13),
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -217,6 +219,8 @@ describe("EntitySnapshot binary codec", () => {
     expect(result.airMomentumX).toBe(192.5);
     expect(result.airMomentumY).toBe(-36.25);
     expect(result.jumpInputState).toBe(3);
+    expect(result.emergencyState).toBe(5);
+    expect(result.vehicleHeading).toBe(Math.fround(-2.13));
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);
@@ -500,6 +504,8 @@ describe("EntityDelta binary codec", () => {
       airMomentumX: 192.5,
       airMomentumY: -36.25,
       jumpInputState: 3,
+      emergencyState: 5,
+      vehicleHeading: Math.fround(-2.13),
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -522,6 +528,8 @@ describe("EntityDelta binary codec", () => {
     expect(result.airMomentumX).toBe(192.5);
     expect(result.airMomentumY).toBe(-36.25);
     expect(result.jumpInputState).toBe(3);
+    expect(result.emergencyState).toBe(5);
+    expect(result.vehicleHeading).toBe(Math.fround(-2.13));
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);

@@ -98,6 +98,9 @@ and streaming readiness passed. The full 714-browser run had 709 passes; its fiv
 failures were resolved and passed in focused reruns. The final cursor/focus
 scenario passed three consecutive runs. All 880 Workshop identities are retained.
 
+[144](../tactical/144-rolling-car-steering.md) adds shared rolling car turns:
+no stationary pivot, opposite steering yaw in reverse and persistent nose bearings.
+
 Continue hands-on editing, driving and map trials to tune the shared web UI.
 Automated standard-gamepad snapshots and native contact injection establish the
 input path, not physical button/finger feel or child usability.

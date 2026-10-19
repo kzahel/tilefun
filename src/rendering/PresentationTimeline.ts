@@ -5,6 +5,11 @@ export interface MotionSample {
   y: number;
   z: number;
   jumpZ: number;
+  vehicleHeading?: number;
+}
+/** Shortest arc, including the -pi/pi seam; also used for local predicted poses. */
+export function interpolateHeading(a: number, b: number, fraction: number): number {
+  return a + Math.atan2(Math.sin(b - a), Math.cos(b - a)) * fraction;
 }
 export const PRESENTATION_DELAY = 0.05;
 export const MAX_PRESENTATION_EXTRAPOLATION = 0.1;
@@ -56,6 +61,15 @@ export function sampleMotion(
     y: a.y + (b.y - a.y) * f,
     z: a.z + (b.z - a.z) * f,
     jumpZ: a.jumpZ + (b.jumpZ - a.jumpZ) * f,
+    ...(b.vehicleHeading === undefined
+      ? {}
+      : {
+          vehicleHeading: interpolateHeading(
+            a.vehicleHeading ?? b.vehicleHeading,
+            b.vehicleHeading,
+            f,
+          ),
+        }),
   };
 }
 

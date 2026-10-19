@@ -3,12 +3,21 @@
 Topic: multiplayer-networking
 Status: reliable ordered replication and fragmented P2P snapshots; bounded guest
 recovery with failure diagnostics. Broader network investigation is deferred.
-Updated: 2026-10-18.
+Updated: 2026-10-19.
 
 Owns ongoing transport/replication decisions and gaps. The
 [architecture guide](../client-server-architecture.md) owns runtime boundaries;
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
+
+## Driven-car heading codec
+
+[144](../tactical/144-rolling-car-steering.md) carries optional float32
+`vehicleHeading` in baseline presence bit 16 and delta change/null bit 17.
+Baseline masks expand from u16 to u32; existing delta masks stay u32. Removal is
+explicit when a car returns to automatic route ownership. All endpoints must
+update together. Authority and prediction consume the same quantized bearing;
+remote presentation interpolates it without changing physics.
 
 ## Packaged host/join and shared menus
 

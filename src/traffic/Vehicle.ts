@@ -8,6 +8,35 @@ export const VEHICLE_MODELS = [...new Set(bank.views.map((v) => v.vehicleId))];
 export const TRAFFIC_MODELS = VEHICLE_MODELS.filter((id) => id !== "fire-truck-ladder-2");
 const directions = ["south", "north", "west", "east"];
 const viewsByKey = new Map(bank.views.map((v) => [`vehicle-v1:${v.vehicleId}:${v.direction}`, v]));
+// Longer bodies need more room to turn. Use the immutable approved footprints,
+// independent of the currently selected cardinal sprite and rendering backend.
+const turningRadii = new Map(
+  VEHICLE_MODELS.map((id) => [
+    `vehicle-v1:${id}`,
+    Math.max(
+      40,
+      ...bank.views
+        .filter((v) => v.vehicleId === id)
+        .flatMap((v) => v.metadata.colliders.map((c) => Math.max(c.width, c.height) * 0.7)),
+    ),
+  ]),
+);
+export function vehicleTurningRadius(type: string): number {
+  return turningRadii.get(type) ?? 40;
+}
+export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "sprite">): number {
+  if (entity.vehicleHeading !== undefined) return entity.vehicleHeading;
+  switch (entity.sprite?.direction) {
+    case Direction.Up:
+      return -Math.PI / 2;
+    case Direction.Down:
+      return Math.PI / 2;
+    case Direction.Left:
+      return Math.PI;
+    default:
+      return 0;
+  }
+}
 const roofSizes = new Map(
   VEHICLE_MODELS.map((id) => [
     id,

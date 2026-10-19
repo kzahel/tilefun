@@ -5013,7 +5013,7 @@
       "name": "Shopping center · parking and shoppers",
       "prompt": "Watch the normal generated city shopping trip, with native road arrival, return, obstruction waits and paused save/reload. Pavement and markings use the ordinary terrain chunk renderer.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1",
-      "fingerprint": "9ca2c00344a71afe3b008f6b6607cfa6bd96545755e8ce4e4d05c7f6aca7bc05",
+      "fingerprint": "2f3293c3bf4d561ed2d17f4dfd6e9917d9a78e9ef0d3e7010866b1c69179c671",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -5023,7 +5023,7 @@
       "name": "Generated city · road to shopping center",
       "prompt": "Follow the same native road car into the generated shopping center, watch its shopper visit and return, then follow its checked merge back onto the boulevard. One visitor per center; no entrance or exit teleport.",
       "url": "/tilefun/workshop.html#/tool/parking-lab?play=1&city=1",
-      "fingerprint": "9ca2c00344a71afe3b008f6b6607cfa6bd96545755e8ce4e4d05c7f6aca7bc05",
+      "fingerprint": "2f3293c3bf4d561ed2d17f4dfd6e9917d9a78e9ef0d3e7010866b1c69179c671",
       "excluded": "Playable behavior study; static parking-pattern review snapshots retain their own identities."
     },
     {
@@ -10354,7 +10354,7 @@
       "prompt": "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review.",
       "url": "/tilefun/workshop.html?geometry=nature-racetrack&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=462&y=455&landscape=sparse&zoom=0.8",
-      "fingerprint": "333f16d543da82363a00166fc1b2c38f15937fdd56dca64fbae0bc6288c79c3f"
+      "fingerprint": "d5f7784487ff45152b09729c099a94b34d9244c6616962c21800c5af45bda163"
     },
     {
       "id": "nature:racetrack:balanced:v1",
@@ -10364,7 +10364,7 @@
       "prompt": "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review.",
       "url": "/tilefun/workshop.html?geometry=nature-racetrack&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=462&y=455&landscape=balanced&zoom=0.8",
-      "fingerprint": "e6a30ff7afeaa24ab0a299a4204fe0c0a5816572a9c5aa81b1d8060b3e638754"
+      "fingerprint": "86799a9db66d5a8dcc76ce6a3c07025311f88b07ae28f49ba2e4de9ef17b97a7"
     },
     {
       "id": "nature:racetrack:lush:v1",
@@ -10374,7 +10374,7 @@
       "prompt": "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review.",
       "url": "/tilefun/workshop.html?geometry=nature-racetrack&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=462&y=455&landscape=lush&zoom=0.8",
-      "fingerprint": "62b55ce1e26e4c47cc5c641bdbab4962ddd9dc9746f717a01abf2ca3eff200fc"
+      "fingerprint": "7ece7ae3004bf5310882c186ce236aa0b219dcc42b8dcfc8bdfc6c9e5b1d9bc0"
     },
     {
       "id": "nature:racetrack:thicket:v1",
@@ -10384,7 +10384,7 @@
       "prompt": "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review.",
       "url": "/tilefun/workshop.html?geometry=nature-racetrack&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=462&y=455&landscape=thicket&zoom=0.8",
-      "fingerprint": "be779b4580e245805e9ec2928adc85ab84fb9a87dc9428cc4aff75170965051d"
+      "fingerprint": "f61149dde6b694cfd96b353972e0a268a3e00b59fdadf9dc35b2cbbf3bbfdf7c"
     },
     {
       "id": "nature:city-pets:sparse:v1",
@@ -11664,7 +11664,7 @@
       "name": "Car crossing the railway bridge",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-bridge#/tool/world-geometry",
-      "fingerprint": "1d8aab4878e4c6e370b671874b6272b41b680da76cd21540ffc6aff38025f05d",
+      "fingerprint": "e545c7e38b12bf9ecdf147f625e29ddd2b16ae68f54d659a7e38ce2bf7bcee89",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -11674,7 +11674,7 @@
       "name": "Car entering an underground garage",
       "prompt": "Run both directions and reload on the ramp; inspect full-body support and clearance using production traffic. Level chassis, schematic surfaces, unchanged native car art.",
       "url": "/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry",
-      "fingerprint": "9d45a9d973d4d53bc70e59505a63d792adc70d2129c23db570726d00bc490953",
+      "fingerprint": "3a73a73cc2f815406e723acf1a563a77659ee4c82b16f1ed7a8f1c27b3827b46",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -11724,7 +11724,7 @@
       "name": "Generated road bridge · seed 100",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-100#/tool/world-geometry",
-      "fingerprint": "002747dca914c36e15a097823770a04480d93f450376a6e825e9b687b09490d0",
+      "fingerprint": "9887be26c922db5aa2073f607e751c514756459eba1df55e13b5c017f56c2ab0",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -11734,7 +11734,7 @@
       "name": "Generated road bridge · seed 42",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry",
-      "fingerprint": "98aaa251130ea5647b088a243f215350a1837def826aa9f07aabf6ee83adb8b3",
+      "fingerprint": "50a259e5c62f258a43bc8f9fdec8342a01d59aad5379e5853973427a132338c8",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -11744,7 +11744,7 @@
       "name": "Generated road bridge · seed 3",
       "prompt": "Walk both approaches and underneath; watch generated road traffic above level rails, then save/reload. Real regional terrain and routes; schematic bridge surfaces, staged initial vehicle positions.",
       "url": "/tilefun/workshop.html?geometry=generated-3#/tool/world-geometry",
-      "fingerprint": "9b4c6dd2bab38abaa974754513a236e86c553a5a29eda75bc60f4b39d12b3de8",
+      "fingerprint": "0de8748be0863e933dafaa83009fa94211a6ea9b8443f27c6bd59414fc9a4b11",
       "excluded": "Interactive generated-world experiment; schematic structure, not an immutable art approval snapshot."
     },
     {
@@ -40719,5 +40719,5 @@
       }
     }
   ],
-  "inputDigest": "3117901cb460221252625390ddd616db180a252613d8cff779aedccbd43b3fcb"
+  "inputDigest": "5ecc0dc8b9c462d82cc33bcd2a357f567743b153e3cb19f2b86dbd8e7df49e98"
 }

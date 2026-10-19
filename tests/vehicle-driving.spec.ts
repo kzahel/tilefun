@@ -362,7 +362,9 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       await page.keyboard.up("ArrowDown");
       await page.keyboard.up("ArrowRight");
       expect(alignment.length).toBeGreaterThan(5);
-      expect(Math.max(...alignment.map(Math.abs))).toBeLessThan(0.001);
+      // Rolling turns have a finite radius: the current nose leads the
+      // preceding displayed chord slightly (bounded by one tick of curvature).
+      expect(Math.max(...alignment.map(Math.abs))).toBeLessThan(0.06);
       await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
       const stoppedHeading = () =>
         page.evaluate(() => {

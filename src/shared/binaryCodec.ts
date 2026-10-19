@@ -36,7 +36,7 @@ const AI_STATES = ["idle", "walking", "chasing", "following", "ridden", "scared"
 const AI_STATE_TO_INDEX: Record<string, number> = {};
 for (let i = 0; i < AI_STATES.length; i++) AI_STATE_TO_INDEX[AI_STATES[i]!] = i;
 
-// ---- Presence bitmask bits (shared by baseline and delta) ----
+// ---- Baseline presence bitmask bits (u32; delta has its own mapping) ----
 
 const BIT_VELOCITY = 0;
 const BIT_SPRITE = 1;
@@ -53,6 +53,7 @@ const BIT_LOCAL_OFFSET_Y = 11;
 const BIT_AIR_MOMENTUM_Y = 13;
 const BIT_JUMP_INPUT_STATE = 14;
 const BIT_EMERGENCY_STATE = 15;
+const BIT_VEHICLE_HEADING = 16;
 const BIT_AIR_MOMENTUM_X = 12;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
@@ -110,8 +111,9 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 // ---- FrameMessage binary codec ----
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
-const MAX_BASELINE_SIZE = 16 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
-const MAX_DELTA_SIZE = 13 + 8 + 8 + 3 + 1 + 1 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 8 + 4; // Passive XY velocity and jump-button latch.
+// Fixed header, velocity, full sprite/AI, booleans, eleven 32-bit fields and lights.
+const MAX_BASELINE_SIZE = 17 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
+const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -263,8 +265,9 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.airMomentumY !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_Y;
   if (snap.jumpInputState !== undefined) mask |= 1 << BIT_JUMP_INPUT_STATE;
   if (snap.emergencyState !== undefined) mask |= 1 << BIT_EMERGENCY_STATE;
-  view.setUint16(off, mask, true);
-  off += 2;
+  if (snap.vehicleHeading !== undefined) mask |= 1 << BIT_VEHICLE_HEADING;
+  view.setUint32(off, mask, true);
+  off += 4;
 
   // Conditional fields
   if (mask & (1 << BIT_VELOCITY)) {
@@ -333,6 +336,10 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     off += 4;
   }
   if (snap.emergencyState !== undefined) view.setUint8(off++, snap.emergencyState);
+  if (snap.vehicleHeading !== undefined) {
+    view.setFloat32(off, snap.vehicleHeading, true);
+    off += 4;
+  }
   return off;
 }
 
@@ -349,8 +356,8 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
   const wy = view.getFloat32(off, true);
   off += 4;
 
-  const mask = view.getUint16(off, true);
-  off += 2;
+  const mask = view.getUint32(off, true);
+  off += 4;
 
   let velocity: { vx: number; vy: number } | null = null;
   let spriteState: SpriteState | null = null;
@@ -433,6 +440,10 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     off += 4;
   }
   if (mask & (1 << BIT_EMERGENCY_STATE)) snap.emergencyState = view.getUint8(off++);
+  if (mask & (1 << BIT_VEHICLE_HEADING)) {
+    snap.vehicleHeading = view.getFloat32(off, true);
+    off += 4;
+  }
   return [snap, off];
 }
 
@@ -535,6 +546,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     changeMask |= 1 << 16;
     if (delta.emergencyState === null) nullMask |= 1 << 16;
   }
+  if (delta.vehicleHeading !== undefined) {
+    changeMask |= 1 << 17;
+    if (delta.vehicleHeading === null) nullMask |= 1 << 17;
+  }
   view.setUint32(off, changeMask, true);
   off += 4;
   view.setUint32(off, nullMask, true);
@@ -618,6 +633,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   }
   if (changeMask & (1 << 16) && !(nullMask & (1 << 16)))
     view.setUint8(off++, delta.emergencyState as number);
+  if (changeMask & (1 << 17) && !(nullMask & (1 << 17))) {
+    view.setFloat32(off, delta.vehicleHeading as number, true);
+    off += 4;
+  }
   return off;
 }
 
@@ -788,6 +807,13 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
   }
   if (changeMask & (1 << 16))
     delta.emergencyState = nullMask & (1 << 16) ? null : view.getUint8(off++);
+  if (changeMask & (1 << 17)) {
+    if (nullMask & (1 << 17)) delta.vehicleHeading = null;
+    else {
+      delta.vehicleHeading = view.getFloat32(off, true);
+      off += 4;
+    }
+  }
   return [delta, off];
 }
 
