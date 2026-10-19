@@ -60,8 +60,10 @@ Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
 With `CI` set, browser tests use one worker and a 60-second overall deadline:
 hosted software GPU rendering can otherwise starve the simulation Worker.
-CI splits the suite across four independent runners, each with isolated auth/data
-and one browser worker. Individual assertion deadlines remain explicit. Long
+CI splits the suite across eight independent runners, each with isolated auth/data
+and one browser worker. The 1,474-case suite outgrew four shards; eight reduce
+wall time while preserving the same per-runner CPU/GPU budget and full coverage.
+Individual assertion deadlines remain explicit. Long
 headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
 Wildlife contact checks retry a grounded landing after any existing alarm finishes,
 because a flight can start between observing rest and clicking the inspection control.
