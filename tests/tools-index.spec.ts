@@ -5,7 +5,7 @@ test("game sidebar opens the central index and each listed destination is served
   page,
 }) => {
   await page.goto("/tilefun/");
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 15_000 });
   await page.getByTestId("main-menu-toggle").click();
   await page.getByTestId("open-tools-index").click();
   await expect(page).toHaveURL(/\/tilefun\/workshop.html$/);
@@ -111,6 +111,11 @@ test("tools and both in-game catalogs provide a return path to the index", async
     "?panel=interiors&interiorSource=room_builder_tile",
   ]) {
     await page.goto(`/tilefun/${path}`);
+    // Game catalogs open from the startup route after assets and authority load.
+    if (path.startsWith("?panel="))
+      await expect(page.locator("#game"), path).toHaveAttribute("data-ready", "true", {
+        timeout: 15_000,
+      });
     const back = page.getByRole("link", { name: /Indexes & atlases/ }).first();
     await expect(back, path).toBeVisible();
     await back.click();

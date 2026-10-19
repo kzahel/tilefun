@@ -67,6 +67,8 @@ Wildlife contact checks retry a grounded landing after any existing alarm finish
 because a flight can start between observing rest and clicking the inspection control.
 They still require the native escape clip and physical height. The raptor reload
 check retains its bounded hunt/perch ticks with a 30-second wall-time budget.
+Game-catalog deep-link checks await the completed startup route before testing
+the return link, with a 15-second readiness allowance for hosted rendering.
 Each CI shard stops at its first test failure so GitHub publishes its job logs
 promptly; other shards continue independently. Local runs collect all failures.
 The raster verification renders every Workshop candidate in headless-shell and
