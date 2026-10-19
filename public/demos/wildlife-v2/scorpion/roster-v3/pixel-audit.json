@@ -1,0 +1,17 @@
+{
+  "identity": "scorpion-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.603977798334867,
+    "up": 1.7261199596331949,
+    "left": 1.7913599209081355,
+    "right": 1.7913599209081355
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

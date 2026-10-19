@@ -609,3 +609,13 @@
 !worm/roster-v3/*
 !moray-eel/roster-v3/*
 !electric-eel/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!spider/roster-v3/*
+!praying-mantis/roster-v3/*
+!leaf-insect/roster-v3/*
+!scorpion/roster-v3/*
+!roly-poly/roster-v3/*
+!earwig/roster-v3/*
+!centipede/roster-v3/*
+!millipede/roster-v3/*

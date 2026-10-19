@@ -6,7 +6,7 @@
 
 [Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**54 newly completed; 18 in progress; 0 currently blocked; 2 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**62 newly completed; 12 in progress; 0 currently blocked; 0 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -52,13 +52,13 @@
 | Swordfish | finished-game-active | [Playback](../public/demos/wildlife-v2/swordfish/roster-v3/index.html) |
 | Pufferfish | finished-game-active | [Playback](../public/demos/wildlife-v2/pufferfish/roster-v3/index.html) |
 | Cuttlefish | in-progress | [Playback](../public/demos/wildlife-v2/cuttlefish/roster-v3/index.html) |
-| Coconut crab | in-progress | Source/animation work |
-| Horseshoe crab | in-progress | Source/animation work |
+| Coconut crab | in-progress | [Playback](../public/demos/wildlife-v2/coconut-crab/roster-v3/index.html) |
+| Horseshoe crab | in-progress | [Playback](../public/demos/wildlife-v2/horseshoe-crab/roster-v3/index.html) |
 | Seahorse | in-progress | [Playback](../public/demos/wildlife-v2/seahorse/roster-v3/index.html) |
 | Starfish | in-progress | [Playback](../public/demos/wildlife-v2/starfish/roster-v3/index.html) |
-| Lobster | in-progress | Source/animation work |
-| Shrimp | in-progress | Source/animation work |
-| Mantis shrimp | in-progress | Source/animation work |
+| Lobster | in-progress | [Playback](../public/demos/wildlife-v2/lobster/roster-v3/index.html) |
+| Shrimp | in-progress | [Playback](../public/demos/wildlife-v2/shrimp/roster-v3/index.html) |
+| Mantis shrimp | in-progress | [Playback](../public/demos/wildlife-v2/mantis-shrimp/roster-v3/index.html) |
 | Nautilus | in-progress | [Playback](../public/demos/wildlife-v2/nautilus/roster-v3/index.html) |
 | Sea lion | finished-game-active | [Playback](../public/demos/wildlife-v2/sea-lion/roster-v3/index.html) |
 | Manatee | finished-game-active | [Playback](../public/demos/wildlife-v2/manatee/roster-v3/index.html) |
@@ -72,16 +72,18 @@
 | Crocodile | finished-game-active | [Playback](../public/demos/wildlife-v2/crocodile/roster-v3/index.html) |
 | Alligator | finished-game-active | [Playback](../public/demos/wildlife-v2/alligator/roster-v3/index.html) |
 | Komodo dragon | finished-game-active | [Playback](../public/demos/wildlife-v2/komodo-dragon/roster-v3/index.html) |
-| Spider | in-progress | [Playback](../public/demos/wildlife-v2/spider/roster-v3/index.html) |
-| Praying mantis | in-progress | [Playback](../public/demos/wildlife-v2/praying-mantis/roster-v3/index.html) |
-| Leaf insect | in-progress | [Playback](../public/demos/wildlife-v2/leaf-insect/roster-v3/index.html) |
-| Scorpion | in-progress | [Playback](../public/demos/wildlife-v2/scorpion/roster-v3/index.html) |
-| Pill bug | in-progress | [Playback](../public/demos/wildlife-v2/roly-poly/roster-v3/index.html) |
-| Earwig (pincher bug) | in-progress | [Playback](../public/demos/wildlife-v2/earwig/roster-v3/index.html) |
-| Centipede | in-progress | [Playback](../public/demos/wildlife-v2/centipede/roster-v3/index.html) |
-| Millipede | in-progress | [Playback](../public/demos/wildlife-v2/millipede/roster-v3/index.html) |
+| Spider | finished-game-active | [Playback](../public/demos/wildlife-v2/spider/roster-v3/index.html) |
+| Praying mantis | finished-game-active | [Playback](../public/demos/wildlife-v2/praying-mantis/roster-v3/index.html) |
+| Leaf insect | finished-game-active | [Playback](../public/demos/wildlife-v2/leaf-insect/roster-v3/index.html) |
+| Scorpion | finished-game-active | [Playback](../public/demos/wildlife-v2/scorpion/roster-v3/index.html) |
+| Pill bug | finished-game-active | [Playback](../public/demos/wildlife-v2/roly-poly/roster-v3/index.html) |
+| Earwig (pincher bug) | finished-game-active | [Playback](../public/demos/wildlife-v2/earwig/roster-v3/index.html) |
+| Centipede | finished-game-active | [Playback](../public/demos/wildlife-v2/centipede/roster-v3/index.html) |
+| Millipede | finished-game-active | [Playback](../public/demos/wildlife-v2/millipede/roster-v3/index.html) |
 | Snail | finished-game-active | [Playback](../public/demos/wildlife-v2/snail/roster-v3/index.html) |
 | Earthworm | finished-game-active | [Playback](../public/demos/wildlife-v2/worm/roster-v3/index.html) |
+| Upright elephant | in-progress | Source/animation work |
+| Upright giraffe | in-progress | Source/animation work |
 
 ## Current gorilla shoulder study
 
@@ -93,7 +95,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T15:34:59.343Z (19/10/2026, 17:34:59 Berlin).
+Snapshot: 2026-10-19T15:59:10.076Z (19/10/2026, 17:59:10 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

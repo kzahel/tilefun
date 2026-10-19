@@ -214,3 +214,24 @@ in the sortable animal browser and its real shared-engine AI scenes.
   requests. All exact art pending human review. **176/196 implemented;20 remaining.**
   Eight arthropods, five marine oddities and five crustacean/chelicerate prototypes
   are in source work; two upright companions remain queued.
+
+- Ground-arthropod checkpoint: Fourteenth checkpoint: spider, praying mantis, leaf insect, scorpion, roly-poly,
+  earwig, centipede and millipede now join seeded worlds, placement and browser AI.
+  Original6/8/14/28/48walking-leg rigs use fixed links, buried roots, planted
+  metachronal travel and moving torsos. Native review widened the stance, removed
+  inappropriate tails and separated antennae; mantis has a foreleg grasp, scorpion
+  has five linked tail segments and earwig has forceps. Four hunters receive actual
+  ant prey. The directed chain scorpion→centipede→spider→mantis admits larger hunters
+  without reciprocal cycles. The other four use ground forage/escape; webs, venom,
+  rolling and burrowing remain future work. Natural-only distant delayed births remain.
+  Validation: **5,486 full-unit passes**, five known Windows failures and ten skips;
+  97 focused checks; **42 distinct browser cases /776 previews** across corrected
+  runs; eight exact replays and3,904 native/3x crops. Millipede rest waits now follow
+  its slow cadence. Predator inspection queries adjacent chunks when rounding crosses
+  a boundary; actual scorpion spawning/placement/deletion passes. Typecheck, isolated
+  lint/build and1,705-candidate normal Chromium inventory pass. The two generated
+  projection guides over32MiB are excluded from Biome like existing cat/dog guides;
+  dedicated closed-volume, fixed-link and continuous source audits still validate them.
+  All exact art pending human review. **184/196 implemented;12 remaining.** Marine
+  oddities5 and crustaceans5 have source/playback work underway; the two upright
+  companion prototypes are refining dense arm keys and supported weight transfer.

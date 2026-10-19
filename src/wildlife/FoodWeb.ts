@@ -133,7 +133,21 @@ const pasture = [
   "alpaca",
 ] as const;
 
+const arthropodPrey = [
+  "ant",
+  "bee",
+  "ladybug",
+  "stag-beetle",
+  "grasshopper",
+  "cricket",
+  "leaf-insect",
+  "roly-poly",
+  "earwig",
+  "millipede",
+] as const;
+const arthropodHunters = ["spider", "praying-mantis", "scorpion", "centipede"] as const;
 const smallGroundHunters = [
+  ...arthropodHunters,
   "gaboon-viper",
   "tasmanian-devil",
   "mongoose",
@@ -147,6 +161,38 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  "praying-mantis": ["ant", "cricket", "grasshopper", "bee", "ladybug", "earwig", "leaf-insect"],
+  spider: [
+    "ant",
+    "cricket",
+    "grasshopper",
+    "bee",
+    "ladybug",
+    "earwig",
+    "leaf-insect",
+    "praying-mantis",
+  ],
+  centipede: [
+    "ant",
+    "cricket",
+    "grasshopper",
+    "earwig",
+    "leaf-insect",
+    "roly-poly",
+    "millipede",
+    "spider",
+    "praying-mantis",
+  ],
+  scorpion: [
+    "ant",
+    "cricket",
+    "grasshopper",
+    "earwig",
+    "roly-poly",
+    "centipede",
+    "spider",
+    "praying-mantis",
+  ],
   "gaboon-viper": ["mouse", "rat", "red-squirrel", "frog", "gecko", "cricket", "ant"],
   "moray-eel": ["fish", "crab", "octopus"],
   "electric-eel": ["fish", "frog", "axolotl", "pond-turtle"],
@@ -181,6 +227,8 @@ export const HUNTING_DIETS = {
   ],
   "komodo-dragon": [...small, "deer", "piglet", "goat", "king-cobra", "fox"],
   "secretary-bird": [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "king-cobra",
@@ -196,6 +244,8 @@ export const HUNTING_DIETS = {
   swordfish: ["fish", "pufferfish", "anglerfish", "octopus"],
   anglerfish: ["fish", "crab"],
   owl: [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "bat",
@@ -210,6 +260,8 @@ export const HUNTING_DIETS = {
     "dove",
   ],
   hawk: [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "bat",
@@ -225,6 +277,8 @@ export const HUNTING_DIETS = {
     "pigeon",
   ],
   eagle: [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "bat",
@@ -249,6 +303,8 @@ export const HUNTING_DIETS = {
     "hawk",
   ],
   mongoose: [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "rabbit",
@@ -263,6 +319,8 @@ export const HUNTING_DIETS = {
     "frog",
   ],
   "honey-badger": [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "mongoose",
@@ -298,6 +356,8 @@ export const HUNTING_DIETS = {
     "chameleon",
   ],
   "white-nosed-coati": [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "rabbit",
@@ -404,6 +464,8 @@ export const HUNTING_DIETS = {
   lynx: [...small, "fox"],
   bobcat: [...small],
   "giant-spider": [
+    ...arthropodPrey,
+    ...arthropodHunters,
     "snail",
     "worm",
     "bee",

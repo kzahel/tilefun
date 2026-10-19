@@ -1,0 +1,17 @@
+{
+  "identity": "earwig-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6634920634920576,
+    "up": 1.6978889116622184,
+    "left": 1.8749314779675217,
+    "right": 1.8749314779675217
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

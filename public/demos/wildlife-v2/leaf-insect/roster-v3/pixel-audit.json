@@ -1,0 +1,17 @@
+{
+  "identity": "leaf-insect-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.9477730928675214,
+    "up": 1.6868317610062888,
+    "left": 1.8833333333333258,
+    "right": 1.8833333333333258
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

@@ -606,6 +606,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-spider-predator-v1",
+      "name": "wildlife spider predator v1",
+      "image": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-praying-mantis-predator-v1",
+      "name": "wildlife praying mantis predator v1",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-scorpion-predator-v1",
+      "name": "wildlife scorpion predator v1",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-centipede-predator-v1",
+      "name": "wildlife centipede predator v1",
+      "image": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-tasmanian-devil-predator-v1",
       "name": "wildlife tasmanian devil predator v1",
       "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
@@ -1853,6 +1893,46 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-leaf-insect-provisional-v1",
+      "name": "wildlife leaf insect provisional v1",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-roly-poly-provisional-v1",
+      "name": "wildlife roly poly provisional v1",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-earwig-provisional-v1",
+      "name": "wildlife earwig provisional v1",
+      "image": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-millipede-provisional-v1",
+      "name": "wildlife millipede provisional v1",
+      "image": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -5453,6 +5533,86 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-spider-roster-v3",
+      "name": "wildlife v2 spider roster v3",
+      "image": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-praying-mantis-roster-v3",
+      "name": "wildlife v2 praying mantis roster v3",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-leaf-insect-roster-v3",
+      "name": "wildlife v2 leaf insect roster v3",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-scorpion-roster-v3",
+      "name": "wildlife v2 scorpion roster v3",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-roly-poly-roster-v3",
+      "name": "wildlife v2 roly poly roster v3",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-earwig-roster-v3",
+      "name": "wildlife v2 earwig roster v3",
+      "image": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-centipede-roster-v3",
+      "name": "wildlife v2 centipede roster v3",
+      "image": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-millipede-roster-v3",
+      "name": "wildlife v2 millipede roster v3",
+      "image": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -27188,6 +27348,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-spider-predator-v1",
+      "sheetId": "wildlife-spider-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-spider-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-praying-mantis-predator-v1",
+      "sheetId": "wildlife-praying-mantis-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-praying-mantis-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-scorpion-predator-v1",
+      "sheetId": "wildlife-scorpion-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-scorpion-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-centipede-predator-v1",
+      "sheetId": "wildlife-centipede-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-centipede-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-tasmanian-devil-predator-v1",
       "sheetId": "wildlife-tasmanian-devil-predator-v1",
       "rect": [
@@ -29446,6 +29678,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-leaf-insect-provisional-v1",
+      "sheetId": "wildlife-leaf-insect-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-leaf-insect-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-roly-poly-provisional-v1",
+      "sheetId": "wildlife-roly-poly-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-roly-poly-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-earwig-provisional-v1",
+      "sheetId": "wildlife-earwig-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-earwig-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-millipede-provisional-v1",
+      "sheetId": "wildlife-millipede-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-millipede-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -31479,7 +31783,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:961"
+          "source": "src/wildlife/Fauna.ts:962"
         },
         {
           "system": "Gameplay",
@@ -31491,15 +31795,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:243"
+          "source": "src/wildlife/FoodWeb.ts:297"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:422"
+          "source": "src/wildlife/FoodWeb.ts:484"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:601"
+          "source": "src/wildlife/FoodWeb.ts:663"
         },
         {
           "system": "Gameplay",
@@ -31561,39 +31865,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:35"
+          "source": "src/wildlife/Fauna.ts:36"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:232"
+          "source": "src/wildlife/Fauna.ts:233"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:157"
+          "source": "src/wildlife/FoodWeb.ts:203"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:473"
+          "source": "src/wildlife/FoodWeb.ts:535"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:490"
+          "source": "src/wildlife/FoodWeb.ts:552"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:507"
+          "source": "src/wildlife/FoodWeb.ts:569"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:546"
+          "source": "src/wildlife/FoodWeb.ts:608"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:574"
+          "source": "src/wildlife/FoodWeb.ts:636"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:601"
+          "source": "src/wildlife/FoodWeb.ts:663"
         }
       ]
     },
@@ -31647,23 +31951,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:225"
+          "source": "src/wildlife/FoodWeb.ts:277"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:244"
+          "source": "src/wildlife/FoodWeb.ts:298"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:423"
+          "source": "src/wildlife/FoodWeb.ts:485"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:601"
+          "source": "src/wildlife/FoodWeb.ts:663"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:602"
+          "source": "src/wildlife/FoodWeb.ts:664"
         },
         {
           "system": "Gameplay",
@@ -31709,7 +32013,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:602"
+          "source": "src/wildlife/FoodWeb.ts:664"
         }
       ]
     },
@@ -31755,7 +32059,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:603"
+          "source": "src/wildlife/FoodWeb.ts:665"
         }
       ]
     },
@@ -31801,7 +32105,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:604"
+          "source": "src/wildlife/FoodWeb.ts:666"
         }
       ]
     },
@@ -31847,7 +32151,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:605"
+          "source": "src/wildlife/FoodWeb.ts:667"
         }
       ]
     },
@@ -32005,11 +32309,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:246"
+          "source": "src/wildlife/FoodWeb.ts:300"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:601"
+          "source": "src/wildlife/FoodWeb.ts:663"
         },
         {
           "system": "Gameplay",
@@ -32059,7 +32363,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:601"
+          "source": "src/wildlife/FoodWeb.ts:663"
         },
         {
           "system": "Gameplay",

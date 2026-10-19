@@ -19057,5 +19057,749 @@
         "sha256": "fcb56409f3ea3bd9d92263d13fb1756d4e5e4bf3667d794032db5894c5b2900b"
       }
     ]
+  },
+  {
+    "id": "spider-roster-v3",
+    "animalId": "spider",
+    "revision": "roster-v3",
+    "name": "Spider · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/spider/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-spider-roster-v3",
+      "name": "Spider sheet",
+      "image": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296",
+      "source": "art-source/wildlife-v2/spider/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-spider-roster-v3-scene",
+      "name": "Spider scene",
+      "image": "demos/wildlife-v2/spider/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "b801041d79e7e21c3b4cef6114e3cf95788b7d884126259cb15c43f69014330d",
+      "source": "art-source/wildlife-v2/spider/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-spider-roster-v3-contact",
+      "name": "Spider contact",
+      "image": "demos/wildlife-v2/spider/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "4f5ae5fd3f523fc1f6c4658134fdd2f55cb7ac14987bf13eba556532261f3626",
+      "source": "art-source/wildlife-v2/spider/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/spider/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/contact-sheet-native.png",
+        "sha256": "4f5ae5fd3f523fc1f6c4658134fdd2f55cb7ac14987bf13eba556532261f3626"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/index.html",
+        "sha256": "c3311889a924899685037b6c41012e75cac41442c9961893d4c87b871d183f0b"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/pixel-audit.json",
+        "sha256": "bcc79d9503f13b697d5837faf8259679328e421e6fb9e3797499be34dc32c57e"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/preview-native.gif",
+        "sha256": "643e600db17532430187c732eb495c39bdf58d9833f0efa6bb27c715f59e3225"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/preview.gif",
+        "sha256": "105e34f176e4eb27fc7de8bc5828e4e88cacfc42440950df1af3ecaa54e91343"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/scene-native.png",
+        "sha256": "b801041d79e7e21c3b4cef6114e3cf95788b7d884126259cb15c43f69014330d"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+        "sha256": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/source-audit.json",
+        "sha256": "a56684803b0ff6e51ec9276f2d5cb1bb110dd7eefa2f88ba22d7ae703f0d446f"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/sprite.json",
+        "sha256": "34ca845bbddb752a68a80d4c166c57309743263e30d52a9ea356ae164fefdeae"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/travel-native.gif",
+        "sha256": "b0cf84a5a64cb281b05cfbec874a6ad1397d89636d3548a808a6ba634e364cb4"
+      },
+      {
+        "path": "demos/wildlife-v2/spider/roster-v3/validation.json",
+        "sha256": "b39a6ca783540895159b385b00433524a64ed7c4b6062fddde4b20fd153f82e1"
+      }
+    ]
+  },
+  {
+    "id": "praying-mantis-roster-v3",
+    "animalId": "praying-mantis",
+    "revision": "roster-v3",
+    "name": "Praying mantis · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/praying-mantis/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-praying-mantis-roster-v3",
+      "name": "Praying mantis sheet",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+      "source": "art-source/wildlife-v2/praying-mantis/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-praying-mantis-roster-v3-scene",
+      "name": "Praying mantis scene",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "5750424462fada9e0c6797e7376fc3d2b962cd2ac6d6be140b0b3e20ff81991e",
+      "source": "art-source/wildlife-v2/praying-mantis/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-praying-mantis-roster-v3-contact",
+      "name": "Praying mantis contact",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2fb4423668170d8376dedc64e4c30353b737e6a92d176ddf722b342df9d3c196",
+      "source": "art-source/wildlife-v2/praying-mantis/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/praying-mantis/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/contact-sheet-native.png",
+        "sha256": "2fb4423668170d8376dedc64e4c30353b737e6a92d176ddf722b342df9d3c196"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/index.html",
+        "sha256": "fb0fba6e6b7a143ae447a4dae94804669b5c669013d1b718ddac1621c348c2d3"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/pixel-audit.json",
+        "sha256": "48c983b85d3195e230a2bca5e15108a44fb6c199ee51a9b5b51faeeb56eff2ea"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/preview-native.gif",
+        "sha256": "8828f4ad3a86f6a6dbba3e1c5d863e39764b3e8b2faec6bbc2117b79f3ca0e6a"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/preview.gif",
+        "sha256": "7815956d217a4db4364555b33c539f00acb3ed39c1b2504a7c732f6fd43c22ae"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/scene-native.png",
+        "sha256": "5750424462fada9e0c6797e7376fc3d2b962cd2ac6d6be140b0b3e20ff81991e"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+        "sha256": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/source-audit.json",
+        "sha256": "b513c8eb3241d6df655aaac66f53b848a46aae96300d7429e033be3aae86a4f7"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/sprite.json",
+        "sha256": "06d2ae8312e720dbbdc527ac342e2e177e753112682ad0607ae75d134d2231fd"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/travel-native.gif",
+        "sha256": "621f3359ddf372abd5c34fc8a2f16f8096912566270918e1087cfd3190c035fe"
+      },
+      {
+        "path": "demos/wildlife-v2/praying-mantis/roster-v3/validation.json",
+        "sha256": "f1246bfd28d89d1faa2395d8837412bf00e54d9b3ea94d9ff323e05ae155ba84"
+      }
+    ]
+  },
+  {
+    "id": "leaf-insect-roster-v3",
+    "animalId": "leaf-insect",
+    "revision": "roster-v3",
+    "name": "Leaf insect · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/leaf-insect/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-leaf-insect-roster-v3",
+      "name": "Leaf insect sheet",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+      "source": "art-source/wildlife-v2/leaf-insect/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-leaf-insect-roster-v3-scene",
+      "name": "Leaf insect scene",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "7a95728b6be1b70f911e6c1559a990494895891efb22f03e6f76092e3159c44d",
+      "source": "art-source/wildlife-v2/leaf-insect/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-leaf-insect-roster-v3-contact",
+      "name": "Leaf insect contact",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "bfb8d2d2024431b6e99e6a33135b7e382109b37f34d023b7707909311844b438",
+      "source": "art-source/wildlife-v2/leaf-insect/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/leaf-insect/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/contact-sheet-native.png",
+        "sha256": "bfb8d2d2024431b6e99e6a33135b7e382109b37f34d023b7707909311844b438"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/index.html",
+        "sha256": "90868212b3f14d5e9fe90e095fe45be98c81c62dc3c1e163c09eaa4b2399d611"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/pixel-audit.json",
+        "sha256": "4f3069d08bcbbdf20bd3a6da24b77a846bf0ebc74f256083c00eb2f0070f00a3"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/preview-native.gif",
+        "sha256": "1074b835c9f32443eba39e2387dd22b532b01afb26322a2a596c929252651c47"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/preview.gif",
+        "sha256": "5d1b012f724d0905081b654af004b26da11e45c88b19830cbffbf8a39a478ae3"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/scene-native.png",
+        "sha256": "7a95728b6be1b70f911e6c1559a990494895891efb22f03e6f76092e3159c44d"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+        "sha256": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/source-audit.json",
+        "sha256": "da24d083c5f4c6bd8f36b5f2c2cdc8c4238227f06c49db480db22ef7e2e8b270"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/sprite.json",
+        "sha256": "e8e18c47ce2cfcb9f5e74c8c4ef2ccb1a86932de753b1fadb89c74a1f4aea97b"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/travel-native.gif",
+        "sha256": "d9d60814025598356c0465cdec45c7cbb8226ca3856146b638b744d30b4b79af"
+      },
+      {
+        "path": "demos/wildlife-v2/leaf-insect/roster-v3/validation.json",
+        "sha256": "4553049cf742fa8dbd4a867e7923a063c591252768a8d727fb4b5878fc2e3d55"
+      }
+    ]
+  },
+  {
+    "id": "scorpion-roster-v3",
+    "animalId": "scorpion",
+    "revision": "roster-v3",
+    "name": "Scorpion · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/scorpion/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-scorpion-roster-v3",
+      "name": "Scorpion sheet",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e",
+      "source": "art-source/wildlife-v2/scorpion/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-scorpion-roster-v3-scene",
+      "name": "Scorpion scene",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "275575f62fccf62cff9344a03d3f72927728316d3c7a78a10d00d511bb70c8a6",
+      "source": "art-source/wildlife-v2/scorpion/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-scorpion-roster-v3-contact",
+      "name": "Scorpion contact",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "6e439ae8b260108768806e24b6b68f7907c4871fe73b6879ecf058abd7df67cf",
+      "source": "art-source/wildlife-v2/scorpion/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/scorpion/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/contact-sheet-native.png",
+        "sha256": "6e439ae8b260108768806e24b6b68f7907c4871fe73b6879ecf058abd7df67cf"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/index.html",
+        "sha256": "a9abd8195a726b6d5e2279d30574815b099b8821f06a245f1292474dbb311403"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/pixel-audit.json",
+        "sha256": "10b023ae24bfa09478a0cc318d368b47ba114d48e7d2b59b1e41f9b6524b662a"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/preview-native.gif",
+        "sha256": "37bd2d1e4c8c93c30f980185aba982998cbf71dbd620067d0f1e56f456aaf1c6"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/preview.gif",
+        "sha256": "50574c4d9b2c2d556900466bd05c98c45c5259e28eaa69a73a4a2e105ac17497"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/scene-native.png",
+        "sha256": "275575f62fccf62cff9344a03d3f72927728316d3c7a78a10d00d511bb70c8a6"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+        "sha256": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/source-audit.json",
+        "sha256": "164d3e8f3a95054778535fe0918b426e8ceb364db83b9070f948717172f05d42"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/sprite.json",
+        "sha256": "75675a59e0e5d56137cdd29735c78a4d92926597da54d7fd03d5e5a44acf01bd"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/travel-native.gif",
+        "sha256": "1e5f7763904a5990a61b7d542b889bce440a0251550b87dcc658049cc08631b3"
+      },
+      {
+        "path": "demos/wildlife-v2/scorpion/roster-v3/validation.json",
+        "sha256": "4d0ad64fb74c6513e6dff87e27cb051db72024ecaca2819558fa498aae9dc145"
+      }
+    ]
+  },
+  {
+    "id": "roly-poly-roster-v3",
+    "animalId": "roly-poly",
+    "revision": "roster-v3",
+    "name": "Pill bug · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/roly-poly/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-roly-poly-roster-v3",
+      "name": "Pill bug sheet",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397",
+      "source": "art-source/wildlife-v2/roly-poly/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-roly-poly-roster-v3-scene",
+      "name": "Pill bug scene",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "93ad0a8c960ca2e883f90e8cef3ff194abf765c78b73d716f1b4a060bb203e50",
+      "source": "art-source/wildlife-v2/roly-poly/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-roly-poly-roster-v3-contact",
+      "name": "Pill bug contact",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e7335b000c34fa16ab7ada700e700f513aab9d271150d61cd0c719ed2ff6de7a",
+      "source": "art-source/wildlife-v2/roly-poly/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/roly-poly/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/contact-sheet-native.png",
+        "sha256": "e7335b000c34fa16ab7ada700e700f513aab9d271150d61cd0c719ed2ff6de7a"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/index.html",
+        "sha256": "2dbc08b3be48f97a875019a304d5f2dfff6976efd0255a36be214ce72b09e05f"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/pixel-audit.json",
+        "sha256": "55783d83364f5cf8c4f81e6a24ab6030bd3309035fb263321a3bcf403e11f270"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/preview-native.gif",
+        "sha256": "6a22e65c91a105555095686f0fcf5ca99350a62f675035be26234bac47909096"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/preview.gif",
+        "sha256": "1f2e35cad0335b9446efbf30a95a2145360fcbd6d144fa0c83478b5f6d137cee"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/scene-native.png",
+        "sha256": "93ad0a8c960ca2e883f90e8cef3ff194abf765c78b73d716f1b4a060bb203e50"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+        "sha256": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/source-audit.json",
+        "sha256": "53f10a750d1dd3f36b9badb307ce6b5f821b4722c8973f8d9a079bbd03e13134"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/sprite.json",
+        "sha256": "5e984f916c089c16baccedd93390d68f085946c2228e67d6ed2eb3c572c81f6a"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/travel-native.gif",
+        "sha256": "e3aa4424cceb5f6e9bb1143b768509a841cb0f8ffdf638cc53658b5328a47e2c"
+      },
+      {
+        "path": "demos/wildlife-v2/roly-poly/roster-v3/validation.json",
+        "sha256": "e4cb50cba57e84ed5230a51cdd1cc72645e6c1cbfd71e5745223a58ba17af2f4"
+      }
+    ]
+  },
+  {
+    "id": "earwig-roster-v3",
+    "animalId": "earwig",
+    "revision": "roster-v3",
+    "name": "Earwig (pincher bug) · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/earwig/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-earwig-roster-v3",
+      "name": "Earwig (pincher bug) sheet",
+      "image": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900",
+      "source": "art-source/wildlife-v2/earwig/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-earwig-roster-v3-scene",
+      "name": "Earwig (pincher bug) scene",
+      "image": "demos/wildlife-v2/earwig/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "93aa9320fc2ca054a59a2492731e942fe3ec4e5c8091ad7b977b2d919fa7669a",
+      "source": "art-source/wildlife-v2/earwig/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-earwig-roster-v3-contact",
+      "name": "Earwig (pincher bug) contact",
+      "image": "demos/wildlife-v2/earwig/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c922daf706d6b3dd7ff10e436feeb2f4645ded336345d9d555348fa8c2518b2f",
+      "source": "art-source/wildlife-v2/earwig/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/earwig/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/contact-sheet-native.png",
+        "sha256": "c922daf706d6b3dd7ff10e436feeb2f4645ded336345d9d555348fa8c2518b2f"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/index.html",
+        "sha256": "e1e90bd619bebe6027384d5ac2b274ccb7d8c41649bc960ada08b69124edcb68"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/pixel-audit.json",
+        "sha256": "588aa48706eafd48bb53e32477f331e9fae0f034d069386b234d8bf770265ee4"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/preview-native.gif",
+        "sha256": "3952662a478b680de23fe2c1f1eed2ded9ca402c5d9197bf02eeface6d91b651"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/preview.gif",
+        "sha256": "9aa2d73c75589ec6ef5e8951a67f70b5f4c9518ceb37747e328602a37b9fbcae"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/scene-native.png",
+        "sha256": "93aa9320fc2ca054a59a2492731e942fe3ec4e5c8091ad7b977b2d919fa7669a"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+        "sha256": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/source-audit.json",
+        "sha256": "5961d1b2dd752b710c7cdc69b7b5c5e4dfd74f70155697e9866a513e3c9d7b1a"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/sprite.json",
+        "sha256": "a6e9f2a601d91d2021b06bc5ccbb2a92ebb7b2d121fb79ea421df76388734b52"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/travel-native.gif",
+        "sha256": "eb1abccc7407240d5e261b1517836122859cd3e6b568555fe648e2d8b7a38af4"
+      },
+      {
+        "path": "demos/wildlife-v2/earwig/roster-v3/validation.json",
+        "sha256": "d8194a4b08725e3e8c3c070ad650580e03f50f9eaef425bf57201b643aaef5e6"
+      }
+    ]
+  },
+  {
+    "id": "centipede-roster-v3",
+    "animalId": "centipede",
+    "revision": "roster-v3",
+    "name": "Centipede · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/centipede/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-centipede-roster-v3",
+      "name": "Centipede sheet",
+      "image": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+      "source": "art-source/wildlife-v2/centipede/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-centipede-roster-v3-scene",
+      "name": "Centipede scene",
+      "image": "demos/wildlife-v2/centipede/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "2c69e7b339e1dbaded104027a8c89172083b6d79d70f4f38e6e70a93fea53208",
+      "source": "art-source/wildlife-v2/centipede/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-centipede-roster-v3-contact",
+      "name": "Centipede contact",
+      "image": "demos/wildlife-v2/centipede/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "818631379e8e7bfa5a714e89740f101fb0c945de06555e525f349e6a11bb63ac",
+      "source": "art-source/wildlife-v2/centipede/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/centipede/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/contact-sheet-native.png",
+        "sha256": "818631379e8e7bfa5a714e89740f101fb0c945de06555e525f349e6a11bb63ac"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/index.html",
+        "sha256": "ed9d1ac9b9ed6b098c5e067bd77aa71bdb84ebfbf7cc8c7fcdf549da85e7a65d"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/pixel-audit.json",
+        "sha256": "05b2a6842d9a4a1c207d0280e1b1d51eb64f537216f6d3d2cc786a9e34e97a44"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/preview-native.gif",
+        "sha256": "caa037ae2984db45622e69a08ebe6df931429c69abeeaa3febf215e26a3721fe"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/preview.gif",
+        "sha256": "907f55fde9e26aa6f3569e7ac2a7328f7abd44d04f0c25dddffa0c6c6be110e6"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/scene-native.png",
+        "sha256": "2c69e7b339e1dbaded104027a8c89172083b6d79d70f4f38e6e70a93fea53208"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+        "sha256": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/source-audit.json",
+        "sha256": "6471aea11598b30d56754eb4b583f91e2b526237e9a4f701050c256ad59d4447"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/sprite.json",
+        "sha256": "773c5d701252ccb2a2f061abcf04717fbbc2e93ef5914cf7c952929a7390271e"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/travel-native.gif",
+        "sha256": "221b94cff21fa332ce5ac37fb777f1de6b6d536c458a1453b03609992500d789"
+      },
+      {
+        "path": "demos/wildlife-v2/centipede/roster-v3/validation.json",
+        "sha256": "454a21c8dbd2e884a46b7a78da7f215e9e464f528e804857694f54694a7c0360"
+      }
+    ]
+  },
+  {
+    "id": "millipede-roster-v3",
+    "animalId": "millipede",
+    "revision": "roster-v3",
+    "name": "Millipede · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/millipede/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-millipede-roster-v3",
+      "name": "Millipede sheet",
+      "image": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
+      "source": "art-source/wildlife-v2/millipede/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-millipede-roster-v3-scene",
+      "name": "Millipede scene",
+      "image": "demos/wildlife-v2/millipede/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "7fa7588acafffc1d666b43ec10e51a8d94e721f6960274bc62d220c92ff0cda4",
+      "source": "art-source/wildlife-v2/millipede/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-millipede-roster-v3-contact",
+      "name": "Millipede contact",
+      "image": "demos/wildlife-v2/millipede/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ab154aaf83d0220dac6997a591e10608739b149df76e728c1b45919fefc0c5b5",
+      "source": "art-source/wildlife-v2/millipede/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/millipede/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/contact-sheet-native.png",
+        "sha256": "ab154aaf83d0220dac6997a591e10608739b149df76e728c1b45919fefc0c5b5"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/index.html",
+        "sha256": "d5ceb5cc5424fddef3411cc7a4edfb2609b65be210a93e295900827f7a628258"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/pixel-audit.json",
+        "sha256": "04757aec7e7e4de09f99c052be25b18a76a7228a108eeabec3fcf8f139ab6ae1"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/preview-native.gif",
+        "sha256": "f36370005282f02156eccb8c592e06be673f9f4af91a5e868b0a182e2155de5a"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/preview.gif",
+        "sha256": "8555de6a2c08863f66d3ca19d24cc953453b7127792fd8c5de8aff675842250b"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/scene-native.png",
+        "sha256": "7fa7588acafffc1d666b43ec10e51a8d94e721f6960274bc62d220c92ff0cda4"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+        "sha256": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/source-audit.json",
+        "sha256": "ca47192c7b1819183616d6fe445c57bb68aa3ba58c08a278a10571add9c1ff70"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/sprite.json",
+        "sha256": "00cb64649a8aaeaacf8bc9307ce737c1df6e3c801aa1cf2e2a5413da1abed7d7"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/travel-native.gif",
+        "sha256": "6b6db8065eff9217057f0a2a5d9c5fe93e9879c9a40e170583667c978904e1d1"
+      },
+      {
+        "path": "demos/wildlife-v2/millipede/roster-v3/validation.json",
+        "sha256": "7d2499197867ac44afcc67e4d24c791b3753433a2441f7a6796d4e8b98411af2"
+      }
+    ]
   }
 ]

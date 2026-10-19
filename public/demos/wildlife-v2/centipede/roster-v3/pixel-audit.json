@@ -1,0 +1,17 @@
+{
+  "identity": "centipede-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.8761467889908232,
+    "up": 1.8761467889908232,
+    "left": 1.7584155252964848,
+    "right": 1.7584155252964848
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

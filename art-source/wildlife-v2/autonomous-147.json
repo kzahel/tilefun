@@ -1533,11 +1533,16 @@
     "spider": {
       "name": "Spider",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/spider/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "stag-beetle": {
       "name": "Stag beetle",
@@ -1560,65 +1565,100 @@
     "praying-mantis": {
       "name": "Praying mantis",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/praying-mantis/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "leaf-insect": {
       "name": "Leaf insect",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/leaf-insect/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "scorpion": {
       "name": "Scorpion",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/scorpion/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "roly-poly": {
       "name": "Pill bug",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/roly-poly/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "earwig": {
       "name": "Earwig (pincher bug)",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/earwig/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "centipede": {
       "name": "Centipede",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/centipede/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "millipede": {
       "name": "Millipede",
       "family": "Insects & arthropods",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:41:32.624769Z",
-      "progress": "Unregistered original arthropod source authoring; not runtime active."
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/millipede/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     },
     "snail": {
       "name": "Snail",
@@ -1651,16 +1691,20 @@
     "elephant-upright": {
       "name": "Upright elephant",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:45:11.685641Z",
+      "progress": "Unregistered original upright companion source authoring; not runtime active."
     },
     "giraffe-upright": {
       "name": "Upright giraffe",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:45:11.685641Z",
+      "progress": "Unregistered original upright companion source authoring; not runtime active."
     }
   },
   "checkpoints": [
@@ -1795,6 +1839,20 @@
         "electric-eel"
       ],
       "validation": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    {
+      "utc": "2026-10-19T15:59:09.736607Z",
+      "completed": [
+        "spider",
+        "praying-mantis",
+        "leaf-insect",
+        "scorpion",
+        "roly-poly",
+        "earwig",
+        "centipede",
+        "millipede"
+      ],
+      "validation": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
     }
   ]
 }
