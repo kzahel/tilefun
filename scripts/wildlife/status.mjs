@@ -264,7 +264,7 @@ export function writeStatus() {
     lines.splice(
       2,
       0,
-      "## Active autonomous completion run",
+      "## Latest autonomous completion run",
       "",
       `[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline ${clean(run.deadlineUtc)}. State: ${clean(run.state)}.`,
       "",

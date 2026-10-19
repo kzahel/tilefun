@@ -531,3 +531,21 @@ assertion; distinguish them from newly introduced failures.
   Typecheck/lint/build, 1379-candidate manifest, 60 browser cases and streaming --assert-ready pass. Full bounded units: 4338 pass, 5 known Windows failures, 10 skipped. 16 ten-artifact byte-identical replays and 6528 exact crops.
   106 new entries plus sixteen delivered leave 74 remaining.
   Fresh inbox/notes are clear. Exact pixels remain pending human review.
+
+- 04:05 UTC: eight-hour production window closed. 106 new/repaired entries and
+  sixteen preserved entries give 122/196 implemented, with 74 queued and no
+  unfinished in-progress entries. All verified batches are committed locally.
+  Final checks: 4,338 unit passes, five known Windows failures, ten skipped;
+  typecheck/lint/build, 1,379-candidate manifest, 60 distinct final browser cases
+  including the rebuilt Rock pigeon correction, and streaming readiness pass.
+  All 106 receipts pass 3,185 artifact checks across 2,359 unique files. Source
+  replays/native playback remain mechanical evidence, not human art approval.
+  Remaining by family: 20 marine/aquatic, 15 birds, 11 small/exotic mammals,
+  nine arthropods, seven primates, five marsupials/monotremes, four reptiles/
+  amphibians, two retained upright forms and one other invertebrate.
+  Next work should start with review of these exact banks, then a freshly scoped
+  continuation for the remaining families. Clone frozen helpers for new work.
+  Future insect-only hunters need legal prey fixtures and natural companions;
+  current generic ground-hunter fixtures/companions assume rabbit/deer prey.
+  Future hunter descriptors should publish both stride fields; the current frozen
+  small-hunter banks are verified through measured travel and matched foot paths.

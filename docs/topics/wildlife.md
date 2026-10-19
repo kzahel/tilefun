@@ -6,17 +6,19 @@ The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
 Updated: 2026-10-19.
 
-## Current eight-hour completion run
+## Completed eight-hour completion run
 
-Latest checkpoint: 04:02 UTC. 122 of the retained 196 entries are delivered
-(106 new this run, 16 preserved); 74 remain. The final sixteen additions include
-new shelled/amphibian animals, four small hunters with directed cross-predator
-meals, and six short-flight birds. Natural-only replacement, saved phase and
-shared world/lab/editor behavior are verified; 74 entries remain queued.
-Exact new art remains pending human review.
+Window closed at 04:05 UTC after eight hours. 122/196 entries are implemented:
+106 added/repaired in this run and sixteen preserved; 74 remain queued. There
+are no unfinished in-progress entries. All verified work is committed locally.
+New art remains pending human review. Final typecheck/lint/build, 1,379-candidate
+manifest, 60 distinct browser cases and streaming readiness pass. The full unit
+suite has 4,338 passes, the five known Windows failures and ten skips. All 106
+new receipts retain their exact bytes (3,185 checks across 2,359 unique files).
+See the tactical/ledger for remaining families and the next continuation scope.
 
-The owner now explicitly authorizes all remaining animals in the retained
-196-animal list, autonomously for up to eight hours. [140](../tactical/140-autonomous-wildlife-completion.md)
+The owner explicitly authorized all remaining animals in the retained
+196-animal list, autonomously for up to eight hours. That window has ended. [140](../tactical/140-autonomous-wildlife-completion.md)
 owns this run (2026-10-18 20:05:24 UTC to 2026-10-19 04:05:24 UTC) and its
 [tracked ledger](../../art-source/wildlife-v2/autonomous-140.json). Start with
 sheep/pig and the remaining frozen-torso repairs, then unfinished families.

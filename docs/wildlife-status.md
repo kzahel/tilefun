@@ -1,8 +1,8 @@
 # Wildlife production status
 
-## Active autonomous completion run
+## Latest autonomous completion run
 
-[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
+[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: timebox-complete.
 
 **106 newly completed; 0 in progress; 74 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
@@ -117,7 +117,7 @@
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T04:02:32.209Z (19/10/2026, 06:02:32 Berlin).
+Snapshot: 2026-10-19T04:05:24.348Z (19/10/2026, 06:05:24 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

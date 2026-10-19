@@ -3,8 +3,8 @@
   "authorization": "Owner: complete all remaining animals in our list autonomously, or for the next eight hours; then Good. Proceed then! (2026-10-18)",
   "startedUtc": "2026-10-18T20:05:24Z",
   "deadlineUtc": "2026-10-19T04:05:24Z",
-  "state": "active",
-  "allowNewAnimals": true,
+  "state": "timebox-complete",
+  "allowNewAnimals": false,
   "supersedes": "Historical expansion holds for this timed owner-authorized workstream; immutable banks and human review ownership remain",
   "qualityReference": [
     "horse/motion-study-v3",
@@ -2661,5 +2661,21 @@
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/flying-birds-140/README.md"
     }
+  },
+  "endedUtc": "2026-10-19T04:05:24Z",
+  "completionSummary": {
+    "newCompleted": 106,
+    "completedBeforeRun": 16,
+    "totalDelivered": 122,
+    "remaining": 74,
+    "humanReview": "Exact new banks remain pending; no synthetic approvals",
+    "unitsPassed": 4338,
+    "knownWindowsFailures": 5,
+    "skipped": 10,
+    "distinctFinalBrowserCases": 60,
+    "immutableReceiptCount": 106,
+    "immutableArtifactChecks": 3185,
+    "immutableUniqueFiles": 2359,
+    "immutableErrors": 0
   }
 }
