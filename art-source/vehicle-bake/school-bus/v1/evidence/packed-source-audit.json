@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "results": {
+    "master.blend": {
+      "sha256": "75610bafad24c1afeb8db64a253121aee3e47d867dc88f91c92a90676a15ba9b",
+      "meshObjects": 40,
+      "triangles": 2564,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "895bdbad60c8b9ed7225b4f10b3ce8bd484a5975406bd08aea866e49e6f79b72",
+      "meshObjects": 5,
+      "triangles": 2564,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+      "minBlenderWorld": [
+        -60.95652389526367,
+        -21.39130401611328,
+        0.0
+      ],
+      "maxBlenderWorld": [
+        60.26087188720703,
+        21.39130401611328,
+        43.130435943603516
+      ],
+      "dimensionsBlenderWorld": [
+        121.2173957824707,
+        42.78260803222656,
+        43.130435943603516
+      ],
+      "dimensionsSourceUnits": [
+        6.970000257492065,
+        2.459999961853027,
+        2.480000066757202
+      ]
+    }
+  }
+}

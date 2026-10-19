@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: red coupe and accepted Beetle v1 integrated and validated; school bus is next.
+Status: red coupe and Beetle integrated; school bus v1 delivered for appearance review.
 Updated: 2026-10-19.
 
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
@@ -55,6 +55,24 @@ roster to 47 types/46 traffic-eligible types. Its runtime GLB is byte-identical 
 the reviewed revision, with matching native cardinal captures in the standard
 sprite fallback. Normal loading, disabled/failed meshes, saves and shared lab
 presentation use existing authority/rendering paths.
+
+Beetle/pipeline integration is committed and pushed as `7b5e1851`. Eleven focused
+production browser checks, 161 focused units, typechecks, lint, build and streaming
+readiness pass; broader suite limits are recorded in 148. The owner-authorized
+next checkpoint is [149](../tactical/149-school-bus-pipeline-review.md): a yellow
+school bus with its own long body, door/window ownership and larger transparent
+review viewport at the same pixel density. Pickup remains queued after that.
+
+School bus v1 is now a separate **2,564-triangle**, five-mesh review candidate
+with one 512² unlit atlas (182,232 GLB bytes). Its long rounded body/hood, repeated
+blue windows/rails and side-owned folding door use original semantic surface UV
+paint. The 224px transparent viewport preserves the existing native pixel density
+and world scale; all prior Beetle render pixels remain exact. Independent actual
+GLB clearance/rolling, native/game views, source-only replay and desktop/mobile/
+offline checks pass. [149](../tactical/149-school-bus-pipeline-review.md) owns the
+exact retained revision and evidence. It is available through the original-vehicle
+review collection and `data/vehicle-bake/school-bus-review.html`; gameplay
+activation remains pending the owner's appearance decision.
 
 The owner likes the style but flagged upper tire crowns above the fenders.
 `a-reduced-projection/mid-fenders-v3` corrects the source geometry with integrated

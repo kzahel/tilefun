@@ -1,54 +1,34 @@
-"""Verify a frozen original-family review, its source inputs and optional old-byte baseline."""
+"""Verify all frozen public pins, source inputs, actual GLB and exact offline embedding."""
 import argparse
-import base64
-import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import re
+import base64
 
-from catalog import audit_glb
-
-ROOT = Path(__file__).resolve().parents[2]
-
-
-def sha(path):
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def read(path):
-    return json.loads(path.read_text(encoding='utf-8-sig'))
-
-
+spec = importlib.util.spec_from_file_location('family_package', Path(__file__).with_name('family-package.py'))
+package = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(package)
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('config', type=Path)
 parser.add_argument('--baseline', type=Path)
 args = parser.parse_args()
-config = read(args.config)
-out = ROOT/config['output']
-frozen = read(out/'review-manifest.json')['candidates'][0]
-batch = read(out.parent/'manifest.json')
-candidate = next(row for row in batch['candidates'] if row['id'] == config['id'])
-assert candidate['audit'] == frozen['audit'] == audit_glb(out/frozen['glb'])
-expected = {p.relative_to(ROOT/'public').as_posix() for p in out.rglob('*') if p.is_file()}
-pinned = {file['url'] for file in candidate['files']}
-assert pinned == expected, {'missing': sorted(expected-pinned), 'extra': sorted(pinned-expected)}
-for item in candidate['files']:
-    assert sha(ROOT/'public'/item['url']) == item['sha256'], item['url']
-for item in frozen['sourceInputs']:
-    assert sha(ROOT/'public'/item['source']) == item['sha256'], item['source']
-    assert sha(ROOT/'public'/item['retained']) == item['sha256'], item['retained']
-html = (ROOT/config['offline']).read_text(encoding='utf-8')
+config = package.read(args.config)
+candidate = package.verify_frozen(config)
+html = (package.ROOT/config['offline']).read_text(encoding='utf-8')
+assert html == package.offline_html(config), 'Offline HTML differs from exact frozen JS/CSS/assets embedding; run offline command'
 match = re.search(r'window\.familyReviewOffline=(.*?);</script>', html, re.S)
 assert match, 'Offline payload not found'
 payload = json.loads(match[1])
-embedded = base64.b64decode(payload['assets'][frozen['glb']].split(',', 1)[1])
-assert hashlib.sha256(embedded).hexdigest() == frozen['audit']['sha256']
+assert payload['manifest'] == package.read(package.ROOT/config['output']/'candidate.json')
+for name, encoded in payload['assets'].items():
+    assert base64.b64decode(encoded.split(',', 1)[1]) == (package.ROOT/config['output']/name).read_bytes(), name
 assert '<script src=' not in html and '<link rel="stylesheet"' not in html
-baseline_count = 0
+count = 0
 if args.baseline:
-    for file, expected_sha in read(args.baseline).items():
-        assert sha(ROOT/file) == expected_sha, 'Frozen pre-existing bytes changed: '+file
-        baseline_count += 1
-print(json.dumps({'status': 'passed', 'id': candidate['id'], 'publicFiles': len(pinned),
-                  'glbSha256': frozen['audit']['sha256'], 'offlineExact': True,
-                  'unchangedPriorFiles': baseline_count}, indent=2))
+    for name, expected in package.read(args.baseline).items():
+        assert package.digest(package.ROOT/name) == expected, 'Previous frozen bytes changed: '+name
+        count += 1
+print(json.dumps({'status': 'passed', 'id': candidate['id'], 'publicFiles': len(candidate['files']),
+                  'glbSha256': candidate['audit']['sha256'], 'offlineExact': True,
+                  'embeddedAssets': len(payload['assets']), 'unchangedPriorFiles': count}, indent=2))

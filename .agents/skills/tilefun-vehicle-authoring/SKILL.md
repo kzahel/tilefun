@@ -46,6 +46,11 @@ explicit family config to pin the review/source replay, measure actual imported
 bounds and copy the exact model/cardinal pixels. Larger capture viewports preserve
 native pixel density and centered ground origin; only transparent padding may be
 cropped into the standard fallback frame. Keep normal builds independent of Blender.
+School-bus tactical 149 qualifies a 224px viewport at unchanged world-pixel density,
+side-owned door/window paint and a fresh-clone frozen-only offline command. Use
+`family-regression.mjs` when changing the review harness; old Beetle pixels must
+stay exact. New retained-input-map receipts use `runtime-export-v2.py`; preserve
+the original exporter because the Beetle's historical provenance pins its bytes.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

@@ -5,7 +5,7 @@
       "id": "original-vehicles",
       "name": "Original vehicle review",
       "description": "Inspect new vehicle families at game scale, including rotating wheels and fender coverage.",
-      "url": "demos/original-vehicles/beetle-v1/index.html",
+      "url": "demos/original-vehicles/index.html",
       "mode": "link"
     },
     {
@@ -11852,6 +11852,17 @@
       "kind": "projection",
       "fingerprint": "a6d68b22d3f457833a96ea5960d5b1c0800cda11b32345e6a4540be378977bfe",
       "sourceFingerprint": "a6d68b22d3f457833a96ea5960d5b1c0800cda11b32345e6a4540be378977bfe",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-school-bus-v1",
+      "batchId": "original-vehicles",
+      "name": "Yellow school bus · long vehicle experiment v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/school-bus-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "77d9c5c0f154aacd7d525ffc7d0c93d6b33c663166b2147f6028a788fb64e816",
+      "sourceFingerprint": "77d9c5c0f154aacd7d525ffc7d0c93d6b33c663166b2147f6028a788fb64e816",
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
@@ -41283,5 +41294,5 @@
       }
     }
   ],
-  "inputDigest": "03a0b0509a9b478cdd9f5be466ae3e5ce4c2109b92ca62325ce4e89ac0ce8b2d"
+  "inputDigest": "8bb3eb5fab641fcc03f9592b2bd40de0049f9722ddddf59324741d9acce6df5b"
 }

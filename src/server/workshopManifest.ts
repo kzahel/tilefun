@@ -65,6 +65,9 @@ export async function workshopInputDigest(root = ".") {
   }
   files.push(
     "public/demos/original-vehicles/manifest.json",
+    "public/demos/original-vehicles/index.html",
+    "public/demos/original-vehicles/gallery.css",
+    "public/demos/original-vehicles/gallery.js",
     "src/workshop/OriginalVehicleCandidates.ts",
   );
   for (const candidate of originalVehicles.candidates) {

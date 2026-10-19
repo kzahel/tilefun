@@ -221,3 +221,23 @@ packs occupied native pixels around (96,144) in each 192×224 fallback frame,
 cropping transparent padding only. It rejects any clipped occupied pixel instead
 of resizing the car. `runtime-test.py` exercises 128/224/256px inputs, row isolation,
 ground registration and clipping rejection.
+
+The school-bus experiment adds `nativeSize` to the family review config. Its
+224px viewport uses radius 112 in the unchanged game projection. The study view
+expands proportionally, preserving its fixed elevation, pixel density and 28px
+registration. This gives a long/tall vehicle more transparent margin without
+shrinking it. `family-regression.mjs` verifies the old Beetle pixels exactly and
+centered crops between viewport sizes. The Workshop collection opens all frozen
+families; `check-gallery.mjs` checks native sizing and navigation on desktop/phone.
+
+For fresh-clone offline review, run `family-package.py CONFIG offline` and then
+`family-verify.py CONFIG`. This verifies the frozen public files before writing
+only the ignored standalone page; it needs no Blender, source regeneration or
+local baseline. Do not assemble/refreeze an existing revision.
+
+The first Beetle provenance pins `runtime-export.py` itself, so that historical
+entry point remains unchanged. New families can use `runtime-export-v2.py`, which
+accepts explicit retained `inputHashes` maps as well as legacy role receipts.
+It verifies every declared dependency and requires the configured builder/family
+pins. School-bus export and native 224px fallback packing are tested in ignored
+output only; the ordinary game catalog stays unchanged until appearance approval.

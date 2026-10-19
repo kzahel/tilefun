@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "artReviewStatus": "awaiting-owner-review",
+  "runtime": "not integrated",
+  "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+  "atlasSha256": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f",
+  "report": "public/demos/vehicle-bake/school-bus/v1/report.json",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/school-bus/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/school-bus/capture.mjs",
+    "python scripts/vehicle-bake/school-bus/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/school-bus/v1/evidence/clearance-input.json data/vehicle-bake/school-bus/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/school-bus/v1/model.glb --config scripts/vehicle-bake/school-bus/coverage-region.json --output data/vehicle-bake/school-bus/recheck-coverage.json"
+  ]
+}

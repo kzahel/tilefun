@@ -1,32 +1,64 @@
 <!doctype html>
+
 <html lang="en">
+
   <head>
+
     <meta charset="utf-8" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Original vehicle review</title>
+
     <link rel="stylesheet" href="review.css" />
+
   </head>
+
   <body>
+
     <main>
+
       <nav><span>TILEFUN / ORIGINAL VEHICLES</span><span class="badge">HUMAN REVIEW PENDING</span></nav>
-      <header><p class="eyebrow">A NEW SHAPE, IN THE SAME PIXEL WORLD</p><h1 id="name">Original vehicle</h1><p class="intro">Inspect the actual textured model, from every angle. Each view starts with the same 128 × 128 pixels.</p></header>
+
+      <header><p class="eyebrow">A NEW SHAPE, IN THE SAME PIXEL WORLD</p><h1 id="name">Original vehicle</h1><p class="intro">Inspect the actual textured model, from every angle. Each view starts with the same pixel density, in <span id="intro-size">128 × 128</span> pixels.</p></header>
+
       <section class="controls" aria-label="Model controls">
+
         <label>Enlarged view <select id="zoom"><option value="1">Native · 1×</option><option value="2" selected>Pixels · 2×</option><option value="3">Pixels · 3×</option></select></label>
+
         <label>Camera <select id="projection"><option value="study">Study · 50°</option><option value="engine">Shared game camera</option></select></label>
+
         <button type="button" id="play" aria-pressed="false">Rotate + roll</button>
+
         <label class="heading">Heading <input type="range" min="0" max="359.5" step="0.5" value="45" id="angle" /><output id="angle-value">45°</output></label>
+
         <label class="check"><input type="checkbox" id="wireframe" /> Wireframe</label>
+
       </section>
+
       <p id="status" role="status">Loading actual GLB…</p>
+
       <section class="comparison" aria-label="Actual model at native and enlarged scales">
+
         <article class="hero"><div class="card-title"><h2>Explore the model</h2><span>NEAREST PIXELS</span></div><div class="stage enlarged"><canvas id="low" width="128" height="128" aria-label="Actual GLB enlarged view"></canvas></div><p id="stats">Reading exported geometry…</p></article>
+
         <div class="side"><article><div class="card-title"><h2>At native size</h2><span>1× ALWAYS</span></div><div class="stage native"><canvas id="native" width="128" height="128" aria-label="Actual GLB native 128 pixel view"></canvas></div><p>The same live frame, at its original resolution.</p></article>
+
         <article id="style-card"><div class="card-title"><h2>Accepted red coupe</h2><span>STYLE REFERENCE</span></div><div class="stage native"><img id="reference" width="128" height="128" alt="Accepted red coupe actual GLB render, style reference only" /></div><p>Actual accepted GLB image. Style reference only; this is not a shape or paint target.</p></article></div>
+
       </section>
+
       <p id="projection-note" class="note"></p>
-      <section class="details"><h2>Review the source</h2><p id="method"></p><div class="links"><a id="model" href="inputs/model.glb" hidden>Exact GLB</a><a id="atlas" href="inputs/atlas.png" hidden>Atlas</a><a id="report" href="inputs/report.json" hidden>Author report</a><a href="captures/contact-sheet.png">Heading contact sheet</a><a href="captures/turntable.gif">Turntable</a><a href="clearance.json">Independent clearance</a></div><p class="note">One view-independent texture and independent rolling wheels. Outlines come from the shared renderer. No image repaint.</p></section>
+
+      <section class="details"><h2>Review the source</h2><p id="method"></p><div class="links"><a id="model" href="inputs/model.glb" hidden>Exact GLB</a><a id="atlas" href="inputs/atlas.png" hidden>Atlas</a><a id="report" href="inputs/report.json" hidden>Author report</a><a href="captures/contact-sheet.png">Heading contact sheet</a><a href="captures/turntable.gif">Study turntable</a><a href="captures/game-turntable.gif">Game turntable</a><a href="captures/study-2x.png">Study · 2×</a><a href="captures/engine-3x.png">Game · 3×</a><a href="captures/wheel-phases.png">Wheel phases · both cameras</a><a href="clearance.json">Independent clearance</a></div><p class="note">One view-independent texture and independent rolling wheels. Outlines come from the shared renderer. No image repaint.</p></section>
+
       <footer>Experiment only · human review pending · no gameplay activation. Steering and suspension are not qualified by neutral-wheel checks.</footer>
+
     </main>
+
     <script src="viewer.js" defer></script>
+
   </body>
+
 </html>
+

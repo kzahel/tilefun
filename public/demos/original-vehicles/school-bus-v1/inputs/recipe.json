@@ -1,0 +1,672 @@
+{
+  "family": "classic-conventional-school-bus",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    6.9,
+    2.4,
+    2.48
+  ],
+  "wheelRadius": 0.47,
+  "wheelWidth": 0.29,
+  "axles": [
+    -2.5,
+    1.96
+  ],
+  "halfTrack": 0.98,
+  "bodyStations": [
+    [
+      -2.25,
+      0.96,
+      0.97
+    ],
+    [
+      -2.12,
+      1,
+      1
+    ],
+    [
+      -1.9,
+      1,
+      1
+    ],
+    [
+      2.98,
+      1,
+      1
+    ],
+    [
+      3.2,
+      0.985,
+      0.99
+    ],
+    [
+      3.32,
+      0.94,
+      0.95
+    ]
+  ],
+  "bodySection": [
+    [
+      -1.08,
+      0.38
+    ],
+    [
+      -1.1,
+      1.23
+    ],
+    [
+      -1.1,
+      1.96
+    ],
+    [
+      -1.065,
+      2.19
+    ],
+    [
+      -0.99,
+      2.32
+    ],
+    [
+      -0.86,
+      2.41
+    ],
+    [
+      -0.64,
+      2.465
+    ],
+    [
+      0,
+      2.48
+    ],
+    [
+      0.64,
+      2.465
+    ],
+    [
+      0.86,
+      2.41
+    ],
+    [
+      0.99,
+      2.32
+    ],
+    [
+      1.065,
+      2.19
+    ],
+    [
+      1.1,
+      1.96
+    ],
+    [
+      1.1,
+      1.23
+    ],
+    [
+      1.08,
+      0.38
+    ]
+  ],
+  "hoodStations": [
+    [
+      -3.34,
+      0.65,
+      1.06
+    ],
+    [
+      -3.25,
+      0.75,
+      1.19
+    ],
+    [
+      -3.02,
+      0.79,
+      1.27
+    ],
+    [
+      -2.65,
+      0.79,
+      1.31
+    ],
+    [
+      -2.34,
+      0.8,
+      1.33
+    ],
+    [
+      -2.24,
+      0.8,
+      1.33
+    ]
+  ],
+  "arch": {
+    "cutRadius": 0.565,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      177,
+      110,
+      38
+    ],
+    "paintShadow": [
+      211,
+      139,
+      39
+    ],
+    "paintMid": [
+      237,
+      167,
+      40
+    ],
+    "paint": [
+      250,
+      187,
+      48
+    ],
+    "paintLight": [
+      255,
+      207,
+      79
+    ],
+    "cream": [
+      255,
+      226,
+      130
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original family-specific semantic surface UV paint on actual body/hood triangles. No source projection, screen redraw or high-to-low transfer.",
+  "components": [
+    {
+      "name": "Long crowned coach body with local open wheel pockets",
+      "group": "body",
+      "triangles": 344,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Short rounded projecting engine hood",
+      "group": "body",
+      "triangles": 118,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Central engine bay",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad open fender shell -2.5 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad open fender shell -2.5 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad open fender shell 1.96 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad open fender shell 1.96 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Restrained black end bumper -3.43",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Restrained black end bumper 3.39",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Front grille dark face",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Broad quiet grille slat 0.74",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad quiet grille slat 0.86",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Broad quiet grille slat 0.98",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Static folded red stop plate",
+      "group": "body",
+      "triangles": 6,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Mirror arm -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Driver passenger mirror -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Mirror arm 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Driver passenger mirror 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Round headlamp metal rim -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Round ivory headlamp -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Front amber corner lamp -1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "amber"
+      ]
+    },
+    {
+      "name": "Round headlamp metal rim 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Round ivory headlamp 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Front amber corner lamp 1",
+      "group": "body",
+      "triangles": 22,
+      "paintRoles": [
+        "amber"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.5,
+        -0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        -43.478260869565226,
+        8.173913022746211,
+        17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.5,
+        0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        -43.478260869565226,
+        8.173913022746211,
+        -17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.9600000381469727,
+        -0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        34.08695718516475,
+        8.173913022746211,
+        17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.9600000381469727,
+        0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        34.08695718516475,
+        8.173913022746211,
+        -17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    }
+  ],
+  "method": "Original family-specific semantic surface UV paint on actual body/hood triangles. No source projection, screen redraw or high-to-low transfer.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/school-bus/build.py",
+    "scripts/vehicle-bake/school-bus/family.json",
+    "scripts/vehicle-bake/school-bus/coverage-region.json",
+    "scripts/vehicle-bake/school-bus/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

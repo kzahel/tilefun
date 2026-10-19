@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe and Beetle integrated. School bus is the next owner-authorized authoring/review checkpoint.",
+  "gate": "Red coupe and Beetle integrated and committed. School bus v1 ready for appearance review; pickup remains queued.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -29,9 +29,10 @@
       "name": "Yellow school bus",
       "family": "School bus",
       "priority": 3,
-      "status": "backlog",
-      "authorization": "Owner-authorized follow-on experiment after red-car agreement; queued, not started in asset-commit checkpoint",
-      "next": "Test long body, repeated windows, stripes, asymmetric doors and wheelbase"
+      "status": "review",
+      "authorization": "2026-10-19 owner requested next vehicle after accepted Beetle gameplay/commit checkpoint",
+      "next": "Owner review of school-bus v1 shape, outlines, windows/door and wheel fit; gameplay activation follows appearance agreement",
+      "candidate": "school-bus-v1"
     },
     {
       "id": "pickup",

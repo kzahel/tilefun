@@ -1,0 +1,15 @@
+{
+  "id": "school-bus-v1",
+  "clearanceId": "school-bus--v1",
+  "name": "Yellow school bus",
+  "title": "Yellow school bus \u00b7 long vehicle experiment v1",
+  "source": "public/demos/vehicle-bake/school-bus/v1",
+  "glb": "public/demos/vehicle-bake/school-bus/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/school-bus/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/school-bus/v1/report.json",
+  "output": "public/demos/original-vehicles/school-bus-v1",
+  "qa": "data/vehicle-bake/school-bus-qa",
+  "offline": "data/vehicle-bake/school-bus-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224
+}

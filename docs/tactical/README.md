@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [149 School bus pipeline review](149-school-bus-pipeline-review.md) | Delivered for review: 2,564-triangle school bus, side-owned paint and fixed-pixel larger-viewport review; [original vehicles](../topics/original-vehicles.md) |
 | [148 Beetle gameplay](148-beetle-gameplay.md) | Delivered: accepted Beetle spawning, normal traffic, measured bounds and shared game/lab fallback; [original vehicles](../topics/original-vehicles.md) |
 | [147 Wildlife continuation](147-wildlife-continuation.md) | Active: eight-hour remaining-roster continuation; per-batch commits and live lab verification |
 | [146 Beetle pipeline review](146-beetle-pipeline-review.md) | Delivered for review: 2,554-triangle rounded compact, reusable family preview and independent wheel/fender qualification; [original vehicles](../topics/original-vehicles.md) |

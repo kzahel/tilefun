@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+  "atlasSha256": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f",
+  "invokedBuilder": "art-source/vehicle-bake/school-bus/v1/build.py",
+  "inputHashes": {
+    "art-source/vehicle-bake/school-bus/v1/build.py": "ec4384d947c06e86b7bfb3f1c3efa062174b3926c616600bfa775db282d7c48a",
+    "art-source/vehicle-bake/school-bus/v1/family.json": "92911855ed8440577d20a2fbced8bb55c79f9d91f6ea5a90b4dfddd3435b1cf5",
+    "art-source/vehicle-bake/school-bus/v1/coverage-region.json": "8b477c72afab92fdab590426d46c16bcbb9d3af107390d9c942d4dbf4e4cbbab",
+    "art-source/vehicle-bake/school-bus/v1/review.json": "d878d09da118a71e7920c3fa914026b388f5920d8c3f4921f409a9f4a3fdaff3"
+  },
+  "scratchInputDependencies": [],
+  "sharedDependencies": [
+    "Blender 5.2 glTF exporter",
+    "scripts/vehicle-bake/catalog.py:audit_glb"
+  ]
+}

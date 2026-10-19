@@ -7,7 +7,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     name: "Original vehicle review",
     description:
       "Inspect new vehicle families at game scale, including rotating wheels and fender coverage.",
-    url: "demos/original-vehicles/beetle-v1/index.html",
+    url: "demos/original-vehicles/index.html",
     mode: "link",
   },
   {

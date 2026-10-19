@@ -18,6 +18,8 @@ if (!process.argv.includes("--qa-only") && existsSync(resolve(out, "review-manif
   throw Error("Frozen review revision: capture into a new directory.");
 await mkdir(qa, { recursive: true });
 const candidate = JSON.parse(await readFile(resolve(out, "candidate.json"), "utf8")).candidates[0];
+const nativeSize = candidate.nativeSize ?? 128;
+assert.equal(nativeSize, config.nativeSize ?? 128);
 const sha = createHash("sha256")
   .update(await readFile(resolve(out, candidate.glb)))
   .digest("hex");
@@ -61,14 +63,15 @@ try {
             const rendered = window.familyReview.pose(yaw, 0, mode);
             let opaque = 0;
             let edge = 0;
-            const bounds = { minX: 128, minY: 128, maxX: -1, maxY: -1 };
+            const size = rendered.nativeSize;
+            const bounds = { minX: size, minY: size, maxX: -1, maxY: -1 };
             for (let i = 3; i < rendered.pixels.length; i += 4) {
               if (!rendered.pixels[i]) continue;
               opaque++;
               const p = (i - 3) / 4;
-              const x = p % 128;
-              const y = Math.floor(p / 128);
-              if (x === 0 || x === 127 || y === 0 || y === 127) edge++;
+              const x = p % size;
+              const y = Math.floor(p / size);
+              if (x === 0 || x === size - 1 || y === 0 || y === size - 1) edge++;
               bounds.minX = Math.min(bounds.minX, x);
               bounds.minY = Math.min(bounds.minY, y);
               bounds.maxX = Math.max(bounds.maxX, x);
@@ -93,6 +96,46 @@ try {
           edgePixels: result.edge,
           bounds: result.bounds,
         });
+      }
+    }
+    const cropProof = [];
+    if (nativeSize > 128) {
+      for (let index = 0; index < 16; index++) {
+        const proof = await page.evaluate(
+          ({ index, nativeSize }) => {
+            const api = window.familyReview;
+            api.setNativeSize(128);
+            const small = api.pose(index * 22.5, 0, "engine").pixels;
+            api.setNativeSize(nativeSize);
+            const large = api.pose(index * 22.5, 0, "engine").pixels;
+            const offset = (nativeSize - 128) / 2;
+            let mismatchedChannels = 0;
+            // Exclude the 1px frame boundary: clipping changes outline neighbour tests there.
+            for (let y = 1; y < 127; y++)
+              for (let x = 1; x < 127; x++)
+                for (let c = 0; c < 4; c++) {
+                  if (
+                    small[(y * 128 + x) * 4 + c] !==
+                    large[((y + offset) * nativeSize + x + offset) * 4 + c]
+                  )
+                    mismatchedChannels++;
+                }
+            return {
+              yaw: index * 22.5,
+              comparedPixels: 126 * 126,
+              mismatchedChannels,
+              includesInteriorOutline: true,
+              excludedFrameBoundary: 1,
+            };
+          },
+          { index, nativeSize },
+        );
+        assert.equal(
+          proof.mismatchedChannels,
+          0,
+          `Native viewport crop changed game pixels at ${proof.yaw}`,
+        );
+        cropProof.push(proof);
       }
     }
     const radius = (await page.evaluate(() => window.familyReview.wheelRadii()))[0].radius;
@@ -134,9 +177,16 @@ try {
           rig,
           views,
           phases,
+          centered128GameCropProof: cropProof,
           sourceScale: "80 / 4.6 (unchanged)",
-          study: "50 degrees; ground (64,92)",
-          game: "setCarMeshProjection(camera.projectionMatrix,64); ground (64,64)",
+          nativeSize,
+          dimensions: [nativeSize, nativeSize],
+          groundOrigins: {
+            study: [nativeSize / 2, nativeSize / 2 + 28],
+            engine: [nativeSize / 2, nativeSize / 2],
+          },
+          study: "50 degrees; viewport expands by nativeSize / 128; constant 28px registration",
+          game: "setCarMeshProjection(camera.projectionMatrix,nativeSize/2); centered ground",
           engineComponents: [
             "CarMeshAsset",
             "VehicleGeometryBatches",
@@ -167,11 +217,11 @@ try {
     await page.locator("#zoom").selectOption(zoom);
     assert.equal(
       await page.locator("#low").evaluate((el) => el.getBoundingClientRect().width),
-      128 * Number(zoom),
+      nativeSize * Number(zoom),
     );
     assert.equal(
       await page.locator("#native").evaluate((el) => el.getBoundingClientRect().width),
-      128,
+      nativeSize,
     );
   }
   await page.locator("#zoom").selectOption("2");
@@ -185,8 +235,33 @@ try {
       true,
       `Mobile overflow at ${zoom}x`,
     );
+    assert.equal(
+      await page.locator("#native").evaluate((el) => el.getBoundingClientRect().width),
+      nativeSize,
+    );
+    if (candidate.styleReference)
+      assert.equal(
+        await page.locator("#reference").evaluate((el) => el.getBoundingClientRect().width),
+        128,
+      );
+    if (nativeSize * Number(zoom) > 324) {
+      assert.ok(
+        await page.locator(".enlarged").evaluate((el) => el.scrollWidth > el.clientWidth),
+        "Enlargement scrolls internally",
+      );
+      await page.locator(".enlarged").evaluate((el) => {
+        el.scrollLeft = el.scrollWidth;
+      });
+      assert.ok(
+        await page.locator(".enlarged").evaluate((el) => el.scrollLeft > 0),
+        "Enlarged pixels remain reachable",
+      );
+    }
   }
   await page.locator("#zoom").selectOption("2");
+  await page.locator(".enlarged").evaluate((el) => {
+    el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+  });
   await page.screenshot({ path: resolve(qa, "mobile.png"), fullPage: true });
   let offline = "not yet assembled";
   if (process.argv.includes("--qa-only")) {
@@ -225,7 +300,7 @@ try {
         desktop: [1200, 1050],
         mobile: [390, 844],
         controls: ["heading", "study/game", "wireframe", "rotate+roll", "native/2x/3x"],
-        nativeCardAlways128: true,
+        nativeCardActualPixels: nativeSize,
         mobileNoPageOverflowAllScales: true,
         offline,
         errors,
