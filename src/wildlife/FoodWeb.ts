@@ -161,6 +161,7 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  cuttlefish: ["fish", "crab", "octopus", "nautilus"],
   "praying-mantis": ["ant", "cricket", "grasshopper", "bee", "ladybug", "earwig", "leaf-insect"],
   spider: [
     "ant",
@@ -241,7 +242,17 @@ export const HUNTING_DIETS = {
     "grasshopper",
     "stag-beetle",
   ],
-  swordfish: ["fish", "pufferfish", "anglerfish", "octopus"],
+  swordfish: [
+    "cuttlefish",
+    "seahorse",
+    "nautilus",
+    "leafy-seadragon",
+    "starfish",
+    "fish",
+    "pufferfish",
+    "anglerfish",
+    "octopus",
+  ],
   anglerfish: ["fish", "crab"],
   owl: [
     ...arthropodPrey,
@@ -378,6 +389,11 @@ export const HUNTING_DIETS = {
   dolphin: ["fish", "octopus", "crab"],
   narwhal: ["fish", "octopus", "crab"],
   shark: [
+    "cuttlefish",
+    "seahorse",
+    "nautilus",
+    "leafy-seadragon",
+    "starfish",
     "moray-eel",
     "electric-eel",
     "sea-lion",
@@ -403,6 +419,11 @@ export const HUNTING_DIETS = {
   ],
   "hammerhead-shark": ["fish", "manta-ray", "octopus", "crab"],
   orca: [
+    "cuttlefish",
+    "seahorse",
+    "nautilus",
+    "leafy-seadragon",
+    "starfish",
     "moray-eel",
     "electric-eel",
     "sea-lion",

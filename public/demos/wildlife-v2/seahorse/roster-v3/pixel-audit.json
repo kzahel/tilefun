@@ -1,0 +1,17 @@
+{
+  "identity": "seahorse-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.821153846153834,
+    "up": 2.2502264492753596,
+    "left": 2.1629651357693547,
+    "right": 1.7898089171974476
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

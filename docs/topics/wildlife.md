@@ -276,6 +276,26 @@ oddities5 and crustaceans5 have source/playback work underway; the two upright
 companion prototypes are refining dense arm keys and supported weight transfer.
 
 
+Fifteenth checkpoint: cuttlefish, seahorse, nautilus, leafy seadragon and starfish
+join deep-water natural refuges, placement and the animated animal browser.
+Cuttlefish have eight linked arms, two feeding tentacles and attached mantle fins;
+seahorses have a curled tail and upright body; nautiluses have a closed patterned
+spiral shell and animated tentacle bundles; leafy seadragons have attached leaf
+appendages and a linked tail; starfish have five articulated radial arms.
+All use closed editable volumes, fixed links, moving painted bodies and exact
+source loops. Cuttlefish hunt through shared aquatic authority; the other four
+swim or crawl, forage and escape. Directed diets allow larger marine hunters to
+eat them. Natural meals retain distant delayed replacement; placed prey stay
+finite. Camouflage, ink and other special abilities remain future work.
+Validation: **5,557 full-unit passes**, five known Windows failures and ten skips;
+51 focused checks; **30 browser cases / 796 visible previews**; five exact replays
+and 1,960 native/3x crops. Typecheck, isolated lint/build and the 1,730-candidate
+normal Chromium inventory pass. All three vehicle review objects remain exact.
+New art remains pending human review. **189/196 implemented; seven remaining.**
+The five crustaceans and two upright companions have passed source replay and
+native/3x playback verification and await runtime integration.
+
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

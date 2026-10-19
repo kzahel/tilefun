@@ -17,6 +17,7 @@ import { INSECT_PROFILES } from "./Insects.js";
 import { LEGLESS_FAUNA_PROFILES } from "./LeglessCreatures.js";
 import { LIZARD_PROFILES } from "./Lizards.js";
 import { MARINE_FAUNA_PROFILES } from "./MarineFauna.js";
+import { MARINE_ODDITY_FAUNA_PROFILES } from "./MarineOddities.js";
 import { MORE_MAMMAL_PROFILES } from "./MoreMammals.js";
 import { PANDA_PROFILE } from "./Panda.js";
 import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
@@ -1360,6 +1361,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...SHORE_MAMMAL_PROFILES,
   ...LEGLESS_FAUNA_PROFILES,
   ...GROUND_ARTHROPOD_FAUNA_PROFILES,
+  ...MARINE_ODDITY_FAUNA_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

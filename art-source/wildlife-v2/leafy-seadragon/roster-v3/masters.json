@@ -1,0 +1,13 @@
+{
+  "identity": "leafy-seadragon-roster-v3-pixels-01",
+  "palette": {
+    "K": "#25312d",
+    "N": "#151d19",
+    "B": "#78935e",
+    "C": "#d9c8a0",
+    "M": "#526a42",
+    "H": "#b2bc77",
+    "T": "#e1d4b4"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -619,3 +619,10 @@
 !earwig/roster-v3/*
 !centipede/roster-v3/*
 !millipede/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!cuttlefish/roster-v3/*
+!seahorse/roster-v3/*
+!nautilus/roster-v3/*
+!leafy-seadragon/roster-v3/*
+!starfish/roster-v3/*

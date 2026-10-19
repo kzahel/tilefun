@@ -19801,5 +19801,470 @@
         "sha256": "7d2499197867ac44afcc67e4d24c791b3753433a2441f7a6796d4e8b98411af2"
       }
     ]
+  },
+  {
+    "id": "cuttlefish-roster-v3",
+    "animalId": "cuttlefish",
+    "revision": "roster-v3",
+    "name": "Cuttlefish · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/cuttlefish/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-cuttlefish-roster-v3",
+      "name": "Cuttlefish sheet",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "art-source/wildlife-v2/cuttlefish/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-cuttlefish-roster-v3-scene",
+      "name": "Cuttlefish scene",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "ebe788ec9133978b97c77e3a38c667aa2a08af6045589f5cce534435ae2a9f06",
+      "source": "art-source/wildlife-v2/cuttlefish/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-cuttlefish-roster-v3-contact",
+      "name": "Cuttlefish contact",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "4bc87e037e783724dd40d14b675a48249fc4d3a08289c84ff5f68301ed631181",
+      "source": "art-source/wildlife-v2/cuttlefish/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/cuttlefish/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/contact-sheet-native.png",
+        "sha256": "4bc87e037e783724dd40d14b675a48249fc4d3a08289c84ff5f68301ed631181"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/index.html",
+        "sha256": "4237ace95ee3ea4f1e20e2acd302306ba927f15fccf61e8d2daa21fadaf6f854"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/pixel-audit.json",
+        "sha256": "cdf8ebe5604bd4b0510c6008b99dbf846e8df78ce17d5169572ae4d9d0c5c2ce"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/preview-native.gif",
+        "sha256": "35993458b0f93a59f2186ec825efc4cb94877ea39d63925ffc7a12292936332e"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/preview.gif",
+        "sha256": "65868225264bf2729428a6df7b93837b7835236eb5c4be4c2193eacbd93e33e9"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/scene-native.png",
+        "sha256": "ebe788ec9133978b97c77e3a38c667aa2a08af6045589f5cce534435ae2a9f06"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+        "sha256": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/source-audit.json",
+        "sha256": "0149255fd642583c58525453cc3dd02de2da79736544f56c6ee7803cee7e379e"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/sprite.json",
+        "sha256": "e84f2f8a9f9af1af07488a73b62d13005685ec63aa3f07dfea5991ff659442ac"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/travel-native.gif",
+        "sha256": "bf93ddb410e53f8ed2e82fc38ee358201543f68ee5b49d0e06d107ab1dad1d8c"
+      },
+      {
+        "path": "demos/wildlife-v2/cuttlefish/roster-v3/validation.json",
+        "sha256": "80375276dc9aa03b6930ba6ca4680a1462cebe8fddff620b13a1310c334bf9c3"
+      }
+    ]
+  },
+  {
+    "id": "seahorse-roster-v3",
+    "animalId": "seahorse",
+    "revision": "roster-v3",
+    "name": "Seahorse · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/seahorse/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-seahorse-roster-v3",
+      "name": "Seahorse sheet",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source": "art-source/wildlife-v2/seahorse/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-seahorse-roster-v3-scene",
+      "name": "Seahorse scene",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "1d31f17785348bf18312b7696f0e390b86471f6bce68c1eacecdde1729138e86",
+      "source": "art-source/wildlife-v2/seahorse/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-seahorse-roster-v3-contact",
+      "name": "Seahorse contact",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "294fc84057bcc65525b1093e7b28d691b9d41b903a93775adea7c7e3065196bf",
+      "source": "art-source/wildlife-v2/seahorse/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/seahorse/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/contact-sheet-native.png",
+        "sha256": "294fc84057bcc65525b1093e7b28d691b9d41b903a93775adea7c7e3065196bf"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/index.html",
+        "sha256": "d86f50c47a7b3081c6a14bfcbc093ebf2a00924f4370c394da6f7209c394acb0"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/pixel-audit.json",
+        "sha256": "7b9da054ba50bbd5eb1e9a25d34f36476787b688e9d936c66ac14f0ef4eeef71"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/preview-native.gif",
+        "sha256": "df67316a4561372efa71c3d3328a6904502198c2c992bfa7d2a252cd9856af53"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/preview.gif",
+        "sha256": "99207a7bcae739239b68712da2a6f84995241e3570850047ac6e1c1ce3b776ca"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/scene-native.png",
+        "sha256": "1d31f17785348bf18312b7696f0e390b86471f6bce68c1eacecdde1729138e86"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+        "sha256": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/source-audit.json",
+        "sha256": "26cbc643159c350ed241bc9356dc1524f14a31fef126f3efefcf60ceed18ea2d"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/sprite.json",
+        "sha256": "bb4719f21319c28847aaee71dbbff08fdaaa009ce1e36f8838320d9f55edf7eb"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/travel-native.gif",
+        "sha256": "cdc82502f7a993299672bd2124733b389a4d5e89ca624e1302f5ae27890ffb9e"
+      },
+      {
+        "path": "demos/wildlife-v2/seahorse/roster-v3/validation.json",
+        "sha256": "8cd2d200530e5bce5a242bc7c6ef69e2568f0f19469db9b5c0c6e0457fc020c3"
+      }
+    ]
+  },
+  {
+    "id": "nautilus-roster-v3",
+    "animalId": "nautilus",
+    "revision": "roster-v3",
+    "name": "Nautilus · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/nautilus/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-nautilus-roster-v3",
+      "name": "Nautilus sheet",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad",
+      "source": "art-source/wildlife-v2/nautilus/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-nautilus-roster-v3-scene",
+      "name": "Nautilus scene",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "9f066ba07f0b8e763de5805193a8c5725e66716edb9d9f5403498800989b5c08",
+      "source": "art-source/wildlife-v2/nautilus/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-nautilus-roster-v3-contact",
+      "name": "Nautilus contact",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1487b5b67757379d203df2215c36429fcc37837399ef004d6645b648ad5e66f0",
+      "source": "art-source/wildlife-v2/nautilus/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/nautilus/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/contact-sheet-native.png",
+        "sha256": "1487b5b67757379d203df2215c36429fcc37837399ef004d6645b648ad5e66f0"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/index.html",
+        "sha256": "bb5f0005ab847897fff97039ab31ee147c1ba85f95f1e8683558ad414cafc659"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/pixel-audit.json",
+        "sha256": "0a611dd8930b859e243000913d03089ccb2201d153dee85a9f7a4b06bbf0cdf1"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/preview-native.gif",
+        "sha256": "b9d2c1b4e41b0e641a381075e46a8c708d95baf6c1a77ce87a4bc4d62abb58d1"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/preview.gif",
+        "sha256": "5f85e2486aab252b635f3aab8d5578f4b204bffa129725fe0c2689967fe62044"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/scene-native.png",
+        "sha256": "9f066ba07f0b8e763de5805193a8c5725e66716edb9d9f5403498800989b5c08"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+        "sha256": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/source-audit.json",
+        "sha256": "6a9f1d62849986bc1927b3c17d3637f985ce2c3318408ec4d8d482ae35665d2d"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/sprite.json",
+        "sha256": "5f000efe43d44e48aadb5003f7ed098e034a100e09c629be29b8ec4e0beb89c2"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/travel-native.gif",
+        "sha256": "3a867b7ab543032cc3139258ebdad21e37fb7e1f94a937a0c19e5b1aed888618"
+      },
+      {
+        "path": "demos/wildlife-v2/nautilus/roster-v3/validation.json",
+        "sha256": "0ce88b55cfedea267d0eec24beab4e0faa8f1699fe1a5a2a078863fc21257500"
+      }
+    ]
+  },
+  {
+    "id": "leafy-seadragon-roster-v3",
+    "animalId": "leafy-seadragon",
+    "revision": "roster-v3",
+    "name": "Leafy seadragon · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/leafy-seadragon/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-leafy-seadragon-roster-v3",
+      "name": "Leafy seadragon sheet",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+      "source": "art-source/wildlife-v2/leafy-seadragon/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-leafy-seadragon-roster-v3-scene",
+      "name": "Leafy seadragon scene",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "92a27844dd65bbaa3e3c0c869265d388981ecd4c1d7411404e58e74c94034ec1",
+      "source": "art-source/wildlife-v2/leafy-seadragon/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-leafy-seadragon-roster-v3-contact",
+      "name": "Leafy seadragon contact",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "110039ab0ceb3842c12295c5c306cf25a7d2a73bc03e3844e81c764d548f269d",
+      "source": "art-source/wildlife-v2/leafy-seadragon/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/leafy-seadragon/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/contact-sheet-native.png",
+        "sha256": "110039ab0ceb3842c12295c5c306cf25a7d2a73bc03e3844e81c764d548f269d"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/index.html",
+        "sha256": "24c0ba52af8c848bbee70020a1c4169add921c1c00a36db0c0cd0442060ac209"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/pixel-audit.json",
+        "sha256": "3b0c7ffdc238507af72bd3b89a496eb5b4dffdc3d99aeabb037dc3bc17bc057d"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/preview-native.gif",
+        "sha256": "345a911a9679cb1f0fa8c7c6afa084884e5b347b6a106fddf40c9f7944c309fd"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/preview.gif",
+        "sha256": "6dcea02fcd19b8317c6c4e2372033333614bcdd1b356236506cb112300dfdc58"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/scene-native.png",
+        "sha256": "92a27844dd65bbaa3e3c0c869265d388981ecd4c1d7411404e58e74c94034ec1"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+        "sha256": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/source-audit.json",
+        "sha256": "75f5468b1df5acac4970a51080973dc11d6d2660d8c48402cc670e957c55d0ac"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/sprite.json",
+        "sha256": "dbc3b5b8de6447c7956c487a0bcf25d782a1acf55602dd61424af978637acaa1"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/travel-native.gif",
+        "sha256": "10bb9886990b9da8a01a6c5b75126c93e5f1f0a42bd4582bfc0f4e80157a0b4e"
+      },
+      {
+        "path": "demos/wildlife-v2/leafy-seadragon/roster-v3/validation.json",
+        "sha256": "e9c3b4803bf3fb5a113ad0c6b12f8417deb058380a1296a3be361ad4cd72e58a"
+      }
+    ]
+  },
+  {
+    "id": "starfish-roster-v3",
+    "animalId": "starfish",
+    "revision": "roster-v3",
+    "name": "Starfish · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/starfish/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-starfish-roster-v3",
+      "name": "Starfish sheet",
+      "image": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
+      "source": "art-source/wildlife-v2/starfish/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-starfish-roster-v3-scene",
+      "name": "Starfish scene",
+      "image": "demos/wildlife-v2/starfish/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "00731014edc2984b7d0ec037403ee57fc8c83e97be14192141a8e8c8dd28288b",
+      "source": "art-source/wildlife-v2/starfish/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-starfish-roster-v3-contact",
+      "name": "Starfish contact",
+      "image": "demos/wildlife-v2/starfish/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3725e7b0a3e5f0ccd74ac6cbe7fef7e10b5dcee5b7cb07fddaf7d26fc25158e6",
+      "source": "art-source/wildlife-v2/starfish/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/starfish/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/contact-sheet-native.png",
+        "sha256": "3725e7b0a3e5f0ccd74ac6cbe7fef7e10b5dcee5b7cb07fddaf7d26fc25158e6"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/index.html",
+        "sha256": "aecb2ec9f9e07e0fb1caa8b7b64d3973815c6ae823aba916790aa8c1d4c77b34"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/pixel-audit.json",
+        "sha256": "96c35413c00cfe6c2be0b68ae76e54100ac4bed5b4f069200fdd39867472be71"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/preview-native.gif",
+        "sha256": "25f53623bc3f8724f9d25a2a3c7dda401aab0eb1a429b66c309607147f3fb008"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/preview.gif",
+        "sha256": "ed87fea85d6f1e2e9af9342488d49be99e1e939bca5a976b727f498e0d5b5662"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/scene-native.png",
+        "sha256": "00731014edc2984b7d0ec037403ee57fc8c83e97be14192141a8e8c8dd28288b"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+        "sha256": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/source-audit.json",
+        "sha256": "848b72a1eebc4d4b68ecb2475f8fa0b1942fdfa6f2cfff1e1eafdf624aa0b47d"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/sprite.json",
+        "sha256": "f524f95a3e12259969faeb1765279e070c1ed69a092f2c085f946cd8ba2e9d03"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/travel-native.gif",
+        "sha256": "4c905d3ca1b3f9c35263dfb284d0922d2f2aab3396d78bc0bd28832e633910b1"
+      },
+      {
+        "path": "demos/wildlife-v2/starfish/roster-v3/validation.json",
+        "sha256": "5ab015b1a37ca47796f9b0051f967993e0a4e03ab1b2709de0e60110023b4120"
+      }
+    ]
   }
 ]

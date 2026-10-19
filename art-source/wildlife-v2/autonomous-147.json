@@ -1230,11 +1230,16 @@
     "cuttlefish": {
       "name": "Cuttlefish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:07:46.919480Z",
-      "progress": "Unregistered original marine source authoring; not runtime active."
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/cuttlefish/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
     },
     "coconut-crab": {
       "name": "Coconut crab",
@@ -1257,20 +1262,30 @@
     "seahorse": {
       "name": "Seahorse",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:07:46.919480Z",
-      "progress": "Unregistered original marine source authoring; not runtime active."
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/seahorse/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
     },
     "starfish": {
       "name": "Starfish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:07:46.919480Z",
-      "progress": "Unregistered original marine source authoring; not runtime active."
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/starfish/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
     },
     "lobster": {
       "name": "Lobster",
@@ -1302,11 +1317,16 @@
     "nautilus": {
       "name": "Nautilus",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:07:46.919480Z",
-      "progress": "Unregistered original marine source authoring; not runtime active."
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/nautilus/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
     },
     "sea-lion": {
       "name": "Sea lion",
@@ -1380,11 +1400,16 @@
     "leafy-seadragon": {
       "name": "Leafy seadragon",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:07:46.919480Z",
-      "progress": "Unregistered original marine source authoring; not runtime active."
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/leafy-seadragon/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
     },
     "moray-eel": {
       "name": "Moray eel",
@@ -1853,6 +1878,17 @@
         "millipede"
       ],
       "validation": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    {
+      "utc": "2026-10-19T16:22:35.349059Z",
+      "completed": [
+        "cuttlefish",
+        "seahorse",
+        "nautilus",
+        "leafy-seadragon",
+        "starfish"
+      ],
+      "validation": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
     }
   ]
 }

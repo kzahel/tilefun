@@ -20,6 +20,10 @@ import {
   LEGLESS_LAND_HUNTER_PROFILES,
   LEGLESS_WATER_HUNTER_PROFILES,
 } from "../src/wildlife/LeglessCreatures.js";
+import {
+  MARINE_ODDITY_FAUNA_PROFILES,
+  MARINE_ODDITY_HUNTER_PROFILES,
+} from "../src/wildlife/MarineOddities.js";
 import { MORE_MAMMAL_PROFILES } from "../src/wildlife/MoreMammals.js";
 import { REPTILE_HUNTER_PROFILES } from "../src/wildlife/ReptileHunters.js";
 import { SEABIRD_PROFILES } from "../src/wildlife/Seabirds.js";
@@ -164,6 +168,7 @@ for (const animal of [
   ...SHORE_MAMMAL_PROFILES,
   ...LEGLESS_FAUNA_PROFILES,
   ...GROUND_ARTHROPOD_FAUNA_PROFILES,
+  ...MARINE_ODDITY_FAUNA_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
@@ -219,6 +224,7 @@ for (const animal of [
   ...LEGLESS_LAND_HUNTER_PROFILES,
   ...GROUND_ARTHROPOD_HUNTER_PROFILES,
   ...LEGLESS_WATER_HUNTER_PROFILES,
+  ...MARINE_ODDITY_HUNTER_PROFILES,
 ]) {
   test(`${animal.species} browser display opens a real moving shared hunter`, async ({ page }) => {
     await page.goto(

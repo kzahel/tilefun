@@ -696,6 +696,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-cuttlefish-predator-v1",
+      "name": "wildlife cuttlefish predator v1",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-shark-predator-v1",
       "name": "wildlife shark predator v1",
       "image": "demos/wildlife-v2/shark/roster-v2/sheet.png",
@@ -1933,6 +1943,46 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-seahorse-provisional-v1",
+      "name": "wildlife seahorse provisional v1",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-nautilus-provisional-v1",
+      "name": "wildlife nautilus provisional v1",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-leafy-seadragon-provisional-v1",
+      "name": "wildlife leafy seadragon provisional v1",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-starfish-provisional-v1",
+      "name": "wildlife starfish provisional v1",
+      "image": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -5613,6 +5663,56 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cuttlefish-roster-v3",
+      "name": "wildlife v2 cuttlefish roster v3",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-seahorse-roster-v3",
+      "name": "wildlife v2 seahorse roster v3",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-nautilus-roster-v3",
+      "name": "wildlife v2 nautilus roster v3",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-leafy-seadragon-roster-v3",
+      "name": "wildlife v2 leafy seadragon roster v3",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-starfish-roster-v3",
+      "name": "wildlife v2 starfish roster v3",
+      "image": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -27510,6 +27610,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-cuttlefish-predator-v1",
+      "sheetId": "wildlife-cuttlefish-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-cuttlefish-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-shark-predator-v1",
       "sheetId": "wildlife-shark-predator-v1",
       "rect": [
@@ -29750,6 +29868,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-seahorse-provisional-v1",
+      "sheetId": "wildlife-seahorse-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-seahorse-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-nautilus-provisional-v1",
+      "sheetId": "wildlife-nautilus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-nautilus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-leafy-seadragon-provisional-v1",
+      "sheetId": "wildlife-leafy-seadragon-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-leafy-seadragon-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-starfish-provisional-v1",
+      "sheetId": "wildlife-starfish-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-starfish-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -31783,7 +31973,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:962"
+          "source": "src/wildlife/Fauna.ts:963"
         },
         {
           "system": "Gameplay",
@@ -31795,15 +31985,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:297"
+          "source": "src/wildlife/FoodWeb.ts:308"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:484"
+          "source": "src/wildlife/FoodWeb.ts:505"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:663"
+          "source": "src/wildlife/FoodWeb.ts:684"
         },
         {
           "system": "Gameplay",
@@ -31865,39 +32055,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:36"
+          "source": "src/wildlife/Fauna.ts:37"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:233"
+          "source": "src/wildlife/Fauna.ts:234"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:203"
+          "source": "src/wildlife/FoodWeb.ts:204"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:535"
+          "source": "src/wildlife/FoodWeb.ts:556"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:552"
+          "source": "src/wildlife/FoodWeb.ts:573"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:569"
+          "source": "src/wildlife/FoodWeb.ts:590"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:608"
+          "source": "src/wildlife/FoodWeb.ts:629"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:636"
+          "source": "src/wildlife/FoodWeb.ts:657"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:663"
+          "source": "src/wildlife/FoodWeb.ts:684"
         }
       ]
     },
@@ -31951,23 +32141,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:277"
+          "source": "src/wildlife/FoodWeb.ts:288"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:298"
+          "source": "src/wildlife/FoodWeb.ts:309"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:485"
+          "source": "src/wildlife/FoodWeb.ts:506"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:663"
+          "source": "src/wildlife/FoodWeb.ts:684"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:664"
+          "source": "src/wildlife/FoodWeb.ts:685"
         },
         {
           "system": "Gameplay",
@@ -32013,7 +32203,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:664"
+          "source": "src/wildlife/FoodWeb.ts:685"
         }
       ]
     },
@@ -32059,7 +32249,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:665"
+          "source": "src/wildlife/FoodWeb.ts:686"
         }
       ]
     },
@@ -32105,7 +32295,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:666"
+          "source": "src/wildlife/FoodWeb.ts:687"
         }
       ]
     },
@@ -32151,7 +32341,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:667"
+          "source": "src/wildlife/FoodWeb.ts:688"
         }
       ]
     },
@@ -32309,11 +32499,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:300"
+          "source": "src/wildlife/FoodWeb.ts:311"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:663"
+          "source": "src/wildlife/FoodWeb.ts:684"
         },
         {
           "system": "Gameplay",
@@ -32363,7 +32553,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:663"
+          "source": "src/wildlife/FoodWeb.ts:684"
         },
         {
           "system": "Gameplay",

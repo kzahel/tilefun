@@ -1,0 +1,17 @@
+{
+  "identity": "nautilus-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6916877899469114,
+    "up": 1.9761904761904816,
+    "left": 2.093558907460249,
+    "right": 1.525649013499475
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

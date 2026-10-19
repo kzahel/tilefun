@@ -1,0 +1,17 @@
+{
+  "identity": "cuttlefish-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.9518982387475603,
+    "up": 3.2042051927976445,
+    "left": 2.7205393162998064,
+    "right": 2.004948362079091
+  },
+  "rootTravelPixelsPerCycle": 23.04,
+  "plantedTravel": true
+}
