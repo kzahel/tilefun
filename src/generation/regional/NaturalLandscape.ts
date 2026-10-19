@@ -15,6 +15,7 @@ import {
 import {
   FAUNA_EXPANSION_ROSTER,
   FAUNA_WATER_EXPANSION_ROSTER,
+  UPRIGHT_COMPANION_SPECIES,
 } from "../../wildlife/FaunaExpansion.js";
 import { dietFor } from "../../wildlife/FoodWeb.js";
 import { createFrog, FROG_TYPE } from "../../wildlife/Frog.js";
@@ -126,6 +127,7 @@ export class NaturalLandscape {
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private lagoons = new Map<string, NaturalPond | null>();
   private ponds = new Map<string, NaturalPond | null>();
+  private companionFaunaHomes = new Map<string, FaunaHome | null>();
   private faunaHomes = new Map<string, FaunaHome | null>();
   private expansionFaunaHomes = new Map<string, FaunaHome | null>();
   private deerGlades = new Map<string, RabbitGlade | null>();
@@ -935,6 +937,60 @@ export class NaturalLandscape {
     if (cache.size > 128) cache.delete(cache.keys().next().value ?? "");
     return home;
   }
+  /** Downstream companion owners preserve all original and expansion ownership slots. */
+  companionHome(cx: number, cy: number): FaunaHome | null {
+    const key = `${cx},${cy}`;
+    if (this.companionFaunaHomes.has(key)) return this.companionFaunaHomes.get(key) ?? null;
+    const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
+    const species =
+      UPRIGHT_COMPANION_SPECIES[Math.floor(h(48011) * UPRIGHT_COMPANION_SPECIES.length)];
+    const p = FAUNA_PROFILES.find((p) => p.species === species && p.companion);
+    let home: FaunaHome | null = null;
+    if (p && h(48001) < 0.12) {
+      const clearance = Math.ceil(p.radius / 16 + p.body[0] / 32 + 4);
+      for (let attempt = 0; attempt < 4 && !home; attempt++) {
+        const x = cx * 64 + 24 + h(48021 + attempt * 2) * 16,
+          y = cy * 64 + 24 + h(48022 + attempt * 2) * 16;
+        const occupied = [this.faunaHome(cx, cy), this.faunaHome(cx, cy, true)];
+        const rabbit = this.rabbitGlade(cx, cy),
+          deer = this.deerGlade(cx, cy);
+        if (
+          occupied.some((o) => o && Math.hypot(x - o.x, y - o.y) < clearance + o.clearance + 4) ||
+          this.reserved(x, y, clearance) ||
+          this.pondBank(x, y, clearance) ||
+          this.inThicket(x, y, clearance) ||
+          (rabbit && Math.hypot(x - rabbit.x, y - rabbit.y) < clearance + 8) ||
+          (deer && Math.hypot(x - deer.x, y - deer.y) < clearance + 12)
+        )
+          continue;
+        let valid = true;
+        for (let dy = -clearance; dy <= clearance && valid; dy += 2)
+          for (let dx = -clearance; dx <= clearance && valid; dx += 2)
+            valid = this.terrain(x + dx, y + dy) === TerrainId.Grass;
+        // Fit the ordinary existing scenery instead of cutting new clearings:
+        // robins derive natural ownership from those exact trees.
+        for (
+          let py = Math.floor((y - clearance - 4) / 16);
+          py <= Math.floor((y + clearance + 4) / 16) && valid;
+          py++
+        )
+          for (
+            let px = Math.floor((x - clearance - 4) / 16);
+            px <= Math.floor((x + clearance + 4) / 16) && valid;
+            px++
+          )
+            valid = !this.placements(px, py).some(
+              (prop) => Math.hypot(prop.wx / 16 - x, prop.wy / 16 - y) < clearance + 4,
+            );
+        if (valid)
+          home = { id: `fauna-companion-home:${cx}:${cy}`, species: p.species, x, y, clearance };
+      }
+    }
+    this.companionFaunaHomes.set(key, home);
+    if (this.companionFaunaHomes.size > 128)
+      this.companionFaunaHomes.delete(this.companionFaunaHomes.keys().next().value ?? "");
+    return home;
+  }
   private faunaClearing(x: number, y: number): boolean {
     // Largest current/proposed ground body has a 160px home and 56px body.
     for (let cy = Math.floor((y - 20) / 64); cy <= Math.floor((y + 20) / 64); cy++)
@@ -948,8 +1004,11 @@ export class NaturalLandscape {
   }
   private fauna(cx: number, cy: number): ActorPlacement[] {
     const actors: ActorPlacement[] = [];
-    for (const expansion of [false, true]) {
-      const home = this.faunaHome(Math.floor(cx / 4), Math.floor(cy / 4), expansion);
+    for (const bank of [0, 1, 2]) {
+      const home =
+        bank === 2
+          ? this.companionHome(Math.floor(cx / 4), Math.floor(cy / 4))
+          : this.faunaHome(Math.floor(cx / 4), Math.floor(cy / 4), bank === 1);
       if (!home) continue;
       const p = FAUNA_PROFILES.find((p) => p.species === home.species);
       if (!p) continue;
@@ -957,7 +1016,7 @@ export class NaturalLandscape {
         valueNoise(
           Math.floor(cx / 4),
           Math.floor(cy / 4),
-          this.world.seed + salt + (expansion ? 30000 : 0),
+          this.world.seed + salt + (bank === 2 ? 40000 : bank === 1 ? 30000 : 0),
         );
       const groupId = `wildlife:${home.species}:${this.world.seed}:${home.id}`;
       for (let i = 0; i < p.group; i++) {
@@ -1302,6 +1361,7 @@ export class NaturalLandscape {
       glades: this.glades.size,
       deerGlades: this.deerGlades.size,
       faunaHomes: this.faunaHomes.size,
+      companionFaunaHomes: this.companionFaunaHomes.size,
       expansionFaunaHomes: this.expansionFaunaHomes.size,
       lagoons: this.lagoons.size,
     };

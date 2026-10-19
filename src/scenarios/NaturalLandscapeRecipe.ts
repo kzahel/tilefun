@@ -31,7 +31,7 @@ export const NATURAL_CASES = [
   })),
   ...FAUNA_PROFILES.map((p) => ({
     id: p.species,
-    name: `${p.label} · ${p.habitat} refuge`,
+    name: `${p.label} · ${p.companion ? "companion clearing" : `${p.habitat} refuge`}`,
     seed: 2026,
     x: p.inspection[0],
     y: p.inspection[1],

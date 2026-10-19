@@ -3,8 +3,8 @@
   "authorization": "Owner: make more animals from the list for the next eight hours, committing each and ensuring visibility in the lab; good now proceed (2026-10-19).",
   "startedUtc": "2026-10-19T11:06:24Z",
   "deadlineUtc": "2026-10-19T19:06:24Z",
-  "state": "active",
-  "allowNewAnimals": true,
+  "state": "final-verification",
+  "allowNewAnimals": false,
   "supersedes": "Historical expansion and sequencing holds for this explicit timed continuation; registered banks and human review remain immutable.",
   "previousRun": "art-source/wildlife-v2/autonomous-140.json",
   "tactical": "147-wildlife-continuation.md",
@@ -1741,20 +1741,30 @@
     "elephant-upright": {
       "name": "Upright elephant",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:45:11.685641Z",
-      "progress": "Unregistered original upright companion source authoring; not runtime active."
+      "progress": "Supported biped weight transfer, two planted fixed-link legs, attached arms and trunk/neck, independent natural ownership, protected food-web identity and shared game/lab authority verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/elephant-upright/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:49:16.870474Z",
+      "evidence": "5663 initial full-unit passes, five known Windows failures, ten skips and one transient Workshop API timeout; all 13 API tests pass isolated on unchanged source. 43 focused checks and 16 browser cases with 824 visible four-facing previews pass. Two ten-artifact exact replays and 656 native/3x crops. All 74 banks preserve 1677 pinned artifacts byte for byte. Typecheck, isolated lint/build, 1765-candidate normal Chromium inventory and streaming readiness pass. Full-unit retry and full Playwright sweep follow. Exact art pending review."
     },
     "giraffe-upright": {
       "name": "Upright giraffe",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T15:45:11.685641Z",
-      "progress": "Unregistered original upright companion source authoring; not runtime active."
+      "progress": "Supported biped weight transfer, two planted fixed-link legs, attached arms and trunk/neck, independent natural ownership, protected food-web identity and shared game/lab authority verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/giraffe-upright/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:49:16.870474Z",
+      "evidence": "5663 initial full-unit passes, five known Windows failures, ten skips and one transient Workshop API timeout; all 13 API tests pass isolated on unchanged source. 43 focused checks and 16 browser cases with 824 visible four-facing previews pass. Two ten-artifact exact replays and 656 native/3x crops. All 74 banks preserve 1677 pinned artifacts byte for byte. Typecheck, isolated lint/build, 1765-candidate normal Chromium inventory and streaming readiness pass. Full-unit retry and full Playwright sweep follow. Exact art pending review."
     }
   },
   "checkpoints": [
@@ -1925,6 +1935,19 @@
         "mantis-shrimp"
       ],
       "validation": "5627 full-unit passes, five known Windows failures and ten skips; 48 focused checks; 28 real browser cases with 816 visible four-facing previews. Five byte-identical ten-artifact replays and 2600 exact native/3x crops. Typecheck, isolated lint/build and 1755-candidate normal Chromium inventory pass. All 72 registered banks retain 1629 byte-identical pinned artifacts. Exact art pending human review."
+    },
+    {
+      "utc": "2026-10-19T16:49:16.870474Z",
+      "completed": [
+        "elephant-upright",
+        "giraffe-upright"
+      ],
+      "validation": "5663 initial full-unit passes, five known Windows failures, ten skips and one transient Workshop API timeout; all 13 API tests pass isolated on unchanged source. 43 focused checks and 16 browser cases with 824 visible four-facing previews pass. Two ten-artifact exact replays and 656 native/3x crops. All 74 banks preserve 1677 pinned artifacts byte for byte. Typecheck, isolated lint/build, 1765-candidate normal Chromium inventory and streaming readiness pass. Full-unit retry and full Playwright sweep follow. Exact art pending review."
     }
-  ]
+  ],
+  "productionCompleteUtc": "2026-10-19T16:49:16.870474Z",
+  "finalVerification": {
+    "state": "pending",
+    "work": "Full-unit retry and complete Playwright sweep against the frozen 196-animal roster."
+  }
 }

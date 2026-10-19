@@ -5,7 +5,7 @@ import { BOVID_PROFILES } from "./Bovids.js";
 import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
 import { CRUSTACEAN_FAUNA_PROFILES } from "./Crustaceans.js";
 import { DISTINCT_FISH_FAUNA_PROFILES } from "./DistinctFish.js";
-import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
+import type { FAUNA_EXPANSION_ROSTER, UPRIGHT_COMPANION_SPECIES } from "./FaunaExpansion.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
 import { FOREST_SPECIALIST_PROFILES } from "./ForestSpecialists.js";
@@ -29,6 +29,7 @@ import { SHORE_MAMMAL_PROFILES } from "./ShoreMammals.js";
 import { SMALL_MAMMAL_PROFILES } from "./SmallMammals.js";
 import { TALL_BIRD_PROFILES } from "./TallBirds.js";
 import { UNGULATE_PROFILES } from "./Ungulates.js";
+import { UPRIGHT_COMPANION_PROFILES } from "./UprightCompanions.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
 export const FAUNA_ROSTER = [
@@ -51,12 +52,15 @@ export const FAUNA_ROSTER = [
   "manta-ray",
 ] as const;
 export type FaunaSpecies =
+  | (typeof UPRIGHT_COMPANION_SPECIES)[number]
   | (typeof FAUNA_ROSTER)[number]
   | (typeof FAUNA_EXPANSION_ROSTER)[number]
   | (typeof PET_ART)[number]["id"];
 export interface FaunaProfile {
   species: FaunaSpecies;
   variantOf?: "cat" | "dog";
+  /** Friendly authored companion protected from every food-web relationship. */
+  companion?: boolean;
   label: string;
   image: string;
   identity: string;
@@ -1364,6 +1368,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...GROUND_ARTHROPOD_FAUNA_PROFILES,
   ...MARINE_ODDITY_FAUNA_PROFILES,
   ...CRUSTACEAN_FAUNA_PROFILES,
+  ...UPRIGHT_COMPANION_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

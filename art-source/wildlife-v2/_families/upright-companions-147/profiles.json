@@ -1,0 +1,209 @@
+{
+  "elephant-upright": {
+    "label": "Upright elephant",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      2.0
+    ],
+    "radii": [
+      0.6,
+      0.4,
+      0.85
+    ],
+    "head": [
+      0,
+      0.08,
+      3.05
+    ],
+    "skull": [
+      0.55,
+      0.46,
+      0.52
+    ],
+    "hip": [
+      0.29,
+      0,
+      1.35
+    ],
+    "legLengths": [
+      0.58,
+      0.58,
+      0.3,
+      0.12
+    ],
+    "legRadii": [
+      0.16,
+      0.13,
+      0.1,
+      0.09
+    ],
+    "footWidth": 0.18,
+    "footLength": 0.27,
+    "footHeight": 0.08,
+    "neckLengths": [],
+    "neckRoot": [
+      0,
+      0,
+      2.55
+    ],
+    "trunkLengths": [
+      0.28,
+      0.28,
+      0.24,
+      0.2
+    ],
+    "trunkRoot": [
+      0,
+      0.46,
+      -0.1
+    ],
+    "tailLengths": [
+      0.16,
+      0.16,
+      0.14
+    ],
+    "tailRadius": 0.06,
+    "tailKey": "B",
+    "tailRoot": [
+      0,
+      -0.3,
+      1.65
+    ],
+    "tailAngle": -1.1,
+    "armLengths": [
+      0.4,
+      0.38,
+      0.12
+    ],
+    "shoulder": [
+      0.47,
+      0,
+      2.35
+    ],
+    "walkSpeed": 12,
+    "walkMs": 40,
+    "chaseSpeed": 24,
+    "chaseMs": 20,
+    "lift": 0.2,
+    "forageDrop": 0,
+    "hunter": false,
+    "palette": {
+      "K": "#29322f",
+      "N": "#141c18",
+      "B": "#8d9390",
+      "C": "#b9bbb0",
+      "M": "#5d6965",
+      "H": "#a88a7f",
+      "T": "#e5d9b9"
+    }
+  },
+  "giraffe-upright": {
+    "label": "Upright giraffe",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      2.05
+    ],
+    "radii": [
+      0.46,
+      0.35,
+      0.8
+    ],
+    "head": [
+      0,
+      0.2,
+      4.25
+    ],
+    "skull": [
+      0.24,
+      0.38,
+      0.25
+    ],
+    "hip": [
+      0.23,
+      0,
+      1.48
+    ],
+    "legLengths": [
+      0.67,
+      0.58,
+      0.34,
+      0.12
+    ],
+    "legRadii": [
+      0.11,
+      0.09,
+      0.075,
+      0.06
+    ],
+    "footWidth": 0.13,
+    "footLength": 0.23,
+    "footHeight": 0.08,
+    "neckLengths": [
+      0.6,
+      0.6,
+      0.5
+    ],
+    "neckRoot": [
+      0,
+      0.02,
+      2.55
+    ],
+    "trunkLengths": [],
+    "trunkRoot": [
+      0,
+      0,
+      0
+    ],
+    "tailLengths": [
+      0.2,
+      0.2,
+      0.18
+    ],
+    "tailRadius": 0.04,
+    "tailKey": "B",
+    "tailRoot": [
+      0,
+      -0.25,
+      1.65
+    ],
+    "tailAngle": -1.1,
+    "armLengths": [
+      0.38,
+      0.36,
+      0.12
+    ],
+    "shoulder": [
+      0.36,
+      0,
+      2.35
+    ],
+    "walkSpeed": 10,
+    "walkMs": 40,
+    "chaseSpeed": 20,
+    "chaseMs": 20,
+    "lift": 0.2,
+    "forageDrop": 0,
+    "hunter": false,
+    "palette": {
+      "K": "#34302a",
+      "N": "#151a17",
+      "B": "#c99e56",
+      "C": "#e5c780",
+      "M": "#785138",
+      "H": "#a66e43",
+      "T": "#d6bd83"
+    }
+  }
+}

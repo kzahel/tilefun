@@ -1,0 +1,13 @@
+{
+  "identity": "elephant-upright-roster-v3-pixels-01",
+  "palette": {
+    "K": "#29322f",
+    "N": "#141c18",
+    "B": "#8d9390",
+    "C": "#b9bbb0",
+    "M": "#5d6965",
+    "H": "#a88a7f",
+    "T": "#e5d9b9"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

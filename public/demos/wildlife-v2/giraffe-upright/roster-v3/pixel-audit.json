@@ -1,0 +1,17 @@
+{
+  "identity": "giraffe-upright-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7520762090864679,
+    "up": 1.3126550868486362,
+    "left": 3.685733603786339,
+    "right": 3.685733603786339
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

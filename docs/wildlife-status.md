@@ -4,9 +4,9 @@
 
 ## Latest autonomous completion run
 
-[Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
+[Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: final-verification.
 
-**72 newly completed; 2 in progress; 0 currently blocked; 0 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**74 newly completed; 0 in progress; 0 currently blocked; 0 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -82,8 +82,8 @@
 | Millipede | finished-game-active | [Playback](../public/demos/wildlife-v2/millipede/roster-v3/index.html) |
 | Snail | finished-game-active | [Playback](../public/demos/wildlife-v2/snail/roster-v3/index.html) |
 | Earthworm | finished-game-active | [Playback](../public/demos/wildlife-v2/worm/roster-v3/index.html) |
-| Upright elephant | in-progress | [Playback](../public/demos/wildlife-v2/elephant-upright/roster-v3/index.html) |
-| Upright giraffe | in-progress | [Playback](../public/demos/wildlife-v2/giraffe-upright/roster-v3/index.html) |
+| Upright elephant | finished-game-active | [Playback](../public/demos/wildlife-v2/elephant-upright/roster-v3/index.html) |
+| Upright giraffe | finished-game-active | [Playback](../public/demos/wildlife-v2/giraffe-upright/roster-v3/index.html) |
 
 ## Current gorilla shoulder study
 
@@ -95,7 +95,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T16:34:12.195Z (19/10/2026, 18:34:12 Berlin).
+Snapshot: 2026-10-19T16:49:17.228Z (19/10/2026, 18:49:17 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

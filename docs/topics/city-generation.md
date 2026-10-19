@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-18.
+Updated: 2026-10-19.
 
 ## Current generation policy
 
@@ -45,24 +45,31 @@ participating in the ordinary building/interior lookup. Player enter/exit behavi
 and persistence are owned by [patterns and interiors](patterns-and-interiors.md).
 No terrain regeneration or parking-specific renderer is required for this door fix.
 
-[Wildlife completion 140](../tactical/140-autonomous-wildlife-completion.md) adds
-a fixed natural expansion roster separately from the original habitat-owner
-slots. Unfinished species leave empty slots; activating a profile does not
-reshuffle existing species selection. Both banks have independent bounded
-caches and whole-body dry refuges. Original dry owners reserve upstream of
-pond admission; expansion homes fit around admitted water. Activating new land
-profiles must never veto an existing pond or lagoon. A profile-activation
-regression checks the same refuges with and without all active expansion species. The first new hen uses ordinary generated actor identity and
-shared game/lab authority. A separate fixed 42-species aquatic expansion pool
-selects additional compatible profiles within already admitted ponds/lagoons.
-Inactive slots remain empty. Full water footprints are checked; pond expansion
-starts downstream of the original fish school, and original water actor identities,
-positions and RNG remain unchanged. Shore profiles await their own compatible
-admission. New natural hunters also fill their reserved land expansion slots.
-Additional rabbit/deer owners inside these exclusive clearings supply legal
-nearby prey without moving original predator/glade selection. The new owned
-prey use ordinary procedural lineage and natural-only meal replacement.
-Current development worlds remain disposable.
+[Wildlife completion 140](../tactical/140-autonomous-wildlife-completion.md) and
+[continuation 147](../tactical/147-wildlife-continuation.md) keep fixed natural
+ownership pools: 17 original species, 169 land expansion slots and 42 aquatic
+expansion slots. Activating a profile never resizes or reorders these pools.
+Original dry owners reserve upstream of pond admission; expansion and companion
+homes fit around already admitted water, so new land profiles never veto an
+existing pond or lagoon. All caches remain bounded and query-order independent.
+Profile-activation regressions preserve prior refuges and actor records.
+
+Aquatic expansion checks complete water footprints and occupies downstream
+arcs of existing refuges. Original fish schools and other water actors retain
+their identities, positions and RNG. Shore species now have compatible southern
+arc admission; sea lions and walruses require lagoons. New natural hunters fill
+reserved expansion slots. Their local prey use the
+profile's explicit prey species, or the existing rabbit default, plus legal
+grazers selected through the food web. These additional natural owners retain
+procedural lineage and natural-only delayed distant meal replacement.
+
+The upright elephant and giraffe use an independent two-species companion bank.
+Rare existing open sites exclude original/expansion homes, rabbit/deer glades,
+water, infrastructure, thickets and nearby placed scenery. They never remove
+trees or their robin owners. Their ownership and RNG salts are separate;
+they never participate in upstream water reservations. They use ordinary shared
+Fauna authority and persistence, and the food web protects them as friendly
+companions. Existing quadruped banks and all three fixed pools remain unchanged.
 
 ## Exact review scenes and asset banks
 
