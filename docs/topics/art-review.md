@@ -2,12 +2,18 @@
 
 Topic: art-review
 Status: Workshop and outdoor catalog delivered; human review remains ongoing.
-Updated: 2026-10-10.
+Updated: 2026-10-19.
 
 Owns agent operating rules for exact-source feedback, approvals and metadata.
 The [Workshop guide](../tilefun-workshop.md) owns UI, authentication and API
 reference; the [art workbench guide](../art-workbench.md) owns source selection
 and inventory usage. Read these before changing review flows or acting on notes.
+
+The phone building-review layout reserves additional vertical space for hotel
+sign controls, keeping the note and verdict buttons inside a 390×844 viewport.
+This adjusts the fitted preview height; candidate source pixels and approval
+fingerprints retain their exact registered identity. Building and hotel review
+browser checks cover every selectable appearance without scrolling to vote.
 
 ## Review workflow
 

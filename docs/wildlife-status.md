@@ -4,7 +4,7 @@
 
 ## Latest autonomous completion run
 
-[Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: final-verification.
+[Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: roster-complete.
 
 **74 newly completed; 0 in progress; 0 currently blocked; 0 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
@@ -95,7 +95,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T16:49:17.228Z (19/10/2026, 18:49:17 Berlin).
+Snapshot: 2026-10-19T19:01:41.664Z (19/10/2026, 21:01:41 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

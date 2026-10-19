@@ -364,12 +364,23 @@ it("runs hops, flights, crown rests and songs in production Realm and saves dura
     );
     const saved = encodeActor(retained),
       manualId = manual.persistentId;
+    const individuals = birds().map((bird) => encodeActor(bird));
     await s.reload();
     expect(birds().some((b) => b.persistentId === removed.persistentId)).toBe(false);
     expect(required(birds().find((b) => b.persistentId === saved.persistentId)).robin).toEqual(
       saved.state.robin,
     );
     expect(birds().some((b) => b.persistentId === manualId)).toBe(true);
+    for (const individual of individuals) {
+      const restored = required(birds().find((b) => b.persistentId === individual.persistentId));
+      expect(restored.robin).toEqual(individual.state.robin);
+      expect(restored.position).toEqual({ wx: individual.wx, wy: individual.wy });
+    }
+    const owners = birds()
+      .map((b) => b.naturalSpawnId ?? b.proceduralId)
+      .filter((id): id is string => !!id);
+    expect(owners.length).toBeGreaterThan(0);
+    expect(new Set(owners).size).toBe(owners.length);
   } finally {
     await s.close();
   }

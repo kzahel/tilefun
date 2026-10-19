@@ -49,13 +49,17 @@ export class ScenarioWorkerHost {
   }
 
   private response(id: number, frames: ArrayBuffer[]): ScenarioResponse {
+    const handles = { ...this.session?.handles };
+    for (const state of this.session?.realm.traffic?.states.values() ?? [])
+      if (state.lane.race && state.entity.proceduralId)
+        handles[`racer:${state.entity.proceduralId}`] = state.entity.id;
     const car = this.session?.realm.traffic?.states.get(this.session.handles.car ?? -1);
     const parking =
       this.session?.realm.parking?.diagnostics ?? this.session?.realm.traffic?.shoppingDiagnostics;
     return {
       id,
       frames,
-      handles: { ...this.session?.handles },
+      handles,
       ...(parking ? { parking } : {}),
       clock: { mode: this.mode, running: this.running, ticks: this.ticks },
       ...(car

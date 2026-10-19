@@ -3,7 +3,7 @@
   "authorization": "Owner: make more animals from the list for the next eight hours, committing each and ensuring visibility in the lab; good now proceed (2026-10-19).",
   "startedUtc": "2026-10-19T11:06:24Z",
   "deadlineUtc": "2026-10-19T19:06:24Z",
-  "state": "final-verification",
+  "state": "roster-complete",
   "allowNewAnimals": false,
   "supersedes": "Historical expansion and sequencing holds for this explicit timed continuation; registered banks and human review remain immutable.",
   "previousRun": "art-source/wildlife-v2/autonomous-140.json",
@@ -1943,11 +1943,41 @@
         "giraffe-upright"
       ],
       "validation": "5663 initial full-unit passes, five known Windows failures, ten skips and one transient Workshop API timeout; all 13 API tests pass isolated on unchanged source. 43 focused checks and 16 browser cases with 824 visible four-facing previews pass. Two ten-artifact exact replays and 656 native/3x crops. All 74 banks preserve 1677 pinned artifacts byte for byte. Typecheck, isolated lint/build, 1765-candidate normal Chromium inventory and streaming readiness pass. Full-unit retry and full Playwright sweep follow. Exact art pending review."
+    },
+    {
+      "utc": "2026-10-19T19:01:40.208286Z",
+      "completed": [],
+      "validation": "5714 corrected full-unit passes with only five known Windows failures and ten skips. Full Playwright sweep: 1463 passed, nine failed, one intentionally skipped and one serially blocked; all affected cases and representative shared hosts then pass 51 focused rechecks. All 1473 runnable cases are covered across the sweep/rechecks, with no unresolved browser failures. Fixes cover actual racer ownership, robin fixed-camera reload assertions with stronger durable-owner coverage, current accepted vehicle selection, phone hotel voting layout and current RTC wire-header probes; dev reload is rechecked unchanged. All 196 roster animals are among 206 animated lab entries; 824 four-facing previews. All 74 active new banks remain registered pending human review, 740 exact replay artifacts, 33104 native/3x crops and 1677 unchanged pinned artifacts. Type/lint/build, normal Chromium 1765-candidate manifest and final streaming readiness pass. Three vehicle review objects stay exact; remote NPC predation/CI fixes preserved."
     }
   ],
   "productionCompleteUtc": "2026-10-19T16:49:16.870474Z",
   "finalVerification": {
-    "state": "pending",
-    "work": "Full-unit retry and complete Playwright sweep against the frozen 196-animal roster."
-  }
+    "state": "complete",
+    "completedUtc": "2026-10-19T19:01:40.208286Z",
+    "animalSourceCommit": "9f2e5008",
+    "unitPassed": 5714,
+    "knownWindowsFailures": 5,
+    "unitSkipped": 10,
+    "initialBrowserPassed": 1463,
+    "initialBrowserFailed": 9,
+    "initialBrowserBlocked": 1,
+    "browserPassedAcrossRechecks": 1473,
+    "browserSkipped": 1,
+    "focusedBrowserPassed": 51,
+    "browserDuration": "1.8h",
+    "unresolvedBrowserFailures": 0,
+    "rosterAnimals": 196,
+    "browserEntries": 206,
+    "reviewCoverage": {
+      "newActiveBanks": 74,
+      "allRegistered": true,
+      "allExactArtPendingHumanReview": true,
+      "byteIdenticalReplayArtifacts": 740,
+      "exactNativeAnd3xFacingCrops": 33104
+    },
+    "pinnedArtifacts": 1677,
+    "streamingReady": true,
+    "evidence": "5714 corrected full-unit passes with only five known Windows failures and ten skips. Full Playwright sweep: 1463 passed, nine failed, one intentionally skipped and one serially blocked; all affected cases and representative shared hosts then pass 51 focused rechecks. All 1473 runnable cases are covered across the sweep/rechecks, with no unresolved browser failures. Fixes cover actual racer ownership, robin fixed-camera reload assertions with stronger durable-owner coverage, current accepted vehicle selection, phone hotel voting layout and current RTC wire-header probes; dev reload is rechecked unchanged. All 196 roster animals are among 206 animated lab entries; 824 four-facing previews. All 74 active new banks remain registered pending human review, 740 exact replay artifacts, 33104 native/3x crops and 1677 unchanged pinned artifacts. Type/lint/build, normal Chromium 1765-candidate manifest and final streaming readiness pass. Three vehicle review objects stay exact; remote NPC predation/CI fixes preserved."
+  },
+  "completedUtc": "2026-10-19T19:01:40.208286Z"
 }

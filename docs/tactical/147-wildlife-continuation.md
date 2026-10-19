@@ -1,5 +1,7 @@
 # Wildlife continuation
 
+Status: complete — all 196 roster animals implemented; new art pending human review.
+
 Owner-authorized eight-hour continuation: 2026-10-19 11:06:24–19:06:24 UTC.
 The [ledger](../../art-source/wildlife-v2/autonomous-147.json) starts with 122
 implemented roster animals and 74 queued. Complete remaining animals, verify
@@ -293,3 +295,35 @@ in the sortable animal browser and its real shared-engine AI scenes.
   readiness pass. Three vehicle review objects remain exact. All new art is pending
   human review. **196/196 implemented; none remaining.** The run remains in final
   verification for a full-unit retry and the complete browser suite.
+
+## Final verification
+
+Final verification closes the run with **196/196 roster animals implemented**:
+122 from the preceding run and all 74 remaining animals completed here. Every
+roster animal is present among **206 animated lab entries**. All new exact art
+remains pending human review; no approvals were synthesized.
+
+Animal source `9f2e5008` and the final verification corrections preserve remote
+NPC predation and CI fixes. The complete corrected unit retry has **5,714 passes**, only the five known
+Windows failures and ten skips. The earlier Workshop API timeout does not recur.
+The full Playwright sweep has **1,463 passes, nine failures, one intentional skip
+and one serially blocked case**. All affected cases and shared hosts are covered by
+**51 successful focused browser rechecks**, covering all **1,473 runnable cases**
+across the sweep and rechecks with no unresolved browser failures. Racer counts
+now use actual racing-lane ownership; robin reload checks retain every saved pose
+and a fixed view, with stronger headless durable-owner assertions.
+Legacy driving checks select accepted authored models. Phone hotel voting fits
+the viewport, and RTC fault probes derive their current wire header from the
+codec. The dev-reload timeout is rechecked on unchanged code.
+Typecheck, lint, production build, the 1,765-candidate normal Chromium manifest
+and merged streaming readiness pass. All three prior vehicle review objects
+remain exact. All 74 active new banks are registered; 740 replay artifacts,
+33,104 exact native/3x crops, 1,677 pinned artifacts and 824 visible four-facing
+previews support the delivered source and animation checks.
+
+Shared authority owns their world/lab behavior. Hunters use the directed food
+web; natural meals retain delayed distant replacement and placed animals remain
+finite. Friendly companions are protected. Individual checkpoints describe
+remaining specialist behavior such as open-air navigation, fishing, climbing,
+camouflage and burrowing. The next step is human review of the newest browser
+entries and a population-balance playtest after the hosted checkout deploys.

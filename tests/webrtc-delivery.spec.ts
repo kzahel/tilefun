@@ -6,7 +6,7 @@ import { expect, type Page, test } from "@playwright/test";
 import type { ClientStateView } from "../src/client/ClientStateView.js";
 import type { ClientMessage, FrameMessage } from "../src/shared/protocol.js";
 import type { IClientTransport } from "../src/transport/Transport.js";
-import { installRtcProbe } from "./helpers/rtc-delivery-probe.js";
+import { installRtcProbe, RTC_FRAME_LAYOUT } from "./helpers/rtc-delivery-probe.js";
 
 interface TestGame {
   transport: IClientTransport;
@@ -270,12 +270,15 @@ test("reliable RTC delivers exits and orders a world reset behind delayed old-wo
     // is definitely waiting before we request the transition on reliable input.
     await expect
       .poll(() =>
-        page.evaluate(() =>
-          window.__rtcProbe.held.some(({ event }) => {
-            if (!(event.data instanceof ArrayBuffer) || event.data.byteLength < 19) return false;
-            const data = new DataView(event.data);
-            return data.getUint8(0) === 0x04 && data.getUint16(13, true) > 0;
-          }),
+        page.evaluate(
+          ({ frameTag, frameHeaderSize }) =>
+            window.__rtcProbe.held.some(({ event }) => {
+              if (!(event.data instanceof ArrayBuffer) || event.data.byteLength < frameHeaderSize)
+                return false;
+              const data = new DataView(event.data);
+              return data.getUint8(0) === frameTag && data.getUint16(frameHeaderSize - 6, true) > 0;
+            }),
+          RTC_FRAME_LAYOUT,
         ),
       )
       .toBe(true);
