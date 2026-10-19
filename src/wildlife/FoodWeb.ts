@@ -19,6 +19,11 @@ const birds = [
   "seagull",
 ] as const;
 const small = [
+  "gecko",
+  "iguana",
+  "chameleon",
+  "texas-horned-lizard",
+
   "rabbit",
   "frog",
   "red-squirrel",

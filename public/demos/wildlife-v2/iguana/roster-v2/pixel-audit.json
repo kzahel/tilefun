@@ -1,0 +1,17 @@
+{
+  "identity": "iguana-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4945633707101535,
+    "up": 1.6741084585912134,
+    "left": 1.1765058435720732,
+    "right": 1.1765058435720732
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

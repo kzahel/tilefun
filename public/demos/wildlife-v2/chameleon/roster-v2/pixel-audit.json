@@ -1,0 +1,17 @@
+{
+  "identity": "chameleon-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4735102074551634,
+    "up": 1.542890716803754,
+    "left": 1.3691410507957258,
+    "right": 1.3691410507957258
+  },
+  "rootTravelPixelsPerCycle": 5.76,
+  "plantedTravel": true
+}

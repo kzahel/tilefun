@@ -423,10 +423,20 @@
     "gecko": {
       "name": "Tokay gecko",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:44:00Z"
+      "startedUtc": "2026-10-19T02:44:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:04:49Z",
+      "receipt": "art-source/wildlife-v2/gecko/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hip roots, 992 contacts and 688 planted travel pairs; fixed linked tail; native moving body paint; source clock matches delivery; ten-artifact byte-identical replay; 328 exact crops; four world/lab/browser cases; eight origin tests; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "cb0b906be5b2cc30613baeed8c29896c0b138ce75d63ee3d5ac9e7467b93c060",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.05791669399621592,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "wolf": {
       "name": "Wolf",
@@ -522,9 +532,10 @@
     "parrot": {
       "name": "Scarlet macaw",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T03:01:00Z"
     },
     "coyote": {
       "name": "Coyote",
@@ -1090,9 +1101,10 @@
     "mongoose": {
       "name": "Mongoose",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:58:00Z"
     },
     "binturong": {
       "name": "Binturong",
@@ -1104,16 +1116,18 @@
     "honey-badger": {
       "name": "Honey badger",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:58:00Z"
     },
     "fossa": {
       "name": "Fossa",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:58:00Z"
     },
     "aye-aye": {
       "name": "Aye-aye",
@@ -1125,9 +1139,10 @@
     "white-nosed-coati": {
       "name": "White-nosed coati",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T02:58:00Z"
     },
     "kinkajou": {
       "name": "Kinkajou",
@@ -1198,16 +1213,18 @@
     "toucan": {
       "name": "Toucan",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T03:01:00Z"
     },
     "great-hornbill": {
       "name": "Great hornbill",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T03:01:00Z"
     },
     "eagle": {
       "name": "Eagle",
@@ -1226,16 +1243,18 @@
     "pigeon": {
       "name": "Pigeon",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T03:01:00Z"
     },
     "dove": {
       "name": "Dove",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T03:01:00Z"
     },
     "raven": {
       "name": "Raven",
@@ -1282,9 +1301,10 @@
     "sparrow": {
       "name": "Sparrow",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T03:01:00Z"
     },
     "peacock": {
       "name": "Peacock",
@@ -1646,18 +1666,38 @@
     "iguana": {
       "name": "Iguana",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:44:00Z"
+      "startedUtc": "2026-10-19T02:44:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:04:49Z",
+      "receipt": "art-source/wildlife-v2/iguana/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hip roots, 992 contacts and 688 planted travel pairs; fixed linked tail; native moving body paint; source clock matches delivery; ten-artifact byte-identical replay; 328 exact crops; four world/lab/browser cases; eight origin tests; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "27cd03dfe70a3767c7902b966c496265ffa5ec5390aaec1eb873ae479bda68a9",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.05791669399621592,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "chameleon": {
       "name": "Chameleon",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:44:00Z"
+      "startedUtc": "2026-10-19T02:44:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:04:49Z",
+      "receipt": "art-source/wildlife-v2/chameleon/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hip roots, 992 contacts and 688 planted travel pairs; fixed linked tail; native moving body paint; source clock matches delivery; ten-artifact byte-identical replay; 328 exact crops; four world/lab/browser cases; eight origin tests; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "4659fb76722568f5dc16241c93a65e6d18a8ff290f0511f41029141e5998cc14",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "pond-turtle": {
       "name": "Pond turtle",
@@ -1731,10 +1771,20 @@
     "texas-horned-lizard": {
       "name": "Texas horned lizard",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:44:00Z"
+      "startedUtc": "2026-10-19T02:44:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T03:04:49Z",
+      "receipt": "art-source/wildlife-v2/texas-horned-lizard/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hip roots, 992 contacts and 688 planted travel pairs; fixed linked tail; native moving body paint; source clock matches delivery; ten-artifact byte-identical replay; 328 exact crops; four world/lab/browser cases; eight origin tests; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "35c06e16f8a1cd3c167eb473462a89bc001dde9ea2965c3967809cd4ed71c4ba",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "dragonfly": {
       "name": "Dragonfly",
@@ -2157,6 +2207,16 @@
         "cricket"
       ],
       "validation": "Typecheck/lint/build, 1249-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full bounded units: 3792 pass, 5 known Windows failures, 10 skipped. Six ten-artifact byte-identical replays and 1968 exact crops. Twelve source-origin meal tests require airborne protection, landed meals, preserved natural lineage and finite placed prey."
+    },
+    {
+      "utc": "2026-10-19T03:04:49Z",
+      "completed": [
+        "gecko",
+        "iguana",
+        "chameleon",
+        "texas-horned-lizard"
+      ],
+      "validation": "Typecheck/lint/build, 1269-candidate manifest, 16 browser cases and streaming --assert-ready pass. Full bounded units: 3852 pass, 5 known Windows failures, 10 skipped. Four ten-artifact replays and 1312 exact crops. Independent 322 eighth-pose samples per species keep endpoint gap below .058 native pixels and soles above ground. Six corrected insect review wrappers retain immutable bank bytes and pass 1968 exact crops."
     }
   ],
   "existingOutsideRoster": [
@@ -2376,6 +2436,18 @@
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/insects-140/README.md",
       "roles": "short physical flights/hops; giant-spider prey only after landing"
+    },
+    "lizards": {
+      "animals": [
+        "gecko",
+        "iguana",
+        "chameleon",
+        "texas-horned-lizard"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/lizards-140/README.md"
     }
   }
 }

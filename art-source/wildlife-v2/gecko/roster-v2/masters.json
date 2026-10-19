@@ -1,0 +1,13 @@
+{
+  "identity": "gecko-roster-v2-pixels-01",
+  "palette": {
+    "B": "#bd9d54",
+    "H": "#e8d492",
+    "C": "#d6c69a",
+    "M": "#665134",
+    "N": "#1d251e",
+    "E": "#e6d571",
+    "K": "#242b29"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

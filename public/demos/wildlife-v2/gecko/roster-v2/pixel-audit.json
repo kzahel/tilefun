@@ -1,0 +1,17 @@
+{
+  "identity": "gecko-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.574074074074069,
+    "up": 1.4515990739946858,
+    "left": 1.2966799951532764,
+    "right": 1.2966799951532764
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

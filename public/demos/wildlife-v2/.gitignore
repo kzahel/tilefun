@@ -489,3 +489,9 @@
 !stag-beetle/roster-v2/*
 !grasshopper/roster-v2/*
 !cricket/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!gecko/roster-v2/*
+!iguana/roster-v2/*
+!chameleon/roster-v2/*
+!texas-horned-lizard/roster-v2/*

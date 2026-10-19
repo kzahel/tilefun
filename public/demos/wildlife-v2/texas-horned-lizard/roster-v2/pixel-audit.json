@@ -1,0 +1,17 @@
+{
+  "identity": "texas-horned-lizard-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5052973342447018,
+    "up": 1.4278965030024722,
+    "left": 1.4147475545027817,
+    "right": 1.4147475545027817
+  },
+  "rootTravelPixelsPerCycle": 5.76,
+  "plantedTravel": true
+}

@@ -473,3 +473,22 @@ assertion; distinguish them from newly introduced failures.
   inbox/notes are clear. Eighty new entries plus sixteen delivered leave 100
   remaining. Four lizards and two further six-animal source batches are underway.
   Exact pixels remain pending human review.
+
+- 03:04 UTC: gecko, iguana, chameleon and Texas horned lizard completed. Low
+  moving bodies, four planted outward-bending fixed-link limbs, counted toes and
+  five/seven-link tails distinguish their grounded movement. Gecko pads/spots,
+  iguana crest/dewlap, chameleon eyes/curled tail and horned-lizard closed horns
+  retain editable volumes. Horned-lizard tail proportions were shortened before
+  freezing. Source Blender clock/loop range matches delivery. Each bank has 164
+  poses, 5,248 limb links, 1,312 buried hips, 992 contacts and 688 planted travel
+  pairs. Separate 322-sample eighth-pose checks keep intermediate endpoint gap
+  below .058 native px with no foot penetration. Four ten-artifact replays and
+  1,312 exact crops pass. Eight origin meal tests preserve natural replacements
+  and finite placed prey. Corrected six insect title encodings through wrappers
+  outside their immutable banks; all 1,968 crops/controls pass. Typecheck/lint/
+  build, 1,269-candidate manifest, 16 browser cases and streaming readiness pass.
+  Full bounded units: 3,852 pass, five known Windows failures, ten skipped.
+  Fresh inbox/notes are clear. Eighty-four new entries plus sixteen delivered
+  leave 96 remaining. Six forest mammals are next; six shelled/amphibian sources,
+  four small hunters and six short-flight birds also have drafts/replays underway.
+  Exact pixels remain pending human review.

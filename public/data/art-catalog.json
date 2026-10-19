@@ -1216,6 +1216,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-gecko-provisional-v1",
+      "name": "wildlife gecko provisional v1",
+      "image": "demos/wildlife-v2/gecko/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e2d363560f957fab15f6e6a9fc37ceafd9ad226eba141d7c1dcf71c61cf0ab8b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-iguana-provisional-v1",
+      "name": "wildlife iguana provisional v1",
+      "image": "demos/wildlife-v2/iguana/roster-v2/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "3a934cf83eea115ccef1f0d18c3b8bf33482c9b6f34fc956d71fa0731cc00d07",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-chameleon-provisional-v1",
+      "name": "wildlife chameleon provisional v1",
+      "image": "demos/wildlife-v2/chameleon/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "1763f6f6e9ff5104d51e1479e019ae6636bc6cbfd8a958cf8bb829b5d64c0d23",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-texas-horned-lizard-provisional-v1",
+      "name": "wildlife texas horned lizard provisional v1",
+      "image": "demos/wildlife-v2/texas-horned-lizard/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7db9bdb4ef1af2537be5962d8c2b1c5fc9fbd089ee118b809e635580754fd384",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-bee-provisional-v1",
       "name": "wildlife bee provisional v1",
       "image": "demos/wildlife-v2/bee/roster-v2/sheet.png",
@@ -3803,6 +3843,46 @@
       "height": 128,
       "tileSize": 16,
       "fingerprint": "c924bcd4d12b8c1034a4354343cf584b1cb35e8d4fae86e5dc6ff28d49b0aef5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-gecko-roster-v2",
+      "name": "wildlife v2 gecko roster v2",
+      "image": "demos/wildlife-v2/gecko/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "e2d363560f957fab15f6e6a9fc37ceafd9ad226eba141d7c1dcf71c61cf0ab8b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-iguana-roster-v2",
+      "name": "wildlife v2 iguana roster v2",
+      "image": "demos/wildlife-v2/iguana/roster-v2/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "3a934cf83eea115ccef1f0d18c3b8bf33482c9b6f34fc956d71fa0731cc00d07",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-chameleon-roster-v2",
+      "name": "wildlife v2 chameleon roster v2",
+      "image": "demos/wildlife-v2/chameleon/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "1763f6f6e9ff5104d51e1479e019ae6636bc6cbfd8a958cf8bb829b5d64c0d23",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-texas-horned-lizard-roster-v2",
+      "name": "wildlife v2 texas horned lizard roster v2",
+      "image": "demos/wildlife-v2/texas-horned-lizard/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7db9bdb4ef1af2537be5962d8c2b1c5fc9fbd089ee118b809e635580754fd384",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -26636,6 +26716,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-gecko-provisional-v1",
+      "sheetId": "wildlife-gecko-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-gecko-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-iguana-provisional-v1",
+      "sheetId": "wildlife-iguana-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3280,
+        320
+      ],
+      "label": "wildlife-iguana-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-chameleon-provisional-v1",
+      "sheetId": "wildlife-chameleon-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-chameleon-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-texas-horned-lizard-provisional-v1",
+      "sheetId": "wildlife-texas-horned-lizard-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-texas-horned-lizard-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-bee-provisional-v1",
       "sheetId": "wildlife-bee-provisional-v1",
       "rect": [
@@ -28327,7 +28479,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:944"
+          "source": "src/wildlife/Fauna.ts:945"
         },
         {
           "system": "Gameplay",
@@ -28339,11 +28491,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:131"
+          "source": "src/wildlife/FoodWeb.ts:136"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:288"
+          "source": "src/wildlife/FoodWeb.ts:293"
         }
       ]
     },
@@ -28401,35 +28553,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:20"
+          "source": "src/wildlife/Fauna.ts:21"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:215"
+          "source": "src/wildlife/Fauna.ts:216"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:171"
+          "source": "src/wildlife/FoodWeb.ts:176"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:187"
+          "source": "src/wildlife/FoodWeb.ts:192"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:203"
+          "source": "src/wildlife/FoodWeb.ts:208"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:237"
+          "source": "src/wildlife/FoodWeb.ts:242"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:261"
+          "source": "src/wildlife/FoodWeb.ts:266"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:288"
+          "source": "src/wildlife/FoodWeb.ts:293"
         }
       ]
     },
@@ -28479,15 +28631,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:132"
+          "source": "src/wildlife/FoodWeb.ts:137"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:288"
+          "source": "src/wildlife/FoodWeb.ts:293"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:289"
+          "source": "src/wildlife/FoodWeb.ts:294"
         }
       ]
     },
@@ -28529,7 +28681,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:289"
+          "source": "src/wildlife/FoodWeb.ts:294"
         }
       ]
     },
@@ -28575,7 +28727,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:290"
+          "source": "src/wildlife/FoodWeb.ts:295"
         }
       ]
     },
@@ -28621,7 +28773,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:291"
+          "source": "src/wildlife/FoodWeb.ts:296"
         }
       ]
     },
@@ -28667,7 +28819,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:292"
+          "source": "src/wildlife/FoodWeb.ts:297"
         }
       ]
     },
@@ -28821,7 +28973,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:288"
+          "source": "src/wildlife/FoodWeb.ts:293"
         }
       ]
     },
@@ -28867,7 +29019,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:288"
+          "source": "src/wildlife/FoodWeb.ts:293"
         }
       ]
     },
