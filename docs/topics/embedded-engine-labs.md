@@ -30,6 +30,11 @@ accepted Beetle: shared palette, assets, traffic model selection, dimensions,
 handling and mesh registry. Its 81×38×35px body and exact own mesh/cardinal fallback
 are shared by game and Traffic playground; no separate lab car is introduced.
 
+[150](../tactical/150-school-bus-gameplay.md) adds the accepted school bus through
+that same catalog. Game and Traffic share its exact radius-112 model, matching
+cardinal fallback, 122×43×44px bounds and slower bus handling. Its wider road
+admission is derived by the ordinary shared rule; no lab-only bus is introduced.
+
 [140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
 ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
 30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh

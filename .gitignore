@@ -64,6 +64,10 @@ data/
 !/art-source/vehicle-bake/school-bus/v1/
 /public/demos/vehicle-bake/school-bus/*
 !/public/demos/vehicle-bake/school-bus/v1/
+/art-source/vehicle-bake/pickup/*
+!/art-source/vehicle-bake/pickup/v1/
+/public/demos/vehicle-bake/pickup/*
+!/public/demos/vehicle-bake/pickup/v1/
 
 # Unselected style-study folders remain scratch until explicitly retained.
 /art-source/vehicle-style-study/*/

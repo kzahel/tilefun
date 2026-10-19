@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: red coupe and Beetle integrated; school bus v1 delivered for appearance review.
+Status: red coupe, Beetle and school bus integrated; pickup review preparation in progress.
 Updated: 2026-10-19.
 
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
@@ -10,6 +10,15 @@ the expansion backlog. [Vehicle porting](vehicle-model-porting.md) continues to
 own the 45 existing sprite ports; these prototypes do not change those counts.
 
 ## Current decision and gate
+
+The owner accepted school bus v1 and explicitly authorized runtime integration.
+[150](../tactical/150-school-bus-gameplay.md) adds **Yellow school bus** to editor
+spawning, normal road traffic and shared game/lab own-mesh presentation. The exact
+reviewed GLB and native cardinal fallback are retained. Conservative 122×43×44px
+bounds require 98px roads; handling is 78px/s with 100px/s² acceleration. The combined
+roster is 48 types/47 ordinary traffic types; the source bank remains 45 types/180 views.
+Pickup authoring follows directly under [151](../tactical/151-pickup-pipeline-review.md).
+Its appearance review precedes any pickup gameplay activation.
 
 The owner prefers [141](../tactical/141-sports-car-style-experiments.md)'s approach 3,
 especially characteristic outer and internal outlines. [142](../tactical/142-red-car-low-poly-pipeline.md)
@@ -72,7 +81,10 @@ GLB clearance/rolling, native/game views, source-only replay and desktop/mobile/
 offline checks pass. [149](../tactical/149-school-bus-pipeline-review.md) owns the
 exact retained revision and evidence. It is available through the original-vehicle
 review collection and `data/vehicle-bake/school-bus-review.html`; gameplay
-activation remains pending the owner's appearance decision.
+activation was authorized on 2026-10-19 when the owner said “looks great. integrate it. commit. then proceed directly with the pickup.”
+[150](../tactical/150-school-bus-gameplay.md) owns exact-revision integration;
+[151](../tactical/151-pickup-pipeline-review.md) owns the next regular-cab/open-bed
+family review. The bus review snapshot retains its original review-time metadata.
 
 The owner likes the style but flagged upper tire crowns above the fenders.
 `a-reduced-projection/mid-fenders-v3` corrects the source geometry with integrated

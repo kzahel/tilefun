@@ -2516,6 +2516,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:school-bus",
+      "name": "vehicle v1:school bus",
+      "image": "assets/vehicles/school-bus-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "ec42ee8d4653c915bd80fa45ae555b2bec963ac4b52390bace1d054d023948fd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "player",
       "name": "player",
       "image": "assets/sprites/player.png",
@@ -30297,6 +30307,24 @@
         896
       ],
       "label": "vehicle-v1:beetle · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:school-bus",
+      "sheetId": "vehicle-v1:school-bus",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:school-bus · registered 192×224 frames",
       "kind": "sprite",
       "consumers": [
         {

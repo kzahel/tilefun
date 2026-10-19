@@ -130,60 +130,19 @@ it.each(VEHICLE_MODELS)("keeps %s sprite and mesh bounds at all four screen edge
         car.position = { wx, wy };
         expect(collect(car, 1, zoom)).toHaveLength(1);
       }
-      // Once the entire sprite and the existing effects margin leave the view,
-      // the collector must still avoid submitting it. Additional sedans and large cars use an
-      // 80px enclosing mesh bound, so their vertical exit is farther away.
+      // The fallback spans [-96,96] x [-144,80] around its ground origin.
+      // A registered mesh sphere projects to +/- radius horizontally and
+      // +/- sqrt(2)*radius vertically under the shared y-z camera. Test just
+      // beyond their union plus the 16px effects margin, for every family.
+      const radius = authoredVehicleForType(car.type)?.radius ?? 0;
+      const halfWidth = Math.max(96, radius);
+      const topReach = Math.max(144, radius * Math.SQRT2);
+      const bottomReach = Math.max(80, radius * Math.SQRT2);
       for (const [wx, wy] of [
-        [
-          model === "fire-truck-ladder-2"
-            ? -209
-            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
-              ? -161
-              : model === "ambulance" || model.startsWith("bus-")
-                ? -129
-                : -113,
-          150,
-        ],
-        [
-          model === "fire-truck-ladder-2"
-            ? 609
-            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
-              ? 561
-              : model === "ambulance" || model.startsWith("bus-")
-                ? 529
-                : 513,
-          150,
-        ],
-        [
-          200,
-          model === "fire-truck-ladder-2"
-            ? -290
-            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
-              ? -221
-              : model === "ambulance" || model.startsWith("bus-")
-                ? -177
-                : model === "police-car" ||
-                    model.startsWith("unindexed-sedan-") ||
-                    model.startsWith("car-") ||
-                    model === "sedan-12"
-                  ? -145
-                  : -120,
-        ],
-        [
-          200,
-          model === "fire-truck-ladder-2"
-            ? 590
-            : model === "fire-truck-ladder-1" || model.startsWith("garbage-truck-")
-              ? 521
-              : model === "ambulance" || model.startsWith("bus-")
-                ? 477
-                : model === "police-car" ||
-                    model.startsWith("unindexed-sedan-") ||
-                    model.startsWith("car-") ||
-                    model === "sedan-12"
-                  ? 495
-                  : 461,
-        ],
+        [-halfWidth - 17, 150],
+        [400 + halfWidth + 17, 150],
+        [200, -bottomReach - 17],
+        [200, 300 + topReach + 17],
       ] as const) {
         car.position = { wx, wy };
         expect(collect(car, 1, zoom)).toHaveLength(0);

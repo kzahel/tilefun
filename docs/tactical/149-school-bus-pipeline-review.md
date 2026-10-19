@@ -116,3 +116,10 @@ pixel-regression, navigation and versioned export checks remain separate passes.
 Extracting the four declared bus recipe files plus AGENTS/catalog from staged
 blobs also reproduces the exact GLB and atlas in a clean scratch root. No ignored
 authoring input is needed.
+
+## Owner follow-up
+
+On 2026-10-19 the owner reviewed this exact frozen bus, said “looks great” and
+requested integration/commit followed directly by the pickup. Gameplay delivery
+is recorded in [150](150-school-bus-gameplay.md); the immutable review snapshot
+and all existing candidate metadata remain unchanged.

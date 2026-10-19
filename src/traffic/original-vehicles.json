@@ -246,6 +246,129 @@
           }
         }
       ]
+    },
+    {
+      "id": "school-bus",
+      "name": "Yellow school bus",
+      "sprite": "assets/vehicles/school-bus-v1.png",
+      "mesh": {
+        "assetId": "school-bus-authored-v1",
+        "path": "assets/models/vehicles/school-bus-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 78,
+        "acceleration": 100,
+        "pushSpeed": 64,
+        "pushWeight": 500
+      },
+      "views": [
+        {
+          "id": "original-vehicle:school-bus:south",
+          "vehicleId": "school-bus",
+          "direction": "south",
+          "rect": [75, 45, 42, 153],
+          "metadata": {
+            "name": "Yellow school bus · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [21, 160.0],
+            "footprint": [-21.5, -122, 43, 122],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 43,
+                "height": 122,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -61.0
+          }
+        },
+        {
+          "id": "original-vehicle:school-bus:north",
+          "vehicleId": "school-bus",
+          "direction": "north",
+          "rect": [75, 288, 42, 134],
+          "metadata": {
+            "name": "Yellow school bus · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [21, 141.0],
+            "footprint": [-21.5, -122, 43, 122],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 43,
+                "height": 122,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -61.0
+          }
+        },
+        {
+          "id": "original-vehicle:school-bus:west",
+          "vehicleId": "school-bus",
+          "direction": "west",
+          "rect": [35, 534, 121, 77],
+          "metadata": {
+            "name": "Yellow school bus · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [61, 79.5],
+            "footprint": [-61.0, -43, 122, 43],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 122,
+                "height": 43,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -21.5
+          }
+        },
+        {
+          "id": "original-vehicle:school-bus:east",
+          "vehicleId": "school-bus",
+          "direction": "east",
+          "rect": [36, 758, 121, 77],
+          "metadata": {
+            "name": "Yellow school bus · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [60, 79.5],
+            "footprint": [-61.0, -43, 122, 43],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 122,
+                "height": 43,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -21.5
+          }
+        }
+      ]
     }
   ]
 }

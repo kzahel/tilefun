@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe and Beetle integrated and committed. School bus v1 ready for appearance review; pickup remains queued.",
+  "gate": "Red coupe, Beetle and owner-accepted school bus integrated. Pickup is being prepared for appearance review before gameplay activation.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -20,7 +20,7 @@
       "priority": 2,
       "status": "integrated",
       "authorization": "2026-10-19 owner explicitly requested Beetle authoring for review",
-      "next": "Spawn Beetle-style compact from Edit > Vehicles or normal road traffic; next authoring example is school bus",
+      "next": "Spawn Beetle-style compact from Edit > Vehicles or normal road traffic; pickup is the current authoring example",
       "candidate": "beetle-v1",
       "ownerFeedback": "2026-10-19: looks fine; requested commit, gameplay activation and next vehicle"
     },
@@ -29,19 +29,20 @@
       "name": "Yellow school bus",
       "family": "School bus",
       "priority": 3,
-      "status": "review",
+      "status": "integrated",
       "authorization": "2026-10-19 owner requested next vehicle after accepted Beetle gameplay/commit checkpoint",
-      "next": "Owner review of school-bus v1 shape, outlines, windows/door and wheel fit; gameplay activation follows appearance agreement",
-      "candidate": "school-bus-v1"
+      "next": "Spawn Yellow school bus from Edit > Vehicles or encounter ordinary traffic on roads at least 98px wide; pickup review is next",
+      "candidate": "school-bus-v1",
+      "ownerFeedback": "2026-10-19: looks great; integrate it, commit, then proceed directly with the pickup"
     },
     {
       "id": "pickup",
       "name": "Pickup truck",
       "family": "Pickup",
       "priority": 4,
-      "status": "backlog",
-      "authorization": "Owner-authorized follow-on experiment after red-car agreement; queued, not started in asset-commit checkpoint",
-      "next": "Test cab/bed separation, open cargo bed and larger tires"
+      "status": "authoring",
+      "authorization": "2026-10-19 owner explicitly requested proceeding directly with pickup after approved school-bus integration",
+      "next": "Author own regular cab, recessed open cargo bed and larger tires; deliver exact native-pixel appearance review before runtime activation"
     },
     {
       "id": "classic-roadster",

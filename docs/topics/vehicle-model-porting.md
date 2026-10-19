@@ -27,6 +27,9 @@ The owner accepted the [Beetle v1 review](../tactical/146-beetle-pipeline-review
 [148](../tactical/148-beetle-gameplay.md) integrates its exact 2,554-triangle model
 and matching fallback, bringing combined gameplay to 47 types. The port table
 still describes the immutable 45-type source bank.
+The owner then accepted school bus v1; [150](../tactical/150-school-bus-gameplay.md)
+adds its exact model/fallback through the same shared path, bringing combined
+gameplay to 48 types. Pickup authoring/review is separate in [151](../tactical/151-pickup-pipeline-review.md).
 
 The inventory is the 45 unique `vehicleId` values in
 [`vehicles-v1.json`](../../src/traffic/vehicles-v1.json): 180 directional views.
