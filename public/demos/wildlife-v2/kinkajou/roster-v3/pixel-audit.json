@@ -1,0 +1,17 @@
+{
+  "identity": "kinkajou-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.591004497751122,
+    "up": 1.6643735668125998,
+    "left": 1.8388802889576823,
+    "right": 1.8388802889576823
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

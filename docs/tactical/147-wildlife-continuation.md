@@ -146,3 +146,18 @@ in the sortable animal browser and its real shared-engine AI scenes.
   **156/196 implemented;40 remaining.** Exact art pending human review. Seven forest
   specialists and four mixed mammals have verified source prototypes; four shore
   mammals are in source refinement.
+
+- Forest-specialist checkpoint: Tenth checkpoint: sloth, binturong, aye-aye, kinkajou, opossum, echidna and
+  Tasmanian devil now join natural worlds, placement and the interactive browser.
+  Distinct masks, fingers, claws, whiskers, tails,49 closed echidna quills and devil
+  markings use planted fixed-link legs, buried roots and visible body weight transfer.
+  Six use shared ground walking/foraging; the devil hunts small prey. Climbing and
+  brachiation remain future work. Natural-only delayed distant replacement is retained.
+  Validation: **5,144 full-unit passes**, five known Windows failures and ten skips;
+  90 focused checks; **40 distinct browser cases /692 visible previews**; seven
+  byte-identical banks and2,616 exact native/3x crops. Two initial sloth tests exceeded
+  a fixed12-second wait; measured walking began after14seconds. Cadence-based waits
+  pass both renderers without changing gameplay. Typecheck, isolated lint/build and
+  1,600-candidate normal Chromium inventory pass. All exact art pending human review.
+  **163/196 implemented;33 remaining.** Mixed mammals4 and shore mammals4 have verified
+  sources; eight arthropods are in source authoring with species-specific leg counts.

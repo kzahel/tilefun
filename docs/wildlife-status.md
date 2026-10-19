@@ -6,7 +6,7 @@
 
 [Current tactical](tactical/147-wildlife-continuation.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T19:06:24Z. State: active.
 
-**34 newly completed; 15 in progress; 0 currently blocked; 25 queued; 122 completed before this run.** Final pixels retain their own human-review status.
+**41 newly completed; 16 in progress; 0 currently blocked; 17 queued; 122 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -20,20 +20,20 @@
 | Japanese macaque | finished-game-active | [Playback](../public/demos/wildlife-v2/japanese-macaque/roster-v3/index.html) |
 | Bat | in-progress | [Playback](../public/demos/wildlife-v2/bat/roster-v3/index.html) |
 | Meerkat | finished-game-active | [Playback](../public/demos/wildlife-v2/meerkat/roster-v3/index.html) |
-| River otter | in-progress | Source/animation work |
-| Sloth | in-progress | [Playback](../public/demos/wildlife-v2/sloth/roster-v3/index.html) |
+| River otter | in-progress | [Playback](../public/demos/wildlife-v2/river-otter/roster-v3/index.html) |
+| Sloth | finished-game-active | [Playback](../public/demos/wildlife-v2/sloth/roster-v3/index.html) |
 | Giant anteater | finished-game-active | [Playback](../public/demos/wildlife-v2/giant-anteater/roster-v3/index.html) |
 | Aardvark | finished-game-active | [Playback](../public/demos/wildlife-v2/aardvark/roster-v3/index.html) |
 | Armadillo | finished-game-active | [Playback](../public/demos/wildlife-v2/armadillo/roster-v3/index.html) |
 | Pangolin | finished-game-active | [Playback](../public/demos/wildlife-v2/pangolin/roster-v3/index.html) |
-| Binturong | in-progress | [Playback](../public/demos/wildlife-v2/binturong/roster-v3/index.html) |
-| Aye-aye | in-progress | [Playback](../public/demos/wildlife-v2/aye-aye/roster-v3/index.html) |
-| Kinkajou | in-progress | [Playback](../public/demos/wildlife-v2/kinkajou/roster-v3/index.html) |
+| Binturong | finished-game-active | [Playback](../public/demos/wildlife-v2/binturong/roster-v3/index.html) |
+| Aye-aye | finished-game-active | [Playback](../public/demos/wildlife-v2/aye-aye/roster-v3/index.html) |
+| Kinkajou | finished-game-active | [Playback](../public/demos/wildlife-v2/kinkajou/roster-v3/index.html) |
 | Wallaby | in-progress | [Playback](../public/demos/wildlife-v2/wallaby/roster-v3/index.html) |
-| Opossum | in-progress | [Playback](../public/demos/wildlife-v2/opossum/roster-v3/index.html) |
-| Tasmanian devil | in-progress | [Playback](../public/demos/wildlife-v2/tasmanian-devil/roster-v3/index.html) |
-| Platypus | in-progress | Source/animation work |
-| Echidna | in-progress | [Playback](../public/demos/wildlife-v2/echidna/roster-v3/index.html) |
+| Opossum | finished-game-active | [Playback](../public/demos/wildlife-v2/opossum/roster-v3/index.html) |
+| Tasmanian devil | finished-game-active | [Playback](../public/demos/wildlife-v2/tasmanian-devil/roster-v3/index.html) |
+| Platypus | in-progress | [Playback](../public/demos/wildlife-v2/platypus/roster-v3/index.html) |
+| Echidna | finished-game-active | [Playback](../public/demos/wildlife-v2/echidna/roster-v3/index.html) |
 | Eagle | finished-game-active | [Playback](../public/demos/wildlife-v2/eagle/roster-v3/index.html) |
 | Hawk | finished-game-active | [Playback](../public/demos/wildlife-v2/hawk/roster-v3/index.html) |
 | Raven | finished-game-active | [Playback](../public/demos/wildlife-v2/raven/roster-v3/index.html) |
@@ -51,14 +51,22 @@
 | Ocean sunfish | finished-game-active | [Playback](../public/demos/wildlife-v2/ocean-sunfish/roster-v3/index.html) |
 | Swordfish | finished-game-active | [Playback](../public/demos/wildlife-v2/swordfish/roster-v3/index.html) |
 | Pufferfish | finished-game-active | [Playback](../public/demos/wildlife-v2/pufferfish/roster-v3/index.html) |
-| Sea lion | in-progress | Source/animation work |
+| Sea lion | in-progress | [Playback](../public/demos/wildlife-v2/sea-lion/roster-v3/index.html) |
 | Manatee | in-progress | [Playback](../public/demos/wildlife-v2/manatee/roster-v3/index.html) |
 | Dugong | in-progress | [Playback](../public/demos/wildlife-v2/dugong/roster-v3/index.html) |
-| Walrus | in-progress | Source/animation work |
+| Walrus | in-progress | [Playback](../public/demos/wildlife-v2/walrus/roster-v3/index.html) |
 | Anglerfish | finished-game-active | [Playback](../public/demos/wildlife-v2/anglerfish/roster-v3/index.html) |
 | Crocodile | finished-game-active | [Playback](../public/demos/wildlife-v2/crocodile/roster-v3/index.html) |
 | Alligator | finished-game-active | [Playback](../public/demos/wildlife-v2/alligator/roster-v3/index.html) |
 | Komodo dragon | finished-game-active | [Playback](../public/demos/wildlife-v2/komodo-dragon/roster-v3/index.html) |
+| Spider | in-progress | Source/animation work |
+| Praying mantis | in-progress | Source/animation work |
+| Leaf insect | in-progress | Source/animation work |
+| Scorpion | in-progress | Source/animation work |
+| Pill bug | in-progress | Source/animation work |
+| Earwig (pincher bug) | in-progress | Source/animation work |
+| Centipede | in-progress | Source/animation work |
+| Millipede | in-progress | Source/animation work |
 
 ## Current gorilla shoulder study
 
@@ -70,7 +78,7 @@ Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/ind
 
 The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
 
-Snapshot: 2026-10-19T14:33:02.607Z (19/10/2026, 16:33:02 Berlin).
+Snapshot: 2026-10-19T14:44:48.914Z (19/10/2026, 16:44:48 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

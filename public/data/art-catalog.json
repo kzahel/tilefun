@@ -596,6 +596,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-tasmanian-devil-predator-v1",
+      "name": "wildlife tasmanian devil predator v1",
+      "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-swordfish-predator-v1",
       "name": "wildlife swordfish predator v1",
       "image": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
@@ -1653,6 +1663,66 @@
       "height": 448,
       "tileSize": 16,
       "fingerprint": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-sloth-provisional-v1",
+      "name": "wildlife sloth provisional v1",
+      "image": "demos/wildlife-v2/sloth/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-binturong-provisional-v1",
+      "name": "wildlife binturong provisional v1",
+      "image": "demos/wildlife-v2/binturong/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "81e0884e88368b320317f41e7fd1ab50d9aeb30eb0475f8aae013b63fe6610da",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-aye-aye-provisional-v1",
+      "name": "wildlife aye aye provisional v1",
+      "image": "demos/wildlife-v2/aye-aye/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "687e800452aff98c369c9befdd6a0b3bf07355af9c4cc361b7fc3be79bae00eb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-kinkajou-provisional-v1",
+      "name": "wildlife kinkajou provisional v1",
+      "image": "demos/wildlife-v2/kinkajou/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "675e2a6ca29ba3c7a7e9045fc632faba5a077bd0aa353e8cd429b37d879ce831",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-opossum-provisional-v1",
+      "name": "wildlife opossum provisional v1",
+      "image": "demos/wildlife-v2/opossum/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "dfcafe6ea8b32edf0b51ffb5680f453838a32e53e5c5086deb8d95f613730c58",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-echidna-provisional-v1",
+      "name": "wildlife echidna provisional v1",
+      "image": "demos/wildlife-v2/echidna/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "bfabb023be800d6d3db9684e0fda209eaf1abecea828d025cfeecb9f8cc7c89e",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -5053,6 +5123,76 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sloth-roster-v3",
+      "name": "wildlife v2 sloth roster v3",
+      "image": "demos/wildlife-v2/sloth/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-binturong-roster-v3",
+      "name": "wildlife v2 binturong roster v3",
+      "image": "demos/wildlife-v2/binturong/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "81e0884e88368b320317f41e7fd1ab50d9aeb30eb0475f8aae013b63fe6610da",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-aye-aye-roster-v3",
+      "name": "wildlife v2 aye aye roster v3",
+      "image": "demos/wildlife-v2/aye-aye/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "687e800452aff98c369c9befdd6a0b3bf07355af9c4cc361b7fc3be79bae00eb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-kinkajou-roster-v3",
+      "name": "wildlife v2 kinkajou roster v3",
+      "image": "demos/wildlife-v2/kinkajou/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "675e2a6ca29ba3c7a7e9045fc632faba5a077bd0aa353e8cd429b37d879ce831",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-opossum-roster-v3",
+      "name": "wildlife v2 opossum roster v3",
+      "image": "demos/wildlife-v2/opossum/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "dfcafe6ea8b32edf0b51ffb5680f453838a32e53e5c5086deb8d95f613730c58",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-echidna-roster-v3",
+      "name": "wildlife v2 echidna roster v3",
+      "image": "demos/wildlife-v2/echidna/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "bfabb023be800d6d3db9684e0fda209eaf1abecea828d025cfeecb9f8cc7c89e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-tasmanian-devil-roster-v3",
+      "name": "wildlife v2 tasmanian devil roster v3",
+      "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -26770,6 +26910,24 @@
       ]
     },
     {
+      "id": "sprite:wildlife-tasmanian-devil-predator-v1",
+      "sheetId": "wildlife-tasmanian-devil-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-tasmanian-devil-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-swordfish-predator-v1",
       "sheetId": "wildlife-swordfish-predator-v1",
       "rect": [
@@ -28677,6 +28835,114 @@
         448
       ],
       "label": "wildlife-great-blue-heron-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-sloth-provisional-v1",
+      "sheetId": "wildlife-sloth-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-sloth-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-binturong-provisional-v1",
+      "sheetId": "wildlife-binturong-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-binturong-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-aye-aye-provisional-v1",
+      "sheetId": "wildlife-aye-aye-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-aye-aye-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-kinkajou-provisional-v1",
+      "sheetId": "wildlife-kinkajou-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-kinkajou-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-opossum-provisional-v1",
+      "sheetId": "wildlife-opossum-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-opossum-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-echidna-provisional-v1",
+      "sheetId": "wildlife-echidna-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-echidna-provisional-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -30719,7 +30985,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:955"
+          "source": "src/wildlife/Fauna.ts:956"
         },
         {
           "system": "Gameplay",
@@ -30731,15 +30997,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:196"
+          "source": "src/wildlife/FoodWeb.ts:212"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:351"
+          "source": "src/wildlife/FoodWeb.ts:367"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:530"
+          "source": "src/wildlife/FoodWeb.ts:546"
         },
         {
           "system": "Gameplay",
@@ -30801,39 +31067,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:31"
+          "source": "src/wildlife/Fauna.ts:32"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:226"
+          "source": "src/wildlife/Fauna.ts:227"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:134"
+          "source": "src/wildlife/FoodWeb.ts:147"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:402"
+          "source": "src/wildlife/FoodWeb.ts:418"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:419"
+          "source": "src/wildlife/FoodWeb.ts:435"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:436"
+          "source": "src/wildlife/FoodWeb.ts:452"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:475"
+          "source": "src/wildlife/FoodWeb.ts:491"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:503"
+          "source": "src/wildlife/FoodWeb.ts:519"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:530"
+          "source": "src/wildlife/FoodWeb.ts:546"
         }
       ]
     },
@@ -30887,23 +31153,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:184"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/wildlife/FoodWeb.ts:197"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:352"
+          "source": "src/wildlife/FoodWeb.ts:213"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:530"
+          "source": "src/wildlife/FoodWeb.ts:368"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:531"
+          "source": "src/wildlife/FoodWeb.ts:546"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:547"
         },
         {
           "system": "Gameplay",
@@ -30949,7 +31215,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:531"
+          "source": "src/wildlife/FoodWeb.ts:547"
         }
       ]
     },
@@ -30995,7 +31261,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:532"
+          "source": "src/wildlife/FoodWeb.ts:548"
         }
       ]
     },
@@ -31041,7 +31307,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:533"
+          "source": "src/wildlife/FoodWeb.ts:549"
         }
       ]
     },
@@ -31087,7 +31353,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:534"
+          "source": "src/wildlife/FoodWeb.ts:550"
         }
       ]
     },
@@ -31245,11 +31511,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:199"
+          "source": "src/wildlife/FoodWeb.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:530"
+          "source": "src/wildlife/FoodWeb.ts:546"
         },
         {
           "system": "Gameplay",
@@ -31299,7 +31565,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:530"
+          "source": "src/wildlife/FoodWeb.ts:546"
         },
         {
           "system": "Gameplay",

@@ -11,6 +11,9 @@ for (const profile of FAUNA_PROFILES) {
   const [arrivalX, arrivalY] = profile.inspection;
   for (const renderer of ["canvas", "gpu"]) {
     test(`${profile.species} motion, contact and saved phase (${renderer})`, async ({ page }) => {
+      test.setTimeout(
+        Math.max(30_000, Math.ceil(((4 * profile.step) / profile.speed + 20) * 1000)),
+      );
       const errors: string[] = [];
       page.on("pageerror", (e) => errors.push(e.message));
       await page.goto(
@@ -48,9 +51,8 @@ for (const profile of FAUNA_PROFILES) {
                     : 4),
             ),
           {
-            // Arrival can trigger a small group's normal alert/escape/recovery.
-            // Wait through that cycle before requiring an ordinary walking frame.
-            timeout: 12000,
+            // Arrival escape/recovery scales with the species' ordinary cadence.
+            timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
             intervals: [30],
           },
         )

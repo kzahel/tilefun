@@ -41,6 +41,10 @@ const birds = [
   "seagull",
 ] as const;
 const small = [
+  "aye-aye",
+  "kinkajou",
+  "opossum",
+  "echidna",
   "meerkat",
   "salamander",
   "newt",
@@ -81,6 +85,8 @@ const groundPrimates = [
   "japanese-macaque",
 ] as const;
 const pasture = [
+  "sloth",
+  "binturong",
   "giant-anteater",
   "aardvark",
   "armadillo",
@@ -121,13 +127,20 @@ const pasture = [
   "alpaca",
 ] as const;
 
-const smallGroundHunters = ["mongoose", "honey-badger", "fossa", "white-nosed-coati"] as const;
+const smallGroundHunters = [
+  "tasmanian-devil",
+  "mongoose",
+  "honey-badger",
+  "fossa",
+  "white-nosed-coati",
+] as const;
 const smallerCats = ["cheetah", "lynx", "bobcat"] as const;
 const felids = ["jaguar", "leopard", ...smallerCats] as const;
 
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  "tasmanian-devil": [...small, "king-cobra"],
   crocodile: [
     ...small,
     ...pasture,
@@ -184,6 +197,9 @@ export const HUNTING_DIETS = {
     "pigeon",
   ],
   eagle: [
+    "aye-aye",
+    "kinkajou",
+    "opossum",
     "meerkat",
     "capuchin-monkey",
     "ring-tailed-lemur",

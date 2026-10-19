@@ -7,6 +7,7 @@ import { DISTINCT_FISH_FAUNA_PROFILES } from "./DistinctFish.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
+import { FOREST_SPECIALIST_PROFILES } from "./ForestSpecialists.js";
 import { GREAT_APE_PROFILES } from "./GreatApes.js";
 import { GROUND_BIRD_PROFILES } from "./GroundBirds.js";
 import { GROUND_PRIMATE_PROFILES } from "./GroundPrimates.js";
@@ -1348,6 +1349,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...GROUND_SPECIALIST_PROFILES,
   ...SEABIRD_PROFILES,
   ...TALL_BIRD_PROFILES,
+  ...FOREST_SPECIALIST_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

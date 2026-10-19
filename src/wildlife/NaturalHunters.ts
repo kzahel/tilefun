@@ -1,12 +1,14 @@
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import type { AnimationClip } from "../entities/EntityDefs.js";
 import type { FierceBehaviorProfile } from "./FierceCreatures.js";
+import { FOREST_HUNTER_PROFILES } from "./ForestSpecialists.js";
 import { RAPTOR_PROFILES } from "./Raptors.js";
 import { REPTILE_HUNTER_PROFILES } from "./ReptileHunters.js";
 import { SMALL_GROUND_HUNTER_PROFILES } from "./SmallGroundHunters.js";
 import { SECRETARY_BIRD_PROFILES } from "./TallBirds.js";
 
 export const NATURAL_HUNTER_SPECIES = [
+  "tasmanian-devil",
   "crocodile",
   "alligator",
   "komodo-dragon",
@@ -259,4 +261,5 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
   ...RAPTOR_PROFILES,
   ...SECRETARY_BIRD_PROFILES,
   ...REPTILE_HUNTER_PROFILES,
+  ...FOREST_HUNTER_PROFILES,
 ];

@@ -1,0 +1,17 @@
+{
+  "identity": "echidna-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.578362315650459,
+    "up": 1.6164071315729984,
+    "left": 1.9413145539906083,
+    "right": 1.9413145539906083
+  },
+  "rootTravelPixelsPerCycle": 8.96,
+  "plantedTravel": true
+}

@@ -1,0 +1,14 @@
+{
+  "identity": "sloth-roster-v3-pixels-01",
+  "palette": {
+    "B": "#9b8c6f",
+    "H": "#b8a88a",
+    "C": "#e0d4bc",
+    "M": "#514b40",
+    "K": "#282e2b",
+    "E": "#caaf65",
+    "N": "#1e2826",
+    "T": "#c69487"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

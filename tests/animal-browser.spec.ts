@@ -4,6 +4,10 @@ import {
   DISTINCT_FISH_FAUNA_PROFILES,
   DISTINCT_FISH_HUNTER_PROFILES,
 } from "../src/wildlife/DistinctFish.js";
+import {
+  FOREST_HUNTER_PROFILES,
+  FOREST_SPECIALIST_PROFILES,
+} from "../src/wildlife/ForestSpecialists.js";
 import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
 import { GROUND_PRIMATE_PROFILES } from "../src/wildlife/GroundPrimates.js";
 import { GROUND_SPECIALIST_PROFILES } from "../src/wildlife/GroundSpecialists.js";
@@ -144,6 +148,7 @@ for (const animal of [
   ...GROUND_SPECIALIST_PROFILES,
   ...SEABIRD_PROFILES,
   ...TALL_BIRD_PROFILES,
+  ...FOREST_SPECIALIST_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
@@ -192,7 +197,11 @@ for (const animal of [
   });
 }
 
-for (const animal of [...DISTINCT_FISH_HUNTER_PROFILES, ...REPTILE_HUNTER_PROFILES]) {
+for (const animal of [
+  ...DISTINCT_FISH_HUNTER_PROFILES,
+  ...REPTILE_HUNTER_PROFILES,
+  ...FOREST_HUNTER_PROFILES,
+]) {
   test(`${animal.species} browser display opens a real moving shared hunter`, async ({ page }) => {
     await page.goto(
       "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",

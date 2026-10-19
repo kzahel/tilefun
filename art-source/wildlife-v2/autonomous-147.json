@@ -642,11 +642,16 @@
     "sloth": {
       "name": "Sloth",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/sloth/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "capybara": {
       "name": "Capybara",
@@ -715,11 +720,16 @@
     "binturong": {
       "name": "Binturong",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/binturong/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "honey-badger": {
       "name": "Honey badger",
@@ -736,11 +746,16 @@
     "aye-aye": {
       "name": "Aye-aye",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/aye-aye/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "white-nosed-coati": {
       "name": "White-nosed coati",
@@ -751,11 +766,16 @@
     "kinkajou": {
       "name": "Kinkajou",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/kinkajou/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "koala": {
       "name": "Koala",
@@ -781,20 +801,30 @@
     "opossum": {
       "name": "Opossum",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/opossum/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "tasmanian-devil": {
       "name": "Tasmanian devil",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/tasmanian-devil/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "platypus": {
       "name": "Platypus",
@@ -808,11 +838,16 @@
     "echidna": {
       "name": "Echidna",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:42:39.458554Z",
-      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/echidna/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     },
     "quokka": {
       "name": "Quokka",
@@ -1417,9 +1452,11 @@
     "spider": {
       "name": "Spider",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "stag-beetle": {
       "name": "Stag beetle",
@@ -1442,51 +1479,65 @@
     "praying-mantis": {
       "name": "Praying mantis",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "leaf-insect": {
       "name": "Leaf insect",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "scorpion": {
       "name": "Scorpion",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "roly-poly": {
       "name": "Pill bug",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "earwig": {
       "name": "Earwig (pincher bug)",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "centipede": {
       "name": "Centipede",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "millipede": {
       "name": "Millipede",
       "family": "Insects & arthropods",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Unregistered original arthropod source authoring; not runtime active."
     },
     "snail": {
       "name": "Snail",
@@ -1605,6 +1656,19 @@
         "komodo-dragon"
       ],
       "validation": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged."
+    },
+    {
+      "utc": "2026-10-19T14:44:48.576472Z",
+      "completed": [
+        "sloth",
+        "binturong",
+        "aye-aye",
+        "kinkajou",
+        "opossum",
+        "echidna",
+        "tasmanian-devil"
+      ],
+      "validation": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
     }
   ]
 }

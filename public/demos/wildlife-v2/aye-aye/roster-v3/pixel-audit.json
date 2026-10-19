@@ -1,0 +1,17 @@
+{
+  "identity": "aye-aye-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7362433862433804,
+    "up": 1.8035714285714235,
+    "left": 1.7919171318162341,
+    "right": 1.7919171318162341
+  },
+  "rootTravelPixelsPerCycle": 11.52,
+  "plantedTravel": true
+}
