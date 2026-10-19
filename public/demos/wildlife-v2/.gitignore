@@ -626,3 +626,10 @@
 !nautilus/roster-v3/*
 !leafy-seadragon/roster-v3/*
 !starfish/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!coconut-crab/roster-v3/*
+!horseshoe-crab/roster-v3/*
+!lobster/roster-v3/*
+!shrimp/roster-v3/*
+!mantis-shrimp/roster-v3/*

@@ -3,6 +3,7 @@ import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { BOVID_PROFILES } from "./Bovids.js";
 import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
+import { CRUSTACEAN_FAUNA_PROFILES } from "./Crustaceans.js";
 import { DISTINCT_FISH_FAUNA_PROFILES } from "./DistinctFish.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
@@ -1362,6 +1363,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...LEGLESS_FAUNA_PROFILES,
   ...GROUND_ARTHROPOD_FAUNA_PROFILES,
   ...MARINE_ODDITY_FAUNA_PROFILES,
+  ...CRUSTACEAN_FAUNA_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

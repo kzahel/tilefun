@@ -1,0 +1,17 @@
+{
+  "identity": "coconut-crab-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.911788853472416,
+    "up": 1.6557307741089886,
+    "left": 1.7833169388156591,
+    "right": 1.7833169388156591
+  },
+  "rootTravelPixelsPerCycle": 8.96,
+  "plantedTravel": true
+}

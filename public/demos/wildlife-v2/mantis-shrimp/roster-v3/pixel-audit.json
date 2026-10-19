@@ -1,0 +1,17 @@
+{
+  "identity": "mantis-shrimp-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.624529121993632,
+    "up": 1.5371240601503757,
+    "left": 1.852703112149925,
+    "right": 1.852703112149925
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

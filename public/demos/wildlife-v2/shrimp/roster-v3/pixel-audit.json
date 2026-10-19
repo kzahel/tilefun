@@ -1,0 +1,17 @@
+{
+  "identity": "shrimp-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6484368041328992,
+    "up": 1.8465346534653406,
+    "left": 1.8440029985007556,
+    "right": 1.8440029985007556
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

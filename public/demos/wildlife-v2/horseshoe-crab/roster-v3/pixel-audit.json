@@ -1,0 +1,17 @@
+{
+  "identity": "horseshoe-crab-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.962962962962962,
+    "up": 1.4985182218662487,
+    "left": 1.8396867351933395,
+    "right": 1.8396867351933395
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}
