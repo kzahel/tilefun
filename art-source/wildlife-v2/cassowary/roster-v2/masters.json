@@ -1,0 +1,16 @@
+{
+  "identity": "cassowary-roster-v2-pixels-01",
+  "palette": {
+    "K": "#293338",
+    "B": "#2e383c",
+    "H": "#485257",
+    "C": "#8b9c9c",
+    "M": "#7b7d70",
+    "N": "#232d32",
+    "E": "#c2ad74",
+    "U": "#477d9b",
+    "R": "#ad554c",
+    "T": "#66834f"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

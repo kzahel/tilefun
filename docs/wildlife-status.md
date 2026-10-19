@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**61 newly completed; 7 in progress; 112 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**68 newly completed; 6 in progress; 106 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -24,10 +24,11 @@
 | Pig | finished-game-active | [Playback](../public/demos/wildlife-v2/piglet/motion-v2/index.html) |
 | Goat | finished-game-active | [Playback](../public/demos/wildlife-v2/goat/motion-v2/index.html) |
 | Chicken | finished-game-active | [Playback](../public/demos/wildlife-v2/chicken/roster-v2/index.html) |
+| Green sea turtle | in-progress | Source/animation work |
 | Wolf | finished-game-active | [Playback](../public/demos/wildlife-v2/wolf/roster-v2/index.html) |
 | Donkey | finished-game-active | [Playback](../public/demos/wildlife-v2/donkey/roster-v2/index.html) |
 | Mule | finished-game-active | [Playback](../public/demos/wildlife-v2/mule/roster-v2/index.html) |
-| Wild turkey | in-progress | Source/animation work |
+| Wild turkey | finished-game-active | [Playback](../public/demos/wildlife-v2/wild-turkey/roster-v2/index.html) |
 | Llama | finished-game-active | [Playback](../public/demos/wildlife-v2/llama/roster-v2/index.html) |
 | Alpaca | finished-game-active | [Playback](../public/demos/wildlife-v2/alpaca/roster-v2/index.html) |
 | Hamster | finished-game-active | [Playback](../public/demos/wildlife-v2/hamster/roster-v2/index.html) |
@@ -67,19 +68,24 @@
 | Raccoon | finished-game-active | [Playback](../public/demos/wildlife-v2/raccoon/roster-v2/index.html) |
 | Skunk | finished-game-active | [Playback](../public/demos/wildlife-v2/skunk/roster-v2/index.html) |
 | Red panda | finished-game-active | [Playback](../public/demos/wildlife-v2/red-panda/roster-v2/index.html) |
-| Peacock | in-progress | Source/animation work |
-| Ostrich | in-progress | Source/animation work |
-| Emu | in-progress | Source/animation work |
-| Cassowary | in-progress | Source/animation work |
-| Kiwi | in-progress | Source/animation work |
-| Kakapo | in-progress | Source/animation work |
+| Peacock | finished-game-active | [Playback](../public/demos/wildlife-v2/peacock/roster-v2/index.html) |
+| Ostrich | finished-game-active | [Playback](../public/demos/wildlife-v2/ostrich/roster-v2/index.html) |
+| Emu | finished-game-active | [Playback](../public/demos/wildlife-v2/emu/roster-v2/index.html) |
+| Cassowary | finished-game-active | [Playback](../public/demos/wildlife-v2/cassowary/roster-v2/index.html) |
+| Kiwi | finished-game-active | [Playback](../public/demos/wildlife-v2/kiwi/roster-v2/index.html) |
+| Kakapo | finished-game-active | [Playback](../public/demos/wildlife-v2/kakapo/roster-v2/index.html) |
 | Shark | finished-game-active | [Playback](../public/demos/wildlife-v2/shark/roster-v2/index.html) |
 | Hammerhead shark | finished-game-active | [Playback](../public/demos/wildlife-v2/hammerhead-shark/roster-v2/index.html) |
+| Whale shark | in-progress | Source/animation work |
+| Dolphin | in-progress | Source/animation work |
 | Orca | finished-game-active | [Playback](../public/demos/wildlife-v2/orca/roster-v2/index.html) |
+| Humpback whale | in-progress | Source/animation work |
+| Blue whale | in-progress | Source/animation work |
+| Narwhal | in-progress | Source/animation work |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T01:36:16.919Z (19/10/2026, 03:36:16 Berlin).
+Snapshot: 2026-10-19T02:01:14.249Z (19/10/2026, 04:01:14 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 

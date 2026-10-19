@@ -1,0 +1,16 @@
+{
+  "identity": "kakapo-roster-v2-pixels-01",
+  "palette": {
+    "K": "#293338",
+    "B": "#71824b",
+    "H": "#a3ad65",
+    "C": "#c8be87",
+    "M": "#515c3c",
+    "N": "#232d32",
+    "E": "#c2ad74",
+    "U": "#477d9b",
+    "R": "#ad554c",
+    "T": "#66834f"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

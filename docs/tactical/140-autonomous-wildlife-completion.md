@@ -417,3 +417,27 @@ assertion; distinguish them from newly introduced failures.
   plus sixteen delivered leave 119 remaining. Seven ground-bird sources are
   underway; correct their neck bend continuity and density before registration.
   Exact pixels remain pending human review.
+
+- 02:01 UTC: ostrich, emu, cassowary, kiwi, kakapo, wild turkey and peacock
+  completed. Fresh ratite bodies/skin necks, cassowary casque/blue neck/wattles,
+  kiwi long bill, kakapo facial disc/hooked beak, turkey wattle/banded fan and
+  peacock crest/eyespots/sixteen-feather folding train use distinct scenes.
+  Two planted four-link legs carry moving bodies; fixed two-link necks and
+  attached wings/feathers retain volume. Source toe counts/directions distinguish
+  ostrich two, emu/cassowary three, three-forward/one-rear kiwi/turkey/peacock and
+  two-forward/two-rear kakapo. Stable neck bend planes and quarter-pose keys
+  remove grazing flips. Eighth-pose endpoint gap stays below .079 native px.
+  Each bank has 164 poses, 5,184 limb links, 1,296 buried hip and neck checks,
+  2,576 wing roots, 944 contacts and 664 planted travel pairs. Peacock adds
+  10,368 feather-root checks. Seven ten-artifact replays and 2,296 exact crops
+  pass. Fixed expansion slots and explicit food tiers integrate all seven.
+  These profiles supply ground walking, foraging/display and escape; they do
+  not add an airborne controller for turkey, peacock or kakapo.
+  Corrected generic grazer wording on thirteen ocean/small-mammal review pages
+  through wrappers outside the immutable banks. Review links point to those
+  wrappers; all 5,224 exact crops and controls pass without changing bank bytes.
+  Typecheck/lint/build, 1,189-candidate manifest, twenty-eight browser cases and
+  streaming readiness pass. Full bounded units: 3,644 pass, five known Windows
+  failures, ten skipped. Sixty-eight new entries plus sixteen delivered leave
+  112 remaining. Six marine sources are underway. Exact pixels remain pending
+  human review.

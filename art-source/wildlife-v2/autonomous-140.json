@@ -401,9 +401,10 @@
     "sea-turtle": {
       "name": "Green sea turtle",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:50:00Z"
     },
     "gecko": {
       "name": "Tokay gecko",
@@ -448,10 +449,14 @@
     "wild-turkey": {
       "name": "Wild turkey",
       "family": "Farm & livestock",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/wild-turkey/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "llama": {
       "name": "Llama",
@@ -1263,42 +1268,62 @@
     "peacock": {
       "name": "Peacock",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/peacock/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "ostrich": {
       "name": "Ostrich",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/ostrich/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "emu": {
       "name": "Emu",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/emu/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "cassowary": {
       "name": "Cassowary",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/cassowary/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "kiwi": {
       "name": "Kiwi",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/kiwi/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "secretary-bird": {
       "name": "Secretary bird",
@@ -1317,10 +1342,14 @@
     "kakapo": {
       "name": "Kakapo",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T01:29:00Z"
+      "startedUtc": "2026-10-19T01:29:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T02:01:00Z",
+      "receipt": "art-source/wildlife-v2/kakapo/roster-v2/receipt.json",
+      "evidence": "164 source poses; 257 walk/eighth-pose and 65 action samples/facing; 5184 fixed limb links, 1296 buried hips and neck links, 2576 wing roots; 944 contacts/664 planted travel pairs; counted toe directions; fixed feather fans; ten-artifact replay; 328 exact crops; four shared world/lab/browser checks; exact pixels pending review"
     },
     "great-blue-heron": {
       "name": "Great blue heron",
@@ -1398,16 +1427,18 @@
     "whale-shark": {
       "name": "Whale shark",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:50:00Z"
     },
     "dolphin": {
       "name": "Dolphin",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:50:00Z"
     },
     "orca": {
       "name": "Orca",
@@ -1424,23 +1455,26 @@
     "humpback-whale": {
       "name": "Humpback whale",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:50:00Z"
     },
     "blue-whale": {
       "name": "Blue whale",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:50:00Z"
     },
     "narwhal": {
       "name": "Narwhal",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:50:00Z"
     },
     "cuttlefish": {
       "name": "Cuttlefish",
@@ -2016,6 +2050,19 @@
         "red-panda"
       ],
       "validation": "Typecheck/lint/build, 1154-candidate manifest, 40 browser cases and streaming --assert-ready pass. Full bounded units: 3553 pass, 5 known Windows failures, 10 skipped. Ten ten-artifact replays and 3280 exact crops. Closed/manifold quills: hedgehog 24, porcupine 35. Sixteen wild catch tests preserve natural lineage and finite manual prey; domestic hamster/guinea pig protected from every hunter."
+    },
+    {
+      "utc": "2026-10-19T02:01:00Z",
+      "completed": [
+        "ostrich",
+        "emu",
+        "cassowary",
+        "kiwi",
+        "kakapo",
+        "wild-turkey",
+        "peacock"
+      ],
+      "validation": "Typecheck/lint/build, 1189-candidate manifest, 28 browser cases and streaming --assert-ready pass. Full bounded units: 3644 pass, 5 known Windows failures, 10 skipped. Seven ten-artifact replays and 2296 exact crops. Stable neck bend plane and quarter-pose keys keep eighth-pose endpoint gap below .079 native px. Thirteen corrected review wrappers retain immutable banks and pass 5224 exact native/enlarged crops."
     }
   ],
   "existingOutsideRoster": [
@@ -2028,10 +2075,20 @@
   ],
   "familyReferences": {
     "ground-birds": {
-      "animal": "chicken",
+      "animals": [
+        "ostrich",
+        "emu",
+        "cassowary",
+        "kiwi",
+        "kakapo",
+        "wild-turkey",
+        "peacock"
+      ],
       "revision": "roster-v2",
       "state": "agent-inspected-game-active",
-      "humanReview": "pending"
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/ground-birds-140/README.md",
+      "roles": "ground walking, foraging/display and escape; no new airborne controller"
     },
     "flutterers": {
       "animal": "butterfly",

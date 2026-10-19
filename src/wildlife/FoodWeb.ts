@@ -6,7 +6,18 @@ import { MALLARD_TYPE } from "./Mallard.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
-const birds = ["mallard-duck", "robin", "chicken", "pigeon", "crow", "seagull"] as const;
+const birds = [
+  "kiwi",
+  "kakapo",
+  "wild-turkey",
+  "peacock",
+  "mallard-duck",
+  "robin",
+  "chicken",
+  "pigeon",
+  "crow",
+  "seagull",
+] as const;
 const small = [
   "rabbit",
   "frog",
@@ -28,6 +39,9 @@ const antelopes = [
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
 const pasture = [
+  "ostrich",
+  "emu",
+  "cassowary",
   "porcupine",
   "raccoon",
   "skunk",

@@ -1,0 +1,663 @@
+{
+  "ostrich": {
+    "label": "Ostrich",
+    "canvas": 96,
+    "torso": [
+      0,
+      -0.06,
+      2.8
+    ],
+    "radii": [
+      0.7,
+      0.95,
+      0.9
+    ],
+    "head": [
+      0,
+      1.05,
+      5.0
+    ],
+    "skull": [
+      0.24,
+      0.28,
+      0.25
+    ],
+    "headKey": "M",
+    "neckKey": "M",
+    "neckLengths": [
+      1.25,
+      1.25
+    ],
+    "neckRadius": 0.13,
+    "neckRoot": [
+      0,
+      0.2375,
+      3.205
+    ],
+    "headDrop": 3.6,
+    "headReach": 0.85,
+    "beakLength": 0.27,
+    "beakWidth": 0.1,
+    "legHip": [
+      0.35,
+      -0.02,
+      2.25
+    ],
+    "legLengths": [
+      0.75,
+      0.85,
+      0.75,
+      0.25
+    ],
+    "legRadii": [
+      0.1,
+      0.075,
+      0.055,
+      0.045
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.18,
+    "toes": 2,
+    "lift": 0.22,
+    "wingRadii": [
+      0.13,
+      0.65,
+      0.42
+    ],
+    "wingSpread": 0.5,
+    "tailRoot": [
+      0,
+      -0.8075,
+      2.6199999999999997
+    ],
+    "tailFeathers": 3,
+    "tailLength": 0.55,
+    "tailWidth": 0.15,
+    "walkSpeed": 20,
+    "walkMs": 40,
+    "palette": {
+      "K": "#293338",
+      "B": "#30383b",
+      "H": "#515a5c",
+      "C": "#e7e0ca",
+      "M": "#bb9b87",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1
+    ]
+  },
+  "emu": {
+    "label": "Emu",
+    "canvas": 96,
+    "torso": [
+      0,
+      -0.06,
+      2.42
+    ],
+    "radii": [
+      0.65,
+      0.9,
+      0.82
+    ],
+    "head": [
+      0,
+      0.95,
+      4.32
+    ],
+    "skull": [
+      0.25,
+      0.3,
+      0.29
+    ],
+    "headKey": "M",
+    "neckKey": "M",
+    "neckLengths": [
+      1.1,
+      1.1
+    ],
+    "neckRadius": 0.17,
+    "neckRoot": [
+      0,
+      0.225,
+      2.7889999999999997
+    ],
+    "headDrop": 2.9,
+    "headReach": 0.85,
+    "beakLength": 0.3,
+    "beakWidth": 0.1,
+    "legHip": [
+      0.325,
+      -0.02,
+      1.9
+    ],
+    "legLengths": [
+      0.65,
+      0.76,
+      0.65,
+      0.23
+    ],
+    "legRadii": [
+      0.1,
+      0.075,
+      0.055,
+      0.045
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.18,
+    "toes": 3,
+    "lift": 0.22,
+    "wingRadii": [
+      0.1,
+      0.36,
+      0.25
+    ],
+    "wingSpread": 0.32,
+    "tailRoot": [
+      0,
+      -0.765,
+      2.256
+    ],
+    "tailFeathers": 3,
+    "tailLength": 0.42,
+    "tailWidth": 0.14,
+    "walkSpeed": 18,
+    "walkMs": 40,
+    "palette": {
+      "K": "#293338",
+      "B": "#7b6c57",
+      "H": "#a08c6e",
+      "C": "#c8b38e",
+      "M": "#6d7068",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1,
+      1
+    ]
+  },
+  "cassowary": {
+    "label": "Cassowary",
+    "canvas": 96,
+    "torso": [
+      0,
+      -0.06,
+      2.48
+    ],
+    "radii": [
+      0.66,
+      0.85,
+      0.87
+    ],
+    "head": [
+      0,
+      0.93,
+      4.1
+    ],
+    "skull": [
+      0.25,
+      0.28,
+      0.27
+    ],
+    "headKey": "U",
+    "neckKey": "U",
+    "neckLengths": [
+      1.02,
+      1.02
+    ],
+    "neckRadius": 0.17,
+    "neckRoot": [
+      0,
+      0.2125,
+      2.8715
+    ],
+    "headDrop": 2.5,
+    "headReach": 0.7,
+    "beakLength": 0.3,
+    "beakWidth": 0.11,
+    "legHip": [
+      0.33,
+      -0.02,
+      1.96
+    ],
+    "legLengths": [
+      0.68,
+      0.76,
+      0.66,
+      0.23
+    ],
+    "legRadii": [
+      0.1,
+      0.075,
+      0.055,
+      0.045
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.18,
+    "toes": 3,
+    "lift": 0.22,
+    "wingRadii": [
+      0.09,
+      0.3,
+      0.22
+    ],
+    "wingSpread": 0.32,
+    "tailRoot": [
+      0,
+      -0.7224999999999999,
+      2.306
+    ],
+    "tailFeathers": 3,
+    "tailLength": 0.36,
+    "tailWidth": 0.13,
+    "walkSpeed": 18,
+    "walkMs": 40,
+    "palette": {
+      "K": "#293338",
+      "B": "#2e383c",
+      "H": "#485257",
+      "C": "#8b9c9c",
+      "M": "#7b7d70",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1,
+      1
+    ]
+  },
+  "kiwi": {
+    "label": "Kiwi",
+    "canvas": 64,
+    "torso": [
+      0,
+      -0.06,
+      0.85
+    ],
+    "radii": [
+      0.44,
+      0.61,
+      0.48
+    ],
+    "head": [
+      0,
+      0.66,
+      1.1
+    ],
+    "skull": [
+      0.22,
+      0.25,
+      0.22
+    ],
+    "headKey": "B",
+    "neckKey": "B",
+    "neckLengths": [
+      0.42,
+      0.42
+    ],
+    "neckRadius": 0.14,
+    "neckRoot": [
+      0,
+      0.1525,
+      1.066
+    ],
+    "headDrop": 0.36,
+    "headReach": 0.18,
+    "beakLength": 0.78,
+    "beakWidth": 0.055,
+    "legHip": [
+      0.22,
+      -0.02,
+      0.56
+    ],
+    "legLengths": [
+      0.28,
+      0.3,
+      0.16,
+      0.1
+    ],
+    "legRadii": [
+      0.075,
+      0.055,
+      0.04,
+      0.03
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.12,
+    "toes": 4,
+    "lift": 0.12,
+    "wingRadii": [
+      0.045,
+      0.15,
+      0.1
+    ],
+    "wingSpread": 0.32,
+    "tailRoot": [
+      0,
+      -0.5185,
+      0.754
+    ],
+    "tailFeathers": 3,
+    "tailLength": 0.14,
+    "tailWidth": 0.09,
+    "walkSpeed": 10,
+    "walkMs": 30,
+    "palette": {
+      "K": "#293338",
+      "B": "#8a7154",
+      "H": "#b19a74",
+      "C": "#d4bd93",
+      "M": "#635c49",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ]
+  },
+  "kakapo": {
+    "label": "Kakapo",
+    "canvas": 64,
+    "torso": [
+      0,
+      -0.06,
+      1.08
+    ],
+    "radii": [
+      0.48,
+      0.64,
+      0.56
+    ],
+    "head": [
+      0,
+      0.59,
+      1.59
+    ],
+    "skull": [
+      0.28,
+      0.25,
+      0.3
+    ],
+    "headKey": "B",
+    "neckKey": "B",
+    "neckLengths": [
+      0.38,
+      0.38
+    ],
+    "neckRadius": 0.17,
+    "neckRoot": [
+      0,
+      0.16,
+      1.332
+    ],
+    "headDrop": 0.48,
+    "headReach": 0.18,
+    "beakLength": 0.18,
+    "beakWidth": 0.12,
+    "legHip": [
+      0.24,
+      -0.02,
+      0.72
+    ],
+    "legLengths": [
+      0.35,
+      0.38,
+      0.2,
+      0.12
+    ],
+    "legRadii": [
+      0.075,
+      0.055,
+      0.04,
+      0.03
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.12,
+    "toes": 4,
+    "lift": 0.12,
+    "wingRadii": [
+      0.14,
+      0.53,
+      0.38
+    ],
+    "wingSpread": 0.32,
+    "tailRoot": [
+      0,
+      -0.544,
+      0.9680000000000001
+    ],
+    "tailFeathers": 3,
+    "tailLength": 0.34,
+    "tailWidth": 0.11,
+    "walkSpeed": 10,
+    "walkMs": 35,
+    "palette": {
+      "K": "#293338",
+      "B": "#71824b",
+      "H": "#a3ad65",
+      "C": "#c8be87",
+      "M": "#515c3c",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1,
+      -1,
+      -1
+    ]
+  },
+  "wild-turkey": {
+    "label": "Wild turkey",
+    "canvas": 64,
+    "torso": [
+      0,
+      -0.06,
+      1.28
+    ],
+    "radii": [
+      0.48,
+      0.67,
+      0.55
+    ],
+    "head": [
+      0,
+      0.74,
+      2.15
+    ],
+    "skull": [
+      0.18,
+      0.21,
+      0.22
+    ],
+    "headKey": "R",
+    "neckKey": "R",
+    "neckLengths": [
+      0.56,
+      0.56
+    ],
+    "neckRadius": 0.11,
+    "neckRoot": [
+      0,
+      0.1675,
+      1.5275
+    ],
+    "headDrop": -0.16,
+    "headReach": 0.08,
+    "beakLength": 0.22,
+    "beakWidth": 0.07,
+    "legHip": [
+      0.24,
+      -0.02,
+      0.88
+    ],
+    "legLengths": [
+      0.43,
+      0.43,
+      0.24,
+      0.13
+    ],
+    "legRadii": [
+      0.075,
+      0.055,
+      0.04,
+      0.03
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.12,
+    "toes": 4,
+    "lift": 0.12,
+    "wingRadii": [
+      0.13,
+      0.53,
+      0.35
+    ],
+    "wingSpread": 0.5,
+    "tailRoot": [
+      0,
+      -0.5695,
+      1.38
+    ],
+    "tailFeathers": 8,
+    "tailLength": 1.3,
+    "tailWidth": 0.13,
+    "walkSpeed": 12,
+    "walkMs": 40,
+    "palette": {
+      "K": "#293338",
+      "B": "#66574a",
+      "H": "#967e5e",
+      "C": "#d5bf96",
+      "M": "#947a64",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ]
+  },
+  "peacock": {
+    "label": "Peacock",
+    "canvas": 96,
+    "torso": [
+      0,
+      -0.06,
+      1.48
+    ],
+    "radii": [
+      0.42,
+      0.68,
+      0.52
+    ],
+    "head": [
+      0,
+      0.82,
+      2.46
+    ],
+    "skull": [
+      0.18,
+      0.22,
+      0.22
+    ],
+    "headKey": "U",
+    "neckKey": "U",
+    "neckLengths": [
+      0.65,
+      0.65
+    ],
+    "neckRadius": 0.105,
+    "neckRoot": [
+      0,
+      0.17,
+      1.714
+    ],
+    "headDrop": -0.22,
+    "headReach": 0.05,
+    "beakLength": 0.21,
+    "beakWidth": 0.065,
+    "legHip": [
+      0.21,
+      -0.02,
+      1.03
+    ],
+    "legLengths": [
+      0.47,
+      0.48,
+      0.25,
+      0.14
+    ],
+    "legRadii": [
+      0.075,
+      0.055,
+      0.04,
+      0.03
+    ],
+    "footWidth": 0.09,
+    "footLength": 0.12,
+    "toes": 4,
+    "lift": 0.12,
+    "wingRadii": [
+      0.11,
+      0.52,
+      0.34
+    ],
+    "wingSpread": 0.5,
+    "tailRoot": [
+      0,
+      -0.5780000000000001,
+      1.376
+    ],
+    "tailFeathers": 16,
+    "tailLength": 3.2,
+    "tailWidth": 0.26,
+    "walkSpeed": 13,
+    "walkMs": 40,
+    "palette": {
+      "K": "#293338",
+      "B": "#3d6c7e",
+      "H": "#587e62",
+      "C": "#e5ddbf",
+      "M": "#77765d",
+      "N": "#232d32",
+      "E": "#c2ad74",
+      "U": "#477d9b",
+      "R": "#ad554c",
+      "T": "#66834f"
+    },
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ]
+  }
+}

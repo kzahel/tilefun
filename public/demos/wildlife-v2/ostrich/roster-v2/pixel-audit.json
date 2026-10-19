@@ -1,0 +1,17 @@
+{
+  "identity": "ostrich-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4486048221680434,
+    "up": 1.764772978959023,
+    "left": 1.4567342965178582,
+    "right": 1.4567342965178582
+  },
+  "rootTravelPixelsPerCycle": 25.6,
+  "plantedTravel": true
+}

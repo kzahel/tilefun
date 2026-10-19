@@ -1,0 +1,17 @@
+{
+  "identity": "wild-turkey-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5409274821039531,
+    "up": 1.3830874835694473,
+    "left": 1.497018246550958,
+    "right": 1.497018246550958
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

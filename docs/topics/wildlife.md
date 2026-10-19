@@ -165,7 +165,20 @@ Ten source replays, 3,280 exact crops, forty browser cases, typecheck/lint/build
 and streaming readiness pass. Full bounded units: 3,553 pass, five known Windows
 failures, ten skipped. Wild prey retain natural-only replacement; domestic
 hamster/guinea pig are protected. Sixty-one new entries plus sixteen delivered
-leave 119 remaining. Seven ground-bird sources are underway.
+leave 119 remaining. Ostrich, emu, cassowary, kiwi, kakapo, wild turkey and
+peacock now also use fresh world/editor/lab banks. Planted biped legs, moving
+bodies, fixed linked necks and attached wings retain distinct bills, casques,
+coats, toe layouts, wattles and feather fans. Quarter-pose source keys and a
+stable neck bend plane keep eighth-pose joins within .079 native px. Peacock
+spreads sixteen fixed feathers; turkey opens a banded fan. Ground locomotion,
+foraging/display and escape are active; no new airborne controller is added.
+Seven source replays, 2,296 exact crops, twenty-eight browser cases,
+typecheck/lint/build and streaming readiness pass. Full bounded units: 3,644
+pass, five known Windows failures, ten skipped. Corrected review wrappers for
+thirteen ocean/small-mammal galleries replace generic grazer copy while keeping
+immutable banks unchanged; 5,224 exact wrapper crops and controls pass.
+Sixty-eight new entries plus sixteen delivered leave 112 remaining.
+Six marine sources are underway.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion

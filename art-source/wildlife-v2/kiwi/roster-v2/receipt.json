@@ -1,0 +1,172 @@
+{
+  "identity": "kiwi-roster-v2",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-140",
+  "sourceAudit": {
+    "identity": "kiwi-roster-v2",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 164,
+    "toeMeshesPerFoot": {
+      "leg-1": 4,
+      "leg1": 4
+    },
+    "forwardToesPerFoot": {
+      "leg-1": 3,
+      "leg1": 3
+    },
+    "continuousSamplesPerFacing": 257,
+    "continuousActionSamplesPerFacing": 65,
+    "fixedLengthLinkChecks": 5184,
+    "buriedHipRootChecks": 1296,
+    "tailFeatherAttachmentChecks": 1944,
+    "neckFixedLengthChecks": 1296,
+    "wingAttachmentChecks": 2576,
+    "plantedGroundContacts": 944,
+    "plantedTravelPairs": 664,
+    "maxContinuousEndpointGapWorldUnits": 0.0003081932454080078,
+    "maxNeckEndpointGapWorldUnits": 0.00019575156366614227,
+    "maxEighthPoseRotationStepDegrees": 3.802091237808642,
+    "maxContactSlideWorldUnits": 6.143906154658885e-8,
+    "meshLocalGeometrySha256": {
+      "bird rib cage": "f90d8d18f76aec40e57a4dbe6b6f3da756e74062a4e7960bac52e27b5b806ca1",
+      "breast": "dc5274bf8e70d1847201a69447b8569049de2b9c1384b7df8c94080391fab55d",
+      "back feather plane": "b0702008c65288d50b61f689a7bb2e4058ab0b23460b8ebc2ef6465eff874784",
+      "skull": "cbb8e3002b7c3a8600953a35d3d0f115bb5629c44006e99f40425c57538e446a",
+      "closed upper beak": "6604d65a598765838700887206ca281cf3e5c7e59de6e498e749034d41fd9583",
+      "lower beak": "cf68705dabea8fdf67ae4c4a96fb158eeadd6f326fdc6dab26516b65d86bdd34",
+      "eye -1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+      "eye 1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+      "folded wing -1": "42fe5bcd832f05b21d9fd7f9814408b915695217a21701760c9309c430d8e3eb",
+      "flight feather -1 0": "39c4c577ef6e2b362cf3e4b7aca978fddf95cd5ea998e89e69b0b140283b17fb",
+      "flight feather -1 1": "39c4c577ef6e2b362cf3e4b7aca978fddf95cd5ea998e89e69b0b140283b17fb",
+      "flight feather -1 2": "39c4c577ef6e2b362cf3e4b7aca978fddf95cd5ea998e89e69b0b140283b17fb",
+      "folded wing 1": "42fe5bcd832f05b21d9fd7f9814408b915695217a21701760c9309c430d8e3eb",
+      "flight feather 1 0": "39c4c577ef6e2b362cf3e4b7aca978fddf95cd5ea998e89e69b0b140283b17fb",
+      "flight feather 1 1": "39c4c577ef6e2b362cf3e4b7aca978fddf95cd5ea998e89e69b0b140283b17fb",
+      "flight feather 1 2": "39c4c577ef6e2b362cf3e4b7aca978fddf95cd5ea998e89e69b0b140283b17fb",
+      "leg-1-link-0": "d6aa3525f46c08d24c6aa8a757174c6233f795489c02a25b1c8f63fe5c107c12",
+      "leg-1-link-1": "186c3884b302a1346d0c18ba439d555bad755901fb446f0b4885983d5ba4d433",
+      "leg-1-link-2": "d5a7365b9c559181d1824f5774e5167ab64e6469954444b7fac9fe8dd51e75b3",
+      "leg-1-link-3": "c713700121dcea96747336628fb7d3db1674cc5f01714629fa8eb7981a415d3d",
+      "leg-1-joint-volume-1": "e169b6b40bafad3e79429d19ccd1068d573477cb5c1644b56a3fca69410d8531",
+      "leg-1-joint-volume-2": "d82428466b87cd7ee92d2c7ae24d234fe8a71e8963cfebe3e7c1cf142e8455df",
+      "leg-1-joint-volume-3": "f712dc425a5cac30ccdd54e95979eba27b01a1229cdbf87f815b04bf476c6e13",
+      "leg-1-foot": "b62d70284a75d29c87911e8b339ad943d1e1d51886d351af4f618085e0e00d9e",
+      "leg1-link-0": "d6aa3525f46c08d24c6aa8a757174c6233f795489c02a25b1c8f63fe5c107c12",
+      "leg1-link-1": "186c3884b302a1346d0c18ba439d555bad755901fb446f0b4885983d5ba4d433",
+      "leg1-link-2": "d5a7365b9c559181d1824f5774e5167ab64e6469954444b7fac9fe8dd51e75b3",
+      "leg1-link-3": "c713700121dcea96747336628fb7d3db1674cc5f01714629fa8eb7981a415d3d",
+      "leg1-joint-volume-1": "e169b6b40bafad3e79429d19ccd1068d573477cb5c1644b56a3fca69410d8531",
+      "leg1-joint-volume-2": "d82428466b87cd7ee92d2c7ae24d234fe8a71e8963cfebe3e7c1cf142e8455df",
+      "leg1-joint-volume-3": "f712dc425a5cac30ccdd54e95979eba27b01a1229cdbf87f815b04bf476c6e13",
+      "leg1-foot": "b62d70284a75d29c87911e8b339ad943d1e1d51886d351af4f618085e0e00d9e",
+      "leg-1-toe-0": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg-1-toe-1": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg-1-toe-2": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg-1-toe-3": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg1-toe-0": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg1-toe-1": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg1-toe-2": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "leg1-toe-3": "93a3c04f8a80572044a4bd5090ef5abc49e87750f341ea144ad3afc0768bbfd8",
+      "NECK-link-0": "a2bbb657270a3e5e4620c39247885049013ee0669d8a0e0f70c1a44c11f973cf",
+      "NECK-link-1": "a2bbb657270a3e5e4620c39247885049013ee0669d8a0e0f70c1a44c11f973cf",
+      "TAIL-feather-0": "061ba8e90d2f540db481aaf1750552ec37fb2d0fa3978eb593445ef26004e78c",
+      "TAIL-feather-1": "9f0a9090204c16b64e0cf344881f4a56f9c2da2f14c58a7a0188006702aceaa8",
+      "TAIL-feather-2": "061ba8e90d2f540db481aaf1750552ec37fb2d0fa3978eb593445ef26004e78c"
+    },
+    "bodyRangePixels": {
+      "walk": {
+        "down": 1.5320892333984375,
+        "up": 1.5320892333984375,
+        "left": 1.6395320892333984,
+        "right": 1.6395320892333984
+      }
+    }
+  },
+  "pixelAudit": {
+    "identity": "kiwi-roster-v2-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyPaintCentroidRangePixels": {
+      "down": 1.227704623672004,
+      "up": 1.4373501199040746,
+      "left": 1.6086249655552507,
+      "right": 1.6086249655552507
+    },
+    "rootTravelPixelsPerCycle": 9.6,
+    "plantedTravel": true
+  },
+  "validation": {
+    "identity": "kiwi-roster-v2",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "kiwi-roster-v2",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "8f4b309f4379a1cb619b6508c317a2bc309fa993eaa0fc66fcf81cdc4662b604",
+      "pixel-audit.json": "0fba4f395275b22a85ef561865ce892d8d8c3a71b663035647baeef55466e998",
+      "preview-native.gif": "0064dbfcc2dcb665f4056ad3dacd3afa049db172afc924c39b65595adab1c1a0",
+      "preview.gif": "69b38dcd1dd043589ddda9c2fa37e10ff1903026365d7b5d71bf2e882779eb65",
+      "scene-background.png": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7",
+      "scene-native.png": "f438887d1ecbfb69bd55a528e296fd31449814057bfc404c313537010515982a",
+      "sheet.png": "851fbcb2c641484a9dd9f306f4703c0e6750aa7fea6ce63d4c4e1099e830bf75",
+      "source-audit.json": "cfeb319dc10fd741da6fed070eb49ebfbd9b87eb12686c7334f1146405ccc3ac",
+      "sprite.json": "f44b30510eeeb1bf8a20afdb371c3ed9f6c2aa0958b7d080e5f144ac9eef9f2b",
+      "travel-native.gif": "2ff60fad13d22b7d8c91c248173920d398c66c0d89c4bc430e9406bd784c62f7"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/kiwi/roster-v2/audit.py": "8009a359a885a627c5bf03939c8f0d41458c62c332cc431191934af989a514a0",
+    "art-source/wildlife-v2/kiwi/roster-v2/build.py": "e89506e52f06d9b21a9ee412270505e3d41e219292b75abdb766fc9454c108cf",
+    "art-source/wildlife-v2/kiwi/roster-v2/finish.py": "2d7bd32b8c368202784dca211efc428289d7e44c5a45f4ffe542f953ca30f478",
+    "art-source/wildlife-v2/kiwi/roster-v2/inputs.json": "9537ee74e2c3be8c16b3b8acf49fde310db194c7c289d362811301267944d803",
+    "art-source/wildlife-v2/kiwi/roster-v2/kiwi.blend": "9c0a5152abf0082aceda756f256cc91d7af91e8c89c24dfa6b442937373eaef0",
+    "art-source/wildlife-v2/kiwi/roster-v2/masters.json": "94234f10bd0ec4dea53e0491b65b52b27d56290df80d468c588f7b36d30ffb8d",
+    "art-source/wildlife-v2/kiwi/roster-v2/projection.json": "be0e42269aec6995bb7c1231c60e1557d4862aad2ef5d8f5985dc709d4df4311",
+    "art-source/wildlife-v2/kiwi/roster-v2/README.md": "c7d87e4186fe6a0de1e1f8a68af248c3eb40f0ab8228842c3e13fe9462f12324",
+    "public/demos/wildlife-v2/kiwi/roster-v2/contact-sheet-native.png": "8f4b309f4379a1cb619b6508c317a2bc309fa993eaa0fc66fcf81cdc4662b604",
+    "public/demos/wildlife-v2/kiwi/roster-v2/index.html": "c4c50a8135280a14de6a5f17c7197bda50de14cc21b9cfa78097290017b37858",
+    "public/demos/wildlife-v2/kiwi/roster-v2/pixel-audit.json": "0fba4f395275b22a85ef561865ce892d8d8c3a71b663035647baeef55466e998",
+    "public/demos/wildlife-v2/kiwi/roster-v2/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/kiwi/roster-v2/preview-native.gif": "0064dbfcc2dcb665f4056ad3dacd3afa049db172afc924c39b65595adab1c1a0",
+    "public/demos/wildlife-v2/kiwi/roster-v2/preview.gif": "69b38dcd1dd043589ddda9c2fa37e10ff1903026365d7b5d71bf2e882779eb65",
+    "public/demos/wildlife-v2/kiwi/roster-v2/scene-background.png": "4389808deefaa300568125638444a31f4ac262365e51a34b3ab9d136dbf100f7",
+    "public/demos/wildlife-v2/kiwi/roster-v2/scene-native.png": "f438887d1ecbfb69bd55a528e296fd31449814057bfc404c313537010515982a",
+    "public/demos/wildlife-v2/kiwi/roster-v2/sheet.png": "851fbcb2c641484a9dd9f306f4703c0e6750aa7fea6ce63d4c4e1099e830bf75",
+    "public/demos/wildlife-v2/kiwi/roster-v2/source-audit.json": "cfeb319dc10fd741da6fed070eb49ebfbd9b87eb12686c7334f1146405ccc3ac",
+    "public/demos/wildlife-v2/kiwi/roster-v2/sprite.json": "f44b30510eeeb1bf8a20afdb371c3ed9f6c2aa0958b7d080e5f144ac9eef9f2b",
+    "public/demos/wildlife-v2/kiwi/roster-v2/travel-native.gif": "2ff60fad13d22b7d8c91c248173920d398c66c0d89c4bc430e9406bd784c62f7",
+    "public/demos/wildlife-v2/kiwi/roster-v2/validation.json": "c29cf47ce3fbfea243e63e45588f49afe25c1dd991b812a3692797b846400627",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/ground-birds-140/build.py": "7320c444330f1115488abff9ee2bb8ac612ce3caf3a058d7590f8133a541ce8d",
+    "art-source/wildlife-v2/_families/ground-birds-140/geometry.py": "6c9b00a4aa58ee29172e7a11d26ab19a13dc456721b8c5735c6a9e30b7482717",
+    "art-source/wildlife-v2/_families/ground-birds-140/finish.py": "4713b4ac185fb3206eec0635a2cb7849c3dc10dfb69915589e58895390d4079e",
+    "art-source/wildlife-v2/_families/ground-birds-140/audit.py": "b6e08c1bd4cd49751fae8b32b3bfdd99259917ed9179ff614e6d0c00c871567b",
+    "art-source/wildlife-v2/_families/ground-birds-140/profiles.json": "128d2be603c053fcef53afcf5a0b69599ee10a06236b963aaa0bed148cd09da4",
+    "art-source/wildlife-v2/_families/ground-birds-140/README.md": "e5bf61ebf0fc2d3694522ab081c00148b9e162ca62db254693efd0be93ec386e",
+    "scripts/wildlife/capture-motion-v2.mjs": "473aa0d69dff10869d7749578e54e61f29aefe886f61d611f07bb72c9d39a453",
+    "scripts/wildlife/register-motion-v2.mjs": "774c1a1381cf82a28f5f89774ab291d91f5d2ae653116f089aa821ca73090af5",
+    "scripts/wildlife/replay-motion-v2.py": "4fcd155c813b0cddfd13523bfa49e4a76246af810e230059490217d612483e6d"
+  }
+}

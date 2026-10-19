@@ -464,3 +464,12 @@
 !raccoon/roster-v2/*
 !skunk/roster-v2/*
 !red-panda/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!ostrich/roster-v2/*
+!emu/roster-v2/*
+!cassowary/roster-v2/*
+!kiwi/roster-v2/*
+!kakapo/roster-v2/*
+!wild-turkey/roster-v2/*
+!peacock/roster-v2/*

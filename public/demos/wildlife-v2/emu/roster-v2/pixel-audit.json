@@ -1,0 +1,17 @@
+{
+  "identity": "emu-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5837476272258897,
+    "up": 1.5785530454675438,
+    "left": 1.747665525837661,
+    "right": 1.747665525837661
+  },
+  "rootTravelPixelsPerCycle": 23.04,
+  "plantedTravel": true
+}

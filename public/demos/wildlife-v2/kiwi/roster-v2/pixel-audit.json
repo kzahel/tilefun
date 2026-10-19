@@ -1,0 +1,17 @@
+{
+  "identity": "kiwi-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.227704623672004,
+    "up": 1.4373501199040746,
+    "left": 1.6086249655552507,
+    "right": 1.6086249655552507
+  },
+  "rootTravelPixelsPerCycle": 9.6,
+  "plantedTravel": true
+}

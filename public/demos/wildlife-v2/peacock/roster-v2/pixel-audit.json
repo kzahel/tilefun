@@ -1,0 +1,17 @@
+{
+  "identity": "peacock-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4362266857962709,
+    "up": 1.6291390728476784,
+    "left": 1.492178301093361,
+    "right": 1.492178301093361
+  },
+  "rootTravelPixelsPerCycle": 16.64,
+  "plantedTravel": true
+}

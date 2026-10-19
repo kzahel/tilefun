@@ -1086,6 +1086,76 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-ostrich-provisional-v1",
+      "name": "wildlife ostrich provisional v1",
+      "image": "demos/wildlife-v2/ostrich/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a1fa35a3ae6eda5a4e135c891d13fce20637b30a94d49cb71b1a455adf7837a0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-emu-provisional-v1",
+      "name": "wildlife emu provisional v1",
+      "image": "demos/wildlife-v2/emu/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "75168bb671db0dc788738a964d6d749ceaca8fa0cde910c7c87b88a6a635e915",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-cassowary-provisional-v1",
+      "name": "wildlife cassowary provisional v1",
+      "image": "demos/wildlife-v2/cassowary/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "191d501b42b8537b9995f9586fb583c976c8b7cea20bf03ec66c441ac89cf42f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-kiwi-provisional-v1",
+      "name": "wildlife kiwi provisional v1",
+      "image": "demos/wildlife-v2/kiwi/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "851fbcb2c641484a9dd9f306f4703c0e6750aa7fea6ce63d4c4e1099e830bf75",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-kakapo-provisional-v1",
+      "name": "wildlife kakapo provisional v1",
+      "image": "demos/wildlife-v2/kakapo/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "6481f458ee7d9da0807ade14d6c3996ee27d32afc077dbc1c52c9fe90fec79d7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-wild-turkey-provisional-v1",
+      "name": "wildlife wild turkey provisional v1",
+      "image": "demos/wildlife-v2/wild-turkey/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3e40859523ef6f55737a82089419e0267089a1970ebac4ee21f649d0658e5178",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-peacock-provisional-v1",
+      "name": "wildlife peacock provisional v1",
+      "image": "demos/wildlife-v2/peacock/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "80f2d5cffc3b686d3c93baec71132da287733d7403cd6e8c0cbae9c2da88cc34",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -3423,6 +3493,76 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "819fa414c4507ade6a29474f3036088d2376eeb6a4a0c2f8bfe43a289f4e8d82",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ostrich-roster-v2",
+      "name": "wildlife v2 ostrich roster v2",
+      "image": "demos/wildlife-v2/ostrich/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a1fa35a3ae6eda5a4e135c891d13fce20637b30a94d49cb71b1a455adf7837a0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-emu-roster-v2",
+      "name": "wildlife v2 emu roster v2",
+      "image": "demos/wildlife-v2/emu/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "75168bb671db0dc788738a964d6d749ceaca8fa0cde910c7c87b88a6a635e915",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cassowary-roster-v2",
+      "name": "wildlife v2 cassowary roster v2",
+      "image": "demos/wildlife-v2/cassowary/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "191d501b42b8537b9995f9586fb583c976c8b7cea20bf03ec66c441ac89cf42f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-kiwi-roster-v2",
+      "name": "wildlife v2 kiwi roster v2",
+      "image": "demos/wildlife-v2/kiwi/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "851fbcb2c641484a9dd9f306f4703c0e6750aa7fea6ce63d4c4e1099e830bf75",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-kakapo-roster-v2",
+      "name": "wildlife v2 kakapo roster v2",
+      "image": "demos/wildlife-v2/kakapo/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "6481f458ee7d9da0807ade14d6c3996ee27d32afc077dbc1c52c9fe90fec79d7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-wild-turkey-roster-v2",
+      "name": "wildlife v2 wild turkey roster v2",
+      "image": "demos/wildlife-v2/wild-turkey/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "3e40859523ef6f55737a82089419e0267089a1970ebac4ee21f649d0658e5178",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-peacock-roster-v2",
+      "name": "wildlife v2 peacock roster v2",
+      "image": "demos/wildlife-v2/peacock/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "80f2d5cffc3b686d3c93baec71132da287733d7403cd6e8c0cbae9c2da88cc34",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -26022,6 +26162,132 @@
       ]
     },
     {
+      "id": "sprite:wildlife-ostrich-provisional-v1",
+      "sheetId": "wildlife-ostrich-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-ostrich-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-emu-provisional-v1",
+      "sheetId": "wildlife-emu-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-emu-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-cassowary-provisional-v1",
+      "sheetId": "wildlife-cassowary-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-cassowary-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-kiwi-provisional-v1",
+      "sheetId": "wildlife-kiwi-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-kiwi-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-kakapo-provisional-v1",
+      "sheetId": "wildlife-kakapo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-kakapo-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-wild-turkey-provisional-v1",
+      "sheetId": "wildlife-wild-turkey-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-wild-turkey-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-peacock-provisional-v1",
+      "sheetId": "wildlife-peacock-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-peacock-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -27605,7 +27871,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:941"
+          "source": "src/wildlife/Fauna.ts:942"
         },
         {
           "system": "Gameplay",
@@ -27613,15 +27879,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:9"
+          "source": "src/wildlife/FoodWeb.ts:16"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:87"
+          "source": "src/wildlife/FoodWeb.ts:101"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:244"
+          "source": "src/wildlife/FoodWeb.ts:258"
         }
       ]
     },
@@ -27679,35 +27945,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:17"
+          "source": "src/wildlife/Fauna.ts:18"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:212"
+          "source": "src/wildlife/Fauna.ts:213"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:127"
+          "source": "src/wildlife/FoodWeb.ts:141"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:143"
+          "source": "src/wildlife/FoodWeb.ts:157"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:159"
+          "source": "src/wildlife/FoodWeb.ts:173"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:193"
+          "source": "src/wildlife/FoodWeb.ts:207"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:217"
+          "source": "src/wildlife/FoodWeb.ts:231"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:244"
+          "source": "src/wildlife/FoodWeb.ts:258"
         }
       ]
     },
@@ -27753,19 +28019,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:9"
+          "source": "src/wildlife/FoodWeb.ts:17"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:88"
+          "source": "src/wildlife/FoodWeb.ts:102"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:244"
+          "source": "src/wildlife/FoodWeb.ts:258"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:245"
+          "source": "src/wildlife/FoodWeb.ts:259"
         }
       ]
     },
@@ -27807,7 +28073,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:245"
+          "source": "src/wildlife/FoodWeb.ts:259"
         }
       ]
     },
@@ -27853,7 +28119,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:246"
+          "source": "src/wildlife/FoodWeb.ts:260"
         }
       ]
     },
@@ -27899,7 +28165,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:247"
+          "source": "src/wildlife/FoodWeb.ts:261"
         }
       ]
     },
@@ -27945,7 +28211,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:248"
+          "source": "src/wildlife/FoodWeb.ts:262"
         }
       ]
     },
@@ -28095,11 +28361,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:9"
+          "source": "src/wildlife/FoodWeb.ts:18"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:244"
+          "source": "src/wildlife/FoodWeb.ts:258"
         }
       ]
     },
@@ -28141,11 +28407,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:9"
+          "source": "src/wildlife/FoodWeb.ts:19"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:244"
+          "source": "src/wildlife/FoodWeb.ts:258"
         }
       ]
     },

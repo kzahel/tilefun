@@ -1,0 +1,17 @@
+{
+  "identity": "kakapo-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.3617021276595764,
+    "up": 1.671852176453406,
+    "left": 1.726954177897575,
+    "right": 1.726954177897575
+  },
+  "rootTravelPixelsPerCycle": 11.2,
+  "plantedTravel": true
+}

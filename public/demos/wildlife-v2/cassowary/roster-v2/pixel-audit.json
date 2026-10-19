@@ -1,0 +1,17 @@
+{
+  "identity": "cassowary-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.588235294117645,
+    "up": 1.5873127848925535,
+    "left": 1.6687495737570757,
+    "right": 1.6687495737570757
+  },
+  "rootTravelPixelsPerCycle": 23.04,
+  "plantedTravel": true
+}

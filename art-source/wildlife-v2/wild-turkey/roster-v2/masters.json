@@ -1,0 +1,16 @@
+{
+  "identity": "wild-turkey-roster-v2-pixels-01",
+  "palette": {
+    "K": "#293338",
+    "B": "#66574a",
+    "H": "#967e5e",
+    "C": "#d5bf96",
+    "M": "#947a64",
+    "N": "#232d32",
+    "E": "#c2ad74",
+    "U": "#477d9b",
+    "R": "#ad554c",
+    "T": "#66834f"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}
