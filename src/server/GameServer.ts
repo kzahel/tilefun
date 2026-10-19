@@ -1,4 +1,5 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import { isBoat } from "../boats/Boat.js";
 import {
   applyPlayerModel,
   isPlayerModel,
@@ -7,6 +8,7 @@ import {
 import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
+import { aabbLacksWater, aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
@@ -51,6 +53,8 @@ import { WorldStorePool } from "../persistence/WorldStorePool.js";
 import { setServerPhysicsMult, setServerTickMs } from "../physics/PlayerMovement.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
+import { around } from "./InterestManager.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
 import { type RealmDestination, RealmTransitions } from "./RealmTransitions.js";
@@ -886,6 +890,35 @@ export class GameServer {
               y: saved.player.y / TILE_SIZE,
               generation: realm.generation,
             };
+            // A saved inside driver is supported by the actual durable boat,
+            // rather than standing on the water below it. Explicit travel still
+            // follows ordinary dry-arrival checks and clears the driving seat.
+            if (saved.player.driving) {
+              await realm.ensureReady(
+                around(Math.floor(saved.player.x / 256), Math.floor(saved.player.y / 256), 3),
+              );
+              const boat = realm.entityManager.entities.find(
+                (e) => isBoat(e) && e.proceduralId === saved.player.driving?.identity,
+              );
+              if (
+                boat?.collider &&
+                realm.vehicles.available(boat.id) &&
+                Math.hypot(boat.position.wx - saved.player.x, boat.position.wy - saved.player.y) < 2
+              ) {
+                const bounds = getEntityAABB(boat.position, boat.collider);
+                const collision = (x: number, y: number) => realm.world.getCollisionIfLoaded(x, y);
+                if (
+                  !aabbLacksWater(bounds, collision) &&
+                  !aabbOverlapsSolid(bounds, collision, CollisionFlag.Solid)
+                )
+                  return {
+                    realm,
+                    allowInterior: true,
+                    savedPlayer: saved.player,
+                    returnLocation: saved.player.returnLocation ?? null,
+                  };
+              }
+            }
             const position = await safeArrival(realm, arrival);
             const exact = position.wx === saved.player.x && position.wy === saved.player.y;
             return {

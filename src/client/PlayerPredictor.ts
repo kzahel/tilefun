@@ -1,3 +1,4 @@
+import { BOAT_SEAT_Z, isBoat } from "../boats/Boat.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent, SpriteComponent } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
@@ -1566,7 +1567,10 @@ export class PlayerPredictor {
       this.predicted.position.wy = this.predictedMount.position.wy + this.mountOffsetY;
       // Derive player wz from mount surface + ride offset
       if (this.predictedMount.wz !== undefined && this.predicted.jumpZ !== undefined) {
-        this.predicted.wz = this.predictedMount.wz + this.predicted.jumpZ;
+        this.predicted.wz =
+          this.predictedMount.wz +
+          this.predicted.jumpZ +
+          (isBoat(this.predictedMount) ? BOAT_SEAT_Z : 0);
       }
     } else {
       // ── Normal: apply friction + acceleration from input ──

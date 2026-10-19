@@ -6,6 +6,13 @@ New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
 Updated: 2026-10-19.
 
+[Explorer boats and large lakes](boats.md) add four natural fish schools, four
+other water species and one aquatic hunter per new large lake. Existing water
+refuges and the fixed ownership pools remain unchanged; normal shared habitat,
+hunting and delayed natural-only return rules apply. The zebra inspection point
+now uses a valid clearing under the updated current terrain. Exact animal art
+and completed roster counts remain unchanged.
+
 ## Large predators can eat NPC people
 
 Owner request, 2026-10-19: big predators can eat NPC people, while every

@@ -41,7 +41,8 @@ export class NaturalStrategy extends RailwayStrategy {
         if (
           terrain !== TerrainId.Grass &&
           (this.nature.pondAt(cx * 16 + sx / 2, cy * 16 + sy / 2) ||
-            this.nature.lagoonAt(cx * 16 + sx / 2, cy * 16 + sy / 2))
+            this.nature.lagoonAt(cx * 16 + sx / 2, cy * 16 + sy / 2) ||
+            this.nature.lakeAt(x, y))
         ) {
           chunk.setSubgrid(sx, sy, terrain);
           changed = true;
@@ -67,6 +68,9 @@ export class NaturalStrategy extends RailwayStrategy {
             chunk.setHeight(lx, ly, 0);
           }
       }
+  }
+  boats(cx: number, cy: number) {
+    return this.nature.boats(cx, cy);
   }
   override actors(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };

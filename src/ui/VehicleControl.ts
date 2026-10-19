@@ -1,3 +1,4 @@
+import { isBoat } from "../boats/Boat.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
@@ -82,9 +83,11 @@ export class VehicleControl {
       ? "Get out"
       : candidate && isTrain(candidate)
         ? "Drive train"
-        : bench
-          ? "Call train"
-          : "Drive car";
+        : candidate && isBoat(candidate)
+          ? "Drive boat"
+          : bench
+            ? "Call train"
+            : "Drive car";
     const hint = inputHint("E", "Y");
     const label = `${action}${hint ? ` · ${hint}` : ""}`;
     if (this.button.textContent !== label) this.button.textContent = label;

@@ -1,0 +1,15 @@
+{
+  "headings": 16,
+  "viewport": [
+    128,
+    128
+  ],
+  "actualExportedGlb": true,
+  "sharedGameProjection": true,
+  "noClippedViews": true,
+  "propellerMoves": true,
+  "stats": {
+    "meshes": 42,
+    "drawMeshes": 2
+  }
+}

@@ -1,6 +1,9 @@
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import boatReview from "../../public/demos/original-vehicles/explorer-boat-v1/review.json" with {
+  type: "json",
+};
 import originalVehicles from "../../public/demos/original-vehicles/manifest.json" with {
   type: "json",
 };
@@ -69,8 +72,9 @@ export async function workshopInputDigest(root = ".") {
     "public/demos/original-vehicles/gallery.css",
     "public/demos/original-vehicles/gallery.js",
     "src/workshop/OriginalVehicleCandidates.ts",
+    "public/demos/original-vehicles/explorer-boat-v1/review.json",
   );
-  for (const candidate of originalVehicles.candidates) {
+  for (const candidate of [...originalVehicles.candidates, ...boatReview.candidates]) {
     files.push(...candidate.files.map((file) => `public/${file.url}`));
   }
   files.push(...CHARACTERS.map((c) => `public/${c.image}`));

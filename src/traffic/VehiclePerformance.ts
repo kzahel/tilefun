@@ -1,3 +1,4 @@
+import { isBoat } from "../boats/Boat.js";
 import { originalVehicle } from "./OriginalVehicles.js";
 
 /** Shared gameplay tuning, independent of immutable art/collision snapshots. Units: world px/s. */
@@ -24,6 +25,7 @@ const bus: VehiclePerformance = { speed: 88, acceleration: 120, pushSpeed: 64, p
 const truck: VehiclePerformance = { speed: 80, acceleration: 104, pushSpeed: 72, pushWeight: 600 };
 export const TRAIN_PUSH = { pushSpeed: 80, pushWeight: 1000 };
 export function vehiclePerformance(type: string): VehiclePerformance {
+  if (isBoat({ type })) return { speed: 76, acceleration: 64, pushSpeed: 0, pushWeight: 0 };
   const model = type.replace(/^vehicle-v1:/, "");
   const original = originalVehicle(model);
   if (original) return original.performance;

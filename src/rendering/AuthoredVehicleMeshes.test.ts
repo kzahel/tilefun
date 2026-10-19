@@ -1,7 +1,8 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
+import { BOAT_MESH, BOAT_MODEL } from "../boats/Boat.js";
 import { ORIGINAL_VEHICLES } from "../traffic/OriginalVehicles.js";
-import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { AUTHORED_VEHICLE_MESHES } from "./AuthoredVehicleMeshes.js";
 
 it("registers every source type exactly once and consumes its latest retained export", () => {
@@ -14,10 +15,14 @@ it("registers every source type exactly once and consumes its latest retained ex
     if (!old || Number(bundle.revision.slice(1)) > Number(old.revision.slice(1)))
       latest.set(bundle.assetId, bundle);
   }
-  expect(new Set(AUTHORED_VEHICLE_MESHES.map((d) => d.vehicle))).toEqual(new Set(VEHICLE_MODELS));
-  expect(AUTHORED_VEHICLE_MESHES).toHaveLength(VEHICLE_MODELS.length);
-  expect(new Set(AUTHORED_VEHICLE_MESHES.map((d) => d.assetId)).size).toBe(VEHICLE_MODELS.length);
+  expect(new Set(AUTHORED_VEHICLE_MESHES.map((d) => d.vehicle))).toEqual(new Set(DRIVABLE_MODELS));
+  expect(AUTHORED_VEHICLE_MESHES).toHaveLength(DRIVABLE_MODELS.length);
+  expect(new Set(AUTHORED_VEHICLE_MESHES.map((d) => d.assetId)).size).toBe(DRIVABLE_MODELS.length);
   for (const definition of AUTHORED_VEHICLE_MESHES) {
+    if (definition.vehicle === BOAT_MODEL) {
+      expect(definition).toEqual(BOAT_MESH);
+      continue;
+    }
     const original = ORIGINAL_VEHICLES.find((vehicle) => vehicle.id === definition.vehicle);
     if (original) {
       expect(definition).toEqual({ vehicle: original.id, ...original.mesh });

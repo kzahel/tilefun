@@ -5,7 +5,7 @@ import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { DRIVABLE_MODELS, VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { around } from "./InterestManager.js";
 
@@ -27,9 +27,9 @@ function place(s: ScenarioSession, model = "ambulance", wx = 160, wy = 0) {
   });
   return [...required(s.realm.traffic).states.values()].at(-1);
 }
-it("offers and places every vehicle, including raised fire, in a world with no traffic lanes", async () => {
+it("offers every drivable type and places every road vehicle in a world with no traffic lanes", async () => {
   expect(new Set(VEHICLE_PALETTE.map((e) => e.type))).toEqual(
-    new Set(VEHICLE_MODELS.map((m) => `vehicle-v1:${m}`)),
+    new Set(DRIVABLE_MODELS.map((m) => `vehicle-v1:${m}`)),
   );
   const s = await ScenarioSession.create(recipe());
   try {

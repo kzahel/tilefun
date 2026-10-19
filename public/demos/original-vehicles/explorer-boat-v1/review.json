@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "explorer-boat-v1",
+      "name": "Explorer motorboat",
+      "title": "Explorer motorboat \u00b7 hollow hull and outboard v1",
+      "url": "demos/original-vehicles/explorer-boat-v1/",
+      "files": [
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/audit.json",
+          "sha256": "21be6da9aea7e5e0917d8557c2f364005da85ec60ec5c9eb2a9fabb680af0f7f"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-0.png",
+          "sha256": "b117ec8b827de3c8831e1b9fd52ae961d7db14bb80532e4b12bb38ce8e6321a8"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-1.png",
+          "sha256": "09aed72d22dd26d8f68a2c917c9569285448e8c23d389eae8d53f43f9108bfa1"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-10.png",
+          "sha256": "452745a3d83d3f90d6a9182cac598774f250eea1532a9eb713b1c7099d5053d8"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-11.png",
+          "sha256": "3ddc378dc5089589082d9541a8c9e2c8221784fad6353af3c9ce81308fb28c88"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-12.png",
+          "sha256": "10a0aab26904fa691a9caca6b12c410670cd7aa047c92bfadf13583cfeaea006"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-13.png",
+          "sha256": "9ee65c68233190367fbd03c90148f84b2cf0337799aedcd4e0530be14c6ab295"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-14.png",
+          "sha256": "9ad2a84e6f2842a04953c8695d62953368660d3bb8bda174df2efeaa6fa618e9"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-15.png",
+          "sha256": "4a87bd65174f72d58a6ee907dd9506ccc9f071003dd2ede1770e0fe46bcd56bc"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-2.png",
+          "sha256": "1dbb0116fdba94155e7a48d736ae3a5a33ea0fc429c007f257d8f6fca8c8bc34"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-3.png",
+          "sha256": "38e39c57f258c031742f15585e9ede446ee9a1868b4944c109b46452b43412db"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-4.png",
+          "sha256": "0a862c2e4a2d18c9867e455f44da37ec199b134458a6af56e5702ccf96219bd2"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-5.png",
+          "sha256": "9e6b2d1181751c35a081e10f31de1d698b3ac2fb7a2c745b59164efbb0af6dda"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-6.png",
+          "sha256": "a23316eef06c3588cf53a9c798648b3d4c965d6e7d992e6da36dab2b987b835e"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-7.png",
+          "sha256": "97b253743a2b227c4df33c54957eff2781e10349db46ba8d0a0d1e2c3e82922c"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-8.png",
+          "sha256": "e49d7bd9f9b897a37ebe4ebea3f8d0514b6606630759d718d90d634b6666085e"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/captures/engine-9.png",
+          "sha256": "53293060f51319b12030141e92622962e81a183f3f19a4ad005a1c83d4902003"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/index.html",
+          "sha256": "1e9e45c19f3964acbbcc4e30e75e6cc44ae0a4a42b2e704bbb5df3f7a9ede58e"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/inputs/atlas.png",
+          "sha256": "d8971d1a3912505a9c632087001bf883373232f90b62bd3feff3b95a001ab780"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/inputs/model.glb",
+          "sha256": "6239c017a8b9bf0c3ad9bd7937e1df6786a6d0388fc69066c46d452fd376e788"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/inputs/recipe.json",
+          "sha256": "da811d20cf0564fcb8ed8d55cffbf09658e375860bb0d199890f8dcb015ab410"
+        },
+        {
+          "url": "demos/original-vehicles/explorer-boat-v1/viewer.js",
+          "sha256": "629b416e0df6ba9747208025df5b9f87a13f43e70d4333fe87244c800750f256"
+        }
+      ]
+    }
+  ]
+}

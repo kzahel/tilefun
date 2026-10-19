@@ -1,5 +1,9 @@
 # Asset Sources
 
+Explorer motorboat v1 is original Tilefun Blender geometry and palette UV paint.
+Its hull, seating, helm and outboard use no third-party vehicle artwork.
+Editable source and provenance: `art-source/vehicle-models/explorer-boat/v1/`.
+
 Base player and animal sprites by Cup Nooble (Sprout Lands asset pack).
 
 Additional interior art from LimeZu Modern Interiors. Credit required:

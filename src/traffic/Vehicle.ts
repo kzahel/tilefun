@@ -1,19 +1,22 @@
 import { required } from "../art/ArtCatalog.js";
+import { BOAT_MODEL, BOAT_VIEWS } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import bank from "./vehicles-v1.json" with { type: "json" };
 
 export const VEHICLE_BANK = bank;
-const views = [...bank.views, ...ORIGINAL_VEHICLES.flatMap((vehicle) => vehicle.views)];
-export const VEHICLE_MODELS = [...new Set(views.map((v) => v.vehicleId))];
+const roadViews = [...bank.views, ...ORIGINAL_VEHICLES.flatMap((vehicle) => vehicle.views)];
+const views = [...roadViews, ...BOAT_VIEWS];
+export const VEHICLE_MODELS = [...new Set(roadViews.map((v) => v.vehicleId))];
+export const DRIVABLE_MODELS = [...VEHICLE_MODELS, BOAT_MODEL];
 export const TRAFFIC_MODELS = VEHICLE_MODELS.filter((id) => id !== "fire-truck-ladder-2");
 const directions = ["south", "north", "west", "east"];
 const viewsByKey = new Map(views.map((v) => [`vehicle-v1:${v.vehicleId}:${v.direction}`, v]));
 // Longer bodies need more room to turn. Use retained vehicle footprints,
 // independent of the currently selected cardinal sprite and rendering backend.
 const turningRadii = new Map(
-  VEHICLE_MODELS.map((id) => [
+  DRIVABLE_MODELS.map((id) => [
     `vehicle-v1:${id}`,
     Math.max(
       40,
@@ -40,7 +43,7 @@ export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "spri
   }
 }
 const roofSizes = new Map(
-  VEHICLE_MODELS.map((id) => [
+  DRIVABLE_MODELS.map((id) => [
     id,
     Math.max(
       0,
@@ -53,7 +56,7 @@ const roofSizes = new Map(
   ]),
 );
 const roadWidths = new Map(
-  VEHICLE_MODELS.map((model) => [
+  DRIVABLE_MODELS.map((model) => [
     model,
     Math.max(
       ...views
@@ -117,7 +120,7 @@ export function applyVehicleFacing(
   }
 }
 export const VEHICLE_DEFS: Record<string, EntityDef> = Object.fromEntries(
-  VEHICLE_MODELS.map((id) => [
+  DRIVABLE_MODELS.map((id) => [
     `vehicle-v1:${id}`,
     {
       sprite: {

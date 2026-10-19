@@ -1,0 +1,328 @@
+{
+  "revision": "explorer-boat-v1",
+  "authoring": "Original semantic geometry and palette UVs; hollow hull with actual inner walls/floor, attached gunwales, benches, console and independently rotating outboard propeller. No wheel rig or car geometry.",
+  "axes": {
+    "forward": "Blender -X",
+    "up": "Blender +Z",
+    "waterline": 0
+  },
+  "palette": {
+    "hull": "e77137",
+    "hullLight": "f5964b",
+    "hullDark": "a9402f",
+    "cream": "f1dfb6",
+    "creamShade": "c4ad86",
+    "deck": "b48b5c",
+    "deckDark": "806142",
+    "navy": "293e59",
+    "blue": "50778a",
+    "silver": "a6b8bd",
+    "white": "fff1d8",
+    "red": "cd554a",
+    "ink": "34364c"
+  },
+  "components": [
+    {
+      "name": "Boat_Hull",
+      "triangles": 104,
+      "paletteRoles": [
+        "cream",
+        "creamShade",
+        "deckDark",
+        "hull",
+        "hullDark",
+        "hullLight"
+      ]
+    },
+    {
+      "name": "Interior floor plank 0",
+      "triangles": 12,
+      "paletteRoles": [
+        "creamShade"
+      ]
+    },
+    {
+      "name": "Interior floor plank 1",
+      "triangles": 12,
+      "paletteRoles": [
+        "deck"
+      ]
+    },
+    {
+      "name": "Interior floor plank 2",
+      "triangles": 12,
+      "paletteRoles": [
+        "creamShade"
+      ]
+    },
+    {
+      "name": "Interior floor plank 3",
+      "triangles": 12,
+      "paletteRoles": [
+        "deck"
+      ]
+    },
+    {
+      "name": "Interior floor plank 4",
+      "triangles": 12,
+      "paletteRoles": [
+        "creamShade"
+      ]
+    },
+    {
+      "name": "Interior floor plank 5",
+      "triangles": 12,
+      "paletteRoles": [
+        "deck"
+      ]
+    },
+    {
+      "name": "Interior floor plank 6",
+      "triangles": 12,
+      "paletteRoles": [
+        "creamShade"
+      ]
+    },
+    {
+      "name": "Continuous cream gunwale -1",
+      "triangles": 68,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Painted blue side stripe -1",
+      "triangles": 36,
+      "paletteRoles": [
+        "navy"
+      ]
+    },
+    {
+      "name": "White side fender -1 -9",
+      "triangles": 28,
+      "paletteRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "White side fender -1 16",
+      "triangles": 28,
+      "paletteRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Continuous cream gunwale 1",
+      "triangles": 68,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Painted blue side stripe 1",
+      "triangles": 36,
+      "paletteRoles": [
+        "navy"
+      ]
+    },
+    {
+      "name": "White side fender 1 -9",
+      "triangles": 28,
+      "paletteRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "White side fender 1 16",
+      "triangles": 28,
+      "paletteRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Bow flotation deck",
+      "triangles": 44,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Rear bench",
+      "triangles": 44,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Driver bench",
+      "triangles": 44,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Driver backrest",
+      "triangles": 44,
+      "paletteRoles": [
+        "creamShade"
+      ]
+    },
+    {
+      "name": "Helm pedestal",
+      "triangles": 44,
+      "paletteRoles": [
+        "navy"
+      ]
+    },
+    {
+      "name": "Helm console",
+      "triangles": 44,
+      "paletteRoles": [
+        "blue"
+      ]
+    },
+    {
+      "name": "Steering wheel",
+      "triangles": 166,
+      "paletteRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Steering stem",
+      "triangles": 20,
+      "paletteRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Outboard engine",
+      "triangles": 44,
+      "paletteRoles": [
+        "navy"
+      ]
+    },
+    {
+      "name": "Outboard cap",
+      "triangles": 44,
+      "paletteRoles": [
+        "blue"
+      ]
+    },
+    {
+      "name": "Outboard leg",
+      "triangles": 44,
+      "paletteRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Boat_Propeller",
+      "triangles": 12,
+      "paletteRoles": [
+        "navy"
+      ]
+    },
+    {
+      "name": "Bow mooring cleat -1",
+      "triangles": 32,
+      "paletteRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Bow mooring cleat 1",
+      "triangles": 32,
+      "paletteRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 0",
+      "triangles": 16,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 1",
+      "triangles": 16,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 2",
+      "triangles": 16,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 3",
+      "triangles": 16,
+      "paletteRoles": [
+        "red"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 4",
+      "triangles": 16,
+      "paletteRoles": [
+        "red"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 5",
+      "triangles": 16,
+      "paletteRoles": [
+        "red"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 6",
+      "triangles": 16,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 7",
+      "triangles": 16,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 8",
+      "triangles": 16,
+      "paletteRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 9",
+      "triangles": 16,
+      "paletteRoles": [
+        "red"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 10",
+      "triangles": 16,
+      "paletteRoles": [
+        "red"
+      ]
+    },
+    {
+      "name": "Flotation ring segment 11",
+      "triangles": 16,
+      "paletteRoles": [
+        "red"
+      ]
+    }
+  ],
+  "source": "Editable packed Blender source; runtime-topology master, no high-to-low transfer claim.",
+  "reviewStatus": "pending-human-review",
+  "replay": "Blender --background --python build.py -- --output REPLAY_DIRECTORY"
+}

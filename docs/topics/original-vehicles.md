@@ -4,6 +4,12 @@ Topic: original-vehicles
 Status: red coupe, Beetle and school bus integrated; pickup v1 delivered for appearance review.
 Updated: 2026-10-19.
 
+The owner separately authorized an original **explorer motorboat** and working
+lake gameplay in [152](../tactical/152-explorer-boat-and-lakes.md). Its independent
+hollow-hull Blender/UV source and zero-wheel outboard rig do not change the car
+queue, the 45 source ports or the three accepted road originals. [Boats](boats.md)
+owns its runtime, exact pending review and water generation.
+
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
 pixel-style transfer, low-poly deliverables, reusable authoring instructions and
 the expansion backlog. [Vehicle porting](vehicle-model-porting.md) continues to
@@ -17,8 +23,8 @@ spawning, normal road traffic and shared game/lab own-mesh presentation. The exa
 reviewed GLB and native cardinal fallback are retained. Conservative 122×43×44px
 bounds require 98px roads; handling is 78px/s with 100px/s² acceleration. The combined
 roster is 48 types/47 ordinary traffic types; the source bank remains 45 types/180 views.
-Pickup authoring follows directly under [151](../tactical/151-pickup-pipeline-review.md).
-Its appearance review precedes any pickup gameplay activation.
+Pickup authoring/review is recorded under [151](../tactical/151-pickup-pipeline-review.md).
+The owner likes its appearance; gameplay activation remains pending.
 
 The owner prefers [141](../tactical/141-sports-car-style-experiments.md)'s approach 3,
 especially characteristic outer and internal outlines. [142](../tactical/142-red-car-low-poly-pipeline.md)
@@ -125,8 +131,14 @@ support, real bed-floor triangle rays, source-only replay and all 32 study/game
 views pass; visual inspection is separate from those geometric proofs.
 [151](../tactical/151-pickup-pipeline-review.md) owns the frozen review and retained
 source. Open `data/vehicle-bake/pickup-review.html` for standalone inspection.
-Pickup gameplay activation awaits owner appearance feedback. The remaining four
-queue entries are proposals and have not started.
+The owner subsequently said “Looks great” about the pickup; runtime integration
+remains pending. The brainstorming backlog now contains 36 future vehicle ideas,
+covering everyday cars, open racers, leisure vehicles, mobile shops, working
+trucks, machinery and motorcycles. These remain ideas; no new vehicle production
+has started. Six standalone motorcycle/scooter styles join the existing sidecar:
+classic street, sport, cruiser, dirt, touring and retro scooter. Their two-wheel
+geometry, wheel rigs and rider pose need their own authoring contract rather than
+inheriting a four-wheel car template; the sidecar has a separate three-wheel layout.
 
 ## Pipeline invariants
 

@@ -13,6 +13,10 @@ at each authoring, retention, integration or review checkpoint.
 [vehicles](vehicles.md) owns traffic, driving and physical geometry;
 [rendering architecture](rendering-architecture.md) owns engine interfaces.
 
+The new [explorer motorboat](boats.md) is an independent original watercraft,
+with its own packed source, GLB and game-camera fallback. It is outside the
+45-type road-port queue and does not alter these completion counts.
+
 ## Scope and status
 
 Original vehicles beyond the source bank have their own

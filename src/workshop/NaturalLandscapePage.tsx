@@ -3,6 +3,7 @@ import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { FootstepSystem } from "../audio/FootstepSystem.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
+import { isBoat } from "../boats/Boat.js";
 import {
   LANDSCAPE_PROFILES,
   landscapeLabel,
@@ -68,7 +69,7 @@ export default function NaturalLandscapePage() {
             ? 0.25
             : ["village-pets", "city-pets", "city-center"].includes(caseId)
               ? 0.3
-              : caseId === "pond"
+              : ["pond", "lake"].includes(caseId)
                 ? 0.4
                 : 0.8),
     ),
@@ -147,7 +148,7 @@ export default function NaturalLandscapePage() {
     setPaused(false);
     keys.current.clear();
     const h = new ScenarioPresentationHost(c, recipe, {
-      ...(caseId === "racetrack" ? { defaultRenderer: "gpu-mesh" as const } : {}),
+      ...(["racetrack", "lake"].includes(caseId) ? { defaultRenderer: "gpu-mesh" as const } : {}),
       width: 960,
       height: 640,
       terrain: true,
@@ -397,6 +398,16 @@ export default function NaturalLandscapePage() {
           Math.max(Number(c.dataset.playerMaxVz ?? 0), view.serverPlayerEntity.jumpVZ ?? 0),
         );
         c.dataset.playerZ = String(view.serverPlayerEntity.wz ?? 0);
+        c.dataset.playerParent = String(view.serverPlayerEntity.parentId ?? -1);
+        c.dataset.boatPoses = JSON.stringify(
+          view.serverEntities.filter(isBoat).map((e) => ({
+            id: e.id,
+            x: e.position.wx,
+            y: e.position.wy,
+            z: e.wz ?? 0,
+            heading: e.vehicleHeading,
+          })),
+        );
         const diagnostics = h.getDiagnostics();
         c.dataset.authorityRunning = String(diagnostics.authority.clock?.running ?? false);
         c.dataset.terrainPending = String(diagnostics.terrain?.pending ?? -1);
@@ -467,7 +478,7 @@ export default function NaturalLandscapePage() {
             ? 0.25
             : ["village-pets", "city-pets", "city-center"].includes(nextCase)
               ? 0.3
-              : nextCase === "pond"
+              : ["pond", "lake"].includes(nextCase)
                 ? 0.4
                 : 0.8),
     );
@@ -605,7 +616,9 @@ export default function NaturalLandscapePage() {
         )}
       </div>
       <p>
-        {caseId === "racetrack" ? (
+        {caseId === "lake" ? (
+          "Large wildlife lake · E beside the motorboat to board; Arrows/WASD steer, R reverses. Return beside a clear shore to get out. Fish schools and varied water animals use the same AI as the game."
+        ) : caseId === "racetrack" ? (
           "City outskirts speedway · Eight cars race around the oval. Walk to the spectator seating, picnic area or track; cars stop for people. Use Arrows/WASD to walk, Space to jump, and E beside a stopped car to drive."
         ) : predatorCase ? (
           "Hunting playground · Arrows/WASD to walk, Space to jump. Eaten natural animals return after 60–120 seconds, far from the meal and away from players. Animals you place stay gone when eaten. Throw a ball in the game to interrupt a hunt."

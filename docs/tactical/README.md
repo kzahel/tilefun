@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [152 Explorer boat and lakes](152-explorer-boat-and-lakes.md) | Implemented and validated: drivable boat, shore moorings, large lakes and varied water wildlife; appearance pending review |
 | [151 Pickup pipeline review](151-pickup-pipeline-review.md) | Delivered for review: 2,984-triangle teal pickup, real open bed and own-family semantic UV paint; [original vehicles](../topics/original-vehicles.md) |
 | [150 School bus gameplay](150-school-bus-gameplay.md) | Delivered: owner-approved bus spawning, suitable road traffic and exact model/fallback; [original vehicles](../topics/original-vehicles.md) |
 | [149 School bus pipeline review](149-school-bus-pipeline-review.md) | Delivered for review: 2,564-triangle school bus, side-owned paint and fixed-pixel larger-viewport review; [original vehicles](../topics/original-vehicles.md) |

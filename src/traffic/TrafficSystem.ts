@@ -1,4 +1,5 @@
 import { required } from "../art/ArtCatalog.js";
+import { BOAT_MODEL, type BoatPlacement } from "../boats/Boat.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
   type AABB,
@@ -38,14 +39,15 @@ import { commitVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 export interface TrafficRouteSource {
   trafficNetwork(wx: number, wy: number): LaneGraph;
   shoppingCenters?(wx: number, wy: number): readonly ShoppingCenter[];
+  boats?(cx: number, cy: number): readonly BoatPlacement[];
 }
 
 import {
   applyVehicleFacing,
   createVehicle,
+  DRIVABLE_MODELS,
   isVehicle,
   TRAFFIC_MODELS,
-  VEHICLE_MODELS,
   vehicleRoadWidth,
   vehicleView,
 } from "./Vehicle.js";
@@ -204,7 +206,7 @@ export class TrafficSystem {
   /** Editor placement uses the same full-body dry-ground checks as driving. */
   place(model: string, wx: number, wy: number, facing = Direction.Right): TrafficState | undefined {
     if (
-      !VEHICLE_MODELS.includes(model) ||
+      !DRIVABLE_MODELS.includes(model) ||
       ![Direction.Up, Direction.Down, Direction.Left, Direction.Right].includes(facing) ||
       this.states.size >= 1024 ||
       ![wx, wy].every(Number.isFinite) ||
@@ -258,6 +260,46 @@ export class TrafficSystem {
     state.waiting = "parked";
     this.onChange?.(state, false);
     return state;
+  }
+  /** Stable natural moorings use the same durable holders/tombstones as parked cars. */
+  private populateBoats(): void {
+    if (!this.strategy.boats) return;
+    const seen = new Set<string>();
+    for (const range of this.visibleRanges)
+      for (let cy = range.minCy; cy <= range.maxCy; cy++)
+        for (let cx = range.minCx; cx <= range.maxCx; cx++)
+          for (const p of this.strategy.boats(cx, cy)) {
+            if (seen.has(p.identity) || this.states.size >= 1024) continue;
+            seen.add(p.identity);
+            if (
+              [...this.states.values()].some((s) => s.entity.proceduralId === p.identity) ||
+              !this.canSpawn(p.identity, p.wx, p.wy)
+            )
+              continue;
+            const e = createVehicle(BOAT_MODEL, p.wx, p.wy, Direction.Left);
+            e.id = -1;
+            if (
+              !drivenCarPose(
+                e,
+                { dx: 0, dy: 0 },
+                1 / 60,
+                this.world,
+                this.props.props,
+                this.entities.entities,
+                this.drivingQueries,
+              )
+            )
+              continue;
+            const s = this.add(BOAT_MODEL, placementLane(p.identity, p.wx, p.wy), 0, false, {
+              x: p.wx,
+              y: p.wy,
+              direction: Direction.Left,
+            });
+            s.entity.proceduralId = p.identity;
+            s.placed = s.parked = true;
+            s.waiting = "moored";
+            this.onChange?.(s, false);
+          }
   }
   private network(s: TrafficState): LaneGraph {
     return this.strategy.trafficNetwork(s.entity.position.wx, s.entity.position.wy);
@@ -643,6 +685,7 @@ export class TrafficSystem {
     this.time += dt;
     this.spawnClock -= dt;
     if (this.spawnClock <= 0) {
+      this.populateBoats();
       this.populateRacers(players);
       this.populateShopping();
       this.populate(players);
@@ -989,7 +1032,7 @@ export class TrafficSystem {
     return records.flatMap((r) => {
       if (identities.has(r.identity)) return [];
       if (
-        !VEHICLE_MODELS.includes(r.model) ||
+        !DRIVABLE_MODELS.includes(r.model) ||
         ![
           r.wz ?? 0,
           r.wx ?? r.x,
@@ -1019,7 +1062,10 @@ export class TrafficSystem {
         throw new Error("Invalid placed vehicle state.");
       if (
         r.placed &&
-        (!r.identity.startsWith("placed-vehicle-v1:") ||
+        (!(
+          r.identity.startsWith("placed-vehicle-v1:") ||
+          (r.model === BOAT_MODEL && /^lake-boat:[-0-9]+:[-0-9]+:[-0-9]+$/.test(r.identity))
+        ) ||
           r.laneId !== r.identity ||
           !r.parked ||
           r.nextId !== null ||

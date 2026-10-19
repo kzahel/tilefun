@@ -78,6 +78,15 @@ each other; paused reload checks retain model and position matching.
 
 ## Exact review scenes and asset banks
 
+[Large wildlife lakes](boats.md) add an independent 512-tile ownership bank to
+the current natural generator. Admission preserves infrastructure and existing
+ponds/lagoons; realization, map sampling, wildlife and shore boats use the same
+coordinate-addressable plan. Lakes include broad deep interiors, shallow shores,
+a clear boarding beach, varied aquatic actors and a durable natural mooring.
+The fixed 17/169/42 animal ownership arrays remain unchanged. New terrain can
+relocate land clearings; the zebra lab inspection now selects another valid
+natural owner. This follows the existing fresh/same-seed recreation policy.
+
 Review approval remains tied to exact candidate identities. The twenty existing city
 views (3 dense, 4 commercial, 3 parking, 4 parks, 3 architecture, 3 pedestrians) are
 finite snapshots in `src/art/city-review-snapshots-v1.json`: plans, props, initial actor

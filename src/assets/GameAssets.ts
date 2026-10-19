@@ -1,11 +1,12 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import { BOAT_MODEL, BOAT_SPRITE } from "../boats/Boat.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
 import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { originalVehicle } from "../traffic/OriginalVehicles.js";
-import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FIERCE_DENS } from "../wildlife/FierceDens.js";
@@ -82,9 +83,12 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
     w: c.frameSize,
     h: c.frameSize,
   })),
-  ...VEHICLE_MODELS.map((id) => ({
+  ...DRIVABLE_MODELS.map((id) => ({
     key: `vehicle-v1:${id}`,
-    path: originalVehicle(id)?.sprite ?? `assets/vehicles/${id}-v1.png`,
+    path:
+      id === BOAT_MODEL
+        ? BOAT_SPRITE
+        : (originalVehicle(id)?.sprite ?? `assets/vehicles/${id}-v1.png`),
     w: 192,
     h: 224,
   })),

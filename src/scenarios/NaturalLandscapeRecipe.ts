@@ -19,6 +19,13 @@ import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  {
+    id: "lake",
+    name: "Large lake · motorboat & water wildlife",
+    seed: 2026,
+    x: 812.9465317726135,
+    y: -907.1952428035438,
+  },
   { id: "wolf-pack", name: "Dire wolves · coordinated pack", seed: 1, x: 4, y: 4 },
   { id: "food-web-natural", name: "Food web · natural population", seed: 1, x: 4, y: 4 },
   { id: "food-web-placed", name: "Food web · player-created population", seed: 1, x: 4, y: 4 },
@@ -66,6 +73,20 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "lake" && !at) {
+    const lake = new NaturalLandscape(regionalWorld(2026), profile).lake(1, -2);
+    if (!lake) throw Error("Missing boat lake");
+    return {
+      version: 1,
+      id: `nature-lake-${profile}-v1`,
+      generation: createDescriptor("regional", 2026),
+      landscape: profile,
+      player: createPlayer(lake.x * 16, (lake.y - lake.ry) * 16 - 20),
+      props: [],
+      traffic: [],
+      trafficPopulation: true,
+    };
+  }
   if (!at && ["wolf-pack", "food-web-natural", "food-web-placed"].includes(id)) {
     const pack = [
       createPredator("dire-wolf", 64, 64),

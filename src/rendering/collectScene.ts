@@ -1,3 +1,4 @@
+import { isBoat } from "../boats/Boat.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
@@ -108,7 +109,9 @@ export function collectScene(
 
   const poseTime = frame?.presentationTime ?? 0;
   frame?.meshPoses.retain(entities);
-  const insideParents = new Set(entities.filter(isDrivable).map((e) => e.id));
+  const insideParents = new Set(
+    entities.filter((e) => isDrivable(e) && !isBoat(e)).map((e) => e.id),
+  );
   // --- Entities ---
   for (const e of entities) {
     if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
@@ -173,7 +176,9 @@ export function collectScene(
       continue;
 
     // Shadow parameters
-    const hasShadow = !e.flashHidden && !e.noShadow;
+    const boatParent =
+      e.parentId === undefined ? undefined : entities.find((p) => p.id === e.parentId && isBoat(p));
+    const hasShadow = !boatParent && !e.flashHidden && !e.noShadow;
     const col = e.collider;
     const shadowWidth = col ? col.width : e.sprite.spriteWidth * 0.6;
     const shadowFeetWy = pos.wy + (col ? col.offsetY : (e.sortOffsetY ?? 0));
@@ -189,12 +194,16 @@ export function collectScene(
         : terrainZ;
 
     // Sort key
-    const sortKey = depthAboveProps(
-      pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR,
-      e.collider ? getEntityAABB(pos, e.collider) : null,
-      zOffset,
-      depthSurfaces,
-    );
+    const sortKey = boatParent
+      ? interpolatePosition(boatParent.position, boatParent.prevPosition, alpha).wy +
+        (boatParent.sortOffsetY ?? 0) +
+        0.1
+      : depthAboveProps(
+          pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR,
+          e.collider ? getEntityAABB(pos, e.collider) : null,
+          zOffset,
+          depthSurfaces,
+        );
 
     const mesh =
       frame?.meshPoses.evaluate(e, poseTime, pos) ??

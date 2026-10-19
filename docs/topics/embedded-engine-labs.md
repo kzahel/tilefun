@@ -58,6 +58,14 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Animal browser and natural return timing
 
+[152](../tactical/152-explorer-boat-and-lakes.md) adds the large-lake boat case
+through the same natural generator, vehicle authority, rolling prediction,
+water-only swept-body collision, open driver presentation and saved traffic
+records used in the game. Boats are explicitly excluded from road populations.
+The shared mesh loader validates an authored zero-wheel watercraft rig and its
+independent propeller; cardinal fallback remains available on Canvas and while
+meshes load or fail. Driver seat height is shared by authority and prediction.
+
 The Natural Landscape page now includes the sortable/searchable animal browser.
 Its visible animated cards read ordinary shared sprite definitions; selecting an
 animal switches the existing ScenarioPresentationHost fixture. There is one

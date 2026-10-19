@@ -1,4 +1,6 @@
+import { isBoat } from "../boats/Boat.js";
 import {
+  aabbLacksWater,
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
   aabbsOverlap,
@@ -81,7 +83,7 @@ export function drivenCarPose(
     (reverse ? 1 : length * scale);
   const old = car.velocity ?? { vx: 0, vy: 0 };
   const oldSpeed = old.vx * Math.cos(heading) + old.vy * Math.sin(heading);
-  const acceleration = (length || reverse ? performance.acceleration : 448) * dt;
+  const acceleration = (length || reverse ? performance.acceleration : isBoat(car) ? 48 : 448) * dt;
   let speed = oldSpeed + Math.max(-acceleration, Math.min(acceleration, targetSpeed - oldSpeed));
   if (contactSpeed !== undefined) speed = Math.max(-contactSpeed, Math.min(contactSpeed, speed));
   const distance = speed * dt;
@@ -111,8 +113,20 @@ export function drivenCarPose(
     vehicleHeading: nose,
   };
   applyVehicleFacing(next, facing(Math.cos(nose), Math.sin(nose), previous));
-  if (!checkedCarPose(car, next, dt, world, props, entities, queries, pushes !== undefined)) return;
-  if (pushes) {
+  if (
+    !checkedCarPose(
+      car,
+      next,
+      dt,
+      world,
+      props,
+      entities,
+      queries,
+      pushes !== undefined && !isBoat(car),
+    )
+  )
+    return;
+  if (pushes && !isBoat(car)) {
     const plan = planVehiclePushes(
       [{ before: car, after: next }],
       dt,
@@ -202,10 +216,11 @@ function checkedCarPose(
     aabbOverlapsSolid(
       swept,
       (x, y) => world.getCollisionIfLoaded(x, y),
-      CollisionFlag.Solid | CollisionFlag.Water,
+      isBoat(car) ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water,
     )
   )
     return;
+  if (isBoat(car) && aabbLacksWater(swept, (x, y) => world.getCollisionIfLoaded(x, y))) return;
   queries ??= drivingQueries(props);
   // Include offset feet outside the collider as well as both cardinal poses.
   const bounds = {

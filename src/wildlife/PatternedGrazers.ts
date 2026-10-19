@@ -10,7 +10,7 @@ export const PATTERNED_GRAZER_PROFILES: readonly FaunaProfile[] = [
     sha256: "a097f5f1bd2e15e6d852c3a816555aae49a6865a1d81594775aab6dacae4b69e",
     size: 64,
     anchor: [32, 48],
-    inspection: [869, -805],
+    inspection: [1310, 1434],
     clips: [
       {
         name: "idle",

@@ -1779,6 +1779,75 @@ it.each(["butcher", "condo-bay"])(
   },
 );
 
+it("resumes an available saved boat seat over water, while explicit travel returns to shore", async () => {
+  const setup = await createTestSetup();
+  const profile = { profileId: "boat-driver", displayName: "Boat driver" };
+  let server = setup.server;
+  try {
+    setup.transport.connect("local", profile);
+    await server.settle();
+    const generation = createDescriptor("regional", 2026);
+    const meta = await setup.registry.createWorld(
+      "Boat lake",
+      undefined,
+      undefined,
+      undefined,
+      generation,
+    );
+    const arrival = { x: 812.9465317726135, y: -907.1952428035438, generation };
+    await server.loadWorld(meta.id, arrival);
+    const session = server.getLocalSession();
+    server.updateVisibleChunks(session.visibleRange);
+    for (
+      let i = 0;
+      i < 130 && !server.entityManager.entities.some((e) => e.type === "vehicle-v1:explorer-boat");
+      i++
+    )
+      server.tick(1 / 60);
+    const boat = server.entityManager.entities.find((e) => e.type === "vehicle-v1:explorer-boat");
+    if (!boat) throw Error("Missing natural boat");
+    session.editorEnabled = false;
+    setup.transport.clientSend("local", {
+      type: "enter-vehicle",
+      requestId: 15001,
+      entityId: boat.id,
+    });
+    await server.settle();
+    expect(session.player.parentId).toBe(boat.id);
+    for (let i = 0; i < 140; i++) {
+      setup.transport.clientSend("local", {
+        type: "player-input",
+        seq: i + 1,
+        dtMs: 16.67,
+        dx: 0,
+        dy: i < 100 ? 1 : 0,
+        jump: false,
+        sprinting: false,
+      });
+      server.tick(1 / 60);
+    }
+    await server.flushAsync();
+    const position = { ...boat.position };
+    await server.destroy();
+    const transport = new TestTransport();
+    server = new GameServer(transport, {
+      registry: setup.registry,
+      createStore: setup.createStore,
+    });
+    await server.init();
+    transport.connect("local", profile);
+    await server.settle();
+    expect(server.getLocalSession().player.parentId).toBeDefined();
+    expect(server.getLocalSession().player.position).toEqual(position);
+    expect(server.getLocalSession().player.wz).toBe(8);
+    await server.loadWorld(meta.id, arrival);
+    expect(server.getLocalSession().player.parentId).toBeUndefined();
+    expect(server.getLocalSession().player.wz).toBe(0);
+  } finally {
+    await server.destroy();
+  }
+}, 30000);
+
 it("resumes a saved procedural train roof, while explicit travel returns to ground", async () => {
   const setup = await createTestSetup();
   const profile = { profileId: "train-rider", displayName: "Train rider" };

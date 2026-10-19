@@ -1,3 +1,4 @@
+import { BOAT_SEAT_Z, isBoat } from "../boats/Boat.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -207,7 +208,12 @@ export class VehicleControl {
     if (!vehicle) return;
     this.stop(session);
     const placement = this.exitPlacement(session.player, vehicle);
-    if (!placement && !forced) throw Error("No clear place to get out. Move somewhere open first.");
+    if (!placement && !forced)
+      throw Error(
+        isBoat(vehicle)
+          ? "Move beside a clear shore to get out."
+          : "No clear place to get out. Move somewhere open first.",
+      );
     const car = this.realm.traffic?.states.get(vehicle.id);
     if (car) this.realm.traffic?.releaseControl(car, !forced);
     const train = [...(this.realm.railway?.services.values() ?? [])].find(
@@ -270,7 +276,12 @@ export class VehicleControl {
         this.honk(session, false);
       const p = session.player;
       p.position = { ...vehicle.position };
-      p.wz = p.groundZ = vehicle.wz ?? 0;
+      p.wz = p.groundZ = (vehicle.wz ?? 0) + (isBoat(vehicle) ? BOAT_SEAT_Z : 0);
+      if (isBoat(vehicle) && p.sprite && vehicle.sprite) {
+        p.sprite.direction = vehicle.sprite.direction;
+        p.sprite.frameRow = vehicle.sprite.direction;
+        p.sprite.moving = false;
+      }
       p.jumpZ = 0;
       this.realm.entityManager.spatialHash.update(p);
     }

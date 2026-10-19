@@ -23,6 +23,7 @@ import { TrafficTestHarness } from "./TrafficTestHarness.js";
 import {
   applyVehicleFacing,
   createVehicle,
+  DRIVABLE_MODELS,
   TRAFFIC_MODELS,
   VEHICLE_BANK,
   VEHICLE_MODELS,
@@ -162,7 +163,7 @@ it("registers every combined model exactly once across editor, assets, traffic a
   );
   expect(new Set(VEHICLE_MODELS).size).toBe(VEHICLE_MODELS.length);
   expect(TRAFFIC_MODELS).toHaveLength(VEHICLE_MODELS.length - 1);
-  expect(AUTHORED_VEHICLE_MESHES).toHaveLength(VEHICLE_MODELS.length);
+  expect(AUTHORED_VEHICLE_MESHES).toHaveLength(DRIVABLE_MODELS.length);
   for (const model of VEHICLE_MODELS) {
     const type = `vehicle-v1:${model}`;
     expect(VEHICLE_PALETTE.filter((entry) => entry.type === type)).toHaveLength(1);

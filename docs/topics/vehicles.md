@@ -4,6 +4,12 @@ Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
 Updated: 2026-10-19.
 
+[Boats](boats.md) adds an original explorer motorboat through shared driving,
+boarding, prediction, records and presentation. It uses water-only motion and
+natural lake moorings, and is excluded from the unchanged road vehicle catalog
+and automatic road routing. The drivable/editor catalog has 48 road types plus
+one boat. [152](../tactical/152-explorer-boat-and-lakes.md) owns this slice.
+
 The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversion
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
 This is separate from the approved sprite bank and vehicle gameplay behavior.

@@ -71,6 +71,11 @@ and acceptance details.
 
 ## Features
 
+Regional worlds now include large wildlife lakes with an explorer motorboat
+beside the northern shore. Press **E / Drive boat** to board, steer with ordinary
+vehicle controls, and return beside a clear shore to get out. Boats are also in
+**Edit → Vehicles**. [Boat controls and lake generation](docs/topics/boats.md).
+
 The game defaults to **GPU + 3D car**: the existing fixed game view rendered with
 WebGL2, with all 45 authored vehicle models: compact cars, sedans, buses, police,
 ambulance, firetrucks and garbage trucks. Models load as needed; sprites remain

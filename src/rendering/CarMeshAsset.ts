@@ -35,6 +35,8 @@ export class CarMeshAsset {
   /** Compiled draw meshes; meshCount retains the authored source-part count. */
   readonly drawMeshCount: number;
   private lights?: VehicleEmergencyLights;
+  private propeller?: THREE.Object3D;
+  private propellerRest?: THREE.Quaternion;
   constructor(scene: THREE.Group, lateralScale = 1.3, options?: CarMeshAssetOptions) {
     let meshes = 0;
     scene.traverse((node) => {
@@ -66,8 +68,18 @@ export class CarMeshAsset {
         if (!id || rolls.has(id)) throw Error(`Duplicate authored car wheel ${id}`);
         rolls.set(id, node);
       });
-      for (const id of ["FL", "FR", "RL", "RR"])
-        if (!rolls.has(id)) throw Error(`Missing authored car wheel ${id}`);
+      const boat = scene.getObjectByName("Boat_Root");
+      if (boat?.userData.tilefun_watercraft === 1) {
+        if (rolls.size || !scene.getObjectByName("Boat_Hull"))
+          throw Error("Invalid authored boat rig");
+        const propeller = scene.getObjectByName("Boat_Propeller");
+        if (!propeller) throw Error("Missing authored boat propeller");
+        this.propeller = propeller;
+        this.propellerRest = this.propeller.quaternion.clone();
+      } else {
+        for (const id of ["FL", "FR", "RL", "RR"])
+          if (!rolls.has(id)) throw Error(`Missing authored car wheel ${id}`);
+      }
       for (const [id, roll] of rolls) {
         const steer = scene.getObjectByName(`Wheel_${id}_Steer`);
         const radius: unknown = roll?.userData.wheel_radius;
@@ -149,6 +161,10 @@ export class CarMeshAsset {
   }
   /** Absolute pose per draw: a shared resource never carries another car's phase. */
   setTravel(distance: number) {
+    if (this.propeller && this.propellerRest) {
+      this.rotation.setFromAxisAngle(new THREE.Vector3(1, 0, 0), distance / 2);
+      this.propeller.quaternion.copy(this.propellerRest).multiply(this.rotation);
+    }
     for (const wheel of this.wheels) {
       this.rotation.setFromAxisAngle(wheel.axis, -distance / wheel.radius);
       wheel.roll.quaternion.copy(wheel.rest).multiply(this.rotation);
