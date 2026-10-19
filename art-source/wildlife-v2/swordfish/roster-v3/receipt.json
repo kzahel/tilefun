@@ -1,0 +1,133 @@
+{
+  "identity": "swordfish-roster-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-147",
+  "sourceAudit": {
+    "identity": "swordfish-roster-v3",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 324,
+    "closedMeshVolumes": 19,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 129,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 1968,
+    "finAttachmentChecks": 2592,
+    "maxContinuousEndpointGapWorldUnits": 0.00006915127852006998,
+    "maxTailRootGapWorldUnits": 0.000004474816473570656,
+    "maxLoopMatrixDelta": 3.383758606645415e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+    "bodyMotionRangePixels": {
+      "down": 2.305652618408203,
+      "up": 1.4063720703125,
+      "left": 1.9173240661621094,
+      "right": 1.9173240661621094
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "distinct fish body": "1525718ae284d9c51643befa584492a68c64a01ea573a96ead3e93e405099fed",
+      "skull": "b5b83d3dca3e4e77738a11a02d6ea110dd5dec52ea42533a13be188ddeb1cc32",
+      "lower jaw": "9cb086d3d6060240d2e6fc5f9dd7f21231c37b08d5f3c13e20f829106220297d",
+      "mouth lining": "0af95c4f18d9e21df2870ba8289745e26cec7c026a5b75dfd51c595216ab00b3",
+      "eye -1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+      "eye pupil -1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+      "gill cover -1": "e860dfb46807e8ca08977694599703cc0192399f6e5f321a03b978200aa889f6",
+      "eye 1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+      "eye pupil 1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+      "gill cover 1": "e860dfb46807e8ca08977694599703cc0192399f6e5f321a03b978200aa889f6",
+      "long tapered sword bill": "487fbcc796fc878443170c38077f8ec193641c7f1b19e457bb1557c72af9aa38",
+      "high curved dorsal": "119f2eba51abeb1d8afc99035c6bd46f8bc8ac384facc4cc8656df0d3233a6aa",
+      "swept pectoral -1 closed blade": "ae2c5810c97c4b92d7eafdd19151b3c01c1ea5d26d79c7e8737eabebbaa0a758",
+      "swept pectoral 1 closed blade": "2b2faefd84dd90c59feccc3d34d0511b066d71e000696ca4daadfabd92386745",
+      "anal keel": "e6a3cea7ec28fe400c52b611ee99364353a52513637f87307dbb844639cccb21",
+      "TAIL-link-0": "9bb7ce32b03d5e7a712b997cdccdce5538abd3eda3f18d17de173ed14762a7b9",
+      "TAIL-link-1": "ba26dde513c66dd01cfca905bf7c03a15dbfc5e86e4328b65ccdb36d9debca93",
+      "TAIL-link-2": "f255b4f7891326adad9b7d70822e5f5403cf9bb999014c0a762713579831ad2e",
+      "closed vertical fish caudal fin": "206516b18cb9a0aab40fb549bcbed7704494ad535892ce6a88c72de7393b16e5"
+    }
+  },
+  "pixelAudit": {
+    "identity": "swordfish-roster-v3-pixels-01",
+    "poses": 324,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 2.296710968017578,
+      "up": 1.4063720703125,
+      "left": 1.9173240661621094,
+      "right": 1.9173240661621094
+    },
+    "independentSwimAndChase": true
+  },
+  "validation": {
+    "identity": "swordfish-roster-v3",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "swordfish-roster-v3",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "8196f77a66b65b1722f3099ea80352dd38a7a00930768f4ed53c0e2f6da75b0e",
+      "pixel-audit.json": "b782000dd505aaf695f7bfc965463be215f020c6b4836232184b0903ae3a2183",
+      "preview-native.gif": "6153567face4ee0b646e07122b4cde70a4f52bbd915ba6c71fe150d00135afa7",
+      "preview.gif": "db65b397e79be301e9df443247a2d8e82db317bda2a5257d6200cf6bbc2518ad",
+      "scene-background.png": "f37f5e75167981b3483bfc65035645aafecf8f672f705ce024791a238b494106",
+      "scene-native.png": "90fce0e5a540c1de924c8bd7a6ce41399b3cbf75891f3fbe3f455b61a40f2187",
+      "sheet.png": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+      "source-audit.json": "ff4d66f198e4890911aa661886c67bb92f1b88b689d3185bbdf608f3929ea474",
+      "sprite.json": "58085bf16f57c4d8088557b7bd71e7eef1afb7476a3585ba07bc433c58c99541",
+      "travel-native.gif": "d527fa76c0b94d61d9aa0ec3ba67906349c57d5e8b759d1d59fb83070e1de304"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/swordfish/roster-v3/audit.py": "ddfa49b03c30abdd093e13ddfded3437d71bb8726e6df51f19999bf03bdff430",
+    "art-source/wildlife-v2/swordfish/roster-v3/build.py": "b6eb5b9235094c3236ca04857c54e04f8f28a01f3928a6787c2641eb10cb5e4a",
+    "art-source/wildlife-v2/swordfish/roster-v3/finish.py": "8b24953f7bc260c73cb96dc4c567a52034100e66252fb4ed31875ea62064ff7d",
+    "art-source/wildlife-v2/swordfish/roster-v3/inputs.json": "3b14f2c3a54c37fff814eafc63f54f16f1669c4b9b6e1d1e495ac2c62e3635f2",
+    "art-source/wildlife-v2/swordfish/roster-v3/masters.json": "44fa00ca8fefdb02b51a5432f67af42362b8fb9cfc7ebf87085e8af279ab9eed",
+    "art-source/wildlife-v2/swordfish/roster-v3/projection.json": "0cea2687fc925455eb76e29d6ab939a17e3b3f67978698de9f5d403d31ef39a6",
+    "art-source/wildlife-v2/swordfish/roster-v3/README.md": "615b07be275deed49d64a958632fecda5ce3c77b7960318c5875797863937fcf",
+    "art-source/wildlife-v2/swordfish/roster-v3/swordfish.blend": "c45615d960d7f2c261784383922a635fabb49e08c24593c239563e625666e492",
+    "public/demos/wildlife-v2/swordfish/roster-v3/contact-sheet-native.png": "8196f77a66b65b1722f3099ea80352dd38a7a00930768f4ed53c0e2f6da75b0e",
+    "public/demos/wildlife-v2/swordfish/roster-v3/index.html": "ba99b6f763bf1116c76a982467138c33b2f2a353b60e4680c4396ebd2ad38a5a",
+    "public/demos/wildlife-v2/swordfish/roster-v3/pixel-audit.json": "b782000dd505aaf695f7bfc965463be215f020c6b4836232184b0903ae3a2183",
+    "public/demos/wildlife-v2/swordfish/roster-v3/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/swordfish/roster-v3/preview-native.gif": "6153567face4ee0b646e07122b4cde70a4f52bbd915ba6c71fe150d00135afa7",
+    "public/demos/wildlife-v2/swordfish/roster-v3/preview.gif": "db65b397e79be301e9df443247a2d8e82db317bda2a5257d6200cf6bbc2518ad",
+    "public/demos/wildlife-v2/swordfish/roster-v3/scene-background.png": "f37f5e75167981b3483bfc65035645aafecf8f672f705ce024791a238b494106",
+    "public/demos/wildlife-v2/swordfish/roster-v3/scene-native.png": "90fce0e5a540c1de924c8bd7a6ce41399b3cbf75891f3fbe3f455b61a40f2187",
+    "public/demos/wildlife-v2/swordfish/roster-v3/sheet.png": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+    "public/demos/wildlife-v2/swordfish/roster-v3/source-audit.json": "ff4d66f198e4890911aa661886c67bb92f1b88b689d3185bbdf608f3929ea474",
+    "public/demos/wildlife-v2/swordfish/roster-v3/sprite.json": "58085bf16f57c4d8088557b7bd71e7eef1afb7476a3585ba07bc433c58c99541",
+    "public/demos/wildlife-v2/swordfish/roster-v3/travel-native.gif": "d527fa76c0b94d61d9aa0ec3ba67906349c57d5e8b759d1d59fb83070e1de304",
+    "public/demos/wildlife-v2/swordfish/roster-v3/validation.json": "0d4b76d2f6e8b9660d7d663ce707ddcd21ca218fc2d6087296401970f7a471c0",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/distinct-fish-147/build.py": "4623cd9003a7f1bd6aad8e6361dfcb40f044fb84a274bcf1c9d2ea96a75f9664",
+    "art-source/wildlife-v2/_families/distinct-fish-147/finish.py": "6c7ef0a9d23db7e6fdede05eb6b7376ad17388eb6f221844de5d5d75ed423478",
+    "art-source/wildlife-v2/_families/distinct-fish-147/audit.py": "4a78ad6ced7f03123a132b51d290138455908eff54e68826a66aeab30d54441b",
+    "art-source/wildlife-v2/_families/distinct-fish-147/geometry.py": "b099b9acc1e857216e86e79d74a3f3eb0d34dcd322eeef38df1630203bae909e",
+    "art-source/wildlife-v2/_families/distinct-fish-147/profiles.json": "8a5b03253395af54572e93c6185b2eee0fd9acbd220b7ca2bb19a8a72e5a53f5",
+    "art-source/wildlife-v2/_families/distinct-fish-147/README.md": "3365cf4965cd35dd8e18aa2d834c4dc90ab0b58902cd809fd31df54204a212f5",
+    "scripts/wildlife/capture-continuation-147.mjs": "88570dbd188754ea22facfa962d89bd300d60063fcadc55941ee492325d72d44",
+    "scripts/wildlife/register-continuation-147.mjs": "19fd1e154da656ecc8aefad4d975f5501fb08ed978582af779a97def882b563a",
+    "scripts/wildlife/replay-continuation-147.py": "c42f911aacb9a1c8f9f86416c7e8c64ade58dd9c5d593ac11a08f7ba55e82cf3"
+  }
+}

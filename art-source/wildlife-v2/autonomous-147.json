@@ -615,7 +615,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:31:14.286425Z"
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
     },
     "river-otter": {
       "name": "River otter",
@@ -649,7 +650,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:31:14.286425Z"
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
     },
     "aardvark": {
       "name": "Aardvark",
@@ -657,7 +659,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:31:14.286425Z"
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
     },
     "armadillo": {
       "name": "Armadillo",
@@ -665,7 +668,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:31:14.286425Z"
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
     },
     "pangolin": {
       "name": "Pangolin",
@@ -673,7 +677,8 @@
       "state": "in-progress",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:31:14.286425Z"
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "progress": "Saved-scene mechanics, native/3x exact playback and ten-artifact byte-identical replay verified. Runtime inactive and source unregistered."
     },
     "mongoose": {
       "name": "Mongoose",
@@ -866,16 +871,18 @@
     "pelican": {
       "name": "Pelican",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z"
     },
     "blue-footed-booby": {
       "name": "Blue-footed booby",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z"
     },
     "sparrow": {
       "name": "Sparrow",
@@ -956,43 +963,57 @@
     "ruby-throated-hummingbird": {
       "name": "Ruby-throated hummingbird",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z"
     },
     "great-frigatebird": {
       "name": "Great frigatebird",
       "family": "Birds",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z"
     },
     "ocean-sunfish": {
       "name": "Ocean sunfish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:13:37.975156Z",
-      "progress": "Distinct closed-volume source and saved-scene motion audit pass; runtime not activated."
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/ocean-sunfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
     },
     "swordfish": {
       "name": "Swordfish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:13:37.975156Z",
-      "progress": "Distinct closed-volume source and saved-scene motion audit pass; runtime not activated."
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/swordfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
     },
     "pufferfish": {
       "name": "Pufferfish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:13:37.975156Z",
-      "progress": "Distinct closed-volume source and saved-scene motion audit pass; runtime not activated."
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/pufferfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
     },
     "shark": {
       "name": "Shark",
@@ -1136,11 +1157,15 @@
     "anglerfish": {
       "name": "Anglerfish",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:13:37.975156Z",
-      "progress": "Distinct closed-volume source and saved-scene motion audit pass; runtime not activated."
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/anglerfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
     },
     "leafy-seadragon": {
       "name": "Leafy seadragon",
@@ -1391,6 +1416,16 @@
         "japanese-macaque"
       ],
       "validation": "4665 unit passes, five known Windows failures and ten skipped;120 focused source/ecology/codec/authority checks;31 real Canvas/GPU browser cases including580 visible previews. Five ten-artifact byte-identical banks and1640 exact native/3x crops. Typecheck, isolated lint/build and1459candidate full Chromium manifest pass. All eight roster primates implemented; tree climbing/brachiation remain future work."
+    },
+    {
+      "utc": "2026-10-19T12:55:53.418573Z",
+      "completed": [
+        "ocean-sunfish",
+        "swordfish",
+        "pufferfish",
+        "anglerfish"
+      ],
+      "validation": "4718 unit passes, five known Windows failures and ten skipped;116 focused source/ecology/codec/body/real-lagoon hunt and reload checks.32 distinct browser cases across22 new-fish/browser cases and all14 aquatic regressions (4 overlap);596 visible previews. Four ten-artifact byte-identical banks and1952 exact native/3x crops. Typecheck/isolated lint/build and1479candidate full Chromium manifest pass. Generic aquatic test anchors follow source dimensions and meal counts follow delayed replacements."
     }
   ]
 }

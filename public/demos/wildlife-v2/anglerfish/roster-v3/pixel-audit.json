@@ -1,0 +1,16 @@
+{
+  "identity": "anglerfish-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.2462520599365234,
+    "up": 1.3652372360229492,
+    "left": 1.9019050598144531,
+    "right": 1.838639259338379
+  },
+  "independentSwimAndChase": true
+}

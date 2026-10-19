@@ -15244,5 +15244,377 @@
         "sha256": "3a52bc0e6a8b287307c6def14c3d5638ad044f51b478595b05c8f9bd075fed32"
       }
     ]
+  },
+  {
+    "id": "ocean-sunfish-roster-v3",
+    "animalId": "ocean-sunfish",
+    "revision": "roster-v3",
+    "name": "Ocean sunfish · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/ocean-sunfish/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-ocean-sunfish-roster-v3",
+      "name": "Ocean sunfish sheet",
+      "image": "demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+      "source": "art-source/wildlife-v2/ocean-sunfish/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-ocean-sunfish-roster-v3-scene",
+      "name": "Ocean sunfish scene",
+      "image": "demos/wildlife-v2/ocean-sunfish/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "3b48bf4a714b459c311648821015d35b4b209472e8a3f9215a37f42a623b3cb8",
+      "source": "art-source/wildlife-v2/ocean-sunfish/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-ocean-sunfish-roster-v3-contact",
+      "name": "Ocean sunfish contact",
+      "image": "demos/wildlife-v2/ocean-sunfish/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "4a85d599776f15cf2c7ffcd29f03ebce2d6ae5d1abe81262030571b35d7a1f74",
+      "source": "art-source/wildlife-v2/ocean-sunfish/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/ocean-sunfish/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/contact-sheet-native.png",
+        "sha256": "4a85d599776f15cf2c7ffcd29f03ebce2d6ae5d1abe81262030571b35d7a1f74"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/index.html",
+        "sha256": "f2544b35aea279307a8ad83bbffc5b86debfad07e9122e95aa097489d5a8a7d6"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/pixel-audit.json",
+        "sha256": "3373fe86b0e20c4cd7070fbc8b96e25044ca0f904b97ac228b045f1c1bc42315"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/preview-native.gif",
+        "sha256": "8c518da82a466909ef47ad2b9b58feab66096ff3da37f4916b344aa0e84cc0c5"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/preview.gif",
+        "sha256": "99b0069d129d1d2619fa93775d39d163327d12ecba2a95c1de2adb2b29d45248"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/scene-background.png",
+        "sha256": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/scene-native.png",
+        "sha256": "3b48bf4a714b459c311648821015d35b4b209472e8a3f9215a37f42a623b3cb8"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png",
+        "sha256": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/source-audit.json",
+        "sha256": "d315f1526fe5252f3dbf93be999f553538d280cf1a8a15ced7c7dbd21276a912"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/sprite.json",
+        "sha256": "af8dde3b4f4b9acf69d717a2647e7f27b420baa5fa322a900c725f1b682efeb5"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/travel-native.gif",
+        "sha256": "cca344c69f6b31ee304c41f627ebfd0efab04601731d53795a991dcafe2cebec"
+      },
+      {
+        "path": "demos/wildlife-v2/ocean-sunfish/roster-v3/validation.json",
+        "sha256": "a0f3ce76181c4191be40cdb32ee32bb7b98593f099224c711406e66400a94cd7"
+      }
+    ]
+  },
+  {
+    "id": "swordfish-roster-v3",
+    "animalId": "swordfish",
+    "revision": "roster-v3",
+    "name": "Swordfish · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/swordfish/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-swordfish-roster-v3",
+      "name": "Swordfish sheet",
+      "image": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
+      "width": 10368,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+      "source": "art-source/wildlife-v2/swordfish/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-swordfish-roster-v3-scene",
+      "name": "Swordfish scene",
+      "image": "demos/wildlife-v2/swordfish/roster-v3/scene-native.png",
+      "width": 672,
+      "height": 168,
+      "tileSize": 16,
+      "fingerprint": "90fce0e5a540c1de924c8bd7a6ce41399b3cbf75891f3fbe3f455b61a40f2187",
+      "source": "art-source/wildlife-v2/swordfish/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-swordfish-roster-v3-contact",
+      "name": "Swordfish contact",
+      "image": "demos/wildlife-v2/swordfish/roster-v3/contact-sheet-native.png",
+      "width": 1024,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "8196f77a66b65b1722f3099ea80352dd38a7a00930768f4ed53c0e2f6da75b0e",
+      "source": "art-source/wildlife-v2/swordfish/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/swordfish/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/contact-sheet-native.png",
+        "sha256": "8196f77a66b65b1722f3099ea80352dd38a7a00930768f4ed53c0e2f6da75b0e"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/index.html",
+        "sha256": "ba99b6f763bf1116c76a982467138c33b2f2a353b60e4680c4396ebd2ad38a5a"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/pixel-audit.json",
+        "sha256": "b782000dd505aaf695f7bfc965463be215f020c6b4836232184b0903ae3a2183"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/preview-native.gif",
+        "sha256": "6153567face4ee0b646e07122b4cde70a4f52bbd915ba6c71fe150d00135afa7"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/preview.gif",
+        "sha256": "db65b397e79be301e9df443247a2d8e82db317bda2a5257d6200cf6bbc2518ad"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/scene-background.png",
+        "sha256": "f37f5e75167981b3483bfc65035645aafecf8f672f705ce024791a238b494106"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/scene-native.png",
+        "sha256": "90fce0e5a540c1de924c8bd7a6ce41399b3cbf75891f3fbe3f455b61a40f2187"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
+        "sha256": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/source-audit.json",
+        "sha256": "ff4d66f198e4890911aa661886c67bb92f1b88b689d3185bbdf608f3929ea474"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/sprite.json",
+        "sha256": "58085bf16f57c4d8088557b7bd71e7eef1afb7476a3585ba07bc433c58c99541"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/travel-native.gif",
+        "sha256": "d527fa76c0b94d61d9aa0ec3ba67906349c57d5e8b759d1d59fb83070e1de304"
+      },
+      {
+        "path": "demos/wildlife-v2/swordfish/roster-v3/validation.json",
+        "sha256": "0d4b76d2f6e8b9660d7d663ce707ddcd21ca218fc2d6087296401970f7a471c0"
+      }
+    ]
+  },
+  {
+    "id": "pufferfish-roster-v3",
+    "animalId": "pufferfish",
+    "revision": "roster-v3",
+    "name": "Pufferfish · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/pufferfish/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-pufferfish-roster-v3",
+      "name": "Pufferfish sheet",
+      "image": "demos/wildlife-v2/pufferfish/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "ab1d201605b7cd0b56ed974d768b9114b27cf4d3956c0d779ea2dd92f63811bd",
+      "source": "art-source/wildlife-v2/pufferfish/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-pufferfish-roster-v3-scene",
+      "name": "Pufferfish scene",
+      "image": "demos/wildlife-v2/pufferfish/roster-v3/scene-native.png",
+      "width": 480,
+      "height": 120,
+      "tileSize": 16,
+      "fingerprint": "bca580efe78ec39ef043439c9635227b9db40004cca0fda1a0c8fce0e4e4a5f5",
+      "source": "art-source/wildlife-v2/pufferfish/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-pufferfish-roster-v3-contact",
+      "name": "Pufferfish contact",
+      "image": "demos/wildlife-v2/pufferfish/roster-v3/contact-sheet-native.png",
+      "width": 640,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "923fd482e7a68b0c03276c816ccef0df0fbd5dc2323c28215b03fb190df0b940",
+      "source": "art-source/wildlife-v2/pufferfish/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/pufferfish/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/contact-sheet-native.png",
+        "sha256": "923fd482e7a68b0c03276c816ccef0df0fbd5dc2323c28215b03fb190df0b940"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/index.html",
+        "sha256": "6db11defc60333e66f9a43e66463bd75cbe4a515c3268dec0c651bf7de10478b"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/pixel-audit.json",
+        "sha256": "4459452ed11a330c045ec808846b5bd36c8b003a36a74b2d9df9a683c2a22d81"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/preview-native.gif",
+        "sha256": "c1e7395657a9e577f81d635e8313c61a5e2b75f3c2639ead25d6894c02a3aca7"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/preview.gif",
+        "sha256": "bcccc34969e7b2b96a75808617cb1e31588a51083dcbc3d81acc0548b0c79286"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/scene-background.png",
+        "sha256": "10809a59962465831923b2401360fc5b3fe2f6ee7823ef2b3badd1f6fc136ffe"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/scene-native.png",
+        "sha256": "bca580efe78ec39ef043439c9635227b9db40004cca0fda1a0c8fce0e4e4a5f5"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/sheet.png",
+        "sha256": "ab1d201605b7cd0b56ed974d768b9114b27cf4d3956c0d779ea2dd92f63811bd"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/source-audit.json",
+        "sha256": "734b789c1ce87462c5d9f3e6cbfb97b9e6ab3a52c112d1db876c701562d1c82a"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/sprite.json",
+        "sha256": "d4379a3d5250956bb6e997090fded41786553ea019894719856cefa898933ef6"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/travel-native.gif",
+        "sha256": "2a309257e9fb463be133fed4d5162b3350a9f395b3fd7458466f68bace3ab281"
+      },
+      {
+        "path": "demos/wildlife-v2/pufferfish/roster-v3/validation.json",
+        "sha256": "46de3b4583026ae6c78498fdccb5bc74af4ee21649198b73cb408a5b92396c8b"
+      }
+    ]
+  },
+  {
+    "id": "anglerfish-roster-v3",
+    "animalId": "anglerfish",
+    "revision": "roster-v3",
+    "name": "Anglerfish · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/anglerfish/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-anglerfish-roster-v3",
+      "name": "Anglerfish sheet",
+      "image": "demos/wildlife-v2/anglerfish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+      "source": "art-source/wildlife-v2/anglerfish/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-anglerfish-roster-v3-scene",
+      "name": "Anglerfish scene",
+      "image": "demos/wildlife-v2/anglerfish/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "7cb2e324db0f9d8cdbaca5b8644ef28b529c29d8eb0f2e66255d3cd11ce3edcb",
+      "source": "art-source/wildlife-v2/anglerfish/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-anglerfish-roster-v3-contact",
+      "name": "Anglerfish contact",
+      "image": "demos/wildlife-v2/anglerfish/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "95c37a6892a7ab1cf6289933be4841a8c2df78ef09f8fe5f886e8b02deb61540",
+      "source": "art-source/wildlife-v2/anglerfish/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/anglerfish/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/contact-sheet-native.png",
+        "sha256": "95c37a6892a7ab1cf6289933be4841a8c2df78ef09f8fe5f886e8b02deb61540"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/index.html",
+        "sha256": "057b27c82723ed5f4fbdef6baed0e75df82433720a6bbc4dee6d25bebe0a3dda"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/pixel-audit.json",
+        "sha256": "a5327e857c2efa1518b8ee6f90097ee8cfd93d6762cfcf33b750d897e3fad3a7"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/preview-native.gif",
+        "sha256": "a423e844b973ecc366936727fae8007bf07f8a771494c2f25ceb555757b4f561"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/preview.gif",
+        "sha256": "0eee391da037ed0a90c4cedbdd3f5e62edb345838d9b6edccb7822d0c5578b9d"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/scene-background.png",
+        "sha256": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/scene-native.png",
+        "sha256": "7cb2e324db0f9d8cdbaca5b8644ef28b529c29d8eb0f2e66255d3cd11ce3edcb"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/sheet.png",
+        "sha256": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/source-audit.json",
+        "sha256": "38acf1a0ee417d80dccbc3af819513009f099af6aa7ff55fc8ae1a278fa8d5ff"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/sprite.json",
+        "sha256": "2bc0f5ad4483a6fa66a94148b5012eed1362cb5ce44e2cd0f0f5a6a191d486f7"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/travel-native.gif",
+        "sha256": "29f19f82c356440ee29319ca08f472d9be574518458d7c73b1f56dcab83d93ea"
+      },
+      {
+        "path": "demos/wildlife-v2/anglerfish/roster-v3/validation.json",
+        "sha256": "030591380978d49515a689d8c385c08ff90db4f153dc82f3ddb9e08864af8446"
+      }
+    ]
   }
 ]

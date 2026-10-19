@@ -73,3 +73,15 @@ in the sortable animal browser and its real shared-engine AI scenes.
   typecheck/isolated lint/build/1,459-candidate manifest pass. No pending Workshop
   requests/art notes. New exact pixels pending human review. 135/196 implemented;
   61 remaining. Four fish and five ground-specialist sources are in progress.
+
+- Distinct-fish checkpoint: sunfish/pufferfish gentle deep fauna; swordfish/anglerfish
+  shared aquatic hunters, explicit directed diets and source-origin replacement.
+  Closed editable anatomy, linked tails, attached fins, source-matched clocks and
+  non-overlapping swim/feed/display/chase ranges. No puffer inflation/scaling.
+  4,718 unit passes with five known Windows failures;116 focused checks;32 distinct
+  browser cases including all14 aquatic cases and596 previews;1,952 exact crops and
+  four ten-artifact byte-identical replays;typecheck/isolated lint/build/1,479-candidate
+  manifest pass. Aquatic regression anchors now follow own source dimensions and
+  live fish counts reflect delayed births. All pixels pending human review.
+  139/196 implemented;57 remaining. Ground-specialist5banks ready;flying-bird4sources
+  underway with a continuous leg hock plane and denser independent source audits.

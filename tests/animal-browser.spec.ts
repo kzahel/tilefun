@@ -1,5 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { CONTINUATION_BIRD_PROFILES } from "../src/wildlife/ContinuationBirds.js";
+import {
+  DISTINCT_FISH_FAUNA_PROFILES,
+  DISTINCT_FISH_HUNTER_PROFILES,
+} from "../src/wildlife/DistinctFish.js";
 import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
 import { GROUND_PRIMATE_PROFILES } from "../src/wildlife/GroundPrimates.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
@@ -132,6 +136,7 @@ for (const animal of [
   ...CONTINUATION_BIRD_PROFILES,
   ...GREAT_APE_PROFILES,
   ...GROUND_PRIMATE_PROFILES,
+  ...DISTINCT_FISH_FAUNA_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
@@ -174,6 +179,47 @@ for (const animal of [
               before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
           ),
         { timeout: 12000, intervals: [30] },
+      )
+      .toBe(true);
+    await page.screenshot({ path: `data/wildlife-147-${animal.species}-lab.png` });
+  });
+}
+
+for (const animal of DISTINCT_FISH_HUNTER_PROFILES) {
+  test(`${animal.species} browser display opens a real moving aquatic hunter`, async ({ page }) => {
+    await page.goto(
+      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+    );
+    await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
+    const card = page.locator(`[data-animal="${animal.species}"]`),
+      preview = card.locator("canvas");
+    await page.getByLabel("Preview animation", { exact: true }).selectOption("action");
+    await expect(preview).toHaveAttribute("data-ready", "true");
+    await expect(preview).toHaveAttribute("data-clip", "display");
+    const frame = await preview.getAttribute("data-frame");
+    await expect.poll(() => preview.getAttribute("data-frame")).not.toBe(frame);
+    await card.getByRole("button", { name: "Watch AI", exact: true }).click();
+    const stage = page.getByLabel("Natural landscape playground");
+    await expect(stage).toHaveAttribute("data-ready", "true");
+    await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(animal.species);
+    const poses = async () =>
+      (
+        JSON.parse((await stage.getAttribute("data-predator-poses")) ?? "[]") as {
+          type: string;
+          frame: number;
+          x: number;
+          y: number;
+        }[]
+      ).filter((p) => p.type === `wildlife-${animal.species}-predator-v1`);
+    await expect.poll(async () => (await poses()).length).toBe(1);
+    const before = await poses();
+    await expect
+      .poll(
+        async () =>
+          (await poses()).some(
+            (p) => p.frame > 4 && before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
+          ),
+        { timeout: 15000, intervals: [30] },
       )
       .toBe(true);
     await page.screenshot({ path: `data/wildlife-147-${animal.species}-lab.png` });

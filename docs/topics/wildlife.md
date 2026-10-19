@@ -90,6 +90,26 @@ inbox and art notes have no pending requests; new exact art remains pending revi
 **135 of 196 implemented; 61 remaining.** Four fish banks await runtime integration;
 five ground-specialist source prototypes are underway.
 
+Fifth checkpoint: ocean sunfish, pufferfish, swordfish and anglerfish spawn in
+legal deep-water refuges and join placement/browser inspection. Sunfish paired
+dorsal/anal paddles and clavus, swordfish bill/forked tail, puffer closed spines and
+angler lure/toothed jaw use distinct editable anatomy. Fins remain attached and
+tails retain fixed links. Source swim/chase clocks use separate non-overlapping
+key ranges. Puffer inflation is not implemented; no animated scaling is used.
+
+Swordfish and anglerfish use ordinary shared aquatic hunting. Explicit diets
+include swordfish→anglerfish/pufferfish and shark/orca→all four new fish. Reverse
+hunts are excluded; natural/placed lineage policy remains unchanged. Existing
+lagoon hunters now validate source-specific anchors, and browser tests assert a
+reduced live fish population during the delayed replacement period.
+Validation: **4,718 unit passes**, five known Windows failures, ten skipped;
+116 focused checks; **32 distinct browser cases**, including all seven aquatic
+hunters in Canvas/GPU and **596 visible previews**; four byte-identical source
+banks and 1,952 exact crops. Typecheck, isolated lint/build and the 1,479-candidate
+full Chromium manifest pass. All new art remains pending human review.
+**139 of 196 implemented; 57 remaining.** Five ground-specialist banks are ready
+for runtime integration; four more flying-bird prototypes are underway.
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

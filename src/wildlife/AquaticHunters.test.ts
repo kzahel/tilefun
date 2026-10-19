@@ -36,7 +36,7 @@ describe.each(AQUATIC_HUNTER_PROFILES)("$species aquatic source and authority", 
         .update(readFileSync(`${base}/sheet.png`))
         .digest("hex"),
     ).toBe(p.art.sha256);
-    expect(metadata.anchor).toEqual([48, 72]);
+    expect(metadata.anchor).toEqual([p.size / 2, p.anchorY]);
     for (const c of p.art.clips)
       expect(metadata.clips[c.name]).toEqual({
         start: c.start,

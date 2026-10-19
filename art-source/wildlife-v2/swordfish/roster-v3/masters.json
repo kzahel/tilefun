@@ -1,0 +1,14 @@
+{
+  "identity": "swordfish-roster-v3-pixels-01",
+  "palette": {
+    "B": "#496a7f",
+    "H": "#789fae",
+    "W": "#c6d4cd",
+    "K": "#252e35",
+    "M": "#343340",
+    "E": "#e7d9ad",
+    "T": "#f0e8c4",
+    "G": "#aaab7a"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

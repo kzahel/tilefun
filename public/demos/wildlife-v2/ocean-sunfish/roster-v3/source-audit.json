@@ -1,0 +1,43 @@
+{
+  "identity": "ocean-sunfish-roster-v3",
+  "status": "mechanics-checked-final-pixels-pending-human-review",
+  "allClipPoses": 164,
+  "closedMeshVolumes": 19,
+  "continuousSwimSamplesPerFacing": 129,
+  "continuousChaseSamplesPerFacing": 0,
+  "continuousFeedSamplesPerFacing": 33,
+  "fixedLengthTailChecks": 984,
+  "finAttachmentChecks": 2592,
+  "maxContinuousEndpointGapWorldUnits": 1.3899804439593694e-05,
+  "maxTailRootGapWorldUnits": 5.404747916926137e-06,
+  "maxLoopMatrixDelta": 2.384185791015625e-07,
+  "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+  "bodyMotionRangePixels": {
+    "down": 2.5777158737182617,
+    "up": 1.1355433464050293,
+    "left": 1.9563899040222168,
+    "right": 1.905777931213379
+  },
+  "feedingJawRangeRadians": 0.19999998807907104,
+  "meshLocalGeometrySha256": {
+    "distinct fish body": "368b154dab278ffa7b1774d0e7c3d84488f6ebd401d6aa00536506ba802b9258",
+    "skull": "a37667e7d4ab4318d345b3e9da05e7b277da2ba9c612bee80e65b601675b74f0",
+    "lower jaw": "4e90478795c91ebc673e768aec85c4ea66139de52223d005ba46d8cd0214a1cb",
+    "mouth lining": "39f8e7805f550bd664fc002bef99f799532d658290e460c93af96f06dd701fc0",
+    "eye -1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+    "eye pupil -1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+    "gill cover -1": "eb85d852065b1263a257469a254ae99af8814f70cee2e98fe605b65b796e16c2",
+    "eye 1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+    "eye pupil 1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+    "gill cover 1": "eb85d852065b1263a257469a254ae99af8814f70cee2e98fe605b65b796e16c2",
+    "small pursed mouth": "c7db957d2a99df90521125a02e7efc147322814c875a8c391f0b3d4817674a05",
+    "dorsal paddle closed blade": "a200405af52d30bc040be271082e301c059cbc59522f492decd2822a9cc8b5ce",
+    "anal paddle closed blade": "8fe097f05e4289e5bbe16ea7ea0e87a77fd68f1ea63c157a03940ecef5f0810e",
+    "pectoral paddle -1 closed blade": "ad2d416e4c598974728657f0a1db606686a3cc9f5a01dcc5207e81b16d452612",
+    "pectoral paddle 1 closed blade": "910f1ecf7f13a7aaeb9c1bed15e2b6854c88eba87211457ef8f07f94a204c218",
+    "TAIL-link-0": "7591db571e3bfe5de2b4a4c766884ee4171cd8a10807bd50015e66987915500b",
+    "TAIL-link-1": "1e66289b8c556e41c852e538f24b1e5f6a6de9f1538b2f11df60e5829efb1a5b",
+    "TAIL-link-2": "d577586139cf1b9990dd6fee08de6d8c4f692c7a6f12d2f39b8288d9d623aacc",
+    "closed vertical fish caudal fin": "aa0a2f69a65bb15f5c73170916abd7decb168d1182cebdaedae256dc7ee0c353"
+  }
+}

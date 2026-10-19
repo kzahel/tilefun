@@ -1,0 +1,133 @@
+{
+  "identity": "ocean-sunfish-roster-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-147",
+  "sourceAudit": {
+    "identity": "ocean-sunfish-roster-v3",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 164,
+    "closedMeshVolumes": 19,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 0,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 984,
+    "finAttachmentChecks": 2592,
+    "maxContinuousEndpointGapWorldUnits": 0.000013899804439593694,
+    "maxTailRootGapWorldUnits": 0.000005404747916926137,
+    "maxLoopMatrixDelta": 2.384185791015625e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+    "bodyMotionRangePixels": {
+      "down": 2.5777158737182617,
+      "up": 1.1355433464050293,
+      "left": 1.9563899040222168,
+      "right": 1.905777931213379
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "distinct fish body": "368b154dab278ffa7b1774d0e7c3d84488f6ebd401d6aa00536506ba802b9258",
+      "skull": "a37667e7d4ab4318d345b3e9da05e7b277da2ba9c612bee80e65b601675b74f0",
+      "lower jaw": "4e90478795c91ebc673e768aec85c4ea66139de52223d005ba46d8cd0214a1cb",
+      "mouth lining": "39f8e7805f550bd664fc002bef99f799532d658290e460c93af96f06dd701fc0",
+      "eye -1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+      "eye pupil -1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+      "gill cover -1": "eb85d852065b1263a257469a254ae99af8814f70cee2e98fe605b65b796e16c2",
+      "eye 1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+      "eye pupil 1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+      "gill cover 1": "eb85d852065b1263a257469a254ae99af8814f70cee2e98fe605b65b796e16c2",
+      "small pursed mouth": "c7db957d2a99df90521125a02e7efc147322814c875a8c391f0b3d4817674a05",
+      "dorsal paddle closed blade": "a200405af52d30bc040be271082e301c059cbc59522f492decd2822a9cc8b5ce",
+      "anal paddle closed blade": "8fe097f05e4289e5bbe16ea7ea0e87a77fd68f1ea63c157a03940ecef5f0810e",
+      "pectoral paddle -1 closed blade": "ad2d416e4c598974728657f0a1db606686a3cc9f5a01dcc5207e81b16d452612",
+      "pectoral paddle 1 closed blade": "910f1ecf7f13a7aaeb9c1bed15e2b6854c88eba87211457ef8f07f94a204c218",
+      "TAIL-link-0": "7591db571e3bfe5de2b4a4c766884ee4171cd8a10807bd50015e66987915500b",
+      "TAIL-link-1": "1e66289b8c556e41c852e538f24b1e5f6a6de9f1538b2f11df60e5829efb1a5b",
+      "TAIL-link-2": "d577586139cf1b9990dd6fee08de6d8c4f692c7a6f12d2f39b8288d9d623aacc",
+      "closed vertical fish caudal fin": "aa0a2f69a65bb15f5c73170916abd7decb168d1182cebdaedae256dc7ee0c353"
+    }
+  },
+  "pixelAudit": {
+    "identity": "ocean-sunfish-roster-v3-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 2.5776524543762207,
+      "up": 1.1355433464050293,
+      "left": 1.9563899040222168,
+      "right": 1.905777931213379
+    },
+    "independentSwimAndChase": false
+  },
+  "validation": {
+    "identity": "ocean-sunfish-roster-v3",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "ocean-sunfish-roster-v3",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "4a85d599776f15cf2c7ffcd29f03ebce2d6ae5d1abe81262030571b35d7a1f74",
+      "pixel-audit.json": "3373fe86b0e20c4cd7070fbc8b96e25044ca0f904b97ac228b045f1c1bc42315",
+      "preview-native.gif": "8c518da82a466909ef47ad2b9b58feab66096ff3da37f4916b344aa0e84cc0c5",
+      "preview.gif": "99b0069d129d1d2619fa93775d39d163327d12ecba2a95c1de2adb2b29d45248",
+      "scene-background.png": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63",
+      "scene-native.png": "3b48bf4a714b459c311648821015d35b4b209472e8a3f9215a37f42a623b3cb8",
+      "sheet.png": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+      "source-audit.json": "d315f1526fe5252f3dbf93be999f553538d280cf1a8a15ced7c7dbd21276a912",
+      "sprite.json": "af8dde3b4f4b9acf69d717a2647e7f27b420baa5fa322a900c725f1b682efeb5",
+      "travel-native.gif": "cca344c69f6b31ee304c41f627ebfd0efab04601731d53795a991dcafe2cebec"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/audit.py": "f1c10246b4dd9dfa79e3131a5aa44c457dd7979a07d4834c8dc661f9a749cad7",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/build.py": "2610d48c931ca8b54afd64284641ab8ffce7609e59568ba60eb543b5f20983c0",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/finish.py": "55217c62ac13f4d804b51bf051049efd46c598c1ab950366d42962940d0b91c3",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/inputs.json": "3b14f2c3a54c37fff814eafc63f54f16f1669c4b9b6e1d1e495ac2c62e3635f2",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/masters.json": "ba60d9e349db38b3aa9caf671816771bf1e6965fb4c19bc721321b67572af0a6",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/ocean-sunfish.blend": "a3cf0497b81167b7f131bb3303d94f48ab52de94fba671aaf134a19d10eace6c",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/projection.json": "fcef6f863ffb1abbc0f86831d5edea9b348d9a142e7a9d41460aa5489b0fed4e",
+    "art-source/wildlife-v2/ocean-sunfish/roster-v3/README.md": "223987d04a8838d160dc04b78c1b9016fddaad71d2d1fb38e7a934bac99807a6",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/contact-sheet-native.png": "4a85d599776f15cf2c7ffcd29f03ebce2d6ae5d1abe81262030571b35d7a1f74",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/index.html": "f2544b35aea279307a8ad83bbffc5b86debfad07e9122e95aa097489d5a8a7d6",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/pixel-audit.json": "3373fe86b0e20c4cd7070fbc8b96e25044ca0f904b97ac228b045f1c1bc42315",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/preview-native.gif": "8c518da82a466909ef47ad2b9b58feab66096ff3da37f4916b344aa0e84cc0c5",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/preview.gif": "99b0069d129d1d2619fa93775d39d163327d12ecba2a95c1de2adb2b29d45248",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/scene-background.png": "fbd41505ffc5db13e0542903f544091b4d70f395937c9d60bccf414db5f72e63",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/scene-native.png": "3b48bf4a714b459c311648821015d35b4b209472e8a3f9215a37f42a623b3cb8",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/source-audit.json": "d315f1526fe5252f3dbf93be999f553538d280cf1a8a15ced7c7dbd21276a912",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/sprite.json": "af8dde3b4f4b9acf69d717a2647e7f27b420baa5fa322a900c725f1b682efeb5",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/travel-native.gif": "cca344c69f6b31ee304c41f627ebfd0efab04601731d53795a991dcafe2cebec",
+    "public/demos/wildlife-v2/ocean-sunfish/roster-v3/validation.json": "a0f3ce76181c4191be40cdb32ee32bb7b98593f099224c711406e66400a94cd7",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/distinct-fish-147/build.py": "4623cd9003a7f1bd6aad8e6361dfcb40f044fb84a274bcf1c9d2ea96a75f9664",
+    "art-source/wildlife-v2/_families/distinct-fish-147/finish.py": "6c7ef0a9d23db7e6fdede05eb6b7376ad17388eb6f221844de5d5d75ed423478",
+    "art-source/wildlife-v2/_families/distinct-fish-147/audit.py": "4a78ad6ced7f03123a132b51d290138455908eff54e68826a66aeab30d54441b",
+    "art-source/wildlife-v2/_families/distinct-fish-147/geometry.py": "b099b9acc1e857216e86e79d74a3f3eb0d34dcd322eeef38df1630203bae909e",
+    "art-source/wildlife-v2/_families/distinct-fish-147/profiles.json": "8a5b03253395af54572e93c6185b2eee0fd9acbd220b7ca2bb19a8a72e5a53f5",
+    "art-source/wildlife-v2/_families/distinct-fish-147/README.md": "3365cf4965cd35dd8e18aa2d834c4dc90ab0b58902cd809fd31df54204a212f5",
+    "scripts/wildlife/capture-continuation-147.mjs": "88570dbd188754ea22facfa962d89bd300d60063fcadc55941ee492325d72d44",
+    "scripts/wildlife/register-continuation-147.mjs": "19fd1e154da656ecc8aefad4d975f5501fb08ed978582af779a97def882b563a",
+    "scripts/wildlife/replay-continuation-147.py": "c42f911aacb9a1c8f9f86416c7e8c64ade58dd9c5d593ac11a08f7ba55e82cf3"
+  }
+}
