@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "route": "a-reduced-projection",
+  "family": "approach-3-red-coupe",
+  "sourceBlend": "art-source/vehicle-style-study/03-guide-pixel-finish/sports-coupe.blend",
+  "targetDirectory": "public/demos/vehicle-style-study/03-guide-pixel-finish",
+  "guideDirectory": "public/demos/vehicle-style-study/03-guide-pixel-finish",
+  "blenderExecutable": "C:/Program Files/Blender Foundation/Blender 5.2/blender.exe",
+  "renderThreads": 4,
+  "atlasSize": 512,
+  "exportWorldScale": 17.39130434782609,
+  "camera": {
+    "orthoScale": 7.2,
+    "elevationDegrees": 50,
+    "rawSize": 512,
+    "nativeSize": 128,
+    "translation": [
+      0,
+      28
+    ]
+  },
+  "budgetFactors": {
+    "1300": 0.35,
+    "1800": 0.6,
+    "2500": 0.85
+  },
+  "paintRules": "exact-source-owner-visibility-projection-with-semantic-cleanup-v2",
+  "semanticAssumptions": "Retained source guide_class per component, named coupe components, parametric glass patch vertex order, four source Roll_Y wheel parents; explicit component budget rules in build.py",
+  "outputRevision": "v5",
+  "requestedTriangles": 2500,
+  "budgetFactor": 0.85,
+  "minimumFenderTriangles": 16,
+  "minimumCoachworkTriangles": 220
+}

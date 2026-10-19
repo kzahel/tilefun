@@ -1,0 +1,115 @@
+{
+  "route": "04-simple-painted",
+  "title": "Rosso Sprint \u2014 simple painted coupe",
+  "triangles": 1710,
+  "meshCount": 5,
+  "components": [
+    {
+      "name": "Body_PaintedShell_Glass_Trim",
+      "triangles": 974,
+      "vertices": 886
+    },
+    {
+      "name": "Wheel_Front_L",
+      "triangles": 184,
+      "vertices": 128
+    },
+    {
+      "name": "Wheel_Front_R",
+      "triangles": 184,
+      "vertices": 128
+    },
+    {
+      "name": "Wheel_Rear_L",
+      "triangles": 184,
+      "vertices": 128
+    },
+    {
+      "name": "Wheel_Rear_R",
+      "triangles": 184,
+      "vertices": 128
+    }
+  ],
+  "paletteRoles": {
+    "ink": "#3a3a50",
+    "red_shadow": "#a11250",
+    "red_side": "#c53458",
+    "red_main": "#d3445c",
+    "red_light": "#e35a5a",
+    "red_glint": "#e18484",
+    "glass_dark": "#738ca8",
+    "glass_mid": "#8fa1c8",
+    "glass_light": "#a4bbd5",
+    "glass_glint": "#bad2e0",
+    "trim_dark": "#46465e",
+    "trim_mid": "#565972",
+    "silver": "#b9b9d5",
+    "lamp": "#ebe4f2",
+    "rear_lamp": "#fc5c46",
+    "red_deep": "#7f214c"
+  },
+  "units": {
+    "length": 4.6,
+    "nominalBodyWidth": 1.92,
+    "roofHeight": 1.05,
+    "forward": "-X",
+    "up": "+Z",
+    "origin": "ground center"
+  },
+  "camera": {
+    "position": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "elevationDegrees": 50,
+    "orthographicScale": 7.2,
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "renderer": {
+    "engine": "Cycles",
+    "device": "CPU",
+    "samples": 8,
+    "threads": 4,
+    "materials": "RGB unlit surface"
+  },
+  "wheelCenters": [
+    [
+      -1.3799999952316284,
+      -0.8799999952316284,
+      0.33000001311302185
+    ],
+    [
+      -1.3799999952316284,
+      0.8799999952316284,
+      0.33000001311302185
+    ],
+    [
+      1.3799999952316284,
+      -0.8799999952316284,
+      0.33000001311302185
+    ],
+    [
+      1.3799999952316284,
+      0.8799999952316284,
+      0.33000001311302185
+    ]
+  ],
+  "wheelRadius": 0.33,
+  "blend": "data/vehicle-style-study/04-simple-painted/sports-coupe.blend",
+  "glb": "public/demos/vehicle-style-study/04-simple-painted/sports-coupe.glb",
+  "renderedHeadings": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ]
+}

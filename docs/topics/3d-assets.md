@@ -1,6 +1,15 @@
 # 3D assets and sprite reconstruction
 
 Topic: 3d-assets
+Original vehicle expansion experiment: [141](../tactical/141-sports-car-style-experiments.md)
+compares detailed shaded/toon Blender renders, guide-based pixel finishing and
+simple geometry/paint for a new red sports car. Four offline prototypes and a
+shared native/interactive comparison are delivered for inspection. The owner
+prefers approach 3's guide-finished art, especially outlines. [142](../tactical/142-red-car-low-poly-pipeline.md)
+now tests low-poly textured GLBs, budget ladders and reusable instructions;
+[original vehicles](original-vehicles.md) owns the gated queue and pipeline.
+Existing vehicle bank and production review states remain unchanged.
+
 Status: car projection and orthographic inspection delivered; top-view appearance
 unresolved. Authored Blender/UV compact-car pilot delivered for inspection.
 Reusable offline fitting/projection/inspection tools delivered. All 45 vehicles
@@ -10,7 +19,7 @@ Fixed-view GPU gameplay integration is delivered and is the main-game default;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
 remain unresolved. Game clipping is unchanged.
-Updated: 2026-10-12.
+Updated: 2026-10-19.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
 to physical proxies, and cross-view quality. [Rendering architecture](rendering-architecture.md)

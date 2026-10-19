@@ -1,0 +1,54 @@
+{
+  "status": "performed",
+  "date": "2026-10-19",
+  "performedBy": "authoring agent visual inspection; not human approval",
+  "viewsInspected": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "surfaces": [
+    "native sheet at 1x",
+    "comparison panels native and nearest 4x",
+    "raw contact sheet all eight views",
+    "representative full 512px raw renders",
+    "decoded GIF contact sheet all eight frames"
+  ],
+  "observations": [
+    "Coherent sports-coupe silhouette, swept cabin and curved fenders.",
+    "Glazing borders and near/far wheel occlusion remain readable.",
+    "Headlamp shapes and intake blocks survive; fine wheel drilling, split spokes and door seams partly disappear.",
+    "Fixed lighting yields large rear-glass shade clusters and occasional isolated trim highlights.",
+    "Four connected fender patches repaired unsupported early arch lips; final exact pixels inspected after correction and contract sizing."
+  ],
+  "gifPlaybackInspection": "Decoded eight-frame contact sheet and duration metadata; no real-time playback claimed.",
+  "files": {
+    "public/demos/vehicle-style-study/02-detailed-toon/comparison.png": "e94ea41d1cc6c64310b3703ed16e52dae554a43c864c311d83033ed75f63ad2f",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-0.png": "f8c0eaa173a42a54adee4d544ad78a6b04467ec31f0a8126bd5d99f0de2a9289",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-1.png": "6f6340eb335de16769e3c43100e36b4a7a3ffcdad72d7f053f629091a141a5af",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-2.png": "51269c78e8b9c68d64101adc66bdd6f1537509d577ad3a46ba3c0f97d1ec77b2",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-3.png": "3e17d5921063bb9325bab0f1aa0163899c7c1db3e641b5cd54ee474fa8fee53d",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-4.png": "dacdbf6a47538d799420474947467406717f7dcf5b2f47f8aa6d951b53bf9546",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-5.png": "b519ff354c5630816c880841a10ce0f14bb602261598969c347e18a842f25ab0",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-6.png": "e363c92a3547a70c51bd36947c6aace3def49ced9ccaa8f6770b1e4281981d3f",
+    "public/demos/vehicle-style-study/02-detailed-toon/raw-7.png": "04116f807b251714108245bc94dfcaef8dc7c891c2871ea46afa38d19cf88a05",
+    "public/demos/vehicle-style-study/02-detailed-toon/sheet.png": "0b7b4dbb311d8dfbdfdb9c67fb295451d3806de50a274ae82ff4a7f088ecd33d",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-0.png": "89c32bb89540492645640fcc7c3d2c8b05edfcfaefe3b298c02539501d3ab912",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-1.png": "8fda9bcc914b2dda0b35ca8b64e3fbabc5ade0565e40ee43a708b0050b86247e",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-2.png": "afba52cf18213c3098e268c735263e618d43d92251895e39d32156a65a283106",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-3.png": "4576d07b8665ab9973d0e98b8d4ba54040d0d77935d9c2a31bcf6b93181d88e3",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-4.png": "c82f5fa2b76f4afead44f287739d3b0a4f0461b8cbaad9b94cc743073327cfe6",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-5.png": "4480c32d81660ad8410a0028614c649c2e8cccd088434d47928af391f1ffc1fe",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-6.png": "b55e50ec6087d7e99a0cf204513cf4d64c41a8a930f320cff6ef068596fafe77",
+    "public/demos/vehicle-style-study/02-detailed-toon/view-7.png": "f823ffd24debdb998fecd315b2821d3f83637d1f1fdf29f1d1b19e381524df6e",
+    "public/demos/vehicle-style-study/02-detailed-toon/turntable.gif": "38500360e7e37a6f40a7f1b67f9be15f5db0db4c9908de6a47c4234aeb535bd7",
+    "data/vehicle-style-study/02-detailed-toon/raw-contact.png": "9e6e19b3b61935b9ffdd681297e4d341f2593b881ef993b766c010feb5085d51",
+    "data/vehicle-style-study/02-detailed-toon/gif-contact.png": "358d16a890e9d8c65fc4c5ae3236a67a502777b41e501bd17f49724595e2551b",
+    "data/vehicle-style-study/02-detailed-toon/sheet-4x.png": "355aa1ff2b31e0a766ef65fda5e4c49fd8591d4a97406d3df509699f34640132"
+  }
+}

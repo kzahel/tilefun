@@ -1,0 +1,16 @@
+{
+  "route": "a-reduced-projection",
+  "baseRevision": "budget-mid",
+  "geometryMode": "integrated-flat",
+  "trackTuckPerSide": 0.08,
+  "longitudinalStations": [-0.7, -0.5, -0.375, -0.3, -0.15, 0, 0.15, 0.3, 0.375, 0.5, 0.7],
+  "crownProfile": [[0, 0.72], [0.3, 0.715], [0.375, 0.695], [0.5, 0.64], [0.7, 0.5]],
+  "segments": 8,
+  "outerRadius": 0.405,
+  "innerRadius": 0.375,
+  "railsY": [0.52, 0.7, 0.95],
+  "wheelRadius": 0.34,
+  "exportWorldScale": 17.39130434782609,
+  "renderThreads": 4,
+  "paintPolicy": "Preserve exact mid atlas and old UVs; body shoulders use existing source palette swatches"
+}

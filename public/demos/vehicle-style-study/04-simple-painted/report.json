@@ -1,0 +1,475 @@
+{
+  "route": "04-simple-painted",
+  "title": "Rosso Sprint \u2014 simple painted coupe",
+  "status": "complete",
+  "method": "Original sectional low-poly shell with actual curved open wheel arches; four rigid wheels; shared flat unlit palette materials, geometric internal ink, fixed point reduction, binary alpha and one-pixel inward silhouette ink.",
+  "evaluatedTriangleCount": 1710,
+  "evaluatedMeshCount": 5,
+  "components": [
+    {
+      "name": "Body_PaintedShell_Glass_Trim",
+      "triangles": 974,
+      "vertices": 886
+    },
+    {
+      "name": "Wheel_Front_L",
+      "triangles": 184,
+      "vertices": 128
+    },
+    {
+      "name": "Wheel_Front_R",
+      "triangles": 184,
+      "vertices": 128
+    },
+    {
+      "name": "Wheel_Rear_L",
+      "triangles": 184,
+      "vertices": 128
+    },
+    {
+      "name": "Wheel_Rear_R",
+      "triangles": 184,
+      "vertices": 128
+    }
+  ],
+  "nativeSize": [
+    128,
+    128
+  ],
+  "rawSize": [
+    512,
+    512
+  ],
+  "sheetSize": [
+    1024,
+    128
+  ],
+  "modelUnits": {
+    "length": 4.6,
+    "nominalBodyWidth": 1.92,
+    "roofHeight": 1.05,
+    "forward": "-X",
+    "up": "+Z",
+    "origin": "ground center"
+  },
+  "camera": {
+    "position": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "elevationDegrees": 50,
+    "orthographicScale": 7.2,
+    "target": [
+      0,
+      0,
+      0
+    ]
+  },
+  "renderSettings": {
+    "engine": "Cycles",
+    "device": "CPU",
+    "samples": 8,
+    "threads": 4,
+    "materials": "RGB unlit surface"
+  },
+  "headingDegrees": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "translationPixels": [
+    0,
+    28
+  ],
+  "groundAnchorPixels": [
+    64,
+    92
+  ],
+  "palette": {
+    "ink": "#3a3a50",
+    "red_shadow": "#a11250",
+    "red_side": "#c53458",
+    "red_main": "#d3445c",
+    "red_light": "#e35a5a",
+    "red_glint": "#e18484",
+    "glass_dark": "#738ca8",
+    "glass_mid": "#8fa1c8",
+    "glass_light": "#a4bbd5",
+    "glass_glint": "#bad2e0",
+    "trim_dark": "#46465e",
+    "trim_mid": "#565972",
+    "silver": "#b9b9d5",
+    "lamp": "#ebe4f2",
+    "rear_lamp": "#fc5c46",
+    "red_deep": "#7f214c"
+  },
+  "paletteColorCount": 16,
+  "usedColorCount": 16,
+  "usedColors": [
+    "#3a3a50",
+    "#46465e",
+    "#565972",
+    "#738ca8",
+    "#7f214c",
+    "#8fa1c8",
+    "#a11250",
+    "#a4bbd5",
+    "#b9b9d5",
+    "#bad2e0",
+    "#c53458",
+    "#d3445c",
+    "#e18484",
+    "#e35a5a",
+    "#ebe4f2",
+    "#fc5c46"
+  ],
+  "paletteProvenance": "Every role is an exact opaque source RGB sampled from compact-4/v1/refs; no supplemental colors.",
+  "sourceReferences": {
+    "east.png": {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/east.png",
+      "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb",
+      "size": [
+        64,
+        64
+      ]
+    },
+    "north.png": {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/north.png",
+      "sha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6",
+      "size": [
+        32,
+        64
+      ]
+    },
+    "south.png": {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/south.png",
+      "sha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146",
+      "size": [
+        32,
+        64
+      ]
+    },
+    "west.png": {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/west.png",
+      "sha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa",
+      "size": [
+        64,
+        64
+      ]
+    }
+  },
+  "blendPath": "data/vehicle-style-study/04-simple-painted/sports-coupe.blend",
+  "glbPath": "public/demos/vehicle-style-study/04-simple-painted/sports-coupe.glb",
+  "sourcePaths": [
+    "scripts/vehicle-style-study/04-simple-painted/build.py",
+    "scripts/vehicle-style-study/04-simple-painted/finish.py",
+    "scripts/vehicle-style-study/04-simple-painted/verify_scene.py"
+  ],
+  "commands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-style-study/04-simple-painted/build.py",
+    "python scripts/vehicle-style-study/04-simple-painted/finish.py",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-style-study/04-simple-painted/verify_scene.py",
+    "python scripts/vehicle-style-study/04-simple-painted/finish.py --verified"
+  ],
+  "glbValidation": {
+    "triangles": 1710,
+    "meshCount": 5,
+    "materialCount": 15,
+    "materialPrimitives": 30,
+    "independentWheelNodes": 4,
+    "unlit": true,
+    "bytes": 106100
+  },
+  "finishing": {
+    "reduction": "nearest point, one fixed 512-to-128 reduction",
+    "alphaThreshold": 128,
+    "outline": "one-native-pixel inward 4-neighbor silhouette",
+    "dither": false,
+    "perViewPalette": false,
+    "perViewFitting": false,
+    "authoredPixelClusters": [],
+    "internalInk": "3D painted glass apertures, hood shutlines, arch lips, intakes and door seams; no view-specific pixel redrawing"
+  },
+  "wheelCenters": [
+    [
+      -1.3799999952316284,
+      -0.8799999952316284,
+      0.33000001311302185
+    ],
+    [
+      -1.3799999952316284,
+      0.8799999952316284,
+      0.33000001311302185
+    ],
+    [
+      1.3799999952316284,
+      -0.8799999952316284,
+      0.33000001311302185
+    ],
+    [
+      1.3799999952316284,
+      0.8799999952316284,
+      0.33000001311302185
+    ]
+  ],
+  "wheelRadius": 0.33,
+  "bounds": [
+    [
+      23,
+      70,
+      105,
+      105
+    ],
+    [
+      26,
+      55,
+      103,
+      118
+    ],
+    [
+      46,
+      53,
+      82,
+      121
+    ],
+    [
+      25,
+      55,
+      102,
+      118
+    ],
+    [
+      23,
+      70,
+      105,
+      105
+    ],
+    [
+      25,
+      58,
+      102,
+      119
+    ],
+    [
+      46,
+      56,
+      82,
+      121
+    ],
+    [
+      26,
+      58,
+      103,
+      119
+    ]
+  ],
+  "validation": {
+    "binaryAlpha": true,
+    "allOutputsExist": true,
+    "allEightDistinct": true,
+    "paddingPass": true,
+    "fixedGlobalPalette": true,
+    "gifFrames": 8,
+    "gifFrameDurationMs": 250,
+    "glbUnlit": true
+  },
+  "visualInspection": {
+    "date": "2026-10-19",
+    "reviewer": "authoring agent; agent inspection only, no human approval inferred",
+    "inspectedAllRawViews": true,
+    "inspectedAllFinalViews": true,
+    "inspectedGifDecodedFrames": true,
+    "evidenceViewed": [
+      "public/demos/vehicle-style-study/04-simple-painted/raw-0.png",
+      "public/demos/vehicle-style-study/04-simple-painted/raw-1.png",
+      "data/vehicle-style-study/04-simple-painted/raw-contact.png",
+      "public/demos/vehicle-style-study/04-simple-painted/comparison.png",
+      "public/demos/vehicle-style-study/04-simple-painted/sheet.png",
+      "data/vehicle-style-study/04-simple-painted/gif-decoded-contact.png"
+    ],
+    "findings": [
+      "Long low nose, swept cabin, raised rear haunches, curved openings, dark side intakes, mirrors and front/rear lamp distinctions read coherently across all eight raw views.",
+      "Near wheels are visible in obliques; far wheels occlude behind the body in side views and both tracks show in front/rear views. No obvious floating wheel, body intrusion, clipping or glass spill was seen.",
+      "Broad face-painted highlights remain stable and glass has continuous geometric dark borders; native finishing adds one inward silhouette pixel without changing the anchor or fitting each view.",
+      "First pass had broken subpixel seams; shell-following strips and wider hood lines improved them before this final output. No per-view pixel redrawing was used.",
+      "All eight final sprites were inspected together at native scale in sheet.png and enlarged nearest in comparison.png. Hood seams retain some stair steps; small handles, vents and rim spokes simplify with point sampling.",
+      "All eight decoded GIF frames were inspected in a contact sheet. Eight unique frames and 250 ms durations were checked programmatically. Continuous animated playback was not inspected. The GIF includes a fixed ground-origin crosshair guide over the sprite; final PNGs contain no guide.",
+      "The compact-4 source red roles are pink-magenta, and flat highlight bands look graphic rather than glossy. This is the intended inexpensive unlit baseline, not a detailed shaded result."
+    ],
+    "remainingLimitations": [
+      "No human art approval, runtime performance evidence or integration qualification.",
+      "No steering or suspension qualification; neutral rolling cylinder clearance and independent wheel transforms were checked.",
+      "GLB has geometric internal trim but the sprite finishing silhouette ink is external to its mesh."
+    ],
+    "finalPixelState": "final sprites inspected; freeze for coordinator registration"
+  },
+  "sceneVerification": {
+    "status": "pass",
+    "sceneOpenedFromSavedBlend": true,
+    "triangles": 1710,
+    "meshCount": 5,
+    "groundAnchorPixels": [
+      64,
+      92
+    ],
+    "cameraContract": true,
+    "cpuRenderThreads": 4,
+    "cpuSamples": 8,
+    "wheelRestContactZ": 0,
+    "fullCylinderClearance": [
+      {
+        "wheel": "Wheel_Front_L",
+        "conservativeFullCylinderBodyClearance": 0.0476022702750456
+      },
+      {
+        "wheel": "Wheel_Front_R",
+        "conservativeFullCylinderBodyClearance": 0.0476022702750456
+      },
+      {
+        "wheel": "Wheel_Rear_L",
+        "conservativeFullCylinderBodyClearance": 0.0476022702750456
+      },
+      {
+        "wheel": "Wheel_Rear_R",
+        "conservativeFullCylinderBodyClearance": 0.0476022702750456
+      }
+    ],
+    "independentRollProbes": [
+      {
+        "wheel": "Wheel_Front_L",
+        "probeRollDegrees": 37,
+        "movedVertices": 128,
+        "otherWheelAndBodyVerticesUnchanged": true
+      },
+      {
+        "wheel": "Wheel_Front_R",
+        "probeRollDegrees": 37,
+        "movedVertices": 128,
+        "otherWheelAndBodyVerticesUnchanged": true
+      },
+      {
+        "wheel": "Wheel_Rear_L",
+        "probeRollDegrees": 37,
+        "movedVertices": 128,
+        "otherWheelAndBodyVerticesUnchanged": true
+      },
+      {
+        "wheel": "Wheel_Rear_R",
+        "probeRollDegrees": 37,
+        "movedVertices": 128,
+        "otherWheelAndBodyVerticesUnchanged": true
+      }
+    ],
+    "visualBounds": {
+      "min": [
+        -2.308000087738037,
+        -1.0010000467300415,
+        0.0
+      ],
+      "max": [
+        2.309999942779541,
+        1.0010000467300415,
+        1.0499999523162842
+      ]
+    },
+    "axisExport": "Blender (X,Y,Z) -> glTF (X,Z,-Y); source -X forward stays -X; glTF +Y is up",
+    "limits": "Conservative full tire-cylinder vs all body triangles; no steering/suspension/physics/runtime qualification."
+  },
+  "limitations": [
+    "Original offline baseline candidate; no human approval or production qualification.",
+    "Faceted shoulders and broad unlit highlight bands trade surface nuance for low cost; the red source palette is pink-magenta rather than saturated automotive red.",
+    "Small handles, grille and five-spoke rim detail simplify or vanish at the fixed native scale; no per-view pixel repair was applied.",
+    "Wheel roll is independent and static-body clearance is checked; steering, suspension, physics/collision integration and gameplay performance are unqualified.",
+    "Flat palette materials export as multiple GLB material primitives; triangle count alone is not a device draw-call budget.",
+    "Sprite ink is a finishing operation and is not part of the GLB; geometric internal trim remains in both.",
+    "Static material highlights rotate with the model; they are authored paint rather than physically moving light reflections."
+  ],
+  "files": {
+    "raw-0.png": {
+      "bytes": 97764,
+      "sha256": "3d3957ab71bfbea535c5d7fc4e4dfabfe3146b8add371a5b7ff62d222af6fd16"
+    },
+    "raw-1.png": {
+      "bytes": 106213,
+      "sha256": "2f22e38e7ba3fd84663fd58ed383232845c28ea62021a4fef0c8e81647f73302"
+    },
+    "raw-2.png": {
+      "bytes": 100636,
+      "sha256": "85a8566b2be0e7f79f7f144fa6eb16f373848f3d46933049cd59417030dd9525"
+    },
+    "raw-3.png": {
+      "bytes": 104543,
+      "sha256": "ed7be75d3073927159bc060a69d9d04196737acde44f3aa60a0c188a900c1fba"
+    },
+    "raw-4.png": {
+      "bytes": 97669,
+      "sha256": "58ec7fd9bb1405827ebc2fc2147abbf3fb4180bf7c6ed646e8d7fbe78d6397a6"
+    },
+    "raw-5.png": {
+      "bytes": 105472,
+      "sha256": "6306ff4905d7069d180e997ba2c760d16503abb861e1c605776fa75a2dbe40f6"
+    },
+    "raw-6.png": {
+      "bytes": 98621,
+      "sha256": "c23f17d21de6e6326aee4d31e990f9611487e3457ae97590720b88deb3fb859f"
+    },
+    "raw-7.png": {
+      "bytes": 105234,
+      "sha256": "cb41c5258ad5ccaaf775055eb3c4bd8e6f95a7998acf656185223e44a2d55a02"
+    },
+    "view-0.png": {
+      "bytes": 1584,
+      "sha256": "50f2afb611ad982f2c817a5c71e2954aef4502cc92f96aed238879d4512b648b"
+    },
+    "view-1.png": {
+      "bytes": 2116,
+      "sha256": "ae247b310f6d5a94c54ba7ca7f5ef6b1109a1cd4c7349b8120035b05e56e03f8"
+    },
+    "view-2.png": {
+      "bytes": 1416,
+      "sha256": "5c1b52d1a72be66d2e256f546506c84c5b6696a8dbd7aa9134aacc03c3bcc0b0"
+    },
+    "view-3.png": {
+      "bytes": 2136,
+      "sha256": "65b0f1688d3303d9cc798c16c7968b7da47f2e8c70265ffbac08dc0be9119804"
+    },
+    "view-4.png": {
+      "bytes": 1578,
+      "sha256": "8bae55171d211467ac09c5e2f9e6adcdf430f3b1e499d25c4a6db6030ff208fa"
+    },
+    "view-5.png": {
+      "bytes": 2126,
+      "sha256": "c1b99051f2bb187923dfe48c52af18337da0119ade3ff16bbb97919c4179eeb8"
+    },
+    "view-6.png": {
+      "bytes": 1374,
+      "sha256": "c15e4623a5fabe487552be9d773fc8eabb648612b7dd2142de92c69585e99dc9"
+    },
+    "view-7.png": {
+      "bytes": 2151,
+      "sha256": "02857e723882e18f570bff7ce85bce2d24421bb2d9d87c9546a328cdb424f13b"
+    },
+    "sheet.png": {
+      "bytes": 12408,
+      "sha256": "cc51ce9c0655e8381c6017209a938e4db2a0615ff354295b0ee86b311221ccfe"
+    },
+    "comparison.png": {
+      "bytes": 175527,
+      "sha256": "2957f10bff119b38f4c5d660b232335643fe6a9325dae9872519c5f54b601f87"
+    },
+    "turntable.gif": {
+      "bytes": 113195,
+      "sha256": "4b2232d04fc561524adedbb7e4de680fec4c81076828725bc52820bb95a253f7"
+    },
+    "sports-coupe.glb": {
+      "bytes": 106100,
+      "sha256": "b99a00ee26a5253133876b4b0f83034b569ee11a14f6bbaf8b05701bbb919b6c"
+    }
+  }
+}

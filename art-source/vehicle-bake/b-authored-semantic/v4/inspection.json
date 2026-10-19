@@ -1,0 +1,27 @@
+{
+  "allEightViewsInspected": true,
+  "nativeAnd4x": true,
+  "intermediateAndRollInspected": true,
+  "inspector": "B authoring agent, visual inspection of actual GLB round-trip renders; this is not human approval",
+  "views": [0, 45, 90, 135, 180, 225, 270, 315],
+  "evidence": ["sheet-native.png", "inspect-4x.png", "comparison.png", "contour-diff.png", "novel-and-roll.png", "wireframe.png"],
+  "findings": [
+    "Inspected all eight native and four-times-nearest views, plus 22.5/67.5/157.5/292.5 degree headings and four quarter-turn wheel poses.",
+    "The red coupe identity and swept cabin are preserved. Separate glass ownership keeps aperture frames continuous and avoids glass leaking onto the body.",
+    "Hood seams, red ramps, restrained glass bands, side intake and three deck slats come from the embedded atlas; no post-render interior drawing is used.",
+    "Wheel pockets are real open geometry. Alpha outlines can merge far-side wheel/mirror details at native size, but no obvious tire/body clipping or stray texture-island colors were observed.",
+    "Source landmark rails and end trim improve mean eight-view silhouette IoU from roughly 0.950 in v1 to 0.962 in v4, but do not close the source-reduced route's silhouette lead."
+  ],
+  "remainingLimitations": [
+    "Hood seams are heavier than the chosen approach-3 drawings; this is authored atlas width, not an outline-pass artifact.",
+    "The coachwork remains more angular and the body highlight layout more regular than the target or source-reduced route. Source landmarks are retained but this is an economical analytic retopology rather than the high-detail sculpt.",
+    "Some far-side trim and narrow deck/window details merge or change pixel coverage between headings. Three slats exist in the atlas but exact per-view line coverage is not guaranteed.",
+    "The four-times wireframe sheet is a coarse optional proof render and undersamples thin edges; exact exported topology statistics come from GLB indices and attributes."
+  ],
+  "coordinatorEvidence": {
+    "source": "Coordinator user message in this session",
+    "finalRevisionSharedComponentCapture": "passed v4: 2378 triangles",
+    "finalRevisionCylinderProof": "passed all neutral roll angles and collision-negative control",
+    "scope": "Coordinator performed shared-engine validation; route agent independently checked actual GLB buffers, rigs and Blender round-trip renders. No separate final-capture filesystem path was supplied."
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "triangles": 2469,
+  "meshes": 5,
+  "materials": 1,
+  "primitives": 5,
+  "vertices": 3305,
+  "glbBytes": 161488,
+  "textureBytes": 33880,
+  "extensionsUsed": [
+    "KHR_materials_unlit"
+  ],
+  "nodes": [
+    {
+      "extras": {
+        "guide_class": "body",
+        "source_owner": 0,
+        "wheel_source": ""
+      },
+      "mesh": 0,
+      "name": "Body_static"
+    },
+    {
+      "extras": {
+        "guide_class": "wheels",
+        "source_owner": 61,
+        "wheel_source": "Front_near_Roll_Y"
+      },
+      "mesh": 1,
+      "name": "Wheel_FL_tire_hub",
+      "translation": [
+        1.399999976158142,
+        -0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        1
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_FL_Roll"
+    },
+    {
+      "children": [
+        2
+      ],
+      "extras": {
+        "steering_enabled": true,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_FL_Steer",
+      "translation": [
+        -1.4000000953674316,
+        0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "extras": {
+        "guide_class": "wheels",
+        "source_owner": 70,
+        "wheel_source": "Front_far_Roll_Y"
+      },
+      "mesh": 2,
+      "name": "Wheel_FR_tire_hub",
+      "translation": [
+        1.399999976158142,
+        -0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        4
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_FR_Roll"
+    },
+    {
+      "children": [
+        5
+      ],
+      "extras": {
+        "steering_enabled": true,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_FR_Steer",
+      "translation": [
+        -1.4000000953674316,
+        0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "extras": {
+        "guide_class": "wheels",
+        "source_owner": 79,
+        "wheel_source": "Rear_near_Roll_Y"
+      },
+      "mesh": 3,
+      "name": "Wheel_RL_tire_hub",
+      "translation": [
+        -1.399999976158142,
+        -0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        7
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_RL_Roll"
+    },
+    {
+      "children": [
+        8
+      ],
+      "extras": {
+        "steering_enabled": false,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_RL_Steer",
+      "translation": [
+        1.4000000953674316,
+        0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "extras": {
+        "guide_class": "wheels",
+        "source_owner": 88,
+        "wheel_source": "Rear_far_Roll_Y"
+      },
+      "mesh": 4,
+      "name": "Wheel_RR_tire_hub",
+      "translation": [
+        -1.399999976158142,
+        -0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        10
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_RR_Roll"
+    },
+    {
+      "children": [
+        11
+      ],
+      "extras": {
+        "steering_enabled": false,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_RR_Steer",
+      "translation": [
+        1.4000000953674316,
+        0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        0,
+        3,
+        6,
+        9,
+        12
+      ],
+      "name": "Coupe_export_root",
+      "scale": [
+        17.39130401611328,
+        17.39130401611328,
+        17.39130401611328
+      ]
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ]
+}

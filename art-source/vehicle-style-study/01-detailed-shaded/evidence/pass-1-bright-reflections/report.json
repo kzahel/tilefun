@@ -1,0 +1,348 @@
+{
+  "route": "01-detailed-shaded",
+  "title": "Detailed smooth red sports coupe / direct shaded render",
+  "status": "awaiting-visual-inspection",
+  "method": "Original parametric curved panels and mechanical details; glossy red Principled clearcoat; fixed soft studio; CPU Cycles 16 samples; direct render quantization adapting pack_tiger.py. No authored pixel clusters or redraw.",
+  "evaluatedTriangles": 234036,
+  "evaluatedMeshCount": 221,
+  "sourceMeshCount": 134,
+  "sourceCurveCount": 87,
+  "nativeSize": [
+    128,
+    128
+  ],
+  "rawSize": [
+    512,
+    512
+  ],
+  "palette": [
+    "#e35a5a",
+    "#3a3a50",
+    "#7f214c",
+    "#d3445c",
+    "#ba2758",
+    "#a11250",
+    "#c53458",
+    "#a4bbd5",
+    "#4a2a3d",
+    "#bad2e0",
+    "#8fa1c8",
+    "#565972",
+    "#738ca8",
+    "#46465e",
+    "#d4d4e6",
+    "#e18484",
+    "#565672",
+    "#7373a8",
+    "#ebe4f2",
+    "#f8f8f8",
+    "#838897",
+    "#cb2a2a",
+    "#968bab",
+    "#a82b2d",
+    "#d93232",
+    "#b9b9d5",
+    "#fc5c46",
+    "#410c1a",
+    "#74121d",
+    "#ab161e",
+    "#dd2025",
+    "#fa4339",
+    "#ff7c64",
+    "#1c1927"
+  ],
+  "paletteCount": 34,
+  "colourCount": 28,
+  "paletteProvenance": {
+    "sourceReferences": [
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/east.png",
+        "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb",
+        "size": [
+          64,
+          64
+        ]
+      },
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/north.png",
+        "sha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6",
+        "size": [
+          32,
+          64
+        ]
+      },
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/south.png",
+        "sha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146",
+        "size": [
+          32,
+          64
+        ]
+      },
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/west.png",
+        "sha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa",
+        "size": [
+          64,
+          64
+        ]
+      }
+    ],
+    "sampledColours": [
+      "#e35a5a",
+      "#3a3a50",
+      "#7f214c",
+      "#d3445c",
+      "#ba2758",
+      "#a11250",
+      "#c53458",
+      "#a4bbd5",
+      "#4a2a3d",
+      "#bad2e0",
+      "#8fa1c8",
+      "#565972",
+      "#738ca8",
+      "#46465e",
+      "#d4d4e6",
+      "#e18484",
+      "#565672",
+      "#7373a8",
+      "#ebe4f2",
+      "#f8f8f8",
+      "#838897",
+      "#cb2a2a",
+      "#968bab",
+      "#a82b2d",
+      "#d93232",
+      "#b9b9d5",
+      "#fc5c46"
+    ],
+    "namedSupplementRoles": {
+      "redDeepShadow": "#410c1a",
+      "redShadow": "#74121d",
+      "redMid": "#ab161e",
+      "redAutomotive": "#dd2025",
+      "redLit": "#fa4339",
+      "redClearcoat": "#ff7c64",
+      "trimOutline": "#1c1927"
+    }
+  },
+  "blendPath": "data/vehicle-style-study/01-detailed-shaded/sports-coupe.blend",
+  "sourcePath": "scripts/vehicle-style-study/01-detailed-shaded/build.py",
+  "packerPath": "scripts/vehicle-style-study/01-detailed-shaded/pack.py",
+  "commands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-style-study/01-detailed-shaded/build.py",
+    "python scripts/vehicle-style-study/01-detailed-shaded/pack.py"
+  ],
+  "renderer": {
+    "engine": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "projection": {
+    "position": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "orthoScale": 7.2,
+    "elevationDegrees": 50
+  },
+  "model": {
+    "forward": "-X",
+    "up": "Z",
+    "bodyLength": 4.6,
+    "maxBodyWidth": 1.94,
+    "roofHeight": 1.05,
+    "wheelCenters": [
+      [
+        -1.4,
+        -0.835,
+        0.32
+      ],
+      [
+        -1.4,
+        0.835,
+        0.32
+      ],
+      [
+        1.4,
+        -0.835,
+        0.32
+      ],
+      [
+        1.4,
+        0.835,
+        0.32
+      ]
+    ],
+    "tireRadius": 0.32,
+    "groundContactZ": 0
+  },
+  "packing": {
+    "filter": "premultiplied-alpha Lanczos 512 to 128",
+    "translation": [
+      0,
+      28
+    ],
+    "groundAnchor": [
+      64,
+      92
+    ],
+    "alphaThreshold": 110,
+    "alpha": "binary 0 or 255",
+    "outline": "one native pixel, exterior cardinal neighbours only",
+    "dither": false,
+    "independentFrameFit": false,
+    "authoredPixelClusters": []
+  },
+  "views": [
+    {
+      "bodyPixels": 2545,
+      "outlinePixels": 226,
+      "bounds": [
+        21,
+        68,
+        108,
+        106
+      ]
+    },
+    {
+      "bodyPixels": 2475,
+      "outlinePixels": 187,
+      "bounds": [
+        24,
+        55,
+        104,
+        121
+      ]
+    },
+    {
+      "bodyPixels": 2296,
+      "outlinePixels": 192,
+      "bounds": [
+        44,
+        53,
+        84,
+        123
+      ]
+    },
+    {
+      "bodyPixels": 2475,
+      "outlinePixels": 188,
+      "bounds": [
+        24,
+        55,
+        104,
+        121
+      ]
+    },
+    {
+      "bodyPixels": 2545,
+      "outlinePixels": 225,
+      "bounds": [
+        20,
+        68,
+        107,
+        106
+      ]
+    },
+    {
+      "bodyPixels": 2422,
+      "outlinePixels": 185,
+      "bounds": [
+        24,
+        58,
+        104,
+        121
+      ]
+    },
+    {
+      "bodyPixels": 2219,
+      "outlinePixels": 186,
+      "bounds": [
+        44,
+        55,
+        84,
+        124
+      ]
+    },
+    {
+      "bodyPixels": 2422,
+      "outlinePixels": 185,
+      "bounds": [
+        24,
+        58,
+        104,
+        121
+      ]
+    }
+  ],
+  "gif": {
+    "frames": 8,
+    "durationMs": [
+      350,
+      350,
+      350,
+      350,
+      350,
+      350,
+      350,
+      350
+    ],
+    "size": [
+      512,
+      512
+    ],
+    "loop": true
+  },
+  "limitations": [
+    "Unreviewed offline experiment; no production approval or integration.",
+    "Bright softbox highlights can turn red panels pale pink and collapse to broad flat palette bands.",
+    "Fine split spokes, rotor drillings, lens rings, tire grooves and grille ribs approach or fall below a native pixel.",
+    "Reflective highlights change across directions under fixed lighting; palette mapping cannot impose authored cluster stability.",
+    "Glass is opaque reflective smoked material, not a refractive cabin with interior.",
+    "Editable wheels have separate pivots, but animated steering, tire/body clearance and runtime optimization are unqualified.",
+    "Dense evaluated geometry is an offline shading experiment, not a runtime mesh budget."
+  ],
+  "visualInspection": [],
+  "validation": {
+    "distinctViews": 8,
+    "binaryAlpha": true,
+    "sharedPalette": true,
+    "allFramesPadded": true,
+    "sheetSize": [
+      1024,
+      128
+    ],
+    "expectedFilesExist": true
+  },
+  "outputHashes": {
+    "comparison.png": "1839f1470c8db2c1d3a9ed2782c182e0939414982c9f0342febb60d90c969914",
+    "native-contact.png": "b52dc739ac8bbb37ce037a20e728b2fcbdd2290f9b63e655562780eb7743c53f",
+    "raw-0.png": "bbdbc8ba2e263d748971f3d82d04af09dda969b2ad5f372d1920b83ea8df68b9",
+    "raw-1.png": "1c3d4360bd8d1b60e08e41b4f9a839906046d4bb1885d47d88b5a29000aaf8a7",
+    "raw-2.png": "5b81126e91e13c0cac3232e4f91b1bd4f5707d76e8e6f1c637adbe058c54d5ab",
+    "raw-3.png": "6dbd68bd637bb760c21676387803f15f6220bcf73324f781f29b7ed9f7829017",
+    "raw-4.png": "0d4ce160a4688e21c2751c9e601c7fe64260c92f8278a4ba5508821b8e2b0cde",
+    "raw-5.png": "b0890bd3c1e54a1e0ee11a80c9239d30ddedb5e39c4b4749f40119774ef7588f",
+    "raw-6.png": "bc428054e3047d50641a8a89e2f5a776ae41a27d2f54879049a0af3c186320d2",
+    "raw-7.png": "5622f1968c8fbcadfac95d903674d0295738dfd06d0c81b95e8369fd66d1e8b8",
+    "raw-contact.png": "39402e18a9fb56899a1dbdbff655036e1d3609afe6d4ffce6a41867fa66f899b",
+    "sheet.png": "f5eaaa01f09794d5854e090ccf24590e1b3c3c29d186e82501f37e02ca665b5c",
+    "turntable.gif": "138b8394fbe73002b1d80325aec5764c97811420a91de4382b54f4a80e73e6dd",
+    "view-0.png": "80ce21f0f417f924e115c55d99bd80a3037702615f4f07982704d6ca75524faa",
+    "view-1.png": "28ca8e656e621469024720cccc6b74f402baefd9f0738631e8f67509daba7681",
+    "view-2.png": "dad02817d3e93eaed8b9fbf33054d21905d24bdfb535cec00c369134ec663065",
+    "view-3.png": "dbc1b6bcae67d859f0dc46f5b0f19c191bc37bd0260ca7e40d12ce9efdf587cd",
+    "view-4.png": "4b39271a9498a814d8bb93b6b9acc126cf2971a28cb4287055803065183d5971",
+    "view-5.png": "ed6280554e03d616a4fe617e501540273920720efc976a5fccb94388cc1b4513",
+    "view-6.png": "21e3bdeb4d3abff07cde5be84173e6a0361f98fe9dbe05eeb18e1bcc3b5edc0f",
+    "view-7.png": "03fcd3819997ee78c6e19ddb3124b983eaa041a65114d5b9f11d83ebec4d04e7"
+  }
+}

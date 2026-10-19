@@ -1,0 +1,110 @@
+[
+  {
+    "status": "passed",
+    "id": "a-reduced-projection--v5",
+    "glbSha256": "8298e37a89f61b314c641db310b295af22d46a3b4bfaaf4cca714bd65abf4d80",
+    "triangles": 2469,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.913044686906577,
+        "minimumGap": 0.5998638764703816,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913043913608384,
+        "minimumGap": 0.3599895537493101,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913044627817117,
+        "minimumGap": 0.6708170385955432,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044834209611,
+        "minimumGap": 0.6325321569857998,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  {
+    "status": "passed",
+    "id": "a-reduced-projection--budget-mid",
+    "glbSha256": "d33c9fdc300b01d0337b37969bd067d9481ef60014be9226ab0277b08f558bee",
+    "triangles": 1877,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.9130441247250465,
+        "minimumGap": 0.042857149769265135,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913044950779918,
+        "minimumGap": 0.339460990884378,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913045629803742,
+        "minimumGap": 0.31932116417234635,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044977011654,
+        "minimumGap": 0.26608296695138467,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  {
+    "status": "passed",
+    "id": "a-reduced-projection--budget-low-v4",
+    "glbSha256": "ccce8117bde3e42eb76b7af58aa55abac1b46c8411897a98474b0634e1409710",
+    "triangles": 1376,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.9130441247250465,
+        "minimumGap": 0.5998644386519123,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913045803365305,
+        "minimumGap": 0.35998766399238846,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913045629803742,
+        "minimumGap": 0.670816036608918,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044977011654,
+        "minimumGap": 0.6325320141837567,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

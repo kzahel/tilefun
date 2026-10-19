@@ -1,0 +1,191 @@
+[
+  {
+    "rgb": [
+      127,
+      33,
+      76
+    ],
+    "hex": "#7f214c",
+    "roles": [
+      "Coachwork",
+      "Rear_lens"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 653
+  },
+  {
+    "rgb": [
+      168,
+      43,
+      45
+    ],
+    "hex": "#a82b2d",
+    "roles": [
+      "Coachwork"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 12
+  },
+  {
+    "rgb": [
+      217,
+      50,
+      50
+    ],
+    "hex": "#d93232",
+    "roles": [
+      "Coachwork"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 10
+  },
+  {
+    "rgb": [
+      252,
+      92,
+      70
+    ],
+    "hex": "#fc5c46",
+    "roles": [
+      "Coachwork",
+      "Rear_lens"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 6
+  },
+  {
+    "rgb": [
+      58,
+      58,
+      80
+    ],
+    "hex": "#3a3a50",
+    "roles": [
+      "Glazing",
+      "Rubber_intake"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 841
+  },
+  {
+    "rgb": [
+      86,
+      89,
+      114
+    ],
+    "hex": "#565972",
+    "roles": [
+      "Glazing",
+      "Machined_alloy"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 112
+  },
+  {
+    "rgb": [
+      115,
+      140,
+      168
+    ],
+    "hex": "#738ca8",
+    "roles": [
+      "Glazing"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 100
+  },
+  {
+    "rgb": [
+      164,
+      187,
+      213
+    ],
+    "hex": "#a4bbd5",
+    "roles": [
+      "Glazing",
+      "Warm_LED"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 426
+  },
+  {
+    "rgb": [
+      32,
+      29,
+      43
+    ],
+    "hex": "#201d2b",
+    "roles": [
+      "Rubber_intake"
+    ],
+    "source": "explicit named trim/ink supplement",
+    "sourcePixelOccurrences": 0
+  },
+  {
+    "rgb": [
+      70,
+      70,
+      94
+    ],
+    "hex": "#46465e",
+    "roles": [
+      "Rubber_intake"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 76
+  },
+  {
+    "rgb": [
+      143,
+      161,
+      200
+    ],
+    "hex": "#8fa1c8",
+    "roles": [
+      "Machined_alloy"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 114
+  },
+  {
+    "rgb": [
+      212,
+      212,
+      230
+    ],
+    "hex": "#d4d4e6",
+    "roles": [
+      "Machined_alloy",
+      "Warm_LED"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 56
+  },
+  {
+    "rgb": [
+      248,
+      248,
+      248
+    ],
+    "hex": "#f8f8f8",
+    "roles": [
+      "Machined_alloy",
+      "Warm_LED"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 22
+  },
+  {
+    "rgb": [
+      203,
+      42,
+      42
+    ],
+    "hex": "#cb2a2a",
+    "roles": [
+      "Rear_lens"
+    ],
+    "source": "compact-4/v1/refs exact pixel",
+    "sourcePixelOccurrences": 12
+  }
+]

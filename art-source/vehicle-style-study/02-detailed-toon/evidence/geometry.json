@@ -1,0 +1,1353 @@
+{
+  "route": "02-detailed-toon",
+  "evaluatedTriangles": 113888,
+  "evaluatedMeshCount": 184,
+  "nativeMeshCount": 145,
+  "curveCount": 39,
+  "objects": [
+    {
+      "name": "Continuous_sculpted_body_with_wheel_openings",
+      "type": "MESH",
+      "triangles": 29360,
+      "vertices": 14682
+    },
+    {
+      "name": "Front_Near_rolled_fender_lip",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Front_Near_compound_curved_fender_sheet",
+      "type": "MESH",
+      "triangles": 1920,
+      "vertices": 1053
+    },
+    {
+      "name": "Front_Far_rolled_fender_lip",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Front_Far_compound_curved_fender_sheet",
+      "type": "MESH",
+      "triangles": 1920,
+      "vertices": 1053
+    },
+    {
+      "name": "Rear_Near_rolled_fender_lip",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Rear_Near_compound_curved_fender_sheet",
+      "type": "MESH",
+      "triangles": 1920,
+      "vertices": 1053
+    },
+    {
+      "name": "Rear_Far_rolled_fender_lip",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Rear_Far_compound_curved_fender_sheet",
+      "type": "MESH",
+      "triangles": 1920,
+      "vertices": 1053
+    },
+    {
+      "name": "Swept_compound_curved_glass_and_roof",
+      "type": "MESH",
+      "triangles": 13568,
+      "vertices": 6955
+    },
+    {
+      "name": "Glazing_border_windshield_base",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Glazing_border_A_pillar",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Glazing_border_C_pillar",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Glazing_border_rear_glass_base",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Roof_side_rail_-1",
+      "type": "CURVE",
+      "triangles": 960,
+      "vertices": 490
+    },
+    {
+      "name": "Window_sill_-1",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Window_B_pillar_-1",
+      "type": "CURVE",
+      "triangles": 400,
+      "vertices": 210
+    },
+    {
+      "name": "Mirror_stalk_-1",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Roof_side_rail_1",
+      "type": "CURVE",
+      "triangles": 960,
+      "vertices": 490
+    },
+    {
+      "name": "Window_sill_1",
+      "type": "CURVE",
+      "triangles": 1280,
+      "vertices": 650
+    },
+    {
+      "name": "Window_B_pillar_1",
+      "type": "CURVE",
+      "triangles": 400,
+      "vertices": 210
+    },
+    {
+      "name": "Mirror_stalk_1",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Deep_side_air_scoop_-1",
+      "type": "MESH",
+      "triangles": 236,
+      "vertices": 120
+    },
+    {
+      "name": "Intake_upper_rolled_edge_-1",
+      "type": "CURVE",
+      "triangles": 40,
+      "vertices": 30
+    },
+    {
+      "name": "Scoop_vane_-1_0",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Scoop_vane_-1_1",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Scoop_vane_-1_2",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Door_seam_-1",
+      "type": "CURVE",
+      "triangles": 60,
+      "vertices": 40
+    },
+    {
+      "name": "Lower_sill_blade_-1",
+      "type": "CURVE",
+      "triangles": 60,
+      "vertices": 40
+    },
+    {
+      "name": "Deep_side_air_scoop_1",
+      "type": "MESH",
+      "triangles": 236,
+      "vertices": 120
+    },
+    {
+      "name": "Intake_upper_rolled_edge_1",
+      "type": "CURVE",
+      "triangles": 40,
+      "vertices": 30
+    },
+    {
+      "name": "Scoop_vane_1_0",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Scoop_vane_1_1",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Scoop_vane_1_2",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Door_seam_1",
+      "type": "CURVE",
+      "triangles": 60,
+      "vertices": 40
+    },
+    {
+      "name": "Lower_sill_blade_1",
+      "type": "CURVE",
+      "triangles": 60,
+      "vertices": 40
+    },
+    {
+      "name": "Hood_power_crease_-1",
+      "type": "CURVE",
+      "triangles": 900,
+      "vertices": 460
+    },
+    {
+      "name": "Black_headlamp_surround_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Swept_LED_headlamp_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "LED_light_blade_-1",
+      "type": "CURVE",
+      "triangles": 40,
+      "vertices": 30
+    },
+    {
+      "name": "Hood_power_crease_1",
+      "type": "CURVE",
+      "triangles": 900,
+      "vertices": 460
+    },
+    {
+      "name": "Black_headlamp_surround_1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Swept_LED_headlamp_1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "LED_light_blade_1",
+      "type": "CURVE",
+      "triangles": 40,
+      "vertices": 30
+    },
+    {
+      "name": "Wide_front_grille",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Front_intake_vertical_vane_-0.38",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Front_intake_vertical_vane_-0.19",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Front_intake_vertical_vane_0",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Front_intake_vertical_vane_0.19",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Front_intake_vertical_vane_0.38",
+      "type": "CURVE",
+      "triangles": 20,
+      "vertices": 20
+    },
+    {
+      "name": "Front_splitter",
+      "type": "CURVE",
+      "triangles": 60,
+      "vertices": 40
+    },
+    {
+      "name": "Rear_black_fascia",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Diffuser_fin_-0.61",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Diffuser_fin_-0.3",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Diffuser_fin_0",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Diffuser_fin_0.3",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Diffuser_fin_0.61",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Rear_lip_spoiler",
+      "type": "CURVE",
+      "triangles": 60,
+      "vertices": 40
+    },
+    {
+      "name": "Rounded_performance_tire_Front_Near",
+      "type": "MESH",
+      "triangles": 2240,
+      "vertices": 1120
+    },
+    {
+      "name": "Polished_rim_lip_Front_Near",
+      "type": "MESH",
+      "triangles": 1120,
+      "vertices": 560
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_0_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_0_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_1_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_1_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_2_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_2_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_3_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_3_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_4_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Near_4_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Rounded_performance_tire_Front_Far",
+      "type": "MESH",
+      "triangles": 2240,
+      "vertices": 1120
+    },
+    {
+      "name": "Polished_rim_lip_Front_Far",
+      "type": "MESH",
+      "triangles": 1120,
+      "vertices": 560
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_0_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_0_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_1_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_1_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_2_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_2_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_3_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_3_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_4_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Front_Far_4_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Rounded_performance_tire_Rear_Near",
+      "type": "MESH",
+      "triangles": 2240,
+      "vertices": 1120
+    },
+    {
+      "name": "Polished_rim_lip_Rear_Near",
+      "type": "MESH",
+      "triangles": 1120,
+      "vertices": 560
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_0_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_0_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_1_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_1_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_2_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_2_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_3_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_3_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_4_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Near_4_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Rounded_performance_tire_Rear_Far",
+      "type": "MESH",
+      "triangles": 2240,
+      "vertices": 1120
+    },
+    {
+      "name": "Polished_rim_lip_Rear_Far",
+      "type": "MESH",
+      "triangles": 1120,
+      "vertices": 560
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_0_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_0_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_1_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_1_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_2_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_2_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_3_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_3_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_4_-1",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Split_alloy_spoke_Rear_Far_4_1",
+      "type": "MESH",
+      "triangles": 156,
+      "vertices": 80
+    },
+    {
+      "name": "Sculpted_mirror_-1",
+      "type": "MESH",
+      "triangles": 960,
+      "vertices": 482
+    },
+    {
+      "name": "Mirror_glass_-1",
+      "type": "MESH",
+      "triangles": 960,
+      "vertices": 482
+    },
+    {
+      "name": "Sculpted_mirror_1",
+      "type": "MESH",
+      "triangles": 960,
+      "vertices": 482
+    },
+    {
+      "name": "Mirror_glass_1",
+      "type": "MESH",
+      "triangles": 960,
+      "vertices": 482
+    },
+    {
+      "name": "Flush_door_handle_-1",
+      "type": "MESH",
+      "triangles": 528,
+      "vertices": 266
+    },
+    {
+      "name": "Flush_door_handle_1",
+      "type": "MESH",
+      "triangles": 528,
+      "vertices": 266
+    },
+    {
+      "name": "Recessed_tail_lamp_socket_-0.4",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Round_red_tail_lens_-0.4",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Recessed_tail_lamp_socket_-0.61",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Round_red_tail_lens_-0.61",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Polished_exhaust_tip_-1",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Hollow_exhaust_core_-1",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Recessed_tail_lamp_socket_0.4",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Round_red_tail_lens_0.4",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Recessed_tail_lamp_socket_0.61",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Round_red_tail_lens_0.61",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Polished_exhaust_tip_1",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Hollow_exhaust_core_1",
+      "type": "MESH",
+      "triangles": 764,
+      "vertices": 384
+    },
+    {
+      "name": "Recessed_wheel_barrel_Front_Near",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Brake_rotor_Front_Near",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Rotor_drill_Front_Near_0",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_1",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_2",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_3",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_4",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_5",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_6",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_7",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_8",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Near_9",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Red_brake_caliper_Front_Near",
+      "type": "MESH",
+      "triangles": 528,
+      "vertices": 266
+    },
+    {
+      "name": "Raised_hub_Front_Near",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Dark_center_cap_Front_Near",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Recessed_wheel_barrel_Front_Far",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Brake_rotor_Front_Far",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Rotor_drill_Front_Far_0",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_1",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_2",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_3",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_4",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_5",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_6",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_7",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_8",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Front_Far_9",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Red_brake_caliper_Front_Far",
+      "type": "MESH",
+      "triangles": 528,
+      "vertices": 266
+    },
+    {
+      "name": "Raised_hub_Front_Far",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Dark_center_cap_Front_Far",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Recessed_wheel_barrel_Rear_Near",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Brake_rotor_Rear_Near",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_0",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_1",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_2",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_3",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_4",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_5",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_6",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_7",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_8",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Near_9",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Red_brake_caliper_Rear_Near",
+      "type": "MESH",
+      "triangles": 528,
+      "vertices": 266
+    },
+    {
+      "name": "Raised_hub_Rear_Near",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Dark_center_cap_Rear_Near",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Recessed_wheel_barrel_Rear_Far",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Brake_rotor_Rear_Far",
+      "type": "MESH",
+      "triangles": 380,
+      "vertices": 192
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_0",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_1",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_2",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_3",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_4",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_5",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_6",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_7",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_8",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Rotor_drill_Rear_Far_9",
+      "type": "MESH",
+      "triangles": 44,
+      "vertices": 24
+    },
+    {
+      "name": "Red_brake_caliper_Rear_Far",
+      "type": "MESH",
+      "triangles": 528,
+      "vertices": 266
+    },
+    {
+      "name": "Raised_hub_Rear_Far",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    },
+    {
+      "name": "Dark_center_cap_Rear_Far",
+      "type": "MESH",
+      "triangles": 188,
+      "vertices": 96
+    }
+  ],
+  "bounds": {
+    "min": [
+      -2.2819664478302,
+      -0.9930294156074524,
+      0.0
+    ],
+    "max": [
+      2.318033456802368,
+      0.9930294156074524,
+      1.0479257106781006
+    ]
+  },
+  "authoredToContractScale": 0.9650431257840368,
+  "wheels": [
+    {
+      "name": "Front_Near",
+      "center": [
+        -1.3800116698711726,
+        -0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        -1.3800116698711726,
+        -0.7961605787718303,
+        0.0
+      ]
+    },
+    {
+      "name": "Front_Far",
+      "center": [
+        -1.3800116698711726,
+        0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        -1.3800116698711726,
+        0.7961605787718303,
+        0.0
+      ]
+    },
+    {
+      "name": "Rear_Near",
+      "center": [
+        1.3510603760976514,
+        -0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        1.3510603760976514,
+        -0.7961605787718303,
+        0.0
+      ]
+    },
+    {
+      "name": "Rear_Far",
+      "center": [
+        1.3510603760976514,
+        0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        1.3510603760976514,
+        0.7961605787718303,
+        0.0
+      ]
+    }
+  ],
+  "materialRoles": {
+    "Coachwork": [
+      [
+        127,
+        33,
+        76
+      ],
+      [
+        168,
+        43,
+        45
+      ],
+      [
+        217,
+        50,
+        50
+      ],
+      [
+        252,
+        92,
+        70
+      ]
+    ],
+    "Glazing": [
+      [
+        58,
+        58,
+        80
+      ],
+      [
+        86,
+        89,
+        114
+      ],
+      [
+        115,
+        140,
+        168
+      ],
+      [
+        164,
+        187,
+        213
+      ]
+    ],
+    "Rubber_intake": [
+      [
+        32,
+        29,
+        43
+      ],
+      [
+        58,
+        58,
+        80
+      ],
+      [
+        70,
+        70,
+        94
+      ]
+    ],
+    "Machined_alloy": [
+      [
+        86,
+        89,
+        114
+      ],
+      [
+        143,
+        161,
+        200
+      ],
+      [
+        212,
+        212,
+        230
+      ],
+      [
+        248,
+        248,
+        248
+      ]
+    ],
+    "Warm_LED": [
+      [
+        164,
+        187,
+        213
+      ],
+      [
+        212,
+        212,
+        230
+      ],
+      [
+        248,
+        248,
+        248
+      ]
+    ],
+    "Rear_lens": [
+      [
+        127,
+        33,
+        76
+      ],
+      [
+        203,
+        42,
+        42
+      ],
+      [
+        252,
+        92,
+        70
+      ]
+    ]
+  },
+  "camera": {
+    "location": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "elevationDegrees": 50,
+    "orthographicScale": 7.2
+  },
+  "threads": 4,
+  "engine": "BLENDER_EEVEE",
+  "anglesDegrees": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ]
+}

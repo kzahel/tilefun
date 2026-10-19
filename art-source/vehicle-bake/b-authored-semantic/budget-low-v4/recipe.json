@@ -1,0 +1,312 @@
+{
+  "route": "b-authored-semantic",
+  "revision": "budget-low-v4",
+  "surfaceRegions": {
+    "coachwork": [
+      4,
+      4,
+      508,
+      196
+    ],
+    "front_glass": [
+      4,
+      204,
+      132,
+      268
+    ],
+    "rear_glass": [
+      140,
+      204,
+      268,
+      268
+    ],
+    "side_glass": [
+      276,
+      204,
+      508,
+      268
+    ],
+    "roof": [
+      4,
+      276,
+      132,
+      340
+    ],
+    "nose": [
+      140,
+      276,
+      268,
+      340
+    ],
+    "tail": [
+      276,
+      276,
+      404,
+      340
+    ],
+    "fender": [
+      412,
+      276,
+      508,
+      340
+    ],
+    "wheel_cap": [
+      4,
+      348,
+      132,
+      476
+    ],
+    "tread": [
+      140,
+      348,
+      268,
+      412
+    ],
+    "swatches": [
+      276,
+      348,
+      508,
+      476
+    ]
+  },
+  "swatches": {
+    "ink": [
+      294,
+      366
+    ],
+    "warm_ink": [
+      326,
+      366
+    ],
+    "red_deep": [
+      358,
+      366
+    ],
+    "red_shadow": [
+      390,
+      366
+    ],
+    "red_mid": [
+      422,
+      366
+    ],
+    "red": [
+      454,
+      366
+    ],
+    "red_light": [
+      486,
+      366
+    ],
+    "red_glint": [
+      294,
+      398
+    ],
+    "glass_dark": [
+      326,
+      398
+    ],
+    "glass": [
+      358,
+      398
+    ],
+    "glass_light": [
+      390,
+      398
+    ],
+    "glass_glint": [
+      422,
+      398
+    ],
+    "rim": [
+      454,
+      398
+    ],
+    "silver": [
+      486,
+      398
+    ],
+    "white": [
+      294,
+      430
+    ],
+    "tire_light": [
+      326,
+      430
+    ],
+    "ruby": [
+      358,
+      430
+    ]
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "warm_ink": [
+      74,
+      42,
+      61
+    ],
+    "red_deep": [
+      127,
+      33,
+      76
+    ],
+    "red_shadow": [
+      161,
+      18,
+      80
+    ],
+    "red_mid": [
+      197,
+      52,
+      88
+    ],
+    "red": [
+      211,
+      68,
+      92
+    ],
+    "red_light": [
+      227,
+      90,
+      90
+    ],
+    "red_glint": [
+      225,
+      132,
+      132
+    ],
+    "glass_dark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glass_light": [
+      164,
+      187,
+      213
+    ],
+    "glass_glint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "tire_light": [
+      70,
+      70,
+      94
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ]
+  },
+  "widthFunction": [
+    [
+      -2.3,
+      0.68
+    ],
+    [
+      -2.13,
+      0.85
+    ],
+    [
+      -1.5,
+      0.94
+    ],
+    [
+      -0.6,
+      0.865
+    ],
+    [
+      0.3,
+      0.88
+    ],
+    [
+      1.35,
+      0.965
+    ],
+    [
+      2.08,
+      0.91
+    ],
+    [
+      2.3,
+      0.76
+    ]
+  ],
+  "deckFunction": [
+    [
+      -2.3,
+      0.39
+    ],
+    [
+      -2.05,
+      0.48
+    ],
+    [
+      -1.2,
+      0.57
+    ],
+    [
+      -0.6,
+      0.63
+    ],
+    [
+      0.5,
+      0.66
+    ],
+    [
+      1.25,
+      0.66
+    ],
+    [
+      2.1,
+      0.61
+    ],
+    [
+      2.3,
+      0.52
+    ]
+  ],
+  "exportWorldScale": 17.39130434782609,
+  "bodyParam": "same approach-3 superellipse, powers 0.57 / 0.45, 0.08 fender Gaussian",
+  "method": "Geometry-aware authored semantic UV paint. Source-mask histograms validate palette roles; no image projection or view-conditioned material.",
+  "ownership": {
+    "coachwork": "source width/deck/superellipse functions; longitudinal seams and deck slats in object coordinates",
+    "glass": "separate retained-source apertures; border and band re-authored in their own UV rectangles",
+    "wheels": "independent cap/tread regions, five spoke cap painting",
+    "hidden": "underside and well interiors explicitly authored ink"
+  },
+  "uncertainty": {
+    "rawProjection": "not used by this route; rejected-projection.png is empty, not a coverage claim",
+    "authored-uncertainty.png": "64: analytically authored body ramp; 128: inferred hidden tread; 0: semantic design regions or unused",
+    "conflicts": "opposite-view illumination cannot coexist in one atlas; symmetric body ramp is an intentional compromise"
+  },
+  "sourcePaletteEvidence": "source-mask-palette.json"
+}

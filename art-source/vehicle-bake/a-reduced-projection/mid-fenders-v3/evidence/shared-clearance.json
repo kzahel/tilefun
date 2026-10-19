@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "a-reduced-projection--mid-fenders-v3",
+    "glbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+    "triangles": 2299,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.9130441247250465,
+        "minimumGap": 0.2740180219838839,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913044950779918,
+        "minimumGap": 0.27401754825549496,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913045629803742,
+        "minimumGap": 0.2600586841417485,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044977011654,
+        "minimumGap": 0.2600593369338364,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

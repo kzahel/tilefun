@@ -1,6 +1,10 @@
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import vehicleBake from "../../public/demos/vehicle-bake/manifest.json" with { type: "json" };
+import vehicleStyleStudy from "../../public/demos/vehicle-style-study/manifest.json" with {
+  type: "json",
+};
 import { CHARACTERS } from "../characters/CharacterCatalog.js";
 import wildlifeReviews from "../wildlife/reviews.json" with { type: "json" };
 import type { WorkshopManifest } from "../workshop/WorkshopTypes.js";
@@ -35,6 +39,27 @@ export async function workshopInputDigest(root = ".") {
       ...[draft.sheet, draft.scene, draft.contact].map((sheet) => `public/${sheet.image}`),
     );
   files.push("public/demos/wildlife-v2/index.html", "public/demos/wildlife-v2/reviews.json");
+  files.push(
+    "public/demos/vehicle-style-study/manifest.json",
+    "public/demos/vehicle-style-study/index.html",
+    "public/demos/vehicle-style-study/gallery.js",
+    "public/demos/vehicle-style-study/gallery.css",
+    "src/workshop/VehicleStyleStudyCandidates.ts",
+  );
+  for (const route of vehicleStyleStudy.routes) {
+    files.push(...route.files.map((file) => `public/${file.url}`));
+  }
+  files.push(
+    "public/demos/vehicle-bake/manifest.json",
+    "public/demos/vehicle-bake/index.html",
+    "public/demos/vehicle-bake/review.css",
+    "public/demos/vehicle-bake/viewer.js",
+    "scripts/vehicle-bake/viewer.mjs",
+    "src/workshop/VehicleBakeCandidates.ts",
+  );
+  for (const candidate of vehicleBake.candidates) {
+    files.push(...candidate.files.map((file) => `public/${file.url}`));
+  }
   files.push(...CHARACTERS.map((c) => `public/${c.image}`));
   files.push(
     "public/data/art-catalog.json",

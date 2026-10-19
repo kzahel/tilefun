@@ -1,0 +1,79 @@
+[
+  {
+    "id": "a-reduced-projection--budget-low-v4",
+    "fourViewSilhouetteIoU": [
+      0.9515472312703583,
+      0.9664570230607966,
+      0.9689716312056738,
+      0.9668624161073825
+    ],
+    "meanFourViewSilhouetteIoU": 0.9634595754110529,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  },
+  {
+    "id": "a-reduced-projection--budget-mid",
+    "fourViewSilhouetteIoU": [
+      0.9540276647681042,
+      0.969392033542977,
+      0.9711751662971175,
+      0.9685666387259011
+    ],
+    "meanFourViewSilhouetteIoU": 0.9657903758335249,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  },
+  {
+    "id": "a-reduced-projection--mid-fenders-v3",
+    "fourViewSilhouetteIoU": [
+      0.9224652087475149,
+      0.9454995871180842,
+      0.941586748038361,
+      0.9451093685513826
+    ],
+    "meanFourViewSilhouetteIoU": 0.9386652281138357,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  },
+  {
+    "id": "a-reduced-projection--v5",
+    "fourViewSilhouetteIoU": [
+      0.9625101874490628,
+      0.9764903442485307,
+      0.9791574279379157,
+      0.975251677852349
+    ],
+    "meanFourViewSilhouetteIoU": 0.9733524093719645,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  },
+  {
+    "id": "b-authored-semantic--budget-low-v4",
+    "fourViewSilhouetteIoU": [
+      0.9481209150326797,
+      0.9529213955443464,
+      0.9551907719609583,
+      0.9529213955443464
+    ],
+    "meanFourViewSilhouetteIoU": 0.9522886195205826,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  },
+  {
+    "id": "b-authored-semantic--v4",
+    "fourViewSilhouetteIoU": [
+      0.9591503267973857,
+      0.9647058823529412,
+      0.9551907719609583,
+      0.9647058823529412
+    ],
+    "meanFourViewSilhouetteIoU": 0.9609382158660565,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  },
+  {
+    "id": "c-surface-bake--v3",
+    "fourViewSilhouetteIoU": [
+      0.9611928104575164,
+      0.9630252100840336,
+      0.9591474245115453,
+      0.9626050420168067
+    ],
+    "meanFourViewSilhouetteIoU": 0.9614926217674755,
+    "meaning": "Geometry occupancy only, not an art quality or approval score"
+  }
+]

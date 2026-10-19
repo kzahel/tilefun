@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "candidates": [
+    {
+      "id": "a-reduced-projection--mid-fenders-v3",
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "rig": {
+        "wheels": [
+          {
+            "id": "FL",
+            "radius": 5.913043478260871,
+            "quarterTurn": true,
+            "pivotFixed": true,
+            "independent": true
+          },
+          {
+            "id": "FR",
+            "radius": 5.913043478260871,
+            "quarterTurn": true,
+            "pivotFixed": true,
+            "independent": true
+          },
+          {
+            "id": "RL",
+            "radius": 5.913043478260871,
+            "quarterTurn": true,
+            "pivotFixed": true,
+            "independent": true
+          },
+          {
+            "id": "RR",
+            "radius": 5.913043478260871,
+            "quarterTurn": true,
+            "pivotFixed": true,
+            "independent": true
+          }
+        ],
+        "forwardReverseAbsoluteReset": true
+      }
+    }
+  ],
+  "errors": []
+}

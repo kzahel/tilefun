@@ -1,0 +1,11 @@
+{
+  "retainedGlbHash": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+  "replayGlbHash": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+  "retainedAtlasHash": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b",
+  "replayAtlasHash": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b",
+  "byteIdentical": true,
+  "command": "blender --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/c-surface-bake/v3/recipe-scripts/build.py -- --revision replay-v3",
+  "input": "Only retained 141 source blend and this route recipe; no ignored data read",
+  "sourceHighTrianglesAfterSimpleSubdivision": 356414,
+  "lowMeshTriangles": 2597
+}

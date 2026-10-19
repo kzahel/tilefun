@@ -30,3 +30,34 @@ data/
 # public/assets/models/vehicles/. Never ignore those tracked deliverables.
 /art-source/vehicles/
 /public/demos/authored-car/
+
+# Vehicle authoring: only completed frozen bundles are retained, including their
+# pinned replay inputs and final validation evidence. Drafts/replays stay local.
+/art-source/vehicle-bake/a-reduced-projection/*
+!/art-source/vehicle-bake/a-reduced-projection/budget-low-v4/
+!/art-source/vehicle-bake/a-reduced-projection/budget-mid/
+!/art-source/vehicle-bake/a-reduced-projection/v5/
+!/art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/
+!/art-source/vehicle-bake/a-reduced-projection/ladder-clearance.json
+/art-source/vehicle-bake/b-authored-semantic/*
+!/art-source/vehicle-bake/b-authored-semantic/budget-low-v4/
+!/art-source/vehicle-bake/b-authored-semantic/v4/
+/art-source/vehicle-bake/c-surface-bake/*
+!/art-source/vehicle-bake/c-surface-bake/v3/
+/public/demos/vehicle-bake/a-reduced-projection/*
+!/public/demos/vehicle-bake/a-reduced-projection/budget-low-v4/
+!/public/demos/vehicle-bake/a-reduced-projection/budget-mid/
+!/public/demos/vehicle-bake/a-reduced-projection/v5/
+!/public/demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/
+/public/demos/vehicle-bake/b-authored-semantic/*
+!/public/demos/vehicle-bake/b-authored-semantic/budget-low-v4/
+!/public/demos/vehicle-bake/b-authored-semantic/v4/
+/public/demos/vehicle-bake/c-surface-bake/*
+!/public/demos/vehicle-bake/c-surface-bake/v3/
+
+# Unselected style-study folders remain scratch until explicitly retained.
+/art-source/vehicle-style-study/*/
+!/art-source/vehicle-style-study/01-detailed-shaded/
+!/art-source/vehicle-style-study/02-detailed-toon/
+!/art-source/vehicle-style-study/03-guide-pixel-finish/
+!/art-source/vehicle-style-study/04-simple-painted/

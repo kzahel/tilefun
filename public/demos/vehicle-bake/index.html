@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Red coupe · low-poly review</title>
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <main>
+      <nav><a href="../../workshop.html">← Tilefun Workshop</a><span>ORIGINAL VEHICLES / 142</span></nav>
+      <header>
+        <p class="eyebrow">KEEP THE PIXELS. LOSE THE POLYGONS.</p>
+        <h1>The red coupe, simplified.</h1>
+        <p class="intro">The chosen pixel-art target beside a real textured low-poly model.
+          Compare the outlines, glass, shape and wheels at game size, then rotate through the angles.</p>
+      </header>
+      <section class="controls" aria-label="Model comparison controls">
+        <label>Candidate <select id="candidate"></select></label>
+        <label>Size <select id="zoom"><option value="1">Native · 1×</option><option value="2" selected>Pixels · 2×</option><option value="3">Pixels · 3×</option></select></label>
+        <label>View <select id="projection"><option value="study">Match the art camera</option><option value="engine">Game projection</option></select></label>
+        <button type="button" id="play" aria-pressed="false">Rotate + roll</button>
+        <label>Angle <input type="range" min="0" max="359.5" step="0.5" value="45" id="angle" /><output id="angle-value">45°</output></label>
+        <label><input type="checkbox" id="wireframe" /> Wireframe</label>
+      </section>
+      <p id="status" role="status">Loading the low-poly model…</p>
+      <section class="comparison" aria-label="Art target and runtime model">
+        <article><h2 id="reference-angle">Chosen art target · 45°</h2><p>Approach 3 · 71,390-triangle offline source</p>
+          <div class="stage"><img id="reference" alt="Chosen red coupe pixel-art target" width="128" height="128" /></div></article>
+        <article><h2>Low-poly textured model</h2><p id="stats">Reading actual GLB…</p>
+          <div class="stage"><canvas id="low" width="128" height="128" aria-label="Actual low-poly GLB rendered in WebGL"></canvas></div></article>
+      </section>
+      <p id="projection-note" class="note"></p>
+      <section class="details"><h2>How this candidate was made</h2><p id="method"></p>
+        <div class="links"><a id="model" href="manifest.json" hidden>GLB model</a><a id="atlas" href="manifest.json" hidden>Texture atlas</a><a id="report" href="manifest.json" hidden>Evidence report</a><a href="comparison.png">All-candidate comparison</a></div>
+        <p class="note">An authoring prototype for review. The original target has eight drawn directions;
+          intermediate model angles show the nearest target direction for reference.</p></section>
+      <footer>Red-car review comes first. The Beetle, school bus and pickup remain in the next-family queue.</footer>
+    </main>
+    <script src="viewer.js" defer></script>
+  </body>
+</html>

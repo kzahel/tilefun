@@ -1,0 +1,138 @@
+[
+  {
+    "yaw": 0,
+    "sourceLowIoU": 0.927749106788408,
+    "sourceEngineIoU": 0.9228628230616303,
+    "blenderAlphaBounds": [
+      23,
+      69,
+      106,
+      103
+    ],
+    "engineAlphaBounds": [
+      23,
+      69,
+      106,
+      103
+    ]
+  },
+  {
+    "yaw": 45,
+    "sourceLowIoU": 0.9423631123919308,
+    "sourceEngineIoU": 0.94467382328654,
+    "blenderAlphaBounds": [
+      26,
+      56,
+      102,
+      119
+    ],
+    "engineAlphaBounds": [
+      27,
+      56,
+      102,
+      119
+    ]
+  },
+  {
+    "yaw": 90,
+    "sourceLowIoU": 0.9368741837178929,
+    "sourceEngineIoU": 0.9437663469921534,
+    "blenderAlphaBounds": [
+      46,
+      54,
+      82,
+      121
+    ],
+    "engineAlphaBounds": [
+      46,
+      54,
+      82,
+      121
+    ]
+  },
+  {
+    "yaw": 135,
+    "sourceLowIoU": 0.9411764705882353,
+    "sourceEngineIoU": 0.9446966570367313,
+    "blenderAlphaBounds": [
+      25,
+      55,
+      102,
+      119
+    ],
+    "engineAlphaBounds": [
+      26,
+      56,
+      102,
+      119
+    ]
+  },
+  {
+    "yaw": 180,
+    "sourceLowIoU": 0.9324324324324325,
+    "sourceEngineIoU": 0.9228628230616303,
+    "blenderAlphaBounds": [
+      22,
+      69,
+      105,
+      104
+    ],
+    "engineAlphaBounds": [
+      22,
+      69,
+      105,
+      104
+    ]
+  },
+  {
+    "yaw": 225,
+    "sourceLowIoU": 0.9506953223767383,
+    "sourceEngineIoU": 0.9560067681895094,
+    "blenderAlphaBounds": [
+      25,
+      57,
+      102,
+      118
+    ],
+    "engineAlphaBounds": [
+      26,
+      58,
+      102,
+      118
+    ]
+  },
+  {
+    "yaw": 270,
+    "sourceLowIoU": 0.9480108499095841,
+    "sourceEngineIoU": 0.9502262443438914,
+    "blenderAlphaBounds": [
+      46,
+      56,
+      82,
+      121
+    ],
+    "engineAlphaBounds": [
+      46,
+      56,
+      82,
+      121
+    ]
+  },
+  {
+    "yaw": 315,
+    "sourceLowIoU": 0.9532237673830595,
+    "sourceEngineIoU": 0.958104104951333,
+    "blenderAlphaBounds": [
+      26,
+      57,
+      102,
+      118
+    ],
+    "engineAlphaBounds": [
+      26,
+      58,
+      102,
+      118
+    ]
+  }
+]

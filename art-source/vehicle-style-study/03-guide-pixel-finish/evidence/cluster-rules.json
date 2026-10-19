@@ -1,0 +1,13 @@
+[
+  "One palette sampled from all four compact-4 frozen refs; no extra colors, adaptive quantization or dithering.",
+  "Visible class maps are the actual scene rendered with emission materials and identical geometry/camera; 4x4 plurality reduces IDs to native grid.",
+  "Every view is reduced to 128 square then translated by exactly (0,+28); no bounds fitting.",
+  "Body uses fixed raw-red luminance bands and a single constrained majority cleanup, replacing one-pixel shade islands inside the body only.",
+  "Glass is redrawn inside its projected aperture: one dark inner border, two broad component-relative tone bands, one continuous upper reflection strip. No stochastic reflections.",
+  "Tires use solid dark clusters with a restrained lower shade; rims remain actual projected spokes and rings, using two fixed silver tones.",
+  "Lamps use contiguous pale-core/blue-edge clusters and ruby rear clusters; no isolated bright pixels outside the actual projected lamp masks.",
+  "Intakes use a solid dark fill and restrained one-row muted lower accent for clusters at least four native pixels wide; no dotted grille noise.",
+  "Six fine scene rear-deck louvers are deliberately simplified into three continuous one-pixel slats at the actual projected endpoints of louvers 0/2/4; original intake-mask speckles in their bank are replaced with the neighboring body tone.",
+  "Projected panel-feature pixels are one-pixel ink; body silhouette has one-native-pixel inward ink so silhouette footprint is preserved.",
+  "All interior authored marks are clipped to actual visible semantic masks. Small glass fragments remain dark rather than inventing replacement windows."
+]

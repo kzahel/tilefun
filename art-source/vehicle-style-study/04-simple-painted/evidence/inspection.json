@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-19",
+  "reviewer": "authoring agent; agent inspection only, no human approval inferred",
+  "inspectedAllRawViews": true,
+  "inspectedAllFinalViews": true,
+  "inspectedGifDecodedFrames": true,
+  "evidenceViewed": [
+    "public/demos/vehicle-style-study/04-simple-painted/raw-0.png",
+    "public/demos/vehicle-style-study/04-simple-painted/raw-1.png",
+    "data/vehicle-style-study/04-simple-painted/raw-contact.png",
+    "public/demos/vehicle-style-study/04-simple-painted/comparison.png",
+    "public/demos/vehicle-style-study/04-simple-painted/sheet.png",
+    "data/vehicle-style-study/04-simple-painted/gif-decoded-contact.png"
+  ],
+  "findings": [
+    "Long low nose, swept cabin, raised rear haunches, curved openings, dark side intakes, mirrors and front/rear lamp distinctions read coherently across all eight raw views.",
+    "Near wheels are visible in obliques; far wheels occlude behind the body in side views and both tracks show in front/rear views. No obvious floating wheel, body intrusion, clipping or glass spill was seen.",
+    "Broad face-painted highlights remain stable and glass has continuous geometric dark borders; native finishing adds one inward silhouette pixel without changing the anchor or fitting each view.",
+    "First pass had broken subpixel seams; shell-following strips and wider hood lines improved them before this final output. No per-view pixel redrawing was used.",
+    "All eight final sprites were inspected together at native scale in sheet.png and enlarged nearest in comparison.png. Hood seams retain some stair steps; small handles, vents and rim spokes simplify with point sampling.",
+    "All eight decoded GIF frames were inspected in a contact sheet. Eight unique frames and 250 ms durations were checked programmatically. Continuous animated playback was not inspected. The GIF includes a fixed ground-origin crosshair guide over the sprite; final PNGs contain no guide.",
+    "The compact-4 source red roles are pink-magenta, and flat highlight bands look graphic rather than glossy. This is the intended inexpensive unlit baseline, not a detailed shaded result."
+  ],
+  "remainingLimitations": [
+    "No human art approval, runtime performance evidence or integration qualification.",
+    "No steering or suspension qualification; neutral rolling cylinder clearance and independent wheel transforms were checked.",
+    "GLB has geometric internal trim but the sprite finishing silhouette ink is external to its mesh."
+  ],
+  "finalPixelState": "final sprites inspected; freeze for coordinator registration"
+}

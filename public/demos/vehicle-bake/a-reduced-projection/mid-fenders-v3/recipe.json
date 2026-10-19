@@ -1,0 +1,958 @@
+{
+  "route": "a-reduced-projection",
+  "revision": "mid-fenders-v3",
+  "budgetFactor": 0.6,
+  "inputRecipe": {
+    "route": "a-reduced-projection",
+    "baseRevision": "budget-mid",
+    "geometryMode": "integrated-flat",
+    "trackTuckPerSide": 0.08,
+    "longitudinalStations": [
+      -0.7,
+      -0.5,
+      -0.375,
+      -0.3,
+      -0.15,
+      0,
+      0.15,
+      0.3,
+      0.375,
+      0.5,
+      0.7
+    ],
+    "crownProfile": [
+      [
+        0,
+        0.72
+      ],
+      [
+        0.3,
+        0.715
+      ],
+      [
+        0.375,
+        0.695
+      ],
+      [
+        0.5,
+        0.64
+      ],
+      [
+        0.7,
+        0.5
+      ]
+    ],
+    "segments": 8,
+    "outerRadius": 0.405,
+    "innerRadius": 0.375,
+    "railsY": [
+      0.52,
+      0.7,
+      0.95
+    ],
+    "wheelRadius": 0.34,
+    "exportWorldScale": 17.39130434782609,
+    "renderThreads": 4,
+    "paintPolicy": "Preserve exact mid atlas and old UVs; body shoulders use existing source palette swatches",
+    "outputRevision": "mid-fenders-v3"
+  },
+  "exportWorldScale": 17.39130434782609,
+  "components": [
+    {
+      "name": "Continuous sculpted coachwork with cut arches",
+      "kind": "body",
+      "sourceTriangles": 19990,
+      "wheel": null,
+      "budget": 510,
+      "actual": 793
+    },
+    {
+      "name": "Front windshield",
+      "kind": "glass",
+      "sourceTriangles": 1920,
+      "wheel": null,
+      "budget": 17,
+      "actual": 17
+    },
+    {
+      "name": "Rear glass",
+      "kind": "glass",
+      "sourceTriangles": 1536,
+      "wheel": null,
+      "budget": 17,
+      "actual": 16
+    },
+    {
+      "name": "Roof",
+      "kind": "body",
+      "sourceTriangles": 2816,
+      "wheel": null,
+      "budget": 22,
+      "actual": 22
+    },
+    {
+      "name": "Side glass -1",
+      "kind": "glass",
+      "sourceTriangles": 1440,
+      "wheel": null,
+      "budget": 12,
+      "actual": 11
+    },
+    {
+      "name": "Window gasket -1",
+      "kind": "panels",
+      "sourceTriangles": 80,
+      "wheel": null,
+      "budget": 17,
+      "actual": 22
+    },
+    {
+      "name": "A pillar -1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rear buttress -1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Roof drip rail -1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Window B pillar -1",
+      "kind": "panels",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Sculpted flank intake -1",
+      "kind": "intakes",
+      "sourceTriangles": 576,
+      "wheel": null,
+      "budget": 4,
+      "actual": 3
+    },
+    {
+      "name": "Intake upper lip -1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Door perimeter -1",
+      "kind": "panels",
+      "sourceTriangles": 60,
+      "wheel": null,
+      "budget": 6,
+      "actual": 18
+    },
+    {
+      "name": "Door handle -1",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Sill crease -1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rolled fender arch",
+      "kind": "body",
+      "sourceTriangles": 960,
+      "wheel": null,
+      "budget": 22,
+      "actual": 22
+    },
+    {
+      "name": "Rolled fender arch.001",
+      "kind": "body",
+      "sourceTriangles": 960,
+      "wheel": null,
+      "budget": 22,
+      "actual": 24
+    },
+    {
+      "name": "Mirror stalk",
+      "kind": "panels",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Aerodynamic mirror",
+      "kind": "body",
+      "sourceTriangles": 960,
+      "wheel": null,
+      "budget": 12,
+      "actual": 12
+    },
+    {
+      "name": "Side glass 1",
+      "kind": "glass",
+      "sourceTriangles": 1440,
+      "wheel": null,
+      "budget": 12,
+      "actual": 11
+    },
+    {
+      "name": "Window gasket 1",
+      "kind": "panels",
+      "sourceTriangles": 80,
+      "wheel": null,
+      "budget": 17,
+      "actual": 22
+    },
+    {
+      "name": "A pillar 1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rear buttress 1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Roof drip rail 1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Window B pillar 1",
+      "kind": "panels",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Sculpted flank intake 1",
+      "kind": "intakes",
+      "sourceTriangles": 576,
+      "wheel": null,
+      "budget": 4,
+      "actual": 3
+    },
+    {
+      "name": "Intake upper lip 1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Door perimeter 1",
+      "kind": "panels",
+      "sourceTriangles": 60,
+      "wheel": null,
+      "budget": 6,
+      "actual": 18
+    },
+    {
+      "name": "Door handle 1",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Sill crease 1",
+      "kind": "body",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rolled fender arch.002",
+      "kind": "body",
+      "sourceTriangles": 960,
+      "wheel": null,
+      "budget": 22,
+      "actual": 22
+    },
+    {
+      "name": "Rolled fender arch.003",
+      "kind": "body",
+      "sourceTriangles": 960,
+      "wheel": null,
+      "budget": 22,
+      "actual": 22
+    },
+    {
+      "name": "Mirror stalk.001",
+      "kind": "panels",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Aerodynamic mirror.001",
+      "kind": "body",
+      "sourceTriangles": 960,
+      "wheel": null,
+      "budget": 12,
+      "actual": 12
+    },
+    {
+      "name": "Hood pressed crease -1",
+      "kind": "panels",
+      "sourceTriangles": 60,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Swept front LED -1",
+      "kind": "lamps",
+      "sourceTriangles": 576,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Front corner vent -1",
+      "kind": "intakes",
+      "sourceTriangles": 256,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Rear blade lamp -1",
+      "kind": "rear_lamps",
+      "sourceTriangles": 512,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Tail lamp inner signature -1",
+      "kind": "lamps",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Polished exhaust",
+      "kind": "rim",
+      "sourceTriangles": 768,
+      "wheel": null,
+      "budget": 12,
+      "actual": 16
+    },
+    {
+      "name": "Hood pressed crease 1",
+      "kind": "panels",
+      "sourceTriangles": 60,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Swept front LED 1",
+      "kind": "lamps",
+      "sourceTriangles": 576,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Front corner vent 1",
+      "kind": "intakes",
+      "sourceTriangles": 256,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Rear blade lamp 1",
+      "kind": "rear_lamps",
+      "sourceTriangles": 512,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Tail lamp inner signature 1",
+      "kind": "lamps",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Polished exhaust.001",
+      "kind": "rim",
+      "sourceTriangles": 768,
+      "wheel": null,
+      "budget": 12,
+      "actual": 16
+    },
+    {
+      "name": "Central nose grille",
+      "kind": "intakes",
+      "sourceTriangles": 768,
+      "wheel": null,
+      "budget": 4,
+      "actual": 4
+    },
+    {
+      "name": "Front splitter",
+      "kind": "panels",
+      "sourceTriangles": 60,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rear diffuser",
+      "kind": "intakes",
+      "sourceTriangles": 768,
+      "wheel": null,
+      "budget": 4,
+      "actual": 3
+    },
+    {
+      "name": "Diffuser vane",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Diffuser vane.001",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Diffuser vane.002",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Diffuser vane.003",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Diffuser vane.004",
+      "kind": "rim",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rear deck cooling louver 0",
+      "kind": "intakes",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 0,
+      "actual": 0
+    },
+    {
+      "name": "Rear deck cooling louver 1",
+      "kind": "intakes",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 0,
+      "actual": 0
+    },
+    {
+      "name": "Rear deck cooling louver 2",
+      "kind": "intakes",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 0,
+      "actual": 0
+    },
+    {
+      "name": "Rear deck cooling louver 3",
+      "kind": "intakes",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 0,
+      "actual": 0
+    },
+    {
+      "name": "Rear deck cooling louver 4",
+      "kind": "intakes",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 0,
+      "actual": 0
+    },
+    {
+      "name": "Rear deck cooling louver 5",
+      "kind": "intakes",
+      "sourceTriangles": 20,
+      "wheel": null,
+      "budget": 0,
+      "actual": 0
+    },
+    {
+      "name": "Integrated rear lip",
+      "kind": "body",
+      "sourceTriangles": 40,
+      "wheel": null,
+      "budget": 6,
+      "actual": 6
+    },
+    {
+      "name": "Rounded performance tire",
+      "kind": "wheels",
+      "sourceTriangles": 4608,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 77,
+      "actual": 76
+    },
+    {
+      "name": "Recessed wheel barrel",
+      "kind": "wheels",
+      "sourceTriangles": 252,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 17,
+      "actual": 16
+    },
+    {
+      "name": "Torus.003",
+      "kind": "rim",
+      "sourceTriangles": 1536,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 19,
+      "actual": 26
+    },
+    {
+      "name": "Swept forged spoke",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.001",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.002",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.003",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.004",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Sphere",
+      "kind": "rim",
+      "sourceTriangles": 528,
+      "wheel": "Front_near_Roll_Y",
+      "budget": 10,
+      "actual": 10
+    },
+    {
+      "name": "Rounded performance tire.001",
+      "kind": "wheels",
+      "sourceTriangles": 4608,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 77,
+      "actual": 76
+    },
+    {
+      "name": "Recessed wheel barrel.001",
+      "kind": "wheels",
+      "sourceTriangles": 252,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 17,
+      "actual": 16
+    },
+    {
+      "name": "Torus.005",
+      "kind": "rim",
+      "sourceTriangles": 1536,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 19,
+      "actual": 24
+    },
+    {
+      "name": "Swept forged spoke.005",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.006",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.007",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.008",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.009",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Sphere.001",
+      "kind": "rim",
+      "sourceTriangles": 528,
+      "wheel": "Front_far_Roll_Y",
+      "budget": 10,
+      "actual": 10
+    },
+    {
+      "name": "Rounded performance tire.002",
+      "kind": "wheels",
+      "sourceTriangles": 4608,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 77,
+      "actual": 76
+    },
+    {
+      "name": "Recessed wheel barrel.002",
+      "kind": "wheels",
+      "sourceTriangles": 252,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 17,
+      "actual": 16
+    },
+    {
+      "name": "Torus.007",
+      "kind": "rim",
+      "sourceTriangles": 1536,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 19,
+      "actual": 24
+    },
+    {
+      "name": "Swept forged spoke.010",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.011",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.012",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.013",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.014",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Sphere.002",
+      "kind": "rim",
+      "sourceTriangles": 528,
+      "wheel": "Rear_near_Roll_Y",
+      "budget": 10,
+      "actual": 10
+    },
+    {
+      "name": "Rounded performance tire.003",
+      "kind": "wheels",
+      "sourceTriangles": 4608,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 77,
+      "actual": 76
+    },
+    {
+      "name": "Recessed wheel barrel.003",
+      "kind": "wheels",
+      "sourceTriangles": 252,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 17,
+      "actual": 16
+    },
+    {
+      "name": "Torus.009",
+      "kind": "rim",
+      "sourceTriangles": 1536,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 19,
+      "actual": 24
+    },
+    {
+      "name": "Swept forged spoke.015",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.016",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.017",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.018",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Swept forged spoke.019",
+      "kind": "rim",
+      "sourceTriangles": 40,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 5,
+      "actual": 4
+    },
+    {
+      "name": "Sphere.003",
+      "kind": "rim",
+      "sourceTriangles": 528,
+      "wheel": "Rear_far_Roll_Y",
+      "budget": 10,
+      "actual": 10
+    }
+  ],
+  "wheels": [
+    {
+      "label": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.913043540457021,
+        13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.913043540457021,
+        -13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "RL",
+      "centerBlender": [
+        1.399999976158142,
+        -0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        24.34782567231552,
+        5.913043540457021,
+        13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "RR",
+      "centerBlender": [
+        1.399999976158142,
+        0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        24.34782567231552,
+        5.913043540457021,
+        -13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    }
+  ],
+  "source": "art-source\\vehicle-style-study\\03-guide-pixel-finish\\sports-coupe.blend",
+  "postReductionConstraints": [
+    "Clamp tire radial envelope to source radius .34; align an outer contact vertex down",
+    "Rear buttress outside tip limited to |Y|<=.79 to clear tire axial slab",
+    "Actual wheel-local radius .375 safety pockets after QEM, 20 cutter sides"
+  ],
+  "projection": "Eight fixed cameras, ray visibility against retained high mesh, exact source component and semantic pixel ownership; native exterior boundary rejection",
+  "atlas": [
+    512,
+    512
+  ],
+  "renderThreads": 4,
+  "baseRevision": "budget-mid",
+  "refinement": "Flattened broad tapered fender shoulders, .72 crown, .08 inboard track tuck per side; rear buttress tip clearance adjustment; original axle X/radius/ground and wheel vertex/normal/UV bytes preserved.",
+  "shoulders": [
+    {
+      "center": [
+        -1.4,
+        -0.87,
+        0.34
+      ],
+      "triangles": 128,
+      "object": "Physical_shoulder_-1.4_-1"
+    },
+    {
+      "center": [
+        -1.4,
+        0.87,
+        0.34
+      ],
+      "triangles": 128,
+      "object": "Physical_shoulder_-1.4_1"
+    },
+    {
+      "center": [
+        1.4,
+        -0.87,
+        0.34
+      ],
+      "triangles": 128,
+      "object": "Physical_shoulder_1.4_-1"
+    },
+    {
+      "center": [
+        1.4,
+        0.87,
+        0.34
+      ],
+      "triangles": 128,
+      "object": "Physical_shoulder_1.4_1"
+    }
+  ],
+  "removedTubeTriangles": 90,
+  "actualTriangles": 2299,
+  "atlasPolicy": "Exact base atlas bytes and old UV paint retained; shoulders own fixed source-palette swatches in that atlas",
+  "provenance": {
+    "directSourceBlend": "art-source/vehicle-bake/a-reduced-projection/budget-mid/car.blend",
+    "directSourceAtlas": "art-source/vehicle-bake/a-reduced-projection/budget-mid/atlas.png",
+    "refinementScript": "scripts/vehicle-bake/a-reduced-projection/refine_fenders.py",
+    "projectionEvidence": "Inherited exact mid atlas; new shoulders use existing palette swatches. This refinement does not repeat projection."
+  },
+  "removedAndAddedComponentAccounting": "Base component list is historical reduction provenance; actual final exported count is geometry.triangles and explicit shoulder/removal accounting."
+}

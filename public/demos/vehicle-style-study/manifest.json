@@ -1,0 +1,610 @@
+{
+  "version": 1,
+  "status": "exploratory-unapproved",
+  "renderContract": {
+    "size": [
+      128,
+      128
+    ],
+    "groundAnchor": [
+      64,
+      92
+    ],
+    "cameraElevation": 50,
+    "orthoScale": 7.2,
+    "headings": [
+      0,
+      45,
+      90,
+      135,
+      180,
+      225,
+      270,
+      315
+    ]
+  },
+  "routes": [
+    {
+      "id": "01-detailed-shaded",
+      "number": "01",
+      "title": "Detailed + glossy",
+      "description": "Smooth detailed geometry, glossy shading, then palette reduction and pixel ink.",
+      "triangles": 234036,
+      "colors": 28,
+      "nativeBounds": [
+        [
+          22,
+          69,
+          106,
+          105
+        ],
+        [
+          25,
+          56,
+          103,
+          120
+        ],
+        [
+          45,
+          54,
+          83,
+          122
+        ],
+        [
+          25,
+          56,
+          103,
+          120
+        ],
+        [
+          22,
+          69,
+          106,
+          105
+        ],
+        [
+          25,
+          59,
+          103,
+          120
+        ],
+        [
+          45,
+          57,
+          83,
+          123
+        ],
+        [
+          25,
+          59,
+          103,
+          120
+        ]
+      ],
+      "sourceScene": "art-source/vehicle-style-study/01-detailed-shaded/sports-coupe.blend",
+      "sourceSha256": "865a163ad648a700e68466560f93e0dfaeec1d13ace5a385c335bc30c6501119",
+      "files": [
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/comparison.png",
+          "sha256": "f615e717f9f8b82b733a2b86eee27a3af9db83191c630595cb0db8b34803afcd"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/turntable.gif",
+          "sha256": "b9cd44173bda2a3fed7b285356cd020b30075fd7ad30447854238e900c94a9ba"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/sheet.png",
+          "sha256": "41f88e3a55ffc82fa386903f05314e7766f1393f32fc8d2d6f13860d8870b1d0"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/report.json",
+          "sha256": "2c6c098e8b914b3f2e402a35baa023ba1527322b19b830756657898461fbe0f1"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-0.png",
+          "sha256": "4e28003d368453fe64f28190af0d44df3fdfc4696ee5ca901098747ac2735aa5"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-1.png",
+          "sha256": "81e965f7cda5da333dbde5d2043c03fe06ede6ab118017947b5714551b4402f7"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-2.png",
+          "sha256": "0d8458af6a6d08255153f90296397551c60021afd73e3e96b0863f7e7612d37c"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-3.png",
+          "sha256": "64a0bd75a26d994453eb70c7ee54b060a03bb5bdc9b1b79f7a678c8a74d7daa5"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-4.png",
+          "sha256": "93a2d2f651dd804f84fa92cbd77c6481074a62d8cf01e629b40368c016e6cdca"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-5.png",
+          "sha256": "8d84a654c252583ab99bb2c7546fee75e555e711ae305352ced2ce18f8c897a2"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-6.png",
+          "sha256": "2f8b724dcfbdbd79a3a56f00969cfc134f43ba871e63dd403e2a7b7ac3fb5e19"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/view-7.png",
+          "sha256": "36e89f7157cf1a5377a05c88c3b13a8db38569e36df79c833ec66c4e5aebdc94"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-0.png",
+          "sha256": "bb2d61e6af7ac1b8788c5c8ef8aa52c0b61a52beee7067f229357a756573472a"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-1.png",
+          "sha256": "1b6c5a61426b8e72bd97f522d41e84f64de78f23de368409b4effaf03c86d4d3"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-2.png",
+          "sha256": "519af90d6c6087bee042e62ff811fe46f6442348a1342a23d797273e2f97b3bf"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-3.png",
+          "sha256": "04599c51e9f70158afa799c9a6a6b5aff457cd64205b9ba47049aa56ca684d4e"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-4.png",
+          "sha256": "278fb403c59d87d1960d5cf3497d0fafc8b062813ddfb56efa38b696853103f3"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-5.png",
+          "sha256": "c93b2327130e905f7b0662fc359ad995a2c3509bc08c3147fb49f7627c822fb3"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-6.png",
+          "sha256": "daa381d92cdb5897b687e1056860b3157c143acdc9a5df0c1810f151549623c4"
+        },
+        {
+          "url": "demos/vehicle-style-study/01-detailed-shaded/raw-7.png",
+          "sha256": "68fdab8d92dab58378681c51f1dd1d23762a52be10778afb38e54999a89f8028"
+        }
+      ]
+    },
+    {
+      "id": "02-detailed-toon",
+      "number": "02",
+      "title": "Detailed + toon",
+      "description": "Detailed geometry with controlled colour bands before pixel reduction.",
+      "triangles": 113888,
+      "colors": 13,
+      "nativeBounds": [
+        [
+          22,
+          69,
+          106,
+          105
+        ],
+        [
+          27,
+          56,
+          102,
+          118
+        ],
+        [
+          45,
+          54,
+          83,
+          122
+        ],
+        [
+          26,
+          56,
+          101,
+          118
+        ],
+        [
+          22,
+          69,
+          105,
+          105
+        ],
+        [
+          26,
+          59,
+          101,
+          118
+        ],
+        [
+          45,
+          56,
+          83,
+          122
+        ],
+        [
+          27,
+          59,
+          102,
+          118
+        ]
+      ],
+      "sourceScene": "art-source/vehicle-style-study/02-detailed-toon/sports-coupe.blend",
+      "sourceSha256": "9d86174456e2b45ebb72d75aaad03537648b99ec4c059b6c27d9035abdf42ee6",
+      "files": [
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/comparison.png",
+          "sha256": "e94ea41d1cc6c64310b3703ed16e52dae554a43c864c311d83033ed75f63ad2f"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/turntable.gif",
+          "sha256": "38500360e7e37a6f40a7f1b67f9be15f5db0db4c9908de6a47c4234aeb535bd7"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/sheet.png",
+          "sha256": "0b7b4dbb311d8dfbdfdb9c67fb295451d3806de50a274ae82ff4a7f088ecd33d"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/report.json",
+          "sha256": "d6f8e12fb1e56e126ba34984ac975bb8c69e4b67066f2ec880aa4faf50f61dbe"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-0.png",
+          "sha256": "89c32bb89540492645640fcc7c3d2c8b05edfcfaefe3b298c02539501d3ab912"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-1.png",
+          "sha256": "8fda9bcc914b2dda0b35ca8b64e3fbabc5ade0565e40ee43a708b0050b86247e"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-2.png",
+          "sha256": "afba52cf18213c3098e268c735263e618d43d92251895e39d32156a65a283106"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-3.png",
+          "sha256": "4576d07b8665ab9973d0e98b8d4ba54040d0d77935d9c2a31bcf6b93181d88e3"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-4.png",
+          "sha256": "c82f5fa2b76f4afead44f287739d3b0a4f0461b8cbaad9b94cc743073327cfe6"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-5.png",
+          "sha256": "4480c32d81660ad8410a0028614c649c2e8cccd088434d47928af391f1ffc1fe"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-6.png",
+          "sha256": "b55e50ec6087d7e99a0cf204513cf4d64c41a8a930f320cff6ef068596fafe77"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/view-7.png",
+          "sha256": "f823ffd24debdb998fecd315b2821d3f83637d1f1fdf29f1d1b19e381524df6e"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-0.png",
+          "sha256": "f8c0eaa173a42a54adee4d544ad78a6b04467ec31f0a8126bd5d99f0de2a9289"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-1.png",
+          "sha256": "6f6340eb335de16769e3c43100e36b4a7a3ffcdad72d7f053f629091a141a5af"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-2.png",
+          "sha256": "51269c78e8b9c68d64101adc66bdd6f1537509d577ad3a46ba3c0f97d1ec77b2"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-3.png",
+          "sha256": "3e17d5921063bb9325bab0f1aa0163899c7c1db3e641b5cd54ee474fa8fee53d"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-4.png",
+          "sha256": "dacdbf6a47538d799420474947467406717f7dcf5b2f47f8aa6d951b53bf9546"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-5.png",
+          "sha256": "b519ff354c5630816c880841a10ce0f14bb602261598969c347e18a842f25ab0"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-6.png",
+          "sha256": "e363c92a3547a70c51bd36947c6aace3def49ced9ccaa8f6770b1e4281981d3f"
+        },
+        {
+          "url": "demos/vehicle-style-study/02-detailed-toon/raw-7.png",
+          "sha256": "04116f807b251714108245bc94dfcaef8dc7c891c2871ea46afa38d19cf88a05"
+        }
+      ]
+    },
+    {
+      "id": "03-guide-pixel-finish",
+      "number": "03",
+      "title": "Guides + pixel finish",
+      "description": "Detailed 3D guides with deliberately authored pixel clusters and highlights.",
+      "triangles": 71390,
+      "colors": 16,
+      "nativeBounds": [
+        [
+          22,
+          69,
+          106,
+          105
+        ],
+        [
+          26,
+          56,
+          103,
+          119
+        ],
+        [
+          46,
+          54,
+          82,
+          122
+        ],
+        [
+          25,
+          56,
+          102,
+          119
+        ],
+        [
+          22,
+          69,
+          106,
+          105
+        ],
+        [
+          25,
+          59,
+          102,
+          118
+        ],
+        [
+          46,
+          56,
+          82,
+          121
+        ],
+        [
+          26,
+          59,
+          103,
+          118
+        ]
+      ],
+      "sourceScene": "art-source/vehicle-style-study/03-guide-pixel-finish/sports-coupe.blend",
+      "sourceSha256": "b636af46a30799126151e7cf9f8bfd2db3b6e3490a69787a7a3e8dbcc56f0296",
+      "files": [
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/comparison.png",
+          "sha256": "831fd81e8df1696f4ded4119aad259f6c313f7802ec1de88bb9e9c68a14e9382"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/turntable.gif",
+          "sha256": "70d424d72f29edcde6c68c003ff6a88cc3f23d4225057c7d0b077051d36f859b"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/sheet.png",
+          "sha256": "a766fcb27b92553f48ecb4262eebf4ad730d4b5a5dc6256b81d94280a992961b"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/report.json",
+          "sha256": "e6964ba0ee88858c4f8d72e86870400d24b98dcb1567856a7573ce761f6abcff"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-0.png",
+          "sha256": "620221b4053a45bd378decdcf2b8b623ad1e6b9fb51ad4b5c0be66d61321175b"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-1.png",
+          "sha256": "c46dcd483a08a033485edff47058c97c352dce4dd7023fc3865d19e46e1369a7"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-2.png",
+          "sha256": "8f671fb3ea0a5aba43812cc18962a353783f5b869ca2693422539edf23a14754"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-3.png",
+          "sha256": "7388dcf03a9c04fe6b2fb8463641dce3fb30337bef9a865c89b596ac344e75e9"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-4.png",
+          "sha256": "66f4c4cc3a802d1537700794d3d28309c06f6ced7634735b217b6d14fdb2f963"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-5.png",
+          "sha256": "ca8186cfc384a48f8ff5b4e8a8cab779c21853b7656c5435cc83cce372e08494"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-6.png",
+          "sha256": "ac4cd1305ed72ca337d0d4a59748a6a3cdfb5cf755193ab5aa79ea88e181ebd9"
+        },
+        {
+          "url": "demos/vehicle-style-study/03-guide-pixel-finish/raw-7.png",
+          "sha256": "2f1803c5f00c7df43448d9b4731df85aaffd4a5692565a5e48e71acb0b00bb38"
+        }
+      ]
+    },
+    {
+      "id": "04-simple-painted",
+      "number": "04",
+      "title": "Simple + painted",
+      "description": "A low-poly family with shared red, glass and trim paint roles.",
+      "triangles": 1710,
+      "colors": 16,
+      "nativeBounds": [
+        [
+          23,
+          70,
+          105,
+          105
+        ],
+        [
+          26,
+          55,
+          103,
+          118
+        ],
+        [
+          46,
+          53,
+          82,
+          121
+        ],
+        [
+          25,
+          55,
+          102,
+          118
+        ],
+        [
+          23,
+          70,
+          105,
+          105
+        ],
+        [
+          25,
+          58,
+          102,
+          119
+        ],
+        [
+          46,
+          56,
+          82,
+          121
+        ],
+        [
+          26,
+          58,
+          103,
+          119
+        ]
+      ],
+      "sourceScene": "art-source/vehicle-style-study/04-simple-painted/sports-coupe.blend",
+      "sourceSha256": "81e755b513887c223ff1f50d30237819c983a37474fe08a90cd7976186ea1a3f",
+      "files": [
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/comparison.png",
+          "sha256": "2957f10bff119b38f4c5d660b232335643fe6a9325dae9872519c5f54b601f87"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/turntable.gif",
+          "sha256": "4b2232d04fc561524adedbb7e4de680fec4c81076828725bc52820bb95a253f7"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/sheet.png",
+          "sha256": "cc51ce9c0655e8381c6017209a938e4db2a0615ff354295b0ee86b311221ccfe"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/report.json",
+          "sha256": "5b0b56a2ab2c58c353390cf349aa541aeb414c310314a1043a0644bc542e3d31"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-0.png",
+          "sha256": "50f2afb611ad982f2c817a5c71e2954aef4502cc92f96aed238879d4512b648b"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-1.png",
+          "sha256": "ae247b310f6d5a94c54ba7ca7f5ef6b1109a1cd4c7349b8120035b05e56e03f8"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-2.png",
+          "sha256": "5c1b52d1a72be66d2e256f546506c84c5b6696a8dbd7aa9134aacc03c3bcc0b0"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-3.png",
+          "sha256": "65b0f1688d3303d9cc798c16c7968b7da47f2e8c70265ffbac08dc0be9119804"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-4.png",
+          "sha256": "8bae55171d211467ac09c5e2f9e6adcdf430f3b1e499d25c4a6db6030ff208fa"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-5.png",
+          "sha256": "c1b99051f2bb187923dfe48c52af18337da0119ade3ff16bbb97919c4179eeb8"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-6.png",
+          "sha256": "c15e4623a5fabe487552be9d773fc8eabb648612b7dd2142de92c69585e99dc9"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/view-7.png",
+          "sha256": "02857e723882e18f570bff7ce85bce2d24421bb2d9d87c9546a328cdb424f13b"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-0.png",
+          "sha256": "3d3957ab71bfbea535c5d7fc4e4dfabfe3146b8add371a5b7ff62d222af6fd16"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-1.png",
+          "sha256": "2f22e38e7ba3fd84663fd58ed383232845c28ea62021a4fef0c8e81647f73302"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-2.png",
+          "sha256": "85a8566b2be0e7f79f7f144fa6eb16f373848f3d46933049cd59417030dd9525"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-3.png",
+          "sha256": "ed7be75d3073927159bc060a69d9d04196737acde44f3aa60a0c188a900c1fba"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-4.png",
+          "sha256": "58ec7fd9bb1405827ebc2fc2147abbf3fb4180bf7c6ed646e8d7fbe78d6397a6"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-5.png",
+          "sha256": "6306ff4905d7069d180e997ba2c760d16503abb861e1c605776fa75a2dbe40f6"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-6.png",
+          "sha256": "c23f17d21de6e6326aee4d31e990f9611487e3457ae97590720b88deb3fb859f"
+        },
+        {
+          "url": "demos/vehicle-style-study/04-simple-painted/raw-7.png",
+          "sha256": "cb41c5258ad5ccaaf775055eb3c4bd8e6f95a7998acf656185223e44a2d55a02"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "title": "Original red compact",
+      "file": "references/compact-4.png",
+      "width": 64,
+      "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb"
+    },
+    {
+      "title": "Original green car",
+      "file": "references/car-8.png",
+      "width": 80,
+      "sha256": "fd389b64db2fe6c4daf9f22427068ee7511394d5d79aa24f6d3bfc0ef27d8f36"
+    }
+  ]
+}

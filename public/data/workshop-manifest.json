@@ -2,6 +2,20 @@
   "version": 1,
   "tools": [
     {
+      "id": "vehicle-bake",
+      "name": "Red coupe low-poly review",
+      "description": "Compare the preferred pixel art with textured low-poly models, budgets and rolling wheels.",
+      "url": "demos/vehicle-bake/index.html",
+      "mode": "link"
+    },
+    {
+      "id": "vehicle-style-study",
+      "name": "Sports car style study",
+      "description": "Compare detailed renders, toon shading, guided pixel finishing and simple paint.",
+      "url": "demos/vehicle-style-study/index.html",
+      "mode": "link"
+    },
+    {
       "id": "parking-lab",
       "name": "Parking lot lab",
       "description": "Big shopping-center parking, smaller town lots and long-bay patterns with native tiles and parked cars.",
@@ -206,6 +220,18 @@
     }
   ],
   "batches": [
+    {
+      "id": "vehicle-bake",
+      "name": "Red coupe low-poly review",
+      "description": "Actual low-poly GLB style and budget experiments; other vehicle families await owner agreement.",
+      "toolId": "vehicle-bake"
+    },
+    {
+      "id": "vehicle-style-study",
+      "name": "Sports car style study",
+      "description": "Four original sports-car authoring experiments; offline inspection without promotion.",
+      "toolId": "vehicle-style-study"
+    },
     {
       "id": "authored-trains",
       "name": "Authored train models",
@@ -11436,6 +11462,127 @@
       "fingerprint": "252f26a2d699dafce95771443558bc81bef8faa0808d4634bec60071338e5beb",
       "sourceFingerprint": "1429a07733836963fc6f1bf703bba59e2e766152bea54a9e936a65089c2d0737",
       "excluded": "Retained model inspection; exact production art approval remains pending."
+    },
+    {
+      "id": "projection:sports-car-study-01-detailed-shaded-v1",
+      "batchId": "vehicle-style-study",
+      "name": "Sports car · Detailed + glossy",
+      "prompt": "Compare native pixels, diagonals and raw renders beside the existing vehicle sprites.",
+      "url": "/tilefun/demos/vehicle-style-study/index.html#01-detailed-shaded",
+      "kind": "projection",
+      "fingerprint": "0b0de56a57f5c161e6bcd0d2b314688f72549bbb005050d3a53cfa39f1fba66a",
+      "sourceFingerprint": "0b0de56a57f5c161e6bcd0d2b314688f72549bbb005050d3a53cfa39f1fba66a",
+      "excluded": "Offline authoring experiment; no gameplay integration or production art approval."
+    },
+    {
+      "id": "projection:sports-car-study-02-detailed-toon-v1",
+      "batchId": "vehicle-style-study",
+      "name": "Sports car · Detailed + toon",
+      "prompt": "Compare native pixels, diagonals and raw renders beside the existing vehicle sprites.",
+      "url": "/tilefun/demos/vehicle-style-study/index.html#02-detailed-toon",
+      "kind": "projection",
+      "fingerprint": "7e76e3e5763ae3158829e2f7ddfbe04a289b37dbd17f347d713e3e742a652d60",
+      "sourceFingerprint": "7e76e3e5763ae3158829e2f7ddfbe04a289b37dbd17f347d713e3e742a652d60",
+      "excluded": "Offline authoring experiment; no gameplay integration or production art approval."
+    },
+    {
+      "id": "projection:sports-car-study-03-guide-pixel-finish-v1",
+      "batchId": "vehicle-style-study",
+      "name": "Sports car · Guides + pixel finish",
+      "prompt": "Compare native pixels, diagonals and raw renders beside the existing vehicle sprites.",
+      "url": "/tilefun/demos/vehicle-style-study/index.html#03-guide-pixel-finish",
+      "kind": "projection",
+      "fingerprint": "65b516b63d4ae10c6c3b89febd0c09e1edb088da70f46a468772cfd6f47d0e1e",
+      "sourceFingerprint": "65b516b63d4ae10c6c3b89febd0c09e1edb088da70f46a468772cfd6f47d0e1e",
+      "excluded": "Offline authoring experiment; no gameplay integration or production art approval."
+    },
+    {
+      "id": "projection:sports-car-study-04-simple-painted-v1",
+      "batchId": "vehicle-style-study",
+      "name": "Sports car · Simple + painted",
+      "prompt": "Compare native pixels, diagonals and raw renders beside the existing vehicle sprites.",
+      "url": "/tilefun/demos/vehicle-style-study/index.html#04-simple-painted",
+      "kind": "projection",
+      "fingerprint": "2947e9d8f048b56e1f94bf16eea1394e24733bcc17a1bb6485d4d0e8091500ac",
+      "sourceFingerprint": "2947e9d8f048b56e1f94bf16eea1394e24733bcc17a1bb6485d4d0e8091500ac",
+      "excluded": "Offline authoring experiment; no gameplay integration or production art approval."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-a-reduced-projection--budget-low-v4",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Projected paint · 1,376 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=a-reduced-projection--budget-low-v4",
+      "kind": "projection",
+      "fingerprint": "2c53f1bae16b7712c5f53ba71eeafb198a171ceff6fe8370e1a56acfb6f0f7e0",
+      "sourceFingerprint": "2c53f1bae16b7712c5f53ba71eeafb198a171ceff6fe8370e1a56acfb6f0f7e0",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-a-reduced-projection--budget-mid",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Projected paint · 1,877 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=a-reduced-projection--budget-mid",
+      "kind": "projection",
+      "fingerprint": "a2521cc2c2d2fa28f399827d529c91203fd18e09b1fe7a9ac58e7cc6a5a62ba8",
+      "sourceFingerprint": "a2521cc2c2d2fa28f399827d529c91203fd18e09b1fe7a9ac58e7cc6a5a62ba8",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-a-reduced-projection--mid-fenders-v3",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Projected paint · 2,299 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=a-reduced-projection--mid-fenders-v3",
+      "kind": "projection",
+      "fingerprint": "2dbb7e060c8cb649de0fdfadea0c7ce3bc2ee9b4f75d329b3dbcf61182dc04cc",
+      "sourceFingerprint": "2dbb7e060c8cb649de0fdfadea0c7ce3bc2ee9b4f75d329b3dbcf61182dc04cc",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-a-reduced-projection--v5",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Projected paint · 2,469 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=a-reduced-projection--v5",
+      "kind": "projection",
+      "fingerprint": "1c156787d42028885a7e911e474f752880c3d0c9f90f919b60c5bfe613d57b2c",
+      "sourceFingerprint": "1c156787d42028885a7e911e474f752880c3d0c9f90f919b60c5bfe613d57b2c",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-b-authored-semantic--budget-low-v4",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Authored UV paint · 1,324 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=b-authored-semantic--budget-low-v4",
+      "kind": "projection",
+      "fingerprint": "7fb75ee59f5a040548e76b8c4c15d0b89b3bed2c80e9694821baa5ab1ad3349e",
+      "sourceFingerprint": "7fb75ee59f5a040548e76b8c4c15d0b89b3bed2c80e9694821baa5ab1ad3349e",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-b-authored-semantic--v4",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Authored UV paint · 2,378 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=b-authored-semantic--v4",
+      "kind": "projection",
+      "fingerprint": "9ad90ce854a75ff7fb3cde978611551ef7b80633177f3381f402d53f4f78a4f8",
+      "sourceFingerprint": "9ad90ce854a75ff7fb3cde978611551ef7b80633177f3381f402d53f4f78a4f8",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:red-coupe-low-poly-c-surface-bake--v3",
+      "batchId": "vehicle-bake",
+      "name": "Red coupe · Surface bake · 2,597 triangles",
+      "prompt": "Compare the chosen pixel art with the actual textured low-poly GLB, including diagonal views and wheel roll.",
+      "url": "/tilefun/demos/vehicle-bake/index.html?candidate=c-surface-bake--v3",
+      "kind": "projection",
+      "fingerprint": "296f14fcfcf7188763ed6e19f49bfef112751bb9afcf88f5c7b7a5322acc75ae",
+      "sourceFingerprint": "296f14fcfcf7188763ed6e19f49bfef112751bb9afcf88f5c7b7a5322acc75ae",
+      "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
     },
     {
       "id": "authored-vehicle-game-fit-v1",
@@ -40572,5 +40719,5 @@
       }
     }
   ],
-  "inputDigest": "f362b1924597baa8140ecb58b740cb41ac264cc6e8de2f5c423a6c647827eae8"
+  "inputDigest": "d992c82fb3606c3b6a114a4ae236356f1a6f5b13718886373ff0c50d023d1cc5"
 }

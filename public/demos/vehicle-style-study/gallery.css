@@ -1,0 +1,235 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  color: #eae4d6;
+  background: #171d21;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 1240px;
+  padding: 28px 32px 64px;
+  margin: auto;
+}
+a {
+  color: #b8d4b4;
+  text-underline-offset: 4px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #83908f;
+}
+header {
+  padding: 56px 0 30px;
+  max-width: 820px;
+}
+.eyebrow {
+  color: #e5ae70;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+h1 {
+  font-size: clamp(42px, 6vw, 72px);
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  margin: 12px 0 20px;
+}
+.intro {
+  font-size: 19px;
+  color: #b5bfba;
+  line-height: 1.6;
+  max-width: 760px;
+}
+.note {
+  font-size: 12px;
+  color: #8e9a95;
+}
+.controls {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 18px 0;
+  border-block: 1px solid #354039;
+}
+.controls label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #b9c3bb;
+  font-size: 13px;
+}
+button,
+select {
+  font: inherit;
+  padding: 9px 12px;
+  border: 1px solid #48564b;
+  border-radius: 5px;
+  color: #eae4d6;
+  background: #26332b;
+}
+button {
+  cursor: pointer;
+  min-width: 120px;
+}
+button:hover {
+  background: #354535;
+}
+input {
+  accent-color: #d3ad7b;
+  max-width: 150px;
+}
+output {
+  min-width: 32px;
+}
+#status {
+  font-size: 12px;
+  color: #a6b29f;
+  margin-block: 15px;
+}
+.routes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.route {
+  background: #202a29;
+  border: 1px solid #3a4640;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.route header {
+  padding: 20px 22px 6px;
+}
+.route .number {
+  color: #dfad78;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+}
+.route h2 {
+  font-size: 23px;
+  letter-spacing: -0.03em;
+  margin: 7px 0;
+}
+.route .description {
+  color: #b8c1b8;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 10px 0;
+  min-height: 42px;
+}
+.viewport {
+  height: 310px;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+  background-color: #6a7971;
+  background-image:
+    linear-gradient(45deg, #718077 25%, transparent 25%),
+    linear-gradient(-45deg, #718077 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #718077 75%),
+    linear-gradient(-45deg, transparent 75%, #718077 75%);
+  background-size: 32px 32px;
+  background-position:
+    0 0,
+    0 16px,
+    16px -16px,
+    -16px 0;
+}
+.car {
+  image-rendering: pixelated;
+  display: block;
+}
+.car.raw {
+  image-rendering: auto;
+}
+.route footer {
+  padding: 17px 22px 20px;
+}
+.metrics {
+  display: flex;
+  gap: 20px;
+  font-size: 11px;
+  color: #b6c4b3;
+  margin: 0 0 14px;
+}
+.links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+.references {
+  margin-top: 38px;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 36px;
+  padding: 28px 0;
+  border-block: 1px solid #354039;
+}
+.references h2,
+.reading h2 {
+  font-size: 23px;
+  letter-spacing: -0.025em;
+}
+.references p,
+.reading p {
+  color: #aebbb0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.reference-cars {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.reference-cars figure {
+  margin: 0;
+  text-align: center;
+}
+.reference-cars img {
+  image-rendering: pixelated;
+}
+figcaption {
+  margin-top: 12px;
+  font-size: 11px;
+  color: #b4bfb4;
+}
+.reading {
+  padding-top: 20px;
+  max-width: 800px;
+}
+@media (max-width: 720px) {
+  main {
+    padding: 20px 18px 40px;
+  }
+  header {
+    padding-top: 34px;
+  }
+  .routes,
+  .references {
+    grid-template-columns: 1fr;
+  }
+  .controls {
+    gap: 16px;
+  }
+  .controls label {
+    flex-wrap: wrap;
+  }
+  nav span {
+    display: none;
+  }
+  .viewport {
+    height: 280px;
+  }
+}

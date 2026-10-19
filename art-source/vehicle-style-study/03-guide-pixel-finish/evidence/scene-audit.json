@@ -1,0 +1,50 @@
+{
+  "triangles": 71390,
+  "bounds": {
+    "min": [
+      -2.3618435859680176,
+      -1.0329999923706055,
+      2.9802322387695312e-08
+    ],
+    "max": [
+      2.3513123989105225,
+      1.0329999923706055,
+      1.0699999332427979
+    ],
+    "size": [
+      4.71315598487854,
+      2.065999984741211,
+      1.0699999034404755
+    ]
+  },
+  "wheelPivots": 4,
+  "tires": [
+    {
+      "object": "Rounded performance tire",
+      "parent": "Front_near_Roll_Y",
+      "minZ": 2.3611494981423675e-08
+    },
+    {
+      "object": "Rounded performance tire.001",
+      "parent": "Front_far_Roll_Y",
+      "minZ": 2.3611494981423675e-08
+    },
+    {
+      "object": "Rounded performance tire.002",
+      "parent": "Rear_near_Roll_Y",
+      "minZ": 2.3611494981423675e-08
+    },
+    {
+      "object": "Rounded performance tire.003",
+      "parent": "Rear_far_Roll_Y",
+      "minZ": 2.3611494981423675e-08
+    }
+  ],
+  "groundAnchor": [
+    64,
+    92
+  ],
+  "threads": 4,
+  "device": "CPU",
+  "beautyMaterialsRetained": true
+}

@@ -1,0 +1,423 @@
+{
+  "route": "01-detailed-shaded",
+  "title": "Detailed smooth red sports coupe / direct shaded render",
+  "status": "complete",
+  "method": "Original parametric curved panels and mechanical details; glossy red Principled clearcoat; fixed soft studio; CPU Cycles 16 samples; direct render quantization adapting pack_tiger.py. No authored pixel clusters or redraw.",
+  "evaluatedTriangles": 234036,
+  "evaluatedMeshCount": 221,
+  "sourceMeshCount": 134,
+  "sourceCurveCount": 87,
+  "nativeSize": [
+    128,
+    128
+  ],
+  "rawSize": [
+    512,
+    512
+  ],
+  "palette": [
+    "#e35a5a",
+    "#3a3a50",
+    "#7f214c",
+    "#d3445c",
+    "#ba2758",
+    "#a11250",
+    "#c53458",
+    "#a4bbd5",
+    "#4a2a3d",
+    "#bad2e0",
+    "#8fa1c8",
+    "#565972",
+    "#738ca8",
+    "#46465e",
+    "#d4d4e6",
+    "#e18484",
+    "#565672",
+    "#7373a8",
+    "#ebe4f2",
+    "#f8f8f8",
+    "#838897",
+    "#cb2a2a",
+    "#968bab",
+    "#a82b2d",
+    "#d93232",
+    "#b9b9d5",
+    "#fc5c46",
+    "#410c1a",
+    "#74121d",
+    "#ab161e",
+    "#dd2025",
+    "#fa4339",
+    "#ff7c64",
+    "#1c1927"
+  ],
+  "paletteCount": 34,
+  "colourCount": 28,
+  "paletteProvenance": {
+    "sourceReferences": [
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/east.png",
+        "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb",
+        "size": [
+          64,
+          64
+        ]
+      },
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/north.png",
+        "sha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6",
+        "size": [
+          32,
+          64
+        ]
+      },
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/south.png",
+        "sha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146",
+        "size": [
+          32,
+          64
+        ]
+      },
+      {
+        "path": "art-source/vehicle-models/compact-4/v1/refs/west.png",
+        "sha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa",
+        "size": [
+          64,
+          64
+        ]
+      }
+    ],
+    "sampledColours": [
+      "#e35a5a",
+      "#3a3a50",
+      "#7f214c",
+      "#d3445c",
+      "#ba2758",
+      "#a11250",
+      "#c53458",
+      "#a4bbd5",
+      "#4a2a3d",
+      "#bad2e0",
+      "#8fa1c8",
+      "#565972",
+      "#738ca8",
+      "#46465e",
+      "#d4d4e6",
+      "#e18484",
+      "#565672",
+      "#7373a8",
+      "#ebe4f2",
+      "#f8f8f8",
+      "#838897",
+      "#cb2a2a",
+      "#968bab",
+      "#a82b2d",
+      "#d93232",
+      "#b9b9d5",
+      "#fc5c46"
+    ],
+    "namedSupplementRoles": {
+      "redDeepShadow": "#410c1a",
+      "redShadow": "#74121d",
+      "redMid": "#ab161e",
+      "redAutomotive": "#dd2025",
+      "redLit": "#fa4339",
+      "redClearcoat": "#ff7c64",
+      "trimOutline": "#1c1927"
+    }
+  },
+  "blendPath": "data/vehicle-style-study/01-detailed-shaded/sports-coupe.blend",
+  "sourcePath": "scripts/vehicle-style-study/01-detailed-shaded/build.py",
+  "packerPath": "scripts/vehicle-style-study/01-detailed-shaded/pack.py",
+  "commands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-style-study/01-detailed-shaded/build.py",
+    "python scripts/vehicle-style-study/01-detailed-shaded/pack.py",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background data/vehicle-style-study/01-detailed-shaded/sports-coupe.blend --threads 4 --python-exit-code 1 --python scripts/vehicle-style-study/01-detailed-shaded/validate_scene.py",
+    "python scripts/vehicle-style-study/01-detailed-shaded/finalize.py"
+  ],
+  "renderer": {
+    "engine": "Cycles CPU",
+    "threads": 4,
+    "samples": 16
+  },
+  "projection": {
+    "position": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "orthoScale": 7.2,
+    "elevationDegrees": 50
+  },
+  "model": {
+    "forward": "-X",
+    "up": "Z",
+    "visualLength": 4.6,
+    "bodyLength": 4.468849095839688,
+    "maxBodyWidth": 1.8846885317236945,
+    "roofHeight": 1.0200633805721029,
+    "visualBounds": {
+      "min": [
+        -2.278141577738884,
+        -1.0122915228371518,
+        0.0
+      ],
+      "max": [
+        2.321858422261115,
+        1.0122915228371518,
+        1.0317142185441923
+      ]
+    },
+    "uniformAuthoringScale": 0.9714889338781931,
+    "wheelCenters": [
+      [
+        -1.3600845074294703,
+        -0.8111932597882913,
+        0.31087645884102183
+      ],
+      [
+        -1.3600845074294703,
+        0.8111932597882913,
+        0.31087645884102183
+      ],
+      [
+        1.3600845074294703,
+        -0.8111932597882913,
+        0.31087645884102183
+      ],
+      [
+        1.3600845074294703,
+        0.8111932597882913,
+        0.31087645884102183
+      ]
+    ],
+    "tireRadius": 0.31087645884102183,
+    "axleAxis": "Y",
+    "groundContactZ": 0
+  },
+  "packing": {
+    "filter": "premultiplied-alpha Lanczos 512 to 128",
+    "translation": [
+      0,
+      28
+    ],
+    "groundAnchor": [
+      64,
+      92
+    ],
+    "alphaThreshold": 110,
+    "alpha": "binary 0 or 255",
+    "outline": "one native pixel, exterior cardinal neighbours only",
+    "dither": false,
+    "independentFrameFit": false,
+    "authoredPixelClusters": []
+  },
+  "views": [
+    {
+      "bodyPixels": 2409,
+      "outlinePixels": 223,
+      "bounds": [
+        22,
+        69,
+        106,
+        105
+      ]
+    },
+    {
+      "bodyPixels": 2330,
+      "outlinePixels": 180,
+      "bounds": [
+        25,
+        56,
+        103,
+        120
+      ]
+    },
+    {
+      "bodyPixels": 2144,
+      "outlinePixels": 192,
+      "bounds": [
+        45,
+        54,
+        83,
+        122
+      ]
+    },
+    {
+      "bodyPixels": 2330,
+      "outlinePixels": 181,
+      "bounds": [
+        25,
+        56,
+        103,
+        120
+      ]
+    },
+    {
+      "bodyPixels": 2410,
+      "outlinePixels": 224,
+      "bounds": [
+        22,
+        69,
+        106,
+        105
+      ]
+    },
+    {
+      "bodyPixels": 2285,
+      "outlinePixels": 178,
+      "bounds": [
+        25,
+        59,
+        103,
+        120
+      ]
+    },
+    {
+      "bodyPixels": 2078,
+      "outlinePixels": 182,
+      "bounds": [
+        45,
+        57,
+        83,
+        123
+      ]
+    },
+    {
+      "bodyPixels": 2285,
+      "outlinePixels": 179,
+      "bounds": [
+        25,
+        59,
+        103,
+        120
+      ]
+    }
+  ],
+  "gif": {
+    "frames": 8,
+    "durationMs": [
+      350,
+      350,
+      350,
+      350,
+      350,
+      350,
+      350,
+      350
+    ],
+    "size": [
+      512,
+      512
+    ],
+    "loop": true
+  },
+  "limitations": [
+    "Unreviewed offline experiment; no production approval or integration.",
+    "Bright softbox highlights can turn red panels pale pink and collapse to broad flat palette bands.",
+    "Fine split spokes, rotor drillings, lens rings, tire grooves and grille ribs approach or fall below a native pixel.",
+    "Reflective highlights change across directions under fixed lighting; palette mapping cannot impose authored cluster stability.",
+    "Glass is opaque reflective smoked material, not a refractive cabin with interior.",
+    "Editable wheels have separate pivots, but animated steering, tire/body clearance and runtime optimization are unqualified.",
+    "Dense evaluated geometry is an offline shading experiment, not a runtime mesh budget."
+  ],
+  "visualInspection": [
+    {
+      "artifact": "raw-contact.png",
+      "inspection": "Viewed all eight final raw renders together. Coherent long nose and swept cabin; front LED blades differ clearly from rear round lamps; body and four wheels remain coherent through yaw."
+    },
+    {
+      "artifact": "native-contact.png and sheet.png",
+      "inspection": "Viewed true native pixels across all eight directions. Near-side wheels read as dark circles with alloy centers; far wheels are naturally occluded in side views and appear at the end-view silhouette. No detached tires or clipped canvas observed."
+    },
+    {
+      "artifact": "comparison.png",
+      "inspection": "Viewed labelled raw, reduced, native and 4x nearest stages plus unchanged compact references. Glass borders and roof/glass separation remain readable. Gloss highlights become broad pale-red clusters and some stair-step noise. Tiny grille, tire and rim details disappear or merge at native size."
+    },
+    {
+      "artifact": "raw-0.png, raw-1.png, raw-2.png, raw-5.png",
+      "inspection": "Inspected larger individual side, front-oblique, front and rear-oblique beauty renders. Curved panels, wheel arches, tires/rims, side/hood intakes, LED blades and circular rear lenses are genuinely geometric. No bitmap feature patch was substituted."
+    },
+    {
+      "artifact": "turntable.gif",
+      "inspection": "All eight encoded frames and 350ms durations decoded and compared exactly to checker-composited 4x nearest native sprites. No real-time player inspection claimed."
+    },
+    {
+      "artifact": "pass-1-bright-reflections/comparison.png",
+      "inspection": "Inspected first pass before changing lights: broad gray clearcoat patches were distracting. Final lighting reduces that defect without pixel redraw. Initial raw and packed outputs retained."
+    }
+  ],
+  "validation": {
+    "distinctViews": 8,
+    "binaryAlpha": true,
+    "sharedPalette": true,
+    "allFramesPadded": true,
+    "sheetSize": [
+      1024,
+      128
+    ],
+    "expectedFilesExist": true,
+    "sceneContractPassed": true,
+    "allFourTiresContactZ0": true,
+    "visualLength": 4.6000001430511475,
+    "encodedSheetMatchesViews": true,
+    "allDecodedGifFramesMatchViews": true,
+    "allRequiredOutputsInspected": true,
+    "frozenPixels": true
+  },
+  "outputHashes": {
+    "comparison.png": "f615e717f9f8b82b733a2b86eee27a3af9db83191c630595cb0db8b34803afcd",
+    "native-contact.png": "11985ac0a50da484280590dc6af771ff19c1d0246df5851949d1f7f0758f9047",
+    "raw-0.png": "bb2d61e6af7ac1b8788c5c8ef8aa52c0b61a52beee7067f229357a756573472a",
+    "raw-1.png": "1b6c5a61426b8e72bd97f522d41e84f64de78f23de368409b4effaf03c86d4d3",
+    "raw-2.png": "519af90d6c6087bee042e62ff811fe46f6442348a1342a23d797273e2f97b3bf",
+    "raw-3.png": "04599c51e9f70158afa799c9a6a6b5aff457cd64205b9ba47049aa56ca684d4e",
+    "raw-4.png": "278fb403c59d87d1960d5cf3497d0fafc8b062813ddfb56efa38b696853103f3",
+    "raw-5.png": "c93b2327130e905f7b0662fc359ad995a2c3509bc08c3147fb49f7627c822fb3",
+    "raw-6.png": "daa381d92cdb5897b687e1056860b3157c143acdc9a5df0c1810f151549623c4",
+    "raw-7.png": "68fdab8d92dab58378681c51f1dd1d23762a52be10778afb38e54999a89f8028",
+    "raw-contact.png": "f24dad3eb2a03226eec27a1d6182b77f70f35d234af6c0e0e0bbab12425d9e40",
+    "sheet.png": "41f88e3a55ffc82fa386903f05314e7766f1393f32fc8d2d6f13860d8870b1d0",
+    "turntable.gif": "b9cd44173bda2a3fed7b285356cd020b30075fd7ad30447854238e900c94a9ba",
+    "view-0.png": "4e28003d368453fe64f28190af0d44df3fdfc4696ee5ca901098747ac2735aa5",
+    "view-1.png": "81e965f7cda5da333dbde5d2043c03fe06ede6ab118017947b5714551b4402f7",
+    "view-2.png": "0d8458af6a6d08255153f90296397551c60021afd73e3e96b0863f7e7612d37c",
+    "view-3.png": "64a0bd75a26d994453eb70c7ee54b060a03bb5bdc9b1b79f7a678c8a74d7daa5",
+    "view-4.png": "93a2d2f651dd804f84fa92cbd77c6481074a62d8cf01e629b40368c016e6cdca",
+    "view-5.png": "8d84a654c252583ab99bb2c7546fee75e555e711ae305352ced2ce18f8c897a2",
+    "view-6.png": "2f8b724dcfbdbd79a3a56f00969cfc134f43ba871e63dd403e2a7b7ac3fb5e19",
+    "view-7.png": "36e89f7157cf1a5377a05c88c3b13a8db38569e36df79c833ec66c4e5aebdc94"
+  },
+  "inspectionRecord": "data/vehicle-style-study/01-detailed-shaded/inspection.json",
+  "sceneValidation": "data/vehicle-style-study/01-detailed-shaded/scene-validation.json",
+  "iterations": [
+    {
+      "name": "Initial brighter softbox pass",
+      "path": "data/vehicle-style-study/01-detailed-shaded/pass-1-bright-reflections",
+      "finding": "Unrestricted nearest palette mapping made broad clearcoat highlights gray. Preserved raw and packed comparison."
+    },
+    {
+      "name": "Final reduced reflection intensity",
+      "finding": "Lower fixed light powers, moderate clearcoat, higher contrast and lower exposure retain red. Same geometry route and no feature redraw. Uniform model normalization gives exact 4.6-unit visual length."
+    }
+  ],
+  "sourcePaths": [
+    "scripts/vehicle-style-study/01-detailed-shaded/build.py",
+    "scripts/vehicle-style-study/01-detailed-shaded/pack.py",
+    "scripts/vehicle-style-study/01-detailed-shaded/validate_scene.py",
+    "scripts/vehicle-style-study/01-detailed-shaded/finalize.py"
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-style-study/01-detailed-shaded/build.py": "fe622522abb24deb77d5deb9e0bba9868c3af24237db634868dfd24d3bb44eb5",
+    "scripts/vehicle-style-study/01-detailed-shaded/pack.py": "7e8b2f1c88a9734fa80344c9c33123f7534661540470edee49fa5323bd797344",
+    "scripts/vehicle-style-study/01-detailed-shaded/validate_scene.py": "4f01cfb9e04920d4b5f729d41f4dc4a8b942e8d977b3d9144589405857dd04eb",
+    "scripts/vehicle-style-study/01-detailed-shaded/finalize.py": "df4b3303d936cd93857e90654da499f9ec7bae58ffa6d4119d08ac126054713c",
+    "data/vehicle-style-study/01-detailed-shaded/sports-coupe.blend": "865a163ad648a700e68466560f93e0dfaeec1d13ace5a385c335bc30c6501119"
+  }
+}

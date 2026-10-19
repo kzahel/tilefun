@@ -1,0 +1,27 @@
+{
+  "allEightViewsInspected": true,
+  "nativeAnd4x": true,
+  "intermediateAndRollInspected": true,
+  "inspector": "B authoring agent, visual inspection of actual GLB round-trip renders; this is not human approval",
+  "views": [0, 45, 90, 135, 180, 225, 270, 315],
+  "evidence": ["sheet-native.png", "inspect-4x.png", "comparison.png", "contour-diff.png", "novel-and-roll.png", "wireframe.png"],
+  "findings": [
+    "Inspected all eight native and four-times-nearest views, plus 22.5/67.5/157.5/292.5 degree headings and four quarter-turn wheel poses.",
+    "The low budget uses exactly the high-budget atlas bytes and the same source shape functions, aperture landmarks, wheel centers and physical scale.",
+    "The red coupe, glass frames, reflection bands, hood seams and deck slats remain readable. Lower longitudinal/cabin sampling and twelve-sided wheels visibly simplify the profile.",
+    "No obvious broken UV ownership, glass leak, body/tire clipping or stray island colors were observed. Actual exported cylinder gaps are approximately 0.99509 world units.",
+    "Mean eight-view silhouette IoU is approximately 0.954. Body triangulation and angularity remain visible compared to the chosen approach-3 drawings."
+  ],
+  "remainingLimitations": [
+    "The low-budget hood seams bend and thicken more under coarse UV interpolation, especially in side and diagonal views; both candidates have heavier seams than the target.",
+    "The twelve-sided tires and reduced coachwork/cabin sampling are visibly more angular than the high budget and source-reduced route.",
+    "Narrow glass, mirror, fender and deck-slat features can merge or change pixel coverage at native scale; source direction-specific cluster fidelity is not claimed.",
+    "The optional wireframe sheet undersamples thin edges; exact exported topology statistics come from GLB indices and attributes."
+  ],
+  "coordinatorEvidence": {
+    "source": "Coordinator user message in this session",
+    "finalRevisionSharedComponentCapture": "passed budget-low-v4: 1324 triangles",
+    "finalRevisionCylinderProof": "passed all neutral roll angles and collision-negative control",
+    "scope": "Coordinator performed shared-engine validation; route agent independently checked actual GLB buffers, rigs and Blender round-trip renders. No separate final-capture filesystem path was supplied."
+  }
+}

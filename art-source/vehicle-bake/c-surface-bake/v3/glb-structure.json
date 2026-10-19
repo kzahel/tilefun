@@ -1,0 +1,641 @@
+{
+  "asset": {
+    "generator": "Khronos glTF Blender I/O v5.2.40",
+    "version": "2.0"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "extras": {
+        "render_contract": "512 RGBA > 128 then translate (0,+28); origin (64,92); fixed light/camera; forward -X",
+        "authorship": "Original procedural sports coupe; no downloaded model; guide-driven offline pixel finish"
+      },
+      "name": "Scene",
+      "nodes": [
+        13
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "extras": {
+        "guide_class": "body",
+        "source_paint_roles": "red,red_glint,red_light,red_mid,red_shadow,warm_ink"
+      },
+      "mesh": 0,
+      "name": "Body"
+    },
+    {
+      "mesh": 1,
+      "name": "Wheel_FL_TireHub",
+      "translation": [
+        1.399999976158142,
+        -0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        1
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_FL_Roll"
+    },
+    {
+      "children": [
+        2
+      ],
+      "extras": {
+        "steering_enabled": true,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_FL_Steer",
+      "translation": [
+        -1.4000000953674316,
+        0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "mesh": 2,
+      "name": "Wheel_FR_TireHub",
+      "translation": [
+        1.399999976158142,
+        -0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        4
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_FR_Roll"
+    },
+    {
+      "children": [
+        5
+      ],
+      "extras": {
+        "steering_enabled": true,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_FR_Steer",
+      "translation": [
+        -1.4000000953674316,
+        0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "mesh": 3,
+      "name": "Wheel_RL_TireHub",
+      "translation": [
+        -1.399999976158142,
+        -0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        7
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_RL_Roll"
+    },
+    {
+      "children": [
+        8
+      ],
+      "extras": {
+        "steering_enabled": false,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_RL_Steer",
+      "translation": [
+        1.4000000953674316,
+        0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "mesh": 4,
+      "name": "Wheel_RR_TireHub",
+      "translation": [
+        -1.399999976158142,
+        -0.3400000333786011,
+        0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        10
+      ],
+      "extras": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "name": "Wheel_RR_Roll"
+    },
+    {
+      "children": [
+        11
+      ],
+      "extras": {
+        "steering_enabled": false,
+        "steer_axis_gltf": [
+          0,
+          1,
+          0
+        ]
+      },
+      "name": "Wheel_RR_Steer",
+      "translation": [
+        1.4000000953674316,
+        0.3400000333786011,
+        -0.8700000643730164
+      ]
+    },
+    {
+      "children": [
+        0,
+        3,
+        6,
+        9,
+        12
+      ],
+      "extras": {
+        "exportWorldScale": 17.39130434782609,
+        "front_axis_blender": "-X",
+        "source_dimensions": [
+          4.6,
+          1.9,
+          1.05
+        ]
+      },
+      "name": "Coupe_WorldScale_80_over_4p6",
+      "scale": [
+        17.39130401611328,
+        17.39130401611328,
+        17.39130401611328
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Coupe baked semantic paint / KHR_materials_unlit",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0,
+        "roughnessFactor": 1
+      },
+      "extensions": {
+        "KHR_materials_unlit": {}
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Continuous sculpted coachwork with cut arches.001",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "Torus.010",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 4,
+            "NORMAL": 5,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "Torus.011",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 8,
+            "NORMAL": 9,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "Torus.012",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 12,
+            "NORMAL": 13,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "Torus.013",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 16,
+            "NORMAL": 17,
+            "TEXCOORD_0": 18
+          },
+          "indices": 19,
+          "material": 0
+        }
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ],
+  "images": [
+    {
+      "bufferView": 4,
+      "mimeType": "image/png",
+      "name": "atlas"
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 4705,
+      "max": [
+        2.3260347843170166,
+        1.0709433555603027,
+        1.0340098142623901
+      ],
+      "min": [
+        -2.3544423580169678,
+        0.1651679277420044,
+        -1.0349125862121582
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 4705,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 4705,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5123,
+      "count": 4767,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 5,
+      "componentType": 5126,
+      "count": 432,
+      "max": [
+        -1.059999942779541,
+        0.6799999475479126,
+        1.0069999694824219
+      ],
+      "min": [
+        -1.7400000095367432,
+        2.9802322387695312e-08,
+        0.8189858794212341
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 6,
+      "componentType": 5126,
+      "count": 432,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 7,
+      "componentType": 5126,
+      "count": 432,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 8,
+      "componentType": 5123,
+      "count": 756,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 9,
+      "componentType": 5126,
+      "count": 424,
+      "max": [
+        -1.059999942779541,
+        0.6799999475479126,
+        -0.8189858794212341
+      ],
+      "min": [
+        -1.7400000095367432,
+        2.9802322387695312e-08,
+        -1.0069999694824219
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 10,
+      "componentType": 5126,
+      "count": 424,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 11,
+      "componentType": 5126,
+      "count": 424,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 12,
+      "componentType": 5123,
+      "count": 756,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 13,
+      "componentType": 5126,
+      "count": 432,
+      "max": [
+        1.7400000095367432,
+        0.6799999475479126,
+        1.0069999694824219
+      ],
+      "min": [
+        1.059999942779541,
+        2.9802322387695312e-08,
+        0.8189858794212341
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 14,
+      "componentType": 5126,
+      "count": 432,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 15,
+      "componentType": 5126,
+      "count": 432,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 16,
+      "componentType": 5123,
+      "count": 756,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 17,
+      "componentType": 5126,
+      "count": 432,
+      "max": [
+        1.7400000095367432,
+        0.6799999475479126,
+        -0.8189858794212341
+      ],
+      "min": [
+        1.059999942779541,
+        2.9802322387695312e-08,
+        -1.0069999694824219
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 18,
+      "componentType": 5126,
+      "count": 432,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 19,
+      "componentType": 5126,
+      "count": 432,
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 20,
+      "componentType": 5123,
+      "count": 756,
+      "type": "SCALAR"
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 56460,
+      "byteOffset": 0,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 56460,
+      "byteOffset": 56460,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 37640,
+      "byteOffset": 112920,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 9534,
+      "byteOffset": 150560,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 18865,
+      "byteOffset": 160096
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5184,
+      "byteOffset": 178964,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5184,
+      "byteOffset": 184148,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3456,
+      "byteOffset": 189332,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1512,
+      "byteOffset": 192788,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5088,
+      "byteOffset": 194300,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5088,
+      "byteOffset": 199388,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3392,
+      "byteOffset": 204476,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1512,
+      "byteOffset": 207868,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5184,
+      "byteOffset": 209380,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5184,
+      "byteOffset": 214564,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3456,
+      "byteOffset": 219748,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1512,
+      "byteOffset": 223204,
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5184,
+      "byteOffset": 224716,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 5184,
+      "byteOffset": 229900,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 3456,
+      "byteOffset": 235084,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 1512,
+      "byteOffset": 238540,
+      "target": 34963
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9728,
+      "minFilter": 9984
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 240052
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_unlit"
+  ]
+}

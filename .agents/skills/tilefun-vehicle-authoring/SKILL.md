@@ -1,6 +1,6 @@
 ---
 name: tilefun-vehicle-authoring
-description: Reconstruct Tilefun vehicle sprites as editable Blender meshes with source-matched UV paint, native-pixel comparisons and independently rotating wheels. Use for another vehicle or a vehicle-family refinement; other asset classes need their own geometry templates.
+description: Author original Tilefun vehicles or reconstruct vehicle sprites as editable Blender meshes with palette-matched UV paint, native-pixel comparisons and independently rotating wheels. Use for vehicle authoring or family refinement; other asset classes need their own geometry templates.
 ---
 
 Work in the Tilefun repository root (contains `src/traffic/vehicles-v1.json` and
@@ -14,6 +14,19 @@ It owns the full queue and each model's status; update its row, next action,
 evidence and summary counts at every authoring/delivery/integration checkpoint.
 
 ## Choose the route from evidence
+
+For original vehicles beyond the sprite bank, first read
+`docs/topics/original-vehicles.md`, `docs/vehicle-status.md` and
+`docs/vehicle-authoring-pipeline.md`. The current red-coupe pilot owns the
+high-detail master → authored pixel target → low-poly UV transfer route. Check
+the owner's expansion gate before another family. Reuse its shared export,
+actual-GLB render and wheel-envelope checks; source component/UV ownership and
+geometry parameters remain family-specific. Never project a view's exterior
+silhouette ink into the atlas or use a final screen redraw to qualify mesh paint.
+Check upper tire coverage beneath real fenders independently of clearance. Inspect
+far-side crowns in elevated and game views; avoid exposed tires and isolated raised
+caps that spoil the body silhouette. The coupe coverage diagnostic is sampled
+geometry evidence and does not replace this visual check.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

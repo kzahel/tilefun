@@ -1,0 +1,123 @@
+{
+  "status": "passed",
+  "views": [
+    {
+      "view": 0,
+      "alphaComponents": [
+        2448
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 1,
+      "alphaComponents": [
+        2379
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 2,
+      "alphaComponents": [
+        2252
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 3,
+      "alphaComponents": [
+        2379
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 4,
+      "alphaComponents": [
+        2448
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 5,
+      "alphaComponents": [
+        2323
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 6,
+      "alphaComponents": [
+        2162
+      ],
+      "finishedPixelsOutsideGuide": 0
+    },
+    {
+      "view": 7,
+      "alphaComponents": [
+        2323
+      ],
+      "finishedPixelsOutsideGuide": 0
+    }
+  ],
+  "guideCoveragePixels": {
+    "body": 12760,
+    "glass": 3371,
+    "wheels": 1161,
+    "lamps": 232,
+    "intakes": 290,
+    "panels": 645
+  },
+  "gifFrames": 8,
+  "gifTotalMs": 1760,
+  "scene": {
+    "triangles": 71390,
+    "bounds": {
+      "min": [
+        -2.3618435859680176,
+        -1.0329999923706055,
+        2.9802322387695312e-08
+      ],
+      "max": [
+        2.3513123989105225,
+        1.0329999923706055,
+        1.0699999332427979
+      ],
+      "size": [
+        4.71315598487854,
+        2.065999984741211,
+        1.0699999034404755
+      ]
+    },
+    "wheelPivots": 4,
+    "tires": [
+      {
+        "object": "Rounded performance tire",
+        "parent": "Front_near_Roll_Y",
+        "minZ": 2.3611494981423675e-08
+      },
+      {
+        "object": "Rounded performance tire.001",
+        "parent": "Front_far_Roll_Y",
+        "minZ": 2.3611494981423675e-08
+      },
+      {
+        "object": "Rounded performance tire.002",
+        "parent": "Rear_near_Roll_Y",
+        "minZ": 2.3611494981423675e-08
+      },
+      {
+        "object": "Rounded performance tire.003",
+        "parent": "Rear_far_Roll_Y",
+        "minZ": 2.3611494981423675e-08
+      }
+    ],
+    "groundAnchor": [
+      64,
+      92
+    ],
+    "threads": 4,
+    "device": "CPU",
+    "beautyMaterialsRetained": true
+  },
+  "requiredFiles": 19,
+  "broadChecks": "Not run, per isolated experiment scope; coordinator owns shared validation."
+}

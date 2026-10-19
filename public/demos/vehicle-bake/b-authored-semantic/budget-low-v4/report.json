@@ -1,0 +1,395 @@
+{
+  "status": "complete",
+  "route": "b-authored-semantic",
+  "revision": "budget-low-v4",
+  "method": "Geometry-aware authored semantic UV paint. Source-mask histograms validate palette roles; no image projection or view-conditioned material.",
+  "triangles": 1324,
+  "exportedVertices": 1203,
+  "meshCount": 5,
+  "materialCount": 1,
+  "primitiveCount": 5,
+  "textureBytes": 4692,
+  "glbBytes": 55632,
+  "perMesh": [
+    {
+      "mesh": "Body_source_function_retopology",
+      "triangles": 860,
+      "vertices": 847
+    },
+    {
+      "mesh": "Wheel_FL_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    },
+    {
+      "mesh": "Wheel_FR_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    },
+    {
+      "mesh": "Wheel_RL_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    },
+    {
+      "mesh": "Wheel_RR_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    }
+  ],
+  "wheels": [
+    {
+      "wheel": "FL",
+      "centerGltfWorld": [
+        -24.34782728112259,
+        5.9130439459759145,
+        15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950926581629851,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    },
+    {
+      "wheel": "FR",
+      "centerGltfWorld": [
+        -24.34782728112259,
+        5.9130439459759145,
+        -15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950927730865056,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    },
+    {
+      "wheel": "RL",
+      "centerGltfWorld": [
+        24.34782728112259,
+        5.9130439459759145,
+        15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950927049938825,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    },
+    {
+      "wheel": "RR",
+      "centerGltfWorld": [
+        24.34782728112259,
+        5.9130439459759145,
+        -15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950930894331211,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    }
+  ],
+  "boundsGltf": {
+    "min": [
+      -41.07696206070432,
+      5.183012490306282e-07,
+      -17.79046854004173
+    ],
+    "max": [
+      40.902514299510585,
+      18.608694136246413,
+      17.79046854004173
+    ],
+    "size": [
+      81.9794763602149,
+      18.608693617945164,
+      35.58093708008346
+    ]
+  },
+  "unlit": true,
+  "embeddedAtlas": true,
+  "embeddedAtlasPixelHash": "22932d93018040596d39d1e6e2e81e47d02e812778d2da79312344b86cd855d4",
+  "wheelCylinderNegativeProbePassed": true,
+  "actualExportWheelClearancePassed": true,
+  "atlasSize": [
+    512,
+    512
+  ],
+  "exportWorldScale": 17.39130434782609,
+  "sourceDimensions": "4.6 body length; exact source width/deck/cabin landmarks, wheels/mirrors extend to approximately 2.066 width",
+  "sourceHashes": {
+    "scripts/vehicle-style-study/03-guide-pixel-finish/build.py": "d3146a09bd546e1d38b1e7a141fea658b6eae566617cf3b61f1a5f4973da4e73",
+    "scripts/vehicle-style-study/03-guide-pixel-finish/finish.py": "e9b4535e5cb03b67dca96d5343634a591bcc32860fb4318fa4f65490c91af93f",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/sports-coupe.blend": "b636af46a30799126151e7cf9f8bfd2db3b6e3490a69787a7a3e8dbcc56f0296",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/scene.json": "dbe876295bd61a031c3fb4c512356aaf2b93bb56ae04cb978b0afb89a6d9df44",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-0.png": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-1.png": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-2.png": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-3.png": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-4.png": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-5.png": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-6.png": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-7.png": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-0-128.png": "7d5da32063381fc7dec115d3bb3d31e4318bd25bc815adfa00602c9cec9344da",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-1-128.png": "20231f39546f0927b489aba86b785acecf185b87e5bb4dece3f436a01a9b58fa",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-2-128.png": "5b9ec26a8a326a9f043daca674240a0cf1f4f8c3f76a469b676ea9d9423619aa",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-3-128.png": "e9b9a146c94b3dec153dda9dd8237a0f3db00f5f96b9c017fc62bae7d44bb10d",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-4-128.png": "b8127cb8e669cf2554ff294209fbfa3b627af67bc53382f09fd4f31e1a2887e2",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-5-128.png": "cd9ece8776a96070e700bb862077e730608b0e30c0da5e3df26db0abb2655787",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-6-128.png": "e3b8d7d234bcdbbc7a7b3a14a6c3b99152d4b6d19d6cfc8cf992e39253246c05",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/body-7-128.png": "3ce5680d2f4d52bef3204c14cc3710d5b80745cd15828515a84d29f0a26b7715",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-0-128.png": "e17fb5c48cd41e20f3f15b547dd02f8e94f96d82a94864c55f9e6414bd024081",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-1-128.png": "eaf2d47bc0730ea6e6d2b2ac1a1702d1db9aba571e7c2fc6354e28e04a00b409",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-2-128.png": "de685cbe6c6ab4b6f8d7d5922c624605f8d7da8d31708f08e4ceb936c35eeace",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-3-128.png": "90fe955cc2e84c4e000828439631d61e2e267987a1f7d45b539d2768421ed301",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-4-128.png": "c3229ed104b67df5bf25885e5e8eddc14403abb93fd9fa25f4525a1cc33d4bd4",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-5-128.png": "d682f4684b422c69fb02c49123474679977695e920bc788996611e24d7b9943b",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-6-128.png": "1e045dd871cbebe8b0431f4efa3146405516ab101fd3c84ddd3877a7bcab22fa",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/glass-7-128.png": "33a2bf9397969db786a26c262a130b9e098c65e553350936dd062e3f372935ed",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-0-128.png": "efd644b8ba461a10d32d3ea737666f6ebcefb7283849a7609178f677fbf73d5d",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-1-128.png": "207ba65689ebefbcc036e17d115078860273ac4125bf05a7461b2893bbf41a7f",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-2-128.png": "8bdb1ee45d146eec8fed6af5f60de8a605550359bf46ba85c49ceafc5d212f2d",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-3-128.png": "75c05ba96cf4d5bc97400438df0b6a3e37a71b0c09076756696bc659be2cec0f",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-4-128.png": "396f340cb1966a9935cdd82befb98edfbdc19873e4546a93101ca6e803a916fb",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-5-128.png": "8b35dbc9718b4a158fcc9a65904c38c30f19f9fcc6354740ebf024ce7526dc22",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-6-128.png": "b900a376453558dfd8f0b976b3ec63fa1930e40538c5eb1df7cc4a2ffafb5af6",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/intakes-7-128.png": "a718d3375d48c48ca4843c62e87a37702eb175920ecff04abb4c3cf294ce18ff",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-0-128.png": "f7b3dc2c257c870706f39de524101519c05810db5a643981b4ea90c94cf37a2a",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-1-128.png": "4b0e77e5ea80ce97b1c1ce1efac6af76240f6c656884cd1ccf00c585963435de",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-2-128.png": "b41401e3a4020c10b52298c6002a6a608d5d3f20e4eb8845c3a6170c007ee548",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-3-128.png": "32a5cccd00cba7eb364dd55597bae289e5e27328e14fec2374b9a54873bfc564",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-4-128.png": "21e698ffbc679b99b079813ad97a847de7ee4f651821aec41fd68f3b503da72c",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-5-128.png": "4bea26fc69c0063b0dd2644924c96cbca02e8875d6b860cc4a9d95674a04846a",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-6-128.png": "f142a4304668b327875e00ea30f6d2befc1deaf19bef34b2a21456f3ab0b5666",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-7-128.png": "80a0abc879bac04cb386e3d60f253863e84e93ebb3d7f557d8f4a625fbe9e3be",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-0-128.png": "f7b3dc2c257c870706f39de524101519c05810db5a643981b4ea90c94cf37a2a",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-1-128.png": "73f5840476fc13307fda0b884586d67d994239f981744e240786f4025bd98872",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-2-128.png": "b41401e3a4020c10b52298c6002a6a608d5d3f20e4eb8845c3a6170c007ee548",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-3-128.png": "fc49e379344028dc98765003d4392d9dc6b7907646d858fb9c3f4355f54ca354",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-4-128.png": "21e698ffbc679b99b079813ad97a847de7ee4f651821aec41fd68f3b503da72c",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-5-128.png": "1d82c27167293d8ba92ddbf5388698b32b4fffaccf3eb8648af4ccb24fc1ad8c",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-6-128.png": "c62928a0f9e4be8cce2178f7510fe12a9c3ca70b005228d3bd5980eb2ae62d6a",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/lamps-combined-7-128.png": "aedb4c4b70cdcb7763faf310e72b28d72c4b71fc22970438227c4bb4550714b2",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-0-128.png": "21e690046d275556275369d440236b140de54b92399ebb51744c73e9dd76150c",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-1-128.png": "b06a1e61798afa95681008d2c93f2a2fdf8bc6dde09a662e7746b7acf26ad13b",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-2-128.png": "f42749593f006444e1ebc8558703ec1cc9980d5c1125c767231a7a0409e04d15",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-3-128.png": "f57efa901885184fa9ed88403f0a5997a45179de2c9ca67b32d95dafd4a14b8b",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-4-128.png": "1b2e79a4ff007ac24267287c188c7df25754b90b1bfdf644ad695001dfcb38c1",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-5-128.png": "7a5bc6d5d85a340d3b6609c1a5521f2b437dbee950921331e3f788d5c713f7a5",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-6-128.png": "2d86ef925b9eae55c1bbc8308bf883f2dd0ba9722baae1a44fd031110e66f9ef",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/panels-7-128.png": "aa267d242f396da6d6ffe6ed6cf407fb28e8162b043d066ff420b39d584604f3",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-0-128.png": "99ff0b3aac9b9f3f257ac04938f62d1817c6fdadd2c6a4040830dc3965598968",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-1-128.png": "700c3e317c9b6d0c5da33fe3e3df0c8aadf2e9a147ac48d409d190c6922c9592",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-2-128.png": "99ff0b3aac9b9f3f257ac04938f62d1817c6fdadd2c6a4040830dc3965598968",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-3-128.png": "d4a53af4ad3a86147a858a778f15054c0f619ab4046d690047148f0c3006a95f",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-4-128.png": "99ff0b3aac9b9f3f257ac04938f62d1817c6fdadd2c6a4040830dc3965598968",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-5-128.png": "7d393e47501e3ecba1b1158e8b17b0386a6b0a87cc2223c6f03cf1c007ced4a3",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-6-128.png": "f0f5e997c73d01917aba3e670fc219f0054d349f42ab1b63c2706c0912e09172",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rear_lamps-7-128.png": "e0bd332c9719689f16525a816685a76783e7406bd5d8f1b1b6092246dd86313b",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-0-128.png": "daaf13b45ab733c392cc5f7cda634be501fb9d570554343f9d063115c81dfcca",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-1-128.png": "90539ba042660e4e4f3652d6a5675df12b4b706799ebde393596b1735d785200",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-2-128.png": "a7b6735710410752774f677ec19800cdb1c3a4520db9448ebccee0cc0cee8d14",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-3-128.png": "298edda1c548880c49e5b9127e6ae1d6f129e07f9ef819662e48fce6f05ce6d6",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-4-128.png": "2e31a0022e86511d8befdf1165d0731a8eae92ddf6ace3f5ad817ee6913d378e",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-5-128.png": "fa246d1fbb21c0a4f83e3555007250975a713a7a4e6bffaecf81db7399938f54",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-6-128.png": "d70ab520dfbd99892283a63c4c3ffb744cca59396fa0902d3639dcd231254fd2",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/rim-7-128.png": "3fdc403e901c117d52f0d2ff8e6c7fc7efea4525930923263c08855e0647deff",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-0-128.png": "72c73e1596f3a6d209e2b491322c9310f23090625c07f3a7a909b05e737c81c9",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-1-128.png": "0e6377a931069d1795a34dbd57d7656a84d36d374fc68553c638cf7693729e63",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-2-128.png": "5c86c18a13ab5d6bd58efd9262fcadb7536ce4631b14ff99f1750fce324c6b16",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-3-128.png": "755c5bf6bd44554591c940af529825300eecb25942328e96d652ca10cb986d5a",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-4-128.png": "b513fead6ceaa3c11627ff70d6d847be07d4aa96a0859e1daa01745dc95cc4e4",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-5-128.png": "2c8842ecea18e4c86e4cf6815c984adfab776691ea8365f077b0c50dd2841ada",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-6-128.png": "b595bc955459d29d6681cc809bd6cf3cb0ce955d963de8abc1ec7258abf6ff28",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-7-128.png": "c59f4719722b5db291eb830a1d37cc4359a5b2dfb1fd7f0e7d0c4f0e82b2fc43",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-0-128.png": "4dee8e147ea86a2c43352c2a4bea9612cc047dae3c05a9436b7807fd81732202",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-1-128.png": "2b3468c6c92c09beb84a4d003390bac7ade54479d26b6de7430338b968e89a76",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-2-128.png": "3cd03792ff7af0fe67baa62f5e5db9a3a95d17aeeb793cbf055e7a0d4ac1fc46",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-3-128.png": "113844f1f38e05632867e80773681344501ba757a93ecb8eed743b5272990b1d",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-4-128.png": "7006a8f3bd3bf9add8f34a50408382547c1e4a4228f2ee7b9930884ce3ee4a7f",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-5-128.png": "7b4e47bf485e377ac6c744833b07f6da752d99f202e84826c4e1fb790206ce0c",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-6-128.png": "52f3638557dceef694be1c0bea601e69c81b5b3422f69de0b175313383e3e3e7",
+    "art-source/vehicle-style-study/03-guide-pixel-finish/evidence/guides/wheels-combined-7-128.png": "449b5f038e07279183a546443920ed353d020d7ec277f6bed09b38ee3a31fe77"
+  },
+  "ownSource": "art-source/vehicle-bake/b-authored-semantic/budget-low-v4",
+  "recipe": "art-source/vehicle-bake/b-authored-semantic/budget-low-v4/recipe.json",
+  "scriptHashes": {
+    "build.py": "a72405840ebef8970dfcc05ea38bc6829045b52ac31173ae84d5b1395161175e",
+    "finish.py": "d4ff0ab68265ad48fc4d3f05609b7c3f5eaeb5c1585ca6cb88fb85ca631e305c",
+    "paint.py": "21d41ad951006d76e8aa0a1c8301e406e76b2688d002d71949bf90e86510cb3d",
+    "seal.py": "a1ab54c8651b66a1feca116cb0566a076090577682592f0ce2978253ddeeb16e"
+  },
+  "silhouetteIoU": [
+    0.9506323949408405,
+    0.9520807061790668,
+    0.9569462938304483,
+    0.9508403361344537,
+    0.9550837076357697,
+    0.9565964761495488,
+    0.9560998151571165,
+    0.9557750107342207
+  ],
+  "paintOwnership": {
+    "coachwork": "source width/deck/superellipse functions; longitudinal seams and deck slats in object coordinates",
+    "glass": "separate retained-source apertures; border and band re-authored in their own UV rectangles",
+    "wheels": "independent cap/tread regions, five spoke cap painting",
+    "hidden": "underside and well interiors explicitly authored ink"
+  },
+  "uncertainty": {
+    "rawProjection": "not used by this route; rejected-projection.png is empty, not a coverage claim",
+    "authored-uncertainty.png": "64: analytically authored body ramp; 128: inferred hidden tread; 0: semantic design regions or unused",
+    "conflicts": "opposite-view illumination cannot coexist in one atlas; symmetric body ramp is an intentional compromise"
+  },
+  "actualValidation": [
+    "Parsed actual GLB indices/attributes, five draw primitives, one embedded opaque atlas material, KHR_materials_unlit.",
+    "Actual GLB independently reimported into Blender for all eight fixed headings, four intermediate headings, and four roll angles.",
+    "Each actual GLB wheel was rotated independently about declared glTF -Z; other wheel/body vertices unchanged; absolute reset checked.",
+    "Every actual body triangle clipped against each wheel axial slab; swept radius-.34 cylinder does not intersect body; negative triangle-insertion probe detects intrusion.",
+    "Only nearest reduction, fixed (0,+28) translation, alpha threshold and one-pixel inward alpha-boundary ink applied to final pixels."
+  ],
+  "visualInspection": {
+    "allEightViewsInspected": true,
+    "nativeAnd4x": true,
+    "intermediateAndRollInspected": true,
+    "inspector": "B authoring agent, visual inspection of actual GLB round-trip renders; this is not human approval",
+    "views": [
+      0,
+      45,
+      90,
+      135,
+      180,
+      225,
+      270,
+      315
+    ],
+    "evidence": [
+      "sheet-native.png",
+      "inspect-4x.png",
+      "comparison.png",
+      "contour-diff.png",
+      "novel-and-roll.png",
+      "wireframe.png"
+    ],
+    "findings": [
+      "Inspected all eight native and four-times-nearest views, plus 22.5/67.5/157.5/292.5 degree headings and four quarter-turn wheel poses.",
+      "The low budget uses exactly the high-budget atlas bytes and the same source shape functions, aperture landmarks, wheel centers and physical scale.",
+      "The red coupe, glass frames, reflection bands, hood seams and deck slats remain readable. Lower longitudinal/cabin sampling and twelve-sided wheels visibly simplify the profile.",
+      "No obvious broken UV ownership, glass leak, body/tire clipping or stray island colors were observed. Actual exported cylinder gaps are approximately 0.99509 world units.",
+      "Mean eight-view silhouette IoU is approximately 0.954. Body triangulation and angularity remain visible compared to the chosen approach-3 drawings."
+    ],
+    "remainingLimitations": [
+      "The low-budget hood seams bend and thicken more under coarse UV interpolation, especially in side and diagonal views; both candidates have heavier seams than the target.",
+      "The twelve-sided tires and reduced coachwork/cabin sampling are visibly more angular than the high budget and source-reduced route.",
+      "Narrow glass, mirror, fender and deck-slat features can merge or change pixel coverage at native scale; source direction-specific cluster fidelity is not claimed.",
+      "The optional wireframe sheet undersamples thin edges; exact exported topology statistics come from GLB indices and attributes."
+    ],
+    "coordinatorEvidence": {
+      "source": "Coordinator user message in this session",
+      "finalRevisionSharedComponentCapture": "passed budget-low-v4: 1324 triangles",
+      "finalRevisionCylinderProof": "passed all neutral roll angles and collision-negative control",
+      "scope": "Coordinator performed shared-engine validation; route agent independently checked actual GLB buffers, rigs and Blender round-trip renders. No separate final-capture filesystem path was supplied."
+    }
+  },
+  "sourceMeshStats": [
+    {
+      "name": "Body",
+      "vertices": 544,
+      "triangles": 860,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_FL_tire_hub",
+      "vertices": 60,
+      "triangles": 116,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_FR_tire_hub",
+      "vertices": 60,
+      "triangles": 116,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_RL_tire_hub",
+      "vertices": 60,
+      "triangles": 116,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_RR_tire_hub",
+      "vertices": 60,
+      "triangles": 116,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    }
+  ],
+  "sourceVertices": 784,
+  "vertexSplitOverhead": 419,
+  "packedSourceAtlas": true,
+  "transferLimitations": [
+    "Symmetric view-independent red ramp replaces direction-specific studio highlights in the eight target drawings.",
+    "Analytic semantic paint reauthors source feature ownership; not a raw projection of target drawings. No projected texels are claimed.",
+    "Tires are faceted at the budget; five-spoke paint replaces source high-detail forged geometry.",
+    "Continuous UV glass frames are surface-owned and cannot reproduce every direction-specific one-pixel cluster of 141.",
+    "Steering remains neutral; steering clearance and actual engine full-Chromium qualification belong to the coordinator.",
+    "UV discontinuities at Boolean pocket walls are explicit ink-owned cuts; unseen underside/tread paint is inferred.",
+    "The low-budget hood seams bend and thicken more under coarse UV interpolation, especially in side and diagonal views; both candidates have heavier seams than the target.",
+    "The twelve-sided tires and reduced coachwork/cabin sampling are visibly more angular than the high budget and source-reduced route.",
+    "Narrow glass, mirror, fender and deck-slat features can merge or change pixel coverage at native scale; source direction-specific cluster fidelity is not claimed.",
+    "The optional wireframe sheet undersamples thin edges; exact exported topology statistics come from GLB indices and attributes."
+  ],
+  "replayCommands": [
+    "python art-source/vehicle-bake/b-authored-semantic/budget-low-v4/scripts/paint.py --revision NEW",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/b-authored-semantic/budget-low-v4/scripts/build.py -- --revision NEW --budget low",
+    "python art-source/vehicle-bake/b-authored-semantic/budget-low-v4/scripts/finish.py --revision NEW"
+  ],
+  "humanApproval": false,
+  "coordinatorNext": "Register these exact final revisions and present the red coupe budget/style comparison for owner review. No family expansion yet.",
+  "scriptSnapshot": "art-source/vehicle-bake/b-authored-semantic/budget-low-v4/scripts",
+  "coordinatorEvidence": {
+    "source": "Coordinator user message in this session",
+    "finalRevisionSharedComponentCapture": "passed budget-low-v4: 1324 triangles",
+    "finalRevisionCylinderProof": "passed all neutral roll angles and collision-negative control",
+    "scope": "Coordinator performed shared-engine validation; route agent independently checked actual GLB buffers, rigs and Blender round-trip renders. No separate final-capture filesystem path was supplied."
+  },
+  "files": {
+    "atlas.png": "1251a5ca21368d4923c315720c49dd4cd52730a3b5e863838536ff7b3a810cf3",
+    "comparison.png": "778fc5f6b334a4440110c04382063e50b4719105e6970f8d848b6b2b7fb06c23",
+    "contour-diff.png": "8ba6d9e0a37136200fb7fd80e424d6c2704687d9fb90f90eb0d15fb0ceaa8726",
+    "inspect-4x.png": "af5e547d003ffb30a9db11c96bca23a87ffae5f38e5362a4359542188a96ff11",
+    "model.glb": "37ec4987929e3fdd4e082f6821318f03ca057e2427c62e6ea1b16ceedfebf718",
+    "novel-and-roll.png": "3a8b7ecc56ec01ca2b9d1fd76fba4beaf2457396da52d235e9ddbc1b0f45ed09",
+    "sheet-native.png": "6fd02fbcc8e6e120eca81e9bc6d41841b9a52905ecc9a10fb32138db27f61fe3",
+    "sheet.png": "5f27c658b0ec125c539b0dec0840b4257f206bd02f7ddfc2d761bf64afa21249",
+    "turntable.gif": "e170452d3cfe3713add4d5f1458efbb167940672a216970cc43f802caa4b84ba",
+    "view-0.png": "7d7a104c6f4129abf8ce87c9e372ca40ff4ab7705c9cfbb31f3538171a5fb375",
+    "view-1.png": "2fac6d2fe49b9cae9c1ee5dd504f68e2e07a0b715e4a4dea5a2ddd85aa7323ea",
+    "view-2.png": "9340d3309c40a6f5020e295a16ad91697213f553663c2226993dbd26fb5d0103",
+    "view-3.png": "60ee57ffa035a9512b0d02a7bc3f485552bdd0c3386b62afc3aa3d417c05a759",
+    "view-4.png": "df8bdc4e59322ed1cbb86a4848fad556abea20d70807007a1043b798e066cdb6",
+    "view-5.png": "beebbb9ef3cc0c806a5d051412615d2c49dbc8a4793d32de0523f30bfe90534e",
+    "view-6.png": "3dba2c99159047c60ada6b62dbf881365b2653b63606b0847ef7baef31549d95",
+    "view-7.png": "afb32ac78e39a8b9f6680a64e6317a3775509948b5ff67227bde1b9c0c7408bf",
+    "wireframe.png": "e3f5c8bc386e48020e5b3cf48e1006b6c78ce33c49f8af62a1ae2c9bee01598a"
+  }
+}

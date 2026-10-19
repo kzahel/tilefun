@@ -12,6 +12,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [142 Red car low-poly pipeline](142-red-car-low-poly-pipeline.md) | In progress: YA texture/geometry experiments, actual-GLB review and reusable original-vehicle queue; other cars await owner agreement |
+| [141 Sports-car style experiments](141-sports-car-style-experiments.md) | Delivered for inspection: four YA Codex routes, retained scenes/sprites, native comparison and standalone interactive viewer |
 | [140 Shared input UX and reverse](140-shared-input-ux-and-reverse.md) | Shared cursor/tool selection, native map gestures, named action paddles and reverse driving |
 | [139 Steam Deck package and controller menus](139-steam-deck-package-and-controller-menus.md) | Delivered: Linux game package, shared submenus, controller UI and P2P host/join |
 | [140 Autonomous wildlife completion](140-autonomous-wildlife-completion.md) | Owner-authorized full-roster completion, eight-hour window; tracked batches and incremental commits |

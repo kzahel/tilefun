@@ -1,0 +1,460 @@
+{
+  "status": "complete",
+  "route": "c-surface-bake",
+  "revision": "v3",
+  "method": "Owner-restricted bidirectional normal raycast from low UV texel to retained high triangle; barycentric high semantic surface color; exact palette cleanup and padding.",
+  "exportWorldScale": 17.39130434782609,
+  "triangles": 2597,
+  "meshCount": 5,
+  "materialCount": 1,
+  "primitiveCount": 5,
+  "vertexCount": 6425,
+  "nodeCount": 14,
+  "glbBytes": 246904,
+  "atlasSize": [
+    512,
+    512
+  ],
+  "atlasBytes": 18865,
+  "unlit": true,
+  "embeddedImages": true,
+  "imageCount": 1,
+  "wheels": [
+    {
+      "id": "FL",
+      "center": [
+        -24.34782728112259,
+        5.9130439459759145,
+        15.130435613549253
+      ],
+      "radius": 5.913043478260871,
+      "parenting": true,
+      "independentQuarterTurn": true
+    },
+    {
+      "id": "FR",
+      "center": [
+        -24.34782728112259,
+        5.9130439459759145,
+        -15.130435613549253
+      ],
+      "radius": 5.913043478260871,
+      "parenting": true,
+      "independentQuarterTurn": true
+    },
+    {
+      "id": "RL",
+      "center": [
+        24.34782728112259,
+        5.9130439459759145,
+        15.130435613549253
+      ],
+      "radius": 5.913043478260871,
+      "parenting": true,
+      "independentQuarterTurn": true
+    },
+    {
+      "id": "RR",
+      "center": [
+        24.34782728112259,
+        5.9130439459759145,
+        -15.130435613549253
+      ],
+      "radius": 5.913043478260871,
+      "parenting": true,
+      "independentQuarterTurn": true
+    }
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-style-study/03-guide-pixel-finish/sports-coupe.blend": "b636af46a30799126151e7cf9f8bfd2db3b6e3490a69787a7a3e8dbcc56f0296",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-0.png": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-1.png": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-2.png": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-3.png": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-4.png": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-5.png": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-6.png": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453",
+    "public/demos/vehicle-style-study/03-guide-pixel-finish/view-7.png": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+  },
+  "recipePath": "art-source/vehicle-bake/c-surface-bake/v3/recipe.json",
+  "blendPath": "art-source/vehicle-bake/c-surface-bake/v3/car.blend",
+  "transfer": {
+    "algorithm": "source-corner barycentric color -> nearest exact source palette; missing paint ink; four atlas-space padding rounds",
+    "palette": {
+      "ink": [
+        58,
+        58,
+        80
+      ],
+      "warm_ink": [
+        74,
+        42,
+        61
+      ],
+      "red_deep": [
+        127,
+        33,
+        76
+      ],
+      "red_shadow": [
+        161,
+        18,
+        80
+      ],
+      "red_mid": [
+        197,
+        52,
+        88
+      ],
+      "red": [
+        211,
+        68,
+        92
+      ],
+      "red_light": [
+        227,
+        90,
+        90
+      ],
+      "red_glint": [
+        225,
+        132,
+        132
+      ],
+      "glass_dark": [
+        86,
+        89,
+        114
+      ],
+      "glass": [
+        115,
+        140,
+        168
+      ],
+      "glass_light": [
+        164,
+        187,
+        213
+      ],
+      "glass_glint": [
+        186,
+        210,
+        224
+      ],
+      "rim": [
+        131,
+        136,
+        151
+      ],
+      "silver": [
+        212,
+        212,
+        230
+      ],
+      "white": [
+        248,
+        248,
+        248
+      ],
+      "tire_light": [
+        70,
+        70,
+        94
+      ],
+      "ruby": [
+        186,
+        39,
+        88
+      ]
+    },
+    "coveredTexels": 148860,
+    "normalRayHitTexels": 148711,
+    "nearestFallbackTexels": 149,
+    "ambiguousTexels": 14344,
+    "unknownTexels": 0,
+    "coveredFraction": 0.5678558349609375,
+    "rayDistancePercentiles": [
+      0.00019494650041451678,
+      0.004726432543247941,
+      0.021499991416931152,
+      0.1243000254034996
+    ],
+    "quantizationChangedTexels": 22100,
+    "paddingRounds": 4,
+    "screenInteriorPatches": 0
+  },
+  "validation": {
+    "actualGlbChromium": {
+      "backend": "WebKit WebGL",
+      "meshCount": 5,
+      "materialCount": 1,
+      "materials": [
+        {
+          "type": "MeshBasicMaterial",
+          "unlit": true,
+          "map": true,
+          "nearest": true
+        }
+      ],
+      "rigs": [
+        {
+          "id": "FL",
+          "center": [
+            -24.34782728112259,
+            5.9130439459759145,
+            15.130435613549253
+          ],
+          "radius": 5.913043478260871,
+          "parenting": true,
+          "independentQuarterTurn": true
+        },
+        {
+          "id": "FR",
+          "center": [
+            -24.34782728112259,
+            5.9130439459759145,
+            -15.130435613549253
+          ],
+          "radius": 5.913043478260871,
+          "parenting": true,
+          "independentQuarterTurn": true
+        },
+        {
+          "id": "RL",
+          "center": [
+            24.34782728112259,
+            5.9130439459759145,
+            15.130435613549253
+          ],
+          "radius": 5.913043478260871,
+          "parenting": true,
+          "independentQuarterTurn": true
+        },
+        {
+          "id": "RR",
+          "center": [
+            24.34782728112259,
+            5.9130439459759145,
+            -15.130435613549253
+          ],
+          "radius": 5.913043478260871,
+          "parenting": true,
+          "independentQuarterTurn": true
+        }
+      ],
+      "neutralBounds": {
+        "min": [
+          -40.946822836687716,
+          5.183012490306282e-07,
+          -17.99847941691769
+        ],
+        "max": [
+          40.45277808611172,
+          18.625101480585727,
+          17.982779035482054
+        ]
+      },
+      "triangles": 2597
+    },
+    "allEightViewsRendered": true,
+    "nativeViews": true,
+    "intermediateHeadings": [
+      22.5,
+      67.5,
+      112.5,
+      157.5
+    ],
+    "rollDegrees": [
+      0,
+      90,
+      180,
+      270
+    ],
+    "canvasInteriorPatches": 0,
+    "sharedCylinderClearance": {
+      "status": "passed",
+      "id": "c-surface-bake--v3",
+      "glbSha256": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+      "triangles": 2597,
+      "clearance": [
+        {
+          "wheel": "Wheel_FL_Roll",
+          "radius": 5.913044751662273,
+          "minimumGap": 1.08395054726949,
+          "nearestBody": "Body"
+        },
+        {
+          "wheel": "Wheel_FR_Roll",
+          "radius": 5.913044751662273,
+          "minimumGap": 1.0946611056926114,
+          "nearestBody": "Body"
+        },
+        {
+          "wheel": "Wheel_RL_Roll",
+          "radius": 5.913044963984565,
+          "minimumGap": 0.6522590070081193,
+          "nearestBody": "Body"
+        },
+        {
+          "wheel": "Wheel_RR_Roll",
+          "radius": 5.913044963984565,
+          "minimumGap": 0.6394311334272658,
+          "nearestBody": "Body"
+        }
+      ],
+      "allNeutralRollAngles": true,
+      "collidingBodyRejected": true,
+      "baselineRestored": true,
+      "steering": "unqualified"
+    },
+    "replay": {
+      "retainedGlbHash": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+      "replayGlbHash": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+      "retainedAtlasHash": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b",
+      "replayAtlasHash": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b",
+      "byteIdentical": true,
+      "command": "blender --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/c-surface-bake/v3/recipe-scripts/build.py -- --revision replay-v3",
+      "input": "Only retained 141 source blend and this route recipe; no ignored data read",
+      "sourceHighTrianglesAfterSimpleSubdivision": 356414,
+      "lowMeshTriangles": 2597
+    },
+    "opaqueAtlasExactPalette": true,
+    "coordinatorIndependentEvidence": "Coordinator reports 16 authoring + 16 game-heading actual GLB captures and independent unchanged cylinder proof with collision rejection. This agent additionally rendered and inspected own 8 fixed headings, 4 intermediate headings and 4 wheel-roll states."
+  },
+  "limitations": [
+    "The chosen target has view-relative glass strips and richer red clusters. Source-owned fixed paint approximates those decisions; this C route is less close to the target than coordinator comparison route A.",
+    "Thin slats and hood lines still show native raster aliasing at intermediate headings. The high source has three continuous slats; some low pixels merge or alternate.",
+    "149 nearest-surface fallback texels and 14344 opposing-surface ambiguity flags remain explicitly recorded. Zero unknowns means every low texel found authored source paint, not that hidden paint was observed in target drawings.",
+    "6425 exported vertices for 2597 triangles reflect UV and flat-normal splits; this is a triangle-budget prototype, not optimized vertex bandwidth.",
+    "Two low rear buttress ends were raised by at most approximately 0.083 source units for conservative cylinder clearance, while immutable high geometry remains unchanged.",
+    "Neutral wheel roll is proven; steering remains neutral and unqualified.",
+    "No production art approval, registration, runtime activation or other vehicles."
+  ],
+  "replayCommands": [
+    "blender --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/c-surface-bake/build.py -- --revision NEW_REV",
+    "node scripts/vehicle-bake/c-surface-bake/capture.mjs NEW_REV",
+    "python scripts/vehicle-bake/c-surface-bake/finish.py NEW_REV",
+    "blender --background --factory-startup --threads 4 --python scripts/vehicle-bake/c-surface-bake/inspect_source.py -- NEW_REV",
+    "blender --background --factory-startup --threads 4 --python scripts/vehicle-bake/clearance.py -- OWN_MANIFEST OWN_RESULT"
+  ],
+  "visualInspection": [
+    {
+      "view": 0,
+      "yaw": 0,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 1,
+      "yaw": 45,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 2,
+      "yaw": 90,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 3,
+      "yaw": 135,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 4,
+      "yaw": 180,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 5,
+      "yaw": 225,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 6,
+      "yaw": 270,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "view": 7,
+      "yaw": 315,
+      "checked": "Actual exported GLB and own Blender low render compared with target at native and 4x; silhouette, dark window boundaries, body seams, lamps, three slats, wheel centers and obvious UV artifacts inspected."
+    },
+    {
+      "intermediateYaw": [
+        22.5,
+        67.5,
+        112.5,
+        157.5
+      ],
+      "wheelRoll": [
+        0,
+        90,
+        180,
+        270
+      ],
+      "checked": "Actual GLB intermediate/roll sheet inspected. Paint remains mesh-owned; slat/edge aliasing changes with sampling but no view switch or displaced texture."
+    }
+  ],
+  "approvalStatus": "unreviewed",
+  "frozen": true,
+  "glbSha256": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+  "atlasSha256": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b",
+  "genuineSurfaceBake": {
+    "rasterization": "Every covered low-UV texel interpolates actual low position/triangle normal.",
+    "transfer": "Two owner-restricted normal rays (+/-0.13 source units); closest actual high triangle hit wins; 0.20-unit nearest fallback only on ray miss.",
+    "sampling": "Barycentric linear color of retained high SourceSemanticPaint point attribute, then sRGB encoding.",
+    "authoredHighPaint": "Original semantic roles, source-space red ramps, glass aperture borders/bands, source curve anchored hood/door ink, three louver anchors. Dense simple subdivision of source shell improves paint sampling without smoothing shape.",
+    "authoredLowCleanup": "Nearest exact 17-color palette; no dither; four atlas-space padding rounds; trailing rear-buttress low vertices below z=0.71 raised for shared wheel-cylinder clearance.",
+    "screenOperations": "Nearest 512->128; constant (0,+28); binary alpha and alpha-only 1px inward exterior outline. Zero interior drawing patches.",
+    "sourcePaintIsTargetProjection": false,
+    "sourcePbrShadingBaked": false
+  },
+  "coverageInterpretation": {
+    "coveredTexels": 148860,
+    "normalRayHitTexels": 148711,
+    "nearestFallbackTexels": 149,
+    "opposingSurfaceAmbiguityTexels": 14344,
+    "unknownTexels": 0,
+    "quantizationChangedTexels": 22100,
+    "occupiedAtlasFraction": 0.5678558349609375,
+    "ambiguityDefinition": "Opposing rays hit distinct high triangle indices with distance difference >0.025 source units; conservative geometric flag, not measured disagreement between target drawings. Closest hit remains selected.",
+    "notObservedTargetCoverage": "High semantic paint is authored, including hidden/underside surfaces. Ray hit rate proves high-to-low geometric coverage, not automatic recovery or approval of target sprite pixels.",
+    "conflicts": "No target-view projection fusion is attempted. No target-view color conflicts are hidden or claimed resolved. Opposing geometric choices remain explicit in uncertainty.png.",
+    "rejectedSourceOwners": "Each low part admits only its retained high semantic owner(s); unrelated source geometry is excluded before BVH intersection.",
+    "unusedTexels": "113284 atlas texels are outside rasterized low surfaces; final opaque atlas fills them with ink and UV padding."
+  },
+  "files": {
+    "atlas.png": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b",
+    "comparison.png": "fe3a3711c60e058982564a5f5d1da3a3d3f44ab2a303bb31d36500b9c7356eb7",
+    "gltf-eight-views-4x.png": "aa0d4c000c13777f4f43bb50a034be29fa439683058a6406094f39796c7269b8",
+    "gltf-view-0.png": "5f67ebe3687bd7c36210b98b45cc2a7f714f9585775c5f09ac3407db1ebbfc27",
+    "gltf-view-1.png": "3bdb13a889c4ac20039648d783306e763a173cb1cf5235f0622a0695a91c1cba",
+    "gltf-view-2.png": "69b6a63b901bc3bd842fd351dc648e4d0022caa7adda5876cb2b92736a50878f",
+    "gltf-view-3.png": "0853fc38f0ba6defbfd8f139dd856aec689aa2a9bd3f4ccef8bfc895e793403a",
+    "gltf-view-4.png": "c6d74e849f01f13979c1df1496970bbeee23d0f1b754c9bb92d10380ecc4647b",
+    "gltf-view-5.png": "efcff0e59766385d26a01d30936a0442db49136e1eaa821788a16a6e86a31766",
+    "gltf-view-6.png": "fda1a66218b4526b8668aad52715555b2c4e25393c5aa23c351459a6c6a2f383",
+    "gltf-view-7.png": "6db8beef1d505459c5fe31d310d445dd39f8673ecd7e8124fc3154b778d55f31",
+    "high-to-low.png": "fafae07a5c53a2d236757b2a348752071d497d8e7b49e33cdaa0093b4910c29c",
+    "intermediate-0.png": "88a668bcaa9e4ac590381d60992b6d9360c8c385dcde78dc8e84e7c7ac4b6fcb",
+    "intermediate-1.png": "4f754a3037723731ae225f0ea7ac73abb3b9e6f01fef26e1c5c948e9982d038e",
+    "intermediate-2.png": "179af05da4080e5e6c58df82895e1e9efcf95a6402f62c9a69a2975ab9873ae8",
+    "intermediate-3.png": "9011a848578270e56f8a6b6874ba7cc920841d55c7f6603f5b3dcfb8775aef48",
+    "intermediate-and-roll.png": "fdf27b8e17132c5ca04998b98cde813e574cd022d8a6e3751c07dabe294d3827",
+    "model.glb": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+    "native-eight-views.png": "9e405201f64fee5b59eedc478645e8c2e5c277e277df527ab37b0dbae88d8ba4",
+    "roll-0.png": "5f67ebe3687bd7c36210b98b45cc2a7f714f9585775c5f09ac3407db1ebbfc27",
+    "roll-1.png": "a7535cb392bbdb3989cd3cf0df45ccb2067032c0529bbe1ff01ebcd0944affb2",
+    "roll-2.png": "efa66cc74402f6831ea10763b67b87af6261d624ca0aa063549845055f8438c3",
+    "roll-3.png": "ef6514b855105e7d26e5dc44bd81e3f47cb8ba189240b33399a3df13bb9689e0",
+    "transfer-evidence.png": "b2d501035945005f50f1ccb8bf363184f4c561b486f1268b50a55e8a4f974744",
+    "turntable.gif": "41561c49ce4a4e1e47200cbe744621eb5f45e4b65f165263233f8873138a3894",
+    "view-0.png": "56f0a877ae0a7f1c0880e42d634ba7d6ad72c7ea527c059ed74fbac9a04c7ebd",
+    "view-1.png": "e294c80d78561c71a0f8158530976969878525842bcd421a15c20104c3280647",
+    "view-2.png": "789aa091639fdb20fe6da259b9a43a2f6ca734ea925064202f7e90cb6b3a5107",
+    "view-3.png": "d7428a82b7c266c0cc29d8232b917c6269248cc32529c8bb392713231323bae3",
+    "view-4.png": "149d297a2e95c0450b24a23bcbf27cc5a6bbd29ebf1207e53b22b303d300de7d",
+    "view-5.png": "fd987b4a7643410d9addfc1611f807776bd11ff371b4bc55d334fb3de83f0851",
+    "view-6.png": "0a1a11502eac6ae22d9d03eb056ca57fe89167f856716fec38736283aac9bd14",
+    "view-7.png": "66bb35d06e7896f8746fe4723d52415701e37204c6d65ab1caadbbbfaeb8ef8d"
+  }
+}

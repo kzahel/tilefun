@@ -11,6 +11,17 @@ docs/tactical/072-conditioning-fidelity/**/*.json -text
 # Retained vehicle scenes, exports, textures and receipts are byte-exact captures.
 art-source/vehicle-models/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 public/assets/models/vehicles/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Original vehicle studies and final bake bundles pin exact bytes, including
+# source snapshots, guide inputs and review receipts, across platform checkouts.
+art-source/vehicle-style-study/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+public/demos/vehicle-style-study/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+art-source/vehicle-bake/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+public/demos/vehicle-bake/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/vehicle-style-study/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/vehicle-bake/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# The retained viewer bundle contains upstream Three.js GLSL string whitespace.
+public/demos/vehicle-bake/viewer.js -text -whitespace
 # These replay inputs are pinned by the retained bundle catalog.
 scripts/authored-assets/compact-final-setup.json -text
 scripts/authored-assets/compact-variant-template.json -text

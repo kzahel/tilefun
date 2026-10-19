@@ -1,0 +1,8 @@
+{
+  "source": "art-source\\vehicle-style-study\\03-guide-pixel-finish\\sports-coupe.blend",
+  "sha256Before": "b636af46a30799126151e7cf9f8bfd2db3b6e3490a69787a7a3e8dbcc56f0296",
+  "sha256After": "b636af46a30799126151e7cf9f8bfd2db3b6e3490a69787a7a3e8dbcc56f0296",
+  "unchanged": true,
+  "sourceInspectionReport": "data/vehicle-bake/coverage-independent-source.json",
+  "finalCorrectionReport": "data/vehicle-bake/coverage-independent-mid-fenders-v3.json"
+}

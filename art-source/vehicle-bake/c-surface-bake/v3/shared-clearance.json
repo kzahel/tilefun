@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "c-surface-bake--v3",
+    "glbSha256": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+    "triangles": 2597,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.913044751662273,
+        "minimumGap": 1.08395054726949,
+        "nearestBody": "Body"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913044751662273,
+        "minimumGap": 1.0946611056926114,
+        "nearestBody": "Body"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913044963984565,
+        "minimumGap": 0.6522590070081193,
+        "nearestBody": "Body"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044963984565,
+        "minimumGap": 0.6394311334272658,
+        "nearestBody": "Body"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

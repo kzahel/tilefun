@@ -1,0 +1,138 @@
+[
+  {
+    "yaw": 0,
+    "sourceLowIoU": 0.9666802112962211,
+    "sourceEngineIoU": 0.9625101874490628,
+    "blenderAlphaBounds": [
+      22,
+      69,
+      106,
+      104
+    ],
+    "engineAlphaBounds": [
+      22,
+      69,
+      106,
+      105
+    ]
+  },
+  {
+    "yaw": 45,
+    "sourceLowIoU": 0.9715837860426243,
+    "sourceEngineIoU": 0.975251677852349,
+    "blenderAlphaBounds": [
+      26,
+      56,
+      102,
+      119
+    ],
+    "engineAlphaBounds": [
+      26,
+      56,
+      102,
+      119
+    ]
+  },
+  {
+    "yaw": 90,
+    "sourceLowIoU": 0.9756421612046059,
+    "sourceEngineIoU": 0.9804878048780488,
+    "blenderAlphaBounds": [
+      46,
+      54,
+      82,
+      122
+    ],
+    "engineAlphaBounds": [
+      46,
+      54,
+      82,
+      122
+    ]
+  },
+  {
+    "yaw": 135,
+    "sourceLowIoU": 0.9728260869565217,
+    "sourceEngineIoU": 0.9744127516778524,
+    "blenderAlphaBounds": [
+      25,
+      55,
+      102,
+      119
+    ],
+    "engineAlphaBounds": [
+      26,
+      56,
+      102,
+      119
+    ]
+  },
+  {
+    "yaw": 180,
+    "sourceLowIoU": 0.9679122664500406,
+    "sourceEngineIoU": 0.9625254582484725,
+    "blenderAlphaBounds": [
+      22,
+      69,
+      106,
+      105
+    ],
+    "engineAlphaBounds": [
+      22,
+      69,
+      106,
+      105
+    ]
+  },
+  {
+    "yaw": 225,
+    "sourceLowIoU": 0.9760376551133932,
+    "sourceEngineIoU": 0.9858308286818377,
+    "blenderAlphaBounds": [
+      25,
+      59,
+      102,
+      118
+    ],
+    "engineAlphaBounds": [
+      26,
+      59,
+      102,
+      118
+    ]
+  },
+  {
+    "yaw": 270,
+    "sourceLowIoU": 0.9833718244803695,
+    "sourceEngineIoU": 0.9893617021276596,
+    "blenderAlphaBounds": [
+      46,
+      56,
+      82,
+      121
+    ],
+    "engineAlphaBounds": [
+      46,
+      56,
+      82,
+      121
+    ]
+  },
+  {
+    "yaw": 315,
+    "sourceLowIoU": 0.9807445442875481,
+    "sourceEngineIoU": 0.9836769759450171,
+    "blenderAlphaBounds": [
+      26,
+      59,
+      102,
+      118
+    ],
+    "engineAlphaBounds": [
+      26,
+      59,
+      102,
+      118
+    ]
+  }
+]

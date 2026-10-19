@@ -3,6 +3,21 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "vehicle-bake",
+    name: "Red coupe low-poly review",
+    description:
+      "Compare the preferred pixel art with textured low-poly models, budgets and rolling wheels.",
+    url: "demos/vehicle-bake/index.html",
+    mode: "link",
+  },
+  {
+    id: "vehicle-style-study",
+    name: "Sports car style study",
+    description: "Compare detailed renders, toon shading, guided pixel finishing and simple paint.",
+    url: "demos/vehicle-style-study/index.html",
+    mode: "link",
+  },
+  {
     id: "parking-lab",
     name: "Parking lot lab",
     description:
@@ -229,6 +244,20 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "vehicle-bake",
+    name: "Red coupe low-poly review",
+    description:
+      "Actual low-poly GLB style and budget experiments; other vehicle families await owner agreement.",
+    toolId: "vehicle-bake",
+  },
+  {
+    id: "vehicle-style-study",
+    name: "Sports car style study",
+    description:
+      "Four original sports-car authoring experiments; offline inspection without promotion.",
+    toolId: "vehicle-style-study",
+  },
   {
     id: "authored-trains",
     name: "Authored train models",

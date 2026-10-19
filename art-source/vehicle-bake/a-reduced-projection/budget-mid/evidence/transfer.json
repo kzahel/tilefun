@@ -1,0 +1,17 @@
+{
+  "retainedTexels": 93010,
+  "observedTexels": 43489,
+  "unknownTexels": 49521,
+  "conflictingTexels": 26870,
+  "rejectedSamples": {
+    "exteriorBoundary": 54142,
+    "semanticMismatch": 208837,
+    "visibilityOrOwnerMismatch": 207610
+  },
+  "cleanup": [
+    "Source-parametric continuous dark glass frame and broad reflection bands",
+    "Solid intakes/panels and wheel rubber; source palette lamp/rim roles",
+    "Three world-space source-anchored deck slats; no exterior ink projected",
+    "Explicit source-role fallback for unseen texels; three-texel island dilation"
+  ]
+}

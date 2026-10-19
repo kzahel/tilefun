@@ -1,0 +1,127 @@
+{
+  "budget": "high",
+  "wheelRecords": [
+    {
+      "name": "FL",
+      "center": [
+        -1.4,
+        -0.87,
+        0.34
+      ],
+      "radius": 0.34,
+      "exportedRadius": 5.913043478260871
+    },
+    {
+      "name": "FR",
+      "center": [
+        -1.4,
+        0.87,
+        0.34
+      ],
+      "radius": 0.34,
+      "exportedRadius": 5.913043478260871
+    },
+    {
+      "name": "RL",
+      "center": [
+        1.4,
+        -0.87,
+        0.34
+      ],
+      "radius": 0.34,
+      "exportedRadius": 5.913043478260871
+    },
+    {
+      "name": "RR",
+      "center": [
+        1.4,
+        0.87,
+        0.34
+      ],
+      "radius": 0.34,
+      "exportedRadius": 5.913043478260871
+    }
+  ],
+  "sourceStations": [
+    -2.3,
+    -2.13,
+    -2.05,
+    -1.98,
+    -1.88,
+    -1.805,
+    -1.65,
+    -1.4,
+    -1.2,
+    -1.08,
+    -0.995,
+    -0.82,
+    -0.6,
+    -0.45,
+    -0.3,
+    0.3,
+    0.5,
+    0.75,
+    0.9,
+    0.995,
+    1.2,
+    1.4,
+    1.65,
+    1.805,
+    1.88,
+    1.98,
+    2.08,
+    2.2,
+    2.3
+  ],
+  "radialSegments": 18,
+  "cameraScale": 17.39130434782609,
+  "renderedFrom": "reimported public model.glb",
+  "sourceMeshStats": [
+    {
+      "name": "Body",
+      "vertices": 1023,
+      "triangles": 1754,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_FL_tire_hub",
+      "vertices": 80,
+      "triangles": 156,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_FR_tire_hub",
+      "vertices": 80,
+      "triangles": 156,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_RL_tire_hub",
+      "vertices": 80,
+      "triangles": 156,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    },
+    {
+      "name": "Wheel_RR_tire_hub",
+      "vertices": 80,
+      "triangles": 156,
+      "modifiers": 0,
+      "uvLayers": [
+        "SemanticUV"
+      ]
+    }
+  ],
+  "packedAtlas": true
+}

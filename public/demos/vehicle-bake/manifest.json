@@ -1,0 +1,3149 @@
+{
+  "version": 1,
+  "status": "awaiting-owner-review",
+  "recommended": "a-reduced-projection--mid-fenders-v3",
+  "candidates": [
+    {
+      "id": "a-reduced-projection--budget-low-v4",
+      "route": "a-reduced-projection",
+      "revision": "budget-low-v4",
+      "title": "Projected paint \u00b7 1,376 triangles",
+      "method": "Per-component QEM on retained approach-3 source; exact owner and visibility-tested eight-view projection; source-owned atlas cleanup; five consolidated meshes.",
+      "glb": "a-reduced-projection/budget-low-v4/model.glb",
+      "atlas": "a-reduced-projection/budget-low-v4/atlas.png",
+      "report": "a-reduced-projection/budget-low-v4/report.json",
+      "audit": {
+        "triangles": 1376,
+        "vertices": 2265,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 120904,
+        "sha256": "ccce8117bde3e42eb76b7af58aa55abac1b46c8411897a98474b0634e1409710",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/atlas.png",
+          "sha256": "40332f093cf9347f8dd547b9fabd5a9474292b090d4583f92b384ff327137416"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/comparison.png",
+          "sha256": "38dad8400eccbf32b0cafe67eb990fc63af2c8ef0c8a3a82762af0bf51c04aa2"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/inspection-engine.png",
+          "sha256": "a8b5927d582e9a67a671ced11810cd106e8653c12c8486f4becafafe97ad0686"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/inspection-mesh.png",
+          "sha256": "434b11aaf038bb3c6443dc968de408a83a6482890bc2cef5303474e197923abd"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/inspection-roll.png",
+          "sha256": "38231925ff6b5927e7e3916791ad97b70b605dcc0b32ce142d34d54482ff12c5"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/inspection-study.png",
+          "sha256": "000470c3d397f606326213420bd21500bb374233c6a94a647be88c80ea919f85"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/model.glb",
+          "sha256": "ccce8117bde3e42eb76b7af58aa55abac1b46c8411897a98474b0634e1409710"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-0.png",
+          "sha256": "67687168dfa97e6de5502acac73bb6c50f33e8ac956f535cb966633161ab0c77"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-1.png",
+          "sha256": "85f1ebb78153a2dff67a08149e5547f85a523449d9c97151f31210e549c34adc"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-2.png",
+          "sha256": "ebbb960ae0134fc53cc0d0e4982931282faa2e56382daa9b75e27f5dbddf8480"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-3.png",
+          "sha256": "38c71fb265c232865829584eac8efff913395d19ea6aa4f70030fc4b8d222806"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-4.png",
+          "sha256": "4bdf03f76eb2a200708880cec582d00357ed94406dae6b7a1f3cf383dd955053"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-5.png",
+          "sha256": "030d3a5966e87e9d2215c65980e2cd3106541abb68cfc80d839700a4aa5aec9c"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-6.png",
+          "sha256": "847c218dc5105f53e10e57a539535ca7528163dab5ea88ae85c3c8b7a64a3f3d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/raw-7.png",
+          "sha256": "3e4a5c628a2b5b4d0812bdf9670422852dd1f71f3401e84969b78dcd63221308"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/recipe.json",
+          "sha256": "9462d1a7fad3ce913e49fd34d57806de24bb4f5043fde44152c110db3a4824b8"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/report.json",
+          "sha256": "e9c5ad7e0f9ddf8bce3a9713342a73053c7feaf03fc91e92e80f865d49f8ca79"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/sheet.png",
+          "sha256": "0c98d3f8ce39f43109f6a66265f49ddb95b6c0ad4129b1852ea3cbfe53d483b1"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/turntable.gif",
+          "sha256": "589bee463159138fb6b562dd78a04d2b7c41a5f914169840cd6e490aa802934a"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-0.png",
+          "sha256": "983358eb8dd5942b1899587d97f76394c3edb24372a6c36035f70115d4a020d9"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-1.png",
+          "sha256": "83fb8741b65907f782d053d2d9298c100d5c660770403ede4b967722a415eed3"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-2.png",
+          "sha256": "97c986ed808245d5d90d71caecc9c69448cf2cc09c5ae669f60bbee8ff32bc0d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-3.png",
+          "sha256": "69c4abd295b55e257a232bf3c21074c06f10b0f733f0377523d4ee72618e4d07"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-4.png",
+          "sha256": "b549b24c66c047c5df9a8eb374cfe9143f31863dacf2ee5493df48e4cca95b96"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-5.png",
+          "sha256": "4bbc639b6fa3c58142abb837535f1471d279eb20998a45b9895eb36b0f6f5476"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-6.png",
+          "sha256": "1b0059c46c10030ccb6ae37002da972a095c4c585f7d0ac0407d90f529b93bea"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-low-v4/view-7.png",
+          "sha256": "b88fb390a813221b90562e93819193ea9711533d5a9dc8dba612f8e0f0159272"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/capture.json",
+          "sha256": "2929a685256840f529789dc08f6808b0885c91e25613577742c75de04f237459"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-0.png",
+          "sha256": "07a94a582408c4eba0d8b63c7c5644f244bd879c9f5d9d53780e0ffe76bccd97"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-1.png",
+          "sha256": "ce1e446e4f52c7e2549aaca0afe7d2ffe2befb60819211a7627cee0a1c64e868"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-10.png",
+          "sha256": "a1c9b00b0d7b5be8a144eb4fe30bbe5c49da00a72c45bd56b173598defc8d43a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-11.png",
+          "sha256": "385df2853dabd43742080a0a1ae4ca2384180d99ef8c6d92bcb0e2513a0a1976"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-12.png",
+          "sha256": "d46492452050724191d45c9721282075fd5d7d46616491b4a135b854481b02c7"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-13.png",
+          "sha256": "32933c9123999ba5ec1ec1590aed6d05c83517ee435a5768136fe5951cbb5d96"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-14.png",
+          "sha256": "df834366e56b02593b40bc533ebd71f6c41334f115fdca43a0513fd94a4caf69"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-15.png",
+          "sha256": "050012b7ac626a35388ed1b7c125f6905f9cdca10413bd937ed1225a7827cb83"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-2.png",
+          "sha256": "25d7c4e73c6c7dbd6c67228162768dc5db458d8429886a757666a78eb7f54d77"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-3.png",
+          "sha256": "e8b9a42694d787605b3875aee705b38bf4c690350b8bb7135795634e3cd2bfd4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-4.png",
+          "sha256": "dc1fb2c2f3b3e52ac13801588a5e4183d4f37473d8c3eef4448e2d51dc449106"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-5.png",
+          "sha256": "315edffed704eeb9f5080019749d711cd0f54bd80eaae63914e82af4b9cd5b9d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-6.png",
+          "sha256": "1941be5a23b0f300eaaf3d134de8159298a71dd93362e26a007115b7c01a9c70"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-7.png",
+          "sha256": "07dfb54ebf1e8f252ddb577c0c6d2525716d00dc10bc28783ca7b0605456d708"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-8.png",
+          "sha256": "8a3356d7594b39f575d26c58ed20420b1b6843cea2259cda492900bd4e6e4917"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/engine-9.png",
+          "sha256": "1aa6a63cc5f203843f3c3170714535fd8b5a398b3485876f2ab0a935bc060355"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-0.png",
+          "sha256": "63236a7205e55957e89d5dbbe522422a0399bca7c1b1afdd18a259a4f10ec610"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-1.png",
+          "sha256": "a0be138c4b137cb6767f0049a918fa6babc5cfdc2679dfc9dc5920201234f8ea"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-2.png",
+          "sha256": "6eb2450eb91c2fad87a54bca53d4e92511333de0eddaf785060d66ada2e0d6a4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-3.png",
+          "sha256": "9a02b9dce129e2977b5d1a0f2b06a135358f354177b7e59b20bbaf81b217462d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-4.png",
+          "sha256": "92ea5b87b9086e0020e330666707c4d4e8483d5b9801166b2f8aec48d1531902"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-5.png",
+          "sha256": "520670710283db78a687ede6216afd95ceab61d70ab02605215643b5b821d7c5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-6.png",
+          "sha256": "8013ffb5d52a00baa6040640a06c0830a380181eabeff2153e499f22c93d089b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/roll-7.png",
+          "sha256": "ab86ef0c62a17e8ea1d715cddbe8736b2d257de2d132439f0f03608ca9e054fa"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-0.png",
+          "sha256": "a41e59eb087036e162f2ee8fbb5da85588dc3d38bd5e2ac56178602a30d1eca9"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-1.png",
+          "sha256": "e0c5963c56303fbc06b774c12d762be78d168c20503691389d34943eb39a45f8"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-10.png",
+          "sha256": "d3595f182d0f7d356352262de54f8434e1d68d0984e2149a5fe74613a26593ca"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-11.png",
+          "sha256": "842a13b3edd3f848b80a905f4dccbe256c08b2b4553c139712bd47cbbd46e10b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-12.png",
+          "sha256": "c41a038638f8b67fd11349aa620f0bfae382efe866932d7c322d2f20ad4390cb"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-13.png",
+          "sha256": "1bd48a783170a8d9c66042c4d37bd9c2fe279e51e856524978380d2bcbeb44fa"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-14.png",
+          "sha256": "f7dc03a1e182e7ee1095adc376a95fabcb15aaa4c91851f798a333d5163c9210"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-15.png",
+          "sha256": "5342452fbe0754be3a2f8b7aa529c321bd2dff91dcb4d133071d3cb547ec5e73"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-2.png",
+          "sha256": "63236a7205e55957e89d5dbbe522422a0399bca7c1b1afdd18a259a4f10ec610"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-3.png",
+          "sha256": "4c987343ab2703735f0d86bb4404a8adfa2cae2d86cf76328af7b5b0490a0998"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-4.png",
+          "sha256": "5a4a116892012ceb4925ece290f9d219a1b1e3e3a1c1463af30b2a1eeee6cb76"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-5.png",
+          "sha256": "8f954486c8c486afa8ce4873cfdef8d897e4f176caca177d0c9117ddc62c8fea"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-6.png",
+          "sha256": "c57d260fe443078737770e2546bf14dd454c408d9e97241120d5a0791cdf9037"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-7.png",
+          "sha256": "f4783ad8178592d96c6d3a942099884d1f1e2faa9b6a16ba23318bd5a48f198f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-8.png",
+          "sha256": "19cf0b94732b7e9ced19c9f414d1a689d9c47785b80a0db5f659972d2a82bfd0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/study-9.png",
+          "sha256": "f34fd63f5346591223a92c01c92f63c2d481d1c855903aeacd9a878c0461b437"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/turntable.gif",
+          "sha256": "40651b2e80b48ac96360beae95e096ee49b6ddff8db38aff8e57869337199c03"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-low-v4/wire.png",
+          "sha256": "72c6fc714d5a97ead2e25c0b9f5aad35dcabbf76d28dabb7f78135c534eb1e02"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "a-reduced-projection--budget-low-v4",
+          "glbSha256": "ccce8117bde3e42eb76b7af58aa55abac1b46c8411897a98474b0634e1409710",
+          "triangles": 1376,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.9130441247250465,
+              "minimumGap": 0.5998644386519123,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913045803365305,
+              "minimumGap": 0.35998766399238846,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913045629803742,
+              "minimumGap": 0.670816036608918,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913044977011654,
+              "minimumGap": 0.6325320141837567,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    },
+    {
+      "id": "a-reduced-projection--budget-mid",
+      "route": "a-reduced-projection",
+      "revision": "budget-mid",
+      "title": "Projected paint \u00b7 1,877 triangles",
+      "method": "Per-component QEM on retained approach-3 source; exact owner and visibility-tested eight-view projection; source-owned atlas cleanup; five consolidated meshes.",
+      "glb": "a-reduced-projection/budget-mid/model.glb",
+      "atlas": "a-reduced-projection/budget-mid/atlas.png",
+      "report": "a-reduced-projection/budget-mid/report.json",
+      "audit": {
+        "triangles": 1877,
+        "vertices": 2678,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 137060,
+        "sha256": "d33c9fdc300b01d0337b37969bd067d9481ef60014be9226ab0277b08f558bee",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/atlas.png",
+          "sha256": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/comparison.png",
+          "sha256": "fdf93716ed3ec85ba3dab36fe3cc0632873a6c547c718b922160d3f66690362c"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/inspection-engine.png",
+          "sha256": "a8887b4379cc5897007810847e555f530a117888b56eb7ade762ff181527cb90"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/inspection-mesh.png",
+          "sha256": "da45552370d6c03510d961e6683e9e01f441b524e76aeaa230170bda7eb66a46"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/inspection-roll.png",
+          "sha256": "3bc9d866475ae2035db3ce7d055694b5605bb408572e1d0c475075e3b7f416bd"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/inspection-study.png",
+          "sha256": "82c3ed9ff17c4604b82bfa4f31a1152e34e7a10ffbd3bd26308068c3219f6aa8"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/model.glb",
+          "sha256": "d33c9fdc300b01d0337b37969bd067d9481ef60014be9226ab0277b08f558bee"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-0.png",
+          "sha256": "399d570179ea1d4e6f49c2449e7a47055a01d513b473ed636bc6c54f1db93eb6"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-1.png",
+          "sha256": "594dcbf0173d40fe064b1d5abcfd13a8a3f9212e9f544b46322f47d207884f92"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-2.png",
+          "sha256": "3a15abc4faf0e69dc55f37e91922838ea63894585516368aabe49ad171d931fa"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-3.png",
+          "sha256": "22152c2ba58d6d12269db9cbd40642a4596039c74478308b6e723dffff3c2b06"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-4.png",
+          "sha256": "8b903a69f5631f9903fe8021cb973201b1fdb5e30c2f731cb13e519032515773"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-5.png",
+          "sha256": "0927a167649e6dbf18b8994d5fda514a5ae0733bd71259da9a83ed076c59d56d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-6.png",
+          "sha256": "8c4fc106bfb8b62ccaa09c3bbde6f8b751700c1cedf897252c6c22f7f6e7cf25"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/raw-7.png",
+          "sha256": "89f01912f6193b998583bb41e633d152c805b12bcb14f7d9348c13a5859144aa"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/recipe.json",
+          "sha256": "a9b583944846b45f9f852be3ec3896cb7b2f99fbf7b8ff7481b2307214ae8c9c"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/report.json",
+          "sha256": "f4e80c848e18acb0f98dc069801aec0c4f86a750d81b71d9c257402d44ccc5b2"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/sheet.png",
+          "sha256": "d29229505887ac1efa182c48c5dc82bebe18ba8e33a001347a62c96a81fe901e"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/turntable.gif",
+          "sha256": "17273573b2b848bc63a5fd6cf6e54c3a06ce0fadecc4fe83e3aa24177b6dd100"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-0.png",
+          "sha256": "1e6c2cea56d8e63d22b78e00bfc1c915f721422e3ac03439b80cbb45946eb586"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-1.png",
+          "sha256": "3c342b80c70b1ad395d6bddb488acadaf8519e53536aa8b4413709873b09ab2f"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-2.png",
+          "sha256": "bef8f50f6e1b7c570c2fb331d1aebe74a65a6dd329576ce7b27f31f329db9caa"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-3.png",
+          "sha256": "2f6e738ac311782a1f3aa65890fb89cffc5f42dbd748d1953ecb2c621d322301"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-4.png",
+          "sha256": "22991adea3a047ab068e0662c6c2fd0bc190f55e4a5827a4ccfee1978ed54076"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-5.png",
+          "sha256": "98b8c12de2ef5c9007a301816c92e26a0892e1c787f466c400e4f688ea7826ea"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-6.png",
+          "sha256": "a368df151b5e0aa2a85b32faaba3a737d9860ad15c763b4a71b6eacf94a3bb3e"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/budget-mid/view-7.png",
+          "sha256": "cda9b948f9fb37fa3f59c127c3eb73d351de8fb341c28a0e705249b2240e4b12"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/capture.json",
+          "sha256": "da70315906d55b217567bd8df007b6cc36722ebf2dae2ff69fd1bffcc3000c8b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-0.png",
+          "sha256": "8d44e716261e5104086920b522f47b7dcb9768e85cd7f896d33b0ed18aacaf68"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-1.png",
+          "sha256": "f5b676965996cea74bcd8f1a6e08cf838f1e33ebf3ef7cb9e12996504d81a5f1"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-10.png",
+          "sha256": "8126a11dd163e17595770f2d4aa1cc4cf91fa527533e7fa194fb135e5080214a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-11.png",
+          "sha256": "9ac1afb997dfbc0a4479ec90191e20259232f63081d7ad78406a03dd16b94f34"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-12.png",
+          "sha256": "0744369ff6009ea8beebbd0c607326de641fae0e95eddff826a9849c8e50c6ad"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-13.png",
+          "sha256": "8eda77b94504c881670e0d4e87d9ca18e77559ebdc87c796e75a792805684a8f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-14.png",
+          "sha256": "76b981734f288397b4c835896d5b87cc86b8d58fc156e411b3ffa246f28999f0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-15.png",
+          "sha256": "785adf0133e4b011412e799aa0022cb21581c9c82782befa2b43c3b07f79b1dd"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-2.png",
+          "sha256": "517029b0c1ab757ced4c574dc8e20733dc7beaf7ee21bae61f8095ad1bb25275"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-3.png",
+          "sha256": "f223af5e29e8d4d412818bc88ba6212654be9cc4fa594a9e5f9f8ff196703f4f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-4.png",
+          "sha256": "eb85d30d61f65d0cd6ceb9b712ba26415bab1cf00a52357090a5992a24b9b66f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-5.png",
+          "sha256": "bb2ec6276e33711696382d45a0d3153078d1c71e123f72ae8f3098f9ca91ce9d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-6.png",
+          "sha256": "546d9e4a2d1c837f6c94dddbefa8365bf6ba9973abbcbdfd1a02d3f9fc5b8434"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-7.png",
+          "sha256": "00715a257caf9af8631897a76a82b023bb6aff694af72051bfc646effe077cb5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-8.png",
+          "sha256": "caa8b2f237f528ccb275f8ce4977457b1d88879f3bbee66f645e09e4da22561b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/engine-9.png",
+          "sha256": "a2f942d66de6c37e937fb503f5472bc1eda4503fe8a7d41f3ed8b705d7dfb727"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-0.png",
+          "sha256": "82ffc0e6f6b11f4d7c66be0542686e46e9558c1a11ecd6ea7066a7f5049c2379"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-1.png",
+          "sha256": "c3586c4e8db2a76d2a957a45ac5c5f0ce64255c6a2376ac51cd5b73c1a7dab67"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-2.png",
+          "sha256": "aa6539a17b760ed7dcea119ec2d334842c055db78a3737ff0ad18f9174925364"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-3.png",
+          "sha256": "5c85b1c835410d96c927576fe5ec0435d258397487804a4ecd1b04101a63e9bf"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-4.png",
+          "sha256": "84e9cc85318f88b38d025ad1ed952653505d9e3077d24b0bcf24c284be6e4c2f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-5.png",
+          "sha256": "def6a689f2317cda387779a4934c2a2f9298e9113ed41ec9c2bb78e03c9a349b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-6.png",
+          "sha256": "d68360da537fe762ee4e8000f9c56f016645f1b2be7eae903852fc6b5fbe7469"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/roll-7.png",
+          "sha256": "003172a4e3c4d1830ec467483fab5d5eef96b6ca484d5252390f93e94700f6b7"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-0.png",
+          "sha256": "a6289264557b4fef35a30529d0336c1cd87d280b5cd838d605ca68e432fbc45a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-1.png",
+          "sha256": "0983c64c1f752d24d68e9fc12ca7dc8b8e948e2fba673795cac15ff332a4a1b5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-10.png",
+          "sha256": "cee2b5d2d4333697a30118711694c8b2e7d057c44a5532731339fc001dc99eb3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-11.png",
+          "sha256": "ff5d8f197cf52bbb7d22b05d7e8b6e1113fb6a944cb22f4010287c85f788dda3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-12.png",
+          "sha256": "6b57084a734150c52cb1be51b26c81915ab889aef727730d622c65ca7f054a29"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-13.png",
+          "sha256": "3b538f1d2d6079fa70737cf316e930791741be4dfd4c41dbfc87dc849c5f64fd"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-14.png",
+          "sha256": "73d489f751aa3a287f5a48b44c733b50e9107a1fbf80b4bd00d777e10e181aa5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-15.png",
+          "sha256": "09c06492fd4007964d55043880c5373695f6bb07ef745922a989c0256b7dffb3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-2.png",
+          "sha256": "82ffc0e6f6b11f4d7c66be0542686e46e9558c1a11ecd6ea7066a7f5049c2379"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-3.png",
+          "sha256": "7235037c3901b409683a94b2ead6ef40fd0280b3f2613df2f2748ba62a477cb0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-4.png",
+          "sha256": "7a594b64adb62b15792148ee96bfab6ff19d817afef96cbdd0f8225403b1eb8e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-5.png",
+          "sha256": "6854e33eac0e170746728da6d6d9db71b7df6042a7fbb7004ae892685db263af"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-6.png",
+          "sha256": "87ded0f1d2243af23a9db64c5ca4b5d4c87da4bf1812b98bbb5ba9f38d24cab1"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-7.png",
+          "sha256": "e40a20549be5a7b50d5b9e0aca9266fa40d106ad2433d7b6b087935ea1faa85d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-8.png",
+          "sha256": "d3849874fb25d39807706cafe3b2b4937c1e13419560b7aae833c3c41127ed63"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/study-9.png",
+          "sha256": "b23f7dd70c0a19b9f1a1131c9c47830958bfc8350377292f6f7126d1872dd2cd"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/turntable.gif",
+          "sha256": "3ce98a8a138e8ae0f92a0d42221497f7847bd0863cf3376abc6b22df282534c4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--budget-mid/wire.png",
+          "sha256": "32d8d036a3551ac8dd2aebe62599f2379797135e024110fd1d0f8901c09ba7dd"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "a-reduced-projection--budget-mid",
+          "glbSha256": "d33c9fdc300b01d0337b37969bd067d9481ef60014be9226ab0277b08f558bee",
+          "triangles": 1877,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.9130441247250465,
+              "minimumGap": 0.042857149769265135,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913044950779918,
+              "minimumGap": 0.339460990884378,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913045629803742,
+              "minimumGap": 0.31932116417234635,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913044977011654,
+              "minimumGap": 0.26608296695138467,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    },
+    {
+      "id": "a-reduced-projection--mid-fenders-v3",
+      "route": "a-reduced-projection",
+      "revision": "mid-fenders-v3",
+      "title": "Projected paint \u00b7 2,299 triangles",
+      "method": "Flattened broad tapered fender shoulders, .72 crown, .08 inboard track tuck per side; rear buttress tip clearance adjustment; original axle X/radius/ground and wheel vertex/normal/UV bytes preserved.",
+      "glb": "a-reduced-projection/mid-fenders-v3/model.glb",
+      "atlas": "a-reduced-projection/mid-fenders-v3/atlas.png",
+      "report": "a-reduced-projection/mid-fenders-v3/report.json",
+      "audit": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 149324,
+        "sha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png",
+          "sha256": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/comparison.png",
+          "sha256": "f0442ec9c523180fd04cd105c50644cfaad0f846232aa2c8fa2db59416df7804"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/inspection-engine.png",
+          "sha256": "da653b26d3ee76e39dd0b460fbe6252d1dbfe411e217b5564c393459a452fe41"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/inspection-mesh.png",
+          "sha256": "405a30960a691c7992b79a20cd0701ddf0d2188029c5a9443723cfbc7e5dc8d1"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/inspection-roll.png",
+          "sha256": "feb294ba601313f45d3556208e0ea8f3030fda3d4d7a66ef63978ea65e115846"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/inspection-study.png",
+          "sha256": "aae38dece52045eeaa264bc927d9c49c56c1a55298185250992ce47a22cd07ab"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/model.glb",
+          "sha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-0.png",
+          "sha256": "d3cbfc7ba5389e0daab8d33f8ec882ea9689c920a000fbf58ad28476ab3f0f66"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-1.png",
+          "sha256": "243fe82863bd8cef226715132e7086209d65182d020f0bd3c2c15351be1834e4"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-2.png",
+          "sha256": "1d49cdd79f5a083d6c61676a1242fa472f7101390e5faa912a34678ed0040bc6"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-3.png",
+          "sha256": "4dd33f5f8cae8386f1f37c6546a2db5ac3a04847d81a81cc08b7162ae98074fc"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-4.png",
+          "sha256": "9103c9ee11f36d6d3b7c13676d77e347e4658e2118bd685f6399ad69ab78cb3f"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-5.png",
+          "sha256": "4ae958e71d0746de7a291f8823e77f8f55ab4d416108a3812c50ee6386643d48"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-6.png",
+          "sha256": "bfd4831f152f08b65cfc0918ad44108c33e73916d336d0aed2e841a7fee785b0"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/raw-7.png",
+          "sha256": "7731c0cb056292029786e8d369e6486a60766913fb918c6c17326b6a4ed8096f"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json",
+          "sha256": "fad5844ce3e499650168122847971b39dec9fc1bcba9200e43f4a80a14d43cd1"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/report.json",
+          "sha256": "07df8362b778fa0348e3968b2edfabc57906102ec62089f82b65c38646e7cd4a"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/sheet.png",
+          "sha256": "148448f81f3ac4ab0453511a22b8d8c0920eae40e2febd547c021f770140b3fd"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/turntable.gif",
+          "sha256": "bdb52f06497727e1187351c7100fdc6c4c157c586920e746963dd16c7109b371"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-0.png",
+          "sha256": "c3a6fed453bc16a815b77977dede24f5bd8b99228f7459f8b06dd7e1e7245f6f"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-1.png",
+          "sha256": "652eea795210f3a2757f6a280d51c368c08f55bf2f5964db398c2be2a8422d66"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-2.png",
+          "sha256": "f81f2ecbb44c46f6121032c53740c12e7e70670544595fecb8baf2a451f4a069"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-3.png",
+          "sha256": "3ea65b4ce4d955432cf27baef42bff6cbe561cb1901cd267bc248f956cdac9d8"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-4.png",
+          "sha256": "bbd7d4e477f51050ff68a530f3f4ea533127eb7d2b6f09fda6c712030f082e27"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-5.png",
+          "sha256": "c19fb4941745e9172fa89f224c3b04f8c25fc22f2a6763070f461a857b002257"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-6.png",
+          "sha256": "5ce86847b0d95a07a1298635649943e02f7010f426ce56d16bedcb26cc4e7d9b"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/view-7.png",
+          "sha256": "9ce48d488a299d977be8ad742d1bd806e90e098b0e257bec181d2a2025b038db"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/capture.json",
+          "sha256": "f739c0b12b44daaf6cffcde55ba54da4518bc1d0a67441de514e5b45a4b4d404"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-0.png",
+          "sha256": "3de2289a93d3e57fc0e40e7d06b1c47ac93d2bfd597501d3ae3a868ff09546da"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-1.png",
+          "sha256": "4bd9d794777170037d114fc5030b88a3376286ddbfcc31611765efe23953391f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-10.png",
+          "sha256": "f64dae8b59d4b920478c45fd00d2d6613b4c963fad869e6aa25ced4eb70f97f2"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-11.png",
+          "sha256": "a4f2ec6522e38ba5244b06ad0b7bda3055e9c0d4eee00ec9ad36a76b5d4bef34"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-12.png",
+          "sha256": "1556edec27931083bbd28401fa0fae6a4077852f04a8b65ae2eb7efbd163ce94"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-13.png",
+          "sha256": "12713ec40d8f1fbc3bf3e89eb5e83079f26e7c04d4e0389e8bbb76c38eb2f553"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-14.png",
+          "sha256": "04415ae9199d9168a50e23a21ef96c8d6a712b542a2bf714721577e8c76fa5ee"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-15.png",
+          "sha256": "cb73d5f80dd7284b28092744e3a48e196700a927ef5a1ae15e42bbba4e0e8473"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-2.png",
+          "sha256": "e1fb0f293fbc8096e92106759fd84365769a4431bded699c541c0a3d6f501760"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-3.png",
+          "sha256": "4fc53a0701029b0840269b79faf29895050109f764af6f00836c212a5de136ef"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-4.png",
+          "sha256": "6252a4ef06cbf98a45c591cfc0a81ccd598eb46dc8756001e9c4eb3f028ecdda"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-5.png",
+          "sha256": "492a5e9e5150ed4e6c7cceaf99e8c5e23435d1c0b5c93d2673516010e0a67273"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-6.png",
+          "sha256": "2ba083b180728a641a5fdc41f29b69fb155ee8b5441a777c3b011eae5d80e0af"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-7.png",
+          "sha256": "b72148a609daff180226b24a048f3a0ba60d968c2c3cbc64216ba40dce4a5970"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-8.png",
+          "sha256": "6c709b0950292c143a86b1441d3277b410eb855b3468f3e200f9351034bdade2"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-9.png",
+          "sha256": "eafbec6cd694ffa641fa34ea450ef0c092c4ef1d1e665b3af5c8869c163a40aa"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-0.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-1.png",
+          "sha256": "f44907bcbc4cb3e9395a9b957ffc56084c2aa90ae23a66f9379ec132d7121801"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-2.png",
+          "sha256": "0e3a921d1d9a808ee025312c2119b76b699b006dccbedbf5d2221a847f633e5d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-3.png",
+          "sha256": "bb1d8c0d6841ed72ebb79e5c7e30b167e8aca4553ea4cb9fa9b462235a3bf013"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-4.png",
+          "sha256": "cb599f2ccdae4ebaacb2cd73620a253876a92c7a3072c62ae51a1f9f7337d92a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-5.png",
+          "sha256": "d245327200cf7d57d43900a296bdaaeeca66a39d4640f190b43acd296412a829"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-6.png",
+          "sha256": "d68cf99a5ac56ff50674822ae5ded5bbaaab3a75f8621f116c517861cab12832"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/roll-7.png",
+          "sha256": "d73ab19a31ad0d865d80e8d27914281e44b98576ff5ecf42799b882b5adab5c5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-0.png",
+          "sha256": "607e85e5f028ac040cf5a75675e0e0ad6ec63b5d9d09993c9f44a1c396b7eb8d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-1.png",
+          "sha256": "f7c0d94462500c3462f1eb7d0740d070500697976a5c52030251b8c76798fce6"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-10.png",
+          "sha256": "6044520004ac0205eb3c06b75a73574c2156e6c56a8a967df8bb608f6e910ba5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-11.png",
+          "sha256": "93ab71dee0519860e8ac45921efaddb2f562bb36db8ec5376908ada7e03de2fe"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-12.png",
+          "sha256": "0a6d3bfd783a07c3ee7f26c9ae2b7eee1dd9c141edad382e1043a2a81817173e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-13.png",
+          "sha256": "fb90267ec9c14724a9f8ecd45c5aa33e202c36d17204bc33c55b3b391f3ff291"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-14.png",
+          "sha256": "0fc6e39c339b0b49809cb12083fe7e7aab512438299d4643c8e86f26fd82d079"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-15.png",
+          "sha256": "26895cf9bb1bf981d8faba88ed274ed868c8013f8c445a0fd3831aaadfa3ab89"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-3.png",
+          "sha256": "61d5a5e144a53e41a3321f958c96cf287efdb076f4e4436259f9526b7ff8024b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-4.png",
+          "sha256": "72b2e47a806b093a6e90ac1efa81d3a6fee2bcba48a2e03600de47cc0c49da01"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-5.png",
+          "sha256": "b8dcb8c0868e522c1b11fe5b0e01b5c6a87b8f63e24fab54c875ace117d67f0a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-6.png",
+          "sha256": "9ec101449e3db0f58eb531163f514a442759e8e4ebf32247576971a577204da8"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-7.png",
+          "sha256": "77eca1ccd7f84161e6e9034023822cfafe335878650c96663e19341921e65f94"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-8.png",
+          "sha256": "a3065e9364ad9ae0ba8231b0789bdd4321136a4f9d83a82ac4201a58ba59abfa"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-9.png",
+          "sha256": "91408a5c032f3172e1e1748e04c4f40cf1d95ebb17921bdadc3c600acf4dc0ec"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/turntable.gif",
+          "sha256": "e98d3cadc21401e241f3bdadcb0d96b4d096025e1b43103565eb9284104b5171"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/wire.png",
+          "sha256": "4b5a0d7c38ca0e375312745bf26612bde66bb2531671aaefd0073eb2ab15f39a"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "a-reduced-projection--mid-fenders-v3",
+          "glbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+          "triangles": 2299,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.9130441247250465,
+              "minimumGap": 0.2740180219838839,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913044950779918,
+              "minimumGap": 0.27401754825549496,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913045629803742,
+              "minimumGap": 0.2600586841417485,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913044977011654,
+              "minimumGap": 0.2600593369338364,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    },
+    {
+      "id": "a-reduced-projection--v5",
+      "route": "a-reduced-projection",
+      "revision": "v5",
+      "title": "Projected paint \u00b7 2,469 triangles",
+      "method": "Per-component QEM on retained approach-3 source; exact owner and visibility-tested eight-view projection; source-owned atlas cleanup; five consolidated meshes.",
+      "glb": "a-reduced-projection/v5/model.glb",
+      "atlas": "a-reduced-projection/v5/atlas.png",
+      "report": "a-reduced-projection/v5/report.json",
+      "audit": {
+        "triangles": 2469,
+        "vertices": 3305,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 161488,
+        "sha256": "8298e37a89f61b314c641db310b295af22d46a3b4bfaaf4cca714bd65abf4d80",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/atlas.png",
+          "sha256": "dc1e1f77decb2d965f1a3f517c4b7a3824db603ae28abd766b0c92fc8a96d48f"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/comparison.png",
+          "sha256": "13159d3cde365fa41044caad31643ae74d765fbdc2fd381f4c0118147c95e83c"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/inspection-engine.png",
+          "sha256": "e122494ba4a4bdbd44a74592e7e03406ecc2d9e88c8d243b8d1c740f076d45f6"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/inspection-mesh.png",
+          "sha256": "f852bdab6d46e03ebdc9b22b700209a7c423fe0ff56d06eafa8ada07636946bd"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/inspection-roll.png",
+          "sha256": "026ddaf6f6ad600474b1cf784f173f5740ff8f549b6ce7835701060b5d61eae7"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/inspection-study.png",
+          "sha256": "a6d3e5784bfc86d66e83cdaeb919db491ad69ccc4ff2d2025bd73c6bfcd46cc7"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/model.glb",
+          "sha256": "8298e37a89f61b314c641db310b295af22d46a3b4bfaaf4cca714bd65abf4d80"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-0.png",
+          "sha256": "e96e3c721fd7a46b79c62f0f35f007531b868d30a6a39c681d5d3222a13fd354"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-1.png",
+          "sha256": "a6e0644e5a1be4a33a35e1e681f476f5a4b7434eeec52515492d7cd25f9377c3"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-2.png",
+          "sha256": "f2535874a0841169c1b811ac9f32434fb4d7e9a0597da24125e8ad1834e0cd0d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-3.png",
+          "sha256": "ff6b91c68b98ea3c137d5f1f90580aeb8d07665489c55d8765b64343919c63bc"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-4.png",
+          "sha256": "d0944ad9900596696653de41c53785f400f7f9ede45ec27724ddaa29a1bf5615"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-5.png",
+          "sha256": "9bab63b624d10b2973f657d0300fd6617d3a303e00941437ba3fd3c5fefc754e"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-6.png",
+          "sha256": "40a5ddb53b50848af69f65e5a41bd8e507aa4aabf14a62ed2557d034584c209f"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/raw-7.png",
+          "sha256": "ebf7286b43c3cfc8d32cdfc03d0db3635f437f0ec404a51bd28bb725055dfb04"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/recipe.json",
+          "sha256": "7b33f9e6d3b340474c49ada4cbed9b671504df463f57679863dd276deba6e600"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/report.json",
+          "sha256": "5d281ea9b659f487c4ee90da105cb5701412b968599423729ec89ecd06b4c1c5"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/sheet.png",
+          "sha256": "95078fd32b16095b328fd3d95fec8b1092b4e9a85f03dc7dbeddac55e538ff80"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/turntable.gif",
+          "sha256": "6bd13366edebb5c2ab7ddb6ad4cfd1df970173a7ea22065690ae2cfb87b7c070"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-0.png",
+          "sha256": "8b60966653d7936f62d295cf1aaedca09eb997101aff05edd391ebafd2fbb3c2"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-1.png",
+          "sha256": "e8a676bee756d2fe464c88ea3bdb087153eb6868fa9a851fe187dd73a45179ff"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-2.png",
+          "sha256": "610fbfb5576c26ef1f9765630b13a357969e4d45c790d5189218f5b78fd1587d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-3.png",
+          "sha256": "c5153a0c09f878caec30ccd5b7e596d3b746cbd297ff00b2678019bb16a84c6d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-4.png",
+          "sha256": "19fd7d0d00ccb71894ffb600fcf802de356d81ea9721bc20ca6e35ecc775a449"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-5.png",
+          "sha256": "5a0b9322e3186acdaeaacb13913dc14af808e93df53b4e010d45a36eed05285c"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-6.png",
+          "sha256": "50ec271b27f9eb287abadf73b8ea5e4713dd5ff300ee3219252a6a528ecf320d"
+        },
+        {
+          "url": "demos/vehicle-bake/a-reduced-projection/v5/view-7.png",
+          "sha256": "ff04450cccd3d68e5fc017ae5313a3a72935fc68a6a8f6c4da4f21e4ca01919f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/capture.json",
+          "sha256": "c06bbe1a17029c6ef420a24665ded1573e51fdfbe7ce7d8b59c4fbc82514bfb5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-0.png",
+          "sha256": "89ea93bba1e73d8948affce4cd984da269c344d12fc5190f703c0837de89bd13"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-1.png",
+          "sha256": "83f91523413665d3687dac14acf3e4e9cb204a6c163e1d33d0172cf2d1a976c1"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-10.png",
+          "sha256": "036c7906aa67a475cd745cda3930c792c421165ba76ecbaaea634fdafce0ab9e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-11.png",
+          "sha256": "ef284d5443bca496b393a7e84bd6e7b4169a6d44c587c2d5b5daca0fe4abe183"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-12.png",
+          "sha256": "d91b6979c339dcd9ae1c2e1394f6a2049a020428c4b822d8be19219b53df60fd"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-13.png",
+          "sha256": "c74398b1584112af1ae2faa6d688bc63ea9fce604e2d4615e6ea52eedc95910d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-14.png",
+          "sha256": "433aa7785825eabe9e5a39acd6ccfc11ea5ccf2b42803667b7577fadd4dac811"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-15.png",
+          "sha256": "85d632dcc775514bb959105a6e32fb252a479bb468ec7849950d6f371f61a901"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-2.png",
+          "sha256": "32cc748dbcf753b3984a31c1f0bc01a2891358e3aa0817681d258a3bd5598b8e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-3.png",
+          "sha256": "06201f32b1ed69b89bf4b4566749a60f32b0535814af95078922fdd3a381a04c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-4.png",
+          "sha256": "475ad32ec00fbd509a0613ff94c5767c29bf84b088bfce4ed0d18a6c7f7d8217"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-5.png",
+          "sha256": "08d9992a9fa6274c5aa636f7fb9bac2ab85b8ed28ab64ba17557394dd806a3b6"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-6.png",
+          "sha256": "567b6ffe04877511fbafd5c914fab711fc0795b57f2bf11a89e46e6258be77db"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-7.png",
+          "sha256": "d03e0c01c78945e478eeab4d00746f4ef16d8dcb2ab288e41fba3f17fe828eec"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-8.png",
+          "sha256": "fbf4599d655b7cfacb382f785582a37330fdac258f2becd79c6dfc91316c3898"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/engine-9.png",
+          "sha256": "e1ffcff43735194106e6f6abaac22a98e2afb49b4d96fcd3bc444361c00fd79d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-0.png",
+          "sha256": "c324573efbb9a730711d37d0061f04860b286dcc1d31147da35eaa75bd2cdbab"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-1.png",
+          "sha256": "1678a68c677fe57eb365888e61b623c8fc6dc29fdaee12665ea161a8ac4b47e8"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-2.png",
+          "sha256": "6c731c0e6175b4c8f9d7874caaa6ebed4b9bdb533b7278b69c60072224187402"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-3.png",
+          "sha256": "3b19e9526ebe7447fefbe0f8557968a66a2843d18ee7926b60f065d8b51c61c0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-4.png",
+          "sha256": "48597101fd5271572385c28a2f58f39d936863a47cc8fe9e5a753bded115e801"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-5.png",
+          "sha256": "5956f21aca964f4aa9763c3071ac746d4349a98a9f5b35c08eef19591eb9333c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-6.png",
+          "sha256": "0f3fb0cf6510fe110b5232450cea9573968126859169a18cc3bd3f699753988e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/roll-7.png",
+          "sha256": "fc6d02f8bcd40a1f760b32034c6b5f71f61bc8601014577ffc06b9eb953148d0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-0.png",
+          "sha256": "4e282a02a19d820b7824faef1746677ebf8f9f8dabd5ae8d68992cc78416d6d2"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-1.png",
+          "sha256": "be2c79c50235b24cd12824feb002e8bd6ccc0d8503a993eeeab8889d56c2c913"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-10.png",
+          "sha256": "820db32184f8970259ae8325abd06255bc08a0d5d42f1df556f3fe2e3323d488"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-11.png",
+          "sha256": "daf3ae10595e4f82c2f26cae40497cf442e4b420dec0cd0ed66d0bc041467d15"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-12.png",
+          "sha256": "e5490b38dc3973ee9f9c5ac4dcfd2664813ce910330ac7363162c9d1c320d4ab"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-13.png",
+          "sha256": "7d27e3fe013279c41285e5d0dde5b2a8581b9d6ecbc2c3811a117395d04f9901"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-14.png",
+          "sha256": "b530d26b99b6e05995251189007569d4a9419fe8d2be3e46f65942f3e97cd45b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-15.png",
+          "sha256": "6db9dc13310244a43171fa287a5bfb91738ba738687d11e94d7aba53890f685a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-2.png",
+          "sha256": "c324573efbb9a730711d37d0061f04860b286dcc1d31147da35eaa75bd2cdbab"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-3.png",
+          "sha256": "08d1ffbc7bf6366ef747ca94398521544e23842712234e6cc18c0c912cd671b8"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-4.png",
+          "sha256": "bac220f4e0c2b00b652db2eec2833e3fc255f3d0cc6cb44614871ea063064ebe"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-5.png",
+          "sha256": "e46f1186e2923de6a449a12311999da087cf4aef436513fdb9a3c3ff0f7d5966"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-6.png",
+          "sha256": "23707a39a10e0c8aed0301f27fd84c8368fc3cc750cd4397e5463238d98e18a0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-7.png",
+          "sha256": "c28e7bc8f74665a971efdb93a55702e4a2d12dfce7a3fe22ca587467283b686e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-8.png",
+          "sha256": "b6791c9ca2939c597b480e84e64dbdaeae72fb01d664fd9915ca3734809ea972"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/study-9.png",
+          "sha256": "9538b5de3320cd66e0f5309f50cde3351e11ed95e8abe186c5d058719fe9e38c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/turntable.gif",
+          "sha256": "9d086e2c28536736e101a0347381619ceaeb0bd284ce879e783b503a166d1a7d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/a-reduced-projection--v5/wire.png",
+          "sha256": "32f48e8906bf1ae9c6eb733602ec7634cb3da8b18db99bddc293d88a7ef68d31"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "a-reduced-projection--v5",
+          "glbSha256": "8298e37a89f61b314c641db310b295af22d46a3b4bfaaf4cca714bd65abf4d80",
+          "triangles": 2469,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.913044686906577,
+              "minimumGap": 0.5998638764703816,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913043913608384,
+              "minimumGap": 0.3599895537493101,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913044627817117,
+              "minimumGap": 0.6708170385955432,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913044834209611,
+              "minimumGap": 0.6325321569857998,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    },
+    {
+      "id": "b-authored-semantic--budget-low-v4",
+      "route": "b-authored-semantic",
+      "revision": "budget-low-v4",
+      "title": "Authored UV paint \u00b7 1,324 triangles",
+      "method": "Geometry-aware authored semantic UV paint. Source-mask histograms validate palette roles; no image projection or view-conditioned material.",
+      "glb": "b-authored-semantic/budget-low-v4/model.glb",
+      "atlas": "b-authored-semantic/budget-low-v4/atlas.png",
+      "report": "b-authored-semantic/budget-low-v4/report.json",
+      "audit": {
+        "triangles": 1324,
+        "vertices": 1203,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 55632,
+        "sha256": "37ec4987929e3fdd4e082f6821318f03ca057e2427c62e6ea1b16ceedfebf718",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/atlas.png",
+          "sha256": "1251a5ca21368d4923c315720c49dd4cd52730a3b5e863838536ff7b3a810cf3"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/comparison.png",
+          "sha256": "778fc5f6b334a4440110c04382063e50b4719105e6970f8d848b6b2b7fb06c23"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/contour-diff.png",
+          "sha256": "8ba6d9e0a37136200fb7fd80e424d6c2704687d9fb90f90eb0d15fb0ceaa8726"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/inspect-4x.png",
+          "sha256": "af5e547d003ffb30a9db11c96bca23a87ffae5f38e5362a4359542188a96ff11"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/model.glb",
+          "sha256": "37ec4987929e3fdd4e082f6821318f03ca057e2427c62e6ea1b16ceedfebf718"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/novel-and-roll.png",
+          "sha256": "3a8b7ecc56ec01ca2b9d1fd76fba4beaf2457396da52d235e9ddbc1b0f45ed09"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/report.json",
+          "sha256": "98eab6400e6c83067b5121c6bdb19630e62a8446fa148434e003b53e7d46f000"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/sheet-native.png",
+          "sha256": "6fd02fbcc8e6e120eca81e9bc6d41841b9a52905ecc9a10fb32138db27f61fe3"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/sheet.png",
+          "sha256": "5f27c658b0ec125c539b0dec0840b4257f206bd02f7ddfc2d761bf64afa21249"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/turntable.gif",
+          "sha256": "e170452d3cfe3713add4d5f1458efbb167940672a216970cc43f802caa4b84ba"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-0.png",
+          "sha256": "7d7a104c6f4129abf8ce87c9e372ca40ff4ab7705c9cfbb31f3538171a5fb375"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-1.png",
+          "sha256": "2fac6d2fe49b9cae9c1ee5dd504f68e2e07a0b715e4a4dea5a2ddd85aa7323ea"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-2.png",
+          "sha256": "9340d3309c40a6f5020e295a16ad91697213f553663c2226993dbd26fb5d0103"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-3.png",
+          "sha256": "60ee57ffa035a9512b0d02a7bc3f485552bdd0c3386b62afc3aa3d417c05a759"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-4.png",
+          "sha256": "df8bdc4e59322ed1cbb86a4848fad556abea20d70807007a1043b798e066cdb6"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-5.png",
+          "sha256": "beebbb9ef3cc0c806a5d051412615d2c49dbc8a4793d32de0523f30bfe90534e"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-6.png",
+          "sha256": "3dba2c99159047c60ada6b62dbf881365b2653b63606b0847ef7baef31549d95"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/view-7.png",
+          "sha256": "afb32ac78e39a8b9f6680a64e6317a3775509948b5ff67227bde1b9c0c7408bf"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/budget-low-v4/wireframe.png",
+          "sha256": "e3f5c8bc386e48020e5b3cf48e1006b6c78ce33c49f8af62a1ae2c9bee01598a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/capture.json",
+          "sha256": "438cbe31dc07865b5b3b3668088d48aad6383bc71f71a0329af58d9dc7c77bc3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-0.png",
+          "sha256": "c9d947e5c9441c5682aa0a11e516df209065a95e239d89c7233216360579bc41"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-1.png",
+          "sha256": "209a540ef84f7e62769daa42d21103f744a90413e6f2a9921927535612204c29"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-10.png",
+          "sha256": "56cf650bbd67d7a0d5351a03ab665eb0233a0852f3956be9df8a9ea7b8489ba5"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-11.png",
+          "sha256": "d15809dc3c5ad4020214e5a7623ef46898e49821b8d74b432255024e91529f0e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-12.png",
+          "sha256": "c2fa363a158ab070951b8a86de2f7533750184f32e64e48b69a8eaf5c9861dcc"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-13.png",
+          "sha256": "9ae18fbc6a24e39c4a51518e56fcbb708867df353170e716765ef5b43f7a8691"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-14.png",
+          "sha256": "8155e20ffb1b991f3dc21a9e775a08e7bf00d96f7b212e355932d93f2cd44a65"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-15.png",
+          "sha256": "1937ae0c826ced21e877e4fcb38eb79f8b29bbd4b33b5429cf7a767d9320fa6e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-2.png",
+          "sha256": "d702aeb3561979fb9d06fb05a70d1cc62f34392ef27e6245c50e0c9397885792"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-3.png",
+          "sha256": "fba6f5defba579736a6e8a5d63f500240e79498b64bce6b68e5cf67d1c6632d9"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-4.png",
+          "sha256": "f32d0da8bd316e08e7b3402b20d483672d472017ddb2989f04396502795ad5b7"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-5.png",
+          "sha256": "d9ffd687a1573182d8fa2603e13bce0f21ef34bd908f2082ee0217a2d46d0f90"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-6.png",
+          "sha256": "81b802526ac5073c6150616715bc8056829732dea6ae977eb2d5689a609adbfc"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-7.png",
+          "sha256": "d397598e862a469560b1f25a7d60f64b56bd633710372753adeef782cd3e260a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-8.png",
+          "sha256": "96fe53382c2851cd719a7cca9c619da03aedca80646202dfbceadaae9e049040"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/engine-9.png",
+          "sha256": "240f176b84a069cc980cb9d4e1c738d21c46b0e850eeba0cee17def2167447c3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-0.png",
+          "sha256": "078eb149f69561a16c683765ad09b3fa4ba4c281a44c04995ca8509463d5358d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-1.png",
+          "sha256": "b28e7eaa7219b35d48d83b1c5b20c679a2e9eb16402c68cd97838beca5729c1a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-2.png",
+          "sha256": "c1f67e8333ea3b0c4d2b3bac243427f74753f7b29e2c49cbe96bd8984bc2ac84"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-3.png",
+          "sha256": "d399cbc3b25edf38b53463a18f6e3ad2237b944d2bbeddd91a133e58e1583542"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-4.png",
+          "sha256": "f9e5163c1c56ba15506c9467710976b4b0e9f65c8b04fcaf323043cb0c5b086d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-5.png",
+          "sha256": "7163170e4f08b3005ea4d00210b85960ded0f9a580b01a87cbbea0a4e0c60393"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-6.png",
+          "sha256": "5a40af1d818dd900d36ca98d04e3aca6ab153454401172ec6ad97c97fb767f58"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/roll-7.png",
+          "sha256": "880bd9ac9403afd05c9e342af4dbec0b98a58f5850e8d29dae9828e47e14897e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-0.png",
+          "sha256": "74b5b25db32ce4b24571fbdf8f42a2ff82415487e2123abd8973b9684c17b9e2"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-1.png",
+          "sha256": "7da74c0846cbf9376ad3e8b502a4560761edb0e798d9f855d7fd7fb3d5dea94c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-10.png",
+          "sha256": "7652b0ea0fdc5ea9de8224bf1032eb31151307d8af58a2a3a6460982d8554517"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-11.png",
+          "sha256": "dbccca29f0d7ac7c8be90f655d25de5f7a92df012ef17adb824fa8ad32793d8c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-12.png",
+          "sha256": "af1252c837960337db88f99d1862254d35dcc358edfcc035d979062ae52d179e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-13.png",
+          "sha256": "b8e8ebf9674ae1d9d29988554518047e93c70fc26e59e51202feab2964478b71"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-14.png",
+          "sha256": "7286da846062a1d6489e9216b9a9ad1f19966656f4b709f1ec19d96bbefcc21a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-15.png",
+          "sha256": "3ffe3e8765283becf59b7cda7f90f61eb353ba00cf488624bb431f117f3ccd9d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-2.png",
+          "sha256": "078eb149f69561a16c683765ad09b3fa4ba4c281a44c04995ca8509463d5358d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-3.png",
+          "sha256": "d70ac59a32a03626e4cbc99912624d3ec74492a43d54f33ac168c6d101f54bed"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-4.png",
+          "sha256": "42356838d3afb08ac575243956bdc1f2588f6c5f283ba3c510dfa5a216ac8617"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-5.png",
+          "sha256": "d6943996491a061ce04315a1e630561b181f57c8678e9f7762e6cd468afd2853"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-6.png",
+          "sha256": "0e224cfc693aceba251863a74fae762cc628f3ecfec9b2d8b607b4e1dfa9d048"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-7.png",
+          "sha256": "e0e07781719f2f7e39835090e7bed9c07f0fc9e0444a83afda021478acc64ed6"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-8.png",
+          "sha256": "356dbc8e79fd170912a55a4cf187a192a1fd84593e304099d9d55e1b18a49efe"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/study-9.png",
+          "sha256": "9e47c060adc776a2386e8c26d477bf7580c039cabed63ec0fffa88306f42cd70"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/turntable.gif",
+          "sha256": "5a1ff2faf4ffe5adcae83e3243b3ead2da59eea392c6ad583f585d77d796a9a9"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--budget-low-v4/wire.png",
+          "sha256": "5630d79cff930a3f3c17c5366250bce6fab40e8c8a920c34ef539cfa4ef4dc56"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "b-authored-semantic--budget-low-v4",
+          "glbSha256": "37ec4987929e3fdd4e082f6821318f03ca057e2427c62e6ea1b16ceedfebf718",
+          "triangles": 1324,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 0.9950919667389888,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 0.99509119343851,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 0.9950911518123187,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 0.9950905369124259,
+              "nearestBody": "Body"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    },
+    {
+      "id": "b-authored-semantic--v4",
+      "route": "b-authored-semantic",
+      "revision": "v4",
+      "title": "Authored UV paint \u00b7 2,378 triangles",
+      "method": "Geometry-aware authored semantic UV paint. Source-mask histograms validate palette roles; no image projection or view-conditioned material.",
+      "glb": "b-authored-semantic/v4/model.glb",
+      "atlas": "b-authored-semantic/v4/atlas.png",
+      "report": "b-authored-semantic/v4/report.json",
+      "audit": {
+        "triangles": 2378,
+        "vertices": 1991,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 86712,
+        "sha256": "4ccf772f710372dfa52fd96b2ffc66bf5598d5c0004dad6123707d742a8facd1",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/atlas.png",
+          "sha256": "1251a5ca21368d4923c315720c49dd4cd52730a3b5e863838536ff7b3a810cf3"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/comparison.png",
+          "sha256": "5f63a01e4e552583131daf1a15c1b35880c2fc8201652d59d73003daa9e311bd"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/contour-diff.png",
+          "sha256": "aeaf9897fd37acaae237b9556d893886dbe4b69e4b161d81fed581e8e219ddf6"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/inspect-4x.png",
+          "sha256": "2ab77ce74afb142c8f3ba2caf7d09e3636188c4bfd4944cc0ead3b00e97bf18f"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/model.glb",
+          "sha256": "4ccf772f710372dfa52fd96b2ffc66bf5598d5c0004dad6123707d742a8facd1"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/novel-and-roll.png",
+          "sha256": "af700f3d0de87f0f2e48f566b9b8fe1dc03b17665010ad4d2fefec109925e6fd"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/report.json",
+          "sha256": "a1e6918b83708d622d070a7e6aec6349f3dcf677421f4a5d88ae5778c7309965"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/sheet-native.png",
+          "sha256": "18cd0458cd34a769d3c38d39f3de611c035e33a4365aaf8d31f321e50611fe93"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/sheet.png",
+          "sha256": "f79d20e8b7a0ae16cdc6896c3b2129b72d0216df60ed7310d5797eeeaaafd540"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/turntable.gif",
+          "sha256": "a2815221d8f7f0a98bbf81ab15cc9dd7ac0bb560b50d96f4fd23a0daa9078b1c"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-0.png",
+          "sha256": "17286911fddc888ed5bc86e26b321b9cf027b210121b492e85c3e3a403bc1b40"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-1.png",
+          "sha256": "8daf417cc142c3ffe4c232c1476e7c8a9289ea47d319f765eb415a22a9e30fbf"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-2.png",
+          "sha256": "479085a4c77a2a0e517b4de8bac37cc56739977ad3fd57c5935ab5a230b7ac7a"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-3.png",
+          "sha256": "259d65f16b30c18ff40dde1d33d50a1349a28c2b193d7bd1f40b500645e5c96a"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-4.png",
+          "sha256": "a1557424802ce9166325c7e0aae0eea6a6c10e1aaee296355f4defd70d7bb1d1"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-5.png",
+          "sha256": "4b09d30e4d20db22e82cb2b3ca99877ac6be0df59e1d59886e7b9b0cbba32b80"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-6.png",
+          "sha256": "229c3cc872144edb4c020c31af198cb0ef8bef687eb48cdfca824145d45a6b12"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/view-7.png",
+          "sha256": "1de1fc4faf20583385f98f523815577cd6695b4cbf0ce4d1fa35fe33c019b3dc"
+        },
+        {
+          "url": "demos/vehicle-bake/b-authored-semantic/v4/wireframe.png",
+          "sha256": "70502a3515982497397a324a333c50a8f646280159caa1f8b94594ad1c1848be"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/capture.json",
+          "sha256": "963ecbf5bbd13ad169f24bb54671f4a8fc0779892ebc62c116d96d2cfd5ad8d7"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-0.png",
+          "sha256": "d6f4dc1897646fec6754b84bdec5c3c977759010636f183af2608d0c7542be3f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-1.png",
+          "sha256": "d1a482f9aacbb38e243a4084aee0ded4ded4880bdd3374cf2888b25c50e4da21"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-10.png",
+          "sha256": "2a07019f68265f348d5f8c5136f16526bad5b941a2b9a6b96e507c5b066186fe"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-11.png",
+          "sha256": "de65dbcbcfcbae842f8b15a7ee8a48d1f5e6beeb6231d0a4688b165ee3d9a38a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-12.png",
+          "sha256": "fc8df82ec459986c5c1f5a71e45dc503d0d5d3cae2788f87b3deb0a990a411d7"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-13.png",
+          "sha256": "6006b3cc92a591114399ee78011bc8692d896b98d45b8c3e61f07e5f4018542c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-14.png",
+          "sha256": "f4774a208ded7f1e075f2ffec046ce3be5c8cbdae66a7fa32fef47891b665059"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-15.png",
+          "sha256": "c96a09db836bb6ea40c73051320b9963713095d0057a66d4ff65bd5d7a3a7571"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-2.png",
+          "sha256": "70425386290885a2f065d7c4694dff63ab15cb4eab47a8f17b31a82210f2fa55"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-3.png",
+          "sha256": "41888583b4b8bc233ec95ed0afc1512d67c6e4769941b31401d08c61c377e26c"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-4.png",
+          "sha256": "9350455c1437e1a1fff25e70a14e3955eff0af7d110ab36dd49ea83413d920b4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-5.png",
+          "sha256": "3cf316e27179cfb5f1c87890b612740523848ce67ba1a1b33d43ce73cd8f0000"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-6.png",
+          "sha256": "6fdcf2aa4a6c0d19937b8ceb71e8e5c7c11a2cb0281ff57fa4575b0bfb08c200"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-7.png",
+          "sha256": "c643df5083a49390777c6f69f2503104470c9d92a59e72a8a868b7f1ca57dc96"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-8.png",
+          "sha256": "470ecd113e773139593b9b90b32efbfe2922b9df804c589c63e82d333a741806"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/engine-9.png",
+          "sha256": "ecbe109086aa28f409dbe32330b58f02913c957f23746922961a2d9631bc1bff"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-0.png",
+          "sha256": "441ea3109207fe9cc9c5d538509f3b3f0215c2ade9e501b9f89c25ed31d723d2"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-1.png",
+          "sha256": "8859e3bdd9a881b32b9ae905c3d4af3bceab796f1d95fe070f21c8c5c6b7161f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-2.png",
+          "sha256": "7e1633f800ea9e8b2a2527a0331e37be44efd57a88ae7b1176e29e590b50a23a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-3.png",
+          "sha256": "5a43beaefc4b59ed8f58e3d1f420d0f159a66a75f64c3be763eb68a7a511db5b"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-4.png",
+          "sha256": "bd724d28463ccb9bb209aa4c2ecf447d76256410bf35af6e088fc0969faf86d1"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-5.png",
+          "sha256": "2499f47a6d026b9c49b1b0820fac54da17001d347a7e9c83c2c36f6f36314500"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-6.png",
+          "sha256": "c10a25ca9bab6a1e19e8009b65585991055f4183dfba1ff6f08ffae7d03e150a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/roll-7.png",
+          "sha256": "bda4db51acd178940b19df8b508d80539f77deb54c34dcf508691e6af79bf9b4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-0.png",
+          "sha256": "353228d8a8cfdf1a5dbe36dfaf92ba96d2fd80eb4e8a1d0a7f8cb3b860d6585e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-1.png",
+          "sha256": "67ba56d11a334320dff876b0f1a74dc7cc5e029282074713a6a1172463068b30"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-10.png",
+          "sha256": "c69eb5963eff8fdeea98536df5ae573a4703b2d168278f02fc62702afe311144"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-11.png",
+          "sha256": "b14ec1b28c7c0e7053cd9b8b2635f14b78592ee5fd2a011559ff286cc6517cb4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-12.png",
+          "sha256": "ed9272305c43ab74bb99f78cacd9a89faac78613b91162bebabf0accc5b7a2ba"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-13.png",
+          "sha256": "ce35ac0e1455c91c67527fa450a5e896bc35150593d4b152bc4b272c66888ce9"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-14.png",
+          "sha256": "2a52df44da75d92a58ee899b479d992a1fa5d3094613c9dc5712744dcc2bf7ee"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-15.png",
+          "sha256": "50001b2378e83e7b9d8876a62dbe95cba36bad2eaed074eea578dda542771341"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-2.png",
+          "sha256": "441ea3109207fe9cc9c5d538509f3b3f0215c2ade9e501b9f89c25ed31d723d2"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-3.png",
+          "sha256": "04a3882d29ebf5eb045c03138efa7a8734c99529d2230f445c5256213a6b8733"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-4.png",
+          "sha256": "7ff3dcc9773f6dfd367af24fd089b2db4abb34d1028c114e3cf66bcd74e34f00"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-5.png",
+          "sha256": "4690c959e24d76e2a7e1a1237acd3919a79ef167d3f91e602d032121cc485510"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-6.png",
+          "sha256": "fefda56af4aa3c48c58820a29ea7e3c3240f4acd33d2babf8ce4b1ace516583d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-7.png",
+          "sha256": "6796cff1b3b2416472af19ba53bb79da008eb90ffad554d9d3ffedbfc293d327"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-8.png",
+          "sha256": "ceec8ccdbf39d14776e5ab0df0abd8f45641c26db2b76113175f941be8809493"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/study-9.png",
+          "sha256": "3908fff7c2665d9baf134136f1571aa8269767a2667b477a7cb3b6fa10cf9f0f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/turntable.gif",
+          "sha256": "dfce121b03034d778da25fc992ea3a670adaa945e5198f135e7817973c95f313"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/b-authored-semantic--v4/wire.png",
+          "sha256": "a1eee74a8fe7ed1462bf989398822f54f9b651bfbc769b785401f7c1cee441ee"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "b-authored-semantic--v4",
+          "glbSha256": "4ccf772f710372dfa52fd96b2ffc66bf5598d5c0004dad6123707d742a8facd1",
+          "triangles": 2378,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 1.0701727099903167,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 1.0701718113393,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 1.0701727099903167,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913043975830078,
+              "minimumGap": 1.0701723788460313,
+              "nearestBody": "Body"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    },
+    {
+      "id": "c-surface-bake--v3",
+      "route": "c-surface-bake",
+      "revision": "v3",
+      "title": "Surface bake \u00b7 2,597 triangles",
+      "method": "Owner-restricted bidirectional normal raycast from low UV texel to retained high triangle; barycentric high semantic surface color; exact palette cleanup and padding.",
+      "glb": "c-surface-bake/v3/model.glb",
+      "atlas": "c-surface-bake/v3/atlas.png",
+      "report": "c-surface-bake/v3/report.json",
+      "audit": {
+        "triangles": 2597,
+        "vertices": 6425,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 246904,
+        "sha256": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "files": [
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/atlas.png",
+          "sha256": "1b9ddf4f1054292de0a93b07c1bd4d2c80cdaa7eb4b3943814993a8dc16cfa8b"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/comparison.png",
+          "sha256": "fe3a3711c60e058982564a5f5d1da3a3d3f44ab2a303bb31d36500b9c7356eb7"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-eight-views-4x.png",
+          "sha256": "aa0d4c000c13777f4f43bb50a034be29fa439683058a6406094f39796c7269b8"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-0.png",
+          "sha256": "5f67ebe3687bd7c36210b98b45cc2a7f714f9585775c5f09ac3407db1ebbfc27"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-1.png",
+          "sha256": "3bdb13a889c4ac20039648d783306e763a173cb1cf5235f0622a0695a91c1cba"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-2.png",
+          "sha256": "69b6a63b901bc3bd842fd351dc648e4d0022caa7adda5876cb2b92736a50878f"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-3.png",
+          "sha256": "0853fc38f0ba6defbfd8f139dd856aec689aa2a9bd3f4ccef8bfc895e793403a"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-4.png",
+          "sha256": "c6d74e849f01f13979c1df1496970bbeee23d0f1b754c9bb92d10380ecc4647b"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-5.png",
+          "sha256": "efcff0e59766385d26a01d30936a0442db49136e1eaa821788a16a6e86a31766"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-6.png",
+          "sha256": "fda1a66218b4526b8668aad52715555b2c4e25393c5aa23c351459a6c6a2f383"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/gltf-view-7.png",
+          "sha256": "6db8beef1d505459c5fe31d310d445dd39f8673ecd7e8124fc3154b778d55f31"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/high-to-low.png",
+          "sha256": "fafae07a5c53a2d236757b2a348752071d497d8e7b49e33cdaa0093b4910c29c"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/intermediate-0.png",
+          "sha256": "88a668bcaa9e4ac590381d60992b6d9360c8c385dcde78dc8e84e7c7ac4b6fcb"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/intermediate-1.png",
+          "sha256": "4f754a3037723731ae225f0ea7ac73abb3b9e6f01fef26e1c5c948e9982d038e"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/intermediate-2.png",
+          "sha256": "179af05da4080e5e6c58df82895e1e9efcf95a6402f62c9a69a2975ab9873ae8"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/intermediate-3.png",
+          "sha256": "9011a848578270e56f8a6b6874ba7cc920841d55c7f6603f5b3dcfb8775aef48"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/intermediate-and-roll.png",
+          "sha256": "fdf27b8e17132c5ca04998b98cde813e574cd022d8a6e3751c07dabe294d3827"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/model.glb",
+          "sha256": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/native-eight-views.png",
+          "sha256": "9e405201f64fee5b59eedc478645e8c2e5c277e277df527ab37b0dbae88d8ba4"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/report.json",
+          "sha256": "3a58218e9780cafc0a006aa64487445ed1f11edde374cbdd8d2710152090ce13"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/roll-0.png",
+          "sha256": "5f67ebe3687bd7c36210b98b45cc2a7f714f9585775c5f09ac3407db1ebbfc27"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/roll-1.png",
+          "sha256": "a7535cb392bbdb3989cd3cf0df45ccb2067032c0529bbe1ff01ebcd0944affb2"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/roll-2.png",
+          "sha256": "efa66cc74402f6831ea10763b67b87af6261d624ca0aa063549845055f8438c3"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/roll-3.png",
+          "sha256": "ef6514b855105e7d26e5dc44bd81e3f47cb8ba189240b33399a3df13bb9689e0"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/transfer-evidence.png",
+          "sha256": "b2d501035945005f50f1ccb8bf363184f4c561b486f1268b50a55e8a4f974744"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/turntable.gif",
+          "sha256": "41561c49ce4a4e1e47200cbe744621eb5f45e4b65f165263233f8873138a3894"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-0.png",
+          "sha256": "56f0a877ae0a7f1c0880e42d634ba7d6ad72c7ea527c059ed74fbac9a04c7ebd"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-1.png",
+          "sha256": "e294c80d78561c71a0f8158530976969878525842bcd421a15c20104c3280647"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-2.png",
+          "sha256": "789aa091639fdb20fe6da259b9a43a2f6ca734ea925064202f7e90cb6b3a5107"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-3.png",
+          "sha256": "d7428a82b7c266c0cc29d8232b917c6269248cc32529c8bb392713231323bae3"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-4.png",
+          "sha256": "149d297a2e95c0450b24a23bcbf27cc5a6bbd29ebf1207e53b22b303d300de7d"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-5.png",
+          "sha256": "fd987b4a7643410d9addfc1611f807776bd11ff371b4bc55d334fb3de83f0851"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-6.png",
+          "sha256": "0a1a11502eac6ae22d9d03eb056ca57fe89167f856716fec38736283aac9bd14"
+        },
+        {
+          "url": "demos/vehicle-bake/c-surface-bake/v3/view-7.png",
+          "sha256": "66bb35d06e7896f8746fe4723d52415701e37204c6d65ab1caadbbbfaeb8ef8d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/capture.json",
+          "sha256": "c92408b3b33c8dd176babdf052e44313d6f6bdd6ca0eddf5973f210d4555747a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-0.png",
+          "sha256": "01f36ae8bde0bf93a198337c9b85f9495b5e35fa90fc607a7050279ee68542d7"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-1.png",
+          "sha256": "2d9d1b1b5b0aeea27184d2118fbe50d9990ed58b4d14141b7e41bc3d32e6a52f"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-10.png",
+          "sha256": "1e3d681c70244ca08e1164d3eada2a3feabdb457b5e71a53a74012fe5a46beec"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-11.png",
+          "sha256": "097586d7e2b468da14460992697891c6114e3cb6ab70fe44ae7623253b584dd0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-12.png",
+          "sha256": "269ce33fccbb35b7be434b4355a7763073e49af56d08b370f4805c6277a2344e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-13.png",
+          "sha256": "0cd936e526d249df02eeda640837c93456c014288c76d19338220c1c67136cad"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-14.png",
+          "sha256": "cb1a1ae9c9cd05b2b5ca104ba7762d827765915db20e5e293978f34c3445816a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-15.png",
+          "sha256": "acaca228b9ef7112a8794f05cb0b6f1240b9b70f6d91ec6e61dc353d42508f3d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-2.png",
+          "sha256": "487da0d6594062db9a417d82b9963659820c24538855a7601a45aedf3db98057"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-3.png",
+          "sha256": "c1ca4f09d457c00a8d7eafc2b71adf169290016a9cad7484c3b8c4c1f569e624"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-4.png",
+          "sha256": "1f16f81427b8edffbb00ebf096d0e8c6a29d7469503576a8aaf39f04ab56ae95"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-5.png",
+          "sha256": "553d36b47e91cba47dad0bde8e7f0ed871e3c5ac505194dbb2b4ec46fb8edff0"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-6.png",
+          "sha256": "d215a5ecd9d27fc9ee11d681560d7161532c25040ed4a0a4fab270e164db7532"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-7.png",
+          "sha256": "275d964eaf2d9b54e1acd55119204379bdead6e3ebd591afb8b2762e45edac08"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-8.png",
+          "sha256": "26827bf907e6af3a69c2a4555f2662e501f47189b6ab561c244f2c10874ffa41"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/engine-9.png",
+          "sha256": "e9198bd437156894d940a32f1638aa8b24bc6f69500a69d90b6e705ce3f7c1ad"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-0.png",
+          "sha256": "63874fe7b6e951b395a104114bf393c05c9c21c6253eeaed5d7f62d3d0d34bf3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-1.png",
+          "sha256": "0348ad514b05622fd694f3d65b69a84e3b74adc739bf96d3adf73daeeb76f4ff"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-2.png",
+          "sha256": "2b813e315449e03365079273eabe377fb8d8597b27976aaa0a8146aa3083d3ca"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-3.png",
+          "sha256": "d316eaf27f2e4fa51cbc7d0b90e1eda3d9c7e661d2b51bf86c9992d32d40bfd1"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-4.png",
+          "sha256": "e5510c8d0a8c2ef15accae4add5affcb006360847b44a106091bfaacce1b003e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-5.png",
+          "sha256": "f8ee1b20248b45dd3bedf69397d1d1f19db5e8c9c72e70a5372392d4bfc8f872"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-6.png",
+          "sha256": "5b377cabbce147891b388a24324f137752bf7f10b0c1692d1f22988600afcaea"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/roll-7.png",
+          "sha256": "3b80af7989f5d4e1926fe9ed0d6b07b0e29900dde9fe3b2df04ce3480decda36"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-0.png",
+          "sha256": "ad31601e7ded4fa816142e48b35f719ba52e2ea5a9e7f368d1ab8134585b6222"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-1.png",
+          "sha256": "8986d0eb525176f05aca16e7cab96d70ba4b922e238a562118843bb60b8649d4"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-10.png",
+          "sha256": "76b6f281a3ae01f4b0599f2962245a5b4403243b7fc083e94db3333b039be11d"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-11.png",
+          "sha256": "f24707b2ffaeeaf32742a0d700b2a008ebd20afcb7a4b90e294e5def6aec6946"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-12.png",
+          "sha256": "3b78d5295d409aa9be82f695e73afec954faf2c0b8787f2cd05253adaf4cec83"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-13.png",
+          "sha256": "3995b25b69fd4a6ac4fdcb2fb0e62262160d0dfd4dfbd0235c0240a0c96bba24"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-14.png",
+          "sha256": "6653d8ccd2c6ed987261f675382b5ff869d44b3570aef3e033c6869b5496ca3e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-15.png",
+          "sha256": "4bde56bf196ee61677d88fdf706d3783796382f2ddee219549924cd7498ab00e"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-2.png",
+          "sha256": "63874fe7b6e951b395a104114bf393c05c9c21c6253eeaed5d7f62d3d0d34bf3"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-3.png",
+          "sha256": "53dab1f880627f697ce1e6d5d5fd9131662967e433a30aafd13dd5788fddf513"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-4.png",
+          "sha256": "46d96a187e5374b85760e14a70fca5d4f46f0c766f4d83f5b84ecb2413759942"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-5.png",
+          "sha256": "14a08668c86e23b11bccb0424568805c958983db39daafb2330a3006f98f45b9"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-6.png",
+          "sha256": "a1844868e52048b2c38e2e82e6ad56243c1e5e4c50a9f62b3af15663fae4aea8"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-7.png",
+          "sha256": "04635ca9bbf57437669b954b2a7091df3973baa4bdb3ffd93ecb8f8f9da90bbf"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-8.png",
+          "sha256": "a969534d22cbcfa4794ee03c0289af7bc2f3ed97e184d6cb0fca6e7f1dd5e04a"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/study-9.png",
+          "sha256": "5ee13fe54848469a2a30af13805a531848ff556fd75675f3415fc68f943f6a89"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/turntable.gif",
+          "sha256": "c646aa9738e80a66b028e7c7e3061dfaa23cb7560fd35e64d31945d593d2f0eb"
+        },
+        {
+          "url": "demos/vehicle-bake/captures/c-surface-bake--v3/wire.png",
+          "sha256": "76dfad320551268106bbd672d7f462c9d280bb5a93a75ea2b2f7667a9254f3cb"
+        },
+        {
+          "url": "demos/vehicle-bake/index.html",
+          "sha256": "5006bf71c6287af39f36c76ff717c9302a009c80ec67a7edd2860a0022e45450"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-0.png",
+          "sha256": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-1.png",
+          "sha256": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-2.png",
+          "sha256": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-3.png",
+          "sha256": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-4.png",
+          "sha256": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-5.png",
+          "sha256": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-6.png",
+          "sha256": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453"
+        },
+        {
+          "url": "demos/vehicle-bake/reference/view-7.png",
+          "sha256": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3"
+        },
+        {
+          "url": "demos/vehicle-bake/review.css",
+          "sha256": "8978a13e38df5f0f6f04a5408f6a4d1a663e1487ea5a9d5ca82cc064985dbdd5"
+        },
+        {
+          "url": "demos/vehicle-bake/viewer.js",
+          "sha256": "48b69008a33e661af699526d760374000156f816005a255793c9a005ad60e2cb"
+        }
+      ],
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "c-surface-bake--v3",
+          "glbSha256": "6472c1747744b3051bdf58d0f5b1f39e8ebd2cb86538fab89b4c1150255eac19",
+          "triangles": 2597,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.913044751662273,
+              "minimumGap": 1.08395054726949,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913044751662273,
+              "minimumGap": 1.0946611056926114,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913044963984565,
+              "minimumGap": 0.6522590070081193,
+              "nearestBody": "Body"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913044963984565,
+              "minimumGap": 0.6394311334272658,
+              "nearestBody": "Body"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngineCapture": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "steering": "unqualified",
+        "art": "awaiting owner review",
+        "runtime": "not integrated"
+      }
+    }
+  ]
+}

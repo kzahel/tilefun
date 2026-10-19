@@ -1,0 +1,678 @@
+{
+  "route": "02-detailed-toon",
+  "title": "Detailed smooth coupe with pre-raster toon lighting",
+  "status": "complete",
+  "method": "Original dense longitudinal body loft with exact boolean wheel openings and curved fender patches; swept compound-curved cabin; detailed radial tires, split spokes, drilled rotors and calipers. Eevee Diffuse -> ShaderToRGB -> CONSTANT role ramp -> Emission supplies bands before reduction. 512px RGBA -> nearest centre-sample 128px -> constant (0,+28) -> fixed shared RGB lookup -> binary alpha -> cardinal one-pixel exterior ink. No dither, no per-view fitting or repaint.",
+  "evaluatedTriangles": 113888,
+  "evaluatedMeshCount": 184,
+  "nativeMeshCount": 145,
+  "curveCount": 39,
+  "nativeSize": [
+    128,
+    128
+  ],
+  "rawSize": [
+    512,
+    512
+  ],
+  "groundAnchor": [
+    64,
+    92
+  ],
+  "translation": [
+    0,
+    28
+  ],
+  "forward": "local -X",
+  "units": "metres; Z up",
+  "visualBounds": {
+    "min": [
+      -2.2819664478302,
+      -0.9930294156074524,
+      0.0
+    ],
+    "max": [
+      2.318033456802368,
+      0.9930294156074524,
+      1.0479257106781006
+    ]
+  },
+  "camera": {
+    "location": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "elevationDegrees": 50,
+    "orthographicScale": 7.2
+  },
+  "anglesDegrees": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "wheelGroundContacts": [
+    {
+      "name": "Front_Near",
+      "center": [
+        -1.3800116698711726,
+        -0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        -1.3800116698711726,
+        -0.7961605787718303,
+        0.0
+      ]
+    },
+    {
+      "name": "Front_Far",
+      "center": [
+        -1.3800116698711726,
+        0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        -1.3800116698711726,
+        0.7961605787718303,
+        0.0
+      ]
+    },
+    {
+      "name": "Rear_Near",
+      "center": [
+        1.3510603760976514,
+        -0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        1.3510603760976514,
+        -0.7961605787718303,
+        0.0
+      ]
+    },
+    {
+      "name": "Rear_Far",
+      "center": [
+        1.3510603760976514,
+        0.7961605787718303,
+        0.32811466276657253
+      ],
+      "axle": [
+        0,
+        1,
+        0
+      ],
+      "radius": 0.32811466276657253,
+      "tire_width": 0.2412607814460092,
+      "ground_contact": [
+        1.3510603760976514,
+        0.7961605787718303,
+        0.0
+      ]
+    }
+  ],
+  "renderEngine": "BLENDER_EEVEE",
+  "renderThreads": 4,
+  "palette": [
+    {
+      "rgb": [
+        127,
+        33,
+        76
+      ],
+      "hex": "#7f214c",
+      "roles": [
+        "Coachwork",
+        "Rear_lens"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 653
+    },
+    {
+      "rgb": [
+        168,
+        43,
+        45
+      ],
+      "hex": "#a82b2d",
+      "roles": [
+        "Coachwork"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 12
+    },
+    {
+      "rgb": [
+        217,
+        50,
+        50
+      ],
+      "hex": "#d93232",
+      "roles": [
+        "Coachwork"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 10
+    },
+    {
+      "rgb": [
+        252,
+        92,
+        70
+      ],
+      "hex": "#fc5c46",
+      "roles": [
+        "Coachwork",
+        "Rear_lens"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 6
+    },
+    {
+      "rgb": [
+        58,
+        58,
+        80
+      ],
+      "hex": "#3a3a50",
+      "roles": [
+        "Glazing",
+        "Rubber_intake"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 841
+    },
+    {
+      "rgb": [
+        86,
+        89,
+        114
+      ],
+      "hex": "#565972",
+      "roles": [
+        "Glazing",
+        "Machined_alloy"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 112
+    },
+    {
+      "rgb": [
+        115,
+        140,
+        168
+      ],
+      "hex": "#738ca8",
+      "roles": [
+        "Glazing"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 100
+    },
+    {
+      "rgb": [
+        164,
+        187,
+        213
+      ],
+      "hex": "#a4bbd5",
+      "roles": [
+        "Glazing",
+        "Warm_LED"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 426
+    },
+    {
+      "rgb": [
+        32,
+        29,
+        43
+      ],
+      "hex": "#201d2b",
+      "roles": [
+        "Rubber_intake"
+      ],
+      "source": "explicit named trim/ink supplement",
+      "sourcePixelOccurrences": 0
+    },
+    {
+      "rgb": [
+        70,
+        70,
+        94
+      ],
+      "hex": "#46465e",
+      "roles": [
+        "Rubber_intake"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 76
+    },
+    {
+      "rgb": [
+        143,
+        161,
+        200
+      ],
+      "hex": "#8fa1c8",
+      "roles": [
+        "Machined_alloy"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 114
+    },
+    {
+      "rgb": [
+        212,
+        212,
+        230
+      ],
+      "hex": "#d4d4e6",
+      "roles": [
+        "Machined_alloy",
+        "Warm_LED"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 56
+    },
+    {
+      "rgb": [
+        248,
+        248,
+        248
+      ],
+      "hex": "#f8f8f8",
+      "roles": [
+        "Machined_alloy",
+        "Warm_LED"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 22
+    },
+    {
+      "rgb": [
+        203,
+        42,
+        42
+      ],
+      "hex": "#cb2a2a",
+      "roles": [
+        "Rear_lens"
+      ],
+      "source": "compact-4/v1/refs exact pixel",
+      "sourcePixelOccurrences": 12
+    }
+  ],
+  "paletteSize": 14,
+  "colourCount": 13,
+  "perView": [
+    {
+      "view": 0,
+      "angleDegrees": 0,
+      "bounds": [
+        22,
+        69,
+        106,
+        105
+      ],
+      "opaquePixels": 2492,
+      "inkPixels": 232,
+      "colours": 13
+    },
+    {
+      "view": 1,
+      "angleDegrees": 45,
+      "bounds": [
+        27,
+        56,
+        102,
+        118
+      ],
+      "opaquePixels": 2409,
+      "inkPixels": 218,
+      "colours": 12
+    },
+    {
+      "view": 2,
+      "angleDegrees": 90,
+      "bounds": [
+        45,
+        54,
+        83,
+        122
+      ],
+      "opaquePixels": 2267,
+      "inkPixels": 186,
+      "colours": 13
+    },
+    {
+      "view": 3,
+      "angleDegrees": 135,
+      "bounds": [
+        26,
+        56,
+        101,
+        118
+      ],
+      "opaquePixels": 2409,
+      "inkPixels": 220,
+      "colours": 13
+    },
+    {
+      "view": 4,
+      "angleDegrees": 180,
+      "bounds": [
+        22,
+        69,
+        105,
+        105
+      ],
+      "opaquePixels": 2480,
+      "inkPixels": 236,
+      "colours": 12
+    },
+    {
+      "view": 5,
+      "angleDegrees": 225,
+      "bounds": [
+        26,
+        59,
+        101,
+        118
+      ],
+      "opaquePixels": 2367,
+      "inkPixels": 215,
+      "colours": 13
+    },
+    {
+      "view": 6,
+      "angleDegrees": 270,
+      "bounds": [
+        45,
+        56,
+        83,
+        122
+      ],
+      "opaquePixels": 2203,
+      "inkPixels": 184,
+      "colours": 13
+    },
+    {
+      "view": 7,
+      "angleDegrees": 315,
+      "bounds": [
+        27,
+        59,
+        102,
+        118
+      ],
+      "opaquePixels": 2367,
+      "inkPixels": 214,
+      "colours": 13
+    }
+  ],
+  "blendPath": "data/vehicle-style-study/02-detailed-toon/sports-coupe.blend",
+  "sourcePaths": [
+    "scripts/vehicle-style-study/02-detailed-toon/build.py",
+    "scripts/vehicle-style-study/02-detailed-toon/finish.py",
+    "scripts/vehicle-style-study/02-detailed-toon/verify_scene.py"
+  ],
+  "sourceHashes": {
+    "scripts/vehicle-style-study/02-detailed-toon/build.py": "9a3a4a4ae4ff6eccc5a399aac6bf7434b7bd1382e75774c8d29cdeddc67913c8",
+    "scripts/vehicle-style-study/02-detailed-toon/finish.py": "d1885a15a8019642713276fd0d305fe2913f375bc7a1523b80847c5a428d4d4b",
+    "scripts/vehicle-style-study/02-detailed-toon/verify_scene.py": "0da94e0d312322c2cfb8b30248224ce589a1f637d472ce29d3cf13b55bf4354d",
+    "data/vehicle-style-study/02-detailed-toon/sports-coupe.blend": "9d86174456e2b45ebb72d75aaad03537648b99ec4c059b6c27d9035abdf42ee6"
+  },
+  "referencePaths": [
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/east.png",
+      "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb"
+    },
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/north.png",
+      "sha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6"
+    },
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/south.png",
+      "sha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146"
+    },
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/west.png",
+      "sha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa"
+    }
+  ],
+  "commands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python scripts/vehicle-style-study/02-detailed-toon/build.py",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python scripts/vehicle-style-study/02-detailed-toon/verify_scene.py",
+    "python scripts/vehicle-style-study/02-detailed-toon/finish.py"
+  ],
+  "authoredPixelClusters": [],
+  "authoredClusterExplanation": "No per-view manual pixel clusters. Only deterministic shared-palette mapping and one-pixel exterior ink; all lamps, seams, spokes and glass borders originate in editable geometry/material roles.",
+  "limitations": [
+    "Experimental original car; no human acceptance or production integration.",
+    "High-detail scene is an offline sprite source, not a runtime geometry budget.",
+    "Fine brake drilling, split spokes and door seams are partly lost or merge at native size.",
+    "Fixed world-space lighting intentionally changes face bands across rotations.",
+    "Nearest reduction can produce isolated highlight/trim pixels; geometry detail alone does not author clean pixel clusters.",
+    "No ground shadow receiver; ground anchor and four tire contacts are explicit metadata.",
+    "Wheel rolls/steering were not animated or clearance-qualified."
+  ],
+  "inspection": {
+    "status": "performed",
+    "date": "2026-10-19",
+    "performedBy": "authoring agent visual inspection; not human approval",
+    "viewsInspected": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "surfaces": [
+      "native sheet at 1x",
+      "comparison panels native and nearest 4x",
+      "raw contact sheet all eight views",
+      "representative full 512px raw renders",
+      "decoded GIF contact sheet all eight frames"
+    ],
+    "observations": [
+      "Coherent sports-coupe silhouette, swept cabin and curved fenders.",
+      "Glazing borders and near/far wheel occlusion remain readable.",
+      "Headlamp shapes and intake blocks survive; fine wheel drilling, split spokes and door seams partly disappear.",
+      "Fixed lighting yields large rear-glass shade clusters and occasional isolated trim highlights.",
+      "Four connected fender patches repaired unsupported early arch lips; final exact pixels inspected after correction and contract sizing."
+    ],
+    "gifPlaybackInspection": "Decoded eight-frame contact sheet and duration metadata; no real-time playback claimed.",
+    "files": {
+      "public/demos/vehicle-style-study/02-detailed-toon/comparison.png": "e94ea41d1cc6c64310b3703ed16e52dae554a43c864c311d83033ed75f63ad2f",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-0.png": "f8c0eaa173a42a54adee4d544ad78a6b04467ec31f0a8126bd5d99f0de2a9289",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-1.png": "6f6340eb335de16769e3c43100e36b4a7a3ffcdad72d7f053f629091a141a5af",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-2.png": "51269c78e8b9c68d64101adc66bdd6f1537509d577ad3a46ba3c0f97d1ec77b2",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-3.png": "3e17d5921063bb9325bab0f1aa0163899c7c1db3e641b5cd54ee474fa8fee53d",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-4.png": "dacdbf6a47538d799420474947467406717f7dcf5b2f47f8aa6d951b53bf9546",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-5.png": "b519ff354c5630816c880841a10ce0f14bb602261598969c347e18a842f25ab0",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-6.png": "e363c92a3547a70c51bd36947c6aace3def49ced9ccaa8f6770b1e4281981d3f",
+      "public/demos/vehicle-style-study/02-detailed-toon/raw-7.png": "04116f807b251714108245bc94dfcaef8dc7c891c2871ea46afa38d19cf88a05",
+      "public/demos/vehicle-style-study/02-detailed-toon/sheet.png": "0b7b4dbb311d8dfbdfdb9c67fb295451d3806de50a274ae82ff4a7f088ecd33d",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-0.png": "89c32bb89540492645640fcc7c3d2c8b05edfcfaefe3b298c02539501d3ab912",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-1.png": "8fda9bcc914b2dda0b35ca8b64e3fbabc5ade0565e40ee43a708b0050b86247e",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-2.png": "afba52cf18213c3098e268c735263e618d43d92251895e39d32156a65a283106",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-3.png": "4576d07b8665ab9973d0e98b8d4ba54040d0d77935d9c2a31bcf6b93181d88e3",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-4.png": "c82f5fa2b76f4afead44f287739d3b0a4f0461b8cbaad9b94cc743073327cfe6",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-5.png": "4480c32d81660ad8410a0028614c649c2e8cccd088434d47928af391f1ffc1fe",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-6.png": "b55e50ec6087d7e99a0cf204513cf4d64c41a8a930f320cff6ef068596fafe77",
+      "public/demos/vehicle-style-study/02-detailed-toon/view-7.png": "f823ffd24debdb998fecd315b2821d3f83637d1f1fdf29f1d1b19e381524df6e",
+      "public/demos/vehicle-style-study/02-detailed-toon/turntable.gif": "38500360e7e37a6f40a7f1b67f9be15f5db0db4c9908de6a47c4234aeb535bd7",
+      "data/vehicle-style-study/02-detailed-toon/raw-contact.png": "9e6e19b3b61935b9ffdd681297e4d341f2593b881ef993b766c010feb5085d51",
+      "data/vehicle-style-study/02-detailed-toon/gif-contact.png": "358d16a890e9d8c65fc4c5ae3236a67a502777b41e501bd17f49724595e2551b",
+      "data/vehicle-style-study/02-detailed-toon/sheet-4x.png": "355aa1ff2b31e0a766ef65fda5e4c49fd8591d4a97406d3df509699f34640132"
+    }
+  },
+  "savedSceneValidation": {
+    "status": "passed",
+    "savedSceneReopened": true,
+    "evaluatedTriangles": 113888,
+    "evaluatedMeshCount": 184,
+    "overallDimensions": [
+      4.600000381469727,
+      1.9860589504241943,
+      1.0479257106781006
+    ],
+    "bounds": {
+      "min": [
+        -2.2819664478302,
+        -0.9930294752120972,
+        0.0
+      ],
+      "max": [
+        2.3180336952209473,
+        0.9930294752120972,
+        1.0479257106781006
+      ]
+    },
+    "toonRoleBandCounts": {
+      "Coachwork": 4,
+      "Glazing": 4,
+      "Machined_alloy": 4,
+      "Rear_lens": 3,
+      "Rubber_intake": 3,
+      "Warm_LED": 3
+    },
+    "groundAnchor": [
+      64.0,
+      92.00000762939453
+    ],
+    "tireMinimumWorldZ": {
+      "Rounded_performance_tire_Front_Near": 0.0,
+      "Rounded_performance_tire_Front_Far": 0.0,
+      "Rounded_performance_tire_Rear_Near": 0.0,
+      "Rounded_performance_tire_Rear_Far": 0.0
+    },
+    "fourIndependentWheelAxleFrames": true,
+    "renderer": "BLENDER_EEVEE",
+    "threads": 4,
+    "sceneUnmodified": true
+  },
+  "validation": {
+    "dimensions": true,
+    "binaryAlpha": true,
+    "sharedPalette": true,
+    "noClipping": true,
+    "gifFramesAndPixelParity": true,
+    "allRequiredOutputsExist": true
+  },
+  "outputs": [
+    {
+      "path": "raw-0.png",
+      "sha256": "f8c0eaa173a42a54adee4d544ad78a6b04467ec31f0a8126bd5d99f0de2a9289"
+    },
+    {
+      "path": "raw-1.png",
+      "sha256": "6f6340eb335de16769e3c43100e36b4a7a3ffcdad72d7f053f629091a141a5af"
+    },
+    {
+      "path": "raw-2.png",
+      "sha256": "51269c78e8b9c68d64101adc66bdd6f1537509d577ad3a46ba3c0f97d1ec77b2"
+    },
+    {
+      "path": "raw-3.png",
+      "sha256": "3e17d5921063bb9325bab0f1aa0163899c7c1db3e641b5cd54ee474fa8fee53d"
+    },
+    {
+      "path": "raw-4.png",
+      "sha256": "dacdbf6a47538d799420474947467406717f7dcf5b2f47f8aa6d951b53bf9546"
+    },
+    {
+      "path": "raw-5.png",
+      "sha256": "b519ff354c5630816c880841a10ce0f14bb602261598969c347e18a842f25ab0"
+    },
+    {
+      "path": "raw-6.png",
+      "sha256": "e363c92a3547a70c51bd36947c6aace3def49ced9ccaa8f6770b1e4281981d3f"
+    },
+    {
+      "path": "raw-7.png",
+      "sha256": "04116f807b251714108245bc94dfcaef8dc7c891c2871ea46afa38d19cf88a05"
+    },
+    {
+      "path": "view-0.png",
+      "sha256": "89c32bb89540492645640fcc7c3d2c8b05edfcfaefe3b298c02539501d3ab912"
+    },
+    {
+      "path": "view-1.png",
+      "sha256": "8fda9bcc914b2dda0b35ca8b64e3fbabc5ade0565e40ee43a708b0050b86247e"
+    },
+    {
+      "path": "view-2.png",
+      "sha256": "afba52cf18213c3098e268c735263e618d43d92251895e39d32156a65a283106"
+    },
+    {
+      "path": "view-3.png",
+      "sha256": "4576d07b8665ab9973d0e98b8d4ba54040d0d77935d9c2a31bcf6b93181d88e3"
+    },
+    {
+      "path": "view-4.png",
+      "sha256": "c82f5fa2b76f4afead44f287739d3b0a4f0461b8cbaad9b94cc743073327cfe6"
+    },
+    {
+      "path": "view-5.png",
+      "sha256": "4480c32d81660ad8410a0028614c649c2e8cccd088434d47928af391f1ffc1fe"
+    },
+    {
+      "path": "view-6.png",
+      "sha256": "b55e50ec6087d7e99a0cf204513cf4d64c41a8a930f320cff6ef068596fafe77"
+    },
+    {
+      "path": "view-7.png",
+      "sha256": "f823ffd24debdb998fecd315b2821d3f83637d1f1fdf29f1d1b19e381524df6e"
+    },
+    {
+      "path": "sheet.png",
+      "sha256": "0b7b4dbb311d8dfbdfdb9c67fb295451d3806de50a274ae82ff4a7f088ecd33d"
+    },
+    {
+      "path": "comparison.png",
+      "sha256": "e94ea41d1cc6c64310b3703ed16e52dae554a43c864c311d83033ed75f63ad2f"
+    },
+    {
+      "path": "turntable.gif",
+      "sha256": "38500360e7e37a6f40a7f1b67f9be15f5db0db4c9908de6a47c4234aeb535bd7"
+    }
+  ]
+}

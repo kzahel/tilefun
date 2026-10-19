@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "evaluatedTriangles": 234036,
+  "evaluatedMeshCount": 221,
+  "visualBounds": {
+    "min": [
+      -2.278141498565674,
+      -1.012291431427002,
+      0.0
+    ],
+    "max": [
+      2.3218586444854736,
+      1.012291431427002,
+      1.0317142009735107
+    ]
+  },
+  "visualLength": 4.6000001430511475,
+  "groundCenterRawPx": [
+    64.0,
+    64.00000762939453
+  ],
+  "groundCenterFinalPx": [
+    64.0,
+    92.00000762939453
+  ],
+  "fourTireContacts": [
+    {
+      "name": "Front_near_rubber_tire",
+      "center": [
+        -1.3600845336914062,
+        -0.8111932277679443,
+        0.3108764588832855
+      ],
+      "minimumZ": 0.0
+    },
+    {
+      "name": "Front_far_rubber_tire",
+      "center": [
+        -1.3600845336914062,
+        0.8111932277679443,
+        0.3108764588832855
+      ],
+      "minimumZ": 0.0
+    },
+    {
+      "name": "Rear_near_rubber_tire",
+      "center": [
+        1.3600845336914062,
+        -0.8111932277679443,
+        0.3108764588832855
+      ],
+      "minimumZ": 0.0
+    },
+    {
+      "name": "Rear_far_rubber_tire",
+      "center": [
+        1.3600845336914062,
+        0.8111932277679443,
+        0.3108764588832855
+      ],
+      "minimumZ": 0.0
+    }
+  ],
+  "cameraAndLightsFixed": true,
+  "renderer": "Cycles CPU / 16 samples / 4 threads",
+  "limitations": "No animated steering or collision clearance qualification."
+}

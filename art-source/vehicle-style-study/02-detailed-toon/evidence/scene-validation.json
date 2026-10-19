@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "savedSceneReopened": true,
+  "evaluatedTriangles": 113888,
+  "evaluatedMeshCount": 184,
+  "overallDimensions": [
+    4.600000381469727,
+    1.9860589504241943,
+    1.0479257106781006
+  ],
+  "bounds": {
+    "min": [
+      -2.2819664478302,
+      -0.9930294752120972,
+      0.0
+    ],
+    "max": [
+      2.3180336952209473,
+      0.9930294752120972,
+      1.0479257106781006
+    ]
+  },
+  "toonRoleBandCounts": {
+    "Coachwork": 4,
+    "Glazing": 4,
+    "Machined_alloy": 4,
+    "Rear_lens": 3,
+    "Rubber_intake": 3,
+    "Warm_LED": 3
+  },
+  "groundAnchor": [
+    64.0,
+    92.00000762939453
+  ],
+  "tireMinimumWorldZ": {
+    "Rounded_performance_tire_Front_Near": 0.0,
+    "Rounded_performance_tire_Front_Far": 0.0,
+    "Rounded_performance_tire_Rear_Near": 0.0,
+    "Rounded_performance_tire_Rear_Far": 0.0
+  },
+  "fourIndependentWheelAxleFrames": true,
+  "renderer": "BLENDER_EEVEE",
+  "threads": 4,
+  "sceneUnmodified": true
+}

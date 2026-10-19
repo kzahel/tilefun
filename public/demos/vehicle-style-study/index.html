@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sports car studies · Tilefun Workshop</title>
+    <link rel="stylesheet" href="gallery.css" />
+  </head>
+  <body>
+    <main>
+      <nav><a href="../../workshop.html">← Tilefun Workshop</a><span>ART STUDY / 141</span></nav>
+      <header>
+        <p class="eyebrow">ONE BRIEF, FOUR APPROACHES</p>
+        <h1>A new kind of fast.</h1>
+        <p class="intro">Can a detailed 3D sports car become convincing Tilefun pixel art?
+          Compare four independently authored red coupes, from raw render to final pixels.</p>
+        <p class="note">Exploratory art · each route has its own geometry · pending human review</p>
+      </header>
+      <section class="controls" aria-label="Comparison controls">
+        <button type="button" id="play" aria-pressed="false">Play rotation</button>
+        <label>Direction <input id="angle" type="range" min="0" max="7" value="1" /><output id="heading">45°</output></label>
+        <label>Size <select id="scale"><option value="1">Native · 1×</option><option value="2" selected>Pixels · 2×</option><option value="3">Pixels · 3×</option></select></label>
+        <label>Stage <select id="stage"><option value="view">Finished pixels</option><option value="raw">Raw 3D render</option></select></label>
+      </section>
+      <p id="status" role="status">Loading the experiments…</p>
+      <section id="routes" class="routes" aria-label="Four approaches"></section>
+      <section class="references">
+        <div><p class="eyebrow">THE STYLE REFERENCE</p><h2>Existing vehicle sprites</h2>
+          <p>Original pixels, shown at the same zoom. New cars use a common camera and world scale;
+            the original sprites have their own illustrated proportions.</p></div>
+        <div id="references" class="reference-cars"></div>
+      </section>
+      <section class="reading">
+        <h2>What to look for</h2>
+        <p>At native size, compare the silhouette, glass borders, wheel openings and red highlights.
+          Scrub the diagonals to see which details stay readable. Switch to the raw render to see
+          which choices come from geometry and which appear during pixel finishing.</p>
+        <p>These are workflow trials, so body design also affects the result. Producing good sprite
+          inputs does not yet prove those pixels will make a good texture on a simpler runtime model.</p>
+        <p><a href="overview.png">Open the full comparison image</a> · <a href="manifest.json">Evidence and validation</a></p>
+      </section>
+    </main>
+    <script type="module" src="gallery.js"></script>
+  </body>
+</html>

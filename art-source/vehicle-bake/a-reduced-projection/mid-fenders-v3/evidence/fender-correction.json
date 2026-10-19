@@ -1,0 +1,16 @@
+{
+  "cause": "Tire upper envelope reaches z=.68, while hood/deck behind the open pockets is lower. Narrow rolled arch tubes do not span the tread width; source and low mesh expose far-side tire half-moons.",
+  "fix": "Replace tube faces with four closed fender shoulders, joining actual coachwork inboard and spanning over tread with open lower arches. Existing body/UVs/wheel meshes/cameras are retained.",
+  "beforeTriangles": 1877,
+  "removedTubeTriangles": 90,
+  "addedTriangles": 512,
+  "afterTriangles": 2299,
+  "outerRadius": 0.405,
+  "innerRadius": 0.375,
+  "railsY": [
+    0.52,
+    0.7,
+    0.95
+  ],
+  "sameAtlasBytes": true
+}

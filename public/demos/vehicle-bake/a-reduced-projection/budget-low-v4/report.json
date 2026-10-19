@@ -1,0 +1,413 @@
+{
+  "status": "complete",
+  "route": "a-reduced-projection",
+  "revision": "budget-low-v4",
+  "method": "Per-component QEM on retained approach-3 source; exact owner and visibility-tested eight-view projection; source-owned atlas cleanup; five consolidated meshes.",
+  "exportWorldScale": 17.39130434782609,
+  "geometry": {
+    "triangles": 1376,
+    "meshes": 5,
+    "materials": 1,
+    "primitives": 5,
+    "vertices": 2265,
+    "glbBytes": 120904,
+    "textureBytes": 33160,
+    "extensionsUsed": [
+      "KHR_materials_unlit"
+    ],
+    "atlasSize": [
+      512,
+      512
+    ]
+  },
+  "wheels": [
+    {
+      "label": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -0.8700000047683716,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.913043540457021,
+        15.1304348655369
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        0.8700000047683716,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.913043540457021,
+        -15.1304348655369
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "RL",
+      "centerBlender": [
+        1.399999976158142,
+        -0.8700000047683716,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        24.34782567231552,
+        5.913043540457021,
+        15.1304348655369
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "RR",
+      "centerBlender": [
+        1.399999976158142,
+        0.8700000047683716,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        24.34782567231552,
+        5.913043540457021,
+        -15.1304348655369
+      ],
+      "wheel_radius": 5.913043478260871
+    }
+  ],
+  "sourceHashes": {
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-0.png": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-0.png": "c7ad1a5b461ee278779dfb89a4953ba2d6ed3ff4d347f4879a45831754b37b2f",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-1.png": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-1.png": "d0e85b521af8516815647dec7ca47c458b4b6b25ac304ab5212c621ceabdde10",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-2.png": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-2.png": "8103984b9d93167c07b12880461ea4a73170482bebc0fd05cd6047ec81fe940d",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-3.png": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-3.png": "dfb1f6c82eeee4bdb1749336ec9f72f9e777b1c011aba0c776a9b9524e89cabb",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-4.png": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-4.png": "dea83261ae6d7b6842f3b445cccf05b2fd314e6d49cc616bd3adefcab970d93a",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-5.png": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-5.png": "faad6a31ed47efa48460ef33ef93644e772d0cca99960f4abb9ab7d712493763",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-6.png": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-6.png": "c4dd062bb1617fcc9da3283172af051f9fb58d4ff50f0aff17f819023ad830df",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\view-7.png": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3",
+    "public\\demos\\vehicle-style-study\\03-guide-pixel-finish\\guide-7.png": "ada592847339a9cd9aff707c98a50dbf95427516532720251e7a7cc95a3e8f9a",
+    "art-source\\vehicle-style-study\\03-guide-pixel-finish\\sports-coupe.blend": "b636af46a30799126151e7cf9f8bfd2db3b6e3490a69787a7a3e8dbcc56f0296"
+  },
+  "sourcePath": "art-source/vehicle-bake/a-reduced-projection/budget-low-v4/car.blend",
+  "recipePath": "art-source/vehicle-bake/a-reduced-projection/budget-low-v4/recipe.json",
+  "transfer": {
+    "retainedTexels": 93985,
+    "observedTexels": 39942,
+    "unknownTexels": 54043,
+    "conflictingTexels": 24962,
+    "rejectedSamples": {
+      "exteriorBoundary": 47883,
+      "semanticMismatch": 259875,
+      "visibilityOrOwnerMismatch": 194078
+    },
+    "cleanup": [
+      "Source-parametric continuous dark glass frame and broad reflection bands",
+      "Solid intakes/panels and wheel rubber; source palette lamp/rim roles",
+      "Three world-space source-anchored deck slats; no exterior ink projected",
+      "Explicit source-role fallback for unseen texels; three-texel island dilation"
+    ]
+  },
+  "validation": {
+    "allEightRendered": true,
+    "nativePixelMethod": "512px actual mesh -> nearest128 -> constant (0,+28) -> alpha-only inward outline",
+    "actualGLBMetadataParsed": true,
+    "binaryAlpha": true,
+    "actualKHRMaterialsUnlit": true,
+    "actualEmbeddedAtlasEqualsDeliveredAtlas": true,
+    "atlasOpaque": true,
+    "sourcePaletteOnly": true,
+    "fullChromiumNoLights": true,
+    "actualIndependentWheelRoll": true,
+    "actualNeutralRollBodyAndFloorClear": true,
+    "collidingBodyNegativeControlRejected": true,
+    "sharedHarnessUnmodified": true,
+    "renderThreads": 4
+  },
+  "visualInspection": [
+    {
+      "views": [
+        0,
+        180
+      ],
+      "finding": "Coupe proportions, actual open wells and dark window frames retained. Sill and hood shade speckling remains; far-side mirror and wheel fragments alias at native scale."
+    },
+    {
+      "views": [
+        45,
+        135,
+        225,
+        315
+      ],
+      "finding": "Swept cabin, nose and rear deck remain coherent. Internal glass reflections/frame and three deck slats are atlas paint visible in actual GLB; slats alias at intermediate headings."
+    },
+    {
+      "views": [
+        90,
+        270
+      ],
+      "finding": "Front lamps, dark windshield aperture, rear window and rear light bar remain readable. Target direction-specific bright body ramps are only approximately preserved."
+    },
+    {
+      "headings": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ],
+      "evidence": "inspection-mesh.png, eight actual mesh renders inspected at native pixels and 4x nearest"
+    },
+    {
+      "headings": [
+        0.0,
+        22.5,
+        45.0,
+        67.5,
+        90.0,
+        112.5,
+        135.0,
+        157.5,
+        180.0,
+        202.5,
+        225.0,
+        247.5,
+        270.0,
+        292.5,
+        315.0,
+        337.5
+      ],
+      "evidence": "inspection-study.png and inspection-engine.png, actual full-Chromium shared GLB rendering with no lights inspected"
+    },
+    {
+      "wheelRollDegrees": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ],
+      "evidence": "inspection-roll.png, fixed body paint stable while wheel assembly turns; full neutral-roll cylinder proof retained separately"
+    },
+    {
+      "budgetFinding": "Minimum-budget comparison: broad dark side-glass wedge and coarse hubs visibly lose fidelity. Not preferred over mid; 1,332-triangle predecessor remains rejected."
+    }
+  ],
+  "limitations": [
+    "Owner art acceptance pending.",
+    "Target drawings contain view-dependent reflection and body shades; atlas commits to one surface colour.",
+    "Unknown/hidden texels explicitly filled by source palette semantic roles.",
+    "Steering held neutral; no nonzero-steer clearance claim.",
+    "About half the used UV texels lack an accepted projection sample; hidden/occluded and rejected boundary regions use explicit semantic fallback. See unknown/conflict masks.",
+    "QEM is not unconstrained one-click reduction: wheel radial envelope, buttress tip and open-pocket corrections plus component minima are necessary.",
+    "Source coachwork is 4.6 units long; mirrors/trim make actual exported total bounds slightly larger. Exact measured source-unit bounds are retained in clearance.json.",
+    "Family geometry, semantic patch coordinates and feature anchors are coupe-specific; no Beetle/bus/pickup validation."
+  ],
+  "replayCommands": [
+    "python scripts/vehicle-bake/a-reduced-projection/run.py --recipe art-source/vehicle-bake/a-reduced-projection/budget-low-v4/input-recipe.json --revision NEW_REVISION --triangles 1300 --capture"
+  ],
+  "artReviewStatus": "awaiting-owner-review",
+  "triangles": 1376,
+  "meshCount": 5,
+  "materialCount": 1,
+  "primitiveCount": 5,
+  "vertexCount": 2265,
+  "atlasSize": [
+    512,
+    512
+  ],
+  "glbBytes": 120904,
+  "glbSha256": "ccce8117bde3e42eb76b7af58aa55abac1b46c8411897a98474b0634e1409710",
+  "atlasSha256": "40332f093cf9347f8dd547b9fabd5a9474292b090d4583f92b384ff327137416",
+  "paletteColorCount": 15,
+  "paintRuleVersion": "exact-source-owner-visibility-projection-with-semantic-cleanup-v2",
+  "surfaceOwnershipEvidence": "art-source/vehicle-bake/a-reduced-projection/budget-low-v4/evidence/ownership.png",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "a-reduced-projection--budget-low-v4",
+    "glbSha256": "ccce8117bde3e42eb76b7af58aa55abac1b46c8411897a98474b0634e1409710",
+    "triangles": 1376,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.9130441247250465,
+        "minimumGap": 0.5998644386519123,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913045803365305,
+        "minimumGap": 0.35998766399238846,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913045629803742,
+        "minimumGap": 0.670816036608918,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044977011654,
+        "minimumGap": 0.6325320141837567,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "comparisonMetrics": [
+    {
+      "yaw": 0,
+      "sourceLowIoU": 0.9545269995939911,
+      "sourceEngineIoU": 0.9523615635179153,
+      "blenderAlphaBounds": [
+        23,
+        69,
+        106,
+        104
+      ],
+      "engineAlphaBounds": [
+        23,
+        69,
+        106,
+        104
+      ]
+    },
+    {
+      "yaw": 45,
+      "sourceLowIoU": 0.9636287625418061,
+      "sourceEngineIoU": 0.9647946353730092,
+      "blenderAlphaBounds": [
+        26,
+        56,
+        102,
+        119
+      ],
+      "engineAlphaBounds": [
+        26,
+        56,
+        102,
+        119
+      ]
+    },
+    {
+      "yaw": 90,
+      "sourceLowIoU": 0.9623393885688968,
+      "sourceEngineIoU": 0.9707446808510638,
+      "blenderAlphaBounds": [
+        46,
+        54,
+        82,
+        121
+      ],
+      "engineAlphaBounds": [
+        46,
+        54,
+        82,
+        121
+      ]
+    },
+    {
+      "yaw": 135,
+      "sourceLowIoU": 0.9636135508155583,
+      "sourceEngineIoU": 0.9660519698239731,
+      "blenderAlphaBounds": [
+        26,
+        55,
+        102,
+        119
+      ],
+      "engineAlphaBounds": [
+        26,
+        56,
+        102,
+        119
+      ]
+    },
+    {
+      "yaw": 180,
+      "sourceLowIoU": 0.9561154002438034,
+      "sourceEngineIoU": 0.9519543973941368,
+      "blenderAlphaBounds": [
+        22,
+        69,
+        105,
+        105
+      ],
+      "engineAlphaBounds": [
+        22,
+        69,
+        105,
+        105
+      ]
+    },
+    {
+      "yaw": 225,
+      "sourceLowIoU": 0.971318493150685,
+      "sourceEngineIoU": 0.9764150943396226,
+      "blenderAlphaBounds": [
+        26,
+        59,
+        102,
+        118
+      ],
+      "engineAlphaBounds": [
+        26,
+        59,
+        102,
+        118
+      ]
+    },
+    {
+      "yaw": 270,
+      "sourceLowIoU": 0.9760036917397323,
+      "sourceEngineIoU": 0.9833641404805915,
+      "blenderAlphaBounds": [
+        46,
+        56,
+        82,
+        121
+      ],
+      "engineAlphaBounds": [
+        46,
+        56,
+        82,
+        121
+      ]
+    },
+    {
+      "yaw": 315,
+      "sourceLowIoU": 0.9730423620025674,
+      "sourceEngineIoU": 0.9729961423060437,
+      "blenderAlphaBounds": [
+        26,
+        59,
+        102,
+        118
+      ],
+      "engineAlphaBounds": [
+        26,
+        59,
+        102,
+        118
+      ]
+    }
+  ]
+}

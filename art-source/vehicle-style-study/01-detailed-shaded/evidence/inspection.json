@@ -1,0 +1,51 @@
+{
+  "outputHashes": {
+    "comparison.png": "f615e717f9f8b82b733a2b86eee27a3af9db83191c630595cb0db8b34803afcd",
+    "native-contact.png": "11985ac0a50da484280590dc6af771ff19c1d0246df5851949d1f7f0758f9047",
+    "raw-0.png": "bb2d61e6af7ac1b8788c5c8ef8aa52c0b61a52beee7067f229357a756573472a",
+    "raw-1.png": "1b6c5a61426b8e72bd97f522d41e84f64de78f23de368409b4effaf03c86d4d3",
+    "raw-2.png": "519af90d6c6087bee042e62ff811fe46f6442348a1342a23d797273e2f97b3bf",
+    "raw-3.png": "04599c51e9f70158afa799c9a6a6b5aff457cd64205b9ba47049aa56ca684d4e",
+    "raw-4.png": "278fb403c59d87d1960d5cf3497d0fafc8b062813ddfb56efa38b696853103f3",
+    "raw-5.png": "c93b2327130e905f7b0662fc359ad995a2c3509bc08c3147fb49f7627c822fb3",
+    "raw-6.png": "daa381d92cdb5897b687e1056860b3157c143acdc9a5df0c1810f151549623c4",
+    "raw-7.png": "68fdab8d92dab58378681c51f1dd1d23762a52be10778afb38e54999a89f8028",
+    "raw-contact.png": "f24dad3eb2a03226eec27a1d6182b77f70f35d234af6c0e0e0bbab12425d9e40",
+    "sheet.png": "41f88e3a55ffc82fa386903f05314e7766f1393f32fc8d2d6f13860d8870b1d0",
+    "turntable.gif": "b9cd44173bda2a3fed7b285356cd020b30075fd7ad30447854238e900c94a9ba",
+    "view-0.png": "4e28003d368453fe64f28190af0d44df3fdfc4696ee5ca901098747ac2735aa5",
+    "view-1.png": "81e965f7cda5da333dbde5d2043c03fe06ede6ab118017947b5714551b4402f7",
+    "view-2.png": "0d8458af6a6d08255153f90296397551c60021afd73e3e96b0863f7e7612d37c",
+    "view-3.png": "64a0bd75a26d994453eb70c7ee54b060a03bb5bdc9b1b79f7a678c8a74d7daa5",
+    "view-4.png": "93a2d2f651dd804f84fa92cbd77c6481074a62d8cf01e629b40368c016e6cdca",
+    "view-5.png": "8d84a654c252583ab99bb2c7546fee75e555e711ae305352ced2ce18f8c897a2",
+    "view-6.png": "2f8b724dcfbdbd79a3a56f00969cfc134f43ba871e63dd403e2a7b7ac3fb5e19",
+    "view-7.png": "36e89f7157cf1a5377a05c88c3b13a8db38569e36df79c833ec66c4e5aebdc94"
+  },
+  "observations": [
+    {
+      "artifact": "raw-contact.png",
+      "inspection": "Viewed all eight final raw renders together. Coherent long nose and swept cabin; front LED blades differ clearly from rear round lamps; body and four wheels remain coherent through yaw."
+    },
+    {
+      "artifact": "native-contact.png and sheet.png",
+      "inspection": "Viewed true native pixels across all eight directions. Near-side wheels read as dark circles with alloy centers; far wheels are naturally occluded in side views and appear at the end-view silhouette. No detached tires or clipped canvas observed."
+    },
+    {
+      "artifact": "comparison.png",
+      "inspection": "Viewed labelled raw, reduced, native and 4x nearest stages plus unchanged compact references. Glass borders and roof/glass separation remain readable. Gloss highlights become broad pale-red clusters and some stair-step noise. Tiny grille, tire and rim details disappear or merge at native size."
+    },
+    {
+      "artifact": "raw-0.png, raw-1.png, raw-2.png, raw-5.png",
+      "inspection": "Inspected larger individual side, front-oblique, front and rear-oblique beauty renders. Curved panels, wheel arches, tires/rims, side/hood intakes, LED blades and circular rear lenses are genuinely geometric. No bitmap feature patch was substituted."
+    },
+    {
+      "artifact": "turntable.gif",
+      "inspection": "All eight encoded frames and 350ms durations decoded and compared exactly to checker-composited 4x nearest native sprites. No real-time player inspection claimed."
+    },
+    {
+      "artifact": "pass-1-bright-reflections/comparison.png",
+      "inspection": "Inspected first pass before changing lights: broad gray clearcoat patches were distracting. Final lighting reduces that defect without pixel redraw. Initial raw and packed outputs retained."
+    }
+  ]
+}

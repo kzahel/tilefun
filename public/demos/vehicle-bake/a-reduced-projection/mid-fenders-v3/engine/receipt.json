@@ -1,0 +1,602 @@
+{
+  "browser": "Bundled Playwright full Chromium / SwiftShader WebGL",
+  "noLights": true,
+  "sharedComponents": [
+    "CarMeshAsset(scene,1,{batch:true})",
+    "CarPixelOutline"
+  ],
+  "materialAudit": {
+    "materials": [
+      {
+        "mesh": "Body_static",
+        "type": "MeshBasicMaterial",
+        "unlit": true,
+        "map": true,
+        "emissiveMap": false
+      },
+      {
+        "mesh": "Wheel_FL_tire_hub",
+        "type": "MeshBasicMaterial",
+        "unlit": true,
+        "map": true,
+        "emissiveMap": false
+      },
+      {
+        "mesh": "Wheel_FR_tire_hub",
+        "type": "MeshBasicMaterial",
+        "unlit": true,
+        "map": true,
+        "emissiveMap": false
+      },
+      {
+        "mesh": "Wheel_RL_tire_hub",
+        "type": "MeshBasicMaterial",
+        "unlit": true,
+        "map": true,
+        "emissiveMap": false
+      },
+      {
+        "mesh": "Wheel_RR_tire_hub",
+        "type": "MeshBasicMaterial",
+        "unlit": true,
+        "map": true,
+        "emissiveMap": false
+      }
+    ],
+    "rig": [
+      {
+        "name": "Wheel_FL_Steer",
+        "parent": "Coupe_export_root",
+        "extras": {
+          "name": "Wheel_FL_Steer",
+          "steering_enabled": true,
+          "steer_axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "Wheel_FL_Roll",
+        "parent": "Wheel_FL_Steer",
+        "extras": {
+          "name": "Wheel_FL_Roll",
+          "wheel_radius": 5.913043478260871,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      {
+        "name": "Wheel_FR_Steer",
+        "parent": "Coupe_export_root",
+        "extras": {
+          "name": "Wheel_FR_Steer",
+          "steering_enabled": true,
+          "steer_axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "Wheel_FR_Roll",
+        "parent": "Wheel_FR_Steer",
+        "extras": {
+          "name": "Wheel_FR_Roll",
+          "wheel_radius": 5.913043478260871,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      {
+        "name": "Wheel_RL_Steer",
+        "parent": "Coupe_export_root",
+        "extras": {
+          "name": "Wheel_RL_Steer",
+          "steering_enabled": false,
+          "steer_axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "Wheel_RL_Roll",
+        "parent": "Wheel_RL_Steer",
+        "extras": {
+          "name": "Wheel_RL_Roll",
+          "wheel_radius": 5.913043478260871,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        }
+      },
+      {
+        "name": "Wheel_RR_Steer",
+        "parent": "Coupe_export_root",
+        "extras": {
+          "name": "Wheel_RR_Steer",
+          "steering_enabled": false,
+          "steer_axis_gltf": [
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      {
+        "name": "Wheel_RR_Roll",
+        "parent": "Wheel_RR_Steer",
+        "extras": {
+          "name": "Wheel_RR_Roll",
+          "wheel_radius": 5.913043478260871,
+          "roll_axis_gltf": [
+            0,
+            0,
+            -1
+          ]
+        }
+      }
+    ],
+    "stats": {
+      "triangles": 2299,
+      "vertices": 2982,
+      "primitives": 5,
+      "sourceMeshes": 5,
+      "drawMeshes": 5,
+      "bodyDrawCalls": 5
+    }
+  },
+  "independentRoll": [
+    {
+      "name": "Wheel_FL_Roll",
+      "changed": true,
+      "othersUnchanged": true
+    },
+    {
+      "name": "Wheel_FR_Roll",
+      "changed": true,
+      "othersUnchanged": true
+    },
+    {
+      "name": "Wheel_RL_Roll",
+      "changed": true,
+      "othersUnchanged": true
+    },
+    {
+      "name": "Wheel_RR_Roll",
+      "changed": true,
+      "othersUnchanged": true
+    }
+  ],
+  "samples": [
+    {
+      "name": "study-00.png",
+      "yaw": 0,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2388
+    },
+    {
+      "name": "study-01.png",
+      "yaw": 22.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2411
+    },
+    {
+      "name": "study-02.png",
+      "yaw": 45,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2331
+    },
+    {
+      "name": "study-03.png",
+      "yaw": 67.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2244
+    },
+    {
+      "name": "study-04.png",
+      "yaw": 90,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2207
+    },
+    {
+      "name": "study-05.png",
+      "yaw": 112.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2244
+    },
+    {
+      "name": "study-06.png",
+      "yaw": 135,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2333
+    },
+    {
+      "name": "study-07.png",
+      "yaw": 157.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2407
+    },
+    {
+      "name": "study-08.png",
+      "yaw": 180,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2388
+    },
+    {
+      "name": "study-09.png",
+      "yaw": 202.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2398
+    },
+    {
+      "name": "study-10.png",
+      "yaw": 225,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2301
+    },
+    {
+      "name": "study-11.png",
+      "yaw": 247.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2191
+    },
+    {
+      "name": "study-12.png",
+      "yaw": 270,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2148
+    },
+    {
+      "name": "study-13.png",
+      "yaw": 292.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2192
+    },
+    {
+      "name": "study-14.png",
+      "yaw": 315,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2304
+    },
+    {
+      "name": "study-15.png",
+      "yaw": 337.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2392
+    },
+    {
+      "name": "engine-00.png",
+      "yaw": 0,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3131
+    },
+    {
+      "name": "engine-01.png",
+      "yaw": 22.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3118
+    },
+    {
+      "name": "engine-02.png",
+      "yaw": 45,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3024
+    },
+    {
+      "name": "engine-03.png",
+      "yaw": 67.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2874
+    },
+    {
+      "name": "engine-04.png",
+      "yaw": 90,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2752
+    },
+    {
+      "name": "engine-05.png",
+      "yaw": 112.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2869
+    },
+    {
+      "name": "engine-06.png",
+      "yaw": 135,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3025
+    },
+    {
+      "name": "engine-07.png",
+      "yaw": 157.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3124
+    },
+    {
+      "name": "engine-08.png",
+      "yaw": 180,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3137
+    },
+    {
+      "name": "engine-09.png",
+      "yaw": 202.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3098
+    },
+    {
+      "name": "engine-10.png",
+      "yaw": 225,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2986
+    },
+    {
+      "name": "engine-11.png",
+      "yaw": 247.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2787
+    },
+    {
+      "name": "engine-12.png",
+      "yaw": 270,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2687
+    },
+    {
+      "name": "engine-13.png",
+      "yaw": 292.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2787
+    },
+    {
+      "name": "engine-14.png",
+      "yaw": 315,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 2977
+    },
+    {
+      "name": "engine-15.png",
+      "yaw": 337.5,
+      "stats": {
+        "triangles": 2299,
+        "vertices": 2982,
+        "primitives": 5,
+        "sourceMeshes": 5,
+        "drawMeshes": 5,
+        "bodyDrawCalls": 5
+      },
+      "opaque": 3101
+    }
+  ],
+  "errors": []
+}

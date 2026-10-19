@@ -1,0 +1,112 @@
+{
+  "sourceGLBSha256": "8298e37a89f61b314c641db310b295af22d46a3b4bfaaf4cca714bd65abf4d80",
+  "meshCount": 5,
+  "worldBounds": {
+    "min": [
+      -40.95110321044922,
+      -18.04039764404297,
+      -1.5834262967473478e-07
+    ],
+    "max": [
+      40.90251541137695,
+      17.99847984313965,
+      18.613826751708984
+    ],
+    "size": [
+      81.85361862182617,
+      36.03887748718262,
+      18.613826910051614
+    ]
+  },
+  "sourceUnitBoundsSize": [
+    4.706583070755004,
+    2.0722354555130003,
+    1.0702950473279675
+  ],
+  "wheels": [
+    {
+      "wheel": "FL",
+      "centerWorldBlender": [
+        -24.347827911376953,
+        -15.130435943603516,
+        5.913043975830078
+      ],
+      "actualRadialEnvelope": 5.913044686906577,
+      "metadataRadius": 5.913043478260871,
+      "axialSlab": [
+        -17.829938888549805,
+        -14.012710571289062
+      ],
+      "minimumBodyGap": 0.5998638764703816,
+      "closestTriangle": 1214,
+      "floorGapAcrossAllRolls": -7.110764990159169e-07,
+      "neutralMeshFloorGap": -1.5834262967473478e-07,
+      "allNeutralRollBodyClear": true,
+      "allNeutralRollFloorClear": true
+    },
+    {
+      "wheel": "FR",
+      "centerWorldBlender": [
+        -24.347827911376953,
+        15.130435943603516,
+        5.913043975830078
+      ],
+      "actualRadialEnvelope": 5.913043913608384,
+      "metadataRadius": 5.913043478260871,
+      "axialSlab": [
+        13.994623184204102,
+        17.850116729736328
+      ],
+      "minimumBodyGap": 0.3599895537493101,
+      "closestTriangle": 1421,
+      "floorGapAcrossAllRolls": 6.222169446346015e-08,
+      "neutralMeshFloorGap": 6.222169446346015e-08,
+      "allNeutralRollBodyClear": true,
+      "allNeutralRollFloorClear": true
+    },
+    {
+      "wheel": "RL",
+      "centerWorldBlender": [
+        24.347827911376953,
+        -15.130435943603516,
+        5.913043975830078
+      ],
+      "actualRadialEnvelope": 5.913044627817117,
+      "metadataRadius": 5.913043478260871,
+      "axialSlab": [
+        -17.792640686035156,
+        -13.990063667297363
+      ],
+      "minimumBodyGap": 0.6708170385955432,
+      "closestTriangle": 1258,
+      "floorGapAcrossAllRolls": -6.519870385801596e-07,
+      "neutralMeshFloorGap": 2.258837383806167e-07,
+      "allNeutralRollBodyClear": true,
+      "allNeutralRollFloorClear": true
+    },
+    {
+      "wheel": "RR",
+      "centerWorldBlender": [
+        24.347827911376953,
+        15.130435943603516,
+        5.913043975830078
+      ],
+      "actualRadialEnvelope": 5.913044834209611,
+      "metadataRadius": 5.913043478260871,
+      "axialSlab": [
+        13.957769393920898,
+        17.718595504760742
+      ],
+      "minimumBodyGap": 0.6325321569857998,
+      "closestTriangle": 1438,
+      "floorGapAcrossAllRolls": -8.583795327865573e-07,
+      "neutralMeshFloorGap": 1.5808110731541092e-07,
+      "allNeutralRollBodyClear": true,
+      "allNeutralRollFloorClear": true
+    }
+  ],
+  "allNeutralRollBodyClear": true,
+  "allNeutralRollFloorClear": true,
+  "method": "Clip every imported fixed-body triangle to each actual exported wheel axial slab; prove radial separation from entire moving vertex cylinder for all roll angles",
+  "steeringQualified": false
+}

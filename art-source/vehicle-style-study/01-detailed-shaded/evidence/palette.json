@@ -1,0 +1,74 @@
+{
+  "sourceReferences": [
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/east.png",
+      "sha256": "9b6791014dea4b7cf1924dcbbf63ccc890ad9dfa4999cc9d800d379c50fc58fb",
+      "size": [
+        64,
+        64
+      ]
+    },
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/north.png",
+      "sha256": "df1d9c0138cb07b627691a6ede1033cad5946f6702e2c7b02406143cc856d8d6",
+      "size": [
+        32,
+        64
+      ]
+    },
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/south.png",
+      "sha256": "0f92942e782069c78cf15868f6e5a62b70c71946b4b974106ad9d412b100b146",
+      "size": [
+        32,
+        64
+      ]
+    },
+    {
+      "path": "art-source/vehicle-models/compact-4/v1/refs/west.png",
+      "sha256": "32c9fb946a374cd1816e2d8c4b44a0f85f876d47cd10e19e6dc456dd0446c5aa",
+      "size": [
+        64,
+        64
+      ]
+    }
+  ],
+  "sampledColours": [
+    "#e35a5a",
+    "#3a3a50",
+    "#7f214c",
+    "#d3445c",
+    "#ba2758",
+    "#a11250",
+    "#c53458",
+    "#a4bbd5",
+    "#4a2a3d",
+    "#bad2e0",
+    "#8fa1c8",
+    "#565972",
+    "#738ca8",
+    "#46465e",
+    "#d4d4e6",
+    "#e18484",
+    "#565672",
+    "#7373a8",
+    "#ebe4f2",
+    "#f8f8f8",
+    "#838897",
+    "#cb2a2a",
+    "#968bab",
+    "#a82b2d",
+    "#d93232",
+    "#b9b9d5",
+    "#fc5c46"
+  ],
+  "namedSupplementRoles": {
+    "redDeepShadow": "#410c1a",
+    "redShadow": "#74121d",
+    "redMid": "#ab161e",
+    "redAutomotive": "#dd2025",
+    "redLit": "#fa4339",
+    "redClearcoat": "#ff7c64",
+    "trimOutline": "#1c1927"
+  }
+}

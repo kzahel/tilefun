@@ -1,0 +1,116 @@
+{
+  "triangles": 1324,
+  "exportedVertices": 1203,
+  "meshCount": 5,
+  "materialCount": 1,
+  "primitiveCount": 5,
+  "textureBytes": 4692,
+  "glbBytes": 55632,
+  "perMesh": [
+    {
+      "mesh": "Body_source_function_retopology",
+      "triangles": 860,
+      "vertices": 847
+    },
+    {
+      "mesh": "Wheel_FL_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    },
+    {
+      "mesh": "Wheel_FR_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    },
+    {
+      "mesh": "Wheel_RL_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    },
+    {
+      "mesh": "Wheel_RR_tire_hub",
+      "triangles": 116,
+      "vertices": 89
+    }
+  ],
+  "wheels": [
+    {
+      "wheel": "FL",
+      "centerGltfWorld": [
+        -24.34782728112259,
+        5.9130439459759145,
+        15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950926581629851,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    },
+    {
+      "wheel": "FR",
+      "centerGltfWorld": [
+        -24.34782728112259,
+        5.9130439459759145,
+        -15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950927730865056,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    },
+    {
+      "wheel": "RL",
+      "centerGltfWorld": [
+        24.34782728112259,
+        5.9130439459759145,
+        15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950927049938825,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    },
+    {
+      "wheel": "RR",
+      "centerGltfWorld": [
+        24.34782728112259,
+        5.9130439459759145,
+        -15.130435613549253
+      ],
+      "radiusWorld": 5.913043478260871,
+      "groundMinY": 5.183012490306282e-07,
+      "minimumBodyEnvelopeClearanceWorld": 0.9950930894331211,
+      "clearancePassed": true,
+      "independentRollPassed": true,
+      "resetPassed": true
+    }
+  ],
+  "boundsGltf": {
+    "min": [
+      -41.07696206070432,
+      5.183012490306282e-07,
+      -17.79046854004173
+    ],
+    "max": [
+      40.902514299510585,
+      18.608694136246413,
+      17.79046854004173
+    ],
+    "size": [
+      81.9794763602149,
+      18.608693617945164,
+      35.58093708008346
+    ]
+  },
+  "unlit": true,
+  "embeddedAtlas": true,
+  "embeddedAtlasPixelHash": "22932d93018040596d39d1e6e2e81e47d02e812778d2da79312344b86cd855d4",
+  "wheelCylinderNegativeProbePassed": true,
+  "actualExportWheelClearancePassed": true
+}

@@ -1,0 +1,72 @@
+{
+  "status": "pass",
+  "sceneOpenedFromSavedBlend": true,
+  "triangles": 1710,
+  "meshCount": 5,
+  "groundAnchorPixels": [
+    64,
+    92
+  ],
+  "cameraContract": true,
+  "cpuRenderThreads": 4,
+  "cpuSamples": 8,
+  "wheelRestContactZ": 0,
+  "fullCylinderClearance": [
+    {
+      "wheel": "Wheel_Front_L",
+      "conservativeFullCylinderBodyClearance": 0.0476022702750456
+    },
+    {
+      "wheel": "Wheel_Front_R",
+      "conservativeFullCylinderBodyClearance": 0.0476022702750456
+    },
+    {
+      "wheel": "Wheel_Rear_L",
+      "conservativeFullCylinderBodyClearance": 0.0476022702750456
+    },
+    {
+      "wheel": "Wheel_Rear_R",
+      "conservativeFullCylinderBodyClearance": 0.0476022702750456
+    }
+  ],
+  "independentRollProbes": [
+    {
+      "wheel": "Wheel_Front_L",
+      "probeRollDegrees": 37,
+      "movedVertices": 128,
+      "otherWheelAndBodyVerticesUnchanged": true
+    },
+    {
+      "wheel": "Wheel_Front_R",
+      "probeRollDegrees": 37,
+      "movedVertices": 128,
+      "otherWheelAndBodyVerticesUnchanged": true
+    },
+    {
+      "wheel": "Wheel_Rear_L",
+      "probeRollDegrees": 37,
+      "movedVertices": 128,
+      "otherWheelAndBodyVerticesUnchanged": true
+    },
+    {
+      "wheel": "Wheel_Rear_R",
+      "probeRollDegrees": 37,
+      "movedVertices": 128,
+      "otherWheelAndBodyVerticesUnchanged": true
+    }
+  ],
+  "visualBounds": {
+    "min": [
+      -2.308000087738037,
+      -1.0010000467300415,
+      0.0
+    ],
+    "max": [
+      2.309999942779541,
+      1.0010000467300415,
+      1.0499999523162842
+    ]
+  },
+  "axisExport": "Blender (X,Y,Z) -> glTF (X,Z,-Y); source -X forward stays -X; glTF +Y is up",
+  "limits": "Conservative full tire-cylinder vs all body triangles; no steering/suspension/physics/runtime qualification."
+}

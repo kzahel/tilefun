@@ -1,0 +1,281 @@
+{
+  "route": "03-guide-pixel-finish",
+  "title": "Sculpted coupe / semantic guides to authored pixel clusters",
+  "status": "complete",
+  "method": "Original high-detail coachwork rendered with fixed CPU Cycles lighting, followed by actual-scene visible emission-ID guides and semantic component pixel redraw.",
+  "evaluatedTriangles": 71390,
+  "evaluatedMeshCount": 97,
+  "sourceMeshCount": 36,
+  "nativeSize": [
+    128,
+    128
+  ],
+  "palette": {
+    "ink": "#3a3a50",
+    "warm_ink": "#4a2a3d",
+    "red_deep": "#7f214c",
+    "red_shadow": "#a11250",
+    "red_mid": "#c53458",
+    "red": "#d3445c",
+    "red_light": "#e35a5a",
+    "red_glint": "#e18484",
+    "glass_dark": "#565972",
+    "glass": "#738ca8",
+    "glass_light": "#a4bbd5",
+    "glass_glint": "#bad2e0",
+    "rim": "#838897",
+    "silver": "#d4d4e6",
+    "white": "#f8f8f8",
+    "tire_light": "#46465e",
+    "ruby": "#ba2758"
+  },
+  "colourCount": 16,
+  "paletteCount": 17,
+  "paletteSource": "art-source/vehicle-models/compact-4/v1/refs/*.png",
+  "supplementedColors": [],
+  "blendPath": "data/vehicle-style-study/03-guide-pixel-finish/sports-coupe.blend",
+  "sourcePaths": [
+    "scripts/vehicle-style-study/03-guide-pixel-finish/build.py",
+    "scripts/vehicle-style-study/03-guide-pixel-finish/finish.py",
+    "scripts/vehicle-style-study/03-guide-pixel-finish/audit_scene.py",
+    "scripts/vehicle-style-study/03-guide-pixel-finish/validate.py"
+  ],
+  "guidesPath": "data/vehicle-style-study/03-guide-pixel-finish/guides/",
+  "camera": {
+    "location": [
+      0.0,
+      -7.713451385498047,
+      9.192533493041992
+    ],
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "orthoScale": 7.2,
+    "elevationDegrees": 50
+  },
+  "angles": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "rawSize": [
+    512,
+    512
+  ],
+  "translation": [
+    0,
+    28
+  ],
+  "groundAnchor": [
+    64,
+    92
+  ],
+  "render": {
+    "engine": "Cycles CPU",
+    "threads": 4,
+    "samples": 16,
+    "guideSamples": 1
+  },
+  "authoredClusterRules": [
+    "One palette sampled from all four compact-4 frozen refs; no extra colors, adaptive quantization or dithering.",
+    "Visible class maps are the actual scene rendered with emission materials and identical geometry/camera; 4x4 plurality reduces IDs to native grid.",
+    "Every view is reduced to 128 square then translated by exactly (0,+28); no bounds fitting.",
+    "Body uses fixed raw-red luminance bands and a single constrained majority cleanup, replacing one-pixel shade islands inside the body only.",
+    "Glass is redrawn inside its projected aperture: one dark inner border, two broad component-relative tone bands, one continuous upper reflection strip. No stochastic reflections.",
+    "Tires use solid dark clusters with a restrained lower shade; rims remain actual projected spokes and rings, using two fixed silver tones.",
+    "Lamps use contiguous pale-core/blue-edge clusters and ruby rear clusters; no isolated bright pixels outside the actual projected lamp masks.",
+    "Intakes use a solid dark fill and restrained one-row muted lower accent for clusters at least four native pixels wide; no dotted grille noise.",
+    "Six fine scene rear-deck louvers are deliberately simplified into three continuous one-pixel slats at the actual projected endpoints of louvers 0/2/4; original intake-mask speckles in their bank are replaced with the neighboring body tone.",
+    "Projected panel-feature pixels are one-pixel ink; body silhouette has one-native-pixel inward ink so silhouette footprint is preserved.",
+    "All interior authored marks are clipped to actual visible semantic masks. Small glass fragments remain dark rather than inventing replacement windows."
+  ],
+  "views": [
+    {
+      "view": 0,
+      "bounds": [
+        22,
+        69,
+        106,
+        105
+      ],
+      "opaquePixels": 2448,
+      "colors": 15
+    },
+    {
+      "view": 1,
+      "bounds": [
+        26,
+        56,
+        103,
+        119
+      ],
+      "opaquePixels": 2379,
+      "colors": 14
+    },
+    {
+      "view": 2,
+      "bounds": [
+        46,
+        54,
+        82,
+        122
+      ],
+      "opaquePixels": 2252,
+      "colors": 12
+    },
+    {
+      "view": 3,
+      "bounds": [
+        25,
+        56,
+        102,
+        119
+      ],
+      "opaquePixels": 2379,
+      "colors": 15
+    },
+    {
+      "view": 4,
+      "bounds": [
+        22,
+        69,
+        106,
+        105
+      ],
+      "opaquePixels": 2448,
+      "colors": 14
+    },
+    {
+      "view": 5,
+      "bounds": [
+        25,
+        59,
+        102,
+        118
+      ],
+      "opaquePixels": 2323,
+      "colors": 15
+    },
+    {
+      "view": 6,
+      "bounds": [
+        46,
+        56,
+        82,
+        121
+      ],
+      "opaquePixels": 2162,
+      "colors": 14
+    },
+    {
+      "view": 7,
+      "bounds": [
+        26,
+        59,
+        103,
+        118
+      ],
+      "opaquePixels": 2323,
+      "colors": 15
+    }
+  ],
+  "commands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-style-study/03-guide-pixel-finish/build.py",
+    "python scripts/vehicle-style-study/03-guide-pixel-finish/finish.py",
+    "python scripts/vehicle-style-study/03-guide-pixel-finish/validate.py"
+  ],
+  "limitations": [
+    "Offline art experiment; no production approval, review registration or gameplay integration.",
+    "Fixed eight-direction pixel redraw; no temporal in-between guarantee.",
+    "Small far-side wheel and trim details can merge at this fixed scale.",
+    "Separate wheel pivots exist; exported runtime steering and full clearance qualification are outside this study.",
+    "Body luminance bands remain lighting-dependent while glass and accent bands are deliberately authored.",
+    "Nominal coachwork length is 4.6; splitter, curve bevels and exhaust extend the complete evaluated envelope to 4.713 x 2.066 x 1.070."
+  ],
+  "visualInspection": [
+    {
+      "artifact": "raw-sheet.png",
+      "inspection": "Viewed all eight 512px geometry captures: continuous hood and deck after short side-local cutter repair; near/far tires, roof, glazing and lamp placement inspected."
+    },
+    {
+      "artifact": "comparison.png",
+      "inspection": "Viewed every native and 4x final plus raw/ID stages. Glass borders and broad reflection bands read consistently. Rear louver speckles replaced by three continuous endpoint-guided slats; reviewed all diagonals."
+    },
+    {
+      "artifact": "sheet.png",
+      "inspection": "Viewed native 1024x128 strip at original resolution; checked coherent scale, glass, front/rear distinction and wheel positions."
+    },
+    {
+      "artifact": "data/vehicle-style-study/03-guide-pixel-finish/encoded-gif-contact.png",
+      "inspection": "Viewed all eight decoded GIF frames as a contact sheet; consistent placement and no missing frames. Continuous real-time playback was not used."
+    }
+  ],
+  "validation": {
+    "binaryAlpha": true,
+    "paletteMembership": true,
+    "sourcePaletteOnly": true,
+    "fixedCanvasAndTranslation": true,
+    "allRequiredFilesExist": true,
+    "gifFrames": 8,
+    "sheetSize": [
+      1024,
+      128
+    ],
+    "minimumTrianglesPassed": true,
+    "sceneAuditPassed": true,
+    "artifactAuditPassed": true,
+    "allSixGuideClassesPresent": true,
+    "finishedPixelsOutsideGuide": 0,
+    "tinyDisconnectedAlphaIslands": 0,
+    "gifDurationMs": 1760
+  },
+  "files": {
+    "raw-0.png": "620221b4053a45bd378decdcf2b8b623ad1e6b9fb51ad4b5c0be66d61321175b",
+    "raw-1.png": "c46dcd483a08a033485edff47058c97c352dce4dd7023fc3865d19e46e1369a7",
+    "raw-2.png": "8f671fb3ea0a5aba43812cc18962a353783f5b869ca2693422539edf23a14754",
+    "raw-3.png": "7388dcf03a9c04fe6b2fb8463641dce3fb30337bef9a865c89b596ac344e75e9",
+    "raw-4.png": "66f4c4cc3a802d1537700794d3d28309c06f6ced7634735b217b6d14fdb2f963",
+    "raw-5.png": "ca8186cfc384a48f8ff5b4e8a8cab779c21853b7656c5435cc83cce372e08494",
+    "raw-6.png": "ac4cd1305ed72ca337d0d4a59748a6a3cdfb5cf755193ab5aa79ea88e181ebd9",
+    "raw-7.png": "2f1803c5f00c7df43448d9b4731df85aaffd4a5692565a5e48e71acb0b00bb38",
+    "view-0.png": "f7e608a18af586d796e4da343105bc80d506c1766918ecdd5a57e13f2020b041",
+    "view-1.png": "10d9a9c9c3ee144c2fe90b38d0d0375077812684862cc8ff757b89f4eb6667a5",
+    "view-2.png": "437303c1432a1cfdfe0a173756d09dfd1e37912dec7036277235d9633316b931",
+    "view-3.png": "9f7c6745f80ca329b6f8c90f13b4c41d3eae8baf9a0ca2512c66ec451d1cca5d",
+    "view-4.png": "21a26438d738769d4dd77f1450a53e8efadbae7348177089530eb88199a6ab5c",
+    "view-5.png": "0da86cfd0c92f692ba02c86f224ac772a48cb280a90fe2af53f9587c776f73c5",
+    "view-6.png": "069b2afb1b3e1fda8ac0aecbc94db9d3d6b9b42793709ec9d16ba2c32d3aa453",
+    "view-7.png": "7d7812392a4ad9731c36a27c3a49264ee4927f93a98accce382d8524d29c0fd3",
+    "sheet.png": "a766fcb27b92553f48ecb4262eebf4ad730d4b5a5dc6256b81d94280a992961b",
+    "comparison.png": "831fd81e8df1696f4ded4119aad259f6c313f7802ec1de88bb9e9c68a14e9382",
+    "turntable.gif": "70d424d72f29edcde6c68c003ff6a88cc3f23d4225057c7d0b077051d36f859b"
+  },
+  "sceneAuditPath": "data/vehicle-style-study/03-guide-pixel-finish/scene-audit.json",
+  "validationPath": "data/vehicle-style-study/03-guide-pixel-finish/validation.json",
+  "bounds": {
+    "min": [
+      -2.3618435859680176,
+      -1.0329999923706055,
+      2.9802322387695312e-08
+    ],
+    "max": [
+      2.3513123989105225,
+      1.0329999923706055,
+      1.0699999332427979
+    ],
+    "size": [
+      4.71315598487854,
+      2.065999984741211,
+      1.0699999034404755
+    ]
+  },
+  "nominalCoachworkLength": 4.6,
+  "pixelFreeze": "Final PNG/GIF pixels frozen after visual inspection; report hashes identify exact candidate bytes."
+}

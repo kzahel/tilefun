@@ -15,6 +15,13 @@ at each authoring, retention, integration or review checkpoint.
 
 ## Scope and status
 
+Original vehicles beyond the source bank have their own
+[topic and queue](original-vehicles.md). [141](../tactical/141-sports-car-style-experiments.md)
+compares initial art routes; [142](../tactical/142-red-car-low-poly-pipeline.md)
+now refines the preferred guide-finished red coupe into low-poly GLBs and reusable
+instructions. This study adds no source-bank row or game integration; the 45-set
+counts below continue to describe the existing sprite ports.
+
 The inventory is the 45 unique `vehicleId` values in
 [`vehicles-v1.json`](../../src/traffic/vehicles-v1.json): 180 directional views.
 Keep those IDs, including `sedan-12` and the `unindexed-sedan-*` names. Both

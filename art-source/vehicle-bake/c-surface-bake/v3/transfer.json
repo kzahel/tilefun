@@ -1,0 +1,551 @@
+{
+  "algorithm": "source-corner barycentric color -> nearest exact source palette; missing paint ink; four atlas-space padding rounds",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "warm_ink": [
+      74,
+      42,
+      61
+    ],
+    "red_deep": [
+      127,
+      33,
+      76
+    ],
+    "red_shadow": [
+      161,
+      18,
+      80
+    ],
+    "red_mid": [
+      197,
+      52,
+      88
+    ],
+    "red": [
+      211,
+      68,
+      92
+    ],
+    "red_light": [
+      227,
+      90,
+      90
+    ],
+    "red_glint": [
+      225,
+      132,
+      132
+    ],
+    "glass_dark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glass_light": [
+      164,
+      187,
+      213
+    ],
+    "glass_glint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "tire_light": [
+      70,
+      70,
+      94
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ]
+  },
+  "coveredTexels": 148860,
+  "normalRayHitTexels": 148711,
+  "nearestFallbackTexels": 149,
+  "ambiguousTexels": 14344,
+  "unknownTexels": 0,
+  "coveredFraction": 0.5678558349609375,
+  "rayDistancePercentiles": [
+    0.00019494650041451678,
+    0.004726432543247941,
+    0.021499991416931152,
+    0.1243000254034996
+  ],
+  "quantizationChangedTexels": 22100,
+  "paddingRounds": 4,
+  "screenInteriorPatches": 0,
+  "owners": [
+    {
+      "lowPart": "LOW_Continuous sculpted coachwork with cut arches",
+      "sourceOwners": [
+        "Continuous sculpted coachwork with cut arches"
+      ],
+      "triangles": 1119,
+      "coveredTexels": 96668,
+      "normalRayHits": 96654,
+      "nearestFallback": 14
+    },
+    {
+      "lowPart": "LOW_Front windshield",
+      "sourceOwners": [
+        "Front windshield"
+      ],
+      "triangles": 32,
+      "coveredTexels": 4284,
+      "normalRayHits": 4284,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Rear glass",
+      "sourceOwners": [
+        "Rear glass"
+      ],
+      "triangles": 32,
+      "coveredTexels": 4349,
+      "normalRayHits": 4349,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Roof",
+      "sourceOwners": [
+        "Roof"
+      ],
+      "triangles": 79,
+      "coveredTexels": 6678,
+      "normalRayHits": 6678,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Side glass -1",
+      "sourceOwners": [
+        "Side glass -1"
+      ],
+      "triangles": 31,
+      "coveredTexels": 2915,
+      "normalRayHits": 2915,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_A pillar -1",
+      "sourceOwners": [
+        "A pillar -1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 713,
+      "normalRayHits": 713,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Rear buttress -1",
+      "sourceOwners": [
+        "Rear buttress -1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 648,
+      "normalRayHits": 642,
+      "nearestFallback": 6
+    },
+    {
+      "lowPart": "LOW_Roof drip rail -1",
+      "sourceOwners": [
+        "Roof drip rail -1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 533,
+      "normalRayHits": 533,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Sculpted flank intake -1",
+      "sourceOwners": [
+        "Sculpted flank intake -1"
+      ],
+      "triangles": 3,
+      "coveredTexels": 398,
+      "normalRayHits": 398,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Mirror stalk",
+      "sourceOwners": [
+        "Mirror stalk"
+      ],
+      "triangles": 12,
+      "coveredTexels": 119,
+      "normalRayHits": 119,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Aerodynamic mirror",
+      "sourceOwners": [
+        "Aerodynamic mirror"
+      ],
+      "triangles": 32,
+      "coveredTexels": 360,
+      "normalRayHits": 360,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Side glass 1",
+      "sourceOwners": [
+        "Side glass 1"
+      ],
+      "triangles": 31,
+      "coveredTexels": 2922,
+      "normalRayHits": 2922,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_A pillar 1",
+      "sourceOwners": [
+        "A pillar 1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 634,
+      "normalRayHits": 634,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Rear buttress 1",
+      "sourceOwners": [
+        "Rear buttress 1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 629,
+      "normalRayHits": 619,
+      "nearestFallback": 10
+    },
+    {
+      "lowPart": "LOW_Roof drip rail 1",
+      "sourceOwners": [
+        "Roof drip rail 1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 614,
+      "normalRayHits": 614,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Sculpted flank intake 1",
+      "sourceOwners": [
+        "Sculpted flank intake 1"
+      ],
+      "triangles": 3,
+      "coveredTexels": 408,
+      "normalRayHits": 408,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Mirror stalk.001",
+      "sourceOwners": [
+        "Mirror stalk.001"
+      ],
+      "triangles": 12,
+      "coveredTexels": 108,
+      "normalRayHits": 108,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Aerodynamic mirror.001",
+      "sourceOwners": [
+        "Aerodynamic mirror.001"
+      ],
+      "triangles": 32,
+      "coveredTexels": 355,
+      "normalRayHits": 355,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Swept front LED -1",
+      "sourceOwners": [
+        "Swept front LED -1"
+      ],
+      "triangles": 8,
+      "coveredTexels": 286,
+      "normalRayHits": 286,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Front corner vent -1",
+      "sourceOwners": [
+        "Front corner vent -1"
+      ],
+      "triangles": 4,
+      "coveredTexels": 157,
+      "normalRayHits": 157,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Rear blade lamp -1",
+      "sourceOwners": [
+        "Rear blade lamp -1"
+      ],
+      "triangles": 4,
+      "coveredTexels": 180,
+      "normalRayHits": 180,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Tail lamp inner signature -1",
+      "sourceOwners": [
+        "Tail lamp inner signature -1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 165,
+      "normalRayHits": 165,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Swept front LED 1",
+      "sourceOwners": [
+        "Swept front LED 1"
+      ],
+      "triangles": 8,
+      "coveredTexels": 287,
+      "normalRayHits": 287,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Front corner vent 1",
+      "sourceOwners": [
+        "Front corner vent 1"
+      ],
+      "triangles": 4,
+      "coveredTexels": 140,
+      "normalRayHits": 140,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Rear blade lamp 1",
+      "sourceOwners": [
+        "Rear blade lamp 1"
+      ],
+      "triangles": 4,
+      "coveredTexels": 180,
+      "normalRayHits": 180,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Tail lamp inner signature 1",
+      "sourceOwners": [
+        "Tail lamp inner signature 1"
+      ],
+      "triangles": 12,
+      "coveredTexels": 165,
+      "normalRayHits": 165,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Central nose grille",
+      "sourceOwners": [
+        "Central nose grille"
+      ],
+      "triangles": 4,
+      "coveredTexels": 438,
+      "normalRayHits": 438,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Front splitter",
+      "sourceOwners": [
+        "Front splitter"
+      ],
+      "triangles": 18,
+      "coveredTexels": 926,
+      "normalRayHits": 860,
+      "nearestFallback": 66
+    },
+    {
+      "lowPart": "LOW_Rear diffuser",
+      "sourceOwners": [
+        "Rear diffuser"
+      ],
+      "triangles": 3,
+      "coveredTexels": 1115,
+      "normalRayHits": 1115,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Integrated rear lip",
+      "sourceOwners": [
+        "Integrated rear lip"
+      ],
+      "triangles": 18,
+      "coveredTexels": 1273,
+      "normalRayHits": 1273,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Tire_FL",
+      "sourceOwners": [
+        "Rounded performance tire",
+        "Recessed wheel barrel",
+        "Torus.003",
+        "Swept forged spoke",
+        "Swept forged spoke.001",
+        "Swept forged spoke.002",
+        "Swept forged spoke.003",
+        "Swept forged spoke.004",
+        "Sphere"
+      ],
+      "triangles": 192,
+      "coveredTexels": 3020,
+      "normalRayHits": 3020,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Hub_FL",
+      "sourceOwners": [
+        "Rounded performance tire",
+        "Recessed wheel barrel",
+        "Torus.003",
+        "Swept forged spoke",
+        "Swept forged spoke.001",
+        "Swept forged spoke.002",
+        "Swept forged spoke.003",
+        "Swept forged spoke.004",
+        "Sphere"
+      ],
+      "triangles": 60,
+      "coveredTexels": 2021,
+      "normalRayHits": 2004,
+      "nearestFallback": 17
+    },
+    {
+      "lowPart": "LOW_Tire_FR",
+      "sourceOwners": [
+        "Rounded performance tire.001",
+        "Recessed wheel barrel.001",
+        "Torus.005",
+        "Swept forged spoke.005",
+        "Swept forged spoke.006",
+        "Swept forged spoke.007",
+        "Swept forged spoke.008",
+        "Swept forged spoke.009",
+        "Sphere.001"
+      ],
+      "triangles": 192,
+      "coveredTexels": 3013,
+      "normalRayHits": 3013,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Hub_FR",
+      "sourceOwners": [
+        "Rounded performance tire.001",
+        "Recessed wheel barrel.001",
+        "Torus.005",
+        "Swept forged spoke.005",
+        "Swept forged spoke.006",
+        "Swept forged spoke.007",
+        "Swept forged spoke.008",
+        "Swept forged spoke.009",
+        "Sphere.001"
+      ],
+      "triangles": 60,
+      "coveredTexels": 2068,
+      "normalRayHits": 2046,
+      "nearestFallback": 22
+    },
+    {
+      "lowPart": "LOW_Tire_RL",
+      "sourceOwners": [
+        "Rounded performance tire.002",
+        "Recessed wheel barrel.002",
+        "Torus.007",
+        "Swept forged spoke.010",
+        "Swept forged spoke.011",
+        "Swept forged spoke.012",
+        "Swept forged spoke.013",
+        "Swept forged spoke.014",
+        "Sphere.002"
+      ],
+      "triangles": 192,
+      "coveredTexels": 3017,
+      "normalRayHits": 3017,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Hub_RL",
+      "sourceOwners": [
+        "Rounded performance tire.002",
+        "Recessed wheel barrel.002",
+        "Torus.007",
+        "Swept forged spoke.010",
+        "Swept forged spoke.011",
+        "Swept forged spoke.012",
+        "Swept forged spoke.013",
+        "Swept forged spoke.014",
+        "Sphere.002"
+      ],
+      "triangles": 60,
+      "coveredTexels": 2012,
+      "normalRayHits": 2012,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Tire_RR",
+      "sourceOwners": [
+        "Rounded performance tire.003",
+        "Recessed wheel barrel.003",
+        "Torus.009",
+        "Swept forged spoke.015",
+        "Swept forged spoke.016",
+        "Swept forged spoke.017",
+        "Swept forged spoke.018",
+        "Swept forged spoke.019",
+        "Sphere.003"
+      ],
+      "triangles": 192,
+      "coveredTexels": 3025,
+      "normalRayHits": 3025,
+      "nearestFallback": 0
+    },
+    {
+      "lowPart": "LOW_Hub_RR",
+      "sourceOwners": [
+        "Rounded performance tire.003",
+        "Recessed wheel barrel.003",
+        "Torus.009",
+        "Swept forged spoke.015",
+        "Swept forged spoke.016",
+        "Swept forged spoke.017",
+        "Swept forged spoke.018",
+        "Swept forged spoke.019",
+        "Sphere.003"
+      ],
+      "triangles": 60,
+      "coveredTexels": 2037,
+      "normalRayHits": 2023,
+      "nearestFallback": 14
+    }
+  ]
+}
