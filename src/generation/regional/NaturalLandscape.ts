@@ -3,6 +3,7 @@ import { TerrainId } from "../../autotile/TerrainId.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
+import { AQUATIC_HUNTER_PROFILES } from "../../wildlife/AquaticHunters.js";
 import { createDeer, DEER_TYPE } from "../../wildlife/Deer.js";
 import {
   createFauna,
@@ -304,10 +305,11 @@ export class NaturalLandscape {
       refuge: NaturalPond,
       home: { wx: number; wy: number },
       positions: { wx: number; wy: number }[],
+      identityPrefix = `wildlife:${species}`,
     ) => {
       const profile = FAUNA_PROFILES.find((p) => p.species === species);
       if (!profile) return;
-      const groupId = `wildlife:${species}:${this.world.seed}:${refuge.id}`;
+      const groupId = `${identityPrefix}:${this.world.seed}:${refuge.id}`;
       positions.forEach((point, i) => {
         if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
         const fauna = createFauna(species, point.wx, point.wy).fauna;
@@ -354,7 +356,10 @@ export class NaturalLandscape {
           )
         ];
       if (!species) return;
-      const p = FAUNA_PROFILES.find((p) => p.species === species);
+      const hunter = AQUATIC_HUNTER_PROFILES.find((p) => p.species === species);
+      const p =
+        FAUNA_PROFILES.find((p) => p.species === species) ??
+        (hunter && { ...hunter, ...hunter.expansion });
       if (!p || !["pond", "deep"].includes(p.habitat)) return;
       if (p.habitat === "deep" && !refuge.id.startsWith("lagoon:")) return;
       const home = {
@@ -387,7 +392,40 @@ export class NaturalLandscape {
           }
         }
       }
-      add(species, refuge, home, positions);
+      if (hunter) {
+        positions.forEach((point, i) => {
+          if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+          const predator = required(createPredator(hunter.species, point.wx, point.wy).predator);
+          predator.home = { ...home };
+          predator.randomState =
+            Math.floor(valueNoise(refuge.x, refuge.y, this.world.seed + 8363 + i) * 4294967296) >>>
+            0;
+          actors.push({
+            featureId: `wildlife:${hunter.species}:${this.world.seed}:${refuge.id}:${i}`,
+            type: predatorType(hunter.species),
+            wx: point.wx,
+            wy: point.wy,
+            route: [],
+            predator,
+          });
+        });
+        // Dedicated nearby fish keep hunts local without moving original water owners.
+        const prey = [
+          { wx: home.wx - 56, wy: home.wy + 32 },
+          { wx: home.wx + 56, wy: home.wy + 32 },
+          { wx: home.wx, wy: home.wy - 64 },
+        ];
+        const wet = prey.filter((p) =>
+          [-8, 0, 8].every((dx) =>
+            [-8, 0, 8].every((dy) =>
+              [TerrainId.DeepWater, TerrainId.ShallowWater].includes(
+                this.terrain((p.wx + dx) / 16, (p.wy + dy) / 16),
+              ),
+            ),
+          ),
+        );
+        add("fish", refuge, home, wet, `wildlife:water-prey:${hunter.species}:fish`);
+      } else add(species, refuge, home, positions);
     };
     if (pond) {
       expansion(pond);

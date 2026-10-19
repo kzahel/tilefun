@@ -377,3 +377,23 @@ assertion; distinguish them from newly introduced failures.
   Forty-eight new entries plus sixteen delivered leave 132 remaining. Shark,
   hammerhead and orca sources are underway with water-aware hunting next.
   Every exact new identity remains pending human art review.
+
+- 01:17 UTC: shark, hammerhead shark and orca completed with aquatic hunting.
+  Fresh rigid bodies have linked jaws, attached pectoral fins and three fixed
+  tail links. Sharks sweep vertical tails sideways; orca moves horizontal
+  flukes vertically. Countershading follows actual body surface faces. Each bank
+  has 324 poses, independent swim/pursuit and feeding/display. Saved-scene audits
+  check 1,968 tail links, 2,592 fin attachments, loop closure, fixed geometry and
+  native heave/pitch. Three ten-artifact replays and 1,944 exact crops pass.
+  Shared predator AI retains dry land routes and requires complete deep-water
+  footprints for ocean hunters, including replacement predators. Fixed existing
+  lagoon slots add nearby natural fish without altering old water owners.
+  Explicit diets include orca → either shark, without reciprocal cycles. Actual
+  generated fish meals retain replacement lineage/pose through reload; placed
+  fish stay gone, and an unavailable replacement site prevents natural catches.
+  Real lagoon labs frame bank/water at .4 zoom. The world editor tests use .3
+  zoom after dry-bank arrival so their water placement stays on screen.
+  Typecheck/lint/build, 1,104-candidate manifest, nine browser cases and streaming
+  readiness pass. Full bounded units: 3,405 pass, five known Windows failures,
+  ten skipped. Fifty-one new entries plus sixteen delivered leave 129 remaining.
+  Ten small-mammal sources are underway. Exact pixels remain pending review.

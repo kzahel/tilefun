@@ -144,7 +144,18 @@ twenty browser cases, typecheck/lint/build and streaming readiness pass.
 Full bounded units: 3,383 pass, five known Windows failures, ten skipped;
 initial unbounded contention timeouts disappear with two test workers.
 Forty-eight new entries plus sixteen delivered leave 132 remaining.
-Shark, hammerhead and orca are the next sources, including water-aware hunting.
+Shark, hammerhead and orca now also hunt in deep lagoons. Their rigid bodies,
+fixed tail chains, attached fins and linked jaws have independent swimming,
+feeding and pursuit clips. Native countershading follows source surface faces.
+Complete collider footprints constrain shared hunting paths and replacement
+predators to deep water; existing land hunters keep dry paths. Fixed lagoon
+slots add nearby legal natural fish while preserving earlier water owners.
+Explicit diets permit orca to eat either shark; no reciprocal cycles. Generated
+fish meals persist replacement lineage and feeding pose through reload; placed
+fish stay finite. Three source replays, 1,944 exact crops, nine browser cases,
+typecheck/lint/build and streaming readiness pass. Full bounded units: 3,405
+pass, five known Windows failures, ten skipped. Fifty-one new entries plus
+sixteen delivered leave 129 remaining. Ten small-mammal sources are underway.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion

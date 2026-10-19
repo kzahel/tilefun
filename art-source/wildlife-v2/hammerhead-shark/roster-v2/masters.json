@@ -1,0 +1,13 @@
+{
+  "identity": "hammerhead-shark-roster-v2-pixels-01",
+  "palette": {
+    "B": "#998b78",
+    "H": "#afa18a",
+    "W": "#e3dcc7",
+    "M": "#665d52",
+    "E": "#22282b",
+    "T": "#f5ecd6",
+    "G": "#c4b99e"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

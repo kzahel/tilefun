@@ -447,3 +447,8 @@
 !rhinoceros/roster-v2/*
 !warthog/roster-v2/*
 !hippopotamus/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!shark/roster-v2/*
+!hammerhead-shark/roster-v2/*
+!orca/roster-v2/*

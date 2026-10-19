@@ -2,12 +2,12 @@ import { required } from "../art/ArtCatalog.js";
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import { AQUATIC_HUNTER_PROFILES, type AquaticHunterSpecies } from "./AquaticHunters.js";
 import {
   FIERCE_PROFILES,
   type FierceBehaviorProfile,
   type FierceSpecies,
 } from "./FierceCreatures.js";
-
 import { NATURAL_HUNTER_PROFILES, type NaturalHunterSpecies } from "./NaturalHunters.js";
 
 const ORIGINAL_PREDATORS = [
@@ -40,7 +40,8 @@ const ORIGINAL_PREDATORS = [
 export type PredatorSpecies =
   | (typeof ORIGINAL_PREDATORS)[number]["species"]
   | FierceSpecies
-  | NaturalHunterSpecies;
+  | NaturalHunterSpecies
+  | AquaticHunterSpecies;
 export interface PredatorProfile {
   species: PredatorSpecies;
   label: string;
@@ -55,7 +56,7 @@ export interface PredatorProfile {
   callKind?: CreatureCallKind;
   art?: { identity: string; sha256: string; clips: readonly AnimationClip[] };
   expansion?: {
-    habitat: "woodland" | "open";
+    habitat: "woodland" | "open" | "deep";
     radius: number;
     group: number;
     inspection: readonly [number, number];
@@ -74,6 +75,7 @@ export const PREDATOR_PROFILES: readonly PredatorProfile[] = [
   })),
   ...FIERCE_PROFILES,
   ...NATURAL_HUNTER_PROFILES,
+  ...AQUATIC_HUNTER_PROFILES,
 ];
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
 const profilesByType = new Map(PREDATOR_PROFILES.map((p) => [predatorType(p.species), p]));
@@ -175,6 +177,7 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
         speed: p.speed,
         directional: true,
       },
+      ...(p.expansion?.habitat === "deep" ? { aquatic: true, noShadow: true } : {}),
       weight: p.weight,
       hasVelocity: true,
     },
@@ -212,6 +215,7 @@ export function createPredator(species: PredatorSpecies, wx: number, wy: number)
       meals: 0,
     },
     weight: p.weight,
+    ...(def.noShadow ? { noShadow: true } : {}),
     tags: new Set(["npc", "wildlife", "predator"]),
   };
 }

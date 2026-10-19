@@ -8455,5 +8455,284 @@
         "sha256": "465bc0146083adc110ce970d8ab93b600d16ec3a45f119782457ebd7f44e4d33"
       }
     ]
+  },
+  {
+    "id": "shark-roster-v2",
+    "animalId": "shark",
+    "revision": "roster-v2",
+    "name": "Shark · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/shark/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-shark-roster-v2",
+      "name": "Shark sheet",
+      "image": "demos/wildlife-v2/shark/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c02561fe0470068cc99c33c51b518e6214f75ad30b4f08a9d14ee4fd78823fae",
+      "source": "art-source/wildlife-v2/shark/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-shark-roster-v2-scene",
+      "name": "Shark scene",
+      "image": "demos/wildlife-v2/shark/roster-v2/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "332f9cc3fa782715b1d61b171d3d568e8663e8f902581f111462adb418c40edf",
+      "source": "art-source/wildlife-v2/shark/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-shark-roster-v2-contact",
+      "name": "Shark contact",
+      "image": "demos/wildlife-v2/shark/roster-v2/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5ce5585289a884c99dfcbd8b67b032820d8b5719389d61121ac92bb74e65a6bf",
+      "source": "art-source/wildlife-v2/shark/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/shark/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/contact-sheet-native.png",
+        "sha256": "5ce5585289a884c99dfcbd8b67b032820d8b5719389d61121ac92bb74e65a6bf"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/index.html",
+        "sha256": "95f04d73cc1712bd768fe9604425227bdda1f2e62f69cae1af2699e04b83ec66"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/pixel-audit.json",
+        "sha256": "0f721ed3897fe5b89a1205f2369397206f19285ba52f303b60ef721f6e43beff"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/preview-native.gif",
+        "sha256": "aee4f66ee962ef70f2c2ee9e6a9b5b8b76963dc4881ba8bb440ae4cfaeb10c4e"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/preview.gif",
+        "sha256": "5500d35f17aed92b57a66596e7885e122efabf23152aab064d2391a2ab2f28a8"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/scene-background.png",
+        "sha256": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/scene-native.png",
+        "sha256": "332f9cc3fa782715b1d61b171d3d568e8663e8f902581f111462adb418c40edf"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/sheet.png",
+        "sha256": "c02561fe0470068cc99c33c51b518e6214f75ad30b4f08a9d14ee4fd78823fae"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/source-audit.json",
+        "sha256": "8ca8f5a1c84e69710c74a63578d20f0d153d9adffb1269790efc223fe849b9f3"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/sprite.json",
+        "sha256": "663ec4f210152ebe272493a8a63da836479f9e95af07150884917f5178462780"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/travel-native.gif",
+        "sha256": "ea621abae4c0c9cc4e0d45d97d64f1941e39bc123e8a03c54577f5434c1b12e6"
+      },
+      {
+        "path": "demos/wildlife-v2/shark/roster-v2/validation.json",
+        "sha256": "6ec2e7630efaff4ad45c6145fed250975f3b116fba45bfa2675bf07205502369"
+      }
+    ]
+  },
+  {
+    "id": "hammerhead-shark-roster-v2",
+    "animalId": "hammerhead-shark",
+    "revision": "roster-v2",
+    "name": "Hammerhead shark · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/hammerhead-shark/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-hammerhead-shark-roster-v2",
+      "name": "Hammerhead shark sheet",
+      "image": "demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+      "source": "art-source/wildlife-v2/hammerhead-shark/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-hammerhead-shark-roster-v2-scene",
+      "name": "Hammerhead shark scene",
+      "image": "demos/wildlife-v2/hammerhead-shark/roster-v2/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "f74a8d75b4a3cd19a3246c30d2f35880ee1d29cf507dcb22106c925e67b50efa",
+      "source": "art-source/wildlife-v2/hammerhead-shark/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-hammerhead-shark-roster-v2-contact",
+      "name": "Hammerhead shark contact",
+      "image": "demos/wildlife-v2/hammerhead-shark/roster-v2/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d120c19c4a3445d6db19bd47a9242798b6660c3f9773d62e2deee0a978771fd9",
+      "source": "art-source/wildlife-v2/hammerhead-shark/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/hammerhead-shark/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/contact-sheet-native.png",
+        "sha256": "d120c19c4a3445d6db19bd47a9242798b6660c3f9773d62e2deee0a978771fd9"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/index.html",
+        "sha256": "0f325ea4a3b3039792b8f974603f64b5f90de6b597abf9209d47a7e8343ac5c5"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/pixel-audit.json",
+        "sha256": "8d621d43a6cd64280dd8b14171fc0cde8f98ab022c8bf82e9f0017f3d24f45e9"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/preview-native.gif",
+        "sha256": "fff8d44ff93b9de67eca488acf41887c44b3702ab36e296eadd3d3dca7b0918c"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/preview.gif",
+        "sha256": "07c6bb60ad876535b3408da99b3f29bbd7629d75d1666d048fc50985e3a2f4fe"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/scene-background.png",
+        "sha256": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/scene-native.png",
+        "sha256": "f74a8d75b4a3cd19a3246c30d2f35880ee1d29cf507dcb22106c925e67b50efa"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png",
+        "sha256": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/source-audit.json",
+        "sha256": "05a9289fd64634d5fdca83be1a57482b1b675be2bd34ba2d88d641439b2532ef"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/sprite.json",
+        "sha256": "10b0a8679ab2c5497c53bd596b16bd5e4f52769b487d8417ca6a99221c3b1ec3"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/travel-native.gif",
+        "sha256": "da5d52be335f54ebdd1d35a80b0ff610c8e81c712dfbbc0f632dd042418ce4f2"
+      },
+      {
+        "path": "demos/wildlife-v2/hammerhead-shark/roster-v2/validation.json",
+        "sha256": "f181b6f1cf1e1dedc6d0a47ba8bd0e630d75036e232829133c323816c5455eb5"
+      }
+    ]
+  },
+  {
+    "id": "orca-roster-v2",
+    "animalId": "orca",
+    "revision": "roster-v2",
+    "name": "Orca · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/orca/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-orca-roster-v2",
+      "name": "Orca sheet",
+      "image": "demos/wildlife-v2/orca/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+      "source": "art-source/wildlife-v2/orca/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-orca-roster-v2-scene",
+      "name": "Orca scene",
+      "image": "demos/wildlife-v2/orca/roster-v2/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "888af3adfca01811c2bae471eaf6e22d43fa8bee7e6458f421c45f2f6d68a777",
+      "source": "art-source/wildlife-v2/orca/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-orca-roster-v2-contact",
+      "name": "Orca contact",
+      "image": "demos/wildlife-v2/orca/roster-v2/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "fe8cf0952463b39318a0eae0dee96c6f3d8675a2543b2af4a780eee02d137f34",
+      "source": "art-source/wildlife-v2/orca/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/orca/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/contact-sheet-native.png",
+        "sha256": "fe8cf0952463b39318a0eae0dee96c6f3d8675a2543b2af4a780eee02d137f34"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/index.html",
+        "sha256": "ae7680319bfc0fe22af399d16d01bbd3aa45180c251b0b3950c9c0bbff5cbcde"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/pixel-audit.json",
+        "sha256": "d35dfc9fe30544fee4a7a91a79cdd8ab9dc3165c46186ee79fb3ba51c39a3582"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/preview-native.gif",
+        "sha256": "0a9104882bf9b813fc4201c30394ca588e497e5e439fb60f65558c1cfeaa83b6"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/preview.gif",
+        "sha256": "4ca004d14c95bb72311a7967515f7404d94832209d173b16f5567107174f8f66"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/scene-background.png",
+        "sha256": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/scene-native.png",
+        "sha256": "888af3adfca01811c2bae471eaf6e22d43fa8bee7e6458f421c45f2f6d68a777"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/sheet.png",
+        "sha256": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/source-audit.json",
+        "sha256": "c4e2d5678e199ceb9323ad905fcb845d37164f21bf7ec796b2ee8de5169df3ed"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/sprite.json",
+        "sha256": "5385fe4d102da5f55b74ef9853c0cc695988a05889d77d524aa64c033a731c8f"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/travel-native.gif",
+        "sha256": "6bdca5aaf8b01cdf66e7724f601fd101f8947752b513b29a707bbec3d495ac83"
+      },
+      {
+        "path": "demos/wildlife-v2/orca/roster-v2/validation.json",
+        "sha256": "3359b17ebc3a47f2cd8d8eaa4ba3a6b07bda27bf4758f12897b2b28c1f2817ed"
+      }
+    ]
   }
 ]

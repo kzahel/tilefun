@@ -30,6 +30,15 @@ import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 
+function animalInspectionZoom(id: string): number | undefined {
+  return (
+    FAUNA_PROFILES.find((p) => p.species === id)?.inspectionZoom ??
+    (PREDATOR_PROFILES.find((p) => p.species === id)?.expansion?.habitat === "deep"
+      ? 0.4
+      : undefined)
+  );
+}
+
 /** Natural fixtures of the existing World geometry lab; all simulation/presentation is shared. */
 export default function NaturalLandscapePage() {
   const initial = useMemo(() => new URLSearchParams(location.search), []);
@@ -47,7 +56,7 @@ export default function NaturalLandscapePage() {
   const audioTime = useRef(0);
   useEffect(() => () => audio.current?.dispose(), []);
   const [zoom, setZoom] = useState(
-      FAUNA_PROFILES.find((p) => p.species === caseId)?.inspectionZoom ??
+      animalInspectionZoom(caseId) ??
         (caseId === "racetrack"
           ? 0.13
           : caseId === "farmstead"
@@ -433,7 +442,7 @@ export default function NaturalLandscapePage() {
     setProfile(nextProfile);
     setFollow(nextCase === "train");
     setZoom(
-      FAUNA_PROFILES.find((p) => p.species === nextCase)?.inspectionZoom ??
+      animalInspectionZoom(nextCase) ??
         (nextCase === "racetrack"
           ? 0.13
           : nextCase === "farmstead"

@@ -477,16 +477,18 @@
     "hamster": {
       "name": "Hamster",
       "family": "Domestic pets",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "guinea-pig": {
       "name": "Guinea pig",
       "family": "Domestic pets",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "parrot": {
       "name": "Scarlet macaw",
@@ -890,51 +892,58 @@
     "mouse": {
       "name": "Field mouse",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "rat": {
       "name": "Rat",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "chinchilla": {
       "name": "Chinchilla",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "hedgehog": {
       "name": "Hedgehog",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "porcupine": {
       "name": "Porcupine",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "raccoon": {
       "name": "Raccoon",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "skunk": {
       "name": "Skunk",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "beaver": {
       "name": "Beaver",
@@ -967,9 +976,10 @@
     "red-panda": {
       "name": "Red panda",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T01:14:00Z"
     },
     "sloth": {
       "name": "Sloth",
@@ -1317,18 +1327,26 @@
     "shark": {
       "name": "Shark",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T00:57:00Z"
+      "startedUtc": "2026-10-19T00:57:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:17:00Z",
+      "receipt": "art-source/wildlife-v2/shark/roster-v2/receipt.json",
+      "evidence": "324 source poses; 1968 fixed tail-link and 2592 fin-root checks; rigid heave/pitch, independent swim/pursuit and linked jaws; ten-artifact replay; 648 exact native/enlarged crops; deep footprint confinement; generated fish meals and replacement lineage/reload; placed fish finite; orca can eat natural sharks; exact pixels pending human review"
     },
     "hammerhead-shark": {
       "name": "Hammerhead shark",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T00:57:00Z"
+      "startedUtc": "2026-10-19T00:57:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:17:00Z",
+      "receipt": "art-source/wildlife-v2/hammerhead-shark/roster-v2/receipt.json",
+      "evidence": "324 source poses; 1968 fixed tail-link and 2592 fin-root checks; rigid heave/pitch, independent swim/pursuit and linked jaws; ten-artifact replay; 648 exact native/enlarged crops; deep footprint confinement; generated fish meals and replacement lineage/reload; placed fish finite; orca can eat natural sharks; exact pixels pending human review"
     },
     "whale-shark": {
       "name": "Whale shark",
@@ -1347,10 +1365,14 @@
     "orca": {
       "name": "Orca",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T00:57:00Z"
+      "startedUtc": "2026-10-19T00:57:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:17:00Z",
+      "receipt": "art-source/wildlife-v2/orca/roster-v2/receipt.json",
+      "evidence": "324 source poses; 1968 fixed tail-link and 2592 fin-root checks; rigid heave/pitch, independent swim/pursuit and linked jaws; ten-artifact replay; 648 exact native/enlarged crops; deep footprint confinement; generated fish meals and replacement lineage/reload; placed fish finite; orca can eat natural sharks; exact pixels pending human review"
     },
     "humpback-whale": {
       "name": "Humpback whale",
@@ -1922,6 +1944,15 @@
         "hippopotamus"
       ],
       "validation": "Typecheck/lint/build, 1089-candidate manifest, 20 browser cases and streaming --assert-ready pass. Full bounded units: 3383 pass, 5 known Windows failures, 10 skipped. Initial unbounded run timed out under contention; final two-worker run has no additional failures. Five ten-artifact replays and 1640 exact crops pass. Hippo uses pond-only bottom walking; amphibious transition is not implemented."
+    },
+    {
+      "utc": "2026-10-19T01:17:00Z",
+      "completed": [
+        "shark",
+        "hammerhead-shark",
+        "orca"
+      ],
+      "validation": "Typecheck/lint/build, 1104-candidate manifest, 9 browser cases and streaming --assert-ready pass. Full bounded units: 3405 pass, 5 known Windows failures, 10 skipped. Three ten-artifact replays and 1944 exact crops. New aquatic authority checks and existing land catch tests pass. Dry-bank arrival requires .3 game zoom for water placement; .4 lab framing includes lagoon and bank."
     }
   ],
   "existingOutsideRoster": [
@@ -2071,6 +2102,18 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/ungulates-140/README.md"
+    },
+    "ocean-hunters": {
+      "animals": [
+        "shark",
+        "hammerhead-shark",
+        "orca"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/ocean-hunters-140/README.md",
+      "roles": "deep-water predators; orca can eat either shark species"
     }
   }
 }

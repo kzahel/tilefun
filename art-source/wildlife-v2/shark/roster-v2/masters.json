@@ -1,0 +1,13 @@
+{
+  "identity": "shark-roster-v2-pixels-01",
+  "palette": {
+    "B": "#7e8d96",
+    "H": "#98a6ad",
+    "W": "#dfe2d9",
+    "M": "#46535c",
+    "E": "#19232c",
+    "T": "#f4eddc",
+    "G": "#acb6b8"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

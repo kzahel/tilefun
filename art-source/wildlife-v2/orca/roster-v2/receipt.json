@@ -1,0 +1,141 @@
+{
+  "identity": "orca-roster-v2",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-140",
+  "sourceAudit": {
+    "identity": "orca-roster-v2",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 324,
+    "continuousSwimSamplesPerFacing": 129,
+    "continuousChaseSamplesPerFacing": 129,
+    "continuousFeedSamplesPerFacing": 33,
+    "fixedLengthTailChecks": 1968,
+    "finAttachmentChecks": 2592,
+    "maxContinuousEndpointGapWorldUnits": 0.00007547539201240686,
+    "maxTailRootGapWorldUnits": 0.000002625312274163399,
+    "maxLoopMatrixDelta": 3.8743019104003906e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+    "bodyMotionRangePixels": {
+      "down": 1.971877098083496,
+      "up": 1.1298809051513672,
+      "left": 1.6061325073242188,
+      "right": 1.6061325073242188
+    },
+    "feedingJawRangeRadians": 0.19999998807907104,
+    "meshLocalGeometrySha256": {
+      "fusiform rib cage": "a5cbb359b3a756c885b315b54fbcb44fd7db2024476ed2bed08eaddf4dfebfc1",
+      "back plane": "6315e3dd06694a295938549112148aebd05fa538be39639d08d4fd31c9d6287d",
+      "blunt skull": "a02b11188ae623341179c73e119a7f7128f17e5e188eed41da4ebb4870a4f4ff",
+      "lower jaw": "b343d6790783dcbb6d1759cbd82b1ee0743ca4c6b3d568eb0646be099de7ec72",
+      "mouth lining": "8eadac8ce675792e7c84afb9740c46c1c66decfb094b9e86b24e1a9b90dfa77b",
+      "eye -1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+      "eye 1": "0d7af8a3194f9b3e1267ca1b914f1bfe0f814f17d599c83fe56d91fabfbe8f8e",
+      "white eye patch -1": "cf05515698d4100e4b6af66816947851b2ba069d6a0e5db940270fc527543825",
+      "white flank saddle -1": "2387d1cd58705e3f5425b9ca2a21d876715c3a00b78f2411017dbda751c7ba7d",
+      "lower tooth -1 0": "2069c00ca7afbf2ebe4ec88601c73bb9967702d8918030fcf38ab0078d4fc976",
+      "lower tooth -1 1": "b85410ac3de7389153a718a661ff787574d575954e389d25d95349a7158bb816",
+      "lower tooth -1 2": "d5c4335e544d111ffc601d879d32c1b2084d8e633bc47f2f9989fe012da08be5",
+      "lower tooth -1 3": "ee7428d17c8aaddd6fe6f065083486338c6fb78608848254fec6c31eca94665d",
+      "lower tooth -1 4": "85ffb103eba6d50ad473f4bc6c42e08741320a8dcf5b2492004ebb4b13c6e786",
+      "white eye patch 1": "cf05515698d4100e4b6af66816947851b2ba069d6a0e5db940270fc527543825",
+      "white flank saddle 1": "2387d1cd58705e3f5425b9ca2a21d876715c3a00b78f2411017dbda751c7ba7d",
+      "lower tooth 1 0": "ef347832e2fb37609dac0c0cf8b026f8e7147b27f0e50d6b02d91a1e48138467",
+      "lower tooth 1 1": "03678dc3fc82a8521b3e92fb78d3b21ca5b512bcf3be13b99827dafb392ec493",
+      "lower tooth 1 2": "b8d2ad80d435258c9976f38c938d5a57f62e5111c2925e81c795109165575b94",
+      "lower tooth 1 3": "0a9b7fbeccd4598a65d1de4a43f082b171a1f99be0b04781e55fc4b1dc384e56",
+      "lower tooth 1 4": "0550d5d824c997a6dda5247533168e5a96f1effbb32a68b038d3c2b32abd970e",
+      "dorsal fin": "0e9300ff04d18114b77dbb42154ab275e6b1b2a2b87cff77f812b95396e9a615",
+      "pectoral flipper -1": "2779f02138b6f15b262e5aba3644bacca9bb06e410f318cd413e869577fdfcd4",
+      "pectoral flipper 1": "4c8909e1b6cd98799304923703f2183e6b5718ede2e5626a34460098b37e9af2",
+      "TAIL-link-0": "866a5dcae47cd0ecc3c978a00099be540e16869d97dfcb3c2360363a987f832a",
+      "TAIL-link-1": "1f1dac409a0805a3fc6489c71108d65b7e2b743128c632019ccf138853075dcd",
+      "TAIL-link-2": "846264fc929a81123d567384c9480ce2efd3ef2ff3e73214b5728bc449ac9c87",
+      "horizontal fluke -1": "17676e3fac7100992a9fd2437f05463b68b316b4d066fbcba61a61e8c53dfc0c",
+      "horizontal fluke 1": "e60e9d3bd30d0a9a81898d984c6f703cc6fe660ac66359cb22a82384bd40a7dd"
+    }
+  },
+  "pixelAudit": {
+    "identity": "orca-roster-v2-pixels-01",
+    "poses": 324,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyProjectionRangePixels": {
+      "down": 1.966278076171875,
+      "up": 1.1298809051513672,
+      "left": 1.6061325073242188,
+      "right": 1.6061325073242188
+    },
+    "independentSwimAndChase": true
+  },
+  "validation": {
+    "identity": "orca-roster-v2",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "orca-roster-v2",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "fe8cf0952463b39318a0eae0dee96c6f3d8675a2543b2af4a780eee02d137f34",
+      "pixel-audit.json": "d35dfc9fe30544fee4a7a91a79cdd8ab9dc3165c46186ee79fb3ba51c39a3582",
+      "preview-native.gif": "0a9104882bf9b813fc4201c30394ca588e497e5e439fb60f65558c1cfeaa83b6",
+      "preview.gif": "4ca004d14c95bb72311a7967515f7404d94832209d173b16f5567107174f8f66",
+      "scene-background.png": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48",
+      "scene-native.png": "888af3adfca01811c2bae471eaf6e22d43fa8bee7e6458f421c45f2f6d68a777",
+      "sheet.png": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+      "source-audit.json": "c4e2d5678e199ceb9323ad905fcb845d37164f21bf7ec796b2ee8de5169df3ed",
+      "sprite.json": "5385fe4d102da5f55b74ef9853c0cc695988a05889d77d524aa64c033a731c8f",
+      "travel-native.gif": "6bdca5aaf8b01cdf66e7724f601fd101f8947752b513b29a707bbec3d495ac83"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/orca/roster-v2/audit.py": "d791066c226dfb613814a3f59f774123c09253f7ce8cbec0566414fb929edd9a",
+    "art-source/wildlife-v2/orca/roster-v2/build.py": "395fc85e0127293f50b721a30891829e9a0cbadef66317aa0f2902a48a98170d",
+    "art-source/wildlife-v2/orca/roster-v2/finish.py": "828bd6b5e0d6ed349c211b61dd8a859a777325bd96888690ef29ba8eee3144b2",
+    "art-source/wildlife-v2/orca/roster-v2/inputs.json": "f9f9344380b710cd29d1ad8b6f8b5b517d5582d8444e8f5a87fbdfa38a754dfe",
+    "art-source/wildlife-v2/orca/roster-v2/masters.json": "710fd8b592d7999c7d0378c93aaf7645bdf9f323a8e27c2604abbd7081d9e0d5",
+    "art-source/wildlife-v2/orca/roster-v2/orca.blend": "b78abbf2f93439758ce593d8387403e9fb578de9ceadd9826eb26b8df60f09d6",
+    "art-source/wildlife-v2/orca/roster-v2/projection.json": "62d650d0bbf4a40a53db0805242a5558f030a73a027565403185d2f02fad54a1",
+    "art-source/wildlife-v2/orca/roster-v2/README.md": "181ec6dbb76ebab7e255ed8e6ce1260ccdd34418d035e3c0a3649fc762f34c9c",
+    "public/demos/wildlife-v2/orca/roster-v2/contact-sheet-native.png": "fe8cf0952463b39318a0eae0dee96c6f3d8675a2543b2af4a780eee02d137f34",
+    "public/demos/wildlife-v2/orca/roster-v2/index.html": "ae7680319bfc0fe22af399d16d01bbd3aa45180c251b0b3950c9c0bbff5cbcde",
+    "public/demos/wildlife-v2/orca/roster-v2/pixel-audit.json": "d35dfc9fe30544fee4a7a91a79cdd8ab9dc3165c46186ee79fb3ba51c39a3582",
+    "public/demos/wildlife-v2/orca/roster-v2/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/orca/roster-v2/preview-native.gif": "0a9104882bf9b813fc4201c30394ca588e497e5e439fb60f65558c1cfeaa83b6",
+    "public/demos/wildlife-v2/orca/roster-v2/preview.gif": "4ca004d14c95bb72311a7967515f7404d94832209d173b16f5567107174f8f66",
+    "public/demos/wildlife-v2/orca/roster-v2/scene-background.png": "b57734423ba4c36a32f3af04f634b6983fe2eb9a995e4dc73960c968e0619c48",
+    "public/demos/wildlife-v2/orca/roster-v2/scene-native.png": "888af3adfca01811c2bae471eaf6e22d43fa8bee7e6458f421c45f2f6d68a777",
+    "public/demos/wildlife-v2/orca/roster-v2/sheet.png": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+    "public/demos/wildlife-v2/orca/roster-v2/source-audit.json": "c4e2d5678e199ceb9323ad905fcb845d37164f21bf7ec796b2ee8de5169df3ed",
+    "public/demos/wildlife-v2/orca/roster-v2/sprite.json": "5385fe4d102da5f55b74ef9853c0cc695988a05889d77d524aa64c033a731c8f",
+    "public/demos/wildlife-v2/orca/roster-v2/travel-native.gif": "6bdca5aaf8b01cdf66e7724f601fd101f8947752b513b29a707bbec3d495ac83",
+    "public/demos/wildlife-v2/orca/roster-v2/validation.json": "3359b17ebc3a47f2cd8d8eaa4ba3a6b07bda27bf4758f12897b2b28c1f2817ed",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/ocean-hunters-140/build.py": "72230138e3a0429ea9be9688c87b64d8698b06f401655e73ff4439d5c0bd8a43",
+    "art-source/wildlife-v2/_families/ocean-hunters-140/finish.py": "c000943c180f49ed51ec1da6dd3d51bf4c71e635f3b49540240b0d6c9fb587ac",
+    "art-source/wildlife-v2/_families/ocean-hunters-140/audit.py": "a91550431b653799b5ad3626bc159388ccc41f9ee2c8cabfabdea87aba15f39a",
+    "art-source/wildlife-v2/_families/ocean-hunters-140/profiles.json": "f2d5932c079d75f45d26e27002f73e31db44cd8f272ee45c5149e2706293fc9c",
+    "art-source/wildlife-v2/_families/ocean-hunters-140/README.md": "b5feed98a506e10626ec33e97c3f94c7e7984689c5071d60d17cd61798759362",
+    "scripts/wildlife/capture-motion-v2.mjs": "473aa0d69dff10869d7749578e54e61f29aefe886f61d611f07bb72c9d39a453",
+    "scripts/wildlife/register-motion-v2.mjs": "774c1a1381cf82a28f5f89774ab291d91f5d2ae653116f089aa821ca73090af5",
+    "scripts/wildlife/replay-motion-v2.py": "4fcd155c813b0cddfd13523bfa49e4a76246af810e230059490217d612483e6d"
+  }
+}

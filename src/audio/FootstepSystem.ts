@@ -33,7 +33,7 @@ function hasFootsteps(type: string): boolean {
     type.startsWith("person") ||
     type === "chicken" ||
     type === "cow" ||
-    predatorProfile(type) !== undefined
+    (predatorProfile(type) !== undefined && predatorProfile(type)?.expansion?.habitat !== "deep")
   );
 }
 

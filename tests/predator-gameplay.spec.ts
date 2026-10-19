@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { PREDATOR_PROFILES } from "../src/wildlife/Predator.js";
 
 test.use({ channel: "chromium" });
-for (const p of PREDATOR_PROFILES)
+for (const p of PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))
   for (const renderer of ["canvas", "gpu"]) {
     test(`${p.species} hunts and reloads its meal in the shared Worker lab (${renderer})`, async ({
       page,

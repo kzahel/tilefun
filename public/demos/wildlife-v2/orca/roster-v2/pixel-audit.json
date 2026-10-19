@@ -1,0 +1,16 @@
+{
+  "identity": "orca-roster-v2-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.966278076171875,
+    "up": 1.1298809051513672,
+    "left": 1.6061325073242188,
+    "right": 1.6061325073242188
+  },
+  "independentSwimAndChase": true
+}

@@ -1,0 +1,16 @@
+{
+  "identity": "shark-roster-v2-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.9661407470703125,
+    "up": 1.129995346069336,
+    "left": 1.606109619140625,
+    "right": 1.6061067581176758
+  },
+  "independentSwimAndChase": true
+}

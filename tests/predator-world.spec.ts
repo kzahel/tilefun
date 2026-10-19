@@ -12,7 +12,7 @@ const homes = new Map<string, { wx: number; wy: number; home: { wx: number; wy: 
 for (const p of PREDATOR_PROFILES) {
   if (!p.expansion) continue;
   const [x, y] = p.expansion.inspection;
-  for (const a of nature.expansionPredators(Math.floor(x / 16), Math.floor(y / 16))) {
+  for (const a of nature.wildlife(Math.floor(x / 16), Math.floor(y / 16))) {
     if (a.predator) homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
   }
 }
@@ -59,6 +59,13 @@ for (const p of PREDATOR_PROFILES) {
       g.debugPanel.paused = true;
       g.transport.send({ type: "set-debug", paused: true, noclip: false });
     });
+    if (p.expansion?.habitat === "deep")
+      await page.evaluate(async () => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        // A dry-bank arrival places lagoon homes farther away than a land clearing.
+        g.debugPanel.setZoom(0.3);
+        await new Promise(requestAnimationFrame);
+      });
     const original = await animals(),
       removed = original[0];
     if (!removed) throw Error("Missing generated predator");

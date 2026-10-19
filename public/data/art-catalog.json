@@ -486,6 +486,36 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-shark-predator-v1",
+      "name": "wildlife shark predator v1",
+      "image": "demos/wildlife-v2/shark/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c02561fe0470068cc99c33c51b518e6214f75ad30b4f08a9d14ee4fd78823fae",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-hammerhead-shark-predator-v1",
+      "name": "wildlife hammerhead shark predator v1",
+      "image": "demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-orca-predator-v1",
+      "name": "wildlife orca predator v1",
+      "image": "demos/wildlife-v2/orca/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-fox-provisional-v1",
       "name": "wildlife fox provisional v1",
       "image": "demos/wildlife-v2/fox/motion-v2/sheet.png",
@@ -3166,6 +3196,36 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-shark-roster-v2",
+      "name": "wildlife v2 shark roster v2",
+      "image": "demos/wildlife-v2/shark/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c02561fe0470068cc99c33c51b518e6214f75ad30b4f08a9d14ee4fd78823fae",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-hammerhead-shark-roster-v2",
+      "name": "wildlife v2 hammerhead shark roster v2",
+      "image": "demos/wildlife-v2/hammerhead-shark/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ed82957fdcc77380bc20e4ffa20eb740b017c74cca456fc2ff1f5e43d6590ea",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-orca-roster-v2",
+      "name": "wildlife v2 orca roster v2",
+      "image": "demos/wildlife-v2/orca/roster-v2/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "643a7041db730a1e3d3387ee7bb70b00a02c6c3e3ef5689b37e2adae4269e0fc",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -5565,11 +5625,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:992"
+          "source": "src/generation/regional/NaturalLandscape.ts:1030"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1186"
+          "source": "src/generation/regional/NaturalLandscape.ts:1224"
         },
         {
           "system": "World generation",
@@ -24674,6 +24734,60 @@
       ]
     },
     {
+      "id": "sprite:wildlife-shark-predator-v1",
+      "sheetId": "wildlife-shark-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-shark-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-hammerhead-shark-predator-v1",
+      "sheetId": "wildlife-hammerhead-shark-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-hammerhead-shark-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-orca-predator-v1",
+      "sheetId": "wildlife-orca-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-orca-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-fox-provisional-v1",
       "sheetId": "wildlife-fox-provisional-v1",
       "rect": [
@@ -27123,11 +27237,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:71"
+          "source": "src/wildlife/FoodWeb.ts:74"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:228"
+          "source": "src/wildlife/FoodWeb.ts:231"
         }
       ]
     },
@@ -27193,27 +27307,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:111"
+          "source": "src/wildlife/FoodWeb.ts:114"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:127"
+          "source": "src/wildlife/FoodWeb.ts:130"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:143"
+          "source": "src/wildlife/FoodWeb.ts:146"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:177"
+          "source": "src/wildlife/FoodWeb.ts:180"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:201"
+          "source": "src/wildlife/FoodWeb.ts:204"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:228"
+          "source": "src/wildlife/FoodWeb.ts:231"
         }
       ]
     },
@@ -27263,15 +27377,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:72"
+          "source": "src/wildlife/FoodWeb.ts:75"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:228"
+          "source": "src/wildlife/FoodWeb.ts:231"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:229"
+          "source": "src/wildlife/FoodWeb.ts:232"
         }
       ]
     },
@@ -27313,7 +27427,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:229"
+          "source": "src/wildlife/FoodWeb.ts:232"
         }
       ]
     },
@@ -27359,7 +27473,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:230"
+          "source": "src/wildlife/FoodWeb.ts:233"
         }
       ]
     },
@@ -27405,7 +27519,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:231"
+          "source": "src/wildlife/FoodWeb.ts:234"
         }
       ]
     },
@@ -27451,7 +27565,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:232"
+          "source": "src/wildlife/FoodWeb.ts:235"
         }
       ]
     },
@@ -27605,7 +27719,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:228"
+          "source": "src/wildlife/FoodWeb.ts:231"
         }
       ]
     },
@@ -27651,7 +27765,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:228"
+          "source": "src/wildlife/FoodWeb.ts:231"
         }
       ]
     },
@@ -28701,11 +28815,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:992"
+          "source": "src/generation/regional/NaturalLandscape.ts:1030"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1186"
+          "source": "src/generation/regional/NaturalLandscape.ts:1224"
         },
         {
           "system": "World generation",

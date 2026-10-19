@@ -1,0 +1,5 @@
+{
+  "shark": {"tailLengths":[0.62,0.48,0.36],"speed":18,"swimMs":40,"chaseMs":20,"palette":{"B":"#7e8d96","H":"#98a6ad","W":"#dfe2d9","M":"#46535c","E":"#19232c","T":"#f4eddc","G":"#acb6b8"}},
+  "hammerhead-shark": {"tailLengths":[0.62,0.48,0.36],"speed":16,"swimMs":40,"chaseMs":20,"palette":{"B":"#998b78","H":"#afa18a","W":"#e3dcc7","M":"#665d52","E":"#22282b","T":"#f5ecd6","G":"#c4b99e"}},
+  "orca": {"tailLengths":[0.68,0.53,0.41],"speed":20,"swimMs":40,"chaseMs":20,"palette":{"B":"#28333e","H":"#3c4a55","W":"#eee9d9","M":"#5c5055","E":"#121c27","T":"#fff1d9","G":"#86949c"}}
+}

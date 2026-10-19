@@ -25,9 +25,9 @@ export const NATURAL_CASES = [
   ...PREDATOR_PROFILES.map((p) => ({
     id: p.species,
     name: `${p.label} · hunting & prey replacement`,
-    seed: 1,
-    x: 4,
-    y: 4,
+    seed: p.expansion?.habitat === "deep" ? 2026 : 1,
+    x: p.expansion?.habitat === "deep" ? p.expansion.inspection[0] : 4,
+    y: p.expansion?.habitat === "deep" ? p.expansion.inspection[1] : 4,
   })),
   ...FAUNA_PROFILES.map((p) => ({
     id: p.species,
@@ -100,7 +100,7 @@ export function naturalLandscapeRecipe(
     };
   }
   const predator = PREDATOR_PROFILES.find((p) => p.species === id);
-  if (!at && predator) {
+  if (!at && predator && predator.expansion?.habitat !== "deep") {
     const deer = createDeer(108, 64),
       rabbit = createRabbit(
         predator.fierce?.kind === "spider" ? 100 : 128,
