@@ -1,0 +1,822 @@
+{
+  "family": "classic-open-top-roadster",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    4.85,
+    1.96,
+    1.26
+  ],
+  "wheelRadius": 0.38,
+  "wheelWidth": 0.24,
+  "axles": [
+    -1.45,
+    1.45
+  ],
+  "halfTrack": 0.78,
+  "arch": {
+    "cutRadius": 0.465,
+    "pocketInnerY": 0.58,
+    "segments": 24
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.54,
+      0.67,
+      0.82,
+      0.93,
+      0.98
+    ],
+    "shoulderRadii": [
+      0.5,
+      0.565,
+      0.565,
+      0.54,
+      0.51
+    ],
+    "archRadius": 0.448
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      34,
+      67,
+      60
+    ],
+    "paintShadow": [
+      35,
+      83,
+      63
+    ],
+    "paintMid": [
+      39,
+      107,
+      67
+    ],
+    "paint": [
+      47,
+      127,
+      78
+    ],
+    "paintLight": [
+      88,
+      158,
+      101
+    ],
+    "cream": [
+      238,
+      207,
+      151
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "bedFloor": [
+      67,
+      66,
+      68
+    ],
+    "bedRib": [
+      91,
+      84,
+      75
+    ],
+    "bedWall": [
+      54,
+      61,
+      65
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "tan": [
+      193,
+      146,
+      99
+    ],
+    "tanLight": [
+      225,
+      184,
+      125
+    ],
+    "tanShadow": [
+      150,
+      106,
+      76
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original low roadster coachwork with true recessed two-seat cockpit and exact semantic windshield, seat, inner-panel and trim UV owners. No projection or high-to-low transfer claim.",
+  "bodyStations": [
+    [
+      -2.3,
+      0.62,
+      0.66
+    ],
+    [
+      -2.23,
+      0.77,
+      0.78
+    ],
+    [
+      -2.06,
+      0.86,
+      0.87
+    ],
+    [
+      -1.72,
+      0.89,
+      0.92
+    ],
+    [
+      -1.12,
+      0.87,
+      0.94
+    ],
+    [
+      -0.4,
+      0.85,
+      0.91
+    ],
+    [
+      -0.22,
+      0.85,
+      0.85
+    ],
+    [
+      0.84,
+      0.85,
+      0.84
+    ],
+    [
+      1.08,
+      0.86,
+      0.88
+    ],
+    [
+      1.61,
+      0.88,
+      0.87
+    ],
+    [
+      2.08,
+      0.8,
+      0.78
+    ],
+    [
+      2.29,
+      0.63,
+      0.65
+    ]
+  ],
+  "components": [
+    {
+      "name": "Own long rounded roadster coachwork with genuine cockpit",
+      "group": "body",
+      "triangles": 696,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Dark inner door panel -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedWall"
+      ]
+    },
+    {
+      "name": "Tan door top pad -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tan"
+      ]
+    },
+    {
+      "name": "Slim painted lower sill -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Dark inner door panel 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedWall"
+      ]
+    },
+    {
+      "name": "Tan door top pad 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tan"
+      ]
+    },
+    {
+      "name": "Slim painted lower sill 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "paintShadow"
+      ]
+    },
+    {
+      "name": "Dark dashboard across actual front cockpit",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedWall"
+      ]
+    },
+    {
+      "name": "Tan dashboard cap",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanLight"
+      ]
+    },
+    {
+      "name": "Recessed cockpit floor visible in footwells",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedFloor"
+      ]
+    },
+    {
+      "name": "Narrow low center tunnel",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "bedRib"
+      ]
+    },
+    {
+      "name": "Tan bucket seat cushion -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "tan"
+      ]
+    },
+    {
+      "name": "Cream tan cushion center -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanLight"
+      ]
+    },
+    {
+      "name": "Tan bucket seatback -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "tan"
+      ]
+    },
+    {
+      "name": "Tan seatback center face -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanLight"
+      ]
+    },
+    {
+      "name": "Seatback top warm seam -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanShadow"
+      ]
+    },
+    {
+      "name": "Tan bucket seat cushion 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "tan"
+      ]
+    },
+    {
+      "name": "Cream tan cushion center 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanLight"
+      ]
+    },
+    {
+      "name": "Tan bucket seatback 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "tan"
+      ]
+    },
+    {
+      "name": "Tan seatback center face 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanLight"
+      ]
+    },
+    {
+      "name": "Seatback top warm seam 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "tanShadow"
+      ]
+    },
+    {
+      "name": "Static tiny windscreen exact framed opaque glass owner",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Integrated roadster fender -1.45 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated roadster fender -1.45 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated roadster fender 1.45 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Integrated roadster fender 1.45 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Slim chrome bumper -2.375",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Slim chrome bumper 2.375",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Small rounded front grille",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat -0.25",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat -0.125",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0.125",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0.25",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Round headlamp chrome rim -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Round cream headlamp -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Small round rear ruby lamp -1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Quiet chrome door handle -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Round headlamp chrome rim 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Round cream headlamp 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Small round rear ruby lamp 1",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Quiet chrome door handle 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Static steering wheel in cockpit",
+      "group": "body",
+      "triangles": 100,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Static steering wheel spoke",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Wheel rubber FL",
+      "group": "FL",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FL-1",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FL-1",
+      "group": "FL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber FR",
+      "group": "FR",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub FR1",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint FR1",
+      "group": "FR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RL",
+      "group": "RL",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RL-1",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RL-1",
+      "group": "RL",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    },
+    {
+      "name": "Wheel rubber RR",
+      "group": "RR",
+      "triangles": 124,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Wheel rim RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Chrome hub RR1",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Hub glint RR1",
+      "group": "RR",
+      "triangles": 22,
+      "paintRoles": [
+        "white"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4500000476837158,
+        -0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        6.608695569245713,
+        13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4500000476837158,
+        0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        6.608695569245713,
+        -13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4500000476837158,
+        -0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        25.217392133629843,
+        6.608695569245713,
+        13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4500000476837158,
+        0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        25.217392133629843,
+        6.608695569245713,
+        -13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    }
+  ],
+  "method": "Original low roadster coachwork with true recessed two-seat cockpit and exact semantic windshield, seat, inner-panel and trim UV owners. No projection or high-to-low transfer claim.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/classic-roadster/build.py",
+    "scripts/vehicle-bake/classic-roadster/family.json",
+    "scripts/vehicle-bake/classic-roadster/coverage-region.json",
+    "scripts/vehicle-bake/classic-roadster/cockpit-region.json",
+    "scripts/vehicle-bake/classic-roadster/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

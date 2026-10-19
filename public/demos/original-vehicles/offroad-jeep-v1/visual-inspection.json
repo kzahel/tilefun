@@ -1,0 +1,19 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized autonomous production run153; formal human art review remains open",
+  "observations": [
+    "Independently inspected every final study/game heading0-15 at native pixel density; burnt-orange body, upright hardtop, blue glass bands and rear spare distinguish the SUV silhouette.",
+    "Both side-window bands and front/rear panes stay bounded by continuous ink frames; no coincident panel flicker was observed in final shared-renderer captures.",
+    "Near wheels sit in real open arches; far crowns remain below orange fenders/body. Rear spare is fixed coachwork rather than a rolling road-wheel group.",
+    "Inspected both signed wheel-phase sheets and both actual wireframes. Body/hardtop/spare stay fixed and the exported rig reports four independently rolling road wheels with absolute reset.",
+    "Independent retained-input-only replay reproduced model, atlas and recipe bytes in a fresh scratch tree; no author workspace or ignored input was needed.",
+    "Independent actual-GLB full-neutral-roll body proof, colliding-body rejection/reset, unchanged camera/rig capture and desktop/mobile/offline browser checks pass."
+  ],
+  "limitations": [
+    "Neutral roll only; steering/suspension and equipment animation remain unqualified.",
+    "Finite crown sampling complements, rather than replaces, the recorded camera views.",
+    "The mounted rear spare is static; ordinary road physics do not add off-road suspension."
+  ]
+}

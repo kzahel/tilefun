@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "delivery-van",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/delivery-van/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/delivery-van/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/delivery-van/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe, Beetle and owner-accepted school bus integrated. Pickup v1 delivered for appearance review; further families remain ideas.",
+  "gate": "Owner-authorized eight-hour autonomous vehicle production: 2026-10-19 21:19:36 UTC through 2026-10-20 05:19:36 UTC. Per-vehicle appearance pauses waived; actual asset QA and game validation still apply. Motorcycles need rider presentation.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -40,46 +40,342 @@
       "name": "Pickup truck",
       "family": "Pickup",
       "priority": 4,
-      "status": "review",
+      "status": "integrated",
       "authorization": "2026-10-19 owner explicitly requested proceeding directly with pickup after approved school-bus integration",
-      "next": "Owner review of teal pickup v1 cab, open bed, outlines/glass and wheel fit; gameplay integration follows appearance agreement",
-      "candidate": "pickup-v1"
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "candidate": "pickup-v1",
+      "ownerFeedback": "2026-10-19: Looks great; asked whether it was already in the world and editor. Informed that runtime integration is pending."
     },
     {
       "id": "classic-roadster",
       "name": "Classic open-top roadster",
       "family": "Convertible",
       "priority": 5,
-      "status": "idea",
-      "authorization": "Proposed expansion, not authorized for production",
-      "next": "Consider exposed interior and windscreen ownership"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "candidate": "classic-roadster-v1"
     },
     {
       "id": "offroad-jeep",
       "name": "Boxy off-road vehicle",
       "family": "Utility SUV",
       "priority": 6,
-      "status": "idea",
-      "authorization": "Proposed expansion, not authorized for production",
-      "next": "Consider spare tire, wheel clearance and high cabin"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "candidate": "offroad-jeep-v1"
     },
     {
       "id": "delivery-van",
       "name": "Small delivery van",
       "family": "Van",
       "priority": 7,
-      "status": "idea",
-      "authorization": "Proposed expansion, not authorized for production",
-      "next": "Consider large painted panels and reusable decals"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "candidate": "delivery-van-v1"
     },
     {
       "id": "race-coupe",
       "name": "Striped racing coupe",
       "family": "Sports-car variation",
       "priority": 8,
-      "status": "idea",
-      "authorization": "Proposed expansion, not authorized for production",
-      "next": "Test palette/stripe reuse after the base coupe is accepted"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Spawn from Edit > Vehicles or encounter eligible ordinary road traffic; exact model/fallback and save/reload/driving verified in run 153.",
+      "candidate": "race-coupe-v1"
+    },
+    {
+      "id": "microcar",
+      "name": "Tiny bubble microcar",
+      "family": "Microcar",
+      "priority": 9,
+      "status": "checking",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Independent exact-model review and replay queued; source complete at 2,596 triangles",
+      "candidate": "microcar-v1"
+    },
+    {
+      "id": "woody-wagon",
+      "name": "Wood-panel station wagon",
+      "family": "Estate car",
+      "priority": 10,
+      "status": "checking",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Independent exact-model review and replay queued; source complete",
+      "candidate": "woody-wagon-v1"
+    },
+    {
+      "id": "stretch-limousine",
+      "name": "Stretch limousine",
+      "family": "Limousine",
+      "priority": 11,
+      "status": "checking",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Independent exact-model review and replay queued; source complete at 2,956 triangles",
+      "candidate": "stretch-limousine-v1"
+    },
+    {
+      "id": "hot-rod",
+      "name": "Classic hot rod",
+      "family": "Hot rod",
+      "priority": 12,
+      "status": "authoring",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Chopped roof, exposed front wheels and oversized rear tires"
+    },
+    {
+      "id": "rally-hatchback",
+      "name": "Rally hatchback",
+      "family": "Rally car",
+      "priority": 13,
+      "status": "authoring",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Stubby hatchback, contrasting paint blocks, auxiliary lamps and a roof scoop"
+    },
+    {
+      "id": "open-wheel-racer",
+      "name": "Open-wheel racing car",
+      "family": "Formula-style racer",
+      "priority": 14,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Exposed tires, narrow central body, open cockpit and wide wings"
+    },
+    {
+      "id": "monster-truck",
+      "name": "Monster truck",
+      "family": "Oversized pickup",
+      "priority": 15,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Huge tires, high body and a clearly separated pickup bed"
+    },
+    {
+      "id": "beach-buggy",
+      "name": "Beach dune buggy",
+      "family": "Buggy",
+      "priority": 16,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Open sides, rounded fenders, visible seats and a simple roll cage"
+    },
+    {
+      "id": "go-kart",
+      "name": "Go-kart",
+      "family": "Small open racer",
+      "priority": 17,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Very low chassis, four exposed wheels and one visible seat"
+    },
+    {
+      "id": "golf-cart",
+      "name": "Golf cart",
+      "family": "Small utility cart",
+      "priority": 18,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Open passenger sides, bench seats and a canopy on thin supports"
+    },
+    {
+      "id": "ice-cream-van",
+      "name": "Ice cream van",
+      "family": "Shop van",
+      "priority": 19,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Pastel paint, a serving hatch, striped awning and a large ice cream emblem"
+    },
+    {
+      "id": "food-truck",
+      "name": "Food truck",
+      "family": "Mobile kitchen",
+      "priority": 20,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Boxy kitchen body, wide serving window, folded counter and bold food graphics"
+    },
+    {
+      "id": "camper-van",
+      "name": "Retro camper van",
+      "family": "Camper van",
+      "priority": 21,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rounded cab-over nose, two-tone paint and a contrasting raised camper roof"
+    },
+    {
+      "id": "motorhome",
+      "name": "Family motorhome",
+      "family": "Recreational vehicle",
+      "priority": 22,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Tall living compartment, over-cab sleeping pod, side windows and a camper door"
+    },
+    {
+      "id": "retro-taxi",
+      "name": "Checker-style taxi",
+      "family": "Taxi",
+      "priority": 23,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rounded yellow sedan, roof sign and a broad checker stripe"
+    },
+    {
+      "id": "tow-truck",
+      "name": "Tow truck",
+      "family": "Recovery truck",
+      "priority": 24,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Short cab, exposed rear lifting boom, winch and a prominent tow hook"
+    },
+    {
+      "id": "flatbed-truck",
+      "name": "Flatbed work truck",
+      "family": "Cargo truck",
+      "priority": 25,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Separate cab, long low open deck and a few restrained stake rails"
+    },
+    {
+      "id": "semi-truck",
+      "name": "Semi truck with trailer",
+      "family": "Articulated freight vehicle",
+      "priority": 26,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Tall tractor cab and a long box trailer; articulation is a later gameplay question"
+    },
+    {
+      "id": "dump-truck",
+      "name": "Construction dump truck",
+      "family": "Tipper truck",
+      "priority": 27,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Short stout cab and a deep open tipping body with sloping sides"
+    },
+    {
+      "id": "cement-mixer",
+      "name": "Concrete mixer truck",
+      "family": "Construction truck",
+      "priority": 28,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Large striped mixing drum, rear chute and multiple axles"
+    },
+    {
+      "id": "mobile-crane",
+      "name": "Mobile crane truck",
+      "family": "Crane truck",
+      "priority": 29,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Long low carrier, folded telescoping boom, hook and stowed outriggers"
+    },
+    {
+      "id": "street-sweeper",
+      "name": "Street sweeper",
+      "family": "Street maintenance",
+      "priority": 30,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Compact cab, low side brushes and a contrasting rear collection tank"
+    },
+    {
+      "id": "snowplow",
+      "name": "Snowplow truck",
+      "family": "Winter service truck",
+      "priority": 31,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Bright front blade, chunky work cab and a rear salt hopper"
+    },
+    {
+      "id": "farm-tractor",
+      "name": "Farm tractor",
+      "family": "Agricultural vehicle",
+      "priority": 32,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Huge rear wheels, small front wheels, narrow hood and a tall cab"
+    },
+    {
+      "id": "forklift",
+      "name": "Forklift",
+      "family": "Warehouse vehicle",
+      "priority": 33,
+      "status": "queued",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Tiny upright body, overhead guard, vertical mast and low front forks"
+    },
+    {
+      "id": "sidecar-motorcycle",
+      "name": "Motorcycle with sidecar",
+      "family": "Three-wheel vehicle",
+      "priority": 34,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; Visible rider saddle, narrow bike body and a separate rounded sidecar"
+    },
+    {
+      "id": "classic-motorcycle",
+      "name": "Classic street motorcycle",
+      "family": "Standard motorcycle",
+      "priority": 35,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; Rounded fuel tank, exposed engine, flat saddle and a single round headlamp"
+    },
+    {
+      "id": "sport-motorcycle",
+      "name": "Sport motorcycle",
+      "family": "Sport bike",
+      "priority": 36,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; Low streamlined fairings, a small windscreen, broad rear tire and compact tail"
+    },
+    {
+      "id": "cruiser-motorcycle",
+      "name": "Cruiser motorcycle",
+      "family": "Cruiser",
+      "priority": 37,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; Long low silhouette, swept handlebars, large front fork and stepped saddle"
+    },
+    {
+      "id": "dirt-motorcycle",
+      "name": "Dirt bike",
+      "family": "Off-road motorcycle",
+      "priority": 38,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; High fenders, narrow body, knobby tires, long suspension and a front number plate"
+    },
+    {
+      "id": "touring-motorcycle",
+      "name": "Touring motorcycle",
+      "family": "Touring bike",
+      "priority": 39,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; Upright riding position, tall windscreen, broad fairing and matching side panniers"
+    },
+    {
+      "id": "retro-scooter",
+      "name": "Retro motor scooter",
+      "family": "Scooter",
+      "priority": 40,
+      "status": "deferred",
+      "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
+      "next": "Rider presentation prerequisite; Rounded leg shield, step-through frame, small wheels and bright two-tone bodywork"
     }
   ]
 }

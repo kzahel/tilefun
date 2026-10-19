@@ -1,5 +1,6 @@
 import { expect, type Page, test } from "@playwright/test";
 import type { GameClient } from "../src/client/GameClient.js";
+import { AUTONOMOUS_ORIGINAL_VEHICLES } from "../src/traffic/AutonomousOriginalVehicles.fixture.js";
 import type { SavedTraffic } from "../src/traffic/TrafficSystem.js";
 import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
 import { flushLocalWorld, worldRecords } from "./helpers/local-world.js";
@@ -179,10 +180,7 @@ type VehicleGpuDiagnostics = {
   };
 };
 
-for (const family of [
-  { model: "beetle", title: "Beetle", name: "Beetle-style compact", roof: 35 },
-  { model: "school-bus", title: "School bus", name: "Yellow school bus", roof: 44 },
-]) {
+for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
   const originals = (page: Page) =>
     page.evaluate((model) => {
       const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
@@ -242,9 +240,9 @@ for (const family of [
   }
 
   async function expectOriginalFallback(page: Page) {
-    const frames = await page.evaluate(async (model) => {
+    const frames = await page.evaluate(async (spritePath) => {
       const image = new Image();
-      image.src = `/tilefun/assets/vehicles/${model}-v1.png`;
+      image.src = `/tilefun/${spritePath}`;
       await image.decode();
       const canvas = document.createElement("canvas");
       canvas.width = image.width;
@@ -263,7 +261,7 @@ for (const family of [
           return count;
         }),
       };
-    }, family.model);
+    }, family.spritePath);
     expect(frames.width).toBe(192);
     expect(frames.height).toBe(896);
     for (const occupied of frames.occupied) expect(occupied).toBeGreaterThan(500);
@@ -275,25 +273,25 @@ for (const family of [
     }, testInfo) => {
       const errors: string[] = [];
       page.on("pageerror", (error) => errors.push(error.message));
-      if (failed)
-        await page.route(`**/assets/models/vehicles/${family.model}-v1.glb`, (route) =>
-          route.abort(),
-        );
+      if (failed) await page.route(`**/${family.modelPath}`, (route) => route.abort());
       await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
       const canvas = page.getByLabel("Generated traffic playground");
       await expect(canvas).toHaveAttribute("data-ready", "true");
       await page.getByLabel("Playground vehicle", { exact: true }).selectOption(family.model);
       await expect(canvas).toHaveAttribute("data-ready", "true");
       const diagnostics = () =>
-        canvas.evaluate((surface: TrafficCanvas, model) => {
-          const report = surface.__presentationDiagnostics?.();
-          const terrain = report?.terrain as VehicleGpuDiagnostics | undefined;
-          return {
-            asset: terrain?.gpu?.vehicleAssets?.[`${model}-authored-v1`],
-            meshDraws: report?.meshDraws ?? 0,
-            eligible: report?.meshEligibleVehicleTypes,
-          };
-        }, family.model);
+        canvas.evaluate(
+          (surface: TrafficCanvas, { assetId }) => {
+            const report = surface.__presentationDiagnostics?.();
+            const terrain = report?.terrain as VehicleGpuDiagnostics | undefined;
+            return {
+              asset: terrain?.gpu?.vehicleAssets?.[assetId],
+              meshDraws: report?.meshDraws ?? 0,
+              eligible: report?.meshEligibleVehicleTypes,
+            };
+          },
+          { assetId: family.assetId },
+        );
       await expect
         .poll(async () => (await diagnostics()).asset?.state)
         .toBe(failed ? "failed" : "ready");
@@ -310,7 +308,7 @@ for (const family of [
         await expect.poll(async () => (await diagnostics()).meshDraws).toBeGreaterThan(0);
       }
       await page.getByRole("button", { name: "Start on roof", exact: true }).click();
-      await expect(canvas).toHaveAttribute("data-player-z", String(family.roof));
+      await expect(canvas).toHaveAttribute("data-player-z", String(family.bounds[2]));
       const before = Number(await canvas.getAttribute("data-car-x"));
       await expect
         .poll(async () => Number(await canvas.getAttribute("data-car-x")))
@@ -342,10 +340,7 @@ for (const family of [
         test.setTimeout(60_000);
         const errors: string[] = [];
         page.on("pageerror", (error) => errors.push(error.message));
-        if (failed)
-          await page.route(`**/assets/models/vehicles/${family.model}-v1.glb`, (route) =>
-            route.abort(),
-          );
+        if (failed) await page.route(`**/${family.modelPath}`, (route) => route.abort());
         await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
         await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
         await page.evaluate(async () => {
@@ -435,7 +430,7 @@ for (const family of [
               return report.gpu;
             });
           await expect
-            .poll(async () => (await diagnostics())?.vehicleAssets?.[`${family.model}-authored-v1`])
+            .poll(async () => (await diagnostics())?.vehicleAssets?.[family.assetId])
             .toMatchObject(
               failed
                 ? { state: "failed", meshes: 0, drawMeshes: 0 }

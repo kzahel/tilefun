@@ -1,0 +1,108 @@
+{
+  "modelSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+  "spriteSha256": "9fc715b676dc56d282de114a139c18157dab678527c5a2ebd05b066820cb80eb",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-offroad-jeep-v1.json": "fe4b903da4d56c540d0bec05bf46d8b564d6287498cc249a85f7afd621b8c791",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/offroad-jeep-v1/review-manifest.json": "0c880c4fd5db45a887280b5aacf7211259dd0b1b84a66f8b3249eeb8cd09c5be",
+    "public/demos/original-vehicles/offroad-jeep-v1/inputs/model.glb": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "public/demos/original-vehicles/offroad-jeep-v1/inputs/atlas.png": "9a2e09cf2cb15026105ee3d9d82622bc8d3ea3f6cb1b4e3d177bf3f94d733a3f",
+    "public/demos/original-vehicles/offroad-jeep-v1/captures/capture.json": "de55fac9f74c2f068eed2d33afa437e53672fd2c7bae11b62cf5ee95c0cce498",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/replay-verification.json": "b0f30ed6b59e7d13bc7678bf536ff4b93501b66916dfffa92274f7c5051d3de3",
+    "art-source/vehicle-bake/offroad-jeep/v1/build.py": "443b6d28d7b7fe9d5d6d14cb535c289f017fbb23e2882d1e76c2dc92328d9ad8",
+    "art-source/vehicle-bake/offroad-jeep/v1/geometry.py": "b6ab0ea6cdc4e99a76edcf6697106a2bda5f65a45ba21e6029e7fc23e61b105b",
+    "art-source/vehicle-bake/offroad-jeep/v1/family.json": "f905a9035cf096e86222b9db10041b3a7fc6428e1b337b77621b0b2c1f575c5c",
+    "art-source/vehicle-bake/offroad-jeep/v1/coverage-region.json": "b9706a01c12e5b1166dcc1e57bd436c90ce23d443b7a5a291f3587630fd3dfae",
+    "art-source/vehicle-bake/offroad-jeep/v1/review.json": "9873bf9550de60d493036bf439f1a17921aa6036cff32ecc4d93466a038f3bf1",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+    "public/demos/original-vehicles/offroad-jeep-v1/captures/engine-4.png": "2541254a568626aa507ff116acce6b8c926458fefb17943adc0be02376067b55",
+    "public/demos/original-vehicles/offroad-jeep-v1/captures/engine-12.png": "7a35225990a7f5ba538da014927caa9cbf8f7421024582433ce5e5b8ac62f030",
+    "public/demos/original-vehicles/offroad-jeep-v1/captures/engine-8.png": "091535f5c3ebf00704ce4ae8e7901f902786cfffc95d9d8261ea8e93b1a9e1dd",
+    "public/demos/original-vehicles/offroad-jeep-v1/captures/engine-0.png": "5e0e9b1fef42b283408e70691655a4a59f070ed4cc838b0609eb7a4ead3836c5"
+  },
+  "physicalBounds": [
+    88,
+    40,
+    38
+  ],
+  "measurement": {
+    "modelSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -42.79130172729492,
+        -19.547826766967773,
+        9.5367431640625e-07
+      ],
+      "max": [
+        43.75652313232422,
+        19.547826766967773,
+        37.21739196777344
+      ],
+      "size": [
+        86.54782104492188,
+        39.09565353393555,
+        37.21739196777344
+      ]
+    },
+    "triangles": 3146,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/offroad-jeep/v1/evidence/replay-verification.json",
+    "sha256": "b0f30ed6b59e7d13bc7678bf536ff4b93501b66916dfffa92274f7c5051d3de3",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-offroad-jeep-v1.json --blender BLENDER"
+}

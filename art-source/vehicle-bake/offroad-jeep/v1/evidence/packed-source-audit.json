@@ -1,0 +1,75 @@
+{
+  "status": "passed",
+  "results": {
+    "fixedEquipment": {
+      "spareComponents": [
+        "STATIC spare rear mount",
+        "STATIC rear mounted spare rubber",
+        "STATIC spare steel rim",
+        "STATIC spare center hub"
+      ],
+      "hardtopComponents": [
+        "STATIC contrasting removable-style hardtop",
+        "Hardtop continuous lower weather edge -1",
+        "Hardtop continuous lower weather edge 1"
+      ],
+      "staticNoRollMetadata": true,
+      "separateSkinOwners": [
+        "Upright framed greenhouse actual skin",
+        "STATIC contrasting removable-style hardtop",
+        "Flat rounded short engine hood"
+      ],
+      "glassOwnership": "Continuous side UV chart; fixed windshield and rear glass own distinct atlas half-charts. Roof is a separate fixed component/chart. No intersecting glass overlays."
+    },
+    "master.blend": {
+      "sha256": "285b454ae7be7f2f0f0a85c63b7d1740bca9baaa0f46eafecf5d051f8c8ae64c",
+      "meshObjects": 55,
+      "triangles": 3146,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "car.blend": {
+      "sha256": "414f71d6d4e374fc9d1dc089b340d3b0980b4d55ac958f2f41fbc0c66a246283",
+      "meshObjects": 5,
+      "triangles": 3146,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+      "minBlenderWorld": [
+        -42.79130172729492,
+        -19.547826766967773,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        43.75652313232422,
+        19.547826766967773,
+        37.21739196777344
+      ],
+      "dimensionsBlenderWorld": [
+        86.54782485961914,
+        39.09565353393555,
+        37.21739101409912
+      ],
+      "dimensionsSourceUnits": [
+        4.9764999294281,
+        2.2480000782012937,
+        2.139999983310699
+      ],
+      "includesRearSpare": true
+    },
+    "actualGLBStaticSpare": {
+      "owner": "Body_static",
+      "spareRegionVertexCount": 347,
+      "noRollMetadata": true,
+      "wholeFixedBodyIncludedInClearance": true
+    }
+  }
+}

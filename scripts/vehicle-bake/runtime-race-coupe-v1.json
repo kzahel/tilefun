@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "race-coupe",
+  "name": "Striped racing coupe",
+  "tags": ["vehicle", "original", "racing coupe"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/race-coupe-v1/review-manifest.json",
+    "sha256": "6b40d227001c5c19c70b935dccfa52804858d287e49d82196b4e2a7e5a57d1da",
+    "candidateId": "race-coupe-v1",
+    "model": "public/demos/original-vehicles/race-coupe-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/race-coupe-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/race-coupe-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/race-coupe-v1/captures",
+    "modelSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "triangles": 2431,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/race-coupe/v1/evidence/replay-verification.json",
+    "sha256": "06fcc5e2c0c4728936ea0a23af0f051af17ca9fa61470215d96b0bb6677554d1",
+    "build": "art-source/vehicle-bake/race-coupe/v1/build.py",
+    "family": "art-source/vehicle-bake/race-coupe/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "race-coupe-authored-v1",
+    "path": "assets/models/vehicles/race-coupe-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/race-coupe-v1.png",
+  "performance": {
+    "speed": 172,
+    "acceleration": 320,
+    "pushSpeed": 44,
+    "pushWeight": 120
+  },
+  "receipt": "art-source/vehicle-bake/runtime-race-coupe-v1.json",
+  "expectedBounds": [82, 37, 19]
+}

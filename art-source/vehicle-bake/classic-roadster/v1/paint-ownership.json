@@ -1,0 +1,313 @@
+{
+  "method": "Original low roadster coachwork with true recessed two-seat cockpit and exact semantic windshield, seat, inner-panel and trim UV owners. No projection or high-to-low transfer claim.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      34,
+      67,
+      60
+    ],
+    "paintShadow": [
+      35,
+      83,
+      63
+    ],
+    "paintMid": [
+      39,
+      107,
+      67
+    ],
+    "paint": [
+      47,
+      127,
+      78
+    ],
+    "paintLight": [
+      88,
+      158,
+      101
+    ],
+    "cream": [
+      238,
+      207,
+      151
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "bedFloor": [
+      67,
+      66,
+      68
+    ],
+    "bedRib": [
+      91,
+      84,
+      75
+    ],
+    "bedWall": [
+      54,
+      61,
+      65
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "tan": [
+      193,
+      146,
+      99
+    ],
+    "tanLight": [
+      225,
+      184,
+      125
+    ],
+    "tanShadow": [
+      150,
+      106,
+      76
+    ]
+  },
+  "ownership": "Own continuous side and hood/deck charts on the low rounded body; genuine cockpit floor/inner panels, tan bucket cushions/seatbacks, opaque glass/framing and chrome trim have exact named semantic owners. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "semanticOwners": {
+    "bodySide": {
+      "component": "Own long rounded roadster coachwork with genuine cockpit",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        160
+      ],
+      "meaning": "Continuous real body side paint, lower shadow and door cutline"
+    },
+    "hood": {
+      "atlasPixelRect": [
+        0,
+        160,
+        512,
+        288
+      ],
+      "meaning": "Long rounded hood skin, broad light/deep green clusters and central seam"
+    },
+    "rearDeck": {
+      "atlasPixelRect": [
+        0,
+        288,
+        512,
+        384
+      ],
+      "meaning": "Compact rounded rear deck, never covers cockpit"
+    },
+    "windscreen": {
+      "component": "Static tiny windscreen exact framed opaque glass owner",
+      "atlasPixelRect": [
+        0,
+        384,
+        512,
+        464
+      ],
+      "meaning": "Only actual front/back slab faces own blue glass with continuous dark perimeter; thin edges remain ink"
+    },
+    "bucketSeatbacks": {
+      "components": [
+        "Tan bucket seatback -1",
+        "Tan bucket seatback 1",
+        "Tan seatback center face -1",
+        "Tan seatback center face 1"
+      ],
+      "roles": [
+        "tan",
+        "tanLight",
+        "tanShadow"
+      ],
+      "meaning": "Padded role swatches; actual back/cushion geometry, not a painted upper deck"
+    },
+    "trim": {
+      "roles": [
+        "silver",
+        "rim",
+        "ink",
+        "cream",
+        "ruby"
+      ],
+      "meaning": "Exact named bumpers, grille, round lamps, handles and static steering components; padded role islands"
+    },
+    "cockpit": {
+      "roles": [
+        "bedFloor",
+        "bedWall",
+        "bedRib"
+      ],
+      "meaning": "Recessed actual floor, separate inner door panels/dashboard and low center tunnel"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "bedFloor": [
+      80,
+      504
+    ],
+    "bedRib": [
+      112,
+      504
+    ],
+    "bedWall": [
+      144,
+      504
+    ],
+    "rubyLight": [
+      176,
+      504
+    ],
+    "tan": [
+      208,
+      504
+    ],
+    "tanLight": [
+      240,
+      504
+    ],
+    "tanShadow": [
+      272,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric two-seat open roadster; long hood and compact rear deck have distinct semantic ownership.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

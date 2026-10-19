@@ -1,0 +1,18 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+  "humanApproval": false,
+  "activationAuthorization": "Owner-authorized autonomous production run153; formal human art review remains open",
+  "observations": [
+    "Inspected all16finalstudy and16game headings at native density. Short sloping cab, tall continuous cargo roof, cream panels and violet stripe/envelope distinguish the panel van.",
+    "Both front-third side panes and windshield stay continuously framed on actual body skin; rear double-door seams and lamps remain coherent in opposite rear obliques.",
+    "Near wheels sit in open arches and far crowns remain under continuous body/fenders. No raised caps, exposed crowns or detached trim were observed.",
+    "Inspected both eight-signed-phase sets using fixed-union crops at nearest2x and both wireframes. Body/UV marks stay fixed while rig quarter/reverse/reset tests pass.",
+    "Independent declared-input-only replay reproduces exact GLB/atlas/recipe. Independent actual full-roll body proof rejects a colliding-body control and restores baseline.",
+    "Unchanged native projection, fixed-body/rig checks, clipping and desktop/mobile/network-free offline checks pass."
+  ],
+  "limitations": [
+    "Neutral rolling only; steering, suspension and animated equipment are unqualified.",
+    "Finite coverage sampling complements, rather than substitutes for, recorded native visual views."
+  ]
+}

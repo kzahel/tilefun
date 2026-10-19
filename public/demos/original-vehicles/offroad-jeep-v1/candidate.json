@@ -1,0 +1,510 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "offroad-jeep-v1",
+      "name": "Boxy off-road vehicle",
+      "title": "Boxy off-road vehicle \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original boxy off-road SUV; independent continuous side, fixed windshield/rear and separate removable-style roof UV ownership on actual skin. Static rear-mounted spare. No projected or view-dependent paint.",
+      "audit": {
+        "triangles": 3146,
+        "vertices": 5972,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 216488,
+        "sha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/atlas.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/atlas.png",
+          "sha256": "9a2e09cf2cb15026105ee3d9d82622bc8d3ea3f6cb1b4e3d177bf3f94d733a3f"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/capture.json",
+          "sha256": "de55fac9f74c2f068eed2d33afa437e53672fd2c7bae11b62cf5ee95c0cce498"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-0.png",
+          "sha256": "5e0e9b1fef42b283408e70691655a4a59f070ed4cc838b0609eb7a4ead3836c5"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-1.png",
+          "sha256": "faf530d6b06a4b07791c15dbd87084eb5932c962f0f4b982e07b839ffb14d240"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-10.png",
+          "sha256": "d2dffae4295a0ddc9dce66c7407ac674d4a37a7ab5ed41ea3ea90a050732d2de"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-11.png",
+          "sha256": "116fc7f442b58f03b900644257f3919ce418cb450fd6f4a59dfded7fd69361c3"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-12.png",
+          "sha256": "7a35225990a7f5ba538da014927caa9cbf8f7421024582433ce5e5b8ac62f030"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-13.png",
+          "sha256": "15870cae2b4cdaa9b7e18403a064d3657954a32618b43ec5e9d8d4bae19ba11b"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-14.png",
+          "sha256": "cf32295fbefc9245295863f2ecbc300e63fd0784ce49afa23dbe9ebe7dd01eb9"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-15.png",
+          "sha256": "ad786e282532a9c8bc4d5494fef447470b4e7dc4466cb5b1dd9302347161252d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-1x.png",
+          "sha256": "7845329f113ec70f93b2c638b326d93262a25f4b7f2fcce78c53a02afcdf547d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-2.png",
+          "sha256": "4171db62c74e67cc3431d38e8ce94e0c6713694f1ed90e668bf54e7753b27f92"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-2x.png",
+          "sha256": "5d35caaf2fdc0894933346735c656adb1f50fd205cb0c84b01d835928e31313a"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-3.png",
+          "sha256": "0dfd0ad2359fcce9afec6f1ddb30bc12e4f6cb268aeb0b0ab46abe7f6e060ba1"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-3x.png",
+          "sha256": "8cb16c93a64dabe272f6551f84aa1de5abaf57755c7fc7c0c56d186bd66e898d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-4.png",
+          "sha256": "2541254a568626aa507ff116acce6b8c926458fefb17943adc0be02376067b55"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-5.png",
+          "sha256": "0a9554d970ab9a5c3d213357db6fe845baf48b450166db29403853b1248f4150"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-6.png",
+          "sha256": "1c6c049f32a576f352b1a1b300f7d6f43abc2034e7d9d0e0ba4a68bb9c392587"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-7.png",
+          "sha256": "eacf7778d1616b67967eb1b28c4fdd14efa88f1b478c881163bbac92deca1f9c"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-8.png",
+          "sha256": "091535f5c3ebf00704ce4ae8e7901f902786cfffc95d9d8261ea8e93b1a9e1dd"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/engine-9.png",
+          "sha256": "f2ac0bb9daebb24bdcdf5d763f2941473467c9227cc2a1eea16e508b5cca0f30"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-0.png",
+          "sha256": "4171db62c74e67cc3431d38e8ce94e0c6713694f1ed90e668bf54e7753b27f92"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-1.png",
+          "sha256": "7e588b80d03dc2e86faeef6af9f730b9eb392230c0869723ef1e210ec967cb25"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-2.png",
+          "sha256": "47df78dc1290680ef60bb8cef84ff490cbaaa50d43509717ab2ac2e8e505e91f"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-3.png",
+          "sha256": "1a4cafccfd78e8a28739fc0b988b2e4f54f77a83900891d3e0533da23249ee65"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-4.png",
+          "sha256": "4171db62c74e67cc3431d38e8ce94e0c6713694f1ed90e668bf54e7753b27f92"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-5.png",
+          "sha256": "7e588b80d03dc2e86faeef6af9f730b9eb392230c0869723ef1e210ec967cb25"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-6.png",
+          "sha256": "47df78dc1290680ef60bb8cef84ff490cbaaa50d43509717ab2ac2e8e505e91f"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/game-roll-7.png",
+          "sha256": "1a4cafccfd78e8a28739fc0b988b2e4f54f77a83900891d3e0533da23249ee65"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "5e0e9b1fef42b283408e70691655a4a59f070ed4cc838b0609eb7a4ead3836c5"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "1967f4593ba124e18c6ed3d6146025dcf20a7e9a2f2838d7cc77bf0dbebba02e"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "3732ac542a3796672817208d694664c44cbc382b906c152875e2ba255b74279b"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "5e0e9b1fef42b283408e70691655a4a59f070ed4cc838b0609eb7a4ead3836c5"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "091535f5c3ebf00704ce4ae8e7901f902786cfffc95d9d8261ea8e93b1a9e1dd"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "be45d022b77a8087a32ca1f1467391a10551580eaa63db6a4ee183761dec2cfe"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "e49e1ecc568ade9433defba93f1d68b4be4c7265af403ea3bccbc6d33e56b1f7"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "091535f5c3ebf00704ce4ae8e7901f902786cfffc95d9d8261ea8e93b1a9e1dd"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "5e0e9b1fef42b283408e70691655a4a59f070ed4cc838b0609eb7a4ead3836c5"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "c53fd2f5aa02ba4287e350938fb9cf9e645820e72bd5478e169254c3306487de"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "c53fd2f5aa02ba4287e350938fb9cf9e645820e72bd5478e169254c3306487de"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "5e0e9b1fef42b283408e70691655a4a59f070ed4cc838b0609eb7a4ead3836c5"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "091535f5c3ebf00704ce4ae8e7901f902786cfffc95d9d8261ea8e93b1a9e1dd"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "c11ac32de319bb8edce105bb51f3af10f2472231050ef5a5071ccc3725c9692b"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "c11ac32de319bb8edce105bb51f3af10f2472231050ef5a5071ccc3725c9692b"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "091535f5c3ebf00704ce4ae8e7901f902786cfffc95d9d8261ea8e93b1a9e1dd"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/independent-visual.json",
+          "sha256": "113d1b3d4e336bf338131c8ddf9d42013d24ea700787bf8737c0454853873283"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-engine.png",
+          "sha256": "8413a91cf571b9dfc72e3b0b1f5fa64a7d6f12ffd6c11d1b05b059cb35006dff"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-independent.png",
+          "sha256": "a1412b9c9043f6bfb3044afb1afca0d12af27ce5d6d3cb535602e4a8b4857610"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-phases.png",
+          "sha256": "f036c125046c636d5830e688ef71f87319f71fefb2fe5d351ae70377729029cd"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-study.png",
+          "sha256": "0506e14fb9358fca5a7bbb29a621422c3ec7cc6cd81afb484d527872a1dbd1a2"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "2d4856c2c8a359e53b8c23a71caded5332768efe873ad1d8f9e6615392bb6a9c"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "03dfadf21a909b5791af6551c863e1d1c91a788930e947549104b071d536ca40"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "3df976e65a2c75dd7c16b9ebebf829879f30fc908ffa128c925edc905796061c"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/inspection-wires.png",
+          "sha256": "a6c97acb89e522df70fd85d6dbb89cfdd7075124304fb45e3edca7e42c6d67a0"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-0.png",
+          "sha256": "c4e1c94e82ee2993affca85dd4877a48f7a9a91c5f1c79deec0acf167dc082ae"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-1.png",
+          "sha256": "588c4cfd9aa7e6621b548dbf81efd899aeec29236a476d6e209c6ce276f7f945"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-2.png",
+          "sha256": "c4e1c94e82ee2993affca85dd4877a48f7a9a91c5f1c79deec0acf167dc082ae"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-3.png",
+          "sha256": "77da3778732b64e25d697d8a211a58754a01574d25befad5af4371d4fcc5a870"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-4.png",
+          "sha256": "c4e1c94e82ee2993affca85dd4877a48f7a9a91c5f1c79deec0acf167dc082ae"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-5.png",
+          "sha256": "588c4cfd9aa7e6621b548dbf81efd899aeec29236a476d6e209c6ce276f7f945"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-6.png",
+          "sha256": "c4e1c94e82ee2993affca85dd4877a48f7a9a91c5f1c79deec0acf167dc082ae"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/roll-7.png",
+          "sha256": "77da3778732b64e25d697d8a211a58754a01574d25befad5af4371d4fcc5a870"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-0.png",
+          "sha256": "2396002c112cd2e86743fc0685da158b0f1ce616cbb1d28ae23a7a954e8183c6"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-1.png",
+          "sha256": "01c7ef7aea2c9f1792c0aa74f896911c3fc9ea11a82f381f11aae118c11f862d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-10.png",
+          "sha256": "633f18461db2f5567e7d8a6734fbeb6c1e88bbdbdca638ee673b846899a39b49"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-11.png",
+          "sha256": "f91bdb0bdf5b0673de15cd3a681f7e16214ca3c56c929d0b28d0712a70653b92"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-12.png",
+          "sha256": "eb4e8ba6e8ea25741f21b15410590e31b042bc4cc1893d77dc4a8f8b0f46da9f"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-13.png",
+          "sha256": "6eb4ac484f07364df0883929711f9bc4b83cf633cc997cdabc02e69d05b0b0fa"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-14.png",
+          "sha256": "1f18d2a5bf938b19ffcfe32c1ffc7f86eaef281567223be46abd089953fdda6d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-15.png",
+          "sha256": "9189c0be1ebf158efbc2973cf4e142ab6946a4a559748e829c1a652714eb5d6b"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-1x.png",
+          "sha256": "02cbb73f680861498d545c207d7eec78c2c493f2e25ef9cc83328550a748f6a7"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-2.png",
+          "sha256": "c4e1c94e82ee2993affca85dd4877a48f7a9a91c5f1c79deec0acf167dc082ae"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-2x.png",
+          "sha256": "06e12ecb8c126dc2873501e03b3daca5929a63bc3e9c6a64be42fce0b8baff5c"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-3.png",
+          "sha256": "27b060ab561042db0110d5ba37f31f83eb2b095d57125b0da9dce5c544c53df3"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-3x.png",
+          "sha256": "29cc23534be09e9602ce392493861ec760f65fb4f83bdac8158d3252135e0b34"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-4.png",
+          "sha256": "c85081bbd55cadbda3ad1596937f60a603f14ba017dc76faa2ff0d7fb9966b2a"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-5.png",
+          "sha256": "f79f72247cbfe33c417c081a4ad695320a3baee478c76b09031c33c2913f81ce"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-6.png",
+          "sha256": "a014eea0240565c45383ab6db6f4b9f54d11d07a819ad6342f0434f93213705d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-7.png",
+          "sha256": "f3156aa8858acbcb0d7fa716377522e25530d4276039ca8c1e70357cd980c0fc"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-8.png",
+          "sha256": "25ffd1d60772f79933c8015ef612966447d1a3e5bf0096ff21a9d731e6f8ef48"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/study-9.png",
+          "sha256": "f76202469f97c777ff8e7c8280e0afae6ed3f19942b538a7139543e0cb266a57"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/wire-engine.png",
+          "sha256": "9fa2ae418c96fd53c77701d4e5dd3c9e50f5f1b5185d25438bb79483d6eb4bd4"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/engine/wire-study.png",
+          "sha256": "b50930652d77c7eb1eab36ac49422cdaded4ac69ca0660a68306f0cf7e42921c"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/model.glb",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/model.glb",
+          "sha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/recipe.json",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/recipe.json",
+          "sha256": "83cd9a8461c116bcf0e2d58751787ee6b34cda40f0ca16419af6336325a90a03"
+        },
+        {
+          "source": "demos/vehicle-bake/offroad-jeep/v1/report.json",
+          "retained": "demos/original-vehicles/offroad-jeep-v1/inputs/report.json",
+          "sha256": "e91deb6a38a96aa95e2536f620cd312584b55fa4b50ef836092aa83d22464652"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "status": "passed",
+  "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "id": "FL",
+      "yaw": 0,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 129,
+      "reverseChangedChannels": 105,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesSpoiler": true,
+      "images": [
+        "engine/independent-FL-0.png",
+        "engine/independent-FL-1.png",
+        "engine/independent-FL-2.png",
+        "engine/independent-FL-3.png"
+      ]
+    },
+    {
+      "id": "FR",
+      "yaw": 180,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 120,
+      "reverseChangedChannels": 103,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesSpoiler": true,
+      "images": [
+        "engine/independent-FR-0.png",
+        "engine/independent-FR-1.png",
+        "engine/independent-FR-2.png",
+        "engine/independent-FR-3.png"
+      ]
+    },
+    {
+      "id": "RL",
+      "yaw": 0,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 113,
+      "reverseChangedChannels": 110,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesSpoiler": true,
+      "images": [
+        "engine/independent-RL-0.png",
+        "engine/independent-RL-1.png",
+        "engine/independent-RL-2.png",
+        "engine/independent-RL-3.png"
+      ]
+    },
+    {
+      "id": "RR",
+      "yaw": 180,
+      "phasesDegrees": [
+        0,
+        90,
+        -90,
+        0
+      ],
+      "changedChannels": 125,
+      "reverseChangedChannels": 89,
+      "absoluteResetPixelsExact": true,
+      "allOtherMeshesFixed": true,
+      "staticBodyIncludesSpoiler": true,
+      "images": [
+        "engine/independent-RR-0.png",
+        "engine/independent-RR-1.png",
+        "engine/independent-RR-2.png",
+        "engine/independent-RR-3.png"
+      ]
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,106 @@
+{
+  "modelSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+  "spriteSha256": "2a5e68aa43f6c08c2735e57c4e3fe1d7de858b93825a9a53dc28b9672e7ef084",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-delivery-van-v1.json": "5f2ea4f9a03c28bdb59f5d72b59bc86ba49968559d2b6ad5616a92963e92b8c6",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/delivery-van-v1/review-manifest.json": "5094344a660a79c9de6959687c34121cda5d10497eee2e41ae4e9848a188b30c",
+    "public/demos/original-vehicles/delivery-van-v1/inputs/model.glb": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "public/demos/original-vehicles/delivery-van-v1/inputs/atlas.png": "d601d691fd0853487a238b259381d0a5b4d5dac2e7c8968a075b9a06ad5452d2",
+    "public/demos/original-vehicles/delivery-van-v1/captures/capture.json": "adb5839b725c2a6d1cd4fbf820722d81fee5375567c4c21540a79ba2eb2d0044",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/replay-verification.json": "b8ce10c32abff035b7c87bf52d2238fe88ff01ccf6542b1845213ad856102820",
+    "art-source/vehicle-bake/delivery-van/v1/build.py": "e0923c6dc4d730ab34b9b726bfa6162b2b732966c8d13ef889225036cab0678f",
+    "art-source/vehicle-bake/delivery-van/v1/family.json": "ba3b12a38053decbe06d4727e8769a32bfbc086aaa95ca3ed62ef7ea0704c62d",
+    "art-source/vehicle-bake/delivery-van/v1/coverage-region.json": "01ca64db785e4d52103ced85522b2d380afe43b1e400cd8f31c751c28005122a",
+    "art-source/vehicle-bake/delivery-van/v1/surface-regions.json": "5288112b2b19994cf834ef5b2ccad18f61fed519e48c195067ca6b4a7b8e17c3",
+    "art-source/vehicle-bake/delivery-van/v1/review.json": "667b9689c38a706da5f936d43fe87c255f7348fa437628e285229369eb64ebd9",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/delivery-van-v1/captures/engine-4.png": "ff6d33584e9065efd0b9cd3802014b33ee803260d574236d8fa43c8de9f41606",
+    "public/demos/original-vehicles/delivery-van-v1/captures/engine-12.png": "d0a4af7aa7700ee83f3e0bd22be898b901edfcb564a50ecc17a1136f22a75dc8",
+    "public/demos/original-vehicles/delivery-van-v1/captures/engine-8.png": "07cda887486415de5f99f9060da6cc62d21a7a57227fdf1cab5b0ee6c419784e",
+    "public/demos/original-vehicles/delivery-van-v1/captures/engine-0.png": "faadb292e470c099cd7f5a1ea9db1d851a4631f269ad3c96b99e92495782791b"
+  },
+  "physicalBounds": [
+    88,
+    37,
+    39
+  ],
+  "measurement": {
+    "modelSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -43.52173614501953,
+        -18.30434799194336,
+        4.76837158203125e-07
+      ],
+      "max": [
+        43.52173614501953,
+        18.30434799194336,
+        38.72174072265625
+      ],
+      "size": [
+        87.04347229003906,
+        36.60869598388672,
+        38.72174072265625
+      ]
+    },
+    "triangles": 2426,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/delivery-van/v1/evidence/replay-verification.json",
+    "sha256": "b8ce10c32abff035b7c87bf52d2238fe88ff01ccf6542b1845213ad856102820",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-delivery-van-v1.json --blender BLENDER"
+}

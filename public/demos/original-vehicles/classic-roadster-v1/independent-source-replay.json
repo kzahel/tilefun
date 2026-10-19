@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "classic-roadster",
+  "independent": true,
+  "declaredInputPins": 15,
+  "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/classic-roadster/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/classic-roadster/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/classic-roadster/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "classic-roadster",
+  "name": "Classic open-top roadster",
+  "tags": ["vehicle", "original", "roadster"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/classic-roadster-v1/review-manifest.json",
+    "sha256": "606da57f94d752f09122f3d1f4997757bc546e3a537e832bb546c1cfcdf32d9d",
+    "candidateId": "classic-roadster-v1",
+    "model": "public/demos/original-vehicles/classic-roadster-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/classic-roadster-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/classic-roadster-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/classic-roadster-v1/captures",
+    "modelSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "triangles": 3092,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json",
+    "sha256": "d8226264687195e6aa70d315ab4b28b0c88d39000bb40e81f501a1c84f23b02b",
+    "build": "art-source/vehicle-bake/classic-roadster/v1/build.py",
+    "family": "art-source/vehicle-bake/classic-roadster/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "classic-roadster-authored-v1",
+    "path": "assets/models/vehicles/classic-roadster-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/classic-roadster-v1.png",
+  "performance": {
+    "speed": 130,
+    "acceleration": 240,
+    "pushSpeed": 42,
+    "pushWeight": 110
+  },
+  "receipt": "art-source/vehicle-bake/runtime-classic-roadster-v1.json",
+  "expectedBounds": [85, 35, 22]
+}

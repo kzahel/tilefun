@@ -1,0 +1,19 @@
+{
+  "status": "complete",
+  "readyForParentQA": true,
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "report": "public/demos/vehicle-bake/classic-roadster/v1/report.json",
+  "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "atlasSha256": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/classic-roadster/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/classic-roadster/capture.mjs",
+    "python scripts/vehicle-bake/classic-roadster/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/classic-roadster/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/classic-roadster/v1/evidence/clearance-input.json data/vehicle-bake/classic-roadster/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/classic-roadster/v1/model.glb --config art-source/vehicle-bake/classic-roadster/v1/coverage-region.json --output data/vehicle-bake/classic-roadster/recheck-coverage.json",
+    "python scripts/vehicle-bake/classic-roadster/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/classic-roadster/author-config.json --qa-only"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "pickup",
+  "name": "Teal blue pickup truck",
+  "tags": ["vehicle", "original", "pickup truck"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/pickup-v1/review-manifest.json",
+    "sha256": "8aafd4a1448b68793e02d10e3ce9c3e4e7d1901c7b58cf00d4946f1604ce43da",
+    "candidateId": "pickup-v1",
+    "model": "public/demos/original-vehicles/pickup-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/pickup-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/pickup-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/pickup-v1/captures",
+    "modelSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "triangles": 2984,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/pickup/v1/evidence/replay-verification.json",
+    "sha256": "62a772044892bf270e850c2622dfc7b9d6af8cd70477a74d9d5d609eb3b0e143",
+    "build": "art-source/vehicle-bake/pickup/v1/build.py",
+    "family": "art-source/vehicle-bake/pickup/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "pickup-authored-v1",
+    "path": "assets/models/vehicles/pickup-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/pickup-v1.png",
+  "performance": {
+    "speed": 100,
+    "acceleration": 180,
+    "pushSpeed": 45,
+    "pushWeight": 200
+  },
+  "receipt": "art-source/vehicle-bake/runtime-pickup-v1.json",
+  "expectedBounds": [95, 39, 36]
+}

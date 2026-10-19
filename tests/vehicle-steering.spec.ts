@@ -1,11 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { AUTONOMOUS_ORIGINAL_VEHICLES } from "../src/traffic/AutonomousOriginalVehicles.fixture.js";
 
 test.use({ channel: "chromium" });
 
-for (const family of [
-  { model: "beetle", title: "Beetle" },
-  { model: "school-bus", title: "School bus" },
-]) {
+for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
   for (const backend of ["canvas", "gpu&meshes"]) {
     test(`${family.title} forward and reverse rolling turns preserve stopped heading (${backend})`, async ({
       page,

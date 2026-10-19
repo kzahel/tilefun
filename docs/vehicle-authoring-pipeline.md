@@ -261,6 +261,38 @@ inspection and does not replace wheel clearance or coverage checks.
 The pickup uses the same native 224px viewport and fixed pixel density as the bus.
 Its four wheels have a world-space radius of 8px. Its own coverage region and
 whole-body roll proof are qualified independently. Reuse the frozen-only offline command with
-`scripts/vehicle-bake/family-pickup.json`; wait for owner appearance agreement before
-adding any pickup runtime catalog entry. The bus now has its own accepted runtime
+`scripts/vehicle-bake/family-pickup.json`; its exact reviewed revision is now
+active under the explicit autonomous authorization in tactical 153. The bus now has its own accepted runtime
 config, `runtime-school-bus-v1.json`, consumed by the existing versioned exporter.
+
+## Bounded production orchestration
+
+`production.py CONFIG capture --blender BLENDER --deadline UTC_ISO` runs the
+established prepare/build/capture/clearance/assembly/browser stages into a new
+review directory. It stops before freezing so a coordinator can inspect the
+actual native camera sheets, phases and wireframes. Record that independent
+inspection in the configured QA directory, including `humanApproval: false`.
+Run `production.py CONFIG inspect --deadline UTC_ISO` to compose actual native
+study/engine sheets, fixed-union signed phase crops and wireframes under QA.
+Inspect those images directly; generating a contact sheet is not visual approval.
+Then run `production.py CONFIG freeze --baseline BASELINE --deadline UTC_ISO` to
+freeze, regenerate the standalone from frozen files and verify prior bytes.
+Existing frozen review directories are rejected by the capture/freeze actions;
+`verify` is read-only. The helper preserves the established render/proof tools.
+
+An optional absolute UTC deadline bounds each owned subprocess. Per-stage logs
+and receipts remain under the configured ignored QA directory. The autonomous
+run in [153](tactical/153-autonomous-vehicle-production.md) uses this orchestration;
+its owner explicitly waived per-vehicle appearance pauses without changing
+formal human review records or the required visual/gameplay checks.
+
+
+New runtime receipts use `runtime-export-v3.py`: centered conservative bounds
+must enclose both sides about the unchanged ground origin. Use
+`ceil(2*max(abs(min),abs(max)))` for horizontal axes and `ceil(maxZ)` for height.
+Explicit expected bounds reject mismatches before writing runtime assets. New
+assets use zero origin tolerance; never transfer the historical coupe exception.
+Preserve v1/v2 and v3 once their receipt hashes are retained. Intentional exposed
+wheels (for example hot-rod fronts) retain raw unsupported crown samples plus an
+explicit N/A explanation; actual whole-body roll clearance still covers every
+wheel. Different axle radii must be measured and exercised independently.

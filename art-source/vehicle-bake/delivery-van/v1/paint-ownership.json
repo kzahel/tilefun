@@ -1,0 +1,273 @@
+{
+  "method": "Original tall panel-van loft with short sloping nose and continuous crowned roof. Direct semantic paint on actual cab/body skin: bounded front-third blue glazing, violet lower stripe, envelope motif and closed rear double doors. Economical runtime-topology component master; no high-to-low transfer.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      155,
+      151,
+      162
+    ],
+    "paintShadow": [
+      182,
+      182,
+      187
+    ],
+    "paintMid": [
+      215,
+      212,
+      206
+    ],
+    "paint": [
+      240,
+      236,
+      223
+    ],
+    "paintLight": [
+      255,
+      250,
+      235
+    ],
+    "cream": [
+      255,
+      230,
+      163
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "violet": [
+      123,
+      94,
+      169
+    ],
+    "violetLight": [
+      160,
+      125,
+      196
+    ],
+    "violetShadow": [
+      95,
+      77,
+      139
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "ownership": "Direct semantic UV paint on the actual continuous panel-van skin. Front-third cab side glass and sloping windshield own bounded dark frames; no overlay glass on body. Blank white cargo side panels, broad violet lower stripe, envelope shape and rear two-door seam/handles/lamps have distinct authored charts.",
+  "semanticOwners": {
+    "bodySide": {
+      "component": "Own short nose tall panel-van continuous crowned coachwork",
+      "atlasPixelRect": [
+        0,
+        0,
+        512,
+        192
+      ],
+      "meaning": "Two symmetrical actual side surfaces; cab panes exclusively front third, envelope motif and blank cargo panel; violet stripe and door cutline"
+    },
+    "endCaps": {
+      "atlasPixelRect": [
+        0,
+        192,
+        512,
+        272
+      ],
+      "meaning": "Left half front grille/lamps; right half rear two closed doors, handles, seam and red lamps. Rear has no glass."
+    },
+    "windshield": {
+      "atlasPixelRect": [
+        0,
+        272,
+        512,
+        352
+      ],
+      "meaning": "Only front sloping cab skin owns bounded blue windshield and dark continuous perimeter"
+    },
+    "roof": {
+      "atlasPixelRect": [
+        0,
+        352,
+        512,
+        432
+      ],
+      "meaning": "Continuous gently crowned cream roof, no cargo windows"
+    },
+    "nose": {
+      "atlasPixelRect": [
+        0,
+        432,
+        512,
+        480
+      ],
+      "meaning": "Short sloping cream nose"
+    },
+    "trim": {
+      "roles": [
+        "ink",
+        "silver",
+        "glass",
+        "violet",
+        "violetLight",
+        "violetShadow"
+      ],
+      "meaning": "Named bumpers, fixed mirrors and broad integrated fender components own padded role islands"
+    }
+  },
+  "roleSwatchPixelCenters": {
+    "ink": [
+      16,
+      488
+    ],
+    "tire": [
+      48,
+      488
+    ],
+    "tireLight": [
+      80,
+      488
+    ],
+    "paintDeep": [
+      112,
+      488
+    ],
+    "paintShadow": [
+      144,
+      488
+    ],
+    "paintMid": [
+      176,
+      488
+    ],
+    "paint": [
+      208,
+      488
+    ],
+    "paintLight": [
+      240,
+      488
+    ],
+    "cream": [
+      272,
+      488
+    ],
+    "glassDark": [
+      304,
+      488
+    ],
+    "glass": [
+      336,
+      488
+    ],
+    "glassLight": [
+      368,
+      488
+    ],
+    "glassGlint": [
+      400,
+      488
+    ],
+    "rim": [
+      432,
+      488
+    ],
+    "silver": [
+      464,
+      488
+    ],
+    "white": [
+      496,
+      488
+    ],
+    "ruby": [
+      16,
+      504
+    ],
+    "amber": [
+      48,
+      504
+    ],
+    "violet": [
+      80,
+      504
+    ],
+    "violetLight": [
+      112,
+      504
+    ],
+    "violetShadow": [
+      144,
+      504
+    ],
+    "rubyLight": [
+      176,
+      504
+    ]
+  },
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric closed cargo van with front-third cab windows and separate closed rear double-door paint; no interior openness claim.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "offroad-jeep",
+  "independent": true,
+  "declaredInputPins": 17,
+  "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/offroad-jeep/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/offroad-jeep/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/offroad-jeep/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

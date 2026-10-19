@@ -1,0 +1,293 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "offroad-jeep",
+  "route": "offroad-jeep",
+  "revision": "v1",
+  "method": "Original boxy off-road SUV; independent continuous side, fixed windshield/rear and separate removable-style roof UV ownership on actual skin. Static rear-mounted spare. No projected or view-dependent paint.",
+  "geometry": {
+    "triangles": 3146,
+    "vertices": 5972,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 216488,
+    "sha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4299999475479126,
+        -0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -24.869564305181093,
+        8.000000145124353,
+        15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4299999475479126,
+        0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -24.869564305181093,
+        8.000000145124353,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.2799999713897705,
+        -0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        22.260869067648187,
+        8.000000145124353,
+        15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.2799999713897705,
+        0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        22.260869067648187,
+        8.000000145124353,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/offroad-jeep/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/offroad-jeep/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/offroad-jeep/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending",
+  "authorization": "autonomous-153",
+  "triangles": 3146,
+  "vertexCount": 5972,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 216488,
+  "atlasBytes": 3149,
+  "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+  "atlasSha256": "9a2e09cf2cb15026105ee3d9d82622bc8d3ea3f6cb1b4e3d177bf3f94d733a3f",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "offroad-jeep--v1",
+    "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "triangles": 3146,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.2595405202179197,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.2595405202179197,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.2595424243656055,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.2595424243656055,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/offroad-jeep/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "minBlenderWorld": [
+      -42.79130172729492,
+      -19.547826766967773,
+      9.5367431640625e-07
+    ],
+    "maxBlenderWorld": [
+      43.75652313232422,
+      19.547826766967773,
+      37.21739196777344
+    ],
+    "dimensionsBlenderWorld": [
+      86.54782485961914,
+      39.09565353393555,
+      37.21739101409912
+    ],
+    "dimensionsSourceUnits": [
+      4.9764999294281,
+      2.2480000782012937,
+      2.139999983310699
+    ],
+    "includesRearSpare": true
+  },
+  "staticSpareEvidence": {
+    "owner": "Body_static",
+    "spareRegionVertexCount": 347,
+    "noRollMetadata": true,
+    "wholeFixedBodyIncludedInClearance": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/offroad-jeep/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/offroad-jeep/capture.mjs",
+    "node scripts/vehicle-bake/offroad-jeep/independent-visual.mjs",
+    "python scripts/vehicle-bake/offroad-jeep/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/offroad-jeep/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/offroad-jeep/v1/evidence/clearance-input.json data/vehicle-bake/offroad-jeep/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/offroad-jeep/v1/model.glb --config art-source/vehicle-bake/offroad-jeep/v1/coverage-region.json --output data/vehicle-bake/offroad-jeep/recheck-coverage.json"
+  ],
+  "visualInspection": [
+    "Inspected all16 native study and16 native game headings, with fixed pixel density and no camera fitting. Burnt-orange short coachwork, raised contrasting charcoal hardtop, continuous framed cool-blue window band and static rear spare make a recognizable boxy off-road SUV.",
+    "Flat hood and upright windshield/rear glass retain separate skin ownership. Broad hood/fender paint clusters and beveled corners soften the box. No logos or tiny lettering. Door seams/handles are atlas paint.",
+    "Near road tires sit in real open arches; broad integrated fenders cover far crowns in both camera sets. No tire crowns appear above hood/fenders. No isolated raised caps, intersecting glass planes or blocked wells observed.",
+    "Inspected eight signed wheel phases per camera and both actual-GLB wireframes; wheel silhouette stays seated and fixed body remains coherent. Topology follows broad skin panels, local pockets, open shoulders and cylindrical wheels.",
+    "Inspected per-wheel neutral/quarter/reverse/reset images for all four wheels from visible opposing sides. Small asymmetric hub marks move; all other road wheels/body matrices stay fixed and reset images are byte-identical. Static body includes hardtop and rear spare.",
+    "Final packed audit measured4.9765L2.248W2.14H including spare/hub protrusions. The only change after parent draft inspection was moving each hub index inward0.01 source units to respect maximum width; final own32-heading/phase/wireframe inspection repeated.",
+    "Minor one-pixel variation in round lamps and small hub highlights is ordinary nearest-sampled native aliasing. No blocking visual findings."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "staticHardtopAndRearSpare": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Economical editable semantic component master uses runtime topology; no high-to-low transfer claim.",
+    "Finite family crown sampling and native visual inspection are separate evidence.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No off-road physics or new gameplay features; ordinary drive contract.",
+    "Minor native-pixel aliasing of round lamps/hub marks varies with heading.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/offroad-jeep/v1/atlas.png": "9a2e09cf2cb15026105ee3d9d82622bc8d3ea3f6cb1b4e3d177bf3f94d733a3f",
+    "art-source/vehicle-bake/offroad-jeep/v1/audit-source.py": "67bb808f6344e24d14b3b18c4443afc20b135c30cd334e8871684d81f91f8f1a",
+    "art-source/vehicle-bake/offroad-jeep/v1/build.py": "443b6d28d7b7fe9d5d6d14cb535c289f017fbb23e2882d1e76c2dc92328d9ad8",
+    "art-source/vehicle-bake/offroad-jeep/v1/capture.mjs": "6d241cfd55c7d176c6e48329c408e7bb5786b0182234b73305028f120931aff4",
+    "art-source/vehicle-bake/offroad-jeep/v1/car.blend": "414f71d6d4e374fc9d1dc089b340d3b0980b4d55ac958f2f41fbc0c66a246283",
+    "art-source/vehicle-bake/offroad-jeep/v1/coverage-region.json": "b9706a01c12e5b1166dcc1e57bd436c90ce23d443b7a5a291f3587630fd3dfae",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/author-browser-qa.json": "c645690a06d495aaad7cdec24104c915d7e1f0b21ddf88bdc53432fae3164754",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/author-visual-inspection.json": "45d5657ca65b4eac0123562edcd03340c04f6ba1cd608f0ace56d5744a6e3fe4",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/clearance-input.json": "a5b50343ec2fabb88f3077b7f424c42cbbe3c0927e89117e127b0a93c2ebd7a3",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/engine-capture.json": "de55fac9f74c2f068eed2d33afa437e53672fd2c7bae11b62cf5ee95c0cce498",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/independent-visual.json": "113d1b3d4e336bf338131c8ddf9d42013d24ea700787bf8737c0454853873283",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/packed-source-audit.json": "61fa16f3f165f6b84bf66eb5bec3fb2393d39993c766ac4725d3bd2332d4de67",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/replay-verification.json": "b0f30ed6b59e7d13bc7678bf536ff4b93501b66916dfffa92274f7c5051d3de3",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/shared-clearance.json": "fd25c084f4c7b575425660d01f60175af3f6f1d765701e4fbaf7ad160dff49a8",
+    "art-source/vehicle-bake/offroad-jeep/v1/evidence/upper-wheel-coverage.json": "95e06c06f450e15dd7af4a35f554cf30a2f80822070434247b2fec48dc26bcda",
+    "art-source/vehicle-bake/offroad-jeep/v1/family.json": "f905a9035cf096e86222b9db10041b3a7fc6428e1b337b77621b0b2c1f575c5c",
+    "art-source/vehicle-bake/offroad-jeep/v1/finalize.py": "c07167f1bfa3967f0742de5d901b10629f7e5c30d10c6bbf6f5e358fa35c679c",
+    "art-source/vehicle-bake/offroad-jeep/v1/geometry.py": "b6ab0ea6cdc4e99a76edcf6697106a2bda5f65a45ba21e6029e7fc23e61b105b",
+    "art-source/vehicle-bake/offroad-jeep/v1/independent-visual.mjs": "09e9693efe2356c8cfd84260c5b55e5c2c220e0a5bc0879ebd44d7d2d0f69614",
+    "art-source/vehicle-bake/offroad-jeep/v1/master.blend": "285b454ae7be7f2f0f0a85c63b7d1740bca9baaa0f46eafecf5d051f8c8ae64c",
+    "art-source/vehicle-bake/offroad-jeep/v1/model.glb": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "art-source/vehicle-bake/offroad-jeep/v1/paint-ownership.json": "280e8df2359c27c93d9a41c764baf8d323edec3292c82d883be9dc004126822f",
+    "art-source/vehicle-bake/offroad-jeep/v1/palette-draft.png": "3a918639bc09316df8fb185e4c47ad77c8bf2e1debe681eb23bfea05f795d18b",
+    "art-source/vehicle-bake/offroad-jeep/v1/recipe.json": "83cd9a8461c116bcf0e2d58751787ee6b34cda40f0ca16419af6336325a90a03",
+    "art-source/vehicle-bake/offroad-jeep/v1/review.json": "9873bf9550de60d493036bf439f1a17921aa6036cff32ecc4d93466a038f3bf1",
+    "art-source/vehicle-bake/offroad-jeep/v1/sheets.py": "9f0432e001531a3ac368f668c06ad753e74f28a1772785b8d3b090edafa2b2d0"
+  }
+}

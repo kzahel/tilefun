@@ -1,0 +1,106 @@
+{
+  "modelSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "spriteSha256": "a42a360fb3a4586f553a618e879de6612397bbe23348196fed5cf35aab598a1a",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-classic-roadster-v1.json": "ef0b0b83baedcd48e0823cccc98aceeb2ed1120113a08a083cc5e2290447d807",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/classic-roadster-v1/review-manifest.json": "606da57f94d752f09122f3d1f4997757bc546e3a537e832bb546c1cfcdf32d9d",
+    "public/demos/original-vehicles/classic-roadster-v1/inputs/model.glb": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "public/demos/original-vehicles/classic-roadster-v1/inputs/atlas.png": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b",
+    "public/demos/original-vehicles/classic-roadster-v1/captures/capture.json": "29eeee9504d98dee31c4abbbb952a135d77470d5047ba4822cd727e7f0faf437",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json": "d8226264687195e6aa70d315ab4b28b0c88d39000bb40e81f501a1c84f23b02b",
+    "art-source/vehicle-bake/classic-roadster/v1/build.py": "72eb867bf393483f1a81fea8550e9ec56a0b459c04e1ffa93d43e2062cacfa64",
+    "art-source/vehicle-bake/classic-roadster/v1/family.json": "1f2038c1bb8165f36a7a9420f5aed15b85d2fa62af12a02b8d933249d6f72933",
+    "art-source/vehicle-bake/classic-roadster/v1/coverage-region.json": "448782c264ec35518db4c47c282ebfc79f5b22081cc9141332c83c3f8eb5dbe9",
+    "art-source/vehicle-bake/classic-roadster/v1/cockpit-region.json": "afff93623e410917eab49cd66d9d0a674581e540b5211dac5a04de6f2b018654",
+    "art-source/vehicle-bake/classic-roadster/v1/review.json": "e3a949c05211a70f7a37288020aa354fba5627c3cfd9c4f406429bcae3a9369d",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/classic-roadster-v1/captures/engine-4.png": "9b5b6a48a6d45930d75f5905ef95d1445ebda440a9f5299e430438ce46c33033",
+    "public/demos/original-vehicles/classic-roadster-v1/captures/engine-12.png": "b06ec38085be6d3b293555200b24972bf0fff54b0635be4747adc3a302591a2d",
+    "public/demos/original-vehicles/classic-roadster-v1/captures/engine-8.png": "d44558bdd79793a075baaa5420ae9a72284153c0792432a2e9bd7f0456dc594b",
+    "public/demos/original-vehicles/classic-roadster-v1/captures/engine-0.png": "f057d32083a6c9697bf3c9aed88880add783ad3bebd379eb549b6a3995a71e56"
+  },
+  "physicalBounds": [
+    85,
+    35,
+    22
+  ],
+  "measurement": {
+    "modelSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -42.21739196777344,
+        -17.04347801208496,
+        4.76837158203125e-07
+      ],
+      "max": [
+        42.21739196777344,
+        17.04347801208496,
+        21.65217399597168
+      ],
+      "size": [
+        84.43478393554688,
+        34.08695602416992,
+        21.65217399597168
+      ]
+    },
+    "triangles": 3092,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json",
+    "sha256": "d8226264687195e6aa70d315ab4b28b0c88d39000bb40e81f501a1c84f23b02b",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-classic-roadster-v1.json --blender BLENDER"
+}

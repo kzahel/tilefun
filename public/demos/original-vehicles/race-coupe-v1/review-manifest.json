@@ -1,0 +1,1227 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "race-coupe-v1",
+      "name": "Striped racing coupe",
+      "title": "Striped racing coupe \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Explicit accepted-coupe paint variation: exact base geometry/UV/rig plus static modest spoiler. Red-ramp replacement guarded by semantic masks; cream stripes and roundels rasterized barycentrically in UV space from actual triangle 3D coordinates. No screen projection.",
+      "audit": {
+        "triangles": 2431,
+        "vertices": 3302,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 159872,
+        "sha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 5.913043478260871,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/atlas.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/atlas.png",
+          "sha256": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/capture.json",
+          "sha256": "aefafbe9dec69c1fac433e69bce0b87d431ed1a580938ce375617f6113903cc6"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-1.png",
+          "sha256": "41000a7b29635ca120425f9c0631a2a7c8d4164efd4f6da3ce447bb42d8d5a66"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-10.png",
+          "sha256": "0e8bf9dd2eb7ed85c2ded3d02069eaf5d1dd8eebdf188a931838f5e84314919f"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-11.png",
+          "sha256": "1d6015b74cfc0263568b983f6495d0908da4a935657710a3e828bd1e0aa43b34"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-12.png",
+          "sha256": "43f11dbf543a58a6b003ac5a488cad5ad1dc3fabc440941ea58e6887c87f999f"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-13.png",
+          "sha256": "97c8b9209dae9d240460f74e3beb636185264363f7e64f26aa197f56b8dcf996"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-14.png",
+          "sha256": "20bf7433553cca9d30ff7c3ebce0b08a08c47d8d537bc398fbf192a65290f966"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-15.png",
+          "sha256": "ef05e62aac18c8a37da48188cb1afcbcbfe41b6bcd76fe3b1db9ef987b1ee077"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-1x.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-1x.png",
+          "sha256": "0b03eebf2395738e57c60e6749423b33ac316f62249561582c7a964d91931d07"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-2.png",
+          "sha256": "8f07409eabbc58e90c378681576cbab9d84ea5cbb6680691cedfca7939f08ad5"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-2x.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-2x.png",
+          "sha256": "821e7aefa10061cae26774c5b49cab785eed5d6b713953357916e2ed2cd12895"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-3.png",
+          "sha256": "c9de12d92ad7771ff6f9de9c022c40a4f1e5576f96ad6d11be1111ff26823ad1"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-3x.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-3x.png",
+          "sha256": "1d01c0e4ddbe91b743b1a0fbd8805077560c49968a740f6e1e4266ec9f2386fd"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-4.png",
+          "sha256": "6429880795c16f4b174d67003a19eddbd21b710d960dc04dfbc57ca0a1b6cd21"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-5.png",
+          "sha256": "bc96ae686b6f48188a4bf68d2f224c95f4256ff5ee605076f641c2280fc3dffc"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-6.png",
+          "sha256": "a56416b6560cf4a79e00b5d7a66ff6506b1bd003da1f0dc65c212ebdcd91fbab"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-7.png",
+          "sha256": "b06ad1ce675729a6db7afc96d2666ae80b0987068cc604c22c861ab7f5b91972"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-8.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-9.png",
+          "sha256": "8f712997e2bb92969762d27d43fe56b6400b8b442a06b0b7a4e573051ca7c1f1"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-0.png",
+          "sha256": "8f07409eabbc58e90c378681576cbab9d84ea5cbb6680691cedfca7939f08ad5"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-1.png",
+          "sha256": "7575729c77c5808fd66ad3c554ef2d904afd45fa2cf3f6a8108aa42e451b573b"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-2.png",
+          "sha256": "30c2abfd30f39ebe496692d9bdabbd5d8b61806134256feb735c2a7e60cd85db"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-3.png",
+          "sha256": "56f427d066c947328756b4640325f5a538815ec67cafe3d685ec4d82d659067d"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-4.png",
+          "sha256": "3fe56cc3e095ab9c64f9d70346aa8991260cf6d85bed163aa76f8a5761f31316"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-5.png",
+          "sha256": "cd2b6c97d26ead64e95705303e82886435fd66b05d4954323c7144966a4bf489"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-6.png",
+          "sha256": "1c94fdb978a42b155cc072d7c08dadd614d222707b686eb7ddfb5061fbbdd67f"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-7.png",
+          "sha256": "74ca5ce5a200ed8035799286e4d1ed99611f2b03fa428efaef8fa74675a83e5d"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FL-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FL-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "53f3d0f0a5c9a6d82c7942a5b9a14e609881bb7bdd54b229cd6b8c977b2c4c7a"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FL-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "03915326be995dd34e2a6781f508deaa4f02d50e2e40b8c0f18249284236d038"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FL-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FR-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FR-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "a58bbc1e14fa30c464b844ca5bc4c07d1fd2364dc4f7b4cc26ed4e711b2b4632"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FR-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "866fba18219f0bd3f0605b2beb9a86062c1bff5f4ba57ada51ae3bc8c4bece20"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-FR-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RL-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RL-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "c0151645c9a1419e64d56fa756e9bfb7d225b21f372d73960b40198f25538f5d"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RL-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "faab39a83db00ef1b7aff9821360f1c702927ab3e24b604ee125009210099b91"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RL-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RR-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RR-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "3fa390c326ac1888f98b7dfbb6bbd16d701b5c3ea450f429b3bf19f8efa016a9"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RR-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "0327ec672f02651a4ac20e8bd008de17449500af81f77ec2111a1266aafd539f"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-RR-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/independent-visual.json",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-visual.json",
+          "sha256": "aa25819dbf9a569e8d5fed6ed7e7ca986fefcbf872fc64c13b5eb19556a0b481"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-engine.png",
+          "sha256": "c676304edc77ebfc4224e38ab68931819525b61a25f0c122be78caf27cfa23fe"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-independent.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-independent.png",
+          "sha256": "7b3b7a586e4bba9e6596711788b5236674a8797938485a6bae5a36e9a16cd615"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-phases.png",
+          "sha256": "4fca778a53bd592a46c7eeaed4d7818623fa91a558cb9fec9952d1e4d83cfd84"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-study.png",
+          "sha256": "ed9969961fd903ad4293eb0a5394cc257677ec2eac23739924677feffc21849c"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-tight-engine.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "7095f87f4898099f5a45a57da4c0c9b2668bbbc097f80a042c888ccbfcee1b2d"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-tight-phases.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "bafa42a52576f06dc494a0f00fd6290b196597f03cb687af3759a16a3b12b798"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-tight-study.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "c74f3f3762baa7e6497f00a962f0fefa1451f084d565031e0c6a7e7bf3dd7f37"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/inspection-wires.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-wires.png",
+          "sha256": "48a3480a7c2af52d1523b46775b526a699113d70dc5752655727c3ae6aafab00"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-0.png",
+          "sha256": "bd8f7d1ee90a0c719c4b23da5dede500612023deb5503f35912127aeb07ecc47"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-1.png",
+          "sha256": "e30ba7d35ddc152981dcbaecd513d06113ae8802ff156d56e7335ce506fb1eee"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-2.png",
+          "sha256": "d3eab029fe691600a7bd17bc9084eedb3cdfbe2acf4c141439dd8a698f703238"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-3.png",
+          "sha256": "4aa7bcb6e42222e9dda2c687923ba44fac92d71a350698c8ca15a7e56d450a8a"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-4.png",
+          "sha256": "b82f6277958a584d53642650a78c7697b43b4af34b7777c696594f49847919f3"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-5.png",
+          "sha256": "29fd9eae25689cc5477e71e03cfebd367f878cc67dc2fff996daf3591a86ab2a"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-6.png",
+          "sha256": "9f1a824d023693cd30bfd04fa5cd3b8673ae0f78423535b31e24797ea805c8d7"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-7.png",
+          "sha256": "23c9c51fe0c27e2ef54d84b407fa93c40d22181087b9b24d27b3f0470c9a29a8"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-0.png",
+          "sha256": "855f6ea2fc427ed5a9637c509a3a3eeaedb91e16269f1f06974b512237377964"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-1.png",
+          "sha256": "4c35ad4dde91247e4850d85d22fbf0e9e794808387ed014fa54dc483da330eef"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-10.png",
+          "sha256": "0e01a754b845fcd72b39b1594a4af68d984bc47db361f9ca31be522c77b70cb1"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-11.png",
+          "sha256": "e616a504afc4400407ffb0caad52182b51b48936bdc9e26aecd89d41e2983d3c"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-12.png",
+          "sha256": "ccfdaa4afd6a3a9b91e34aee1a9d6aa9872ce2984c92fcfe7a61672b9f277928"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-13.png",
+          "sha256": "21694bb445376bed11ea8a37f182ad45bda5ccb2c03ba7499764b41304ebade8"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-14.png",
+          "sha256": "df7305975028aff2b028bd8d6f61d500fc06502cc5c0a8e309215318b2c2c9ba"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-15.png",
+          "sha256": "a796e97de443a31ce9fd006004d9af0a364d14c4a7d89236a433e3703fdcda62"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-1x.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-1x.png",
+          "sha256": "d3cb0da6992f24215157d7ae471a0e9b906370d17f4e59b5baaf32420f562189"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-2.png",
+          "sha256": "bd8f7d1ee90a0c719c4b23da5dede500612023deb5503f35912127aeb07ecc47"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-2x.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-2x.png",
+          "sha256": "819e5766bd03d3851c91802ec46a6a479cf56e042ac81d91f4f0909fe7060fbb"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-3.png",
+          "sha256": "3c77eee8dada25eb1076c46478d17615ea31ccf173d7bdf28ecd9f066ce18aa6"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-3x.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-3x.png",
+          "sha256": "24e8c6ac4ab5ca72f7bdf9ad06d4f9a85f9bdf3ceec0a84def8b6a7993d290cb"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-4.png",
+          "sha256": "4ef2ef1432d4834d7fa62451fdee0a3a16741dfcf92bdd7578795243ce16b137"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-5.png",
+          "sha256": "3747cc49762660bbd40370677c7597966779c9992bccc6c7da46df30b2da3e12"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-6.png",
+          "sha256": "8b527b5ed282a21697882a4952228c7a603252fef52a989665becdc2f30e5238"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-7.png",
+          "sha256": "a72722238568e23c0fd4c2d2b2bd574cfd69eecd1f39900ef8339c67fb1a4d01"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-8.png",
+          "sha256": "09834a6a9c5f9f51b75356dc2a1cb17b9ca10d624ad9a62e06c618187ac9c9a2"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-9.png",
+          "sha256": "6fdab1cb39824a808f0c8f5b01475f1e8f35f1e388716851b9c1074059ead75b"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/wire-engine.png",
+          "sha256": "4e34b2052faaa3b85f09c08c0f5fa91200ff425c26706dfc4fb5a92bebeae278"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/engine/wire-study.png",
+          "sha256": "2201f64755c01340d91363aaba9f535128c3b2b2d747892ccc85c4c6eb4e48d4"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/model.glb",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/model.glb",
+          "sha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/recipe.json",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/recipe.json",
+          "sha256": "ab5c1176091c838910979204f00fbc6c964d597609b21d175baad49bdb6f24fb"
+        },
+        {
+          "source": "demos/vehicle-bake/race-coupe/v1/report.json",
+          "retained": "demos/original-vehicles/race-coupe-v1/inputs/report.json",
+          "sha256": "76e15b5ffb65264fe4b01d307f9ab17a1e86e9fe1ba0efe3129a90e972105c19"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/race-coupe-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "race-coupe--v1",
+          "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+          "triangles": 2431,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 5.9130441247250465,
+              "minimumGap": 0.2740180219838839,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 5.913044950779918,
+              "minimumGap": 0.27401754825549496,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 5.913045629803742,
+              "minimumGap": 0.2600586841417485,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 5.913044977011654,
+              "minimumGap": 0.2600593369338364,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 5.913043478260871,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/browser-qa.json",
+          "sha256": "1a64dffef9d240bbe7c6b2151fa92e645184f56ccd952f62e044c511f069c14a"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/candidate.json",
+          "sha256": "2b9e8e8f0162f876d94efaf55413efd9ec58218265b43cd02caf1e66dfc21bc5"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/capture.json",
+          "sha256": "aefafbe9dec69c1fac433e69bce0b87d431ed1a580938ce375617f6113903cc6"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/contact-sheet.png",
+          "sha256": "0755658d358c5ac9d46eb614eedb2849554b89e18d39a0b6f26610a8ee2451bf"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-1.png",
+          "sha256": "41000a7b29635ca120425f9c0631a2a7c8d4164efd4f6da3ce447bb42d8d5a66"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-10.png",
+          "sha256": "0e8bf9dd2eb7ed85c2ded3d02069eaf5d1dd8eebdf188a931838f5e84314919f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-11.png",
+          "sha256": "1d6015b74cfc0263568b983f6495d0908da4a935657710a3e828bd1e0aa43b34"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-12.png",
+          "sha256": "43f11dbf543a58a6b003ac5a488cad5ad1dc3fabc440941ea58e6887c87f999f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-13.png",
+          "sha256": "97c8b9209dae9d240460f74e3beb636185264363f7e64f26aa197f56b8dcf996"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-14.png",
+          "sha256": "20bf7433553cca9d30ff7c3ebce0b08a08c47d8d537bc398fbf192a65290f966"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-15.png",
+          "sha256": "ef05e62aac18c8a37da48188cb1afcbcbfe41b6bcd76fe3b1db9ef987b1ee077"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-1x.png",
+          "sha256": "e9ff0db050fa1b5ecb8b9b1ce3c2a73df2aefd98cb39c8ee591246eaeef0e05f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-2.png",
+          "sha256": "8f07409eabbc58e90c378681576cbab9d84ea5cbb6680691cedfca7939f08ad5"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-2x.png",
+          "sha256": "ce5c28b1525a72fca193d76ef38fbfac218e3a66a30c60573df9a2999f9282b5"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-3.png",
+          "sha256": "c9de12d92ad7771ff6f9de9c022c40a4f1e5576f96ad6d11be1111ff26823ad1"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-3x.png",
+          "sha256": "8e55ea3db0204b988fb6e696c8eda1450f7d8b391490720d2fc1a63c7469c64c"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-4.png",
+          "sha256": "6429880795c16f4b174d67003a19eddbd21b710d960dc04dfbc57ca0a1b6cd21"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-5.png",
+          "sha256": "bc96ae686b6f48188a4bf68d2f224c95f4256ff5ee605076f641c2280fc3dffc"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-6.png",
+          "sha256": "a56416b6560cf4a79e00b5d7a66ff6506b1bd003da1f0dc65c212ebdcd91fbab"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-7.png",
+          "sha256": "b06ad1ce675729a6db7afc96d2666ae80b0987068cc604c22c861ab7f5b91972"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-8.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/engine-9.png",
+          "sha256": "8f712997e2bb92969762d27d43fe56b6400b8b442a06b0b7a4e573051ca7c1f1"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-0.png",
+          "sha256": "8f07409eabbc58e90c378681576cbab9d84ea5cbb6680691cedfca7939f08ad5"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-1.png",
+          "sha256": "7575729c77c5808fd66ad3c554ef2d904afd45fa2cf3f6a8108aa42e451b573b"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-2.png",
+          "sha256": "30c2abfd30f39ebe496692d9bdabbd5d8b61806134256feb735c2a7e60cd85db"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-3.png",
+          "sha256": "56f427d066c947328756b4640325f5a538815ec67cafe3d685ec4d82d659067d"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-4.png",
+          "sha256": "3fe56cc3e095ab9c64f9d70346aa8991260cf6d85bed163aa76f8a5761f31316"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-5.png",
+          "sha256": "cd2b6c97d26ead64e95705303e82886435fd66b05d4954323c7144966a4bf489"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-6.png",
+          "sha256": "1c94fdb978a42b155cc072d7c08dadd614d222707b686eb7ddfb5061fbbdd67f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-roll-7.png",
+          "sha256": "74ca5ce5a200ed8035799286e4d1ed99611f2b03fa428efaef8fa74675a83e5d"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/game-turntable.gif",
+          "sha256": "7e5ba8e3e0c20b1552045dac73c033ffefa28eca39a47fffa8218b269d50b893"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-0.png",
+          "sha256": "bd8f7d1ee90a0c719c4b23da5dede500612023deb5503f35912127aeb07ecc47"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-1.png",
+          "sha256": "e30ba7d35ddc152981dcbaecd513d06113ae8802ff156d56e7335ce506fb1eee"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-2.png",
+          "sha256": "d3eab029fe691600a7bd17bc9084eedb3cdfbe2acf4c141439dd8a698f703238"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-3.png",
+          "sha256": "4aa7bcb6e42222e9dda2c687923ba44fac92d71a350698c8ca15a7e56d450a8a"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-4.png",
+          "sha256": "b82f6277958a584d53642650a78c7697b43b4af34b7777c696594f49847919f3"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-5.png",
+          "sha256": "29fd9eae25689cc5477e71e03cfebd367f878cc67dc2fff996daf3591a86ab2a"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-6.png",
+          "sha256": "9f1a824d023693cd30bfd04fa5cd3b8673ae0f78423535b31e24797ea805c8d7"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/roll-7.png",
+          "sha256": "23c9c51fe0c27e2ef54d84b407fa93c40d22181087b9b24d27b3f0470c9a29a8"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-0.png",
+          "sha256": "855f6ea2fc427ed5a9637c509a3a3eeaedb91e16269f1f06974b512237377964"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-1.png",
+          "sha256": "4c35ad4dde91247e4850d85d22fbf0e9e794808387ed014fa54dc483da330eef"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-10.png",
+          "sha256": "0e01a754b845fcd72b39b1594a4af68d984bc47db361f9ca31be522c77b70cb1"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-11.png",
+          "sha256": "e616a504afc4400407ffb0caad52182b51b48936bdc9e26aecd89d41e2983d3c"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-12.png",
+          "sha256": "ccfdaa4afd6a3a9b91e34aee1a9d6aa9872ce2984c92fcfe7a61672b9f277928"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-13.png",
+          "sha256": "21694bb445376bed11ea8a37f182ad45bda5ccb2c03ba7499764b41304ebade8"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-14.png",
+          "sha256": "df7305975028aff2b028bd8d6f61d500fc06502cc5c0a8e309215318b2c2c9ba"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-15.png",
+          "sha256": "a796e97de443a31ce9fd006004d9af0a364d14c4a7d89236a433e3703fdcda62"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-1x.png",
+          "sha256": "d47e054d0026ecd814d2cf17c99496756828c1235b24365bc20f0b2e6d8b1c60"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-2.png",
+          "sha256": "bd8f7d1ee90a0c719c4b23da5dede500612023deb5503f35912127aeb07ecc47"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-2x.png",
+          "sha256": "8ff8d6d3a0f94881229bf1884ff5a68bbb2e8c13a5ff11412065265f5bc6dd50"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-3.png",
+          "sha256": "3c77eee8dada25eb1076c46478d17615ea31ccf173d7bdf28ecd9f066ce18aa6"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-3x.png",
+          "sha256": "767de0c9294271c35e95523a21fac6436a9ff755c633a24c93e1438082226451"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-4.png",
+          "sha256": "4ef2ef1432d4834d7fa62451fdee0a3a16741dfcf92bdd7578795243ce16b137"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-5.png",
+          "sha256": "3747cc49762660bbd40370677c7597966779c9992bccc6c7da46df30b2da3e12"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-6.png",
+          "sha256": "8b527b5ed282a21697882a4952228c7a603252fef52a989665becdc2f30e5238"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-7.png",
+          "sha256": "a72722238568e23c0fd4c2d2b2bd574cfd69eecd1f39900ef8339c67fb1a4d01"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-8.png",
+          "sha256": "09834a6a9c5f9f51b75356dc2a1cb17b9ca10d624ad9a62e06c618187ac9c9a2"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/study-9.png",
+          "sha256": "6fdab1cb39824a808f0c8f5b01475f1e8f35f1e388716851b9c1074059ead75b"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/turntable.gif",
+          "sha256": "2072e2766ec34d871854b366ff00c502664eb1dd8643d92ee90787107a124a70"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/viewer-desktop.png",
+          "sha256": "533f21170f3f822ad2d39dc5aec6c358ea333be55b8c24b3bb9a84d3ecb98ba8"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/viewer-mobile.png",
+          "sha256": "23253ea8d3b4af1c865b73948cccbcf7c0f8f0f1efdf4f57ec115356f4f2a44c"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/wheel-phases.png",
+          "sha256": "b09ae78d4bb695deb2e6c53ad3d04bb4516a9b363f7f7153b076f3bc14a7206f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/wire-engine.png",
+          "sha256": "4e34b2052faaa3b85f09c08c0f5fa91200ff425c26706dfc4fb5a92bebeae278"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/captures/wire-study.png",
+          "sha256": "2201f64755c01340d91363aaba9f535128c3b2b2d747892ccc85c4c6eb4e48d4"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/clearance.json",
+          "sha256": "eb1fd57180ae3b6bb5c798443bd8a87ad54e6204421af8faaa1a886fa8b5652b"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/independent-source-replay.json",
+          "sha256": "32e9ad6249ce82055e096f09f9fbf64f33461284a483a85b361bc6dfa74fa3b3"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/atlas.png",
+          "sha256": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/capture.json",
+          "sha256": "aefafbe9dec69c1fac433e69bce0b87d431ed1a580938ce375617f6113903cc6"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-1.png",
+          "sha256": "41000a7b29635ca120425f9c0631a2a7c8d4164efd4f6da3ce447bb42d8d5a66"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-10.png",
+          "sha256": "0e8bf9dd2eb7ed85c2ded3d02069eaf5d1dd8eebdf188a931838f5e84314919f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-11.png",
+          "sha256": "1d6015b74cfc0263568b983f6495d0908da4a935657710a3e828bd1e0aa43b34"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-12.png",
+          "sha256": "43f11dbf543a58a6b003ac5a488cad5ad1dc3fabc440941ea58e6887c87f999f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-13.png",
+          "sha256": "97c8b9209dae9d240460f74e3beb636185264363f7e64f26aa197f56b8dcf996"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-14.png",
+          "sha256": "20bf7433553cca9d30ff7c3ebce0b08a08c47d8d537bc398fbf192a65290f966"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-15.png",
+          "sha256": "ef05e62aac18c8a37da48188cb1afcbcbfe41b6bcd76fe3b1db9ef987b1ee077"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-1x.png",
+          "sha256": "0b03eebf2395738e57c60e6749423b33ac316f62249561582c7a964d91931d07"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-2.png",
+          "sha256": "8f07409eabbc58e90c378681576cbab9d84ea5cbb6680691cedfca7939f08ad5"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-2x.png",
+          "sha256": "821e7aefa10061cae26774c5b49cab785eed5d6b713953357916e2ed2cd12895"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-3.png",
+          "sha256": "c9de12d92ad7771ff6f9de9c022c40a4f1e5576f96ad6d11be1111ff26823ad1"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-3x.png",
+          "sha256": "1d01c0e4ddbe91b743b1a0fbd8805077560c49968a740f6e1e4266ec9f2386fd"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-4.png",
+          "sha256": "6429880795c16f4b174d67003a19eddbd21b710d960dc04dfbc57ca0a1b6cd21"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-5.png",
+          "sha256": "bc96ae686b6f48188a4bf68d2f224c95f4256ff5ee605076f641c2280fc3dffc"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-6.png",
+          "sha256": "a56416b6560cf4a79e00b5d7a66ff6506b1bd003da1f0dc65c212ebdcd91fbab"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-7.png",
+          "sha256": "b06ad1ce675729a6db7afc96d2666ae80b0987068cc604c22c861ab7f5b91972"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-8.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/engine-9.png",
+          "sha256": "8f712997e2bb92969762d27d43fe56b6400b8b442a06b0b7a4e573051ca7c1f1"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-0.png",
+          "sha256": "8f07409eabbc58e90c378681576cbab9d84ea5cbb6680691cedfca7939f08ad5"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-1.png",
+          "sha256": "7575729c77c5808fd66ad3c554ef2d904afd45fa2cf3f6a8108aa42e451b573b"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-2.png",
+          "sha256": "30c2abfd30f39ebe496692d9bdabbd5d8b61806134256feb735c2a7e60cd85db"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-3.png",
+          "sha256": "56f427d066c947328756b4640325f5a538815ec67cafe3d685ec4d82d659067d"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-4.png",
+          "sha256": "3fe56cc3e095ab9c64f9d70346aa8991260cf6d85bed163aa76f8a5761f31316"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-5.png",
+          "sha256": "cd2b6c97d26ead64e95705303e82886435fd66b05d4954323c7144966a4bf489"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-6.png",
+          "sha256": "1c94fdb978a42b155cc072d7c08dadd614d222707b686eb7ddfb5061fbbdd67f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/game-roll-7.png",
+          "sha256": "74ca5ce5a200ed8035799286e4d1ed99611f2b03fa428efaef8fa74675a83e5d"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-1.png",
+          "sha256": "53f3d0f0a5c9a6d82c7942a5b9a14e609881bb7bdd54b229cd6b8c977b2c4c7a"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-2.png",
+          "sha256": "03915326be995dd34e2a6781f508deaa4f02d50e2e40b8c0f18249284236d038"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FL-3.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-0.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-1.png",
+          "sha256": "a58bbc1e14fa30c464b844ca5bc4c07d1fd2364dc4f7b4cc26ed4e711b2b4632"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-2.png",
+          "sha256": "866fba18219f0bd3f0605b2beb9a86062c1bff5f4ba57ada51ae3bc8c4bece20"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-FR-3.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-0.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-1.png",
+          "sha256": "c0151645c9a1419e64d56fa756e9bfb7d225b21f372d73960b40198f25538f5d"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-2.png",
+          "sha256": "faab39a83db00ef1b7aff9821360f1c702927ab3e24b604ee125009210099b91"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RL-3.png",
+          "sha256": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-0.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-1.png",
+          "sha256": "3fa390c326ac1888f98b7dfbb6bbd16d701b5c3ea450f429b3bf19f8efa016a9"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-2.png",
+          "sha256": "0327ec672f02651a4ac20e8bd008de17449500af81f77ec2111a1266aafd539f"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-RR-3.png",
+          "sha256": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/independent-visual.json",
+          "sha256": "aa25819dbf9a569e8d5fed6ed7e7ca986fefcbf872fc64c13b5eb19556a0b481"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-engine.png",
+          "sha256": "c676304edc77ebfc4224e38ab68931819525b61a25f0c122be78caf27cfa23fe"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-independent.png",
+          "sha256": "7b3b7a586e4bba9e6596711788b5236674a8797938485a6bae5a36e9a16cd615"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-phases.png",
+          "sha256": "4fca778a53bd592a46c7eeaed4d7818623fa91a558cb9fec9952d1e4d83cfd84"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-study.png",
+          "sha256": "ed9969961fd903ad4293eb0a5394cc257677ec2eac23739924677feffc21849c"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-tight-engine.png",
+          "sha256": "7095f87f4898099f5a45a57da4c0c9b2668bbbc097f80a042c888ccbfcee1b2d"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-tight-phases.png",
+          "sha256": "bafa42a52576f06dc494a0f00fd6290b196597f03cb687af3759a16a3b12b798"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-tight-study.png",
+          "sha256": "c74f3f3762baa7e6497f00a962f0fefa1451f084d565031e0c6a7e7bf3dd7f37"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/inspection-wires.png",
+          "sha256": "48a3480a7c2af52d1523b46775b526a699113d70dc5752655727c3ae6aafab00"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-0.png",
+          "sha256": "bd8f7d1ee90a0c719c4b23da5dede500612023deb5503f35912127aeb07ecc47"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-1.png",
+          "sha256": "e30ba7d35ddc152981dcbaecd513d06113ae8802ff156d56e7335ce506fb1eee"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-2.png",
+          "sha256": "d3eab029fe691600a7bd17bc9084eedb3cdfbe2acf4c141439dd8a698f703238"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-3.png",
+          "sha256": "4aa7bcb6e42222e9dda2c687923ba44fac92d71a350698c8ca15a7e56d450a8a"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-4.png",
+          "sha256": "b82f6277958a584d53642650a78c7697b43b4af34b7777c696594f49847919f3"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-5.png",
+          "sha256": "29fd9eae25689cc5477e71e03cfebd367f878cc67dc2fff996daf3591a86ab2a"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-6.png",
+          "sha256": "9f1a824d023693cd30bfd04fa5cd3b8673ae0f78423535b31e24797ea805c8d7"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/roll-7.png",
+          "sha256": "23c9c51fe0c27e2ef54d84b407fa93c40d22181087b9b24d27b3f0470c9a29a8"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-0.png",
+          "sha256": "855f6ea2fc427ed5a9637c509a3a3eeaedb91e16269f1f06974b512237377964"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-1.png",
+          "sha256": "4c35ad4dde91247e4850d85d22fbf0e9e794808387ed014fa54dc483da330eef"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-10.png",
+          "sha256": "0e01a754b845fcd72b39b1594a4af68d984bc47db361f9ca31be522c77b70cb1"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-11.png",
+          "sha256": "e616a504afc4400407ffb0caad52182b51b48936bdc9e26aecd89d41e2983d3c"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-12.png",
+          "sha256": "ccfdaa4afd6a3a9b91e34aee1a9d6aa9872ce2984c92fcfe7a61672b9f277928"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-13.png",
+          "sha256": "21694bb445376bed11ea8a37f182ad45bda5ccb2c03ba7499764b41304ebade8"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-14.png",
+          "sha256": "df7305975028aff2b028bd8d6f61d500fc06502cc5c0a8e309215318b2c2c9ba"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-15.png",
+          "sha256": "a796e97de443a31ce9fd006004d9af0a364d14c4a7d89236a433e3703fdcda62"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-1x.png",
+          "sha256": "d3cb0da6992f24215157d7ae471a0e9b906370d17f4e59b5baaf32420f562189"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-2.png",
+          "sha256": "bd8f7d1ee90a0c719c4b23da5dede500612023deb5503f35912127aeb07ecc47"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-2x.png",
+          "sha256": "819e5766bd03d3851c91802ec46a6a479cf56e042ac81d91f4f0909fe7060fbb"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-3.png",
+          "sha256": "3c77eee8dada25eb1076c46478d17615ea31ccf173d7bdf28ecd9f066ce18aa6"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-3x.png",
+          "sha256": "24e8c6ac4ab5ca72f7bdf9ad06d4f9a85f9bdf3ceec0a84def8b6a7993d290cb"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-4.png",
+          "sha256": "4ef2ef1432d4834d7fa62451fdee0a3a16741dfcf92bdd7578795243ce16b137"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-5.png",
+          "sha256": "3747cc49762660bbd40370677c7597966779c9992bccc6c7da46df30b2da3e12"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-6.png",
+          "sha256": "8b527b5ed282a21697882a4952228c7a603252fef52a989665becdc2f30e5238"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-7.png",
+          "sha256": "a72722238568e23c0fd4c2d2b2bd574cfd69eecd1f39900ef8339c67fb1a4d01"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-8.png",
+          "sha256": "09834a6a9c5f9f51b75356dc2a1cb17b9ca10d624ad9a62e06c618187ac9c9a2"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/study-9.png",
+          "sha256": "6fdab1cb39824a808f0c8f5b01475f1e8f35f1e388716851b9c1074059ead75b"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/wire-engine.png",
+          "sha256": "4e34b2052faaa3b85f09c08c0f5fa91200ff425c26706dfc4fb5a92bebeae278"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/engine/wire-study.png",
+          "sha256": "2201f64755c01340d91363aaba9f535128c3b2b2d747892ccc85c4c6eb4e48d4"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/model.glb",
+          "sha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/recipe.json",
+          "sha256": "ab5c1176091c838910979204f00fbc6c964d597609b21d175baad49bdb6f24fb"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/inputs/report.json",
+          "sha256": "76e15b5ffb65264fe4b01d307f9ab17a1e86e9fe1ba0efe3129a90e972105c19"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/race-coupe-v1/visual-inspection.json",
+          "sha256": "5c8d0765cc8cef1dd52ae7d18eb79cdb179ef0864887704af557437e776d9d6b"
+        }
+      ]
+    }
+  ]
+}

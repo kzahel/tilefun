@@ -1,0 +1,124 @@
+{
+  "method": "Original boxy off-road SUV; independent continuous side, fixed windshield/rear and separate removable-style roof UV ownership on actual skin. Static rear-mounted spare. No projected or view-dependent paint.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      112,
+      53,
+      45
+    ],
+    "paintShadow": [
+      151,
+      65,
+      42
+    ],
+    "paintMid": [
+      181,
+      79,
+      42
+    ],
+    "paint": [
+      206,
+      105,
+      48
+    ],
+    "paintLight": [
+      234,
+      143,
+      72
+    ],
+    "cream": [
+      255,
+      226,
+      160
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "roof": [
+      64,
+      68,
+      85
+    ],
+    "roofLight": [
+      83,
+      87,
+      103
+    ],
+    "roofEdge": [
+      48,
+      52,
+      69
+    ]
+  },
+  "ownership": "Continuous side skin charts with framed blue windows; separate fixed windshield/rear charts; static contrasting hardtop chart; rounded flat hood; broad integrated open fenders; rear mounted static spare. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric side window band; separate front/rear glass and roof; rear static spare.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

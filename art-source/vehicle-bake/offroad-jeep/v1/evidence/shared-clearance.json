@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "offroad-jeep--v1",
+    "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "triangles": 3146,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.2595405202179197,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.000001907348633,
+        "minimumGap": 1.2595405202179197,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.2595424243656055,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.000000399840292,
+        "minimumGap": 1.2595424243656055,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

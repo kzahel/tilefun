@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "classic-roadster--v1",
+    "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "triangles": 3092,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786944783795878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786941910791528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786945772582992,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786943302858559,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

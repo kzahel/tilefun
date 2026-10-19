@@ -57,7 +57,20 @@ walls, wheelhouses, cab rear and tailgate own separate surface paint. Use its ow
 native rear-oblique inspection. A dark top deck does not qualify an open bed.
 Its radius-8 wheels and coverage region are family-specific; the usual whole-body
 roll, far-crown visual checks and source-only replay still apply. Pickup runtime
-activation waits for owner appearance review.
+activation is now authorized and complete in tactical 153. The owner explicitly
+waived per-family appearance pauses for that bounded eight-hour run; retain honest
+agent QA and leave formal human review states unchanged. Outside that authorization,
+follow the current owner gate.
+
+For new original runtime families use `runtime-export-v3.py` with explicit expected
+centered bounds, preserving all older receipt-pinned exporters. Collision boxes
+are centered at the unchanged ground origin: ceil(2*max(abs(min),abs(max))) per
+horizontal axis, not ceil(span). Use zero origin tolerance for new families.
+`production.py` provides deadline-bounded capture, inspect, freeze and verify;
+inspect native camera sets, signed phases and wires before freezing. Replay only
+declared retained inputs in a fresh directory. Intentional exposed-wheel families
+may mark crown coverage N/A explicitly; never fake covered samples. Full-body
+neutral-roll nonintersection and independent per-wheel radii remain mandatory.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

@@ -1,0 +1,88 @@
+{
+  "status": "passed",
+  "results": {
+    "baseHashesVerified": {
+      "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+      "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350",
+      "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json": "fad5844ce3e499650168122847971b39dec9fc1bcba9200e43f4a80a14d43cd1"
+    },
+    "spoilerMounts": [
+      {
+        "side": -1,
+        "actualDeckZ": 0.6134516000747681,
+        "supportBottom": 0.55,
+        "supportTop": 0.855,
+        "intersectsDeckForStaticMount": true
+      },
+      {
+        "side": 1,
+        "actualDeckZ": 0.6145220994949341,
+        "supportBottom": 0.55,
+        "supportTop": 0.855,
+        "intersectsDeckForStaticMount": true
+      }
+    ],
+    "master.blend": {
+      "sha256": "243350debc680bd9fd5cb7f778eb55d3b0e0e9ed64c8cfa5cea3e6d9fd48d25a",
+      "triangles": 2431,
+      "meshObjects": 8,
+      "packedImages": [
+        "atlas.png.002",
+        "Unused pinned red-base palette planning draft"
+      ],
+      "oneUVLayer": true,
+      "acceptedBodyPositionsTopologyUVPreserved": true,
+      "acceptedWheelPositionsTopologyUVPosePreserved": true,
+      "staticSpoiler": true
+    },
+    "car.blend": {
+      "sha256": "0e3fee3886d5459b7beff1e13c932538843fe0579ecf247677eea9b8f529561c",
+      "triangles": 2431,
+      "meshObjects": 5,
+      "packedImages": [
+        "atlas.png.002",
+        "Unused pinned red-base palette planning draft"
+      ],
+      "oneUVLayer": true,
+      "acceptedBodyPositionsTopologyUVPreserved": true,
+      "acceptedWheelPositionsTopologyUVPosePreserved": true,
+      "staticSpoiler": true
+    },
+    "actualGLBWheelAttributes": {
+      "status": "passed",
+      "baseGLB": "public/demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/model.glb",
+      "baseGLBSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+      "attributesByteExact": [
+        "POSITION",
+        "NORMAL",
+        "TEXCOORD_0"
+      ],
+      "allFour": true
+    },
+    "actualGLBBounds": {
+      "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+      "minBlenderWorld": [
+        -40.121742248535156,
+        -18.04039764404297,
+        -1.0391151050725966e-07
+      ],
+      "maxBlenderWorld": [
+        40.90251541137695,
+        17.884828567504883,
+        18.613826751708984
+      ],
+      "dimensionsBlenderWorld": [
+        81.02425765991211,
+        35.92522621154785,
+        18.613826855620495
+      ],
+      "dimensionsSourceUnits": [
+        4.658894815444945,
+        2.065700507164001,
+        1.0702950441981782
+      ],
+      "includesNewSpoiler": true
+    },
+    "finishedSUVGlbPreserved": true
+  }
+}

@@ -2956,6 +2956,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:pickup",
+      "name": "vehicle v1:pickup",
+      "image": "assets/vehicles/pickup-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "32681b6f11e4f1f3bfb65ca8f8ed3667a6e45efcdfc84190839d0759d3928de6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:classic-roadster",
+      "name": "vehicle v1:classic roadster",
+      "image": "assets/vehicles/classic-roadster-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "a42a360fb3a4586f553a618e879de6612397bbe23348196fed5cf35aab598a1a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:offroad-jeep",
+      "name": "vehicle v1:offroad jeep",
+      "image": "assets/vehicles/offroad-jeep-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "9fc715b676dc56d282de114a139c18157dab678527c5a2ebd05b066820cb80eb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:delivery-van",
+      "name": "vehicle v1:delivery van",
+      "image": "assets/vehicles/delivery-van-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "2a5e68aa43f6c08c2735e57c4e3fe1d7de858b93825a9a53dc28b9672e7ef084",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:race-coupe",
+      "name": "vehicle v1:race coupe",
+      "image": "assets/vehicles/race-coupe-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "516359d32f53d9bed329645587831909b9325f7f4004816d9254b63945a530ad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "vehicle-v1:explorer-boat",
       "name": "vehicle v1:explorer boat",
       "image": "assets/vehicles/explorer-boat-v1.png",
@@ -31973,6 +32023,96 @@
         896
       ],
       "label": "vehicle-v1:school-bus · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:pickup",
+      "sheetId": "vehicle-v1:pickup",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:pickup · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:classic-roadster",
+      "sheetId": "vehicle-v1:classic-roadster",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:classic-roadster · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:offroad-jeep",
+      "sheetId": "vehicle-v1:offroad-jeep",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:offroad-jeep · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:delivery-van",
+      "sheetId": "vehicle-v1:delivery-van",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:delivery-van · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:race-coupe",
+      "sheetId": "vehicle-v1:race-coupe",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:race-coupe · registered 192×224 frames",
       "kind": "sprite",
       "consumers": [
         {

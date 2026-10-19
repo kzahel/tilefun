@@ -1,0 +1,571 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "classic-roadster",
+  "route": "classic-roadster",
+  "revision": "v1",
+  "method": "Original low roadster coachwork with true recessed two-seat cockpit and exact semantic windshield, seat, inner-panel and trim UV owners. No projection or high-to-low transfer claim.",
+  "geometry": {
+    "triangles": 3092,
+    "vertices": 6173,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 222216,
+    "sha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 6.608695652173914,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4500000476837158,
+        -0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        6.608695569245713,
+        13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4500000476837158,
+        0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        -25.217392133629843,
+        6.608695569245713,
+        -13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.4500000476837158,
+        -0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        25.217392133629843,
+        6.608695569245713,
+        13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.4500000476837158,
+        0.7799999713897705,
+        0.3799999952316284
+      ],
+      "centerExport": [
+        25.217392133629843,
+        6.608695569245713,
+        -13.56521689373514
+      ],
+      "radiusBlender": 0.38,
+      "wheel_radius": 6.608695652173914
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/classic-roadster/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/classic-roadster/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/classic-roadster/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static windscreen and seats; no folding roof or equipment animations.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 3092,
+  "vertexCount": 6173,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 222216,
+  "atlasBytes": 2543,
+  "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "atlasSha256": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "classic-roadster--v1",
+    "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "triangles": 3092,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786944783795878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786941910791528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786945772582992,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.608695983886719,
+        "minimumGap": 1.3786943302858559,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/classic-roadster/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "minBlenderWorld": [
+      -42.21739196777344,
+      -17.04347801208496,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      42.21739196777344,
+      17.04347801208496,
+      21.65217399597168
+    ],
+    "dimensionsBlenderWorld": [
+      84.43478393554688,
+      34.08695602416992,
+      21.65217351913452
+    ],
+    "dimensionsSourceUnits": [
+      4.855000076293945,
+      1.9599999713897702,
+      1.2449999773502347
+    ]
+  },
+  "cockpitDepthEvidence": {
+    "status": "passed",
+    "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "rayCount": 12,
+    "centralDownwardRays": [
+      {
+        "xySource": [
+          0.0,
+          -0.48
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.0,
+          -0.13
+        ],
+        "firstSurfaceZSource": 0.4170002734661102,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.0,
+          0.13
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.0,
+          0.48
+        ],
+        "firstSurfaceZSource": 0.4170002734661102,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.13,
+          -0.48
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.13,
+          -0.13
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.13,
+          0.13
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.13,
+          0.48
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.23,
+          -0.48
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.23,
+          -0.13
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.23,
+          0.13
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.23,
+          0.48
+        ],
+        "firstSurfaceZSource": 0.41700005412101737,
+        "owner": "Body_static"
+      }
+    ],
+    "doorRailRays": [
+      {
+        "xySource": [
+          0.13,
+          -0.68
+        ],
+        "firstSurfaceZSource": 0.836162302494049,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.13,
+          0.68
+        ],
+        "firstSurfaceZSource": 0.836164002418518,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.65,
+          -0.68
+        ],
+        "firstSurfaceZSource": 0.8313510227203368,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.65,
+          0.68
+        ],
+        "firstSurfaceZSource": 0.8313526678085326,
+        "owner": "Body_static"
+      }
+    ],
+    "seatCushionRays": [
+      {
+        "xySource": [
+          0.5,
+          -0.322
+        ],
+        "firstSurfaceZSource": 0.645500144958496,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.5,
+          0.322
+        ],
+        "firstSurfaceZSource": 0.645500144958496,
+        "owner": "Body_static"
+      }
+    ],
+    "seatbackRays": [
+      {
+        "xySource": [
+          0.87,
+          -0.322
+        ],
+        "firstSurfaceZSource": 1.0130001258850097,
+        "owner": "Body_static"
+      },
+      {
+        "xySource": [
+          0.87,
+          0.322
+        ],
+        "firstSurfaceZSource": 1.0130000162124633,
+        "owner": "Body_static"
+      }
+    ],
+    "minimumRecessDepthSource": 0.4143507492542266,
+    "minimumRecessDepthWorld": 7.206099987030029,
+    "controls": {
+      "baselinePositivePassed": true,
+      "outsideHoodRejected": true,
+      "opaqueUpperDeckRejected": true,
+      "upperDeckNegativeRays": [
+        {
+          "xySource": [
+            0.0,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.0,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.0,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.0,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.13,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.8699998474121092,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.13,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.13,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.8699998474121092,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.13,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.23,
+            -0.48
+          ],
+          "firstSurfaceZSource": 0.8699998474121092,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.23,
+            -0.13
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.23,
+            0.13
+          ],
+          "firstSurfaceZSource": 0.8699998474121092,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        },
+        {
+          "xySource": [
+            0.23,
+            0.48
+          ],
+          "firstSurfaceZSource": 0.8700000119209288,
+          "owner": "NEGATIVE_CONTROL_opaque_upper_deck_not_candidate"
+        }
+      ],
+      "baselineRestored": true,
+      "inputBytesUnchanged": true
+    },
+    "regionConfig": "scripts/vehicle-bake/classic-roadster/cockpit-region.json",
+    "meaning": "Declared floor rays avoid cushions, steering rim and low center tunnel. Floor, rails, cushions and seatbacks are independently sampled; a temporary opaque upper deck must reject the floor-depth condition. No driver or equipment animation."
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/classic-roadster/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/classic-roadster/capture.mjs",
+    "python scripts/vehicle-bake/classic-roadster/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/classic-roadster/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/classic-roadster/v1/evidence/clearance-input.json data/vehicle-bake/classic-roadster/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/classic-roadster/v1/model.glb --config art-source/vehicle-bake/classic-roadster/v1/coverage-region.json --output data/vehicle-bake/classic-roadster/recheck-coverage.json",
+    "python scripts/vehicle-bake/classic-roadster/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/classic-roadster/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all 16 study plus 16 engine headings at unchanged native 224px/radius112. No clipping, view fitting or scale changes.",
+    "Long rounded green hood, short rounded rear deck and low tiny framed blue windscreen read as classic open-top roadster. Body construction is independent of coupe/pickup geometry.",
+    "Both seats and the recessed dark cockpit read in front obliques 45/135 and rear obliques 225/315 in both cameras; additionally inspected their individual native 224px files. Tan cushion/back distinction remains visible. Real floor/rail rays independently prove depth.",
+    "Far-side tire crowns remain under continuous broad integrated hood/rear fenders at all headings. Near-wheel seating and open local pockets have no blocking visual intersection or detached raised-cap silhouette.",
+    "Inspected all eight signed rolling phases in each camera and both wireframes. Only four road wheel assemblies roll; fixed body, seats, cockpit, glass and brightwork stay fixed.",
+    "Opaque unlit glass has continuous dark perimeter on its actual windscreen slab. Hood/side charts and exact seatback/trim swatch owners are retained in paint-ownership.json.",
+    "Broad deep/light green, cool blue, cream-tan and ink 58,58,80 coherent palette. Slim chrome bumpers and simple round lamps remain legible without logos or tiny text.",
+    "Expected minor angle-dependent pixel aliasing in grille, chrome and round hubs; no blocking native appearance finding.",
+    "No visible animated driver, existing ordinary driving semantics; no folding roof/equipment animation or new rider gameplay."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBCockpitFloorRays": 12,
+    "cockpitUpperDeckNegativeAndReset": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Opaque unlit static framed windshield; no folding roof or equipment animations.",
+    "Small grille, lamps and hubs retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/classic-roadster/v1/atlas.png": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b",
+    "art-source/vehicle-bake/classic-roadster/v1/audit-source.py": "dca3e3a695ca43718bd1f5917872b7e76aae8829a0ba8ca0d3507b156f9af34c",
+    "art-source/vehicle-bake/classic-roadster/v1/build.py": "72eb867bf393483f1a81fea8550e9ec56a0b459c04e1ffa93d43e2062cacfa64",
+    "art-source/vehicle-bake/classic-roadster/v1/capture.mjs": "3ac689c266fc2af5cfb7cf03a1290438c9d915ba959685bc14d2449d77b81438",
+    "art-source/vehicle-bake/classic-roadster/v1/car.blend": "b6c9958dea75c8e5f23ee1f43d7950006b944f65114d63414a9477636f4530ec",
+    "art-source/vehicle-bake/classic-roadster/v1/cockpit-region.json": "afff93623e410917eab49cd66d9d0a674581e540b5211dac5a04de6f2b018654",
+    "art-source/vehicle-bake/classic-roadster/v1/coverage-region.json": "448782c264ec35518db4c47c282ebfc79f5b22081cc9141332c83c3f8eb5dbe9",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/author-browser-qa.json": "5643a111243d92cc1854950a371d5e561c9749d9bd0349052020740aa736be52",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/author-visual-inspection.json": "ca0c31ab3d7bc19665799b7b1e98226f6b6c340e7ea90c254ed2516c73ff5ea0",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/clearance-input.json": "db0fcf62a3f7dd297851381d65c75820562d717f91343e04d10622fd2f3a4c0a",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/engine-capture.json": "29eeee9504d98dee31c4abbbb952a135d77470d5047ba4822cd727e7f0faf437",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/packed-source-audit.json": "e616b8bcefa4c7d9a38b234c9f40224bed41fdc98aeba2a55f61d2af86853c68",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/replay-verification.json": "d8226264687195e6aa70d315ab4b28b0c88d39000bb40e81f501a1c84f23b02b",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/shared-clearance.json": "677dadfe25803a03acc504556b42c46927313e56947b149d4c0d021a48bed6f4",
+    "art-source/vehicle-bake/classic-roadster/v1/evidence/upper-wheel-coverage.json": "594fb5dd85e3d42fb71024a3a4ae649073139a587e973151198ee5f1c6a5ab2a",
+    "art-source/vehicle-bake/classic-roadster/v1/family.json": "1f2038c1bb8165f36a7a9420f5aed15b85d2fa62af12a02b8d933249d6f72933",
+    "art-source/vehicle-bake/classic-roadster/v1/finalize.py": "d6f44c3f9489eeadd9c2643ca011e833034a000e00d1343262a6386e0e68a75a",
+    "art-source/vehicle-bake/classic-roadster/v1/master.blend": "d69ec2f5b7e109a1b0df63ec17c3775d8cdab7dd7c017e50306b01b362c4fd17",
+    "art-source/vehicle-bake/classic-roadster/v1/model.glb": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+    "art-source/vehicle-bake/classic-roadster/v1/pack-author.py": "ce6e8a3affa3e8424a771d4cdc191462eb0a8639f56802d47f5acf16d1243588",
+    "art-source/vehicle-bake/classic-roadster/v1/paint-ownership.json": "24653e69574b45f57b598e89ec9d54f9ac282d246e3468f2a9f6ea78191fb9ea",
+    "art-source/vehicle-bake/classic-roadster/v1/palette-draft.png": "942919b0819c458ef365aef59b6347c5a2c10d79cb9cfa5dee16ca12b8b9076e",
+    "art-source/vehicle-bake/classic-roadster/v1/recipe.json": "6b353262671373e096824c9418ab0d14e0855836824ad2a72e576c5d5d2555fb",
+    "art-source/vehicle-bake/classic-roadster/v1/review.json": "e3a949c05211a70f7a37288020aa354fba5627c3cfd9c4f406429bcae3a9369d",
+    "art-source/vehicle-bake/classic-roadster/v1/sheets.py": "2a51bfdc8db75ebaef2eed00714319998f633bd06f9d7398f09486fb7c3f9b19"
+  }
+}

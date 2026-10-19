@@ -369,6 +369,621 @@
           }
         }
       ]
+    },
+    {
+      "id": "pickup",
+      "name": "Teal blue pickup truck",
+      "sprite": "assets/vehicles/pickup-v1.png",
+      "mesh": {
+        "assetId": "pickup-authored-v1",
+        "path": "assets/models/vehicles/pickup-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 100,
+        "acceleration": 180,
+        "pushSpeed": 45,
+        "pushWeight": 200
+      },
+      "views": [
+        {
+          "id": "original-vehicle:pickup:south",
+          "vehicleId": "pickup",
+          "direction": "south",
+          "rect": [77, 77, 38, 107],
+          "metadata": {
+            "name": "Teal blue pickup truck · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "pickup truck"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [19, 114.5],
+            "footprint": [-19.5, -95, 39, 95],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 39,
+                "height": 95,
+                "zHeight": 36
+              }
+            ],
+            "depthOffset": -47.5
+          }
+        },
+        {
+          "id": "original-vehicle:pickup:north",
+          "vehicleId": "pickup",
+          "direction": "north",
+          "rect": [77, 303, 38, 105],
+          "metadata": {
+            "name": "Teal blue pickup truck · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "pickup truck"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [19, 112.5],
+            "footprint": [-19.5, -95, 39, 95],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 39,
+                "height": 95,
+                "zHeight": 36
+              }
+            ],
+            "depthOffset": -47.5
+          }
+        },
+        {
+          "id": "original-vehicle:pickup:west",
+          "vehicleId": "pickup",
+          "direction": "west",
+          "rect": [49, 543, 94, 67],
+          "metadata": {
+            "name": "Teal blue pickup truck · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "pickup truck"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [47, 68.5],
+            "footprint": [-47.5, -39, 95, 39],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 95,
+                "height": 39,
+                "zHeight": 36
+              }
+            ],
+            "depthOffset": -19.5
+          }
+        },
+        {
+          "id": "original-vehicle:pickup:east",
+          "vehicleId": "pickup",
+          "direction": "east",
+          "rect": [49, 767, 94, 67],
+          "metadata": {
+            "name": "Teal blue pickup truck · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "pickup truck"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [47, 68.5],
+            "footprint": [-47.5, -39, 95, 39],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 95,
+                "height": 39,
+                "zHeight": 36
+              }
+            ],
+            "depthOffset": -19.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "classic-roadster",
+      "name": "Classic open-top roadster",
+      "sprite": "assets/vehicles/classic-roadster-v1.png",
+      "mesh": {
+        "assetId": "classic-roadster-authored-v1",
+        "path": "assets/models/vehicles/classic-roadster-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 130,
+        "acceleration": 240,
+        "pushSpeed": 42,
+        "pushWeight": 110
+      },
+      "views": [
+        {
+          "id": "original-vehicle:classic-roadster:south",
+          "vehicleId": "classic-roadster",
+          "direction": "south",
+          "rect": [79, 92, 34, 88],
+          "metadata": {
+            "name": "Classic open-top roadster · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "roadster"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [17, 94.5],
+            "footprint": [-17.5, -85, 35, 85],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 85,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -42.5
+          }
+        },
+        {
+          "id": "original-vehicle:classic-roadster:north",
+          "vehicleId": "classic-roadster",
+          "direction": "north",
+          "rect": [79, 314, 34, 90],
+          "metadata": {
+            "name": "Classic open-top roadster · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "roadster"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [17, 96.5],
+            "footprint": [-17.5, -85, 35, 85],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 35,
+                "height": 85,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -42.5
+          }
+        },
+        {
+          "id": "original-vehicle:classic-roadster:west",
+          "vehicleId": "classic-roadster",
+          "direction": "west",
+          "rect": [54, 559, 84, 48],
+          "metadata": {
+            "name": "Classic open-top roadster · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "roadster"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [42, 50.5],
+            "footprint": [-42.5, -35, 85, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 85,
+                "height": 35,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        },
+        {
+          "id": "original-vehicle:classic-roadster:east",
+          "vehicleId": "classic-roadster",
+          "direction": "east",
+          "rect": [54, 783, 84, 48],
+          "metadata": {
+            "name": "Classic open-top roadster · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "roadster"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [42, 50.5],
+            "footprint": [-42.5, -35, 85, 35],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 85,
+                "height": 35,
+                "zHeight": 22
+              }
+            ],
+            "depthOffset": -17.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "offroad-jeep",
+      "name": "Boxy off-road vehicle",
+      "sprite": "assets/vehicles/offroad-jeep-v1.png",
+      "mesh": {
+        "assetId": "offroad-jeep-authored-v1",
+        "path": "assets/models/vehicles/offroad-jeep-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 96,
+        "acceleration": 160,
+        "pushSpeed": 45,
+        "pushWeight": 250
+      },
+      "views": [
+        {
+          "id": "original-vehicle:offroad-jeep:south",
+          "vehicleId": "offroad-jeep",
+          "direction": "south",
+          "rect": [76, 73, 40, 106],
+          "metadata": {
+            "name": "Boxy off-road vehicle · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "off-road vehicle"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [20, 115.0],
+            "footprint": [-20.0, -88, 40, 88],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 40,
+                "height": 88,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -44.0
+          }
+        },
+        {
+          "id": "original-vehicle:offroad-jeep:north",
+          "vehicleId": "offroad-jeep",
+          "direction": "north",
+          "rect": [76, 306, 40, 92],
+          "metadata": {
+            "name": "Boxy off-road vehicle · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "off-road vehicle"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [20, 106.0],
+            "footprint": [-20.0, -88, 40, 88],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 40,
+                "height": 88,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -44.0
+          }
+        },
+        {
+          "id": "original-vehicle:offroad-jeep:west",
+          "vehicleId": "offroad-jeep",
+          "direction": "west",
+          "rect": [53, 539, 87, 71],
+          "metadata": {
+            "name": "Boxy off-road vehicle · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "off-road vehicle"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [43, 73.0],
+            "footprint": [-44.0, -40, 88, 40],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 88,
+                "height": 40,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -20.0
+          }
+        },
+        {
+          "id": "original-vehicle:offroad-jeep:east",
+          "vehicleId": "offroad-jeep",
+          "direction": "east",
+          "rect": [52, 763, 87, 71],
+          "metadata": {
+            "name": "Boxy off-road vehicle · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "off-road vehicle"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [44, 73.0],
+            "footprint": [-44.0, -40, 88, 40],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 88,
+                "height": 40,
+                "zHeight": 38
+              }
+            ],
+            "depthOffset": -20.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "delivery-van",
+      "name": "Small delivery van",
+      "sprite": "assets/vehicles/delivery-van-v1.png",
+      "mesh": {
+        "assetId": "delivery-van-authored-v1",
+        "path": "assets/models/vehicles/delivery-van-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 96,
+        "acceleration": 155,
+        "pushSpeed": 42,
+        "pushWeight": 190
+      },
+      "views": [
+        {
+          "id": "original-vehicle:delivery-van:south",
+          "vehicleId": "delivery-van",
+          "direction": "south",
+          "rect": [78, 66, 36, 115],
+          "metadata": {
+            "name": "Small delivery van · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "van"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [18, 122.0],
+            "footprint": [-18.5, -88, 37, 88],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 37,
+                "height": 88,
+                "zHeight": 39
+              }
+            ],
+            "depthOffset": -44.0
+          }
+        },
+        {
+          "id": "original-vehicle:delivery-van:north",
+          "vehicleId": "delivery-van",
+          "direction": "north",
+          "rect": [78, 304, 36, 101],
+          "metadata": {
+            "name": "Small delivery van · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "van"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [18, 108.0],
+            "footprint": [-18.5, -88, 37, 88],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 37,
+                "height": 88,
+                "zHeight": 39
+              }
+            ],
+            "depthOffset": -44.0
+          }
+        },
+        {
+          "id": "original-vehicle:delivery-van:west",
+          "vehicleId": "delivery-van",
+          "direction": "west",
+          "rect": [52, 539, 88, 69],
+          "metadata": {
+            "name": "Small delivery van · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "van"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [44, 71.5],
+            "footprint": [-44.0, -37, 88, 37],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 88,
+                "height": 37,
+                "zHeight": 39
+              }
+            ],
+            "depthOffset": -18.5
+          }
+        },
+        {
+          "id": "original-vehicle:delivery-van:east",
+          "vehicleId": "delivery-van",
+          "direction": "east",
+          "rect": [52, 763, 88, 69],
+          "metadata": {
+            "name": "Small delivery van · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "van"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [44, 71.5],
+            "footprint": [-44.0, -37, 88, 37],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 88,
+                "height": 37,
+                "zHeight": 39
+              }
+            ],
+            "depthOffset": -18.5
+          }
+        }
+      ]
+    },
+    {
+      "id": "race-coupe",
+      "name": "Striped racing coupe",
+      "sprite": "assets/vehicles/race-coupe-v1.png",
+      "mesh": {
+        "assetId": "race-coupe-authored-v1",
+        "path": "assets/models/vehicles/race-coupe-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 172,
+        "acceleration": 320,
+        "pushSpeed": 44,
+        "pushWeight": 120
+      },
+      "views": [
+        {
+          "id": "original-vehicle:race-coupe:south",
+          "vehicleId": "race-coupe",
+          "direction": "south",
+          "rect": [78, 90, 36, 91],
+          "metadata": {
+            "name": "Striped racing coupe · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "racing coupe"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [18, 95.0],
+            "footprint": [-18.5, -82, 37, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 37,
+                "height": 82,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:race-coupe:north",
+          "vehicleId": "race-coupe",
+          "direction": "north",
+          "rect": [78, 321, 36, 84],
+          "metadata": {
+            "name": "Striped racing coupe · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "racing coupe"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [18, 88.0],
+            "footprint": [-18.5, -82, 37, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 37,
+                "height": 82,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:race-coupe:west",
+          "vehicleId": "race-coupe",
+          "direction": "west",
+          "rect": [56, 561, 81, 46],
+          "metadata": {
+            "name": "Striped racing coupe · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "racing coupe"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [40, 49.5],
+            "footprint": [-41.0, -37, 82, 37],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 37,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -18.5
+          }
+        },
+        {
+          "id": "original-vehicle:race-coupe:east",
+          "vehicleId": "race-coupe",
+          "direction": "east",
+          "rect": [55, 785, 81, 45],
+          "metadata": {
+            "name": "Striped racing coupe · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "racing coupe"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [41, 49.5],
+            "footprint": [-41.0, -37, 82, 37],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 37,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -18.5
+          }
+        }
+      ]
     }
   ]
 }

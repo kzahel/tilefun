@@ -1,0 +1,72 @@
+{
+  "name": "delivery-van-own-surface-regions-v1",
+  "meaning": "Actual GLB triangle hits and interpolated UV samples establish cab-only glazing, blank cargo panels, violet stripe, opaque rear double doors and continuous cream roof. Closed passenger/cargo body; no open-well depth claim.",
+  "rays": [
+    {
+      "id": "left-cab-glass",
+      "origin": [-0.95, -3, 1.6],
+      "direction": [0, 1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "right-cab-glass",
+      "origin": [-0.95, 3, 1.6],
+      "direction": [0, -1, 0],
+      "roles": ["glass", "glassLight", "glassGlint"]
+    },
+    {
+      "id": "left-blank-cargo",
+      "origin": [0.1, -3, 1.7],
+      "direction": [0, 1, 0],
+      "roles": ["paint", "paintLight"]
+    },
+    {
+      "id": "right-blank-cargo",
+      "origin": [0.1, 3, 1.7],
+      "direction": [0, -1, 0],
+      "roles": ["paint", "paintLight"]
+    },
+    {
+      "id": "left-violet-stripe",
+      "origin": [0.1, -3, 0.78],
+      "direction": [0, 1, 0],
+      "roles": ["violet"]
+    },
+    {
+      "id": "right-violet-stripe",
+      "origin": [0.1, 3, 0.78],
+      "direction": [0, -1, 0],
+      "roles": ["violet"]
+    },
+    {
+      "id": "front-windshield",
+      "origin": [-3, 0, 1.65],
+      "direction": [1, 0, 0],
+      "roles": ["glassLight", "glassGlint", "glass"]
+    },
+    {
+      "id": "front-windshield-frame",
+      "origin": [-3, 0.83, 1.65],
+      "direction": [1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "closed-rear-door",
+      "origin": [3, 0.35, 1.5],
+      "direction": [-1, 0, 0],
+      "roles": ["paint", "paintLight"]
+    },
+    {
+      "id": "rear-door-center-seam",
+      "origin": [3, 0, 1.5],
+      "direction": [-1, 0, 0],
+      "roles": ["ink"]
+    },
+    {
+      "id": "continuous-cream-roof",
+      "origin": [0.5, 0, 3],
+      "direction": [0, 0, -1],
+      "roles": ["paintLight"]
+    }
+  ]
+}

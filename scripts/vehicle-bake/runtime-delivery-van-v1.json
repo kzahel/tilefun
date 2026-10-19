@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "delivery-van",
+  "name": "Small delivery van",
+  "tags": ["vehicle", "original", "van"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/delivery-van-v1/review-manifest.json",
+    "sha256": "5094344a660a79c9de6959687c34121cda5d10497eee2e41ae4e9848a188b30c",
+    "candidateId": "delivery-van-v1",
+    "model": "public/demos/original-vehicles/delivery-van-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/delivery-van-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/delivery-van-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/delivery-van-v1/captures",
+    "modelSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "triangles": 2426,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/delivery-van/v1/evidence/replay-verification.json",
+    "sha256": "b8ce10c32abff035b7c87bf52d2238fe88ff01ccf6542b1845213ad856102820",
+    "build": "art-source/vehicle-bake/delivery-van/v1/build.py",
+    "family": "art-source/vehicle-bake/delivery-van/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "delivery-van-authored-v1",
+    "path": "assets/models/vehicles/delivery-van-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/delivery-van-v1.png",
+  "performance": {
+    "speed": 96,
+    "acceleration": 155,
+    "pushSpeed": 42,
+    "pushWeight": 190
+  },
+  "receipt": "art-source/vehicle-bake/runtime-delivery-van-v1.json",
+  "expectedBounds": [88, 37, 39]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "delivery-van--v1",
+    "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "triangles": 2426,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

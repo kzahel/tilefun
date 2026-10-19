@@ -1,0 +1,14 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+  "authority": "Author agent QA; no formal human approval inferred. Parent independent 32-heading draft inspection also reported no blocking issues.",
+  "observations": [
+    "Inspected all16 native study and16 native game headings, with fixed pixel density and no camera fitting. Burnt-orange short coachwork, raised contrasting charcoal hardtop, continuous framed cool-blue window band and static rear spare make a recognizable boxy off-road SUV.",
+    "Flat hood and upright windshield/rear glass retain separate skin ownership. Broad hood/fender paint clusters and beveled corners soften the box. No logos or tiny lettering. Door seams/handles are atlas paint.",
+    "Near road tires sit in real open arches; broad integrated fenders cover far crowns in both camera sets. No tire crowns appear above hood/fenders. No isolated raised caps, intersecting glass planes or blocked wells observed.",
+    "Inspected eight signed wheel phases per camera and both actual-GLB wireframes; wheel silhouette stays seated and fixed body remains coherent. Topology follows broad skin panels, local pockets, open shoulders and cylindrical wheels.",
+    "Inspected per-wheel neutral/quarter/reverse/reset images for all four wheels from visible opposing sides. Small asymmetric hub marks move; all other road wheels/body matrices stay fixed and reset images are byte-identical. Static body includes hardtop and rear spare.",
+    "Final packed audit measured4.9765L2.248W2.14H including spare/hub protrusions. The only change after parent draft inspection was moving each hub index inward0.01 source units to respect maximum width; final own32-heading/phase/wireframe inspection repeated.",
+    "Minor one-pixel variation in round lamps and small hub highlights is ordinary nearest-sampled native aliasing. No blocking visual findings."
+  ]
+}

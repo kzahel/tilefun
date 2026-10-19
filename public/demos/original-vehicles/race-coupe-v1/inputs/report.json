@@ -1,0 +1,301 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "family": "race-coupe",
+  "route": "race-coupe",
+  "revision": "v1",
+  "method": "Explicit accepted-coupe paint variation: exact base geometry/UV/rig plus static modest spoiler. Red-ramp replacement guarded by semantic masks; cream stripes and roundels rasterized barycentrically in UV space from actual triangle 3D coordinates. No screen projection.",
+  "geometry": {
+    "triangles": 2431,
+    "vertices": 3302,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 159872,
+    "sha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 5.913043478260871,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "baseHashes": {
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json": "fad5844ce3e499650168122847971b39dec9fc1bcba9200e43f4a80a14d43cd1"
+  },
+  "wheels": [
+    {
+      "label": "FL",
+      "centerBlender": [
+        -1.399999976158142,
+        -0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.913043540457021,
+        13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "FR",
+      "centerBlender": [
+        -1.399999976158142,
+        0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        -24.34782567231552,
+        5.913043540457021,
+        -13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "RL",
+      "centerBlender": [
+        1.399999976158142,
+        -0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        24.34782567231552,
+        5.913043540457021,
+        13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    },
+    {
+      "label": "RR",
+      "centerBlender": [
+        1.399999976158142,
+        0.7900000214576721,
+        0.3400000035762787
+      ],
+      "centerExport": [
+        24.34782567231552,
+        5.913043540457021,
+        -13.739130807959517
+      ],
+      "wheel_radius": 5.913043478260871
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/race-coupe/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/race-coupe/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/race-coupe/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "parent-owned integration pending",
+  "authorization": "autonomous-153",
+  "triangles": 2431,
+  "vertexCount": 3302,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 159872,
+  "atlasBytes": 32600,
+  "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+  "atlasSha256": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "race-coupe--v1",
+    "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "triangles": 2431,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.9130441247250465,
+        "minimumGap": 0.2740180219838839,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913044950779918,
+        "minimumGap": 0.27401754825549496,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913045629803742,
+        "minimumGap": 0.2600586841417485,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044977011654,
+        "minimumGap": 0.2600593369338364,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/race-coupe/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "independentWheelVisualEvidence": "engine/independent-visual.json",
+  "actualBounds": {
+    "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "minBlenderWorld": [
+      -40.121742248535156,
+      -18.04039764404297,
+      -1.0391151050725966e-07
+    ],
+    "maxBlenderWorld": [
+      40.90251541137695,
+      17.884828567504883,
+      18.613826751708984
+    ],
+    "dimensionsBlenderWorld": [
+      81.02425765991211,
+      35.92522621154785,
+      18.613826855620495
+    ],
+    "dimensionsSourceUnits": [
+      4.658894815444945,
+      2.065700507164001,
+      1.0702950441981782
+    ],
+    "includesNewSpoiler": true
+  },
+  "basePreservationEvidence": {
+    "status": "passed",
+    "baseGLB": "public/demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/model.glb",
+    "baseGLBSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+    "attributesByteExact": [
+      "POSITION",
+      "NORMAL",
+      "TEXCOORD_0"
+    ],
+    "allFour": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/race-coupe/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/race-coupe/capture.mjs",
+    "node scripts/vehicle-bake/race-coupe/independent-visual.mjs",
+    "python scripts/vehicle-bake/race-coupe/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/race-coupe/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/race-coupe/v1/evidence/clearance-input.json data/vehicle-bake/race-coupe/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/race-coupe/v1/model.glb --config art-source/vehicle-bake/race-coupe/v1/coverage-region.json --output data/vehicle-bake/race-coupe/recheck-coverage.json"
+  ],
+  "visualInspection": [
+    "Inspected16 study and16 game headings from actual GLB at224 native and fixed pixel density, plus fixed-crop nearest enlargements for details. The accepted low coupe is recognizably varied by royal/cobalt blue paint and two broad cream center bands on hood, roof and rear deck. No logos or tiny text. Side roundels remain visible as foreshortened cream discs at native game view.",
+    "Original blue-grey glass contrasts with saturated blue body; existing continuous dark window frames and windshield/rear-glass ownership remain unchanged. Front lamps, rear ruby lamps, dark intake/grille and metal rims retain their base colors.",
+    "Rear stripe bands cross the original deck louvers; louver interruptions/aliasing are inherited physical and paint details, not a screen overlay. The modest blue rear spoiler has two actual feet intersecting the source rear deck, stays below the roof crown and is consolidated with Body_static.",
+    "Near wheels remain seated in open real arches; broad accepted shoulders cover far crowns across both complete camera sets. No tire crown above hood/fender body line, blocked well or new spoiler/wheel interference observed.",
+    "Inspected8 signed phases per camera, both actual-GLB wireframes and per-wheel neutral/quarter/reverse/reset visuals from opposing visible sides. Each road wheel moves independently while other wheels and fixed body/spoiler stay fixed; reset pixels match exactly.",
+    "Packed-source audit proves all original body positions/topology/UV prefix, wheel local geometry/pose/UV and exact exported POSITION/NORMAL/TEXCOORD_0 wheel bytes preserved. Semantic masks guard69,780 protected atlas texels; cream markings use barycentric UV interpolation from real surface3D coordinates.",
+    "No blocking visual findings. Inherited small body shade speckles and narrow lamp/louver native aliasing remain as accepted base style; no steering/suspension or new physics claim."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "bothWireframes": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "independentWheelVisualPhases": true,
+    "acceptedBaseShapeUVRigPreserved": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedBiomeAndPythonCompile": "passed",
+    "globalTests": "Not run; explicitly parent-owned",
+    "independentFrozenReview": "parent-owned"
+  },
+  "limitations": [
+    "Accepted 2,299-triangle sports-coupe variation, plus 132-triangle static attached spoiler. Own editable semantic master retains accepted runtime topology; no new high-to-low transfer claim.",
+    "Finite family crown sampling and native visual inspection are separate evidence.",
+    "Full neutral roll only; nonzero steering, suspension and equipment motion unqualified.",
+    "No new gameplay features; ordinary drive contract.",
+    "Inherited deck louvers interrupt rear stripe bands; native aliasing of vents, narrow lamps and wheel details varies with heading.",
+    "Source complete and immutable; parent owns frozen review, registration and runtime integration."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/race-coupe/v1/atlas.png": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b",
+    "art-source/vehicle-bake/race-coupe/v1/audit-source.py": "534317eccb3bf61665ddc84a8bca3b2a238adb0c9ce3267a5de6c7666fe50959",
+    "art-source/vehicle-bake/race-coupe/v1/build.py": "4e10f72af356f229b4c289ab8fa8c45fa85c572fe2e757f406e7ca3156716303",
+    "art-source/vehicle-bake/race-coupe/v1/capture.mjs": "f013f880e2c4484499158d2c28994894d947fa4372dbd49405c160689c6d04b4",
+    "art-source/vehicle-bake/race-coupe/v1/car.blend": "0e3fee3886d5459b7beff1e13c932538843fe0579ecf247677eea9b8f529561c",
+    "art-source/vehicle-bake/race-coupe/v1/coverage-region.json": "31ca1a3f1ccbf5f92cfd0728f50166172eb078b1c238f5133fd9d9dc28eee22b",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/author-browser-qa.json": "1a64dffef9d240bbe7c6b2151fa92e645184f56ccd952f62e044c511f069c14a",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/author-visual-inspection.json": "e8914de214a9b4c2939bbbd27ff6298ee099cba073a3d363ead5c3ed017a3d65",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/clearance-input.json": "ec98a5c25d49ab1688f3da747408ba568c7524154677ebd0b614170957fc85f2",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/engine-capture.json": "aefafbe9dec69c1fac433e69bce0b87d431ed1a580938ce375617f6113903cc6",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/independent-visual.json": "aa25819dbf9a569e8d5fed6ed7e7ca986fefcbf872fc64c13b5eb19556a0b481",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/packed-source-audit.json": "aa58ecaa8873ee5be616434dcd1dd3ec1baefd182c110f300caf7d94e1feb217",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/protected-mask.png": "bfaf114f25cd67bc65e470eec9db08cd3fa7a87d49a134dc84e890d69578051c",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/replay-verification.json": "06fcc5e2c0c4728936ea0a23af0f051af17ca9fa61470215d96b0bb6677554d1",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/roundel-mask.png": "8c2bbb205325c20e4358902024989e58fb0d74af28c734815d6dfce44aa37441",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/shared-clearance.json": "eb1fd57180ae3b6bb5c798443bd8a87ad54e6204421af8faaa1a886fa8b5652b",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/stripe-mask.png": "2c60f802956b542f024707d8b83dc91cd413ef7c40a7719a203a7b22e63370b0",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/upper-wheel-coverage.json": "df7ce1ad742a205783bc145b4cc2adc453f9db0c39b24023c6b5d731311f411d",
+    "art-source/vehicle-bake/race-coupe/v1/family.json": "0a1bd5a2f33111ac6597f2812c3bcf842f9178bad71e02562bffc53516dcc60f",
+    "art-source/vehicle-bake/race-coupe/v1/finalize.py": "7925534c27b60adb1aa1e1f067e718d23089aa2dd5d92489c651086930e4c490",
+    "art-source/vehicle-bake/race-coupe/v1/independent-visual.mjs": "cb2797a2258a3cec85a7c352f8ebff4333a3db966fbefdc37740fd2dc427e309",
+    "art-source/vehicle-bake/race-coupe/v1/master.blend": "243350debc680bd9fd5cb7f778eb55d3b0e0e9ed64c8cfa5cea3e6d9fd48d25a",
+    "art-source/vehicle-bake/race-coupe/v1/model.glb": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "art-source/vehicle-bake/race-coupe/v1/paint-ownership.json": "37922aaf60770c08805e1e2f2540e7f565454568e86034c1b19783886623943e",
+    "art-source/vehicle-bake/race-coupe/v1/palette-draft.png": "9fb0423ef7c0552d6919daea78f86f0e8d2ccec3dd3a7ee16f0b988e9d743757",
+    "art-source/vehicle-bake/race-coupe/v1/recipe.json": "ab5c1176091c838910979204f00fbc6c964d597609b21d175baad49bdb6f24fb",
+    "art-source/vehicle-bake/race-coupe/v1/review.json": "002ac3a5e825e9b06ed02e1bc773a9f127a60e6ace903ca1670d94f3558576d0",
+    "art-source/vehicle-bake/race-coupe/v1/sheets.py": "d557bd743ea83dd698c2a0670d379689c2a53f371344621a30e3802cc791c826"
+  }
+}

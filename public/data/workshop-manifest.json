@@ -14637,6 +14637,50 @@
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
+      "id": "projection:original-vehicle-classic-roadster-v1",
+      "batchId": "original-vehicles",
+      "name": "Classic open-top roadster · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/classic-roadster-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "ae99d27dfd25f693529d0b76e54f9de4468073efdd2523c436d7489f7c66d106",
+      "sourceFingerprint": "ae99d27dfd25f693529d0b76e54f9de4468073efdd2523c436d7489f7c66d106",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-offroad-jeep-v1",
+      "batchId": "original-vehicles",
+      "name": "Boxy off-road vehicle · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/offroad-jeep-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "cd763e695f1ea98408770c624c2ee3cb725a339a853ef218a1103043d5e0905d",
+      "sourceFingerprint": "cd763e695f1ea98408770c624c2ee3cb725a339a853ef218a1103043d5e0905d",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-delivery-van-v1",
+      "batchId": "original-vehicles",
+      "name": "Small delivery van · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/delivery-van-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "a3b96d61305ad1c6864aa2090fba7ee71b32b0a2d2cc086a2f9d81b7e2734650",
+      "sourceFingerprint": "a3b96d61305ad1c6864aa2090fba7ee71b32b0a2d2cc086a2f9d81b7e2734650",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
+      "id": "projection:original-vehicle-race-coupe-v1",
+      "batchId": "original-vehicles",
+      "name": "Striped racing coupe · autonomous original v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/race-coupe-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "eed604c824e7cea19ff43afec560eed1e6471cac1465c3c8d91fc6c3794bfffc",
+      "sourceFingerprint": "eed604c824e7cea19ff43afec560eed1e6471cac1465c3c8d91fc6c3794bfffc",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
       "id": "projection:original-vehicle-explorer-boat-v1",
       "batchId": "original-vehicles",
       "name": "Explorer motorboat · hollow hull and outboard v1",
@@ -46932,5 +46976,5 @@
       }
     }
   ],
-  "inputDigest": "b6317c75daaadc532de32e8ecdba751a5e191c9ce604c6e4c016e43ee90457bd"
+  "inputDigest": "08f208d637eda3b64cf65c1cfff835f06f4c1451f3b516fdc2f2c936ff84e461"
 }

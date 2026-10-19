@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending",
+  "report": "public/demos/vehicle-bake/race-coupe/v1/report.json",
+  "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+  "atlasSha256": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/race-coupe/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/race-coupe/capture.mjs",
+    "node scripts/vehicle-bake/race-coupe/independent-visual.mjs",
+    "python scripts/vehicle-bake/race-coupe/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/race-coupe/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/race-coupe/v1/evidence/clearance-input.json data/vehicle-bake/race-coupe/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/race-coupe/v1/model.glb --config art-source/vehicle-bake/race-coupe/v1/coverage-region.json --output data/vehicle-bake/race-coupe/recheck-coverage.json"
+  ]
+}

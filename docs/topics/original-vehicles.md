@@ -1,13 +1,13 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: red coupe, Beetle and school bus integrated; pickup v1 delivered for appearance review.
+Status: eight road originals integrated; autonomous run 153 continues with the next families.
 Updated: 2026-10-19.
 
 The owner separately authorized an original **explorer motorboat** and working
 lake gameplay in [152](../tactical/152-explorer-boat-and-lakes.md). Its independent
 hollow-hull Blender/UV source and zero-wheel outboard rig do not change the car
-queue, the 45 source ports or the three accepted road originals. [Boats](boats.md)
+queue, the 45 source ports or the original-road vehicle queue. [Boats](boats.md)
 owns its runtime, exact pending review and water generation.
 
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
@@ -17,6 +17,23 @@ own the 45 existing sprite ports; these prototypes do not change those counts.
 
 ## Current decision and gate
 
+On 2026-10-19 the owner authorized an eight-hour autonomous production run through
+the backlog, including game availability and incremental commits/pushes, without
+per-vehicle appearance pauses or a quantity guarantee. [153](../tactical/153-autonomous-vehicle-production.md)
+owns the bounded run and [ledger](../../art-source/vehicle-bake/autonomous-153.json).
+The hard cutoff is 2026-10-20 05:19:36 UTC. Existing human review records remain
+unchanged; new runtime activations use explicit batch authorization plus honest
+agent QA. Batch 1 activates pickup, classic roadster, off-road SUV, delivery van and racing
+coupe. Together with the three earlier originals, the normal catalog has **53 road
+types, 52 traffic-eligible types**, plus the separately owned boat (54 drivable
+types). All five additions retain exact frozen GLBs/cardinal pixels and pass 56
+full-Chromium gameplay checks across all eight originals. The complete unit run
+passes 5,768 tests with the five known Windows failures and ten skips; typechecks,
+lint, build and the 1,774-identity Workshop inventory pass. New origin-centered
+bounds use the versioned v3 exporter; pickup is conservatively 95×39×36px.
+Microcar, woody wagon and limousine sources are next in independent review.
+Historical checkpoint details below retain their original counts and gates.
+
 The owner accepted school bus v1 and explicitly authorized runtime integration.
 [150](../tactical/150-school-bus-gameplay.md) adds **Yellow school bus** to editor
 spawning, normal road traffic and shared game/lab own-mesh presentation. The exact
@@ -24,7 +41,7 @@ reviewed GLB and native cardinal fallback are retained. Conservative 122×43×44
 bounds require 98px roads; handling is 78px/s with 100px/s² acceleration. The combined
 roster is 48 types/47 ordinary traffic types; the source bank remains 45 types/180 views.
 Pickup authoring/review is recorded under [151](../tactical/151-pickup-pipeline-review.md).
-The owner likes its appearance; gameplay activation remains pending.
+The owner likes its appearance; run 153 now activates its exact reviewed model.
 
 The owner prefers [141](../tactical/141-sports-car-style-experiments.md)'s approach 3,
 especially characteristic outer and internal outlines. [142](../tactical/142-red-car-low-poly-pipeline.md)

@@ -1,0 +1,15 @@
+{
+  "id": "offroad-jeep-v1",
+  "clearanceId": "offroad-jeep--v1",
+  "name": "Boxy off-road vehicle",
+  "title": "Boxy off-road vehicle \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/offroad-jeep/v1",
+  "glb": "public/demos/vehicle-bake/offroad-jeep/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/offroad-jeep/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/offroad-jeep/v1/report.json",
+  "output": "public/demos/original-vehicles/offroad-jeep-v1",
+  "qa": "data/vehicle-bake/offroad-jeep-qa",
+  "offline": "data/vehicle-bake/offroad-jeep-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224
+}

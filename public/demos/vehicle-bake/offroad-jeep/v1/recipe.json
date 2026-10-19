@@ -1,0 +1,706 @@
+{
+  "family": "boxy-short-offroad-suv",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [
+    4.97,
+    2.22,
+    2.14
+  ],
+  "wheelRadius": 0.46,
+  "wheelWidth": 0.34,
+  "axles": [
+    -1.43,
+    1.28
+  ],
+  "halfTrack": 0.9,
+  "arch": {
+    "cutRadius": 0.555,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [
+      0.65,
+      0.79,
+      0.98,
+      1.06,
+      1.11
+    ],
+    "shoulderRadii": [
+      0.57,
+      0.64,
+      0.64,
+      0.62,
+      0.59
+    ],
+    "archRadius": 0.535
+  },
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      112,
+      53,
+      45
+    ],
+    "paintShadow": [
+      151,
+      65,
+      42
+    ],
+    "paintMid": [
+      181,
+      79,
+      42
+    ],
+    "paint": [
+      206,
+      105,
+      48
+    ],
+    "paintLight": [
+      234,
+      143,
+      72
+    ],
+    "cream": [
+      255,
+      226,
+      160
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ],
+    "roof": [
+      64,
+      68,
+      85
+    ],
+    "roofLight": [
+      83,
+      87,
+      103
+    ],
+    "roofEdge": [
+      48,
+      52,
+      69
+    ]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Original boxy off-road SUV; independent continuous side, fixed windshield/rear and separate removable-style roof UV ownership on actual skin. Static rear-mounted spare. No projected or view-dependent paint.",
+  "components": [
+    {
+      "name": "Burnt orange continuous lower coachwork",
+      "group": "body",
+      "triangles": 268,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Upright framed greenhouse actual skin",
+      "group": "body",
+      "triangles": 172,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "STATIC contrasting removable-style hardtop",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roof"
+      ]
+    },
+    {
+      "name": "Hardtop continuous lower weather edge -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Hardtop continuous lower weather edge 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Flat rounded short engine hood",
+      "group": "body",
+      "triangles": 156,
+      "paintRoles": [
+        "paint"
+      ]
+    },
+    {
+      "name": "Central narrow chassis",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Broad integrated open wheel fender -1.43 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad integrated open wheel fender -1.43 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad integrated open wheel fender 1.28 -1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Broad integrated open wheel fender 1.28 1",
+      "group": "body",
+      "triangles": 160,
+      "paintRoles": [
+        "paint",
+        "paintDeep",
+        "paintLight",
+        "paintMid"
+      ]
+    },
+    {
+      "name": "Short side sill step -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roof"
+      ]
+    },
+    {
+      "name": "Short side sill step 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roof"
+      ]
+    },
+    {
+      "name": "Short stout bumper -2.35",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roof"
+      ]
+    },
+    {
+      "name": "Bumper face broad metal strip -2.35",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Short stout bumper 2.06",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roof"
+      ]
+    },
+    {
+      "name": "Bumper face broad metal strip 2.06",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Front black vertical grille field",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "ink"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat -0.42",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat -0.28",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat -0.14",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0.14",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0.28",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Simple vertical grille slat 0.42",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Round front headlamp metal bezel -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Round front headlamp ivory lens -1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Front amber lower lamp -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "amber"
+      ]
+    },
+    {
+      "name": "Rear vertical ruby lamp -1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Rear ruby broad highlight -1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rubyLight"
+      ]
+    },
+    {
+      "name": "Round front headlamp metal bezel 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Round front headlamp ivory lens 1",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "cream"
+      ]
+    },
+    {
+      "name": "Front amber lower lamp 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "amber"
+      ]
+    },
+    {
+      "name": "Rear vertical ruby lamp 1",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "ruby"
+      ]
+    },
+    {
+      "name": "Rear ruby broad highlight 1",
+      "group": "body",
+      "triangles": 12,
+      "paintRoles": [
+        "rubyLight"
+      ]
+    },
+    {
+      "name": "Chunky road tire FL",
+      "group": "FL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Road steel rim FL",
+      "group": "FL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Road raised metal hub FL",
+      "group": "FL",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Road hub index FL",
+      "group": "FL",
+      "triangles": 16,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Chunky road tire FR",
+      "group": "FR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Road steel rim FR",
+      "group": "FR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Road raised metal hub FR",
+      "group": "FR",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Road hub index FR",
+      "group": "FR",
+      "triangles": 16,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Chunky road tire RL",
+      "group": "RL",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Road steel rim RL",
+      "group": "RL",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Road raised metal hub RL",
+      "group": "RL",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Road hub index RL",
+      "group": "RL",
+      "triangles": 16,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "Chunky road tire RR",
+      "group": "RR",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "Road steel rim RR",
+      "group": "RR",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "Road raised metal hub RR",
+      "group": "RR",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    },
+    {
+      "name": "Road hub index RR",
+      "group": "RR",
+      "triangles": 16,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "STATIC spare rear mount",
+      "group": "body",
+      "triangles": 44,
+      "paintRoles": [
+        "roofEdge"
+      ]
+    },
+    {
+      "name": "STATIC rear mounted spare rubber",
+      "group": "body",
+      "triangles": 156,
+      "paintRoles": [
+        "tire",
+        "tireLight"
+      ]
+    },
+    {
+      "name": "STATIC spare steel rim",
+      "group": "body",
+      "triangles": 34,
+      "paintRoles": [
+        "rim"
+      ]
+    },
+    {
+      "name": "STATIC spare center hub",
+      "group": "body",
+      "triangles": 28,
+      "paintRoles": [
+        "silver"
+      ]
+    }
+  ],
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4299999475479126,
+        -0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -24.869564305181093,
+        8.000000145124353,
+        15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4299999475479126,
+        0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        -24.869564305181093,
+        8.000000145124353,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.2799999713897705,
+        -0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        22.260869067648187,
+        8.000000145124353,
+        15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.2799999713897705,
+        0.8999999761581421,
+        0.46000000834465027
+      ],
+      "centerExport": [
+        22.260869067648187,
+        8.000000145124353,
+        -15.652173498402474
+      ],
+      "radiusBlender": 0.46,
+      "wheel_radius": 8.000000000000002
+    }
+  ],
+  "method": "Original boxy off-road SUV; independent continuous side, fixed windshield/rear and separate removable-style roof UV ownership on actual skin. Static rear-mounted spare. No projected or view-dependent paint.",
+  "masterMeaning": "Editable semantic component master at runtime topology; no separate high-poly/decimation claim.",
+  "sourceDependencies": [
+    "scripts/vehicle-bake/offroad-jeep/build.py",
+    "scripts/vehicle-bake/offroad-jeep/geometry.py",
+    "scripts/vehicle-bake/offroad-jeep/family.json",
+    "scripts/vehicle-bake/offroad-jeep/coverage-region.json",
+    "scripts/vehicle-bake/offroad-jeep/review.json"
+  ],
+  "sharedComponents": [
+    "Blender glTF exporter (same selected-root/y-up/extras/material contract as coupe)",
+    "scripts/vehicle-bake/catalog.py:audit_glb",
+    "scripts/vehicle-bake/clearance.py",
+    "Compiled shared viewer.js / CarMeshAsset / CarPixelOutline / wheel-rig.mjs"
+  ]
+}

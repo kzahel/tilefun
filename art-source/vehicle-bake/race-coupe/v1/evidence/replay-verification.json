@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+  "atlasSha256": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b",
+  "recipeSha256": "ab5c1176091c838910979204f00fbc6c964d597609b21d175baad49bdb6f24fb",
+  "invokedBuilder": "art-source/vehicle-bake/race-coupe/v1/build.py",
+  "inputHashes": {
+    "art-source/vehicle-bake/race-coupe/v1/build.py": "4e10f72af356f229b4c289ab8fa8c45fa85c572fe2e757f406e7ca3156716303",
+    "art-source/vehicle-bake/race-coupe/v1/family.json": "0a1bd5a2f33111ac6597f2812c3bcf842f9178bad71e02562bffc53516dcc60f",
+    "art-source/vehicle-bake/race-coupe/v1/coverage-region.json": "31ca1a3f1ccbf5f92cfd0728f50166172eb078b1c238f5133fd9d9dc28eee22b",
+    "art-source/vehicle-bake/race-coupe/v1/review.json": "002ac3a5e825e9b06ed02e1bc773a9f127a60e6ace903ca1670d94f3558576d0",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json": "fad5844ce3e499650168122847971b39dec9fc1bcba9200e43f4a80a14d43cd1"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+    "public/demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/model.glb": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+  },
+  "scratchInputDependencies": [],
+  "blender": "5.2.2 LTS d13f752e3b9c; factory startup; background; 4 threads; python exit code 1",
+  "meaning": "Retained variation constructor/configs plus pinned COMMITTED accepted-coupe blend, atlas, recipe and repository catalog helper. No ignored master dependencies; scratch contains outputs only. Exact GLB, atlas and recipe reproduced; packed scene bytes retained, not asserted deterministic across saves."
+}

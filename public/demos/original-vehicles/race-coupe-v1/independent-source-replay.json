@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "family": "race-coupe",
+  "independent": true,
+  "declaredInputPins": 20,
+  "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+  "exactOutputs": {
+    "model.glb": "data/vehicle-bake/race-coupe/replay/public/model.glb",
+    "atlas.png": "data/vehicle-bake/race-coupe/replay/public/atlas.png",
+    "recipe.json": "data/vehicle-bake/race-coupe/replay/public/recipe.json"
+  },
+  "scratchInputDependencies": []
+}

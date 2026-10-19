@@ -1,0 +1,17 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; no formal human approval fabricated",
+  "runtime": "parent-owned integration pending",
+  "report": "public/demos/vehicle-bake/offroad-jeep/v1/report.json",
+  "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+  "atlasSha256": "9a2e09cf2cb15026105ee3d9d82622bc8d3ea3f6cb1b4e3d177bf3f94d733a3f",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/offroad-jeep/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/offroad-jeep/capture.mjs",
+    "node scripts/vehicle-bake/offroad-jeep/independent-visual.mjs",
+    "python scripts/vehicle-bake/offroad-jeep/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/offroad-jeep/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/offroad-jeep/v1/evidence/clearance-input.json data/vehicle-bake/offroad-jeep/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/offroad-jeep/v1/model.glb --config art-source/vehicle-bake/offroad-jeep/v1/coverage-region.json --output data/vehicle-bake/offroad-jeep/recheck-coverage.json"
+  ]
+}

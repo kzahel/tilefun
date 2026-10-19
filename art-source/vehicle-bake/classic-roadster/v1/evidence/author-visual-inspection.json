@@ -1,0 +1,16 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "reviewKind": "author actual-export visual inspection; no formal human approval",
+  "observations": [
+    "Inspected all 16 study plus 16 engine headings at unchanged native 224px/radius112. No clipping, view fitting or scale changes.",
+    "Long rounded green hood, short rounded rear deck and low tiny framed blue windscreen read as classic open-top roadster. Body construction is independent of coupe/pickup geometry.",
+    "Both seats and the recessed dark cockpit read in front obliques 45/135 and rear obliques 225/315 in both cameras; additionally inspected their individual native 224px files. Tan cushion/back distinction remains visible. Real floor/rail rays independently prove depth.",
+    "Far-side tire crowns remain under continuous broad integrated hood/rear fenders at all headings. Near-wheel seating and open local pockets have no blocking visual intersection or detached raised-cap silhouette.",
+    "Inspected all eight signed rolling phases in each camera and both wireframes. Only four road wheel assemblies roll; fixed body, seats, cockpit, glass and brightwork stay fixed.",
+    "Opaque unlit glass has continuous dark perimeter on its actual windscreen slab. Hood/side charts and exact seatback/trim swatch owners are retained in paint-ownership.json.",
+    "Broad deep/light green, cool blue, cream-tan and ink 58,58,80 coherent palette. Slim chrome bumpers and simple round lamps remain legible without logos or tiny text.",
+    "Expected minor angle-dependent pixel aliasing in grille, chrome and round hubs; no blocking native appearance finding.",
+    "No visible animated driver, existing ordinary driving semantics; no folding roof/equipment animation or new rider gameplay."
+  ]
+}

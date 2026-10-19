@@ -3,7 +3,6 @@ import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { TrafficTestHarness } from "./TrafficTestHarness.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 
@@ -51,32 +50,5 @@ it("places, drives and reloads the coupe through the shared Realm and saved traf
   }
 });
 
-it("selects the coupe in ordinary automatic traffic on actual generated roads", () => {
-  const scene = new TrafficTestHarness();
-  for (const state of [...scene.traffic.states.values()])
-    scene.entities.remove(state.entity.id, false);
-  // Simulate persisted exclusions for other identities so a 12-car quota cannot
-  // mask this family's admission. Lane selection, model choice and collision
-  // checks remain the production implementation, with no manually added coupe.
-  scene.traffic.canSpawn = (identity) => identity.includes(":rosso-coupe:");
-  const graph = scene.strategy.trafficNetwork(4800, 8304);
-  const positions = [
-    { x: 4800, y: 8304 },
-    ...[...graph.lanes.values()].slice(0, 12).map((lane) => lane.a),
-  ];
-  for (const position of positions) {
-    scene.player.position = { wx: position.x, wy: position.y };
-    const cx = Math.floor(position.x / 256),
-      cy = Math.floor(position.y / 256);
-    for (let y = cy - 7; y <= cy + 7; y++)
-      for (let x = cx - 7; x <= cx + 7; x++) scene.world.getChunk(x, y);
-    scene.traffic.visibleRanges = [{ minCx: cx, maxCx: cx, minCy: cy, maxCy: cy }];
-    scene.traffic.tick(2.1, [scene.player]);
-    if (scene.traffic.states.size) break;
-  }
-  const car = required([...scene.traffic.states.values()][0]);
-  expect(car.entity.type).toBe("vehicle-v1:rosso-coupe");
-  expect(car.placed).not.toBe(true);
-  expect(car.lane.width).toBeGreaterThanOrEqual(84);
-  expect(car.entity.proceduralId).toContain("traffic-v1:");
-});
+// Generated-road admission for every original is covered by the independent
+// fixture-driven production selector cases in OriginalVehicles.test.ts.

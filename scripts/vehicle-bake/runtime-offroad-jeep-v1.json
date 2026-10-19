@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "id": "offroad-jeep",
+  "name": "Boxy off-road vehicle",
+  "tags": ["vehicle", "original", "off-road vehicle"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/offroad-jeep-v1/review-manifest.json",
+    "sha256": "0c880c4fd5db45a887280b5aacf7211259dd0b1b84a66f8b3249eeb8cd09c5be",
+    "candidateId": "offroad-jeep-v1",
+    "model": "public/demos/original-vehicles/offroad-jeep-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/offroad-jeep-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/offroad-jeep-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/offroad-jeep-v1/captures",
+    "modelSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+    "triangles": 3146,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/offroad-jeep/v1/evidence/replay-verification.json",
+    "sha256": "b0f30ed6b59e7d13bc7678bf536ff4b93501b66916dfffa92274f7c5051d3de3",
+    "build": "art-source/vehicle-bake/offroad-jeep/v1/build.py",
+    "family": "art-source/vehicle-bake/offroad-jeep/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "offroad-jeep-authored-v1",
+    "path": "assets/models/vehicles/offroad-jeep-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/offroad-jeep-v1.png",
+  "performance": {
+    "speed": 96,
+    "acceleration": 160,
+    "pushSpeed": 45,
+    "pushWeight": 250
+  },
+  "receipt": "art-source/vehicle-bake/runtime-offroad-jeep-v1.json",
+  "expectedBounds": [88, 40, 38]
+}

@@ -1,0 +1,993 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "classic-roadster-v1",
+      "name": "Classic open-top roadster",
+      "title": "Classic open-top roadster \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original low roadster coachwork with true recessed two-seat cockpit and exact semantic windshield, seat, inner-panel and trim UV owners. No projection or high-to-low transfer claim.",
+      "audit": {
+        "triangles": 3092,
+        "vertices": 6173,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 222216,
+        "sha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.608695652173914,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/atlas.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/atlas.png",
+          "sha256": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/capture.json",
+          "sha256": "29eeee9504d98dee31c4abbbb952a135d77470d5047ba4822cd727e7f0faf437"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-0.png",
+          "sha256": "f057d32083a6c9697bf3c9aed88880add783ad3bebd379eb549b6a3995a71e56"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-1.png",
+          "sha256": "7cb8fc7c563659f25f71fc9f1a184d0c9f3283d62a718bad8feab7e8da4f4d25"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-10.png",
+          "sha256": "71dd71cd5b9a6223cb4e9430035f64b78071709022487ac98d05046f388d923e"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-11.png",
+          "sha256": "add1d2d5fdca6d4c426bb69a395baed5d0f252153b65d14cec8bc41bfe1198ad"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-12.png",
+          "sha256": "b06ec38085be6d3b293555200b24972bf0fff54b0635be4747adc3a302591a2d"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-13.png",
+          "sha256": "0f5b1563862c1d89cb27747e94d5c6f97733b12cece825a3c615c9bba2ff31a6"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-14.png",
+          "sha256": "3f6d8d1513a594736b06d2c62fdff60155512a8c4f79a6ec819f9dfd98f6aeee"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-15.png",
+          "sha256": "5ae54efbea4e45dae6abe27d9cd4a68295d62bdf18932ddf2b66d8dcccb03c83"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-2.png",
+          "sha256": "0613b2e8d7c59f5fd636ead0bcccbe83e50d6d6c0a607f9f40a489ccffafc7ba"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-3.png",
+          "sha256": "ae87c18d4b17bad207a2b08c2d6e3d2733f8325093d326cc5b7e9a66f4953d32"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-4.png",
+          "sha256": "9b5b6a48a6d45930d75f5905ef95d1445ebda440a9f5299e430438ce46c33033"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-5.png",
+          "sha256": "0ab1102e19839446db532cf81a2c9b4dcce5e84e8ed4eda06cf5fd3978601fba"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-6.png",
+          "sha256": "c1040182dc3409b244399fa67efa6cbb15d954d16dd194af1271dbaed469cce4"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-7.png",
+          "sha256": "fc0955d3e086f447e6e673fe9e77811a6121351dd65af76bdff87727f17551aa"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-8.png",
+          "sha256": "d44558bdd79793a075baaa5420ae9a72284153c0792432a2e9bd7f0456dc594b"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-9.png",
+          "sha256": "3fb724143fd579bbaeb4511defaa5b56d2ccb925839af50e33f4ba5f4db9296a"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-0.png",
+          "sha256": "0613b2e8d7c59f5fd636ead0bcccbe83e50d6d6c0a607f9f40a489ccffafc7ba"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-1.png",
+          "sha256": "9121f3d4fe27cba695e56e5d28e3f2015af9bd8fae2eff83aa21752aee0f8a08"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-2.png",
+          "sha256": "055f35efa8f5cee07ed27c0aa746492e466c37044666365bed8bd598d388fb10"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-3.png",
+          "sha256": "044dc65a86ddcb58b60fac463ae639c4af0a0cf365dc7eb476e42156dc14eae3"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-4.png",
+          "sha256": "faf2818e3272698b6278537ac48565c920eed4da3cb3dbec0252491c31d90e98"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-5.png",
+          "sha256": "43cd341c971057007af2d6ec4b63fce8c07693791353e0d11391495b0ba05cc5"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-6.png",
+          "sha256": "8d29dae6d4a7b9c28a7504881efd4d4fe3e238463a85097f7010343fdcb25a0b"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-7.png",
+          "sha256": "78861759028f93ac01d2d918788e447e17ea911f1da027496e2bab3593040eeb"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/inspection-engine.png",
+          "sha256": "b43567d75c6018ec31330db532d2c612a163e9dc24c101aac1bd32f2f9a4e148"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/inspection-phases.png",
+          "sha256": "754e82ea320e0042079360f7888c048d047c7da0136b1b0e0dfc756073965bd3"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/inspection-study.png",
+          "sha256": "8257c65f6a156c21dba031fa416dc05c6f3891465ce2ade195de9b6e9952e8bc"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/parent-engine.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/parent-engine.png",
+          "sha256": "128e26ba222437c3b696b76502d9becedc23f6af184e601d07cbdca29b4124cf"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/parent-study.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/parent-study.png",
+          "sha256": "1d459f66faa5217fa82ca37fa04d7273d04f2e81da3da714221b956951b5ea6b"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-0.png",
+          "sha256": "d37203100d7837e275e506a905a505f3be88009c432c46fc311b71c09cefe7b3"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-1.png",
+          "sha256": "a94d968fea2e51b5c36fc186d7e3327e2b222b1b3e5a358cb19f568b8abb448c"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-2.png",
+          "sha256": "eae503a6100dd570b9ffd97f6fae4ae662056dcd3bba925cf345bd5c46dc4144"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-3.png",
+          "sha256": "d21d6f909e630305be327b38df12764b3f9b9a2676d40dffec27d5cd0e3236e3"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-4.png",
+          "sha256": "b16522e47d4f851b5e666da250cb4de7cec47649d3d137152095c9dde086ccbd"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-5.png",
+          "sha256": "714ccb5d3a7f558fd90e464666113dff7499c34ec1ed2a68bb8ce20333d5914e"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-6.png",
+          "sha256": "b16b3f34edfa5ccdf7000d6a0d5f349d0cf1f963cfbd77d3e72d2c6674e0b18e"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-7.png",
+          "sha256": "3c1cfef1071b411b7e193227f34749a22941e37659bcda11b3dc0f43cde3af7c"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-0.png",
+          "sha256": "89372b06bbaad5d1c856cad521477704c9451677e4bdacf10e5422261967db9e"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-1.png",
+          "sha256": "915b113c351fd732e49d47e71a81b9bd20df724f82cf1350dc8ee09edbacac4c"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-10.png",
+          "sha256": "91087fe8f7277f43302dbc19e6d459a76f1c0b9de83f2f4adf8126dbc6577f21"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-11.png",
+          "sha256": "6795126aabbdda512cef038544bfc29b57d699626a8756a5b16d80a873f486b9"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-12.png",
+          "sha256": "f7a0445639329009aa588ebb79c4be612e08eebcab4b6246ae58a04a5c745c2e"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-13.png",
+          "sha256": "c34ba637f1155ff8d26be698319f5bcd0b51f59fdc17b33d5292add4abb124f1"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-14.png",
+          "sha256": "1b3e3c93ab268b12b9229688f4488e1718578cbfd0d9943103a1badc5f24aa78"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-15.png",
+          "sha256": "9d91a0920030ba24b5687cee50ccfab3936303f65aa7ba20aba0564518487e3f"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-2.png",
+          "sha256": "d37203100d7837e275e506a905a505f3be88009c432c46fc311b71c09cefe7b3"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-3.png",
+          "sha256": "ffbe163e1c66e97c9c139f3db6519fb089e8eff55bc3a68238fe1cd95a6fc810"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-4.png",
+          "sha256": "491958cb9e82b95062f58fbff8d2216c217ecdd74a560aee69029db6e343510e"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-5.png",
+          "sha256": "74c29ccdd4c4bccb158ef2a21655e3768794e6c89b9fe0da82e8e8370fe64404"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-6.png",
+          "sha256": "e5a4870563950bad075968974b53465c1d4d93c1697daa714de5fc85b5678b83"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-7.png",
+          "sha256": "920f0f332f0973dedac878fb770169a558503205ad1505da773c5acd6293472a"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-8.png",
+          "sha256": "09573b2cf1f532ab7acf09ea9c717e7575e783f34c1548ffd70d24e8e7a62608"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-9.png",
+          "sha256": "0d7b5aa0eb35116085288e916a80fb19fca8b5a525932420abe2a974b8068e47"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/wire-engine.png",
+          "sha256": "081fb4670e45f60c3f1f606241d8f5aefbbb20be4bd2fa96509a16bbdf7c7ddd"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/engine/wire-study.png",
+          "sha256": "c1b43b3328786e30803e738adce9b0dc2fcc749efec2b445237703270be9b1bd"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/model.glb",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/model.glb",
+          "sha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/recipe.json",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/recipe.json",
+          "sha256": "6b353262671373e096824c9418ab0d14e0855836824ad2a72e576c5d5d2555fb"
+        },
+        {
+          "source": "demos/vehicle-bake/classic-roadster/v1/report.json",
+          "retained": "demos/original-vehicles/classic-roadster-v1/inputs/report.json",
+          "sha256": "8b9e1d0ef60f307e62f65ff0936f1e8cbed64cacf523f9aab1bffddc1dfc8948"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/classic-roadster-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "classic-roadster--v1",
+          "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+          "triangles": 3092,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 6.608695983886719,
+              "minimumGap": 1.3786944783795878,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 6.608695983886719,
+              "minimumGap": 1.3786941910791528,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 6.608695983886719,
+              "minimumGap": 1.3786945772582992,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 6.608695983886719,
+              "minimumGap": 1.3786943302858559,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 6.608695652173914,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 6.608695652173914,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 6.608695652173914,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 6.608695652173914,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/browser-qa.json",
+          "sha256": "5643a111243d92cc1854950a371d5e561c9749d9bd0349052020740aa736be52"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/candidate.json",
+          "sha256": "2670f546fc7690e4d1d27d87351f8daf75e812c9ba2472adfda7c6f64571b6d4"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/capture.json",
+          "sha256": "29eeee9504d98dee31c4abbbb952a135d77470d5047ba4822cd727e7f0faf437"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/contact-sheet.png",
+          "sha256": "f50725b1740307ee61d71c854dd00ecc6cfa7bda988afb9d6889631cfec5f78b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-0.png",
+          "sha256": "f057d32083a6c9697bf3c9aed88880add783ad3bebd379eb549b6a3995a71e56"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-1.png",
+          "sha256": "7cb8fc7c563659f25f71fc9f1a184d0c9f3283d62a718bad8feab7e8da4f4d25"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-10.png",
+          "sha256": "71dd71cd5b9a6223cb4e9430035f64b78071709022487ac98d05046f388d923e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-11.png",
+          "sha256": "add1d2d5fdca6d4c426bb69a395baed5d0f252153b65d14cec8bc41bfe1198ad"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-12.png",
+          "sha256": "b06ec38085be6d3b293555200b24972bf0fff54b0635be4747adc3a302591a2d"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-13.png",
+          "sha256": "0f5b1563862c1d89cb27747e94d5c6f97733b12cece825a3c615c9bba2ff31a6"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-14.png",
+          "sha256": "3f6d8d1513a594736b06d2c62fdff60155512a8c4f79a6ec819f9dfd98f6aeee"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-15.png",
+          "sha256": "5ae54efbea4e45dae6abe27d9cd4a68295d62bdf18932ddf2b66d8dcccb03c83"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-1x.png",
+          "sha256": "c30a3a0b6c7a624aae9114550e3501fa98fc9482d5581a46325e07f7bfca03f2"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-2.png",
+          "sha256": "0613b2e8d7c59f5fd636ead0bcccbe83e50d6d6c0a607f9f40a489ccffafc7ba"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-2x.png",
+          "sha256": "7b76c58fcfdc136a078f9f5d5f01051efd121c84527a36476e36ef2832d7f0c2"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-3.png",
+          "sha256": "ae87c18d4b17bad207a2b08c2d6e3d2733f8325093d326cc5b7e9a66f4953d32"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-3x.png",
+          "sha256": "1fe3b2de9d8ef07e9298de8dbeca3d34a816a5d38a14cd8148848fb2cc4720c8"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-4.png",
+          "sha256": "9b5b6a48a6d45930d75f5905ef95d1445ebda440a9f5299e430438ce46c33033"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-5.png",
+          "sha256": "0ab1102e19839446db532cf81a2c9b4dcce5e84e8ed4eda06cf5fd3978601fba"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-6.png",
+          "sha256": "c1040182dc3409b244399fa67efa6cbb15d954d16dd194af1271dbaed469cce4"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-7.png",
+          "sha256": "fc0955d3e086f447e6e673fe9e77811a6121351dd65af76bdff87727f17551aa"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-8.png",
+          "sha256": "d44558bdd79793a075baaa5420ae9a72284153c0792432a2e9bd7f0456dc594b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/engine-9.png",
+          "sha256": "3fb724143fd579bbaeb4511defaa5b56d2ccb925839af50e33f4ba5f4db9296a"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-0.png",
+          "sha256": "0613b2e8d7c59f5fd636ead0bcccbe83e50d6d6c0a607f9f40a489ccffafc7ba"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-1.png",
+          "sha256": "9121f3d4fe27cba695e56e5d28e3f2015af9bd8fae2eff83aa21752aee0f8a08"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-2.png",
+          "sha256": "055f35efa8f5cee07ed27c0aa746492e466c37044666365bed8bd598d388fb10"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-3.png",
+          "sha256": "044dc65a86ddcb58b60fac463ae639c4af0a0cf365dc7eb476e42156dc14eae3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-4.png",
+          "sha256": "faf2818e3272698b6278537ac48565c920eed4da3cb3dbec0252491c31d90e98"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-5.png",
+          "sha256": "43cd341c971057007af2d6ec4b63fce8c07693791353e0d11391495b0ba05cc5"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-6.png",
+          "sha256": "8d29dae6d4a7b9c28a7504881efd4d4fe3e238463a85097f7010343fdcb25a0b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-roll-7.png",
+          "sha256": "78861759028f93ac01d2d918788e447e17ea911f1da027496e2bab3593040eeb"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/game-turntable.gif",
+          "sha256": "d9b0f285e10375db82dd61a30ed93ed1ae28f894f897c6e5ece442c2be2501fb"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-0.png",
+          "sha256": "d37203100d7837e275e506a905a505f3be88009c432c46fc311b71c09cefe7b3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-1.png",
+          "sha256": "a94d968fea2e51b5c36fc186d7e3327e2b222b1b3e5a358cb19f568b8abb448c"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-2.png",
+          "sha256": "eae503a6100dd570b9ffd97f6fae4ae662056dcd3bba925cf345bd5c46dc4144"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-3.png",
+          "sha256": "d21d6f909e630305be327b38df12764b3f9b9a2676d40dffec27d5cd0e3236e3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-4.png",
+          "sha256": "b16522e47d4f851b5e666da250cb4de7cec47649d3d137152095c9dde086ccbd"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-5.png",
+          "sha256": "714ccb5d3a7f558fd90e464666113dff7499c34ec1ed2a68bb8ce20333d5914e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-6.png",
+          "sha256": "b16b3f34edfa5ccdf7000d6a0d5f349d0cf1f963cfbd77d3e72d2c6674e0b18e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/roll-7.png",
+          "sha256": "3c1cfef1071b411b7e193227f34749a22941e37659bcda11b3dc0f43cde3af7c"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-0.png",
+          "sha256": "89372b06bbaad5d1c856cad521477704c9451677e4bdacf10e5422261967db9e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-1.png",
+          "sha256": "915b113c351fd732e49d47e71a81b9bd20df724f82cf1350dc8ee09edbacac4c"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-10.png",
+          "sha256": "91087fe8f7277f43302dbc19e6d459a76f1c0b9de83f2f4adf8126dbc6577f21"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-11.png",
+          "sha256": "6795126aabbdda512cef038544bfc29b57d699626a8756a5b16d80a873f486b9"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-12.png",
+          "sha256": "f7a0445639329009aa588ebb79c4be612e08eebcab4b6246ae58a04a5c745c2e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-13.png",
+          "sha256": "c34ba637f1155ff8d26be698319f5bcd0b51f59fdc17b33d5292add4abb124f1"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-14.png",
+          "sha256": "1b3e3c93ab268b12b9229688f4488e1718578cbfd0d9943103a1badc5f24aa78"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-15.png",
+          "sha256": "9d91a0920030ba24b5687cee50ccfab3936303f65aa7ba20aba0564518487e3f"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-1x.png",
+          "sha256": "f4059d5eab4e02a3c6c6c9ba071f3feed10865405bd76c2d14ead7f0dbf7e440"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-2.png",
+          "sha256": "d37203100d7837e275e506a905a505f3be88009c432c46fc311b71c09cefe7b3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-2x.png",
+          "sha256": "ce0435a61115041b6f4e88a9106d8b0c5a6e2dec687080fce82c0910532673ce"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-3.png",
+          "sha256": "ffbe163e1c66e97c9c139f3db6519fb089e8eff55bc3a68238fe1cd95a6fc810"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-3x.png",
+          "sha256": "881962e3c5765a1462454d5797054604dbc57cae4fac71eb64091c82e7ad6a42"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-4.png",
+          "sha256": "491958cb9e82b95062f58fbff8d2216c217ecdd74a560aee69029db6e343510e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-5.png",
+          "sha256": "74c29ccdd4c4bccb158ef2a21655e3768794e6c89b9fe0da82e8e8370fe64404"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-6.png",
+          "sha256": "e5a4870563950bad075968974b53465c1d4d93c1697daa714de5fc85b5678b83"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-7.png",
+          "sha256": "920f0f332f0973dedac878fb770169a558503205ad1505da773c5acd6293472a"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-8.png",
+          "sha256": "09573b2cf1f532ab7acf09ea9c717e7575e783f34c1548ffd70d24e8e7a62608"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/study-9.png",
+          "sha256": "0d7b5aa0eb35116085288e916a80fb19fca8b5a525932420abe2a974b8068e47"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/turntable.gif",
+          "sha256": "161783a273b453db8e9350482dcd344fae9e41631f0c73d6d48ff3ea311e61e0"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/viewer-desktop.png",
+          "sha256": "f6193222bc0e60804d90a93fe3dd3880fdc0819e59f3e61d79f625473d7342f5"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/viewer-mobile.png",
+          "sha256": "8a25d98bfe12f73ae83bbdbf39e41a0ca33859bba3bdaf95f3bc32b2ed112971"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/wheel-phases.png",
+          "sha256": "f778143e3166695c762b0dffd2ba402a5356b6cfcb70e6e5b62669c752518f40"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/wire-engine.png",
+          "sha256": "081fb4670e45f60c3f1f606241d8f5aefbbb20be4bd2fa96509a16bbdf7c7ddd"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/captures/wire-study.png",
+          "sha256": "c1b43b3328786e30803e738adce9b0dc2fcc749efec2b445237703270be9b1bd"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/clearance.json",
+          "sha256": "677dadfe25803a03acc504556b42c46927313e56947b149d4c0d021a48bed6f4"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/independent-source-replay.json",
+          "sha256": "747aebbe6329c6041e26a37a7e767e6f9411dc13a07be8c9b3b0ec91db49c55e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/atlas.png",
+          "sha256": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/capture.json",
+          "sha256": "29eeee9504d98dee31c4abbbb952a135d77470d5047ba4822cd727e7f0faf437"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-0.png",
+          "sha256": "f057d32083a6c9697bf3c9aed88880add783ad3bebd379eb549b6a3995a71e56"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-1.png",
+          "sha256": "7cb8fc7c563659f25f71fc9f1a184d0c9f3283d62a718bad8feab7e8da4f4d25"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-10.png",
+          "sha256": "71dd71cd5b9a6223cb4e9430035f64b78071709022487ac98d05046f388d923e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-11.png",
+          "sha256": "add1d2d5fdca6d4c426bb69a395baed5d0f252153b65d14cec8bc41bfe1198ad"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-12.png",
+          "sha256": "b06ec38085be6d3b293555200b24972bf0fff54b0635be4747adc3a302591a2d"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-13.png",
+          "sha256": "0f5b1563862c1d89cb27747e94d5c6f97733b12cece825a3c615c9bba2ff31a6"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-14.png",
+          "sha256": "3f6d8d1513a594736b06d2c62fdff60155512a8c4f79a6ec819f9dfd98f6aeee"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-15.png",
+          "sha256": "5ae54efbea4e45dae6abe27d9cd4a68295d62bdf18932ddf2b66d8dcccb03c83"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-2.png",
+          "sha256": "0613b2e8d7c59f5fd636ead0bcccbe83e50d6d6c0a607f9f40a489ccffafc7ba"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-3.png",
+          "sha256": "ae87c18d4b17bad207a2b08c2d6e3d2733f8325093d326cc5b7e9a66f4953d32"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-4.png",
+          "sha256": "9b5b6a48a6d45930d75f5905ef95d1445ebda440a9f5299e430438ce46c33033"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-5.png",
+          "sha256": "0ab1102e19839446db532cf81a2c9b4dcce5e84e8ed4eda06cf5fd3978601fba"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-6.png",
+          "sha256": "c1040182dc3409b244399fa67efa6cbb15d954d16dd194af1271dbaed469cce4"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-7.png",
+          "sha256": "fc0955d3e086f447e6e673fe9e77811a6121351dd65af76bdff87727f17551aa"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-8.png",
+          "sha256": "d44558bdd79793a075baaa5420ae9a72284153c0792432a2e9bd7f0456dc594b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/engine-9.png",
+          "sha256": "3fb724143fd579bbaeb4511defaa5b56d2ccb925839af50e33f4ba5f4db9296a"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-0.png",
+          "sha256": "0613b2e8d7c59f5fd636ead0bcccbe83e50d6d6c0a607f9f40a489ccffafc7ba"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-1.png",
+          "sha256": "9121f3d4fe27cba695e56e5d28e3f2015af9bd8fae2eff83aa21752aee0f8a08"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-2.png",
+          "sha256": "055f35efa8f5cee07ed27c0aa746492e466c37044666365bed8bd598d388fb10"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-3.png",
+          "sha256": "044dc65a86ddcb58b60fac463ae639c4af0a0cf365dc7eb476e42156dc14eae3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-4.png",
+          "sha256": "faf2818e3272698b6278537ac48565c920eed4da3cb3dbec0252491c31d90e98"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-5.png",
+          "sha256": "43cd341c971057007af2d6ec4b63fce8c07693791353e0d11391495b0ba05cc5"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-6.png",
+          "sha256": "8d29dae6d4a7b9c28a7504881efd4d4fe3e238463a85097f7010343fdcb25a0b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/game-roll-7.png",
+          "sha256": "78861759028f93ac01d2d918788e447e17ea911f1da027496e2bab3593040eeb"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/inspection-engine.png",
+          "sha256": "b43567d75c6018ec31330db532d2c612a163e9dc24c101aac1bd32f2f9a4e148"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/inspection-phases.png",
+          "sha256": "754e82ea320e0042079360f7888c048d047c7da0136b1b0e0dfc756073965bd3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/inspection-study.png",
+          "sha256": "8257c65f6a156c21dba031fa416dc05c6f3891465ce2ade195de9b6e9952e8bc"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/parent-engine.png",
+          "sha256": "128e26ba222437c3b696b76502d9becedc23f6af184e601d07cbdca29b4124cf"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/parent-study.png",
+          "sha256": "1d459f66faa5217fa82ca37fa04d7273d04f2e81da3da714221b956951b5ea6b"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-0.png",
+          "sha256": "d37203100d7837e275e506a905a505f3be88009c432c46fc311b71c09cefe7b3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-1.png",
+          "sha256": "a94d968fea2e51b5c36fc186d7e3327e2b222b1b3e5a358cb19f568b8abb448c"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-2.png",
+          "sha256": "eae503a6100dd570b9ffd97f6fae4ae662056dcd3bba925cf345bd5c46dc4144"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-3.png",
+          "sha256": "d21d6f909e630305be327b38df12764b3f9b9a2676d40dffec27d5cd0e3236e3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-4.png",
+          "sha256": "b16522e47d4f851b5e666da250cb4de7cec47649d3d137152095c9dde086ccbd"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-5.png",
+          "sha256": "714ccb5d3a7f558fd90e464666113dff7499c34ec1ed2a68bb8ce20333d5914e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-6.png",
+          "sha256": "b16b3f34edfa5ccdf7000d6a0d5f349d0cf1f963cfbd77d3e72d2c6674e0b18e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/roll-7.png",
+          "sha256": "3c1cfef1071b411b7e193227f34749a22941e37659bcda11b3dc0f43cde3af7c"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-0.png",
+          "sha256": "89372b06bbaad5d1c856cad521477704c9451677e4bdacf10e5422261967db9e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-1.png",
+          "sha256": "915b113c351fd732e49d47e71a81b9bd20df724f82cf1350dc8ee09edbacac4c"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-10.png",
+          "sha256": "91087fe8f7277f43302dbc19e6d459a76f1c0b9de83f2f4adf8126dbc6577f21"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-11.png",
+          "sha256": "6795126aabbdda512cef038544bfc29b57d699626a8756a5b16d80a873f486b9"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-12.png",
+          "sha256": "f7a0445639329009aa588ebb79c4be612e08eebcab4b6246ae58a04a5c745c2e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-13.png",
+          "sha256": "c34ba637f1155ff8d26be698319f5bcd0b51f59fdc17b33d5292add4abb124f1"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-14.png",
+          "sha256": "1b3e3c93ab268b12b9229688f4488e1718578cbfd0d9943103a1badc5f24aa78"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-15.png",
+          "sha256": "9d91a0920030ba24b5687cee50ccfab3936303f65aa7ba20aba0564518487e3f"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-2.png",
+          "sha256": "d37203100d7837e275e506a905a505f3be88009c432c46fc311b71c09cefe7b3"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-3.png",
+          "sha256": "ffbe163e1c66e97c9c139f3db6519fb089e8eff55bc3a68238fe1cd95a6fc810"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-4.png",
+          "sha256": "491958cb9e82b95062f58fbff8d2216c217ecdd74a560aee69029db6e343510e"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-5.png",
+          "sha256": "74c29ccdd4c4bccb158ef2a21655e3768794e6c89b9fe0da82e8e8370fe64404"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-6.png",
+          "sha256": "e5a4870563950bad075968974b53465c1d4d93c1697daa714de5fc85b5678b83"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-7.png",
+          "sha256": "920f0f332f0973dedac878fb770169a558503205ad1505da773c5acd6293472a"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-8.png",
+          "sha256": "09573b2cf1f532ab7acf09ea9c717e7575e783f34c1548ffd70d24e8e7a62608"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/study-9.png",
+          "sha256": "0d7b5aa0eb35116085288e916a80fb19fca8b5a525932420abe2a974b8068e47"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/wire-engine.png",
+          "sha256": "081fb4670e45f60c3f1f606241d8f5aefbbb20be4bd2fa96509a16bbdf7c7ddd"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/engine/wire-study.png",
+          "sha256": "c1b43b3328786e30803e738adce9b0dc2fcc749efec2b445237703270be9b1bd"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/model.glb",
+          "sha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/recipe.json",
+          "sha256": "6b353262671373e096824c9418ab0d14e0855836824ad2a72e576c5d5d2555fb"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/inputs/report.json",
+          "sha256": "8b9e1d0ef60f307e62f65ff0936f1e8cbed64cacf523f9aab1bffddc1dfc8948"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/viewer.js",
+          "sha256": "8f59eba0b0879ccd14c11605fe9976ae60da510790f0d6b53b04ddd57f25e176"
+        },
+        {
+          "url": "demos/original-vehicles/classic-roadster-v1/visual-inspection.json",
+          "sha256": "78f86017ad3c11ece5002b2659016e425d5e61b47d21c56565ad4f914bf2fdcb"
+        }
+      ]
+    }
+  ]
+}

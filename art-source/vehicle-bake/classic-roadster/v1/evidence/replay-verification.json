@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+  "atlasSha256": "8ee7e11fd9d4c4fffa4b970f877cfb17e79335252766af65bf115ae892d44f2b",
+  "recipeSha256": "6b353262671373e096824c9418ab0d14e0855836824ad2a72e576c5d5d2555fb",
+  "invokedBuilder": "art-source/vehicle-bake/classic-roadster/v1/build.py",
+  "inputHashes": {
+    "art-source/vehicle-bake/classic-roadster/v1/build.py": "72eb867bf393483f1a81fea8550e9ec56a0b459c04e1ffa93d43e2062cacfa64",
+    "art-source/vehicle-bake/classic-roadster/v1/family.json": "1f2038c1bb8165f36a7a9420f5aed15b85d2fa62af12a02b8d933249d6f72933",
+    "art-source/vehicle-bake/classic-roadster/v1/coverage-region.json": "448782c264ec35518db4c47c282ebfc79f5b22081cc9141332c83c3f8eb5dbe9",
+    "art-source/vehicle-bake/classic-roadster/v1/cockpit-region.json": "afff93623e410917eab49cd66d9d0a674581e540b5211dac5a04de6f2b018654",
+    "art-source/vehicle-bake/classic-roadster/v1/review.json": "e3a949c05211a70f7a37288020aa354fba5627c3cfd9c4f406429bcae3a9369d"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/vehicle-bake/family-review.html": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be",
+    "scripts/vehicle-bake/family-review.css": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9"
+  },
+  "scratchInputDependencies": [],
+  "blender": "5.2.2 LTS d13f752e3b9c; factory startup; background; four threads",
+  "meaning": "Retained source builder/config replay plus declared repository helpers. Scratch paths are outputs only; no scratch read dependencies. Model, atlas and recipe exact; packed scene byte determinism not claimed."
+}

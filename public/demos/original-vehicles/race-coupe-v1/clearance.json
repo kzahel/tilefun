@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "race-coupe--v1",
+    "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "triangles": 2431,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 5.9130441247250465,
+        "minimumGap": 0.2740180219838839,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 5.913044950779918,
+        "minimumGap": 0.27401754825549496,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 5.913045629803742,
+        "minimumGap": 0.2600586841417485,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 5.913044977011654,
+        "minimumGap": 0.2600593369338364,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

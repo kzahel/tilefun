@@ -1,0 +1,103 @@
+{
+  "modelSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "spriteSha256": "32681b6f11e4f1f3bfb65ca8f8ed3667a6e45efcdfc84190839d0759d3928de6",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-pickup-v1.json": "c180b3771d6ae7d74aa378b6b6196aef299ad45e427a753634efd8f97d1c59a3",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/pickup-v1/review-manifest.json": "8aafd4a1448b68793e02d10e3ce9c3e4e7d1901c7b58cf00d4946f1604ce43da",
+    "public/demos/original-vehicles/pickup-v1/inputs/model.glb": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "public/demos/original-vehicles/pickup-v1/inputs/atlas.png": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102",
+    "public/demos/original-vehicles/pickup-v1/captures/capture.json": "3583135ee3548d3194d1869a92dd4dbd5abca56de8135a9a47d15d7716336fd4",
+    "art-source/vehicle-bake/pickup/v1/evidence/replay-verification.json": "62a772044892bf270e850c2622dfc7b9d6af8cd70477a74d9d5d609eb3b0e143",
+    "art-source/vehicle-bake/pickup/v1/build.py": "f138ad6930c9db48c5f605cbc84c5cc963aae2a4eb76a7a38e7c9183e2b5268e",
+    "art-source/vehicle-bake/pickup/v1/family.json": "4e2c4ddb97d039172f856dfae4c5f483cef470299d7ecc74470b2e592d66975f",
+    "art-source/vehicle-bake/pickup/v1/coverage-region.json": "81ba13760858bd2017c6456c58e62fa23327d47f8fccf7913d8cc4e46568677e",
+    "art-source/vehicle-bake/pickup/v1/review.json": "167b39140dd5c5208701d268a92562b7dce88e3d646390956343e4760b8616b7",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "public/demos/original-vehicles/pickup-v1/captures/engine-4.png": "78104fbdbc48ce4806b298dbd70f9febacd3baf1e7e4bde1612b80a4e3fdeb85",
+    "public/demos/original-vehicles/pickup-v1/captures/engine-12.png": "e811cd6be6084f0aa9eab7fde1cb0f0839717128c52ecc8c88b4fc47d06ade39",
+    "public/demos/original-vehicles/pickup-v1/captures/engine-8.png": "51456395a7efb2da66e52d4907f5c542fdebfc1de3526e1bd62f8c3807371b8f",
+    "public/demos/original-vehicles/pickup-v1/captures/engine-0.png": "7c721d01f2473d4b2d962d2ff608c7a637eb3912f3b0dc425698d48d5feb4212"
+  },
+  "physicalBounds": [
+    95,
+    39,
+    36
+  ],
+  "measurement": {
+    "modelSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -46.69565200805664,
+        -19.478260040283203,
+        9.5367431640625e-07
+      ],
+      "max": [
+        47.21739196777344,
+        19.478260040283203,
+        35.13043212890625
+      ],
+      "size": [
+        93.91304016113281,
+        38.956520080566406,
+        35.13043212890625
+      ]
+    },
+    "triangles": 2984,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/pickup/v1/evidence/replay-verification.json",
+    "sha256": "62a772044892bf270e850c2622dfc7b9d6af8cd70477a74d9d5d609eb3b0e143",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-pickup-v1.json --blender BLENDER"
+}

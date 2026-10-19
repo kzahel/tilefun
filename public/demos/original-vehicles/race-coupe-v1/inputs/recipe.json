@@ -1,0 +1,155 @@
+{
+  "family": "accepted-coupe-striped-racing-variation",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "baseBlend": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+  "baseAtlas": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png",
+  "baseRecipe": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json",
+  "baseHashes": {
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json": "fad5844ce3e499650168122847971b39dec9fc1bcba9200e43f4a80a14d43cd1"
+  },
+  "recolor": {
+    "127,33,76": [
+      35,
+      48,
+      110
+    ],
+    "161,18,80": [
+      43,
+      64,
+      145
+    ],
+    "197,52,88": [
+      51,
+      81,
+      180
+    ],
+    "211,68,92": [
+      61,
+      101,
+      209
+    ],
+    "227,90,90": [
+      81,
+      128,
+      231
+    ],
+    "225,132,132": [
+      122,
+      157,
+      241
+    ]
+  },
+  "cream": [
+    250,
+    241,
+    215
+  ],
+  "blue": [
+    61,
+    101,
+    209
+  ],
+  "blueLight": [
+    81,
+    128,
+    231
+  ],
+  "blueDeep": [
+    35,
+    48,
+    110
+  ],
+  "stripeAbsY": [
+    0.07,
+    0.31
+  ],
+  "stripeSurfaceOwners": [
+    0,
+    3,
+    60
+  ],
+  "stripeMinimumZ": 0.5,
+  "stripeMinimumNormalZ": 0.25,
+  "roundel": {
+    "owner": 0,
+    "centerXZ": [
+      -0.24,
+      0.47
+    ],
+    "radius": 0.235,
+    "minimumAbsY": 0.65,
+    "minimumAbsNormalY": 0.45
+  },
+  "spoiler": {
+    "bladeCenter": [
+      2.06,
+      0,
+      0.89
+    ],
+    "bladeSize": [
+      0.24,
+      1.62,
+      0.07
+    ],
+    "supportX": 2.06,
+    "supportY": 0.54,
+    "supportBottom": 0.55,
+    "supportTop": 0.855
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "paintMethod": "Explicit accepted-coupe paint variation: exact base geometry/UV/rig plus static modest spoiler. Red-ramp replacement guarded by semantic masks; cream stripes and roundels rasterized barycentrically in UV space from actual triangle 3D coordinates. No screen projection.",
+  "baseGeometrySignatures": {
+    "Body_static": "7079b3402398d5edafa7914a616b619aa1ec94a96ee2cdc1b08ace0f369223b0",
+    "Wheel_FL_tire_hub": "794635460204dea2df3c8ba7cd1520fa815dd1e3fca167e01ecb0b6902daab19",
+    "Wheel_FR_tire_hub": "7f0027971d7a9356c5592d6e11960164df46287f78f2bc437aea7b3cf3eeed20",
+    "Wheel_RL_tire_hub": "b7ac4a4a55d71505d67e94948db98e92cbe0a1253f3aebe12ad7f88ce292e430",
+    "Wheel_RR_tire_hub": "50033bc206beb67378ee7dde752dca2030ecd834eb846a3621d9d5cb26f17dbb"
+  },
+  "baseWheelSignatures": {
+    "Wheel_FL_tire_hub": "794635460204dea2df3c8ba7cd1520fa815dd1e3fca167e01ecb0b6902daab19",
+    "Wheel_FR_tire_hub": "7f0027971d7a9356c5592d6e11960164df46287f78f2bc437aea7b3cf3eeed20",
+    "Wheel_RL_tire_hub": "b7ac4a4a55d71505d67e94948db98e92cbe0a1253f3aebe12ad7f88ce292e430",
+    "Wheel_RR_tire_hub": "50033bc206beb67378ee7dde752dca2030ecd834eb846a3621d9d5cb26f17dbb"
+  },
+  "baseBodyVertices": 1013,
+  "baseBodyPolygons": 1713,
+  "newSpoilerOwners": [
+    200,
+    201,
+    202
+  ],
+  "spoilerChartPixels": [
+    315,
+    4,
+    16,
+    8
+  ],
+  "paintTexelCounts": {
+    "redRampChanged": 177260,
+    "stripes": 6615,
+    "roundels": 770,
+    "protectedUnchanged": 69780
+  },
+  "baseUVUnchanged": true,
+  "baseWheelGeometryUVPoseUnchanged": true,
+  "masterMeaning": "Editable accepted runtime-topology component master with retained source_owner semantic face attributes and separate new static spoiler parts; no high-to-low transfer claim."
+}

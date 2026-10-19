@@ -1,0 +1,15 @@
+{
+  "id": "classic-roadster-v1",
+  "clearanceId": "classic-roadster--v1",
+  "name": "Classic open-top roadster",
+  "title": "Classic open-top roadster \u00b7 autonomous original v1",
+  "source": "public/demos/vehicle-bake/classic-roadster/v1",
+  "glb": "public/demos/vehicle-bake/classic-roadster/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/classic-roadster/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/classic-roadster/v1/report.json",
+  "output": "public/demos/original-vehicles/classic-roadster-v1",
+  "qa": "data/vehicle-bake/classic-roadster-qa",
+  "offline": "data/vehicle-bake/classic-roadster-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png",
+  "nativeSize": 224
+}

@@ -1,0 +1,585 @@
+{
+  "status": "complete",
+  "artReviewStatus": "agent-QA; run153 appearance wait waived; no formal human approval claimed",
+  "family": "delivery-van",
+  "route": "delivery-van",
+  "revision": "v1",
+  "method": "Original tall panel-van loft with short sloping nose and continuous crowned roof. Direct semantic paint on actual cab/body skin: bounded front-third blue glazing, violet lower stripe, envelope motif and closed rear double doors. Economical runtime-topology component master; no high-to-low transfer.",
+  "geometry": {
+    "triangles": 2426,
+    "vertices": 4758,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 173600,
+    "sha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 7.130434782608696,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 7.130434782608696,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 7.130434782608696,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 7.130434782608696,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.4600000381469727,
+        -0.8450000286102295,
+        0.4099999964237213
+      ],
+      "centerExport": [
+        -25.391305011251703,
+        7.130434720412546,
+        14.695652671482254
+      ],
+      "radiusBlender": 0.41,
+      "wheel_radius": 7.130434782608696
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.4600000381469727,
+        0.8450000286102295,
+        0.4099999964237213
+      ],
+      "centerExport": [
+        -25.391305011251703,
+        7.130434720412546,
+        -14.695652671482254
+      ],
+      "radiusBlender": 0.41,
+      "wheel_radius": 7.130434782608696
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.5,
+        -0.8450000286102295,
+        0.4099999964237213
+      ],
+      "centerExport": [
+        26.086956521739133,
+        7.130434720412546,
+        14.695652671482254
+      ],
+      "radiusBlender": 0.41,
+      "wheel_radius": 7.130434782608696
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.5,
+        0.8450000286102295,
+        0.4099999964237213
+      ],
+      "centerExport": [
+        26.086956521739133,
+        7.130434720412546,
+        -14.695652671482254
+      ],
+      "radiusBlender": 0.41,
+      "wheel_radius": 7.130434782608696
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/delivery-van/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/delivery-van/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/delivery-van/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "driverPresentation": "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+  "equipment": "Static closed panel van, fixed mirrors, closed rear doors; no equipment animation.",
+  "runtime": "Parent owns frozen review and integration; this is the stable source handoff",
+  "triangles": 2426,
+  "vertexCount": 4758,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "glbBytes": 173600,
+  "atlasBytes": 3592,
+  "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+  "atlasSha256": "d601d691fd0853487a238b259381d0a5b4d5dac2e7c8968a075b9a06ad5452d2",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "delivery-van--v1",
+    "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "triangles": 2426,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 7.130435034178902,
+        "minimumGap": 1.350266937876043,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/delivery-van/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "minBlenderWorld": [
+      -43.52173614501953,
+      -18.30434799194336,
+      4.76837158203125e-07
+    ],
+    "maxBlenderWorld": [
+      43.52173614501953,
+      18.30434799194336,
+      38.72174072265625
+    ],
+    "dimensionsBlenderWorld": [
+      87.04347229003906,
+      36.60869598388672,
+      38.72174024581909
+    ],
+    "dimensionsSourceUnits": [
+      5.004999656677246,
+      2.105000019073486,
+      2.2265000641345973
+    ]
+  },
+  "semanticSurfaceEvidence": {
+    "status": "passed",
+    "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "rayCount": 11,
+    "samples": [
+      {
+        "id": "left-cab-glass",
+        "hitSource": [
+          -0.9499999284744263,
+          -0.9927502274513245,
+          1.600000023841858
+        ],
+        "triangle": 760,
+        "interpolatedUV": [
+          0.317307710647583,
+          0.7535714507102966
+        ],
+        "atlasPixel": [
+          162,
+          126
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-cab-glass",
+        "hitSource": [
+          -0.9499999284744263,
+          0.9927502274513245,
+          1.600000023841858
+        ],
+        "triangle": 769,
+        "interpolatedUV": [
+          0.3173076808452606,
+          0.7535713911056519
+        ],
+        "atlasPixel": [
+          162,
+          126
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-blank-cargo",
+        "hitSource": [
+          0.10000000149011612,
+          -0.9914904236793518,
+          1.7000001668930054
+        ],
+        "triangle": 784,
+        "interpolatedUV": [
+          0.5192307829856873,
+          0.735714316368103
+        ],
+        "atlasPixel": [
+          265,
+          135
+        ],
+        "rgb": [
+          240,
+          236,
+          223
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-blank-cargo",
+        "hitSource": [
+          0.10000000149011612,
+          0.9914904236793518,
+          1.7000001668930054
+        ],
+        "triangle": 793,
+        "interpolatedUV": [
+          0.5192307829856873,
+          0.7357141971588135
+        ],
+        "atlasPixel": [
+          265,
+          135
+        ],
+        "rgb": [
+          240,
+          236,
+          223
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "left-violet-stripe",
+        "hitSource": [
+          0.10000000149011612,
+          -1.0,
+          0.7800000309944153
+        ],
+        "triangle": 783,
+        "interpolatedUV": [
+          0.5192307829856873,
+          0.9000000357627869
+        ],
+        "atlasPixel": [
+          265,
+          51
+        ],
+        "rgb": [
+          123,
+          94,
+          169
+        ],
+        "roles": [
+          "violet"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "right-violet-stripe",
+        "hitSource": [
+          0.10000000149011612,
+          1.0,
+          0.7800000309944153
+        ],
+        "triangle": 794,
+        "interpolatedUV": [
+          0.5192307829856873,
+          0.8999999761581421
+        ],
+        "atlasPixel": [
+          265,
+          51
+        ],
+        "rgb": [
+          123,
+          94,
+          169
+        ],
+        "roles": [
+          "violet"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-windshield",
+        "hitSource": [
+          -1.8671218156814575,
+          0.0,
+          1.6500000953674316
+        ],
+        "triangle": 704,
+        "interpolatedUV": [
+          0.5,
+          0.3623511791229248
+        ],
+        "atlasPixel": [
+          256,
+          326
+        ],
+        "rgb": [
+          164,
+          187,
+          213
+        ],
+        "roles": [
+          "glassLight"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "front-windshield-frame",
+        "hitSource": [
+          -1.8481534719467163,
+          0.8300000429153442,
+          1.6500000953674316
+        ],
+        "triangle": 705,
+        "interpolatedUV": [
+          0.8608696460723877,
+          0.3623512387275696
+        ],
+        "atlasPixel": [
+          440,
+          326
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "closed-rear-door",
+        "hitSource": [
+          2.4100000858306885,
+          0.3500000238418579,
+          1.5000001192092896
+        ],
+        "triangle": 893,
+        "interpolatedUV": [
+          0.8260869979858398,
+          0.5297619104385376
+        ],
+        "atlasPixel": [
+          422,
+          240
+        ],
+        "rgb": [
+          240,
+          236,
+          223
+        ],
+        "roles": [
+          "paint"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "rear-door-center-seam",
+        "hitSource": [
+          2.4100000858306885,
+          0.0,
+          1.5000001192092896
+        ],
+        "triangle": 893,
+        "interpolatedUV": [
+          0.75,
+          0.5297619104385376
+        ],
+        "atlasPixel": [
+          384,
+          240
+        ],
+        "rgb": [
+          58,
+          58,
+          80
+        ],
+        "roles": [
+          "ink"
+        ],
+        "owner": "Body_static"
+      },
+      {
+        "id": "continuous-cream-roof",
+        "hitSource": [
+          0.5000000596046448,
+          0.0,
+          2.2265000343322754
+        ],
+        "triangle": 110,
+        "interpolatedUV": [
+          0.5961538553237915,
+          0.234375
+        ],
+        "atlasPixel": [
+          305,
+          392
+        ],
+        "rgb": [
+          255,
+          250,
+          235
+        ],
+        "roles": [
+          "paintLight"
+        ],
+        "owner": "Body_static"
+      }
+    ],
+    "regionConfig": "scripts/vehicle-bake/delivery-van/surface-regions.json",
+    "meaning": "Actual GLB triangle hits and interpolated UV samples establish cab-only glazing, blank cargo panels, violet stripe, opaque rear double doors and continuous cream roof. Closed passenger/cargo body; no open-well depth claim.",
+    "inputBytesUnchanged": true
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/delivery-van/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/delivery-van/capture.mjs",
+    "python scripts/vehicle-bake/delivery-van/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/delivery-van/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/delivery-van/v1/evidence/clearance-input.json data/vehicle-bake/delivery-van/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/delivery-van/v1/model.glb --config art-source/vehicle-bake/delivery-van/v1/coverage-region.json --output data/vehicle-bake/delivery-van/recheck-coverage.json",
+    "python scripts/vehicle-bake/delivery-van/pack-author.py",
+    "node scripts/vehicle-bake/family-capture.mjs data/vehicle-bake/delivery-van/author-config.json --qa-only"
+  ],
+  "visualInspection": [
+    "Inspected all16 study plus all16 game headings at native224/radius112, fixed world density and unchanged study50-degree/game projection; no clipping or per-heading fitting.",
+    "Tall rounded rectangular cargo body and continuous slightly crowned roof, short sloping nose and front-third cab windows read as original small delivery panel van. Independent van longitudinal loft and UV construction; not stretched SUV/coupe/pickup.",
+    "Broad cream/white cargo panels remain clean and mostly blank. Violet lower stripe and single geometric envelope motif are readable; no logos, tiny text or markings that require interpretation.",
+    "Blue windshield and bounded side cab panes have continuous dark perimeter on the real body skin; no glass overlays. Cargo/rear panels are unglazed. ActualGLB triangle UV rays independently verify cab glass/frame, blank cargo, stripe, rear doors/seam and roof.",
+    "Rear obliques show two closed rear doors with painted center seam/handles and simple red lamp strips. Front obliques preserve the short hood/nose and broad front glazing.",
+    "Far-side wheel crowns stay beneath broad integrated fenders/coachwork in both camera sets at all16 headings. Near wheel centers, true open wheel-local pockets and lower stripe have no blocking intersections or detached raised-cap silhouette.",
+    "Inspected8 signed phases in each camera and both wireframes. Four standard roadwheel rigs roll independently; body, cab glass, roof, doors and mirrors stay fixed; quarter/reverse/reset rig proof passes.",
+    "Additionally inspected individual224px native images for both full sides and opposing front/rear obliques; door/window ownership, rear seam, violet stripe and motif stay coherent.",
+    "Expected minor native aliasing in the diagonal envelope flap, small mirror/door-handle/lamp highlights; no blocking visual finding.",
+    "Closed opaque cargo/passenger body; no open-interior depth or high-to-low transfer claim. No visible animated driver; existing ordinary driving semantics, no new rider/equipment gameplay."
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "actualGLBSemanticTriangleUVRays": 11,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "authorDesktopMobileOffline": true,
+    "scopedFormatting": "Python Black and Biome checked before source pins",
+    "globalTests": "Not run by author; parent owns global validation per run153 worker contract",
+    "independentFamilyQA": "Parent independently captures/freezes stable source after this handoff"
+  },
+  "limitations": [
+    "Exact human art approval is not claimed; run153 authorizes proceeding without per-vehicle appearance waits.",
+    "Economical semantic component master uses runtime topology; no high-poly transfer claim.",
+    "Finite crown region is support evidence, complemented by all 32 actual native views; not a universal coverage metric.",
+    "Full neutral wheel roll only; nonzero steering and suspension are unqualified.",
+    "No visible animated driver; existing ordinary driving semantics hide the driver inside vehicles. No new rider gameplay.",
+    "Closed cargo body and rear doors; no open-interior depth or animated equipment claim.",
+    "Envelope diagonal, rear lamp/handle and chrome highlights retain expected angle-dependent native pixel aliasing.",
+    "Nearest mipmap nearest in exporter; shared CarMeshAsset enforces nearest min/mag without mipmaps."
+  ],
+  "sourceHashes": {
+    "art-source/vehicle-bake/delivery-van/v1/atlas.png": "d601d691fd0853487a238b259381d0a5b4d5dac2e7c8968a075b9a06ad5452d2",
+    "art-source/vehicle-bake/delivery-van/v1/audit-source.py": "ee74a4883e76a7aa09d4563180fabf26840be0a577c5ccf0785c3328535b5683",
+    "art-source/vehicle-bake/delivery-van/v1/build.py": "e0923c6dc4d730ab34b9b726bfa6162b2b732966c8d13ef889225036cab0678f",
+    "art-source/vehicle-bake/delivery-van/v1/capture.mjs": "fcbd57882467f617bcba589bb4a152571d86b685fa3a8fabf346e29ba9297bb4",
+    "art-source/vehicle-bake/delivery-van/v1/car.blend": "48aaf4b95b177c9770ed565ecbf8e8d21ccab6ea5cd30df771bdc9349ba545ac",
+    "art-source/vehicle-bake/delivery-van/v1/coverage-region.json": "01ca64db785e4d52103ced85522b2d380afe43b1e400cd8f31c751c28005122a",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/author-browser-qa.json": "8d41bcffaf25acc1d82678780784d8648bd4910dbaee0dcfdb02c4547501eca4",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/author-visual-inspection.json": "17af2715f7f4c7e7dd63becd57ef6c12219eda6e3c382bc0850f2d9ec3fdbfa5",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/clearance-input.json": "11eb93fa04ef55ee0f4a022b5c04313a0c8530a380fa2ff49b16269fbe830b61",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/engine-capture.json": "adb5839b725c2a6d1cd4fbf820722d81fee5375567c4c21540a79ba2eb2d0044",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/packed-source-audit.json": "f00ffdc87c8144af8cbb6a50505814232c501e493153c496529bc1b430dd0f95",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/replay-verification.json": "b8ce10c32abff035b7c87bf52d2238fe88ff01ccf6542b1845213ad856102820",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/shared-clearance.json": "2c35f09ae2a8597469d63449e9e17dc02f4a32c3482d423ad0dad63c3a563489",
+    "art-source/vehicle-bake/delivery-van/v1/evidence/upper-wheel-coverage.json": "a45aa7363d8385756399f51659af378796737feb9b608826ec3af8a06a476f20",
+    "art-source/vehicle-bake/delivery-van/v1/family.json": "ba3b12a38053decbe06d4727e8769a32bfbc086aaa95ca3ed62ef7ea0704c62d",
+    "art-source/vehicle-bake/delivery-van/v1/finalize.py": "402f3b3f75d2335793e11d62828288a3548fa538995b53a895c7725025579723",
+    "art-source/vehicle-bake/delivery-van/v1/master.blend": "145e950473456a02f2af0ba1cd11f1d0b9d16855c3b729de91068f1a85757801",
+    "art-source/vehicle-bake/delivery-van/v1/model.glb": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+    "art-source/vehicle-bake/delivery-van/v1/pack-author.py": "7950d157f8f314d07a74784b5b637621d18d4bfb7f13040fcbddef8c4839c1fe",
+    "art-source/vehicle-bake/delivery-van/v1/paint-ownership.json": "ade7f2fe3be7b588845f0f3067ef2d95a5f70f337fb879c69f4e19660338c2fe",
+    "art-source/vehicle-bake/delivery-van/v1/palette-draft.png": "0ed01809c7b46146e88b96a340329abb9faa904a5f7bd08ccc534ae57df62499",
+    "art-source/vehicle-bake/delivery-van/v1/recipe.json": "ada2cac19a65d8bcec9b5d67aa12071b8277eca378321374589a80098bd1f607",
+    "art-source/vehicle-bake/delivery-van/v1/review.json": "667b9689c38a706da5f936d43fe87c255f7348fa437628e285229369eb64ebd9",
+    "art-source/vehicle-bake/delivery-van/v1/sheets.py": "27ef97283082d97a4acf11b7730482150be271dd110e886d467787e675d42ef7",
+    "art-source/vehicle-bake/delivery-van/v1/surface-regions.json": "5288112b2b19994cf834ef5b2ccad18f61fed519e48c195067ca6b4a7b8e17c3"
+  }
+}

@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "delivery-van-v1",
+      "name": "Small delivery van",
+      "title": "Small delivery van \u00b7 autonomous original v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original tall panel-van loft with short sloping nose and continuous crowned roof. Direct semantic paint on actual cab/body skin: bounded front-third blue glazing, violet lower stripe, envelope motif and closed rear double doors. Economical runtime-topology component master; no high-to-low transfer.",
+      "audit": {
+        "triangles": 2426,
+        "vertices": 4758,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 173600,
+        "sha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 7.130434782608696,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 7.130434782608696,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 7.130434782608696,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 7.130434782608696,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/atlas.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/atlas.png",
+          "sha256": "d601d691fd0853487a238b259381d0a5b4d5dac2e7c8968a075b9a06ad5452d2"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/capture.json",
+          "sha256": "adb5839b725c2a6d1cd4fbf820722d81fee5375567c4c21540a79ba2eb2d0044"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-0.png",
+          "sha256": "faadb292e470c099cd7f5a1ea9db1d851a4631f269ad3c96b99e92495782791b"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-1.png",
+          "sha256": "e2fa6b3ace508f57a33c7d2b060fcade082c8edeae72b604a63e1126675d6679"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-10.png",
+          "sha256": "472ae754a681680119199cd4a466042ffa09f317b9f8bca94ddec07b75f48688"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-11.png",
+          "sha256": "bb9c1ae21753fc9fea2af5f35032f7b14d26670cacca8a938e2bde90b6ee73c2"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-12.png",
+          "sha256": "d0a4af7aa7700ee83f3e0bd22be898b901edfcb564a50ecc17a1136f22a75dc8"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-13.png",
+          "sha256": "a077acd6aa10530bf5723c40740ce62fe39b59d18ecd78de2e4808df2e3634ed"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-14.png",
+          "sha256": "a7be0914687b921da76cfd89a964b547b760cfea60a1cc84440f79690cba3b68"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-15.png",
+          "sha256": "9bbb47fb9f0a9466725cbb410d8126277c962d8bd5a0e313f0339745578147d8"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-2.png",
+          "sha256": "d834824794898226ba71500242d558793e3121560b2adba326ad002a0b9960b8"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-3.png",
+          "sha256": "bd41d2fd80ebe0c6d608b58600cd892d305e3dc1915f0fdbf79c1a775f0e718b"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-4.png",
+          "sha256": "ff6d33584e9065efd0b9cd3802014b33ee803260d574236d8fa43c8de9f41606"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-5.png",
+          "sha256": "a7e9744db9c52d3ab44316aabf3a2ed4434f5ed2cce8fecb2bed16b0bd04b534"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-6.png",
+          "sha256": "94bd7e896fcbdc17a2d362618c70b0ac962458cc52a8e3e9977139fa65dd51b6"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-7.png",
+          "sha256": "63addc93a8cb7a9e36363b0184c9c5fa5712b6dfdaeb46dfc7f84cc1f85b11d0"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-8.png",
+          "sha256": "07cda887486415de5f99f9060da6cc62d21a7a57227fdf1cab5b0ee6c419784e"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/engine-9.png",
+          "sha256": "49566aef229d88f086ec3cc2ef86669e9c46184e5539325db497ce4c25a7e01d"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-0.png",
+          "sha256": "d834824794898226ba71500242d558793e3121560b2adba326ad002a0b9960b8"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-1.png",
+          "sha256": "aed413f630cd3e3de9261fb5aeeb302efa81a21d7d5e6bfa2bffc1143ec3328f"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-2.png",
+          "sha256": "a56c65bc43ab3b8da72f65c61c82e3f1d9570189cc767fd03a8a1c3f415a6919"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-3.png",
+          "sha256": "5eb25c5b0c5867c5aa23d8461a097029c69fdee11560b68f2764c676c902c64c"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-4.png",
+          "sha256": "f556deb94459aa0df1313c2edbd53fd7dab0a3d0117f2781a77de09027b9db06"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-5.png",
+          "sha256": "725a8047c9be98aae5a20546774ff2f32649729f0134febcc1eb6d4f7957b93b"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-6.png",
+          "sha256": "ce9d0863a2db117704cff2ee3d1074c22f0a17d1af42a26070b77facda665dd7"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/game-roll-7.png",
+          "sha256": "06f29c0aa50a3951fd58cd306c0e33ac77dac23fcf91eac96fa949bd7116afad"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/inspection-engine.png",
+          "sha256": "0f28edf678aa15818fb6f7bf70317d17272084800dc7722a66570d7eacdeda01"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/inspection-phases.png",
+          "sha256": "93b23011ec9931a2548145b37d586517ec3a4d7a5a24a62aefa60f9e12a73283"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/inspection-study.png",
+          "sha256": "c1a6f349c08b55307964d5540debe92cdad205b44084555459142d6a55241b06"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-0.png",
+          "sha256": "d320d09700edc73eb11fc2cdcef94a521b2bffa1578b37b9f544fc8d87a752b6"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-1.png",
+          "sha256": "69e65a694d4538272df6641a5c2873f35942f16457cfb793fddf303fcc339c78"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-2.png",
+          "sha256": "108ab17cd63c2c171a445c4e1afb27bf58c3eb36ea9d18d921f64534d71c734b"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-3.png",
+          "sha256": "0d303fe4156866ea7791978a1aa26ec892c1c42cf856b887636bf7b945e0a255"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-4.png",
+          "sha256": "08c4b16f78099be5fb3cb1bd1e23ca5b08e79845ee803c0fe10c3e1f8ef539bd"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-5.png",
+          "sha256": "74b414d6695ed79c35f654f4a63586cbe914e4abf9b8a2f3968eba5d0a7c6c9d"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-6.png",
+          "sha256": "5d51cd952d2704f872d32d9435b54d216be0b9e9920fd0e6f343eeedfb5827bd"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/roll-7.png",
+          "sha256": "4235525118840a82917e03cb081451d0f44412c48cad1e836e9ee3de19773e96"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-0.png",
+          "sha256": "9be7b0f04893b57627fc4c7a2f7b97db89e2437b74a2f959fd4872887cb4fab8"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-1.png",
+          "sha256": "20e0840c1fc3f5a03ece080ec419fbd5982d1b2b7fb232ee6137d0e155ea6252"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-10.png",
+          "sha256": "76aa6a77e6764b37b2dc7620aad3c5e7502282fba944ad32839892e87f28d71d"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-11.png",
+          "sha256": "bfd3d7bbbc82b916ad6300586b5116f7dac1adcaef492f64d2af355ecdc405d5"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-12.png",
+          "sha256": "4c1fd0c4eef85e973abaa0ad41ef393bbb359b61aad8869fb554a5e27e633edd"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-13.png",
+          "sha256": "29a8a02c0633f8398d6c068a7668bc6d2e41adb67726691bda59de65272140e0"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-14.png",
+          "sha256": "d14c6fca43a78e2a55309d20bc8ca10671c5e8607227dc6cad600dd4392109ea"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-15.png",
+          "sha256": "54f3be8d83e69a0412527fd3b068f62eef8371d6cc973eb8fa48a57e3723d446"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-2.png",
+          "sha256": "d320d09700edc73eb11fc2cdcef94a521b2bffa1578b37b9f544fc8d87a752b6"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-3.png",
+          "sha256": "1b02658bf847a93811146f9a0352c916cd214a28260e369b32e8c6506501450b"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-4.png",
+          "sha256": "d0ff0b1c4030974f3eab366b0779c0fbf4563ffb7128e436cc3be426b3ae6b4f"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-5.png",
+          "sha256": "29a6a1b6cbec9aa11ca4795e3c90641421ff39b3c1823c06a7d9bd917e96ebdf"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-6.png",
+          "sha256": "a5c3937d20d48c7938ff168bd723fad500f3f40dfa5e42350c3471c945cfc2aa"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-7.png",
+          "sha256": "44a9e4764082bf4f18b29550c629f9d0ecee2d440f276243cf278791212481e7"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-8.png",
+          "sha256": "38c5b1f442c083d7c7100b7a44775eeea697d1b01958c359ade6bcbcee1e45ee"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/study-9.png",
+          "sha256": "cc09950efa47b049b2ac0900fa93a2d61d6b9067ddae7d6b4f6195e26e2df5b9"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/wire-engine.png",
+          "sha256": "7dcb608e3bddd2fd364378a44797e020f1fc6f458f14acff4c36a9959b64a193"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/engine/wire-study.png",
+          "sha256": "78f3dcc9ec7c180ce8db1cfed50fa83dbf2877d0eb71d779caafaf762ca5b548"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/model.glb",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/model.glb",
+          "sha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/recipe.json",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/recipe.json",
+          "sha256": "ada2cac19a65d8bcec9b5d67aa12071b8277eca378321374589a80098bd1f607"
+        },
+        {
+          "source": "demos/vehicle-bake/delivery-van/v1/report.json",
+          "retained": "demos/original-vehicles/delivery-van-v1/inputs/report.json",
+          "sha256": "7456f82cf0fe3b2771137c0691875b0ad97c7b3945cd1b8c99a0b21fe653238a"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png"
+    }
+  ]
+}

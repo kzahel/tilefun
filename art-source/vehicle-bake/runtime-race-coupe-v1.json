@@ -1,0 +1,111 @@
+{
+  "modelSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+  "spriteSha256": "516359d32f53d9bed329645587831909b9325f7f4004816d9254b63945a530ad",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-race-coupe-v1.json": "33e47421b27308abd816d2c55c84716cebe457d5e0f41c4da34e004e9c2eb3b3",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/race-coupe-v1/review-manifest.json": "6b40d227001c5c19c70b935dccfa52804858d287e49d82196b4e2a7e5a57d1da",
+    "public/demos/original-vehicles/race-coupe-v1/inputs/model.glb": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "public/demos/original-vehicles/race-coupe-v1/inputs/atlas.png": "75d9b4c6beaba1ec81c868d499b35ab1cbf7180230e4b305e2fd234c2eb7374b",
+    "public/demos/original-vehicles/race-coupe-v1/captures/capture.json": "aefafbe9dec69c1fac433e69bce0b87d431ed1a580938ce375617f6113903cc6",
+    "art-source/vehicle-bake/race-coupe/v1/evidence/replay-verification.json": "06fcc5e2c0c4728936ea0a23af0f051af17ca9fa61470215d96b0bb6677554d1",
+    "art-source/vehicle-bake/race-coupe/v1/build.py": "4e10f72af356f229b4c289ab8fa8c45fa85c572fe2e757f406e7ca3156716303",
+    "art-source/vehicle-bake/race-coupe/v1/family.json": "0a1bd5a2f33111ac6597f2812c3bcf842f9178bad71e02562bffc53516dcc60f",
+    "art-source/vehicle-bake/race-coupe/v1/coverage-region.json": "31ca1a3f1ccbf5f92cfd0728f50166172eb078b1c238f5133fd9d9dc28eee22b",
+    "art-source/vehicle-bake/race-coupe/v1/review.json": "002ac3a5e825e9b06ed02e1bc773a9f127a60e6ace903ca1670d94f3558576d0",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/atlas.png": "3afb794ffa16f00ab2a553da3fe1edefebd025d79df6933430ae5a9c23aee350",
+    "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/recipe.json": "fad5844ce3e499650168122847971b39dec9fc1bcba9200e43f4a80a14d43cd1",
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9",
+    "src/rendering/CarMeshAsset.ts": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
+    "src/rendering/CarPixelOutline.ts": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26",
+    "src/rendering/CarMeshProjection.ts": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb",
+    "src/rendering/VehicleGeometryBatches.ts": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d",
+    "public/demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/model.glb": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+    "public/demos/original-vehicles/race-coupe-v1/captures/engine-4.png": "6429880795c16f4b174d67003a19eddbd21b710d960dc04dfbc57ca0a1b6cd21",
+    "public/demos/original-vehicles/race-coupe-v1/captures/engine-12.png": "43f11dbf543a58a6b003ac5a488cad5ad1dc3fabc440941ea58e6887c87f999f",
+    "public/demos/original-vehicles/race-coupe-v1/captures/engine-8.png": "0f11511219a342a8843dd41bd45176bd25de1e48b952543d4c925b956e4fb1ea",
+    "public/demos/original-vehicles/race-coupe-v1/captures/engine-0.png": "a016a91696ff69839b4512ec18bbe382dbf746163b8795a3e6d5566f71e94b69"
+  },
+  "physicalBounds": [
+    82,
+    37,
+    19
+  ],
+  "measurement": {
+    "modelSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -40.121742248535156,
+        -18.04039764404297,
+        -1.0391151050725966e-07
+      ],
+      "max": [
+        40.90251541137695,
+        17.884828567504883,
+        18.613826751708984
+      ],
+      "size": [
+        81.02426147460938,
+        35.92522430419922,
+        18.613826751708984
+      ]
+    },
+    "triangles": 2431,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/race-coupe/v1/evidence/replay-verification.json",
+    "sha256": "06fcc5e2c0c4728936ea0a23af0f051af17ca9fa61470215d96b0bb6677554d1",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-race-coupe-v1.json --blender BLENDER"
+}

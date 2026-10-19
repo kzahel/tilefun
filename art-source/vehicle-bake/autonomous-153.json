@@ -1,0 +1,121 @@
+{
+  "schema": "tilefun-autonomous-vehicle-run-v1",
+  "startedAt": "2026-10-19T21:19:36Z",
+  "deadline": "2026-10-20T05:19:36Z",
+  "status": "active",
+  "authorization": "Owner requests autonomous authoring, visual QA, game availability, commits and pushes for up to eight hours; per-vehicle appearance pauses waived; no quantity guarantee.",
+  "batch": 1,
+  "active": [
+    "microcar",
+    "woody-wagon",
+    "stretch-limousine",
+    "hot-rod",
+    "rally-hatchback"
+  ],
+  "integratedThisRun": [
+    {
+      "id": "pickup",
+      "modelSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "physicalBounds": [
+        95,
+        39,
+        36
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "classic-roadster",
+      "modelSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+      "physicalBounds": [
+        85,
+        35,
+        22
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "offroad-jeep",
+      "modelSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+      "physicalBounds": [
+        88,
+        40,
+        38
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "delivery-van",
+      "modelSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+      "physicalBounds": [
+        88,
+        37,
+        39
+      ],
+      "status": "integrated"
+    },
+    {
+      "id": "race-coupe",
+      "modelSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+      "physicalBounds": [
+        82,
+        37,
+        19
+      ],
+      "status": "integrated"
+    }
+  ],
+  "completedArtThisRun": [
+    {
+      "id": "classic-roadster",
+      "candidate": "classic-roadster-v1",
+      "triangles": 3092,
+      "glbSha256": "a7d453a2539103836aafff81f1030ed6d86f977d9b24554f8ce149932ffe0673",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "offroad-jeep",
+      "candidate": "offroad-jeep-v1",
+      "triangles": 3146,
+      "glbSha256": "68b188c03f679308082ec5453f80d101c0949af93220562f7f7bce5e7dba378d",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "delivery-van",
+      "candidate": "delivery-van-v1",
+      "triangles": 2426,
+      "glbSha256": "1bd32ba9cef19e10dd2acf8bd4ec80208cb424cfd8137463d6d3e02c326b1541",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+    },
+    {
+      "id": "race-coupe",
+      "candidate": "race-coupe-v1",
+      "triangles": 2431,
+      "glbSha256": "11d3fa953658a07ee65fe4c009b2760c74d22a70af51812030e87dfd5b610938",
+      "status": "frozen",
+      "qa": "Independent actual-GLB views, full roll proof, declared-input replay and frozen-only verification pass"
+    }
+  ],
+  "deferred": [],
+  "checkpoints": [
+    {
+      "batch": 1,
+      "at": "2026-10-19T22:11:00Z",
+      "integrated": [
+        "pickup",
+        "classic-roadster",
+        "offroad-jeep",
+        "delivery-van",
+        "race-coupe"
+      ],
+      "typecheck": "pass",
+      "lint": "pass; existing 119 warnings/35 infos",
+      "unit": "5768 passed, 5 known Windows failures, 10 skipped",
+      "browser": "56 passed; full Chromium canvas/GPU/failure fallback, gameplay, rolling, save/reload/delete",
+      "workshopIdentities": 1774,
+      "build": "pass"
+    }
+  ]
+}
