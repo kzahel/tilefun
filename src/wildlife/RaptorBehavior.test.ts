@@ -119,5 +119,7 @@ describe.each(["owl", "eagle", "hawk"] as const)("%s shared aerial hunting", (sp
         await session.close();
       }
     },
+    // Up to 2,880 real Realm ticks plus two reloads need hosted CPU time.
+    30_000,
   );
 });

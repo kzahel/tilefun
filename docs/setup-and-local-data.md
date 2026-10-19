@@ -63,6 +63,10 @@ hosted software GPU rendering can otherwise starve the simulation Worker.
 CI splits the suite across four independent runners, each with isolated auth/data
 and one browser worker. Individual assertion deadlines remain explicit. Long
 headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
+Wildlife contact checks retry a grounded landing after any existing alarm finishes,
+because a flight can start between observing rest and clicking the inspection control.
+They still require the native escape clip and physical height. The raptor reload
+check retains its bounded hunt/perch ticks with a 30-second wall-time budget.
 Each CI shard stops at its first test failure so GitHub publishes its job logs
 promptly; other shards continue independently. Local runs collect all failures.
 The raster verification renders every Workshop candidate in headless-shell and
