@@ -1,0 +1,16 @@
+{
+  "identity": "marabou-stork-roster-v3-pixels-01",
+  "palette": {
+    "B": "#465156",
+    "H": "#6c7b7a",
+    "C": "#d4d2b8",
+    "M": "#b28e7e",
+    "E": "#c1a874",
+    "K": "#293338",
+    "N": "#1f2b32",
+    "U": "#52778d",
+    "R": "#b96d62",
+    "T": "#667a6c"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

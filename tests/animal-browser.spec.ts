@@ -8,6 +8,7 @@ import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
 import { GROUND_PRIMATE_PROFILES } from "../src/wildlife/GroundPrimates.js";
 import { GROUND_SPECIALIST_PROFILES } from "../src/wildlife/GroundSpecialists.js";
 import { SEABIRD_PROFILES } from "../src/wildlife/Seabirds.js";
+import { TALL_BIRD_PROFILES } from "../src/wildlife/TallBirds.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
@@ -141,6 +142,7 @@ for (const animal of [
   ...DISTINCT_FISH_FAUNA_PROFILES,
   ...GROUND_SPECIALIST_PROFILES,
   ...SEABIRD_PROFILES,
+  ...TALL_BIRD_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,

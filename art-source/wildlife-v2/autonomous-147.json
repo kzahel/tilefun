@@ -638,9 +638,11 @@
     "sloth": {
       "name": "Sloth",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "capybara": {
       "name": "Capybara",
@@ -709,9 +711,11 @@
     "binturong": {
       "name": "Binturong",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "honey-badger": {
       "name": "Honey badger",
@@ -728,9 +732,11 @@
     "aye-aye": {
       "name": "Aye-aye",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "white-nosed-coati": {
       "name": "White-nosed coati",
@@ -741,9 +747,11 @@
     "kinkajou": {
       "name": "Kinkajou",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "koala": {
       "name": "Koala",
@@ -767,16 +775,20 @@
     "opossum": {
       "name": "Opossum",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "tasmanian-devil": {
       "name": "Tasmanian devil",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "platypus": {
       "name": "Platypus",
@@ -788,9 +800,11 @@
     "echidna": {
       "name": "Echidna",
       "family": "Marsupials & monotremes",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Distinct closed anatomy source prototypes underway; not registered or active in runtime."
     },
     "quokka": {
       "name": "Quokka",
@@ -877,46 +891,62 @@
     "flamingo": {
       "name": "Flamingo",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:16:05.475390Z",
-      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/flamingo/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
     },
     "shoebill": {
       "name": "Shoebill",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:16:05.475390Z",
-      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/shoebill/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
     },
     "pelican": {
       "name": "Pelican",
       "family": "Birds",
-      "state": "finished",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
       "completedUtc": "2026-10-19T13:30:46.161417Z",
       "evidence": [
         "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
-      ]
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/pelican/roster-v3/receipt.json"
     },
     "blue-footed-booby": {
       "name": "Blue-footed booby",
       "family": "Birds",
-      "state": "finished",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
       "completedUtc": "2026-10-19T13:30:46.161417Z",
       "evidence": [
         "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
-      ]
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/blue-footed-booby/roster-v3/receipt.json"
     },
     "sparrow": {
       "name": "Sparrow",
@@ -957,20 +987,30 @@
     "secretary-bird": {
       "name": "Secretary bird",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:16:05.475390Z",
-      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/secretary-bird/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
     },
     "marabou-stork": {
       "name": "Marabou stork",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:16:05.475390Z",
-      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/marabou-stork/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
     },
     "kakapo": {
       "name": "Kakapo",
@@ -981,11 +1021,16 @@
     "great-blue-heron": {
       "name": "Great blue heron",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T13:16:05.475390Z",
-      "progress": "Connected three-link neck and planted biped prototypes audited; refining thigh/lower-leg proportions before registration or runtime activation."
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/great-blue-heron/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
     },
     "atlantic-puffin": {
       "name": "Atlantic puffin",
@@ -1003,28 +1048,34 @@
     "ruby-throated-hummingbird": {
       "name": "Ruby-throated hummingbird",
       "family": "Birds",
-      "state": "finished",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
       "completedUtc": "2026-10-19T13:30:46.161417Z",
       "evidence": [
         "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
-      ]
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/receipt.json"
     },
     "great-frigatebird": {
       "name": "Great frigatebird",
       "family": "Birds",
-      "state": "finished",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T12:53:52.325320Z",
-      "progress": "Ten-artifact byte-identical replay and native/3x exact playback pass. Continuous hock plane, quarter-pose source keys and257 independent flight samples per facing. Runtime inactive and unregistered.",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
       "completedUtc": "2026-10-19T13:30:46.161417Z",
       "evidence": [
         "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
-      ]
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/great-frigatebird/roster-v3/receipt.json"
     },
     "ocean-sunfish": {
       "name": "Ocean sunfish",
@@ -1509,6 +1560,17 @@
         "ruby-throated-hummingbird"
       ],
       "validation": "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+    },
+    {
+      "utc": "2026-10-19T13:44:21.871484Z",
+      "completed": [
+        "flamingo",
+        "shoebill",
+        "secretary-bird",
+        "marabou-stork",
+        "great-blue-heron"
+      ],
+      "validation": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
     }
   ]
 }

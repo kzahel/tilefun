@@ -20,6 +20,7 @@ import { PET_ART } from "./PetVariants.js";
 import { SEABIRD_PROFILES } from "./Seabirds.js";
 import { SHELLED_AMPHIBIAN_PROFILES } from "./ShelledAmphibians.js";
 import { SMALL_MAMMAL_PROFILES } from "./SmallMammals.js";
+import { TALL_BIRD_PROFILES } from "./TallBirds.js";
 import { UNGULATE_PROFILES } from "./Ungulates.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
@@ -1346,6 +1347,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...DISTINCT_FISH_FAUNA_PROFILES,
   ...GROUND_SPECIALIST_PROFILES,
   ...SEABIRD_PROFILES,
+  ...TALL_BIRD_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

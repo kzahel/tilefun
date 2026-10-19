@@ -110,3 +110,22 @@ in the sortable animal browser and its real shared-engine AI scenes.
   lint/build and 1,524-candidate full Chromium manifest pass. Exact art pending review.
   **148 of 196 implemented; 48 remaining.** Five tall-bird banks have exact source
   playback evidence; three distinct reptile hunters are in source refinement.
+
+- Tall-bird checkpoint: Eighth checkpoint: flamingo, shoebill, secretary bird, marabou stork and great blue
+  heron have distinct bills/crests/plumage, buried fixed-link legs, body weight
+  transfer, planted feet and connected three-link necks through forage poses.
+  Secretary bird uses terrestrial hunting with explicit snake/small-prey diets;
+  its lab contains an ordinary natural king cobra and one uneaten deer. Cobra
+  catches and delayed natural replacement queues persist on reload. The other
+  four use shared ground walking/foraging; wetland wading and flight are future work.
+  All join seeded worlds, placement and browser action/Watch AI. Exact art pending review.
+  Full units: **4,958 passed**, five known Windows failures plus one stale source
+  assertion assuming four feet and identical walk/chase paths. The corrected test
+  measures planted source geometry through the actual camera; all17 source banks
+  pass, and all52 source/ecology regression cases are covered passing across runs.
+  Also75 focused new-family checks; **32 browser cases /652 previews**; five exact
+  replays and1,960 native/3x crops; typecheck/isolated lint/build,1,549-candidate
+  manifest and streaming readiness pass. The ledger also corrects the prior four
+  flight birds to its expected finished-game-active state.
+  **153 of196 implemented;43 remaining.** Three reptile hunter banks have exact
+  replay evidence; seven forest-mammal/marsupial prototypes are under refinement.

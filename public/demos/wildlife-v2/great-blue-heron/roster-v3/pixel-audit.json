@@ -1,0 +1,17 @@
+{
+  "identity": "great-blue-heron-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.553382420616657,
+    "up": 1.664285714285711,
+    "left": 1.7437177835051614,
+    "right": 1.7437177835051614
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

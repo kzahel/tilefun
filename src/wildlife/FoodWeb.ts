@@ -7,6 +7,12 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = [
+  "flamingo",
+  "shoebill",
+  "secretary-bird",
+  "marabou-stork",
+  "great-blue-heron",
+
   "pelican",
   "blue-footed-booby",
   "great-frigatebird",
@@ -122,6 +128,17 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter eats prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  "secretary-bird": [
+    "king-cobra",
+    "rabbit",
+    "mouse",
+    "rat",
+    "frog",
+    "gecko",
+    "cricket",
+    "grasshopper",
+    "stag-beetle",
+  ],
   swordfish: ["fish", "pufferfish", "anglerfish", "octopus"],
   anglerfish: ["fish", "crab"],
   owl: ["mouse", "rat", "red-squirrel", "rabbit", "frog", "gecko", "robin", "sparrow", "dove"],

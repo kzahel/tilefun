@@ -556,6 +556,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-secretary-bird-predator-v1",
+      "name": "wildlife secretary bird predator v1",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+      "width": 9072,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-swordfish-predator-v1",
       "name": "wildlife swordfish predator v1",
       "image": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
@@ -1573,6 +1583,46 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-flamingo-provisional-v1",
+      "name": "wildlife flamingo provisional v1",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-shoebill-provisional-v1",
+      "name": "wildlife shoebill provisional v1",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-marabou-stork-provisional-v1",
+      "name": "wildlife marabou stork provisional v1",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-great-blue-heron-provisional-v1",
+      "name": "wildlife great blue heron provisional v1",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4886,6 +4936,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-flamingo-roster-v3",
+      "name": "wildlife v2 flamingo roster v3",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-shoebill-roster-v3",
+      "name": "wildlife v2 shoebill roster v3",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-secretary-bird-roster-v3",
+      "name": "wildlife v2 secretary bird roster v3",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+      "width": 9072,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-marabou-stork-roster-v3",
+      "name": "wildlife v2 marabou stork roster v3",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-great-blue-heron-roster-v3",
+      "name": "wildlife v2 great blue heron roster v3",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -6333,7 +6433,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:120"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:123"
         },
         {
           "system": "Gameplay",
@@ -26043,7 +26143,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:120"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:123"
         },
         {
           "system": "Gameplay",
@@ -26519,6 +26619,24 @@
         384
       ],
       "label": "wildlife-hawk-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-secretary-bird-predator-v1",
+      "sheetId": "wildlife-secretary-bird-predator-v1",
+      "rect": [
+        0,
+        0,
+        9072,
+        448
+      ],
+      "label": "wildlife-secretary-bird-predator-v1 · registered 112×112 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -28363,6 +28481,78 @@
         256
       ],
       "label": "wildlife-ruby-throated-hummingbird-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-flamingo-provisional-v1",
+      "sheetId": "wildlife-flamingo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-flamingo-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-shoebill-provisional-v1",
+      "sheetId": "wildlife-shoebill-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-shoebill-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-marabou-stork-provisional-v1",
+      "sheetId": "wildlife-marabou-stork-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-marabou-stork-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-great-blue-heron-provisional-v1",
+      "sheetId": "wildlife-great-blue-heron-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-great-blue-heron-provisional-v1 · registered 112×112 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -30387,7 +30577,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:954"
+          "source": "src/wildlife/Fauna.ts:955"
         },
         {
           "system": "Gameplay",
@@ -30395,19 +30585,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:32"
+          "source": "src/wildlife/FoodWeb.ts:38"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:150"
+          "source": "src/wildlife/FoodWeb.ts:167"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:305"
+          "source": "src/wildlife/FoodWeb.ts:322"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:478"
+          "source": "src/wildlife/FoodWeb.ts:495"
         },
         {
           "system": "Gameplay",
@@ -30469,15 +30659,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:30"
+          "source": "src/wildlife/Fauna.ts:31"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:225"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:356"
+          "source": "src/wildlife/Fauna.ts:226"
         },
         {
           "system": "Gameplay",
@@ -30489,15 +30675,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:426"
+          "source": "src/wildlife/FoodWeb.ts:407"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:451"
+          "source": "src/wildlife/FoodWeb.ts:443"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:478"
+          "source": "src/wildlife/FoodWeb.ts:468"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:495"
         }
       ]
     },
@@ -30547,27 +30737,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:33"
+          "source": "src/wildlife/FoodWeb.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:138"
+          "source": "src/wildlife/FoodWeb.ts:155"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:151"
+          "source": "src/wildlife/FoodWeb.ts:168"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:306"
+          "source": "src/wildlife/FoodWeb.ts:323"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:478"
+          "source": "src/wildlife/FoodWeb.ts:495"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:479"
+          "source": "src/wildlife/FoodWeb.ts:496"
         },
         {
           "system": "Gameplay",
@@ -30613,7 +30803,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:479"
+          "source": "src/wildlife/FoodWeb.ts:496"
         }
       ]
     },
@@ -30659,7 +30849,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:480"
+          "source": "src/wildlife/FoodWeb.ts:497"
         }
       ]
     },
@@ -30705,7 +30895,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:481"
+          "source": "src/wildlife/FoodWeb.ts:498"
         }
       ]
     },
@@ -30751,7 +30941,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:482"
+          "source": "src/wildlife/FoodWeb.ts:499"
         }
       ]
     },
@@ -30905,15 +31095,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:34"
+          "source": "src/wildlife/FoodWeb.ts:40"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:153"
+          "source": "src/wildlife/FoodWeb.ts:170"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:478"
+          "source": "src/wildlife/FoodWeb.ts:495"
         },
         {
           "system": "Gameplay",
@@ -30959,11 +31149,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:35"
+          "source": "src/wildlife/FoodWeb.ts:41"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:478"
+          "source": "src/wildlife/FoodWeb.ts:495"
         },
         {
           "system": "Gameplay",

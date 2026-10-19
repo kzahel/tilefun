@@ -16453,5 +16453,470 @@
         "sha256": "c6f613a2f157a78382e6e6963cc45cba4e021e01ed3ab852f022d8500b4c4399"
       }
     ]
+  },
+  {
+    "id": "flamingo-roster-v3",
+    "animalId": "flamingo",
+    "revision": "roster-v3",
+    "name": "Flamingo · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/flamingo/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-flamingo-roster-v3",
+      "name": "Flamingo sheet",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342",
+      "source": "art-source/wildlife-v2/flamingo/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-flamingo-roster-v3-scene",
+      "name": "Flamingo scene",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "4208aefeb3aa4c0bfda509f737a3e094bb6aaae6612ab18dd24867374ad3cc36",
+      "source": "art-source/wildlife-v2/flamingo/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-flamingo-roster-v3-contact",
+      "name": "Flamingo contact",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "59a2d04e1431f4f8c77421b1b684c37d573dffe80159d2988ea10727910a9688",
+      "source": "art-source/wildlife-v2/flamingo/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/flamingo/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/contact-sheet-native.png",
+        "sha256": "59a2d04e1431f4f8c77421b1b684c37d573dffe80159d2988ea10727910a9688"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/index.html",
+        "sha256": "3fedb1e4600cc33697dbd9309ce9ec43c611f54847b3d4ee55ff50c95fed8b7f"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/pixel-audit.json",
+        "sha256": "2b8c7c67ce7bfbba1ebf8d685b9cc3d3a2224dfdc5d328a7daeb9256018e7748"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/preview-native.gif",
+        "sha256": "c77aac97bf8a1fda34e0ada3d5f1671f61edd75c61b5b73bd1cbf7de6b515c8e"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/preview.gif",
+        "sha256": "eed78480b9a772489bbf4e2bfa305aedd4fd409a0d1fa63fe1690f3a71df534b"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/scene-background.png",
+        "sha256": "6632d41e5131bfc5af45c392964749c4bfe24672124c8362a01d1b0031b88521"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/scene-native.png",
+        "sha256": "4208aefeb3aa4c0bfda509f737a3e094bb6aaae6612ab18dd24867374ad3cc36"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+        "sha256": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/source-audit.json",
+        "sha256": "1dc71cf46d5693b694eeab1274310a710821aca640b4ffb33b04240706d78458"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/sprite.json",
+        "sha256": "cbeb6748c574e984e262a2b3ea02394efc37628d900751c406033d8417557801"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/travel-native.gif",
+        "sha256": "4ca4ad245f535987e196705554da575a88f00097afa940a902307352d4b6fefe"
+      },
+      {
+        "path": "demos/wildlife-v2/flamingo/roster-v3/validation.json",
+        "sha256": "f9d0b1c585e756966351a2640ca46288f15fa5ca3d16386709022f3153835b2c"
+      }
+    ]
+  },
+  {
+    "id": "shoebill-roster-v3",
+    "animalId": "shoebill",
+    "revision": "roster-v3",
+    "name": "Shoebill · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/shoebill/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-shoebill-roster-v3",
+      "name": "Shoebill sheet",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+      "source": "art-source/wildlife-v2/shoebill/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-shoebill-roster-v3-scene",
+      "name": "Shoebill scene",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "10e04ff9557348c568085afb31b0ee1413b89a085017be719c5912670bdd2117",
+      "source": "art-source/wildlife-v2/shoebill/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-shoebill-roster-v3-contact",
+      "name": "Shoebill contact",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "6cc0cc078018b535a00ce414f4aaa9415f14ed05c630bef60bea75cfb1cbd743",
+      "source": "art-source/wildlife-v2/shoebill/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/shoebill/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/contact-sheet-native.png",
+        "sha256": "6cc0cc078018b535a00ce414f4aaa9415f14ed05c630bef60bea75cfb1cbd743"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/index.html",
+        "sha256": "86d1edda997c315b7180964bff6402bb27767df1ab8bda188be2cb297b286aec"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/pixel-audit.json",
+        "sha256": "4e4debfa5cc70be7bc176870230e67bede4a4ab4b55866c5c67e86807374ed89"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/preview-native.gif",
+        "sha256": "2ffba830947f204afcb95ba3228568337d98f1036ec65265014ccb27478b8b25"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/preview.gif",
+        "sha256": "249fc338e0b6d8eaaf43798c76fc25188427095561d692a6abe5a9cfa1410b49"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/scene-background.png",
+        "sha256": "6632d41e5131bfc5af45c392964749c4bfe24672124c8362a01d1b0031b88521"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/scene-native.png",
+        "sha256": "10e04ff9557348c568085afb31b0ee1413b89a085017be719c5912670bdd2117"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+        "sha256": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/source-audit.json",
+        "sha256": "67a540854246177391a3cd8742d74c5f23a26b5f9945ce8b2fcab58005be069a"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/sprite.json",
+        "sha256": "8fd03f1bb7a5a6d313c0b9786fbf920bd39fb40b7b1041421b4fb1d8b25f0996"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/travel-native.gif",
+        "sha256": "1394879daf58c331c68355748163499b241d3885d3991a580020f6a2689c84ac"
+      },
+      {
+        "path": "demos/wildlife-v2/shoebill/roster-v3/validation.json",
+        "sha256": "4d2e5d4f5d75bb653b8064da63a12bac7a8408bd22bee6195ead0bf77ad1da25"
+      }
+    ]
+  },
+  {
+    "id": "secretary-bird-roster-v3",
+    "animalId": "secretary-bird",
+    "revision": "roster-v3",
+    "name": "Secretary bird · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/secretary-bird/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-secretary-bird-roster-v3",
+      "name": "Secretary bird sheet",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+      "width": 9072,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+      "source": "art-source/wildlife-v2/secretary-bird/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-secretary-bird-roster-v3-scene",
+      "name": "Secretary bird scene",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "fa7bef95d8c7500f58c9fd3e071b7f07bda5dfcc55b8f29ce822d1dab3faf502",
+      "source": "art-source/wildlife-v2/secretary-bird/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-secretary-bird-roster-v3-contact",
+      "name": "Secretary bird contact",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "3305fbe3176298971c80bb13856d00e950b087800be00191592fb96ec29e615e",
+      "source": "art-source/wildlife-v2/secretary-bird/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/secretary-bird/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/contact-sheet-native.png",
+        "sha256": "3305fbe3176298971c80bb13856d00e950b087800be00191592fb96ec29e615e"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/index.html",
+        "sha256": "ad9a49f939f66279bbc1ffd6d9e631bf9ca05dd9b824c196aa33ba651715b066"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/pixel-audit.json",
+        "sha256": "43c3ec11677b17c6c6fe2a5736c908676f02677fbe1d09e75267dbb96b6ab38a"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/preview-native.gif",
+        "sha256": "e5bfefff0400b5e2d31426572ffc13c2e067dd87b416c9e7bd7fc27ec1dbcaa5"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/preview.gif",
+        "sha256": "db9ab1cbb479485f314dd192b0c5e0f8d0d50cd905e16e5bbb3fc3cae8b1458a"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/scene-background.png",
+        "sha256": "6632d41e5131bfc5af45c392964749c4bfe24672124c8362a01d1b0031b88521"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/scene-native.png",
+        "sha256": "fa7bef95d8c7500f58c9fd3e071b7f07bda5dfcc55b8f29ce822d1dab3faf502"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+        "sha256": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/source-audit.json",
+        "sha256": "b96a4ea3c66e0e9488d763aff8ebbe02aec411ea843923933c288ec5bf01770d"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/sprite.json",
+        "sha256": "54c39aff1e1f6d11d1ef60552bd2a66c48b1c00416aee8276f91fe014b981325"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/travel-native.gif",
+        "sha256": "738e3d7a32312276e02d6be60bdaf2c1460d74504942528d0c19809fb170b9ad"
+      },
+      {
+        "path": "demos/wildlife-v2/secretary-bird/roster-v3/validation.json",
+        "sha256": "673aa79eed31f4a3959f2641f243b3ae57f6caddab115e7b51e3db92f4d89dc1"
+      }
+    ]
+  },
+  {
+    "id": "marabou-stork-roster-v3",
+    "animalId": "marabou-stork",
+    "revision": "roster-v3",
+    "name": "Marabou stork · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/marabou-stork/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-marabou-stork-roster-v3",
+      "name": "Marabou stork sheet",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+      "source": "art-source/wildlife-v2/marabou-stork/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-marabou-stork-roster-v3-scene",
+      "name": "Marabou stork scene",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "9cacfc9b55a9d830c0c0cf31652e875fcf869d71ad04bab1871938b5056a69d6",
+      "source": "art-source/wildlife-v2/marabou-stork/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-marabou-stork-roster-v3-contact",
+      "name": "Marabou stork contact",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "73388702319a91e1f4400fc01b90a73f8652b1258878a2472284c3ef11637865",
+      "source": "art-source/wildlife-v2/marabou-stork/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/marabou-stork/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/contact-sheet-native.png",
+        "sha256": "73388702319a91e1f4400fc01b90a73f8652b1258878a2472284c3ef11637865"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/index.html",
+        "sha256": "92f7ab5780d0825aa93a54fda58c999c06c50fce32c94d7ab731cef77f7f7fc8"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/pixel-audit.json",
+        "sha256": "b462548fcf9c709ebf1a3f6e3b22f6b0cd2a93559e92e7ad1b383d0721a31a9a"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/preview-native.gif",
+        "sha256": "5d3482d2d00a723fbe688a6fab1a69ad7b205fbf45ef56badcdf57139577d5a2"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/preview.gif",
+        "sha256": "15d6a3d18226b0434a0670935fb88a6ec51752362cfe3df370591f11ec072121"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/scene-background.png",
+        "sha256": "6632d41e5131bfc5af45c392964749c4bfe24672124c8362a01d1b0031b88521"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/scene-native.png",
+        "sha256": "9cacfc9b55a9d830c0c0cf31652e875fcf869d71ad04bab1871938b5056a69d6"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+        "sha256": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/source-audit.json",
+        "sha256": "3e749ed9407ed3a415055102b550ec39848045d228cd6325a33815bc6a3296fc"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/sprite.json",
+        "sha256": "a478d004ca5589fc487dbab1f0e2fd2822640b558cb0d13537af089d7aa7b9ba"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/travel-native.gif",
+        "sha256": "c2ef976e0a74a4aa6bac7bf78827d295aa53b34444fd2c5a4f7fb453befcb900"
+      },
+      {
+        "path": "demos/wildlife-v2/marabou-stork/roster-v3/validation.json",
+        "sha256": "89cf9ad1ec59ca96a30608f7419486cfcb579da84195e02c7e00d9138801a7b3"
+      }
+    ]
+  },
+  {
+    "id": "great-blue-heron-roster-v3",
+    "animalId": "great-blue-heron",
+    "revision": "roster-v3",
+    "name": "Great blue heron · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/great-blue-heron/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-great-blue-heron-roster-v3",
+      "name": "Great blue heron sheet",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+      "source": "art-source/wildlife-v2/great-blue-heron/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-great-blue-heron-roster-v3-scene",
+      "name": "Great blue heron scene",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/scene-native.png",
+      "width": 608,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "62268ee01e5be3a5b087c64d0b11265778d9f7be7fe08358da980e49f2555ab4",
+      "source": "art-source/wildlife-v2/great-blue-heron/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-great-blue-heron-roster-v3-contact",
+      "name": "Great blue heron contact",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/contact-sheet-native.png",
+      "width": 896,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "1be09478e242499852f9063a1d2a6ed0f49e05acf177fc52ce4d48f9287ca59b",
+      "source": "art-source/wildlife-v2/great-blue-heron/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/great-blue-heron/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/contact-sheet-native.png",
+        "sha256": "1be09478e242499852f9063a1d2a6ed0f49e05acf177fc52ce4d48f9287ca59b"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/index.html",
+        "sha256": "f97925bbc8fc859dcd5f867c0290c4197813b49ce8187376db8ee175ace3b846"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/pixel-audit.json",
+        "sha256": "9cd4809ece3ece9363e671edc016213d003cd4149c16beb107b418a96064cea6"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/preview-native.gif",
+        "sha256": "dacbf3f82f16e5588a33857d505347fdc5f776384c3e733e54841f848a188c5e"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/preview.gif",
+        "sha256": "87ca7d702fa5c47e675015993a74ff938f4ebddceb8e20ab06c3bc2157313731"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/scene-background.png",
+        "sha256": "6632d41e5131bfc5af45c392964749c4bfe24672124c8362a01d1b0031b88521"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/scene-native.png",
+        "sha256": "62268ee01e5be3a5b087c64d0b11265778d9f7be7fe08358da980e49f2555ab4"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+        "sha256": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/source-audit.json",
+        "sha256": "a77802ca89f6d3ee519f13de7f3baa2b4c565a69ec6134df6b84445d7a90bd82"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/sprite.json",
+        "sha256": "9c7a9962aa7097c18b4ebc40eea876158143e7aace952712345d50b294905736"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/travel-native.gif",
+        "sha256": "076a35f90765308c63ea8d3d6e9afacf53fdeff5597717a7d4685031ca41d7f7"
+      },
+      {
+        "path": "demos/wildlife-v2/great-blue-heron/roster-v3/validation.json",
+        "sha256": "ae332d1940d043f9d8e081b0bb396e7bf64e6bfa374f137299ce3afd00bb90f0"
+      }
+    ]
   }
 ]

@@ -1,0 +1,507 @@
+{
+  "flamingo": {
+    "label": "Flamingo",
+    "canvas": 112,
+    "torso": [
+      0,
+      -0.05,
+      2.75
+    ],
+    "radii": [
+      0.45,
+      0.65,
+      0.49
+    ],
+    "head": [
+      0,
+      1.05,
+      4.45
+    ],
+    "skull": [
+      0.2,
+      0.28,
+      0.23
+    ],
+    "headKey": "B",
+    "neckKey": "B",
+    "neckLengths": [
+      1.5,
+      1.6,
+      0.45
+    ],
+    "neckRadius": 0.1,
+    "neckRoot": [
+      0,
+      0.1625,
+      2.9705
+    ],
+    "headDrop": 3.5,
+    "headReach": 0.8,
+    "beakLength": 0.4,
+    "beakWidth": 0.12,
+    "legHip": [
+      0.24,
+      -0.04,
+      2.35
+    ],
+    "legLengths": [
+      0.4,
+      1.15,
+      1.15,
+      0.25
+    ],
+    "legRadii": [
+      0.07,
+      0.055,
+      0.045,
+      0.035
+    ],
+    "footWidth": 0.12,
+    "footLength": 0.2,
+    "toes": 4,
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ],
+    "lift": 0.18,
+    "wingRadii": [
+      0.12,
+      0.45499999999999996,
+      0.392
+    ],
+    "wingSpread": 0.6,
+    "tailRoot": [
+      0,
+      -0.5525,
+      2.65
+    ],
+    "tailFeathers": 5,
+    "tailLength": 0.4,
+    "tailWidth": 0.065,
+    "walkSpeed": 12,
+    "walkMs": 40,
+    "chaseSpeed": 24,
+    "chaseMs": 20,
+    "hunter": false,
+    "forageBodyDrop": 0.2,
+    "legKey": "R",
+    "palette": {
+      "B": "#d7a4a0",
+      "H": "#eabdb0",
+      "C": "#efc8b8",
+      "M": "#bea19a",
+      "E": "#8d5554",
+      "K": "#293338",
+      "N": "#1f2b32",
+      "U": "#52778d",
+      "R": "#b96d62",
+      "T": "#667a6c"
+    }
+  },
+  "shoebill": {
+    "label": "Shoebill",
+    "canvas": 112,
+    "torso": [
+      0,
+      -0.05,
+      2.25
+    ],
+    "radii": [
+      0.49,
+      0.66,
+      0.61
+    ],
+    "head": [
+      0,
+      0.8,
+      3.5
+    ],
+    "skull": [
+      0.31,
+      0.38,
+      0.35
+    ],
+    "headKey": "B",
+    "neckKey": "B",
+    "neckLengths": [
+      1.1,
+      1.2,
+      0.35
+    ],
+    "neckRadius": 0.19,
+    "neckRoot": [
+      0,
+      0.165,
+      2.5245
+    ],
+    "headDrop": 2.1,
+    "headReach": 0.6,
+    "beakLength": 0.7,
+    "beakWidth": 0.25,
+    "legHip": [
+      0.28,
+      -0.03,
+      1.85
+    ],
+    "legLengths": [
+      0.4,
+      0.9,
+      0.9,
+      0.23
+    ],
+    "legRadii": [
+      0.1,
+      0.08,
+      0.06,
+      0.045
+    ],
+    "footWidth": 0.12,
+    "footLength": 0.2,
+    "toes": 4,
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ],
+    "lift": 0.18,
+    "wingRadii": [
+      0.12,
+      0.46199999999999997,
+      0.488
+    ],
+    "wingSpread": 0.6,
+    "tailRoot": [
+      0,
+      -0.561,
+      2.15
+    ],
+    "tailFeathers": 5,
+    "tailLength": 0.4,
+    "tailWidth": 0.065,
+    "walkSpeed": 10,
+    "walkMs": 40,
+    "chaseSpeed": 20,
+    "chaseMs": 20,
+    "hunter": false,
+    "forageBodyDrop": 0.2,
+    "legKey": "M",
+    "palette": {
+      "B": "#899796",
+      "H": "#afb9ad",
+      "C": "#c9cbb5",
+      "M": "#7b8882",
+      "E": "#a6a174",
+      "K": "#293338",
+      "N": "#1f2b32",
+      "U": "#52778d",
+      "R": "#b96d62",
+      "T": "#667a6c"
+    }
+  },
+  "secretary-bird": {
+    "label": "Secretary bird",
+    "canvas": 112,
+    "torso": [
+      0,
+      -0.05,
+      3.0
+    ],
+    "radii": [
+      0.48,
+      0.66,
+      0.65
+    ],
+    "head": [
+      0,
+      0.8,
+      4.2
+    ],
+    "skull": [
+      0.23,
+      0.29,
+      0.27
+    ],
+    "headKey": "B",
+    "neckKey": "B",
+    "neckLengths": [
+      1.1,
+      1.2,
+      0.35
+    ],
+    "neckRadius": 0.14,
+    "neckRoot": [
+      0,
+      0.165,
+      3.2925
+    ],
+    "headDrop": 3.0,
+    "headReach": 0.65,
+    "beakLength": 0.28,
+    "beakWidth": 0.12,
+    "legHip": [
+      0.28,
+      -0.03,
+      2.45
+    ],
+    "legLengths": [
+      0.45,
+      1.2,
+      1.2,
+      0.25
+    ],
+    "legRadii": [
+      0.1,
+      0.075,
+      0.055,
+      0.04
+    ],
+    "footWidth": 0.12,
+    "footLength": 0.2,
+    "toes": 4,
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ],
+    "lift": 0.18,
+    "wingRadii": [
+      0.12,
+      0.46199999999999997,
+      0.52
+    ],
+    "wingSpread": 0.6,
+    "tailRoot": [
+      0,
+      -0.561,
+      2.9
+    ],
+    "tailFeathers": 5,
+    "tailLength": 1.25,
+    "tailWidth": 0.065,
+    "walkSpeed": 14,
+    "walkMs": 40,
+    "chaseSpeed": 36,
+    "chaseMs": 20,
+    "hunter": true,
+    "forageBodyDrop": 0.55,
+    "legKey": "M",
+    "palette": {
+      "B": "#b4bcb1",
+      "H": "#d6d5bd",
+      "C": "#e2dfc9",
+      "M": "#737f77",
+      "E": "#d6a071",
+      "K": "#293338",
+      "N": "#1f2b32",
+      "U": "#52778d",
+      "R": "#b96d62",
+      "T": "#667a6c"
+    }
+  },
+  "marabou-stork": {
+    "label": "Marabou stork",
+    "canvas": 112,
+    "torso": [
+      0,
+      -0.05,
+      2.65
+    ],
+    "radii": [
+      0.54,
+      0.72,
+      0.68
+    ],
+    "head": [
+      0,
+      0.95,
+      4.15
+    ],
+    "skull": [
+      0.25,
+      0.32,
+      0.3
+    ],
+    "headKey": "M",
+    "neckKey": "M",
+    "neckLengths": [
+      1.2,
+      1.3,
+      0.4
+    ],
+    "neckRadius": 0.16,
+    "neckRoot": [
+      0,
+      0.18,
+      2.956
+    ],
+    "headDrop": 2.5,
+    "headReach": 0.65,
+    "beakLength": 0.85,
+    "beakWidth": 0.15,
+    "legHip": [
+      0.31,
+      -0.04,
+      2.1
+    ],
+    "legLengths": [
+      0.4,
+      1.0,
+      1.05,
+      0.25
+    ],
+    "legRadii": [
+      0.095,
+      0.07,
+      0.055,
+      0.04
+    ],
+    "footWidth": 0.12,
+    "footLength": 0.2,
+    "toes": 4,
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ],
+    "lift": 0.18,
+    "wingRadii": [
+      0.12,
+      0.504,
+      0.544
+    ],
+    "wingSpread": 0.6,
+    "tailRoot": [
+      0,
+      -0.612,
+      2.55
+    ],
+    "tailFeathers": 5,
+    "tailLength": 0.4,
+    "tailWidth": 0.065,
+    "walkSpeed": 10,
+    "walkMs": 40,
+    "chaseSpeed": 20,
+    "chaseMs": 20,
+    "hunter": false,
+    "forageBodyDrop": 0.2,
+    "legKey": "M",
+    "palette": {
+      "B": "#465156",
+      "H": "#6c7b7a",
+      "C": "#d4d2b8",
+      "M": "#b28e7e",
+      "E": "#c1a874",
+      "K": "#293338",
+      "N": "#1f2b32",
+      "U": "#52778d",
+      "R": "#b96d62",
+      "T": "#667a6c"
+    }
+  },
+  "great-blue-heron": {
+    "label": "Great blue heron",
+    "canvas": 112,
+    "torso": [
+      0,
+      -0.05,
+      2.45
+    ],
+    "radii": [
+      0.4,
+      0.63,
+      0.51
+    ],
+    "head": [
+      0,
+      1.0,
+      4.1
+    ],
+    "skull": [
+      0.21,
+      0.29,
+      0.25
+    ],
+    "headKey": "B",
+    "neckKey": "B",
+    "neckLengths": [
+      1.3,
+      1.4,
+      0.35
+    ],
+    "neckRadius": 0.105,
+    "neckRoot": [
+      0,
+      0.1575,
+      2.6795
+    ],
+    "headDrop": 2.8,
+    "headReach": 0.7,
+    "beakLength": 0.7,
+    "beakWidth": 0.1,
+    "legHip": [
+      0.24,
+      -0.03,
+      2.05
+    ],
+    "legLengths": [
+      0.35,
+      1.05,
+      1.05,
+      0.22
+    ],
+    "legRadii": [
+      0.075,
+      0.06,
+      0.045,
+      0.035
+    ],
+    "footWidth": 0.12,
+    "footLength": 0.2,
+    "toes": 4,
+    "toeDirections": [
+      1,
+      1,
+      1,
+      -1
+    ],
+    "lift": 0.18,
+    "wingRadii": [
+      0.12,
+      0.44099999999999995,
+      0.40800000000000003
+    ],
+    "wingSpread": 0.6,
+    "tailRoot": [
+      0,
+      -0.5355,
+      2.35
+    ],
+    "tailFeathers": 5,
+    "tailLength": 0.4,
+    "tailWidth": 0.065,
+    "walkSpeed": 12,
+    "walkMs": 40,
+    "chaseSpeed": 24,
+    "chaseMs": 20,
+    "hunter": false,
+    "forageBodyDrop": 0.2,
+    "legKey": "M",
+    "palette": {
+      "B": "#7a929d",
+      "H": "#a3b5b5",
+      "C": "#cfd1b9",
+      "M": "#6c7a80",
+      "E": "#c9aa66",
+      "K": "#293338",
+      "N": "#1f2b32",
+      "U": "#52778d",
+      "R": "#b96d62",
+      "T": "#667a6c"
+    }
+  }
+}

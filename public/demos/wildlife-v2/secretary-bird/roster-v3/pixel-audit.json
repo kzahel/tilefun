@@ -1,0 +1,17 @@
+{
+  "identity": "secretary-bird-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6840292834732082,
+    "up": 1.7425139425139449,
+    "left": 1.6721701621300014,
+    "right": 1.6721701621300014
+  },
+  "rootTravelPixelsPerCycle": 17.92,
+  "plantedTravel": true
+}
