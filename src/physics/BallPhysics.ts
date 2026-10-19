@@ -231,6 +231,7 @@ export function tickBallPhysics(
           }
           ai.state = "scared";
           ai.scaredTimer = BALL_SCARE_DURATION;
+          delete ai.scaredSpeed;
           ai.dirX = hitNx;
           ai.dirY = hitNy;
           ai.timer = 0.3;

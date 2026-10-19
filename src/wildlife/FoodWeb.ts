@@ -187,6 +187,7 @@ export const HUNTING_DIETS = {
     "octopus",
   ],
   "polar-bear": [
+    "person",
     ...smallGroundHunters,
     ...small,
     ...pasture,
@@ -200,6 +201,7 @@ export const HUNTING_DIETS = {
     "penguin",
   ],
   jaguar: [
+    "person",
     ...smallGroundHunters,
     ...small,
     ...pasture,
@@ -210,6 +212,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   leopard: [
+    "person",
     ...smallGroundHunters,
     ...small,
     ...pasture,
@@ -241,8 +244,9 @@ export const HUNTING_DIETS = {
     "king-cobra",
   ],
   coyote: [...small, "fox"],
-  wolf: [...smallGroundHunters, ...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
+  wolf: ["person", ...smallGroundHunters, ...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
   "spotted-hyena": [
+    "person",
     ...smallGroundHunters,
     ...small,
     ...pasture,
@@ -252,6 +256,7 @@ export const HUNTING_DIETS = {
     "wolf",
   ],
   "dire-wolf": [
+    "person",
     ...smallGroundHunters,
     "panda",
     "musk-ox",
@@ -265,6 +270,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   panther: [
+    "person",
     ...smallGroundHunters,
     ...smallerCats,
     ...small,
@@ -277,6 +283,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   tiger: [
+    "person",
     ...smallGroundHunters,
     "panda",
     ...heavyBovids,
@@ -294,6 +301,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   lion: [
+    "person",
     ...smallGroundHunters,
     "panda",
     ...heavyBovids,
@@ -311,6 +319,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "brown-bear": [
+    "person",
     ...smallGroundHunters,
     "panda",
     ...heavyBovids,
@@ -329,6 +338,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   griffin: [
+    "person",
     ...smallGroundHunters,
     "panda",
     ...felids,
@@ -344,6 +354,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    "person",
     ...smallGroundHunters,
     "rhinoceros",
     "hippopotamus",
@@ -369,6 +380,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    "person",
     ...smallGroundHunters,
     "rhinoceros",
     "hippopotamus",
@@ -410,6 +422,9 @@ const identities = new Map<string, string>([
     (species) => [`wildlife-${species}-predator-v1`, species] as const,
   ),
   ...["chicken", "cow", "pigeon", "crow", "seagull"].map((species) => [species, species] as const),
+  ...Array.from({ length: 20 }, (_, i) => [`person${i + 1}`, "person"] as const),
+  ...["reader", "diner", "cleaner", "chef"].map((role) => [`indoor-${role}`, "person"] as const),
+  ["character-person-v1", "person"],
   ["pigeon2", "pigeon"],
   ["fish1", "fish"],
   ["fish2", "fish"],
@@ -426,8 +441,9 @@ const diets = new Map<string, ReadonlySet<string>>(
   Object.entries(HUNTING_DIETS).map(([species, prey]) => [species, new Set(prey)]),
 );
 
-/** Every recognized animal has an identity, including safe pets and aquatic fauna.
- * Unknown types (players, characters, vehicles, props) are never food. */
+/** Recognized animals and NPC people have food-web identities.
+ * Controlled players retain type "player" regardless of their appearance.
+ * Other character types, vehicles and props are never food. */
 export const creatureSpecies = (entity: Pick<Entity, "type">): string | undefined =>
   identities.get(entity.type);
 export function dietFor(species: string): ReadonlySet<string> {
@@ -439,6 +455,7 @@ export function canEat(hunter: Entity, prey: Entity): boolean {
   const species = creatureSpecies(prey),
     predator = creatureSpecies(hunter);
   return (
+    prey.type !== "player" &&
     !!species &&
     !!predator &&
     hunter !== prey &&

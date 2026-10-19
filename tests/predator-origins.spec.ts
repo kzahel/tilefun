@@ -9,6 +9,11 @@ for (const pair of [
   { name: "deer", prey: DEER_TYPE, hunter: predatorType("tiger") },
   { name: "wolf", prey: predatorType("wolf"), hunter: predatorType("t-rex") },
   { name: "brown bear", prey: predatorType("brown-bear"), hunter: predatorType("t-rex") },
+  { name: "street person", prey: "person1", hunter: predatorType("tiger") },
+  { name: "another street person", prey: "person20", hunter: predatorType("lion") },
+  { name: "Trail Explorer NPC", prey: "character-person-v1", hunter: predatorType("small-dragon") },
+  { name: "indoor resident", prey: "indoor-reader", hunter: predatorType("brown-bear") },
+  { name: "person hunted by a dinosaur", prey: "person10", hunter: predatorType("t-rex") },
 ])
   test(`a player-placed ${pair.name} is eaten without replacement in the real Worker world and stays gone on reload`, async ({
     page,
@@ -28,6 +33,7 @@ for (const pair of [
       ({ prey, hunter }) => {
         const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
         const p = g.stateView.playerEntity.position;
+        g.transport.send({ type: "set-player-model", requestId: 731, model: "person1" });
         g.debugPanel.paused = true;
         g.transport.send({ type: "set-debug", paused: true, noclip: false });
         // Isolate meal provenance from unrelated starter-world prey.
@@ -57,6 +63,12 @@ for (const pair of [
       g.transport.send({ type: "set-debug", paused: false, noclip: false });
     });
     await expect.poll(population, { timeout: 20000 }).toEqual({ prey: 0, hunter: 1 });
+    expect(
+      await page.evaluate(() => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        return { type: g.stateView.playerEntity.type, model: g.stateView.playerEntity.playerModel };
+      }),
+    ).toEqual({ type: "player", model: "person1" });
     await page.evaluate(async () => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       g.loop.stop();

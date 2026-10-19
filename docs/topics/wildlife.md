@@ -6,6 +6,48 @@ The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
 Updated: 2026-10-19.
 
+## Large predators can eat NPC people
+
+Owner request, 2026-10-19: big predators can eat NPC people, while every
+human-controlled player stays safe. The explicit food web now admits all twenty
+street-person types, Trail Explorer and the four indoor human roles as `person`
+prey for T. rex, dragon, brown/polar bears, lion, tiger, panther, jaguar, leopard,
+wolf, spotted hyena, dire wolf and griffin. Small hunters, aquatic hunters and herbivores do
+not gain human prey. Other approved character NPCs keep their existing behavior.
+
+Eligibility uses the actor's actual type, never its sprite, player model, weight
+or generic `npc` tag. Controlled actors retain type `player`, including co-op
+players and every selectable character appearance, and fail both acquisition
+and catch checks. Following buddies and attached/ridden actors retain protection.
+Ordinary shared Realm pursuit, scare/flee behavior, body contact, terrain/height
+checks, feeding and cooldowns handle these meals in the game and embedded labs.
+NPC people flee at 1.5× walking speed so the named predators can catch them;
+their previous ball-hit panic runs at 3×, faster than lions/tigers/bears. The
+optional scare-speed override clears on calming down or a new ball hit. Ordinary
+walking, predator speeds and ball-hit panic retain their previous behavior.
+
+Eaten people use normal durable deletion and procedural tombstones. They do not
+enter the animal-only delayed replacement queue, which would discard resident
+homes/routes. No new art or review approval is involved.
+
+[PeoplePredation tests](../../src/wildlife/PeoplePredation.test.ts) cover every
+NPC type against every predator, every player appearance at acquisition/catch,
+following/attachment and physical protections, scare recovery/ball hits and
+fifteen real Realm hunts with saved deletion. The real Worker browser checks
+also place NPC people beside the five named predators while the controlled
+player wears a human appearance. The older predator feeding checks now assert
+the existing delayed animal-return contract rather than an immediate replacement.
+
+Validation: all 4,463 unit tests pass, plus 94 distinct browser cases across the
+predator gameplay, origins, world, fierce-creature and food-chain suites (89
+existing cases and five added NPC cases). Typecheck, lint and production build
+pass; lint retains existing warnings. The art catalog and 1,391-candidate
+Workshop manifest are regenerated. Next: playtest the new NPC pursuit pacing.
+
+The production-table refresh cannot run in this checkout: its required local
+`data/wildlife-campaign-v2/progress.json` is absent. The existing table is retained;
+the status command and failure are recorded rather than inventing campaign state.
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

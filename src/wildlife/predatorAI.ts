@@ -10,7 +10,7 @@ import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { startleDeer } from "./deerInteractions.js";
-import { canEat } from "./FoodWeb.js";
+import { canEat, creatureSpecies } from "./FoodWeb.js";
 import { startleFauna } from "./faunaInteractions.js";
 import { startleFrog } from "./frogInteractions.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
@@ -57,6 +57,9 @@ function alarmPrey(prey: Entity, from: PositionComponent): void {
   else if (prey.wanderAI) {
     prey.wanderAI.state = "scared";
     prey.wanderAI.scaredTimer = 2;
+    // People run from predators, but ball-hit panic (3x walking speed) would
+    // make them faster than lions, tigers and bears throughout every pursuit.
+    if (creatureSpecies(prey) === "person") prey.wanderAI.scaredSpeed = prey.wanderAI.speed * 1.5;
     const dx = prey.position.wx - from.wx,
       dy = prey.position.wy - from.wy,
       d = Math.hypot(dx, dy) || 1;
@@ -450,8 +453,8 @@ export function updatePredatorAI(
   restorePredatorPose(e);
 }
 
-/** Called after collision resolution. Only world-origin prey receives a new
- * durable replacement; player-created prey and ordinary deletions stay gone. */
+/** Called after collision resolution. Only world-origin animals receive a new
+ * durable replacement; NPC people, placed prey and ordinary deletions stay gone. */
 export function resolvePredatorCatches(
   manager: EntityManager,
   active: readonly Entity[],
@@ -479,7 +482,12 @@ export function resolvePredatorCatches(
       continue;
     if (bodyGap(hunter, prey) > 3 || !clearPath(hunter, prey.position, env)) continue;
     const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
-    if (naturalSpawnId && !scheduleWildlifeRespawn(manager, prey, () => random(hunter))) continue;
+    if (
+      naturalSpawnId &&
+      creatureSpecies(prey) !== "person" &&
+      !scheduleWildlifeRespawn(manager, prey, () => random(hunter))
+    )
+      continue;
     manager.remove(prey.id);
     ai.meals++;
     ai.cooldown = 35 + random(hunter) * 20;

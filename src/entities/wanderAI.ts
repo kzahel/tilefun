@@ -22,6 +22,7 @@ export function updateWanderAI(
     if (ai.scaredTimer <= 0) {
       // Calm down — return to idle
       delete ai.scaredTimer;
+      delete ai.scaredSpeed;
       ai.state = "idle";
       ai.timer = ai.idleMin + random() * (ai.idleMax - ai.idleMin);
       ai.dirX = 0;
@@ -41,7 +42,7 @@ export function updateWanderAI(
       ai.dirY = Math.sin(angle);
     }
 
-    const scaredSpeed = ai.speed * BALL_SCARE_SPEED_MULT;
+    const scaredSpeed = ai.scaredSpeed ?? ai.speed * BALL_SCARE_SPEED_MULT;
     vel.vx = ai.dirX * scaredSpeed;
     vel.vy = ai.dirY * scaredSpeed;
     if (entity.sprite) {

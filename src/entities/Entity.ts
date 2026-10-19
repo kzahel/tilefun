@@ -106,6 +106,8 @@ export interface WanderAIComponent {
   rideSpeed?: number;
   /** Remaining seconds of scared behavior after being hit by a ball (server-only). */
   scaredTimer?: number;
+  /** Optional escape speed in px/s; absent uses the ordinary ball-hit panic speed. */
+  scaredSpeed?: number;
 }
 
 export interface Entity {
