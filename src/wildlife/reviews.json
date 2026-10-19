@@ -13849,5 +13849,98 @@
         "sha256": "0e2b5322a4f81fbaeeae3e356cb64bedf0d295bff9664792b95fbab28dca8b13"
       }
     ]
+  },
+  {
+    "id": "gorilla-shoulder-study-v1",
+    "animalId": "gorilla",
+    "revision": "shoulder-study-v1",
+    "name": "Gorilla · shoulder study",
+    "batchId": "wildlife-v2-gorilla-shoulder-study",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/gorilla/shoulder-study-v1/",
+    "sheet": {
+      "id": "wildlife-v2-gorilla-shoulder-study-v1",
+      "name": "Gorilla sheet",
+      "image": "demos/wildlife-v2/gorilla/shoulder-study-v1/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ab30dd90ea43f73b48e3a9fd6a06f70aa4e0f1ad81d5645179d884d2c6f6fa19",
+      "source": "art-source/wildlife-v2/gorilla/shoulder-study-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-gorilla-shoulder-study-v1-scene",
+      "name": "Gorilla scene",
+      "image": "demos/wildlife-v2/gorilla/shoulder-study-v1/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "e8e1061a47291fa29794995c207403a5eae755a76b322de565af1b62b15a8ba1",
+      "source": "art-source/wildlife-v2/gorilla/shoulder-study-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-gorilla-shoulder-study-v1-contact",
+      "name": "Gorilla contact",
+      "image": "demos/wildlife-v2/gorilla/shoulder-study-v1/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8654d2c012d58ed32d0d75693310eb3bff39221829662a27757534dfa06573e9",
+      "source": "art-source/wildlife-v2/gorilla/shoulder-study-v1"
+    },
+    "preview": "demos/wildlife-v2/gorilla/shoulder-study-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/contact-sheet-native.png",
+        "sha256": "8654d2c012d58ed32d0d75693310eb3bff39221829662a27757534dfa06573e9"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/index.html",
+        "sha256": "8253e0fe57e308ae3848faab67aa2b40eb1d92b5b915c72889ec53b47e2cd6cd"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/pixel-audit.json",
+        "sha256": "1c7550a3747bb7ac701e74c441c3e655ab62642f0b868b849a6ccd764fcf9a85"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/preview-native.gif",
+        "sha256": "81905f153ce27121bc0e594549a3ddcb760b3a62e569c5880b8f7ac7302bee0b"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/preview.gif",
+        "sha256": "e3f6471e362ca0f360d8bd60157602d732cf80b542551118a11f455a2efe66d7"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/scene-background.png",
+        "sha256": "158431b6dcc3079fc724e7317c5ab7c303246e0a98844127e03f0688c3bb8200"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/scene-native.png",
+        "sha256": "e8e1061a47291fa29794995c207403a5eae755a76b322de565af1b62b15a8ba1"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/sheet.png",
+        "sha256": "ab30dd90ea43f73b48e3a9fd6a06f70aa4e0f1ad81d5645179d884d2c6f6fa19"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/source-audit.json",
+        "sha256": "b6539b142f41eb295901985f7ba7a2c30af4835fb76d752626b00b19612479fc"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/sprite.json",
+        "sha256": "ecb8913076ae7ab0f112eff19792cf1c6a5968d58f24d32ab6ed27aa13d88fe4"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/travel-native.gif",
+        "sha256": "65cfe4f40cd1a279a633e053de0a02b2ecaedfb45b40dd1b3ad622d122591029"
+      },
+      {
+        "path": "demos/wildlife-v2/gorilla/shoulder-study-v1/validation.json",
+        "sha256": "aeadfcaf1f9371e74a518c2409f2902483ae15a4e6db40f7b66ce58b58aebcaa"
+      }
+    ]
   }
 ]

@@ -37,7 +37,7 @@ export function writeStatus() {
             : task.state === "in-progress"
               ? "In progress"
               : task.state === "blocked"
-                ? "Blocked"
+                ? "Previous draft rejected"
                 : task.state === "out-of-scope"
                   ? "Out of scope"
                   : "Queued";
@@ -48,7 +48,7 @@ export function writeStatus() {
     Paused: 1,
     "Draft ready": 0,
     "In progress": 1,
-    Blocked: 2,
+    "Previous draft rejected": 2,
     "Receipt needs checking": 3,
     Queued: 4,
     "Out of scope": 5,
@@ -61,9 +61,9 @@ export function writeStatus() {
     "",
     "Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.",
     "",
-    "Draft ready means retained sprite sheets/animation sources and a validated production-review receipt. It does not mean the animal is integrated into gameplay or human-approved. Preview links open the actual local animation files. Blocked attempts are retained and never counted as ready.",
+    "Draft ready means retained sprite sheets/animation sources and a validated production-review receipt. It does not mean the animal is integrated into gameplay or human-approved. Preview links open the actual local animation files. Previous draft rejected means that historical revision failed its visual checks. It is retained as evidence, not a current work blocker; consult the latest run above for current progress.",
     "",
-    `**${result.valid}/${result.total} draft ready; ${counts["Motion review required"] ?? 0} require motion review; ${counts["In progress"] ?? 0} in progress; ${counts.Paused ?? 0} paused; ${counts.Blocked ?? 0} blocked; ${counts.Queued ?? 0} queued.**`,
+    `**${result.valid}/${result.total} draft ready; ${counts["Motion review required"] ?? 0} require motion review; ${counts["In progress"] ?? 0} in progress; ${counts.Paused ?? 0} paused; ${counts["Previous draft rejected"] ?? 0} previous drafts rejected; ${counts.Queued ?? 0} queued.**`,
     ...(result.productionHold && result.productionHold.active !== false
       ? [
           "",
@@ -79,9 +79,9 @@ export function writeStatus() {
     "",
     `[Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/060-wildlife-fresh-production.md)${sessionLink}`,
     "",
-    "## Current work, motion holds and blocked attempts",
+    "## Historical work and rejected drafts",
     "",
-    "| Animal | State | Current stage / reason |",
+    "| Animal | Historical state | Recorded stage / reason |",
     "| --- | --- | --- |",
   ];
   for (const task of tasks.filter((t) => !t.valid && t.state !== "queued")) {
@@ -97,7 +97,7 @@ export function writeStatus() {
   }
   lines.push(
     "",
-    "## Whole roster",
+    "## Historical whole roster",
     "",
     "| Animal | Family | State | Revision | Ready animations | Preview / inspection |",
     "| --- | --- | --- | --- | --- | --- |",
@@ -156,7 +156,7 @@ export function writeStatus() {
       }),
       "",
     ];
-    lines.splice(lines.indexOf("## Whole roster"), 0, ...section);
+    lines.splice(lines.indexOf("## Historical whole roster"), 0, ...section);
   }
   if (existsSync(resolve(ROOT, "art-source/wildlife-v2/tiger-batch.json"))) {
     const batch = read("art-source/wildlife-v2/tiger-batch.json");
@@ -167,7 +167,7 @@ export function writeStatus() {
       ? `[Playback](../${base}/index.html) · [Observations](../${base}/review-observations.md)`
       : "-";
     lines.splice(
-      lines.indexOf("## Whole roster"),
+      lines.indexOf("## Historical whole roster"),
       0,
       "## Authorized tiger pilot",
       "",
@@ -182,7 +182,7 @@ export function writeStatus() {
   if (existsSync(resolve(ROOT, "art-source/wildlife-v2/predator-batch.json"))) {
     const batch = read("art-source/wildlife-v2/predator-batch.json");
     lines.splice(
-      lines.indexOf("## Whole roster"),
+      lines.indexOf("## Historical whole roster"),
       0,
       "## Authorized predator gameplay and art",
       "",
@@ -207,7 +207,7 @@ export function writeStatus() {
   if (existsSync(resolve(ROOT, "art-source/wildlife-v2/fantasy-batch.json"))) {
     const batch = read("art-source/wildlife-v2/fantasy-batch.json");
     lines.splice(
-      lines.indexOf("## Whole roster"),
+      lines.indexOf("## Historical whole roster"),
       0,
       "## Authorized fierce creatures",
       "",
@@ -225,7 +225,7 @@ export function writeStatus() {
   if (existsSync(resolve(ROOT, "art-source/wildlife-v2/horse-motion-study.json"))) {
     const study = read("art-source/wildlife-v2/horse-motion-study.json");
     lines.splice(
-      lines.indexOf("## Whole roster"),
+      lines.indexOf("## Historical whole roster"),
       0,
       "## Focused horse motion study",
       "",
@@ -240,7 +240,7 @@ export function writeStatus() {
   if (existsSync(resolve(ROOT, "art-source/wildlife-v2/long-legged-repairs.json"))) {
     const repairs = read("art-source/wildlife-v2/long-legged-repairs.json");
     lines.splice(
-      lines.indexOf("## Whole roster"),
+      lines.indexOf("## Historical whole roster"),
       0,
       "## Completed horse and giraffe motion repairs",
       "",
@@ -268,7 +268,7 @@ export function writeStatus() {
       "",
       `[Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline ${clean(run.deadlineUtc)}. State: ${clean(run.state)}.`,
       "",
-      `**${finished.length} newly completed; ${active.length} in progress; ${entries.filter(([, t]) => t.state === "queued").length} queued; ${entries.filter(([, t]) => t.state === "already-completed").length} completed before this run.** Final pixels retain their own human-review status.`,
+      `**${finished.length} newly completed; ${active.length} in progress; ${entries.filter(([, t]) => t.state === "blocked").length} currently blocked; ${entries.filter(([, t]) => t.state === "queued").length} queued; ${entries.filter(([, t]) => t.state === "already-completed").length} completed before this run.** Final pixels retain their own human-review status.`,
       "",
       "| Animal | Current state | Inspection |",
       "| --- | --- | --- |",
@@ -280,6 +280,22 @@ export function writeStatus() {
         ),
       "",
       "## Historical campaign snapshot",
+      "",
+      "The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.",
+      "",
+    );
+  }
+  if (existsSync(resolve(ROOT, "art-source/wildlife-v2/gorilla-shoulder-study.json"))) {
+    const study = read("art-source/wildlife-v2/gorilla-shoulder-study.json");
+    const historical = lines.indexOf("## Historical campaign snapshot");
+    lines.splice(
+      historical < 0 ? 2 : historical,
+      0,
+      "## Current gorilla shoulder study",
+      "",
+      `Owner-requested focused revision: ${clean(study.state)}. The silver saddle follows the torso surface and the shoulder contour is lower. New pixels await human review.`,
+      "",
+      `Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/${study.revision}/index.html) · [Source and checks](../art-source/wildlife-v2/gorilla/${study.revision}/README.md). Gameplay still uses the preserved roster-v2 bank.`,
       "",
     );
   }

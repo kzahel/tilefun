@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: timebox-complete.
 
-**106 newly completed; 0 in progress; 74 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**106 newly completed; 0 in progress; 0 currently blocked; 74 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -115,15 +115,23 @@
 | Grasshopper | finished-game-active | [Playback](../public/demos/wildlife-v2/grasshopper/roster-v2/index.html) |
 | Cricket | finished-game-active | [Playback](../public/demos/wildlife-v2/cricket/roster-v2/index.html) |
 
+## Current gorilla shoulder study
+
+Owner-requested focused revision: review-ready. The silver saddle follows the torso surface and the shoulder contour is lower. New pixels await human review.
+
+Gorilla · [Animation](../public/demos/wildlife-v2/gorilla/shoulder-study-v1/index.html) · [Source and checks](../art-source/wildlife-v2/gorilla/shoulder-study-v1/README.md). Gameplay still uses the preserved roster-v2 bank.
+
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T04:05:24.348Z (19/10/2026, 06:05:24 Berlin).
+The records below describe earlier revisions. Rejected drafts and old production holds do not override the current work ledger above.
+
+Snapshot: 2026-10-19T05:11:36.652Z (19/10/2026, 07:11:36 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
-Draft ready means retained sprite sheets/animation sources and a validated production-review receipt. It does not mean the animal is integrated into gameplay or human-approved. Preview links open the actual local animation files. Blocked attempts are retained and never counted as ready.
+Draft ready means retained sprite sheets/animation sources and a validated production-review receipt. It does not mean the animal is integrated into gameplay or human-approved. Preview links open the actual local animation files. Previous draft rejected means that historical revision failed its visual checks. It is retained as evidence, not a current work blocker; consult the latest run above for current progress.
 
-**11/196 draft ready; 11 require motion review; 0 in progress; 0 paused; 8 blocked; 0 queued.**
+**11/196 draft ready; 11 require motion review; 0 in progress; 0 paused; 8 previous drafts rejected; 0 queued.**
 
 **Historical campaign paused:** Only existing frozen-torso repairs are authorized. New animal production is canceled; sheep/pig correction review precedes any other existing repairs. The separately authorized four-pet batch is tracked below.
 
@@ -131,9 +139,9 @@ Draft ready means retained sprite sheets/animation sources and a validated produ
 
 [Overall decisions and evidence](topics/wildlife.md) · [Execution history](tactical/060-wildlife-fresh-production.md) · [Latest session activity](../data/wildlife-campaign-v2/background-02-worker/checkpoint.md)
 
-## Current work, motion holds and blocked attempts
+## Historical work and rejected drafts
 
-| Animal | State | Current stage / reason |
+| Animal | Historical state | Recorded stage / reason |
 | --- | --- | --- |
 | Red fox | Motion review required | Owner rejected stationary-torso walks; this walker needs coordinator re-review against the revised body-motion contract. Existing art and receipt preserved. |
 | African elephant | Motion review required | Owner rejected stationary-torso walks; this walker needs coordinator re-review against the revised body-motion contract. Existing art and receipt preserved. |
@@ -146,14 +154,14 @@ Draft ready means retained sprite sheets/animation sources and a validated produ
 | Horse | Motion review required | Owner rejected stationary-torso walks; this walker needs coordinator re-review against the revised body-motion contract. Existing art and receipt preserved. |
 | Pig | Motion review required | Owner rejected stationary-torso walks; this walker needs coordinator re-review against the revised body-motion contract. Existing art and receipt preserved. |
 | Goat | Motion review required | Owner rejected stationary-torso walks; this walker needs coordinator re-review against the revised body-motion contract. Existing art and receipt preserved. |
-| Butterfly | Blocked | Opened all92 frames and all native/4x actual chronological two-walk/two-flutter/action/idle sequences. Down walk nearly stationary and front/rear upright wing silhouette dark fork with weak body/antennae. Integrity1104 limb/224 contacts/92 head/336 browser checks passes but visual gate fails. Retained source/output/rejected evidence and precise public review-observations; no registration or ready receipt. Family siblings stay locked. |
-| Gorilla | Blocked | Final geometry04/drawing03 all40 actual Chromium states4facings both scales inspected348samples13.524/13.503s. Integrity passes736limbs1472digits240contacts52head52body; quality fails profile pack-like upper back and crouched face-adjacent chest action/weak rear display. Full current sources/audits/review retained; no registration/ready receipt/sibling gate. |
-| Crab | Blocked | All68 poses plus all30 actual chronological states each facing native4x opened. Shell stable and proper elevated projection, but front pincers collapse cream bracket, rear action barely reads, profile claws/leg fringes buglike. Fresh-process1632 leg links480 groundtips and266 actual Chromium frames integrity pass; no ready receipt or registration. |
-| Octopus | Blocked | All68 poses plus30 actual chronological states all4facings bothscales opened,266 browser10.311/10.303s. Thin radial idle spiderlike/small mantle, diagonal tips fragment and front armcurl overlaps; jet mostly arm gathering because collar stroke invisible. Source247meshes4352links6528cupchecks16796 water bounds and24file replay1064pixel checks pass. No ready receipt, registry or family unlock. |
-| Jellyfish | Blocked | All64 poses and all29 actual native4x timelines inspected. Opaque badge/saucer silhouette, stiff short arm fringe, collapsed horseshoes and weak front action fail despite source/replay passes. Unregistered; no family unlock. |
-| Red squirrel | Blocked | Visual gate remains failed: rear contacts lost under rump/plume and profile plume too shallow. Only capture/playback formatting corrected for lint; exact original JS retained in red-squirrel-format-evidence, all art pixels/source geometry unchanged. Updated blocked evidence hashes; no ready receipt or registration. |
-| Brown bear | Blocked | Profile body remains flattened with narrow angled legs; rear anatomy and rake readability fail independent visual inspection despite source/replay/browser integrity passes. |
-| Chicken | Blocked | Front tail post and indistinct hen face; bare rear neck; geometry04/drawing03 integrity passes and all actual native/enlarged playback facings inspected, but style/anatomy visual gate fails. |
+| Butterfly | Previous draft rejected | Opened all92 frames and all native/4x actual chronological two-walk/two-flutter/action/idle sequences. Down walk nearly stationary and front/rear upright wing silhouette dark fork with weak body/antennae. Integrity1104 limb/224 contacts/92 head/336 browser checks passes but visual gate fails. Retained source/output/rejected evidence and precise public review-observations; no registration or ready receipt. Family siblings stay locked. |
+| Gorilla | Previous draft rejected | Final geometry04/drawing03 all40 actual Chromium states4facings both scales inspected348samples13.524/13.503s. Integrity passes736limbs1472digits240contacts52head52body; quality fails profile pack-like upper back and crouched face-adjacent chest action/weak rear display. Full current sources/audits/review retained; no registration/ready receipt/sibling gate. |
+| Crab | Previous draft rejected | All68 poses plus all30 actual chronological states each facing native4x opened. Shell stable and proper elevated projection, but front pincers collapse cream bracket, rear action barely reads, profile claws/leg fringes buglike. Fresh-process1632 leg links480 groundtips and266 actual Chromium frames integrity pass; no ready receipt or registration. |
+| Octopus | Previous draft rejected | All68 poses plus30 actual chronological states all4facings bothscales opened,266 browser10.311/10.303s. Thin radial idle spiderlike/small mantle, diagonal tips fragment and front armcurl overlaps; jet mostly arm gathering because collar stroke invisible. Source247meshes4352links6528cupchecks16796 water bounds and24file replay1064pixel checks pass. No ready receipt, registry or family unlock. |
+| Jellyfish | Previous draft rejected | All64 poses and all29 actual native4x timelines inspected. Opaque badge/saucer silhouette, stiff short arm fringe, collapsed horseshoes and weak front action fail despite source/replay passes. Unregistered; no family unlock. |
+| Red squirrel | Previous draft rejected | Visual gate remains failed: rear contacts lost under rump/plume and profile plume too shallow. Only capture/playback formatting corrected for lint; exact original JS retained in red-squirrel-format-evidence, all art pixels/source geometry unchanged. Updated blocked evidence hashes; no ready receipt or registration. |
+| Brown bear | Previous draft rejected | Profile body remains flattened with narrow angled legs; rear anatomy and rake readability fail independent visual inspection despite source/replay/browser integrity passes. |
+| Chicken | Previous draft rejected | Front tail post and indistinct hen face; bare rear neck; geometry04/drawing03 integrity passes and all actual native/enlarged playback facings inspected, but style/anatomy visual gate fails. |
 | Bee | Out of scope | In progress.  |
 | Ladybug | Out of scope | owner-motion-hold. Production interrupted after owner rigid-torso feedback. Preserve partial source; do not resume broad production before correction review. |
 | Owl | Out of scope | In progress.  |
@@ -380,7 +388,7 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | horse | finished-game-active · [Playback](../public/demos/wildlife-v2/horse/motion-v2/index.html) | Active |
 | giraffe | finished-game-active · [Playback](../public/demos/wildlife-v2/giraffe/motion-v2/index.html) | Active |
 
-## Whole roster
+## Historical whole roster
 
 | Animal | Family | State | Revision | Ready animations | Preview / inspection |
 | --- | --- | --- | --- | --- | --- |
@@ -406,14 +414,14 @@ Separate from the historical roster and its stopped queue. [Scope and evidence](
 | Horse | Farm & livestock | Motion review required | draft-v1 | - | [Needs motion review](../public/demos/wildlife-v2/horse/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/horse/draft-v1/review-observations.md) |
 | Pig | Farm & livestock | Motion review required | draft-v1 | - | [Needs motion review](../public/demos/wildlife-v2/piglet/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/piglet/draft-v1/review-observations.md) |
 | Goat | Farm & livestock | Motion review required | draft-v1 | - | [Needs motion review](../public/demos/wildlife-v2/goat/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/goat/draft-v1/review-observations.md) |
-| Butterfly | Insects & arthropods | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/butterfly/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/butterfly/draft-v1/review-observations.md) |
-| Gorilla | Primates | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/gorilla/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/gorilla/draft-v1/review-observations.md) |
-| Crab | Marine & aquatic | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/crab/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/crab/draft-v1/review-observations.md) |
-| Octopus | Marine & aquatic | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/octopus/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/octopus/draft-v1/review-observations.md) |
-| Jellyfish | Marine & aquatic | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/jellyfish/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/jellyfish/draft-v1/review-observations.md) |
-| Red squirrel | Small & exotic mammals | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/red-squirrel/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/red-squirrel/draft-v1/review-observations.md) |
-| Brown bear | Bears | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/bear/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/bear/draft-v1/review-observations.md) |
-| Chicken | Birds | Blocked | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/chicken/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/chicken/draft-v1/review-observations.md) |
+| Butterfly | Insects & arthropods | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/butterfly/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/butterfly/draft-v1/review-observations.md) |
+| Gorilla | Primates | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/gorilla/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/gorilla/draft-v1/review-observations.md) |
+| Crab | Marine & aquatic | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/crab/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/crab/draft-v1/review-observations.md) |
+| Octopus | Marine & aquatic | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/octopus/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/octopus/draft-v1/review-observations.md) |
+| Jellyfish | Marine & aquatic | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/jellyfish/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/jellyfish/draft-v1/review-observations.md) |
+| Red squirrel | Small & exotic mammals | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/red-squirrel/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/red-squirrel/draft-v1/review-observations.md) |
+| Brown bear | Bears | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/bear/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/bear/draft-v1/review-observations.md) |
+| Chicken | Birds | Previous draft rejected | draft-v1 | - | [Unaccepted attempt](../public/demos/wildlife-v2/chicken/draft-v1/preview.gif) · [Notes](../public/demos/wildlife-v2/chicken/draft-v1/review-observations.md) |
 | Bee | Insects & arthropods | Out of scope | - | - | - |
 | Ladybug | Insects & arthropods | Out of scope | draft-v1 | - | - |
 | Owl | Birds | Out of scope | - | - | - |

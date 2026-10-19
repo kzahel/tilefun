@@ -554,6 +554,12 @@
       "toolId": "wildlife-v2"
     },
     {
+      "id": "wildlife-v2-gorilla-shoulder-study",
+      "name": "Wildlife · gorilla-shoulder-study",
+      "description": "Fresh elevated-view animal art and motion; human approval pending.",
+      "toolId": "wildlife-v2"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -26243,6 +26249,48 @@
       }
     },
     {
+      "id": "pattern:wildlife-v2-gorilla-shoulder-study-v1",
+      "batchId": "wildlife-v2-gorilla-shoulder-study",
+      "kind": "wildlife",
+      "name": "Gorilla · shoulder study",
+      "prompt": "Inspect native scale, elevated perspective, rear anatomy, head volume and near/far foot contacts. Open playback for full walking and action cycles.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-gorilla-shoulder-study-v1",
+      "fingerprint": "9ac0ecda8bce19359032a7730c5aef73fbd4265e3fc8ca83c80de40661e36742",
+      "sourceFingerprint": "ab30dd90ea43f73b48e3a9fd6a06f70aa4e0f1ad81d5645179d884d2c6f6fa19",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-v2-gorilla-shoulder-study-v1",
+        "prefabIds": [],
+        "revision": "1a32e479d95266f199172a967627c35c90da59fb6a54910d4b449dae77fd12a9",
+        "renderFingerprint": "9ac0ecda8bce19359032a7730c5aef73fbd4265e3fc8ca83c80de40661e36742",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-gorilla-shoulder-study-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-v2-gorilla-shoulder-study-v1",
+        "fingerprint": "ab30dd90ea43f73b48e3a9fd6a06f70aa4e0f1ad81d5645179d884d2c6f6fa19",
+        "sheetSize": [
+          4704,
+          384
+        ],
+        "rect": [
+          0,
+          0,
+          4704,
+          384
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-v2-gorilla-shoulder-study-v1",
+          "prefabIds": [],
+          "revision": "1a32e479d95266f199172a967627c35c90da59fb6a54910d4b449dae77fd12a9",
+          "renderFingerprint": "9ac0ecda8bce19359032a7730c5aef73fbd4265e3fc8ca83c80de40661e36742",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-v2-gorilla-shoulder-study-v1"
+        }
+      }
+    },
+    {
       "id": "vehicle:compact-1:north",
       "batchId": "vehicles",
       "name": "Compact 1 · north",
@@ -40517,5 +40565,5 @@
       }
     }
   ],
-  "inputDigest": "fd6c752d29fca5cd811725e68a06b61c5599fd65bacca7111a8272fafaca3314"
+  "inputDigest": "65df3f1929f684ad633c2e51c1df3701ebfaded33eb43c76fff24f5c25920b4c"
 }

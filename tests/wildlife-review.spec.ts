@@ -62,7 +62,8 @@ test("wildlife revisions preserve native pixels or block feedback on missing arc
         d.batchId.startsWith("wildlife-v2-supervised-") ||
         d.batchId === "wildlife-v2-common-pets-084" ||
         d.batchId === "wildlife-v2-tiger-131" ||
-        d.batchId === "wildlife-v2-predators-132",
+        d.batchId === "wildlife-v2-predators-132" ||
+        d.batchId === "wildlife-v2-gorilla-shoulder-study",
     );
     expect(pilots.length).toBeGreaterThan(0);
     for (const d of pilots) {

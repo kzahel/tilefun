@@ -523,3 +523,6 @@
 !parrot/roster-v2/*
 !toucan/roster-v2/*
 !great-hornbill/roster-v2/*
+
+# Owner-requested gorilla shoulder study, pending human review.
+!gorilla/shoulder-study-v1/*

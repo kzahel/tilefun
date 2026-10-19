@@ -1,0 +1,11 @@
+{
+  "identity": "gorilla-shoulder-study",
+  "authorization": "Owner requested one focused gorilla adjustment and animation on 2026-10-19",
+  "state": "review-ready",
+  "revision": "shoulder-study-v1",
+  "reviewStatus": "pending",
+  "gameplay": false,
+  "previousRevision": "roster-v2",
+  "change": "Lower shoulder contour and silver saddle conforming to the torso surface",
+  "receipt": "art-source/wildlife-v2/gorilla/shoulder-study-v1/receipt.json"
+}

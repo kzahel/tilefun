@@ -4326,6 +4326,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-gorilla-shoulder-study-v1",
+      "name": "wildlife v2 gorilla shoulder study v1",
+      "image": "demos/wildlife-v2/gorilla/shoulder-study-v1/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ab30dd90ea43f73b48e3a9fd6a06f70aa4e0f1ad81d5645179d884d2c6f6fa19",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",

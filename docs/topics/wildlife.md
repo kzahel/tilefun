@@ -6,6 +6,31 @@ The timed completion run adds verified repairs and new naturally spawning
 creatures. All changed art remains pending human review.
 Updated: 2026-10-19.
 
+## Focused gorilla shoulder review
+
+On 2026-10-19 the owner requested clearer historical rejection labels and one
+focused gorilla adjustment to inspect. The status generator now calls the eight
+old visual failures **Previous draft rejected**, keeps their evidence, and shows
+current blockers separately. Historical holds do not describe the latest banks.
+
+The [shoulder study](../../art-source/wildlife-v2/gorilla/shoulder-study-v1/README.md)
+lowers the shoulder contour and replaces the raised silver cap with a closed
+patch conforming to the actual torso surface. The existing fixed-volume limbs,
+planted knuckle gait, body weight transfer and alternating chest beat are retained.
+It has a separate pending review identity and preserves `roster-v2` gameplay.
+This explicit request is independent of the expired eight-hour authorization.
+The [study record](../../art-source/wildlife-v2/gorilla-shoulder-study.json) owns
+its current state. Next: owner inspection of the animation before further
+shape changes or selection for gameplay.
+
+Validation: the new bank replays ten artifacts byte-for-byte; both old and new
+gorilla receipts pass all 25 artifact checks each. Saved-scene checks retain
+2,112 fixed walk links, 416 ground contacts and 1,088 chest-beat links. Full
+Chromium verifies 392 exact crops at native/3x; all four Workshop browser cases
+pass, including this new candidate at retina scale. Typecheck/lint/build and
+1,380 manifest identities pass. Full units: 4,379 pass, ten skip; the five known
+Windows symlink/WAL failures and static-files symlink setup failure remain.
+
 ## Completed eight-hour completion run
 
 Window closed at 04:05 UTC after eight hours. 122/196 entries are implemented:
