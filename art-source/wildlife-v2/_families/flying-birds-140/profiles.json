@@ -1,0 +1,356 @@
+{
+  "pigeon": {
+    "label": "Pigeon",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.19,
+      0.23,
+      0.2
+    ],
+    "wingLength": 0.72,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 16,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#717c83",
+      "H": "#a0a8aa",
+      "C": "#8c6b92",
+      "M": "#616e73",
+      "N": "#252c2b",
+      "E": "#e3d17b",
+      "K": "#252e2f",
+      "T": "#d9a247",
+      "R": "#b14e3d"
+    }
+  },
+  "dove": {
+    "label": "Dove",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.19,
+      0.23,
+      0.2
+    ],
+    "wingLength": 0.68,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 16,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#c7bd9e",
+      "H": "#e8dfbf",
+      "C": "#e8dfbf",
+      "M": "#c7bd9e",
+      "N": "#252c2b",
+      "E": "#e3d17b",
+      "K": "#252e2f",
+      "T": "#d9a247",
+      "R": "#b14e3d"
+    }
+  },
+  "sparrow": {
+    "label": "Sparrow",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.19,
+      0.23,
+      0.2
+    ],
+    "wingLength": 0.55,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 18,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#8b6e49",
+      "H": "#bca37a",
+      "C": "#d4c3a0",
+      "M": "#72533b",
+      "N": "#252c2b",
+      "E": "#e3d17b",
+      "K": "#252e2f",
+      "T": "#d9a247",
+      "R": "#b14e3d"
+    }
+  },
+  "parrot": {
+    "label": "Parrot",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.19,
+      0.23,
+      0.2
+    ],
+    "wingLength": 0.8,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 16,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#4b965c",
+      "H": "#84bf66",
+      "C": "#c75b45",
+      "M": "#4b965c",
+      "N": "#252c2b",
+      "E": "#e3d17b",
+      "K": "#252e2f",
+      "T": "#d9a247",
+      "R": "#b14e3d"
+    }
+  },
+  "toucan": {
+    "label": "Toucan",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.19,
+      0.23,
+      0.2
+    ],
+    "wingLength": 0.78,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 16,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#303b3f",
+      "H": "#5d696a",
+      "C": "#e5d4a3",
+      "M": "#303b3f",
+      "N": "#252c2b",
+      "E": "#e3d17b",
+      "K": "#252e2f",
+      "T": "#d9a247",
+      "R": "#b14e3d"
+    }
+  },
+  "great-hornbill": {
+    "label": "Great hornbill",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.19,
+      0.23,
+      0.2
+    ],
+    "wingLength": 1.0,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 16,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#303c40",
+      "H": "#65716e",
+      "C": "#e6d8b2",
+      "M": "#e6d8b2",
+      "N": "#252c2b",
+      "E": "#e3d17b",
+      "K": "#252e2f",
+      "T": "#d9a247",
+      "R": "#b14e3d"
+    }
+  }
+}

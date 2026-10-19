@@ -1,0 +1,13 @@
+{
+  "identity": "axolotl-roster-v2-pixels-01",
+  "palette": {
+    "B": "#d9a9ab",
+    "H": "#f1d4c2",
+    "C": "#ebc2bd",
+    "M": "#9c526d",
+    "N": "#1d251e",
+    "E": "#e6d571",
+    "K": "#242b29"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

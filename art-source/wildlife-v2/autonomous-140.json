@@ -532,10 +532,14 @@
     "parrot": {
       "name": "Scarlet macaw",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T03:01:00Z"
+      "startedUtc": "2026-10-19T03:01:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/parrot/roster-v2/receipt.json",
+      "evidence": "164 poses; 1968 fixed leg links, 656 buried hips, 2592 shoulder/elbow attachments and 8 resting contacts; closed feather volumes; physical 800ms short flights with 10px height; fixed-pose tucking legs; ten-artifact replay; 328 exact crops; shared world/editor/save and airborne-meal origin checks; exact pixels pending review"
     },
     "coyote": {
       "name": "Coyote",
@@ -1113,10 +1117,14 @@
     "mongoose": {
       "name": "Mongoose",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:58:00Z"
+      "startedUtc": "2026-10-19T02:58:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/mongoose/roster-v2/receipt.json",
+      "evidence": "324 poses; 10496 fixed limb links, 2624 buried hips, 1968 tail checks, 1976 contacts/1376 planted travel pairs; native body motion; 40px/s chase with matched 14/12/16/14ms source clocks; byte-identical replay; 648 exact crops; real fleeing-prey and generated-population meals; directed cross-predator natural/manual replacement and exact Realm reload; exact pixels pending review"
     },
     "binturong": {
       "name": "Binturong",
@@ -1128,18 +1136,26 @@
     "honey-badger": {
       "name": "Honey badger",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:58:00Z"
+      "startedUtc": "2026-10-19T02:58:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/honey-badger/roster-v2/receipt.json",
+      "evidence": "324 poses; 10496 fixed limb links, 2624 buried hips, 1968 tail checks, 1976 contacts/1376 planted travel pairs; native body motion; 40px/s chase with matched 14/12/16/14ms source clocks; byte-identical replay; 648 exact crops; real fleeing-prey and generated-population meals; directed cross-predator natural/manual replacement and exact Realm reload; exact pixels pending review"
     },
     "fossa": {
       "name": "Fossa",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:58:00Z"
+      "startedUtc": "2026-10-19T02:58:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/fossa/roster-v2/receipt.json",
+      "evidence": "324 poses; 10496 fixed limb links, 2624 buried hips, 1968 tail checks, 1976 contacts/1376 planted travel pairs; native body motion; 40px/s chase with matched 14/12/16/14ms source clocks; byte-identical replay; 648 exact crops; real fleeing-prey and generated-population meals; directed cross-predator natural/manual replacement and exact Realm reload; exact pixels pending review"
     },
     "aye-aye": {
       "name": "Aye-aye",
@@ -1151,10 +1167,14 @@
     "white-nosed-coati": {
       "name": "White-nosed coati",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:58:00Z"
+      "startedUtc": "2026-10-19T02:58:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/white-nosed-coati/roster-v2/receipt.json",
+      "evidence": "324 poses; 10496 fixed limb links, 2624 buried hips, 1968 tail checks, 1976 contacts/1376 planted travel pairs; native body motion; 40px/s chase with matched 14/12/16/14ms source clocks; byte-identical replay; 648 exact crops; real fleeing-prey and generated-population meals; directed cross-predator natural/manual replacement and exact Realm reload; exact pixels pending review"
     },
     "kinkajou": {
       "name": "Kinkajou",
@@ -1237,18 +1257,26 @@
     "toucan": {
       "name": "Toucan",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T03:01:00Z"
+      "startedUtc": "2026-10-19T03:01:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/toucan/roster-v2/receipt.json",
+      "evidence": "164 poses; 1968 fixed leg links, 656 buried hips, 2592 shoulder/elbow attachments and 8 resting contacts; closed feather volumes; physical 800ms short flights with 10px height; fixed-pose tucking legs; ten-artifact replay; 328 exact crops; shared world/editor/save and airborne-meal origin checks; exact pixels pending review"
     },
     "great-hornbill": {
       "name": "Great hornbill",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T03:01:00Z"
+      "startedUtc": "2026-10-19T03:01:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/great-hornbill/roster-v2/receipt.json",
+      "evidence": "164 poses; 1968 fixed leg links, 656 buried hips, 2592 shoulder/elbow attachments and 8 resting contacts; closed feather volumes; physical 800ms short flights with 10px height; fixed-pose tucking legs; ten-artifact replay; 328 exact crops; shared world/editor/save and airborne-meal origin checks; exact pixels pending review"
     },
     "eagle": {
       "name": "Eagle",
@@ -1267,18 +1295,26 @@
     "pigeon": {
       "name": "Pigeon",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T03:01:00Z"
+      "startedUtc": "2026-10-19T03:01:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/pigeon/roster-v2/receipt.json",
+      "evidence": "164 poses; 1968 fixed leg links, 656 buried hips, 2592 shoulder/elbow attachments and 8 resting contacts; closed feather volumes; physical 800ms short flights with 10px height; fixed-pose tucking legs; ten-artifact replay; 328 exact crops; shared world/editor/save and airborne-meal origin checks; exact pixels pending review"
     },
     "dove": {
       "name": "Dove",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T03:01:00Z"
+      "startedUtc": "2026-10-19T03:01:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/dove/roster-v2/receipt.json",
+      "evidence": "164 poses; 1968 fixed leg links, 656 buried hips, 2592 shoulder/elbow attachments and 8 resting contacts; closed feather volumes; physical 800ms short flights with 10px height; fixed-pose tucking legs; ten-artifact replay; 328 exact crops; shared world/editor/save and airborne-meal origin checks; exact pixels pending review"
     },
     "raven": {
       "name": "Raven",
@@ -1325,10 +1361,14 @@
     "sparrow": {
       "name": "Sparrow",
       "family": "Birds",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T03:01:00Z"
+      "startedUtc": "2026-10-19T03:01:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/sparrow/roster-v2/receipt.json",
+      "evidence": "164 poses; 1968 fixed leg links, 656 buried hips, 2592 shoulder/elbow attachments and 8 resting contacts; closed feather volumes; physical 800ms short flights with 10px height; fixed-pose tucking legs; ten-artifact replay; 328 exact crops; shared world/editor/save and airborne-meal origin checks; exact pixels pending review"
     },
     "peacock": {
       "name": "Peacock",
@@ -1726,18 +1766,38 @@
     "pond-turtle": {
       "name": "Pond turtle",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:51:00Z"
+      "startedUtc": "2026-10-19T02:51:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/pond-turtle/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hips, counted toes, closed shell/scute/gill/frill volumes; 992 contacts/688 planted travel pairs; native moving body paint; frill floor guard; ten-artifact replay; 328 exact crops; shared world/lab/editor and origin checks; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "26148136d59b479f1af0ee2b944e72d46ab1aee44c8ee41929b0f631025045e6",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "land-tortoise": {
       "name": "Land tortoise",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:51:00Z"
+      "startedUtc": "2026-10-19T02:51:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/land-tortoise/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hips, counted toes, closed shell/scute/gill/frill volumes; 992 contacts/688 planted travel pairs; native moving body paint; frill floor guard; ten-artifact replay; 328 exact crops; shared world/lab/editor and origin checks; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "bbb2f3af7e54a0c1e1610d03e5d5aad64d1052a30f6bcc66cdc35372150085e8",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "crocodile": {
       "name": "Crocodile",
@@ -1763,34 +1823,74 @@
     "salamander": {
       "name": "Fire salamander",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:51:00Z"
+      "startedUtc": "2026-10-19T02:51:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/salamander/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hips, counted toes, closed shell/scute/gill/frill volumes; 992 contacts/688 planted travel pairs; native moving body paint; frill floor guard; ten-artifact replay; 328 exact crops; shared world/lab/editor and origin checks; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "68416508e3ef9a355957095a9e6d80a8a657de5096c2e40ed7e1e2f6fad8636f",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "newt": {
       "name": "Newt",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:51:00Z"
+      "startedUtc": "2026-10-19T02:51:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/newt/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hips, counted toes, closed shell/scute/gill/frill volumes; 992 contacts/688 planted travel pairs; native moving body paint; frill floor guard; ten-artifact replay; 328 exact crops; shared world/lab/editor and origin checks; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "8f71ce8c7e264ed929191e438412672dfb05f44a73d3deee579ddaec9fcb64f9",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "axolotl": {
       "name": "Axolotl",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:51:00Z"
+      "startedUtc": "2026-10-19T02:51:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/axolotl/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hips, counted toes, closed shell/scute/gill/frill volumes; 992 contacts/688 planted travel pairs; native moving body paint; frill floor guard; ten-artifact replay; 328 exact crops; shared world/lab/editor and origin checks; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "443927da44e8133f7231bb25ad8ca4b495632dad91a3c5fc3f255edb6d8223a8",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "frilled-neck-lizard": {
       "name": "Frilled-neck lizard",
       "family": "Reptiles & amphibians",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "startedUtc": "2026-10-19T02:51:00Z"
+      "startedUtc": "2026-10-19T02:51:00Z",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T04:02:31Z",
+      "receipt": "art-source/wildlife-v2/frilled-neck-lizard/roster-v2/receipt.json",
+      "evidence": "164 poses; 5248 fixed limb links, 1312 buried hips, counted toes, closed shell/scute/gill/frill volumes; 992 contacts/688 planted travel pairs; native moving body paint; frill floor guard; ten-artifact replay; 328 exact crops; shared world/lab/editor and origin checks; exact pixels pending review",
+      "interpolationEvidence": {
+        "sourceSha256": "d0ac0c4771d58061fb14e4a126b05c1f311eed4a87e9b3380a7fc44181805274",
+        "eighthPoseSamples": 322,
+        "maxEndpointGapNativePixels": 0.0273189219517022,
+        "minimumSoleWorldZ": 0.0
+      }
     },
     "texas-horned-lizard": {
       "name": "Texas horned lizard",
@@ -2253,6 +2353,28 @@
         "malayan-tapir"
       ],
       "validation": "Typecheck/lint/build, 1299-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full bounded units: 3942 pass, 5 known Windows failures, 10 skipped. 6 ten-artifact byte-identical replays and 1968 exact crops."
+    },
+    {
+      "utc": "2026-10-19T04:02:31Z",
+      "completed": [
+        "salamander",
+        "newt",
+        "axolotl",
+        "frilled-neck-lizard",
+        "land-tortoise",
+        "pond-turtle",
+        "mongoose",
+        "honey-badger",
+        "fossa",
+        "white-nosed-coati",
+        "pigeon",
+        "dove",
+        "sparrow",
+        "parrot",
+        "toucan",
+        "great-hornbill"
+      ],
+      "validation": "Typecheck/lint/build, 1379-candidate manifest, 60 browser cases and streaming --assert-ready pass. Full bounded units: 4338 pass, 5 known Windows failures, 10 skipped. 16 ten-artifact byte-identical replays and 6528 exact crops."
     }
   ],
   "existingOutsideRoster": [
@@ -2498,6 +2620,46 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/forest-herbivores-140/README.md"
+    },
+    "shelled-amphibians": {
+      "animals": [
+        "salamander",
+        "newt",
+        "axolotl",
+        "frilled-neck-lizard",
+        "land-tortoise",
+        "pond-turtle"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/shelled-amphibians-140/README.md"
+    },
+    "small-ground-hunters": {
+      "animals": [
+        "mongoose",
+        "honey-badger",
+        "fossa",
+        "white-nosed-coati"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/small-ground-hunters-140/README.md"
+    },
+    "flying-birds": {
+      "animals": [
+        "pigeon",
+        "dove",
+        "sparrow",
+        "parrot",
+        "toucan",
+        "great-hornbill"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/flying-birds-140/README.md"
     }
   }
 }

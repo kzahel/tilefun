@@ -1,0 +1,15 @@
+{
+  "identity": "dove-roster-v2-pixels-01",
+  "palette": {
+    "B": "#c7bd9e",
+    "H": "#e8dfbf",
+    "C": "#e8dfbf",
+    "M": "#c7bd9e",
+    "N": "#252c2b",
+    "E": "#e3d17b",
+    "K": "#252e2f",
+    "T": "#d9a247",
+    "R": "#b14e3d"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

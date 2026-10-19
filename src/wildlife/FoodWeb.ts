@@ -7,6 +7,12 @@ import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
 const birds = [
+  "dove",
+  "sparrow",
+  "parrot",
+  "toucan",
+  "great-hornbill",
+
   "kiwi",
   "kakapo",
   "wild-turkey",
@@ -19,6 +25,13 @@ const birds = [
   "seagull",
 ] as const;
 const small = [
+  "salamander",
+  "newt",
+  "axolotl",
+  "frilled-neck-lizard",
+  "land-tortoise",
+  "pond-turtle",
+
   "gecko",
   "iguana",
   "chameleon",
@@ -77,15 +90,79 @@ const pasture = [
   "alpaca",
 ] as const;
 
+const smallGroundHunters = ["mongoose", "honey-badger", "fossa", "white-nosed-coati"] as const;
 const smallerCats = ["cheetah", "lynx", "bobcat"] as const;
 const felids = ["jaguar", "leopard", ...smallerCats] as const;
 
 /** Explicit game food web. Direction means hunter â†’ prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  mongoose: [
+    "rabbit",
+    "mouse",
+    "rat",
+    "ant",
+    "bee",
+    "ladybug",
+    "grasshopper",
+    "cricket",
+    "king-cobra",
+    "frog",
+  ],
+  "honey-badger": [
+    "mongoose",
+    "rabbit",
+    "mouse",
+    "rat",
+    "ant",
+    "bee",
+    "ladybug",
+    "dragonfly",
+    "stag-beetle",
+    "grasshopper",
+    "cricket",
+    "king-cobra",
+    "frog",
+    "gecko",
+    "iguana",
+    "chameleon",
+    "texas-horned-lizard",
+    "salamander",
+    "newt",
+  ],
+  fossa: [
+    "mongoose",
+    "white-nosed-coati",
+    "rabbit",
+    "mouse",
+    "rat",
+    "chinchilla",
+    "hedgehog",
+    "red-squirrel",
+    "gecko",
+    "chameleon",
+  ],
+  "white-nosed-coati": [
+    "rabbit",
+    "mouse",
+    "rat",
+    "ant",
+    "bee",
+    "ladybug",
+    "dragonfly",
+    "stag-beetle",
+    "grasshopper",
+    "cricket",
+    "frog",
+    "gecko",
+    "chameleon",
+  ],
+
   dolphin: ["fish", "octopus", "crab"],
   narwhal: ["fish", "octopus", "crab"],
   shark: [
+    "pond-turtle",
+    "axolotl",
     "dolphin",
     "sea-turtle",
     "fish",
@@ -110,6 +187,7 @@ export const HUNTING_DIETS = {
     "octopus",
   ],
   "polar-bear": [
+    ...smallGroundHunters,
     ...small,
     ...pasture,
     "wolf",
@@ -121,8 +199,26 @@ export const HUNTING_DIETS = {
     "harbor-seal",
     "penguin",
   ],
-  jaguar: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
-  leopard: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
+  jaguar: [
+    ...smallGroundHunters,
+    ...small,
+    ...pasture,
+    ...smallerCats,
+    "fox",
+    "wolf",
+    "coyote",
+    "giant-spider",
+  ],
+  leopard: [
+    ...smallGroundHunters,
+    ...small,
+    ...pasture,
+    ...smallerCats,
+    "fox",
+    "wolf",
+    "coyote",
+    "giant-spider",
+  ],
   cheetah: [...small, ...lightAntelopes, "deer", "sheep", "goat", "piglet", "kangaroo", "alpaca"],
   lynx: [...small, "fox"],
   bobcat: [...small],
@@ -145,9 +241,18 @@ export const HUNTING_DIETS = {
     "king-cobra",
   ],
   coyote: [...small, "fox"],
-  wolf: [...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
-  "spotted-hyena": [...small, ...pasture, ...smallerCats, "fox", "coyote", "wolf"],
+  wolf: [...smallGroundHunters, ...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
+  "spotted-hyena": [
+    ...smallGroundHunters,
+    ...small,
+    ...pasture,
+    ...smallerCats,
+    "fox",
+    "coyote",
+    "wolf",
+  ],
   "dire-wolf": [
+    ...smallGroundHunters,
     "panda",
     "musk-ox",
     ...felids,
@@ -160,6 +265,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   panther: [
+    ...smallGroundHunters,
     ...smallerCats,
     ...small,
     ...pasture,
@@ -171,6 +277,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   tiger: [
+    ...smallGroundHunters,
     "panda",
     ...heavyBovids,
     ...felids,
@@ -187,6 +294,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   lion: [
+    ...smallGroundHunters,
     "panda",
     ...heavyBovids,
     ...felids,
@@ -203,6 +311,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "brown-bear": [
+    ...smallGroundHunters,
     "panda",
     ...heavyBovids,
     ...felids,
@@ -220,6 +329,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   griffin: [
+    ...smallGroundHunters,
     "panda",
     ...felids,
     ...small,
@@ -234,6 +344,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    ...smallGroundHunters,
     "rhinoceros",
     "hippopotamus",
     "panda",
@@ -258,6 +369,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    ...smallGroundHunters,
     "rhinoceros",
     "hippopotamus",
     "panda",

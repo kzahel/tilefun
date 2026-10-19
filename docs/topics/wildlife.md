@@ -8,11 +8,11 @@ Updated: 2026-10-19.
 
 ## Current eight-hour completion run
 
-Latest checkpoint: 03:18 UTC. 106 of the retained 196 entries are delivered
-(90 new this run, 16 preserved); 90 remain. Six forest herbivores now spawn with
-source-verified planted movement and ground foraging/escape. Six shelled/amphibian
-creatures and four small hunters are next, with six short-flight birds also ready
-for integration.
+Latest checkpoint: 04:02 UTC. 122 of the retained 196 entries are delivered
+(106 new this run, 16 preserved); 74 remain. The final sixteen additions include
+new shelled/amphibian animals, four small hunters with directed cross-predator
+meals, and six short-flight birds. Natural-only replacement, saved phase and
+shared world/lab/editor behavior are verified; 74 entries remain queued.
 Exact new art remains pending human review.
 
 The owner now explicitly authorizes all remaining animals in the retained

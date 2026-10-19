@@ -1,0 +1,13 @@
+{
+  "identity": "pond-turtle-roster-v2-pixels-01",
+  "palette": {
+    "B": "#4d7954",
+    "H": "#bdcb80",
+    "C": "#d6c69a",
+    "M": "#344e3d",
+    "N": "#1d251e",
+    "E": "#e6d571",
+    "K": "#242b29"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

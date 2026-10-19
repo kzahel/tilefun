@@ -1,0 +1,13 @@
+{
+  "identity": "land-tortoise-roster-v2-pixels-01",
+  "palette": {
+    "B": "#82704a",
+    "H": "#b5a36c",
+    "C": "#d6c69a",
+    "M": "#4b4b37",
+    "N": "#1d251e",
+    "E": "#e6d571",
+    "K": "#242b29"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

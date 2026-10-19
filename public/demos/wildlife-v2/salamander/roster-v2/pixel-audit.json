@@ -1,0 +1,17 @@
+{
+  "identity": "salamander-roster-v2-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6914744933612909,
+    "up": 1.1958689458689449,
+    "left": 1.1961538461538481,
+    "right": 1.2945595541015393
+  },
+  "rootTravelPixelsPerCycle": 5.76,
+  "plantedTravel": true
+}

@@ -35,8 +35,53 @@ describe.each(NATURAL_HUNTER_PROFILES)("$species natural source and ecology", (p
       const c = required(p.art.clips.find((c) => c.name === name));
       return (c.count * c.frameDuration) / 1000;
     };
-    expect(m.rootTravelPixelsPerCycle).toBeCloseTo(p.speed * duration("walk"), 6);
-    expect(m.chaseRootTravelPixelsPerCycle).toBeCloseTo(p.chaseSpeed * duration("chase"), 6);
+    let walkTravel = m.rootTravelPixelsPerCycle;
+    let chaseTravel = m.chaseRootTravelPixelsPerCycle;
+    if (walkTravel === undefined || chaseTravel === undefined) {
+      // This source family publishes measured travel in its pixel audit. Its
+      // faster chase retains the walk's spatial foot path; verify those actual
+      // source projections before using the same distance for both clocks.
+      const pixels = JSON.parse(readFileSync(`${base}/pixel-audit.json`, "utf8"));
+      const audit = JSON.parse(readFileSync(`${base}/source-audit.json`, "utf8"));
+      type Volume = { name: string; group: string; points: number[][] };
+      type Pose = { facing: string; clip: string; index: number; volumes: Volume[] };
+      const source = JSON.parse(
+        readFileSync(`art-source/wildlife-v2/${p.species}/${p.revision}/projection.json`, "utf8"),
+      ) as { records: Pose[] };
+      const walks = source.records.filter((r) => r.clip === "walk");
+      expect(walks).toHaveLength(128);
+      const bounds = (v: Volume) => [
+        Math.min(...v.points.map((xy) => required(xy[0]))),
+        Math.min(...v.points.map((xy) => required(xy[1]))),
+        Math.max(...v.points.map((xy) => required(xy[0]))),
+        Math.max(...v.points.map((xy) => required(xy[1]))),
+      ];
+      for (const walk of walks) {
+        const chase = required(
+          source.records.find(
+            (r) => r.clip === "chase" && r.facing === walk.facing && r.index === walk.index,
+          ),
+        );
+        const feet = walk.volumes.filter((v) => v.group === "foot");
+        expect(feet).toHaveLength(4);
+        for (const foot of feet) {
+          const target = bounds(required(chase.volumes.find((v) => v.name === foot.name)));
+          bounds(foot).forEach((coordinate, axis) => {
+            expect(coordinate).toBeCloseTo(required(target[axis]), 3);
+          });
+        }
+      }
+      expect(audit.plantedTravelPairs).toBeGreaterThan(0);
+      expect(audit.maxContactSlideWorldUnits).toBeLessThan(0.0001);
+      expect(
+        Object.values(audit.bodyRangePixels.chase as Record<string, number>).every(
+          (range) => range >= 1,
+        ),
+      ).toBe(true);
+      walkTravel = chaseTravel = pixels.rootTravelPixelsPerCycle;
+    }
+    expect(walkTravel).toBeCloseTo(p.speed * duration("walk"), 6);
+    expect(chaseTravel).toBeCloseTo(p.chaseSpeed * duration("chase"), 6);
     const hunter = createPredator(p.species, 0, 0);
     required(hunter.predator).state = "pounce";
     restorePredatorPose(hunter);

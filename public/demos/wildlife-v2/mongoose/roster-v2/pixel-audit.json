@@ -1,0 +1,17 @@
+{
+  "identity": "mongoose-roster-v2-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.15589443742099,
+    "up": 1.2571088387729432,
+    "left": 1.410623622952393,
+    "right": 1.410623622952393
+  },
+  "rootTravelPixelsPerCycle": 17.92,
+  "plantedTravel": true
+}

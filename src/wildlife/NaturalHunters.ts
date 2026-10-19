@@ -1,5 +1,6 @@
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import type { AnimationClip } from "../entities/EntityDefs.js";
+import { SMALL_GROUND_HUNTER_PROFILES } from "./SmallGroundHunters.js";
 
 export const NATURAL_HUNTER_SPECIES = [
   "wolf",
@@ -11,6 +12,10 @@ export const NATURAL_HUNTER_SPECIES = [
   "lynx",
   "bobcat",
   "polar-bear",
+  "mongoose",
+  "honey-badger",
+  "fossa",
+  "white-nosed-coati",
 ] as const;
 export type NaturalHunterSpecies = (typeof NATURAL_HUNTER_SPECIES)[number];
 
@@ -237,4 +242,5 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
       inspection: [-90, 615],
     },
   },
+  ...SMALL_GROUND_HUNTER_PROFILES,
 ];

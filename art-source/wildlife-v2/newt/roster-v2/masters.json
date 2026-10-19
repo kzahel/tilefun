@@ -1,0 +1,13 @@
+{
+  "identity": "newt-roster-v2-pixels-01",
+  "palette": {
+    "B": "#7b5744",
+    "H": "#d67f48",
+    "C": "#d6c69a",
+    "M": "#493b34",
+    "N": "#1d251e",
+    "E": "#e6d571",
+    "K": "#242b29"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

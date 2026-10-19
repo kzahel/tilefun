@@ -1,0 +1,15 @@
+{
+  "identity": "parrot-roster-v2-pixels-01",
+  "palette": {
+    "B": "#4b965c",
+    "H": "#84bf66",
+    "C": "#c75b45",
+    "M": "#4b965c",
+    "N": "#252c2b",
+    "E": "#e3d17b",
+    "K": "#252e2f",
+    "T": "#d9a247",
+    "R": "#b14e3d"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

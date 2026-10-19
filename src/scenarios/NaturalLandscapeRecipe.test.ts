@@ -42,17 +42,17 @@ it("runs forest movement and persists tree deletion and movement through reload"
     await s.close();
   }
 });
-it("pins real locations and keeps explicit profiles available beside the natural default", () => {
-  for (const c of NATURAL_CASES) {
-    const r = naturalLandscapeRecipe(c.id, "balanced");
-    if (r.generation.type === "regional") expect(r.landscape).toBe("balanced");
-    else {
-      expect(r.generation.type).toBe("flat");
-      expect(r.landscape).toBeUndefined();
-      expect(r.actors?.some((e) => e.predator)).toBe(true);
-    }
-    expect(r.generation.seed).toBe(c.seed);
+it.each(NATURAL_CASES)("$id keeps its explicit generation and landscape profile", (c) => {
+  const r = naturalLandscapeRecipe(c.id, "balanced");
+  if (r.generation.type === "regional") expect(r.landscape).toBe("balanced");
+  else {
+    expect(r.generation.type).toBe("flat");
+    expect(r.landscape).toBeUndefined();
+    expect(r.actors?.some((e) => e.predator)).toBe(true);
   }
+  expect(r.generation.seed).toBe(c.seed);
+});
+it("retains native placements at the pinned forest sample", () => {
   const g = createGenerator(createDescriptor("regional", 2026));
   expect(g.placements(-26, -32, new Set()).placements.length).toBeGreaterThan(0);
 });

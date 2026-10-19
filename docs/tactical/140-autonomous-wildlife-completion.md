@@ -506,3 +506,28 @@ assertion; distinguish them from newly introduced failures.
   Typecheck/lint/build, 1299-candidate manifest, 24 browser cases and streaming --assert-ready pass. Full bounded units: 3942 pass, 5 known Windows failures, 10 skipped. 6 ten-artifact byte-identical replays and 1968 exact crops.
   90 new entries plus sixteen delivered leave 90 remaining.
   Fresh inbox/notes are clear. Exact pixels remain pending human review.
+
+- 04:02 UTC: six shelled/amphibian creatures, four small hunters and six short-flight
+  birds completed. Salamander/newt coats, broad pink axolotl head/external gills,
+  ground-clear oval neck frill and closed turtle scutes retain separate editable
+  anatomy. Newt uses its terrestrial phase; axolotl/pond turtle use verified ponds.
+  Ground/bottom walking does not add amphibious transitions. Shark explicitly
+  includes both new aquatic prey. Mongoose, honey badger, fossa and white-nosed
+  coati hunt legal prey and larger hunters can eat them. Chase is 40px/s with
+  14/12/16/14ms poses, retaining each planted stride; already-fleeing prey catches
+  pass. Eight actual T. rex pursuits across natural/placed versions of all four
+  retain the expected population policy and exact saved feeding/replacement state.
+  Pigeon, dove, sparrow, parrot, toucan and hornbill have distinct bills/coats,
+  two fixed leg chains and shoulder/elbow feather wings. Their 800ms flights rise
+  10px and return to grounded feet; no unrestricted navigation/perching is added.
+  Native/enlarged source crops, physical-phase saves and airborne meal guards pass.
+  The new editor entry is Rock pigeon, distinguishing the legacy Pigeon entry.
+  One duplicate-label browser failure was corrected; all four rebuilt pigeon
+  cases pass, completing 60 distinct successful browser cases across this batch.
+  Shared source tests now verify measured pixel travel and matching walk/chase
+  foot projections when a frozen bank lacks the old descriptor stride fields.
+  Recipe checks run per scene, retaining all assertions without a growing whole-
+  roster five-second timeout. The final full suite covers both corrections.
+  Typecheck/lint/build, 1379-candidate manifest, 60 browser cases and streaming --assert-ready pass. Full bounded units: 4338 pass, 5 known Windows failures, 10 skipped. 16 ten-artifact byte-identical replays and 6528 exact crops.
+  106 new entries plus sixteen delivered leave 74 remaining.
+  Fresh inbox/notes are clear. Exact pixels remain pending human review.

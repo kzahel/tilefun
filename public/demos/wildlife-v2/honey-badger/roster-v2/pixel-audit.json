@@ -1,0 +1,17 @@
+{
+  "identity": "honey-badger-roster-v2-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4868413235905678,
+    "up": 1.2211855728751857,
+    "left": 1.2938459300210923,
+    "right": 1.2938459300210923
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

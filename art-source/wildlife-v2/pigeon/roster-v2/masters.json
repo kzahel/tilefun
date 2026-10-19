@@ -1,0 +1,15 @@
+{
+  "identity": "pigeon-roster-v2-pixels-01",
+  "palette": {
+    "B": "#717c83",
+    "H": "#a0a8aa",
+    "C": "#8c6b92",
+    "M": "#616e73",
+    "N": "#252c2b",
+    "E": "#e3d17b",
+    "K": "#252e2f",
+    "T": "#d9a247",
+    "R": "#b14e3d"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

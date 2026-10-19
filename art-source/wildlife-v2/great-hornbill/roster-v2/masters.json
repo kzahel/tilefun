@@ -1,0 +1,15 @@
+{
+  "identity": "great-hornbill-roster-v2-pixels-01",
+  "palette": {
+    "B": "#303c40",
+    "H": "#65716e",
+    "C": "#e6d8b2",
+    "M": "#e6d8b2",
+    "N": "#252c2b",
+    "E": "#e3d17b",
+    "K": "#252e2f",
+    "T": "#d9a247",
+    "R": "#b14e3d"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

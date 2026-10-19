@@ -1,0 +1,13 @@
+{
+  "identity": "mongoose-roster-v2-pixels-01",
+  "palette": {
+    "K": "#272f34",
+    "B": "#8f7853",
+    "H": "#b9a174",
+    "C": "#ded0a8",
+    "M": "#63563f",
+    "E": "#d3b066",
+    "N": "#242c31"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

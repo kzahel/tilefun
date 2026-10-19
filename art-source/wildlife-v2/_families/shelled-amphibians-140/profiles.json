@@ -1,0 +1,612 @@
+{
+  "salamander": {
+    "label": "Salamander",
+    "canvas": 64,
+    "anchor": [
+      32,
+      44
+    ],
+    "torso": [
+      0,
+      -0.05,
+      0.42
+    ],
+    "radii": [
+      0.3,
+      0.63,
+      0.23
+    ],
+    "chest": [
+      0,
+      0.4,
+      0.42
+    ],
+    "chestRadii": [
+      0.27,
+      0.32,
+      0.23
+    ],
+    "head": [
+      0,
+      0.76,
+      0.4
+    ],
+    "skull": [
+      0.25,
+      0.25,
+      0.15
+    ],
+    "muzzleY": 0.2,
+    "muzzleRadii": [
+      0.2,
+      0.18,
+      0.09
+    ],
+    "foreHip": [
+      0.19,
+      0.33,
+      0.36
+    ],
+    "hindHip": [
+      0.19,
+      -0.4,
+      0.36
+    ],
+    "foreLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "hindLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "legRadii": [
+      0.055,
+      0.045,
+      0.035,
+      0.025
+    ],
+    "footWidth": 0.085,
+    "footLength": 0.13,
+    "walkSpeed": 6,
+    "chaseSpeed": 12,
+    "walkMs": 30,
+    "chaseMs": 15,
+    "lift": 0.1,
+    "forageDrop": 0.015,
+    "tailY": -0.58,
+    "tailLengths": [
+      0.3,
+      0.28,
+      0.25,
+      0.22,
+      0.18
+    ],
+    "tailRadius": 0.13,
+    "tailKey": "B",
+    "tailAngle": 0.12,
+    "palette": {
+      "B": "#303d3b",
+      "H": "#e0be4b",
+      "C": "#d6c69a",
+      "M": "#1d2b2e",
+      "N": "#1d251e",
+      "E": "#e6d571",
+      "K": "#242b29"
+    }
+  },
+  "newt": {
+    "label": "Newt",
+    "canvas": 64,
+    "anchor": [
+      32,
+      44
+    ],
+    "torso": [
+      0,
+      -0.05,
+      0.42
+    ],
+    "radii": [
+      0.3,
+      0.63,
+      0.23
+    ],
+    "chest": [
+      0,
+      0.4,
+      0.42
+    ],
+    "chestRadii": [
+      0.27,
+      0.32,
+      0.23
+    ],
+    "head": [
+      0,
+      0.76,
+      0.4
+    ],
+    "skull": [
+      0.25,
+      0.25,
+      0.15
+    ],
+    "muzzleY": 0.2,
+    "muzzleRadii": [
+      0.2,
+      0.18,
+      0.09
+    ],
+    "foreHip": [
+      0.19,
+      0.33,
+      0.36
+    ],
+    "hindHip": [
+      0.19,
+      -0.4,
+      0.36
+    ],
+    "foreLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "hindLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "legRadii": [
+      0.055,
+      0.045,
+      0.035,
+      0.025
+    ],
+    "footWidth": 0.085,
+    "footLength": 0.13,
+    "walkSpeed": 6,
+    "chaseSpeed": 12,
+    "walkMs": 30,
+    "chaseMs": 15,
+    "lift": 0.1,
+    "forageDrop": 0.015,
+    "tailY": -0.58,
+    "tailLengths": [
+      0.3,
+      0.28,
+      0.25,
+      0.22,
+      0.18
+    ],
+    "tailRadius": 0.13,
+    "tailKey": "B",
+    "tailAngle": 0.12,
+    "palette": {
+      "B": "#7b5744",
+      "H": "#d67f48",
+      "C": "#d6c69a",
+      "M": "#493b34",
+      "N": "#1d251e",
+      "E": "#e6d571",
+      "K": "#242b29"
+    }
+  },
+  "axolotl": {
+    "label": "Axolotl",
+    "canvas": 64,
+    "anchor": [
+      32,
+      44
+    ],
+    "torso": [
+      0,
+      -0.05,
+      0.42
+    ],
+    "radii": [
+      0.28,
+      0.63,
+      0.2
+    ],
+    "chest": [
+      0,
+      0.4,
+      0.42
+    ],
+    "chestRadii": [
+      0.27,
+      0.32,
+      0.23
+    ],
+    "head": [
+      0,
+      0.76,
+      0.4
+    ],
+    "skull": [
+      0.35,
+      0.22,
+      0.14
+    ],
+    "muzzleY": 0.2,
+    "muzzleRadii": [
+      0.3,
+      0.14,
+      0.07
+    ],
+    "foreHip": [
+      0.19,
+      0.33,
+      0.36
+    ],
+    "hindHip": [
+      0.19,
+      -0.4,
+      0.36
+    ],
+    "foreLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "hindLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "legRadii": [
+      0.055,
+      0.045,
+      0.035,
+      0.025
+    ],
+    "footWidth": 0.085,
+    "footLength": 0.13,
+    "walkSpeed": 6,
+    "chaseSpeed": 12,
+    "walkMs": 30,
+    "chaseMs": 15,
+    "lift": 0.1,
+    "forageDrop": 0.015,
+    "tailY": -0.58,
+    "tailLengths": [
+      0.3,
+      0.28,
+      0.25,
+      0.22,
+      0.18
+    ],
+    "tailRadius": 0.14,
+    "tailKey": "B",
+    "tailAngle": 0.12,
+    "palette": {
+      "B": "#d9a9ab",
+      "H": "#f1d4c2",
+      "C": "#ebc2bd",
+      "M": "#9c526d",
+      "N": "#1d251e",
+      "E": "#e6d571",
+      "K": "#242b29"
+    }
+  },
+  "frilled-neck-lizard": {
+    "label": "Frilled-neck lizard",
+    "canvas": 64,
+    "anchor": [
+      32,
+      44
+    ],
+    "torso": [
+      0,
+      -0.05,
+      0.42
+    ],
+    "radii": [
+      0.3,
+      0.63,
+      0.23
+    ],
+    "chest": [
+      0,
+      0.4,
+      0.42
+    ],
+    "chestRadii": [
+      0.27,
+      0.32,
+      0.23
+    ],
+    "head": [
+      0,
+      0.78,
+      0.5
+    ],
+    "skull": [
+      0.25,
+      0.25,
+      0.15
+    ],
+    "muzzleY": 0.2,
+    "muzzleRadii": [
+      0.2,
+      0.18,
+      0.09
+    ],
+    "foreHip": [
+      0.19,
+      0.33,
+      0.36
+    ],
+    "hindHip": [
+      0.19,
+      -0.4,
+      0.36
+    ],
+    "foreLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "hindLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "legRadii": [
+      0.055,
+      0.045,
+      0.035,
+      0.025
+    ],
+    "footWidth": 0.085,
+    "footLength": 0.13,
+    "walkSpeed": 6,
+    "chaseSpeed": 12,
+    "walkMs": 30,
+    "chaseMs": 15,
+    "lift": 0.1,
+    "forageDrop": 0.015,
+    "tailY": -0.58,
+    "tailLengths": [
+      0.4,
+      0.38,
+      0.35,
+      0.3,
+      0.27
+    ],
+    "tailRadius": 0.13,
+    "tailKey": "B",
+    "tailAngle": 0.12,
+    "palette": {
+      "B": "#a58a56",
+      "H": "#dac283",
+      "C": "#d6c69a",
+      "M": "#6b593c",
+      "N": "#1d251e",
+      "E": "#e6d571",
+      "K": "#242b29"
+    }
+  },
+  "land-tortoise": {
+    "label": "Land tortoise",
+    "canvas": 64,
+    "anchor": [
+      32,
+      44
+    ],
+    "torso": [
+      0,
+      -0.05,
+      0.42
+    ],
+    "radii": [
+      0.44,
+      0.58,
+      0.3
+    ],
+    "chest": [
+      0,
+      0.4,
+      0.42
+    ],
+    "chestRadii": [
+      0.31,
+      0.3,
+      0.22
+    ],
+    "head": [
+      0,
+      0.77,
+      0.4
+    ],
+    "skull": [
+      0.25,
+      0.25,
+      0.15
+    ],
+    "muzzleY": 0.2,
+    "muzzleRadii": [
+      0.2,
+      0.18,
+      0.09
+    ],
+    "foreHip": [
+      0.19,
+      0.33,
+      0.36
+    ],
+    "hindHip": [
+      0.19,
+      -0.4,
+      0.36
+    ],
+    "foreLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "hindLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "legRadii": [
+      0.055,
+      0.045,
+      0.035,
+      0.025
+    ],
+    "footWidth": 0.085,
+    "footLength": 0.13,
+    "walkSpeed": 6,
+    "chaseSpeed": 12,
+    "walkMs": 30,
+    "chaseMs": 15,
+    "lift": 0.1,
+    "forageDrop": 0.015,
+    "tailY": -0.58,
+    "tailLengths": [
+      0.07,
+      0.07,
+      0.07,
+      0.07,
+      0.07
+    ],
+    "tailRadius": 0.07,
+    "tailKey": "B",
+    "tailAngle": 0.12,
+    "palette": {
+      "B": "#82704a",
+      "H": "#b5a36c",
+      "C": "#d6c69a",
+      "M": "#4b4b37",
+      "N": "#1d251e",
+      "E": "#e6d571",
+      "K": "#242b29"
+    },
+    "headRadii": [
+      0.21,
+      0.24,
+      0.15
+    ]
+  },
+  "pond-turtle": {
+    "label": "Pond turtle",
+    "canvas": 64,
+    "anchor": [
+      32,
+      44
+    ],
+    "torso": [
+      0,
+      -0.05,
+      0.42
+    ],
+    "radii": [
+      0.44,
+      0.58,
+      0.3
+    ],
+    "chest": [
+      0,
+      0.4,
+      0.42
+    ],
+    "chestRadii": [
+      0.31,
+      0.3,
+      0.22
+    ],
+    "head": [
+      0,
+      0.77,
+      0.4
+    ],
+    "skull": [
+      0.25,
+      0.25,
+      0.15
+    ],
+    "muzzleY": 0.2,
+    "muzzleRadii": [
+      0.2,
+      0.18,
+      0.09
+    ],
+    "foreHip": [
+      0.19,
+      0.33,
+      0.36
+    ],
+    "hindHip": [
+      0.19,
+      -0.4,
+      0.36
+    ],
+    "foreLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "hindLengths": [
+      0.26,
+      0.28,
+      0.22,
+      0.1
+    ],
+    "legRadii": [
+      0.055,
+      0.045,
+      0.035,
+      0.025
+    ],
+    "footWidth": 0.085,
+    "footLength": 0.13,
+    "walkSpeed": 6,
+    "chaseSpeed": 12,
+    "walkMs": 30,
+    "chaseMs": 15,
+    "lift": 0.1,
+    "forageDrop": 0.015,
+    "tailY": -0.58,
+    "tailLengths": [
+      0.07,
+      0.07,
+      0.07,
+      0.07,
+      0.07
+    ],
+    "tailRadius": 0.07,
+    "tailKey": "B",
+    "tailAngle": 0.12,
+    "palette": {
+      "B": "#4d7954",
+      "H": "#bdcb80",
+      "C": "#d6c69a",
+      "M": "#344e3d",
+      "N": "#1d251e",
+      "E": "#e6d571",
+      "K": "#242b29"
+    },
+    "headRadii": [
+      0.21,
+      0.24,
+      0.15
+    ]
+  }
+}
