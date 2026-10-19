@@ -1,7 +1,7 @@
 # Original vehicle authoring
 
 Topic: original-vehicles
-Status: red coupe integrated and validated in editor, traffic, Canvas and GPU.
+Status: red coupe and accepted Beetle v1 integrated and validated; school bus is next.
 Updated: 2026-10-19.
 
 Owns original vehicles beyond the existing sprite bank: high-detail art masters,
@@ -19,6 +19,42 @@ experiment are not an exact-revision production art approval.
 The red-car appearance gate is now cleared for the corrected v3. Beetle,
 school-bus and pickup are the next queued pipeline experiments under the owner's
 earlier instruction; none started during this asset-commit checkpoint.
+
+The owner then requested the Beetle explicitly on 2026-10-19. [146](../tactical/146-beetle-pipeline-review.md)
+owns its rounded-family authoring and review delivery. Warm yellow paint and blue
+glass carry the approved outline style onto a domed roof, rounded hood/rear deck
+and substantial fenders. This checkpoint prepares an actual low-poly model for
+appearance review; school bus and pickup remain queued.
+
+Beetle v1 is now a frozen **2,554-triangle**, five-mesh export with one opaque
+512² unlit atlas and four independently rolling wheels (198,312 GLB bytes).
+Its direct semantic UV route authors glass/frames on the body skin, avoiding the
+draft's intersecting curved-glass overlays. It uses the same actual-GLB pixel
+presentation and unchanged game camera as the coupe. Independent full-roll body
+clearance, collision negative control, all 32 study/game headings and desktop,
+mobile and network-free offline preview checks pass. The declared Beetle crown
+sample region has 25/25 supported samples per wheel; visual coverage is checked
+separately. Retained-script replay reproduces the exact GLB and atlas.
+
+The exact review page and evidence are under
+`public/demos/original-vehicles/beetle-v1/`, registered separately as
+`projection:original-vehicle-beetle-v1`. The self-contained local review is
+`data/vehicle-bake/beetle-review.html`. On 2026-10-19 the owner said “looks fine”
+and requested commit/gameplay integration, then the next vehicle. [148](../tactical/148-beetle-gameplay.md)
+owns this activation; the frozen review keeps its original review-time metadata.
+Its component master uses economical topology and
+does not demonstrate high-to-low transfer. The existing coupe and 45 source ports
+retain their exact bytes and counts.
+
+The shared catalog now adds `vehicle-v1:beetle` (**Beetle-style compact**) to
+editor spawning and eligible road traffic. Its physical bounds are measured from
+the actual imported GLB: 80.8696×37.0435×34.087px, conservatively rounded to
+81×38×35px; road admission is 88px and turning radius 56.7px. Compact handling is
+105px/s with 180px/s² acceleration. The two originals bring the combined gameplay
+roster to 47 types/46 traffic-eligible types. Its runtime GLB is byte-identical to
+the reviewed revision, with matching native cardinal captures in the standard
+sprite fallback. Normal loading, disabled/failed meshes, saves and shared lab
+presentation use existing authority/rendering paths.
 
 The owner likes the style but flagged upper tire crowns above the fenders.
 `a-reduced-projection/mid-fenders-v3` corrects the source geometry with integrated

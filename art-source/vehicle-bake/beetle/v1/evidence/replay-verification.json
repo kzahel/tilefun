@@ -1,0 +1,14 @@
+{
+  "byteIdentical": true,
+  "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "atlasSha256": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f",
+  "inputs": [
+    "scripts/vehicle-bake/beetle/build.py",
+    "scripts/vehicle-bake/beetle/family.json"
+  ],
+  "scratchInputDependencies": [],
+  "retainedBuildSha256": "a857035d881b2b275bc2fa93004236b497baf6397b04e7db7769a1fbf70a1118",
+  "familySha256": "e8faa8e5922e3a1b51bf88d366c1f470b5079661af21a9ccc8215fe758154868",
+  "command": "blender --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/beetle/v1/build.py -- --scratch",
+  "repoRelativeMetadata": "POSIX forward slashes"
+}

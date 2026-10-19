@@ -108,3 +108,5 @@ scripts/authored-assets/pack_train_draft.py text eol=lf
 scripts/wildlife/register-continuation-147.mjs text eol=lf
 scripts/wildlife/capture-continuation-147.mjs text eol=lf
 scripts/wildlife/replay-continuation-147.py text eol=lf
+public/demos/original-vehicles/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+public/demos/original-vehicles/**/viewer.js -text -whitespace

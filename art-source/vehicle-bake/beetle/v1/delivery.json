@@ -1,0 +1,14 @@
+{
+  "status": "complete",
+  "artReviewStatus": "awaiting-owner-review",
+  "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "atlasSha256": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f",
+  "report": "public/demos/vehicle-bake/beetle/v1/report.json",
+  "replayCommands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/beetle/build.py -- --scratch",
+    "node scripts/vehicle-bake/beetle/capture.mjs",
+    "python scripts/vehicle-bake/beetle/sheets.py",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/beetle/v1/evidence/clearance-input.json data/vehicle-bake/beetle/recheck-clearance.json",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/beetle/v1/model.glb --config scripts/vehicle-bake/beetle/coverage-region.json --output data/vehicle-bake/beetle/recheck-coverage.json"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "id": "beetle",
+  "name": "Beetle-style compact",
+  "tags": ["vehicle", "original", "compact car"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/beetle-v1/review-manifest.json",
+    "sha256": "9478fb898159219f27fd17ec969b2a5235278233422fbe2e8a196a371fe6e89b",
+    "candidateId": "beetle-v1",
+    "model": "public/demos/original-vehicles/beetle-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/beetle-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/beetle-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/beetle-v1/captures",
+    "modelSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "triangles": 2554,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/beetle/v1/evidence/replay-verification.json",
+    "sha256": "f78fb0b28f80f59ca387306a15afb9cb559a8ac897b6ef84db01709fcc2c5363",
+    "build": "art-source/vehicle-bake/beetle/v1/build.py",
+    "family": "art-source/vehicle-bake/beetle/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [128, 128],
+    "groundOrigin": [64, 64],
+    "cardinals": { "south": 4, "north": 12, "west": 8, "east": 0 }
+  },
+  "mesh": {
+    "assetId": "beetle-authored-v1",
+    "path": "assets/models/vehicles/beetle-v1.glb",
+    "radius": 64,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/beetle-v1.png",
+  "performance": { "speed": 105, "acceleration": 180, "pushSpeed": 40, "pushWeight": 90 },
+  "receipt": "art-source/vehicle-bake/runtime-beetle-v1.json"
+}

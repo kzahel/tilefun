@@ -23,6 +23,10 @@ instructions. [145](../tactical/145-original-coupe-gameplay.md) then integrates
 the owner-authorized original coupe with its own additive catalog, matching sprite
 fallback and normal spawning/traffic. The 45-set counts below still describe the
 existing sprite ports; the combined gameplay roster now has 46 own-model types.
+The owner accepted the [Beetle v1 review](../tactical/146-beetle-pipeline-review.md).
+[148](../tactical/148-beetle-gameplay.md) integrates its exact 2,554-triangle model
+and matching fallback, bringing combined gameplay to 47 types. The port table
+still describes the immutable 45-type source bank.
 
 The inventory is the 45 unique `vehicleId` values in
 [`vehicles-v1.json`](../../src/traffic/vehicles-v1.json): 180 directional views.

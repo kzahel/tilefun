@@ -2,6 +2,13 @@
   "version": 1,
   "tools": [
     {
+      "id": "original-vehicles",
+      "name": "Original vehicle review",
+      "description": "Inspect new vehicle families at game scale, including rotating wheels and fender coverage.",
+      "url": "demos/original-vehicles/beetle-v1/index.html",
+      "mode": "link"
+    },
+    {
       "id": "vehicle-bake",
       "name": "Red coupe low-poly review",
       "description": "Compare the preferred pixel art with textured low-poly models, budgets and rolling wheels.",
@@ -220,6 +227,12 @@
     }
   ],
   "batches": [
+    {
+      "id": "original-vehicles",
+      "name": "Original vehicle review",
+      "description": "New vehicle families awaiting owner appearance review before gameplay activation.",
+      "toolId": "original-vehicles"
+    },
     {
       "id": "vehicle-bake",
       "name": "Red coupe low-poly review",
@@ -11709,6 +11722,17 @@
       "fingerprint": "296f14fcfcf7188763ed6e19f49bfef112751bb9afcf88f5c7b7a5322acc75ae",
       "sourceFingerprint": "296f14fcfcf7188763ed6e19f49bfef112751bb9afcf88f5c7b7a5322acc75ae",
       "excluded": "Low-poly authoring pilot awaiting owner style/budget review; no gameplay activation."
+    },
+    {
+      "id": "projection:original-vehicle-beetle-v1",
+      "batchId": "original-vehicles",
+      "name": "Beetle-style compact · rounded compact experiment v1",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/beetle-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "a6d68b22d3f457833a96ea5960d5b1c0800cda11b32345e6a4540be378977bfe",
+      "sourceFingerprint": "a6d68b22d3f457833a96ea5960d5b1c0800cda11b32345e6a4540be378977bfe",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
       "id": "authored-vehicle-game-fit-v1",
@@ -40971,5 +40995,5 @@
       }
     }
   ],
-  "inputDigest": "6f767e8f54e13a7fde2ceaf78405fb9fc2cc234af68520a88bbea914ae598711"
+  "inputDigest": "28d49f61b1184ad6596b9fdd2baeca2b1fc524e12ac55121e3f7111404ed7d82"
 }

@@ -1,0 +1,260 @@
+{
+  "status": "passed",
+  "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "quick": false,
+  "stats": {
+    "triangles": 2554,
+    "vertices": 5462,
+    "primitives": 5,
+    "sourceMeshes": 5,
+    "drawMeshes": 5,
+    "bodyDrawCalls": 5
+  },
+  "rig": {
+    "wheels": [
+      {
+        "id": "FL",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true
+      },
+      {
+        "id": "FR",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true
+      },
+      {
+        "id": "RL",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true
+      },
+      {
+        "id": "RR",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true
+      }
+    ],
+    "forwardReverseAbsoluteReset": true
+  },
+  "samples": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "opaque": 2647,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "opaque": 2579,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "opaque": 2454,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "opaque": 2312,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "opaque": 2270,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "opaque": 2312,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "opaque": 2450,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "opaque": 2579,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "opaque": 2648,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "opaque": 2594,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "opaque": 2473,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "opaque": 2324,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "opaque": 2284,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "opaque": 2324,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "opaque": 2474,
+      "edge": 0
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "opaque": 2594,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "opaque": 3470,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "opaque": 3414,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "opaque": 3225,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "opaque": 2951,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "opaque": 2885,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "opaque": 2952,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "opaque": 3226,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "opaque": 3414,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "opaque": 3471,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "opaque": 3432,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "opaque": 3249,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "opaque": 2963,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "opaque": 2894,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "opaque": 2965,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "opaque": 3248,
+      "edge": 0
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "opaque": 3432,
+      "edge": 0
+    }
+  ],
+  "errors": [],
+  "rollPhasesDegrees": [
+    0,
+    45,
+    90,
+    135,
+    180,
+    225,
+    270,
+    315
+  ],
+  "components": [
+    "Unmodified compiled shared viewer.js",
+    "CarMeshAsset",
+    "CarPixelOutline",
+    "VehicleGeometryBatches",
+    "setCarMeshProjection",
+    "createWheelRig"
+  ],
+  "browser": "bundled full Playwright Chromium / SwiftShader"
+}

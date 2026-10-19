@@ -3,6 +3,14 @@ import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
 export const WORKSHOP_TOOLS: WorkshopTool[] = [
   {
+    id: "original-vehicles",
+    name: "Original vehicle review",
+    description:
+      "Inspect new vehicle families at game scale, including rotating wheels and fender coverage.",
+    url: "demos/original-vehicles/beetle-v1/index.html",
+    mode: "link",
+  },
+  {
     id: "vehicle-bake",
     name: "Red coupe low-poly review",
     description:
@@ -244,6 +252,13 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
 ];
 export const CITY_BATCHES: ReviewBatch[] = [
+  {
+    id: "original-vehicles",
+    name: "Original vehicle review",
+    description:
+      "New vehicle families awaiting owner appearance review before gameplay activation.",
+    toolId: "original-vehicles",
+  },
   {
     id: "vehicle-bake",
     name: "Red coupe low-poly review",

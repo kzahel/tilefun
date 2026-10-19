@@ -14,6 +14,7 @@ import { DOOR_CASES } from "./DoorCandidates.js";
 import { buildFamilySheetCandidates } from "./FamilySheetCandidates.js";
 import { buildInteriorCandidates, INTERIOR_BATCHES } from "./InteriorCandidates.js";
 import { buildNaturalCandidates } from "./NaturalLandscapeCandidate.js";
+import { buildOriginalVehicleCandidates } from "./OriginalVehicleCandidates.js";
 import { buildParkingVisitCandidate } from "./ParkingVisitCandidate.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
@@ -57,6 +58,7 @@ try {
   candidates.push(...(await buildAuthoredVehicleCandidates()));
   candidates.push(...(await buildVehicleStyleStudyCandidates()));
   candidates.push(...(await buildVehicleBakeCandidates()));
+  candidates.push(...(await buildOriginalVehicleCandidates()));
   candidates.push(
     await buildVehicleGameFitCandidate("v1"),
     await buildVehicleGameFitCandidate("v2"),

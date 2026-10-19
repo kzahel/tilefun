@@ -33,6 +33,20 @@ cardinal fallback, measured physical bounds and shared catalog registration.
 Keep original entries separate from the immutable source bank; qualify ordinary
 editor/traffic, save/reload and failed-mesh fallback through game and lab paths.
 
+The Beetle experiment in tactical 146 adds direct semantic UV painting on its own
+rounded-family topology. Use `scripts/vehicle-bake/beetle/` for that family and
+the `family-*` review tools for new original-family capture/packaging. Curved glass
+overlays can enter coarse body facets; a continuous cabin UV chart keeps frames,
+glass and seams on the actual skin triangles. Its component master has runtime
+topology and does not qualify automatic high-to-low texture transfer. Preserve
+that distinction when choosing a route. New families still require their own
+shape, paint ownership, wheel bounds and explicit coverage sample region.
+For accepted follow-on originals, tactical 148 and `runtime-export.py` use an
+explicit family config to pin the review/source replay, measure actual imported
+bounds and copy the exact model/cardinal pixels. Larger capture viewports preserve
+native pixel density and centered ground origin; only transparent padding may be
+cropped into the standard fallback frame. Keep normal builds independent of Blender.
+
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,
 not completed models. A small red compact is `compact-4`; an ambulance is

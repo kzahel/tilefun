@@ -1,0 +1,293 @@
+{
+  "status": "complete",
+  "artReviewStatus": "awaiting-owner-review",
+  "family": "beetle",
+  "route": "beetle",
+  "revision": "v1",
+  "method": "Original family-specific loft and swept open-arch fender geometry; directly authored semantic UV surface paint. Glass, frames, seams and vents live on actual coachwork UVs. No high-to-low/projection transfer claim.",
+  "geometry": {
+    "triangles": 2554,
+    "vertices": 5462,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 198312,
+    "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 6.782608695652176,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -1.340000033378601,
+        -0.8600000143051147,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -23.30434840658437,
+        6.78260844686757,
+        14.95652198791504
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -1.340000033378601,
+        0.8600000143051147,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        -23.30434840658437,
+        6.78260844686757,
+        -14.95652198791504
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.340000033378601,
+        -0.8600000143051147,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        23.30434840658437,
+        6.78260844686757,
+        14.95652198791504
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.340000033378601,
+        0.8600000143051147,
+        0.38999998569488525
+      ],
+      "centerExport": [
+        23.30434840658437,
+        6.78260844686757,
+        -14.95652198791504
+      ],
+      "radiusBlender": 0.39,
+      "wheel_radius": 6.782608695652176
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/beetle/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/beetle/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/beetle/v1/recipe.json",
+  "renderThreads": 4,
+  "runtime": "not integrated",
+  "triangles": 2554,
+  "vertexCount": 5462,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "atlasBytes": 4679,
+  "glbBytes": 198312,
+  "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "atlasSha256": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "beetle--v1",
+    "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "triangles": 2554,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946073013193,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946073013193,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946877043528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946877043528,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/beetle/v1/evidence/upper-wheel-coverage-final.json",
+  "engineEvidence": "engine/capture.json",
+  "replayCommands": [
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/beetle/build.py -- --scratch",
+    "node scripts/vehicle-bake/beetle/capture.mjs",
+    "python scripts/vehicle-bake/beetle/sheets.py",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/beetle/v1/evidence/clearance-input.json data/vehicle-bake/beetle/recheck-clearance.json",
+    "& \"C:/Program Files/Blender Foundation/Blender 5.2/blender.exe\" --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/beetle/v1/model.glb --config scripts/vehicle-bake/beetle/coverage-region.json --output data/vehicle-bake/beetle/recheck-coverage.json"
+  ],
+  "validation": {
+    "actualGLBCatalogAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "opaqueAtlas": true,
+    "embeddedAtlasMatchesDelivered": true,
+    "nearestMagnification": true,
+    "nearestRuntimeMinificationNoMipmaps": true,
+    "actualSharedEngine16HeadingsPerCamera": true,
+    "independentWheelsAndFixedBody": true,
+    "forwardReverseAbsoluteReset": true,
+    "wholeBodyAllNeutralRollAngles": true,
+    "collidingBodyNegativeControlRejected": true,
+    "coverage25Of25Each": true,
+    "sourceOnlyReplayByteIdentical": true,
+    "renderThreads": 4,
+    "captureScriptsBiomeCheck": true,
+    "pythonAndNodeSyntax": true
+  },
+  "visualInspection": [
+    {
+      "evidence": "inspection-study.png",
+      "headings": [
+        0.0,
+        22.5,
+        45.0,
+        67.5,
+        90.0,
+        112.5,
+        135.0,
+        157.5,
+        180.0,
+        202.5,
+        225.0,
+        247.5,
+        270.0,
+        292.5,
+        315.0,
+        337.5
+      ],
+      "finding": "Recognizable rounded compact; tall dome, curved hood/lid, closed dark glass borders and broad blue clusters, real open arches; far tire crowns beneath fender shells."
+    },
+    {
+      "evidence": "inspection-engine.png",
+      "headings": [
+        0.0,
+        22.5,
+        45.0,
+        67.5,
+        90.0,
+        112.5,
+        135.0,
+        157.5,
+        180.0,
+        202.5,
+        225.0,
+        247.5,
+        270.0,
+        292.5,
+        315.0,
+        337.5
+      ],
+      "finding": "Unchanged shared projection and outline, both ends/diagonals inspected. No crown exposure or clipping. Raised pontoon shoulders are deliberately separate classic fenders."
+    },
+    {
+      "evidence": "inspection-roll.png",
+      "phasesDegrees": [
+        0,
+        45,
+        90,
+        135,
+        180,
+        225,
+        270,
+        315
+      ],
+      "finding": "Actual exported rolling wheel assemblies; body shape/paint stays fixed. Rig transform test additionally proves each wheel independently and reverse/reset."
+    }
+  ],
+  "limitations": [
+    "Owner art review pending; no gameplay integration or production approval.",
+    "Original semantic surface-authored family, not evidence of automatic source projection or high-to-low transfer.",
+    "Editable component master uses the same economical authored topology; no separate high-detail master is claimed.",
+    "Coverage is sampled vertical support, not a universal silhouette/occlusion proof; study/game views were separately inspected.",
+    "Neutral steering full-roll qualified; nonzero steering, suspension and physical gameplay bounds/handling remain unqualified.",
+    "Small lamp/vent/trim features retain ordinary native-pixel angle aliasing.",
+    "Atlas uses continuous coachwork UVs plus intentionally shared padded role swatches for trim/fenders/wheels.",
+    "GLB min sampler is NEAREST_MIPMAP_NEAREST from the shared Blender exporter; CarMeshAsset forces nearest min/mag and disables mipmaps."
+  ],
+  "priorAssetsPreserved": {
+    "priorFilesVerified": 2988,
+    "changedFiles": [],
+    "method": "Read-only SHA256 comparison against independent QA pre-authoring ledger."
+  },
+  "sourceHashes": {
+    "art-source/vehicle-bake/beetle/v1/atlas.png": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f",
+    "art-source/vehicle-bake/beetle/v1/build.py": "a857035d881b2b275bc2fa93004236b497baf6397b04e7db7769a1fbf70a1118",
+    "art-source/vehicle-bake/beetle/v1/capture.mjs": "4872f87a6d44964ecba229339ff2bfeb51a8c33ae4c7b959719336d4c1d852e4",
+    "art-source/vehicle-bake/beetle/v1/car.blend": "c2198c3f1e8726d5089144a877d30357347ef07e22f14b93fd3809132e5f2716",
+    "art-source/vehicle-bake/beetle/v1/coverage-region.json": "f7bf2cb16b037406e6e1de4fe7090b8b5329c319868f1817311483945a14d71b",
+    "art-source/vehicle-bake/beetle/v1/evidence/clearance-input.json": "c50c1e82dcf01391e23240bb090fda55532bec2e075401fe915036334c433f4a",
+    "art-source/vehicle-bake/beetle/v1/evidence/engine-capture.json": "ecdad2da44567ad96d66821404a2183a8b2ea64662248e6b5752d1d5ede015c6",
+    "art-source/vehicle-bake/beetle/v1/evidence/prior-retained-preservation.json": "55ca6749c3ae5560405ee179a7575d0a103b3ce68d16f2a13e9b0f7608652bde",
+    "art-source/vehicle-bake/beetle/v1/evidence/replay-verification.json": "f78fb0b28f80f59ca387306a15afb9cb559a8ac897b6ef84db01709fcc2c5363",
+    "art-source/vehicle-bake/beetle/v1/evidence/shared-clearance.json": "6b304d68725f86afa4aa9d6a884dd5f36dbb2b82181f20b85b729e5ed26e782d",
+    "art-source/vehicle-bake/beetle/v1/evidence/upper-wheel-coverage-final.json": "a936a24f585a77d02ba340d4682a9dec36a958ace6f3e0970f7b0107a151a342",
+    "art-source/vehicle-bake/beetle/v1/family.json": "e8faa8e5922e3a1b51bf88d366c1f470b5079661af21a9ccc8215fe758154868",
+    "art-source/vehicle-bake/beetle/v1/finalize.py": "1e2441b47d7954e561b30d98187015d92570b8f436320042868d58d0477f14e4",
+    "art-source/vehicle-bake/beetle/v1/master.blend": "9fae08c2f01a6871f55ee673e7c870ebc616a58ff6c63e618a4288545ceb30ff",
+    "art-source/vehicle-bake/beetle/v1/model.glb": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "art-source/vehicle-bake/beetle/v1/paint-ownership.json": "71aba6c3a51dfd0849baf101566e4f9b0791627a0e58b465ec5049797ab5db16",
+    "art-source/vehicle-bake/beetle/v1/palette-draft.png": "0eee1618d9d40efcf11703f299a2028f8dd33ace6a442539ebbc78ae77b284fa",
+    "art-source/vehicle-bake/beetle/v1/recipe.json": "5e2f0a9d25b332a14475b9091433b5703f172a82dee695a9fa3d768f681b0e01",
+    "art-source/vehicle-bake/beetle/v1/sheets.py": "2f727844a09a3df3d6ca0ed7c17f26ad89b496a788606c543d9f36c524f78189"
+  }
+}

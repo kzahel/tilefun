@@ -55,6 +55,12 @@ data/
 /public/demos/vehicle-bake/c-surface-bake/*
 !/public/demos/vehicle-bake/c-surface-bake/v3/
 
+# Original rounded-compact review: retain the completed source/export revision.
+/art-source/vehicle-bake/beetle/*
+!/art-source/vehicle-bake/beetle/v1/
+/public/demos/vehicle-bake/beetle/*
+!/public/demos/vehicle-bake/beetle/v1/
+
 # Unselected style-study folders remain scratch until explicitly retained.
 /art-source/vehicle-style-study/*/
 !/art-source/vehicle-style-study/01-detailed-shaded/

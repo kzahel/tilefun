@@ -1,0 +1,23 @@
+{
+  "family": "classic-rounded-compact",
+  "revision": "v1",
+  "forwardBlender": "-X", "upBlender": "+Z", "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "wheelRadius": 0.39, "wheelWidth": 0.23, "axles": [-1.34, 1.34], "halfTrack": 0.86,
+  "stations": [
+    [-2.14,0.46,0.54],[-2.02,0.59,0.68],[-1.8,0.66,0.82],[-1.55,0.68,0.95],
+    [-1.26,0.69,1.08],[-1.03,0.7,1.32],[-0.77,0.73,1.62],[-0.48,0.76,1.83],
+    [-0.15,0.77,1.94],[0.2,0.77,1.96],[0.55,0.76,1.87],[0.86,0.73,1.68],
+    [1.13,0.7,1.41],[1.4,0.68,1.13],[1.68,0.66,0.9],[1.96,0.59,0.68],[2.14,0.46,0.5]
+  ],
+  "fender": {"archRadius":0.449,"shoulderRadii":[0.59,0.65,0.63,0.55,0.449],"lateralStations":[0.60,0.72,0.88,1.02,1.065],"segments":14},
+  "palette": {
+    "ink":[58,58,80],"tire":[52,52,70],"tireLight":[70,70,94],
+    "paintDeep":[164,125,75],"paintShadow":[197,157,92],"paintMid":[224,188,113],
+    "paint":[241,211,139],"paintLight":[250,227,166],"cream":[255,239,194],
+    "glassDark":[86,89,114],"glass":[115,140,168],"glassLight":[164,187,213],"glassGlint":[186,210,224],
+    "rim":[131,136,151],"silver":[212,212,230],"white":[248,248,248],"ruby":[186,39,88],"amber":[234,165,99]
+  },
+  "camera": {"elevationDegrees":50,"orthoScale":7.2,"nativeSize":128,"translation":[0,28]},
+  "paintMethod":"Family-authored semantic surface palette, common owned parametric regions; no source-image projection, screen redraw or directional texture."
+}

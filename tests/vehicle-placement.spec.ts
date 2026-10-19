@@ -1,5 +1,6 @@
 import { expect, type Page, test } from "@playwright/test";
 import type { GameClient } from "../src/client/GameClient.js";
+import { VEHICLE_MODELS } from "../src/traffic/Vehicle.js";
 
 const vehicles = (page: Page) =>
   page.evaluate(() => {
@@ -87,7 +88,7 @@ for (const [model, label] of [
       await page.getByRole("button", { name: "Edit", exact: true }).tap();
       await page.locator('[data-editor-tab="vehicles"]').tap();
       const picker = page.getByRole("group", { name: "Vehicle picker" });
-      await expect(picker.getByRole("button")).toHaveCount(47);
+      await expect(picker.getByRole("button")).toHaveCount(VEHICLE_MODELS.length + 1);
       expect((await page.getByTestId("editor-panel").boundingBox())?.height).toBeLessThanOrEqual(
         400,
       );

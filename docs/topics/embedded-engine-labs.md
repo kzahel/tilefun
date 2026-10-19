@@ -25,6 +25,11 @@ the same vehicle definitions, asset loader and mesh registry used by the game an
 Traffic playground. Its cardinal sprite fallback and physical bounds also belong
 to the shared catalog; no lab-only rendering or traffic policy is introduced.
 
+[148](../tactical/148-beetle-gameplay.md) uses that same additive path for the
+accepted Beetle: shared palette, assets, traffic model selection, dimensions,
+handling and mesh registry. Its 81×38×35px body and exact own mesh/cardinal fallback
+are shared by game and Traffic playground; no separate lab car is introduced.
+
 [140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
 ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
 30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh

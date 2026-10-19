@@ -1,6 +1,6 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe appearance accepted and shared gameplay integrated. Beetle, school bus and pickup are queued follow-on experiments.",
+  "gate": "Red coupe and Beetle integrated. School bus is the next owner-authorized authoring/review checkpoint.",
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -18,9 +18,11 @@
       "name": "Beetle-style compact",
       "family": "Rounded compact",
       "priority": 2,
-      "status": "backlog",
-      "authorization": "Owner-authorized follow-on experiment after red-car agreement; queued, not started in asset-commit checkpoint",
-      "next": "Test rounded roof/fenders and curved glass with the selected pipeline"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner explicitly requested Beetle authoring for review",
+      "next": "Spawn Beetle-style compact from Edit > Vehicles or normal road traffic; next authoring example is school bus",
+      "candidate": "beetle-v1",
+      "ownerFeedback": "2026-10-19: looks fine; requested commit, gameplay activation and next vehicle"
     },
     {
       "id": "school-bus",

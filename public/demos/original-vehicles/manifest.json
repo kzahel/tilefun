@@ -1,0 +1,952 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "beetle-v1",
+      "name": "Beetle-style compact",
+      "title": "Beetle-style compact \u00b7 rounded compact experiment v1",
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original family-specific loft and swept open-arch fender geometry; directly authored semantic UV surface paint. Glass, frames, seams and vents live on actual coachwork UVs. No high-to-low/projection transfer claim.",
+      "audit": {
+        "triangles": 2554,
+        "vertices": 5462,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 198312,
+        "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/beetle/v1/atlas.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/atlas.png",
+          "sha256": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/comparison.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/comparison.png",
+          "sha256": "7dc2d79dbb74bbda20a38e1b25a0774af584b3f3facda4dba622deb9ad86ca2e"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/capture.json",
+          "sha256": "ecdad2da44567ad96d66821404a2183a8b2ea64662248e6b5752d1d5ede015c6"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-0.png",
+          "sha256": "3a353b0e9b5dac70a8b6de7d269f75ed58b88bd8bf0120b1d016a7e7ffe4ec7d"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-1.png",
+          "sha256": "e8621dc79a4c4f41430778a594b3a6c00925edcecdab291b90932c2ae5f488eb"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-10.png",
+          "sha256": "83a56ec700c6cbc840545e70e129360c369ad7faf3c8c77c2fa48f8709f14c3c"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-11.png",
+          "sha256": "8ec0152259ec8e37541fd1beb03d221bcc7e6cc74d0c189f0d392a0741d45039"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-12.png",
+          "sha256": "9608157dec3672a5ddeda2f818cf721fb7cf462c2ef4d0683d0664a3a41b9583"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-13.png",
+          "sha256": "4c3bbaec3a40886afa6ea8d8b1819c4217ea0ee7c4463a58be7ff9f6747c9c47"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-14.png",
+          "sha256": "f3ed8ef006651b570e225f6576d9453981f1d33d86407edb5335db48a687f8fd"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-15.png",
+          "sha256": "ddeb3dd463d6a8870c1cedad6dea7e8491b17bfaa2490021eab5de85a5b70633"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-2.png",
+          "sha256": "c3ef2a17593f169eeb7a4bb39820fea8d286336c1f9d4be86ef93a0383d24f59"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-3.png",
+          "sha256": "f5ccb71c5e7e4d9b469c8979f928cf388bec0d9b90d2adeb67235228cd58295d"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-4.png",
+          "sha256": "6f1ea79c09d8ce17d0f9aa35f4ad41f26449a269379485021906781ffe21d895"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-5.png",
+          "sha256": "beb380f029e8c528883c53e06e4b3fd2e8ad800ebc2d98a00f46befbfe2816ce"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-6.png",
+          "sha256": "e096da8a6177d39e8975479392035b5b60f51e10fafa7b4604a82e456cb57380"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-7.png",
+          "sha256": "7b40b0c419900d2af4b916241a096f20a517550aefccb8f535b2e77b4824b3dd"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-8.png",
+          "sha256": "01ee11c47f9fefc2e8e132be39d19dfb07112bf35855580bb0b071a824b5deb5"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/engine-9.png",
+          "sha256": "1aca623d99427c4dec93bfa3a97681310fbfa97e8d179f8f488825e2a3bf13fa"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-0.png",
+          "sha256": "cb9184af3bdb961d7b021e8634f76df1f3f4f6cf699317a363234a9b57a5085e"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-1.png",
+          "sha256": "3c56c1f230eda5dce047419e19ac1027e481d5c48a26de2e9f7fc5a074f3725e"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-2.png",
+          "sha256": "c727069987b6e0e11e180b8d2e18c3df9e60a3ab00939cfc7315f83068a68c9d"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-3.png",
+          "sha256": "16a0205a39da685553a013b86aa07bb6f71faa38d5cbd364aee39c066a61d2ac"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-4.png",
+          "sha256": "1c616c09ca7035613dba0f4677cf0921399a60176d9118189a2d053cce88f38e"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-5.png",
+          "sha256": "38d19edef99305b79441e559a673f5777c9c8f72fed5d2cce7b689a09f98400a"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-6.png",
+          "sha256": "03e37406421946331137df4baa1bc90aa0772d0637d417e923c8747526130513"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/roll-7.png",
+          "sha256": "1911dd3ffa1cd8447772d58ecbb3b524e1543f3938759dfeb37114f27ada939c"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-0.png",
+          "sha256": "ab4fc0a29fc9f7f674f695dacb1c868740d6e81466094957346c17d580eb8c27"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-1.png",
+          "sha256": "d55126049ba6a492becdd99acfac2925936b04d5deac49c1ac7e4825b0f306a4"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-10.png",
+          "sha256": "6d8fab5a8ee145bd34347b9891bdf42aa8cc4431fd348ebdf613c177fa6899e5"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-11.png",
+          "sha256": "a1c0efabc8c1a7062bc4b5a5a6bdab8653f6d23f706b86302d4a5054286e7495"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-12.png",
+          "sha256": "9be03f1d819427de31ed27e1cf3b6ea042ec7a42336fc65c50dd2df60d36d71a"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-13.png",
+          "sha256": "513c549b428be382020efde78d4175de82be51fdc48d11658db36fb411e6a8a5"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-14.png",
+          "sha256": "6b6adc0de2f6e56e4b876edced86b53c803997f638abca98f124c93d650605c2"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-15.png",
+          "sha256": "467b2fce3d5fd2539a2e438971add04d6d8e8ca1b38530d130f8ac8ce4ab19de"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-2.png",
+          "sha256": "cb9184af3bdb961d7b021e8634f76df1f3f4f6cf699317a363234a9b57a5085e"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-3.png",
+          "sha256": "73ed27c427652c93a5116bcf6f9abb3c644b84688a44f61721ed04a2dd9662a7"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-4.png",
+          "sha256": "f7ce36ef74ddeefdf4703a46cbb309544c5b5e2160befe9c4cb17e9a68c31e3f"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-5.png",
+          "sha256": "183c0cb2a669311390e7f6f151891b9a5ec0cf18f2e731166779a2dd50c4d8df"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-6.png",
+          "sha256": "12a23342dc4435776c307077001ebff166d3e1b70e2c3822661ae1f30d685b37"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-7.png",
+          "sha256": "f7397a5946c0659518e366ec4807ba0003ec7f7b30e98899cb47e4bf428c5c8f"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-8.png",
+          "sha256": "68f7f22175491d0c80d1294b6f1a3ddbec122d5dea81fcaaeb47540956cf97e1"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/study-9.png",
+          "sha256": "0fc11ef453897d41501118a4565ea30c292363dc0042e1f1a626d117b3b40012"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/engine/wire.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/engine/wire.png",
+          "sha256": "e12434858ac4c7eddb31b5b14c80270f0275b3bbd9515599737004ebf0c13416"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/inspection-engine.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/inspection-engine.png",
+          "sha256": "80ad5a3c47c53b19697c84f4c6460dac82df76e73814efa9a03ce09ea6fd128a"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/inspection-roll.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/inspection-roll.png",
+          "sha256": "114838ccc36d066dbe8fac4db12000b0d2b67ef46e2ae7602e6fa3ff200176b4"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/inspection-study.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/inspection-study.png",
+          "sha256": "89f465dda69bbd2cebf37fa63e6386d10e804fc8702fc9c2e86887171ff17faf"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/model.glb",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/model.glb",
+          "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/recipe.json",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/recipe.json",
+          "sha256": "5e2f0a9d25b332a14475b9091433b5703f172a82dee695a9fa3d768f681b0e01"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/report.json",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/report.json",
+          "sha256": "b640747480e22769948add00e1063473f9337d723bbbf7244162339405e53fb8"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/turntable.gif",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/turntable.gif",
+          "sha256": "5688d5c0ea706e6e9d4334532ca9b9496ca701b2488f886142c460297ca5e767"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-0.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-0.png",
+          "sha256": "51272087ecd2e2669dc2da99821042ee91c95c7ff2b5ecdbbf1b11836bcaf7b4"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-1.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-1.png",
+          "sha256": "61b4bb74150faa42e65b7e8f75cde7857e81dcac4845d07f1eb18f6e70bd93cf"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-2.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-2.png",
+          "sha256": "1400fd4da326033b2c4eea4de8369a0d12e25072231aba08bb857adc5c6fe248"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-3.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-3.png",
+          "sha256": "dc3aba3d2ae5cd2df9854713f16bb0d9f4d1acc553dccde737965136bbaa0188"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-4.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-4.png",
+          "sha256": "59f7c7fdf4fd64d33ec5140fe1ea88a7adf409365f95afae35f965de0ea4d3a7"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-5.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-5.png",
+          "sha256": "5845cb9db249fc4c8d95f441014a3cb883db073f68b479c3cf37961b6a5d1404"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-6.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-6.png",
+          "sha256": "57dd1a76cbe4d16e38d7329559daedc1155c1d0b3efb778e4b58c55748b31228"
+        },
+        {
+          "source": "demos/vehicle-bake/beetle/v1/view-7.png",
+          "retained": "demos/original-vehicles/beetle-v1/inputs/view-7.png",
+          "sha256": "c534fc8971ae810026f15dae44ca2fe9b8f840cd39d176b60f15473317652f61"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/beetle-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "beetle--v1",
+          "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+          "triangles": 2554,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 6.782609082236107,
+              "minimumGap": 0.9657946073013193,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 6.782609082236107,
+              "minimumGap": 0.9657946073013193,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 6.782609082236107,
+              "minimumGap": 0.9657946877043528,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 6.782609082236107,
+              "minimumGap": 0.9657946877043528,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 6.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 6.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 6.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 6.782608695652176,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/beetle-v1/browser-qa.json",
+          "sha256": "3be36e1fba85d8caee118862f62f806eb0d2f757a22c0728c64f8490df744fad"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/candidate.json",
+          "sha256": "50b45b3c61fce087751ffffa91c62e0f526985b54163695cd8681b03d3364e18"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/capture.json",
+          "sha256": "0658b75021a44162fdf7fec22d935c89cecfe96a8680a54ab18ed8baba0dde80"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/contact-sheet.png",
+          "sha256": "63d89e92c7d32da51b030e2ff58f173d69c41056d7035ca06c0afab0adfc8e96"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-0.png",
+          "sha256": "2a170b1aa75da42aefc4778a0ff2a6c22f9ae0ed64ae0dd016ebb6a6083114d5"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-1.png",
+          "sha256": "a86b09be09a114d06a7eadb558fab2d853d68eee7271acbeb57bc308569ebe9a"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-10.png",
+          "sha256": "cdc6ef9f9c6c8fe3768fbc9ffbba5fbb452e367a205a7356e7258d6ed7142be2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-11.png",
+          "sha256": "de621ab4f9177798307c7b4141307b18f59a145088a4496cb3e3cd0f84cdc143"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-12.png",
+          "sha256": "a57fda9e1a83870ff5a4222c24e65f07b7d07e5c0d62a75dec9c481136681cc2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-13.png",
+          "sha256": "6e949af0d2a3a45975be0a230b84d571ecb68720b0a8d2ade6f0290cd6dd020f"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-14.png",
+          "sha256": "0724643804f0e79377122b62d9107fbdc9c778a886ccec6733dee7aa91f36a7d"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-15.png",
+          "sha256": "6a28f60c90608918ad0c6b8938fad904b9b2076103bb994c9c518be78c302f0f"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-2.png",
+          "sha256": "1f15cd8aefad9e34ab45b5f3201ff061354041bcbb4b4d968f98001d92080253"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-3.png",
+          "sha256": "593b49f813feae9809d301ec4856201add0d2e31a33817e13d093824e93a3e07"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-3x.png",
+          "sha256": "f4dc736be77612555d80ed94b363aef41a074ad497b9ee68fc918594b2a8d827"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-4.png",
+          "sha256": "e46bfb27914a6c8bf85705bae8559458eefc8310f4830ca57bed3b0de41e2004"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-5.png",
+          "sha256": "9fa406b9c1963a273a10d711bacebac106c8bf9f74c076d5ef73907181e597d0"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-6.png",
+          "sha256": "57bab7dd135c7f8d857a9844c47d42e9f6b3cbe906dd9a0e87bd210d5f514331"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-7.png",
+          "sha256": "33d712c3da7d72f9bb91c1af98e719e2bbf2264c2744a3e7de46006c78d2f07d"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-8.png",
+          "sha256": "0bdadadd7ea115a2f7b6801b9e7cbdfcc9d8ed602baed9ab79f4bd685059c3fa"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/engine-9.png",
+          "sha256": "a49c53180fd4285547742e749d712384147bf7ea87bab4c462f362ba563ca925"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-0.png",
+          "sha256": "1f15cd8aefad9e34ab45b5f3201ff061354041bcbb4b4d968f98001d92080253"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-1.png",
+          "sha256": "5ef781792fbb7186ed7e851ccc47d519f2582336b92e58c743f05b058920f562"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-2.png",
+          "sha256": "38d76fc49a5d50a32fd33689ae30c174ce40804d7f62d826b718d22b8aa0f009"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-3.png",
+          "sha256": "5fe4189378f99d6f325ef226ebba11fbf7c6406715d090805427a60a865fcbdd"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-4.png",
+          "sha256": "2b3e108ab7244e1cc976e208791742f48cbfe33b885cd365d84e8d2b01cfcaca"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-5.png",
+          "sha256": "496b58d85227b526f9bf3a8828b3b71cd72170798ce6464d07a44862b9589e32"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-6.png",
+          "sha256": "6d64c10d71aaec66d80aa865b68b135cad627fcd608e15fd5e12f1e2e302aa71"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-roll-7.png",
+          "sha256": "d1f067d0c07d9004f2143201b386fb10b1b73d1ab4d3e92d730eabec77befc07"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/game-turntable.gif",
+          "sha256": "dfb8484e57e741863059d3d3e5a89ab3e84cb3869bad88cb73a403c720aa377b"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-0.png",
+          "sha256": "bee2536414d98c47e5f2a549e89989c21948137bb099c49bcf483b0ba41b4431"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-1.png",
+          "sha256": "907ef793bed5a3e450934028a9e01e96c4bbb37c266efc363ef548d6bb426914"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-2.png",
+          "sha256": "521a4e2dcfffc1c2a54eae9576d55f23e2615fb9acab36cf6a35770db79b0621"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-3.png",
+          "sha256": "a296aabbdb782e49f1b867ee80388cd3e939437154ad7bd36c6961e971c24a87"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-4.png",
+          "sha256": "2b2d74c51e2a66eb4d94386bd416fab6ae6cfdd9f2bf9f84500cc641f60377d2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-5.png",
+          "sha256": "7a2947d54a5e40fa0ffbd0facaa72c203968bdfcffbb78c057df88b3a229cf79"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-6.png",
+          "sha256": "8d5c745e5de19a2ab13dbca09ad131ecea82337b8ec5655cc2565a66f94235af"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/roll-7.png",
+          "sha256": "bb7086a0105cee510ea94ca3a88c2c3f8dccafcc74cbfa11696ce05c50e5c4af"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-0.png",
+          "sha256": "0a474ebefe8a36f7c3b87ee2cbef63f9c8be404b8d0981eae26a2d9f872313c6"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-1.png",
+          "sha256": "017a6c5bed4223ca8add328f1557df701798b97fab43d234cde70f78e58dae80"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-10.png",
+          "sha256": "90aedd6e69d3b684f7ff90f728d57661d60293aabea9cc9a6825a3bbd71a2420"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-11.png",
+          "sha256": "2f70c77ec4b7ae71f70adabe4e0ca12ae8a1f7115441efcdb36f2520064058d2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-12.png",
+          "sha256": "a970c7bfb056b9b12187350ee3c5f92f07823afa8c32ae72560b3525b651e9ee"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-13.png",
+          "sha256": "16b2a547916679dd62d4fb44178459f83211c644fbebd9c73a702f23dfa636be"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-14.png",
+          "sha256": "7efa2fcb32aaddea5d84c7b87e48547b63768440bbc399f2900ec95fe8fc84d3"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-15.png",
+          "sha256": "8ae598c421be16ba96d7a8d516be20a2517440fd79798947953e03b4124258df"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-2.png",
+          "sha256": "bee2536414d98c47e5f2a549e89989c21948137bb099c49bcf483b0ba41b4431"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-3.png",
+          "sha256": "037347eadf1c61416cdc93e7816ef6acb77c31028a9fd45424a68ba239da5fd4"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-3x.png",
+          "sha256": "361bd079c79d50e8e3df73dd011c9cf6183d87f6b9484cb21085535b03d21661"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-4.png",
+          "sha256": "d56338112884106e895ec9d7a0d15f1228a5350e0bc44dabae176502a06288b4"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-5.png",
+          "sha256": "6225d1fc9c07d5c381f90fe9aea707a06cd833c228ab5c7731f969257428bfd0"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-6.png",
+          "sha256": "8d4d7a272205dd23c2314eb243c76e4fdea2093e022f3ed0d7636557b84a5fbb"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-7.png",
+          "sha256": "2912d813ea146bad40e1d2f0631d296fd0a3700ca13fe231f441c91815ad61b2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-8.png",
+          "sha256": "635fb40ff1bb2adab86877b90380d06ccd3888611e4e1d8caf7375caa46dddc9"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/study-9.png",
+          "sha256": "fb8d8537e4cc6aa11e1f1305bbc4622262946619f2c19cfbc7cb309f6a06fc7e"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/turntable.gif",
+          "sha256": "1b630e47158d5dbfcbd9081869d9ecf5dfd3af7752899cb9e58eae967d4b0868"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/viewer-desktop.png",
+          "sha256": "dc6930529075f5e01e559eb6db94ca7ba952f0603a481772d0489ec90ee3b0a3"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/viewer-mobile.png",
+          "sha256": "ea10bf987bd237e6244b4f44f75dcfefbce6987d302e216f229592423f7a9b14"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/wheel-phases.png",
+          "sha256": "90b4a84f4ff57f0c9642c9ce922aa22cad7c48c820aeec7117b755d9b8dc9cb5"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/wire-engine.png",
+          "sha256": "1dea2c140cd81ff38c5ae5ef002c8b5a71a50285360608cf6d76ea78a6e76897"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/captures/wire-study.png",
+          "sha256": "492260b4708d0fb8e55e7829803cf6bc2de1beb6ee2d5502c08e3bfe85b20595"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/clearance.json",
+          "sha256": "6b304d68725f86afa4aa9d6a884dd5f36dbb2b82181f20b85b729e5ed26e782d"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/index.html",
+          "sha256": "f9b7d4f83f80c56fb0563d6c84075abac2ae956d56c683905cc2e6b044f43281"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/atlas.png",
+          "sha256": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/comparison.png",
+          "sha256": "7dc2d79dbb74bbda20a38e1b25a0774af584b3f3facda4dba622deb9ad86ca2e"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/capture.json",
+          "sha256": "ecdad2da44567ad96d66821404a2183a8b2ea64662248e6b5752d1d5ede015c6"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-0.png",
+          "sha256": "3a353b0e9b5dac70a8b6de7d269f75ed58b88bd8bf0120b1d016a7e7ffe4ec7d"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-1.png",
+          "sha256": "e8621dc79a4c4f41430778a594b3a6c00925edcecdab291b90932c2ae5f488eb"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-10.png",
+          "sha256": "83a56ec700c6cbc840545e70e129360c369ad7faf3c8c77c2fa48f8709f14c3c"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-11.png",
+          "sha256": "8ec0152259ec8e37541fd1beb03d221bcc7e6cc74d0c189f0d392a0741d45039"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-12.png",
+          "sha256": "9608157dec3672a5ddeda2f818cf721fb7cf462c2ef4d0683d0664a3a41b9583"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-13.png",
+          "sha256": "4c3bbaec3a40886afa6ea8d8b1819c4217ea0ee7c4463a58be7ff9f6747c9c47"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-14.png",
+          "sha256": "f3ed8ef006651b570e225f6576d9453981f1d33d86407edb5335db48a687f8fd"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-15.png",
+          "sha256": "ddeb3dd463d6a8870c1cedad6dea7e8491b17bfaa2490021eab5de85a5b70633"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-2.png",
+          "sha256": "c3ef2a17593f169eeb7a4bb39820fea8d286336c1f9d4be86ef93a0383d24f59"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-3.png",
+          "sha256": "f5ccb71c5e7e4d9b469c8979f928cf388bec0d9b90d2adeb67235228cd58295d"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-4.png",
+          "sha256": "6f1ea79c09d8ce17d0f9aa35f4ad41f26449a269379485021906781ffe21d895"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-5.png",
+          "sha256": "beb380f029e8c528883c53e06e4b3fd2e8ad800ebc2d98a00f46befbfe2816ce"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-6.png",
+          "sha256": "e096da8a6177d39e8975479392035b5b60f51e10fafa7b4604a82e456cb57380"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-7.png",
+          "sha256": "7b40b0c419900d2af4b916241a096f20a517550aefccb8f535b2e77b4824b3dd"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-8.png",
+          "sha256": "01ee11c47f9fefc2e8e132be39d19dfb07112bf35855580bb0b071a824b5deb5"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/engine-9.png",
+          "sha256": "1aca623d99427c4dec93bfa3a97681310fbfa97e8d179f8f488825e2a3bf13fa"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-0.png",
+          "sha256": "cb9184af3bdb961d7b021e8634f76df1f3f4f6cf699317a363234a9b57a5085e"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-1.png",
+          "sha256": "3c56c1f230eda5dce047419e19ac1027e481d5c48a26de2e9f7fc5a074f3725e"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-2.png",
+          "sha256": "c727069987b6e0e11e180b8d2e18c3df9e60a3ab00939cfc7315f83068a68c9d"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-3.png",
+          "sha256": "16a0205a39da685553a013b86aa07bb6f71faa38d5cbd364aee39c066a61d2ac"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-4.png",
+          "sha256": "1c616c09ca7035613dba0f4677cf0921399a60176d9118189a2d053cce88f38e"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-5.png",
+          "sha256": "38d19edef99305b79441e559a673f5777c9c8f72fed5d2cce7b689a09f98400a"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-6.png",
+          "sha256": "03e37406421946331137df4baa1bc90aa0772d0637d417e923c8747526130513"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/roll-7.png",
+          "sha256": "1911dd3ffa1cd8447772d58ecbb3b524e1543f3938759dfeb37114f27ada939c"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-0.png",
+          "sha256": "ab4fc0a29fc9f7f674f695dacb1c868740d6e81466094957346c17d580eb8c27"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-1.png",
+          "sha256": "d55126049ba6a492becdd99acfac2925936b04d5deac49c1ac7e4825b0f306a4"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-10.png",
+          "sha256": "6d8fab5a8ee145bd34347b9891bdf42aa8cc4431fd348ebdf613c177fa6899e5"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-11.png",
+          "sha256": "a1c0efabc8c1a7062bc4b5a5a6bdab8653f6d23f706b86302d4a5054286e7495"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-12.png",
+          "sha256": "9be03f1d819427de31ed27e1cf3b6ea042ec7a42336fc65c50dd2df60d36d71a"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-13.png",
+          "sha256": "513c549b428be382020efde78d4175de82be51fdc48d11658db36fb411e6a8a5"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-14.png",
+          "sha256": "6b6adc0de2f6e56e4b876edced86b53c803997f638abca98f124c93d650605c2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-15.png",
+          "sha256": "467b2fce3d5fd2539a2e438971add04d6d8e8ca1b38530d130f8ac8ce4ab19de"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-2.png",
+          "sha256": "cb9184af3bdb961d7b021e8634f76df1f3f4f6cf699317a363234a9b57a5085e"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-3.png",
+          "sha256": "73ed27c427652c93a5116bcf6f9abb3c644b84688a44f61721ed04a2dd9662a7"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-4.png",
+          "sha256": "f7ce36ef74ddeefdf4703a46cbb309544c5b5e2160befe9c4cb17e9a68c31e3f"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-5.png",
+          "sha256": "183c0cb2a669311390e7f6f151891b9a5ec0cf18f2e731166779a2dd50c4d8df"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-6.png",
+          "sha256": "12a23342dc4435776c307077001ebff166d3e1b70e2c3822661ae1f30d685b37"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-7.png",
+          "sha256": "f7397a5946c0659518e366ec4807ba0003ec7f7b30e98899cb47e4bf428c5c8f"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-8.png",
+          "sha256": "68f7f22175491d0c80d1294b6f1a3ddbec122d5dea81fcaaeb47540956cf97e1"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/study-9.png",
+          "sha256": "0fc11ef453897d41501118a4565ea30c292363dc0042e1f1a626d117b3b40012"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/engine/wire.png",
+          "sha256": "e12434858ac4c7eddb31b5b14c80270f0275b3bbd9515599737004ebf0c13416"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/inspection-engine.png",
+          "sha256": "80ad5a3c47c53b19697c84f4c6460dac82df76e73814efa9a03ce09ea6fd128a"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/inspection-roll.png",
+          "sha256": "114838ccc36d066dbe8fac4db12000b0d2b67ef46e2ae7602e6fa3ff200176b4"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/inspection-study.png",
+          "sha256": "89f465dda69bbd2cebf37fa63e6386d10e804fc8702fc9c2e86887171ff17faf"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/model.glb",
+          "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/recipe.json",
+          "sha256": "5e2f0a9d25b332a14475b9091433b5703f172a82dee695a9fa3d768f681b0e01"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/report.json",
+          "sha256": "b640747480e22769948add00e1063473f9337d723bbbf7244162339405e53fb8"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/turntable.gif",
+          "sha256": "5688d5c0ea706e6e9d4334532ca9b9496ca701b2488f886142c460297ca5e767"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-0.png",
+          "sha256": "51272087ecd2e2669dc2da99821042ee91c95c7ff2b5ecdbbf1b11836bcaf7b4"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-1.png",
+          "sha256": "61b4bb74150faa42e65b7e8f75cde7857e81dcac4845d07f1eb18f6e70bd93cf"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-2.png",
+          "sha256": "1400fd4da326033b2c4eea4de8369a0d12e25072231aba08bb857adc5c6fe248"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-3.png",
+          "sha256": "dc3aba3d2ae5cd2df9854713f16bb0d9f4d1acc553dccde737965136bbaa0188"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-4.png",
+          "sha256": "59f7c7fdf4fd64d33ec5140fe1ea88a7adf409365f95afae35f965de0ea4d3a7"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-5.png",
+          "sha256": "5845cb9db249fc4c8d95f441014a3cb883db073f68b479c3cf37961b6a5d1404"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-6.png",
+          "sha256": "57dd1a76cbe4d16e38d7329559daedc1155c1d0b3efb778e4b58c55748b31228"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/inputs/view-7.png",
+          "sha256": "c534fc8971ae810026f15dae44ca2fe9b8f840cd39d176b60f15473317652f61"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/review.css",
+          "sha256": "753cebae451b4d1313d5b9af82171dcafd514ff0ff0b6a847684d3ab04ed6baa"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/viewer.js",
+          "sha256": "dd6789b718b41ba92d52add04c8c44c1fb753cabc5093e74fc50d77e88cf89b2"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/visual-inspection.json",
+          "sha256": "83c10a01d76d7b80b64bc387a122e2b03dc901f89b95c8af6e5191b4ac184cf4"
+        },
+        {
+          "url": "demos/original-vehicles/beetle-v1/review-manifest.json",
+          "sha256": "9478fb898159219f27fd17ec969b2a5235278233422fbe2e8a196a371fe6e89b"
+        }
+      ]
+    }
+  ]
+}

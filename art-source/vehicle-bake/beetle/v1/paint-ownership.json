@@ -1,0 +1,105 @@
+{
+  "method": "Family-authored semantic surface palette, common owned parametric regions; no source-image projection, screen redraw or directional texture.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      164,
+      125,
+      75
+    ],
+    "paintShadow": [
+      197,
+      157,
+      92
+    ],
+    "paintMid": [
+      224,
+      188,
+      113
+    ],
+    "paint": [
+      241,
+      211,
+      139
+    ],
+    "paintLight": [
+      250,
+      227,
+      166
+    ],
+    "cream": [
+      255,
+      239,
+      194
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ]
+  },
+  "ownership": "Per-component names in master.blend; FACE paint_role attributes for component roles (coachwork UV pixels own its glass and panel details); separate wheel-only meshes. Coachwork continuous UV skin + side-panel strip; padded palette swatches intentionally overlap within identical trim/fender/wheel roles.",
+  "observedProjectionTexels": 0,
+  "unknownProjectionTexels": "not applicable: wholly original semantic authored surfaces",
+  "uncertainty": "Hidden/underside surfaces deliberately authored; no photographic or source sprite fidelity asserted. Shape and highlight choices require owner review.",
+  "outerInk": "none in atlas; shared renderer supplies exterior outline",
+  "glass": "Glass apertures and four-sided frames authored directly on actual cabin triangle UVs, broad blue bands, no overlapping glass meshes.",
+  "limitations": [
+    "No automatic high-to-low transfer demonstrated.",
+    "No steering/suspension clearance qualification."
+  ]
+}

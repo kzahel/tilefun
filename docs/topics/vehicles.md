@@ -20,6 +20,18 @@ camera; Canvas, disabled/failed/loading meshes preserve the same car. Conservati
 sporty driving is 156px/s with existing Fast and Reverse controls. Traffic remains
 bounded and selected normally, so a coupe need not appear at every road arrival.
 
+## Original Beetle-style compact
+
+[148](../tactical/148-beetle-gameplay.md) adds the owner-accepted Beetle through
+the same shared catalog as `vehicle-v1:beetle`, labelled **Beetle-style compact**.
+Its exact 2,554-triangle model and matching game-camera cardinal sprites preserve
+the reviewed proportions. Measured conservative bounds are 81×38×35px, ordinary
+road admission is 88px and its turning radius is 56.7px. It uses gentler compact
+handling (105px/s, 180px/s² acceleration) and existing drive/reverse/Fast controls.
+The combined roster is 47 vehicle types, 46 eligible for automatic road traffic.
+Editor placement also works in existing outdoor worlds without generated roads.
+The immutable source bank remains 45 types/180 views.
+
 ## Game-camera proportions and contact
 
 [130](../tactical/130-vehicle-game-camera-fit.md) fits all 45 model side heights to
