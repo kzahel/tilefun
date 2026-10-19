@@ -1,0 +1,17 @@
+{
+  "identity": "capuchin-monkey-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5353656323716223,
+    "up": 1.8157894736842124,
+    "left": 1.8509079324625688,
+    "right": 1.8509079324625688
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

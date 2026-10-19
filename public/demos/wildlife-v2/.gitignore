@@ -543,3 +543,10 @@
 # Verified pending motion identities, owner-authorized autonomous run 147.
 !chimpanzee/roster-v3/*
 !orangutan/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!capuchin-monkey/roster-v3/*
+!ring-tailed-lemur/roster-v3/*
+!mandrill/roster-v3/*
+!proboscis-monkey/roster-v3/*
+!japanese-macaque/roster-v3/*

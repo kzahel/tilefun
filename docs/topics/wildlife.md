@@ -74,6 +74,22 @@ readiness pass. All new pixels remain pending human review.
 **130 of 196 implemented; 66 remaining.** Five remaining primates have audited
 unregistered banks; four distinct fish prototypes are also in progress.
 
+Fourth checkpoint: capuchin monkey, ring-tailed lemur, mandrill, proboscis monkey
+and Japanese macaque complete the eight roster primates. They have distinct
+faces/muzzles/ears, caps/cheeks, articulated tails (including lemur rings), buried
+limb roots, planted feet, moving torsos and foraging actions. Ordinary shared
+woodland authority owns movement, group spacing, escape and persistence; tree
+climbing/brachiation remain future work. All join editor placement and the browser.
+Explicit diets allow larger hunters to consume them; eagle can hunt capuchin/lemur.
+Natural meals retain delayed distant replacement; placed prey remain finite.
+Validation: **4,665 unit passes**, five known Windows failures, ten skipped;
+120 focused checks; **31 browser cases**, including **580 visible previews**;
+five byte-identical banks and 1,640 exact native/3x crops. Typecheck, isolated
+lint/build and the 1,459-candidate full Chromium manifest pass. Mid-run Workshop
+inbox and art notes have no pending requests; new exact art remains pending review.
+**135 of 196 implemented; 61 remaining.** Four fish banks await runtime integration;
+five ground-specialist source prototypes are underway.
+
 ## Small-animal roadkill
 
 [143](../tactical/143-small-animal-roadkill.md) implements the owner's accepted

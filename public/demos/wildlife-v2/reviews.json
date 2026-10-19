@@ -14779,5 +14779,470 @@
         "sha256": "050e773899a47bd6c81d33a04490d0963b4a1cfbdfb027bb455c6ee6d7d9fc46"
       }
     ]
+  },
+  {
+    "id": "capuchin-monkey-roster-v3",
+    "animalId": "capuchin-monkey",
+    "revision": "roster-v3",
+    "name": "White-faced capuchin · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/capuchin-monkey/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-capuchin-monkey-roster-v3",
+      "name": "White-faced capuchin sheet",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+      "source": "art-source/wildlife-v2/capuchin-monkey/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-capuchin-monkey-roster-v3-scene",
+      "name": "White-faced capuchin scene",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "784e869336e0ccb27221baa7b0be07ba3fb96e6534da71166f6dd27e645a87e2",
+      "source": "art-source/wildlife-v2/capuchin-monkey/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-capuchin-monkey-roster-v3-contact",
+      "name": "White-faced capuchin contact",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "bf7c6eb0f69251fc4ab4e8fed198b6da4d12b6912a6928a083253a8d4e494b12",
+      "source": "art-source/wildlife-v2/capuchin-monkey/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/capuchin-monkey/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/contact-sheet-native.png",
+        "sha256": "bf7c6eb0f69251fc4ab4e8fed198b6da4d12b6912a6928a083253a8d4e494b12"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/index.html",
+        "sha256": "b7209869b7f35a3ba9a1d0494193d3615ca63f821f9895d360cad422679f3c4c"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/pixel-audit.json",
+        "sha256": "e19da6b3f51bd4dea34a96c1a653fd3d146699713593969332f9c326c538c4ce"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/preview-native.gif",
+        "sha256": "a7ad9e7aa1f4515777b8b585c1ecc3e369a8fcbdbcf7f7f34c6fbca68fc9edf6"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/preview.gif",
+        "sha256": "f1da66555d616997839e0c0c58bab92b8d14221267ca076d816c1403b50001c9"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/scene-native.png",
+        "sha256": "784e869336e0ccb27221baa7b0be07ba3fb96e6534da71166f6dd27e645a87e2"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+        "sha256": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/source-audit.json",
+        "sha256": "2a27c5698acf0e086edfda57d379c63d35d31aa1370e8c203938e9c9d342fa73"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/sprite.json",
+        "sha256": "fa3b784a4fa11b7b1980301b29644f5cf893c50660968073f95d020709e0bccc"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/travel-native.gif",
+        "sha256": "bff2a33485106111563660d75a693324c08559cf3ae3aae18b7da5311ad217d5"
+      },
+      {
+        "path": "demos/wildlife-v2/capuchin-monkey/roster-v3/validation.json",
+        "sha256": "669ba90e85ecff51b5d3cd855ad1f1a5ebdbea35dfadedd13897640fb2fd29a8"
+      }
+    ]
+  },
+  {
+    "id": "ring-tailed-lemur-roster-v3",
+    "animalId": "ring-tailed-lemur",
+    "revision": "roster-v3",
+    "name": "Ring-tailed lemur · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/ring-tailed-lemur/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-ring-tailed-lemur-roster-v3",
+      "name": "Ring-tailed lemur sheet",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+      "source": "art-source/wildlife-v2/ring-tailed-lemur/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-ring-tailed-lemur-roster-v3-scene",
+      "name": "Ring-tailed lemur scene",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "a2c72ce54977487058fd02f04c6f7c410cfc9ef22fbd2e94509695458615a8b5",
+      "source": "art-source/wildlife-v2/ring-tailed-lemur/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-ring-tailed-lemur-roster-v3-contact",
+      "name": "Ring-tailed lemur contact",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8dc78c54ca41dbe66728a1c577826c7338d32f60097008c70b1db163dabf144a",
+      "source": "art-source/wildlife-v2/ring-tailed-lemur/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/contact-sheet-native.png",
+        "sha256": "8dc78c54ca41dbe66728a1c577826c7338d32f60097008c70b1db163dabf144a"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/index.html",
+        "sha256": "1f8820659e1361e0d758dc67c496c22a2d49f43891f6cea3d6aa35387fbd571a"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/pixel-audit.json",
+        "sha256": "5a56b1a6b8ec64530595e2968067391d2250c38cd3c94749cb780d749c43a9b1"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/preview-native.gif",
+        "sha256": "7c4a48e56d0e806eebfe292a1d827099647d6cae755f2c2cb1195290f3c9e093"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/preview.gif",
+        "sha256": "d16fc004d1d374da0acd4c5c0d913fb22a577ac406f954db9dbb070b7848ee99"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/scene-native.png",
+        "sha256": "a2c72ce54977487058fd02f04c6f7c410cfc9ef22fbd2e94509695458615a8b5"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+        "sha256": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/source-audit.json",
+        "sha256": "4f1efcba3988fda97c6bb14742c381f240238631edb20941fe1a899c043993da"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sprite.json",
+        "sha256": "5d3f057769d09c3d35e0f19001ce0167fd04a28407533e0a1d024d226dbf6b67"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/travel-native.gif",
+        "sha256": "e788848a293b05d806497b7cda160bdff0551bce602422b253c17e57784a6f84"
+      },
+      {
+        "path": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/validation.json",
+        "sha256": "993274f69277e3fc287de9dee7cde347e4ad9c2ccc7323bc570057196a34e570"
+      }
+    ]
+  },
+  {
+    "id": "mandrill-roster-v3",
+    "animalId": "mandrill",
+    "revision": "roster-v3",
+    "name": "Mandrill · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/mandrill/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-mandrill-roster-v3",
+      "name": "Mandrill sheet",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5",
+      "source": "art-source/wildlife-v2/mandrill/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-mandrill-roster-v3-scene",
+      "name": "Mandrill scene",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "dc2c208349ae840ea14fd2895005375fed39617c5129fe6286e1b7e8efe49b80",
+      "source": "art-source/wildlife-v2/mandrill/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-mandrill-roster-v3-contact",
+      "name": "Mandrill contact",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "890914656adbb843db8ae789138a16734e5b85bfc0065c149bc9176a7cc76081",
+      "source": "art-source/wildlife-v2/mandrill/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/mandrill/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/contact-sheet-native.png",
+        "sha256": "890914656adbb843db8ae789138a16734e5b85bfc0065c149bc9176a7cc76081"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/index.html",
+        "sha256": "7ac1d94158ac20d23849aa1e2ad5da718672b8dd8ad66270cac544aa2d760bc6"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/pixel-audit.json",
+        "sha256": "43115b65d845a7ba967b31e79ce09a024e1d142828cfac23131fe808a501168b"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/preview-native.gif",
+        "sha256": "7b368dac7c08e8d87258399c7bf8d1e01d5319c359e5c0dada456e5a403e683c"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/preview.gif",
+        "sha256": "7cda83e4101f656e9fd3f2354880d73ec037d145c14aefba64338585bfa045e0"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/scene-native.png",
+        "sha256": "dc2c208349ae840ea14fd2895005375fed39617c5129fe6286e1b7e8efe49b80"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+        "sha256": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/source-audit.json",
+        "sha256": "500b9f25ae30a5a12d63e70e0d9dee3d61a3fcd55f304dd69b9a6520c52cd779"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/sprite.json",
+        "sha256": "69c336e271c2ff9b0d740cb71de7a7f7f812532c2faef76c71e76eb15a525544"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/travel-native.gif",
+        "sha256": "2ad444d184ff70ecbb3d15761216e4f0412546ac62f732d4cce645a97c87a914"
+      },
+      {
+        "path": "demos/wildlife-v2/mandrill/roster-v3/validation.json",
+        "sha256": "4fa9545c6cda7c04984bf315d2519a65256c4627f30b2e4d98e7f95225b7c463"
+      }
+    ]
+  },
+  {
+    "id": "proboscis-monkey-roster-v3",
+    "animalId": "proboscis-monkey",
+    "revision": "roster-v3",
+    "name": "Proboscis monkey · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/proboscis-monkey/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-proboscis-monkey-roster-v3",
+      "name": "Proboscis monkey sheet",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+      "source": "art-source/wildlife-v2/proboscis-monkey/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-proboscis-monkey-roster-v3-scene",
+      "name": "Proboscis monkey scene",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "d277334360b85719b9295eeb1ec8eda6631ff8ef16be67817d8dc9992de2c5a5",
+      "source": "art-source/wildlife-v2/proboscis-monkey/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-proboscis-monkey-roster-v3-contact",
+      "name": "Proboscis monkey contact",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d6acfdd7f6a0b9c2a769a5cead77710b583eb6fcdb7c20ce59a406c152b63413",
+      "source": "art-source/wildlife-v2/proboscis-monkey/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/proboscis-monkey/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/contact-sheet-native.png",
+        "sha256": "d6acfdd7f6a0b9c2a769a5cead77710b583eb6fcdb7c20ce59a406c152b63413"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/index.html",
+        "sha256": "fd4edd219807c2975d57088fa69a6759aacb5c467c0fc258bbf885fb21c2ec7f"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/pixel-audit.json",
+        "sha256": "fc9234a62491fc09dda74ad749ce1786d33eb3c7646e12ccb612375bb680f0bc"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/preview-native.gif",
+        "sha256": "67e8bb42603650faa88a4246b93a599e756ca3a8c38ea2bb6c407d9e06455cb2"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/preview.gif",
+        "sha256": "b14c36a36ca99ece1c88e53b7280bb55258bf50bada06bbe55dd13ca00bd0b47"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/scene-native.png",
+        "sha256": "d277334360b85719b9295eeb1ec8eda6631ff8ef16be67817d8dc9992de2c5a5"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+        "sha256": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/source-audit.json",
+        "sha256": "1fd031ea6678856ca99295e92a522f44ae3a31f3a8b99f69e6243a2d6c3e61ec"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/sprite.json",
+        "sha256": "2269bd9974f7caf89124f45b465cebbb5aaa3befca8ea6366977e4963e985a0f"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/travel-native.gif",
+        "sha256": "2069da84d83f19404adfd26b460cec666b100a25143f5e4b1e9ab05d2a29b7d4"
+      },
+      {
+        "path": "demos/wildlife-v2/proboscis-monkey/roster-v3/validation.json",
+        "sha256": "f6399610c85f4eb7030b0e07560434965a5b1b78375a6a6a60bf3e25dbf56d6f"
+      }
+    ]
+  },
+  {
+    "id": "japanese-macaque-roster-v3",
+    "animalId": "japanese-macaque",
+    "revision": "roster-v3",
+    "name": "Japanese macaque · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/japanese-macaque/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-japanese-macaque-roster-v3",
+      "name": "Japanese macaque sheet",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
+      "source": "art-source/wildlife-v2/japanese-macaque/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-japanese-macaque-roster-v3-scene",
+      "name": "Japanese macaque scene",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "7291d4aeaf677ea59a303146d8afe44e2648c602e668864bf116f95006ee55d4",
+      "source": "art-source/wildlife-v2/japanese-macaque/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-japanese-macaque-roster-v3-contact",
+      "name": "Japanese macaque contact",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c6d097c612c008fc19de619a0b7b7736fffa719aedafd8148742ee238ece8233",
+      "source": "art-source/wildlife-v2/japanese-macaque/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/japanese-macaque/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/contact-sheet-native.png",
+        "sha256": "c6d097c612c008fc19de619a0b7b7736fffa719aedafd8148742ee238ece8233"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/index.html",
+        "sha256": "53f64236d57ffe5d371a10559e323b686f7015cd8e8e32a58d944ffd66b2572d"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/pixel-audit.json",
+        "sha256": "926e317b8410344029481dd0b28acd0f4830b1bb59ad698dc272723ae4704ec8"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/preview-native.gif",
+        "sha256": "18f2863645621578c4b6b7d5ddc053066b5126eb710e226be09a201a6c513bf6"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/preview.gif",
+        "sha256": "8e539a5a1575f43bc00740bdedd61ae4c998ee2ca10f75f34eda1e7af5809f6b"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/scene-native.png",
+        "sha256": "7291d4aeaf677ea59a303146d8afe44e2648c602e668864bf116f95006ee55d4"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+        "sha256": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/source-audit.json",
+        "sha256": "0498d877900204d9b32b307c89426e5e25a228c4bc2b43f533e55f137d8fafc9"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/sprite.json",
+        "sha256": "5627ce9fc2d1c07cefb3b078442c098faf8bc0b68eabad5423c8cfb4e1d66f33"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/travel-native.gif",
+        "sha256": "98b410c99de1804df5b470a183e394b403640383591891d55b064aaf14d3622c"
+      },
+      {
+        "path": "demos/wildlife-v2/japanese-macaque/roster-v3/validation.json",
+        "sha256": "3a52bc0e6a8b287307c6def14c3d5638ad044f51b478595b05c8f9bd075fed32"
+      }
+    ]
   }
 ]

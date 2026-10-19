@@ -1,0 +1,14 @@
+{
+  "identity": "proboscis-monkey-roster-v3-pixels-01",
+  "palette": {
+    "B": "#956b40",
+    "H": "#b98d53",
+    "C": "#d8ba84",
+    "M": "#a8795d",
+    "E": "#d89b70",
+    "K": "#292d2c",
+    "N": "#252927",
+    "T": "#bf6052"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

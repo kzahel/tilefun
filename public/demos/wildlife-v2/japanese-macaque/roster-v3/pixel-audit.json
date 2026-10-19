@@ -1,0 +1,17 @@
+{
+  "identity": "japanese-macaque-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7571189668788065,
+    "up": 1.5756016742239325,
+    "left": 1.7272727272727266,
+    "right": 1.7272727272727266
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

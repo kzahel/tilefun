@@ -61,7 +61,15 @@ const antelopes = [
 ] as const;
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
+const groundPrimates = [
+  "capuchin-monkey",
+  "ring-tailed-lemur",
+  "mandrill",
+  "proboscis-monkey",
+  "japanese-macaque",
+] as const;
 const pasture = [
+  ...groundPrimates,
   "chimpanzee",
   "orangutan",
   "beaver",
@@ -118,6 +126,8 @@ export const HUNTING_DIETS = {
     "pigeon",
   ],
   eagle: [
+    "capuchin-monkey",
+    "ring-tailed-lemur",
     "mouse",
     "rat",
     "red-squirrel",

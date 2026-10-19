@@ -464,10 +464,15 @@
     "capuchin-monkey": {
       "name": "White-faced capuchin",
       "family": "Primates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:02:18.187114Z"
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/capuchin-monkey/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
     },
     "chimpanzee": {
       "name": "Chimpanzee",
@@ -500,34 +505,54 @@
     "ring-tailed-lemur": {
       "name": "Ring-tailed lemur",
       "family": "Primates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:02:18.187114Z"
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/ring-tailed-lemur/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
     },
     "mandrill": {
       "name": "Mandrill",
       "family": "Primates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:02:18.187114Z"
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/mandrill/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
     },
     "proboscis-monkey": {
       "name": "Proboscis monkey",
       "family": "Primates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:02:18.187114Z"
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/proboscis-monkey/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
     },
     "japanese-macaque": {
       "name": "Japanese macaque",
       "family": "Primates",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
-      "startedUtc": "2026-10-19T12:02:18.187114Z"
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/japanese-macaque/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
     },
     "mouse": {
       "name": "Field mouse",
@@ -587,9 +612,10 @@
     "meerkat": {
       "name": "Meerkat",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z"
     },
     "river-otter": {
       "name": "River otter",
@@ -620,30 +646,34 @@
     "giant-anteater": {
       "name": "Giant anteater",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z"
     },
     "aardvark": {
       "name": "Aardvark",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z"
     },
     "armadillo": {
       "name": "Armadillo",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z"
     },
     "pangolin": {
       "name": "Pangolin",
       "family": "Small & exotic mammals",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z"
     },
     "mongoose": {
       "name": "Mongoose",
@@ -1350,6 +1380,17 @@
         "orangutan"
       ],
       "validation": "4580 unit passes, five known Windows failures and ten skipped;1170 focused ape/ecology checks and109 codec/scenario checks pass. 19 browser cases (16 ape/browser plus3 real P2P host/join/fragment/recovery),560 visible animated previews. Two ten-artifact byte-identical banks and784 exact native/3x crops. Typecheck/lint/build/streaming pass. Registry crossed256 types; widened baseline type indices to u16 with frame tag0x04 and explicit legacy rejection. Final combined manifest preserves schoolbus edbb5bda."
+    },
+    {
+      "utc": "2026-10-19T12:35:27.596309Z",
+      "completed": [
+        "capuchin-monkey",
+        "ring-tailed-lemur",
+        "mandrill",
+        "proboscis-monkey",
+        "japanese-macaque"
+      ],
+      "validation": "4665 unit passes, five known Windows failures and ten skipped;120 focused source/ecology/codec/authority checks;31 real Canvas/GPU browser cases including580 visible previews. Five ten-artifact byte-identical banks and1640 exact native/3x crops. Typecheck, isolated lint/build and1459candidate full Chromium manifest pass. All eight roster primates implemented; tree climbing/brachiation remain future work."
     }
   ]
 }

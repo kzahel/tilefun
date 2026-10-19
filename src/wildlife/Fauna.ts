@@ -8,6 +8,7 @@ import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
 import { GREAT_APE_PROFILES } from "./GreatApes.js";
 import { GROUND_BIRD_PROFILES } from "./GroundBirds.js";
+import { GROUND_PRIMATE_PROFILES } from "./GroundPrimates.js";
 import { INSECT_PROFILES } from "./Insects.js";
 import { LIZARD_PROFILES } from "./Lizards.js";
 import { MARINE_FAUNA_PROFILES } from "./MarineFauna.js";
@@ -1338,6 +1339,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...FLYING_BIRD_PROFILES,
   ...CONTINUATION_BIRD_PROFILES,
   ...GREAT_APE_PROFILES,
+  ...GROUND_PRIMATE_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

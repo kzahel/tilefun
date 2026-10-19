@@ -62,3 +62,14 @@ in the sortable animal browser and its real shared-engine AI scenes.
   two byte-identical ten-artifact replays. Type/lint/build/streaming readiness pass.
   Baseline advances to vehicle schoolbus commit edbb5bda; preserve its inventory.
   130/196 implemented;66 remaining. Five primates and four fish sources continue.
+
+- Remaining primates checkpoint: capuchin, ring-tailed lemur, mandrill, proboscis
+  monkey and Japanese macaque active in natural worlds, editor and browser. Eight
+  roster primates now implemented. Distinct anatomy, connected tails, buried roots,
+  planted feet and foraging; no climbing/brachiation. Explicit eagle→capuchin/lemur
+  and larger-hunter prey rows retain source-origin replacement policy.
+  4,665 unit passes with five known Windows failures;120 focused checks;31 browser
+  cases/580 previews;five ten-artifact byte-identical banks and1,640 exact crops;
+  typecheck/isolated lint/build/1,459-candidate manifest pass. No pending Workshop
+  requests/art notes. New exact pixels pending human review. 135/196 implemented;
+  61 remaining. Four fish and five ground-specialist sources are in progress.

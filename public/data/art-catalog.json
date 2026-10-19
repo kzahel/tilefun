@@ -1396,6 +1396,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-capuchin-monkey-provisional-v1",
+      "name": "wildlife capuchin monkey provisional v1",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ring-tailed-lemur-provisional-v1",
+      "name": "wildlife ring tailed lemur provisional v1",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-mandrill-provisional-v1",
+      "name": "wildlife mandrill provisional v1",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-proboscis-monkey-provisional-v1",
+      "name": "wildlife proboscis monkey provisional v1",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-japanese-macaque-provisional-v1",
+      "name": "wildlife japanese macaque provisional v1",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -4523,6 +4573,56 @@
       "height": 384,
       "tileSize": 16,
       "fingerprint": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-capuchin-monkey-roster-v3",
+      "name": "wildlife v2 capuchin monkey roster v3",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ring-tailed-lemur-roster-v3",
+      "name": "wildlife v2 ring tailed lemur roster v3",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-mandrill-roster-v3",
+      "name": "wildlife v2 mandrill roster v3",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-proboscis-monkey-roster-v3",
+      "name": "wildlife v2 proboscis monkey roster v3",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-japanese-macaque-roster-v3",
+      "name": "wildlife v2 japanese macaque roster v3",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -27688,6 +27788,96 @@
       ]
     },
     {
+      "id": "sprite:wildlife-capuchin-monkey-provisional-v1",
+      "sheetId": "wildlife-capuchin-monkey-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-capuchin-monkey-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ring-tailed-lemur-provisional-v1",
+      "sheetId": "wildlife-ring-tailed-lemur-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-ring-tailed-lemur-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-mandrill-provisional-v1",
+      "sheetId": "wildlife-mandrill-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-mandrill-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-proboscis-monkey-provisional-v1",
+      "sheetId": "wildlife-proboscis-monkey-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-proboscis-monkey-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-japanese-macaque-provisional-v1",
+      "sheetId": "wildlife-japanese-macaque-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-japanese-macaque-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -29703,7 +29893,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:950"
+          "source": "src/wildlife/Fauna.ts:951"
         },
         {
           "system": "Gameplay",
@@ -29715,15 +29905,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:127"
+          "source": "src/wildlife/FoodWeb.ts:137"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:274"
+          "source": "src/wildlife/FoodWeb.ts:284"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:447"
+          "source": "src/wildlife/FoodWeb.ts:457"
         },
         {
           "system": "Gameplay",
@@ -29785,35 +29975,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:26"
+          "source": "src/wildlife/Fauna.ts:27"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:221"
+          "source": "src/wildlife/Fauna.ts:222"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:325"
+          "source": "src/wildlife/FoodWeb.ts:335"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:342"
+          "source": "src/wildlife/FoodWeb.ts:352"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:359"
+          "source": "src/wildlife/FoodWeb.ts:369"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:395"
+          "source": "src/wildlife/FoodWeb.ts:405"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:420"
+          "source": "src/wildlife/FoodWeb.ts:430"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:447"
+          "source": "src/wildlife/FoodWeb.ts:457"
         }
       ]
     },
@@ -29867,23 +30057,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:118"
+          "source": "src/wildlife/FoodWeb.ts:126"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:128"
+          "source": "src/wildlife/FoodWeb.ts:138"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:275"
+          "source": "src/wildlife/FoodWeb.ts:285"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:447"
+          "source": "src/wildlife/FoodWeb.ts:457"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:448"
+          "source": "src/wildlife/FoodWeb.ts:458"
         },
         {
           "system": "Gameplay",
@@ -29929,7 +30119,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:448"
+          "source": "src/wildlife/FoodWeb.ts:458"
         }
       ]
     },
@@ -29975,7 +30165,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:449"
+          "source": "src/wildlife/FoodWeb.ts:459"
         }
       ]
     },
@@ -30021,7 +30211,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:450"
+          "source": "src/wildlife/FoodWeb.ts:460"
         }
       ]
     },
@@ -30067,7 +30257,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:451"
+          "source": "src/wildlife/FoodWeb.ts:461"
         }
       ]
     },
@@ -30225,11 +30415,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:130"
+          "source": "src/wildlife/FoodWeb.ts:140"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:447"
+          "source": "src/wildlife/FoodWeb.ts:457"
         },
         {
           "system": "Gameplay",
@@ -30279,7 +30469,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:447"
+          "source": "src/wildlife/FoodWeb.ts:457"
         },
         {
           "system": "Gameplay",

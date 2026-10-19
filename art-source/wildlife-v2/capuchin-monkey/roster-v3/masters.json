@@ -1,0 +1,14 @@
+{
+  "identity": "capuchin-monkey-roster-v3-pixels-01",
+  "palette": {
+    "B": "#67503a",
+    "H": "#a58b60",
+    "C": "#e7d9b5",
+    "M": "#4e4034",
+    "E": "#d8be94",
+    "K": "#292d2c",
+    "N": "#252927",
+    "T": "#bf6052"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

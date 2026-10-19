@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { CONTINUATION_BIRD_PROFILES } from "../src/wildlife/ContinuationBirds.js";
 import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
+import { GROUND_PRIMATE_PROFILES } from "../src/wildlife/GroundPrimates.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
@@ -127,7 +128,11 @@ for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) 
   });
 }
 
-for (const animal of [...CONTINUATION_BIRD_PROFILES, ...GREAT_APE_PROFILES]) {
+for (const animal of [
+  ...CONTINUATION_BIRD_PROFILES,
+  ...GREAT_APE_PROFILES,
+  ...GROUND_PRIMATE_PROFILES,
+]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,
   }) => {
