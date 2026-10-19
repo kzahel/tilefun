@@ -632,11 +632,16 @@
     "river-otter": {
       "name": "River otter",
       "family": "Small & exotic mammals",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:33:02.243756Z",
-      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/river-otter/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
     },
     "red-panda": {
       "name": "Red panda",
@@ -839,11 +844,16 @@
     "platypus": {
       "name": "Platypus",
       "family": "Marsupials & monotremes",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:33:02.243756Z",
-      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/platypus/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
     },
     "echidna": {
       "name": "Echidna",
@@ -1220,9 +1230,11 @@
     "cuttlefish": {
       "name": "Cuttlefish",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Unregistered original marine source authoring; not runtime active."
     },
     "coconut-crab": {
       "name": "Coconut crab",
@@ -1241,16 +1253,20 @@
     "seahorse": {
       "name": "Seahorse",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Unregistered original marine source authoring; not runtime active."
     },
     "starfish": {
       "name": "Starfish",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Unregistered original marine source authoring; not runtime active."
     },
     "lobster": {
       "name": "Lobster",
@@ -1276,18 +1292,25 @@
     "nautilus": {
       "name": "Nautilus",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Unregistered original marine source authoring; not runtime active."
     },
     "sea-lion": {
       "name": "Sea lion",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:33:02.243756Z",
-      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/sea-lion/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
     },
     "manatee": {
       "name": "Manatee",
@@ -1320,11 +1343,16 @@
     "walrus": {
       "name": "Walrus",
       "family": "Marine & aquatic",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v3",
       "startedUtc": "2026-10-19T14:33:02.243756Z",
-      "progress": "Unregistered amphibious source authoring and motion audits in progress; not runtime active."
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/walrus/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
     },
     "anglerfish": {
       "name": "Anglerfish",
@@ -1342,9 +1370,11 @@
     "leafy-seadragon": {
       "name": "Leafy seadragon",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Unregistered original marine source authoring; not runtime active."
     },
     "moray-eel": {
       "name": "Moray eel",
@@ -1709,6 +1739,16 @@
         "dugong"
       ],
       "validation": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
+    },
+    {
+      "utc": "2026-10-19T15:12:45.024132Z",
+      "completed": [
+        "river-otter",
+        "platypus",
+        "sea-lion",
+        "walrus"
+      ],
+      "validation": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
     }
   ]
 }

@@ -10,6 +10,8 @@ import {
   durableId,
   encodeActor,
 } from "../persistence/ActorRecords.js";
+import { faunaHabitatAllows } from "./faunaAI.js";
+import { syncFaunaWater } from "./faunaInteractions.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
 import { predatorHabitatAllows } from "./predatorAI.js";
 
@@ -121,10 +123,12 @@ export function tickWildlifeRespawns(
         ground.some(
           (p) =>
             manager.canPlace?.(p.wx, p.wy) === false ||
-            env.isWater(p) !== (ENTITY_DEFS[candidate.type]?.aquatic === true) ||
+            (!ENTITY_DEFS[candidate.type]?.amphibious &&
+              env.isWater(p) !== (ENTITY_DEFS[candidate.type]?.aquatic === true)) ||
             Math.abs((env.surfaceZ?.(p) ?? 0) - required(candidate.wz)) > 2,
         ) ||
         (candidate.predator && !predatorHabitatAllows(candidate, point, env)) ||
+        (candidate.fauna && !faunaHabitatAllows(candidate, point, env)) ||
         !env.canOccupy(candidate, point) ||
         manager.canSpawn?.(candidate) === false ||
         manager.entities.some(
@@ -143,6 +147,7 @@ export function tickWildlifeRespawns(
         home.randomState = (random() * 4294967296) >>> 0;
       }
       if (candidate.predator) candidate.predator.cooldown = 20;
+      if (candidate.fauna) syncFaunaWater(candidate, env.isWater(point));
       manager.spawn(candidate);
       manager.wildlifeRespawns.delete(id);
       manager.onWildlifeRespawnChanged?.(id, undefined);

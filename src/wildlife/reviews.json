@@ -18220,5 +18220,377 @@
         "sha256": "f104bb8bcdba55939e651f297fd836530f24fcdf414c07aac4eba14395904cfa"
       }
     ]
+  },
+  {
+    "id": "river-otter-roster-v3",
+    "animalId": "river-otter",
+    "revision": "roster-v3",
+    "name": "River otter · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/river-otter/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-river-otter-roster-v3",
+      "name": "River otter sheet",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+      "source": "art-source/wildlife-v2/river-otter/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-river-otter-roster-v3-scene",
+      "name": "River otter scene",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "62e918e5c8d8b24ade2e7341f4b36c32b5ffbcd2909e058c3ca5554cf403d873",
+      "source": "art-source/wildlife-v2/river-otter/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-river-otter-roster-v3-contact",
+      "name": "River otter contact",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "084ea3411590b03ef33b889ef8cd5ea748f211c883ac6df264f324d60555ac9a",
+      "source": "art-source/wildlife-v2/river-otter/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/river-otter/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/contact-sheet-native.png",
+        "sha256": "084ea3411590b03ef33b889ef8cd5ea748f211c883ac6df264f324d60555ac9a"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/index.html",
+        "sha256": "321bfa18b7429985cf2d0b2c1074c8d8a3d9d4a2aa8ed9a232825e64975568fc"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/pixel-audit.json",
+        "sha256": "d85be794d777bf972805c11b8d1559e51c1c760e1c9c871fc84acdda7c0a4e59"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/preview-native.gif",
+        "sha256": "c851e5044e4181954af41fb1eda5bc9c5d2d342d2aeba7d4a78abc983819de4f"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/preview.gif",
+        "sha256": "01821148b069156e1c29a9f489d590c637f8a5f2179463073201fff65a1c8e13"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/scene-native.png",
+        "sha256": "62e918e5c8d8b24ade2e7341f4b36c32b5ffbcd2909e058c3ca5554cf403d873"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+        "sha256": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/source-audit.json",
+        "sha256": "fc733dfff8206fa179544af7376822413aee1c896a4638253ed62eb6a518f292"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/sprite.json",
+        "sha256": "357a81a6cacf11fdc9709c0950dfac864bb2c8a20ef405bc1ed17c22349b3b77"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/travel-native.gif",
+        "sha256": "96446c99243761c1fff5dd9971f1842c148a2f6a54323f677502614dbdda8c30"
+      },
+      {
+        "path": "demos/wildlife-v2/river-otter/roster-v3/validation.json",
+        "sha256": "ca11248e02f22e8663567d046376dd985f9f951e569541be054ce25adb1394ad"
+      }
+    ]
+  },
+  {
+    "id": "platypus-roster-v3",
+    "animalId": "platypus",
+    "revision": "roster-v3",
+    "name": "Platypus · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/platypus/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-platypus-roster-v3",
+      "name": "Platypus sheet",
+      "image": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3",
+      "source": "art-source/wildlife-v2/platypus/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-platypus-roster-v3-scene",
+      "name": "Platypus scene",
+      "image": "demos/wildlife-v2/platypus/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "fcd0a6c8918f8906aae543060e3d6b4b562776478e91bd5ea66c467ba5a6c3c6",
+      "source": "art-source/wildlife-v2/platypus/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-platypus-roster-v3-contact",
+      "name": "Platypus contact",
+      "image": "demos/wildlife-v2/platypus/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "981f0c1a4b1889fb60d75cfe87db54b88d7053053787e27998594198ed9af3fd",
+      "source": "art-source/wildlife-v2/platypus/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/platypus/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/contact-sheet-native.png",
+        "sha256": "981f0c1a4b1889fb60d75cfe87db54b88d7053053787e27998594198ed9af3fd"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/index.html",
+        "sha256": "88828dd43d3b093d2eb99a4c4fad688e676b0e7f48d954fede8e13c84004f226"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/pixel-audit.json",
+        "sha256": "2bbe5f8547c00aa4fd4f9ecf21d968655189b7fd4c695a361304ed29cffd44df"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/preview-native.gif",
+        "sha256": "dfc4cf2ddaedbdd0d301adc56d454ee0a9cde4354a3703cdbdc25763f0890ab7"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/preview.gif",
+        "sha256": "04cbb0e11e57efc4bf7e5f021b49df0c3c39894b660b32ba96c65046c287c8f2"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/scene-native.png",
+        "sha256": "fcd0a6c8918f8906aae543060e3d6b4b562776478e91bd5ea66c467ba5a6c3c6"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+        "sha256": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/source-audit.json",
+        "sha256": "de807dae03ed29cc7dff0d26dc900e6cf42a7f17772544970019272449269c69"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/sprite.json",
+        "sha256": "8679de8a71db6757b3d2a2b34bb032a4c3084927ff391d0a19ccd4f2cf8fd687"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/travel-native.gif",
+        "sha256": "db20a4b11d92d3b1be3a33757147e7280e72cdcbf7d3d69bc4bc889b87572771"
+      },
+      {
+        "path": "demos/wildlife-v2/platypus/roster-v3/validation.json",
+        "sha256": "a186635f1d8853212a502b2fd9cc68409a45edfe2191287526fd816fdaeb970f"
+      }
+    ]
+  },
+  {
+    "id": "sea-lion-roster-v3",
+    "animalId": "sea-lion",
+    "revision": "roster-v3",
+    "name": "Sea lion · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/sea-lion/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-sea-lion-roster-v3",
+      "name": "Sea lion sheet",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+      "source": "art-source/wildlife-v2/sea-lion/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-sea-lion-roster-v3-scene",
+      "name": "Sea lion scene",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "b81a8e90eda99eaecae00f9394f7eda82c4aa9e0d46134cd62b4bf8e3083c598",
+      "source": "art-source/wildlife-v2/sea-lion/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-sea-lion-roster-v3-contact",
+      "name": "Sea lion contact",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8c3959f83af81420514ce7d33bb2651000b4c8ea9273d258fc4493b9e914b272",
+      "source": "art-source/wildlife-v2/sea-lion/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/sea-lion/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/contact-sheet-native.png",
+        "sha256": "8c3959f83af81420514ce7d33bb2651000b4c8ea9273d258fc4493b9e914b272"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/index.html",
+        "sha256": "286bc0039ff02c87946564b0ba61fe2b58ade3eeec893f6e79de01d56f270022"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/pixel-audit.json",
+        "sha256": "60e2ca5b5583bf9a25dd1160af85eb2a4510be32314ba7eba29a0112ec4f198d"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/preview-native.gif",
+        "sha256": "ea9830d406ca7b52687a9dab4320d26227041c6bd848827545f882c6c321a4c4"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/preview.gif",
+        "sha256": "a0c6184cd97dae24ad7ee823e5c3ef5eace5a84ac1e2bffa81e055a2aa255eb3"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/scene-native.png",
+        "sha256": "b81a8e90eda99eaecae00f9394f7eda82c4aa9e0d46134cd62b4bf8e3083c598"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+        "sha256": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/source-audit.json",
+        "sha256": "c0e09247a998bb2e8091468e71abcc11f3d33cbb9733143cde8787c28259c5af"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/sprite.json",
+        "sha256": "fee51d454b91fbf59a8c31f51bdd735e67cae2a34c48faf9db2b0ce330f45204"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/travel-native.gif",
+        "sha256": "c3f53648fbe97037ccfdb9d0ccdf0accd19b4de2b185f324acad547013d7e522"
+      },
+      {
+        "path": "demos/wildlife-v2/sea-lion/roster-v3/validation.json",
+        "sha256": "3fb674908fc7f703a8d03d2ec93dd9e36f9a94cec7b6a100d0fca15493565ac7"
+      }
+    ]
+  },
+  {
+    "id": "walrus-roster-v3",
+    "animalId": "walrus",
+    "revision": "roster-v3",
+    "name": "Walrus · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/walrus/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-walrus-roster-v3",
+      "name": "Walrus sheet",
+      "image": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "art-source/wildlife-v2/walrus/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-walrus-roster-v3-scene",
+      "name": "Walrus scene",
+      "image": "demos/wildlife-v2/walrus/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "641815db0cf420c0d0be67fcea9598d5bc89f4560803509b1fb9302bf8b36a73",
+      "source": "art-source/wildlife-v2/walrus/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-walrus-roster-v3-contact",
+      "name": "Walrus contact",
+      "image": "demos/wildlife-v2/walrus/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7a030fdfce9dc5366a5155539e261ae02f5b2ebf4f49cc7f8f1913351bc0e7a1",
+      "source": "art-source/wildlife-v2/walrus/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/walrus/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/contact-sheet-native.png",
+        "sha256": "7a030fdfce9dc5366a5155539e261ae02f5b2ebf4f49cc7f8f1913351bc0e7a1"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/index.html",
+        "sha256": "f3adf533266d4294fc782f83ba0b50066b7b3118fefd5ac7c628459350ba8b74"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/pixel-audit.json",
+        "sha256": "437bdf5130739dceb7ead74c8847e508c83a0cb80cf18cace456a79207e901b4"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/preview-native.gif",
+        "sha256": "68a253cd50f0b24219c6fd931c63788beb1ca1ea287d5a91bbc99fbd14aaa061"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/preview.gif",
+        "sha256": "183c4cd646fecd06de41dfd51efc938b2207c75a1ae5bffecbc62fd7e70b6471"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/scene-native.png",
+        "sha256": "641815db0cf420c0d0be67fcea9598d5bc89f4560803509b1fb9302bf8b36a73"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+        "sha256": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/source-audit.json",
+        "sha256": "510bf63dcd2253d8f8e4839e600d0bcea9a9e7586349c07464a5b0e686d22d07"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/sprite.json",
+        "sha256": "1ca06a5e8f3136360eac248742a8f68e621cf3102fe83bf5413b2f43e5e6e615"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/travel-native.gif",
+        "sha256": "4b9f02a187ba602dc3daecafa604cf78e91e37bd018204f11300fed90ffe93d3"
+      },
+      {
+        "path": "demos/wildlife-v2/walrus/roster-v3/validation.json",
+        "sha256": "843d2c2f0ab52541d02bc9d2492b75219981f0c83cdc0c67f167329a18ba6df3"
+      }
+    ]
   }
 ]

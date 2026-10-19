@@ -175,3 +175,23 @@ in the sortable animal browser and its real shared-engine AI scenes.
   isolated lint/build and1,620-candidate normal Chromium inventory pass. Exact pixels
   remain pending human review. **167/196 implemented;29 remaining.** Shore mammals4,
   arthropods8 and legless creatures5 remain in source verification/refinement.
+
+- Shore-mammal checkpoint: Twelfth checkpoint: river otter, platypus, sea lion and walrus now have natural
+  shore homes, editor placement and browser action/Watch AI. Distinct muzzles,
+  bills, flattened tails, ear flaps, tusks and moustaches use fixed linked limbs,
+  planted ground travel, body weight transfer and a separate body-relative paddle
+  cycle. Shared amphibious walking/swimming, foraging and escape are active;
+  fishing is future work. Sea lions/walruses require lagoons; the other two can use
+  ponds or lagoons. Fixed slots and the southern arc preserve original shore homes:
+  558 pre-existing natural actor records around all four refuges are byte-identical.
+  New birth coverage exposed a shared habitat bug: amphibious births were rejected
+  in water. Birth placement now admits their legal wet/dry footprint, initializes
+  the water pose and checks deep fauna's complete deep-water footprint. Shallow or
+  internally invalid water retries; delays, distances and manual finite populations
+  are unchanged. Validation: **5,270 full-unit passes**, five known Windows failures,
+  ten skips;160 focused cases across corrected runs; **40 browser cases /724 visible
+  previews**, including all14 aquatic hunter regressions; four exact replays and
+  2,336 native/3x crops. Typecheck, isolated lint/build,1,640-candidate full Chromium
+  manifest and streaming readiness pass. Exact art pending human review.
+  **171/196 implemented;25 remaining.** Eight arthropods, five legless creatures and
+  five marine oddities are in source verification/refinement.

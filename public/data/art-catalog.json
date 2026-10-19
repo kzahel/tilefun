@@ -1766,6 +1766,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-river-otter-provisional-v1",
+      "name": "wildlife river otter provisional v1",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-platypus-provisional-v1",
+      "name": "wildlife platypus provisional v1",
+      "image": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-sea-lion-provisional-v1",
+      "name": "wildlife sea lion provisional v1",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-walrus-provisional-v1",
+      "name": "wildlife walrus provisional v1",
+      "image": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -5276,6 +5316,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-river-otter-roster-v3",
+      "name": "wildlife v2 river otter roster v3",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-platypus-roster-v3",
+      "name": "wildlife v2 platypus roster v3",
+      "image": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sea-lion-roster-v3",
+      "name": "wildlife v2 sea lion roster v3",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-walrus-roster-v3",
+      "name": "wildlife v2 walrus roster v3",
+      "image": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -7679,11 +7759,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1077"
+          "source": "src/generation/regional/NaturalLandscape.ts:1094"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1271"
+          "source": "src/generation/regional/NaturalLandscape.ts:1288"
         },
         {
           "system": "World generation",
@@ -29104,6 +29184,78 @@
       ]
     },
     {
+      "id": "sprite:wildlife-river-otter-provisional-v1",
+      "sheetId": "wildlife-river-otter-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-river-otter-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-platypus-provisional-v1",
+      "sheetId": "wildlife-platypus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-platypus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-sea-lion-provisional-v1",
+      "sheetId": "wildlife-sea-lion-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-sea-lion-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-walrus-provisional-v1",
+      "sheetId": "wildlife-walrus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-walrus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -31137,7 +31289,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:957"
+          "source": "src/wildlife/Fauna.ts:960"
         },
         {
           "system": "Gameplay",
@@ -31149,15 +31301,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:227"
+          "source": "src/wildlife/FoodWeb.ts:231"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:386"
+          "source": "src/wildlife/FoodWeb.ts:398"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:565"
+          "source": "src/wildlife/FoodWeb.ts:577"
         },
         {
           "system": "Gameplay",
@@ -31219,39 +31371,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:33"
+          "source": "src/wildlife/Fauna.ts:34"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:228"
+          "source": "src/wildlife/Fauna.ts:231"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:149"
+          "source": "src/wildlife/FoodWeb.ts:153"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:437"
+          "source": "src/wildlife/FoodWeb.ts:449"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:454"
+          "source": "src/wildlife/FoodWeb.ts:466"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:471"
+          "source": "src/wildlife/FoodWeb.ts:483"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:510"
+          "source": "src/wildlife/FoodWeb.ts:522"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:538"
+          "source": "src/wildlife/FoodWeb.ts:550"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:565"
+          "source": "src/wildlife/FoodWeb.ts:577"
         }
       ]
     },
@@ -31305,23 +31457,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:211"
+          "source": "src/wildlife/FoodWeb.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:228"
+          "source": "src/wildlife/FoodWeb.ts:232"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:387"
+          "source": "src/wildlife/FoodWeb.ts:399"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:565"
+          "source": "src/wildlife/FoodWeb.ts:577"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:566"
+          "source": "src/wildlife/FoodWeb.ts:578"
         },
         {
           "system": "Gameplay",
@@ -31367,7 +31519,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:566"
+          "source": "src/wildlife/FoodWeb.ts:578"
         }
       ]
     },
@@ -31413,7 +31565,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:567"
+          "source": "src/wildlife/FoodWeb.ts:579"
         }
       ]
     },
@@ -31459,7 +31611,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:568"
+          "source": "src/wildlife/FoodWeb.ts:580"
         }
       ]
     },
@@ -31505,7 +31657,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:569"
+          "source": "src/wildlife/FoodWeb.ts:581"
         }
       ]
     },
@@ -31663,11 +31815,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:230"
+          "source": "src/wildlife/FoodWeb.ts:234"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:565"
+          "source": "src/wildlife/FoodWeb.ts:577"
         },
         {
           "system": "Gameplay",
@@ -31717,7 +31869,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:565"
+          "source": "src/wildlife/FoodWeb.ts:577"
         },
         {
           "system": "Gameplay",
@@ -32771,11 +32923,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1077"
+          "source": "src/generation/regional/NaturalLandscape.ts:1094"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1271"
+          "source": "src/generation/regional/NaturalLandscape.ts:1288"
         },
         {
           "system": "World generation",

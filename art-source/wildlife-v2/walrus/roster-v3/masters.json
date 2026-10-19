@@ -1,0 +1,14 @@
+{
+  "identity": "walrus-roster-v3-pixels-01",
+  "palette": {
+    "B": "#958471",
+    "H": "#b19d86",
+    "C": "#d1c1a4",
+    "M": "#5b5147",
+    "K": "#343832",
+    "E": "#d1b98b",
+    "N": "#26302b",
+    "T": "#dbd1b7"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

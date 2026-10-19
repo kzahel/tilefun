@@ -21,6 +21,7 @@ import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
 import { PET_ART } from "./PetVariants.js";
 import { SEABIRD_PROFILES } from "./Seabirds.js";
 import { SHELLED_AMPHIBIAN_PROFILES } from "./ShelledAmphibians.js";
+import { SHORE_MAMMAL_PROFILES } from "./ShoreMammals.js";
 import { SMALL_MAMMAL_PROFILES } from "./SmallMammals.js";
 import { TALL_BIRD_PROFILES } from "./TallBirds.js";
 import { UNGULATE_PROFILES } from "./Ungulates.js";
@@ -60,6 +61,8 @@ export interface FaunaProfile {
   inspection: readonly [number, number];
   inspectionZoom?: number;
   swimSpeed?: number;
+  /** Optional restriction for natural water expansion slots. */
+  waterRefuge?: "pond" | "lagoon";
   /** Body faces perpendicular to motion; authored scuttle travels along local +X. */
   sideways?: boolean;
   hop?: { duration: number; push: number; land: number; height: number };
@@ -1352,6 +1355,7 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...TALL_BIRD_PROFILES,
   ...FOREST_SPECIALIST_PROFILES,
   ...MORE_MAMMAL_PROFILES,
+  ...SHORE_MAMMAL_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

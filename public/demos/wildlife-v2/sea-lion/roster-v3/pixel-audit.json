@@ -1,0 +1,17 @@
+{
+  "identity": "sea-lion-roster-v3-pixels-01",
+  "poses": 292,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6002324333988867,
+    "up": 1.7726817042606555,
+    "left": 1.904552035428381,
+    "right": 1.904552035428381
+  },
+  "rootTravelPixelsPerCycle": 10.24,
+  "plantedTravel": true
+}

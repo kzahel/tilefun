@@ -360,7 +360,24 @@ export class NaturalLandscape {
       const p =
         FAUNA_PROFILES.find((p) => p.species === species) ??
         (hunter && { ...hunter, ...hunter.expansion });
-      if (!p || !["pond", "deep"].includes(p.habitat)) return;
+      if (!p) return;
+      if (p.habitat === "shore") {
+        if ("waterRefuge" in p && p.waterRefuge && !refuge.id.startsWith(`${p.waterRefuge}:`))
+          return;
+        // The southern open arc is independent of original northern penguin/seal homes.
+        const home = { wx: refuge.x * 16, wy: (refuge.y + refuge.ry * 1.05) * 16 };
+        add(
+          species,
+          refuge,
+          home,
+          Array.from({ length: p.group }, (_, i) => ({
+            wx: home.wx + (i - (p.group - 1) / 2) * (p.body[0] + 12),
+            wy: home.wy,
+          })),
+        );
+        return;
+      }
+      if (!["pond", "deep"].includes(p.habitat)) return;
       if (p.habitat === "deep" && !refuge.id.startsWith("lagoon:")) return;
       const home = {
         wx: refuge.x * 16,

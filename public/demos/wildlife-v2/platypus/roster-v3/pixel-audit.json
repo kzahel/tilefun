@@ -1,0 +1,17 @@
+{
+  "identity": "platypus-roster-v3-pixels-01",
+  "poses": 292,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7401477832512313,
+    "up": 1.7318264791152131,
+    "left": 1.6772774327122164,
+    "right": 1.6772774327122164
+  },
+  "rootTravelPixelsPerCycle": 11.52,
+  "plantedTravel": true
+}

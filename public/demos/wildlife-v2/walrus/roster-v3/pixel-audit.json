@@ -1,0 +1,17 @@
+{
+  "identity": "walrus-roster-v3-pixels-01",
+  "poses": 292,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.8060142402666273,
+    "up": 1.744964959392199,
+    "left": 1.893585526315789,
+    "right": 1.893585526315789
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

@@ -14,6 +14,7 @@ import { GROUND_SPECIALIST_PROFILES } from "../src/wildlife/GroundSpecialists.js
 import { MORE_MAMMAL_PROFILES } from "../src/wildlife/MoreMammals.js";
 import { REPTILE_HUNTER_PROFILES } from "../src/wildlife/ReptileHunters.js";
 import { SEABIRD_PROFILES } from "../src/wildlife/Seabirds.js";
+import { SHORE_MAMMAL_PROFILES } from "../src/wildlife/ShoreMammals.js";
 import { TALL_BIRD_PROFILES } from "../src/wildlife/TallBirds.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
@@ -151,6 +152,7 @@ for (const animal of [
   ...TALL_BIRD_PROFILES,
   ...FOREST_SPECIALIST_PROFILES,
   ...MORE_MAMMAL_PROFILES,
+  ...SHORE_MAMMAL_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,

@@ -596,3 +596,9 @@
 !wallaby/roster-v3/*
 !manatee/roster-v3/*
 !dugong/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!river-otter/roster-v3/*
+!platypus/roster-v3/*
+!sea-lion/roster-v3/*
+!walrus/roster-v3/*

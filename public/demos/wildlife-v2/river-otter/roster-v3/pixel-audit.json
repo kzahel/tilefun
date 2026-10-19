@@ -1,0 +1,17 @@
+{
+  "identity": "river-otter-roster-v3-pixels-01",
+  "poses": 292,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4431735537190065,
+    "up": 1.8106060606060623,
+    "left": 1.9127906976744242,
+    "right": 1.9127906976744242
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}
