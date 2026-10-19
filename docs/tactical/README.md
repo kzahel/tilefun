@@ -16,7 +16,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | [150 School bus gameplay](150-school-bus-gameplay.md) | Delivered: owner-approved bus spawning, suitable road traffic and exact model/fallback; [original vehicles](../topics/original-vehicles.md) |
 | [149 School bus pipeline review](149-school-bus-pipeline-review.md) | Delivered for review: 2,564-triangle school bus, side-owned paint and fixed-pixel larger-viewport review; [original vehicles](../topics/original-vehicles.md) |
 | [148 Beetle gameplay](148-beetle-gameplay.md) | Delivered: accepted Beetle spawning, normal traffic, measured bounds and shared game/lab fallback; [original vehicles](../topics/original-vehicles.md) |
-| [147 Wildlife continuation](147-wildlife-continuation.md) | Active: eight-hour remaining-roster continuation; per-batch commits and live lab verification |
+| [147 Wildlife continuation](147-wildlife-continuation.md) | Complete: all 74 remaining animals implemented; 196/196 roster, animated lab and game checks; new art pending human review |
 | [146 Beetle pipeline review](146-beetle-pipeline-review.md) | Delivered for review: 2,554-triangle rounded compact, reusable family preview and independent wheel/fender qualification; [original vehicles](../topics/original-vehicles.md) |
 | [145 — Original coupe gameplay](145-original-coupe-gameplay.md) | Delivered: original catalog, editor spawning, matching fallback, rolling driving and automatic road traffic; [original vehicles](../topics/original-vehicles.md) |
 | [144 Rolling car steering](144-rolling-car-steering.md) | Complete: shared signed rolling turns, persistent/replicated heading, Deck acceptance and prediction/render parity |

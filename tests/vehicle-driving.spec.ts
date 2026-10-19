@@ -9,6 +9,7 @@ import { authoredVehicleForType } from "../src/rendering/AuthoredVehicleMeshes.j
 import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import { projectWorld } from "../src/rendering/Projection.js";
 import type { RequestMessage } from "../src/shared/requests.js";
+import { ORIGINAL_VEHICLES } from "../src/traffic/OriginalVehicles.js";
 import type { WorkerClientTransport } from "../src/transport/WorkerClientTransport.js";
 import { worldTap } from "./helpers/worldTap.js";
 
@@ -144,46 +145,54 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     page.on("pageerror", (e) => errors.push(e.message));
     await start(page, backend, true);
     const override = backend.includes("allcars3d");
-    // All road models now have meshes. Check the actual generated car's asset
-    // rather than requiring one random traffic slot to contain a blue compact.
-    const desiredModel = override ? "other" : "any";
+    const ownAuthored = backend.includes("meshes") && !override;
+    const desiredModel = ownAuthored ? "authored" : override ? "other" : "any";
+    const authoredTypes = ORIGINAL_VEHICLES.map((v) => `vehicle-v1:${v.id}`);
     await expect
       .poll(
         () =>
-          page.evaluate((mode) => {
-            const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-            return g.stateView.entities.some(
-              (e) =>
-                e.type.startsWith("vehicle-v1:") &&
-                (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
-            );
-          }, desiredModel),
+          page.evaluate(
+            ({ mode, authoredTypes }) => {
+              const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+              return g.stateView.entities.some(
+                (e) =>
+                  e.type.startsWith("vehicle-v1:") &&
+                  (mode !== "authored" || authoredTypes.includes(e.type)) &&
+                  (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
+              );
+            },
+            { mode: desiredModel, authoredTypes },
+          ),
         { timeout: 15000 },
       )
       .toBe(true);
-    await page.evaluate(async (mode) => {
-      const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-      const car = g.stateView.entities.find(
-        (e) =>
-          e.type.startsWith("vehicle-v1:") &&
-          (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
-      );
-      if (!car?.collider) throw Error("No car");
-      const dir = car.sprite?.direction ?? 3;
-      const dx = dir === 3 ? 1 : dir === 2 ? -1 : 0,
-        dy = dir === 0 ? 1 : dir === 1 ? -1 : 0;
-      const x = car.position.wx + car.collider.offsetX + dx * (car.collider.width / 2 + 12);
-      const y =
-        car.position.wy +
-        car.collider.offsetY -
-        car.collider.height / 2 +
-        dy * (car.collider.height / 2 + 12);
-      await g.gcSendRequest({
-        type: "rcon",
-        requestId: g.nextRequestId++,
-        command: `tp ${x} ${y}`,
-      });
-    }, desiredModel);
+    await page.evaluate(
+      async ({ mode, authoredTypes }) => {
+        const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+        const car = g.stateView.entities.find(
+          (e) =>
+            e.type.startsWith("vehicle-v1:") &&
+            (mode !== "authored" || authoredTypes.includes(e.type)) &&
+            (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
+        );
+        if (!car?.collider) throw Error("No car");
+        const dir = car.sprite?.direction ?? 3;
+        const dx = dir === 3 ? 1 : dir === 2 ? -1 : 0,
+          dy = dir === 0 ? 1 : dir === 1 ? -1 : 0;
+        const x = car.position.wx + car.collider.offsetX + dx * (car.collider.width / 2 + 12);
+        const y =
+          car.position.wy +
+          car.collider.offsetY -
+          car.collider.height / 2 +
+          dy * (car.collider.height / 2 + 12);
+        await g.gcSendRequest({
+          type: "rcon",
+          requestId: g.nextRequestId++,
+          command: `tp ${x} ${y}`,
+        });
+      },
+      { mode: desiredModel, authoredTypes },
+    );
     await expect(page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ })).toBeVisible({
       timeout: 15000,
     });
@@ -194,6 +203,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     await checkHorn(page, "car");
     if (backend.includes("meshes")) {
       if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
+      else expect(authoredTypes).toContain((await read(page)).type);
       const expectedAsset =
         authoredVehicleForType((await read(page)).type ?? "")?.assetId ?? "compact-1-authored-v7";
       await expect

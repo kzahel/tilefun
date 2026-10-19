@@ -827,6 +827,14 @@ interpolates its angle and meshes retain it at rest. Cardinal collision and
 sprite fallback remain tied to the immutable approved bank. Trains and automatic
 road motion keep their existing owners.
 
+## Racing diagnostics
+
+Scenario Worker responses derive `racer:` handles from ordinary TrafficSystem
+states whose lanes own racing. Speedway diagnostics use those durable handles,
+so an ordinary road car sharing a racing model is not counted as another racer.
+The diagnostic never owns population, movement or persistence. Same-model
+ownership and reload tests cover the distinction.
+
 ## Native props in animal fixtures
 
 Raptor inspection adds optional bounded `ScenarioRecipe.nativeProps` placements.

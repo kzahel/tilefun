@@ -232,7 +232,7 @@
     height: clamp(110px, calc(100dvh - 600px - var(--workshop-nav-height, 0px)), 400px);
   }
   .building-preview:has(#hotel-options:not([hidden])) .building-stage {
-    height: clamp(110px, calc(100dvh - 610px - var(--workshop-nav-height, 0px)), 350px);
+    height: clamp(110px, calc(100dvh - 630px - var(--workshop-nav-height, 0px)), 330px);
   }
   .building-preview h2 {
     font-size: 18px;

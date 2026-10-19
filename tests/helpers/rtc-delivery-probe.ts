@@ -1,4 +1,16 @@
 import type { Page } from "@playwright/test";
+import { encodeServerMessage } from "../../src/shared/binaryCodec.js";
+
+const emptyFrame = encodeServerMessage({
+  type: "frame",
+  serverTick: 0,
+  lastProcessedInputSeq: 0,
+  playerEntityId: 0,
+});
+export const RTC_FRAME_LAYOUT = {
+  frameTag: new DataView(emptyFrame).getUint8(0),
+  frameHeaderSize: emptyFrame.byteLength,
+};
 
 export interface RtcProbe {
   channels: RTCDataChannel[];
@@ -22,7 +34,7 @@ declare global {
  * Reliable sync/input is never dropped; hold-sync delays the whole receive stream. This is message loss, not UDP/SCTP emulation.
  */
 export async function installRtcProbe(page: Page): Promise<void> {
-  await page.addInitScript(() => {
+  await page.addInitScript(({ frameTag, frameHeaderSize }) => {
     const probe: RtcProbe = {
       channels: [],
       mode: "pass",
@@ -53,17 +65,17 @@ export async function installRtcProbe(page: Page): Promise<void> {
         if (!(event.data instanceof ArrayBuffer)) return;
         probe.bytes += event.data.byteLength;
         const bytes = new DataView(event.data);
-        if (bytes.byteLength < 19 || bytes.getUint8(0) !== 0x04) return;
+        if (bytes.byteLength < frameHeaderSize || bytes.getUint8(0) !== frameTag) return;
         if (label === "sync") {
           probe.syncFrames++;
           return;
         }
         if (label !== "entities") return;
         probe.entitiesFrames++;
-        // Current FrameMessage binary header: tag, tick, input seq, player ID,
-        // then u16 baseline/delta/exit counts. Codec tests own this schema.
-        const baseline = bytes.getUint16(13, true) > 0;
-        const exit = bytes.getUint16(17, true) > 0;
+        // The fixed header ends in u16 baseline/delta/exit counts. Derive its
+        // current tag/size from the encoder; codec tests own the wire schema.
+        const baseline = bytes.getUint16(frameHeaderSize - 6, true) > 0;
+        const exit = bytes.getUint16(frameHeaderSize - 2, true) > 0;
         if ((probe.mode === "drop-baseline" && baseline) || (probe.mode === "drop-exit" && exit)) {
           event.stopImmediatePropagation();
           probe.dropped++;
@@ -76,5 +88,5 @@ export async function installRtcProbe(page: Page): Promise<void> {
       });
       return channel;
     };
-  });
+  }, RTC_FRAME_LAYOUT);
 }

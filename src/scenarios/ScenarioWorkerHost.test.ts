@@ -1,8 +1,10 @@
 import { expect, it } from "vitest";
 import { RemoteStateView } from "../client/ClientStateView.js";
+import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { decodeServerMessage } from "../shared/binaryCodec.js";
 import type { BufferedMessage } from "../shared/protocol.js";
+import { type Lane, path } from "../traffic/LaneGraph.js";
 import { World } from "../world/World.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
@@ -16,6 +18,57 @@ const recipe: ScenarioRecipe = {
   props: scenarioWalls(-80, -80, 80, 80),
   physics: { gravityScale: 0.5 },
 };
+it("reports actual durable racer handles without including an ordinary car of the same model", async () => {
+  const lane = (id: string, y: number, race: boolean): Lane => ({
+    id,
+    from: `${id}:a`,
+    to: `${id}:b`,
+    a: { x: 0, y },
+    b: { x: 256, y },
+    direction: Direction.Right,
+    width: 16,
+    intercity: false,
+    path: path([
+      { x: 0, y },
+      { x: 256, y },
+    ]),
+    ...(race ? { race: { model: "car-21", speed: 150 } } : {}),
+  });
+  const r: ScenarioRecipe = {
+    version: 1,
+    id: "racer-handle-ownership",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(0, 100),
+    props: [],
+    roads: [
+      { left: -32, right: 320, top: 16, bottom: 48 },
+      { left: -32, right: 320, top: 176, bottom: 208 },
+    ],
+    trafficLanes: [lane("racetrack-fixture", 32, true), lane("street-fixture", 192, false)],
+    traffic: [
+      { name: "racer", model: "car-21", laneId: "racetrack-fixture", x: 64, y: 32, distance: 64 },
+      { name: "ordinary", model: "car-21", laneId: "street-fixture", x: 64, y: 192, distance: 64 },
+    ],
+  };
+  const host = new ScenarioWorkerHost();
+  let id = 0;
+  try {
+    const opened = await host.request({ id: ++id, kind: "open", recipe: r });
+    expect(opened.error).toBeUndefined();
+    const racers = Object.entries(opened.handles).filter(([name]) => name.startsWith("racer:"));
+    expect(racers).toHaveLength(1);
+    expect(racers[0]?.[1]).toBe(opened.handles.racer);
+    expect(racers[0]?.[1]).not.toBe(opened.handles.ordinary);
+    const reloaded = await host.request({ id: ++id, kind: "reload" });
+    expect(reloaded.error).toBeUndefined();
+    const restored = Object.entries(reloaded.handles).filter(([name]) => name.startsWith("racer:"));
+    expect(restored.map(([name]) => name)).toEqual(racers.map(([name]) => name));
+    expect(restored[0]?.[1]).toBe(reloaded.handles.racer);
+    expect(restored[0]?.[1]).not.toBe(reloaded.handles.ordinary);
+  } finally {
+    await host.request({ id: ++id, kind: "close" });
+  }
+});
 it("the Worker request host matches explicit headless steps and distinguishes reload from reset", async () => {
   const host = new ScenarioWorkerHost(),
     direct = await ScenarioSession.create(recipe);
