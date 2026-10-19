@@ -34,6 +34,7 @@ import { REPTILE_HUNTER_PROFILES } from "../src/wildlife/ReptileHunters.js";
 import { SEABIRD_PROFILES } from "../src/wildlife/Seabirds.js";
 import { SHORE_MAMMAL_PROFILES } from "../src/wildlife/ShoreMammals.js";
 import { TALL_BIRD_PROFILES } from "../src/wildlife/TallBirds.js";
+import { UPRIGHT_COMPANION_PROFILES } from "../src/wildlife/UprightCompanions.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
@@ -175,6 +176,7 @@ for (const animal of [
   ...GROUND_ARTHROPOD_FAUNA_PROFILES,
   ...MARINE_ODDITY_FAUNA_PROFILES,
   ...CRUSTACEAN_FAUNA_PROFILES,
+  ...UPRIGHT_COMPANION_PROFILES,
 ]) {
   test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
     page,

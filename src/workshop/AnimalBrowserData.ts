@@ -3,7 +3,7 @@ import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { NATURAL_CASES } from "../scenarios/NaturalLandscapeRecipe.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
-import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
+import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
 import { FROG_IMAGE, FROG_TYPE } from "../wildlife/Frog.js";
 import { MALLARD_IMAGE, MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
@@ -34,6 +34,7 @@ export const ANIMAL_BROWSER_ENTRIES = [
 ]
   .map((p) => ({
     ...p,
+    companion: faunaProfile(p.type)?.companion === true,
     family:
       families.get(p.id) ??
       families.get(p.id === "brown-bear" ? "bear" : p.id === "mallard" ? "mallard-duck" : p.id) ??

@@ -271,3 +271,25 @@ in the sortable animal browser and its real shared-engine AI scenes.
   byte for byte. Three vehicle review objects remain exact. Art pending human review.
   **194/196 implemented; two remaining.** Both upright companion source banks have
   passed supported weight transfer, dense arm attachment, replay and playback checks.
+
+- Upright-companion checkpoint: Seventeenth checkpoint: the upright elephant and giraffe complete the roster.
+  They are friendly biped companions, separate from the immutable quadruped banks.
+  Two planted four-link legs support body bob and lateral weight transfer during
+  double support. Dense attached arm animation, fixed trunk/neck/tail chains and
+  closed editable volumes pass independent continuous source audits. Both use
+  ordinary ground travel, cautious interest, greeting/forage, escape and persistence.
+  All food-web hunters protect them; the browser explicitly labels them Companion.
+
+  An independent two-species natural bank preserves the 17/169/42 original pools.
+  The first clearing prototype removed trees and their robin owners; the corrected
+  admission rule fits existing open sites without changing scenery. Regressions
+  preserve prior actors, trees, homes and water refuges and check bounded cache
+  eviction/query-order independence. World placement, deletion and reopening pass.
+  Validation: **5,663 initial full-unit passes**, five known Windows failures,
+  ten skips and one Workshop API timeout; all 13 API tests pass isolated on unchanged
+  source. **43 focused checks; 16 browser cases / 824 visible previews**; two exact
+  replays and 656 native/3x crops. All 74 new banks retain 1,677 exact pinned artifacts.
+  Typecheck, isolated lint/build, 1,765-candidate normal Chromium manifest and streaming
+  readiness pass. Three vehicle review objects remain exact. All new art is pending
+  human review. **196/196 implemented; none remaining.** The run remains in final
+  verification for a full-unit retry and the complete browser suite.

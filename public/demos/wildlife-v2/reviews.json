@@ -20731,5 +20731,191 @@
         "sha256": "4c93fdd1d549ca47acb4424a137d2c896e66c34a28936f8a6e127b79141116a9"
       }
     ]
+  },
+  {
+    "id": "elephant-upright-roster-v3",
+    "animalId": "elephant-upright",
+    "revision": "roster-v3",
+    "name": "Upright elephant · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/elephant-upright/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-elephant-upright-roster-v3",
+      "name": "Upright elephant sheet",
+      "image": "demos/wildlife-v2/elephant-upright/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "737d409fbff268a748f6d08cacb9dd3cde7304fdf2ca546007a88cefa9f892d3",
+      "source": "art-source/wildlife-v2/elephant-upright/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-elephant-upright-roster-v3-scene",
+      "name": "Upright elephant scene",
+      "image": "demos/wildlife-v2/elephant-upright/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "06b3101f5204f3aafecfb0201a3b4363230a994af72a00e5153214373856ec6e",
+      "source": "art-source/wildlife-v2/elephant-upright/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-elephant-upright-roster-v3-contact",
+      "name": "Upright elephant contact",
+      "image": "demos/wildlife-v2/elephant-upright/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "fae03c5e9193f673e61f8f7399a1aea4a46f626539c64dd6ab752b86f94e1169",
+      "source": "art-source/wildlife-v2/elephant-upright/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/elephant-upright/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/contact-sheet-native.png",
+        "sha256": "fae03c5e9193f673e61f8f7399a1aea4a46f626539c64dd6ab752b86f94e1169"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/index.html",
+        "sha256": "9708b23b213b91dd679255a5bfe612c2f43a896f9be606a4fbef92635dab5cf9"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/pixel-audit.json",
+        "sha256": "a3434f76385d52f7799fd95114daf0c1ee826eea2ccf7a5fb2f7633fa756153a"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/preview-native.gif",
+        "sha256": "ef5b92838a03699814d6132cefda65590a65e25b73134d94b31b452387750964"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/preview.gif",
+        "sha256": "96397c6ed1438f7f9bbd72a349a4beed2c4a298a8f6c5a6f60499d30e5030d94"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/scene-native.png",
+        "sha256": "06b3101f5204f3aafecfb0201a3b4363230a994af72a00e5153214373856ec6e"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/sheet.png",
+        "sha256": "737d409fbff268a748f6d08cacb9dd3cde7304fdf2ca546007a88cefa9f892d3"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/source-audit.json",
+        "sha256": "b19972641db8dfc19c0a4d149d0f8f79cd49262b57457d930e7f8324938f0785"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/sprite.json",
+        "sha256": "9f11a528e5de119fe0624db92263915fd3e737f876416336f92e370bdccb9e30"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/travel-native.gif",
+        "sha256": "b586247358550208df6198eae7a974e50fd19d362643210e148587b61ed57845"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant-upright/roster-v3/validation.json",
+        "sha256": "6cbffdc950ef158a584244798a9184dc26757e6dce72430003c8d3ac2b3d3004"
+      }
+    ]
+  },
+  {
+    "id": "giraffe-upright-roster-v3",
+    "animalId": "giraffe-upright",
+    "revision": "roster-v3",
+    "name": "Upright giraffe · completed motion",
+    "batchId": "wildlife-v2-autonomous-147",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/giraffe-upright/roster-v3/",
+    "sheet": {
+      "id": "wildlife-v2-giraffe-upright-roster-v3",
+      "name": "Upright giraffe sheet",
+      "image": "demos/wildlife-v2/giraffe-upright/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "54bccc660cf970c44637ed1a87f0928555b62f180e80fa306ada157955d80372",
+      "source": "art-source/wildlife-v2/giraffe-upright/roster-v3"
+    },
+    "scene": {
+      "id": "wildlife-v2-giraffe-upright-roster-v3-scene",
+      "name": "Upright giraffe scene",
+      "image": "demos/wildlife-v2/giraffe-upright/roster-v3/scene-native.png",
+      "width": 544,
+      "height": 136,
+      "tileSize": 16,
+      "fingerprint": "507d9201db9edf1d3af9fce3e74c50d004547dc5bcd2fd3fc5b084eaf8934cfb",
+      "source": "art-source/wildlife-v2/giraffe-upright/roster-v3"
+    },
+    "contact": {
+      "id": "wildlife-v2-giraffe-upright-roster-v3-contact",
+      "name": "Upright giraffe contact",
+      "image": "demos/wildlife-v2/giraffe-upright/roster-v3/contact-sheet-native.png",
+      "width": 768,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "9a17bf9f5ee94e64be145692d874265e16ffd24fcb6f98fb359a08ebc7a79537",
+      "source": "art-source/wildlife-v2/giraffe-upright/roster-v3"
+    },
+    "preview": "demos/wildlife-v2/giraffe-upright/roster-v3/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/contact-sheet-native.png",
+        "sha256": "9a17bf9f5ee94e64be145692d874265e16ffd24fcb6f98fb359a08ebc7a79537"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/index.html",
+        "sha256": "f0df130de4ae5d5e20ce2a1a6fefc90c2d1e08d286879add8fe35b69626451e2"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/pixel-audit.json",
+        "sha256": "17549a1cf96cba79a4e20d922ea434c4f12933b4dab36952cdedd3968d6313ff"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/preview-native.gif",
+        "sha256": "c131c9eb824a03bc606574b78763b402912e1e1368f1080ee23956505e833750"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/preview.gif",
+        "sha256": "9d95de2fc506df73829f43f3eecc30409de2dd1b142ad9595837cc1832fc0632"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/scene-background.png",
+        "sha256": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/scene-native.png",
+        "sha256": "507d9201db9edf1d3af9fce3e74c50d004547dc5bcd2fd3fc5b084eaf8934cfb"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/sheet.png",
+        "sha256": "54bccc660cf970c44637ed1a87f0928555b62f180e80fa306ada157955d80372"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/source-audit.json",
+        "sha256": "5a42251c9e7ecd1758630bf615630735cd40324c316f00388ff982e354b9682a"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/sprite.json",
+        "sha256": "19a9503437e1a6071b6bbf6bbda21b8ef237c5d2b0909ffb1d9edb8c4c7d2218"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/travel-native.gif",
+        "sha256": "33325fb8cacf7cc3750b937ae336904ec05eb4e4aee8cd2c1b1997ebe208e3d4"
+      },
+      {
+        "path": "demos/wildlife-v2/giraffe-upright/roster-v3/validation.json",
+        "sha256": "4996a3ebd43a9c765ef06a4c064619a25f33da9fa2123b0d9f74a792f7491eca"
+      }
+    ]
   }
 ]

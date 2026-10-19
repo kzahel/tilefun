@@ -1,0 +1,17 @@
+{
+  "identity": "elephant-upright-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.074316356273499,
+    "up": 1.4710538426138982,
+    "left": 3.6701357914560475,
+    "right": 3.6701357914560475
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

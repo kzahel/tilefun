@@ -218,3 +218,6 @@ export const FAUNA_WATER_EXPANSION_ROSTER = [
   "alligator",
   "axolotl",
 ] as const;
+
+/** Independent friendly companion bank; never append to existing owner rosters. */
+export const UPRIGHT_COMPANION_SPECIES = ["elephant-upright", "giraffe-upright"] as const;

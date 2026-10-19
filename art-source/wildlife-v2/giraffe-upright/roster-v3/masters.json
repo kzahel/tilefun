@@ -1,0 +1,13 @@
+{
+  "identity": "giraffe-upright-roster-v3-pixels-01",
+  "palette": {
+    "K": "#34302a",
+    "N": "#151a17",
+    "B": "#c99e56",
+    "C": "#e5c780",
+    "M": "#785138",
+    "H": "#a66e43",
+    "T": "#d6bd83"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -2036,6 +2036,26 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-elephant-upright-provisional-v1",
+      "name": "wildlife elephant upright provisional v1",
+      "image": "demos/wildlife-v2/elephant-upright/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "737d409fbff268a748f6d08cacb9dd3cde7304fdf2ca546007a88cefa9f892d3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-giraffe-upright-provisional-v1",
+      "name": "wildlife giraffe upright provisional v1",
+      "image": "demos/wildlife-v2/giraffe-upright/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "54bccc660cf970c44637ed1a87f0928555b62f180e80fa306ada157955d80372",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-salamander-provisional-v1",
       "name": "wildlife salamander provisional v1",
       "image": "demos/wildlife-v2/salamander/roster-v2/sheet.png",
@@ -5816,6 +5836,26 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-elephant-upright-roster-v3",
+      "name": "wildlife v2 elephant upright roster v3",
+      "image": "demos/wildlife-v2/elephant-upright/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "737d409fbff268a748f6d08cacb9dd3cde7304fdf2ca546007a88cefa9f892d3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-giraffe-upright-roster-v3",
+      "name": "wildlife v2 giraffe upright roster v3",
+      "image": "demos/wildlife-v2/giraffe-upright/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "54bccc660cf970c44637ed1a87f0928555b62f180e80fa306ada157955d80372",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -8219,11 +8259,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1096"
+          "source": "src/generation/regional/NaturalLandscape.ts:1155"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1290"
+          "source": "src/generation/regional/NaturalLandscape.ts:1349"
         },
         {
           "system": "World generation",
@@ -30130,6 +30170,42 @@
       ]
     },
     {
+      "id": "sprite:wildlife-elephant-upright-provisional-v1",
+      "sheetId": "wildlife-elephant-upright-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-elephant-upright-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-giraffe-upright-provisional-v1",
+      "sheetId": "wildlife-giraffe-upright-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-giraffe-upright-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -32171,7 +32247,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:964"
+          "source": "src/wildlife/Fauna.ts:968"
         },
         {
           "system": "Gameplay",
@@ -32253,11 +32329,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:38"
+          "source": "src/wildlife/Fauna.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:235"
+          "source": "src/wildlife/Fauna.ts:239"
         },
         {
           "system": "Gameplay",
@@ -33805,11 +33881,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1096"
+          "source": "src/generation/regional/NaturalLandscape.ts:1155"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1290"
+          "source": "src/generation/regional/NaturalLandscape.ts:1349"
         },
         {
           "system": "World generation",

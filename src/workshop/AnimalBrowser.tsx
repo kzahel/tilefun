@@ -301,7 +301,7 @@ export default function AnimalBrowser({
             <AnimalPreview animal={a} motion={motion} direction={direction} animate={animate} />
             <h3 style={{ margin: "8px 0 4px" }}>{a.name}</h3>
             <p style={{ margin: "4px 0" }}>
-              {a.family} · {a.hunter ? "Hunting" : "Wildlife"}
+              {a.family} · {a.companion ? "Companion" : a.hunter ? "Hunting" : "Wildlife"}
             </p>
             <small>
               {dates[a.id]?.added ? (

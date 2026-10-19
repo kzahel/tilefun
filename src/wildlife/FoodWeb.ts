@@ -728,7 +728,7 @@ const companions = new Set([
   "guinea-pig",
   "cat",
   "dog",
-  ...FAUNA_PROFILES.filter((p) => p.variantOf).map((p) => p.species),
+  ...FAUNA_PROFILES.filter((p) => p.variantOf || p.companion).map((p) => p.species),
 ]);
 const diets = new Map<string, ReadonlySet<string>>(
   Object.entries(HUNTING_DIETS).map(([species, prey]) => [species, new Set(prey)]),

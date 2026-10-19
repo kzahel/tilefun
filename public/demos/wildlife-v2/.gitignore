@@ -633,3 +633,7 @@
 !lobster/roster-v3/*
 !shrimp/roster-v3/*
 !mantis-shrimp/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!elephant-upright/roster-v3/*
+!giraffe-upright/roster-v3/*
