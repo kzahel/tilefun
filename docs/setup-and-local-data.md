@@ -71,6 +71,12 @@ They still require the native escape clip and physical height. The raptor reload
 check retains its bounded hunt/perch ticks with a 30-second wall-time budget.
 Game-catalog deep-link checks await the completed startup route before testing
 the return link, with a 15-second readiness allowance for hosted rendering.
+Robin reload checks hold the camera over the same region: hydration reorders
+runtime actors, and following the first robin can stream another grove. Exact
+population, position, height and saved flight-frame assertions remain in place.
+Resumed wildlife walks use the same species-scaled phase allowance as initial
+arrival. Vehicle boarding checks use an available generated car and verify its
+actual mesh asset; the expanded traffic roster does not guarantee a blue compact.
 Each CI shard stops at its first test failure so GitHub publishes its job logs
 promptly; other shards continue independently. Local runs collect all failures.
 The raster verification renders every Workshop candidate in headless-shell and

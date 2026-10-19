@@ -144,30 +144,9 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     page.on("pageerror", (e) => errors.push(e.message));
     await start(page, backend, true);
     const override = backend.includes("allcars3d");
-    const exactBlue = backend.includes("meshes") && !override;
-    const desiredModel = exactBlue ? "blue" : override ? "other" : "any";
-    if (exactBlue) {
-      // The seeded blue compact starts on the west street, outside the
-      // initial replica window. Let native traffic populate, then approach it.
-      await expect
-        .poll(
-          () =>
-            page.evaluate(() => {
-              const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-              return g.stateView.entities.some((e) => e.type.startsWith("vehicle-v1:"));
-            }),
-          { timeout: 15000 },
-        )
-        .toBe(true);
-      await page.evaluate(async () => {
-        const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
-        await g.gcSendRequest({
-          type: "rcon",
-          requestId: g.nextRequestId++,
-          command: "tp 3360 7344",
-        });
-      });
-    }
+    // All road models now have meshes. Check the actual generated car's asset
+    // rather than requiring one random traffic slot to contain a blue compact.
+    const desiredModel = override ? "other" : "any";
     await expect
       .poll(
         () =>
@@ -176,7 +155,6 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
             return g.stateView.entities.some(
               (e) =>
                 e.type.startsWith("vehicle-v1:") &&
-                (mode !== "blue" || e.type === "vehicle-v1:compact-1") &&
                 (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
             );
           }, desiredModel),
@@ -188,7 +166,6 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
       const car = g.stateView.entities.find(
         (e) =>
           e.type.startsWith("vehicle-v1:") &&
-          (mode !== "blue" || e.type === "vehicle-v1:compact-1") &&
           (mode !== "other" || e.type !== "vehicle-v1:compact-1"),
       );
       if (!car?.collider) throw Error("No car");
@@ -217,7 +194,6 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
     await checkHorn(page, "car");
     if (backend.includes("meshes")) {
       if (override) expect((await read(page)).type).not.toBe("vehicle-v1:compact-1");
-      else expect((await read(page)).type).toBe("vehicle-v1:compact-1");
       const expectedAsset =
         authoredVehicleForType((await read(page)).type ?? "")?.assetId ?? "compact-1-authored-v7";
       await expect

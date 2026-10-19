@@ -87,7 +87,9 @@ for (const profile of FAUNA_PROFILES) {
         // Sample the short native rest phase instead of skipping it between
         // increasingly sparse polls after a slower pet walk.
         .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0), {
-          timeout: Math.max(5_000, Math.ceil(((1.35 * profile.step) / profile.speed + 2) * 1000)),
+          // Resuming a saved walk needs the same movement/authority budget as
+          // initial arrival, including software-rendered CI scheduling delays.
+          timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
           intervals: [30],
         })
         .toBe(true);

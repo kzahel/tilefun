@@ -17,6 +17,9 @@ for (const renderer of ["canvas", "gpu"]) {
     );
     const c = page.getByLabel("Natural landscape playground");
     await expect(c).toHaveAttribute("data-ready", "true");
+    // Keep the replicated region fixed: hydration reorders runtime actors, so
+    // following the first robin can stream a different grove after reload.
+    await page.getByLabel("Follow selected animal").uncheck();
     await page.getByLabel("Landscape zoom").selectOption("1.3");
     const poses = async () =>
       JSON.parse((await c.getAttribute("data-robin-poses")) ?? "[]") as {
