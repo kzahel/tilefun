@@ -456,16 +456,21 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
           type: "touchStart",
           touchPoints: [{ x: 530, y: 300, id: 1 }],
         });
-      else await page.touchscreen.tap(530, 300);
-      await expect.poll(async () => (await read(page)).speed).toBeGreaterThan(24);
-      // Leave room to reverse before stopping: speed alone can be reached
-      // within eight pixels of the route endpoint where this train starts.
-      await expect.poll(async () => (await read(page)).x).toBeGreaterThan(forwardStart.x + 32);
+      else await worldTap(page, 530, 300);
+      // Sparse software-GPU frames can sample a braking interval between
+      // input batches. Require authoritative travel, not a transient speed.
+      // This also leaves room to reverse away from the starting route end.
+      await expect
+        .poll(async () => (await read(page)).x, { timeout: 15000 })
+        .toBeGreaterThan(forwardStart.x + 32);
       if (mode === "Hold to move") {
         await page.waitForTimeout(1000);
-        expect((await read(page)).speed).toBeGreaterThan(24);
+        const held = await read(page);
+        await expect
+          .poll(async () => (await read(page)).x, { timeout: 15000 })
+          .toBeGreaterThan(held.x + 8);
         await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      } else await page.touchscreen.tap(530, 300);
+      } else await worldTap(page, 530, 300);
       await expect.poll(async () => (await read(page)).speed).toBeLessThan(0.1);
       const stopped = await read(page);
       await page.waitForTimeout(400);
@@ -477,8 +482,10 @@ for (const backend of ["canvas", "gpu", "gpu&meshes", "gpu&meshes&allcars3d"]) {
           type: "touchStart",
           touchPoints: [{ x: 70, y: 300, id: 2 }],
         });
-      else await page.touchscreen.tap(70, 300);
-      await expect.poll(async () => (await read(page)).x).toBeLessThan(stopped.x - 8);
+      else await worldTap(page, 70, 300);
+      await expect
+        .poll(async () => (await read(page)).x, { timeout: 15000 })
+        .toBeLessThan(stopped.x - 8);
       await page
         .locator("button[aria-label=Options]")
         .evaluate((b: HTMLButtonElement) => b.click());

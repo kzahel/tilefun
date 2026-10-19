@@ -85,6 +85,10 @@ Vehicle reload checks hold the first native touch through the keyboard-to-touch
 hint change, require the pressed button to remain under the finger, then release
 and require authority to relinquish the seat. Vehicle instructions/errors sit
 above the bottom-left button so text changes cannot move its touch target.
+Train touch checks require authoritative forward/reverse travel and continued
+travel after a one-second hold, rather than sampling an instantaneous minimum
+speed between input batches on software GPU runners. Native train taps queue
+contact and release together through the shared short-tap helper.
 Review tests wait for intercepted feedback requests before inspecting their
 payloads: optimistic approval counts and pending-save text can appear before
 the request reaches the test route.
