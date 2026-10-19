@@ -3,6 +3,8 @@ import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { BOVID_PROFILES } from "./Bovids.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
+import { PANDA_PROFILE } from "./Panda.js";
+import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
 import { PET_ART } from "./PetVariants.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
@@ -1152,7 +1154,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
         loop: true,
       },
     ],
-    body: [24, 12, 31],
+    body: [24, 12, 18],
     speed: 12,
     radius: 128,
     step: 32,
@@ -1202,7 +1204,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
         loop: true,
       },
     ],
-    body: [26, 14, 35],
+    body: [26, 14, 20],
     speed: 14,
     radius: 144,
     step: 36,
@@ -1316,6 +1318,8 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...BASE_FAUNA_PROFILES,
   ...ANTELOPE_PROFILES,
   ...BOVID_PROFILES,
+  ...PATTERNED_GRAZER_PROFILES,
+  PANDA_PROFILE,
   ...PET_ART.map((art): FaunaProfile => {
     const base = BASE_FAUNA_PROFILES.find((p) => p.species === art.species);
     if (!base) throw new Error(`Missing pet behavior: ${art.species}`);

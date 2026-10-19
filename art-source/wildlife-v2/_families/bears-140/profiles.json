@@ -1,0 +1,184 @@
+{
+  "panda": {
+    "label": "Panda",
+    "torso": [
+      0,
+      -0.1,
+      1.41
+    ],
+    "radii": [
+      0.67,
+      0.91,
+      0.65
+    ],
+    "chest": [
+      0,
+      0.48,
+      1.48
+    ],
+    "chestRadii": [
+      0.64,
+      0.47,
+      0.68
+    ],
+    "head": [
+      0,
+      1.13,
+      1.64
+    ],
+    "skull": [
+      0.34,
+      0.34,
+      0.34
+    ],
+    "muzzleWidth": 0.25,
+    "earRadius": 0.14,
+    "tuft": 0,
+    "pattern": "none",
+    "foreHip": [
+      0.45,
+      0.52,
+      1.34
+    ],
+    "hindHip": [
+      0.47,
+      -0.68,
+      1.26
+    ],
+    "foreLengths": [
+      0.69,
+      0.68,
+      0.33,
+      0.12
+    ],
+    "hindLengths": [
+      0.67,
+      0.66,
+      0.32,
+      0.12
+    ],
+    "legRadii": [
+      0.19,
+      0.14,
+      0.105,
+      0.09
+    ],
+    "pawWidth": 0.21,
+    "tailLengths": [
+      0.12,
+      0.1,
+      0.08
+    ],
+    "tailRadius": 0.08,
+    "walkSpeed": 12,
+    "chaseSpeed": 24,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#353930",
+      "B": "#e9e5ce",
+      "H": "#f8f0da",
+      "C": "#e3dbc0",
+      "M": "#3d3a34",
+      "E": "#1e2927",
+      "N": "#292f29",
+      "G": "#497648",
+      "L": "#93ad55"
+    },
+    "muzzleLength": 0.22,
+    "muzzleY": 0.29,
+    "limbKey": "M",
+    "pawKey": "M",
+    "earKey": "M"
+  },
+  "polar-bear": {
+    "label": "Polar bear",
+    "torso": [
+      0,
+      -0.1,
+      1.51
+    ],
+    "radii": [
+      0.67,
+      1.13,
+      0.69
+    ],
+    "chest": [
+      0,
+      0.58,
+      1.64
+    ],
+    "chestRadii": [
+      0.72,
+      0.55,
+      0.77
+    ],
+    "head": [
+      0,
+      1.43,
+      1.78
+    ],
+    "skull": [
+      0.34,
+      0.44,
+      0.34
+    ],
+    "muzzleWidth": 0.27,
+    "earRadius": 0.14,
+    "tuft": 0,
+    "pattern": "none",
+    "foreHip": [
+      0.51,
+      0.65,
+      1.49
+    ],
+    "hindHip": [
+      0.53,
+      -0.83,
+      1.37
+    ],
+    "foreLengths": [
+      0.77,
+      0.75,
+      0.36,
+      0.12
+    ],
+    "hindLengths": [
+      0.74,
+      0.73,
+      0.35,
+      0.12
+    ],
+    "legRadii": [
+      0.21,
+      0.16,
+      0.12,
+      0.1
+    ],
+    "pawWidth": 0.24,
+    "tailLengths": [
+      0.12,
+      0.1,
+      0.08
+    ],
+    "tailRadius": 0.08,
+    "walkSpeed": 14,
+    "chaseSpeed": 42,
+    "walkMs": 40,
+    "chaseMs": 20,
+    "palette": {
+      "K": "#797b69",
+      "B": "#e9e5d1",
+      "H": "#fff5dc",
+      "C": "#d1cbb4",
+      "M": "#aaa68e",
+      "E": "#1e2927",
+      "N": "#292f29"
+    },
+    "muzzleLength": 0.31,
+    "muzzleY": 0.36,
+    "limbKey": "B",
+    "pawKey": "B",
+    "earKey": "B"
+  }
+}

@@ -123,6 +123,19 @@ Full final units: 3,248 pass, five known Windows failures, ten skipped. Thirty-
 eight new entries plus sixteen delivered leave 142 remaining. Zebra, okapi,
 camel, panda and polar bear are underway. New mounts must be reachable with a
 normal ground jump; verify donkey/mule support heights during camel integration.
+Zebra, okapi, camel, panda and polar bear now also use fresh world/editor/lab
+banks. Actual source ribbon quads and articulated limb/neck markings distinguish
+the striped grazers; camel has its own hump, lips and padded toes. Panda forages
+with jaw-attached bamboo and keyed source visibility; polar bear hunts local
+natural prey, retains lineage through reload and has a bounded original growl.
+Five source replays and 2,280 exact crops pass. Default ground jumps board
+camel and the earlier donkey/mule: their back supports now use reachable
+20/18/20px heights. Riding keeps species speeds/phase and reloads correctly;
+mounted animals remain protected prey. Earlier source banks stay immutable.
+Typecheck/lint/build, 1,064-candidate manifest, 23 browser cases and streaming
+readiness pass. Full final units: 3,320 pass, five known Windows failures,
+ten skipped. Forty-three new entries plus sixteen delivered leave 137 remaining.
+Moose, elk, rhinoceros, warthog and hippo are the next sources.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion

@@ -10,6 +10,7 @@ export const NATURAL_HUNTER_SPECIES = [
   "cheetah",
   "lynx",
   "bobcat",
+  "polar-bear",
 ] as const;
 export type NaturalHunterSpecies = (typeof NATURAL_HUNTER_SPECIES)[number];
 
@@ -211,6 +212,29 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
       radius: 128,
       group: 1,
       inspection: [1383, 1250],
+    },
+  },
+  {
+    species: "polar-bear",
+    callKind: "bear",
+    label: "Polar bear",
+    revision: "roster-v2",
+    speed: 14,
+    chaseSpeed: 42,
+    weight: 300,
+    size: 64,
+    anchorY: 48,
+    body: [34, 18, 30],
+    art: {
+      identity: "polar-bear-roster-v2-pixels-01",
+      sha256: "7ccd05f7397e19c7fac25e22a752d5ba44e1a67f1dddf2061674745080eac2de",
+      clips,
+    },
+    expansion: {
+      habitat: "open",
+      radius: 176,
+      group: 1,
+      inspection: [-90, 615],
     },
   },
 ];

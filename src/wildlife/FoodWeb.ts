@@ -19,6 +19,9 @@ const antelopes = [
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
 const pasture = [
+  "zebra",
+  "okapi",
+  "camel",
   "wildebeest",
   ...antelopes,
   "deer",
@@ -38,6 +41,18 @@ const felids = ["jaguar", "leopard", ...smallerCats] as const;
 /** Explicit game food web. Direction means hunter → prey, never inferred from mass.
  * These size/threat tiers are game rules, not a claim of measured animal ecology. */
 export const HUNTING_DIETS = {
+  "polar-bear": [
+    ...small,
+    ...pasture,
+    "wolf",
+    "coyote",
+    "spotted-hyena",
+    "fox",
+    "musk-ox",
+    "fish",
+    "harbor-seal",
+    "penguin",
+  ],
   jaguar: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
   leopard: [...small, ...pasture, ...smallerCats, "fox", "wolf", "coyote", "giant-spider"],
   cheetah: [...small, ...lightAntelopes, "deer", "sheep", "goat", "piglet", "kangaroo", "alpaca"],
@@ -58,6 +73,7 @@ export const HUNTING_DIETS = {
   wolf: [...small, ...pasture, "lynx", "bobcat", "fox", "coyote"],
   "spotted-hyena": [...small, ...pasture, ...smallerCats, "fox", "coyote", "wolf"],
   "dire-wolf": [
+    "panda",
     "musk-ox",
     ...felids,
     ...small,
@@ -80,6 +96,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   tiger: [
+    "panda",
     ...heavyBovids,
     ...felids,
     ...small,
@@ -95,6 +112,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   lion: [
+    "panda",
     ...heavyBovids,
     ...felids,
     ...small,
@@ -110,6 +128,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "brown-bear": [
+    "panda",
     ...heavyBovids,
     ...felids,
     "wolf",
@@ -126,6 +145,7 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   griffin: [
+    "panda",
     ...felids,
     ...small,
     ...pasture,
@@ -139,6 +159,8 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    "panda",
+    "polar-bear",
     ...heavyBovids,
     ...felids,
     "wolf",
@@ -159,6 +181,8 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    "panda",
+    "polar-bear",
     ...heavyBovids,
     ...felids,
     "wolf",

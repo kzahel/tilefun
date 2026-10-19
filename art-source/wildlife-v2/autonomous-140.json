@@ -594,62 +594,82 @@
     "panda": {
       "name": "Panda",
       "family": "Bears",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent bear anatomy; panda bamboo forage / polar bear hunter; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:37:25Z",
+      "receipt": "art-source/wildlife-v2/panda/roster-v2/receipt.json",
+      "evidence": "Native/enlarged anatomy and coat inspection; fixed linked source motion; ten-artifact byte-identical replay; exact Chromium crops; 23 game/lab/world browser cases across cohort; 267 focused hunting/ecology/audio/riding checks; full final repository checks",
+      "reviewStatus": "pending human review"
     },
     "polar-bear": {
       "name": "Polar bear",
       "family": "Bears",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent bear anatomy; panda bamboo forage / polar bear hunter; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:37:25Z",
+      "receipt": "art-source/wildlife-v2/polar-bear/roster-v2/receipt.json",
+      "evidence": "Native/enlarged anatomy and coat inspection; fixed linked source motion; ten-artifact byte-identical replay; exact Chromium crops; 23 game/lab/world browser cases across cohort; 267 focused hunting/ecology/audio/riding checks; full final repository checks",
+      "reviewStatus": "pending human review"
     },
     "moose": {
       "name": "Moose",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
     },
     "elk": {
       "name": "Elk",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
     },
     "zebra": {
       "name": "Zebra",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent patterned grazer anatomy and surface markings; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:37:25Z",
+      "receipt": "art-source/wildlife-v2/zebra/roster-v2/receipt.json",
+      "evidence": "Native/enlarged anatomy and coat inspection; fixed linked source motion; ten-artifact byte-identical replay; exact Chromium crops; 23 game/lab/world browser cases across cohort; 267 focused hunting/ecology/audio/riding checks; full final repository checks",
+      "reviewStatus": "pending human review"
     },
     "rhinoceros": {
       "name": "White rhinoceros",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
     },
     "hippopotamus": {
       "name": "Hippo",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "four-toed pond walker and yawn source; provisional until source/game checks"
     },
     "camel": {
       "name": "Dromedary camel",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent patterned grazer anatomy and surface markings; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:37:25Z",
+      "receipt": "art-source/wildlife-v2/camel/roster-v2/receipt.json",
+      "evidence": "Native/enlarged anatomy and coat inspection; fixed linked source motion; ten-artifact byte-identical replay; exact Chromium crops; 23 game/lab/world browser cases across cohort; 267 focused hunting/ecology/audio/riding checks; full final repository checks",
+      "reviewStatus": "pending human review"
     },
     "american-bison": {
       "name": "American bison",
@@ -769,17 +789,22 @@
     "okapi": {
       "name": "Okapi",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent patterned grazer anatomy and surface markings; provisional until source/game checks"
+      "gameplay": true,
+      "completedUtc": "2026-10-19T00:37:25Z",
+      "receipt": "art-source/wildlife-v2/okapi/roster-v2/receipt.json",
+      "evidence": "Native/enlarged anatomy and coat inspection; fixed linked source motion; ten-artifact byte-identical replay; exact Chromium crops; 23 game/lab/world browser cases across cohort; 267 focused hunting/ecology/audio/riding checks; full final repository checks",
+      "reviewStatus": "pending human review"
     },
     "warthog": {
       "name": "Warthog",
       "family": "Hoofed & large herbivores",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
     },
     "gerenuk": {
       "name": "Gerenuk",
@@ -1841,6 +1866,28 @@
         "wildebeest"
       ],
       "validation": "Typecheck/lint/build, 1039-candidate manifest and streaming readiness pass. Final full units: 3248 pass, 5 known Windows failures, 10 skipped. Four source replays and 1312 exact crops pass. Sixteen world/lab/body/ball browser cases covered, with all eight motion cases rerun after the shared herd fix. Generated buffalo regression rejects old behavior and passes corrected behavior; 35 shared herd fixtures sample the visible warning instead of skipping it in one coarse tick."
+    },
+    {
+      "utc": "2026-10-19T00:23:19Z",
+      "prepared": [
+        "zebra",
+        "okapi",
+        "camel",
+        "panda",
+        "polar-bear"
+      ],
+      "validation": "Five ten-artifact byte-identical replays and 2280 exact Chromium crops pass. Native stripe/face/hump/ear inspection, fixed source links and Panda food visibility/attachment pass. 267 focused hunting/source/ecology/audio/riding tests pass; generated polar bear meals and lineage reload pass. Donkey/mule/camel mount from a normal ground jump. Full game validation underway."
+    },
+    {
+      "utc": "2026-10-19T00:37:25Z",
+      "completed": [
+        "zebra",
+        "okapi",
+        "camel",
+        "panda",
+        "polar-bear"
+      ],
+      "validation": "Typecheck/lint/build, 1064-candidate manifest, 23 browser cases and streaming --assert-ready pass. Full units: 3320 pass, 5 known Windows failures, 10 skipped. Five ten-artifact replays and 2280 exact crops pass. Normal ground jumps board donkey/mule/camel; support heights corrected to 18/20/20px and riding survives reload. Panda source checks 3888 food attachment/visibility samples. Polar bear naturally hunts and reloads lineage with a bounded original growl."
     }
   ],
   "existingOutsideRoster": [
@@ -1955,6 +2002,28 @@
       "state": "agent-inspected-game-active",
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/bovids-140/README.md"
+    },
+    "patterned-grazers": {
+      "animals": [
+        "zebra",
+        "okapi",
+        "camel"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/patterned-grazers-140/README.md"
+    },
+    "bears": {
+      "animals": [
+        "panda",
+        "polar-bear"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/bears-140/README.md",
+      "roles": "panda foraging fauna; polar bear natural hunter"
     }
   }
 }

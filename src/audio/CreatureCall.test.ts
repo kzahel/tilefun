@@ -7,19 +7,26 @@ import { creatureCallSamples } from "./CreatureCall.js";
 afterEach(() => vi.unstubAllGlobals());
 
 describe("creature calls", () => {
-  it.each(["rex", "dragon", "wolf", "griffin", "spider", "coyote", "hyena", "cat"] as const)(
-    "%s has a bounded finite call with quiet edges",
-    (kind) => {
-      const samples = creatureCallSamples(kind, 8000);
-      expect(samples.length).toBe(10240);
-      expect([...samples].every((v) => Number.isFinite(v) && Math.abs(v) <= 1)).toBe(true);
-      expect(samples[0]).toBe(0);
-      expect(Math.abs(samples.at(-1) ?? 1)).toBeLessThan(0.01);
-      expect(Math.sqrt(samples.reduce((n, v) => n + v * v, 0) / samples.length)).toBeGreaterThan(
-        0.05,
-      );
-    },
-  );
+  it.each([
+    "rex",
+    "dragon",
+    "wolf",
+    "griffin",
+    "spider",
+    "coyote",
+    "hyena",
+    "cat",
+    "bear",
+  ] as const)("%s has a bounded finite call with quiet edges", (kind) => {
+    const samples = creatureCallSamples(kind, 8000);
+    expect(samples.length).toBe(10240);
+    expect([...samples].every((v) => Number.isFinite(v) && Math.abs(v) <= 1)).toBe(true);
+    expect(samples[0]).toBe(0);
+    expect(Math.abs(samples.at(-1) ?? 1)).toBeLessThan(0.01);
+    expect(Math.sqrt(samples.reduce((n, v) => n + v * v, 0) / samples.length)).toBeGreaterThan(
+      0.05,
+    );
+  });
   it.each([
     "t-rex",
     "wolf",
@@ -30,6 +37,7 @@ describe("creature calls", () => {
     "cheetah",
     "lynx",
     "bobcat",
+    "polar-bear",
   ] as const)(
     "%s plays one spatial call per display, suppresses late/muted calls and stops on pause/removal",
     (species) => {

@@ -333,3 +333,28 @@ assertion; distinguish them from newly introduced failures.
   Thirty-eight new entries plus sixteen delivered leave 142 remaining. Zebra,
   okapi, camel, panda and polar-bear sources are underway. Also check mount
   heights against normal jumping when integrating the new camel.
+
+- 00:37 UTC: zebra, okapi, camel, panda and polar bear completed.
+  Zebra coat ribbons and articulated neck/leg bands, okapi ossicones/cheeks/
+  rump and stocking markings, and a single camel hump/lips/padded toes use
+  distinct empty-scene anatomy. Source polygon origins are geometric centers;
+  visible ribbon quads preserve curved markings without convex-hull merging.
+  Native limb surfaces use compact actual mesh hulls. Each grazer has 164 poses,
+  fixed linked necks/limbs/tails, grazing jaws and matched planted travel.
+  Panda has black shoulders/limbs/ears/eye patches; polar bear an elongated
+  white body/neck/muzzle and round ears. Each bear has 324 poses with independent
+  walk/chase travel and jaw/display motion. Panda's jaw-attached bamboo has
+  keyed source visibility only during foraging, independently checked 3,888
+  times. Polar bear hunts generated local prey, preserves replacement lineage
+  after reload and uses a bounded original growl. Explicit food tiers include
+  all five; no mass inference or player/pet meals.
+  Five ten-artifact replays and 2,280 exact Chromium crops pass. Normal ground
+  jumps exposed donkey/mule support heights above the jump apex; back supports
+  now use 18/20px, camel 20px. All three board without teleport/launch assist,
+  use their own 64/80/64px/s riding speeds, retain riding through reload and
+  remain protected while ridden. Source banks for earlier grazers stay immutable.
+  Typecheck/lint/build, 1,064-candidate manifest, 23 game/lab/world browser cases
+  and streaming readiness pass. Full units: 3,320 pass, five known Windows
+  failures, ten skipped. Forty-three new entries plus sixteen delivered leave
+  137 remaining. Moose, elk, rhinoceros, warthog and hippo sources are underway.
+  Every exact new art identity remains pending human review.

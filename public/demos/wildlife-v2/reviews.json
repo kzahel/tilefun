@@ -7525,5 +7525,470 @@
         "sha256": "13833604e0282477d53c7bff91a52e151d15284ed712731072d00520efc4a18e"
       }
     ]
+  },
+  {
+    "id": "zebra-roster-v2",
+    "animalId": "zebra",
+    "revision": "roster-v2",
+    "name": "Zebra · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/zebra/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-zebra-roster-v2",
+      "name": "Zebra sheet",
+      "image": "demos/wildlife-v2/zebra/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a097f5f1bd2e15e6d852c3a816555aae49a6865a1d81594775aab6dacae4b69e",
+      "source": "art-source/wildlife-v2/zebra/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-zebra-roster-v2-scene",
+      "name": "Zebra scene",
+      "image": "demos/wildlife-v2/zebra/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "9c4b5ec94bf79c5f408ad987d34381fa74cdf9056a5b00a078eae0daa8f07e44",
+      "source": "art-source/wildlife-v2/zebra/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-zebra-roster-v2-contact",
+      "name": "Zebra contact",
+      "image": "demos/wildlife-v2/zebra/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "ac19cda4e37cb4ccf561547a25c3908c7add5bb760eac2538b8ba5c6ce212517",
+      "source": "art-source/wildlife-v2/zebra/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/zebra/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/contact-sheet-native.png",
+        "sha256": "ac19cda4e37cb4ccf561547a25c3908c7add5bb760eac2538b8ba5c6ce212517"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/index.html",
+        "sha256": "0e42e6955b2e9ad54b9732451959929bf10515fe490c1501df8866e0dcd20655"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/pixel-audit.json",
+        "sha256": "6fe1f6d9422080f39e15d2953d71a422e9cdeb3e57d876881781764d78d6f6ae"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/preview-native.gif",
+        "sha256": "5d4d04d2fff5796dd8ac8c59e5c3bcbe6dc2598eb9668264ed8fc52e191c01d1"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/preview.gif",
+        "sha256": "916dc664c5fbb7bb2bacfa7aec855c14a2ecd735c2d6283311a7e4934aa95aaa"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/scene-native.png",
+        "sha256": "9c4b5ec94bf79c5f408ad987d34381fa74cdf9056a5b00a078eae0daa8f07e44"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/sheet.png",
+        "sha256": "a097f5f1bd2e15e6d852c3a816555aae49a6865a1d81594775aab6dacae4b69e"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/source-audit.json",
+        "sha256": "c4340e7cfe48f6fd30641116586a9f6062067347fa97fa248b8555b32d0aee40"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/sprite.json",
+        "sha256": "42219948714ec2a0e1589d2b75dd6b211f2241d7acdc78874f1e850c02e4bd1d"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/travel-native.gif",
+        "sha256": "03680d0b1809c38b5c476c45e8665c6e2e6af549bb1538e9599af0aee73a47ec"
+      },
+      {
+        "path": "demos/wildlife-v2/zebra/roster-v2/validation.json",
+        "sha256": "a41412eb85fc7e77b1254bd1a5a3efecbfb188f5b098f5046f79a7abd944eba4"
+      }
+    ]
+  },
+  {
+    "id": "okapi-roster-v2",
+    "animalId": "okapi",
+    "revision": "roster-v2",
+    "name": "Okapi · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/okapi/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-okapi-roster-v2",
+      "name": "Okapi sheet",
+      "image": "demos/wildlife-v2/okapi/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "11033686947a6fa9a27aef1da20dbbac204b459bc7e276fcd520b64cdcdf7644",
+      "source": "art-source/wildlife-v2/okapi/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-okapi-roster-v2-scene",
+      "name": "Okapi scene",
+      "image": "demos/wildlife-v2/okapi/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "b34dfcc50dd4aaa70c92899270f29c5d3ddc1e5abb06f19476d2540aa20c761c",
+      "source": "art-source/wildlife-v2/okapi/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-okapi-roster-v2-contact",
+      "name": "Okapi contact",
+      "image": "demos/wildlife-v2/okapi/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "1e065d36a6199c242a8f734194e6ef4a0f3b076ca6a54937be97498df1ebbf5b",
+      "source": "art-source/wildlife-v2/okapi/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/okapi/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/contact-sheet-native.png",
+        "sha256": "1e065d36a6199c242a8f734194e6ef4a0f3b076ca6a54937be97498df1ebbf5b"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/index.html",
+        "sha256": "4b514797904a599e725bd18e84163554ca6590a2120ef05d57370d28561235f1"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/pixel-audit.json",
+        "sha256": "421d27c16df0d507b80d3dc07c4d5370a85b8c589c69ed1840d31a3a0d0c941c"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/preview-native.gif",
+        "sha256": "d622155e396b75ae884f16835be3e708346ca79d90b30a0d0f0eeb79a3250b5b"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/preview.gif",
+        "sha256": "91d39c9730910d0d23f69c78d3eaa90e6e0cff7e6806484eb187a5dee9b52519"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/scene-native.png",
+        "sha256": "b34dfcc50dd4aaa70c92899270f29c5d3ddc1e5abb06f19476d2540aa20c761c"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/sheet.png",
+        "sha256": "11033686947a6fa9a27aef1da20dbbac204b459bc7e276fcd520b64cdcdf7644"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/source-audit.json",
+        "sha256": "92a1685ed01b49733b14cf3a0ebc03ed293f6ed6547b292a867a6e01acb30118"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/sprite.json",
+        "sha256": "3a989d2d0712ea55916920ceb08125b5f2f1ee9372377ca2320b9dc7057b78f6"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/travel-native.gif",
+        "sha256": "b79fd08594e954ca42c272776edcbe737c32eeb3fdc093d69f0a5909bfd75904"
+      },
+      {
+        "path": "demos/wildlife-v2/okapi/roster-v2/validation.json",
+        "sha256": "2448b0bf4c1ec6e2ea05689c614dc38cdbe2529dc32d7cd2dfc88b90f5495cbf"
+      }
+    ]
+  },
+  {
+    "id": "camel-roster-v2",
+    "animalId": "camel",
+    "revision": "roster-v2",
+    "name": "Dromedary camel · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/camel/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-camel-roster-v2",
+      "name": "Dromedary camel sheet",
+      "image": "demos/wildlife-v2/camel/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7447703104520e03331c42297a96238c11559063f4e0a7339433c2ddafc9526d",
+      "source": "art-source/wildlife-v2/camel/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-camel-roster-v2-scene",
+      "name": "Dromedary camel scene",
+      "image": "demos/wildlife-v2/camel/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "3fe9f570042991717fc6e121bb3543ac46f049aeba0093f1df43247aebf2d0b8",
+      "source": "art-source/wildlife-v2/camel/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-camel-roster-v2-contact",
+      "name": "Dromedary camel contact",
+      "image": "demos/wildlife-v2/camel/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "edcdd411d3f07bb5fa34fe0c2e2c31af7755bdcd09a6b445752de756ccb751c4",
+      "source": "art-source/wildlife-v2/camel/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/camel/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/contact-sheet-native.png",
+        "sha256": "edcdd411d3f07bb5fa34fe0c2e2c31af7755bdcd09a6b445752de756ccb751c4"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/index.html",
+        "sha256": "711b859f99961801c81fd6e6366fae48c15a38507205251c48a0f83e13aaaac2"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/pixel-audit.json",
+        "sha256": "be7f3c34ef74ed82f20df883ac3e708c412b2264676399590fde08c5648b3d84"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/preview-native.gif",
+        "sha256": "c65feaddfc3af18fcc054605b2e9dadfa92a96b14c10401a143e9423f3c38897"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/preview.gif",
+        "sha256": "9282f4454d3e2f6f298e7596586ca7671a30c241e5f01b2c59ad056554d6e5d7"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/scene-native.png",
+        "sha256": "3fe9f570042991717fc6e121bb3543ac46f049aeba0093f1df43247aebf2d0b8"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/sheet.png",
+        "sha256": "7447703104520e03331c42297a96238c11559063f4e0a7339433c2ddafc9526d"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/source-audit.json",
+        "sha256": "b6762d3f2f007647b8847c63eb26acf4aee8229cc7a5ca519d0eb6ecee6fc25c"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/sprite.json",
+        "sha256": "99b0620c8e858514ecbb9a1250c3b24d3067f881d06e99f9c1b17331d8b3ac4f"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/travel-native.gif",
+        "sha256": "315288af37e04690b5e446df7a72cfd141aeb788ef3d5530d7286ad41e0d0d3b"
+      },
+      {
+        "path": "demos/wildlife-v2/camel/roster-v2/validation.json",
+        "sha256": "cc7b98366d3b9cb5f81f3d260baa553f2d4b638811a83a1165aaca632abd2817"
+      }
+    ]
+  },
+  {
+    "id": "panda-roster-v2",
+    "animalId": "panda",
+    "revision": "roster-v2",
+    "name": "Panda · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/panda/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-panda-roster-v2",
+      "name": "Panda sheet",
+      "image": "demos/wildlife-v2/panda/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "eaf32465fcf406013586b6aa906bc7b1a7b407f4aa1a7304764235c126395f47",
+      "source": "art-source/wildlife-v2/panda/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-panda-roster-v2-scene",
+      "name": "Panda scene",
+      "image": "demos/wildlife-v2/panda/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "6617ba5fb1e837070e10f138666476aacc5fe6bbb53f01ed62b89ffa5a09cf0e",
+      "source": "art-source/wildlife-v2/panda/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-panda-roster-v2-contact",
+      "name": "Panda contact",
+      "image": "demos/wildlife-v2/panda/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "659ca71729bc3aac51ec35f31a38ae8321814fbddb4ea7b0f1e3d96d4bd60b07",
+      "source": "art-source/wildlife-v2/panda/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/panda/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/contact-sheet-native.png",
+        "sha256": "659ca71729bc3aac51ec35f31a38ae8321814fbddb4ea7b0f1e3d96d4bd60b07"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/index.html",
+        "sha256": "6b989a97954295e89400ee3008f012cd5458ae564085d3f2d7b37a4ae508a973"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/pixel-audit.json",
+        "sha256": "9389af6e5753b98f607579431d631dd2e9c8a4faab673779bb834ec99e282128"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/preview-native.gif",
+        "sha256": "4a32c277a2de5070401ecc86f04e80d10057aa3bf04c2eff362937a9b9db9df9"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/preview.gif",
+        "sha256": "cf5d7c09473b1e46f549e1b9355b02bfa0006caa4b77d44141cd88665d2f8f9d"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/scene-native.png",
+        "sha256": "6617ba5fb1e837070e10f138666476aacc5fe6bbb53f01ed62b89ffa5a09cf0e"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/sheet.png",
+        "sha256": "eaf32465fcf406013586b6aa906bc7b1a7b407f4aa1a7304764235c126395f47"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/source-audit.json",
+        "sha256": "f1bf32598bc2cba8603563a05bb78a0cdf92b7a12eab8cb56a2147291c6db033"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/sprite.json",
+        "sha256": "996cf8f6f6c6173415a29b4602017bd32e9f3e5b101e3c52f213c422f3873b12"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/travel-native.gif",
+        "sha256": "0e6aa9510aaf17c4a1ea353895645a0a2e89f5273c08f520b1ed9c05a98a9c51"
+      },
+      {
+        "path": "demos/wildlife-v2/panda/roster-v2/validation.json",
+        "sha256": "a0f839ee827af194ad264c07d5ca3df7812c2bdaa6dd6f608d9d83798b369fda"
+      }
+    ]
+  },
+  {
+    "id": "polar-bear-roster-v2",
+    "animalId": "polar-bear",
+    "revision": "roster-v2",
+    "name": "Polar bear · completed motion",
+    "batchId": "wildlife-v2-autonomous-140",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/polar-bear/roster-v2/",
+    "sheet": {
+      "id": "wildlife-v2-polar-bear-roster-v2",
+      "name": "Polar bear sheet",
+      "image": "demos/wildlife-v2/polar-bear/roster-v2/sheet.png",
+      "width": 5184,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "7ccd05f7397e19c7fac25e22a752d5ba44e1a67f1dddf2061674745080eac2de",
+      "source": "art-source/wildlife-v2/polar-bear/roster-v2"
+    },
+    "scene": {
+      "id": "wildlife-v2-polar-bear-roster-v2-scene",
+      "name": "Polar bear scene",
+      "image": "demos/wildlife-v2/polar-bear/roster-v2/scene-native.png",
+      "width": 416,
+      "height": 104,
+      "tileSize": 16,
+      "fingerprint": "6f1f3f255c9aa90951de363e33f3063a99cdfba181eabe48e80aadd9d96b23b9",
+      "source": "art-source/wildlife-v2/polar-bear/roster-v2"
+    },
+    "contact": {
+      "id": "wildlife-v2-polar-bear-roster-v2-contact",
+      "name": "Polar bear contact",
+      "image": "demos/wildlife-v2/polar-bear/roster-v2/contact-sheet-native.png",
+      "width": 512,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "8ec0c37aa6293ce1e3e2f8bb821effd420e42e21f946203479aacd4c8ccfb7b0",
+      "source": "art-source/wildlife-v2/polar-bear/roster-v2"
+    },
+    "preview": "demos/wildlife-v2/polar-bear/roster-v2/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/contact-sheet-native.png",
+        "sha256": "8ec0c37aa6293ce1e3e2f8bb821effd420e42e21f946203479aacd4c8ccfb7b0"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/index.html",
+        "sha256": "39953b4e8a06d7ece7e2ff5f6f25b99508c90789a46d73c1c804010a6a28bb4e"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/pixel-audit.json",
+        "sha256": "19aba763e0ef536a0105bf12b40b70583b660cf60a0ee5f8116814789d9ebbc9"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/playback.js",
+        "sha256": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/preview-native.gif",
+        "sha256": "f7a030e16d7379bcc0b36e503a7375efcbce8c55344ff65702852dfa7f72ebfd"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/preview.gif",
+        "sha256": "bb53f9744e41f4787e85649e9314af902bb9e6304f343b907ec142346dc54f55"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/scene-background.png",
+        "sha256": "8b9c9b43f32fe38846772fa73b2a00cf2159a1df6959eeab26c77b45f643563f"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/scene-native.png",
+        "sha256": "6f1f3f255c9aa90951de363e33f3063a99cdfba181eabe48e80aadd9d96b23b9"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/sheet.png",
+        "sha256": "7ccd05f7397e19c7fac25e22a752d5ba44e1a67f1dddf2061674745080eac2de"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/source-audit.json",
+        "sha256": "4bc0e5b435f37868a75f3fb93536f5ef1603ff4150f3cb69d3614e1d72e5e465"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/sprite.json",
+        "sha256": "2eb832948c77f48ab0e971b33815af0808c098fc98e54a50046b98a559167a10"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/travel-native.gif",
+        "sha256": "c0f6b162b0350844e5048dcdd03553a3f33994d1044b7ef075c7ab55db42326f"
+      },
+      {
+        "path": "demos/wildlife-v2/polar-bear/roster-v2/validation.json",
+        "sha256": "eec4259a2c0ea12b4e9de43893cb36135b177892b82cfef7e69ebbd3a794b5fd"
+      }
+    ]
   }
 ]

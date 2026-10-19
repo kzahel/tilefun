@@ -4,7 +4,7 @@
 
 [Tactical 140](tactical/140-autonomous-wildlife-completion.md): owner-authorized full-roster work supersedes the historical expansion/sequencing holds below. Deadline 2026-10-19T04:05:24Z. State: active.
 
-**38 newly completed; 5 in progress; 137 queued; 16 completed before this run.** Final pixels retain their own human-review status.
+**43 newly completed; 5 in progress; 132 queued; 16 completed before this run.** Final pixels retain their own human-review status.
 
 | Animal | Current state | Inspection |
 | --- | --- | --- |
@@ -36,10 +36,14 @@
 | Cheetah | finished-game-active | [Playback](../public/demos/wildlife-v2/cheetah/roster-v2/index.html) |
 | Eurasian lynx | finished-game-active | [Playback](../public/demos/wildlife-v2/lynx/roster-v2/index.html) |
 | Bobcat | finished-game-active | [Playback](../public/demos/wildlife-v2/bobcat/roster-v2/index.html) |
-| Panda | in-progress | Source/animation work |
-| Polar bear | in-progress | Source/animation work |
-| Zebra | in-progress | Source/animation work |
-| Dromedary camel | in-progress | Source/animation work |
+| Panda | finished-game-active | [Playback](../public/demos/wildlife-v2/panda/roster-v2/index.html) |
+| Polar bear | finished-game-active | [Playback](../public/demos/wildlife-v2/polar-bear/roster-v2/index.html) |
+| Moose | in-progress | Source/animation work |
+| Elk | in-progress | Source/animation work |
+| Zebra | finished-game-active | [Playback](../public/demos/wildlife-v2/zebra/roster-v2/index.html) |
+| White rhinoceros | in-progress | Source/animation work |
+| Hippo | in-progress | Source/animation work |
+| Dromedary camel | finished-game-active | [Playback](../public/demos/wildlife-v2/camel/roster-v2/index.html) |
 | American bison | finished-game-active | [Playback](../public/demos/wildlife-v2/american-bison/roster-v2/index.html) |
 | Water buffalo | finished-game-active | [Playback](../public/demos/wildlife-v2/water-buffalo/roster-v2/index.html) |
 | Gemsbok | finished-game-active | [Playback](../public/demos/wildlife-v2/gemsbok-oryx/roster-v2/index.html) |
@@ -49,12 +53,13 @@
 | Saiga antelope | finished-game-active | [Playback](../public/demos/wildlife-v2/saiga-antelope/roster-v2/index.html) |
 | Musk ox | finished-game-active | [Playback](../public/demos/wildlife-v2/musk-ox/roster-v2/index.html) |
 | Wildebeest | finished-game-active | [Playback](../public/demos/wildlife-v2/wildebeest/roster-v2/index.html) |
-| Okapi | in-progress | Source/animation work |
+| Okapi | finished-game-active | [Playback](../public/demos/wildlife-v2/okapi/roster-v2/index.html) |
+| Warthog | in-progress | Source/animation work |
 | Gerenuk | finished-game-active | [Playback](../public/demos/wildlife-v2/gerenuk/roster-v2/index.html) |
 
 ## Historical campaign snapshot
 
-Snapshot: 2026-10-19T00:08:44.820Z (19/10/2026, 02:08:44 Berlin).
+Snapshot: 2026-10-19T00:37:25.912Z (19/10/2026, 02:37:25 Berlin).
 
 Automatically regenerated at task checkpoints and handoffs. Reopen this file to load the latest snapshot. It covers the whole fresh roster.
 
