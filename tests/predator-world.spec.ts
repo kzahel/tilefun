@@ -12,10 +12,14 @@ const homes = new Map<string, { wx: number; wy: number; home: { wx: number; wy: 
 for (const p of PREDATOR_PROFILES) {
   if (!p.expansion) continue;
   const [x, y] = p.expansion.inspection;
-  for (const a of nature.wildlife(Math.floor(x / 16), Math.floor(y / 16))) {
-    if (a.predator && a.type === predatorType(p.species))
-      homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
-  }
+  // Rounded inspection tiles can lie across a chunk boundary from the actual home.
+  for (const dy of [0, -1, 1])
+    for (const dx of [0, -1, 1]) {
+      for (const a of nature.wildlife(Math.floor(x / 16) + dx, Math.floor(y / 16) + dy)) {
+        if (a.predator && a.type === predatorType(p.species) && !homes.has(a.type))
+          homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
+      }
+    }
 }
 for (let gy = -12; gy < 12 && homes.size < PREDATOR_PROFILES.length; gy++)
   for (let gx = -12; gx < 12 && homes.size < PREDATOR_PROFILES.length; gx++)

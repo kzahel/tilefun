@@ -249,6 +249,45 @@ describe("EntitySnapshot binary codec", () => {
     }
   });
 
+  it("preserves both sides of the 255/256 boundary alongside following baselines and deltas", () => {
+    const types = [
+      expectDefined(ENTITY_TYPE_LIST[255]),
+      expectDefined(ENTITY_TYPE_LIST[256]),
+      expectDefined(ENTITY_TYPE_LIST[0]),
+    ];
+    const baselines: EntitySnapshot[] = types.map((type, i) => ({
+      id: i + 1,
+      type,
+      position: { wx: i * 23.5, wy: -i * 12.25 },
+      velocity: null,
+      spriteState: null,
+      wanderAIState: null,
+    }));
+    const msg: FrameMessage = {
+      type: "frame",
+      serverTick: 20,
+      lastProcessedInputSeq: 7,
+      playerEntityId: 1,
+      entityBaselines: baselines,
+      entityDeltas: [{ id: 9, position: { wx: 47.5, wy: -3.25 } }],
+      entityExits: [12, 13],
+    };
+    const bytes = encodeServerMessage(msg);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x04);
+    expect(roundtripServer(msg)).toEqual(msg);
+  });
+
+  it("rejects legacy byte-type frames instead of silently shifting baseline fields", () => {
+    const bytes = encodeServerMessage({
+      type: "frame",
+      serverTick: 1,
+      lastProcessedInputSeq: 0,
+      playerEntityId: 1,
+    });
+    new DataView(bytes).setUint8(0, 0x01);
+    expect(() => decodeServerMessage(bytes)).toThrow("matching updated client and server");
+  });
+
   it("roundtrips SpriteState without optional fields", () => {
     const snap: EntitySnapshot = {
       id: 1,

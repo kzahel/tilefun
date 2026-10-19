@@ -1,0 +1,94 @@
+{
+  "modelSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "spriteSha256": "b26dd0ca1ea498477b11ca276b5dc7cb2bbadaadd0b58be90a9b15d452b9a9f5",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-beetle-v1.json": "a074c9ae3353d5f497fdcb1cc42fbe3153a303efc9ffb6aecb6efe3707c68e44",
+    "scripts/vehicle-bake/runtime-export.py": "cbdced9e54dad43c0ac627555b6c2a4fcd656c6f86791a2cb46c6045b99896d5",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/beetle-v1/review-manifest.json": "9478fb898159219f27fd17ec969b2a5235278233422fbe2e8a196a371fe6e89b",
+    "public/demos/original-vehicles/beetle-v1/inputs/model.glb": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "public/demos/original-vehicles/beetle-v1/inputs/atlas.png": "7259b5f3a33721dd28cada5c2c2b5d43a2ddc3b4a1a569a92e3e62f3f98df27f",
+    "public/demos/original-vehicles/beetle-v1/captures/capture.json": "0658b75021a44162fdf7fec22d935c89cecfe96a8680a54ab18ed8baba0dde80",
+    "art-source/vehicle-bake/beetle/v1/evidence/replay-verification.json": "f78fb0b28f80f59ca387306a15afb9cb559a8ac897b6ef84db01709fcc2c5363",
+    "art-source/vehicle-bake/beetle/v1/build.py": "a857035d881b2b275bc2fa93004236b497baf6397b04e7db7769a1fbf70a1118",
+    "art-source/vehicle-bake/beetle/v1/family.json": "e8faa8e5922e3a1b51bf88d366c1f470b5079661af21a9ccc8215fe758154868",
+    "scripts/vehicle-bake/beetle/build.py": "a857035d881b2b275bc2fa93004236b497baf6397b04e7db7769a1fbf70a1118",
+    "scripts/vehicle-bake/beetle/family.json": "e8faa8e5922e3a1b51bf88d366c1f470b5079661af21a9ccc8215fe758154868",
+    "public/demos/original-vehicles/beetle-v1/captures/engine-4.png": "e46bfb27914a6c8bf85705bae8559458eefc8310f4830ca57bed3b0de41e2004",
+    "public/demos/original-vehicles/beetle-v1/captures/engine-12.png": "a57fda9e1a83870ff5a4222c24e65f07b7d07e5c0d62a75dec9c481136681cc2",
+    "public/demos/original-vehicles/beetle-v1/captures/engine-8.png": "0bdadadd7ea115a2f7b6801b9e7cbdfcc9d8ed602baed9ab79f4bd685059c3fa",
+    "public/demos/original-vehicles/beetle-v1/captures/engine-0.png": "2a170b1aa75da42aefc4778a0ff2a6c22f9ae0ed64ae0dd016ebb6a6083114d5"
+  },
+  "physicalBounds": [
+    81,
+    38,
+    35
+  ],
+  "measurement": {
+    "modelSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -40.434783935546875,
+        -18.521739959716797,
+        4.76837158203125e-07
+      ],
+      "max": [
+        40.434783935546875,
+        18.521739959716797,
+        34.08695602416992
+      ],
+      "size": [
+        80.86956787109375,
+        37.043479919433594,
+        34.08695602416992
+      ]
+    },
+    "triangles": 2554,
+    "meshes": 5
+  },
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      128,
+      128
+    ],
+    "groundOrigin": [
+      64,
+      64
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/beetle/v1/evidence/replay-verification.json",
+    "sha256": "f78fb0b28f80f59ca387306a15afb9cb559a8ac897b6ef84db01709fcc2c5363",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export.py --config scripts/vehicle-bake/runtime-beetle-v1.json --blender BLENDER"
+}

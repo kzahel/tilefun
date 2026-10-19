@@ -178,3 +178,10 @@ service positions before Realm startup; production railway validation and motion
 own them thereafter. Staged traffic uses the real generated lane graph. Reset
 creates a fresh world; reload preserves terrain, generated part identities,
 car height and service state. See [tactical 062](../tactical/062-generated-road-rail-crossing.md).
+
+
+Continuation 147 adds an ordinary natural king cobra to the secretary-bird hunt
+recipe, alongside one deer outside its explicit diet. Shared production predator
+authority catches the cobra and preserves its delayed natural replacement queue
+across reload. This fixture uses the same creature factory as world spawning and
+placement; it adds no lab-only hunt behavior.

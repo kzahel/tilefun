@@ -1,0 +1,14 @@
+{
+  "identity": "japanese-macaque-roster-v3-pixels-01",
+  "palette": {
+    "B": "#85816d",
+    "H": "#b5af95",
+    "C": "#d7ceb0",
+    "M": "#a65c55",
+    "E": "#cd8b7d",
+    "K": "#292d2c",
+    "N": "#252927",
+    "T": "#bf6052"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

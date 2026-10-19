@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "vehicles": [
+    {
+      "id": "rosso-coupe",
+      "name": "Red sports coupe",
+      "sprite": "assets/vehicles/rosso-coupe-v1.png",
+      "mesh": {
+        "assetId": "rosso-coupe-authored-v3",
+        "path": "assets/models/vehicles/rosso-coupe-v3.glb",
+        "radius": 64,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 156,
+        "acceleration": 300,
+        "pushSpeed": 44,
+        "pushWeight": 120
+      },
+      "views": [
+        {
+          "id": "original-vehicle:rosso-coupe:south",
+          "vehicleId": "rosso-coupe",
+          "direction": "south",
+          "rect": [78, 94, 36, 87],
+          "metadata": {
+            "name": "Red sports coupe · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [18, 91.0],
+            "footprint": [-18.0, -82, 36, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 36,
+                "height": 82,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:rosso-coupe:north",
+          "vehicleId": "rosso-coupe",
+          "direction": "north",
+          "rect": [78, 321, 36, 84],
+          "metadata": {
+            "name": "Red sports coupe · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [18, 88.0],
+            "footprint": [-18.0, -82, 36, 82],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 36,
+                "height": 82,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -41.0
+          }
+        },
+        {
+          "id": "original-vehicle:rosso-coupe:west",
+          "vehicleId": "rosso-coupe",
+          "direction": "west",
+          "rect": [56, 561, 81, 46],
+          "metadata": {
+            "name": "Red sports coupe · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [40, 49.0],
+            "footprint": [-41.0, -36, 82, 36],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 36,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -18.0
+          }
+        },
+        {
+          "id": "original-vehicle:rosso-coupe:east",
+          "vehicleId": "rosso-coupe",
+          "direction": "east",
+          "rect": [55, 785, 81, 45],
+          "metadata": {
+            "name": "Red sports coupe · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "sports car"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [41, 49.0],
+            "footprint": [-41.0, -36, 82, 36],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 82,
+                "height": 36,
+                "zHeight": 19
+              }
+            ],
+            "depthOffset": -18.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "beetle",
+      "name": "Beetle-style compact",
+      "sprite": "assets/vehicles/beetle-v1.png",
+      "mesh": {
+        "assetId": "beetle-authored-v1",
+        "path": "assets/models/vehicles/beetle-v1.glb",
+        "radius": 64,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 105,
+        "acceleration": 180,
+        "pushSpeed": 40,
+        "pushWeight": 90
+      },
+      "views": [
+        {
+          "id": "original-vehicle:beetle:south",
+          "vehicleId": "beetle",
+          "direction": "south",
+          "rect": [77, 95, 38, 83],
+          "metadata": {
+            "name": "Beetle-style compact · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "compact car"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [19, 89.5],
+            "footprint": [-19.0, -81, 38, 81],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 38,
+                "height": 81,
+                "zHeight": 35
+              }
+            ],
+            "depthOffset": -40.5
+          }
+        },
+        {
+          "id": "original-vehicle:beetle:north",
+          "vehicleId": "beetle",
+          "direction": "north",
+          "rect": [77, 319, 38, 83],
+          "metadata": {
+            "name": "Beetle-style compact · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "compact car"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [19, 89.5],
+            "footprint": [-19.0, -81, 38, 81],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 38,
+                "height": 81,
+                "zHeight": 35
+              }
+            ],
+            "depthOffset": -40.5
+          }
+        },
+        {
+          "id": "original-vehicle:beetle:west",
+          "vehicleId": "beetle",
+          "direction": "west",
+          "rect": [56, 554, 80, 54],
+          "metadata": {
+            "name": "Beetle-style compact · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "compact car"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [40, 57.0],
+            "footprint": [-40.5, -38, 81, 38],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 81,
+                "height": 38,
+                "zHeight": 35
+              }
+            ],
+            "depthOffset": -19.0
+          }
+        },
+        {
+          "id": "original-vehicle:beetle:east",
+          "vehicleId": "beetle",
+          "direction": "east",
+          "rect": [56, 778, 80, 54],
+          "metadata": {
+            "name": "Beetle-style compact · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "compact car"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [40, 57.0],
+            "footprint": [-40.5, -38, 81, 38],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 81,
+                "height": 38,
+                "zHeight": 35
+              }
+            ],
+            "depthOffset": -19.0
+          }
+        }
+      ]
+    },
+    {
+      "id": "school-bus",
+      "name": "Yellow school bus",
+      "sprite": "assets/vehicles/school-bus-v1.png",
+      "mesh": {
+        "assetId": "school-bus-authored-v1",
+        "path": "assets/models/vehicles/school-bus-v1.glb",
+        "radius": 112,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 78,
+        "acceleration": 100,
+        "pushSpeed": 64,
+        "pushWeight": 500
+      },
+      "views": [
+        {
+          "id": "original-vehicle:school-bus:south",
+          "vehicleId": "school-bus",
+          "direction": "south",
+          "rect": [75, 45, 42, 153],
+          "metadata": {
+            "name": "Yellow school bus · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "south",
+            "anchor": [21, 160.0],
+            "footprint": [-21.5, -122, 43, 122],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 43,
+                "height": 122,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -61.0
+          }
+        },
+        {
+          "id": "original-vehicle:school-bus:north",
+          "vehicleId": "school-bus",
+          "direction": "north",
+          "rect": [75, 288, 42, 134],
+          "metadata": {
+            "name": "Yellow school bus · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "north",
+            "anchor": [21, 141.0],
+            "footprint": [-21.5, -122, 43, 122],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 43,
+                "height": 122,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -61.0
+          }
+        },
+        {
+          "id": "original-vehicle:school-bus:west",
+          "vehicleId": "school-bus",
+          "direction": "west",
+          "rect": [35, 534, 121, 77],
+          "metadata": {
+            "name": "Yellow school bus · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "west",
+            "anchor": [61, 79.5],
+            "footprint": [-61.0, -43, 122, 43],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 122,
+                "height": 43,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -21.5
+          }
+        },
+        {
+          "id": "original-vehicle:school-bus:east",
+          "vehicleId": "school-bus",
+          "direction": "east",
+          "rect": [36, 758, 121, 77],
+          "metadata": {
+            "name": "Yellow school bus · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "original", "bus"],
+            "settings": ["road"],
+            "facing": "east",
+            "anchor": [60, 79.5],
+            "footprint": [-61.0, -43, 122, 43],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 122,
+                "height": 43,
+                "zHeight": 44
+              }
+            ],
+            "depthOffset": -21.5
+          }
+        }
+      ]
+    }
+  ]
+}

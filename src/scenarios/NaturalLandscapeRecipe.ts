@@ -10,7 +10,7 @@ import {
 import { RacetrackSource } from "../generation/regional/RacetrackPlanner.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { createDeer } from "../wildlife/Deer.js";
-import { FAUNA_PROFILES } from "../wildlife/Fauna.js";
+import { createFauna, FAUNA_PROFILES } from "../wildlife/Fauna.js";
 import { createPredator, PREDATOR_PROFILES } from "../wildlife/Predator.js";
 import { createRabbit } from "../wildlife/Rabbit.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
@@ -102,20 +102,26 @@ export function naturalLandscapeRecipe(
   const predator = PREDATOR_PROFILES.find((p) => p.species === id);
   if (!at && predator && predator.expansion?.habitat !== "deep") {
     const deer = createDeer(108, 64),
-      rabbit = createRabbit(
-        predator.fierce?.kind === "spider" ? 100 : 128,
-        predator.fierce?.kind === "spider" ? 88 : 104,
-      );
+      rabbit =
+        predator.preySpecies || id === "secretary-bird"
+          ? createFauna(predator.preySpecies ?? "king-cobra", 128, 104)
+          : createRabbit(
+              predator.fierce?.kind === "spider" ? 100 : 128,
+              predator.fierce?.kind === "spider" ? 88 : 104,
+            );
     // This fixture models a natural population. Editor-created animals carry
     // neither lineage field and are never replaced when eaten.
     deer.naturalSpawnId = `nature-${id}-deer`;
-    rabbit.naturalSpawnId = `nature-${id}-rabbit`;
+    rabbit.naturalSpawnId = `nature-${id}-${predator.preySpecies ?? (id === "secretary-bird" ? "king-cobra" : "rabbit")}`;
     return {
       version: 1,
       id: `nature-${id}-${profile}-v1`,
       generation: FLAT_SCENARIO,
       player: createPlayer(64, 160),
       props: [],
+      ...(predator.fierce?.kind === "raptor"
+        ? { nativeProps: [{ type: "prop-griffin-perch", wx: 32, wy: 64 }] }
+        : {}),
       actors: [createPredator(predator.species, 64, 64), deer, rabbit],
       traffic: [],
     };

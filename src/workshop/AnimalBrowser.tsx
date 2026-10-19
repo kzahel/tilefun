@@ -35,13 +35,14 @@ function AnimalPreview({
       request = 0,
       start = performance.now(),
       image: HTMLImageElement | undefined;
+    canvas.dataset.ready = "false";
     const def = animal.sprite,
       clip =
-        def.clips?.find((c) => c.name === motion) ??
         (motion === "walk"
-          ? def.clips?.find((c) => ["hop", "swim", "flap"].includes(c.name))
-          : undefined) ??
-        def.clips?.[0];
+          ? animal.locomotion
+          : motion === "action"
+            ? animal.action
+            : def.clips?.find((c) => c.name === motion)) ?? def.clips?.[0];
     const count = clip?.count ?? def.frameCount,
       duration = clip?.frameDuration ?? def.frameDuration,
       first = clip?.start ?? 0;
@@ -71,6 +72,7 @@ function AnimalPreview({
         w,
         h,
       );
+      canvas.dataset.clip = clip?.name ?? "default";
       canvas.dataset.ready = "true";
       canvas.dataset.frame = String(index);
       if (animate) request = requestAnimationFrame(draw);

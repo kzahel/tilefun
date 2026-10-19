@@ -1,0 +1,14 @@
+{
+  "identity": "armadillo-roster-v3-pixels-01",
+  "palette": {
+    "B": "#797d74",
+    "H": "#a3a69a",
+    "C": "#c4bba0",
+    "M": "#595f5b",
+    "K": "#292e2d",
+    "E": "#e3ce95",
+    "N": "#252c2b",
+    "T": "#d8cdb0"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

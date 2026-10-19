@@ -1,0 +1,979 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "school-bus-v1",
+      "name": "Yellow school bus",
+      "title": "Yellow school bus \u00b7 long vehicle experiment v1",
+      "nativeSize": 224,
+      "engineRadius": 112.0,
+      "dimensions": [
+        224,
+        224
+      ],
+      "groundOrigins": {
+        "study": [
+          112,
+          140
+        ],
+        "engine": [
+          112,
+          112
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original family-specific semantic surface UV paint on actual body/hood triangles. No source projection, screen redraw or high-to-low transfer.",
+      "audit": {
+        "triangles": 2564,
+        "vertices": 4986,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 182232,
+        "sha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.173913043478262,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.173913043478262,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.173913043478262,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.173913043478262,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/atlas.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/atlas.png",
+          "sha256": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/capture.json",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/capture.json",
+          "sha256": "cc4c4b2d5bca3e81b1999fa473406d03b657577ff02fbe4b0b67137b0d3664c9"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-0.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-0.png",
+          "sha256": "8087baa4dd39d00caf748c4b4cfd50488bc8ce7c13ec05e2ca99d7cac35072f4"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-1.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-1.png",
+          "sha256": "cb5d2a99a9d38311800cd8b471585726d6969a1e5e902580ef9ac8ae3f24a2b9"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-10.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-10.png",
+          "sha256": "419a932de0a80bba6514b41eaf5ab127677e43826bc650cb7fd2fa292374d4bc"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-11.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-11.png",
+          "sha256": "375d219938a1c7339c598a4d9de6966b17f1e881b042df03516be9f5df67fba5"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-12.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-12.png",
+          "sha256": "1b072188c6383892a4880a7c93c62d93f4647491a6d98729cfc296d577b2ed6d"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-13.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-13.png",
+          "sha256": "93b6426975bc77916652d94a61b45ac44a27c03b4db5f04bf582bc9d44c976e8"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-14.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-14.png",
+          "sha256": "d6b64f765a19ac4031a1cce51701bef6a60ba3048f3d3b4def6b70a703eabb7d"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-15.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-15.png",
+          "sha256": "85a2ca9983f867ae7d4e39c51b288a90655e6e0e4c64f17d3316d573ead9fce8"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-2.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-2.png",
+          "sha256": "6bf6d6eb27e1a19dbd0c88a5a16af9601632af7449b77c31bed0a6dfe314b86c"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-3.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-3.png",
+          "sha256": "050a3eb78c3c9bb3569dfa7ee64bcba33077c11674453a71d94b13df4651a183"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-4.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-4.png",
+          "sha256": "d0d59435df76b5f0ce263dcf8e47a28862c80ff3bc2f70d29c52f105d769942f"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-5.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-5.png",
+          "sha256": "edb20d7a9b49550b7ba91d5b41b3db476eda73f3ea5b83af208b64857289302c"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-6.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-6.png",
+          "sha256": "5595a2de50e386d879155522cbfbf90bebb24b2e81a8c173b43bb54d42c9327b"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-7.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-7.png",
+          "sha256": "8760aa09a197b24853758ef1e7b37a7083a8e53e78fd706919fd0a21507c3dfc"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-8.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-8.png",
+          "sha256": "f05e45fa2761db3b5c00725f667c8acb8d81791968e972012d1ae69442c1994c"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/engine-9.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-9.png",
+          "sha256": "c55bd8985449823178fb166dbb31098835ce65dcfd06b6d43ac7fc3010c49166"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-0.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-0.png",
+          "sha256": "6bf6d6eb27e1a19dbd0c88a5a16af9601632af7449b77c31bed0a6dfe314b86c"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-1.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-1.png",
+          "sha256": "bef3caca311b8bb17c3707fe51eb1b67ead8568dddbd985986ed6d9d78f977a1"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-2.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-2.png",
+          "sha256": "7ab8221fa4efb14519352f5b45d6e6a7238ae9ad3e56d055aaffbac735be1580"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-3.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-3.png",
+          "sha256": "3ef23d52cd0c788fc64d5cc907a9bcbbc52fa118f3e5c66c439d5674039f49b3"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-4.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-4.png",
+          "sha256": "d944c09591d84e0208baf105377f980eff18a4483c042fba94ca7419a0e5b244"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-5.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-5.png",
+          "sha256": "74d3eb248900832f3e0cf98f8ad289968c4cfeb00a74bddcf543180902fd2705"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-6.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-6.png",
+          "sha256": "6ae4eeb98faad27741098dc6785d29962611590ca1bf57fde80e75ae4a17796e"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/game-roll-7.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-7.png",
+          "sha256": "df9cd9acd7478aa1c33e0d807e8e61e860c8169ad6bd5d47eb52fec0e3b31ee6"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/inspection-engine.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/inspection-engine.png",
+          "sha256": "fbc44817e106c996a7195075f8ca7b903ff1614109d6aa9af286a8743437a425"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/inspection-phases.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/inspection-phases.png",
+          "sha256": "ff36ff3055eeb470c10d457665e819aee7332fd355837772844361148deb1254"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/inspection-study.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/inspection-study.png",
+          "sha256": "71496d7cebc84f118b262dc5102bd79b1bcec3b9c56de067edbfb696e76499b7"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-0.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-0.png",
+          "sha256": "5f314cf7d80fe34511f880e48c2a54819c363e6eca185d0b3f91e475b4a5afa1"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-1.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-1.png",
+          "sha256": "4d81043d3f104b7102f92ede7982e42f9b26e819462a179dd8a3c6e8496e6899"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-2.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-2.png",
+          "sha256": "a5a47ecc61fedc72340540a4939a99498d1df6276f67ddc3186ecb6c16cfab0e"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-3.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-3.png",
+          "sha256": "831a7eb9eb3d15f2c5e5296811f1f85d75a3df7526ec9a080155c1e018a12d49"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-4.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-4.png",
+          "sha256": "2cfb1c72adae18d09a27bd54ab3af78b5f1e783f1eb128c8e6ac46d6f2e998c6"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-5.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-5.png",
+          "sha256": "a9ed60e6f6f4da841221487b161ac8aff4e8df0d23cfff56fe4e385cf5d54a28"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-6.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-6.png",
+          "sha256": "20e4cb431132b2670561820265c48b617108c11b08e6472050ccf623e7b21fc7"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/roll-7.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-7.png",
+          "sha256": "e023e8614e769a7d53c051fa4785e7928a7260b19818205048d909cab7e604f6"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-0.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-0.png",
+          "sha256": "e813b6a70a2c655f6cf274af6d83deb036cda8518de60a525c313757c8a20d2b"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-1.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-1.png",
+          "sha256": "1a6973b99b4a23543867e8beaf32746ae43a86d59f76dc1c25207845786699a4"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-10.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-10.png",
+          "sha256": "3f2e1d9f43509951a46b11e62f81863f002922e53bd6c8446ef184c1f2e868e0"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-11.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-11.png",
+          "sha256": "abbbc37fc7920bc0daba1b40a9847c68f1025c5106bb074a3495fe53ab9a7d34"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-12.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-12.png",
+          "sha256": "bc1bd559139c781add997c7d944399deb90ee53da5467105a5dc42acf6f58492"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-13.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-13.png",
+          "sha256": "a0b0e4158524de7bd2be8b32369dc43304db4e5e168dc33c7769d5361d4f5d10"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-14.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-14.png",
+          "sha256": "f313bc490a636db10d80d4c22b2de8c35c89356592ad0dc82534039aca8f25f2"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-15.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-15.png",
+          "sha256": "2cc41e292fd8e190de1b13266425c0f4a906cbca879ca23556b4fe114fb550a5"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-2.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-2.png",
+          "sha256": "5f314cf7d80fe34511f880e48c2a54819c363e6eca185d0b3f91e475b4a5afa1"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-3.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-3.png",
+          "sha256": "b1a883c34c1a4c529a64f4da482e39a97af959da1b663349adfdd84a1dbbbf4a"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-4.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-4.png",
+          "sha256": "d71fa823819b07e653076078ec1c0748ae9031cc9e6579b8cd0751703c7aa9b5"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-5.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-5.png",
+          "sha256": "9c1a31263dc832a4d85d7c6fa27d3ad330cfd5d4c4aef285a7d506a6bf85ec03"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-6.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-6.png",
+          "sha256": "0702a7253a9bd5aaf5345384631e66ab897ae62910afdcd4b1ebb617a67e05d9"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-7.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-7.png",
+          "sha256": "9b9547bd0e2b37a3b36cf37a0589272965254a611725da32096018f1cc17f0ad"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-8.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-8.png",
+          "sha256": "cede773898b06cf387c717a2a6afe89c92fd435b56e836a22e52a35306287129"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/study-9.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/study-9.png",
+          "sha256": "bc866c765dfc4b71a8876bbb5ecd054796ba159001ec23c11bfa24fd2fd684fd"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/wire-engine.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/wire-engine.png",
+          "sha256": "d4327f2857564c360fa4831beca46caa1c7fa7c9b1b97a21bce80fde815ad1bd"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/engine/wire-study.png",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/engine/wire-study.png",
+          "sha256": "56d9cbc2788fa43db1dd889231676112b24ac4be47c6640e7f840af1c5282947"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/model.glb",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/model.glb",
+          "sha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/recipe.json",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/recipe.json",
+          "sha256": "aa53ca52c56931abdc55cf09f8ca6d64b84bba6ad6fcefa65551ece89ed7f3b0"
+        },
+        {
+          "source": "demos/vehicle-bake/school-bus/v1/report.json",
+          "retained": "demos/original-vehicles/school-bus-v1/inputs/report.json",
+          "sha256": "4e1201f27306b8aa4ba8478afc2f8b73ca00d9e46e8f54ff78876b8c1b712086"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "styleReference": "style-reference.png",
+      "url": "demos/original-vehicles/school-bus-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "school-bus--v1",
+          "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+          "triangles": 2564,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 8.173913347356049,
+              "minimumGap": 1.4485016446189878,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 8.173913347356049,
+              "minimumGap": 1.4485016446189878,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 8.173913347356049,
+              "minimumGap": 1.4485016446189878,
+              "nearestBody": "Body_static"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 8.173913347356049,
+              "minimumGap": 1.4485016446189878,
+              "nearestBody": "Body_static"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 8.173913043478262,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 8.173913043478262,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 8.173913043478262,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 8.173913043478262,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/school-bus-v1/browser-qa.json",
+          "sha256": "fcb738dccea955605f020495a6bdd446a6478d9d5be21041a2f8c5fafefb2665"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/candidate.json",
+          "sha256": "39b6fe224a3f8fba363cb91988cf529c9d79be894ea449c403dcbb76e0e855f6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/capture.json",
+          "sha256": "031d67289e0c051e21efa5348dd1389a48198622a0066928642dcf3678153043"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/contact-sheet.png",
+          "sha256": "66e2b1fe3efbcc803f7ed98c1c857844fa8c035269ece83055cfdab30dfee210"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-0.png",
+          "sha256": "8087baa4dd39d00caf748c4b4cfd50488bc8ce7c13ec05e2ca99d7cac35072f4"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-1.png",
+          "sha256": "cb5d2a99a9d38311800cd8b471585726d6969a1e5e902580ef9ac8ae3f24a2b9"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-10.png",
+          "sha256": "419a932de0a80bba6514b41eaf5ab127677e43826bc650cb7fd2fa292374d4bc"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-11.png",
+          "sha256": "375d219938a1c7339c598a4d9de6966b17f1e881b042df03516be9f5df67fba5"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-12.png",
+          "sha256": "1b072188c6383892a4880a7c93c62d93f4647491a6d98729cfc296d577b2ed6d"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-13.png",
+          "sha256": "93b6426975bc77916652d94a61b45ac44a27c03b4db5f04bf582bc9d44c976e8"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-14.png",
+          "sha256": "d6b64f765a19ac4031a1cce51701bef6a60ba3048f3d3b4def6b70a703eabb7d"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-15.png",
+          "sha256": "85a2ca9983f867ae7d4e39c51b288a90655e6e0e4c64f17d3316d573ead9fce8"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-1x.png",
+          "sha256": "b9620e30de472ae7c6dfbb78b23f4bcad86258c4f390f34ca00b128a58d31fc7"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-2.png",
+          "sha256": "6bf6d6eb27e1a19dbd0c88a5a16af9601632af7449b77c31bed0a6dfe314b86c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-2x.png",
+          "sha256": "db31113fd38e72649b0b8495117bc86c2d4702a1d1494423d88c2439df5fbe4d"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-3.png",
+          "sha256": "050a3eb78c3c9bb3569dfa7ee64bcba33077c11674453a71d94b13df4651a183"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-3x.png",
+          "sha256": "4e29212c3ab0a96b2de5de84289bf739ab115e79e146300aa9b209e16b99c55b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-4.png",
+          "sha256": "d0d59435df76b5f0ce263dcf8e47a28862c80ff3bc2f70d29c52f105d769942f"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-5.png",
+          "sha256": "edb20d7a9b49550b7ba91d5b41b3db476eda73f3ea5b83af208b64857289302c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-6.png",
+          "sha256": "5595a2de50e386d879155522cbfbf90bebb24b2e81a8c173b43bb54d42c9327b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-7.png",
+          "sha256": "8760aa09a197b24853758ef1e7b37a7083a8e53e78fd706919fd0a21507c3dfc"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-8.png",
+          "sha256": "f05e45fa2761db3b5c00725f667c8acb8d81791968e972012d1ae69442c1994c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/engine-9.png",
+          "sha256": "c55bd8985449823178fb166dbb31098835ce65dcfd06b6d43ac7fc3010c49166"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-0.png",
+          "sha256": "6bf6d6eb27e1a19dbd0c88a5a16af9601632af7449b77c31bed0a6dfe314b86c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-1.png",
+          "sha256": "bef3caca311b8bb17c3707fe51eb1b67ead8568dddbd985986ed6d9d78f977a1"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-2.png",
+          "sha256": "7ab8221fa4efb14519352f5b45d6e6a7238ae9ad3e56d055aaffbac735be1580"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-3.png",
+          "sha256": "3ef23d52cd0c788fc64d5cc907a9bcbbc52fa118f3e5c66c439d5674039f49b3"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-4.png",
+          "sha256": "d944c09591d84e0208baf105377f980eff18a4483c042fba94ca7419a0e5b244"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-5.png",
+          "sha256": "74d3eb248900832f3e0cf98f8ad289968c4cfeb00a74bddcf543180902fd2705"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-6.png",
+          "sha256": "6ae4eeb98faad27741098dc6785d29962611590ca1bf57fde80e75ae4a17796e"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-roll-7.png",
+          "sha256": "df9cd9acd7478aa1c33e0d807e8e61e860c8169ad6bd5d47eb52fec0e3b31ee6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/game-turntable.gif",
+          "sha256": "20dc3dc9ea118fd7ccffdd83d9e2f2459750022a1ea70e528e456bee66ee3a45"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-0.png",
+          "sha256": "5f314cf7d80fe34511f880e48c2a54819c363e6eca185d0b3f91e475b4a5afa1"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-1.png",
+          "sha256": "4d81043d3f104b7102f92ede7982e42f9b26e819462a179dd8a3c6e8496e6899"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-2.png",
+          "sha256": "a5a47ecc61fedc72340540a4939a99498d1df6276f67ddc3186ecb6c16cfab0e"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-3.png",
+          "sha256": "831a7eb9eb3d15f2c5e5296811f1f85d75a3df7526ec9a080155c1e018a12d49"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-4.png",
+          "sha256": "2cfb1c72adae18d09a27bd54ab3af78b5f1e783f1eb128c8e6ac46d6f2e998c6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-5.png",
+          "sha256": "a9ed60e6f6f4da841221487b161ac8aff4e8df0d23cfff56fe4e385cf5d54a28"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-6.png",
+          "sha256": "20e4cb431132b2670561820265c48b617108c11b08e6472050ccf623e7b21fc7"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/roll-7.png",
+          "sha256": "e023e8614e769a7d53c051fa4785e7928a7260b19818205048d909cab7e604f6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-0.png",
+          "sha256": "e813b6a70a2c655f6cf274af6d83deb036cda8518de60a525c313757c8a20d2b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-1.png",
+          "sha256": "1a6973b99b4a23543867e8beaf32746ae43a86d59f76dc1c25207845786699a4"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-10.png",
+          "sha256": "3f2e1d9f43509951a46b11e62f81863f002922e53bd6c8446ef184c1f2e868e0"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-11.png",
+          "sha256": "abbbc37fc7920bc0daba1b40a9847c68f1025c5106bb074a3495fe53ab9a7d34"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-12.png",
+          "sha256": "bc1bd559139c781add997c7d944399deb90ee53da5467105a5dc42acf6f58492"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-13.png",
+          "sha256": "a0b0e4158524de7bd2be8b32369dc43304db4e5e168dc33c7769d5361d4f5d10"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-14.png",
+          "sha256": "f313bc490a636db10d80d4c22b2de8c35c89356592ad0dc82534039aca8f25f2"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-15.png",
+          "sha256": "2cc41e292fd8e190de1b13266425c0f4a906cbca879ca23556b4fe114fb550a5"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-1x.png",
+          "sha256": "75977a519b251dab9871aa3958d4b21723934d49fa756d142fa4eb80003d228b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-2.png",
+          "sha256": "5f314cf7d80fe34511f880e48c2a54819c363e6eca185d0b3f91e475b4a5afa1"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-2x.png",
+          "sha256": "be81e1d41b6bfd9ba923842d69a9a47517d60c0f7362a14552fb3e6de90f9980"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-3.png",
+          "sha256": "b1a883c34c1a4c529a64f4da482e39a97af959da1b663349adfdd84a1dbbbf4a"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-3x.png",
+          "sha256": "b4cbd24b6378c2c97f0df644922e76b3c770e28787e5b1d6e411d4c5189ec29b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-4.png",
+          "sha256": "d71fa823819b07e653076078ec1c0748ae9031cc9e6579b8cd0751703c7aa9b5"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-5.png",
+          "sha256": "9c1a31263dc832a4d85d7c6fa27d3ad330cfd5d4c4aef285a7d506a6bf85ec03"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-6.png",
+          "sha256": "0702a7253a9bd5aaf5345384631e66ab897ae62910afdcd4b1ebb617a67e05d9"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-7.png",
+          "sha256": "9b9547bd0e2b37a3b36cf37a0589272965254a611725da32096018f1cc17f0ad"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-8.png",
+          "sha256": "cede773898b06cf387c717a2a6afe89c92fd435b56e836a22e52a35306287129"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/study-9.png",
+          "sha256": "bc866c765dfc4b71a8876bbb5ecd054796ba159001ec23c11bfa24fd2fd684fd"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/turntable.gif",
+          "sha256": "28c41929b2f0d036e58d012365848e742a2732bdae53ca6fbe481adb8bcfa339"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/viewer-desktop.png",
+          "sha256": "c2e576d1498b38ad345c89bdba9e8ceea63f094a1d8acefcd982b0b773ca5228"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/viewer-mobile.png",
+          "sha256": "93085aa3486f58136f793a19739f58c5d703a7917acb5c2dbffe413ad307b6f4"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/wheel-phases.png",
+          "sha256": "d593cdf055117e306dd53b49ab0cc39ffeb69e19dcd05163dc1ada787c63d5a2"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/wire-engine.png",
+          "sha256": "d4327f2857564c360fa4831beca46caa1c7fa7c9b1b97a21bce80fde815ad1bd"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/captures/wire-study.png",
+          "sha256": "56d9cbc2788fa43db1dd889231676112b24ac4be47c6640e7f840af1c5282947"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/clearance.json",
+          "sha256": "b2c4dcb3f158187c728a0de97a74604b81aa4924a14ee5d01151e6a8e48abd6c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/atlas.png",
+          "sha256": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/capture.json",
+          "sha256": "cc4c4b2d5bca3e81b1999fa473406d03b657577ff02fbe4b0b67137b0d3664c9"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-0.png",
+          "sha256": "8087baa4dd39d00caf748c4b4cfd50488bc8ce7c13ec05e2ca99d7cac35072f4"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-1.png",
+          "sha256": "cb5d2a99a9d38311800cd8b471585726d6969a1e5e902580ef9ac8ae3f24a2b9"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-10.png",
+          "sha256": "419a932de0a80bba6514b41eaf5ab127677e43826bc650cb7fd2fa292374d4bc"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-11.png",
+          "sha256": "375d219938a1c7339c598a4d9de6966b17f1e881b042df03516be9f5df67fba5"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-12.png",
+          "sha256": "1b072188c6383892a4880a7c93c62d93f4647491a6d98729cfc296d577b2ed6d"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-13.png",
+          "sha256": "93b6426975bc77916652d94a61b45ac44a27c03b4db5f04bf582bc9d44c976e8"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-14.png",
+          "sha256": "d6b64f765a19ac4031a1cce51701bef6a60ba3048f3d3b4def6b70a703eabb7d"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-15.png",
+          "sha256": "85a2ca9983f867ae7d4e39c51b288a90655e6e0e4c64f17d3316d573ead9fce8"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-2.png",
+          "sha256": "6bf6d6eb27e1a19dbd0c88a5a16af9601632af7449b77c31bed0a6dfe314b86c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-3.png",
+          "sha256": "050a3eb78c3c9bb3569dfa7ee64bcba33077c11674453a71d94b13df4651a183"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-4.png",
+          "sha256": "d0d59435df76b5f0ce263dcf8e47a28862c80ff3bc2f70d29c52f105d769942f"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-5.png",
+          "sha256": "edb20d7a9b49550b7ba91d5b41b3db476eda73f3ea5b83af208b64857289302c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-6.png",
+          "sha256": "5595a2de50e386d879155522cbfbf90bebb24b2e81a8c173b43bb54d42c9327b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-7.png",
+          "sha256": "8760aa09a197b24853758ef1e7b37a7083a8e53e78fd706919fd0a21507c3dfc"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-8.png",
+          "sha256": "f05e45fa2761db3b5c00725f667c8acb8d81791968e972012d1ae69442c1994c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/engine-9.png",
+          "sha256": "c55bd8985449823178fb166dbb31098835ce65dcfd06b6d43ac7fc3010c49166"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-0.png",
+          "sha256": "6bf6d6eb27e1a19dbd0c88a5a16af9601632af7449b77c31bed0a6dfe314b86c"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-1.png",
+          "sha256": "bef3caca311b8bb17c3707fe51eb1b67ead8568dddbd985986ed6d9d78f977a1"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-2.png",
+          "sha256": "7ab8221fa4efb14519352f5b45d6e6a7238ae9ad3e56d055aaffbac735be1580"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-3.png",
+          "sha256": "3ef23d52cd0c788fc64d5cc907a9bcbbc52fa118f3e5c66c439d5674039f49b3"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-4.png",
+          "sha256": "d944c09591d84e0208baf105377f980eff18a4483c042fba94ca7419a0e5b244"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-5.png",
+          "sha256": "74d3eb248900832f3e0cf98f8ad289968c4cfeb00a74bddcf543180902fd2705"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-6.png",
+          "sha256": "6ae4eeb98faad27741098dc6785d29962611590ca1bf57fde80e75ae4a17796e"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/game-roll-7.png",
+          "sha256": "df9cd9acd7478aa1c33e0d807e8e61e860c8169ad6bd5d47eb52fec0e3b31ee6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/inspection-engine.png",
+          "sha256": "fbc44817e106c996a7195075f8ca7b903ff1614109d6aa9af286a8743437a425"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/inspection-phases.png",
+          "sha256": "ff36ff3055eeb470c10d457665e819aee7332fd355837772844361148deb1254"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/inspection-study.png",
+          "sha256": "71496d7cebc84f118b262dc5102bd79b1bcec3b9c56de067edbfb696e76499b7"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-0.png",
+          "sha256": "5f314cf7d80fe34511f880e48c2a54819c363e6eca185d0b3f91e475b4a5afa1"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-1.png",
+          "sha256": "4d81043d3f104b7102f92ede7982e42f9b26e819462a179dd8a3c6e8496e6899"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-2.png",
+          "sha256": "a5a47ecc61fedc72340540a4939a99498d1df6276f67ddc3186ecb6c16cfab0e"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-3.png",
+          "sha256": "831a7eb9eb3d15f2c5e5296811f1f85d75a3df7526ec9a080155c1e018a12d49"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-4.png",
+          "sha256": "2cfb1c72adae18d09a27bd54ab3af78b5f1e783f1eb128c8e6ac46d6f2e998c6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-5.png",
+          "sha256": "a9ed60e6f6f4da841221487b161ac8aff4e8df0d23cfff56fe4e385cf5d54a28"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-6.png",
+          "sha256": "20e4cb431132b2670561820265c48b617108c11b08e6472050ccf623e7b21fc7"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/roll-7.png",
+          "sha256": "e023e8614e769a7d53c051fa4785e7928a7260b19818205048d909cab7e604f6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-0.png",
+          "sha256": "e813b6a70a2c655f6cf274af6d83deb036cda8518de60a525c313757c8a20d2b"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-1.png",
+          "sha256": "1a6973b99b4a23543867e8beaf32746ae43a86d59f76dc1c25207845786699a4"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-10.png",
+          "sha256": "3f2e1d9f43509951a46b11e62f81863f002922e53bd6c8446ef184c1f2e868e0"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-11.png",
+          "sha256": "abbbc37fc7920bc0daba1b40a9847c68f1025c5106bb074a3495fe53ab9a7d34"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-12.png",
+          "sha256": "bc1bd559139c781add997c7d944399deb90ee53da5467105a5dc42acf6f58492"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-13.png",
+          "sha256": "a0b0e4158524de7bd2be8b32369dc43304db4e5e168dc33c7769d5361d4f5d10"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-14.png",
+          "sha256": "f313bc490a636db10d80d4c22b2de8c35c89356592ad0dc82534039aca8f25f2"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-15.png",
+          "sha256": "2cc41e292fd8e190de1b13266425c0f4a906cbca879ca23556b4fe114fb550a5"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-2.png",
+          "sha256": "5f314cf7d80fe34511f880e48c2a54819c363e6eca185d0b3f91e475b4a5afa1"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-3.png",
+          "sha256": "b1a883c34c1a4c529a64f4da482e39a97af959da1b663349adfdd84a1dbbbf4a"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-4.png",
+          "sha256": "d71fa823819b07e653076078ec1c0748ae9031cc9e6579b8cd0751703c7aa9b5"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-5.png",
+          "sha256": "9c1a31263dc832a4d85d7c6fa27d3ad330cfd5d4c4aef285a7d506a6bf85ec03"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-6.png",
+          "sha256": "0702a7253a9bd5aaf5345384631e66ab897ae62910afdcd4b1ebb617a67e05d9"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-7.png",
+          "sha256": "9b9547bd0e2b37a3b36cf37a0589272965254a611725da32096018f1cc17f0ad"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-8.png",
+          "sha256": "cede773898b06cf387c717a2a6afe89c92fd435b56e836a22e52a35306287129"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/study-9.png",
+          "sha256": "bc866c765dfc4b71a8876bbb5ecd054796ba159001ec23c11bfa24fd2fd684fd"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/wire-engine.png",
+          "sha256": "d4327f2857564c360fa4831beca46caa1c7fa7c9b1b97a21bce80fde815ad1bd"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/engine/wire-study.png",
+          "sha256": "56d9cbc2788fa43db1dd889231676112b24ac4be47c6640e7f840af1c5282947"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/model.glb",
+          "sha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/recipe.json",
+          "sha256": "aa53ca52c56931abdc55cf09f8ca6d64b84bba6ad6fcefa65551ece89ed7f3b0"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/inputs/report.json",
+          "sha256": "4e1201f27306b8aa4ba8478afc2f8b73ca00d9e46e8f54ff78876b8c1b712086"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/proofs/offline-integrity-negative.json",
+          "sha256": "170038a076f159031f2600ec2cb0564ee913bda4969883659402cc1c0452fb2e"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/proofs/pixel-regression.json",
+          "sha256": "d5cbf3bd34a9825244e5300d0a55cbd23346af122486420534b710f45f5110d6"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/style-reference.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/viewer.js",
+          "sha256": "f1241dd22ad00e0dcb4267b9b28b97ab768e7891881db1cf3fc9b790634c44aa"
+        },
+        {
+          "url": "demos/original-vehicles/school-bus-v1/visual-inspection.json",
+          "sha256": "c3ab9357dff721d24a01b6d4233f8673701b227d60dd6c26dc0e7d83c3d3e114"
+        }
+      ]
+    }
+  ]
+}

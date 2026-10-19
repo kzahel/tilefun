@@ -1,0 +1,17 @@
+{
+  "identity": "roly-poly-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6110056925996332,
+    "up": 1.852941176470594,
+    "left": 1.8555936906674475,
+    "right": 1.8555936906674475
+  },
+  "rootTravelPixelsPerCycle": 5.12,
+  "plantedTravel": true
+}

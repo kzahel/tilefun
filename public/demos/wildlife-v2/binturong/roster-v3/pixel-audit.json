@@ -1,0 +1,17 @@
+{
+  "identity": "binturong-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.77687776141385,
+    "up": 1.5355450236966846,
+    "left": 1.9404314628529917,
+    "right": 1.9404314628529917
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

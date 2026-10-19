@@ -1,0 +1,21 @@
+{
+  "identity": "ruby-throated-hummingbird-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 0.29784202575683594,
+    "up": 0.4942951202392578,
+    "left": 0.30271339416503906,
+    "right": 0.41322898864746094
+  },
+  "physicalHop": {
+    "duration": 0.8,
+    "push": 0.08,
+    "land": 0.72,
+    "height": 10
+  }
+}

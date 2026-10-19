@@ -1,0 +1,15 @@
+{
+  "identity": "wallaby-roster-v3-pixels-01",
+  "palette": {
+    "B": "#9a8268",
+    "H": "#b69c79",
+    "C": "#d9c7a4",
+    "M": "#6b5744",
+    "T": "#b4a18b",
+    "R": "#9c7965",
+    "N": "#262d2b",
+    "K": "#323832",
+    "E": "#c6b18a"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

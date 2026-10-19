@@ -1,0 +1,13 @@
+{
+  "identity": "starfish-roster-v3-pixels-01",
+  "palette": {
+    "K": "#25312d",
+    "N": "#151d19",
+    "B": "#c28158",
+    "C": "#e2ab73",
+    "M": "#675641",
+    "H": "#ab7652",
+    "T": "#e1d4b4"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

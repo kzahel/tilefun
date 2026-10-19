@@ -6,9 +6,12 @@ compares detailed shaded/toon Blender renders, guide-based pixel finishing and
 simple geometry/paint for a new red sports car. Four offline prototypes and a
 shared native/interactive comparison are delivered for inspection. The owner
 prefers approach 3's guide-finished art, especially outlines. [142](../tactical/142-red-car-low-poly-pipeline.md)
-now tests low-poly textured GLBs, budget ladders and reusable instructions;
-[original vehicles](original-vehicles.md) owns the gated queue and pipeline.
-Existing vehicle bank and production review states remain unchanged.
+retains the chosen 2,299-triangle fender-corrected coupe and reusable instructions.
+The owner authorized its gameplay integration in [145](../tactical/145-original-coupe-gameplay.md):
+Edit → Vehicles, automatic road traffic and shared game/lab GPU loading with a
+matching cardinal sprite fallback. [Original vehicles](original-vehicles.md) owns
+that additive catalog, queued families and pipeline. Existing source-bank pixels,
+45-type port counts and their production review states remain unchanged.
 
 Status: car projection and orthographic inspection delivered; top-view appearance
 unresolved. Authored Blender/UV compact-car pilot delivered for inspection.

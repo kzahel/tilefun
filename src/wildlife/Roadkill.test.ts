@@ -58,9 +58,10 @@ it("registers all small species/variants and inert remains without making pets o
       "seagull",
       "wildlife-chicken-provisional-v1",
       "wildlife-pigeon-provisional-v1",
+      "wildlife-crow-provisional-v1",
     ]),
   );
-  expect(types).toHaveLength(12);
+  expect(types).toHaveLength(13);
   for (const type of types) {
     const factory = required(ENTITY_FACTORIES[roadkillType(type)]);
     const remains = factory(10, 20);

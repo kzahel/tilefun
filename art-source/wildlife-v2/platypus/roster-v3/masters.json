@@ -1,0 +1,14 @@
+{
+  "identity": "platypus-roster-v3-pixels-01",
+  "palette": {
+    "B": "#786344",
+    "H": "#9b8157",
+    "C": "#bea978",
+    "M": "#4c4738",
+    "K": "#343832",
+    "E": "#d1b98b",
+    "N": "#26302b",
+    "T": "#dbd1b7"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

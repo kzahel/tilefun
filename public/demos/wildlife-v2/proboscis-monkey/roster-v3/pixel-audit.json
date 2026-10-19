@@ -1,0 +1,17 @@
+{
+  "identity": "proboscis-monkey-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.649777813850612,
+    "up": 1.7778453307392965,
+    "left": 1.9595959595959584,
+    "right": 1.9595959595959584
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

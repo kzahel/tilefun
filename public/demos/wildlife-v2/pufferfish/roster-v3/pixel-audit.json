@@ -1,0 +1,16 @@
+{
+  "identity": "pufferfish-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.309589385986328,
+    "up": 1.396019458770752,
+    "left": 1.9193792343139648,
+    "right": 1.9193792343139648
+  },
+  "independentSwimAndChase": false
+}

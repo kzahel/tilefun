@@ -17,6 +17,8 @@ describe("creature calls", () => {
     "hyena",
     "cat",
     "bear",
+    "owl",
+    "raptor",
   ] as const)("%s has a bounded finite call with quiet edges", (kind) => {
     const samples = creatureCallSamples(kind, 8000);
     expect(samples.length).toBe(10240);
@@ -29,6 +31,9 @@ describe("creature calls", () => {
   });
   it.each([
     "t-rex",
+    "owl",
+    "eagle",
+    "hawk",
     "wolf",
     "coyote",
     "spotted-hyena",

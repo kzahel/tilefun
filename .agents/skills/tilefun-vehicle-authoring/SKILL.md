@@ -27,6 +27,37 @@ Check upper tire coverage beneath real fenders independently of clearance. Inspe
 far-side crowns in elevated and game views; avoid exposed tires and isolated raised
 caps that spoil the body silhouette. The coupe coverage diagnostic is sampled
 geometry evidence and does not replace this visual check.
+For an owner-authorized original's gameplay integration, follow tactical 145 and
+the pipeline's runtime export step: exact reviewed GLB, matching game-camera
+cardinal fallback, measured physical bounds and shared catalog registration.
+Keep original entries separate from the immutable source bank; qualify ordinary
+editor/traffic, save/reload and failed-mesh fallback through game and lab paths.
+
+The Beetle experiment in tactical 146 adds direct semantic UV painting on its own
+rounded-family topology. Use `scripts/vehicle-bake/beetle/` for that family and
+the `family-*` review tools for new original-family capture/packaging. Curved glass
+overlays can enter coarse body facets; a continuous cabin UV chart keeps frames,
+glass and seams on the actual skin triangles. Its component master has runtime
+topology and does not qualify automatic high-to-low texture transfer. Preserve
+that distinction when choosing a route. New families still require their own
+shape, paint ownership, wheel bounds and explicit coverage sample region.
+For accepted follow-on originals, tactical 148 and `runtime-export.py` use an
+explicit family config to pin the review/source replay, measure actual imported
+bounds and copy the exact model/cardinal pixels. Larger capture viewports preserve
+native pixel density and centered ground origin; only transparent padding may be
+cropped into the standard fallback frame. Keep normal builds independent of Blender.
+School-bus tactical 149 qualifies a 224px viewport at unchanged world-pixel density,
+side-owned door/window paint and a fresh-clone frozen-only offline command. Use
+`family-regression.mjs` when changing the review harness; old Beetle pixels must
+stay exact. New retained-input-map receipts use `runtime-export-v2.py`; preserve
+the original exporter because the Beetle's historical provenance pins its bytes.
+The pickup example in tactical 151 adds a real recessed cargo bed: floor, inner
+walls, wheelhouses, cab rear and tailgate own separate surface paint. Use its own
+`scripts/vehicle-bake/pickup/` geometry and bed-depth triangle-ray probe alongside
+native rear-oblique inspection. A dark top deck does not qualify an open bed.
+Its radius-8 wheels and coverage region are family-specific; the usual whole-body
+roll, far-crown visual checks and source-only replay still apply. Pickup runtime
+activation waits for owner appearance review.
 
 Identify the requested sprite in the vehicle bank before choosing a template.
 `python scripts/authored-assets/pipeline.py list` lists extraction support,

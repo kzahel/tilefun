@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "id": "school-bus",
+  "name": "Yellow school bus",
+  "tags": ["vehicle", "original", "bus"],
+  "review": {
+    "manifest": "public/demos/original-vehicles/school-bus-v1/review-manifest.json",
+    "sha256": "0ac879788029ae9baedc0c1d24d76bc78c068a69c99b8b5ecd809adc9ad06dae",
+    "candidateId": "school-bus-v1",
+    "model": "public/demos/original-vehicles/school-bus-v1/inputs/model.glb",
+    "atlas": "public/demos/original-vehicles/school-bus-v1/inputs/atlas.png",
+    "capture": "public/demos/original-vehicles/school-bus-v1/captures/capture.json",
+    "captures": "public/demos/original-vehicles/school-bus-v1/captures",
+    "modelSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "triangles": 2564,
+    "meshes": 5
+  },
+  "sourceReplay": {
+    "receipt": "art-source/vehicle-bake/school-bus/v1/evidence/replay-verification.json",
+    "sha256": "fac4b2875ac572ca834c9da008d71e28b359a0e37d721e849d9c1f213c96e0c4",
+    "build": "art-source/vehicle-bake/school-bus/v1/build.py",
+    "family": "art-source/vehicle-bake/school-bus/v1/family.json"
+  },
+  "capture": {
+    "frameSize": [224, 224],
+    "groundOrigin": [112, 112],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "mesh": {
+    "assetId": "school-bus-authored-v1",
+    "path": "assets/models/vehicles/school-bus-v1.glb",
+    "radius": 112,
+    "lateralScale": 1
+  },
+  "sprite": "assets/vehicles/school-bus-v1.png",
+  "performance": {
+    "speed": 78,
+    "acceleration": 100,
+    "pushSpeed": 64,
+    "pushWeight": 500
+  },
+  "receipt": "art-source/vehicle-bake/runtime-school-bus-v1.json"
+}

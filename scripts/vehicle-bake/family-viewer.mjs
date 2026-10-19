@@ -1,0 +1,513 @@
+import * as THREE from "three";
+
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+import { CarMeshAsset } from "../../src/rendering/CarMeshAsset.ts";
+
+import { setCarMeshProjection } from "../../src/rendering/CarMeshProjection.ts";
+
+import { CarPixelOutline } from "../../src/rendering/CarPixelOutline.ts";
+
+import { createWheelRig } from "../authored-assets/runtime/wheel-rig.mjs";
+
+const state = {
+  candidate: null,
+
+  asset: null,
+
+  yaw: 45,
+
+  distance: 0,
+
+  mode: "study",
+
+  wireframe: false,
+
+  playing: false,
+};
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
+
+renderer.setSize(128, 128);
+
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+renderer.toneMapping = THREE.NoToneMapping;
+
+const scene = new THREE.Scene();
+
+const source = new THREE.WebGLRenderTarget(128, 128, { depthBuffer: true });
+
+source.texture.colorSpace = THREE.SRGBColorSpace;
+
+source.texture.magFilter = source.texture.minFilter = THREE.NearestFilter;
+
+source.texture.generateMipmaps = false;
+
+const outline = new CarPixelOutline();
+
+const camera = new THREE.OrthographicCamera(-3.6, 3.6, 3.6, -3.6, 0.01, 1000);
+
+const gameCamera = new THREE.Camera();
+
+const canvas = document.querySelector("#low");
+
+const ctx = canvas.getContext("2d");
+
+let nativeSize = 128;
+
+let pixels, image;
+
+function setNativeSize(size = 128) {
+  if (!Number.isInteger(size) || size < 128 || size % 2) throw Error("Invalid nativeSize");
+
+  nativeSize = size;
+
+  renderer.setSize(size, size);
+
+  source.setSize(size, size);
+
+  pixels = new Uint8Array(size * size * 4);
+
+  image = ctx.createImageData(size, size);
+
+  for (const id of ["low", "native"]) {
+    const element = document.querySelector(`#${id}`);
+
+    element.width = element.height = size;
+  }
+
+  document.documentElement.style.setProperty("--native-size", `${size}px`);
+
+  document
+    .querySelector("#native")
+    .setAttribute("aria-label", `Actual GLB native ${size} pixel view`);
+
+  document.querySelector("#intro-size").textContent = `${size} × ${size}`;
+}
+
+const stats = document.querySelector("#stats");
+
+let manifest;
+
+let loadVersion = 0;
+
+function url(path) {
+  return window.familyReviewOffline?.assets[path] ?? path;
+}
+
+async function load(candidate) {
+  const version = ++loadVersion;
+
+  const gltf = await new GLTFLoader().loadAsync(url(candidate.glb));
+
+  if (version !== loadVersion) {
+    new CarMeshAsset(gltf.scene, 1).dispose();
+
+    return;
+  }
+
+  const asset = new CarMeshAsset(gltf.scene, 1, { batch: true });
+
+  let triangles = 0,
+    vertices = 0,
+    primitives = 0;
+
+  asset.object.traverse((node) => {
+    if (!node.isMesh) return;
+
+    triangles += (node.geometry.index?.count ?? node.geometry.attributes.position.count) / 3;
+
+    vertices += node.geometry.attributes.position.count;
+
+    primitives += Math.max(1, node.geometry.groups.length);
+  });
+
+  state.asset?.dispose();
+
+  state.asset = asset;
+
+  state.candidate = candidate;
+
+  setNativeSize(candidate.nativeSize ?? 128);
+
+  state.stats = {
+    triangles,
+
+    vertices,
+
+    primitives,
+
+    sourceMeshes: asset.meshCount,
+
+    drawMeshes: asset.drawMeshCount,
+  };
+
+  state.distance = 0;
+
+  stats.textContent = `${triangles.toLocaleString()} triangles · ${asset.drawMeshCount} draw meshes · unlit palette atlas`;
+
+  document.querySelector("#method").textContent = candidate.method ?? candidate.title;
+
+  document.querySelector("#model").href = url(candidate.glb);
+
+  document.querySelector("#atlas").href = url(candidate.atlas);
+
+  document.querySelector("#report").href = url(candidate.report);
+
+  for (const id of ["model", "atlas", "report"]) document.querySelector(`#${id}`).hidden = false;
+
+  if (window.familyReviewOffline) {
+    for (const [id, name] of [
+      ["model", "model.glb"],
+
+      ["atlas", "atlas.png"],
+
+      ["report", "report.json"],
+    ])
+      document.querySelector(`#${id}`).download = `${candidate.id}-${name}`;
+  }
+
+  draw();
+}
+
+function draw() {
+  if (!state.asset) return;
+
+  const object = state.asset.object;
+
+  const normalized = object.children[0].children[0];
+
+  const s = 80 / 4.6;
+
+  if (state.mode === "study") {
+    normalized.rotation.set(0, 0, 0);
+
+    object.rotation.set(0, THREE.MathUtils.degToRad(state.yaw), 0);
+
+    camera.left = camera.bottom = -3.6 * s * (nativeSize / 128);
+
+    camera.right = camera.top = 3.6 * s * (nativeSize / 128);
+
+    camera.position.set(
+      0,
+
+      12 * Math.sin((50 * Math.PI) / 180) * s,
+
+      12 * Math.cos((50 * Math.PI) / 180) * s,
+    );
+
+    camera.lookAt(0, 0, 0);
+
+    camera.updateProjectionMatrix();
+
+    // Constant 28-pixel study registration; expand the viewport without scaling the model.
+
+    camera.projectionMatrix.elements[13] = -28 / (nativeSize / 2);
+
+    camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
+  } else {
+    normalized.rotation.set(Math.PI / 2, 0, Math.PI, "ZYX");
+
+    object.rotation.set(0, 0, THREE.MathUtils.degToRad(state.yaw));
+
+    setCarMeshProjection(gameCamera.projectionMatrix, nativeSize / 2);
+
+    gameCamera.projectionMatrixInverse.copy(gameCamera.projectionMatrix).invert();
+  }
+
+  object.traverse((node) => {
+    if (!node.isMesh) return;
+
+    for (const mat of Array.isArray(node.material) ? node.material : [node.material]) {
+      if (mat.wireframe !== state.wireframe) {
+        mat.wireframe = state.wireframe;
+
+        mat.needsUpdate = true;
+      }
+    }
+  });
+
+  state.asset.setTravel(state.distance);
+
+  scene.add(object);
+
+  renderer.setRenderTarget(source);
+
+  renderer.setClearColor(0, 0);
+
+  renderer.clear();
+
+  renderer.render(scene, state.mode === "study" ? camera : gameCamera);
+
+  const calls = renderer.info.render.calls;
+
+  outline.render(renderer, source);
+
+  renderer.readRenderTargetPixels(outline.target, 0, 0, nativeSize, nativeSize, pixels);
+
+  for (let y = 0; y < nativeSize; y++) {
+    image.data.set(
+      pixels.subarray((nativeSize - 1 - y) * nativeSize * 4, (nativeSize - y) * nativeSize * 4),
+      y * nativeSize * 4,
+    );
+  }
+
+  ctx.putImageData(image, 0, 0);
+
+  document.querySelector("#native").getContext("2d").putImageData(image, 0, 0);
+
+  scene.remove(object);
+
+  state.stats.bodyDrawCalls = calls;
+
+  document.querySelector("#angle-value").textContent = `${state.yaw.toFixed(1)}°`;
+
+  document.querySelector("#angle").value = String(state.yaw);
+
+  document.querySelector("#projection").value = state.mode;
+
+  document.querySelector("#wireframe").checked = state.wireframe;
+
+  document.querySelector("#style-card").hidden = !state.candidate.styleReference;
+
+  if (state.candidate.styleReference)
+    document.querySelector("#reference").src = url(state.candidate.styleReference);
+
+  document.querySelector("#projection-note").textContent =
+    state.mode === "study"
+      ? `Study: fixed 50° elevation, unchanged pixel density; ${nativeSize} px; ground anchor (${nativeSize / 2},${nativeSize / 2 + 28}).`
+      : `Game: unchanged shared projection and pixel density; ${nativeSize} px; ground anchor (${nativeSize / 2},${nativeSize / 2}).`;
+}
+
+async function start() {
+  manifest =
+    window.familyReviewOffline?.manifest ?? (await fetch("candidate.json").then((r) => r.json()));
+
+  const selected = manifest.candidates[0];
+
+  if (!selected) throw Error("No finished revision packaged.");
+
+  document.querySelector("#name").textContent = selected.name;
+
+  document.title = `${selected.name} · original vehicle review`;
+
+  await load(selected);
+
+  document.querySelector("#angle").addEventListener("input", (event) => {
+    state.yaw = Number(event.target.value);
+
+    draw();
+  });
+
+  document.querySelector("#projection").addEventListener("change", (event) => {
+    state.mode = event.target.value;
+
+    draw();
+  });
+
+  document.querySelector("#wireframe").addEventListener("change", (event) => {
+    state.wireframe = event.target.checked;
+
+    draw();
+  });
+
+  document
+
+    .querySelector("#zoom")
+
+    .addEventListener("change", (event) =>
+      document.documentElement.style.setProperty("--zoom", event.target.value),
+    );
+
+  document.querySelector("#play").addEventListener("click", (event) => {
+    state.playing = !state.playing;
+
+    event.target.textContent = state.playing ? "Pause rotation" : "Rotate + roll";
+
+    event.target.setAttribute("aria-pressed", String(state.playing));
+  });
+
+  window.familyReview = {
+    manifest,
+
+    setNativeSize,
+
+    state,
+
+    load,
+
+    wheelRadii() {
+      return createWheelRig(state.asset.object, THREE).wheels.map((w) => ({
+        id: w.id,
+
+        radius: w.radius,
+      }));
+    },
+
+    auditRig() {
+      state.asset.setTravel(0);
+
+      const rig = createWheelRig(state.asset.object, THREE);
+
+      state.asset.object.updateMatrixWorld(true);
+
+      const baseline = new Map();
+
+      state.asset.object.traverse((node) => {
+        if (node.isMesh) baseline.set(node, node.matrixWorld.toArray());
+      });
+
+      const checked = [];
+
+      for (const wheel of rig.wheels) {
+        const moving = new Set();
+
+        wheel.roll.traverse((node) => moving.add(node));
+
+        const center = wheel.roll.getWorldPosition(new THREE.Vector3());
+
+        rig.setWheelTravel(wheel.id, (wheel.radius * Math.PI) / 2);
+
+        state.asset.object.updateMatrixWorld(true);
+
+        if (Math.abs(wheel.roll.quaternion.angleTo(wheel.restRoll) - Math.PI / 2) > 1e-6)
+          throw Error(`Incorrect roll phase: ${wheel.id}`);
+
+        if (wheel.roll.getWorldPosition(new THREE.Vector3()).distanceTo(center) > 1e-6)
+          throw Error(`Wheel pivot moved: ${wheel.id}`);
+
+        let changed = 0;
+
+        state.asset.object.traverse((node) => {
+          if (!node.isMesh) return;
+
+          const prior = baseline.get(node);
+
+          const differs = node.matrixWorld.elements.some((v, i) => Math.abs(v - prior[i]) > 1e-6);
+
+          if (differs && !moving.has(node))
+            throw Error(`Independent wheel moved fixed geometry: ${wheel.id}/${node.name}`);
+
+          if (differs) changed++;
+        });
+
+        if (!changed) throw Error(`Wheel contains no moving meshes: ${wheel.id}`);
+
+        rig.setWheelTravel(wheel.id, (-wheel.radius * Math.PI) / 2);
+
+        const reverse = wheel.restRoll
+
+          .clone()
+
+          .multiply(new THREE.Quaternion().setFromAxisAngle(wheel.axis, Math.PI / 2));
+
+        if (wheel.roll.quaternion.angleTo(reverse) > 1e-6)
+          throw Error(`Independent reverse phase mismatch: ${wheel.id}`);
+
+        rig.setTravel(0);
+
+        state.asset.object.updateMatrixWorld(true);
+
+        state.asset.object.traverse((node) => {
+          if (!node.isMesh) return;
+
+          const prior = baseline.get(node);
+
+          if (node.matrixWorld.elements.some((v, i) => Math.abs(v - prior[i]) > 1e-6))
+            throw Error(`Independent reset changed geometry: ${wheel.id}/${node.name}`);
+        });
+
+        checked.push({
+          id: wheel.id,
+
+          radius: wheel.radius,
+
+          quarterTurn: true,
+
+          pivotFixed: true,
+
+          independent: true,
+
+          reverseQuarterTurn: true,
+
+          absoluteReset: true,
+        });
+      }
+
+      for (const distance of [17, -17, 0, 17, 0]) {
+        state.asset.setTravel(distance);
+
+        for (const wheel of rig.wheels) {
+          const expected = wheel.restRoll
+
+            .clone()
+
+            .multiply(
+              new THREE.Quaternion().setFromAxisAngle(wheel.axis, -distance / wheel.radius),
+            );
+
+          if (wheel.roll.quaternion.angleTo(expected) > 1e-6)
+            throw Error(`Runtime distance phase mismatch: ${wheel.id}`);
+        }
+      }
+
+      state.distance = 0;
+
+      draw();
+
+      return { wheels: checked, forwardReverseAbsoluteReset: true };
+    },
+
+    pose(yaw, distance = 0, mode = "study", wireframe = false) {
+      Object.assign(state, { yaw, distance, mode, wireframe });
+
+      draw();
+
+      return { pixels: Array.from(image.data), nativeSize, stats: state.stats };
+    },
+  };
+
+  window.familyReviewReady = true;
+
+  document.querySelector("#status").textContent =
+    "Actual textured GLB · shared engine rendering · human review pending · gameplay inactive";
+
+  let previous = performance.now();
+
+  function tick(now) {
+    const dt = Math.min(0.1, (now - previous) / 1000);
+
+    previous = now;
+
+    if (state.playing) {
+      state.yaw = (state.yaw + dt * 35) % 360;
+
+      state.distance += dt * 12;
+
+      draw();
+    }
+
+    requestAnimationFrame(tick);
+  }
+
+  requestAnimationFrame(tick);
+
+  addEventListener("pagehide", () => {
+    state.asset?.dispose();
+
+    outline.dispose();
+
+    source.dispose();
+
+    renderer.dispose();
+  });
+}
+
+function showError(error) {
+  document.querySelector("#status").textContent = error.message;
+
+  console.error(error);
+}
+
+start().catch(showError);

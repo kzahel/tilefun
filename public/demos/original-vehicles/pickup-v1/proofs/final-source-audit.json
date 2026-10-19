@@ -1,0 +1,68 @@
+{
+  "status": "passed",
+  "audit": {
+    "triangles": 2984,
+    "vertices": 5722,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 207472,
+    "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.000000000000002,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "embeddedAtlasExact": true,
+  "opaque512Atlas": true,
+  "externalBuffersOrImages": false,
+  "retainedModelAtlasExact": true,
+  "sourceHashCount": 24,
+  "sourceHashesAllExact": true,
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "worldScale": 17.39130434782609
+}

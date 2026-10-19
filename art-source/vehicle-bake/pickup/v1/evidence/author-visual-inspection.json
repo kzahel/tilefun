@@ -1,0 +1,38 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "meaning": "Author inspection of exact actual GLB captures, separate from independent QA and human approval.",
+  "observations": [
+    {
+      "evidence": "engine/inspection-study.png",
+      "headingCount": 16,
+      "finding": "Original teal regular-cab pickup reads clearly from all study headings. Rounded hood and short tall cab are separated from real open cargo tub. Continuous front windshield and both side-window blue clusters remain bounded by dark frames. Rear cab glass distinct from cargo floor. Far crowns under broad fender/body shoulders; near tires seated in open arches. No clipping or detached raised fender caps."
+    },
+    {
+      "evidence": "engine/inspection-engine.png",
+      "headingCount": 16,
+      "finding": "All unchanged game projection headings inspected at native density and nearest enlargement. Recessed dark floor, visible interior walls and raised rear wheelhouses read as open cargo bed, with bright metal rails and upright tailgate. No glass or deck across bed. Opposite heading pairs retain coherent paint and silhouette. Far wheels do not project above body/fenders; near tires retain dark open arch clearance."
+    },
+    {
+      "evidence": "engine/inspection-phases.png",
+      "phasesDegrees": [
+        0,
+        45,
+        90,
+        135,
+        -180,
+        -135,
+        -90,
+        -45
+      ],
+      "finding": "Eight signed roll phases per camera inspected. Body/fenders/glass/bed stay fixed. Tires remain seated and highlights roll; native hub aliases are ordinary angle sampling. Actual hierarchy audit additionally proves each independent wheel, fixed pivots, reverse quarter turns and absolute reset."
+    },
+    {
+      "evidence": [
+        "engine/wire-study.png",
+        "engine/wire-engine.png"
+      ],
+      "finding": "Actual-export wireframes inspected; cargo center contains the low floor and no elevated deck. Hood, cab, four fender shoulders and wheel separation are coherent. Whole-body exact cylinder clearance separately proves local body/floor pockets stay outside tires."
+    }
+  ]
+}

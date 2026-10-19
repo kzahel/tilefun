@@ -1,0 +1,155 @@
+{
+  "identity": "seahorse-roster-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-147",
+  "sourceAudit": {
+    "identity": "seahorse-roster-v3",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 164,
+    "closedMeshVolumes": 38,
+    "chains": {
+      "TAIL": {
+        "segments": 8,
+        "kind": "curl"
+      }
+    },
+    "fixedLengthChainChecks": 2624,
+    "chainRootAttachmentChecks": 648,
+    "finAttachmentChecks": 1944,
+    "maxContinuousEndpointGapWorldUnits": 1.228781230931777e-7,
+    "maxQuarterPoseRotationStepDegrees": 0.39366380764155207,
+    "maxLoopMatrixDelta": 2.384185791015625e-7,
+    "bodyMotionRangePixels": {
+      "down": 1.8385047912597656,
+      "up": 1.8385047912597656,
+      "left": 2.218319892883301,
+      "right": 1.4586925506591797
+    },
+    "meshLocalGeometrySha256": {
+      "ringed upright trunk": "13e7fce9e8583e4176cb3d58ad1e6aa415030c6a71f0895bb1dd36f5ec0294e9",
+      "rounded brood belly": "152e14a823d2c92f003df23b4043283da7154b47d2e2452dce55428d597920ee",
+      "arched neck": "512b9cc3e8ee435bf681aa71225ec6a1ef9eb357c32c266470cb47206cdf2955",
+      "horse-shaped head": "439cdd76af79cb852b42957e9fa26815c6ad35d72046809d93dadb2be65680ce",
+      "tubular snout": "541d2f77ae1737fe8710e6dc39ad8209af55f46c1e44e4b52aa5794fcc7b7b55",
+      "trunk ridge 0": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "trunk ridge 1": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "trunk ridge 2": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "trunk ridge 3": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "trunk ridge 4": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "trunk ridge 5": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "trunk ridge 6": "990d420f355125bcacbf00b6802dab6327577a288a3e0b71d03647f8461fefcb",
+      "eye -1": "bded68d6c0fd7d12dfccb07c143e0fdeec74752d25defecf3d7756d807ed1397",
+      "pectoral--1 closed blade": "69a832ba24e945ff574d2e3554c64f4253cc65227334d3707bfd23f527a91122",
+      "eye 1": "bded68d6c0fd7d12dfccb07c143e0fdeec74752d25defecf3d7756d807ed1397",
+      "pectoral-1 closed blade": "112a4d3064930c6613f197d403335724870a5c4477207f61b735f04c909855f9",
+      "coronet point 0": "986fbd14e07fb9cb5deb2ea9e9924fbff8f21ebb1e2b416cae8b59eb24097fbb",
+      "coronet point 1": "986fbd14e07fb9cb5deb2ea9e9924fbff8f21ebb1e2b416cae8b59eb24097fbb",
+      "coronet point 2": "986fbd14e07fb9cb5deb2ea9e9924fbff8f21ebb1e2b416cae8b59eb24097fbb",
+      "coronet point 3": "986fbd14e07fb9cb5deb2ea9e9924fbff8f21ebb1e2b416cae8b59eb24097fbb",
+      "coronet point 4": "986fbd14e07fb9cb5deb2ea9e9924fbff8f21ebb1e2b416cae8b59eb24097fbb",
+      "small dorsal fan closed blade": "36859b947e1936c4509da217c013edd61a3ad5a98409bb6d2fd2b74a5de26c8a",
+      "TAIL-link-0": "de18076548943fd306ccbf6f73c69ac5c598c520abb2bd7ac86a5a51403ab9dc",
+      "TAIL-overlap-0": "e67c8d04a6d29e52ca79cb9c42520fe2ec3f96c8fb0471cf8edebb22126ef02f",
+      "TAIL-link-1": "543b177241c955a0934d6617bf5d2c270fd5547cd176f627899bc1328be23a6b",
+      "TAIL-overlap-1": "dacea30d6a50a5f082ca2df6b7161bde134b832a18e9920674f4adb47d80a4ec",
+      "TAIL-link-2": "b151d188f30b58b712d911042b829f200676cd490a9c1c246ec03c90cb614bc4",
+      "TAIL-overlap-2": "6ac923096d94def78eaf2e91f05474e964b586c60ac75fee8965867a5b1f8c72",
+      "TAIL-link-3": "b59b8743ac309fdcb0a352909d8f5e68107135117058f70eb2d1f24c613dfa26",
+      "TAIL-overlap-3": "452ddf676b5e04d30f31fc4dc3b8e1eb61cd6c608a30725acacea6949465a0ad",
+      "TAIL-link-4": "69d94507165f1a669943f203663e453c7afbebbb30817931457e9f8726e3e10b",
+      "TAIL-overlap-4": "1d7a64f87b5d9c8e29edf27cd65dcaa503c5453532e5d461ef511f5af2cd9dea",
+      "TAIL-link-5": "a5f807a83af161766cae1066f9e379813b4ac8611382a39259a2d28ed7c55956",
+      "TAIL-overlap-5": "7c6c4e06ab8842a65169734f830f1e918cec1d215a4cd6091b1c52165504c010",
+      "TAIL-link-6": "51288a32db929159d9f94f0396f1412892032434d54ceb40b73d0e8c31fc5479",
+      "TAIL-overlap-6": "6b2c35319702c7c6f968e3a5b7cfcfe2c85a37ea2ce42fb7a7be0b553eceef8b",
+      "TAIL-link-7": "3e2ec53735b03cc6ed650913592cbdb434a4deb64d57be04d7e884d9fa679c4a",
+      "TAIL-overlap-7": "c036b8a54f9c1f3abe018817eb92df1ce95d2890cde73224b014ec8bd7ca08d0"
+    }
+  },
+  "pixelAudit": {
+    "identity": "seahorse-roster-v3-pixels-01",
+    "poses": 164,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyPaintCentroidRangePixels": {
+      "down": 1.821153846153834,
+      "up": 2.2502264492753596,
+      "left": 2.1629651357693547,
+      "right": 1.7898089171974476
+    },
+    "rootTravelPixelsPerCycle": 12.8,
+    "plantedTravel": true
+  },
+  "validation": {
+    "identity": "seahorse-roster-v3",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 41,
+        "exactFacingCrops": 164
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "seahorse-roster-v3",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "294fc84057bcc65525b1093e7b28d691b9d41b903a93775adea7c7e3065196bf",
+      "pixel-audit.json": "7b9da054ba50bbd5eb1e9a25d34f36476787b688e9d936c66ac14f0ef4eeef71",
+      "preview-native.gif": "df67316a4561372efa71c3d3328a6904502198c2c992bfa7d2a252cd9856af53",
+      "preview.gif": "99207a7bcae739239b68712da2a6f84995241e3570850047ac6e1c1ce3b776ca",
+      "scene-background.png": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59",
+      "scene-native.png": "1d31f17785348bf18312b7696f0e390b86471f6bce68c1eacecdde1729138e86",
+      "sheet.png": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source-audit.json": "26cbc643159c350ed241bc9356dc1524f14a31fef126f3efefcf60ceed18ea2d",
+      "sprite.json": "bb4719f21319c28847aaee71dbbff08fdaaa009ce1e36f8838320d9f55edf7eb",
+      "travel-native.gif": "cdc82502f7a993299672bd2124733b389a4d5e89ca624e1302f5ae27890ffb9e"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/seahorse/roster-v3/audit.py": "f76c979325de8160669b11c16b7b837d6b4f026372044e79458278678f1bbd93",
+    "art-source/wildlife-v2/seahorse/roster-v3/build.py": "f045b6d6bcab50ee3382cf01660c5a3fecac47138d532da322db70535154952f",
+    "art-source/wildlife-v2/seahorse/roster-v3/finish.py": "f07033b1b199ebb68b53db90285a47560b8c9024c1421db719b2f0092828c80f",
+    "art-source/wildlife-v2/seahorse/roster-v3/inputs.json": "78fea8d80af9f767c2c4557744bdc3c6b6b207163aa70a6290d53414535f65ab",
+    "art-source/wildlife-v2/seahorse/roster-v3/masters.json": "fd2f6d1f6f06525826580acac2888d0fb9f1f9392b65c695690ff9e4a33c554b",
+    "art-source/wildlife-v2/seahorse/roster-v3/projection.json": "85c36b3d2e6e663f9d7057f4a765abc4470ffd5ad1d4046d5afdb6eb13d6e726",
+    "art-source/wildlife-v2/seahorse/roster-v3/README.md": "5c01a796377a2f78ba8b69be69337e8060998db7c2b6cca833e9fe6bce51bbaf",
+    "art-source/wildlife-v2/seahorse/roster-v3/seahorse.blend": "c9cb587b59d854d73d17d5fa123065d5e32bca57ecc1ce7bf053fa3049151ad8",
+    "public/demos/wildlife-v2/seahorse/roster-v3/contact-sheet-native.png": "294fc84057bcc65525b1093e7b28d691b9d41b903a93775adea7c7e3065196bf",
+    "public/demos/wildlife-v2/seahorse/roster-v3/index.html": "d86f50c47a7b3081c6a14bfcbc093ebf2a00924f4370c394da6f7209c394acb0",
+    "public/demos/wildlife-v2/seahorse/roster-v3/pixel-audit.json": "7b9da054ba50bbd5eb1e9a25d34f36476787b688e9d936c66ac14f0ef4eeef71",
+    "public/demos/wildlife-v2/seahorse/roster-v3/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/seahorse/roster-v3/preview-native.gif": "df67316a4561372efa71c3d3328a6904502198c2c992bfa7d2a252cd9856af53",
+    "public/demos/wildlife-v2/seahorse/roster-v3/preview.gif": "99207a7bcae739239b68712da2a6f84995241e3570850047ac6e1c1ce3b776ca",
+    "public/demos/wildlife-v2/seahorse/roster-v3/scene-background.png": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59",
+    "public/demos/wildlife-v2/seahorse/roster-v3/scene-native.png": "1d31f17785348bf18312b7696f0e390b86471f6bce68c1eacecdde1729138e86",
+    "public/demos/wildlife-v2/seahorse/roster-v3/sheet.png": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+    "public/demos/wildlife-v2/seahorse/roster-v3/source-audit.json": "26cbc643159c350ed241bc9356dc1524f14a31fef126f3efefcf60ceed18ea2d",
+    "public/demos/wildlife-v2/seahorse/roster-v3/sprite.json": "bb4719f21319c28847aaee71dbbff08fdaaa009ce1e36f8838320d9f55edf7eb",
+    "public/demos/wildlife-v2/seahorse/roster-v3/travel-native.gif": "cdc82502f7a993299672bd2124733b389a4d5e89ca624e1302f5ae27890ffb9e",
+    "public/demos/wildlife-v2/seahorse/roster-v3/validation.json": "8cd2d200530e5bce5a242bc7c6ef69e2568f0f19469db9b5c0c6e0457fc020c3",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/marine-oddities-147/build.py": "a115d7c08c4062105ce8f6374c664a719f4398f675b3a5ce38386fd63698d9a8",
+    "art-source/wildlife-v2/_families/marine-oddities-147/geometry.py": "2fd0ab0916dde7195a6cfc0eaa573057dea2bf6e98c8733e8d06037c4c5e3a07",
+    "art-source/wildlife-v2/_families/marine-oddities-147/finish.py": "f44b918f9279ed9d2028df807a060d8a4e12fb609f9c11eb2dcc02fe832b52f5",
+    "art-source/wildlife-v2/_families/marine-oddities-147/audit.py": "bd0521d363ffacfae1e615f65e4c3ef19686e21609ef975fcf9632d682d7d887",
+    "art-source/wildlife-v2/_families/marine-oddities-147/profiles.json": "8e35064ecaa3f56e413188bd9272a580d4fc83ffc5bced97e8ee8b4d2ae416a5",
+    "art-source/wildlife-v2/_families/marine-oddities-147/README.md": "86625fc5b366e303b8190c99399e6392ce0e972fe7f815b44d8236752559bf22",
+    "scripts/wildlife/capture-continuation-147.mjs": "88570dbd188754ea22facfa962d89bd300d60063fcadc55941ee492325d72d44",
+    "scripts/wildlife/register-continuation-147.mjs": "19fd1e154da656ecc8aefad4d975f5501fb08ed978582af779a97def882b563a",
+    "scripts/wildlife/replay-continuation-147.py": "c42f911aacb9a1c8f9f86416c7e8c64ade58dd9c5d593ac11a08f7ba55e82cf3"
+  }
+}

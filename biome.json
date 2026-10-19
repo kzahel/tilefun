@@ -12,10 +12,13 @@
       "!test-results",
       "!ME complete tileset.tsx",
       "!public/demos/vehicle-bake/viewer.js",
+      "!public/demos/original-vehicles/**/viewer.js",
       "!art-source/vehicle-bake/**/scripts/capture.mjs",
       "!art-source/vehicle-bake/**/recipe-scripts/capture.mjs",
       "!art-source/wildlife-v2/cat/motion-v2/projection.json",
       "!art-source/wildlife-v2/dog/motion-v2/projection.json",
+      "!art-source/wildlife-v2/centipede/roster-v3/projection.json",
+      "!art-source/wildlife-v2/millipede/roster-v3/projection.json",
       "!docs/tactical/053-semantic-tileset-map/source-files.json"
     ]
   },
@@ -78,10 +81,12 @@
         "art-source/train-models/**/*.json",
         "art-source/vehicle-style-study/**/*.json",
         "art-source/vehicle-bake/**/*.json",
+        "scripts/vehicle-bake/beetle/*.json",
         "public/assets/models/trains/review/**/*.json",
         "public/demos/wildlife-v2/**/*.json",
         "public/demos/vehicle-style-study/**/*.json",
         "public/demos/vehicle-bake/**/*.json",
+        "public/demos/original-vehicles/**/*.json",
         "src/wildlife/reviews.json"
       ],
       "files": {

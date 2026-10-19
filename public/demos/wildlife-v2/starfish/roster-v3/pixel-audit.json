@@ -1,0 +1,17 @@
+{
+  "identity": "starfish-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.172982456140346,
+    "up": 2.082162162162163,
+    "left": 2.6730593607305906,
+    "right": 2.0821034025629643
+  },
+  "rootTravelPixelsPerCycle": 4.8,
+  "plantedTravel": true
+}

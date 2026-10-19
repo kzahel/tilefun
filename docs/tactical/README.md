@@ -12,6 +12,13 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [151 Pickup pipeline review](151-pickup-pipeline-review.md) | Delivered for review: 2,984-triangle teal pickup, real open bed and own-family semantic UV paint; [original vehicles](../topics/original-vehicles.md) |
+| [150 School bus gameplay](150-school-bus-gameplay.md) | Delivered: owner-approved bus spawning, suitable road traffic and exact model/fallback; [original vehicles](../topics/original-vehicles.md) |
+| [149 School bus pipeline review](149-school-bus-pipeline-review.md) | Delivered for review: 2,564-triangle school bus, side-owned paint and fixed-pixel larger-viewport review; [original vehicles](../topics/original-vehicles.md) |
+| [148 Beetle gameplay](148-beetle-gameplay.md) | Delivered: accepted Beetle spawning, normal traffic, measured bounds and shared game/lab fallback; [original vehicles](../topics/original-vehicles.md) |
+| [147 Wildlife continuation](147-wildlife-continuation.md) | Active: eight-hour remaining-roster continuation; per-batch commits and live lab verification |
+| [146 Beetle pipeline review](146-beetle-pipeline-review.md) | Delivered for review: 2,554-triangle rounded compact, reusable family preview and independent wheel/fender qualification; [original vehicles](../topics/original-vehicles.md) |
+| [145 — Original coupe gameplay](145-original-coupe-gameplay.md) | Delivered: original catalog, editor spawning, matching fallback, rolling driving and automatic road traffic; [original vehicles](../topics/original-vehicles.md) |
 | [144 Rolling car steering](144-rolling-car-steering.md) | Complete: shared signed rolling turns, persistent/replicated heading, Deck acceptance and prediction/render parity |
 | [143 Small-animal roadkill](143-small-animal-roadkill.md) | Delivered: driven car/train contact, inert fading remains and durable deaths; full unit/browser and streaming checks pass |
 | [142 Red car low-poly pipeline](142-red-car-low-poly-pipeline.md) | In progress: YA texture/geometry experiments, actual-GLB review and reusable original-vehicle queue; other cars await owner agreement |

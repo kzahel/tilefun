@@ -1,0 +1,240 @@
+{
+  "identity": "cuttlefish-roster-v3",
+  "status": "finished",
+  "reviewStatus": "pending",
+  "authorization": "wildlife-autonomous-147",
+  "sourceAudit": {
+    "identity": "cuttlefish-roster-v3",
+    "status": "mechanics-checked-final-pixels-pending-human-review",
+    "allClipPoses": 324,
+    "closedMeshVolumes": 87,
+    "chains": {
+      "ARM-0": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-1": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-2": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-3": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-4": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-5": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-6": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "ARM-7": {
+        "segments": 3,
+        "kind": "arm"
+      },
+      "FEEDING-TENTACLE--1": {
+        "segments": 4,
+        "kind": "tentacle"
+      },
+      "FEEDING-TENTACLE-1": {
+        "segments": 4,
+        "kind": "tentacle"
+      }
+    },
+    "fixedLengthChainChecks": 20992,
+    "chainRootAttachmentChecks": 12960,
+    "finAttachmentChecks": 20736,
+    "maxContinuousEndpointGapWorldUnits": 4.917383193969727e-7,
+    "maxQuarterPoseRotationStepDegrees": 1.1176629256344282,
+    "maxLoopMatrixDelta": 4.6193599700927734e-7,
+    "bodyMotionRangePixels": {
+      "down": 1.8385047912597656,
+      "up": 1.8385047912597656,
+      "left": 2.218319892883301,
+      "right": 1.4586925506591797
+    },
+    "meshLocalGeometrySha256": {
+      "closed broad mantle": "2528b945419da3913b925afb6430cf7d4ab8238ab05123a9aa378db7b7d7a78b",
+      "head": "f8292e0b57d6177763fd933d38a4035a41c5a62a9addb8d3d6289eaceaa0a23c",
+      "eye -1": "92867de075e8679a61e3e43c791b2dc299bbbd144b9c834930825f9efa61b359",
+      "closed ribbon panel -1 0": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 1": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 2": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 3": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 4": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 5": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 6": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "closed ribbon panel -1 7": "692e9147b4ec9d5b16c6fd8c6db7a2957df32b7798a3c122b597100acfac2e52",
+      "eye 1": "92867de075e8679a61e3e43c791b2dc299bbbd144b9c834930825f9efa61b359",
+      "closed ribbon panel 1 0": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 1": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 2": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 3": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 4": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 5": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 6": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "closed ribbon panel 1 7": "9f5bde1a29585c0fe7cbec8f1a3b044a57474818469fbc442e8915d5bc2240ad",
+      "ARM-0-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-0-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-0-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-0-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-0-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-0-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-1-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-1-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-1-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-1-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-1-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-1-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-2-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-2-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-2-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-2-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-2-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-2-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-3-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-3-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-3-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-3-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-3-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-3-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-4-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-4-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-4-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-4-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-4-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-4-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-5-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-5-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-5-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-5-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-5-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-5-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-6-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-6-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-6-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-6-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-6-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-6-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "ARM-7-link-0": "13f9e071adf1a4f4acd9902c6873a0acd5d4599e6018e792ef10d9c0dd1db189",
+      "ARM-7-overlap-0": "54841681c40570308250185b95a823bf02fbfd9a10b4bec6087ea8fbe4d2e0c8",
+      "ARM-7-link-1": "17fced8e29be0498e0ce2454c5a5753b5490ed983a28a0a75aaf143b45cd5291",
+      "ARM-7-overlap-1": "19d13890b9c3c93ddd2ac061142c4c13805fb9a5dcf32603f785127d4bc75922",
+      "ARM-7-link-2": "3064fc83be2f00ec873bf5c673adaa44da2b8f388a40959ac2fa1a88f9662da1",
+      "ARM-7-overlap-2": "7bc08f65d64fdb06653b4f897946b1df5df716e0755cb23eb4a49880dab3a4e6",
+      "FEEDING-TENTACLE--1-link-0": "b3ad637478ec863c9d2377aa10f1e003d15dc13ab6c437031f3054f1a67c18fe",
+      "FEEDING-TENTACLE--1-overlap-0": "8b54741a910634ff20027a9097dc75891405a2a63d98050f9041eb4dfc19f064",
+      "FEEDING-TENTACLE--1-link-1": "d884c1633af484e9c43b9057fa21eb999eca435f9b6d400891b23dab7c3c0503",
+      "FEEDING-TENTACLE--1-overlap-1": "68c742cda4698dd769ac4d8448e74a045dd2be041cd2e46b98c7517d291fc8de",
+      "FEEDING-TENTACLE--1-link-2": "8213e553ed2eedfcd747289adf7d4c685e73870f3abc7ee992a024aad951edea",
+      "FEEDING-TENTACLE--1-overlap-2": "376dc3a67870ea756f6c1369c0cb3e9e50a98b3a4e9ed27451099a16322cff9d",
+      "FEEDING-TENTACLE--1-link-3": "983ec7c4aa064dae5fb60b8d41be136325dadd0e22ec07456cffafe4745368b3",
+      "FEEDING-TENTACLE--1-overlap-3": "33f18d74cd6d2f0b20f48261920479b8f8b1bb94fff2bc2b69de225fd25f6453",
+      "feeding club -1": "4300cfd7e5efc40a0abcef278720731048d858d7a79e01895e55baf8f173ad30",
+      "FEEDING-TENTACLE-1-link-0": "b3ad637478ec863c9d2377aa10f1e003d15dc13ab6c437031f3054f1a67c18fe",
+      "FEEDING-TENTACLE-1-overlap-0": "8b54741a910634ff20027a9097dc75891405a2a63d98050f9041eb4dfc19f064",
+      "FEEDING-TENTACLE-1-link-1": "d884c1633af484e9c43b9057fa21eb999eca435f9b6d400891b23dab7c3c0503",
+      "FEEDING-TENTACLE-1-overlap-1": "68c742cda4698dd769ac4d8448e74a045dd2be041cd2e46b98c7517d291fc8de",
+      "FEEDING-TENTACLE-1-link-2": "8213e553ed2eedfcd747289adf7d4c685e73870f3abc7ee992a024aad951edea",
+      "FEEDING-TENTACLE-1-overlap-2": "376dc3a67870ea756f6c1369c0cb3e9e50a98b3a4e9ed27451099a16322cff9d",
+      "FEEDING-TENTACLE-1-link-3": "983ec7c4aa064dae5fb60b8d41be136325dadd0e22ec07456cffafe4745368b3",
+      "FEEDING-TENTACLE-1-overlap-3": "33f18d74cd6d2f0b20f48261920479b8f8b1bb94fff2bc2b69de225fd25f6453",
+      "feeding club 1": "4300cfd7e5efc40a0abcef278720731048d858d7a79e01895e55baf8f173ad30",
+      "small beak": "37914d6aee2fc0eb3504676e8ac6017636877d9be1cb7ba18229ed242694c79c"
+    }
+  },
+  "pixelAudit": {
+    "identity": "cuttlefish-roster-v3-pixels-01",
+    "poses": 324,
+    "binaryAlpha": true,
+    "fixedPalette": true,
+    "minimumPadding": 2,
+    "freshSpeciesSource": true,
+    "sourceMeshVolumes": true,
+    "bodyPaintCentroidRangePixels": {
+      "down": 2.9518982387475603,
+      "up": 3.2042051927976445,
+      "left": 2.7205393162998064,
+      "right": 2.004948362079091
+    },
+    "rootTravelPixelsPerCycle": 23.04,
+    "plantedTravel": true
+  },
+  "validation": {
+    "identity": "cuttlefish-roster-v3",
+    "browser": "bundled full Chromium",
+    "results": [
+      {
+        "scale": 1,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      },
+      {
+        "scale": 3,
+        "chronologicalPoses": 81,
+        "exactFacingCrops": 324
+      }
+    ],
+    "controls": "pause/play, next, range keyboard scrubbing and speed",
+    "errors": []
+  },
+  "replay": {
+    "identity": "cuttlefish-roster-v3",
+    "status": "byte-identical",
+    "artifacts": 10,
+    "sha256": {
+      "contact-sheet-native.png": "4bc87e037e783724dd40d14b675a48249fc4d3a08289c84ff5f68301ed631181",
+      "pixel-audit.json": "cdf8ebe5604bd4b0510c6008b99dbf846e8df78ce17d5169572ae4d9d0c5c2ce",
+      "preview-native.gif": "35993458b0f93a59f2186ec825efc4cb94877ea39d63925ffc7a12292936332e",
+      "preview.gif": "65868225264bf2729428a6df7b93837b7835236eb5c4be4c2193eacbd93e33e9",
+      "scene-background.png": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59",
+      "scene-native.png": "ebe788ec9133978b97c77e3a38c667aa2a08af6045589f5cce534435ae2a9f06",
+      "sheet.png": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source-audit.json": "0149255fd642583c58525453cc3dd02de2da79736544f56c6ee7803cee7e379e",
+      "sprite.json": "e84f2f8a9f9af1af07488a73b62d13005685ec63aa3f07dfea5991ff659442ac",
+      "travel-native.gif": "bf93ddb410e53f8ed2e82fc38ee358201543f68ee5b49d0e06d107ab1dad1d8c"
+    }
+  },
+  "artifacts": {
+    "art-source/wildlife-v2/cuttlefish/roster-v3/audit.py": "1f0b1965b004984ba89563cc0c75858702d5a09e8714286b3ed11df88a561132",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/build.py": "9205ec82d2fa0bd70b8853e38ebf3992962f330481975418a30335ad118c7bba",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/cuttlefish.blend": "c80af5938319a67464931e345a23e7e86ef4629e33aa09590f53f13d02fb39bb",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/finish.py": "2333e837d35817219b2028f44ca326524067578aaec966ce8cca50930feb432f",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/inputs.json": "78fea8d80af9f767c2c4557744bdc3c6b6b207163aa70a6290d53414535f65ab",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/masters.json": "c47756d351f4f561884a8badfb4c81c2333a449cb7e9f306dbc5dffdb39b649b",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/projection.json": "5f514c1268f3b14e5a8df29ff82dc2e75452ca1899173c2c252b556e13b07b8f",
+    "art-source/wildlife-v2/cuttlefish/roster-v3/README.md": "8474c9dc4160dca4cb4e80a930df40a74874c4a2e1bfaf331e0b22f95585e763",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/contact-sheet-native.png": "4bc87e037e783724dd40d14b675a48249fc4d3a08289c84ff5f68301ed631181",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/index.html": "4237ace95ee3ea4f1e20e2acd302306ba927f15fccf61e8d2daa21fadaf6f854",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/pixel-audit.json": "cdf8ebe5604bd4b0510c6008b99dbf846e8df78ce17d5169572ae4d9d0c5c2ce",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/playback.js": "6e35ec294ecb543d256a5988209886e0e158d6ee988b5a3190bdf9b8fefc259f",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/preview-native.gif": "35993458b0f93a59f2186ec825efc4cb94877ea39d63925ffc7a12292936332e",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/preview.gif": "65868225264bf2729428a6df7b93837b7835236eb5c4be4c2193eacbd93e33e9",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/scene-background.png": "178cfeeeeb6f66c012d5ae207c6419dd469aaaa8a52a71873993e9da992bec59",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/scene-native.png": "ebe788ec9133978b97c77e3a38c667aa2a08af6045589f5cce534435ae2a9f06",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/sheet.png": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/source-audit.json": "0149255fd642583c58525453cc3dd02de2da79736544f56c6ee7803cee7e379e",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/sprite.json": "e84f2f8a9f9af1af07488a73b62d13005685ec63aa3f07dfea5991ff659442ac",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/travel-native.gif": "bf93ddb410e53f8ed2e82fc38ee358201543f68ee5b49d0e06d107ab1dad1d8c",
+    "public/demos/wildlife-v2/cuttlefish/roster-v3/validation.json": "80375276dc9aa03b6930ba6ca4680a1462cebe8fddff620b13a1310c334bf9c3",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9",
+    "art-source/wildlife-v2/_families/marine-oddities-147/build.py": "a115d7c08c4062105ce8f6374c664a719f4398f675b3a5ce38386fd63698d9a8",
+    "art-source/wildlife-v2/_families/marine-oddities-147/geometry.py": "2fd0ab0916dde7195a6cfc0eaa573057dea2bf6e98c8733e8d06037c4c5e3a07",
+    "art-source/wildlife-v2/_families/marine-oddities-147/finish.py": "f44b918f9279ed9d2028df807a060d8a4e12fb609f9c11eb2dcc02fe832b52f5",
+    "art-source/wildlife-v2/_families/marine-oddities-147/audit.py": "bd0521d363ffacfae1e615f65e4c3ef19686e21609ef975fcf9632d682d7d887",
+    "art-source/wildlife-v2/_families/marine-oddities-147/profiles.json": "8e35064ecaa3f56e413188bd9272a580d4fc83ffc5bced97e8ee8b4d2ae416a5",
+    "art-source/wildlife-v2/_families/marine-oddities-147/README.md": "86625fc5b366e303b8190c99399e6392ce0e972fe7f815b44d8236752559bf22",
+    "scripts/wildlife/capture-continuation-147.mjs": "88570dbd188754ea22facfa962d89bd300d60063fcadc55941ee492325d72d44",
+    "scripts/wildlife/register-continuation-147.mjs": "19fd1e154da656ecc8aefad4d975f5501fb08ed978582af779a97def882b563a",
+    "scripts/wildlife/replay-continuation-147.py": "c42f911aacb9a1c8f9f86416c7e8c64ade58dd9c5d593ac11a08f7ba55e82cf3"
+  }
+}

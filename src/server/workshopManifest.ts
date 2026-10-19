@@ -1,6 +1,9 @@
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { join } from "node:path";
+import originalVehicles from "../../public/demos/original-vehicles/manifest.json" with {
+  type: "json",
+};
 import vehicleBake from "../../public/demos/vehicle-bake/manifest.json" with { type: "json" };
 import vehicleStyleStudy from "../../public/demos/vehicle-style-study/manifest.json" with {
   type: "json",
@@ -58,6 +61,16 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/VehicleBakeCandidates.ts",
   );
   for (const candidate of vehicleBake.candidates) {
+    files.push(...candidate.files.map((file) => `public/${file.url}`));
+  }
+  files.push(
+    "public/demos/original-vehicles/manifest.json",
+    "public/demos/original-vehicles/index.html",
+    "public/demos/original-vehicles/gallery.css",
+    "public/demos/original-vehicles/gallery.js",
+    "src/workshop/OriginalVehicleCandidates.ts",
+  );
+  for (const candidate of originalVehicles.candidates) {
     files.push(...candidate.files.map((file) => `public/${file.url}`));
   }
   files.push(...CHARACTERS.map((c) => `public/${c.image}`));

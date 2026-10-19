@@ -1,0 +1,215 @@
+{
+  "raven": {
+    "label": "Raven",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.27,
+      0.45,
+      0.33
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 1.01,
+    "headRadii": [
+      0.21,
+      0.26,
+      0.22
+    ],
+    "wingLength": 0.96,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 18,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#26333d",
+      "H": "#536373",
+      "C": "#344452",
+      "M": "#25313d",
+      "N": "#141b25",
+      "E": "#d2b77b",
+      "K": "#141b25",
+      "T": "#43515b",
+      "R": "#737a7b"
+    },
+    "beakLength": 0.34,
+    "tailLength": 0.67,
+    "neckRadii": [
+      0.14,
+      0.19,
+      0.22
+    ],
+    "breastRadii": [
+      0.2376,
+      0.315,
+      0.2805
+    ]
+  },
+  "crow": {
+    "label": "Carrion crow",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.23,
+      0.35,
+      0.3
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.18,
+      0.22,
+      0.19
+    ],
+    "wingLength": 0.77,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 18,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#30373a",
+      "H": "#5b6264",
+      "C": "#3c4445",
+      "M": "#2b3235",
+      "N": "#151c20",
+      "E": "#d5bf86",
+      "K": "#151c20",
+      "T": "#485154",
+      "R": "#858b88"
+    },
+    "beakLength": 0.26,
+    "tailLength": 0.53,
+    "neckRadii": [
+      0.14,
+      0.19,
+      0.22
+    ],
+    "breastRadii": [
+      0.2024,
+      0.24499999999999997,
+      0.255
+    ]
+  },
+  "atlantic-puffin": {
+    "label": "Atlantic puffin",
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "coreRadii": [
+      0.28,
+      0.32,
+      0.37
+    ],
+    "bodyZ": 0.65,
+    "headY": 0.3,
+    "headZ": 0.95,
+    "headRadii": [
+      0.23,
+      0.23,
+      0.24
+    ],
+    "wingLength": 0.55,
+    "hipX": 0.11,
+    "hipY": -0.06,
+    "footX": 0.13,
+    "hindFootX": 0.13,
+    "legLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindLengths": [
+      0.2,
+      0.25,
+      0.17
+    ],
+    "hindRadius": 0.035,
+    "antennaLength": 0,
+    "speed": 14,
+    "motionMs": 25,
+    "motionClip": "fly",
+    "exampleDistance": 22,
+    "hop": {
+      "duration": 0.8,
+      "push": 0.08,
+      "land": 0.72,
+      "height": 10
+    },
+    "palette": {
+      "B": "#293941",
+      "H": "#bec5bf",
+      "C": "#eee8cf",
+      "M": "#2d3b42",
+      "N": "#17272d",
+      "E": "#e4be67",
+      "K": "#17272d",
+      "T": "#df8c40",
+      "R": "#c34c3b"
+    },
+    "beakLength": 0.34,
+    "tailLength": 0.26,
+    "neckRadii": [
+      0.14,
+      0.19,
+      0.22
+    ],
+    "breastRadii": [
+      0.24640000000000004,
+      0.22399999999999998,
+      0.3145
+    ]
+  }
+}

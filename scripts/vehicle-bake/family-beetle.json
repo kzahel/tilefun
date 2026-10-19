@@ -1,0 +1,14 @@
+{
+  "id": "beetle-v1",
+  "clearanceId": "beetle--v1",
+  "name": "Beetle-style compact",
+  "title": "Beetle-style compact · rounded compact experiment v1",
+  "source": "public/demos/vehicle-bake/beetle/v1",
+  "glb": "public/demos/vehicle-bake/beetle/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/beetle/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/beetle/v1/report.json",
+  "output": "public/demos/original-vehicles/beetle-v1",
+  "qa": "data/vehicle-bake/beetle-qa",
+  "offline": "data/vehicle-bake/beetle-review.html",
+  "styleReference": "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/study-2.png"
+}

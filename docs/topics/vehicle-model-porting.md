@@ -19,8 +19,17 @@ Original vehicles beyond the source bank have their own
 [topic and queue](original-vehicles.md). [141](../tactical/141-sports-car-style-experiments.md)
 compares initial art routes; [142](../tactical/142-red-car-low-poly-pipeline.md)
 now refines the preferred guide-finished red coupe into low-poly GLBs and reusable
-instructions. This study adds no source-bank row or game integration; the 45-set
-counts below continue to describe the existing sprite ports.
+instructions. [145](../tactical/145-original-coupe-gameplay.md) then integrates
+the owner-authorized original coupe with its own additive catalog, matching sprite
+fallback and normal spawning/traffic. The 45-set counts below still describe the
+existing sprite ports; the combined gameplay roster now has 46 own-model types.
+The owner accepted the [Beetle v1 review](../tactical/146-beetle-pipeline-review.md).
+[148](../tactical/148-beetle-gameplay.md) integrates its exact 2,554-triangle model
+and matching fallback, bringing combined gameplay to 47 types. The port table
+still describes the immutable 45-type source bank.
+The owner then accepted school bus v1; [150](../tactical/150-school-bus-gameplay.md)
+adds its exact model/fallback through the same shared path, bringing combined
+gameplay to 48 types. Pickup authoring/review is separate in [151](../tactical/151-pickup-pipeline-review.md).
 
 The inventory is the 45 unique `vehicleId` values in
 [`vehicles-v1.json`](../../src/traffic/vehicles-v1.json): 180 directional views.

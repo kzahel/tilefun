@@ -3,9 +3,18 @@
 Owner: [Original vehicles](topics/original-vehicles.md). Current proof is the
 red coupe in [142](tactical/142-red-car-low-poly-pipeline.md), derived from the
 owner-preferred approach 3 in [141](tactical/141-sports-car-style-experiments.md).
-This is a red-car pilot with reusable stages, not a validated automatic generator
-for arbitrary vehicles. The owner accepted corrected v3's appearance on 2026-10-19;
-other families remain queued, and gameplay integration is pending.
+These are hand-authored family examples with reusable inspection stages, not a
+validated automatic generator for arbitrary vehicles. The owner accepted corrected v3's appearance on 2026-10-19;
+other families remain queued. [145](tactical/145-original-coupe-gameplay.md)
+integrates the accepted car with shared spawning, traffic and sprite fallback.
+
+The owner next authorized the Beetle-style compact in
+[146](tactical/146-beetle-pipeline-review.md). It tests direct semantic UV painting
+on its own rounded-family topology, while reusing the same export, pixel outline,
+wheel and actual-GLB inspection contracts. Its editable component master is at
+runtime topology; it does not demonstrate automatic high-to-low transfer.
+The owner accepted that appearance and authorized its gameplay delivery in
+[148](tactical/148-beetle-gameplay.md).
 
 ## What each stage owns
 
@@ -75,6 +84,14 @@ The red source's masks, ownership rules, component names and glass patch paramet
 are family-specific. A rounded compact, bus or pickup needs its own explicit
 geometry/ownership configuration. Shared palette, transfer diagnostics, GLB audit,
 wheel proof, renderer and comparison stages should be reused.
+
+For directly authored rounded bodies, a continuous cabin UV chart can own glass,
+frames and panel seams on the actual skin triangles. Separate curved glass
+overlays with different subdivisions can enter the coarse body facets and create
+broken blue/ink marks. Paint the aperture on the skin, or construct matching real
+aperture topology. Preserve broad glass clusters and continuous frames in every
+view. This route authors unseen paint deliberately; it is not observed source
+projection or evidence that high-to-low texture transfer succeeded.
 
 ## Export and verify the actual asset
 
@@ -153,6 +170,15 @@ with a temporary automated profile.
 
 ## Retain, review and advance
 
+For another original family, use the independent
+[`family-*` review harness](../scripts/vehicle-bake/family-README.md) with its own
+config and revision directory. It preserves the coupe's frozen viewer/manifest,
+uses the same shared rendering components and camera math, and creates an exact
+standalone preview plus a separately registered original-family review. Its
+prepare → capture → inspect → freeze contract refuses source drift and requires
+actual-export wheel proofs and offline/mobile checks. Geometry, UV ownership and
+coverage regions remain family-specific.
+
 Retain the exact GLB, packed low-poly Blender scene, atlas, family/config/replay
 inputs, original targets, transfer uncertainty and actual-export proof receipts.
 Previous completed revisions stay immutable; normal builds use retained assets
@@ -164,3 +190,77 @@ Update `art-source/vehicle-bake/roster.json` first, then run
 activation separately. A promising original-car prototype does not change the
 existing 45-set sprite-port inventory. After the owner agrees to the red-car
 result, the next transferability tests are Beetle, school bus and pickup.
+
+For an accepted original's gameplay delivery, explicitly run
+`python scripts/vehicle-bake/export-runtime.py`. Retain the exact reviewed GLB
+under the runtime asset directory, a cardinal game-camera sprite sheet with the
+shared frame/origin contract, measured collision bounds and handling, and their
+provenance. Register it in the additive original catalog rather than changing
+the immutable source sprite bank. Verify editor placement, normal automatic road
+selection, driving/reload, live GPU use and failed/disabled-mesh fallback through
+the shared game/lab paths. Builds consume retained outputs without regenerating.
+
+That original command retains the coupe's historical replay. New original
+families use the config-driven runtime exporter, for example:
+
+```powershell
+python scripts/vehicle-bake/runtime-export.py --config scripts/vehicle-bake/runtime-beetle-v1.json --blender 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe'
+```
+
+The config pins the exact frozen review manifest, model, atlas, camera captures
+and source-only replay dependencies. Blender imports the actual GLB to measure
+its world bounds; runtime geometry is copied without re-export. Conservative
+collision dimensions round those measurements up, while existing shared rules
+derive road admission and turning radius. Set handling explicitly per family.
+Use `--output-root` and `--work-dir` under ignored `data/` for a replay and verify
+identical model, sprite, provenance and preserved existing catalog entries.
+
+Larger vehicles may need a larger transparent review viewport at the same pixel
+density. Record its centered ground origin and mesh radius. The runtime exporter
+packs occupied native pixels around (96,144) in each 192×224 fallback frame,
+cropping transparent padding only. It rejects any clipped occupied pixel instead
+of resizing the car. `runtime-test.py` exercises 128/224/256px inputs, row isolation,
+ground registration and clipping rejection.
+
+The school-bus experiment adds `nativeSize` to the family review config. Its
+224px viewport uses radius 112 in the unchanged game projection. The study view
+expands proportionally, preserving its fixed elevation, pixel density and 28px
+registration. This gives a long/tall vehicle more transparent margin without
+shrinking it. `family-regression.mjs` verifies the old Beetle pixels exactly and
+centered crops between viewport sizes. The Workshop collection opens all frozen
+families; `check-gallery.mjs` checks native sizing and navigation on desktop/phone.
+
+For fresh-clone offline review, run `family-package.py CONFIG offline` and then
+`family-verify.py CONFIG`. This verifies the frozen public files before writing
+only the ignored standalone page; it needs no Blender, source regeneration or
+local baseline. Do not assemble/refreeze an existing revision.
+
+The first Beetle provenance pins `runtime-export.py` itself, so that historical
+entry point remains unchanged. New families can use `runtime-export-v2.py`, which
+accepts explicit retained `inputHashes` maps as well as legacy role receipts.
+It verifies every declared dependency and requires the configured builder/family
+pins. School-bus export and native 224px fallback packing are tested in ignored
+output only; the ordinary game catalog stays unchanged until appearance approval.
+
+## Open cargo beds and the pickup example
+
+The pickup in [151](tactical/151-pickup-pipeline-review.md) adds a regular cab and
+real open cargo tub with independent semantic owners for the floor, inner walls,
+wheelhouses, cab rear and tailgate. Its constructor/configuration is under
+`scripts/vehicle-bake/pickup/`; the retained source is
+`art-source/vehicle-bake/pickup/v1/`. This economical component master uses direct
+surface paint; it is not a high-to-low transfer demonstration.
+
+Keep the cargo floor below the rails and keep upper deck geometry out of the open
+bed. Wheelhouses may project into the tub, but the lower chassis/floor must retain
+real wheel-local pockets. Inspect both rear obliques at native pixels so dark paint
+does not disguise a solid deck. The actual-GLB bed probe casts declared vertical
+rays onto real triangles and records floor/rail depth; it complements visual
+inspection and does not replace wheel clearance or coverage checks.
+
+The pickup uses the same native 224px viewport and fixed pixel density as the bus.
+Its four wheels have a world-space radius of 8px. Its own coverage region and
+whole-body roll proof are qualified independently. Reuse the frozen-only offline command with
+`scripts/vehicle-bake/family-pickup.json`; wait for owner appearance agreement before
+adding any pickup runtime catalog entry. The bus now has its own accepted runtime
+config, `runtime-school-bus-v1.json`, consumed by the existing versioned exporter.

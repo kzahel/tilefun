@@ -1,0 +1,103 @@
+{
+  "identity": "starfish-roster-v3",
+  "status": "mechanics-checked-final-pixels-pending-human-review",
+  "allClipPoses": 164,
+  "closedMeshVolumes": 61,
+  "chains": {
+    "RADIAL-ARM-0": {
+      "segments": 4,
+      "kind": "radial"
+    },
+    "RADIAL-ARM-1": {
+      "segments": 4,
+      "kind": "radial"
+    },
+    "RADIAL-ARM-2": {
+      "segments": 4,
+      "kind": "radial"
+    },
+    "RADIAL-ARM-3": {
+      "segments": 4,
+      "kind": "radial"
+    },
+    "RADIAL-ARM-4": {
+      "segments": 4,
+      "kind": "radial"
+    }
+  },
+  "fixedLengthChainChecks": 6560,
+  "chainRootAttachmentChecks": 3240,
+  "finAttachmentChecks": 0,
+  "maxContinuousEndpointGapWorldUnits": 1.3657139822709083e-07,
+  "maxQuarterPoseRotationStepDegrees": 0.7486002426106207,
+  "maxLoopMatrixDelta": 3.5762786865234375e-07,
+  "bodyMotionRangePixels": {
+    "down": 1.8385047912597656,
+    "up": 1.8385047912597656,
+    "left": 2.218319892883301,
+    "right": 1.4586925506591797
+  },
+  "meshLocalGeometrySha256": {
+    "closed central disc": "d1ddd522ada627289429190c5907e831604e3da1e309150112ab41629dc1cc19",
+    "RADIAL-ARM-0-link-0": "8291219d81a7ab959ae78ec1929d11fa60af738c80c66a96932b03c52e106450",
+    "RADIAL-ARM-0-overlap-0": "8f38c1a2d5f8af70ce3fa1f4c323e5b9c0ce369d2abeea4188e688df550a1e46",
+    "RADIAL-ARM-0-link-1": "403d0c48c2b157297cf66a03841fc3d332648374e2675b2e2738355bc56a303c",
+    "RADIAL-ARM-0-overlap-1": "f2f0a9a710425dc061f96734a0fb9c4f4155401cdbfa5edce2ebaa6d8708f118",
+    "RADIAL-ARM-0-link-2": "5616e06735f12d694695fc911ff267d8191c8f1b04b6cb8f2288eaab094698a2",
+    "RADIAL-ARM-0-overlap-2": "7e0d70e72fc42ac1bc3142f874cac28c1bc627d78c5c3c835fb1757d6046c07f",
+    "RADIAL-ARM-0-link-3": "1e0cece28342ec687fe1aa3d14cf29deb5b1fc20f178766fb6ca1c431a3ca30f",
+    "RADIAL-ARM-0-overlap-3": "daa3a1b8018c2268f0a2e037e40a54ed3284c36eb25e3dd1f2043ed16cc05e73",
+    "dorsal granule 0 0": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 0 1": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 0 2": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 0 3": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "RADIAL-ARM-1-link-0": "8291219d81a7ab959ae78ec1929d11fa60af738c80c66a96932b03c52e106450",
+    "RADIAL-ARM-1-overlap-0": "8f38c1a2d5f8af70ce3fa1f4c323e5b9c0ce369d2abeea4188e688df550a1e46",
+    "RADIAL-ARM-1-link-1": "403d0c48c2b157297cf66a03841fc3d332648374e2675b2e2738355bc56a303c",
+    "RADIAL-ARM-1-overlap-1": "f2f0a9a710425dc061f96734a0fb9c4f4155401cdbfa5edce2ebaa6d8708f118",
+    "RADIAL-ARM-1-link-2": "5616e06735f12d694695fc911ff267d8191c8f1b04b6cb8f2288eaab094698a2",
+    "RADIAL-ARM-1-overlap-2": "7e0d70e72fc42ac1bc3142f874cac28c1bc627d78c5c3c835fb1757d6046c07f",
+    "RADIAL-ARM-1-link-3": "1e0cece28342ec687fe1aa3d14cf29deb5b1fc20f178766fb6ca1c431a3ca30f",
+    "RADIAL-ARM-1-overlap-3": "daa3a1b8018c2268f0a2e037e40a54ed3284c36eb25e3dd1f2043ed16cc05e73",
+    "dorsal granule 1 0": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 1 1": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 1 2": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 1 3": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "RADIAL-ARM-2-link-0": "8291219d81a7ab959ae78ec1929d11fa60af738c80c66a96932b03c52e106450",
+    "RADIAL-ARM-2-overlap-0": "8f38c1a2d5f8af70ce3fa1f4c323e5b9c0ce369d2abeea4188e688df550a1e46",
+    "RADIAL-ARM-2-link-1": "403d0c48c2b157297cf66a03841fc3d332648374e2675b2e2738355bc56a303c",
+    "RADIAL-ARM-2-overlap-1": "f2f0a9a710425dc061f96734a0fb9c4f4155401cdbfa5edce2ebaa6d8708f118",
+    "RADIAL-ARM-2-link-2": "5616e06735f12d694695fc911ff267d8191c8f1b04b6cb8f2288eaab094698a2",
+    "RADIAL-ARM-2-overlap-2": "7e0d70e72fc42ac1bc3142f874cac28c1bc627d78c5c3c835fb1757d6046c07f",
+    "RADIAL-ARM-2-link-3": "1e0cece28342ec687fe1aa3d14cf29deb5b1fc20f178766fb6ca1c431a3ca30f",
+    "RADIAL-ARM-2-overlap-3": "daa3a1b8018c2268f0a2e037e40a54ed3284c36eb25e3dd1f2043ed16cc05e73",
+    "dorsal granule 2 0": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 2 1": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 2 2": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 2 3": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "RADIAL-ARM-3-link-0": "8291219d81a7ab959ae78ec1929d11fa60af738c80c66a96932b03c52e106450",
+    "RADIAL-ARM-3-overlap-0": "8f38c1a2d5f8af70ce3fa1f4c323e5b9c0ce369d2abeea4188e688df550a1e46",
+    "RADIAL-ARM-3-link-1": "403d0c48c2b157297cf66a03841fc3d332648374e2675b2e2738355bc56a303c",
+    "RADIAL-ARM-3-overlap-1": "f2f0a9a710425dc061f96734a0fb9c4f4155401cdbfa5edce2ebaa6d8708f118",
+    "RADIAL-ARM-3-link-2": "5616e06735f12d694695fc911ff267d8191c8f1b04b6cb8f2288eaab094698a2",
+    "RADIAL-ARM-3-overlap-2": "7e0d70e72fc42ac1bc3142f874cac28c1bc627d78c5c3c835fb1757d6046c07f",
+    "RADIAL-ARM-3-link-3": "1e0cece28342ec687fe1aa3d14cf29deb5b1fc20f178766fb6ca1c431a3ca30f",
+    "RADIAL-ARM-3-overlap-3": "daa3a1b8018c2268f0a2e037e40a54ed3284c36eb25e3dd1f2043ed16cc05e73",
+    "dorsal granule 3 0": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 3 1": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 3 2": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 3 3": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "RADIAL-ARM-4-link-0": "8291219d81a7ab959ae78ec1929d11fa60af738c80c66a96932b03c52e106450",
+    "RADIAL-ARM-4-overlap-0": "8f38c1a2d5f8af70ce3fa1f4c323e5b9c0ce369d2abeea4188e688df550a1e46",
+    "RADIAL-ARM-4-link-1": "403d0c48c2b157297cf66a03841fc3d332648374e2675b2e2738355bc56a303c",
+    "RADIAL-ARM-4-overlap-1": "f2f0a9a710425dc061f96734a0fb9c4f4155401cdbfa5edce2ebaa6d8708f118",
+    "RADIAL-ARM-4-link-2": "5616e06735f12d694695fc911ff267d8191c8f1b04b6cb8f2288eaab094698a2",
+    "RADIAL-ARM-4-overlap-2": "7e0d70e72fc42ac1bc3142f874cac28c1bc627d78c5c3c835fb1757d6046c07f",
+    "RADIAL-ARM-4-link-3": "1e0cece28342ec687fe1aa3d14cf29deb5b1fc20f178766fb6ca1c431a3ca30f",
+    "RADIAL-ARM-4-overlap-3": "daa3a1b8018c2268f0a2e037e40a54ed3284c36eb25e3dd1f2043ed16cc05e73",
+    "dorsal granule 4 0": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 4 1": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 4 2": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf",
+    "dorsal granule 4 3": "139cb8d28b73d092b9df38d022fe5cd0c8b8a43cca1e794a947c3e899bb23eaf"
+  }
+}

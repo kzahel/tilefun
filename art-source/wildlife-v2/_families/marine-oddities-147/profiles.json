@@ -1,0 +1,167 @@
+{
+  "cuttlefish": {
+    "label": "Cuttlefish",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "head": [
+      0,
+      0.72,
+      0.8
+    ],
+    "bodyZ": 0.75,
+    "walkMs": 40,
+    "speed": 18,
+    "chaseSpeed": 36,
+    "chaseMs": 20,
+    "hunter": true,
+    "palette": {
+      "K": "#25312d",
+      "N": "#151d19",
+      "B": "#9e8d6b",
+      "C": "#d9c8a0",
+      "M": "#675641",
+      "H": "#ab7652",
+      "T": "#e1d4b4"
+    }
+  },
+  "seahorse": {
+    "label": "Seahorse",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "head": [
+      0,
+      0.25,
+      1.55
+    ],
+    "bodyZ": 0.9,
+    "walkMs": 50,
+    "speed": 8,
+    "chaseSpeed": 36,
+    "chaseMs": 20,
+    "hunter": false,
+    "palette": {
+      "K": "#25312d",
+      "N": "#151d19",
+      "B": "#d5af66",
+      "C": "#d9c8a0",
+      "M": "#675641",
+      "H": "#ab7652",
+      "T": "#e1d4b4"
+    }
+  },
+  "nautilus": {
+    "label": "Nautilus",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "head": [
+      0,
+      0.55,
+      0.55
+    ],
+    "bodyZ": 0.7,
+    "walkMs": 50,
+    "speed": 8,
+    "chaseSpeed": 36,
+    "chaseMs": 20,
+    "hunter": false,
+    "palette": {
+      "K": "#25312d",
+      "N": "#151d19",
+      "B": "#d7c8a1",
+      "C": "#d9c8a0",
+      "M": "#675641",
+      "H": "#ab7652",
+      "T": "#e1d4b4"
+    }
+  },
+  "leafy-seadragon": {
+    "label": "Leafy seadragon",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "head": [
+      0,
+      0.65,
+      1.18
+    ],
+    "bodyZ": 0.7,
+    "walkMs": 50,
+    "speed": 10,
+    "chaseSpeed": 36,
+    "chaseMs": 20,
+    "hunter": false,
+    "palette": {
+      "K": "#25312d",
+      "N": "#151d19",
+      "B": "#78935e",
+      "C": "#d9c8a0",
+      "M": "#526a42",
+      "H": "#b2bc77",
+      "T": "#e1d4b4"
+    }
+  },
+  "starfish": {
+    "label": "Starfish",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0
+    ],
+    "head": [
+      0,
+      0,
+      0.4
+    ],
+    "bodyZ": 0.4,
+    "walkMs": 50,
+    "speed": 3,
+    "chaseSpeed": 36,
+    "chaseMs": 20,
+    "hunter": false,
+    "palette": {
+      "K": "#25312d",
+      "N": "#151d19",
+      "B": "#c28158",
+      "C": "#e2ab73",
+      "M": "#675641",
+      "H": "#ab7652",
+      "T": "#e1d4b4"
+    }
+  }
+}

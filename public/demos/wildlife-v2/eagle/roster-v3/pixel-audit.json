@@ -1,0 +1,17 @@
+{
+  "identity": "eagle-roster-v3-pixels-01",
+  "poses": 484,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.127772331237793,
+    "up": 1.1255722045898438,
+    "left": 1.2694215774536133,
+    "right": 1.2694215774536133
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "chaseRootTravelPixelsPerCycle": 15.36
+}

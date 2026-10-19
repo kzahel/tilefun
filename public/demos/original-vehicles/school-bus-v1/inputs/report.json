@@ -1,0 +1,298 @@
+{
+  "status": "complete",
+  "artReviewStatus": "awaiting-owner-review",
+  "family": "school-bus",
+  "route": "school-bus",
+  "revision": "v1",
+  "method": "Original family-specific semantic surface UV paint on actual body/hood triangles. No source projection, screen redraw or high-to-low transfer.",
+  "geometry": {
+    "triangles": 2564,
+    "vertices": 4986,
+    "meshes": 5,
+    "primitives": 5,
+    "materials": 1,
+    "textures": 1,
+    "glbBytes": 182232,
+    "sha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "wheels": {
+      "FL": {
+        "wheel_radius": 8.173913043478262,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "FR": {
+        "wheel_radius": 8.173913043478262,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RL": {
+        "wheel_radius": 8.173913043478262,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      },
+      "RR": {
+        "wheel_radius": 8.173913043478262,
+        "roll_axis_gltf": [
+          0,
+          0,
+          -1
+        ]
+      }
+    }
+  },
+  "exportWorldScale": 17.39130434782609,
+  "wheels": [
+    {
+      "id": "FL",
+      "centerBlender": [
+        -2.5,
+        -0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        -43.478260869565226,
+        8.173913022746211,
+        17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "FR",
+      "centerBlender": [
+        -2.5,
+        0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        -43.478260869565226,
+        8.173913022746211,
+        -17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "RL",
+      "centerBlender": [
+        1.9600000381469727,
+        -0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        34.08695718516475,
+        8.173913022746211,
+        17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    },
+    {
+      "id": "RR",
+      "centerBlender": [
+        1.9600000381469727,
+        0.9800000190734863,
+        0.4699999988079071
+      ],
+      "centerExport": [
+        34.08695718516475,
+        8.173913022746211,
+        -17.043478592582375
+      ],
+      "radiusBlender": 0.47,
+      "wheel_radius": 8.173913043478262
+    }
+  ],
+  "atlasSize": [
+    512,
+    512
+  ],
+  "sourceBlend": "art-source/vehicle-bake/school-bus/v1/car.blend",
+  "masterBlend": "art-source/vehicle-bake/school-bus/v1/master.blend",
+  "recipe": "art-source/vehicle-bake/school-bus/v1/recipe.json",
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [
+      112,
+      140
+    ],
+    "engineGroundOrigin": [
+      112,
+      112
+    ]
+  },
+  "renderThreads": 4,
+  "runtime": "not integrated",
+  "triangles": 2564,
+  "vertexCount": 4986,
+  "meshCount": 5,
+  "primitiveCount": 5,
+  "materialCount": 1,
+  "textureCount": 1,
+  "atlasBytes": 4111,
+  "glbBytes": 182232,
+  "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+  "atlasSha256": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f",
+  "sharedClearance": {
+    "status": "passed",
+    "id": "school-bus--v1",
+    "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "triangles": 2564,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  },
+  "coverageEvidence": "art-source/vehicle-bake/school-bus/v1/evidence/upper-wheel-coverage.json",
+  "engineEvidence": "engine/capture.json",
+  "actualBounds": {
+    "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "minBlenderWorld": [
+      -60.95652389526367,
+      -21.39130401611328,
+      0.0
+    ],
+    "maxBlenderWorld": [
+      60.26087188720703,
+      21.39130401611328,
+      43.130435943603516
+    ],
+    "dimensionsBlenderWorld": [
+      121.2173957824707,
+      42.78260803222656,
+      43.130435943603516
+    ],
+    "dimensionsSourceUnits": [
+      6.970000257492065,
+      2.459999961853027,
+      2.480000066757202
+    ]
+  },
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/school-bus/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/school-bus/capture.mjs",
+    "python scripts/vehicle-bake/school-bus/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/school-bus/v1/evidence/clearance-input.json data/vehicle-bake/school-bus/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/school-bus/v1/model.glb --config scripts/vehicle-bake/school-bus/coverage-region.json --output data/vehicle-bake/school-bus/recheck-coverage.json"
+  ],
+  "validation": {
+    "actualGLBAudit": true,
+    "actualKHRMaterialsUnlit": true,
+    "oneOpaque512Atlas": true,
+    "embeddedAtlasPixelsMatch": true,
+    "actualSharedEngine32HeadingViews": true,
+    "eightSignedPhasesPerCamera": true,
+    "independentWheelsFixedBodyReverseAbsoluteReset": true,
+    "allNeutralRollWholeBodyClearance": true,
+    "collidingBodyRejectedAndBaselineRestored": true,
+    "crown25of25EachWithControls": true,
+    "retainedSourceOnlyReplayByteIdentical": true,
+    "packedSourcesVerified": true,
+    "priorFrozenAssetsPreserved": true,
+    "projectWideValidation": "Coordinator-owned after final review registration."
+  },
+  "visualInspection": [
+    {
+      "evidence": "engine/inspection-study.png",
+      "headingCount": 16,
+      "finding": "Rounded long roof and short projecting hood read as conventional school bus. Blue side and windshield clusters retain continuous frames. Opposite side owns folding door; driver side has driver pane and static red stop plate. Repeated window spacing and rub rails coherent. Open arch seating; no exposed far crown or floating cap."
+    },
+    {
+      "evidence": "engine/inspection-engine.png",
+      "headingCount": 16,
+      "finding": "Unchanged game projection and density, with larger transparent viewport only. Door/window asymmetry preserved; front and rear marker/bumper separation visible. Wheel crowns under body/fenders; no clipping or blocking paint issue."
+    },
+    {
+      "evidence": "engine/inspection-phases.png",
+      "phasesDegrees": [
+        0,
+        45,
+        90,
+        135,
+        -180,
+        -135,
+        -90,
+        -45
+      ],
+      "finding": "Both camera phase sets visually inspected; body/paint stays fixed and tires remain seated. Independent motion, reverse quarter turn and reset additionally proven by actual GLB rig audit."
+    }
+  ],
+  "limitations": [
+    "Owner visual approval pending; no bus gameplay/catalog activation.",
+    "Original semantic UV surface paint; no automatic projection or high-to-low transfer demonstrated.",
+    "Editable component master uses economical runtime topology, not a separate high-poly source.",
+    "Coverage is the declared finite bus crown/support region, not universal occlusion or silhouette proof. Both fixed camera sets were separately inspected.",
+    "Neutral steering full-roll qualified only; nonzero steering, suspension and physical gameplay handling unqualified.",
+    "Small markers, lamps, grille slats and wheel highlights have ordinary native-pixel angle aliasing. No animated door, flashing lamps or stop-plate motion.",
+    "GLB nearest min sampler uses exporter NEAREST_MIPMAP_NEAREST; shared CarMeshAsset forces nearest min/mag and disables mipmaps."
+  ],
+  "priorAssetsPreserved": {
+    "priorFilesVerified": 2849,
+    "changedFiles": [],
+    "method": "SHA-256 comparison with independent QA pre-authoring frozen-asset ledger."
+  },
+  "sourceHashes": {
+    "art-source/vehicle-bake/school-bus/v1/atlas.png": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f",
+    "art-source/vehicle-bake/school-bus/v1/audit-source.py": "8e8bf931e298e53f2a042e3f211e3676b7d161d1f3ff1a43462ac4a10d6973c6",
+    "art-source/vehicle-bake/school-bus/v1/build.py": "ec4384d947c06e86b7bfb3f1c3efa062174b3926c616600bfa775db282d7c48a",
+    "art-source/vehicle-bake/school-bus/v1/capture.mjs": "1464980423e330b59a90fc21621824ef365f2f136af6d1ea3c296e9178d74b16",
+    "art-source/vehicle-bake/school-bus/v1/car.blend": "895bdbad60c8b9ed7225b4f10b3ce8bd484a5975406bd08aea866e49e6f79b72",
+    "art-source/vehicle-bake/school-bus/v1/coverage-region.json": "8b477c72afab92fdab590426d46c16bcbb9d3af107390d9c942d4dbf4e4cbbab",
+    "art-source/vehicle-bake/school-bus/v1/evidence/author-browser-qa.json": "abb3c1c037561cd977af088ac235120f0985934fc4e68cfd613db25c53ea6b01",
+    "art-source/vehicle-bake/school-bus/v1/evidence/clearance-input.json": "49a10dbca436bd675474c7a523f4594a7ba7e8b9ad3c526617f3d33ff74fb269",
+    "art-source/vehicle-bake/school-bus/v1/evidence/engine-capture.json": "cc4c4b2d5bca3e81b1999fa473406d03b657577ff02fbe4b0b67137b0d3664c9",
+    "art-source/vehicle-bake/school-bus/v1/evidence/packed-source-audit.json": "641bd2efcbaea13d2635f4ac35495a0140246a2e8859c80ba669114efa20947e",
+    "art-source/vehicle-bake/school-bus/v1/evidence/prior-retained-preservation.json": "85aac7ef3399efc50743b2ef4ea4885ab732c81c618e96c606c0b3d9ce7b0216",
+    "art-source/vehicle-bake/school-bus/v1/evidence/replay-verification.json": "fac4b2875ac572ca834c9da008d71e28b359a0e37d721e849d9c1f213c96e0c4",
+    "art-source/vehicle-bake/school-bus/v1/evidence/shared-clearance.json": "b2c4dcb3f158187c728a0de97a74604b81aa4924a14ee5d01151e6a8e48abd6c",
+    "art-source/vehicle-bake/school-bus/v1/evidence/upper-wheel-coverage.json": "e10f249b14e743d0d9ee7723f6507686d2386ec999e874eeb3cc20f237ba650b",
+    "art-source/vehicle-bake/school-bus/v1/family.json": "92911855ed8440577d20a2fbced8bb55c79f9d91f6ea5a90b4dfddd3435b1cf5",
+    "art-source/vehicle-bake/school-bus/v1/finalize.py": "e674ffe6e4583de577cacdc8b461b82e46198751c4256326f3212a0c819c02c3",
+    "art-source/vehicle-bake/school-bus/v1/master.blend": "75610bafad24c1afeb8db64a253121aee3e47d867dc88f91c92a90676a15ba9b",
+    "art-source/vehicle-bake/school-bus/v1/model.glb": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "art-source/vehicle-bake/school-bus/v1/paint-ownership.json": "e0f0e1788c76791092c55e21a46e73a63435d6617dec3ed563baffe1f3a1880f",
+    "art-source/vehicle-bake/school-bus/v1/palette-draft.png": "e4f3cbbb311ebd5d707e76ce259710452a4a819df3a2f648e8e6f3a483e11483",
+    "art-source/vehicle-bake/school-bus/v1/README.md": "27ed9a46819ead3e5819eff44145fe8d1cdce3a00dfebb37f22ca3153ce51639",
+    "art-source/vehicle-bake/school-bus/v1/recipe.json": "aa53ca52c56931abdc55cf09f8ca6d64b84bba6ad6fcefa65551ece89ed7f3b0",
+    "art-source/vehicle-bake/school-bus/v1/review.json": "d878d09da118a71e7920c3fa914026b388f5920d8c3f4921f409a9f4a3fdaff3",
+    "art-source/vehicle-bake/school-bus/v1/sheets.py": "17bb0dc29451dd799bc8b1ddb7a6d71d7fdf910e58f2f0ab4c0b536442b143e2"
+  }
+}

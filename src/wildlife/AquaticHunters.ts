@@ -1,6 +1,14 @@
 import type { AnimationClip } from "../entities/EntityDefs.js";
+import { DISTINCT_FISH_HUNTER_PROFILES } from "./DistinctFish.js";
+import { LEGLESS_WATER_HUNTER_PROFILES } from "./LeglessCreatures.js";
+import { MARINE_ODDITY_HUNTER_PROFILES } from "./MarineOddities.js";
 
 export const AQUATIC_HUNTER_SPECIES = [
+  "cuttlefish",
+  "moray-eel",
+  "electric-eel",
+  "swordfish",
+  "anglerfish",
   "shark",
   "hammerhead-shark",
   "orca",
@@ -17,6 +25,9 @@ const clips: readonly AnimationClip[] = [
 ];
 /** Deep-water hunters retain dedicated immutable clips and fixed lagoon slots. */
 export const AQUATIC_HUNTER_PROFILES = [
+  ...DISTINCT_FISH_HUNTER_PROFILES,
+  ...LEGLESS_WATER_HUNTER_PROFILES,
+  ...MARINE_ODDITY_HUNTER_PROFILES,
   {
     species: "shark",
     label: "Shark",

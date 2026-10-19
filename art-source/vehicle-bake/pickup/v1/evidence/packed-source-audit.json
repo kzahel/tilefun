@@ -1,0 +1,249 @@
+{
+  "status": "passed",
+  "results": {
+    "openBedGeometry": {
+      "status": "passed",
+      "centralDownwardRays": [
+        {
+          "xy": [
+            0.8,
+            -0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            0.8,
+            0
+          ],
+          "firstSurfaceZ": 0.7099997997283936,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            0.8,
+            0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            1.2,
+            -0.35
+          ],
+          "firstSurfaceZ": 0.7099997997283936,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            1.2,
+            0
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            1.2,
+            0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            1.8,
+            -0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            1.8,
+            0
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            1.8,
+            0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            2.2,
+            -0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            2.2,
+            0
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        },
+        {
+          "xy": [
+            2.2,
+            0.35
+          ],
+          "firstSurfaceZ": 0.7100000381469727,
+          "owner": "Recessed cargo floor with longitudinal painted ribs"
+        }
+      ],
+      "floorTopZ": 0.71,
+      "railTopZ": 1.2775,
+      "recessDepth": 0.5675,
+      "cabRearX": 0.32,
+      "cargoFrontX": 0.42,
+      "cabBedGap": 0.1,
+      "meaning": "Twelve central cargo rays reach the recessed floor, not roof, glass or a solid deck; side wheelhouses and walls are separate real geometry."
+    },
+    "master.blend": {
+      "sha256": "809b568db207ecbaf84ec1a48f04962be2c906e1bf55e780c85ea5f8b642ce66",
+      "meshObjects": 51,
+      "triangles": 2984,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "car.blend": {
+      "sha256": "d3ffa7c3aa53d7e4c801576d1e8094e20e236f0a405dc6aceb224139eed18df3",
+      "meshObjects": 5,
+      "triangles": 2984,
+      "packedImages": [
+        "atlas.png",
+        "Unused family palette planning draft"
+      ],
+      "oneSemanticUVLayer": true,
+      "sourceUnits": "Authoring source units; exported root scales by 80/4.6."
+    },
+    "actualGLBBounds": {
+      "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "minBlenderWorld": [
+        -46.69565200805664,
+        -19.478260040283203,
+        9.5367431640625e-07
+      ],
+      "maxBlenderWorld": [
+        47.21739196777344,
+        19.478260040283203,
+        35.13043212890625
+      ],
+      "dimensionsBlenderWorld": [
+        93.91304397583008,
+        38.956520080566406,
+        35.130431175231934
+      ],
+      "dimensionsSourceUnits": [
+        5.400000028610228,
+        2.239999904632568,
+        2.019999792575836
+      ]
+    },
+    "actualGLBOpenBed": {
+      "status": "passed",
+      "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "centralDownwardRays": [
+        {
+          "xySource": [
+            0.8,
+            -0.35
+          ],
+          "firstSurfaceZSource": 0.7099997758865355
+        },
+        {
+          "xySource": [
+            0.8,
+            0
+          ],
+          "firstSurfaceZSource": 0.7100002694129943
+        },
+        {
+          "xySource": [
+            0.8,
+            0.35
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            1.2,
+            -0.35
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            1.2,
+            0
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            1.2,
+            0.35
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            1.8,
+            -0.35
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            1.8,
+            0
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            1.8,
+            0.35
+          ],
+          "firstSurfaceZSource": 0.7099997758865355
+        },
+        {
+          "xySource": [
+            2.2,
+            -0.35
+          ],
+          "firstSurfaceZSource": 0.7100000500679015
+        },
+        {
+          "xySource": [
+            2.2,
+            0
+          ],
+          "firstSurfaceZSource": 0.7099997758865355
+        },
+        {
+          "xySource": [
+            2.2,
+            0.35
+          ],
+          "firstSurfaceZSource": 0.7099997758865355
+        }
+      ],
+      "rayCount": 12
+    }
+  }
+}

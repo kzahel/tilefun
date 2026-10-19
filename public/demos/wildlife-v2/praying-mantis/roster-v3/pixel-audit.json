@@ -1,0 +1,17 @@
+{
+  "identity": "praying-mantis-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.5594511535298494,
+    "up": 1.878952630921134,
+    "left": 1.8224063842848324,
+    "right": 1.8224063842848324
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

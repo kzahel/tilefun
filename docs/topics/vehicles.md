@@ -8,6 +8,30 @@ The [vehicle model porting checklist](vehicle-model-porting.md) tracks conversio
 of all 45 sprite sets to Blender/GLB assets and their individual engine status.
 This is separate from the approved sprite bank and vehicle gameplay behavior.
 
+## Original red sports coupe
+
+[145](../tactical/145-original-coupe-gameplay.md) adds **Red sports coupe** to
+Edit → Vehicles and ordinary generated-road traffic, plus the shared Traffic
+playground selector. It is `vehicle-v1:rosso-coupe`: an owner-authorized original
+alongside the immutable 45-type sprite bank, bringing gameplay to 46 vehicle types.
+The exact 2,299-triangle mesh and its matching cardinal fallback share the game
+camera; Canvas, disabled/failed/loading meshes preserve the same car. Conservative
+82×36×19px bounds and ordinary 84px road admission use existing authority paths;
+sporty driving is 156px/s with existing Fast and Reverse controls. Traffic remains
+bounded and selected normally, so a coupe need not appear at every road arrival.
+
+## Original Beetle-style compact
+
+[148](../tactical/148-beetle-gameplay.md) adds the owner-accepted Beetle through
+the same shared catalog as `vehicle-v1:beetle`, labelled **Beetle-style compact**.
+Its exact 2,554-triangle model and matching game-camera cardinal sprites preserve
+the reviewed proportions. Measured conservative bounds are 81×38×35px, ordinary
+road admission is 88px and its turning radius is 56.7px. It uses gentler compact
+handling (105px/s, 180px/s² acceleration) and existing drive/reverse/Fast controls.
+The combined roster is 47 vehicle types, 46 eligible for automatic road traffic.
+Editor placement also works in existing outdoor worlds without generated roads.
+The immutable source bank remains 45 types/180 views.
+
 ## Game-camera proportions and contact
 
 [130](../tactical/130-vehicle-game-camera-fit.md) fits all 45 model side heights to

@@ -360,7 +360,24 @@ export class NaturalLandscape {
       const p =
         FAUNA_PROFILES.find((p) => p.species === species) ??
         (hunter && { ...hunter, ...hunter.expansion });
-      if (!p || !["pond", "deep"].includes(p.habitat)) return;
+      if (!p) return;
+      if (p.habitat === "shore") {
+        if ("waterRefuge" in p && p.waterRefuge && !refuge.id.startsWith(`${p.waterRefuge}:`))
+          return;
+        // The southern open arc is independent of original northern penguin/seal homes.
+        const home = { wx: refuge.x * 16, wy: (refuge.y + refuge.ry * 1.05) * 16 };
+        add(
+          species,
+          refuge,
+          home,
+          Array.from({ length: p.group }, (_, i) => ({
+            wx: home.wx + (i - (p.group - 1) / 2) * (p.body[0] + 12),
+            wy: home.wy,
+          })),
+        );
+        return;
+      }
+      if (!["pond", "deep"].includes(p.habitat)) return;
       if (p.habitat === "deep" && !refuge.id.startsWith("lagoon:")) return;
       const home = {
         wx: refuge.x * 16,
@@ -999,19 +1016,21 @@ export class NaturalLandscape {
       const x = wx + (i === 0 ? 64 : -64),
         y = wy + 32;
       if (!own(x, y)) continue;
-      const rabbit = required(createRabbit(x, y).rabbit);
-      rabbit.home = { wx, wy };
-      rabbit.shelter = { wx: x, wy: y };
-      rabbit.radius = 112;
-      rabbit.randomState =
+      const prey = p.preySpecies ? createFauna(p.preySpecies, x, y) : createRabbit(x, y);
+      const behavior = required(prey.fauna ?? prey.rabbit);
+      behavior.home = { wx, wy };
+      behavior.shelter = { wx: x, wy: y };
+      behavior.radius = 112;
+      behavior.randomState =
         Math.floor(valueNoise(gx, gy, this.world.seed + 38061 + i) * 4294967296) >>> 0;
+      if (prey.fauna) prey.fauna.groupId = `expansion-prey:${home.id}`;
       actors.push({
-        featureId: `wildlife:expansion-prey:${p.species}:${this.world.seed}:${home.id}:rabbit:${i}`,
-        type: RABBIT_TYPE,
+        featureId: `wildlife:expansion-prey:${p.species}:${this.world.seed}:${home.id}:${p.preySpecies ?? "rabbit"}:${i}`,
+        type: prey.type,
         wx: x,
         wy: y,
         route: [],
-        rabbit,
+        ...(prey.fauna ? { fauna: prey.fauna } : { rabbit: required(prey.rabbit) }),
       });
     }
     // This fixed companion bank adds varied legal grazers without resizing or

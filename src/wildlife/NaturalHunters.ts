@@ -1,8 +1,30 @@
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import type { AnimationClip } from "../entities/EntityDefs.js";
+import type { FaunaSpecies } from "./Fauna.js";
+import type { FierceBehaviorProfile } from "./FierceCreatures.js";
+import { FOREST_HUNTER_PROFILES } from "./ForestSpecialists.js";
+import { GROUND_ARTHROPOD_HUNTER_PROFILES } from "./GroundArthropods.js";
+import { LEGLESS_LAND_HUNTER_PROFILES } from "./LeglessCreatures.js";
+import { RAPTOR_PROFILES } from "./Raptors.js";
+import { REPTILE_HUNTER_PROFILES } from "./ReptileHunters.js";
 import { SMALL_GROUND_HUNTER_PROFILES } from "./SmallGroundHunters.js";
+import { SECRETARY_BIRD_PROFILES } from "./TallBirds.js";
 
 export const NATURAL_HUNTER_SPECIES = [
+  "spider",
+  "praying-mantis",
+  "scorpion",
+  "centipede",
+  "gaboon-viper",
+  "tasmanian-devil",
+  "crocodile",
+  "alligator",
+  "komodo-dragon",
+
+  "secretary-bird",
+  "owl",
+  "eagle",
+  "hawk",
   "wolf",
   "coyote",
   "spotted-hyena",
@@ -26,8 +48,11 @@ export interface NaturalHunterProfile {
   revision: string;
   speed: number;
   chaseSpeed: number;
+  /** Optional natural clearing prey; ordinary hunters retain their rabbit companions. */
+  preySpecies?: FaunaSpecies;
   weight: number;
   callKind: CreatureCallKind;
+  fierce?: FierceBehaviorProfile;
   size: number;
   anchorY: number;
   body: readonly [number, number, number];
@@ -243,4 +268,10 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
     },
   },
   ...SMALL_GROUND_HUNTER_PROFILES,
+  ...RAPTOR_PROFILES,
+  ...SECRETARY_BIRD_PROFILES,
+  ...REPTILE_HUNTER_PROFILES,
+  ...LEGLESS_LAND_HUNTER_PROFILES,
+  ...GROUND_ARTHROPOD_HUNTER_PROFILES,
+  ...FOREST_HUNTER_PROFILES,
 ];

@@ -1,0 +1,17 @@
+{
+  "identity": "orangutan-roster-v3-pixels-01",
+  "poses": 196,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.2256708145141602,
+    "up": 1.2256736755371094,
+    "left": 1.4047164916992188,
+    "right": 1.4047164916992188
+  },
+  "rootTravelPixelsPerCycle": 17.92,
+  "chaseRootTravelPixelsPerCycle": 17.92
+}

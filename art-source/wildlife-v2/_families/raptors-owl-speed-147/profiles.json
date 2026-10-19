@@ -1,0 +1,56 @@
+{
+  "owl": {
+    "label": "Tawny owl",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "coreRadii": [
+      0.42,
+      0.4,
+      0.52
+    ],
+    "bodyZ": 1.0,
+    "headY": 0.43,
+    "headZ": 1.62,
+    "headRadii": [
+      0.41,
+      0.32,
+      0.36
+    ],
+    "wingLength": 1.15,
+    "hipX": 0.18,
+    "hipY": -0.06,
+    "footX": 0.2,
+    "hindFootX": 0.2,
+    "legLengths": [
+      0.35,
+      0.4,
+      0.3
+    ],
+    "hindLengths": [
+      0.35,
+      0.4,
+      0.3
+    ],
+    "speed": 10,
+    "chaseSpeed": 40,
+    "motionMs": 40,
+    "motionClip": "walk",
+    "walkStride": 1.28,
+    "stance": 0.68,
+    "exampleDistance": 22,
+    "palette": {
+      "B": "#806148",
+      "H": "#ae8e63",
+      "C": "#cbb389",
+      "M": "#967851",
+      "N": "#242a2b",
+      "E": "#d8b75d",
+      "K": "#242a2b",
+      "T": "#ab9260",
+      "R": "#ede0b8"
+    }
+  }
+}

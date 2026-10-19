@@ -1,0 +1,13 @@
+{
+  "identity": "crocodile-roster-v3-pixels-01",
+  "palette": {
+    "K": "#26302c",
+    "B": "#657653",
+    "H": "#8a9565",
+    "C": "#c8bf8d",
+    "M": "#3c4e38",
+    "E": "#c4a25b",
+    "N": "#182523"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

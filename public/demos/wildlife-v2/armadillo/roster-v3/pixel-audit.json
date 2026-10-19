@@ -1,0 +1,17 @@
+{
+  "identity": "armadillo-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.711536151813597,
+    "up": 1.620270270270268,
+    "left": 1.7976827094474146,
+    "right": 1.7976827094474146
+  },
+  "rootTravelPixelsPerCycle": 10.24,
+  "plantedTravel": true
+}

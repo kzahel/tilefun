@@ -1,0 +1,238 @@
+{
+  "ocean-sunfish": {
+    "label": "Ocean sunfish",
+    "canvas": 112,
+    "anchor": [
+      56,
+      84
+    ],
+    "bodyCenter": [
+      0,
+      -0.08,
+      1.9
+    ],
+    "bodyRadii": [
+      0.36,
+      1.25,
+      1.38
+    ],
+    "headPosition": [
+      0,
+      1.0,
+      2.0
+    ],
+    "headRadii": [
+      0.32,
+      0.4,
+      0.49
+    ],
+    "tailRoot": [
+      0,
+      -1.22,
+      1.9
+    ],
+    "tailLengths": [
+      0.11,
+      0.12,
+      0.1
+    ],
+    "tailRadius": 0.26,
+    "tailPlane": "vertical",
+    "flukeStyle": "clavus",
+    "flukeWidth": 0.7,
+    "fauna": true,
+    "speed": 10,
+    "swimMs": 50,
+    "chaseMs": 20,
+    "finReach": 0.42,
+    "finPivots": [],
+    "heave": 0.12,
+    "palette": {
+      "B": "#839a9a",
+      "H": "#a9bfba",
+      "W": "#d5d7c1",
+      "K": "#252e35",
+      "M": "#343340",
+      "E": "#e7d9ad",
+      "T": "#f0e8c4",
+      "G": "#aaab7a"
+    }
+  },
+  "swordfish": {
+    "label": "Swordfish",
+    "canvas": 128,
+    "anchor": [
+      64,
+      88
+    ],
+    "bodyCenter": [
+      0,
+      0,
+      1.15
+    ],
+    "bodyRadii": [
+      0.56,
+      1.75,
+      0.6
+    ],
+    "headPosition": [
+      0,
+      1.52,
+      1.15
+    ],
+    "headRadii": [
+      0.48,
+      0.52,
+      0.45
+    ],
+    "tailRoot": [
+      0,
+      -1.55,
+      1.15
+    ],
+    "tailLengths": [
+      0.55,
+      0.6,
+      0.55
+    ],
+    "tailRadius": 0.32,
+    "tailPlane": "vertical",
+    "flukeStyle": "fork",
+    "flukeWidth": 0.7,
+    "fauna": false,
+    "speed": 24,
+    "swimMs": 40,
+    "chaseMs": 20,
+    "finReach": 0.9,
+    "finPivots": [],
+    "heave": 0.12,
+    "palette": {
+      "B": "#496a7f",
+      "H": "#789fae",
+      "W": "#c6d4cd",
+      "K": "#252e35",
+      "M": "#343340",
+      "E": "#e7d9ad",
+      "T": "#f0e8c4",
+      "G": "#aaab7a"
+    }
+  },
+  "pufferfish": {
+    "label": "Pufferfish",
+    "canvas": 80,
+    "anchor": [
+      40,
+      60
+    ],
+    "bodyCenter": [
+      0,
+      0,
+      1.18
+    ],
+    "bodyRadii": [
+      0.69,
+      0.85,
+      0.7
+    ],
+    "headPosition": [
+      0,
+      0.64,
+      1.17
+    ],
+    "headRadii": [
+      0.46,
+      0.39,
+      0.44
+    ],
+    "tailRoot": [
+      0,
+      -0.76,
+      1.18
+    ],
+    "tailLengths": [
+      0.11,
+      0.14,
+      0.12
+    ],
+    "tailRadius": 0.22,
+    "tailPlane": "vertical",
+    "flukeStyle": "fan",
+    "flukeWidth": 0.7,
+    "fauna": true,
+    "speed": 10,
+    "swimMs": 50,
+    "chaseMs": 20,
+    "finReach": 0.4,
+    "finPivots": [],
+    "heave": 0.12,
+    "palette": {
+      "B": "#8f8e50",
+      "H": "#c0ba74",
+      "W": "#e0d8a8",
+      "K": "#252e35",
+      "M": "#343340",
+      "E": "#e7d9ad",
+      "T": "#f0e8c4",
+      "G": "#aaab7a"
+    }
+  },
+  "anglerfish": {
+    "label": "Anglerfish",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "bodyCenter": [
+      0,
+      -0.1,
+      1.15
+    ],
+    "bodyRadii": [
+      0.68,
+      0.83,
+      0.68
+    ],
+    "headPosition": [
+      0,
+      0.48,
+      1.18
+    ],
+    "headRadii": [
+      0.64,
+      0.65,
+      0.63
+    ],
+    "tailRoot": [
+      0,
+      -0.85,
+      1.15
+    ],
+    "tailLengths": [
+      0.18,
+      0.22,
+      0.18
+    ],
+    "tailRadius": 0.26,
+    "tailPlane": "vertical",
+    "flukeStyle": "fan",
+    "flukeWidth": 0.7,
+    "fauna": false,
+    "speed": 10,
+    "swimMs": 40,
+    "chaseMs": 20,
+    "finReach": 0.5,
+    "finPivots": [],
+    "heave": 0.12,
+    "palette": {
+      "B": "#685866",
+      "H": "#958497",
+      "W": "#c8bfaa",
+      "K": "#252e35",
+      "M": "#343340",
+      "E": "#e7d9ad",
+      "T": "#f0e8c4",
+      "G": "#aaab7a"
+    }
+  }
+}

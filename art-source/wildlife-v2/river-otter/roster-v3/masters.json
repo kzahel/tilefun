@@ -1,0 +1,14 @@
+{
+  "identity": "river-otter-roster-v3-pixels-01",
+  "palette": {
+    "B": "#77614a",
+    "H": "#9b8060",
+    "C": "#d0ba90",
+    "M": "#493e31",
+    "K": "#343832",
+    "E": "#d1b98b",
+    "N": "#26302b",
+    "T": "#dbd1b7"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

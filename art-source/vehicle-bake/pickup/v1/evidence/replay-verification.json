@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "byteIdentical": true,
+  "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "atlasSha256": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102",
+  "recipeSha256": "74db2f17912a4abeee28942bcf2fdfe9d131115817f3e2cf6d008c1b329ca8c9",
+  "invokedBuilder": "art-source/vehicle-bake/pickup/v1/build.py",
+  "inputHashes": {
+    "art-source/vehicle-bake/pickup/v1/build.py": "f138ad6930c9db48c5f605cbc84c5cc963aae2a4eb76a7a38e7c9183e2b5268e",
+    "art-source/vehicle-bake/pickup/v1/family.json": "4e2c4ddb97d039172f856dfae4c5f483cef470299d7ecc74470b2e592d66975f",
+    "art-source/vehicle-bake/pickup/v1/coverage-region.json": "81ba13760858bd2017c6456c58e62fa23327d47f8fccf7913d8cc4e46568677e",
+    "art-source/vehicle-bake/pickup/v1/review.json": "167b39140dd5c5208701d268a92562b7dce88e3d646390956343e4760b8616b7"
+  },
+  "sharedInputHashes": {
+    "scripts/vehicle-bake/catalog.py": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f",
+    "scripts/vehicle-bake/clearance.py": "f6679244ac163de01c849708b116628c0c54930f6a748c9e89107ffe15fbca31",
+    "scripts/vehicle-bake/coverage.py": "a84547c625442cc3fb88a58e7e1701887dc03c334e82573390e9cc4d9d414e10",
+    "scripts/vehicle-bake/family-viewer.mjs": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d",
+    "scripts/vehicle-bake/family-build.mjs": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191",
+    "scripts/vehicle-bake/family-capture.mjs": "35aa17ee05f71602f118e40e4dd8938d7036ff858ae2159ad8c65b25e689d337",
+    "scripts/vehicle-bake/family-package.py": "d192e5573b18d036cb7c99bcaac2fd3caf117ec83a95951e5231a8fd8bcb1090",
+    "scripts/authored-assets/runtime/wheel-rig.mjs": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9"
+  },
+  "scratchInputDependencies": [],
+  "blender": "5.2.2 LTS d13f752e3b9c; factory startup; background; 4 threads; python exit code 1",
+  "meaning": "Retained builder/config only plus declared repository helpers; scratch contains outputs only. GLB, atlas and recipe replay exactly. Packed scene bytes are retained, not asserted deterministic across saves."
+}

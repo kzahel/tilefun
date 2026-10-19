@@ -1,0 +1,1894 @@
+{
+  "identity": "wildlife-autonomous-147",
+  "authorization": "Owner: make more animals from the list for the next eight hours, committing each and ensuring visibility in the lab; good now proceed (2026-10-19).",
+  "startedUtc": "2026-10-19T11:06:24Z",
+  "deadlineUtc": "2026-10-19T19:06:24Z",
+  "state": "active",
+  "allowNewAnimals": true,
+  "supersedes": "Historical expansion and sequencing holds for this explicit timed continuation; registered banks and human review remain immutable.",
+  "previousRun": "art-source/wildlife-v2/autonomous-140.json",
+  "tactical": "147-wildlife-continuation.md",
+  "tasks": {
+    "fox": {
+      "name": "Red fox",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "rabbit": {
+      "name": "Rabbit",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "pilot-v1"
+    },
+    "elephant": {
+      "name": "African elephant",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "giraffe": {
+      "name": "Giraffe",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": null
+    },
+    "mallard-duck": {
+      "name": "Mallard duck",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "robin": {
+      "name": "European robin",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "draft-v2"
+    },
+    "fish": {
+      "name": "Pond fish",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "draft-v2"
+    },
+    "butterfly": {
+      "name": "Butterfly",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "ant": {
+      "name": "Ant",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "draft-v2"
+    },
+    "king-cobra": {
+      "name": "King cobra",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "frog": {
+      "name": "Frog",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "gorilla": {
+      "name": "Gorilla",
+      "family": "Primates",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "kangaroo": {
+      "name": "Kangaroo",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "crab": {
+      "name": "Crab",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "octopus": {
+      "name": "Octopus",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "penguin": {
+      "name": "Penguin",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "harbor-seal": {
+      "name": "Harbor seal",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "manta-ray": {
+      "name": "Manta ray",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "draft-v1"
+    },
+    "jellyfish": {
+      "name": "Jellyfish",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cat": {
+      "name": "Cat",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "dog": {
+      "name": "Dog",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "red-squirrel": {
+      "name": "Red squirrel",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bear": {
+      "name": "Brown bear",
+      "family": "Bears",
+      "state": "already-completed",
+      "revision": "hunt-v1"
+    },
+    "deer": {
+      "name": "White-tailed deer",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "cow": {
+      "name": "Cow",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "sheep": {
+      "name": "Sheep",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "horse": {
+      "name": "Horse",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": null
+    },
+    "piglet": {
+      "name": "Pig",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "goat": {
+      "name": "Goat",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "motion-v2"
+    },
+    "chicken": {
+      "name": "Chicken",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bee": {
+      "name": "Bee",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "ladybug": {
+      "name": "Ladybug",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "owl": {
+      "name": "Owl",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v4",
+      "startedUtc": "2026-10-19T11:22:00Z",
+      "detail": "Registered roster-v3 anatomy preserved; new exact chase cadence reaches 40px/s instead of matching rabbit speed. Rechecking source replay and actual hunting.",
+      "completedUtc": "2026-10-19T11:49:51Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/owl/roster-v4/receipt.json",
+      "evidence": "Source fixed-volume links, planted source travel and eighth-pose geometry audited. Native/3x playback + byte-identical replay. Natural source-origin meals and durable birth queues; shared aerial flight, reload, interrupted landing and native perch checks. Real Canvas/GPU Worker scenes, browser action/swoop/feed and natural-world editor deletion pass."
+    },
+    "sea-turtle": {
+      "name": "Green sea turtle",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gecko": {
+      "name": "Tokay gecko",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wolf": {
+      "name": "Wolf",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "donkey": {
+      "name": "Donkey",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "mule": {
+      "name": "Mule",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wild-turkey": {
+      "name": "Wild turkey",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "llama": {
+      "name": "Llama",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "alpaca": {
+      "name": "Alpaca",
+      "family": "Farm & livestock",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hamster": {
+      "name": "Hamster",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "guinea-pig": {
+      "name": "Guinea pig",
+      "family": "Domestic pets",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "parrot": {
+      "name": "Scarlet macaw",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "coyote": {
+      "name": "Coyote",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "spotted-hyena": {
+      "name": "Spotted hyena",
+      "family": "Canids (wild)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "lion": {
+      "name": "Lion",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": null
+    },
+    "tiger": {
+      "name": "Tiger",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": null
+    },
+    "jaguar": {
+      "name": "Jaguar",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "leopard": {
+      "name": "Leopard",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cheetah": {
+      "name": "Cheetah",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "lynx": {
+      "name": "Eurasian lynx",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bobcat": {
+      "name": "Bobcat",
+      "family": "Felids (big cats)",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "panda": {
+      "name": "Panda",
+      "family": "Bears",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "polar-bear": {
+      "name": "Polar bear",
+      "family": "Bears",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "moose": {
+      "name": "Moose",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "elk": {
+      "name": "Elk",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "zebra": {
+      "name": "Zebra",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "rhinoceros": {
+      "name": "White rhinoceros",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hippopotamus": {
+      "name": "Hippo",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "camel": {
+      "name": "Dromedary camel",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "american-bison": {
+      "name": "American bison",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "water-buffalo": {
+      "name": "Water buffalo",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gemsbok-oryx": {
+      "name": "Gemsbok",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gazelle": {
+      "name": "Gazelle",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "impala": {
+      "name": "Impala",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "springbok": {
+      "name": "Springbok",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "saiga-antelope": {
+      "name": "Saiga antelope",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "musk-ox": {
+      "name": "Musk ox",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wildebeest": {
+      "name": "Wildebeest",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "malayan-tapir": {
+      "name": "Tapir",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "okapi": {
+      "name": "Okapi",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "warthog": {
+      "name": "Warthog",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "gerenuk": {
+      "name": "Gerenuk",
+      "family": "Hoofed & large herbivores",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "capuchin-monkey": {
+      "name": "White-faced capuchin",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/capuchin-monkey/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
+    },
+    "chimpanzee": {
+      "name": "Chimpanzee",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:49:51Z",
+      "detail": "New anatomical source prototypes underway; not registered or active. Original gorilla source stays unchanged.",
+      "completedUtc": "2026-10-19T12:20:41.181741Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/chimpanzee/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; fixed-limb, planted-knuckle, body motion and grooming audits; native/3x exact crops; natural world Canvas/GPU motion/startle/save-reload, editor placement/deletion, browser grooming and Watch AI pass. Natural meal lineage retains delayed replacement; manually placed prey remain finite."
+    },
+    "orangutan": {
+      "name": "Orangutan",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:49:51Z",
+      "detail": "New anatomical source prototypes underway; not registered or active. Original gorilla source stays unchanged.",
+      "completedUtc": "2026-10-19T12:20:41.181741Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/orangutan/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; fixed-limb, planted-knuckle, body motion and grooming audits; native/3x exact crops; natural world Canvas/GPU motion/startle/save-reload, editor placement/deletion, browser grooming and Watch AI pass. Natural meal lineage retains delayed replacement; manually placed prey remain finite."
+    },
+    "ring-tailed-lemur": {
+      "name": "Ring-tailed lemur",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/ring-tailed-lemur/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
+    },
+    "mandrill": {
+      "name": "Mandrill",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/mandrill/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
+    },
+    "proboscis-monkey": {
+      "name": "Proboscis monkey",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/proboscis-monkey/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
+    },
+    "japanese-macaque": {
+      "name": "Japanese macaque",
+      "family": "Primates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:02:18.187114Z",
+      "completedUtc": "2026-10-19T12:35:27.596309Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/japanese-macaque/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; source fixed limbs, buried roots, planted travel, connected tail and body transfer audited; native/3x exact crops. Natural Canvas/GPU world motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Source-matched stride/cadence. Explicit prey relationships and natural-versus-placed lineage policy verified."
+    },
+    "mouse": {
+      "name": "Field mouse",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "rat": {
+      "name": "Rat",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "chinchilla": {
+      "name": "Chinchilla",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hedgehog": {
+      "name": "Hedgehog",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "porcupine": {
+      "name": "Porcupine",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "raccoon": {
+      "name": "Raccoon",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "skunk": {
+      "name": "Skunk",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "beaver": {
+      "name": "Beaver",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "bat": {
+      "name": "Bat",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:51:11.315571Z",
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/bat/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
+    },
+    "meerkat": {
+      "name": "Meerkat",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/meerkat/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
+    },
+    "river-otter": {
+      "name": "River otter",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/river-otter/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
+    },
+    "red-panda": {
+      "name": "Red panda",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "sloth": {
+      "name": "Sloth",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/sloth/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "capybara": {
+      "name": "Capybara",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "giant-anteater": {
+      "name": "Giant anteater",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/giant-anteater/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
+    },
+    "aardvark": {
+      "name": "Aardvark",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/aardvark/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
+    },
+    "armadillo": {
+      "name": "Armadillo",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/armadillo/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
+    },
+    "pangolin": {
+      "name": "Pangolin",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:31:14.286425Z",
+      "completedUtc": "2026-10-19T13:16:05.475390Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/pangolin/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; buried four-link limbs, planted travel, linked tails and moving body paint; closed armadillo bands/pangolin scales audited. Natural Canvas/GPU motion/startle/save-reload, editor placement/deletion and browser foraging/Watch AI pass. Explicit prey relationships preserve natural/placed lineage."
+    },
+    "mongoose": {
+      "name": "Mongoose",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "binturong": {
+      "name": "Binturong",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/binturong/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "honey-badger": {
+      "name": "Honey badger",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "fossa": {
+      "name": "Fossa",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "aye-aye": {
+      "name": "Aye-aye",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/aye-aye/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "white-nosed-coati": {
+      "name": "White-nosed coati",
+      "family": "Small & exotic mammals",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "kinkajou": {
+      "name": "Kinkajou",
+      "family": "Small & exotic mammals",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/kinkajou/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "koala": {
+      "name": "Koala",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "wallaby": {
+      "name": "Wallaby",
+      "family": "Marsupials & monotremes",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:53:49.288457Z",
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/wallaby/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
+    },
+    "wombat": {
+      "name": "Wombat",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "opossum": {
+      "name": "Opossum",
+      "family": "Marsupials & monotremes",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/opossum/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "tasmanian-devil": {
+      "name": "Tasmanian devil",
+      "family": "Marsupials & monotremes",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/tasmanian-devil/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "platypus": {
+      "name": "Platypus",
+      "family": "Marsupials & monotremes",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/platypus/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
+    },
+    "echidna": {
+      "name": "Echidna",
+      "family": "Marsupials & monotremes",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:42:39.458554Z",
+      "progress": "Natural worlds, placement, foraging or terrestrial hunting, lab motion and persistence verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/echidna/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:44:48.576472Z",
+      "evidence": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    "quokka": {
+      "name": "Quokka",
+      "family": "Marsupials & monotremes",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "toucan": {
+      "name": "Toucan",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "great-hornbill": {
+      "name": "Great hornbill",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "eagle": {
+      "name": "Eagle",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:22:00Z",
+      "completedUtc": "2026-10-19T11:49:51Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/eagle/roster-v3/receipt.json",
+      "evidence": "Source fixed-volume links, planted source travel and eighth-pose geometry audited. Native/3x playback + byte-identical replay. Natural source-origin meals and durable birth queues; shared aerial flight, reload, interrupted landing and native perch checks. Real Canvas/GPU Worker scenes, browser action/swoop/feed and natural-world editor deletion pass."
+    },
+    "hawk": {
+      "name": "Hawk",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:22:00Z",
+      "completedUtc": "2026-10-19T11:49:51Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/hawk/roster-v3/receipt.json",
+      "evidence": "Source fixed-volume links, planted source travel and eighth-pose geometry audited. Native/3x playback + byte-identical replay. Natural source-origin meals and durable birth queues; shared aerial flight, reload, interrupted landing and native perch checks. Real Canvas/GPU Worker scenes, browser action/swoop/feed and natural-world editor deletion pass."
+    },
+    "pigeon": {
+      "name": "Pigeon",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "dove": {
+      "name": "Dove",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "raven": {
+      "name": "Raven",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:06:24Z",
+      "completedUtc": "2026-10-19T11:20:05Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/raven/roster-v3/receipt.json",
+      "evidence": "Byte-identical ten-artifact source replay; 328 exact native/3x crops; connected fixed-volume wing/leg audits; world/editor and real Worker lab Canvas/GPU flight, pause/reload and finite manual deaths; browser Watch AI visibility."
+    },
+    "crow": {
+      "name": "Crow",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:06:24Z",
+      "completedUtc": "2026-10-19T11:20:05Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/crow/roster-v3/receipt.json",
+      "evidence": "Byte-identical ten-artifact source replay; 328 exact native/3x crops; connected fixed-volume wing/leg audits; world/editor and real Worker lab Canvas/GPU flight, pause/reload and finite manual deaths; browser Watch AI visibility."
+    },
+    "flamingo": {
+      "name": "Flamingo",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/flamingo/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    "shoebill": {
+      "name": "Shoebill",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/shoebill/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    "pelican": {
+      "name": "Pelican",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/pelican/roster-v3/receipt.json"
+    },
+    "blue-footed-booby": {
+      "name": "Blue-footed booby",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/blue-footed-booby/roster-v3/receipt.json"
+    },
+    "sparrow": {
+      "name": "Sparrow",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "peacock": {
+      "name": "Peacock",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "ostrich": {
+      "name": "Ostrich",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "emu": {
+      "name": "Emu",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cassowary": {
+      "name": "Cassowary",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "kiwi": {
+      "name": "Kiwi",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "secretary-bird": {
+      "name": "Secretary bird",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/secretary-bird/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    "marabou-stork": {
+      "name": "Marabou stork",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/marabou-stork/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    "kakapo": {
+      "name": "Kakapo",
+      "family": "Birds",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "great-blue-heron": {
+      "name": "Great blue heron",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:16:05.475390Z",
+      "progress": "Shared world, placement, animation, AI and persistence verified. Registered exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/great-blue-heron/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T13:44:21.871484Z",
+      "evidence": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    "atlantic-puffin": {
+      "name": "Atlantic puffin",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T11:06:24Z",
+      "completedUtc": "2026-10-19T11:20:05Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/atlantic-puffin/roster-v3/receipt.json",
+      "evidence": "Byte-identical ten-artifact source replay; 328 exact native/3x crops; connected fixed-volume wing/leg audits; world/editor and real Worker lab Canvas/GPU flight, pause/reload and finite manual deaths; browser Watch AI visibility."
+    },
+    "ruby-throated-hummingbird": {
+      "name": "Ruby-throated hummingbird",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/ruby-throated-hummingbird/roster-v3/receipt.json"
+    },
+    "great-frigatebird": {
+      "name": "Great frigatebird",
+      "family": "Birds",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:53:52.325320Z",
+      "progress": "Active shared dry-ground flight, natural homes, explicit larger-hunter prey, placement and lab browser verified; source bank registered and pending human review.",
+      "completedUtc": "2026-10-19T13:30:46.161417Z",
+      "evidence": [
+        "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+      ],
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/great-frigatebird/roster-v3/receipt.json"
+    },
+    "ocean-sunfish": {
+      "name": "Ocean sunfish",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:13:37.975156Z",
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/ocean-sunfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
+    },
+    "swordfish": {
+      "name": "Swordfish",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:13:37.975156Z",
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/swordfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
+    },
+    "pufferfish": {
+      "name": "Pufferfish",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:13:37.975156Z",
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/pufferfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
+    },
+    "shark": {
+      "name": "Shark",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "hammerhead-shark": {
+      "name": "Hammerhead shark",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "whale-shark": {
+      "name": "Whale shark",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "dolphin": {
+      "name": "Dolphin",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "orca": {
+      "name": "Orca",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "humpback-whale": {
+      "name": "Humpback whale",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "blue-whale": {
+      "name": "Blue whale",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "narwhal": {
+      "name": "Narwhal",
+      "family": "Marine & aquatic",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cuttlefish": {
+      "name": "Cuttlefish",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/cuttlefish/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    },
+    "coconut-crab": {
+      "name": "Coconut crab",
+      "family": "Marine & aquatic",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+    },
+    "horseshoe-crab": {
+      "name": "Horseshoe crab",
+      "family": "Marine & aquatic",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+    },
+    "seahorse": {
+      "name": "Seahorse",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/seahorse/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    },
+    "starfish": {
+      "name": "Starfish",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/starfish/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    },
+    "lobster": {
+      "name": "Lobster",
+      "family": "Marine & aquatic",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+    },
+    "shrimp": {
+      "name": "Shrimp",
+      "family": "Marine & aquatic",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+    },
+    "mantis-shrimp": {
+      "name": "Mantis shrimp",
+      "family": "Marine & aquatic",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:27:49.991294Z",
+      "progress": "Unregistered original crustacean/chelicerate source authoring; not runtime active."
+    },
+    "nautilus": {
+      "name": "Nautilus",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/nautilus/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    },
+    "sea-lion": {
+      "name": "Sea lion",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/sea-lion/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
+    },
+    "manatee": {
+      "name": "Manatee",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:49:27.849725Z",
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/manatee/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
+    },
+    "dugong": {
+      "name": "Dugong",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:49:27.852257Z",
+      "progress": "Shared world, placement, locomotion, foraging, escape, lab motion and durable origin verified; exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/dugong/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:57:34.921650Z",
+      "evidence": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
+    },
+    "walrus": {
+      "name": "Walrus",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:33:02.243756Z",
+      "progress": "Natural shore homes, placement, amphibious walk/swim/forage/escape, lab motion and durable origin verified; active fishing future work. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/walrus/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:12:45.024132Z",
+      "evidence": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
+    },
+    "anglerfish": {
+      "name": "Anglerfish",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T12:13:37.975156Z",
+      "completedUtc": "2026-10-19T12:55:53.418573Z",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/anglerfish/roster-v3/receipt.json",
+      "evidence": "Ten-artifact byte-identical replay; closed source volumes, connected fins, fixed tail links and matching source animation clocks audited; native/3x exact crops. Natural deep-water generation, shared hunting for swordfish/anglerfish, Canvas/GPU motion/contact/save-reload, editor placement/deletion and browser actions/Watch AI pass. Explicit directed diets and natural-versus-placed replacement lineage verified."
+    },
+    "leafy-seadragon": {
+      "name": "Leafy seadragon",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:07:46.919480Z",
+      "progress": "Distinct marine anatomy, attached fixed appendages, moving painted bodies, legal seeded deep-water homes, placement/browser AI and natural-only meal replacement verified.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/leafy-seadragon/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T16:22:35.349059Z",
+      "evidence": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    },
+    "moray-eel": {
+      "name": "Moray eel",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/moray-eel/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    "electric-eel": {
+      "name": "Electric eel",
+      "family": "Marine & aquatic",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/electric-eel/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    "gaboon-viper": {
+      "name": "Gaboon viper",
+      "family": "Reptiles & amphibians",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/gaboon-viper/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    "iguana": {
+      "name": "Iguana",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "chameleon": {
+      "name": "Chameleon",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "pond-turtle": {
+      "name": "Pond turtle",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "land-tortoise": {
+      "name": "Land tortoise",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "crocodile": {
+      "name": "Crocodile",
+      "family": "Reptiles & amphibians",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:26:00Z",
+      "evidence": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged.",
+      "progress": "Connected terrestrial hunting and world/editor/lab visibility verified. Swimming is future work; exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/crocodile/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:33:02.243756Z"
+    },
+    "alligator": {
+      "name": "Alligator",
+      "family": "Reptiles & amphibians",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:26:00Z",
+      "evidence": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged.",
+      "progress": "Connected terrestrial hunting and world/editor/lab visibility verified. Swimming is future work; exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/alligator/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:33:02.243756Z"
+    },
+    "komodo-dragon": {
+      "name": "Komodo dragon",
+      "family": "Reptiles & amphibians",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T13:26:00Z",
+      "evidence": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged.",
+      "progress": "Connected terrestrial hunting and world/editor/lab visibility verified. Swimming is future work; exact pixels pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/komodo-dragon/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T14:33:02.243756Z"
+    },
+    "salamander": {
+      "name": "Fire salamander",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "newt": {
+      "name": "Newt",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "axolotl": {
+      "name": "Axolotl",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "frilled-neck-lizard": {
+      "name": "Frilled-neck lizard",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "texas-horned-lizard": {
+      "name": "Texas horned lizard",
+      "family": "Reptiles & amphibians",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "dragonfly": {
+      "name": "Dragonfly",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "spider": {
+      "name": "Spider",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/spider/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "stag-beetle": {
+      "name": "Stag beetle",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "grasshopper": {
+      "name": "Grasshopper",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "cricket": {
+      "name": "Cricket",
+      "family": "Insects & arthropods",
+      "state": "already-completed",
+      "revision": "roster-v2"
+    },
+    "praying-mantis": {
+      "name": "Praying mantis",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/praying-mantis/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "leaf-insect": {
+      "name": "Leaf insect",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/leaf-insect/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "scorpion": {
+      "name": "Scorpion",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/scorpion/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "roly-poly": {
+      "name": "Pill bug",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/roly-poly/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "earwig": {
+      "name": "Earwig (pincher bug)",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/earwig/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "centipede": {
+      "name": "Centipede",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/centipede/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "millipede": {
+      "name": "Millipede",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:41:32.624769Z",
+      "progress": "Species-correct anatomy, planted linked limbs, seeded owners, editor/lab visibility, directed hunting or forage/escape and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/millipede/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:59:09.736607Z",
+      "evidence": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    "snail": {
+      "name": "Snail",
+      "family": "Insects & arthropods",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/snail/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    "worm": {
+      "name": "Earthworm",
+      "family": "Other invertebrates",
+      "state": "finished-game-active",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T14:49:08.323468Z",
+      "progress": "Closed linked bodies, natural world ownership, placement, shared AI, lab motion and durable origin verified. Exact art pending human review.",
+      "gameplay": true,
+      "humanReview": "pending",
+      "receipt": "art-source/wildlife-v2/worm/roster-v3/receipt.json",
+      "completedUtc": "2026-10-19T15:34:58.978529Z",
+      "evidence": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    "elephant-upright": {
+      "name": "Upright elephant",
+      "family": "Hoofed & large herbivores",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:45:11.685641Z",
+      "progress": "Unregistered original upright companion source authoring; not runtime active."
+    },
+    "giraffe-upright": {
+      "name": "Upright giraffe",
+      "family": "Hoofed & large herbivores",
+      "state": "in-progress",
+      "historicalState": "queued",
+      "revision": "roster-v3",
+      "startedUtc": "2026-10-19T15:45:11.685641Z",
+      "progress": "Unregistered original upright companion source authoring; not runtime active."
+    }
+  },
+  "checkpoints": [
+    {
+      "utc": "2026-10-19T11:20:05Z",
+      "completed": [
+        "raven",
+        "crow",
+        "atlantic-puffin"
+      ],
+      "validation": "Typecheck/lint/build and streaming readiness pass. 20 browser cases pass, including all 135 entries in four facings (540 previews). Three byte-identical replays and 984 exact source crops. Full units: 4456 passed, 6 failed, 10 skipped; new authored-crow registration adds one legitimate roadkill type, fixed stale 12-type expectation; all 30 focused bird/roadkill tests then pass, leaving five known Windows symlink/WAL failures. Isolated wildlife-only build and 1406-candidate full Chromium manifest pass."
+    },
+    {
+      "utc": "2026-10-19T11:49:51Z",
+      "completed": [
+        "owl",
+        "eagle",
+        "hawk"
+      ],
+      "validation": "4544 unit passes, five known Windows failures and ten skipped. All388focused hunting/source/audio checks pass. 27 real Canvas/GPU lab/game browser cases pass, including 552 browser previews. Four ten-artifact byte-identical source banks and 3872 exact native/3x crops (owl-v3 preserved; owl-v4 active with corrected hunt cadence). Typecheck, isolated lint/build and 1423-candidate full Chromium manifest pass; streaming --assert-ready passes from main checkout."
+    },
+    {
+      "utc": "2026-10-19T12:20:41.181741Z",
+      "completed": [
+        "chimpanzee",
+        "orangutan"
+      ],
+      "validation": "4580 unit passes, five known Windows failures and ten skipped;1170 focused ape/ecology checks and109 codec/scenario checks pass. 19 browser cases (16 ape/browser plus3 real P2P host/join/fragment/recovery),560 visible animated previews. Two ten-artifact byte-identical banks and784 exact native/3x crops. Typecheck/lint/build/streaming pass. Registry crossed256 types; widened baseline type indices to u16 with frame tag0x04 and explicit legacy rejection. Final combined manifest preserves schoolbus edbb5bda."
+    },
+    {
+      "utc": "2026-10-19T12:35:27.596309Z",
+      "completed": [
+        "capuchin-monkey",
+        "ring-tailed-lemur",
+        "mandrill",
+        "proboscis-monkey",
+        "japanese-macaque"
+      ],
+      "validation": "4665 unit passes, five known Windows failures and ten skipped;120 focused source/ecology/codec/authority checks;31 real Canvas/GPU browser cases including580 visible previews. Five ten-artifact byte-identical banks and1640 exact native/3x crops. Typecheck, isolated lint/build and1459candidate full Chromium manifest pass. All eight roster primates implemented; tree climbing/brachiation remain future work."
+    },
+    {
+      "utc": "2026-10-19T12:55:53.418573Z",
+      "completed": [
+        "ocean-sunfish",
+        "swordfish",
+        "pufferfish",
+        "anglerfish"
+      ],
+      "validation": "4718 unit passes, five known Windows failures and ten skipped;116 focused source/ecology/codec/body/real-lagoon hunt and reload checks.32 distinct browser cases across22 new-fish/browser cases and all14 aquatic regressions (4 overlap);596 visible previews. Four ten-artifact byte-identical banks and1952 exact native/3x crops. Typecheck/isolated lint/build and1479candidate full Chromium manifest pass. Generic aquatic test anchors follow source dimensions and meal counts follow delayed replacements."
+    },
+    {
+      "utc": "2026-10-19T13:16:05.475390Z",
+      "completed": [
+        "meerkat",
+        "giant-anteater",
+        "aardvark",
+        "armadillo",
+        "pangolin"
+      ],
+      "validation": "4803 unit passes, five known Windows failures and ten skipped;120 focused source/ecology/codec/authority checks;31 real Canvas/GPU browser cases and616 visible previews. Five ten-artifact byte-identical banks and1640 exact native/3x crops. Typecheck/isolated lint/build and1504candidate full Chromium manifest pass. Grounded walking/foraging; curling, burrowing and sentinel rearing remain future work."
+    },
+    {
+      "utc": "2026-10-19T13:30:33.385566Z",
+      "completed": [
+        "pelican",
+        "blue-footed-booby",
+        "great-frigatebird",
+        "ruby-throated-hummingbird"
+      ],
+      "validation": "4871 unit passes, five known Windows failures and ten skipped;60 focused source/ecology/body/authority checks;26 real Canvas/GPU browser cases and632 visible previews. Four ten-artifact byte-identical banks and1312 exact native/3x crops. Typecheck, isolated lint/build and1524-candidate full Chromium manifest pass. Bounded landing-to-landing flights on dry ground; swimming and sustained hovering remain future work."
+    },
+    {
+      "utc": "2026-10-19T13:44:21.871484Z",
+      "completed": [
+        "flamingo",
+        "shoebill",
+        "secretary-bird",
+        "marabou-stork",
+        "great-blue-heron"
+      ],
+      "validation": "Full units:4958 passed, five known Windows failures plus one stale four-foot/same-stride hunter assertion. Corrected source checks pass all17 hunter banks; all52 source/ecology regression cases covered passing across corrected runs.75 new-family focused checks and32 real Canvas/GPU browser cases pass, including652 visible previews. Five byte-identical ten-artifact replays and1960 exact native/3x crops. Typecheck, isolated lint/build,1549-candidate full Chromium manifest and streaming --assert-ready pass. Secretary hunts actual cobra prey and preserves its natural queue on reload; other four use ground walking/foraging, with wading and flight future work."
+    },
+    {
+      "utc": "2026-10-19T14:33:02.243756Z",
+      "completed": [
+        "crocodile",
+        "alligator",
+        "komodo-dragon"
+      ],
+      "validation": "5023 full-unit passes, five known Windows failures plus one food-web traversal timeout corrected with memoized DAG visitation; all five food-web checks then pass.54 focused source/hunt/lineage cases and18 browser cases pass, including664 visible previews, real fleeing-prey catches, ordinary world placement/deletion and meal reload in Canvas/GPU. Three byte-identical ten-artifact replays and1944 exact native/3x crops. Typecheck, isolated lint/build and1565-candidate full Chromium manifest pass; all three vehicle review records unchanged."
+    },
+    {
+      "utc": "2026-10-19T14:44:48.576472Z",
+      "completed": [
+        "sloth",
+        "binturong",
+        "aye-aye",
+        "kinkajou",
+        "opossum",
+        "echidna",
+        "tasmanian-devil"
+      ],
+      "validation": "5144 full-unit passes, five known Windows failures and ten skips.90 focused source/food-web/lineage/ecology cases pass.40 distinct browser cases and692 visible previews pass across the initial run and corrected two sloth cases; the fixed 12-second wait now scales to slow species cadence (real walking began after14s). Seven ten-artifact byte-identical source replays and2616 exact native/3x crops. Typecheck, isolated lint/build and1600-candidate normal Chromium inventory pass. All exact art pending review; shared ground behavior only, climbing future work."
+    },
+    {
+      "utc": "2026-10-19T14:57:34.921650Z",
+      "completed": [
+        "bat",
+        "wallaby",
+        "manatee",
+        "dugong"
+      ],
+      "validation": "5208 full-unit passes with five known Windows failures and ten skips.557 focused source/body/food-web checks and30 browser cases pass, including708 visible previews plus wombat regressions. Four ten-artifact byte-identical replays and1312 exact native/3x crops. Typecheck, isolated lint/build and1620-candidate normal Chromium inventory pass. Bat bounded landing-to-landing flights, wallaby physical hops and deep swimming manatee/dugong use shared authority and source-origin replacement. Exact art pending review; roosts/open-air navigation future work."
+    },
+    {
+      "utc": "2026-10-19T15:12:45.024132Z",
+      "completed": [
+        "river-otter",
+        "platypus",
+        "sea-lion",
+        "walrus"
+      ],
+      "validation": "5270 full-unit passes with five known Windows failures and ten skips.160 distinct focused cases pass across the initial water/food-web run and corrected source/birth run.40 browser cases pass (26 shore cases plus14 aquatic hunter regressions), including724 visible previews. Four ten-artifact byte-identical replays and2336 exact native/3x crops. Typecheck, isolated lint/build,1640-candidate normal Chromium manifest and streaming --assert-ready pass.558 pre-existing natural actor records around all four refuges are byte-identical. Shared births now allow amphibious wet/dry habitats, initialize water pose and require complete deep-fauna water footprints. Exact art pending review; active fishing future work."
+    },
+    {
+      "utc": "2026-10-19T15:34:58.978529Z",
+      "completed": [
+        "gaboon-viper",
+        "snail",
+        "worm",
+        "moray-eel",
+        "electric-eel"
+      ],
+      "validation": "5345 full-unit passes with five known Windows failures and ten skips.49 focused source/food-web/natural-world/lineage cases and28 browser cases pass, including744 visible previews, fleeing mouse prey, both lagoon hunts, placement/deletion and persisted meals. Five ten-artifact byte-identical replays and2600 exact native/3x crops. Typecheck, isolated lint/build,1665-candidate normal Chromium inventory and streaming --assert-ready pass. Optional configured clearing prey supports small hunters while original rabbit defaults and fixed banks remain. Exact art pending review; electrical discharge/burrowing future work. Latest inbox and art notes have zero pending requests."
+    },
+    {
+      "utc": "2026-10-19T15:59:09.736607Z",
+      "completed": [
+        "spider",
+        "praying-mantis",
+        "leaf-insect",
+        "scorpion",
+        "roly-poly",
+        "earwig",
+        "centipede",
+        "millipede"
+      ],
+      "validation": "5486 full-unit passes with five known Windows failures and ten skips.97 focused checks and42 distinct browser cases pass across the initial run and corrected three cases, with776 visible previews. Millipede rest waits now follow species cadence; natural predator discovery queries neighboring chunks when rounded inspection tiles cross a boundary. Eight ten-artifact byte-identical replays and3904 exact native/3x crops. Typecheck, isolated lint/build and1705-candidate normal Chromium inventory pass. Two generated projection JSONs over32MiB are excluded from Biome like existing large cat/dog guides, with dedicated closed-volume/continuous-motion audits retained. Exact art pending review; webs, venom and defensive rolling future work."
+    },
+    {
+      "utc": "2026-10-19T16:22:35.349059Z",
+      "completed": [
+        "cuttlefish",
+        "seahorse",
+        "nautilus",
+        "leafy-seadragon",
+        "starfish"
+      ],
+      "validation": "5557 full-unit passes, five known Windows failures and ten skips; 51 focused checks; 30 real browser cases with 796 visible four-facing previews. Five byte-identical ten-artifact source replays and 1960 exact native/3x crops. Typecheck, isolated lint/build and 1730-candidate normal Chromium inventory pass. Exact art pending human review."
+    }
+  ]
+}

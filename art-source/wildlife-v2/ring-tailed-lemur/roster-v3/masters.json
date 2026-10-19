@@ -1,0 +1,14 @@
+{
+  "identity": "ring-tailed-lemur-roster-v3-pixels-01",
+  "palette": {
+    "B": "#858e89",
+    "H": "#aab1a1",
+    "C": "#e6e0c8",
+    "M": "#514b42",
+    "E": "#d2a65c",
+    "K": "#292d2c",
+    "N": "#252927",
+    "T": "#bf6052"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

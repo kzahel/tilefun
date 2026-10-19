@@ -1,0 +1,17 @@
+{
+  "identity": "leafy-seadragon-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 2.334949539271612,
+    "up": 2.2544242702826836,
+    "left": 2.963926147511984,
+    "right": 1.4356846473029066
+  },
+  "rootTravelPixelsPerCycle": 16.0,
+  "plantedTravel": true
+}

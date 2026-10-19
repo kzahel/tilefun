@@ -17,13 +17,16 @@ describe("explicit creature food web", () => {
       expect(FOOD_WEB.some((r) => r.species === p.species)).toBe(true);
     for (const p of PREDATOR_PROFILES) expect(HUNTING_DIETS).toHaveProperty(p.species);
     const bySpecies = new Map(FOOD_WEB.map((r) => [r.species, r]));
+    const checked = new Set<string>();
     const visit = (species: string, path: string[]) => {
       expect(path, `${path.join(" → ")} → ${species}`).not.toContain(species);
+      if (checked.has(species)) return;
       const row = required(bySpecies.get(species));
       for (const prey of row.eats) {
         expect(required(bySpecies.get(prey)).protected).toBe(false);
         visit(prey, [...path, species]);
       }
+      checked.add(species);
     };
     for (const row of FOOD_WEB) visit(row.species, []);
   });

@@ -1,0 +1,17 @@
+{
+  "identity": "shoebill-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.4902987047316856,
+    "up": 1.5217569786535279,
+    "left": 1.6537646243528599,
+    "right": 1.6537646243528599
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

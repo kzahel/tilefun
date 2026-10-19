@@ -1,0 +1,16 @@
+{
+  "identity": "ocean-sunfish-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.5776524543762207,
+    "up": 1.1355433464050293,
+    "left": 1.9563899040222168,
+    "right": 1.905777931213379
+  },
+  "independentSwimAndChase": false
+}

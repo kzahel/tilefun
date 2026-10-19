@@ -1,0 +1,94 @@
+{
+  "modelSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+  "spriteSha256": "ec42ee8d4653c915bd80fa45ae555b2bec963ac4b52390bace1d054d023948fd",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-school-bus-v1.json": "ab9a9eefd1a470962e5c964e23e5ed8900ea6f3a0c3edaafc4c2e64d86ddeba7",
+    "scripts/vehicle-bake/runtime-export-v2.py": "a29a2b3755d901ac41b095e134de32986c391733e212595dc25ef3f1e5182327",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/school-bus-v1/review-manifest.json": "0ac879788029ae9baedc0c1d24d76bc78c068a69c99b8b5ecd809adc9ad06dae",
+    "public/demos/original-vehicles/school-bus-v1/inputs/model.glb": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "public/demos/original-vehicles/school-bus-v1/inputs/atlas.png": "4acc24dc8810e61b2c8ceabef32b8013394e5f776a5a767c85de1c9e5810562f",
+    "public/demos/original-vehicles/school-bus-v1/captures/capture.json": "031d67289e0c051e21efa5348dd1389a48198622a0066928642dcf3678153043",
+    "art-source/vehicle-bake/school-bus/v1/evidence/replay-verification.json": "fac4b2875ac572ca834c9da008d71e28b359a0e37d721e849d9c1f213c96e0c4",
+    "art-source/vehicle-bake/school-bus/v1/build.py": "ec4384d947c06e86b7bfb3f1c3efa062174b3926c616600bfa775db282d7c48a",
+    "art-source/vehicle-bake/school-bus/v1/family.json": "92911855ed8440577d20a2fbced8bb55c79f9d91f6ea5a90b4dfddd3435b1cf5",
+    "art-source/vehicle-bake/school-bus/v1/coverage-region.json": "8b477c72afab92fdab590426d46c16bcbb9d3af107390d9c942d4dbf4e4cbbab",
+    "art-source/vehicle-bake/school-bus/v1/review.json": "d878d09da118a71e7920c3fa914026b388f5920d8c3f4921f409a9f4a3fdaff3",
+    "public/demos/original-vehicles/school-bus-v1/captures/engine-4.png": "d0d59435df76b5f0ce263dcf8e47a28862c80ff3bc2f70d29c52f105d769942f",
+    "public/demos/original-vehicles/school-bus-v1/captures/engine-12.png": "1b072188c6383892a4880a7c93c62d93f4647491a6d98729cfc296d577b2ed6d",
+    "public/demos/original-vehicles/school-bus-v1/captures/engine-8.png": "f05e45fa2761db3b5c00725f667c8acb8d81791968e972012d1ae69442c1994c",
+    "public/demos/original-vehicles/school-bus-v1/captures/engine-0.png": "8087baa4dd39d00caf748c4b4cfd50488bc8ce7c13ec05e2ca99d7cac35072f4"
+  },
+  "physicalBounds": [
+    122,
+    43,
+    44
+  ],
+  "measurement": {
+    "modelSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -60.95652389526367,
+        -21.39130401611328,
+        0.0
+      ],
+      "max": [
+        60.26087188720703,
+        21.39130401611328,
+        43.130435943603516
+      ],
+      "size": [
+        121.21739196777344,
+        42.78260803222656,
+        43.130435943603516
+      ]
+    },
+    "triangles": 2564,
+    "meshes": 5
+  },
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      224,
+      224
+    ],
+    "groundOrigin": [
+      112,
+      112
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/school-bus/v1/evidence/replay-verification.json",
+    "sha256": "fac4b2875ac572ca834c9da008d71e28b359a0e37d721e849d9c1f213c96e0c4",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v2.py --config scripts/vehicle-bake/runtime-school-bus-v1.json --blender BLENDER"
+}

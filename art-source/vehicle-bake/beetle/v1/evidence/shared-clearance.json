@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "beetle--v1",
+    "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+    "triangles": 2554,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946073013193,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946073013193,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946877043528,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.782609082236107,
+        "minimumGap": 0.9657946877043528,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

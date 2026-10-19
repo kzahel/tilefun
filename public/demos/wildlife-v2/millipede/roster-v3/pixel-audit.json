@@ -1,0 +1,17 @@
+{
+  "identity": "millipede-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.8761467889908232,
+    "up": 1.8761467889908232,
+    "left": 1.7458930201182454,
+    "right": 1.7458930201182454
+  },
+  "rootTravelPixelsPerCycle": 3.84,
+  "plantedTravel": true
+}

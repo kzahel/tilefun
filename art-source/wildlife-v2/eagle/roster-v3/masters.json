@@ -1,0 +1,15 @@
+{
+  "identity": "eagle-roster-v3-pixels-01",
+  "palette": {
+    "B": "#594c40",
+    "H": "#8e7960",
+    "C": "#75624d",
+    "M": "#e6e2cc",
+    "N": "#283034",
+    "E": "#e5c15a",
+    "K": "#283034",
+    "T": "#dcb448",
+    "R": "#ebe5ce"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

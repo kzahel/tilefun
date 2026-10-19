@@ -1,0 +1,13 @@
+{
+  "identity": "manatee-roster-v3-pixels-01",
+  "palette": {
+    "B": "#8b9282",
+    "H": "#a7ad9b",
+    "W": "#c5c7b0",
+    "M": "#455650",
+    "E": "#253d37",
+    "T": "#d8cfb1",
+    "G": "#a0aa8f"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

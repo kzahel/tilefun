@@ -47,6 +47,295 @@ Workshop manifest are regenerated. Next: playtest the new NPC pursuit pacing.
 The production-table refresh cannot run in this checkout: its required local
 `data/wildlife-campaign-v2/progress.json` is absent. The existing table is retained;
 the status command and failure are recorded rather than inventing campaign state.
+## Active eight-hour continuation
+
+Owner authorized another approximately eight hours and said “good now proceed”
+on 2026-10-19. Window: **11:06:24–19:06:24 UTC**.
+[Tactical 147](../tactical/147-wildlife-continuation.md) and its
+[ledger](../../art-source/wildlife-v2/autonomous-147.json) own new progress.
+The previous run remains an immutable completed record: 122 roster animals
+already implemented, 74 remaining. Register new exact pending art identities,
+verify world/animal-browser animation and AI, commit and push finished batches.
+This explicit scope supersedes historical expansion/sequencing holds for this
+window; it does not invent human approvals or alter registered source banks.
+
+First checkpoint: raven, carrion crow and Atlantic puffin `roster-v3` are active
+in natural worlds, editor placement and the animal browser. Distinct original
+bills, tails, wing proportions, puffin face/breast and webbed feet; fixed linked
+legs and shoulder/elbow feather wings. Bounded landing-to-landing flights use
+shared Fauna authority. These three use dry-ground homes; open-air navigation,
+coastal swimming and corvid hunting are not implemented in this batch.
+All 135 browser entries pass four-facing visible animation checks, and the three
+new Watch AI paths show real moving natural animals. Twenty Canvas/GPU lab/game
+browser checks, three byte-identical source replays and 984 exact source crops
+pass. Typecheck/lint/build and streaming readiness pass. Full units had 4,456
+passing and the five known Windows failures plus one stale roadkill type count;
+authored crow legitimately joins legacy crow. Its explicit registration check
+was corrected and all 30 affected bird/roadkill tests pass. Exact new art remains
+pending human review. Roster: **125 of 196 implemented; 71 remaining**.
+
+
+Second checkpoint: tawny owl, bald eagle and red-tailed hawk now join natural
+world spawning, editor placement and the lab browser. They use shared bounded
+predator flights, physical landings, ordinary perches, explicit diets, feeding,
+quiet/alert cycles and species calls. Eagle can hunt owl/hawk; larger hunters can
+hunt these birds. Natural meals retain the same delayed distant birth policy;
+manual prey remain finite. No airborne near-miss catches are allowed.
+The owl-v3 anatomy bank remains immutable; active owl-v4 raises chase speed from
+30 to 40px/s with matching source timing. Eagle/hawk use roster-v3. All art is
+pending human review. Browser **Action** now resolves hunters' display clips
+instead of falling back to idle. Native fixture props retain production type
+identity, enabling shared perch AI; custom fixture geometry remains anonymous.
+Raptor landings publish their actual support height. Contact from above requires
+real landed support/XY overlap and retains the airborne-prey meal guard.
+Validation: **4,544 unit passes**, five known Windows failures, ten skipped;
+388 focused hunting/source/audio checks; 27 real browser cases including 552
+four-facing previews; four byte-identical banks and 3,872 exact source crops.
+Typecheck, isolated lint/build, 1,423-candidate full Chromium manifest and
+streaming readiness pass. **128 of 196 implemented; 68 remaining.** Chimpanzee
+and orangutan follow in the next checkpoint below.
+
+
+Third checkpoint: chimpanzee and orangutan now have natural woodland homes,
+editor placement and browser entries. Narrow chimp torso/large ears and long-armed
+orangutan cheek flanges/throat pouch/shoulder hair use connected fixed-volume
+knuckle walks, body weight transfer and one-sided grooming. Ground behavior uses
+shared Fauna; climbing/brachiation remain future work. Large predator diets include
+both apes. Natural prey retain delayed distant replacements; placed prey are finite.
+
+Adding the apes crossed the 256-type binary registry limit: worm4 wrapped to ball.
+Baseline type indices now use u16, with frame tag 0x04 and explicit rejection of
+the legacy layout. All endpoints require matching builds; deltas are unchanged.
+The [network topic](multiplayer-networking.md) owns the wire contract.
+Validation: **4,580 unit passes**, five known Windows failures, ten skipped;
+1,170 focused ape/ecology and 109 codec/scenario checks; 19 browser cases including
+real P2P host/join, fragmented transfer and reconnect; **560** visible previews;
+two byte-identical banks and 784 exact crops. Typecheck/lint/build and streaming
+readiness pass. All new pixels remain pending human review.
+**130 of 196 implemented; 66 remaining.** Five remaining primates have audited
+unregistered banks; four distinct fish prototypes are also in progress.
+
+Fourth checkpoint: capuchin monkey, ring-tailed lemur, mandrill, proboscis monkey
+and Japanese macaque complete the eight roster primates. They have distinct
+faces/muzzles/ears, caps/cheeks, articulated tails (including lemur rings), buried
+limb roots, planted feet, moving torsos and foraging actions. Ordinary shared
+woodland authority owns movement, group spacing, escape and persistence; tree
+climbing/brachiation remain future work. All join editor placement and the browser.
+Explicit diets allow larger hunters to consume them; eagle can hunt capuchin/lemur.
+Natural meals retain delayed distant replacement; placed prey remain finite.
+Validation: **4,665 unit passes**, five known Windows failures, ten skipped;
+120 focused checks; **31 browser cases**, including **580 visible previews**;
+five byte-identical banks and 1,640 exact native/3x crops. Typecheck, isolated
+lint/build and the 1,459-candidate full Chromium manifest pass. Mid-run Workshop
+inbox and art notes have no pending requests; new exact art remains pending review.
+**135 of 196 implemented; 61 remaining.** Four fish banks await runtime integration;
+five ground-specialist source prototypes are underway.
+
+Fifth checkpoint: ocean sunfish, pufferfish, swordfish and anglerfish spawn in
+legal deep-water refuges and join placement/browser inspection. Sunfish paired
+dorsal/anal paddles and clavus, swordfish bill/forked tail, puffer closed spines and
+angler lure/toothed jaw use distinct editable anatomy. Fins remain attached and
+tails retain fixed links. Source swim/chase clocks use separate non-overlapping
+key ranges. Puffer inflation is not implemented; no animated scaling is used.
+
+Swordfish and anglerfish use ordinary shared aquatic hunting. Explicit diets
+include swordfish→anglerfish/pufferfish and shark/orca→all four new fish. Reverse
+hunts are excluded; natural/placed lineage policy remains unchanged. Existing
+lagoon hunters now validate source-specific anchors, and browser tests assert a
+reduced live fish population during the delayed replacement period.
+Validation: **4,718 unit passes**, five known Windows failures, ten skipped;
+116 focused checks; **32 distinct browser cases**, including all seven aquatic
+hunters in Canvas/GPU and **596 visible previews**; four byte-identical source
+banks and 1,952 exact crops. Typecheck, isolated lint/build and the 1,479-candidate
+full Chromium manifest pass. All new art remains pending human review.
+**139 of 196 implemented; 57 remaining.** Five ground-specialist banks are ready
+for runtime integration; four more flying-bird prototypes are underway.
+
+Sixth checkpoint: meerkat, giant anteater, aardvark, armadillo and pangolin now
+spawn naturally, support editor placement and appear in the browser. Distinct
+snouts/ears/markings, the anteater's bushy tail and shoulder slash, eight closed
+armadillo armor bands and 58 closed pangolin body/tail scales are editable volumes.
+Buried fixed-length limbs, planted feet, linked tails and visible body paint motion
+are audited. Ordinary shared ground walking, foraging, escape and persistence are
+implemented; curling, burrowing and meerkat sentinel rearing remain future work.
+Explicit prey rows retain the natural/placed replacement policy.
+Validation: **4,803 unit passes**, five known Windows failures, ten skipped;
+120 focused checks; **31 browser cases / 616 visible previews**; five byte-identical
+banks and 1,640 exact crops. Typecheck, isolated lint/build and the 1,504-candidate
+full Chromium manifest pass. All new art stays pending human review.
+**144 of 196 implemented; 52 remaining.** Four new flying-bird banks are ready for
+integration; five tall-bird prototypes have connected three-link necks and planted
+biped gaits and are undergoing proportion refinement.
+
+
+Seventh checkpoint: pelican, blue-footed booby, great frigatebird and ruby-throated
+hummingbird now spawn naturally and join editor placement and the lab browser.
+Distinct bills/pouches, blue webbed feet, forked tail, gorget and wing proportions
+use connected shoulder/elbow feathers and tucking fixed-link legs. Denser source
+keys and independent eighth-pose audits preserve continuous leg planes. Physical
+landing-to-landing flights use shared authority; dry-ground homes are deliberate.
+Swimming, open-air navigation and sustained hummingbird hovering are future work.
+Large hunters can eat them after landing; natural-only delayed births remain.
+Validation: **4,871 unit passes**, five known Windows failures, ten skipped;
+60 focused checks; **26 browser cases**, including **632 visible previews**;
+four byte-identical banks and 1,312 exact native/3x crops. Typecheck, isolated
+lint/build and 1,524-candidate full Chromium manifest pass. Exact art pending review.
+**148 of 196 implemented; 48 remaining.** Five tall-bird banks have exact source
+playback evidence; three distinct reptile hunters are in source refinement.
+
+
+
+Eighth checkpoint: flamingo, shoebill, secretary bird, marabou stork and great blue
+heron have distinct bills/crests/plumage, buried fixed-link legs, body weight
+transfer, planted feet and connected three-link necks through forage poses.
+Secretary bird uses terrestrial hunting with explicit snake/small-prey diets;
+its lab contains an ordinary natural king cobra and one uneaten deer. Cobra
+catches and delayed natural replacement queues persist on reload. The other
+four use shared ground walking/foraging; wetland wading and flight are future work.
+All join seeded worlds, placement and browser action/Watch AI. Exact art pending review.
+Full units: **4,958 passed**, five known Windows failures plus one stale source
+assertion assuming four feet and identical walk/chase paths. The corrected test
+measures planted source geometry through the actual camera; all17 source banks
+pass, and all52 source/ecology regression cases are covered passing across runs.
+Also75 focused new-family checks; **32 browser cases /652 previews**; five exact
+replays and1,960 native/3x crops; typecheck/isolated lint/build,1,549-candidate
+manifest and streaming readiness pass. The ledger also corrects the prior four
+flight birds to its expected finished-game-active state.
+**153 of196 implemented;43 remaining.** Three reptile hunter banks have exact
+replay evidence; seven forest-mammal/marsupial prototypes are under refinement.
+
+
+Ninth checkpoint: crocodile, alligator and Komodo dragon now have distinct
+closed snouts, scutes or forked tongues, buried splayed fixed-link legs, planted
+travel, moving torsos and connected tails. Native96px canvases keep editor/lab
+previews readable. Ground hunting bursts catch genuinely fleeing prey; explicit
+diets include larger predators eating smaller hunters. Swimming is future work.
+Natural-only delayed distant births and manual finite populations remain intact.
+Validation: **5,023 full-unit passes**, five known Windows failures and one food-web
+traversal timeout. Memoized completed DAG nodes remove repeated path expansion;
+all five food-web regressions then pass in milliseconds, retaining cycle checks.
+Also54 focused checks, **18 browser cases /664 previews**, three byte-identical
+source replays and1,944 exact native/3x crops. Typecheck, isolated lint/build and
+1,565-candidate full Chromium inventory pass. All three vehicle review records
+are byte-identical; live scenario fingerprints follow current shared code.
+**156/196 implemented;40 remaining.** Exact art pending human review. Seven forest
+specialists and four mixed mammals have verified source prototypes; four shore
+mammals are in source refinement.
+
+
+Tenth checkpoint: sloth, binturong, aye-aye, kinkajou, opossum, echidna and
+Tasmanian devil now join natural worlds, placement and the interactive browser.
+Distinct masks, fingers, claws, whiskers, tails,49 closed echidna quills and devil
+markings use planted fixed-link legs, buried roots and visible body weight transfer.
+Six use shared ground walking/foraging; the devil hunts small prey. Climbing and
+brachiation remain future work. Natural-only delayed distant replacement is retained.
+Validation: **5,144 full-unit passes**, five known Windows failures and ten skips;
+90 focused checks; **40 distinct browser cases /692 visible previews**; seven
+byte-identical banks and2,616 exact native/3x crops. Two initial sloth tests exceeded
+a fixed12-second wait; measured walking began after14seconds. Cadence-based waits
+pass both renderers without changing gameplay. Typecheck, isolated lint/build and
+1,600-candidate normal Chromium inventory pass. All exact art pending human review.
+**163/196 implemented;33 remaining.** Mixed mammals4 and shore mammals4 have verified
+sources; eight arthropods are in source authoring with species-specific leg counts.
+
+
+Eleventh checkpoint: bat, wallaby, manatee and dugong join natural worlds,
+editor placement and browser Watch AI. Bat has eight finger bones and14 closed
+wing membranes; wallaby has fixed hind legs, connected forearms and balancing tail.
+Both use physical bounded flights/hops and source-matched landing clocks. Hanging
+roosts and open-air navigation are future work. Manatee paddle tail and dugong
+forked flukes use closed volumes, attached flippers and shared deep-water authority.
+Directed diets preserve airborne safety and delayed natural-only replacement.
+Validation: **5,208 full-unit passes**, five known Windows failures and ten skips;
+557 focused source/body/food-web checks; **30 browser cases /708 visible previews**,
+including wombat regressions; four exact replays and1,312 native/3x crops. Typecheck,
+isolated lint/build and1,620-candidate normal Chromium inventory pass. Exact pixels
+remain pending human review. **167/196 implemented;29 remaining.** Shore mammals4,
+arthropods8 and legless creatures5 remain in source verification/refinement.
+
+
+Twelfth checkpoint: river otter, platypus, sea lion and walrus now have natural
+shore homes, editor placement and browser action/Watch AI. Distinct muzzles,
+bills, flattened tails, ear flaps, tusks and moustaches use fixed linked limbs,
+planted ground travel, body weight transfer and a separate body-relative paddle
+cycle. Shared amphibious walking/swimming, foraging and escape are active;
+fishing is future work. Sea lions/walruses require lagoons; the other two can use
+ponds or lagoons. Fixed slots and the southern arc preserve original shore homes:
+558 pre-existing natural actor records around all four refuges are byte-identical.
+New birth coverage exposed a shared habitat bug: amphibious births were rejected
+in water. Birth placement now admits their legal wet/dry footprint, initializes
+the water pose and checks deep fauna's complete deep-water footprint. Shallow or
+internally invalid water retries; delays, distances and manual finite populations
+are unchanged. Validation: **5,270 full-unit passes**, five known Windows failures,
+ten skips;160 focused cases across corrected runs; **40 browser cases /724 visible
+previews**, including all14 aquatic hunter regressions; four exact replays and
+2,336 native/3x crops. Typecheck, isolated lint/build,1,640-candidate full Chromium
+manifest and streaming readiness pass. Exact art pending human review.
+**171/196 implemented;25 remaining.** Eight arthropods, five legless creatures and
+five marine oddities are in source verification/refinement.
+
+
+Thirteenth checkpoint: Gaboon viper, snail, earthworm, moray eel and electric eel
+join seeded worlds, placement and the browser. Original closed fixed body chains,
+overlap joints, attached jaws, moving painted bodies and exact loop seams replace
+leg-based assumptions. Ground forms retain under0.03world-unit clearance; eels
+use shared deep-water authority. Viper hunts mouse prey; eels hunt aquatic prey;
+snail/worm crawl, forage and escape. Directed meals preserve delayed natural-only
+replacement. Electrical discharge and burrowing are future work.
+Natural hunter profiles can now specify their clearing prey. The viper receives
+actual mice in both its lab and ordinary natural clearing; existing hunters keep
+their rabbit defaults and stable identities. Shared source/ecology/meal tests
+support the configured prey rather than assuming every hunter eats a rabbit.
+Validation: **5,345 full-unit passes**, five known Windows failures and ten skips;
+49 focused checks; **28 browser cases /744 visible previews**; five exact replays
+and2,600 native/3x crops. Typecheck, isolated lint/build,1,665-candidate normal
+Chromium inventory and streaming readiness pass. Inbox/art notes: no pending
+requests. All exact art pending human review. **176/196 implemented;20 remaining.**
+Eight arthropods, five marine oddities and five crustacean/chelicerate prototypes
+are in source work; two upright companions remain queued.
+
+
+Fourteenth checkpoint: spider, praying mantis, leaf insect, scorpion, roly-poly,
+earwig, centipede and millipede now join seeded worlds, placement and browser AI.
+Original6/8/14/28/48walking-leg rigs use fixed links, buried roots, planted
+metachronal travel and moving torsos. Native review widened the stance, removed
+inappropriate tails and separated antennae; mantis has a foreleg grasp, scorpion
+has five linked tail segments and earwig has forceps. Four hunters receive actual
+ant prey. The directed chain scorpion→centipede→spider→mantis admits larger hunters
+without reciprocal cycles. The other four use ground forage/escape; webs, venom,
+rolling and burrowing remain future work. Natural-only distant delayed births remain.
+Validation: **5,486 full-unit passes**, five known Windows failures and ten skips;
+97 focused checks; **42 distinct browser cases /776 previews** across corrected
+runs; eight exact replays and3,904 native/3x crops. Millipede rest waits now follow
+its slow cadence. Predator inspection queries adjacent chunks when rounding crosses
+a boundary; actual scorpion spawning/placement/deletion passes. Typecheck, isolated
+lint/build and1,705-candidate normal Chromium inventory pass. The two generated
+projection guides over32MiB are excluded from Biome like existing cat/dog guides;
+dedicated closed-volume, fixed-link and continuous source audits still validate them.
+All exact art pending human review. **184/196 implemented;12 remaining.** Marine
+oddities5 and crustaceans5 have source/playback work underway; the two upright
+companion prototypes are refining dense arm keys and supported weight transfer.
+
+
+Fifteenth checkpoint: cuttlefish, seahorse, nautilus, leafy seadragon and starfish
+join deep-water natural refuges, placement and the animated animal browser.
+Cuttlefish have eight linked arms, two feeding tentacles and attached mantle fins;
+seahorses have a curled tail and upright body; nautiluses have a closed patterned
+spiral shell and animated tentacle bundles; leafy seadragons have attached leaf
+appendages and a linked tail; starfish have five articulated radial arms.
+All use closed editable volumes, fixed links, moving painted bodies and exact
+source loops. Cuttlefish hunt through shared aquatic authority; the other four
+swim or crawl, forage and escape. Directed diets allow larger marine hunters to
+eat them. Natural meals retain distant delayed replacement; placed prey stay
+finite. Camouflage, ink and other special abilities remain future work.
+Validation: **5,557 full-unit passes**, five known Windows failures and ten skips;
+51 focused checks; **30 browser cases / 796 visible previews**; five exact replays
+and 1,960 native/3x crops. Typecheck, isolated lint/build and the 1,730-candidate
+normal Chromium inventory pass. All three vehicle review objects remain exact.
+New art remains pending human review. **189/196 implemented; seven remaining.**
+The five crustaceans and two upright companions have passed source replay and
+native/3x playback verification and await runtime integration.
+
 
 ## Small-animal roadkill
 
@@ -63,6 +352,31 @@ with a five-second fade. They have no AI, collision, support or shadow and reloa
 with their remaining lifetime. Shared game/lab authority, private car prediction
 and Canvas/GPU presentation implement the behavior. Full unit/browser and streaming
 readiness checks pass; 143 records the evidence and missing campaign-status input.
+
+## Animal browser locomotion correction
+
+The owner reported static dove/cobra previews on 2026-10-19. The browser's
+hard-coded walk/hop/swim/flap fallback selected the single idle frame for sixteen
+entries whose travel is named fly, slither, crawl, flutter, bound, jet or pulse.
+Previews now use the ordinary travel clip from each shared wildlife definition,
+matching the existing idle/travel/action ordering used by the AI. Mallard uses
+its waddle clip for ordinary locomotion instead of the former swim fallback.
+The preview readiness flag resets when its clip/facing changes and reports the
+actual selected clip after drawing. Existing pixels and gameplay AI are unchanged.
+
+The owner confirmed frog visibility recovered, consistent with a transient client
+issue. Fresh live Chromium checks found visible frog/mallard cards and four frogs
+with advancing AI in the pond scene. No frog-specific art or spawn correction is
+included. Regression coverage now checks all 132 browser entries in four facings:
+visible canvas pixels, the species travel clip, and a change in actual rendered
+pixels through its animation. A separate read-only scan confirmed all 528 native
+travel sequences contain visible frames and more than one distinct pose.
+
+Validation: all 528 rendered browser previews advance their actual pixels, across
+six passing full-Chromium cases including desktop/mobile browsing. Typecheck,
+lint, production build and the 1,391-candidate Workshop manifest pass. Full units:
+4,405 pass, five known Windows symlink/WAL failures and ten skips; static-files
+symlink fixture setup also retains its existing failure. No new diagnostics.
 
 ## Animal browser and delayed natural returns
 

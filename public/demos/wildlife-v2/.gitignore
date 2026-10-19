@@ -526,3 +526,103 @@
 
 # Owner-requested gorilla shoulder study, pending human review.
 !gorilla/shoulder-study-v1/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!raven/roster-v3/*
+!crow/roster-v3/*
+!atlantic-puffin/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!owl/roster-v3/*
+!eagle/roster-v3/*
+!hawk/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!owl/roster-v4/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!chimpanzee/roster-v3/*
+!orangutan/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!capuchin-monkey/roster-v3/*
+!ring-tailed-lemur/roster-v3/*
+!mandrill/roster-v3/*
+!proboscis-monkey/roster-v3/*
+!japanese-macaque/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!ocean-sunfish/roster-v3/*
+!swordfish/roster-v3/*
+!pufferfish/roster-v3/*
+!anglerfish/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!meerkat/roster-v3/*
+!giant-anteater/roster-v3/*
+!aardvark/roster-v3/*
+!armadillo/roster-v3/*
+!pangolin/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!pelican/roster-v3/*
+!blue-footed-booby/roster-v3/*
+!great-frigatebird/roster-v3/*
+!ruby-throated-hummingbird/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!flamingo/roster-v3/*
+!shoebill/roster-v3/*
+!secretary-bird/roster-v3/*
+!marabou-stork/roster-v3/*
+!great-blue-heron/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!crocodile/roster-v3/*
+!alligator/roster-v3/*
+!komodo-dragon/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!sloth/roster-v3/*
+!binturong/roster-v3/*
+!aye-aye/roster-v3/*
+!kinkajou/roster-v3/*
+!opossum/roster-v3/*
+!echidna/roster-v3/*
+!tasmanian-devil/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!bat/roster-v3/*
+!wallaby/roster-v3/*
+!manatee/roster-v3/*
+!dugong/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!river-otter/roster-v3/*
+!platypus/roster-v3/*
+!sea-lion/roster-v3/*
+!walrus/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!gaboon-viper/roster-v3/*
+!snail/roster-v3/*
+!worm/roster-v3/*
+!moray-eel/roster-v3/*
+!electric-eel/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!spider/roster-v3/*
+!praying-mantis/roster-v3/*
+!leaf-insect/roster-v3/*
+!scorpion/roster-v3/*
+!roly-poly/roster-v3/*
+!earwig/roster-v3/*
+!centipede/roster-v3/*
+!millipede/roster-v3/*
+
+# Verified pending motion identities, owner-authorized autonomous run 147.
+!cuttlefish/roster-v3/*
+!seahorse/roster-v3/*
+!nautilus/roster-v3/*
+!leafy-seadragon/roster-v3/*
+!starfish/roster-v3/*

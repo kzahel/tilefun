@@ -83,6 +83,19 @@ function bodyGap(a: Entity, b: Entity): number {
     Math.max(x.top - y.bottom, y.top - x.bottom, 0),
   );
 }
+/** Detect actual support contact after a raptor lands on prey. The meal resolver
+ * separately retains airborne-prey protection before allowing a catch. */
+function raptorOnPrey(hunter: Entity, prey: Entity): boolean {
+  const top = (prey.wz ?? 0) + (prey.collider?.physicalHeight ?? 0);
+  return (
+    predatorProfile(hunter.type)?.fierce?.kind === "raptor" &&
+    !hunter.predator?.flight &&
+    (hunter.jumpZ ?? 0) <= 1 &&
+    Math.abs((hunter.wz ?? 0) - top) < 0.1 &&
+    Math.abs((hunter.groundZ ?? -Infinity) - top) < 0.1 &&
+    bodyGap(hunter, prey) === 0
+  );
+}
 /** Every footprint tile must remain deep water for ocean hunters. Land policy stays dry. */
 export function predatorHabitatAllows(
   e: Entity,
@@ -278,7 +291,7 @@ export function updatePredatorAI(
       );
       if (
         launching &&
-        fierce?.kind === "griffin" &&
+        (fierce?.kind === "griffin" || fierce?.kind === "raptor") &&
         (distance(e.position, prey.position) > 24 ||
           Math.abs((e.wz ?? 0) - (env.surfaceZ?.(prey.position) ?? 0)) > 4) &&
         clearPredatorFlight(e, prey.position, env.surfaceZ?.(prey.position) ?? 0, env, planning)
@@ -300,12 +313,16 @@ export function updatePredatorAI(
     if (
       ai.state === "chase" &&
       bodyGap(e, prey) <= 4 &&
-      (!prey.rabbit || !["startle", "hop"].includes(prey.rabbit.state))
+      (raptorOnPrey(e, prey) || !prey.rabbit || !["startle", "hop"].includes(prey.rabbit.state))
     )
       enter(e, "pounce", 0);
     if (ai.state === "pounce" && ai.elapsed > 0.9) {
       ai.cooldown = 3;
       enter(e, "rest", 1);
+      return;
+    }
+    if (ai.state === "pounce" && raptorOnPrey(e, prey)) {
+      restorePredatorPose(e);
       return;
     }
   }
@@ -346,7 +363,7 @@ export function updatePredatorAI(
           canEat(e, a) &&
           d < best &&
           distance(a.position, ai.home) < ai.radius &&
-          (fierce?.kind === "griffin"
+          (fierce?.kind === "griffin" || fierce?.kind === "raptor"
             ? clearPredatorFlight(e, a.position, env.surfaceZ?.(a.position) ?? 0, env, planning)
             : clearPath(e, a.position, env, planning))
         ) {
@@ -397,7 +414,7 @@ export function updatePredatorAI(
         ai.cooldown = 3;
         enter(e, "rest", 1);
       }
-    } else if (!ai.targetId && fierce?.kind === "griffin") {
+    } else if (!ai.targetId && (fierce?.kind === "griffin" || fierce?.kind === "raptor")) {
       const perches = env.predatorPerches?.(ai.home, ai.radius) ?? [];
       const perch = perches
         .filter((p) => distance(p, ai.home) < ai.radius)
@@ -475,12 +492,13 @@ export function resolvePredatorCatches(
     );
     if (
       !prey?.collider ||
-      Math.abs((hunter.wz ?? 0) - (prey.wz ?? 0)) > 4 ||
+      (Math.abs((hunter.wz ?? 0) - (prey.wz ?? 0)) > 4 && !raptorOnPrey(hunter, prey)) ||
       (prey.jumpZ ?? 0) > 1 ||
       (prey.rabbit?.state === "hop" && (prey.wz ?? 0) > (env.surfaceZ?.(prey.position) ?? 0) + 1)
     )
       continue;
-    if (bodyGap(hunter, prey) > 3 || !clearPath(hunter, prey.position, env)) continue;
+    const approach = raptorOnPrey(hunter, prey) ? { ...hunter, wz: prey.wz ?? 0 } : hunter;
+    if (bodyGap(hunter, prey) > 3 || !clearPath(approach, prey.position, env)) continue;
     const naturalSpawnId = prey.naturalSpawnId ?? prey.proceduralId;
     if (
       naturalSpawnId &&

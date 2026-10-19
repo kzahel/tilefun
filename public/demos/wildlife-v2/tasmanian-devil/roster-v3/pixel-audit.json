@@ -1,0 +1,17 @@
+{
+  "identity": "tasmanian-devil-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.6406614709023941,
+    "up": 1.763084147542223,
+    "left": 1.9476439790575881,
+    "right": 1.9476439790575881
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

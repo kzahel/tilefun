@@ -1,0 +1,23 @@
+{
+  "status": "no-blocking-issues",
+  "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+  "observations": [
+    "Inspected all16 study and16 shared game headings at native and nearest2x. Long rounded roof, hood and end profiles form a coherent conventional bus.",
+    "Repeated window frames, glass bands and stripes are continuous. Passenger folding door appears only on its authored side; driver pane and static stop plate remain on the opposite side.",
+    "Near wheels sit in open arches. Far-side crowns remain under body/fender geometry; no isolated raised caps or floating tire silhouettes found.",
+    "Inspected eight signed wheel phases per camera and both wireframes; body stays fixed, wheel seating and outlines remain coherent. Independent forward/reverse quarter turns and absolute reset additionally proven through imported GLB rig.",
+    "Desktop and390px mobile show an actual224px native card, separate128px STYLE reference and internally scrolling enlarged pixels.",
+    "Final capture pixels match all50 inspected draft heading/phase/wireframe PNGs exactly."
+  ],
+  "inspectedFrames": {
+    "headings": 32,
+    "signedWheelPhases": 16,
+    "wireframes": 2
+  },
+  "finalRecaptureMatchesInspectedDraft": 50,
+  "limitations": [
+    "Agent QA is not human art approval.",
+    "Neutral roll only; steering, suspension and gameplay integration remain unqualified.",
+    "Small lamps, grille and hub details retain ordinary native-pixel angle aliasing."
+  ]
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "school-bus--v1",
+    "glbSha256": "4b71cb259c5226af9657fe624585354ad66c41b3b66c5a2a2cf25ba61d3df42f",
+    "triangles": 2564,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 8.173913347356049,
+        "minimumGap": 1.4485016446189878,
+        "nearestBody": "Body_static"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

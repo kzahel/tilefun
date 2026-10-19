@@ -1,0 +1,16 @@
+{
+  "identity": "swordfish-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 2.296710968017578,
+    "up": 1.4063720703125,
+    "left": 1.9173240661621094,
+    "right": 1.9173240661621094
+  },
+  "independentSwimAndChase": true
+}

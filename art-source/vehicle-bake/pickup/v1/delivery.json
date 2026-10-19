@@ -1,0 +1,16 @@
+{
+  "status": "complete",
+  "artReviewStatus": "awaiting-owner-review",
+  "runtime": "not integrated",
+  "report": "public/demos/vehicle-bake/pickup/v1/report.json",
+  "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "atlasSha256": "4e306a982593c52551996acca8affa4001c4f2ad2e2b5ad78912235ac26a0102",
+  "replayCommands": [
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python art-source/vehicle-bake/pickup/v1/build.py -- --scratch",
+    "node scripts/vehicle-bake/pickup/capture.mjs",
+    "python scripts/vehicle-bake/pickup/sheets.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/pickup/audit-source.py",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/clearance.py -- art-source/vehicle-bake/pickup/v1/evidence/clearance-input.json data/vehicle-bake/pickup/recheck-clearance.json",
+    "& 'C:/Program Files/Blender Foundation/Blender 5.2/blender.exe' --background --factory-startup --threads 4 --python-exit-code 1 --python scripts/vehicle-bake/coverage.py -- --input public/demos/vehicle-bake/pickup/v1/model.glb --config art-source/vehicle-bake/pickup/v1/coverage-region.json --output data/vehicle-bake/pickup/recheck-coverage.json"
+  ]
+}

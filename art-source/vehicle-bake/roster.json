@@ -1,15 +1,15 @@
 {
   "schema": "tilefun-original-vehicle-roster-v1",
-  "gate": "Red coupe v3 appearance accepted 2026-10-19. Beetle, school bus and pickup are queued follow-on experiments; gameplay integration is pending.",
+  "gate": "Red coupe, Beetle and owner-accepted school bus integrated. Pickup v1 delivered for appearance review; further families remain ideas.",
   "vehicles": [
     {
       "id": "rosso-coupe",
       "name": "Red sports coupe",
       "family": "Low sports car",
       "priority": 1,
-      "status": "appearance-accepted",
+      "status": "integrated",
       "authorization": "Current red-car pipeline pilot only",
-      "next": "Commit final v3 asset/pipeline; integrate entity spawning and automatic road traffic in a separate implementation step",
+      "next": "Use Edit > Vehicles > Red sports coupe or encounter ordinary generated-road traffic; next pipeline examples are Beetle, school bus and pickup",
       "candidate": "a-reduced-projection--mid-fenders-v3",
       "ownerFeedback": "2026-10-19: good looks better; requested final asset commit"
     },
@@ -18,27 +18,32 @@
       "name": "Beetle-style compact",
       "family": "Rounded compact",
       "priority": 2,
-      "status": "backlog",
-      "authorization": "Owner-authorized follow-on experiment after red-car agreement; queued, not started in asset-commit checkpoint",
-      "next": "Test rounded roof/fenders and curved glass with the selected pipeline"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner explicitly requested Beetle authoring for review",
+      "next": "Spawn Beetle-style compact from Edit > Vehicles or normal road traffic; pickup is the current authoring example",
+      "candidate": "beetle-v1",
+      "ownerFeedback": "2026-10-19: looks fine; requested commit, gameplay activation and next vehicle"
     },
     {
       "id": "school-bus",
       "name": "Yellow school bus",
       "family": "School bus",
       "priority": 3,
-      "status": "backlog",
-      "authorization": "Owner-authorized follow-on experiment after red-car agreement; queued, not started in asset-commit checkpoint",
-      "next": "Test long body, repeated windows, stripes, asymmetric doors and wheelbase"
+      "status": "integrated",
+      "authorization": "2026-10-19 owner requested next vehicle after accepted Beetle gameplay/commit checkpoint",
+      "next": "Spawn Yellow school bus from Edit > Vehicles or encounter ordinary traffic on roads at least 98px wide; pickup review is next",
+      "candidate": "school-bus-v1",
+      "ownerFeedback": "2026-10-19: looks great; integrate it, commit, then proceed directly with the pickup"
     },
     {
       "id": "pickup",
       "name": "Pickup truck",
       "family": "Pickup",
       "priority": 4,
-      "status": "backlog",
-      "authorization": "Owner-authorized follow-on experiment after red-car agreement; queued, not started in asset-commit checkpoint",
-      "next": "Test cab/bed separation, open cargo bed and larger tires"
+      "status": "review",
+      "authorization": "2026-10-19 owner explicitly requested proceeding directly with pickup after approved school-bus integration",
+      "next": "Owner review of teal pickup v1 cab, open bed, outlines/glass and wheel fit; gameplay integration follows appearance agreement",
+      "candidate": "pickup-v1"
     },
     {
       "id": "classic-roadster",

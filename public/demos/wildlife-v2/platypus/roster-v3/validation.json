@@ -1,0 +1,18 @@
+{
+  "identity": "platypus-roster-v3",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 73,
+      "exactFacingCrops": 292
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 73,
+      "exactFacingCrops": 292
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

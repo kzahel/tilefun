@@ -1,0 +1,21 @@
+{
+  "identity": "wallaby-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyProjectionRangePixels": {
+    "down": 1.0730743408203125,
+    "up": 1.8801212310791016,
+    "left": 0.7619738578796387,
+    "right": 0.9975504875183105
+  },
+  "physicalHop": {
+    "duration": 0.8,
+    "push": 0.08,
+    "land": 0.72,
+    "height": 12
+  }
+}

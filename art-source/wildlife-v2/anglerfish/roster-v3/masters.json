@@ -1,0 +1,14 @@
+{
+  "identity": "anglerfish-roster-v3-pixels-01",
+  "palette": {
+    "B": "#685866",
+    "H": "#958497",
+    "W": "#c8bfaa",
+    "K": "#252e35",
+    "M": "#343340",
+    "E": "#e7d9ad",
+    "T": "#f0e8c4",
+    "G": "#aaab7a"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

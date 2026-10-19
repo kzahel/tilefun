@@ -1,0 +1,43 @@
+{
+  "identity": "swordfish-roster-v3",
+  "status": "mechanics-checked-final-pixels-pending-human-review",
+  "allClipPoses": 324,
+  "closedMeshVolumes": 19,
+  "continuousSwimSamplesPerFacing": 129,
+  "continuousChaseSamplesPerFacing": 129,
+  "continuousFeedSamplesPerFacing": 33,
+  "fixedLengthTailChecks": 1968,
+  "finAttachmentChecks": 2592,
+  "maxContinuousEndpointGapWorldUnits": 6.915127852006998e-05,
+  "maxTailRootGapWorldUnits": 4.474816473570656e-06,
+  "maxLoopMatrixDelta": 3.383758606645415e-07,
+  "maxQuarterPoseRotationStepDegrees": 1.227148975581104,
+  "bodyMotionRangePixels": {
+    "down": 2.305652618408203,
+    "up": 1.4063720703125,
+    "left": 1.9173240661621094,
+    "right": 1.9173240661621094
+  },
+  "feedingJawRangeRadians": 0.19999998807907104,
+  "meshLocalGeometrySha256": {
+    "distinct fish body": "1525718ae284d9c51643befa584492a68c64a01ea573a96ead3e93e405099fed",
+    "skull": "b5b83d3dca3e4e77738a11a02d6ea110dd5dec52ea42533a13be188ddeb1cc32",
+    "lower jaw": "9cb086d3d6060240d2e6fc5f9dd7f21231c37b08d5f3c13e20f829106220297d",
+    "mouth lining": "0af95c4f18d9e21df2870ba8289745e26cec7c026a5b75dfd51c595216ab00b3",
+    "eye -1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+    "eye pupil -1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+    "gill cover -1": "e860dfb46807e8ca08977694599703cc0192399f6e5f321a03b978200aa889f6",
+    "eye 1": "68dcb5b6dc92d1d6a90d40b6ea881cf3583e17341882a3ce04263282db334115",
+    "eye pupil 1": "cda3739a070c5af3c04dd92b9724fcce22d1e866a87a701522427abb605320a1",
+    "gill cover 1": "e860dfb46807e8ca08977694599703cc0192399f6e5f321a03b978200aa889f6",
+    "long tapered sword bill": "487fbcc796fc878443170c38077f8ec193641c7f1b19e457bb1557c72af9aa38",
+    "high curved dorsal": "119f2eba51abeb1d8afc99035c6bd46f8bc8ac384facc4cc8656df0d3233a6aa",
+    "swept pectoral -1 closed blade": "ae2c5810c97c4b92d7eafdd19151b3c01c1ea5d26d79c7e8737eabebbaa0a758",
+    "swept pectoral 1 closed blade": "2b2faefd84dd90c59feccc3d34d0511b066d71e000696ca4daadfabd92386745",
+    "anal keel": "e6a3cea7ec28fe400c52b611ee99364353a52513637f87307dbb844639cccb21",
+    "TAIL-link-0": "9bb7ce32b03d5e7a712b997cdccdce5538abd3eda3f18d17de173ed14762a7b9",
+    "TAIL-link-1": "ba26dde513c66dd01cfca905bf7c03a15dbfc5e86e4328b65ccdb36d9debca93",
+    "TAIL-link-2": "f255b4f7891326adad9b7d70822e5f5403cf9bb999014c0a762713579831ad2e",
+    "closed vertical fish caudal fin": "206516b18cb9a0aab40fb549bcbed7704494ad535892ce6a88c72de7393b16e5"
+  }
+}

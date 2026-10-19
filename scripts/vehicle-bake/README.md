@@ -1,8 +1,12 @@
 # Red coupe: low-poly transfer experiment contract
 
 Owner: [142](../../docs/tactical/142-red-car-low-poly-pipeline.md).
-The user prefers 141 route 3's pixel art, especially outlines. Author red coupe
-only now; other car families require the owner's next approval.
+This document preserves the red-coupe pilot contract. The user prefers 141 route 3's
+pixel art, especially outlines. Current family authorization and gameplay state
+live in [original vehicles](../../docs/topics/original-vehicles.md). For the accepted
+Beetle/school bus and the pickup review, use the reusable [family harness](family-README.md)
+and [pipeline guide](../../docs/vehicle-authoring-pipeline.md); the coupe dimensions
+and component ownership below are specific to that historical pilot.
 
 ## Immutable source
 

@@ -1,0 +1,17 @@
+{
+  "identity": "worm-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 3.45771670190274,
+    "up": 3.446464646464648,
+    "left": 1.8107331469400378,
+    "right": 2.0438596491228083
+  },
+  "rootTravelPixelsPerCycle": 6.4,
+  "plantedTravel": true
+}

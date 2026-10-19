@@ -1,0 +1,15 @@
+{
+  "identity": "pelican-roster-v3-pixels-01",
+  "palette": {
+    "B": "#e4e2cc",
+    "H": "#aaa996",
+    "C": "#efead4",
+    "M": "#454b4a",
+    "T": "#d6bd7e",
+    "R": "#a78653",
+    "N": "#192b30",
+    "K": "#23323a",
+    "E": "#e0d4a5"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -1,0 +1,17 @@
+{
+  "identity": "alligator-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7155176048914171,
+    "up": 1.8218791973625272,
+    "left": 1.8285524559661752,
+    "right": 1.8285524559661752
+  },
+  "rootTravelPixelsPerCycle": 10.24,
+  "plantedTravel": true
+}

@@ -526,6 +526,186 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-owl-predator-v1",
+      "name": "wildlife owl predator v1",
+      "image": "demos/wildlife-v2/owl/roster-v4/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-eagle-predator-v1",
+      "name": "wildlife eagle predator v1",
+      "image": "demos/wildlife-v2/eagle/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5a1338aa40193197c28a850c45b1fd37f8a4bb3d80dd52a61148fa2b12e75540",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-hawk-predator-v1",
+      "name": "wildlife hawk predator v1",
+      "image": "demos/wildlife-v2/hawk/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-secretary-bird-predator-v1",
+      "name": "wildlife secretary bird predator v1",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+      "width": 9072,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-crocodile-predator-v1",
+      "name": "wildlife crocodile predator v1",
+      "image": "demos/wildlife-v2/crocodile/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-alligator-predator-v1",
+      "name": "wildlife alligator predator v1",
+      "image": "demos/wildlife-v2/alligator/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-komodo-dragon-predator-v1",
+      "name": "wildlife komodo dragon predator v1",
+      "image": "demos/wildlife-v2/komodo-dragon/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-gaboon-viper-predator-v1",
+      "name": "wildlife gaboon viper predator v1",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-spider-predator-v1",
+      "name": "wildlife spider predator v1",
+      "image": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-praying-mantis-predator-v1",
+      "name": "wildlife praying mantis predator v1",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-scorpion-predator-v1",
+      "name": "wildlife scorpion predator v1",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-centipede-predator-v1",
+      "name": "wildlife centipede predator v1",
+      "image": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-tasmanian-devil-predator-v1",
+      "name": "wildlife tasmanian devil predator v1",
+      "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-swordfish-predator-v1",
+      "name": "wildlife swordfish predator v1",
+      "image": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
+      "width": 10368,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-anglerfish-predator-v1",
+      "name": "wildlife anglerfish predator v1",
+      "image": "demos/wildlife-v2/anglerfish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-moray-eel-predator-v1",
+      "name": "wildlife moray eel predator v1",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-electric-eel-predator-v1",
+      "name": "wildlife electric eel predator v1",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-cuttlefish-predator-v1",
+      "name": "wildlife cuttlefish predator v1",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-shark-predator-v1",
       "name": "wildlife shark predator v1",
       "image": "demos/wildlife-v2/shark/roster-v2/sheet.png",
@@ -1313,6 +1493,496 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "28238b91fbe75430af2c9369b1d4cccfa5d9b558a58681e59f8326e1e61070c3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-raven-provisional-v1",
+      "name": "wildlife raven provisional v1",
+      "image": "demos/wildlife-v2/raven/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-crow-provisional-v1",
+      "name": "wildlife crow provisional v1",
+      "image": "demos/wildlife-v2/crow/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a2cca2203ea0fa942a6963e55cee0241a0d0a88c03a1bfc5c82164c9877ff2e2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-atlantic-puffin-provisional-v1",
+      "name": "wildlife atlantic puffin provisional v1",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-chimpanzee-provisional-v1",
+      "name": "wildlife chimpanzee provisional v1",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-orangutan-provisional-v1",
+      "name": "wildlife orangutan provisional v1",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-capuchin-monkey-provisional-v1",
+      "name": "wildlife capuchin monkey provisional v1",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ring-tailed-lemur-provisional-v1",
+      "name": "wildlife ring tailed lemur provisional v1",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-mandrill-provisional-v1",
+      "name": "wildlife mandrill provisional v1",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-proboscis-monkey-provisional-v1",
+      "name": "wildlife proboscis monkey provisional v1",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-japanese-macaque-provisional-v1",
+      "name": "wildlife japanese macaque provisional v1",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ocean-sunfish-provisional-v1",
+      "name": "wildlife ocean sunfish provisional v1",
+      "image": "demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-pufferfish-provisional-v1",
+      "name": "wildlife pufferfish provisional v1",
+      "image": "demos/wildlife-v2/pufferfish/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "ab1d201605b7cd0b56ed974d768b9114b27cf4d3956c0d779ea2dd92f63811bd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-meerkat-provisional-v1",
+      "name": "wildlife meerkat provisional v1",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-giant-anteater-provisional-v1",
+      "name": "wildlife giant anteater provisional v1",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-aardvark-provisional-v1",
+      "name": "wildlife aardvark provisional v1",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-armadillo-provisional-v1",
+      "name": "wildlife armadillo provisional v1",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-pangolin-provisional-v1",
+      "name": "wildlife pangolin provisional v1",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-pelican-provisional-v1",
+      "name": "wildlife pelican provisional v1",
+      "image": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-blue-footed-booby-provisional-v1",
+      "name": "wildlife blue footed booby provisional v1",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-great-frigatebird-provisional-v1",
+      "name": "wildlife great frigatebird provisional v1",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "name": "wildlife ruby throated hummingbird provisional v1",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-flamingo-provisional-v1",
+      "name": "wildlife flamingo provisional v1",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-shoebill-provisional-v1",
+      "name": "wildlife shoebill provisional v1",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-marabou-stork-provisional-v1",
+      "name": "wildlife marabou stork provisional v1",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-great-blue-heron-provisional-v1",
+      "name": "wildlife great blue heron provisional v1",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-sloth-provisional-v1",
+      "name": "wildlife sloth provisional v1",
+      "image": "demos/wildlife-v2/sloth/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-binturong-provisional-v1",
+      "name": "wildlife binturong provisional v1",
+      "image": "demos/wildlife-v2/binturong/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "81e0884e88368b320317f41e7fd1ab50d9aeb30eb0475f8aae013b63fe6610da",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-aye-aye-provisional-v1",
+      "name": "wildlife aye aye provisional v1",
+      "image": "demos/wildlife-v2/aye-aye/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "687e800452aff98c369c9befdd6a0b3bf07355af9c4cc361b7fc3be79bae00eb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-kinkajou-provisional-v1",
+      "name": "wildlife kinkajou provisional v1",
+      "image": "demos/wildlife-v2/kinkajou/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "675e2a6ca29ba3c7a7e9045fc632faba5a077bd0aa353e8cd429b37d879ce831",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-opossum-provisional-v1",
+      "name": "wildlife opossum provisional v1",
+      "image": "demos/wildlife-v2/opossum/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "dfcafe6ea8b32edf0b51ffb5680f453838a32e53e5c5086deb8d95f613730c58",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-echidna-provisional-v1",
+      "name": "wildlife echidna provisional v1",
+      "image": "demos/wildlife-v2/echidna/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "bfabb023be800d6d3db9684e0fda209eaf1abecea828d025cfeecb9f8cc7c89e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-bat-provisional-v1",
+      "name": "wildlife bat provisional v1",
+      "image": "demos/wildlife-v2/bat/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c3df8641d60c6fe475edc1d9240e360efdf6709dfdb29e0b78214d7673ba19d1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-wallaby-provisional-v1",
+      "name": "wildlife wallaby provisional v1",
+      "image": "demos/wildlife-v2/wallaby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "642bde4eb5e1a239636c605add6815720a99931875fb6019fbbe3f7ad0fdf5b9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-manatee-provisional-v1",
+      "name": "wildlife manatee provisional v1",
+      "image": "demos/wildlife-v2/manatee/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-dugong-provisional-v1",
+      "name": "wildlife dugong provisional v1",
+      "image": "demos/wildlife-v2/dugong/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-river-otter-provisional-v1",
+      "name": "wildlife river otter provisional v1",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-platypus-provisional-v1",
+      "name": "wildlife platypus provisional v1",
+      "image": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-sea-lion-provisional-v1",
+      "name": "wildlife sea lion provisional v1",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-walrus-provisional-v1",
+      "name": "wildlife walrus provisional v1",
+      "image": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-snail-provisional-v1",
+      "name": "wildlife snail provisional v1",
+      "image": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-worm-provisional-v1",
+      "name": "wildlife worm provisional v1",
+      "image": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-leaf-insect-provisional-v1",
+      "name": "wildlife leaf insect provisional v1",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-roly-poly-provisional-v1",
+      "name": "wildlife roly poly provisional v1",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-earwig-provisional-v1",
+      "name": "wildlife earwig provisional v1",
+      "image": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-millipede-provisional-v1",
+      "name": "wildlife millipede provisional v1",
+      "image": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-seahorse-provisional-v1",
+      "name": "wildlife seahorse provisional v1",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-nautilus-provisional-v1",
+      "name": "wildlife nautilus provisional v1",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-leafy-seadragon-provisional-v1",
+      "name": "wildlife leafy seadragon provisional v1",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-starfish-provisional-v1",
+      "name": "wildlife starfish provisional v1",
+      "image": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -2183,6 +2853,36 @@
       "height": 896,
       "tileSize": 16,
       "fingerprint": "422fdf68b4838bd631d0b861a04739f338a2251536be92c18b622be209e0812e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:rosso-coupe",
+      "name": "vehicle v1:rosso coupe",
+      "image": "assets/vehicles/rosso-coupe-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "3c89ecdda89149c2a6a470b73cee0ccaa8761c6cc0afabbe3840f096fd1d72d0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle",
+      "name": "vehicle v1:beetle",
+      "image": "assets/vehicles/beetle-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "b26dd0ca1ea498477b11ca276b5dc7cb2bbadaadd0b58be90a9b15d452b9a9f5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:school-bus",
+      "name": "vehicle v1:school bus",
+      "image": "assets/vehicles/school-bus-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "ec42ee8d4653c915bd80fa45ae555b2bec963ac4b52390bace1d054d023948fd",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -4336,6 +5036,686 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-raven-roster-v3",
+      "name": "wildlife v2 raven roster v3",
+      "image": "demos/wildlife-v2/raven/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "b2bee01cf971969a0924c901b94e6674707b3a848ac9cf172b5dd0ae793deae9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-crow-roster-v3",
+      "name": "wildlife v2 crow roster v3",
+      "image": "demos/wildlife-v2/crow/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "a2cca2203ea0fa942a6963e55cee0241a0d0a88c03a1bfc5c82164c9877ff2e2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-atlantic-puffin-roster-v3",
+      "name": "wildlife v2 atlantic puffin roster v3",
+      "image": "demos/wildlife-v2/atlantic-puffin/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92f5eab133575b182d418b356e162c40506475ec5c70bbec4da4d5718c9bebed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-owl-roster-v3",
+      "name": "wildlife v2 owl roster v3",
+      "image": "demos/wildlife-v2/owl/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-eagle-roster-v3",
+      "name": "wildlife v2 eagle roster v3",
+      "image": "demos/wildlife-v2/eagle/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5a1338aa40193197c28a850c45b1fd37f8a4bb3d80dd52a61148fa2b12e75540",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-hawk-roster-v3",
+      "name": "wildlife v2 hawk roster v3",
+      "image": "demos/wildlife-v2/hawk/roster-v3/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ffaa104b652f30a9653bfab0d7a7ba9efa9aec8006d7fae50efa1e81af742774",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-owl-roster-v4",
+      "name": "wildlife v2 owl roster v4",
+      "image": "demos/wildlife-v2/owl/roster-v4/sheet.png",
+      "width": 11616,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "7eee624a33170f91269f9c77123e28a1de411f58de205ce9d50fd2e61d93ffc9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-chimpanzee-roster-v3",
+      "name": "wildlife v2 chimpanzee roster v3",
+      "image": "demos/wildlife-v2/chimpanzee/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a354ba2ffd1f006234ba9fd42f3a3e08a75b703210319773cf93de142c9beeed",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-orangutan-roster-v3",
+      "name": "wildlife v2 orangutan roster v3",
+      "image": "demos/wildlife-v2/orangutan/roster-v3/sheet.png",
+      "width": 4704,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ec0347b8b61a8d91b1fcfaed1112f3cff1ba94d840c8d602fd0b9b3486d59a2e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-capuchin-monkey-roster-v3",
+      "name": "wildlife v2 capuchin monkey roster v3",
+      "image": "demos/wildlife-v2/capuchin-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ring-tailed-lemur-roster-v3",
+      "name": "wildlife v2 ring tailed lemur roster v3",
+      "image": "demos/wildlife-v2/ring-tailed-lemur/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "2d7a78a2bb2352e249f4648641d25e4f2dea4ab0464e60b0aea51b8a7b31dd0f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-mandrill-roster-v3",
+      "name": "wildlife v2 mandrill roster v3",
+      "image": "demos/wildlife-v2/mandrill/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f18c948dc2e4801d060ac7ab8e550890984d902c74e99546896ede26c0d74dc5",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-proboscis-monkey-roster-v3",
+      "name": "wildlife v2 proboscis monkey roster v3",
+      "image": "demos/wildlife-v2/proboscis-monkey/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-japanese-macaque-roster-v3",
+      "name": "wildlife v2 japanese macaque roster v3",
+      "image": "demos/wildlife-v2/japanese-macaque/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ocean-sunfish-roster-v3",
+      "name": "wildlife v2 ocean sunfish roster v3",
+      "image": "demos/wildlife-v2/ocean-sunfish/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "6bec15ed654d1d21c5ad021dc2b5f823f457d9bab2044b9f0949f5fd2bb95037",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-swordfish-roster-v3",
+      "name": "wildlife v2 swordfish roster v3",
+      "image": "demos/wildlife-v2/swordfish/roster-v3/sheet.png",
+      "width": 10368,
+      "height": 512,
+      "tileSize": 16,
+      "fingerprint": "135b26b1ef3c9f52775dee6fc85997b89f69efb04de06e55257c0e3f1436caf7",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-pufferfish-roster-v3",
+      "name": "wildlife v2 pufferfish roster v3",
+      "image": "demos/wildlife-v2/pufferfish/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "ab1d201605b7cd0b56ed974d768b9114b27cf4d3956c0d779ea2dd92f63811bd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-anglerfish-roster-v3",
+      "name": "wildlife v2 anglerfish roster v3",
+      "image": "demos/wildlife-v2/anglerfish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f51ba066ba24eaeb23acca9897f8069ac1e534c1cebcdba9e6b5cb532f5291db",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-meerkat-roster-v3",
+      "name": "wildlife v2 meerkat roster v3",
+      "image": "demos/wildlife-v2/meerkat/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f231ed461ef4f0bce8ea2f8a8e2817fd3664061b4ca575a78a5a9766999d3200",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-giant-anteater-roster-v3",
+      "name": "wildlife v2 giant anteater roster v3",
+      "image": "demos/wildlife-v2/giant-anteater/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "047aa986f5f3a16712cd79cf8b6d40f8d3408179f1cb8653d7403a7b35b8cadb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-aardvark-roster-v3",
+      "name": "wildlife v2 aardvark roster v3",
+      "image": "demos/wildlife-v2/aardvark/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "080b234760eb4c42c288460f65c307f50377039338435baba422e4d6bea82865",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-armadillo-roster-v3",
+      "name": "wildlife v2 armadillo roster v3",
+      "image": "demos/wildlife-v2/armadillo/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "93b141e8ab5bba76b13c5b511b28d1124b65e1dc2e2e85bf42df786aa57d7efe",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-pangolin-roster-v3",
+      "name": "wildlife v2 pangolin roster v3",
+      "image": "demos/wildlife-v2/pangolin/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf1e29524928e54e5a0c83a2fc2c7e26e2931f5cb5742cf198b22a34c7f0d580",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-pelican-roster-v3",
+      "name": "wildlife v2 pelican roster v3",
+      "image": "demos/wildlife-v2/pelican/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "73e7f50a490824fe60a013fa9cf67ee57b4b7713cf9495232e0c37bf15c53f7e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-blue-footed-booby-roster-v3",
+      "name": "wildlife v2 blue footed booby roster v3",
+      "image": "demos/wildlife-v2/blue-footed-booby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "fc022cca8b7dff33eb4c1238c3899512f2ba8ec5baea1831674c0115a84158bb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-great-frigatebird-roster-v3",
+      "name": "wildlife v2 great frigatebird roster v3",
+      "image": "demos/wildlife-v2/great-frigatebird/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a00635f391e0740aa89534208bdfb4738653c17df46495c9f62daaea8e24ad8f",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-ruby-throated-hummingbird-roster-v3",
+      "name": "wildlife v2 ruby throated hummingbird roster v3",
+      "image": "demos/wildlife-v2/ruby-throated-hummingbird/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "92b0cb244e044934d9b76236ccdc85082d747e16d8d05679393ebdb0d737bc75",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-flamingo-roster-v3",
+      "name": "wildlife v2 flamingo roster v3",
+      "image": "demos/wildlife-v2/flamingo/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "4c682366aeda93bc2e3a4b6d402fb891c66db26931c88a1e211de2d956918342",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-shoebill-roster-v3",
+      "name": "wildlife v2 shoebill roster v3",
+      "image": "demos/wildlife-v2/shoebill/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "a2b633bebe9a195db2e5698a2dc5272d88b3fd3e0010157352e31f0678d1f8a9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-secretary-bird-roster-v3",
+      "name": "wildlife v2 secretary bird roster v3",
+      "image": "demos/wildlife-v2/secretary-bird/roster-v3/sheet.png",
+      "width": 9072,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "52ad465c2849528d2c42068af327f576506d1b36e18afa0dcd98c327ad867ae6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-marabou-stork-roster-v3",
+      "name": "wildlife v2 marabou stork roster v3",
+      "image": "demos/wildlife-v2/marabou-stork/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "dbc3f358167c8909cf3b5814e7a90b45582fb0454032db9f8554f51e0f0caabb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-great-blue-heron-roster-v3",
+      "name": "wildlife v2 great blue heron roster v3",
+      "image": "demos/wildlife-v2/great-blue-heron/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "f82cbd30b4359c7d24caf69db08de0e13bf225f64e95d4a85e415ba5bbf9a26c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-crocodile-roster-v3",
+      "name": "wildlife v2 crocodile roster v3",
+      "image": "demos/wildlife-v2/crocodile/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "a2a27c8c6f012e8a99c457d1564e39641e0a7d476fc4722f8ca6f17386b65a26",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-alligator-roster-v3",
+      "name": "wildlife v2 alligator roster v3",
+      "image": "demos/wildlife-v2/alligator/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "53a020bb5fa35846ecc1cea0dc1c19b4873e6d626831bedba918d33023ecd1d6",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-komodo-dragon-roster-v3",
+      "name": "wildlife v2 komodo dragon roster v3",
+      "image": "demos/wildlife-v2/komodo-dragon/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "12fdc2f63b9a42b96ecae5e0bded804314139eb9fca51987f74e682622f68ce4",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sloth-roster-v3",
+      "name": "wildlife v2 sloth roster v3",
+      "image": "demos/wildlife-v2/sloth/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e59fa504936feafc5ba04794be5c1100dc806e764b6b8677afff52803eb26076",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-binturong-roster-v3",
+      "name": "wildlife v2 binturong roster v3",
+      "image": "demos/wildlife-v2/binturong/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "81e0884e88368b320317f41e7fd1ab50d9aeb30eb0475f8aae013b63fe6610da",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-aye-aye-roster-v3",
+      "name": "wildlife v2 aye aye roster v3",
+      "image": "demos/wildlife-v2/aye-aye/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "687e800452aff98c369c9befdd6a0b3bf07355af9c4cc361b7fc3be79bae00eb",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-kinkajou-roster-v3",
+      "name": "wildlife v2 kinkajou roster v3",
+      "image": "demos/wildlife-v2/kinkajou/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "675e2a6ca29ba3c7a7e9045fc632faba5a077bd0aa353e8cd429b37d879ce831",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-opossum-roster-v3",
+      "name": "wildlife v2 opossum roster v3",
+      "image": "demos/wildlife-v2/opossum/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "dfcafe6ea8b32edf0b51ffb5680f453838a32e53e5c5086deb8d95f613730c58",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-echidna-roster-v3",
+      "name": "wildlife v2 echidna roster v3",
+      "image": "demos/wildlife-v2/echidna/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "bfabb023be800d6d3db9684e0fda209eaf1abecea828d025cfeecb9f8cc7c89e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-tasmanian-devil-roster-v3",
+      "name": "wildlife v2 tasmanian devil roster v3",
+      "image": "demos/wildlife-v2/tasmanian-devil/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3ad88f8a2e5c12a32313ce03539db6e9ce2bf389613e23368076703de10a42de",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-bat-roster-v3",
+      "name": "wildlife v2 bat roster v3",
+      "image": "demos/wildlife-v2/bat/roster-v3/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "c3df8641d60c6fe475edc1d9240e360efdf6709dfdb29e0b78214d7673ba19d1",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-wallaby-roster-v3",
+      "name": "wildlife v2 wallaby roster v3",
+      "image": "demos/wildlife-v2/wallaby/roster-v3/sheet.png",
+      "width": 3280,
+      "height": 320,
+      "tileSize": 16,
+      "fingerprint": "642bde4eb5e1a239636c605add6815720a99931875fb6019fbbe3f7ad0fdf5b9",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-manatee-roster-v3",
+      "name": "wildlife v2 manatee roster v3",
+      "image": "demos/wildlife-v2/manatee/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "0806d311c9127a29d0ea09a50232fc1f4e3d3181e133933c6efd9effe2218a6c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-dugong-roster-v3",
+      "name": "wildlife v2 dugong roster v3",
+      "image": "demos/wildlife-v2/dugong/roster-v3/sheet.png",
+      "width": 4592,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "ac8b13d934787273415cb1ee3b7451fa30487225d7b96dc35d05c90987ba302b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-river-otter-roster-v3",
+      "name": "wildlife v2 river otter roster v3",
+      "image": "demos/wildlife-v2/river-otter/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0fefb6c140a3cb7fd4ea25423eabbbb0bfcdaa6c6ce64095aa2bf88b0f62b35b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-platypus-roster-v3",
+      "name": "wildlife v2 platypus roster v3",
+      "image": "demos/wildlife-v2/platypus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "692d391cc6b7acb85f95a518a7379fd65c25ba68f628943c3f5d29a35b80e2e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-sea-lion-roster-v3",
+      "name": "wildlife v2 sea lion roster v3",
+      "image": "demos/wildlife-v2/sea-lion/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "3a73f97490c5fa16823e90a3fcb8af563b2f9ef4cd55fa4dc236414e8cd10292",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-walrus-roster-v3",
+      "name": "wildlife v2 walrus roster v3",
+      "image": "demos/wildlife-v2/walrus/roster-v3/sheet.png",
+      "width": 7008,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "890c51321e7f28214b5a5dc02c3f9e99443fc9c3466109ae77e95dbe17eebde3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-gaboon-viper-roster-v3",
+      "name": "wildlife v2 gaboon viper roster v3",
+      "image": "demos/wildlife-v2/gaboon-viper/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cee144235212ad79da58fe460f03cb54ec08b1b93fe46bd05e36430dc8ab8816",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-snail-roster-v3",
+      "name": "wildlife v2 snail roster v3",
+      "image": "demos/wildlife-v2/snail/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "056f428708bf0a5c42776b806098ca9245dd8b532f391c3f308ff3443bd7a031",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-worm-roster-v3",
+      "name": "wildlife v2 worm roster v3",
+      "image": "demos/wildlife-v2/worm/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cb8c743f62624d0b87725efb5b8de18041282d4458023ea1a3094a68f006fee2",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-moray-eel-roster-v3",
+      "name": "wildlife v2 moray eel roster v3",
+      "image": "demos/wildlife-v2/moray-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "f7598cf1f6a8470960c7cfb41ab43d0734a87b8aff0d44ff27cd7b35d4acadcd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-electric-eel-roster-v3",
+      "name": "wildlife v2 electric eel roster v3",
+      "image": "demos/wildlife-v2/electric-eel/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "eca8c537aa94bf61196937f3984077db7d145b82c8344f3ad5ed21c74e5e8433",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-spider-roster-v3",
+      "name": "wildlife v2 spider roster v3",
+      "image": "demos/wildlife-v2/spider/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8519c509f243d1c5b7fa174e1d6545ea5087e72ea517475b88b26bf348796296",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-praying-mantis-roster-v3",
+      "name": "wildlife v2 praying mantis roster v3",
+      "image": "demos/wildlife-v2/praying-mantis/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "c461f6b1410ec5d944455b580b6f7adb2b45e0ebdccb0c497805bd4e5b434475",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-leaf-insect-roster-v3",
+      "name": "wildlife v2 leaf insect roster v3",
+      "image": "demos/wildlife-v2/leaf-insect/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "602103f049966e82bc592abbf3c909607595df95718c0cd3325a4d9dd35117a0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-scorpion-roster-v3",
+      "name": "wildlife v2 scorpion roster v3",
+      "image": "demos/wildlife-v2/scorpion/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "35270f46170ceb79dc6b5448b7afbdb7ae31021f5738bf37220e02c19749987e",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-roly-poly-roster-v3",
+      "name": "wildlife v2 roly poly roster v3",
+      "image": "demos/wildlife-v2/roly-poly/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "071dbc5bb046bf4397ef3cd7f0dad2e9d1262adf22583366ca51e153b5513397",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-earwig-roster-v3",
+      "name": "wildlife v2 earwig roster v3",
+      "image": "demos/wildlife-v2/earwig/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "cf9e15cb3601322e75d950839cc82062110279aa4d6c41939b6688a0a088d900",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-centipede-roster-v3",
+      "name": "wildlife v2 centipede roster v3",
+      "image": "demos/wildlife-v2/centipede/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d7a8b710c72005364166068ddb4ea86d4d60a1311f1d0fe3bb8951bf1539e6bf",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-millipede-roster-v3",
+      "name": "wildlife v2 millipede roster v3",
+      "image": "demos/wildlife-v2/millipede/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "d637e760709e4ad51f0a2768135f74ab1815c81621eb2514c219fe2205a2c5e3",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-cuttlefish-roster-v3",
+      "name": "wildlife v2 cuttlefish roster v3",
+      "image": "demos/wildlife-v2/cuttlefish/roster-v3/sheet.png",
+      "width": 7776,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5be55a7964472eaf392ef459660d37d90d0e32624e81574414de21dd5487a793",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-seahorse-roster-v3",
+      "name": "wildlife v2 seahorse roster v3",
+      "image": "demos/wildlife-v2/seahorse/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "b1f6f270cb0f6ce1de3d9c4083bc98b9ce3c7f6584c3ea3681bc654e01d2af4b",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-nautilus-roster-v3",
+      "name": "wildlife v2 nautilus roster v3",
+      "image": "demos/wildlife-v2/nautilus/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "e603f625a53b8c33ad06604303fe96ad48defd6e10ccbede9c68326f5dceafad",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-leafy-seadragon-roster-v3",
+      "name": "wildlife v2 leafy seadragon roster v3",
+      "image": "demos/wildlife-v2/leafy-seadragon/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "5bae591742955e8cadac4470c6b913049271084288acf5eaae0e0d7081d38e61",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-starfish-roster-v3",
+      "name": "wildlife v2 starfish roster v3",
+      "image": "demos/wildlife-v2/starfish/roster-v3/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -5783,6 +7163,10 @@
       "consumers": [
         {
           "system": "Gameplay",
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:123"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/Realm.ts:1072"
         },
         {
@@ -6509,7 +7893,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:132"
+          "source": "src/assets/GameAssets.ts:133"
         },
         {
           "system": "Gameplay",
@@ -6555,7 +7939,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:133"
+          "source": "src/assets/GameAssets.ts:134"
         },
         {
           "system": "Gameplay",
@@ -6593,7 +7977,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:134"
+          "source": "src/assets/GameAssets.ts:135"
         },
         {
           "system": "Gameplay",
@@ -6623,7 +8007,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:135"
+          "source": "src/assets/GameAssets.ts:136"
         },
         {
           "system": "Gameplay",
@@ -6657,7 +8041,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:136"
+          "source": "src/assets/GameAssets.ts:137"
         },
         {
           "system": "Gameplay",
@@ -6695,7 +8079,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:137"
+          "source": "src/assets/GameAssets.ts:138"
         },
         {
           "system": "Gameplay",
@@ -6735,11 +8119,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1077"
+          "source": "src/generation/regional/NaturalLandscape.ts:1096"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1271"
+          "source": "src/generation/regional/NaturalLandscape.ts:1290"
         },
         {
           "system": "World generation",
@@ -6797,7 +8181,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:138"
+          "source": "src/assets/GameAssets.ts:139"
         },
         {
           "system": "Gameplay",
@@ -6827,7 +8211,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:139"
+          "source": "src/assets/GameAssets.ts:140"
         },
         {
           "system": "Gameplay",
@@ -6881,7 +8265,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:140"
+          "source": "src/assets/GameAssets.ts:141"
         },
         {
           "system": "Gameplay",
@@ -6919,7 +8303,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:142"
+          "source": "src/assets/GameAssets.ts:143"
         },
         {
           "system": "Gameplay",
@@ -6949,7 +8333,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:143"
+          "source": "src/assets/GameAssets.ts:144"
         },
         {
           "system": "Gameplay",
@@ -6983,7 +8367,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:144"
+          "source": "src/assets/GameAssets.ts:145"
         },
         {
           "system": "Gameplay",
@@ -7017,7 +8401,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:145"
+          "source": "src/assets/GameAssets.ts:146"
         },
         {
           "system": "Gameplay",
@@ -7047,7 +8431,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:146"
+          "source": "src/assets/GameAssets.ts:147"
         },
         {
           "system": "Gameplay",
@@ -7081,7 +8465,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:147"
+          "source": "src/assets/GameAssets.ts:148"
         },
         {
           "system": "Gameplay",
@@ -7111,7 +8495,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:148"
+          "source": "src/assets/GameAssets.ts:149"
         },
         {
           "system": "Gameplay",
@@ -7141,7 +8525,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:149"
+          "source": "src/assets/GameAssets.ts:150"
         },
         {
           "system": "Gameplay",
@@ -7171,7 +8555,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:150"
+          "source": "src/assets/GameAssets.ts:151"
         },
         {
           "system": "Gameplay",
@@ -7201,7 +8585,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:151"
+          "source": "src/assets/GameAssets.ts:152"
         },
         {
           "system": "Gameplay",
@@ -25489,6 +26873,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:123"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/Realm.ts:1072"
         },
         {
@@ -25907,6 +27295,330 @@
         256
       ],
       "label": "wildlife-white-nosed-coati-predator-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-owl-predator-v1",
+      "sheetId": "wildlife-owl-predator-v1",
+      "rect": [
+        0,
+        0,
+        11616,
+        384
+      ],
+      "label": "wildlife-owl-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-eagle-predator-v1",
+      "sheetId": "wildlife-eagle-predator-v1",
+      "rect": [
+        0,
+        0,
+        11616,
+        384
+      ],
+      "label": "wildlife-eagle-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-hawk-predator-v1",
+      "sheetId": "wildlife-hawk-predator-v1",
+      "rect": [
+        0,
+        0,
+        11616,
+        384
+      ],
+      "label": "wildlife-hawk-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-secretary-bird-predator-v1",
+      "sheetId": "wildlife-secretary-bird-predator-v1",
+      "rect": [
+        0,
+        0,
+        9072,
+        448
+      ],
+      "label": "wildlife-secretary-bird-predator-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-crocodile-predator-v1",
+      "sheetId": "wildlife-crocodile-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-crocodile-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-alligator-predator-v1",
+      "sheetId": "wildlife-alligator-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-alligator-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-komodo-dragon-predator-v1",
+      "sheetId": "wildlife-komodo-dragon-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-komodo-dragon-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-gaboon-viper-predator-v1",
+      "sheetId": "wildlife-gaboon-viper-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-gaboon-viper-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-spider-predator-v1",
+      "sheetId": "wildlife-spider-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-spider-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-praying-mantis-predator-v1",
+      "sheetId": "wildlife-praying-mantis-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-praying-mantis-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-scorpion-predator-v1",
+      "sheetId": "wildlife-scorpion-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-scorpion-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-centipede-predator-v1",
+      "sheetId": "wildlife-centipede-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-centipede-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-tasmanian-devil-predator-v1",
+      "sheetId": "wildlife-tasmanian-devil-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-tasmanian-devil-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-swordfish-predator-v1",
+      "sheetId": "wildlife-swordfish-predator-v1",
+      "rect": [
+        0,
+        0,
+        10368,
+        512
+      ],
+      "label": "wildlife-swordfish-predator-v1 · registered 128×128 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-anglerfish-predator-v1",
+      "sheetId": "wildlife-anglerfish-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-anglerfish-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-moray-eel-predator-v1",
+      "sheetId": "wildlife-moray-eel-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-moray-eel-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-electric-eel-predator-v1",
+      "sheetId": "wildlife-electric-eel-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-electric-eel-predator-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-cuttlefish-predator-v1",
+      "sheetId": "wildlife-cuttlefish-predator-v1",
+      "rect": [
+        0,
+        0,
+        7776,
+        384
+      ],
+      "label": "wildlife-cuttlefish-predator-v1 · registered 96×96 frames",
       "kind": "sprite",
       "consumers": [
         {
@@ -27346,6 +29058,888 @@
       ]
     },
     {
+      "id": "sprite:wildlife-raven-provisional-v1",
+      "sheetId": "wildlife-raven-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-raven-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-crow-provisional-v1",
+      "sheetId": "wildlife-crow-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-crow-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-atlantic-puffin-provisional-v1",
+      "sheetId": "wildlife-atlantic-puffin-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-atlantic-puffin-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-chimpanzee-provisional-v1",
+      "sheetId": "wildlife-chimpanzee-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4704,
+        384
+      ],
+      "label": "wildlife-chimpanzee-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-orangutan-provisional-v1",
+      "sheetId": "wildlife-orangutan-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4704,
+        384
+      ],
+      "label": "wildlife-orangutan-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-capuchin-monkey-provisional-v1",
+      "sheetId": "wildlife-capuchin-monkey-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-capuchin-monkey-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ring-tailed-lemur-provisional-v1",
+      "sheetId": "wildlife-ring-tailed-lemur-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-ring-tailed-lemur-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-mandrill-provisional-v1",
+      "sheetId": "wildlife-mandrill-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-mandrill-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-proboscis-monkey-provisional-v1",
+      "sheetId": "wildlife-proboscis-monkey-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-proboscis-monkey-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-japanese-macaque-provisional-v1",
+      "sheetId": "wildlife-japanese-macaque-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-japanese-macaque-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ocean-sunfish-provisional-v1",
+      "sheetId": "wildlife-ocean-sunfish-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-ocean-sunfish-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-pufferfish-provisional-v1",
+      "sheetId": "wildlife-pufferfish-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3280,
+        320
+      ],
+      "label": "wildlife-pufferfish-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-meerkat-provisional-v1",
+      "sheetId": "wildlife-meerkat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-meerkat-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-giant-anteater-provisional-v1",
+      "sheetId": "wildlife-giant-anteater-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-giant-anteater-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-aardvark-provisional-v1",
+      "sheetId": "wildlife-aardvark-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-aardvark-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-armadillo-provisional-v1",
+      "sheetId": "wildlife-armadillo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-armadillo-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-pangolin-provisional-v1",
+      "sheetId": "wildlife-pangolin-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-pangolin-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-pelican-provisional-v1",
+      "sheetId": "wildlife-pelican-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-pelican-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-blue-footed-booby-provisional-v1",
+      "sheetId": "wildlife-blue-footed-booby-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3280,
+        320
+      ],
+      "label": "wildlife-blue-footed-booby-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-great-frigatebird-provisional-v1",
+      "sheetId": "wildlife-great-frigatebird-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-great-frigatebird-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-ruby-throated-hummingbird-provisional-v1",
+      "sheetId": "wildlife-ruby-throated-hummingbird-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-ruby-throated-hummingbird-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-flamingo-provisional-v1",
+      "sheetId": "wildlife-flamingo-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-flamingo-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-shoebill-provisional-v1",
+      "sheetId": "wildlife-shoebill-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-shoebill-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-marabou-stork-provisional-v1",
+      "sheetId": "wildlife-marabou-stork-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-marabou-stork-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-great-blue-heron-provisional-v1",
+      "sheetId": "wildlife-great-blue-heron-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-great-blue-heron-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-sloth-provisional-v1",
+      "sheetId": "wildlife-sloth-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-sloth-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-binturong-provisional-v1",
+      "sheetId": "wildlife-binturong-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-binturong-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-aye-aye-provisional-v1",
+      "sheetId": "wildlife-aye-aye-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-aye-aye-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-kinkajou-provisional-v1",
+      "sheetId": "wildlife-kinkajou-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-kinkajou-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-opossum-provisional-v1",
+      "sheetId": "wildlife-opossum-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-opossum-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-echidna-provisional-v1",
+      "sheetId": "wildlife-echidna-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-echidna-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-bat-provisional-v1",
+      "sheetId": "wildlife-bat-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-bat-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-wallaby-provisional-v1",
+      "sheetId": "wildlife-wallaby-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3280,
+        320
+      ],
+      "label": "wildlife-wallaby-provisional-v1 · registered 80×80 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-manatee-provisional-v1",
+      "sheetId": "wildlife-manatee-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-manatee-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-dugong-provisional-v1",
+      "sheetId": "wildlife-dugong-provisional-v1",
+      "rect": [
+        0,
+        0,
+        4592,
+        448
+      ],
+      "label": "wildlife-dugong-provisional-v1 · registered 112×112 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-river-otter-provisional-v1",
+      "sheetId": "wildlife-river-otter-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-river-otter-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-platypus-provisional-v1",
+      "sheetId": "wildlife-platypus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-platypus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-sea-lion-provisional-v1",
+      "sheetId": "wildlife-sea-lion-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-sea-lion-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-walrus-provisional-v1",
+      "sheetId": "wildlife-walrus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        7008,
+        384
+      ],
+      "label": "wildlife-walrus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-snail-provisional-v1",
+      "sheetId": "wildlife-snail-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-snail-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-worm-provisional-v1",
+      "sheetId": "wildlife-worm-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-worm-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-leaf-insect-provisional-v1",
+      "sheetId": "wildlife-leaf-insect-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-leaf-insect-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-roly-poly-provisional-v1",
+      "sheetId": "wildlife-roly-poly-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-roly-poly-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-earwig-provisional-v1",
+      "sheetId": "wildlife-earwig-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-earwig-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-millipede-provisional-v1",
+      "sheetId": "wildlife-millipede-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-millipede-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-seahorse-provisional-v1",
+      "sheetId": "wildlife-seahorse-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-seahorse-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-nautilus-provisional-v1",
+      "sheetId": "wildlife-nautilus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-nautilus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-leafy-seadragon-provisional-v1",
+      "sheetId": "wildlife-leafy-seadragon-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-leafy-seadragon-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-starfish-provisional-v1",
+      "sheetId": "wildlife-starfish-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-starfish-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-salamander-provisional-v1",
       "sheetId": "wildlife-salamander-provisional-v1",
       "rect": [
@@ -28023,7 +30617,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:75"
+          "source": "src/assets/GameAssets.ts:76"
         },
         {
           "system": "Gameplay",
@@ -28049,7 +30643,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:76"
+          "source": "src/assets/GameAssets.ts:77"
         },
         {
           "system": "Gameplay",
@@ -28083,7 +30677,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:77"
+          "source": "src/assets/GameAssets.ts:78"
         },
         {
           "system": "Gameplay",
@@ -28167,7 +30761,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:427"
+          "source": "src/wildlife/FoodWeb.ts:699"
         }
       ]
     },
@@ -28955,7 +31549,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:77"
+          "source": "src/traffic/Vehicle.ts:79"
         }
       ]
     },
@@ -29058,6 +31652,60 @@
       ]
     },
     {
+      "id": "sprite:vehicle-v1:rosso-coupe",
+      "sheetId": "vehicle-v1:rosso-coupe",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:rosso-coupe · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle",
+      "sheetId": "vehicle-v1:beetle",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:school-bus",
+      "sheetId": "vehicle-v1:school-bus",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:school-bus · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:player",
       "sheetId": "player",
       "rect": [
@@ -29075,7 +31723,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:91"
+          "source": "src/assets/GameAssets.ts:92"
         },
         {
           "system": "Gameplay",
@@ -29179,11 +31827,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:50"
+          "source": "src/scenarios/ScenarioSession.ts:56"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:181"
+          "source": "src/scenarios/ScenarioSession.ts:187"
         },
         {
           "system": "Gameplay",
@@ -29267,7 +31915,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:458"
+          "source": "src/wildlife/FoodWeb.ts:730"
         },
         {
           "system": "Gameplay",
@@ -29293,7 +31941,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:97"
+          "source": "src/assets/GameAssets.ts:98"
         },
         {
           "system": "Gameplay",
@@ -29305,7 +31953,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:92"
+          "source": "src/editor/EditorPalettes.ts:93"
         },
         {
           "system": "Gameplay",
@@ -29333,7 +31981,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:948"
+          "source": "src/wildlife/Fauna.ts:963"
         },
         {
           "system": "Gameplay",
@@ -29341,15 +31989,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:22"
+          "source": "src/wildlife/FoodWeb.ts:38"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:242"
+          "source": "src/wildlife/FoodWeb.ts:308"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:424"
+          "source": "src/wildlife/FoodWeb.ts:508"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:696"
         },
         {
           "system": "Gameplay",
@@ -29375,7 +32027,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:102"
+          "source": "src/assets/GameAssets.ts:103"
         },
         {
           "system": "Gameplay",
@@ -29383,7 +32035,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:93"
+          "source": "src/editor/EditorPalettes.ts:94"
         },
         {
           "system": "Gameplay",
@@ -29411,35 +32063,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:24"
+          "source": "src/wildlife/Fauna.ts:37"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:219"
+          "source": "src/wildlife/Fauna.ts:234"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:297"
+          "source": "src/wildlife/FoodWeb.ts:204"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:315"
+          "source": "src/wildlife/FoodWeb.ts:563"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:333"
+          "source": "src/wildlife/FoodWeb.ts:581"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:371"
+          "source": "src/wildlife/FoodWeb.ts:599"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:397"
+          "source": "src/wildlife/FoodWeb.ts:640"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:424"
+          "source": "src/wildlife/FoodWeb.ts:669"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:696"
         }
       ]
     },
@@ -29461,11 +32117,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:103"
+          "source": "src/assets/GameAssets.ts:104"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:94"
+          "source": "src/editor/EditorPalettes.ts:95"
         },
         {
           "system": "Gameplay",
@@ -29489,19 +32145,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:23"
+          "source": "src/wildlife/FoodWeb.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:243"
+          "source": "src/wildlife/FoodWeb.ts:288"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:424"
+          "source": "src/wildlife/FoodWeb.ts:309"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:428"
+          "source": "src/wildlife/FoodWeb.ts:509"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:696"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:700"
         },
         {
           "system": "Gameplay",
@@ -29527,11 +32191,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:104"
+          "source": "src/assets/GameAssets.ts:105"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:95"
+          "source": "src/editor/EditorPalettes.ts:96"
         },
         {
           "system": "Gameplay",
@@ -29547,7 +32211,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:428"
+          "source": "src/wildlife/FoodWeb.ts:700"
         }
       ]
     },
@@ -29569,11 +32233,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:105"
+          "source": "src/assets/GameAssets.ts:106"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:98"
+          "source": "src/editor/EditorPalettes.ts:99"
         },
         {
           "system": "Gameplay",
@@ -29593,7 +32257,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:429"
+          "source": "src/wildlife/FoodWeb.ts:701"
         }
       ]
     },
@@ -29615,11 +32279,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:106"
+          "source": "src/assets/GameAssets.ts:107"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:99"
+          "source": "src/editor/EditorPalettes.ts:100"
         },
         {
           "system": "Gameplay",
@@ -29639,7 +32303,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:430"
+          "source": "src/wildlife/FoodWeb.ts:702"
         }
       ]
     },
@@ -29661,11 +32325,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:107"
+          "source": "src/assets/GameAssets.ts:108"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:100"
+          "source": "src/editor/EditorPalettes.ts:101"
         },
         {
           "system": "Gameplay",
@@ -29685,7 +32349,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:431"
+          "source": "src/wildlife/FoodWeb.ts:703"
         }
       ]
     },
@@ -29707,7 +32371,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:108"
+          "source": "src/assets/GameAssets.ts:109"
         },
         {
           "system": "Gameplay",
@@ -29715,7 +32379,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:101"
+          "source": "src/editor/EditorPalettes.ts:102"
         },
         {
           "system": "Gameplay",
@@ -29761,11 +32425,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:109"
+          "source": "src/assets/GameAssets.ts:110"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:102"
+          "source": "src/editor/EditorPalettes.ts:103"
         },
         {
           "system": "Gameplay",
@@ -29807,11 +32471,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:110"
+          "source": "src/assets/GameAssets.ts:111"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:96"
+          "source": "src/editor/EditorPalettes.ts:97"
         },
         {
           "system": "Gameplay",
@@ -29831,15 +32495,23 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/wildlife/ContinuationBirds.ts:61"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/wildlife/FaunaExpansion.ts:101"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:24"
+          "source": "src/wildlife/FoodWeb.ts:40"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:424"
+          "source": "src/wildlife/FoodWeb.ts:311"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/FoodWeb.ts:696"
         },
         {
           "system": "Gameplay",
@@ -29865,11 +32537,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:111"
+          "source": "src/assets/GameAssets.ts:112"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:97"
+          "source": "src/editor/EditorPalettes.ts:98"
         },
         {
           "system": "Gameplay",
@@ -29885,11 +32557,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:25"
+          "source": "src/wildlife/FoodWeb.ts:41"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:424"
+          "source": "src/wildlife/FoodWeb.ts:696"
         },
         {
           "system": "Gameplay",
@@ -29915,11 +32587,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:112"
+          "source": "src/assets/GameAssets.ts:113"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:103"
+          "source": "src/editor/EditorPalettes.ts:104"
         },
         {
           "system": "Gameplay",
@@ -29945,11 +32617,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:113"
+          "source": "src/assets/GameAssets.ts:114"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:104"
+          "source": "src/editor/EditorPalettes.ts:105"
         },
         {
           "system": "Gameplay",
@@ -29975,11 +32647,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:114"
+          "source": "src/assets/GameAssets.ts:115"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:105"
+          "source": "src/editor/EditorPalettes.ts:106"
         },
         {
           "system": "Gameplay",
@@ -30005,11 +32677,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:115"
+          "source": "src/assets/GameAssets.ts:116"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:106"
+          "source": "src/editor/EditorPalettes.ts:107"
         },
         {
           "system": "Gameplay",
@@ -30035,7 +32707,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:116"
+          "source": "src/assets/GameAssets.ts:117"
         },
         {
           "system": "Gameplay",
@@ -30097,11 +32769,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:117"
+          "source": "src/assets/GameAssets.ts:118"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:107"
+          "source": "src/editor/EditorPalettes.ts:108"
         },
         {
           "system": "Gameplay",
@@ -30147,11 +32819,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:118"
+          "source": "src/assets/GameAssets.ts:119"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:108"
+          "source": "src/editor/EditorPalettes.ts:109"
         },
         {
           "system": "Gameplay",
@@ -30697,7 +33369,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:132"
+          "source": "src/assets/GameAssets.ts:133"
         },
         {
           "system": "Gameplay",
@@ -30747,7 +33419,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:133"
+          "source": "src/assets/GameAssets.ts:134"
         },
         {
           "system": "Gameplay",
@@ -30789,7 +33461,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:134"
+          "source": "src/assets/GameAssets.ts:135"
         },
         {
           "system": "Gameplay",
@@ -30823,7 +33495,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:135"
+          "source": "src/assets/GameAssets.ts:136"
         },
         {
           "system": "Gameplay",
@@ -30861,7 +33533,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:136"
+          "source": "src/assets/GameAssets.ts:137"
         },
         {
           "system": "Gameplay",
@@ -30903,7 +33575,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:137"
+          "source": "src/assets/GameAssets.ts:138"
         },
         {
           "system": "Gameplay",
@@ -30943,11 +33615,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1077"
+          "source": "src/generation/regional/NaturalLandscape.ts:1096"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1271"
+          "source": "src/generation/regional/NaturalLandscape.ts:1290"
         },
         {
           "system": "World generation",
@@ -31009,7 +33681,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:138"
+          "source": "src/assets/GameAssets.ts:139"
         },
         {
           "system": "Gameplay",
@@ -31043,7 +33715,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:139"
+          "source": "src/assets/GameAssets.ts:140"
         },
         {
           "system": "Gameplay",
@@ -31101,7 +33773,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:140"
+          "source": "src/assets/GameAssets.ts:141"
         },
         {
           "system": "Gameplay",
@@ -31143,7 +33815,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:142"
+          "source": "src/assets/GameAssets.ts:143"
         },
         {
           "system": "Gameplay",
@@ -31177,7 +33849,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:143"
+          "source": "src/assets/GameAssets.ts:144"
         },
         {
           "system": "Gameplay",
@@ -31215,7 +33887,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:144"
+          "source": "src/assets/GameAssets.ts:145"
         },
         {
           "system": "Gameplay",
@@ -31253,7 +33925,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:145"
+          "source": "src/assets/GameAssets.ts:146"
         },
         {
           "system": "Gameplay",
@@ -31287,7 +33959,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:146"
+          "source": "src/assets/GameAssets.ts:147"
         },
         {
           "system": "Gameplay",
@@ -31325,7 +33997,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:147"
+          "source": "src/assets/GameAssets.ts:148"
         },
         {
           "system": "Gameplay",
@@ -31359,7 +34031,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:148"
+          "source": "src/assets/GameAssets.ts:149"
         },
         {
           "system": "Gameplay",
@@ -31393,7 +34065,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:149"
+          "source": "src/assets/GameAssets.ts:150"
         },
         {
           "system": "Gameplay",
@@ -31427,7 +34099,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:150"
+          "source": "src/assets/GameAssets.ts:151"
         },
         {
           "system": "Gameplay",
@@ -31461,7 +34133,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:151"
+          "source": "src/assets/GameAssets.ts:152"
         },
         {
           "system": "Gameplay",
@@ -31495,7 +34167,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:153"
+          "source": "src/assets/GameAssets.ts:154"
         },
         {
           "system": "Gameplay",

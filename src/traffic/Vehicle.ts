@@ -1,21 +1,23 @@
 import { required } from "../art/ArtCatalog.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import bank from "./vehicles-v1.json" with { type: "json" };
 
 export const VEHICLE_BANK = bank;
-export const VEHICLE_MODELS = [...new Set(bank.views.map((v) => v.vehicleId))];
+const views = [...bank.views, ...ORIGINAL_VEHICLES.flatMap((vehicle) => vehicle.views)];
+export const VEHICLE_MODELS = [...new Set(views.map((v) => v.vehicleId))];
 export const TRAFFIC_MODELS = VEHICLE_MODELS.filter((id) => id !== "fire-truck-ladder-2");
 const directions = ["south", "north", "west", "east"];
-const viewsByKey = new Map(bank.views.map((v) => [`vehicle-v1:${v.vehicleId}:${v.direction}`, v]));
-// Longer bodies need more room to turn. Use the immutable approved footprints,
+const viewsByKey = new Map(views.map((v) => [`vehicle-v1:${v.vehicleId}:${v.direction}`, v]));
+// Longer bodies need more room to turn. Use retained vehicle footprints,
 // independent of the currently selected cardinal sprite and rendering backend.
 const turningRadii = new Map(
   VEHICLE_MODELS.map((id) => [
     `vehicle-v1:${id}`,
     Math.max(
       40,
-      ...bank.views
+      ...views
         .filter((v) => v.vehicleId === id)
         .flatMap((v) => v.metadata.colliders.map((c) => Math.max(c.width, c.height) * 0.7)),
     ),
@@ -43,7 +45,7 @@ const roofSizes = new Map(
     Math.max(
       0,
       Math.min(
-        ...bank.views
+        ...views
           .filter((v) => v.vehicleId === id)
           .flatMap((v) => v.metadata.colliders.map((c) => Math.min(c.width, c.height))),
       ) - 4,
@@ -54,7 +56,7 @@ const roadWidths = new Map(
   VEHICLE_MODELS.map((model) => [
     model,
     Math.max(
-      ...bank.views
+      ...views
         .filter((v) => v.vehicleId === model)
         .map((v) => {
           const c = required(v.metadata.colliders[0]);

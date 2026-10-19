@@ -1,0 +1,73 @@
+{
+  "family": "classic-regular-cab-pickup",
+  "revision": "v1",
+  "forwardBlender": "-X",
+  "upBlender": "+Z",
+  "groundZ": 0,
+  "exportWorldScale": 17.39130434782609,
+  "dimensionsSource": [5.4, 2.24, 2.02],
+  "wheelRadius": 0.46,
+  "wheelWidth": 0.3,
+  "axles": [-1.65, 1.63],
+  "halfTrack": 0.9,
+  "cabStations": [
+    [-1.3, 0.94, 0.34],
+    [-1.23, 1, 0.3],
+    [-0.94, 1, 0],
+    [0.15, 1, 0],
+    [0.27, 0.97, 0],
+    [0.32, 0.93, 0]
+  ],
+  "hoodStations": [
+    [-2.54, 0.93, 0.88],
+    [-2.44, 1, 0.96],
+    [-2.22, 1, 1],
+    [-1.62, 1, 1.02],
+    [-1.23, 0.99, 1.02],
+    [-1.12, 0.96, 1]
+  ],
+  "arch": {
+    "cutRadius": 0.555,
+    "pocketInnerY": 0.7,
+    "segments": 20
+  },
+  "fender": {
+    "segments": 16,
+    "lateralStations": [0.66, 0.8, 0.97, 1.07, 1.12],
+    "shoulderRadii": [0.57, 0.625, 0.625, 0.61, 0.585],
+    "archRadius": 0.535
+  },
+  "palette": {
+    "ink": [58, 58, 80],
+    "tire": [52, 52, 70],
+    "tireLight": [70, 70, 94],
+    "paintDeep": [43, 97, 113],
+    "paintShadow": [46, 119, 135],
+    "paintMid": [52, 143, 155],
+    "paint": [67, 166, 173],
+    "paintLight": [103, 191, 192],
+    "cream": [255, 226, 160],
+    "glassDark": [86, 89, 114],
+    "glass": [115, 140, 168],
+    "glassLight": [164, 187, 213],
+    "glassGlint": [186, 210, 224],
+    "rim": [131, 136, 151],
+    "silver": [212, 212, 230],
+    "white": [248, 248, 248],
+    "ruby": [186, 39, 88],
+    "amber": [234, 165, 99],
+    "bedFloor": [50, 83, 99],
+    "bedRib": [66, 105, 117],
+    "bedWall": [42, 72, 90],
+    "rubyLight": [223, 93, 119]
+  },
+  "render": {
+    "nativeSize": 224,
+    "meshRadius": 112,
+    "studyElevationDegrees": 50,
+    "studyOrthoScale": 12.6,
+    "studyGroundOrigin": [112, 140],
+    "engineGroundOrigin": [112, 112]
+  },
+  "paintMethod": "Original pickup-specific semantic UV paint on actual cab/hood skin and explicit cargo components. No source projection, screen redraw or high-to-low transfer."
+}

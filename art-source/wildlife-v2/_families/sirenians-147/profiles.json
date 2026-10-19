@@ -1,0 +1,144 @@
+{
+  "manatee": {
+    "label": "West Indian manatee",
+    "canvas": 112,
+    "fauna": true,
+    "tailPlane": "horizontal",
+    "bodyCenter": [
+      0,
+      -0.05,
+      1.2
+    ],
+    "bodyRadii": [
+      0.7,
+      1.45,
+      0.62
+    ],
+    "headPosition": [
+      0,
+      1.2,
+      1.15
+    ],
+    "headRadii": [
+      0.46,
+      0.5,
+      0.43
+    ],
+    "tailRoot": [
+      0,
+      -1.22,
+      1.12
+    ],
+    "tailLengths": [
+      0.48,
+      0.43,
+      0.35
+    ],
+    "tailRadius": 0.33,
+    "flukeWidth": 0.85,
+    "finPivots": [
+      [
+        -1,
+        -0.55,
+        0.55,
+        1.0
+      ],
+      [
+        1,
+        0.55,
+        0.55,
+        1.0
+      ]
+    ],
+    "finReach": 0.65,
+    "speed": 10,
+    "swimMs": 50,
+    "chaseMs": 25,
+    "palette": {
+      "B": "#8b9282",
+      "H": "#a7ad9b",
+      "W": "#c5c7b0",
+      "M": "#455650",
+      "E": "#253d37",
+      "T": "#d8cfb1",
+      "G": "#a0aa8f"
+    },
+    "tailShape": "paddle",
+    "anchor": [
+      56,
+      84
+    ],
+    "heave": 0.11
+  },
+  "dugong": {
+    "label": "Dugong",
+    "canvas": 112,
+    "fauna": true,
+    "tailPlane": "horizontal",
+    "bodyCenter": [
+      0,
+      -0.05,
+      1.2
+    ],
+    "bodyRadii": [
+      0.62,
+      1.5,
+      0.56
+    ],
+    "headPosition": [
+      0,
+      1.2,
+      1.15
+    ],
+    "headRadii": [
+      0.37,
+      0.46,
+      0.36
+    ],
+    "tailRoot": [
+      0,
+      -1.22,
+      1.12
+    ],
+    "tailLengths": [
+      0.48,
+      0.43,
+      0.35
+    ],
+    "tailRadius": 0.33,
+    "flukeWidth": 0.85,
+    "finPivots": [
+      [
+        -1,
+        -0.55,
+        0.55,
+        1.0
+      ],
+      [
+        1,
+        0.55,
+        0.55,
+        1.0
+      ]
+    ],
+    "finReach": 0.65,
+    "speed": 12,
+    "swimMs": 50,
+    "chaseMs": 25,
+    "palette": {
+      "B": "#9b9480",
+      "H": "#b5ad97",
+      "W": "#d1c6aa",
+      "M": "#575b4c",
+      "E": "#2b3932",
+      "T": "#e5d8b7",
+      "G": "#b1aa8e"
+    },
+    "tailShape": "flukes",
+    "anchor": [
+      56,
+      84
+    ],
+    "heave": 0.11
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "status": "passed",
+  "browser": "153.0.8010.12",
+  "views": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "frozen128Exact": true,
+      "centered224CropExact": true
+    }
+  ],
+  "all32FrozenFramesExact": true,
+  "all32LargerViewportCropsExact": true
+}

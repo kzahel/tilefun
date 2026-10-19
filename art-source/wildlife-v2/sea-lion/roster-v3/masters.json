@@ -1,0 +1,14 @@
+{
+  "identity": "sea-lion-roster-v3-pixels-01",
+  "palette": {
+    "B": "#8e7750",
+    "H": "#b09565",
+    "C": "#ccb480",
+    "M": "#564c39",
+    "K": "#343832",
+    "E": "#d1b98b",
+    "N": "#26302b",
+    "T": "#dbd1b7"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

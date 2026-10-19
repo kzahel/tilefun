@@ -44,9 +44,10 @@ for (const p of AQUATIC_HUNTER_PROFILES)
       await expect(canvas).toHaveAttribute("data-authority-running", "false");
       const before = await poses();
       expect(before[0]?.z).toBe(0);
-      expect(await fish()).toBe(population);
+      const remaining = await fish();
+      expect(remaining).toBeLessThan(population);
       await canvas.screenshot({
-        path: `data/wildlife-140/${p.species}/roster-v2/lagoon-${renderer}.png`,
+        path: `data/wildlife-147/${p.species}/${p.revision}/lagoon-${renderer}.png`,
       });
       await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-reload-count", "1");
@@ -55,7 +56,7 @@ for (const p of AQUATIC_HUNTER_PROFILES)
       expect(after[0]?.frame).toBe(before[0]?.frame);
       expect(after[0]?.x).toBeCloseTo(before[0]?.x ?? NaN, 3);
       expect(after[0]?.y).toBeCloseTo(before[0]?.y ?? NaN, 3);
-      expect(await fish()).toBe(population);
+      expect(await fish()).toBe(remaining);
       expect(errors).toEqual([]);
     });
   }

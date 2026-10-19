@@ -1,0 +1,18 @@
+{
+  "identity": "chimpanzee-roster-v3",
+  "browser": "bundled full Chromium",
+  "results": [
+    {
+      "scale": 1,
+      "chronologicalPoses": 49,
+      "exactFacingCrops": 196
+    },
+    {
+      "scale": 3,
+      "chronologicalPoses": 49,
+      "exactFacingCrops": 196
+    }
+  ],
+  "controls": "pause/play, next, range keyboard scrubbing and speed",
+  "errors": []
+}

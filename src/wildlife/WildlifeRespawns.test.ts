@@ -6,9 +6,14 @@ import { durableId } from "../persistence/ActorRecords.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { createDeer } from "./Deer.js";
+import { createFauna } from "./Fauna.js";
 import { createPredator } from "./Predator.js";
 import { resolvePredatorCatches } from "./predatorAI.js";
-import { tickWildlifeRespawns, WILDLIFE_RESPAWN_LIMIT } from "./WildlifeRespawns.js";
+import {
+  scheduleWildlifeRespawn,
+  tickWildlifeRespawns,
+  WILDLIFE_RESPAWN_LIMIT,
+} from "./WildlifeRespawns.js";
 
 const open = { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 };
 function meal(natural = true) {
@@ -133,3 +138,38 @@ it("saves pending countdowns and atomically replaces their records with distant 
     await session.close();
   }
 }, 30_000);
+
+it("returns amphibious natural animals on wet terrain with the correct saved water pose", () => {
+  const manager = new EntityManager();
+  const prey = createFauna("harbor-seal", 0, 0);
+  prey.naturalSpawnId = "natural-wet-seal";
+  expect(scheduleWildlifeRespawn(manager, prey, () => 0.5)).toBe(true);
+  tickWildlifeRespawns(manager, 120, { ...open, isWater: () => true }, []);
+  const born = required(manager.entities.find((e) => e.type === prey.type));
+  expect(born.fauna?.water).toBe(true);
+  expect(born.noShadow).toBe(true);
+  expect(born.naturalSpawnId).toBe("natural-wet-seal");
+  expect(manager.wildlifeRespawns.size).toBe(0);
+});
+it("defers deep fauna births on shallow or internally unsuitable water tiles", () => {
+  const manager = new EntityManager();
+  const prey = createFauna("manatee", 0, 0);
+  prey.naturalSpawnId = "natural-deep-manatee";
+  expect(scheduleWildlifeRespawn(manager, prey, () => 0.5)).toBe(true);
+  const wet = { ...open, isWater: () => true };
+  tickWildlifeRespawns(manager, 120, { ...wet, isDeepWater: () => false }, []);
+  expect(manager.entities).toHaveLength(0);
+  expect(manager.wildlifeRespawns.size).toBe(1);
+  // Every center/corner could be deep while an interior footprint tile is shallow.
+  tickWildlifeRespawns(
+    manager,
+    5,
+    { ...wet, isDeepWater: (p) => !(Math.abs(p.wx % 16) === 8 && Math.abs(p.wy % 16) === 8) },
+    [],
+  );
+  expect(manager.entities).toHaveLength(0);
+  expect(manager.wildlifeRespawns.size).toBe(1);
+  tickWildlifeRespawns(manager, 5, { ...wet, isDeepWater: () => true }, []);
+  expect(manager.entities).toHaveLength(1);
+  expect(manager.wildlifeRespawns.size).toBe(0);
+});

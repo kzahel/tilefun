@@ -1,0 +1,17 @@
+{
+  "identity": "sloth-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.8672667198359392,
+    "up": 1.8187500000000014,
+    "left": 1.8002755746740178,
+    "right": 1.8002755746740178
+  },
+  "rootTravelPixelsPerCycle": 9.6,
+  "plantedTravel": true
+}

@@ -1,0 +1,15 @@
+{
+  "identity": "atlantic-puffin-roster-v3-pixels-01",
+  "palette": {
+    "B": "#293941",
+    "H": "#bec5bf",
+    "C": "#eee8cf",
+    "M": "#2d3b42",
+    "N": "#17272d",
+    "E": "#e4be67",
+    "K": "#17272d",
+    "T": "#df8c40",
+    "R": "#c34c3b"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

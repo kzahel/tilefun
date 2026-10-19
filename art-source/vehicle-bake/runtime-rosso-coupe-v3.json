@@ -1,0 +1,32 @@
+{
+  "modelSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+  "spriteSha256": "3c89ecdda89149c2a6a470b73cee0ccaa8761c6cc0afabbe3840f096fd1d72d0",
+  "inputs": {
+    "public/demos/vehicle-bake/a-reduced-projection/mid-fenders-v3/model.glb": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-4.png": "6252a4ef06cbf98a45c591cfc0a81ccd598eb46dc8756001e9c4eb3f028ecdda",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-12.png": "1556edec27931083bbd28401fa0fae6a4077852f04a8b65ae2eb7efbd163ce94",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-8.png": "6c709b0950292c143a86b1441d3277b410eb855b3468f3e200f9351034bdade2",
+    "public/demos/vehicle-bake/captures/a-reduced-projection--mid-fenders-v3/engine-0.png": "3de2289a93d3e57fc0e40e7d06b1c47ac93d2bfd597501d3ae3a868ff09546da"
+  },
+  "physicalBounds": [
+    82,
+    36,
+    19
+  ],
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "projection": "Unchanged shared game projection; exact native pixels from retained actual GLB captures",
+  "replay": "python scripts/vehicle-bake/export-runtime.py"
+}

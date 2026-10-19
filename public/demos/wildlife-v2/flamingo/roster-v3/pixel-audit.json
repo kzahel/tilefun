@@ -1,0 +1,17 @@
+{
+  "identity": "flamingo-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.8284023668639122,
+    "up": 1.5467497385848716,
+    "left": 1.587432110045171,
+    "right": 1.587432110045171
+  },
+  "rootTravelPixelsPerCycle": 15.36,
+  "plantedTravel": true
+}

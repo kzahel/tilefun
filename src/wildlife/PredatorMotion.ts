@@ -75,6 +75,7 @@ export function settlePredatorFlight(e: Entity, groundZ: number): void {
   delete ai.flight;
   delete e.jumpZ;
   e.wz = groundZ;
+  e.groundZ = groundZ;
   ai.state = attack ? "chase" : groundZ > 4 ? "perch" : "rest";
   ai.timer = attack ? 0 : groundZ > 4 ? 2 : 1;
   ai.elapsed = 0;

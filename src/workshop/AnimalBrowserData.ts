@@ -1,4 +1,4 @@
-import ledger from "../../art-source/wildlife-v2/autonomous-140.json";
+import ledger from "../../art-source/wildlife-v2/autonomous-140.json" with { type: "json" };
 import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { NATURAL_CASES } from "../scenarios/NaturalLandscapeRecipe.js";
@@ -51,6 +51,12 @@ export const ANIMAL_BROWSER_ENTRIES = [
                 ? "pond"
                 : p.id,
     sprite: required(ENTITY_DEFS[p.type]?.sprite),
+    // Shared wildlife definitions put ordinary travel immediately after idle.
+    // Keep species-specific fly/slither/bound/jet/pulse/waddle clips intact.
+    locomotion: required(ENTITY_DEFS[p.type]?.sprite).clips?.[1],
+    action: required(ENTITY_DEFS[p.type]?.sprite).clips?.find(
+      (c) => c.name === (p.hunter ? "display" : "action"),
+    ),
   }))
   .filter((p) => NATURAL_CASES.some((c) => c.id === p.scene));
 export type AnimalBrowserEntry = (typeof ANIMAL_BROWSER_ENTRIES)[number];

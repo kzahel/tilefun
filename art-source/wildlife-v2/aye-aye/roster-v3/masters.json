@@ -1,0 +1,14 @@
+{
+  "identity": "aye-aye-roster-v3-pixels-01",
+  "palette": {
+    "B": "#635f50",
+    "H": "#8d8872",
+    "C": "#c3b89c",
+    "M": "#3d4138",
+    "K": "#282e2b",
+    "E": "#caaf65",
+    "N": "#1e2826",
+    "T": "#c69487"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

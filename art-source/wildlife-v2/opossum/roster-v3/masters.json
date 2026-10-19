@@ -1,0 +1,14 @@
+{
+  "identity": "opossum-roster-v3-pixels-01",
+  "palette": {
+    "B": "#888a7d",
+    "H": "#b5b7a5",
+    "C": "#ded6bb",
+    "M": "#5f6258",
+    "K": "#282e2b",
+    "E": "#caaf65",
+    "N": "#1e2826",
+    "T": "#c69487"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

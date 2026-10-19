@@ -1,0 +1,43 @@
+{
+  "identity": "dugong-roster-v3",
+  "status": "mechanics-checked-final-pixels-pending-human-review",
+  "closedMeshVolumes": 19,
+  "allClipPoses": 164,
+  "continuousSwimSamplesPerFacing": 129,
+  "continuousChaseSamplesPerFacing": 0,
+  "continuousFeedSamplesPerFacing": 33,
+  "fixedLengthTailChecks": 984,
+  "finAttachmentChecks": 1296,
+  "maxContinuousEndpointGapWorldUnits": 4.915124923727108e-07,
+  "maxTailRootGapWorldUnits": 1.228781230931777e-07,
+  "maxLoopMatrixDelta": 3.5762786865234375e-07,
+  "maxQuarterPoseRotationStepDegrees": 1.2347790645122037,
+  "bodyMotionRangePixels": {
+    "down": 2.1493582725524902,
+    "up": 1.2185425758361816,
+    "left": 1.744041919708252,
+    "right": 1.744041919708252
+  },
+  "feedingJawRangeRadians": 0.19999998807907104,
+  "meshLocalGeometrySha256": {
+    "barrel rib cage": "4d24d8f5daeb136d16cbc2558d417b91c4a2ea9479b83162de7c9c79d4e3e522",
+    "thick neck": "7afcbb2a6b7eaa49019bbec525f9c5e648ec55932804f30e675f4f969dbcc1fc",
+    "rounded skull": "c240250016b173db873153c7e724bd5bbd6d36d66b82f2a70caf8f1725542edf",
+    "small eye -1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+    "nostril -1": "0394c0583f9c283d1f8970dc8166a81dcef805dbd76a4af2f1d359491a8633af",
+    "downturned snout lobe -1": "5ed54516410569992da202c5d29c2ddab939bd93f8441f60758f90c9b76161bb",
+    "small eye 1": "93a1e95cb2c5ee2e4b32ade32cc71b0f92b9dbede3db5051f5710cefc738f79f",
+    "nostril 1": "0394c0583f9c283d1f8970dc8166a81dcef805dbd76a4af2f1d359491a8633af",
+    "downturned snout lobe 1": "5ed54516410569992da202c5d29c2ddab939bd93f8441f60758f90c9b76161bb",
+    "soft lower lip": "741c13e22aa358b72e13dd53e661f2ff20e31665f8daf4463bf6eaf4785cef7f",
+    "small tusk -1": "8135a48b2a9a4034faaea0d1671345edaa40b1bcefc85f32a4791af67cb11871",
+    "small tusk 1": "8135a48b2a9a4034faaea0d1671345edaa40b1bcefc85f32a4791af67cb11871",
+    "rounded flipper 0": "10b61abe869471aabc3223cab9e5d802f57f786a16823d5aa271e7330ea3dced",
+    "rounded flipper 1": "10b61abe869471aabc3223cab9e5d802f57f786a16823d5aa271e7330ea3dced",
+    "TAIL-link-0": "8e754c879ad2df8e0710989efd3d1a93b5ef92fee16882c48b645129f8884041",
+    "TAIL-link-1": "11301a02ce5d2fee63f1aea277548ab70eef8c6449c457c68ece8059e515d830",
+    "TAIL-link-2": "af8530cb045da0ca35f27252efff323bf82ac4417fbe659605d8a53fb925c18d",
+    "horizontal fluke -1": "3a486bbff3ddc38f677373e305b2b2f8465d3632a8eb8d8abc5398662ff75439",
+    "horizontal fluke 1": "a7a6a3bc58926c6a4ae36ed4131e95316c8ef6ac5a46bffc9e8ea7f0a2a84b71"
+  }
+}

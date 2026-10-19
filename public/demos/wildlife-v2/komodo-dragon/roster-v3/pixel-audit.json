@@ -1,0 +1,17 @@
+{
+  "identity": "komodo-dragon-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.7545598577942627,
+    "up": 1.7553261968687863,
+    "left": 1.927482949701627,
+    "right": 1.927482949701627
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

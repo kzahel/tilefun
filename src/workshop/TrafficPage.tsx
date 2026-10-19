@@ -15,6 +15,7 @@ import {
   isWarningVehicle,
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { ORIGINAL_VEHICLES } from "../traffic/OriginalVehicles.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
 
 export type TrafficCanvas = HTMLCanvasElement & {
@@ -184,6 +185,11 @@ export default function TrafficPage() {
             onChange={(e) => setModel(e.target.value)}
           >
             <option value="compact-1">Blue car</option>
+            {ORIGINAL_VEHICLES.map((vehicle) => (
+              <option key={vehicle.id} value={vehicle.id}>
+                {vehicle.name}
+              </option>
+            ))}
             <option value="compact-2">Green car</option>
             <option value="compact-3">Cyan car</option>
             <option value="compact-4">Red car</option>

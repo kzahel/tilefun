@@ -1,0 +1,17 @@
+{
+  "identity": "marabou-stork-roster-v3-pixels-01",
+  "poses": 164,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.3149001536098268,
+    "up": 1.7966227074458558,
+    "left": 1.754705598455601,
+    "right": 1.754705598455601
+  },
+  "rootTravelPixelsPerCycle": 12.8,
+  "plantedTravel": true
+}

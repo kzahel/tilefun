@@ -1,0 +1,17 @@
+{
+  "identity": "spider-roster-v3-pixels-01",
+  "poses": 324,
+  "binaryAlpha": true,
+  "fixedPalette": true,
+  "minimumPadding": 2,
+  "freshSpeciesSource": true,
+  "sourceMeshVolumes": true,
+  "bodyPaintCentroidRangePixels": {
+    "down": 1.736779521056988,
+    "up": 1.647130503144652,
+    "left": 1.7487179487179532,
+    "right": 1.7487179487179532
+  },
+  "rootTravelPixelsPerCycle": 7.68,
+  "plantedTravel": true
+}

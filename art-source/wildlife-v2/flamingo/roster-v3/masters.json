@@ -1,0 +1,16 @@
+{
+  "identity": "flamingo-roster-v3-pixels-01",
+  "palette": {
+    "B": "#d7a4a0",
+    "H": "#eabdb0",
+    "C": "#efc8b8",
+    "M": "#bea19a",
+    "E": "#8d5554",
+    "K": "#293338",
+    "N": "#1f2b32",
+    "U": "#52778d",
+    "R": "#b96d62",
+    "T": "#667a6c"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

@@ -1,0 +1,16 @@
+{
+  "identity": "great-blue-heron-roster-v3-pixels-01",
+  "palette": {
+    "B": "#7a929d",
+    "H": "#a3b5b5",
+    "C": "#cfd1b9",
+    "M": "#6c7a80",
+    "E": "#c9aa66",
+    "K": "#293338",
+    "N": "#1f2b32",
+    "U": "#52778d",
+    "R": "#b96d62",
+    "T": "#667a6c"
+  },
+  "finishing": "Depth-sorted native projections of fixed editable source volumes"
+}

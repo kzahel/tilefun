@@ -33,7 +33,7 @@ const text = [
   "| ---: | --- | --- | --- | --- |",
   ...rows,
   "",
-  "Backlog/idea entries are not authorized art production. Exact model review and gameplay activation are separate checkpoints.",
+  "Authorization lives in each roster entry; idea entries remain proposals. Exact model review and gameplay activation are separate checkpoints.",
   "",
 ].join("\n");
 await writeFile(new URL("docs/vehicle-status.md", root), text);

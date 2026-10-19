@@ -1,0 +1,124 @@
+{
+  "method": "Original pickup-specific semantic UV paint on actual cab/hood skin and explicit cargo components. No source projection, screen redraw or high-to-low transfer.",
+  "palette": {
+    "ink": [
+      58,
+      58,
+      80
+    ],
+    "tire": [
+      52,
+      52,
+      70
+    ],
+    "tireLight": [
+      70,
+      70,
+      94
+    ],
+    "paintDeep": [
+      43,
+      97,
+      113
+    ],
+    "paintShadow": [
+      46,
+      119,
+      135
+    ],
+    "paintMid": [
+      52,
+      143,
+      155
+    ],
+    "paint": [
+      67,
+      166,
+      173
+    ],
+    "paintLight": [
+      103,
+      191,
+      192
+    ],
+    "cream": [
+      255,
+      226,
+      160
+    ],
+    "glassDark": [
+      86,
+      89,
+      114
+    ],
+    "glass": [
+      115,
+      140,
+      168
+    ],
+    "glassLight": [
+      164,
+      187,
+      213
+    ],
+    "glassGlint": [
+      186,
+      210,
+      224
+    ],
+    "rim": [
+      131,
+      136,
+      151
+    ],
+    "silver": [
+      212,
+      212,
+      230
+    ],
+    "white": [
+      248,
+      248,
+      248
+    ],
+    "ruby": [
+      186,
+      39,
+      88
+    ],
+    "amber": [
+      234,
+      165,
+      99
+    ],
+    "bedFloor": [
+      50,
+      83,
+      99
+    ],
+    "bedRib": [
+      66,
+      105,
+      117
+    ],
+    "bedWall": [
+      42,
+      72,
+      90
+    ],
+    "rubyLight": [
+      223,
+      93,
+      119
+    ]
+  },
+  "ownership": "Own cab side/front/rear/roof charts on actual skin, rounded hood chart, recessed cargo floor, shadowed interior walls, tailgate and wheelhouses. Named source components retain base FACE paint_role attributes; their continuous UV charts own window/paint details. Trim islands share padded constant-role swatches; wheel-only meshes never sample coachwork.",
+  "observedProjectionTexels": 0,
+  "uncertainty": "Wholly original authored surfaces, including underside. No source-image fidelity or high-to-low transfer asserted.",
+  "outerInk": "No exterior silhouette paint in atlas; shared engine outline is RGB 58,58,80.",
+  "asymmetry": "Symmetric regular cab; front hood and rear open bed have distinct semantic ownership.",
+  "limitations": [
+    "Economical runtime-topology component master.",
+    "Neutral steering only; no suspension or animated equipment qualification."
+  ]
+}

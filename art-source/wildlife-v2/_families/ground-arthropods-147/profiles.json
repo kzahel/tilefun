@@ -1,0 +1,748 @@
+{
+  "spider": {
+    "label": "Wolf spider",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.49999999999999994
+    ],
+    "radii": [
+      0.38,
+      0.65,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.49999999999999994
+    ],
+    "chestRadii": [
+      0.38,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      0.73,
+      0.53
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.22799999999999998,
+      0.35750000000000004,
+      0.4799999999999999
+    ],
+    "hindHip": [
+      0.22799999999999998,
+      -0.35750000000000004,
+      0.4799999999999999
+    ],
+    "foreLengths": [
+      0.65,
+      0.65,
+      0.3,
+      0.1
+    ],
+    "hindLengths": [
+      0.65,
+      0.65,
+      0.3,
+      0.1
+    ],
+    "legRadii": [
+      0.045,
+      0.036,
+      0.028,
+      0.024
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -0.5525,
+    "tailAngle": 0.2,
+    "walkSpeed": 6,
+    "walkMs": 40,
+    "chaseSpeed": 40,
+    "chaseMs": 10,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": true,
+    "pairs": 4,
+    "footSpread": 1.0,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#675844",
+      "C": "#b9a477",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  },
+  "praying-mantis": {
+    "label": "Praying mantis",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.7
+    ],
+    "radii": [
+      0.38,
+      0.8,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.7
+    ],
+    "chestRadii": [
+      0.38,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      0.88,
+      0.73
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.22799999999999998,
+      0.44000000000000006,
+      0.6799999999999999
+    ],
+    "hindHip": [
+      0.22799999999999998,
+      -0.44000000000000006,
+      0.6799999999999999
+    ],
+    "foreLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "hindLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "legRadii": [
+      0.045,
+      0.036,
+      0.028,
+      0.024
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -0.68,
+    "tailAngle": 0.2,
+    "walkSpeed": 6,
+    "walkMs": 40,
+    "chaseSpeed": 38,
+    "chaseMs": 10,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": true,
+    "pairs": 3,
+    "footSpread": 0.6,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#638858",
+      "C": "#aacb71",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": true
+  },
+  "leaf-insect": {
+    "label": "Leaf insect",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.7
+    ],
+    "radii": [
+      0.38,
+      0.8,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.7
+    ],
+    "chestRadii": [
+      0.38,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      0.88,
+      0.73
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.22799999999999998,
+      0.44000000000000006,
+      0.6799999999999999
+    ],
+    "hindHip": [
+      0.22799999999999998,
+      -0.44000000000000006,
+      0.6799999999999999
+    ],
+    "foreLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "hindLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "legRadii": [
+      0.045,
+      0.036,
+      0.028,
+      0.024
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -0.68,
+    "tailAngle": 0.2,
+    "walkSpeed": 6,
+    "walkMs": 40,
+    "chaseSpeed": 12,
+    "chaseMs": 20,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": false,
+    "pairs": 3,
+    "footSpread": 0.6,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#638858",
+      "C": "#aacb71",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  },
+  "scorpion": {
+    "label": "Scorpion",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.49999999999999994
+    ],
+    "radii": [
+      0.38,
+      0.65,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.49999999999999994
+    ],
+    "chestRadii": [
+      0.38,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      0.73,
+      0.53
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.22799999999999998,
+      0.35750000000000004,
+      0.4799999999999999
+    ],
+    "hindHip": [
+      0.22799999999999998,
+      -0.35750000000000004,
+      0.4799999999999999
+    ],
+    "foreLengths": [
+      0.65,
+      0.65,
+      0.3,
+      0.1
+    ],
+    "hindLengths": [
+      0.65,
+      0.65,
+      0.3,
+      0.1
+    ],
+    "legRadii": [
+      0.045,
+      0.036,
+      0.028,
+      0.024
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [
+      0.26,
+      0.26,
+      0.26,
+      0.26,
+      0.26
+    ],
+    "tailRadius": 0.075,
+    "tailKey": "B",
+    "tailY": -0.5525,
+    "tailAngle": 1.5,
+    "walkSpeed": 6,
+    "walkMs": 40,
+    "chaseSpeed": 36,
+    "chaseMs": 10,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": true,
+    "pairs": 4,
+    "footSpread": 0.8,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#675844",
+      "C": "#b9a477",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  },
+  "roly-poly": {
+    "label": "Roly-poly",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.52
+    ],
+    "radii": [
+      0.38,
+      0.65,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.52
+    ],
+    "chestRadii": [
+      0.38,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      0.73,
+      0.55
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.22799999999999998,
+      0.35750000000000004,
+      0.5
+    ],
+    "hindHip": [
+      0.22799999999999998,
+      -0.35750000000000004,
+      0.5
+    ],
+    "foreLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "hindLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "legRadii": [
+      0.045,
+      0.036,
+      0.028,
+      0.024
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -0.5525,
+    "tailAngle": 0.2,
+    "walkSpeed": 4,
+    "walkMs": 40,
+    "chaseSpeed": 8,
+    "chaseMs": 20,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": false,
+    "pairs": 7,
+    "footSpread": 0.5,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#675844",
+      "C": "#b9a477",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  },
+  "earwig": {
+    "label": "Earwig",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.7
+    ],
+    "radii": [
+      0.38,
+      0.8,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.7
+    ],
+    "chestRadii": [
+      0.38,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      0.88,
+      0.73
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.22799999999999998,
+      0.44000000000000006,
+      0.6799999999999999
+    ],
+    "hindHip": [
+      0.22799999999999998,
+      -0.44000000000000006,
+      0.6799999999999999
+    ],
+    "foreLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "hindLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "legRadii": [
+      0.045,
+      0.036,
+      0.028,
+      0.024
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [
+      0.12,
+      0.12,
+      0.12
+    ],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -0.68,
+    "tailAngle": 0.2,
+    "walkSpeed": 6,
+    "walkMs": 40,
+    "chaseSpeed": 12,
+    "chaseMs": 20,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": false,
+    "pairs": 3,
+    "footSpread": 0.6,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#675844",
+      "C": "#b9a477",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  },
+  "centipede": {
+    "label": "Centipede",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.52
+    ],
+    "radii": [
+      0.23,
+      1.8,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.52
+    ],
+    "chestRadii": [
+      0.23,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      1.8800000000000001,
+      0.55
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.138,
+      0.9900000000000001,
+      0.5
+    ],
+    "hindHip": [
+      0.138,
+      -0.9900000000000001,
+      0.5
+    ],
+    "foreLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "hindLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "legRadii": [
+      0.027,
+      0.022,
+      0.018,
+      0.018
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -1.53,
+    "tailAngle": 0.2,
+    "walkSpeed": 6,
+    "walkMs": 40,
+    "chaseSpeed": 40,
+    "chaseMs": 10,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": true,
+    "pairs": 14,
+    "footSpread": 0.5,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#675844",
+      "C": "#b9a477",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  },
+  "millipede": {
+    "label": "Millipede",
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "torso": [
+      0,
+      0,
+      0.52
+    ],
+    "radii": [
+      0.23,
+      1.8,
+      0.26
+    ],
+    "chest": [
+      0,
+      0.25,
+      0.52
+    ],
+    "chestRadii": [
+      0.23,
+      0.35,
+      0.25
+    ],
+    "head": [
+      0,
+      1.8800000000000001,
+      0.55
+    ],
+    "skull": [
+      0.22,
+      0.26,
+      0.19
+    ],
+    "foreHip": [
+      0.138,
+      0.9900000000000001,
+      0.5
+    ],
+    "hindHip": [
+      0.138,
+      -0.9900000000000001,
+      0.5
+    ],
+    "foreLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "hindLengths": [
+      0.55,
+      0.5,
+      0.25,
+      0.1
+    ],
+    "legRadii": [
+      0.027,
+      0.022,
+      0.018,
+      0.018
+    ],
+    "footWidth": 0.04,
+    "footLength": 0.085,
+    "tailLengths": [],
+    "tailRadius": 0.035,
+    "tailKey": "B",
+    "tailY": -1.53,
+    "tailAngle": 0.2,
+    "walkSpeed": 3,
+    "walkMs": 40,
+    "chaseSpeed": 6,
+    "chaseMs": 20,
+    "lift": 0.1,
+    "forageDrop": 0.04,
+    "hunter": false,
+    "pairs": 24,
+    "footSpread": 0.5,
+    "palette": {
+      "K": "#25302b",
+      "N": "#151b17",
+      "B": "#675844",
+      "C": "#b9a477",
+      "M": "#443a32",
+      "H": "#918058",
+      "T": "#d5c49b"
+    },
+    "foreAction": false
+  }
+}

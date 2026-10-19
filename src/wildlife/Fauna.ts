@@ -2,18 +2,31 @@ import { Direction, type Entity, type PositionComponent } from "../entities/Enti
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { BOVID_PROFILES } from "./Bovids.js";
+import { CONTINUATION_BIRD_PROFILES } from "./ContinuationBirds.js";
+import { DISTINCT_FISH_FAUNA_PROFILES } from "./DistinctFish.js";
 import type { FAUNA_EXPANSION_ROSTER } from "./FaunaExpansion.js";
 import { FLYING_BIRD_PROFILES } from "./FlyingBirds.js";
 import { FOREST_HERBIVORE_PROFILES } from "./ForestHerbivores.js";
+import { FOREST_SPECIALIST_PROFILES } from "./ForestSpecialists.js";
+import { GREAT_APE_PROFILES } from "./GreatApes.js";
+import { GROUND_ARTHROPOD_FAUNA_PROFILES } from "./GroundArthropods.js";
 import { GROUND_BIRD_PROFILES } from "./GroundBirds.js";
+import { GROUND_PRIMATE_PROFILES } from "./GroundPrimates.js";
+import { GROUND_SPECIALIST_PROFILES } from "./GroundSpecialists.js";
 import { INSECT_PROFILES } from "./Insects.js";
+import { LEGLESS_FAUNA_PROFILES } from "./LeglessCreatures.js";
 import { LIZARD_PROFILES } from "./Lizards.js";
 import { MARINE_FAUNA_PROFILES } from "./MarineFauna.js";
+import { MARINE_ODDITY_FAUNA_PROFILES } from "./MarineOddities.js";
+import { MORE_MAMMAL_PROFILES } from "./MoreMammals.js";
 import { PANDA_PROFILE } from "./Panda.js";
 import { PATTERNED_GRAZER_PROFILES } from "./PatternedGrazers.js";
 import { PET_ART } from "./PetVariants.js";
+import { SEABIRD_PROFILES } from "./Seabirds.js";
 import { SHELLED_AMPHIBIAN_PROFILES } from "./ShelledAmphibians.js";
+import { SHORE_MAMMAL_PROFILES } from "./ShoreMammals.js";
 import { SMALL_MAMMAL_PROFILES } from "./SmallMammals.js";
+import { TALL_BIRD_PROFILES } from "./TallBirds.js";
 import { UNGULATE_PROFILES } from "./Ungulates.js";
 
 /** Fixed existing roster order: adding gameplay profiles never remaps habitat owners. */
@@ -51,6 +64,8 @@ export interface FaunaProfile {
   inspection: readonly [number, number];
   inspectionZoom?: number;
   swimSpeed?: number;
+  /** Optional restriction for natural water expansion slots. */
+  waterRefuge?: "pond" | "lagoon";
   /** Body faces perpendicular to motion; authored scuttle travels along local +X. */
   sideways?: boolean;
   hop?: { duration: number; push: number; land: number; height: number };
@@ -352,7 +367,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
         loop: true,
       },
     ],
-    // The back is reachable with the default 150px/s jump and 500px/sÂ² gravity.
+    // The back is reachable with the default 150px/s jump and 500px/s squared gravity.
     // The head remains visual; support/collision represents the saddle height.
     body: [34, 14, 18],
     speed: 20,
@@ -1334,6 +1349,19 @@ export const FAUNA_PROFILES: readonly FaunaProfile[] = [
   ...GROUND_BIRD_PROFILES,
   ...MARINE_FAUNA_PROFILES,
   ...FLYING_BIRD_PROFILES,
+  ...CONTINUATION_BIRD_PROFILES,
+  ...GREAT_APE_PROFILES,
+  ...GROUND_PRIMATE_PROFILES,
+  ...DISTINCT_FISH_FAUNA_PROFILES,
+  ...GROUND_SPECIALIST_PROFILES,
+  ...SEABIRD_PROFILES,
+  ...TALL_BIRD_PROFILES,
+  ...FOREST_SPECIALIST_PROFILES,
+  ...MORE_MAMMAL_PROFILES,
+  ...SHORE_MAMMAL_PROFILES,
+  ...LEGLESS_FAUNA_PROFILES,
+  ...GROUND_ARTHROPOD_FAUNA_PROFILES,
+  ...MARINE_ODDITY_FAUNA_PROFILES,
   ...SHELLED_AMPHIBIAN_PROFILES,
   ...FOREST_HERBIVORE_PROFILES,
   ...LIZARD_PROFILES,

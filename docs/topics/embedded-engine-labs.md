@@ -20,6 +20,21 @@ replacement-host error guard used by furniture playtest.
 
 ## Shared reverse driving (2026-10-19)
 
+[145](../tactical/145-original-coupe-gameplay.md) adds the original red coupe through
+the same vehicle definitions, asset loader and mesh registry used by the game and
+Traffic playground. Its cardinal sprite fallback and physical bounds also belong
+to the shared catalog; no lab-only rendering or traffic policy is introduced.
+
+[148](../tactical/148-beetle-gameplay.md) uses that same additive path for the
+accepted Beetle: shared palette, assets, traffic model selection, dimensions,
+handling and mesh registry. Its 81×38×35px body and exact own mesh/cardinal fallback
+are shared by game and Traffic playground; no separate lab car is introduced.
+
+[150](../tactical/150-school-bus-gameplay.md) adds the accepted school bus through
+that same catalog. Game and Traffic share its exact radius-112 model, matching
+cardinal fallback, 122×43×44px bounds and slower bus handling. Its wider road
+admission is derived by the ordinary shared rule; no lab-only bus is introduced.
+
 [140](../tactical/140-shared-input-ux-and-reverse.md) sends held reverse through the
 ordinary input flag, Realm/TrafficSystem and PlayerPredictor. Native scenario
 30/60Hz binary/replay regressions cover reverse with delayed commands. Car mesh
@@ -811,3 +826,14 @@ replay and saved in parked traffic records. Shared local/remote presentation
 interpolates its angle and meshes retain it at rest. Cardinal collision and
 sprite fallback remain tied to the immutable approved bank. Trains and automatic
 road motion keep their existing owners.
+
+## Native props in animal fixtures
+
+Raptor inspection adds optional bounded `ScenarioRecipe.nativeProps` placements.
+ScenarioSession creates them with the ordinary prop factory, preserving their
+production type and persistence. Custom fixture geometry keeps its anonymous
+scenario identity. This distinction matters to shared perch AI: a renamed
+fixture rock has collision but is not a recognized native perch. No lab-only
+perching or flight simulation is introduced; game and lab use PredatorMotion,
+Realm support collision and durable ordinary props. Native flight/reload and
+perch checks cover the boundary.
