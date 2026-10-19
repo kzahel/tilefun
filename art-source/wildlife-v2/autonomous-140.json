@@ -618,18 +618,26 @@
     "moose": {
       "name": "Moose",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:06:00Z",
+      "receipt": "art-source/wildlife-v2/moose/roster-v2/receipt.json",
+      "evidence": "164 source poses; 6272 fixed limb, 784 neck and 1176 tail checks; independently counted 2/3/4 toe components; planted travel and visible body motion; ten-artifact source replay; 328 exact Chromium crops; four shared game/browser checks; exact pixels pending human review"
     },
     "elk": {
       "name": "Elk",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:06:00Z",
+      "receipt": "art-source/wildlife-v2/elk/roster-v2/receipt.json",
+      "evidence": "164 source poses; 6272 fixed limb, 784 neck and 1176 tail checks; independently counted 2/3/4 toe components; planted travel and visible body motion; ten-artifact source replay; 328 exact Chromium crops; four shared game/browser checks; exact pixels pending human review"
     },
     "zebra": {
       "name": "Zebra",
@@ -646,18 +654,26 @@
     "rhinoceros": {
       "name": "White rhinoceros",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:06:00Z",
+      "receipt": "art-source/wildlife-v2/rhinoceros/roster-v2/receipt.json",
+      "evidence": "164 source poses; 6272 fixed limb, 784 neck and 1176 tail checks; independently counted 2/3/4 toe components; planted travel and visible body motion; ten-artifact source replay; 328 exact Chromium crops; four shared game/browser checks; exact pixels pending human review"
     },
     "hippopotamus": {
       "name": "Hippo",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "four-toed pond walker and yawn source; provisional until source/game checks"
+      "stage": "four-toed pond walker and yawn source; provisional until source/game checks",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:06:00Z",
+      "receipt": "art-source/wildlife-v2/hippopotamus/roster-v2/receipt.json",
+      "evidence": "164 source poses; 6272 fixed limb, 784 neck and 1176 tail checks; independently counted 2/3/4 toe components; planted travel and visible body motion; ten-artifact source replay; 328 exact Chromium crops; four shared game/browser checks; exact pixels pending human review"
     },
     "camel": {
       "name": "Dromedary camel",
@@ -801,10 +817,14 @@
     "warthog": {
       "name": "Warthog",
       "family": "Hoofed & large herbivores",
-      "state": "in-progress",
+      "state": "finished-game-active",
       "historicalState": "queued",
       "revision": "roster-v2",
-      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks"
+      "stage": "independent antlered / thick-hide grazer anatomy; provisional until source/game checks",
+      "gameplay": true,
+      "completedUtc": "2026-10-19T01:06:00Z",
+      "receipt": "art-source/wildlife-v2/warthog/roster-v2/receipt.json",
+      "evidence": "164 source poses; 6272 fixed limb, 784 neck and 1176 tail checks; independently counted 2/3/4 toe components; planted travel and visible body motion; ten-artifact source replay; 328 exact Chromium crops; four shared game/browser checks; exact pixels pending human review"
     },
     "gerenuk": {
       "name": "Gerenuk",
@@ -1297,16 +1317,18 @@
     "shark": {
       "name": "Shark",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T00:57:00Z"
     },
     "hammerhead-shark": {
       "name": "Hammerhead shark",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T00:57:00Z"
     },
     "whale-shark": {
       "name": "Whale shark",
@@ -1325,9 +1347,10 @@
     "orca": {
       "name": "Orca",
       "family": "Marine & aquatic",
-      "state": "queued",
+      "state": "in-progress",
       "historicalState": "queued",
-      "revision": null
+      "revision": "roster-v2",
+      "startedUtc": "2026-10-19T00:57:00Z"
     },
     "humpback-whale": {
       "name": "Humpback whale",
@@ -1888,6 +1911,17 @@
         "polar-bear"
       ],
       "validation": "Typecheck/lint/build, 1064-candidate manifest, 23 browser cases and streaming --assert-ready pass. Full units: 3320 pass, 5 known Windows failures, 10 skipped. Five ten-artifact replays and 2280 exact crops pass. Normal ground jumps board donkey/mule/camel; support heights corrected to 18/20/20px and riding survives reload. Panda source checks 3888 food attachment/visibility samples. Polar bear naturally hunts and reloads lineage with a bounded original growl."
+    },
+    {
+      "utc": "2026-10-19T01:06:00Z",
+      "completed": [
+        "moose",
+        "elk",
+        "rhinoceros",
+        "warthog",
+        "hippopotamus"
+      ],
+      "validation": "Typecheck/lint/build, 1089-candidate manifest, 20 browser cases and streaming --assert-ready pass. Full bounded units: 3383 pass, 5 known Windows failures, 10 skipped. Initial unbounded run timed out under contention; final two-worker run has no additional failures. Five ten-artifact replays and 1640 exact crops pass. Hippo uses pond-only bottom walking; amphibious transition is not implemented."
     }
   ],
   "existingOutsideRoster": [
@@ -2024,6 +2058,19 @@
       "humanReview": "pending",
       "source": "art-source/wildlife-v2/_families/bears-140/README.md",
       "roles": "panda foraging fauna; polar bear natural hunter"
+    },
+    "ungulates": {
+      "animals": [
+        "moose",
+        "elk",
+        "rhinoceros",
+        "warthog",
+        "hippopotamus"
+      ],
+      "revision": "roster-v2",
+      "state": "agent-inspected-game-active",
+      "humanReview": "pending",
+      "source": "art-source/wildlife-v2/_families/ungulates-140/README.md"
     }
   }
 }

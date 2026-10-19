@@ -440,3 +440,10 @@
 !camel/roster-v2/*
 !panda/roster-v2/*
 !polar-bear/roster-v2/*
+
+# Verified pending motion identities, owner-authorized autonomous run 140.
+!moose/roster-v2/*
+!elk/roster-v2/*
+!rhinoceros/roster-v2/*
+!warthog/roster-v2/*
+!hippopotamus/roster-v2/*

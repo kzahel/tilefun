@@ -1,0 +1,542 @@
+{
+  "moose": {
+    "label": "Moose",
+    "torso": [
+      0,
+      -0.1,
+      2.66
+    ],
+    "radii": [
+      0.7,
+      1.18,
+      0.72
+    ],
+    "chest": [
+      0,
+      0.68,
+      2.74
+    ],
+    "chestRadii": [
+      0.68,
+      0.56,
+      0.78
+    ],
+    "neckBase": [
+      0,
+      0.87,
+      2.98
+    ],
+    "neckLengths": [
+      0.86,
+      0.84
+    ],
+    "neckRadius": 0.31,
+    "head": [
+      0,
+      1.62,
+      3.88
+    ],
+    "grazeHead": [
+      0,
+      1.72,
+      1.92
+    ],
+    "headKind": "cervid",
+    "earHeight": 0.3,
+    "mane": true,
+    "foreHip": [
+      0.48,
+      0.78,
+      2.48
+    ],
+    "hindHip": [
+      0.49,
+      -0.89,
+      2.36
+    ],
+    "foreLengths": [
+      1.04,
+      1.02,
+      0.52,
+      0.2
+    ],
+    "hindLengths": [
+      1.02,
+      1.0,
+      0.51,
+      0.2
+    ],
+    "tailLengths": [
+      0.17,
+      0.14,
+      0.12
+    ],
+    "tailRadius": 0.065,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 14,
+    "walkMs": 60,
+    "palette": {
+      "K": "#403b30",
+      "B": "#695038",
+      "H": "#99724c",
+      "C": "#c8ac74",
+      "M": "#41382b",
+      "E": "#1c2926",
+      "N": "#30372d"
+    },
+    "pattern": "none",
+    "legRadii": [
+      0.14,
+      0.1,
+      0.075,
+      0.065
+    ],
+    "legKeys": [
+      "B",
+      "B",
+      "B",
+      "M"
+    ],
+    "footWidth": 0.13,
+    "footLength": 0.21,
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "toeCount": 2
+  },
+  "elk": {
+    "label": "Elk",
+    "torso": [
+      0,
+      -0.09,
+      2.33
+    ],
+    "radii": [
+      0.57,
+      1.07,
+      0.59
+    ],
+    "chest": [
+      0,
+      0.57,
+      2.41
+    ],
+    "chestRadii": [
+      0.56,
+      0.5,
+      0.65
+    ],
+    "neckBase": [
+      0,
+      0.78,
+      2.58
+    ],
+    "neckLengths": [
+      0.76,
+      0.74
+    ],
+    "neckRadius": 0.25,
+    "head": [
+      0,
+      1.4,
+      3.36
+    ],
+    "grazeHead": [
+      0,
+      1.52,
+      1.65
+    ],
+    "headKind": "cervid",
+    "earHeight": 0.3,
+    "mane": true,
+    "foreHip": [
+      0.39,
+      0.67,
+      2.17
+    ],
+    "hindHip": [
+      0.4,
+      -0.81,
+      2.06
+    ],
+    "foreLengths": [
+      0.94,
+      0.92,
+      0.47,
+      0.18
+    ],
+    "hindLengths": [
+      0.91,
+      0.89,
+      0.46,
+      0.18
+    ],
+    "tailLengths": [
+      0.17,
+      0.14,
+      0.12
+    ],
+    "tailRadius": 0.065,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 16,
+    "walkMs": 50,
+    "palette": {
+      "K": "#403b30",
+      "B": "#ae8050",
+      "H": "#c7a671",
+      "C": "#e3ce9e",
+      "M": "#65472f",
+      "E": "#1c2926",
+      "N": "#30372d"
+    },
+    "pattern": "none",
+    "legRadii": [
+      0.14,
+      0.1,
+      0.075,
+      0.065
+    ],
+    "legKeys": [
+      "B",
+      "B",
+      "B",
+      "M"
+    ],
+    "footWidth": 0.13,
+    "footLength": 0.21,
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "toeCount": 2
+  },
+  "rhinoceros": {
+    "label": "White rhinoceros",
+    "torso": [
+      0,
+      -0.13,
+      1.72
+    ],
+    "radii": [
+      0.94,
+      1.36,
+      0.77
+    ],
+    "chest": [
+      0,
+      0.81,
+      1.83
+    ],
+    "chestRadii": [
+      0.92,
+      0.7,
+      0.82
+    ],
+    "neckBase": [
+      0,
+      0.97,
+      1.89
+    ],
+    "neckLengths": [
+      0.87,
+      0.85
+    ],
+    "neckRadius": 0.46,
+    "head": [
+      0,
+      1.85,
+      1.48
+    ],
+    "grazeHead": [
+      0,
+      1.95,
+      0.76
+    ],
+    "headKind": "rhinoceros",
+    "earHeight": 0.3,
+    "mane": false,
+    "foreHip": [
+      0.65,
+      0.75,
+      1.36
+    ],
+    "hindHip": [
+      0.67,
+      -1.0,
+      1.3
+    ],
+    "foreLengths": [
+      0.64,
+      0.61,
+      0.34,
+      0.14
+    ],
+    "hindLengths": [
+      0.62,
+      0.59,
+      0.33,
+      0.14
+    ],
+    "tailLengths": [
+      0.3,
+      0.26,
+      0.22
+    ],
+    "tailRadius": 0.065,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 12,
+    "walkMs": 60,
+    "palette": {
+      "K": "#403b30",
+      "B": "#92938b",
+      "H": "#b7b7a7",
+      "C": "#c8bda1",
+      "M": "#5c6059",
+      "E": "#1c2926",
+      "N": "#30372d"
+    },
+    "pattern": "none",
+    "legRadii": [
+      0.19,
+      0.14,
+      0.095,
+      0.075
+    ],
+    "legKeys": [
+      "B",
+      "B",
+      "B",
+      "M"
+    ],
+    "footWidth": 0.19,
+    "footLength": 0.25,
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "toeCount": 3
+  },
+  "warthog": {
+    "label": "Warthog",
+    "torso": [
+      0,
+      -0.08,
+      1.2
+    ],
+    "radii": [
+      0.49,
+      0.83,
+      0.45
+    ],
+    "chest": [
+      0,
+      0.43,
+      1.25
+    ],
+    "chestRadii": [
+      0.51,
+      0.4,
+      0.51
+    ],
+    "neckBase": [
+      0,
+      0.58,
+      1.38
+    ],
+    "neckLengths": [
+      0.57,
+      0.55
+    ],
+    "neckRadius": 0.24,
+    "head": [
+      0,
+      1.07,
+      1.27
+    ],
+    "grazeHead": [
+      0,
+      1.19,
+      0.69
+    ],
+    "headKind": "warthog",
+    "earHeight": 0.3,
+    "mane": false,
+    "foreHip": [
+      0.33,
+      0.48,
+      1.08
+    ],
+    "hindHip": [
+      0.34,
+      -0.63,
+      1.02
+    ],
+    "foreLengths": [
+      0.47,
+      0.46,
+      0.27,
+      0.13
+    ],
+    "hindLengths": [
+      0.45,
+      0.44,
+      0.26,
+      0.13
+    ],
+    "tailLengths": [
+      0.3,
+      0.26,
+      0.22
+    ],
+    "tailRadius": 0.065,
+    "tailUp": true,
+    "cloven": true,
+    "walkSpeed": 13,
+    "walkMs": 40,
+    "palette": {
+      "K": "#403b30",
+      "B": "#8a6b4e",
+      "H": "#b18e64",
+      "C": "#e2d1a1",
+      "M": "#5b4a36",
+      "E": "#1c2926",
+      "N": "#30372d"
+    },
+    "pattern": "none",
+    "legRadii": [
+      0.12,
+      0.09,
+      0.06,
+      0.05
+    ],
+    "legKeys": [
+      "B",
+      "B",
+      "B",
+      "M"
+    ],
+    "footWidth": 0.11,
+    "footLength": 0.18,
+    "canvas": 64,
+    "anchor": [
+      32,
+      48
+    ],
+    "toeCount": 2
+  },
+  "hippopotamus": {
+    "label": "Hippopotamus",
+    "torso": [
+      0,
+      -0.16,
+      1.12
+    ],
+    "radii": [
+      0.98,
+      1.42,
+      0.78
+    ],
+    "chest": [
+      0,
+      0.85,
+      1.15
+    ],
+    "chestRadii": [
+      0.95,
+      0.66,
+      0.8
+    ],
+    "neckBase": [
+      0,
+      1.08,
+      1.3
+    ],
+    "neckLengths": [
+      0.65,
+      0.63
+    ],
+    "neckRadius": 0.56,
+    "head": [
+      0,
+      1.93,
+      1.3
+    ],
+    "grazeHead": [
+      0,
+      1.98,
+      1.91
+    ],
+    "headKind": "hippopotamus",
+    "earHeight": 0.3,
+    "mane": false,
+    "foreHip": [
+      0.65,
+      0.82,
+      0.8
+    ],
+    "hindHip": [
+      0.65,
+      -0.95,
+      0.74
+    ],
+    "foreLengths": [
+      0.44,
+      0.4,
+      0.25,
+      0.12
+    ],
+    "hindLengths": [
+      0.42,
+      0.39,
+      0.24,
+      0.12
+    ],
+    "tailLengths": [
+      0.22,
+      0.18,
+      0.14
+    ],
+    "tailRadius": 0.065,
+    "tailUp": false,
+    "cloven": true,
+    "walkSpeed": 8,
+    "walkMs": 70,
+    "palette": {
+      "K": "#4f443f",
+      "B": "#987b70",
+      "H": "#b49a88",
+      "C": "#e6d6ac",
+      "M": "#6a554f",
+      "E": "#202725",
+      "N": "#352f2d"
+    },
+    "pattern": "none",
+    "legRadii": [
+      0.2,
+      0.14,
+      0.1,
+      0.08
+    ],
+    "legKeys": [
+      "B",
+      "B",
+      "B",
+      "M"
+    ],
+    "footWidth": 0.2,
+    "footLength": 0.25,
+    "canvas": 96,
+    "anchor": [
+      48,
+      72
+    ],
+    "toeCount": 4
+  }
+}

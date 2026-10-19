@@ -358,3 +358,22 @@ assertion; distinguish them from newly introduced failures.
   failures, ten skipped. Forty-three new entries plus sixteen delivered leave
   137 remaining. Moose, elk, rhinoceros, warthog and hippo sources are underway.
   Every exact new art identity remains pending human review.
+
+- 01:06 UTC: moose, elk, white rhinoceros, warthog and hippopotamus completed.
+  Distinct palmate/branched antlers, moose bell, rhino nasal horns/skin folds,
+  warthog warts/tusks/raised walking tail and hippo muzzle/eyes/nostrils use fresh
+  editable scenes. Independent saved-scene graph checks count two cloven toes,
+  three rhino toes and four hippo toes per foot. Each bank has 164 poses with
+  moving torso/head, fixed linked limbs/necks/tail and matched planted travel.
+  Hippo has a .9-radian jaw opening with actual posed jaw volume projections.
+  Five ten-artifact replays and 1,640 exact native/enlarged crops pass. Four land
+  profiles use fixed expansion homes; hippo uses existing fixed pond slots and
+  remains pond-only with bottom walking, without amphibious transitions.
+  Explicit food tiers admit the new prey, with rhino/hippo reserved for the
+  largest fantasy hunters. Typecheck/lint/build, 1,089-candidate manifest,
+  twenty browser cases and streaming readiness pass. Full bounded units: 3,383
+  pass, five known Windows failures, ten skipped. The initial unbounded run had
+  contention timeouts; the final two-worker run has no additional failures.
+  Forty-eight new entries plus sixteen delivered leave 132 remaining. Shark,
+  hammerhead and orca sources are underway with water-aware hunting next.
+  Every exact new identity remains pending human art review.

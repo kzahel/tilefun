@@ -135,7 +135,16 @@ mounted animals remain protected prey. Earlier source banks stay immutable.
 Typecheck/lint/build, 1,064-candidate manifest, 23 browser cases and streaming
 readiness pass. Full final units: 3,320 pass, five known Windows failures,
 ten skipped. Forty-three new entries plus sixteen delivered leave 137 remaining.
-Moose, elk, rhinoceros, warthog and hippo are the next sources.
+Moose, elk, rhinoceros, warthog and hippo now also use fresh world/editor/lab
+banks. Antlers, horns, tusks, cheek warts and independently counted toes distinguish
+their anatomy; all retain fixed linked limbs and visible torso/head motion.
+Hippo opens its linked jaw and uses pond-only bottom walking; amphibious
+transitions are not implemented. Five source replays and 1,640 exact crops,
+twenty browser cases, typecheck/lint/build and streaming readiness pass.
+Full bounded units: 3,383 pass, five known Windows failures, ten skipped;
+initial unbounded contention timeouts disappear with two test workers.
+Forty-eight new entries plus sixteen delivered leave 132 remaining.
+Shark, hammerhead and orca are the next sources, including water-aware hunting.
 All exact new identities remain pending human art review.
 
 ## Horse and giraffe motion

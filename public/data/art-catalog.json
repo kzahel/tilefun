@@ -906,6 +906,56 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-moose-provisional-v1",
+      "name": "wildlife moose provisional v1",
+      "image": "demos/wildlife-v2/moose/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "53583c75dd451bf3967fe7e79d064d988a6a86a96a77b2b44077fca4bf05fda0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-elk-provisional-v1",
+      "name": "wildlife elk provisional v1",
+      "image": "demos/wildlife-v2/elk/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0e9a14ef554a58ec32a92f65c2b91d396441ac974054cb44453a754348620e9c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-rhinoceros-provisional-v1",
+      "name": "wildlife rhinoceros provisional v1",
+      "image": "demos/wildlife-v2/rhinoceros/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8c60a8aab5b7c9819805a1aaaf3b91278b63ec778cebdc9132baf28dc7c34386",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-warthog-provisional-v1",
+      "name": "wildlife warthog provisional v1",
+      "image": "demos/wildlife-v2/warthog/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "22e0cd678c897f9bcf7adfb6c0c64c54952c5abfd9387be6850c4e19c42ecb32",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-hippopotamus-provisional-v1",
+      "name": "wildlife hippopotamus provisional v1",
+      "image": "demos/wildlife-v2/hippopotamus/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "9b37d39010704e8ce3e08aee464d7f5b22d5cbcd813fb2cf3fa38ab211c30c22",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-cat-ginger-provisional-v1",
       "name": "wildlife cat ginger provisional v1",
       "image": "demos/wildlife-v2/cat-ginger/draft-v1/sheet.png",
@@ -3063,6 +3113,56 @@
       "height": 256,
       "tileSize": 16,
       "fingerprint": "7ccd05f7397e19c7fac25e22a752d5ba44e1a67f1dddf2061674745080eac2de",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-moose-roster-v2",
+      "name": "wildlife v2 moose roster v2",
+      "image": "demos/wildlife-v2/moose/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "53583c75dd451bf3967fe7e79d064d988a6a86a96a77b2b44077fca4bf05fda0",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-elk-roster-v2",
+      "name": "wildlife v2 elk roster v2",
+      "image": "demos/wildlife-v2/elk/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "0e9a14ef554a58ec32a92f65c2b91d396441ac974054cb44453a754348620e9c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-rhinoceros-roster-v2",
+      "name": "wildlife v2 rhinoceros roster v2",
+      "image": "demos/wildlife-v2/rhinoceros/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "8c60a8aab5b7c9819805a1aaaf3b91278b63ec778cebdc9132baf28dc7c34386",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-warthog-roster-v2",
+      "name": "wildlife v2 warthog roster v2",
+      "image": "demos/wildlife-v2/warthog/roster-v2/sheet.png",
+      "width": 2624,
+      "height": 256,
+      "tileSize": 16,
+      "fingerprint": "22e0cd678c897f9bcf7adfb6c0c64c54952c5abfd9387be6850c4e19c42ecb32",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-hippopotamus-roster-v2",
+      "name": "wildlife v2 hippopotamus roster v2",
+      "image": "demos/wildlife-v2/hippopotamus/roster-v2/sheet.png",
+      "width": 3936,
+      "height": 384,
+      "tileSize": 16,
+      "fingerprint": "9b37d39010704e8ce3e08aee464d7f5b22d5cbcd813fb2cf3fa38ab211c30c22",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -25338,6 +25438,96 @@
       ]
     },
     {
+      "id": "sprite:wildlife-moose-provisional-v1",
+      "sheetId": "wildlife-moose-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-moose-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-elk-provisional-v1",
+      "sheetId": "wildlife-elk-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-elk-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-rhinoceros-provisional-v1",
+      "sheetId": "wildlife-rhinoceros-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-rhinoceros-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-warthog-provisional-v1",
+      "sheetId": "wildlife-warthog-provisional-v1",
+      "rect": [
+        0,
+        0,
+        2624,
+        256
+      ],
+      "label": "wildlife-warthog-provisional-v1 · registered 64×64 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:wildlife-hippopotamus-provisional-v1",
+      "sheetId": "wildlife-hippopotamus-provisional-v1",
+      "rect": [
+        0,
+        0,
+        3936,
+        384
+      ],
+      "label": "wildlife-hippopotamus-provisional-v1 · registered 96×96 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:wildlife-cat-ginger-provisional-v1",
       "sheetId": "wildlife-cat-ginger-provisional-v1",
       "rect": [
@@ -26921,7 +27111,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:939"
+          "source": "src/wildlife/Fauna.ts:940"
         },
         {
           "system": "Gameplay",
@@ -26933,11 +27123,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:68"
+          "source": "src/wildlife/FoodWeb.ts:71"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:221"
+          "source": "src/wildlife/FoodWeb.ts:228"
         }
       ]
     },
@@ -26995,35 +27185,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:15"
+          "source": "src/wildlife/Fauna.ts:16"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:210"
+          "source": "src/wildlife/Fauna.ts:211"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:108"
+          "source": "src/wildlife/FoodWeb.ts:111"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:124"
+          "source": "src/wildlife/FoodWeb.ts:127"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:140"
+          "source": "src/wildlife/FoodWeb.ts:143"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:172"
+          "source": "src/wildlife/FoodWeb.ts:177"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:194"
+          "source": "src/wildlife/FoodWeb.ts:201"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:221"
+          "source": "src/wildlife/FoodWeb.ts:228"
         }
       ]
     },
@@ -27073,15 +27263,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:69"
+          "source": "src/wildlife/FoodWeb.ts:72"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:221"
+          "source": "src/wildlife/FoodWeb.ts:228"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:222"
+          "source": "src/wildlife/FoodWeb.ts:229"
         }
       ]
     },
@@ -27123,7 +27313,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:222"
+          "source": "src/wildlife/FoodWeb.ts:229"
         }
       ]
     },
@@ -27169,7 +27359,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:223"
+          "source": "src/wildlife/FoodWeb.ts:230"
         }
       ]
     },
@@ -27215,7 +27405,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:224"
+          "source": "src/wildlife/FoodWeb.ts:231"
         }
       ]
     },
@@ -27261,7 +27451,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:225"
+          "source": "src/wildlife/FoodWeb.ts:232"
         }
       ]
     },
@@ -27415,7 +27605,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:221"
+          "source": "src/wildlife/FoodWeb.ts:228"
         }
       ]
     },
@@ -27461,7 +27651,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:221"
+          "source": "src/wildlife/FoodWeb.ts:228"
         }
       ]
     },

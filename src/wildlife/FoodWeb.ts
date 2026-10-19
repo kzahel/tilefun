@@ -19,6 +19,9 @@ const antelopes = [
 const lightAntelopes = antelopes.filter((s) => s !== "gemsbok-oryx");
 const heavyBovids = ["american-bison", "water-buffalo", "musk-ox"] as const;
 const pasture = [
+  "moose",
+  "elk",
+  "warthog",
   "zebra",
   "okapi",
   "camel",
@@ -159,6 +162,8 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "small-dragon": [
+    "rhinoceros",
+    "hippopotamus",
     "panda",
     "polar-bear",
     ...heavyBovids,
@@ -181,6 +186,8 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
   "t-rex": [
+    "rhinoceros",
+    "hippopotamus",
     "panda",
     "polar-bear",
     ...heavyBovids,
