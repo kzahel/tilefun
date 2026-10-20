@@ -2,7 +2,14 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 import type { WorkItem } from "./AnimalWork.js";
 
-export const SOURCE_KINDS = ["fruit-tree", "nut-tree", "seed-plant", "growing-plant"] as const;
+export const SOURCE_KINDS = [
+  "fruit-tree",
+  "nut-tree",
+  "seed-plant",
+  "growing-plant",
+  "browse-shrub",
+  "root-patch",
+] as const;
 export type SourceKind = (typeof SOURCE_KINDS)[number];
 export const sourceType = (kind: SourceKind) => `wildlife-resource-${kind}-v1`;
 export const SOURCE_FOOD = {
@@ -10,7 +17,17 @@ export const SOURCE_FOOD = {
   "nut-tree": "nut",
   "seed-plant": "seed",
   "growing-plant": "greens",
+  "browse-shrub": "greens",
+  "root-patch": "root",
 } as const;
+const sourceStart: Record<SourceKind, number> = {
+  "growing-plant": 14,
+  "seed-plant": 18,
+  "nut-tree": 22,
+  "fruit-tree": 26,
+  "browse-shrub": 30,
+  "root-patch": 34,
+};
 export function createFoodSource(kind: SourceKind, wx: number, wy: number): Entity {
   const food = SOURCE_FOOD[kind],
     e = createForageItem(food, wx, wy);
@@ -22,8 +39,8 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
     e.workItem.growth = {
       food,
       capacity: 3,
-      interval: food === "fruit" ? 240 : food === "nut" ? 300 : 180,
-      remaining: food === "fruit" ? 240 : food === "nut" ? 300 : 180,
+      interval: food === "fruit" ? 240 : food === "nut" || food === "root" ? 300 : 180,
+      remaining: food === "fruit" ? 240 : food === "nut" || food === "root" ? 300 : 180,
     };
   }
   restoreWorkItemPose(e);
@@ -31,8 +48,17 @@ export function createFoodSource(kind: SourceKind, wx: number, wy: number): Enti
 }
 
 export const FORAGE_SHEET = "wildlife-forage-resources-v1";
-export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v3/sheet.png";
-export const FORAGE_KINDS = ["twig", "fruit", "nut", "nest", "cache", "greens", "seed"] as const;
+export const FORAGE_IMAGE = "demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png";
+export const FORAGE_KINDS = [
+  "twig",
+  "fruit",
+  "nut",
+  "nest",
+  "cache",
+  "greens",
+  "seed",
+  "root",
+] as const;
 export type ForageKind = (typeof FORAGE_KINDS)[number];
 export const forageType = (kind: ForageKind) => `wildlife-resource-${kind}-v1`;
 const cells = {
@@ -43,6 +69,7 @@ const cells = {
   cache: [8, 9],
   greens: [10, 11, 12],
   seed: [13],
+  root: [38],
 };
 export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   FORAGE_KINDS.map((kind) => [
@@ -81,15 +108,11 @@ export const FORAGE_DEFS: Record<string, EntityDef> = Object.fromEntries(
 export function restoreWorkItemPose(e: Entity): void {
   const item = e.workItem;
   if (!item || item.kind === "ball") return;
-  const sourceCells = item.growth
-    ? item.kind === "greens"
-      ? [14, 15, 16, 17]
-      : item.kind === "seed"
-        ? [18, 19, 20, 21]
-        : item.kind === "nut"
-          ? [22, 23, 24, 25]
-          : [26, 27, 28, 29]
-    : undefined;
+  const source = SOURCE_KINDS.find((kind) => e.type === sourceType(kind));
+  const sourceCells =
+    item.growth && source
+      ? Array.from({ length: 4 }, (_, i) => sourceStart[source] + i)
+      : undefined;
   const stage = sourceCells
     ? Math.max(0, Math.min(3, item.units))
     : item.kind === "greens"
@@ -117,7 +140,7 @@ export function createForageItem(kind: ForageKind, wx: number, wy: number): Enti
     velocity: null,
     sprite: {
       ...def.sprite,
-      frameCol: 0,
+      frameCol: def.sprite.clips?.[0]?.start ?? 0,
       frameRow: 0,
       animTimer: 0,
       direction: Direction.Down,
@@ -141,14 +164,7 @@ for (const kind of SOURCE_KINDS) {
           ...def.sprite,
           clips: Array.from({ length: 4 }, (_, i) => ({
             name: `stage-${i}`,
-            start:
-              (kind === "growing-plant"
-                ? 14
-                : kind === "seed-plant"
-                  ? 18
-                  : kind === "nut-tree"
-                    ? 22
-                    : 26) + i,
+            start: sourceStart[kind] + i,
             count: 1,
             frameDuration: 200,
             loop: true,
@@ -172,7 +188,8 @@ export const FORAGE_FACTORIES = {
   ),
 };
 export const isCarryable = (e: Entity) =>
-  e.type === "ball" || FORAGE_KINDS.slice(0, 3).some((kind) => e.type === forageType(kind));
+  e.type === "ball" ||
+  (["twig", "fruit", "nut", "root"] as const).some((kind) => e.type === forageType(kind));
 export function freshBallWork(owner: string, returnPosition: Entity["position"]): WorkItem {
   return { kind: "ball", owner, returnPosition: { ...returnPosition }, units: 0, contents: [] };
 }

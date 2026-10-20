@@ -71,6 +71,13 @@ consumption. Direct authoring defaults and train inspection remain unchanged.
 
 ## Animal browser and natural return timing
 
+[163](../tactical/163-browsing-rooting-and-trunks.md) adds goat, pig and elephant
+activity scenes through ordinary Realm/Worker authority. They share finite source
+stock/growth, real prop support and collision, saved work/motion and ordinary
+attachments. Source-derived trunk sockets determine both the safe approach and
+carried fruit pose. Canvas/GPU presentation receives ordinary replicated clip,
+phase, parent and height fields; there is no private lab behavior or growth clock.
+
 [152](../tactical/152-explorer-boat-and-lakes.md) adds the large-lake boat case
 through the same natural generator, vehicle authority, rolling prediction,
 water-only swept-body collision, open driver presentation and saved traffic

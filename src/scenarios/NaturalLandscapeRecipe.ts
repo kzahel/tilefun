@@ -16,12 +16,22 @@ import { createRabbit } from "../wildlife/Rabbit.js";
 import { animalWorkRecipe } from "./AnimalWorkRecipe.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
 import { meadowWorkRecipe } from "./MeadowWorkRecipe.js";
+import { pastureWorkRecipe } from "./PastureWorkRecipe.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 import { FLAT_SCENARIO } from "./ScenarioRecipe.js";
 import { woodlandWorkRecipe } from "./WoodlandWorkRecipe.js";
 
 /** Fixed, inspected coordinates; IDs pin compositions, never search order. All positions are tiles. */
 export const NATURAL_CASES = [
+  { id: "behavior-goat", name: "Goat · browse shrubs and hop onto rocks", seed: 1, x: 8, y: 11 },
+  { id: "behavior-pig", name: "Pig · sniff, root and uncover food", seed: 1, x: 8, y: 11 },
+  {
+    id: "behavior-elephant",
+    name: "Elephant · trunk harvest and fruit sharing",
+    seed: 1,
+    x: 8,
+    y: 11,
+  },
   {
     id: "behavior-cat-ginger",
     name: "Ginger cat · inherited toy play and climbing",
@@ -135,6 +145,8 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "behavior-goat" || id === "behavior-pig" || id === "behavior-elephant")
+    return pastureWorkRecipe(id.slice("behavior-".length) as "goat" | "pig" | "elephant");
   if (id === "behavior-cat-ginger" || id === "behavior-cat-black")
     return woodlandWorkRecipe("cat", id.slice("behavior-".length) as "cat-ginger" | "cat-black");
   if (id === "behavior-capuchin" || id === "behavior-raccoon" || id === "behavior-cat")

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [163 Browsing, rooting and trunks](163-browsing-rooting-and-trunks.md) | Implemented and automation verified: goat browsing/rock hops, pig rooting and elephant fruit work; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [161 Climbing, cache raids and play](161-climbing-raids-and-play.md) | Three new signatures and two inherited cat coats; renewable food and persistent toys; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [159 Foraging and lookouts](159-foraging-and-lookouts.md) | Implemented and automation verified: rabbit plant feeding, robin ground forage/perch return and meerkat sentinels; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [158 Browser-test migration](158-browser-test-migration.md) | Implemented and locally green: all 403 decisions resolved, 1,724 → 808 browser cases, eight CI shards and preserved browser boundaries; [testing](../topics/testing.md) |

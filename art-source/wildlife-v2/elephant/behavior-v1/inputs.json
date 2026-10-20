@@ -1,0 +1,18 @@
+{
+  "blend": "art-source/wildlife-v2/elephant/motion-v2/elephant.blend",
+  "masters": "art-source/wildlife-v2/elephant/pilot-v2/masters.json",
+  "sheet": "public/demos/wildlife-v2/elephant/motion-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/elephant/motion-v2/sprite.json",
+  "canvas": 112,
+  "anchor": [
+    56,
+    80
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/elephant/motion-v2/elephant.blend": "fe0766bcbb042e7fcd8a6debf873294ada6d72863a8bd57aa1548cba03bdd9ee",
+    "art-source/wildlife-v2/elephant/pilot-v2/masters.json": "bd7adc1983d3545bc75cf2205c1228c147d68e7bffc909cf25589a0108d8b514",
+    "public/demos/wildlife-v2/elephant/motion-v2/sheet.png": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
+    "public/demos/wildlife-v2/elephant/motion-v2/sprite.json": "6890956718f28d4297241338bab4bd7666a6864623e2c138d7232245bca06d5c",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

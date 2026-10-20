@@ -391,9 +391,27 @@ describe.each(FAUNA_PROFILES.filter((p) => !["pond", "shore", "deep"].includes(p
           await s.step(idle, 0.1);
           for (const d of animal()) {
             clips.add(d.sprite?.clip ?? 0);
-            if (p.hop) expect(d.wz ?? 0).toBeGreaterThanOrEqual(0);
-            else expect(d.wz).toBe(0);
-            if (!p.hop || !d.fauna?.motion) expect(d.jumpZ).toBeUndefined();
+            const rockWork =
+              d.animalWork?.kind === "goat" &&
+              ["hop", "perch"].includes(d.animalWork.state) &&
+              d.animalWork.rock;
+            if (rockWork) {
+              expect(
+                s.realm.propManager.props.some(
+                  (prop) =>
+                    prop.type === "prop-low-rock" &&
+                    (prop.proceduralId ?? prop.persistentId) === rockWork.id,
+                ),
+              ).toBe(true);
+              expect(d.wz ?? 0).toBeGreaterThanOrEqual(rockWork.ground);
+              expect(d.wz ?? 0).toBeLessThanOrEqual(rockWork.z + 14);
+              if (d.animalWork?.state === "perch") expect(d.wz).toBe(rockWork.z);
+              expect(d.jumpVZ).toBeUndefined();
+            } else {
+              if (p.hop) expect(d.wz ?? 0).toBeGreaterThanOrEqual(0);
+              else expect(d.wz).toBe(0);
+              if (!p.hop || !d.fauna?.motion) expect(d.jumpZ).toBeUndefined();
+            }
             expect(
               Math.hypot(
                 d.position.wx - required(d.fauna).home.wx,

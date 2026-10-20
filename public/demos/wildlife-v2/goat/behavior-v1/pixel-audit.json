@@ -1,0 +1,34 @@
+{
+  "identity": "goat-behavior-v1",
+  "poses": 152,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "rear": 8,
+      "browse": 3,
+      "lower": 8,
+      "hop": 5
+    },
+    "up": {
+      "rear": 8,
+      "browse": 3,
+      "lower": 8,
+      "hop": 4
+    },
+    "left": {
+      "rear": 8,
+      "browse": 3,
+      "lower": 8,
+      "hop": 6
+    },
+    "right": {
+      "rear": 8,
+      "browse": 3,
+      "lower": 8,
+      "hop": 6
+    }
+  },
+  "connectedHeadBodyChecks": 152
+}

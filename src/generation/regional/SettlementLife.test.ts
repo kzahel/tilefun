@@ -136,7 +136,23 @@ it("assigns each farm animal once to its actual spawn chunk, independently of qu
       })
       .sort((a, b) => a.featureId.localeCompare(b.featureId));
   const result = scan(coords);
-  expect(result).toHaveLength(6);
+  const animals = result.filter((a) => faunaProfile(a.type));
+  expect(animals).toHaveLength(6);
+  expect(new Set(animals.map((a) => a.featureId))).toEqual(
+    new Set(f.actors.map((a) => a.featureId)),
+  );
+  const supplies = result.filter((a) => !faunaProfile(a.type));
+  expect(supplies).toHaveLength(
+    f.actors.filter((a) =>
+      ["wildlife-goat-provisional-v1", "wildlife-piglet-provisional-v1"].includes(a.type),
+    ).length,
+  );
+  expect(new Set(result.map((a) => a.featureId)).size).toBe(result.length);
+  for (const supply of supplies) {
+    const owner = required(animals.find((a) => supply.featureId === `${a.featureId}:pasture-food`));
+    expect(Math.floor(supply.wx / 256)).toBe(Math.floor(owner.wx / 256));
+    expect(Math.floor(supply.wy / 256)).toBe(Math.floor(owner.wy / 256));
+  }
   expect(scan(coords.reverse())).toEqual(result);
 });
 

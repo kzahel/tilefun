@@ -82,6 +82,10 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
     p = faunaProfile(animal.type),
     motion = ai?.motion;
   if (!ai || !motion || !p || !animal.velocity || dt <= 0) return;
+  if (motion.workPaused) {
+    animal.velocity.vx = animal.velocity.vy = 0;
+    return;
+  }
   const old = motion.elapsed;
   motion.elapsed = Math.min(motion.duration, old + dt);
   if (p.hop) {
@@ -99,7 +103,7 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
     animal.jumpZ = height;
     return;
   }
-  if (animal.animalWork?.state === "pounce") {
+  if (animal.animalWork?.state === "pounce" || animal.animalWork?.state === "hop") {
     const t = motion.elapsed / motion.duration;
     animal.wz =
       (motion.startZ ?? 0) +

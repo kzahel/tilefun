@@ -1,12 +1,9 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: 206-entry ledger; dog fetch, crow nests and squirrel caches implemented.
-Second batch implements rabbit plants, robin ground forage and meerkat lookouts.
-Third batch adds capuchin climbing, raccoon cache raids and cat toy play/perch rests,
-plus renewable food sources and persistent bounded toys. Eleven entries are automation
-verified: nine distinct signatures and two inherited cat coats. Exact art/behavior
-human review remains pending.
+Status: four behavior batches implemented. Fourteen entries have targeted automation
+verification: twelve distinct signatures and two inherited cat coats. Final 163
+source and Canvas/GPU checks pass; exact art/behavior human review remains pending.
 Updated: 2026-10-20.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
@@ -50,7 +47,7 @@ original mallard-duck and bear roster IDs. Preserve completed art ledgers as his
 The [generated progress report](../wildlife-behavior-status.md) derives its counts
 and animal table from this ledger. The same generator writes compact Animal
 Browser progress data. Filter **Behavior progress → Demonstrations** and select
-**Demonstrate behavior** to open a shared authority scene. The other 195 animals
+**Demonstrate behavior** to open a shared authority scene. The other 192 animals
 still need detailed audits and phase assignment. Existing behavior has not been
 removed or declared absent. Verified stages require recorded evidence.
 
@@ -133,8 +130,8 @@ Use the existing embedded engine hosts, not a separate showcase implementation.
 These are proposed capability groups, not a requirement to finish one entire
 group before starting another. Prefer complete, demonstrable slices. The initial
 inventory/report and first implementation batch are established. Next step:
-review the six implemented demonstrations, then audit the next small land/air
-batch against these completion rules. Continue classifying the remaining 200
+review the fourteen implemented demonstrations, then audit the next small land/air
+batch against these completion rules. Continue classifying the remaining 192
 entries and record proposed mechanics before expanding production.
 
 ## First batch contracts
@@ -260,3 +257,42 @@ their owner. Player toys have no timed expiry and remain on water; ordinary edit
 balls keep their previous disposable behavior. Explicit editor deletion still works.
 A compact saved owner index prevents travel/reload from bypassing the limit and
 rejects a retired toy even if an older scope snapshot arrives late.
+
+## Browsing, rooting and trunks (163)
+
+[163](../tactical/163-browsing-rooting-and-trunks.md) adds finite leafy shrubs and
+root patches to the existing food-growth system. Both hold three portions; leaves
+renew every 180 admitted ready seconds and roots every 300, with saved timers and
+no offline catch-up. Empty root patches remain visible as disturbed soil. Roots
+are actual carryable edible actors, separate from the patch stock.
+
+Goats approach a shrub, rear above planted hind hooves, browse one portion and
+lower. They can hop onto an ordinary editable **Low rock**, rest on its real
+8-pixel top and hop down. Grounded bodies are unchanged. The new Low rock reuses
+existing native rock art under an explicit finite walkable geometry identity;
+older rock definitions remain intact. Flight follows ordinary collision and
+saved motion; unavailable support pauses the committed hop. Removed support
+changes the landing to actual ground without a height jump.
+
+Pigs sniff a real stocked patch, work the snout into the soil, uncover one actual
+root, lift it and eat. Scares/following/riding and interruptions release claims;
+already uncovered roots drop as real items. Competing pigs cannot duplicate stock.
+
+Elephants stand at a collision-safe authored trunk reach point beside a supported
+fruit crop. Reaching takes one actual fruit; its attachment follows the trunk tip
+through the curl into the mouth and eating. A separate shake transfers at most two
+available portions into real ground fruit for other foragers. It never makes food.
+Deleting the support cancels the reach/crop; held fruit remains conserved.
+
+Natural goat/pig homes and farm residents receive bounded cell-owned supplies;
+elephant homes receive an actual ordinary oak and finite crop. Existing animal
+IDs, roster slots and random ordering are unchanged. Manually placed animals
+create no supplies. The editor provides Leafy browsing shrub, Rooting patch,
+Foraging root and Low rock for existing worlds. Three behavior demonstrations use
+the same Realm/Worker implementation, resources, props and clocks as the game.
+
+New behavior-v1 banks append actions for these three existing animals. Resource
+behavior-v4 appends nine stock/item cells; all earlier native cells are unchanged.
+Editable rigs, fixed mesh geometry, connected fixed-length limbs/trunk, source
+projections, retained palette masters and isolated replays are receipt-pinned.
+The exact new art remains pending human review.

@@ -496,7 +496,10 @@ export class EntityManager {
               CollisionFlag.Water) !==
               0,
           );
-        if (entity.animalWork?.state === "pounce" && entity.fauna?.motion) {
+        if (
+          (entity.animalWork?.state === "pounce" || entity.animalWork?.state === "hop") &&
+          entity.fauna?.motion
+        ) {
           if (entity.fauna.motion.elapsed >= entity.fauna.motion.duration)
             settleFauna(entity, computeGroundZ(entity));
           continue;

@@ -657,3 +657,9 @@
 !cat-ginger/behavior-v1/*
 !cat-black/behavior-v1/*
 !foraging-resources/behavior-v3/*
+
+# Owner-authorized behavior batch 163.
+!goat/behavior-v1/*
+!piglet/behavior-v1/*
+!elephant/behavior-v1/*
+!foraging-resources/behavior-v4/*

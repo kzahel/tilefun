@@ -36,6 +36,13 @@ Manually placing an animal creates no automatic food or neighbours. Existing
 saved regions keep their realization; new sources are also ordinary editor items.
 The [behavior topic](wildlife-behaviors.md) owns saved stock and renewal timing.
 
+[163](../tactical/163-browsing-rooting-and-trunks.md) adds bounded shrub/root
+supplies at existing goat/pig homes and farm residents, low rock supports for goats,
+and ordinary oaks/fruit crops beside elephant homes. Source/support points derive
+from existing owner IDs and stay on the owning side of cell boundaries. Animal
+positions, IDs, RNG and roster ownership remain unchanged. Older saved regions
+retain their realization; ordinary editor items expose the same behaviors.
+
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
 regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road

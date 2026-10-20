@@ -134,3 +134,7 @@ scripts/wildlife/register-meadow-157.mjs -text whitespace=blank-at-eol,blank-at-
 # Exact retained wildlife action helpers for batch 161.
 scripts/wildlife/woodland-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/wildlife/register-woodland-161.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Exact retained wildlife action helpers for batch 163.
+scripts/wildlife/pasture-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+scripts/wildlife/register-pasture-163.mjs -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

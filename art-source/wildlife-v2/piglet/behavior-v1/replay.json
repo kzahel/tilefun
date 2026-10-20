@@ -1,0 +1,18 @@
+{
+  "identity": "piglet-behavior-v1",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 10,
+  "sha256": {
+    "contact-sheet-native.png": "ea3648ab46fb9eb35621f7f2834ac11d5122a23a60c3a9c78177c36850ccc002",
+    "index.html": "50a35e855c102ced8a3bd802ce28996fd8a68d55caf6b861904677b915d3f4b7",
+    "pixel-audit.json": "49b1d74a75f3e66e41975430f95f8b19e4380b7ef15715e1e0075d4ad0f3b872",
+    "playback.js": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc",
+    "preview-native.gif": "2c7eacdc0243bebf9e392473ac5c5f73386d73fbc12a1eb3d1a894cfcf8868e0",
+    "preview.gif": "86e20caab7818ba421797cb33248378dfcab29ef2c0fa5e2ed0f4a5e8ed58ec1",
+    "scene-native.png": "763fb5c77b1e15dfb1b63c4fda2bcb9351e3fac3315786d59e5e7b66380a1a81",
+    "sheet.png": "dcf3d7c84b222a5797deb23ecf3158814fd2a75af26dc7fc3f70a65745f07b40",
+    "source-audit.json": "b4379bbbb15cd8a58b88a51675d967a87bb4943af4033b8a508fd33f95cda335",
+    "sprite.json": "6f1d462acb6631376bca8ea98ca69a62973b2fb56ad975f651c0c86d37bdfc77"
+  }
+}

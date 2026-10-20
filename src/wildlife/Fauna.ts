@@ -1432,6 +1432,7 @@ export interface FaunaBehavior {
     duration: number;
     escaping: boolean;
     workSpeed?: number;
+    workPaused?: boolean;
     startZ?: number;
     endZ?: number;
     lift?: number;

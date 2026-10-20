@@ -1,0 +1,18 @@
+{
+  "blend": "art-source/wildlife-v2/goat/motion-v2/goat.blend",
+  "masters": "art-source/wildlife-v2/goat/draft-v1/masters.json",
+  "sheet": "public/demos/wildlife-v2/goat/motion-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/goat/motion-v2/sprite.json",
+  "canvas": 48,
+  "anchor": [
+    24,
+    35
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/goat/motion-v2/goat.blend": "e2ff1f9b6e29dce78e23241a05866179f8a52bbec92166a3dd5e46aa7a41cf00",
+    "art-source/wildlife-v2/goat/draft-v1/masters.json": "3840fa57fc3d5a5b9a2b38f2f3b7248a75968324c1c6270069c3163a56057b22",
+    "public/demos/wildlife-v2/goat/motion-v2/sheet.png": "72bee51b5816c69955c66577add82bae9e6eb14654452a81c567bb8495a90c59",
+    "public/demos/wildlife-v2/goat/motion-v2/sprite.json": "acb270adaa93637d2c524d436027aa92921a2289b0aa8516c5686be9364937a7",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "identity": "elephant-behavior-v1",
+  "reviewStatus": "pending human review",
+  "frameWidth": 112,
+  "frameHeight": 112,
+  "anchor": [
+    56,
+    80
+  ],
+  "image": "sheet.png",
+  "rootMotion": false,
+  "defaultClip": "reach",
+  "clips": {
+    "idle": {
+      "start": 0,
+      "count": 1,
+      "frameDuration": 200
+    },
+    "walk": {
+      "start": 1,
+      "count": 32,
+      "frameDuration": 50
+    },
+    "action": {
+      "start": 33,
+      "count": 8,
+      "frameDuration": 200
+    },
+    "reach": {
+      "start": 41,
+      "count": 12,
+      "frameDuration": 125,
+      "loop": false
+    },
+    "curl": {
+      "start": 53,
+      "count": 12,
+      "frameDuration": 125,
+      "loop": false
+    },
+    "eat": {
+      "start": 65,
+      "count": 8,
+      "frameDuration": 200,
+      "loop": true
+    },
+    "shake": {
+      "start": 73,
+      "count": 12,
+      "frameDuration": 125,
+      "loop": false
+    }
+  },
+  "sheetSha256": "09dbbece84aab75cccfe0bac0d2c9dc44921bbad65cac7a2c9dfcb5bc4b50cde"
+}

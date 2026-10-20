@@ -46,3 +46,37 @@ it.each(["capuchin-monkey", "red-squirrel"] as const)(
     }
   },
 );
+
+it.each(["goat", "piglet", "elephant"] as const)(
+  "%s supplies stay in their owning cell near every boundary",
+  (species) => {
+    for (const [cx, cy] of [
+      [0, 0],
+      [-2, -1],
+      [2, 3],
+    ])
+      for (const [dx, dy] of [
+        [1, 1],
+        [254, 1],
+        [1, 254],
+        [254, 254],
+      ]) {
+        const actor = {
+          type: faunaType(species),
+          featureId: `wildlife:${species}:boundary`,
+          wx: (cx ?? 0) * 256 + (dx ?? 0),
+          wy: (cy ?? 0) * 256 + (dy ?? 0),
+          route: [],
+        };
+        const items = foragePlacements([actor], nature, cx ?? 0, cy ?? 0);
+        expect(items).toHaveLength(1);
+        for (const item of items) {
+          expect(Math.floor(item.wx / 256)).toBe(cx);
+          expect(Math.floor(item.wy / 256)).toBe(cy);
+          expect(Math.hypot(item.wx - actor.wx, item.wy - actor.wy)).toBeGreaterThan(
+            species === "elephant" ? 60 : 12,
+          );
+        }
+      }
+  },
+);

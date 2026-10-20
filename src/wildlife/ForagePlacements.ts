@@ -3,6 +3,7 @@ import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { createFauna, faunaType } from "./Fauna.js";
 import { forageType, sourceType } from "./ForageResources.js";
+import { pastureSite } from "./PastureHabitat.js";
 import { RABBIT_TYPE } from "./Rabbit.js";
 import { ROBIN_TYPE } from "./Robin.js";
 
@@ -59,6 +60,21 @@ export function foragePlacements(
       crow = actor.type === faunaType("crow"),
       squirrel = actor.type === faunaType("red-squirrel");
     const capuchin = actor.type === faunaType("capuchin-monkey");
+    const pasture =
+      actor.type === faunaType("goat")
+        ? "browse-shrub"
+        : actor.type === faunaType("piglet")
+          ? "root-patch"
+          : actor.type === faunaType("elephant")
+            ? "fruit-tree"
+            : undefined;
+    if (pasture)
+      result.push({
+        featureId: `${actor.featureId}:pasture-food`,
+        type: sourceType(pasture),
+        ...pastureSite(actor),
+        route: [],
+      });
     if (capuchin || squirrel)
       result.push({
         featureId: `${actor.featureId}:growing-food`,

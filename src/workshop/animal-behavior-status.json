@@ -54,31 +54,31 @@
     "review": "not-requested"
   },
   "piglet": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Sniff and root a finite patch, uncover real food and eat it.",
+    "scene": "behavior-pig",
+    "review": "pending"
   },
   "goat": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Rear to browse finite shrubs, then hop onto an actual low rock and back down.",
+    "scene": "behavior-goat",
+    "review": "pending"
   },
   "elephant": {
-    "phase": "unclassified",
-    "ai": "not-audited",
-    "animation": "not-audited",
-    "validation": "not-audited",
-    "description": null,
-    "scene": null,
-    "review": "not-requested"
+    "phase": "land",
+    "ai": "verified",
+    "animation": "verified",
+    "validation": "verified",
+    "description": "Reach and curl the trunk to harvest fruit; shake stocked trees to drop fruit for others.",
+    "scene": "behavior-elephant",
+    "review": "pending"
   },
   "giraffe": {
     "phase": "unclassified",

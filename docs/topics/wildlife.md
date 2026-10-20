@@ -16,7 +16,7 @@ entries, including all 196 roster entries. [Batch 155](../tactical/155-fetch-nes
 adds dog ball fetching, crow twig collection/nesting and squirrel food caches,
 with real carried objects, saved resource counts and new action clips. Animal
 Browser exposes progress filters and demonstrations from this ledger. The other
-195 animals still need detailed audits; new behavior/art review remains pending.
+192 animals still need detailed audits; new behavior/art review remains pending.
 
 [Batch 159](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plant
 feeding, robin ground-food/perch trips and rotating meerkat lookouts with group
@@ -26,7 +26,7 @@ bird within the existing inspection cap. Editor food supports existing
 worlds and placed animals. Shared lifetime and local predator-sensing corrections
 keep consumed resources removed and actual nearby prey discoverable. The
 [behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json) owns progress
-and pending human review for all nine implemented signature mechanics.
+and pending human review for all twelve implemented signature mechanics.
 
 [Batch 161](../tactical/161-climbing-raids-and-play.md) adds supported capuchin
 fruit climbing, conserved raccoon cache raids and cat physical toy play/tree rests.
@@ -36,6 +36,13 @@ Natural raccoon homes include a real caching squirrel; manually placed animals
 create no hidden supplies. The [behavior topic](wildlife-behaviors.md) owns resource,
 climbing, toy lifetime, lab demonstrations and progress contracts. New art remains
 pending human review; automated evidence is recorded in the batch checkpoint.
+
+[Batch 163](../tactical/163-browsing-rooting-and-trunks.md) adds goat shrub browsing
+and actual low-rock hops, pig sniffing/rooting and elephant trunk fruit harvesting
+and shaking. Fourteen entries now have targeted behavior verification: twelve
+signatures and two inherited cat coats. New bounded shrubs/root patches, actual
+carried roots/fruit and world/editor supplies use the shared saved resource rules.
+The [behavior topic](wildlife-behaviors.md) owns the contracts and pending reviews.
 
 [Explorer boats and large lakes](boats.md) add four natural fish schools, four
 other water species and one aquatic hunter per new large lake. Existing water

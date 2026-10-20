@@ -24,6 +24,10 @@ export interface WildlifeEnvironment {
     home: PositionComponent,
     radius: number,
   ): readonly import("./TreeClimbing.js").ClimbTree[];
+  browsingRocks?(
+    home: PositionComponent,
+    radius: number,
+  ): readonly import("./BrowsingRocks.js").BrowsingRock[];
   perches?(home: PositionComponent, radius: number): readonly import("./Robin.js").RobinPerch[];
 }
 const distance = (a: PositionComponent, b: PositionComponent) =>

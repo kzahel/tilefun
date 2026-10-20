@@ -11,7 +11,10 @@ export interface AnimalWork {
     | "meerkat"
     | "capuchin"
     | "raccoon"
-    | "cat";
+    | "cat"
+    | "goat"
+    | "pig"
+    | "elephant";
   state:
     | "idle"
     | "seek"
@@ -29,7 +32,15 @@ export interface AnimalWork {
     | "stalk"
     | "pounce"
     | "bat"
-    | "perch";
+    | "perch"
+    | "rear"
+    | "browse"
+    | "sniff"
+    | "root"
+    | "reach"
+    | "curl"
+    | "shake"
+    | "hop";
   elapsed: number;
   cooldown: number;
   targetId?: string;
@@ -50,9 +61,15 @@ export interface AnimalWork {
   played?: number;
   climbZ?: number;
   climbFrom?: PositionComponent & { z: number };
+  rock?: import("./BrowsingRocks.js").BrowsingRock;
+  hopDown?: boolean;
+  hops?: number;
+  uncovered?: number;
+  harvested?: number;
+  shaken?: number;
 }
 
-export type FoodKind = "nut" | "fruit";
+export type FoodKind = "nut" | "fruit" | "root";
 export interface WorkItem {
   kind: "ball" | "twig" | FoodKind | "nest" | "cache" | "greens" | "seed";
   claimedBy?: string;
@@ -64,7 +81,7 @@ export interface WorkItem {
   contents: FoodKind[];
   ballOrder?: number;
   growth?: {
-    food: "fruit" | "nut" | "seed" | "greens";
+    food: "fruit" | "nut" | "seed" | "greens" | "root";
     capacity: number;
     interval: number;
     remaining: number;

@@ -1,0 +1,18 @@
+{
+  "blend": "art-source/wildlife-v2/piglet/motion-v2/piglet.blend",
+  "masters": "art-source/wildlife-v2/piglet/draft-v1/masters.json",
+  "sheet": "public/demos/wildlife-v2/piglet/motion-v2/sheet.png",
+  "metadata": "public/demos/wildlife-v2/piglet/motion-v2/sprite.json",
+  "canvas": 48,
+  "anchor": [
+    24,
+    35
+  ],
+  "sha256": {
+    "art-source/wildlife-v2/piglet/motion-v2/piglet.blend": "c46f0bd988857c65ca020ea1c4ec85a554e5e88d69046956478e890f89d1b499",
+    "art-source/wildlife-v2/piglet/draft-v1/masters.json": "9f8b2936382128e12ecc6dc2bf62de3b1cfb03d1537483823b595d341b6b1131",
+    "public/demos/wildlife-v2/piglet/motion-v2/sheet.png": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
+    "public/demos/wildlife-v2/piglet/motion-v2/sprite.json": "b9db7ba64afc6aa64f6303a8c8938c7dfe42cc4fab2a4f074d0f9304356347f9",
+    "art-source/wildlife-v2/camera.json": "9f5c983471f433a20634c786f4c5d30a82d261e0c5103a14fb2f430c29f46be9"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-20",
+  "base": "69883a30",
+  "state": "automation-verified-human-review-pending",
+  "authority": {
+    "newScenarios": 13,
+    "boundaryCases": 5,
+    "broadRechecks": "36 final isolated cases and 679 affected main-source cases pass"
+  },
+  "art": {
+    "pendingIdentities": 4,
+    "priorReviewObjectsPreserved": 241,
+    "pinnedArtifacts": 114,
+    "isolatedReplayArtifacts": 37,
+    "exactNativeAnd3xCrops": 1920,
+    "fixedLengthEndpointChecks": 1872,
+    "fixedLengthTrunkChecks": 220,
+    "connectedHeadBodyChecks": 468,
+    "priorTravelCellsUnchanged": true,
+    "priorThirtyResourceCellsUnchanged": true,
+    "humanReview": "pending",
+    "uniqueArtifactPins": 87
+  },
+  "focusedBrowser": {
+    "passed": 2,
+    "rendererBoundaries": ["Canvas2D", "GPU"],
+    "animalsPerBoundary": 3,
+    "contract": "Actual native coat pixels in the projected sprite rectangle, real Worker action clips/attachments, exact saved poses and visible supported/dropped outcomes",
+    "seconds": 77
+  },
+  "manifest": {
+    "candidates": 1898,
+    "inputDigest": "a33bdb5b797a8edad00dc326fbcafcad7255ba90d936f25b15279d2f70c7e982",
+    "normalRetinaChromiumVerified": true,
+    "scope": "HEAD plus named wildlife source; concurrent unfinished vehicle/3D WIP excluded"
+  },
+  "broadUnits": {
+    "sweepCases": 6450,
+    "passed": 6432,
+    "failed": 8,
+    "skipped": 10,
+    "seconds": 790.41,
+    "knownWindowsFailures": 5,
+    "resolvedNonPlatformFailures": 3,
+    "resolution": "Goat real-support and farm roster/resource assertions updated; cold predator recheck passes without runtime/timeout changes.",
+    "finalAdditionalRegressionCases": 1,
+    "finalAffectedPasses": 679,
+    "finalIsolatedPasses": 36,
+    "coverage": "Full sweep plus focused resolved-failure/final-source rechecks; not a single all-green full run."
+  },
+  "fullBrowser": {
+    "cases": 823,
+    "sweepPassed": 822,
+    "sweepFailed": 1,
+    "sweepSeconds": 2222.19,
+    "failure": "Canvas train reload startup travel 200.8px exceeded 192px allowance; supported roof pose was restored.",
+    "coldTrainPassed": 4,
+    "coldTrainSeconds": 54.5,
+    "trainSourceAndTestUnchanged": true,
+    "finalAffectedRecheck": {
+      "passed": 4,
+      "seconds": 78,
+      "boundaries": "Final built Canvas/GPU three-animal actions and desktop/phone entity picker"
+    }
+  },
+  "integration": {
+    "nodeComparatorPassed": 1,
+    "httpWebSocketPassed": 3,
+    "workerPassed": 11,
+    "workerDryRunBuild": "passed",
+    "browserMigrationBaselineDecisions": 403
+  },
+  "checks": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "streamingReady": "passed",
+    "artPins": "passed"
+  }
+}

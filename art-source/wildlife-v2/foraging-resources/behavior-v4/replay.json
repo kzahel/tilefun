@@ -1,0 +1,15 @@
+{
+  "identity": "foraging-resources-behavior-v4",
+  "status": "byte-identical",
+  "isolation": "minimal retained inputs only",
+  "artifacts": 7,
+  "sha256": {
+    "contact-sheet-native.png": "04ec8f9f2bccd707339926db8bc00a38cc8de72ce50270ed243f281d54407b89",
+    "index.html": "2f59c930cd4d40acb76e6063fdcea84d0b70162165714672defba686f07f9b00",
+    "pixel-audit.json": "84c1c4cb40188f45c77d8185c651ff9f4c2d83574ce2922bd706039ddb39af58",
+    "preview.png": "ac8099c0042808e1c8b7fac889ee0bca5e8b1d35d14a8414059f1d3602af3ac8",
+    "scene-native.png": "ac8099c0042808e1c8b7fac889ee0bca5e8b1d35d14a8414059f1d3602af3ac8",
+    "sheet.png": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234",
+    "sprite.json": "4860a33a1437d95d2b570b9dceb29dbbb9f4468af37a294909b335be8c96ee96"
+  }
+}

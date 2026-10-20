@@ -98,6 +98,7 @@ import {
 } from "../traffic/TrafficSystem.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
+import { browsingRocks } from "../wildlife/BrowsingRocks.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
 import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
 import { tickFoodSources } from "../wildlife/FoodGrowth.js";
@@ -1145,6 +1146,16 @@ export class Realm {
               }),
           climbTrees: (home, radius) =>
             climbTrees(
+              this.propManager.getPropsInChunkRange(
+                Math.floor((home.wx - radius) / 256),
+                Math.floor((home.wy - radius) / 256),
+                Math.floor((home.wx + radius) / 256),
+                Math.floor((home.wy + radius) / 256),
+              ),
+              (p) => getSurfaceZ(p.wx, p.wy, getHeight),
+            ),
+          browsingRocks: (home, radius) =>
+            browsingRocks(
               this.propManager.getPropsInChunkRange(
                 Math.floor((home.wx - radius) / 256),
                 Math.floor((home.wy - radius) / 256),

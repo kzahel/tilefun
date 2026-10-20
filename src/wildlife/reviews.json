@@ -22079,5 +22079,329 @@
         "sha256": "19efcd96b57e2775c915e1fb19070669a7e2a49df6df677c32dccb75fbbe2eb6"
       }
     ]
+  },
+  {
+    "id": "goat-behavior-v1",
+    "animalId": "goat",
+    "revision": "behavior-v1",
+    "name": "Goat browsing and rock hops",
+    "batchId": "wildlife-v2-behaviors-163",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/goat/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-goat-behavior-v1",
+      "name": "Goat browsing and rock hops sheet",
+      "image": "demos/wildlife-v2/goat/behavior-v1/sheet.png",
+      "width": 3792,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "c3db8cf9b28a67f7e3c8c2a0e31dd79e4d3a42f8557a7ec49ab58c5f6b605967",
+      "source": "art-source/wildlife-v2/goat/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-goat-behavior-v1-scene",
+      "name": "Goat browsing and rock hops scene",
+      "image": "demos/wildlife-v2/goat/behavior-v1/scene-native.png",
+      "width": 384,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "520d6224e7bafdb674f0a2df711c98a47c1c08f6db25d6dd7bfba5666b0d95be",
+      "source": "art-source/wildlife-v2/goat/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-goat-behavior-v1-contact",
+      "name": "Goat browsing and rock hops contact",
+      "image": "demos/wildlife-v2/goat/behavior-v1/contact-sheet-native.png",
+      "width": 1824,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "8e342a3b9cf093de545755cd31e8c7dffd597da865b70f2d6379404b18f1d30e",
+      "source": "art-source/wildlife-v2/goat/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/goat/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/contact-sheet-native.png",
+        "sha256": "8e342a3b9cf093de545755cd31e8c7dffd597da865b70f2d6379404b18f1d30e"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/index.html",
+        "sha256": "b4012df9d92eb18dcc528a2ec842bb707b6e5897d0c151dd7b15b9d810460961"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/pixel-audit.json",
+        "sha256": "025cdbc6264e9ef224b6cd74b2379172dc7c481177c4ab65161d4a95a44f2f13"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/preview-native.gif",
+        "sha256": "edd89e94e2e952f49d2d796f4967fac2e14c154467c63fda8ce19c2d947dc5c2"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/preview.gif",
+        "sha256": "7c3d5cf91053fa0b652fc93a04f67d41c8f84417847063c7e8b743ad8abd95bd"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/scene-native.png",
+        "sha256": "520d6224e7bafdb674f0a2df711c98a47c1c08f6db25d6dd7bfba5666b0d95be"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/sheet.png",
+        "sha256": "c3db8cf9b28a67f7e3c8c2a0e31dd79e4d3a42f8557a7ec49ab58c5f6b605967"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/source-audit.json",
+        "sha256": "1328d261d1b1ea705c81135fa50ad3ebfe9347f35bb6a64b7cd409d3c48f7a07"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/sprite.json",
+        "sha256": "d6521254481612851d88dfeafaec33fe7e23322dea2b390e36056dafd3d99372"
+      },
+      {
+        "path": "demos/wildlife-v2/goat/behavior-v1/validation.json",
+        "sha256": "3fa65f895364a7d45b330e63c55037ae90526fc58344ea5e8e01bb0ef2944365"
+      }
+    ]
+  },
+  {
+    "id": "piglet-behavior-v1",
+    "animalId": "piglet",
+    "revision": "behavior-v1",
+    "name": "Pig sniffing and rooting",
+    "batchId": "wildlife-v2-behaviors-163",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/piglet/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-piglet-behavior-v1",
+      "name": "Pig sniffing and rooting sheet",
+      "image": "demos/wildlife-v2/piglet/behavior-v1/sheet.png",
+      "width": 3648,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "dcf3d7c84b222a5797deb23ecf3158814fd2a75af26dc7fc3f70a65745f07b40",
+      "source": "art-source/wildlife-v2/piglet/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-piglet-behavior-v1-scene",
+      "name": "Pig sniffing and rooting scene",
+      "image": "demos/wildlife-v2/piglet/behavior-v1/scene-native.png",
+      "width": 384,
+      "height": 88,
+      "tileSize": 16,
+      "fingerprint": "763fb5c77b1e15dfb1b63c4fda2bcb9351e3fac3315786d59e5e7b66380a1a81",
+      "source": "art-source/wildlife-v2/piglet/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-piglet-behavior-v1-contact",
+      "name": "Pig sniffing and rooting contact",
+      "image": "demos/wildlife-v2/piglet/behavior-v1/contact-sheet-native.png",
+      "width": 1680,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "ea3648ab46fb9eb35621f7f2834ac11d5122a23a60c3a9c78177c36850ccc002",
+      "source": "art-source/wildlife-v2/piglet/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/piglet/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/contact-sheet-native.png",
+        "sha256": "ea3648ab46fb9eb35621f7f2834ac11d5122a23a60c3a9c78177c36850ccc002"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/index.html",
+        "sha256": "50a35e855c102ced8a3bd802ce28996fd8a68d55caf6b861904677b915d3f4b7"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/pixel-audit.json",
+        "sha256": "49b1d74a75f3e66e41975430f95f8b19e4380b7ef15715e1e0075d4ad0f3b872"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/preview-native.gif",
+        "sha256": "2c7eacdc0243bebf9e392473ac5c5f73386d73fbc12a1eb3d1a894cfcf8868e0"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/preview.gif",
+        "sha256": "86e20caab7818ba421797cb33248378dfcab29ef2c0fa5e2ed0f4a5e8ed58ec1"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/scene-native.png",
+        "sha256": "763fb5c77b1e15dfb1b63c4fda2bcb9351e3fac3315786d59e5e7b66380a1a81"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/sheet.png",
+        "sha256": "dcf3d7c84b222a5797deb23ecf3158814fd2a75af26dc7fc3f70a65745f07b40"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/source-audit.json",
+        "sha256": "b4379bbbb15cd8a58b88a51675d967a87bb4943af4033b8a508fd33f95cda335"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/sprite.json",
+        "sha256": "6f1d462acb6631376bca8ea98ca69a62973b2fb56ad975f651c0c86d37bdfc77"
+      },
+      {
+        "path": "demos/wildlife-v2/piglet/behavior-v1/validation.json",
+        "sha256": "2d7d238de0082b8dd524610e46ab1cf62482b54852dff87a8e3020e3b817256d"
+      }
+    ]
+  },
+  {
+    "id": "elephant-behavior-v1",
+    "animalId": "elephant",
+    "revision": "behavior-v1",
+    "name": "Elephant trunk harvest and shaking",
+    "batchId": "wildlife-v2-behaviors-163",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/elephant/behavior-v1/",
+    "sheet": {
+      "id": "wildlife-v2-elephant-behavior-v1",
+      "name": "Elephant trunk harvest and shaking sheet",
+      "image": "demos/wildlife-v2/elephant/behavior-v1/sheet.png",
+      "width": 9520,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "09dbbece84aab75cccfe0bac0d2c9dc44921bbad65cac7a2c9dfcb5bc4b50cde",
+      "source": "art-source/wildlife-v2/elephant/behavior-v1"
+    },
+    "scene": {
+      "id": "wildlife-v2-elephant-behavior-v1-scene",
+      "name": "Elephant trunk harvest and shaking scene",
+      "image": "demos/wildlife-v2/elephant/behavior-v1/scene-native.png",
+      "width": 640,
+      "height": 152,
+      "tileSize": 16,
+      "fingerprint": "ad49300880e3dbe9a2a475ebb743a551ce7a62f3f1f0b4b42dcad2c97a3a8391",
+      "source": "art-source/wildlife-v2/elephant/behavior-v1"
+    },
+    "contact": {
+      "id": "wildlife-v2-elephant-behavior-v1-contact",
+      "name": "Elephant trunk harvest and shaking contact",
+      "image": "demos/wildlife-v2/elephant/behavior-v1/contact-sheet-native.png",
+      "width": 4928,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "853d11a96b8d14efc2e6580f4100c2e6f063e7d90a8c7bf75e5c0ff1065522c2",
+      "source": "art-source/wildlife-v2/elephant/behavior-v1"
+    },
+    "preview": "demos/wildlife-v2/elephant/behavior-v1/preview.gif",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/contact-sheet-native.png",
+        "sha256": "853d11a96b8d14efc2e6580f4100c2e6f063e7d90a8c7bf75e5c0ff1065522c2"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/index.html",
+        "sha256": "c68134a97f77edeecfb57e0343d00709753e01584a499fa775cb6f39ab448492"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/pixel-audit.json",
+        "sha256": "4c24079f5c94bdc4937a65240e2e1fbc07ed9bc41fbc668b6487bc337695176d"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/playback.js",
+        "sha256": "d44ec220c8375937c6eec0341a9f010e8836666a9e38c2a9648b04fb7a91f3fc"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/preview-native.gif",
+        "sha256": "9625e30dfdc65f7692544854ec900815a9f6de63d9526c588d7355165d55adf2"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/preview.gif",
+        "sha256": "49aad58079ac33ca443f7c17876cfd732d82b843720a96edae6d1304c97a87f0"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/scene-native.png",
+        "sha256": "ad49300880e3dbe9a2a475ebb743a551ce7a62f3f1f0b4b42dcad2c97a3a8391"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/sheet.png",
+        "sha256": "09dbbece84aab75cccfe0bac0d2c9dc44921bbad65cac7a2c9dfcb5bc4b50cde"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/source-audit.json",
+        "sha256": "29692b99bd3083bc21e7b0c70b5dd70d0d74e9bb43382f8cc1a4cce959768c14"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/sprite.json",
+        "sha256": "4cdd510b0f880c689af09bbf208a0766c84716cbf435210f9190ad5e793d7de8"
+      },
+      {
+        "path": "demos/wildlife-v2/elephant/behavior-v1/validation.json",
+        "sha256": "76f7d578c83fcab5a1dd98217eb251fc8851d77c2bdb4cceb18f032da7b3f6f8"
+      }
+    ]
+  },
+  {
+    "id": "foraging-resources-behavior-v4",
+    "animalId": "foraging-resources",
+    "revision": "behavior-v4",
+    "name": "Finite shrubs and root patches",
+    "batchId": "wildlife-v2-behaviors-163",
+    "galleryUrl": "/tilefun/demos/wildlife-v2/foraging-resources/behavior-v4/",
+    "sheet": {
+      "id": "wildlife-v2-foraging-resources-behavior-v4",
+      "name": "Finite shrubs and root patches sheet",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png",
+      "width": 1248,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v4"
+    },
+    "scene": {
+      "id": "wildlife-v2-foraging-resources-behavior-v4-scene",
+      "name": "Finite shrubs and root patches scene",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v4/scene-native.png",
+      "width": 288,
+      "height": 64,
+      "tileSize": 16,
+      "fingerprint": "ac8099c0042808e1c8b7fac889ee0bca5e8b1d35d14a8414059f1d3602af3ac8",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v4"
+    },
+    "contact": {
+      "id": "wildlife-v2-foraging-resources-behavior-v4-contact",
+      "name": "Finite shrubs and root patches contact",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v4/contact-sheet-native.png",
+      "width": 288,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "04ec8f9f2bccd707339926db8bc00a38cc8de72ce50270ed243f281d54407b89",
+      "source": "art-source/wildlife-v2/foraging-resources/behavior-v4"
+    },
+    "preview": "demos/wildlife-v2/foraging-resources/behavior-v4/preview.png",
+    "files": [
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/contact-sheet-native.png",
+        "sha256": "04ec8f9f2bccd707339926db8bc00a38cc8de72ce50270ed243f281d54407b89"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/index.html",
+        "sha256": "2f59c930cd4d40acb76e6063fdcea84d0b70162165714672defba686f07f9b00"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/pixel-audit.json",
+        "sha256": "84c1c4cb40188f45c77d8185c651ff9f4c2d83574ce2922bd706039ddb39af58"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/preview.png",
+        "sha256": "ac8099c0042808e1c8b7fac889ee0bca5e8b1d35d14a8414059f1d3602af3ac8"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/scene-native.png",
+        "sha256": "ac8099c0042808e1c8b7fac889ee0bca5e8b1d35d14a8414059f1d3602af3ac8"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png",
+        "sha256": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234"
+      },
+      {
+        "path": "demos/wildlife-v2/foraging-resources/behavior-v4/sprite.json",
+        "sha256": "4860a33a1437d95d2b570b9dceb29dbbb9f4468af37a294909b335be8c96ee96"
+      }
+    ]
   }
 ]

@@ -10,6 +10,7 @@ import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
 import type { WildlifeEnvironment } from "./mallardAI.js";
+import { isPastureWorker, PastureWork } from "./PastureWork.js";
 import { isWoodlandWorker, WoodlandWork } from "./WoodlandWork.js";
 
 const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
@@ -40,9 +41,11 @@ const carrying = (e: Entity) => !!e.animalWork?.heldId;
 export class AnimalWorkSystem {
   private readonly meadow: MeadowWork;
   private readonly woodland: WoodlandWork;
+  private readonly pasture: PastureWork;
   constructor(private readonly manager: EntityManager) {
     this.meadow = new MeadowWork(manager);
     this.woodland = new WoodlandWork(manager, this);
+    this.pasture = new PastureWork(manager, this);
     manager.removalListeners.add((removed, destroyed) => {
       if (!destroyed) return; // Residency eviction is not a death or a resource deletion.
       if (removed.animalWork) this.cancel(removed, 3);
@@ -244,6 +247,7 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
+    if (isPastureWorker(animal)) return this.pasture.update(animal, dt, context, planning);
     if (isWoodlandWorker(animal)) return this.woodland.update(animal, dt, context, planning);
     if (isMeadowWorker(animal)) return this.meadow.update(animal, dt, context, planning);
     const kind = workerKind(animal),

@@ -34,6 +34,9 @@ import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 
 function animalInspectionZoom(id: string): number | undefined {
+  if (id === "behavior-goat") return 1.3;
+  if (id === "behavior-pig") return 1.6;
+  if (id === "behavior-elephant") return 0.9;
   if (id === "behavior-capuchin" || id === "behavior-raccoon") return 1;
   if (id.startsWith("behavior-cat")) return 1.4;
   if (id === "behavior-rabbit") return 2;
@@ -158,6 +161,9 @@ export default function NaturalLandscapePage() {
       height: 640,
       terrain: true,
       fixedCamera: (player, alpha) => {
+        if (caseId === "behavior-goat") return { wx: 144, wy: 144 };
+        if (caseId === "behavior-pig") return { wx: 152, wy: 152 };
+        if (caseId === "behavior-elephant") return { wx: 176, wy: 112 };
         if (caseId === "behavior-capuchin") return { wx: 160, wy: 100 };
         if (caseId === "behavior-raccoon") return { wx: 160, wy: 128 };
         if (caseId === "behavior-rabbit") return { wx: 160, wy: 176 };
@@ -431,6 +437,14 @@ export default function NaturalLandscapePage() {
                 y: e.position.wy,
                 z: e.wz ?? 0,
                 clip: e.sprite?.clip,
+                column: e.sprite?.frameCol,
+                row: e.sprite?.frameRow,
+                screen: {
+                  left: p.sx - ((sprite?.spriteWidth ?? 0) / 2) * scale,
+                  top: bottom - (sprite?.spriteHeight ?? 0) * scale,
+                  width: (sprite?.spriteWidth ?? 0) * scale,
+                  height: (sprite?.spriteHeight ?? 0) * scale,
+                },
                 parent: e.parentId ?? -1,
                 visible,
               };
@@ -587,23 +601,29 @@ export default function NaturalLandscapePage() {
       {caseId.startsWith("behavior-") && (
         <div className="actions">
           <p>
-            {caseId === "behavior-capuchin"
-              ? "The monkey climbs a real tree, picks one fruit, eats on the crown and climbs down. The crop slowly regrows while the world runs."
-              : caseId === "behavior-raccoon"
-                ? "The raccoon takes actual food from the squirrel’s cache and carries it under a tree to eat. The squirrel gathers nuts to refill its cache."
-                : caseId.startsWith("behavior-cat")
-                  ? "The cat crouches, stalks, pounces and bats a physical ball, then chases it again. After playing it can climb to rest on the tree."
-                  : caseId === "behavior-dog"
-                    ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
-                    : caseId === "behavior-crow"
-                      ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
-                      : caseId === "behavior-rabbit"
-                        ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
-                        : caseId === "behavior-robin"
-                          ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
-                          : caseId === "behavior-meerkat"
-                            ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
-                            : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
+            {caseId === "behavior-goat"
+              ? "The goat rears to browse a leafy shrub, lowers again and hops onto a real low rock to rest before jumping down. Shrubs slowly grow new leaves."
+              : caseId === "behavior-pig"
+                ? "The pig sniffs a root patch, digs with its snout, uncovers one real root and eats it. Depleted patches slowly replenish while the world runs."
+                : caseId === "behavior-elephant"
+                  ? "The elephant reaches for actual tree fruit, curls it to its mouth and eats. It can also shake limited fruit loose for other foragers."
+                  : caseId === "behavior-capuchin"
+                    ? "The monkey climbs a real tree, picks one fruit, eats on the crown and climbs down. The crop slowly regrows while the world runs."
+                    : caseId === "behavior-raccoon"
+                      ? "The raccoon takes actual food from the squirrel’s cache and carries it under a tree to eat. The squirrel gathers nuts to refill its cache."
+                      : caseId.startsWith("behavior-cat")
+                        ? "The cat crouches, stalks, pounces and bats a physical ball, then chases it again. After playing it can climb to rest on the tree."
+                        : caseId === "behavior-dog"
+                          ? "Throw a ball and wait for it to settle. The dog picks it up, carries it back and drops it near you. Throw again to reuse the returned ball."
+                          : caseId === "behavior-crow"
+                            ? "The crow gathers real loose twigs, carries them to a tree perch and builds its nest in four visible stages."
+                            : caseId === "behavior-rabbit"
+                              ? "The rabbit hops to an edible plant, nibbles it in three visible stages and checks for danger between bites. Food is finite; reset the scene to replenish it."
+                              : caseId === "behavior-robin"
+                                ? "The robin flies down from an actual tree canopy, pecks and eats the ground food, then flies back to its perch."
+                                : caseId === "behavior-meerkat"
+                                  ? "The group takes turns standing upright to scan. Place a tiger nearby to see the lookout give an alarm and the group escape."
+                                  : "The squirrel gathers real nuts and fruit, buries food in a cache, rests, then digs it up and eats it."}
           </p>
           {caseId === "behavior-dog" && (
             <button

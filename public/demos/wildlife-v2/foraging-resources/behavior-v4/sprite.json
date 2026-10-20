@@ -1,0 +1,10 @@
+{
+  "identity": "foraging-resources-behavior-v4",
+  "frameWidth": 32,
+  "frameHeight": 32,
+  "anchor": [
+    16,
+    16
+  ],
+  "sheetSha256": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234"
+}

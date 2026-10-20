@@ -1,0 +1,34 @@
+{
+  "identity": "elephant-behavior-v1",
+  "poses": 176,
+  "binaryAlpha": true,
+  "nativeCellsUnchanged": true,
+  "minimumPadding": 2,
+  "distinctActionFrames": {
+    "down": {
+      "reach": 10,
+      "curl": 9,
+      "eat": 3,
+      "shake": 5
+    },
+    "up": {
+      "reach": 7,
+      "curl": 10,
+      "eat": 3,
+      "shake": 7
+    },
+    "left": {
+      "reach": 12,
+      "curl": 11,
+      "eat": 3,
+      "shake": 8
+    },
+    "right": {
+      "reach": 12,
+      "curl": 11,
+      "eat": 3,
+      "shake": 9
+    }
+  },
+  "connectedHeadBodyChecks": 176
+}

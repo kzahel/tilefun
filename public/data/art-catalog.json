@@ -418,11 +418,11 @@
     {
       "id": "wildlife-forage-resources-v1",
       "name": "wildlife forage resources v1",
-      "image": "demos/wildlife-v2/foraging-resources/behavior-v3/sheet.png",
-      "width": 960,
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png",
+      "width": 1248,
       "height": 128,
       "tileSize": 16,
-      "fingerprint": "646da265e2b3cfc49b80ce62c7e815d26de3427f89c2189ac7a0ae3354a3bdbf",
+      "fingerprint": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -998,31 +998,31 @@
     {
       "id": "wildlife-piglet-provisional-v1",
       "name": "wildlife piglet provisional v1",
-      "image": "demos/wildlife-v2/piglet/motion-v2/sheet.png",
-      "width": 1968,
+      "image": "demos/wildlife-v2/piglet/behavior-v1/sheet.png",
+      "width": 3648,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "4bde5279e1ff6479bd5e49b430687c64a0d99931e8d804ba153bd70738f1226a",
+      "fingerprint": "dcf3d7c84b222a5797deb23ecf3158814fd2a75af26dc7fc3f70a65745f07b40",
       "source": "public/assets/SOURCES.md"
     },
     {
       "id": "wildlife-goat-provisional-v1",
       "name": "wildlife goat provisional v1",
-      "image": "demos/wildlife-v2/goat/motion-v2/sheet.png",
-      "width": 1968,
+      "image": "demos/wildlife-v2/goat/behavior-v1/sheet.png",
+      "width": 3792,
       "height": 192,
       "tileSize": 16,
-      "fingerprint": "72bee51b5816c69955c66577add82bae9e6eb14654452a81c567bb8495a90c59",
+      "fingerprint": "c3db8cf9b28a67f7e3c8c2a0e31dd79e4d3a42f8557a7ec49ab58c5f6b605967",
       "source": "public/assets/SOURCES.md"
     },
     {
       "id": "wildlife-elephant-provisional-v1",
       "name": "wildlife elephant provisional v1",
-      "image": "demos/wildlife-v2/elephant/motion-v2/sheet.png",
-      "width": 4592,
+      "image": "demos/wildlife-v2/elephant/behavior-v1/sheet.png",
+      "width": 9520,
       "height": 448,
       "tileSize": 16,
-      "fingerprint": "e2f62f339de18844287366c7c0c9c0e88be4966b13b2ff49be860fabff99faae",
+      "fingerprint": "09dbbece84aab75cccfe0bac0d2c9dc44921bbad65cac7a2c9dfcb5bc4b50cde",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -6456,6 +6456,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-v2-goat-behavior-v1",
+      "name": "wildlife v2 goat behavior v1",
+      "image": "demos/wildlife-v2/goat/behavior-v1/sheet.png",
+      "width": 3792,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "c3db8cf9b28a67f7e3c8c2a0e31dd79e4d3a42f8557a7ec49ab58c5f6b605967",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-piglet-behavior-v1",
+      "name": "wildlife v2 piglet behavior v1",
+      "image": "demos/wildlife-v2/piglet/behavior-v1/sheet.png",
+      "width": 3648,
+      "height": 192,
+      "tileSize": 16,
+      "fingerprint": "dcf3d7c84b222a5797deb23ecf3158814fd2a75af26dc7fc3f70a65745f07b40",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-elephant-behavior-v1",
+      "name": "wildlife v2 elephant behavior v1",
+      "image": "demos/wildlife-v2/elephant/behavior-v1/sheet.png",
+      "width": 9520,
+      "height": 448,
+      "tileSize": 16,
+      "fingerprint": "09dbbece84aab75cccfe0bac0d2c9dc44921bbad65cac7a2c9dfcb5bc4b50cde",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "wildlife-v2-foraging-resources-behavior-v4",
+      "name": "wildlife v2 foraging resources behavior v4",
+      "image": "demos/wildlife-v2/foraging-resources/behavior-v4/sheet.png",
+      "width": 1248,
+      "height": 128,
+      "tileSize": 16,
+      "fingerprint": "91b0a72c9389b89425a36119f4d8319d2fe655f0a3863c1e74d093247a27d234",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -7903,11 +7943,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:214"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:226"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1126"
+          "source": "src/server/Realm.ts:1127"
         },
         {
           "system": "Gameplay",
@@ -8391,7 +8431,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:722"
+          "source": "src/entities/PropFactories.ts:731"
         },
         {
           "system": "World generation",
@@ -8417,7 +8457,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:723"
+          "source": "src/entities/PropFactories.ts:732"
         }
       ]
     },
@@ -8439,7 +8479,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:724"
+          "source": "src/entities/PropFactories.ts:733"
         }
       ]
     },
@@ -8461,7 +8501,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:727"
+          "source": "src/entities/PropFactories.ts:736"
         }
       ]
     },
@@ -8483,7 +8523,41 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:728"
+          "source": "src/entities/PropFactories.ts:738"
+        }
+      ]
+    },
+    {
+      "id": "prop:prop-low-rock",
+      "sheetId": "objects",
+      "rect": [
+        128,
+        16,
+        16,
+        16
+      ],
+      "label": "prop-low-rock",
+      "kind": "prop",
+      "consumers": [
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:203"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PropFactories.ts:737"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/PastureWorkRecipe.ts:22"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/BrowsingRocks.ts:18"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/PastureHabitat.ts:57"
         }
       ]
     },
@@ -8501,11 +8575,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:203"
+          "source": "src/entities/PropFactories.ts:212"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:725"
+          "source": "src/entities/PropFactories.ts:734"
         }
       ]
     },
@@ -8523,11 +8597,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:204"
+          "source": "src/entities/PropFactories.ts:213"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:726"
+          "source": "src/entities/PropFactories.ts:735"
         }
       ]
     },
@@ -8545,11 +8619,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:205"
+          "source": "src/entities/PropFactories.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:729"
+          "source": "src/entities/PropFactories.ts:739"
         }
       ]
     },
@@ -8567,11 +8641,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:206"
+          "source": "src/entities/PropFactories.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:730"
+          "source": "src/entities/PropFactories.ts:740"
         }
       ]
     },
@@ -8589,11 +8663,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:207"
+          "source": "src/entities/PropFactories.ts:216"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:731"
+          "source": "src/entities/PropFactories.ts:741"
         }
       ]
     },
@@ -8611,11 +8685,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:208"
+          "source": "src/entities/PropFactories.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:732"
+          "source": "src/entities/PropFactories.ts:742"
         }
       ]
     },
@@ -8637,15 +8711,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:210"
+          "source": "src/entities/PropFactories.ts:219"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:211"
+          "source": "src/entities/PropFactories.ts:220"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:734"
+          "source": "src/entities/PropFactories.ts:744"
         },
         {
           "system": "Gameplay",
@@ -8683,15 +8757,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:219"
+          "source": "src/entities/PropFactories.ts:228"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:220"
+          "source": "src/entities/PropFactories.ts:229"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:735"
+          "source": "src/entities/PropFactories.ts:745"
         },
         {
           "system": "Gameplay",
@@ -8721,15 +8795,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:228"
+          "source": "src/entities/PropFactories.ts:237"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:229"
+          "source": "src/entities/PropFactories.ts:238"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:736"
+          "source": "src/entities/PropFactories.ts:746"
         }
       ]
     },
@@ -8751,15 +8825,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:236"
+          "source": "src/entities/PropFactories.ts:245"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:237"
+          "source": "src/entities/PropFactories.ts:246"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:737"
+          "source": "src/entities/PropFactories.ts:747"
         },
         {
           "system": "World generation",
@@ -8785,19 +8859,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:244"
+          "source": "src/entities/PropFactories.ts:253"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:245"
+          "source": "src/entities/PropFactories.ts:254"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:738"
+          "source": "src/entities/PropFactories.ts:748"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1128"
+          "source": "src/server/Realm.ts:1129"
         },
         {
           "system": "Gameplay",
@@ -8827,15 +8901,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:268"
+          "source": "src/entities/PropFactories.ts:277"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:269"
+          "source": "src/entities/PropFactories.ts:278"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:739"
+          "source": "src/entities/PropFactories.ts:749"
         },
         {
           "system": "World generation",
@@ -8911,15 +8985,23 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/PastureWorkRecipe.ts:24"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/scenarios/WoodlandWorkRecipe.ts:54"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1128"
+          "source": "src/server/Realm.ts:1129"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:40"
+          "source": "src/wildlife/ForagePlacements.ts:41"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/PastureHabitat.ts:57"
         },
         {
           "system": "Gameplay",
@@ -8953,15 +9035,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:292"
+          "source": "src/entities/PropFactories.ts:301"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:293"
+          "source": "src/entities/PropFactories.ts:302"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:740"
+          "source": "src/entities/PropFactories.ts:750"
         }
       ]
     },
@@ -8983,15 +9065,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:301"
+          "source": "src/entities/PropFactories.ts:310"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:302"
+          "source": "src/entities/PropFactories.ts:311"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:741"
+          "source": "src/entities/PropFactories.ts:751"
         },
         {
           "system": "World generation",
@@ -9037,15 +9119,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:310"
+          "source": "src/entities/PropFactories.ts:319"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:311"
+          "source": "src/entities/PropFactories.ts:320"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:742"
+          "source": "src/entities/PropFactories.ts:752"
         },
         {
           "system": "World generation",
@@ -9075,15 +9157,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:320"
+          "source": "src/entities/PropFactories.ts:329"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:321"
+          "source": "src/entities/PropFactories.ts:330"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:743"
+          "source": "src/entities/PropFactories.ts:753"
         }
       ]
     },
@@ -9105,15 +9187,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:331"
+          "source": "src/entities/PropFactories.ts:340"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:332"
+          "source": "src/entities/PropFactories.ts:341"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:744"
+          "source": "src/entities/PropFactories.ts:754"
         },
         {
           "system": "World generation",
@@ -9139,15 +9221,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:340"
+          "source": "src/entities/PropFactories.ts:349"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:341"
+          "source": "src/entities/PropFactories.ts:350"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:745"
+          "source": "src/entities/PropFactories.ts:755"
         },
         {
           "system": "World generation",
@@ -9173,15 +9255,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:350"
+          "source": "src/entities/PropFactories.ts:359"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:351"
+          "source": "src/entities/PropFactories.ts:360"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:746"
+          "source": "src/entities/PropFactories.ts:756"
         }
       ]
     },
@@ -9203,15 +9285,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:359"
+          "source": "src/entities/PropFactories.ts:368"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:360"
+          "source": "src/entities/PropFactories.ts:369"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:747"
+          "source": "src/entities/PropFactories.ts:757"
         },
         {
           "system": "World generation",
@@ -9237,15 +9319,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:368"
+          "source": "src/entities/PropFactories.ts:377"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:369"
+          "source": "src/entities/PropFactories.ts:378"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:748"
+          "source": "src/entities/PropFactories.ts:758"
         }
       ]
     },
@@ -9267,15 +9349,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:382"
+          "source": "src/entities/PropFactories.ts:391"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:383"
+          "source": "src/entities/PropFactories.ts:392"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:749"
+          "source": "src/entities/PropFactories.ts:759"
         }
       ]
     },
@@ -9297,15 +9379,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:396"
+          "source": "src/entities/PropFactories.ts:405"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:397"
+          "source": "src/entities/PropFactories.ts:406"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:750"
+          "source": "src/entities/PropFactories.ts:760"
         }
       ]
     },
@@ -9327,15 +9409,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:411"
+          "source": "src/entities/PropFactories.ts:420"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:412"
+          "source": "src/entities/PropFactories.ts:421"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:751"
+          "source": "src/entities/PropFactories.ts:761"
         }
       ]
     },
@@ -9357,15 +9439,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:420"
+          "source": "src/entities/PropFactories.ts:429"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:421"
+          "source": "src/entities/PropFactories.ts:430"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:752"
+          "source": "src/entities/PropFactories.ts:762"
         }
       ]
     },
@@ -9383,11 +9465,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:429"
+          "source": "src/entities/PropFactories.ts:438"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:754"
+          "source": "src/entities/PropFactories.ts:764"
         },
         {
           "system": "World generation",
@@ -9409,11 +9491,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:439"
+          "source": "src/entities/PropFactories.ts:448"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:755"
+          "source": "src/entities/PropFactories.ts:765"
         },
         {
           "system": "World generation",
@@ -9435,11 +9517,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:449"
+          "source": "src/entities/PropFactories.ts:458"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:756"
+          "source": "src/entities/PropFactories.ts:766"
         },
         {
           "system": "World generation",
@@ -9461,11 +9543,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:459"
+          "source": "src/entities/PropFactories.ts:468"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:757"
+          "source": "src/entities/PropFactories.ts:767"
         },
         {
           "system": "World generation",
@@ -9487,11 +9569,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:469"
+          "source": "src/entities/PropFactories.ts:478"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:758"
+          "source": "src/entities/PropFactories.ts:768"
         },
         {
           "system": "World generation",
@@ -9513,11 +9595,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:479"
+          "source": "src/entities/PropFactories.ts:488"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:759"
+          "source": "src/entities/PropFactories.ts:769"
         },
         {
           "system": "World generation",
@@ -9539,11 +9621,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:489"
+          "source": "src/entities/PropFactories.ts:498"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:760"
+          "source": "src/entities/PropFactories.ts:770"
         },
         {
           "system": "World generation",
@@ -9589,11 +9671,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:499"
+          "source": "src/entities/PropFactories.ts:508"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:761"
+          "source": "src/entities/PropFactories.ts:771"
         },
         {
           "system": "World generation",
@@ -9615,11 +9697,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:510"
+          "source": "src/entities/PropFactories.ts:519"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:762"
+          "source": "src/entities/PropFactories.ts:772"
         },
         {
           "system": "World generation",
@@ -9717,11 +9799,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:519"
+          "source": "src/entities/PropFactories.ts:528"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:763"
+          "source": "src/entities/PropFactories.ts:773"
         },
         {
           "system": "World generation",
@@ -9819,11 +9901,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:528"
+          "source": "src/entities/PropFactories.ts:537"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:764"
+          "source": "src/entities/PropFactories.ts:774"
         },
         {
           "system": "World generation",
@@ -9857,11 +9939,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:537"
+          "source": "src/entities/PropFactories.ts:546"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:765"
+          "source": "src/entities/PropFactories.ts:775"
         },
         {
           "system": "World generation",
@@ -9887,11 +9969,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:546"
+          "source": "src/entities/PropFactories.ts:555"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:766"
+          "source": "src/entities/PropFactories.ts:776"
         },
         {
           "system": "World generation",
@@ -27859,7 +27941,7 @@
       "rect": [
         0,
         0,
-        960,
+        1248,
         128
       ],
       "label": "wildlife-forage-resources-v1 · registered 32×32 frames",
@@ -27871,7 +27953,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:33"
+          "source": "src/wildlife/ForageResources.ts:50"
         }
       ]
     },
@@ -27915,11 +27997,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:214"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:226"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1126"
+          "source": "src/server/Realm.ts:1127"
         },
         {
           "system": "Gameplay",
@@ -28935,7 +29017,7 @@
       "rect": [
         0,
         0,
-        1968,
+        3648,
         192
       ],
       "label": "wildlife-piglet-provisional-v1 · registered 48×48 frames",
@@ -28953,7 +29035,7 @@
       "rect": [
         0,
         0,
-        1968,
+        3792,
         192
       ],
       "label": "wildlife-goat-provisional-v1 · registered 48×48 frames",
@@ -28971,7 +29053,7 @@
       "rect": [
         0,
         0,
-        4592,
+        9520,
         448
       ],
       "label": "wildlife-elephant-provisional-v1 · registered 112×112 frames",
@@ -33577,23 +33659,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:336"
+          "source": "src/server/Realm.ts:337"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1538"
+          "source": "src/server/Realm.ts:1549"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1723"
+          "source": "src/server/Realm.ts:1734"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2429"
+          "source": "src/server/Realm.ts:2440"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2649"
+          "source": "src/server/Realm.ts:2660"
         },
         {
           "system": "Gameplay",
@@ -33679,7 +33761,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:120"
+          "source": "src/editor/EditorPalettes.ts:126"
         },
         {
           "system": "Gameplay",
@@ -33761,7 +33843,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:121"
+          "source": "src/editor/EditorPalettes.ts:127"
         },
         {
           "system": "Gameplay",
@@ -33847,7 +33929,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:122"
+          "source": "src/editor/EditorPalettes.ts:128"
         },
         {
           "system": "Gameplay",
@@ -33921,7 +34003,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:123"
+          "source": "src/editor/EditorPalettes.ts:129"
         },
         {
           "system": "Gameplay",
@@ -33963,7 +34045,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:126"
+          "source": "src/editor/EditorPalettes.ts:132"
         },
         {
           "system": "Gameplay",
@@ -34009,7 +34091,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:127"
+          "source": "src/editor/EditorPalettes.ts:133"
         },
         {
           "system": "Gameplay",
@@ -34055,7 +34137,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:128"
+          "source": "src/editor/EditorPalettes.ts:134"
         },
         {
           "system": "Gameplay",
@@ -34105,7 +34187,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:129"
+          "source": "src/editor/EditorPalettes.ts:135"
         },
         {
           "system": "Gameplay",
@@ -34155,7 +34237,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:130"
+          "source": "src/editor/EditorPalettes.ts:136"
         },
         {
           "system": "Gameplay",
@@ -34201,7 +34283,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:124"
+          "source": "src/editor/EditorPalettes.ts:130"
         },
         {
           "system": "Gameplay",
@@ -34233,7 +34315,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:145"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:157"
         },
         {
           "system": "Gameplay",
@@ -34241,11 +34323,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:46"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:30"
+          "source": "src/wildlife/AnimalWorkPose.ts:63"
         },
         {
           "system": "Gameplay",
@@ -34253,35 +34331,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:108"
+          "source": "src/wildlife/AnimalWorkSystem.ts:32"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:118"
+          "source": "src/wildlife/AnimalWorkSystem.ts:111"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:167"
+          "source": "src/wildlife/AnimalWorkSystem.ts:121"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:264"
+          "source": "src/wildlife/AnimalWorkSystem.ts:170"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:436"
+          "source": "src/wildlife/AnimalWorkSystem.ts:268"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:479"
+          "source": "src/wildlife/AnimalWorkSystem.ts:440"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:515"
+          "source": "src/wildlife/AnimalWorkSystem.ts:483"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:524"
+          "source": "src/wildlife/AnimalWorkSystem.ts:519"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/AnimalWorkSystem.ts:528"
         },
         {
           "system": "Gameplay",
@@ -34305,15 +34387,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:15"
+          "source": "src/wildlife/ForagePlacements.ts:16"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:23"
+          "source": "src/wildlife/ForagePlacements.ts:24"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:59"
+          "source": "src/wildlife/ForagePlacements.ts:60"
         },
         {
           "system": "Gameplay",
@@ -34343,7 +34425,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:125"
+          "source": "src/editor/EditorPalettes.ts:131"
         },
         {
           "system": "Gameplay",
@@ -34393,7 +34475,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:131"
+          "source": "src/editor/EditorPalettes.ts:137"
         },
         {
           "system": "Gameplay",
@@ -34423,7 +34505,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:132"
+          "source": "src/editor/EditorPalettes.ts:138"
         },
         {
           "system": "Gameplay",
@@ -34453,7 +34535,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:133"
+          "source": "src/editor/EditorPalettes.ts:139"
         },
         {
           "system": "Gameplay",
@@ -34483,7 +34565,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:134"
+          "source": "src/editor/EditorPalettes.ts:140"
         },
         {
           "system": "Gameplay",
@@ -34541,11 +34623,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1634"
+          "source": "src/server/Realm.ts:1645"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2613"
+          "source": "src/server/Realm.ts:2624"
         },
         {
           "system": "Gameplay",
@@ -34561,31 +34643,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWork.ts:57"
+          "source": "src/wildlife/AnimalWork.ts:74"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:83"
+          "source": "src/wildlife/AnimalWorkSystem.ts:86"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:472"
+          "source": "src/wildlife/AnimalWorkSystem.ts:476"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:521"
+          "source": "src/wildlife/AnimalWorkSystem.ts:525"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:83"
+          "source": "src/wildlife/ForageResources.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:175"
+          "source": "src/wildlife/ForageResources.ts:191"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForageResources.ts:177"
+          "source": "src/wildlife/ForageResources.ts:194"
         },
         {
           "system": "Gameplay",
@@ -34627,7 +34709,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:135"
+          "source": "src/editor/EditorPalettes.ts:141"
         },
         {
           "system": "Gameplay",
@@ -34677,7 +34759,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPalettes.ts:136"
+          "source": "src/editor/EditorPalettes.ts:142"
         },
         {
           "system": "Gameplay",
@@ -35227,15 +35309,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:210"
+          "source": "src/entities/PropFactories.ts:219"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:211"
+          "source": "src/entities/PropFactories.ts:220"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:734"
+          "source": "src/entities/PropFactories.ts:744"
         },
         {
           "system": "Gameplay",
@@ -35277,15 +35359,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:219"
+          "source": "src/entities/PropFactories.ts:228"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:220"
+          "source": "src/entities/PropFactories.ts:229"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:735"
+          "source": "src/entities/PropFactories.ts:745"
         },
         {
           "system": "Gameplay",
@@ -35319,15 +35401,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:228"
+          "source": "src/entities/PropFactories.ts:237"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:229"
+          "source": "src/entities/PropFactories.ts:238"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:736"
+          "source": "src/entities/PropFactories.ts:746"
         }
       ]
     },
@@ -35353,15 +35435,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:236"
+          "source": "src/entities/PropFactories.ts:245"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:237"
+          "source": "src/entities/PropFactories.ts:246"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:737"
+          "source": "src/entities/PropFactories.ts:747"
         },
         {
           "system": "World generation",
@@ -35391,19 +35473,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:244"
+          "source": "src/entities/PropFactories.ts:253"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:245"
+          "source": "src/entities/PropFactories.ts:254"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:738"
+          "source": "src/entities/PropFactories.ts:748"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1128"
+          "source": "src/server/Realm.ts:1129"
         },
         {
           "system": "Gameplay",
@@ -35437,15 +35519,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:268"
+          "source": "src/entities/PropFactories.ts:277"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:269"
+          "source": "src/entities/PropFactories.ts:278"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:739"
+          "source": "src/entities/PropFactories.ts:749"
         },
         {
           "system": "World generation",
@@ -35521,15 +35603,23 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/PastureWorkRecipe.ts:24"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/scenarios/WoodlandWorkRecipe.ts:54"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1128"
+          "source": "src/server/Realm.ts:1129"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:40"
+          "source": "src/wildlife/ForagePlacements.ts:41"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/PastureHabitat.ts:57"
         },
         {
           "system": "Gameplay",
@@ -35567,15 +35657,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:292"
+          "source": "src/entities/PropFactories.ts:301"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:293"
+          "source": "src/entities/PropFactories.ts:302"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:740"
+          "source": "src/entities/PropFactories.ts:750"
         }
       ]
     },
@@ -35601,15 +35691,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:301"
+          "source": "src/entities/PropFactories.ts:310"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:302"
+          "source": "src/entities/PropFactories.ts:311"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:741"
+          "source": "src/entities/PropFactories.ts:751"
         },
         {
           "system": "World generation",
@@ -35659,15 +35749,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:310"
+          "source": "src/entities/PropFactories.ts:319"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:311"
+          "source": "src/entities/PropFactories.ts:320"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:742"
+          "source": "src/entities/PropFactories.ts:752"
         },
         {
           "system": "World generation",
@@ -35701,15 +35791,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:320"
+          "source": "src/entities/PropFactories.ts:329"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:321"
+          "source": "src/entities/PropFactories.ts:330"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:743"
+          "source": "src/entities/PropFactories.ts:753"
         }
       ]
     },
@@ -35735,15 +35825,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:331"
+          "source": "src/entities/PropFactories.ts:340"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:332"
+          "source": "src/entities/PropFactories.ts:341"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:744"
+          "source": "src/entities/PropFactories.ts:754"
         },
         {
           "system": "World generation",
@@ -35773,15 +35863,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:340"
+          "source": "src/entities/PropFactories.ts:349"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:341"
+          "source": "src/entities/PropFactories.ts:350"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:745"
+          "source": "src/entities/PropFactories.ts:755"
         },
         {
           "system": "World generation",
@@ -35811,15 +35901,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:350"
+          "source": "src/entities/PropFactories.ts:359"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:351"
+          "source": "src/entities/PropFactories.ts:360"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:746"
+          "source": "src/entities/PropFactories.ts:756"
         }
       ]
     },
@@ -35845,15 +35935,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:359"
+          "source": "src/entities/PropFactories.ts:368"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:360"
+          "source": "src/entities/PropFactories.ts:369"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:747"
+          "source": "src/entities/PropFactories.ts:757"
         },
         {
           "system": "World generation",
@@ -35883,15 +35973,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:368"
+          "source": "src/entities/PropFactories.ts:377"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:369"
+          "source": "src/entities/PropFactories.ts:378"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:748"
+          "source": "src/entities/PropFactories.ts:758"
         }
       ]
     },
@@ -35917,15 +36007,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:382"
+          "source": "src/entities/PropFactories.ts:391"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:383"
+          "source": "src/entities/PropFactories.ts:392"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:749"
+          "source": "src/entities/PropFactories.ts:759"
         }
       ]
     },
@@ -35951,15 +36041,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:396"
+          "source": "src/entities/PropFactories.ts:405"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:397"
+          "source": "src/entities/PropFactories.ts:406"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:750"
+          "source": "src/entities/PropFactories.ts:760"
         }
       ]
     },
@@ -35985,15 +36075,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:411"
+          "source": "src/entities/PropFactories.ts:420"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:412"
+          "source": "src/entities/PropFactories.ts:421"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:751"
+          "source": "src/entities/PropFactories.ts:761"
         }
       ]
     },
@@ -36019,15 +36109,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:420"
+          "source": "src/entities/PropFactories.ts:429"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:421"
+          "source": "src/entities/PropFactories.ts:430"
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/PropFactories.ts:752"
+          "source": "src/entities/PropFactories.ts:762"
         }
       ]
     },

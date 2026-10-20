@@ -87,10 +87,14 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
           ? "Tree nut supply (place beside a tree)"
           : kind === "seed-plant"
             ? "Seed-bearing plant"
-            : "Growing edible plant",
+            : kind === "browse-shrub"
+              ? "Leafy browsing shrub"
+              : kind === "root-patch"
+                ? "Rooting patch"
+                : "Growing edible plant",
     color: "#54834b",
   })),
-  ...(["twig", "nut", "fruit", "greens", "seed"] as const).map((kind) => ({
+  ...(["twig", "nut", "fruit", "greens", "seed", "root"] as const).map((kind) => ({
     type: forageType(kind),
     label:
       kind === "greens"
@@ -101,7 +105,9 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
             ? "Loose nest twig"
             : kind === "nut"
               ? "Foraging nut"
-              : "Fallen fruit",
+              : kind === "root"
+                ? "Foraging root"
+                : "Fallen fruit",
     color: "#a77b4c",
   })),
   ...PROMOTED_CHARACTERS.map((c) => ({ type: c.sheetKey, label: c.name, color: "#d4a880" })),

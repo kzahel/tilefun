@@ -2,7 +2,7 @@
   "version": 1,
   "id": "wildlife-distinct-behaviors",
   "updated": "2026-10-20",
-  "state": "third-batch-verified",
+  "state": "fourth-batch-automation-verified",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -148,7 +148,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained action bank.",
       "updatedUtc": "2026-10-20T14:07:29.399361+00:00"
     },
     "dog": {
@@ -351,7 +351,7 @@
       "runtimeType": "wildlife-piglet-provisional-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -359,27 +359,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing native ground travel and periodic action inspected; signature habitat/resource interactions absent. New action cells preserve prior travel pixels.",
+            "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Sniff and root a finite patch, uncover real food and eat it.",
+        "trigger": "Nearby stocked root patch.",
+        "scenario": "behavior-pig",
+        "tactical": "docs/tactical/163-browsing-rooting-and-trunks.md",
+        "resourceRules": "Finite saved stocks and real transfers; explicit sources renew only during ready active simulation, with no offline catch-up.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "actual editable habitat",
+          "interruption and conservation",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/PastureWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/piglet/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/PastureWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained new action bank; next propose chicken, bee and hummingbird interactions.",
+      "updatedUtc": "2026-10-20T16:11:35.721653+00:00"
     },
     "goat": {
       "name": "Goat",
@@ -387,7 +431,7 @@
       "runtimeType": "wildlife-goat-provisional-v1",
       "family": "Farm & livestock",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "pasture",
@@ -395,27 +439,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing native ground travel and periodic action inspected; signature habitat/resource interactions absent. New action cells preserve prior travel pixels.",
+            "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Rear to browse finite shrubs, then hop onto an actual low rock and back down.",
+        "trigger": "Nearby leafy shrub or ordinary low boulder.",
+        "scenario": "behavior-goat",
+        "tactical": "docs/tactical/163-browsing-rooting-and-trunks.md",
+        "resourceRules": "Finite saved stocks and real transfers; explicit sources renew only during ready active simulation, with no offline catch-up.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "actual editable habitat",
+          "interruption and conservation",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/PastureWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/goat/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/PastureWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained new action bank; next propose chicken, bee and hummingbird interactions.",
+      "updatedUtc": "2026-10-20T16:11:35.721640+00:00"
     },
     "elephant": {
       "name": "Elephant",
@@ -423,7 +511,7 @@
       "runtimeType": "wildlife-elephant-provisional-v1",
       "family": "Hoofed & large herbivores",
       "variantOf": null,
-      "phase": "unclassified",
+      "phase": "land",
       "inventoryFacts": {
         "system": "shared-fauna",
         "habitat": "open",
@@ -431,27 +519,71 @@
         "specialistHunterProfile": null
       },
       "progress": {
-        "audit": "not-audited",
-        "design": "not-audited",
-        "ai": "not-audited",
-        "animation": "not-audited",
-        "integration": "not-audited",
-        "validation": "not-audited"
+        "audit": "verified",
+        "design": "verified",
+        "ai": "verified",
+        "animation": "verified",
+        "integration": "verified",
+        "validation": "verified"
       },
       "humanReview": {
-        "behavior": "not-requested",
-        "animation": "not-requested"
+        "behavior": "pending",
+        "animation": "pending"
       },
       "audit": {
-        "findings": [],
+        "findings": [
+          {
+            "observation": "Existing native ground travel and periodic action inspected; signature habitat/resource interactions absent. New action cells preserve prior travel pixels.",
+            "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+          }
+        ],
         "sourceRefs": [
           "src/workshop/AnimalBrowserData.ts"
         ]
       },
-      "plan": null,
-      "evidence": [],
+      "plan": {
+        "signature": "Reach and curl the trunk to harvest fruit; shake stocked trees to drop fruit for others.",
+        "trigger": "Nearby real supported fruit crop.",
+        "scenario": "behavior-elephant",
+        "tactical": "docs/tactical/163-browsing-rooting-and-trunks.md",
+        "resourceRules": "Finite saved stocks and real transfers; explicit sources renew only during ready active simulation, with no offline catch-up.",
+        "animationRevision": "behavior-v1",
+        "requirements": [
+          "actual editable habitat",
+          "interruption and conservation",
+          "save/reload",
+          "ordinary world/manual and lab integration"
+        ]
+      },
+      "evidence": [
+        {
+          "area": "audit",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+        },
+        {
+          "area": "design",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks.md"
+        },
+        {
+          "area": "ai",
+          "ref": "src/wildlife/PastureWork.test.ts"
+        },
+        {
+          "area": "animation",
+          "ref": "art-source/wildlife-v2/elephant/behavior-v1/receipt.json"
+        },
+        {
+          "area": "integration",
+          "ref": "src/scenarios/PastureWorkRecipe.ts"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/163-browsing-rooting-and-trunks/validation.json"
+        }
+      ],
       "notRequiredReasons": {},
-      "nextAction": "Audit existing behavior and assign phase; specify a signature mechanic."
+      "nextAction": "Human review of the behavior demonstration and retained new action bank; next propose chicken, bee and hummingbird interactions.",
+      "updatedUtc": "2026-10-20T16:11:35.721656+00:00"
     },
     "giraffe": {
       "name": "Giraffe",
@@ -2200,7 +2332,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained action bank.",
       "updatedUtc": "2026-10-20T14:07:29.399359+00:00"
     },
     "skunk": {
@@ -3189,7 +3321,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained action bank.",
       "updatedUtc": "2026-10-20T14:07:29.399343+00:00"
     },
     "ring-tailed-lemur": {
@@ -5760,7 +5892,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the ginger coat’s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the ginger coat\u2019s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-ginger",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -5799,7 +5931,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained action bank.",
       "updatedUtc": "2026-10-20T14:07:29.399363+00:00"
     },
     "cat-black": {
@@ -5839,7 +5971,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the black coat’s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the black coat\u2019s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-black",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -5878,7 +6010,7 @@
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and new action bank; next propose goat, pig and elephant interactions.",
+      "nextAction": "Human review of the behavior demonstration and retained action bank.",
       "updatedUtc": "2026-10-20T14:07:29.399364+00:00"
     },
     "dog-golden": {
@@ -8007,6 +8139,10 @@
     {
       "date": "2026-10-20",
       "summary": "157 full-unit run: 6063 pass; five known Windows failures plus two checks now passing cold (85 aquatic and 13 Workshop tests). Production build, streaming readiness and normal-retina 1856-candidate manifest pass. Full 1731-case browser sweep in progress; shared food picker sheet/frame lookup correction queued after its stable build."
+    },
+    {
+      "date": "2026-10-20",
+      "summary": "163: three new signatures, fourteen verified entries/twelve distinct mechanics total. Thirteen current pasture authority scenarios, both production renderer boundaries and four exact art identities verified; broad regression sweep and final two edge rechecks pending completion. New art remains pending human review."
     }
   ]
 }
