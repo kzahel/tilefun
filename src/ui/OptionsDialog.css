@@ -114,7 +114,7 @@
     width: min(660px, calc(100vw - 24px));
   }
   .options-dialog h2 {
-    margin: 6px 0;
+    display: none;
   }
   .options-dialog p {
     margin: 4px 0;
@@ -125,4 +125,19 @@
   .options-status:empty {
     display: none;
   }
+}
+
+.options-driving {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.options-driving select {
+  min-height: 44px;
+  max-width: 100%;
+  font: inherit;
+}
+#options-driving-help {
+  font-size: 14px;
 }

@@ -831,8 +831,12 @@ longitudinal motion and distance-based turning. Traffic, Natural landscape and
 World geometry keep ordinary directional axes/Reverse through ScenarioClient;
 none owns a steering integrator. Float32 nose state is replicated, restored for
 replay and saved in parked traffic records. Shared local/remote presentation
-interpolates its angle and meshes retain it at rest. Cardinal collision and
-sprite fallback remain tied to the immutable approved bank. Trains and automatic
+interpolates its angle and meshes retain it at rest. Sprite fallback retains the
+immutable approved bank. [154](../tactical/154-car-controls-and-contact.md) adds
+shared automatic reverse, relative steering input and model-covering collision
+envelopes. Traffic inspection exposes both manual styles through the ordinary
+binary input path; main-game tap/hold destinations remain world-relative. Traffic
+lookahead/queues use the same calibrated body dimensions. Trains and automatic
 road motion keep their existing owners.
 
 ## Racing diagnostics

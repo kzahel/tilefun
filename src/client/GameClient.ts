@@ -32,6 +32,7 @@ import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
+import { type CarDrivingStyle, carDrivingStyle } from "../traffic/CarControls.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { requestSessionNavigation } from "../ui/sessionNavigation.js";
 import { DoorPresentation } from "./DoorPresentation.js";
@@ -109,13 +110,19 @@ export interface GameClientOptions {
     playerModel?: string;
     touchMovement?: TouchMovementMode;
     pinchZoom?: boolean;
+    carDriving?: CarDrivingStyle;
   };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
     createProfile(name: string): Promise<{ id: string; name: string }>;
     updateProfile?(
       id: string,
-      updates: { playerModel?: string; touchMovement?: TouchMovementMode; pinchZoom?: boolean },
+      updates: {
+        playerModel?: string;
+        touchMovement?: TouchMovementMode;
+        pinchZoom?: boolean;
+        carDriving?: CarDrivingStyle;
+      },
     ): Promise<void>;
   };
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
@@ -177,6 +184,7 @@ export class GameClient {
   private focusPaused = false;
   private lastTouchAt = -Infinity;
   private movementMode: TouchMovementMode = "joystick";
+  private carDriving: CarDrivingStyle = "direction";
   private debugPanel: DebugPanel;
   private editorMode: EditorMode;
   private editorModel: EditorModel;
@@ -269,6 +277,7 @@ export class GameClient {
     this.profile = options?.profile ?? null;
     this.movementMode = touchMovementMode(this.profile?.touchMovement);
     this.pinchZoom = this.profile?.pinchZoom === true;
+    this.carDriving = carDrivingStyle(this.profile?.carDriving);
     this.reloadCamera = readReloadCamera(sessionStorage.getItem(HMR_KEY), this.profile?.id ?? null);
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
@@ -350,6 +359,14 @@ export class GameClient {
         if (!this.profile || !this.profileStore?.updateProfile)
           throw new Error("No profile storage");
         await this.profileStore.updateProfile(this.profile.id, { pinchZoom: enabled });
+      },
+      async (style) => {
+        this.clearPlayInput();
+        this.carDriving = style;
+        if (this.profile) this.profile.carDriving = style;
+        if (!this.profile || !this.profileStore?.updateProfile)
+          throw new Error("No profile storage");
+        await this.profileStore.updateProfile(this.profile.id, { carDriving: style });
       },
     );
     this.mainMenu.onOptions = (opener) => this.openOptions(opener);
@@ -638,6 +655,7 @@ export class GameClient {
           this.initDone && ready && this.scenes.current instanceof PlayScene,
           this.doorPresentation.busy || this.playInputBlocked || this.storagePaused,
           this.movementMode,
+          this.carDriving,
         );
         this.doorControl.update(
           this.stateView,
@@ -1357,6 +1375,9 @@ export class GameClient {
       get touchMovement() {
         return client.movementMode;
       },
+      get carDriving() {
+        return client.carDriving;
+      },
       tapMovement: this.tapMovement,
       trainTapMovement: this.trainTapMovement,
       touchPinch: this.touchPinch,
@@ -1783,7 +1804,7 @@ export class GameClient {
   private openOptions(opener: HTMLElement): void {
     if (this.doorPresentation.busy) return;
     this.clearPlayInput();
-    this.optionsDialog.show(this.movementMode, opener, this.pinchZoom);
+    this.optionsDialog.show(this.movementMode, opener, this.pinchZoom, this.carDriving);
   }
   private onInputBlur = (): void => {
     this.focusPaused = true;

@@ -714,6 +714,23 @@ describe("player-input binary codec", () => {
     expect(decoded).toEqual(msg);
   });
 
+  it("roundtrips relative car controls independently of the reverse override", () => {
+    for (const reversing of [false, true]) {
+      const decoded = roundtripClient({
+        type: "player-input",
+        seq: 7,
+        dx: -1,
+        dy: 1,
+        sprinting: false,
+        jump: false,
+        relativeDriving: true,
+        reversing,
+      });
+      expect(decoded.type === "player-input" && decoded.relativeDriving).toBe(true);
+      expect(decoded.type === "player-input" && !!decoded.reversing).toBe(reversing);
+    }
+  });
+
   it("roundtrips jumpPressed flag", () => {
     const msg: ClientMessage = {
       type: "player-input",

@@ -32,18 +32,26 @@ for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
           };
         });
       const start = await read();
+      // Calibrated long bodies cannot turn into the roadside lamp. Exercise
+      // every family toward the clear part of this production street.
+      const turnKey = "ArrowUp";
+      const turnSign = -1;
       await canvas.focus();
-      await page.keyboard.down("ArrowDown");
-      await expect.poll(async () => (await read()).heading).toBeGreaterThan(start.heading + 0.3);
-      await page.keyboard.up("ArrowDown");
+      await page.keyboard.down(turnKey);
+      await expect
+        .poll(async () => ((await read()).heading - start.heading) * turnSign)
+        .toBeGreaterThan(0.3);
+      await page.keyboard.up(turnKey);
       await expect.poll(async () => (await read()).speed).toBeLessThan(0.01);
       const forward = await read();
       expect(forward.x).toBeGreaterThan(start.x + 8);
-      expect(forward.y).toBeGreaterThan(start.y);
+      expect((forward.y - start.y) * turnSign).toBeGreaterThan(0);
       await page.keyboard.down("r");
-      await page.keyboard.down("ArrowDown");
-      await expect.poll(async () => (await read()).heading).toBeLessThan(forward.heading - 0.2);
-      await page.keyboard.up("ArrowDown");
+      await page.keyboard.down(turnKey);
+      await expect
+        .poll(async () => (forward.heading - (await read()).heading) * turnSign)
+        .toBeGreaterThan(0.2);
+      await page.keyboard.up(turnKey);
       await page.keyboard.up("r");
       await expect.poll(async () => (await read()).speed).toBeLessThan(0.01);
       // Authority speed reaches zero before the interpolated displayed pose settles.

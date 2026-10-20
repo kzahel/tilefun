@@ -288,7 +288,7 @@ export class PlayScene implements GameScene {
     }
     const manual = inputLocked
       ? { dx: 0, dy: 0, sprinting: false, jump: false }
-      : gc.actions.getMovement();
+      : gc.actions.getMovement(!(vehicle && !isTrain(vehicle) && gc.carDriving === "steering"));
     let rawMovement =
       !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
         ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt, vehicle ? 24 : 0)
@@ -353,6 +353,13 @@ export class PlayScene implements GameScene {
       jump: rawMovement.jump,
       jumpPressed,
       reversing: !!vehicle && !isTrain(vehicle) && !inputLocked && gc.actions.isHeld("reverse"),
+      // Tap/hold destinations always aim in world space, even when the manual
+      // keyboard/controller/joystick controls use relative car steering.
+      relativeDriving:
+        !!vehicle &&
+        !isTrain(vehicle) &&
+        gc.carDriving === "steering" &&
+        (!!manual.dx || !!manual.dy || (gc.touchMovement ?? "joystick") === "joystick"),
     };
     const seq = nextInputSequence(gc.transport);
     gc.transport.send({
@@ -364,6 +371,7 @@ export class PlayScene implements GameScene {
       jump: movement.jump,
       jumpPressed: movement.jumpPressed,
       reversing: movement.reversing,
+      relativeDriving: movement.relativeDriving,
       dtMs: commandDtMs,
     });
 

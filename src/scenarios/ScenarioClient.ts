@@ -234,7 +234,7 @@ export class ScenarioClient {
     if (this.failure) throw this.failure;
     if (!this.loaded || this.closed || !this.running || this.busy || !this.channel.writable)
       return false;
-    const length = Math.max(1, Math.hypot(input.dx, input.dy));
+    const length = input.relativeDriving ? 1 : Math.max(1, Math.hypot(input.dx, input.dy));
     const movement = {
       ...input,
       dx: quantizeAxis(input.dx / length),

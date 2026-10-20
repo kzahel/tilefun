@@ -1,8 +1,9 @@
 import { required } from "../art/ArtCatalog.js";
-import { BOAT_MODEL, BOAT_VIEWS } from "../boats/Boat.js";
+import { BOAT_MODEL, BOAT_SIZE, BOAT_TYPE, BOAT_VIEWS } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
+import meshBodies from "./vehicle-body-bounds.json" with { type: "json" };
 import bank from "./vehicles-v1.json" with { type: "json" };
 
 export const VEHICLE_BANK = bank;
@@ -26,12 +27,32 @@ const turningRadii = new Map(
     ),
   ]),
 );
+const rollingBodies = new Map(
+  VEHICLE_MODELS.map((id) => {
+    const colliders = views
+      .filter((view) => view.vehicleId === id)
+      .flatMap((view) => view.metadata.colliders);
+    const mesh = meshBodies[id as keyof typeof meshBodies];
+    return [
+      `vehicle-v1:${id}`,
+      {
+        length: Math.max(
+          mesh?.length ?? 0,
+          ...colliders.map((body) => Math.max(body.width, body.height)),
+        ),
+        breadth: Math.max(
+          mesh?.breadth ?? 0,
+          ...colliders.map((body) => Math.min(body.width, body.height)),
+        ),
+      },
+    ];
+  }),
+);
 export function vehicleTurningRadius(type: string): number {
   return turningRadii.get(type) ?? 40;
 }
-export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "sprite">): number {
-  if (entity.vehicleHeading !== undefined) return entity.vehicleHeading;
-  switch (entity.sprite?.direction) {
+export function vehicleCardinalHeading(direction = Direction.Right): number {
+  switch (direction) {
     case Direction.Up:
       return -Math.PI / 2;
     case Direction.Down:
@@ -41,6 +62,20 @@ export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "spri
     default:
       return 0;
   }
+}
+export function vehicleNoseHeading(entity: Pick<Entity, "vehicleHeading" | "sprite">): number {
+  return entity.vehicleHeading ?? vehicleCardinalHeading(entity.sprite?.direction);
+}
+export function vehicleBodySize(type: string, heading: number): { width: number; height: number } {
+  if (type === BOAT_TYPE) return { width: BOAT_SIZE, height: BOAT_SIZE };
+  const body = rollingBodies.get(type);
+  if (!body) throw Error(`Unknown vehicle body ${type}`);
+  const cos = Math.abs(Math.cos(heading)),
+    sin = Math.abs(Math.sin(heading));
+  // Exact cardinal dimensions avoid microscopic overlap between adjacent lanes.
+  const c = cos < 1e-6 ? 0 : cos > 1 - 1e-6 ? 1 : cos;
+  const s = sin < 1e-6 ? 0 : sin > 1 - 1e-6 ? 1 : sin;
+  return { width: body.length * c + body.breadth * s, height: body.length * s + body.breadth * c };
 }
 const roofSizes = new Map(
   DRIVABLE_MODELS.map((id) => [
@@ -104,11 +139,17 @@ export function applyVehicleFacing(
   if (!view) return;
   const c = view.metadata.colliders[0];
   if (!c) throw new Error("Missing approved vehicle collider");
+  // The envelope includes the registered mesh and native sprite footprints.
+  // Its continuous heading prevents the body escaping a cardinal collision box.
+  const { width, height } = vehicleBodySize(
+    entity.type,
+    entity.vehicleHeading ?? vehicleCardinalHeading(direction),
+  );
   entity.collider = {
     offsetX: 0,
-    offsetY: c.height / 2,
-    width: c.width,
-    height: c.height,
+    offsetY: height / 2,
+    width,
+    height,
     physicalHeight: c.zHeight,
     clientSolid: true,
   };

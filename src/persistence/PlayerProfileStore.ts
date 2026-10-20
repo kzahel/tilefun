@@ -1,5 +1,6 @@
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { generateUUID } from "../shared/uuid.js";
+import type { CarDrivingStyle } from "../traffic/CarControls.js";
 
 export interface PlayerProfile {
   id: string;
@@ -9,6 +10,7 @@ export interface PlayerProfile {
   playerModel?: string;
   touchMovement?: TouchMovementMode;
   pinchZoom?: boolean;
+  carDriving?: CarDrivingStyle;
 }
 
 const PROFILE_DB = "tilefun-profiles";
@@ -92,7 +94,10 @@ export class PlayerProfileStore {
   async updateProfile(
     id: string,
     updates: Partial<
-      Pick<PlayerProfile, "name" | "pin" | "playerModel" | "touchMovement" | "pinchZoom">
+      Pick<
+        PlayerProfile,
+        "name" | "pin" | "playerModel" | "touchMovement" | "pinchZoom" | "carDriving"
+      >
     >,
   ): Promise<void> {
     const db = this.db;
@@ -109,6 +114,7 @@ export class PlayerProfileStore {
           if (updates.playerModel !== undefined) profile.playerModel = updates.playerModel;
           if (updates.touchMovement !== undefined) profile.touchMovement = updates.touchMovement;
           if (updates.pinchZoom !== undefined) profile.pinchZoom = updates.pinchZoom;
+          if (updates.carDriving !== undefined) profile.carDriving = updates.carDriving;
           store.put(profile);
         }
       };

@@ -13,6 +13,7 @@ import { ScenarioSession } from "../../src/scenarios/ScenarioSession.js";
 import {
   decodeClientMessage,
   encodeClientMessage,
+  quantizeAxis,
   quantizeInputDtMs,
 } from "../../src/shared/binaryCodec.js";
 import { LocalTransport } from "../../src/transport/LocalTransport.js";
@@ -26,7 +27,13 @@ const PHASE_MS = 1000 / 480;
 export async function runCarDrivingCase(
   serverHz: 30 | 60,
   profile: Profile,
-  motion: "cruise" | "turn-release" | "reverse" | "reverse-turn" = "cruise",
+  motion:
+    | "cruise"
+    | "turn-release"
+    | "reverse"
+    | "reverse-turn"
+    | "automatic-reverse"
+    | "relative" = "cruise",
 ) {
   const originalRate = getServerTickRate();
   const recipe = contactRecipe("car-roof");
@@ -133,22 +140,33 @@ export async function runCarDrivingCase(
           });
         }
         const commandDt = quantizeInputDtMs(dt * 1000) / 1000;
-        const input =
-          motion === "reverse-turn"
+        const rawInput =
+          motion === "relative"
             ? step < 120
-              ? RIGHT
+              ? { ...IDLE, dy: -1, dx: 0.4, relativeDriving: true }
               : step < 360
-                ? { ...IDLE, dy: 1, reversing: true }
+                ? { ...IDLE, dy: 1, dx: -0.3, relativeDriving: true }
+                : { ...IDLE, relativeDriving: true }
+            : motion === "automatic-reverse"
+              ? step < 240
+                ? { ...IDLE, dx: -1, dy: 0.3 }
                 : IDLE
-            : motion === "reverse"
-              ? { ...IDLE, reversing: true }
-              : motion === "cruise" || step < 120
-                ? RIGHT
-                : step < 240
-                  ? { ...RIGHT, dy: 1 }
+              : motion === "reverse-turn"
+                ? step < 120
+                  ? RIGHT
                   : step < 360
-                    ? { ...IDLE, dy: -1 }
-                    : IDLE;
+                    ? { ...IDLE, dy: 1, reversing: true }
+                    : IDLE
+                : motion === "reverse"
+                  ? { ...IDLE, reversing: true }
+                  : motion === "cruise" || step < 120
+                    ? RIGHT
+                    : step < 240
+                      ? { ...RIGHT, dy: 1 }
+                      : step < 360
+                        ? { ...IDLE, dy: -1 }
+                        : IDLE;
+        const input = { ...rawInput, dx: quantizeAxis(rawInput.dx), dy: quantizeAxis(rawInput.dy) };
         predictor.storeInput(++seq, input, commandDt);
         predictor.update(commandDt, input, view.world, view.props, view.serverEntities);
         // Every half-second, move one input across a server deadline. Delivery

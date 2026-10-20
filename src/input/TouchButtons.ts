@@ -32,7 +32,6 @@ export class TouchButtons {
     if (!this.driving) return index < 2;
     return (
       index === 3 ||
-      (index === 6 && !this.train) ||
       (index === 4 && (this.emergency || this.warning)) ||
       (index === 5 && this.emergency)
     );

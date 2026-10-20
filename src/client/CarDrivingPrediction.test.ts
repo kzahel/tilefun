@@ -63,3 +63,17 @@ for (const hz of [30, 60] as const)
     expect(delayed.summary.endAuthoritySpeed).toBe(0);
     expect(delayed.summary.motionWithoutInputPx).toBe(0);
   });
+
+for (const hz of [30, 60] as const)
+  for (const motion of ["automatic-reverse", "relative"] as const)
+    it(`replays ${motion} controls through binary authority (${hz}Hz)`, async () => {
+      const regular = await runCarDrivingCase(hz, "regular", motion);
+      const delayed = await runCarDrivingCase(hz, "late-input", motion);
+      expect(delayed.summary.maxReconcileShiftPx).toBeLessThan(0.001);
+      expect(delayed.summary.maxReconcileVelocityShift).toBeLessThan(0.001);
+      expect(delayed.summary.maxReconcileHeadingShift).toBeLessThan(0.00001);
+      expect(delayed.summary.endAuthorityX).toBeCloseTo(regular.summary.endAuthorityX, 5);
+      expect(delayed.summary.endAuthorityY).toBeCloseTo(regular.summary.endAuthorityY, 5);
+      expect(delayed.summary.endAuthoritySpeed).toBe(0);
+      expect(delayed.authority.some((sample) => sample.vx < -1)).toBe(true);
+    });

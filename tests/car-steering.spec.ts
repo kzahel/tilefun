@@ -52,6 +52,27 @@ for (const backend of ["canvas", "gpu&meshes"]) {
       expect((await read()).heading).toBeCloseTo(stopped.heading, 6);
       // World positions round to float32 at authority reconciliation.
       expect((await read()).x).toBeCloseTo(stopped.x, 3);
+      await page.getByLabel("Car controls", { exact: true }).selectOption("steering");
+      await canvas.focus();
+      await page.keyboard.down("ArrowUp");
+      await page.keyboard.down("ArrowLeft");
+      await expect.poll(async () => (await read()).heading).toBeLessThan(stopped.heading - 0.2);
+      await page.keyboard.up("ArrowLeft");
+      await page.keyboard.up("ArrowUp");
+      await expect.poll(async () => (await read()).speed).toBeLessThan(0.01);
+      await page.waitForTimeout(100);
+      const nose = await read();
+      await page.keyboard.down("ArrowDown");
+      await expect
+        .poll(async () => {
+          const next = await read();
+          return (
+            (next.x - nose.x) * Math.cos(nose.heading) + (next.y - nose.y) * Math.sin(nose.heading)
+          );
+        })
+        .toBeLessThan(-8);
+      await page.keyboard.up("ArrowDown");
+      await expect.poll(async () => (await read()).speed).toBeLessThan(0.01);
       await page.screenshot({ path: testInfo.outputPath("rolling-steering.png") });
       expect(errors).toEqual([]);
     });

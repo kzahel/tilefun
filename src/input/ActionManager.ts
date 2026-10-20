@@ -21,6 +21,7 @@ export interface Movement {
   /** Edge-triggered jump press sampled from input events (optional). */
   jumpPressed?: boolean;
   reversing?: boolean;
+  relativeDriving?: boolean;
 }
 
 type DiscreteCallback = () => void;
@@ -133,7 +134,7 @@ export class ActionManager {
     return binding.keys.some((k) => this.keysDown.has(k));
   }
 
-  getMovement(): Movement {
+  getMovement(normalizeDiagonal = true): Movement {
     if (this.touchJoystick?.isActive()) {
       const touch = this.touchJoystick.getMovement();
       return {
@@ -149,7 +150,7 @@ export class ActionManager {
     if (this.isHeld("move_right")) dx += 1;
     if (this.isHeld("move_up")) dy -= 1;
     if (this.isHeld("move_down")) dy += 1;
-    if (dx !== 0 && dy !== 0) {
+    if (normalizeDiagonal && dx !== 0 && dy !== 0) {
       dx *= SQRT2_INV;
       dy *= SQRT2_INV;
     }

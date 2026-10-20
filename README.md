@@ -57,7 +57,7 @@ saves first. Online play requires signaling and a working peer connection.
 | LB / RB | Build–Play / horn |
 | RT | Sprint; paint/place while building |
 | Right stick / LT | Building cursor / erase |
-| LT / R key while driving | Reverse at half speed; stick/arrows steer while rolling |
+| Driving | Aim behind to reverse; optional Up/Down forward/reverse and Left/Right steering in Options |
 | D-pad ↑ / → | Vehicle lights / siren style (L / K on keyboard) |
 
 D-pad/stick focus, A select, B back and an on-screen text keyboard cover game
@@ -130,8 +130,11 @@ In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train �
 (or press E). Your character disappears inside; other players can ride visibly on
 its roof. Cars use ordinary directional movement controls, including diagonals, or a
 Tap-to-move destination. The nose turns along a curved rolling path: it cannot
-pivot at rest or slide sideways. Hold Reverse / R / LT to back up at half speed;
-backing reverses the steering effect. Longer vehicles need wider turns. Trains stay on their track: up/right moves one way,
+pivot at rest or slide sideways. Aim substantially behind the car to reverse at
+half speed; guide the direction around its side to turn forward. **Options → Car
+controls** also offers Up/Down forward/reverse with Left/Right steering for keys,
+controller and joystick. Tap and hold destinations still aim where to drive with
+either choice. Longer vehicles need wider turns. Trains stay on their track: up/right moves one way,
 down/left the other. In tap mode, tap the right/left half of the screen to start;
 tap the same side again to stop. In Hold to move, hold the right/left half
 to travel and lift to stop; cars steer toward the held finger. **Get out · E**

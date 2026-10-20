@@ -1,0 +1,318 @@
+{
+  "ambulance": {
+    "length": 118,
+    "breadth": 43
+  },
+  "beach-buggy": {
+    "length": 68,
+    "breadth": 38
+  },
+  "beetle": {
+    "length": 81,
+    "breadth": 38
+  },
+  "bus-1": {
+    "length": 108,
+    "breadth": 38
+  },
+  "bus-2": {
+    "length": 108,
+    "breadth": 38
+  },
+  "bus-3": {
+    "length": 108,
+    "breadth": 38
+  },
+  "bus-4": {
+    "length": 108,
+    "breadth": 38
+  },
+  "bus-5": {
+    "length": 108,
+    "breadth": 38
+  },
+  "bus-6": {
+    "length": 108,
+    "breadth": 38
+  },
+  "camper-van": {
+    "length": 89,
+    "breadth": 37
+  },
+  "car-10": {
+    "length": 78,
+    "breadth": 34
+  },
+  "car-11": {
+    "length": 78,
+    "breadth": 34
+  },
+  "car-13": {
+    "length": 78,
+    "breadth": 34
+  },
+  "car-14": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-15": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-16": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-17": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-18": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-19": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-20": {
+    "length": 68,
+    "breadth": 32
+  },
+  "car-21": {
+    "length": 72,
+    "breadth": 34
+  },
+  "car-22": {
+    "length": 72,
+    "breadth": 34
+  },
+  "car-23": {
+    "length": 72,
+    "breadth": 34
+  },
+  "car-24": {
+    "length": 72,
+    "breadth": 34
+  },
+  "car-25": {
+    "length": 72,
+    "breadth": 34
+  },
+  "car-26": {
+    "length": 72,
+    "breadth": 34
+  },
+  "car-7": {
+    "length": 78,
+    "breadth": 34
+  },
+  "car-8": {
+    "length": 78,
+    "breadth": 34
+  },
+  "car-9": {
+    "length": 78,
+    "breadth": 34
+  },
+  "cement-mixer": {
+    "length": 119,
+    "breadth": 44
+  },
+  "classic-roadster": {
+    "length": 85,
+    "breadth": 35
+  },
+  "compact-1": {
+    "length": 59,
+    "breadth": 31
+  },
+  "compact-2": {
+    "length": 59,
+    "breadth": 31
+  },
+  "compact-3": {
+    "length": 59,
+    "breadth": 31
+  },
+  "compact-4": {
+    "length": 59,
+    "breadth": 31
+  },
+  "compact-5": {
+    "length": 59,
+    "breadth": 31
+  },
+  "compact-6": {
+    "length": 59,
+    "breadth": 31
+  },
+  "delivery-van": {
+    "length": 88,
+    "breadth": 37
+  },
+  "dump-truck": {
+    "length": 112,
+    "breadth": 46
+  },
+  "explorer-boat": {
+    "length": 72,
+    "breadth": 35
+  },
+  "farm-tractor": {
+    "length": 68,
+    "breadth": 38
+  },
+  "fire-truck-ladder-1": {
+    "length": 140,
+    "breadth": 51
+  },
+  "fire-truck-ladder-2": {
+    "length": 140,
+    "breadth": 51
+  },
+  "flatbed-truck": {
+    "length": 111,
+    "breadth": 42
+  },
+  "food-truck": {
+    "length": 105,
+    "breadth": 51
+  },
+  "forklift": {
+    "length": 80,
+    "breadth": 28
+  },
+  "garbage-truck-green": {
+    "length": 118,
+    "breadth": 47
+  },
+  "garbage-truck-orange": {
+    "length": 120,
+    "breadth": 47
+  },
+  "go-kart": {
+    "length": 53,
+    "breadth": 33
+  },
+  "golf-cart": {
+    "length": 56,
+    "breadth": 30
+  },
+  "hot-rod": {
+    "length": 74,
+    "breadth": 42
+  },
+  "ice-cream-van": {
+    "length": 86,
+    "breadth": 44
+  },
+  "microcar": {
+    "length": 56,
+    "breadth": 31
+  },
+  "mobile-crane": {
+    "length": 130,
+    "breadth": 46
+  },
+  "monster-truck": {
+    "length": 87,
+    "breadth": 52
+  },
+  "motorhome": {
+    "length": 125,
+    "breadth": 53
+  },
+  "offroad-jeep": {
+    "length": 88,
+    "breadth": 40
+  },
+  "open-wheel-racer": {
+    "length": 81,
+    "breadth": 43
+  },
+  "pickup": {
+    "length": 95,
+    "breadth": 39
+  },
+  "police-car": {
+    "length": 76,
+    "breadth": 32
+  },
+  "race-coupe": {
+    "length": 82,
+    "breadth": 37
+  },
+  "rally-hatchback": {
+    "length": 74,
+    "breadth": 35
+  },
+  "retro-taxi": {
+    "length": 82,
+    "breadth": 35
+  },
+  "rosso-coupe": {
+    "length": 82,
+    "breadth": 37
+  },
+  "school-bus": {
+    "length": 122,
+    "breadth": 43
+  },
+  "sedan-12": {
+    "length": 78,
+    "breadth": 34
+  },
+  "semi-truck": {
+    "length": 161,
+    "breadth": 44
+  },
+  "snowplow": {
+    "length": 131,
+    "breadth": 51
+  },
+  "street-sweeper": {
+    "length": 70,
+    "breadth": 44
+  },
+  "stretch-limousine": {
+    "length": 123,
+    "breadth": 35
+  },
+  "tow-truck": {
+    "length": 102,
+    "breadth": 39
+  },
+  "unindexed-sedan-beige": {
+    "length": 78,
+    "breadth": 32
+  },
+  "unindexed-sedan-cyan": {
+    "length": 78,
+    "breadth": 32
+  },
+  "unindexed-sedan-dark": {
+    "length": 78,
+    "breadth": 32
+  },
+  "unindexed-sedan-olive": {
+    "length": 78,
+    "breadth": 32
+  },
+  "unindexed-sedan-orange": {
+    "length": 78,
+    "breadth": 32
+  },
+  "unindexed-sedan-red": {
+    "length": 78,
+    "breadth": 32
+  },
+  "unindexed-sedan-silver": {
+    "length": 78,
+    "breadth": 32
+  },
+  "woody-wagon": {
+    "length": 95,
+    "breadth": 35
+  }
+}

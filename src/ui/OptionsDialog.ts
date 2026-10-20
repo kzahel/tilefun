@@ -1,4 +1,5 @@
 import type { TouchMovementMode } from "../input/TapMovement.js";
+import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
 import "./OptionsDialog.css";
 
@@ -10,10 +11,12 @@ export class OptionsDialog {
   private status = document.createElement("p");
   private pinch = document.createElement("input");
   private saving = false;
+  private carStyle = document.createElement("select");
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
     private closed: () => void,
     private selectPinch: (enabled: boolean) => Promise<void>,
+    private selectCar: (style: CarDrivingStyle) => Promise<void>,
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -27,7 +30,7 @@ export class OptionsDialog {
     header.append(title, close);
     const controls = document.createElement("p");
     controls.textContent =
-      "A / Space Jump · X / B Throw · Y / E Interact · RT / Shift Fast · LT / R Reverse · RB / H Horn · D-pad ↑ / L Lights · D-pad → / K Siren style. LB / Tab Build–Play · View / G Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools; A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.";
+      "A / Space Jump · X / B Throw · Y / E Interact · RT / Shift Fast · RB / H Horn · D-pad ↑ / L Lights · D-pad → / K Siren style. LB / Tab Build–Play · View / G Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools; A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.";
 
     const heading = document.createElement("h2");
     heading.textContent = "Movement";
@@ -58,6 +61,27 @@ export class OptionsDialog {
     pinchHelp.id = "options-pinch-help";
     pinchHelp.textContent =
       "Put two fingers on the world together, then spread or pinch them. Joystick movement and action buttons block zoom.";
+    const driving = document.createElement("label");
+    driving.className = "options-driving";
+    driving.append("Car controls ", this.carStyle);
+    this.carStyle.setAttribute("aria-label", "Car controls");
+    this.carStyle.setAttribute("aria-describedby", "options-driving-help");
+    for (const [value, text] of [
+      ["direction", "Point where to drive"],
+      ["steering", "Forward / reverse and steer"],
+    ] as const) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = text;
+      this.carStyle.append(option);
+    }
+    this.carStyle.onchange = () => {
+      void this.chooseCar();
+    };
+    const drivingHelp = document.createElement("p");
+    drivingHelp.id = "options-driving-help";
+    drivingHelp.textContent =
+      "Point behind to reverse. Steering: ↑ forward, ↓ reverse, ←/→ steer. Taps always aim.";
     this.status.setAttribute("role", "status");
     this.status.className = "options-status";
     d.append(
@@ -65,6 +89,8 @@ export class OptionsDialog {
       heading,
       choices,
       this.help,
+      driving,
+      drivingHelp,
       zoom,
       pinchHelp,
       this.status,
@@ -87,11 +113,17 @@ export class OptionsDialog {
   get visible(): boolean {
     return this.dialog.open;
   }
-  show(mode: TouchMovementMode, opener: HTMLElement | null, pinchZoom: boolean): void {
+  show(
+    mode: TouchMovementMode,
+    opener: HTMLElement | null,
+    pinchZoom: boolean,
+    carDriving: CarDrivingStyle = "direction",
+  ): void {
     this.opener = opener;
     this.status.textContent = "";
     this.setMode(mode);
     this.pinch.checked = pinchZoom;
+    this.carStyle.value = carDriving;
     if (!this.visible) this.dialog.showModal();
     activateMenu(this.dialog, () => this.hide(), false);
     this.cards.find((c) => c.dataset.mode === mode)?.focus();
@@ -126,6 +158,7 @@ export class OptionsDialog {
   private async choose(mode: TouchMovementMode): Promise<void> {
     if (this.saving) return;
     this.saving = true;
+    this.carStyle.disabled = true;
     this.setMode(mode);
     for (const c of this.cards) c.disabled = true;
     this.pinch.disabled = true;
@@ -136,6 +169,7 @@ export class OptionsDialog {
       this.status.textContent = "You can use this choice now, but it could not be remembered.";
     } finally {
       this.saving = false;
+      this.carStyle.disabled = false;
       for (const c of this.cards) c.disabled = false;
       this.pinch.disabled = false;
       if (this.visible) this.cards.find((c) => c.dataset.mode === mode)?.focus();
@@ -144,6 +178,7 @@ export class OptionsDialog {
   private async choosePinch(): Promise<void> {
     if (this.saving) return;
     this.saving = true;
+    this.carStyle.disabled = true;
     this.pinch.disabled = true;
     for (const c of this.cards) c.disabled = true;
     try {
@@ -153,9 +188,29 @@ export class OptionsDialog {
       this.status.textContent = "You can use this choice now, but it could not be remembered.";
     } finally {
       this.saving = false;
+      this.carStyle.disabled = false;
       this.pinch.disabled = false;
       for (const c of this.cards) c.disabled = false;
       if (this.visible) this.pinch.focus();
+    }
+  }
+  private async chooseCar(): Promise<void> {
+    if (this.saving) return;
+    this.saving = true;
+    this.carStyle.disabled = true;
+    this.pinch.disabled = true;
+    for (const c of this.cards) c.disabled = true;
+    try {
+      await this.selectCar(this.carStyle.value as CarDrivingStyle);
+      this.status.textContent = "Car controls saved for this player.";
+    } catch {
+      this.status.textContent = "You can use this choice now, but it could not be remembered.";
+    } finally {
+      this.saving = false;
+      this.carStyle.disabled = false;
+      this.pinch.disabled = false;
+      for (const c of this.cards) c.disabled = false;
+      if (this.visible) this.carStyle.focus();
     }
   }
   private fullscreen = (): void => {

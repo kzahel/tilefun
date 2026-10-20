@@ -71,11 +71,15 @@ keeps labs using their existing controls.
 
 [140](../tactical/140-shared-input-ux-and-reverse.md) replaces A/B/R circles with
 named action paddles in the same shared game UI. Fast stays in a fixed position;
-Jump/Throw retain their meanings, and driving offers Horn, Reverse and applicable
+Jump/Throw retain their meanings, and driving offers Horn and applicable
 Lights/Style actions. Hints reflect the most recently used keyboard/controller;
 touch uses action names. Nearby interactions use the same Y/E prompt on web/Deck
 and sit clear of the paddles. Lights use L/D-pad Up and style K/D-pad Right,
-independently of Jump/Throw. Held Reverse/R/LT backs up at half base speed.
+independently of Jump/Throw. Directional aiming behind the car automatically reverses at half base speed;
+Options also offers relative forward/reverse/steering controls for manual input.
+Tap/hold destinations keep world-direction aiming with either manual preference.
+The separate Reverse paddle is removed; R/LT remain compatible. See
+[vehicles](vehicles.md#configurable-controls-and-automatic-reverse).
 Button touches stay claimed so they do not steer the joystick, tap destination or
 held world contact. Seat changes, menus and focus loss release held buttons.
 

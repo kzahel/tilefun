@@ -12,6 +12,7 @@ import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { canBecomeRoadkill, createRoadkill } from "../wildlife/Roadkill.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
+import { separatesContact } from "./ContactRecovery.js";
 import type { DrivingQueries } from "./DrivingQueries.js";
 
 export interface VehiclePush {
@@ -107,6 +108,14 @@ export function planVehiclePushes(
         continue;
       const box = getEntityAABB(other.position, other.collider);
       if (!aabbsOverlap(swept, box)) continue;
+      if (
+        separatesContact(
+          getEntityAABB(before.position, before.collider),
+          getEntityAABB(after.position, after.collider),
+          box,
+        )
+      )
+        continue;
       if (distance > 0 && canBecomeRoadkill(other)) {
         if (sweptBodyContact(before, after, other))
           planned.set(other.id, {

@@ -23,6 +23,7 @@ import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
 import type { GameServer } from "../server/GameServer.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
+import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import type { ChatHUD } from "../ui/ChatHUD.js";
 import type { MainMenu } from "../ui/MainMenu.js";
@@ -39,6 +40,7 @@ export interface GameContext {
   readonly storagePaused?: boolean;
   readonly inputBlocked?: boolean;
   readonly touchMovement?: TouchMovementMode;
+  readonly carDriving?: CarDrivingStyle;
   readonly tapMovement?: TapMovement;
   readonly trainTapMovement?: TrainTapMovement;
   readonly touchPinch?: TouchPinch;

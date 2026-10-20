@@ -132,6 +132,11 @@ it("does not back a yielding approach into a pedestrian behind it", () => {
   const pedestrian = f.entities.spawn(
     createPlayer(car.entity.position.wx - 36, car.entity.position.wy + 3),
   );
+  pedestrian.position.wx =
+    car.entity.position.wx -
+    (required(car.entity.collider).width + required(pedestrian.collider).width) / 2 -
+    1;
+  f.entities.spatialHash.update(pedestrian);
   const start = car.entity.position.wx;
   for (let i = 0; i < 240; i++) {
     f.traffic.tick(1 / 60, []);
@@ -144,6 +149,9 @@ it("does not back a yielding approach into a pedestrian behind it", () => {
   }
   expect(car.entity.position.wx).toBeGreaterThan(start - 4);
   f.entities.remove(pedestrian.id, false);
-  for (let i = 0; i < 120; i++) f.traffic.tick(1 / 60, []);
-  expect(car.entity.position.wx).toBeCloseTo(start - f.traffic.settings.gap);
+  for (let i = 0; i < 360; i++) f.traffic.tick(1 / 60, []);
+  const body = required(car.entity.collider);
+  const half = Math.max(body.width, body.height) / 2;
+  const margin = Math.max(half + 8, half * 2) + f.traffic.settings.gap;
+  expect(car.entity.position.wx).toBeCloseTo(start - (margin - 36));
 });

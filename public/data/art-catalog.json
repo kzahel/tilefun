@@ -32125,7 +32125,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:82"
+          "source": "src/traffic/Vehicle.ts:117"
         }
       ]
     },
@@ -32981,7 +32981,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/PlayerSession.ts:83"
+          "source": "src/server/PlayerSession.ts:84"
         },
         {
           "system": "Gameplay",
@@ -32993,15 +32993,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1636"
+          "source": "src/server/Realm.ts:1637"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2337"
+          "source": "src/server/Realm.ts:2338"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2557"
+          "source": "src/server/Realm.ts:2558"
         },
         {
           "system": "Gameplay",
@@ -33025,7 +33025,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:262"
+          "source": "src/traffic/Driving.ts:315"
         },
         {
           "system": "Gameplay",
@@ -33037,7 +33037,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/VehiclePush.ts:123"
+          "source": "src/traffic/VehiclePush.ts:132"
         },
         {
           "system": "Gameplay",
@@ -33865,11 +33865,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:822"
+          "source": "src/scenes/PlayScene.ts:830"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2521"
+          "source": "src/server/Realm.ts:2522"
         },
         {
           "system": "Gameplay",
@@ -33877,11 +33877,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/VehiclePush.ts:96"
+          "source": "src/traffic/VehiclePush.ts:97"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/VehiclePush.ts:123"
+          "source": "src/traffic/VehiclePush.ts:132"
         }
       ]
     },

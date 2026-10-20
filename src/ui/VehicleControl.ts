@@ -4,6 +4,7 @@ import { inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { isTrain } from "../railway/Train.js";
+import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/Driving.js";
 
 type VehicleRequest =
@@ -38,6 +39,7 @@ export class VehicleControl {
     allowed: boolean,
     locked: boolean,
     movementMode: TouchMovementMode = "joystick",
+    carDriving: CarDrivingStyle = "direction",
   ): boolean {
     const p = view.playerEntity,
       entities = view.entities;
@@ -99,12 +101,19 @@ export class VehicleControl {
             : movementMode === "tap"
               ? "Tap left / right to travel · tap again to stop"
               : "Drag left / right to drive train")
-        : inputHint("WASD / arrows · R to reverse", "Left stick · LT to reverse") ||
+        : (carDriving === "steering"
+            ? inputHint("↑/↓ Forward/Reverse · ←/→ Steer", "Stick ↑/↓ Forward/Reverse · ←/→ Steer")
+            : inputHint(
+                "WASD / arrows · aim behind to reverse",
+                "Left stick · aim behind to reverse",
+              )) ||
           (movementMode === "hold"
-            ? "Hold toward a direction to drive · Reverse to back up"
+            ? "Hold a direction · aim behind to reverse"
             : movementMode === "tap"
-              ? "Tap a destination to drive · Reverse to back up"
-              : "Drag to steer · Reverse to back up");
+              ? "Tap a destination · tap behind to reverse"
+              : carDriving === "steering"
+                ? "Joystick ↑/↓ Forward/Reverse · ←/→ Steer"
+                : "Drag a direction · aim behind to reverse");
       if (this.status.textContent !== hint) this.status.textContent = hint;
     }
     return !!this.request;

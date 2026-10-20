@@ -2,7 +2,6 @@ import { isBoat } from "../boats/Boat.js";
 import {
   aabbLacksWater,
   aabbOverlapsPropWalls,
-  aabbOverlapsSolid,
   aabbsOverlap,
   getEntityAABB,
 } from "../entities/collision.js";
@@ -12,6 +11,7 @@ import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { isTrain } from "../railway/Train.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
+import { separatesContact } from "./ContactRecovery.js";
 import { type DrivingQueries, drivingQueries } from "./DrivingQueries.js";
 import { movingPassengerPosition } from "./MovingSupport.js";
 import { roofSupport } from "./RoofSupport.js";
@@ -59,7 +59,13 @@ function facing(dx: number, dy: number, previous: Direction): Direction {
  * Call in small substeps; commit body, pushes and passengers together only after all clear. */
 export function drivenCarPose(
   car: Entity,
-  input: { dx: number; dy: number; sprinting?: boolean; reversing?: boolean },
+  input: {
+    dx: number;
+    dy: number;
+    sprinting?: boolean;
+    reversing?: boolean;
+    relativeDriving?: boolean;
+  },
   dt: number,
   world: World,
   props: readonly Prop[],
@@ -67,6 +73,7 @@ export function drivenCarPose(
   queries?: DrivingQueries,
   pushes?: VehiclePush[],
   contactSpeed?: number,
+  straight = false,
 ): Entity | undefined {
   if (![input.dx, input.dy, dt].every(Number.isFinite) || dt <= 0 || dt > 0.1) return;
   const length = Math.hypot(input.dx, input.dy);
@@ -76,26 +83,41 @@ export function drivenCarPose(
   // Directional input steers toward a nose bearing. It never supplies sideways
   // velocity: signed rolling distance turns the chassis, including in reverse.
   const heading = vehicleNoseHeading(car);
-  const reverse = input.reversing === true;
+  if (car.vehicleHeading === undefined) {
+    car = { ...car, sprite: car.sprite && { ...car.sprite }, vehicleHeading: Math.fround(heading) };
+    applyVehicleFacing(car);
+  }
+  const old = car.velocity ?? { vx: 0, vy: 0 };
+  const oldSpeed = old.vx * Math.cos(heading) + old.vy * Math.sin(heading);
+  const relative = input.relativeDriving === true;
+  const error =
+    !relative && length
+      ? Math.atan2(
+          Math.sin(Math.atan2(input.dy, input.dx) - heading),
+          Math.cos(Math.atan2(input.dy, input.dx) - heading),
+        )
+      : 0;
+  // Enter reverse beyond 120 degrees; keep it until the aim passes 90 degrees.
+  // The velocity sign supplies deterministic gear hysteresis through replay.
+  const automaticReverse = length > 0 && Math.cos(error) < (oldSpeed < -0.01 ? 0 : -0.5);
+  const reverse = input.reversing === true || (relative ? input.dy > 0 : automaticReverse);
+  const throttle = relative ? Math.min(1, Math.abs(input.dy)) : length * scale;
   const targetSpeed =
     performance.speed *
     (reverse ? -0.5 : input.sprinting ? 1.6 : 1) *
-    (reverse ? 1 : length * scale);
-  const old = car.velocity ?? { vx: 0, vy: 0 };
-  const oldSpeed = old.vx * Math.cos(heading) + old.vy * Math.sin(heading);
-  const acceleration = (length || reverse ? performance.acceleration : isBoat(car) ? 48 : 448) * dt;
+    (input.reversing ? 1 : throttle);
+  const acceleration =
+    (throttle || input.reversing ? performance.acceleration : isBoat(car) ? 48 : 448) * dt;
   let speed = oldSpeed + Math.max(-acceleration, Math.min(acceleration, targetSpeed - oldSpeed));
   if (contactSpeed !== undefined) speed = Math.max(-contactSpeed, Math.min(contactSpeed, speed));
   const distance = speed * dt;
-  const error = length
-    ? Math.atan2(
-        Math.sin(Math.atan2(input.dy, input.dx) - heading),
-        Math.cos(Math.atan2(input.dy, input.dx) - heading),
-      )
-    : 0;
-  const steering = reverse ? Math.sin(error) : Math.max(-1, Math.min(1, error / (Math.PI / 3)));
-  let turn = (steering * distance) / vehicleTurningRadius(car.type);
-  if (distance > 0) turn = Math.sign(turn) * Math.min(Math.abs(turn), Math.abs(error));
+  const steering = relative
+    ? Math.max(-1, Math.min(1, input.dx))
+    : reverse
+      ? Math.sin(error)
+      : Math.max(-1, Math.min(1, error / (Math.PI / 3)));
+  let turn = ((straight ? 0 : steering) * distance) / vehicleTurningRadius(car.type);
+  if (!relative && distance > 0) turn = Math.sign(turn) * Math.min(Math.abs(turn), Math.abs(error));
   // Quantize the authoritative bearing to its wire representation before using
   // it again, so binary replay and native simulation share the same turn state.
   const nose = Math.fround(Math.atan2(Math.sin(heading + turn), Math.cos(heading + turn)));
@@ -113,6 +135,12 @@ export function drivenCarPose(
     vehicleHeading: nose,
   };
   applyVehicleFacing(next, facing(Math.cos(nose), Math.sin(nose), previous));
+  // A turn can widen the envelope against a wall. Let a clear straight roll
+  // escape instead of requiring an impossible turn at rest. All gates still run.
+  const retryStraight = () =>
+    !straight && Math.abs(turn) > 1e-8
+      ? drivenCarPose(car, input, dt, world, props, entities, queries, pushes, contactSpeed, true)
+      : undefined;
   if (
     !checkedCarPose(
       car,
@@ -125,7 +153,7 @@ export function drivenCarPose(
       pushes !== undefined && !isBoat(car),
     )
   )
-    return;
+    return retryStraight();
   if (pushes && !isBoat(car)) {
     const plan = planVehiclePushes(
       [{ before: car, after: next }],
@@ -138,18 +166,21 @@ export function drivenCarPose(
     );
     if (!plan) {
       if (contactSpeed === undefined)
-        return drivenCarPose(
-          car,
-          input,
-          dt,
-          world,
-          props,
-          entities,
-          queries,
-          pushes,
-          performance.pushSpeed * 0.98,
+        return (
+          drivenCarPose(
+            car,
+            input,
+            dt,
+            world,
+            props,
+            entities,
+            queries,
+            pushes,
+            performance.pushSpeed * 0.98,
+            straight,
+          ) ?? retryStraight()
         );
-      return;
+      return retryStraight();
     }
     pushes.push(...plan);
   }
@@ -210,16 +241,21 @@ function checkedCarPose(
     bottom: Math.max(before.bottom, after.bottom),
   };
   for (let y = Math.floor(swept.top / 16); y <= Math.floor((swept.bottom - 0.001) / 16); y++)
-    for (let x = Math.floor(swept.left / 16); x <= Math.floor((swept.right - 0.001) / 16); x++)
+    for (let x = Math.floor(swept.left / 16); x <= Math.floor((swept.right - 0.001) / 16); x++) {
       if (!world.getChunkIfLoaded(Math.floor(x / 16), Math.floor(y / 16))) return;
-  if (
-    aabbOverlapsSolid(
-      swept,
-      (x, y) => world.getCollisionIfLoaded(x, y),
-      isBoat(car) ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water,
-    )
-  )
-    return;
+      if (
+        world.getCollisionIfLoaded(x, y) &
+          (isBoat(car) ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water) &&
+        (isBoat(car) ||
+          !separatesContact(before, after, {
+            left: x * 16,
+            right: (x + 1) * 16,
+            top: y * 16,
+            bottom: (y + 1) * 16,
+          }))
+      )
+        return;
+    }
   if (isBoat(car) && aabbLacksWater(swept, (x, y) => world.getCollisionIfLoaded(x, y))) return;
   queries ??= drivingQueries(props);
   // Include offset feet outside the collider as well as both cardinal poses.
@@ -237,11 +273,27 @@ function checkedCarPose(
   next.wz = next.groundZ = z;
   const height = next.collider.physicalHeight ?? 24;
   for (const prop of localProps)
-    if (
-      aabbOverlapsPropWalls(before, prop.position, prop, beforeZ, height) ||
-      aabbOverlapsPropWalls(after, prop.position, prop, z, height)
-    )
-      return;
+    for (const wall of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
+      const part = { collider: wall, walls: null };
+      const wasBlocked = aabbOverlapsPropWalls(before, prop.position, part, beforeZ, height);
+      const blocked = aabbOverlapsPropWalls(
+        swept,
+        prop.position,
+        part,
+        Math.min(beforeZ, z),
+        height + Math.abs(z - beforeZ),
+      );
+      if (
+        (wasBlocked || blocked) &&
+        !(
+          !isBoat(car) &&
+          wasBlocked &&
+          !wall.surface &&
+          separatesContact(before, after, getEntityAABB(prop.position, wall))
+        )
+      )
+        return;
+    }
   for (const other of planPushes ? [] : (queries?.bodies?.(swept) ?? entities)) {
     if (
       other.id === car.id ||
@@ -256,7 +308,8 @@ function checkedCarPose(
       base + (other.collider.physicalHeight ?? 16) <= Math.min(beforeZ, z)
     )
       continue;
-    if (aabbsOverlap(swept, getEntityAABB(other.position, other.collider))) return;
+    const box = getEntityAABB(other.position, other.collider);
+    if (aabbsOverlap(swept, box) && (isBoat(car) || !separatesContact(before, after, box))) return;
   }
   for (const rider of entities) {
     if (rider.type !== "player" || !rider.collider || roofSupport(rider, entities)?.id !== car.id)

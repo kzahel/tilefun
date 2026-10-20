@@ -49,6 +49,7 @@ export class WorldMap {
   private target: Point | null = null;
   private previousFocus: HTMLElement | null = null;
   private pointers = new Map<number, Point>();
+  private nativeTouchEvents = false;
   private gesture: { origin: Point; view: ViewState; dragged: boolean; held: boolean } | null =
     null;
   private pinch: { distance: number; view: ViewState; center: Point } | null = null;
@@ -442,7 +443,7 @@ export class WorldMap {
     this.holdTimer = undefined;
   }
   private pointerDown(event: PointerEvent): void {
-    if (event.pointerType === "touch" && "ontouchstart" in window) return;
+    if (event.pointerType === "touch" && this.nativeTouchEvents) return;
     if (this.busy || event.button !== 0) return;
     event.preventDefault();
     this.canvas.focus();
@@ -474,7 +475,7 @@ export class WorldMap {
     }, 650);
   }
   private pointerMove(event: PointerEvent): void {
-    if (event.pointerType === "touch" && "ontouchstart" in window) return;
+    if (event.pointerType === "touch" && this.nativeTouchEvents) return;
     if (!this.pointers.has(event.pointerId) || this.busy) return;
     event.preventDefault();
     this.moveContact(event.pointerId, this.point(event));
@@ -517,7 +518,7 @@ export class WorldMap {
     }
   }
   private pointerUp(event: PointerEvent, cancelled: boolean): void {
-    if (event.pointerType === "touch" && "ontouchstart" in window) return;
+    if (event.pointerType === "touch" && this.nativeTouchEvents) return;
     this.endContact(event.pointerId, this.point(event), cancelled);
   }
   private selectPoint(point: Point): void {
@@ -548,6 +549,13 @@ export class WorldMap {
   };
   private touchStart = (event: TouchEvent): void => {
     event.preventDefault();
+    if (!this.nativeTouchEvents) {
+      // A hybrid Chromebook can emit both streams without advertising
+      // ontouchstart. Replace the provisional pointer contact, otherwise one
+      // physical finger becomes two pinch contacts with different identifiers.
+      this.nativeTouchEvents = true;
+      this.resetGesture();
+    }
     this.canvas.focus();
     const rect = this.canvas.getBoundingClientRect();
     for (const touch of event.changedTouches)

@@ -42,7 +42,9 @@ or credentials in this repository.
   View map; Menu pause. In editing, Y opens controller tools, left stick pans,
   right stick positions the cursor, RT places/paints and LT erases.
   The same screen cursor reaches DOM tools and map controls: A/RT selects, with
-  UI holds consumed until release. LT/R reverses cars; D-pad Up/L toggles vehicle
+  UI holds consumed until release. Cars reverse automatically for rearward aim;
+  Options also offers relative throttle/steering. LT/R remains a compatibility
+  override. D-pad Up/L toggles vehicle
   lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
   Named on-screen paddles and interaction prompts follow the last input source.
 - Public invitation links use the hosted game URL, while entering a code/link
@@ -100,6 +102,24 @@ scenario passed three consecutive runs. All 880 Workshop identities are retained
 
 [144](../tactical/144-rolling-car-steering.md) adds shared rolling car turns:
 no stationary pivot, opposite steering yaw in reverse and persistent nose bearings.
+
+The Chromebook map regression uses observed native TouchEvents to choose the
+contact owner, replacing any provisional touch pointer contact on the first
+`touchstart`. It no longer relies on the legacy `ontouchstart` property: hybrid
+Chromebooks can emit both event streams without exposing that property, causing
+one finger to become a pinch and cancel hold-to-travel. Pointer-only stacks keep
+the pointer fallback. Browser regression coverage removes the property on a
+desktop touch context and checks first-contact hold travel, pinch, cancellation
+and subsequent travel alongside the ordinary mobile path.
+
+The map fix and configurable car controls share the current validation record in
+[154](../tactical/154-car-controls-and-contact.md): all 5,744 unit tests and 87
+distinct focused browser checks pass, along with typechecks, lint, inventories,
+production build and streaming readiness. Final validation on 2026-10-20 passes
+all 1,477 browser cases, including the aquatic-hunter assertion that stopped the
+earlier map-only run.
+The [vehicle topic](vehicles.md#configurable-controls-and-automatic-reverse)
+records the driving controls and contact behavior.
 
 Continue hands-on editing, driving and map trials to tune the shared web UI.
 Automated standard-gamepad snapshots and native contact injection establish the

@@ -69,6 +69,7 @@ export type ClientMessage =
       /** Discrete jump edge since the previous command sample. */
       jumpPressed?: boolean;
       reversing?: boolean;
+      relativeDriving?: boolean;
       /** Command-step delta time in milliseconds (client simulation step). */
       dtMs?: number;
     }

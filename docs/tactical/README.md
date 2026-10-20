@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [154 Car controls and contact](154-car-controls-and-contact.md) | Configurable steering, automatic reverse and model-covering contact bounds |
 | [153 Autonomous vehicle production](153-autonomous-vehicle-production.md) | Active: eight-hour YA authoring, independent QA and incremental game integrations; [original vehicles](../topics/original-vehicles.md) |
 | [152 Explorer boat and lakes](152-explorer-boat-and-lakes.md) | Implemented and validated: drivable boat, shore moorings, large lakes and varied water wildlife; appearance pending review |
 | [151 Pickup pipeline review](151-pickup-pipeline-review.md) | Delivered for review: 2,984-triangle teal pickup, real open bed and own-family semantic UV paint; [original vehicles](../topics/original-vehicles.md) |
@@ -212,7 +213,6 @@ Several early plans contain original unchecked lists superseded by later work.
 | [067 Shared prediction timeline](067-shared-prediction-timeline.md) | In progress: rate transitions, common moving support and time-aware NPC contact prediction |
 
 | [068 Natural landscape preview](068-natural-landscape-preview.md) | Implemented for review: shared habitat planning, trees/ponds and seeded explorer/lab scenes; ordinary defaults unchanged |
-
 
 ## Earlier plans
 

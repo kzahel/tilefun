@@ -18,6 +18,7 @@ import { RoadType } from "../road/RoadType.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
+import { separatesContact } from "./ContactRecovery.js";
 import { drivenCarPose } from "./Driving.js";
 import { createDrivingQueries, type DrivingQueries } from "./DrivingQueries.js";
 import { validVehicleLightState } from "./EmergencyVehicle.js";
@@ -48,8 +49,9 @@ import {
   DRIVABLE_MODELS,
   isVehicle,
   TRAFFIC_MODELS,
+  vehicleBodySize,
+  vehicleCardinalHeading,
   vehicleRoadWidth,
-  vehicleView,
 } from "./Vehicle.js";
 
 export const EMPTY_TRAFFIC_ROUTES: TrafficRouteSource = {
@@ -332,8 +334,7 @@ export class TrafficSystem {
   }
   private box(s: TrafficState, ahead: number): AABB {
     const pose = this.pose(s, ahead),
-      view = required(vehicleView(s.entity.type, pose.direction)),
-      c = required(view.metadata.colliders[0]);
+      c = vehicleBodySize(s.entity.type, vehicleCardinalHeading(pose.direction));
     return {
       left: pose.x - c.width / 2,
       right: pose.x + c.width / 2,
@@ -469,7 +470,7 @@ export class TrafficSystem {
     }
     return { z, reason: "" };
   }
-  private blocked(s: TrafficState, ahead: number, reuseRoad = false): string {
+  private blocked(s: TrafficState, ahead: number, reuseRoad = false, recovering = false): string {
     if (s.lane.surfaceFollowing) return this.surfaceProbe(s, ahead).reason;
     const box = this.box(s, ahead),
       height = s.entity.collider?.physicalHeight ?? 24;
@@ -491,7 +492,11 @@ export class TrafficSystem {
       if (e === s.entity || !e.collider || e.collider.solid === false || e.flashHidden) continue;
       // A roof passenger's feet are at the roof plane, outside the vehicle body.
       if ((e.wz ?? 0) >= height - 0.05) continue;
-      if (aabbsOverlap(box, getEntityAABB(e.position, e.collider)))
+      const obstacle = getEntityAABB(e.position, e.collider);
+      if (
+        aabbsOverlap(box, obstacle) &&
+        !(recovering && separatesContact(this.box(s, 0), box, obstacle))
+      )
         return isVehicle(e) ? "traffic" : "crossing";
     }
     return "";
@@ -506,8 +511,7 @@ export class TrafficSystem {
     // A padded corridor box also covers the opposite lane and can deadlock all
     // approaches even when every selected exit is physically clear.
     const exitAhead = s.lane.path.length - s.distance + turnPath(s.lane, s.next).length;
-    const exitView = required(vehicleView(s.entity.type, s.next.direction));
-    const exitCollider = required(exitView.metadata.colliders[0]);
+    const exitCollider = vehicleBodySize(s.entity.type, vehicleCardinalHeading(s.next.direction));
     const exitLength = Math.max(
       72,
       s.entity.collider?.width ?? 0,
@@ -719,7 +723,7 @@ export class TrafficSystem {
       }
       // Queued approaches must leave the configured gap outside turning bodies,
       // including the sideways footprint change halfway through a left turn.
-      const stopMargin = half + 8 + (s.next ? this.settings.gap : 0);
+      const stopMargin = s.next ? Math.max(half + 8, half * 2) + this.settings.gap : half + 8;
       if (!s.turn && end - s.distance < lookahead + stopMargin) {
         const junctionReason = this.reserve(s, true);
         if (junctionReason) {
@@ -754,14 +758,14 @@ export class TrafficSystem {
         move === 0 &&
         !s.turn &&
         !s.lane.surfaceFollowing &&
-        owner !== undefined &&
         owner !== s.entity.id &&
+        (owner !== undefined || reason === "traffic") &&
         overshoot > 0.001
       ) {
         // Old saved queues can already occupy the turning safety gap. Ease back
         // along the same lane only when both body probes and passenger plans fit.
         const retreat = Math.min(s.distance, overshoot, 8 * dt, 4);
-        if (!this.blocked(s, 0) && !this.blocked(s, -retreat)) {
+        if (!this.blocked(s, -retreat, false, true)) {
           move = -retreat;
           reason = "yielding junction";
         }
@@ -776,6 +780,7 @@ export class TrafficSystem {
         sprite: s.entity.sprite ? { ...s.entity.sprite } : null,
       };
       if (surface && !surface.reason) next.wz = next.groundZ = surface.z;
+      delete next.vehicleHeading;
       applyVehicleFacing(next, pose.direction);
       const passengers = planMovingPassengers(
         s.entity,
@@ -870,7 +875,13 @@ export class TrafficSystem {
   }
   drive(
     s: TrafficState,
-    input: { dx: number; dy: number; sprinting?: boolean; reversing?: boolean },
+    input: {
+      dx: number;
+      dy: number;
+      sprinting?: boolean;
+      reversing?: boolean;
+      relativeDriving?: boolean;
+    },
     dt: number,
   ): void {
     s.entity.prevPosition = { ...s.entity.position };
@@ -1188,9 +1199,9 @@ export class TrafficSystem {
       s.entity.position = r.parked
         ? { wx: r.wx ?? pose.x, wy: r.wy ?? pose.y }
         : { wx: pose.x, wy: pose.y };
-      applyVehicleFacing(s.entity, r.parked ? (r.facing ?? pose.direction) : pose.direction);
       if (r.parked && r.vehicleHeading !== undefined)
         s.entity.vehicleHeading = Math.fround(r.vehicleHeading);
+      applyVehicleFacing(s.entity, r.parked ? (r.facing ?? pose.direction) : pose.direction);
       this.entities.spatialHash.update(s.entity);
       s.shoppingCooldown = r.shoppingCooldown ?? 0;
       s.shoppingTrips = r.shoppingTrips ?? 0;

@@ -51,7 +51,7 @@ describe("driven car neighborhoods", () => {
   it("keeps compound walls whose origin is distant and observes moving/deleted props", () => {
     const f = fixture(),
       p = wall(1024);
-    p.walls = [{ ...required(p.collider), offsetX: -1024 }];
+    p.walls = [{ ...required(p.collider), offsetX: -996 }];
     f.props.add(p);
     expect(f.pose(true)).toEqual(f.pose(false));
     expect(f.pose(true)).toBeUndefined();
@@ -64,7 +64,7 @@ describe("driven car neighborhoods", () => {
   it("includes oversized live bodies across distant origin cells", () => {
     const f = fixture(),
       body = createPlayer(1024, 0);
-    body.collider = { offsetX: -1024, offsetY: 10, width: 8, height: 20, physicalHeight: 16 };
+    body.collider = { offsetX: -996, offsetY: 10, width: 8, height: 20, physicalHeight: 16 };
     f.entities.spawn(body);
     expect(f.pose(true)).toEqual(f.pose(false));
     expect(f.pose(true)).toBeUndefined();

@@ -37,6 +37,7 @@ import {
   vehicleTurningRadius,
 } from "./Vehicle.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
+import meshBodies from "./vehicle-body-bounds.json" with { type: "json" };
 
 it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
   "ships $model reviewed mesh and exact game-camera fallback for every facing",
@@ -92,11 +93,16 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       ]);
     }
     expect(sheet.data).toEqual(expectedSheet);
+    const body = meshBodies[family.model as keyof typeof meshBodies];
+    const bodyLength = Math.max(length, body?.length ?? 0),
+      bodyWidth = Math.max(width, body?.breadth ?? 0);
     for (const facing of [Direction.Down, Direction.Up, Direction.Left, Direction.Right]) {
       const car = createVehicle(definition.id, 120, 240, facing);
       expect(car.collider?.physicalHeight).toBe(height);
       expect([car.collider?.width, car.collider?.height]).toEqual(
-        facing === Direction.Left || facing === Direction.Right ? [length, width] : [width, length],
+        facing === Direction.Left || facing === Direction.Right
+          ? [bodyLength, bodyWidth]
+          : [bodyWidth, bodyLength],
       );
       expect(deserializeEntity(serializeEntity(car)).collider).toEqual(car.collider);
       expect(car.sprite?.frameRow).toBe(facing);

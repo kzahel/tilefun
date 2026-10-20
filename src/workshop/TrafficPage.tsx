@@ -9,6 +9,7 @@ import {
 import type { TerrainDiagnostics } from "../rendering/RenderFrame.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { TRAFFIC_DEMO_GENERATION, trafficRecipe } from "../scenarios/TrafficRecipe.js";
+import { carDrivingStyle } from "../traffic/CarControls.js";
 import {
   hasVehicleLights,
   isEmergencyVehicle,
@@ -40,6 +41,7 @@ export default function TrafficPage() {
     void scene.current?.command({ kind: "vehicle-horn", active }).catch((e) => setError(String(e)));
   }, []);
   const [model, setModel] = useState("compact-1");
+  const carStyle = useRef("direction");
   const [driving, setDriving] = useState(false);
   const [emergencyState, setEmergencyState] = useState(2);
   const [zoom, setZoom] = useState(0.75);
@@ -67,6 +69,9 @@ export default function TrafficPage() {
           jump: k.has(" "),
           sprinting: k.has("Shift"),
           reversing: k.has("r"),
+          relativeDriving:
+            carStyle.current === "steering" &&
+            scene.current?.session.view.playerEntity.parentId !== undefined,
         };
       },
       onError: (e) => {
@@ -234,6 +239,20 @@ export default function TrafficPage() {
             <option value="fire-truck-ladder-2">Firetruck · raised ladder</option>
             <option value="ambulance">Ambulance</option>
             <option value="fire-truck-ladder-1">Firetruck</option>
+          </select>
+        </label>
+        <label>
+          Car controls{" "}
+          <select
+            aria-label="Car controls"
+            defaultValue="direction"
+            onChange={(e) => {
+              keys.current.clear();
+              carStyle.current = carDrivingStyle(e.target.value);
+            }}
+          >
+            <option value="direction">Point where to drive</option>
+            <option value="steering">Forward / reverse and steer</option>
           </select>
         </label>
         {driving && (

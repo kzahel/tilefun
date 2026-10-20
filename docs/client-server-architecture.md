@@ -183,3 +183,11 @@ delta change/null masks retain u32 with heading at bit 17. Both endpoints requir
 the same build. Prediction restores the bearing before replay; presentation
 interpolates shortest arcs on borrowed clones without writing physics state.
 See [rolling steering](tactical/144-rolling-car-steering.md).
+
+Car control interpretation travels with each command: input flag bit 4 means
+relative steering/throttle. Authority and prediction apply it against the admitted
+vehicle nose; tap/hold destinations send ordinary world-direction axes. Directional
+reverse choice and conservative model-covering body envelopes are shared by main
+game and embedded labs. Local profiles remember the manual preference. Retained
+mesh bounds, native source footprints and continuous headings determine the same
+collider on deserialize/delta/parked restore; see [154](tactical/154-car-controls-and-contact.md).

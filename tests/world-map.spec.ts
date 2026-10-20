@@ -182,86 +182,110 @@ test("in-game map keeps distant multiplayer players live and long-press travels 
   }
 });
 
-test("touch map supports hold-to-travel and cancels a hold on pointer cancellation", async ({
-  browser,
-}) => {
-  const context = await browser.newContext({
-    viewport: { width: 390, height: 844 },
-    isMobile: true,
-    hasTouch: true,
+for (const hybrid of [false, true])
+  test(`touch map supports hold-to-travel and cancellation (${hybrid ? "hybrid Chromebook" : "mobile"})`, async ({
+    browser,
+  }) => {
+    const context = await browser.newContext({
+      viewport: { width: 390, height: 844 },
+      isMobile: !hybrid,
+      hasTouch: true,
+    });
+    try {
+      const page = await context.newPage();
+      await page.goto("/tilefun/");
+      await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+      if (hybrid)
+        await page.evaluate(() => {
+          // Desktop ChromeOS can deliver TouchEvents without this legacy feature flag.
+          let owner: object | null = window;
+          while (owner) {
+            Reflect.deleteProperty(owner, "ontouchstart");
+            owner = Object.getPrototypeOf(owner);
+          }
+        });
+      if (hybrid) expect(await page.evaluate(() => "ontouchstart" in window)).toBe(false);
+      await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+      // Use known walkable terrain; a hold over open water should correctly fail.
+      await page.evaluate(async () => {
+        const game = (
+          document.querySelector("#game") as unknown as {
+            __game: {
+              gcSendRequest(message: unknown): Promise<{ meta: { id: string } }>;
+              nextRequestId: number;
+            };
+          }
+        ).__game;
+        const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
+        const created = await game.gcSendRequest({
+          type: "create-world",
+          requestId: game.nextRequestId++,
+          name: "Touch map",
+          generation,
+        });
+        await game.gcSendRequest({
+          type: "join-realm",
+          requestId: game.nextRequestId++,
+          worldId: created.meta.id,
+          arrival: { x: 0, y: 0, generation },
+        });
+      });
+      await page.getByRole("button", { name: "Open world map" }).tap();
+      const map = page.getByTestId("world-map");
+      await expect(map).toHaveAttribute("data-settled", "true");
+      const canvas = map.getByTestId("world-map-canvas");
+      const box = await canvas.boundingBox();
+      if (!box) throw new Error("Missing touch map canvas");
+      const session = await context.newCDPSession(page);
+      // The first native contact must replace its preceding pointer event, even
+      // on hybrid ChromeOS where the legacy ontouchstart flag is absent.
+      const center = { x: box.x + box.width / 2, y: box.y + box.height / 2, id: 1 };
+      await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [center] });
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ ...center, x: center.x + 2 }],
+      });
+      await expect(map).toHaveAttribute("data-zoom", "1");
+      await expect(map).toBeHidden({ timeout: 10_000 });
+      await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await page.getByRole("button", { name: "Open world map" }).tap();
+      await expect(map).toHaveAttribute("data-settled", "true");
+      const pinchPoints = [
+        { x: box.x + box.width / 2 - 40, y: box.y + box.height / 2, id: 1 },
+        { x: box.x + box.width / 2 + 40, y: box.y + box.height / 2, id: 2 },
+      ];
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: pinchPoints,
+      });
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: pinchPoints.map((p, i) => ({ ...p, x: p.x + (i === 0 ? -40 : 40) })),
+      });
+      await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await expect.poll(async () => Number(await map.getAttribute("data-zoom"))).toBeCloseTo(2);
+      await page.waitForTimeout(750);
+      await expect(map).toBeVisible();
+      await map.getByRole("button", { name: "Zoom out" }).tap();
+      await map.getByRole("button", { name: "Find me" }).tap();
+      await expect(map).toHaveAttribute("data-settled", "true");
+      const point = { x: box.x + box.width / 2 + 50, y: box.y + box.height / 2 };
+      await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+      await session.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
+      await page.waitForTimeout(750);
+      await expect(map).toBeVisible();
+      await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+      await expect(map).toBeHidden({ timeout: 10_000 });
+      await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+      await page.getByRole("button", { name: "Open world map" }).tap();
+      await expect(map).toHaveAttribute("data-settled", "true");
+      await expect(map.locator('[data-testid="world-map-player"][data-self="true"]')).toBeVisible();
+      await expect(
+        map.locator('[data-testid="world-map-player"][data-self="true"]'),
+      ).toHaveAttribute("data-x", "50");
+      await map.getByRole("button", { name: "Close map" }).tap();
+      await expect(map).toBeHidden();
+    } finally {
+      await context.close();
+    }
   });
-  try {
-    const page = await context.newPage();
-    await page.goto("/tilefun/");
-    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    // Use known walkable terrain; a hold over open water should correctly fail.
-    await page.evaluate(async () => {
-      const game = (
-        document.querySelector("#game") as unknown as {
-          __game: {
-            gcSendRequest(message: unknown): Promise<{ meta: { id: string } }>;
-            nextRequestId: number;
-          };
-        }
-      ).__game;
-      const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
-      const created = await game.gcSendRequest({
-        type: "create-world",
-        requestId: game.nextRequestId++,
-        name: "Touch map",
-        generation,
-      });
-      await game.gcSendRequest({
-        type: "join-realm",
-        requestId: game.nextRequestId++,
-        worldId: created.meta.id,
-        arrival: { x: 0, y: 0, generation },
-      });
-    });
-    await page.getByRole("button", { name: "Open world map" }).tap();
-    const map = page.getByTestId("world-map");
-    await expect(map).toHaveAttribute("data-settled", "true");
-    const canvas = map.getByTestId("world-map-canvas");
-    const box = await canvas.boundingBox();
-    if (!box) throw new Error("Missing touch map canvas");
-    const session = await context.newCDPSession(page);
-    const pinchPoints = [
-      { x: box.x + box.width / 2 - 40, y: box.y + box.height / 2, id: 1 },
-      { x: box.x + box.width / 2 + 40, y: box.y + box.height / 2, id: 2 },
-    ];
-    await session.send("Input.dispatchTouchEvent", {
-      type: "touchStart",
-      touchPoints: pinchPoints,
-    });
-    await session.send("Input.dispatchTouchEvent", {
-      type: "touchMove",
-      touchPoints: pinchPoints.map((p, i) => ({ ...p, x: p.x + (i === 0 ? -40 : 40) })),
-    });
-    await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-    await expect.poll(async () => Number(await map.getAttribute("data-zoom"))).toBeCloseTo(2);
-    await page.waitForTimeout(750);
-    await expect(map).toBeVisible();
-    await map.getByRole("button", { name: "Zoom out" }).tap();
-    await map.getByRole("button", { name: "Find me" }).tap();
-    await expect(map).toHaveAttribute("data-settled", "true");
-    const point = { x: box.x + box.width / 2 + 50, y: box.y + box.height / 2 };
-    await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
-    await session.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
-    await page.waitForTimeout(750);
-    await expect(map).toBeVisible();
-    await session.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
-    await expect(map).toBeHidden({ timeout: 10_000 });
-    await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-    await page.getByRole("button", { name: "Open world map" }).tap();
-    await expect(map).toHaveAttribute("data-settled", "true");
-    await expect(map.locator('[data-testid="world-map-player"][data-self="true"]')).toBeVisible();
-    await expect(map.locator('[data-testid="world-map-player"][data-self="true"]')).toHaveAttribute(
-      "data-x",
-      "50",
-    );
-    await map.getByRole("button", { name: "Close map" }).tap();
-    await expect(map).toBeHidden();
-  } finally {
-    await context.close();
-  }
-});

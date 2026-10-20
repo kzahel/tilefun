@@ -117,24 +117,61 @@ One optional float32 `vehicleHeading` belongs to shared authority/prediction.
 It is replicated through baselines/deltas, restored before replay and persisted
 in traffic records; older records fall back to saved cardinal facing. GPU meshes
 use this bearing, with shortest-arc local/remote presentation interpolation and
-signed wheel travel. Sprite fallback and collision still use approved cardinal
-views/footprints. This is rolling motion, not rotated collision geometry or
-animated front-wheel steering. Automatic route traffic and trains retain their
+signed wheel travel. Sprite fallback retains approved cardinal views; collision
+uses the continuously sized conservative envelope described below. Front-wheel
+steering art remains separate. Automatic route traffic and trains retain their
 existing motion owners. Game, web, Deck and embedded labs share the same rules.
 
-## Shared reverse driving
+## Configurable controls and automatic reverse
 
-[140](../tactical/140-shared-input-ux-and-reverse.md) adds held Reverse (paddle,
-R key or LT) through the existing binary command, shared authority and prediction.
-It backs along the nose without steering input; directional input now follows
-the rolling-steering contract above. Speed is half base speed, without boost. Release brakes normally.
-The ordinary collision, gentle push, roof-rider and terrain-readiness gates remain
-shared by game and embedded labs. Replicated facing keeps sprite/GPU noses forward
-and GPU wheels roll with signed backward travel. Gear state is not saved.
+[154](../tactical/154-car-controls-and-contact.md) adds per-player **Options →
+Car controls**: **Point where to drive** (default), or **Forward / reverse and
+steer**. The choice applies to keys, controller and joystick. In steering mode,
+Up drives forward, Down reverses and Left/Right turn relative to the car; steering
+at rest does not pivot or start driving. Tap and held world destinations always
+aim in world space, independently of the manual preference.
 
-Jump and Throw no longer toggle emergency actions while driving. The shared named
-paddles and Y/E interaction hints are the same on web and Deck; only input-source
-hints change. Traffic inspection uses R, L and K too.
+Directional aiming selects reverse beyond 120° from the nose, retaining reverse
+while already backing until the aim passes 90°. Reverse speed follows input
+strength/close-target slowdown at half base speed; Fast never boosts reverse.
+Changing direction brakes through zero before rolling the other way. Turning
+still depends on signed travel, so pointing sideways guides a forward turn.
+The separate Reverse paddle is removed. R/LT remain a compatibility override.
+
+Relative input uses bit 4 of the existing player-command flags. Authority and
+prediction interpret it against their own admitted/replayed pose; a client never
+pre-rotates axes against an out-of-date presentation heading. The preference is
+local profile data, not durable vehicle state. Trains retain rail-axis controls.
+Traffic inspection exposes the same style selector through ordinary ScenarioClient.
+
+## Body contact and recovery
+
+Car bodies now cover the registered mesh and native footprint at every bearing.
+Retained `vehicle-body-bounds.json` records conservative centered mesh envelopes,
+including lateral registration scale; `npx tsx scripts/vehicle-body-bounds.ts --check`
+verifies them. Its authoring mode is explicit; builds never regenerate models or
+bounds. Expanded original road models use the same retained envelope pipeline;
+boats keep their fixed 80px square hull, water-only clearance and strict body
+contact without car overlap recovery. The original 45-type/180-view approved
+sprite bank and model bytes stay unchanged. Cardinal traffic lookahead, turning
+reservations, replay, replication, restore and player driving share the resulting
+dimensions.
+
+The former cardinal boxes were undersized even before diagonal rotation (e.g.
+compact side 56×20 versus its centered registered mesh envelope 59×31). Continuous
+turns could put much of a mesh outside its collision box. Runtime bounds now use
+a conservative rotated rectangle's axis-aligned envelope, including parked cars.
+This favors clearance over exact polygon contact, so diagonal empty corners can
+stop a car earlier. Roof standing areas and body heights keep their native rules.
+
+New contact or deeper penetration blocks the complete body/push/passenger step.
+An existing overlap may move only toward a nearer exit face; a clear straight roll
+can replace a turn whose widening box is blocked. This permits recovery from old
+saved footprints or moving-body overlap without teleporting or pushing fixed cars.
+Compound building walls and solid/water tiles obey the same recovery rule; surface
+slabs retain ordinary vertical clearance. Automatic queues leave a full body length
+at junctions and can retreat safely from an obsolete queue gap even before a
+junction owner is chosen. The owner-requested no-new-overlap checks remain enforced.
 
 ## Horns, driving personality and gentle contact
 
@@ -208,7 +245,8 @@ braking remains service-timed. Collision, roofs and approved art are unchanged.
 owner's 2026-10-10 choice: explicit **Drive car · E** beside a stopped car,
 with the player hidden inside after authority grants the seat. One driver owns
 the car; other players can still walk/jump onto the roof and ride visibly.
-WASD/arrows or the movement stick steer rolling turns, including normalized diagonals.
+WASD/arrows or the movement stick steer rolling turns. Directional mode normalizes
+diagonals; relative steering keeps throttle and turn axes independent.
 Native cardinal views follow the heading with a small facing switch margin.
 In **Tap to move**, tap a destination to steer there without pathfinding;
 arrival, obstacles and menu/focus changes stop the car.

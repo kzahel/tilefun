@@ -69,6 +69,15 @@ describe("ActionManager", () => {
     expect(len).toBeCloseTo(1, 5);
   });
 
+  it("keeps full throttle while steering when axes are independent", () => {
+    const actions = new ActionManager();
+    actions.pressKey("ArrowRight");
+    actions.pressKey("ArrowUp");
+    const movement = actions.getMovement(false);
+    expect(movement.dx).toBe(1);
+    expect(movement.dy).toBe(-1);
+  });
+
   it("cancels opposite directions", () => {
     const actions = new ActionManager();
     actions.pressKey("ArrowLeft");
