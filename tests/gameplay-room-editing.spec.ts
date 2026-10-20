@@ -191,12 +191,18 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
     .toEqual(walls);
   await expect.poll(furnitureCount).toBe(initialFurniture + 1);
   await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(360);
-  if ((await state(page)).player.wx > entryX + 10) {
+  const returnToStreet = page.getByRole("button", { name: "Return to street" });
+  if (!(await returnToStreet.isVisible())) {
     await page.keyboard.down("ArrowLeft");
-    await expect.poll(async () => (await state(page)).player.wx).toBeLessThan(entryX + 10);
-    await page.keyboard.up("ArrowLeft");
+    try {
+      // The default expanding poll intervals can hold Left past the whole door
+      // activation range. Stop on the real control, sampling each frame.
+      await expect.poll(() => returnToStreet.isVisible(), { intervals: [16] }).toBe(true);
+    } finally {
+      await page.keyboard.up("ArrowLeft");
+    }
   }
-  await page.getByRole("button", { name: "Return to street" }).click();
+  await returnToStreet.click();
   await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
   expect(errors).toEqual([]);
 });

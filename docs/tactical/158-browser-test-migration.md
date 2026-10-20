@@ -172,3 +172,17 @@ check, raster, all eight e2e shards and deploy must succeed. GitHub's checks att
 to that commit are the authoritative CI record; no documentation-only follow-up
 commit should bypass that final gate. Compare actual job durations with audit 157's
 historical baseline when evaluating savings, rather than extrapolating case counts.
+
+First CI follow-up: [run 39411558703](https://github.com/kzahel/tilefun/actions/runs/39411558703)
+finished with one failure: a room-editing test's final keyboard traversal overshoot
+on shard 7. All other seven browser shards, raster and check passed. The
+expanding positional poll could hold Left through an entire door activation zone
+and then accept any farther-left position, leaving no Return button to click.
+The test now samples actual control visibility at frame-sized intervals and
+releases Left in a finally block. It preserves real keyboard travel and the
+actual exit click; no product behavior, timeout or assertion scope changed.
+Five consecutive focused runs with CI settings passed, followed by the entire
+affected shard in the same single-worker CI mode (97/97 in 6.2 minutes). Typechecks,
+lint and migration inventory verification also pass. The full local 808-case
+run above predates this test-only synchronization correction; final exact-commit
+CI remains the authoritative cross-platform validation of the correction.

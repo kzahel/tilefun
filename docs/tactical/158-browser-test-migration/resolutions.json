@@ -2014,7 +2014,7 @@
       "cases": 1,
       "auditDisposition": "split",
       "status": "retained",
-      "resolution": "Connected-room validation/revision/undo/collision are headless; actual brush gestures, editor mode UI and browser persistence remain integration. Retain this integrated boundary rather than add a duplicate native fixture: a native-only replacement would omit the browser behavior described here. Native references remain supplementary; no claim of full assertion equivalence or deletion readiness.",
+      "resolution": "Connected-room validation/revision/undo/collision are headless; actual brush gestures, editor mode UI and browser persistence remain integration. Retain this integrated boundary rather than add a duplicate native fixture: a native-only replacement would omit the browser behavior described here. Native references remain supplementary; no claim of full assertion equivalence or deletion readiness. CI follow-up: keyboard return traversal stops on the actual visible door control with frame-sized polling, avoiding an expanding positional poll that could overshoot the entire door activation range.",
       "nativeCoverage": [
         "src/interiors/GameplayRoom.test.ts",
         "src/patterns/PatternDocument.test.ts",
@@ -2022,7 +2022,8 @@
       ],
       "browserCoverage": ["tests/gameplay-room-editing.spec.ts"],
       "validation": [
-        "Source/body and existing native-coverage review in audit 157; final full browser validation recorded in tactical 158"
+        "Source/body and existing native-coverage review in audit 157; final full browser validation recorded in tactical 158",
+        "After the first exact-commit CI run exposed a doorway overshoot, five consecutive focused CI-mode browser runs passed without timeout changes; tactical 158 records handoff gates."
       ]
     },
     {

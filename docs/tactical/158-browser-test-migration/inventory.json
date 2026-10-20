@@ -201,7 +201,7 @@
         {
           "path": "tests/gameplay-room-editing.spec.ts",
           "cases": 1,
-          "sourceSha256": "0b96a81e859e6c28a92dce7c1676b3676f3ce0b518d31fd8c5984c6f9b5a6f54"
+          "sourceSha256": "e276218f89f92bd3fcc16ebf261ed4dfb0034f7bab914f29fe18dd7d977a81d5"
         },
         {
           "path": "tests/generated-crossing.spec.ts",
