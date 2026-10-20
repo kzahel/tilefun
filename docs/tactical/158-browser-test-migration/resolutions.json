@@ -36,11 +36,12 @@
       "cases": 1,
       "auditDisposition": "browser",
       "status": "retained",
-      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts.",
+      "resolution": "Search/sort controls, layout, preview pixel visibility and frame advancement, and Watch AI routing are browser contracts. Mobile preview readiness follows actual viewport intersection: scroll the lazy canvas into view before expecting decoded pixels.",
       "nativeCoverage": ["src/wildlife/Fauna.test.ts", "src/wildlife/Predator.test.ts"],
       "browserCoverage": ["tests/animal-browser.spec.ts"],
       "validation": [
-        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158",
+        "Final validation follow-up: focused mobile navigation and desktop/phone entity picker run passed 4/4; tactical 158 records full-suite evidence."
       ]
     },
     {
@@ -1328,11 +1329,12 @@
       "cases": 2,
       "auditDisposition": "browser",
       "status": "retained",
-      "resolution": "Reads actual sprite alpha bounds, CSS button/canvas sizes/contrast and checks the selected label on desktop/phone.",
+      "resolution": "Reads actual sprite alpha bounds, CSS button/canvas sizes/contrast and checks the selected label on desktop/phone. Final validation exposed and fixed missing shared-sheet forage thumbnails: resolve the entity sprite sheet and clip column, then compare actual rendered silhouette against independently decoded source pixels.",
       "nativeCoverage": ["src/characters/PlayerModels.test.ts", "src/assets/SpriteCatalog.test.ts"],
       "browserCoverage": ["tests/entity-picker.spec.ts"],
       "validation": [
-        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158"
+        "Audited browser-dependent source contract; final full local and CI validation recorded in tactical 158",
+        "Focused desktop and phone entity-thumbnail pixel comparisons pass; unchanged candidate identity verification recorded in tactical 158."
       ]
     },
     {

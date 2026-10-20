@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { SPRITE_MANIFEST } from "../src/assets/GameAssets.js";
 import { ENTITY_PALETTE } from "../src/editor/EditorPalettes.js";
+import { ENTITY_DEFS } from "../src/entities/EntityDefs.js";
 
 // Exercise the same compositor used by the actual picker, including phone sizing.
 test.use({ channel: "chromium" });
@@ -19,9 +20,17 @@ for (const viewport of [
     await page.getByRole("button", { name: "Edit", exact: true }).click();
     await page.locator('[data-editor-tab="entities"]').click();
     const entries = ENTITY_PALETTE.map(({ type, label, previewRow }) => {
-      const asset = SPRITE_MANIFEST.find((a) => a.key === type);
+      const sprite = ENTITY_DEFS[type]?.sprite;
+      const asset = SPRITE_MANIFEST.find((a) => a.key === (sprite?.sheetKey ?? type));
       if (!asset) throw Error(`Missing entity image: ${type}`);
-      return { label, path: asset.path, width: asset.w, height: asset.h, row: previewRow ?? 0 };
+      return {
+        label,
+        path: asset.path,
+        width: asset.w,
+        height: asset.h,
+        row: previewRow ?? 0,
+        col: sprite?.clips?.[0]?.start ?? 0,
+      };
     });
     const measurements = await page.evaluate(async (entries) => {
       function bounds(canvas: HTMLCanvasElement) {
@@ -59,7 +68,7 @@ for (const viewport of [
           if (!ctx) throw Error("Missing source context");
           ctx.drawImage(
             image,
-            0,
+            entry.col * entry.width,
             entry.row * entry.height,
             entry.width,
             entry.height,

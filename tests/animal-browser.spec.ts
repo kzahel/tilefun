@@ -106,6 +106,8 @@ test("mobile animal search fits the viewport and opens a hunting scene", async (
   await page.getByLabel("Find animal", { exact: true }).fill("t. rex");
   const results = page.getByRole("region", { name: "Animal results" });
   await expect(results.locator("article")).toHaveCount(1);
+  // Previews intentionally decode only when their canvas intersects the viewport.
+  await results.locator("canvas").scrollIntoViewIfNeeded();
   await expect(results.locator("canvas")).toHaveAttribute("data-ready", "true");
   expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
   await results.getByRole("button", { name: "Watch AI", exact: true }).click();

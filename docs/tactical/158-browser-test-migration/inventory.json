@@ -6,7 +6,7 @@
     {
       "name": "browser",
       "cases": 808,
-      "inventorySha256": "d88e2ab6f93743bb61224076e7d674f33de6efd3a3cf36b442e9fdb301932fc0",
+      "inventorySha256": "f20d7d42d1ea9c521c028aa72cd9d0c7e3590a6b463d687b67131cc2b3f25fee",
       "files": [
         {
           "path": "tests/ambulance-driving.spec.ts",
@@ -16,7 +16,7 @@
         {
           "path": "tests/animal-browser.spec.ts",
           "cases": 76,
-          "sourceSha256": "5f5e3b9d1b65df957df447be802a77cc0c32a5a5847810ee6bbb702c439b7cff"
+          "sourceSha256": "b172ba9a672f8816e88fc06ad1c11e5ea0c512a5682e6408b7d8d01114527365"
         },
         {
           "path": "tests/animal-work.spec.ts",
@@ -151,7 +151,7 @@
         {
           "path": "tests/entity-picker.spec.ts",
           "cases": 2,
-          "sourceSha256": "d5a15b8f132dcc00d848491c302f25f8c6b8a2f6bbd2516d5ea3ae66d9d7b330"
+          "sourceSha256": "2a5a52419ed9c02503d2538eaf568f6a5b93e7743474785259c44792d93aeb0b"
         },
         {
           "path": "tests/family-sheets.spec.ts",

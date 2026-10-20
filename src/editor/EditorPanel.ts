@@ -2,6 +2,7 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { MAX_ELEVATION } from "../config/constants.js";
 import { Direction } from "../entities/Entity.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { getPropSheetInfo, PROP_PALETTE } from "../entities/PropFactories.js";
 import { RoadType } from "../road/RoadType.js";
 import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
@@ -1130,10 +1131,20 @@ export class EditorPanel {
       const btn = this.entityButtons[i];
       const entry = ENTITY_PALETTE[i];
       if (!btn || !entry) continue;
-      const sheet = sheets.get(entry.type);
+      const sprite = ENTITY_DEFS[entry.type]?.sprite;
+      const sheet = sheets.get(sprite?.sheetKey ?? entry.type);
       if (sheet) {
         const row = entry.previewRow ?? 0;
-        this.renderPreviewCanvas(btn, sheet, 0, row, 64, 44, this.entityPreviewRegion(sheet, row));
+        const col = sprite?.clips?.[0]?.start ?? 0;
+        this.renderPreviewCanvas(
+          btn,
+          sheet,
+          col,
+          row,
+          64,
+          44,
+          this.entityPreviewRegion(sheet, row, col),
+        );
         btn.style.background = "#4b5563";
       }
     }
@@ -1186,8 +1197,9 @@ export class EditorPanel {
   private entityPreviewRegion(
     sheet: Spritesheet,
     row: number,
+    col = 0,
   ): ReturnType<Spritesheet["getRegion"]> {
-    const region = sheet.getRegion(0, row);
+    const region = sheet.getRegion(col, row);
     const frame = document.createElement("canvas");
     frame.width = region.width;
     frame.height = region.height;

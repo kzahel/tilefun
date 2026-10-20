@@ -125,3 +125,15 @@ restarts; all 13 focused cases pass without raising timeout limits. Updating tes
 scripts also exposed eight historical vehicle receipts pinning package.json.
 Retained its exact original bytes in the existing replay-input catalog rather
 than rewrite receipts; all 66 mesh/receipt cases pass.
+
+Full-browser follow-up: the latest baseline CI had two independent failures.
+Resource thumbnails looked up twig/nut/fruit as separate spritesheets even though
+they share the forage sheet. The editor now resolves the entity's registered
+sheet and initial clip column; the existing desktop/phone tests still compare
+actual thumbnail pixels with independently decoded source frames. The mobile
+Animal Browser test now scrolls the intentionally lazy preview into view before
+expecting readiness. Both picker cases, mobile navigation and actual mouse terrain
+editing pass (4/4); no timeout increases or golden changes. Refreshed generated
+inventories: art-catalog changes only source line references and workshop-manifest
+changes only inputDigest; all 1,840 candidate records are unchanged and their
+registered raster identities verified by normal manifest generation.
