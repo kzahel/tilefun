@@ -1,0 +1,287 @@
+{
+  "schema": "tilefun-vehicle-paint-gameplay-validation-v1",
+  "date": "2026-10-20T07:59:30.868626+00:00",
+  "scope": "Fourteen exact reviewed schemes, three normal vehicle types, one base GLB per family",
+  "authorization": "2026-10-20 owner: great make them work in game! proceed. commit. push when done.",
+  "packaging": {
+    "receipt": "art-source/vehicle-bake/paint-runtime/v1/receipt.json",
+    "sha256": "9280ed6aa37f9bf22db9b5e5c5a82db56d4955f5beb0bda0b7ef7e81d6b7b505",
+    "stagedReplay": {
+      "status": "passed",
+      "source": "Git index",
+      "inputs": 101,
+      "outputs": 29,
+      "receiptExact": true,
+      "sha256InputsAndOutputsExact": true
+    },
+    "frozenStudyVerifier": "passed"
+  },
+  "gpuParity": {
+    "status": "passed",
+    "browser": "153.0.8010.12",
+    "channel": "bundled full Chromium",
+    "runtimeModelsLoaded": 3,
+    "schemeTextures": 14,
+    "results": [
+      {
+        "model": "beetle",
+        "paint": "butter",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "beetle",
+        "paint": "cream",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "beetle",
+        "paint": "cherry",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "beetle",
+        "paint": "teal",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "beetle",
+        "paint": "powder-blue",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "beetle",
+        "paint": "forest",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "pickup",
+        "paint": "teal",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "pickup",
+        "paint": "cherry",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "pickup",
+        "paint": "forest-cream",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "pickup",
+        "paint": "navy-cream",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "rosso-coupe",
+        "paint": "cherry",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "rosso-coupe",
+        "paint": "butter",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "rosso-coupe",
+        "paint": "powder-blue",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      },
+      {
+        "model": "rosso-coupe",
+        "paint": "navy-stripes",
+        "status": "passed",
+        "frames": 48,
+        "baseGlbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+        "identicalReviewedRGBA": true,
+        "sameMeshGeometryAndMaterialObjects": true,
+        "originalResetExact": true
+      }
+    ],
+    "errors": []
+  },
+  "units": {
+    "boundedFullWindowsRun": {
+      "files": 340,
+      "passed": 6045,
+      "failed": 5,
+      "skipped": 10,
+      "durationSeconds": 503.21,
+      "knownPlatformFailures": [
+        "FsSecurity: three EPERM symlink privilege errors",
+        "privateDataPlugin: EPERM symlink privilege error",
+        "SqliteRecordStore: Windows process-death/SIGKILL"
+      ],
+      "knownHooks": "staticFiles symlink setup fails, ten tests skip, dependent cleanup hook fails"
+    },
+    "focusedPaintRun": {
+      "files": 5,
+      "passed": 12,
+      "includes": "three natural-road tests added after full run"
+    }
+  },
+  "browser": {
+    "channel": "bundled full Chromium",
+    "combinedVehicleAndPaintChecks": 21,
+    "subsequentPaintedDrivingAndControlsChecks": 12,
+    "paintedDrivingCoverage": "three families x Canvas/GPU; touch editor, board, predicted paint, movement, save/reopen while seated",
+    "errors": 0
+  },
+  "streaming": {
+    "status": "passed",
+    "renderer": "gpu",
+    "meshes": true,
+    "browser": "153.0.8010.12",
+    "limits": "Bounded desktop readiness; no physical-phone pacing claim",
+    "fixtures": [
+      {
+        "version": "current",
+        "errors": [],
+        "failures": [],
+        "samples": [
+          {
+            "name": "cold",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "travelledPx": 0,
+            "visitedChunks": 9
+          },
+          {
+            "name": "standing",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "travelledPx": 0,
+            "visitedChunks": 9
+          },
+          {
+            "name": "walk",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "travelledPx": 110.421875,
+            "visitedChunks": 9
+          },
+          {
+            "name": "sprint",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "travelledPx": 368.07373046875,
+            "visitedChunks": 12
+          },
+          {
+            "name": "reverse",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "travelledPx": 368.07373046875,
+            "visitedChunks": 12
+          },
+          {
+            "name": "zoom-out",
+            "missingDataFrames": 0,
+            "incompleteCacheFrames": 0,
+            "travelledPx": 0,
+            "visitedChunks": 12
+          }
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "typecheck": "passed (client/server/worker)",
+    "build": "passed",
+    "lint": "passed; 120 existing warnings, 37 infos",
+    "artCatalog": {
+      "sheets": 681,
+      "sourceUses": 1392
+    },
+    "workshopManifest": "1840 candidate identities verified in normal Chromium at retina scale"
+  },
+  "resourceContract": {
+    "baseGlbsUnchanged": true,
+    "perPaintGeometryOrMaterialCopies": 0,
+    "lazyAtlasRgbaBytesEach": 1048576,
+    "fallbackRgbaBytesTotal": 9633792,
+    "newRuntimePngs": 28,
+    "frameProtocolTag": "0x05"
+  },
+  "localEvidence": {
+    "ignoredRoot": "data/vehicle-bake/",
+    "logsSha256": {
+      "build": "79a99d746f9e8540ea2b54891deef2773e6534d5f0e3d25bb90fb3bce8a67e8a",
+      "browser": "a3991518aa0bbef94d1cf380aab08bc4b6d7e5c00cfdc42e8e0edb05c462693b",
+      "driving": "8b7fa1c5d7d5110d06b75fbae6765a282cca360ed099c43fb81207c8ef18d699",
+      "typecheck": "31f05910dee5d7e88b130e191583637cd70e17bebb914bcf97222066594f904c",
+      "lint": "8a2b7488a99645227f4ac5855c9d0d63907d5faa72433d5e629a5d9a387df50d",
+      "units": "26c69f3444d5f6ca27ef5edaba9b1cfd7f5157f830ba22c1c67d4df3bb570cb1",
+      "natural": "f09e9020f7f68b39487fc7632917b6ca8ee16aaf0f1b05491e7e0e1b330ce8c7",
+      "catalog": "952d71ed57e1e1baa89b8572d58cd760237dd0aaf1b0aa838b3286e28d379067",
+      "manifest": "8e26706ac4d983281dfb14101f4110a57d5aab720d4f62c6e38eb4ca54926233",
+      "streaming": "8be646e2eaa172db2af3382d7ce61f3efa038915a5cf28c0f11cd52581224b5f"
+    }
+  }
+}

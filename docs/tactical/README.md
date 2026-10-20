@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [156 Vehicle paint gameplay](156-vehicle-paint-gameplay.md) | Fourteen shared editor/traffic paints, persistent replicated identity, lazy GPU atlases and matching sprite fallbacks; [original vehicles](../topics/original-vehicles.md) |
 | [155 Fetch, nests and caches](155-fetch-nests-and-caches.md) | Implemented and automation verified: dog fetch, crow nests and squirrel food caches; human review pending; [animal behaviors](../topics/wildlife-behaviors.md) |
 | [154 Car controls and contact](154-car-controls-and-contact.md) | Configurable steering, automatic reverse and model-covering contact bounds |
 | [154 Vehicle paint study](154-vehicle-paint-study.md) | Fourteen Beetle/pickup/coupe schemes for review; reusable palette/mask pipeline, source and mesh preservation; [original vehicles](../topics/original-vehicles.md) |

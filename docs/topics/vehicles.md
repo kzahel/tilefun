@@ -4,6 +4,14 @@ Topic: vehicles
 Status: Approved vehicle bank promoted; generated-road traffic, inside driving and passive roof riding delivered in the current regional generator (regional-v13).
 Updated: 2026-10-19.
 
+[156](../tactical/156-vehicle-paint-gameplay.md) adds fourteen owner-authorized paint
+schemes for Beetle, pickup and sports coupe. Edit → Vehicles has paint swatches;
+ordinary traffic chooses stable weighted schemes. Each car saves/replicates its
+paint while preserving the same model, physics and exact colored sprite fallback.
+Game and Traffic lab share the catalog and lazy GPU paint cache. Missing paint in
+older records retains the original. [Paint variants](../vehicle-paint-variants.md)
+owns the palette, packaging and runtime contracts.
+
 [Boats](boats.md) adds an original explorer motorboat through shared driving,
 boarding, prediction, records and presentation. It uses water-only motion and
 natural lake moorings, and is excluded from the unchanged road vehicle catalog

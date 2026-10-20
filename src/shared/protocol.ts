@@ -122,6 +122,7 @@ export type ClientMessage =
       wx: number;
       wy: number;
       entityType: string;
+      paintSchemeId?: string;
     }
   | { type: "edit-delete-entity"; entityId: number }
   | { type: "edit-delete-prop"; propId: number }
@@ -216,6 +217,7 @@ export interface EntitySnapshot {
   emergencyState?: number;
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
+  paintSchemeId?: string;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

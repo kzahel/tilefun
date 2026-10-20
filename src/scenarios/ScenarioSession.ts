@@ -281,7 +281,15 @@ export class ScenarioSession {
           minCy: Math.floor(fixture.wy / 256) - 1,
           maxCy: Math.floor(fixture.wy / 256) + 1,
         });
-        if (!this.realm.traffic?.place(fixture.model, fixture.wx, fixture.wy, fixture.facing))
+        if (
+          !this.realm.traffic?.place(
+            fixture.model,
+            fixture.wx,
+            fixture.wy,
+            fixture.facing,
+            fixture.paintSchemeId,
+          )
+        )
           throw new Error("Blocked parked scenario vehicle");
       }
       for (const fixture of this.recipe.traffic ?? []) {
@@ -297,6 +305,7 @@ export class ScenarioSession {
           true,
           undefined,
           fixture.z ?? 0,
+          fixture.paintSchemeId,
         ).entity;
         this.handles[fixture.name] = car.id;
         if (car.proceduralId) this.identities[fixture.name] = car.proceduralId;

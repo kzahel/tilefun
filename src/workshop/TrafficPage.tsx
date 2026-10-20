@@ -18,6 +18,7 @@ import {
 } from "../traffic/EmergencyVehicle.js";
 import { ORIGINAL_VEHICLES } from "../traffic/OriginalVehicles.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
+import { vehiclePaintSchemes } from "../traffic/VehiclePaint.js";
 
 export type TrafficCanvas = HTMLCanvasElement & {
   /** Read-only, on-demand diagnostics for lab profiling and integration checks. */
@@ -41,6 +42,7 @@ export default function TrafficPage() {
     void scene.current?.command({ kind: "vehicle-horn", active }).catch((e) => setError(String(e)));
   }, []);
   const [model, setModel] = useState("compact-1");
+  const [paint, setPaint] = useState("");
   const carStyle = useRef("direction");
   const [driving, setDriving] = useState(false);
   const [emergencyState, setEmergencyState] = useState(2);
@@ -56,7 +58,7 @@ export default function TrafficPage() {
     setError("");
     if (restart > 0) setPaused(false);
     keys.current.clear();
-    const host = new ScenarioPresentationHost(c, trafficRecipe(model), {
+    const host = new ScenarioPresentationHost(c, trafficRecipe(model, paint || undefined), {
       width: 960,
       height: 600,
       cameraOffsetY: -12,
@@ -98,6 +100,8 @@ export default function TrafficPage() {
         c.dataset.carX = String(car.position.wx);
         c.dataset.carY = String(car.position.wy);
         c.dataset.carHeading = String(vehicleNoseHeading(car));
+        c.dataset.paintScheme = car.paintSchemeId ?? "original";
+        c.dataset.carSheet = car.sprite?.sheetKey ?? "";
         c.dataset.speed = String(
           occupied
             ? Math.hypot(car.velocity?.vx ?? 0, car.velocity?.vy ?? 0)
@@ -149,7 +153,7 @@ export default function TrafficPage() {
       keys.current.clear();
       scene.current = null;
     };
-  }, [restart, model, honk]);
+  }, [restart, model, paint, honk]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
       e.currentTarget.setPointerCapture(e.pointerId);
@@ -187,7 +191,10 @@ export default function TrafficPage() {
           <select
             aria-label="Playground vehicle"
             value={model}
-            onChange={(e) => setModel(e.target.value)}
+            onChange={(e) => {
+              setPaint("");
+              setModel(e.target.value);
+            }}
           >
             <option value="compact-1">Blue car</option>
             {ORIGINAL_VEHICLES.map((vehicle) => (
@@ -241,6 +248,23 @@ export default function TrafficPage() {
             <option value="fire-truck-ladder-1">Firetruck</option>
           </select>
         </label>
+        {vehiclePaintSchemes(model).length > 0 && (
+          <label>
+            Paint{" "}
+            <select
+              aria-label="Playground paint"
+              value={paint}
+              onChange={(e) => setPaint(e.target.value)}
+            >
+              <option value="">Original</option>
+              {vehiclePaintSchemes(model).map((scheme) => (
+                <option key={scheme.id} value={scheme.id}>
+                  {scheme.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <label>
           Car controls{" "}
           <select

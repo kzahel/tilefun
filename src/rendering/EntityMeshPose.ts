@@ -13,6 +13,7 @@ interface Pose {
   y: number;
   travel: number;
   instance: MeshInstance & {
+    paintSchemeId?: string;
     wheelTravel: number;
     emergencyEnabled?: boolean;
     presentationTime?: number;
@@ -86,7 +87,7 @@ export class EntityMeshPose {
     const train = this.authoredTrains && !!authoredTrainForType(entity.type);
     const target = train ? trainMeshHeading(entity) : entityHeading(entity);
     let pose = this.poses.get(entity.id);
-    if (!pose) {
+    if (!pose || pose.instance.assetId !== assetId) {
       const orientation: [number, number, number, number] = [
         0,
         0,
@@ -151,6 +152,9 @@ export class EntityMeshPose {
       pose.orientation[3] = Math.cos(pose.angle / 2);
     }
     pose.instance.emergencyEnabled = emergencyEnabled(entity.emergencyState);
+    // A pooled presentation ID can change paint without changing its mesh asset.
+    if (entity.paintSchemeId === undefined) delete pose.instance.paintSchemeId;
+    else pose.instance.paintSchemeId = entity.paintSchemeId;
     pose.instance.presentationTime = time;
     return pose.instance;
   }

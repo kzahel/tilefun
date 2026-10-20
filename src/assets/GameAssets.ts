@@ -7,6 +7,7 @@ import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
+import { VEHICLE_PAINTS, vehiclePaintSheet } from "../traffic/VehiclePaint.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { FIERCE_DENS } from "../wildlife/FierceDens.js";
@@ -45,6 +46,14 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  ...Object.entries(VEHICLE_PAINTS.families).flatMap(([model, family]) =>
+    family.schemes.map((paint) => ({
+      key: vehiclePaintSheet(`vehicle-v1:${model}`, paint.id),
+      path: paint.sprite,
+      w: 192,
+      h: 224,
+    })),
+  ),
   { key: FORAGE_SHEET, path: FORAGE_IMAGE, w: 32, h: 32 },
   ...FIERCE_DENS.map((d) => ({
     key: d.type,

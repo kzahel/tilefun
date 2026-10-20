@@ -38,6 +38,12 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 
 ## Transport and requests
 
+Vehicle paint identity adds one optional dictionary byte to entity baselines and
+nullable deltas. Frame tag 0x05 requires matching updated endpoints; pre-paint 0x04
+is rejected rather than decoded with missing fields. The authority validates each
+scheme against its model, and local mount prediction preserves the replicated
+choice. [Vehicle paints](vehicle-paint-variants.md) owns the complete contract.
+
 [Transport interfaces](../src/transport/Transport.ts) separate hosts from the
 shared protocol. Worker traffic is ordered binary data with bounded batches and
 acknowledgments for consumption/backpressure. Main-thread decode/application is

@@ -196,6 +196,7 @@ export class EditScene implements GameScene {
         wx: spawn.wx,
         wy: spawn.wy,
         entityType: spawn.entityType,
+        ...(spawn.paintSchemeId === undefined ? {} : { paintSchemeId: spawn.paintSchemeId }),
       });
     }
 

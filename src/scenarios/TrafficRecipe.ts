@@ -12,7 +12,7 @@ export const TRAFFIC_DEMO_GENERATION = {
   seed: 2026,
   preset: "temperate-v1",
 } as const;
-export function trafficRecipe(model = "compact-1"): ScenarioRecipe {
+export function trafficRecipe(model = "compact-1", paintSchemeId?: string): ScenarioRecipe {
   const strategy = createGenerator(TRAFFIC_DEMO_GENERATION).terrain as TrafficStrategy;
   const graph = strategy.trafficNetwork(4800, 8304);
   const lane = required(
@@ -34,7 +34,15 @@ export function trafficRecipe(model = "compact-1"): ScenarioRecipe {
     player: createPlayer(pose.x + 90, pose.y + 3),
     props: [],
     traffic: [
-      { name: "car", model, laneId: lane.id, x: 4800, y: 8304, distance: 80 },
+      {
+        name: "car",
+        model,
+        ...(paintSchemeId === undefined ? {} : { paintSchemeId }),
+        laneId: lane.id,
+        x: 4800,
+        y: 8304,
+        distance: 80,
+      },
       ...(reverse
         ? [
             {

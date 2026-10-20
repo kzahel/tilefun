@@ -1653,7 +1653,7 @@ export class Realm {
 
       case "edit-spawn":
         if (msg.entityType.startsWith("vehicle-v1:") && !session.editorEnabled) break;
-        this.handleSpawn(msg.entityType, msg.wx, msg.wy);
+        this.handleSpawn(msg.entityType, msg.wx, msg.wy, msg.paintSchemeId);
         break;
 
       case "edit-delete-entity":
@@ -2367,11 +2367,11 @@ export class Realm {
   }
 
   /** Build per-tick frame + on-change sync events for a specific client. */
-  private handleSpawn(entityType: string, wx: number, wy: number): void {
+  private handleSpawn(entityType: string, wx: number, wy: number, paintSchemeId?: string): void {
     let changed = false;
     if (this.interior && (!furnitureAsset(entityType) || !this.roomState)) return;
     if (entityType.startsWith("vehicle-v1:")) {
-      changed = !!this.traffic?.place(entityType.slice(11), wx, wy);
+      changed = !!this.traffic?.place(entityType.slice(11), wx, wy, undefined, paintSchemeId);
     } else if (isPropType(entityType)) {
       const prop = createProp(entityType, wx, wy);
       if (this.interior && this.roomGeometry) {

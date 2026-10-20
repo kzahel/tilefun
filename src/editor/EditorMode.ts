@@ -49,6 +49,7 @@ export interface PendingEntitySpawn {
   wx: number;
   wy: number;
   entityType: string;
+  paintSchemeId?: string;
 }
 
 export class EditorMode {
@@ -443,6 +444,9 @@ export class EditorMode {
     this.pendingEntitySpawns.push({
       wx,
       wy,
+      ...(this.model.editorTab === "vehicles" && this.model.selectedVehiclePaint !== undefined
+        ? { paintSchemeId: this.model.selectedVehiclePaint }
+        : {}),
       entityType:
         this.model.editorTab === "vehicles"
           ? this.model.selectedVehicleType

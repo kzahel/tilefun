@@ -771,6 +771,9 @@ export class PlayerPredictor {
       if (serverMount.emergencyState !== undefined)
         this.predictedMount.emergencyState = serverMount.emergencyState;
       else delete this.predictedMount.emergencyState;
+      if (serverMount.paintSchemeId !== undefined)
+        this.predictedMount.paintSchemeId = serverMount.paintSchemeId;
+      else delete this.predictedMount.paintSchemeId;
       if (isVehicle(serverMount) || isTrain(serverMount))
         this.predictedMount.velocity = serverMount.velocity && { ...serverMount.velocity };
       this.predictedMount.sprite = predictionSprite(this.predictedMount.sprite, serverMount.sprite);
@@ -1636,6 +1639,7 @@ export class PlayerPredictor {
       clone.vehicleHeading = serverPlayer.vehicleHeading;
     if (serverPlayer.emergencyState !== undefined)
       clone.emergencyState = serverPlayer.emergencyState;
+    if (serverPlayer.paintSchemeId !== undefined) clone.paintSchemeId = serverPlayer.paintSchemeId;
     if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;
     if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
     if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;

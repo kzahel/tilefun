@@ -13,6 +13,7 @@ export class EditorModel {
   selectedRoadType: RoadType = RoadType.Asphalt;
   selectedEntityType = "chicken";
   selectedVehicleType = "vehicle-v1:compact-1";
+  selectedVehiclePaint: string | undefined;
   selectedPropType = "prop-flower-red";
   deleteMode = false;
   indoor = false;

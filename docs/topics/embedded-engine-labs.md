@@ -20,6 +20,12 @@ replacement-host error guard used by furniture playtest.
 
 ## Shared reverse driving (2026-10-19)
 
+[156](../tactical/156-vehicle-paint-gameplay.md) shares model-scoped paint choices
+between editor placements, ordinary road traffic and Traffic inspection. Scenario
+fixtures pass their optional paint into the same Realm/TrafficSystem constructor,
+record codec and replicated entity field. Both hosts use the same shared mesh,
+lazy atlas cache and exact per-scheme sprite fallback; the lab has no private tint.
+
 [145](../tactical/145-original-coupe-gameplay.md) adds the original red coupe through
 the same vehicle definitions, asset loader and mesh registry used by the game and
 Traffic playground. Its cardinal sprite fallback and physical bounds also belong

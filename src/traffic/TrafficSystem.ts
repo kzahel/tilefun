@@ -35,6 +35,7 @@ import { carryMovingPassengers, planMovingPassengers } from "./MovingSupport.js"
 import { ParkingSystem, type SavedParking } from "./ParkingSystem.js";
 import { roofSupport } from "./RoofSupport.js";
 import { SHOPPING_PARKED_BAYS, type ShoppingCenter, shoppingLot } from "./ShoppingCenter.js";
+import { trafficPaint, validVehiclePaint } from "./VehiclePaint.js";
 import { commitVehiclePushes, type VehiclePush } from "./VehiclePush.js";
 
 export interface TrafficRouteSource {
@@ -83,6 +84,7 @@ export interface SavedTraffic {
   parked?: boolean;
   facing?: number;
   vehicleHeading?: number;
+  paintSchemeId?: string;
   resumePath?: Path;
   persistentId?: string;
   originScope?: string;
@@ -184,8 +186,9 @@ export class TrafficSystem {
     persist = true,
     pose = samplePath(lane.path, distance),
     z = 0,
+    paintSchemeId?: string,
   ): TrafficState {
-    const entity = createVehicle(model, pose.x, pose.y, pose.direction);
+    const entity = createVehicle(model, pose.x, pose.y, pose.direction, paintSchemeId);
     entity.wz = entity.groundZ = z;
     entity.proceduralId = this.identity(model, lane, distance);
     this.entities.spawn(entity);
@@ -206,9 +209,16 @@ export class TrafficSystem {
     return s;
   }
   /** Editor placement uses the same full-body dry-ground checks as driving. */
-  place(model: string, wx: number, wy: number, facing = Direction.Right): TrafficState | undefined {
+  place(
+    model: string,
+    wx: number,
+    wy: number,
+    facing = Direction.Right,
+    paintSchemeId?: string,
+  ): TrafficState | undefined {
     if (
       !DRIVABLE_MODELS.includes(model) ||
+      !validVehiclePaint(model, paintSchemeId) ||
       ![Direction.Up, Direction.Down, Direction.Left, Direction.Right].includes(facing) ||
       this.states.size >= 1024 ||
       ![wx, wy].every(Number.isFinite) ||
@@ -256,6 +266,7 @@ export class TrafficSystem {
       false,
       { x: wx, y: wy, direction: facing },
       candidate.wz,
+      paintSchemeId,
     );
     state.entity.proceduralId = identity;
     state.placed = state.parked = true;
@@ -1011,6 +1022,7 @@ export class TrafficSystem {
       parked: s.parked ?? false,
       facing: s.entity.sprite?.direction ?? 0,
       ...(s.entity.vehicleHeading !== undefined ? { vehicleHeading: s.entity.vehicleHeading } : {}),
+      ...(s.entity.paintSchemeId === undefined ? {} : { paintSchemeId: s.entity.paintSchemeId }),
       ...(s.resumePath ? { resumePath: s.resumePath } : {}),
       identity: required(s.entity.proceduralId),
       model: s.entity.type.slice(11),
@@ -1094,6 +1106,8 @@ export class TrafficSystem {
         : (graph.lanes.get(r.laneId) ?? this.strategy.trafficNetwork(r.x, r.y).lanes.get(r.laneId));
       if (r.parked !== undefined && typeof r.parked !== "boolean")
         throw new Error("Invalid parked state.");
+      if (!validVehiclePaint(r.model, r.paintSchemeId))
+        throw new Error("Invalid saved vehicle paint.");
       if (
         r.vehicleHeading !== undefined &&
         (!Number.isFinite(r.vehicleHeading) || Math.abs(r.vehicleHeading) > Math.PI + 0.000001)
@@ -1189,6 +1203,8 @@ export class TrafficSystem {
       s.next = next;
       s.choices = Math.max(0, Math.floor(r.choices));
       s.entity.proceduralId = r.identity;
+      if (r.paintSchemeId === undefined) delete s.entity.paintSchemeId;
+      else s.entity.paintSchemeId = r.paintSchemeId;
       s.distance = r.distance;
       if (r.turning) {
         s.turn = activePath;
@@ -1282,6 +1298,9 @@ export class TrafficSystem {
         )
           continue;
         const s = this.add(model, lane, spawnDistance(lane), false);
+        const paint = trafficPaint(model, id);
+        if (paint !== undefined) s.entity.paintSchemeId = paint;
+        applyVehicleFacing(s.entity);
         if (
           this.blocked(s, 0) ||
           this.entities.entities.some(

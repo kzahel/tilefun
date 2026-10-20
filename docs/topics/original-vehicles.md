@@ -17,6 +17,14 @@ own the 45 existing sprite ports; these prototypes do not change those counts.
 
 ## Current decision and gate
 
+On 2026-10-20 the owner accepted proceeding from the paint comparison and explicitly
+requested gameplay integration, commit and push. [156](../tactical/156-vehicle-paint-gameplay.md)
+registers all fourteen Beetle/pickup/coupe schemes in normal editor and road traffic,
+with persisted/replicated identity and matching sprite fallbacks. GPU presentation
+shares each family's base geometry and caches only requested paint atlases. Existing
+review snapshots stay immutable; their capture-time inactive labels remain historical.
+The normal roster remains 33 originals, 78 road types and one separate boat.
+
 The owner authorized the first paint experiment and commit on 2026-10-20.
 [154](../tactical/154-vehicle-paint-study.md) adds fourteen review-only schemes:
 six Beetle colors, four pickup schemes including cream roofs, and four coupe

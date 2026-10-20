@@ -19,6 +19,7 @@ export interface ScenarioRecipe {
   /** Native parked bodies use durable TrafficRecords, just like editor placement. */
   parkedVehicles?: {
     model: string;
+    paintSchemeId?: string;
     wx: number;
     wy: number;
     facing: import("../entities/Entity.js").Direction;
@@ -37,6 +38,7 @@ export interface ScenarioRecipe {
   traffic?: {
     z?: number;
     model: string;
+    paintSchemeId?: string;
     laneId: string;
     x: number;
     y: number;

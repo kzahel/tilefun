@@ -39,6 +39,7 @@ export interface EntityDelta {
   jumpInputState?: number | null;
   emergencyState?: number | null;
   vehicleHeading?: number | null;
+  paintSchemeId?: string | null;
   wz?: number | null;
   parentId?: number | null;
   localOffsetX?: number | null;
@@ -97,6 +98,8 @@ export function diffEntitySnapshots(
   diffOptionalNum("jumpInputState", prev, curr, ensure);
   diffOptionalNum("emergencyState", prev, curr, ensure);
   diffOptionalNum("vehicleHeading", prev, curr, ensure);
+  if (prev.paintSchemeId !== curr.paintSchemeId)
+    ensure().paintSchemeId = curr.paintSchemeId ?? null;
   diffOptionalNum("wz", prev, curr, ensure);
   diffOptionalNum("parentId", prev, curr, ensure);
   diffOptionalNum("localOffsetX", prev, curr, ensure);
@@ -253,8 +256,6 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
     tickSpriteAnimation(entity, 0);
     applyPlayerModel(entity, delta.spriteState.model);
   }
-  applyVehicleFacing(entity);
-
   if (delta.wanderAIState !== undefined) {
     if (delta.wanderAIState === null) {
       entity.wanderAI = null;
@@ -321,6 +322,9 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "jumpInputState");
   applyOptionalNum(entity, delta, "emergencyState");
   applyOptionalNum(entity, delta, "vehicleHeading");
+  if (delta.paintSchemeId === null) delete entity.paintSchemeId;
+  else if (delta.paintSchemeId !== undefined) entity.paintSchemeId = delta.paintSchemeId;
+  applyVehicleFacing(entity);
   applyOptionalNum(entity, delta, "wz");
   applyOptionalNum(entity, delta, "parentId");
   applyOptionalNum(entity, delta, "localOffsetX");

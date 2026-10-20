@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { vehiclePaint } from "../traffic/VehiclePaint.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
@@ -15,9 +16,11 @@ import {
 import { projectWorld } from "./Projection.js";
 import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
+import { VehiclePaintResources } from "./VehiclePaintResources.js";
 
 /** One render target reused synchronously; only this body's triangles share depth. */
 export class GpuMeshBodies {
+  readonly paints = new VehiclePaintResources();
   readonly car = new ResourceSlot<CarMeshAsset>();
   readonly ambulance = new ResourceSlot<CarMeshAsset>();
   readonly fireTruck = new ResourceSlot<CarMeshAsset>();
@@ -35,6 +38,8 @@ export class GpuMeshBodies {
   private enabled = false;
   draws = 0;
   drawCalls = 0;
+  paintDraws = 0;
+  paintFallbacks = 0;
   constructor(private readonly surface: GpuRasterSurface) {
     this.target.texture.colorSpace = THREE.SRGBColorSpace;
     this.target.texture.magFilter = this.target.texture.minFilter = THREE.NearestFilter;
@@ -82,6 +87,7 @@ export class GpuMeshBodies {
   }
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
+    this.paints.beginFrame();
     this.ready.clear();
     if (this.enabled)
       for (const [assetId, slot] of this.slots) if (slot.state === "ready") this.ready.add(assetId);
@@ -89,6 +95,13 @@ export class GpuMeshBodies {
   draw(camera: Camera, item: SpriteItem): boolean {
     const asset = item.mesh ? this.request(item.mesh.assetId)?.value : undefined;
     if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return false;
+    const definition = authoredVehicleForAsset(item.mesh.assetId);
+    const paint = definition && vehiclePaint(definition.vehicle, item.mesh.paintSchemeId);
+    const paintTexture = paint && this.paints.request(paint);
+    if (paint && !paintTexture) {
+      this.paintFallbacks++;
+      return false; // Complete matching sprite while pending/failed.
+    }
     const { surface } = this,
       renderer = surface.renderer;
     surface.flush();
@@ -108,6 +121,7 @@ export class GpuMeshBodies {
     const previous = renderer.getRenderTarget();
     let texture = this.target.texture;
     renderer.setScissorTest(false);
+    const restorePaint = paintTexture ? this.paints.bind(object, paintTexture) : undefined;
     try {
       renderer.setRenderTarget(this.target);
       renderer.setClearColor(0, 0);
@@ -117,6 +131,7 @@ export class GpuMeshBodies {
       texture = this.outline.render(renderer, this.target);
       this.drawCalls += renderer.info.render.calls;
     } finally {
+      restorePaint?.();
       renderer.setRenderTarget(previous);
       renderer.setClearColor(this.clearColor, alpha);
       this.scene.remove(object);
@@ -134,6 +149,7 @@ export class GpuMeshBodies {
     surface.flush();
     surface.restore();
     this.draws++;
+    if (paintTexture) this.paintDraws++;
     return true;
   }
   recover() {
@@ -141,6 +157,7 @@ export class GpuMeshBodies {
     this.target.dispose();
   }
   dispose() {
+    this.paints.dispose();
     this.ready.clear();
     for (const slot of this.slots.values()) slot.dispose();
     this.outline.dispose();

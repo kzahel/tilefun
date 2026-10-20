@@ -276,6 +276,146 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:beetle:paint:butter",
+      "name": "vehicle v1:beetle:paint:butter",
+      "image": "assets/vehicles/paint-v1/beetle-butter.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "28c1dada2c3569d68d182f209608a4b7385a89899e22045384dbfaea04706567",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle:paint:cream",
+      "name": "vehicle v1:beetle:paint:cream",
+      "image": "assets/vehicles/paint-v1/beetle-cream.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "cb481e7438c2307cce06911e151ca05c0fe864a9588daf32aa5260b6f12e2158",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle:paint:cherry",
+      "name": "vehicle v1:beetle:paint:cherry",
+      "image": "assets/vehicles/paint-v1/beetle-cherry.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "8d1a31871796349dcc80124c4623ae8f69dbbb5fc9c2981997504b58544b0e1c",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle:paint:teal",
+      "name": "vehicle v1:beetle:paint:teal",
+      "image": "assets/vehicles/paint-v1/beetle-teal.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "a866e6897e34072efa9668251eb4f39d88ed6779a2c9d7d398586bc280649313",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle:paint:powder-blue",
+      "name": "vehicle v1:beetle:paint:powder blue",
+      "image": "assets/vehicles/paint-v1/beetle-powder-blue.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "d1165959ff0725c13226e025875983d1c659ed1f85387c8e33133046503b1237",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:beetle:paint:forest",
+      "name": "vehicle v1:beetle:paint:forest",
+      "image": "assets/vehicles/paint-v1/beetle-forest.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "6e8ca27a358a53ddb34df54e7b04c8f055d3868798959afb9b4cd73865e8b4bd",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:pickup:paint:teal",
+      "name": "vehicle v1:pickup:paint:teal",
+      "image": "assets/vehicles/paint-v1/pickup-teal.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "f85077f21d6a2f962b1e72fb9b1018a289943b3dd3fcc89f01256bbd1a9877aa",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:pickup:paint:cherry",
+      "name": "vehicle v1:pickup:paint:cherry",
+      "image": "assets/vehicles/paint-v1/pickup-cherry.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "253f7dacf57530518385e5ee38fb563058c4a782ce2205ddf94881958b4638df",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:pickup:paint:forest-cream",
+      "name": "vehicle v1:pickup:paint:forest cream",
+      "image": "assets/vehicles/paint-v1/pickup-forest-cream.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "54a01ac7c9d7e09ad947f1d1f5eee55b93fb249686e49581b61a4b1c06768741",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:pickup:paint:navy-cream",
+      "name": "vehicle v1:pickup:paint:navy cream",
+      "image": "assets/vehicles/paint-v1/pickup-navy-cream.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "7525ca44de0ec97852f9f3f8ad48e9a294bd18433d79ddb39528785b5abe9522",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:rosso-coupe:paint:cherry",
+      "name": "vehicle v1:rosso coupe:paint:cherry",
+      "image": "assets/vehicles/paint-v1/rosso-coupe-cherry.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "8798e56e7ef299cd20a3685b8ac056d2f25e073920d59c02716d45c990e58580",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:rosso-coupe:paint:butter",
+      "name": "vehicle v1:rosso coupe:paint:butter",
+      "image": "assets/vehicles/paint-v1/rosso-coupe-butter.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "093e3e4ef193af704babbdc2ff79084a4026df401138e9014bd15be810b58751",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:rosso-coupe:paint:powder-blue",
+      "name": "vehicle v1:rosso coupe:paint:powder blue",
+      "image": "assets/vehicles/paint-v1/rosso-coupe-powder-blue.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "c5648f8090a577a0179e318f8874352c6f4e1003d9aa83ea755d5ae25be1f355",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "vehicle-v1:rosso-coupe:paint:navy-stripes",
+      "name": "vehicle v1:rosso coupe:paint:navy stripes",
+      "image": "assets/vehicles/paint-v1/rosso-coupe-navy-stripes.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "d58db287befb4a29d183815c8f4fdaee749397c817951c2a5a6a28280bf22b01",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "wildlife-forage-resources-v1",
       "name": "wildlife forage resources v1",
       "image": "demos/wildlife-v2/foraging-resources/behavior-v1/sheet.png",
@@ -8139,11 +8279,11 @@
       "consumers": [
         {
           "system": "Editor",
-          "source": "src/editor/EditorModel.ts:16"
+          "source": "src/editor/EditorModel.ts:17"
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorModel.ts:19"
+          "source": "src/editor/EditorModel.ts:20"
         },
         {
           "system": "Gameplay",
@@ -8393,7 +8533,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:139"
+          "source": "src/assets/GameAssets.ts:148"
         },
         {
           "system": "Gameplay",
@@ -8439,7 +8579,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:140"
+          "source": "src/assets/GameAssets.ts:149"
         },
         {
           "system": "Gameplay",
@@ -8477,7 +8617,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:141"
+          "source": "src/assets/GameAssets.ts:150"
         },
         {
           "system": "Gameplay",
@@ -8507,7 +8647,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:142"
+          "source": "src/assets/GameAssets.ts:151"
         },
         {
           "system": "Gameplay",
@@ -8541,7 +8681,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:143"
+          "source": "src/assets/GameAssets.ts:152"
         },
         {
           "system": "Gameplay",
@@ -8579,7 +8719,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:144"
+          "source": "src/assets/GameAssets.ts:153"
         },
         {
           "system": "Gameplay",
@@ -8689,7 +8829,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:145"
+          "source": "src/assets/GameAssets.ts:154"
         },
         {
           "system": "Gameplay",
@@ -8719,7 +8859,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:146"
+          "source": "src/assets/GameAssets.ts:155"
         },
         {
           "system": "Gameplay",
@@ -8773,7 +8913,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:147"
+          "source": "src/assets/GameAssets.ts:156"
         },
         {
           "system": "Gameplay",
@@ -8811,7 +8951,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:149"
+          "source": "src/assets/GameAssets.ts:158"
         },
         {
           "system": "Gameplay",
@@ -8841,7 +8981,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:150"
+          "source": "src/assets/GameAssets.ts:159"
         },
         {
           "system": "Gameplay",
@@ -8875,7 +9015,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:151"
+          "source": "src/assets/GameAssets.ts:160"
         },
         {
           "system": "Gameplay",
@@ -8909,7 +9049,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:152"
+          "source": "src/assets/GameAssets.ts:161"
         },
         {
           "system": "Gameplay",
@@ -8939,7 +9079,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:153"
+          "source": "src/assets/GameAssets.ts:162"
         },
         {
           "system": "Gameplay",
@@ -8973,7 +9113,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:154"
+          "source": "src/assets/GameAssets.ts:163"
         },
         {
           "system": "Gameplay",
@@ -9003,7 +9143,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:155"
+          "source": "src/assets/GameAssets.ts:164"
         },
         {
           "system": "Gameplay",
@@ -9033,7 +9173,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:156"
+          "source": "src/assets/GameAssets.ts:165"
         },
         {
           "system": "Gameplay",
@@ -9063,7 +9203,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:157"
+          "source": "src/assets/GameAssets.ts:166"
         },
         {
           "system": "Gameplay",
@@ -9093,7 +9233,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:158"
+          "source": "src/assets/GameAssets.ts:167"
         },
         {
           "system": "Gameplay",
@@ -24787,7 +24927,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:372"
+          "source": "src/editor/EditorPanel.ts:381"
         },
         {
           "system": "Interiors",
@@ -24937,7 +25077,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:374"
+          "source": "src/editor/EditorPanel.ts:383"
         },
         {
           "system": "Interiors",
@@ -25043,7 +25183,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:373"
+          "source": "src/editor/EditorPanel.ts:382"
         },
         {
           "system": "Interiors",
@@ -25113,7 +25253,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:375"
+          "source": "src/editor/EditorPanel.ts:384"
         },
         {
           "system": "Interiors",
@@ -25187,7 +25327,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:376"
+          "source": "src/editor/EditorPanel.ts:385"
         },
         {
           "system": "Interiors",
@@ -25297,7 +25437,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:377"
+          "source": "src/editor/EditorPanel.ts:386"
         },
         {
           "system": "Interiors",
@@ -25413,7 +25553,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:378"
+          "source": "src/editor/EditorPanel.ts:387"
         },
         {
           "system": "Interiors",
@@ -25459,7 +25599,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:379"
+          "source": "src/editor/EditorPanel.ts:388"
         },
         {
           "system": "Interiors",
@@ -27338,6 +27478,258 @@
         {
           "system": "Gameplay",
           "source": "src/rendering/RendererLab.ts:320"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle:paint:butter",
+      "sheetId": "vehicle-v1:beetle:paint:butter",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle:paint:butter · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle:paint:cream",
+      "sheetId": "vehicle-v1:beetle:paint:cream",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle:paint:cream · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle:paint:cherry",
+      "sheetId": "vehicle-v1:beetle:paint:cherry",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle:paint:cherry · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle:paint:teal",
+      "sheetId": "vehicle-v1:beetle:paint:teal",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle:paint:teal · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle:paint:powder-blue",
+      "sheetId": "vehicle-v1:beetle:paint:powder-blue",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle:paint:powder-blue · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:beetle:paint:forest",
+      "sheetId": "vehicle-v1:beetle:paint:forest",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:beetle:paint:forest · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:pickup:paint:teal",
+      "sheetId": "vehicle-v1:pickup:paint:teal",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:pickup:paint:teal · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:pickup:paint:cherry",
+      "sheetId": "vehicle-v1:pickup:paint:cherry",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:pickup:paint:cherry · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:pickup:paint:forest-cream",
+      "sheetId": "vehicle-v1:pickup:paint:forest-cream",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:pickup:paint:forest-cream · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:pickup:paint:navy-cream",
+      "sheetId": "vehicle-v1:pickup:paint:navy-cream",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:pickup:paint:navy-cream · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:rosso-coupe:paint:cherry",
+      "sheetId": "vehicle-v1:rosso-coupe:paint:cherry",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:rosso-coupe:paint:cherry · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:rosso-coupe:paint:butter",
+      "sheetId": "vehicle-v1:rosso-coupe:paint:butter",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:rosso-coupe:paint:butter · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:rosso-coupe:paint:powder-blue",
+      "sheetId": "vehicle-v1:rosso-coupe:paint:powder-blue",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:rosso-coupe:paint:powder-blue · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
+      "id": "sprite:vehicle-v1:rosso-coupe:paint:navy-stripes",
+      "sheetId": "vehicle-v1:rosso-coupe:paint:navy-stripes",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:rosso-coupe:paint:navy-stripes · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
         }
       ]
     },
@@ -31273,7 +31665,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:79"
+          "source": "src/assets/GameAssets.ts:88"
         },
         {
           "system": "Gameplay",
@@ -31299,7 +31691,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:80"
+          "source": "src/assets/GameAssets.ts:89"
         },
         {
           "system": "Gameplay",
@@ -31333,7 +31725,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:81"
+          "source": "src/assets/GameAssets.ts:90"
         },
         {
           "system": "Gameplay",
@@ -32205,7 +32597,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:117"
+          "source": "src/traffic/Vehicle.ts:118"
         }
       ]
     },
@@ -32937,7 +33329,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:98"
+          "source": "src/assets/GameAssets.ts:107"
         },
         {
           "system": "Gameplay",
@@ -32981,7 +33373,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:1071"
+          "source": "src/client/PlayerPredictor.ts:1074"
         },
         {
           "system": "Gameplay",
@@ -32993,7 +33385,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorMode.ts:92"
+          "source": "src/editor/EditorMode.ts:93"
         },
         {
           "system": "Gameplay",
@@ -33101,7 +33493,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:127"
+          "source": "src/shared/serialization.ts:129"
         },
         {
           "system": "Gameplay",
@@ -33155,7 +33547,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:104"
+          "source": "src/assets/GameAssets.ts:113"
         },
         {
           "system": "Gameplay",
@@ -33241,7 +33633,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:109"
+          "source": "src/assets/GameAssets.ts:118"
         },
         {
           "system": "Gameplay",
@@ -33331,7 +33723,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:110"
+          "source": "src/assets/GameAssets.ts:119"
         },
         {
           "system": "Editor",
@@ -33405,7 +33797,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:111"
+          "source": "src/assets/GameAssets.ts:120"
         },
         {
           "system": "Editor",
@@ -33447,7 +33839,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:112"
+          "source": "src/assets/GameAssets.ts:121"
         },
         {
           "system": "Editor",
@@ -33493,7 +33885,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:113"
+          "source": "src/assets/GameAssets.ts:122"
         },
         {
           "system": "Editor",
@@ -33539,7 +33931,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:114"
+          "source": "src/assets/GameAssets.ts:123"
         },
         {
           "system": "Editor",
@@ -33585,7 +33977,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:115"
+          "source": "src/assets/GameAssets.ts:124"
         },
         {
           "system": "Gameplay",
@@ -33639,7 +34031,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:116"
+          "source": "src/assets/GameAssets.ts:125"
         },
         {
           "system": "Editor",
@@ -33685,7 +34077,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:117"
+          "source": "src/assets/GameAssets.ts:126"
         },
         {
           "system": "Editor",
@@ -33827,7 +34219,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:118"
+          "source": "src/assets/GameAssets.ts:127"
         },
         {
           "system": "Editor",
@@ -33877,7 +34269,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:119"
+          "source": "src/assets/GameAssets.ts:128"
         },
         {
           "system": "Editor",
@@ -33907,7 +34299,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:120"
+          "source": "src/assets/GameAssets.ts:129"
         },
         {
           "system": "Editor",
@@ -33937,7 +34329,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:121"
+          "source": "src/assets/GameAssets.ts:130"
         },
         {
           "system": "Editor",
@@ -33967,7 +34359,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:122"
+          "source": "src/assets/GameAssets.ts:131"
         },
         {
           "system": "Editor",
@@ -33997,7 +34389,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:123"
+          "source": "src/assets/GameAssets.ts:132"
         },
         {
           "system": "Gameplay",
@@ -34095,7 +34487,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:124"
+          "source": "src/assets/GameAssets.ts:133"
         },
         {
           "system": "Editor",
@@ -34145,7 +34537,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:125"
+          "source": "src/assets/GameAssets.ts:134"
         },
         {
           "system": "Editor",
@@ -34695,7 +35087,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:139"
+          "source": "src/assets/GameAssets.ts:148"
         },
         {
           "system": "Gameplay",
@@ -34745,7 +35137,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:140"
+          "source": "src/assets/GameAssets.ts:149"
         },
         {
           "system": "Gameplay",
@@ -34787,7 +35179,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:141"
+          "source": "src/assets/GameAssets.ts:150"
         },
         {
           "system": "Gameplay",
@@ -34821,7 +35213,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:142"
+          "source": "src/assets/GameAssets.ts:151"
         },
         {
           "system": "Gameplay",
@@ -34859,7 +35251,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:143"
+          "source": "src/assets/GameAssets.ts:152"
         },
         {
           "system": "Gameplay",
@@ -34901,7 +35293,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:144"
+          "source": "src/assets/GameAssets.ts:153"
         },
         {
           "system": "Gameplay",
@@ -35015,7 +35407,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:145"
+          "source": "src/assets/GameAssets.ts:154"
         },
         {
           "system": "Gameplay",
@@ -35049,7 +35441,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:146"
+          "source": "src/assets/GameAssets.ts:155"
         },
         {
           "system": "Gameplay",
@@ -35107,7 +35499,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:147"
+          "source": "src/assets/GameAssets.ts:156"
         },
         {
           "system": "Gameplay",
@@ -35149,7 +35541,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:149"
+          "source": "src/assets/GameAssets.ts:158"
         },
         {
           "system": "Gameplay",
@@ -35183,7 +35575,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:150"
+          "source": "src/assets/GameAssets.ts:159"
         },
         {
           "system": "Gameplay",
@@ -35221,7 +35613,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:151"
+          "source": "src/assets/GameAssets.ts:160"
         },
         {
           "system": "Gameplay",
@@ -35259,7 +35651,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:152"
+          "source": "src/assets/GameAssets.ts:161"
         },
         {
           "system": "Gameplay",
@@ -35293,7 +35685,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:153"
+          "source": "src/assets/GameAssets.ts:162"
         },
         {
           "system": "Gameplay",
@@ -35331,7 +35723,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:154"
+          "source": "src/assets/GameAssets.ts:163"
         },
         {
           "system": "Gameplay",
@@ -35365,7 +35757,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:155"
+          "source": "src/assets/GameAssets.ts:164"
         },
         {
           "system": "Gameplay",
@@ -35399,7 +35791,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:156"
+          "source": "src/assets/GameAssets.ts:165"
         },
         {
           "system": "Gameplay",
@@ -35433,7 +35825,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:157"
+          "source": "src/assets/GameAssets.ts:166"
         },
         {
           "system": "Gameplay",
@@ -35467,7 +35859,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:158"
+          "source": "src/assets/GameAssets.ts:167"
         },
         {
           "system": "Gameplay",
@@ -35501,7 +35893,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/assets/GameAssets.ts:160"
+          "source": "src/assets/GameAssets.ts:169"
         },
         {
           "system": "Gameplay",

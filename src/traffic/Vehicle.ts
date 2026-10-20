@@ -3,6 +3,7 @@ import { BOAT_MODEL, BOAT_SIZE, BOAT_TYPE, BOAT_VIEWS } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
+import { validVehiclePaint, vehiclePaintSheet } from "./VehiclePaint.js";
 import meshBodies from "./vehicle-body-bounds.json" with { type: "json" };
 import bank from "./vehicles-v1.json" with { type: "json" };
 
@@ -156,6 +157,7 @@ export function applyVehicleFacing(
   entity.sortOffsetY = view.metadata.depthOffset - (c.offsetY - c.height / 2);
   entity.noShadow = true; // Native art contains the approved shadow.
   if (entity.sprite) {
+    entity.sprite.sheetKey = vehiclePaintSheet(entity.type, entity.paintSchemeId);
     entity.sprite.direction = direction;
     entity.sprite.frameRow = vehicleFrameDirection(entity.type, direction);
   }
@@ -184,13 +186,16 @@ export function createVehicle(
   wx: number,
   wy: number,
   direction = Direction.Right,
+  paintSchemeId?: string,
 ): Entity {
   const type = `vehicle-v1:${model}`,
     def = VEHICLE_DEFS[type];
   if (!def?.sprite) throw new Error(`Unknown vehicle ${model}`);
+  if (!validVehiclePaint(type, paintSchemeId)) throw new Error(`Invalid paint for ${model}`);
   const entity: Entity = {
     id: 0,
     type,
+    ...(paintSchemeId === undefined ? {} : { paintSchemeId }),
     position: { wx, wy },
     velocity: { vx: 0, vy: 0 },
     sprite: {

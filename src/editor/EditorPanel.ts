@@ -5,6 +5,7 @@ import { Direction } from "../entities/Entity.js";
 import { getPropSheetInfo, PROP_PALETTE } from "../entities/PropFactories.js";
 import { RoadType } from "../road/RoadType.js";
 import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
+import { originalPaintSwatches, vehiclePaintSchemes } from "../traffic/VehiclePaint.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import type { EditorModel } from "./EditorModel.js";
 import {
@@ -66,6 +67,8 @@ export class EditorPanel {
   private readonly structureRow: HTMLDivElement;
   private readonly entityRow: HTMLDivElement;
   private readonly vehicleRow: HTMLDivElement;
+  private readonly vehiclePaintRow: HTMLDivElement;
+  private vehiclePaintSelection = "";
   private readonly vehicleButtons: HTMLButtonElement[] = [];
   private readonly elevationRow: HTMLDivElement;
   private readonly elevationHeightButtons: HTMLButtonElement[] = [];
@@ -304,6 +307,7 @@ export class EditorPanel {
       button.setAttribute("aria-label", entry.label);
       button.onclick = () => {
         this.model.selectedVehicleType = entry.type;
+        this.model.selectedVehiclePaint = undefined;
         this.model.deleteMode = false;
         this.syncFromModel();
       };
@@ -312,6 +316,11 @@ export class EditorPanel {
     }
     this.vehicleRow.append(this.makeSeparator(), this.buildDeleteButton());
     this.paletteScroll.append(this.vehicleRow);
+    this.vehiclePaintRow = document.createElement("div");
+    this.vehiclePaintRow.style.cssText = `${ROW_STYLE}position: sticky; top: 0; z-index: 2; background: #20242b; border-bottom: 1px solid #667;`;
+    this.vehiclePaintRow.setAttribute("role", "group");
+    this.vehiclePaintRow.setAttribute("aria-label", "Vehicle paint");
+    this.paletteScroll.insertBefore(this.vehiclePaintRow, this.vehicleRow);
 
     // --- Props row ---
     this.propsRow = document.createElement("div");
@@ -998,6 +1007,49 @@ export class EditorPanel {
   }
 
   private updateEntitySelection(): void {
+    const paints = vehiclePaintSchemes(this.model.selectedVehicleType);
+    this.vehiclePaintRow.style.display =
+      this.model.editorTab === "vehicles" && !this.model.deleteMode && paints.length
+        ? "flex"
+        : "none";
+    const key = this.model.selectedVehicleType;
+    if (key !== this.vehiclePaintSelection) {
+      this.vehiclePaintSelection = key;
+      this.vehiclePaintRow.replaceChildren(this.makeLabel("Paint"));
+      for (const paint of [
+        {
+          id: "",
+          name: "Original",
+          swatches: originalPaintSwatches(this.model.selectedVehicleType),
+        },
+        ...paints,
+      ]) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.dataset.paintId = paint.id;
+        button.setAttribute("aria-label", `Paint: ${paint.name}`);
+        button.setAttribute(
+          "aria-pressed",
+          String((this.model.selectedVehiclePaint ?? "") === paint.id),
+        );
+        button.title = paint.name;
+        const colors = paint.swatches.map((rgb) => `rgb(${rgb.join(",")})`);
+        button.style.cssText = `${BTN_STYLE}min-width: 72px; background: linear-gradient(135deg, ${colors[0]} 50%, ${colors.at(-1)} 50%); text-shadow: 0 1px 3px #000, 0 0 4px #000;`;
+        button.style.borderColor =
+          (this.model.selectedVehiclePaint ?? "") === paint.id ? "#fff" : "#888";
+        button.textContent = paint.name;
+        button.onclick = () => {
+          this.model.selectedVehiclePaint = paint.id || undefined;
+          this.syncFromModel();
+        };
+        this.vehiclePaintRow.append(button);
+      }
+    }
+    for (const button of this.vehiclePaintRow.querySelectorAll("button")) {
+      const selected = button.dataset.paintId === (this.model.selectedVehiclePaint ?? "");
+      button.setAttribute("aria-pressed", String(selected));
+      button.style.borderColor = selected ? "#fff" : "#888";
+    }
     for (const [index, entry] of VEHICLE_PALETTE.entries()) {
       const button = this.vehicleButtons[index];
       if (button)

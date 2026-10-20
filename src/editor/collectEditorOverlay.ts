@@ -6,6 +6,7 @@ import type { Camera } from "../rendering/Camera.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RemoteEditorCursor } from "../shared/protocol.js";
 import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
+import { vehiclePaintSheet } from "../traffic/VehiclePaint.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { EditorMode } from "./EditorMode.js";
@@ -179,7 +180,7 @@ function collectCursor(
     );
     if (!model.deleteMode) {
       const d = out.next("sprite");
-      d.sheetKey = model.selectedVehicleType;
+      d.sheetKey = vehiclePaintSheet(model.selectedVehicleType, model.selectedVehiclePaint);
       d.srcX = 0;
       d.srcY = vehicleFrameDirection(model.selectedVehicleType, Direction.Right) * 224;
       d.srcWidth = 192;

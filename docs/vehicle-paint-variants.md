@@ -2,7 +2,10 @@
 
 The first paint study contains six Beetle colors, four pickup schemes (including
 two cream roofs), and four sports-coupe schemes (including navy/cream twin
-stripes). These are review assets; current game colors and vehicle IDs are unchanged.
+stripes). The owner authorized gameplay integration on 2026-10-20. These fourteen
+schemes are now registered for normal editor/traffic presentation on the same
+three vehicle types; vehicle IDs, geometry and handling stay unchanged. Frozen
+study pages retain their capture-time review/integration labels.
 
 Open the committed comparison at
 `public/demos/original-vehicles/paint-study-v1/index.html` through a static server.
@@ -86,18 +89,62 @@ ignored `data/`. Packed final scenes, atlases, masks, recipes, exact models and
 registered review evidence are committed. The frozen receipt is
 `art-source/vehicle-bake/paint-study/v1/retained.json`.
 
-## After appearance review
+## Runtime integration
 
-The next implementation slice is a shared per-vehicle `paintSchemeId`, saved and
-replicated with the car. Keep one vehicle definition per geometry; paint choices
-must not multiply the normal spawn catalog. The editor should offer swatches,
-and traffic should choose from family-specific weighted schemes once per car.
-Older saves should resolve to the original default scheme.
+Choose a model and paint under **Edit → Vehicles**, then place it normally. The
+swatch bar stays above the scrolling vehicle grid and preserves keyboard/controller
+focus when choosing a color. **Original** retains the original palette. Traffic
+inspection offers the same schemes in its Paint selector through the production
+Realm; it has no separate paint implementation.
 
-Use shared model geometry and cache generated textures/materials by model and
-scheme, not by entity. Each additional decoded 512² RGBA atlas costs 1 MiB
-before GPU bookkeeping; avoid eagerly loading every fleet color. Generate exact
-cardinal sprite fallbacks for each selected scheme so disabled, loading and
-failed meshes retain the same paint. Preserve identity through save/reload,
-multiplayer, pooling and game/lab presentation. These runtime behaviors are
-planned, not delivered by this appearance experiment.
+`src/traffic/vehicle-paints-v1.json` is the generated runtime catalog. It owns
+friendly labels, original/secondary swatches, atlas/sprite paths and traffic
+weights. `VehiclePaint.ts` validates each scheme against its model. A car's optional
+`paintSchemeId` belongs to authority and durable traffic records. Old records
+without that field keep the original paint. New ordinary traffic chooses once
+from a stable identity hash and family-specific weights; restoring or driving a
+car never rerolls it. Coupe stripes have weight 1 versus cherry/default 4;
+other colors favor practical/common paints while retaining every reviewed option.
+
+The entity baseline carries one optional dictionary byte (presence bit 17), and
+the delta carries a nullable byte at bit 18. Snapshot reuse, replicas and local
+mount prediction retain the choice; null restores the original. The append-only
+wire dictionary is in `VehiclePaint.ts`. Frame tag **0x05** requires matching
+updated client/server builds; pre-paint 0x04 frames are rejected explicitly.
+
+`GpuMeshBodies` keeps the existing one mesh asset per model. `VehiclePaintResources`
+loads each requested atlas lazily and publishes it at a frame boundary. Rendering
+temporarily binds that shared texture to the existing atlas-owned materials,
+then restores their original maps in `finally`. Geometry/material objects, wheel
+rigs and draw counts are shared across schemes; there is no per-car mesh clone.
+ResourceSlot cleanup discards late loads, and scene teardown disposes the cache.
+The catalog bounds it to fourteen possible additional textures, each 1 MiB decoded
+RGBA before GPU bookkeeping. These atlases are not eagerly loaded.
+
+Fourteen exact 192×896 cardinal sprite sheets join the normal startup sprite
+manifest (9.19 MiB total decoded RGBA). Each uses four 192×224 frames with unchanged
+ground registration (96,144). Canvas, disabled/loading/failed meshes, failed
+paint-atlas loads and the editor ghost use the selected scheme's sheet. They
+preserve the same color while mesh/atlas loading is pending or unavailable.
+
+Runtime assets are retained under `public/assets/vehicles/paint-v1/`. They are
+copied/packed from the frozen study without new rendering or resampling:
+
+```sh
+python scripts/vehicle-bake/export-paints.py --check
+python scripts/vehicle-bake/export-paints.py --output-root data/vehicle-bake/NEW-RUNTIME-REPLAY
+node scripts/vehicle-bake/paint-runtime-parity.mjs
+```
+
+The export receipt in `art-source/vehicle-bake/paint-runtime/v1/receipt.json`
+pins every consumed source, the exporter, generated catalog and normal PNGs.
+Normal builds use committed assets and never run these authoring commands.
+The parity runner builds only ignored QA files: three original runtime GLBs with
+fourteen external atlases reproduce all 672 reviewed RGBA frames exactly,
+including signed wheel phases. Every scheme keeps the same mesh/geometry/material
+objects and restores the original paint exactly after drawing.
+
+[156](tactical/156-vehicle-paint-gameplay.md) records the gameplay validation.
+The next expansion can assign owned paint regions to more original families and
+add schemes to this catalog. Do not recolor a family whose paint and protected
+materials share RGB values without first providing explicit UV ownership.

@@ -4,6 +4,7 @@ import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 /** Data-only optional presentation. SpriteItem remains the complete fallback. */
 export interface MeshInstance {
   readonly assetId: string;
+  readonly paintSchemeId?: string;
   readonly orientation: readonly [number, number, number, number];
   /** Conservative sphere, in world pixels, enclosing every supported pose. */
   readonly radius: number;

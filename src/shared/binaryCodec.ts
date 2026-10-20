@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x04 = FrameMessage (u16 entity types) (server→client)
+ *   0x05 = FrameMessage (u16 entity types, vehicle paint) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x80 = player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -12,6 +12,7 @@
 
 import { PLAYER_MODELS } from "../characters/PlayerModels.js";
 import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
+import { paintFromWire, paintWireIndex } from "../traffic/VehiclePaint.js";
 import type { EntityDelta } from "./entityDelta.js";
 import { ENTITY_TYPE_LIST, ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
 import type {
@@ -25,7 +26,8 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x04;
+const TAG_FRAME = 0x05;
+const TAG_PRE_PAINT_FRAME = 0x04;
 const TAG_LEGACY_FRAME = 0x01;
 const TAG_SYNC_CHUNKS = 0x03;
 const TAG_PLAYER_INPUT = 0x80;
@@ -55,6 +57,7 @@ const BIT_AIR_MOMENTUM_Y = 13;
 const BIT_JUMP_INPUT_STATE = 14;
 const BIT_EMERGENCY_STATE = 15;
 const BIT_VEHICLE_HEADING = 16;
+const BIT_VEHICLE_PAINT = 17;
 const BIT_AIR_MOMENTUM_X = 12;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
@@ -74,7 +77,7 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
   const view = new DataView(buf);
   const tag = view.getUint8(0);
   if (tag === TAG_FRAME) return decodeFrameMessage(view, buf);
-  if (tag === TAG_LEGACY_FRAME)
+  if (tag === TAG_LEGACY_FRAME || tag === TAG_PRE_PAINT_FRAME)
     throw new Error("Legacy entity frame: matching updated client and server builds are required");
   if (tag === TAG_SYNC_CHUNKS) return decodeSyncChunksMessage(view, buf);
   if (tag === TAG_JSON) return decodeJsonFallback(buf) as ServerMessage;
@@ -115,8 +118,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
 // Fixed header, velocity, full sprite/AI, booleans, eleven 32-bit fields and lights.
-const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
-const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 11 * 4 + 1;
+const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 11 * 4 + 2;
+const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 11 * 4 + 2;
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -269,6 +272,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.jumpInputState !== undefined) mask |= 1 << BIT_JUMP_INPUT_STATE;
   if (snap.emergencyState !== undefined) mask |= 1 << BIT_EMERGENCY_STATE;
   if (snap.vehicleHeading !== undefined) mask |= 1 << BIT_VEHICLE_HEADING;
+  if (snap.paintSchemeId !== undefined) mask |= 1 << BIT_VEHICLE_PAINT;
   view.setUint32(off, mask, true);
   off += 4;
 
@@ -343,6 +347,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     view.setFloat32(off, snap.vehicleHeading, true);
     off += 4;
   }
+  if (snap.paintSchemeId !== undefined) view.setUint8(off++, paintWireIndex(snap.paintSchemeId));
   return off;
 }
 
@@ -447,6 +452,7 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     snap.vehicleHeading = view.getFloat32(off, true);
     off += 4;
   }
+  if (mask & (1 << BIT_VEHICLE_PAINT)) snap.paintSchemeId = paintFromWire(view.getUint8(off++));
   return [snap, off];
 }
 
@@ -553,6 +559,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     changeMask |= 1 << 17;
     if (delta.vehicleHeading === null) nullMask |= 1 << 17;
   }
+  if (delta.paintSchemeId !== undefined) {
+    changeMask |= 1 << 18;
+    if (delta.paintSchemeId === null) nullMask |= 1 << 18;
+  }
   view.setUint32(off, changeMask, true);
   off += 4;
   view.setUint32(off, nullMask, true);
@@ -640,6 +650,8 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     view.setFloat32(off, delta.vehicleHeading as number, true);
     off += 4;
   }
+  if (changeMask & (1 << 18) && !(nullMask & (1 << 18)))
+    view.setUint8(off++, paintWireIndex(delta.paintSchemeId as string));
   return off;
 }
 
@@ -817,6 +829,8 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
       off += 4;
     }
   }
+  if (changeMask & (1 << 18))
+    delta.paintSchemeId = nullMask & (1 << 18) ? null : paintFromWire(view.getUint8(off++));
   return [delta, off];
 }
 

@@ -126,6 +126,8 @@ export interface Entity {
   emergencyState?: number;
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
+  /** Stable, model-scoped coachwork choice; absent preserves the original paint. */
+  paintSchemeId?: string;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

@@ -17,6 +17,7 @@ public/assets/models/vehicles/** -text whitespace=blank-at-eol,blank-at-eof,spac
 art-source/vehicle-style-study/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 public/demos/vehicle-style-study/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 art-source/vehicle-bake/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+src/traffic/vehicle-paints-v1.json -text
 public/demos/vehicle-bake/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/vehicle-style-study/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 scripts/vehicle-bake/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
