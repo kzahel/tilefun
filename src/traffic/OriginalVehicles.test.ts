@@ -7,6 +7,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { SPRITE_MANIFEST } from "../assets/GameAssets.js";
+import { RemoteStateView } from "../client/ClientStateView.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
@@ -19,8 +20,10 @@ import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
 import { EntityMeshPose } from "../rendering/EntityMeshPose.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { decodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
+import { World } from "../world/World.js";
 import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
 import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
@@ -432,6 +435,29 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       for (let i = 0; i < 240 && car.entity.position.wx <= 240; i++)
         await session.step({ ...idle, dx: 1 });
       expect(car.entity.position.wx).toBeGreaterThan(240);
+      const straight = car.entity.vehicleHeading ?? 0;
+      for (let i = 0; i < 240 && (car.entity.vehicleHeading ?? 0) > straight - 0.35; i++)
+        await session.step({ ...idle, dy: -1 });
+      expect(car.entity.vehicleHeading).toBeLessThan(straight - 0.3);
+      const forward = required(car.entity.vehicleHeading);
+      for (let i = 0; i < 240 && (car.entity.vehicleHeading ?? 0) < forward + 0.25; i++)
+        await session.step({ ...idle, dy: -1, reversing: true });
+      expect(car.entity.vehicleHeading).toBeGreaterThan(forward + 0.2);
+      for (let i = 0; i < 60; i++) await session.step(idle);
+      expect(Math.hypot(car.entity.velocity?.vx ?? 0, car.entity.velocity?.vy ?? 0)).toBe(0);
+      const stopped = { position: { ...car.entity.position }, heading: car.entity.vehicleHeading };
+      for (let i = 0; i < 30; i++) await session.step(idle);
+      expect(car.entity.position).toEqual(stopped.position);
+      expect(car.entity.vehicleHeading).toBe(stopped.heading);
+      const replica = new RemoteStateView(new World());
+      for (const packet of session.frames()) {
+        const message = decodeServerMessage(packet);
+        if (message.type === "frame" || message.type.startsWith("sync-"))
+          replica.applyMessage(message as Parameters<RemoteStateView["applyMessage"]>[0]);
+      }
+      expect(replica.entities.find((e) => e.id === car.entity.id)?.vehicleHeading).toBe(
+        stopped.heading,
+      );
       const position = { ...car.entity.position };
       await session.reload();
       const restored = required(
@@ -441,12 +467,23 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
       );
       expect(restored.entity.type).toBe(`vehicle-v1:${family.model}`);
       expect(restored.entity.position).toEqual(position);
+      expect(restored.entity.vehicleHeading).toBe(stopped.heading);
       expect(restored.placed).toBe(true);
       expect(session.player.player.parentId).toBe(restored.entity.id);
       session.realm.vehicles.exit(session.player);
       for (let i = 0; i < 60; i++) await session.step(idle);
       expect(restored.parked).toBe(true);
       expect(restored.entity.position).toEqual(position);
+      // Per-model roof height is a physical contract, independent of GPU mesh
+      // loading. Retain real browser roof/input representatives separately.
+      const rider = session.player.player;
+      rider.position = { ...restored.entity.position };
+      rider.wz = family.bounds[2] + 3;
+      rider.jumpZ = rider.wz;
+      rider.jumpVZ = -40;
+      session.realm.entityManager.spatialHash.update(rider);
+      for (let i = 0; i < 12; i++) await session.step(idle);
+      expect(rider.wz).toBe(family.bounds[2]);
       session.player.editorEnabled = true;
       session.realm.handleMessage(session.player.clientId, session.player, {
         type: "edit-delete-entity",

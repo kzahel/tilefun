@@ -59,3 +59,10 @@ and exact deleted/manual identities through reload. The four existing exhaustive
 suites pass 1,955 cases. Six distinct presentation/editor representatives plus
 scene switching pass 20 browser cases, replacing 461; every species still has
 real decoded animation pixel coverage in Animal Browser.
+
+Vehicles: extended the existing 33-family production lifecycle test with signed
+forward/reverse turns, stopped pose, binary heading and roof landing. All 33 pass.
+All meshes retain real browser decode/draw/failure coverage; mobile lifecycle and
+keyboard steering retain three representative families each (100/100 browsers
+across authored gameplay, vehicle steering and the additional car-control paths).
+Removed 150 repeated browser variants.

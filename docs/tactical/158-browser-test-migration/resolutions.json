@@ -403,21 +403,41 @@
       "source": "tests/authored-vehicle-gameplay.spec.ts:273",
       "cases": 66,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Extended the existing 33-family Realm lifecycle owner with signed forward/reverse turns, braking/stopped pose, binary replica heading, persisted heading and physical roof support. Retain three mobile editor/IndexedDB representatives across Canvas/GPU/failed mesh and three keyboard steering families; every actual model still decodes/draws and tests fetch failure in Chromium. car-steering retains additional relative-control-style/positive turn input paths.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/client/CarDrivingPrediction.test.ts"
+      ],
+      "browserCoverage": [
+        "tests/authored-vehicle-gameplay.spec.ts",
+        "tests/vehicle-steering.spec.ts",
+        "tests/car-steering.spec.ts"
+      ],
+      "validation": [
+        "Native 33-family lifecycle: 33 passed in 10.40s",
+        "Three browser suites: 100 passed in 6.7m"
+      ]
     },
     {
       "source": "tests/authored-vehicle-gameplay.spec.ts:339",
       "cases": 99,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Extended the existing 33-family Realm lifecycle owner with signed forward/reverse turns, braking/stopped pose, binary replica heading, persisted heading and physical roof support. Retain three mobile editor/IndexedDB representatives across Canvas/GPU/failed mesh and three keyboard steering families; every actual model still decodes/draws and tests fetch failure in Chromium. car-steering retains additional relative-control-style/positive turn input paths.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/client/CarDrivingPrediction.test.ts"
+      ],
+      "browserCoverage": [
+        "tests/authored-vehicle-gameplay.spec.ts",
+        "tests/vehicle-steering.spec.ts",
+        "tests/car-steering.spec.ts"
+      ],
+      "validation": [
+        "Native 33-family lifecycle: 33 passed in 10.40s",
+        "Three browser suites: 100 passed in 6.7m"
+      ]
     },
     {
       "source": "tests/authored-vehicle-review.spec.ts:51",
@@ -784,11 +804,21 @@
       "source": "tests/car-steering.spec.ts:6",
       "cases": 4,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Extended the existing 33-family Realm lifecycle owner with signed forward/reverse turns, braking/stopped pose, binary replica heading, persisted heading and physical roof support. Retain three mobile editor/IndexedDB representatives across Canvas/GPU/failed mesh and three keyboard steering families; every actual model still decodes/draws and tests fetch failure in Chromium. car-steering retains additional relative-control-style/positive turn input paths.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/client/CarDrivingPrediction.test.ts"
+      ],
+      "browserCoverage": [
+        "tests/authored-vehicle-gameplay.spec.ts",
+        "tests/vehicle-steering.spec.ts",
+        "tests/car-steering.spec.ts"
+      ],
+      "validation": [
+        "Native 33-family lifecycle: 33 passed in 10.40s",
+        "Three browser suites: 100 passed in 6.7m"
+      ]
     },
     {
       "source": "tests/character-gameplay.spec.ts:44",
@@ -5031,11 +5061,21 @@
       "source": "tests/vehicle-steering.spec.ts:8",
       "cases": 66,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Extended the existing 33-family Realm lifecycle owner with signed forward/reverse turns, braking/stopped pose, binary replica heading, persisted heading and physical roof support. Retain three mobile editor/IndexedDB representatives across Canvas/GPU/failed mesh and three keyboard steering families; every actual model still decodes/draws and tests fetch failure in Chromium. car-steering retains additional relative-control-style/positive turn input paths.",
+      "nativeCoverage": [
+        "src/traffic/OriginalVehicles.test.ts",
+        "src/client/CarDrivingPrediction.test.ts"
+      ],
+      "browserCoverage": [
+        "tests/authored-vehicle-gameplay.spec.ts",
+        "tests/vehicle-steering.spec.ts",
+        "tests/car-steering.spec.ts"
+      ],
+      "validation": [
+        "Native 33-family lifecycle: 33 passed in 10.40s",
+        "Three browser suites: 100 passed in 6.7m"
+      ]
     },
     {
       "source": "tests/vehicle-workshop.spec.ts:7",

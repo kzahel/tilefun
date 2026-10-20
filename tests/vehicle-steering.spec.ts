@@ -3,7 +3,11 @@ import { AUTONOMOUS_ORIGINAL_VEHICLES } from "../src/traffic/AutonomousOriginalV
 
 test.use({ channel: "chromium" });
 
-for (const family of AUTONOMOUS_ORIGINAL_VEHICLES) {
+// Per-model signed turning, braking, heading replication and restore are in
+// OriginalVehicles.test. Keep keyboard/presentation for small, long and work bodies.
+for (const family of AUTONOMOUS_ORIGINAL_VEHICLES.filter((f) =>
+  ["rosso-coupe", "school-bus", "forklift"].includes(f.model),
+)) {
   for (const backend of ["canvas", "gpu&meshes"]) {
     test(`${family.title} forward and reverse rolling turns preserve stopped heading (${backend})`, async ({
       page,
