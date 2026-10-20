@@ -45,3 +45,11 @@ retained two focused frog/robin client audio dispatch cases (both pass), with an
 actual keyboard-release ball-creation check in the frog case. The original audit's
 portable classification for these two complete bodies was too broad; their domain
 semantics moved but their browser audio wiring remains.
+
+Predators: reconciled exact interactive recipe feeding pose, frame, remaining prey
+and reload for all 48 species (48/48 Node). Added generated-home editor-command
+placement/deletion identity coverage (48/48 Node), sharing the bounded generator
+fixture with browser representatives. Retained eight land pause/reload cases, four
+lagoon cases and three actual editor/IndexedDB cases (15/15 browsers), replacing
+144 old cases. Native aquatic parity observes the hunter/fish contract; unrelated
+land wildlife can legitimately appear when new chunks become ready on reopening.

@@ -1,43 +1,22 @@
 import { expect, test } from "@playwright/test";
 import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
-import { NaturalLandscape } from "../src/generation/regional/NaturalLandscape.js";
-import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { PREDATOR_PROFILES, predatorType } from "../src/wildlife/Predator.js";
 
-test.use({ channel: "chromium" });
-// Query the production generator, rather than injecting scene-only animals.
-const nature = new NaturalLandscape(regionalWorld(2026), "thicket");
-const homes = new Map<string, { wx: number; wy: number; home: { wx: number; wy: number } }>();
-for (const p of PREDATOR_PROFILES) {
-  if (!p.expansion) continue;
-  const [x, y] = p.expansion.inspection;
-  // Rounded inspection tiles can lie across a chunk boundary from the actual home.
-  for (const dy of [0, -1, 1])
-    for (const dx of [0, -1, 1]) {
-      for (const a of nature.wildlife(Math.floor(x / 16) + dx, Math.floor(y / 16) + dy)) {
-        if (a.predator && a.type === predatorType(p.species) && !homes.has(a.type))
-          homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
-      }
-    }
-}
-for (let gy = -12; gy < 12 && homes.size < PREDATOR_PROFILES.length; gy++)
-  for (let gx = -12; gx < 12 && homes.size < PREDATOR_PROFILES.length; gx++)
-    for (let dy = 0; dy < 4; dy++)
-      for (let dx = 0; dx < 4; dx++)
-        for (const a of [
-          ...nature.predators(gx * 4 + dx, gy * 4 + dy),
-          ...nature.fiercePredators(gx * 4 + dx, gy * 4 + dy),
-        ])
-          if (a.predator && !homes.has(a.type))
-            homes.set(a.type, { wx: a.wx, wy: a.wy, home: a.predator.home });
+import { predatorHomes } from "../src/wildlife/PredatorHomes.fixture.js";
 
-for (const p of PREDATOR_PROFILES) {
+test.use({ channel: "chromium" });
+
+// Ground/fierce and deep-water editor/storage paths; all 48 command/identity
+// combinations are exercised in PredatorPlacement.test without Chromium.
+for (const p of PREDATOR_PROFILES.filter((p) =>
+  ["tiger", "giant-spider", "shark"].includes(p.species),
+)) {
   test(`${p.species} naturally spawns, supports editor placement and retains deletion on reopening`, async ({
     page,
   }) => {
     const type = predatorType(p.species),
-      spawn = homes.get(type);
+      spawn = predatorHomes.get(type);
     if (!spawn) throw Error(`No natural ${p.species} found in the bounded query`);
     const generation = createDescriptor("regional", 2026);
     const arrival = { x: (spawn.wx - 64) / 16, y: spawn.wy / 16, generation };

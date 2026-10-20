@@ -96,11 +96,20 @@
       "source": "tests/aquatic-hunters.spec.ts:9",
       "cases": 24,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Closed exact-recipe feeding clip/frame/position/remaining-prey reload parity for all 48 predators in Node, supplementing existing diet/ecology suites. Keep actual pause/first-client publication for ground, web, flight/swoop and fish-only/cross-predator lagoon paths.",
+      "nativeCoverage": [
+        "src/scenarios/PredatorRecipe.test.ts",
+        "src/wildlife/Predator.test.ts",
+        "src/wildlife/NaturalHunters.test.ts",
+        "src/wildlife/AquaticHunters.test.ts"
+      ],
+      "browserCoverage": ["tests/aquatic-hunters.spec.ts"],
+      "validation": [
+        "PredatorPlacement: 48 passed",
+        "PredatorRecipe: 48 passed",
+        "real browser predator/aquatic/editor representatives: 15 passed"
+      ]
     },
     {
       "source": "tests/art-workbench.spec.ts:8",
@@ -3171,11 +3180,20 @@
       "source": "tests/predator-gameplay.spec.ts:7",
       "cases": 72,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "Closed exact-recipe feeding clip/frame/position/remaining-prey reload parity for all 48 predators in Node, supplementing existing diet/ecology suites. Keep actual pause/first-client publication for ground, web, flight/swoop and fish-only/cross-predator lagoon paths.",
+      "nativeCoverage": [
+        "src/scenarios/PredatorRecipe.test.ts",
+        "src/wildlife/Predator.test.ts",
+        "src/wildlife/NaturalHunters.test.ts",
+        "src/wildlife/AquaticHunters.test.ts"
+      ],
+      "browserCoverage": ["tests/predator-gameplay.spec.ts"],
+      "validation": [
+        "PredatorPlacement: 48 passed",
+        "PredatorRecipe: 48 passed",
+        "real browser predator/aquatic/editor representatives: 15 passed"
+      ]
     },
     {
       "source": "tests/predator-origins.spec.ts:18",
@@ -3191,11 +3209,15 @@
       "source": "tests/predator-world.spec.ts:36",
       "cases": 48,
       "auditDisposition": "split",
-      "status": "pending",
-      "resolution": "",
-      "nativeCoverage": [],
-      "browserCoverage": [],
-      "validation": []
+      "status": "resolved",
+      "resolution": "All 48 generated homes now exercise production editor spawn/delete and exact identity persistence in Node. Keep three actual picker/coordinate/IDB flows: tiger, giant spider and shark.",
+      "nativeCoverage": ["src/wildlife/PredatorPlacement.test.ts"],
+      "browserCoverage": ["tests/predator-world.spec.ts"],
+      "validation": [
+        "PredatorPlacement: 48 passed",
+        "PredatorRecipe: 48 passed",
+        "real browser predator/aquatic/editor representatives: 15 passed"
+      ]
     },
     {
       "source": "tests/prediction-recovery.spec.ts:7",

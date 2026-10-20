@@ -4,7 +4,9 @@ import { faunaType } from "../src/wildlife/Fauna.js";
 import { predatorType } from "../src/wildlife/Predator.js";
 
 test.use({ channel: "chromium" });
-for (const p of AQUATIC_HUNTER_PROFILES)
+// Preserve fish-only and cross-predator lagoon browser publication paths;
+// all hunter recipes persist exact poses and survivors in PredatorRecipe.test.
+for (const p of AQUATIC_HUNTER_PROFILES.filter((p) => ["shark", "orca"].includes(p.species)))
   for (const renderer of ["canvas", "gpu"]) {
     test(`${p.species} hunts in its real lagoon and saves feeding phase (${renderer})`, async ({
       page,
