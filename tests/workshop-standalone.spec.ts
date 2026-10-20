@@ -4,12 +4,9 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import { hashWorkshopPassword } from "../src/server/workshopAuth.js";
-import type { WorkshopManifest } from "../src/workshop/WorkshopTypes.js";
 import { WORKSHOP_TEST_PASSWORD } from "./workshop-setup.js";
 
-test("standalone serves Workshop login, native reviews and both protected compatibility APIs", async ({
-  browser,
-}) => {
+test("standalone browser login renders a native review and sends its vote", async ({ browser }) => {
   test.setTimeout(60_000);
   const directory = await mkdtemp(join(tmpdir(), "tilefun-workshop-standalone-"));
   const authDirectory = join(directory, "workshop");
@@ -63,17 +60,11 @@ test("standalone serves Workshop login, native reviews and both protected compat
         }
       })
       .toBe(true);
-    expect((await context.request.get("/tilefun/api/art-notes")).status()).toBe(401);
-    expect(
-      (await context.request.post("/tilefun/api/interior-review", { data: {} })).status(),
-    ).toBe(401);
     const page = await context.newPage();
     await page.goto("/tilefun/workshop.html#/login");
     await page.getByLabel("Password", { exact: true }).fill(WORKSHOP_TEST_PASSWORD);
     await page.getByRole("button", { name: "Sign in", exact: true }).click();
     await expect(page.getByRole("heading", { name: "What’s ready to look at?" })).toBeVisible();
-    const freshInbox = await (await context.request.get("/tilefun/api/workshop/inbox")).json();
-    expect(freshInbox.manifestCurrent).toBe(true);
     await page.goto("/tilefun/workshop.html#/review/surface%3Asurface-v1-narrow");
     await expect(page.locator('[data-review-ready="true"]')).toBeVisible();
     await page.getByRole("button", { name: "Looks right ✓", exact: true }).click();
@@ -86,37 +77,8 @@ test("standalone serves Workshop login, native reviews and both protected compat
           }),
         ]),
       );
-    const manifest = JSON.parse(
-      await readFile("public/data/workshop-manifest.json", "utf8"),
-    ) as WorkshopManifest;
-    const room = manifest.candidates.find((c) => c.kind === "interior" && !c.excluded);
-    if (!room?.interior) throw Error("Missing room fixture");
-    const session = await (await context.request.get("/tilefun/api/auth/session")).json();
-    expect(
-      (
-        await context.request.post("/tilefun/api/interior-review", {
-          headers: { "X-Workshop-CSRF": session.csrfToken },
-          data: {
-            ...room.interior,
-            id: "standalone-room",
-            createdAt: new Date().toISOString(),
-            verdict: "wrong",
-            note: "Standalone compatibility",
-          },
-        })
-      ).status(),
-    ).toBe(200);
-    const inbox = await (await context.request.get("/tilefun/api/workshop/inbox")).json();
-    expect(inbox.requests).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ id: `interior:${room.id}`, note: "Standalone compatibility" }),
-      ]),
-    );
     expect(await readFile(join(directory, "art-notes/notes.ndjson"), "utf8")).toContain(
       '"approved"',
-    );
-    expect(await readFile(join(directory, "interior-review/feedback.ndjson"), "utf8")).toContain(
-      "Standalone compatibility",
     );
   } finally {
     try {

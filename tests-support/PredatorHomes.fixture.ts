@@ -1,6 +1,6 @@
-import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
-import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { PREDATOR_PROFILES, predatorType } from "./Predator.js";
+import { NaturalLandscape } from "../src/generation/regional/NaturalLandscape.js";
+import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { PREDATOR_PROFILES, predatorType } from "../src/wildlife/Predator.js";
 
 // Query the production generator, rather than injecting scene-only animals.
 const nature = new NaturalLandscape(regionalWorld(2026), "thicket");

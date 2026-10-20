@@ -66,3 +66,62 @@ All meshes retain real browser decode/draw/failure coverage; mobile lifecycle an
 keyboard steering retain three representative families each (100/100 browsers
 across authored gameplay, vehicle steering and the additional car-control paths).
 Removed 150 repeated browser variants.
+
+Portable validation/artifacts: all eight malformed family animation variants now
+exercise the production loader in Node (9 including valid catalog); two actual
+error/no-artwork UI paths remain. Historical model GLB/registration and all 45
+frozen fit-report rows run in Node (47 cases); all 46 distinct comparison pages
+retain browser decoding/layout. All eight manual prey-origin command pairs pass
+in Node; one actual Worker/IndexedDB/profile path remains. The combined focused
+browser run passed 102 cases. Existing native animal-work and furniture owners
+passed in the 58-case scenario run; removed the long animal-work completion wait
+and reduced 11 identical Circle controls to two representatives.
+
+All six screenshot-only captures now run explicitly with `npm run screenshots`
+(outside default testDir); all six passed. Default interiors retain their actual
+bitmap/layout/input assertions. Retired the misleading water-animation nonblack
+smoke after comparison with stronger real-frame movement checks. Consolidated
+repeated generic smoke cases around readiness/viewport pixels, real arrow/WASD
+movement/errors and F3 pixel changes. No screenshot golden references changed.
+
+Shared test-only fixtures live in tests-support, outside broad art-input hashing;
+adding a fixture must not invalidate production review identities.
+
+The exact route/grade/shopping owners pass 58 native tests. Removed browser waits
+for full inter-city arrival, bridge/tunnel endpoint reversal and post-reload
+shopping completion while retaining real input, saved roof ride, client pause,
+mesh/terrain readiness, controls and Worker cleanup. The focused integration run
+passed 35/35. The existing explorer production message handler now runs all four
+generators in Node (4/4); one compiled browser Worker still proves import/transfer.
+
+Standalone server API checks run with real HTTP/WS clients after the build via
+`npm run test:http-integration` (3/3). This lane has no browser fixture or auth
+bootstrap page. It checks the full current tool URL inventory, protected legacy
+APIs, CSRF, inbox and disk writes, and actual binary admin/guest acceptance. The
+browser retains login/render/vote, anonymous gate and real RTC/fragment bootstrap.
+
+All 403 baseline templates now have an execution decision. Retained mixed cases
+keep their actual browser composition; their native references are supplementary,
+not a claim that every assertion has exact native parity. In particular, React
+speech-input cases retain real focus, keyboard/pointer cancellation and unmount
+wiring even when recognition itself is doubled. Retaining those integrated paths
+does not require duplicating their assertions in a new controller abstraction.
+
+Current collection: **808 browser cases**, versus 1,724 baseline (916 fewer,
+53.1%). Six opt-in captures sit outside that inventory. One new browser case
+replaces the unasserted editor captures with an actual palette/mouse stroke →
+Worker authority → changed terrain replica check (passes). Complete final local
+and exact-SHA CI validation remains before completion.
+
+CI uses eight browser shards for the reduced suite. Registered candidate raster
+verification runs once in a separate required job instead of sixteen times.
+Retain per-shard builds: the local dist is approximately 604 MB, so distributing
+that artifact to every shard adds substantial transfer work to avoid a small
+build. Measure the final run rather than assuming case count predicts runtime.
+
+Full-unit follow-up: two baseline Workshop service timeouts reproduced. Tests now
+compute the real unchanged source digest once and reuse it across fixture/service
+restarts; all 13 focused cases pass without raising timeout limits. Updating test
+scripts also exposed eight historical vehicle receipts pinning package.json.
+Retained its exact original bytes in the existing replay-input catalog rather
+than rewrite receipts; all 66 mesh/receipt cases pass.

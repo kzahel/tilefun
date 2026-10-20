@@ -3,12 +3,12 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { createServer, request as httpRequest } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import type { WorkshopInbox, WorkshopManifest } from "../workshop/WorkshopTypes.js";
 import { ArtNoteStore } from "./artNotesHttp.js";
 import { InteriorReviewStore } from "./interiorReviewPlugin.js";
 import { hashWorkshopPassword, WorkshopAuth } from "./workshopAuth.js";
-import { workshopInputDigest } from "./workshopManifest.js";
+import * as workshopManifest from "./workshopManifest.js";
 import { WorkshopService } from "./workshopService.js";
 
 const manifest = JSON.parse(
@@ -16,7 +16,10 @@ const manifest = JSON.parse(
 ) as WorkshopManifest;
 const password = "workshop-test-password-only";
 const passwordHash = await hashWorkshopPassword(password),
-  digest = await workshopInputDigest();
+  digest = await workshopManifest.workshopInputDigest();
+// Fixtures vary the saved digest, never the source tree. Hash real inputs once;
+// repeated service/restart tests need the same value, not repeated whole-asset I/O.
+vi.spyOn(workshopManifest, "workshopInputDigest").mockResolvedValue(digest);
 const cleanups: (() => Promise<void>)[] = [];
 afterEach(async () => {
   for (const cleanup of cleanups.splice(0)) await cleanup();

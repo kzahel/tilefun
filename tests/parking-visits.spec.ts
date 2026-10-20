@@ -53,14 +53,12 @@ for (const renderer of ["canvas", "gpu"] as const) {
       JSON.parse((await canvas.getAttribute("data-parking")) ?? "null") as NonNullable<
         ScenarioResponse["parking"]
       > | null;
-    const observed = new Set<string>();
     await expect
       .poll(
         async () => {
           const p = await status();
           if (!p) return false;
           expect(p.maneuvers).toBeLessThanOrEqual(1);
-          for (const v of p.visits) observed.add(v.phase);
           return p.visits.some((v) => v.phase === "walking-to-shop");
         },
         { timeout: 60000, intervals: [200] },
@@ -81,28 +79,10 @@ for (const renderer of ["canvas", "gpu"] as const) {
     await settledParking(canvas);
     await canvas.screenshot({ path: `/tmp/tilefun-parking-visits-${renderer}.png` });
     await page.getByRole("button", { name: "Resume trips", exact: true }).click();
+    // ScenarioParking and CityParking step every phase, reload and exact departure.
     await expect
-      .poll(
-        async () => {
-          const p = await status();
-          if (!p) return 0;
-          expect(p.maneuvers).toBeLessThanOrEqual(1);
-          for (const v of p.visits) observed.add(v.phase);
-          return p.completed;
-        },
-        { timeout: 110000, intervals: [200] },
-      )
-      .toBeGreaterThan(0);
-    for (const phase of [
-      "arriving",
-      "parked",
-      "walking-to-shop",
-      "shopping",
-      "returning",
-      "ready-to-leave",
-      "leaving",
-    ])
-      expect(observed.has(phase)).toBe(true);
+      .poll(async () => JSON.parse((await canvas.getAttribute("data-clock")) ?? "{}").running)
+      .toBe(true);
     await page.getByRole("button", { name: "Pause trips", exact: true }).click();
     await page.setViewportSize({ width: 390, height: 844 });
     await expect(canvas).toBeVisible();
@@ -116,7 +96,7 @@ for (const renderer of ["canvas", "gpu"] as const) {
   });
 }
 
-test("generated city uses 3D cars by default and keeps one road visitor through reload and departure", async ({
+test("generated city uses 3D cars by default and keeps one road visitor through browser pause and reload", async ({
   page,
 }) => {
   test.setTimeout(210000);
@@ -167,9 +147,8 @@ test("generated city uses 3D cars by default and keeps one road visitor through 
   await canvas.screenshot({ path: "/tmp/tilefun-city-shopping-3d.png" });
   await page.getByRole("button", { name: "Resume trips", exact: true }).click();
   await expect
-    .poll(async () => (await status())?.completed, { timeout: 120000, intervals: [250] })
-    .toBe(1);
-  await expect.poll(async () => (await status())?.visits.length).toBe(0);
+    .poll(async () => JSON.parse((await canvas.getAttribute("data-clock")) ?? "{}").running)
+    .toBe(true);
   expect(errors).toEqual([]);
 });
 

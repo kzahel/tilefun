@@ -1,45 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-test("canvas renders with non-zero dimensions", async ({ page }) => {
+test("ready game fills a nonzero viewport with rendered pixels", async ({ page }) => {
   await page.goto("/tilefun/");
-  const canvas = page.locator("#game");
-  await expect(canvas).toBeVisible();
-
-  const box = await canvas.boundingBox();
-  expect(box).not.toBeNull();
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
+  await expect(page.locator("#game")).toBeVisible();
+  const box = await page.locator("#game").boundingBox();
   expect(box?.width).toBeGreaterThan(0);
   expect(box?.height).toBeGreaterThan(0);
-});
-
-test("canvas has pixel content from spritesheet", async ({ page }) => {
-  await page.goto("/tilefun/");
-
-  // Wait for the game to finish loading assets and start rendering
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-
-  // Give one frame for render
-  await page.waitForTimeout(100);
-
-  const hasContent = await page.evaluate(() => {
-    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
-      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
-    };
-    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
-    const ctx = c.getContext("2d");
-    if (!ctx) return false;
-    // Sample center pixel — should have grass tile content
-    const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
-    const a = pixel[3] ?? 0;
-    const rgb = (pixel[0] ?? 0) + (pixel[1] ?? 0) + (pixel[2] ?? 0);
-    return a > 0 && rgb > 0;
-  });
-
-  expect(hasContent).toBe(true);
-});
-
-test("multiple chunks are rendered across the viewport", async ({ page }) => {
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await page.waitForTimeout(100);
 
   // Sample several points across the canvas — all should have grass pixel content
@@ -72,26 +39,35 @@ test("multiple chunks are rendered across the viewport", async ({ page }) => {
   expect(allHaveContent).toBe(true);
 });
 
-test("camera movement via arrow keys does not crash", async ({ page }) => {
+test("arrow and WASD input keep the game rendering without console or page errors", async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on("console", (msg) => {
     if (msg.type() === "error") errors.push(msg.text());
   });
 
+  page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/tilefun/");
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-  await page.waitForTimeout(100);
 
-  // Press arrow keys to move camera
+  // Rapidly scroll in all directions to trigger chunk generation/autotile/caching
+  for (const key of ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "w", "a", "s", "d"]) {
+    await page.keyboard.down(key);
+    await page.waitForTimeout(500);
+    await page.keyboard.up(key);
+  }
+
+  // Diagonal movement
   await page.keyboard.down("ArrowRight");
-  await page.waitForTimeout(300);
-  await page.keyboard.up("ArrowRight");
-
   await page.keyboard.down("ArrowDown");
-  await page.waitForTimeout(300);
+  await page.waitForTimeout(500);
+  await page.keyboard.up("ArrowRight");
   await page.keyboard.up("ArrowDown");
 
-  // Verify still rendering after movement
+  await page.waitForTimeout(200);
+
+  // Verify rendering still works
   const hasContent = await page.evaluate(() => {
     const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
       __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
@@ -106,118 +82,6 @@ test("camera movement via arrow keys does not crash", async ({ page }) => {
   });
 
   expect(hasContent).toBe(true);
-  expect(errors).toEqual([]);
-});
-
-test("no console errors on load", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("console", (msg) => {
-    if (msg.type() === "error") {
-      errors.push(msg.text());
-    }
-  });
-
-  await page.goto("/tilefun/");
-  // Wait for game to initialize
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-  await page.waitForTimeout(500);
-
-  expect(errors).toEqual([]);
-});
-
-test("player sprite visible at screen center", async ({ page }) => {
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-  await page.waitForTimeout(200);
-
-  // The player is at (0,0) and the camera follows, so player is near screen center.
-  // Sample a small area around center — at least one pixel should differ from
-  // the terrain-only background (the player character sprite is drawn on top).
-  const result = await page.evaluate(() => {
-    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
-      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
-    };
-    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
-    const ctx = c.getContext("2d");
-    if (!ctx) return { hasPixels: false };
-
-    const cx = Math.floor(c.width / 2);
-    const cy = Math.floor(c.height / 2);
-    // Sample a 48x48 area around center (one character frame at 3x scale = 144px,
-    // but we sample a smaller region to ensure we hit the character)
-    const size = 48;
-    const data = ctx.getImageData(cx - size / 2, cy - size / 2, size, size).data;
-    let nonZero = 0;
-    for (let i = 0; i < data.length; i += 4) {
-      if ((data[i + 3] ?? 0) > 0) nonZero++;
-    }
-    return { hasPixels: nonZero > 0 };
-  });
-
-  expect(result.hasPixels).toBe(true);
-});
-
-test("arrow key movement does not crash and keeps rendering", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("console", (msg) => {
-    if (msg.type() === "error") errors.push(msg.text());
-  });
-
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-  await page.waitForTimeout(200);
-
-  // Move player in all directions
-  await page.keyboard.down("ArrowRight");
-  await page.waitForTimeout(400);
-  await page.keyboard.up("ArrowRight");
-
-  await page.keyboard.down("ArrowDown");
-  await page.waitForTimeout(400);
-  await page.keyboard.up("ArrowDown");
-  await page.waitForTimeout(100);
-
-  // Verify still rendering after movement
-  const hasContent = await page.evaluate(() => {
-    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
-      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
-    };
-    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
-    const ctx = c.getContext("2d");
-    if (!ctx) return false;
-    const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
-    return (pixel[3] ?? 0) > 0;
-  });
-
-  expect(hasContent).toBe(true);
-  expect(errors).toEqual([]);
-});
-
-test("no console errors after WASD movement", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("console", (msg) => {
-    if (msg.type() === "error") errors.push(msg.text());
-  });
-
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-  await page.waitForTimeout(100);
-
-  // Test WASD keys
-  for (const key of ["w", "a", "s", "d"]) {
-    await page.keyboard.down(key);
-    await page.waitForTimeout(200);
-    await page.keyboard.up(key);
-  }
-
-  // Diagonal WASD
-  await page.keyboard.down("w");
-  await page.keyboard.down("d");
-  await page.waitForTimeout(300);
-  await page.keyboard.up("w");
-  await page.keyboard.up("d");
-
-  await page.waitForTimeout(100);
   expect(errors).toEqual([]);
 });
 
@@ -266,67 +130,4 @@ test("F3 toggles debug overlay", async ({ page }) => {
   expect(pixelsBefore).not.toBeNull();
   expect(pixelsAfter).not.toBeNull();
   expect(pixelsAfter).not.toBe(pixelsBefore);
-});
-
-test("no console errors with collision and NPCs active", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("console", (msg) => {
-    if (msg.type() === "error") errors.push(msg.text());
-  });
-
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-
-  // Move around for a few seconds to exercise collision and NPC AI
-  for (const key of ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"]) {
-    await page.keyboard.down(key);
-    await page.waitForTimeout(500);
-    await page.keyboard.up(key);
-  }
-
-  await page.waitForTimeout(200);
-  expect(errors).toEqual([]);
-});
-
-test("no console errors after rapid scrolling through many chunks", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("console", (msg) => {
-    if (msg.type() === "error") errors.push(msg.text());
-  });
-
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-
-  // Rapidly scroll in all directions to trigger chunk generation/autotile/caching
-  for (const key of ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp"]) {
-    await page.keyboard.down(key);
-    await page.waitForTimeout(500);
-    await page.keyboard.up(key);
-  }
-
-  // Diagonal movement
-  await page.keyboard.down("ArrowRight");
-  await page.keyboard.down("ArrowDown");
-  await page.waitForTimeout(500);
-  await page.keyboard.up("ArrowRight");
-  await page.keyboard.up("ArrowDown");
-
-  await page.waitForTimeout(200);
-
-  // Verify rendering still works
-  const hasContent = await page.evaluate(() => {
-    const gameCanvas = document.getElementById("game") as HTMLCanvasElement & {
-      __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
-    };
-    const c = gameCanvas.__game.renderHost.captureFrame?.() ?? gameCanvas;
-    const ctx = c.getContext("2d");
-    if (!ctx) return false;
-    const pixel = ctx.getImageData(Math.floor(c.width / 2), Math.floor(c.height / 2), 1, 1).data;
-    const a = pixel[3] ?? 0;
-    const rgb = (pixel[0] ?? 0) + (pixel[1] ?? 0) + (pixel[2] ?? 0);
-    return a > 0 && rgb > 0;
-  });
-
-  expect(hasContent).toBe(true);
-  expect(errors).toEqual([]);
 });

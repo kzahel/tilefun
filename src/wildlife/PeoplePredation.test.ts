@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { MANUAL_PREY_PAIRS } from "../../tests-support/ManualPreyPairs.fixture.js";
 import { required } from "../art/ArtCatalog.js";
 import { applyPlayerModel, PLAYER_MODELS } from "../characters/PlayerModels.js";
 import { CHARACTER_FACTORIES } from "../characters/PromotedCharacters.js";
@@ -233,3 +234,51 @@ describe("NPC people as prey", () => {
     },
   );
 });
+
+it.each(MANUAL_PREY_PAIRS)(
+  "editor-placed $name is consumed once and stays absent after reload",
+  async ({ prey, hunter }) => {
+    const session = await ScenarioSession.create({
+      version: 1,
+      id: `manual-prey-${prey}`,
+      generation: FLAT_SCENARIO,
+      player: createPlayer(64, 64),
+      props: [],
+    });
+    try {
+      session.player.editorEnabled = true;
+      // Appearance selection is owned by GameServer; retain its real browser path.
+      applyPlayerModel(session.player.player, "person1");
+      for (const [type, x] of [
+        [hunter, 112],
+        [prey, 160],
+      ] as const)
+        session.realm.handleMessage(session.player.clientId, session.player, {
+          type: "edit-spawn",
+          entityType: type,
+          wx: x,
+          wy: 64,
+        });
+      session.player.editorEnabled = false;
+      await session.ready();
+      const population = () => session.realm.entityManager.entities;
+      const victim = required(population().find((e) => e.type === prey));
+      const id = durableId(victim);
+      expect(population().filter((e) => e.type === prey)).toHaveLength(1);
+      expect(population().filter((e) => e.type === hunter)).toHaveLength(1);
+      for (let tick = 0; tick < 1200 && population().some((e) => e.type === prey); tick++)
+        await session.step(idle);
+      expect(population().some((e) => e.type === prey)).toBe(false);
+      expect(population().filter((e) => e.type === hunter)).toHaveLength(1);
+      expect(session.realm.entityManager.wildlifeRespawns.size).toBe(0);
+      expect(session.player.player.type).toBe("player");
+      expect(session.player.player.playerModel).toBe("person1");
+      await session.reload();
+      expect(population().some((e) => durableId(e) === id || e.type === prey)).toBe(false);
+      expect(population().filter((e) => e.type === hunter)).toHaveLength(1);
+      expect(session.realm.entityManager.wildlifeRespawns.size).toBe(0);
+    } finally {
+      await session.close();
+    }
+  },
+);

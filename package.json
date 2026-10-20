@@ -16,7 +16,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts",
+    "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts && playwright test --config=playwright.capture.config.ts interiors.spec.ts",
     "assets:interiors": "node scripts/index-interiors-atlas.mjs",
     "assets:app-icons": "node scripts/build-app-icons.mjs",
     "assets:review": "tsx scripts/build-review-sprites.ts",
@@ -43,7 +43,9 @@
     "deck:install": "node scripts/steam-deck.mjs install",
     "deck:launch": "node scripts/steam-deck.mjs launch",
     "deck:status": "node scripts/steam-deck.mjs status",
-    "test:node-integration": "playwright test --config=playwright.node.config.ts"
+    "test:node-integration": "playwright test --config=playwright.node.config.ts",
+    "screenshots": "npm run build && playwright test --config=playwright.capture.config.ts",
+    "test:http-integration": "playwright test --config=playwright.http.config.ts"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

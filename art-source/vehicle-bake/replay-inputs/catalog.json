@@ -5,6 +5,11 @@
       "path": "src/rendering/CarMeshAsset.ts",
       "sha256": "b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c",
       "snapshot": "art-source/vehicle-bake/replay-inputs/b0c162b99d077e816761e58b0d48db84e53f1992f9dd82897eee7af940b5611c/src/rendering/CarMeshAsset.ts"
+    },
+    {
+      "path": "package.json",
+      "sha256": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45",
+      "snapshot": "art-source/vehicle-bake/replay-inputs/4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45/package.json"
     }
   ]
 }

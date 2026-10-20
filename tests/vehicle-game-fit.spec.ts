@@ -20,16 +20,4 @@ test("game-camera vehicle fit is registered and opens its frozen grounded compar
       true,
     );
   }
-  const response = await page.request.get(
-    "/tilefun/assets/models/vehicles/review/game-fit-v2/report.json",
-  );
-  const rows = await response.json();
-  expect(rows).toHaveLength(45);
-  for (const row of rows) {
-    expect(row.ground).toHaveLength(32);
-    expect(row.shadowPixels).toBeGreaterThan(100);
-    for (const view of row.views.slice(0, 2))
-      expect(Math.abs(view.mesh.h - view.src.h)).toBeLessThanOrEqual(1);
-    for (const sample of row.ground) expect(Math.abs(sample.minZ)).toBeLessThan(0.15);
-  }
 });

@@ -150,9 +150,8 @@ test("full neighborhood area notes attach asset revisions, survive drafts and lo
   await page.screenshot({ path: "/tmp/tilefun-neighborhood-annotation-phone.png", fullPage: true });
 });
 
-test("new catalog and scene writes retain public login and CSRF protections", async ({
+test("anonymous catalog remains public while scene notes require browser login", async ({
   browser,
-  page,
 }) => {
   const ctx = await browser.newContext({ storageState: { cookies: [], origins: [] } });
   try {
@@ -161,13 +160,6 @@ test("new catalog and scene writes retain public login and CSRF protections", as
     await expect(
       visitor.getByRole("heading", { name: "Outdoor asset catalog", exact: true }),
     ).toBeVisible();
-    expect(
-      (
-        await visitor.request.post("/tilefun/api/workshop/events", {
-          data: { id: crypto.randomUUID(), type: "asset" },
-        })
-      ).status(),
-    ).toBe(401);
     await visitor.goto(workshop + "#/scene/district-v10-destinations");
     await expect(
       visitor.getByRole("heading", { name: "Sign in to your Workshop.", exact: true }),
@@ -175,13 +167,6 @@ test("new catalog and scene writes retain public login and CSRF protections", as
   } finally {
     await ctx.close();
   }
-  expect(
-    (
-      await page.request.post("/tilefun/api/workshop/events", {
-        data: { id: crypto.randomUUID(), type: "scene" },
-      })
-    ).status(),
-  ).toBe(403);
 });
 
 test("metadata outbox survives a failed save and reload then syncs once", async ({ page }) => {

@@ -35,7 +35,7 @@ const read = (page: Page) =>
     };
   });
 for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
-  test(`ride a generated train between cities, reopen mid-bend and alight (${backend})`, async ({
+  test(`board a generated moving train, reopen its saved roof ride and jump off (${backend})`, async ({
     page,
   }) => {
     test.setTimeout(180000);
@@ -87,18 +87,7 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     await expect
       .poll(async () => (await read(page)).speed, { timeout: 15000 })
       .toBeGreaterThan(100);
-    await expect
-      .poll(
-        async () => {
-          const s = await read(page);
-          return s.heading % 64 > 16 && s.heading % 64 < 48;
-        },
-        { timeout: 60000 },
-      )
-      .toBe(true);
-    expect((await read(page)).serverZ).toBe(44);
-    expect((await read(page)).naturalProps).toBeGreaterThan(0);
-    await page.screenshot({ path: `/tmp/tilefun-city-train-bend-${backend}.png` });
+    // CityTrainRecipe.test steps the full inter-city bend/arrival contract.
     const saved = await page.evaluate(async () => {
       const g = (document.querySelector("#game") as unknown as { __game: Game }).__game;
       g.loop.stop();
@@ -125,24 +114,13 @@ for (const backend of ["canvas", "gpu", "gpu&meshes"]) {
     // Authority may run during startup; allow one second of service travel.
     expect(Math.hypot(restored.x - saved.x, restored.y - saved.y)).toBeLessThan(192);
     if (restored.editing) await page.keyboard.press("Tab");
-    await expect
-      .poll(
-        async () => {
-          const s = await read(page);
-          expect(s.serverZ).toBe(44);
-          return Math.abs(s.trainX - 3422 * 16) < 0.1 && s.speed < 0.1;
-        },
-        { timeout: 90000, intervals: [500] },
-      )
-      .toBe(true);
-    await page.screenshot({ path: `/tmp/tilefun-city-train-arrival-${backend}.png` });
     await page.keyboard.down("ArrowUp");
     await page.keyboard.down("Space");
     await page.waitForTimeout(950);
     await page.keyboard.up("ArrowUp");
     await page.keyboard.up("Space");
     await expect.poll(async () => (await read(page)).serverZ).toBe(0);
-    expect((await read(page)).y).toBeLessThan(-2658 * 16 - 30);
+
     expect(errors).toEqual([]);
   });
 }

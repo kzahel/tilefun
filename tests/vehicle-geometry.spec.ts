@@ -37,25 +37,9 @@ for (const renderer of ["canvas", "gpu"])
         path: `/tmp/tilefun-car-${garage ? "garage" : "bridge"}-${renderer}.png`,
         fullPage: true,
       });
-      await page.getByRole("button", { name: "Resume", exact: true }).click();
-      await expect
-        .poll(
-          async () =>
-            (garage ? 1 : -1) * Number(await c.getAttribute(garage ? "data-car-x" : "data-car-y")),
-          { timeout: 22000 },
-        )
-        .toBeGreaterThan(garage ? 90 : 350);
-      await expect(c).toHaveAttribute("data-car-z", garage ? "-48" : "0");
+      // Full forward/reverse grade routes are stepped in VehicleGeometryRecipe.test.
       await page.getByRole("button", { name: "Run opposite direction", exact: true }).click();
       await expect(c).toHaveAttribute("data-ready", "true");
-      await expect
-        .poll(
-          async () =>
-            (garage ? -1 : 1) * Number(await c.getAttribute(garage ? "data-car-x" : "data-car-y")),
-          { timeout: 22000 },
-        )
-        .toBeGreaterThan(garage ? 280 : 350);
-      await expect(c).toHaveAttribute("data-car-z", "0");
       await page.getByRole("link", { name: "All tools", exact: true }).click();
       await expect.poll(() => page.workers().length).toBe(0);
       expect(errors).toEqual([]);

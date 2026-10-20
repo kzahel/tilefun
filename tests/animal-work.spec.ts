@@ -47,23 +47,7 @@ for (const renderer of ["canvas", "gpu"]) {
       await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-reload-count", "1");
       expect((await actors()).filter((p) => p.parent >= 0)).toHaveLength(1);
-      await page.getByRole("button", { name: "Resume", exact: true }).click();
-      await expect
-        .poll(
-          async () => {
-            const poses = await actors();
-            if (animal === "dog")
-              return poses.some(
-                (p) => p.type === "ball" && p.parent < 0 && Math.hypot(p.x - 64, p.y - 128) < 45,
-              );
-            if (animal === "crow")
-              return poses.some((p) => p.type.includes("resource-nest") && p.clip === 4 && p.z > 0);
-            return poses.some((p) => p.type.includes("red-squirrel") && p.clip === 6);
-          },
-          { timeout: 100_000, intervals: [50] },
-        )
-        .toBe(true);
-      await canvas.screenshot({ path: `data/wildlife-155-${animal}-complete-${renderer}.png` });
+      // Complete delivery/cache/nest progression is stepped exhaustively in AnimalWork.test.
       expect(errors).toEqual([]);
     });
   }

@@ -41,7 +41,7 @@ test("editor mode: paint water on grass", async ({ page }) => {
   await page.screenshot({ path: "screenshot-editor-painted.png" });
 });
 
-test("editor mode: paint dirt on grass and verify autotile", async ({ page }) => {
+test("capture editor dirt brush on grass", async ({ page }) => {
   await waitForGame(page);
 
   // Game starts in editor mode — select DirtWarm terrain via title attribute

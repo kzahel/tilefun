@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
+import { predatorHomes } from "../../tests-support/PredatorHomes.fixture.js";
 import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { PREDATOR_PROFILES, predatorType } from "./Predator.js";
-import { predatorHomes } from "./PredatorHomes.fixture.js";
 
 it.each(PREDATOR_PROFILES)(
   "$species natural deletion and editor placement survive reopening",

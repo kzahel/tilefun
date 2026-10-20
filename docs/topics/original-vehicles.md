@@ -237,6 +237,9 @@ inheriting a four-wheel car template; the sidecar has a separate three-wheel lay
 - Inspect far-side tire coverage beneath real fender surfaces independently of
   nonintersection; the owner flagged exposed upper tire crowns in the first pilot.
 - Reusable recipes must run from retained inputs without ignored scratch state.
+  The pre-migration package.json is retained byte-for-byte in the replay-input
+  catalog when historical receipts pin it; current test scripts may evolve without
+  rewriting those receipts or changing approved models.
 - Human style review precedes expansion and any runtime activation.
 
 ## Queue and evidence

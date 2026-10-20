@@ -51,9 +51,10 @@ test("shared movement stops at furniture, supports precise placement, and saves 
   expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
 });
 
-test.describe("automatic walk for each furniture set", () => {
+test.describe("automatic walk and phone layout representatives", () => {
   test.describe.configure({ mode: "parallel" });
-  for (const scene of MOTION_SCENES)
+  // Exhaustive preset route/collider checks live in FurnitureMotion.test.
+  for (const scene of MOTION_SCENES.filter((scene) => ["wardrobe", "worktable"].includes(scene.id)))
     test(scene.name, async ({ page }) => {
       const errors: string[] = [];
       page.on("pageerror", (e) => errors.push(e.message));

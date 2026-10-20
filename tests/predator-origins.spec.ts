@@ -1,20 +1,11 @@
 import { expect, test } from "@playwright/test";
 import type { GameClient } from "../src/client/GameClient.js";
-import { DEER_TYPE } from "../src/wildlife/Deer.js";
-import { predatorType } from "../src/wildlife/Predator.js";
+import { MANUAL_PREY_PAIRS } from "../tests-support/ManualPreyPairs.fixture.js";
 
 test.use({ channel: "chromium" });
 
-for (const pair of [
-  { name: "deer", prey: DEER_TYPE, hunter: predatorType("tiger") },
-  { name: "wolf", prey: predatorType("wolf"), hunter: predatorType("t-rex") },
-  { name: "brown bear", prey: predatorType("brown-bear"), hunter: predatorType("t-rex") },
-  { name: "street person", prey: "person1", hunter: predatorType("tiger") },
-  { name: "another street person", prey: "person20", hunter: predatorType("lion") },
-  { name: "Trail Explorer NPC", prey: "character-person-v1", hunter: predatorType("small-dragon") },
-  { name: "indoor resident", prey: "indoor-reader", hunter: predatorType("brown-bear") },
-  { name: "person hunted by a dinosaur", prey: "person10", hunter: predatorType("t-rex") },
-])
+// Actual Worker/IndexedDB provenance boundary; the full pairing matrix runs in Node.
+for (const pair of MANUAL_PREY_PAIRS.filter((p) => p.prey === "person1"))
   test(`a player-placed ${pair.name} is eaten without replacement in the real Worker world and stays gone on reload`, async ({
     page,
   }) => {

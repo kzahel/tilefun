@@ -241,9 +241,7 @@ test("real tile zoom uses bounded shared rendering, configurable settings, and r
   expect(errors).toEqual([]);
 });
 
-test("actual explorer worker realizes exactly the game producer buffers for every generator", async ({
-  page,
-}) => {
+test("compiled explorer Worker transfers the exact regional producer buffers", async ({ page }) => {
   const { createDescriptor } = await import("../src/generation/GenerationDescriptor.js");
   const { createGenerator } = await import("../src/generation/Generator.js");
   const { World } = await import("../src/world/World.js");
@@ -251,7 +249,8 @@ test("actual explorer worker realizes exactly the game producer buffers for ever
   await expect(page.locator("#app")).toHaveAttribute("data-settled", "true");
   const workerUrl = page.workers()[0]?.url();
   if (!workerUrl) throw new Error("Explorer worker missing");
-  for (const choice of ["classic", "island", "flat", "regional"] as const) {
+  // Exhaustive choices exercise this same production handler in RegionalWorker.test.
+  for (const choice of ["regional"] as const) {
     const generation = createDescriptor(choice, 2026);
     const buffers = await page.evaluate(
       async ({ workerUrl, generation }) => {

@@ -43,18 +43,7 @@ test("game sidebar opens the central index and each listed destination is served
   await expect(
     page.getByRole("heading", { name: "Authored train models", exact: true }),
   ).toBeVisible();
-  const destinations = await page
-    .locator("main a[href]")
-    .evaluateAll((links) => [
-      ...new Set(
-        links.map((link) => (link as HTMLAnchorElement).href).filter((url) => !url.includes("#")),
-      ),
-    ]);
-  for (const url of destinations) {
-    const response = await page.request.get(url);
-    expect(response.ok(), url).toBe(true);
-    expect(response.headers()["content-type"], url).toContain("text/html");
-  }
+  // Exhaustive destination HTTP conformance runs without Chromium in tests-http.
   await page.screenshot({ path: "/tmp/tilefun-tools-index-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);

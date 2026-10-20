@@ -3,7 +3,7 @@ import type { GameClient } from "../src/client/GameClient.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { PREDATOR_PROFILES, predatorType } from "../src/wildlife/Predator.js";
 
-import { predatorHomes } from "../src/wildlife/PredatorHomes.fixture.js";
+import { predatorHomes } from "../tests-support/PredatorHomes.fixture.js";
 
 test.use({ channel: "chromium" });
 

@@ -1,25 +1,7 @@
-import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
 const CAPTURE_DIR = "test-results/interiors";
-const SOURCE_ATLAS_DIR = "assets/interiors/1_Interiors/16x16/Room_Builder_subfiles";
-const SOURCE_ATLAS_FILES = [
-  "Room_Builder_borders_16x16.png",
-  "Room_Builder_Baseboards_16x16.png",
-  "Room_Builder_3d_walls_16x16.png",
-];
-
-test("capture source atlas geometry grids", () => {
-  test.skip(
-    SOURCE_ATLAS_FILES.some((file) => !fs.existsSync(`${SOURCE_ATLAS_DIR}/${file}`)),
-    "Source atlas PNGs are local assets and are not included in the repository",
-  );
-  execFileSync("node", ["scripts/capture-interiors-source-grids.mjs"], {
-    stdio: "inherit",
-  });
-});
-
 async function waitForInteriorsPanel(page: import("@playwright/test").Page, query: string) {
   fs.mkdirSync(CAPTURE_DIR, { recursive: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -108,17 +90,6 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
     `${CAPTURE_DIR}/generic-home-1-derived-variation.png`,
     Buffer.from(variantPng.split(",")[1], "base64"),
   );
-});
-
-test("capture room-builder wall candidates", async ({ page }) => {
-  await waitForInteriorsPanel(page, "interiorSource=room_builder_tile&interiorCategory=walls");
-
-  await page.getByTestId("interior-catalog").screenshot({
-    path: `${CAPTURE_DIR}/room-builder-walls-panel.png`,
-  });
-  await page.getByTestId("interior-entry-grid").screenshot({
-    path: `${CAPTURE_DIR}/room-builder-walls-grid.png`,
-  });
 });
 
 test("capture apartments generated from editable floor plans", async ({ page }) => {

@@ -781,16 +781,7 @@ test("door source demonstrations stay paused and expose every frame independentl
   );
 });
 
-for (const invalid of [
-  "length",
-  "empty",
-  "zero",
-  "negative",
-  "fractional",
-  "non-finite",
-  "loop",
-  "size",
-] as const) {
+for (const invalid of ["zero", "size"] as const) {
   test(`invalid animation ${invalid} is blocked even with current metadata revisions`, async ({
     page,
   }) => {

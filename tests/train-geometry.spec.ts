@@ -47,25 +47,11 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect(c).toHaveAttribute("data-carriage-heights", last);
     await page.screenshot({ path: `/tmp/tilefun-train-route-${renderer}.png`, fullPage: true });
     await page.getByLabel("Train camera").selectOption("follow");
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect(c).toHaveAttribute("data-carriage-heights", "-96.00,-96.00,-96.00", {
-      timeout: 23000,
-    });
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await page.screenshot({ path: `/tmp/tilefun-train-tunnel-${renderer}.png`, fullPage: true });
+    // Full tunnel/bridge/reversal progression is stepped in TrainGeometryRecipe.test.
     await page.getByLabel("Visible surfaces").selectOption("all");
     await expect(c).toHaveAttribute("data-visibility", "all");
-    await page.screenshot({
-      path: `/tmp/tilefun-train-tunnel-covered-${renderer}.png`,
-      fullPage: true,
-    });
-    await expect(c).toHaveAttribute("data-carriage-heights", "-96.00,-96.00,-96.00");
+    await expect(c).toHaveAttribute("data-carriage-heights", last);
     await page.getByLabel("Visible surfaces").selectOption("auto");
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect
-      .poll(async () => Number(await c.getAttribute("data-train-vx")), { timeout: 15000 })
-      .toBeLessThan(0);
-    await expect(c).toHaveAttribute("data-carriage-heights", "0.00,0.00,0.00", { timeout: 25000 });
     await page.getByRole("button", { name: "Run opposite direction", exact: true }).click();
     await expect(c).toHaveAttribute("data-ready", "true");
     await expect(c).toHaveAttribute("data-carriage-count", "3");
