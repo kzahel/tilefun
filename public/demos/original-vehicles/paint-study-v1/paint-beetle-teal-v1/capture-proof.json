@@ -1,0 +1,550 @@
+{
+  "status": "passed",
+  "glbSha256": "6e6f0546ed4db3d85b04eacacb0467b5e3c9f7da882b58248b18107d1b5494bd",
+  "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "browser": "153.0.8010.12",
+  "browserChannel": "bundled full Chromium",
+  "views": [
+    {
+      "mode": "study",
+      "yaw": 0,
+      "distance": 0,
+      "name": "study-0",
+      "opaquePixels": 2646,
+      "changedPaintPixels": 1578,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 22.5,
+      "distance": 0,
+      "name": "study-1",
+      "opaquePixels": 2579,
+      "changedPaintPixels": 1586,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": 0,
+      "name": "study-2",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1552,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 67.5,
+      "distance": 0,
+      "name": "study-3",
+      "opaquePixels": 2312,
+      "changedPaintPixels": 1494,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 90,
+      "distance": 0,
+      "name": "study-4",
+      "opaquePixels": 2270,
+      "changedPaintPixels": 1468,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 112.5,
+      "distance": 0,
+      "name": "study-5",
+      "opaquePixels": 2312,
+      "changedPaintPixels": 1494,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 135,
+      "distance": 0,
+      "name": "study-6",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1552,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 157.5,
+      "distance": 0,
+      "name": "study-7",
+      "opaquePixels": 2579,
+      "changedPaintPixels": 1586,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 180,
+      "distance": 0,
+      "name": "study-8",
+      "opaquePixels": 2646,
+      "changedPaintPixels": 1578,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 202.5,
+      "distance": 0,
+      "name": "study-9",
+      "opaquePixels": 2590,
+      "changedPaintPixels": 1589,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 225,
+      "distance": 0,
+      "name": "study-10",
+      "opaquePixels": 2468,
+      "changedPaintPixels": 1592,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 247.5,
+      "distance": 0,
+      "name": "study-11",
+      "opaquePixels": 2325,
+      "changedPaintPixels": 1523,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 270,
+      "distance": 0,
+      "name": "study-12",
+      "opaquePixels": 2284,
+      "changedPaintPixels": 1498,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 292.5,
+      "distance": 0,
+      "name": "study-13",
+      "opaquePixels": 2325,
+      "changedPaintPixels": 1523,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 315,
+      "distance": 0,
+      "name": "study-14",
+      "opaquePixels": 2468,
+      "changedPaintPixels": 1592,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 337.5,
+      "distance": 0,
+      "name": "study-15",
+      "opaquePixels": 2590,
+      "changedPaintPixels": 1589,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": 0,
+      "name": "study-roll-0",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1552,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": 5.327048412608781,
+      "name": "study-roll-1",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1553,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": 10.654096825217563,
+      "name": "study-roll-2",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1552,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": 15.981145237826343,
+      "name": "study-roll-3",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1553,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": -21.308193650435125,
+      "name": "study-roll-4",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1552,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": -15.981145237826343,
+      "name": "study-roll-5",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1553,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": -10.654096825217563,
+      "name": "study-roll-6",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1552,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "study",
+      "yaw": 45,
+      "distance": -5.327048412608781,
+      "name": "study-roll-7",
+      "opaquePixels": 2446,
+      "changedPaintPixels": 1553,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 0,
+      "distance": 0,
+      "name": "engine-0",
+      "opaquePixels": 3473,
+      "changedPaintPixels": 2106,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 22.5,
+      "distance": 0,
+      "name": "engine-1",
+      "opaquePixels": 3417,
+      "changedPaintPixels": 2094,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": 0,
+      "name": "engine-2",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 67.5,
+      "distance": 0,
+      "name": "engine-3",
+      "opaquePixels": 2953,
+      "changedPaintPixels": 1943,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 90,
+      "distance": 0,
+      "name": "engine-4",
+      "opaquePixels": 2926,
+      "changedPaintPixels": 1884,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 112.5,
+      "distance": 0,
+      "name": "engine-5",
+      "opaquePixels": 2953,
+      "changedPaintPixels": 1943,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 135,
+      "distance": 0,
+      "name": "engine-6",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 157.5,
+      "distance": 0,
+      "name": "engine-7",
+      "opaquePixels": 3417,
+      "changedPaintPixels": 2094,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 180,
+      "distance": 0,
+      "name": "engine-8",
+      "opaquePixels": 3473,
+      "changedPaintPixels": 2106,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 202.5,
+      "distance": 0,
+      "name": "engine-9",
+      "opaquePixels": 3432,
+      "changedPaintPixels": 2104,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 225,
+      "distance": 0,
+      "name": "engine-10",
+      "opaquePixels": 3249,
+      "changedPaintPixels": 2083,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 247.5,
+      "distance": 0,
+      "name": "engine-11",
+      "opaquePixels": 2966,
+      "changedPaintPixels": 1994,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 270,
+      "distance": 0,
+      "name": "engine-12",
+      "opaquePixels": 2936,
+      "changedPaintPixels": 1938,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 292.5,
+      "distance": 0,
+      "name": "engine-13",
+      "opaquePixels": 2966,
+      "changedPaintPixels": 1994,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 315,
+      "distance": 0,
+      "name": "engine-14",
+      "opaquePixels": 3249,
+      "changedPaintPixels": 2083,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 337.5,
+      "distance": 0,
+      "name": "engine-15",
+      "opaquePixels": 3433,
+      "changedPaintPixels": 2105,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": 0,
+      "name": "engine-roll-0",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": 5.327048412608781,
+      "name": "engine-roll-1",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": 10.654096825217563,
+      "name": "engine-roll-2",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": 15.981145237826343,
+      "name": "engine-roll-3",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": -21.308193650435125,
+      "name": "engine-roll-4",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": -15.981145237826343,
+      "name": "engine-roll-5",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": -10.654096825217563,
+      "name": "engine-roll-6",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    },
+    {
+      "mode": "engine",
+      "yaw": 45,
+      "distance": -5.327048412608781,
+      "name": "engine-roll-7",
+      "opaquePixels": 3225,
+      "changedPaintPixels": 2053,
+      "alphaExact": true,
+      "nonPaintExact": true
+    }
+  ],
+  "rig": {
+    "wheels": [
+      {
+        "id": "FL",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      },
+      {
+        "id": "FR",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      },
+      {
+        "id": "RL",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      },
+      {
+        "id": "RR",
+        "radius": 6.782608695652176,
+        "quarterTurn": true,
+        "pivotFixed": true,
+        "independent": true,
+        "reverseQuarterTurn": true,
+        "absoluteReset": true
+      }
+    ],
+    "forwardReverseAbsoluteReset": true
+  },
+  "stats": {
+    "triangles": 2554,
+    "vertices": 5462,
+    "primitives": 5,
+    "sourceMeshes": 5,
+    "drawMeshes": 5,
+    "bodyDrawCalls": 5
+  },
+  "desktop": [
+    1200,
+    1050
+  ],
+  "mobile": [
+    390,
+    844
+  ],
+  "allScalesNoOverflow": true,
+  "errors": [],
+  "humanApproval": false,
+  "normalGameplay": false
+}

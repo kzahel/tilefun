@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-pickup-cherry-v1",
+  "family": "pickup",
+  "paintSchemeId": "cherry",
+  "base": "public/assets/models/vehicles/pickup-v1.glb",
+  "baseSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "baseBlend": "art-source/vehicle-bake/pickup/v1/car.blend",
+  "baseBlendSha256": "d3ffa7c3aa53d7e4c801576d1e8094e20e236f0a405dc6aceb224139eed18df3",
+  "palette": {
+    "id": "cherry",
+    "name": "Farm red",
+    "primary": "cherry"
+  },
+  "roleMask": "../pickup-roles.png",
+  "atlasSha256": "10daaf4384d39485c8cdc83c4b3943f567cc2b5dcc8d5f9d57c1eb81dbd1c2cd",
+  "glbSha256": "4aa18f92e5852e052d855bd3bda0385b7289d3c911c797d511bdad86f9e62819",
+  "paintTexels": {
+    "primary": 186235,
+    "secondary": 0,
+    "protected": 75909
+  },
+  "geometryProof": {
+    "originalBinarySha256": "f829419e9e2e8b26c34cb3ea0d8e487aa6bd6b179aaa4ecd600bed9e671e151d",
+    "originalBinaryBytes": 201340,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

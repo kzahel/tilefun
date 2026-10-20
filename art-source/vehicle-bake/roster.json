@@ -405,6 +405,114 @@
       "authorization": "2026-10-19 owner authorized autonomous authoring and gameplay integration within the eight-hour run; per-vehicle appearance pause waived",
       "next": "Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated.",
       "prerequisite": "docs/topics/vehicle-riders.md"
+    },
+    {
+      "id": "finned-coupe",
+      "name": "1950s finned coupe",
+      "family": "Tailfin coupe",
+      "priority": 41,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Suggested next pick 1 of 3; agree an authoring batch before production."
+    },
+    {
+      "id": "wedge-supercar",
+      "name": "Wedge-shaped supercar",
+      "family": "Wedge sports car",
+      "priority": 42,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Suggested next pick 2 of 3; agree an authoring batch before production."
+    },
+    {
+      "id": "double-decker-bus",
+      "name": "Double-decker bus",
+      "family": "Two-level bus",
+      "priority": 43,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Suggested next pick 3 of 3; agree an authoring batch before production."
+    },
+    {
+      "id": "lowrider",
+      "name": "Lowrider",
+      "family": "Custom low coupe",
+      "priority": 44,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch and appearance direction."
+    },
+    {
+      "id": "bubble-canopy-concept",
+      "name": "Bubble-canopy concept car",
+      "family": "Retro-futuristic concept",
+      "priority": 45,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch and appearance direction."
+    },
+    {
+      "id": "three-wheel-delivery-van",
+      "name": "Enclosed three-wheel delivery van",
+      "family": "Three-wheel utility vehicle",
+      "priority": 46,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch; qualify the three-wheel enclosed vehicle rig."
+    },
+    {
+      "id": "desert-trophy-truck",
+      "name": "Desert trophy truck",
+      "family": "Off-road racing truck",
+      "priority": 47,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch and appearance direction."
+    },
+    {
+      "id": "armored-bank-truck",
+      "name": "Armored bank truck",
+      "family": "Armored utility truck",
+      "priority": 48,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch and appearance direction."
+    },
+    {
+      "id": "steam-car",
+      "name": "Vintage steam-powered car",
+      "family": "Steam carriage",
+      "priority": 49,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch and appearance direction."
+    },
+    {
+      "id": "car-transporter",
+      "name": "Car transporter carrying miniature existing cars",
+      "family": "Vehicle carrier",
+      "priority": 50,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch; plan miniature cargo reuse, total mesh budget and road clearance."
+    },
+    {
+      "id": "ice-resurfacer",
+      "name": "Ice resurfacer",
+      "family": "Ice maintenance vehicle",
+      "priority": 51,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch and appearance direction."
+    },
+    {
+      "id": "duck-advertising-van",
+      "name": "Giant duck advertising van",
+      "family": "Novelty advertising vehicle",
+      "priority": 52,
+      "status": "idea",
+      "authorization": "2026-10-20 owner requested adding this idea to the backlog",
+      "next": "Choose an authoring batch; plan the giant duck silhouette and vehicle clearance."
     }
   ]
 }

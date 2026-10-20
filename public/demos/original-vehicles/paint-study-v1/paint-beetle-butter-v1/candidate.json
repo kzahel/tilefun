@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-beetle-butter-v1",
+      "name": "Beetle \u00b7 Butter yellow",
+      "title": "Paint study \u00b7 Beetle \u00b7 Butter yellow",
+      "nativeSize": 128,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2554,
+        "vertices": 5462,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 201220,
+        "sha256": "9ff746da553798640357fef13ab809fb74716fd708e47fbdea74ed2b97f82fc8",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

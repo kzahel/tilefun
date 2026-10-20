@@ -1,0 +1,320 @@
+{
+  "schema": "tilefun-vehicle-paint-study-v1",
+  "candidates": [
+    {
+      "id": "paint-beetle-butter-v1",
+      "family": "beetle",
+      "scheme": {
+        "id": "butter",
+        "name": "Butter yellow",
+        "primary": "butter",
+        "swatches": [
+          [
+            241,
+            211,
+            139
+          ]
+        ]
+      },
+      "name": "Beetle \u00b7 Butter yellow",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-beetle-butter-v1",
+      "glbSha256": "9ff746da553798640357fef13ab809fb74716fd708e47fbdea74ed2b97f82fc8",
+      "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "id": "paint-beetle-cream-v1",
+      "family": "beetle",
+      "scheme": {
+        "id": "cream",
+        "name": "Warm cream",
+        "primary": "cream",
+        "swatches": [
+          [
+            231,
+            216,
+            185
+          ]
+        ]
+      },
+      "name": "Beetle \u00b7 Warm cream",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-beetle-cream-v1",
+      "glbSha256": "9c2e12c3a4855906d5771aa18a507e81cc5368d978315a42bb8ab8170a8330ae",
+      "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "id": "paint-beetle-cherry-v1",
+      "family": "beetle",
+      "scheme": {
+        "id": "cherry",
+        "name": "Cherry red",
+        "primary": "cherry",
+        "swatches": [
+          [
+            208,
+            76,
+            88
+          ]
+        ]
+      },
+      "name": "Beetle \u00b7 Cherry red",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1",
+      "glbSha256": "c8c85cfb76739ad78b4668b65cd6c92bde6e5e0ac162d87e329e2bb46a107437",
+      "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "id": "paint-beetle-teal-v1",
+      "family": "beetle",
+      "scheme": {
+        "id": "teal",
+        "name": "Lagoon teal",
+        "primary": "teal",
+        "swatches": [
+          [
+            67,
+            166,
+            173
+          ]
+        ]
+      },
+      "name": "Beetle \u00b7 Lagoon teal",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-beetle-teal-v1",
+      "glbSha256": "6e6f0546ed4db3d85b04eacacb0467b5e3c9f7da882b58248b18107d1b5494bd",
+      "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "id": "paint-beetle-powder-blue-v1",
+      "family": "beetle",
+      "scheme": {
+        "id": "powder-blue",
+        "name": "Powder blue",
+        "primary": "powder-blue",
+        "swatches": [
+          [
+            145,
+            176,
+            205
+          ]
+        ]
+      },
+      "name": "Beetle \u00b7 Powder blue",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-beetle-powder-blue-v1",
+      "glbSha256": "1f885e9b652fee3b5b527ba6819c628a2bd526433c42271a77652d4db99db3c1",
+      "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "id": "paint-beetle-forest-v1",
+      "family": "beetle",
+      "scheme": {
+        "id": "forest",
+        "name": "Forest green",
+        "primary": "forest",
+        "swatches": [
+          [
+            75,
+            140,
+            103
+          ]
+        ]
+      },
+      "name": "Beetle \u00b7 Forest green",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-beetle-forest-v1",
+      "glbSha256": "5e4aec34d39ccde381effa1f656b10fe499f54d1f7b6b04fee0de0575cf85eba",
+      "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "id": "paint-pickup-teal-v1",
+      "family": "pickup",
+      "scheme": {
+        "id": "teal",
+        "name": "Lagoon teal",
+        "primary": "teal",
+        "swatches": [
+          [
+            67,
+            166,
+            173
+          ]
+        ]
+      },
+      "name": "Pickup \u00b7 Lagoon teal",
+      "nativeSize": 224,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-pickup-teal-v1",
+      "glbSha256": "ec6febd0f82db07e71a75884466e23284ab7b979e3e6edd28c7c68f24841467f",
+      "baseSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+    },
+    {
+      "id": "paint-pickup-cherry-v1",
+      "family": "pickup",
+      "scheme": {
+        "id": "cherry",
+        "name": "Farm red",
+        "primary": "cherry",
+        "swatches": [
+          [
+            208,
+            76,
+            88
+          ]
+        ]
+      },
+      "name": "Pickup \u00b7 Farm red",
+      "nativeSize": 224,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-pickup-cherry-v1",
+      "glbSha256": "4aa18f92e5852e052d855bd3bda0385b7289d3c911c797d511bdad86f9e62819",
+      "baseSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+    },
+    {
+      "id": "paint-pickup-forest-cream-v1",
+      "family": "pickup",
+      "scheme": {
+        "id": "forest-cream",
+        "name": "Forest / cream roof",
+        "primary": "forest",
+        "secondary": "cream",
+        "secondaryRoof": true,
+        "swatches": [
+          [
+            75,
+            140,
+            103
+          ],
+          [
+            231,
+            216,
+            185
+          ]
+        ]
+      },
+      "name": "Pickup \u00b7 Forest / cream roof",
+      "nativeSize": 224,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-pickup-forest-cream-v1",
+      "glbSha256": "1db5b8630eeefdb7c28a7ec668290f96f16695e1f28a56cd474578b10b68f18b",
+      "baseSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+    },
+    {
+      "id": "paint-pickup-navy-cream-v1",
+      "family": "pickup",
+      "scheme": {
+        "id": "navy-cream",
+        "name": "Navy / cream roof",
+        "primary": "navy",
+        "secondary": "cream",
+        "secondaryRoof": true,
+        "swatches": [
+          [
+            72,
+            109,
+            138
+          ],
+          [
+            231,
+            216,
+            185
+          ]
+        ]
+      },
+      "name": "Pickup \u00b7 Navy / cream roof",
+      "nativeSize": 224,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-pickup-navy-cream-v1",
+      "glbSha256": "b5f701682869f1a047ef0c2ec04f5b2a8580be4186e32b38f5b2929daafe1707",
+      "baseSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+    },
+    {
+      "id": "paint-rosso-coupe-cherry-v1",
+      "family": "rosso-coupe",
+      "scheme": {
+        "id": "cherry",
+        "name": "Cherry red",
+        "primary": "cherry",
+        "swatches": [
+          [
+            208,
+            76,
+            88
+          ]
+        ]
+      },
+      "name": "Sports coupe \u00b7 Cherry red",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-rosso-coupe-cherry-v1",
+      "glbSha256": "29df64a541bda530ad062f742a23ff6964d8783151c5699f4c22b629c040ebd4",
+      "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+    },
+    {
+      "id": "paint-rosso-coupe-butter-v1",
+      "family": "rosso-coupe",
+      "scheme": {
+        "id": "butter",
+        "name": "Butter yellow",
+        "primary": "butter",
+        "swatches": [
+          [
+            241,
+            211,
+            139
+          ]
+        ]
+      },
+      "name": "Sports coupe \u00b7 Butter yellow",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-rosso-coupe-butter-v1",
+      "glbSha256": "f4907ba316a8a46ad65571eb3b31f90cdebe56830414259ce23f630774d7ad01",
+      "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+    },
+    {
+      "id": "paint-rosso-coupe-powder-blue-v1",
+      "family": "rosso-coupe",
+      "scheme": {
+        "id": "powder-blue",
+        "name": "Powder blue",
+        "primary": "powder-blue",
+        "swatches": [
+          [
+            145,
+            176,
+            205
+          ]
+        ]
+      },
+      "name": "Sports coupe \u00b7 Powder blue",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-rosso-coupe-powder-blue-v1",
+      "glbSha256": "55f6aeb6e0c1c9282382efee50cc35e3f088c7e6032b77b29825646cf7c19e78",
+      "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+    },
+    {
+      "id": "paint-rosso-coupe-navy-stripes-v1",
+      "family": "rosso-coupe",
+      "scheme": {
+        "id": "navy-stripes",
+        "name": "Navy / cream stripes",
+        "primary": "navy",
+        "secondary": "cream",
+        "stripes": true,
+        "swatches": [
+          [
+            72,
+            109,
+            138
+          ],
+          [
+            231,
+            216,
+            185
+          ]
+        ]
+      },
+      "name": "Sports coupe \u00b7 Navy / cream stripes",
+      "nativeSize": 128,
+      "directory": "public/demos/original-vehicles/paint-study-v1/paint-rosso-coupe-navy-stripes-v1",
+      "glbSha256": "29174daaa7f41a63aed6435128f3c1264f1c6d95c67900b38337e9e9ab2817b9",
+      "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+    }
+  ]
+}

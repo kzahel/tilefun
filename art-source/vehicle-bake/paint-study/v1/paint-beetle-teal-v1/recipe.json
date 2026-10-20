@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-beetle-teal-v1",
+  "family": "beetle",
+  "paintSchemeId": "teal",
+  "base": "public/assets/models/vehicles/beetle-v1.glb",
+  "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "baseBlend": "art-source/vehicle-bake/beetle/v1/car.blend",
+  "baseBlendSha256": "c2198c3f1e8726d5089144a877d30357347ef07e22f14b93fd3809132e5f2716",
+  "palette": {
+    "id": "teal",
+    "name": "Lagoon teal",
+    "primary": "teal"
+  },
+  "roleMask": "../beetle-roles.png",
+  "atlasSha256": "4881ae92b4d17336be71f081b8f956fb69f172e6740e8e534039804c542d1954",
+  "glbSha256": "6e6f0546ed4db3d85b04eacacb0467b5e3c9f7da882b58248b18107d1b5494bd",
+  "paintTexels": {
+    "primary": 185440,
+    "secondary": 0,
+    "protected": 76704
+  },
+  "geometryProof": {
+    "originalBinarySha256": "47fe38c03d00efe4ba78f8828b7019ac3a7ee736c6bd9790d4f4f1800813ea8f",
+    "originalBinaryBytes": 192220,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

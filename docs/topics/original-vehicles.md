@@ -17,6 +17,19 @@ own the 45 existing sprite ports; these prototypes do not change those counts.
 
 ## Current decision and gate
 
+The owner authorized the first paint experiment and commit on 2026-10-20.
+[154](../tactical/154-vehicle-paint-study.md) adds fourteen review-only schemes:
+six Beetle colors, four pickup schemes including cream roofs, and four coupe
+schemes including twin stripes. [Paint variants](../vehicle-paint-variants.md)
+owns the reusable ramps, surface masks, preservation checks and proposed runtime
+selection contract. Existing game colors and geometry remain unchanged; the
+next step is owner appearance review before the shared runtime selection slice.
+
+On 2026-10-20 the owner requested adding twelve further vehicle ideas to the
+[roster](../vehicle-status.md). The suggested next picks are the 1950s finned
+coupe, wedge-shaped supercar and double-decker bus. All twelve remain ideas;
+this backlog update does not reopen the completed production batch.
+
 On 2026-10-19 the owner authorized an eight-hour autonomous production run through
 the backlog, including game availability and incremental commits/pushes, without
 per-vehicle appearance pauses or a quantity guarantee. [153](../tactical/153-autonomous-vehicle-production.md)

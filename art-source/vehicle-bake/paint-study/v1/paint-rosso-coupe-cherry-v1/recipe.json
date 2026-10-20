@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-rosso-coupe-cherry-v1",
+  "family": "rosso-coupe",
+  "paintSchemeId": "cherry",
+  "base": "public/assets/models/vehicles/rosso-coupe-v3.glb",
+  "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+  "baseBlend": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+  "baseBlendSha256": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+  "palette": {
+    "id": "cherry",
+    "name": "Cherry red",
+    "primary": "cherry"
+  },
+  "roleMask": "../rosso-coupe-roles.png",
+  "atlasSha256": "e6a13b25b01ddc193ab3438e4aea440670b2fee3ee81b3e92b005a85b5d87fd3",
+  "glbSha256": "29df64a541bda530ad062f742a23ff6964d8783151c5699f4c22b629c040ebd4",
+  "paintTexels": {
+    "primary": 179800,
+    "secondary": 0,
+    "protected": 82344
+  },
+  "geometryProof": {
+    "originalBinarySha256": "513e146a16762fe4bbd24eb1424280b77e4d2f04cc5a329fad7e3f6be8e34cab",
+    "originalBinaryBytes": 142304,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

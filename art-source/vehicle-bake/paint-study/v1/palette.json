@@ -1,0 +1,651 @@
+{
+  "schema": "tilefun-vehicle-paint-palette-v1",
+  "tone": "Softened toy-car hues; six discrete authored steps from deep shadow to highlight. No whole-texture tint or nearest-color guesses.",
+  "ramps": {
+    "cherry": [
+      [
+        110,
+        40,
+        65
+      ],
+      [
+        146,
+        45,
+        68
+      ],
+      [
+        178,
+        57,
+        76
+      ],
+      [
+        208,
+        76,
+        88
+      ],
+      [
+        229,
+        111,
+        113
+      ],
+      [
+        243,
+        155,
+        147
+      ]
+    ],
+    "butter": [
+      [
+        164,
+        125,
+        75
+      ],
+      [
+        197,
+        157,
+        92
+      ],
+      [
+        224,
+        188,
+        113
+      ],
+      [
+        241,
+        211,
+        139
+      ],
+      [
+        250,
+        227,
+        166
+      ],
+      [
+        255,
+        239,
+        194
+      ]
+    ],
+    "cream": [
+      [
+        143,
+        125,
+        103
+      ],
+      [
+        177,
+        157,
+        127
+      ],
+      [
+        205,
+        186,
+        154
+      ],
+      [
+        231,
+        216,
+        185
+      ],
+      [
+        246,
+        232,
+        205
+      ],
+      [
+        255,
+        245,
+        223
+      ]
+    ],
+    "teal": [
+      [
+        40,
+        81,
+        91
+      ],
+      [
+        45,
+        110,
+        119
+      ],
+      [
+        51,
+        139,
+        145
+      ],
+      [
+        67,
+        166,
+        173
+      ],
+      [
+        111,
+        193,
+        191
+      ],
+      [
+        165,
+        218,
+        206
+      ]
+    ],
+    "powder-blue": [
+      [
+        66,
+        89,
+        127
+      ],
+      [
+        90,
+        117,
+        151
+      ],
+      [
+        117,
+        147,
+        180
+      ],
+      [
+        145,
+        176,
+        205
+      ],
+      [
+        178,
+        202,
+        222
+      ],
+      [
+        207,
+        225,
+        235
+      ]
+    ],
+    "forest": [
+      [
+        52,
+        82,
+        72
+      ],
+      [
+        53,
+        102,
+        83
+      ],
+      [
+        55,
+        116,
+        89
+      ],
+      [
+        75,
+        140,
+        103
+      ],
+      [
+        114,
+        169,
+        127
+      ],
+      [
+        160,
+        196,
+        156
+      ]
+    ],
+    "navy": [
+      [
+        53,
+        62,
+        88
+      ],
+      [
+        57,
+        76,
+        104
+      ],
+      [
+        63,
+        91,
+        120
+      ],
+      [
+        72,
+        109,
+        138
+      ],
+      [
+        101,
+        139,
+        165
+      ],
+      [
+        145,
+        178,
+        194
+      ]
+    ]
+  },
+  "families": {
+    "beetle": {
+      "name": "Beetle",
+      "glb": "public/assets/models/vehicles/beetle-v1.glb",
+      "glbSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+      "blend": "art-source/vehicle-bake/beetle/v1/car.blend",
+      "blendSha256": "c2198c3f1e8726d5089144a877d30357347ef07e22f14b93fd3809132e5f2716",
+      "triangles": 2554,
+      "nativeSize": 128,
+      "paintColors": [
+        [
+          164,
+          125,
+          75
+        ],
+        [
+          197,
+          157,
+          92
+        ],
+        [
+          224,
+          188,
+          113
+        ],
+        [
+          241,
+          211,
+          139
+        ],
+        [
+          250,
+          227,
+          166
+        ],
+        [
+          255,
+          239,
+          194
+        ]
+      ],
+      "protectedColors": [
+        [
+          58,
+          58,
+          80
+        ],
+        [
+          52,
+          52,
+          70
+        ],
+        [
+          70,
+          70,
+          94
+        ],
+        [
+          86,
+          89,
+          114
+        ],
+        [
+          115,
+          140,
+          168
+        ],
+        [
+          164,
+          187,
+          213
+        ],
+        [
+          186,
+          210,
+          224
+        ],
+        [
+          131,
+          136,
+          151
+        ],
+        [
+          212,
+          212,
+          230
+        ],
+        [
+          248,
+          248,
+          248
+        ],
+        [
+          186,
+          39,
+          88
+        ],
+        [
+          234,
+          165,
+          99
+        ]
+      ],
+      "rampSteps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "schemes": [
+        {
+          "id": "butter",
+          "name": "Butter yellow",
+          "primary": "butter"
+        },
+        {
+          "id": "cream",
+          "name": "Warm cream",
+          "primary": "cream"
+        },
+        {
+          "id": "cherry",
+          "name": "Cherry red",
+          "primary": "cherry"
+        },
+        {
+          "id": "teal",
+          "name": "Lagoon teal",
+          "primary": "teal"
+        },
+        {
+          "id": "powder-blue",
+          "name": "Powder blue",
+          "primary": "powder-blue"
+        },
+        {
+          "id": "forest",
+          "name": "Forest green",
+          "primary": "forest"
+        }
+      ]
+    },
+    "pickup": {
+      "name": "Pickup",
+      "glb": "public/assets/models/vehicles/pickup-v1.glb",
+      "glbSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+      "blend": "art-source/vehicle-bake/pickup/v1/car.blend",
+      "blendSha256": "d3ffa7c3aa53d7e4c801576d1e8094e20e236f0a405dc6aceb224139eed18df3",
+      "triangles": 2984,
+      "nativeSize": 224,
+      "paintColors": [
+        [
+          43,
+          97,
+          113
+        ],
+        [
+          46,
+          119,
+          135
+        ],
+        [
+          52,
+          143,
+          155
+        ],
+        [
+          67,
+          166,
+          173
+        ],
+        [
+          103,
+          191,
+          192
+        ]
+      ],
+      "protectedColors": [
+        [
+          58,
+          58,
+          80
+        ],
+        [
+          52,
+          52,
+          70
+        ],
+        [
+          70,
+          70,
+          94
+        ],
+        [
+          255,
+          226,
+          160
+        ],
+        [
+          86,
+          89,
+          114
+        ],
+        [
+          115,
+          140,
+          168
+        ],
+        [
+          164,
+          187,
+          213
+        ],
+        [
+          186,
+          210,
+          224
+        ],
+        [
+          131,
+          136,
+          151
+        ],
+        [
+          212,
+          212,
+          230
+        ],
+        [
+          248,
+          248,
+          248
+        ],
+        [
+          186,
+          39,
+          88
+        ],
+        [
+          234,
+          165,
+          99
+        ],
+        [
+          50,
+          83,
+          99
+        ],
+        [
+          66,
+          105,
+          117
+        ],
+        [
+          42,
+          72,
+          90
+        ],
+        [
+          223,
+          93,
+          119
+        ]
+      ],
+      "rampSteps": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "schemes": [
+        {
+          "id": "teal",
+          "name": "Lagoon teal",
+          "primary": "teal"
+        },
+        {
+          "id": "cherry",
+          "name": "Farm red",
+          "primary": "cherry"
+        },
+        {
+          "id": "forest-cream",
+          "name": "Forest / cream roof",
+          "primary": "forest",
+          "secondary": "cream",
+          "secondaryRoof": true
+        },
+        {
+          "id": "navy-cream",
+          "name": "Navy / cream roof",
+          "primary": "navy",
+          "secondary": "cream",
+          "secondaryRoof": true
+        }
+      ]
+    },
+    "rosso-coupe": {
+      "name": "Sports coupe",
+      "glb": "public/assets/models/vehicles/rosso-coupe-v3.glb",
+      "glbSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+      "blend": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+      "blendSha256": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+      "triangles": 2299,
+      "nativeSize": 128,
+      "paintColors": [
+        [
+          127,
+          33,
+          76
+        ],
+        [
+          161,
+          18,
+          80
+        ],
+        [
+          197,
+          52,
+          88
+        ],
+        [
+          211,
+          68,
+          92
+        ],
+        [
+          227,
+          90,
+          90
+        ],
+        [
+          225,
+          132,
+          132
+        ]
+      ],
+      "protectedColors": [
+        [
+          58,
+          58,
+          80
+        ],
+        [
+          74,
+          42,
+          61
+        ],
+        [
+          115,
+          140,
+          168
+        ],
+        [
+          131,
+          136,
+          151
+        ],
+        [
+          164,
+          187,
+          213
+        ],
+        [
+          186,
+          39,
+          88
+        ],
+        [
+          186,
+          210,
+          224
+        ],
+        [
+          212,
+          212,
+          230
+        ],
+        [
+          248,
+          248,
+          248
+        ]
+      ],
+      "rampSteps": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "schemes": [
+        {
+          "id": "cherry",
+          "name": "Cherry red",
+          "primary": "cherry"
+        },
+        {
+          "id": "butter",
+          "name": "Butter yellow",
+          "primary": "butter"
+        },
+        {
+          "id": "powder-blue",
+          "name": "Powder blue",
+          "primary": "powder-blue"
+        },
+        {
+          "id": "navy-stripes",
+          "name": "Navy / cream stripes",
+          "primary": "navy",
+          "secondary": "cream",
+          "stripes": true
+        }
+      ]
+    }
+  }
+}

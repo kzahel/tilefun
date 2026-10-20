@@ -1,0 +1,34 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-rosso-coupe-navy-stripes-v1",
+  "family": "rosso-coupe",
+  "paintSchemeId": "navy-stripes",
+  "base": "public/assets/models/vehicles/rosso-coupe-v3.glb",
+  "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+  "baseBlend": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+  "baseBlendSha256": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+  "palette": {
+    "id": "navy-stripes",
+    "name": "Navy / cream stripes",
+    "primary": "navy",
+    "secondary": "cream",
+    "stripes": true
+  },
+  "roleMask": "../rosso-coupe-roles.png",
+  "atlasSha256": "0ed7198deb6588a502d948d62d00a1c4fb41f12dff7eecd01219a0ccb5e39bad",
+  "glbSha256": "29174daaa7f41a63aed6435128f3c1264f1c6d95c67900b38337e9e9ab2817b9",
+  "paintTexels": {
+    "primary": 174589,
+    "secondary": 5211,
+    "protected": 82344
+  },
+  "geometryProof": {
+    "originalBinarySha256": "513e146a16762fe4bbd24eb1424280b77e4d2f04cc5a329fad7e3f6be8e34cab",
+    "originalBinaryBytes": 142304,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

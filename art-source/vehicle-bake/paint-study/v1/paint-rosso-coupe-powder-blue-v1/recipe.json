@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-rosso-coupe-powder-blue-v1",
+  "family": "rosso-coupe",
+  "paintSchemeId": "powder-blue",
+  "base": "public/assets/models/vehicles/rosso-coupe-v3.glb",
+  "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+  "baseBlend": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+  "baseBlendSha256": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+  "palette": {
+    "id": "powder-blue",
+    "name": "Powder blue",
+    "primary": "powder-blue"
+  },
+  "roleMask": "../rosso-coupe-roles.png",
+  "atlasSha256": "70ce09d09b89e4a6d9098a1a35a11c7133f53bb38688cb86b4de9692713d1e83",
+  "glbSha256": "55f6aeb6e0c1c9282382efee50cc35e3f088c7e6032b77b29825646cf7c19e78",
+  "paintTexels": {
+    "primary": 179800,
+    "secondary": 0,
+    "protected": 82344
+  },
+  "geometryProof": {
+    "originalBinarySha256": "513e146a16762fe4bbd24eb1424280b77e4d2f04cc5a329fad7e3f6be8e34cab",
+    "originalBinaryBytes": 142304,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

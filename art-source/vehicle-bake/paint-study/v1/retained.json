@@ -1,0 +1,508 @@
+{
+  "schema": "tilefun-vehicle-paint-retained-v1",
+  "humanApproval": false,
+  "normalGameplay": false,
+  "inputs": [
+    {
+      "path": "scripts/vehicle-bake/paint-variants.py",
+      "sha256": "b0696f2ed2b2e58e7df44327c62500d043d94ec17c39794a4b8b6e9195d91b52"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-variants-v1.json",
+      "sha256": "ba92db16d1a6019531687aceead9b645aba2641e4fef23295e5b0a88d4ba373f"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-source-blender.py",
+      "sha256": "f24a208433c3e4c65bbbe743b1a147fea6acce7d8ef04d2f687f29fcd7517117"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-source-verify.py",
+      "sha256": "acd9163bb5d615bac2f6e717a3f0df116bae38142e5ee602be3b5e32c04bfd47"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-capture.mjs",
+      "sha256": "7b6fbbc329397514a9af3062ff55831287f4cf3be3e65f81b73d1efdadd8a087"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-review.py",
+      "sha256": "c429cd07cda5178df702d104b1277612f0b1123a22b7ea0dbb491043f8ab1237"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-gallery.html",
+      "sha256": "188bc8568afb4a430ea0816f5c12f92f8222795ac8e49c40c18142a7bb08398e"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-gallery.css",
+      "sha256": "820fa482dcc99fdc47bd0aac5a1dfba1811a9ebee9ad29eb0caef6437b8948e4"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-gallery.js",
+      "sha256": "351a3380b6253025d0c81426fb29b842ab36dc565ccea72503ff14c9d0bca8e3"
+    },
+    {
+      "path": "scripts/vehicle-bake/paint-gallery-qa.mjs",
+      "sha256": "13ebd30d4a2584e72886da337b9c67f78e089c116834e070be57931d450e6559"
+    },
+    {
+      "path": "scripts/vehicle-bake/family-review.html",
+      "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+    },
+    {
+      "path": "scripts/vehicle-bake/family-review.css",
+      "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+    },
+    {
+      "path": "scripts/vehicle-bake/family-viewer.mjs",
+      "sha256": "5643aa48b595c6ff65849b983d0a7a55ded99e7918c5f87018cdb6eb7fcbd96d"
+    },
+    {
+      "path": "scripts/vehicle-bake/family-build.mjs",
+      "sha256": "8948110b2086eebf1ef424d066aa8394e855ec0a5d3b86270325c477e7335191"
+    },
+    {
+      "path": "scripts/vehicle-bake/catalog.py",
+      "sha256": "1ef402ebf9918efbf791ba6d7cecd2d021a4f381de854c2e3faa8d8799c2272f"
+    },
+    {
+      "path": "package.json",
+      "sha256": "4c9ad133374898be41ad8f0f9e95588ce9d5b1fc78c1a6d6aaea2b3a39f85a45"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "c8def4da5c141bd49dd131c086f542c04736df4a13e6dd43a6ffd4af18e69235"
+    },
+    {
+      "path": "src/rendering/CarMeshAsset.ts",
+      "sha256": "27a6791277d89e50819ec67a5a0de381ea94e414fa10a32dcb36980dfbac389e"
+    },
+    {
+      "path": "src/rendering/CarMeshDefinition.ts",
+      "sha256": "faeb09c9cd089128c463e448b039292bbb0bc4eef8945623db47c1c8ede00162"
+    },
+    {
+      "path": "src/rendering/VehicleGeometryBatches.ts",
+      "sha256": "2bb1cf8364da200bf650ce43d73a49fecc583ba15fb0d7d6440d70147c304a2d"
+    },
+    {
+      "path": "src/rendering/VehicleEmergencyLights.ts",
+      "sha256": "9a092414ac2b1f525c5cf8f0082c8a937b1532418da152758cc07606e9f96978"
+    },
+    {
+      "path": "src/rendering/CarMeshProjection.ts",
+      "sha256": "0d54386f05c1c1a847e9068797e97fe87216651703bfcdfce9e683cb647fdadb"
+    },
+    {
+      "path": "src/rendering/CarPixelOutline.ts",
+      "sha256": "e51315f63b72782da891aeb1680b749b07541d8aa57ec3fee32f72b8c163ab26"
+    },
+    {
+      "path": "scripts/authored-assets/runtime/wheel-rig.mjs",
+      "sha256": "512201dcbcbfd6cb1197f337590fafb2c38ba886bca2d08acd3dab9c99879ed9"
+    },
+    {
+      "path": "public/assets/models/vehicles/beetle-v1.glb",
+      "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1"
+    },
+    {
+      "path": "art-source/vehicle-bake/beetle/v1/car.blend",
+      "sha256": "c2198c3f1e8726d5089144a877d30357347ef07e22f14b93fd3809132e5f2716"
+    },
+    {
+      "path": "public/assets/models/vehicles/pickup-v1.glb",
+      "sha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7"
+    },
+    {
+      "path": "art-source/vehicle-bake/pickup/v1/car.blend",
+      "sha256": "d3ffa7c3aa53d7e4c801576d1e8094e20e236f0a405dc6aceb224139eed18df3"
+    },
+    {
+      "path": "public/assets/models/vehicles/rosso-coupe-v3.glb",
+      "sha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64"
+    },
+    {
+      "path": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+      "sha256": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/beetle-roles.png",
+      "sha256": "71e5e6407883360f1fe156d85adbcd6e70f961f3df7e65ce5456617c852717ca"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/palette.json",
+      "sha256": "ac7d68d1d1096f04f91d59e28f8dc79918b2fbf3bb4bd61f9dae7205381b543e"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/pickup-roles.png",
+      "sha256": "92c70e6e7fae8b5bfda7d52d1d2e2803bf5dffaca5af24d163982a1b38812f0f"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/rosso-coupe-roles.png",
+      "sha256": "c4234d2242f9fd0e527a4e56044637b5ae299ba748bd7ff2753c0ec069a05817"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/study.json",
+      "sha256": "cb85d209270a88a525669a7d6f43d20ef18eefc805f6acbc3d682e7356a61e72"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-butter-v1/atlas.png",
+      "sha256": "5783ffcb7296d09ad770522aeed36a4444b6c6c3f0fe4380292b1f844b328dab"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-butter-v1/car.blend",
+      "sha256": "c36578cbcfb977f437a595aec1b2d7981a8c44727d612d33a918d3c48c1aeed1"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-butter-v1/recipe.json",
+      "sha256": "f69fb56d53aabd58ed0d1b774e6d3955440533db48fe12f4bdb13d979b1c8446"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-butter-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cherry-v1/atlas.png",
+      "sha256": "04f0647956a3e1c90589f2e0a3c94a449770f4a93a18b74c38c596c8a93977ad"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cherry-v1/car.blend",
+      "sha256": "676cbcb917fb865b193245021d574665838e4aa9b3aa3d689e964415ad5c90cc"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cherry-v1/recipe.json",
+      "sha256": "0132b0809e5573706581ac201084b67d69a6e5e4d0369c23afaa9b3f79a7675d"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cherry-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cream-v1/atlas.png",
+      "sha256": "bb27d3213dc987aa95ced9fd03c8c2bf1ca20ccd7d5bf01ac8ce71d0230c9703"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cream-v1/car.blend",
+      "sha256": "c043d06f346ab0a2d8d26c5d4e295c47cc73d86197cd656a90f354c16f3b9090"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cream-v1/recipe.json",
+      "sha256": "ab205e320a9b6daa0252c9f99f3fe0234184ea77b2624fedd6a04453325d6aa8"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-cream-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-forest-v1/atlas.png",
+      "sha256": "5c1e5c26773c81d4fc05d7222dc173fb4943e4b28e766df22536349c9da9666f"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-forest-v1/car.blend",
+      "sha256": "362c928f7060592553d9944f4193eed43e6d1d81a202c69ec13c7c7a0c4b8585"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-forest-v1/recipe.json",
+      "sha256": "8b8ec98540c0e06f8c1c0aad233ed471b727f829ab5f987cebc5b46109358824"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-forest-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-powder-blue-v1/atlas.png",
+      "sha256": "28a135e5abb5d1036b0fdfd9f54effb885b97bf92ba2c87320af3a9b6d902416"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-powder-blue-v1/car.blend",
+      "sha256": "0f75ef9e3a83fadb06505a6f2c292e22ad014081a29e70b5b1d57fe9b8486078"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-powder-blue-v1/recipe.json",
+      "sha256": "8c56a3afcfc1f4052d6aaa0fa8df93143bfa7f6f3a77709970321ae2ca643f68"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-powder-blue-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-teal-v1/atlas.png",
+      "sha256": "4881ae92b4d17336be71f081b8f956fb69f172e6740e8e534039804c542d1954"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-teal-v1/car.blend",
+      "sha256": "cb431c6c5f5d0445a74c629ddd21f9b8c699242757af992fc9665fd1b9dc2f39"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-teal-v1/recipe.json",
+      "sha256": "0f119230d5b37267b92dc4703d0199a623ac4d2f344e810020bef3ae0f9b7486"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-beetle-teal-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-cherry-v1/atlas.png",
+      "sha256": "10daaf4384d39485c8cdc83c4b3943f567cc2b5dcc8d5f9d57c1eb81dbd1c2cd"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-cherry-v1/car.blend",
+      "sha256": "fd7c3cc74b64e9b0f75968703c3565fc147258932f9ebb4201a59c6b05437905"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-cherry-v1/recipe.json",
+      "sha256": "eb80df61a7457f58615f47e84b570237503efd97f09f19d0ffd447d43d94d816"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-cherry-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-forest-cream-v1/atlas.png",
+      "sha256": "a692f30c7606464dbe1d9f29bb23f7ee3ee7c24f1cf3f1c3cb33f5707c335d54"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-forest-cream-v1/car.blend",
+      "sha256": "0d4c91ab7d19ed977d19b3bd69e40cee110029024d77c100be4ac82849946fd2"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-forest-cream-v1/recipe.json",
+      "sha256": "dd44f2ce00408d76746485c0041539d864df3c56f830f287c9f3790a495eaf9e"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-forest-cream-v1/secondary-mask.png",
+      "sha256": "f5195e0ec9726c82784317391bf7306b6a170cd59612a2f77234751986929d7a"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-navy-cream-v1/atlas.png",
+      "sha256": "436ad55e8c829dbf5755b336af0a8ef2ecf0fcb4791cd4861f3227f305690a5b"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-navy-cream-v1/car.blend",
+      "sha256": "4a80d155f1a8809cdf4a0557c26e50e130b60d85da75a9ce44573fa68f19740a"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-navy-cream-v1/recipe.json",
+      "sha256": "3d26443abbfb9ffc8acd119b12604fd07661cd5f21d445f45ef42b97d1787de0"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-navy-cream-v1/secondary-mask.png",
+      "sha256": "f5195e0ec9726c82784317391bf7306b6a170cd59612a2f77234751986929d7a"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-teal-v1/atlas.png",
+      "sha256": "7cf3ba938c37785638b73d8344fd5b88f687c9bfb31179b62854a8ee029edc5d"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-teal-v1/car.blend",
+      "sha256": "c5bb0f76ede7a499c4f462b2550fc268c9f221b96e7c1d2546fe278ba9cd00bc"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-teal-v1/recipe.json",
+      "sha256": "65f257088e97982e13abc91524d86a1e48ddf5c7bf84ccd56d8dafb130a20cd2"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-pickup-teal-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-butter-v1/atlas.png",
+      "sha256": "ebacc66f50b05dca1712236c579a3c986630bc3144e59c66edef68f3a909095b"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-butter-v1/car.blend",
+      "sha256": "57e7bf76d6421c96f90e0347baff76a64d39680a131ea8aa7893b7e076829fee"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-butter-v1/recipe.json",
+      "sha256": "4dfec695c45b9dee08bb3e25f2099f52df8b8179d56c4c7746aaf79c4137fdc6"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-butter-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-cherry-v1/atlas.png",
+      "sha256": "e6a13b25b01ddc193ab3438e4aea440670b2fee3ee81b3e92b005a85b5d87fd3"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-cherry-v1/car.blend",
+      "sha256": "70c61526df33517ae39904904996d857c44aa19cc645bbd9ebe7163e42c98188"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-cherry-v1/recipe.json",
+      "sha256": "4751ef2b7af6d1a5b2c6a1f90fb8ab0477f793cddbe5109d12aba3f44916d43c"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-cherry-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-navy-stripes-v1/atlas.png",
+      "sha256": "0ed7198deb6588a502d948d62d00a1c4fb41f12dff7eecd01219a0ccb5e39bad"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-navy-stripes-v1/car.blend",
+      "sha256": "d5f5e9b51890ac49c6057234bddd393e0784d18e187b99ccd76748a9f21341f8"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-navy-stripes-v1/recipe.json",
+      "sha256": "d14a1e3f4377069e357e22f0a6a9c792d68558f2d31327d2c374b867b90fbb4e"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-navy-stripes-v1/secondary-mask.png",
+      "sha256": "113ce9d3ba5acad88fd10cd82eb28f96dac9ad0ae5e15651a6bbc5cdaac53e9b"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-powder-blue-v1/atlas.png",
+      "sha256": "70ce09d09b89e4a6d9098a1a35a11c7133f53bb38688cb86b4de9692713d1e83"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-powder-blue-v1/car.blend",
+      "sha256": "cf5a0d54d08108a1c4e989474bb7e74846d8f62b5206a2c39663b387f617d4ca"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-powder-blue-v1/recipe.json",
+      "sha256": "73bdfa9c19ba55dc401390f4150b7b5d11ba96043a3d2b22be2150c8241c222d"
+    },
+    {
+      "path": "art-source/vehicle-bake/paint-study/v1/paint-rosso-coupe-powder-blue-v1/secondary-mask.png",
+      "sha256": "65795a5b91030a2a433dae510d1edf494082a9cfa1153cd94f3797759f68f257"
+    }
+  ],
+  "visualInspection": {
+    "status": "no-blocking-issues",
+    "humanApproval": false,
+    "reviewed": "Actual 14-scheme comparison and mobile gallery; all 32 headings for navy/cream stripes and forest/cream pickup; all 672 frames have automated alpha/non-paint exact checks.",
+    "findings": [
+      "Paint ramps remain distinct and coherent at native game density.",
+      "Cream roofs have clean panel ownership; glass and lamps remain unchanged.",
+      "Twin stripes follow hood/roof/rear deck and retain rear vent ink.",
+      "No new wheel/fender silhouettes or floating tire artifacts; geometry and alpha are unchanged."
+    ],
+    "next": "Owner appearance review; normal gameplay paint selection remains pending."
+  },
+  "galleryQA": {
+    "status": "passed",
+    "variants": 14,
+    "browser": "153.0.8010.12",
+    "channel": "bundled full Chromium",
+    "desktop": [
+      1200,
+      1050
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "cameras": 2,
+    "headingsPerCamera": [
+      0,
+      45,
+      157.5,
+      337.5
+    ],
+    "scales": [
+      1,
+      2,
+      3
+    ],
+    "backgrounds": [
+      "neutral",
+      "grass",
+      "road"
+    ],
+    "noPageOverflow": true,
+    "offlineNetworkRequests": [],
+    "errors": []
+  },
+  "packedSourceQA": {
+    "status": "passed",
+    "results": [
+      {
+        "id": "paint-beetle-butter-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "d0ae5fc9965fa662ba5d12fb257b130a000981ea017d6924bb8618f5e2d17c52",
+        "packedAtlasSha256": "5783ffcb7296d09ad770522aeed36a4444b6c6c3f0fe4380292b1f844b328dab"
+      },
+      {
+        "id": "paint-beetle-cream-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "d0ae5fc9965fa662ba5d12fb257b130a000981ea017d6924bb8618f5e2d17c52",
+        "packedAtlasSha256": "bb27d3213dc987aa95ced9fd03c8c2bf1ca20ccd7d5bf01ac8ce71d0230c9703"
+      },
+      {
+        "id": "paint-beetle-cherry-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "d0ae5fc9965fa662ba5d12fb257b130a000981ea017d6924bb8618f5e2d17c52",
+        "packedAtlasSha256": "04f0647956a3e1c90589f2e0a3c94a449770f4a93a18b74c38c596c8a93977ad"
+      },
+      {
+        "id": "paint-beetle-teal-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "d0ae5fc9965fa662ba5d12fb257b130a000981ea017d6924bb8618f5e2d17c52",
+        "packedAtlasSha256": "4881ae92b4d17336be71f081b8f956fb69f172e6740e8e534039804c542d1954"
+      },
+      {
+        "id": "paint-beetle-powder-blue-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "d0ae5fc9965fa662ba5d12fb257b130a000981ea017d6924bb8618f5e2d17c52",
+        "packedAtlasSha256": "28a135e5abb5d1036b0fdfd9f54effb885b97bf92ba2c87320af3a9b6d902416"
+      },
+      {
+        "id": "paint-beetle-forest-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "d0ae5fc9965fa662ba5d12fb257b130a000981ea017d6924bb8618f5e2d17c52",
+        "packedAtlasSha256": "5c1e5c26773c81d4fc05d7222dc173fb4943e4b28e766df22536349c9da9666f"
+      },
+      {
+        "id": "paint-pickup-teal-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "03b22b714d20535d2c35fe0d665006c7e2062c1f4e5e160c3b782c3e3bad1b6b",
+        "packedAtlasSha256": "7cf3ba938c37785638b73d8344fd5b88f687c9bfb31179b62854a8ee029edc5d"
+      },
+      {
+        "id": "paint-pickup-cherry-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "03b22b714d20535d2c35fe0d665006c7e2062c1f4e5e160c3b782c3e3bad1b6b",
+        "packedAtlasSha256": "10daaf4384d39485c8cdc83c4b3943f567cc2b5dcc8d5f9d57c1eb81dbd1c2cd"
+      },
+      {
+        "id": "paint-pickup-forest-cream-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "03b22b714d20535d2c35fe0d665006c7e2062c1f4e5e160c3b782c3e3bad1b6b",
+        "packedAtlasSha256": "a692f30c7606464dbe1d9f29bb23f7ee3ee7c24f1cf3f1c3cb33f5707c335d54"
+      },
+      {
+        "id": "paint-pickup-navy-cream-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "03b22b714d20535d2c35fe0d665006c7e2062c1f4e5e160c3b782c3e3bad1b6b",
+        "packedAtlasSha256": "436ad55e8c829dbf5755b336af0a8ef2ecf0fcb4791cd4861f3227f305690a5b"
+      },
+      {
+        "id": "paint-rosso-coupe-cherry-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "8a8c3bc88df1ec0f1d560ded5b495782bf1269fcca5e63c97d2ccc57eac42d78",
+        "packedAtlasSha256": "e6a13b25b01ddc193ab3438e4aea440670b2fee3ee81b3e92b005a85b5d87fd3"
+      },
+      {
+        "id": "paint-rosso-coupe-butter-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "8a8c3bc88df1ec0f1d560ded5b495782bf1269fcca5e63c97d2ccc57eac42d78",
+        "packedAtlasSha256": "ebacc66f50b05dca1712236c579a3c986630bc3144e59c66edef68f3a909095b"
+      },
+      {
+        "id": "paint-rosso-coupe-powder-blue-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "8a8c3bc88df1ec0f1d560ded5b495782bf1269fcca5e63c97d2ccc57eac42d78",
+        "packedAtlasSha256": "70ce09d09b89e4a6d9098a1a35a11c7133f53bb38688cb86b4de9692713d1e83"
+      },
+      {
+        "id": "paint-rosso-coupe-navy-stripes-v1",
+        "status": "passed",
+        "sourceGeometryUVHierarchySha256": "8a8c3bc88df1ec0f1d560ded5b495782bf1269fcca5e63c97d2ccc57eac42d78",
+        "packedAtlasSha256": "0ed7198deb6588a502d948d62d00a1c4fb41f12dff7eecd01219a0ccb5e39bad"
+      }
+    ]
+  }
+}

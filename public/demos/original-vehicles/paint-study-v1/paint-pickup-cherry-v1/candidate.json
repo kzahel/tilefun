@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-pickup-cherry-v1",
+      "name": "Pickup \u00b7 Farm red",
+      "title": "Paint study \u00b7 Pickup \u00b7 Farm red",
+      "nativeSize": 224,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2984,
+        "vertices": 5722,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 209840,
+        "sha256": "4aa18f92e5852e052d855bd3bda0385b7289d3c911c797d511bdad86f9e62819",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

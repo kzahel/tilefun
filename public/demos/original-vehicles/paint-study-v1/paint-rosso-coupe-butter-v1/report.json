@@ -1,0 +1,34 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-rosso-coupe-butter-v1",
+  "family": "rosso-coupe",
+  "paintSchemeId": "butter",
+  "base": "public/assets/models/vehicles/rosso-coupe-v3.glb",
+  "baseSha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+  "baseBlend": "art-source/vehicle-bake/a-reduced-projection/mid-fenders-v3/car.blend",
+  "baseBlendSha256": "f7661c61810d56647654cb441cff5fb44b88f26de7125f0bfbea148cf5ee06af",
+  "palette": {
+    "id": "butter",
+    "name": "Butter yellow",
+    "primary": "butter"
+  },
+  "roleMask": "../rosso-coupe-roles.png",
+  "atlasSha256": "ebacc66f50b05dca1712236c579a3c986630bc3144e59c66edef68f3a909095b",
+  "glbSha256": "f4907ba316a8a46ad65571eb3b31f90cdebe56830414259ce23f630774d7ad01",
+  "paintTexels": {
+    "primary": 179800,
+    "secondary": 0,
+    "protected": 82344
+  },
+  "geometryProof": {
+    "originalBinarySha256": "513e146a16762fe4bbd24eb1424280b77e4d2f04cc5a329fad7e3f6be8e34cab",
+    "originalBinaryBytes": 142304,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false,
+  "status": "complete",
+  "method": "Explicit owned color ramps and UV/physical-surface masks; embedded atlas replacement with unchanged mesh/rig/UV bytes. Review only."
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-pickup-teal-v1",
+  "family": "pickup",
+  "paintSchemeId": "teal",
+  "base": "public/assets/models/vehicles/pickup-v1.glb",
+  "baseSha256": "4eb8b56c808c4ca807ef120caa786ecd29f256b3f43b40d04661cb8573b3b9d7",
+  "baseBlend": "art-source/vehicle-bake/pickup/v1/car.blend",
+  "baseBlendSha256": "d3ffa7c3aa53d7e4c801576d1e8094e20e236f0a405dc6aceb224139eed18df3",
+  "palette": {
+    "id": "teal",
+    "name": "Lagoon teal",
+    "primary": "teal"
+  },
+  "roleMask": "../pickup-roles.png",
+  "atlasSha256": "7cf3ba938c37785638b73d8344fd5b88f687c9bfb31179b62854a8ee029edc5d",
+  "glbSha256": "ec6febd0f82db07e71a75884466e23284ab7b979e3e6edd28c7c68f24841467f",
+  "paintTexels": {
+    "primary": 186235,
+    "secondary": 0,
+    "protected": 75909
+  },
+  "geometryProof": {
+    "originalBinarySha256": "f829419e9e2e8b26c34cb3ea0d8e487aa6bd6b179aaa4ecd600bed9e671e151d",
+    "originalBinaryBytes": 201340,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

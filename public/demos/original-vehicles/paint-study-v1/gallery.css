@@ -1,0 +1,149 @@
+:root {
+  font:
+    16px / 1.5 system-ui,
+    sans-serif;
+  color: #e9edf4;
+  background: #202637;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+main {
+  max-width: 1180px;
+  margin: auto;
+  padding: 36px 24px;
+}
+h1 {
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  line-height: 1.1;
+  margin: 12px 0;
+}
+h2 {
+  font-size: 1.2rem;
+}
+header {
+  margin-bottom: 32px;
+}
+.eyebrow {
+  color: #b5d5cb;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+}
+.studio {
+  background: #30394d;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 36px;
+}
+.controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.8rem;
+  color: #c0cbdc;
+  min-width: 0;
+}
+select {
+  max-width: 100%;
+  padding: 8px;
+  font: inherit;
+  background: #202637;
+  color: #edf2fa;
+  border: 1px solid #63718b;
+  border-radius: 6px;
+}
+.heading {
+  flex: 1;
+  min-width: 180px;
+}
+.stage {
+  background: #e0e2e4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  min-height: 240px;
+  overflow: auto;
+}
+.stage img {
+  display: block;
+  flex: none;
+  image-rendering: pixelated;
+  max-width: none;
+}
+.swatches {
+  display: flex;
+  gap: 7px;
+  margin-top: 16px;
+}
+.swatches span {
+  width: 30px;
+  height: 22px;
+  border-radius: 4px;
+  border: 1px solid #ffffff30;
+}
+a {
+  color: #b5d5ff;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 16px;
+}
+.paint-card {
+  background: #30394d;
+  color: inherit;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 18px 8px 12px;
+  cursor: pointer;
+  font: inherit;
+  overflow: auto;
+}
+.paint-card[aria-pressed="true"] {
+  border-color: #b5d5cb;
+}
+.paint-card img {
+  display: block;
+  margin: auto;
+  image-rendering: pixelated;
+}
+.paint-card span {
+  display: block;
+  font-size: 0.88rem;
+  margin-top: 12px;
+}
+footer,
+#view-note {
+  color: #b0bdce;
+  font-size: 0.85rem;
+}
+footer {
+  margin-top: 32px;
+}
+@media (max-width: 600px) {
+  main {
+    padding: 24px 12px;
+  }
+  .studio {
+    padding: 14px;
+  }
+  .controls {
+    gap: 12px;
+  }
+  label {
+    max-width: 100%;
+  }
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}

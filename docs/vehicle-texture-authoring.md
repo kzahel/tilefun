@@ -4,6 +4,10 @@ Reusable textures need physical surface ownership and family-specific geometry,
 UVs and native-pixel inspection. There is no validated automatic bake for arbitrary
 vehicles.
 
+For curated colors, two-tone schemes and stripes on existing originals, use
+[paint variants](vehicle-paint-variants.md). Its first fourteen schemes preserve
+the exact mesh/UV/rig and protected palette, with separate appearance review.
+
 ## Choose the route honestly
 
 The red coupe records two different transfers. Accepted route A reduced the

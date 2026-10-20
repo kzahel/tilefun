@@ -2,7 +2,7 @@
 
 Generated from [the roster](../art-source/vehicle-bake/roster.json) by `node scripts/vehicle-bake/status.mjs`.
 
-**33 integrated · 7 deferred.**
+**33 integrated · 7 deferred · 12 idea.**
 
 The owner-authorized run153 production batch is complete within its eight-hour limit (2026-10-19 21:19:36 UTC–2026-10-20 05:19:36 UTC). All33 ordinary entries are integrated; seven cycle styles retain diagnostic source/shared reviews but remain deferred for normal rider presentation. Per-family appearance pauses were waived for this delivered batch only; formal review states remain unchanged. Follow the current owner gate before further production.
 
@@ -50,5 +50,17 @@ The owner-authorized run153 production batch is complete within its eight-hour l
 | 38 | Dirt bike | Off-road motorcycle | deferred | Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated. |
 | 39 | Touring motorcycle | Touring bike | deferred | Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated. |
 | 40 | Retro motor scooter | Scooter | deferred | Immutable distinct source and isolated Explorer shared-loader composition pass independent replay, 32 bare/32 combined pixel parity and actual contacts/per-wheel controls; normal identity, AI and occupied fallback remain gated. |
+| 41 | 1950s finned coupe | Tailfin coupe | idea | Suggested next pick 1 of 3; agree an authoring batch before production. |
+| 42 | Wedge-shaped supercar | Wedge sports car | idea | Suggested next pick 2 of 3; agree an authoring batch before production. |
+| 43 | Double-decker bus | Two-level bus | idea | Suggested next pick 3 of 3; agree an authoring batch before production. |
+| 44 | Lowrider | Custom low coupe | idea | Choose an authoring batch and appearance direction. |
+| 45 | Bubble-canopy concept car | Retro-futuristic concept | idea | Choose an authoring batch and appearance direction. |
+| 46 | Enclosed three-wheel delivery van | Three-wheel utility vehicle | idea | Choose an authoring batch; qualify the three-wheel enclosed vehicle rig. |
+| 47 | Desert trophy truck | Off-road racing truck | idea | Choose an authoring batch and appearance direction. |
+| 48 | Armored bank truck | Armored utility truck | idea | Choose an authoring batch and appearance direction. |
+| 49 | Vintage steam-powered car | Steam carriage | idea | Choose an authoring batch and appearance direction. |
+| 50 | Car transporter carrying miniature existing cars | Vehicle carrier | idea | Choose an authoring batch; plan miniature cargo reuse, total mesh budget and road clearance. |
+| 51 | Ice resurfacer | Ice maintenance vehicle | idea | Choose an authoring batch and appearance direction. |
+| 52 | Giant duck advertising van | Novelty advertising vehicle | idea | Choose an authoring batch; plan the giant duck silhouette and vehicle clearance. |
 
 Authorization lives in each roster entry; idea entries remain proposals. Exact model review and gameplay activation are separate checkpoints.

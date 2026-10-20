@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-beetle-cream-v1",
+      "name": "Beetle \u00b7 Warm cream",
+      "title": "Paint study \u00b7 Beetle \u00b7 Warm cream",
+      "nativeSize": 128,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2554,
+        "vertices": 5462,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 201220,
+        "sha256": "9c2e12c3a4855906d5771aa18a507e81cc5368d978315a42bb8ab8170a8330ae",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

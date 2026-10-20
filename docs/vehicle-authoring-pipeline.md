@@ -4,6 +4,8 @@ Start with [texture authoring](vehicle-texture-authoring.md) for surface ownersh
 UV paint and the distinction between actual high-to-low transfer and direct
 semantic painting. [Current fleet status](topics/original-vehicles.md) owns normal
 availability and validation; the examples below retain their original decisions.
+For palette variations on existing geometry, use [paint variants](vehicle-paint-variants.md):
+curated ramps, explicit protected surfaces, two-tone/stripe masks and exact mesh preservation.
 
 Standalone Python review tools use
 `python -m pip install -r scripts/vehicle-bake/requirements-review.txt`.

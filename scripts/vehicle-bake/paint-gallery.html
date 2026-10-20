@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tilefun · Vehicle paint studio</title>
+    <link rel="stylesheet" href="gallery.css">
+  </head>
+  <body>
+    <main>
+      <header><p class="eyebrow">TILEFUN / VEHICLE PAINT STUDIO</p><h1>A little more color.</h1><p>Fourteen paint schemes, three familiar shapes. Compare them at game size, then look closer.</p></header>
+      <section class="studio" aria-label="Selected paint scheme">
+        <div class="controls">
+          <label>Vehicle and paint <select id="paint"><!--OPTIONS--></select></label>
+          <label>View <select id="camera"><option value="engine">Game camera</option><option value="study">Elevated view</option></select></label>
+          <label>Size <select id="scale"><option value="1">Native pixels</option><option value="2" selected>2× pixels</option><option value="3">3× pixels</option></select></label>
+          <label>Background <select id="background"><option value="neutral">Neutral</option><option value="grass">Grass</option><option value="road">Road</option></select></label>
+          <label class="heading">Heading <input id="heading" type="range" min="0" max="15" step="1" value="2"><output id="heading-label">45°</output></label>
+        </div>
+        <h2 id="selected-name">Loading paint schemes…</h2>
+        <div id="stage" class="stage"><img id="selected-frame" alt="Selected vehicle paint scheme"></div>
+        <div class="swatches" id="swatches"></div>
+        <p id="view-note"></p><a id="model-link" href="paint-beetle-butter-v1/index.html">Explore the 3D model →</a>
+      </section>
+      <section aria-label="All paint schemes"><h2>The collection</h2><div class="cards"><!--CARDS--></div></section>
+      <footer>Paint study for review. In-game vehicles retain their current colors.</footer>
+    </main>
+    <script src="gallery.js" defer></script>
+  </body>
+</html>

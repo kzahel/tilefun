@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-beetle-teal-v1",
+      "name": "Beetle \u00b7 Lagoon teal",
+      "title": "Paint study \u00b7 Beetle \u00b7 Lagoon teal",
+      "nativeSize": 128,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2554,
+        "vertices": 5462,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 201260,
+        "sha256": "6e6f0546ed4db3d85b04eacacb0467b5e3c9f7da882b58248b18107d1b5494bd",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

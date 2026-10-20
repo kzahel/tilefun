@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-beetle-powder-blue-v1",
+      "name": "Beetle \u00b7 Powder blue",
+      "title": "Paint study \u00b7 Beetle \u00b7 Powder blue",
+      "nativeSize": 128,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2554,
+        "vertices": 5462,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 201216,
+        "sha256": "1f885e9b652fee3b5b527ba6819c628a2bd526433c42271a77652d4db99db3c1",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

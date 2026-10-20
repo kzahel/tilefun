@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "status": "frozen-awaiting-owner-review",
+  "candidateIds": [
+    "paint-beetle-butter-v1",
+    "paint-beetle-cream-v1",
+    "paint-beetle-cherry-v1",
+    "paint-beetle-teal-v1",
+    "paint-beetle-powder-blue-v1",
+    "paint-beetle-forest-v1",
+    "paint-pickup-teal-v1",
+    "paint-pickup-cherry-v1",
+    "paint-pickup-forest-cream-v1",
+    "paint-pickup-navy-cream-v1",
+    "paint-rosso-coupe-cherry-v1",
+    "paint-rosso-coupe-butter-v1",
+    "paint-rosso-coupe-powder-blue-v1",
+    "paint-rosso-coupe-navy-stripes-v1"
+  ],
+  "humanApproval": false,
+  "normalGameplay": false
+}

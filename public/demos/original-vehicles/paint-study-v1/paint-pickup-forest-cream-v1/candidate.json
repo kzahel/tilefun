@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-pickup-forest-cream-v1",
+      "name": "Pickup \u00b7 Forest / cream roof",
+      "title": "Paint study \u00b7 Pickup \u00b7 Forest / cream roof",
+      "nativeSize": 224,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2984,
+        "vertices": 5722,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 209852,
+        "sha256": "1db5b8630eeefdb7c28a7ec668290f96f16695e1f28a56cd474578b10b68f18b",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

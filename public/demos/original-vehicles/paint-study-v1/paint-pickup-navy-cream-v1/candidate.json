@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-pickup-navy-cream-v1",
+      "name": "Pickup \u00b7 Navy / cream roof",
+      "title": "Paint study \u00b7 Pickup \u00b7 Navy / cream roof",
+      "nativeSize": 224,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2984,
+        "vertices": 5722,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 209880,
+        "sha256": "b5f701682869f1a047ef0c2ec04f5b2a8580be4186e32b38f5b2929daafe1707",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 8.000000000000002,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated"
+    }
+  ]
+}

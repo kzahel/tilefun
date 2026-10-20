@@ -1,0 +1,32 @@
+{
+  "schema": "tilefun-vehicle-paint-v1",
+  "id": "paint-beetle-powder-blue-v1",
+  "family": "beetle",
+  "paintSchemeId": "powder-blue",
+  "base": "public/assets/models/vehicles/beetle-v1.glb",
+  "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+  "baseBlend": "art-source/vehicle-bake/beetle/v1/car.blend",
+  "baseBlendSha256": "c2198c3f1e8726d5089144a877d30357347ef07e22f14b93fd3809132e5f2716",
+  "palette": {
+    "id": "powder-blue",
+    "name": "Powder blue",
+    "primary": "powder-blue"
+  },
+  "roleMask": "../beetle-roles.png",
+  "atlasSha256": "28a135e5abb5d1036b0fdfd9f54effb885b97bf92ba2c87320af3a9b6d902416",
+  "glbSha256": "1f885e9b652fee3b5b527ba6819c628a2bd526433c42271a77652d4db99db3c1",
+  "paintTexels": {
+    "primary": 185440,
+    "secondary": 0,
+    "protected": 76704
+  },
+  "geometryProof": {
+    "originalBinarySha256": "47fe38c03d00efe4ba78f8828b7019ac3a7ee736c6bd9790d4f4f1800813ea8f",
+    "originalBinaryBytes": 192220,
+    "originalBinaryPrefixExact": true,
+    "allNonImageMetadataExact": true,
+    "scope": "Geometry, normals, UVs, indices, materials, hierarchy, wheel pivots and radii unchanged"
+  },
+  "humanApproval": false,
+  "normalGameplay": false
+}

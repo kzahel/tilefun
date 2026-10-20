@@ -1,0 +1,1450 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "paint-beetle-cherry-v1",
+      "name": "Beetle \u00b7 Cherry red",
+      "title": "Paint study \u00b7 Beetle \u00b7 Cherry red",
+      "nativeSize": 128,
+      "glb": "model.glb",
+      "atlas": "atlas.png",
+      "report": "report.json",
+      "method": "Curated paint ramps; glass, rubber, lamps, trim and outlines preserved. Geometry and wheel rig unchanged.",
+      "audit": {
+        "triangles": 2554,
+        "vertices": 5462,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 201260,
+        "sha256": "c8c85cfb76739ad78b4668b65cd6c92bde6e5e0ac162d87e329e2bb46a107437",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.782608695652176,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/index.html",
+      "qualification": {
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "paintIsolation": {
+          "status": "passed",
+          "glbSha256": "c8c85cfb76739ad78b4668b65cd6c92bde6e5e0ac162d87e329e2bb46a107437",
+          "baseSha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+          "browser": "153.0.8010.12",
+          "browserChannel": "bundled full Chromium",
+          "views": [
+            {
+              "mode": "study",
+              "yaw": 0,
+              "distance": 0,
+              "name": "study-0",
+              "opaquePixels": 2646,
+              "changedPaintPixels": 1578,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 22.5,
+              "distance": 0,
+              "name": "study-1",
+              "opaquePixels": 2579,
+              "changedPaintPixels": 1586,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": 0,
+              "name": "study-2",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1552,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 67.5,
+              "distance": 0,
+              "name": "study-3",
+              "opaquePixels": 2312,
+              "changedPaintPixels": 1494,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 90,
+              "distance": 0,
+              "name": "study-4",
+              "opaquePixels": 2270,
+              "changedPaintPixels": 1468,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 112.5,
+              "distance": 0,
+              "name": "study-5",
+              "opaquePixels": 2312,
+              "changedPaintPixels": 1494,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 135,
+              "distance": 0,
+              "name": "study-6",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1552,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 157.5,
+              "distance": 0,
+              "name": "study-7",
+              "opaquePixels": 2579,
+              "changedPaintPixels": 1586,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 180,
+              "distance": 0,
+              "name": "study-8",
+              "opaquePixels": 2646,
+              "changedPaintPixels": 1578,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 202.5,
+              "distance": 0,
+              "name": "study-9",
+              "opaquePixels": 2590,
+              "changedPaintPixels": 1589,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 225,
+              "distance": 0,
+              "name": "study-10",
+              "opaquePixels": 2468,
+              "changedPaintPixels": 1592,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 247.5,
+              "distance": 0,
+              "name": "study-11",
+              "opaquePixels": 2325,
+              "changedPaintPixels": 1523,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 270,
+              "distance": 0,
+              "name": "study-12",
+              "opaquePixels": 2284,
+              "changedPaintPixels": 1498,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 292.5,
+              "distance": 0,
+              "name": "study-13",
+              "opaquePixels": 2325,
+              "changedPaintPixels": 1523,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 315,
+              "distance": 0,
+              "name": "study-14",
+              "opaquePixels": 2468,
+              "changedPaintPixels": 1592,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 337.5,
+              "distance": 0,
+              "name": "study-15",
+              "opaquePixels": 2590,
+              "changedPaintPixels": 1589,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": 0,
+              "name": "study-roll-0",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1552,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": 5.327048412608781,
+              "name": "study-roll-1",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1553,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": 10.654096825217563,
+              "name": "study-roll-2",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1552,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": 15.981145237826343,
+              "name": "study-roll-3",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1553,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": -21.308193650435125,
+              "name": "study-roll-4",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1552,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": -15.981145237826343,
+              "name": "study-roll-5",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1553,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": -10.654096825217563,
+              "name": "study-roll-6",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1552,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "study",
+              "yaw": 45,
+              "distance": -5.327048412608781,
+              "name": "study-roll-7",
+              "opaquePixels": 2446,
+              "changedPaintPixels": 1553,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 0,
+              "distance": 0,
+              "name": "engine-0",
+              "opaquePixels": 3473,
+              "changedPaintPixels": 2106,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 22.5,
+              "distance": 0,
+              "name": "engine-1",
+              "opaquePixels": 3417,
+              "changedPaintPixels": 2094,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": 0,
+              "name": "engine-2",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 67.5,
+              "distance": 0,
+              "name": "engine-3",
+              "opaquePixels": 2953,
+              "changedPaintPixels": 1943,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 90,
+              "distance": 0,
+              "name": "engine-4",
+              "opaquePixels": 2926,
+              "changedPaintPixels": 1884,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 112.5,
+              "distance": 0,
+              "name": "engine-5",
+              "opaquePixels": 2953,
+              "changedPaintPixels": 1943,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 135,
+              "distance": 0,
+              "name": "engine-6",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 157.5,
+              "distance": 0,
+              "name": "engine-7",
+              "opaquePixels": 3417,
+              "changedPaintPixels": 2094,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 180,
+              "distance": 0,
+              "name": "engine-8",
+              "opaquePixels": 3473,
+              "changedPaintPixels": 2106,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 202.5,
+              "distance": 0,
+              "name": "engine-9",
+              "opaquePixels": 3432,
+              "changedPaintPixels": 2104,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 225,
+              "distance": 0,
+              "name": "engine-10",
+              "opaquePixels": 3249,
+              "changedPaintPixels": 2083,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 247.5,
+              "distance": 0,
+              "name": "engine-11",
+              "opaquePixels": 2966,
+              "changedPaintPixels": 1994,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 270,
+              "distance": 0,
+              "name": "engine-12",
+              "opaquePixels": 2936,
+              "changedPaintPixels": 1938,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 292.5,
+              "distance": 0,
+              "name": "engine-13",
+              "opaquePixels": 2966,
+              "changedPaintPixels": 1994,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 315,
+              "distance": 0,
+              "name": "engine-14",
+              "opaquePixels": 3249,
+              "changedPaintPixels": 2083,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 337.5,
+              "distance": 0,
+              "name": "engine-15",
+              "opaquePixels": 3433,
+              "changedPaintPixels": 2105,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": 0,
+              "name": "engine-roll-0",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": 5.327048412608781,
+              "name": "engine-roll-1",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": 10.654096825217563,
+              "name": "engine-roll-2",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": 15.981145237826343,
+              "name": "engine-roll-3",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": -21.308193650435125,
+              "name": "engine-roll-4",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": -15.981145237826343,
+              "name": "engine-roll-5",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": -10.654096825217563,
+              "name": "engine-roll-6",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            },
+            {
+              "mode": "engine",
+              "yaw": 45,
+              "distance": -5.327048412608781,
+              "name": "engine-roll-7",
+              "opaquePixels": 3225,
+              "changedPaintPixels": 2053,
+              "alphaExact": true,
+              "nonPaintExact": true
+            }
+          ],
+          "rig": {
+            "wheels": [
+              {
+                "id": "FL",
+                "radius": 6.782608695652176,
+                "quarterTurn": true,
+                "pivotFixed": true,
+                "independent": true,
+                "reverseQuarterTurn": true,
+                "absoluteReset": true
+              },
+              {
+                "id": "FR",
+                "radius": 6.782608695652176,
+                "quarterTurn": true,
+                "pivotFixed": true,
+                "independent": true,
+                "reverseQuarterTurn": true,
+                "absoluteReset": true
+              },
+              {
+                "id": "RL",
+                "radius": 6.782608695652176,
+                "quarterTurn": true,
+                "pivotFixed": true,
+                "independent": true,
+                "reverseQuarterTurn": true,
+                "absoluteReset": true
+              },
+              {
+                "id": "RR",
+                "radius": 6.782608695652176,
+                "quarterTurn": true,
+                "pivotFixed": true,
+                "independent": true,
+                "reverseQuarterTurn": true,
+                "absoluteReset": true
+              }
+            ],
+            "forwardReverseAbsoluteReset": true
+          },
+          "stats": {
+            "triangles": 2554,
+            "vertices": 5462,
+            "primitives": 5,
+            "sourceMeshes": 5,
+            "drawMeshes": 5,
+            "bodyDrawCalls": 5
+          },
+          "desktop": [
+            1200,
+            1050
+          ],
+          "mobile": [
+            390,
+            844
+          ],
+          "allScalesNoOverflow": true,
+          "errors": [],
+          "humanApproval": false,
+          "normalGameplay": false
+        }
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-0.png",
+          "sha256": "2a170b1aa75da42aefc4778a0ff2a6c22f9ae0ed64ae0dd016ebb6a6083114d5"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-1.png",
+          "sha256": "a86b09be09a114d06a7eadb558fab2d853d68eee7271acbeb57bc308569ebe9a"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-10.png",
+          "sha256": "cdc6ef9f9c6c8fe3768fbc9ffbba5fbb452e367a205a7356e7258d6ed7142be2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-11.png",
+          "sha256": "de621ab4f9177798307c7b4141307b18f59a145088a4496cb3e3cd0f84cdc143"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-12.png",
+          "sha256": "a57fda9e1a83870ff5a4222c24e65f07b7d07e5c0d62a75dec9c481136681cc2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-13.png",
+          "sha256": "6e949af0d2a3a45975be0a230b84d571ecb68720b0a8d2ade6f0290cd6dd020f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-14.png",
+          "sha256": "0724643804f0e79377122b62d9107fbdc9c778a886ccec6733dee7aa91f36a7d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-15.png",
+          "sha256": "6a28f60c90608918ad0c6b8938fad904b9b2076103bb994c9c518be78c302f0f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-2.png",
+          "sha256": "1f15cd8aefad9e34ab45b5f3201ff061354041bcbb4b4d968f98001d92080253"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-3.png",
+          "sha256": "593b49f813feae9809d301ec4856201add0d2e31a33817e13d093824e93a3e07"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-4.png",
+          "sha256": "e46bfb27914a6c8bf85705bae8559458eefc8310f4830ca57bed3b0de41e2004"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-5.png",
+          "sha256": "9fa406b9c1963a273a10d711bacebac106c8bf9f74c076d5ef73907181e597d0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-6.png",
+          "sha256": "57bab7dd135c7f8d857a9844c47d42e9f6b3cbe906dd9a0e87bd210d5f514331"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-7.png",
+          "sha256": "33d712c3da7d72f9bb91c1af98e719e2bbf2264c2744a3e7de46006c78d2f07d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-8.png",
+          "sha256": "0bdadadd7ea115a2f7b6801b9e7cbdfcc9d8ed602baed9ab79f4bd685059c3fa"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-9.png",
+          "sha256": "a49c53180fd4285547742e749d712384147bf7ea87bab4c462f362ba563ca925"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-0.png",
+          "sha256": "1f15cd8aefad9e34ab45b5f3201ff061354041bcbb4b4d968f98001d92080253"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-1.png",
+          "sha256": "5ef781792fbb7186ed7e851ccc47d519f2582336b92e58c743f05b058920f562"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-2.png",
+          "sha256": "38d76fc49a5d50a32fd33689ae30c174ce40804d7f62d826b718d22b8aa0f009"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-3.png",
+          "sha256": "5fe4189378f99d6f325ef226ebba11fbf7c6406715d090805427a60a865fcbdd"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-4.png",
+          "sha256": "2b3e108ab7244e1cc976e208791742f48cbfe33b885cd365d84e8d2b01cfcaca"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-5.png",
+          "sha256": "496b58d85227b526f9bf3a8828b3b71cd72170798ce6464d07a44862b9589e32"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-6.png",
+          "sha256": "6d64c10d71aaec66d80aa865b68b135cad627fcd608e15fd5e12f1e2e302aa71"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/engine-roll-7.png",
+          "sha256": "d1f067d0c07d9004f2143201b386fb10b1b73d1ab4d3e92d730eabec77befc07"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-0.png",
+          "sha256": "0a474ebefe8a36f7c3b87ee2cbef63f9c8be404b8d0981eae26a2d9f872313c6"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-1.png",
+          "sha256": "017a6c5bed4223ca8add328f1557df701798b97fab43d234cde70f78e58dae80"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-10.png",
+          "sha256": "90aedd6e69d3b684f7ff90f728d57661d60293aabea9cc9a6825a3bbd71a2420"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-11.png",
+          "sha256": "2f70c77ec4b7ae71f70adabe4e0ca12ae8a1f7115441efcdb36f2520064058d2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-12.png",
+          "sha256": "a970c7bfb056b9b12187350ee3c5f92f07823afa8c32ae72560b3525b651e9ee"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-13.png",
+          "sha256": "16b2a547916679dd62d4fb44178459f83211c644fbebd9c73a702f23dfa636be"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-14.png",
+          "sha256": "7efa2fcb32aaddea5d84c7b87e48547b63768440bbc399f2900ec95fe8fc84d3"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-15.png",
+          "sha256": "8ae598c421be16ba96d7a8d516be20a2517440fd79798947953e03b4124258df"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-2.png",
+          "sha256": "bee2536414d98c47e5f2a549e89989c21948137bb099c49bcf483b0ba41b4431"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-3.png",
+          "sha256": "037347eadf1c61416cdc93e7816ef6acb77c31028a9fd45424a68ba239da5fd4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-4.png",
+          "sha256": "d56338112884106e895ec9d7a0d15f1228a5350e0bc44dabae176502a06288b4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-5.png",
+          "sha256": "6225d1fc9c07d5c381f90fe9aea707a06cd833c228ab5c7731f969257428bfd0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-6.png",
+          "sha256": "8d4d7a272205dd23c2314eb243c76e4fdea2093e022f3ed0d7636557b84a5fbb"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-7.png",
+          "sha256": "2912d813ea146bad40e1d2f0631d296fd0a3700ca13fe231f441c91815ad61b2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-8.png",
+          "sha256": "635fb40ff1bb2adab86877b90380d06ccd3888611e4e1d8caf7375caa46dddc9"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-9.png",
+          "sha256": "fb8d8537e4cc6aa11e1f1305bbc4622262946619f2c19cfbc7cb309f6a06fc7e"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-0.png",
+          "sha256": "bee2536414d98c47e5f2a549e89989c21948137bb099c49bcf483b0ba41b4431"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-1.png",
+          "sha256": "907ef793bed5a3e450934028a9e01e96c4bbb37c266efc363ef548d6bb426914"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-2.png",
+          "sha256": "521a4e2dcfffc1c2a54eae9576d55f23e2615fb9acab36cf6a35770db79b0621"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-3.png",
+          "sha256": "a296aabbdb782e49f1b867ee80388cd3e939437154ad7bd36c6961e971c24a87"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-4.png",
+          "sha256": "2b2d74c51e2a66eb4d94386bd416fab6ae6cfdd9f2bf9f84500cc641f60377d2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-5.png",
+          "sha256": "7a2947d54a5e40fa0ffbd0facaa72c203968bdfcffbb78c057df88b3a229cf79"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-6.png",
+          "sha256": "8d5c745e5de19a2ab13dbca09ad131ecea82337b8ec5655cc2565a66f94235af"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-beetle/captures/study-roll-7.png",
+          "sha256": "bb7086a0105cee510ea94ca3a88c2c3f8dccafcc74cbfa11696ce05c50e5c4af"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-0.png",
+          "sha256": "7c721d01f2473d4b2d962d2ff608c7a637eb3912f3b0dc425698d48d5feb4212"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-1.png",
+          "sha256": "ec4f0ad4453c8d82ee606467598570cafb07ccb02cc8c93e9cd57be81e51a81a"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-10.png",
+          "sha256": "472181d06da39c0f086dd1298753c99b32ce2f3f60b19d6e99236c244143f00f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-11.png",
+          "sha256": "d30098f4fcb9533f7dd409b19927e8d3a7ddc0d20215dbf4f38f282ae005a8f4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-12.png",
+          "sha256": "e811cd6be6084f0aa9eab7fde1cb0f0839717128c52ecc8c88b4fc47d06ade39"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-13.png",
+          "sha256": "0459998f1ebdd8131c2fbabb98251636cff0a0dcbb6ba513a17d64208ca09631"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-14.png",
+          "sha256": "7986b89b62483efab8a3e5ca48ea47e7931bd93c1692b4499d93e897533c17c0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-15.png",
+          "sha256": "525f03cbee932e8a9cfe0121cff04efbf9d3c9829c413359d4ffdfccd0dd781d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-2.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-3.png",
+          "sha256": "f091e8637d6c6978967928f125a9f1413129621f052318179ea5cf49453c7c9c"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-4.png",
+          "sha256": "78104fbdbc48ce4806b298dbd70f9febacd3baf1e7e4bde1612b80a4e3fdeb85"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-5.png",
+          "sha256": "7f9386023e9a648d40f05190393cbe80258ced5def470895532636b4ef7c8248"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-6.png",
+          "sha256": "3327a21e9c0b00538b269c972f5644a2b619449f32a303879ae40b91c8bcc78f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-7.png",
+          "sha256": "4aac92d5abd6914975470dcc2b62d515cf47fbcddc1ec427c8793b38ee3286f6"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-8.png",
+          "sha256": "51456395a7efb2da66e52d4907f5c542fdebfc1de3526e1bd62f8c3807371b8f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-9.png",
+          "sha256": "bb010cfb5f9e06aecb3e1a96656503d236ab7f4101e1d1b6a6f1567e9479cc09"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-0.png",
+          "sha256": "ec8a48efcb5b16ba572b079584881e5c632495e31022c5b8b3e870486cf6db5d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-1.png",
+          "sha256": "62a31c1f8dc866deb535e557ceb9c72052ee58409840a954f71ae94267227173"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-2.png",
+          "sha256": "dd9a0d9a4f1d1aec85c0154cb5c024c7b7a33d67f58a1dbac8068086c71feacf"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-3.png",
+          "sha256": "8dea83e5e72a6bba8dba12fd49026583e228417653ee243eedde51bce9f0d888"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-4.png",
+          "sha256": "c2869710cd1b7e70af61137d6b86b53b39c304a0da5bb98a4d87c357ebde71eb"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-5.png",
+          "sha256": "095941d0a8bc906c41a23457426d65da50563ec2abc694f69124c2eac60e9d56"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-6.png",
+          "sha256": "73b0cedb05e3c9135f09676d5214af729c0be1c0421e3566c71e40fb46fc8063"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/engine-roll-7.png",
+          "sha256": "eff146fad3ed9c0506023ad22795dd701502cb65d39b1b3af9dae789963890ac"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-0.png",
+          "sha256": "7d4b6c3b10e726e88bab7fc39b555a097d72de6cac1bfb2a98ccaba6bbae3f77"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-1.png",
+          "sha256": "a837f2c13741bf2089534a490b30454256e5e5a28772649e029704ddff6128a1"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-10.png",
+          "sha256": "8b4010d022d661c4ce9e2d393c74ff13cb767169d2a3e58f2c981040e55ccff0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-11.png",
+          "sha256": "3c7bbea5f0a60eb17b8ac36cba5e35fc6de3fbb21106288c42066fbdc4c44360"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-12.png",
+          "sha256": "16721c55e586b4559ce1b71da26f5fb6ba4fbf41a2fe0da207710cc9ab2ea1f4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-13.png",
+          "sha256": "b3d02d210cd2865965a2dff8b1a2031567695d18c67f1496468ecedf633f21bc"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-14.png",
+          "sha256": "fa0b0853ba2f07c2971ec1f4ba8b4428d88e02ffa60cd56bf5a9a7f9217a37b0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-15.png",
+          "sha256": "cb1a9484bb3144f224f1268fa80cbfdf5a72c7d51caa91bb34e0091c69fcf8be"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-2.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-3.png",
+          "sha256": "f5cd1d2318b6e2293cbe409c14106d73aa45bfb56b096b3f44bcf1b61a00c36b"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-4.png",
+          "sha256": "28e8473869a5e78b82cb5d5ca20c4469e550522b079166d637840b8f30a27928"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-5.png",
+          "sha256": "1ca589a25ce09ca9c504cf2247e9446a5a3b236349235d1d9d8ab72991e62066"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-6.png",
+          "sha256": "39b35d0391bdbedfc3d4cd08a7ee57d836275c14c7d5ba820c36dad67318083c"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-7.png",
+          "sha256": "73ea369fd70c39878166c7127a4064a73f2d029e124d871b2d01279e9cf517c1"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-8.png",
+          "sha256": "cbb4a6acf885ef04f3f71be49eb181eada0ec029e9dd60715643847d4f923016"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-9.png",
+          "sha256": "90df210c4fc2a1723f8696567443a2bfb9536aab344eeff589223a2d66dd7059"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-0.png",
+          "sha256": "30cfd7724763d58249ec8fd07bc22f102e7dd3aab73b7d906d53f7ceaf8b51af"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-1.png",
+          "sha256": "050de001a9d9d23c6e21c5b4ff9976ac15600e19f021cdd47f2bd027589fc7f4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-2.png",
+          "sha256": "54a3468d8da27e07eb9dd893b4caa0037e7e76e9687d21f37946a0d4c9a03263"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-3.png",
+          "sha256": "71bc04dfc803102880579e148b53b952fe886fa9d10d91fa8309de67503d2127"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-4.png",
+          "sha256": "2a635d876bcfa3be8289fb7b5e26a370b081d678a10df6befed44388862cf3e4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-5.png",
+          "sha256": "17ee5111c0f9013dfd77b56d2fa8dd588715388ae16b249ee934bd2c1fd0dde2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-6.png",
+          "sha256": "89abe6b77f9fd95888488f5099d93d1c453af663d94622e7ab2c60801ad63b67"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-pickup/captures/study-roll-7.png",
+          "sha256": "9d73e2b48691d36b27f9d77b175d9581626eb5ad98a67ce69a96e0522ae369b0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-0.png",
+          "sha256": "3de2289a93d3e57fc0e40e7d06b1c47ac93d2bfd597501d3ae3a868ff09546da"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-1.png",
+          "sha256": "4bd9d794777170037d114fc5030b88a3376286ddbfcc31611765efe23953391f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-10.png",
+          "sha256": "f64dae8b59d4b920478c45fd00d2d6613b4c963fad869e6aa25ced4eb70f97f2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-11.png",
+          "sha256": "a4f2ec6522e38ba5244b06ad0b7bda3055e9c0d4eee00ec9ad36a76b5d4bef34"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-12.png",
+          "sha256": "1556edec27931083bbd28401fa0fae6a4077852f04a8b65ae2eb7efbd163ce94"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-13.png",
+          "sha256": "12713ec40d8f1fbc3bf3e89eb5e83079f26e7c04d4e0389e8bbb76c38eb2f553"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-14.png",
+          "sha256": "04415ae9199d9168a50e23a21ef96c8d6a712b542a2bf714721577e8c76fa5ee"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-15.png",
+          "sha256": "cb73d5f80dd7284b28092744e3a48e196700a927ef5a1ae15e42bbba4e0e8473"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-2.png",
+          "sha256": "e1fb0f293fbc8096e92106759fd84365769a4431bded699c541c0a3d6f501760"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-3.png",
+          "sha256": "4fc53a0701029b0840269b79faf29895050109f764af6f00836c212a5de136ef"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-4.png",
+          "sha256": "6252a4ef06cbf98a45c591cfc0a81ccd598eb46dc8756001e9c4eb3f028ecdda"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-5.png",
+          "sha256": "492a5e9e5150ed4e6c7cceaf99e8c5e23435d1c0b5c93d2673516010e0a67273"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-6.png",
+          "sha256": "2ba083b180728a641a5fdc41f29b69fb155ee8b5441a777c3b011eae5d80e0af"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-7.png",
+          "sha256": "b72148a609daff180226b24a048f3a0ba60d968c2c3cbc64216ba40dce4a5970"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-8.png",
+          "sha256": "6c709b0950292c143a86b1441d3277b410eb855b3468f3e200f9351034bdade2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-9.png",
+          "sha256": "eafbec6cd694ffa641fa34ea450ef0c092c4ef1d1e665b3af5c8869c163a40aa"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-0.png",
+          "sha256": "e1fb0f293fbc8096e92106759fd84365769a4431bded699c541c0a3d6f501760"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-1.png",
+          "sha256": "d1d0fef4998e2341c81ea6131bfa49bda5adbcd69650306c87b1da9818eb6648"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-2.png",
+          "sha256": "7f777767dd4a293dd68cfc25fba8d74fcd92a278b290e756b43bc7d01f2f4d0f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-3.png",
+          "sha256": "6fd5976ab124b5d58605d0d92c9af1734b53a1c78ab34c15e7485bf04a9cd693"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-4.png",
+          "sha256": "bcd64de225bd0e83f3ac7cf45185ce45aff5cb72c7de607e901512f91b9dba74"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-5.png",
+          "sha256": "e98315e4d98fe9a4c785d4b0bdaa24a2ff2a09222ae8ebee31f93e2c97158cd0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-6.png",
+          "sha256": "ca5dbf41a95b8a509da433cbcaee6b5547e22adc2bbb91fc65741a7f92e31331"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/engine-roll-7.png",
+          "sha256": "faf286615cd6139b627cfa4200f6a3bc6a084882b2caafb58fad2027341bf8e4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-0.png",
+          "sha256": "607e85e5f028ac040cf5a75675e0e0ad6ec63b5d9d09993c9f44a1c396b7eb8d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-1.png",
+          "sha256": "f7c0d94462500c3462f1eb7d0740d070500697976a5c52030251b8c76798fce6"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-10.png",
+          "sha256": "6044520004ac0205eb3c06b75a73574c2156e6c56a8a967df8bb608f6e910ba5"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-11.png",
+          "sha256": "93ab71dee0519860e8ac45921efaddb2f562bb36db8ec5376908ada7e03de2fe"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-12.png",
+          "sha256": "0a6d3bfd783a07c3ee7f26c9ae2b7eee1dd9c141edad382e1043a2a81817173e"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-13.png",
+          "sha256": "fb90267ec9c14724a9f8ecd45c5aa33e202c36d17204bc33c55b3b391f3ff291"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-14.png",
+          "sha256": "0fc6e39c339b0b49809cb12083fe7e7aab512438299d4643c8e86f26fd82d079"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-15.png",
+          "sha256": "26895cf9bb1bf981d8faba88ed274ed868c8013f8c445a0fd3831aaadfa3ab89"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-2.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-3.png",
+          "sha256": "61d5a5e144a53e41a3321f958c96cf287efdb076f4e4436259f9526b7ff8024b"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-4.png",
+          "sha256": "72b2e47a806b093a6e90ac1efa81d3a6fee2bcba48a2e03600de47cc0c49da01"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-5.png",
+          "sha256": "b8dcb8c0868e522c1b11fe5b0e01b5c6a87b8f63e24fab54c875ace117d67f0a"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-6.png",
+          "sha256": "9ec101449e3db0f58eb531163f514a442759e8e4ebf32247576971a577204da8"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-7.png",
+          "sha256": "77eca1ccd7f84161e6e9034023822cfafe335878650c96663e19341921e65f94"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-8.png",
+          "sha256": "a3065e9364ad9ae0ba8231b0789bdd4321136a4f9d83a82ac4201a58ba59abfa"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-9.png",
+          "sha256": "91408a5c032f3172e1e1748e04c4f40cf1d95ebb17921bdadc3c600acf4dc0ec"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-0.png",
+          "sha256": "22a073e91a203b240e80ac829cf2218a927d7893d0a2f98ba69ee60558fab682"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-1.png",
+          "sha256": "f44907bcbc4cb3e9395a9b957ffc56084c2aa90ae23a66f9379ec132d7121801"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-2.png",
+          "sha256": "0e3a921d1d9a808ee025312c2119b76b699b006dccbedbf5d2221a847f633e5d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-3.png",
+          "sha256": "bb1d8c0d6841ed72ebb79e5c7e30b167e8aca4553ea4cb9fa9b462235a3bf013"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-4.png",
+          "sha256": "cb599f2ccdae4ebaacb2cd73620a253876a92c7a3072c62ae51a1f9f7337d92a"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-5.png",
+          "sha256": "d245327200cf7d57d43900a296bdaaeeca66a39d4640f190b43acd296412a829"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-6.png",
+          "sha256": "d68cf99a5ac56ff50674822ae5ded5bbaaab3a75f8621f116c517861cab12832"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/base-rosso-coupe/captures/study-roll-7.png",
+          "sha256": "d73ab19a31ad0d865d80e8d27914281e44b98576ff5ecf42799b882b5adab5c5"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/gallery.css",
+          "sha256": "820fa482dcc99fdc47bd0aac5a1dfba1811a9ebee9ad29eb0caef6437b8948e4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/gallery.js",
+          "sha256": "351a3380b6253025d0c81426fb29b842ab36dc565ccea72503ff14c9d0bca8e3"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/index.html",
+          "sha256": "52e3f27b08f66f07f8aa4ebface3b2d0dd9737b263745ba8577555cc57f6b2e5"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/atlas.png",
+          "sha256": "04f0647956a3e1c90589f2e0a3c94a449770f4a93a18b74c38c596c8a93977ad"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/candidate.json",
+          "sha256": "6958dccb41532e6434766dad8caefe8de08a82392d3d28bc943c5d53f6ecd551"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/capture-proof.json",
+          "sha256": "4ee646e036282787d413b058fddb981cab8bd27986e830a8377c0b749cd6eab4"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/contact-sheet.png",
+          "sha256": "85b9989b3afafc146a8553383a860c9bc92cf3377fa82e043a163fa7de7efeb6"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-0.png",
+          "sha256": "661a9fcd83d13dbf48d056a5a3bf0f9d5210094cec97793254c3ed79c6be553b"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-1.png",
+          "sha256": "e2da90c966141132073834758e55877fad300e2091fcd0a0bde84a38421f942d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-10.png",
+          "sha256": "ab28c432a8fc63d5795a8e71d0e06bc2cad6a0eaf3a21a42fa0ea198b198db8a"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-11.png",
+          "sha256": "9fc3686b122377ad97ebde5cbb09d5efa2fafee6c23b91c9f8932b537423e46d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-12.png",
+          "sha256": "bf490ef89e9bc8ef7359869e7c0f9b25ec72f7af5fe66cbedc12a19caaf59340"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-13.png",
+          "sha256": "394468c3034df881aa41c7f08c8bc4e74d471f02b7dc0c158453efc4c29becb7"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-14.png",
+          "sha256": "dd27b7967827cad389961f16e9ec7791f309d055458472a6dd90395715667f86"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-15.png",
+          "sha256": "3ba286d03cd417966d1a9da2a98c5971bc3dcbd9b3587f859994afef814cbd13"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-2.png",
+          "sha256": "06457de5da73c10c099e7363949d793ef49ca199d01ac6dadfe697b3e649341d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-3.png",
+          "sha256": "95331c9d7c77ede20c36562952267aee1af422201c7ceb39bd9022d080e294ad"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-4.png",
+          "sha256": "a053dccc3a920c734deff0018d9424a604e42b784cc2d234080aba72b4feaba0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-5.png",
+          "sha256": "dc5abaeb4ca9836ef111e3ff38b3f296d64513ef9da8c83bf1636d9ebd4f4781"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-6.png",
+          "sha256": "3fb7092976f82b3ff02fcf73349246fb4fe1702c821700ade3c022a5f3bb949e"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-7.png",
+          "sha256": "829cc49ae9432254430ccff515a52d2439f69eac4a812afb880ca91ce1a088d5"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-8.png",
+          "sha256": "8e4132060e955e005fb475e5a483b56c699eb5d177667b91c0b9d44dec51fe21"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-9.png",
+          "sha256": "102bb7f745b211425af05e8207cf97f17488b34e4abaa67d37700d0f3ba345e1"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-0.png",
+          "sha256": "06457de5da73c10c099e7363949d793ef49ca199d01ac6dadfe697b3e649341d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-1.png",
+          "sha256": "6856e995bb447601b78b8bcac815e282dfd1fd1ebff0ffbbdf705dde2a6890ba"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-2.png",
+          "sha256": "4aedf73d28a5b28ff78b680200866b95e598b77fbca198e55fbea04dc81d6881"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-3.png",
+          "sha256": "2286614ed62ac0872a45d2a2641313b4781f82900330f664b0246169399e745f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-4.png",
+          "sha256": "b2e1f37f58379e10b2c1fe28ee8cc14fc71a1ec0179c9f99686d2916fa1704ab"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-5.png",
+          "sha256": "a886db157e6d7f3f69d34ff62e617f538e0cbfccff5c382e8aeaaccf6836b2a6"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-6.png",
+          "sha256": "d1d0b601150a98a8c3403b4144081242728ee2a2102e90b1d891906e1533884e"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/engine-roll-7.png",
+          "sha256": "6078d919bd8d28f66dc86bb66bc32cb396379518e636c8eb34773d441cfb66c3"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-0.png",
+          "sha256": "48d9deda29fcafc5d1214600841733495401934085146326a73d23759453a9b9"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-1.png",
+          "sha256": "2a7e6001efdb744bbb5bb400cc83aab1f6b1b7f3e24b1430633d10b35f219139"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-10.png",
+          "sha256": "66d07db1f393b43b976d8f4d0f8eb8a529a19adad61d36268dd4ee3bddc2369c"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-11.png",
+          "sha256": "aab17bf6f114de9b713528b18f7f21ff8eee5d4c2b6891b861b1b72f58577723"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-12.png",
+          "sha256": "f12b1c216a0ad92c761cd7eca448404603616cda9c9a429333caa2d01d4558d0"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-13.png",
+          "sha256": "fbb6bd1991c81179e2bca70a3536ad2c62f746f73428265e8d7515657de14d98"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-14.png",
+          "sha256": "9a2c042e7b0ad330bd8c2d294f7f55eb4a1000dd14562a0fbb24309c77c4a4be"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-15.png",
+          "sha256": "365df2c9a89d0477696e0a45d5609110e10427fae3ff781ca162a9daa01bed7d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-2.png",
+          "sha256": "c5338780adf432ee617fc057fdfabc2d7cf1d6d8c78e598167bdac6da41f4fa2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-3.png",
+          "sha256": "e9ddd9200938fac2e4be6fc4dac3ebbe8644c29ecbe9166a40419ef79858bdd3"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-4.png",
+          "sha256": "9e9573915c3f8f6d655706c13c50131f12e881c703f40cc3ff98150f80c84831"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-5.png",
+          "sha256": "61564f7374ffaaf3f5d9997ccad8b61c5082088008361c36d8fe2fca51fe46cc"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-6.png",
+          "sha256": "8a7175a5c647b80856995b1ea6662f27a3882ccd5a8f78b97de04cf75ce4dbc2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-7.png",
+          "sha256": "0ec371f75e141ecee26f5e59ea597b6ab3ddf6ae01ecdda5c170bee41d72a7f1"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-8.png",
+          "sha256": "72de3dd2cf40463883f73744454bab77cd1c864d69575a25fe77b66a8e8ccd19"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-9.png",
+          "sha256": "23ef980f547ff7edefedcb69553b13dd7e0c989eef3a64d7a2796927bc0e150f"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-0.png",
+          "sha256": "c5338780adf432ee617fc057fdfabc2d7cf1d6d8c78e598167bdac6da41f4fa2"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-1.png",
+          "sha256": "cd80b0d596e4d2248086f54701258ef431a82aa93b8cc6e2cd7e423f06d93bf7"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-2.png",
+          "sha256": "508a7c2e2d969637431fbbe0a6402f3ba65209d42e6c9e132fa6a45863b7d6be"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-3.png",
+          "sha256": "c5c09d61bcb5bf5d8005c4f05cd9bc5ab5b82417748dc315dd23d192ef1e5e33"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-4.png",
+          "sha256": "489592b23be87bca1eba5846f245352eb6f107bf63cd250fd4d7991d35b3e29d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-5.png",
+          "sha256": "6bc78fa958b0a04f6fdc0d6b331023baa4db0be0e10a4a0667e38df4623a54ea"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-6.png",
+          "sha256": "fcc1588ab7dd93a5cf0f4d8ac4c9d4180cb0e5ca775bf8bb83e884b28c9d7ecb"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/captures/study-roll-7.png",
+          "sha256": "c7cca88d50178938edc80eab9c6088623a819f427d19ed22ab4a9119d2cc397a"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/index.html",
+          "sha256": "0ee6aa72eaa717aaf51be2110c081f089ae000b2067b7768899c0ddc8e7ed44c"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/model.glb",
+          "sha256": "c8c85cfb76739ad78b4668b65cd6c92bde6e5e0ac162d87e329e2bb46a107437"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/report.json",
+          "sha256": "ae2c3d24fb6a6d20757c54a75dff0226353ad344ea5b7af777ffecf54be2ce7c"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/thumbnail.png",
+          "sha256": "d2832e24ca1be2d9fdfe892220d3af344090efea9a7b1aa332e45f534a501940"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-beetle-cherry-v1/viewer.js",
+          "sha256": "bd64d254a6f8eac0d8fc5bc86bd85fb414db1a694fc5e72c7b2fc6ae9408a949"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/paint-comparison.png",
+          "sha256": "3cf095ea77ad4d6a202f544fce235e0f880b226d20136408ebcff50d5de5816d"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/review-manifest.json",
+          "sha256": "5ea253e364d2c0b59da0686bed9b43ba8bec3ee450969d22bfb18ea4d5a03aa3"
+        },
+        {
+          "url": "demos/original-vehicles/paint-study-v1/study.json",
+          "sha256": "dc3afb8b1a9dc8923044840703b34bbaf826c9e99f04d2b85a77e1d590897e81"
+        }
+      ]
+    }
+  ]
+}
